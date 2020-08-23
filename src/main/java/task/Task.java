@@ -5,11 +5,11 @@ package task;
  */
 public class Task {
     protected String taskDescription;
-    protected boolean done;
+    protected boolean isDone;
 
-    public Task(String taskDescription, boolean done) {
+    public Task(String taskDescription, boolean isDone) {
         this.taskDescription = taskDescription;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
@@ -20,25 +20,25 @@ public class Task {
     public String getTaskDescription() {
         return this.taskDescription;
     }
-
+    
     /**
      * Returns the status of the Task.
      *
      * @return Status
      */
-    public boolean getDone() {
-        return this.done;
+    public boolean getStatus() {
+        return this.isDone;
     }
 
     /**
      * Mark the Task as completed.
      */
     public void completeTask() {
-        this.done = true;
+        this.isDone = true;
     }
 
     @Override
     public String toString() {
-        return (getDone() ? "[\u2713] " : "[\u2717] ") + getTaskDescription();
+        return (getStatus() ? "[\u2713] " : "[\u2717] ") + getTaskDescription();
     }
 }

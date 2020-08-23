@@ -1,9 +1,10 @@
 package duke;
 
 import java.io.IOException;
+import java.io.FileNotFoundException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.FileNotFoundException;
 
 /**
  * Main class for the Duke program
@@ -25,6 +26,7 @@ public class Duke {
      */
     public void run() {
         Parser parser = new Parser(new Scanner(System.in));
+
         try {
             this.storage.load(taskList);
         } catch (FileNotFoundException e) {
@@ -32,19 +34,25 @@ public class Duke {
         } catch (IOException e) {
             this.ui.printReply("OOPS!!! Something went wrong... Tasks not saved.");
         }
+
         this.ui.greet();
+
         while (true) {
             String reply = parser.executeCommand(this.taskList);
+
             if (reply.equals("bye")) {
                 break;
             }
+
             this.ui.printReply(reply);
+
             try {
                 this.storage.save(this.taskList);
             } catch (IOException e) {
                 this.ui.printReply("OOPS!!! Something went wrong... Tasks not saved.");
             }
         }
+
         this.ui.bye();
     }
 

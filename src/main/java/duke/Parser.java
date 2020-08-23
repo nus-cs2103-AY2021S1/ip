@@ -2,9 +2,12 @@ package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 import task.Task;
+
 import exception.InvalidCommandException;
 import exception.MissingInfoException;
 
@@ -27,6 +30,7 @@ public class Parser {
      */
     public String executeCommand(TaskList taskList) {
         String command = this.input.next();
+
         if (command.equals("bye")) {
             return "bye";
         } else if (command.equals("list")) {
@@ -58,20 +62,22 @@ public class Parser {
         } else {
             try {
                 TaskType.TypeOfTask typeOfTask;
+
                 switch (command) {
-                    case "todo":
-                        typeOfTask = TaskType.TypeOfTask.TODO;
-                        break;
-                    case "deadline":
-                        typeOfTask = TaskType.TypeOfTask.DEADLINE;
-                        break;
-                    case "event":
-                        typeOfTask = TaskType.TypeOfTask.EVENT;
-                        break;
-                    default:
-                        this.input.nextLine();
-                        throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                case "todo":
+                    typeOfTask = TaskType.TypeOfTask.TODO;
+                    break;
+                case "deadline":
+                    typeOfTask = TaskType.TypeOfTask.DEADLINE;
+                    break;
+                case "event":
+                    typeOfTask = TaskType.TypeOfTask.EVENT;
+                    break;
+                default:
+                    this.input.nextLine();
+                    throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
+
                 Task newTask = getTask(command, typeOfTask, taskList);
                 taskList.addTask(newTask);
                 return "Got it. I've added this task:\n" + newTask.toString()
@@ -86,7 +92,8 @@ public class Parser {
         }
     }
 
-    private Task getTask(String command, TaskType.TypeOfTask typeOfTask, TaskList taskList) throws MissingInfoException {
+    private Task getTask(String command, TaskType.TypeOfTask typeOfTask, TaskList taskList)
+            throws MissingInfoException {
         String[] commandArray = this.input.nextLine().split(" ");
         String description = "";
         LocalDateTime timing = null;
@@ -99,6 +106,7 @@ public class Parser {
                 timing = getTiming(command, commandArray, i + 1);
                 break;
             }
+
             if (i == 1) {
                 description = commandArray[i];
             } else {
@@ -110,15 +118,18 @@ public class Parser {
             throw new MissingInfoException("OOPS!!! The description of a " + command + " cannot be empty.");
         }
 
-        if ((typeOfTask.equals(TaskType.TypeOfTask.DEADLINE) || typeOfTask.equals(TaskType.TypeOfTask.EVENT)) && timing == null) {
+        if ((typeOfTask.equals(TaskType.TypeOfTask.DEADLINE) || typeOfTask.equals(TaskType.TypeOfTask.EVENT))
+                && timing == null) {
             throw new MissingInfoException("OOPS!!! The date/time of a " + command + " cannot be empty.");
         }
 
         return taskList.createTask(typeOfTask, description, timing, false);
     }
 
-    private LocalDateTime getTiming(String command, String[] commandArray, int index) throws MissingInfoException, DateTimeParseException {
+    private LocalDateTime getTiming(String command, String[] commandArray, int index)
+            throws MissingInfoException, DateTimeParseException {
         String timing = "";
+
         for (int i = index; i < commandArray.length; i++) {
             if (i == index) {
                 timing = commandArray[i];
@@ -130,6 +141,7 @@ public class Parser {
         if (timing.isEmpty()) {
             throw new MissingInfoException("OOPS!!! The date/time of a " + command + " cannot be empty.");
         }
+
         try {
             return LocalDateTime.parse(timing);
         } catch (DateTimeParseException e) {
