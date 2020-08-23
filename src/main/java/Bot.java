@@ -1,3 +1,5 @@
+import java.io.*;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -16,7 +18,7 @@ public class Bot {
     ArrayList<Task> tasks;
 
     Bot() {
-        this.tasks = new ArrayList<>(100);
+        this.tasks = readFromFile();
     }
 
     public void interact() {
@@ -54,6 +56,62 @@ public class Bot {
                 break;
             }
             System.out.println(Bot.demarcation);
+            saveToFile();
+        }
+    }
+
+    private ArrayList<Task> readFromFile() {
+        ArrayList<Task> tasks = new ArrayList<>();
+        // Check if file exists and create file otherwise
+        try {
+            File savedFile = new File("ip_data.txt");
+            if (!savedFile.exists()) {
+                try {
+                    savedFile.createNewFile();
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
+            }
+            String currLine;
+            // Read from file
+            BufferedReader reader = new BufferedReader(new FileReader(savedFile));
+            while ((currLine = reader.readLine()) != null) {
+                String[] taskArr = currLine.split("\\|");
+                String taskType = taskArr[0];
+                boolean done = taskArr[1] == "1";
+
+                switch (taskType) {
+                case ("T"):
+                    tasks.add(new Todo(taskArr[2], done));
+                    break;
+                case ("D"):
+                    tasks.add(new Deadline(taskArr[2], taskArr[3], done));
+                    break;
+                case ("E"):
+                    tasks.add(new Event(taskArr[2], taskArr[3], done));
+                    break;
+                }
+            }
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        return tasks;
+    }
+
+    private void saveToFile() {
+        File savedFile = new File("ip_data.txt");
+
+        // Write to file
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(savedFile));
+            for (Task task : tasks) {
+                writer.write(task.getInfo());
+                writer.newLine();
+                writer.flush();
+            }
+            writer.close();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 
@@ -124,17 +182,17 @@ public class Bot {
         case ("todo"):
             // Only has the word todo
             if (taskArr.length == 1) throw new EmptyTodoException();
-            task = new Todo(command.substring(5));
+            task = new Todo(command.substring(5).trim(), false);
             break;
         case ("deadline"):
             String deadlineContent = command.substring(9);
             String[] deadlineArr = deadlineContent.split("/");
-            task = new Deadline(deadlineArr[0], deadlineArr[1]);
+            task = new Deadline(deadlineArr[0].trim(),  deadlineArr[1].substring(3).trim(), false);
             break;
         case("event"):
             String eventContent = command.substring(6);
             String[] eventArr = eventContent.split("/");
-            task = new Event(eventArr[0], eventArr[1]);
+            task = new Event(eventArr[0].trim(), eventArr[1].substring(3).trim(), false);
             break;
         default:
             throw new DukeException();

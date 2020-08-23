@@ -1,6 +1,14 @@
-public class Todo extends Task {
-    Todo(String label) {
-        super(label);
+public class Todo extends Task implements Saveable {
+    Todo(String label, boolean done) {
+        super(label, done);
+    }
+
+    @Override
+    public String getInfo() {
+        StringBuilder str = new StringBuilder();
+        str.append("T");
+        str.append(super.getInfo());
+        return str.toString();
     }
 
     @Override

@@ -1,14 +1,28 @@
-public class Deadline extends Task {
-    String deadline;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    Deadline(String label, String deadline) {
-        super(label);
+public class Deadline extends Task implements Saveable {
+    LocalDate deadline;
+
+    Deadline(String label, String deadline, boolean done) {
+        super(label, done);
         // Remove the "by"
-        this.deadline = deadline.substring(3);
+        this.deadline = LocalDate.parse(deadline);
+    }
+
+    @Override
+    public String getInfo() {
+        StringBuilder str = new StringBuilder();
+        str.append("D");
+        str.append(super.getInfo());
+        str.append(super.separator);
+        str.append(deadline.toString());
+        return str.toString();
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), deadline);
+        return String.format("[D]%s (by: %s)", super.toString(),
+                deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 }
