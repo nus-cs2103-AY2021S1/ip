@@ -19,4 +19,8 @@ public class Task {
         return "[" + (status ? "\u2713" : "\u2718") + "] " + this.name;
     }
 
+    public String convertTxt() {
+        return "T | " + (this.status ? "1" : "0") + " | " + name;
+    }
+
 }

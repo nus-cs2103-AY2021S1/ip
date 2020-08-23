@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +21,111 @@ public class Duke {
         }
     }
 
+    private static void generateTxt (List<Task> tasks, File data) throws IOException {
+        FileWriter fw = new FileWriter(data);
+        for (Task task : tasks) {
+            fw.write(task.convertTxt() + System.lineSeparator());
+
+        }
+        fw.close();
+    }
+
+    private static void appendTxt (Task task, File data) throws IOException {
+        FileWriter fw = new FileWriter(data, true);
+        fw.write(task.convertTxt() + System.lineSeparator());
+        fw.close();
+    }
+
     public static void main(String[] args) {
+        String dir = System.getProperty("user.dir");
+        File data;
+
+        try {
+            java.nio.file.Path dataFolder = java.nio.file.Paths.get(dir,"data");
+            if (!java.nio.file.Files.exists(dataFolder)) {
+                if (!new File(dataFolder.toString()).mkdir()) {
+                    throw new FolderErrorException();
+                }
+            }
+
+            java.nio.file.Path fileLocation = java.nio.file.Paths
+                    .get(dataFolder.toString(),"duke.txt");
+
+            if (!java.nio.file.Files.exists(fileLocation)) {
+                if (!fileLocation.toFile().createNewFile()) {
+                    throw new FileErrorException();
+                }
+            }
+
+            data = new File(fileLocation.toString());
+
+        } catch (DukeException | IOException | SecurityException e ) {
+            System.out.println(e);
+            return;
+        }
+
+        List<Task> tasks = new ArrayList<>();
+
+        try {
+            Scanner s = new Scanner(data);
+            while (s.hasNext()) {
+                String event = s.nextLine();
+                String[] component = event.split("\\|");
+                try{
+                    switch(component[0].trim()) {
+                    case "T": {
+                        Task current = new Task(component[2]);
+                        int state = Integer.parseInt(component[1].trim());
+                        if (state != 0 && state != 1) {
+                            throw new DukeException("Unknown completion type detected!");
+                        }
+                        if (state == 1) {
+                            current.markAsDone();
+                        }
+                        tasks.add(current);
+                        break;
+                    }
+                    case "D": {
+                        Deadline current = new Deadline(component[2], component[3]);
+                        int state = Integer.parseInt(component[1].trim());
+                        if (state != 0 && state != 1) {
+                            throw new DukeException("Unknown completion type detected!");
+                        }
+                        if (state == 1) {
+                            current.markAsDone();
+                        }
+                        tasks.add(current);
+                        break;
+                    }
+
+                    case "E": {
+                        Event current = new Event(component[2], component[3]);
+                        int state = Integer.parseInt(component[1].trim());
+                        if (state != 0 && state != 1) {
+                            throw new DukeException("Unknown completion type detected!");
+                        }
+                        if (state == 1) {
+                            current.markAsDone();
+                        }
+                        tasks.add(current);
+                        break;
+                    }
+                    default: {
+                        throw new DukeException("Unknown task type detected!");
+                    }
+                    }
+                } catch (DukeException | ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                    System.out.println(e);
+                    System.out.println("Corrupted row detected! Row discarded.");
+                    continue;
+                }
+            }
+            s.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("I can't seem to find your file...");
+            return;
+        }
+
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -25,21 +133,19 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        List<Task> tasks = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
-
         System.out.println(LINE_BREAK);
         System.out.println(SPACE1 + "Hey, I'm Emilia \u2764 !\n" + SPACE1 +
                 "What can I do for you?");
         System.out.println(LINE_BREAK);
 
+
+        Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String input = sc.nextLine().trim().toLowerCase();
             System.out.println(LINE_BREAK);
             if (input.equals("bye")) {
                 System.out.println(SPACE1 + "Welcome back \u2764 !\n" + LINE_BREAK);
                 break;
-
             }
 
             if (input.equals("list")) {
@@ -54,7 +160,6 @@ public class Duke {
             }
 
             String[] process = input.split(" ", 2);
-
             try {
                 if (process[0].equals("done") && isInteger(process[1])) {
                     int index = Integer.parseInt(process[1]) - 1;
@@ -62,7 +167,7 @@ public class Duke {
                     task.markAsDone();
                     System.out.println(SPACE1 + "Understood, I've marked this " +
                             "task as done:\n" + SPACE2 + task);
-
+                    generateTxt(tasks, data);
                     continue;
                 }
 
@@ -73,11 +178,16 @@ public class Duke {
                     System.out.println(SPACE1 + "Understood, I've deleted this task\n" +
                              SPACE2 + task + "\n" + SPACE1 + "You have " + tasks.size() +
                             " tasks in your list now!");
+                    generateTxt(tasks,data);
                     continue;
                 }
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(SPACE1 + "Sorry, I can't seem " +
                         "to find the task...");
+                continue;
+
+            } catch (IOException e) {
+                System.out.println("txt file update unsuccessful " + e.getMessage());
                 continue;
             }
 
@@ -86,31 +196,33 @@ public class Duke {
             Task current;
             try {
                 switch (firstWord) {
-                    case "todo":
-                        current = new ToDo(process[1].trim());
-                        break;
-                    case "deadline": {
-                        int byIndex = process[1].indexOf(" /by ");
-                        if (byIndex == -1) {
-                            throw new DukeException("better description");
-                        }
-                        String deadline = process[1].substring(byIndex + 4).trim();
-                        String description = process[1].substring(0, byIndex).trim();
-                        current = new Deadline(description, deadline);
-                        break;
+                case "todo": {
+                    current = new ToDo(process[1].trim());
+                    break;
+                }
+                case "deadline": {
+                    int byIndex = process[1].indexOf(" /by ");
+                    if (byIndex == -1) {
+                        throw new DukeException("better description");
                     }
-                    case "event": {
-                        int atIndex = process[1].indexOf(" /at ");
-                        if (atIndex == -1) {
-                            throw new DukeException("better description");
-                        }
-                        String deadline = process[1].substring(atIndex + 4).trim();
-                        String description = process[1].substring(0, atIndex).trim();
-                        current = new Event(description, deadline);
-                        break;
+                    String deadline = process[1].substring(byIndex + 4).trim();
+                    String description = process[1].substring(0, byIndex).trim();
+                    current = new Deadline(description, deadline);
+                    break;
+                }
+                case "event": {
+                    int atIndex = process[1].indexOf(" /at ");
+                    if (atIndex == -1) {
+                        throw new DukeException("better description");
                     }
-                    default:
-                        throw new DukeException("nothing understood");
+                    String deadline = process[1].substring(atIndex + 4).trim();
+                    String description = process[1].substring(0, atIndex).trim();
+                    current = new Event(description, deadline);
+                    break;
+                }
+                default: {
+                    throw new DukeException("nothing understood");
+                }
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println(SPACE1 + "The description of " +
@@ -128,11 +240,18 @@ public class Duke {
             }
 
             tasks.add(current);
+            try {
+                appendTxt(current, data);
+            } catch (IOException e) {
+                System.out.println("txt file update unsuccessful " + e.getMessage());
+            }
             System.out.println(SPACE1 + "Understood! I've added this task:\n" +
                     SPACE2 + current);
             System.out.println(SPACE1 + "You have " +
                     tasks.size() + " tasks in your list now!");
             System.out.println(LINE_BREAK);
         }
+
+        sc.close();
     }
 }
