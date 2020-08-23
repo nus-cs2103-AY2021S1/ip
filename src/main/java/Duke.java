@@ -25,9 +25,10 @@ public class Duke {
                 + "_________________________________________");
     }
 
-    public static void exit() {
+    public static void exit(DataStorage ds, Duke dd) {
         System.out.println("You're leaving? Bye :( Come back soon!"
                 + "\n_________________________________________");
+        ds.writeData(dd.taskList);
     }
 
     public static void list(Duke dd) {
@@ -120,6 +121,9 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        DataStorage ds = new DataStorage();
+        ArrayList<Task> tasks = ds.takeData();
+
         greeting();
 
         Scanner sc = new Scanner(System.in);
@@ -128,10 +132,10 @@ public class Duke {
         String bye = "bye";
         String list = "list";
 
-        Duke dd = new Duke();
+        Duke dd = new Duke(tasks.size(), tasks);
 
         if (input.equals(bye)) {
-            exit();
+            exit(ds, dd);
         }
         else {
             // does not exit
@@ -162,7 +166,7 @@ public class Duke {
                 System.out.println("_________________________________________");
                 input = sc.nextLine();
             }
-            exit();
+            exit(ds, dd);
         }
     }
 }
