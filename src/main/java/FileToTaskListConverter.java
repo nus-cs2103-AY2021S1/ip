@@ -5,6 +5,7 @@ import Task.ToDoTask;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -31,25 +32,40 @@ public abstract class FileToTaskListConverter {
             sc.close();
             return list;
         } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+            File directory = data.getParentFile();
+            System.out.println(directory);
+            try {
+                if (directory.exists() && directory.isDirectory()) {
+                    data.createNewFile();
+                } else {
+                    directory.mkdirs();
+                    data.createNewFile();
+                }
+            } catch (IOException ioe) {
+                System.out.println("Unable to open/create file");
+            }
             return new ArrayList<>();
         }
     }
 
-    public static Task getTaskFromData(String info) {
-        String[] arr = info.split("/");
-        char type = arr[0].charAt(0);
-        boolean isDone = arr[1].equals("1");
+    private static Task getTaskFromData(String info) {
+
+        char type = info.charAt(1);
+        boolean isDone = Character.toString(info.charAt(4)).equals("✓");
+        int indexOfOpenBrackets = info.indexOf("(");
+        int indexOfCloseBrackets = info.indexOf(")");
 
         switch (type) {
         case 'T':
-            return new ToDoTask(arr[2], isDone);
+            return new ToDoTask(info.substring(7), isDone);
         case 'D':
-            return new DeadlineTask(arr[2], arr[3], isDone);
+            return new DeadlineTask(info.substring(7,indexOfOpenBrackets - 1),
+                    info.substring(indexOfOpenBrackets + 5, indexOfCloseBrackets), isDone);
         case 'E':
-            return new EventTask(arr[2], arr[3], isDone);
+            return new EventTask(info.substring(7,indexOfOpenBrackets - 1),
+                    info.substring(indexOfOpenBrackets + 5, indexOfCloseBrackets), isDone);
         default:
-            return new Task("No Task");
+            return new Task("No Task !!!!");
         }
     }
 }
