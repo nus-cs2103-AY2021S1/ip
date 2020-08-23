@@ -1,4 +1,6 @@
-import exceptions.NoSuchTaskException;
+package duke.task;
+
+import duke.exceptions.NoSuchTaskException;
 
 import java.util.List;
 import java.util.ArrayList;

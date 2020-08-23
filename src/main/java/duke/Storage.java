@@ -1,4 +1,11 @@
-import exceptions.WrongDateFormatException;
+package duke;
+
+import duke.exceptions.WrongDateFormatException;
+import duke.parser.DateParser;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,7 +41,7 @@ public class Storage {
             }
             return tasks;
         } catch (FileNotFoundException e) {
-            System.out.println("Storage file not found");
+            System.out.println("duke.Storage file not found");
             return tasks;
         } catch (WrongDateFormatException e) {
             System.out.println("Wrong date formatting in storage file");

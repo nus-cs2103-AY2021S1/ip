@@ -1,7 +1,9 @@
-import exceptions.DukeException;
-import exceptions.NoSuchTaskException;
-import exceptions.UnknownCommandException;
-import exceptions.WrongSyntaxException;
+package duke.parser;
+
+import duke.command.*;
+import duke.exceptions.DukeException;
+import duke.exceptions.UnknownCommandException;
+import duke.exceptions.WrongSyntaxException;
 
 import java.util.Arrays;
 import java.util.HashSet;

@@ -1,5 +1,5 @@
 ***********************
-Hi! I'm Duke. What can I do for you?
+Hi! I'm duke.Duke. What can I do for you?
 ***********************
 ***********************
 added: [T][✘] sleep 

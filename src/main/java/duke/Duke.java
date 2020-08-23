@@ -1,4 +1,9 @@
-import exceptions.DukeException;
+package duke;
+
+import duke.command.Command;
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.task.TaskList;
 
 import java.io.IOException;
 
