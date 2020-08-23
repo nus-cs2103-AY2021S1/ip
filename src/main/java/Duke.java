@@ -2,11 +2,146 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) throws CommandNotRecognisedException,
-            MissingTaskNumberException, MissingTaskDescriptionException {
+    
+    public static void main(String[] args) throws MissingTaskDescriptionException, 
+            MissingTaskNumberException, CommandNotRecognisedException{
+//        // Contains all tasks
+//        ArrayList<Task> listOfTasks= new ArrayList<>();
+//
+//        // Introduction of Mocha
+//        String horizontalLine = "_______________________________________________________";
+//        String nameIntro = "Hello, I'm Mocha!";
+//        String greeting = "What's up today!";
+//        System.out.println(horizontalLine
+//                + "\r\n"
+//                + nameIntro
+//                + "\r\n"
+//                + greeting
+//                + "\r\n"
+//                + horizontalLine
+//                + "\r\n");
+//
+//        // Create new scanner
+//        Scanner userCommand = new Scanner(System.in);
+//
+//        while (userCommand.hasNextLine()) {
+//
+//            String nextCommand = userCommand.nextLine();
+//            String[] commandParts = nextCommand.split("\\s", 2);
+//
+//            if (commandParts[0].contains("todo")) {
+//                try {
+//                    Task newToDoTask = new ToDo(commandParts[1]);
+//                    listOfTasks.add(newToDoTask);
+//
+//                    System.out.println(horizontalLine
+//                            + "\r\n"
+//                            + "One new ToDo Task added: "
+//                            + "\r\n"
+//                            + newToDoTask.toString()
+//                            + "\r\n"
+//                            + "Total number of tasks in list: "
+//                            + listOfTasks.size()
+//                            + "\r\n"
+//                            + horizontalLine);
+//                } catch (Exception e) {
+//                    throw new MissingTaskDescriptionException();
+//                }
+//
+//            } else if (commandParts[0].contains("deadline")) {
+//
+//                try {
+//                    String[] deadlineParts = commandParts[1].split("/by");
+//                    Task newDeadline = new Deadline(deadlineParts[0].trim(), deadlineParts[1].trim());
+//                    listOfTasks.add(newDeadline);
+//                    System.out.println(horizontalLine
+//                            + "\r\n"
+//                            + "One new Deadline added: "
+//                            + "\r\n"
+//                            + newDeadline.toString()
+//                            + "\r\n"
+//                            + "Total number of tasks in list: "
+//                            + listOfTasks.size()
+//                            + "\r\n"
+//                            + horizontalLine);
+//                } catch (Exception e) {
+//                    throw new MissingTaskDescriptionException();
+//                }
+//
+//            } else if (commandParts[0].contains("event")) {
+//
+//                try {
+//                    String[] eventParts = commandParts[1].split("/at");
+//
+//                    Task newEvent = new Event(eventParts[0].trim(), eventParts[1].trim());
+//                    listOfTasks.add(newEvent);
+//                    System.out.println(horizontalLine
+//                            + "\r\n"
+//                            + "One new Deadline Task added: "
+//                            + "\r\n"
+//                            + newEvent.toString()
+//                            + "\r\n"
+//                            + "Total number of tasks in list: "
+//                            + listOfTasks.size()
+//                            + "\r\n"
+//                            + horizontalLine);
+//                } catch (Exception e) {
+//                    throw new MissingTaskDescriptionException();
+//                }
+//
+//            } else if (commandParts[0].contains("list")) {
+//
+//                System.out.println(horizontalLine + "\r\n" + "Here's all the tasks in your list: ");
+//                for (int i = 0; i < listOfTasks.size(); i++) {
+//                    System.out.println((i + 1) + "." + listOfTasks.get(i).toString());
+//                }
+//                System.out.println(horizontalLine + "\r\n");
+//
+//            } else if (commandParts[0].contains("done")) {
+//
+//                try {
+//                    int taskNumber = Integer.parseInt(commandParts[1].trim()) - 1;
+//                    Task doneTask = listOfTasks.get(taskNumber);
+//                    doneTask.markAsDone();
+//                    System.out.println(horizontalLine
+//                            + "\r\n Nice! One thing done: \r\n"
+//                            + doneTask.toString()
+//                            + "\r\n"
+//                            + horizontalLine);
+//                } catch (Exception e) {
+//                    throw new MissingTaskNumberException();
+//                }
+//
+//            } else if (commandParts[0].contains("bye")) {
+//                System.out.println(horizontalLine
+//                        + "\r\n"
+//                        + "Bye! See ya soon!"
+//                        + "\r\n"
+//                        + horizontalLine);
+//            } else if (commandParts[0].contains("delete")) {
+//
+//                int taskNumber = Integer.parseInt(commandParts[1].trim()) - 1;
+//                Task deleteTask = listOfTasks.get(taskNumber);
+//                listOfTasks.remove(taskNumber);
+//                System.out.println(horizontalLine
+//                        + "\r\n"
+//                        + "Noted. Removing the following task:"
+//                        + "\r\n"
+//                        + deleteTask.toString()
+//                        + "\r\n"
+//                        + "Total number of tasks left in the list: "
+//                        + listOfTasks.size()
+//                        + "\r\n"
+//                        + horizontalLine);
+//
+//            } else {
+//                throw new CommandNotRecognisedException();
+//            }
+//        }
+
         // Contains all tasks
         ArrayList<Task> listOfTasks= new ArrayList<>();
-
+        
         // Introduction of Mocha
         String horizontalLine = "_______________________________________________________";
         String nameIntro = "Hello, I'm Mocha!";
@@ -17,20 +152,18 @@ public class Duke {
                 + "\r\n"
                 + greeting
                 + "\r\n"
-                + horizontalLine
-                + "\r\n");
+                + horizontalLine);
+        
+        Scanner userInput = new Scanner(System.in);
+        
+        while (userInput.hasNextLine()) {
+            try {
+                String nextLine = userInput.nextLine();
+                String[] commandParts = nextLine.split("\\s", 2);
 
-        // Create new scanner
-        Scanner userCommand = new Scanner(System.in);
+                if (commandParts[0].contains("todo")) {
 
-        while (userCommand.hasNextLine()) {
-
-            String nextCommand = userCommand.nextLine();
-            String[] commandParts = nextCommand.split("\\s", 2);
-
-            if (commandParts[0].contains("todo")) {
-                try {
-                    Task newToDoTask = new ToDo(commandParts[1]);
+                    Task newToDoTask= createNewToDo(nextLine);
                     listOfTasks.add(newToDoTask);
 
                     System.out.println(horizontalLine
@@ -43,100 +176,182 @@ public class Duke {
                             + listOfTasks.size()
                             + "\r\n"
                             + horizontalLine);
-                } catch (Exception e) {
-                    throw new MissingTaskDescriptionException();
-                }
 
-            } else if (commandParts[0].contains("deadline")) {
+                } else if (commandParts[0].contains("deadline")) {
 
-                try {
-                    String[] deadlineParts = commandParts[1].split("/by");
-                    Task newDeadline = new Deadline(deadlineParts[0].trim(), deadlineParts[1].trim());
-                    listOfTasks.add(newDeadline);
+                    Task newDeadlineTask = createNewDeadline(nextLine);
+                    listOfTasks.add(newDeadlineTask);
                     System.out.println(horizontalLine
                             + "\r\n"
                             + "One new Deadline added: "
                             + "\r\n"
-                            + newDeadline.toString()
+                            + newDeadlineTask.toString()
                             + "\r\n"
                             + "Total number of tasks in list: "
                             + listOfTasks.size()
                             + "\r\n"
                             + horizontalLine);
-                } catch (Exception e) {
-                    throw new MissingTaskDescriptionException();
-                }
 
-            } else if (commandParts[0].contains("event")) {
+                } else if (commandParts[0].contains("event")) {
 
-                try {
-                    String[] eventParts = commandParts[1].split("/at");
-
-                    Task newEvent = new Event(eventParts[0].trim(), eventParts[1].trim());
-                    listOfTasks.add(newEvent);
+                    Task newEventTask = createNewTask(nextLine);
+                    listOfTasks.add(newEventTask);
                     System.out.println(horizontalLine
                             + "\r\n"
                             + "One new Deadline Task added: "
                             + "\r\n"
-                            + newEvent.toString()
+                            + newEventTask.toString()
                             + "\r\n"
                             + "Total number of tasks in list: "
                             + listOfTasks.size()
                             + "\r\n"
                             + horizontalLine);
-                } catch (Exception e) {
-                    throw new MissingTaskDescriptionException();
-                }
 
-            } else if (commandParts[0].contains("list")) {
+                } else if (commandParts[0].contains("done")) {
 
-                System.out.println(horizontalLine + "\r\n" + "Here's all the tasks in your list: ");
-                for (int i = 0; i < listOfTasks.size(); i++) {
-                    System.out.println((i + 1) + "." + listOfTasks.get(i).toString());
-                }
-                System.out.println(horizontalLine + "\r\n");
-
-            } else if (commandParts[0].contains("done")) {
-
-                try {
-                    int taskNumber = Integer.parseInt(commandParts[1].trim()) - 1;
+                    int taskNumber = markDoneTask(nextLine);
                     Task doneTask = listOfTasks.get(taskNumber);
                     doneTask.markAsDone();
                     System.out.println(horizontalLine
-                            + "\r\n Nice! One thing done: \r\n"
+                            + "\r\n"
+                            + "Nice! One thing done: \r\n"
                             + doneTask.toString()
                             + "\r\n"
                             + horizontalLine);
-                } catch (Exception e) {
-                    throw new MissingTaskNumberException();
+
+                } else if (commandParts[0].contains("list")) {
+
+                    System.out.println(horizontalLine
+                            + "\r\n"
+                            + "Here are all of your tasks:"
+                            + "\r\n");
+
+                    for (int i = 0; i < listOfTasks.size(); i++) {
+                        System.out.println((i + 1) + "." + listOfTasks.get(i).toString());
+                    }
+
+                    System.out.println("\r\n"
+                            + "You have a total of "
+                            + listOfTasks.size()
+                            + " tasks."
+                            + "\r\n"
+                            + horizontalLine);
+
+                } else if (commandParts[0].contains("bye")) {
+                    System.out.println(horizontalLine
+                            + "\r\n"
+                            + "Bye! See ya soon!"
+                            + "\r\n"
+                            + horizontalLine);
+                    
+                } else if (commandParts[0].contains("delete")) {
+
+                    int taskNumber = Integer.parseInt(commandParts[1].trim()) - 1;
+                    Task deleteTask = listOfTasks.get(taskNumber);
+                    listOfTasks.remove(taskNumber);
+                    System.out.println(horizontalLine
+                            + "\r\n"
+                            + "Noted. Removing the following task:"
+                            + "\r\n"
+                            + deleteTask.toString()
+                            + "\r\n"
+                            + "Total number of tasks left in the list: "
+                            + listOfTasks.size()
+                            + "\r\n"
+                            + horizontalLine);
+
+                } else {
+                    throw new CommandNotRecognisedException(horizontalLine
+                            + "\r\n"
+                            + "Oops! I couldn't understand what you mean :("
+                            + "\r\n"
+                            + horizontalLine);
                 }
-
-            } else if (commandParts[0].contains("bye")) {
-                System.out.println(horizontalLine
-                        + "\r\n"
-                        + "Bye! See ya soon!"
-                        + "\r\n"
-                        + horizontalLine);
-            } else if (commandParts[0].contains("delete")) {
-
-                int taskNumber = Integer.parseInt(commandParts[1].trim()) - 1;
-                Task deleteTask = listOfTasks.get(taskNumber);
-                listOfTasks.remove(taskNumber);
-                System.out.println(horizontalLine
-                        + "\r\n"
-                        + "Noted. Removing the following task:"
-                        + "\r\n"
-                        + deleteTask.toString()
-                        + "\r\n"
-                        + "Total number of tasks left in the list: "
-                        + listOfTasks.size()
-                        + "\r\n"
-                        + horizontalLine);
-
-            } else {
-                throw new CommandNotRecognisedException();
+            } catch (MissingTaskDescriptionException e) {
+                System.out.println(e.getMessage());
+            } catch (MissingTaskNumberException e) {
+                System.out.println(e.getMessage());
+            } catch (CommandNotRecognisedException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
+
+    private static Task createNewToDo(String nextLine) throws MissingTaskDescriptionException {
+        try {
+            
+            String[] commandParts = nextLine.split("\\s", 2);
+            Task newToDoTask = new ToDo(commandParts[1]);
+            return newToDoTask;
+            
+        } catch (Exception e) {
+            String horizontalLine = "_______________________________________________________";
+
+            throw new MissingTaskDescriptionException(horizontalLine
+                    + "\r\n"
+                    + "Oops! The description cannot be empty :("
+                    + "\r\n"
+                    + horizontalLine);
+        }
+    }
+
+    private static Task createNewDeadline(String nextLine) throws MissingTaskDescriptionException {
+        try {
+            
+            String[] commandParts = nextLine.split("\\s", 2);
+            String[] deadlineParts = commandParts[1].split("/by");
+            Task newDeadlineTask = new Deadline(deadlineParts[0].trim(), deadlineParts[1].trim());
+            return newDeadlineTask;
+            
+        } catch (Exception e) {
+            String horizontalLine = "_______________________________________________________";
+
+            throw new MissingTaskDescriptionException(horizontalLine
+                    + "\r\n"
+                    + "Oops! The description cannot be empty :("
+                    + "\r\n"
+                    + horizontalLine);
+        }
+    }
+
+    private static Task createNewTask(String nextLine) throws MissingTaskDescriptionException {
+        try {
+            
+            String[] commandParts = nextLine.split("\\s", 2);
+            String[] eventParts = commandParts[1].split("/at");
+            Task newEventTask = new Event(eventParts[0].trim(), eventParts[1].trim());
+            return newEventTask;
+            
+        } catch (Exception e) {
+            String horizontalLine = "_______________________________________________________";
+
+            throw new MissingTaskDescriptionException(horizontalLine
+                    + "\r\n"
+                    + "Oops! The description cannot be empty :("
+                    + "\r\n"
+                    + horizontalLine);
+        }
+    }
+
+
+    private static int markDoneTask(String nextLine) throws MissingTaskNumberException {
+      try {
+          
+          String[] commandParts = nextLine.split("\\s", 2);
+          int taskNumber = Integer.parseInt(commandParts[1].trim()) - 1;
+          return taskNumber;
+          
+      } catch (Exception e) {
+
+          String horizontalLine = "_______________________________________________________";
+          
+          throw new MissingTaskNumberException(horizontalLine 
+                  + "\r\n"
+                  + "Oops! The task number cannot be missing :("
+                  + "\r\n"
+                  + horizontalLine);
+          
+      }
+    } 
 }
 
