@@ -1,4 +1,6 @@
+import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskList {
     ArrayList<Task> taskList = new ArrayList<>();
@@ -23,7 +25,17 @@ public class TaskList {
         taskList.remove(task);
     }
 
-    public void addTask(Task task) {
+    public void addTask(Task task) throws FileNotFoundException {
+            try {
+                FileOutputStream fos = new FileOutputStream("Duke.txt");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(task);
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
         taskList.add(task);
+        }
+
     }
-}
+
