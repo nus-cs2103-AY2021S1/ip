@@ -1,5 +1,8 @@
 package duke.exceptions;
 
+/**
+ * Encapsulates an exception where the user tries to create a task without description.
+ */
 public class EmptyCommandException extends DukeException {
     private String cmd;
     public EmptyCommandException (String cmd) {

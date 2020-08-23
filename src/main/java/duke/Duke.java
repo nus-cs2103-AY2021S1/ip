@@ -4,6 +4,10 @@ import duke.exceptions.DukeException;
 
 import java.util.Scanner;
 
+/**
+ * The main program of Duke.
+ */
+
 public class Duke {
     private Storage storage;
     protected TaskList tasks;
@@ -16,6 +20,10 @@ public class Duke {
         parser = new Parser();
     }
 
+    /**
+     * Starts the main Duke program.
+     * Receive and process user input until user keys "bye".
+     */
     public void run() {
         ui.welcome();
         tasks = new TaskList(storage.load());

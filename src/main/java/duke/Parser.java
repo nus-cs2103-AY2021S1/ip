@@ -3,7 +3,19 @@ package duke;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidCommandException;
 
+/**
+ * Processes the user's commands.
+ */
+
 public class Parser {
+
+    /**
+     * Takes in a line of user input and passes it to TaskList.
+     * @param str user's input
+     * @param tasks current list of tasks
+     * @param storage location of saved tasklist
+     * @throws DukeException when user input is not a valid command
+     */
 
     public void command(String str, TaskList tasks, Storage storage) throws DukeException {
         if (str.equals("list")) {

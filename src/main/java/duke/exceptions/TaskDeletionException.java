@@ -1,5 +1,9 @@
 package duke.exceptions;
 
+/**
+ * Encapsulates the exception where a task out of range of the list is selected for deletion.
+ */
+
 public class TaskDeletionException extends DukeException {
     protected int size;
     public TaskDeletionException(int size) {

@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Encapsulates an Event which occurs at a certain time.
+ */
+
 public class Event extends TimedTask {
 
     public Event(String description, String at) {
@@ -8,6 +12,11 @@ public class Event extends TimedTask {
         this.firstLetter = "[E]";
     }
 
+    /**
+     * Loads an Event from its stored form.
+     * @param str String representing the task in the storage file.
+     * @return The corresponding Event.
+     */
     public static Event load(String str) {
         String[] arr = str.split("\\|", 4);
         Event ev = new Event(arr[2], arr[3]);

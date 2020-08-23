@@ -8,6 +8,10 @@ import duke.task.ToDo;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Stores the location of the saved TaskList.
+ */
+
 public class Storage {
     private final String filepath;
 
@@ -15,9 +19,19 @@ public class Storage {
         this.filepath = "";
     }
 
+    /**
+     * Creates a new storage with the specified directory.
+     * @param filepath directory to save to and load from
+     */
+
     public Storage(String filepath) {
         this.filepath = filepath;
     }
+
+    /**
+     * Loads the previously saved tasks into an arraylist.
+     * If there is no saved directory or file, create a new folder and arraylist.
+     */
 
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -48,6 +62,11 @@ public class Storage {
             return tasks;
         }
     }
+
+    /**
+     * Saves the current list of tasks into the directory.
+     * @param tasks Current list of tasks.
+     */
 
     public void save(TaskList tasks) {
         try {
