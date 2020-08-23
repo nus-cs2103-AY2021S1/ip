@@ -46,7 +46,7 @@ public class Storage {
                 if (taskType.charAt(0) == 'D') {
                     toAdd = new Deadline(description, time);
                 } else if (taskType.charAt(0) == 'E') {
-                    toAdd = new ActualEvent(description, time);
+                    toAdd = new Event(description, time);
                 } else {
                     throw new InvalidCommandException("Invalid input file format");
                 }

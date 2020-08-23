@@ -1,7 +1,7 @@
 package duke.component;
 
 import duke.task.Deadline;
-import duke.task.ActualEvent;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 import org.junit.jupiter.api.Test;
@@ -298,7 +298,7 @@ public class ParserTest {
             assertEquals(d2, d);
 
             Task e = Parser.generate("event meeting /at 2020-09-01 11:00");
-            Task e2 = new ActualEvent("meeting", "2020-09-01 11:00");
+            Task e2 = new Event("meeting", "2020-09-01 11:00");
             assertEquals(e2, e);
         } catch (Exception e) {
             fail();
