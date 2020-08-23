@@ -1,5 +1,6 @@
 package duke.utils;
 
+import duke.Duke;
 import duke.command.ClearCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -7,6 +8,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
@@ -53,6 +55,12 @@ public class Parser {
             }
         case "todo":
             return new TodoCommand(input.substring(5));
+        case "find":
+            try {
+                return new FindCommand(input.substring(5));
+            } catch (Exception e) {
+                throw new DukeException("Find format isn't correct");
+            }
         default:
             throw new DukeException("I don't know what that means :( ");
         }

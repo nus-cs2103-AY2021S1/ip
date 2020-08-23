@@ -45,6 +45,15 @@ public class Ui {
     /**
      * Welcomes the user with a welcome message
      */
+    public void displayList(List<Task> toDoList, String s) {
+        displayLines();
+        displayString(s);
+        for (int i = 0; i < toDoList.size(); i++) {
+            displayString((i + 1) + ". " + toDoList.get(i));
+        }
+        displayLines();
+    }
+
     public void welcome() {
         String logo = "     ____        _        \n"
                 + "    |  _ \\ _   _| | _____ \n"
@@ -61,7 +70,8 @@ public class Ui {
                 "\n    - done <num>" +
                 "\n    - todo <task>" +
                 "\n    - deadline <task> /by <yyyy-mm-dd>" +
-                "\n    - event <task> /at <yyyy-mm-dd>\n");
+                "\n    - event <task> /at <yyyy-mm-dd>" +
+                "\n    - find <keyword>\n");
 
 
     }
