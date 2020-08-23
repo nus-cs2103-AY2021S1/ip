@@ -1,3 +1,4 @@
 T>0>wake up
 D>1>homework>tues
 E>0>com day>wed
+T>0>sleep

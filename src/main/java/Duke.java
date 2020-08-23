@@ -9,6 +9,7 @@ import java.io.FileWriter;
 public class Duke {
     public static final String LINE = "_______________________________________\n";
     public static ArrayList<Task> taskList = new ArrayList<>();
+    public static FileWriter writer;
 
     public static void main(String[] args) throws DukeException, IOException {
 
@@ -20,8 +21,9 @@ public class Duke {
                 + "_______________________________________ \n";
         System.out.println(open);
 
-        readSavedData();
-        //FileWriter writer = new FileWriter("data/duke.txt");
+        File file = new File("data/duke.txt");
+        readSavedData(file);
+        writer = new FileWriter(file, true);
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
         while(running) {
@@ -78,7 +80,7 @@ public class Duke {
 
         // Closing
         scanner.close();
-        //writer.close();
+        writer.close();
         String close = "_______________________________________ \n"
                 + "Goodbye! See you soon! \n"
                 + "_______________________________________ \n";
@@ -118,8 +120,10 @@ public class Duke {
         }
     }
 
-    public static void handleTodo(String todoDescription) {
-        taskList.add(new ToDo(todoDescription, false));
+    public static void handleTodo(String todoDescription) throws IOException {
+        ToDo newToDo = new ToDo(todoDescription, false);
+        taskList.add(newToDo);
+        writer.write(System.lineSeparator() + newToDo.toEncoding());
         String output = LINE + "Got it. I've added this task: \n"
                 + taskList.get(taskList.size() - 1) + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list."
@@ -127,9 +131,11 @@ public class Duke {
         System.out.println(output);
     }
 
-    public static void handleDeadline(String deadlineDetails) {
+    public static void handleDeadline(String deadlineDetails) throws IOException {
         String[] details = deadlineDetails.split(" /by ", 2);
-        taskList.add(new Deadline(details[0], details[1], false));
+        Deadline newDeadline = new Deadline(details[0], details[1], false);
+        taskList.add(newDeadline);
+        writer.write(System.lineSeparator() + newDeadline.toEncoding());
         String output = LINE + "Got it. I've added this task: \n"
                 + taskList.get(taskList.size() - 1) + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list."
@@ -137,9 +143,11 @@ public class Duke {
         System.out.println(output);
     }
 
-    public static void handleEvent(String eventDetails) {
+    public static void handleEvent(String eventDetails) throws IOException {
         String[] details = eventDetails.split(" /at ", 2);
-        taskList.add(new Event(details[0], details[1], false));
+        Event newEvent = new Event(details[0], details[1], false);
+        taskList.add(newEvent);
+        writer.write(System.lineSeparator() + newEvent.toEncoding());
         String output = LINE + "Got it. I've added this task: \n"
                 + taskList.get(taskList.size() - 1) + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list."
@@ -159,8 +167,7 @@ public class Duke {
         System.out.println(output);
     }
 
-    public static void readSavedData() throws IOException {
-        File file = new File("data/duke.txt");
+    public static void readSavedData(File file) throws IOException {
         if (!file.exists()) {
             file.getParentFile().mkdirs();
             file.createNewFile();
