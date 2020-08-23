@@ -1,7 +1,7 @@
 package duke.storage;
 
 import duke.exceptions.InvalidFIlePathException;
-import duke.exceptions.NoSuchTaskException;
+import duke.exceptions.StorageException;
 import duke.exceptions.TaskListTranslatorException;
 import duke.tasklist.TaskList;
 
@@ -44,19 +44,16 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new AssertionError("A non-existent file scenario has been handled earlier.");
         } catch (IOException e) {
-            // todo: throw duke.storage exception
-            System.out.println(e.getMessage());
             return new TaskList();
         }
     }
 
-    public void save(TaskList taskList) {
+    public void save(TaskList taskList) throws StorageException {
         try {
             List<String> encodedTaskList = TaskListTranslator.encode(taskList);
             Files.write(path, encodedTaskList);
         } catch (IOException e) {
-            // todo: io exception
-            throw new NoSuchTaskException();
+            throw new StorageException();
         }
     }
 
