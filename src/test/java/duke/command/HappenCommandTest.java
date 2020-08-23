@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class HappenCommandTest {
     @Test
-    public void isExit_alwaysFalse() {
+    public void isExit__alwaysFalse() {
         assertFalse(new HappenCommand("happen on today").isExit());
     }
 

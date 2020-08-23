@@ -50,7 +50,7 @@ public abstract class Task {
      * @param date the given date
      * @return true if the task happens on the given date, ToDo does not happen on any date, so always false
      */
-    public boolean happenOnDate(LocalDate date) {
+    public boolean isHappeningOn(LocalDate date) {
         return false;
     }
 
@@ -58,7 +58,7 @@ public abstract class Task {
      * Checks whether the task happens today.
      * @return true if the task happens today, ToDo does not happen on any date, so always false
      */
-    public boolean happenToday() {
+    public boolean isHappeningToday() {
         return false;
     }
 
@@ -67,7 +67,7 @@ public abstract class Task {
      * @param date the given date
      * @return true if the task happens before the given date, ToDo does not happen on any date, so always false
      */
-    public boolean happenBeforeDate(LocalDate date) {
+    public boolean hasHappenedBefore(LocalDate date) {
         return false;
     }
 
@@ -75,7 +75,7 @@ public abstract class Task {
      * Checks whether the task happens before today.
      * @return true if the task happens before today, ToDo does not happen on any date, so always false
      */
-    public boolean happenBeforeToday() {
+    public boolean hasHappenedBeforeToday() {
         return false;
     }
 
@@ -84,7 +84,7 @@ public abstract class Task {
      * @param date the given date
      * @return true if the task happens after the given date, ToDo does not happen on any date, so always false
      */
-    public boolean happenAfterDate(LocalDate date) {
+    public boolean isHappeningAfter(LocalDate date) {
         return false;
     }
 
@@ -92,7 +92,7 @@ public abstract class Task {
      * Checks whether the task happens after today.
      * @return true if the task happens after today, ToDo does not happen on any date, so always false
      */
-    public boolean happenAfterToday() {
+    public boolean isHappeningAfterToday() {
         return false;
     }
 
@@ -103,7 +103,7 @@ public abstract class Task {
      * @return true if the task happens before the two dates (inclusive), ToDo does not happen on any date, so always
      * false
      */
-    public boolean happenBetween(LocalDate date1, LocalDate date2) {
+    public boolean isHappeningBetween(LocalDate date1, LocalDate date2) {
         return false;
     }
 
@@ -112,7 +112,7 @@ public abstract class Task {
      * @param n the number of days to construct the period, 1 for tomorrow
      * @return true if the task happens within n days (inclusive), ToDo does not happen on any date, so always false
      */
-    public boolean happenIn(int n) {
+    public boolean willHappenInDays(int n) {
         return false;
     }
 

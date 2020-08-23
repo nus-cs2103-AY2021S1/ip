@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.function.Predicate;
 
 public class Ui {
-    private static final String horizontalLine = "\t=================================================================================";
+    private static final String HORIZONTAL_LINE = "\t=================================================================================";
     private final Scanner sc;
 
     /**
@@ -29,7 +29,7 @@ public class Ui {
      * @param message the message to be wrapped
      */
     public void output(String message) {
-        print(horizontalLine + "\n\t  " + message + "\n" + horizontalLine + "\n");
+        print(HORIZONTAL_LINE + "\n\t  " + message + "\n" + HORIZONTAL_LINE + "\n");
     }
 
     /**
@@ -40,9 +40,9 @@ public class Ui {
      * @return the note with the size of the filtered list at the end
      */
     public String printList(TaskList list, Predicate<Task> predicate, String note) {
-        System.out.println(horizontalLine + "\n\t  " + "Here are the tasks " + note + "in your list:");
+        System.out.println(HORIZONTAL_LINE + "\n\t  " + "Here are the tasks " + note + "in your list:");
         int n = list.print(predicate);
-        System.out.println(horizontalLine + "\n");
+        System.out.println(HORIZONTAL_LINE + "\n");
         return note + n;
     }
 

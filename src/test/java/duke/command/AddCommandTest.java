@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AddCommandTest {
     @Test
-    public void isExit_alwaysFalse() {
+    public void isExit__alwaysFalse() {
         assertFalse(new AddCommand("anything").isExit());
         assertFalse(new AddCommand("todo anything").isExit());
         assertFalse(new AddCommand("event anything").isExit());

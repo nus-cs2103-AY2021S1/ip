@@ -25,45 +25,45 @@ public class Deadline extends Task {
     }
 
     @Override
-    public boolean happenOnDate(LocalDate date) {
+    public boolean isHappeningOn(LocalDate date) {
         return date.isEqual(byTime);
     }
 
     @Override
-    public boolean happenToday() {
-        return happenOnDate(LocalDate.now());
+    public boolean isHappeningToday() {
+        return isHappeningOn(LocalDate.now());
     }
 
     @Override
-    public boolean happenBeforeDate(LocalDate date) {
+    public boolean hasHappenedBefore(LocalDate date) {
         return byTime.isBefore(date);
     }
 
     @Override
-    public boolean happenBeforeToday() {
-        return happenBeforeDate(LocalDate.now());
+    public boolean hasHappenedBeforeToday() {
+        return hasHappenedBefore(LocalDate.now());
     }
 
     @Override
-    public boolean happenAfterDate(LocalDate date) {
+    public boolean isHappeningAfter(LocalDate date) {
         return byTime.isAfter(date);
     }
 
     @Override
-    public boolean happenAfterToday() {
-        return happenAfterDate(LocalDate.now());
+    public boolean isHappeningAfterToday() {
+        return isHappeningAfter(LocalDate.now());
     }
 
     @Override
-    public boolean happenBetween(LocalDate date1, LocalDate date2) {
-        super.happenBetween(date1, date2);
+    public boolean isHappeningBetween(LocalDate date1, LocalDate date2) {
+        super.isHappeningBetween(date1, date2);
         return !byTime.isAfter(date2) && !byTime.isBefore(date1);
     }
 
     @Override
-    public boolean happenIn(int n) {
-        super.happenIn(n);
-        return happenBetween(LocalDate.now(), LocalDate.now().plusDays(n));
+    public boolean willHappenInDays(int n) {
+        super.willHappenInDays(n);
+        return isHappeningBetween(LocalDate.now(), LocalDate.now().plusDays(n));
     }
 
     /**

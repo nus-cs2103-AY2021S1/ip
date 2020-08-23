@@ -11,13 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ByeCommandTest {
     @Test
-    public void isExit_alwaysTrue() {
+    public void isExit__alwaysTrue() {
         ByeCommand b = new ByeCommand("bye");
         assertTrue(b.isExit());
     }
 
     @Test
-    public void execute_nothingWrong() {
+    public void execute__nothingWrong() {
         Ui ui = new Ui();
         Storage storage = new StorageStub();
         TaskList list = storage.getList();
