@@ -136,6 +136,36 @@ public class Duke {
 //                throw new CommandNotRecognisedException();
 //            }
 //        }
+        
+        // Introduction of Mocha
+        String horizontalLine = "_______________________________________________________";
+        String nameIntro = "Hello, I'm Mocha!";
+        String greeting = "What's up today!";
+        System.out.println(horizontalLine
+                + "\r\n"
+                + nameIntro
+                + "\r\n"
+                + greeting
+                + "\r\n"
+                + horizontalLine
+                + "\r\n");
+        
+        Scanner userInput = new Scanner(System.in);
+        
+        while (userInput.hasNextLine()) {
+            
+            String nextLine = userInput.nextLine();
+            
+             if (!nextLine.contains("bye")) {
+                 System.out.println(nextLine);
+             } else {
+                 System.out.println(horizontalLine
+                         + "\r\n"
+                         + "Bye! See ya soon!"
+                         + "\r\n"
+                         + horizontalLine);
+             }
+        }
     }
 }
 
