@@ -1,0 +1,50 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+
+public class HandleFile {
+    File storedData;
+    ListOfItems list;
+
+    HandleFile(ListOfItems list) {
+        this.storedData = new File("stored.txt");
+        this.list = list;
+    }
+
+    void checkFile() throws IOException {
+        if (!this.storedData.exists()) {
+            this.storedData.createNewFile();
+        } else {
+            readFile();
+        }
+    }
+
+    void readFile() {
+        try {
+            Scanner sc = new Scanner(this.storedData);
+            while(sc.hasNextLine()) {
+                this.list.addStored(sc.nextLine());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void writeFile(ListOfItems listOfItems) throws IOException {
+        List<Task> list = listOfItems.list;
+
+        FileWriter fw = new FileWriter(this.storedData);
+        BufferedWriter bw = new BufferedWriter(fw);
+
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            String taskText = task.toString();
+            bw.write(taskText);
+            bw.write("\n");
+        }
+        bw.close();
+    }
+}
