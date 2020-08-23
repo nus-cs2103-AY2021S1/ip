@@ -1,7 +1,3 @@
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,74 +19,10 @@ public class Duke {
     private static final String LIST = "list";
     private static final String TODO = "todo";
 
-    private static int storageCount = 0;
-    private static final List<Task> taskStorage = new ArrayList<>(100);
-
-    private static void loadTasks() {
-        String currDir = System.getProperty("user.dir");
-        Path filePath = Paths.get(currDir, "data", "tasks.csv");
-        File file = filePath.toFile();
-        if (!file.exists()) {
-            return;
-        }
-        try {
-            BufferedReader br = Files.newBufferedReader(filePath);
-            br.readLine();
-            String line = br.readLine();
-            while (line != null) {
-                String[] taskEntry = line.split(",");
-                String type = taskEntry[0];
-                String done = taskEntry[1];
-                String description = taskEntry[2];
-                if (type.equals(TODO)) {
-                    Task task = new Todo(description, done.equals("1"));
-                    taskStorage.add(storageCount, task);
-                }
-                if (type.equals(DEADLINE)) {
-                    String date = taskEntry[3];
-                    Task task = new Deadline(description, done.equals("1"), date);
-                    taskStorage.add(storageCount, task);
-                }
-                if (type.equals(EVENT)) {
-                    String date = taskEntry[3];
-                    Task task = new Event(description, done.equals("1"), date);
-                    taskStorage.add(storageCount, task);
-                }
-                storageCount++;
-                line = br.readLine();
-            }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private static void saveTasks() {
-        String currDir = System.getProperty("user.dir");
-        Path folderPath = Paths.get(currDir, "data");
-        try {
-            if (!Files.exists(folderPath)) {
-                Files.createDirectories(folderPath);
-            }
-            Path filePath = Paths.get(currDir, "data", "tasks.csv");
-            File file = filePath.toFile();
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            FileWriter fw = new FileWriter(file);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("Task,Done?,Description,Date");
-            for (Task task: taskStorage) {
-                bw.write(task.write());
-            }
-            bw.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     private static void botStart() {
-        loadTasks();
         Scanner sc = new Scanner(System.in);
+        List<Task> taskStorage = new ArrayList<>(100);
+        int storageCount = 0;
         System.out.println("=========================================="
                 + "\nHi, my name is Duke."
                 + "\nWhat can I do for you today?"
@@ -100,8 +32,6 @@ public class Duke {
                 String command = sc.nextLine().trim();
                 String[] commandWordArray = command.split(" ");
                 if (command.equals(BYE)) {
-                    saveTasks();
-                    System.out.println("List saved to hard disk at data/tasks.csv");
                     System.out.println("Thanks for chatting with me, see you soon!"
                             + "\n==========================================");
                     break;
