@@ -29,7 +29,7 @@ public class Storage {
 
     public void save(TaskList lst) {
         try {
-            new File("./data").mkdirs();
+            new File(filePath).getParentFile().mkdirs();
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath));
             oos.writeObject(lst.getList());
             oos.flush();
