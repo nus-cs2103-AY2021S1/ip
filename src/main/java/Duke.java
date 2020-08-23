@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -71,8 +72,11 @@ public class Duke {
         System.out.println(String.format("Now you have %d tasks in the list", store.size()));
     }
 
+
+
     public void addTask(String command, String description) throws InvalidEventException, InvalidDeadlineException {
         String splitted[];
+        LocalDate date;
         switch (command) {
             case "todo":
                 addTaskToList(new Todo(description));
@@ -82,14 +86,16 @@ public class Duke {
                 if (splitted.length == 1) {
                     throw new InvalidDeadlineException();
                 }
-                addTaskToList(new Deadline(splitted[0], splitted[1]));
+                date = LocalDate.parse(splitted[1]);
+                addTaskToList(new Deadline(splitted[0], date));
                 break;
             case "event":
                 splitted = description.split(" /at ", 2);
                 if (splitted.length == 1) {
                     throw new InvalidEventException();
                 }
-                addTaskToList(new Event(splitted[0], splitted[1]));
+                date = LocalDate.parse(splitted[1]);
+                addTaskToList(new Event(splitted[0], date));
                 break;
             default:
                 break;
