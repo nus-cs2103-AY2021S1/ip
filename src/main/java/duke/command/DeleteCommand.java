@@ -16,6 +16,14 @@ public class DeleteCommand extends Command {
         super(input);
     }
 
+    /**
+     * Executes the command, prints the result on ui and re-writes the source data file.
+     * @param ui The user interface object that is currently running.
+     * @param list The current list of tasks.
+     * @param storage The storage-writing object that is currently running.
+     * @return The string that is to be printed on ui if the deleting is successful.
+     * @throws InvalidCommandException If the input index for deleting is invalid.
+     */
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         int count = list.size();
