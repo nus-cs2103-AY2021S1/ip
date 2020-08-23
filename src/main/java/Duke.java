@@ -201,7 +201,9 @@ public class Duke {
             } else {
                deadlineTask.setStatus(false);
             }
-            deadlineTask.setDescription(word[2].trim().replace('|','/'));
+            String[] strings = word[2].split("\\|");
+            deadlineTask.setDescription(strings[0].trim());
+            deadlineTask.setDate(LocalDateTime.parse(strings[1].trim(),formatter));
             list.add(deadlineTask);
             break;
         case "E" :
@@ -211,7 +213,9 @@ public class Duke {
             } else {
                 eventTask.setStatus(false);
             }
-            eventTask.setDescription(word[2].trim().replace('|','/'));
+            String[] strings1 = word[2].split("\\|");
+            eventTask.setDescription(strings1[0].trim());
+            eventTask.setDateTime(LocalDateTime.parse(strings1[1].trim(),formatter));
             list.add(eventTask);
             break;
         default :
