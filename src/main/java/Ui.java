@@ -3,7 +3,10 @@ import java.util.Scanner;
 
 public class Ui {
 
-    protected Ui() {}
+    Scanner scanner;
+    protected Ui() {
+        scanner = new Scanner(System.in);
+    }
 
     public void printGreeting() {
         String logo = " ____        _        \n"
@@ -79,5 +82,9 @@ public class Ui {
             printedList = "List is empty \n";
         }
         System.out.println(formatString(printedList));
+    }
+
+    public String readInput() {
+        return scanner.nextLine();
     }
 }

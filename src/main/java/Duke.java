@@ -25,8 +25,8 @@ public class Duke {
 
     public void readAndEcho(List<Task> list) {
         //Reading in user input
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+
+        String input = ui.readInput();
 
         //Stop when user inputs "bye"
         while (!input.equals("bye")) {
@@ -128,7 +128,7 @@ public class Duke {
                         + "dd/MM/2020 HHmm (e.g. 02/12/2020 1530) "
                         + "or dd/MM/2020 (e.g. 15/02/2020)\n");
             }
-            input = sc.nextLine();
+            input = ui.readInput();
         }
 
 
