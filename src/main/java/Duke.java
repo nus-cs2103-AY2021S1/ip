@@ -27,13 +27,14 @@ public class Duke {
         handleLoad();
         ui.greeting();
         ui.showList();
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                String toEcho = sc.nextLine();
+                String toEcho = ui.getCommand();
                 String[] command = toEcho.split(" ", 2);
                 if (toEcho.equals("bye")) {
                     ui.bye();
+                    isExit = true;
                 } else if (toEcho.equals("list")) {
                     ui.showList();
                 } else if (toEcho.startsWith("done")) {

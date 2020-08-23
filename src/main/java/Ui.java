@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Ui {
 
     static final String GREETING = "Hello Boss! How can I help you?";
@@ -5,6 +7,16 @@ public class Ui {
     static final String SHOW_TASK = "Here are the tasks in your list:";
     static final String BYE = "Bye Boss! Hope to see you again!";
     static final String TAB = "   ";
+
+    Scanner sc;
+
+    Ui() {
+        this.sc = new Scanner(System.in);
+    }
+
+    public String getCommand() {
+        return sc.nextLine();
+    }
 
     public void greeting() {
         System.out.println(GREETING);
