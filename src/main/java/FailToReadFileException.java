@@ -1,8 +1,6 @@
 package main.java;
 
-import java.io.IOException;
-
-public class FailToReadFileException extends IOException {
+public class FailToReadFileException extends DukeException {
     FailToReadFileException() {
         super("Something went wrong when reading the storage file! Please try again.");
     }

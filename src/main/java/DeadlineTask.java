@@ -1,27 +1,27 @@
 package main.java;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DeadlineTask extends Task {
-    private LocalDate date;
+    private LocalDateTime date;
 
-    DeadlineTask(String taskName, LocalDate date) {
+    DeadlineTask(String taskName, LocalDateTime date) {
         super(taskName);
         this.date = date;
     }
 
     public String getDateString() {
-        return this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return this.date;
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() +
-                " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+                " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 }
