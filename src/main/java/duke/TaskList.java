@@ -1,6 +1,11 @@
 package duke;
 
-import duke.exceptions.*;
+import duke.exceptions.EmptyCommandException;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.MissingTimeException;
+import duke.exceptions.TaskCompletionException;
+import duke.exceptions.TaskDeletionException;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -12,7 +17,7 @@ public class TaskList {
 
     private ArrayList<Task> tasks;
 
-    public TaskList (ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 

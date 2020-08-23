@@ -6,3 +6,6 @@ T|false|9
 T|false|10
 T|true|99
 T|false|10
+T|true|1
+T|false|12
+T|false|1
