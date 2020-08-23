@@ -1,5 +1,7 @@
+package duke.Task;
+
 public class ToDo extends Task {
-    ToDo(String taskDescription) {
+    public ToDo(String taskDescription) {
         super(taskDescription);
     }
 

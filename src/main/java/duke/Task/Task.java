@@ -1,8 +1,10 @@
+package duke.Task;
+
 public class Task {
     private final String taskDescription;
     private boolean isDone;
 
-    Task(String task) {
+    public Task(String task) {
         this.taskDescription = task;
         this.isDone = false;
     }

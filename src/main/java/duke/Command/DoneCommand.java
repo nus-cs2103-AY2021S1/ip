@@ -1,3 +1,10 @@
+package duke.Command;
+
+import duke.Exception.DoneException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 public class DoneCommand extends Command {
     private final int listNumber;
 
@@ -7,7 +14,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DoneException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DoneException {
         if (listNumber > tasks.size()) {
             throw new DoneException("Item number " + listNumber + " does not exist in list!");
         }
@@ -17,7 +24,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }

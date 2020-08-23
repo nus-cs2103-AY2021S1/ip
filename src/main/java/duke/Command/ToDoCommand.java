@@ -1,10 +1,19 @@
+package duke.Command;
+
+import duke.Exception.ToDoException;
+import duke.Storage;
+import duke.Task.Task;
+import duke.Task.ToDo;
+import duke.TaskList;
+import duke.Ui;
+
 public class ToDoCommand extends Command {
     public ToDoCommand(String input) {
         super(input);
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws ToDoException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws ToDoException {
         Task task = new ToDo(input);
         tasks.add(task);
 
@@ -14,7 +23,7 @@ public class ToDoCommand extends Command {
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }

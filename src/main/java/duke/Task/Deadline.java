@@ -1,9 +1,11 @@
+package duke.Task;
+
 import java.time.LocalDateTime;
 
-public class Event extends Task {
+public class Deadline extends Task {
     private final LocalDateTime dateTime;
 
-    Event(String task, LocalDateTime dateTime) {
+    public Deadline(String task, LocalDateTime dateTime) {
         super(task);
         this.dateTime = dateTime;
     }
@@ -23,6 +25,6 @@ public class Event extends Task {
         int dd = this.dateTime.getDayOfMonth();
         int yyyy = this.dateTime.getYear();
         String HHHH = this.dateTime.toLocalTime().toString();
-        return "[E]" + super.toString() + "(at: " + dd + " " + MMM + " " + yyyy + ", " + DDD + " @ " + HHHH + ")";
+        return "[D]" + super.toString() + "(at: " + dd + " " + MMM + " " + yyyy + ", " + DDD + " @ " + HHHH + ")";
     }
 }

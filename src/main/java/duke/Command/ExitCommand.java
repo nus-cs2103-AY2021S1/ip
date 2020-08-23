@@ -1,3 +1,10 @@
+package duke.Command;
+
+import duke.Exception.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 import java.io.IOException;
 
 public class ExitCommand extends Command {
@@ -6,7 +13,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         System.out.println("Bye. Hope to see you again soon!");
         // saves tasks to filePath
         try {
@@ -17,7 +24,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return true;
     }
 }

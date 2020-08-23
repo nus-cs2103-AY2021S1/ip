@@ -1,3 +1,8 @@
+package duke;
+
+import duke.Command.Command;
+import duke.Exception.DukeException;
+
 public class Duke {
 
     private final Storage storage;

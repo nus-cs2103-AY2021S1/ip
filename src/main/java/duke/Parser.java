@@ -1,9 +1,14 @@
+package duke;
+
+import duke.Command.*;
+import duke.Exception.*;
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
 public class Parser {
 
-    public static Command parse(String input) throws DukeException{
+    public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) {
             // when user inputs bye
 

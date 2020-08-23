@@ -1,3 +1,11 @@
+package duke.Command;
+
+import duke.Exception.DukeException;
+import duke.Storage;
+import duke.Task.Task;
+import duke.TaskList;
+import duke.Ui;
+
 public class ListCommand extends Command {
 
     public ListCommand(String input) {
@@ -5,7 +13,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         System.out.println("Here are the tasks in your list:");
         int index = 1;
         for (Task task : tasks.getList()) {
@@ -15,7 +23,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }

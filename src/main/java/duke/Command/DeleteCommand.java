@@ -1,3 +1,11 @@
+package duke.Command;
+
+import duke.Exception.DeletionException;
+import duke.Storage;
+import duke.Task.Task;
+import duke.TaskList;
+import duke.Ui;
+
 public class DeleteCommand extends Command {
 
     private final int index;
@@ -8,7 +16,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DeletionException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DeletionException {
         if (index >= tasks.size() || index < 0) {
             throw new DeletionException("Item does not exist in list!");
         }
@@ -22,7 +30,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }
