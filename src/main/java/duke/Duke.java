@@ -18,6 +18,7 @@ public class Duke {
     private final DukeFileHandler fileHandler;
     private TaskList tasks;
 
+
     private Duke(String path) {
         ui = new Ui();
         ui.welcome();
@@ -36,6 +37,7 @@ public class Duke {
 
         run();
     }
+
 
     private void run() {
 
