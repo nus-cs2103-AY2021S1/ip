@@ -1,9 +1,9 @@
 /**
  * Encapsulates a Task with a description.
- * Task can be completed and will be mark as done.
- * By default, it is initialised as incomplete.
+ *
+ * Task can be completed and will be mark as done. By default, it is initialised as incomplete.
  */
-public class Task {
+public abstract class Task implements PrintSummary {
 
     /**
      * description of the task
@@ -41,11 +41,25 @@ public class Task {
     }
 
     /**
+     * Returns the state of th:we Task, whether it is completed or not.
+     * @return true if the task is completed, false otherwise
+     */
+    protected boolean isCompleted() {
+        return isDone;
+    }
+
+    /**
      * Marks the task as complete.
      */
     public void markDone() {
         isDone = true;
     }
+
+    /**
+     * Returns a summary of the Task.
+     * @return string summarising the object
+     */
+    public abstract String getSummary();
 
 
 
