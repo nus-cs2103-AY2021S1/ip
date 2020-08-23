@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * This class deals with the interpretation of the user's inputs by the program.
+ */
 public class Parser {
     public Storage storage;
     public TaskList shelf;
@@ -19,6 +22,12 @@ public class Parser {
     public UI ui;
     public int indexer;
 
+    /**
+     * Constructor for the parser.
+     * @param storage Storage object that would deal with the storing of previously saved lists
+     * @param tasklist Tasklist object that contains the task lists for the to do list
+     * @param ui UI which deals with interactions with the user
+     */
     public Parser(Storage storage, TaskList tasklist, UI ui) {
         this.storage = storage;
         this.shelf = tasklist;
@@ -26,10 +35,50 @@ public class Parser {
         this.ui = ui;
     }
 
+    /**
+     * Method that is used as a flag in the duke handler method in the duke class to indicate when the program should
+     * stop running.
+     * @param response Response would refer to the input by the user
+     * @return boolean value, true = the program should stop, false = the program should continue running
+     */
     public boolean toStop(String response) {
         return response.equals("bye");
     }
 
+    /**
+     * Method that takes in different commands by the user and calls the relevant methods in the UI to deal with them.
+     *
+     * <p>
+     *     <h3> Userinput = bye</h3>
+     *      Stops the entire program
+     * </p>
+     *
+     * <p>
+     *     <h3> UserInput = list</h3>
+     *      Prints out a list of the tasks in the TaskList
+     * </p>
+     *
+     * <p>
+     *     <h3> UserInput = delete xxx task</h3>
+     *     Triggers the UI to delete the task and converts the one-based index given by the user
+     *     to a zero-based index.
+     * </p>
+     *
+     * <p>
+     *     <h3> UserInput = done</h3>
+     *     Triggers the UI to mark the task as done and converts the one-based index given by the user
+     *     to a zero-based index.
+     * </p>
+     *
+     * <p>
+     *     <h3> UserInput = create Event/Deadline/Todo </h3>
+     *     Triggers the UI to create the corresponding task object and separates the user's input to
+     *     show the name of the task, type of task and the duedate of the task(only applicable for deadline and events).
+     *     It may throw an error if the description is empty, keywords are missing or the dates are in the wrong format.
+     * </p>
+     *
+     * @param response String response which represents the user's input
+     */
     public void listen(String response) {
         try {
             if (response.equals("bye")) {

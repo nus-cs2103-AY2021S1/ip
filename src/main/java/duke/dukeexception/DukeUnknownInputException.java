@@ -1,6 +1,5 @@
 package duke.dukeexception;
 
-import duke.dukeexception.DukeException;
 
 public class DukeUnknownInputException extends DukeException {
     public DukeUnknownInputException(String message) {
