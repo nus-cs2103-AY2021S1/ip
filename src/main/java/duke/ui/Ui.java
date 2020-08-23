@@ -45,10 +45,6 @@ public class Ui {
         System.out.println("Unable to load Tasklist");
     }
 
-    public void showLine() {
-        System.out.println(DIVIDER);
-    }
-
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
