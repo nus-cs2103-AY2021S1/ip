@@ -80,16 +80,14 @@ public class Ui {
         }
     }
 
-<<<<<<< HEAD
+    public void printFind() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
     /**
      * Prints the error message
      * @param error error message
      */
-=======
-    public void printFind() {
-        System.out.println("Here are the matching tasks in your list:");
-    }
->>>>>>> branch-Level-9
     public void showError(String error) {
         System.out.println(error);
     }
