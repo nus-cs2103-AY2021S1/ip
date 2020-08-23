@@ -8,6 +8,11 @@ public class Task {
         isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
@@ -19,6 +24,13 @@ public class Task {
 
     public void markAsDone() {
         isDone = true;
+    }
+
+    public String write() {
+        if (isDone) {
+            return 1 + "," + description;
+        }
+        return 0 + "," + description;
     }
 
 //    public static void main(String[] args) {
