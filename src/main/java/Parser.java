@@ -1,7 +1,5 @@
-import java.util.List;
-
 public class Parser {
-    public String parse(String input, List<Task> list, Storage storage) throws DukeException {
+    public String parse(String input, TaskList list, Storage storage) throws DukeException {
         String output;
         String[] command = input.split(" ", 2);
 
@@ -47,7 +45,7 @@ public class Parser {
             }
 
             targetTask.setDone();
-            storage.update(list);
+            list.updateStorage(storage);
             output = "\tNice! I've marked this task as done: \n\t\t" + targetTask;
         } else if (command[0].equals("todo")) {
             if (command.length < 2 || command[1].isBlank()) {
@@ -56,8 +54,7 @@ public class Parser {
 
             ToDo newToDo = new ToDo(command[1]);
 
-            list.add(newToDo);
-            storage.update(list);
+            list.add(newToDo,storage);
             output = "\tGot it. I've added this task: \n\t\t" + newToDo + "\n\tNow you have " + list.size() + " tasks in the list.";
         } else if (command[0].equals("deadline")) {
             if (command.length < 2) {
@@ -87,8 +84,7 @@ public class Parser {
 
             Deadline newDeadline = new Deadline(description, by);
 
-            list.add(newDeadline);
-            storage.update(list);
+            list.add(newDeadline, storage);
             output = "\tGot it. I've added this task: \n\t\t" + newDeadline + "\n\tNow you have " + list.size() + " tasks in the list.";
         } else if (command[0].equals("event")) {
             if (command.length < 2) {
@@ -118,8 +114,7 @@ public class Parser {
 
             Event newEvent = new Event(description, at);
 
-            list.add(newEvent);
-            storage.update(list);
+            list.add(newEvent, storage);
             output = "\tGot it. I've added this task: \n\t\t" + newEvent + "\n\tNow you have " + list.size() + " tasks in the list.";
         } else if (command[0].equals("delete")) {
             if (command.length < 2) {
@@ -143,8 +138,7 @@ public class Parser {
             }
 
             int index = inputNumber - 1;
-            Task targetTask = list.remove(index);
-            storage.update(list);
+            Task targetTask = list.remove(index, storage);
             output = "\tNoted. I've removed this task: \n\t\t" + targetTask + "\n\tNow you have " + list.size() + " tasks in the list.";
         } else {
             throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

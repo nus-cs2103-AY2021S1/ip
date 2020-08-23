@@ -1,11 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 public class Duke {
 
     public static void main(String[] args) {
@@ -13,12 +5,11 @@ public class Duke {
         Storage storage = new Storage("data/storage/duke.txt");
         Parser parser = new Parser();
         String input = "";
-        List<Task> list = storage.load();
+        TaskList list = new TaskList(storage.load());
         String output;
 
         ui.showWelcome();
         
-
         while (!input.equals("bye")) {
             input = ui.readInput();
 
