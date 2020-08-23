@@ -1,8 +1,9 @@
 import java.util.Scanner;
 
 public class Ui {
-    Parser parser;
-    String divider = "____________________________________________________________";
+
+    protected Parser parser;
+    protected String divider = "____________________________________________________________";
 
     public Ui(Parser parser) {
         this.parser = parser;
@@ -10,13 +11,13 @@ public class Ui {
         this.run();
     }
 
-    void hello() {
+    protected void hello() {
         String intro = "Hello! I'm Bob\n" +
                 "What can I do for you?\n";
         System.out.println(divider + "\n" + intro + "\n" + divider);
     }
 
-    void run() {
+    protected void run() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -27,7 +28,7 @@ public class Ui {
         this.goodbye();
     }
 
-    void goodbye() {
+    protected void goodbye() {
         String message = "Bye. Hope to see you again soon! :)";
         System.out.println(divider + "\n" + message + "\n" + divider);
     }
