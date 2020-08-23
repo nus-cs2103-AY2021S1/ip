@@ -1,6 +1,11 @@
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
     private static final String COMPLETE = "\u2713";
     private static final String NOT_COMPLETE = "\u2718";
+
+    protected static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM YY HH:mm");
+    protected static final DateTimeFormatter READER_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     protected String description;
     protected boolean isComplete = false;

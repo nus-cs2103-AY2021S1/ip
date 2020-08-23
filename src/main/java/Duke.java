@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -122,6 +123,8 @@ public class Duke {
         } catch (TaskException e) {
             throw new DukeIncompleteCommandException(ERROR_MESSAGE
                     + "\nDid you provide a date and description for this event?");
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidArgumentException(ERROR_MESSAGE + "\nPlease provide a valid event date in DD/MM/YYYY HH:mm format.");
         }
     }
 
@@ -133,6 +136,8 @@ public class Duke {
         } catch (TaskException e) {
             throw new DukeIncompleteCommandException(ERROR_MESSAGE
                     + "\nDid you provide a deadline and description for this deadline?");
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidArgumentException(ERROR_MESSAGE + "\nPlease provide a valid deadline in DD/MM/YYYY HH:mm format.\"");
         }
     }
 
