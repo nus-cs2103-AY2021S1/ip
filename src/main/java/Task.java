@@ -7,8 +7,19 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Constructor to use when reading data from the hard disk upon Duke start up.
+     * @param description is the details of the task.
+     * @param isDone determines whether the task is marked as completed.
+     */
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+
     public String getStatusIcon() {
-        return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
+        return (isDone ? "1" : "0");
     }
 
     public String getDescription() {
@@ -21,6 +32,6 @@ public class Task {
 
     @Override
     public String toString() {
-       return this.getStatusIcon() + " " + this.description;
+       return this.getStatusIcon() + " | " + this.description;
     }
 }
