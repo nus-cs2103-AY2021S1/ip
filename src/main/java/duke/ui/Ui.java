@@ -34,7 +34,7 @@ public class Ui {
         System.out.println(startLine +
                         "Here are a list of commands you can use:\n" +
                         "1. list (shows all currently listed tasks)\n" +
-                        "2. bye (exit the program)" +
+                        "2. bye (exit the program)\n" +
                         "3. done <task number> (mark the task with <task number> " +
                 "as complete)\n" +
                         "4. delete <task number> (delete this task with " +
