@@ -43,42 +43,42 @@ public class TaskList {
             String[] arr = str.split(" ", 2);
             String str2 = arr[1];
             switch (arr[0]) {
-                case "todo":
-                    ToDo td = new ToDo(str2);
-                    insert(td);
-                    break;
-                case "deadline":
-                    if (str2.contains("/by")) {
-                        String[] arr2 = str2.split("/by", 2);
-                        if (arr2[0].isBlank()) {
-                            throw new EmptyCommandException("deadline");
-                        }
-                        if (arr2[1].isBlank()) {
-                            throw new MissingTimeException("deadline");
-                        }
-                        Deadline dl = new Deadline(arr2[0], arr2[1].trim());
-                        insert(dl);
-                    } else {
+            case "todo":
+                ToDo td = new ToDo(str2);
+                insert(td);
+                break;
+            case "deadline":
+                if (str2.contains("/by")) {
+                    String[] arr2 = str2.split("/by", 2);
+                    if (arr2[0].isBlank()) {
+                        throw new EmptyCommandException("deadline");
+                    }
+                    if (arr2[1].isBlank()) {
                         throw new MissingTimeException("deadline");
                     }
-                    break;
-                case "event":
-                    if (str2.contains("/at")) {
-                        String[] arr2 = str2.split("/at", 2);
-                        if (arr2[0].isBlank()) {
-                            throw new EmptyCommandException("event");
-                        }
-                        if (arr2[1].isBlank()) {
-                            throw new MissingTimeException("event");
-                        }
-                        Event ev = new Event(arr2[0], arr2[1].trim());
-                        insert(ev);
-                    } else {
+                    Deadline dl = new Deadline(arr2[0], arr2[1].trim());
+                    insert(dl);
+                } else {
+                    throw new MissingTimeException("deadline");
+                }
+                break;
+            case "event":
+                if (str2.contains("/at")) {
+                    String[] arr2 = str2.split("/at", 2);
+                    if (arr2[0].isBlank()) {
+                        throw new EmptyCommandException("event");
+                    }
+                    if (arr2[1].isBlank()) {
                         throw new MissingTimeException("event");
                     }
-                    break;
-                default:
-                    throw new InvalidCommandException();
+                    Event ev = new Event(arr2[0], arr2[1].trim());
+                    insert(ev);
+                } else {
+                    throw new MissingTimeException("event");
+                }
+                break;
+            default:
+                throw new InvalidCommandException();
             }
         } else {
             throw new InvalidCommandException();
