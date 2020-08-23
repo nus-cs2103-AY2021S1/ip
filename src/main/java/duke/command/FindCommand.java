@@ -19,6 +19,6 @@ public class FindCommand implements Command{
     public boolean equals(Object o) {
         if (this == o) {
             return true;
-        } else return o instanceof AddCommand;
+        } else return o instanceof FindCommand;
     }
 }

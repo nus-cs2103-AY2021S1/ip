@@ -100,7 +100,6 @@ public class TaskList {
      */
     public List<Task> checkDate(LocalDate date) {
         List<Task> sameDates = new ArrayList<>();
-
         for (Task t : listOfTask) {
             if (t.compareDate(date)) {
                 sameDates.add(t);

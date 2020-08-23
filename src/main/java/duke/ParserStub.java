@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.*;
+import duke.task.Task;
 import duke.task.Todo;
 
 public class ParserStub {
@@ -21,11 +22,12 @@ public class ParserStub {
             return new DoneCommand();
         } else if (command.matches(ignoreCase + Parser.CommandState.CHECK.name() + wildcard)) {
             return new CheckCommand();
+        } else if (command.matches(ignoreCase + Parser.CommandState.DELETE.name() + "(.*)")) {
+            return new DeleteCommand();
+        } else if (command.matches(ignoreCase + Parser.CommandState.FIND.name() + "(.*)")) {
+            return new FindCommand(command);
         } else {
             String t = checkAction(command);
-            if (t.equals("Delete")) {
-                return new DeleteCommand();
-            }
             return new AddCommand(Todo.createTask("todo buy books"));
         }
     }

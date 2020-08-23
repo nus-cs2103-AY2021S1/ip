@@ -149,7 +149,6 @@ public class Ui {
      * Prints a message to inform users that they have no <code>Task</code> on the specified date.
      */
     public void noSameDate() {
-        System.out.println("here");
         print(" You have no task on this day! Have a good break! *Woof*\n");
     }
 
@@ -200,7 +199,7 @@ public class Ui {
 
     public void relevantTaskHeader() {
         System.out.print(lines);
-        System.out.println(" Here is the list of matching task in your list: ");
+        System.out.println(" Here is the list of matching tasks in your storage: ");
     }
 
 }

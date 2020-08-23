@@ -18,7 +18,7 @@ public class Parser {
      * <code>CommandState</code> is an enum representing all possible command direction from user.
      */
     enum CommandState {
-        LIST, DONE, BYE, TODO, DEADLINE, EVENT, DELETE, CHECK
+        LIST, DONE, BYE, TODO, DEADLINE, EVENT, DELETE, CHECK, FIND
     }
 
     /**
@@ -41,6 +41,8 @@ public class Parser {
             return new CheckCommand();
         } else if (command.matches(ignoreCase + CommandState.DELETE.name() + "(.*)")) {
             return new DeleteCommand();
+        } else if (command.matches(ignoreCase + CommandState.FIND.name() + "(.*)")) {
+            return new FindCommand(command);
         } else {
             Task t = checkAction(command);
             return new AddCommand(t);
