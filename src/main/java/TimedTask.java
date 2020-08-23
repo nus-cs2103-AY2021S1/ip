@@ -9,7 +9,6 @@ public class TimedTask extends Task {
 
     public TimedTask (String description, String time, String tag) {
         super(description);
-
         String dt = "";
         if (time.indexOf(' ') > 0) {
             dt = time.substring(0, time.indexOf(' '));
@@ -20,6 +19,13 @@ public class TimedTask extends Task {
             this.time = "";
         }
         date = parseDate(dt);
+        this.tag = tag;
+    }
+
+    public TimedTask (String description, String time, LocalDate date, String tag) {
+        super(description);
+        this.time = time;
+        this.date = date;
         this.tag = tag;
     }
 

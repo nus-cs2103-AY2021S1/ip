@@ -2,7 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -22,8 +24,9 @@ public class Dobby {
             + (Commands.LIST).getUsage()
             + (Commands.DONE).getUsage()
             + (Commands.DELETE).getUsage()
-            + (Commands.BYE).getUsage()
-            + (Commands.SCHEDULED).getUsage();
+            + (Commands.SCHEDULED).getUsage()
+            + (Commands.BYE).getUsage();
+
 
     public static void main(String[] args) {
         reply("\n    Hello! I'm Dobby" + ALL_COMMANDS + "\n    How can I help you?\n    ");
@@ -49,7 +52,11 @@ public class Dobby {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNext()) {
                 String str = scanner.nextLine();
-                createList(str);
+                try {
+                    createList(str);
+                } catch (ParseException e) { // should never be called
+                    reply("\n    " + e.getMessage() + "\n    ");
+                }
             }
         } catch (FileNotFoundException e) {
             reply("\n    " + e.getMessage() + "\n    ");
@@ -72,22 +79,30 @@ public class Dobby {
         }
     }
 
-    private static void createList(String str) {
+    private static void createList(String str) throws ParseException {
         boolean isDone = str.charAt(4) == '\u2713';
         Task task;
-        if (str.charAt(1) == 'T') {
+        if (str.charAt(1) == 'T') { // TODO
             String decription = str.substring(str.indexOf(' ') + 1);
             task = new Todo(decription);
             tasks.add(task);
-        } else if (str.charAt(1) == 'D') {
+        } else if (str.charAt(1) == 'D') { // DEADLINE
             String description = str.substring(str.indexOf(' ') + 1, str.indexOf("(by: "));
-            String by = str.substring(str.indexOf("(by: ") + 5, str.length() - 1);
-            task = new Deadline(description, by);
+            String by = str.substring(str.indexOf("(by: ") + 5, str.length() - 1); //Aug 28 2020 4:00 pm
+            int thirdIndex = by.indexOf(' ', 10);
+            String dt = by.substring(0, thirdIndex);
+            String tm = by.substring(thirdIndex + 1);
+            LocalDate date = LocalDate.parse(dt, DateTimeFormatter.ofPattern("MMM d yyyy"));
+            task = new Deadline(description, tm, date);
             tasks.add(task);
-        } else {
+        } else { // EVENT
             String description = str.substring(str.indexOf(' ') + 1, str.indexOf("(at: "));
             String at = str.substring(str.indexOf("(at: ") + 5, str.length() - 1);
-            task = new Event(description, at);
+            int thirdIndex = at.indexOf(' ', 10);
+            String dt = at.substring(0, thirdIndex);
+            String tm = at.substring(thirdIndex + 1);
+            LocalDate date = LocalDate.parse(dt, DateTimeFormatter.ofPattern("MMM d yyyy"));
+            task = new Event(description, tm, date);
             tasks.add(task);
         }
 
@@ -131,7 +146,8 @@ public class Dobby {
                 }
                 tasks.add(deadline);
                 message = "\n    Great! I've added the following task:\n      " + deadline.getDescription() +
-                        String.format("\n    Now you have %d tasks in the list.\n    ", tasks.size());
+                        String.format("\n    Now you have %d task%s in the list.\n    ",
+                                tasks.size(), tasks.size() > 1 ? "s" : "");
             } catch (StringIndexOutOfBoundsException e) {
                 if (text.startsWith("deadline") || text == null) { // description empty
                     throw new DobbyException("\n    Incorrect usage of command. Description cannot be empty. Please try again."
@@ -164,7 +180,8 @@ public class Dobby {
                 }
                 tasks.add(event);
                 message = "\n    Great! I've added the following task:\n      " + event.getDescription() +
-                        String.format("\n    Now you have %d tasks in the list.\n    ", tasks.size());
+                        String.format("\n    Now you have %d task%s in the list.\n    ",
+                                tasks.size(), tasks.size() > 1 ? "s" : "");
             } catch (StringIndexOutOfBoundsException e) {
                 if (text.startsWith("event") || text == null) { // description empty
                     throw new DobbyException("\n    Incorrect usage of command. Description cannot be empty. Please try again."
@@ -187,6 +204,9 @@ public class Dobby {
                 all_tasks = all_tasks + i + ". " + task.getDescription() + "\n    ";
             }
             message = all_tasks;
+            if (i == 0) {
+                message = message + "The task list is currently empty.\n    ";
+            }
         } else if (text.startsWith("done")) { // done command
             try {
                 text = text.substring(4).trim();
@@ -256,4 +276,3 @@ public class Dobby {
         System.out.println("    " + UNDERSCORE + message + UNDERSCORE);
     }
 }
-

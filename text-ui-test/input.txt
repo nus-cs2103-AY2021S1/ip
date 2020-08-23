@@ -12,16 +12,17 @@ delete 1
 delete 1
 list
 deadline
-deadline /by 27/08/2020 11:59pm
+deadline /by 27/08/2020 2359
 deadline ip task for week 3 /by
-deadline ip task for week 3 /by 27/08/2020 11:59pm
+deadline ip task for week 3 /by 27/08/2020 2359
 list
 event
-event /at 28/08/2020 4pm
+event /at 28/08/2020 1600
 event lecture /at
-event lecture /at 28/08/2020 4pm
+event lecture /at 28/08/2020 1600
 list
 todo
 todo push new levels to github
 list
+scheduled 28/08/2020
 bye
