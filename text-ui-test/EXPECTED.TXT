@@ -2,31 +2,31 @@ Hello, I'm Duke
 I can help you keep track of all your tasks! ☆*:.｡.o(≧▽≦)o.｡.:*☆
 How to add tasks to the list:
 ToDo - type 'todo' followed by the description
-Deadline - type 'deadline' followed by the description,then '/by', then due date
-Event - type 'event' followed by the description, then '/at', then timing
+Deadline - type 'deadline' followed by the description,then '/by', then due date in yyyy-MM-dd format
+Event - type 'event' followed by the description, then '/at', then timing in yyyy-MM-dd format
 Type 'done' followed by the task number and I'll mark it as done
 Type 'list' to see the list
 Type 'bye' to exit
 List is empty
 Added: [T][✘] borrow book
 Total tasks: 1
-Added: [D][✘] return book (by: Sunday)
+Added: [D][✘] return book (by: Aug 25 2020)
 Total tasks: 2
-Added: [E][✘] project meeting (at: Mon 2-4pm)
+Added: [E][✘] project meeting (at: Aug 26 2020)
 Total tasks: 3
 Items in list:
 1. [T][✘] borrow book
-2. [D][✘] return book (by: Sunday)
-3. [E][✘] project meeting (at: Mon 2-4pm)
+2. [D][✘] return book (by: Aug 25 2020)
+3. [E][✘] project meeting (at: Aug 26 2020)
 Task marked complete:
 [T][✓] borrow book
 Items in list:
 1. [T][✓] borrow book
-2. [D][✘] return book (by: Sunday)
-3. [E][✘] project meeting (at: Mon 2-4pm)
+2. [D][✘] return book (by: Aug 25 2020)
+3. [E][✘] project meeting (at: Aug 26 2020)
 Task deleted:
 [T][✓] borrow book
 Items in list:
-1. [D][✘] return book (by: Sunday)
-2. [E][✘] project meeting (at: Mon 2-4pm)
+1. [D][✘] return book (by: Aug 25 2020)
+2. [E][✘] project meeting (at: Aug 26 2020)
 Bye! :>
