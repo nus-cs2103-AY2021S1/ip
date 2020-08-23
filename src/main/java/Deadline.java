@@ -80,7 +80,7 @@ public class Deadline extends Task {
         }catch (DateTimeException d) {
             try {
                 LocalDateTime parsedDate = localDateTime(string);
-                e = new Deadline(name, parsedDate.format(DateTimeFormatter.ofPattern("yyyy MM dd, HH:mm")));
+                e = new Deadline(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")));
             } catch (DateTimeException g) {
                 try {
                     LocalTime parsedDate = localTime(string);

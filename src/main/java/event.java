@@ -69,29 +69,30 @@ public class event extends Task {
     }
     public static event provide(String name, String string, String end){
         event e;
-        DateTimeFormatter date = DateTimeFormatter.ofPattern("dd LLL yyyy");
-        DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("yyyy MM dd, HH:mm");
-        DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm");
-        try {
+        try{
             LocalDate parsedDate = localDate(string);
-            LocalDate endDate = localDate(string);
-            e = new event(name, parsedDate.format(date), endDate.format(date));
+            LocalDate endDate = localDate(end);
+            e = new event(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy")),
+                    endDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy")));
         }catch (DateTimeException d) {
             try {
                 LocalDateTime parsedDate = localDateTime(string);
-                LocalDateTime endDate = localDateTime(string);
-                e = new event(name, parsedDate.format(date), endDate.format(dateTime));
-
-            }catch (DateTimeException g) {
+                LocalDateTime endDate = localDateTime(end);
+                e = new event(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")),
+                        endDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")));
+            } catch (DateTimeException g) {
                 try {
                     LocalTime parsedDate = localTime(string);
-                    LocalTime endDate = localTime(string);
-                    e = new event(name, parsedDate.format(date), endDate.format(time));
+                    LocalTime endDate = localTime(end);
+                    e = new event(name, parsedDate.format(DateTimeFormatter.ofPattern("HH:mm")),
+                            endDate.format(DateTimeFormatter.ofPattern("HH:mm")));
                 } catch (DateTimeException f) {
+                    System.out.println(f.toString());
                     throw f;
                 }
             } }
         return e;
+
     }
     public String inputListFormat(){
         return "E" + super.inputListFormat() + " | " + this.dateTime;
