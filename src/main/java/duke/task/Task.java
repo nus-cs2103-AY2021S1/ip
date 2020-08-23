@@ -36,6 +36,10 @@ public abstract class Task {
         isDone = true;
     }
 
+    /**
+     * Gets the string to write in the storage file.
+     * @return the string to write in the storage file
+     */
     public String output() {
         int done = isDone ? 1 : 0;
         return " | " + done + " | " + description;
