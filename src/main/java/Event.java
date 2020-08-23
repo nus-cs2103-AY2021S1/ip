@@ -10,7 +10,7 @@ public class Event extends Task {
         this.at = at;
     }
 
-    protected Event(String description, boolean isDone, String at) {
+    protected Event(String description, boolean isDone, LocalDate at) {
         super(description, isDone);
         this.at = at;
     }

@@ -6,7 +6,6 @@ import java.util.Scanner;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class RunYoo {
 
@@ -126,11 +125,13 @@ public class RunYoo {
             al.add(td);
             break;
         case "D":
-            Deadline dl = new Deadline(temp[2], isDone, temp[3]);
+            LocalDate dldate = LocalDate.parse(temp[3]);
+            Deadline dl = new Deadline(temp[2], isDone, dldate);
             al.add(dl);
             break;
         case "E":
-            Event e = new Event(temp[2], isDone, temp[3]);
+            LocalDate edate = LocalDate.parse(temp[3]);
+            Event e = new Event(temp[2], isDone, edate);
             al.add(e);
             break;
         }
