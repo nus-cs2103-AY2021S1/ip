@@ -18,7 +18,7 @@
 	 OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________________________________
 	____________________________________________________________
-	 Got it. I've added this task:
+	 Got it. I've added this todo:
 	   [T][✘] borrow book
 	 Now you have 1 task in the list.
 	____________________________________________________________
@@ -32,7 +32,7 @@
 	 OOPS!!! Please use the format "dd/MM/yyyy HH:mm" to indicate the date and time.
 	____________________________________________________________
 	____________________________________________________________
-	 Got it. I've added this task:
+	 Got it. I've added this deadline:
 	   [D][✘] read book (by: 24 August 2020, 12:30 PM)
 	 Now you have 2 tasks in the list.
 	____________________________________________________________
@@ -46,12 +46,12 @@
 	 OOPS!!! Please use the format "dd/MM/yyyy HH:mm" to indicate the date and time.
 	____________________________________________________________
 	____________________________________________________________
-	 Got it. I've added this task:
+	 Got it. I've added this event:
 	   [E][✘] lesson (at: 24 August 2020, 03:00 PM)
 	 Now you have 3 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
-	 Got it. I've added this task:
+	 Got it. I've added this todo:
 	   [T][✘] ip
 	 Now you have 4 tasks in the list.
 	____________________________________________________________
@@ -69,7 +69,7 @@
 	 OOPS!!! Task Number is invalid.
 	____________________________________________________________
 	____________________________________________________________
-	 Got it. I've added this task:
+	 Got it. I've added this todo:
 	   [T][✘] play basketball
 	 Now you have 5 tasks in the list.
 	____________________________________________________________
@@ -97,12 +97,12 @@
 	 5.[T][✘] play basketball
 	____________________________________________________________
 	____________________________________________________________
-	 Got it. I've added this task:
+	 Got it. I've added this event:
 	   [E][✘] project meeting (at: 02 August 2020, 10:15 PM)
 	 Now you have 6 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
-	 Got it. I've added this task:
+	 Got it. I've added this deadline:
 	   [D][✘] survey (by: 12 October 2021, 12:00 AM)
 	 Now you have 7 tasks in the list.
 	____________________________________________________________

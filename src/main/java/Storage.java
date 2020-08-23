@@ -4,13 +4,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Data {
+public class Storage {
     private final Path path;
     private static final String FILE_PATH = "./data/tasks.txt";
 
-    public Data() {
+    public Storage() {
         path = Paths.get(FILE_PATH);
         File file = new File(FILE_PATH);
         file.getParentFile().mkdirs();
@@ -35,9 +36,9 @@ public class Data {
         }
     }
 
-    public TaskList load() {
+    public ArrayList<Task> load() {
         try {
-            TaskList list = new TaskList();
+            ArrayList<Task> list = new ArrayList<>();
             File file = new File(FILE_PATH);
             Scanner sc = new Scanner(file);
             while(sc.hasNextLine()) {
@@ -68,11 +69,11 @@ public class Data {
                         task = new Event(description, isDone, time);
                         break;
                 }
-                list.addTask(task);
+                list.add(task);
             }
             return list;
         } catch (FileNotFoundException e) {
-            return new TaskList();
+            return new ArrayList<>();
         }
     }
 
