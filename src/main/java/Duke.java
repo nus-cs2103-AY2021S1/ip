@@ -8,7 +8,6 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -17,7 +16,7 @@ public class Duke {
         + "What can I do for you?";
     private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon! :)";
 
-    private static ArrayList<Task> list;
+    private static TaskList list;
 
     private static String makeWrappedString(String txt) {
         return LINE + "\n" + txt + "\n" + LINE;
@@ -34,14 +33,13 @@ public class Duke {
 
     private static void makeDataFile() throws IOException {
         File file = Paths.get(".", "data", "duke.data").toFile();
-        list = new ArrayList<>();
+        list = new TaskList();
         FileOutputStream fos = new FileOutputStream(file);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(list);
         oos.close();
     }
 
-    @SuppressWarnings("unchecked") //TODO: Don't do this. extract out save functionality into a method and only do that.
     public static void main(String[] args) {
         System.out.println(makeWrappedString(WELCOME_MESSAGE));
 
@@ -51,7 +49,7 @@ public class Duke {
             //Reused from https://stackoverflow.com/a/16111797 with minor modifications
             FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            list = (ArrayList<Task>) ois.readObject();
+            list = (TaskList) ois.readObject();
             ois.close();
             //@@author
         } catch (IOException | ClassNotFoundException e1) {
@@ -59,8 +57,8 @@ public class Duke {
                 makeDataFile();
             } catch (FileNotFoundException e2) {
                 try {
-                    Path datafolder = Paths.get(".", "data");
-                    Files.createDirectories(datafolder);
+                    Path dataFolder = Paths.get(".", "data");
+                    Files.createDirectories(dataFolder);
                     makeDataFile();
                 } catch (IOException e) {
                     System.out.println(e);
@@ -107,7 +105,7 @@ public class Duke {
                     break;
                 case "list":
                     System.out.println(LINE + "\nHere are the tasks in your list:");
-                    if (list.size() == 0) {
+                    if (list.isEmpty()) {
                         System.out.println("Your list is empty. How about adding some tasks?");
                     } else {
                         for (int i = 0; i < list.size(); i++) {
@@ -128,8 +126,7 @@ public class Duke {
                         throw new IllegalArgumentException(
                             "The index provided is too small.\nInput an integer that is 1 or greater.");
                     }
-                    Task doneTask = list.get(Integer.parseInt(input.split(" ")[1]) - 1);
-                    doneTask.setDone(true);
+                    Task doneTask = list.markTaskAsDone(Integer.parseInt(input.split(" ")[1]) - 1);
                     System.out.println(
                         makeWrappedString("Great Job! I've marked this task as done:\n" + doneTask));
                     break;

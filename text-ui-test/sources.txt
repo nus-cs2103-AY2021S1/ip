@@ -2,4 +2,5 @@ C:\Users\Kimmie\Documents\git\ip\src\main\java\Deadline.java
 C:\Users\Kimmie\Documents\git\ip\src\main\java\Duke.java
 C:\Users\Kimmie\Documents\git\ip\src\main\java\Event.java
 C:\Users\Kimmie\Documents\git\ip\src\main\java\Task.java
+C:\Users\Kimmie\Documents\git\ip\src\main\java\TaskList.java
 C:\Users\Kimmie\Documents\git\ip\src\main\java\Todo.java
