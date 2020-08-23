@@ -102,7 +102,7 @@ public class Storage {
         FileWriter csvWriter = insertColumnHeadersToCSV();
         for(Task task : taskList.getList()) {
             String typeOfTask = task.getClass().getSimpleName();
-            String isCompleted = Boolean.toString(task.isComepleted());
+            String isCompleted = Boolean.toString(task.isCompleted());
             String taskDescription = task.getTaskDescription();
             String timeDescription = "";
             if (typeOfTask.equals("Deadline")) {

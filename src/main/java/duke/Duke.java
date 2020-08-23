@@ -18,12 +18,11 @@ public class Duke {
     }
 
     public void run() {
-        Scanner sc = new Scanner(System.in);
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
-                String input = ui.readCommand(sc);
+                String input = ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(input);
                 c.execute(tasks, ui, storage);

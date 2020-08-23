@@ -13,7 +13,7 @@ public class Task {
         return this.taskDescription;
     }
 
-    public boolean isComepleted() {
+    public boolean isCompleted() {
         return this.isDone;
     }
 

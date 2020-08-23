@@ -30,7 +30,6 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DeadlineException {
 
-
         LocalDateTime dateTime = null;
         try {
             dateTime = LocalDateTime.of(year, month, day, hour, min);

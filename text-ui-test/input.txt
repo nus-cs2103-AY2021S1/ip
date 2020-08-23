@@ -1,38 +1,4 @@
-todo
-deadline
-event
-deadline return book
-deadline return book /by 22 1600
-deadline return book /by 22-08 1700
-deadline return book /by 22-08-2020
-deadline return book /by 22-2020 1900
-event project meeting
-event project meeting /at 22 1600
-event project meeting /at 22-08 1700
-event project meeting /at 22-08-2020
-event project meeting /at 22-2020 1900
-todo read book
-deadline return book /by 22-08-2020 1700
-event project meeting /at 22-08-2020 1900
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
-todo join sports club
-todo borrow book
-done
-done 1 2 3
-done 213123
-done 1
-done 4
-list
-delete 312312
-delete -1
+todo eat
+todo sleep
 delete 1
-list
-delete 3
-list
-delete 5
-list
-delete 1
-delete 1
-delete 1
-bye
+delete 2
