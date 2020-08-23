@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class InvalidDukeCommand extends DukeException {
 
     @Override

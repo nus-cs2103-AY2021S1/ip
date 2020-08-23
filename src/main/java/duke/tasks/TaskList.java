@@ -1,8 +1,11 @@
+package duke.tasks;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import duke.parser.Parser;
 
 public class TaskList {
     private ArrayList<Task> tasks;

@@ -1,3 +1,9 @@
+package duke.commands;
+
+import duke.tasks.TaskList;
+import duke.storage.Storage;
+import duke.ui.UI;
+
 public class Command {
     protected String commandDescription;
     private boolean isExit;

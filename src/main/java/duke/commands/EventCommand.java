@@ -1,3 +1,11 @@
+package duke.commands;
+
+import duke.commands.Command;
+import duke.tasks.TaskList;
+import duke.tasks.Event;
+import duke.storage.Storage;
+import duke.ui.UI;
+
 import java.time.LocalDate;
 
 public class EventCommand extends Command {

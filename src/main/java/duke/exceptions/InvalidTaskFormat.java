@@ -1,3 +1,7 @@
+package duke.exceptions;
+
+import duke.tasks.TaskType;
+
 public class InvalidTaskFormat extends DukeException {
 
     private TaskType taskType;

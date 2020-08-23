@@ -1,3 +1,11 @@
+package duke.commands;
+
+import duke.commands.Command;
+import duke.tasks.TaskList;
+import duke.tasks.Task;
+import duke.storage.Storage;
+import duke.ui.UI;
+
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
     public final int sizeOffset = -1;

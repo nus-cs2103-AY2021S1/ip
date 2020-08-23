@@ -1,24 +1,23 @@
+package duke.duke;
+
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.UI;
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
 
 public class Duke {
 
-    private Storage storage;
+    private Storage store;
     private TaskList tasks;
     private UI ui;
 
     public Duke(String directoryPath, String filePath) {
         ui = new UI();
-        storage = new Storage(directoryPath, filePath);
-        File loadFile = storage.loadData(ui);
+        store = new Storage(directoryPath, filePath);
+        File loadFile = store.loadData(ui);
         if (loadFile != null) {
             tasks = new TaskList(loadFile);
         } else {
@@ -32,7 +31,7 @@ public class Duke {
         while (!isExit) {
             String fullCommand = ui.readCommand();
             Command command = Parser.parse(fullCommand);
-            command.execute(tasks, ui, storage);
+            command.execute(tasks, ui, store);
             isExit = command.isExit();
             if (!isExit) {
                 ui.displayBlankLine();
@@ -41,7 +40,7 @@ public class Duke {
     }
 
 
-    public static void main(String[] args) throws DukeException{
+    public static void main(String[] args) throws DukeException {
         Duke duke = new Duke("./data", "duke.txt");
         duke.run();
     }
