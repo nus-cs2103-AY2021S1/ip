@@ -3,6 +3,7 @@ package main.java;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -158,7 +159,8 @@ public class Duke {
                         boolean hasTime = taskMessageArr.length > 1 &&
                                 taskMessageArr[1].split(" ", 2).length > 1;
                         if (!hasTime) {
-                            throw new IncompleteCommandException(taskCategory);
+                            throw new DukeException("Please specify the time of task " +
+                                    "e.g. event finish book /by 2019-15-10");
                         }
 
                         String taskTime = taskMessageArr[1].split(" ", 2)[1];
@@ -177,6 +179,8 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
+            } catch (DateTimeParseException e) {
+                System.out.println("Datetime could not be recognised. Use yyyy-mm-dd format e.g. 2019-10-15");
             } finally {
                 System.out.println(MSG_DIVIDER);
             }

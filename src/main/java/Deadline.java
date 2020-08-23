@@ -1,16 +1,20 @@
 package main.java;
 
-public class Deadline extends Task {
-    protected String by;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    protected LocalDate by;
+
+    public Deadline(String description, String by) throws DateTimeParseException {
         super(description);
-        this.by = by;
+        this.by = LocalDate.parse(by);
     }
 
-    public Deadline(String description, boolean isDone, String by) {
+    public Deadline(String description, boolean isDone, String by) throws DateTimeParseException {
         super(description, isDone);
-        this.by = by;
+        this.by = LocalDate.parse(by);
     }
 
     @Override
@@ -20,6 +24,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        String formattedBy = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "[D]" + super.toString() + " (by: " + formattedBy + ")";
     }
 }
