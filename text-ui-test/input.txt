@@ -1,7 +1,5 @@
 test
 list
-todo
-todo finish work
 deadline
 deadline /by Aug 20th 2359
 deadline cs2103 ip
@@ -11,8 +9,9 @@ event /at always
 event rest
 event rest /at always
 list
-done 3
+done 2
 list
-delete 3
+delete 2
+delete 2
 list
 bye

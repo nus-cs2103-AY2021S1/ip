@@ -147,7 +147,7 @@ public class Duke {
 
     private static void loadList() {
         try {
-            File f = new File("./src/main/java/data/list.txt");
+            File f = new File("./data/list.txt");
             Scanner listScanner = new Scanner(f);
             int index = 0;
             while (listScanner.hasNext()) {
@@ -170,7 +170,15 @@ public class Duke {
 
     private static void saveList() {
         try {
-            FileWriter fw = new FileWriter("./src/main/java/data/list.txt");
+            File saveFile = new File("./data/list.txt");
+            File parent_directory = saveFile.getParentFile();
+
+            if (null != parent_directory)
+            {
+                parent_directory.mkdirs();
+            }
+
+            FileWriter fw = new FileWriter(saveFile);
             int len = list.size();
             if (len > 0) {
                 String text = list.get(0).toCommand();
