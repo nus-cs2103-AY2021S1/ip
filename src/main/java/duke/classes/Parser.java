@@ -1,4 +1,5 @@
-import java.io.IOException;
+package duke.classes;
+
 import java.util.Scanner;
 
 public class Parser {

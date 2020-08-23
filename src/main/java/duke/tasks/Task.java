@@ -1,9 +1,11 @@
+package duke.tasks;
+
 public class Task {
-    protected String description;
-    protected boolean isDone;
-    protected int index;
-    protected final String done = "[\u2713] ";
-    protected final String start = "[\u2718] ";
+    public String description;
+    public boolean isDone;
+    public int index;
+    public final String done = "[\u2713] ";
+    public final String start = "[\u2718] ";
     public TaskType type;
 
     public Task(String description, int index) {

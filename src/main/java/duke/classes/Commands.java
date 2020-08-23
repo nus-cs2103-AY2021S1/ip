@@ -1,3 +1,5 @@
+package duke.classes;
+
 public enum Commands {
     LIST {
         @Override

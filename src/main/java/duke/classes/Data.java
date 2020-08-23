@@ -1,3 +1,8 @@
+package duke.classes;
+
+import duke.exceptions.DukeInvalidTimeException;
+import duke.tasks.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -6,14 +11,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Data {
     final Path path;
 
-    Data(String path) throws IOException {
+    public Data(String path) throws IOException {
         //System.out.println("Path being located");
         this.path = Paths.get("src/main/data/duke.txt").toAbsolutePath();
         if (Files.notExists(this.path)) {

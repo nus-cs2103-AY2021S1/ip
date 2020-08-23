@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then
@@ -13,7 +12,7 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java
+if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/duke/tasks/*.java ../src/main/java/duke/classes/*.java ../src/main/java/duke/exceptions/*.java
 #if ! (
 #    find ../src/main/java -name "*.java" > sources.txt
 #    javac -cp ../src -Xlint:none -d ../bin @sources.txt
