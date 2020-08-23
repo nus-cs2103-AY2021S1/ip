@@ -1,6 +1,7 @@
 package duke.component;
 
 import duke.command.ByeCommand;
+import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -309,5 +310,10 @@ public class ParserTest {
     @Test
     public void parse_byeCommand_byeCommand() {
         assertEquals(new ByeCommand("bye"), Parser.parse("bye"));
+    }
+
+    @Test
+    public void parse_listCommand_listCommand() {
+        assertEquals(new ListCommand("list"), Parser.parse("list"));
     }
 }
