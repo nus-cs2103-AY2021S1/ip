@@ -1,4 +1,6 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TaskList {
     ArrayList<Task> tasks;
@@ -92,5 +94,13 @@ public class TaskList {
         int itemToDelete = index - 1;
         Task removedTask = tasks.remove(itemToDelete);
         return removedTask;
+    }
+
+    public ArrayList<String> find(String word) {
+        ArrayList<String> tasksWithWord = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.containsWord(word)) tasksWithWord.add(task.toString());
+        }
+        return tasksWithWord;
     }
 }

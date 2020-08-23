@@ -1,3 +1,3 @@
 public enum Action {
-    ADD, DONE, DELETE;
+    ADD, DONE, DELETE, FIND, LIST;
 }

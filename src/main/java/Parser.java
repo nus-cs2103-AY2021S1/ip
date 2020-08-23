@@ -25,6 +25,10 @@ public class Parser {
         return Integer.parseInt(inputArr[1]);
     }
 
+    public String getWord() {
+        return inputArr[1];
+    }
+
     /**
      * Returns an array of strings that make up the details of one task. Eg: ["T", "Read Book"].
      * @return Details of a single task.

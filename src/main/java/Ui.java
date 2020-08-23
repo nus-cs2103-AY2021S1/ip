@@ -50,9 +50,21 @@ public class Ui {
         System.out.println(indentWord(String.format("Now you have %s tasks in the list.", tasks.getSize())));
     }
 
-    private void printTasks(ArrayList<String> tasksDescription) {
+    private void printTasks(ArrayList<String> tasksDescription, Action action) {
+        String prompt;
+        switch (action) {
+        case FIND:
+            prompt = "Here are the matching tasks in your list:";
+            break;
+        case LIST:
+            prompt = "Here are the tasks in your list:";
+            break;
+        default:
+            prompt = "";
+            break;
+        }
         int counter = 1;
-        System.out.println("Here are the tasks in your list:");
+        System.out.println(prompt);
         for (String description : tasksDescription) {
             System.out.print(indentWord(counter + ". "));
             System.out.println(description);
@@ -80,8 +92,11 @@ public class Ui {
             case ("bye"):
                 System.out.println(indentWord(farewellMsg));
                 return;
+            case ("find"):
+                printTasks(tasks.find(parser.getWord()), Action.FIND);
+                break;
             case ("list"):
-                printTasks(tasks.getTasksDescription());
+                printTasks(tasks.getTasksDescription(), Action.LIST);
                 break;
             case ("delete"):
                 // Print response from Duke after deleting task
