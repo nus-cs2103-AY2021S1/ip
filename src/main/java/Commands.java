@@ -12,8 +12,6 @@ public class Commands {
     }
 
     public void start() {
-        this.greet();
-        Storage.getPreviousTask(taskList);
 
         Scanner scanner = new Scanner(System.in);
 
@@ -61,7 +59,6 @@ public class Commands {
                 inputs = scanner.nextLine().trim();
             }
         }
-        Storage.writeToFile(taskList);
     }
 
     private void markDone(String[] inputs) throws DukeException {
@@ -78,10 +75,6 @@ public class Commands {
             throw new DukeException("~\n ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
                     "PLEASE TRY AGAIN \n~");
         }
-    }
-
-    private void greet() {
-        System.out.println("~ \n Hello I'm the Terminator \n What can I do for you? \n~");
     }
 
     private void lst() {
