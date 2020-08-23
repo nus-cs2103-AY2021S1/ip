@@ -18,7 +18,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
-    Duke(String filePath) {
+    public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.tasks = new TaskList();
@@ -27,7 +27,7 @@ public class Duke {
     private int getNumTasks() {
         return this.tasks.getTaskList().size();
     }
-    private String furtherProcessing(Commands commandType, String[] tokens, boolean isLoaded) throws DukeException {
+    protected String furtherProcessing(Commands commandType, String[] tokens, boolean isLoaded) throws DukeException {
         Task parsedTask = new Task("");
         if(commandType == Commands.DEADLINE || commandType == Commands.EVENT || commandType == Commands.TODO) {
 
@@ -71,7 +71,7 @@ public class Duke {
         return parsedTask.getUiOutput();
     }
 
-    private String processedCommand(String command, boolean isLoaded) throws DukeException {
+    protected String processedCommand(String command, boolean isLoaded) throws DukeException {
         command = command.strip();
         if(command.equals("")) return "";
         String[] tokens = command.split(" ");
@@ -82,7 +82,7 @@ public class Duke {
         }
     }
 
-    private void run() {
+    protected void run() {
         Ui.printDialog("Hello! I'm the Riddle. Type 'help' if you know nothing HAHAHA\n    What can WE do for you?");
         Scanner sc = new Scanner(System.in);
         ArrayList<String> savedTasks = storage.loadSavedTasks();
