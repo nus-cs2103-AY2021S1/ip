@@ -5,6 +5,9 @@ public class TaskList {
     public TaskList() {
         this.items = new ArrayList<>();
     }
+    public List<Task> getItemsList() {
+        return this.items;
+    }
     public int size(){
         return this.items.size();
     }
