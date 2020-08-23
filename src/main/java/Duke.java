@@ -39,6 +39,7 @@ public class Duke {
                         try{
                             String date = checker.dateFinder(echo,2);
                             Deadline d = new Deadline(name);
+                            System.out.println("LOL");
                             d.addDate(date);
                             store.add(d);
                             d.print();
