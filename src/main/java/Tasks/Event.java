@@ -18,7 +18,7 @@ public class Event extends Task {
     }
 
     @Override
-    public Event markAsDone() {
+    protected Event markAsDone() {
         return new Event(super.description, this.at, true);
     }
 

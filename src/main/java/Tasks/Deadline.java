@@ -18,7 +18,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public Deadline markAsDone() {
+    protected Deadline markAsDone() {
         return new Deadline(super.description, this.by, true);
     }
 

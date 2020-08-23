@@ -11,7 +11,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public Todo markAsDone() {
+    protected Todo markAsDone() {
         return new Todo(super.description, true);
     }
 
