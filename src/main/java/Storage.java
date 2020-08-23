@@ -19,7 +19,7 @@ public class Storage {
                 String currentLine = sc.nextLine();
                 Task currentTask = new Task("placeholder");
 
-                String[] parts = currentLine.split(" | ");
+                String[] parts = currentLine.split(" \\| ");
                 switch (parts[0]) {
                     case "T":
                         currentTask = new Todo(parts[2]);
