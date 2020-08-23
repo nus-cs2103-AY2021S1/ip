@@ -98,7 +98,7 @@ class Checker {
                 throw new EmptyTaskException("Please describe what you need to do.");
             }
             String[] arr = task.split("/?by");
-            Task t = Task.createEvent(arr[0].trim(), arr[1].trim());
+            Task t = Task.createDeadline(arr[0].trim(), arr[1].trim());
             e = Command.createAddCommand(t);
 
         } else if (checkForWord(s, "delete")) {

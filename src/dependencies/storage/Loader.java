@@ -102,10 +102,4 @@ public class Loader {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        Loader l = new Loader(".", "data", "taskdata.txt");
-        l.instantiateFile();
-    }
-
-
 }
