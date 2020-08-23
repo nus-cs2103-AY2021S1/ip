@@ -1,13 +1,10 @@
-package main.java;
+package main.java.duke;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 
-import java.nio.file.NotDirectoryException;
-import java.nio.file.Path;
-import java.nio.file.Files;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
