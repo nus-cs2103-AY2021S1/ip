@@ -1,5 +1,6 @@
 package duke.tasklist;
 
+import duke.exceptions.NoSuchTaskException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -44,7 +45,7 @@ public class TestTaskList {
             TaskList taskList = new TaskList();
             Task task = taskList.markTaskAsDone(0);
             fail();
-        } catch (Exception e) {
+        } catch (NoSuchTaskException e) {
             assertEquals("OOPS! No such task exists!", e.getMessage());
         }
     }
@@ -64,7 +65,7 @@ public class TestTaskList {
             TaskList taskList = new TaskList();
             Task task = taskList.deleteTask(0);
             fail();
-        } catch (Exception e) {
+        } catch (NoSuchTaskException e) {
             assertEquals("OOPS! No such task exists!", e.getMessage());
         }
     }
