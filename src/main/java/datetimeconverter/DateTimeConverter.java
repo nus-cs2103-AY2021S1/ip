@@ -1,4 +1,4 @@
-package datetime;
+package datetimeconverter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Arrays;
 
-public class DateTime {
+public class DateTimeConverter {
 
     public static String formatDateTime(String input) {
         // Make a copy of the input string

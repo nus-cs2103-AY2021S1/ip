@@ -95,7 +95,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[T][N] todo work
+		[T][N] work
 
 	Now you have 1 tasks in the list.
 
@@ -225,7 +225,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	____________________________________________________________
 
-	1.[T][N] todo work
+	1.[T][N] work
 	2.[D][N] return book (by: Sunday)
 	3.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
 	4.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
@@ -243,7 +243,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Nice! I've marked this task as done:
 
-	[T][Y] todo work
+	[T][Y] work
 	____________________________________________________________
 
 	____________________________________________________________
@@ -262,7 +262,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	____________________________________________________________
 
-	1.[T][Y] todo work
+	1.[T][Y] work
 	2.[D][Y] return book (by: Sunday)
 	3.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
 	4.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
@@ -280,7 +280,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Noted. I've removed this task:
 
-		[T][Y] todo work
+		[T][Y] work
 
 	Now you have 11 tasks in the list.
 

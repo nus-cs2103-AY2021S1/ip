@@ -11,7 +11,7 @@ break > data/duke.txt
 
 REM compile the code into the bin folder
 dir /s /B ..\src\main\java\*.java > sources.txt
-javac -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\datetime\*.java ..\src\main\java\exception\*.java ..\src\main\java\parser\*.java ..\src\main\java\storage\*.java ..\src\main\java\task\*.java ..\src\main\java\task\tasks\*.java ..\src\main\java\ui\*.java
+javac -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\datetimeconverter\*.java ..\src\main\java\exception\*.java ..\src\main\java\parser\*.java ..\src\main\java\storage\*.java ..\src\main\java\task\*.java ..\src\main\java\task\tasks\*.java ..\src\main\java\ui\*.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1

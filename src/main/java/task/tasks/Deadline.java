@@ -1,6 +1,6 @@
 package task.tasks;
 
-import datetime.DateTime;
+import datetimeconverter.DateTimeConverter;
 
 public class Deadline extends Task {
 
@@ -13,6 +13,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateTime.formatDateTime(by) + ")";
+        return "[D]" + super.toString() + " (by: " + DateTimeConverter.formatDateTime(by) + ")";
     }
 }

@@ -1,6 +1,6 @@
 package task.tasks;
 
-import datetime.DateTime;
+import datetimeconverter.DateTimeConverter;
 
 public class Event extends Task {
 
@@ -13,6 +13,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + DateTime.formatDateTime(at) + ")";
+        return "[E]" + super.toString() + " (at: " + DateTimeConverter.formatDateTime(at) + ")";
     }
 }

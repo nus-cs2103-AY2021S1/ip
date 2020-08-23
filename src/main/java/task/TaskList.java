@@ -29,7 +29,9 @@ public class TaskList {
                 DukeException.invalidTodo();
             } else {
                 // Add and report that the todo is added
-                Task newTask = new Todo(userCommand);
+                String[] userCommandSplit = userCommand.split(" ", 2);
+                String description = userCommandSplit[1];
+                Task newTask = new Todo(description);
                 this.tasks.add(newTask);
                 TaskDescription.addedTaskDescription(this.tasks, newTask);
                 Storage.appendToFile(newTask.toString());
