@@ -20,4 +20,7 @@ public class event extends Task {
     public String toString() {
         return "[E]" + super.toString() + "(at: " + this.dateTime + ")";
     }
+    public String inputListFormat(){
+        return "E" + super.inputListFormat() + " | " + this.dateTime;
+    }
 }

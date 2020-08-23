@@ -22,4 +22,7 @@ public class deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + "(by: " + this.day + ")";
     }
+    public String inputListFormat(){
+        return "D" + super.inputListFormat() + " | " + this.day;
+    }
 }
