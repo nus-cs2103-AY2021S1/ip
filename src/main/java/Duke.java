@@ -122,6 +122,7 @@ public class Duke {
                     printLine();
                     break;
                 case "on":
+                    printLine();
                     LocalDate checkOn = LocalDate.parse(sc.nextLine().trim());
                     System.out.println("On this day, you have: ");
                     int eCount = 0;
@@ -136,8 +137,10 @@ public class Duke {
                     } else {
                         System.out.println("   [ You have no events on this day ]");
                     }
+                    printLine();
                     break;
                 case "by":
+                    printLine();
                     LocalDate checkBy = LocalDate.parse(sc.nextLine().trim());
                     System.out.println("By this day, you have: ");
                     int dCount = 0;
@@ -153,6 +156,7 @@ public class Duke {
                     } else {
                         System.out.println("   [ You have no deadlines by this day ]");
                     }
+                    printLine();
                     break;
                 default:
                     printLine();
