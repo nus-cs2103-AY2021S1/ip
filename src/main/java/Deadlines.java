@@ -9,6 +9,6 @@ public class Deadlines extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "+ deadline.substring(3) + ")";
+        return "[D]" + super.toString() + "(by: "+ deadline.substring(3) + ")";
     }
 }
