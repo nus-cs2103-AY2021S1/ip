@@ -15,4 +15,9 @@ public class Deadline extends Task {
     public String toString() {
         return getTypeIcon() + " " + super.getStatusIcon() + " " + super.description + " (by: " + dueTime + ")";
     }
+    
+    @Override
+    public String getTime() {
+        return dueTime;
+    }
 }
