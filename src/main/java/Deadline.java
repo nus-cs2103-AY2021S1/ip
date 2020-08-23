@@ -2,15 +2,29 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a deadline to be completed.
+ */
 public class Deadline extends Task {
     private static final String dateFormat = "yyyy-MM-dd HH:mm";
     protected LocalDateTime by;
 
+    /**
+     * Constructor for the deadline.
+     * @param details deadline details.
+     * @param by date and time to be completed.
+     * @throws DukeException If an invalid date or time is provided.
+     */
     public Deadline(String details, String by) throws DukeException {
         super(details);
         validateDateTime(by);
     }
 
+    /**
+     * Helper method for constructor.
+     * @param dateTime date and time.
+     * @throws DukeException If invalid date/time given.
+     */
     public void validateDateTime(String dateTime) throws DukeException {
         try {
             DateTimeFormatter df = DateTimeFormatter.ofPattern(dateFormat);
@@ -24,6 +38,10 @@ public class Deadline extends Task {
         return this.by;
     }
 
+    /**
+     * Returns the string representation of the deadline.
+     * @return String representation.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " +

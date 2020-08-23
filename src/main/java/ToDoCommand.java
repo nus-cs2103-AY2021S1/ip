@@ -1,6 +1,13 @@
+/**
+ * Represents a toDo command.
+ */
 public class ToDoCommand extends Command {
     private String afterCommand;
 
+    /**
+     * Constructor for the todo command.
+     * @param afterCommand details of todo command.
+     */
     public ToDoCommand(String afterCommand) {
         this.afterCommand = afterCommand;
     }

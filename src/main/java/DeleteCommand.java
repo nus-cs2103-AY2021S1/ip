@@ -1,6 +1,13 @@
+/**
+ * Represents a delete command.
+ */
 public class DeleteCommand extends Command {
     private String afterCommand;
 
+    /**
+     * Constructor for the delete command.
+     * @param afterCommand task id to be deleted
+     */
     public DeleteCommand(String afterCommand) {
         this.afterCommand = afterCommand;
     }

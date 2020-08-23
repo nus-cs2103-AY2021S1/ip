@@ -1,6 +1,13 @@
+/**
+ * Represents a deadline command.
+ */
 public class DeadlineCommand extends Command {
     private String afterCommand;
 
+    /**
+     * Constructor for the deadline command
+     * @param afterCommand details and time for deadline to be completed.
+     */
     public DeadlineCommand(String afterCommand) {
         this.afterCommand = afterCommand;
     }

@@ -1,6 +1,13 @@
+/**
+ * Represents an event command.
+ */
 public class EventCommand extends Command {
     private String afterCommand;
 
+    /**
+     * Constructor for the event command.
+     * @param afterCommand details and time of the event to be completed.
+     */
     public EventCommand(String afterCommand) {
         this.afterCommand = afterCommand;
     }
