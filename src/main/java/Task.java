@@ -3,7 +3,7 @@ public class Task {
     protected boolean isDone;
     protected Type type;
 
-    protected enum Type { TODO, DEADLINE, EVENT, UNKNOWN }
+    public enum Type { TODO, DEADLINE, EVENT, UNKNOWN }
 
     protected Task(String description) {
         this.description = description;
@@ -24,11 +24,20 @@ public class Task {
     protected String getTypeIcon() {
         String icon;
         switch (this.type) {
-            case TODO: icon = "T"; break;
-            case DEADLINE: icon = "D"; break;
-            case EVENT: icon = "E"; break;
-            case UNKNOWN: icon = "?"; break;
-            default: icon = "Error";
+        case TODO:
+            icon = "T";
+            break;
+        case DEADLINE:
+            icon = "D";
+            break;
+        case EVENT:
+            icon = "E";
+            break;
+        case UNKNOWN:
+            icon = "?";
+            break;
+        default:
+            icon = "Error";
         }
         return "[" + icon + "]";
     }

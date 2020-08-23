@@ -1,2 +1,3 @@
 Duke: Hey There! What can I do for you?
+Duke: Please key in a task!
 Duke: Bye! Hope to see you again.

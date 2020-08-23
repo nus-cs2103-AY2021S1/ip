@@ -14,7 +14,7 @@ public class Duke {
         while (!handler.isBye(input)) {
             if (handler.isList(input)) {
                 printList(taskList);
-            } else if (handler.isDone(input)) {
+            } else if (handler.isDone(input) && taskList.size() > 0) {
                 if (handler.isValidSize(input, taskList)) markAsDone(input, handler, taskList);
                 else {
                     say("Please specify a correct task number!");
@@ -30,19 +30,20 @@ public class Duke {
                 Task.Type type = handler.getType(input);
                 boolean valid = false;
                 switch (type) {
-                    case TODO:
-                        valid = handler.checkTodo(input);
-                        if (valid) addToList(Task.Type.TODO, input, handler, taskList);
-                        break;
-                    case DEADLINE:
-                        valid = handler.checkDeadline(input);
-                        if (valid) addToList(Task.Type.DEADLINE, input, handler, taskList);
-                        break;
-                    case EVENT:
-                        valid = handler.checkEvent(input);
-                        if (valid) addToList(Task.Type.EVENT, input, handler, taskList);
-                        break;
-                    default: //
+                case TODO:
+                    valid = handler.checkTodo(input);
+                    if (valid) addToList(Task.Type.TODO, input, handler, taskList);
+                    break;
+                case DEADLINE:
+                    valid = handler.checkDeadline(input);
+                    if (valid) addToList(Task.Type.DEADLINE, input, handler, taskList);
+                    break;
+                case EVENT:
+                    valid = handler.checkEvent(input);
+                    if (valid) addToList(Task.Type.EVENT, input, handler, taskList);
+                    break;
+                case UNKNOWN: // Fallthrough
+                default: // Fallthrough
                 }
                 if (!valid) {
                     say("Task found but please follow the format!");

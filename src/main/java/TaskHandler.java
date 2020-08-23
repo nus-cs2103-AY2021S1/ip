@@ -1,16 +1,22 @@
 import java.util.ArrayList;
 
 public class TaskHandler {
-    // input a line and check what it is and act accordingly
 
     public Task.Type getType(String input) {
         Task.Type type;
         String typeString = input.split(" ", 2)[0];
         switch (typeString) {
-            case "todo": type = Task.Type.TODO; break;
-            case "deadline" : type = Task.Type.DEADLINE; break;
-            case "event": type = Task.Type.EVENT; break;
-            default: type = Task.Type.UNKNOWN;
+        case "todo":
+            type = Task.Type.TODO;
+            break;
+        case "deadline":
+            type = Task.Type.DEADLINE;
+            break;
+        case "event":
+            type = Task.Type.EVENT;
+            break;
+        default:
+            type = Task.Type.UNKNOWN;
         }
         return type;
     }
