@@ -1,62 +1,91 @@
+import java.io.IOException;
 import java.util.*;
+import java.io.FileNotFoundException;
 
 
 public class Duke {
-    List<String> toDoLst;
-    HashMap<Integer, Boolean> toDoItemToStatus;
-    HashMap<Integer, String> toDoItemToType;
+    FileUtil db;
 
-    Duke() {
-        toDoLst = new ArrayList<>();
-        toDoItemToStatus = new HashMap<>();
-        toDoItemToType = new HashMap<>();
-    }
-
-    public List<String> getToDoLst() {
-        return toDoLst;
-    }
-
-    public int getToDoLstSize() {
-        return toDoLst.size();
+    Duke() throws IOException {
+        try {
+            db = new FileUtil();
+        } catch (FileNotFoundException e) {
+            throw e;
+        } catch (IOException e) {
+            throw e;
+        }
     }
 
     public boolean isTaskModification(String action) {
         return action.equals("done") || action.equals("delete");
     }
 
-    // needed?
-    public HashMap<Integer, Boolean> getToDoItemToStatus() {
-        return toDoItemToStatus;
+    public List<Task> getToDoLst() {
+        return db.getToDoLst();
     }
 
-    // needed?
-    public HashMap<Integer, String> getToDoItemToType() {
-        return toDoItemToType;
-    }
-
-    public String getToDoItemDescription(int i) {
-        return String.format("[%s][%s] %s", toDoItemToType.get(i), toDoItemToStatus.get(i) ? "✓" : "✗", toDoLst.get(i));
+    public int getToDoLstSize() {
+        return db.getToDoLstSize();
     }
 
     public String getTotalItemsDescription() {
-        return String.format("Now you have %d %s in the list.", getToDoLstSize(), getToDoLstSize() > 1 ? "tasks" : "task");
+        return db.getTotalItemsDescription();
     }
 
-    public void setToDoItemStatus(int i, boolean bool) {
-        toDoItemToStatus.put(i, bool);
+    public Task setToDoItemStatus(int i, boolean bool) {
+        Task task = getToDoLst().get(i);
+
+        task.setStatus(bool);
+
+        return task;
     }
 
-    public void setToDoItemToType(int i, String type) {
-        toDoItemToType.put(i, Character.toString(type.charAt(0)).toUpperCase());
+    public Task addToDoItem(String type, String todo) {
+        Task newTask = null;
+
+        if (type.equals("todo")) {
+            newTask = new Task("T", todo, false);
+        } else if (type.equals("deadline")) {
+            newTask = new Task("D", todo, false);
+        } else if (type.equals("event")) {
+            newTask = new Task("E", todo, false);
+        }
+
+        db.addToDoItem(newTask);
+
+        return newTask;
     }
 
-    public void removeToDoItem(int i) {
-        toDoLst.remove(i);
-        toDoItemToStatus.remove(i);
+    public Task removeToDoItem(int i) {
+        Task deletedTask = db.removeToDoItem(i);
+
+        return deletedTask;
+    }
+
+    public void save() throws IOException {
+        try {
+            db.save();
+        } catch (IOException e) {
+            throw e;
+        }
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
+        Duke duke = null;
+
+        try {
+            duke = new Duke();
+        } catch (FileNotFoundException e) {
+            System.out.println("Data directory or file not found, see error");
+
+            System.out.println(e.getMessage());
+
+            return;
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+
+            return;
+        }
 
         Scanner scanner = new Scanner(System.in);
         String line = "";
@@ -67,35 +96,31 @@ public class Duke {
         while(!line.equals("bye")) {
             if (!line.equals("")) {
                 if (line.equals("list")) {
-                    for (int i = 0; i < duke.getToDoLst().size(); i++) {
-                        System.out.println(String.format("%d.%s", i + 1, duke.getToDoItemDescription(i)));
+                    System.out.println("Here are the tasks in your list:");
+
+                    for (int i = 0; i < duke.getToDoLstSize(); i++) {
+                        System.out.println(String.format("%d.%s", i + 1, duke.getToDoLst().get(i)));
                     }
                 } else if (duke.isTaskModification(line.split(" ")[0])) {
                     String[] lineData = line.split(" ");
                     int i = Integer.parseInt(lineData[1]) - 1;
 
                     if (line.split(" ")[0].equals("done")) {
-                        duke.setToDoItemStatus(i, true);
+                        Task updatedTask = duke.setToDoItemStatus(i, true);
 
                         System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(duke.getToDoItemDescription(i));
+                        System.out.println(updatedTask);
                     }  else {
+                        Task deletedTask = duke.removeToDoItem(i);
 
                         System.out.println("Noted. I've removed this task:");
-                        System.out.println(duke.getToDoItemDescription(i));
-
-                        // remove here
-                        duke.removeToDoItem(i);
-
+                        System.out.println(deletedTask);
                         System.out.println(duke.getTotalItemsDescription());
                     }
                 } else {
                     String[] lineData = line.split(" ");
                     String type = lineData[0];
                     boolean isValidEntry = true;
-
-                    duke.setToDoItemStatus(duke.getToDoLstSize(), false);
-                    duke.setToDoItemToType(duke.getToDoLstSize(), type);
 
                     if (type.equals("todo")) {
                         if (lineData.length == 1) {
@@ -128,16 +153,23 @@ public class Duke {
                     }
 
                     if (isValidEntry) {
-                        duke.getToDoLst().add(line);
+                        Task newTask = duke.addToDoItem(type, line);
 
                         System.out.println("Got it. I've added this task: ");
-                        System.out.println(duke.getToDoItemDescription(duke.getToDoLstSize() - 1));
-                        duke.getTotalItemsDescription();
+                        System.out.println(newTask);
+                        System.out.println(duke.getTotalItemsDescription());
                     }
                 }
             }
 
             line = scanner.nextLine();
+        }
+
+        try {
+            duke.save();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return;
         }
 
         System.out.println("Bye. Hope to see you again soon!");
