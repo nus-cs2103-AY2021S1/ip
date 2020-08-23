@@ -65,6 +65,10 @@ public class Ui {
                 "assure you: I remain undaunted - and as determined as ever to claim my rightful throne!");
     }
 
+    /**
+     * Shows a {@link TaskList} of found tasks.
+     * @param foundTasks a TaskList of tasks found.
+     */
     public static void showFound(TaskList foundTasks) {
         System.out.println("I found these tasks:");
         System.out.println(foundTasks);

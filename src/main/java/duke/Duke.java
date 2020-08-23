@@ -49,9 +49,7 @@ public class Duke {
                 Ui.showDelete(deletedTask);
                 break;
             case "todo":
-                //Fallthrough
             case "deadline":
-                //Fallthrough
             case "event":
                 try {
                     Task addedTask = command.toTask();
