@@ -41,11 +41,13 @@ public class Duke {
     public void run() {
         ui.showWelcome();
         ui.showLine();
+        int num = 0;
         boolean isExit = false;
         if(tasks.allTasks.size() == 0 || ui.currNum >= tasks.allTasks.size()){
             isExit = true;
         }
-        while (!isExit) {
+        while (!isExit && num < tasks.allTasks.size()) {
+            num++;
             try {
                 String fullCommand = ui.readCommand();
                 ui.curr();
