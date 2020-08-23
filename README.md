@@ -48,6 +48,8 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
     1. Duke will recognise command `delete` followed by an applicable integer to delete the corresponding task.
     2. For those `delete` commands that Duke does not accept, error handling is also implemented for this.
 6. Save to disk: Duke will keep a copy of the task list in a local file and retrive it every time Duke starts.
+7. Time format support for `deadline` and `event`, if a date input is of the pattern `yyyy-mm-dd`, Duke will understand this
+and print the format as `MMM dd yyyy`, otherwise, Duke will treat this as a string.
 ## Demo
    ```
        ____________________________________________________________
