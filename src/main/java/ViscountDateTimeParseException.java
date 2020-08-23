@@ -1,7 +1,11 @@
 public class ViscountDateTimeParseException extends ViscountException {
-    private static final String ERROR_MESSAGE = "Alas, I do not understand. Please format your %s\n"
+    private static final String DATE_ERROR_MESSAGE = "Alas, I do not understand. Please format your %s\n"
+            + "in this format: dd-MM-yyyy\n"
+            + "For example: 23-08-2020";
+    
+    private static final String DATE_TIME_ERROR_MESSAGE = "Alas, I do not understand. Please format your %s\n"
             + "in this format: dd-MM-yyyy HHmm\n"
-            + "like the following example: 23-08-2020 1300\n"
+            + "For example: 23-08-2020 1300\n"
             + "The time is optional and the default is 0000.";
     
     private String dateTimeType;
@@ -13,6 +17,8 @@ public class ViscountDateTimeParseException extends ViscountException {
     
     @Override
     public String toString() {
-        return String.format(ViscountDateTimeParseException.ERROR_MESSAGE, dateTimeType);
+        return dateTimeType.equals("date query")
+            ? String.format(ViscountDateTimeParseException.DATE_ERROR_MESSAGE, dateTimeType)
+            : String.format(ViscountDateTimeParseException.DATE_TIME_ERROR_MESSAGE, dateTimeType);
     }
 }

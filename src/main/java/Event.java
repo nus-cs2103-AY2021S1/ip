@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -15,10 +16,15 @@ public class Event extends Task {
     public boolean hasDateTime() {
         return true;
     }
+    
+    @Override
+    public LocalDateTime getDateTime() {
+        return eventTime;
+    }
 
     @Override
     public String toString() {
         return String.format(Event.STRING_FORMAT, getStatusIcon(), description, 
-                eventTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm")));
+                eventTime.format(Task.OUTPUT_DATE_TIME_FORMATTER));
     }
 }

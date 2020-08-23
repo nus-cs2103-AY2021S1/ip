@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -15,10 +16,15 @@ public class Deadline extends Task {
     public boolean hasDateTime() {
         return true;
     }
+    
+    @Override
+    public LocalDateTime getDateTime() {
+        return dueDate;
+    }
 
     @Override
     public String toString() {
         return String.format(Deadline.STRING_FORMAT, getStatusIcon(), description, 
-                dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm a")));
+                dueDate.format(Task.OUTPUT_DATE_TIME_FORMATTER));
     }
 }

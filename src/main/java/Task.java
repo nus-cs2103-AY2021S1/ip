@@ -1,4 +1,10 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
+    protected static final DateTimeFormatter OUTPUT_DATE_TIME_FORMATTER = 
+            DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
+    
     protected TaskType taskType;
     protected String description;
     protected boolean isDone;
@@ -23,4 +29,5 @@ public abstract class Task {
     }
 
     public abstract boolean hasDateTime();
+    public abstract LocalDateTime getDateTime();
 }

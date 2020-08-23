@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public class Todo extends Task {
     private static final String STRING_FORMAT = "[T][%s] %s";
 
@@ -8,6 +10,11 @@ public class Todo extends Task {
     @Override
     public boolean hasDateTime() {
         return false;
+    }
+    
+    @Override
+    public LocalDateTime getDateTime() {
+        throw new UnsupportedOperationException();
     }
 
     @Override

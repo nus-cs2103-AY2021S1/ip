@@ -6,8 +6,11 @@ import java.time.temporal.TemporalAccessor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Viscount {
     private static final String VISCOUNT_LOGO =
@@ -19,6 +22,7 @@ public class Viscount {
             "   \\_/ |_|_____/ \\_____\\___/ \\__,_|_| |_|\\__|";
     private static final String HORIZONTAL_LINE = "__________________________________________________";
     private static final DateTimeFormatter INPUT_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy[ HHmm]");
+    private static final DateTimeFormatter OUTPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     private static List<Task> tasks = new ArrayList<>();
 
@@ -33,7 +37,7 @@ public class Viscount {
         System.out.println();
     }
 
-    private static String convertTaskListToString() {
+    private static String convertTaskListToString(List<Task> tasks) {
         String result = "";
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -84,12 +88,75 @@ public class Viscount {
         return dateTime;
     }
     //@@author
+    
+    private static void filterAndListTasks(String modifier, String dateString) throws ViscountException {
+        if (!modifier.isEmpty()) {
+            try {
+                TaskType.valueOf(modifier.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                throw new ViscountUnknownCommandException(modifier);
+            }
+        }
+
+        Predicate<Task> filterByModifier = task -> modifier.isEmpty()
+                || task.getTaskType() == TaskType.valueOf(modifier.toUpperCase());
+
+        if (dateString.isEmpty()) {
+            List<Task> filteredTasks = tasks
+                    .stream()
+                    .filter(filterByModifier)
+                    .collect(Collectors.toList());
+            
+            Viscount.speak(String.format("Here are the %ss in your list:\n%s",
+                    modifier.isEmpty() ? "task" : modifier,
+                    Viscount.convertTaskListToString(filteredTasks)));
+        } else {
+            try {
+                LocalDateTime queriedDateTime = dateString.equals("today")
+                        ? LocalDate.now().atStartOfDay()
+                        : Viscount.formatDateTime(dateString);
+
+                List<Task> filteredTasks = tasks
+                        .stream()
+                        .filter(Task::hasDateTime)
+                        .filter(filterByModifier)
+                        .filter(task -> task.getDateTime().toLocalDate().isEqual(queriedDateTime.toLocalDate()))
+                        .sorted(Comparator.comparing(Task::getDateTime))
+                        .collect(Collectors.toList());
+                
+                Viscount.speak(String.format("Here are the %ss occurring %s in your list:\n%s",
+                        modifier.isEmpty() ? "task" : modifier,
+                        dateString.equals("today") 
+                                ? dateString 
+                                : "on " + queriedDateTime.format(Viscount.OUTPUT_DATE_FORMATTER),
+                        Viscount.convertTaskListToString(filteredTasks)));
+            } catch (DateTimeParseException e) {
+                throw new ViscountDateTimeParseException("date query");
+            }
+        }
+    }
 
     private static void parseInput(List<String> arguments) throws ViscountException {
         String command = arguments.get(0);
 
         if (command.equals("list")) {
-            Viscount.speak("Here are the tasks in your list:\n" + Viscount.convertTaskListToString());
+            int indexOfDate = arguments.indexOf("/on");
+            
+            if (indexOfDate == -1) {
+                String modifier = String.join(" ", arguments.subList(1, arguments.size()));
+                Viscount.filterAndListTasks(modifier, "");
+            } else {
+                String modifier = String.join(" ", arguments.subList(1, indexOfDate));
+                String dateString = String.join(" ", arguments.subList(indexOfDate + 1, arguments.size()));
+                
+                if (modifier.equals("todo")) {
+                    Viscount.speak("Alas, todos do not have dates! Try again without /on");
+                } else if (dateString.isEmpty()) {
+                    throw new ViscountMissingArgumentDescriptionException("/on");
+                } else {
+                    Viscount.filterAndListTasks(modifier, dateString);
+                }
+            }            
         } else if (command.equals("todo")) {
             String description = String.join(" ", arguments.subList(1, arguments.size()));
 
