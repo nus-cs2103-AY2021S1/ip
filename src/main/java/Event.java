@@ -6,6 +6,7 @@ public class Event extends Task {
 
     public Event(String contents) {
         super(Event.format(contents));
+        super.inputString = this.getClass().getSimpleName().toLowerCase() + " " + contents;
     }
 
     public String toString() {

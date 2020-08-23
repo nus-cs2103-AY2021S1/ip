@@ -6,6 +6,7 @@ public class Deadline extends Task {
 
     public Deadline(String contents) {
         super(Deadline.format(contents));
+        super.inputString = this.getClass().getSimpleName().toLowerCase() + " " + contents;
     }
 
     public String toString() {
