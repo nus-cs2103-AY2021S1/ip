@@ -1,11 +1,12 @@
-import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
 import java.time.LocalDate;
+
+import java.io.IOException;
 import java.io.FileNotFoundException;
 
-/**
- * Main class
- */
 public class Duke {
     private Storage db;
     private Parser parser;
