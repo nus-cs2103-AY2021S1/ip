@@ -1,6 +1,8 @@
 package main.java;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -63,11 +65,11 @@ class Todo extends Task {
 }
 
 class Deadline extends Task {
-    String by;
+    LocalDate by;
 
     public Deadline(String name, String by) {
         super(name);
-        this.by = by;
+        this.by = LocalDate.parse(by);
     }
 
     public String toData() {
@@ -76,16 +78,16 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
 
 class Event extends Task {
-    String at;
+    LocalDate at;
 
     public Event(String name, String at) {
         super(name);
-        this.at = at;
+        this.at = LocalDate.parse(at);
     }
 
     public String toData() {
@@ -94,7 +96,7 @@ class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
 
