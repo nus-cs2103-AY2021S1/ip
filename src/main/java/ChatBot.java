@@ -22,18 +22,37 @@ public class ChatBot {
     }
 
     private static String response(String query){
-        String[] command = query.toLowerCase().split("\\s+");
-        switch (command[0]){
+        String[] splitQuery = query.split("\\s+");
+        String command = splitQuery[0].toLowerCase();
+        String[] cRemoved = removeCommandString(splitQuery);
+        switch (command){
             case "done":
-                if(command.length<2){
+                if(splitQuery.length != 2){
                     return "Error: Usage of command 'done' should be done as follows: 'done <task number>'";
                 }
-                return markedAsDone(command[1]);
+                return markedAsDone(splitQuery[1]);
+            case "clear":
+                return "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
             case "list":
                 return listOfTasks();
+            case "todo":
+                String editedQ = concatenateStrArr(cRemoved);
+                Task toDo = ChatBot.addToDo(editedQ);
+                return taskAdded(toDo);
+            case "deadline":
+                String title = getTitle(cRemoved);
+                String preposition = getPreposition(cRemoved);
+                String dateTime = getDateTime(cRemoved);
+                Task deadline = ChatBot.addDeadline(title,preposition,dateTime);
+                return taskAdded(deadline);
+            case "event":
+                String ttle = getTitle(cRemoved);
+                String ppstn = getPreposition(cRemoved);
+                String dT = getDateTime(cRemoved);
+                Task event = ChatBot.addEvent(ttle,ppstn,dT);
+                return taskAdded(event);
             default:
-                ChatBot.addTask(query);
-                return "added: " + query;
+                return "Error: Unknown command. Type 'help' to get the list of commands";
         }
     }
 
@@ -47,9 +66,22 @@ public class ChatBot {
         return acc;
     }
 
-    private static void addTask(String query){
-        Task newTask = new Task(query);
+    private static Task addToDo(String query){
+        Task newTask = new ToDo(query);
         taskList.add(newTask);
+        return newTask;
+    }
+
+    private static Task addDeadline(String title, String preposition, String dateTime){
+        Task newTask = new Deadline(title,preposition,dateTime);
+        taskList.add(newTask);
+        return newTask;
+    }
+
+    private static Task addEvent(String title, String preposition, String dateTime){
+        Task newTask = new Event(title,preposition,dateTime);
+        taskList.add(newTask);
+        return newTask;
     }
 
     private static String markedAsDone(String listIndex){
@@ -62,10 +94,61 @@ public class ChatBot {
                 return "Error: This task has already been marked as done";
             }
             curr.markDone();
-            return String.format("Nice I have marked this task as done:\n\t%s",curr);
+            return String.format("Nice I have marked this task as done:\n\t%s\nNow you have %d tasks left",curr,taskList.size());
         }
     }
 
+    private static String taskAdded(Task task){
+        return "Got it. I've added this task:\n\t" + task.toString() + String.format("\nNow you have %d tasks in the list",taskList.size());
+    }
+
+    private static String[] removeCommandString(String[] splitQuery){
+        splitQuery[0] = "";
+        return splitQuery;
+    }
+
+    private static String concatenateStrArr(String[] strArr){
+        String acc = "";
+        for (String s: strArr) {
+            if(s != "") {
+                acc = acc + " " + s;
+            }
+        }
+        return acc;
+    }
+
+    private static String getTitle(String[] splitQuery){
+        String accTaskTitle = "";
+        int i = 1;
+        while(!splitQuery[i].startsWith("/")){
+            accTaskTitle = accTaskTitle + " " + splitQuery[i];
+            i++;
+        }
+        return accTaskTitle;
+    }
+
+    private static String getPreposition(String[] splitQuery){
+        for (String s:splitQuery) {
+            if(s.startsWith("/")){
+                return s.substring(1);
+            }
+        }
+        return "";
+    }
+
+    private static String getDateTime(String[] splitQuery){
+        String accTaskDateTime = "";
+        int i = 0;
+        while(!splitQuery[i].startsWith("/")){
+            i++;
+        }
+        i++;
+        while(i < splitQuery.length){
+            accTaskDateTime = accTaskDateTime + " " + splitQuery[i];
+            i++;
+        }
+        return accTaskDateTime;
+    }
 
     private static boolean isEnd(String query){
         String editedQuery = query.stripLeading().stripTrailing();

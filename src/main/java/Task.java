@@ -1,6 +1,6 @@
 package main.java;
 
-public class Task {
+public abstract class Task{
     private String title;
     private boolean isDone = false;
 
