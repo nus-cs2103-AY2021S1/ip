@@ -51,22 +51,20 @@ public class Duke {
                         + "\nNumber of tasks in list: " + tasks.size());
                 break;
             case "deadline":
-                String[] taskBy = input.substring(9)
-                        .split("/by");
-                if(taskBy.length >= 2 && !taskBy[0].equals("")) {
+                String[] taskBy = input.substring(9).split("/by");
+                if(taskBy.length == 2 && !taskBy[0].equals("")) {
                     // condition checks that input has task description and date/time
-                    StringBuilder taskDeadline = new StringBuilder(taskBy[1]);
-                    // if there are more than one '/by' in input,
                     // task deadline taken as string after first '/by'
-                    for(int i = 2; i < taskBy.length; i++) {
-                        taskDeadline.append("/by").append(taskBy[i]);
+                    try {
+                        Deadline deadline = new Deadline(taskBy[0], taskBy[1].substring(1));
+                        tasks.add(deadline);
+                        writeToFile(deadline, DukeAction.ADD);
+                        System.out.println("Dino has added to your list of tasks:\n"
+                                + deadline
+                                + "\nNumber of tasks in list: " + tasks.size());
+                    } catch(DukeException e) {
+                        System.out.println(e.getMessage());
                     }
-                    Deadline deadline = new Deadline(taskBy[0], taskDeadline.toString());
-                    tasks.add(deadline);
-                    writeToFile(deadline, DukeAction.ADD);
-                    System.out.println("Dino has added to your list of tasks:\n"
-                            + deadline
-                            + "\nNumber of tasks in list: " + tasks.size());
                 } else {
                     throw new DukeException("Rawr! Dino could not add your task. "
                             + "Make sure your format is correct."
@@ -74,22 +72,22 @@ public class Duke {
                 }
                 break;
             case "event":
-                String[] eventAt = input.substring(6)
-                        .split("/at");
-                if(eventAt.length >= 2 && !eventAt[0].equals("")) {
+                String[] eventAt = input.substring(6).split("/at");
+                if(eventAt.length == 2 && !eventAt[0].equals("")) {
                     // condition checks that input has task description and date/time
-                    StringBuilder eventTime = new StringBuilder(eventAt[1]);
-                    // if there are more than one '/at' in input,
+
                     // task deadline taken as string after first '/at'
-                    for(int i = 2; i < eventAt.length; i++) {
-                        eventTime.append("/at").append(eventAt[i]);
+                    try {
+                        Event event = new Event(eventAt[0], eventAt[1].substring(1));
+                        tasks.add(event);
+                        writeToFile(event, DukeAction.ADD);
+                        System.out.println("Dino has added to your list of tasks:\n"
+                                + event
+                                + "\nNumber of tasks in list: " + tasks.size());
+                    } catch(DukeException e) {
+                        System.out.println(e.getMessage());
                     }
-                    Event event = new Event(eventAt[0], eventTime.toString());
-                    tasks.add(event);
-                    writeToFile(event, DukeAction.ADD);
-                    System.out.println("Dino has added to your list of tasks:\n"
-                            + event
-                            + "\nNumber of tasks in list: " + tasks.size());
+
                 } else {
                     throw new DukeException("Rawr! Dino could not add your task. "
                             + "Make sure your format is correct."
@@ -133,12 +131,12 @@ public class Duke {
                 System.out.println("Formats for the three task types Todo, Deadline and Event,"
                         + " are shown below.\n"
                         + "Todo: 'todo <task description>'"
-                        + " (e.g., visit new theme park)\n"
+                        + " (e.g. todo visit new theme park)\n"
                         + "Deadline: 'deadline <task description>"
-                        + " /by <date/time>' (e.g., submit report by 11/10/2019 5pm)\n"
+                        + " /by <yyyy-mm-dd hhmm>' (e.g. deadline submit report /by 2019-11-10 1500)\n"
                         + "Event: 'event <task description>"
-                        + " /at <date/start and end time>' "
-                        + "(e.g., team project meeting on 2/10/2019 2-4pm)\n"
+                        + " /at <yyyy-mm-dd hhmm-hhmm>' "
+                        + "(e.g. event team project meeting /at 2019-10-02 1400-1500)\n"
                         + "\nAdditional Information:"
                         + "\nTo mark a task as done, input 'done <task number>'."
                         + "\nTo delete a task from your list, input 'delete <task number>'.");
