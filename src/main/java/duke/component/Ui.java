@@ -54,10 +54,16 @@ public class Ui {
         return sc.nextLine();
     }
 
+    /**
+     * Greets the user when the app is opened.
+     */
     public void greeting() {
         output("Hello! I'm Duke\n\t  What can I do for you?");
     }
 
+    /**
+     * Says goodbye to the user when the app is exited.
+     */
     public void close() {
         output("Bye. Hope to see you again soon!");
     }
