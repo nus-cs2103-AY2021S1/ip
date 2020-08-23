@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -32,6 +31,7 @@ public class Duke {
             // Dino marks task as done
             int taskIndex = taskNumber - 1;
             Task doneTask = tasks.get(taskIndex);
+            writeToFile(doneTask, DukeAction.MARK_DONE);
             doneTask.markAsDone();
             System.out.println("Great! Dino has marked " + "Task " + taskNumber
                     + " as done:\n" + doneTask);
@@ -45,6 +45,7 @@ public class Duke {
                 String task = input.substring(5);
                 Todo todo = new Todo(task);
                 tasks.add(todo);
+                writeToFile(todo, DukeAction.ADD);
                 System.out.println("Dino has added to your list of tasks:\n"
                         + todo
                         + "\nNumber of tasks in list: " + tasks.size());
@@ -62,6 +63,7 @@ public class Duke {
                     }
                     Deadline deadline = new Deadline(taskBy[0], taskDeadline.toString());
                     tasks.add(deadline);
+                    writeToFile(deadline, DukeAction.ADD);
                     System.out.println("Dino has added to your list of tasks:\n"
                             + deadline
                             + "\nNumber of tasks in list: " + tasks.size());
@@ -84,6 +86,7 @@ public class Duke {
                     }
                     Event event = new Event(eventAt[0], eventTime.toString());
                     tasks.add(event);
+                    writeToFile(event, DukeAction.ADD);
                     System.out.println("Dino has added to your list of tasks:\n"
                             + event
                             + "\nNumber of tasks in list: " + tasks.size());
@@ -117,9 +120,10 @@ public class Duke {
             int taskIndex = taskNumber - 1;
             Task toDelete = tasks.get(taskIndex);
             tasks.remove(taskIndex);
+            writeToFile(toDelete, DukeAction.DELETE);
             System.out.println("Rawr! Dino has deleted " + "Task " + taskNumber
                     + " from your list:\n" + toDelete
-                    + "\nNumber of tasks in list:" + tasks.size());
+                    + "\nNumber of tasks in list: " + tasks.size());
         }
     }
 
@@ -181,11 +185,11 @@ public class Duke {
                     String taskTypeAndDone = scan.next();
                     String taskDesc = scan.nextLine().substring(1);
                     char taskType = taskTypeAndDone.charAt(1);
-                    char taskDone = taskTypeAndDone.charAt(4);
+                    String taskDone = taskTypeAndDone.substring(4,5);
                     switch (taskType) {
                     case 'T':
                         Todo todo = new Todo(taskDesc);
-                        if(taskDone == '✓') {
+                        if(taskDone.equals("1")) {
                             todo.markAsDone();
                         }
                         tasks.add(todo);
@@ -196,7 +200,7 @@ public class Duke {
                         String task = taskBy[0].substring(0, taskBy[0].length() - 2);
                         String by = taskBy[1].substring(1, taskBy[1].length() - 1);
                         Deadline deadline = new Deadline(task, by);
-                        if(taskDone == '✓') {
+                        if(taskDone.equals("1")) {
                             deadline.markAsDone();
                         }
                         tasks.add(deadline);
@@ -207,7 +211,7 @@ public class Duke {
                         String eventTask = eventAt[0].substring(0, eventAt[0].length() - 2);
                         String at = eventAt[1].substring(1, eventAt[1].length() - 1);
                         Event event = new Event(eventTask, at);
-                        if(taskDone == '✓') {
+                        if(taskDone.equals("1")) {
                             event.markAsDone();
                         }
                         tasks.add(event);
@@ -228,6 +232,84 @@ public class Duke {
             System.out.println(e.getMessage());
         }
         System.out.println("____________________________________________________________");
+    }
+
+    public static void writeToFile(Task task, DukeAction action) throws DukeException {
+        try {
+            switch(action) {
+            case ADD :
+                FileWriter fw = new FileWriter("./data/tasklist.txt", true);
+                fw.write(task.toString() + "\n");
+                fw.close();
+                System.out.println("Success!");
+                break;
+
+            case DELETE:
+                File inputFile = new File("./data/tasklist.txt");
+                File tempFile = new File("./data/myTempFile.txt");
+                BufferedReader reader = new BufferedReader(new FileReader("./data/tasklist.txt"));
+                BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+                String lineToRemove = task.toString();
+                String currentLine;
+                while((currentLine = reader.readLine()) != null) {
+                    if (!currentLine.equals(lineToRemove)) {
+                        writer.write(currentLine);
+                        writer.newLine();
+                    }
+                }
+                writer.close();
+                reader.close();
+                System.gc();
+
+                if(inputFile.delete()) {
+                    if(tempFile.renameTo(inputFile)) {
+                        System.out.println("Success!");
+                    } else {
+                        throw new DukeException("Dino could not write task data to hard disk.");
+                    }
+                } else {
+                    throw new DukeException("Dino could not write task data to hard disk.");
+                }
+                break;
+
+            case MARK_DONE:
+                File taskFile = new File("./data/tasklist.txt");
+                File temFile = new File("./data/myTemFile.txt");
+                BufferedReader br = new BufferedReader(new FileReader("./data/tasklist.txt"));
+                BufferedWriter bw = new BufferedWriter(new FileWriter(temFile));
+
+                String lineToMarkDone = task.toString();
+                String currentL;
+                while((currentL = br.readLine()) != null) {
+                    if (!currentL.equals(lineToMarkDone)) {
+                        bw.write(currentL);
+                    } else {
+                        String taskType = currentL.substring(0,3);
+                        String taskDesc = currentL.substring(6);
+                        bw.write(taskType + "[1]" + taskDesc);
+                    }
+                    bw.newLine();
+                }
+                bw.close();
+                br.close();
+                System.gc();
+
+                if(taskFile.delete()) {
+                    if(temFile.renameTo(taskFile)) {
+                        System.out.println("Success!");
+                    } else {
+                        throw new DukeException("Dino could not write task data to hard disk.");
+                    }
+                } else {
+                    throw new DukeException("Dino could not write task data to hard disk.");
+                }
+                break;
+            }
+
+        } catch(IOException e) {
+            throw new DukeException("Dino could not write task data to hard disk.");
+        }
     }
 
     public static void main(String[] args) {

@@ -12,6 +12,8 @@ To mark a task as done, input 'done <task number>'.
 To delete a task from your list, input 'delete <task number>'.
 To stop Dino, input 'bye'.
 ____________________________________________________________
+Welcome back. Dino has successfully loaded your task data.
+____________________________________________________________
 Formats for the three task types Todo, Deadline and Event, are shown below.
 Todo: 'todo <task description>' (e.g., visit new theme park)
 Deadline: 'deadline <task description> /by <date/time>' (e.g., submit report by 11/10/2019 5pm)
@@ -24,10 +26,12 @@ ____________________________________________________________
 Rawr! Dino could not find any items in your task list.
 Get started by entering a task. Formats for a task can be found by entering 'format'.
 ____________________________________________________________
+Success!
 Dino has added to your list of tasks:
 [T][✘] swimming in sea
 Number of tasks in list: 1
 ____________________________________________________________
+Success!
 Dino has added to your list of tasks:
 [D][✘] 321  (by:  0)
 Number of tasks in list: 2
@@ -37,10 +41,12 @@ Dino lists your tasks:
 2. [D][✘] 321  (by:  0)
 To mark off a task after completion, input 'done <task number>'.
 ____________________________________________________________
+Success!
 Dino has added to your list of tasks:
 [E][✘] 456  (at:  7)
 Number of tasks in list: 3
 ____________________________________________________________
+Success!
 Dino has added to your list of tasks:
 [T][✘] racing car
 Number of tasks in list: 4
@@ -52,9 +58,11 @@ Dino lists your tasks:
 4. [T][✘] racing car
 To mark off a task after completion, input 'done <task number>'.
 ____________________________________________________________
+Success!
 Great! Dino has marked Task 1 as done:
 [T][✓] swimming in sea
 ____________________________________________________________
+Success!
 Great! Dino has marked Task 2 as done:
 [D][✓] 321  (by:  0)
 ____________________________________________________________
@@ -76,10 +84,12 @@ ____________________________________________________________
 Rawr! Dino could not add your task. Make sure your format is correct.
 Formats to input a task can be found by entering 'format'.
 ____________________________________________________________
+Success!
 Dino has added to your list of tasks:
 [D][✘] eat  (by:  10am /by june)
 Number of tasks in list: 5
 ____________________________________________________________
+Success!
 Dino has added to your list of tasks:
 [E][✘] travel to japan  (at:  10 June /at 2pm /at airport)
 Number of tasks in list: 6
@@ -105,9 +115,10 @@ ____________________________________________________________
 Rawr! Dino could not add your task. Make sure your format is correct.
 Formats to input a task can be found by entering 'format'.
 ____________________________________________________________
+Success!
 Rawr! Dino has deleted Task 3 from your list:
 [E][✘] 456  (at:  7)
-Number of tasks in list:5
+Number of tasks in list: 5
 ____________________________________________________________
 Dino lists your tasks:
 1. [T][✓] swimming in sea
