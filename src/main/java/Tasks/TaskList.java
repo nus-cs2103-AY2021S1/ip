@@ -9,8 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
-    ArrayList<Task> taskList;
-    Storage store;
+    private ArrayList<Task> taskList;
+    private Storage store;
 
     public TaskList(Storage store) {
         this.taskList = store.load();
