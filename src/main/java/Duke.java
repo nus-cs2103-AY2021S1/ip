@@ -45,7 +45,7 @@ public class Duke {
                     if (indexOfBy < 0 || input.substring(indexOfBy + 5).split(" ").length <= 0) {
                         throw new IllegalArgumentException(
                             "A date needs to be provided with /by when adding a deadline.\n"
-                                + "     Usage: deadline return book /by tomorrow");
+                                + "     Usage: deadline return book /by 2020-12-30");
                     }
                     addToList(new Deadline(input.substring(9, indexOfBy), input.substring(indexOfBy + 5)));
                     break;
@@ -56,7 +56,7 @@ public class Duke {
                     }
                     if (indexOfAt < 0 || input.substring(indexOfAt + 5).split(" ").length <= 0) {
                         throw new IllegalArgumentException("A date needs to be provided with /at when adding a event.\n"
-                            + "     Usage: event library renewal /at next sunday");
+                            + "     Usage: event library renewal /at 2020-12-31");
                     }
                     addToList(new Event(input.substring(6, indexOfAt), input.substring(indexOfAt + 5)));
                     break;
