@@ -1,15 +1,24 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the task list handler.
+ */
 public class TaskList {
     private static final List<Task> storage = new ArrayList<>();
     private final Ui ui;
 
+    /**
+     * Constructor for TaskList Object.
+     */
     public TaskList() {
         this.ui = new Ui();
     }
 
-    public  void displayList() {
+    /**
+     * Displays the task list.
+     */
+    public void displayList() {
         int listLen = storage.size();
         System.out.println(ui.getBorder().replace("\n", ""));
         System.out.println("Here are the tasks in your list:");
@@ -21,6 +30,12 @@ public class TaskList {
         System.out.println(ui.getBorder());
     }
 
+    /**
+     * Adds task to the task list.
+     * @param s The type of task to add
+     * @param next The remaining task description
+     * @throws DukeException The Exception of Duke bot
+     */
     public void addTask(String s, String next) throws DukeException {
         Task toAdd = null;
         if (s.matches("todo|deadline|event|done|delete") && next.equals("")) {
@@ -73,6 +88,11 @@ public class TaskList {
         ui.addTaskLine(toAdd, storage.size());
     }
 
+    /**
+     * Completes given from the task list.
+     * @param s Index of task to be completed on the list
+     * @throws DukeException The Exception of Duke bot
+     */
     public void doneTask(String s) throws DukeException {
         try {
             int i = Integer.parseInt(s);
@@ -96,6 +116,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes given task from the task list.
+     * @param s Index of task to be completed on the list
+     * @throws DukeException The Exception of Duke bot
+     */
     public void delTask(String s) throws DukeException {
         if (storage.size() == 0 || s.toLowerCase().equals("all")) {
             storage.clear();
@@ -126,6 +151,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Getter method for task list.
+     * @return The current task list of the bot
+     */
     public List<Task> getList() {
         return storage;
     }
