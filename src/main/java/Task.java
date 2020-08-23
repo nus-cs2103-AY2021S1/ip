@@ -18,6 +18,6 @@ public class Task {
     @Override
     public String toString() {
         String tickOrCross  = isCompleted? "DONE" : "NOT DONE";
-        return String.format("%s %s %s %s", "[", tickOrCross, "] ", taskName);
+        return String.format("%s%s%s %s", "[", tickOrCross, "] ", taskName);
     }
 }
