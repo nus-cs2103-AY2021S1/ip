@@ -6,6 +6,11 @@ public class Event extends Task {
         this.time = time;
     }
 
+    public Event(String description, int isDone, String time) {
+        super(description, isDone);
+        this.time = time;
+    }
+
     @Override
     public String toString() {
         return super.toString().replace("[\u2718]", "[E][\u2718]") + " (at: " + time + ")";
@@ -14,5 +19,9 @@ public class Event extends Task {
     @Override
     public String deleteMessage() {
         return super.deleteMessage().replace("[\u2718]", "[T][\u2718]");
+    }
+
+    public String data() {
+        return  "T" + super.data() + " | " + time;
     }
 }

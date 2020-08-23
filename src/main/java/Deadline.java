@@ -6,6 +6,11 @@ public class Deadline extends Task{
         this.time = time;
     }
 
+    public Deadline(String description, int isDone, String time) {
+        super(description, isDone);
+        this.time = time;
+    }
+
     @Override
     public String toString() {
         return super.toString().replace("[\u2718]", "[D][\u2718]") + " (by: " + time + ")";
@@ -15,4 +20,9 @@ public class Deadline extends Task{
     public String deleteMessage() {
         return super.deleteMessage().replace("[\u2718]", "[T][\u2718]");
     }
+
+    public String data() {
+        return  "D" + super.data() + " | " + time;
+    }
+
 }
