@@ -1,3 +1,5 @@
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,23 +19,33 @@ public class Duke {
 
     String convertTaskToText (Task task) {
         if (task instanceof TodoTask) {
-            return "T" + " | " + "0" + " | " + task.description;
+            return "T" + " | " + (task.isDone ? "1" : "0") + " | " + task.description;
         } else if (task instanceof DeadlineTask) {
-            return "D" + " | " + "0" + " | " + task.description + " | " + ((DeadlineTask) task).deadline;
+            return "D" + " | " + (task.isDone ? "1" : "0") + " | " + task.description + " | " + ((DeadlineTask) task).deadline;
         } else {
-            return "E" + " | " + "0" + " | " + task.description + " | " + ((EventTask) task).timing;
+            return "E" + " | " + (task.isDone ? "1" : "0") + " | " + task.description + " | " + ((EventTask) task).timing;
         }
     }
 
     void writeToFile(FileWriterCommand command, Task task) throws IOException {
-        // create a fileWriter in append mode instead of overwriting
         FileWriter fw = new FileWriter(DATA_PATHNAME, true);
+        List<String> fileContent = Files.readAllLines(Paths.get(DATA_PATHNAME));
         switch (command) {
             case APPEND: {
-                fw.append(convertTaskToText(task));
+                fileContent.add(convertTaskToText(task));
                 break;
             }
+            case UPDATE: {
+                int currentIndex = tasks.indexOf(task);
+                fileContent.set(currentIndex, convertTaskToText(task));
+                break;
+            }
+            case DELETE: {
+                fileContent.remove(convertTaskToText(task));
+            }
         }
+
+        Files.write(Paths.get(DATA_PATHNAME),fileContent);
         fw.close();
     }
 
@@ -77,16 +89,29 @@ public class Duke {
     }
 
     void completeTask(int index) {
-        Task completedTask = tasks.get(index -1 );
-        completedTask.markAsDone();
-        System.out.println("Nice! I've marked this task as done:\n " + completedTask);
+        try {
+            Task completedTask = tasks.get(index - 1);
+            completedTask.markAsDone();
+            writeToFile(FileWriterCommand.UPDATE, completedTask);
+            System.out.println("Nice! I've marked this task as done:\n " + completedTask);
+        } catch (IOException error) {
+            System.out.println(error);
+        }
     }
 
     void deleteTask (int index) {
+        try  {
         Task deletedTask = tasks.get(index - 1);
         tasks.remove(index - 1);
+
+        writeToFile(FileWriterCommand.DELETE, deletedTask);
+
         System.out.println("Noted. I've removed this task:\n" + deletedTask);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+
+        } catch (IOException error) {
+            System.out.println(error);
+        }
     }
 
     void exit() {
