@@ -6,6 +6,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String toSaveFormat() {
+        return "event " + super.toSaveFormat() + " /at " + at;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: " + at + ")";
     }

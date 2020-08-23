@@ -1,0 +1,51 @@
+todoasdadas
+todo
+todo 
+list
+list
+deadlineded
+deadline
+deadline 
+deadline testing
+deadline testing 
+deadline testing /by
+deadline testing /asdas
+deadline testing /asdasd 123
+list
+list
+eventasdasdasd
+event
+event 
+event testing
+event testing 
+event testing /at
+event testing /asdas
+event testing /asdasd 123
+todo
+todo 
+todoasdadas
+list
+list
+doneasdasdasd
+done
+done 
+done 22
+done 22 33
+done 2222222222
+done 1 2
+done 1 2 3 4 5 6
+done poop
+done poop poop
+list
+list
+deleteasdasdasd
+delete
+delete 
+delete 22
+delete 22 33
+delete 2222222222
+delete 1 2
+delete 1 2 3 4 5 6
+delete poop
+delete poop poop
+bye
