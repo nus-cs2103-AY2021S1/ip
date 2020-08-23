@@ -8,7 +8,8 @@ public enum Commands {
     EVENT("event", "Add an event with date and time(optional) e.g event buy smth /at 2020-12-20 1800"),
     TODO("todo", "Add a todo"),
     DELETE("delete", "Delete a duke.task"),
-    HELP("help", "For dummies, like YOU");
+    HELP("help", "For dummies, like YOU"),
+    FIND("find", "Find tasks with keywords e.g find book");
 
     private String action;
     private String description;
