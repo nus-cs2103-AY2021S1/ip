@@ -1,6 +1,6 @@
 todo borrow book
-deadline do homework /by no idea :-p
-event project meeting /at Mon 2-4pm
+deadline return book /by 2019-10-15
+event project meeting /at 2010-08-17
 list
 done 1
 list

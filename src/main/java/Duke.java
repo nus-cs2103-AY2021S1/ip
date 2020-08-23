@@ -1,18 +1,18 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public final static String FILEPATH = System.getProperty("user.dir") + (System.getProperty("user.dir").endsWith("text-ui-test")
-            ? "/duke.txt"
-            : "/text-ui-test/duke.txt");
+    public final static String FILEPATH = System.getProperty("user.dir") + "/duke.txt";
     
     private static void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
         fw.write(textToAppend + "\n");
-        //System.out.println(textToAppend);
+//        System.out.println(textToAppend);
         fw.close();
     }
 
@@ -65,7 +65,10 @@ public class Duke {
                         }
                         int start = echo.indexOf("/at");
                         String date = echo.substring(start + 4);
-                        Event t = new Event(echo.substring(6, start - 1), date);
+                        LocalDate d = LocalDate.parse(date);
+                        String formattedDate = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+
+                        Event t = new Event(echo.substring(6, start - 1), formattedDate);
                         books.add(t);
 
                         appendToFile(FILEPATH, "Got it. I've added this task:");
@@ -78,7 +81,10 @@ public class Duke {
 
                         int start = echo.indexOf("/by");
                         String date = echo.substring(start + 4);
-                        Deadline t = new Deadline(echo.substring(9, start - 1), date);
+                        LocalDate d = LocalDate.parse(date);
+                        String formattedDate = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+
+                        Deadline t = new Deadline(echo.substring(9, start - 1), formattedDate);
                         books.add(t);
 
                         appendToFile(FILEPATH, "Got it. I've added this task:");
