@@ -27,6 +27,15 @@ public class Duke {
     private int getNumTasks() {
         return this.tasks.getTaskList().size();
     }
+
+    /**
+     * Distributes each command based on its type, then return a string that will be shown to the user.
+     * @param commandType
+     * @param tokens
+     * @param isLoaded
+     * @return message to user
+     * @throws DukeException
+     */
     protected String furtherProcessing(Commands commandType, String[] tokens, boolean isLoaded) throws DukeException {
         Task parsedTask = new Task("");
         if(commandType == Commands.DEADLINE || commandType == Commands.EVENT || commandType == Commands.TODO) {
@@ -71,6 +80,13 @@ public class Duke {
         return parsedTask.getUiOutput();
     }
 
+    /**
+     * Strips whitespaces and tokenizes each command before further processing
+     * @param command
+     * @param isLoaded
+     * @return message to user
+     * @throws DukeException
+     */
     protected String processedCommand(String command, boolean isLoaded) throws DukeException {
         command = command.strip();
         if(command.equals("")) return "";
@@ -82,6 +98,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Reads input and return output to the user
+     */
     protected void run() {
         Ui.printDialog("Hello! I'm the Riddler. Type 'help' if you know nothing HAHAHA\n    Your tasks will be saved at /data\n    What can WE do for you?");
         Scanner sc = new Scanner(System.in);

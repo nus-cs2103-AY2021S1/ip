@@ -10,6 +10,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class SaveData {
+    /**
+     * Converts saved tasks to string commands
+     * @param tasks
+     * @return String
+     */
     private static String taskToCommand(ArrayList<Task> tasks) {
         String commands = "";
         for(Task task : tasks) {
@@ -26,6 +31,12 @@ public class SaveData {
         }
         return commands;
     }
+
+    /**
+     * Saves current tasks
+     * @param path
+     * @param data
+     */
     public static void saveData(String path, ArrayList<Task> data) {
         //System.out.println("hello");
         try {

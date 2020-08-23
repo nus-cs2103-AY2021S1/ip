@@ -22,6 +22,13 @@ public class TaskList {
     public void addTask(Task task) {
         this.taskList.add(task);
     }
+
+    /**
+     * Marks task as done
+     * @param markNumber
+     * @return status string
+     * @throws DukeInvalidArgumentException
+     */
     public String doneTask(int markNumber) throws DukeInvalidArgumentException {
         try {
             Task marked = taskList.get(markNumber - 1);
@@ -31,6 +38,14 @@ public class TaskList {
             throw new DukeInvalidArgumentException("Invalid number");
         }
     }
+
+    /**
+     * Deletes task
+     * @param markNumber
+     * @param numTasks
+     * @return status string
+     * @throws DukeInvalidArgumentException
+     */
     public String deleteTask(int markNumber, int numTasks) throws DukeInvalidArgumentException {
         try {
             Task marked = taskList.get(markNumber - 1);
@@ -40,6 +55,12 @@ public class TaskList {
             throw new DukeInvalidArgumentException("Invalid number");
         }
     }
+
+    /**
+     * Filters tasks based on deadline
+     * @param deadline
+     * @return message to user
+     */
     public String filteredTaskList(LocalDate deadline) {
         String res = "Here are the tasks in your list:\n    ";
         for(int i = 0;i < taskList.size();i++) {

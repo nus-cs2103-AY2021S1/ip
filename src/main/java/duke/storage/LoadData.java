@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LoadData {
+    /**
+     * Loads saved tasks
+     * @param path
+     * @return commands
+     */
     public static ArrayList<String> getSavedTasks(String path) {
         ArrayList<String> savedTasks = new ArrayList<>();
         try {

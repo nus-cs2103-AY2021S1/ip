@@ -8,6 +8,11 @@ public class Ui {
         System.out.println("    " + content + "\n");
         System.out.println("    ----------------------------------------");
     }
+
+    /**
+     * Prints all tasks
+     * @param taskStorage
+     */
     public static void printStoredTasks(ArrayList<Task> taskStorage) {
         String result = "Here are the tasks in your list:\n    ";
         for(int i= 0; i < taskStorage.size(); i++) {

@@ -26,6 +26,13 @@ public class Parser {
         if(isLoaded && isDone) eventTask.markAsDone();
         return eventTask;
     }
+
+    /**
+     * Extracts content and deadline from tokens
+     * @param isLoaded
+     * @param tokens
+     * @return content and deadline as strings
+     */
     public String[] extractData(boolean isLoaded, String[] tokens) {
         String content = "";
         String deadlineStr = "";
@@ -42,6 +49,17 @@ public class Parser {
         }
         return new String[]{content, deadlineStr};
     }
+
+    /**
+     * Parses task strings
+     * @param commandType
+     * @param tokens
+     * @param isLoaded
+     * @param numTasks
+     * @return parsed tasks
+     * @throws DukeException
+     * @throws DukeInvalidArgumentException
+     */
     public Task parseCommand(Commands commandType, String[] tokens, boolean isLoaded, int numTasks) throws DukeException, DukeInvalidArgumentException{
         String result_prefix = "Got it. I've added this task:\n      ";
         String result_subfix = "Now you have " + (numTasks + 1) + " tasks in the list.";
