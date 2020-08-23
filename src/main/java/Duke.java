@@ -16,6 +16,19 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         greet(logo);
+<<<<<<< Updated upstream
+=======
+
+        // try to open the duke file
+        try {
+            storage.reloadStorage(tasks);
+        } catch (FileNotFoundException ex) {
+            System.out.println("Duke data do not exist!");
+        } catch (DukeException ex) {
+
+        }
+
+>>>>>>> Stashed changes
         Scanner sc = new Scanner(System.in);
         while (dukeOn) {
             String input = sc.nextLine();
