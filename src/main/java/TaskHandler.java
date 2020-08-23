@@ -68,7 +68,7 @@ public class TaskHandler {
             try {
                 return processTaskWithTime(input, tasktype, "/by");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("Oops, use add deadline format: deadline [task] /by [time]");
+                throw new DukeException("Oops, use add deadline format: deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')]");
             }
         } else if (tasktype == Task.taskType.EVENT) {
             try {
