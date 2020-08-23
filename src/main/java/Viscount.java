@@ -50,7 +50,7 @@ public class Viscount {
         return result;
     }
 
-    private static void addToTaskList(Task task) {
+    private static void addToTaskList(Task task) throws IOException {
         tasks.add(task);
         Viscount.saveToDisk();
 
@@ -59,7 +59,7 @@ public class Viscount {
                 + String.format("\nNow you have %d tasks in the list.", tasks.size()));
     }
 
-    private static void removeFromTaskList(int taskIndex) {
+    private static void removeFromTaskList(int taskIndex) throws IOException {
         Task task = tasks.get(taskIndex);
         tasks.remove(taskIndex);
         Viscount.saveToDisk();
@@ -69,14 +69,14 @@ public class Viscount {
                 + String.format("\nNow you have %d tasks in the list.", tasks.size()));
     }
 
-    private static void markAsDone(Task task) {
+    private static void markAsDone(Task task) throws IOException {
         task.setDone(true);
         Viscount.saveToDisk();
         
         Viscount.speak("Very good! I have marked this task as done:\n" + task.toString());
     }
 
-    private static void parseInput(List<String> arguments) throws ViscountException {
+    private static void parseInput(List<String> arguments) throws ViscountException, IOException {
         String command = arguments.get(0);
 
         if (command.equals("list")) {
@@ -161,7 +161,9 @@ public class Viscount {
         }
     }
 
-    private static void chat() {
+    private static void chat() throws IOException {
+        Viscount.speak("Good day to you! I'm Viscount.\nWhat can I do for you on this blessed day?");
+        
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -176,54 +178,50 @@ public class Viscount {
                 input = sc.nextLine();
             }
         }
+
+        Viscount.speak("Farewell my friend, I hope to see you again!");
     }
 
-    private static void loadFromDisk() {
+    private static void loadFromDisk() throws IOException {
+        System.out.println(">> Loading data...");
+        
         Path path = Paths.get(Viscount.DATA_FILE_PATH);
         boolean doesFileExist = Files.exists(path);
 
         if (doesFileExist) {
-            try {
-                File f = new File(Viscount.DATA_FILE_PATH);
-                Scanner sc = new Scanner(f);
-                while (sc.hasNext()) {
-                    String line = sc.nextLine();
-                    if (line.isEmpty()) {
-                        // If the data file has empty lines, skip them
-                        continue;
-                    } else {
-                        List<String> taskData = Arrays.asList(line.split("\\|"));
+            File f = new File(Viscount.DATA_FILE_PATH);
+            Scanner sc = new Scanner(f);
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+                if (line.isEmpty()) {
+                    // If the data file has empty lines, skip them
+                    continue;
+                } else {
+                    List<String> taskData = Arrays.asList(line.split("\\|"));
 
-                        String taskType = taskData.get(0);
-                        boolean taskIsDone = !taskData.get(1).equals("0");
-                        String taskDescription = taskData.get(2);
+                    String taskType = taskData.get(0);
+                    boolean taskIsDone = !taskData.get(1).equals("0");
+                    String taskDescription = taskData.get(2);
 
-                        if (taskType.equals("T")) {
-                            tasks.add(new Todo(taskDescription, taskIsDone));
-                        } else if (taskType.equals("D")) {
-                            String dueDate = taskData.get(3);
-                            tasks.add(new Deadline(taskDescription, taskIsDone, dueDate));
-                        } else if (taskType.equals("E")) {
-                            String eventTime = taskData.get(3);
-                            tasks.add(new Event(taskDescription, taskIsDone, eventTime));
-                        }
+                    if (taskType.equals("T")) {
+                        tasks.add(new Todo(taskDescription, taskIsDone));
+                    } else if (taskType.equals("D")) {
+                        String dueDate = taskData.get(3);
+                        tasks.add(new Deadline(taskDescription, taskIsDone, dueDate));
+                    } else if (taskType.equals("E")) {
+                        String eventTime = taskData.get(3);
+                        tasks.add(new Event(taskDescription, taskIsDone, eventTime));
                     }
                 }
-            } catch (FileNotFoundException e) {
-                System.out.println(e.toString());
-                System.out.println("Error: file not found. Viscount shutting down.");
             }
         } else {
-            try {
-                Files.write(path, new ArrayList<String>(), StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
-            } catch (IOException e) {
-                System.out.println(e.toString());
-                System.out.println("Error: unable to create data file. Viscount shutting down.");
-            }
+            Files.write(path, new ArrayList<String>(), StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
         }
+
+        System.out.println(">> Data loaded successfully.");
     }
 
-    private static void saveToDisk() {
+    private static void saveToDisk() throws IOException {
         Path path = Paths.get(Viscount.DATA_FILE_PATH);
         List<String> savedData = new ArrayList<>();
 
@@ -231,22 +229,21 @@ public class Viscount {
             savedData.add(task.toTaskData());
         }
 
-        try {
-            Files.write(path, savedData, StandardCharsets.UTF_8, StandardOpenOption.WRITE);
-        } catch (IOException e) {
-            System.out.println(e.toString());
-            System.out.println("Error: unable to write to data file. Viscount shutting down.");
-        }
+        Files.write(path, savedData, StandardCharsets.UTF_8, StandardOpenOption.WRITE);
+    }
+    
+    private static void initialise() throws IOException {
+        Viscount.printLogo();
+        Viscount.loadFromDisk();
     }
 
     public static void main(String[] args) {
-        Viscount.printLogo();
-        Viscount.loadFromDisk();
-
-        Viscount.speak("Good day to you! I'm Viscount.\nWhat can I do for you on this blessed day?");
-
-        Viscount.chat();
-
-        Viscount.speak("Farewell my friend, I hope to see you again!");
+        try {
+            Viscount.initialise();
+            Viscount.chat();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+            System.out.println(">> Viscount shutting down.");
+        }
     }
 }

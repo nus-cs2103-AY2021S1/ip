@@ -4,6 +4,8 @@
  \ \ / / |\___ \| |    / _ \| | | | '_ \| __| 
   \ V /| |____) | |___| (_) | |_| | | | | |_  
    \_/ |_|_____/ \_____\___/ \__,_|_| |_|\__|
+>> Loading data...
+>> Data loaded successfully.
 __________________________________________________
 Good day to you! I'm Viscount.
 What can I do for you on this blessed day?
@@ -51,6 +53,8 @@ __________________________________________________
  \ \ / / |\___ \| |    / _ \| | | | '_ \| __| 
   \ V /| |____) | |___| (_) | |_| | | | | |_  
    \_/ |_|_____/ \_____\___/ \__,_|_| |_|\__|
+>> Loading data...
+>> Data loaded successfully.
 __________________________________________________
 Good day to you! I'm Viscount.
 What can I do for you on this blessed day?
@@ -108,6 +112,8 @@ __________________________________________________
  \ \ / / |\___ \| |    / _ \| | | | '_ \| __| 
   \ V /| |____) | |___| (_) | |_| | | | | |_  
    \_/ |_|_____/ \_____\___/ \__,_|_| |_|\__|
+>> Loading data...
+>> Data loaded successfully.
 __________________________________________________
 Good day to you! I'm Viscount.
 What can I do for you on this blessed day?
