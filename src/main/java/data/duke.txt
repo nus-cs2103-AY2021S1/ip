@@ -1,0 +1,3 @@
+[T][Y] todo work
+[E][Y] this is an event (at: sunday)
+[D][Y] this is a deadline (by: sunday)

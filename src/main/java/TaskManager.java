@@ -1,11 +1,10 @@
 import java.util.List;
-import java.util.ArrayList;
 
 public class TaskManager {
     protected List<Task> tasks;
 
-    public TaskManager() {
-        this.tasks = new ArrayList<>();
+    public TaskManager(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public void showAllTask() {
@@ -36,6 +35,7 @@ public class TaskManager {
                 Task newTask = new Todo(userCommand);
                 this.tasks.add(newTask);
                 this.addedTaskDescription(newTask);
+                FileManipulator.appendToFile(newTask.toString());
             }
         } else if (userCommand.contains("deadline")) { // Deadline
             try {
@@ -47,6 +47,7 @@ public class TaskManager {
                 Task newTask = new Deadline(description, by);
                 this.tasks.add(newTask);
                 this.addedTaskDescription(newTask);
+                FileManipulator.appendToFile(newTask.toString());
             } catch (ArrayIndexOutOfBoundsException e) {
                 // E.g deadline return book /bylmklmlmlkmlkmlmlmlmlmkl Sunday
                 DukeException.invalidDeadline();
@@ -61,6 +62,7 @@ public class TaskManager {
                 Task newTask = new Event(description, at);
                 this.tasks.add(newTask);
                 this.addedTaskDescription(newTask);
+                FileManipulator.appendToFile(newTask.toString());
             } catch (ArrayIndexOutOfBoundsException e) {
                 // E.g event project meeting /atlmklmlmlkmlkmlmlmlmlmkl Mon 2-4pm
                 DukeException.invalidEvent();
@@ -89,12 +91,18 @@ public class TaskManager {
 
                 // Mark as done and report that the task is done
                 Task doneTask = this.tasks.get(index);
+                String currentText = doneTask.toString();
                 doneTask.markAsDone();
+                String amendedText = doneTask.toString();
                 this.doneTaskDescription(doneTask);
+                FileManipulator.amendFile(currentText, amendedText);
             }
         } catch (IndexOutOfBoundsException e) {
             // E.g "done 719329813298712398123" is not valid as number of tasks is cap to 100 by requirements
             DukeException.noSuchTask();
+        } catch (NumberFormatException e) {
+            // E.g "done work"
+            DukeException.invalidCommand();
         }
     }
 
@@ -122,6 +130,7 @@ public class TaskManager {
                 Task deletedTask = this.tasks.get(index);
                 this.tasks.remove(index);
                 this.deletedTaskDescription(deletedTask);
+                FileManipulator.deleteFromFile(deletedTask.toString());
             }
         } catch (IndexOutOfBoundsException e) {
             // E.g "delete 719329813298712398123" is not valid as number of tasks is cap to 100 by requirements

@@ -2,6 +2,7 @@ C:\Users\Wong Jun Long\Documents\ip\src\main\java\Deadline.java
 C:\Users\Wong Jun Long\Documents\ip\src\main\java\Duke.java
 C:\Users\Wong Jun Long\Documents\ip\src\main\java\DukeException.java
 C:\Users\Wong Jun Long\Documents\ip\src\main\java\Event.java
+C:\Users\Wong Jun Long\Documents\ip\src\main\java\FileManipulator.java
 C:\Users\Wong Jun Long\Documents\ip\src\main\java\Task.java
 C:\Users\Wong Jun Long\Documents\ip\src\main\java\TaskManager.java
 C:\Users\Wong Jun Long\Documents\ip\src\main\java\Todo.java
