@@ -1,14 +1,15 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
         String logo = "Duke Melvin";
         System.out.println("Hello from\n" + logo + "\n" + "What can I do for you?");
 
-        List<Task> ls = new ArrayList<>();
+        List<Task> ls = TextToArrayListConverter.readFile();
         String line = "";
         Scanner in = new Scanner(System.in);
 
@@ -19,6 +20,7 @@ public class Duke {
                 switch (line) {
                     case "bye":
                         System.out.println("Bye. Hope to see you again soon!");
+                        ArrayListToTextConverter.convertArrayListToText(ls);
                         break;
                     case "list":
                         for (int x = 0; x < ls.size(); x++) {
@@ -37,6 +39,7 @@ public class Duke {
                                         throw new InvalidDoneCommandException();
                                     } else {
                                         ls.get(itemToBeMarkedAsDone - 1).markAsDone();
+                                        ArrayListToTextConverter.convertArrayListToText(ls);
                                     }
                                 }
                                 break;
@@ -54,6 +57,7 @@ public class Duke {
                                         System.out.println("Noted. I've removed this task:");
                                         System.out.println(item.toString());
                                         System.out.format("Now you have %d tasks in the list\n", ls.size());
+                                        ArrayListToTextConverter.convertArrayListToText(ls);
                                     }
                                 }
 
@@ -70,6 +74,7 @@ public class Duke {
                                     System.out.println("Got it. I've added this task:");
                                     System.out.println(todo.toString());
                                     System.out.format("Now you have %d tasks in the list\n", ls.size());
+                                    ArrayListToTextConverter.convertArrayListToText(ls);
                                     break;
                                 }
 
@@ -83,6 +88,7 @@ public class Duke {
                                 System.out.println(" Got it. I've added this task:");
                                 System.out.println(deadline.toString());
                                 System.out.format("Now you have %d tasks in the list\n", ls.size());
+                                ArrayListToTextConverter.convertArrayListToText(ls);
                                 break;
 
                             case "event":
@@ -95,6 +101,7 @@ public class Duke {
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(event.toString());
                                 System.out.format("Now you have %d tasks in the list\n", ls.size());
+                                ArrayListToTextConverter.convertArrayListToText(ls);
                                 break;
 
                             default:
@@ -104,9 +111,6 @@ public class Duke {
                 }
             } catch (DukeException exception) {
                 System.out.println(exception.getMessage());
-            } catch (Exception exception) {
-                System.out.println(exception.getMessage());
-
             }
 
         }
