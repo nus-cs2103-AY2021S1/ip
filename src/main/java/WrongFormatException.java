@@ -6,8 +6,8 @@ public class WrongFormatException extends DukeException {
     }
 
     @Override
-    public String defaultErrorMessage() {
-        return super.defaultErrorMessage() + " The " + commandName + " " +
+    public String getMessage() {
+        return super.getMessage() + " The " + commandName + " " +
                 "command has to be followed by a\n";
     }
 }

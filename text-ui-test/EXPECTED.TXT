@@ -16,6 +16,12 @@ Hello, I'm Star Bot! What can I do for you?
 Say "bye" to exit.
 
 ------------------------------------------------------
+Noted. I've removed this task:
+[T][✘] first task
+Now you have 0 tasks in the list.
+------------------------------------------------------
+
+------------------------------------------------------
 Got it. I've added this task:
 [T][✘] read book
 Now you have 1 tasks in the list.
@@ -283,6 +289,12 @@ Now you have 0 tasks in the list.
 
 ------------------------------------------------------
 Your list is empty! Let's add some tasks!
+------------------------------------------------------
+
+------------------------------------------------------
+Got it. I've added this task:
+[T][✘] first task
+Now you have 1 tasks in the list.
 ------------------------------------------------------
 
 ------------------------------------------------------

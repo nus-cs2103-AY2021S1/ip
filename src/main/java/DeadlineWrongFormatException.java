@@ -5,8 +5,8 @@ public class DeadlineWrongFormatException extends WrongFormatException {
     }
 
     @Override
-    public String defaultErrorMessage() {
-        return super.defaultErrorMessage() + "description of a task in the " +
+    public String getMessage() {
+        return super.getMessage() + "description of a task in the " +
                 "following format:\ntask /by YYYY-MM-DD hhmm\nwhere hh is hours and mm is minutes.\nPlease ensure " +
                 "that the date and time are valid.";
     }

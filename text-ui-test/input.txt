@@ -1,3 +1,4 @@
+delete 1
 todo read book
 event project meeting /at Aug 6th 2-4pm
 done 1
@@ -40,4 +41,5 @@ delete 1
 delete 1
 delete 1
 list
+todo first task
 bye

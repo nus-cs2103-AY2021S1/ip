@@ -6,7 +6,7 @@ public class TaskIndexOutOfBoundsException extends DukeException {
     }
 
     @Override
-    public String defaultErrorMessage() {
-        return super.defaultErrorMessage() + " There is no task no. " + index;
+    public String getMessage() {
+        return super.getMessage() + " There is no task no. " + index;
     }
 }

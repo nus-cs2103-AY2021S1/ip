@@ -5,7 +5,7 @@ public class DoneWrongFormatException extends WrongFormatException {
     }
 
     @Override
-    public String defaultErrorMessage() {
-        return super.defaultErrorMessage() + "single whitespace and an integer";
+    public String getMessage() {
+        return super.getMessage() + "single whitespace and an integer";
     }
 }

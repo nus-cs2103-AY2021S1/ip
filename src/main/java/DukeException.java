@@ -1,6 +1,7 @@
 public class DukeException extends Exception {
 
-    public String defaultErrorMessage() {
+    @Override
+    public String getMessage() {
         return "OOPS!";
     }
 }

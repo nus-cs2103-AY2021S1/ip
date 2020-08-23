@@ -5,7 +5,7 @@ public class TodoWrongFormatException extends WrongFormatException {
     }
 
     @Override
-    public String defaultErrorMessage() {
-        return super.defaultErrorMessage() + "description of a task.";
+    public String getMessage() {
+        return super.getMessage() + "description of a task.";
     }
 }
