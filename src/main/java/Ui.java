@@ -70,4 +70,15 @@ public class Ui {
     public void printBorder() {
         System.out.print("---------------------------\n");
     }
+
+    public void matchingMessage(TaskList arrayOfTasks) {
+        System.out.println("These are the matching tasks in your list:");
+        System.out.println(arrayOfTasks.toString());
+        printBorder();
+    }
+
+    public void noMatchMessage() {
+        System.out.println("There are no matching tasks!");
+        printBorder();
+    }
 }

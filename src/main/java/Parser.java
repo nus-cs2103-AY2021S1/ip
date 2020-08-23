@@ -156,6 +156,17 @@ public class Parser {
                 newTaskObject = new DeleteCommand(currentTaskIndex);
                 break;
 
+            case "find":
+                String[] arrayOfElements = inputLine.split(" ");
+                int numOfTokens = arrayOfElements.length;
+                if (numOfTokens < 2) {
+                    throw new DukeException("Please specific keyword to locate task!");
+                }
+                String tempString = inputLine.split("find")[1];
+                String strippedKeyword = tempString.strip();
+                newTaskObject = new FindCommand(strippedKeyword);
+                break;
+
             default:
                 throw new DukeException("Catastrophe detected! I'm sorry, but '" + commandCheck
                                         + "' is not within my realm of knowledge. ☹");
