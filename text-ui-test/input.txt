@@ -5,7 +5,5 @@ todo join sports club
 todo borrow book
 list
 done 1
-done 2
 done 4
-delete 3
-bye
+delete 5
