@@ -65,8 +65,7 @@ public class TaskList {
         }
         return index;
     }
-
-
+    
     protected ArrayList<Task> findTask(String keyword) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task task: this.taskList) {

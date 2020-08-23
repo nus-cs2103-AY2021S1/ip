@@ -15,6 +15,7 @@ public class DeadlineCommand extends Command {
      * @param command Complete line of the deadline command entered by user
      */
     public DeadlineCommand(String command) {
+
         this.command = command;
     }
 
@@ -26,7 +27,8 @@ public class DeadlineCommand extends Command {
      * @throws WrongDateFormatException when the date is not typed in the correct format
      */
     @Override
-    protected void execute(TaskList tasks, UI dukeUI) throws InvalidTaskDescriptionException, WrongDateFormatException {
+    protected void execute(TaskList tasks, UI dukeUI)
+            throws InvalidTaskDescriptionException, WrongDateFormatException {
         try {
             String[] taskDetails = this.command.split("/");
             LocalDate taskDate = LocalDate.parse(taskDetails[1]);
