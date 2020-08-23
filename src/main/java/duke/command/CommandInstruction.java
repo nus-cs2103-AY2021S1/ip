@@ -1,3 +1,5 @@
+package duke.command;
+
 public enum CommandInstruction {
     LIST("list"),
     BYE("bye"),
