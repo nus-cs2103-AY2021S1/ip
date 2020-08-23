@@ -2,6 +2,7 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,8 @@ public final class FileUtil {
 
             while (line != null) {
                 String[] lineData = line.split("\\|");
-                Task task = new Task(lineData[0], lineData[2], Boolean.valueOf(lineData[1]));
+
+                Task task = new Task(lineData[0], lineData[2], lineData.length == 3 ? null : LocalDate.parse(lineData[3]), Boolean.valueOf(lineData[1]));
 
                 addToDoItem(task);
 

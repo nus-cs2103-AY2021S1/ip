@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.util.*;
+import java.time.LocalDate;
+import java.io.IOException;
 import java.io.FileNotFoundException;
 
 
@@ -40,15 +42,15 @@ public class Duke {
         return task;
     }
 
-    public Task addToDoItem(String type, String todo) {
+    public Task addToDoItem(String type, String todo, LocalDate date) {
         Task newTask = null;
 
         if (type.equals("todo")) {
-            newTask = new Task("T", todo, false);
+            newTask = new Task("T", todo, null,false);
         } else if (type.equals("deadline")) {
-            newTask = new Task("D", todo, false);
+            newTask = new Task("D", todo, date, false);
         } else if (type.equals("event")) {
-            newTask = new Task("E", todo, false);
+            newTask = new Task("E", todo, date, false);
         }
 
         db.addToDoItem(newTask);
@@ -128,36 +130,36 @@ public class Duke {
                             System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                         } else {
                             line = String.join(" ", Arrays.copyOfRange(lineData, 1, lineData.length));
+
+                            Task newTask = duke.addToDoItem(type, line, null);
+
+                            System.out.println("Got it. I've added this task: ");
+                            System.out.println(newTask);
+                            System.out.println(duke.getTotalItemsDescription());
                         }
-                    } else if (type.equals("deadline")) {
+                    } else if (type.equals("deadline") || type.equals("event")) {
+                        int byIndex = -1;
+
                         for (int i = 0; i < lineData.length; i++) {
-                            if (lineData[i].equals("/by")) {
-                                lineData[i] = "(by:";
+                            if (lineData[i].equals("/by") || lineData[i].equals("/at")) {
+                                byIndex = i;
                                 break;
                             }
                         }
 
-                        line = String.join(" ", Arrays.copyOfRange(lineData, 1, lineData.length)) + ")";
-                    } else if (type.equals("event")) {
-                        for (int i = 0; i < lineData.length; i++) {
-                            if (lineData[i].equals("/at")) {
-                                lineData[i] = "(at:";
-                                break;
-                            }
-                        }
+                        String dateStr = lineData[byIndex + 1];
+                        LocalDate date = LocalDate.parse(dateStr);
 
-                        line = String.join(" ", Arrays.copyOfRange(lineData, 1, lineData.length)) + ")";
-                    } else {
-                        isValidEntry = false;
-                        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    }
+                        line = String.join(" ", Arrays.copyOfRange(lineData, 1, byIndex));
 
-                    if (isValidEntry) {
-                        Task newTask = duke.addToDoItem(type, line);
+                        Task newTask = duke.addToDoItem(type, line, date);
 
                         System.out.println("Got it. I've added this task: ");
                         System.out.println(newTask);
                         System.out.println(duke.getTotalItemsDescription());
+                    } else {
+                        isValidEntry = false;
+                        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
             }
