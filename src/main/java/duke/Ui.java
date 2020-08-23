@@ -199,7 +199,7 @@ public class Ui {
 
     public void relevantTaskHeader() {
         System.out.print(lines);
-        System.out.println(" Here is the list of matching tasks in your storage: ");
+        System.out.println(" Here is the list of matching tasks in your storage:");
     }
 
 }

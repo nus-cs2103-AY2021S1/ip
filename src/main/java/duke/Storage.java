@@ -46,8 +46,8 @@ public class Storage {
 
         try {
             String home = System.getProperty("user.dir");
-//            Path currDir = Paths.get(home).getParent();
-            Path currDir = Paths.get(home);
+            Path currDir = Paths.get(home).getParent();
+//            Path currDir = Paths.get(home);
             Path targetPath = Paths.get(currDir.toString(), filePath);
             File directory = new File(Paths.get(currDir.toString(), dirName).toString());
             boolean isDirCreated;

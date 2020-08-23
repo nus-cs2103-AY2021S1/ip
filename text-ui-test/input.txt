@@ -28,4 +28,10 @@ CheCk 2019/02/20
 CheCk 2019/20/20
 CheCk 2019/20
 Check 2019/02/22
+find
+find books
+todo buy boOks
+todo read books
+find    books
+find book
 bye
