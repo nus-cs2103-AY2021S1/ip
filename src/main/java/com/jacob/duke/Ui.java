@@ -1,6 +1,6 @@
-package com.jacob.duke;
+package main.java.com.jacob.duke;
 
-import com.jacob.duke.task.Task;
+import main.java.com.jacob.duke.task.Task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,9 +19,9 @@ public class Ui {
     }
 
     public void showTaskDeleted(String taskDescription, List<Task> taskList) {
-        System.out.printf(" Noted. I've removed this task:\n " +
-                "   %s\n" +
-                " Now you have %d tasks in the list.\n", taskDescription, taskList.size());
+        System.out.printf(" Noted. I've removed this task:\n "
+                + "   %s\n"
+                + " Now you have %d tasks in the list.\n", taskDescription, taskList.size());
 
     }
 
@@ -29,7 +29,7 @@ public class Ui {
         int count = 1;
         System.out.println(" Here are the tasks in your list:");
         for (Task t: taskList) {
-            System.out.println("  "+ count + ". " + t.getCurrentStatus());
+            System.out.println("  " + count + ". " + t.getCurrentStatus());
             count++;
         }
     }
@@ -63,7 +63,7 @@ public class Ui {
         System.out.println(" -----------------");
     }
 
-    public void showWelcomeMessage(){
+    public void showWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -75,7 +75,6 @@ public class Ui {
     public String getConsoleInput() {
         //get console inputs
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        return input;
+        return sc.nextLine();
     }
 }

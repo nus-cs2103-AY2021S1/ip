@@ -1,7 +1,7 @@
-package com.jacob.duke.task;
+package main.java.com.jacob.duke.task;
 
 
-import com.jacob.duke.task.Task;
+import main.java.com.jacob.duke.task.Task;
 
 public class Todo extends Task {
 

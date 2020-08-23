@@ -1,6 +1,6 @@
-package com.jacob.duke;
+package main.java.com.jacob.duke;
 
-import com.jacob.duke.command.*;
+import main.java.com.jacob.duke.command.*;
 
 public class Duke {
     private Storage storage;
@@ -27,7 +27,7 @@ public class Duke {
                 String fullCommand = ui.getConsoleInput();
                 ui.printLines();
                 Command c = parser.parse(fullCommand);
-                c.execute(ui,tasks,storage);
+                c.execute(ui, tasks, storage);
 
                 //write to file
                 storage.writeToFile();

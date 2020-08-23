@@ -1,4 +1,4 @@
-package com.jacob.duke.task;
+package main.java.com.jacob.duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

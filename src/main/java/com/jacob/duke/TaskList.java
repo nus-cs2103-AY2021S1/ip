@@ -1,6 +1,6 @@
-package com.jacob.duke;
+package main.java.com.jacob.duke;
 
-import com.jacob.duke.task.Task;
+import main.java.com.jacob.duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;

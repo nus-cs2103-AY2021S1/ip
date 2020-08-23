@@ -1,6 +1,6 @@
-package com.jacob.duke.command;
+package main.java.com.jacob.duke.command;
 
-import com.jacob.duke.*;
+import main.java.com.jacob.duke.*;
 
 
 public interface Command {

@@ -1,4 +1,4 @@
-package com.jacob.duke.task;
+package main.java.com.jacob.duke.task;
 
 
 public class Deadline extends Task {

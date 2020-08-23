@@ -1,8 +1,8 @@
-package com.jacob.duke.command;
+package main.java.com.jacob.duke.command;
 
-import com.jacob.duke.*;
-import com.jacob.duke.task.Event;
-import com.jacob.duke.task.Task;
+import main.java.com.jacob.duke.*;
+import main.java.com.jacob.duke.task.Event;
+import main.java.com.jacob.duke.task.Task;
 
 import java.util.List;
 

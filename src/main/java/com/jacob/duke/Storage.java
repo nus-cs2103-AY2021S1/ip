@@ -1,9 +1,9 @@
-package com.jacob.duke;
+package main.java.com.jacob.duke;
 
-import com.jacob.duke.task.Deadline;
-import com.jacob.duke.task.Event;
-import com.jacob.duke.task.Task;
-import com.jacob.duke.task.Todo;
+import main.java.com.jacob.duke.task.Deadline;
+import main.java.com.jacob.duke.task.Event;
+import main.java.com.jacob.duke.task.Task;
+import main.java.com.jacob.duke.task.Todo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,29 +62,31 @@ public class Storage {
         String description = inputs[2];
 
         switch (type) {
-            case "T":
-                Task theTodo = new Todo(description);
-                if (isDone == 1) {
-                    theTodo.setDone();
-                }
-                taskList.add(count, theTodo);
-                break;
-            case "E":
-                String dateTime = inputs[3];
-                Task theEvent = new Event(description, dateTime);
-                if (isDone == 1) {
-                    theEvent.setDone();
-                }
-                taskList.add(count, theEvent);
-                break;
-            case "D":
-                dateTime = inputs[3];
-                Task theDeadline = new Deadline(description, dateTime);
-                if (isDone == 1) {
-                    theDeadline.setDone();
-                }
-                taskList.add(count, theDeadline);
-                break;
+        case "T":
+            Task theTodo = new Todo(description);
+            if (isDone == 1) {
+                theTodo.setDone();
+            }
+            taskList.add(count, theTodo);
+            break;
+        case "E":
+            String dateTime = inputs[3];
+            Task theEvent = new Event(description, dateTime);
+            if (isDone == 1) {
+                theEvent.setDone();
+            }
+            taskList.add(count, theEvent);
+            break;
+        case "D":
+            dateTime = inputs[3];
+            Task theDeadline = new Deadline(description, dateTime);
+            if (isDone == 1) {
+                theDeadline.setDone();
+            }
+            taskList.add(count, theDeadline);
+            break;
+        default:
+            break;
         }
     }
 
@@ -115,10 +118,10 @@ public class Storage {
     public void writeToFile() {
         try {
             BufferedWriter bfWriter = new BufferedWriter(new FileWriter(filename));
-            bfWriter.write(stringBufferOfData.toString());//writes the edited string buffer to the new file
-            bfWriter.close();//closes the file
+            bfWriter.write(stringBufferOfData.toString()); //writes the edited string buffer to the new file
+            bfWriter.close(); //closes the file
 
-        } catch (Exception e) {//if an exception occurs
+        } catch (Exception e) { //if an exception occurs
             System.out.println("Error occurred while attempting to write to file: " + e.getMessage());
         }
     }
@@ -130,7 +133,8 @@ public class Storage {
         int startIndex = stringBufferOfData.indexOf(lineToEdit);
         int endIndex = startIndex + lineToEdit.length();
 
-        stringBufferOfData.replace(startIndex, endIndex, replacementText);//this is where the actual replacement of the text happens
+        //replace text
+        stringBufferOfData.replace(startIndex, endIndex, replacementText);
 
     }
 
@@ -161,11 +165,13 @@ public class Storage {
 
         System.out.println(storage.stringBufferOfData);
 
-        System.out.println("Please enter the contents of a line you would like to edit: ");//prompt for a line in file to edit
-        String lineToEdit = sc.nextLine();//read the line to edit
+        //prompt for a line in file to edit
+        System.out.println("Please enter the contents of a line you would like to edit: ");
+        String lineToEdit = sc.nextLine();
 
-        System.out.println("Please enter the the replacement text: ");//prompt for a line in file to replace
-        String replacementText = sc.nextLine();//read the line to replace
+        //prompt for a line in file to replace
+        System.out.println("Please enter the the replacement text: ");
+        String replacementText = sc.nextLine();
 
         try {
             storage.replacement(lineToEdit, replacementText);
@@ -174,12 +180,12 @@ public class Storage {
         }
 
         //add text
-        System.out.println("Please enter the the append text: ");//prompt for a line in file to replace
+        System.out.println("Please enter the the append text: "); //prompt for a line in file to replace
         String appendText = sc.nextLine();
         storage.appendText(appendText);
 
         //add text
-        System.out.println("Please enter the text to be removed: ");//prompt for a line in file to replace
+        System.out.println("Please enter the text to be removed: "); //prompt for a line in file to replace
         String removeText = sc.nextLine();
         storage.removeText(removeText);
 

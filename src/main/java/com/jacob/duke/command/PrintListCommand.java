@@ -1,9 +1,9 @@
-package com.jacob.duke.command;
+package main.java.com.jacob.duke.command;
 
-import com.jacob.duke.Storage;
-import com.jacob.duke.task.Task;
-import com.jacob.duke.TaskList;
-import com.jacob.duke.Ui;
+import main.java.com.jacob.duke.Storage;
+import main.java.com.jacob.duke.task.Task;
+import main.java.com.jacob.duke.TaskList;
+import main.java.com.jacob.duke.Ui;
 
 import java.util.List;
 

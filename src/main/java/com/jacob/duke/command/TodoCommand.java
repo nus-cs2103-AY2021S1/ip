@@ -1,8 +1,8 @@
-package com.jacob.duke.command;
+package main.java.com.jacob.duke.command;
 
-import com.jacob.duke.*;
-import com.jacob.duke.task.Task;
-import com.jacob.duke.task.Todo;
+import main.java.com.jacob.duke.*;
+import main.java.com.jacob.duke.task.Task;
+import main.java.com.jacob.duke.task.Todo;
 
 import java.util.List;
 
@@ -41,4 +41,5 @@ public class TodoCommand implements Command {
     public boolean isBye() {
         return false;
     }
+
 }
