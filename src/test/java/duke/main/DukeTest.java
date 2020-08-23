@@ -1,11 +1,13 @@
 package duke.main;
 
-import duke.task.*;
-import duke.storage.*;
-import duke.exception.*;
-import duke.ui.*;
-import duke.command.*;
-import duke.parser.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+import duke.storage.TaskList;
+import duke.exception.DukeException;
+import duke.ui.Ui;
+import duke.command.ListCommand;
+import duke.parser.Parser;
 
 import org.junit.jupiter.api.Test;
 

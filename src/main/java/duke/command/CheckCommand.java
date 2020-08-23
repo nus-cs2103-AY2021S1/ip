@@ -1,7 +1,8 @@
 package duke.command;
 
-import duke.storage.*;
-import duke.task.*;
+import duke.storage.Storage;
+import duke.storage.TaskList;
+import duke.task.Task;
 import duke.ui.Ui;
 
 import java.time.LocalDate;

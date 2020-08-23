@@ -1,6 +1,6 @@
 package duke.ui;
 
-import duke.task.*;
+import duke.task.Task;
 
 import java.time.LocalDate;
 
