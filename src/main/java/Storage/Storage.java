@@ -4,7 +4,6 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -13,9 +12,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
 
+    /** The filename for the data file */
     private String fileName;
+
+    /** Boolean for whether or not Storage should append data to the data file */
     private boolean appendToFile = false;
 
     public Storage(String fileName) {
@@ -27,8 +32,12 @@ public class Storage {
         this.appendToFile = appendToFile;
     }
 
+    /**
+     * Loads all the tasks from the data file into a list.
+     * @return an arraylist with all of the tasks from the data file
+     */
     public ArrayList<Task> load() {
-        ArrayList<Task> taskList= new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
         try {
             for (int i = 1; i <= getNumOfTasks(); i++) {
                 String taskLine = printLine(i);
@@ -72,10 +81,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Tells the user if there has been an error with the data file.
+     */
     protected static void fileError() {
         System.out.println("Oops! There's been an error with the data file, please try again!");
     }
 
+    /**
+     * Gets the number of tasks from the data file.
+     * @return the number of tasks in the data file
+     */
     public int getNumOfTasks() {
         try {
             createFile(this.fileName);
@@ -94,6 +110,10 @@ public class Storage {
         return 0;
     }
 
+    /**
+     * Creates a data file if it doesn't exist.
+     * @param fileName the name of the data file
+     */
     protected void createFile(String fileName) {
         try {
             File dataFile = new File(fileName);
@@ -105,6 +125,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Processes a line from the data file to the form of the toString of the Tasks.
+     * @param taskLine a line from the data file
+     * @return the line from the file to the form of the toString of the Tasks
+     */
     public String processLine(String taskLine) {
         String[] taskInfo = taskLine.trim().split(" [|] ");
         String taskType = taskInfo[0];
@@ -132,6 +157,9 @@ public class Storage {
         return result;
     }
 
+    /**
+     * Reads the data from the data file.
+     */
     public void readFile() {
         createFile(this.fileName);
         BufferedReader reader = null;
@@ -156,6 +184,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes data to the data file.
+     * @param text the data to be written to the data file
+     * @throws IOException if there is a problem reading the file
+     */
     protected void writeToFile(String text) throws IOException{
         FileWriter writer = new FileWriter(this.fileName, this.appendToFile);
         BufferedWriter bufferedWriter = new BufferedWriter(writer);
@@ -164,6 +197,10 @@ public class Storage {
         bufferedWriter.close();
     }
 
+    /**
+     * Saves data to be written into the data file.
+     * @param text the text to be saved into the data file
+     */
     public void saveData(String text) {
         try {
             createFile(this.fileName);
@@ -174,12 +211,23 @@ public class Storage {
         }
     }
 
+    /**
+     * Prints a specific line from the data file.
+     * @param lineNumber the line number to be printed
+     * @return the text at the specific line from the data file
+     * @throws IOException if there is a problem reading the file
+     */
     public String printLine(int lineNumber) throws IOException {
         lineNumber = lineNumber - 1;
         String lineToRemove = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
         return lineToRemove;
     }
 
+    /**
+     * Deletes the task at a specific line.
+     * @param lineNumber the line of task to delete
+     * @throws IOException if there is a problem reading the file
+     */
     public void deleteFromFile(int lineNumber) throws IOException{
         File currFile = new File(this.fileName);
         File tempFile = new File("duke_data_temp.txt");
@@ -206,6 +254,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the task at a specific line to be done.
+     * @param lineNumber the line of task to update to done
+     * @throws IOException if there is a problem reading the file
+     */
     public void setDoneLine(int lineNumber) throws IOException  {
         File currFile = new File(this.fileName);
         File tempFile = new File("duke_data_temp.txt");

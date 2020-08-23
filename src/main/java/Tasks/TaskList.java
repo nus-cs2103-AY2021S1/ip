@@ -1,14 +1,18 @@
 package tasks;
 
-import DukeException.DukeException;
 import storage.Storage;
-
 import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
 
+/**
+ * Contains the list of tasks.
+ */
 public class TaskList {
 
+    /** The list of tasks */
     protected ArrayList<Task> list;
+
+    /** Storage for storing user's data */
     protected Storage storage;
 
     public TaskList(Storage storage) {
@@ -16,20 +20,35 @@ public class TaskList {
         this.list = storage.load();
     }
 
+    /**
+     * Gets the storage for storing data.
+     * @return the storage for storing data
+     */
     public Storage getStorage() {
         return this.storage;
     }
 
+    /**
+     * Adds a task to the task list.
+     * @param task the tasks to be added to the task list
+     */
     protected void addToList(Task task) {
         list.add(task);
     }
 
+    /**
+     * Gets the number of tasks in the task list.
+     * @return the number of tasks in the task list.
+     */
     protected int getNumList() {
         return this.list.size();
     }
 
-    public void setDoneList(String command) throws DukeException {
-        String[] doneCommand = command.split("\\W+");
+    /**
+     * Updates the task in the list to be done.
+     * @param command the user's input
+     */
+    public void setDoneList(String command) {
         try {
             int i = parseInt(command.split(" ")[1]);
             Task doneTask = list.get(i - 1);
@@ -42,11 +61,13 @@ public class TaskList {
 
     }
 
-    public void deleteList(String command) throws DukeException{
-        String[] deleteCommand = command.split("\\W+");
+    /**
+     * Deletes a task in the task list
+     * @param command the user's input
+     */
+    public void deleteList(String command) {
         try {
             int i = parseInt(command.split(" ")[1]);
-            Task deleteTask = list.get(i - 1);
             list.remove(i - 1);
         } catch (IndexOutOfBoundsException e) {
             ;
@@ -56,6 +77,11 @@ public class TaskList {
 
     }
 
+    /**
+     * Processes the tasks to be saved into the data file in the correct format.
+     * @param task the tasks to be saved into the data file
+     * @return the tasks in the correct format
+     */
     protected static String processTasks(Task task) {
         String result = "";
         int isDone = task.getIsDone().equals("[\u2713] ") ? 1 : 0;
@@ -69,6 +95,10 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Adds a task to the data file and to the task list.
+     * @param task the task to be added
+     */
     public void addToFile(Task task) {
         String taskString = processTasks(task);
         storage.saveData(taskString);
@@ -88,6 +118,9 @@ public class TaskList {
         }
     }*/
 
+    /**
+     * Prints out all the tasks in the task list.
+     */
     public void readList() {
         if (list.isEmpty()) {
             System.out.println("Looks like you don't have any tasks! Go on and add some!");
