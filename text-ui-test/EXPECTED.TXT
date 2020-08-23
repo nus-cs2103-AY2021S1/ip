@@ -1,21 +1,21 @@
 Buenos Dias! Soy Duke, como estas mi amigo?
 DukeExceptions: ☹ OOPS !!! La lista está vacía. ¡Agregue una nueva tarea!
 Entendido. He agregado esta tarea:
-[T][✗]  return book
-Ahora tienes 1 tareas en la lista. 
+[T] [✗] return book
+Ahora tienes 1 tareas en la lista.
 Entendido. He agregado esta tarea:
-[D][✗]  return book (by: sunday)
-Ahora tienes 2 tareas en la lista. 
+[D] [✗] return book (by: sunday)
+Ahora tienes 2 tareas en la lista.
 Entendido. He agregado esta tarea:
-[E][✗]  return book (at: sunday 12pm)
-Ahora tienes 3 tareas en la lista. 
+[E] [✗] return book (at: sunday 12pm)
+Ahora tienes 3 tareas en la lista.
 Estas son las tareas de su lista:
-1. [T][✗]  return book
-2. [D][✗]  return book (by: sunday)
-3. [E][✗]  return book (at: sunday 12pm)
+1. [T] [✗] return book
+2. [D] [✗] return book (by: sunday)
+3. [E] [✗] return book (at: sunday 12pm)
 DukeExceptions: OOPS !!! Lo siento, pero no sé qué significa eso :-(
 Agradable! He marcado esta tarea como hecha:
-[D][✓]  return book (by: sunday)
+[D] [✓] return book (by: sunday)
 DukeExceptions: ☹ OOPS !!! La descripción de una tarea no puede estar vacía.
 DukeExceptions: ☹ OOPS !!! La descripción de una tarea no puede estar vacía.
 DukeExceptions: ☹ OOPS !!! La descripción de una tarea no puede estar vacía.
@@ -23,11 +23,11 @@ DukeExceptions: ☹ OOPS !!! Debe establecer una fecha límite para esta tarea.
 DukeExceptions: ☹ OOPS !!! Debe establecer la hora del evento para esta tarea.
 DukeExceptions: ☹ OOPS !!! No se puede borrar
 Célebre. He eliminado esta tarea:
-[D][✓]  return book (by: sunday)
-Ahora tienes 2 tareas en la lista. 
+[D] [✓] return book (by: sunday)
+Ahora tienes 2 tareas en la lista.
 Estas son las tareas de su lista:
-1. [T][✗]  return book
-2. [E][✗]  return book (at: sunday 12pm)
+1. [T] [✗] return book
+2. [E] [✗] return book (at: sunday 12pm)
 ☹ OOPS !!! No se puede borrar
 DukeExceptions: ☹ OOPS !!! ¡Esta tarea aún no existe!
 Adios, amigos!

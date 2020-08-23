@@ -11,11 +11,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String base = "[E]";
+        String base = "[E] ";
         if (taskCompleted) {
-            base = base + "[✓] ";
+            base = base + "[✓]";
         } else {
-            base = base + "[✗] ";
+            base = base + "[✗]";
         }
         base = base + taskDescription + "(at:" + date + ")";
         return base;

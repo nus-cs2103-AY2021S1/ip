@@ -7,11 +7,11 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        String base = "[T]";
+        String base = "[T] ";
         if (taskCompleted) {
-            base = base + "[✓] ";
+            base = base + "[✓]";
         } else {
-            base = base + "[✗] ";
+            base = base + "[✗]";
         }
         base = base + taskDescription;
         return base;
