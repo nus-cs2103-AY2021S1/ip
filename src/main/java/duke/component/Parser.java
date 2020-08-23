@@ -78,11 +78,11 @@ public class Parser {
             return new Deadline(description, time);
         } else if (cmd.startsWith("event")) {
             if (cmd.length() < 6) {
-                throw new InvalidCommandException("\u2639 OOPS!!! The description of a event cannot be empty.");
+                throw new InvalidCommandException("\u2639 OOPS!!! The description of an event cannot be empty.");
             } else if (cmd.charAt(5) != ' ') {
                 throw new InvalidCommandException("Do you mean 'event " + cmd.substring(5) + "'");
             } else if (cmd.length() < 7) {
-                throw new InvalidCommandException("\u2639 OOPS!!! The description of a event cannot be empty.");
+                throw new InvalidCommandException("\u2639 OOPS!!! The description of an event cannot be empty.");
             }
             String description = cmd.substring(6);
             int s = description.indexOf("/at");
