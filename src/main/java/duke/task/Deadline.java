@@ -75,4 +75,16 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " +
                 byTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" + overdue;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Deadline) {
+            Deadline o = (Deadline) obj;
+            return description == o.description && byTime.isEqual(o.byTime);
+        } else {
+            return false;
+        }
+    }
 }
