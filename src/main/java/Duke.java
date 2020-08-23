@@ -1,12 +1,19 @@
 import Task.*;
+
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Duke {
     public static final String LINE = "_______________________________________\n";
     public static ArrayList<Task> taskList = new ArrayList<>();
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
+        readFile();
+        //FileWriter fw = new FileWriter("data/duke.txt");
+
         // Opening
         String open = "_______________________________________ \n"
                 + "Hello! I'm Duke \n"
@@ -150,4 +157,23 @@ public class Duke {
                 + "bye: Exits program \n" + LINE;
         System.out.println(output);
     }
+
+    public static void readFile() throws IOException {
+        File f = new File("data/duke.txt");
+        if (!f.exists()) {
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+        } else {
+            Scanner fileScanner = new Scanner(f);
+            while (fileScanner.hasNext()) {
+                String task = fileScanner.nextLine();
+                String[] taskSplit = task.split(" ", 3);
+                String taskType = taskSplit[0];
+                boolean taskIsDone = taskSplit[1].equals("[" + "\u2713" + "]") ? true : false;
+                String taskDetails = taskSplit[2];
+            }
+        }
+    }
+
+    public static void
 }

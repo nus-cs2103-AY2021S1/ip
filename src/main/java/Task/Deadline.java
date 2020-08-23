@@ -15,6 +15,6 @@ public class Deadline extends Task {
         } else {
             icon = "[" + "\u2718" + "]";
         }
-        return "[D]" + icon + " " + this.description + " (by: " + this.by + ")";
+        return "[D] " + icon + " " + this.description + " (by: " + this.by + ")";
     }
 }

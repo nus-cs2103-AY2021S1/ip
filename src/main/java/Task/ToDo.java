@@ -15,6 +15,6 @@ public class ToDo extends Task {
         } else {
             icon = "[" + "\u2718" + "]";
         }
-        return "[T]" + icon + " " + this.description;
+        return "[T] " + icon + " " + this.description;
     }
 }

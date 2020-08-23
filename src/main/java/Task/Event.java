@@ -15,6 +15,6 @@ public class Event extends Task {
         } else {
             icon = "[" + "\u2718" + "]";
         }
-        return "[E]" + icon + " " + this.description + " (at: " + this.at + ")";
+        return "[E] " + icon + " " + this.description + " (at: " + this.at + ")";
     }
 }
