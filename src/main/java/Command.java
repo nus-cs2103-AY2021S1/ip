@@ -1,16 +1,11 @@
-public enum Command {
-    LIST("list"),
-    BYE("bye"),
-    DONE("done"),
-    DELETE("delete"),
-    TODO("todo"),
-    DEADLINE("deadline"),
-    EVENT("event"),
-    VIEW("view");
+public abstract class Command {
 
-    private final String command;
+    public Command() {
+    }
 
-    Command(String command) {
-        this.command = command;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+
+    public boolean isExit() {
+        return false;
     }
 }

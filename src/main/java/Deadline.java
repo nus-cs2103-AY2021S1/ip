@@ -4,13 +4,18 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected LocalDate by;
 
-    public Deadline(String description, LocalDate by) {
+    public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = LocalDate.parse(by);
     }
 
     public LocalDate getBy() {
         return this.by;
+    }
+
+    @Override
+    public String getShortForm() {
+        return "D";
     }
 
     @Override

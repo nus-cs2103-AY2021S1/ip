@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -11,12 +11,18 @@ public class Task {
         return (isDone ? "✓" : "✘"); //return tick or X symbols
     }
 
-    public void markAsDone() {
-        this.isDone = true;
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     public String getDescription() {
         return this.description;
+    }
+
+    public abstract String getShortForm();
+
+    public void markAsDone() {
+        this.isDone = true;
     }
 
     @Override

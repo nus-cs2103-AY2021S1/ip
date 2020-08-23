@@ -4,13 +4,18 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDate at;
 
-    public Event(String description, LocalDate at) {
+    public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.at = LocalDate.parse(at);
     }
 
     public LocalDate getAt() {
         return this.at;
+    }
+
+    @Override
+    public String getShortForm() {
+        return "E";
     }
 
     @Override
