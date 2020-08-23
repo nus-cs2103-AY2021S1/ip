@@ -43,8 +43,7 @@ public abstract class AddOperation extends Operation {
     public String execute() {
         Task newTask = createTask();
         this.taskList.addTask(newTask);
-        String status = "I have added the task:\n" + newTask + "\n"
+        return "I have added the task:\n" + newTask + "\n"
                 + String.format("You now have %d tasks.", this.taskList.getCurrCapacity());
-        return status;
     }
 }

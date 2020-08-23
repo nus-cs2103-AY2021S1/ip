@@ -15,10 +15,10 @@ public class DeleteOperation extends Operation {
      * @param taskList taskList the TaskList containing the Task that is to be removed.
      * @param index the associated index of the Task.
      */
-     public DeleteOperation(TaskList taskList, int index) {
+    public DeleteOperation(TaskList taskList, int index) {
         this.taskList = taskList;
         this.index = index;
-     }
+    }
 
     /**
      * Specifies that this is not an ExitOperation.
@@ -36,9 +36,8 @@ public class DeleteOperation extends Operation {
     @Override
     public String execute() {
         Task removed = this.taskList.removeTask(this.index);
-        String status = "Noted. I've removed this task:\n"
+        return "Noted. I've removed this task:\n"
                 + removed + "\n"
                 + String.format("You now have %d tasks in the list", this.taskList.getCurrCapacity());
-        return status;
     }
 }

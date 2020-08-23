@@ -40,7 +40,7 @@ public class ExitOperation extends Operation {
         try {
             this.storage.saveToDisk(this.taskList);
         } catch (DukeException exception) {
-           status += "The list of tasks cannot be saved.\n";
+            status += "The list of tasks cannot be saved.\n";
         }
         return status + "Goodbye. Hope to see you again soon.";
     }
