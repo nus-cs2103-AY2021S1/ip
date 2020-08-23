@@ -1,8 +1,7 @@
 package duke.commands;
 
-import duke.commands.Command;
-import duke.tasks.TaskList;
 import duke.storage.Storage;
+import duke.tasks.TaskList;
 import duke.ui.UI;
 
 public class HelpCommand extends Command {

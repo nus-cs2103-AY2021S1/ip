@@ -1,12 +1,12 @@
 package duke.storage;
 
-import duke.tasks.Task;
-import duke.tasks.TaskList;
-import duke.ui.UI;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.ui.UI;
 
 public class Storage {
 
@@ -27,7 +27,7 @@ public class Storage {
         try {
             file.createNewFile();
         } catch (IOException e) {
-           ui.showLoadingError(e.getMessage());
+            ui.showLoadingError(e.getMessage());
         }
         return file;
     }
@@ -38,8 +38,7 @@ public class Storage {
             resetFileContents(directoryPath + "/" + fileName);
             for (int i = 0; i < tasks.getListSize(); i++) {
                 Task task = tasks.getTaskAtIndex(i);
-                appendToFile(directoryPath + "/" + fileName,
-                        task.getSaveFormat() + "\n");
+                appendToFile(directoryPath + "/" + fileName, task.getSaveFormat() + "\n");
             }
         } catch (IOException e) {
             ui.showError("Something went wrong while trying to save your data... :/");

@@ -2,9 +2,12 @@ package duke.tasks;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import duke.parser.Parser;
 
 public class TaskList {
@@ -15,7 +18,7 @@ public class TaskList {
         try {
             Scanner scanner = new Scanner(file);
 
-            while(scanner.hasNextLine()) {
+            while (scanner.hasNextLine()) {
                 String[] line = scanner.nextLine().split("\\|");
                 Task newTask = null;
                 LocalDate localDate = null;

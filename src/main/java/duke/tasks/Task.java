@@ -27,9 +27,7 @@ public class Task {
     }
 
     public LocalDate getDate() {
-        return hasDate()
-                ? localDate
-                : null;
+        return hasDate() ? localDate : null;
     }
 
     public void setDone() {

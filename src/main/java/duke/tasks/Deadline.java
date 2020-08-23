@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import duke.tasks.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -21,19 +19,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() +
-                " (by: " + (super.hasDate()
-                ? localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                : deadlineDate)
-                + ")";
+        return "[D]" + super.toString() + " (by: " + (super.hasDate() ? localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) : deadlineDate) + ")";
     }
 
     @Override
     public String getSaveFormat() {
-        return "D" + " | " +
-                super.getSaveFormat() + " | " +
-                (super.hasDate()
-                        ? localDate
-                        : deadlineDate);
+        return "D" + " | " + super.getSaveFormat() + " | " + (super.hasDate() ? localDate : deadlineDate);
     }
 }
