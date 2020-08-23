@@ -16,7 +16,6 @@ public class Deadline extends Task {
     public static final String DATE_FORMAT_INPUT = "dd-MM-yyyy HHmm";
     public static final String DATE_FORMAT_OUTPUT = "MMM dd yyyy hh:mm a";
     public static final String DEADLINE_BREAK = "/by";
-    public static final int COMMAND_LENGTH = 2;
 
     /**
      * Constructor method.

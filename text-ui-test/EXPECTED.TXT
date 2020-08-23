@@ -48,6 +48,16 @@ Here are your tasks:
 ---------------------------------------------------------
 
 ---------------------------------------------------------
+Here are the tasks I have found:
+1. [T][✓] borrow book
+2. [D][✗] return book (by: Dec 12 2012 12:00 pm)
+---------------------------------------------------------
+
+---------------------------------------------------------
+I have found no tasks that match: does not exist
+---------------------------------------------------------
+
+---------------------------------------------------------
 Noted. I've removed this task:
 [T][✓] borrow book
 You now have 2 tasks in the list
@@ -79,15 +89,15 @@ Apologies. Ensure there is description for a todo item.
 ---------------------------------------------------------
 
 ---------------------------------------------------------
-Apologies. Ensure an indication of '/at' after an event command.
+Apologies. Ensure there is a description and a time for an event command.
 ---------------------------------------------------------
 
 ---------------------------------------------------------
-Apologies. Ensure an indication of '/by' after a deadline command.
+Apologies. Ensure there is a description and a datetime for a deadline command.
 ---------------------------------------------------------
 
 ---------------------------------------------------------
-Apologies. Ensure the datetime passed in is of the form: 'HHmm'.
+Apologies. Ensure the time passed in is of the form: 'HHmm'.
 ---------------------------------------------------------
 
 ---------------------------------------------------------

@@ -16,7 +16,6 @@ public class Event extends Task{
     public static final String TIME_FORMAT_INPUT = "HHmm";
     public static final String TIME_FORMAT_OUTPUT = "hh:mm a";
     public static final String EVENT_BREAK = "/at";
-    public static final int COMMAND_LENGTH = 2;
 
     /**
      * Constructor method.

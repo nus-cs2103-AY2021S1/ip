@@ -8,7 +8,6 @@ import java.util.Optional;
  */
 public class Todo extends Task {
     public static final String TODO_SYMBOL = "T";
-    public static final int COMMAND_LENGTH = 1;
 
     /**
      * Constructor method.

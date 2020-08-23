@@ -3,9 +3,16 @@ package duke.parser;
 import java.time.LocalDateTime;
 
 import duke.exception.DukeException;
-import duke.operation.*;
+import duke.operation.Operation;
+import duke.operation.AddDeadlineOperation;
+import duke.operation.AddEventOperation;
+import duke.operation.AddTodoOperation;
+import duke.operation.DeleteOperation;
+import duke.operation.DoneOperation;
+import duke.operation.ExitOperation;
+import duke.operation.ListOperation;
+import duke.operation.FindOperation;
 import duke.storage.TaskStorage;
-import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
@@ -25,7 +32,10 @@ public class CommandParser {
     }
 
     private DoneOperation createDoneOp(String[] commands, TaskList list) throws DukeException {
-        if (!Utils.hasInteger(commands, 1)) {
+        if (CommandType.DONE.isLengthSmaller(commands.length)) {
+            throw new DukeException("Ensure a number is passed after a done command");
+        }
+        if (Utils.hasInteger(commands, 1)) {
             throw new DukeException("Ensure a number is passed after a done command.");
         }
         int index = Integer.parseInt(commands[1]);
@@ -36,7 +46,7 @@ public class CommandParser {
     }
 
     private AddTodoOperation createTodoOp(String[] commands, TaskList list) throws DukeException {
-        if (commands.length <= Todo.COMMAND_LENGTH) {
+        if (CommandType.TODO.isLengthSmaller(commands.length)) {
             throw new DukeException("Ensure there is description for a todo item.");
         }
         String description = Utils.concatenate(commands, 1, commands.length);
@@ -45,7 +55,7 @@ public class CommandParser {
 
     private AddDeadlineOperation createDeadlineOp(
             String[] commands, TaskList list) throws DukeException {
-        if (commands.length <= Deadline.COMMAND_LENGTH) {
+        if (CommandType.DEADLINE.isLengthSmaller(commands.length)) {
             throw new DukeException("Ensure there is a description and a datetime for a deadline command.");
         }
         int splitIndex = Utils.getIndexOf(commands, Deadline.DEADLINE_BREAK);
@@ -59,7 +69,7 @@ public class CommandParser {
     }
 
     private AddEventOperation createEventOp(String[] commands, TaskList list) throws DukeException {
-        if (commands.length <= Event.COMMAND_LENGTH) {
+        if (CommandType.EVENT.isLengthSmaller(commands.length)) {
             throw new DukeException("Ensure there is a description and a time for an event command.");
         }
         int splitIndex = Utils.getIndexOf(commands, Event.EVENT_BREAK);
@@ -73,7 +83,10 @@ public class CommandParser {
     }
 
     private DeleteOperation createDeleteOp(String[] commands, TaskList list) throws DukeException {
-        if (!Utils.hasInteger(commands, 1)) {
+        if (CommandType.DELETE.isLengthSmaller(commands.length)) {
+            throw new DukeException("Ensure a number is passed after a delete command.");
+        }
+        if (Utils.hasInteger(commands, 1)) {
             throw new DukeException("Ensure a number is passed after a delete command.");
         }
         int index = Integer.parseInt(commands[1]);
@@ -84,7 +97,7 @@ public class CommandParser {
     }
 
     private FindOperation createFindOp(String[] commands, TaskList list) throws DukeException {
-        if (commands.length < 2) {
+        if (CommandType.FIND.isLengthSmaller(commands.length)) {
             throw new DukeException("Ensure a keyword is entered so that I can perform a search with it.");
         }
         String searchWord = Utils.concatenate(commands, 1, commands.length);
@@ -103,24 +116,23 @@ public class CommandParser {
     public Operation parse(String commandString, TaskList list, TaskStorage taskStorage)
             throws DukeException {
         String[] commands = commandString.split(" ");
-        switch(commands[0]) {
-        case CommandType.BYE:
+        if (CommandType.BYE.getCommand().equals(commands[0])) {
             return createExitOp(taskStorage, list);
-        case CommandType.LIST:
+        } else if (CommandType.LIST.getCommand().equals(commands[0])) {
             return createListOp(list);
-        case CommandType.DONE:
+        } else if (CommandType.DONE.getCommand().equals(commands[0])) {
             return createDoneOp(commands, list);
-        case CommandType.TODO:
+        } else if (CommandType.TODO.getCommand().equals(commands[0])) {
             return createTodoOp(commands, list);
-        case CommandType.DEADLINE:
+        } else if (CommandType.DEADLINE.getCommand().equals(commands[0])) {
             return createDeadlineOp(commands, list);
-        case CommandType.EVENT:
+        } else if (CommandType.EVENT.getCommand().equals(commands[0])) {
             return createEventOp(commands, list);
-        case CommandType.DELETE:
+        } else if (CommandType.DELETE.getCommand().equals(commands[0])) {
             return createDeleteOp(commands, list);
-        case CommandType.FIND:
+        } else if (CommandType.FIND.getCommand().equals(commands[0])) {
             return createFindOp(commands, list);
-        default:
+        } else {
             throw new DukeException("This command is not recognised unfortunately.");
         }
     }

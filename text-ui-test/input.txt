@@ -5,6 +5,8 @@ list
 done 1
 done 2
 list
+find book
+find does not exist
 delete 2
 list
 delete 1
