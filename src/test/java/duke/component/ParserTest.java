@@ -1,6 +1,7 @@
 package duke.component;
 
 import duke.command.ByeCommand;
+import duke.command.DeleteCommand;
 import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -315,5 +316,14 @@ public class ParserTest {
     @Test
     public void parse_listCommand_listCommand() {
         assertEquals(new ListCommand("list"), Parser.parse("list"));
+    }
+
+    @Test
+    public void parse_deleteCommand_deleteCommand() {
+        assertEquals(new DeleteCommand("delete 3"), Parser.parse("delete 3"));
+        assertEquals(new DeleteCommand("delete 0"), Parser.parse("delete 0"));
+        assertEquals(new DeleteCommand("delete -3"), Parser.parse("delete -3"));
+        assertEquals(new DeleteCommand("delete "), Parser.parse("delete "));
+        assertEquals(new DeleteCommand("delete //"), Parser.parse("delete //"));
     }
 }
