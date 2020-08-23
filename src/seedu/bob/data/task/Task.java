@@ -1,3 +1,5 @@
+package seedu.bob.data.task;
+
 /**
  * Represents a task.
  * @author Lim Zi Yang

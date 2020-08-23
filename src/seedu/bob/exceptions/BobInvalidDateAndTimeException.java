@@ -1,3 +1,5 @@
+package seedu.bob.exceptions;
+
 /**
  * Exception representing invalid date input for DEADLINE and EVENT commands with inherited functionalities from Exception.
  * @author Lim Zi Yang

@@ -1,3 +1,10 @@
+package seedu.bob.storage;
+
+import seedu.bob.data.task.Task;
+import seedu.bob.data.task.Deadline;
+import seedu.bob.data.task.Event;
+import seedu.bob.exceptions.BobInvalidDateAndTimeException;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,7 +24,7 @@ public class Storage {
      * Creates a storage.
      * @param filePath Directory path of file.
      */
-    Storage(String filePath) throws IOException {
+    public Storage(String filePath) throws IOException {
         File tempFile = new File(filePath);
 
         // If file does not exist, creates file in directory

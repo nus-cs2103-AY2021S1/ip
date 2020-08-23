@@ -1,3 +1,5 @@
+package seedu.bob.exceptions;
+
 /**
  * Exception representing invalid task number for DONE and DELETE commands
  * with inherited functionalities from Exception.

@@ -1,3 +1,5 @@
+package seedu.bob.exceptions;
+
 /**
  * Exception representing empty task input with inherited functionalities from Exception.
  * @author Lim Zi Yang

@@ -1,8 +1,16 @@
-// Package dependencies
+package seedu.bob;
+
+import seedu.bob.exceptions.*;
+import seedu.bob.storage.Storage;
+import seedu.bob.commands.Command;
+import seedu.bob.data.task.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+
 
 /**
  * Represents the task-managing ChatBot.
@@ -17,8 +25,7 @@ public class Bob {
     /**
      * Introduction message
      */
-    private static final String INTRO =
-            "/*----------------- Welcome to BOB -----------------*/\n"
+    private static final String INTRO = "/*----------------- Welcome to BOB -----------------*/\n"
                     + "                    █▀▀▄ █▀▀█ █▀▀▄\n"
                     + "                    █▀▀▄ █  █ █▀▀▄\n"
                     + "                    ▀▀▀  ▀▀▀▀ ▀▀▀\n"
@@ -39,7 +46,6 @@ public class Bob {
     /**
      * Default file path of saved task list
      */
-    // If testing using runtest.bat, use pathname "../data/bob.txt", else use "/data/bob.txt"
     public static final String FILEPATH = System.getProperty("user.dir").endsWith("text-ui-test")
             ? "test.txt"
             : "data/bob.txt";

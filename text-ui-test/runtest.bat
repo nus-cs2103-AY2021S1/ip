@@ -7,7 +7,7 @@ REM delete output from previous run
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\*.java
+javac  -cp ..\src -Xlint:none -d ..\bin ..\src\seedu\bob\*.java
 
 
 IF ERRORLEVEL 1 (

@@ -1,3 +1,5 @@
+package seedu.bob.commands;
+
 /**
  * Represents different commands recognised by Bob.
  * @author Lim Zi Yang

@@ -1,4 +1,7 @@
-import java.util.Date;
+package seedu.bob.data.task;
+
+import seedu.bob.data.dateandtime.DateAndTime;
+import seedu.bob.exceptions.BobInvalidDateAndTimeException;
 
 /**
  * Represents a deadline with inherited functionalities from Task.
@@ -13,7 +16,7 @@ public class Deadline extends Task {
      * @param date Date of the deadline.
      * @param time Time of the event.
      */
-    Deadline (String description, String date, String time)
+    public Deadline(String description, String date, String time)
             throws BobInvalidDateAndTimeException{
         super(description);
         this.dateAndTime = new DateAndTime(date, time);

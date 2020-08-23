@@ -1,3 +1,8 @@
+package seedu.bob.data.task;
+
+import seedu.bob.data.dateandtime.DateAndTime;
+import seedu.bob.exceptions.BobInvalidDateAndTimeException;
+
 /**
  * Represents a event with inherited functionalities from Task.
  * @author Lim Zi Yang
@@ -11,7 +16,7 @@ public class Event extends Task {
      * @param date  Date of event.
      * @param time Time of event.
      */
-    Event (String description, String date, String time) throws BobInvalidDateAndTimeException{
+    public Event(String description, String date, String time) throws BobInvalidDateAndTimeException{
         super(description);
         this.dateAndTime = new DateAndTime(date, time);
     }

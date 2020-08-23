@@ -1,3 +1,5 @@
+package seedu.bob.exceptions;
+
 /**
  * Exception representing index out of bounds for DONE and DELETE commands
  * with inherited functionalities from Exception.

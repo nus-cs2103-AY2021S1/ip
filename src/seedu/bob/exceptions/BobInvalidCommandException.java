@@ -1,3 +1,5 @@
+package seedu.bob.exceptions;
+
 /**
  * Exception representing an unrecognisable command with inherited functionalities from Exception.
  * @author Lim Zi Yang
