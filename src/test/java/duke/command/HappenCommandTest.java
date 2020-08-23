@@ -4,7 +4,12 @@ import duke.component.Storage;
 import duke.component.StorageStub;
 import duke.component.TaskList;
 import duke.component.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -92,6 +97,58 @@ public class HappenCommandTest {
             fail();
         } catch (Exception e) {
             assertEquals("Latter date is before former date for happen between.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void execute_validCommand_showList() {
+        Ui ui = new Ui();
+        Storage storage = new StorageStub();
+        TaskList list = storage.getList();
+        try {
+            LocalDate today = LocalDate.now();
+            String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate later = LocalDate.now().plusDays(2);
+            String lt = later.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            list.add(new Deadline("assignment 1", "2021-09-01"));
+            list.add(new Deadline("assignment 2", "2021-09-02"));
+            list.add(new Deadline("assignemnt 3", "2019-09-01"));
+            list.add(new Deadline("today assign 1", td));
+            list.add(new Deadline("today assign 2", td));
+            list.add(new Deadline("in 2 days", lt));
+            list.add(new Event("meeting 1", "2021-09-01 11:00"));
+            list.add(new Event("meeting 2", "2021-09-01 19:00"));
+            list.add(new Event("today meeting 1", td + " 12:00"));
+            list.add(new Event("later meeting", lt + " 13:00"));
+
+            assertEquals("happening today 3",
+                    new HappenCommand("happen on today").execute(ui, list, storage));
+            assertEquals("happening on Sep 1 2021 3",
+                    new HappenCommand("happen on 2021-09-01").execute(ui, list, storage));
+            assertEquals("happening on Aug 31 2019 0",
+                    new HappenCommand("happen on 2019-08-31").execute(ui, list, storage));
+            assertEquals("happening before today 1",
+                    new HappenCommand("happen before today").execute(ui, list, storage));
+            assertEquals("happening before Jan 1 2020 1",
+                    new HappenCommand("happen before 2020-01-01").execute(ui, list, storage));
+            assertEquals("happening before Jan 1 2018 0",
+                    new HappenCommand("happen before 2018-01-01").execute(ui, list, storage));
+            assertEquals("happening after today 6",
+                    new HappenCommand("happen after today").execute(ui, list, storage));
+            assertEquals("happening after Jan 1 2021 4",
+                    new HappenCommand("happen after 2021-01-01").execute(ui, list, storage));
+            assertEquals("happening in 1 days 3",
+                    new HappenCommand("happen in 1 days").execute(ui, list, storage));
+            assertEquals("happening in 2 days 5",
+                    new HappenCommand("happen in 2 days").execute(ui, list, storage));
+            assertEquals("happening in 4 days 5",
+                    new HappenCommand("happen in 4 days").execute(ui, list, storage));
+            assertEquals("happening between Aug 31 2021 and Sep 30 2021 4",
+                    new HappenCommand("happen between 2021-08-31 2021-09-30").execute(ui, list, storage));
+            assertEquals("happening between Sep 1 2021 and Sep 2 2021 4",
+                    new HappenCommand("happen between 2021-09-01 2021-09-02").execute(ui, list, storage));
+        } catch (Exception e) {
+            fail();
         }
     }
 }

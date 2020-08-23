@@ -46,7 +46,7 @@ public class HappenCommand extends Command {
                 if (n <= 0) {
                     throw new InvalidCommandException("Please input a positive integer for happen in command.");
                 }
-                return ui.printList(list, t -> t.happenIn(n), "happening in " + n + " days");
+                return ui.printList(list, t -> t.happenIn(n), "happening in " + n + " days ");
             } else if (detail[0].equals("between") && detail.length == 3) {
                 LocalDate date1 = LocalDate.parse(detail[1], parse);
                 LocalDate date2 = LocalDate.parse(detail[2], parse);
@@ -54,7 +54,7 @@ public class HappenCommand extends Command {
                     throw new InvalidCommandException("Latter date is before former date for happen between.");
                 }
                 return ui.printList(list, t -> t.happenBetween(date1, date2),
-                        "happening bewteen " + date1.format(output) + " and " + date2.format(output) + " ");
+                        "happening between " + date1.format(output) + " and " + date2.format(output) + " ");
             } else {
                 throw new InvalidCommandException("Invalid happen command input.");
             }
