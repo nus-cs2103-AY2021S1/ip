@@ -1,5 +1,9 @@
 package main.java;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,22 +17,84 @@ public class Duke {
     private static String completeTaskMessage = Duke.textIndentation + "Nice! I've marked this task as done:";
     private static String invalidSyntaxMessage = Duke.textIndentation + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     private static String deleteTaskMessage = Duke.textIndentation + "Noted. I've removed this task:";
+    private static String dataSeparator = "\uff5c";
     private static TaskList taskList;
 
     public static void main(String[] args) {
 
         Duke.taskList = new TaskList();
+        File dukeData = new File("./data/duke_data.csv");
+
+        if (dukeData.exists()) {
+            try {
+                BufferedReader csvReader = new BufferedReader(new FileReader(dukeData));
+                String eachRow;
+                while ((eachRow = csvReader.readLine()) != null) {
+                    String[] dataStringArray = eachRow.split(dataSeparator);
+                    System.out.println(dataStringArray[0] + dataStringArray[1] + dataStringArray[2]);
+                    Task eachTask = Duke.genTask(dataStringArray);
+                    if (eachTask != null) {
+                        Duke.taskList.addToList(eachTask);
+                    }
+                }
+            } catch (java.io.FileNotFoundException e) {
+                System.out.println("(FILE NOT FOUND) THIS MESSAGE SHOULD NEVER APPEAR");
+            } catch (java.io.IOException e) {
+                System.out.println("(ERROR READING FILE) THIS MESSAGE SHOULD NEVER APPEAR");
+            }
+        }
 
         Duke.printText(Duke.greetMessage);
 
         Scanner sc = new Scanner(System.in);
 
-        while (sc.hasNext()) {
+        while (sc.hasNextLine()) {
             String inputMessage = sc.nextLine();
 
             if (inputMessage.toLowerCase().equals("bye")) {
+
+                sc.close();
+
+                try {
+                    dukeData.delete();
+                    dukeData.createNewFile();
+                } catch (Exception e) {
+                    System.out.println("ERROR CREATING FILE");
+                    return;
+                }
+
+                FileWriter csvWriter = null;
+                try {
+                    csvWriter = new FileWriter(dukeData);
+                } catch (Exception e) {
+                    System.out.println("ERROR INITIALIZING WRITER");
+                    return;
+                }
+
+
+                for (Task eachTask : Duke.taskList.taskArrayList) {
+                    try {
+                        String[] dataString = eachTask.getDataString();
+                        for (int i = 0; i < dataString.length; i++) {
+                            csvWriter.append(dataString[i]);
+                            csvWriter.append(dataSeparator);
+                        }
+                        csvWriter.append("\n");
+                    } catch (Exception e) {
+                        System.out.println("FAILED TO WRITE TASK");
+                    }
+                }
+
+                try {
+                    csvWriter.close();
+                    csvWriter.flush();
+                } catch (Exception e) {
+                    return;
+                }
+
                 Duke.printText(exitMessage);
-                break;
+                return;
+
             } else if (inputMessage.toLowerCase().equals("list")) {
                 Duke.printText(Duke.taskList.toString());
             } else if (inputMessage.toLowerCase().startsWith("done ")) {
@@ -145,6 +211,27 @@ public class Duke {
                 }
             }
         } else {
+            return null;
+        }
+    }
+
+    static Task genTask(String[] stringArray) {
+        try {
+            if (stringArray.length == 0) {
+                return null;
+            } else {
+                String taskType = stringArray[0];
+                if (taskType.equals("todo") && stringArray.length == 3) {
+                    return new ToDo(Boolean.parseBoolean(stringArray[1]), stringArray[2]);
+                } else if (taskType.equals("deadline") && stringArray.length == 4) {
+                    return new Deadline(Boolean.parseBoolean(stringArray[1]), stringArray[2], stringArray[3]);
+                } else if (taskType.equals("event") && stringArray.length == 4) {
+                    return new Event(Boolean.parseBoolean(stringArray[1]), stringArray[2], stringArray[3]);
+                } else {
+                    return null;
+                }
+            }
+        } catch (Exception e) {
             return null;
         }
     }

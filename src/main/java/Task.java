@@ -4,15 +4,15 @@ import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
-class Task {
+abstract class Task {
 
     final String description;
     final LocalDateTime dateTime;
     boolean isCompleted;
 
-    Task(String description, String dateTimeString) {
+    Task(boolean isCompleted, String description, String dateTimeString) {
+        this.isCompleted = isCompleted;
         this.description = description;
-        this.isCompleted = false;
 
         if (dateTimeString == null) {
             this.dateTime = null;
@@ -50,6 +50,10 @@ class Task {
                     this.dateTime.getHour() + ":" +
                     this.dateTime.getMinute();
         }
+    }
+
+    String[] getDataString() {
+        return new String[] {"task", String.valueOf(isCompleted), description};
     }
 
     @Override
