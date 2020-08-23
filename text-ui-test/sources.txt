@@ -1,6 +1,6 @@
-../src/main/java/TodoTask.java
-../src/main/java/EventTask.java
-../src/main/java/DeadlineTask.java
-../src/main/java/Task.java
+../src/main/java/task.TodoTask.java
+../src/main/java/task.EventTask.java
+../src/main/java/task.DeadlineTask.java
+../src/main/java/task.Task.java
 ../src/main/java/Bot.java
-../src/main/java/Duke.java
+../src/main/java/duke.Duke.java

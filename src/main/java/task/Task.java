@@ -1,3 +1,5 @@
+package task;
+
 public class Task {
     private int hasCompleted;
     private String name;
