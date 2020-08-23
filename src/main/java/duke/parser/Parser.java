@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.task.Deadline;
@@ -39,6 +40,8 @@ public class Parser {
             command = new DoneCommand();
         } else if (input.equals("list")) { // list out the tasks
             command = new ListCommand();
+        } else if (input.startsWith("find")) { // find the tasks
+            command = new FindCommand();
         } else if (input.equals("bye")) { // exit the bot
             return new ExitCommand();
         } else { // handle invalid inputs

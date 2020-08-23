@@ -28,6 +28,14 @@ public class Task {
     }
 
     /**
+     * Returns the description of task.
+     * @return Task name.
+     */
+    public String getTaskName() {
+        return this.taskName;
+    }
+
+    /**
      * Returns a tick or a cross based on whether the task is done or not done.
      * @return Tick or cross symbols.
      */

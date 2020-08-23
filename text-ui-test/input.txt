@@ -6,8 +6,10 @@ event project meeting /at 2020-09-25 10:00
 done
 list
 done 1
+find book
 delete 4
 list
+find
 deadline
 event interview /at 2020-20-20
 bye

@@ -4,6 +4,7 @@ C:\Users\Rui Ling\Desktop\uni y2s1\cs2103t\ip\src\main\java\duke\command\Command
 C:\Users\Rui Ling\Desktop\uni y2s1\cs2103t\ip\src\main\java\duke\command\DeleteCommand.java
 C:\Users\Rui Ling\Desktop\uni y2s1\cs2103t\ip\src\main\java\duke\command\DoneCommand.java
 C:\Users\Rui Ling\Desktop\uni y2s1\cs2103t\ip\src\main\java\duke\command\ExitCommand.java
+C:\Users\Rui Ling\Desktop\uni y2s1\cs2103t\ip\src\main\java\duke\command\FindCommand.java
 C:\Users\Rui Ling\Desktop\uni y2s1\cs2103t\ip\src\main\java\duke\command\InvalidCommand.java
 C:\Users\Rui Ling\Desktop\uni y2s1\cs2103t\ip\src\main\java\duke\command\ListCommand.java
 C:\Users\Rui Ling\Desktop\uni y2s1\cs2103t\ip\src\main\java\duke\exception\DukeException.java
