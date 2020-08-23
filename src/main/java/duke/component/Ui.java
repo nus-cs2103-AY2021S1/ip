@@ -9,6 +9,9 @@ public class Ui {
     private static final String horizontalLine = "\t=================================================================================";
     private final Scanner sc;
 
+    /**
+     * Creates a user-interface Ui object.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
