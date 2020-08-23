@@ -20,7 +20,7 @@ public class EventTest {
     }
 
     @Test
-    public void happenOnDateTest() {
+    public void isHappeningOn_date_isHappeningOnDate() {
         try {
             Event e = new Event("Project meeting", "2020-09-03 11:30");
             assertTrue(e.isHappeningOn(LocalDate.parse("2020-09-03")));
@@ -31,7 +31,7 @@ public class EventTest {
     }
 
     @Test
-    public void happenTodayTest() {
+    public void isHappeningToday__isHappeningToday() {
         try {
             LocalDateTime today = LocalDateTime.now();
             String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
@@ -48,7 +48,7 @@ public class EventTest {
     }
 
     @Test
-    public void happenBeforeDateTest() {
+    public void hasHappenedBefore_date_hasHappenedBeforeDate() {
         try {
             Event e = new Event("Project meeting", "2020-09-03 11:30");
             assertTrue(e.hasHappenedBefore(LocalDate.parse("2020-09-05")));
@@ -60,7 +60,7 @@ public class EventTest {
     }
 
     @Test
-    public void happenBeforeTodayTest() {
+    public void hasHappenedBeforeToday__hasHappenedBeforeToday() {
         try {
             LocalDateTime today = LocalDateTime.now();
             String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
@@ -80,7 +80,7 @@ public class EventTest {
     }
 
     @Test
-    public void happenAfterDateTest() {
+    public void isHappeningAfter_date_isHappeningAfterDate() {
         try {
             Event e = new Event("Project meeting", "2020-09-03 11:30");
             assertFalse(e.isHappeningAfter(LocalDate.parse("2020-09-05")));
@@ -92,7 +92,7 @@ public class EventTest {
     }
 
     @Test
-    public void happenAfterTodayTest() {
+    public void isHappeningAfterToday__isHappeningAfterToday() {
         try {
             LocalDateTime today = LocalDateTime.now();
             String td = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
@@ -112,7 +112,7 @@ public class EventTest {
     }
 
     @Test
-    public void happenBetweenTest() {
+    public void isHappeningBetween_dates_isHappeningBetweenDates() {
         try {
             Event e = new Event("Project meeting", "2020-09-03 11:30");
             assertFalse(e.isHappeningBetween(LocalDate.parse("2020-08-01"), LocalDate.parse("2020-09-01")));
@@ -124,7 +124,7 @@ public class EventTest {
     }
 
     @Test
-    public void happenInTest() {
+    public void willHappenInDays_numberOfDays_willHappenInNDays() {
         try {
             LocalDateTime newDate = LocalDateTime.now().plusDays(2);
             String newStr = newDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
@@ -138,7 +138,7 @@ public class EventTest {
     }
 
     @Test
-    public void outputTest() {
+    public void output__toWriteStorage() {
         try {
             Event e = new Event("Project meeting", "2020-09-03 11:30");
             assertEquals("E | 0 | Project meeting | At: 2020-09-03 11:30\n", e.output());
@@ -151,7 +151,7 @@ public class EventTest {
     }
 
     @Test
-    public void toStringTest() {
+    public void toString__systemOutput() {
         try {
             Event e = new Event("Project meeting", "2020-09-03 11:30");
             assertEquals("[E][\u2718] Project meeting (at: 11:30 AM   Sep 3 2020)", e.toString());
