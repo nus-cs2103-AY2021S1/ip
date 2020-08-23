@@ -1,6 +1,6 @@
 todo borrow book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+deadline return book /by 02/12/2020
+event project meeting /at 05/12/2020 1600
 list
 done
 done a

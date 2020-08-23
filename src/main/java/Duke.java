@@ -235,7 +235,7 @@ public class Duke {
                 while (s.hasNext()) {
                     String string = s.nextLine();
                     String[] arr = string.split(" \\| ");
-                    
+
                     boolean isDone = arr[1].equals("1");
                     boolean isTime;
                     Date date;
