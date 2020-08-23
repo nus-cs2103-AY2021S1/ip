@@ -10,6 +10,10 @@ public class Event extends Task{
         this.at = LocalDate.parse(at);
     }
 
+    public LocalDate getAtDate() {
+        return this.at;
+    }
+
     public String getAt() {
         return this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }

@@ -1,30 +1,78 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.util.ArrayList;
 
-public class WriteFile {
+public class Storage {
 
-    private String path;
+    private String fileName;
     private boolean appendToFile = false;
-    private static final String fileName = "duke_data.txt";
 
-    public WriteFile(String path) {
-        this.path = path;
+    public Storage(String fileName) {
+        this.fileName = fileName;
     }
 
-    public WriteFile(String path, boolean appendToFile) {
-        this.path = path;
+    public Storage(String fileName, boolean appendToFile) {
+        this.fileName = fileName;
         this.appendToFile = appendToFile;
+    }
+
+    public ArrayList<Task> load() {
+        ArrayList<Task> taskList= new ArrayList<>();
+        try {
+            for (int i = 1; i <= getNumOfTasks(); i++) {
+                String taskLine = printLine(i);
+                String[] taskInfo = taskLine.trim().split(" [|] ");
+                String taskType = taskInfo[0];
+                boolean isDone = taskInfo[1].equals(String.valueOf(1)) ? true : false;
+                String taskName = taskInfo[2];
+                Task taskToAdd;
+                switch (taskType) {
+                    case "T":
+                        taskToAdd = new Todo(taskName);
+                        if (isDone) {
+                            taskToAdd.markAsDone();
+                        }
+                        taskList.add(taskToAdd);
+                        break;
+                    case "E":
+                        String at = taskInfo[3];
+                        taskToAdd = new Event(taskName, at);
+                        if (isDone) {
+                            taskToAdd.markAsDone();
+                        }
+                        taskList.add(taskToAdd);
+                        break;
+                    case "D":
+                        String by = taskInfo[3];
+                        taskToAdd = new Deadline(taskName, by);
+                        if (isDone) {
+                            taskToAdd.markAsDone();
+                        }
+                        taskList.add(taskToAdd);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return taskList;
+        } catch (IOException e) {
+            fileError();
+            return taskList;
+        }
     }
 
     public static void fileError() {
         System.out.println("Oops! There's been an error with the data file, please try again!");
     }
 
-    public static int getNumOfTasks() {
+    public int getNumOfTasks() {
         try {
-            Scanner sc = new Scanner(new FileReader(fileName));
+            createFile(this.fileName);
+            Scanner sc = new Scanner(new FileReader(this.fileName));
             sc.useDelimiter("\\n");
             int count = 0;
             while (sc.hasNext()) {
@@ -39,7 +87,7 @@ public class WriteFile {
         return 0;
     }
 
-    public static void createFile(String fileName) {
+    public void createFile(String fileName) {
         try {
             File dataFile = new File(fileName);
             if (dataFile.createNewFile()) {
@@ -50,7 +98,7 @@ public class WriteFile {
         }
     }
 
-    public static String processLine(String taskLine) {
+    public String processLine(String taskLine) {
         String[] taskInfo = taskLine.trim().split(" [|] ");
         String taskType = taskInfo[0];
         String isDone = taskInfo[1].equals(String.valueOf(1)) ? "[\u2713] " : "[\u2718] ";
@@ -62,10 +110,12 @@ public class WriteFile {
                 break;
             case "E":
                 String at = taskInfo[3];
+                at = LocalDate.parse(at).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
                 result = String.format("[E]%1$s%2$s (at: %3$s)", isDone, taskName, at);
                 break;
             case "D":
                 String by = taskInfo[3];
+                by = LocalDate.parse(by).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
                 result = String.format("[D]%1$s%2$s (by: %3$s)", isDone, taskName, by);
                 break;
             default:
@@ -74,13 +124,13 @@ public class WriteFile {
         return result;
     }
 
-    public static void readFile() {
-        createFile(fileName);
+    public void readFile() {
+        createFile(this.fileName);
         BufferedReader reader = null;
         int i;
         String curr;
         try {
-            reader = new BufferedReader(new FileReader(fileName));
+            reader = new BufferedReader(new FileReader(this.fileName));
             i = 1;
             while ((curr = reader.readLine()) != null) {
                 System.out.println(i + ". " + processLine(curr));
@@ -99,52 +149,43 @@ public class WriteFile {
     }
 
     public void writeToFile(String text) throws IOException{
-        FileWriter writer = new FileWriter(this.path, this.appendToFile);
+        FileWriter writer = new FileWriter(this.fileName, this.appendToFile);
         BufferedWriter bufferedWriter = new BufferedWriter(writer);
         bufferedWriter.write(text);
         bufferedWriter.newLine();
-        //bufferedWriter.write("\n");
         bufferedWriter.close();
-        //PrintWriter printer = new PrintWriter(writer);
-        //printer.printf("%s" + "%n", text);
-        //printer.close();
-        //writer.write(text);
-        //writer.write("\r\n");
-        //writer.close();
     }
 
-    public static void saveData(String text) {
+    public void saveData(String text) {
         try {
-            createFile(fileName);
-            WriteFile data = new WriteFile(fileName, true);
+            createFile(this.fileName);
+            Storage data = new Storage(this.fileName, true);
             data.writeToFile(text);
         } catch (IOException e) {
             fileError();
         }
     }
 
-    public static String printLine(int lineNumber) throws IOException {
+    public String printLine(int lineNumber) throws IOException {
         lineNumber = lineNumber - 1;
-        String lineToRemove = Files.readAllLines(Paths.get(fileName)).get(lineNumber);
+        String lineToRemove = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
         return lineToRemove;
     }
 
-    public static void deleteFromFile(int lineNumber) throws IOException{
-        File currFile = new File(fileName);
+    public void deleteFromFile(int lineNumber) throws IOException{
+        File currFile = new File(this.fileName);
         File tempFile = new File("duke_data_temp.txt");
         BufferedReader reader = new BufferedReader(new FileReader(currFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
         lineNumber = lineNumber - 1;
-        String lineToRemove = Files.readAllLines(Paths.get(fileName)).get(lineNumber);
+        String lineToRemove = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
         String currLine;
         while((currLine = reader.readLine()) != null) {
             String trimLine = currLine.trim();
             if (trimLine.equals(lineToRemove)) {
                 continue;
             }
-            //writer.write(currLine + System.getProperty("line.separator"));
             writer.write(currLine + '\n');
-            //writer.append('\n');
         }
         writer.close();
         reader.close();
@@ -157,13 +198,13 @@ public class WriteFile {
         }
     }
 
-    public static void setDoneLine(int lineNumber) throws IOException  {
-        File currFile = new File(fileName);
+    public void setDoneLine(int lineNumber) throws IOException  {
+        File currFile = new File(this.fileName);
         File tempFile = new File("duke_data_temp.txt");
         BufferedReader reader = new BufferedReader(new FileReader(currFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
         lineNumber = lineNumber - 1;
-        String lineToUpdate = Files.readAllLines(Paths.get(fileName)).get(lineNumber);
+        String lineToUpdate = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
         String[] taskInfo = lineToUpdate.trim().split(" [|] ");
         taskInfo[1] = String.valueOf(1);
         String doneLine = String.join(" | ", taskInfo);
@@ -171,13 +212,9 @@ public class WriteFile {
         while((currLine = reader.readLine()) != null) {
             String trimLine = currLine.trim();
             if (trimLine.equals(lineToUpdate)) {
-                //writer.append(doneLine);
-                //writer.append('\n');
                 writer.write(doneLine + '\n');
             } else {
-                //writer.write(currLine + System.getProperty("line.separator"));
                 writer.write(currLine + '\n');
-                //writer.append('\n');
             }
         }
         writer.close();

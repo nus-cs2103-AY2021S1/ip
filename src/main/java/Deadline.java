@@ -10,6 +10,10 @@ public class Deadline extends Task{
         this.by = LocalDate.parse(by);
     }
 
+    public LocalDate getByDate() {
+        return this.by;
+    }
+
     public String getBy() {
         return this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
