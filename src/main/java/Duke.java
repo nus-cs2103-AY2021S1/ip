@@ -163,6 +163,7 @@ public class Duke {
     public static void main(String[] args) {
         Ui ui = new Ui();
         Storage storage = new Storage("data/storage/duke.txt");
+        Parser parser = new Parser();
         String input = "";
         List<Task> list = storage.load();
         String output;
@@ -174,7 +175,7 @@ public class Duke {
             input = ui.readInput();
 
             try {
-                output = process(input, list, storage);
+                output = parser.parse(input, list, storage);
             } catch (DukeException e) {
                 output = e.getMessage();
             }
