@@ -65,7 +65,6 @@ public class Parser {
                 throw new NoDescriptionException(cmd[0]);
             } else {
                 try {
-                    System.out.println(Arrays.toString(cmd));
                     LocalDate.parse(cmd[cmd.length - 2], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     LocalTime.parse(cmd[cmd.length - 1].split("-")[0], DateTimeFormatter.ofPattern("HHmm"));
                     LocalTime.parse(cmd[cmd.length - 1].split("-")[1], DateTimeFormatter.ofPattern("HHmm"));
