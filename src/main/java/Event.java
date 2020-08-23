@@ -3,7 +3,7 @@ public class Event extends Task{
     private final String task;
     private final String time;
 
-    protected Event(String task, String time) throws DukeException {
+    protected Event(String task, String time) {
             this.task = task;
             this.time = time;
     }

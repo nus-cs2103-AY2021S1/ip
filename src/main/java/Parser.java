@@ -12,7 +12,7 @@ public class Parser {
         this.list = list;
     }
 
-    protected Task parseFileData(String line) throws DukeException {
+    protected Task parseFileData(String line) {
         char taskType = line.charAt(3);
         boolean isDone = line.charAt(6) == '\u2713';
         Task task = null;

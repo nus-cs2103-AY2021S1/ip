@@ -6,7 +6,7 @@ public class Deadline extends Task{
     private final String task;
     private final LocalDate deadline;
 
-    protected Deadline(String task, LocalDate deadline) throws DukeException{
+    protected Deadline(String task, LocalDate deadline) {
             this.task = task;
             this.deadline = deadline;
     }

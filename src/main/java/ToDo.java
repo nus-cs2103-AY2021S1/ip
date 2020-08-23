@@ -3,7 +3,7 @@ public class ToDo extends Task {
     private final String task;
     private static final String errorMessage = "OOPS!!! The description of a todo cannot be empty.\n";
 
-    protected ToDo(String task) throws DukeException{
+    protected ToDo(String task) {
             this.task = task;
     }
 
