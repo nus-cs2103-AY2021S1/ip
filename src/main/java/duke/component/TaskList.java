@@ -10,13 +10,16 @@ public class TaskList extends ArrayList<Task> {
         super();
     }
 
-    public void print(Predicate<Task> predicate) {
-        int count = size();
-        for (int i = 0; i < count; i++) {
+    public int print(Predicate<Task> predicate) {
+        int n = size();
+        int count = 0;
+        for (int i = 0; i < n; i++) {
             Task task = get(i);
             if (predicate.test(task)) {
                 System.out.println("\t  " + (i + 1) + "." + task);
+                count++;
             }
         }
+        return count;
     }
 }
