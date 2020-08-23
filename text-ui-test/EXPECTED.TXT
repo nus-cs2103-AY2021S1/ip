@@ -1,9 +1,9 @@
 	Hi handsome! My name is Duck. What can I do for you?
 	Got it. I've added this task:
-		[T][✗] todo read book
+		[T][✗] read book
 	Now you have 1 tasks in the list.
 	Nice! I've marked this task as done:
-	[T][✓] todo read book
+	[T][✓] read book
 	Got it. I've added this task:
 		[D][✗] return book (by: June 6th)
 	Now you have 2 tasks in the list.
@@ -11,19 +11,19 @@
 		[E][✗] project meeting (at: Aug 6th 2-4pm)
 	Now you have 3 tasks in the list.
 	Got it. I've added this task:
-		[T][✗] todo join sports club
+		[T][✗] join sports club
 	Now you have 4 tasks in the list.
 	Nice! I've marked this task as done:
-	[T][✓] todo join sports club
+	[T][✓] join sports club
 	Got it. I've added this task:
-		[T][✗] todo borrow book
+		[T][✗] borrow book
 	Now you have 5 tasks in the list.
 	Here are the tasks in your list:
-	1. [T][✓] todo read book
+	1. [T][✓] read book
 	2. [D][✗] return book (by: June 6th)
 	3. [E][✗] project meeting (at: Aug 6th 2-4pm)
-	4. [T][✓] todo join sports club
-	5. [T][✗] todo borrow book
+	4. [T][✓] join sports club
+	5. [T][✗] borrow book
 	Got it. I've added this task:
 		[D][✗] return book (by: Sunday)
 	Now you have 6 tasks in the list.

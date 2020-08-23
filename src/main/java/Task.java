@@ -1,9 +1,11 @@
 public class Task {
     protected String task;
+    protected TaskType taskType;
     private boolean done;
 
-    public Task(String task) {
+    public Task(String task, TaskType taskType) {
         this.task = task;
+        this.taskType = taskType;
     }
 
     public Task doneTask() {
@@ -14,6 +16,6 @@ public class Task {
     @Override
     public String toString() {
         String status = done ? "[✓]" : "[✗]";
-        return status + " " + task;
+        return taskType + status + " " + task;
     }
 }
