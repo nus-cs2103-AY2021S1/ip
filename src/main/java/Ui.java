@@ -84,6 +84,6 @@ public class Ui {
     }
 
     public void showLoadingError() {
-
+        printWindow("Oops, error in loading the tasks! Please check the duke.txt file");
     }
 }
