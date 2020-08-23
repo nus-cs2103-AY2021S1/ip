@@ -3,6 +3,8 @@ package main.java;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -83,6 +85,9 @@ public class Duke {
             } else if (userInput.startsWith("todo")) {
 
                 try {
+                    if (userInput.substring(5).length() == 0) {
+                        throw new Exception();
+                    }
                     Todo newTodo = new Todo(userInput.substring(5));
                     taskList.add(newTodo);
                     updateFile(historyFile, taskList);
@@ -101,7 +106,7 @@ public class Duke {
 
                 try {
                     String[] splited = userInput.substring(9).split("/");
-                    Deadline newDdl = new Deadline(splited[0], splited[1]);
+                    Deadline newDdl = new Deadline(splited[0], splited[1].replace(" ", ""));
                     taskList.add(newDdl);
                     updateFile(historyFile, taskList);
                     System.out.println(
@@ -112,14 +117,14 @@ public class Duke {
                 } catch (Exception e) {
                     System.out.println("\n-> Oops, there is an error...\n" +
                             "-> please add correct description to \"deadline\" order\n" +
-                            "-> deadline {task content} /{time}\n");
+                            "-> deadline {task content} /{yyyy-mm-dd}\n");
                 }
 
             } else if (userInput.startsWith("event")) {
 
                 try {
                     String[] splited = userInput.substring(6).split("/");
-                    Event newEvent = new Event(splited[0], splited[1]);
+                    Event newEvent = new Event(splited[0], splited[1].replace(" ", ""));
                     taskList.add(newEvent);
                     updateFile(historyFile, taskList);
                     System.out.println(
@@ -130,7 +135,7 @@ public class Duke {
                 } catch (Exception e) {
                     System.out.println("\n-> Oops, there is an error...\n" +
                             "-> please add correct description to \"event\" order\n" +
-                            "-> event {task content} /{time}\n");
+                            "-> event {task content} /{yyyy-mm-dd}\n");
                 }
 
             } else if (userInput.startsWith("delete")) {
@@ -179,10 +184,10 @@ public class Duke {
                 if (type.equals("T")) {
                     result.add(new Todo(status, content));
                 } else if (type.equals("E")) {
-                    String time = history.nextLine();
+                    String time = history.nextLine().replace(" ", "");
                     result.add(new Event(status, content, time));
                 } else if (type.equals("D")) {
-                    String time = history.nextLine();
+                    String time = history.nextLine().replace(" ", "");
                     result.add(new Deadline(status, content, time));
                 }
             }

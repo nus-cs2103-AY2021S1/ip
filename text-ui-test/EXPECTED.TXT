@@ -9,20 +9,26 @@ You have 1 tasks in your list currently.
 
 
 -> I have added an Event:
-[E][×]CS2103 lecture (at FRI 12:00)  <-
+[E][×]CS2103 lecture (on Aug 01 2020)  <-
 You have 2 tasks in your list currently.
 
 
 -> I have added a Deadline:
-[D][×]CS2103 project submission (before FRI 2359)  <-
+[D][×]CS2103 project submission (by Aug 01 2020)  <-
 You have 3 tasks in your list currently.
+
+
+-> I have added a Deadline:
+[D][×]CS2103 tP (by Aug 01 2020)  <-
+You have 4 tasks in your list currently.
 
 
 -> Current List:
 
 1. [T][×] go to fairprice  <-
-2. [E][×]CS2103 lecture (at FRI 12:00)  <-
-3. [D][×]CS2103 project submission (before FRI 2359)  <-
+2. [E][×]CS2103 lecture (on Aug 01 2020)  <-
+3. [D][×]CS2103 project submission (by Aug 01 2020)  <-
+4. [D][×]CS2103 tP (by Aug 01 2020)  <-
 
 
 
@@ -33,24 +39,25 @@ You have 3 tasks in your list currently.
 -> Current List:
 
 1. [T][√] go to fairprice  <-
-2. [E][×]CS2103 lecture (at FRI 12:00)  <-
-3. [D][×]CS2103 project submission (before FRI 2359)  <-
+2. [E][×]CS2103 lecture (on Aug 01 2020)  <-
+3. [D][×]CS2103 project submission (by Aug 01 2020)  <-
+4. [D][×]CS2103 tP (by Aug 01 2020)  <-
 
 
 
--> I have added a Todo:
-[T][×]   <-
-You have 4 tasks in your list currently.
+-> Oops, there is an error...
+-> please add correct description to "todo" order
+-> todo {task content}
 
 
 -> Oops, there is an error...
 -> please add correct description to "event" order
--> event {task content} /{time}
+-> event {task content} /{yyyy-mm-dd}
 
 
 -> Oops, there is an error...
 -> please add correct description to "deadline" order
--> deadline {task content} /{time}
+-> deadline {task content} /{yyyy-mm-dd}
 
 
 -> Oops, there is an error...
@@ -69,9 +76,9 @@ You have 4 tasks in your list currently.
 -> Current List:
 
 1. [T][√] go to fairprice  <-
-2. [E][×]CS2103 lecture (at FRI 12:00)  <-
-3. [D][×]CS2103 project submission (before FRI 2359)  <-
-4. [T][×]   <-
+2. [E][×]CS2103 lecture (on Aug 01 2020)  <-
+3. [D][×]CS2103 project submission (by Aug 01 2020)  <-
+4. [D][×]CS2103 tP (by Aug 01 2020)  <-
 
 
 

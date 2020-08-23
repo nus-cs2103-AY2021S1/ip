@@ -1,5 +1,7 @@
 @ECHO OFF
 
+if exist .\data\duke.txt del .\data\duke.txt
+
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 
