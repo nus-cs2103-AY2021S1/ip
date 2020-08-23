@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.function.Function;
 
 public class Task {
@@ -19,13 +20,15 @@ public class Task {
     
     public static Task createTask(String[] stringArr) throws ReadFailedException {
         Function<String, Boolean> isDone = num -> num.equals("1");
+        Function<String, LocalDate> toDate = date -> LocalDate.parse(date);
+        
         switch (stringArr[0]) {
             case "T":
                 return new Todo(stringArr[2], isDone.apply(stringArr[0]));
             case "E":
-                return new Event(stringArr[2], stringArr[3], isDone.apply(stringArr[0]));
+                return new Event(stringArr[2], toDate.apply(stringArr[3]), isDone.apply(stringArr[0]));
             case "D":
-                return new Deadline(stringArr[2], stringArr[3], isDone.apply(stringArr[0]));
+                return new Deadline(stringArr[2], toDate.apply(stringArr[3]), isDone.apply(stringArr[0]));
             default: 
                 throw new ReadFailedException("tasks");
         }
@@ -41,6 +44,10 @@ public class Task {
     
     public String getData() {
         return String.format("%s_%s_%s", type.toString().charAt(0), isDone ? 1 : 0, description);
+    
+    }
+    public boolean hasDate() {
+        return this.type != TaskType.TODO;
     }
 
     @Override

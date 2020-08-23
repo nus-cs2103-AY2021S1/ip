@@ -50,6 +50,9 @@ public class Duke {
                         break;
                     case "deadline":
                         list.addTask(storage, TaskType.DEADLINE, input);
+                        break; 
+                    case "find":
+                        list.find(input);
                         break;
                     default:
                         throw new UnknownInputException();

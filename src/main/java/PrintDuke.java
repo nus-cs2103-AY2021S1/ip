@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class PrintDuke {
@@ -33,13 +35,25 @@ public class PrintDuke {
         message += String.format("\n Now you have %s task%s in the list.", length, length > 1 ? "s" : "" );
         printWithDashes(message);
     }
+    
+    private static StringBuilder printListItems(StringBuilder builder, ArrayList<Task> list) {
+        for (int i = 0; i < list.size(); i++) {
+            builder.append(String.format(" %s. %s\n", i + 1, list.get(i)));
+        }
+        return builder;
+    }
 
     protected static void printList(ArrayList<Task> list) {
-        StringBuilder listStr = new StringBuilder(" Here are the tasks in your list:\n");
-        for (int i = 0; i < list.size(); i++) {
-            listStr.append(String.format(" %s. %s\n", i + 1, list.get(i)));
-        }
-        printWithDashes(listStr.toString());
+        StringBuilder builder = new StringBuilder(" Here are the tasks in your list:\n");
+        printWithDashes(printListItems(builder, list).toString());
+    }
+
+    protected static void printFound(LocalDate localDate, ArrayList<Task> list) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        String formattedDate = localDate.format(formatter);
+        String intro = String.format(" Here are the tasks that I've found on %s:\n", formattedDate);
+        StringBuilder builder = new StringBuilder(intro);
+        printWithDashes(printListItems(builder, list).toString());
     }
 
     protected static void printMarkTaskAsDone(Task task) {

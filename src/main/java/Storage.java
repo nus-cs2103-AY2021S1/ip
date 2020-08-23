@@ -45,6 +45,8 @@ public class Storage {
             String[] stringArr = line.split("_");
             tasks.addTask(stringArr);
         }
+        scanner.close();
+        
         return tasks;
     }
     
