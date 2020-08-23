@@ -24,7 +24,8 @@ public class Ui {
 
     /**
      * Returns the next sentence of user input.
-     * @return string sentence of user input
+     *
+     * @return string sentence of user input.
      */
     public String getCommand() {
         return sc.nextLine();
@@ -58,7 +59,8 @@ public class Ui {
 
     /**
      * Returns task message when added.
-     * @param task task to be added
+     *
+     * @param task task to be added.
      */
     public void printTask(Task task) {
         System.out.println("Got it. I've added this task:");
@@ -69,7 +71,8 @@ public class Ui {
 
     /**
      * Returns done message.
-     * @param index number of list item to be marked done
+     *
+     * @param index number of list item to be marked done.
      */
     public void printDone(int index) {
         System.out.println("Nice! I've marked this task as done:");
@@ -79,7 +82,8 @@ public class Ui {
 
     /**
      * Returns message of delete and deletes the item from the list.
-     * @param indexToDelete number of list item to be deleted
+     *
+     * @param indexToDelete number of list item to be deleted.
      */
     public void printDelete(int indexToDelete) {
         System.out.println("Noted. I've removed this task:");
@@ -91,7 +95,8 @@ public class Ui {
 
     /**
      * Returns the error message.
-     * @param e error message
+     *
+     * @param e error message.
      */
     public void printError(String e) {
         System.out.println(e + "\n" + HORIZONTAL_LINE);
@@ -99,7 +104,8 @@ public class Ui {
 
     /**
      * Returns the error message of date time parse error.
-     * @param e error message
+     *
+     * @param e error message.
      */
     public void printDateTimeParseError(String e) {
         System.out.println(TAB + "Please enter date in 'yyyy-MM-dd' format");

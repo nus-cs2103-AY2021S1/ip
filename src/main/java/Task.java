@@ -9,7 +9,8 @@ public class Task {
 
     /**
      * Constructor of task, item initialized as not done by default.
-     * @param description description of task command
+     *
+     * @param description description of task command.
      */
     public Task(String description) {
         this.description = description;
@@ -18,7 +19,8 @@ public class Task {
 
     /**
      * Returns the status icon depending on done status of task.
-     * @return string icon of tick or cross
+     *
+     * @return string icon of tick or cross.
      */
     public String getStatusIcon() {
         return (isDone ? "✓" : "✘"); //return tick or X symbols
@@ -33,7 +35,7 @@ public class Task {
 
     /**
      * Returns 1 if status is done, 0 if not done.
-     * @return
+     * @return string 1 if status is done, 0 if not done.
      */
     public String toSaveString() {
         if (isDone) {

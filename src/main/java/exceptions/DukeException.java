@@ -8,7 +8,8 @@ public class DukeException extends Exception {
 
     /**
      * Same message will be thrown to user in DukeException.
-     * @param message message that will be thrown to user
+     *
+     * @param message message that will be thrown to user.
      */
     public DukeException(String message) {
         super(message);

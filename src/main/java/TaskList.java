@@ -18,7 +18,8 @@ public class TaskList {
 
     /**
      * Marks task item as done.
-     * @param index number of item in the list
+     *
+     * @param index number of item in the list.
      */
     public void markDone(int index) {
         taskList.get(index).markAsDone();
@@ -26,7 +27,8 @@ public class TaskList {
 
     /**
      * Adds task into the list.
-     * @param task task to be added into list
+     *
+     * @param task task to be added into list.
      */
     public void add(Task task) {
         taskList.add(task);

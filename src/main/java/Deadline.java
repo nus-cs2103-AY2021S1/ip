@@ -9,8 +9,9 @@ public class Deadline extends Task {
 
     /**
      * Constructor of deadline.
-     * @param description description of deadline
-     * @param time deadline time
+     *
+     * @param description description of deadline.
+     * @param time deadline time.
      */
     Deadline(String description, String time) {
         super(description);

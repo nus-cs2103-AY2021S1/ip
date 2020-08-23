@@ -39,8 +39,9 @@ public class Duke {
 
     /**
      * Invoke run for duke chatbot programme.
-     * @param args argument
-     * @throws IOException if file does not exist
+     *
+     * @param args argument.
+     * @throws IOException if file does not exist.
      */
     public static void main(String[] args) throws IOException {
         new Duke().run();
@@ -49,7 +50,8 @@ public class Duke {
     /**
      * Run Duke programme depending on the different commands
      * given by user.
-     * @throws IOException if file does not exist
+     *
+     * @throws IOException if file does not exist.
      */
     public void run() throws IOException {
         storage.handleLoad();
@@ -113,7 +115,8 @@ public class Duke {
 
     /**
      * Add todo into the list and print the relevant todo message.
-     * @param description description of todo
+     *
+     * @param description description of todo.
      */
     public void handleTodo(String description) {
         Todo todo = new Todo(description);
@@ -123,8 +126,9 @@ public class Duke {
 
     /**
      * Add deadline into the list and print the relevant deadline message.
-     * @param description description of deadline
-     * @throws DukeMissingTimeException thrown when user does not input the timing required
+     *
+     * @param description description of deadline.
+     * @throws DukeMissingTimeException thrown when user does not input the timing required.
      */
     public void handleDeadline(String description) throws DukeMissingTimeException {
         try {
@@ -141,8 +145,9 @@ public class Duke {
 
     /**
      * Add event into the list and print the relevant event message.
-     * @param description description of event
-     * @throws DukeMissingTimeException thrown when user does not input the timing required
+     *
+     * @param description description of event.
+     * @throws DukeMissingTimeException thrown when user does not input the timing required.
      */
     public void handleEvent(String description) throws DukeMissingTimeException {
         try {

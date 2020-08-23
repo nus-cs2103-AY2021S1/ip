@@ -11,7 +11,8 @@ public class Storage {
 
     /**
      * Constructor for storage.
-     * @param path path to the storage file
+     *
+     * @param path path to the storage file.
      */
     public Storage(String path) {
         this.path = path;
@@ -19,7 +20,8 @@ public class Storage {
 
     /**
      * Saves every tasks into the storage file.
-     * @throws IOException if storage file cannot be found
+     *
+     * @throws IOException if storage file cannot be found.
      */
     public void saveTasks() throws IOException {
         BufferedWriter taskWriter = new BufferedWriter(new FileWriter(path));
@@ -33,7 +35,8 @@ public class Storage {
 
     /**
      * Loads every tasks from the storage file to the user interface.
-     * @throws IOException if storage file cannot be found
+     *
+     * @throws IOException if storage file cannot be found.
      */
     public void handleLoad() throws IOException {
         BufferedReader taskLoader = new BufferedReader(new FileReader(path));
