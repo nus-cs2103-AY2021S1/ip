@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 
 public class TaskManager {
     private List<Task> toDoList;
@@ -57,8 +61,24 @@ public class TaskManager {
                 int notePos = input.indexOf("/") + 1;
                 String note = input.substring(notePos, input.length());
                 String echo = input.substring(9, notePos - 1) + " ------> " + note;
-                this.taskPrint(echo);
-                this.addToList(new Deadline(echo));
+                if(input.contains("by")) {
+                    int byPos = input.indexOf("by") + 3;
+                    String time = input.substring(byPos, input.length());
+                    try {
+                        String parsedTime = formatDate(time);
+                        String listForm = input.substring(9, notePos - 1) + "by " + parsedTime;
+                        this.taskPrint(listForm);
+                        this.addToList(new Deadline(listForm));
+                    }
+                    catch(Exception e) {
+                        this.taskPrint(echo);
+                        this.addToList(new Deadline(echo));
+                    }
+                }
+                else {
+                    this.taskPrint(echo);
+                    this.addToList(new Deadline(echo));
+                }
             }
             else {
                 this.addToList(new Deadline(input.substring(9, input.length())));
@@ -80,8 +100,24 @@ public class TaskManager {
                 int notePos = input.indexOf("/") + 1;
                 String note = input.substring(notePos, input.length());
                 String echo = input.substring(6, notePos - 1) + " ------> " + note;
-                this.taskPrint(echo);
-                this.addToList(new Event(echo));
+                if(input.contains("on")) {
+                    int byPos = input.indexOf("on") + 3;
+                    String time = input.substring(byPos, input.length());
+                    try {
+                        String parsedTime = formatDate(time);
+                        String listForm = input.substring(6, notePos - 1) + "on " + parsedTime;
+                        this.taskPrint(listForm);
+                        this.addToList(new Event(listForm));
+                    }
+                    catch(Exception e) {
+                        this.taskPrint(echo);
+                        this.addToList(new Event(echo));
+                    }
+                }
+                else {
+                    this.taskPrint(echo);
+                    this.addToList(new Event(echo));
+                }
             }
             else {
                 this.addToList(new Event(input.substring(6, input.length())));
@@ -159,6 +195,12 @@ public class TaskManager {
         System.out.println("Such wow! I have completed the following task!");
         System.out.println(task.toString() + " [" + task.getTaskStatusIcon() + "]");
         System.out.println("--------------------------------------");
+    }
+
+    public String formatDate(String date) throws Exception {
+        LocalDate parseDate = LocalDate.parse(date);
+        return parseDate.getDayOfWeek() + " " + parseDate.getDayOfMonth() + " "
+                + parseDate.getMonth() + " " + parseDate.getYear();
     }
 
     public void taskPrint(String msg) {
