@@ -19,6 +19,10 @@ public class Event extends Task {
         this.date = date;
     }
 
+    public String getFormattedDate() {
+        return this.date;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.date + ")";

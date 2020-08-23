@@ -23,6 +23,9 @@ public class Task {
     public String getTask() {
         return this.task;
     }
+    public boolean getIsDone() {
+        return this.isDone;
+    }
 
     @Override
     public String toString() {

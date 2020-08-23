@@ -19,6 +19,9 @@ public class Deadline extends Task {
         this.due = due;
     }
 
+    public String getFormattedDate() {
+        return this.due;
+    }
 
     @Override
     public String toString() {
