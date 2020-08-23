@@ -1,7 +1,14 @@
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+  private static final String CURRENT_DIRECTORY = System.getProperty("user.dir");
+
   public static void main(String[] args) throws Exception {
     String logo =
         " ____        _        \n"
@@ -11,7 +18,13 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
     System.out.println(logo + "\nHello ! I'm Duke\nWhat can I do for you?\n");
 
+    final String dataDir = CURRENT_DIRECTORY + File.separator + "data";
+    final String dataFile = "duke.txt";
+    // Check for if data file exist, create if does not exist
+    createFile(dataDir, dataFile);
+
     ArrayList<Task> dataArrayList = new ArrayList<>();
+    readFileToArrList(dataDir, dataFile, dataArrayList);
     Scanner scanner = new Scanner(System.in);
     String input = "";
     while (!input.equals("bye")) {
@@ -96,7 +109,91 @@ public class Duke {
           }
           break;
       }
+      writeArrListToFile(dataDir, dataFile, dataArrayList);
     }
     System.out.println("Bye. Hope to see you again soon!");
+  }
+
+  private static void createFile(String pathDir, String fileName) {
+    Path path = Paths.get(pathDir);
+    if (Files.exists(path)) {
+      try {
+        File file = new File(path + File.separator + fileName);
+        if (file.createNewFile()) {
+          System.out.println("File created at: " + file);
+        } else {
+          System.out.println("File already exist at: " + file);
+        }
+      } catch (IOException e) {
+        System.err.println("Failed to create file: " + e.getMessage());
+      }
+    } else {
+      try {
+        Files.createDirectories(path);
+        System.out.println("Directory created: " + pathDir);
+      } catch (IOException e) {
+        System.err.println("Failed to create directory: " + e.getMessage());
+      }
+      createFile(pathDir, fileName);
+    }
+  }
+
+  private static void writeArrListToFile(String dir, String fileName, ArrayList<Task> dataArr) {
+    try {
+      FileWriter writer = new FileWriter(dir + File.separator + fileName);
+      for (Task task : dataArr) {
+        String taskType = task.getClass().getTypeName();
+        if (taskType.equals("Todo")) {
+          writer.append(String.format("%s,%s,%s", taskType, task.isDone, task.description));
+        } else if (taskType.equals("Deadline")) {
+          writer.append(
+              String.format(
+                  "%s,%s,%s,%s", taskType, task.isDone, task.description, ((Deadline) task).by));
+        } else {
+          writer.append(
+              String.format(
+                  "%s,%s,%s,%s", taskType, task.isDone, task.description, ((Event) task).at));
+        }
+        writer.write("\n");
+      }
+      writer.close();
+    } catch (IOException ioException) {
+      ioException.printStackTrace();
+    }
+  }
+
+  private static void readFileToArrList(String dataDir, String fileName, ArrayList<Task> dataArr) {
+    File file = new File(dataDir + File.separator + fileName);
+    try {
+      BufferedReader br = new BufferedReader(new FileReader(file));
+      String fileLine;
+      while ((fileLine = br.readLine()) != null) {
+        String[] tempArr = fileLine.split(",");
+        String command = tempArr[0];
+        switch (command) {
+          case "Todo":
+            dataArr.add(new Todo(tempArr[2]));
+            break;
+          case "Deadline":
+            Task tempDeadline = new Deadline(tempArr[2], tempArr[3]);
+            if (tempArr[1].equals("true")) {
+              tempDeadline.markAsDone();
+            }
+            dataArr.add(tempDeadline);
+            break;
+          case "Event":
+            Task tempEvent = new Event(tempArr[2], tempArr[3]);
+            if (tempArr[1].equals("true")) {
+              tempEvent.markAsDone();
+            }
+            dataArr.add(tempEvent);
+            break;
+          default:
+            System.err.println("No event of this type");
+        }
+      }
+    } catch (IOException fileNotFoundException) {
+      System.err.println("Failed to find file: " + fileNotFoundException.getMessage());
+    }
   }
 }
