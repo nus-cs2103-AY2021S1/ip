@@ -1,0 +1,182 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *** Opening and loading relevant documents into duke.Duke ***
+                ____        _        
+               |  _ \ _   _| | _____ 
+               | | | | | | | |/ / _ \
+               | |_| | |_| |   <  __/
+               |____/ \__,_|_|\_\___|
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Hello! I'm duke.Duke ^.^
+What can I do for you?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Your list is empty!!!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Here are the list of duke.commands available:
+1. list
+2. bye
+3. todo 'duke.task name' (e.g. todo duke.task 1)
+4. deadline 'duke.task name' /by 'any date format' (e.g. deadline project /by YYYY-MM-DD HHMM or YYYY-MM-DD)
+5. event 'event name' /at 'any date format' (e.g. event project /at YYYY-MM-DD HHMM or YYYY-MM-DD)
+6. delete ___ (e.g. delete 1)  *Note that it should be a value more than 0*
+7. done ___ (e.g. done 1)  *Note that it should be a value more than 0*
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Invalid input for delete
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ☹ OOPS! You must fill in the text for todo
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Got it. I've added this duke.task:
+[T][✘] duke.task 1
+Now you have 1 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Got it. I've added this duke.task:
+[T][✘] duke.task 2
+Now you have 2 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ☹ OOPS! You must fill in the text for deadline
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ☹ OOPS! A proper deadline format would be like, e.g. deadline 'duke.task name' /by 'YYYY-MM-DD HHMM or YYYY-MM-DD'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ☹ OOPS! A proper date format would be YYYY-MM-DD HHMM (e.g. 2019-10-15 1600) or YYYY-MM-DD (e.g. 2019-10-15)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Got it. I've added this duke.task:
+[D][✘] finish this project (by: Sunday, 23 Aug 2020, 4:00am)
+Now you have 3 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Got it. I've added this duke.task:
+[D][✘] finish this project (by: Sunday, 23 Aug 2020, 11:59pm)
+Now you have 4 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ☹ OOPS! A proper deadline format would be like, e.g. deadline 'duke.task name' /by 'YYYY-MM-DD HHMM or YYYY-MM-DD'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Invalid input for done
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Invalid input for done
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Nice! I've marked this duke.task as done:
+[T][✓] duke.task 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ☹ OOPS! You must fill in the text for event
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ☹ OOPS! A proper event format would be like, e.g. event 'event name' /at 'YYYY-MM-DD HHMM or YYYY-MM-DD'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ☹ OOPS! A proper date format would be YYYY-MM-DD HHMM (e.g. 2019-10-15 1600) or YYYY-MM-DD (e.g. 2019-10-15)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Got it. I've added this duke.task:
+[E][✘] finish this project (at: Sunday, 23 Aug 2020, 4:00am)
+Now you have 5 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Got it. I've added this duke.task:
+[E][✘] finish this project (at: Sunday, 23 Aug 2020, 11:59pm)
+Now you have 6 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ☹ OOPS! A proper event format would be like, e.g. event 'event name' /at 'YYYY-MM-DD HHMM or YYYY-MM-DD'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here are the tasks in your list:
+1. [T][✓] duke.task 1
+2. [T][✘] duke.task 2
+3. [D][✘] finish this project (by: Sunday, 23 Aug 2020, 4:00am)
+4. [D][✘] finish this project (by: Sunday, 23 Aug 2020, 11:59pm)
+5. [E][✘] finish this project (at: Sunday, 23 Aug 2020, 4:00am)
+6. [E][✘] finish this project (at: Sunday, 23 Aug 2020, 11:59pm)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Noted. I've removed this duke.task:
+[E][✘] finish this project (at: Sunday, 23 Aug 2020, 4:00am)
+Now you have 5 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Nice! I've marked this duke.task as done:
+[D][✓] finish this project (by: Sunday, 23 Aug 2020, 11:59pm)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This duke.task has already been marked!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Nice! I've marked this duke.task as done:
+[T][✓] duke.task 2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Noted. I've removed this duke.task:
+[D][✘] finish this project (by: Sunday, 23 Aug 2020, 4:00am)
+Now you have 4 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ☹ OOPS! Did you mean list? (Note: There should not be anything behind list)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ☹ OOPS! Did you mean bye? (Note: There should not be anything behind bye)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Here are the list of duke.commands available:
+1. list
+2. bye
+3. todo 'duke.task name' (e.g. todo duke.task 1)
+4. deadline 'duke.task name' /by 'any date format' (e.g. deadline project /by YYYY-MM-DD HHMM or YYYY-MM-DD)
+5. event 'event name' /at 'any date format' (e.g. event project /at YYYY-MM-DD HHMM or YYYY-MM-DD)
+6. delete ___ (e.g. delete 1)  *Note that it should be a value more than 0*
+7. done ___ (e.g. done 1)  *Note that it should be a value more than 0*
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Bye ^.^, Hope to see you again soon!!!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
