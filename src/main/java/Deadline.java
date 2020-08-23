@@ -1,10 +1,20 @@
-public class Deadline extends Task {
+public class Deadline extends Task implements Saveable {
     String deadline;
 
-    Deadline(String label, String deadline) {
-        super(label);
+    Deadline(String label, String deadline, boolean done) {
+        super(label, done);
         // Remove the "by"
-        this.deadline = deadline.substring(3);
+        this.deadline = deadline;
+    }
+
+    @Override
+    public String getInfo() {
+        StringBuilder str = new StringBuilder();
+        str.append("D");
+        str.append(super.getInfo());
+        str.append(super.separator);
+        str.append(deadline);
+        return str.toString();
     }
 
     @Override

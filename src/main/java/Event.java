@@ -1,10 +1,20 @@
-public class Event extends Task {
+public class Event extends Task implements Saveable {
     String timing;
 
-    Event(String label, String timing) {
-        super(label);
+    Event(String label, String timing, boolean done) {
+        super(label, done);
         // Remove the "at"
-        this.timing = timing.substring(3);
+        this.timing = timing;
+    }
+
+    @Override
+    public String getInfo() {
+        StringBuilder str = new StringBuilder();
+        str.append("E");
+        str.append(super.getInfo());
+        str.append(super.separator);
+        str.append(timing);
+        return str.toString();
     }
 
     @Override
