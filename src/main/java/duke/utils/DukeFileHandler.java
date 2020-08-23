@@ -26,6 +26,13 @@ public class DukeFileHandler {
         File file = new File(path);
 
         if (!file.exists()) {
+            try {
+                // todo find out why access is denied when creating file
+                file.mkdirs();
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return new ArrayList<>();
 
         } else {
@@ -60,17 +67,22 @@ public class DukeFileHandler {
     }
 
 
+    // todo the access denied to write file
     public void writeToFile(List<Task> list) throws IOException {
-        FileWriter fileWriter = new FileWriter(path);
-        StringBuilder content = new StringBuilder();
 
-        for (Task task : list) {
-            content.append(task.toCustomString()).append(System.lineSeparator());
+        try {
+            FileWriter fileWriter = new FileWriter(path);
+            StringBuilder content = new StringBuilder();
+            for (Task task : list) {
+                content.append(task.toCustomString()).append(System.lineSeparator());
+            }
+
+            fileWriter.write(content.toString());
+            fileWriter.close();
+
+        } catch (IOException e) {
+//            e.printStackTrace();
         }
-
-
-        fileWriter.write(content.toString());
-        fileWriter.close();
     }
 
 }
