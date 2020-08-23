@@ -4,6 +4,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -142,7 +145,7 @@ public class Duke {
                         taskList.add(newTask);
                         isListChanged = true;
                         System.out.println(botReplyForAddTask(newTask));
-                    } catch (IndexOutOfBoundsException | WrongFormatException e)
+                    } catch (IndexOutOfBoundsException | WrongFormatException | DateTimeException e)
                     { // Command is in a wrong format
                         throw new DeadlineWrongFormatException();
                     }
@@ -267,7 +270,8 @@ public class Duke {
                 taskList.add(new Event(splitLine[2], splitLine[3], !splitLine[1].equals("0")));
                 break;
             case "[D]": // Deadline
-                taskList.add(new Deadline(splitLine[2], splitLine[3], !splitLine[1].equals("0")));
+                taskList.add(new Deadline(splitLine[2], LocalDateTime.parse(splitLine[3]).format(DateTimeFormatter
+                        .ofPattern("yyyy-MM-dd HHmm")), !splitLine[1].equals("0")));
                 break;
             default:
                 System.out.println(botReply("Error in last save. Now loading a new, empty task list."));

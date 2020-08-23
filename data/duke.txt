@@ -1,0 +1,5 @@
+[T]|0|read book
+[E]|1|meeting|10pm
+[D]|1|homework|2020-08-23T23:59:00
+[D]|0|write essay|2020-08-27T13:30:00
+[D]|0|send email|2020-09-21T09:30:00
