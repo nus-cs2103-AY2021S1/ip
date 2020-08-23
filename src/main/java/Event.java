@@ -5,8 +5,19 @@ public class Event extends Task{
         this.time = time;
     }
 
+    public Event(String description, boolean isDone, String time) {
+        super(description, isDone);
+        this.time = time;
+    }
+
     @Override
     public String getStatusIcon() {
-        return String.format("[D]%s (at: %s)", super.getStatusIcon(), time);
+        return String.format("[E]%s", super.getStatusIcon(), time);
     }
+
+    @Override
+    public String getOutput() {
+        return String.format("%s %s%s", getStatusIcon(), this.description, this.time);
+    }
+
 }

@@ -7,13 +7,18 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
         String sign = isDone ? "\u2713" : "\u2718"; //return tick or X symbols
         return (String.format("[%s]", sign));
     }
 
     public String getOutput() {
-        return String.format("%s %s", getStatusIcon(), this.description);
+        return String.format("%s%s", getStatusIcon(), this.description);
     }
 
     public void setDone() {

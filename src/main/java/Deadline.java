@@ -5,8 +5,19 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    public Deadline(String description, boolean isDone, String time) {
+        super(description, isDone);
+        this.time = time;
+    }
+
     @Override
     public String getStatusIcon() {
-        return String.format("[D]%s (by: %s)", super.getStatusIcon(), time);
+        return String.format("[D]%s", super.getStatusIcon(), time);
     }
+
+    @Override
+    public String getOutput() {
+        return String.format("%s %s%s", getStatusIcon(), this.description, this.time);
+    }
+
 }
