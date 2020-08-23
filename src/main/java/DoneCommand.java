@@ -1,6 +1,6 @@
 public class DoneCommand extends Command {
-    int taskIndex;
-    boolean exitCheck;
+    protected int taskIndex;
+    protected boolean isExit;
 
     /**
      * Instantiates DoneCommand object.
@@ -42,7 +42,7 @@ public class DoneCommand extends Command {
      * @return exitCheck as False
      */
     public boolean exitCheck() {
-        exitCheck = false;
-        return exitCheck;
+        isExit = false;
+        return isExit;
     }
 }

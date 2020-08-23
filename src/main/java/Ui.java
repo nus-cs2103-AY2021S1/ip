@@ -1,14 +1,17 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 public class Ui {
-    private final BufferedReader inputLine;
+    private final BufferedReader INPUT_LINE;
 
     /**
      * Instantiates Ui object and BufferedReader object to scan user input.
      */
     public Ui() {
         Reader inputStreamReader = new InputStreamReader(System.in);
-        this.inputLine = new BufferedReader(inputStreamReader);
+        this.INPUT_LINE = new BufferedReader(inputStreamReader);
     }
 
     /**
@@ -77,7 +80,7 @@ public class Ui {
      */
     public String parseInput() {
         try {
-            return inputLine.readLine();
+            return INPUT_LINE.readLine();
         } catch (IOException error) {
             System.out.println("Error reading user input.");
             String returnNull = null;
@@ -91,7 +94,7 @@ public class Ui {
      */
     public void exitProgram() {
         try {
-            inputLine.close();
+            INPUT_LINE.close();
         } catch (IOException error) {
             System.out.println("Error closing user input stream.");
         }

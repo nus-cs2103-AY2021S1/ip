@@ -1,5 +1,5 @@
 public class ListCommand extends Command {
-    boolean exitCheck;
+    protected boolean isExit;
 
     /**
      * Runs command to handle list command.
@@ -29,7 +29,7 @@ public class ListCommand extends Command {
      * @return exitCheck as False
      */
     public boolean exitCheck() {
-        exitCheck = false;
-        return exitCheck;
+        isExit = false;
+        return isExit;
     }
 }

@@ -1,2 +1,4 @@
-E|0|project meeting|19/8/2020 1800
-D|0|submit project|30/8/2020 2359
+D|1|submit project|30/8/2020 2359
+T|1|read book
+E|0|project meeting|16/1/2012 1342
+D|0|project|12/2/2013 1203

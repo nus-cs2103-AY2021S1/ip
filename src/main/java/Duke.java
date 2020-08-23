@@ -1,7 +1,7 @@
 public class Duke {
-    public Storage storage;
-    public Ui ui;
-    public TaskList arrayOfTasks;
+    protected Storage storage;
+    protected Ui ui;
+    protected TaskList arrayOfTasks;
 
     /**
      * Instantiates Duke object.

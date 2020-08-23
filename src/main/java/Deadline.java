@@ -1,6 +1,6 @@
 public class Deadline extends Task {
-    public Date deadlineDate;
-    public Timing deadlineTime;
+    protected Date deadlineDate;
+    protected Timing deadlineTime;
 
     /**
      * Instantiates Deadline object.

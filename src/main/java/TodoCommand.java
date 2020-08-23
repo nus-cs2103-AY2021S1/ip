@@ -1,5 +1,6 @@
 public class TodoCommand extends Command {
-    Task toDoTask;
+    protected Task toDoTask;
+    protected boolean isExit;
 
     /**
      * Instantiates TodoCommand object.
@@ -30,6 +31,7 @@ public class TodoCommand extends Command {
      * @return exitCheck as False
      */
     public boolean exitCheck() {
-        return false;
+        isExit = false;
+        return isExit;
     }
 }

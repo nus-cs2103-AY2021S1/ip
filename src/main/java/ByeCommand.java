@@ -1,5 +1,5 @@
 public class ByeCommand extends Command {
-    boolean exitCheck;
+    protected boolean isExit;
 
     /**
      * Runs command to exit Duke.
@@ -18,7 +18,7 @@ public class ByeCommand extends Command {
      * @return boolean true to signal exit from Duke program.
      */
     public boolean exitCheck() {
-        exitCheck = true;
-        return exitCheck;
+        isExit = true;
+        return isExit;
     }
 }

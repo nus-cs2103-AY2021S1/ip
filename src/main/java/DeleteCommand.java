@@ -1,6 +1,6 @@
 public class DeleteCommand extends Command {
-    boolean exitCheck;
-    int taskIndex;
+    protected boolean isExit;
+    protected int taskIndex;
 
     /**
      * Instantiates DeleteCommand object.
@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
      * @return exitCheck as False
      */
     public boolean exitCheck() {
-        exitCheck = false;
-        return exitCheck;
+        isExit = false;
+        return isExit;
     }
 }

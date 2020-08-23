@@ -1,7 +1,7 @@
 public class Task {
     protected boolean isDone;
     protected String description;
-    public static int totalTasks = 0;
+    protected static int totalTasks = 0;
     protected TaskType taskType;
 
     /**

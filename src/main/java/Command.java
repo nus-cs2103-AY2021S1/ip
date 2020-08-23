@@ -1,5 +1,5 @@
 public abstract class Command {
-    String typeOfCommand;
+    protected String typeOfCommand;
 
     /**
      * Gets the specific command.

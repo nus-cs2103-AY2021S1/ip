@@ -1,6 +1,6 @@
 public class DeadlineCommand extends Command {
-    boolean exitCheck;
-    Task deadlineTask;
+    protected boolean isExit;
+    protected Task deadlineTask;
 
     /**
      * Instantiates DeadlineCommand object.
@@ -33,7 +33,7 @@ public class DeadlineCommand extends Command {
      * @return exitCheck as False
      */
     public boolean exitCheck() {
-        exitCheck = false;
-        return exitCheck;
+        isExit = false;
+        return isExit;
     }
 }

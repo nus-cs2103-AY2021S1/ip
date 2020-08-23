@@ -1,6 +1,6 @@
 public class EventCommand extends Command {
-    boolean exitCheck;
-    Task eventTask;
+    protected boolean isExit;
+    protected Task eventTask;
 
     /**
      * Instantiates EventCommand object.
@@ -33,7 +33,7 @@ public class EventCommand extends Command {
      * @return exitCheck as False
      */
     public boolean exitCheck() {
-        exitCheck = false;
-        return exitCheck;
+        isExit = false;
+        return isExit;
     }
 }

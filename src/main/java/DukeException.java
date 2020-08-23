@@ -1,5 +1,5 @@
 public class DukeException extends Exception {
-    String errorMessage;
+    protected String errorMessage;
 
     /**
      * Instantiates DukeException object.
