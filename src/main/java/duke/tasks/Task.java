@@ -56,9 +56,7 @@ public class Task {
      * present, returns null.
      */
     public LocalDate getDate() {
-        return hasDate()
-                ? localDate
-                : null;
+        return hasDate() ? localDate : null;
     }
 
     /**

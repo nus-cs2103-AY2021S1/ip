@@ -30,15 +30,13 @@ public class InvalidTaskFormat extends DukeException {
         switch (taskType) {
         case TODO:
             return super.toString() + " The description of a todo cannot be empty.";
-            //Fallthrough
+        //Fallthrough
         case EVENT:
-            return super.toString() + " Please follow the correct format for events\n" +
-                           "      event <description> /at <date>";
-            //Fallthrough
+            return super.toString() + " Please follow the correct format for events\n" + "      event <description> /at <date>";
+        //Fallthrough
         case DEADLINE:
-            return super.toString() + " Please follow the correct format for deadlines\n" +
-                           "      deadline <description> /by <date>";
-            //Fallthrough
+            return super.toString() + " Please follow the correct format for deadlines\n" + "      deadline <description> /by <date>";
+        //Fallthrough
         default:
             return "What kind of task is that ?!?! :O";
         }

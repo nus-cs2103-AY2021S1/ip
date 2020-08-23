@@ -49,7 +49,7 @@ public class Parser {
         String commandWord = matcher.group("command");
         String commandBody = matcher.group("body");
 
-        switch(commandWord) {
+        switch (commandWord) {
         case TodoCommand.COMMAND_WORD:
             return prepareTodo(commandBody.strip());
         case DeadlineCommand.COMMAND_WORD:
@@ -87,8 +87,7 @@ public class Parser {
     //Otherwise, returns an InvalidCommand object.
     private static Command prepareDeadline(String commandBody) {
         String[] splitParts = commandBody.split((" /by "));
-        if (splitParts.length != 2 || splitParts[0].strip().length() == 0 ||
-                splitParts[1].strip().length() == 0) {
+        if (splitParts.length != 2 || splitParts[0].strip().length() == 0 || splitParts[1].strip().length() == 0) {
             return new InvalidCommand();
         } else {
             LocalDate localDate = Parser.parseDate(splitParts[1].strip());
@@ -105,9 +104,7 @@ public class Parser {
     //Otherwise, returns an InvalidCommand object.
     private static Command prepareEvent(String commandBody) {
         String[] splitParts = commandBody.split((" /at "));
-        if (splitParts.length != 2
-                || splitParts[0].strip().length() == 0
-                || splitParts[1].strip().length() == 0) {
+        if (splitParts.length != 2 || splitParts[0].strip().length() == 0 || splitParts[1].strip().length() == 0) {
             return new InvalidCommand();
         } else {
             LocalDate localDate = Parser.parseDate(splitParts[1].strip());
