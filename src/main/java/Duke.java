@@ -21,7 +21,7 @@ public class Duke {
         System.out.println(open);
 
         readSavedData();
-        FileWriter writer = new FileWriter("data/duke.txt");
+        //FileWriter writer = new FileWriter("data/duke.txt");
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
         while(running) {
@@ -78,7 +78,7 @@ public class Duke {
 
         // Closing
         scanner.close();
-        writer.close();
+        //writer.close();
         String close = "_______________________________________ \n"
                 + "Goodbye! See you soon! \n"
                 + "_______________________________________ \n";
