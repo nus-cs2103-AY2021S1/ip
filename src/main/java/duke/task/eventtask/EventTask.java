@@ -14,8 +14,8 @@ public class EventTask extends Task {
     }
 
     public EventTask(String line, boolean isAutomated) {
-        super(line, true);
-        this.eventDate = LocalDateTime.parse(line.substring(line.indexOf("(at: ") + 5,line.lastIndexOf(")")),
+        super(line);
+        this.eventDate = LocalDateTime.parse(line.substring(line.indexOf("(at: ") + 5, line.lastIndexOf(")")),
                 DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
     }
 

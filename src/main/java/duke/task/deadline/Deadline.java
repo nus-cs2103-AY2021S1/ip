@@ -9,12 +9,12 @@ public class Deadline extends Task {
     private final LocalDateTime dueDate;
 
     public Deadline(String name, LocalDateTime date, String dueDate) {
-        super(name,date);
+        super(name, date);
         this.dueDate = LocalDateTime.parse(dueDate, formatter);
     }
 
     public Deadline(String line, boolean isAutomated) {
-        super(line,true);
+        super(line);
         this.dueDate = LocalDateTime.parse(line.substring(line.indexOf("(by: ") + 5, line.lastIndexOf(")")),
                 DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
     }

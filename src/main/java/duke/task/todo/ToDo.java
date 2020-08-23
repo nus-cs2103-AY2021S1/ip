@@ -10,7 +10,7 @@ public class ToDo extends Task {
     }
 
     public ToDo(String line, boolean isAutomated) {
-        super(line, true);
+        super(line);
     }
     @Override
     public String toString(){

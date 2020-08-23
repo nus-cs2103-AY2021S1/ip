@@ -2,7 +2,6 @@ package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Task {
     protected boolean isDone;
@@ -17,10 +16,10 @@ public class Task {
         this.formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     }
 
-    protected Task(String line,  boolean isAutomated) {
+    protected Task(String line) {
         this.isDone = line.charAt(4) == '\u2713';
         this.name = line.substring(7, line.indexOf("[created on"));
-        this.createdDateTime = LocalDateTime.parse(line.substring(line.indexOf("[created on ")+ 12,
+        this.createdDateTime = LocalDateTime.parse(line.substring(line.indexOf("[created on ") + 12,
                 line.lastIndexOf("]")),
                 DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
         this.formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

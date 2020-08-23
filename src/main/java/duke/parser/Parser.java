@@ -13,16 +13,9 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Parser {
-    public Storage storage;
-    public TaskList shelf;
-    public Scanner sc;
-    public UI ui;
-    public int indexer;
+    private final UI ui;
 
-    public Parser(Storage storage, TaskList tasklist, UI ui) {
-        this.storage = storage;
-        this.shelf = tasklist;
-        this.sc = new Scanner(System.in);
+    public Parser(UI ui) {
         this.ui = ui;
     }
 
@@ -32,6 +25,7 @@ public class Parser {
 
     public void listen(String response) {
         try {
+            int indexer;
             if (response.equals("bye")) {
                 ui.replyBye();
             } else if (response.equals("list")) {

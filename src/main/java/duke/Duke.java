@@ -10,19 +10,16 @@ import java.util.Scanner;
 import java.io.File;
 
 public class Duke {
-    public final static String LINE = "*********************************************************";
-    public static TaskList shelf;
-    public static Storage storage;
-    public static Parser parser;
-    public static UI ui;
+    private final static String LINE = "*********************************************************";
+    private static Parser parser;
 
     public static void main(String[] args) {
         File f = new File("D:\\24092014\\Joven\\UNI STUFF\\CS2103\\IP\\task.txt");
         welcome();
-        storage = new Storage(f);
-        shelf = new TaskList(storage.loadFile());
-        ui = new UI(shelf, storage);
-        parser = new Parser(storage, shelf, ui);
+        Storage storage = new Storage(f);
+        TaskList shelf = new TaskList(storage.loadFile());
+        UI ui = new UI(shelf, storage);
+        parser = new Parser(ui);
         Scanner sc = new Scanner(System.in);
         handler(sc);
         sc.close();
@@ -41,11 +38,11 @@ public class Duke {
     }
 
     public static void handler(Scanner sc) {
-        while(true){
+        while (true) {
             String response = sc.nextLine();
             parser.listen(response);
             System.out.println(LINE);
-            if(parser.toStop(response)){
+            if (parser.toStop(response)) {
                 break;
             }
         }

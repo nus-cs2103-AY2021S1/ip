@@ -14,10 +14,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Storage {
-    public File f;
+    private final File f;
     private Scanner lineReader;
 
-    public Storage(File f){
+    public Storage(File f) {
         this.f = f;
         try {
             f.createNewFile();
@@ -31,9 +31,9 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> loadFile(){
+    public ArrayList<Task> loadFile() {
         ArrayList<Task> shelf = new ArrayList<>();
-        while(lineReader.hasNextLine()) {
+        while (lineReader.hasNextLine()) {
             String data = lineReader.nextLine();
             shelf.add(taskCreator(data));
         }
@@ -42,25 +42,23 @@ public class Storage {
 
     public void updateFile(TaskList shelf) throws IOException {
         FileWriter fw = new FileWriter(f.getAbsolutePath());
-        for(int i = 0; i < shelf.getSize(); i++) {
+        for (int i = 0; i < shelf.getSize(); i++) {
             fw.write(shelf.getTask(i).toString());
             fw.write(System.lineSeparator());
         }
         fw.close();
     }
 
-    private Task taskCreator(String task){
+    private Task taskCreator(String task) {
         switch (task.charAt(1)) {
-            case 'T':
-                return new ToDo(task.toString(), true);
-            case 'D':
-                return new Deadline(task.toString(), true);
-            default:
-                return new EventTask(task.toString(), true);
+        case 'T':
+            return new ToDo(task.toString(), true);
+        case 'D':
+            return new Deadline(task.toString(), true);
+        default:
+            return new EventTask(task.toString(), true);
         }
     }
-
-
 
 
 }
