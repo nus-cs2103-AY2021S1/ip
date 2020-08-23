@@ -40,7 +40,7 @@
 
 	=================================================================================
 	  Got it. I've added this task:
-	    [D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	    [D][✘] cs3230 assignment 1 (by: Aug 22 2020) This is overdue! The deadline has passed!!!
 	  Now you have 6 tasks in the list.
 	=================================================================================
 
@@ -52,7 +52,7 @@
 	  4.[T][✘] verify critical data
 	  5.[T][✘] return books
 	  6.[T][✘] buy CD
-	  7.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	  7.[D][✘] cs3230 assignment 1 (by: Aug 22 2020) This is overdue! The deadline has passed!!!
 	=================================================================================
 
 	=================================================================================
@@ -87,7 +87,7 @@
 	  4.[T][✘] verify critical data
 	  5.[T][✘] return books
 	  6.[T][✘] buy CD
-	  7.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	  7.[D][✘] cs3230 assignment 1 (by: Aug 22 2020) This is overdue! The deadline has passed!!!
 	  8.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
 	  9.[D][✘] utw2001 final paper (by: Nov 3 2020)
 	  10.[T][✘] clean room
@@ -111,7 +111,7 @@
 	  4.[T][✘] verify critical data
 	  5.[T][✘] return books
 	  6.[T][✘] buy CD
-	  7.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	  7.[D][✘] cs3230 assignment 1 (by: Aug 22 2020) This is overdue! The deadline has passed!!!
 	  8.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
 	  9.[D][✘] utw2001 final paper (by: Nov 3 2020)
 	  10.[T][✘] clean room
@@ -135,7 +135,7 @@
 	  3.[T][✘] verify critical data
 	  4.[T][✘] return books
 	  5.[T][✘] buy CD
-	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020) This is overdue! The deadline has passed!!!
 	  7.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
 	  8.[D][✘] utw2001 final paper (by: Nov 3 2020)
 	  9.[T][✘] clean room
@@ -166,7 +166,7 @@
 	  3.[T][✘] verify critical data
 	  4.[T][✘] return books
 	  5.[T][✘] buy CD
-	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020) This is overdue! The deadline has passed!!!
 	  7.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
 	  8.[D][✘] utw2001 final paper (by: Nov 3 2020)
 	  9.[T][✘] clean room
@@ -186,7 +186,7 @@
 	  3.[T][✘] verify critical data
 	  4.[T][✘] return books
 	  5.[T][✘] buy CD
-	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020) This is overdue! The deadline has passed!!!
 	  7.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
 	  8.[D][✘] utw2001 final paper (by: Nov 3 2020)
 	  9.[T][✘] clean room
@@ -207,7 +207,7 @@
 	  3.[T][✘] verify critical data
 	  4.[T][✘] return books
 	  5.[T][✘] buy CD
-	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020) This is overdue! The deadline has passed!!!
 	  7.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
 	  8.[D][✘] utw2001 final paper (by: Nov 3 2020)
 	  9.[T][✘] clean room
@@ -218,7 +218,6 @@
 
 	=================================================================================
 	  Here are the tasks happening today in your list:
-	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
 	=================================================================================
 
 	=================================================================================
@@ -234,12 +233,13 @@
 
 	=================================================================================
 	  Here are the tasks happening before today in your list:
+	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020) This is overdue! The deadline has passed!!!
 	=================================================================================
 
 	=================================================================================
 	  Here are the tasks happening before Sep 1 2020 in your list:
 	  2.[D][✓] cs2102 tutorial 1 (by: Aug 25 2020)
-	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020) This is overdue! The deadline has passed!!!
 	  7.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
 	  11.[D][✘] cs2101 email (by: Aug 31 2020)
 	  12.[E][✘] family party (at: 07:00 PM   Aug 31 2020)
@@ -265,7 +265,6 @@
 	=================================================================================
 	  Here are the tasks happening in 10 daysin your list:
 	  2.[D][✓] cs2102 tutorial 1 (by: Aug 25 2020)
-	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
 	  7.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
 	  11.[D][✘] cs2101 email (by: Aug 31 2020)
 	  12.[E][✘] family party (at: 07:00 PM   Aug 31 2020)
@@ -297,7 +296,7 @@
 	  3.[T][✘] verify critical data
 	  4.[T][✘] return books
 	  5.[T][✘] buy CD
-	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020)
+	  6.[D][✘] cs3230 assignment 1 (by: Aug 22 2020) This is overdue! The deadline has passed!!!
 	  7.[E][✘] cs2101 op meeting (at: 12:00 PM   Aug 31 2020)
 	  8.[D][✘] utw2001 final paper (by: Nov 3 2020)
 	  9.[T][✘] clean room
