@@ -27,4 +27,9 @@ public class Event extends Task {
     public LocalDateTime getDueDate() {
         return dueDate;
     }
+
+    /**
+     * This method returns the string to be written for the event.
+     */
+    public String toWriteString() { return "E " +  super.toWriteString() + " | " + dueDate; }
 }

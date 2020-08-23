@@ -8,6 +8,7 @@ package Duke;
  * @since 2020-15-08
  */
 public class Todo extends Task {
+
     public Todo(String description) {
         this.description = description;
     }
@@ -15,4 +16,9 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    /**
+     * This method returns the string to be written for the todo.
+     */
+    public String toWriteString() { return "T " +  super.toWriteString(); }
 }

@@ -36,8 +36,19 @@ public class Task {
         return true;
     }
 
+    /**
+     * This method marks the task as done.
+     * @return true value
+     */
+    public boolean markAsDoneWithoutPrint() {
+        isDone = true;
+        return true;
+    }
+
 
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
+
+    public String toWriteString() { return " | "+ (isDone ? "1" : "0") + " | " + description;}
 }

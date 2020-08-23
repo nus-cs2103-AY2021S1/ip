@@ -132,12 +132,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">Duke</span>
 extends java.lang.Object</pre>
-<div class="block">The Best2013TBot program that implements a chatbot.</div>
+<div class="block">The Best2013TBot program that implements a chatbot. (Week 3)</div>
 <dl>
 <dt><span class="simpleTagLabel">Since:</span></dt>
 <dd>2020-15-08</dd>
 <dt><span class="simpleTagLabel">Version:</span></dt>
-<dd>1.0</dd>
+<dd>2.0</dd>
 <dt><span class="simpleTagLabel">Author:</span></dt>
 <dd>Zeng Yu Ting</dd>
 </dl>
@@ -198,19 +198,12 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addTask(java.lang.String)">addTask</a></span>&#8203;(java.lang.String&nbsp;taskName)</code></th>
-<td class="colLast">
-<div class="block">This method adds task for the bot.</div>
-</td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addTodo(java.lang.String)">addTodo</a></span>&#8203;(java.lang.String&nbsp;taskName)</code></th>
 <td class="colLast">
 <div class="block">This method adds todoTask for the bot.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#displayDateList(java.time.LocalDateTime)">displayDateList</a></span>&#8203;(java.time.LocalDateTime&nbsp;date)</code></th>
 <td class="colLast">
@@ -253,6 +246,13 @@ extends java.lang.Object</pre>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#verificationDescription(java.lang.String)">verificationDescription</a></span>&#8203;(java.lang.String&nbsp;type)</code></th>
 <td class="colLast">
 <div class="block">This method does verification for description.</div>
+</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#writeFiles()">writeFiles</a></span>()</code></th>
+<td class="colLast">
+<div class="block">This method writes out the existing todolist to a text file.</div>
 </td>
 </tr>
 </table>
@@ -324,6 +324,26 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
+<a id="readFiles()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>readFiles</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;readFiles()</pre>
+<div class="block">This method read the current existing text file and process it into a todolist.</div>
+</li>
+</ul>
+<a id="writeFiles()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>writeFiles</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;writeFiles()</pre>
+<div class="block">This method writes out the existing todolist to a text file.</div>
+</li>
+</ul>
 <a id="addDeadline(java.lang.String)">
 <!--   -->
 </a>
@@ -363,22 +383,6 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>displayNoOfTasks</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;displayNoOfTasks()</pre>
-</li>
-</ul>
-<a id="addTask(java.lang.String)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>addTask</h4>
-<pre class="methodSignature">public&nbsp;java.lang.String&nbsp;addTask&#8203;(java.lang.String&nbsp;taskName)</pre>
-<div class="block">This method adds task for the bot.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>taskName</code> - name of the task</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>taskName name of the task</dd>
-</dl>
 </li>
 </ul>
 <a id="displayList()">

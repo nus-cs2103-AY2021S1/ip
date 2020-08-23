@@ -26,4 +26,9 @@ public class Deadline extends Task {
     public LocalDateTime getDueDate() {
         return dueDate;
     }
+
+    /**
+     * This method returns the string to be written for the deadline task.
+     */
+    public String toWriteString() { return "D " +  super.toWriteString() + " | " + dueDate; }
 }
