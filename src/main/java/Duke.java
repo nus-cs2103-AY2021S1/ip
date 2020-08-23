@@ -1,3 +1,8 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -109,9 +114,10 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        ArrayList<Task> taskList = new ArrayList<>();
+        loadFromMemory(taskList);
         Scanner sc = new Scanner(System.in);
         boolean terminate = false;
-        ArrayList<Task> taskList = new ArrayList<>();
         HashMap<String, TaskType> taskTypeMap = new HashMap<>(Map.of(
                 "event", TaskType.E,
                 "deadline", TaskType.D,
@@ -137,6 +143,7 @@ public class Duke {
                     break;
                 }
                 System.out.print(markAsDone(taskList, taskId));
+                updateMemory(taskList);
                 break;
             case "delete":
                 try {
@@ -146,6 +153,7 @@ public class Duke {
                     break;
                 }
                 System.out.print(delete(taskList, taskId));
+                updateMemory(taskList);
                 break;
             default:
                 TaskType currType = taskTypeMap.get(input);
@@ -159,7 +167,60 @@ public class Duke {
                 } catch (BlankTaskException | MissingDelimiterException | MissingDateTimeException e) {
                     System.out.print(displayOutput(e.getMessage()));
                 }
+                updateMemory(taskList);
                 break;
+            }
+        }
+    }
+
+    private static void updateMemory(ArrayList<Task> taskList) {
+        Path dataPath = Paths.get("data", "duke.txt");
+        StringBuilder taskListString = new StringBuilder();
+        for (Task task : taskList
+        ) {
+            taskListString.append(task.toString().replaceAll("[)\\[\\](✓✗]", "")
+                    .replaceAll("by:|at:", "/--")).append("\n").append(task.isDone()).append("\n");
+        }
+        try {
+            Files.writeString(dataPath, taskListString, StandardOpenOption.WRITE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadFromMemory(ArrayList<Task> taskList) {
+        Path dataPath = Paths.get("data", "duke.txt");
+        if (Files.notExists(dataPath)) {
+            Path dataDir = Paths.get("data");
+            if (Files.notExists(dataDir)) {
+                try {
+                    Files.createDirectory(dataDir);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                Files.createFile(dataPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Scanner data;
+            try {
+                data = new Scanner(dataPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+            while (data.hasNext()) {
+                try {
+                    addToList(taskList, TaskType.valueOf(data.next()), data.nextLine());
+                } catch (BlankTaskException | MissingDelimiterException | MissingDateTimeException e) {
+                    e.printStackTrace();
+                }
+                if (data.nextBoolean()) {
+                    taskList.get(taskList.size() - 1).markAsDone();
+                }
             }
         }
     }
