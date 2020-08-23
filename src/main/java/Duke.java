@@ -3,7 +3,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static final String LINE = "_______________________________________\n";
+    public static ArrayList<Task> taskList = new ArrayList<>();
+
+    public static void main(String[] args) throws DukeException {
         // Opening
         String open = "_______________________________________ \n"
                 + "Hello! I'm Duke \n"
@@ -13,7 +16,6 @@ public class Duke {
         String line = "_______________________________________\n";
         System.out.println(open);
 
-        ArrayList<Task> user_list = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         while(true) {
             String user_input = scanner.nextLine();
@@ -22,91 +24,45 @@ public class Duke {
                 break;
 
             } else if (user_input.equals("list")){  // For viewing items in to do list
-                String output = "";
-                for (int i = 1; i <= user_list.size(); i++) {
-                    output = output + i + ". " + user_list.get(i - 1) + "\n";
-                }
-                System.out.println(line + "Here are the tasks in your list: \n" + output + line);
+                handleList();
 
             } else if (input_split[0].equals("done")) {  // For marking items in the to do list as done
                 try {
-                    int task_id = Integer.parseInt(input_split[1]);
-                    if (task_id <=0 || task_id > user_list.size()) {
-                        System.out.println(line + "Invalid input! That task does not exist! \n" + line);
-                    } else {
-                        user_list.get(task_id - 1).setCompleted();
-                        System.out.println(line + "Nice! I've marked this task as done: \n"
-                                + user_list.get(task_id - 1) + "\n" + line);
-                    }
+                    handleDone(input_split[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(line + "Invalid input! Please specify which task you have completed! \n" + line);
                 }
 
             } else if (input_split[0].equals("todo")) { // Add new todo
                 try {
-                    user_list.add(new ToDo(input_split[1]));
-                    String output = line + "Got it. I've added this task: \n"
-                            + user_list.get(user_list.size() - 1) + "\n"
-                            + "Now you have " + user_list.size() + " tasks in the list."
-                            + "\n" + line;
-                    System.out.println(output);
+                    handleTodo(input_split[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(line + "Invalid input! Please specify your todo description! \n" + line);
                 }
 
             } else if (input_split[0].equals("deadline")) { // Add new deadline
                 try {
-                    String[] details = input_split[1].split(" /by ", 2);
-                    user_list.add(new Deadline(details[0], details[1]));
-                    String output = line + "Got it. I've added this task: \n"
-                            + user_list.get(user_list.size() - 1) + "\n"
-                            + "Now you have " + user_list.size() + " tasks in the list."
-                            + "\n" + line;
-                    System.out.println(output);
+                    handleDeadline(input_split[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(line + "Invalid input! Please specify your deadline description and details! \n" + line);
                 }
 
             } else if (input_split[0].equals("event")) { // Add new event
                 try {
-                    String[] details = input_split[1].split(" /at ", 2);
-                    user_list.add(new Event(details[0], details[1]));
-                    String output = line + "Got it. I've added this task: \n"
-                            + user_list.get(user_list.size() - 1) + "\n"
-                            + "Now you have " + user_list.size() + " tasks in the list."
-                            + "\n" + line;
-                    System.out.println(output);
+                    handleEvent(input_split[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(line + "Invalid input! Please specify your event description and details! \n" + line);
                 }
 
             } else if (input_split[0].equals("delete")) { // Delete task
                 try {
-                    int task_id = Integer.parseInt(input_split[1]);
-                    if (task_id <= 0 || task_id > user_list.size()) {
-                        System.out.println(line + "Invalid input! That task does not exist! \n" + line);
-                    } else {
-                        int new_size = user_list.size() - 1;
-                        System.out.println(line + "Noted! I've deleted this task: \n"
-                                + user_list.get(task_id - 1) + "\n"
-                                + "Now you have " + new_size + " tasks in the list."
-                                + "\n" + line);
-                        user_list.remove(task_id - 1);
-                    }
+                    handleDelete(input_split[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(line + "Invalid input! Please specify which task you want to delete! \n" + line);
                 }
 
             } else if (user_input.equals("help")) { // Additional help feature
-                String output = line  + "These are my available commands: \n"
-                        + "list: View entire list of task \n"
-                        + "todo <desciption>: Add new todo to list \n"
-                        + "deadline <description> <date/time>: Add new deadline to list \n"
-                        + "event <description> <date/time>: Add new event to list \n"
-                        + "done <task id>: Sets task as completed \n"
-                        + "delete <task id>: Deletes task from list \n"
-                        + "bye: Exits program \n" + line;
-                System.out.println(output);
+                handleHelp();
 
             } else {
                 System.out.println(line + "Invalid input! Please try again! \n" + line);
@@ -119,5 +75,79 @@ public class Duke {
                 + "Goodbye! See you soon! \n"
                 + "_______________________________________ \n";
         System.out.println(close);
+    }
+
+    public static void handleList() {
+        String output = "";
+        for (int i = 1; i <= taskList.size(); i++) {
+            output = output + i + ". " + taskList.get(i - 1) + "\n";
+        }
+        System.out.println(LINE + "Here are the tasks in your list: \n" + output + LINE);
+    }
+
+    public static void handleDone(String taskIdString) {
+        int taskId = Integer.parseInt(taskIdString);
+        if (taskId <=0 || taskId > taskList.size()) {
+            System.out.println(LINE + "Invalid input! That task does not exist! \n" + LINE);
+        } else {
+            taskList.get(taskId - 1).setCompleted();
+            System.out.println(LINE + "Nice! I've marked this task as done: \n"
+                    + taskList.get(taskId - 1) + "\n" + LINE);
+        }
+    }
+
+    public static void handleDelete(String taskIdString) {
+        int taskId = Integer.parseInt(taskIdString);
+        if (taskId <=0 || taskId > taskList.size()) {
+            System.out.println(LINE + "Invalid input! That task does not exist! \n" + LINE);
+        } else {
+            int new_size = taskList.size() - 1;
+            System.out.println(LINE + "Noted! I've deleted this task: \n"
+                    + taskList.get(taskId - 1) + "\n"
+                    + "Now you have " + new_size + " tasks in the list."
+                    + "\n" + LINE);
+            taskList.remove(taskId - 1);
+        }
+    }
+
+    public static void handleTodo(String todoDescription) {
+        taskList.add(new ToDo(todoDescription));
+        String output = LINE + "Got it. I've added this task: \n"
+                + taskList.get(taskList.size() - 1) + "\n"
+                + "Now you have " + taskList.size() + " tasks in the list."
+                + "\n" + LINE;
+        System.out.println(output);
+    }
+
+    public static void handleDeadline(String deadlineDetails) {
+        String[] details = deadlineDetails.split(" /by ", 2);
+        taskList.add(new Deadline(details[0], details[1]));
+        String output = LINE + "Got it. I've added this task: \n"
+                + taskList.get(taskList.size() - 1) + "\n"
+                + "Now you have " + taskList.size() + " tasks in the list."
+                + "\n" + LINE;
+        System.out.println(output);
+    }
+
+    public static void handleEvent(String eventDetails) {
+        String[] details = eventDetails.split(" /at ", 2);
+        taskList.add(new Event(details[0], details[1]));
+        String output = LINE + "Got it. I've added this task: \n"
+                + taskList.get(taskList.size() - 1) + "\n"
+                + "Now you have " + taskList.size() + " tasks in the list."
+                + "\n" + LINE;
+        System.out.println(output);
+    }
+
+    public static void handleHelp() {
+        String output = LINE  + "These are my available commands: \n"
+                + "list: View entire list of task \n"
+                + "todo <desciption>: Add new todo to list \n"
+                + "deadline <description> /by <date/time>: Add new deadline to list \n"
+                + "event <description> /at <date/time>: Add new event to list \n"
+                + "done <task id>: Sets task as completed \n"
+                + "delete <task id>: Deletes task from list \n"
+                + "bye: Exits program \n" + LINE;
+        System.out.println(output);
     }
 }
