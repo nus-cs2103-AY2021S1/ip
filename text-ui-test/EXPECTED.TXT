@@ -1,13 +1,12 @@
+FAILURE: Unable to load data from local drive.
 ---------------------------------------------------
 Hello! I'm Duke!
 What can I do for you?
 
-FAILURE: Unable to load data from local drive.
 ---------------------------------------------------
 Got it. I've added this task:
    [T][✘] borrow book
 Now you have 1 tasks in the list.
-12
 ---------------------------------------------------
 Got it. I've added this task:
    [D][✘] return book (by: 2019-10-15 18:00)
@@ -59,5 +58,6 @@ FAILURE: You're talking gibberish. Cannot make sense of what you just said.
 ---------------------------------------------------
 Bye. Hope to see you again soon!
 ---------------------------------------------------
+FAILURE: Could not save data to main/data directory.
 
 

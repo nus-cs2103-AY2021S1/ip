@@ -1,36 +1,117 @@
 import java.io.IOException;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static List<Task> todoList; //= new ArrayList<>();
     public static String line = "---------------------------------------------------";
-    public static Data data;
+    private Data data;
+    private Parser parser;
+    private TaskList taskList;
+    private Ui ui;
 
     public Duke(String path) {
         try {
             data = new Data(path);
             //System.out.println("Before calling load");
-            todoList = data.loadData();
-        } catch (IOException | DukeInvalidTimeException e) {
+            // todoList = data.loadData();
+            this.taskList = new TaskList(data.loadData());
+        } catch (IOException | DukeInvalidTimeException| ArrayIndexOutOfBoundsException e) {
             System.out.println("FAILURE: Unable to load data from local drive.");
-            todoList = new ArrayList<>();
+            //todoList = new ArrayList<>();
+            this.taskList = new TaskList();
         }
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String welcome = line + "\nHello! I'm Duke!\n" +
-                "What can I do for you?\n";
-        //System.out.println(logo + "\n" + welcome);
-        System.out.println(welcome);
-        new Duke("data/duke.txt").runDuke();
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        String welcome = line + "\nHello! I'm Duke!\n" +
+//                "What can I do for you?\n";
+//        //System.out.println(logo + "\n" + welcome);
+//        System.out.println(welcome);
+        //new Duke("data/duke.txt").runDuke();
+
+        new Duke("data/duke.txt").run();
+    }
+
+    public void run() {
+        this.ui = new Ui();
+        this.parser = new Parser();
+        String word = this.parser.scan.nextLine();
+        while (!word.equals("bye")) {
+            int len = word.length();
+            Commands currentCommand = this.parser.analyse(word);
+            assign(currentCommand, word);
+            word = this.parser.scan.nextLine();
+        }
+        this.ui.endDuke();
+        try {
+            data.save(this.taskList.todoList);
+        } catch (IOException | NullPointerException e) {
+            System.out.println("FAILURE: Could not save data to main/data directory.");
+        }
+    }
+
+    public void assign(Commands command, String task) {
+        switch (command) {
+            case LIST:
+                this.ui.displayList(this.taskList.todoList);
+                break;
+            case TODO:
+            case EVENT:
+            case DEADLINE:
+                decideTaskType(command, task);
+                break;
+            case DONE:
+                Task todo = this.taskList.markDone(task);
+                this.ui.completeTask(todo);
+                break;
+            case DELETE:
+                Task deletedTask = this.taskList.delete(task, this.taskList.todoList);
+                this.ui.deleteTask(deletedTask, this.taskList.todoList);
+                break;
+            case BLAH:
+            case TASK:
+                assignOtherTasks(task);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void assignOtherTasks(String task) {
+        try {
+            this.taskList.storeTask(task);
+            this.ui.addOtherTask(task);
+        } catch (BlahException e) {
+            this.ui.printError(e.toString());
+        }
+    }
+
+    public void decideTaskType(Commands commands, String task) {
+        Task todo = null;
+        try {
+            switch (commands){
+                case TODO:
+                    todo = taskList.storeTodo(task);
+                    break;
+                case DEADLINE:
+                    todo = taskList.storeDeadline(task);
+                    break;
+                case EVENT:
+                    todo = taskList.storeEvent(task);
+                    break;
+                default:
+                    break;
+            }
+            this.ui.addTask(todo, this.taskList.todoList);
+        } catch (EmptyDukeException | DukeInvalidTimeException e) {
+            this.ui.printError(e.toString());
+        }
     }
 
     public void runDuke(){
@@ -97,6 +178,7 @@ public class Duke {
             return curr;
         }
     }
+
     public static Deadline storeDeadline(String deadline) throws EmptyDukeException, DukeInvalidTimeException {
         int count = todoList.size() + 1;
         if (count > 100) {
@@ -110,6 +192,7 @@ public class Duke {
             return curr;
         }
     }
+
     public static Event storeEvent(String event) throws EmptyDukeException, DukeInvalidTimeException {
         int count = todoList.size() + 1;
         if (count > 100) {
