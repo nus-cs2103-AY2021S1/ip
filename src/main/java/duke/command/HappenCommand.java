@@ -64,4 +64,15 @@ public class HappenCommand extends Command {
             throw new InvalidCommandException("Invalid date format. Please use yyyy-MM-dd");
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof HappenCommand) {
+            return input.equals(((HappenCommand) obj).input);
+        } else {
+            return false;
+        }
+    }
 }

@@ -18,4 +18,15 @@ public class AddCommand extends Command {
         ui.output("Got it. I've added this task:\n\t    " + task +
                 "\n\t  Now you have " + count + temp + " in the list.");
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof AddCommand) {
+            return input.equals(((AddCommand) obj).input);
+        } else {
+            return false;
+        }
+    }
 }

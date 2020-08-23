@@ -18,4 +18,15 @@ public class DeleteCommand extends Command {
         ui.output("Noted. I've removed this task:\n\t    " + toDelete +
                 "\n\t  Now you have " + list.size());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof DeleteCommand) {
+            return input.equals(((DeleteCommand) obj).input);
+        } else {
+            return false;
+        }
+    }
 }
