@@ -68,4 +68,31 @@ public class TestTaskList {
             assertEquals("OOPS! No such task exists!", e.getMessage());
         }
     }
+
+    @Test
+    public void testNumOfTasks() {
+        TaskList taskList = new TaskList();
+        Todo todo = new Todo("todo");
+        DukeDateTime dateTime = new DukeDateTime(LocalDateTime.parse("2020-08-23T13:00"), true);
+        Event event = new Event("event", dateTime);
+        Deadline deadline = new Deadline("deadline", dateTime);
+        taskList.addTask(todo);
+        taskList.addTask(event);
+        taskList.addTask(deadline);
+        assertEquals(3, taskList.numOfTasks());
+    }
+
+    @Test
+    public void testTasksRemaining() {
+        TaskList taskList = new TaskList();
+        Todo todo = new Todo("todo");
+        DukeDateTime dateTime = new DukeDateTime(LocalDateTime.parse("2020-08-23T13:00"), true);
+        Event event = new Event("event", dateTime);
+        Deadline deadline = new Deadline("deadline", dateTime);
+        taskList.addTask(todo);
+        taskList.addTask(event);
+        taskList.addTask(deadline);
+        String expected = "Now you have 3 tasks in the list";
+        assertEquals(expected, taskList.tasksRemaining());
+    }
 }
