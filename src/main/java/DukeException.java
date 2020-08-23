@@ -5,6 +5,6 @@ public class DukeException extends Exception {
     }
     @Override
     public String toString() {
-        return "Invalid Command! " + error;
+        return "Error! " + error;
     }
 }
