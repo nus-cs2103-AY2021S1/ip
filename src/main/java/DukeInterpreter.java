@@ -13,13 +13,8 @@ public class DukeInterpreter {
         String details = rest[0].trim();
         String extra = "";
         if (rest.length == 2) {
-            if (task instanceof Deadline) {
-                Deadline deadline = (Deadline) task;
-                extra = deadline.getDateTime().toString();
-            } else if (task instanceof Event) {
-                Event event = (Event) task;
-                extra = event.getDateTime().toString();
-            }
+            extra = task.getDateTime().toString();
+            System.out.println(extra);
         }
         return encodeHelper(type, symbol, details, extra);
     }

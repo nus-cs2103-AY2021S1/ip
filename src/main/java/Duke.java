@@ -166,7 +166,7 @@ public class Duke {
         }
 
         String details = splittedDeadline[0].trim();
-        String by = splittedDeadline[1].split("by", 2)[1];
+        String by = splittedDeadline[1].split("by", 2)[1].trim();
         addOnToList(new Deadline(details, by));
     }
 
@@ -186,7 +186,7 @@ public class Duke {
         }
 
         String details = splittedEvent[0].trim();
-        String at = splittedEvent[1].split("at", 2)[1];
+        String at = splittedEvent[1].split("at", 2)[1].trim();
         addOnToList(new Event(details, at));
     }
 
