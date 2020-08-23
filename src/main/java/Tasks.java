@@ -1,7 +1,12 @@
 package main.java;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Tasks {
     private static List<Task> database = new ArrayList<>();
@@ -22,6 +27,7 @@ public class Tasks {
                 throw new Error("An unexpected error has occurred");
 
         }
+        if (tokens.get(3).equals("1")) task.markAsDone();
         database.add(task);
         return task;
     }
@@ -48,6 +54,40 @@ public class Tasks {
     }
 
     public static int count() { return database.size();}
+
+    public static void readFile() {
+        File dir = new File("./tmp/data");
+        dir.mkdirs();
+        System.out.println(dir.getPath());
+        File f = new File(dir, "storage.txt");
+        try {
+            f.createNewFile();
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String[] tokens = s.nextLine().split("%%%");
+                List<String> tokenss = new ArrayList<>(Arrays.asList(tokens));
+                tokenss.add(2, "null");
+                addTask(tokenss);
+            }
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
+    public static void writeFile() {
+        File dir = new File("./tmp/data");
+        try {
+            FileWriter fw = new FileWriter(new File(dir, "storage.txt"));
+            for (Task task: database) {
+                fw.write(task.serialize() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     public static void printTasks() {
         for (int i = 0; i < database.size(); i++) {

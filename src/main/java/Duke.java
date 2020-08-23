@@ -54,6 +54,7 @@ public class Duke {
         }
         switch (command) {
             case BYE:
+                Tasks.writeFile();
                 System.out.println("See you again!");
                 break;
             case LIST:
@@ -116,11 +117,12 @@ public class Duke {
 
     public static void main(String[] args) {
         greet();
+        Tasks.readFile();
         Scanner sc = new Scanner(System.in);
         String input;
         do {
             input = sc.nextLine();
-            handleCommand((input));
+            handleCommand(input);
         }
         while (!input.equals("bye"));
     }

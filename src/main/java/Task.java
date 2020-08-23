@@ -17,6 +17,10 @@ public class Task {
 
     public void markAsDone() {isDone = true;}
 
+    public String serialize() {
+        return type + "%%%" + description + "%%%" + time + "%%%" + (isDone ? 1 : 0);
+    }
+
     @Override
     public String toString() {
         return String.format("[T][%s] %s", (isDone ? "\u2713" : "\u2718"), description);
@@ -26,7 +30,7 @@ public class Task {
 class Todo extends Task {
     public Todo(String description) {
         super(description, null);
-        super.type = "Todo";
+        super.type = "todo";
     }
 
     @Override
@@ -40,7 +44,7 @@ class Todo extends Task {
 class Deadline extends Task {
     public Deadline(String description, String time) {
         super(description, time);
-        super.type = "Deadline";
+        super.type = "deadline";
     }
 
     @Override
@@ -55,7 +59,7 @@ class Deadline extends Task {
 class Event extends Task {
     public Event(String description, String time) {
         super(description, time);
-        super.type = "Event";
+        super.type = "event";
     }
 
     @Override
