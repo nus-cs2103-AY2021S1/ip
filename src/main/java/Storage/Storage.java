@@ -18,10 +18,19 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Operations on local file.
+ */
 public class Storage {
 
+    /** File's path*/
     private final String filepath;
 
+    /**
+     * Constructs a Storage object(file) at given path.
+     *
+     * @param filepath File's path
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
         File file = new File(filepath);
@@ -35,6 +44,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads Tasks from the file to arraylist of Task.
+     *
+     * @return Arraylist of Task.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
@@ -67,6 +81,13 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Adds Task to local file.
+     *
+     * @param command User command.
+     * @param info Task description.
+     * @throws MugException When MugException cause by other method.
+     */
     public void appendTask(Command command, String info) throws MugException {
         try {
             FileWriter fw = new FileWriter(this.filepath, true);
@@ -107,6 +128,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes Task from local file.
+     *
+     * @param taskId Task index
+     * @throws MugException When MugException cause by other method.
+     */
     public void deleteTask(int taskId) throws MugException {
         String tempFile = "temp.txt";
         File oldFile = new File(this.filepath);
@@ -139,6 +166,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Marks Task done in local file.
+     *
+     * @param taskId Task index.
+     * @throws MugException When MugException cause by other method.
+     */
     public void doneTask(int taskId) throws MugException {
         String tempFile = "temp.txt";
         File oldFile = new File(this.filepath);

@@ -8,19 +8,39 @@ import Storage.Storage;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Operation for the list of Task.
+ */
 public class TaskList {
+    /** ArrayList of Task */
     private final ArrayList<Task> taskList;
+    /** Local storage that store list of task */
     private final Storage store;
 
+    /**
+     * Constructs TaskList object with local Storage given.
+     *
+     * @param store Local Storage that store list of task
+     */
     public TaskList(Storage store) {
         this.taskList = store.load();
         this.store = store;
     }
 
+    /**
+     * Length of task's list
+     *
+     * @return Length of task's list
+     */
     private int taskListLen() {
         return this.taskList.size();
     }
 
+    /**
+     * Reads list of Task.
+     *
+     * @return list of Task in String.
+     */
     public String readList() {
         if(this.taskListLen() == 0) {
             return "MUG don't have any of your task \"_\"";
@@ -40,6 +60,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds Task.
+     *
+     * @param command User command.
+     * @param info Task descriptions.
+     * @return Message when task add.
+     */
     public String addTask(Command command, String info) {
         try {
             Task task;
@@ -81,6 +108,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes Task.
+     *
+     * @param taskId Task index.
+     * @return Message when task delete.
+     */
     public String deleteTask(int taskId) {
         if ( taskId > this.taskListLen()) {
             return "MUG don't have this task to Delete @_@";
@@ -102,6 +135,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Updates Task done.
+     *
+     * @param taskId Task index
+     * @return Message when task update done.
+     */
     public String taskDone(int taskId) {
         if (taskId > this.taskListLen()) {
             return "MUG don't have this task to mark as Done :>";

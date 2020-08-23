@@ -5,8 +5,14 @@ import MugException.MugException;
 import Parser.Parser;
 import Tasks.TaskList;
 
+/**
+ * User interaction.
+ */
 public class Ui {
 
+    /**
+     * Prints welcome messages.
+     */
     public void welcome() {
         String logo = " ___    ___        ______\n"
                 + "|   \\  /   |_    _|  ____|\n"
@@ -22,10 +28,23 @@ public class Ui {
         System.out.println(welcome);
     }
 
+    /**
+     * Adds design to the messages.
+     *
+     * @param word Messages.
+     * @return Design messages.
+     */
     private static String printDesign(String word) {
         return "**\n" + word + "\n**";
     }
 
+    /**
+     * Read the input command.
+     *
+     * @param input User input.
+     * @param tasks Task list.
+     * @return Messages according to the user input.
+     */
     public String readCommand(String input, TaskList tasks) {
         String output;
 

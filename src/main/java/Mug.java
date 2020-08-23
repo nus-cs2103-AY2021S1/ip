@@ -4,6 +4,9 @@ import Ui.Ui;
 
 import java.util.Scanner;
 
+/**
+ * A tool to save task.
+ */
 public class Mug {
 
     private final Ui ui;
@@ -15,6 +18,9 @@ public class Mug {
         this.tasks = new TaskList(storage);
     }
 
+    /**
+     * Runs user input.
+     */
     public void run() {
         this.ui.welcome();
         Scanner sc = new Scanner(System.in);
@@ -27,6 +33,10 @@ public class Mug {
         }
     }
 
+    /**
+     * Main.
+     * @param args Arguments.
+     */
     public static void main(String[] args) {
         new Mug("mug.txt").run();
     }
