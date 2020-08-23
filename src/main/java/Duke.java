@@ -64,80 +64,81 @@ public class Duke {
             String[] words = interpretInput(input);
             String command = words[0];
             switch (command) {
-                case "bye" :
-                    echo("Bye. See you again, bro!");
-                    break outerLoop;
-                case "done":
-                    try {
-                        int index = Integer.parseInt(words[1]);
-                        taskManager.doTask(index);
-                        echo("Nice! I have marked this task as done:\n" +
-                                taskManager.getTaskStatus(index));
-                    } catch (NumberFormatException err){
-                        echo("Error. Please key in an integer after \"done\"");
-                    } catch (IndexOutOfBoundsException err) {
-                        echo("Error. You don't have task #" + words[1] +
-                                ".\nKey in \"list\" to find out the tasks on hand");
-                    } catch (TaskDoneException err) {
-                        echo("The task is already done. No need to mark it as done again.");
-                    }
-                    break;
-                case "list":
-                    if (taskManager.getTotalTask() == 0) {
-                        echo("Currently, you have no tasks on hand");
-                    } else {
-                        echo("Here are the tasks in your list\n" + taskManager.toString());
-                    }
-                    break;
-                case "deadline":
-                    try {
-                        Task addedDeadline = taskManager.addDeadLine(words[1], words[2]);
-                        echoNewTask(addedDeadline, taskManager.getTotalTask());
-                    } catch (IndexOutOfBoundsException err) {
-                        echo("Error: The description for deadline can't be empty");
-                    }
-                    break;
-                //3 different types of task
-                case "event":
-                    try {
-                        Task addedEvent = taskManager.addEvent(words[1], words[2]);
-                        echoNewTask(addedEvent, taskManager.getTotalTask());
-                    } catch (IndexOutOfBoundsException err) {
-                        echo("Error: The description for Event can't be empty");
-                    }
-                    break;
-                case "todo":
-                    try {
-                        if (words.length > 2) {
-                            throw new IllegalArgumentException();
-                        }
-                        Task addedToDo = taskManager.addToDo(words[1]);
-                        echoNewTask(addedToDo, taskManager.getTotalTask());
-                    } catch (IndexOutOfBoundsException err) {
-                        echo("Error: The description for ToDo can't be empty");
-                    } catch (IllegalArgumentException err) {
-                        echo("Error. Don't include / in the title of todo task");
-                    }
-                    break;
+            case "bye" :
+                echo("Bye. See you again, bro!");
+                break outerLoop;
+            case "done":
+                try {
+                    int index = Integer.parseInt(words[1]);
+                    taskManager.doTask(index);
+                    echo("Nice! I have marked this task as done:\n" +
+                            taskManager.getTaskStatus(index));
+                } catch (NumberFormatException err){
+                    echo("Error. Please key in an integer after \"done\"");
+                } catch (IndexOutOfBoundsException err) {
+                    echo("Error. You don't have task #" + words[1] +
+                            ".\nKey in \"list\" to find out the tasks on hand");
+                } catch (TaskDoneException err) {
+                    echo("The task is already done. No need to mark it as done again.");
+                }
+                break;
+            case "list":
+                if (taskManager.getTotalTask() == 0) {
+                    echo("Currently, you have no tasks on hand");
+                } else {
+                    echo("Here are the tasks in your list\n" + taskManager.toString());
+                }
+                break;
+            case "deadline":
+                try {
+                    Task addedDeadline = taskManager.addDeadLine(words[1], words[2]);
+                    echoNewTask(addedDeadline, taskManager.getTotalTask());
+                } catch (IndexOutOfBoundsException err) {
+                    echo("Error: The description for deadline can't be empty");
+                }
+                break;
 
-                //Delete Task
-                case "delete":
-                    try {
-                        int index = Integer.parseInt(words[1]);
-                        Task deletedTask = taskManager.deleteTask(index);
-                        echo("Nice! I have deleted this task:\n" +
-                                deletedTask);
-                    } catch (NumberFormatException err){
-                        echo("Error. Please key in an integer after \"done\"");
-                    } catch (IndexOutOfBoundsException err) {
-                        echo("Error. You don't have task #" + words[1] +
-                                ".\nKey in \"list\" to find out the tasks on hand");
+            //3 different types of task
+            case "event":
+                try {
+                    Task addedEvent = taskManager.addEvent(words[1], words[2]);
+                    echoNewTask(addedEvent, taskManager.getTotalTask());
+                } catch (IndexOutOfBoundsException err) {
+                    echo("Error: The description for Event can't be empty");
+                }
+                break;
+            case "todo":
+                try {
+                    if (words.length > 2) {
+                        throw new IllegalArgumentException();
                     }
-                    break;
-                //When command does not match any of those above
-                default:
-                    echo("OOPS!!! I don't know what does it mean by: \"" + input + "\"" );
-                    break;
+                    Task addedToDo = taskManager.addToDo(words[1]);
+                    echoNewTask(addedToDo, taskManager.getTotalTask());
+                } catch (IndexOutOfBoundsException err) {
+                    echo("Error: The description for ToDo can't be empty");
+                } catch (IllegalArgumentException err) {
+                    echo("Error. Don't include / in the title of todo task");
+                }
+                break;
+
+            //Delete Task
+            case "delete":
+                try {
+                    int index = Integer.parseInt(words[1]);
+                    Task deletedTask = taskManager.deleteTask(index);
+                    echo("Nice! I have deleted this task:\n" +
+                            deletedTask);
+                } catch (NumberFormatException err){
+                    echo("Error. Please key in an integer after \"done\"");
+                } catch (IndexOutOfBoundsException err) {
+                    echo("Error. You don't have task #" + words[1] +
+                            ".\nKey in \"list\" to find out the tasks on hand");
+                }
+                break;
+            //When command does not match any of those above
+            default:
+                echo("OOPS!!! I don't know what does it mean by: \"" + input + "\"" );
+                break;
             }
         }
     }
