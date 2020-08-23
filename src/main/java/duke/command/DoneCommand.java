@@ -34,8 +34,7 @@ public class DoneCommand extends Command {
         int taskNumber = Character.getNumericValue(commandDetails[1].charAt(0)) - 1;
         if (!tasks.getTasks().isEmpty() && taskNumber < tasks.getTasks().size()) {
             tasks.getTasks().get(taskNumber).doneTask();
-            System.out.println(" Nice! Target Eliminated: \n   "
-                    + tasks.getTasks().get(taskNumber).toString());
+            ui.showDoneTask(tasks.getTasks().get(taskNumber));
         } else {
             throw new DukeTaskNotFoundException(" ERROR... TASK NOT FOUND. \n PLEASE TRY AGAIN ");
         }

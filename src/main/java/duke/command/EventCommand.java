@@ -34,8 +34,7 @@ public class EventCommand extends Command {
         System.out.println(" Got it. I've added this task: ");
         Event event = new Event(commandDetails[0], at);
         tasks.getTasks().add(event);
-        System.out.println(String.format("   %s \n Now you have %d tasks in the list. ",
-                event, tasks.getTasks().size()));
+        ui.showTask(event, tasks.getTasks().size());
     }
 
     /**

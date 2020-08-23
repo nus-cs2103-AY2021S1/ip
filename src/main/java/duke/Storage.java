@@ -95,15 +95,15 @@ public class Storage {
             FileWriter fw = new FileWriter(file.getPath());
             for (Task task : taskList) {
                 if (task instanceof ToDo) {
-                    String taskDetails = String.format("T | %d | %s", task.checkDone() ? 1 : 0, task.getDescription());
+                    String taskDetails = String.format("T | %d | %s", task.isTaskDone() ? 1 : 0, task.getDescription());
                     content.append(taskDetails).append("\n");
                 } else if (task instanceof Deadline) {
                     String taskDetails = String.format("T | %d | %s |%s",
-                            task.checkDone() ? 1 : 0, task.getDescription(), ((Deadline) task).getDate());
+                            task.isTaskDone() ? 1 : 0, task.getDescription(), ((Deadline) task).getDate());
                     content.append(taskDetails).append("\n");
                 } else {
                     String taskDetails = String.format("T | %d | %s |%s",
-                            task.checkDone() ? 1 : 0, task.getDescription(), ((Event) task).getAt());
+                            task.isTaskDone() ? 1 : 0, task.getDescription(), ((Event) task).getAt());
                     content.append(taskDetails).append("\n");
                 }
             }

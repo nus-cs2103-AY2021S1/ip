@@ -30,11 +30,9 @@ public class ToDoCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println(" Got it. I've added this task: ");
         ToDo toDo = new ToDo(commandDetails[1]);
         tasks.getTasks().add(toDo);
-        System.out.println(String.format("   %s \n Now you have %d tasks in the list. ",
-                toDo, tasks.getTasks().size()));
+        ui.showTask(toDo, tasks.getTasks().size());
     }
 
     /**

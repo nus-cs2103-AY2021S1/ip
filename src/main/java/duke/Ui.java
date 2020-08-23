@@ -91,7 +91,7 @@ public class Ui {
     /**
      * Displays the list of matching task in the TaskList.
      *
-     * @param taskList ArrayList of task.
+     * @param tasks ArrayList of task.
      */
     public void showMatchingTask(ArrayList<Task> tasks) {
         System.out.println(" Here are the matching tasks in your list:");
@@ -99,5 +99,48 @@ public class Ui {
             int count = i + 1;
             System.out.println(String.format("   %d. ", count) + tasks.get(i).toString());
         }
+    }
+
+    /**
+     * Displays the task that is completed.
+     *
+     * @param task Task that is completed.
+     */
+    public void showDoneTask(Task task) {
+        System.out.println(" Nice! Target Eliminated: \n   "
+                + task.toString());
+    }
+
+    /**
+     * Displays the task that has been undone.
+     *
+     * @param task Task that is undone.
+     */
+    public void showUndoTask(Task task) {
+        System.out.println(" Task has been undone: \n   "
+                + task.toString());
+    }
+
+    /**
+     * Displays the task that is deleted.
+     *
+     * @param task Task that is deleted.
+     * @param numTask Number of tasks.
+     */
+    public void showDeletedTask(Task task, int numTask) {
+        System.out.println( String.format(" Noted. Target Scraped: \n   %s \n " +
+                "Now you have %d tasks in the list. ", task.toString(), numTask));
+    }
+
+    /**
+     * Displays the task that is added.
+     *
+     * @param task Task that is added.
+     * @param numTask Number of tasks.
+     */
+    public void showTask(Task task, int numTask) {
+        System.out.println(" Got it. I've added this task: ");
+        System.out.println(String.format("   %s \n Now you have %d tasks in the list. ",
+                task, numTask));
     }
 }

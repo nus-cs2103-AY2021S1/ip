@@ -34,8 +34,7 @@ public class DeadlineCommand extends Command {
         System.out.println(" Got it. I've added this task: ");
         Deadline deadline = new Deadline(commandDetails[0], day.trim());
         tasks.getTasks().add(deadline);
-        System.out.println(String.format("   %s \n Now you have %d tasks in the list. ",
-                deadline, tasks.getTasks().size()));
+        ui.showTask(deadline, tasks.getTasks().size());
     }
 
     /**

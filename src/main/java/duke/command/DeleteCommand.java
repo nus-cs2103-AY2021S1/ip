@@ -35,8 +35,7 @@ public class DeleteCommand extends Command {
         int taskNumber = Character.getNumericValue(commandDetails[1].charAt(0)) - 1;
         if (!tasks.getTasks().isEmpty() && taskNumber < tasks.getTasks().size()) {
             Task removedTask = tasks.getTasks().remove(taskNumber);
-            System.out.println( String.format(" Noted. Target Scraped: \n   %s \n " +
-                    "Now you have %d tasks in the list. ", removedTask.toString(), tasks.getTasks().size()));
+            ui.showDeletedTask(removedTask, tasks.getTasks().size());
         } else {
             throw new DukeTaskNotFoundException(" ERROR... TASK NOT FOUND. \n PLEASE TRY AGAIN ");
         }

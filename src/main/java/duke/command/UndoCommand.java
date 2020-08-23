@@ -34,8 +34,7 @@ public class UndoCommand extends Command {
         int taskNumber = Character.getNumericValue(commandDetails[1].charAt(0)) - 1;
         if (!tasks.getTasks().isEmpty() && taskNumber < tasks.getTasks().size()) {
             tasks.getTasks().get(taskNumber).undoTask();
-            System.out.println(" Task has been undone: \n   "
-                    + tasks.getTasks().get(taskNumber).toString());
+            ui.showUndoTask(tasks.getTasks().get(taskNumber));
         } else {
             throw new DukeTaskNotFoundException(" ERROR... TASK NOT FOUND. \n PLEASE TRY AGAIN ");
         }
