@@ -2,6 +2,30 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    enum type {
+        TODO{
+            public String toString() {
+                return "todo";
+            }
+        },
+        DEADLINE{
+            public String toString() {
+                return "deadline";
+            }
+        },
+        EVENT{
+            @Override
+            public String toString() {
+                return "event";
+            }
+        },
+        DELETE{
+            @Override
+            public String toString() {
+                return "delete";
+            }
+        },
+    }
 
     private static void printBorder() {
         System.out.println("____________________________________________________________\n");
@@ -36,10 +60,11 @@ public class Duke {
                 }
             } else {
                 printBorder();
-                if (input.contains("todo") || input.contains("deadline") || input.contains("event") || input.contains("delete")) {
+                if (input.contains(type.TODO.toString()) || input.contains(type.DEADLINE.toString()) || input.contains(type.EVENT.toString()) || input.contains(type.DELETE.toString())) {
+                    System.out.println(type.TODO.toString());
                     int due = input.indexOf("/");
 
-                    if (input.contains("todo")) {
+                    if (input.contains(type.TODO.toString())) {
                         try {
                             Todo t = new Todo(input.substring(5));
                             tasks.add(t);
@@ -48,7 +73,7 @@ public class Duke {
                         } catch (Exception e) {
                             throw new DukeException(" ☹ Insufficient details! The description of a todo cannot be empty.");
                         }
-                    } else if (input.contains("deadline")) {
+                    } else if (input.contains(type.DEADLINE.toString())) {
                         try {
                             Deadline dl = new Deadline(input.substring(9, due), input.substring(due + 4));
                             System.out.println("Got it. I've added this task:");
@@ -57,7 +82,7 @@ public class Duke {
                         } catch (Exception e) {
                             throw new DukeException(" ☹ Insufficient details! The description of a deadline cannot be empty.");
                         }
-                    } else if (input.contains("event")) {
+                    } else if (input.contains(type.EVENT.toString())) {
                         try {
                             Event e = new Event(input.substring(6, due), input.substring(due + 4));
                             System.out.println("Got it. I've added this task:");
@@ -66,7 +91,7 @@ public class Duke {
                         } catch (Exception e) {
                             throw new DukeException(" ☹ Insufficient details! The description of a todo cannot be empty.");
                         }
-                    } else if (input.contains("delete")) {
+                    } else if (input.contains(type.DELETE.toString())) {
                         try {
                             int index = Integer.parseInt(input.substring(7)) - 1;
                             Task t = tasks.get(index);
