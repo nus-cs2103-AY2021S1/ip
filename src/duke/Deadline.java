@@ -14,12 +14,12 @@ public class Deadline extends Task {
     }
 
     public String getType() {
-        return "[D]";
+        return "D";
     }
 
     @Override
     public String toString() {
-        return this.getType() + this.getStatusIcon() + " " + this.description + " (by:" + this.deadline + ")";
+        return "[" + this.getType() + "]" + this.getStatusIcon() + " " + this.description + " (by:" + this.deadline + ")";
     }
 
     @Override
@@ -27,5 +27,9 @@ public class Deadline extends Task {
         //int index = taskNum - 1;
         Deadline newTask = new Deadline(this.getDescription(), true, this.deadline);
         return newTask;
+    }
+
+    public String getDate() {
+        return this.deadline;
     }
 }
