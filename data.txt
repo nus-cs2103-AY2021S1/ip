@@ -1,4 +1,4 @@
-T | 1 | read book
-D | 1 | return book | 2020-06-06
-T | 0 | project meeting
-T | 1 | join sports club
+T | 1 | watch Inception
+D | 0 | finish hw | 2020-08-27
+T | 0 | lunch with Rhea | 2020-08-25
+T | 1 | do laundry
