@@ -30,4 +30,13 @@ public class Task {
     public String toString() {
         return String.format("%s %s", doneTag(), name);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Task) {
+            Task o = (Task) obj;
+            return this.name.equals(o.name) && this.doneState == o.doneState;
+        }
+        return false;
+    }
 }

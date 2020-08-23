@@ -18,4 +18,13 @@ public class Todo extends Task {
     public String toString() {
         return String.format("[T]%s", super.toString());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Todo) {
+            Task o = (Task) obj;
+            return super.equals(o);
+        }
+        return false;
+    }
 }

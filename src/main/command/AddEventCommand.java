@@ -23,4 +23,13 @@ public class AddEventCommand implements Command {
     public boolean hasCommand() {
         return true;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof AddEventCommand) {
+            AddEventCommand o = (AddEventCommand) obj;
+            return this.event.equals(o.event);
+        }
+        return false;
+    }
 }

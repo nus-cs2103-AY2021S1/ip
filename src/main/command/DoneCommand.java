@@ -25,4 +25,13 @@ public class DoneCommand implements Command {
     public boolean hasCommand() {
         return true;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DoneCommand) {
+            DoneCommand o = (DoneCommand) obj;
+            return this.taskNum == o.taskNum;
+        }
+        return false;
+    }
 }

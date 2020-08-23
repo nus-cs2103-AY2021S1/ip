@@ -28,4 +28,13 @@ public class Deadline extends Task {
         return String.format("[D]%s (by: %s)", super.toString(),
                 time.format(FORMATTER));
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Deadline) {
+            Deadline o = (Deadline) obj;
+            return super.equals(o) && this.time.equals(o.time);
+        }
+        return false;
+    }
 }

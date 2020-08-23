@@ -28,4 +28,13 @@ public class Event extends Task {
         return String.format("[E]%s (at: %s)", super.toString(),
                 time.format(FORMATTER));
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Event) {
+            Event o = (Event) obj;
+            return super.equals(o) && this.time.equals(o.time);
+        }
+        return false;
+    }
 }

@@ -13,4 +13,9 @@ public class ListCommand implements Command {
     public boolean hasCommand() {
         return true;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ListCommand;
+    }
 }

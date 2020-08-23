@@ -21,4 +21,13 @@ public class AddTodoCommand implements Command {
     public boolean hasCommand() {
         return true;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof AddTodoCommand) {
+            AddTodoCommand o = (AddTodoCommand) obj;
+            return this.todo.equals(o.todo);
+        }
+        return false;
+    }
 }

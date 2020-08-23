@@ -29,7 +29,7 @@ public class Storage {
 
         FileWriter fw = new FileWriter(file);
         BufferedWriter bw = new BufferedWriter(fw);
-        bw.write("main.task.Task Type,main.task.Task Time,Done State,main.task.Task Name\n");
+        bw.write("Task Type,Task Time,Done State,Task Name\n");
 
         for (int i = 0; i < tasks.size(); i++) bw.write(tasks.get(i).write());
 

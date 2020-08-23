@@ -23,4 +23,13 @@ public class AddDeadlineCommand implements Command {
     public boolean hasCommand() {
         return true;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof AddDeadlineCommand) {
+            AddDeadlineCommand o = (AddDeadlineCommand) obj;
+            return this.deadline.equals(o.deadline);
+        }
+        return false;
+    }
 }

@@ -24,4 +24,13 @@ public class DeleteCommand implements Command {
     public boolean hasCommand() {
         return true;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DeleteCommand) {
+            DeleteCommand o = (DeleteCommand) obj;
+            return this.taskNum == o.taskNum;
+        }
+        return false;
+    }
 }
