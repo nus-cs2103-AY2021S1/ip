@@ -7,6 +7,10 @@ package duke.command;
 import duke.component.*;
 
 public class ByeCommand extends Command {
+    /**
+     * Creates a command for exiting.
+     * @param input The input command "bye".
+     */
     public ByeCommand(String input) {
         super(input);
     }
