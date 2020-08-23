@@ -21,9 +21,13 @@ public class TaskList {
      * Checks which command the Duke bot is taking in
      * and adds the printed line to the saved file.
      *
-     * @param storage the storage system
-     * @param fullCommand tbe full input
-     * @param first the first word of the input
+     * @param storage the storage system.
+     * @param fullCommand tbe full input.
+     * @param first the first word of the input.
+     * @throws EmptyTodoException  when the todo request is empty.
+     * @throws EmptyEventsException  when the event request is empty.
+     * @throws EmptyDeadlineException  when the deadline request is empty.
+     * @throws UnknownCommandException  when the command is unknown.
      */
     public void operate(Storage storage, String fullCommand, String first) throws IOException {
         String[] s = fullCommand.split("\\s");
