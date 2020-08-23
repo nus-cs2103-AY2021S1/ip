@@ -218,25 +218,16 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String divider = "---------------------------------------------------------------------------------------------";
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        Scanner sc = new Scanner(System.in);
+        Ui ui = new Ui();
         String input = "";
         List<Task> list = new ArrayList<>();
         String output;
 
-        System.out.println("\n" + logo);
-        System.out.println("\t" + divider);
-        System.out.println("\t" + "Hello! I'm Duke\n\tWhat can I do for you?");
-        System.out.println("\t" + divider);
+        ui.showWelcome();
         loadData(list);
 
         while (!input.equals("bye")) {
-            input = sc.nextLine();
+            input = ui.readInput();
 
             try {
                 output = process(input, list);
@@ -244,9 +235,7 @@ public class Duke {
                 output = e.getMessage();
             }
 
-            System.out.println("\t" + divider);
-            System.out.println(output);
-            System.out.println("\t" + divider + "\n");
+            ui.showOutput(output);
         }
     }
 }
