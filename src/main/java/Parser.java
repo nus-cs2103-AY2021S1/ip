@@ -1,3 +1,8 @@
+import exceptions.*;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.ToDos;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -48,7 +53,7 @@ public class Parser {
         }
     }
 
-    public static void getDeadline(String word, TaskList list) throws InvalidDeadlineException{
+    public static void getDeadline(String word, TaskList list) throws InvalidDeadlineException {
         if (word.contains("/by") && !word.substring(word.indexOf("/by") + 3).equals("")){
             word = word.substring(8);
             int index = word.indexOf("/by");
@@ -89,7 +94,7 @@ public class Parser {
         }
     }
 
-    public static void getEvent(String word, TaskList list) throws InvalidEventException{
+    public static void getEvent(String word, TaskList list) throws InvalidEventException {
         if (word.contains("/at") && !word.substring(word.indexOf("/at") + 3).equals("")){
             word = word.substring(5);
             int index = word.indexOf("/at");
@@ -130,7 +135,7 @@ public class Parser {
         }
     }
 
-    public static void validity(String line) throws UnknownCommandException{
+    public static void validity(String line) throws UnknownCommandException {
         ArrayList<String> list = new ArrayList<>(Arrays.asList("delete", "done", "todo", "event", "deadline"));
         String[] words = line.split(" ");
         if (list.contains(words[0]) && words.length > 1){

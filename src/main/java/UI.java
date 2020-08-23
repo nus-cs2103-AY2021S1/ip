@@ -1,3 +1,7 @@
+import exceptions.InvalidDeadlineException;
+import exceptions.InvalidEventException;
+import exceptions.UnknownCommandException;
+
 import java.util.Scanner;
 
 public class UI {

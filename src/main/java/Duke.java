@@ -1,3 +1,5 @@
+import exceptions.DukeException;
+
 public class Duke {
     private Storage storage;
     private UI ui;

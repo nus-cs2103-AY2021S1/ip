@@ -1,3 +1,5 @@
+import tasks.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -21,20 +23,20 @@ public class TaskList {
 //        }
 //    }
 //
-//    private Task getTask(String line){
-//        Task task;
+//    private tasks.Task getTask(String line){
+//        tasks.Task task;
 //        if (line.charAt(1) == 'T'){
-//            task = new ToDos(line.substring(6));
+//            task = new tasks.ToDos(line.substring(6));
 //        } else if (line.charAt(1) == 'D'){
 //            int index = line.indexOf("|");
 //            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 //            LocalDateTime date = LocalDateTime.parse(line.substring(index + 1).trim(), formatter);
-//            task = new Deadline(line.substring(6, index), date);
+//            task = new tasks.Deadline(line.substring(6, index), date);
 //        } else {
 //            int index = line.indexOf("|");
 //            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 //            LocalDateTime date = LocalDateTime.parse(line.substring(index + 1).trim(), formatter);
-//            task = new Event(line.substring(6, index), date);
+//            task = new tasks.Event(line.substring(6, index), date);
 //        }
 //        if (line.charAt(4) == '✓'){
 //            task.updateStatus();
