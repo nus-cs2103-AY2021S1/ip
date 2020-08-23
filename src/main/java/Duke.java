@@ -1,4 +1,10 @@
 import java.io.File;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -64,7 +70,7 @@ public class Duke {
 
     public String addTask(String t) throws DukeEmptyDescriptionException,
             DukeEmptyByException, DukeEmptyAtException,
-            DukeUnknownInputException{
+            DukeUnknownInputException, DukeInvalidDateTimeInputException {
         Task toBeAdded;
         String des;
         String[] tokens;
@@ -81,10 +87,24 @@ public class Duke {
                 throw new DukeEmptyDescriptionException(EMPTY_DESCRIPTION_ERROR("todo"));
             }
         } else if (t.startsWith("deadline")) {
-            tokens = t.split(" /by ");
             try {
+                tokens = t.split(" /by ");
                 des = tokens[0].substring(9);
-                toBeAdded = new Deadline(des, tokens[1]);
+                LocalDate byDate;
+                LocalTime byTime;
+                try {
+                    List<LocalDateTime> dtList = customDateTimeFormatter(tokens[1]);
+                    byDate = dtList.get(0).toLocalDate();
+                    if (dtList.size() == 2) {
+                        LocalDateTime time = dtList.get(1);
+                        byTime = LocalTime.of(time.getHour(), time.getMinute());
+                    } else {
+                        byTime = null;
+                    }
+                } catch (DukeInvalidDateTimeInputException e) {
+                    throw e;
+                }
+                toBeAdded = new Deadline(des, byDate, byTime);
                 data.add(toBeAdded);
                 return "Got it. I've added this task:\n" +
                         INDENT + "  " + toBeAdded + "\n" +
@@ -99,7 +119,21 @@ public class Duke {
             try {
                 tokens = t.split(" /at ");
                 des = tokens[0].substring(6);
-                toBeAdded = new Event(des, tokens[1]);
+                LocalDate atDate;
+                LocalTime atTime;
+                try {
+                    List<LocalDateTime> dtList = customDateTimeFormatter(tokens[1]);
+                    atDate = dtList.get(0).toLocalDate();
+                    if (dtList.size() == 2) {
+                        LocalDateTime time = dtList.get(1);
+                        atTime = LocalTime.of(time.getHour(), time.getMinute());
+                    } else {
+                        atTime = null;
+                    }
+                } catch (DukeInvalidDateTimeInputException e) {
+                    throw e;
+                }
+                toBeAdded = new Event(des, atDate, atTime);
                 data.add(toBeAdded);
                 return "Got it. I've added this task:\n" +
                         INDENT + "  " + toBeAdded + "\n" +
@@ -113,6 +147,44 @@ public class Duke {
         } else {
             throw new DukeUnknownInputException(UNKNOWN_TASK_ERROR);
         }
+    }
+
+    private List<LocalDateTime> customDateTimeFormatter(String dateTimeString) throws DukeInvalidDateTimeInputException {
+        //dateTimeString should be given in "dd/mm/yyyy hhmm"
+        //will use manual parser to check for invalid date time inputs
+        List<LocalDateTime> results = new ArrayList<>();
+        //results returns index 0 as date, index 1 as time
+        String[] tokens = dateTimeString.split(" ");
+        String dateString = tokens[0];
+        String[] dateTokens = dateString.split("/");
+        if (dateTokens.length != 3) {
+            throw new DukeInvalidDateTimeInputException("☹ OOPS!!! Invalid date format!");
+        } else {
+            int year = Integer.parseInt(dateTokens[2]);
+            int month = Integer.parseInt(dateTokens[1]);
+            int day = Integer.parseInt(dateTokens[0]);
+            try {
+                LocalDateTime date = LocalDateTime.of(year, month, day, 0, 0);
+                results.add(date);
+            } catch (DateTimeException e) {
+                throw new DukeInvalidDateTimeInputException("☹ OOPS!!! Invalid date. Date do not exist!");
+            }
+        }
+        if (tokens.length == 1) {
+        } else {
+            String timeString = tokens[1];
+            if (timeString.length() != 4) {
+                throw new DukeInvalidDateTimeInputException("☹ OOPS!!! Invalid time format!");
+            }
+            try {
+                int hr = Integer.parseInt(timeString.substring(0, 2));
+                int min = Integer.parseInt(timeString.substring(2));
+                results.add(LocalDateTime.of(LocalDate.now(), LocalTime.of(hr, min)));
+            } catch (DateTimeException e) {
+                throw new DukeInvalidDateTimeInputException("☹ OOPS!!! Invalid time. You can only input up to 23hr and 59min.");
+            }
+        }
+        return results;
     }
 
     public String markDone(String md) throws DukeInvalidDoneIndexException, DukeEmptyDoneIndexException {
@@ -148,24 +220,61 @@ public class Duke {
         }
     }
 
-    public void printList() {
-        String s = convertToList();
-        printWindow(s);
-    }
-
-    String convertToList() {
+    private String convertList(List<Task> tasks, String alternative) {
         String s = "";
-        for (int i = 0; i < data.getTasksList().size(); i ++) {
-            s += (i + 1) + "." + data.getTasksList().get(i);
-            if (i != data.getTasksList().size() - 1) {
+        for (int i = 0; i < tasks.size(); i ++) {
+            s += (i + 1) + "." + tasks.get(i);
+            if (i != tasks.size() - 1) {
                 s += '\n' + INDENT;
             }
         }
         if (s.equals("")) {
-            return "There is nothing in the list!";
+            return alternative;
         } else {
             return s;
         }
+    }
+
+    private String convertList() {
+        return convertList(data.getTasksList(), "There is nothing in the list!");
+    }
+
+    public void printList() {
+        printWindow(convertList());
+    }
+
+    public void printTaskOn(String dateString) throws DukeInvalidDateTimeInputException {
+        //dateString given in dd/MM/yyyy
+        String[] tokens = dateString.split("/");
+        LocalDate date;
+        if (tokens.length != 3) {
+            throw new DukeInvalidDateTimeInputException("☹ OOPS!!! Invalid date format!");
+        } else {
+            int year = Integer.parseInt(tokens[2]);
+            int month = Integer.parseInt(tokens[1]);
+            int day = Integer.parseInt(tokens[0]);
+            try {
+                date = LocalDate.of(year, month, day);
+            } catch (DateTimeException e) {
+                throw new DukeInvalidDateTimeInputException("☹ OOPS!!! Invalid date. Date do not exist!");
+            }
+        }
+        List<Task> taskOnDate = new ArrayList<>();
+        List<Task> list = data.getTasksList();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) instanceof Deadline) {
+                Deadline d = (Deadline) list.get(i);
+                if (d.getDate().isEqual(date)) {
+                    taskOnDate.add(d);
+                }
+            } else if (list.get(i) instanceof Event) {
+                Event e = (Event) list.get(i);
+                if (e.getDate().isEqual(date)) {
+                    taskOnDate.add(e);
+                }
+            }
+        }
+        printWindow(convertList(taskOnDate, "There is no upcoming tasks on that date."));
     }
 
     public static void printWindow(String s) {
@@ -180,7 +289,7 @@ public class Duke {
         System.out.print(INDENT + HORIZONTAL_LINE);
     }
 
-    public static void main(String[] args) throws DukeInvalidData {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         String homePath = System.getProperty("user.home");
@@ -188,14 +297,7 @@ public class Duke {
         File file = new File(homePath);
         boolean bool = file.mkdir(); //make directory if directory does not exist!
         homePath += "\\duke.txt";
-        Data data;
-        System.out.printf("%b, %s", bool, homePath);
-        try {
-            data = new Data(homePath);
-        } catch (DukeInvalidData e) {
-            System.out.println(e.getMessage());
-            throw e;
-        }
+        Data data = new Data(homePath);
         Duke duke = new Duke(data);
         System.out.println(INDENT + HORIZONTAL_LINE);
         System.out.println("    Hello! I'm Soccat Duke.");
@@ -205,7 +307,7 @@ public class Duke {
                     + homePath);
         } else {
             System.out.println("    This is your current list:");
-            System.out.println(INDENT + duke.convertToList());
+            System.out.println(INDENT + duke.convertList());
         }
         System.out.println("\n    What do you meow?");
         System.out.println(INDENT + HORIZONTAL_LINE);
@@ -216,6 +318,12 @@ public class Duke {
                 break;
             } else if (nextLine.equals("list")) {
                 duke.printList();
+            } else if (nextLine.startsWith("list ")) {
+                try {
+                    duke.printTaskOn(nextLine.substring(5));
+                } catch (DukeInvalidDateTimeInputException e) {
+                    printWindow(e.getMessage());
+                }
             } else if (nextLine.startsWith("done")) {
                 try {
                     printWindow(duke.markDone(nextLine));
@@ -233,10 +341,7 @@ public class Duke {
                 try {
                     printed = duke.addTask(nextLine);
                     printWindow(printed);
-                } catch (DukeUnknownInputException |
-                        DukeEmptyByException |
-                        DukeEmptyAtException |
-                        DukeEmptyDescriptionException e) {
+                } catch (DukeUnknownInputException | DukeEmptyByException | DukeEmptyAtException | DukeEmptyDescriptionException | DukeInvalidDateTimeInputException e) {
                     printWindow(e.getMessage());
                 }
             }
