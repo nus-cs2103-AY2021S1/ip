@@ -1,3 +1,9 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +18,7 @@ public class Viscount {
             "  \\ V /| |____) | |___| (_) | |_| | | | | |_  \n" +
             "   \\_/ |_|_____/ \\_____\\___/ \\__,_|_| |_|\\__|";
     private static final String HORIZONTAL_LINE = "__________________________________________________";
+    private static final DateTimeFormatter INPUT_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy[ HHmm]");
 
     private static List<Task> tasks = new ArrayList<>();
 
@@ -60,6 +67,23 @@ public class Viscount {
         
         Viscount.speak("Very good! I have marked this task as done:\n" + task.toString());
     }
+    
+    //@@author sc-arecrow-reused
+    //Reused from https://stackoverflow.com/a/48281350 with minor modifications
+    private static LocalDateTime formatDateTime(String dateTimeString) throws DateTimeParseException {
+        LocalDateTime dateTime;
+
+        TemporalAccessor ta = INPUT_DATE_TIME_FORMATTER.parseBest(dateTimeString, LocalDateTime::from, LocalDate::from);
+        
+        if (ta instanceof LocalDateTime) {
+            dateTime = (LocalDateTime) ta;
+        } else {
+            dateTime = ((LocalDate) ta).atStartOfDay();
+        }
+        
+        return dateTime;
+    }
+    //@@author
 
     private static void parseInput(List<String> arguments) throws ViscountException {
         String command = arguments.get(0);
@@ -82,15 +106,20 @@ public class Viscount {
                 throw new ViscountMissingArgumentException("/by");
             } else {
                 String description = String.join(" ", arguments.subList(1, indexOfDueDate));
-                String dueDate = String.join(" ", arguments.subList(indexOfDueDate + 1, arguments.size()));
+                String dueDateString = String.join(" ", arguments.subList(indexOfDueDate + 1, arguments.size()));
 
                 if (description.isEmpty()) {
                     throw new ViscountMissingDescriptionException("deadline");
-                } else if (dueDate.isEmpty()) {
+                } else if (dueDateString.isEmpty()) {
                     throw new ViscountMissingArgumentDescriptionException("/by");
                 } else {
-                    Deadline deadline = new Deadline(description, dueDate);
-                    Viscount.addToTaskList(deadline);
+                    try {
+                        LocalDateTime dueDate = Viscount.formatDateTime(dueDateString);
+                        Deadline deadline = new Deadline(description, dueDate);
+                        Viscount.addToTaskList(deadline);
+                    } catch (DateTimeParseException e) {
+                        throw new ViscountDateTimeParseException("due date");
+                    }
                 }
             }
         } else if (command.equals("event")) {
@@ -100,15 +129,20 @@ public class Viscount {
                 throw new ViscountMissingArgumentException("/at");
             } else {
                 String description = String.join(" ", arguments.subList(1, indexOfEventTime));
-                String eventTime = String.join(" ", arguments.subList(indexOfEventTime + 1, arguments.size()));
+                String eventTimeString = String.join(" ", arguments.subList(indexOfEventTime + 1, arguments.size()));
 
                 if (description.isEmpty()) {
                     throw new ViscountMissingDescriptionException("event");
-                } else if (eventTime.isEmpty()) {
+                } else if (eventTimeString.isEmpty()) {
                     throw new ViscountMissingArgumentDescriptionException("/at");
                 } else {
-                    Event event = new Event(description, eventTime);
-                    Viscount.addToTaskList(event);
+                    try {
+                        LocalDateTime eventTime = Viscount.formatDateTime(eventTimeString);
+                        Event event = new Event(description, eventTime);
+                        Viscount.addToTaskList(event);
+                    } catch (DateTimeParseException e) {
+                        throw new ViscountDateTimeParseException("event date");
+                    }
                 }
             }
         } else if (command.equals("done")) {

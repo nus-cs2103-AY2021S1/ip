@@ -19,7 +19,7 @@ __________________________________________________
 
 __________________________________________________
 Very well. I've added this task:
-[T][?] read book
+[T][?] t1
 Now you have 1 tasks in the list.
 __________________________________________________
 
@@ -36,9 +36,29 @@ Alas, the description of the /by argument cannot be empty.
 __________________________________________________
 
 __________________________________________________
+Alas, I do not understand. Please format your due date
+in this format: dd-MM-yyyy HHmm
+like the following example: 23-08-2020 1300
+The time is optional and the default is 0000.
+__________________________________________________
+
+__________________________________________________
+Alas, I do not understand. Please format your due date
+in this format: dd-MM-yyyy HHmm
+like the following example: 23-08-2020 1300
+The time is optional and the default is 0000.
+__________________________________________________
+
+__________________________________________________
 Very well. I've added this task:
-[D][?] return book (by: wednesday)
+[D][?] t2 (by: Aug 23 2020, 11:00 AM)
 Now you have 2 tasks in the list.
+__________________________________________________
+
+__________________________________________________
+Very well. I've added this task:
+[D][?] t3 (by: Aug 23 2020, 12:00 AM)
+Now you have 3 tasks in the list.
 __________________________________________________
 
 __________________________________________________
@@ -54,9 +74,29 @@ Alas, the description of the /at argument cannot be empty.
 __________________________________________________
 
 __________________________________________________
+Alas, I do not understand. Please format your event date
+in this format: dd-MM-yyyy HHmm
+like the following example: 23-08-2020 1300
+The time is optional and the default is 0000.
+__________________________________________________
+
+__________________________________________________
+Alas, I do not understand. Please format your event date
+in this format: dd-MM-yyyy HHmm
+like the following example: 23-08-2020 1300
+The time is optional and the default is 0000.
+__________________________________________________
+
+__________________________________________________
 Very well. I've added this task:
-[E][?] project meeting (at: 6pm)
-Now you have 3 tasks in the list.
+[E][?] t4 (at: Aug 23 2020, 12:00)
+Now you have 4 tasks in the list.
+__________________________________________________
+
+__________________________________________________
+Very well. I've added this task:
+[E][?] t5 (at: Aug 23 2020, 00:00)
+Now you have 5 tasks in the list.
 __________________________________________________
 
 __________________________________________________
@@ -73,26 +113,30 @@ __________________________________________________
 
 __________________________________________________
 Very good! I have marked this task as done:
-[T][?] read book
+[T][?] t1
 __________________________________________________
 
 __________________________________________________
 Here are the tasks in your list:
-1.[T][?] read book
-2.[D][?] return book (by: wednesday)
-3.[E][?] project meeting (at: 6pm)
+1.[T][?] t1
+2.[D][?] t2 (by: Aug 23 2020, 11:00 AM)
+3.[D][?] t3 (by: Aug 23 2020, 12:00 AM)
+4.[E][?] t4 (at: Aug 23 2020, 12:00)
+5.[E][?] t5 (at: Aug 23 2020, 00:00)
 __________________________________________________
 
 __________________________________________________
 Very good! I have marked this task as done:
-[E][?] project meeting (at: 6pm)
+[D][?] t3 (by: Aug 23 2020, 12:00 AM)
 __________________________________________________
 
 __________________________________________________
 Here are the tasks in your list:
-1.[T][?] read book
-2.[D][?] return book (by: wednesday)
-3.[E][?] project meeting (at: 6pm)
+1.[T][?] t1
+2.[D][?] t2 (by: Aug 23 2020, 11:00 AM)
+3.[D][?] t3 (by: Aug 23 2020, 12:00 AM)
+4.[E][?] t4 (at: Aug 23 2020, 12:00)
+5.[E][?] t5 (at: Aug 23 2020, 00:00)
 __________________________________________________
 
 __________________________________________________
@@ -105,23 +149,26 @@ __________________________________________________
 
 __________________________________________________
 Very well. I've removed this task:
-[T][?] read book
-Now you have 2 tasks in the list.
-__________________________________________________
-
-__________________________________________________
-Alas, your task list does not contain a task number 3.
+[T][?] t1
+Now you have 4 tasks in the list.
 __________________________________________________
 
 __________________________________________________
 Very well. I've removed this task:
-[E][?] project meeting (at: 6pm)
-Now you have 1 tasks in the list.
+[E][?] t4 (at: Aug 23 2020, 12:00)
+Now you have 3 tasks in the list.
+__________________________________________________
+
+__________________________________________________
+Very well. I've removed this task:
+[D][?] t3 (by: Aug 23 2020, 12:00 AM)
+Now you have 2 tasks in the list.
 __________________________________________________
 
 __________________________________________________
 Here are the tasks in your list:
-1.[D][?] return book (by: wednesday)
+1.[D][?] t2 (by: Aug 23 2020, 11:00 AM)
+2.[E][?] t5 (at: Aug 23 2020, 00:00)
 __________________________________________________
 
 __________________________________________________
