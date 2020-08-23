@@ -6,12 +6,6 @@ public class Duke {
 
     public static void main(String[] args) throws DukeException {
         String logo = "Duke Melvin";
-//
-//                " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + "\n" + "What can I do for you?");
 
         List<Task> ls = new ArrayList<>();
@@ -27,11 +21,9 @@ public class Duke {
                         System.out.println("Bye. Hope to see you again soon!");
                         break;
                     case "list":
-                        System.out.println("____________________________________________________________");
                         for (int x = 0; x < ls.size(); x++) {
                             System.out.println(x + 1 + ":" + ls.get(x).toString());
                         }
-                        System.out.println("____________________________________________________________");
                         break;
                     default:
                         switch (firstArg) {
@@ -41,7 +33,7 @@ public class Duke {
                                     throw new InvalidDoneCommandException();
                                 } else {
                                     int itemToBeMarkedAsDone = Integer.parseInt(doneCommandArray[1]);
-                                    if (itemToBeMarkedAsDone > ls.size() || itemToBeMarkedAsDone <=0) {
+                                    if (itemToBeMarkedAsDone > ls.size() || itemToBeMarkedAsDone <= 0) {
                                         throw new InvalidDoneCommandException();
                                     } else {
                                         ls.get(itemToBeMarkedAsDone - 1).markAsDone();
@@ -50,21 +42,18 @@ public class Duke {
                                 break;
                             case "delete":
                                 String[] deleteCommandArray = line.split(" ");
-                                if(deleteCommandArray.length <2){
+                                if (deleteCommandArray.length < 2) {
                                     throw new InvalidDeleteCommandException();
-                                }else{
+                                } else {
                                     int itemToBeDeleted = Integer.parseInt(deleteCommandArray[1]);
-                                    if(itemToBeDeleted > ls.size() || itemToBeDeleted <=0){
+                                    if (itemToBeDeleted > ls.size() || itemToBeDeleted <= 0) {
                                         throw new InvalidDeleteCommandException();
-                                    }else{
-                                        Task item = ls.get(itemToBeDeleted-1);
-                                        ls.remove(itemToBeDeleted-1);
-                                        System.out.println("____________________________________________________________");
+                                    } else {
+                                        Task item = ls.get(itemToBeDeleted - 1);
+                                        ls.remove(itemToBeDeleted - 1);
                                         System.out.println("Noted. I've removed this task:");
                                         System.out.println(item.toString());
                                         System.out.format("Now you have %d tasks in the list\n", ls.size());
-                                        System.out.println("____________________________________________________________");
-
                                     }
                                 }
 
@@ -78,11 +67,9 @@ public class Duke {
                                     String todoString = line.substring(5);
                                     ToDo todo = new ToDo(todoString);
                                     ls.add(todo);
-                                    System.out.println("____________________________________________________________");
                                     System.out.println("Got it. I've added this task:");
                                     System.out.println(todo.toString());
                                     System.out.format("Now you have %d tasks in the list\n", ls.size());
-                                    System.out.println("____________________________________________________________");
                                     break;
                                 }
 
@@ -93,11 +80,9 @@ public class Duke {
                                 String deadlineString = line.split("/")[0].substring(9);
                                 Deadline deadline = new Deadline(deadlineString, by2);
                                 ls.add(deadline);
-                                System.out.println("____________________________________________________________");
                                 System.out.println(" Got it. I've added this task:");
                                 System.out.println(deadline.toString());
                                 System.out.format("Now you have %d tasks in the list\n", ls.size());
-                                System.out.println("____________________________________________________________");
                                 break;
 
                             case "event":
@@ -107,11 +92,9 @@ public class Duke {
                                 String eventString = line.split("/")[0].substring(6);
                                 Event event = new Event(eventString, at2);
                                 ls.add(event);
-                                System.out.println("____________________________________________________________");
-                                System.out.println(" Got it. I've added this task:");
+                                System.out.println("Got it. I've added this task:");
                                 System.out.println(event.toString());
                                 System.out.format("Now you have %d tasks in the list\n", ls.size());
-                                System.out.println("____________________________________________________________");
                                 break;
 
                             default:
@@ -121,8 +104,10 @@ public class Duke {
                 }
             } catch (DukeException exception) {
                 System.out.println(exception.getMessage());
-            }
+            } catch (Exception exception) {
+                System.out.println(exception.getMessage());
 
+            }
 
         }
     }
