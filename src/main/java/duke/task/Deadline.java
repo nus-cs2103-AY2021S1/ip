@@ -8,6 +8,12 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private final LocalDate byTime;
 
+    /**
+     * Creates a deadline task.
+     * @param description the description of the task
+     * @param byTime the string description of the time the deadline task should be done by
+     * @throws InvalidCommandException if the input time format is not yyyy-MM-dd
+     */
     public Deadline(String description, String byTime) throws InvalidCommandException {
         super(description);
         try {
