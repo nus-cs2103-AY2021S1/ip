@@ -4,14 +4,36 @@ import java.time.DateTimeException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Duke {
     private static void printTasks(ArrayList<Task> list) {
         for (int i = 0; i < list.size(); i++) {
             System.out.println(i + 1 + ". " + list.get(i).display());
         }
+    }
+    
+    private static void printTaskAdded(Task task, ArrayList<Task> list) {
+        System.out.println("Added task: " + task.display()
+                + "\nYou have " + list.size() + " task(s) left in your list.");
+    }
+    
+    private static String formatDate(String dateString) {
+        if (dateString.contains("/")) {
+            dateString = dateString.replaceAll("\\/", "-");
+        }
+        String[] dateStringArr = dateString.split("-");
+        dateString = "";
+        for (int i = 0; i < dateStringArr.length; i++) {
+            if (dateStringArr[i].length() < 2) {
+                dateStringArr[i] = "0" + dateStringArr[i];
+            }
+            if (i > 0) {
+                dateString = dateString + "-" + dateStringArr[i];
+            } else {
+                dateString = dateStringArr[i];
+            }
+        }
+        return dateString;
     }
 
     private static ArrayList<Task> handleDoneInput(String input, ArrayList<Task> list) throws DukeException{
@@ -22,7 +44,7 @@ public class Duke {
             if (index >= 1) { //if input index is valid
                 Task newTask = list.get(index - 1).markAsDone();
                 list.set(index - 1, newTask);
-                System.out.println("Nice! I've marked this task as doneee! yayy:\n" + newTask);
+                System.out.println("Marked task as done:\n" + newTask.display());
                 return list;
             } else {
                 throw new DukeException("Please enter a valid task number to mark as done (index is not valid)");
@@ -40,8 +62,8 @@ public class Duke {
             if (index >= 1) { //if input index is valid
                 Task removed = list.get(index - 1);
                 list.remove(index - 1);
-                System.out.println("I have removed this task:\n" + removed.display()
-                        + "\nNow you have " + list.size() + " task(s) in the list.");
+                System.out.println("Removed task:\n" + removed.display()
+                        + "\nYou have " + list.size() + " task(s) left in your list.");
                 return list;
             } else {
                 throw new DukeException("Please enter a valid task number to delete (index is not valid)");
@@ -56,9 +78,7 @@ public class Duke {
             String description = input.substring(4);
             Task newTask = new Todo(description.trim());
             list.add(newTask);
-            System.out.println("Got itt. I've added this task:\n    "
-                    + newTask.display()
-                    + "\nNow you have " + list.size() + " task(s) in the list.");
+            printTaskAdded(newTask, list);
             return list;
         } else {
             throw new DukeException("Please enter a valid todo");
@@ -77,21 +97,7 @@ public class Duke {
                 if (by.contains(" ")) { //user gave a time input
                     String dateString = by.split(" ")[0].trim();
                     String timeString = by.split(" ")[1].trim();
-                    if (dateString.contains("/")) {
-                        dateString = dateString.replaceAll("\\/", "-");
-                    }
-                    String[] dateStringArr = dateString.split("-");
-                    dateString = "";
-                    for (int i = 0; i < dateStringArr.length; i++) {
-                        if (dateStringArr[i].length() < 2) {
-                            dateStringArr[i] = "0" + dateStringArr[i];
-                        }
-                        if (i > 0) {
-                            dateString = dateString + "-" + dateStringArr[i];
-                        } else {
-                            dateString = dateStringArr[i];
-                        }
-                    }
+                    dateString = formatDate(dateString);
                     LocalDate d1 = LocalDate.parse(dateString);
                     if (timeString.length() == 4) {
                         try {
@@ -99,9 +105,7 @@ public class Duke {
                             if (time >= 0000 && time <= 2359) {
                                 Task newTask = new Deadline(description.trim(), d1, timeString);
                                 list.add(newTask);
-                                System.out.println("Got itt. I've added this task:\n    "
-                                        + newTask.display()
-                                        + "\nNow you have " + list.size() + " task(s) in the list.");
+                                printTaskAdded(newTask, list);
                                 return list;
                             } else {
                                 throw new DukeException("Please enter a valid time between 0000 and 2359");
@@ -112,33 +116,15 @@ public class Duke {
                     } else {
                         Task newTask = new Deadline(description.trim(), d1);
                         list.add(newTask);
-                        System.out.println("Got itt. I've added this task:\n    "
-                                + newTask.display()
-                                + "\nNow you have " + list.size() + " task(s) in the list.");
+                        printTaskAdded(newTask, list);
                         return list;
                     }
                 } else { //user didn't give a time input
-                    if (by.contains("/")) {
-                        by = by.replaceAll("\\/", "-");
-                    }
-                    String[] byArr = by.split("-");
-                    by = "";
-                    for (int i = 0; i < byArr.length; i++) {
-                        if (byArr[i].length() < 2) {
-                            byArr[i] = "0" + byArr[i];
-                        }
-                        if (i > 0) {
-                            by = by + "-" + byArr[i];
-                        } else {
-                            by = byArr[i];
-                        }
-                    }
+                    by = formatDate(by);
                     LocalDate d1 = LocalDate.parse(by);
                     Task newTask = new Deadline(description.trim(), d1);
                     list.add(newTask);
-                    System.out.println("Got itt. I've added this task:\n    "
-                            + newTask.display()
-                            + "\nNow you have " + list.size() + " task(s) in the list.");
+                    printTaskAdded(newTask, list);
                     return list;
                 }
             } catch (DateTimeException dte) {
@@ -161,31 +147,15 @@ public class Duke {
                 if (at.contains(" ")) { //user gave a time input
                     String dateString = at.split(" ")[0].trim();
                     String timeString = at.split(" ")[1].trim();
-                    if (dateString.contains("/")) {
-                        dateString = dateString.replaceAll("\\/", "-");
-                    }
-                    String[] dateStringArr = dateString.split("-");
-                    dateString = "";
-                    for (int i = 0; i < dateStringArr.length; i++) {
-                        if (dateStringArr[i].length() < 2) {
-                            dateStringArr[i] = "0" + dateStringArr[i];
-                        }
-                        if (i > 0) {
-                            dateString = dateString + "-" + dateStringArr[i];
-                        } else {
-                            dateString = dateStringArr[i];
-                        }
-                    }
+                    dateString = formatDate(dateString);
                     LocalDate d2 = LocalDate.parse(dateString);
                     if (timeString.length() == 4) {
                         try {
-                            int time = Integer.parseInt(timeString); //convert string to integer wrap in try catch?
+                            int time = Integer.parseInt(timeString); //convert string to integer
                             if (time >= 0000 && time <= 2359) {
                                 Task newTask = new Event(description.trim(), d2, timeString);
                                 list.add(newTask);
-                                System.out.println("Got itt. I've added this task:\n    "
-                                        + newTask.display()
-                                        + "\nNow you have " + list.size() + " task(s) in the list.");
+                                printTaskAdded(newTask, list);
                                 return list;
                             } else {
                                 throw new DukeException("Please enter a valid time between 0000 and 2359");
@@ -196,33 +166,15 @@ public class Duke {
                     } else {
                         Task newTask = new Event(description.trim(), d2);
                         list.add(newTask);
-                        System.out.println("Got itt. I've added this task:\n    "
-                                + newTask.display()
-                                + "\nNow you have " + list.size() + " task(s) in the list.");
+                        printTaskAdded(newTask, list);
                         return list;
                     }
                 } else { //user didn't give a time input
-                    if (at.contains("/")) {
-                        at = at.replaceAll("\\/", "-");
-                    }
-                    String[] atArr = at.split("-");
-                    at = "";
-                    for (int i = 0; i < atArr.length; i++) {
-                        if (atArr[i].length() < 2) {
-                            atArr[i] = "0" + atArr[i];
-                        }
-                        if (i > 0) {
-                            at = at + "-" + atArr[i];
-                        } else {
-                            at = atArr[i];
-                        }
-                    }
+                    at = formatDate(at);
                     LocalDate d2 = LocalDate.parse(at);
                     Task newTask = new Event(description.trim(), d2);
                     list.add(newTask);
-                    System.out.println("Got itt. I've added this task:\n    "
-                            + newTask.display()
-                            + "\nNow you have " + list.size() + " task(s) in the list.");
+                    printTaskAdded(newTask, list);
                     return list;
                 }
             } catch (DateTimeException dte) {
@@ -234,11 +186,10 @@ public class Duke {
     }
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Yooo, I'm Duke.\nWhat can I do for you today?"); //Greeting
+        System.out.println("Yooo, I'm Duke.\nWhat can I do for you today?\nPlease enter dates and times in this format: yyyy-mm-dd hhmm"); //Greeting
 
         ArrayList<Task> list = FileClass.readFileContents("src/data/duke.txt");
         String input = sc.nextLine();
-
         try {
             while (!input.isEmpty()) {
                 if (input.equalsIgnoreCase("bye")) { //if user types "bye"
