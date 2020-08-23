@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import static dependencies.task.CompletionState.*;
 
-public abstract class Task implements Serializable {
+public abstract class Task implements Serializable, Schedulable {
     protected CompletionState state;
     protected String task;
 
@@ -19,7 +19,7 @@ public abstract class Task implements Serializable {
         return this.task;
     }
 
-    public boolean isTaskEmpty() {
+    public boolean isItEmpty() {
         return false;
     }
 
@@ -65,7 +65,7 @@ public abstract class Task implements Serializable {
         }
 
         @Override
-        public boolean isTaskEmpty() {
+        public boolean isItEmpty() {
             return true;
         }
 
@@ -87,7 +87,7 @@ public abstract class Task implements Serializable {
         }
 
         @Override
-        public boolean isTaskEmpty() {
+        public boolean isItEmpty() {
             return true;
         }
 

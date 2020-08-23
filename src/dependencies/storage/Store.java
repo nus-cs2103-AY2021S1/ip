@@ -2,10 +2,12 @@ package dependencies.storage;
 
 import dependencies.task.Task;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.IOException;
+
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,36 +17,38 @@ import java.util.ArrayList;
 
 
 public class Store {
-    
-    private static final String SEPARATOR = System.getProperty("file.separator");
 
-    private static final Path SRC_PATH = Paths.get("src");
-    private static final Path DIR_PATH = Paths.get("src", "data");
-    private static final Path FILE_PATH = Paths.get("src", "data").resolve("taskdata.txt");
+    private static final Path WORKING_DIR_PATH = Paths.get(".");
+    private static final Path DIR_PATH = Paths.get(".", "src", "data");
+    private static final Path FILE_PATH = Paths.get(".", "src", "data").resolve("taskdata.txt");
 
-    private boolean doesDirExists;
-    private boolean doesFileExist;
 
+    private boolean isDataFilePresentInitially;
 
     /** todoList that stores the tasks. */
-    private final ArrayList<Task> todoList = new ArrayList<>();
+    private ArrayList<Task> todoList;
 
     /** Private constructor */
-    private Store() throws IOException{
+    private Store() throws IOException {
         if (Files.exists(DIR_PATH)) {
             System.out.println("Dir exist");
             if (Files.exists(FILE_PATH)) {
                 System.out.println("File exists");
+                isDataFilePresentInitially = true;
             } else {
                 Files.createFile(FILE_PATH);
                 System.out.println("File created");
+                isDataFilePresentInitially = false;
             }
         } else {
+            // Directory and storage file not present
             Files.createDirectory(DIR_PATH);
             System.out.println("Dir created");
             Files.createFile(FILE_PATH);
             System.out.println("File created");
+            isDataFilePresentInitially = false;
         }
+
     }
 
     /**
