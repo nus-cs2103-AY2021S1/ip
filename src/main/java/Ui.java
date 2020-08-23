@@ -17,6 +17,22 @@ public class Ui {
         printMsg("Bye! Hope to see you again soon! ☺");
     }
 
+    protected static void fileCreationError() {
+        System.out.println("Error in creating file.\n");
+    }
+
+    protected static void fileUpdateError() {
+        System.out.println("Error in updating file\n");
+    }
+
+    protected static void fileReadingError() {
+        System.out.println("Error in reading from csv file\n");
+    }
+
+    protected static void printBasic(String input) {
+        System.out.printf("%s\n\n", input);
+    }
+
     protected static void markTaskAsDone(Task current) {
         printMsg(String.format("Nice! I've marked this task as done:\n      %s", current));
     }

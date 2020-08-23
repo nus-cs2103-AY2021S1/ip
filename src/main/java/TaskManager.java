@@ -37,7 +37,7 @@ public class TaskManager {
             int digit = Integer.parseInt(restOfWord);
             if (NumberAction.checkIfValid(digit, tasks)) {
                 Task current = tasks.get(digit - 1);
-                if (current.checkIfDone()) {
+                if (current.checkStatus()) {
                     throw new TaskAlreadyDoneException();
                 } else {
                     current.markAsDone();
