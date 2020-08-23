@@ -1,7 +1,9 @@
+package taskbot.task;
+
 /**
  * This class encapsulates the functionality of a task
  */
-abstract class Task {
+abstract public class Task {
     private String task;
     private boolean isDone;
     /**
