@@ -5,8 +5,8 @@ import duke.Ui;
 import java.time.LocalDate;
 
 public class Task{
-    private final String description;
-    private boolean isDone;
+    protected final String description;
+    protected boolean isDone;
     protected final static Ui ui = new Ui();
 
     Task(String message) {
