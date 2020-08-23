@@ -1,4 +1,9 @@
-package main.java;
+package main.java.duke;
+
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -69,15 +74,15 @@ public class Storage {
             for (int i = 0; i < taskList.size(); i++) {
                 Task task = taskList.get(i);
                 if (task instanceof ToDo) {
-                    String taskDetails = String.format("T | %d | %s", task.isDone ? 1 : 0, task.getDescription());
+                    String taskDetails = String.format("T | %d | %s", task.checkDone() ? 1 : 0, task.getDescription());
                     content += taskDetails + "\n";
                 } else if (task instanceof Deadline) {
                     String taskDetails = String.format("T | %d | %s |%s",
-                            task.isDone ? 1 : 0, task.getDescription(), ((Deadline) task).getDate());
+                            task.checkDone() ? 1 : 0, task.getDescription(), ((Deadline) task).getDate());
                     content += taskDetails + "\n";
                 } else {
                     String taskDetails = String.format("T | %d | %s |%s",
-                            task.isDone ? 1 : 0, task.getDescription(), ((Event) task).getAt());
+                            task.checkDone() ? 1 : 0, task.getDescription(), ((Event) task).getAt());
                     content += taskDetails + "\n";
                 }
             }

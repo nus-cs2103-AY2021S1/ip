@@ -1,4 +1,6 @@
-package main.java;
+package main.java.duke;
+
+import main.java.duke.command.Command;
 
 public class Duke {
 

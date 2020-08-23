@@ -1,4 +1,7 @@
-package main.java;
+package main.java.duke.command;
+
+import main.java.duke.*;
+import main.java.duke.task.Task;
 
 public class DeleteCommand extends Command {
 
@@ -9,7 +12,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int taskNumber = Character.getNumericValue(commandDetails[1].charAt(0)) - 1;
         if (!tasks.getTasks().isEmpty() && taskNumber < tasks.getTasks().size()) {
             Task removedTask = tasks.getTasks().remove(taskNumber);

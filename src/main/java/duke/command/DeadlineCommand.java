@@ -1,21 +1,24 @@
-package main.java;
+package main.java.duke.command;
 
-public class EventCommand extends Command {
+import main.java.duke.*;
+import main.java.duke.task.Deadline;
+
+public class DeadlineCommand extends Command {
 
     String[] commandDetails;
 
-    public EventCommand(String[] commandDetails) {
+    public DeadlineCommand(String[] commandDetails) {
         this.commandDetails = commandDetails;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String at = commandDetails[1].split(" ", 2)[1];
+        String day = commandDetails[1].split(" ", 2)[1];
         System.out.println(" Got it. I've added this task: ");
-        Event event = new Event(commandDetails[0], at);
-        tasks.getTasks().add(event);
+        Deadline deadline = new Deadline(commandDetails[0], day.trim());
+        tasks.getTasks().add(deadline);
         System.out.println(String.format("   %s \n Now you have %d tasks in the list. ",
-                event, tasks.getTasks().size()));
+                deadline, tasks.getTasks().size()));
     }
 
     @Override
