@@ -1,64 +1,73 @@
+import java.io.IOException;
 import java.util.List;
-import java.time.LocalDate;
 import java.util.Scanner;
 
-public class Bot {
-    private Store store;
+public class Ui {
+    private TaskList taskList;
     private Scanner scanner = new Scanner(System.in);
 
-    private Bot (Store store) {
-        this.store = store;
+    private Ui(TaskList taskList) {
+        this.taskList = taskList;
     }
 
-    private void repeat() {
-        Bot.sectionize();
+    public Ui() {
+        this.taskList = null;
+    }
+
+    private void reply() {
+        Ui.sectionize();
         System.out.println("\tGot it. I've added this task: ");
-        System.out.println("\t\t" + this.store.getList().get(this.store.size() - 1).toString());
-        System.out.println("\tNow you have " + this.store.size() + " tasks in the list.");
-        Bot.sectionize();
+        System.out.println("\t\t" + this.taskList.getList().get(this.taskList.size() - 1).toString());
+        System.out.println("\tNow you have " + this.taskList.size() + " tasks in the list.");
+        Ui.sectionize();
     }
 
     private void listItems() {
-        Bot.sectionize();
+        Ui.sectionize();
         System.out.println("\tHere are the tasks in your list:");
         int counter = 1;
-        for (int i = 0; i < this.store.size(); i++) {
-            System.out.println("\t" + counter + "." + this.store.getItem(i).toString());
+        for (int i = 0; i < this.taskList.size(); i++) {
+            System.out.println("\t" + counter + "." + this.taskList.getItem(i).toString());
             counter++;
         }
-        Bot.sectionize();
+        Ui.sectionize();
     }
 
     private void sayBye() {
-        Bot.sectionize();
-        System.out.println("\tBye. Hope to see you again soon!");
-        Bot.sectionize();
+        try {
+            Storage.saveListToFile(taskList);
+            Ui.sectionize();
+            System.out.println("\tBye. Hope to see you again soon!");
+            Ui.sectionize();
+        } catch (IOException e) {
+            System.out.println("Sorry! The file failed to save. Please try again.");
+        }
     }
 
     private void markDone(int index) {
-        this.store.setDone(index);
-        Bot.sectionize();
+        this.taskList.setDone(index);
+        Ui.sectionize();
         System.out.println("\tNice! I've marked this task as done: ");
-        System.out.println("\t" + this.store.getItem(index).toString());
-        Bot.sectionize();
+        System.out.println("\t" + this.taskList.getItem(index).toString());
+        Ui.sectionize();
     }
 
     private void remove(int index) {
         try {
-            Task task = this.store.remove(index);
-            Bot.sectionize();
+            Task task = this.taskList.remove(index);
+            Ui.sectionize();
             System.out.println("\tNoted. I've removed this task: ");
             System.out.println("\t\t" + task.toString());
-            System.out.println("\tNow you have " + this.store.size() + " tasks in the list.");
-            Bot.sectionize();
+            System.out.println("\tNow you have " + this.taskList.size() + " tasks in the list.");
+            Ui.sectionize();
         } catch (IndexOutOfBoundsException e) {
-            Bot.sectionize();
+            Ui.sectionize();
             System.out.println("\t☹ OOPS!!! I'm sorry, this task does not exist in your list!");
-            Bot.sectionize();
+            Ui.sectionize();
         }
     }
 
-    private void intro() {
+    public void showWelcome() {
         System.out.println("Hello! I'm DukeBot");
         System.out.println("What can I do for you?");
     }
@@ -71,15 +80,20 @@ public class Bot {
     }
 
     public static void initialize() {
-        Bot bot = new Bot(new Store());
-        bot.intro();
-        bot.listen();
+        Ui ui = new Ui(new TaskList());
+        ui.showWelcome();
+        ui.listen();
     }
 
-    public static void initialize(List<Task> taskArr) {
-        Bot bot = new Bot(new Store(taskArr));
-        bot.intro();
-        bot.listen();
+    public static void initialize(TaskList taskList) {
+        Ui ui = new Ui(taskList);
+        ui.showWelcome();
+        ui.listen();
+    }
+
+    public void showLoadingError() {
+        System.out.println("File failed to load. Initializing new File...");
+        initialize();
     }
 
     private static void exit() {
@@ -88,10 +102,10 @@ public class Bot {
 
     private void listen() {
         String input = scanner.nextLine();
-        if (InputParser.isDone(input)) {
+        if (Parser.isDone(input)) {
             int index = Integer.parseInt(input.substring(5, 6)) - 1;
             this.markDone(index);
-        } else if(InputParser.isDelete(input)) {
+        } else if(Parser.isDelete(input)) {
             int index = Integer.parseInt(input.split(" ")[1]) - 1;
             this.remove(index);
         } else if (input.equals("bye")) {
@@ -101,8 +115,8 @@ public class Bot {
             this.listItems();
         } else {
             try {
-                if (!InputParser.correctInputFormat(input)) {
-                    throw new DukeException(Bot.errorMessage());
+                if (!Parser.correctInputFormat(input)) {
+                    throw new DukeException(Ui.errorMessage());
                 }
 
                 //pull type of task and the task
@@ -113,31 +127,31 @@ public class Bot {
                 //System.out.println(task);
                 switch (taskType) {
                     case ("todo"):
-                        store.addItem(new ToDos(task));
-                        this.repeat();
+                        taskList.addItem(new ToDos(task));
+                        this.reply();
                         break;
                     case ("deadline"):
                         // date = 'by Sunday'
-                        taskAndDateArr = InputParser.splitTaskAndDate(task);
+                        taskAndDateArr = Parser.splitTaskAndDate(task);
                         task = taskAndDateArr[0];
                         date = taskAndDateArr[1];
-                        store.addItem(new Deadlines(task, date));
-                        this.repeat();
+                        taskList.addItem(new Deadlines(task, date));
+                        this.reply();
                         break;
                     case ("event"):
-                        taskAndDateArr = InputParser.splitTaskAndDate(task);
+                        taskAndDateArr = Parser.splitTaskAndDate(task);
                         task = taskAndDateArr[0];
                         date = taskAndDateArr[1];
-                        store.addItem(new Events(task, date));
-                        this.repeat();
+                        taskList.addItem(new Events(task, date));
+                        this.reply();
                         break;
                     default:
-                        throw new DukeException(Bot.errorMessage());
+                        throw new DukeException(Ui.errorMessage());
                 }
             } catch (DukeException e) {
-                Bot.sectionize();
+                Ui.sectionize();
                 System.out.println("\t\t" + e.getMessage());
-                Bot.sectionize();
+                Ui.sectionize();
             }
         }
         this.listen();

@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-public class InputParser {
+public class Parser {
 
     public static boolean isDone(String input) {
         String[] inputArr = input.split(" ");
@@ -121,6 +121,17 @@ public class InputParser {
         } catch (DukeException e) {
             throw e;
         }
+    }
+
+    public static String parseDateToSaveFormat(LocalDate date) {
+        int day = date.getDayOfMonth();
+        int month = date.getMonthValue();
+        String monthStr = Integer.toString(month);
+        int year = date.getYear();
+        if (month < 10) {
+            monthStr = "0" + monthStr;
+        }
+        return day + "/" + monthStr + "/" + year;
     }
 
     public static String[] splitTaskAndDate(String task) throws DukeException {

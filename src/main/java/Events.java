@@ -49,7 +49,8 @@ public class Events extends Task {
     public String parseToSaveFormat() {
         String res = "";
         String isDoneStr = this.done ? "1" : "0";
-        res = "E - " + isDoneStr + " - " + this.task + " - " + this.time;
+        String dateSaveFormatStr = Parser.parseDateToSaveFormat(this.date);
+        res = "E - " + isDoneStr + " - " + this.task + " - " + dateSaveFormatStr + " " + this.time;
         return res;
     }
 
