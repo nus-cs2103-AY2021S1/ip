@@ -1,14 +1,23 @@
 public class Task {
-    private boolean done;
-    private String details;
+    protected boolean done;
+    protected String details;
 
     public Task(String details) {
         this.done = false;
         this.details = details;
     }
 
+    public Task(String details, boolean done) {
+        this.details = details;
+        this.done = done;
+    }
+
     public void markAsDone() {
         this.done = true;
+    }
+
+    public String store() {
+        return details;
     }
 
     @Override

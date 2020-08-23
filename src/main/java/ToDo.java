@@ -3,6 +3,16 @@ public class ToDo extends Task {
         super(details);
     }
 
+    public ToDo(String details, boolean done) {
+        super(details, done);
+    }
+
+    @Override
+    public String store() {
+        String done = this.done ? "T " : "F ";
+        return "T " + done + this.details;
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
