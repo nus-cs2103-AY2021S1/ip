@@ -76,7 +76,9 @@ public class Duke {
                 else {
                     System.out.println("OH FIDDLESTICKS, WE SEEM TO HAVE HIT A BUMP ON THE ROAD HERE.");
                 }
-            } catch (DukeException e) {
+            } catch (DukeIllegalCommandException e) {
+                System.out.println(e.getMessage());
+            } catch (DukeInvalidUserInputException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -109,7 +111,7 @@ public class Duke {
 
     //Done command
     //Then, check if user input contains apt integer
-    private void markTaskDone(String user_input) throws OutOfTaskListException, NotNumberException {
+    private void markTaskDone(String user_input) throws DukeInvalidUserInputException {
         //Get number after done keyword
         String int_substring = user_input.substring(5);
         try {
@@ -120,15 +122,15 @@ public class Duke {
             System.out.println(markDoneMsg);
             System.out.println("  [" + currentTask.getStatusIcon() + "] " + currentTask.getDescription());
         } catch (NumberFormatException ex) {
-            throw new NotNumberException();
+            throw new DukeInvalidUserInputException("My sincere apologies, but please enter a valid number.");
         } catch (IndexOutOfBoundsException ex) {
-            throw new OutOfTaskListException();
+            throw new DukeInvalidUserInputException("Oh dear, it appears that item does not exist.");
         }
     }
 
     //Delete command
     //Then, check if user input contains apt integer
-    private void deleteTask(String user_input) throws OutOfTaskListException, NotNumberException{
+    private void deleteTask(String user_input) throws DukeInvalidUserInputException{
         //Get number after done keyword
         String int_substring = user_input.substring(7);
         try {
@@ -140,50 +142,89 @@ public class Duke {
             System.out.println("  [" + currentTask.getStatusIcon() + "] " + currentTask.getDescription());
             getTotalTasksMsg();
         } catch (NumberFormatException ex) {
-            throw new NotNumberException();
+            throw new DukeInvalidUserInputException("My sincere apologies, but please enter a valid number.");
         } catch (IndexOutOfBoundsException ex) {
-            throw new OutOfTaskListException();
+            throw new DukeInvalidUserInputException("Oh dear, it appears that item does not exist.");
         }
     }
 
     //Adds a To Do task to the task list
-    private void addToDo(String user_input) {
-        ToDo newTask = new ToDo(user_input.substring(5));
-        this.taskList.add(newTask);
-        addedToListMsg();
-        System.out.println("\t" + newTask);
-        getTotalTasksMsg();
-    }
-
-    //Adds a Deadline task to the task list
-    private void addDeadline(String user_input) throws InaptFollowUpCommandException,
-            MissingFollowUpCommandException, EmptyTaskException {
-        String dateTime = getDateTime(user_input, Command.DEADLINE);
-        String deadlineDescription = user_input.substring(9, user_input.indexOf("/")).trim();
-        if (deadlineDescription.isEmpty()) {
-            throw new EmptyTaskException("deadline");
-        } else {
-            Deadline newTask = new Deadline(deadlineDescription, dateTime);
+    private void addToDo(String user_input) throws DukeInvalidUserInputException{
+        try {
+            String description = user_input.substring(5).trim();
+            if (description.isEmpty()) {
+                throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of a todo must not be empty.");
+            }
+            ToDo newTask = new ToDo(description);
             this.taskList.add(newTask);
             addedToListMsg();
             System.out.println("\t" + newTask);
             getTotalTasksMsg();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of a todo must not be empty.");
+        }
+    }
+
+    //Adds a Deadline task to the task list
+    private void addDeadline(String user_input) throws DukeIllegalCommandException, DukeInvalidUserInputException{
+        try{
+            String withoutCommand = user_input.substring(user_input.indexOf(' '));
+            String[] withoutCommandArr = withoutCommand.split("/");
+            String description = withoutCommandArr[0].trim();
+            if (description.isEmpty()) {
+                throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of a deadline must not be empty.");
+            }
+            if (withoutCommandArr.length < 2) {
+                throw new DukeInvalidUserInputException("It appears you are missing a follow up '/by' command.");
+            }
+            String followUpCommand = getFollowUpCommand(withoutCommandArr[1]);
+            if (followUpCommand.equals("by")) {
+                if (!withoutCommandArr[1].trim().contains(" ")) {
+                    throw new DukeInvalidUserInputException("It appears you are missing the date and time for your deadline.");
+                }
+                String dateTime = withoutCommandArr[1].substring(withoutCommandArr[1].indexOf(" ")).trim();
+                Deadline newTask = new Deadline(description, dateTime);
+                this.taskList.add(newTask);
+                addedToListMsg();
+                System.out.println("\t" + newTask);
+                getTotalTasksMsg();
+            } else {
+                throw new DukeIllegalCommandException(followUpCommand);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of a deadline must not be empty.");
+
         }
     }
 
     //Adds an Event task to the task list
-    private void addEvent(String user_input) throws InaptFollowUpCommandException,
-            MissingFollowUpCommandException, EmptyTaskException {
-        String dateTime = getDateTime(user_input, Command.EVENT);
-        String eventDescription = user_input.substring(6, user_input.indexOf("/")).trim();
-        if (eventDescription.isEmpty()) {
-            throw new EmptyTaskException("event");
-        } else {
-            Event newTask = new Event(eventDescription, dateTime);
-            this.taskList.add(newTask);
-            addedToListMsg();
-            System.out.println("\t" + newTask);
-            getTotalTasksMsg();
+    private void addEvent(String user_input) throws DukeIllegalCommandException, DukeInvalidUserInputException{
+        try {
+            String withoutCommand = user_input.substring(user_input.indexOf(' '));
+            String[] withoutCommandArr = withoutCommand.split("/");
+            String description = withoutCommandArr[0].trim();
+            if (description.isEmpty()) {
+                throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of an event must not be empty.");
+            }
+            if (withoutCommandArr.length < 2) {
+                throw new DukeInvalidUserInputException("It appears you are missing a follow up '/at' command.");
+            }
+            String followUpCommand = getFollowUpCommand(withoutCommandArr[1]);
+            if (followUpCommand.equals("at")) {
+                if (!withoutCommandArr[1].trim().contains(" ")) {
+                    throw new DukeInvalidUserInputException("It appears you are missing the date and time for your event.");
+                }
+                String dateTime = withoutCommandArr[1].substring(withoutCommandArr[1].indexOf(" ")).trim();
+                Event newTask = new Event(description, dateTime);
+                this.taskList.add(newTask);
+                addedToListMsg();
+                System.out.println("\t" + newTask);
+                getTotalTasksMsg();
+            } else {
+                throw new DukeIllegalCommandException(followUpCommand);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of an event must not be empty.");
         }
     }
 
@@ -193,99 +234,33 @@ public class Duke {
         System.out.println(add_to_listMsg);
     }
 
-    //To obtain date and time that follows a /by or /at
-    private String getDateTime(String user_input, Command command) throws InaptFollowUpCommandException,
-            MissingFollowUpCommandException, EmptyTaskException {
-        int slashIndex = user_input.indexOf("/");
-
-        if (slashIndex != -1) {
-            if (checkFollowUpCommand(user_input, slashIndex, command)) {
-                String dateTime = user_input.substring(slashIndex + 4).trim();
-                if (dateTime.isEmpty()) {
-                    throw new EmptyTaskException("date and time");
-                } else {
-                    return dateTime;
-                }
-            } else {
-                throw new InaptFollowUpCommandException();
-            }
-        } else {
-            throw new MissingFollowUpCommandException();
-        }
-    }
-
-    //Use to check whether commands such as event and deadline have follow up '/' command
-    private boolean checkFollowUpCommand(String user_input, int slashIndex, Command command) throws  EmptyTaskException {
-        try {
-            if (user_input.charAt(slashIndex + 1) == 'b' && user_input.charAt(slashIndex + 2) == 'y'
-                    && user_input.charAt(slashIndex + 3) == ' ' && command.equals(Command.DEADLINE)) {
-                return true;
-            } else if (user_input.charAt(slashIndex + 1) == 'a' && user_input.charAt(slashIndex + 2) == 't'
-                    && user_input.charAt(slashIndex + 3) == ' ' && command.equals(Command.EVENT)) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (IndexOutOfBoundsException e) {
-            throw new EmptyTaskException("date and time");
-        }
+    //To obtain follow up commands that follow a '/' such as /by at /at
+    private String getFollowUpCommand(String user_input) {
+        String[] user_inputArr = user_input.split(" ");
+        return user_inputArr[0];
     }
 
     //To obtain first keyword of user input
-    private Command getCommand(String user_input) throws InaptCommandException, EmptyTaskException,
-            UnspecifiedItemException{
-        //For commands that have text following a keyword
-        if (user_input.contains(" ")) {
-            int indexOfFirstSpace = user_input.indexOf(' ');
-            String keyword;
-            if (indexOfFirstSpace == 4) {
-                keyword = user_input.substring(0, 4);
-                if (keyword.equals("todo")) {
-                    return Command.TODO;
-                } else if (keyword.equals("done")) {
-                    return Command.DONE;
-                } else {
-                    throw new InaptCommandException();
-                }
-            } else if (indexOfFirstSpace == 5) {
-                keyword = user_input.substring(0, 5);
-                if (keyword.equals("event")) {
-                    return Command.EVENT;
-                } else {
-                    throw new InaptCommandException();
-                }
-            } else if (indexOfFirstSpace == 6) {
-                keyword = user_input.substring(0, 6);
-                if (keyword.equals("delete")) {
-                    return Command.DELETE;
-                } else {
-                    throw new InaptCommandException();
-                }
-            } else if (indexOfFirstSpace == 8){
-                keyword = user_input.substring(0, 8);
-                if (keyword.equals("deadline")) {
-                    return Command.DEADLINE;
-                } else {
-                    throw new InaptCommandException();
-                }
-            } else {
-                throw new InaptCommandException();
-            }
-        }
-        //For commands that do not have any text after keyword
-        else {
-            if (user_input.equals("list")) {
+    private Command getCommand(String user_input) throws DukeIllegalCommandException{
+        String[] user_inputArr = user_input.split(" ");
+        String keyword = user_inputArr[0];
+        switch (keyword) {
+            case "list":
                 return Command.LIST;
-            } else if (user_input.equals("bye")) {
+            case "done":
+                return Command.DONE;
+            case "bye":
                 return Command.BYE;
-            } else if (user_input.equals("todo") || user_input.equals("deadline") || user_input.equals("event"))  {
-                throw new EmptyTaskException(user_input);
-            } else if (user_input.equals("delete") || user_input.equals("done")) {
-                throw new UnspecifiedItemException(user_input);
-            }
-            else {
-                throw new InaptCommandException();
-            }
+            case "todo":
+                return Command.TODO;
+            case "event":
+                return Command.EVENT;
+            case "deadline":
+                return Command.DEADLINE;
+            case "delete":
+                return Command.DELETE;
+            default:
+                throw new DukeIllegalCommandException(keyword);
         }
     }
 
