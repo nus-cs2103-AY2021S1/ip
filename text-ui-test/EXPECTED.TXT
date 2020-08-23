@@ -1,5 +1,5 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *** Opening and loading relevant documents into Duke ***
+ *** Opening and loading relevant documents into duke.Duke ***
                 ____        _        
                |  _ \ _   _| | _____ 
                | | | | | | | |/ / _ \
@@ -9,7 +9,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Hello! I'm Duke ^.^
+Hello! I'm duke.Duke ^.^
 What can I do for you?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -19,11 +19,11 @@ Your list is empty!!!
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
-Here are the list of commands available:
+Here are the list of duke.commands available:
 1. list
 2. bye
-3. todo 'task name' (e.g. todo task 1)
-4. deadline 'task name' /by 'any date format' (e.g. deadline project /by YYYY-MM-DD HHMM or YYYY-MM-DD)
+3. todo 'duke.task name' (e.g. todo duke.task 1)
+4. deadline 'duke.task name' /by 'any date format' (e.g. deadline project /by YYYY-MM-DD HHMM or YYYY-MM-DD)
 5. event 'event name' /at 'any date format' (e.g. event project /at YYYY-MM-DD HHMM or YYYY-MM-DD)
 6. delete ___ (e.g. delete 1)  *Note that it should be a value more than 0*
 7. done ___ (e.g. done 1)  *Note that it should be a value more than 0*
@@ -39,14 +39,14 @@ Invalid input for delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Got it. I've added this task:
-[T][✘] task 1
+Got it. I've added this duke.task:
+[T][✘] duke.task 1
 Now you have 1 tasks in the list.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Got it. I've added this task:
-[T][✘] task 2
+Got it. I've added this duke.task:
+[T][✘] duke.task 2
 Now you have 2 tasks in the list.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -55,7 +55,7 @@ Now you have 2 tasks in the list.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- ☹ OOPS! A proper deadline format would be like, e.g. deadline 'task name' /by 'YYYY-MM-DD HHMM or YYYY-MM-DD'
+ ☹ OOPS! A proper deadline format would be like, e.g. deadline 'duke.task name' /by 'YYYY-MM-DD HHMM or YYYY-MM-DD'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -63,19 +63,19 @@ Now you have 2 tasks in the list.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [D][✘] finish this project (by: Sunday, 23 Aug 2020, 4:00am)
 Now you have 3 tasks in the list.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [D][✘] finish this project (by: Sunday, 23 Aug 2020, 11:59pm)
 Now you have 4 tasks in the list.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- ☹ OOPS! A proper deadline format would be like, e.g. deadline 'task name' /by 'YYYY-MM-DD HHMM or YYYY-MM-DD'
+ ☹ OOPS! A proper deadline format would be like, e.g. deadline 'duke.task name' /by 'YYYY-MM-DD HHMM or YYYY-MM-DD'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -87,8 +87,8 @@ Invalid input for done
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Nice! I've marked this task as done:
-[T][✓] task 1
+Nice! I've marked this duke.task as done:
+[T][✓] duke.task 1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -104,13 +104,13 @@ Nice! I've marked this task as done:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [E][✘] finish this project (at: Sunday, 23 Aug 2020, 4:00am)
 Now you have 5 tasks in the list.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [E][✘] finish this project (at: Sunday, 23 Aug 2020, 11:59pm)
 Now you have 6 tasks in the list.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -121,8 +121,8 @@ Now you have 6 tasks in the list.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Here are the tasks in your list:
-1. [T][✓] task 1
-2. [T][✘] task 2
+1. [T][✓] duke.task 1
+2. [T][✘] duke.task 2
 3. [D][✘] finish this project (by: Sunday, 23 Aug 2020, 4:00am)
 4. [D][✘] finish this project (by: Sunday, 23 Aug 2020, 11:59pm)
 5. [E][✘] finish this project (at: Sunday, 23 Aug 2020, 4:00am)
@@ -130,27 +130,27 @@ Here are the tasks in your list:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Noted. I've removed this task:
+Noted. I've removed this duke.task:
 [E][✘] finish this project (at: Sunday, 23 Aug 2020, 4:00am)
 Now you have 5 tasks in the list.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Nice! I've marked this task as done:
+Nice! I've marked this duke.task as done:
 [D][✓] finish this project (by: Sunday, 23 Aug 2020, 11:59pm)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This task has already been marked!
+This duke.task has already been marked!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Nice! I've marked this task as done:
-[T][✓] task 2
+Nice! I've marked this duke.task as done:
+[T][✓] duke.task 2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Noted. I've removed this task:
+Noted. I've removed this duke.task:
 [D][✘] finish this project (by: Sunday, 23 Aug 2020, 4:00am)
 Now you have 4 tasks in the list.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -165,11 +165,11 @@ Now you have 4 tasks in the list.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
-Here are the list of commands available:
+Here are the list of duke.commands available:
 1. list
 2. bye
-3. todo 'task name' (e.g. todo task 1)
-4. deadline 'task name' /by 'any date format' (e.g. deadline project /by YYYY-MM-DD HHMM or YYYY-MM-DD)
+3. todo 'duke.task name' (e.g. todo duke.task 1)
+4. deadline 'duke.task name' /by 'any date format' (e.g. deadline project /by YYYY-MM-DD HHMM or YYYY-MM-DD)
 5. event 'event name' /at 'any date format' (e.g. event project /at YYYY-MM-DD HHMM or YYYY-MM-DD)
 6. delete ___ (e.g. delete 1)  *Note that it should be a value more than 0*
 7. done ___ (e.g. done 1)  *Note that it should be a value more than 0*
