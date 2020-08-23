@@ -8,6 +8,10 @@ import duke.task.Task;
 import duke.component.*;
 
 public class DeleteCommand extends Command {
+    /**
+     * Creates a command for deleting tasks.
+     * @param input The input command classified as DeleteCommand, starting with "delete ".
+     */
     public DeleteCommand(String input) {
         super(input);
     }
