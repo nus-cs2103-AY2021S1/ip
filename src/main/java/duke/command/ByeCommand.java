@@ -13,8 +13,9 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList list, Storage storage) {
+    public String execute(Ui ui, TaskList list, Storage storage) {
         ui.printList(list, t -> true, "");
+        return "bye";
     }
 
     @Override

@@ -13,7 +13,7 @@ public abstract class Command {
         return false;
     }
 
-    abstract public void execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException;
+    abstract public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException;
 
     @Override
     public boolean equals(Object obj) {

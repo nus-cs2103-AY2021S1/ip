@@ -9,14 +9,16 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
+    public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         int count = list.size();
         Task task = Parser.generate(input);
         storage.addToList(task);
         list.add(count, task);
         String temp = count <= 1 ? " task" : " tasks";
-        ui.output("Got it. I've added this task:\n\t    " + task +
-                "\n\t  Now you have " + count + temp + " in the list.");
+        String res = "Got it. I've added this task:\n\t    " + task +
+                "\n\t  Now you have " + count + temp + " in the list.";
+        ui.output(res);
+        return res;
     }
 
     @Override

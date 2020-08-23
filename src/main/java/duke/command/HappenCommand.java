@@ -12,7 +12,7 @@ public class HappenCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
+    public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         String description = input.substring(7);
         String[] detail = description.split(" ");
         DateTimeFormatter parse = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -58,6 +58,7 @@ public class HappenCommand extends Command {
             } else {
                 throw new InvalidCommandException("Invalid happen command input");
             }
+            return "";
         } catch (InvalidCommandException e) {
             throw e;
         } catch (Exception e) {
