@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.*;
@@ -41,10 +43,9 @@ public class Duke {
             if(taskList.exists()){
                 FileReader fr = new FileReader(taskList);
                 BufferedReader br = new BufferedReader(fr);
-                StringBuffer sb = new StringBuffer();
                 String line;
                 while ((line = br.readLine()) != null) {
-                    String task[] = line.split(" \\| ", 4);
+                    String[] task = line.split(" \\| ", 4);
                     rewriteList(task, tasks);
                 }
                 if (tasks.size() > 0) {
@@ -52,8 +53,7 @@ public class Duke {
                     printList(tasks);
                     fr.close();
                 }
-            }
-            else{
+            } else {
                 taskList.createNewFile();
             }
         } catch(IOException e){
@@ -61,6 +61,7 @@ public class Duke {
         }
 
         printBorder();
+
         System.out.println("Hello I'm Duke\n");
         System.out.println("What can I do for you?\n");
         printBorder();
@@ -87,9 +88,6 @@ public class Duke {
             } else {
                 printBorder();
                 if (input.contains(type.TODO.toString()) || input.contains(type.DEADLINE.toString()) || input.contains(type.EVENT.toString()) || input.contains(type.DELETE.toString())) {
-                    System.out.println(type.TODO.toString());
-                    int due = input.indexOf("/");
-
                     if (input.contains(type.TODO.toString())) {
                         try {
                             Todo t = new Todo(input.substring(5));
@@ -102,23 +100,39 @@ public class Duke {
                         }
                     } else if (input.contains(type.DEADLINE.toString())) {
                         try {
-                            Deadline dl = new Deadline(input.substring(9, due), input.substring(due + 4));
-                            System.out.println("Got it. I've added this task:");
-                            tasks.add(dl);
-                            Save();
-                            System.out.println(dl);
-                        } catch (Exception e) {
-                            throw new DukeException(" ☹ Insufficient details! The description of a deadline cannot be empty.");
+                            String[] s = input.split("/by ", 2);
+                            String[] s2 = s[1].split("-", 3);
+                            LocalDate by = LocalDate.parse(s2[2] + "-" + s2[1] + "-" + s2[0]);
+                            String[] desc = s[0].split(" ", 2);
+                            if (!desc[1].isEmpty()) {
+                                Deadline dl = new Deadline(desc[1], by);
+                                System.out.println("Got it. I've added this task:");
+                                tasks.add(dl);
+                                Save();
+                                System.out.println(dl);
+                            } else {
+                                throw new DukeException(" ☹ Insufficient details! The description of a deadline cannot be empty.");
+                            }
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException(" ☹ Date wrongly entered, please format date in dd-MM-yyyy!");
                         }
                     } else if (input.contains(type.EVENT.toString())) {
                         try {
-                            Event e = new Event(input.substring(6, due), input.substring(due + 4));
-                            System.out.println("Got it. I've added this task:");
-                            tasks.add(e);
-                            Save();
-                            System.out.println(e);
-                        } catch (Exception e) {
-                            throw new DukeException(" ☹ Insufficient details! The description of a todo cannot be empty.");
+                            String[] s = input.split("/at ", 2);
+                            String[] s2 = s[1].split("-", 3);
+                            LocalDate at = LocalDate.parse(s2[2] + "-" + s2[1] + "-" + s2[0]);
+                            String[] desc = s[0].split(" ", 2);
+                            if (!desc[1].isEmpty()) {
+                                Event e = new Event(desc[1], at);
+                                System.out.println("Got it. I've added this task:");
+                                tasks.add(e);
+                                Save();
+                                System.out.println(e);
+                            } else {
+                                throw new DukeException(" ☹ Insufficient details! The description of an event cannot be empty.");
+                            }
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException(" ☹ Date wrongly entered, please format date in dd-MM-yyyy!");
                         }
                     } else if (input.contains(type.DELETE.toString())) {
                         try {
@@ -147,32 +161,35 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
         printBorder();
     }
+
     public static void Save() {
         try {
             FileWriter newList = new FileWriter(taskList);
-            for(Task t : tasks) {
+            for (Task t : tasks) {
                 newList.write(t.saveText());
             }
             newList.flush();
             newList.close();
-        } catch (Exception ex) {
-            System.out.println(ex);
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
     public static void rewriteList(String[] s, ArrayList<Task> tasks){
-        boolean isDone = s[2] == "\u2713";
+        boolean isDone = s[2].equals("\u2713");
         switch (s[0]) {
             case "T":
-                Todo t = new Todo(s[1], isDone);
+                Todo t = new Todo(s[2], isDone);
                 tasks.add(t);
                 break;
             case "D":
-                Deadline dl = new Deadline(s[2], isDone, s[3]);
+                LocalDate by = LocalDate.parse(s[3]);
+                Deadline dl = new Deadline(s[2], isDone, by);
                 tasks.add(dl);
                 break;
             case "E":
-                Event e = new Event(s[2], isDone, s[3]);
+                LocalDate at = LocalDate.parse(s[3]);
+                Event e = new Event(s[2], isDone, at);
                 tasks.add(e);
                 break;
         }

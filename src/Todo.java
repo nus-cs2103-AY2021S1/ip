@@ -9,7 +9,7 @@ public class Todo extends Task {
         this.isDone = isDone;
     }
     public String saveText(){
-        return "T | " + getStatusIcon() + " | " + description + " |\n";
+        return "T | " + getStatusIcon() + " | " + description + "\n";
     }
 
     @Override
