@@ -16,6 +16,9 @@ public class TaskList {
         return taskList.get(index);
     }
 
+    public List<Task> getTaskList() {
+        return this.taskList;
+    }
     public void deleteTask(int index) {
         Task taskToBeDeleted = taskList.get(index);
         taskList.remove(taskToBeDeleted);

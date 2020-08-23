@@ -1,4 +1,5 @@
 package main.java;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -55,6 +56,15 @@ public class Duke {
         }
     }
 
+    public static int[] timeSplitter(String time) {
+        String[] stringArr = time.split("-");
+        int[] timeArr = new int[3];
+        for (int i = 0; i < stringArr.length; i++) {
+            timeArr[i] = Integer.parseInt(stringArr[i]);
+        }
+        return timeArr;
+    }
+
     /**
      * Parse the description of the input
      * @param task Input
@@ -74,71 +84,78 @@ public class Duke {
      * Driver function
      */
     public static void run() {
-        TaskList taskList = new TaskList();
         Scanner scanner = new Scanner(System.in);
         String currentWord = scanner.nextLine();
-        while (!currentWord.equals("bye")) {
-            String command = split(currentWord)[0];
-            try {
-                if (Keyword.isValid(command)) {
-                    if (command.equals("list")) {
-                        System.out.println(taskList.toString());
-                    } else {
-
-                        if (command.equals("done")) {
-                            String indexText = join(split(currentWord), 1);
-                            if (indexText.equals("")) {
-                                throw new InvalidIndexException();
-                            } else {
-                                int taskNumber = Integer.parseInt(indexText);
-                                taskList.getTask(taskNumber - 1).markAsDone();
-                            }
-                        } else if (command.equals("delete")) {
-                            String indexText = join(split(currentWord), 1);
-                            if (indexText.equals("")) {
-                                throw new InvalidIndexException();
-                            } else {
-                                int taskNumber = Integer.parseInt(indexText);
-                                taskList.deleteTask(taskNumber - 1);
-                            }
-
-                        } else if (command.equals("todo")) {
-                            String description = findDescription(join(split(currentWord), 1));
-                            Task newTask = new ToDo(description);
-                            taskList.addTask(newTask);
-
-                        } else if (command.equals("deadline")) {
-                            String detail = join(split(currentWord), 1);
-                            String description = findDescription(detail);
-                            String deadlineTime = findTime(detail, "by");
-                            Task newTask = new DeadLine(description, deadlineTime);
-                            taskList.addTask(newTask);
+        try {
+            Storage storage = new Storage("/Users/admin/ip/data/duke3.txt");
+            TaskList taskList = storage.formTaskList(storage.readStorageFile());
+            while (!currentWord.equals("bye")) {
+                String command = split(currentWord)[0];
+                try {
+                    if (Keyword.isValid(command)) {
+                        if (command.equals("list")) {
+                            System.out.println(taskList.toString());
                         } else {
-                            String detail = join(split(currentWord), 1);
-                            String description = findDescription(detail);
-                            String time = findTime(detail, "at");
-                            Task newTask = new Event(description, time);
-                            taskList.addTask(newTask);
+
+                            if (command.equals("done")) {
+                                String indexText = join(split(currentWord), 1);
+                                if (indexText.equals("")) {
+                                    throw new InvalidIndexException();
+                                } else {
+                                    int taskNumber = Integer.parseInt(indexText);
+                                    taskList.getTask(taskNumber - 1).markAsDone();
+                                }
+                            } else if (command.equals("delete")) {
+                                String indexText = join(split(currentWord), 1);
+                                if (indexText.equals("")) {
+                                    throw new InvalidIndexException();
+                                } else {
+                                    int taskNumber = Integer.parseInt(indexText);
+                                    taskList.deleteTask(taskNumber - 1);
+                                }
+
+                            } else if (command.equals("todo")) {
+                                String description = findDescription(join(split(currentWord), 1));
+                                Task newTask = new ToDo(description);
+                                taskList.addTask(newTask);
+
+                            } else if (command.equals("deadline")) {
+                                String detail = join(split(currentWord), 1);
+                                String description = findDescription(detail);
+                                String deadlineTime = findTime(detail, "by");
+                                Task newTask = new DeadLine(description, deadlineTime);
+                                taskList.addTask(newTask);
+                            } else {
+                                String detail = join(split(currentWord), 1);
+                                String description = findDescription(detail);
+                                String time = findTime(detail, "at");
+                                Task newTask = new Event(description, time);
+                                taskList.addTask(newTask);
+                            }
                         }
+                    } else {
+                        throw new InvalidCommandException();
                     }
-                } else {
-                    throw new InvalidCommandException();
+
+                } catch (InvalidIndexException err) {
+                    System.out.println(err.toString());
+                } catch (EmptyTaskException err) {
+                    System.out.println(err.toString());
+                } catch (EmptyDateException err) {
+                    System.out.println(err.toString());
+                } catch (InvalidCommandException err) {
+                    System.out.println(err.toString());
+                } finally {
+                    storage.writeTasks(taskList);
+                    currentWord = scanner.nextLine();
                 }
 
-            } catch (InvalidIndexException err) {
-                System.out.println(err.toString());
-            } catch (EmptyTaskException err) {
-                System.out.println(err.toString());
-            } catch (EmptyDateException err) {
-                System.out.println(err.toString());
-            } catch (InvalidCommandException err) {
-                System.out.println(err.toString());
-            } finally {
-                currentWord = scanner.nextLine();
             }
-        }
 
-        System.out.println("Bye. Hope to see you again soon!");
+            System.out.println("Bye. Hope to see you again soon!");
+        } catch (IOException err) {
+            System.out.println(err.toString());
+        }
     }
 
     public static void main(String[] args) {

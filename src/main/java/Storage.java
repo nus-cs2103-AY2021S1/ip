@@ -1,0 +1,83 @@
+package main.java;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Storage {
+    private final String storagePath;
+
+    public Storage(String filePath) {
+        this.storagePath = "filePath";
+    }
+
+    public void writeToFile(String textToAdd) {
+        try {
+            FileWriter fileWriter = new FileWriter(storagePath);
+            fileWriter.write(textToAdd);
+            fileWriter.close();
+        } catch (IOException err) {
+            System.out.println(err);
+        }
+    }
+
+    public void addToFile(String textToAdd) throws IOException {
+        FileWriter fileWriter = new FileWriter(storagePath, true);
+        fileWriter.write(textToAdd);
+        fileWriter.close();
+    }
+
+    /**
+     * Method to take the list of tasks from the tasklist and then write it to the file
+     */
+    public void writeTasks(TaskList taskList) {
+        List<Task> tasks = taskList.getTaskList();
+        StringBuilder data = new StringBuilder();
+        for (Task task : tasks) {
+            data.append(task.getStorageString());
+        }
+        writeToFile(data.toString());
+    }
+
+    /**
+     * Method to read a file
+     */
+    public List<String> readStorageFile() throws IOException {
+        File file = new File(storagePath);
+        Scanner sc = new Scanner(file);
+        List<String> tasks = new ArrayList<>();
+        while (sc.hasNextLine()) {
+            String task = sc.nextLine();
+            tasks.add(task);
+        }
+        return tasks;
+    }
+
+    /**
+     * Method to write from storage file to a task list
+     */
+    public TaskList formTaskList(List<String> taskListInString) {
+        TaskList taskList = new TaskList();
+        for (String taskInString : taskListInString) {
+            String[] arr = taskInString.split(" \\| ");
+            String command = arr[0];
+            String isDone = arr[1];
+            String description = arr[2];
+            String time = arr.length == 3 ? "" : arr[3];
+            Task task;
+            if (command.equals("T")) {
+                task = new ToDo(description, isDone.equals("\u2713"));
+            } else if (command.equals("E")) {
+                task = new Event(description, time, isDone.equals("\u2713"));
+            } else {
+                task = new DeadLine(description, time, isDone.equals("\u2713"));
+            }
+            taskList.addTask(task);
+        }
+        return taskList;
+    }
+
+
+}
