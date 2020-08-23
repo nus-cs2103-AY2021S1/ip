@@ -6,6 +6,12 @@ public class EventTask extends Task {
         super(description);
     }
 
+    public EventTask() {}
+
+    public String getType() {
+        return EVENT;
+    }
+
     @Override
     public String toString() {
         return EVENT + super.toString();

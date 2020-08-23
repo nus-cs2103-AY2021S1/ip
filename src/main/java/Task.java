@@ -1,12 +1,27 @@
 package main.java;
 
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
+
+    public Task(){}
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+    
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     private String getStatus() {
