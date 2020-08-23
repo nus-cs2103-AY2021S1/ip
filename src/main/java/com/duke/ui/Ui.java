@@ -1,9 +1,9 @@
 package com.duke.ui;
 
-import com.duke.events.Deadlines;
-import com.duke.events.Events;
-import com.duke.events.Task;
-import com.duke.events.ToDos;
+import com.duke.tasks.Deadlines;
+import com.duke.tasks.Events;
+import com.duke.tasks.Task;
+import com.duke.tasks.ToDos;
 import com.duke.exceptions.DukeException;
 import com.duke.parser.Parser;
 import com.duke.storage.Storage;

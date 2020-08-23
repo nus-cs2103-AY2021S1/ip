@@ -1,28 +1,27 @@
-package com.duke.events;
+package com.duke.tasks;
 
-import com.duke.events.Task;
 import com.duke.parser.Parser;
-
 import java.time.LocalDate;
 
-public class Events extends Task {
+public class Deadlines extends Task {
     protected LocalDate date;
     protected int time;
 
-    public Events(String task, String dateAndTime) {
-//        // date = 'at Sunday 2-4pm'
-//        String time = task.substring(task.indexOf("/") + 1, task.length());
-//        time = com.duke.events.Task.reformatDate(time); // (by: Sunday)
-//
-//        // task = project meeting
-//        task = task.substring(0, task.indexOf("/") - 1);
+    public Deadlines(String task, String dateAndTime) {
+        //date = 2019-12-02 1800
         String[] dateAndTimeArr = dateAndTime.split(" ");
+//        // date = 'by Sunday'
+//        String date = task.substring(task.indexOf("/") + 1, task.length());
+//        date = com.duke.events.Task.reformatDate(date); // (by: Sunday)
+//
+//        // task = return book
+//        task = task.substring(0, task.indexOf("/") - 1);
         this.task = task;
         this.date = LocalDate.parse(dateAndTimeArr[0]);
         this.time = Integer.parseInt(dateAndTimeArr[1]);
     }
 
-    public Events(String task, String dateAndTime, boolean done) {
+    public Deadlines(String task, String dateAndTime, boolean done) {
         String[] dateAndTimeArr = dateAndTime.split(" ");
 
         this.task = task;
@@ -47,7 +46,7 @@ public class Events extends Task {
             time = (this.time - 1200) + "pm";
         }
 
-        return "[E]" + doneIndicator + " " + this.task + " (at: " + date + ", " + time + ")";
+        return "[D]" + doneIndicator + " " + this.task + " (by: " + date + ", " + time + ")";
     }
 
     @Override
@@ -55,7 +54,7 @@ public class Events extends Task {
         String res = "";
         String isDoneStr = this.done ? "1" : "0";
         String dateSaveFormatStr = Parser.parseDateToSaveFormat(this.date);
-        res = "E - " + isDoneStr + " - " + this.task + " - " + dateSaveFormatStr + " " + this.time;
+        res = "D - " + isDoneStr + " - " + this.task + " - " + dateSaveFormatStr + " " + this.time;
         return res;
     }
 

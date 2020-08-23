@@ -1,4 +1,4 @@
-package com.duke.events;
+package com.duke.tasks;
 
 public class Task {
     protected String task;
@@ -37,8 +37,9 @@ public class Task {
                 + ")";
     }
 
+    // Task - 1 - read book
     public String parseToSaveFormat() {
         String isDoneStr = this.done ? "1" : "0";
-        return "com.duke.events.Task - " + isDoneStr + " - " + this.task;
+        return "Task - " + isDoneStr + " - " + this.task;
     }
 }

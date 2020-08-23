@@ -1,6 +1,6 @@
 package com.duke.storage;
 
-import com.duke.events.Task;
+import com.duke.tasks.Task;
 import com.duke.exceptions.DukeException;
 import com.duke.parser.Parser;
 import com.duke.tasklist.TaskList;

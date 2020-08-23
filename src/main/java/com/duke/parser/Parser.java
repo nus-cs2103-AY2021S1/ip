@@ -1,9 +1,9 @@
 package com.duke.parser;
 
-import com.duke.events.Deadlines;
-import com.duke.events.Events;
-import com.duke.events.Task;
-import com.duke.events.ToDos;
+import com.duke.tasks.Deadlines;
+import com.duke.tasks.Events;
+import com.duke.tasks.Task;
+import com.duke.tasks.ToDos;
 import com.duke.exceptions.DukeException;
 
 import java.time.LocalDate;
@@ -24,7 +24,7 @@ public class Parser {
                 && isNumber(input.substring(7,8));
     }
 
-    public static boolean isNumber(String input) {
+    private static boolean isNumber(String input) {
         try {
             Integer.parseInt(input);
             return true;

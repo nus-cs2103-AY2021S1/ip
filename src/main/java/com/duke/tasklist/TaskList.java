@@ -1,6 +1,6 @@
 package com.duke.tasklist;
 
-import com.duke.events.Task;
+import com.duke.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,4 @@
-package com.duke.events;
-
-import com.duke.events.Task;
+package com.duke.tasks;
 
 public class ToDos extends Task {
 

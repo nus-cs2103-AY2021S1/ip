@@ -1,3 +1,5 @@
+package com.duke;
+
 import com.duke.exceptions.DukeException;
 import com.duke.storage.Storage;
 import com.duke.tasklist.TaskList;
