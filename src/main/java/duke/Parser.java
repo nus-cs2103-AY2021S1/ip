@@ -1,7 +1,12 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import task.Task;
+import exception.InvalidCommandException;
+import exception.MissingInfoException;
 
 public class Parser {
 

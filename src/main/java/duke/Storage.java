@@ -1,9 +1,15 @@
+package duke;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+import task.Task;
+import task.Event;
+import task.Todo;
+import task.Deadline;
 
 public class Storage {
     private String pathname;

@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
     public void printReply(String text) {
         String line = "\t____________________________________________________________________________________";
