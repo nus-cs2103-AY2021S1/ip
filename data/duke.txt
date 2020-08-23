@@ -1,0 +1,3 @@
+T | ✗ | watch lecture
+D | ✗ | finish work | 8pm
+E | ✗ | project meeting | mon 4pm

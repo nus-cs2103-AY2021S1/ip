@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,6 +11,7 @@ public class Duke {
     // for the list
     private static final List<Task> tasks = new ArrayList<>(); // not a fixed size anymore
     private static boolean dukeOn = true; // flag to indicate duke is ready to receive any query
+    private static final DukeStorage storage = new DukeStorage("data/duke.txt");
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -16,6 +20,14 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         greet(logo);
+
+        // try to open the duke file
+        try {
+            storage.reloadStorage(tasks);
+        } catch (FileNotFoundException ex) {
+            System.out.println("Duke data do not exist!");
+        }
+
         Scanner sc = new Scanner(System.in);
         while (dukeOn) {
             String input = sc.nextLine();
@@ -32,6 +44,7 @@ public class Duke {
                 format(ex.toString());
             }
         }
+        sc.close();
     }
 
     // main driver function for duke to tackle commands
@@ -84,6 +97,12 @@ public class Duke {
 
     private static void exit() {
         dukeOn = false;
+        try {
+            storage.saveStorage(tasks);
+        } catch (IOException ex) {
+            System.out.println("Error in saving!");
+            ex.printStackTrace();
+        }
         format("Bye. Hope to see you again soon!");
     }
 
@@ -145,7 +164,7 @@ public class Duke {
         }
 
         String details = splittedDeadline[0].trim();
-        String by = splittedDeadline[1].split("\\s", 2)[1];
+        String by = splittedDeadline[1].split("by", 2)[1].trim();
         addOnToList(new Deadline(details, by));
     }
 
@@ -165,7 +184,7 @@ public class Duke {
         }
 
         String details = splittedEvent[0].trim();
-        String at = splittedEvent[1].split("\\s", 2)[1];
+        String at = splittedEvent[1].split("at", 2)[1].trim();
         addOnToList(new Event(details, at));
     }
 
