@@ -19,13 +19,10 @@ public class Storage {
     }
 
     public void load(TaskList taskList) throws IOException {
-        String[] directories = this.pathname.split("/");
-        try {
-            for (int i = 0; i < directories.length - 1; i++) {
-                File directory = new File(directories[i]);
-                if (!directory.exists()) {
-                    directory.mkdir();
-                }
+        try{
+            File directory = new File("data");
+            if (!directory.exists()) {
+                directory.mkdir();
             }
             File f = new File(this.pathname);
             f.createNewFile();
@@ -59,21 +56,21 @@ public class Storage {
             String timing = "";
 
             switch (typeOfTask) {
-                case "Todo":
+                case "task.Todo":
                     taskString = taskString + "T";
                     break;
-                case "Deadline":
+                case "task.Deadline":
                     taskString = taskString + "D";
                     timing = timing + ((Deadline) task).getTiming();
                     break;
-                case "Event":
+                case "task.Event":
                     taskString = taskString + "E";
                     timing = timing + ((Event) task).getTiming();
                     break;
             }
 
             taskString = taskString + " | " + (task.getDone() ? "1" : "0") + " | " + task.getTaskDescription()
-                    + (typeOfTask.equals("Deadline") || typeOfTask.equals("Event")
+                    + (typeOfTask.equals("task.Deadline") || typeOfTask.equals("task.Event")
                     ? " | " + timing
                     : "");
 
