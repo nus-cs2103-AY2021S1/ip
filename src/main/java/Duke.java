@@ -1,34 +1,45 @@
+import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
+import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class Duke {
 
-    final static ArrayList<Task> tasks = new ArrayList<>();
+    private static final Path filePath = Paths.get(".", "data", "duke.txt");
+    static final List<Task> tasks = new ArrayList<>();
 
-    final static String indent = "    ";
-    final static String textIndent = "     ";
-    final static String divide = indent + "____________________________________________________________\n";
-    final static String welcomeMessage = textIndent + "Hello! I'm Duke\n" + textIndent + "What can I do for you?\n";
-    final static String exitMessage = textIndent + "Bye. Hope to see you again soon!\n";
-    final static String listMessage = textIndent + "Here are the tasks in your list:\n";
-    final static String doneMessage = textIndent + "Nice! I've marked this task as done:\n";
-    final static String taskAddedMessage = textIndent + "Got it. I've added this task:\n";
-    final static String deleteMessage = textIndent + "Noted. I've removed this task:\n";
+    final static String DIVIDE = "____________________________________________________________\n";
+    final static String WELCOME_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?\n";
+    final static String EXIT_MESSAGE = "Bye. Hope to see you again soon!\n";
+    final static String LIST_MESSAGE = "Here are the tasks in your list:\n";
+    final static String DONE_MESSAGE = "Nice! I've marked this task as done:\n";
+    final static String TASK_ADDED_MESSAGE = "Got it. I've added this task:\n";
+    final static String DELETE_MESSAGE = "Noted. I've removed this task:\n";
+
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        say(welcomeMessage);
+        say(WELCOME_MESSAGE);
 
         String input;
         while(sc.hasNext()){
             if ((input = sc.nextLine()).equals("bye")) {
-                say(exitMessage);
+                say(EXIT_MESSAGE);
                 break;
             } else {
                 try {
                     handleCommand(input);
+                    save();
                 } catch (DukeException e) {
-                    say(textIndent + e.getMessage() + "\n");
+                    say(e.getMessage() + "\n");
                 }
             }
         }
@@ -37,8 +48,35 @@ public class Duke {
 
     }
 
+    private static void save() throws DukeException {
+        try {
+            // create directory if directory doesn't exist
+            Path parentPath = filePath.getParent();
+            Files.createDirectories(parentPath);
+
+            // create file if file doesn't exist
+            if (!Files.exists(filePath)) {
+                Files.createFile(filePath);
+            }
+            String currTasks = formatTasks();
+            Files.writeString(filePath, currTasks, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+
+        } catch (IOException e) {
+            throw new DukeException("Something went wrong when trying to save your tasks!\n");
+        }
+    }
+
+    private static String formatTasks() {
+        StringBuilder toSave = new StringBuilder();
+        for (Task t : Duke.tasks) {
+            String out = t.getSaveFormat() + '\n';
+            toSave.append(out);
+        }
+        return toSave.toString();
+    }
+
     public static void say(String msg) {
-        System.out.println(divide + msg + divide);
+        System.out.println(DIVIDE + msg + DIVIDE);
     }
 
     public static void handleCommand(String input) throws DukeException{
@@ -105,9 +143,9 @@ public class Duke {
     }
 
     public static void handleList() {
-        StringBuilder out = new StringBuilder(listMessage);
+        StringBuilder out = new StringBuilder(LIST_MESSAGE);
         for (int i = 0; i < tasks.size(); i++) {
-            String nextLine = textIndent + (i + 1) +"." + tasks.get(i) + "\n";
+            String nextLine = (i + 1) + "." + tasks.get(i) + "\n";
             out.append(nextLine);
         }
         say(out.toString());
@@ -118,7 +156,7 @@ public class Duke {
             int num = Integer.parseInt(detail);
             Task curr = tasks.get(num - 1);
             curr.markAsDone();
-            say(doneMessage + textIndent + curr + "\n");
+            say(DONE_MESSAGE + curr + "\n");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please key in the number of an existing task to be marked as done!");
         }
@@ -130,7 +168,7 @@ public class Duke {
             Task curr = tasks.get(num - 1);
             tasks.remove(num - 1);
             String numTasks = "Now you have " + tasks.size() + " tasks in the list.\n";
-            say(deleteMessage + textIndent + curr + "\n" + textIndent + numTasks);
+            say(DELETE_MESSAGE + curr + "\n" + numTasks);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please key in the number of an existing task to be removed!");
         }
@@ -140,19 +178,19 @@ public class Duke {
         Task task = new Todo(detail);
         tasks.add(task);
         String numTasks = "Now you have " + tasks.size() + " tasks in the list.\n";
-        String out = taskAddedMessage + textIndent + task +
-                "\n" + textIndent + numTasks;
+        String out = TASK_ADDED_MESSAGE + task +
+                "\n" + numTasks;
         say(out);
     }
 
     public static void handleDeadline(String detail) throws DukeException {
         try {
-            String[] split = detail.split(" /by", 2);
+            String[] split = detail.split(" /by ", 2);
             Task task = new Deadline(split[0], split[1]);
             tasks.add(task);
             String numTasks = "Now you have " + tasks.size() + " tasks in the list.\n";
-            String out = taskAddedMessage + textIndent + task +
-                    "\n" + textIndent + numTasks;
+            String out = TASK_ADDED_MESSAGE + task +
+                    "\n" + numTasks;
             say(out);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Please enter a deadline to complete the task by or follow the exact command format!");
@@ -161,12 +199,12 @@ public class Duke {
 
     public static void handleEvent(String detail) throws DukeException {
         try {
-            String[] split = detail.split(" /at", 2);
+            String[] split = detail.split(" /at ", 2);
             Task task = new Event(split[0], split[1]);
             tasks.add(task);
             String numTasks = "Now you have " + tasks.size() + " tasks in the list.\n";
-            String out = taskAddedMessage + textIndent + task +
-                    "\n" + textIndent + numTasks;
+            String out = TASK_ADDED_MESSAGE + task +
+                    "\n" + numTasks;
             say(out);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Please enter the time at which the event will take place or follow the exact command format!");
