@@ -14,16 +14,28 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * Manages saving and loading a {@link TaskList} to/from a specified saveFile.
+ */
 public class Storage {
     static final SimpleDateFormat INPUT_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     static final SimpleDateFormat SAVE_DATE_FORMAT = new SimpleDateFormat("dd-MMM-yyyy");
 
     private String saveFile;
 
+    /**
+     * Constructs the Storage with the specified saveFile location.
+     * @param saveFile location of the saved taskList. eg. save.txt
+     */
     public Storage(String saveFile) {
         this.saveFile = saveFile;
     }
 
+    /**
+     * Loads a TaskList from the specified saveFile location.
+     * @return a TaskList constructed form the saveFile.
+     * @throws DukeException if the specified saveFile is not found.
+     */
     public TaskList load() throws DukeException{
         TaskList taskList = new TaskList();
 
@@ -43,6 +55,10 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the given TaskList into the specified saveFile location.
+     * @param taskList the TaskList to be saved.
+     */
     public void save(TaskList taskList) {
         try {
             FileWriter save = new FileWriter(saveFile);
@@ -56,6 +72,12 @@ public class Storage {
     }
 
 
+    /**
+     * Constructs a Task from its String format.
+     * @param taskString the String format to build a Task from.
+     * @return the constructed Task.
+     * @throws DukeException If the String has a wrong format and can't be converted.
+     */
     private Task stringToTask(String taskString) throws DukeException{
         Task newTask;
 

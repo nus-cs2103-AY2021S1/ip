@@ -6,23 +6,43 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Represents a list of {@link Task}.
+ */
 public class TaskList implements Iterable<Task> {
     List<Task> tasks;
 
+    /**
+     * Constructs an empty TaskList.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Mark the Task at specified index as done.
+     * @param index the index of the Task to be marked as done.
+     * @return the Task marked as done.
+     */
     public Task done(int index) {
         Task task = tasks.get(index);
         task.markDone();
         return task;
     }
 
+    /**
+     * Deletes the Task at the specified index from this TaskList.
+     * @param index the index of the Task to be deleted.
+     * @return the deleted Task.
+     */
     public Task delete(int index) {
         return tasks.remove(index);
     }
 
+    /**
+     * Adds a Task to this TaskList.
+     * @param task the Task to be added.
+     */
     public void addTask(Task task) {
         tasks.add(task);
     }
