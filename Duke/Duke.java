@@ -1,9 +1,7 @@
 package Duke;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.*;
 
@@ -18,9 +16,9 @@ public class Duke {
 
     private static String indent = "   ";
     private ArrayList<Task> taskList = new ArrayList<Task>();
-    private static String line = indent + "----------------------------";
-    private static String storageDirectory = System.getProperty("user.dir") + "/data";
-    private static String textName = "/duke.txt";
+    private static String LINE_INDENTATION = indent + "----------------------------";
+    private static String STORAGE_DIRECTORY = System.getProperty("user.dir") + "/data";
+    private static String TEXT_FILE_NAME = "/duke.txt";
 
 
 
@@ -28,9 +26,9 @@ public class Duke {
      * This method greets the user.
      */
     public static void greet() {
-        System.out.println(line);
+        System.out.println(LINE_INDENTATION);
         System.out.println(indent + "Hello! I'm Best2103/TBot\n" + indent + "What can I do for you?");
-        System.out.println(line);
+        System.out.println(LINE_INDENTATION);
     }
 
     /**
@@ -52,7 +50,7 @@ public class Duke {
      */
     public void readFiles() {
         try {
-            FileInputStream inputStream = new FileInputStream(storageDirectory + textName);
+            FileInputStream inputStream = new FileInputStream(STORAGE_DIRECTORY + TEXT_FILE_NAME);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
 
             String input = "";
@@ -84,7 +82,7 @@ public class Duke {
                     }
                 } catch (Exception m) {
                     System.out.println(indent + m);
-                    System.out.println(line);
+                    System.out.println(LINE_INDENTATION);
                 }
             }
             reader.close();
@@ -99,7 +97,7 @@ public class Duke {
      */
     public void writeFiles() {
         try {
-            FileWriter writer = new FileWriter(storageDirectory + textName, false);
+            FileWriter writer = new FileWriter(STORAGE_DIRECTORY + TEXT_FILE_NAME, false);
             for (int i = 0; i < taskList.size(); i++){
                 writer.write(taskList.get(i).toWriteString());
                 writer.write("\n");
@@ -181,7 +179,7 @@ public class Duke {
         while (userInput.hasNext()) {
             try {
                 String input = userInput.nextLine();
-                System.out.println(line);
+                System.out.println(LINE_INDENTATION);
 
                 // Split the string
                 String[] inputList = input.split(" ");
@@ -195,7 +193,7 @@ public class Duke {
 
                 if (inputList[0].equals("bye")) {
                     System.out.println(indent + "Bye. Hope to see you again soon!");
-                    System.out.println(line);
+                    System.out.println(LINE_INDENTATION);
                     break;
                 }
                 if (inputList[0].equals("done")) {
@@ -203,7 +201,7 @@ public class Duke {
                     if (number >= 0 && number < taskList.size()) {
                         System.out.println(indent+"Nice! I've marked this task as done:");
                         taskList.get(number).markAsDone();
-                        System.out.println(line);
+                        System.out.println(LINE_INDENTATION);
                     }
                     continue;
                 }
@@ -220,7 +218,7 @@ public class Duke {
                 }
                 if (inputList[0].equals("list")) {
                     displayList();
-                    System.out.println(line);
+                    System.out.println(LINE_INDENTATION);
                     continue;
                 }
 
@@ -231,7 +229,7 @@ public class Duke {
 
                 if (inputList[0].equals("todo")) {
                     addTodo(input.replace("todo", "").trim());
-                    System.out.println(line);
+                    System.out.println(LINE_INDENTATION);
                     continue;
                 }
 
@@ -241,7 +239,7 @@ public class Duke {
                         throw new DukeException("Incorrect format");
                     }
                     addDeadline(input);
-                    System.out.println(line);
+                    System.out.println(LINE_INDENTATION);
                     continue;
                 }
 
@@ -251,14 +249,14 @@ public class Duke {
                         throw new DukeException("Incorrect format");
                     }
                     addEvent(input);
-                    System.out.println(line);
+                    System.out.println(LINE_INDENTATION);
                     continue;
                 }
 
                 throw new DukeException("I don't know what to do :-(");
             } catch (Exception m) {
                 System.out.println(indent + m);
-                System.out.println(line);
+                System.out.println(LINE_INDENTATION);
             }
         }
     }
