@@ -10,9 +10,13 @@ public class Scanner {
                                                                "delete");
 
     static void scan() throws IOException {
+        TaskList userTaskList = new TaskList();
+        scan(userTaskList);
+    }
+
+    static void scan(TaskList userTaskList) throws IOException {
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader((System.in)));
-        TaskList userTaskList = new TaskList();
 
         scanLoop:
         while(true) {
@@ -52,7 +56,7 @@ public class Scanner {
                     userTaskList.printList();
                     break;
                 case "save":
-                    Writer writer = new Writer("savedTasks.txt");
+                    Writer writer = new Writer(Duke.FILE_PATH);
                     writer.writeListToFile(userTaskList);
                     break;
                 default:
