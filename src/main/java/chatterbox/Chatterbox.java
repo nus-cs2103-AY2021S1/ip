@@ -25,7 +25,7 @@ public class Chatterbox {
             try {
                 processInput(input);
             } catch (ChatterboxException | IOException e) {
-                Ui.showErrorMessage(e);
+                Ui.showErrorMessage(e.toString());
             }
             input = scanner.nextLine();
         }

@@ -29,8 +29,8 @@ public class Ui {
         System.out.println("Hello I'm Chatterbox. What can I do for you?");
     }
 
-    public static void showErrorMessage(Exception e) {
-        showMessage("☹ OOPS!!! " + e);
+    public static void showErrorMessage(String error) {
+        showMessage("☹ OOPS!!! " + error);
     }
 
     public static void showFarewellMessage() {

@@ -36,7 +36,7 @@ public class Storage {
                 t.setDone(Boolean.parseBoolean(line.substring(0, line.indexOf(' '))));
                 items.add(t);
             } catch (ChatterboxException | IndexOutOfBoundsException e) {
-                System.err.println("One or more lines in the save file may have been corrupted.");
+                Ui.showErrorMessage("One or more lines in the save file may have been corrupted.");
             }
         }
         return items;
