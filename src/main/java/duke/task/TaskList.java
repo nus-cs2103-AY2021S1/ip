@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Encapsulates a list of {@link Task}s.
@@ -61,6 +62,13 @@ public class TaskList {
      */
     public int size() {
         return this.tasks.size();
+    }
+
+    public TaskList search(String keyword) {
+        List<Task> filteredList =
+                this.tasks.stream().filter((task) -> task.containsKeyword(keyword))
+                        .collect(Collectors.toList());
+        return new TaskList(filteredList);
     }
 
     /**

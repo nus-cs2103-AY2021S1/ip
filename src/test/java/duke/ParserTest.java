@@ -5,9 +5,11 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidTaskIdException;
+import duke.exception.MissingKeywordException;
 import duke.exception.MissingTaskDetailsException;
 import duke.exception.MissingTaskIdException;
 import org.junit.jupiter.api.Test;
@@ -38,6 +40,38 @@ public class ParserTest {
     public void parseList_leadingAndTrailingSpaces_listCommand() throws DukeException {
         Command c = Parser.parse("    list   ");
         assertTrue(c instanceof ListCommand);
+    }
+
+    // Find
+    @Test
+    public void parseFind_missingKeyword_exceptionThrown() {
+        try {
+            Command c = Parser.parse("find");
+        } catch (DukeException e) {
+            assertTrue(e instanceof MissingKeywordException);
+            assertEquals(
+                    "☹ OOPS!!! I'm not sure what tasks to search for... Please specify a keyword!",
+                    e.getMessage());
+        }
+    }
+
+
+    @Test
+    public void parseFind_validLowercase_findCommand() throws DukeException {
+        Command c = Parser.parse("find blahblah");
+        assertTrue(c instanceof FindCommand);
+    }
+
+    @Test
+    public void parseFind_validUppercase_findCommand() throws DukeException {
+        Command c = Parser.parse("FIND blahblah");
+        assertTrue(c instanceof FindCommand);
+    }
+
+    @Test
+    public void parseFind_validMixedCase_findCommand() throws DukeException {
+        Command c = Parser.parse("FiNd blahblah");
+        assertTrue(c instanceof FindCommand);
     }
 
     // Done

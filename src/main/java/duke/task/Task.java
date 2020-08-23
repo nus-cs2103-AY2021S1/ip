@@ -52,6 +52,10 @@ public abstract class Task implements Serialisable {
         this.isDone = true;
     }
 
+    public boolean containsKeyword(String keyword) {
+        return this.description.toLowerCase().contains(keyword.toLowerCase());
+    }
+
     /**
      * Returns a string representation of the task.
      * The string representation consists of a icon to represent the status of the task (whether

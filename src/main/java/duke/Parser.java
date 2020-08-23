@@ -5,9 +5,11 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidTaskIdException;
+import duke.exception.MissingKeywordException;
 import duke.exception.MissingTaskDetailsException;
 import duke.exception.MissingTaskIdException;
 import duke.task.Deadline;
@@ -35,6 +37,15 @@ public class Parser {
         switch (command) {
             case "list":
                 return new ListCommand();
+
+            case "find":
+                if (commandInputs.length < 2) {
+                    throw new MissingKeywordException("I'm not sure what tasks to search for...");
+                }
+
+                commandDetails = commandInputs[1].trim();
+
+                return new FindCommand(commandDetails);
 
             case "done":
                 if (commandInputs.length < 2) {
