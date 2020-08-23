@@ -1,4 +1,4 @@
-D | 0 | return book | June 6th
-T | 0 | borrow book
-E | 1 | project meeting | Mon 2-4pm
 T | 0 | go for run
+T | 1 | walk the dog
+T | 1 | go jogging
+E | 0 | dinner | Aug 23 2020, 19:00:00

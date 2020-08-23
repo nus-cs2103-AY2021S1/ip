@@ -6,51 +6,40 @@ import java.nio.file.Paths;
 
 public class Duke {
     private static final Path storageFilePath = Paths.get(".", "data", "test.txt");
-    private ArrayList<Task> taskList;
     private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
 
     Duke() {
-        System.out.println("Hello from Duke\nHow may I be of service " +
-                "to you this fine day sire?");
+        this.ui = new Ui();
         this.storage = new Storage(Duke.storageFilePath);
-        this.taskList = this.storage.getAllTasks();
+        try {
+            this.taskList = new TaskList(this.storage.getAllTasks());
+        } catch (DukeException e) {
+            ui.showLoadingError(e.getMessage());
+            taskList = new TaskList();
+        }
     }
 
-    public static void main(String[] args) throws DukeException {
-        Duke duke = new Duke();
-        duke.awaitInstructions();
+    public static void main(String[] args){
+        new Duke().run();
     }
 
-    // Gets the command from the user
-    private static String parseCommand(String userInput) {
-        String[] splitString = userInput.split(" ");
-        return splitString[0];
-    }
-
-    private void writeToFile() throws DukeException {
-    }
-
-    private void awaitInstructions() throws DukeException {
-        Scanner sc = new Scanner(System.in);
-
-        while (sc.hasNext()) {
+    private void run() {
+        this.ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                String userInput = sc.nextLine();
+                String userInput = this.ui.readCommand();
+                ui.showLine();
 
-                if (userInput.equals("bye")) {
-                    System.out.println("Bye. Hope to see you again soon!");
-                    break;
-                }
-
-                String userCommand = parseCommand(userInput);
-                Commands command;
-                try {
-                    command = Commands.valueOf(userCommand.toUpperCase());
-                } catch (IllegalArgumentException e) {
-                    command = Commands.UNKNOWN;
-                }
+                Commands command = Parser.parse(userInput);
 
                 switch (command) { // Determine output from user input
+                    case BYE:
+                        ui.print("Bye. Hope to see you again soon!");
+                        isExit = true;
+                        break;
                     case LIST:
                         this.listAllItems();
                         break;
@@ -74,7 +63,9 @@ public class Duke {
                 }
 
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
             }
         }
     }
@@ -87,12 +78,14 @@ public class Duke {
         try {
             String taskIndex = userInput.substring(7);
             int index = Integer.valueOf(taskIndex) - 1; // taskIndex started from 1
-            Task deletedTask = this.taskList.remove(index);
+            Task deletedTask = this.taskList.delete(index);
+            int listSize = this.taskList.size();
+
             this.storage.deleteTask(index);
 
-            System.out.println("Noted. I've removed this task:\n" +
-                    deletedTask.toString() + "\nNow you have " + (this.taskList.size())
-                    + (this.taskList.size() > 1 ? " tasks" : " task")
+            ui.print("Noted. I've removed this task:\n" +
+                    deletedTask.toString() + "\nNow you have " + (listSize)
+                    + (listSize > 1 ? " tasks" : " task")
                     + " in the list.");
 
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
@@ -133,9 +126,9 @@ public class Duke {
             Task completedTask = this.taskList.get(index);
             completedTask.markAsDone();
             this.storage.updateTask(completedTask,index);
-
-            System.out.println("Nice! I've marked this task as done:\n" +
+            ui.print("Nice! I've marked this task as done:\n" +
                     completedTask.toString());
+
 
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("Please enter a valid task number for me to mark as done.");
@@ -146,17 +139,16 @@ public class Duke {
     public void addItem(Task newTask) {
         this.taskList.add(newTask);
         this.storage.createTask(newTask); // Add to storage database
-
-        System.out.println("Got it. I've added this task:\n   " +
-                newTask.toString() + "\nNow you have " + (this.taskList.size())
-                + (this.taskList.size() > 1 ? " tasks" : " task")
+        int listSize = this.taskList.size();
+        ui.print("Got it. I've added this task:\n   " +
+                newTask.toString() + "\nNow you have " + (listSize)
+                + (listSize > 1 ? " tasks" : " task")
                 + " in the list.");
+
     }
 
     private void listAllItems() {
-        System.out.println("Here are the tasks in your list:\n");
-        ArrayList<Task> currList = this.taskList;
-        currList.forEach(item ->
-                System.out.println((currList.indexOf(item) + 1) + "." + item));
+        ui.print("Here are the tasks in your list:\n");
+        this.taskList.showAllItems();
     }
 }

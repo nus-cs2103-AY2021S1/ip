@@ -34,10 +34,10 @@ public class Storage {
      * Converts string from task storage file to a task list for Duke to use.
      * @return a list of Tasks readable by Duke.
      */
-    public ArrayList<Task> getAllTasks() {
+    public ArrayList<Task> getAllTasks() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         // Convert string to Tasks
-        this.allTasks.forEach(taskString -> {
+        for (String taskString : this.allTasks) {
             char taskType = taskString.charAt(0);
             String taskDetails = taskString.substring(taskString.lastIndexOf("|") + 2);
             boolean isDone = false;
@@ -46,31 +46,23 @@ public class Storage {
                 isDone = true;
             }
 
-            switch(taskType) {
+            switch (taskType) {
                 case 'T':
                     taskList.add(new ToDo(taskDetails, isDone));
                     break;
                 case 'E':
                     String eventDescription = taskString.substring(8, taskString.lastIndexOf("|") - 1);
-                    try {
-                        taskList.add(new Event(eventDescription, isDone, taskDetails));
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
+                    taskList.add(new Event(eventDescription, isDone, taskDetails));
                     break;
                 case 'D':
                     String deadlineDescription = taskString.substring(8, taskString.lastIndexOf("|") - 1);
-                    try {
-                        taskList.add(new Deadline(deadlineDescription, isDone, taskDetails));
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
+                    taskList.add(new Deadline(deadlineDescription, isDone, taskDetails));
                     break;
                 default:
                     System.out.println("Unable to determine type of task");
                     break;
             }
-        });
+        }
 
         return taskList;
     }

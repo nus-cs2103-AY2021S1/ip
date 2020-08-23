@@ -1,30 +1,47 @@
 Hello from Duke
 How may I be of service to you this fine day sire?
+_____________________________________
 Got it. I've added this task:
    T | 0 | read book
 Now you have 1 task in the list.
+_____________________________________
+_____________________________________
 Got it. I've added this task:
    D | 0 | return book | May 4 2020, 15:30:00
 Now you have 2 tasks in the list.
+_____________________________________
+_____________________________________
 Got it. I've added this task:
    E | 0 | talkshow | Aug 15 2020, 18:00:00
 Now you have 3 tasks in the list.
+_____________________________________
+_____________________________________
 Got it. I've added this task:
    T | 0 | join sports club
 Now you have 4 tasks in the list.
+_____________________________________
+_____________________________________
 Here are the tasks in your list:
 
 1.T | 0 | read book
 2.D | 0 | return book | May 4 2020, 15:30:00
 3.E | 0 | talkshow | Aug 15 2020, 18:00:00
 4.T | 0 | join sports club
+_____________________________________
+_____________________________________
 Nice! I've marked this task as done:
 T | 1 | read book
+_____________________________________
+_____________________________________
 Nice! I've marked this task as done:
 T | 1 | join sports club
+_____________________________________
+_____________________________________
 Got it. I've added this task:
    T | 0 | borrow book
 Now you have 5 tasks in the list.
+_____________________________________
+_____________________________________
 Here are the tasks in your list:
 
 1.T | 1 | read book
@@ -32,19 +49,35 @@ Here are the tasks in your list:
 3.E | 0 | talkshow | Aug 15 2020, 18:00:00
 4.T | 1 | join sports club
 5.T | 0 | borrow book
+_____________________________________
+_____________________________________
 Got it. I've added this task:
    D | 0 | individual project | Sep 20 2020, 12:00:00
 Now you have 6 tasks in the list.
+_____________________________________
+_____________________________________
 Got it. I've added this task:
    E | 0 | project meeting | Oct 11 2020, 14:15:00
 Now you have 7 tasks in the list.
+_____________________________________
+_____________________________________
 ☹ OOPS!!! The description of a todo cannot be empty.
+_____________________________________
+_____________________________________
 ☹ OOPS!!! Please input date and time in correct format: YYYY/MM/DD HH:MM
+_____________________________________
+_____________________________________
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+_____________________________________
+_____________________________________
 ☹ OOPS!!! Please enter a valid task number for me to mark as done.
+_____________________________________
+_____________________________________
 Noted. I've removed this task:
 E | 0 | talkshow | Aug 15 2020, 18:00:00
 Now you have 6 tasks in the list.
+_____________________________________
+_____________________________________
 Here are the tasks in your list:
 
 1.T | 1 | read book
@@ -53,9 +86,13 @@ Here are the tasks in your list:
 4.T | 0 | borrow book
 5.D | 0 | individual project | Sep 20 2020, 12:00:00
 6.E | 0 | project meeting | Oct 11 2020, 14:15:00
+_____________________________________
+_____________________________________
 Noted. I've removed this task:
 T | 1 | read book
 Now you have 5 tasks in the list.
+_____________________________________
+_____________________________________
 Here are the tasks in your list:
 
 1.D | 0 | return book | May 4 2020, 15:30:00
@@ -63,5 +100,10 @@ Here are the tasks in your list:
 3.T | 0 | borrow book
 4.D | 0 | individual project | Sep 20 2020, 12:00:00
 5.E | 0 | project meeting | Oct 11 2020, 14:15:00
+_____________________________________
+_____________________________________
 ☹ OOPS!!! Please enter a valid task number for me delete.
+_____________________________________
+_____________________________________
 Bye. Hope to see you again soon!
+_____________________________________
