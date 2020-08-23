@@ -139,7 +139,5 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         duke.takeInputs();
-//        String test = "I want to die";
-//        System.out.println(test.indexOf("die"));
     }
 }
