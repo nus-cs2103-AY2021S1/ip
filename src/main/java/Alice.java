@@ -10,7 +10,7 @@ public class Alice {
         tasks = new ArrayList<>();
     }
 
-    public boolean reply(String input) {
+    public boolean canContinue(String input) {
         String[] arr = input.split(" ", 2);
         try {
             Command cmd = Command.getCommandType(arr[0]);
@@ -19,18 +19,18 @@ public class Alice {
                 return false;
             }
             if (arr.length == 1) {
-                System.out.print(frame_output(process_cmd(cmd, "")) + PROMPT);
+                System.out.print(frameOutput(processCommand(cmd, "")) + PROMPT);
                 return true;
             }
-            System.out.print(frame_output(process_cmd(cmd, arr[1])) + PROMPT);
+            System.out.print(frameOutput(processCommand(cmd, arr[1])) + PROMPT);
             return true;
         } catch (AliceException ex) {
-            System.out.print(frame_output(ex.getMessage()) + PROMPT);
+            System.out.print(frameOutput(ex.getMessage()) + PROMPT);
             return true;
         }
     }
 
-    private String process_cmd(Command cmd, String params) throws AliceException {
+    private String processCommand(Command cmd, String params) throws AliceException {
         if (cmd == Command.LIST && params.isBlank()) {
             // Display task list
             return getTaskList();
@@ -133,7 +133,7 @@ public class Alice {
                 + "\nNow you have " + tasks.size() + " task in your list";
     }
 
-    private String frame_output(String s) {
+    private String frameOutput(String s) {
         return DIVIDER + s + "\n" + DIVIDER;
     }
 
@@ -167,7 +167,7 @@ public class Alice {
     }
 
     public String sayGoodbye() {
-        return frame_output("Goodbye. Hope to see you again soon!");
+        return frameOutput("Goodbye. Hope to see you again soon!");
     }
 
     public static void main(String[] args) {
@@ -177,11 +177,11 @@ public class Alice {
         Scanner sc = new Scanner(System.in);
 
         String input;
-        boolean exiting;
+        boolean isExiting;
         while (sc.hasNextLine()) {
             input = sc.nextLine();
-            exiting = !alice.reply(input);
-            if (exiting) {
+            isExiting = !alice.canContinue(input);
+            if (isExiting) {
                 return;
             }
         }
