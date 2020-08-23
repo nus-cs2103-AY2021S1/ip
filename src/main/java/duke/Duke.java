@@ -1,6 +1,7 @@
 package main.java.duke;
 
 import main.java.duke.command.Command;
+import main.java.duke.exception.DukeException;
 
 public class Duke {
 

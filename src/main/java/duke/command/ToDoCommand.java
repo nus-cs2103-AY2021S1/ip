@@ -1,6 +1,8 @@
 package main.java.duke.command;
 
-import main.java.duke.*;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.Ui;
 import main.java.duke.task.ToDo;
 
 public class ToDoCommand extends Command {
@@ -12,7 +14,7 @@ public class ToDoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         System.out.println(" Got it. I've added this task: ");
         ToDo toDo = new ToDo(commandDetails[1]);
         tasks.getTasks().add(toDo);

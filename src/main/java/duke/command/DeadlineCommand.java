@@ -1,6 +1,8 @@
 package main.java.duke.command;
 
-import main.java.duke.*;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.Ui;
 import main.java.duke.task.Deadline;
 
 public class DeadlineCommand extends Command {
@@ -12,7 +14,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         String day = commandDetails[1].split(" ", 2)[1];
         System.out.println(" Got it. I've added this task: ");
         Deadline deadline = new Deadline(commandDetails[0], day.trim());

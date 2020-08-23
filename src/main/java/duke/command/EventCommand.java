@@ -1,6 +1,8 @@
 package main.java.duke.command;
 
-import main.java.duke.*;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.Ui;
 import main.java.duke.task.Event;
 
 public class EventCommand extends Command {
@@ -12,7 +14,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         String at = commandDetails[1].split(" ", 2)[1];
         System.out.println(" Got it. I've added this task: ");
         Event event = new Event(commandDetails[0], at);

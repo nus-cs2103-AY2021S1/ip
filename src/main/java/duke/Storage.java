@@ -1,5 +1,7 @@
 package main.java.duke;
 
+import main.java.duke.exception.DukeException;
+import main.java.duke.exception.DukeFileNotFoundException;
 import main.java.duke.task.Deadline;
 import main.java.duke.task.Event;
 import main.java.duke.task.Task;
@@ -31,7 +33,7 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws DukeFileNotFoundException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
             Scanner sc = new Scanner(file);
@@ -62,7 +64,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+            throw new DukeFileNotFoundException();
         }
         return taskList;
     }
