@@ -1,5 +1,4 @@
 todo read book
-deadline return book /by June 6th
 event project meeting /at Aug 6th 2-4pm
 done 1
 list
@@ -7,7 +6,6 @@ todo join sports club
 todo borrow book
 done 4
 list
-deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 list
 todo
@@ -25,10 +23,21 @@ deadline /by
 deadline homework /by
 deadline /by tomorrow
 deadline homework /by tomorrow
+deadline homework /by 2020-8-23 2359
+deadline homework /by 2020-08-23 1370
+deadline homework /by 23 Aug 2020 2359
+deadline homework /by 2020-08-23 2359
 list
 done 99
 done 3
 delete 5
 delete 21
+list
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
 list
 bye
