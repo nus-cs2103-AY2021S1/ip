@@ -8,9 +8,15 @@ public class TaskList {
         if (taskType.equals("todo")) {
             newTask = new Todo(taskDescription);
         } else if (taskType.equals("event")) {
-            newTask = new Event(taskDescription);
+            String[] desAndDate = taskDescription.split("/at");
+            String date = desAndDate[1];
+            taskDescription = desAndDate[0] ;
+            newTask = new Event(taskDescription, date);
         } else {
-            newTask = new Deadline(taskDescription);
+            String[] desAndDate = taskDescription.split("/by");
+            String date = desAndDate[1];
+            taskDescription = desAndDate[0] ;
+            newTask = new Deadline(taskDescription, date);
         }
         this.taskList.add(newTask);
         return newTask;

@@ -110,6 +110,14 @@ public class Duke {
         );
     }
 
+    public void printNoDateinput(String command) {
+        System.out.println(
+            this.border
+            + "Master Please enter the date for your " + command + " task.\n"
+            + this.border
+        );
+    }
+
     public void doneHandler(String parameters) throws DukeExceptions.NoUndoneTaskException {
         if (!this.taskList.isEmpty() || this.taskList.allDone()) {
             int index = Integer.parseInt(parameters.strip()) - 1;
@@ -163,6 +171,8 @@ public class Duke {
                 this.addTaskHadler(command.toString().toLowerCase(), parameters);
             } catch (DukeExceptions.IncompleteCommandException e) {
                 this.printIncompleteCommandError(command.toString().toLowerCase());
+            } catch (ArrayIndexOutOfBoundsException e) {
+                this.printNoDateinput(command.toString().toLowerCase());
             }
         } else if (command == commands.DELETE){
             try {
