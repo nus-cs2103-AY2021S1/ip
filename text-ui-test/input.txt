@@ -3,13 +3,15 @@ todo
 todo test
 todo read book
 list
-event meeting /at Mon
-event lunch with friends /at Mon 3 pm
+event meeting /at 30/07/2020 15:00
+event lunch with friends /at 17/07/2020 15:00
+event dinner with friends /at unknown time
 event dinnering
 event meeting /by Mon
 list
-deadline quiz1 /by Tues
-deadline quiz2 submission /by Tues 2 pm
+deadline quiz1 /by 30/08/2020 23:59
+deadline quiz2 submission /by 29/08/2020 22:00
+deadline quiz3 submission /by unknown time
 deadline quiz2
 deadline quiz1 /at Tues
 list
