@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class EventCommand extends CreateCommand {
   public EventCommand(String commandString) {
     super(CommandType.EVENT, commandString);
