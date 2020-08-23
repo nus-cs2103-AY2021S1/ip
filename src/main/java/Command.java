@@ -3,7 +3,7 @@ package main.java;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Commands {
+public class Command {
     private boolean shouldBreak = true;
     private ArrayList<Task> taskList = new ArrayList<>();
 
