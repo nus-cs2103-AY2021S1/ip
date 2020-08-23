@@ -36,6 +36,11 @@ public class Parser {
                 ui.replyBye();
             } else if (response.equals("list")) {
                 ui.replyList();
+            } else if (response.indexOf("find ") == 0) {
+                if (response.length() <= 5) {
+                    throw new EmptyDescriptionException("find query");
+                }
+                ui.replyFind(response.substring(5));
             } else if (response.indexOf("delete") == 0) {
                 indexer = Integer.parseInt(response.replaceAll("\\D+", "")) - 1;
                 ui.replyDelete(indexer);

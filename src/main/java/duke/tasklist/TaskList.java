@@ -19,7 +19,6 @@ public class TaskList {
 
     public void addTask(Task task){
         this.shelf.add(task);
-        //also remember to include thee updateFile from the storage side
     }
 
     public Task completeTask(int index) throws DukeTaskNonExistException {
@@ -43,7 +42,6 @@ public class TaskList {
             System.out.println(counter + ". " + iter.next());
             counter++;
         }
-        // reminder to print line from the duke.ui.UI side
     }
 
     public void delete(int index) throws DukeTaskNonExistException {
@@ -51,6 +49,24 @@ public class TaskList {
             throw new DukeTaskNonExistException("error");
         }
         this.shelf.remove(index);
+    }
+
+    public void find(String response) {
+        Iterator<Task> iter = shelf.iterator();
+        ArrayList<Task> temp = new ArrayList<>();
+        while (iter.hasNext()) {
+            Task book = iter.next();
+            if(book.getName().contains(response)){
+                temp.add(book);
+            }
+        }
+        iter = temp.iterator();
+        int counter = 1;
+        System.out.println("Here are the matching tasks in your list: ");
+        while (iter.hasNext()) {
+            System.out.println(counter + ". " + iter.next());
+            counter++;
+        }
     }
 
 }

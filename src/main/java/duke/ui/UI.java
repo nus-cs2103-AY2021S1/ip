@@ -20,12 +20,16 @@ public class UI {
         this.storage = storage;
     }
 
-    public void replyBye(){
+    public void replyBye() {
         System.out.println("CYA PAL. Hope to see you again!");
     }
 
-    public void replyList(){
+    public void replyList() {
         shelf.iterate();
+    }
+
+    public void replyFind(String response) {
+        shelf.find(response);
     }
 
     public void replyDelete(int index) throws IOException, DukeTaskNonExistException {
@@ -72,7 +76,7 @@ public class UI {
         System.out.println("Now you have " + shelf.getSize() + " tasks in the list.");
     }
 
-    public void showError(Exception e){
+    public void showError(Exception e) {
         System.out.println(e);
     }
 }
