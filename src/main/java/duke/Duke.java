@@ -81,7 +81,7 @@ public class Duke {
     }
 
     /**
-     * Strips whitespaces and tokenizes each command before further processing
+     * Strips trailing whitespaces and tokenizes each command before further processing
      * @param command
      * @param isLoaded
      * @return message to user
