@@ -15,9 +15,9 @@ public class EventTask extends Task {
 
     /**
      * Initializes a new EventTask.
+     *
      * @param description The description of the EventTask.
-     * @param timePeriod The timePeriod when the Event will occur. It
-     *                   should be in YYYY-MM-DD form.
+     * @param timePeriod  The timePeriod when the Event will occur. It should be in YYYY-MM-DD form.
      * @throws DukeException If the date format in timePeriod is wrong.
      */
     public EventTask(String description, String timePeriod) throws DukeException {
@@ -31,10 +31,10 @@ public class EventTask extends Task {
 
     /**
      * Fully initialize an EventTask.
+     *
      * @param description The description of the EventTask.
-     * @param isDone Indicates whether the EventTask has been done.
-     * @param timePeriod The timePeriod in LocalDate form when
-     *                   the EventTask will occur.
+     * @param isDone      Indicates whether the EventTask has been done.
+     * @param timePeriod  The timePeriod in LocalDate form when the EventTask will occur.
      */
     public EventTask(String description, boolean isDone, LocalDate timePeriod) {
         super(description, isDone);

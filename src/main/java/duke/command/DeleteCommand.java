@@ -9,8 +9,7 @@ import duke.Ui;
 import duke.task.Task;
 
 /**
- * Represents the Command to delete
- * existing Tasks from taskList.
+ * Represents the Command to delete existing Tasks from taskList.
  */
 public class DeleteCommand implements Command {
 
@@ -18,19 +17,19 @@ public class DeleteCommand implements Command {
 
     /**
      * Initializes DeleteCommand.
-     * @param taskNum The number of the task in
-     *                the taskList to be deleted.
+     *
+     * @param taskNum The number of the task in the taskList to be deleted.
      */
     public DeleteCommand(int taskNum) {
         this.taskNum = taskNum;
     }
 
     /**
-     * Deletes the task at the specified taskNum in
-     * the taskList.
-     * @param ui The ui of Duke.
+     * Deletes the task at the specified taskNum in the taskList.
+     *
+     * @param ui      The ui of Duke.
      * @param storage The storage object.
-     * @param tasks The taskList.
+     * @param tasks   The taskList.
      */
     @Override
     public void execute(Ui ui, Storage storage, TaskList tasks) {

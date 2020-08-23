@@ -3,6 +3,8 @@ package duke;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import duke.exception.DukeException;
@@ -10,8 +12,6 @@ import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TodoTask;
-
-import java.util.ArrayList;
 
 public class TaskListTest {
 

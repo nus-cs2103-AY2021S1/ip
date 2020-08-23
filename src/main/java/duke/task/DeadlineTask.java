@@ -7,8 +7,7 @@ import java.time.format.DateTimeParseException;
 import duke.exception.DukeException;
 
 /**
- * Represents a DeadlineTask that has to be done
- * by a certain datetime.
+ * Represents a DeadlineTask that has to be done by a certain datetime.
  */
 public class DeadlineTask extends Task {
 
@@ -16,9 +15,9 @@ public class DeadlineTask extends Task {
 
     /**
      * Initializes a new DeadlineTask.
+     *
      * @param description The description of the DeadlineTask.
-     * @param deadline The deadline of the DeadlineTask. It should
-     *                 be in the form YYYY-MM-DD.
+     * @param deadline    The deadline of the DeadlineTask. It should be in the form YYYY-MM-DD.
      * @throws DukeException If the deadline format is wrong.
      */
     public DeadlineTask(String description, String deadline) throws DukeException {
@@ -32,9 +31,10 @@ public class DeadlineTask extends Task {
 
     /**
      * Fully initializes a DeadlineTask.
+     *
      * @param description The description of the DeadlineTask.
-     * @param isDone Indicates whether the DeadlineTask has been done.
-     * @param deadline The deadline in LocalDate format of the DeadlineTask.
+     * @param isDone      Indicates whether the DeadlineTask has been done.
+     * @param deadline    The deadline in LocalDate format of the DeadlineTask.
      */
     public DeadlineTask(String description, boolean isDone, LocalDate deadline) {
         super(description, isDone);

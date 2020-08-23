@@ -1,8 +1,7 @@
 package duke.exception;
 
 /**
- * Represents an IOException while running
- * Duke.
+ * Represents an IOException while running Duke.
  */
 public class DukeIOException extends DukeException {
 

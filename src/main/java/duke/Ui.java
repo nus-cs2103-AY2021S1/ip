@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * The class responsible for the look
- * and feel of the console messages.
+ * The class responsible for the look and feel of the console messages.
  */
 public class Ui {
 
@@ -16,9 +15,7 @@ public class Ui {
     private final static String INDENT = "    ";
 
     /**
-     * Initializes the Ui object with
-     * a Scanner object that scans from
-     * System.in.
+     * Initializes the Ui object with a Scanner object that scans from System.in.
      */
     public Ui() {
         this.sc = new Scanner(System.in);
@@ -26,6 +23,7 @@ public class Ui {
 
     /**
      * Gets user input.
+     *
      * @return The user input.
      */
     public String getUserInput() {
@@ -33,8 +31,7 @@ public class Ui {
     }
 
     /**
-     * Prints the greeting message
-     * when Duke is first launched.
+     * Prints the greeting message when Duke is first launched.
      */
     public void printGreeting() {
         ArrayList<String> welcomeTextBlock = new ArrayList<>(List.of(
@@ -51,23 +48,19 @@ public class Ui {
     }
 
     /**
-     * Prints the exit message
-     * when the user exits Duke.
+     * Prints the exit message when the user exits Duke.
      */
     public void printExit() {
         printWithWrapper(new ArrayList<>(List.of("Bye bye! Hope to see you again soon!")), false, false);
     }
 
     /**
-     * Wraps the console message with borders and
-     * indentation for better UI.
-     * @param toPrint The List of messages to be printed to
-     *                the console.
-     * @param withNumbering Indicates whether the messages
-     *                      should be numbered when printing.
-     * @param isError Indicates whether the messages are
-     *                error messages that requires a different UI.
-     * @param <T> The generic type of the messages to be printed.
+     * Wraps the console message with borders and indentation for better UI.
+     *
+     * @param toPrint       The List of messages to be printed to the console.
+     * @param withNumbering Indicates whether the messages should be numbered when printing.
+     * @param isError       Indicates whether the messages are error messages that requires a different UI.
+     * @param <T>           The generic type of the messages to be printed.
      */
     public <T> void printWithWrapper(ArrayList<T> toPrint, boolean withNumbering, boolean isError) {
         printBorder(isError);

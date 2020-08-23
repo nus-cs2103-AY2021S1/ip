@@ -20,17 +20,16 @@ import duke.task.Task;
 import duke.task.TodoTask;
 
 /**
- * Class that is responsible for parsing raw inputs and
- * translating them to the correct Command or Task.
+ * Class that is responsible for parsing raw inputs and translating them to the correct Command or Task.
  */
 public class Parser {
 
 
     /**
      * Parses user input.
+     *
      * @param input The user input.
-     * @return The Command subclass that correctly
-     * represents the user intent.
+     * @return The Command subclass that correctly represents the user intent.
      * @throws DukeException If input is unexpected or exceptional.
      */
     public static Command parseInput(String input) throws DukeException {
@@ -82,9 +81,9 @@ public class Parser {
 
     /**
      * Parses raw data that is loaded from save file.
+     *
      * @param data The raw data.
-     * @return The correct Task that corresponds to what the raw
-     * data represents.
+     * @return The correct Task that corresponds to what the raw data represents.
      * @throws DukeException If data is unexpected or exceptional.
      */
     public static Task parseTaskData(String data) throws DukeException {

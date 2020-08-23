@@ -10,8 +10,7 @@ import java.util.Scanner;
 import duke.exception.DukeIOException;
 
 /**
- * The class that is responsible for reading
- * and writing raw taskList data.
+ * The class that is responsible for reading and writing raw taskList data.
  */
 public class Storage {
 
@@ -19,6 +18,7 @@ public class Storage {
 
     /**
      * Initializes a Storage object.
+     *
      * @param filePath The path of the data file.
      */
     public Storage(String filePath) {
@@ -27,6 +27,7 @@ public class Storage {
 
     /**
      * Retrives The raw data from the data file.
+     *
      * @return An ArrayList of each line of raw data.
      * @throws DukeIOException If file was not found at the filePath.
      */
@@ -47,9 +48,9 @@ public class Storage {
 
     /**
      * Writes the raw data into the data file.
+     *
      * @param data The raw data to be written.
-     * @throws DukeIOException For exceptional cases where
-     * the program is unable to write to the data file.
+     * @throws DukeIOException For exceptional cases where the program is unable to write to the data file.
      */
     public void save(ArrayList<String> data) throws DukeIOException {
         StringBuilder sb = new StringBuilder();

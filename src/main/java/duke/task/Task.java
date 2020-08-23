@@ -1,8 +1,7 @@
 package duke.task;
 
 /**
- * An abstract class that represents a
- * basic Task.
+ * An abstract class that represents a basic Task.
  */
 public abstract class Task {
 
@@ -11,6 +10,7 @@ public abstract class Task {
 
     /**
      * Initializes a Task object.
+     *
      * @param description The description of the Task.
      */
     public Task(String description) {
@@ -25,6 +25,7 @@ public abstract class Task {
 
     /**
      * Gets the raw data representation of the Task.
+     *
      * @return The raw data representation of the Task.
      */
     public String getData() {
@@ -33,12 +34,14 @@ public abstract class Task {
 
     /**
      * Mark the Task as done.
+     *
      * @return The Task after it is marked as done.
      */
     public abstract Task markAsDone();
 
     /**
      * Checks whether task description contains a certain keyword.
+     *
      * @param keyword The search keyword.
      * @return Boolean value indicating whether task description contains a certain keyword.
      */

@@ -11,8 +11,7 @@ import duke.task.DeadlineTask;
 import duke.task.Task;
 
 /**
- * Represents the command to add a new
- * DeadlineTask.
+ * Represents the command to add a new DeadlineTask.
  */
 public class DeadlineCommand implements Command {
 
@@ -21,8 +20,9 @@ public class DeadlineCommand implements Command {
 
     /**
      * Initializes a DeadlineCommand.
+     *
      * @param description The description of the DeadlineTask.
-     * @param deadline The deadline of the DeadlineTask.
+     * @param deadline    The deadline of the DeadlineTask.
      */
     public DeadlineCommand(String description, String deadline) {
         this.description = description;
@@ -31,9 +31,10 @@ public class DeadlineCommand implements Command {
 
     /**
      * Adds a new DeadlineTask to the taskList.
-     * @param ui The ui of Duke.
+     *
+     * @param ui      The ui of Duke.
      * @param storage The storage object.
-     * @param tasks The taskList.
+     * @param tasks   The taskList.
      * @throws DukeException If deadline format is wrong.
      */
     @Override

@@ -1,13 +1,13 @@
 package duke.task;
 
 /**
- * Represents a TodoTask that is not
- * constrained by datetime.
+ * Represents a TodoTask that is not constrained by datetime.
  */
 public class TodoTask extends Task {
 
     /**
      * Initializes a TodoTask.
+     *
      * @param description The description of the TodoTask.
      */
     public TodoTask(String description) {
@@ -16,8 +16,9 @@ public class TodoTask extends Task {
 
     /**
      * Fully initialize a TodoTask.
+     *
      * @param description The description of the TodoTask.
-     * @param isDone Indicates whether the TodoTask has been done.
+     * @param isDone      Indicates whether the TodoTask has been done.
      */
     public TodoTask(String description, boolean isDone) {
         super(description, isDone);

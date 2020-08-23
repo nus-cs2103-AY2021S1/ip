@@ -7,9 +7,8 @@ import duke.command.Command;
 import duke.exception.DukeException;
 
 /**
- * The Duke object initializes the core classes: Ui, Storage,
- * Parser and TaskList, and contains the main logic that integrates
- * them together to run the Duke application.
+ * The Duke object initializes the core classes: Ui, Storage, Parser and TaskList, and contains the main logic
+ * that integrates them together to run the Duke application.
  */
 public class Duke {
 
@@ -19,8 +18,8 @@ public class Duke {
 
     /**
      * Initializes a Duke object.
-     * @param filePath the filePath where the storage will
-     *                 load from and save data to.
+     *
+     * @param filePath the filePath where the storage will load from and save data to.
      */
     public Duke(String filePath) {
         this.ui = new Ui();
@@ -42,8 +41,8 @@ public class Duke {
     }
 
     /**
-     * The main processing method of Duke. It waits for user input,
-     * parses, then executes the desired command.
+     * The main processing method of Duke. It waits for user input, parses, then executes the desired
+     * command.
      */
     private void run() {
         ui.printGreeting();
