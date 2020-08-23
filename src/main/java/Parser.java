@@ -1,7 +1,9 @@
 public class Parser {
+    String command;
     String[] inputArr;
 
     Parser(String command) {
+        this.command = command;
         this.inputArr = command.split(" ");
     }
 
@@ -15,9 +17,9 @@ public class Parser {
 
     public String[] getNewTask() throws DukeException {
         String[] newTaskDetails;
-        String command = getCommandType();
+        String commandType = getCommandType();
 
-        switch (command) {
+        switch (commandType) {
         case ("todo"):
             // Only has the word todo
             if (inputArr.length == 1) throw new EmptyTodoException();
