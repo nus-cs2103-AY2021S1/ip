@@ -9,31 +9,33 @@ import java.util.Scanner;
 
 public class Duke {
 
-    static final String HORIZONTAL_LINE = "--------------------------------------";
-    static final String GREETING = "Hello Boss! How can I help you?";
-    static final String BYE = "Bye Boss! Hope to see you again!";
-    static final String SHOW_TASK = "Here are the tasks in your list:";
-    static final String TAB = "   ";
+    private Ui ui;
     public final static String FILEPATH = System.getProperty("user.dir") + (System.getProperty("user.dir").endsWith("text-ui-test")
             ? "/saved-tasks.txt"
             : "/text-ui-test/saved-tasks.txt");
 
+    public Duke() {
+        ui = new Ui();
+    }
+
     public static void main(String[] args) throws IOException {
+        new Duke().run();
+    }
+
+    public void run() throws IOException {
 
         handleLoad();
-        System.out.println(GREETING);
-        handleList();
+        ui.greeting();
+        ui.showList();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             try {
                 String toEcho = sc.nextLine();
-                System.out.println(HORIZONTAL_LINE);
                 String[] command = toEcho.split(" ", 2);
                 if (toEcho.equals("bye")) {
-                    saveTasks();
-                    System.out.println(BYE + "\n" + HORIZONTAL_LINE);
+                    ui.bye();
                 } else if (toEcho.equals("list")) {
-                    handleList();
+                    ui.showList();
                 } else if (toEcho.startsWith("done")) {
                     if (toEcho.length() == 4) {
                         throw new DukeEmptyMessageException("Done");
@@ -41,10 +43,8 @@ public class Duke {
                         throw new DukeInvalidMessageException();
                     } else {
                         int index = Integer.parseInt(command[1]) - 1;
-                        System.out.println("Nice! I've marked this task as done:");
                         Task.tasks.get(index).markAsDone();
-                        System.out.println(TAB + Task.tasks.get(index));
-                        System.out.println(HORIZONTAL_LINE);
+                        ui.printDone(index);
                     }
                 } else if (toEcho.startsWith("todo")) {
                     if (toEcho.length() == 4) {
@@ -70,17 +70,15 @@ public class Duke {
                     }
                     System.out.println("Noted. I've removed this task:");
                     int indexToDelete = Integer.parseInt(command[1]) - 1;
-                    System.out.println(TAB + Task.tasks.get(indexToDelete));
-                    Task.tasks.remove(indexToDelete);
-                    System.out.println("Now you have " + Task.tasks.size() + " tasks in the list.");
-                    System.out.println(HORIZONTAL_LINE);
+                    ui.printDelete(indexToDelete);
                 } else {
                     throw new DukeUnknownCommandException();
                 }
+                saveTasks();
             } catch (DateTimeParseException e) {
-                System.out.println(TAB + "Please enter date in the format yyyy-MM-dd HHmm");
+                ui.printDateTimeParseError(e.getMessage());
             } catch (DukeException e) {
-                System.out.println(e.getMessage() + "\n" + HORIZONTAL_LINE);
+                ui.printError(e.getMessage());
             }
         }
     }
@@ -95,46 +93,28 @@ public class Duke {
         taskWriter.close();
     }
 
-    public static void handleList() {
-        System.out.println(SHOW_TASK);
-        for (int i = 0; i < Task.tasks.size(); i++) {
-            int number = i + 1;
-            System.out.println(number + "." + Task.tasks.get(i));
-        }
-        System.out.println(HORIZONTAL_LINE);
-    }
-
-    public static void handleTodo(String description) {
-        System.out.println("Got it. I've added this task:");
+    public void handleTodo(String description) {
         Todo todo = new Todo(description);
         Task.tasks.add(todo);
-        System.out.println(TAB + todo);
-        System.out.println("Now you have " + Task.tasks.size() + " tasks in the list.");
-        System.out.println(HORIZONTAL_LINE);
+        ui.printTask(todo);
     }
 
-    public static void handleDeadline(String description) {
+    public void handleDeadline(String description) {
         String[] strArr = description.split("/by ", 2);
         String todo = strArr[0];
         String time = strArr[1];
         Deadline deadline = new Deadline(todo, time);
-        System.out.println("Got it. I've added this task:");
         Task.tasks.add(deadline);
-        System.out.println(TAB + deadline);
-        System.out.println("Now you have " + Task.tasks.size() + " tasks in the list.");
-        System.out.println(HORIZONTAL_LINE);
+        ui.printTask(deadline);
     }
 
-    public static void handleEvent(String description) {
+    public void handleEvent(String description) {
         String[] strArr = description.split("/at ", 2);
         String todo = strArr[0];
         String time = strArr[1];
         Event event = new Event(todo, time);
-        System.out.println("Got it. I've added this task:");
         Task.tasks.add(event);
-        System.out.println(TAB + event);
-        System.out.println("Now you have " + Task.tasks.size() + " tasks in the list.");
-        System.out.println(HORIZONTAL_LINE);
+        ui.printTask(event);
     }
 
     public static void handleLoad() throws IOException {
