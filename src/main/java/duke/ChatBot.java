@@ -1,3 +1,7 @@
+package duke;
+
+import duke.exception.*;
+import duke.command.*;
 import java.io.IOException;
 
 // The chat bot class to handle the internal logic

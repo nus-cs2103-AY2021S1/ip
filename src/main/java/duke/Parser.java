@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.*;
+import duke.exception.*;
+import duke.command.*;
+import java.io.IOException;
+
 public class Parser {
 
     public Command parse(String response) throws Exception {

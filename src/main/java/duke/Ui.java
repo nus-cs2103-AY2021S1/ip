@@ -1,5 +1,8 @@
+package duke;
+
 import java.util.LinkedList;
 import java.util.Scanner;
+import duke.task.*;
 
 public class Ui {
 

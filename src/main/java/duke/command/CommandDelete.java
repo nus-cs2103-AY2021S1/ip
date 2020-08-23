@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.*;
+import duke.task.*;
+import duke.exception.*;
+
 public class CommandDelete implements Command {
     private int n;
 

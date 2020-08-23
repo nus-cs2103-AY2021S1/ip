@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.*;
+import duke.exception.*;
+
 public class CommandDone implements Command {
     private int n;
 

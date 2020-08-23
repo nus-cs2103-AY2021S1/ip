@@ -1,4 +1,7 @@
+package duke;
+
 import java.util.LinkedList;
+import duke.task.*;
 
 public class TaskList {
     private LinkedList<Task> list;
@@ -9,7 +12,7 @@ public class TaskList {
 
     public TaskList() { this.list = new LinkedList<>(); }
 
-    public LinkedList<Task> getList() {
+    public LinkedList<duke.task.Task> getList() {
         return list;
     }
 

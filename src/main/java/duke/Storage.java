@@ -1,9 +1,15 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
+import duke.task.*;
+import duke.exception.*;
+import duke.command.*;
+import java.io.IOException;
 
 public class Storage {
     private static final String path = "data/duke.txt";
