@@ -95,6 +95,6 @@ public class event extends Task {
 
     }
     public String inputListFormat(){
-        return "E" + super.inputListFormat() + " | " + this.dateTime;
+        return "E" + super.inputListFormat() + " | " + this.dateTime + "-" + this.end;
     }
 }

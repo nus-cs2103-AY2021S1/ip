@@ -1,10 +1,8 @@
-import java.awt.desktop.SystemSleepEvent;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 /**
  * The deadline is a subclass of Task and it is used to describe tasks that has to be completed by a specific day.

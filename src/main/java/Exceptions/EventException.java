@@ -1,8 +1,9 @@
+package Exceptions;
 /**
  * This EventException is used to print out exceptions when there is an incomplete input where whether the description
  * or date is absent.
  */
-public class EventException extends Exception {
+public class EventException extends DukeException {
     /**
      * description tests shows whether the description is present in the input of the user or not.
      * If description is not present it is true, else it is false

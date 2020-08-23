@@ -1,3 +1,2 @@
-todo read book
-deadline submission /by 1999 12 12, 12:00
-event book club /at 12:00-13:00
+T | 0 | read book
+T | 0 | read

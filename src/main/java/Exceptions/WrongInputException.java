@@ -1,7 +1,8 @@
+package Exceptions;
 /**
  * This prints the exception when a wrong word is being input.
  */
-public class WrongInputException extends Exception {
+public class WrongInputException extends DukeException {
     /**
      * This takes not args and overrides the toString() method
      * @return a string that describes the error that took place which is that an invalid string has been inserted

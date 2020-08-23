@@ -2,7 +2,8 @@
  * This DoneException is used to print out exceptions when there is an incomplete input where the ID is absent or the ID
  * of that Task hasnt been defined yet.
  */
-public class DoneException extends Exception{
+package Exceptions;
+public class DoneException extends DukeException{
     /**
      * IDabsent tests shows whether the ID is present in the input of the user or not.
      * If ID is not present it is true, else it is false

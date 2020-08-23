@@ -1,12 +1,10 @@
-
-
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+
+import Exceptions.DoneException;
+import Exceptions.FileAbsentException;
 
 /**
  * This Task is made abstract because it is never intialized in the actual code, however, it is used so that polymorphism
@@ -41,58 +39,46 @@ abstract public class Task {
     /**
      * this prints out that this task is added successfully to the task.
      */
-    public void output() {
-        update();
+    public void output(String s) {
+        update(s);
         System.out.println("  Got it. I've added this task:\n  " + this.toString() + "\n" +
-                "  Now you have " + tasks.size() + " tasks in the list.\n" + "  ____________________________________________________________");
+                "  Now you have " + tasks.size() + " tasks in the list.");
     }
 
+
+    public static int getNum(){
+        return num;
+    }
     /**
      * @param ID is the ID of tShe task that you wish to delete. Since it needs to delete task from tasks, which is static,
      *           this function is also static. If the ID is not present in tasks, it prints that it is not present. If task
      *           is previously deleted, it prints that it was deleted.
      *           Else, it prints that it is successfully deleted.
      */
-    public static void deleteDone(int ID) {
-        if (ID > num) {
-            System.out.println(new DeleteException(false, false).toString());
-        } else {
-            Task task = tasks.get(ID - 1);
-            if (!task.deleted) {
+    public static void deleteDone(int ID, String s) {
                 tasks.get(ID - 1).deleted = true;
                 System.out.println("   Noted. I've removed this task:");
                 System.out.println("   " + tasks.get(ID - 1).toString());
                 System.out.println("  Now you have " + tasks.size() + " tasks in the list.");
-                System.out.println("  ____________________________________________________________");
-                update();
-            } else {
-                System.out.println(new DeleteException(false, true).toString());
-            }
-        }
+                update(s);
     }
-
+    boolean isDeleted(){
+        return deleted;
+    }
     /**
      * @param ID is the ID of the task that you wish to set as done. Since it needs to assign truth to task from tasks,
      *           which is static, this function is also static. If the ID is not present in tasks, it prints that it is not present.
      *           If the task is deleted, it would print that it was deleted.
      *           Else, it prints that it is successfully completed.
      */
-    public static void setDone(int ID) {
-        if (ID > num) {
-            System.out.println(new DoneException(false, false).toString());
-        } else {
-            Task task = tasks.get(ID - 1);
-            if (task.deleted) {
-                System.out.println(new DoneException(false, true).toString());
-            } else {
+    public static void setDone(int ID, String s) {
+
                 tasks.get(ID - 1).done = true;
                 System.out.println("   Nice! I've marked this task as done:");
                 System.out.println("   " + tasks.get(ID - 1).toString());
-                System.out.println("  ____________________________________________________________");
-                update();
-            }
-        }
+                update(s);
     }
+
 
     /**
      * This prints out all tje Since it needs to assign truth to task from tasks,
@@ -107,8 +93,6 @@ abstract public class Task {
                 System.out.println("  " + task.ID + "." + task.toString());
             }
         }
-        System.out.println("  ____________________________________________________________");
-
     }
     public static String listUpdate(){
         String s = "";
@@ -119,9 +103,9 @@ abstract public class Task {
         }
         return s;
     }
-    public static void update() {
+    public static void update(String filePath) {
             try {
-                FileWriter fw = new FileWriter("TIMETABLE.TXT");
+                FileWriter fw = new FileWriter(filePath);
                 fw.write(listUpdate());
                 fw.close();
             } catch (IOException i) {

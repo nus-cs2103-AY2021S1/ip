@@ -1,8 +1,9 @@
+package Exceptions;
 /**
  * This DeleteException is used to print out exceptions when there is an incomplete input where the ID is absent or the ID
  * of that Task hasnt been defined yet or it has previously been deleted.
  */
-public class DeleteException extends Exception {
+public class DeleteException extends DukeException {
     /**
      * IDabsent tests shows whether the ID is present in the input of the user or not.
      * If ID is not present it is true, else it is false
