@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.nio.file.Files;
@@ -6,6 +7,15 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Duke {
+
+    private Storage storage;
+    private TaskList taskList;
+    //private Ui ui;
+
+    public Duke(String filePath) throws FileNotFoundException, DukeException {
+        this.storage = new Storage(filePath);
+        this.taskList = new TaskList(storage);
+    }
 
     private static void processInput(String input, TaskList list) {
         System.out.println("");
@@ -36,6 +46,18 @@ public class Duke {
         }
     }
 
+    public void run() {
+        Scanner sc = new Scanner(System.in);
+        String input;
+        System.out.println("Hi there! I'm Peanut.\nHow can I be of assistance?\n");
+        input = sc.nextLine();
+        while (!input.equals("bye")) {
+            processInput(input, taskList);
+            input = sc.nextLine();
+        }
+        System.out.println("\nBye! Sad to see you go :(");
+    }
+
     public static void main(String[] args) throws IOException, DukeException {
 
         if (!Files.exists(Paths.get("data"))) {
@@ -45,16 +67,7 @@ public class Duke {
             Files.createFile(Paths.get("data/Duke.txt"));
         }
 
-        Scanner sc = new Scanner(System.in);
-        TaskList list = new TaskList();
-        String input;
-        System.out.println("Hi there! I'm Peanut.\nHow can I be of assistance?\n");
-        input = sc.nextLine();
-        while (!input.equals("bye")) {
-           processInput(input, list);
-            input = sc.nextLine();
-        }
-        System.out.println("\nBye! Sad to see you go :(");
+        new Duke("data/Duke.txt").run();
 
     }
 

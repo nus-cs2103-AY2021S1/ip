@@ -1,7 +1,5 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.FileWriter;
-import java.io.File;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -14,13 +12,13 @@ import java.time.format.DateTimeFormatter;
 public class TaskList {
 
     private final List<Task> list = new ArrayList<>();
+    private final Storage storage;
     private static final String doneErrorMessage = "OOPS!!! Please choose a valid task index to mark as done.\n";
     private static final String deleteErrorMessage = "OOPS!!! Please choose a valid task index to delete.\n";
-    private static final String FILE_PATH = "data/Duke.txt";
 
-    TaskList() throws FileNotFoundException, DukeException {
-        File file = new File(FILE_PATH);
-        Scanner scanner = new Scanner(file);
+    TaskList(Storage storage) throws FileNotFoundException, DukeException {
+        this.storage = storage;
+        Scanner scanner = storage.load();
         while (scanner.hasNext()) {
             String taskString = scanner.nextLine();
             char taskType = taskString.charAt(3);
@@ -50,20 +48,13 @@ public class TaskList {
                 }
                 list.add(task);
             }
-
         }
-    }
-
-    protected void updateFile() throws IOException {
-        FileWriter fw = new FileWriter(FILE_PATH);
-        fw.write(toString());
-        fw.close();
     }
 
     protected void addTask(Task task) throws IOException {
         list.add(task);
-        updateFile();
         System.out.println("Added: " + task + "\n");
+        storage.saveTasks(toString());
     }
 
     protected void markTaskDone(String command) throws DukeException {
@@ -71,9 +62,9 @@ public class TaskList {
             int listIndex = Integer.parseInt(command.substring(5));
             Task task = list.get(listIndex - 1);
             task.markDone();
-            updateFile();
             System.out.printf("Hurray! %s is now done.\n", task.getTask());
             System.out.println(task + "\n");
+            storage.saveTasks(toString());
         } catch (Exception error) {
             throw new DukeException(doneErrorMessage);
         }
@@ -84,10 +75,10 @@ public class TaskList {
             int listIndex = Integer.parseInt(command.substring(7));
             Task task = list.get(listIndex - 1);
             list.remove(listIndex - 1);
-            updateFile();
             System.out.printf("Okay %s has been deleted.\n", task.getTask());
             System.out.println(task);
             System.out.println("You now have " + list.size() + " tasks.\n");
+            storage.saveTasks(toString());
         } catch (Exception error) {
             throw new DukeException(deleteErrorMessage);
         }
