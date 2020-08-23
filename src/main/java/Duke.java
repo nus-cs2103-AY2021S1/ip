@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
@@ -5,14 +7,20 @@ import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = " .d8888b.  888               888    888                  888888b.            888    \n" +
+                "d88P  Y88b 888               888    888                  888  \"88b           888    \n" +
+                "888    888 888               888    888                  888  .88P           888    \n" +
+                "888        88888b.   8888b.  888888 888888 888  888      8888888K.   .d88b.  888888 \n" +
+                "888        888 \"88b     \"88b 888    888    888  888      888  \"Y88b d88\"\"88b 888    \n" +
+                "888    888 888  888 .d888888 888    888    888  888      888    888 888  888 888    \n" +
+                "Y88b  d88P 888  888 888  888 Y88b.  Y88b.  Y88b 888      888   d88P Y88..88P Y88b.  \n" +
+                " \"Y8888P\"  888  888 \"Y888888  \"Y888  \"Y888  \"Y88888      8888888P\"   \"Y88P\"   \"Y888 \n" +
+                "                                                888                                 \n" +
+                "                                           Y8b d88P                                 \n" +
+                "                                            \"Y88P\"                                  ";
         System.out.println("Hello from\n" + logo);
         String lines = "    ____________________________________________________________";
-        String defaultGreeting = lines + "\n" + "     Hello! I'm Duke \n" + "     What can I do for you?\n" + lines + "\n";
+        String defaultGreeting = lines + "\n" + "     Hello! I'm Chatty Bot \n" + "     What can I do for you?\n" + lines + "\n";
         System.out.println(defaultGreeting);
         Scanner sc = new Scanner(System.in);
         List<Task> currentList = new ArrayList<>();
@@ -65,7 +73,8 @@ public class Duke {
                         }
                         String deadlineTaskName = deadlineInput.substring(0, indexSeparator - 1);
                         String deadlineTime = deadlineInput.substring(indexSeparator + 4);
-                        Deadline newDeadline = new Deadline(deadlineTaskName, deadlineTime);
+                        LocalDate deadlineDate = LocalDate.parse(deadlineTime);
+                        Deadline newDeadline = new Deadline(deadlineTaskName, deadlineDate);
                         currentList.add(newDeadline);
                         System.out.println(lines + "\n" + "     Got it. I've added this task:");
                         System.out.println("       " + newDeadline);
@@ -83,7 +92,8 @@ public class Duke {
                         }
                         String eventTaskName = eventInput.substring(0, indexSeparator - 1);
                         String eventTime = eventInput.substring(indexSeparator + 4);
-                        Event newEvent = new Event(eventTaskName, eventTime);
+                        LocalDate eventDate = LocalDate.parse(eventTime);
+                        Event newEvent = new Event(eventTaskName, eventDate);
                         currentList.add(newEvent);
                         System.out.println(lines + "\n" + "     Got it. I've added this task:");
                         System.out.println("       " + newEvent);
