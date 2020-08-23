@@ -10,6 +10,16 @@ public class Event extends Task {
         this.time = time;
     }
 
+    public Event(boolean isDone, String description, String time) {
+        super(isDone, description);
+        this.time = time;
+    }
+
+    @Override
+    public String fileFormat() {
+        return String.format("%1$s|%2$s|%3$s|%4$s", "E", this.isDone ? "0" : "1", this.description, this.time);
+    }
+
     @Override
     public String toString() {
         return String.format("[E]%1$s (at: %2$s)", super.toString(), this.time);
