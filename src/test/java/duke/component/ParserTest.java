@@ -247,4 +247,21 @@ public class ParserTest {
             assertEquals("\u2639 OOPS!!! Time should be specified", e.getMessage());
         }
     }
+
+    @Test
+    public void generate_noTimeSpecification_throwException() {
+        try {
+            Parser.generate("deadline things /by");
+            fail();
+        } catch (Exception e) {
+            assertEquals("The time specification cannot be empty.", e.getMessage());
+        }
+
+        try {
+            Parser.generate("event things /at");
+            fail();
+        } catch (Exception e) {
+            assertEquals("The time specification cannot be empty.", e.getMessage());
+        }
+    }
 }
