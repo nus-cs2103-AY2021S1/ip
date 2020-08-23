@@ -17,13 +17,11 @@ public class Event extends Task {
         this.date = date;
     }
 
-<<<<<<< HEAD
+
     public Event(String description, String time, boolean isDone) {
         super(description, isDone);
         this.time = time;
     }
-=======
->>>>>>> branch-level-8
 
     @Override
     public String toString() {

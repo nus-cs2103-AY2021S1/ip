@@ -1,12 +1,9 @@
-<<<<<<< HEAD
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
-=======
 import java.time.LocalDate;
->>>>>>> branch-level-8
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
