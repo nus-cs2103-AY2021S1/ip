@@ -1,7 +1,7 @@
-package DukeHelper;
-import Storage.LoadData;
-import Storage.SaveData;
-import Task.Task;
+package duke.dukehelper;
+import duke.storage.LoadData;
+import duke.storage.SaveData;
+import duke.task.Task;
 
 import java.util.ArrayList;
 

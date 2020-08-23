@@ -1,7 +1,6 @@
-package Task;
+package duke.task;
 
-import Helper.DateTimeHelper;
-import Task.Task;
+import duke.helper.DateTimeHelper;
 
 import java.time.LocalDate;
 

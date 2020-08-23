@@ -1,12 +1,12 @@
-package DukeHelper;
-import Commands.Commands;
-import Helper.DateTimeHelper;
-import Task.Todo;
-import Task.Deadline;
-import Task.Event;
-import Task.Task;
-import Exception.DukeInvalidArgumentException;
-import Exception.DukeException;
+package duke.dukehelper;
+import duke.commands.Commands;
+import duke.helper.DateTimeHelper;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.exception.DukeInvalidArgumentException;
+import duke.exception.DukeException;
 
 import java.time.LocalDate;
 
@@ -43,7 +43,7 @@ public class Parser {
         return new String[]{content, deadlineStr};
     }
     public Task parseCommand(Commands commandType, String[] tokens, boolean isLoaded, int numTasks) throws DukeException, DukeInvalidArgumentException{
-        String result_prefix = "Got it. I've added this task:\n      ";
+        String result_prefix = "Got it. I've added this duke.task:\n      ";
         String result_subfix = "Now you have " + (numTasks + 1) + " tasks in the list.";
 
         String[] extractedData = extractData(isLoaded, tokens);

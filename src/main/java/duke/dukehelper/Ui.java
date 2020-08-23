@@ -1,7 +1,7 @@
-package DukeHelper;
+package duke.dukehelper;
 
 import java.util.ArrayList;
-import Task.Task;
+import duke.task.Task;
 public class Ui {
     public static void printDialog(String content) {
         System.out.println("    ----------------------------------------");

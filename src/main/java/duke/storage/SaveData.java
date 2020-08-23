@@ -1,9 +1,9 @@
-package Storage;
+package duke.storage;
 
-import Task.Task;
-import Task.Deadline;
-import Task.Todo;
-import Task.Event;
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Todo;
+import duke.task.Event;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -35,7 +35,7 @@ public class SaveData {
             }
             FileWriter writer = new FileWriter(file, false);
             String commands = taskToCommand(data);
-            //System.out.println(commands);
+            //System.out.println(duke.commands);
             writer.write(commands);
             writer.flush();
             writer.close();

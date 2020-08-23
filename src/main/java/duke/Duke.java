@@ -1,15 +1,13 @@
-import Commands.Commands;
-import DukeHelper.Parser;
-import DukeHelper.Storage;
-import DukeHelper.TaskList;
-import DukeHelper.Ui;
-import Exception.DukeException;
-import Exception.DukeInvalidArgumentException;
-import Helper.DateTimeHelper;
-import Task.Deadline;
-import Task.Event;
-import Task.Task;
-import Task.Todo;
+package duke;
+
+import duke.commands.Commands;
+import duke.dukehelper.Parser;
+import duke.dukehelper.Storage;
+import duke.dukehelper.TaskList;
+import duke.dukehelper.Ui;
+import duke.exception.DukeException;
+import duke.helper.DateTimeHelper;
+import duke.task.Task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -89,7 +87,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ArrayList<String> savedTasks = storage.loadSavedTasks();
         if(savedTasks.size() > 0 && savedTasks.get(0).equals("000")) {
-            Ui.printDialog("This is the first time you use Duke!");
+            Ui.printDialog("This is the first time you use duke.Duke!");
         } else {
             try {
                 for (String task : savedTasks) {

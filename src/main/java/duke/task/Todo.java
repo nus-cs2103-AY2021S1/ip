@@ -1,6 +1,4 @@
-package Task;
-
-import Task.Task;
+package duke.task;
 
 public class Todo extends Task {
     public Todo(String content) {
