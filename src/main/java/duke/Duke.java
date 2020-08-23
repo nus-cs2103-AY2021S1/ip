@@ -25,12 +25,12 @@ public class Duke {
 
     public void run() {
         ui.intro();
-        boolean isExit = false;
-        while (!isExit) {
+        boolean isEnd = false;
+        while (!isEnd) {
             String fullCommand = ui.readCommand();
             try {
                 Command c = Parser.parse(fullCommand);
-                isExit = !c.execute(list, ui, storage);
+                isEnd = !c.execute(list, ui, storage);
             } catch (DukeEmptyIndexException |
                     DukeEmptyDescriptionException |
                     DukeEmptyByException |
