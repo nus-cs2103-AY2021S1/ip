@@ -1,12 +1,15 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 import duke.exception.DukeException;
-import duke.Parser;
 import duke.task.Task;
 
-import java.util.ArrayList;
-
 public class TaskList {
+
     private ArrayList<Task> taskStore;
 
     public TaskList() {
@@ -36,12 +39,16 @@ public class TaskList {
         return deletedTask;
     }
 
+    public ArrayList<String> find(String keyword) {
+        return mapToRepr(filterTasks(taskStore, task -> task.contains(keyword)), Task::toString);
+    }
+
     public ArrayList<String> getListRepr() {
-        ArrayList<String> res = new ArrayList<>();
-        for (Task t : taskStore) {
-            res.add(t.toString());
-        }
-        return res;
+        return mapToRepr(taskStore, Task::toString);
+    }
+
+    public ArrayList<String> getData() {
+        return mapToRepr(taskStore, Task::getData);
     }
 
     public String getListStatus() {
@@ -50,11 +57,11 @@ public class TaskList {
                 (storeSize > 1 ? "tasks " : "task ") + "in your list!";
     }
 
-    public ArrayList<String> getData() {
-        ArrayList<String> res = new ArrayList<>();
-        for (Task t : taskStore) {
-            res.add(t.getData());
-        }
-        return res;
+    private static ArrayList<String> mapToRepr(ArrayList<Task> taskStore, Function<Task, String> mapper) {
+        return taskStore.stream().map(mapper).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    private static ArrayList<Task> filterTasks(ArrayList<Task> taskStore, Predicate<Task> pred) {
+        return taskStore.stream().filter(pred).collect(Collectors.toCollection(ArrayList::new));
     }
 }
