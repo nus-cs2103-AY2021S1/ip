@@ -87,4 +87,16 @@ public class ToDoTest {
         assertFalse(t.happenBetween(d1, d2));
         assertFalse(t.happenIn(8));
     }
+
+    @Test
+    public void markAsDone_markingDoneAsDone_throwException() {
+        try {
+            ToDo t = new ToDo("return books");
+            t.markAsDone();
+            t.markAsDone();
+            fail();
+        } catch (Exception e) {
+            assertEquals("The task [T][\u2713] return books has already been done.", e.getMessage());
+        }
+    }
 }
