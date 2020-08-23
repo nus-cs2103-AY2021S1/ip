@@ -18,6 +18,10 @@ public class Ui {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
+    public void print(String message) {
+        System.out.println(message);
+    }
+
     public String readInput() {
         return scanner.nextLine().trim();
     }
