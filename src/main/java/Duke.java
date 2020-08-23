@@ -1,9 +1,12 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -178,16 +181,41 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        readFile();
+        readFile(arrayList);
         readAndEcho(arrayList);
     }
 
-    private static void readFile() {
+    private static void readFile(List<Task> arrayList) {
         //From https://www.sghill.net/how-do-i-make-cross-platform-file-paths-in-java.html
         String home = System.getProperty("user.dir");
         Path path = Paths.get(home, "data", "duke.txt");
         if (!Files.isRegularFile(path)) {
             createFile();
+        } else {
+            File f = new File(path.toString());
+            try {
+                Scanner s = new Scanner(f);
+                while (s.hasNext()) {
+                    String string = s.nextLine();
+                    String[] arr = string.split(" \\| ");
+                    System.out.println(Arrays.toString(arr));
+                    boolean isDone = arr[1].equals("1");
+                    switch (arr[0]) {
+                    case "T":
+                        arrayList.add(new ToDo(arr[2], isDone));
+                        break;
+                    case "D":
+                        arrayList.add(new Deadline(arr[2], arr[3], isDone));
+                        break;
+                    case "E":
+                        arrayList.add(new Event(arr[2], arr[3], isDone));
+                        break;
+                    }
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println("Unable to find file :(");
+                createFile();
+            }
         }
     }
 
