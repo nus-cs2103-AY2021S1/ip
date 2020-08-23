@@ -3,25 +3,26 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 
-public final class FileUtil {
+public final class Storage {
     private static final String DB_DIR_NAME = "data";
     private static final String DB_FILE_NAME = "duke.txt";
     private static Path dbPath = null;
 
-    private List<Task> toDoLst;
+    private TaskList toDoLst;
+//    private List<Task> toDoLst;
 
-    public FileUtil() throws FileNotFoundException, IOException {
+    public Storage() throws FileNotFoundException, IOException {
         try {
             checkDbExists();
         } catch (FileNotFoundException e) {
             throw e;
         }
 
-        toDoLst = new ArrayList<>();
+        toDoLst = new TaskList();
+//        toDoLst = new ArrayList<>();
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(dbPath.toFile()));
@@ -57,32 +58,30 @@ public final class FileUtil {
     }
 
     public List<Task> getToDoLst() {
-        return toDoLst;
+        return toDoLst.getToDoLst();
     }
 
     public int getToDoLstSize() {
-        return toDoLst.size();
+        return toDoLst.getToDoLstSize();
     }
 
     public String getTotalItemsDescription() {
-        return String.format("Now you have %d %s in the list.", getToDoLstSize(), getToDoLstSize() > 1 ? "tasks" : "task");
+        return String.format("Now you have %d %s in the list.", toDoLst.getToDoLstSize(), toDoLst.getToDoLstSize() > 1 ? "tasks" : "task");
     }
 
     public void addToDoItem(Task task) {
-        toDoLst.add(task);
+        toDoLst.addToDoItem(task);
     }
 
     public Task removeToDoItem(int i) {
-        Task deletedTask = toDoLst.remove(i);
-
-        return deletedTask;
+        return toDoLst.removeToDoItem(i);
     }
 
     public void save() throws IOException {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(dbPath.toFile()));
 
-            for (Task task: toDoLst) {
+            for (Task task: toDoLst.getToDoLst()) {
                 writer.append(task.toDbString());
                 writer.newLine();
             }

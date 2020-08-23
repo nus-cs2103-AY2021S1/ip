@@ -1,33 +1,33 @@
 import java.io.IOException;
 import java.util.*;
 import java.time.LocalDate;
-import java.io.IOException;
 import java.io.FileNotFoundException;
 
 
 public class Duke {
-    FileUtil db;
+    private Storage db;
+    private Parser parser;
+    private Ui ui;
 
     Duke() throws IOException {
         try {
-            db = new FileUtil();
+            db = new Storage();
         } catch (FileNotFoundException e) {
             throw e;
         } catch (IOException e) {
             throw e;
         }
+
+        ui = new Ui();
+        parser = new Parser();
     }
 
-    public boolean isTaskModification(String action) {
-        return action.equals("done") || action.equals("delete");
-    }
+//    public boolean isTaskModification(String action) {
+//        return action.equals("done") || action.equals("delete");
+//    }
 
     public List<Task> getToDoLst() {
         return db.getToDoLst();
-    }
-
-    public int getToDoLstSize() {
-        return db.getToDoLstSize();
     }
 
     public String getTotalItemsDescription() {
@@ -72,6 +72,88 @@ public class Duke {
         }
     }
 
+    public void run() {
+        Scanner scanner = new Scanner(System.in);
+        String line = "";
+
+        ui.showWelcomeMessage();
+
+        while(!line.equals("bye")) {
+            if (!line.equals("")) {
+                if (line.equals("list")) {
+                    ui.showListItems(getToDoLst());
+                } else if (parser.isTaskModification(line.split(" ")[0])) {
+                    String[] processedData = parser.processModification(line);
+                    String type = processedData[0];
+                    int i = Integer.valueOf(processedData[1]);
+
+                    if (type.equals("done")) {
+                        Task updatedTask = setToDoItemStatus(i, true);
+
+                        ui.showDoneMessage();
+                        System.out.println(updatedTask);
+                    }  else {
+                        Task deletedTask = removeToDoItem(i);
+
+                        ui.showDeleteMessage();
+                        System.out.println(deletedTask);
+                        System.out.println(getTotalItemsDescription());
+                    }
+                } else {
+                    String[] lineData = parser.processTaskItem(line);
+                    String type = lineData[0];
+
+                    if (type.equals("todo")) {
+                        if (lineData.length == 1) {
+                            ui.showErrorMessage();
+                        } else {
+                            line = String.join(" ", Arrays.copyOfRange(lineData, 1, lineData.length));
+
+                            Task newTask = addToDoItem(type, line, null);
+
+                            ui.showAddMessage();
+                            System.out.println(newTask);
+                            System.out.println(getTotalItemsDescription());
+                        }
+                    } else if (type.equals("deadline") || type.equals("event")) {
+                        int byIndex = -1;
+
+                        for (int i = 0; i < lineData.length; i++) {
+                            if (lineData[i].equals("/by") || lineData[i].equals("/at")) {
+                                byIndex = i;
+                                break;
+                            }
+                        }
+
+                        String dateStr = lineData[byIndex + 1];
+                        LocalDate date = LocalDate.parse(dateStr);
+
+                        line = String.join(" ", Arrays.copyOfRange(lineData, 1, byIndex));
+
+                        Task newTask = addToDoItem(type, line, date);
+
+                        ui.showAddMessage();
+                        System.out.println(newTask);
+                        System.out.println(getTotalItemsDescription());
+                    } else {
+                        ui.showWrongInputMessage();
+                    }
+                }
+            }
+
+            line = scanner.nextLine();
+        }
+
+        try {
+            save();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        ui.showByeMessage();
+    }
+
     public static void main(String[] args) {
         Duke duke = null;
 
@@ -89,91 +171,6 @@ public class Duke {
             return;
         }
 
-        Scanner scanner = new Scanner(System.in);
-        String line = "";
-
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-
-        while(!line.equals("bye")) {
-            if (!line.equals("")) {
-                if (line.equals("list")) {
-                    System.out.println("Here are the tasks in your list:");
-
-                    for (int i = 0; i < duke.getToDoLstSize(); i++) {
-                        System.out.println(String.format("%d.%s", i + 1, duke.getToDoLst().get(i)));
-                    }
-                } else if (duke.isTaskModification(line.split(" ")[0])) {
-                    String[] lineData = line.split(" ");
-                    int i = Integer.parseInt(lineData[1]) - 1;
-
-                    if (line.split(" ")[0].equals("done")) {
-                        Task updatedTask = duke.setToDoItemStatus(i, true);
-
-                        System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(updatedTask);
-                    }  else {
-                        Task deletedTask = duke.removeToDoItem(i);
-
-                        System.out.println("Noted. I've removed this task:");
-                        System.out.println(deletedTask);
-                        System.out.println(duke.getTotalItemsDescription());
-                    }
-                } else {
-                    String[] lineData = line.split(" ");
-                    String type = lineData[0];
-                    boolean isValidEntry = true;
-
-                    if (type.equals("todo")) {
-                        if (lineData.length == 1) {
-                            isValidEntry = false;
-                            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-                        } else {
-                            line = String.join(" ", Arrays.copyOfRange(lineData, 1, lineData.length));
-
-                            Task newTask = duke.addToDoItem(type, line, null);
-
-                            System.out.println("Got it. I've added this task: ");
-                            System.out.println(newTask);
-                            System.out.println(duke.getTotalItemsDescription());
-                        }
-                    } else if (type.equals("deadline") || type.equals("event")) {
-                        int byIndex = -1;
-
-                        for (int i = 0; i < lineData.length; i++) {
-                            if (lineData[i].equals("/by") || lineData[i].equals("/at")) {
-                                byIndex = i;
-                                break;
-                            }
-                        }
-
-                        String dateStr = lineData[byIndex + 1];
-                        LocalDate date = LocalDate.parse(dateStr);
-
-                        line = String.join(" ", Arrays.copyOfRange(lineData, 1, byIndex));
-
-                        Task newTask = duke.addToDoItem(type, line, date);
-
-                        System.out.println("Got it. I've added this task: ");
-                        System.out.println(newTask);
-                        System.out.println(duke.getTotalItemsDescription());
-                    } else {
-                        isValidEntry = false;
-                        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    }
-                }
-            }
-
-            line = scanner.nextLine();
-        }
-
-        try {
-            duke.save();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-
-        System.out.println("Bye. Hope to see you again soon!");
+        duke.run();
     }
 }
