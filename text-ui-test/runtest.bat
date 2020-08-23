@@ -9,7 +9,7 @@ REM delete output from previous run
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac -cp "%JAVA%" -Xlint:none -d ..\bin "%JAVA%\Duke.java"
+javac -cp "%JAVA%" -Xlint:none -d ..\bin "%JAVA%\duke\Duke.java"
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
 

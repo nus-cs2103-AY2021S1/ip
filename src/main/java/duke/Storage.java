@@ -1,5 +1,12 @@
+package duke;
+
+import duke.exception.ReadFailedException;
+import duke.task.Task;
+import duke.task.Tasks;
+
 import java.io.File;
 import java.io.FileWriter;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 

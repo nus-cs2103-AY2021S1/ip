@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.Storage;
+import duke.Ui;
+import duke.exception.InvalidTaskNumberException;
+import duke.exception.SaveTaskFailedException;
+import duke.task.Tasks;
+
 import java.io.IOException;
 
 public class DoneCommand extends Command {

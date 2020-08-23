@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.Storage;
+import duke.task.Tasks;
+import duke.Ui;
+import duke.exception.SaveTaskFailedException;
+import duke.task.Task;
+
 import java.io.IOException;
 
 public class TaskCommand extends Command {
