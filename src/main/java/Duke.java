@@ -71,6 +71,11 @@ public class Duke {
                     }
                     int indexToDelete = Integer.parseInt(command[1]) - 1;
                     ui.printDelete(indexToDelete);
+                } else if (toEcho.startsWith("find")) {
+                    if (toEcho.length() == 4) {
+                        throw new DukeEmptyMessageException("Find");
+                    }
+                    ui.printFind(command[1]);
                 } else {
                     throw new DukeUnknownCommandException();
                 }

@@ -7,6 +7,8 @@ public class Ui {
     static final String SHOW_TASK = "Here are the tasks in your list:";
     static final String BYE = "Bye Boss! Hope to see you again!";
     static final String TAB = "   ";
+    static final String FIND_OPENING = "Alright Boss, here are the matching tasks in your list:";
+    static final String FIND_NOTHING = "Sorry Boss, duke can't find anything that matches in your list";
 
     Scanner sc;
 
@@ -33,6 +35,20 @@ public class Ui {
 
     public void bye() {
         System.out.println(BYE + "\n" + HORIZONTAL_LINE);
+    }
+
+    public void printFind(String description) {
+        TaskList.searchKeyword(description);
+        if (TaskList.tempList.size() == 0) {
+            System.out.println(FIND_NOTHING);
+        } else {
+            System.out.println(FIND_OPENING);
+            for (int i = 0; i < TaskList.tempList.size(); i++) {
+                int number = i + 1;
+                System.out.println(number + "." + TaskList.tempList.get(i));
+            }
+        }
+        System.out.println(HORIZONTAL_LINE);
     }
 
     public void printTask(Task task) {

@@ -40,5 +40,11 @@ Sorry Boss! Please ensure that you have input the time
 --------------------------------------
 Sorry Boss! Please ensure that you have input the time
 --------------------------------------
+Alright Boss, here are the matching tasks in your list:
+1.[D][✘] must eat the fruit (by: Oct 10 2020)
+2.[E][✘] attend ninja fruit competition (at: Oct 10 2020)
+--------------------------------------
+Sorry Boss, duke can't find anything that matches in your list
+--------------------------------------
 Bye Boss! Hope to see you again!
 --------------------------------------

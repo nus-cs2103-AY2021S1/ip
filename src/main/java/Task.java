@@ -16,6 +16,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public String toSaveString() {
         if (isDone) {
             return "1";
