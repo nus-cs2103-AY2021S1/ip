@@ -44,12 +44,12 @@ public class Duke {
             if (arr.length == 1) {
                 // Only date provided
                 String date = arr[0].replace("/", "-");
-                localDate = LocalDate.parse(date); // Check if exception is thrown here
+                localDate = LocalDate.parse(date);
                 localDateTime = localDate.atTime(0, 0);
             } else if (arr.length == 2 && arr[1].length() == 4) {
                 // Date and time provided
                 String date = arr[0].replace("/", "-");
-                localDate = LocalDate.parse(date); // Check if exception is thrown here
+                localDate = LocalDate.parse(date);
                 String time = arr[1];
                 int hours = Integer.parseInt(time.substring(0,2));
                 int minutes = Integer.parseInt(time.substring(2,4));
@@ -61,7 +61,7 @@ public class Duke {
 
             return localDateTime;
         } catch (Exception e) {
-            Duke.echo("☹ OOPS!!! Please enter date format as yyyy-mm-dd iiii, e.g. 2019-12-01 1800");
+            Duke.echo("☹ OOPS!!! Please enter date format as yyyy-mm-dd hhmm, e.g. 2019-12-01 1800");
             return null;
         }
     }
