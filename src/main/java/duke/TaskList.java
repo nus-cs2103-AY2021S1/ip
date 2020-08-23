@@ -109,10 +109,17 @@ public class TaskList {
         return sameDates;
     }
 
-    public List<Task> searchTask(String s) {
+    /**
+     * Iterates through the whole list of <code>Task</code> and returns a list containing all <code>Task</code> with
+     * the specified keyword.
+     *
+     * @param keyword to be searched
+     * @return a list containing all <code>Task</code> with the keyword.
+     */
+    public List<Task> searchTask(String keyword) {
         List<Task> validTask = new ArrayList<>();
         for (Task t : listOfTask) {
-            if (t.toString().toLowerCase().contains(s)) {
+            if (t.toString().toLowerCase().contains(keyword)) {
                 validTask.add(t);
             }
         }

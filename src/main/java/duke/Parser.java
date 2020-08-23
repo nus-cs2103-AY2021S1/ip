@@ -31,17 +31,17 @@ public class Parser {
      * @throws DukeException if the command is unidentifiable
      */
     public static Command parse(String command) throws DukeException {
-        if (command.matches(ignoreCase + CommandState.BYE.name())) {
+        if (command.matches(ignoreCase + CommandState.BYE.name() + wildcard)) {
             return new ExitCommand();
-        } else if (command.matches(ignoreCase + CommandState.LIST.name())) {
+        } else if (command.matches(ignoreCase + CommandState.LIST.name() + wildcard)) {
             return new ListCommand();
         } else if (command.matches(ignoreCase + CommandState.DONE.name() + wildcard)) {
             return new DoneCommand();
         } else if (command.matches(ignoreCase + CommandState.CHECK.name() + wildcard)) {
             return new CheckCommand();
-        } else if (command.matches(ignoreCase + CommandState.DELETE.name() + "(.*)")) {
+        } else if (command.matches(ignoreCase + CommandState.DELETE.name() + wildcard)) {
             return new DeleteCommand();
-        } else if (command.matches(ignoreCase + CommandState.FIND.name() + "(.*)")) {
+        } else if (command.matches(ignoreCase + CommandState.FIND.name() + wildcard)) {
             return new FindCommand(command);
         } else {
             Task t = checkAction(command);

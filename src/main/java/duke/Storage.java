@@ -231,9 +231,16 @@ public class Storage {
         return taskList.total();
     }
 
-    public void findRelevantTask(String s) throws DukeException{
+    /**
+     * Iterates through all <code>Task</code> in the file and prints all <code>Task</code>
+     * containing the specified string.
+     *
+     * @param keyword keyword to be searched
+     * @throws DukeException if command input contains no keywords
+     */
+    public void findRelevantTask(String keyword) throws DukeException{
         try {
-            String searchName = s.substring(s.indexOf("find") + 5).trim();
+            String searchName = keyword.substring(keyword.indexOf("find") + 5).trim();
             List<Task> results = taskList.searchTask(searchName.toLowerCase());
 
             if (results.isEmpty()) {

@@ -188,15 +188,28 @@ public class Ui {
         print(" You have already completed this task! *Woof woof*\n");
     }
 
+    /**
+     * Returns a print format reminding users to input keywords together with the command.
+     *
+     * @return a print format reminding users to input keywords together with the command
+     */
     public String searchFail() {
         return printFormat(" Please enter a keyword that you wish to search for...\n"
                 + " Or you can just enter *list* to see all your task! *Woof woof!*\n");
     }
 
+    /**
+     * Prints a message to inform users that there is no <code>Task</code> with the
+     * specified keywords.
+     */
     public void noRelevantTask() {
         print(" I can't seem to find any task with this keyword! *woof*\n");
     }
 
+    /**
+     * Prints the header before listing the list of <code>Task</code> with the specified
+     * keywords.
+     */
     public void relevantTaskHeader() {
         System.out.print(lines);
         System.out.println(" Here is the list of matching tasks in your storage:");
