@@ -11,4 +11,6 @@ helloworld
 delete 1
 deadline nodeadlinetimegiven
 event notimegiven
+find fruit
+find nothing
 bye
