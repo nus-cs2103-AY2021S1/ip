@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.*;
+import duke.exception.*;
+
 import java.io.IOException;
 
 public abstract class Command {
@@ -27,5 +32,7 @@ public abstract class Command {
         return isExit;
     }
 
-    public abstract void execute(Storage storage, TaskList tasks, Ui ui) throws IOException, DukeEmptyArgumentException, DukeInvalidCommandException, DukeInvalidDateException, DukeInvalidArgumentException, DukeInvalidTaskException;
+    public abstract void execute(Storage storage, TaskList tasks, Ui ui) throws IOException,
+            DukeEmptyArgumentException, DukeInvalidCommandException, DukeInvalidDateException,
+            DukeInvalidArgumentException, DukeInvalidTaskException;
 }

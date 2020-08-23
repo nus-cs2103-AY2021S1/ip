@@ -1,3 +1,8 @@
+package duke;
+
+import duke.command.*;
+import duke.exception.DukeException;
+
 import java.io.*;
 import java.util.Scanner;
 

@@ -1,3 +1,6 @@
+package duke.command;
+
+import duke.*;
 import java.io.IOException;
 
 public class ByeCommand extends Command {

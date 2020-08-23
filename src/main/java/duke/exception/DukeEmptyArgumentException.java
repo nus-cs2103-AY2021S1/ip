@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class DukeEmptyArgumentException extends DukeException {
 
     public DukeEmptyArgumentException(String command) {

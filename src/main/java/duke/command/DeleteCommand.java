@@ -1,6 +1,11 @@
-public class DoneCommand extends Command {
+package duke.command;
 
-    public DoneCommand(String command, String extra) {
+import duke.*;
+import duke.exception.*;
+
+public class DeleteCommand extends Command {
+
+    public DeleteCommand(String command, String extra) {
         super(command, extra);
     }
 
@@ -8,8 +13,8 @@ public class DoneCommand extends Command {
     public void execute(Storage storage, TaskList tasks, Ui ui) throws DukeInvalidArgumentException, DukeInvalidTaskException {
         try {
             int taskNum = Integer.parseInt(extra) - 1;
-            tasks.getTask(taskNum).markAsDone();
-            ui.printDone(tasks, taskNum);
+            ui.printDeleted(tasks.getTask(taskNum), tasks.getSize() - 1);
+            tasks.deleteTask(taskNum);
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException(command);
         } catch (IndexOutOfBoundsException e) {

@@ -1,3 +1,8 @@
+package duke;
+
+import duke.command.*;
+import duke.exception.*;
+
 public class Parser {
 
     private static final String BYE = "bye";
