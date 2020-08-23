@@ -1,3 +1,8 @@
+package chatterbox;
+
+import chatterbox.task.Task;
+import chatterbox.task.TaskList;
+
 import java.io.IOException;
 import java.util.Scanner;
 

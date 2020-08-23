@@ -1,3 +1,5 @@
+package chatterbox;
+
 public class ChatterboxException extends Exception {
     private final String msg;
 

@@ -1,3 +1,5 @@
+package chatterbox;
+
 public class Ui {
     private static final String SEPARATOR = "++++++++++++++++++++++++++++++++++++++++++++++++++++++";
 
@@ -10,7 +12,7 @@ public class Ui {
     }
 
     public static void showWelcomeMessage() {
-        System.out.println("Hello I'm Chatterbox. What can I do for you?");
+        System.out.println("Hello I'm chatterbox.Chatterbox. What can I do for you?");
     }
 
     public static void showErrorMessage(Exception e) {

@@ -1,3 +1,7 @@
+package chatterbox.task;
+
+import chatterbox.Parser;
+
 public class Event extends Task {
     private String format(String s) {
         String[] split = s.split("/", 2);

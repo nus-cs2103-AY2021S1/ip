@@ -1,4 +1,10 @@
-import java.text.DateFormat;
+package chatterbox;
+
+import chatterbox.task.Deadline;
+import chatterbox.task.Event;
+import chatterbox.task.Task;
+import chatterbox.task.ToDo;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -11,7 +17,6 @@ public class Parser {
     };
 
     public static LocalDateTime parseDateTime(String dateTime) {
-        DateFormat df = new SimpleDateFormat("MMM d yyyy HHmm'H'");
         for (String format : dateFormats) {
             try {
                 Date d = new SimpleDateFormat(format).parse(dateTime);
