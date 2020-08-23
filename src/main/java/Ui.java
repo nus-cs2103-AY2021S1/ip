@@ -41,7 +41,7 @@ public class Ui {
     }
 
     public void showBye() {
-        System.out.println(" I will be back ");
+        System.out.println(" I will be back! ");
     }
 
     public void showError(String message) {

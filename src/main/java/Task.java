@@ -17,6 +17,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public void undoTask() {
+        this.isDone = false;
+    }
+
     public String getDescription() {
         return description;
     }

@@ -3,7 +3,7 @@ package main.java;
 public class Parser {
 
     enum Input {
-        LIST, BYE, DONE, TODO, DEADLINE, EVENT, DELETE
+        LIST, BYE, DONE, TODO, DEADLINE, EVENT, DELETE, UNDO
     }
 
     public static Command parse(String fullCommand) throws DukeException {
@@ -24,6 +24,8 @@ public class Parser {
                 return parseEvent(command);
             case DELETE:
                 return parseDelete(command);
+            case UNDO:
+                return parseUndo(command);
             }
         } else {
             throw new DukeException(" ERROR... INPUT NOT RECOGNIZED. \n PLEASE TRY AGAIN ");
@@ -91,4 +93,14 @@ public class Parser {
                     "PLEASE TRY AGAIN ");
         }
     }
+
+    public static UndoCommand parseUndo(String[] commandDetails) throws DukeException {
+        if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
+            return new UndoCommand(commandDetails);
+        } else {
+            throw new DukeException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n " +
+                    "PLEASE TRY AGAIN ");
+        }
+    }
+
 }
