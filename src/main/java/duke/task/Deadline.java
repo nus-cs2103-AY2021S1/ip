@@ -36,6 +36,11 @@ public class Deadline extends Task {
     }
 
 
+    /**
+     * Returns a fixed format in string to store the task to storage.
+     *
+     * @return D | 0 | return book | June 6th
+     */
     public String toCustomString() {
         return "D | " + (super.isDone ? 1 : 0) + " | " + super.description + " | " + by;
     }

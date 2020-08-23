@@ -36,7 +36,11 @@ public class Event extends Task {
     }
 
 
-    // D | 0 | return book | June 6th
+    /**
+     * Returns a fixed format in string to store the task to storage.
+     *
+     * @return E | 0 | return book | June 6th
+     */
     public String toCustomString() {
         return "E | " + (super.isDone ? 1 : 0) + " | " + super.description + " | " + at;
     }

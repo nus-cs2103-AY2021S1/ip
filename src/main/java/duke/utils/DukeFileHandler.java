@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Class to handle the saving of files
+ * Class to handle the opening, writing and reading of file data.txt
  */
 public class DukeFileHandler {
     private final String path;
@@ -22,6 +22,13 @@ public class DukeFileHandler {
         this.path = path;
     }
 
+
+    /**
+     * Reads the files from the file path.
+     *
+     * @return a List of Tasks created from the file data.txt
+     * @throws FileNotFoundException if the file is not found, not created
+     */
     public List<Task> readFile() throws FileNotFoundException {
         File file = new File(path);
 
@@ -68,6 +75,13 @@ public class DukeFileHandler {
 
 
     // todo the access denied to write file
+
+    /**
+     * Writes the list to the file.
+     *
+     * @param list the data to write to the file
+     * @throws IOException if the file could not be found
+     */
     public void writeToFile(List<Task> list) throws IOException {
 
         try {
