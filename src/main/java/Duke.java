@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MissingTaskDescriptionException {
 //        // Contains all tasks
 //        ArrayList<Task> listOfTasks= new ArrayList<>();
 //
@@ -160,7 +160,7 @@ public class Duke {
             String[] commandParts = nextLine.split("\\s", 2);
             
             if (commandParts[0].contains("todo")) {
-                
+
                 Task newToDoTask = new ToDo(commandParts[1]);
                 listOfTasks.add(newToDoTask);
 
@@ -174,6 +174,7 @@ public class Duke {
                         + listOfTasks.size()
                         + "\r\n"
                         + horizontalLine);
+                
             } else if (commandParts[0].contains("deadline")) {
 
                 String[] deadlineParts = commandParts[1].split("/by");
@@ -242,6 +243,22 @@ public class Duke {
                          + "Bye! See ya soon!"
                          + "\r\n"
                          + horizontalLine);
+            } else if (commandParts[0].contains("delete")) {
+                
+                int taskNumber = Integer.parseInt(commandParts[1].trim()) - 1;
+                Task deleteTask = listOfTasks.get(taskNumber);
+                listOfTasks.remove(taskNumber);
+                System.out.println(horizontalLine
+                        + "\r\n"
+                        + "Noted. Removing the following task:"
+                        + "\r\n"
+                        + deleteTask.toString()
+                        + "\r\n"
+                        + "Total number of tasks left in the list: "
+                        + listOfTasks.size()
+                        + "\r\n"
+                        + horizontalLine);
+                
             } else {
                 System.out.println("Command not recognised");
             }
