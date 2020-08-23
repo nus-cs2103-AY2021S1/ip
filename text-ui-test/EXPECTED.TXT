@@ -11,7 +11,7 @@ What can I do for you?
 ========================================================
 Yes boss, I have added this task to your list:
   [T][✗] read book
-Currently you have 1 tasks in your list.
+Currently you have 1 task in your list.
 ========================================================
 
 ================================================================================================
@@ -24,29 +24,112 @@ Erm, you are asking me to mark task 3 but there are only 1 tasks. Please enter t
 
 ========================================================
 Yes boss, I have added this task to your list:
-  [D][✗] return book  (by: June 6th)
+  [D][✗] return book  (by: Monday, 24 August 2020, 08:00PM)
 Currently you have 2 tasks in your list.
 ========================================================
 
 ========================================================
 Yes boss, I have added this task to your list:
-  [E][✗] project meeting (at: Aug 6th 2-4pm)
+  [E][✗] project meeting (at: Wednesday, 23 September 2020, 04:35AM)
 Currently you have 3 tasks in your list.
 ========================================================
 
-=====================================================================
-Sorry, I can't guess your date that well. Please enter a date.
-=====================================================================
+========================================================
+Yes boss, I have added this task to your list:
+  [E][✗] birthday party (at: Wednesday, 9 December 2020, 12:00AM)
+Currently you have 4 tasks in your list.
+========================================================
 
-=====================================================================
-Sorry, I can't guess your date that well. Please enter a date.
-=====================================================================
+==========================================================================================================================================
+Sorry, I don't recognize your date and time. Please enter a valid date and time in this format "YY/MM/DD HHmm" after "/by" or "/at".
+For example, "deadline return book /by 2020/08/23 1930".
+Or, "event birthday /at 2020/12/09 0000".
+==========================================================================================================================================
+
+==========================================================================================================================================
+Sorry, I don't recognize your date and time. Please enter a valid date and time in this format "YY/MM/DD HHmm" after "/by" or "/at".
+For example, "deadline return book /by 2020/08/23 1930".
+Or, "event birthday /at 2020/12/09 0000".
+==========================================================================================================================================
+
+==========================================================================================================================================
+Sorry, I don't recognize your date and time. Please enter a valid date and time in this format "YY/MM/DD HHmm" after "/by" or "/at".
+For example, "deadline return book /by 2020/08/23 1930".
+Or, "event birthday /at 2020/12/09 0000".
+==========================================================================================================================================
+
+==========================================================================================================================================
+Sorry, I don't recognize your date and time. Please enter a valid date and time in this format "YY/MM/DD HHmm" after "/by" or "/at".
+For example, "deadline return book /by 2020/08/23 1930".
+Or, "event birthday /at 2020/12/09 0000".
+==========================================================================================================================================
+
+==========================================================================================================================================
+Sorry, I don't recognize your date and time. Please enter a valid date and time in this format "YY/MM/DD HHmm" after "/by" or "/at".
+For example, "deadline return book /by 2020/08/23 1930".
+Or, "event birthday /at 2020/12/09 0000".
+==========================================================================================================================================
+
+==========================================================================================================================================
+Sorry, I don't recognize your date and time. Please enter a valid date and time in this format "YY/MM/DD HHmm" after "/by" or "/at".
+For example, "deadline return book /by 2020/08/23 1930".
+Or, "event birthday /at 2020/12/09 0000".
+==========================================================================================================================================
+
+==========================================================================================================================================
+Sorry, I don't recognize your date and time. Please enter a valid date and time in this format "YY/MM/DD HHmm" after "/by" or "/at".
+For example, "deadline return book /by 2020/08/23 1930".
+Or, "event birthday /at 2020/12/09 0000".
+==========================================================================================================================================
+
+==========================================================================================================================================
+Sorry, I don't recognize your date and time. Please enter a valid date and time in this format "YY/MM/DD HHmm" after "/by" or "/at".
+For example, "deadline return book /by 2020/08/23 1930".
+Or, "event birthday /at 2020/12/09 0000".
+==========================================================================================================================================
+
+==========================================================================================================================================
+Sorry, I don't recognize your date and time. Please enter a valid date and time in this format "YY/MM/DD HHmm" after "/by" or "/at".
+For example, "deadline return book /by 2020/08/23 1930".
+Or, "event birthday /at 2020/12/09 0000".
+==========================================================================================================================================
+
+==========================================================================================================================================
+Sorry, I don't recognize your date and time. Please enter a valid date and time in this format "YY/MM/DD HHmm" after "/by" or "/at".
+For example, "deadline return book /by 2020/08/23 1930".
+Or, "event birthday /at 2020/12/09 0000".
+==========================================================================================================================================
+
+==========================================================================================================================================
+Sorry, I don't recognize your date and time. Please enter a valid date and time in this format "YY/MM/DD HHmm" after "/by" or "/at".
+For example, "deadline return book /by 2020/08/23 1930".
+Or, "event birthday /at 2020/12/09 0000".
+==========================================================================================================================================
+
+==========================================================================================================================================
+Sorry, I don't recognize your date and time. Please enter a valid date and time in this format "YY/MM/DD HHmm" after "/by" or "/at".
+For example, "deadline return book /by 2020/08/23 1930".
+Or, "event birthday /at 2020/12/09 0000".
+==========================================================================================================================================
+
+==========================================================================================================================================
+Sorry, I don't recognize your date and time. Please enter a valid date and time in this format "YY/MM/DD HHmm" after "/by" or "/at".
+For example, "deadline return book /by 2020/08/23 1930".
+Or, "event birthday /at 2020/12/09 0000".
+==========================================================================================================================================
+
+==========================================================================================================================================
+Sorry, I don't recognize your date and time. Please enter a valid date and time in this format "YY/MM/DD HHmm" after "/by" or "/at".
+For example, "deadline return book /by 2020/08/23 1930".
+Or, "event birthday /at 2020/12/09 0000".
+==========================================================================================================================================
 
 ========================================================
-You have 3 unfinished tasks.
+You have 4 unfinished tasks.
 1. [T][✗] read book
-2. [D][✗] return book  (by: June 6th)
-3. [E][✗] project meeting (at: Aug 6th 2-4pm)
+2. [D][✗] return book  (by: Monday, 24 August 2020, 08:00PM)
+3. [E][✗] project meeting (at: Wednesday, 23 September 2020, 04:35AM)
+4. [E][✗] birthday party (at: Wednesday, 9 December 2020, 12:00AM)
 
 ========================================================
 
@@ -66,59 +149,73 @@ Sorry, I can't guess your task that well. Please enter a description for your ta
 
 ========================================================
 I have deleted the task.
-[D][✗] return book  (by: June 6th)
+[D][✗] return book  (by: Monday, 24 August 2020, 08:00PM)
+
+========================================================
+
+========================================================
+You have 2 unfinished tasks.
+1. [T][✓] read book
+2. [E][✗] project meeting (at: Wednesday, 23 September 2020, 04:35AM)
+3. [E][✗] birthday party (at: Wednesday, 9 December 2020, 12:00AM)
+
+========================================================
+
+===========================================================================================
+Sorry, I can't guess your task that well. Please enter a description for your task.
+===========================================================================================
+
+===========================================================================================
+Sorry, I can't guess your task that well. Please enter a description for your task.
+===========================================================================================
+
+========================================================
+I have marked the task as done, good job.
+[E][✓] project meeting (at: Wednesday, 23 September 2020, 04:35AM)
+
+========================================================
+
+========================================================================================
+Sorry but there is no valid task number. Please enter a valid task number.
+========================================================================================
+
+========================================================
+You have 1 unfinished tasks.
+1. [T][✓] read book
+2. [E][✓] project meeting (at: Wednesday, 23 September 2020, 04:35AM)
+3. [E][✗] birthday party (at: Wednesday, 9 December 2020, 12:00AM)
+
+========================================================
+
+========================================================
+I have deleted the task.
+[T][✓] read book
+
+========================================================
+
+==========================================================================================================
+Erm, you are asking me to delete task 5 but there are only 2 tasks. Please enter the correct number instead.
+==========================================================================================================
+
+========================================================================================
+Sorry but there is no valid task number. Please enter a valid task number.
+========================================================================================
+
+========================================================
+I have deleted the task.
+[E][✓] project meeting (at: Wednesday, 23 September 2020, 04:35AM)
 
 ========================================================
 
 ========================================================
 You have 1 unfinished tasks.
-1. [T][✓] read book
-2. [E][✗] project meeting (at: Aug 6th 2-4pm)
-
-========================================================
-
-===========================================================================================
-Sorry, I can't guess your task that well. Please enter a description for your task.
-===========================================================================================
-
-===========================================================================================
-Sorry, I can't guess your task that well. Please enter a description for your task.
-===========================================================================================
-
-========================================================
-I have marked the task as done, good job.
-[E][✓] project meeting (at: Aug 6th 2-4pm)
-
-========================================================
-
-========================================================================================
-Sorry but there is no valid task number. Please enter a valid task number.
-========================================================================================
-
-========================================================
-Wow congrats, you finished all your tasks.
-1. [T][✓] read book
-2. [E][✓] project meeting (at: Aug 6th 2-4pm)
+1. [E][✗] birthday party (at: Wednesday, 9 December 2020, 12:00AM)
 
 ========================================================
 
 ========================================================
 I have deleted the task.
-[T][✓] read book
-
-========================================================
-
-==========================================================================================================
-Erm, you are asking me to delete task 5 but there are only 1 tasks. Please enter the correct number instead.
-==========================================================================================================
-
-========================================================================================
-Sorry but there is no valid task number. Please enter a valid task number.
-========================================================================================
-
-========================================================
-I have deleted the task.
-[E][✓] project meeting (at: Aug 6th 2-4pm)
+[E][✗] birthday party (at: Wednesday, 9 December 2020, 12:00AM)
 
 ========================================================
 

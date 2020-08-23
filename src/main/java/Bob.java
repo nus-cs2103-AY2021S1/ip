@@ -49,13 +49,48 @@ public class Bob {
     }
 
     /**
+     * Formats date to be parsed.
+     * @param date Inputted date.
+     * @return Formatted date.
+     * @throws BobInvalidDateAndTimeException If the inputted date and time has invalid format.
+     */
+
+    private String formatDate(String date) throws BobInvalidDateAndTimeException {
+        String[] split = date.split("/");
+        // If length of date is not same as "YYYY/MM/DD" and components are not separated by "/"
+        if (date.length() != 10 || split.length != 3) {
+            throw new BobInvalidDateAndTimeException();
+        }
+        String formattedDate = split[0] + "-" + split[1] + "-" + split[2];
+        return formattedDate;
+    }
+
+    /**
+     * Formats time to be parsed.
+     * @param time Inputted time.
+     * @return Formatted time.
+     * @throws BobInvalidDateAndTimeException If the inputted date and time has invalid format.
+     */
+    private String formatTime(String time) throws BobInvalidDateAndTimeException {
+        // If length of time is not same as "HHMM"
+        if (time.length() != 4) {
+            throw new BobInvalidDateAndTimeException();
+        }
+
+        return time.substring(0,2) + ":" + time.substring(2);
+    }
+
+    /**
      * Returns message after adding task.
      * @param task Task that was added to list.
      * @return String message.
      */
     private String returnAddMessage(Task task) {
+        String taskWord = list.size() <= 1
+                ? "task"
+                : "tasks";
         return "Yes boss, I have added this task to your list:\n" + "  " + task + "\n"
-                + "Currently you have " + this.list.size() + " tasks in your list.";
+                + "Currently you have " + this.list.size() + " " + taskWord + " in your list.";
     }
 
     /**
@@ -72,23 +107,51 @@ public class Bob {
     /**
      * Adds a deadline to the list.
      * @param description Description of the deadline.
-     * @param timeAndDate Time and date of the deadline.
+     * @param dateAndTime Date and time of the deadline.
      * @return String message regarding adding of deadline.
+     * @throws BobInvalidDateAndTimeException If format of date and time is invalid.
      */
-    private String addDeadline(String description, String timeAndDate) {
-        Deadline deadline = new Deadline(description, timeAndDate);
-        this.list.add(deadline);
-        return returnAddMessage(deadline);
+    private String addDeadline(String description, String dateAndTime) throws BobInvalidDateAndTimeException {
+        // Checks if there is a space between "/by" and "date and time"
+            String temp = dateAndTime.startsWith(" ")
+                    ? dateAndTime.substring(1)
+                    : dateAndTime;
+            String[] dateAndTimeSplit = temp.split(" ");
+
+            // If format of date and time is invalid (in this case, not separated by one space)
+            if (dateAndTimeSplit.length != 2) {
+                throw new BobInvalidDateAndTimeException();
+            }
+
+            String date = formatDate(dateAndTimeSplit[0]);
+            String time = formatTime(dateAndTimeSplit[1]);
+            Deadline deadline = new Deadline(description, date, time);
+            this.list.add(deadline);
+            return returnAddMessage(deadline);
     }
 
     /**
      * Adds an event to the list.
      * @param description Description of the event.
-     * @param time Time of the event.
+     * @param dateAndTime Date and time of the event.
      * @return String message regarding adding of event.
+     * @throws BobInvalidDateAndTimeException If format of date and time is invalid.
      */
-    private String addEvent(String description, String time) {
-        Event event = new Event(description, time);
+    private String addEvent(String description, String dateAndTime) throws BobInvalidDateAndTimeException {
+        // Checks if there is a space between "/by" and "date and time"
+        String temp = dateAndTime.startsWith(" ")
+                ? dateAndTime.substring(1)
+                : dateAndTime;
+        String[] dateAndTimeSplit = temp.split(" ");
+
+        // If format of date and time is invalid (in this case, not separated by one space)
+        if (dateAndTimeSplit.length != 2) {
+            throw new BobInvalidDateAndTimeException();
+        }
+
+        String date = formatDate(dateAndTimeSplit[0]);
+        String time = formatTime(dateAndTimeSplit[1]);
+        Event event = new Event(description, date, time);
         this.list.add(event);
         return returnAddMessage(event);
     }
@@ -171,11 +234,11 @@ public class Bob {
      * @return Updated Bob with the next output.
      * @throws BobListIndexOutOfBoundsException If task number input > number of task in list or <= 0
      * for DONE and DELETE commands.
-     * @throws BobEmptyDateException If no date is provided for DEADLINE and EVENT commands.
+     * @throws BobInvalidDateAndTimeException If no/invalid date is provided for DEADLINE and EVENT commands.
      * @throws BobInvalidNumberException If task number input is not a valid integer for LIST and DELETE commands.
      */
     private Bob execute(Command command, String input) throws BobListIndexOutOfBoundsException,
-            BobEmptyDateException, BobInvalidNumberException {
+            BobInvalidDateAndTimeException, BobInvalidNumberException  {
         // for each case, treats return statement as break
         switch (command) {
 
@@ -186,24 +249,24 @@ public class Bob {
 
         // If the command given by user is deadline, handles empty date exception
         case DEADLINE:
-            String[] split1 = input.split("/");
-            if (split1.length == 1) {
-                throw new BobEmptyDateException();
+            String[] splitD = input.split("/by");
+            if (splitD.length == 1) {
+                throw new BobInvalidDateAndTimeException();
             }
-            String description1 = split1[0].substring(9);
-            String by1 = split1[1];
-            String outputDeadline = addDeadline(description1, by1);
+            String descriptionD = splitD[0].substring(9);
+            String dateAndTimeD = splitD[1];
+            String outputDeadline = addDeadline(descriptionD, dateAndTimeD);
             return new Bob(outputDeadline, this.list);
 
         // If the command given by user is event, handles empty date exception
         case EVENT:
-            String[] split2 = input.split("/");
-            if (split2.length == 1) {
-                throw new BobEmptyDateException();
+            String[] splitE = input.split("/at");
+            if (splitE.length == 1) {
+                throw new BobInvalidDateAndTimeException();
             }
-            String description2 = split2[0].substring(6);
-            String by2 = split2[1];
-            String outputEvent = addEvent(description2, by2);
+            String descriptionE = splitE[0].substring(6);
+            String dateAndTimeE = splitE[1];
+            String outputEvent = addEvent(descriptionE, dateAndTimeE);
             return new Bob(outputEvent, this.list);
 
         // If the command given by user is done, handles invalid number and number out of range exceptions
@@ -217,7 +280,6 @@ public class Bob {
             } catch (NumberFormatException e) {
                 throw new BobInvalidNumberException();
             }
-
         // If the command given by user is delete, handles invalid number and number out of range exceptions
         case DELETE:
             try {
@@ -270,11 +332,11 @@ public class Bob {
      * @throws BobInvalidCommandException If user input is not recognised.
      * @throws BobEmptyTaskException If no task is specified after todo, deadline or event.
      * @throws BobListIndexOutOfBoundsException If BobListIndexOutOfBoundsException is caught after execute.
-     * @throws BobEmptyDateException If BobEmptyDateException is caught after execute.
+     * @throws BobInvalidDateAndTimeException If BobInvalidDateAndTimeException is caught after execute.
      * @throws BobInvalidNumberException If BobInvalidNumberException is caught after execute.
      */
     public Bob nextCommand(String input) throws BobInvalidCommandException, BobEmptyTaskException,
-            BobListIndexOutOfBoundsException, BobEmptyDateException, BobInvalidNumberException {
+            BobListIndexOutOfBoundsException, BobInvalidDateAndTimeException, BobInvalidNumberException {
         try {
             if (input.equals("bye")) {
                 return execute(Command.EXIT);
@@ -303,7 +365,7 @@ public class Bob {
             } else {
                 throw new BobInvalidCommandException();
             }
-        } catch (BobListIndexOutOfBoundsException | BobEmptyDateException | BobInvalidNumberException e) {
+        } catch (BobListIndexOutOfBoundsException | BobInvalidDateAndTimeException | BobInvalidNumberException e) {
             throw e;
         }
 
@@ -333,7 +395,7 @@ public class Bob {
                 System.out.println(e.toString());
             } catch (BobListIndexOutOfBoundsException e) {
                 System.out.println(e.toString());
-            } catch (BobEmptyDateException e) {
+            } catch (BobInvalidDateAndTimeException e) {
                 System.out.println(e.toString());
             } catch (BobInvalidNumberException e) {
                 System.out.println(e.toString());

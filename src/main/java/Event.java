@@ -3,27 +3,28 @@
  * @author Lim Zi Yang
  */
 public class Event extends Task {
-    private final String time;
+    private final DateAndTime dateAndTime;
 
     /**
      * Creates an undone event.
      * @param description Description of event.
+     * @param date  Date of event.
      * @param time Time of event.
      */
-    Event (String description, String time) {
+    Event (String description, String date, String time) throws BobInvalidDateAndTimeException{
         super(description);
-        this.time = time;
+        this.dateAndTime = new DateAndTime(date, time);
     }
 
     /**
      * Creates an event.
      * @param description Description of event.
-     * @param time Time of event.
+     * @param dateAndTime DateAndTime of event.
      * @param isDone Whether the event is done.
      */
-    private Event (String description, String time, boolean isDone) {
+    private Event (String description, DateAndTime dateAndTime, boolean isDone) {
         super(description, isDone);
-        this.time = time;
+        this.dateAndTime = dateAndTime;
     }
 
     /**
@@ -32,7 +33,7 @@ public class Event extends Task {
      */
     @Override
     public Event markDone() {
-        return new Event(getDescription(), this.time, true);
+        return new Event(getDescription(), this.dateAndTime, true);
     }
 
     /**
@@ -41,6 +42,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E][" + getStatusIcon() + "] " + getDescription() + "(at: " + time + ")";
+        return "[E][" + getStatusIcon() + "] " + getDescription() + "(at: " + this.dateAndTime + ")";
     }
 }
