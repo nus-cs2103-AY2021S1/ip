@@ -12,7 +12,7 @@ public class Event extends Task {
     private Date date = null;
     private static final Pattern DATEMATCH =
             Pattern.compile("^(.*) (/at) (.*)$");
-    private static DateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm");
+    private static final DateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm");
 
     //Constructor for the event class
     public Event(final String description, final String at) {

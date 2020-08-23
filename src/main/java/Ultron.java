@@ -9,7 +9,7 @@ public class Ultron {
     private final TaskList taskList;
 
     //Create a UI class
-    private UI ui;
+    private final UI ui;
 
     //Get the pattern for the regex for parsing the command
     private final Pattern pattern = Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
