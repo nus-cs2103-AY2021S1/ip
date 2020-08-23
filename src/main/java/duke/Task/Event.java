@@ -5,11 +5,20 @@ import java.time.LocalDateTime;
 public class Event extends Task {
     private final LocalDateTime dateTime;
 
+    /**
+     * Constructs a Event object to represent an Event task
+     * @param task description of task
+     * @param dateTime LocalDateTime object that represents the event's date and time
+     */
     public Event(String task, LocalDateTime dateTime) {
         super(task);
         this.dateTime = dateTime;
     }
 
+    /**
+     * Returns a String in the format of "dd MM yyyy hh mm"
+     * @return String that represents the date and time of the Deadline Task
+     */
     public String getDateTime() {
         int dd = this.dateTime.getDayOfMonth();
         int mm = this.dateTime.getMonthValue();

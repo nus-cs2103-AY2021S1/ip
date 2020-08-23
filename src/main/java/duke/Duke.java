@@ -11,12 +11,19 @@ public class Duke {
     private final TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Constructs a Duke object with the filePath specified
+     * @param filePath specifies the directory of the csv file to read from/write to
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.tasks = new TaskList(this.storage.read());
         this.ui = new Ui();
     }
 
+    /**
+     * Runs Duke
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
