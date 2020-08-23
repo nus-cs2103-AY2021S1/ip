@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileManipulator {
-    protected final static String FOLDERPATH = System.getProperty("user.dir") + "/src/main/java/data";
-    protected final static String FILEPATH = System.getProperty("user.dir") + (System.getProperty("user.dir").endsWith("text-ui-test")
-        ? "/duke.txt"
-        : "/src/main/java/data/duke.txt");
+    protected final static String FOLDERPATH = java.nio.file.Paths.get(System.getProperty("user.dir"), "data").toString();
+    protected final static String FILEPATH = System.getProperty("user.dir").endsWith("text-ui-test")
+            ? java.nio.file.Paths.get(System.getProperty("user.dir"), "data", "duke.txt").toString()
+            : java.nio.file.Paths.get(System.getProperty("user.dir"), "data", "duke.txt").toString();
 
     public static void createFolder() {
         try {

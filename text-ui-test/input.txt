@@ -3,8 +3,12 @@ todo work
 todowork
 deadline return book /by Sunday
 deadline return book /byasdasd Sunday
+deadline return money /by 2/12/2019 1800
+deadline return money /by 1-1-2019 1800
 event project meeting /at Mon 2-4pm
 event project meeting /asdasd Mon 2-4pm
+event friend meeting /at 13/12/2019 1800
+event friend meeting /at 14-01-2019 1800
 list
 done 2
 list

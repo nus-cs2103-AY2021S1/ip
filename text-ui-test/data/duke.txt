@@ -1,0 +1,6 @@
+[D][Y] return book (by: Sunday)
+[D][N] return money (by: Monday, December 02, 2019 06:00 PM)
+[D][N] return money (by: Tuesday, January 01, 2019 06:00 PM)
+[E][N] project meeting (at: Mon 2-4pm)
+[E][N] friend meeting (at: Friday, December 13, 2019 06:00 PM)
+[E][N] friend meeting (at: Monday, January 14, 2019 06:00 PM)

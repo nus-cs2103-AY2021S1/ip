@@ -9,7 +9,7 @@ REM delete output from previous run
 del ACTUAL.TXT
 
 REM reset duke.txt for every run so that we will not carry forward the previous test state
-break > duke.txt
+break > data/duke.txt
 
 REM compile the code into the bin folder
 dir /s /B ..\src\main\java\*.java > sources.txt
