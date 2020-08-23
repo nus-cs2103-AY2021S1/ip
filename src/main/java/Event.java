@@ -10,7 +10,6 @@ public class Event extends Task{
 
     public Event(String description, boolean isDone, String time) {
         super(description, isDone);
-        System.out.println(LocalDate.parse(time));
         this.time = LocalDate.parse(time);
     }
 
