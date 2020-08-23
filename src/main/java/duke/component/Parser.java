@@ -106,9 +106,9 @@ public class Parser {
             return new ByeCommand(input);
         } else if (input.equals("list")) {
             return new ListCommand(input);
-        } else if (input.startsWith("delete ")) {
+        } else if (input.startsWith("delete")) {
             return new DeleteCommand(input);
-        } else if (input.startsWith("done ")) {
+        } else if (input.startsWith("done")) {
             return new DoneCommand(input);
         } else if (input.startsWith("happen ")) {
             return new HappenCommand(input);

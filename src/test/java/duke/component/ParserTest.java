@@ -323,6 +323,7 @@ public class ParserTest {
         assertEquals(new DeleteCommand("delete -3"), Parser.parse("delete -3"));
         assertEquals(new DeleteCommand("delete "), Parser.parse("delete "));
         assertEquals(new DeleteCommand("delete //"), Parser.parse("delete //"));
+        assertEquals(new DeleteCommand("delete"), Parser.parse("delete"));
     }
 
     @Test
@@ -332,11 +333,24 @@ public class ParserTest {
         assertEquals(new DoneCommand("done -3"), Parser.parse("done -3"));
         assertEquals(new DoneCommand("done "), Parser.parse("done "));
         assertEquals(new DoneCommand("done //"), Parser.parse("done //"));
+        assertEquals(new DoneCommand("done"), Parser.parse("done"));
     }
 
     @Test
     public void parse_happenCommand_happenCommand() {
         assertEquals(new HappenCommand("happen on 2020-08-31"), Parser.parse("happen on 2020-08-31"));
         assertEquals(new HappenCommand("happen "), Parser.parse("happen "));
+    }
+
+    @Test
+    public void parse_taskCommand_addCommand() {
+        assertEquals(new AddCommand("todo homework"), Parser.parse("todo homework"));
+        assertEquals(new AddCommand("event anything"), Parser.parse("event anything"));
+    }
+
+    @Test
+    public void parse_unrecognizedCommand_addCommand() {
+        assertEquals(new AddCommand("bash"), Parser.parse("bash"));
+        assertEquals(new AddCommand("happen"), Parser.parse("happen"));
     }
 }
