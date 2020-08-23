@@ -12,7 +12,7 @@ public class Event extends Task {
     }
 
     public Event(String description, LocalDate date, boolean isDone) {
-        super(description, isDone, TaskType.TODO);
+        super(description, isDone, TaskType.EVENT);
         this.date = date;
     }
     
