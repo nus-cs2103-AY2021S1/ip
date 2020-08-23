@@ -1,7 +1,8 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class TaskList {
+public class TaskList implements Serializable {
     private final List<Task> itemList = new ArrayList<>();
 
     Task addItem(String item) throws DukeException {
