@@ -29,6 +29,10 @@ public class Task {
         return this.desciption.contains(keyword);
     }
 
+    public boolean getStatus() {
+        return this.isDone;
+    }
+
     /**
      * Returns a string to be stored in data file.
      * @return Formatted string to be used in data file.

@@ -17,5 +17,6 @@ public interface Command {
      * @param storage Manager of the file I/O.
      */
     void excute(TaskList tasks, Ui ui, Storage storage);
+
     boolean isExit();
 }
