@@ -1,0 +1,4 @@
+D | 0 | return book | June 6th
+T | 0 | borrow book
+E | 1 | project meeting | Mon 2-4pm
+T | 0 | go for run
