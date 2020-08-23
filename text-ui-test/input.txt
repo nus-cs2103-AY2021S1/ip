@@ -1,16 +1,25 @@
 test
 list
+todo
+todo that
 deadline
-deadline /by Aug 20th 2359
+deadline /by 2021-08-23 0000
 deadline cs2103 ip
-deadline cs2103 ip /by Aug 20th 2359
+deadline cs2103 ip /by august 23
+deadline cs2103 ip /by 2019-08-23 0000
+deadline cs2103 ip /by 2021-08-23 0000
 event
-event /at always
+event /at 2021-08-23 0001
 event rest
-event rest /at always
+event rest /at august 23
+event rest /at 2019-08-23 0001
+event rest /at 2021-08-23 0001
+due in 1 hours
+due in 366 days
 list
 done 2
 list
+delete 3
 delete 2
 delete 2
 list
