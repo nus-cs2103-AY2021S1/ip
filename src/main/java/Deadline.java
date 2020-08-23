@@ -1,25 +1,39 @@
-public class Deadline extends Task {
-    String datetimeDue;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    public Deadline(String content, String datetimeDue, boolean isComplete) throws DukeException {
+public class Deadline extends Task {
+    LocalDateTime datetimeDue;
+    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    public Deadline(String content, String datetimeDueString, boolean isComplete) throws DukeException {
         super(content, isComplete);
-        if (content.replace(" ", "").equals("")) {
-            throw new DukeException("Contents of a task cannot be empty.");
+        if (datetimeDueString.replace(" ", "").equals("")) {
+            throw new DukeException("Event datetime cannot be empty.");
         }
-        this.datetimeDue = datetimeDue;
+        try {
+            this.datetimeDue = LocalDateTime.parse(datetimeDueString, formatter);
+        } catch (DateTimeParseException exception) {
+            throw new DukeException("Invalid datetime specified (Needs to be yyyy-MM-dd HH:mm).");
+        }
     }
 
-    public Deadline(String content, String datetimeDue) throws DukeException {
+
+    public Deadline(String content, String datetimeDueString) throws DukeException {
         super(content);
-        if (content.replace(" ", "").equals("")) {
-            throw new DukeException("Contents of a task cannot be empty.");
+        if (datetimeDueString.replace(" ", "").equals("")) {
+            throw new DukeException("Event datetime cannot be empty.");
         }
-        this.datetimeDue = datetimeDue;
+        try {
+            this.datetimeDue = LocalDateTime.parse(datetimeDueString, formatter);
+        } catch (DateTimeParseException exception) {
+            throw new DukeException("Invalid datetime specified (Needs to be yyyy-MM-dd HH:mm).");
+        }
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), datetimeDue);
+        return String.format("[D]%s (by: %s)", super.toString(), datetimeDue.format(formatter));
     }
 
     @Override
