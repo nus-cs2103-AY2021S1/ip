@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+
 public class TaskList {
 
     private final List<Task> list = new ArrayList<>();
@@ -37,8 +41,10 @@ public class TaskList {
                 list.add(task);
             } else if (taskType == 'D') {
                 int index = taskString.indexOf(" (by: ");
-                String time = taskString.substring(index + 6, taskString.length() - 1);
-                Deadline task = new Deadline("event " + taskString.substring(9, index) + " /by " + time);
+                String date = taskString.substring(index + 6, taskString.length() - 1);
+                LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("d MMM yyyy"));
+                date = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                Deadline task = new Deadline("deadline " + taskString.substring(9, index) + " /by " + date);
                 if (isDone) {
                     task.markDone();
                 }
@@ -57,7 +63,7 @@ public class TaskList {
     protected void addTask(Task task) throws IOException {
         list.add(task);
         updateFile();
-        System.out.println("added: " + task + "\n");
+        System.out.println("Added: " + task + "\n");
     }
 
     protected void markTaskDone(String command) throws DukeException {
