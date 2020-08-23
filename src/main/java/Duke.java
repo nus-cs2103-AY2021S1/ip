@@ -1,11 +1,19 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Represents the main Duke software.
+ */
 public class Duke {
     private DukeStorage storage;
     private Ui ui;
     private TaskList taskList;
 
+    /**
+     * Constructor for the Duke software.
+     * Loads the tasklist with the file content.
+     * @param filePath savepath of file.
+     */
     public Duke(String filePath) {
         storage = new DukeStorage(filePath);
         ui = new Ui();
@@ -20,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main driver code for running main.
+     */
     public void run() {
         ui.greet();
         boolean isCompleted = false;
@@ -37,6 +48,11 @@ public class Duke {
         ui.getScanner().close();
     }
 
+    /**
+     * Helper method to save the data in the file upon every Command.
+     * @param taskList tasklist to store tasks.
+     * @param storage storage of tasks backend.
+     */
     public void saveData(TaskList taskList, DukeStorage storage) {
         try {
             storage.saveStorage(taskList.getTasks());

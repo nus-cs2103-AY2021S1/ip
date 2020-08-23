@@ -1,5 +1,13 @@
+/**
+ * Represents the system used to parse user commands.
+ */
 public class Parser {
-
+    /**
+     * Returns a specific Command to tackle and parse user input.
+     * @param input user's command.
+     * @return Specific Command.
+     * @throws DukeException If an invalid command is provided.
+     */
     // main driver function for duke to tackle and parse commands
     public static Command parse(String input) throws DukeException {
         String[] splittedWords = input.split("\\s", 2); // splits string based on whitespace

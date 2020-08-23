@@ -1,5 +1,13 @@
+/**
+ * Represents the interpreter used to encode and decode tasks for the storage.
+ */
 public class DukeInterpreter {
 
+    /**
+     * Encodes the task and returns a string to be stored in the duke.txt.
+     * @param task task to be encoded.
+     * @return String representation for storage.
+     */
     public static String encode(Task task) {
         String taskString = task.toString();
         char type = taskString.charAt(1);
@@ -24,6 +32,12 @@ public class DukeInterpreter {
             (extra.equals("") ? "" : " | " + extra);
     }
 
+    /**
+     * Decodes the string representation and returns the Task to be added to tasklist.
+     * @param code string representation of task.
+     * @return Task to be added.
+     * @throws DukeException If invalid date/time is provided.
+     */
     public static Task decode(String code) throws DukeException {
         char taskType = code.charAt(0);
         String[] splittedWords = code.split("\\|");

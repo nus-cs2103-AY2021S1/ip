@@ -1,7 +1,14 @@
+/**
+ * Represents a done/ticked command.
+ */
 public class DoneCommand extends Command {
 
     private String afterCommand;
 
+    /**
+     * Constructor for the done command.
+     * @param afterCommand task id to be ticked off
+     */
     public DoneCommand(String afterCommand) {
         this.afterCommand = afterCommand;
     }
