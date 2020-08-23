@@ -3,32 +3,17 @@ import java.util.Scanner;
 import java.io.File;
 
 public class Duke {
-    public static void main(String[] args) {
-        try {
-            init();
-        } catch (IOException e) {
-            System.out.println("Oops! An error has occurred when reading data from local disk.");
-        }
+    private TaskList taskList;
+    private final Ui ui;
+
+    Duke() {
+        taskList = new TaskList();
+        ui = new Ui();
     }
 
-    static void init() throws IOException {
+    void run() throws DukeException {
         final String FILE_PATH = "data/data.txt";
-        String logo = "         ,---._                                                            \n" +
-                        "       .-- -.' \\    ,---,       ,-.----.                 ,---,  .--.--.    \n" +
-                        "       |    |   :  '  .' \\      \\    /  \\        ,---.,`--.' | /  /    '.  \n" +
-                        "       :    ;   | /  ;    '.    ;   :    \\      /__./||   :  :|  :  /`. /  \n" +
-                        "       :        |:  :       \\   |   | .\\ : ,---.;  ; |:   |  ';  |  |--`   \n" +
-                        "       |    :   ::  |   /\\   \\  .   : |: |/___/ \\  | ||   :  ||  :  ;_     \n" +
-                        "       :         |  :  ' ;.   : |   |  \\ :\\   ;  \\ ' |'   '  ; \\  \\    `.  \n" +
-                        "       |    ;   ||  |  ;/  \\   \\|   : .  / \\   \\  \\: ||   |  |  `----.   \\ \n" +
-                        "   ___ l         '  :  | \\  \\ ,';   | |  \\  ;   \\  ' .'   :  ;  __ \\  \\  | \n" +
-                        " /    /\\    J   :|  |  '  '--'  |   | ;\\  \\  \\   \\   '|   |  ' /  /`--'  / \n" +
-                        "/  ../  `..-    ,|  :  :        :   ' | \\.'   \\   `  ;'   :  |'--'.     /  \n" +
-                        "\\    \\         ; |  | ,'        :   : :-'      :   \\ |;   |.'   `--'---'   \n" +
-                        " \\    \\      ,'  `--''          |   |.'         '---\" '---'                \n" +
-                        "  \"---....--'                   `---'                                      \n";
-        System.out.println("\tHello boss! This is\n" + logo);
-        Tasks tasks = new Tasks();
+        ui.displayLogo();
         try {
             File f = new File(FILE_PATH);
             if (!f.exists()) {
@@ -36,35 +21,39 @@ public class Duke {
                     System.out.println("\tStorage space for you tasks has been initialized successfully.");
                 }
             } else {
-                tasks.processStorage(f, new Scanner(f));
+                taskList.processStorage(f, new Scanner(f));
             }
         } catch (IOException e) {
             System.out.println("Oops! Something went wrong when loading your tasks from storage.");
             e.printStackTrace();
-            return;
+            throw new DukeException(e.getMessage());
         }
-        System.out.println("\tWhat can I do for you?");
-        System.out.println("\t___________________________________________________________________________\n");
+        ui.greet();
 
         Scanner s = new Scanner(System.in);
         String input = s.nextLine();
         while (!input.equals("bye")) {
             try {
-                tasks.processInput(input);
+                taskList.processInput(input);
             } catch (DukeException e) {
-                System.out.println("\t___________________________________________________________________________");
-                System.out.println("\t " + e.getMessage());
-                System.out.println("\t___________________________________________________________________________\n");
+                ui.echo(e.getMessage());
             }
             input = s.nextLine();
         }
-        tasks.writeData();
-        bye();
+        try {
+            taskList.writeData();
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
+        ui.bye();
     }
 
-    static void bye() {
-        System.out.println("\t___________________________________________________________________________");
-        System.out.println("\t Bye. Hope to see you again soon");
-        System.out.println("\t___________________________________________________________________________\n");
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        try {
+            duke.run();
+        } catch (DukeException e) {
+            System.out.println("Oops! An unexpected error has occurred.");
+        }
     }
 }

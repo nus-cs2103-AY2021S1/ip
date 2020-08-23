@@ -53,10 +53,10 @@ enum TaskType {
     }
 }
 
-public class Tasks {
+public class TaskList {
     private List<Task> list;
 
-    Tasks() {
+    TaskList() {
         this.list = new ArrayList<>();
     }
 
