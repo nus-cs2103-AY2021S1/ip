@@ -55,36 +55,36 @@ public class Storage {
             String desc = tokens[2];
 
             switch (taskType) {
-                case "T":
-                    tasks.add(new Todo(desc, isDone));
+            case "T":
+                tasks.add(new Todo(desc, isDone));
 
-                    break;
-                case "D":
-                    if (tokens.length < 4) {
-                        throw new CorruptedStorageException("Deadline task is missing due date!");
-                    }
-                    String by = tokens[3];
+                break;
+            case "D":
+                if (tokens.length < 4) {
+                    throw new CorruptedStorageException("Deadline task is missing due date!");
+                }
+                String by = tokens[3];
 
-                    try {
-                        tasks.add(new Deadline(desc, by, isDone));
-                    } catch (InvalidDateInputException e) {
-                        throw new CorruptedStorageException("Date was not stored properly!");
-                    }
+                try {
+                    tasks.add(new Deadline(desc, by, isDone));
+                } catch (InvalidDateInputException e) {
+                    throw new CorruptedStorageException("Date was not stored properly!");
+                }
 
-                    break;
-                case "E":
-                    if (tokens.length < 4) {
-                        throw new CorruptedStorageException("Event task is missing date!");
-                    }
-                    String at = tokens[3];
+                break;
+            case "E":
+                if (tokens.length < 4) {
+                    throw new CorruptedStorageException("Event task is missing date!");
+                }
+                String at = tokens[3];
 
-                    try {
-                        tasks.add(new Event(desc, at, isDone));
-                    } catch (InvalidDateInputException e) {
-                        throw new CorruptedStorageException("Date was not stored properly!");
-                    }
+                try {
+                    tasks.add(new Event(desc, at, isDone));
+                } catch (InvalidDateInputException e) {
+                    throw new CorruptedStorageException("Date was not stored properly!");
+                }
 
-                    break;
+                break;
             }
         }
 

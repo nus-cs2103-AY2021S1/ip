@@ -22,7 +22,8 @@ public class DeadlineTest {
             new Deadline("desc", "30-10-2020");
             fail();
         } catch (InvalidDateInputException e) {
-            assertEquals("☹ OOPS!!! 30-10-2020 is not a recognised date format. Please key in " + "dates in the format yyyy-MM-dd. For example, 2007-12-03.", e.getMessage());
+            assertEquals("☹ OOPS!!! 30-10-2020 is not a recognised date format. Please key in " +
+                    "dates in the format yyyy-MM-dd. For example, 2007-12-03.", e.getMessage());
         }
     }
 
