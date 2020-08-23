@@ -41,7 +41,9 @@ public class Task {
         return isDone ? 1 : 0;
     }
 
-
+    public String getDescription() {
+        return description;
+    }
 
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

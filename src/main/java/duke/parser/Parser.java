@@ -15,6 +15,7 @@ public class Parser {
     private static final String KEYWORD_EVENT = "event";
     private static final String KEYWORD_DEADLINE = "deadline";
     private static final String KEYWORD_DELETE = "delete";
+    private static final String KEYWORD_FIND = "find";
 
     private static boolean isNumber(String str) {
         try {
@@ -55,7 +56,9 @@ public class Parser {
     private static boolean isDelete(String type) {
         return type.equals(KEYWORD_DELETE);
     }
-
+    
+    private static boolean isFind(String type ){ return type.equals(KEYWORD_FIND); }
+    
     public static LocalDateTime formatDateTime(String s) throws InvalidFormatDateException {
         String[] dateFormat = s.split(" ",2);
         String[] date = dateFormat[0].split("-");
@@ -86,7 +89,7 @@ public class Parser {
     }
     
     public static Command parse(String s) throws UnknownCommandException, InvalidFormatByeException,
-            InvalidFormatListException, InvalidFormatDoneException, EmptyTextException, InvalidFormatDeleteException {
+            InvalidFormatListException, InvalidFormatDoneException, EmptyTextException, InvalidFormatDeleteException, InvalidFormatFindException {
         String[] inputArr = s.trim().split(" ", 2);
         inputArr[0] = inputArr[0].toLowerCase();
         if (isEnd(inputArr[0])) {
@@ -117,6 +120,15 @@ public class Parser {
                 throw new InvalidFormatDeleteException();
             }
             return new DeleteCommand(inputArr);
+        } else if (isFind(inputArr[0])) {
+            if (inputArr.length == 1) {
+                throw new InvalidFormatFindException();
+            }
+            String[] inputArr2 = inputArr[1].split(" ");
+            if (inputArr2.length > 1) {
+                throw new InvalidFormatFindException();
+            }
+            return new FindCommand(inputArr);
         } else {
             throw new UnknownCommandException();
         }
