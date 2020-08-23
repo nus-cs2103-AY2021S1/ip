@@ -30,6 +30,8 @@ public class Parser {
             } else if (str.startsWith("todo") | str.startsWith("event") | str.startsWith("deadline")) {
                 tasks.addTask(str);
                 storage.save(tasks);
+            } else if (str.startsWith("find")) {
+                tasks.find(str);
             } else {
                 throw new InvalidCommandException();
             }

@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exceptions.EmptyCommandException;
+import duke.exceptions.EmptyFindException;
 import duke.exceptions.InvalidCommandException;
 import duke.exceptions.MissingTimeException;
 import duke.exceptions.TaskCompletionException;
@@ -93,6 +94,36 @@ public class TaskList {
                 break;
             default:
                 throw new InvalidCommandException();
+            }
+        } else {
+            throw new InvalidCommandException();
+        }
+    }
+
+    public void find (String str) throws EmptyFindException, InvalidCommandException {
+        String s = str.trim();
+        if (s.equals("find")) {
+            throw new EmptyFindException();
+        } else if (s.startsWith("find ")) {
+            String keyword = s.substring(5);
+            int i = 1;
+            boolean flag = false;
+            for (Task t: tasks) {
+                if (t.getDescription().contains(keyword)) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag) {
+                System.out.println("Here are the matching tasks in your list:");
+                for (Task t : tasks) {
+                    if (t.getDescription().contains(keyword)) {
+                        System.out.println(i + "." + t);
+                        i++;
+                    }
+                }
+            } else {
+                System.out.println("No matching task has been found");
             }
         } else {
             throw new InvalidCommandException();
