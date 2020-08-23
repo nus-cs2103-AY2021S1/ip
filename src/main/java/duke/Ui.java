@@ -9,8 +9,7 @@ public class Ui {
         System.out.println("What can i do for you?");
     }
 
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
+    public String readCommand(Scanner sc) {
         return sc.nextLine();
     }
 

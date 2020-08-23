@@ -3,6 +3,8 @@ package duke;
 import duke.Command.Command;
 import duke.Exception.DukeException;
 
+import java.util.Scanner;
+
 public class Duke {
 
     private final Storage storage;
@@ -16,11 +18,12 @@ public class Duke {
     }
 
     public void run() {
+        Scanner sc = new Scanner(System.in);
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
-                String input = ui.readCommand();
+                String input = ui.readCommand(sc);
                 ui.showLine();
                 Command c = Parser.parse(input);
                 c.execute(tasks, ui, storage);
