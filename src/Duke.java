@@ -1,4 +1,7 @@
+import java.time.DateTimeException;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class Duke {
 
@@ -29,15 +32,23 @@ public class Duke {
                 throw new NoDescriptionException("    ☹ OOPS!!! The description of a deadline cannot be empty.");
             } else {
                 String info = splitString[1];
-                String[] information = info.split("/by ");
+                String[] information = info.split(" /by ");
                 if (information.length == 1) {
                     throw new InvalidTaskException("    ☹ OOPS!!! Please specify the deadline time");
                 } else {
                     String description = information[0];
                     String by = information[1];
-                    Deadlines newDeadline = new Deadlines(description, by);
 
-                    newList.addTask(newDeadline);
+                    try {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                        LocalDateTime dateTime = LocalDateTime.parse(by, formatter);
+
+                        Deadlines newDeadline = new Deadlines(description, dateTime);
+
+                        newList.addTask(newDeadline);
+                    } catch (DateTimeException ex) {
+                        System.out.println("    Please specify the date and time in this format dd/MM/yyy HH:mm");
+                    }
                 }
             }
 
@@ -46,16 +57,23 @@ public class Duke {
                 throw new NoDescriptionException("    ☹ OOPS!!! The description of an event cannot be empty.");
             } else {
                 String info = splitString[1];
-                String[] information = info.split("/at ");
+                String[] information = info.split(" /at ");
 
                 if (information.length == 1) {
                     throw new InvalidTaskException("    ☹ OOPS!!! Please state the event time");
                 } else {
                     String description = information[0];
                     String at = information[1];
-                    Events newEvent = new Events(description, at);
+                    try {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                        LocalDateTime dateTime = LocalDateTime.parse(at, formatter);
 
-                    newList.addTask(newEvent);
+                        Events newEvent = new Events(description, dateTime);
+
+                        newList.addTask(newEvent);
+                    } catch (DateTimeException ex) {
+                        System.out.println("    Please specify the date and time in this format dd/MM/yyy HH:mm");
+                    }
                 }
             }
 
