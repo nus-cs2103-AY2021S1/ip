@@ -32,6 +32,7 @@ public class TaskList {
         list.clear();
     }
 
+
     public Task delete(int entryDelete) {
         return list.remove(entryDelete);
     }
