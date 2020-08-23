@@ -13,7 +13,6 @@ public class Chatterbox {
     public Chatterbox() {
         Storage store = new Storage();
         tasks = new TaskList(store);
-
         tasks.loadTasks();
 
         scanner = new Scanner(System.in);
@@ -62,6 +61,8 @@ public class Chatterbox {
         } else if (command.equals("deadline") || command.equals("todo") || command.equals("event")) {
             Task t = Parser.parse(input);
             tasks.addTask(t);
+        } else {
+            throw new ChatterboxException("That's not a valid command.");
         }
     }
 

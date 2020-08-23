@@ -2,6 +2,7 @@ package chatterbox.task;
 
 import chatterbox.ChatterboxException;
 import chatterbox.Storage;
+import chatterbox.Ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,9 +37,8 @@ public class TaskList {
     }
 
     public void addTask(Task t) throws IOException {
-        System.out.println("Got it. I've added this task: \n"
-                + t + "\n"
-                + "Now you have " + tasks.size() + " tasks in the list");
+        tasks.add(t);
+        Ui.showAddTaskMessage(t, tasks.size());
         store.saveItems(tasks);
     }
 
@@ -47,7 +47,7 @@ public class TaskList {
 
         Task t = tasks.get(taskNo);
         t.setDone(true);
-        System.out.println("Nice! I've marked this task as done: \n" + t);
+        Ui.showMessage("Nice! I've marked this task as done: \n" + t);
         store.saveItems(tasks);
     }
 
@@ -55,9 +55,7 @@ public class TaskList {
         if (taskNo < 0 || taskNo >= tasks.size()) throw new ChatterboxException("Invalid task number.");
 
         Task t = tasks.remove(taskNo);
-        System.out.println("Noted! I've removed this task from your list: \n"
-                + t + "\n"
-                + " Now you have " + tasks.size() + " tasks in the list.");
+        Ui.showDeleteTaskMessage(t, tasks.size());
         store.saveItems(tasks);
     }
 }
