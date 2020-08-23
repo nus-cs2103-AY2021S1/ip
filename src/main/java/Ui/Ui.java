@@ -60,6 +60,12 @@ public class Ui {
                     String info = splitOrder[1];
                     output = printDesign(tasks.addTask(command, info));
                     break;
+                case FIND:
+                    Parser.input(command, splitOrder.length, false);
+                    Parser.info(command, splitOrder[1], false);
+                    String keyword = splitOrder[1];
+                    output = printDesign(tasks.searchTask(keyword));
+                    break;
                 default:
                     String errorCommand = "Hey!!! I'm sorry, but MUG don't know what that means :-()";
                     output = printDesign(errorCommand);
