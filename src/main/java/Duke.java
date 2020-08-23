@@ -237,7 +237,6 @@ public class Duke {
             throw new InvalidFunctionException(err);
         }
         this.saveFile();
-        System.out.println("  You have " + this.tasks.size() + " tasks in your list now.");
     }
 
     public String[] retrieveTaskInfo(String message) throws InvalidTaskException {
@@ -263,6 +262,7 @@ public class Duke {
                         "Type '/commands' to view the correct command for task creation! ";
                 throw new InvalidTaskException(err);
             } else if (!task[1].contains(" /by ")) {
+                System.out.println(task[1].length());
                 String err = "Your deadline task does not have the correct format. The task cannot be created.\n" +
                         "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
@@ -326,7 +326,6 @@ public class Duke {
 
             while (sc.hasNextLine()) {
                 String[] taskData = sc.nextLine().split("\\|");
-                // DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
                 if (taskData[0].equals("T ")) {
                     Task toAdd = new Todo(taskData[2]);
                     if (taskData[1].equals(" 1 ")) {
