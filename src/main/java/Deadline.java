@@ -19,10 +19,6 @@ public class Deadline extends Task {
         this.due = due;
     }
 
-    public Deadline(String task, boolean isDone, String due) {
-        super(task, isDone);
-        this.due = due;
-    }
 
     @Override
     public String toString() {

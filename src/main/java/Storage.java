@@ -30,11 +30,7 @@ public class Storage {
     public static void addTask(String task) throws IOException {
         File data = new File(STORAGE_PATH);
         FileWriter writer = new FileWriter(data, true);
-<<<<<<< HEAD
-        writer.write(task);
-=======
         writer. write(task);
->>>>>>> branch-level-8
         writer.write('\n');
         writer.flush();
         writer.close();
@@ -83,54 +79,7 @@ public class Storage {
             }
         }
     }
-
-<<<<<<< HEAD
-        public static void completeTask(int taskNo, int size) {
-            try {
-                File data = new File(STORAGE_PATH);
-                FileReader fr = new FileReader(data);
-                BufferedReader br = new BufferedReader(fr);
-                ArrayList<String> tempArr = new ArrayList<>();
-                for (int i = 0; i < size; i++) {
-                    String task = br.readLine();
-                    if (i == taskNo) {
-                        String temp = task.replaceFirst("0", "1");
-                        task = temp;
-                    }
-                    tempArr.add(task);
-                }
-                Storage.clearTasks();
-                for (int i = 0; i < size; i++) {
-                    Storage.addTask(tempArr.get(i));
-                }
-            } catch (IOException ee) {
-                System.out.println(ee.getMessage());
-            }
-        }
-
-        public static void deleteTask(int index, int size) {
-            try {
-                File data = new File(STORAGE_PATH);
-                FileReader fr = new FileReader(data);
-                BufferedReader br = new BufferedReader(fr);
-                ArrayList<String> tempArr = new ArrayList<>();
-                for (int i = 0; i < size; i++) {
-                    String task = br.readLine();
-                    if (i != index) {
-                        tempArr.add(task);
-                    }
-                }
-                Storage.clearTasks();
-                for (int i = 0; i < size; i++) {
-                    Storage.addTask(tempArr.get(i));
-                }
-            } catch (IOException ee) {
-                System.out.println(ee.getMessage());
-            }
-        }
-
-}
-=======
+    
     public static void completeTask(int taskNo, int size) {
         try {
             File data = new File(STORAGE_PATH);
@@ -176,4 +125,3 @@ public class Storage {
     }
 
 }
->>>>>>> branch-level-8
