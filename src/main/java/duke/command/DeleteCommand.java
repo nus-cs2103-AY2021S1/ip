@@ -8,7 +8,7 @@ import main.java.duke.task.Task;
 
 public class DeleteCommand extends Command {
 
-    String[] commandDetails;
+    private String[] commandDetails;
 
     public DeleteCommand(String[] commandDetails) {
         this.commandDetails = commandDetails;

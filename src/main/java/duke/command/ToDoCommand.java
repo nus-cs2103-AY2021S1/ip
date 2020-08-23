@@ -7,7 +7,7 @@ import main.java.duke.task.ToDo;
 
 public class ToDoCommand extends Command {
 
-    String[] commandDetails;
+    private String[] commandDetails;
 
     public ToDoCommand(String[] commandDetails) {
         this.commandDetails = commandDetails;

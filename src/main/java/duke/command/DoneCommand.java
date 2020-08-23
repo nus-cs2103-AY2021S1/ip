@@ -7,7 +7,7 @@ import main.java.duke.exception.DukeTaskNotFoundException;
 
 public class DoneCommand extends Command {
 
-    String[] commandDetails;
+    private String[] commandDetails;
 
     public DoneCommand(String[] commandDetails) {
         this.commandDetails = commandDetails;

@@ -7,7 +7,7 @@ import main.java.duke.task.Deadline;
 
 public class DeadlineCommand extends Command {
 
-    String[] commandDetails;
+    private String[] commandDetails;
 
     public DeadlineCommand(String[] commandDetails) {
         this.commandDetails = commandDetails;

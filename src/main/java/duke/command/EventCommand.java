@@ -7,7 +7,7 @@ import main.java.duke.task.Event;
 
 public class EventCommand extends Command {
 
-    String[] commandDetails;
+    private String[] commandDetails;
 
     public EventCommand(String[] commandDetails) {
         this.commandDetails = commandDetails;

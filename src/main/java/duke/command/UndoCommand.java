@@ -7,7 +7,7 @@ import main.java.duke.exception.DukeTaskNotFoundException;
 
 public class UndoCommand extends Command {
 
-    String[] commandDetails;
+    private String[] commandDetails;
 
     public UndoCommand(String[] commandDetails) {
         this.commandDetails = commandDetails;
