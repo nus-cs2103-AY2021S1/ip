@@ -1,20 +1,23 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
 
-    String time;
+    LocalDate time;
 
-    Deadline(String name, String time) {
+    Deadline(String name, LocalDate time) {
         super(name);
         this.time = time;
     }
 
-    Deadline(String name, String time, String completed) {
+    Deadline(String name, LocalDate time, String completed) {
         super(name, completed);
         this.time = time;
     }
 
     @Override
     public String toString() {
-        return String.format("[D] %s (by: %s)", super.toString(), time);
+        return String.format("[D] %s (by: %s)", super.toString(), time.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
     @Override
@@ -23,7 +26,7 @@ public class Deadline extends Task{
         strings[0] = "[D]";
         strings[1] = completed ? "1" : "0";
         strings[2] = name;
-        strings[3] = time;
+        strings[3] = time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return strings;
     }
 }

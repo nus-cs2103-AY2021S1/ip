@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -101,7 +102,7 @@ public class Duke {
 				case EVENT:
 					try {
 						String[] evInput = parsedInput[1].split("/at ", 2);
-						Event event = new Event(evInput[0].trim(), evInput[1].trim());
+						Event event = new Event(evInput[0].trim(), LocalDate.parse(evInput[1]));
 						storage.add(event);
 						addTaskNotification(event);
 					} catch (ArrayIndexOutOfBoundsException e) {
@@ -111,7 +112,7 @@ public class Duke {
 				case DEADLINE:
 					try {
 						String[] dlInput = parsedInput[1].split("/by ", 2);
-						Deadline deadline = new Deadline(dlInput[0].trim(), dlInput[1].trim());
+						Deadline deadline = new Deadline(dlInput[0].trim(), LocalDate.parse(dlInput[1].trim()));
 						storage.add(deadline);
 						addTaskNotification(deadline);
 					} catch (ArrayIndexOutOfBoundsException e) {

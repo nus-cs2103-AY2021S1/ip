@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public final class Parser {
 	// utility class for reading lines into tasks
 	final static String regex = ",, ";
@@ -17,9 +19,9 @@ public final class Parser {
 		case "[T]":
 			return new Todo(values[2], values[1]);
 		case "[E]":
-			return new Event(values[2], values[3], values[1]);
+			return new Event(values[2], LocalDate.parse(values[3]), values[1]);
 		case "[D]":
-			return new Deadline(values[2], values[3], values[1]);
+			return new Deadline(values[2], LocalDate.parse(values[3]), values[1]);
 		default:
 			throw new DukeException(String.format("The line '%s' could not be parsed.", line));
 		}
