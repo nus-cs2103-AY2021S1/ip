@@ -35,9 +35,9 @@ public class Parser {
         if (hasInputs(command[0])) {
             switch (Input.valueOf(command[0].toUpperCase())) {
             case LIST:
-                return new ListCommand();
+                return parseList();
             case BYE:
-                return new ByeCommand();
+                return parseBye();
             case DONE:
                 return parseDone(command);
             case TODO:
@@ -59,6 +59,12 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Checks if string is inside enum Input.
+     *
+     * @param input User input.
+     * @return Boolean value.
+     */
     private static boolean hasInputs(String input) {
         for (Input i : Input.values()) {
             if (input.toUpperCase().equals(i.toString())) {
@@ -171,8 +177,31 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the case where the user input is "find".
+     * 
+     * @param keyword Keyword inputted by user.
+     * @return FindCommand.
+     */
     public static FindCommand parseFind(String keyword) {
         return new FindCommand(keyword);
     }
 
+    /**
+     * Handles the case where the user input is "list".
+     *
+     * @return ListCommand.
+     */
+    public static ListCommand parseList() {
+        return new ListCommand();
+    }
+
+    /**
+     * Handles the case where the user input is "bye".
+     *
+     * @return ByeCommand.
+     */
+    public static ByeCommand parseBye() {
+        return new ByeCommand();
+    }
 }

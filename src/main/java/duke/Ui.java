@@ -88,6 +88,11 @@ public class Ui {
         System.out.println("\n ******************************************************************** \n");
     }
 
+    /**
+     * Displays the list of matching task in the TaskList.
+     *
+     * @param taskList ArrayList of task.
+     */
     public void showMatchingTask(ArrayList<Task> tasks) {
         System.out.println(" Here are the matching tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {

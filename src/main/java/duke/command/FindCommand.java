@@ -8,14 +8,30 @@ import main.java.duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a command which finds a task.
+ */
 public class FindCommand extends Command {
 
     private String keyword;
 
+    /**
+     * Creates a new instance of a FindCommand.
+     *
+     * @param keyword Keyword to find tasks.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword.toLowerCase();
     }
 
+    /**
+     * Executes the operation to find matching tasks.
+     *
+     * @param tasks TaskList linked to the program.
+     * @param ui Ui linked to the program.
+     * @param storage Storage linked to the program.
+     * @throws DukeTaskNotFoundException If no matching tasks are found.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeTaskNotFoundException {
         ArrayList<Task> taskArrayList = new ArrayList<>();
@@ -31,6 +47,11 @@ public class FindCommand extends Command {
         }
     }
 
+    /**
+     * Returns a boolean that dictates if the program is running.
+     *
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return false;
