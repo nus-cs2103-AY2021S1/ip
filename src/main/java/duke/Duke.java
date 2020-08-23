@@ -109,7 +109,7 @@ public class Duke {
             Ui.printDialog("This is the first time you use Duke!");
         } else {
             try {
-                for (String task : savedTasks) {
+                for(String task : savedTasks) {
                     processedCommand(task, true);
                 }
             } catch (DukeException e) {
