@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 public class Parser {
 
@@ -85,7 +86,7 @@ public class Parser {
                 try {
                     time = LocalDateTime.parse(components[1].trim(), format);
                 } catch (DateTimeParseException e) {
-                    throw new DukeException("\tDate should be in format dd/mm/yy hh:mm");
+                    throw new DukeException("\tDate should be in format dd/mm/yyyy hh:mm");
                 }
                 newTask = new Deadline(desc, time);
             } else if (input.startsWith("event")) {
@@ -100,7 +101,7 @@ public class Parser {
                 try {
                     time = LocalDateTime.parse(components[1].trim(), format);
                 } catch (DateTimeParseException e) {
-                    throw new DukeException("\tDate should be in format dd/mm/yy hh:mm");
+                    throw new DukeException("\tDate should be in format dd/mm/yyyy hh:mm");
                 }
                 newTask = new Event(desc, time);
             } else {
