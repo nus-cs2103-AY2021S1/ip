@@ -40,6 +40,7 @@ public class TaskList {
                     String date = Parser.parseDateTime(ls[1]);
                     if (date.contains(ui.getBorder())) {
                         System.out.println(date);
+                        return;
                     } else {
                         toAdd = new Deadline(ls[0], date);
                         storage.add(toAdd);
@@ -55,6 +56,7 @@ public class TaskList {
                     String date = Parser.parseDateTime(ls[1]);
                     if (date.contains(ui.getBorder())) {
                         System.out.println(date);
+                        return;
                     } else {
                         toAdd = new Event(ls[0], date);
                         storage.add(toAdd);
