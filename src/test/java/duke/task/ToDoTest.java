@@ -2,6 +2,8 @@ package duke.task;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -39,5 +41,51 @@ public class ToDoTest {
         } catch (Exception e) {
             fail();
         }
+    }
+
+    @Test
+    public void happen_today_alwaysFalse() {
+        ToDo t = new ToDo("return books");
+        LocalDate today = LocalDate.now();
+        assertEquals(false, t.happenOnDate(today));
+        assertEquals(false, t.happenToday());
+        assertEquals(false, t.happenBeforeDate(today));
+        assertEquals(false, t.happenBeforeToday());
+        assertEquals(false, t.happenAfterDate(today));
+        assertEquals(false, t.happenAfterToday());
+        assertEquals(false, t.happenBetween(today, today));
+        assertEquals(false, t.happenIn(8));
+    }
+
+    @Test
+    public void happen_beforeToday_alwaysFalse() {
+        ToDo t = new ToDo("return books");
+        LocalDate d1 = LocalDate.parse("2019-08-10");
+        LocalDate d2 = LocalDate.parse("2010-09-01");
+
+        assertEquals(false, t.happenOnDate(d1));
+        assertEquals(false, t.happenToday());
+        assertEquals(false, t.happenBeforeDate(d1));
+        assertEquals(false, t.happenBeforeToday());
+        assertEquals(false, t.happenAfterDate(d1));
+        assertEquals(false, t.happenAfterToday());
+        assertEquals(false, t.happenBetween(d1, d2));
+        assertEquals(false, t.happenIn(8));
+    }
+
+    @Test
+    public void happen_afterToday_alwaysFalse() {
+        ToDo t = new ToDo("return books");
+        LocalDate d1 = LocalDate.parse("2029-08-10");
+        LocalDate d2 = LocalDate.parse("2030-09-01");
+
+        assertEquals(false, t.happenOnDate(d1));
+        assertEquals(false, t.happenToday());
+        assertEquals(false, t.happenBeforeDate(d1));
+        assertEquals(false, t.happenBeforeToday());
+        assertEquals(false, t.happenAfterDate(d1));
+        assertEquals(false, t.happenAfterToday());
+        assertEquals(false, t.happenBetween(d1, d2));
+        assertEquals(false, t.happenIn(8));
     }
 }
