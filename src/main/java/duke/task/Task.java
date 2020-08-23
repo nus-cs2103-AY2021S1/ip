@@ -23,7 +23,7 @@ public abstract class Task implements Serialisable {
     }
 
     public boolean containsKeyword(String keyword) {
-        return this.description.contains(keyword);
+        return this.description.toLowerCase().contains(keyword.toLowerCase());
     }
 
     @Override
