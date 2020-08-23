@@ -6,15 +6,15 @@ import duke.task.TaskList;
 import duke.task.Deadline;
 
 public class AddDeadlineOperation extends AddOperation {
-    private final LocalDateTime deadline;
+    private final LocalDateTime dateTime;
 
-    public AddDeadlineOperation(String description, LocalDateTime deadline, TaskList taskList) {
+    public AddDeadlineOperation(String description, LocalDateTime dateTime, TaskList taskList) {
         super(description, taskList);
-        this.deadline = deadline;
+        this.dateTime = dateTime;
     }
 
     @Override
     public Deadline createTask() {
-        return Deadline.createDeadline(this.description, this.deadline);
+        return Deadline.createDeadline(this.description, this.dateTime);
     }
 }

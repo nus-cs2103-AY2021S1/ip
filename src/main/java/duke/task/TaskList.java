@@ -43,7 +43,8 @@ public class TaskList implements Iterable<Task> {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < this.taskList.size(); i++) {
             String taskLine = String.format("%d. %s", i + 1, this.taskList.get(i));
-            sb.append(taskLine + "\n");
+            sb.append(taskLine);
+            sb.append("\n");
         }
         if (sb.length() > 0) {
             sb.deleteCharAt(sb.length() - 1);
