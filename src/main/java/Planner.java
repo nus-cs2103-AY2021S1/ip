@@ -38,10 +38,14 @@ public class Planner {
     public String toString() {
         String msg = ". . . list is currently empty . . .";  // Default message given empty list
         if (!this.lst.isEmpty()) {
-            msg = "";
             int i = 1;
+            msg = ((i) + ". " + this.getTask(i) + "\n");
             for (Task t: this.lst) {
                 // Task t = this.list[i];
+                if (i == 1) {
+                    i++;
+                    continue;
+                }
                 msg += String.format("\t" + (i++) + ". " + t + "\n");
             }
         }

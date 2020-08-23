@@ -1,6 +1,6 @@
 public class Parser {
 
-    private Planner lst;
+    private final Planner lst;
 
     public Parser() {
         this.lst = new Planner();
