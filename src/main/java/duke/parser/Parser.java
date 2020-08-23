@@ -4,13 +4,25 @@ import duke.commands.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Represents a Parser that will read User Input from the command
+ * line and identify the appropriate command to be executed.
+ */
 public class Parser {
 
     private static final Pattern COMMAND_FORMAT = Pattern.compile("(?<command>\\S+)(?<body>.*)");
 
+    /**
+     * Tries to identify the format of the date input by the user
+     * and returns a LocalDate object if it has the correct format.
+     *
+     * @param date Date input by the user.
+     * @return LocalDate object if date has the correct format. Otherwise, null.
+     */
     public static LocalDate parseDate(String date) {
         LocalDate localDate;
         try {
@@ -21,6 +33,13 @@ public class Parser {
         return localDate;
     }
 
+    /**
+     * Parses the user input and identifies which command
+     * to execute.
+     *
+     * @param s User input through command line.
+     * @return Appropriate Command to be executed.
+     */
     public static Command parse(String s) {
         Matcher matcher = COMMAND_FORMAT.matcher((s.trim()));
         if (!matcher.matches()) {
@@ -55,6 +74,8 @@ public class Parser {
         }
     }
 
+    //Ensures todo command has the correct format and creates a TodoCommand object if it does.
+    //Otherwise, returns an InvalidCommand object.
     private static Command prepareTodo(String commandBody) {
         if (commandBody.length() > 0) {
             return new TodoCommand(commandBody.strip());
@@ -62,7 +83,8 @@ public class Parser {
             return new InvalidCommand();
         }
     }
-
+    //Ensures deadline command has the correct format and creates a DeadlineCommand object if it does.
+    //Otherwise, returns an InvalidCommand object.
     private static Command prepareDeadline(String commandBody) {
         String[] splitParts = commandBody.split((" /by "));
         if (splitParts.length != 2 || splitParts[0].strip().length() == 0 ||
@@ -79,6 +101,8 @@ public class Parser {
         }
     }
 
+    //Ensures event command has the correct format and creates a EventCommand object if it does.
+    //Otherwise, returns an InvalidCommand object.
     private static Command prepareEvent(String commandBody) {
         String[] splitParts = commandBody.split((" /at "));
         if (splitParts.length != 2
@@ -95,6 +119,8 @@ public class Parser {
         }
     }
 
+    //Ensures getEvents command has the correct format and creates a GetEventsCommand object if it does.
+    //Otherwise, returns an InvalidCommand object.
     private static Command prepareGetEvents(String commandBody) {
         String date = commandBody.strip();
         try {
