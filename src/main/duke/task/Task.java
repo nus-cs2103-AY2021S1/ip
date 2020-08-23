@@ -10,6 +10,10 @@ public abstract class Task {
         completed = false;
     }
 
+    public boolean contains(String query) {
+        return msg.contains(query);
+    }
+
     public void completeTask() {
         completed = true;
     }
