@@ -42,7 +42,7 @@ public class Parser {
             System.out.println(task);
             System.out.println("Now you have " + taskList.getSize() + " tasks in the list.");
 
-        } else if (input.indexOf("search ") == 0) {
+        } else if (input.indexOf("find ") == 0) {
 
             if (input.contains("/on ")) {
 
@@ -71,8 +71,13 @@ public class Parser {
                     throw new DukeException("Enter date in the following format: YYYY-MM-DD");
                 }
 
+            } else if (input.length() > 5) {
+
+                String query = input.substring(5);
+                taskList.printList((task) -> task.contains(query));
+
             } else {
-                throw new DukeException("Enter a valid /on parameter");
+                throw new DukeException("Enter a valid find command");
             }
 
         } else {
