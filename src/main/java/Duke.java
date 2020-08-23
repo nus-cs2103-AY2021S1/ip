@@ -1,29 +1,57 @@
 import exceptions.*;
-
 import java.io.*;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Duke Class is the main class that will run based on different commands
+ * given by user. Available commands include todo, deadline, event,
+ * done, delete. Todo, deadline and event are different types of tasks command.
+ * Done and delete are commands to mark the list item as done or to
+ * delete it respectively.
+ * Todo, deadline and event are followed by a description or message.
+ * Eg: todo do CS2103T project
+ * This would translate to a todo list item added into the user's overall list.
+ * Event and Deadline would require /at and /by to specify the timing.
+ * Description of done and delete would be a number to specify which
+ * item in the list that should be marked as done or deleted.
+ */
 public class Duke {
 
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
+    /**
+     * Determine which filepath to return depending if it is run
+     * from duke class or runtest.bat.
+     */
     public final static String FILEPATH = System.getProperty("user.dir") + (System.getProperty("user.dir").endsWith("text-ui-test")
             ? "/saved-tasks.txt"
             : "/text-ui-test/saved-tasks.txt");
 
+    /**
+     * Constructor for Duke.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(FILEPATH);
         taskList = new TaskList();
     }
 
+    /**
+     * Invoke run for duke chatbot programme.
+     * @param args argument
+     * @throws IOException if file does not exist
+     */
     public static void main(String[] args) throws IOException {
         new Duke().run();
     }
 
+    /**
+     * Run Duke programme depending on the different commands
+     * given by user.
+     * @throws IOException if file does not exist
+     */
     public void run() throws IOException {
-
         storage.handleLoad();
         ui.greeting();
         ui.showList();
@@ -83,12 +111,21 @@ public class Duke {
         }
     }
 
+    /**
+     * Add todo into the list and print the relevant todo message.
+     * @param description description of todo
+     */
     public void handleTodo(String description) {
         Todo todo = new Todo(description);
         TaskList.taskList.add(todo);
         ui.printTask(todo);
     }
 
+    /**
+     * Add deadline into the list and print the relevant deadline message.
+     * @param description description of deadline
+     * @throws DukeMissingTimeException thrown when user does not input the timing required
+     */
     public void handleDeadline(String description) throws DukeMissingTimeException {
         try {
             String[] strArr = Parser.splitDeadlineTime(description);
@@ -102,6 +139,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Add event into the list and print the relevant event message.
+     * @param description description of event
+     * @throws DukeMissingTimeException thrown when user does not input the timing required
+     */
     public void handleEvent(String description) throws DukeMissingTimeException {
         try {
             String[] strArr = Parser.splitEventTime(description);
