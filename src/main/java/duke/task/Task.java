@@ -23,7 +23,7 @@ public class Task {
         return this.date;
     }
 
-    protected String printDate() {
+    public String printDate() {
         return this.date.getDayOfWeek() + ", " + this.date.getMonth() + " " +
                 this.date.getDayOfMonth() + " " + this.date.getYear();
     }
