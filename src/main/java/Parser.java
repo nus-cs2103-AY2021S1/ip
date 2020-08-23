@@ -23,6 +23,7 @@ public class Parser {
         case "deadline":
         case "event":
         case "todo":
+        default:
         }
     }
 

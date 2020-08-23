@@ -16,36 +16,6 @@ public class Duke {
     private final Storage store = new Storage();
     private List<Task> taskList = new ArrayList<>();
 
-
-
-    public void addTask(Task task) {
-        taskList.add(task);
-        printMessage(String.format("added: %s \n Now you have %d tasks in the list", task, taskList.size()));
-    }
-
-    public void completeTask(int taskNumber) {
-        Task completedTask = taskList.get(taskNumber - 1).markCompleted();
-        taskList.set(taskNumber - 1, completedTask);
-        printMessage(String.format("Nice! I've marked this task as done: \n %s", completedTask.toString()));
-    }
-
-    public void deleteTask(int taskNumber) {
-        Task toRemove = taskList.get(taskNumber - 1);
-        taskList.remove(taskNumber - 1);
-        printMessage(String.format("Noted. I've removed this task: \n %s", toRemove.toString()));
-    }
-
-    public void printList() {
-        StringBuilder tasks = new StringBuilder("Here are the tasks in your list: \n");
-        for (int i = 0; i < taskList.size(); i++) {
-            tasks.append(String.format("%d. %s", i + 1, taskList.get(i)));
-            if (i != taskList.size() - 1) {
-                tasks.append('\n');
-            }
-        }
-        printMessage(tasks.toString());
-    }
-
     public boolean handleInput(Scanner scanner) throws DukeException {
         String userInput = scanner.next();
         Command command = Command.getCommand(userInput);
