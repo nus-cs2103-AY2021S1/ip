@@ -1,9 +1,5 @@
 package duke.command;
 
-/**
- * Represents a command that asks the app to delete a task from the list.
- */
-
 import duke.task.Task;
 import duke.component.*;
 
