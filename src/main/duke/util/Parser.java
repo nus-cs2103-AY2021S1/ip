@@ -10,6 +10,15 @@ import java.time.LocalDate;
 
 public class Parser {
 
+    /**
+     * Runs the given input string if valid.
+     * Prints any output or error messages.
+     *
+     * @param input String input read from user.
+     * @param taskList List of task stored by driver.
+     * @param ui UI printer containing standard print methods.
+     * @throws DukeException If input is invalid.
+     */
     public static void parse(String input, TaskList taskList, Ui ui) throws DukeException {
 
         if (input.equals("list")) {

@@ -13,10 +13,16 @@ public class Ui {
 
     private Scanner sc;
 
+    /**
+     * Creates new UI object.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Prints welcome statement.
+     */
     public void printWelcome() {
         System.out.println("Hello from");
         System.out.println(logo);
@@ -24,10 +30,16 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Prints a line.
+     */
     public void printLine() {
         System.out.println(line);
     }
 
+    /**
+     * Reads a line from the user.
+     */
     public String readLine() {
         return sc.nextLine();
     }

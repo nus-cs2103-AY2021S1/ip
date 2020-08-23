@@ -14,10 +14,20 @@ public class Storage {
 
     private String filePath;
 
+    /**
+     * Creates new storage object.
+     *
+     * @param filePath Location of file for data reading and writing.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads the data file for stored tasks.
+     *
+     * @return List of tasks stored in data file.
+     */
     public List<Task> readFile() {
 
         File file = new File(filePath);
@@ -61,6 +71,11 @@ public class Storage {
         return output;
     }
 
+    /**
+     * Writes tasks to the data file for storage.
+     *
+     * @param tasks List of tasks to be stored in data file.
+     */
     public void saveFile(List<Task> tasks) {
 
         File file = new File(filePath);

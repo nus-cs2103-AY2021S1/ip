@@ -31,12 +31,18 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Creates new Duke object.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/duke.txt");
         taskList = new TaskList(storage.readFile());
     }
 
+    /**
+     * Runs the Duke app.
+     */
     public void run() {
 
         ui.printWelcome();
