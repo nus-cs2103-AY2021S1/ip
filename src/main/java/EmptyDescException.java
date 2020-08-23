@@ -1,4 +1,4 @@
-public class EmptyDescException extends Exception {
+public class EmptyDescException extends DukeException {
     public EmptyDescException() {
         super("☹ OOPS!!! The description cannot be empty");
     }

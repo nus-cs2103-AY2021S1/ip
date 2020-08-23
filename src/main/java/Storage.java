@@ -7,11 +7,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
-
-public class FileHandler {
+public class Storage {
     private String filepath;
 
-    public FileHandler(String filepath) {
+    public Storage(String filepath) {
         this.filepath = filepath;
     }
 
@@ -20,7 +19,7 @@ public class FileHandler {
         fw.close();
     }
 
-    private void appendToFile(String textToAppend) throws IOException {
+    public void appendToFile(String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filepath, true); // create a FileWriter in append mode
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(textToAppend);
@@ -43,11 +42,11 @@ public class FileHandler {
                     lst.add(todo);
                     break;
                 case "E":
-                    Task event = new Event(desc, checked, Duke.strToDate(arr[3]));
+                    Task event = new Event(desc, checked, Parser.strToDate(arr[3]));
                     lst.add(event);
                     break;
                 case "D":
-                    Task deadline = new Deadline(desc, checked, Duke.strToDate(arr[3]));
+                    Task deadline = new Deadline(desc, checked, Parser.strToDate(arr[3]));
                     lst.add(deadline);
                     break;
                 default:
@@ -55,10 +54,11 @@ public class FileHandler {
             }
             line = br.readLine();
         }
+        br.close();
         return lst;
     }
 
-    private void rewriteFileContents(List<Task> lst) {
+    public void rewriteFileContents(List<Task> lst) {
         try {
             resetFile();
             for (int i = 0; i < lst.size(); i++) {
@@ -69,44 +69,5 @@ public class FileHandler {
         } catch (Exception e) {
             System.out.println(e);
         }
-    }
-
-    public Task getTask(int i) throws Exception {
-        List<Task> filecontents = getFileContents();
-        if (i <= 0 || i > filecontents.size()) {
-            throw new InvalidIndexException();
-        }
-        return filecontents.get(i-1);
-    }
-
-    public int getSize() throws Exception {
-        List<Task> filecontents = getFileContents();
-        return filecontents.size();
-    }
-
-    public void addTask(String[] arr) throws Exception {
-        appendToFile(Task.stringFormat(arr));
-    }
-
-    public Task completeTask(int i) throws Exception {
-        List<Task> filecontents = getFileContents();
-        Task t = filecontents.get(i-1);
-        if (i <= 0 || i > filecontents.size()) {
-            throw new InvalidIndexException();
-        }
-        filecontents.get(i-1).setStatus("1");
-        rewriteFileContents(filecontents);
-        return t;
-    }
-
-    public Task deleteTask(int i) throws Exception {
-        List<Task> filecontents = getFileContents();
-        Task t = filecontents.get(i-1);
-        if (i <= 0 || i > filecontents.size()) {
-            throw new InvalidIndexException();
-        }
-        filecontents.remove(i-1);
-        rewriteFileContents(filecontents);
-        return t;
     }
 }

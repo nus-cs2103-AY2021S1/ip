@@ -14,12 +14,12 @@ public class Deadline extends Task {
         String[] stringArr = this.by.toString().split("T");
         String[] timeArr = stringArr[1].split(":");
         String t = String.format("%s %s%s", stringArr[0], timeArr[0], timeArr[1]);
-        String[] arr = {"D", super.done, super.description, t};
+        String[] arr = { "D", super.done, super.description, t };
         return arr;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + Duke.parseDateTime(this.by) + ")";
+        return "[D]" + super.toString() + " (by: " + Parser.parseDateTime(this.by) + ")";
     }
 }
