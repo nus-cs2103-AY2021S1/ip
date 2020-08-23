@@ -88,35 +88,19 @@ public class Duke {
     }
 
     private static void handleAdd(List<String> tokens) {
+        Task task;
         try {
-            Task task;
-            try {
-                switch (tokens.get(0)) {
-                    case "todo":
-                        task = new Todo(tokens.get(1));
-                        break;
-                    case "deadline":
-                        task = new Deadline(tokens.get(1), tokens.get(3));
-                        break;
-                    case "event":
-                        task = new Event(tokens.get(1), tokens.get(3));
-                        break;
-                    default:
-                        System.out.println("An unexpected error has occurred");
-                        return;
-                }
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Missing argument(s)");
-                return;
-            }
-
-            Tasks.addTask(task);
-            System.out.println("Got it. I've added this task: ");
-            System.out.println("    " + task);
-            System.out.printf("Now you have %d tasks in the list. \n", Tasks.count());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            task = Tasks.addTask(tokens);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Missing argument(s)");
+            return;
+        } catch (Exception e) {
+            System.out.println("An expected error has occurred.");
+            return;
         }
+        System.out.println("Got it. I've added this task: ");
+        System.out.println("    " + task);
+        System.out.printf("Now you have %d tasks in the list. \n", Tasks.count());
     }
 
     private static void handleRemove(int index) {

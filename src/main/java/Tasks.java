@@ -6,8 +6,24 @@ import java.util.List;
 public class Tasks {
     private static List<Task> database = new ArrayList<>();
 
-    public static void addTask(Task task) {
+    public static Task addTask(List<String> tokens) {
+        Task task;
+        switch (tokens.get(0)) {
+            case "todo":
+                task = new Todo(tokens.get(1));
+                break;
+            case "deadline":
+                task = new Deadline(tokens.get(1), tokens.get(3));
+                break;
+            case "event":
+                task = new Event(tokens.get(1), tokens.get(3));
+                break;
+            default:
+                throw new Error("An unexpected error has occurred");
+
+        }
         database.add(task);
+        return task;
     }
 
     public static Task getTask(int index) {
