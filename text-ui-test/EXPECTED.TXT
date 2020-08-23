@@ -9,11 +9,11 @@ Here are the tasks in your list:
 1.[T][✘] buy some fruits
 --------------------------------------
 Got it. I've added this task:
-   [D][✘] must eat the fruit (by: 12:00, Oct 10 2020)
+   [D][✘] must eat the fruit (by: Oct 10 2020)
 Now you have 2 tasks in the list.
 --------------------------------------
 Got it. I've added this task:
-   [E][✘] attend ninja fruit competition (at: 18:00, Oct 10 2020)
+   [E][✘] attend ninja fruit competition (at: Oct 10 2020)
 Now you have 3 tasks in the list.
 --------------------------------------
 Nice! I've marked this task as done:
@@ -21,8 +21,8 @@ Nice! I've marked this task as done:
 --------------------------------------
 Here are the tasks in your list:
 1.[T][✓] buy some fruits
-2.[D][✘] must eat the fruit (by: 12:00, Oct 10 2020)
-3.[E][✘] attend ninja fruit competition (at: 18:00, Oct 10 2020)
+2.[D][✘] must eat the fruit (by: Oct 10 2020)
+3.[E][✘] attend ninja fruit competition (at: Oct 10 2020)
 --------------------------------------
 Oops! Todo cannot have an empty message!
 --------------------------------------

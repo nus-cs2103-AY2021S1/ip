@@ -1,7 +1,7 @@
 todo buy some fruits
 list
-deadline must eat the fruit /by 2020-10-10 1200
-event attend ninja fruit competition /at 2020-10-10 1800
+deadline must eat the fruit /by 2020-10-10
+event attend ninja fruit competition /at 2020-10-10
 done 1
 list
 todo

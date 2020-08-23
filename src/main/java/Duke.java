@@ -10,12 +10,14 @@ import java.util.Scanner;
 public class Duke {
 
     private Ui ui;
+    private Parser parser;
     public final static String FILEPATH = System.getProperty("user.dir") + (System.getProperty("user.dir").endsWith("text-ui-test")
             ? "/saved-tasks.txt"
             : "/text-ui-test/saved-tasks.txt");
 
     public Duke() {
         ui = new Ui();
+        parser = new Parser();
     }
 
     public static void main(String[] args) throws IOException {
@@ -31,7 +33,7 @@ public class Duke {
         while (!isExit) {
             try {
                 String toEcho = ui.getCommand();
-                String[] command = toEcho.split(" ", 2);
+                String[] command = parser.splitCommandAndDescription(toEcho);
                 if (toEcho.equals("bye")) {
                     ui.bye();
                     isExit = true;
@@ -69,7 +71,6 @@ public class Duke {
                             Integer.parseInt(command[1]) < 0) {
                         throw new DukeInvalidMessageException();
                     }
-                    System.out.println("Noted. I've removed this task:");
                     int indexToDelete = Integer.parseInt(command[1]) - 1;
                     ui.printDelete(indexToDelete);
                 } else {
@@ -101,7 +102,7 @@ public class Duke {
     }
 
     public void handleDeadline(String description) {
-        String[] strArr = description.split("/by ", 2);
+        String[] strArr = parser.splitDeadlineTime(description);
         String todo = strArr[0];
         String time = strArr[1];
         Deadline deadline = new Deadline(todo, time);
@@ -110,7 +111,7 @@ public class Duke {
     }
 
     public void handleEvent(String description) {
-        String[] strArr = description.split("/at ", 2);
+        String[] strArr = parser.splitEventTime(description);
         String todo = strArr[0];
         String time = strArr[1];
         Event event = new Event(todo, time);

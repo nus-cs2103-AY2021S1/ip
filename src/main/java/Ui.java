@@ -49,6 +49,7 @@ public class Ui {
     }
 
     public void printDelete(int indexToDelete) {
+        System.out.println("Noted. I've removed this task:");
         System.out.println(TAB + Task.tasks.get(indexToDelete));
         Task.tasks.remove(indexToDelete);
         System.out.println("Now you have " + Task.tasks.size() + " tasks in the list.");
