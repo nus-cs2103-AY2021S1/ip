@@ -1,10 +1,13 @@
-public class Event extends Task implements Saveable {
-    String timing;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    Event(String label, String timing, boolean done) {
+public class Event extends Task implements Saveable {
+    LocalDate date;
+
+    Event(String label, String date, boolean done) {
         super(label, done);
         // Remove the "at"
-        this.timing = timing;
+        this.date = LocalDate.parse(date);
     }
 
     @Override
@@ -13,12 +16,13 @@ public class Event extends Task implements Saveable {
         str.append("E");
         str.append(super.getInfo());
         str.append(super.separator);
-        str.append(timing);
+        str.append(date.toString());
         return str.toString();
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), timing);
+        return String.format("[E]%s (at: %s)", super.toString(),
+                date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 }
