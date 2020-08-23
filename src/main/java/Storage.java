@@ -1,4 +1,7 @@
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Storage {
@@ -7,10 +10,24 @@ public class Storage {
     PrintWriter printWriter;
     ArrayList<Task> list;
 
-    public Storage(String filepath) throws FileNotFoundException {
-        this.reader = new BufferedReader(new FileReader(filepath));
-        this.printWriter = new PrintWriter(filepath);
-
+    public Storage(String filepath) throws IOException {
+        try{
+            this.reader = new BufferedReader(new FileReader(filepath));
+            this.printWriter = new PrintWriter(filepath);
+        } catch (FileNotFoundException e) {
+            String directoryName = "/data";
+            String fileName = "duke.txt";
+            File directory = new File(directoryName);
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            File file = new File(directoryName + "/" + fileName);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            this.reader = new BufferedReader(new FileReader("data/duke.txt"));
+            this.printWriter = new PrintWriter("data/duke.txt");
+        }
     }
 
     public ArrayList<Task> load() throws IOException, DukeException {
