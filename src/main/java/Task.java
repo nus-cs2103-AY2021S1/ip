@@ -1,5 +1,5 @@
-public class Task {
-    private boolean isDone = false;
+abstract public class Task {
+    protected boolean isDone = false;
     String description;
 
 
@@ -15,4 +15,6 @@ public class Task {
     public String toString() {
         return (isDone ? "[✓] " : "[✗] ") + description;
     }
+
+    abstract public String convertToData();
 }

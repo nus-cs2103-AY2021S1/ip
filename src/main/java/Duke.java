@@ -1,11 +1,105 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import javax.swing.text.html.Option;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
 
 public class Duke {
     static String INDENT = "    ";
     static String divider = INDENT + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
+    static Path path = Paths.get("./data/duke.txt");
+    static File memoryFile;
 
+    static List<Task> parseData(File f) throws FileNotFoundException {
+        List<Task> tasklist = new ArrayList<>();
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+           String str = s.nextLine();
+           String[] args = str.split(" \\| ");
+           boolean done = args[1].equals("1");
+           String description = args[2];
+           Task task;
+           switch (args[0]) {
+               case "T":
+                   task = new Todo(description);
+                   if (done) {
+                       task.markAsDone();
+                   }
+                   tasklist.add(task);
+                   break;
+               case "D":
+                   task = new Deadline(description, args[3]);
+                   if (done) {
+                       task.markAsDone();
+                   }
+                   tasklist.add(task);
+                   break;
+               case "E":
+                   task = new Event(description, args[3]);
+                   if (done) {
+                       task.markAsDone();
+                   }
+                   tasklist.add(task);
+                   break;
+               default:
+                   System.out.println(INDENT + "Corrupted Data Entry found : " + str);
+           }
+        }
+        return tasklist;
+    }
+
+    static void writeData(File f, Task task) {
+        try {
+            FileWriter fw = new FileWriter(path.toString(), true);
+            fw.write(task.convertToData() + "\n");
+            fw.close();
+        } catch (IOException e) {
+            print("Error Writing Message");
+        }
+    }
+
+    static void rewriteData(File f, List<Task> tasks) {
+        try {
+            FileWriter fw = new FileWriter(path.toString());
+            for(Task t : tasks) {
+                fw.write(t.convertToData() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            print("Error Writing Message");
+        }
+    }
+
+    static void initialiseTasks(List<Task> tasklist){
+        System.out.print(divider);
+        memoryFile = new File(path.toString());
+        if (Files.exists(path)) {
+            System.out.println(INDENT + "Loading Tasks from Memory...");
+            try {
+                List<Task> memoryList = parseData(memoryFile);
+                tasklist.addAll(memoryList);
+            } catch (FileNotFoundException e) {
+                System.out.println(INDENT + "Error loading data.");
+            }
+            System.out.println(INDENT + "Load Successful!");
+        } else {
+            System.out.println(INDENT + "No Memory Found.");
+            try {
+                FileWriter fw = new FileWriter(path.toString());
+                System.out.println(INDENT + "Creating new memory file..");
+                fw.write("");
+                fw.close();
+                System.out.println(INDENT + "Done.");
+            } catch (IOException e) {
+                System.out.print(INDENT + e.getMessage());
+            }
+        }
+        System.out.print(divider);
+    }
     static void start() {
         String logo =
                                 " .----------------.  .----------------.  .----------------.  .----------------.\n" +
@@ -42,7 +136,12 @@ public class Duke {
     }
     static void addTask(Task task, List<Task> taskList) {
         taskList.add(task);
+        writeData(memoryFile, task);
         print("Got it. I've added this task:\n  " + task.toString() + "\nNow you have " + taskList.size() + " tasks in the list.");
+    }
+    static void doneTask(List<Task> tasks, int index) {
+        tasks.get(index).markAsDone();
+        rewriteData(memoryFile, tasks);
     }
     static void displayList(List<Task> list) {
         if(list.size() == 0) {
@@ -61,6 +160,7 @@ public class Duke {
         // Initialise
         start();
         List<Task> tasks = new ArrayList<>();
+        initialiseTasks(tasks);
 
         String input = sc.nextLine();
         while(!input.equals("bye")) {
@@ -79,7 +179,7 @@ public class Duke {
                     if (index >= tasks.size() || index < 0) {
                         throw new InvalidArgumentException("index");
                     }
-                    tasks.get(index).markAsDone();
+                    doneTask(tasks, index);
                     print("Nice! I've marked this task as done:\n" + tasks.get(index));
                 } else if (input.matches("todo.*")) {
                     if(input.matches("todo\\s*")) {
