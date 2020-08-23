@@ -12,6 +12,11 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean hasDateTime() {
+        return true;
+    }
+
+    @Override
     public String toString() {
         return String.format(Event.STRING_FORMAT, getStatusIcon(), description, 
                 eventTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm")));

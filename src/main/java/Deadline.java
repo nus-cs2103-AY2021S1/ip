@@ -10,6 +10,11 @@ public class Deadline extends Task {
         super(description);
         this.dueDate = dueDate;
     }
+    
+    @Override
+    public boolean hasDateTime() {
+        return true;
+    }
 
     @Override
     public String toString() {

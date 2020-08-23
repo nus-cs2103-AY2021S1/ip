@@ -1,6 +1,4 @@
-public class Task {
-    private static final String STRING_FORMAT = "[%s] %s";
-
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -18,8 +16,5 @@ public class Task {
         //return tick or X symbols
     }
 
-    @Override
-    public String toString() {
-        return String.format(Task.STRING_FORMAT, getStatusIcon(), description);
-    }
+    public abstract boolean hasDateTime();
 }

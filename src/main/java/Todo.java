@@ -6,6 +6,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public boolean hasDateTime() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return String.format(Todo.STRING_FORMAT, getStatusIcon(), description);
     }
