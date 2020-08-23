@@ -1,6 +1,7 @@
 package parser;
 
 import static ui.Ui.echo;
+import static ui.Ui.filterList;
 import static ui.Ui.line;
 import static ui.Ui.listOut;
 
@@ -74,6 +75,19 @@ public class Parser {
                             stores.save(tl.getStorage());
                         } else {
                             throw Ui.DukeException.outOfBounds(intIndex);
+                        }
+                    } catch (Ui.DukeException e) {
+                        echo(e.getMessage());
+                    }
+                    break;
+                }
+                case "find": {
+                    try {
+                        if (multiWord.hasNextLine()) {
+                            String remainingWords = multiWord.nextLine().trim();
+                            filterList(remainingWords, tl.getStorage());
+                        } else {
+                            throw Ui.DukeException.empty("find");
                         }
                     } catch (Ui.DukeException e) {
                         echo(e.getMessage());

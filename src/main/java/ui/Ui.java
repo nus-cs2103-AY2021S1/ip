@@ -49,7 +49,8 @@ public class Ui {
 
 
     /**
-     * Prints the list of tasks in storage
+     * lists out every task
+     * @param storage where the tasks are stored
      */
     public static void listOut(ArrayList<Task> storage) {
         line();
@@ -58,6 +59,24 @@ public class Ui {
             // list starts from 1
             Task currentTask = storage.get(i);
             System.out.println((i + 1) + ". " + currentTask);
+        }
+        line();
+    }
+
+    /**
+     * only lists out tasks where it contains words
+     * @param words the words to be searched
+     * @param storage where the tasks are stored
+     */
+    public static void filterList(String words, ArrayList<Task> storage) {
+        line();
+        System.out.println("Here's your matching tasks");
+        for (int i = 0; i < storage.size(); i++) {
+            // list starts from 1
+            Task currentTask = storage.get(i);
+            if (currentTask.toString().contains(words)) {
+                System.out.println((i + 1) + ". " + currentTask);
+            }
         }
         line();
     }
