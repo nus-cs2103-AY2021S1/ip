@@ -22,6 +22,7 @@ public class Duke {
             input = scanner.nextLine();
             if (input.equals(DukeConstants.EXIT_INPUT)) {
                 dukeService.printResponse(DukeConstants.EXIT_RESPONSE);
+                dukeService.saveList();
                 break;
             } else if (input.equals(DukeConstants.LIST_COMMAND)) {
                 dukeService.printList();
