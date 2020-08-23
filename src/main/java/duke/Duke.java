@@ -1,5 +1,10 @@
 package duke;
 
+/** The Main class of this program.
+ * @author Li Jiayu
+ * @version 0.1
+ */
+
 import duke.command.Command;
 import duke.command.InvalidCommandException;
 import duke.component.*;
