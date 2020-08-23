@@ -39,20 +39,10 @@ public class Duke {
         System.out.println("Hi there! I'm Peanut.\nHow can I be of assistance?\n");
         input = sc.nextLine();
         while (!input.equals("bye")) {
-            System.out.println("");
-            if (input.equals("list")) {
-                System.out.println("Here are your tasks:");
-                System.out.println(list);
-            } else if (input.length() > 3 && input.substring(0,4).equals("done")) {
-                int listIndex = Integer.parseInt(input.substring(5));
-                list.markTaskDone(listIndex);
-            } else{
-                Task task = Task.makeTask(input);
-                list.addTask(task);
-            }
+           processInput(input, list);
             input = sc.nextLine();
         }
-        System.out.println("\nBye! Sad to see you go :(\n");
+        System.out.println("\nBye! Sad to see you go :(");
 
     }
 

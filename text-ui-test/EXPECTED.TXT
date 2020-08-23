@@ -5,24 +5,16 @@ How can I be of assistance?
 Here are your tasks:
 
 
-Task added!
-[T][✗] My Task
-You now have 1 tasks.
+added: [T][✗] My Task
 
 
-Task added!
-[E][✗] Big Event (at: Tuesday 3pm-9pm)
-You now have 2 tasks.
+added: [E][✗] Big Event (at: Tuesday 3pm-9pm)
 
 
-Task added!
-[D][✗] Homework (by: Wednesday)
-You now have 3 tasks.
+added: [D][✗] Homework (by: Wednesday)
 
 
-Task added!
-[T][✗] More Tasks
-You now have 4 tasks.
+added: [T][✗] More Tasks
 
 
 Here are your tasks:
@@ -52,9 +44,7 @@ Hurray! Homework is now done.
 [D][✓] Homework (by: Wednesday)
 
 
-Task added!
-[D][✗] Essay (by: Friday)
-You now have 5 tasks.
+added: [D][✗] Essay (by: Friday)
 
 
 Here are your tasks:
@@ -80,9 +70,7 @@ Here are your tasks:
 5.[D][✗] Essay (by: Friday)
 
 
-Task added!
-[E][✗] Small Event (at: Thursday 12pm-12am)
-You now have 6 tasks.
+added: [E][✗] Small Event (at: Thursday 12pm-12am)
 
 
 Hurray! More Tasks is now done.
@@ -121,4 +109,3 @@ Here are your tasks:
 
 
 Bye! Sad to see you go :(
-
