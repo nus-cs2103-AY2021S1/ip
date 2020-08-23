@@ -36,7 +36,7 @@ public class TaskHandler {
         String lowerCaseOperation = currentOp.toString().toLowerCase();
         if (stringArr.length != 2 ) {
             // if multiple tasks are given as arguments
-            throw new DukeException("Oops, pls enter only one task number after " + lowerCaseOperation);
+            throw new DukeException("\u2639 Oops, pls enter only one task number after " + lowerCaseOperation);
         }
         try {
             // Finding the actual task
@@ -49,7 +49,7 @@ public class TaskHandler {
             }
             return currentTask;
         } catch (IndexOutOfBoundsException | NumberFormatException e){
-            throw new DukeException("Oops, pls enter a valid task number after " + lowerCaseOperation);
+            throw new DukeException("\u2639 Oops, pls enter a valid task number after " + lowerCaseOperation);
         }
     }
 
@@ -68,7 +68,7 @@ public class TaskHandler {
             try {
                 return processTaskWithTime(input, tasktype, "/by");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("Oops, use add deadline format: deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')]");
+                throw new DukeException("\u2639 Oops, use add deadline format: deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')]");
             }
         } else if (tasktype == Task.taskType.EVENT) {
             try {

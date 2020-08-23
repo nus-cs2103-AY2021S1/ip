@@ -105,7 +105,7 @@ public class Storage {
             }
             writer.flush();
         } catch (IOException e) {
-            throw new DukeException("Error finding savefile to write to.");
+            throw new DukeException("\u2639 Oops, error finding savefile to write to.");
         }
     }
 }

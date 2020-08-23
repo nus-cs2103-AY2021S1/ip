@@ -1,6 +1,8 @@
-4
-todo asd
-todo asdasd
-todo aaaaaaaaaa
-event ssssss /at 123
-0 2 
+6
+todo assignment
+todo resume
+todo project
+event meeting /at 1pm
+todo settle problem
+deadline send email /by 10 Oct 2020, 09:00 PM
+0 2 5 
