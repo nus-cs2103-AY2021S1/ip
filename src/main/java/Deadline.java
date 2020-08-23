@@ -1,28 +1,25 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDateTime time;
 
     public Deadline(String description, String by) throws DukeException {
         super(description);
-        LocalDate dateBy = null;
+        LocalDateTime timeBy;
         try {
-            dateBy = LocalDate.parse(by);
+            timeBy = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
         } catch (DateTimeParseException ex) {
-            try {
-                dateBy = LocalDate.parse(by, DateTimeFormatter.ofPattern("MMM d yyyy"));
-            } catch (DateTimeParseException exc) {
-                throw new DukeException("Deadline timing cannot be parsed");
-            }
+            throw new DukeException("Deadline timing cannot be parsed");
         }
-        this.by = dateBy.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        this.time = timeBy;
     }
 
     @Override
     public String toString() {
+        String by = time.format(DateTimeFormatter.ofPattern("MMM d yyyy kk:mm"));
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
@@ -30,6 +27,7 @@ public class Deadline extends Task {
     public String toData() {
         String isDone = super.isDone ? "1" : "0";
         String separator = "~";
+        String by = time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
         return "D" + separator + isDone + separator + super.description + separator + by + "\n";
     }
 }

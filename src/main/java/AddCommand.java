@@ -14,6 +14,6 @@ public class AddCommand extends Command {
                 + "\t %s\n"
                 + "\t Now you have %d tasks in the list.\n";
         Task t = tasks.addTask(type, task);
-        ui.showAction(String.format((echoizer) + "%n", t, tasks.size()));
+        ui.showAction(String.format(echoizer, t, tasks.size()));
     }
 }
