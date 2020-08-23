@@ -25,7 +25,7 @@ public class Task {
         return description;
     }
 
-    public boolean checkDone() {
+    public boolean isTaskDone() {
         return isDone;
     }
 

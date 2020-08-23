@@ -26,7 +26,7 @@ public class CommandTest {
     }
 
     @Test
-    public void testDelete() throws DukeException {
+    public void parse_deleteCommand_exceptionThrown() throws DukeException {
         TaskList taskList = new TaskList();
         ToDo toDo = new ToDo("read book");
         taskList.getTasks().add(toDo);
@@ -37,7 +37,7 @@ public class CommandTest {
     }
 
     @Test
-    public void testDone() throws DukeException {
+    public void parse_doneCommand_exceptionThrown() throws DukeException {
         TaskList taskList = new TaskList();
         ToDo toDo = new ToDo("read book");
         taskList.getTasks().add(toDo);
@@ -47,7 +47,7 @@ public class CommandTest {
     }
 
     @Test
-    public void testUndo() throws DukeException {
+    public void parse_undoCommand_exceptionThrown() throws DukeException {
         TaskList taskList = new TaskList();
         ToDo toDo = new ToDo("read book");
         toDo.doneTask();
@@ -58,7 +58,7 @@ public class CommandTest {
     }
 
     @Test
-    public void testToDo() throws DukeException {
+    public void parse_toDoCommand_exceptionThrown() throws DukeException {
         TaskList taskList = new TaskList();
         Parser.parse("todo read book").execute(taskList, new Ui(), new Storage("invalidPath/task.txt"));
 
@@ -67,7 +67,7 @@ public class CommandTest {
     }
 
     @Test
-    public void testDeadline() throws DukeException {
+    public void parse_deadline_exceptionThrown() throws DukeException {
         TaskList taskList = new TaskList();
         Parser.parse("deadline return book /by 2/12/2019 1800").execute(taskList, new Ui(), new Storage("invalidPath/task.txt"));
 
@@ -77,7 +77,7 @@ public class CommandTest {
     }
 
     @Test
-    public void testEvent() throws DukeException {
+    public void parse_event_exceptionThrown() throws DukeException {
         TaskList taskList = new TaskList();
         Parser.parse("event return book /at 2/12/2019 4-6pm").execute(taskList, new Ui(), new Storage("invalidPath/task.txt"));
 

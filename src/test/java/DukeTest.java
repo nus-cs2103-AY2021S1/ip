@@ -23,7 +23,7 @@ public class DukeTest {
     }
 
     @Test
-    public void invalidInputTest() {
+    public void parse_invalidCommand_success() {
         try {
             Parser.parse("INVALID");
         } catch (DukeException e) {
@@ -34,7 +34,7 @@ public class DukeTest {
     }
 
     @Test
-    public void startTest() {
+    public void duke_invalidPath_success() {
         new Duke("invalidPath/task.txt");
 
         assertEquals("ERROR DETECTED! UNABLE TO LOAD PROGRAM. \n SYSTEM SHUTTING DOWN",

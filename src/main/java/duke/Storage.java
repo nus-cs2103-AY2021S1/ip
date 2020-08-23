@@ -76,15 +76,15 @@ public class Storage {
             for (int i = 0; i < taskList.size(); i++) {
                 Task task = taskList.get(i);
                 if (task instanceof ToDo) {
-                    String taskDetails = String.format("T | %d | %s", task.checkDone() ? 1 : 0, task.getDescription());
+                    String taskDetails = String.format("T | %d | %s", task.isTaskDone() ? 1 : 0, task.getDescription());
                     content += taskDetails + "\n";
                 } else if (task instanceof Deadline) {
                     String taskDetails = String.format("T | %d | %s |%s",
-                            task.checkDone() ? 1 : 0, task.getDescription(), ((Deadline) task).getDate());
+                            task.isTaskDone() ? 1 : 0, task.getDescription(), ((Deadline) task).getDate());
                     content += taskDetails + "\n";
                 } else {
                     String taskDetails = String.format("T | %d | %s |%s",
-                            task.checkDone() ? 1 : 0, task.getDescription(), ((Event) task).getAt());
+                            task.isTaskDone() ? 1 : 0, task.getDescription(), ((Event) task).getAt());
                     content += taskDetails + "\n";
                 }
             }

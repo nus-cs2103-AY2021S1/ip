@@ -7,7 +7,17 @@ import main.java.duke.Ui;
 
 public abstract class Command {
 
+    /**
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+
+    /**
+     * @return
+     */
     public abstract boolean isExit();
 
 }
