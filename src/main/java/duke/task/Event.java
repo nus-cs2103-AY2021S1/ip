@@ -1,22 +1,26 @@
+package duke.task;
+
+import duke.exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task {
+public class Event extends Task{
 
-    public Deadline(String description, String by) throws DukeException {
+    public Event(String description, String at) throws DukeException {
         super(description);
         try {
-            this.date = LocalDate.parse(by);
+            this.date = LocalDate.parse(at);
         } catch (DateTimeParseException ex) {
             throw new DukeException("Please enter the date in this format: yyyy-mm-dd");
         }
     }
 
-    public Deadline(String description, String by, boolean isDone) throws DukeException {
+    public Event(String description, String at, boolean isDone) throws DukeException {
         super(description);
         this.isDone = isDone;
         try {
-            this.date = LocalDate.parse(by);
+            this.date = LocalDate.parse(at);
         } catch (DateTimeParseException ex) {
             throw new DukeException("Please enter the date in this format: yyyy-mm-dd");
         }
@@ -24,12 +28,12 @@ public class Deadline extends Task {
 
     @Override
     public String saveData() {
-        return "D > " + super.saveData() + " > by: " + this.date;
+        return "E > " + super.saveData() + " > at: " + this.date;
     }
 
     @Override
     public String toString() {
-        return "D > " + super.toString() + " > by: " + printDate();
+        return "E > " + super.toString() + " > at: " + printDate();
     }
 
 }

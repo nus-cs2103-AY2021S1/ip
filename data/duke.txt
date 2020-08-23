@@ -1,5 +1,3 @@
-E > ✘ > new event > at: 2020-09-09
-T > ✘ > new stuff
-D > ✘ > this thing > by: 2020-08-08
 E > ✘ > new stuff > at: 2020-10-07
 T > ✘ > this other stuff
+D > ✘ > new deadline > by: 2020-07-03

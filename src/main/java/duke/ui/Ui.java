@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.task.*;
+
 import java.time.LocalDate;
 
 import java.util.ArrayList;

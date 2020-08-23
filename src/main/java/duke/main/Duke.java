@@ -1,13 +1,15 @@
-import java.util.ArrayList;
+package duke.main;
+
+import duke.command.*;
+import duke.storage.*;
+import duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+
 
 import java.io.FileNotFoundException;
 
-
 public class Duke {
-
-    // attributes for task storage
-    public static ArrayList<Task> lib = new ArrayList<>();
-    public static boolean takeInput = true;
 
     private Storage storage;
     private Ui ui;

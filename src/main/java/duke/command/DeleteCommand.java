@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.task.*;
+import duke.storage.*;
+import duke.ui.Ui;
+import duke.exception.DukeException;
+
 import java.util.ArrayList;
 
 public class DeleteCommand extends Command {
@@ -16,8 +23,8 @@ public class DeleteCommand extends Command {
             ui.printExceptions(new DukeException(
                     "This task ID does not exist in the database!"));
         } else {
+            ui.printDeleteStatement(lib.get(index).toString(), lib.size() - 1);
             tasks.deleteTask(index);
-            ui.printDeleteStatement(lib.get(index).toString(), lib.size());
         }
     }
 

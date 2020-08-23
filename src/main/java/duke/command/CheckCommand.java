@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.storage.*;
+import duke.task.*;
+import duke.ui.Ui;
+
 import java.time.LocalDate;
 
 import java.util.ArrayList;
@@ -16,11 +22,11 @@ public class CheckCommand extends Command {
 
         ui.printCheckStatement(date);
         for (int i = 0; i < lib.size(); i++) {
-            if (lib.get(i).date == null) {
+            if (lib.get(i).getDate() == null) {
                 continue;
             }
 
-            if (lib.get(i).date.equals(date)) {
+            if (lib.get(i).getDate().equals(date)) {
                 ui.showTask(lib.get(i).toString());
             }
         }

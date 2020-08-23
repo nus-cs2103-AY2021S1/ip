@@ -1,11 +1,18 @@
+package duke.command;
+
+import duke.storage.*;
+import duke.ui.Ui;
+import duke.task.*;
+import duke.exception.DukeException;
+
 import java.util.ArrayList;
 
-public class EventCommand extends Command {
+public class DeadlineCommand extends Command {
 
     private String description;
     private String time;
 
-    public EventCommand(String description, String time) {
+    public DeadlineCommand(String description, String time) {
         this.description = description;
         this.time = time;
     }
@@ -15,9 +22,9 @@ public class EventCommand extends Command {
         ArrayList<Task> lib = tasks.getTaskList();
 
         try {
-            Event event = new Event(description, time);
-            tasks.addEvent(event);
-            ui.printAddStatements(event.toString(), lib.size());
+            Deadline deadline = new Deadline(description, time);
+            tasks.addDeadline(deadline);
+            ui.printAddStatements(deadline.toString(), lib.size());
         } catch (DukeException ex) {
             ui.printExceptions(ex);
         }

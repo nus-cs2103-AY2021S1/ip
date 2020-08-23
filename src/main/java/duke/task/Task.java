@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -15,6 +17,10 @@ public class Task {
         return isDone
                 ? "✓"
                 : "✘";
+    }
+
+    public LocalDate getDate() {
+        return this.date;
     }
 
     protected String printDate() {
