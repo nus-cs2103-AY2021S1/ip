@@ -25,30 +25,29 @@ Hello from
     Now you have 3 tasks in the list.
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Oops! A todo task needs a description.
+    !!! Oops! A todo task needs a description. !!!
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Oops! An event task needs a description
+    !!! Oops! An event task needs a description !!!
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Oops! An event task needs a description
+    !!! Oops! An event task needs a description !!!
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Date: event is not formatted correctly
-    Please use dd/mm/yyyy format.
+    !!! Oops! An event task needs a date and time !!!
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Oops! Date or time is missing from deadline
+    !!! Oops! An event task needs a date and time !!!
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Oops! Date or time is missing from deadline
+    !!! Oops! Date or time is missing from event !!!
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Oops! Date or time is missing from deadline
+    !!! Oops! Date or time is missing from event !!!
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Time: 160 is not formatted correctly.
-    Please use HHMM format.
+    !!! Time: 160 is not formatted correctly. !!!
+    !!! Please use HHMM format. !!!
     -------------------------------------------------------------
     -------------------------------------------------------------
     Got it. I've added this task:
@@ -56,23 +55,23 @@ Hello from
     Now you have 4 tasks in the list.
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Oops! A deadline task needs a description
+    !!! Oops! A deadline task needs a description !!!
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Oops! A deadline task needs a deadline
+    !!! Oops! A deadline task needs a deadline date and time !!!
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Oops! A deadline task needs a deadline
+    !!! Oops! A deadline task needs a deadline date and time !!!
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Oops! Date or time is missing from deadline
+    !!! Oops! Date or time is missing from deadline !!!
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Oops! Date or time is missing from deadline
+    !!! Oops! Date or time is missing from deadline !!!
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Time: 160 is not formatted correctly.
-    Please use HHMM format.
+    !!! Time: 160 is not formatted correctly. !!!
+    !!! Please use HHMM format. !!!
     -------------------------------------------------------------
     -------------------------------------------------------------
     Got it. I've added this task:
@@ -88,7 +87,7 @@ Hello from
     5. [D][✘] test description (by: Jan 22 2100 16:00)
     -------------------------------------------------------------
     -------------------------------------------------------------
-    Oops! I'm sorry, I don't know what that means.
+    !!! Oops! I'm sorry, I don't know what that means. !!!
     -------------------------------------------------------------
     -------------------------------------------------------------
     Nice! I've marked this task as done:
@@ -103,6 +102,16 @@ Hello from
     [D][✓] test description (by: Jan 22 2100 16:00)
     -------------------------------------------------------------
     -------------------------------------------------------------
+    Here are the tasks with the date: 2100-01-22
+    4. [E][✘] test description (at: Jan 22 2100 16:00)
+    5. [D][✓] test description (by: Jan 22 2100 16:00)
+    -------------------------------------------------------------
+    -------------------------------------------------------------
+    Here are the tasks with the date: 2100-01-22 and time: 16:00
+    4. [E][✘] test description (at: Jan 22 2100 16:00)
+    5. [D][✓] test description (by: Jan 22 2100 16:00)
+    -------------------------------------------------------------
+    -------------------------------------------------------------
     Noted. I've removed this task.
     [T][✓] description
     Now you have 4 tasks in the list.
@@ -111,6 +120,21 @@ Hello from
     Noted. I've removed this task.
     [E][✘] test description (at: Jan 22 2100 16:00)
     Now you have 3 tasks in the list.
+    -------------------------------------------------------------
+    -------------------------------------------------------------
+    Noted. I've removed this task.
+    [D][✓] description (by: Jan 02 2012 21:00)
+    Now you have 2 tasks in the list.
+    -------------------------------------------------------------
+    -------------------------------------------------------------
+    Noted. I've removed this task.
+    [E][✘] description (at: Jan 22 2101 14:00)
+    Now you have 1 tasks in the list.
+    -------------------------------------------------------------
+    -------------------------------------------------------------
+    Noted. I've removed this task.
+    [D][✓] test description (by: Jan 22 2100 16:00)
+    Now you have 0 tasks in the list.
     -------------------------------------------------------------
     -------------------------------------------------------------
     Goodbye! Hope to see you again soon!
