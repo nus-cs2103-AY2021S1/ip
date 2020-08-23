@@ -1,15 +1,29 @@
 package main.java;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class DeadLine extends Task {
-    private String deadLine;
+    private LocalDate deadLine;
+    private LocalDateTime deadLineWithTime;
 
-    public DeadLine(String description, String deadLine) {
+    public DeadLine(String description, String deadLine, boolean hasTime) {
         super(description);
-        this.deadLine = deadLine;
+        if (!hasTime) {
+            this.deadLine = LocalDate.parse(deadLine);
+        } else {
+            this.deadLineWithTime = LocalDateTime.parse(deadLine);
+        }
     }
 
     @Override
     public String toString() {
-        return "[D][" + this.getStatusIcon() + "] " + this.description + " (by: " + this.deadLine + ")";
+        String datePrintFormat;
+        if (deadLine != null) {
+            datePrintFormat = deadLine.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } else {
+            datePrintFormat = deadLineWithTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        }
+        return "[D][" + this.getStatusIcon() + "] " + this.description + " (by: " + datePrintFormat + ")";
     }
 }
