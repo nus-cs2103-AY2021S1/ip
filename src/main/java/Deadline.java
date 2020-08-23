@@ -1,18 +1,24 @@
+import java.time.LocalDate;
+
 public class Deadline extends Task {
-    String time;
+    LocalDate time;
     public Deadline(String description, String time) {
         super(description);
-        this.time = time;
+        this.time = LocalDate.parse(time);;
     }
 
     public Deadline(String description, boolean isDone, String time) {
         super(description, isDone);
-        this.time = time;
+        this.time = LocalDate.parse(time);
+    }
+
+    String printTime() {
+        return String.format("%s %d %d", time.getMonth(), time.getDayOfMonth(), time.getYear());
     }
 
     @Override
     public String getStatusIcon() {
-        return String.format("[D]%s", super.getStatusIcon(), time);
+        return String.format("[D]%s", super.getStatusIcon(), printTime());
     }
 
     @Override

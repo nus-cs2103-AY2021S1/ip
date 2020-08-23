@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,7 +9,7 @@ public class Duke {
 
     static ArrayList<Task> arr =  new ArrayList<Task>();
 
-    private static void markAsDone(String input) throws IOException {
+    private static void markAsDone(String input) {
         String index = input.substring(5, input.length());
         int number = Integer.parseInt(index) - 1;
         arr.get(number).setDone();
@@ -18,7 +17,6 @@ public class Duke {
         System.out.println(INDENT + "Task marked as done: ");
         System.out.println(String.format(INDENT + "%s", arr.get(number).getOutput()));
         System.out.println(LINE);
-
     }
 
     private static void printList() {
@@ -73,8 +71,9 @@ public class Duke {
     static void addEvent(String input) {
         try {
             int dash = input.indexOf('/');
-            Event temp = new Event(input.substring(6, dash),
-                    input.substring(dash, input.length()));
+            String date_String = input.substring(dash, input.length());
+            Event temp = new Event(input.substring(6, dash), date_String
+                    );
             arr.add(temp);
             System.out.println(LINE);
             System.out.println(INDENT + "Event added:  ");
@@ -89,7 +88,7 @@ public class Duke {
         }
     }
 
-    private static void addNewTask(String input) throws IOException {
+    private static void addNewTask(String input) {
         if(input.indexOf("todo") == 0) {
             addTodo(input);
         } else if (input.indexOf("deadline") == 0) {
@@ -99,7 +98,7 @@ public class Duke {
         }
     }
 
-    private static void removeEntry(String input) throws IOException {
+    private static void removeEntry(String input)  {
         int temp = Integer.parseInt(String.valueOf(input.charAt(7))) - 1;
         System.out.println(temp);
         Task removed = arr.remove(temp);
