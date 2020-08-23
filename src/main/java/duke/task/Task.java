@@ -6,9 +6,9 @@ public class Task {
 
 
     /**
-     * Creates a task
+     * Creates a task.
      *
-     * @param description the content of the class
+     * @param description the content of the class.
      */
     public Task(String description) {
         this.description = description;
@@ -29,7 +29,7 @@ public class Task {
 
 
     /**
-     * Changes the state of this task, isDone to true
+     * Changes the state of this task, isDone to true.
      */
     public Task markAsDone() {
         isDone = true;
@@ -38,9 +38,9 @@ public class Task {
 
 
     /**
-     * Overrides the toString method
+     * Overrides the toString method.
      *
-     * @return a custom event description
+     * @return a custom event description.
      */
     @Override
     public String toString() {
@@ -48,6 +48,11 @@ public class Task {
     }
 
 
+    /**
+     * Returns a fixed format in string to store the task to storage.
+     *
+     * @return T | 0 | return book
+     */
     public String toCustomString() {
         return "T | " + (isDone ? 1 : 0) + " | " + description;
     }

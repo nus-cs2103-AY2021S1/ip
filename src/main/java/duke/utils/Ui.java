@@ -4,12 +4,22 @@ import duke.task.Task;
 
 import java.util.List;
 
+
+/**
+ * Handles the printing of output to the console
+ */
 public class Ui {
 
 
     public Ui() {
     }
 
+
+    /**
+     * Outputs to console with lines.
+     *
+     * @param s string to output to console
+     */
     public void displayThis(String s) {
         displayLines();
         displayString(s);
@@ -17,6 +27,11 @@ public class Ui {
     }
 
 
+    /**
+     * Displays the contents to console.
+     *
+     * @param toDoList the Tasks to display to console
+     */
     public void displayList(List<Task> toDoList) {
         displayLines();
         displayString("Here are your current tasks:");
@@ -27,6 +42,9 @@ public class Ui {
     }
 
 
+    /**
+     * Welcomes the user with a welcome message
+     */
     public void welcome() {
         String logo = "     ____        _        \n"
                 + "    |  _ \\ _   _| | _____ \n"

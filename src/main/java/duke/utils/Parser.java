@@ -11,7 +11,18 @@ import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
 
+/**
+ * Handles all the commands from the user.
+ */
 public class Parser {
+
+    /**
+     * Converts the users input from string to Command type.
+     *
+     * @param input string the user entered.
+     * @return Command which the user wanted.
+     * @throws DukeException if the command format is wrong.
+     */
     public static Command parse(String input) throws DukeException {
         switch (input.split(" ")[0].toLowerCase()) {
         case "":
