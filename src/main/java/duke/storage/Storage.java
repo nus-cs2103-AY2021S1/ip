@@ -12,6 +12,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Class the simulates the storing and retrieving of information into the hard-disk
+ */
 public class Storage {
     
     // might use it at the end
@@ -19,22 +22,43 @@ public class Storage {
     private static final String CREATE_CSV = "Creating file todoList.csv ... ... ... ... ... ... ... ...";
     private static final String SAVE_INFO = "Saving information ... ... ... ... ... ... ... ... ... ...";
     private static final String SAVED = "Saved  ... ... ... ... ... ... ... ... ... ... ... ... ... ";
-    
+
+    /**
+     * Checking if a particular task is completed.
+     * @param s A string encoding whether a task is completed.
+     * @return Returns true if the task is completed, false otherwise.
+     */
     private boolean isTaskDone(String s) {
         return !s.equals("0");
     }
-    
+
+    /**
+     * Creates a file path.
+     * @param path The directory that to be created.
+     * @throws IOException
+     */
     private void createFilePath(Path path) throws IOException {
         //System.out.println(String.format("%s does not exist...", path.toString()));
         Files.createDirectories(path);
         //System.out.println(CREATE_FILEPATH);
     }
 
+    /**
+     * Creates a CSV file for the user.
+     * @param file The CSV file to be created.
+     * @throws IOException
+     */
     private void createCSV(File file) throws IOException {
         //System.out.println(CREATE_CSV);
         file.createNewFile();
     }
 
+    /**
+     * Recording down the list of tasks that the user have during this session.
+     * @param file The CSV file to record down the information.
+     * @param tasks Object contains the task list.
+     * @throws IOException
+     */
     private void savingFileInfo(File file, TaskList tasks) throws IOException {
         // System.out.println(SAVE_INFO);
         FileWriter fileWriter = new FileWriter(file);
@@ -45,7 +69,12 @@ public class Storage {
         //System.out.println(SAVED);
         bufferedWriter.close();
     }
-    // when the user exits, records the data back into the users file
+
+    /**
+     * When the user exits, records the data back into the user's file.
+     * @param tasks Object contains the task list.
+     */
+
     public void record(TaskList tasks) {
         String dir = System.getProperty("user.dir");
         Path path = Paths.get(dir, "duke.Duke");
@@ -68,7 +97,10 @@ public class Storage {
         }
     }
 
-    // retrieves the users data and load into the system
+    /**
+     * Retrieves the user's data and load into the system.
+     * @param tasks Object contains the task list.
+     */
     public void retrieve(TaskList tasks) {
         String dir = System.getProperty("user.dir");
         Path path = Paths.get(dir, "duke.Duke", "todoList.csv");

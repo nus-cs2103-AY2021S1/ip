@@ -2,6 +2,10 @@ package duke.ui;
 
 import java.util.Scanner;
 
+/**
+ * Class the simulates the reaction of duke to the user's input
+ */
+
 public class Ui {
     private static final String spacer = "               ";
     private static final String logo = spacer + " ____        _        \n"
@@ -21,6 +25,9 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Greets the user.
+     */
     public void greetings() {
         messageFormatter(() -> {
             System.out.println(OPENING_MSG);
@@ -32,22 +39,36 @@ public class Ui {
         });
     }
 
+    /**
+     * Saying goodbye to user.
+     */
     public void goodBye() {
         messageFormatter(() -> System.out.println(GOODBYE_MSG));
     }
 
+    /**
+     * Prints the error 'msg'.
+     * @param msg Error message to be printed.
+     */
     public void printException(String msg) {
         messageFormatter(() -> System.out.println(msg));
     }
 
-    // Formatter to format any message. Easily customizable
+    /**
+     * Formatter to format any message. Easily customizable
+     * @param func message to be wrapped around the formatter.
+     */
     public void messageFormatter(Runnable func) {
         System.out.println(LINE);
         func.run();
         System.out.println(LINE);
         System.out.println();
     }
-    
+
+    /**
+     * Reads in the user's input
+     * @return String representing the user's input.
+     */
     public String readCommand() {
         return sc.nextLine();
     }

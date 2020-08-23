@@ -12,21 +12,43 @@ import duke.task.Event;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Class that simulates the add command of the user
+ * Mainly: event, deadline, todo.
+ */
 
 public class AddCommand extends Command {
     
     private static final String ADDED_NOTIFICATION = "Got it. I've added this duke.task:";
+
     
+    /**
+     * Creates an AddCommand object
+     * @param inputArr Array of length 2 that contains information of the user input
+     *                 At index 0, contains the type of command
+     *                 At index 1, contains the message of the command.
+     */
     public AddCommand(String[] inputArr) {
         super(inputArr);
     }
     
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) 
             throws InvalidFormatDeadlineException, InvalidFormatEventException, InvalidFormatDateException {
         addTask(inputArr[0], inputArr[1], ui, tasks);
     }
 
-    // adding the duke.task into the list
+    /**
+     * Adds the given task into the task list. Expected format for the date in message is YYYY-MM-DD HHMM or 
+     * YYYY-MM-DD HHMM. If type is of todo, date can be omitted.
+     * @param type Type of task that is being entered (todo, event, deadline).
+     * @param message Details of the task that the user entered.
+     * @param ui Object that deals with interactions with the user.
+     * @param tasks Object contains the task list.
+     * @throws InvalidFormatDeadlineException Throws an exception when the format of 'message' is wrong.
+     * @throws InvalidFormatEventException Throws an exception when the format of 'message' is wrong.
+     * @throws InvalidFormatDateException Throws an exception when the format of 'message' is wrong.
+     */
     private void addTask(String type, String message, Ui ui, TaskList tasks)
             throws InvalidFormatDeadlineException, InvalidFormatEventException, InvalidFormatDateException {
         Task task;
