@@ -12,11 +12,10 @@ public class Todo extends Task {
      * @param description the description of the task.
      */
     public Todo(String description) {
-        super(description);
+        super("T", description);
     }
 
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
+    public Todo(String description, boolean isDone) {
+        super("T", description, isDone);
     }
 }

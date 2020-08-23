@@ -12,14 +12,35 @@ public class Task {
     /** Flags if a task has been completed */
     protected boolean isDone;
 
+    /** The type of task */
+    protected String type;
+
     /**
      * Constructor for the Task.
      * Tasks are created to be not completed.
-     * @param description the description of the task
+     * @param type the type of task.
+     * @param description the description of the task.
      */
-    public Task(String description) {
+    public Task(String type, String description) {
+        this.type = type;
         this.description = description;
         this.isDone = false;
+    }
+
+    /**
+     * Overloaded constructor for the Task which includes isDone.
+     * @param type the type of task.
+     * @param description the description of the task.
+     * @param isDone the completion flag of the task.
+     */
+    public Task(String type, String description, boolean isDone) {
+        this.type = type;
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+    public String getType() {
+        return type;
     }
 
     /**
@@ -58,6 +79,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), description);
+        return String.format("[%s][%s] %s", type, getStatusIcon(), description);
     }
 }
