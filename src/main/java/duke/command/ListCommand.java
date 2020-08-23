@@ -24,6 +24,11 @@ public class ListCommand extends Command {
         return "list";
     }
 
+    /**
+     * Checks whether a command equals this one.
+     * @param obj the Object to compare
+     * @return true if obj is a ListCommand
+     */
     @Override
     public boolean equals(Object obj) {
         return obj instanceof ListCommand;
