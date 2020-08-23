@@ -1,6 +1,15 @@
 import java.util.Scanner;
+
+/**
+ * Class to print string responses by the bot
+ * @author vanGoghhh
+ */
 public class UI {
 
+    /**
+     * Reads command entered by user
+     * @return string representation of command entered
+     */
     protected String readCommand() {
         Scanner sc = new Scanner(System.in);
 
@@ -9,11 +18,18 @@ public class UI {
         return message;
     }
 
+    /**
+     * Greets the user upon launch
+     */
     protected void greetUser() {
         String welcome = "Hello I am Duke!\nHow can I help you?\n";
         System.out.println(welcome);
     }
 
+    /**
+     * Prints responses when a task is completed
+     * @param task
+     */
     protected void doneTask(Task task) {
         if (task.getStatus()) {
             System.out.println("\nNice! I have completed this task!");
@@ -23,6 +39,11 @@ public class UI {
         }
     }
 
+    /**
+     * Prints responses when a task is added
+     * @param tasks TaskList containing all tasks
+     * @param newTask Task to be added
+     */
     protected void addTask(TaskList tasks, Task newTask) {
         System.out.println("\nGot it. This task is now added.");
         System.out.println(" " + newTask);
@@ -30,12 +51,21 @@ public class UI {
         System.out.println("You have " + tasksLeft + " tasks left in your list!\n");
     }
 
+    /**
+     * Prints responses when a task is deleted
+     * @param tasks TaskList containing all tasks
+     * @param deletedTask Task to be deleted
+     */
     protected void deleteTask(TaskList tasks, Task deletedTask) {
         System.out.println("\nGot it. Deleting task.....");
         System.out.println(" " + deletedTask);
         System.out.println("You have " + tasks.getTaskList().size()  + " tasks left in your list!\n");
     }
 
+    /**
+     * Prints all the tasks stored
+     * @param taskList TaskList containing all the tasks
+     */
     protected void displayTasks(TaskList taskList) {
         int index = 1;
         System.out.println("\n");

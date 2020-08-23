@@ -1,5 +1,16 @@
+/**
+ * Class to handle user commands
+ * @author vanGoghhh
+ */
+
 public class Parser {
 
+    /**
+     * Sorts user commands and handle them according to their types
+     * @param userCommand input command by the user
+     * @return the types of Command depending on the user's commands
+     * @throws InvalidCommandException when a non matching command is entered
+     */
     protected Command parseCommand(String userCommand) throws InvalidCommandException {
         String[] command = userCommand.split(" ");
         if (command[0].equals("done")) {

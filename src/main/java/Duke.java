@@ -1,8 +1,18 @@
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Class which represents the duke bot
+ * @author vanGoghhh
+ */
+
 public class Duke {
 
+    /**
+     * Initiates the bot
+     * @throws DukeException
+     * @throws IOException
+     */
     protected static void startBot() throws DukeException, IOException {
         Storage storage = new Storage("data" + File.separator +  "duke.txt");
         TaskList dukeTaskList = new TaskList(storage.loadData());
