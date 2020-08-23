@@ -13,59 +13,59 @@ public class Duke {
                 + "What can I do for you? \n"
                 + "You can type 'help' to view commands \n"
                 + "_______________________________________ \n";
-        String line = "_______________________________________\n";
         System.out.println(open);
 
         Scanner scanner = new Scanner(System.in);
-        while(true) {
-            String user_input = scanner.nextLine();
-            String[] input_split = user_input.split(" ", 2);
-            if (user_input.equals("bye")) {  // For exiting the program
-                break;
+        boolean running = true;
+        while(running) {
+            String userInput = scanner.nextLine();
+            String[] inputSplit = userInput.split(" ", 2);
+            String userCommand = inputSplit[0];
 
-            } else if (user_input.equals("list")){  // For viewing items in to do list
-                handleList();
+            try {
+                if (userCommand.equals("bye")) {  // For exiting the program
+                    running = false;
+                } else if (userCommand.equals("list")) {  // For viewing items in to do list
+                    handleList();
+                } else if (userCommand.equals("done")) {  // For marking items in the to do list as done
+                    try {
+                        handleDone(inputSplit[1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(LINE + "Invalid input! Please specify which task you have completed! \n" + LINE);
+                    }
+                } else if (userCommand.equals("todo")) { // Add new to do task
+                    try {
+                        handleTodo(inputSplit[1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(LINE + "Invalid input! Please specify your todo description! \n" + LINE);
+                    }
+                } else if (userCommand.equals("deadline")) { // Add new deadline
+                    try {
+                        handleDeadline(inputSplit[1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(LINE + "Invalid input! Please specify your deadline description and details! \n" + LINE);
+                    }
 
-            } else if (input_split[0].equals("done")) {  // For marking items in the to do list as done
-                try {
-                    handleDone(input_split[1]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(line + "Invalid input! Please specify which task you have completed! \n" + line);
+                } else if (userCommand.equals("event")) { // Add new event
+                    try {
+                        handleEvent(inputSplit[1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(LINE + "Invalid input! Please specify your event description and details! \n" + LINE);
+                    }
+
+                } else if (userCommand.equals("delete")) { // Delete task
+                    try {
+                        handleDelete(inputSplit[1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(LINE + "Invalid input! Please specify which task you want to delete! \n" + LINE);
+                    }
+                } else if (userCommand.equals("help")) { // Additional help feature
+                    handleHelp();
+                } else {
+                    System.out.println(LINE + "Invalid input! Please try again! \n" + LINE);
                 }
-
-            } else if (input_split[0].equals("todo")) { // Add new todo
-                try {
-                    handleTodo(input_split[1]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(line + "Invalid input! Please specify your todo description! \n" + line);
-                }
-
-            } else if (input_split[0].equals("deadline")) { // Add new deadline
-                try {
-                    handleDeadline(input_split[1]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(line + "Invalid input! Please specify your deadline description and details! \n" + line);
-                }
-
-            } else if (input_split[0].equals("event")) { // Add new event
-                try {
-                    handleEvent(input_split[1]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(line + "Invalid input! Please specify your event description and details! \n" + line);
-                }
-
-            } else if (input_split[0].equals("delete")) { // Delete task
-                try {
-                    handleDelete(input_split[1]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(line + "Invalid input! Please specify which task you want to delete! \n" + line);
-                }
-
-            } else if (user_input.equals("help")) { // Additional help feature
-                handleHelp();
-
-            } else {
-                System.out.println(line + "Invalid input! Please try again! \n" + line);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
 
@@ -85,10 +85,10 @@ public class Duke {
         System.out.println(LINE + "Here are the tasks in your list: \n" + output + LINE);
     }
 
-    public static void handleDone(String taskIdString) {
+    public static void handleDone(String taskIdString) throws DukeException {
         int taskId = Integer.parseInt(taskIdString);
-        if (taskId <=0 || taskId > taskList.size()) {
-            System.out.println(LINE + "Invalid input! That task does not exist! \n" + LINE);
+        if (taskId <= 0 || taskId > taskList.size()) {
+            throw new DukeException(LINE + "Invalid input! That task does not exist! \n" + LINE);
         } else {
             taskList.get(taskId - 1).setCompleted();
             System.out.println(LINE + "Nice! I've marked this task as done: \n"
