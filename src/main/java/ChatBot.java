@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class ChatBot {
 
-    static ArrayList<Task> taskList = new ArrayList<Task>();
+    private static ArrayList<Task> taskList = new ArrayList<Task>();
 
     public static void start(){
         Scanner scanner = new Scanner(System.in);
@@ -22,8 +22,13 @@ public class ChatBot {
     }
 
     private static String response(String query){
-        String command = query.toLowerCase().stripLeading().stripTrailing();
-        switch (command){
+        String[] command = query.toLowerCase().split("\\s+");
+        switch (command[0]){
+            case "done":
+                if(command.length<2){
+                    return "Error: Usage of command 'done' should be done as follows: 'done <task number>'";
+                }
+                return markedAsDone(command[1]);
             case "list":
                 return listOfTasks();
             default:
@@ -46,6 +51,21 @@ public class ChatBot {
         Task newTask = new Task(query);
         taskList.add(newTask);
     }
+
+    private static String markedAsDone(String listIndex){
+        int idx = Integer.parseInt(listIndex) - 1;
+        if (idx<0||idx>taskList.size()){
+            return "Error: Please enter a number that is in range of the task numbers";
+        } else{
+            Task curr = taskList.get(idx);
+            if(curr.isDone()){
+                return "Error: This task has already been marked as done";
+            }
+            curr.markDone();
+            return String.format("Nice I have marked this task as done:\n\t%s",curr);
+        }
+    }
+
 
     private static boolean isEnd(String query){
         String editedQuery = query.stripLeading().stripTrailing();
