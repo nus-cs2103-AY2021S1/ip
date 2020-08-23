@@ -341,6 +341,11 @@ public class ParserTest {
     }
 
     @Test
+    public void parse_findCommand_findCommand() {
+        assertEquals(new FindCommand("find books"), Parser.parse("find books"));
+    }
+
+    @Test
     public void parse_taskCommand_addCommand() {
         assertEquals(new AddCommand("todo homework"), Parser.parse("todo homework"));
         assertEquals(new AddCommand("event anything"), Parser.parse("event anything"));
