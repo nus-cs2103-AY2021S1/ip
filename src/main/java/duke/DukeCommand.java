@@ -1,3 +1,5 @@
+package duke;
+
 public enum DukeCommand {
     LIST, DELETE, TODO, DONE, DEADLINE, EVENT, BYE;
     public static DukeCommand getCommand(String str) {

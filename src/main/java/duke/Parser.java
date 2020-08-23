@@ -1,3 +1,15 @@
+package duke;
+
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.exception.EmptyCommandException;
+import duke.exception.InvalidCommandException;
+import duke.exception.MissingArgumentException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
