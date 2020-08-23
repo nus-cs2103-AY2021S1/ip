@@ -15,16 +15,19 @@ public class ParsedCommand {
         this.commandType = commandType;
     }
 
-    public void withIndex(int index) {
+    public ParsedCommand withIndex(int index) {
         this.index = index;
+        return this;
     }
 
-    public void withName(String name) {
+    public ParsedCommand withName(String name) {
         this.name = name;
+        return this;
     }
 
-    public void withDate(String date) {
+    public ParsedCommand withDate(String date) {
         this.date = date;
+        return this;
     }
 
     public String getType() {
@@ -33,6 +36,14 @@ public class ParsedCommand {
 
     public int getIndex() {
         return index;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public Task toTask() throws DukeException {
@@ -49,5 +60,23 @@ public class ParsedCommand {
         }
 
         return newTask;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ParsedCommand)) {
+            return false;
+        }
+
+        ParsedCommand pc = (ParsedCommand) other;
+
+        boolean a = pc.getType().equals(getType()) && pc.getIndex() == getIndex()
+                && pc.getName().equals(getName()) && pc.getDate().equals(getDate());
+        return pc.getType().equals(getType()) && pc.getIndex() == getIndex()
+                && pc.getName().equals(getName()) && pc.getDate().equals(getDate());
     }
 }

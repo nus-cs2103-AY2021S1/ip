@@ -1,12 +1,13 @@
 package duke;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class Parser {
     private Scanner sc;
 
-    public Parser() {
-        sc = new Scanner(System.in);
+    public Parser(InputStream input) {
+        sc = new Scanner(input);
     }
 
     public ParsedCommand parseNextCommand() throws DukeException {
@@ -28,14 +29,22 @@ public class Parser {
             command.withName(sc.nextLine().trim());
             break;
         case "deadline":
-            String[] nameAndDeadline = sc.nextLine().split(" /by ");
-            command.withName(nameAndDeadline[0]);
-            command.withDate(nameAndDeadline[1]);
+            try {
+                String[] nameAndDeadline = sc.nextLine().trim().split(" /by ");
+                command.withName(nameAndDeadline[0]);
+                command.withDate(nameAndDeadline[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Please use the format: deadline <name> /by <yyyy-mm-dd>");
+            }
             break;
         case "event":
-            String[] nameAndEvent = sc.nextLine().split(" /at ");
-            command.withName(nameAndEvent[0]);
-            command.withDate(nameAndEvent[1]);
+            try {
+                String[] nameAndEvent = sc.nextLine().trim().split(" /at ");
+                command.withName(nameAndEvent[0]);
+                command.withDate(nameAndEvent[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Please use the format: event <name> /at <yyyy-mm-dd>");
+            }
             break;
         default:
             throw new DukeException("What's that? Please mention one of \"list\", \"done\", \"todo\", \"deadline\", \"event\", or \"bye\".");

@@ -47,4 +47,18 @@ public class TaskList implements Iterable<Task> {
         return string;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof TaskList)) {
+            return false;
+        }
+
+        TaskList tl = (TaskList) other;
+
+        return tl.toString().equals(toString()); // might be a bit slow but is a simple implementation
+    }
 }

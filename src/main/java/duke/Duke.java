@@ -10,7 +10,7 @@ public class Duke {
     private Parser parser;
 
     public Duke(String filePath) {
-        parser = new Parser();
+        parser = new Parser(System.in);
         storage = new Storage(SAVE_FILE);
         try {
             tasks = storage.load();
