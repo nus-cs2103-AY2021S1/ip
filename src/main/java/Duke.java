@@ -1,4 +1,10 @@
-import java.util.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
+
 
 public class Duke {
 
@@ -10,6 +16,7 @@ public class Duke {
     public static final String EVENT = "event";
     public static final String DEADLINE = "deadline";
     public static final String DELETE = "delete";
+    public static DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
 
     public static void main(String[] args) {
         List<Task> list = new ArrayList<>();
@@ -72,8 +79,8 @@ public class Duke {
                     }
 
                     case TODO:
-                        String detail = sc.nextLine();
-                        if (detail.trim().equals("")) {
+                        String detail = sc.nextLine().trim();
+                        if (detail.equals("")) {
                             throw new DukeException("Oops! Todo cannot be empty");
                         }
                         ToDo toDo = new ToDo(detail);
@@ -94,7 +101,7 @@ public class Duke {
                         if (arr.length == 1) {
                             throw new DukeException("Oops! You need to include both detail and time.");
                         }
-                        Event event = new Event(arr[0], arr[1]);
+                        Event event = new Event(arr[0].trim(), LocalDateTime.parse(arr[1].trim(), df));
                         list.add(event);
                         System.out.println(LINE +
                                 "    Got it! I have added this event to the list!" + "\n" +
@@ -113,7 +120,7 @@ public class Duke {
                         if (arr.length == 1) {
                             throw new DukeException("Oops! You need to include both detail and time.");
                         }
-                        Deadline deadline = new Deadline(arr[0], arr[1]);
+                        Deadline deadline = new Deadline(arr[0].trim(), LocalDateTime.parse(arr[1].trim(), df));
                         list.add(deadline);
                         System.out.println(LINE +
                                 "    Got it! I have added this deadline to the list!" + "\n" +
