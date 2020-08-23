@@ -1,13 +1,14 @@
 package duke.parser;
 
-import duke.command.*;
-
 import duke.exceptions.DukeException;
-import duke.exceptions.EmptyBodyException;
+
+import duke.command.*;
 import duke.parser.Parser;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 public class ParserTest {
@@ -55,9 +56,7 @@ public class ParserTest {
                 "event ",
         };
         for (String input : userInput) {
-            assertThrows(DukeException.class, () -> {
-                parser.parse(input);
-            });
+            assertThrows(DukeException.class, () -> parser.parse(input));
         }
     }
 
