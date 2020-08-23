@@ -1,5 +1,7 @@
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 public class Ultron {
 
@@ -21,10 +23,17 @@ public class Ultron {
         storage = new Storage(path);
 
         //Fetch the data
-        ArrayList<Task> taskArrayList = new ArrayList<>();
+        ArrayList<Task> taskArrayList;
+
         try {
+
+            //Fetch all from storage
             taskArrayList = storage.fetchAll();
-        }catch (UltronException e){}
+        }catch (UltronException e){
+
+            //Initialise the blank arraylist
+            taskArrayList = new ArrayList<>();
+        }
 
         //Create a task list
         taskList = new TaskList(taskArrayList);
@@ -33,47 +42,6 @@ public class Ultron {
         ui = new UI();
 
     }
-
-    private String getInput() {
-
-        //Declare type
-        String input;
-
-        // Take in input
-        input = this.scanner.nextLine();
-
-        //Return the input
-        return input;
-    }
-
-    private String wrapper(String message){
-        //Wrapper when printing the error message
-        return "Heh, you can't even type in a correct command\n"
-                + message
-                + "\nI'll give u a pity tip\n"
-                + "Use 'help' for more information";
-    }
-
-    public void printIntro(){
-        // Print the intro messages
-
-        //Logo for the mascot
-        String LOGO = "  _    _ _ _                   \n" +
-                " | |  | | | |                  \n" +
-                " | |  | | | |_ _ __ ___  _ __  \n" +
-                " | |  | | | __| '__/ _ \\| '_ \\ \n" +
-                " | |__| | | |_| | | (_) | | | |\n" +
-                "  \\____/|_|\\__|_|  \\___/|_| |_|";
-
-        //Print the intro
-        System.out.println(LOGO
-                + "\n____________________________________________________________\n"
-                + "Hello lesser being, I am Ultron\n"
-                + "What do you want?\n"
-                + "____________________________________________________________\n");
-    }
-
-
 
     private int parseInteger(final String args) throws UltronException {
         //Catch any errors in the number
@@ -112,7 +80,7 @@ public class Ultron {
         switch (inputCommand) {
 
             //If the user keys in bye
-            case "bye": {
+            case "bye":
                 storage.writeAll(taskList.getList());
                 return true;
 
