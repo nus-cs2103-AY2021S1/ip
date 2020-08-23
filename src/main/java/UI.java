@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class UI {
 
@@ -41,6 +42,16 @@ public class UI {
         System.out.println("\n");
         System.out.println("Here are the tasks in your tasklist:");
         for (Task task: taskList.getTaskList()) {
+            System.out.println(index + "." + task);
+            index++;
+        }
+        System.out.println("\n");
+    }
+
+    protected void findTask(ArrayList<Task> foundTasks) {
+        System.out.println("\nHere are the tasks in your list!\n");
+        int index = 1;
+        for (Task task: foundTasks) {
             System.out.println(index + "." + task);
             index++;
         }

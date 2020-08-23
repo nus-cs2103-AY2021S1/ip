@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class FindCommand extends Command {
 
     private String command;
@@ -7,8 +9,15 @@ public class FindCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, UI ui) throws DukeException {
-        
+    void execute(TaskList tasks, UI dukeUI) throws DukeException {
+        try {
+            String[] keywords = this.command.split(" ", 2);
+            String keyword = keywords[1];
+            ArrayList<Task> foundTasks = tasks.findTask(keyword);
+            dukeUI.findTask(foundTasks);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidKeywordException();
+        }
     }
 
     @Override
