@@ -1,0 +1,4 @@
+T / 1 / gohome
+D / 0 / tomorrow / june
+E / 1 / orientation / town
+T / 0 / work

@@ -8,6 +8,6 @@ public class Todo extends Task {
     @Override
     public String toString() {
         String finished = this.done ? "✓" : "✗";
-        return "[T]" + "[" + finished + "]" + taskName;
+        return "[T]" + "[" + finished + "] " + taskName;
     }
 }
