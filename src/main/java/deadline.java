@@ -1,9 +1,16 @@
+import java.awt.desktop.SystemSleepEvent;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 /**
  * The deadline is a subclass of Task and it is used to describe tasks that has to be completed by a specific day.
  */
 public class deadline extends Task {
-    private String day;
-
+    private String day = null;
     /**
      *
      * @param name super(name) so that it does whatever is mentioned in the parent class
@@ -21,5 +28,64 @@ public class deadline extends Task {
      */
     public String toString() {
         return "[D]" + super.toString() + "(by: " + this.day + ")";
+    }
+    public static LocalDate localDate(String string){
+        try{
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
+            LocalDate parsedDate = LocalDate.parse(string, formatter);
+            return parsedDate;
+        }catch (DateTimeException d) {
+            /*try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd, HH:mm");
+                LocalDateTime parsedDate = LocalDateTime.parse(string, formatter);
+                return parsedDate;
+            } catch (DateTimeException g) {
+                try {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                    LocalTime parsedDate = LocalTime.parse(string, formatter);
+                } catch (DateTimeException f) {
+                    System.out.println(f.toString());
+                }
+            } */
+            throw d;
+        }
+    }
+    public static LocalDateTime localDateTime(String string){
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd, HH:mm");
+            LocalDateTime parsedDate = LocalDateTime.parse(string, formatter);
+            return parsedDate;
+        } catch (DateTimeException g) {
+            throw g;
+        }
+    }
+    public static LocalTime localTime(String string){
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            LocalTime parsedDate = LocalTime.parse(string, formatter);
+            return parsedDate;
+        } catch (DateTimeException f) {
+            throw f;
+        }
+    }
+    public static deadline provide(String name, String string){
+        deadline e;
+        try{
+            LocalDate parsedDate = localDate(string);
+            e = new deadline(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy")));
+        }catch (DateTimeException d) {
+            try {
+                LocalDateTime parsedDate = localDateTime(string);
+                e = new deadline(name, parsedDate.format(DateTimeFormatter.ofPattern("yyyy MM dd, HH:mm")));
+            } catch (DateTimeException g) {
+                try {
+                    LocalTime parsedDate = localTime(string);
+                    e = new deadline(name, parsedDate.format(DateTimeFormatter.ofPattern("HH:mm")));
+                } catch (DateTimeException f) {
+                    System.out.println(f.toString());
+                    throw f;
+                }
+            } }
+        return e;
     }
 }

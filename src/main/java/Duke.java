@@ -1,4 +1,10 @@
+import java.awt.event.AdjustmentEvent;
 import java.io.FileNotFoundException;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,7 +31,45 @@ public class Duke {
             } while (sc.hasNextLine());
         }
     }
-
+    public static LocalDate localDate(String string){
+        try{
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
+            LocalDate parsedDate = LocalDate.parse(string, formatter);
+            return parsedDate;
+        }catch (DateTimeException d) {
+            /*try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd, HH:mm");
+                LocalDateTime parsedDate = LocalDateTime.parse(string, formatter);
+                return parsedDate;
+            } catch (DateTimeException g) {
+                try {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                    LocalTime parsedDate = LocalTime.parse(string, formatter);
+                } catch (DateTimeException f) {
+                    System.out.println(f.toString());
+                }
+            } */
+            throw d;
+        }
+    }
+    public static LocalDateTime localDateTime(String string){
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd, HH:mm");
+                LocalDateTime parsedDate = LocalDateTime.parse(string, formatter);
+                return parsedDate;
+            } catch (DateTimeException g) {
+                throw g;
+            }
+    }
+    public static LocalTime localTime(String string){
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            LocalTime parsedDate = LocalTime.parse(string, formatter);
+            return parsedDate;
+        } catch (DateTimeException f) {
+            throw f;
+        }
+    }
     /**
      * The output function is also static and it reads the input strings that is stored in the static list of todos. This
      * then gives differently outputs and behaves differently depending on the input string.
@@ -86,7 +130,10 @@ public class Duke {
                 }
                 String s = "";
                 int index = -1;
+                int end = -1;
+                boolean duration = false;
                 boolean time = false;
+                String start = "";
                 for (int i = 5; i < string.length(); i++) {
                     if (string.charAt(i) == '/') {
                         index = i;
@@ -95,12 +142,24 @@ public class Duke {
                     }
                     s = s + string.charAt(i);
                 }
+                for(int i = index + 1; i < string.length(); i++){
+                    if (string.charAt(i) == '-' && i != string.length() - 1) {
+                        end = i;
+                        duration = true;
+                        break;
+                    }
+                    start = start + string.charAt(i);
+                }
                 if(!time){
                     System.out.println(new EventException(false).toString());
                     continue;
                 }
-                event e = new event(s.substring(1, s.length() - 1), string.substring(index + 4));
-                e.output();
+                if(!duration){
+                    continue;
+                }
+                System.out.println(string.substring(end + 1));
+                event d = event.provide(s.substring(1, s.length() - 1), string.substring(index + 4, end), string.substring(end + 1));
+                d.output();
             }else if (string.length() >= 8 && string.substring(0, 8).equals("deadline")) {
                 System.out.println("\n" + string + "\n  ____________________________________________________________");
                 if(string.length() == 8 || string.length() == 9){
@@ -122,8 +181,8 @@ public class Duke {
                     System.out.println(new DeadlineException(false).toString());
                     continue;
                 }
-                deadline e = new deadline(s.substring(1, s.length() - 1), string.substring(index + 4));
-                e.output();
+                deadline d = deadline.provide(s.substring(1, s.length() - 1), string.substring(index + 4));
+                d.output();
             } else {
                 System.out.println("\n" + string + "\n  ____________________________________________________________");
                 System.out.println(new WrongInputException().toString());
