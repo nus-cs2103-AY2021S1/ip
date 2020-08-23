@@ -1,8 +1,11 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -92,7 +95,8 @@ public class Duke {
                 }
                 try {
                     String time = content.substring(index + 4);
-                    Task newTask = isDeadline ? new Deadline(taskName, time) : new Event(taskName, time);
+                    LocalDate dateTime = LocalDate.parse(time);
+                    Task newTask = isDeadline ? new Deadline(taskName, dateTime) : new Event(taskName, dateTime);
                     tasks.add(newTask);
                     updateStorage(tasks);
                     printTopLine();
@@ -103,6 +107,10 @@ public class Duke {
                     printBottomLine();
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(new EmptyArgumentException("No task name given"));
+                    continue;
+                }
+                catch (DateTimeException e) {
+                    System.out.println(new InvalidArgumentException("Time given must be in the format yyyy-mm-dd"));
                     continue;
                 }
             } else if (word.startsWith("delete")) {
@@ -239,8 +247,16 @@ public class Duke {
                 //remove ) closing bracket
                 deadline = deadline.substring(0, deadline.length() - 1);
                 //add task
-                Task toBeAdded = new Deadline(taskName, deadline, isCompleted);
-                tasks.add(toBeAdded);
+                try {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+                    LocalDate deadlineDate = LocalDate.parse(deadline, formatter);
+                    Task toBeAdded = new Deadline(taskName, deadlineDate, isCompleted);
+                    tasks.add(toBeAdded);
+                } catch (DateTimeParseException e) {
+                    //corrupted input
+                    continue;
+                }
+
             } else if (sentence.startsWith("[E")) {
                 //Sentence is in the form [E][<Status of Task>]   (at: tmr)
 
@@ -288,8 +304,15 @@ public class Duke {
                 time = time.substring(0, time.length() - 1);
 
                 //add task
-                Task toBeAdded = new Event(taskName, time, isCompleted);
-                tasks.add(toBeAdded);
+                try {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+                    LocalDate timeDate = LocalDate.parse(time, formatter);
+                    Task toBeAdded = new Event(taskName, timeDate, isCompleted);
+                    tasks.add(toBeAdded);
+                } catch (DateTimeParseException e) {
+                    //corrupted input
+                    continue;
+                }
             }
         }
     }

@@ -1,16 +1,23 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    String time;
-    Event(String taskName, String time) {
+    LocalDate time;
+
+
+    Event(String taskName, LocalDate date) {
         super(taskName);
-        this.time = time;
+        this.time = date;
     }
-    Event(String taskName, String time, boolean isCompleted) {
+    Event(String taskName, LocalDate time, boolean isCompleted) {
         super(taskName,isCompleted);
         this.time = time;
     }
 
     @Override
     public String toString() {
-        return String.format("%s%s%s%s", "[E]", super.toString(), "(at: ", time + ")");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        String timeFormatted = time.format(formatter);
+        return String.format("%s%s%s%s", "[E]", super.toString(), "(at: ", timeFormatted + ")");
     }
 }
