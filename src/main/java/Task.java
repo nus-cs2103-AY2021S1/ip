@@ -15,6 +15,11 @@ public class Task {
         isDone = true;
     }
 
+    public String toDataString() {
+        if (isDone) return "? | 1 | " + description;
+        else return "? | 0 | " + description;
+    }
+
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
