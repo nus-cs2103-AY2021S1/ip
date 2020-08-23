@@ -5,10 +5,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-
 public class TaskList {
 
     private final List<Task> list = new ArrayList<>();
@@ -19,35 +15,11 @@ public class TaskList {
     TaskList(Storage storage) throws FileNotFoundException, DukeException {
         this.storage = storage;
         Scanner scanner = storage.load();
+        Parser parser = new Parser();
         while (scanner.hasNext()) {
             String taskString = scanner.nextLine();
-            char taskType = taskString.charAt(3);
-            boolean isDone = taskString.charAt(6) == '\u2713';
-            if (taskType == 'T') {
-                ToDo task = new ToDo("todo " + taskString.substring(9));
-                if (isDone) {
-                    task.markDone();
-                }
-                list.add(task);
-            } else if (taskType == 'E') {
-                int index = taskString.indexOf(" (at: ");
-                String time = taskString.substring(index + 6, taskString.length() - 1);
-                Event task = new Event("event " + taskString.substring(9, index) + " /at " + time);
-                if (isDone) {
-                    task.markDone();
-                }
-                list.add(task);
-            } else if (taskType == 'D') {
-                int index = taskString.indexOf(" (by: ");
-                String date = taskString.substring(index + 6, taskString.length() - 1);
-                LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("d MMM yyyy"));
-                date = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                Deadline task = new Deadline("deadline " + taskString.substring(9, index) + " /by " + date);
-                if (isDone) {
-                    task.markDone();
-                }
-                list.add(task);
-            }
+            Task task = parser.parseFileData(taskString);
+            list.add(task);
         }
     }
 
