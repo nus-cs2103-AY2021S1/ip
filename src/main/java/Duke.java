@@ -26,16 +26,15 @@ public class Duke {
     private static final SimpleDateFormat dateTimeConverterFormat = new SimpleDateFormat("MMM dd yyyy hh:mma");
     private static final SimpleDateFormat dateConverterFormat = new SimpleDateFormat("MMM dd yyyy");
 
+    private Ui ui;
 
-    public static void readAndEcho(List<Task> list) {
+    public Duke() {
+        ui = new Ui();
+    }
 
-        //Formatting of greeting
-        String intro1 = "Hello! I'm Duke \n";
-        String intro2 = "What can I do for you? \n";
 
-        String greeting = addDividers(formatString(intro1) + formatString(intro2));
-        System.out.println(greeting);
-
+    public void readAndEcho(List<Task> list) {
+        ui.printGreeting();
         //Reading in user input
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -46,7 +45,7 @@ public class Duke {
             try {
                 //Print list when user inputs "list"
                 if (input.equals("list")) {
-                    printList(list);
+                    ui.printList(list);
                 }
                 // Mark task as done when user inputs "done"
                 else if (inputArr[0].equals("done")) {
@@ -74,10 +73,7 @@ public class Duke {
                         String todoName = input.substring(5);
                         ToDo todo = new ToDo(todoName);
                         list.add(todo);
-                        String s = formatString("Got it. I've added this task: \n") +
-                                formatString(todo.toString() + '\n') +
-                                formatString("Now you have " + list.size() + " tasks in the list. \n");
-                        System.out.println(addDividers(s));
+                        ui.printAddTask(todo, list.size());
                     }
                     //Add a new deadline task
                     else if (inputArr[0].equals("deadline")) {
@@ -101,10 +97,7 @@ public class Duke {
                         }
                         Deadline deadline = new Deadline(deadlineArr[0], date, isTime);
                         list.add(deadline);
-                        String s = formatString("Got it. I've added this task: \n") +
-                                formatString(deadline.toString() + '\n') +
-                                formatString("Now you have " + list.size() + " tasks in the list. \n");
-                        System.out.println(addDividers(s));
+                        ui.printAddTask(deadline, list.size());
                     }
                     //Add a new Event task
                     else if (inputArr[0].equals("event")) {
@@ -127,10 +120,7 @@ public class Duke {
                         }
                         Event event = new Event(eventArr[0], date, isTime);
                         list.add(event);
-                        String s = formatString("Got it. I've added this task: \n") +
-                                formatString(event.toString() + '\n') +
-                                formatString("Now you have " + list.size() + " tasks in the list. \n");
-                        System.out.println(addDividers(s));
+                        ui.printAddTask(event, list.size());
                     }
                     //Unrecognised command
                     else {
@@ -139,87 +129,55 @@ public class Duke {
                 }
                 writeToFile(list);
             } catch (TaskException e) {
-                System.out.println(addDividers(formatString(e.toString())));
+                ui.printString(e.toString());
             } catch (DukeException e) {
-                System.out.println(addDividers(formatString(e.toString())));
+                ui.printString(e.toString());
             } catch (NumberFormatException e) {
-                System.out.println(addDividers(formatString("Please enter out a valid number\n")));
+                ui.printString("Please enter out a valid number\n");
             } catch (ParseException e) {
-                System.out.println(addDividers(formatString("Please enter a date and time in the format of \n") +
-                        formatString("dd/MM/2020 HHmm (e.g. 02/12/2020 1530) " +
-                        "or dd/MM/2020 (e.g. 15/02/2020)\n")));
+                ui.printString("Please enter a date and time in the format of \n"
+                        + "dd/MM/2020 HHmm (e.g. 02/12/2020 1530) "
+                        + "or dd/MM/2020 (e.g. 15/02/2020)\n");
             }
             input = sc.nextLine();
         }
 
 
         //Formatting and printing of goodbye message
-        String goodbye = "Bye. Hope to see you again soon! \n";
-        System.out.println(addDividers(formatString(goodbye)));
+        ui.printGoodbye();
     }
 
-    private static void deleteTaskFromList(List<Task> list, int taskNumber) throws DukeException {
+    private void deleteTaskFromList(List<Task> list, int taskNumber) throws DukeException {
         if (taskNumber < 0 || taskNumber > list.size() - 1) {
             throw new DukeException("Please enter a valid task number\n");
         } else {
             Task task = list.get(taskNumber);
             list.remove(task);
-            String success = formatString("Noted. I've removed this task: \n") +
-                    formatString(task.toString() + "\n") +
-                    formatString("Now you have " + list.size() + " tasks in the list. \n");
-            System.out.println(addDividers(success));
+            ui.printDeletedTask(task, list.size());
         }
     }
 
 
-    private static void markTaskDoneInList(List<Task> list, Integer taskNumber) throws DukeException {
+    private void markTaskDoneInList(List<Task> list, Integer taskNumber) throws DukeException {
         if (taskNumber < 0 || taskNumber > list.size() - 1) {
             throw new DukeException("Please enter a valid task number\n");
         } else {
-            list.get(taskNumber).markDone();
-            String success = formatString("Nice! I've marked this task as done: \n") +
-                    formatString(list.get(taskNumber).toString() + "\n");
-            System.out.println(addDividers(success));
+            Task task = list.get(taskNumber);
+            task.markDone();
+            ui.printMarkedTask(task);
         }
 
     }
 
-    private static void printList(List<Task> list) {
-        String printedList = "";
-        if (list.size() > 0) {
-            for (int i = 0; i < list.size(); i++) {
-                String lineItem = (i + 1) + ". " + list.get(i) + "\n";
-                printedList = printedList + formatString(lineItem);
-            }
-        } else {
-            String emptyString = "List is empty \n";
-            printedList = formatString(emptyString);
-        }
-        System.out.println(addDividers(printedList));
-    }
 
-    private static String addDividers(String s) {
-        String divider = "____________________________________________________________________\n";
-        String dividerFormatted = String.format("%" + (5 + divider.length()) + "s", divider);
-        return dividerFormatted + s + dividerFormatted;
-    }
-
-    private static String formatString(String s) {
-        return String.format("%" + (6 + s.length()) + "s", s);
-    }
 
     public static void main(String[] args) {
+        Duke duke = new Duke();
         ArrayList<Task> arrayList = new ArrayList<>();
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
         readFile(arrayList);
-        readAndEcho(arrayList);
+        duke.readAndEcho(arrayList);
     }
 
     private static void readFile(List<Task> arrayList) {
