@@ -1,7 +1,7 @@
 public class ToDo extends Task {
     public ToDo(String contents) {
-        super(contents);
-        super.inputString = this.getClass().getSimpleName().toLowerCase() + " " + contents;
+        inputString = this.getClass().getSimpleName().toLowerCase() + " " + contents;
+        setContents(contents);
     }
 
     public String toString() {

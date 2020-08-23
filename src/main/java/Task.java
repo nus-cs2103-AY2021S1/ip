@@ -1,9 +1,15 @@
-public class Task {
-    private final String contents;
-    private boolean isDone = false;
-    protected String inputString;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Task(String contents) {
+public class Task {
+    protected DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM d yyyy HHmm'H'");
+    protected LocalDateTime deadline;
+
+    protected String inputString;
+    private String contents;
+    private boolean isDone = false;
+
+    protected void setContents(String contents) {
         this.contents = contents;
     }
 
@@ -19,6 +25,7 @@ public class Task {
         return inputString;
     }
 
+    @Override
     public String toString() {
         return (isDone ? "[✓]" : "[✗]") + " " + contents;
     }
