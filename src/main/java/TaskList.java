@@ -8,7 +8,13 @@ public class TaskList {
     public TaskList() {
 
         //Create a new arraylist to store the tasks
-        this.list = new ArrayList<>();
+        list = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<Task> taskArrayList){
+
+        //Set the arraylist to the list
+        list = taskArrayList;
     }
 
     public void displayContent() {
@@ -22,7 +28,12 @@ public class TaskList {
 
     }
 
+    public ArrayList<Task> getList(){
+        return list;
+    }
+
     public int size() {
+
 
         //Get the size of the list
         return this.list.size();

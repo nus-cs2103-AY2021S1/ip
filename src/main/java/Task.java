@@ -28,7 +28,11 @@ public abstract class Task {
         return this.completed;
     }
 
+    public abstract String getType();
+    public abstract String getCommand();
+
     public void markDone() {
+
 
         //Mark the task as complete
         this.completed = true; //mark the task as done

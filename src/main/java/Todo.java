@@ -13,6 +13,16 @@ public class Todo extends Task {
     }
 
     @Override
+    public String getType() {
+        return "TODO";
+    }
+
+    @Override
+    public String getCommand() {
+        return String.format("%s", getMessage());
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

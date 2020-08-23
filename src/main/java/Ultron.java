@@ -12,15 +12,68 @@ public class Ultron {
     //Get the pattern for the regex for parsing the command
     private final Pattern pattern = Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
 
-    public Ultron() {
+    //Get the storage
+    private final Storage storage;
 
-        //Create a new task list
-        taskList = new TaskList();
+    public Ultron(String path){
 
+        //Create the Storage object
+        storage = new Storage(path);
+
+        //Fetch the data
+        ArrayList<Task> taskArrayList = new ArrayList<>();
+        try {
+            taskArrayList = storage.fetchAll();
+        }catch (UltronException e){}
+
+        //Create a task list
+        taskList = new TaskList(taskArrayList);
+      
         //Create new instance of UI
         ui = new UI();
 
     }
+
+    private String getInput() {
+
+        //Declare type
+        String input;
+
+        // Take in input
+        input = this.scanner.nextLine();
+
+        //Return the input
+        return input;
+    }
+
+    private String wrapper(String message){
+        //Wrapper when printing the error message
+        return "Heh, you can't even type in a correct command\n"
+                + message
+                + "\nI'll give u a pity tip\n"
+                + "Use 'help' for more information";
+    }
+
+    public void printIntro(){
+        // Print the intro messages
+
+        //Logo for the mascot
+        String LOGO = "  _    _ _ _                   \n" +
+                " | |  | | | |                  \n" +
+                " | |  | | | |_ _ __ ___  _ __  \n" +
+                " | |  | | | __| '__/ _ \\| '_ \\ \n" +
+                " | |__| | | |_| | | (_) | | | |\n" +
+                "  \\____/|_|\\__|_|  \\___/|_| |_|";
+
+        //Print the intro
+        System.out.println(LOGO
+                + "\n____________________________________________________________\n"
+                + "Hello lesser being, I am Ultron\n"
+                + "What do you want?\n"
+                + "____________________________________________________________\n");
+    }
+
+
 
     private int parseInteger(final String args) throws UltronException {
         //Catch any errors in the number
@@ -59,7 +112,8 @@ public class Ultron {
         switch (inputCommand) {
 
             //If the user keys in bye
-            case "bye":
+            case "bye": {
+                storage.writeAll(taskList.getList());
                 return true;
 
             //If the user keys in list
@@ -209,10 +263,10 @@ public class Ultron {
     public static void main(final String[] args) {
 
         //Create a new duke
-        Ultron duke = new Ultron();
+        Ultron ultron = new Ultron("data/data.txt");
 
         //Run the main loop
-        duke.mainLoop();
+        ultron.mainLoop();
 
     }
 }

@@ -48,6 +48,16 @@ public class Deadline extends Task {
 
     }
 
+    @Override
+    public String getType() {
+        return "DEADLINE";
+    }
+
+    @Override
+    public String getCommand() {
+        return String.format("%s /by %s", getMessage(), getDate());
+    }
+
     public static Task parseCommand(final String args) {
         //Create the matcher
         Matcher matcher = DATEMATCH.matcher(args);

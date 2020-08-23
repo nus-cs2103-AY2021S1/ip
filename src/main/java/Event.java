@@ -48,7 +48,18 @@ public class Event extends Task {
 
     }
 
+    @Override
+    public String getType() {
+        return "EVENT";
+    }
+
+    @Override
+    public String getCommand() {
+        return String.format("%s /at %s", getMessage(), getDate());
+    }
+
     public static Task parseCommand(final String args) {
+
         //Create the matcher
         Matcher matcher = DATEMATCH.matcher(args);
 
