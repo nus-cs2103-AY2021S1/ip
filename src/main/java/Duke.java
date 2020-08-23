@@ -26,7 +26,7 @@ public class Duke {
             System.out.println("Please specify a time!");
         } catch (DukeException e) {
             System.out.println ("Description of a task cannot be empty!!");
-        }
+        } 
     }
 
 
@@ -51,7 +51,7 @@ public class Duke {
     }
 
 
-    public static void tasks(String s) throws DukeException, IllegalArgumentException {
+    public static void tasks(String s) throws DukeException, IllegalArgumentException{
         Task task;
         if (s.contains("todo")) {
             if (s.substring(4).trim().length() == 0) {
@@ -60,18 +60,18 @@ public class Duke {
             task = new Todo(s.substring(5));
 
         } else if (s.contains("deadline")) {
-            String[] str = s.split("/");
+            String[] str = s.split("/by");
             if (str[0].substring(8).trim().length() == 0) {
                 throw new DukeException();
             }
-            task = new Deadline(str[0].substring(9), str[1].substring(3));
+            task = new Deadline(str[0].substring(9), str[1].trim());
 
         } else if (s.contains ("event")) {
-            String[] str = s.split ("/");
+            String[] str = s.split ("/at");
             if (str[0].substring(5).trim().length() == 0) {
                 throw new DukeException();
             }
-            task = new Event (str[0].substring(6), str[1].substring(3));
+            task = new Event (str[0].substring(6), str[1].trim());
 
         } else {
             throw new IllegalArgumentException();

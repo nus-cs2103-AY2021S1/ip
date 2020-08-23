@@ -6,7 +6,7 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 Hello! I'm Duke  ^_^
-What can I do for you?
+What can I do for you??
 Got it. I've added this task:
 [T][NOT DONE] sleep
 Now you have 1 tasks in the list.
@@ -36,5 +36,11 @@ Now you have 2 tasks in the list.
 Here are the tasks in your list:
 1.[T][DONE], sleep 
 2.[E][DONE] eat ramen (at: Thursday 7pm) 
+Got it. I've added this task:
+[E][NOT DONE] ice skating (at: Aug 26 2020)
+Now you have 3 tasks in the list.
+Got it. I've added this task:
+[E][NOT DONE] no (at: 2020/09/13)
+Now you have 4 tasks in the list.
 Oops Sorry! >_< I don't know what that means... 
 Bye! Hope to see you again soon! :)
