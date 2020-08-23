@@ -9,14 +9,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FileManager {
+public class Storage {
     
     String filePath;
     private File file;
     Scanner sc;
     private Layout layout = new Layout();
     
-    FileManager(String filePath) {
+    public Storage(String filePath) {
         
         //Find text file inside data folder
         this.filePath = filePath;
@@ -45,8 +45,9 @@ public class FileManager {
         }
     }
     
-    public void readFile(ArrayList<Task> tasks) {
+    public ArrayList<Task> load() {
             Task task;
+            ArrayList<Task> tasks = new ArrayList<>();
             
             while(sc.hasNextLine()) {
                 String [] arr = sc.nextLine().split(" \\| ");
@@ -71,8 +72,7 @@ public class FileManager {
                 }
                 tasks.add(task);
             }
-
-        
+        return tasks;
     }
 
     public void writeFile(ArrayList<Task> tasks) {

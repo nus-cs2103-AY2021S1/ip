@@ -2,11 +2,16 @@ package ip.src.main.java;
 
 import java.util.ArrayList;
 
-public class Tasks {
-    private ArrayList<Task> tasks = new ArrayList<Task>();
-    private String filePath = "data/duke.txt";
-    private FileManager fileManager = new FileManager(filePath);
+public class TaskList {
+    private ArrayList<Task> tasks;
+    private Storage storage;
+    private Parser parser;
     
+    public TaskList(ArrayList<Task> tasks, Storage storage) {
+        this.tasks = tasks;
+        this.storage = storage;
+        this.parser = new Parser();
+    }
     
     private Layout layout = new Layout();
     
@@ -20,17 +25,13 @@ public class Tasks {
         DONE, 
         DELETE
     }
-    
-    public void initTasks() {
-        fileManager.readFile(tasks);
-    }
 
     public void addTask(Type type, String [] arr) {
         Task task;
         
         try {
-            String date = getInfo(arr)[0];
-            String description = getInfo(arr)[1];
+            String date = parser.getDateAndDescription(arr)[0];
+            String description = parser.getDateAndDescription(arr)[1];
             if (description.equals("") || arr.length == 1) {
                 throw new DukeException("The description of a " + type + " cannot be empty");
             }
@@ -89,29 +90,9 @@ public class Tasks {
         }
 
     }
-
-    public String [] getInfo(String [] arr) {
-        boolean reached = false;
-        String date = "";
-        String description = "";
-        for (int i = 1; i < arr.length; i ++) {
-            if (reached) {
-                if (i != arr.length - 1) {
-                    date += arr[i] + " ";
-                } else {
-                    date += arr[i];
-                }
-            } else if (arr[i].equals("/by") || arr[i].equals("/at")) {
-                reached = true;
-            } else {
-                description += arr[i] + " ";
-            }
-        }
-        return new String[]{date, description};
-    }
     
     public void closeDuke() {
-        fileManager.writeFile(tasks);
+        storage.writeFile(tasks);
         layout.print("Bye. Hope to see you again soon!");
         System.exit(0);
     }
