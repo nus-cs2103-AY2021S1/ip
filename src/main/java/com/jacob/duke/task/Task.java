@@ -1,4 +1,4 @@
-package com.jacob.Duke;
+package com.jacob.duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -49,4 +49,7 @@ public class Task {
         return String.format("%s,%s,%s", type, isDone ? 1 : 0, getDescription());
     }
 
+    public LocalDateTime getDueDateTime() {
+        return dueDateTime;
+    }
 }

@@ -1,4 +1,4 @@
-package com.jacob.Duke;
+package com.jacob.duke.task;
 
 
 public class Deadline extends Task {
