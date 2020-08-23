@@ -14,7 +14,7 @@ public class Parser {
     protected static List<String> inputFormat = Arrays.asList("dd/MM/yyyy HHmm", "yyyy-mm-dd Haaa");
     protected static SimpleDateFormat outputFormat = new SimpleDateFormat("MMM dd yyyy h:mma");
 
-    public static String DateParser(String str) {
+    public static String dateParser(String str) {
         Date date = null;
         for (String input : inputFormat) {
             try {
@@ -56,13 +56,13 @@ public class Parser {
                 formatChecker(inputArray);
                 String str = inputArray[1].split(" /", 2)[0];
                 String date = inputArray[1].split("/", 2)[1].split(" ", 2)[1];
-                return new DeadlineCommand(str,DateParser(date));
+                return new DeadlineCommand(str,dateParser(date));
             }
             case "event": {
                 formatChecker(inputArray);
                 String str = inputArray[1].split(" /", 2)[0];
                 String date = inputArray[1].split("/", 2)[1].split(" ", 2)[1];
-                return new EventCommand(str, DateParser(date));
+                return new EventCommand(str, dateParser(date));
             }
             default:
                 throw new CommandException("Im sorry, I do not understand what you mean. Please re-enter:");
