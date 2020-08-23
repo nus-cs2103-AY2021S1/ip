@@ -39,36 +39,26 @@ public class Parser {
 
         String[] inputArray = input.split(" ", 2);
 
+        if (inputArray.length == 1 && (inputArray[0].equals("done") || inputArray[0].equals("delete") || inputArray[0].equals("todo")
+                || inputArray[0].equals("deadline") || inputArray[0].equals("event"))) {
+            throw new EmptyDescriptionException(("The description of " + inputArray[0] + " cannot be empty. Please re-enter"));
+        }
+
         switch (inputArray[0]) {
             case "done":
-                if (inputArray.length == 1) {
-                    throw new EmptyDescriptionException(("The description of " + inputArray[0] + " cannot be empty. Please re-enter"));
-                }
                 return new DoneCommand(Integer.parseInt(inputArray[1]));
             case "delete":
-                if (inputArray.length == 1) {
-                    throw new EmptyDescriptionException(("The description of " + inputArray[0] + " cannot be empty. Please re-enter"));
-                }
                 return new DeleteCommand(Integer.parseInt(inputArray[1]));
             case "todo": {
-                if (inputArray.length == 1) {
-                    throw new EmptyDescriptionException(("The description of " + inputArray[0] + " cannot be empty. Please re-enter"));
-                }
                 return new TodoCommand(inputArray[1]);
             }
             case "deadline": {
-                if (inputArray.length == 1) {
-                    throw new EmptyDescriptionException(("The description of " + inputArray[0] + " cannot be empty. Please re-enter"));
-                }
                 formatChecker(inputArray);
                 String str = inputArray[1].split(" /", 2)[0];
                 String date = inputArray[1].split("/", 2)[1].split(" ", 2)[1];
                 return new DeadlineCommand(str,DateParser(date));
             }
             case "event": {
-                if (inputArray.length == 1) {
-                    throw new EmptyDescriptionException(("The description of " + inputArray[0] + " cannot be empty. Please re-enter"));
-                }
                 formatChecker(inputArray);
                 String str = inputArray[1].split(" /", 2)[0];
                 String date = inputArray[1].split("/", 2)[1].split(" ", 2)[1];
@@ -79,7 +69,7 @@ public class Parser {
         }
     }
 
-    public static void formatChecker(String[] input) throws DukeException {
+    private static void formatChecker(String[] input) throws DukeException {
         try {
             String str = input[1].split(" /", 2)[1];
             if(input[0].equals("deadline")) {
