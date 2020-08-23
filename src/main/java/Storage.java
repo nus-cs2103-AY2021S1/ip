@@ -49,23 +49,22 @@ public class Storage {
                 fw.write(name + split);
 
                 switch (type) {
-                    case "E":
-                        Event event = (Event) curr;
-                        fw.write(event.getAt() + System.lineSeparator());
-                        break;
-                    case "D":
-                        Deadline deadline = (Deadline) curr;
-                        fw.write(deadline.getBy() + System.lineSeparator());
-                        break;
-                    default:
-                        fw.write("mark" + System.lineSeparator());
+                case "E":
+                    Event event = (Event) curr;
+                    fw.write(event.getAt() + System.lineSeparator());
+                    break;
+                case "D":
+                    Deadline deadline = (Deadline) curr;
+                    fw.write(deadline.getBy() + System.lineSeparator());
+                    break;
+                default:
+                    fw.write("mark" + System.lineSeparator());
                 }
             }
             fw.close();
         } catch (IOException e) {
             System.out.println("Oops. Something went wrong while saving data.");
         }
-
     }
 
     public  void loadFile() {
@@ -83,14 +82,14 @@ public class Storage {
                 }
 
                 switch (type) {
-                    case "E":
-                        taskList.getList().add(new Event(name, done, time));
-                        break;
-                    case "D":
-                        taskList.getList().add(new Deadline(name, done, time));
-                        break;
-                    default:
-                        taskList.getList().add(new ToDo(name, done));
+                case "E":
+                    taskList.getList().add(new Event(name, done, time));
+                    break;
+                case "D":
+                    taskList.getList().add(new Deadline(name, done, time));
+                    break;
+                default:
+                    taskList.getList().add(new ToDo(name, done));
                 }
             }
         } catch (FileNotFoundException e) {
@@ -106,7 +105,7 @@ public class Storage {
 
     public static String getStoragePath(String name) {
         return System.getProperty("user.dir")
-                + File.separator + "data" + File.separator + name + ".txt";
+            + File.separator + "data" + File.separator + name + ".txt";
     }
 
     public File getFile() {
