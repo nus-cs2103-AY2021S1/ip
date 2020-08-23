@@ -39,6 +39,6 @@ public class Ui {
     // printing messages for user to view
     public void speak(String input) {
         System.out.println(this.div() +
-            input + this.div());
+            "\t" + input + this.div());
     }
 }
