@@ -108,7 +108,7 @@ public class Storage {
     }
 
 
-    public static void main(String args[]){
+    public static void main(String[] args){
         Storage hello = new Storage("data.txt");
         try{
             ArrayList<Task> lst = hello.fetchAll();
