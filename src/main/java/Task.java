@@ -7,6 +7,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
         return (this.isDone ? "\u2713" : "\u2718");
     }
@@ -18,5 +23,9 @@ public class Task {
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
+    }
+
+    public String writeToFile() {
+        return String.format("%b | %s", this.isDone, this.description);
     }
 }

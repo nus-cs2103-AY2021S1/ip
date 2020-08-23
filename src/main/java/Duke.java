@@ -1,9 +1,23 @@
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     enum Command {
         list, done, delete, todo, deadline, event
+    }
+
+    public static void writeToFile(File dukeFile, ArrayList<Task> tasks) {
+        try {
+            FileWriter dukeFileWriter = new FileWriter(dukeFile);
+            for (Task task : tasks) {
+                dukeFileWriter.write(task.writeToFile() + '\n');
+            }
+            dukeFileWriter.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public static void main(String[] args) {
@@ -24,10 +38,36 @@ public class Duke {
                 + "/ _` /  \\ /  \\ |  \\ |__) \\ / |__  \n"
                 + "\\__> \\__/ \\__/ |__/ |__)  |  |___ \n" + "                                  ";
 
+        ArrayList<Task> tasks = new ArrayList<>();
+        File dukeFile = new File("./data/dukeFile.txt");
+
+        try {
+            dukeFile.getParentFile().mkdirs();
+            dukeFile.createNewFile();
+
+            Scanner fileIn = new Scanner(dukeFile);
+            while (fileIn.hasNextLine()) {
+                String[] line = fileIn.nextLine().split(" \\| ");
+                switch (line[0]) {
+                    case "T":
+                        tasks.add(new Todo(line[2], Boolean.parseBoolean(line[1])));
+                        break;
+                    case "D":
+                        tasks.add(new Deadline(line[2], line[3], Boolean.parseBoolean(line[1])));
+                        break;
+                    case "E":
+                        tasks.add(new Event(line[2], line[3], Boolean.parseBoolean(line[1])));
+                        break;
+                }
+            }
+            fileIn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         System.out.println("Hello I am\n" + logo + "How can I help you?");
         Scanner in = new Scanner(System.in);
         String answer = in.nextLine();
-        ArrayList<Task> tasks = new ArrayList<>();
         while (!answer.equals("bye")) {
             String[] command = answer.split(" ");
             String description, time;
@@ -172,6 +212,7 @@ public class Duke {
                 System.out.println(e);
             } finally {
                 System.out.println(lowerLine);
+                writeToFile(dukeFile, tasks);
                 answer = in.nextLine();
             }
         }

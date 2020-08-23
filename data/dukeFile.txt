@@ -1,0 +1,3 @@
+T | false | sleep   
+D | true | eat | tomorrow
+E | false | play | noon
