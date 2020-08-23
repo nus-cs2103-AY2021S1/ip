@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     ArrayList<Task> tasklist;
@@ -111,7 +112,7 @@ public class Duke {
             String by = temp[1].trim();
 
             if (description.length() <= 0 || by.length() <= 0) {
-                throw new DukeException("Please provide both a description and deadline!");
+                throw new DukeException("Please provide both a description and date in format 'description /by date'!");
             }
             Task t = new Deadline(description, by);
             this.tasklist.add(t);
@@ -123,7 +124,9 @@ public class Duke {
             }
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Please provide both a description and deadline!");
+            throw new DukeException("Please provide both a description and date in format 'description /by date'!");
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please provide date in format yyyy-mm-dd");
         }
     }
 
@@ -134,7 +137,7 @@ public class Duke {
             String at = temp2[1].trim();
 
             if (description.length() <= 0 || at.length() <= 0) {
-                throw new DukeException("Please provide both a description and timing!");
+                throw new DukeException("Please provide both a description and date in format 'description /at date'!");
             }
             Task t = new Event(description, at);
             this.tasklist.add(t);
@@ -146,7 +149,9 @@ public class Duke {
             }
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Please provide both a description and timing!");
+            throw new DukeException("Please provide both a description and date in format 'description /at date'!");
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please provide date in format yyyy-mm-dd");
         }
     }
 
