@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -89,16 +90,25 @@ public class Duke {
 
     private static void handleEvent(String input) throws DukeException {
         String basePattern = "(event\\s)(.+)";
-        String completePattern = "(event\\s)(.+)\\s(/at\\s)(.+)";
+        String almostCompletePattern = "(event\\s)(.+)\\s(/at\\s)(.+)";
+        String datePattern = "(\\d\\d\\d\\d-[01]\\d-[0123]\\d)\\s";
+        String timePattern = "([012]\\d)([012345]\\d)";
+        String completePattern = "(event\\s)(.+)\\s(/at\\s)"+ datePattern + timePattern;
         String missingTaskPattern = "(event\\s)(/at)((\\s(.*))*)";
         if (input.trim().matches(basePattern)) {
-            if (input.trim().matches(completePattern)) {
-                String task = input.replaceAll(completePattern, "$2");
-                String time = input.replaceAll(completePattern, "$4");
-                Task next = new Event(task, time);
-                list.add(next);
-                String text = "Added Event '" + task + "' to your list!";
-                say(text);
+            if (input.trim().matches(almostCompletePattern)) {
+                if (input.trim().matches(completePattern)) {
+                    String task = input.replaceAll(completePattern, "$2");
+                    String date = input.replaceAll(completePattern, "$4");
+                    String hours = input.replaceAll(completePattern, "$5");
+                    String minutes = input.replaceAll(completePattern, "$6");
+                    Task next = new Event(task, date, hours, minutes);
+                    list.add(next);
+                    String text = "Added Event '" + task + "' to your list!";
+                    say(text);
+                } else {
+                    throw(DukeException.wrongDateTime());
+                }
             } else if (input.trim().matches(missingTaskPattern)) {
                 throw(DukeException.missingTask());
             } else {

@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected final String text;
     protected boolean done = false;
 
@@ -11,9 +11,5 @@ public class Task {
     }
 
     @Override
-    public String toString() {
-        return done
-                ? "[✓] " + text
-                : "[✗] " + text;
-    }
+    abstract public String toString();
 }
