@@ -1,4 +1,6 @@
-package ip.src.main.java;
+package duke.io;
+
+import duke.task.TaskList;
 
 import java.util.Scanner;
 

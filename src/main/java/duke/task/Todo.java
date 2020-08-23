@@ -1,4 +1,4 @@
-package ip.src.main.java;
+package duke.task;
 
 public class Todo extends Task {
 

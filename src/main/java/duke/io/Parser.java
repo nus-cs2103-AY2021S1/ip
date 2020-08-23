@@ -1,4 +1,7 @@
-package ip.src.main.java;
+package duke.io;
+
+import duke.task.DukeException;
+import duke.task.TaskList;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -7,7 +10,7 @@ import java.util.Scanner;
 public class Parser {
     Layout layout;
     
-    Parser() {
+    public Parser() {
         this.layout = new Layout();
     }
     
@@ -15,11 +18,11 @@ public class Parser {
         String[] arr = new String[]{
                 "Here are all your commands:",
                 "list- list all tasks",
-                "todo <description> - add task",
-                "deadline <description> \\by <due date> -add task with deadline",
+                "todo <description> - add duke.task",
+                "deadline <description> \\by <due date> -add duke.task with deadline",
                 "event <description> \\at <event date> -add event with date ",
                 "\t deadline and date can be formatted as : yyyy-mm-dd or dd/mm/yyyy and HHmm or HH.mm a",
-                "done <task number> - marks task as done",
+                "done <duke.task number> - marks duke.task as done",
                 "bye - goodbye!"
         };
         layout.printCommands(arr);

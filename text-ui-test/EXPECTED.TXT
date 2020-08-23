@@ -9,12 +9,12 @@
 	What can I do for you?
 	──────────────────────────────────────────────────
 	──────────────────────────────────────────────────
-	Got it. I've added this task:
+	Got it. I've added this duke.task:
 		[T][✘] borrow book 
-	Now you have 1 task in the list.
+	Now you have 1 duke.task in the list.
 	──────────────────────────────────────────────────
 	──────────────────────────────────────────────────
-	Got it. I've added this task:
+	Got it. I've added this duke.task:
 		[D][✘] assignment 30% (by: tomorrow 1159)
 	Now you have 2 tasks in the list.
 	──────────────────────────────────────────────────
@@ -24,7 +24,7 @@
 	2.[D][✘] assignment 30% (by: tomorrow 1159)
 	──────────────────────────────────────────────────
 	──────────────────────────────────────────────────
-	Got it. I've added this task:
+	Got it. I've added this duke.task:
 		[E][✘] wedding (at: fullerton sunday 4pm)
 	Now you have 3 tasks in the list.
 	──────────────────────────────────────────────────
@@ -35,7 +35,7 @@
 	3.[E][✘] wedding (at: fullerton sunday 4pm)
 	──────────────────────────────────────────────────
 	──────────────────────────────────────────────────
-	Nice! I've marked this task as done: 
+	Nice! I've marked this duke.task as done: 
 		[D][✓] assignment 30% (by: tomorrow 1159)
 	──────────────────────────────────────────────────
 	──────────────────────────────────────────────────
@@ -45,7 +45,7 @@
 	3.[E][✘] wedding (at: fullerton sunday 4pm)
 	──────────────────────────────────────────────────
 	──────────────────────────────────────────────────
-	Nice! I've marked this task as done: 
+	Nice! I've marked this duke.task as done: 
 		[E][✓] wedding (at: fullerton sunday 4pm)
 	──────────────────────────────────────────────────
 	──────────────────────────────────────────────────

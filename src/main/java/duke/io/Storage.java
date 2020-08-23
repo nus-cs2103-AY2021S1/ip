@@ -1,6 +1,10 @@
-package ip.src.main.java;
+package duke.io;
 
-import org.w3c.dom.ls.LSOutput;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.DukeException;
+import duke.task.Event;
+import duke.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -82,7 +86,7 @@ public class Storage {
             String newData = "";
             for(int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
-                //newData += "\n" + task.toSave();
+                //newData += "\n" + duke.task.toSave();
                 newData += i == 0 ? task.toSave() : "\n" + task.toSave();
             }
             fileWriter.write(newData);

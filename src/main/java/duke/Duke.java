@@ -1,9 +1,12 @@
+package duke;
+
 import java.util.ArrayList;
-import ip.src.main.java.Storage;
-import ip.src.main.java.TaskList;
-import ip.src.main.java.Ui;
-import ip.src.main.java.Layout;
-import ip.src.main.java.DukeException;
+import duke.io.Storage;
+import duke.task.TaskList;
+import duke.io.Ui;
+import duke.io.Layout;
+import duke.task.DukeException;
+
 
 public class Duke {
     private Storage storage;
