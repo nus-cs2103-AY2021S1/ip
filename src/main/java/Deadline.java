@@ -1,14 +1,23 @@
 package main.java;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
+
+
 public class Deadline extends Task {
-    String deadline;
+    LocalDateTime  deadline;
     public Deadline(String description, String deadline) {
         super(description);
-        this.deadline = deadline;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        this.deadline = LocalDateTime.parse(deadline, formatter);
     }
 
     String getDeadline() {
-        return this.deadline;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
+        return this.deadline.format(formatter).toString();
     }
 
     @Override

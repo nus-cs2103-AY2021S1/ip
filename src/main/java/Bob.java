@@ -1,6 +1,7 @@
 
 import main.java.*;
 
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Bob {
@@ -40,6 +41,11 @@ public class Bob {
               System.out.println("Here's the format: delete/done [index]");
             } catch (IllegalArgumentException e) {
                 System.out.println("Sorry, I do not understand your request. Please try again.");
+            } catch (DateTimeParseException e) {
+                System.out.println("Please input dates and times in the correct format. The format is: ");
+                System.out.println("yyyy-MM-dd HHMM");
+                System.out.println("Note: Events require a start date and time and an end date and time with the following format:");
+                System.out.println("yyyy-MM-dd HHMM to yyyy-MM-dd HHMM");
             }
             command = sc.nextLine();
         }
