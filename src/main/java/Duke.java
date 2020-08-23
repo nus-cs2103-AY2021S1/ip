@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -83,12 +84,14 @@ public class Duke {
 
 
                             case "deadline":
-                                String by = line.split("/")[1];
-                                String by2 = by.substring(by.indexOf("by") + 3);
-                                String deadlineString = line.split("/")[0].substring(9);
-                                Deadline deadline = new Deadline(deadlineString, by2);
+                                String [] arr = line.split("/",2);
+                                String by = arr[1].substring(arr[1].indexOf("by") + 3);
+                                String deadlineString = arr[0].substring(9);
+                                LocalDate localDate = TimeFormatter.localDate(by);
+
+                                Deadline deadline = new Deadline(deadlineString, localDate);
                                 ls.add(deadline);
-                                System.out.println(" Got it. I've added this task:");
+                                System.out.println("Got it. I've added this task:");
                                 System.out.println(deadline.toString());
                                 System.out.format("Now you have %d tasks in the list\n", ls.size());
                                 ArrayListToTextConverter.convertArrayListToText(ls);
@@ -96,9 +99,8 @@ public class Duke {
                                 break;
 
                             case "event":
-                                String at = line.split("/")[1];
+                                String at = line.split("/",2)[1];
                                 String at2 = at.substring(at.indexOf("at") + 3);
-
                                 String eventString = line.split("/")[0].substring(6);
                                 Event event = new Event(eventString, at2);
                                 ls.add(event);
