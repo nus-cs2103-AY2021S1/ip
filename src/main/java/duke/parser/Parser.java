@@ -85,6 +85,7 @@ public class Parser {
             return new InvalidCommand();
         }
     }
+
     //Ensures deadline command has the correct format and creates a DeadlineCommand object if it does.
     //Otherwise, returns an InvalidCommand object.
     private static Command prepareDeadline(String commandBody) {
@@ -130,6 +131,8 @@ public class Parser {
         }
     }
 
+    //Ensures the search keyword is a non-empty string and creates a SearchCommand object if it is.
+    //Otherwise, returns an InvalidCommand object.
     private static Command prepareSearch(String commandBody) {
         if (commandBody.length() == 0) {
             return new InvalidCommand();
