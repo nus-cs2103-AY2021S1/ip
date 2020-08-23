@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -73,7 +75,10 @@ public class Duke {
                         } else {
                             System.out.println("Got it! I've added this task:");
                             int endIndex = input.indexOf("/by") - 1;
-                            task.add(new Deadline(input.substring(9, endIndex), input.substring(endIndex + 5)));
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                            LocalDateTime dateTime = LocalDateTime.parse(input.substring(endIndex + 5), formatter);
+                            task.add(new Deadline(input.substring(9, endIndex),
+                                    dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"))));
                             System.out.println(task.get(task.size() - 1));
                             System.out.println("Now you have " + task.size() + " tasks in your list.");
                         }
