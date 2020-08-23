@@ -1,3 +1,5 @@
+package storage;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,6 +11,15 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import task.tasks.Task;
+import task.tasks.Todo;
+import task.tasks.Deadline;
+import task.tasks.Event;
+import task.TaskList;
+import task.TaskDescription;
+
+import exception.DukeException;
 
 public class Storage {
     protected final static String FOLDERPATH = java.nio.file.Paths.get(System.getProperty("user.dir"), "data").toString();

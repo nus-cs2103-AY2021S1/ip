@@ -1,3 +1,6 @@
+import ui.UI;
+import parser.Parser;
+
 public class Duke {
     public static void run() {
         UI.summonSupremeLeaderAndGreet();
