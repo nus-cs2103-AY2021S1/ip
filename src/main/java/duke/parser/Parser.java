@@ -27,7 +27,7 @@ public class Parser {
      */
     public static Command parse(String input) {
         Command command;
-        if (input.startsWith("todo")) { // add todo tasks
+        if (input.startsWith("todo")) { // add to-do tasks
             command = new AddCommand("todo");
         } else if (input.startsWith("deadline")) { // add deadline tasks
             command = new AddCommand("deadline");

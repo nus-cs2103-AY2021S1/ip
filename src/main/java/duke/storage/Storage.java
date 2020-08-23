@@ -84,14 +84,29 @@ public class Storage {
     }
 
     /**
-     * Saves the data to user's text file.
-     * @param taskList Task list created for user.
+     * Adds the data to user's text file.
+     * @param item Item to be added to text file.
      */
-    public void saveData(ArrayList<Task> taskList) {
+    public void addData(Task item) {
+        try {
+            FileWriter fileWriter = new FileWriter(path, true);
+            String task = item.taskToText() + "\n";
+            fileWriter.write(task);
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Updates the data in user's text file.
+     * @param tasks Task list to be updated.
+     */
+    public void updateData(ArrayList<Task> tasks) {
         try {
             FileWriter fileWriter = new FileWriter(path);
-            for (Task item : taskList) {
-                // get the task list items
+            for (Task item : tasks) {
                 String task = item.taskToText() + "\n";
                 fileWriter.write(task);
             }
