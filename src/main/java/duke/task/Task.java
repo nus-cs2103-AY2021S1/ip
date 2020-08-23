@@ -17,6 +17,10 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Gets the status icon for this task.
+     * @return cross if not done and tick if done
+     */
     private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
