@@ -58,7 +58,7 @@ public class Duke {
                 break;
             case LIST:
                 System.out.println("Here are the tasks in your list: ");
-                Task.printTasks();
+                Tasks.printTasks();
                 break;
             case DONE:
                 handleDone(Integer.parseInt(tokens.get(1)));
@@ -79,9 +79,9 @@ public class Duke {
 
     private static void handleDone(int index) {
         try {
-            Task.iDone(index);
+            Tasks.iDone(index);
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println("    " + Task.getTask(index));
+            System.out.println("    " + Tasks.getTask(index));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -110,10 +110,10 @@ public class Duke {
                 return;
             }
 
-            Task.addTask(task);
+            Tasks.addTask(task);
             System.out.println("Got it. I've added this task: ");
             System.out.println("    " + task);
-            System.out.printf("Now you have %d tasks in the list. \n", Task.count());
+            System.out.printf("Now you have %d tasks in the list. \n", Tasks.count());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -121,10 +121,10 @@ public class Duke {
 
     private static void handleRemove(int index) {
         try {
-            Task task = Task.iRemove(index);
+            Task task = Tasks.iRemove(index);
             System.out.println("Noted. I've removed this task: ");
             System.out.println("    " + task);
-            System.out.printf("Now you have %d tasks in the list. \n", Task.count());
+            System.out.printf("Now you have %d tasks in the list. \n", Tasks.count());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
