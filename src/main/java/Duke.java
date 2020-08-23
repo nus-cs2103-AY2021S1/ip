@@ -10,8 +10,6 @@ public class Duke {
     }
 
     public void run() {
-        TaskList taskList = this.taskList;
-        Storage storage = this.storage;
         ui.startUp(taskList, storage);
         Parser.parseInput(taskList, storage);
     }
