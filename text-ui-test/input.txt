@@ -1,12 +1,17 @@
 command
 list
 todo
+todo
 todo borrow textbook
 deadline
+deadline
 deadline return book
+deadline return book /by
 deadline return book /by 2019-12-02
 event
+event
 event project meeting
+event project meeting /at
 event project meeting /at 2019-12-01
 deadline do homework /by no idea :-p
 list

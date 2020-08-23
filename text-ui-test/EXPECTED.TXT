@@ -16,8 +16,15 @@ MUG don't have any of your task "_"
 HEY!!! Don't be stingy give MUG more information >.<
 **
 **
+HEY!!! Don't be stingy give MUG more information >.<
+**
+**
 Got it. MUG has added this task:
 [T][✘] borrow textbook
+Now you have 1 tasks in the list.
+**
+**
+HEY!!! Don't be stingy give MUG more information >.<
 **
 **
 HEY!!! Don't be stingy give MUG more information >.<
@@ -26,8 +33,15 @@ HEY!!! Don't be stingy give MUG more information >.<
 HEY!!! Feed me with {/by [date]}. MUG is hungry T_T
 **
 **
+HEY!!! Feed me with {/by [date]}. MUG is hungry T_T
+**
+**
 Got it. MUG has added this task:
 [D][✘] return book (by: Dec 2 2019 [MONDAY])
+Now you have 2 tasks in the list.
+**
+**
+HEY!!! Don't be stingy give MUG more information >.<
 **
 **
 HEY!!! Don't be stingy give MUG more information >.<
@@ -36,8 +50,12 @@ HEY!!! Don't be stingy give MUG more information >.<
 HEY!!! Feed me with {/at [date]}. MUG is hungry T_T
 **
 **
+HEY!!! Feed me with {/at [date]}. MUG is hungry T_T
+**
+**
 Got it. MUG has added this task:
 [E][✘] project meeting (at: Dec 1 2019[SUNDAY])
+Now you have 3 tasks in the list.
 **
 **
 MUG is picky. Give him the correct date format(YYYY-MM-DD) XD
@@ -62,6 +80,7 @@ MUG don't have this task to mark as Done :>
 **
 Noted. MUG has removed this task:
 [E][✘] project meeting (at: Dec 1 2019[SUNDAY])
+Now you have 2 tasks in the list.
 **
 **
 MUG don't have this task to Delete @_@

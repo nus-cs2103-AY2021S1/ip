@@ -64,7 +64,10 @@ public class TaskList {
             store.appendTask(command, info);
 
             return "Got it. MUG has added this task:\n"
-                    + task;
+                    + task
+                    + "\nNow you have "
+                    + this.taskListLen()
+                    + " tasks in the list.";
 
         } catch (DukeException ex) {
             return ex.getMessage();
@@ -82,7 +85,10 @@ public class TaskList {
                 this.store.deleteTask(taskId);
 
                 return "Noted. MUG has removed this task:\n"
-                        + deletedTask;
+                        + deletedTask
+                        + "\nNow you have "
+                        + this.taskListLen()
+                        + " tasks in the list.";
             } catch (DukeException ex) {
                 return ex.getMessage();
             }
