@@ -10,7 +10,6 @@ public class Duke {
     public static void main(String[] args) throws DukeException{
         Scanner userInput = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
-
         printBorder();
         System.out.println("Hello I'm Duke\n");
         System.out.println("What can I do for you?\n");
