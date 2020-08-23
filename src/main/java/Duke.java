@@ -3,6 +3,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The main class that directs the required actions to the respective classes.
+ */
 public class Duke {
     private Ui ui;
     private Parser parser;
@@ -21,6 +24,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Simulates the Duke bot to run.
+     */
     public void run() {
         ui.welcomeMessage();
         boolean isExit = false;
@@ -68,8 +74,7 @@ public class Duke {
                     break;
                 }
                 ui.showTotalTasks(tasks.getNumTasks());
-                //reload the file
-                storage.updateFile(tasks.toString());
+                storage.updateFile(tasks.toString()); //reload the file
             } catch (DukeException e) {
                 ui.showDukeError(e);
             } catch (IOException e) {

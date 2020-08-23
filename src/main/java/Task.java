@@ -1,6 +1,10 @@
 import java.time.LocalDate;
 import java.util.Optional;
 
+/**
+ * Represents a generic task. A task object has a description and an
+ * indication of whether the task is done or not.
+ */
 abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -12,6 +16,9 @@ abstract class Task {
 
     public abstract Optional<LocalDate> getDate();
 
+    /**
+     * Mark the task as completed.
+     */
     public void markAsDone() {
         this.isDone = true;
     }

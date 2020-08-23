@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/**
+ * Represents a memory of the tasks of user. It loads tasks from file, saves and updates
+ * the file.
+ */
 public class Storage {
     private final String filePath;
 
@@ -17,6 +21,11 @@ public class Storage {
     }
 
     //This function creates file if it does not exist, else return
+
+    /**
+     * Creates a file if the file does not exist. Otherwise, it will use the existing file.
+     * @throws IOException If the file cannot be created.
+     */
     private void createFile() throws IOException {
         File f = new File(this.filePath);
         if (f.exists()) {
@@ -27,14 +36,19 @@ public class Storage {
         }
     }
 
-    //This function returns a list of tasks to be loaded into tasklist
+    /**
+     * Returns a list of task to be loaded into the task list after
+     * it had retrieved the existing tasks in the memory file.
+     * @return A list of task to be loaded into task list.
+     * @throws IOException If the file cannot be created.
+     */
     public List<Task> load() throws IOException {
         this.createFile();
         File f = new File(this.filePath);
         Scanner sc = new Scanner(f);
         List<Task> taskList = new ArrayList<>();
         while (sc.hasNext()) {
-            //each line is a T|X|description or D|X|description|time format
+            //Format of each line: e.g. T|X|description or D|X|description|date|time
             String line = sc.nextLine();
             String[] taskComponent = line.split(Pattern.quote("|"));
             switch (taskComponent[0]) {
@@ -69,15 +83,23 @@ public class Storage {
         return taskList;
     }
 
-    //This function write to file
-    private static void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
+    /**
+     * Writes the input text to the file.
+     * @param textToAdd The text to be added to the file.
+     * @throws IOException If the writing of file fails.
+     */
+    private void writeToFile(String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(this.filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
-    //This function updates file content when tasklist updated
+    /**
+     * Updates file content when the task list is updated.
+     * @param text The content of the task list to overwrite in the file.
+     * @throws IOException If the writing of file fails.
+     */
     public void updateFile(String text) throws IOException {
-        writeToFile(this.filePath, text);
+        writeToFile(text);
     }
 }
