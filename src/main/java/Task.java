@@ -2,7 +2,7 @@
  * Represents a general Task object
  */
 
-public class Task {
+class Task {
     protected String name;
     protected boolean done;
 

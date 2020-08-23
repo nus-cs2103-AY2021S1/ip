@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Represents a data structure to contain an array of Task objects
  */
 
-public class TaskList {
+class TaskList {
 
     private int numTasks;
     private ArrayList<Task> list;

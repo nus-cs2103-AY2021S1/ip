@@ -1,4 +1,4 @@
-public class InvalidFileException extends DukeException {
+class InvalidFileException extends DukeException {
     public InvalidFileException(String msg) {
         super(msg);
     }

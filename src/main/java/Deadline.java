@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a Deadline task
  */
 
-public class Deadline extends Task{
+class Deadline extends Task{
     protected LocalDateTime datetime;
 
     public Deadline(String name, LocalDateTime datetime, boolean done) {

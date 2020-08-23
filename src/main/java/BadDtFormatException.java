@@ -1,4 +1,4 @@
-public class BadDtFormatException extends DukeException {
+class BadDtFormatException extends DukeException {
     public BadDtFormatException(String message) {
         super(message);
     }

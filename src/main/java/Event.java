@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
  * Represents an Event task
  */
 
-public class Event extends Task {
+class Event extends Task {
     protected LocalDateTime datetime;
 
     public Event(String name, LocalDateTime datetime, boolean done) {
