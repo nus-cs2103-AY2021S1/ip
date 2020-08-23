@@ -84,6 +84,12 @@ public class ParserTest {
         public void testInvalidFormatDeleteException() {
             assertThrows(InvalidFormatDeleteException.class, () -> p.parse("delete"));
         }
+
+        @Test
+        @DisplayName("Testing the InvalidFormatDeleteException in the method Parse")
+        public void testInvalidFormatFindException() {
+            assertThrows(InvalidFormatFindException.class, () -> p.parse("find hello world"));
+        }
         
     }
 

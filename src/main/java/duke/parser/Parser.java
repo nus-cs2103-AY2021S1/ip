@@ -20,6 +20,7 @@ public class Parser {
     private static final String KEYWORD_EVENT = "event";
     private static final String KEYWORD_DEADLINE = "deadline";
     private static final String KEYWORD_DELETE = "delete";
+    private static final String KEYWORD_FIND = "find";
 
     /**
      * Checking if the user's string input is a number
@@ -115,6 +116,9 @@ public class Parser {
     private static boolean isDelete(String type) {
         return type.equals(KEYWORD_DELETE);
     }
+    
+    private static boolean isFind(String type ){ return type.equals(KEYWORD_FIND); }
+    
 
     /**
      * Formats the user's input timing into a LocalDateTime format
@@ -165,8 +169,9 @@ public class Parser {
      * @throws InvalidFormatDeleteException Throws an InvalidFormatDeleteException when the format of Delete is 
      * incorrect.
      */
-    public static Command parse(String s) throws InvalidFormatByeException, InvalidFormatListException, 
-            InvalidFormatDoneException, EmptyTextException, InvalidFormatDeleteException {
+    
+    public static Command parse(String s) throws UnknownCommandException, InvalidFormatByeException,
+            InvalidFormatListException, InvalidFormatDoneException, EmptyTextException, InvalidFormatDeleteException, InvalidFormatFindException {
         String[] inputArr = s.trim().split(" ", 2);
         inputArr[0] = inputArr[0].toLowerCase();
         if (isEnd(inputArr[0])) {
@@ -197,6 +202,15 @@ public class Parser {
                 throw new InvalidFormatDeleteException();
             }
             return new DeleteCommand(inputArr);
+        } else if (isFind(inputArr[0])) {
+            if (inputArr.length == 1) {
+                throw new InvalidFormatFindException();
+            }
+            String[] inputArr2 = inputArr[1].split(" ");
+            if (inputArr2.length > 1) {
+                throw new InvalidFormatFindException();
+            }
+            return new FindCommand(inputArr);
         } else {
             return new UnknownCommand(inputArr);
         }

@@ -75,6 +75,11 @@ public class Task {
     private int getTaskStatus() {
         return isDone ? 1 : 0;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
     
     @Override
     public String toString() {
