@@ -24,7 +24,7 @@ public class TaskSaveAndLoadManager {
             }
             taskManagerData.taskList.add(taskData);
         }
-        IOReadWrite.saveTaskListData(taskManagerData);
+        FileReadWriteIO.saveTaskListData(taskManagerData);
     }
 
     public Task loadTask(TaskData taskData) {
@@ -41,7 +41,7 @@ public class TaskSaveAndLoadManager {
     }
 
     public TaskManager loadTaskManager() throws IOException {
-        List<String> loadedData = IOReadWrite.loadUngroupedSavedTaskList();
+        List<String> loadedData = FileReadWriteIO.loadUngroupedSavedTaskList();
         ArrayList<Task> taskList = new ArrayList<>();
 
         // loop through the loaded data strings, split each string by | and add to task list
