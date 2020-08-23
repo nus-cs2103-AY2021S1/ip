@@ -33,9 +33,11 @@ public class Parser {
 
         switch (commandType) {
         case "bye":
+            //Fallthrough
         case "list":
             break;
         case "done":
+            //Fallthrough
         case "delete":
             command.withIndex(sc.nextInt() - 1); // UI shows base 1, TaskList uses base 0
             break;
@@ -61,7 +63,8 @@ public class Parser {
             }
             break;
         default:
-            throw new DukeException("What's that? Please mention one of \"list\", \"done\", \"todo\", \"deadline\", \"event\", or \"bye\".");
+            throw new DukeException("What's that? Please mention one of \"list\", \"done\", \"todo\", " +
+                    "\"deadline\", \"event\", or \"bye\".");
         }
 
         return command;

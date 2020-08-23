@@ -48,7 +48,9 @@ public class Duke {
                 Task deletedTask = tasks.delete(command.getIndex());
                 Ui.showDelete(deletedTask);
             case "todo":
+                //Fallthrough
             case "deadline":
+                //Fallthrough
             case "event":
                 try {
                     Task addedTask = command.toTask();
@@ -60,6 +62,7 @@ public class Duke {
                 break;
             default:
                 Ui.showException(new DukeException("Duke did not receive a matching command type."));
+                break;
             }
         }
     }

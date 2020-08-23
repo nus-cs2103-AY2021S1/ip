@@ -10,7 +10,7 @@ import java.util.List;
  * Represents a list of {@link Task}.
  */
 public class TaskList implements Iterable<Task> {
-    List<Task> tasks;
+    private List<Task> tasks;
 
     /**
      * Constructs an empty TaskList.

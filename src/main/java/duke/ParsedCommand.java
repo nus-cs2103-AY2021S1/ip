@@ -9,10 +9,10 @@ import duke.tasks.Todo;
  * Represents an input command that has been parsed into a class with accessible members.
  */
 public class ParsedCommand {
-    String commandType;
-    int index;
-    String name;
-    String date;
+    private String commandType;
+    private int index;
+    private String name;
+    private String date;
 
     /**
      * Constructs a base ParsedCommand with the given commandType.
