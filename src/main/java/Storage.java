@@ -7,10 +7,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
+    private static final String folderPath = "/Users/admin/ip/data/";
     private final String storagePath;
 
-    public Storage(String filePath) {
-        this.storagePath = "filePath";
+    public Storage(String fileName) {
+        this.storagePath = folderPath + fileName;
     }
 
     public void writeToFile(String textToAdd) {
@@ -45,7 +46,13 @@ public class Storage {
      * Method to read a file
      */
     public List<String> readStorageFile() throws IOException {
-        File file = new File(storagePath);
+        File folder = new File(this.folderPath);
+        File file = new File(this.storagePath);
+        if (!folder.exists()) {
+            throw new IOException("Folder data does not exist");
+        } else if (folder.exists() && !file.isFile()) {
+            throw new IOException("File does not exist");
+        }
         Scanner sc = new Scanner(file);
         List<String> tasks = new ArrayList<>();
         while (sc.hasNextLine()) {
