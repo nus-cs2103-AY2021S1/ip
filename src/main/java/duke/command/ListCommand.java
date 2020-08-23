@@ -11,4 +11,15 @@ public class ListCommand extends Command {
         String tasksToString = tasks.tasksToString();
         ui.printMessage(tasksToString);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other instanceof ListCommand) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

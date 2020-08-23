@@ -4,6 +4,7 @@ import duke.command.*;
 import duke.exceptions.DukeException;
 import duke.exceptions.UnknownCommandException;
 import duke.exceptions.WrongSyntaxException;
+import duke.exceptions.EmptyBodyException;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -53,7 +54,7 @@ public class Parser {
     }
 
     private String[] splitTime (String type, String commandArgs) throws WrongSyntaxException {
-        String splitBy = type.equals("deadline") ? "by" : "at";
+        String splitBy = type.equals("deadline") ? "/by" : "/at";
         String[] parts = commandArgs.split(splitBy, 2);
         if (parts.length != 2) {
             throw new WrongSyntaxException();
@@ -62,7 +63,7 @@ public class Parser {
         }
     }
 
-    private String[] split(String commandStr) throws UnknownCommandException, WrongSyntaxException {
+    private String[] split(String commandStr) throws UnknownCommandException, WrongSyntaxException, EmptyBodyException {
         if (commandStr.isBlank()) {
             throw new WrongSyntaxException();
         }
@@ -79,6 +80,9 @@ public class Parser {
             return new String[]{ commandName, "" };
         } else {
             String commandArgs = parts[1].trim();
+            if (commandArgs.isBlank()) {
+                throw new EmptyBodyException();
+            }
             return new String[]{ commandName, commandArgs };
         }
     }

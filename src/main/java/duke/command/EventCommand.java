@@ -26,4 +26,16 @@ public class EventCommand extends Command {
         ui.printMessage(String.format("Okay, I've added the following event: \n %s", event.toString()));
         storage.updateTasks(tasks.getListOfTasks());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other instanceof EventCommand) {
+            return this.description.equals(((EventCommand) other).description) &&
+                    this.dateStr.equals(((EventCommand) other).dateStr);
+        } else {
+            return false;
+        }
+    }
 }

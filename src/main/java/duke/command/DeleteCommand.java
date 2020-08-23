@@ -20,4 +20,15 @@ public class DeleteCommand extends Command {
         ui.printMessage(String.format("Okay, I've deleted the following task: \n %s", deletedTask.toString()));
         storage.updateTasks(tasks.getListOfTasks());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other instanceof DeleteCommand) {
+            return this.taskNumber == ((DeleteCommand) other).taskNumber;
+        } else {
+            return false;
+        }
+    }
 }

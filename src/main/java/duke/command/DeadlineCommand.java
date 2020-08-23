@@ -26,4 +26,16 @@ public class DeadlineCommand extends Command {
         ui.printMessage(String.format("Okay, I've added the following deadline: \n %s", deadline.toString()));
         storage.updateTasks(tasks.getListOfTasks());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other instanceof DeadlineCommand) {
+            return this.description.equals(((DeadlineCommand) other).description) &&
+                    this.dateStr.equals(((DeadlineCommand) other).dateStr);
+        } else {
+            return false;
+        }
+    }
 }
