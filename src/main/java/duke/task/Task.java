@@ -27,7 +27,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String completionStatus = isCompleted ? "✓" : "✘";
+        String completionStatus = isCompleted ? "\u2713" : "\u2718";
         return String.format("[%s] %s", completionStatus, description);
     }
 }
