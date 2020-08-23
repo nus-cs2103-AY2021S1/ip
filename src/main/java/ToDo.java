@@ -5,7 +5,7 @@
 public class ToDo extends Task {
 
     /** Symbol representing the type of Task this is */
-    protected static final String TODOS_SYMBOL = "T";
+    protected static final String SYMBOL = "T";
 
     /**
      * Creates a ToDo object with the given task description.
@@ -22,7 +22,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return "[" + TODOS_SYMBOL + "]" + super.toString();
+        return "[" + SYMBOL + "]" + super.toString();
     }
 
     /**
@@ -32,7 +32,7 @@ public class ToDo extends Task {
     @Override
     public String getSummary() {
         return String.format("%s|%d|%s",
-                TODOS_SYMBOL,
+                SYMBOL,
                 (isCompleted() ? 1 : 0),
                 description);
     }

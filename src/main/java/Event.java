@@ -5,7 +5,7 @@
 public class Event extends Task {
 
     /** Symbol representing the type of Task this is */
-    protected static final String EVENT_SYMBOL = "E";
+    protected static final String SYMBOL = "E";
     /** String separator used to separate the task description and the timing*/
     public static final String SPLITTER = " /at ";
 
@@ -33,7 +33,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s (at: %s)", EVENT_SYMBOL, super.toString(), timing);
+        return String.format("[%s]%s (at: %s)", SYMBOL, super.toString(), timing);
     }
 
     /**
@@ -43,7 +43,7 @@ public class Event extends Task {
     @Override
     public String getSummary() {
         return String.format("%s|%d|%s|%s",
-                EVENT_SYMBOL,
+                SYMBOL,
                 (isCompleted() ? 1 : 0),
                 description,
                 timing);

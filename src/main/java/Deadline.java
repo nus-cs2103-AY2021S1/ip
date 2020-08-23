@@ -8,7 +8,7 @@ public class Deadline extends Task {
     /** String separator used to separate the task description from the dateline */
     public static final String SPLITTER = " /by ";
     /** Symbol representing the type of Task this is */
-    protected static final String DEADLINES_SYMBOL = "D";
+    protected static final String SYMBOL = "D";
 
     /** Deadline of the task represented by a String */
     protected String deadline;
@@ -40,7 +40,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s (by: %s)", DEADLINES_SYMBOL, super.toString(), deadline);
+        return String.format("[%s]%s (by: %s)", SYMBOL, super.toString(), deadline);
     }
 
     /**
@@ -50,7 +50,7 @@ public class Deadline extends Task {
     @Override
     public String getSummary() {
         return String.format("%s|%d|%s|%s",
-                DEADLINES_SYMBOL,
+                SYMBOL,
                 (isCompleted() ? 1 : 0),
                 description,
                 deadline);
