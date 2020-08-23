@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,11 +9,12 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static final int DATE_INDEX = 4;    // test commit
+    private static final int DATE_INDEX = 4;
     private static final int DEADLINE_INDEX = 9;
     private static final int DELETE_INDEX = 7;
     private static final int DONE_INDEX = 5;
     private static final int EVENT_INDEX = 6;
+    private static final int TASK_LIMIT = 100;
     private static final int TODO_INDEX = 5;
 
     private static final String BYE = "bye";
@@ -24,7 +26,7 @@ public class Duke {
     private static final String TODO = "todo";
 
     private static int storageCount = 0;
-    private static final List<Task> taskStorage = new ArrayList<>(100);
+    private static final List<Task> taskStorage = new ArrayList<>(TASK_LIMIT);
 
     private static void loadTasks() {
         String currDir = System.getProperty("user.dir");
@@ -158,6 +160,8 @@ public class Duke {
                                                     DEADLINE_INDEX, command.indexOf("/") - 1), date);
                                 } catch (StringIndexOutOfBoundsException e) {
                                     throw new DukeInvalidDateException(DEADLINE);
+                                } catch (DateTimeParseException e) {
+                                    throw new DukeInvalidDateException(DEADLINE);
                                 }
                             }
                         } else if (commandWordArray[0].equals(EVENT)) {
@@ -170,6 +174,8 @@ public class Duke {
                                             command.substring(
                                                     EVENT_INDEX, command.indexOf("/") - 1), date);
                                 } catch (StringIndexOutOfBoundsException e) {
+                                    throw new DukeInvalidDateException(EVENT);
+                                } catch (DateTimeParseException e) {
                                     throw new DukeInvalidDateException(EVENT);
                                 }
                             }
