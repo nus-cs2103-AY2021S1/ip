@@ -33,13 +33,17 @@ Nice! One thing done:
 _______________________________________________________
 _______________________________________________________
 Nice! One thing done: 
+[D][✓] return book (by: June 6h)
+_______________________________________________________
+_______________________________________________________
+Nice! One thing done: 
 [T][✓] join sports club
 _______________________________________________________
 _______________________________________________________
 Here are all of your tasks:
 
 1.[T][✓] read book
-2.[D][✘] return book (by: June 6h)
+2.[D][✓] return book (by: June 6h)
 3.[E][✘] project meeting (at: Aug 6th 2-4pm)
 4.[T][✓] join sports club
 5.[T][✘] borrow book
@@ -47,19 +51,9 @@ Here are all of your tasks:
 You have a total of 5 tasks.
 _______________________________________________________
 _______________________________________________________
-One new Deadline added: 
-[D][✘] return book (by: Sunday)
-Total number of tasks in list: 6
-_______________________________________________________
-_______________________________________________________
-One new Deadline Task added: 
-[E][✘] project meeting (at: Mon 2-4pm)
-Total number of tasks in list: 7
-_______________________________________________________
-_______________________________________________________
-One new Deadline added: 
-[D][✘] do homework (by: no idea :P)
-Total number of tasks in list: 8
+Noted. Removing the following task:
+[E][✘] project meeting (at: Aug 6th 2-4pm)
+Total number of tasks left in the list: 4
 _______________________________________________________
 _______________________________________________________
 Bye! See ya soon!
