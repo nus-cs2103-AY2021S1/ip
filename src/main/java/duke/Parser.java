@@ -9,6 +9,7 @@ import duke.Command.ExitCommand;
 import duke.Command.InvalidCommand;
 import duke.Command.ListCommand;
 import duke.Command.ToDoCommand;
+import duke.Command.FindCommand;
 
 import duke.Exception.DeadlineException;
 import duke.Exception.DeletionException;
@@ -16,6 +17,7 @@ import duke.Exception.DoneException;
 import duke.Exception.DukeException;
 import duke.Exception.EventException;
 import duke.Exception.ToDoException;
+import duke.Exception.FindException;
 
 public class Parser {
 
@@ -183,14 +185,18 @@ public class Parser {
                 throw new FindException("Please input keyword after done! "
                         + "Example of input would be 'find book' which returns tasks with book in it");
             }
-            if (temp.length > 2) {
-                throw new FindException("Too many arguements! "
-                        + "Example of input would be 'find book' which returns tasks with book in it");
-            }
 
             // command == find
             String command = temp[0];
-            String keyword = temp[1];
+            String keyword = "";
+
+            for (int i = 1; i < temp.length; i++) {
+                if (i == temp.length - 1) {
+                    keyword += temp[i];
+                } else {
+                    keyword += temp[i] + " ";
+                }
+            }
 
             return new FindCommand(keyword);
         } else {

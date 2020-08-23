@@ -18,6 +18,9 @@ deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 todo join sports club
 todo borrow book
+find book
+find
+find book food toot
 done
 done 1 2 3
 done 213123

@@ -81,7 +81,20 @@ Got it. I've added this task:
 Now you have 5 tasks in the list.
 ______________________________
 ______________________________
-Please input number after done! Example of input would be 'done 2' checks item number 2 from list
+Here are the matching tasks in your list:
+1. [T][?] read book 
+2. [D][?] return book (at: 22 AUG 2020, SAT @ 17:00)
+3. [T][?] borrow book 
+
+______________________________
+______________________________
+Please input keyword after done! Example of input would be 'find book' which returns tasks with book in it
+______________________________
+______________________________
+Keyword is not found in any tasks!
+______________________________
+______________________________
+Please input number after done! Example of input would be 'done 2' which checks item number 2 from list
 ______________________________
 ______________________________
 Too many arguements! Example of input would be 'done 2' which checks item number 2 from list
