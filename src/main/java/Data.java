@@ -21,7 +21,7 @@ public class Data {
         }
     }
 
-    public List<Task> loadData() throws FileNotFoundException, DukeInvalidTimeException {
+    public List<Task> loadData() throws FileNotFoundException, DukeInvalidTimeException, ArrayIndexOutOfBoundsException {
         List<Task> todoList = new ArrayList<>();
         Scanner scanner = new Scanner(path.toFile());
         for (int i = 1; scanner.hasNextLine(); i++) {

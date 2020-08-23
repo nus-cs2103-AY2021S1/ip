@@ -7,8 +7,8 @@ public class Event extends Task {
     public LocalDateTime time;
 
     public Event(String description, int index, boolean isDone) throws DukeInvalidTimeException {
-            super(description, index, isDone);
-            super.type = TaskType.EVENT;
+        super(description, index, isDone);
+        super.type = TaskType.EVENT;
         int idx = this.description.indexOf('/');
         try {
             this.time = LocalDateTime.parse(this.description.substring(idx + 4, idx + 20),
