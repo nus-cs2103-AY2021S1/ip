@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.ExitCommand;
 
 import java.util.Scanner;
 
@@ -25,15 +26,19 @@ public class Duke {
 
     public void run() {
         Scanner input = new Scanner(System.in);
-        while (input.hasNextLine()) {
+        boolean isExit = false;
+        while (!isExit && input.hasNextLine()) {
             try {
                 String commandMessage = input.nextLine();
                 Command c = Parser.parse(commandMessage);
                 c.execute(commandMessage, storage, ui);
+                if (c instanceof ExitCommand) {
+                    isExit = true;
+                    input.close();
+                }
             } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
             }
         }
-        input.close();
     }
 }
