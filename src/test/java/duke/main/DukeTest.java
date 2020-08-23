@@ -36,7 +36,7 @@ public class DukeTest {
     public void commandBooleanTest2() throws DukeException {
         Ui ui = new Ui();
         Parser parser = new Parser(ui);
-        
+
         assertEquals(true, parser.parse("bye").isDone());
     }
 
