@@ -1,10 +1,10 @@
 public class Task {
     protected String taskName;
-    protected boolean taskDone;
+    protected boolean isDone;
 
     public Task(String taskName) {
         this.taskName = taskName;
-        this.taskDone = false;
+        this.isDone = false;
     }
 
     public String getName() {
@@ -12,11 +12,11 @@ public class Task {
     }
 
     public void setTaskToBeDone() {
-        this.taskDone = true;
+        this.isDone = true;
     }
 
     public String getStatusSymbol() {
-        if (taskDone) {
+        if (isDone) {
             return "\u2713";
         } else {
             return "\u2718";
