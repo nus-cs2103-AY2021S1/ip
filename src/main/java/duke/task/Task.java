@@ -21,6 +21,15 @@ public class Task {
     }
 
     /**
+     * Returns true when the description contains certain keyword, false otherwise.
+     * @param keyword Search key.
+     * @return True when contains the search key and false otherwise.
+     */
+    public boolean containsKeyWord(String keyword) {
+        return this.desciption.contains(keyword);
+    }
+
+    /**
      * Returns a string to be stored in data file.
      * @return Formatted string to be used in data file.
      */

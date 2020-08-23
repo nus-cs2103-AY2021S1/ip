@@ -5,6 +5,7 @@ import duke.command.AddCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 
 import duke.exception.AmbiguousInputException;
@@ -60,6 +61,8 @@ public class Parser {
             }
 
             switch (s[0]) {
+            case "find":
+                return new FindCommand(s[1]);
             case "todo":
                 return new AddCommand(new Todo(s[1]));
             case "deadline": {
