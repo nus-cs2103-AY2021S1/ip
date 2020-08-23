@@ -47,6 +47,7 @@ public class Duke {
             case "delete":
                 Task deletedTask = tasks.delete(command.getIndex());
                 Ui.showDelete(deletedTask);
+                break;
             case "todo":
                 //Fallthrough
             case "deadline":
@@ -59,6 +60,10 @@ public class Duke {
                 } catch (DukeException e) {
                     Ui.showException(e);
                 }
+                break;
+            case "find":
+                TaskList foundTasks = tasks.find(command.getName());
+                Ui.showFound(foundTasks);
                 break;
             default:
                 Ui.showException(new DukeException("Duke did not receive a matching command type."));

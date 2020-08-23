@@ -62,6 +62,9 @@ public class Parser {
                 throw new DukeException("Please use the format: event <name> /at <yyyy-mm-dd>");
             }
             break;
+        case "find":
+            command.withName(sc.nextLine().trim());
+            break;
         default:
             throw new DukeException("What's that? Please mention one of \"list\", \"done\", \"todo\", " +
                     "\"deadline\", \"event\", or \"bye\".");
