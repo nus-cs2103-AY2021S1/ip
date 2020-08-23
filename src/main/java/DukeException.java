@@ -1,3 +1,5 @@
+import javax.swing.plaf.DesktopIconUI;
+
 public class DukeException extends Exception {
     private DukeException(String msg) {
         super(msg);
@@ -31,7 +33,15 @@ public class DukeException extends Exception {
         return new DukeException("Error! '/" + byOrAt + "' date not found.");
     }
 
-    public static DukeException wrongDateTime() {
-        return new DukeException("Error! Invalid date or date is in the wrong format.");
+    public static DukeException wrongDateTimeFormat() {
+        return new DukeException("Error! Date/time is in the wrong format.");
+    }
+
+    public static DukeException invalidDateTime() {
+        return new DukeException("Error! Date/time is invalid.");
+    }
+
+    public static DukeException pastDateTime() {
+        return new DukeException("Error! Date/time has already passed.");
     }
 }

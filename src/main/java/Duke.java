@@ -1,11 +1,15 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
 public class Duke {
     private static ArrayList<Task> list = new ArrayList<>();
+    private static LocalDateTime now = LocalDateTime.now();
 
     private static void say(String s) {
         System.out.println("______________________________");
@@ -64,58 +68,70 @@ public class Duke {
         String timePattern = "([012]\\d)([012345]\\d)";
         String completePattern = "(deadline\\s)(.+)\\s(/by\\s)"+ datePattern + timePattern;
         String missingTaskPattern = "(deadline\\s)(/by)((\\s(.*))*)";
-        if (input.trim().matches(basePattern)) {
-            if (input.trim().matches(almostCompletePattern)) {
-                if (input.trim().matches(completePattern)) {
-                    String task = input.replaceAll(completePattern, "$2");
-                    String date = input.replaceAll(completePattern, "$4");
-                    String hours = input.replaceAll(completePattern, "$5");
-                    String minutes = input.replaceAll(completePattern, "$6");
-                    Task next = new Deadline(task, date, hours, minutes);
-                    list.add(next);
-                    String text = "Added Deadline '" + task + "' to your list!";
-                    say(text);
+        try {
+            if (input.trim().matches(basePattern)) {
+                if (input.trim().matches(almostCompletePattern)) {
+                    if (input.trim().matches(completePattern)) {
+                        String task = input.replaceAll(completePattern, "$2");
+                        LocalDateTime dateTime = extractDateTime(input, completePattern);
+                        if (LocalDateTime.now().isBefore(dateTime)) {
+                            Task next = new Deadline(task, dateTime);
+                            list.add(next);
+                            String text = "Added Deadline '" + task + "' to your list!";
+                            say(text);
+                        } else {
+                            throw(DukeException.pastDateTime());
+                        }
+                    } else {
+                        throw(DukeException.wrongDateTimeFormat());
+                    }
+                } else if (input.trim().matches(missingTaskPattern)) {
+                    throw(DukeException.missingTask());
                 } else {
-                    throw(DukeException.wrongDateTime());
+                    throw(DukeException.missingTime("by"));
                 }
-            } else if (input.trim().matches(missingTaskPattern)) {
-                throw(DukeException.missingTask());
             } else {
-                throw(DukeException.missingTime("by"));
+                throw(DukeException.emptyDesc("deadline"));
             }
-        } else {
-            throw(DukeException.emptyDesc("deadline"));
+        } catch (DateTimeParseException e) {
+            throw(DukeException.invalidDateTime());
         }
     }
 
     private static void handleEvent(String input) throws DukeException {
         String basePattern = "(event\\s)(.+)";
         String almostCompletePattern = "(event\\s)(.+)\\s(/at\\s)(.+)";
-        String datePattern = "(\\d\\d\\d\\d-[01]\\d-[0123]\\d)\\s";
-        String timePattern = "([012]\\d)([012345]\\d)";
+        String datePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)\\s";
+        String timePattern = "(\\d\\d)(\\d\\d)";
         String completePattern = "(event\\s)(.+)\\s(/at\\s)"+ datePattern + timePattern;
         String missingTaskPattern = "(event\\s)(/at)((\\s(.*))*)";
-        if (input.trim().matches(basePattern)) {
-            if (input.trim().matches(almostCompletePattern)) {
-                if (input.trim().matches(completePattern)) {
-                    String task = input.replaceAll(completePattern, "$2");
-                    String date = input.replaceAll(completePattern, "$4");
-                    String hours = input.replaceAll(completePattern, "$5");
-                    String minutes = input.replaceAll(completePattern, "$6");
-                    Task next = new Event(task, date, hours, minutes);
-                    list.add(next);
-                    String text = "Added Event '" + task + "' to your list!";
-                    say(text);
+        try {
+            if (input.trim().matches(basePattern)) {
+                if (input.trim().matches(almostCompletePattern)) {
+                    if (input.trim().matches(completePattern)) {
+                        String task = input.replaceAll(completePattern, "$2");
+                        LocalDateTime dateTime = extractDateTime(input, completePattern);
+                        if (LocalDateTime.now().isBefore(dateTime)) {
+                            Task next = new Event(task, dateTime);
+                            list.add(next);
+                            String text = "Added Event '" + task + "' to your list!";
+                            say(text);
+                        } else {
+                            throw(DukeException.pastDateTime());
+                        }
+                    } else {
+                        throw(DukeException.wrongDateTimeFormat());
+                    }
+                } else if (input.trim().matches(missingTaskPattern)) {
+                    throw(DukeException.missingTask());
                 } else {
-                    throw(DukeException.wrongDateTime());
+                    throw(DukeException.missingTime("at"));
                 }
-            } else if (input.trim().matches(missingTaskPattern)) {
-                throw(DukeException.missingTask());
             } else {
-                throw(DukeException.missingTime("at"));
+                throw(DukeException.emptyDesc("event"));
             }
-        } else {
-            throw(DukeException.emptyDesc("event"));
+        } catch (DateTimeParseException e) {
+            throw(DukeException.invalidDateTime());
         }
     }
 
@@ -140,6 +156,14 @@ public class Duke {
         } catch (IndexOutOfBoundsException e) {
             throw(DukeException.outOfBounds());
         }
+    }
+
+    private static LocalDateTime extractDateTime(String input, String completePattern) {
+        String date = input.replaceAll(completePattern, "$4");
+        String hours = input.replaceAll(completePattern, "$5");
+        String minutes = input.replaceAll(completePattern, "$6");
+        String time = hours + ":" + minutes;
+        return LocalDateTime.parse(date + "T" + time);
     }
 
     public static void main(String[] args) {
