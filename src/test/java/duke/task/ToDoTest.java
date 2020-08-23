@@ -46,14 +46,14 @@ public class ToDoTest {
     public void happen_today_alwaysFalse() {
         ToDo t = new ToDo("return books");
         LocalDate today = LocalDate.now();
-        assertFalse(t.happenOnDate(today));
-        assertFalse(t.happenToday());
-        assertFalse(t.happenBeforeDate(today));
-        assertFalse(t.happenBeforeToday());
-        assertFalse(t.happenAfterDate(today));
-        assertFalse(t.happenAfterToday());
-        assertFalse(t.happenBetween(today, today));
-        assertFalse(t.happenIn(8));
+        assertFalse(t.isHappeningOn(today));
+        assertFalse(t.isHappeningToday());
+        assertFalse(t.hasHappenedBefore(today));
+        assertFalse(t.hasHappenedBeforeToday());
+        assertFalse(t.isHappeningAfter(today));
+        assertFalse(t.isHappeningAfterToday());
+        assertFalse(t.isHappeningBetween(today, today));
+        assertFalse(t.willHappenInDays(8));
     }
 
     @Test
@@ -62,14 +62,14 @@ public class ToDoTest {
         LocalDate d1 = LocalDate.parse("2019-08-10");
         LocalDate d2 = LocalDate.parse("2010-09-01");
 
-        assertFalse(t.happenOnDate(d1));
-        assertFalse(t.happenToday());
-        assertFalse(t.happenBeforeDate(d1));
-        assertFalse(t.happenBeforeToday());
-        assertFalse(t.happenAfterDate(d1));
-        assertFalse(t.happenAfterToday());
-        assertFalse(t.happenBetween(d1, d2));
-        assertFalse(t.happenIn(8));
+        assertFalse(t.isHappeningOn(d1));
+        assertFalse(t.isHappeningToday());
+        assertFalse(t.hasHappenedBefore(d1));
+        assertFalse(t.hasHappenedBeforeToday());
+        assertFalse(t.isHappeningAfter(d1));
+        assertFalse(t.isHappeningAfterToday());
+        assertFalse(t.isHappeningBetween(d1, d2));
+        assertFalse(t.willHappenInDays(8));
     }
 
     @Test
@@ -78,14 +78,14 @@ public class ToDoTest {
         LocalDate d1 = LocalDate.parse("2029-08-10");
         LocalDate d2 = LocalDate.parse("2030-09-01");
 
-        assertFalse(t.happenOnDate(d1));
-        assertFalse(t.happenToday());
-        assertFalse(t.happenBeforeDate(d1));
-        assertFalse(t.happenBeforeToday());
-        assertFalse(t.happenAfterDate(d1));
-        assertFalse(t.happenAfterToday());
-        assertFalse(t.happenBetween(d1, d2));
-        assertFalse(t.happenIn(8));
+        assertFalse(t.isHappeningOn(d1));
+        assertFalse(t.isHappeningToday());
+        assertFalse(t.hasHappenedBefore(d1));
+        assertFalse(t.hasHappenedBeforeToday());
+        assertFalse(t.isHappeningAfter(d1));
+        assertFalse(t.isHappeningAfterToday());
+        assertFalse(t.isHappeningBetween(d1, d2));
+        assertFalse(t.willHappenInDays(8));
     }
 
     @Test

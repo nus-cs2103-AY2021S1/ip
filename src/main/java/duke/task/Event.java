@@ -20,44 +20,44 @@ public class Event extends Task {
     }
 
     @Override
-    public boolean happenOnDate(LocalDate date) {
+    public boolean isHappeningOn(LocalDate date) {
         return date.isEqual(atTime.toLocalDate());
     }
 
     @Override
-    public boolean happenToday() {
-        return happenOnDate(LocalDate.now());
+    public boolean isHappeningToday() {
+        return isHappeningOn(LocalDate.now());
     }
 
     @Override
-    public boolean happenBeforeDate(LocalDate date) {
+    public boolean hasHappenedBefore(LocalDate date) {
         return atTime.toLocalDate().isBefore(date);
     }
 
     @Override
-    public boolean happenBeforeToday() {
-        return happenBeforeDate(LocalDate.now());
+    public boolean hasHappenedBeforeToday() {
+        return hasHappenedBefore(LocalDate.now());
     }
 
     @Override
-    public boolean happenAfterDate(LocalDate date) {
+    public boolean isHappeningAfter(LocalDate date) {
         return atTime.toLocalDate().isAfter(date);
     }
 
     @Override
-    public boolean happenAfterToday() {
-        return happenAfterDate(LocalDate.now());
+    public boolean isHappeningAfterToday() {
+        return isHappeningAfter(LocalDate.now());
     }
 
     @Override
-    public boolean happenBetween(LocalDate date1, LocalDate date2) {
+    public boolean isHappeningBetween(LocalDate date1, LocalDate date2) {
         LocalDate date = atTime.toLocalDate();
         return !date.isAfter(date2) && !date.isBefore(date1);
     }
 
     @Override
-    public boolean happenIn(int n) {
-        return happenBetween(LocalDate.now(), LocalDate.now().plusDays(n));
+    public boolean willHappenInDays(int n) {
+        return isHappeningBetween(LocalDate.now(), LocalDate.now().plusDays(n));
     }
 
     @Override

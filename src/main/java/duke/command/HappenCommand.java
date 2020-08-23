@@ -20,25 +20,25 @@ public class HappenCommand extends Command {
         try {
             if (detail[0].equals("on") && detail.length == 2) {
                 if (detail[1].equals("today")) {
-                    return ui.printList(list, Task::happenToday, "happening today ");
+                    return ui.printList(list, Task::isHappeningToday, "happening today ");
                 } else {
                     LocalDate date = LocalDate.parse(detail[1], parse);
-                    return ui.printList(list, t -> t.happenOnDate(date), "happening on " + date.format(output) + " ");
+                    return ui.printList(list, t -> t.isHappeningOn(date), "happening on " + date.format(output) + " ");
                 }
             } else if (detail[0].equals("before") && detail.length == 2) {
                 if (detail[1].equals("today")) {
-                    return ui.printList(list, Task::happenBeforeToday, "happening before today ");
+                    return ui.printList(list, Task::hasHappenedBeforeToday, "happening before today ");
                 } else {
                     LocalDate date = LocalDate.parse(detail[1], parse);
-                    return ui.printList(list, t -> t.happenBeforeDate(date),
+                    return ui.printList(list, t -> t.hasHappenedBefore(date),
                             "happening before " + date.format(output) + " ");
                 }
             } else if (detail[0].equals("after") && detail.length == 2) {
                 if (detail[1].equals("today")) {
-                    return ui.printList(list, Task::happenAfterToday, "happening after today ");
+                    return ui.printList(list, Task::isHappeningAfterToday, "happening after today ");
                 } else {
                     LocalDate date = LocalDate.parse(detail[1], parse);
-                    return ui.printList(list, t -> t.happenAfterDate(date),
+                    return ui.printList(list, t -> t.isHappeningAfter(date),
                             "happening after " + date.format(output) + " ");
                 }
             } else if (detail.length == 3 && detail[0].equals("in") && detail[2].equals("days")) {
@@ -46,14 +46,14 @@ public class HappenCommand extends Command {
                 if (n <= 0) {
                     throw new InvalidCommandException("Please input a positive integer for happen in command.");
                 }
-                return ui.printList(list, t -> t.happenIn(n), "happening in " + n + " days ");
+                return ui.printList(list, t -> t.willHappenInDays(n), "happening in " + n + " days ");
             } else if (detail[0].equals("between") && detail.length == 3) {
                 LocalDate date1 = LocalDate.parse(detail[1], parse);
                 LocalDate date2 = LocalDate.parse(detail[2], parse);
                 if (!date1.isBefore(date2)) {
                     throw new InvalidCommandException("Latter date is before former date for happen between.");
                 }
-                return ui.printList(list, t -> t.happenBetween(date1, date2),
+                return ui.printList(list, t -> t.isHappeningBetween(date1, date2),
                         "happening between " + date1.format(output) + " and " + date2.format(output) + " ");
             } else {
                 throw new InvalidCommandException("Invalid happen command input.");

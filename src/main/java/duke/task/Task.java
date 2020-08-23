@@ -29,35 +29,35 @@ public abstract class Task {
         return " | " + done + " | " + description;
     }
 
-    public boolean happenOnDate(LocalDate date) {
+    public boolean isHappeningOn(LocalDate date) {
         return false;
     }
 
-    public boolean happenToday() {
+    public boolean isHappeningToday() {
         return false;
     }
 
-    public boolean happenBeforeDate(LocalDate date) {
+    public boolean hasHappenedBefore(LocalDate date) {
         return false;
     }
 
-    public boolean happenBeforeToday() {
+    public boolean hasHappenedBeforeToday() {
         return false;
     }
 
-    public boolean happenAfterDate(LocalDate date) {
+    public boolean isHappeningAfter(LocalDate date) {
         return false;
     }
 
-    public boolean happenAfterToday() {
+    public boolean isHappeningAfterToday() {
         return false;
     }
 
-    public boolean happenBetween(LocalDate date1, LocalDate date2) {
+    public boolean isHappeningBetween(LocalDate date1, LocalDate date2) {
         return false;
     }
 
-    public boolean happenIn(int n) {
+    public boolean willHappenInDays(int n) {
         return false;
     }
 
