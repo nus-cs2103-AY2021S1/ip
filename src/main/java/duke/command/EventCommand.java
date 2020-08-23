@@ -1,14 +1,17 @@
 package duke.command;
 
-import duke.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.EventTask;
 import duke.task.Task;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class EventCommand implements Command {
+
     private final String description;
     private final String timePeriod;
 

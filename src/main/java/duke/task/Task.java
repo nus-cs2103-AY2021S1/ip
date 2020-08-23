@@ -3,6 +3,7 @@ package duke.task;
 import duke.exception.DukeException;
 
 public abstract class Task {
+
     protected final String description;
     protected final boolean isDone;
 

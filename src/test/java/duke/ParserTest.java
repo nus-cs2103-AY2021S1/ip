@@ -1,13 +1,25 @@
 package duke;
 
-import duke.command.*;
-import duke.exception.DukeException;
-import duke.task.Task;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.SaveCommand;
+import duke.command.TodoCommand;
+import duke.exception.DukeException;
+import duke.task.Task;
 
 public class ParserTest {
+
     @Test
     public void parseInput_byeInput_correctCmd() {
         try {

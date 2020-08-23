@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
+
     private final Scanner sc;
     private final static String ERRORBORDER = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
     private final static String BORDER = "===================================================";

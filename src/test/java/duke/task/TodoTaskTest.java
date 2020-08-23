@@ -1,10 +1,11 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 public class TodoTaskTest {
+
     @Test
     public void getData_todoTaskNotDone_correctOutput() {
         TodoTask task = new TodoTask("test");

@@ -1,14 +1,15 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.task.Task;
-import duke.Ui;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
+
 public class DeleteCommand implements Command {
+
     private final int taskNum;
 
     public DeleteCommand(int taskNum) {

@@ -1,13 +1,16 @@
 package duke.command;
 
-import duke.*;
-import duke.task.Task;
-import duke.task.TodoTask;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
+import duke.task.TodoTask;
+
 public class TodoCommand implements Command {
+
     String description;
 
     public TodoCommand(String description) {

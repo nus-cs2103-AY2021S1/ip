@@ -1,7 +1,5 @@
 package duke;
 
-import duke.exception.DukeIOException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -9,7 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exception.DukeIOException;
+
 public class Storage {
+
     private final File f;
 
     public Storage(String filePath) {

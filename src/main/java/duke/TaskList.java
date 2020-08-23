@@ -1,12 +1,12 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.Parser;
-import duke.task.Task;
-
 import java.util.ArrayList;
 
+import duke.exception.DukeException;
+import duke.task.Task;
+
 public class TaskList {
+
     private ArrayList<Task> taskStore;
 
     public TaskList() {
