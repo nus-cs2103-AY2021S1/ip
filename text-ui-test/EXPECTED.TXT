@@ -5,13 +5,13 @@
 
     ____________________________________________________________
     Got it! I have added this todo to the list!
-      [T][✗]  borrow book
+      [T][✗] borrow book
     Now you have 1 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
     Here are the tasks in your list:
-    1. [T][✗]  borrow book
+    1. [T][✗] borrow book
     ____________________________________________________________
 
     ____________________________________________________________
@@ -20,21 +20,21 @@
 
     ____________________________________________________________
     Got it! I have added this deadline to the list!
-      [D][✗]  return book (by: Sunday)
+      [D][✗] return book (by: Aug 30 2020 11:59 PM)
     Now you have 2 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
     Got it! I have added this event to the list!
-      [E][✗]  project meeting (at: Mon 2-4pm)
+      [E][✗] project meeting (at: Sep 1 2020 02:00 PM)
     Now you have 3 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
     Here are the tasks in your list:
-    1. [T][✗]  borrow book
-    2. [D][✗]  return book (by: Sunday)
-    3. [E][✗]  project meeting (at: Mon 2-4pm)
+    1. [T][✗] borrow book
+    2. [D][✗] return book (by: Aug 30 2020 11:59 PM)
+    3. [E][✗] project meeting (at: Sep 1 2020 02:00 PM)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -43,26 +43,26 @@
 
     ____________________________________________________________
     Nice! I've marked this task as done:
-    [D][✓]  return book (by: Sunday)
+    [D][✓] return book (by: Aug 30 2020 11:59 PM)
     ____________________________________________________________
 
     ____________________________________________________________
     Here are the tasks in your list:
-    1. [T][✗]  borrow book
-    2. [D][✓]  return book (by: Sunday)
-    3. [E][✗]  project meeting (at: Mon 2-4pm)
+    1. [T][✗] borrow book
+    2. [D][✓] return book (by: Aug 30 2020 11:59 PM)
+    3. [E][✗] project meeting (at: Sep 1 2020 02:00 PM)
     ____________________________________________________________
 
     ____________________________________________________________
     Noted. I've removed this task:
-      [D][✓]  return book (by: Sunday)
+      [D][✓] return book (by: Aug 30 2020 11:59 PM)
     Now you have 2 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
     Here are the tasks in your list:
-    1. [T][✗]  borrow book
-    2. [E][✗]  project meeting (at: Mon 2-4pm)
+    1. [T][✗] borrow book
+    2. [E][✗] project meeting (at: Sep 1 2020 02:00 PM)
     ____________________________________________________________
 
     ____________________________________________________________

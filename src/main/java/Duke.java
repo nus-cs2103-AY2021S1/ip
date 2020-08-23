@@ -1,6 +1,12 @@
 import java.io.*;
 import java.nio.file.Files;
-import java.util.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
+
 
 public class Duke {
 
@@ -12,6 +18,7 @@ public class Duke {
     public static final String EVENT = "event";
     public static final String DEADLINE = "deadline";
     public static final String DELETE = "delete";
+    public static DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
 
     public static List<Task> list = new ArrayList<>();
     public static final java.nio.file.Path path = java.nio.file.Paths.get(".", "data.txt");
@@ -35,7 +42,7 @@ public class Duke {
                             Deadline deadline = new Deadline(
                                     deadlineArr[0].trim(),
                                     savedTask.substring(2, 3).equals("T"),
-                                    deadlineArr[1].trim());
+                                    LocalDateTime.parse(deadlineArr[1].trim()));
                             list.add(deadline);
                             break;
                         case "E":
@@ -44,7 +51,7 @@ public class Duke {
                             Event event = new Event(
                                     eventArr[0].trim(),
                                     savedTask.substring(2, 3).equals("T"),
-                                    eventArr[1].trim());
+                                    LocalDateTime.parse(eventArr[1].trim()));
                             list.add(event);
                             break;
                     }
@@ -159,9 +166,9 @@ public class Duke {
                         break;
                     }
 
-                    case TODO:
-                        String detail = sc.nextLine();
-                        if (detail.trim().equals("")) {
+                    case TODO: {
+                        String detail = sc.nextLine().trim();
+                        if (detail.equals("")) {
                             throw new DukeException("Oops! Todo cannot be empty");
                         }
                         ToDo toDo = new ToDo(detail);
@@ -173,6 +180,7 @@ public class Duke {
                                 String.format("    Now you have %d tasks in the list.", list.size()) + "\n" +
                                 LINE);
                         break;
+                    }
 
                     case EVENT: {
                         String s = sc.nextLine();
@@ -183,8 +191,10 @@ public class Duke {
                         if (arr.length == 1) {
                             throw new DukeException("Oops! You need to include both detail and time.");
                         }
-                        Event event = new Event(arr[0], arr[1]);
-                        addData("E F " + s + "\n");
+                        String detail = arr[0].trim();
+                        LocalDateTime date = LocalDateTime.parse(arr[1].trim(), df);
+                        addData("E F " + detail +" /at " + date + "\n");
+                        Event event = new Event(detail, date);
                         list.add(event);
                         System.out.println(LINE +
                                 "    Got it! I have added this event to the list!" + "\n" +
@@ -203,8 +213,10 @@ public class Duke {
                         if (arr.length == 1) {
                             throw new DukeException("Oops! You need to include both detail and time.");
                         }
-                        Deadline deadline = new Deadline(arr[0], arr[1]);
-                        addData("D F " + s + "\n");
+                        String detail = arr[0].trim();
+                        LocalDateTime date = LocalDateTime.parse(arr[1].trim(), df);
+                        addData("D F " + detail + " /by " + date + "\n");
+                        Deadline deadline = new Deadline(detail, date);
                         list.add(deadline);
                         System.out.println(LINE +
                                 "    Got it! I have added this deadline to the list!" + "\n" +
