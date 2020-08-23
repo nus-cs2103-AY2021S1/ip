@@ -8,6 +8,9 @@ import task.Task;
 import exception.InvalidCommandException;
 import exception.MissingInfoException;
 
+/**
+ * Parser deals with making sense of the user command.
+ */
 public class Parser {
 
     private Scanner input;
@@ -16,6 +19,12 @@ public class Parser {
         this.input = input;
     }
 
+    /**
+     * Takes in the command entered by the user and execute it accordingly.
+     *
+     * @param taskList All the tasks in the to-do list.
+     * @return String The relevant reply according to command.
+     */
     public String executeCommand(TaskList taskList) {
         String command = this.input.next();
         if (command.equals("bye")) {

@@ -11,6 +11,9 @@ import task.Event;
 import task.Todo;
 import task.Deadline;
 
+/**
+ * Storage deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private String pathname;
 
@@ -18,6 +21,12 @@ public class Storage {
         this.pathname = pathname;
     }
 
+    /**
+     * Fill the TaskList up with the tasks from the text file.
+     *
+     * @param taskList A TaskList with no tasks.
+     * @throws IOException If file is not found or error reading file.
+     */
     public void load(TaskList taskList) throws IOException {
         try{
             File directory = new File("data");
@@ -47,6 +56,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Write the tasks to the text file.
+     *
+     * @param taskList The list of tasks to be saved.
+     * @throws IOException If file is not found or error writing to file.
+     */
     public void save(TaskList taskList) throws IOException {
         String taskString = "";
         ArrayList<Task> tasks = taskList.getTasks();

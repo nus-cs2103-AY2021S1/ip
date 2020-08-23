@@ -3,6 +3,9 @@ package task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the Deadline task
+ */
 public class Deadline extends Task {
     protected LocalDateTime by;
 
@@ -11,6 +14,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Returns the deadline of the task.
+     *
+     * @return Date and time of the deadline.
+     */
     public LocalDateTime getTiming() {
         return this.by;
     }

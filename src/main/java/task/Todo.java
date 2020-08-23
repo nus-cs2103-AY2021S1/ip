@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * Represents the Todo task.
+ */
 public class Todo extends Task {
 
     public Todo(String description, boolean done) {
