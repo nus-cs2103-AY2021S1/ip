@@ -13,6 +13,10 @@ import duke.task.ToDo;
 
 import java.util.ArrayList;
 
+/**
+ * Stores the current list of tasks.
+ */
+
 public class TaskList {
 
     private ArrayList<Task> tasks;
@@ -25,6 +29,9 @@ public class TaskList {
         return this.tasks;
     }
 
+    /**
+     * Prints all the tasks line by line to the user.
+     */
     public void displayTasks() {
         System.out.println("Here are the tasks in your list:");
         int i = 1;
@@ -34,6 +41,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a task to the list based on user input.
+     * @param s User input
+     * @throws InvalidCommandException If command is not valid.
+     * @throws EmptyCommandException If task is missing description.
+     * @throws MissingTimeException If task is missing time.
+     */
     public void addTask(String s) throws InvalidCommandException, EmptyCommandException, MissingTimeException {
         String str = s.trim();
         if (str.equals("todo") || str.equals("deadline") || str.equals("event")) {
@@ -100,6 +114,11 @@ public class TaskList {
         System.out.println("You now have " + tasks.size() + " tasks in the list");
     }
 
+    /**
+     * Completes the task at the position in the list which the user specifies.
+     * @param str User input
+     * @throws TaskCompletionException If the number is out of range of the list.
+     */
     public void completeTask(String str) throws TaskCompletionException {
         if (!str.startsWith("done ")) {
             throw new TaskCompletionException(tasks.size());
@@ -117,6 +136,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes the task at the position in the list which the user specifies.
+     * @param str User input
+     * @throws TaskDeletionException If the number is out of range of the list.
+     */
     public void deleteTask(String str) throws TaskDeletionException {
         if (!str.startsWith("delete ")) {
             throw new TaskDeletionException(tasks.size());
@@ -134,6 +158,7 @@ public class TaskList {
         }
     }
 
+    //helper function to check if part of user input is an integer
     private static boolean isInteger(String str) {
         try {
             Integer.parseInt(str);

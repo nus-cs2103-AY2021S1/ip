@@ -5,6 +5,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+/**
+ * Encapsulates a task with possible date and time assigned to it.
+ */
+
 public class TimedTask extends Task {
 
     protected String dateTime;
@@ -16,6 +20,11 @@ public class TimedTask extends Task {
     protected String firstLetter;
     protected String connecting;
 
+    /**
+     * Creates a new Timed Task with the description and the date and time, if any.
+     * @param description Details of the task.
+     * @param dateTime Date and time of the task.
+     */
     public TimedTask(String description, String dateTime) {
         super(description);
         this.dateTime = dateTime.trim();
@@ -40,7 +49,11 @@ public class TimedTask extends Task {
         }
     }
 
-
+    /**
+     * Expresses the timed task as a String.
+     * If there is date and/or time, it is reformatted.
+     * @return A string representation of the timed task.
+     */
     @Override
     public String toString() {
         if (hasDate) {

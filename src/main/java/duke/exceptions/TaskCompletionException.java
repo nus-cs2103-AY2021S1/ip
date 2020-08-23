@@ -1,5 +1,9 @@
 package duke.exceptions;
 
+/**
+ * Encapsulates the exception where a task out of range of the list is selected for completion.
+ */
+
 public class TaskCompletionException extends DukeException {
     protected int size;
     public TaskCompletionException (int size) {

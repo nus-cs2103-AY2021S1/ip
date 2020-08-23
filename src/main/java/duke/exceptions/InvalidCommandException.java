@@ -1,5 +1,9 @@
 package duke.exceptions;
 
+/**
+ * Encapsulates the exception where the user keys in an invalid command.
+ */
+
 public class InvalidCommandException extends DukeException {
 
     @Override
