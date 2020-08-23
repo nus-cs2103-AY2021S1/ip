@@ -1,10 +1,21 @@
 package duke;
 
-import duke.Command.*;
-import duke.Exception.*;
+import duke.Command.Command;
+import duke.Command.DeadlineCommand;
+import duke.Command.DeleteCommand;
+import duke.Command.DoneCommand;
+import duke.Command.EventCommand;
+import duke.Command.ExitCommand;
+import duke.Command.InvalidCommand;
+import duke.Command.ListCommand;
+import duke.Command.ToDoCommand;
 
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
+import duke.Exception.DeadlineException;
+import duke.Exception.DeletionException;
+import duke.Exception.DoneException;
+import duke.Exception.DukeException;
+import duke.Exception.EventException;
+import duke.Exception.ToDoException;
 
 public class Parser {
 
