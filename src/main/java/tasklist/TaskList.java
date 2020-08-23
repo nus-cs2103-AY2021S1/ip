@@ -95,7 +95,9 @@ public class TaskList {
                             tempList.add(books.get(i));
                         }
                     }
+
                     storage.appendToFile("Here are the matching tasks in your list:");
+
                     for (int i = 0; i < tempList.size(); i++) {
                         int l = i + 1;
                         storage.appendToFile(l + "." + tempList.get(i));
