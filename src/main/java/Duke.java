@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ public class Duke {
         ArrayList<Task> arraylst = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         Processor processor = new Processor();
+        DukeFile dukeFile = DukeFile.createDukeFile("placeholder");
 
         while (sc.hasNext()) {
             String cmd = sc.nextLine();
@@ -24,12 +26,15 @@ public class Duke {
                         processor.processorList(arraylst);
                     } else if (stringarr[0].equals("done")) {
                         int index = Integer.parseInt(stringarr[1]);
-                        arraylst = processor.processorDone(arraylst, index);
+                        String record = processor.processorDone(arraylst, index);
+                        dukeFile.updateRecord(record, index);
                     } else if (stringarr[0].equals("delete")) {
                         int index = Integer.parseInt(stringarr[1]);
-                        arraylst = processor.processorDelete(arraylst, index);
+                        processor.processorDelete(arraylst, index);
+                        dukeFile.deleteRecord(index);
                     } else {
-                        arraylst = processor.processorAdd(cmd, arraylst);
+                        String record = processor.processorAdd(cmd, arraylst);
+                        dukeFile.saveRecord(record);
                     }
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
@@ -38,6 +43,12 @@ public class Duke {
                 System.out.println("_________________________________________\n" + "Bye. Hope to see you again soon!" + "\n" + "_________________________________________");
                 break;
             }
+        }
+        try {
+            dukeFile.saveToFile();
+        } catch (IOException e) {
+            System.out.println("Sorry an unexpected error occurred.");
+            e.printStackTrace();
         }
     }
 }
