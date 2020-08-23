@@ -1,20 +1,24 @@
-import org.junit.jupiter.api.Test;
 import tasklist.Deadline;
 import tasklist.Todo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * DukeTest class is used for JUnit testing.
+ * @author Maguire Ong
+ */
 public class DukeTest {
     @Test
-    public void dummyTest(){
+    public void dummy_Test(){
         assertEquals(2, 2);
     }
 
     @Test
-    public void TodoTest()  {
+    public void Todo_Test()  {
         assertEquals("[T][✘] borrow book", new Todo("borrow book").toString());
     }
 

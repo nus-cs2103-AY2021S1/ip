@@ -13,10 +13,18 @@ public class Duke {
     private final Parser parser;
     private final Ui ui;
 
+    /**
+     * Calls method run().
+     * @param args expecting the array of objects.
+     */
     public static void main(String[] args) throws IOException {
         new Duke().run();
     }
 
+    /**
+     * Creates a Duke.
+     * Initializes the Duke bot.
+     */
     public Duke() throws IOException {
         ui = new Ui();
         storage = new Storage(FILEPATH);
@@ -25,6 +33,10 @@ public class Duke {
         storage.load();
     }
 
+    /**
+     * Runs the entire program.
+     * Main driver of Duke bot.
+     */
     public void run() throws IOException {
         storage.appendToFile("Hello! I'm Duke\n" + "What can I do for you?");
 
