@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class UI {
 
     protected String readCommand() {
@@ -33,14 +34,14 @@ public class UI {
     protected void deleteTask(TaskList tasks, Task deletedTask) {
         System.out.println("\nGot it. Deleting task.....");
         System.out.println(" " + deletedTask);
-        System.out.println("You have " + tasks.getTaskList().size()  + " tasks left in your list!\n");
+        System.out.println("You have " + tasks.getTaskList().size() + " tasks left in your list!\n");
     }
 
     protected void displayTasks(TaskList taskList) {
         int index = 1;
         System.out.println("\n");
         System.out.println("Here are the tasks in your tasklist:");
-        for (Task task: taskList.getTaskList()) {
+        for (Task task : taskList.getTaskList()) {
             System.out.println(index + "." + task);
             index++;
         }

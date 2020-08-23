@@ -4,7 +4,7 @@ import java.io.IOException;
 public class Duke {
 
     protected static void startBot() throws DukeException, IOException {
-        Storage storage = new Storage("data" + File.separator +  "duke.txt");
+        Storage storage = new Storage("data" + File.separator + "duke.txt");
         TaskList dukeTaskList = new TaskList(storage.loadData());
         UI dukeUI = new UI();
         Parser dukeParser = new Parser();
