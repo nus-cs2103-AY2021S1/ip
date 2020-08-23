@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,17 +28,25 @@ public class Duke {
 
     public Duke() {
         this.scanner = new Scanner(System.in);
-        this.taskManager = new TaskManager();
+        try {
+            this.taskManager = new TaskManager();
+        } catch (DukeException | IOException exception) {
+            System.out.println(exception.getMessage());
+            this.taskManager = null;
+        }
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        Duke duke = new Duke();
+        if (duke.taskManager == null) {
+            return;
+        }
         duke.sendMessage(duke.getGreetMessage());
 
         while (true) {
@@ -80,8 +89,8 @@ public class Duke {
         try {
             Deadline deadline = duke.taskManager.addDeadline(content, datetimeDue);
             duke.sendMessage(duke.getAddSuccessMessage(deadline));
-        } catch (DukeException e) {
-            duke.sendMessage(e.getMessage());
+        } catch (DukeException | IOException exception) {
+            duke.sendMessage(exception.getMessage());
         }
     }
 
@@ -96,8 +105,8 @@ public class Duke {
         try {
             Event event = duke.taskManager.addEvent(content, datetime);
             duke.sendMessage(duke.getAddSuccessMessage(event));
-        } catch (DukeException e) {
-            duke.sendMessage(e.getMessage());
+        } catch (DukeException | IOException exception) {
+            duke.sendMessage(exception.getMessage());
         }
     }
 
@@ -109,8 +118,8 @@ public class Duke {
         try {
             Todo todo = duke.taskManager.addTodo(content);
             duke.sendMessage(duke.getAddSuccessMessage(todo));
-        } catch (DukeException e) {
-            duke.sendMessage(e.getMessage());
+        } catch (DukeException | IOException exception) {
+            duke.sendMessage(exception.getMessage());
         }
     }
 
@@ -122,8 +131,8 @@ public class Duke {
         try {
             Task task = duke.taskManager.completeTask(taskNumber);
             duke.sendMessage(duke.getCompleteSuccessMessage(task));
-        } catch (DukeException e) {
-            duke.sendMessage(e.getMessage());
+        } catch (DukeException | IOException exception) {
+            duke.sendMessage(exception.getMessage());
         }
     }
 
@@ -135,8 +144,8 @@ public class Duke {
         try {
             Task task = duke.taskManager.deleteTask(taskNumber);
             duke.sendMessage(duke.getDeleteSuccessMessage(task));
-        } catch (DukeException e) {
-            duke.sendMessage(e.getMessage());
+        } catch (DukeException | IOException exception) {
+            duke.sendMessage(exception.getMessage());
         }
     }
 

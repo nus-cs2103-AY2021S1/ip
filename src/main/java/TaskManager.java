@@ -1,48 +1,50 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class TaskManager {
-    List<Task> taskList;
+    TaskStorage taskStorage;
 
-    public TaskManager() {
-        this.taskList = new ArrayList<>();
+    public TaskManager() throws IOException, DukeException {
+        this.taskStorage = TaskStorage.init();
     }
 
-    public Todo addTodo(String content) throws DukeException {
+    public Todo addTodo(String content) throws DukeException, IOException {
         Todo todo = new Todo(content);
-        taskList.add(todo);
+        taskStorage.addTask(todo);
         return todo;
     }
 
-    public Deadline addDeadline(String content, String datetimeDue) throws DukeException {
+    public Deadline addDeadline(String content, String datetimeDue) throws DukeException, IOException {
         Deadline deadline = new Deadline(content, datetimeDue);
-        taskList.add(deadline);
+        taskStorage.addTask(deadline);
         return deadline;
     }
 
-    public Event addEvent(String content, String datetime) throws DukeException {
+    public Event addEvent(String content, String datetime) throws DukeException, IOException {
         Event event = new Event(content, datetime);
-        taskList.add(event);
+        taskStorage.addTask(event);
         return event;
     }
 
-    public Task deleteTask(int taskNumber) throws DukeException {
+    public Task deleteTask(int taskNumber) throws DukeException, IOException {
         int index = getIndex(taskNumber);
-        return taskList.remove(index);
+        return taskStorage.removeTask(index);
     }
 
-    public Task completeTask(int taskNumber) throws DukeException {
+    public Task completeTask(int taskNumber) throws DukeException, IOException {
         int index = getIndex(taskNumber);
-        Task task = taskList.get(index);
+        Task task = taskStorage.getTask(index);
         task.setComplete(true);
+        taskStorage.save();
         return task;
     }
 
     private int getIndex(int taskNumber) throws DukeException {
         if (taskNumber <= 0) {
             throw new DukeException("Invalid task number specified, task number must be greater than 0.");
-        } else if (taskNumber > taskList.size()) {
+        } else if (taskNumber > taskStorage.getTaskCount()) {
             throw new DukeException("Task number specified is larger than current amount of tasks.");
         }
         int index = taskNumber - 1;
@@ -52,12 +54,12 @@ public class TaskManager {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        return IntStream.range(0, taskList.size())
-                .mapToObj(i -> String.format("%d. %s", i + 1, taskList.get(i).toString().concat("\n")))
+        return IntStream.range(0, taskStorage.getTaskCount())
+                .mapToObj(i -> String.format("%d. %s", i + 1, taskStorage.taskList.get(i).toString().concat("\n")))
                 .reduce("", String::concat);
     }
 
     public int getTaskCount() {
-        return taskList.size();
+        return taskStorage.getTaskCount();
     }
 }
