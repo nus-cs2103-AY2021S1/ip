@@ -1,4 +1,5 @@
 @ECHO OFF
+set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
