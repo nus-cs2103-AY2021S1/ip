@@ -12,7 +12,7 @@ public class Ui {
         this.tasks = tasks;
     }
     
-    public void greet() {
+    private void greet() {
         String logo = "\t ____        _        \n"
                 + "\t|  _ \\ _   _| | _____ \n"
                 + "\t| | | | | | | |/ / _ \\\n"

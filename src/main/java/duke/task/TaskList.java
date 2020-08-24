@@ -10,14 +10,14 @@ public class TaskList {
     private ArrayList<Task> tasks;
     private Storage storage;
     private Parser parser;
+    private Layout layout;
     
     public TaskList(ArrayList<Task> tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
         this.parser = new Parser();
+        this.layout = new Layout();
     }
-    
-    private Layout layout = new Layout();
     
     public enum Type {
         TODO,

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Parser {
-    Layout layout;
+    private Layout layout;
     
     public Parser() {
         this.layout = new Layout();

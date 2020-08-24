@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Deadline extends Task {
-    protected String by;
+    private String by;
     private LocalDate localDate;
     private String time;
 

@@ -15,16 +15,17 @@ import java.util.Scanner;
 
 public class Storage {
     
-    String filePath;
+    private String filePath;
     private File file;
-    Scanner sc;
-    private Layout layout = new Layout();
+    private Scanner sc;
+    private Layout layout;
     
     public Storage(String filePath) {
         
         //Find text file inside data folder
         this.filePath = filePath;
         file = new File("filePath");
+        layout = new Layout();
         
         try {
             sc = new Scanner(file);

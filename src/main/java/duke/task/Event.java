@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Event extends Task {
     
-    protected String eventTime;
+    private String eventTime;
     private LocalDate localDate;
     private String time;
 
