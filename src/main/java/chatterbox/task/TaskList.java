@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles the modification of and other operations relating to the task list.
+ */
 public class TaskList {
     private final Storage store;
     private static List<Task> tasks = new ArrayList<>();
@@ -16,32 +19,50 @@ public class TaskList {
         this.store = store;
     }
 
+    /**
+     * Gets tasks from storage.
+     */
     public void loadTasks() {
         try {
             tasks = store.getItems();
         } catch (IOException e) {
-            System.out.println("Failed to load the save file, starting afresh.");
+            Ui.showErrorMessage("Failed to load the save file, starting afresh.");
         }
     }
 
-    public String getAllTasks() {
+    /**
+     * Prints the full task list.
+     */
+    public void printAllTasks() {
         if (tasks.size() != 0) {
             StringBuilder fullList = new StringBuilder("\n");
             for (int i = 0; i < tasks.size(); i++) {
                 fullList.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
             }
-            return fullList.toString();
+            Ui.showMessage(fullList.toString());
         } else {
-            return "Your list is currently empty.";
+            Ui.showMessage("Your list is currently empty.");
         }
     }
 
+    /**
+     * Adds a task to the task list, and updates storage.
+     *
+     * @throws IOException  If task list fails to save.
+     */
     public void addTask(Task t) throws IOException {
         tasks.add(t);
         Ui.showAddTaskMessage(t, tasks.size());
         store.saveItems(tasks);
     }
 
+    /**
+     * Sets a task as done, and updates storage.
+     *
+     * @param taskNo    The index of the task to be set as done.
+     * @throws ChatterboxException  If task number if invalid.
+     * @throws IOException  If task list fails to save.
+     */
     public void setTaskAsDone(int taskNo) throws ChatterboxException, IOException {
         if (taskNo < 0 || taskNo >= tasks.size()) throw new ChatterboxException("Invalid task number.");
 
@@ -51,7 +72,14 @@ public class TaskList {
         store.saveItems(tasks);
     }
 
-    public void deleteTask(int taskNo) throws IOException, ChatterboxException {
+    /**
+     * Deletes a task, and updates storage.
+     *
+     * @param taskNo    The index of the task to be deleted.
+     * @throws ChatterboxException  If task number if invalid.
+     * @throws IOException  If task list fails to save.
+     */
+    public void deleteTask(int taskNo) throws ChatterboxException, IOException {
         if (taskNo < 0 || taskNo >= tasks.size()) throw new ChatterboxException("Invalid task number.");
 
         Task t = tasks.remove(taskNo);

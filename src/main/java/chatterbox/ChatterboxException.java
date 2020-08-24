@@ -1,5 +1,8 @@
 package chatterbox;
 
+/**
+ * Class of exceptions thrown by the Chatterbox program.
+ */
 public class ChatterboxException extends Exception {
     private final String msg;
 
