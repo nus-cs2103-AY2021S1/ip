@@ -18,4 +18,8 @@ public class Task {
             return "[X]" + this.item;
         }
     }
+
+    public String getInput() {
+        return this.item;
+    }
 }

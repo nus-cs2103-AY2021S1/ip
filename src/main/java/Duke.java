@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -72,20 +74,7 @@ public class Duke {
     }
 
     public String formatTaskToString(Task task) {
-        String item = task.getItem();
-        String[] split = item.split(" ");
-        switch (split[0]) {
-            case "[T][O]":
-            case "[T][X]":
-                return task.getItem();
-            case "[D][O]":
-            case "[D][X]":
-                String deadlineTask = task.getItem();
-                return deadlineTask.substring(0, deadlineTask.length()-1).replace("(by: ", "/by ");
-            default:
-                String eventTask = task.getItem();
-                return eventTask.substring(0, eventTask.length()-1).replace("(at: ", "/at ");
-        }
+        return task.getInput();
     }
 
     public void run() {
@@ -201,17 +190,20 @@ public class Duke {
     public String addTodoItem(String item, boolean completed) {
         Todo newTask = new Todo(item, completed);
         todoList.add(newTask);
-        return "    " + newTask.getItem();
+        return "  " + newTask.getItem();
     }
+
 
     public String addDeadline(String item, boolean completed) throws DukeException {
         String[] splitItem = item.split("/by ");
         if (splitItem.length == 1) {
             throw new DukeException("Incorrect format. Please add a deadline to finish task by.");
         }
-        Deadline newTask = new Deadline(splitItem[0], splitItem[1], completed);
+        LocalDate dueDate = Deadline.formatDate(splitItem[1]);
+        String dateTime = Deadline.formatDateString(dueDate, splitItem[1]);
+        Deadline newTask = new Deadline(splitItem[0], dateTime, dueDate, splitItem[1], completed);
         todoList.add(newTask);
-        return "    " + newTask.getItem();
+        return "  " + newTask.getItem();
     }
 
     public String addEvent(String item, boolean completed) throws DukeException {
@@ -219,9 +211,11 @@ public class Duke {
         if (splitItem.length == 1) {
             throw new DukeException("Incorrect format. Please add a time/date the event is held at.");
         }
-        Event newTask = new Event(splitItem[0], splitItem[1], completed);
+        LocalDate dueDate = Deadline.formatDate(splitItem[1]);
+        String dateTime = Deadline.formatDateString(dueDate, splitItem[1]);
+        Event newTask = new Event(splitItem[0], dateTime, dueDate, splitItem[1], completed);
         todoList.add(newTask);
-        return "    " + newTask.getItem();
+        return "  " + newTask.getItem();
     }
 
     public void greeting() {

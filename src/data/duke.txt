@@ -1,3 +1,5 @@
-[T][O] task
-[D][O] cs3243 /by monday
-[E][O] cs2101 meeting /at 5pm
+[D][X] cs2101 /by 21/03/2020
+[E][O] yolo /at 21/04/2019 2134
+[D][X] test1 /by 25/04/2020 0245
+[E][O] test3 /at 15/03/2019 1629
+[T][X] test 4

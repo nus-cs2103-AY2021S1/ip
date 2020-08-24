@@ -7,4 +7,9 @@ public class Todo extends Task {
     public String getItem() {
         return "[T]" + super.getItem();
     }
+
+    @Override
+    public String getInput() {
+        return "[T]" + super.getItem();
+    }
 }

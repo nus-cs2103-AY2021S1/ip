@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dcc7396a-4a04-47f3-9835-d9f0d7777614" name="Default Changelist" comment="" />
+    <list default="true" id="dcc7396a-4a04-47f3-9835-d9f0d7777614" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/ip.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ip.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/duke.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/duke.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Deadline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Duke.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Todo.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,22 +62,22 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1379" height="217" key="GridCell.Tab.0.bottom" timestamp="1598112682560">
+    <state width="1379" height="217" key="GridCell.Tab.0.bottom" timestamp="1598253362755">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="217" key="GridCell.Tab.0.bottom/4.23.1436.877@4.23.1436.877" timestamp="1598112682560" />
-    <state width="1379" height="217" key="GridCell.Tab.0.center" timestamp="1598112682560">
+    <state width="1379" height="217" key="GridCell.Tab.0.bottom/4.23.1436.877@4.23.1436.877" timestamp="1598253362755" />
+    <state width="1379" height="217" key="GridCell.Tab.0.center" timestamp="1598253362754">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="217" key="GridCell.Tab.0.center/4.23.1436.877@4.23.1436.877" timestamp="1598112682560" />
-    <state width="1379" height="217" key="GridCell.Tab.0.left" timestamp="1598112682559">
+    <state width="1379" height="217" key="GridCell.Tab.0.center/4.23.1436.877@4.23.1436.877" timestamp="1598253362754" />
+    <state width="1379" height="217" key="GridCell.Tab.0.left" timestamp="1598253362753">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="217" key="GridCell.Tab.0.left/4.23.1436.877@4.23.1436.877" timestamp="1598112682559" />
-    <state width="1379" height="217" key="GridCell.Tab.0.right" timestamp="1598112682560">
+    <state width="1379" height="217" key="GridCell.Tab.0.left/4.23.1436.877@4.23.1436.877" timestamp="1598253362753" />
+    <state width="1379" height="217" key="GridCell.Tab.0.right" timestamp="1598253362755">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="217" key="GridCell.Tab.0.right/4.23.1436.877@4.23.1436.877" timestamp="1598112682560" />
+    <state width="1379" height="217" key="GridCell.Tab.0.right/4.23.1436.877@4.23.1436.877" timestamp="1598253362755" />
     <state x="356" y="245" key="NewModule_or_Project.wizard" timestamp="1597677490495">
       <screen x="4" y="23" width="1436" height="877" />
     </state>

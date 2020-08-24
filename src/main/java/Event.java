@@ -1,16 +1,25 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    private String time;
-    Event(String item, String time, boolean completed) {
+    private String dateTime;
+    private LocalDate dueDate;
+    private String input;
+
+    Event(String item, String dateTime, LocalDate dueDate, String input, boolean completed) {
         super(item, completed);
-        this.time = time;
+        this.dateTime = dateTime;
+        this.dueDate = dueDate;
+        this.input = input;
     }
 
     @Override
     public String getItem() {
-        return "[E]" + super.getItem() + "(at: " + time + ")";
+        return "[E]" + super.getItem() + "(at: " + dateTime + ")";
     }
 
-    public String getTime() {
-        return time;
+    @Override
+    public String getInput() {
+        return "[E]" + super.getItem() + "/at " + this.input;
     }
 }
