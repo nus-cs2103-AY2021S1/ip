@@ -55,4 +55,15 @@ public class TaskList {
     public Task removeTask(int index) {
         return tasks.remove(index);
     }
+
+    public ArrayList<Task> find(String word) {
+        ArrayList<Task> tasksWithWord = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (task.getDescription().contains(word)) {
+                tasksWithWord.add(task);
+            }
+        }
+        return tasksWithWord;
+    }
 }
