@@ -34,7 +34,6 @@ public class Storage {
                 while (scan.hasNextLine()) {
                     String taskString = scan.nextLine();
                     if(taskString.equals("")) {
-                        break;
                     } else {
                         String[] taskSplit = taskString.split("@");
                         String taskType = taskSplit[0];

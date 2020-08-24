@@ -20,4 +20,25 @@ public class Ui {
                 + "\nTo stop Dino, input 'bye'."
                 + "\n____________________________________________________________");
     }
+
+    public void bye() {
+        // Dino says bye
+        System.out.println("Rawr. Hope to see you again soon! ><");
+    }
+
+    public void showFormat() {
+        System.out.println("Formats for the three task types Todo, Deadline and Event,"
+                + " are shown below.\n"
+                + "Todo: 'todo <task description>'"
+                + " (e.g. todo visit new theme park)\n"
+                + "Deadline: 'deadline <task description>"
+                + " /by <yyyy-mm-dd hhmm>' (e.g. deadline submit report /by 2019-11-10 1500)\n"
+                + "Event: 'event <task description>"
+                + " /at <yyyy-mm-dd hhmm-hhmm>' "
+                + "(e.g. event team project meeting /at 2019-10-02 1400-1500)\n"
+                + "\nAdditional Information:"
+                + "\nTo mark a task as done, input 'done <task number>'."
+                + "\nTo delete a task from your list, input 'delete <task number>'.");
+    }
+
 }

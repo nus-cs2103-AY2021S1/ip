@@ -1,6 +1,4 @@
-D@0@party@2020-12-13@1300
-T@1@elephant party
-D@1@party@2020-12-12@1800
-D@1@party@2020-12-12@1800
-D@1@party@2020-12-12@1800
-E@0@bbq@2020-01-02@2000-2300
+
+T@1@swimming in sea
+D@1@swimming@2020-05-27@1430
+T@0@racing car
