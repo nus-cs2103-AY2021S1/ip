@@ -16,6 +16,10 @@ public class Task {
         return (completionStatus ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public boolean isToday(){
+        return false;
+    }
+
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.taskName;
     }

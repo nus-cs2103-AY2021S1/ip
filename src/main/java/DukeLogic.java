@@ -13,6 +13,8 @@ public class DukeLogic {
         try {
             if(command.equals("list")){
                 printTaskList();
+            } else if (command.equals("today")){
+                printTasksToday();
             } else if (command.length() >= 4 && command.substring(0, 4).equals("done")){
                 completeTask(command);
             } else if (command.length() >= 6 && command.substring(0, 6).equals("delete")){
@@ -43,6 +45,19 @@ public class DukeLogic {
         int index = 1;
         for(Task task: this.taskList) {
             System.out.println("    " + index + ". " + task);
+            index++;
+        }
+        System.out.println("    ____________________________________________________________");
+    }
+
+    private void printTasksToday(){
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    Here are today's tasks!!");
+        int index = 1;
+        for(Task task: this.taskList) {
+            if(task.isToday()){
+                System.out.println("    " + index + ". " + task);
+            }
             index++;
         }
         System.out.println("    ____________________________________________________________");

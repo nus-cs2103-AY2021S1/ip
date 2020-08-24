@@ -11,6 +11,10 @@ public class Event extends Task {
         this.date = date;
     }
 
+    public boolean isToday(){
+        return this.date.isEqual(LocalDate.now());
+    }
+
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", " +
                 date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault()) + ")";
