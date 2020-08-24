@@ -1,4 +1,1 @@
-E | 0 | party  | 9
-T | 0 | sleep 
-T | 1 | have fun
-D | 0 | assignment  | 2359
+E | 0 | hiii  | Feb 20 2019 10:00
