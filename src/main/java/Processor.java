@@ -1,9 +1,28 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
 public class Processor {
 
     public Processor() {}
+
+    public void process(String command, ArrayList<Task> arraylst, DukeFile dukeFile) throws DukeException {
+        String[] stringarr = command.split(" ");
+        if (stringarr[0].equals("list")) {
+            processorList(arraylst);
+        } else if (stringarr[0].equals("done")) {
+            int index = Integer.parseInt(stringarr[1]);
+            String record = processorDone(arraylst, index);
+            dukeFile.updateRecord(record, index);
+        } else if (stringarr[0].equals("delete")) {
+            int index = Integer.parseInt(stringarr[1]);
+            processorDelete(arraylst, index);
+            dukeFile.deleteRecord(index);
+        } else {
+            String record = processorAdd(command, arraylst);
+            dukeFile.saveRecord(record);
+        }
+    }
 
     public void processorList(ArrayList<Task> arraylst) {
         System.out.println("_________________________________________\n" + "Here are the tasks in your list:");
