@@ -1,6 +1,6 @@
 todo borrow book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+deadline return book /by 2020-08-24 1800
+event project meeting /at 2020-08-24 1900-2359
 list
 done 1
 list
@@ -33,4 +33,19 @@ delete
 delete1
 delete 0
 delete 1A
+deadline iP /by 25-08-2020 2359
+deadline iP /by 08-25-20 2359
+deadline iP /by 08-AUG-2020 1259pm
+deadline iP /by 2020-08-252359
+deadline iP /by 9999-99-99 2400
+deadline iP /by 2020/08/25 2359
+list
+event tP /at 25-08-2020 2359
+event tP /at 08-25-20 2200-2359
+event tP /at 08-AUG-2020 1259-3pm
+event tP /at 2020-08-252350 2359111
+event tP /at 9999-99-99 2200-2000
+event tP /at 9999-99-99 2400-2500
+event tP /at 2020/08/25 2200-2359
+list
 bye
