@@ -103,13 +103,12 @@ public class Duke {
                             System.out.println(String.format(
                                     "Here are the tasks in your list on %s:",
                                     date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))));
-                            int idx = 1;
-                            for (Task task : listOfTasks) {
+                            for (int i = 0; i < n; i++) {
+                                Task task = listOfTasks.get(i);
                                 boolean print = (task instanceof Event && ((Event) task).isOnDate(date))
                                         || (task instanceof Deadline && ((Deadline) task).isOnDate(date));
                                 if (print) {
-                                    System.out.println(String.format("%d.%s", idx, task));
-                                    idx += 1;
+                                    System.out.println(String.format("%d.%s", i + 1, task));
                                 }
                             }
                         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {

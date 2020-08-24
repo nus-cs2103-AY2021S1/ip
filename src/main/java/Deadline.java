@@ -14,6 +14,12 @@ public class Deadline extends Task {
         this.setByDateAndTime();
     }
 
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone);
+        this.by = by;
+        this.setByDateAndTime();
+    }
+
     private void setByDateAndTime() {
         try {
             this.byDateTime = LocalDateTime.parse(this.by);
@@ -23,6 +29,10 @@ public class Deadline extends Task {
                 this.byDate = LocalDate.parse(this.by);
             } catch (DateTimeParseException ignored) { }
         }
+    }
+
+    public String getBy() {
+        return this.by;
     }
 
     private String getFormattedBy() {
@@ -41,15 +51,6 @@ public class Deadline extends Task {
         } else {
             return false;
         }
-    }
-
-    public Deadline(String description, boolean isDone, String by) {
-        super(description, isDone);
-        this.by = by;
-    }
-
-    public String getBy() {
-        return this.by;
     }
 
     @Override

@@ -14,6 +14,12 @@ public class Event extends Task {
         this.setAtDateAndTime();
     }
 
+    public Event(String description, boolean isDone, String at) {
+        super(description, isDone);
+        this.at = at;
+        this.setAtDateAndTime();
+    }
+
     private void setAtDateAndTime() {
         try {
             this.atDateTime = LocalDateTime.parse(this.at);
@@ -23,6 +29,10 @@ public class Event extends Task {
                 this.atDate = LocalDate.parse(this.at);
             } catch (DateTimeParseException ignored) { }
         }
+    }
+
+    public String getAt() {
+        return this.at;
     }
 
     private String getFormattedAt() {
@@ -41,15 +51,6 @@ public class Event extends Task {
         } else {
             return false;
         }
-    }
-
-    public Event(String description, boolean isDone, String at) {
-        super(description, isDone);
-        this.at = at;
-    }
-
-    public String getAt() {
-        return this.at;
     }
 
     @Override
