@@ -12,10 +12,8 @@ public class Sparrow {
     public static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
-        taskToString(new Todo("stop slacking"));
-        taskToString(new Deadline("stop slacking", "now"));
-        taskToString(new Event("stop slacking", "now"));
-        initialize();
+        boolean isInitialized = initialize();
+        assert(isInitialized);
         greet();
 
         Scanner sc = new Scanner(System.in);
@@ -35,55 +33,6 @@ public class Sparrow {
                 reply("Bye. Hope t' see ye again soon!");
                 return false;
             case "list":
-                displayList();
-                break;
-            case "done":
-                try {
-                    markAsDone(commandArr[1]);
-                    saveTaskList();
-                    break;
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new MissingTaskNumberException("No task number passed to done command.", e);
-                }
-            case "todo":
-                try {
-                    addTask("todo", commandArr[1]);
-                    saveTaskList();
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new EmptyTodoDescriptionException("No description provided for todo.", e);
-                }
-                break;
-            case "deadline":
-                try {
-                    addTask("deadline", commandArr[1]);
-                    saveTaskList();
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new EmptyDeadlineDescriptionException("No description provided for deadline.", e);
-                }
-                break;
-            case "event":
-                try {
-                    addTask("event", commandArr[1]);
-                    saveTaskList();
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new EmptyEventDescriptionException("No description provided for event.", e);
-                }
-                break;
-            case "delete":
-                try {
-                    deleteTask(commandArr[1]);
-                    saveTaskList();
-                    break;
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new MissingTaskNumberException("No task number passed to delete command.", e);
-                }
-            default:
-                throw new UnknownCommandException(commandArr[0]);
-            switch (commandArr[0]) {
-            case "bye":
-                reply("Bye. Hope t' see ye again soon!");
-                return false;
-            case "list":
                 if (commandArr.length == 1) {
                     displayList(taskList);
                     break;
@@ -98,6 +47,7 @@ public class Sparrow {
             case "done":
                 try {
                     markAsDone(commandArr[1]);
+                    saveTaskList();
                     break;
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new MissingTaskNumberException("No task number passed to done command.", e);
@@ -105,6 +55,7 @@ public class Sparrow {
             case "todo":
                 try {
                     addTask("todo", commandArr[1]);
+                    saveTaskList();
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new EmptyTodoDescriptionException("No description provided for todo.", e);
                 }
@@ -112,6 +63,7 @@ public class Sparrow {
             case "deadline":
                 try {
                     addTask("deadline", commandArr[1]);
+                    saveTaskList();
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new EmptyDeadlineDescriptionException("No description provided for deadline.", e);
                 }
@@ -119,6 +71,7 @@ public class Sparrow {
             case "event":
                 try {
                     addTask("event", commandArr[1]);
+                    saveTaskList();
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new EmptyEventDescriptionException("No description provided for event.", e);
                 }
@@ -126,6 +79,7 @@ public class Sparrow {
             case "delete":
                 try {
                     deleteTask(commandArr[1]);
+                    saveTaskList();
                     break;
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new MissingTaskNumberException("No task number passed to delete command.", e);
@@ -133,19 +87,20 @@ public class Sparrow {
             default:
                 throw new UnknownCommandException(commandArr[0]);
             }
-        } catch (MissingTaskNumberException e) {
+        } catch(MissingTaskNumberException e){
             System.out.println(standardExceptionMessage() + "️ Please enter a task number after the \"done\"/\"delete\" command.");
-        } catch (EmptyTodoDescriptionException e) {
+        } catch(EmptyTodoDescriptionException e){
             System.out.println(standardExceptionMessage() + "️ The description of a todo cannot be empty.");
-        } catch (EmptyDeadlineDescriptionException e) {
+        } catch(EmptyDeadlineDescriptionException e){
             System.out.println(standardExceptionMessage() + "️ The description of a deadline cannot be empty.");
-        } catch (EmptyEventDescriptionException e) {
+        } catch(EmptyEventDescriptionException e){
             System.out.println(standardExceptionMessage() + "️ The description of an event cannot be empty.");
-        } catch (UnknownCommandException e) {
+        } catch(UnknownCommandException e){
             System.out.println(standardExceptionMessage() + "️ What be the meaning of this?");
         }
         return true;
     }
+
 
     public static void greet() {
         String welcome = "  _  _ _   ___ _                    \n" +
@@ -313,7 +268,40 @@ public class Sparrow {
         return LocalDate.parse(dateStr);
     }
 
-    public static void initialize() {
+    public static void stringToTask(String input) {
+        String[] inputArr = input.split("\\s+\\|\\s+", 4);
+        boolean isTaskDone = Integer.parseInt(inputArr[1]) == 1;
+        switch (inputArr[0]) {
+        case "T":
+            Todo todo = new Todo(inputArr[2]);
+            if (isTaskDone) {
+                todo.markAsDone();
+            }
+            taskList.add(todo);
+            break;
+        case "D":
+            LocalDate dueDate = stringToDate(inputArr[3]);
+            Deadline deadline = new Deadline(inputArr[2], dueDate);
+            if (isTaskDone) {
+                deadline.markAsDone();
+            }
+            taskList.add(deadline);
+            break;
+        case "E":
+            LocalDate date = stringToDate(inputArr[3]);
+            Event event = new Event(inputArr[2], date);
+            if (isTaskDone) {
+                event.markAsDone();
+            }
+            taskList.add(event);
+            break;
+        default:
+            System.out.println("No matching task found, shouldn't end up here");
+        }
+    }
+    public static boolean initialize() {
+        boolean isDirCreated = false;
+        boolean isFileCreated = false;
         // check if directory and file exist
         File f = new File("data/Sparrow.txt");
         if (f.exists()) {
@@ -329,45 +317,17 @@ public class Sparrow {
         } else {
             File g = new File("data");
             if (!g.exists()) {
-                g.mkdirs();
+                isDirCreated = g.mkdirs();
             }
             try {
-                f.createNewFile();
+                isFileCreated = f.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        return isDirCreated && isFileCreated;
     }
 
-    public static void stringToTask(String input) {
-        String[] inputArr = input.split("\\s+\\|\\s+", 4);
-        boolean isTaskDone = Integer.parseInt(inputArr[1]) == 1;
-        switch (inputArr[0]) {
-        case "T":
-            Todo todo = new Todo(inputArr[2]);
-            if (isTaskDone) {
-                todo.markAsDone();
-            }
-            taskList.add(todo);
-            break;
-        case "D":
-            Deadline deadline = new Deadline(inputArr[2], inputArr[3]);
-            if (isTaskDone) {
-                deadline.markAsDone();
-            }
-            taskList.add(deadline);
-            break;
-        case "E":
-            Event event = new Event(inputArr[2], inputArr[3]);
-            if (isTaskDone) {
-                event.markAsDone();
-            }
-            taskList.add(event);
-            break;
-        default:
-            System.out.println("No matching task found, shouldn't end up here");
-        }
-    }
 
     public static String taskToString(Task task) {
         StringBuilder sb = new StringBuilder(task.getDescription());
