@@ -6,6 +6,10 @@ public class Deadline extends Task {
         this.taskBy = by;
     }
 
+    public String getSaveToFileString() {
+        return "D`" + super.getSaveToFileString() + "`" + taskBy;
+    }
+
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), this.taskBy);

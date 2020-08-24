@@ -19,6 +19,10 @@ public class Task {
         return this.desc;
     }
 
+    public String getSaveToFileString() {
+        return String.format("%d`%s", (this.done) ? 1 : 0, this.desc);
+    }
+
 
     @Override
     public String toString(){

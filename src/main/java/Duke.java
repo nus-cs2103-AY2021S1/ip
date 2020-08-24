@@ -1,16 +1,22 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
+    private static final String DATA_FILE = "data/duke.txt";
+    private static final String FILE_DELIMITER = "`";
     private static ArrayList<Task> taskList;
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        taskList = new ArrayList<>();
-
 
         intro();
+        readFromFile();
+
+        Scanner sc = new Scanner(System.in);
 
         String input = "";
         do {
@@ -22,6 +28,81 @@ public class Duke {
             }
         } while (!(input.equals("bye") || input.equals("exit")));
 
+        saveToFile();
+
+    }
+
+    /**
+     * Creates the file provided if it does not exist.
+     * @param file File to be checked
+     */
+    private static void createFileIfNotExist(File file) {
+        if (file.isDirectory())
+            file.mkdirs();
+        else {
+            file.getParentFile().mkdirs();
+            try {
+                file.createNewFile();
+            } catch (IOException io) {
+                throw new DukeException(io.getMessage());
+            }
+        }
+    }
+
+    private static void readFromFile() {
+        File f = new File(DATA_FILE);
+        createFileIfNotExist(f);
+        taskList = new ArrayList<>();
+
+        try {
+            Scanner readFile = new Scanner(f);
+            while(readFile.hasNextLine()) {
+                String ln = readFile.nextLine();
+                String[] split = ln.split(FILE_DELIMITER);
+                Task t;
+
+                //TODO: may want to check for file modification. Or invalid line input
+                switch(split[0]) {
+                    case "T":
+                        t = new ToDo(split[2]);
+                        break;
+                    case "D":
+                        t = new Deadline(split[2], split[3]);
+                        break;
+                    case "E":
+                        t = new Event(split[2], split[3]);
+                        break;
+                    default:
+                        throw new DukeException("Error in reading this line...");
+                }
+
+                if (split[1].equals("1"))
+                    t.setDone();
+
+                taskList.add(t);
+            }
+            readFile.close();
+        } catch (FileNotFoundException fnf) {
+            //impossible since file is created in the method regardless if it exist.
+        }
+
+        if (taskList.size() > 0)
+            list();
+    }
+
+    private static void saveToFile() {
+        File f = new File(DATA_FILE);
+        createFileIfNotExist(f);
+
+        try {
+            FileWriter writer = new FileWriter(DATA_FILE);
+            for (Task t : taskList) {
+                writer.write(t.getSaveToFileString() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
