@@ -15,6 +15,10 @@ public class Task {
         this.isDone = true;
     }
     
+    public String fileFormat() {
+        return this.getStatusIcon() + " | " + new_task;
+    }
+    
     @Override
     public String toString() {
         return  "[" + this.getStatusIcon() + "] " + new_task;

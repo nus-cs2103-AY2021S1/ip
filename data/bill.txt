@@ -1,0 +1,3 @@
+T | ✘ | return book
+D | ✘ | return book  | Sunday
+E | ✘ | project meeting  | Mon 2-4pm

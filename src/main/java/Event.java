@@ -7,6 +7,10 @@ public class Event extends Task {
         this.duration = duration;
     }
 
+    public String fileFormat() {
+        return "E" + " | " + super.fileFormat() + " | " + duration;
+    }
+
     @Override
     public String toString() {
         return "[E]" +  super.toString() + " (at: " + duration + ")";

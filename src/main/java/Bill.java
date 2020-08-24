@@ -1,4 +1,10 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
+import java.io.File;
 
 public class Bill {
     
@@ -10,6 +16,7 @@ public class Bill {
     
     private static final String horizontal_line = "------------------------------------------";
     private static final List<Task> list_of_Content = new ArrayList<>();
+    private static final String filePath = "./data/bill.txt";
     
     private static void welcome_message() {
         System.out.println("Hello from Bill \n" + logo);
@@ -41,9 +48,11 @@ public class Bill {
         System.out.println(horizontal_line);
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         
         welcome_message();
+           
+        fileManager openFile = new fileManager(filePath);
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             try {
@@ -193,5 +202,7 @@ public class Bill {
                 System.out.println(e.getMessage());
             }
         }
+        
+        openFile.write(list_of_Content);
     }
 }
