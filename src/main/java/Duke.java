@@ -2,8 +2,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    ArrayList<Task> taskList;
+
+    public Duke() {
+        this.taskList = new ArrayList<>();
+    }
+
+    public void init() {
+        System.out.println("Hello! I'm Dukebb :)\n" + "What can I do for you?");
+    }
+    public void run() {
+        Scanner scanner = new Scanner(System.in);
+    }
+
     public static void main(String[] args) {
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+        Duke duke = new Duke();
+        duke.run();
+        duke.init();
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<>();
 
@@ -40,7 +55,7 @@ public class Duke {
                     } else if (input.length() == 5 && !input.substring(4,5).equals(" ")) {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
-                    Task newTask = new Task("todo", input);
+                    Task newTask = new TodoTask(input);
                     taskList.add(newTask);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("\t" + newTask);
@@ -53,7 +68,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                     String[] descDue = input.substring(9).split("/");
-                    Task newTask = new Task("deadline", descDue[0], descDue[1]);
+                    Task newTask = new DeadlineTask(descDue[0], descDue[1]);
                     taskList.add(newTask);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("\t" + newTask);
@@ -66,7 +81,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                     String[] descDue = input.substring(6).split("/");
-                    Task newTask = new Task("event", descDue[0], descDue[1]);
+                    Task newTask = new EventTask(descDue[0], descDue[1]);
                     taskList.add(newTask);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("\t" + newTask);
