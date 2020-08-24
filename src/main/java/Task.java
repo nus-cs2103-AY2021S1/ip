@@ -6,6 +6,19 @@ class Task {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public String saveText() {
+        String completeStatus = isCompleted ? "1" : "0";
+        return "Task," +  completeStatus + "," + name;
+    }
+
     public void markDone() {
         isCompleted = true;
         System.out.println("Nice, I've marked this task as done!");

@@ -14,8 +14,8 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
 
+        TaskManager tm = new TaskManager();
         Scanner sc = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
         
         while(true) {
             System.out.print("your input: ");
@@ -26,7 +26,7 @@ public class Duke {
                 break;
             }
             try {
-                handleCmd(cmd, sc, tasks);
+                handleCmd(cmd, sc, tm);
             } catch (DukeException e) {
                 System.out.println(e);
             }
@@ -34,38 +34,38 @@ public class Duke {
         }
     }
 
-    private static void handleCmd(String cmd, Scanner sc, List<Task> tasks) throws DukeException {
+    private static void handleCmd(String cmd, Scanner sc, TaskManager tm) throws DukeException {
         switch(cmd) {
             case "list":
-                list(tasks);
+                tm.listTasks();
                 break;
             case "complete":
-                complete(sc, tasks);
+                complete(sc, tm);
                 break;
             case "todo":
                 try {
-                    todo(sc, tasks);
+                    todo(sc, tm);
                 } catch (DukeException e) {
                     throw e;
                 }
                 break;
             case "deadline":
                 try {
-                    deadline(sc, tasks);
+                    deadline(sc, tm);
                 } catch (DukeException e) {
                     throw e;
                 }
                 break;
             case "event":
                 try {
-                    event(sc, tasks);
+                    event(sc, tm);
                 } catch (DukeException e) {
                     throw e;
                 }
                 break;
             case "delete":
                 try {
-                    delete(sc, tasks);
+                    delete(sc, tm);
                 } catch (DukeException e) {
                     throw e;
                 }
@@ -79,36 +79,27 @@ public class Duke {
          System.out.println("Bye. Hope to see you again soon!");       
     }
 
-    private static void list(List<Task> tasks) {
-        int i = 1;
-        System.out.println("*Here are all your tasks");
-        for (Task task: tasks) {
-            System.out.println(i + ". " + task);
-            i++;
-        }
-    }
-
-    private static void complete(Scanner sc, List<Task> tasks) throws DukeException {
+    private static void complete(Scanner sc, TaskManager tm) throws DukeException {
         System.out.println("Which task do you wish to mark complete? ");
         int taskNum = Integer.parseInt(sc.nextLine());
         try {
-            tasks.get(taskNum - 1).markDone();
+            tm.markDone(taskNum);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("You did not provide a valid task number!");
         }
     }
 
-    private static void todo(Scanner sc, List<Task> tasks) throws DukeException {
+    private static void todo(Scanner sc, TaskManager tm) throws DukeException {
         System.out.println("what is the name of the todo: ");
         String todoName = sc.nextLine();
         if (todoName.isEmpty()) {
             throw new DukeException("You must provide a name for the todo task!");
         }
-        tasks.add(new Todo(todoName));
+        tm.add(new Todo(todoName));
         System.out.println("*added: " + todoName);
     }
 
-    private static void deadline(Scanner sc, List<Task> tasks) throws DukeException {
+    private static void deadline(Scanner sc, TaskManager tm) throws DukeException {
         System.out.println("what is the name of the task: ");
         String deadlineName = sc.nextLine();
         if (deadlineName.isEmpty()) {
@@ -119,12 +110,12 @@ public class Duke {
         if (dueDate.isEmpty()) {
             throw new DukeException("You must provide a due date for the deadline task!");
         }
-        tasks.add(new Deadline(deadlineName, dueDate));
+        tm.add(new Deadline(deadlineName, dueDate)); // TODO: handle exception
         System.out.println("*added: " + deadlineName);
         
     }
 
-    private static void event(Scanner sc, List<Task> tasks) throws DukeException {
+    private static void event(Scanner sc, TaskManager tm) throws DukeException {
         System.out.println("what is the name of the event: ");
         String eventName = sc.nextLine();
         if (eventName.isEmpty()) {
@@ -140,17 +131,15 @@ public class Duke {
         if (end.isEmpty()) {
             throw new DukeException("You must provide an end time for the event!");
         }
-        tasks.add(new Event(eventName, start, end));
+        tm.add(new Event(eventName, start, end));
         System.out.println("*added: " + eventName);
     }
 
-    private static void delete(Scanner sc, List<Task> tasks) throws DukeException {
+    private static void delete (Scanner sc, TaskManager tm) throws DukeException {
         System.out.println("Which task would you like to remove: ");
         int taskNum = Integer.parseInt(sc.nextLine());
         try {
-            Task task = tasks.remove(taskNum - 1);
-            System.out.println(String.format("Successfully removed the following task:\n %s", task));
-            System.out.println(String.format("You have a total of %d tasks left", tasks.size()));
+            tm.deleteTask(taskNum);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("You did not provide a valid task number!");
         }
