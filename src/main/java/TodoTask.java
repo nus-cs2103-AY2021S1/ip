@@ -1,7 +1,11 @@
 public class TodoTask extends Task{
 
-    public TodoTask(String name) {
-        super(name);
+    public TodoTask(String name, boolean isComplete) {
+        super(name, isComplete);
+    }
+
+    public String getType(){
+        return "T";
     }
 
     @Override

@@ -1,70 +1,134 @@
+import javax.sound.midi.ShortMessage;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
     static ArrayList<Task> myTasks = new ArrayList<>();
+    static String horizontalLine = "_________________________________________________________________";
 
     public static void greet(){
-        String greeting = "\n   _________________________________________________________________"
+        String greeting = "\n   " + horizontalLine
                 + "\n   Hi, I'm Duke!"
                 + "\n   How can I help you today?"
-                + "\n   _________________________________________________________________";
+                + "\n   " + horizontalLine;
         System.out.println(greeting);
+        try{
+            readFile();
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public static void readFile() throws IOException{
+        File file = new File("./data\\duke.txt");
+        if(!file.exists()){
+            return;
+        }
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String line = reader.readLine();
+        while(line != null){
+            String[] splitLine = line.split(" \\| ");
+            switch (splitLine[0]){
+                case "E":
+                    myTasks.add(new EventTask(splitLine[2], Boolean.parseBoolean(splitLine[1]),splitLine[3]));
+                    break;
+                case "T":
+                    myTasks.add(new TodoTask(splitLine[2], Boolean.parseBoolean(splitLine[1])));
+                    break;
+                case "D":
+                    myTasks.add(new DeadlineTask(splitLine[2], Boolean.parseBoolean(splitLine[1]),splitLine[3]));
+                    break;
+            }
+
+            line = reader.readLine();
+        }
+
+    }
+
+    public static void writeFile() throws IOException{
+        String line = "";
+        File file = new File("./data\\duke.txt");
+        if(!file.exists()){
+            file.createNewFile();
+        }
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        for(Task task : myTasks){
+            String type = task.getType();
+            switch (type){
+                case "E":
+                case "D":
+                    line = type+" | "+ task.isDone()+" | " + task.getName() + " | " + task.getTime();
+                    break;
+                case "T":
+                    line = type+" | "+ task.isDone()+" | " + task.getName();
+                    break;
+            }
+            writer.write(line);
+            writer.newLine();
+            line="";
+        }
+        writer.close();
+
     }
 
 
-    public static void addTask(Task task){
+    public static void addTask(Task task) throws IOException {
         myTasks.add(task);
-        String output = "   ______________________________________________________________"
+        String output = "   " + horizontalLine
                         + "\n   Got it. I've added this task:"
                         + "\n       " + task
                         + String.format("\n   Now you have %d task(s) in the list.", myTasks.size())
-                        + "\n   ______________________________________________________________";
+                        + "\n   " + horizontalLine;
         System.out.println(output);
+        writeFile();
     }
 
     public static void listTasks(){
         if(myTasks.size() == 0){
-            System.out.println("   ______________________________________________________________"
+            System.out.println("   " + horizontalLine
                     + "\n   " + "You have no tasks"
-                    + "\n   ______________________________________________________________");
+                    + "\n   " + horizontalLine);
         } else {
-            StringBuilder output = new StringBuilder("   ______________________________________________________________");
+            StringBuilder output = new StringBuilder("   " + horizontalLine);
             for (int i = 0; i < myTasks.size(); i++) {
                 output.append("\n    ").append(i + 1).append(". ").append(myTasks.get(i));
             }
-            output.append("\n   ______________________________________________________________");
+            output.append("\n   " + horizontalLine);
             System.out.println(output);
         }
     }
 
     public static void bye(){
-        String output = "   ______________________________________________________________"
+        String output = "   " + horizontalLine
                 + "\n   " + "Bye. Hope to see you again soon!"
-                + "\n   ______________________________________________________________";
+                + "\n   " + horizontalLine;
         System.out.println(output);
     }
 
-    private static void markAsDone(int i) {
+    private static void markAsDone(int i) throws IOException {
         Task task = myTasks.get(i-1);
         task.markDone();
-        String output = "   ______________________________________________________________"
+        String output = "   " + horizontalLine
                 + "\n   " + "Nice! I've marked this task as done:"
                 + "\n   " + task
-                + "\n   ______________________________________________________________";
+                + "\n   " + horizontalLine;
         System.out.println(output);
+        writeFile();
     }
 
-    public static void deleteTask(int i){
+    public static void deleteTask(int i) throws IOException {
         Task task = myTasks.get(i-1);
         myTasks.remove(i-1);
-        String output = "   ______________________________________________________________"
+        String output = "   " + horizontalLine
                 + "\n   " + "Noted. I've removed this task: "
                 + "\n   " + task
                 + String.format("\n   Now you have %d task(s) in the list.", myTasks.size())
-                + "\n   ______________________________________________________________";
+                + "\n   " + horizontalLine;
         System.out.println(output);
+        writeFile();
     }
 
     public static boolean isNumeric(String string){
@@ -112,6 +176,8 @@ public class Duke {
                         }
                     } catch(DukeException e){
                         System.err.println(e);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 } else if (input.startsWith("todo")) {
                     try {
@@ -119,11 +185,13 @@ public class Duke {
                             throw new DukeException("todo needs description", DukeExceptionType.NO_DESCRIPTION, Commands.TODO);
                         } else {
                             String[] inputSplit = input.split("todo ");
-                            Task task = new TodoTask(inputSplit[1]);
+                            Task task = new TodoTask(inputSplit[1], false);
                             addTask(task);
                         }
                     } catch (DukeException e){
                         System.err.println(e);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 } else if (input.startsWith("deadline")) {
                     try {
@@ -141,11 +209,13 @@ public class Duke {
                                 } else{
                                     String name = inputSplit[0].split("deadline ")[1];
                                     String time = inputSplit[1];
-                                    Task task = new DeadlineTask(name, time);
+                                    Task task = new DeadlineTask(name,false, time);
                                     addTask(task);
                                 }
                             } catch(DukeException e){
                                 System.err.println(e);
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             }
                         }
                     } catch(DukeException e){
@@ -168,14 +238,14 @@ public class Duke {
                                 } else{
                                     String name = inputSplit[0].split("event ")[1];
                                     String time = inputSplit[1];
-                                    Task task = new EventTask(name, time);
+                                    Task task = new EventTask(name,false, time);
                                     addTask(task);
                                 }
                             } catch(DukeException e){
                                 System.err.println(e);
                             }
                         }
-                    } catch(DukeException e){
+                    } catch(DukeException | IOException e){
                         System.err.println(e);
                     }
                 } else if (input.startsWith("delete")) {
@@ -191,6 +261,8 @@ public class Duke {
                         }
                     } catch(DukeException e){
                         System.err.println(e);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
                 else {
