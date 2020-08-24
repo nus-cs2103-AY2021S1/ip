@@ -14,7 +14,8 @@ public class Duke {
 
     private static String DATA_PATHNAME = "data/duke.txt";
 
-    private List<Task> tasks = new ArrayList<>();
+    private List<Task> tasks;
+    private Storage storage;
 
     private Ui ui = new Ui();
 
@@ -110,69 +111,15 @@ public class Duke {
         }
     }
 
-    void loadFile() {
-        try {
-            Path filePath = Paths.get(DATA_PATHNAME);
-
-            if (Files.exists(filePath)) {
-                loadTasks();
-            } else {
-                Path directoryPath = Paths.get("data/");
-                if (!Files.exists(directoryPath)) {
-                    Files.createDirectory(directoryPath);
-                }
-                Files.createFile(filePath);
-            }
-
-        } catch (IOException exception) {
-            System.out.println(exception);
-        }
-    }
-
-    void loadTasks() {
-        try {
-            File localTasks = new File(DATA_PATHNAME);
-            // Create Scanner using file as source
-            Scanner sc = new Scanner(localTasks);
-            while (sc.hasNext()) {
-                String[] details = sc.nextLine().split(" \\| ");
-
-                switch (details[0]) {
-                    case "T": {
-                        TodoTask todoTask = new TodoTask(details[2]);
-                        if (details[1].equals("1")) {
-                            todoTask.markAsDone();
-                        }
-                        tasks.add(todoTask);
-                        break;
-                    }
-                    case "D": {
-                        DeadlineTask deadlineTask = new DeadlineTask(details[2], details[3]);
-                        if (details[1].equals("1")) {
-                            deadlineTask.markAsDone();
-                        }
-                        tasks.add(deadlineTask);
-                        break;
-                    }
-                    case "E": {
-                        EventTask eventTask = new EventTask(details[2], details[3]);
-                        if (details[1].equals("1")) {
-                            eventTask.markAsDone();
-                        }
-                        tasks.add(eventTask);
-                        break;
-                    }
-                }
-            }
-        } catch (FileNotFoundException | DukeException exception) {
-            System.out.println(exception);
-        }
-    }
-
-
     void initializeChatbot() {
         ui.greet();
-        loadFile();
+        storage = new Storage(DATA_PATHNAME);
+        try {
+            tasks = storage.load();
+        } catch (DukeException e) {
+            e.printStackTrace();
+            tasks = new ArrayList<>();
+        }
         Scanner sc = new Scanner(System.in);
         boolean hasEnded = false;
         while (!hasEnded) {
