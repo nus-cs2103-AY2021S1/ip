@@ -1,10 +1,7 @@
 package duck;
 
 import duck.exception.DuckException;
-import duck.task.Deadline;
-import duck.task.Event;
-import duck.task.Task;
-import duck.task.Todo;
+import duck.task.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -105,31 +102,8 @@ public class Duck {
     public void createNewTask(String input) throws DuckException {
         String[] inputSplit = input.split("\\s+");
         Option option = Parser.parseOption(input);
-        Task newTask;
 
-        String description = String.join(" ", Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
-
-        if (description.length() == 0) {
-            throw new DuckException("The description field cannot be empty!");
-        }
-
-        if (option.equals(Option.TODO)) {
-            newTask = new Todo(description);
-        } else if (option.equals(Option.DEADLINE)) {
-
-            String[] parsedString = parseWithDate(description, "/by");
-            String desc, date;
-            desc = parsedString[0].strip();
-            date = parsedString[1].strip();
-
-            newTask = new Deadline(desc, date);
-        } else {
-            String[] parsedString = parseWithDate(description, "/at");
-            String desc, date;
-            desc = parsedString[0].strip();
-            date = parsedString[1].strip();
-            newTask = new Event(desc, date);
-        }
+        Task newTask = TaskFactory.createTaskFromInput(input);
 
         this.tasks.add(newTask);
         responses.add("Got it. I've added this task");
