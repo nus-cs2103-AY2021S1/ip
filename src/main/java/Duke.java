@@ -67,62 +67,6 @@ public class Duke {
         );
     }
 
-    public void printNoIndexKeyedError() {
-        System.out.println(
-            this.border
-            + "Master please enter a task number so that I know which to handle.\n"
-            + this.border
-        );
-    }
-
-    public void printIndexSizeMismatchError() {
-        System.out.println(
-            this.border
-            + "Master that is not a valid task number.\n"
-            + this.border
-        );
-    }
-
-    public void printNoUndoneTaskError() {
-        System.out.println(
-            this.border
-            + "Master there is no task that is undone.\n"
-            + this.border
-        );
-    }
-
-    public void printIncompleteCommandError(String command) {
-        System.out.println(
-            this.border
-            + "Master there is no description for " + command + " !\n"
-            + this.border
-        );
-    }
-
-    public void printUnrecognizableCommandError() {
-        System.out.println(
-            this.border
-            + "I am sorry master but I do not understand that command.\n"
-            + this.border
-        );
-    }
-
-    public void printNoTaskToDeleteError() {
-        System.out.println(
-            this.border
-            + "I am sorry master but the task list is empty.\n"
-            + this.border
-        );
-    }
-
-    public void printNoDateInput(String command) {
-        System.out.println(
-            this.border
-            + "Master Please enter the date for your " + command + " task.\n"
-            + this.border
-        );
-    }
-
     public void doneHandler(String parameters) throws DukeExceptions.NoUndoneTaskException {
         if (!this.taskList.isEmpty() || this.taskList.allDone()) {
             int index = Integer.parseInt(parameters.strip()) - 1;
@@ -178,31 +122,31 @@ public class Duke {
             try {
                 this.doneHandler(parameters);
             } catch (DukeExceptions.NoUndoneTaskException e) {
-                this.printNoUndoneTaskError();
+                DukeExceptions.printNoUndoneTaskError();
             } catch (IndexOutOfBoundsException e) {
-                this.printIndexSizeMismatchError();
+                DukeExceptions.printIndexSizeMismatchError();
             } catch (NumberFormatException e) {
-                this.printNoIndexKeyedError();
+                DukeExceptions.noIndexKeyedError();
             }
             return true;
         } else if (command == commands.EVENT || command == commands.TODO || command == commands.DEADLINE) {
             try {
                 this.addTaskHandler(command.toString().toLowerCase(), parameters);
             } catch (DukeExceptions.IncompleteCommandException e) {
-                this.printIncompleteCommandError(command.toString().toLowerCase());
+                DukeExceptions.printIncompleteCommandError(command.toString().toLowerCase());
             } catch (ArrayIndexOutOfBoundsException e) {
-                this.printNoDateInput(command.toString().toLowerCase());
+                DukeExceptions.printNoDateInput(command.toString().toLowerCase());
             }
             return true;
         } else if (command == commands.DELETE){
             try {
                 this.deleteTaskHandler(parameters);
             } catch (DukeExceptions.NoTaskToDeleteException e) {
-                this.printNoTaskToDeleteError();
+                DukeExceptions.printNoTaskToDeleteError();
             } catch (IndexOutOfBoundsException e) {
-                this.printIndexSizeMismatchError();
+                DukeExceptions.printIndexSizeMismatchError();
             } catch (NumberFormatException e) {
-                this.printNoIndexKeyedError();
+                DukeExceptions.noIndexKeyedError();
             }
             return true;
         }
@@ -218,6 +162,7 @@ public class Duke {
         String command;
         String parameters;
 
+
         try {
             File taskList = new File("./data/data.txt");
             if (!taskList.exists()) {
@@ -231,7 +176,7 @@ public class Duke {
                 try {
                     hasChange = duke.run(Duke.commands.valueOf(command), parameters);
                 } catch (IllegalArgumentException e) {
-                    duke.printUnrecognizableCommandError();
+                    DukeExceptions.printUnrecognizableCommandError();
                 }
                 if (hasChange) {
                     duke.updateFile(taskList);
