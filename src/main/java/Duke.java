@@ -1,14 +1,7 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Duke {
 
@@ -29,135 +22,16 @@ public class Duke {
         System.out.println(DIVIDER);
     }
 
-    private static String convertTaskListToString(List<Task> tasks) {
-
-        if (tasks.isEmpty()) {
-            return "You have no tasks!";
-        }
-
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < tasks.size(); i++) {
-            sb.append((i+1));
-            sb.append(".");
-            sb.append(tasks.get(i));
-            sb.append('\n');
-        }
-
-        // remove last newline character
-        sb.deleteCharAt(sb.length() - 1);
-
-        return sb.toString();
-    }
-
-    private static String markTaskAsDone(List<Task> tasks, int taskID) throws DukeException, IOException {
-        if (taskID < 1 || taskID > tasks.size()) {
-            throw new DukeException("Task ID is invalid!");
-        }
-        
-        Task task = tasks.get(taskID - 1);
-        String oldTaskString = task.generateStorageString();
-        task.competeTask();
-        String newTaskString = task.generateStorageString();
-        storage.editLineInStorage(oldTaskString, newTaskString);
-        
-        return String.format("Nice! I've marked this task as done.\n%s", task.toString());
-    }
-
-    private static String deleteTask(List<Task> tasks, int taskID) throws DukeException, IOException {
-        if (taskID < 1 || taskID > tasks.size()) {
-            throw new DukeException("Task ID is invalid!");
-        }
-        
-        Task task = tasks.get(taskID - 1);
-        storage.deleteLineFromStorage(task.generateStorageString());
-        tasks.remove(taskID - 1);
-        
-        return String.format("Nice! I've marked this task as done.\n%s\nNow you have %d tasks in the list", 
-                task.toString(), tasks.size());
-    }
-
-    private static String addTaskToList(List<Task> tasks, Task task) {
-        tasks.add(task);
-        return String.format("Got it. I've added this task: \n%s\nNow you have %d tasks in the list",
-                task.toString(), tasks.size());
-    }
-    
-    private static String taskListToDateFilteredString(List<Task> tasks, String dateString) throws DukeException {
-        LocalDate date;
-        
-        try {
-            date = LocalDate.parse(dateString);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("DateTime format is invalid.");
-        }
-        
-        List<Task> temp = tasks.stream()
-                .filter(task -> task.isOnSameDay(date))
-                .collect(Collectors.toList());
-        
-        return convertTaskListToString(temp);
-    }
-    
-    private static void loadDataFromStorage(Path filePath, List<Task> tasks) throws DukeException, IOException {
-        storage = Storage.loadStorage(filePath);
-
-        FileReader reader = new FileReader(filePath.toString());
-        BufferedReader bufferedReader = new BufferedReader(reader);
-
-        String line;
-
-        while ((line = bufferedReader.readLine()) != null) {
-
-            String[] entry = line.split(" \\| ");
-
-            if (entry.length == 3) {
-                String taskType = entry[0];
-                if (!entry[1].toUpperCase().equals("TRUE") && !entry[1].toUpperCase().equals("FALSE")) {
-                    throw new DukeException("One or more task statuses are not stored correctly");
-                }
-                boolean taskIsDone = Boolean.parseBoolean(entry[1]);
-                String taskArgument = entry[2];
-
-                Task newTask;
-
-                switch (taskType) {
-                case "TODO":
-                    newTask = ToDo.createNewToDo(taskArgument);
-                    break;
-                case "EVENT":
-                    newTask = Event.createNewEvent(taskArgument);
-                    break;
-                case "DEADLINE":
-                    newTask = Deadline.createNewDeadline(taskArgument);
-                    break;
-                default:
-                    throw new DukeException("One or more task types are not stored correctly");
-                }
-
-                if (taskIsDone) {
-                    newTask.competeTask();
-                }
-
-                tasks.add(newTask);
-
-            } else {
-                throw new DukeException("One or more entries have an invalid number of arguments");
-            }
-        }
-
-        reader.close();
-
-    }
-
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
+        TaskList taskList = new TaskList();
         Path filePath = Paths.get("data","duke.txt");
-
+        Storage storage;
+        
         try {
-            loadDataFromStorage(filePath, tasks);
+            storage = Storage.loadStorage(filePath);
+            taskList.loadDataFromStorage(filePath);
         }  catch (IOException e) {
             printToConsole("File System Error");
             return;
@@ -186,31 +60,31 @@ public class Duke {
                     printToConsole("Goodbye!");
                     return;
                 case LIST:
-                    printToConsole(convertTaskListToString(tasks));
+                    printToConsole(taskList.convertTaskListToString());
                     break;
                 case DATE:
-                    printToConsole(taskListToDateFilteredString(tasks, argument));
+                    printToConsole(taskList.taskListToDateFilteredString(argument));
                     break;
                 case DONE:
-                    printToConsole(markTaskAsDone(tasks, Integer.parseInt(inputList[1])));
+                    printToConsole(taskList.markTaskAsDone(Integer.parseInt(inputList[1]), storage));
                     break;
                 case DELETE:
-                    printToConsole(deleteTask(tasks, Integer.parseInt(inputList[1])));
+                    printToConsole(taskList.deleteTask(Integer.parseInt(inputList[1]), storage));
                     break;
                 case TODO:
                     ToDo newTodo = ToDo.createNewToDo(argument);
                     storage.writeLineToStorage(newTodo.generateStorageString());
-                    printToConsole(addTaskToList(tasks, newTodo));
+                    printToConsole(taskList.addTaskToList(newTodo));
                     break;
                 case EVENT:
                     Event newEvent = Event.createNewEvent(argument);
                     storage.writeLineToStorage(newEvent.generateStorageString());
-                    printToConsole(addTaskToList(tasks, newEvent));
+                    printToConsole(taskList.addTaskToList(newEvent));
                     break;
                 case DEADLINE:
                     Deadline newDeadline = Deadline.createNewDeadline(argument);
                     storage.writeLineToStorage(newDeadline.generateStorageString());
-                    printToConsole(addTaskToList(tasks, newDeadline));
+                    printToConsole(taskList.addTaskToList(newDeadline));
                     break;
                 case INVALID:
                     throw new DukeException("Invalid Command.");
