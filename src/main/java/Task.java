@@ -44,6 +44,10 @@ public class Task implements ITask {
         return String.format("Ta|%d|%s", isDone ? 1 : 0, description);
     }
 
+    public boolean isSameTime(String time) {
+        return false;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", isDone ? "✓" : "✗", description);

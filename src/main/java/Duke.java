@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 /**
  * Immutable Duke chatbot class to encapsulate the behavior of the chatbot.
@@ -102,9 +103,16 @@ public class Duke implements IDuke {
     @Override
     public IDuke handleCommand(String command) {
         try {
-            if (command.equals("list")) {
-                // Handle list command
-                handleDisplay();
+            if (command.matches("^list.*")) {
+                if (command.equals("list")) {
+                    // Handle list command
+                    handleDisplay();
+                    return this;
+                } else if (!command.matches("^list .+")) {
+                    throw new DukeIllegalArgumentException(
+                            "Wrong list command! Format: list Optional:<date>");
+                }
+                handleDisplay(command.split(" ", 2)[1]);
                 return this;
             } else if (command.matches("^done.*")) {
                 // Handle done command
@@ -157,7 +165,7 @@ public class Duke implements IDuke {
                     "Meow? Sorry I don't know what you are talking about..."));
         } catch (Exception e) {
             System.out.println(TextFormatter.getFormattedText(
-                    "Meow!!! Something terrible happened!" + e));
+                    "Meow!!! Something terrible happened!\n" + e));
         }
 
         return this;
@@ -169,6 +177,24 @@ public class Duke implements IDuke {
                     "Oops! Looks like there's no task in the list!"));
         } else {
             displayTasks();
+        }
+    }
+
+    private void handleDisplay(String date) {
+        int[] indexes = IntStream
+                .range(0, list.size())
+                .filter(x -> list.get(x).isSameTime(date))
+                .toArray();
+        if (indexes.length == 0) {
+            System.out.println(TextFormatter.getFormattedText(
+                    "Oops! Looks like there's no matching task!"));
+        } else {
+            StringBuilder sb = new StringBuilder("Here are the task on " + date + ":\n");
+            for (int index : indexes) {
+                sb.append(" ").append(index + 1).append(". ")
+                        .append(list.get(index).toString()).append("\n");
+            }
+            System.out.println(TextFormatter.getFormattedText(sb.toString()));
         }
     }
 
