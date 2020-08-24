@@ -60,6 +60,9 @@ public class Duke {
                     case DELETE:
                         delete(parsedUserInput);
                         break;
+                    case FIND:
+                        search(parsedUserInput);
+                        break;
                 }
             }
 
@@ -166,7 +169,35 @@ public class Duke {
         }
     }
 
+    private void search(String[] parsedUserInput) {
+        try {
+            StringBuilder keyword = new StringBuilder(parsedUserInput[1]);
+            for(int i = 2; i < parsedUserInput.length; i++) {
+                keyword.append(parsedUserInput[i]);
+            }
 
+            List<Task> lst = taskList.getLstOfTask();
+            List<Task> resultList = new ArrayList<>();
+            for (int j = 0; j <taskList.getNumOfTask(); j++) {
+                Task t = lst.get(j);
+                String description = t.getDescription();
+                if (description.contains(keyword)) {
+                    resultList.add(t);
+                }
+
+            }
+
+            if (resultList.isEmpty()) {
+                ui.showNoSearchResult();
+            } else {
+                ui.showSearchResults(resultList);
+            }
+
+        } catch (IndexOutOfBoundsException e) {
+            ui.showInvalidSearchCommand();
+        }
+
+    }
 
     public static void main(String[] args)  {
         Duke duke = new Duke("Tasks.txt");

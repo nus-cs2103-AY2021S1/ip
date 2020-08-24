@@ -17,6 +17,10 @@ public class UserInterface {
     private static final String INVALID_DONE_MESSAGE = "    Sorry done cannot be empty ";
     private static final String INVALID_TODO_MESSAGE = "    Sorry todo cannot be empty ";
     private static final String INVALID_DELETE_MESSAGE = "    Sorry delete cannot be empty ";
+    private static final String INVALID_SEARCH_MESSAGE = "    Sorry please enter your keyword correctly";
+
+    private static final String NO_SEARCH_RESULT_MESSAGE = "    No match for keyword searched";
+    private static final String MATCH_SEARCH_RESULT_MESSAGE = "    Here are the matching tasks in your list:";
 
     private static final String GREET_USER_LINE_1 = "Hello! I'm duke.Duke";
     private static final String GREET_USER_LINE_2 = "What can I do for you?";
@@ -93,6 +97,27 @@ public class UserInterface {
         outputUi(INVALID_DATE_FORMAT);
     }
 
+    public void showSearchResults(List<Task> lstOfTask) {
+        outputUi(MATCH_SEARCH_RESULT_MESSAGE,listTaskOnly(lstOfTask));
+    }
+
+    public String listTaskOnly(List<Task> lstOfTask) {
+        String outputIndent = "    ";
+        StringBuilder concat = new StringBuilder();
+        for (int i = 0; i < lstOfTask.size(); i++) {
+            Task task = lstOfTask.get(i);
+            int taskNumber = i + 1;
+            String s="";
+            if (i == lstOfTask.size() -1) {
+                s = outputIndent + taskNumber + "." + task.toString();
+            } else {
+                s = outputIndent + taskNumber + "." + task.toString() + "\n";
+            }
+            concat.append(s);
+        }
+        return concat.toString();
+    }
+
     public void listTask(List<Task> lstOfTask) {
         String outputIndent = "    ";
         StringBuilder concat = new StringBuilder();
@@ -108,6 +133,14 @@ public class UserInterface {
             concat.append(s);
         }
         outputUi(concat.toString());
+    }
+
+    public void showInvalidSearchCommand() {
+        outputUi(INVALID_SEARCH_MESSAGE);
+    }
+
+    public void showNoSearchResult() {
+        outputUi(NO_SEARCH_RESULT_MESSAGE);
     }
 
 }

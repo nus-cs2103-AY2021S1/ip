@@ -10,7 +10,8 @@ public enum Command {
     BYE("bye"),
     TODO("todo"),
     DEADLINE("deadline"),
-    EVENT("event");
+    EVENT("event"),
+    FIND("find");
 
     public final String cmd;
 
