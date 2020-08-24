@@ -12,6 +12,7 @@ public class Duke {
     public static String line = "-------------------------------------";
     public static String defaultError = "Wat talking you?";
     public static String addedMsg = "Alright, I've added a new order: ";
+    public static String help = "HELP";
     public static ArrayList<Task> list = new ArrayList<>();
 
     private static String getFirstWord(String text) {
