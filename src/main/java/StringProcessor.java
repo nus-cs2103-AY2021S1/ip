@@ -34,7 +34,7 @@ public class StringProcessor {
                     throw new InvalidInputException("Date/time for Deadline cannot be empty/not recognised");
                 } else {
                     int indexOfNextWord = toSplit.indexOf(" ", indexOfSlash);
-                    return new Deadline(toSplit.substring(0, indexOfSlash - 1),
+                    return new Deadline(toSplit.substring(0, indexOfSlash),
                             toSplit.substring(indexOfSlash + 1, indexOfNextWord),
                             toSplit.substring(indexOfNextWord + 1));
                 }
