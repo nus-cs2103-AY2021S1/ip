@@ -1,6 +1,6 @@
-package Ultron.Tasks;
+package ultron.tasks;
 
-public class Todo extends Task {
+public final class Todo extends Task {
 
     //Call the constructor
     public Todo(final String description) {

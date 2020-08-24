@@ -1,11 +1,12 @@
-package Ultron;
+package ultron;
 
 import java.util.Scanner;
 
-public class UI {
+public final class UI {
 
     // Create the scanner object
     private final Scanner scanner;
+
     public UI() {
 
         //Create a new scanner object
@@ -32,7 +33,7 @@ public class UI {
         return input;
     }
 
-    public void print(String argument){
+    public void print(final String argument) {
         System.out.print(argument);
     }
 

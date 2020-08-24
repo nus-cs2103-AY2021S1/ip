@@ -1,4 +1,4 @@
-package Ultron.Exceptions;
+package ultron.exceptions;
 
 public enum ExceptionType {
     TOO_MUCH_ARGUMENTS("Too much arguments supplied for %s"),
@@ -12,19 +12,20 @@ public enum ExceptionType {
     //Store the error message
     private final String errorMessage;
 
-    ExceptionType(String errorMessage) {
+    ExceptionType(final String errorMessage) {
 
         //Store the error message
         this.errorMessage = errorMessage;
     }
 
-    public String getMessage(String inputString, String inputArguments) {
+    public String getMessage(final String inputString,
+                             final String inputArguments) {
 
         //Return the string formatted error message
         return String.format(this.errorMessage, inputString, inputArguments);
     }
 
-    public String getMessage(String inputString) {
+    public String getMessage(final String inputString) {
 
         //Return the formatted error message
         return String.format(this.errorMessage, inputString);

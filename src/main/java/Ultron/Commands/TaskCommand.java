@@ -1,11 +1,11 @@
-package Ultron.Commands;
+package ultron.commands;
+
+import ultron.tasks.Deadline;
+import ultron.tasks.Event;
+import ultron.tasks.Task;
+import ultron.tasks.Todo;
 
 import java.util.function.Function;
-
-import Ultron.Tasks.Deadline;
-import Ultron.Tasks.Task;
-import Ultron.Tasks.Event;
-import Ultron.Tasks.Todo;
 
 public enum TaskCommand {
 
@@ -15,7 +15,7 @@ public enum TaskCommand {
     deadline(Deadline::parseCommand);
 
     //Create a variable to store the Function
-    public final Function<String, Task> commandParser;
+    private final Function<String, Task> commandParser;
 
     //Constructor for the function
     TaskCommand(final Function<String, Task> commandParser) {
@@ -25,6 +25,10 @@ public enum TaskCommand {
     //Get the task given description
     public Task createTask(final String description) {
         return commandParser.apply(description);
+    }
+
+    public Function<String, Task> getCommandParser() {
+        return commandParser;
     }
 
 

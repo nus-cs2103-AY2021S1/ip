@@ -1,22 +1,24 @@
-package Ultron.Commands;
+package ultron.commands;
 
-import Ultron.Exceptions.ExceptionType;
-import Ultron.Parser;
-import Ultron.TaskList;
-import Ultron.Tasks.Task;
-import Ultron.UI;
-import Ultron.Storage;
-import Ultron.Exceptions.UltronException;
+import ultron.Parser;
+import ultron.Storage;
+import ultron.TaskList;
+import ultron.UI;
+import ultron.exceptions.ExceptionType;
+import ultron.exceptions.UltronException;
+import ultron.tasks.Task;
 
 
-public class DeleteCommand extends Command{
+public final class DeleteCommand extends Command {
 
-    public DeleteCommand(String arguments){
+    public DeleteCommand(final String arguments) {
         super(false, arguments);
     }
 
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws UltronException{
+    public void execute(final TaskList taskList,
+                        final UI ui,
+                        final Storage storage) throws UltronException {
 
         //Initialise index
         int index = Parser.parseInteger(this.getArguments());

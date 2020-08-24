@@ -1,24 +1,26 @@
-package Ultron.Commands;
+package ultron.commands;
 
-import Ultron.Exceptions.ExceptionType;
-import Ultron.Exceptions.UltronException;
-import Ultron.Parser;
-import Ultron.Storage;
-import Ultron.TaskList;
-import Ultron.UI;
+import ultron.Parser;
+import ultron.Storage;
+import ultron.TaskList;
+import ultron.UI;
+import ultron.exceptions.ExceptionType;
+import ultron.exceptions.UltronException;
 
-public class DoneCommand extends Command {
+public final class DoneCommand extends Command {
 
-    public DoneCommand(String arguments){
+    public DoneCommand(final String arguments) {
         super(false, arguments);
     }
 
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws UltronException {
+    public void execute(final TaskList taskList,
+                        final UI ui,
+                        final Storage storage) throws UltronException {
         //Initialise index
         int index = Parser.parseInteger(this.getArguments());
 
-        if (this.getArguments().trim().length() > 1){
+        if (this.getArguments().trim().length() > 1) {
             throw new UltronException("done", ExceptionType.TOO_MUCH_ARGUMENTS);
         }
 

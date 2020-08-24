@@ -1,4 +1,4 @@
-package Ultron.Tasks;
+package ultron.tasks;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -7,14 +7,15 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Event extends Task {
+public final class Event extends Task {
 
+    private static final Pattern DATE_MATCH =
+            Pattern.compile("^(.*) (/at) (.*)$");
+    private static final DateFormat DATE_FORMAT =
+            new SimpleDateFormat("dd-MM-yyyy HHmm");
     //Store the variables
     private String at = null;
     private Date date = null;
-    private static final Pattern DATEMATCH =
-            Pattern.compile("^(.*) (/at) (.*)$");
-    private static final DateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm");
 
     //Constructor for the event class
     public Event(final String description, final String at) {
@@ -36,12 +37,41 @@ public class Event extends Task {
         this.date = at;
     }
 
+    public static Task parseCommand(final String args) {
+
+        //Create the matcher
+        Matcher matcher = DATE_MATCH.matcher(args);
+
+        //Check for matches
+        matcher.find();
+
+        //Get the date and the name
+        String name = matcher.group(1);
+        String date = matcher.group(3);
+
+        //Extract the date
+        try {
+
+            //Parse the date
+            Date date1 = DATE_FORMAT.parse(date);
+
+            //Pass the date to the constructor
+            return new Event(name, date1);
+        } catch (ParseException e) {
+
+            //Pass the 2 arguments into the function
+            return new Event(name, date);
+        }
+
+
+    }
+
     /**
      * @return date Date of the event
      */
     //Getter for the date of the
     public String getDate() {
-        if (at != null){
+        if (at != null) {
             //Return the date
             return at;
         } else {
@@ -57,36 +87,8 @@ public class Event extends Task {
 
     @Override
     public String getCommand() {
-        return super.getCommand() + String.format("%s /at %s", getMessage(), getDate());
-    }
-
-    public static Task parseCommand(final String args) {
-
-        //Create the matcher
-        Matcher matcher = DATEMATCH.matcher(args);
-
-        //Check for matches
-        matcher.find();
-
-        //Get the date and the name
-        String name = matcher.group(1);
-        String date = matcher.group(3);
-
-        //Extract the date
-        try {
-
-            //Parse the date
-            Date date1 = format.parse(date);
-
-            //Pass the date to the constructor
-            return new Event(name, date1);
-        } catch (ParseException e){
-
-            //Pass the 2 arguments into the function
-            return new Event(name, date);
-        }
-
-
+        return super.getCommand()
+                + String.format("%s /at %s", getMessage(), getDate());
     }
 
     @Override

@@ -1,24 +1,30 @@
-package Ultron;
+package ultron;
 
-import Ultron.Commands.Command;
-import Ultron.Commands.TaskAllocator;
-import Ultron.Commands.ByeCommand;
-import Ultron.Commands.ListCommand;
-import Ultron.Commands.HelpCommand;
-import Ultron.Commands.DeleteCommand;
-import Ultron.Commands.DoneCommand;
-import Ultron.Exceptions.UltronException;
-import Ultron.Exceptions.ExceptionType;
+import ultron.commands.ByeCommand;
+import ultron.commands.Command;
+import ultron.commands.DeleteCommand;
+import ultron.commands.DoneCommand;
+import ultron.commands.HelpCommand;
+import ultron.commands.ListCommand;
+import ultron.commands.TaskAllocator;
+import ultron.exceptions.ExceptionType;
+import ultron.exceptions.UltronException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Parser {
+public final class Parser {
 
     //Get the pattern for the regex for parsing the command
-    private static final Pattern pattern = Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
+    private static final Pattern PATTERN =
+            Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
 
-    private static Command checkInput(final String input, final String arguments) throws UltronException {
+    private Parser() {
+    }
+
+    private static Command checkInput(final String input,
+                                      final String arguments)
+            throws UltronException {
 
         //Switch case to process the commands
         switch (input) {
@@ -63,9 +69,10 @@ public class Parser {
         }
     }
 
-    public static Command parseCommand(String input) throws UltronException{
+    public static Command parseCommand(final String input)
+            throws UltronException {
         //Use regex to get the grp
-        Matcher inputs = pattern.matcher(input);
+        Matcher inputs = PATTERN.matcher(input);
 
         //Find the items in the group
         if (!inputs.find()) {

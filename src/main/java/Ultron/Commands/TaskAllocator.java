@@ -1,17 +1,18 @@
-package Ultron.Commands;
+package ultron.commands;
 
-import Ultron.Exceptions.ExceptionType;
-import Ultron.Exceptions.UltronException;
-import Ultron.Storage;
-import Ultron.TaskList;
-import Ultron.Tasks.Task;
-import Ultron.UI;
+import ultron.Storage;
+import ultron.TaskList;
+import ultron.UI;
+import ultron.exceptions.ExceptionType;
+import ultron.exceptions.UltronException;
+import ultron.tasks.Task;
 
-public class TaskAllocator extends Command{
+public final class TaskAllocator extends Command {
 
     private final TaskCommand taskCommand;
 
-    public TaskAllocator(String command, String arguments) throws UltronException {
+    public TaskAllocator(final String command,
+                         final String arguments) throws UltronException {
 
         //Call the superclass
         super(false, arguments);
@@ -24,12 +25,14 @@ public class TaskAllocator extends Command{
 
             //Throw a Duke exception
             throw new UltronException(command,
-                ExceptionType.INVALID_COMMAND);
+                    ExceptionType.INVALID_COMMAND);
         }
     }
 
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws UltronException {
+    public void execute(final TaskList taskList,
+                        final UI ui,
+                        final Storage storage) throws UltronException {
 
         //Init the enum states
         Task task;
