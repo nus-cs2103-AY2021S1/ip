@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
-    protected DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM d yyyy HHmm'H'");
+    protected static final DateTimeFormatter DF = DateTimeFormatter.ofPattern("MMM d yyyy HHmm'H'");
     protected LocalDateTime deadline;
 
     protected String inputString;
