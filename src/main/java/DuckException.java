@@ -1,6 +1,6 @@
-public class DukeException extends Exception {
+public class DuckException extends Exception {
 
-    public DukeException(String s) {
+    public DuckException(String s) {
         super(s);
     }
 
