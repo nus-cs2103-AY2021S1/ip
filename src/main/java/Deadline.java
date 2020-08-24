@@ -1,15 +1,34 @@
 package main.java;
 
-public class Deadline extends Task {
-    private String date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
-    public Deadline(String name, String date) {
+public class Deadline extends Task {
+    private LocalDate date;
+    private LocalTime time;
+
+    public Deadline(String name, String eventDetail) throws DateTimeParseException {
         super(name);
-        this.date = date;
+        String[] input = eventDetail.split("\\s+");
+        try {
+            date = LocalDate.parse(input[0]);
+            if (input.length == 2) {
+                time = LocalTime.parse(input[1]);
+            } else{
+                time = null;
+            }
+        } catch (DateTimeParseException err) {
+            throw err;
+        }
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.date);
+        String dateTime = Task.DATE_FORMATTER.format(this.date);
+        if (time != null) {
+            dateTime += " " + Task.TIME_FORMATTER.format(this.time);
+        }
+        return String.format("[D]%s (by: %s)", super.toString(), dateTime);
     }
 }
