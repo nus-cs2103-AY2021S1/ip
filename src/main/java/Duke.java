@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -14,7 +13,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         print(WELCOME);
-        ArrayList<Task> tasks = new ArrayList<>();
+        Tasks tasks = new Tasks();
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
@@ -28,21 +27,18 @@ public class Duke {
                 String[] subst;
                 switch (command) {
                     case "list":
-                        print_tasks(tasks);
+                        tasks.print_tasks();
                         break;
                     case "done":
                     case "delete":
                         int i = Integer.parseInt(words[1]) - 1;
-                        if(i < 0 || i >= tasks.size()){
-                            throw new DukeException("invalid task number");
-                        }
                         Task task = tasks.get(i);
                         if(command.equals("done")){
-                            task.done = true;
+                            tasks.setDone(i, true);
                             print("Nice! I've marked this task as done: \n" + task);
                         } else if(command.equals("delete")) {
                             tasks.remove(i);
-                            print("Noted. I've removed this task: \n" + task + numTasks(tasks));
+                            print("Noted. I've removed this task: \n" + task + tasks.numTasks());
                         }
                         break;
                     case "todo":
@@ -51,7 +47,7 @@ public class Duke {
                         }
                         String text = input.substring(5);
                         newTask = new Todo(text);
-                        addTask(newTask, tasks);
+                        tasks.addTask(newTask);
                         break;
                     case "deadline":
                         if (input.length() < 10) {
@@ -62,7 +58,7 @@ public class Duke {
                             throw new DukeException("The due date must be specified.");
                         }
                         newTask = new Deadline(subst[0], subst[1]);
-                        addTask(newTask, tasks);
+                        tasks.addTask(newTask);
                         break;
                     case "event":
                         if (input.length() < 7) {
@@ -73,7 +69,7 @@ public class Duke {
                             throw new DukeException("The event date must be specified.");
                         }
                         newTask = new Event(subst[0], subst[1]);
-                        addTask(newTask, tasks);
+                        tasks.addTask(newTask);
                         break;
                     default:
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -89,25 +85,8 @@ public class Duke {
         print(BYE);
     }
 
-    public static void print_tasks(ArrayList<Task> tasks) {
-        System.out.print(LINE);
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.print((i + 1) + "." + tasks.get(i));
-        }
-        System.out.print(LINE);
-    }
-
     public static void print(String str) {
         System.out.print(LINE + str + LINE);
     }
 
-    public static void addTask(Task task, ArrayList<Task> tasks) {
-        tasks.add(task);
-        print("added: " + task.toString() + numTasks(tasks));
-    }
-
-    public static String numTasks(ArrayList<Task> tasks) {
-        int size = tasks.size();
-        return "You now have " + size + " task" + (size > 1 ? "s" : "") + " in the list.\n";
-    }
 }
