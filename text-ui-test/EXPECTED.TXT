@@ -1,44 +1,29 @@
 __________________________________________________________
-Hello! I'm Duke
-What can I do for you?
+Hello! I'm Duke!
+Here are the tasks in your list:
+1. [T][✓] CS2100
+2. [T][✓] CS2101
+3. [T][✓] CS2100
+4. [E][✘] rotaract club presentation (at: Dec 20 2019 09:10)
+5. [D][✘] CS2103 quiz (by: Dec 21 2019 19:10)
 __________________________________________________________
 
 __________________________________________________________
 Got it. I've added this task:
 [T][✘] CS2100
-Now you have 1 tasks in the list.
+Now you have 6 tasks in the list.
 __________________________________________________________
 
 __________________________________________________________
 Got it. I've added this task:
 [T][✘] CS2101
-Now you have 2 tasks in the list.
+Now you have 7 tasks in the list.
 __________________________________________________________
 
 __________________________________________________________
 Got it. I've added this task:
-[E][✘] rotaract club presentation (at: Sun 8am)
-Now you have 3 tasks in the list.
-__________________________________________________________
-
-__________________________________________________________
-Nice! I've marked this task as done:
-[T][✓] CS2100
-__________________________________________________________
-
-__________________________________________________________
-Here are the tasks in your list:
-1. [T][✓] CS2100
-2. [T][✘] CS2101
-3. [E][✘] rotaract club presentation (at: Sun 8am)
-__________________________________________________________
-
-__________________________________________________________
-Input for done command is invalid! Input a number between 1 and 3.
-__________________________________________________________
-
-__________________________________________________________
-Input for done command is invalid! Input a number between 1 and 3.
+[E][✘] rotaract club presentation (at: Dec 20 2019 09:10)
+Now you have 8 tasks in the list.
 __________________________________________________________
 
 __________________________________________________________
@@ -46,26 +31,60 @@ __________________________________________________________
 __________________________________________________________
 
 __________________________________________________________
-Got it. I've added this task:
-[D][✘] CS2103 quiz (by: Mon 12am)
-Now you have 4 tasks in the list.
+Here are the tasks in your list:
+1. [T][✓] CS2100
+2. [T][✓] CS2101
+3. [T][✓] CS2100
+4. [E][✘] rotaract club presentation (at: Dec 20 2019 09:10)
+5. [D][✘] CS2103 quiz (by: Dec 21 2019 19:10)
+6. [T][✘] CS2100
+7. [T][✘] CS2101
+8. [E][✘] rotaract club presentation (at: Dec 20 2019 09:10)
+__________________________________________________________
+
+__________________________________________________________
+Input for done command is invalid! Input a number between 1 and 8.
 __________________________________________________________
 
 __________________________________________________________
 Nice! I've marked this task as done:
-[T][✓] CS2101
+[D][✓] CS2103 quiz (by: Dec 21 2019 19:10)
+__________________________________________________________
+
+__________________________________________________________
+☹ OOPS!!! Task is already done!
+__________________________________________________________
+
+__________________________________________________________
+☹ OOPS!!! The format of your input time seems to be wrong.
+Try the following time format: YYYY-MM-DD HH:MM
+__________________________________________________________
+
+__________________________________________________________
+Got it. I've added this task:
+[D][✘] CS2103 quiz (by: Dec 21 2019 19:10)
+Now you have 9 tasks in the list.
+__________________________________________________________
+
+__________________________________________________________
+☹ OOPS!!! Task is already done!
 __________________________________________________________
 
 __________________________________________________________
 Here are the tasks in your list:
 1. [T][✓] CS2100
 2. [T][✓] CS2101
-3. [E][✘] rotaract club presentation (at: Sun 8am)
-4. [D][✘] CS2103 quiz (by: Mon 12am)
+3. [T][✓] CS2100
+4. [E][✘] rotaract club presentation (at: Dec 20 2019 09:10)
+5. [D][✓] CS2103 quiz (by: Dec 21 2019 19:10)
+6. [T][✘] CS2100
+7. [T][✘] CS2101
+8. [E][✘] rotaract club presentation (at: Dec 20 2019 09:10)
+9. [D][✘] CS2103 quiz (by: Dec 21 2019 19:10)
 __________________________________________________________
 
 __________________________________________________________
-Input for done command is invalid! Input a number between 1 and 4.
+Input for done command is invalid! Input a number between 1 and 9.
 __________________________________________________________
 
 __________________________________________________________
@@ -77,7 +96,9 @@ __________________________________________________________
 __________________________________________________________
 
 __________________________________________________________
-Input for delete command is invalid! Input a number between 1 and 4.
+Noted. I've removed this task:
+[D][✓] CS2103 quiz (by: Dec 21 2019 19:10)
+Now you have 8 tasks in the list.
 __________________________________________________________
 
 __________________________________________________________
@@ -86,35 +107,38 @@ __________________________________________________________
 
 __________________________________________________________
 ☹ OOPS!!! The format of event command seems to be wrong.
-Try the following format: event task /at time
+Try the following format: event task /at YYYY-MM-DD HH:MM
 __________________________________________________________
 
 __________________________________________________________
 ☹ OOPS!!! The format of deadline command seems to be wrong.
-Try the following format: deadline task /by time
+Try the following format: deadline task /by YYYY-MM-DD HH:MM
+__________________________________________________________
+
+__________________________________________________________
+☹ OOPS!!! Task is already done!
 __________________________________________________________
 
 __________________________________________________________
 Nice! I've marked this task as done:
-[E][✓] rotaract club presentation (at: Sun 8am)
-__________________________________________________________
-
-__________________________________________________________
-Nice! I've marked this task as done:
-[D][✓] CS2103 quiz (by: Mon 12am)
+[E][✓] rotaract club presentation (at: Dec 20 2019 09:10)
 __________________________________________________________
 
 __________________________________________________________
 Noted. I've removed this task:
-[E][✓] rotaract club presentation (at: Sun 8am)
-Now you have 3 tasks in the list.
+[T][✓] CS2100
+Now you have 7 tasks in the list.
 __________________________________________________________
 
 __________________________________________________________
 Here are the tasks in your list:
 1. [T][✓] CS2100
 2. [T][✓] CS2101
-3. [D][✓] CS2103 quiz (by: Mon 12am)
+3. [E][✓] rotaract club presentation (at: Dec 20 2019 09:10)
+4. [T][✘] CS2100
+5. [T][✘] CS2101
+6. [E][✘] rotaract club presentation (at: Dec 20 2019 09:10)
+7. [D][✘] CS2103 quiz (by: Dec 21 2019 19:10)
 __________________________________________________________
 
 __________________________________________________________
@@ -123,7 +147,7 @@ __________________________________________________________
 
 __________________________________________________________
 ☹ OOPS!!! The format of event command seems to be wrong.
-Try the following format: event task /at time
+Try the following format: event task /at YYYY-MM-DD HH:MM
 __________________________________________________________
 
 __________________________________________________________

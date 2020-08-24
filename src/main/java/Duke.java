@@ -44,10 +44,10 @@ public class Duke {
         }
     }
 
-    public void runDuke() throws IOException {
+    public void runDuke() throws IOException, InvalidTimeException {
 
         ArrayList<Task> list = FileReader.getCurrentTasks();
-        messageEcho("Hello! I'm Duke!\n" + listIterator(list));
+        messageEcho("Hello! I'm Duke! Welcome back!\n" + listIterator(list));
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNext()) {
@@ -109,7 +109,7 @@ public class Duke {
                     if (deadlineDateArray.length != 2) {
                         throw new InvalidDeadlineFormatException();
                     }
-                    Deadline newDeadlineTask = new Deadline(deadlineDateArray[0], deadlineDateArray[1]);
+                    Deadline newDeadlineTask = new Deadline(deadlineDateArray[0], Time.getFormatedTime(deadlineDateArray[1]));
                     list.add(newDeadlineTask);
                     messageEcho(
                             "Got it. I've added this task:\n" + newDeadlineTask.toString() +
@@ -141,7 +141,7 @@ public class Duke {
                     if (eventDateArray.length != 2) {
                         throw new InvalidEventFormatException();
                     }
-                    Event newEventTask = new Event(eventDateArray[0], eventDateArray[1]);
+                    Event newEventTask = new Event(eventDateArray[0], Time.getFormatedTime(eventDateArray[1]));
                     list.add(newEventTask);
                     messageEcho(
                             "Got it. I've added this task:\n" + newEventTask.toString() +
@@ -164,7 +164,7 @@ public class Duke {
     public static void main(String[] args) {
         try {
             new Duke().runDuke();
-        } catch (IOException e) {
+        } catch (IOException | InvalidTimeException e) {
             e.getMessage();
         }
     }

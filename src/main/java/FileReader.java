@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
@@ -11,7 +12,7 @@ public class FileReader {
     private final static String TODO_COMMAND = "T";
     private final static String DEADLINE_COMMAND = "D";
 
-    public static ArrayList<Task> getCurrentTasks() throws IOException {
+    public static ArrayList<Task> getCurrentTasks() throws IOException, InvalidTimeException {
             File f = new File(PATH);
             if (f.createNewFile()) {
                 return new ArrayList<>();
@@ -29,12 +30,12 @@ public class FileReader {
                 }
 
                 if(command.equals(EVENT_COMMAND)) {
-                    String date = task[3];
+                    LocalDateTime date = Time.getFormatedTime(task[3]);
                     taskList.add(new Event(description, isDone, date));
                 }
 
                 if(command.equals(DEADLINE_COMMAND)) {
-                    String date = task[3];
+                    LocalDateTime date = Time.getFormatedTime(task[3]);
                     taskList.add(new Deadline(description, isDone, date));
                 }
             }
