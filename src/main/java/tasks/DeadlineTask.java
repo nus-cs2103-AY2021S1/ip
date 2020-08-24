@@ -26,14 +26,20 @@ public class DeadlineTask extends Task {
     }
 
     public DeadlineTask(String title, String dateTimeDetails, boolean isDone) {
-        super(String.format("%s (by: %s)", title, dateTimeDetails), isDone, "D");
+        super(String.format("%s (by: %s)", title,
+                LocalDateTime.parse(dateTimeDetails, PATTERN_INPUT)
+                        .format(PATTERN_OUTPUT)), isDone, "D");
         this.title = title;
-        this.dateTimeDetails = dateTimeDetails;
+        this.dateTime = LocalDateTime.parse(dateTimeDetails, PATTERN_INPUT);
     }
 
     @Override
     public String getSaveFormat() {
         return String.format("D | %s | %s | %s",
-                super.getIsDone() ? 1 : 0, title, dateTimeDetails);
+                super.getIsDone() ? 1 : 0, title, this.getDateTimeDetails());
+    }
+
+    private String getDateTimeDetails() {
+        return this.dateTime.format(PATTERN_INPUT);
     }
 }

@@ -116,7 +116,12 @@ public class DukeDomain {
                         task = new DeadlineTask(components[2], components[3], isDone);
                         break;
                     default:
-                        task = new EventTask(components[2], components[3], isDone);
+                        String[] dateTimeComp = components[3].trim().split("\\s+", 2);
+                        String date = dateTimeComp[0];
+                        String[] timeComp = dateTimeComp[1].split("-", 2);
+                        String startTime = timeComp[0];
+                        String endTime = timeComp[1];
+                        task = new EventTask(components[2], date, startTime, endTime, isDone);
                 }
                 list.add(task);
 
