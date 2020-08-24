@@ -35,9 +35,11 @@ public class Duke {
     }
 
     protected final List<Task> taskRecords;
+    protected final Storage storage;
 
     public Duke() {
-        this.taskRecords = new ArrayList<>();
+        storage = Storage.init();
+        taskRecords = storage.readStoredData();
     }
 
     public static void main(String[] args) {
@@ -72,6 +74,7 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(processErrorString(e));
             }
+            storage.updateFile(taskRecords);
         }
 
     }
