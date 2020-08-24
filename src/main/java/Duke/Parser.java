@@ -10,7 +10,7 @@ public class Parser {
         this.lines = new TaskList(lines);
     }
 
-    public boolean continueDuke() {
+    public boolean shouldContinueDuke() {
         return carryOn;
     }
 

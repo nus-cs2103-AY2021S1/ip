@@ -16,11 +16,11 @@ public class Duke {
         Parser parser = new Parser(lines);
         Scanner input = new Scanner(System.in);
         Ui.introduction();
-        while(parser.continueDuke()) {
+        while(parser.shouldContinueDuke()) {
             String inputString = input.nextLine();
             try {
                 parser.parse(inputString);
-                if (!parser.continueDuke()) {
+                if (!parser.shouldContinueDuke()) {
                     ArrayList<String> finalLines = parser.finalizedLines();
                     storage.saveData(finalLines);
                 }
