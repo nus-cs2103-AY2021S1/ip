@@ -1,6 +1,12 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Command {
 
@@ -11,59 +17,72 @@ public class Command {
     }
 
     public String processCommand(String command) throws DukeException {
-        String[] stringArray = command.split(" ");
-        List<String> stringList = new ArrayList<>(Arrays.asList(stringArray));
-        String com = stringList.remove(0);
-
-        switch(com) {
-            case ("hello"):
-                return "Hi! I'm Duke! Pleasure to meet you :)";
-
-
-            case ("list"):
-            case ("undo"):
-            case ("done"):
-            case ("delete"):
-                try {
-                    return this.processList(com, stringList);
-                } catch (Exception e) {
-                    return e.getMessage();
-                }
-
-            case ("todo"):
-            case ("deadline"):
-            case ("event"):
-                try {
-                    return this.processTask(com, stringList);
-                } catch (Exception e) {
-                    return e.getMessage();
-                }
-
-            default:
-                throw new DukeException("Sorry, I did not understand: " + command);
+        Pattern pattern = Pattern.compile("^(.*?)\\s(.*?)(?:\\s/..\\s(.*))?$");
+//        String[] stringArray = command.split(" ");
+//        List<String> stringList = new ArrayList<>(Arrays.asList(stringArray));
+//        String com = stringList.remove(0);
+        Matcher matcher = pattern.matcher(command);
+        if (command.equals("list")) {
+            return this.list.toString();
         }
+        if (command.equals("hello")) {
+            return "Hi! I'm Duke! Pleasure to meet you :)";
+        }
+        if (matcher.find()) {
+            String com = matcher.group(1);
+            String task = matcher.group(2);
+            String date = matcher.group(3);
+            String index = matcher.group(2);
+
+            switch (com) {
+                case ("undo"):
+                case ("done"):
+                case ("delete"):
+                    try {
+                        return this.processList(com, index);
+                    } catch (Exception e) {
+                        return e.getMessage();
+                    }
+
+                case ("todo"):
+                case ("deadline"):
+                case ("event"):
+                    try {
+                        return this.processTask(com, task, date);
+                    } catch (Exception e) {
+                        return e.getMessage();
+                    }
+            }
+        }
+        throw new DukeException("Sorry, I did not understand: " + command);
     }
 
-    private String processTask(String com, List<String> stringList) throws DukeException {
+    private String processTask(String com, String task, String date) throws DukeException {
 
         switch(com) {
             case("todo"):
-                if (!stringList.isEmpty()) {
-                    return list.addItem(new Todo(String.join(" ", stringList)));
+                if (!task.equals("")) {
+                    return list.addItem(new Todo(task));
                 } else {
                     throw new DukeException("Please write a task to be done, with \"todo <task>\"");
                 }
             case("deadline"):
-                if (!stringList.isEmpty()) {
-                    String[] taskAndDate = Command.getTaskAndDate(stringList);
-                    return list.addItem(new Deadline(taskAndDate[0], taskAndDate[1]));
+                if (!task.equals("")) {
+                    try {
+                        return list.addItem(new Deadline(task, Command.convertDate(date)));
+                    } catch (DateTimeParseException e){
+                        return "Please write your date in the format \"dd/MM/yyyy\"";
+                    }
                 } else {
                     throw new DukeException("Please write a deadline, with \"deadline <task> /by <date>\"");
                 }
             case("event"):
-                if (!stringList.isEmpty()) {
-                    String[] taskAndDate = Command.getTaskAndDate(stringList);
-                    return list.addItem(new Event(taskAndDate[0], taskAndDate[1]));
+                if (!task.equals("")) {
+                    try {
+                        return list.addItem(new Event(task, Command.convertDate(date)));
+                    } catch (DateTimeParseException e) {
+                        return "Please write your date in the format \"dd/MM/yyyy\"";
+                    }
                 } else {
                     throw new DukeException("Please write an event, with \"event <task> /at <date>\"");
                 }
@@ -72,24 +91,24 @@ public class Command {
         }
     }
 
-    private String processList(String com, List<String> stringList) throws DukeException {
+    private String processList(String com, String index) throws DukeException {
 
         switch(com) {
-            case("list"):
-                return list.toString();
             case("done"):
-                if (!stringList.isEmpty()) {
-                    return list.markDone(Integer.parseInt(stringList.get(0)) - 1);
+                if (!index.equals("")) {
+                    return list.markDone(Integer.parseInt(index) - 1);
                 } else {
                     throw new DukeException("Please choose a task to mark as done, with \"done <task number>\"");
                 }
             case("undo"):
-                if (!stringList.isEmpty()) {
-                    return list.revertDone(Integer.parseInt(stringList.get(0)) - 1);
+                if (!index.equals("")) {
+                    return list.revertDone(Integer.parseInt(index) - 1);
+                } else {
+                    throw new DukeException("Please choose a task to undo, with \"undo <task number>\"");
                 }
             case("delete"):
-                if (!stringList.isEmpty()) {
-                    return list.deleteItem(Integer.parseInt(stringList.get(0)) - 1);
+                if (!index.equals("")) {
+                    return list.deleteItem(Integer.parseInt(index) - 1);
                 } else {
                     throw new DukeException("Please choose a task to delete, with \"delete <task number>\"");
                 }
@@ -98,25 +117,11 @@ public class Command {
         }
     }
 
-    private static String[] getTaskAndDate(List<String> description) {
-        String[] result = new String[2];
-        int dateIndex = -1;
-        for (int i = 0; i < description.size(); i++) {
-            if (description.get(i).equals("/at") || description.get(i).equals("/by")) {
-                dateIndex = i;
-            }
+    private static LocalDate convertDate(String date) throws DateTimeParseException {
+        if (date == null) {
+            return null;
         }
-        if (dateIndex == -1) {
-            result[0] = String.join(" ", description.subList(0, description.size()));
-            result[1] = "No date set";
-        } else if (dateIndex == description.size() - 1) {
-            result[0] = String.join(" ", description.subList(0, description.size() - 1));
-            result[1] = "No date set";
-        } else {
-            result[0] = String.join(" ", description.subList(0, dateIndex));
-            result[1] = String.join(" ", description.subList(dateIndex + 1, description.size()));
-        }
-
-        return result;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return LocalDate.parse(date, formatter);
     }
 }

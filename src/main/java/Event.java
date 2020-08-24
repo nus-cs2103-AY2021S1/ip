@@ -1,15 +1,18 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public class Event extends Task {
 
-    String date;
+    LocalDate date;
 
-    Event(String task, String date) {
+    Event(String task, LocalDate date) {
         super(task);
         this.date = date;
     }
 
-    Event(String task, boolean done, String date) {
-        super(task);
-        this.done = done;
+    Event(String task, boolean done, LocalDate date) {
+        super(task, done);
         this.date = date;
     }
 
@@ -19,6 +22,12 @@ public class Event extends Task {
     }
     @Override
     public String toString() {
-        return "[Event] " + super.toString() + " (at: " + this.date + ")";
+        String dateString = "No date set";
+        if (this.date != null) {
+            DateTimeFormatter formatters = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+            dateString = this.date.format(formatters);
+        }
+
+        return "[Event] " + super.toString() + " (at: " + dateString + ")";
     }
 }
