@@ -9,26 +9,27 @@ You have 1 tasks in your list currently.
 
 
 -> I have added an Event:
-[E][×]CS2103 lecture (on Aug 01 2020)  <-
+[E][×] CS2103 lecture (on Aug 01 2020)  <-
 You have 2 tasks in your list currently.
 
 
 -> I have added a Deadline:
-[D][×]CS2103 project submission (by Aug 01 2020)  <-
+[D][×] CS2103 project submission (by Aug 01 2020)  <-
 You have 3 tasks in your list currently.
 
 
 -> I have added a Deadline:
-[D][×]CS2103 tP (by Aug 01 2020)  <-
+[D][×] CS2103 tP (by Aug 01 2020)  <-
 You have 4 tasks in your list currently.
 
 
 -> Current List:
 
 1. [T][×] go to fairprice  <-
-2. [E][×]CS2103 lecture (on Aug 01 2020)  <-
-3. [D][×]CS2103 project submission (by Aug 01 2020)  <-
-4. [D][×]CS2103 tP (by Aug 01 2020)  <-
+2. [E][×] CS2103 lecture (on Aug 01 2020)  <-
+3. [D][×] CS2103 project submission (by Aug 01 2020)  <-
+4. [D][×] CS2103 tP (by Aug 01 2020)  <-
+
 
 
 
@@ -39,9 +40,10 @@ You have 4 tasks in your list currently.
 -> Current List:
 
 1. [T][√] go to fairprice  <-
-2. [E][×]CS2103 lecture (on Aug 01 2020)  <-
-3. [D][×]CS2103 project submission (by Aug 01 2020)  <-
-4. [D][×]CS2103 tP (by Aug 01 2020)  <-
+2. [E][×] CS2103 lecture (on Aug 01 2020)  <-
+3. [D][×] CS2103 project submission (by Aug 01 2020)  <-
+4. [D][×] CS2103 tP (by Aug 01 2020)  <-
+
 
 
 
@@ -76,9 +78,10 @@ You have 4 tasks in your list currently.
 -> Current List:
 
 1. [T][√] go to fairprice  <-
-2. [E][×]CS2103 lecture (on Aug 01 2020)  <-
-3. [D][×]CS2103 project submission (by Aug 01 2020)  <-
-4. [D][×]CS2103 tP (by Aug 01 2020)  <-
+2. [E][×] CS2103 lecture (on Aug 01 2020)  <-
+3. [D][×] CS2103 project submission (by Aug 01 2020)  <-
+4. [D][×] CS2103 tP (by Aug 01 2020)  <-
+
 
 
 
