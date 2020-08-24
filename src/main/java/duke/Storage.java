@@ -11,9 +11,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Encapsulates the storage feature of the Duke program.
+ */
 public class Storage {
     private final Path path;
 
+    /**
+     * Returns a Storage instantiation with a specific file path.
+     * @param filePath The path of the file to store the save file at
+     */
     public Storage(String filePath) {
         path = Paths.get(filePath);
     }
@@ -29,6 +36,10 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Attempts to load the save file.
+     * @return a TaskList from the saved file, if one exists. If not, a new TaskList is returned.
+     */
     public TaskList loadFile() {
         TaskList list = null;
         try {
@@ -63,6 +74,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Attempts to save the TaskList to the respective path.
+     * @param list the TaskList to be saved
+     */
     public void saveFile(TaskList list) {
         try {
             File file = path.toFile();
