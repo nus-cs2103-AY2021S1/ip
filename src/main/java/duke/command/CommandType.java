@@ -1,5 +1,6 @@
 package duke.command;
 
+/** CommandType represents all the valid commands available */
 public enum CommandType {
   LIST_DATE("date"),
   LIST("list"),
@@ -16,8 +17,14 @@ public enum CommandType {
     this.name = name;
   }
 
-  public boolean is(String cmd) {
-    return cmd.startsWith(this.name);
+  /**
+   * Returns true if an only if the command string matches the command type
+   *
+   * @param commandString to be checked
+   * @return true if an only if the command string matches the command type
+   */
+  public boolean is(String commandString) {
+    return commandString.startsWith(this.name);
   }
 
   @Override

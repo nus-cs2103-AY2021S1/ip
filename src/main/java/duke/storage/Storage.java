@@ -9,16 +9,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/** Storage class that writes the tasks to a file specified in src/data directory */
 public class Storage {
   private final BufferedWriter writer;
-  public static final Path dataDir = Paths.get(System.getProperty("user.dir"),"data" );
+  public static final Path dataDir = Paths.get(System.getProperty("user.dir"), "data");
 
   private Storage(BufferedWriter writer) {
     this.writer = writer;
   }
 
   /**
-   * Creates file in the data directory
+   * Creates a file in the src/data directory
    *
    * @param fileName Name of the file
    * @return a new Storage object
@@ -37,10 +38,22 @@ public class Storage {
     }
   }
 
+  /**
+   * Writes the taskList into the file stream
+   *
+   * @param taskList to be written into the file stream
+   * @throws DukeException when there is an IOException
+   */
   public void write(TaskList taskList) throws DukeException {
     this.write(Ui.getListString(taskList));
   }
 
+  /**
+   * Writes the message into the file stream
+   *
+   * @param message to be written into the file stream
+   * @throws DukeException when there is an IOException
+   */
   public void write(String message) throws DukeException {
     try {
       this.writer.write(message);
@@ -49,6 +62,11 @@ public class Storage {
     }
   }
 
+  /**
+   * Closes the buffered writer, writing the content into the file
+   *
+   * @throws DukeException when there is an IOException while writing
+   */
   public void close() throws DukeException {
     try {
       this.writer.close();

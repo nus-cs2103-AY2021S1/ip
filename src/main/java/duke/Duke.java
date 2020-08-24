@@ -7,6 +7,7 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/** Duke class */
 public class Duke {
   private String fileString;
   private TaskList taskList;
@@ -16,6 +17,7 @@ public class Duke {
     this.taskList = new TaskList();
   }
 
+  /** Runs the duke program */
   public void run() {
     Ui.showGreet();
     CommandScanner cmdScanner = new CommandScanner();
