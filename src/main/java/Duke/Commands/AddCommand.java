@@ -26,7 +26,7 @@ public class AddCommand extends Command {
             }
         } else if (string.length() >= 5 && string.substring(0, 5).equals("event")) {
             if (string.length() == 5 || string.length() == 6) {
-                throw new EventException(true);
+                throw new EventException(true, false, false, false);
             }
             String s = "";
             int index = -1;
@@ -51,15 +51,16 @@ public class AddCommand extends Command {
                 start = start + string.charAt(i);
             }
             if (!time) {
-                throw new EventException(false);
+                throw new EventException(false, false, false, false);
             }
             if (!duration) {
+                throw new EventException(false, true, false, false);
             }
             event d = event.provide(s.substring(1, s.length() - 1), string.substring(index + 4, end), string.substring(end + 1));
             d.output(storage.getFilePath());
         } else if (string.length() >= 8 && string.substring(0, 8).equals("deadline")) {
             if (string.length() == 8 || string.length() == 9) {
-                throw new DeadlineException(true);
+                throw new DeadlineException(true, false);
             }
             String s = "";
             int index = -1;
@@ -73,7 +74,7 @@ public class AddCommand extends Command {
                 s = s + string.charAt(i);
             }
             if (!time) {
-                throw new DeadlineException(false);
+                throw new DeadlineException(false, false);
             }
             Deadline d = Deadline.provide(s.substring(1, s.length() - 1), string.substring(index + 4));
             d.output(storage.getFilePath());

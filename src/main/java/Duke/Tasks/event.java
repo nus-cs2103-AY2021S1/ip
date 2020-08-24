@@ -1,5 +1,8 @@
 package Duke.Tasks;
 
+import Duke.Errors.DukeException;
+import Duke.Errors.EventException;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -36,18 +39,6 @@ public class event extends Task {
             LocalDate parsedDate = LocalDate.parse(string, formatter);
             return parsedDate;
         }catch (DateTimeException d) {
-            /*try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd, HH:mm");
-                LocalDateTime parsedDate = LocalDateTime.parse(string, formatter);
-                return parsedDate;
-            } catch (DateTimeException g) {
-                try {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-                    LocalTime parsedDate = LocalTime.parse(string, formatter);
-                } catch (DateTimeException f) {
-                    System.out.println(f.toString());
-                }
-            } */
             throw d;
         }
     }
@@ -69,28 +60,43 @@ public class event extends Task {
             throw f;
         }
     }
-    public static event provide(String name, String string, String end){
+    public static event provide(String name, String string, String end) throws DukeException {
         event e;
         try{
             LocalDate parsedDate = localDate(string);
             LocalDate endDate = localDate(end);
+            if(parsedDate.isAfter(endDate)){
+                throw new EventException(false, false, true, false);
+            }
             e = new event(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy")),
                     endDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy")));
+        }catch (EventException event){
+            throw new EventException(false, false, true, false);
         }catch (DateTimeException d) {
             try {
                 LocalDateTime parsedDate = localDateTime(string);
                 LocalDateTime endDate = localDateTime(end);
+                if(parsedDate.isAfter(endDate)){
+                    throw new EventException(false, false, true, false);
+                }
                 e = new event(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")),
                         endDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")));
-            } catch (DateTimeException g) {
+            } catch (EventException event){
+                throw new EventException(false, false, true, false);
+            }
+            catch (DateTimeException g) {
                 try {
                     LocalTime parsedDate = localTime(string);
                     LocalTime endDate = localTime(end);
+                    if(parsedDate.isAfter(endDate)){
+                        throw new EventException(false, false, true, false);
+                    }
                     e = new event(name, parsedDate.format(DateTimeFormatter.ofPattern("HH:mm")),
                             endDate.format(DateTimeFormatter.ofPattern("HH:mm")));
-                } catch (DateTimeException f) {
-                    System.out.println(f.toString());
-                    throw f;
+                }catch (EventException y){
+                    throw new EventException(false, false, true, false);
+                }catch (DateTimeException z) {
+                    throw new EventException(false, false, false, true);
                 }
             } }
         return e;

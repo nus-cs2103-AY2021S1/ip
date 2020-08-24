@@ -1,6 +1,5 @@
 package Duke;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,7 +71,7 @@ public class Duke {
      * reads input using scan() and adds it to todos.
      *  Then, prints out relevant information using the output() func.
      */
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         PrintStream fileOut = new PrintStream("text-ui-test/ACTUAL.TXT");
         System.setOut(fileOut);
         Duke duke = new Duke("text-ui-test/input.txt");

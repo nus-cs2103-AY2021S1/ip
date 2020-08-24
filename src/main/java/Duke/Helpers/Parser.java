@@ -20,7 +20,7 @@ public class Parser {
         }else if (string.length() >= 8 && string.substring(0, 8).equals("deadline")) {
             return new AddCommand(string);
         }else{
-            throw new WrongInputException();
+            return new RandomCommand(string);
         }
     }
 }

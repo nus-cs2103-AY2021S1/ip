@@ -1,5 +1,8 @@
 package Duke.Tasks;
 
+import Duke.Errors.DeadlineException;
+import Duke.Errors.DukeException;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -33,7 +36,7 @@ public class Deadline extends Task {
     public String inputListFormat() {
         return "D" + super.inputListFormat() + " | " + this.day;
     }
-    public static LocalDate localDate(String string){
+    public static LocalDate localDate(String string) {
         try{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
             LocalDate parsedDate = LocalDate.parse(string, formatter);
@@ -72,7 +75,7 @@ public class Deadline extends Task {
             throw f;
         }
     }
-    public static Deadline provide(String name, String string){
+    public static Deadline provide(String name, String string) throws DukeException {
         Deadline e;
         try{
             LocalDate parsedDate = localDate(string);
@@ -86,8 +89,7 @@ public class Deadline extends Task {
                     LocalTime parsedDate = localTime(string);
                     e = new Deadline(name, parsedDate.format(DateTimeFormatter.ofPattern("HH:mm")));
                 } catch (DateTimeException f) {
-                    System.out.println(f.toString());
-                    throw f;
+                    throw new DeadlineException(false, true);
                 }
             } }
         return e;
