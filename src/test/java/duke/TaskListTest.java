@@ -10,8 +10,8 @@ import java.time.LocalDate;
 
 public class TaskListTest {
     Todo todo = new Todo("Get bread");
-    Deadline deadline = new Deadline("Finish project", "2012-01-23");
-    Event event = new Event("Birthday", "2020-05-30");
+    Deadline deadline = new Deadline("Finish project", LocalDate.parse("2012-01-23"));
+    Event event = new Event("Birthday", LocalDate.parse("2020-05-30"));
 
     @Test
     public void addTask_addSomeTasks_taskListWithAllTasks() {

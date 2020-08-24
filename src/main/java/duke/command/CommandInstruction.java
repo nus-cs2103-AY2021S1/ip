@@ -1,5 +1,8 @@
 package duke.command;
 
+/**
+ * Commands that can be used.
+ */
 public enum CommandInstruction {
     LIST("list"),
     BYE("bye"),
