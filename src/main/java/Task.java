@@ -2,9 +2,17 @@ public class Task {
     protected boolean isCompleted;
     protected String taskName;
 
-    public Task(String name) {
+    protected Task(String name, boolean isCompleted) {
         this.taskName = name;
-        this.isCompleted = false;
+        this.isCompleted = isCompleted;
+    }
+
+    public static Task newTask(String name){
+        return new Task(name, false);
+    }
+
+    public static Task existingTask(String name, boolean isCompleted){
+        return new Task(name, isCompleted);
     }
 
     public Task markAsDone(){
@@ -18,5 +26,9 @@ public class Task {
 
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.taskName;
+    }
+
+    public String toSaveString(){
+        return (this.isCompleted ? "1" : "0") + " | " + this.taskName;
     }
 }
