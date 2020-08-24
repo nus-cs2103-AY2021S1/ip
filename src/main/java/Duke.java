@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -170,19 +171,21 @@ public class Duke {
                         System.out.println(taskReport());
                     }
                 } else if (inputSplitted[0].equals(findCmd)){
-                    try {
-                        LocalDate date = LocalDate.parse(inputSplitted[1]);
+                    Optional<LocalDate> optDate = ParseDate.parse(inputSplitted[1]);
+                    if (optDate.isPresent()) {
+                        LocalDate date = optDate.get();
                         System.out.println(findResultMsg);
                         for (int i = 0; i < tasks.size(); i++) {
                             Task task = tasks.get(i);
-                            if ((task instanceof Deadline && ((Deadline) task).isDueOn(date)) 
+                            if ((task instanceof Deadline && ((Deadline) task).isDueOn(date))
                                     || (task instanceof Event && ((Event) task).isOccuringOn(date))) {
                                 System.out.println(task);
                             }
                         }
-                    } catch (DateTimeParseException e) {
+                    } else {
                         System.out.println(incorrectDateFormatMsg);
                     }
+                    
                 } else { // any other commands
                     throw new IncorrectCommandException();
                 }

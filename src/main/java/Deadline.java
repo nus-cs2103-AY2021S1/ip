@@ -1,7 +1,7 @@
 import java.time.LocalDate;
-
-import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
+
+import java.util.Optional;
 
 public class Deadline extends Task {
     private String dueTimeStr;
@@ -10,11 +10,12 @@ public class Deadline extends Task {
 
     Deadline(String description, String dueTime) {
         super(description);
-        try {
-            this.dueTime = LocalDate.parse(dueTime); // accepts date time in a format yyyy-MM-dd
+        this.dueTimeStr = dueTime;
+        Optional<LocalDate> optDate = ParseDate.parse(dueTime);
+        if (optDate.isPresent()) {
+            this.dueTime = optDate.get();
             isInDateFormat = true;
-        } catch (DateTimeParseException e) {
-            this.dueTimeStr = dueTime;
+        } else {
             isInDateFormat = false;
         }
     }
@@ -42,6 +43,6 @@ public class Deadline extends Task {
     
     @Override
     public String getTime() {
-        return dueTime;
+        return dueTimeStr;
     }
 }

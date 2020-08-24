@@ -1,7 +1,8 @@
 import java.time.LocalDate;
 
-import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
+
+import java.util.Optional;
 
 public class Event extends Task {
     private String eventTime;
@@ -11,21 +12,17 @@ public class Event extends Task {
 
     Event(String description, String eventTime) {
         super(description);
+        this.eventTime = eventTime;
+        isInDateFormat = false;
         int idx = eventTime.indexOf(" to ");
         if (idx != -1) {
-            try {
-                String startStr = eventTime.substring(0, idx);
-                String endStr = eventTime.substring(idx + 4);
-                // accepts date in format yyyy-MM-dd
-                startTime = LocalDate.parse(startStr);
-                endTime = LocalDate.parse(endStr);
+            Optional<LocalDate> optStart = ParseDate.parse(eventTime.substring(0, idx));
+            Optional<LocalDate> optEnd = ParseDate.parse(eventTime.substring(idx + 4));
+            if (optStart.isPresent() && optEnd.isPresent()) {
+                startTime = optStart.get();
+                endTime = optEnd.get();
                 isInDateFormat = true;
-            } catch (DateTimeParseException e) {
-                isInDateFormat = false;
             }
-        }
-        if (!isInDateFormat) {
-            this.eventTime = eventTime;
         }
     }
 
