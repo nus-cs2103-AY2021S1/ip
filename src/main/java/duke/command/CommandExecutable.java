@@ -5,6 +5,6 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 @FunctionalInterface
-public interface CommandExecutable {
+interface CommandExecutable {
     void run(TaskList taskList, Ui ui, String[] arguments) throws DukeException;
 }
