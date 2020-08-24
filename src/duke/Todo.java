@@ -11,12 +11,12 @@ public class Todo extends Task {
     }
 
     public String getType() {
-        return "[T]";
+        return "T";
     }
 
     @Override
     public String toString() {
-        return this.getType() + this.getStatusIcon() + " " + this.description;
+        return "[" + this.getType() + "]" +  this.getStatusIcon() + " " + this.description;
     }
 
     @Override

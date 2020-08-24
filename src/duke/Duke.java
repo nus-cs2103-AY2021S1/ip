@@ -1,9 +1,13 @@
 package duke;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.concurrent.ThreadPoolExecutor;
+
+
 
 public class Duke {
 
@@ -16,13 +20,20 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        System.out.println(duke.toString());
-        //echo();
-        duke.receiveInput();
+        duke.start();
     }
 
-    @Override
-    public String toString() {
+    public void start() {
+        try {
+            greet();
+            this.todos = Duke.readFile();
+            receiveInput();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void greet() {
 //        String donLogo = "  ______      _______     ____    __    \n"
 //                + " |   _  \\    /   _   \\   |    \\  |  |\n"
 //                + " |  | |  |  |   | |   |  |  |\\ \\ |  |\n"
@@ -36,10 +47,10 @@ public class Duke {
                 + "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-' \n";
         String msg = "Hola! I'm Dongo :) \n" +
                 "How can I help you?";
-        return donLogo + "\n" + msg;
+        System.out.println(donLogo + "\n" + msg);
     }
 
-    public void receiveInput() {
+    private void receiveInput() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
@@ -120,7 +131,7 @@ public class Duke {
 //        }
     }
 
-    public String removeFirstWord(String command) throws DukeException {
+    private String removeFirstWord(String command) throws DukeException {
         try {
             String[] cmd = command.split(" ", 2);
             return cmd[1];
@@ -129,23 +140,26 @@ public class Duke {
         }
     }
 
-    public void processDelete(String command) throws DeleteException {
+    private void processDelete(String command) throws DeleteException {
         try {
             String theRest = removeFirstWord(command);
             Integer taskNum = Integer.parseInt(theRest);
             int index = taskNum - 1;
+            System.out.println(index);
             deleteTask(index);
 
         } catch (DukeException d) {
            throw new DeleteException("Please enter a number. I cannot delete nothing :(");
         }
     }
-    public void deleteTask(int taskNum) throws DeleteException {
+
+    private void deleteTask(int taskNum) throws DeleteException {
         if(taskNum <= 0 || taskNum >= todos.size()) {
             throw new DeleteException("Please enter a valid task number.");
         } else {
             Task task = this.todos.get(taskNum);
             this.todos.remove(task);
+            updateData(this.todos);
             System.out.println("Noted. I've removed this task for you: \n"
                     + task.toString() + "\n"
                     + "Now you have " + this.todos.size() + " task(s) in the list.");
@@ -153,18 +167,19 @@ public class Duke {
 
     }
 
-    public void processDone(String command) throws DoneException {
+    private void processDone(String command) throws DoneException {
         try {
             String theRest = removeFirstWord(command);
             Integer taskNum = Integer.parseInt(theRest);
             markTaskAsDone(taskNum);
+            updateData(this.todos);
 
         } catch (DukeException d) {
             throw new DoneException("Please specify what you have already done.");
         }
     }
 
-    public void processTodo(String command) throws TodoException {
+    private void processTodo(String command) throws TodoException {
         try {
             String theRest = removeFirstWord(command);
             Todo todo = new Todo(theRest);
@@ -174,8 +189,7 @@ public class Duke {
         }
     }
 
-
-    public void processDeadline(String command) throws DeadlineException {
+    private void processDeadline(String command) throws DeadlineException {
         try {
             String theRest = removeFirstWord(command);
             String[] taskAndDeadline = theRest.split(" /by", 2);
@@ -194,7 +208,7 @@ public class Duke {
         }
     }
 
-    public void processEvent(String command) throws EventException {
+    private void processEvent(String command) throws EventException {
         try {
             String theRest = removeFirstWord(command);
             String[] eventAndDate = theRest.split(" /at", 2);
@@ -212,7 +226,7 @@ public class Duke {
         }
     }
 
-    public void listItems() {
+    private void listItems() {
         if(this.todos.size() == 0) {
             System.out.println("You don't have any task in your list.");
         } else {
@@ -226,13 +240,14 @@ public class Duke {
         }
     }
 
-    public void saveToList(Task todo) {
+    private void saveToList(Task todo) {
         this.todos.add(todo);
+        updateData(this.todos);
         System.out.println("Okay~ I've added this task: \n" + todo.toString());
         System.out.println("Now you have " + this.todos.size() + " task(s) in the list.");
     }
 
-    public void markTaskAsDone(int taskNum) throws DoneException {
+    private void markTaskAsDone(int taskNum) throws DoneException {
         if (taskNum <= 0 || taskNum >= todos.size() ) {
             throw new DoneException("Please enter a valid task number.");
         } else {
@@ -245,4 +260,91 @@ public class Duke {
                     + newTask.toString());
         }
     }
+
+    private static List<Task> readFile() throws IOException {
+        Path folder = Path.of("data");
+        Path file = folder.resolve("Duke.txt");
+
+        //Create a new directory by creating all parent directories first
+        Files.createDirectories(folder);
+
+        //if user is new and file does not exist, create the file
+        if(!Files.exists(file)) {
+            Files.createFile(file);
+        }
+
+        //read from file
+        BufferedReader reader = Files.newBufferedReader(file);
+        List<Task> tasks = new ArrayList<>(); //this does not update this.todos
+        String currentLine;
+        while((currentLine = reader.readLine()) != null) {
+            try {
+                System.out.println(currentLine);
+                Task task = parseData(currentLine);
+                tasks.add(task);
+            } catch (StorageException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return tasks;
+    }
+
+    private static Task parseData(String line) throws StorageException {
+        String[] parsed = line.split("\\s\\|\\s");
+        Task task;
+
+        if(parsed.length < 2) {
+            throw new StorageException(line + "is in invalid format.");
+        } else {
+            String identifier = parsed[0]; //get the type of task
+            String taskName = parsed[2];
+            if(identifier.equals("T")) {
+                task = new Todo(taskName);
+            } else if (identifier.equals("E")) {
+                String date = parsed[3];
+                task = new Event(taskName, date);
+            } else if (identifier.equals("D")) {
+                String date = parsed[3];
+                task = new Deadline(taskName, date);
+            } else {
+                throw new StorageException("Invalid format. Moving on to the next task.");
+            }
+        }
+
+        String doneIndicator = parsed[1];
+        if (doneIndicator.equals("1")) {
+            task.markAsDone();
+        }
+
+        return task;
+    }
+
+    private static void updateData(List<Task> tasks) {
+        try {
+            BufferedWriter writer = Files.newBufferedWriter(Path.of("data/Duke.txt"));
+            for(Task task : tasks) {
+                String type = task.getType();
+                Boolean status = task.getStatus();
+                String taskName = task.getDescription();
+                String stored = "";
+                if(type.equals("T")) {
+                    stored = String.format("%s | %d | %s", type, status ? 1 : 0, taskName);
+                } else if (type.equals("E")) {
+                    String date = ((Event) task).getDate();
+                    stored = String.format("%s | %d | %s | %s", type, status ? 1 : 0, taskName, date);
+                } else if (type.equals("D")) {
+                    String date = ((Deadline) task).getDate();
+                    stored = String.format("%s | %d | %s | %s", type, status ? 1 : 0, taskName, date);
+                }
+                writer.write(stored);
+                writer.newLine();
+            }
+
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

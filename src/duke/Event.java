@@ -15,12 +15,12 @@ public class Event extends Task {
     }
 
     public String getType() {
-        return "[E]";
+        return "E";
     }
 
     @Override
     public String toString() {
-        return this.getType() + this.getStatusIcon() + " " + this.description + " (at:" + this.date + ")";
+        return "[" + this.getType() + "]" + this.getStatusIcon() + " " + this.description + " (at:" + this.date + ")";
     }
 
     @Override
@@ -28,5 +28,9 @@ public class Event extends Task {
         //int index = taskNum - 1;
         Event newTask = new Event(this.getDescription(), true, this.date);
         return newTask;
+    }
+
+    public String getDate() {
+        return this.date;
     }
 }
