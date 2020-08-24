@@ -2,14 +2,26 @@ package duke.classes;
 
 import java.util.Scanner;
 
+/**
+ * Class for taking in commands and analysing the type of command given to the chatbot.
+ */
 public class Parser {
 
     public Scanner scan;
 
+    /**
+     * Class constructor.
+     */
     public Parser() {
         this.scan = new Scanner(System.in);
     }
 
+    /**
+     * Method to determine the type of command given to the chatbot.
+     *
+     * @param command   Command given to the chatbot.
+     * @return Commands from the Commands ENUM class
+     */
     public Commands analyse(String command) {
         if (command.startsWith("list")) {
             return Commands.LIST;

@@ -1,5 +1,8 @@
 package duke.classes;
 
+/**
+ * Enum class for categorising the commands given to the scanner.
+ */
 public enum Commands {
     LIST {
         @Override
