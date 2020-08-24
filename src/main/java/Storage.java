@@ -1,5 +1,11 @@
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
 
 public class Storage {
     protected String filePath;
@@ -51,7 +57,8 @@ public class Storage {
                         case "D":
                             String deadlineDescription = taskDescription.substring(0, taskDescription.indexOf("(") - 1);
                             String deadlineBy = taskDescription.substring(taskDescription.indexOf("by:") + 4, taskDescription.indexOf(")"));
-                            tasks.add(new Deadline(deadlineDescription, deadlineBy, isDone));
+                            LocalDate deadline = LocalDate.parse(deadlineBy, DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                            tasks.add(new Deadline(deadlineDescription, deadline, isDone));
                             break;
                         case "E":
                             String eventDescription = taskDescription.substring(0, taskDescription.indexOf("(") - 1);

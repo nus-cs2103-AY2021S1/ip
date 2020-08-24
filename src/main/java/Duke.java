@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,10 +18,10 @@ public class Duke {
         Duke duke = new Duke("duke.txt");
         // displayed once main is run, without input from user
         String greetings =
-            "____________________________________________________________\n" +
-            "Hello! I'm Duke\n" +
-            "What can I do for you?\n" +
-            "____________________________________________________________\n";
+                "____________________________________________________________\n" +
+                        "Hello! I'm Duke\n" +
+                        "What can I do for you?\n" +
+                        "____________________________________________________________\n";
 
         System.out.println(greetings);
         Scanner sc = new Scanner(System.in);
@@ -47,7 +49,7 @@ public class Duke {
             }
         }
         // if no slashes found
-        throw new DukeException("Please indicate:\n'/by' - for Deadline, or\n'/at' - for Event.\n");
+        throw new DukeException("Please indicate:\n'/by' - for Deadline with input date formatted as: YYYY-MM-DD, or\n'/at' - for Event.\n");
     }
 
     // method to mark task as done
@@ -98,7 +100,7 @@ public class Duke {
             // exits program
             System.exit(0);
 
-        // display list of items to user when requested with "list" command
+            // display list of items to user when requested with "list" command
         } else if (input.startsWith("list") && input.length() == 4) {
             System.out.println("Here are the tasks in your list:");
             for (int i = 1; i < stored.size() + 1; i++) {
@@ -144,10 +146,12 @@ public class Duke {
                 } else {
                     try {
                         int slashIndex = findSlashIndex(input, 9);
-                        Deadline newDeadline = new Deadline(input.substring(9, slashIndex - 1), input.substring(slashIndex + 4));
+                        Deadline newDeadline = new Deadline(input.substring(9, slashIndex - 1), LocalDate.parse(input.substring(slashIndex + 4)));
                         stored.add(newDeadline);
                     } catch (StringIndexOutOfBoundsException ex) {
                         throw new DukeException("Invalid input - please check if there are too many redundant spaces.\n");
+                    } catch (DateTimeParseException ex) {
+                        throw new DukeException("Please indicate deadline date formatted as: YYYY-MM-DD.");
                     }
                 }
             } else if (input.startsWith("event")) { // is Event task
