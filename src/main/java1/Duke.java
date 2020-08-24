@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Duke {
-    //public final static String pathDirectory = System.getProperty("user.dir");
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
@@ -23,7 +22,6 @@ public class Duke {
         try {
             File f = new File(filePath);
             tasks = new TaskList(storage.load());
-
         } catch (FileNotFoundException e) {
             File newFile = new File(filePath);
             try {
@@ -41,7 +39,7 @@ public class Duke {
         ui.greeting();
         Scanner sc = new Scanner(System.in);
 
-        while(sc.hasNext()) {
+        while (sc.hasNext()) {
             String input = sc.nextLine();
             ui.showLine();
             try {
@@ -59,7 +57,6 @@ public class Duke {
             }
         }
         sc.close();
-
     }
 
     public static void main(String[] args) {

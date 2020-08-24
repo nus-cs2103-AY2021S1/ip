@@ -40,7 +40,7 @@ public class TaskList {
         System.out.println("     Noted. I've removed this task:" + "\n" + "      " + removedTask.toString());
         System.out.println("     Now you have " + this.todoList.size() + " tasks in the list.");
 
-        Storage.removeTask(path, this.todoList);
+        Storage.rewriteTask(path, this.todoList);
 
     }
 
@@ -56,6 +56,6 @@ public class TaskList {
 
     public void updateDone() {
         String path = "/Users/joshua/Desktop/ip/data/duke.txt";
-        Storage.updateTask(path, this.todoList);
+        Storage.rewriteTask(path, this.todoList);
     }
 }

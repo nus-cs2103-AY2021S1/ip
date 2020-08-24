@@ -22,7 +22,6 @@ public class Storage {
         while (s.hasNext()) {
             String[] taskInfo = s.nextLine().split(",", 4);
             if (taskInfo[0].equals("T")) {
-
                 if (taskInfo[1].equals("1")) {
                     Todos todo = new Todos(taskInfo[2], true);
                     list.add(todo);
@@ -65,7 +64,7 @@ public class Storage {
         }
     }
 
-    public static void removeTask(String path, ArrayList<Task> todoList ) {
+    public static void rewriteTask(String path, ArrayList<Task> todoList ) {
         try {
             String allTasks = formatString(todoList.get(0));
             for (int i = 1; i < todoList.size(); i++) {
@@ -79,23 +78,8 @@ public class Storage {
         }
     }
 
-    public static void updateTask(String path, ArrayList<Task> todoList) {
-        try {
-            String allTasks = formatString(todoList.get(0));
-
-            for (int i = 1; i < todoList.size(); i++) {
-                Task t = todoList.get(i);
-                String s = formatString(t);
-                allTasks = allTasks + "\n" + s;
-            }
-            writeToFile(path, allTasks);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
-
     private static String formatString(Task task) {
-        if(task instanceof Todos) {
+        if (task instanceof Todos) {
             if (task.checkDone()) {
                 String s = "T,1," + task.getDescription();
                 return s;
