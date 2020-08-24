@@ -6,11 +6,11 @@ list
 deadline
 deadline return book
 deadline return book /by
-deadline return book /by Sunday
+deadline return book /by 2020-08-30
 event
 event project meeting
 event project meeting /at
-event project meeting /at Mon 2-4pm
+event project meeting /at 2020-08-23
 list
 done
 done three

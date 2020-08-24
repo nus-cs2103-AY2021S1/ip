@@ -23,7 +23,7 @@ public class Deadline extends Task {
 
     @Override
     public String toStorageString() {
-        if (super.isDone) return "D | 1 | " + description + " | " + by;
-        else return "D | 0 | " + description + " | " + by;
+        if (super.isDone) return "D | 1 | " + description + " | " + byDate;
+        else return "D | 0 | " + description + " | " + byDate;
     }
 }

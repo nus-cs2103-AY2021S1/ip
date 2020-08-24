@@ -22,15 +22,19 @@ public class Storage {
                 Task task = new Task("");
 
                 String[] components = nextLine.split(" \\| ");
-                switch (components[0]) {
-                    case "T":
-                        task = new Todo(components[2]);
-                        break;
-                    case "D":
-                        task = new Deadline(components[2], components[3]);
-                        break;
-                    case "E":
-                        task = new Event(components[2], components[3]);
+                try {
+                    switch (components[0]) {
+                        case "T":
+                            task = new Todo(components[2]);
+                            break;
+                        case "D":
+                            task = new Deadline(components[2], components[3]);
+                            break;
+                        case "E":
+                            task = new Event(components[2], components[3]);
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
                 }
 
                 if (components[1].equals("1")) task.markAsDone();
