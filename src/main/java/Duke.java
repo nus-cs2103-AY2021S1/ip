@@ -1,7 +1,7 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.StringJoiner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.*;
 
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
@@ -103,7 +103,8 @@ public class Duke {
         try {
             String[] input = command.substring(command.indexOf(' ') + 1).split(" /by ");
             String description = input[0];
-            String by = input[1];
+            String byString = input[1];
+            Date by = DateFormatter.extractTimestampInput(byString);
             Task task = new Deadline(description, by);
             tasks.add(task);
             String response = String.format(
@@ -111,7 +112,7 @@ public class Duke {
                     task, tasks.size()
             );
             printResponse(response);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException | DukeException e) {
             throw new InvalidDeadlineException();
         }
     }
@@ -145,7 +146,8 @@ public class Duke {
         try {
             String[] input = command.substring(command.indexOf(' ') + 1).split(" /at ");
             String description = input[0];
-            String at = input[1];
+            String atString = input[1];
+            Date at = DateFormatter.extractTimestampInput(atString);
             Task task = new Event(description, at);
             tasks.add(task);
             String response = String.format(
@@ -153,7 +155,7 @@ public class Duke {
                     task, tasks.size()
             );
             printResponse(response);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException | DukeException e) {
             throw new InvalidEventException();
         }
     }
