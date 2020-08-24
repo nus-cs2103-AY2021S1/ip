@@ -8,7 +8,7 @@ public class ToDoCommand extends Command {
 
     /**
      * Executes the command to add the todos entry
-     * @param tasks list of tasks given
+     * @param tasks list of tasks in Duke
      * @param ui handles the output to print
      * @param storage writes the save file
      * @throws InvalidInputException if input of todos is wrong
