@@ -165,6 +165,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Searches the Task using the keyword provide.
+     *
+     * @param keyword Keyword to search.
+     * @return List of Task with the search keyword
+     */
     public String searchTask(String keyword) {
         int taskId = 0;
         StringBuilder results = new StringBuilder("Here is your results:");
