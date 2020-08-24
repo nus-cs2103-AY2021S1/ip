@@ -48,8 +48,9 @@ public class FindCommand extends Command {
                 throw new FindException(true, find);
             }else{
                 System.out.println("  Here are the matching tasks in your list:");
-                for(Task task : this.tasks){
-                    System.out.println("  " + task.toString() + "\n");
+                for(int i = 0; i < this.tasks.size(); i++){
+                    Task task = this.tasks.get(i);
+                    System.out.println("  " + (i + 1) + "." + task.toString());
                 }
             }
         }
