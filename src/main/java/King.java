@@ -1,86 +1,19 @@
 package main.java;
 import java.io.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class King {
     private ArrayList<Task> items = new ArrayList<>();
-    private File listData;
-    private final String path = "data/king.txt";
+    Storage storage;
 
-    King(){
-        File directory = new File("data");
-        if (!directory.exists()){
-            directory.mkdir();
-        }
-        try {
-            listData = new File(path);
-            listData.createNewFile();
-            initialise();
-        } catch (IOException e){
-            System.out.println(Chat.errorBox("Error occurred while loading asset."));
-        }
-    }
-    // method to load the asset into items
-    private void initialise(){
-        try{
-        FileReader input = new FileReader(listData.getAbsoluteFile());
-        Scanner scanner = new Scanner(input);
-        while (scanner.hasNextLine()){
-            String data[] = scanner.nextLine().split("@",4);
-                Task loadedItem;
-                switch (data[0]){
-                    case "T":
-                        loadedItem = new ToDo(data[2]);
-                        break;
-                    case "D":
-                        loadedItem = new Deadline(data[2],LocalDateTime.parse(data[3]));
-                        break;
-                    default:
-                        loadedItem = new Event(data[2],data[3]);
-                }
-                if (data[1].equals("1")){
-                    loadedItem.markAsDone();
-                }
-                items.add(loadedItem);
-            }
-        input.close();
-        scanner.close();
-        } catch (IOException e){
-            System.out.println(Chat.errorBox("Error occurred while reading asset."));
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(Chat.errorBox("Asset file is corrupted."));
-        }
+    King(String filepath){
+        storage = new Storage(filepath);
+        items.addAll(storage.load());
     }
 
-    // method to persist the items into asset
-    private void persistData(){
-        try {
-            BufferedWriter output = new BufferedWriter(new FileWriter(path));
-            for (Task task : items) {
-                String isLoaded = task.isDone() ? "1" : "0";
-                if (task.getClass().isAssignableFrom(ToDo.class)) {
-                    String s = "T@" + isLoaded + "@" + task.description;
-                    output.write(s);
-                } else if (task.getClass().isAssignableFrom(Event.class)){
-                    String s = "E@" + isLoaded + "@" + task.description + "@" + ((Event) task).time;
-                    output.write(s);
-                } else {
-                    String s = "D@" + isLoaded + "@" + task.description + "@" + ((Deadline) task).by;
-                    output.write(s);
-                }
-                output.newLine();
-            }
-            output.close();
-        } catch (IOException e){
-            System.out.println(Chat.errorBox("Error was encountered when saving list to asset."));
-        }
-    }
 
     private LocalDateTime StringToLocalDateTime(String localDateTime) throws KingException{
         try{
@@ -97,14 +30,14 @@ public class King {
     private String generateReply(String phrase) throws KingException {
         int phraseLength = phrase.length();
         if (phrase.equals("list")){
-            return Chat.numberedListChatBox(items);
+            return UI.numberedListChatBox(items);
         } else if((phrase.startsWith("done") && phraseLength == 4) || phrase.startsWith("done ")){
             String stringItem = phrase.substring(4).trim();
             try {
                 int itemNo = Integer.parseInt(stringItem) - 1;
                 Task item = items.get(itemNo);
                 item.markAsDone();
-                return Chat.chatBox(
+                return UI.chatBox(
                         "Nice! I've marked this task as done:\n"
                                 + "\t\t" + item.toString()
                 );
@@ -122,7 +55,7 @@ public class King {
             if (phraseLength != 4 && (item = phrase.substring(5).trim()).length() != 0){
                 ToDo todo = new ToDo(item);
                 items.add(todo);
-                return Chat.addItemChatBox(todo.toString(),items.size());
+                return UI.addItemChatBox(todo.toString(),items.size());
             } else {
                 throw new KingException("Todo cannot be empty!", new Throwable("empty field"));
             }
@@ -132,7 +65,7 @@ public class King {
             if (tokens.length == 2) {
                 Event event = new Event(tokens[0],tokens[1]);
                 items.add(event);
-                return Chat.addItemChatBox(event.toString(),items.size());
+                return UI.addItemChatBox(event.toString(),items.size());
             } else if(tokens.length < 2){
                 throw new KingException("Event description and time CANNOT be empty!", new Throwable("empty field"));
             } else {
@@ -152,7 +85,7 @@ public class King {
                 LocalDateTime datetime = StringToLocalDateTime(tokens[1]);
                 Deadline deadline = new Deadline(tokens[0],datetime);
                 items.add(deadline);
-                return Chat.addItemChatBox(deadline.toString(),items.size());
+                return UI.addItemChatBox(deadline.toString(),items.size());
             } catch (KingException e) {
                 throw e;
             }
@@ -162,7 +95,7 @@ public class King {
                 int itemNo = Integer.parseInt(stringItem) - 1;
                 Task item = items.get(itemNo);
                 items.remove(itemNo);
-                return Chat.chatBox(
+                return UI.chatBox(
                         "I have deleted the following item:\n"
                                 + "\t\t" + item.toString() +
                                 "\n\t You got " + items.size() + " task(s) left."
@@ -189,26 +122,17 @@ public class King {
             try {
                 System.out.println(generateReply(phrase));
             } catch (KingException e) {
-                System.out.println(Chat.chatBox(e.message));
+                System.out.println(UI.chatBox(e.message));
             }
         }
-        System.out.print(Chat.chatBox("Bye. Hope to see you again soon!"));
+        System.out.print(UI.chatBox("Bye. Hope to see you again soon!"));
         scanner.close();
-        persistData();
+        storage.persistData(items);
     }
 
     public static void main(String[] args) {
-        String logo =
-                " ____  __.__\n" +
-                        "|    |/ _|__| ____    ____\n" +
-                        "|      < |  |/    \\  / ___\\ \n" +
-                        "|    |  \\|  |   |  \\/ /_/  >\n" +
-                        "|____|__ \\__|___|  /\\___  /\n" +
-                        "        \\/       \\//_____/\n";
-        System.out.println(logo);
-        System.out.println("Hello! I'm King");
-        System.out.println("What can I do for you?");
-        King king = new King();
+        System.out.println(UI.welcome());
+        King king = new King("data/king.txt");
         king.chat();
     }
 }
