@@ -1,7 +1,9 @@
-public class Deadline extends Task {
-    protected String by;
+import java.util.Date;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    protected Date by;
+
+    public Deadline(String description, Date by) {
         super(description);
         this.by = by;
     }
@@ -13,6 +15,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.by);
+        return String.format("[D]%s (by: %s)", super.toString(), DateFormatter.formatDate(this.by));
     }
 }
