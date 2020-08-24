@@ -34,6 +34,7 @@ public class CommandLineInterface {
                 commandType.checkInput(userInput.toLowerCase());
                 String content, dateTime;
                 String[] userInputArgs;
+                DukeDateTime dukeDateTime;
                 switch (commandType) {
                     case LIST:
                         formatter.print(taskManager.getAllTasks());
@@ -56,7 +57,8 @@ public class CommandLineInterface {
                         userInputArgs = userInput.split("\\s*/by\\s*");
                         content = userInputArgs[0].trim();
                         dateTime = userInputArgs[1];
-                        Deadline newDeadlineTask = new Deadline(content, dateTime);
+                        dukeDateTime = DateTimeParser.parseDateTime(dateTime);
+                        Deadline newDeadlineTask = new Deadline(content, dukeDateTime);
                         formatter.print(taskManager.addTask(newDeadlineTask));
                         break;
 
@@ -65,7 +67,8 @@ public class CommandLineInterface {
                         userInputArgs = userInput.split("\\s*/at\\s*");
                         content = userInputArgs[0].trim();
                         dateTime = userInputArgs[1];
-                        Event newEventTask = new Event(content, dateTime);
+                        dukeDateTime = DateTimeParser.parseDateTime(dateTime);
+                        Event newEventTask = new Event(content, dukeDateTime);
                         formatter.print(taskManager.addTask(newEventTask));
                         break;
 

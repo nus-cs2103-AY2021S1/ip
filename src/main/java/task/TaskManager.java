@@ -19,7 +19,7 @@ public class TaskManager {
         return output + "Now you have a total of " + String.valueOf(tasks.size()) + numberOfTasks;
     }
 
-    public String deleteTask(int taskIndex){
+    public String deleteTask(int taskIndex) {
         Task deletedTask = tasks.remove(taskIndex - 1);
         String output = "Noted. I have removed the task: \n";
         return output + Colour.Red(deletedTask.toString());
