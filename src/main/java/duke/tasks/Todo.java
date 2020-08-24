@@ -25,7 +25,7 @@ public class Todo extends Task {
 
     @Override
     public String getStatusWithIndex() {
-        return String.format("%s. %s%s%s", index, super.type, isDone ? super.done : super.start, this.description);
+        return String.format("%s. %s", index, toString());
     }
 
     /**

@@ -15,7 +15,8 @@ import java.util.List;
  * Class that carries the data structure for storing tasks and supports operations for the tasklist.
  */
 public class TaskList {
-    public List<Task> todoList;
+
+    protected List<Task> todoList;
 
     /**
      * No-arguments constructor for new tasklist.
@@ -131,7 +132,7 @@ public class TaskList {
     public Task markDone(String command) {
         int taskNo = Character.getNumericValue(command.charAt(5)) - 1;
         Task task = todoList.get(taskNo);
-        task.isDone = true;
+        task.setDone(true);
         return task;
     }
 
@@ -140,15 +141,14 @@ public class TaskList {
      * remove a task in the list based on number in the command.
      *
      * @param command   Carries the 'delete (integer)' command
-     * @param list      Todo List given for modification
      * @return          Task deleted
      */
 
-    public Task delete(String command, List<Task> list) {
+    public Task delete(String command) {
         int taskNo = Character.getNumericValue(command.charAt(7)) - 1;
-        Task task = list.remove(taskNo);
-        for (int i = taskNo; i < list.size(); i++) {
-            todoList.get(i).index = todoList.get(i).index - 1;
+        Task task = todoList.remove(taskNo);
+        for (int i = taskNo; i < todoList.size(); i++) {
+            todoList.get(i).setIndex(todoList.get(i).getIndex() - 1);
         }
         return task;
     }

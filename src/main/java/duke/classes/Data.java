@@ -46,26 +46,27 @@ public class Data {
     public List<Task> loadData() throws FileNotFoundException, DukeInvalidTimeException, ArrayIndexOutOfBoundsException {
         List<Task> todoList = new ArrayList<>();
         Scanner scanner = new Scanner(path.toFile());
+
         for (int i = 1; scanner.hasNextLine(); i++) {
             Task currTask = null;
             String[] curr = scanner.nextLine().split("---");
             String task = curr[0];
             boolean isDone = Integer.parseInt(curr[1]) == 1;
             String activity = curr[2];
+            String description;
+
             switch (task) {
-                case "T":
-                    currTask = new Todo(activity, i, isDone);
-                    break;
-                case "D": {
-                    String description = activity + " " + curr[3];
-                    currTask = new Deadline(description, i, isDone);
-                    break;
-                }
-                case "E": {
-                    String description = activity + " " + curr[3];
-                    currTask = new Event(description, i, isDone);
-                    break;
-                }
+            case "T":
+                currTask = new Todo(activity, i, isDone);
+                break;
+            case "D":
+                description = activity + " " + curr[3];
+                currTask = new Deadline(description, i, isDone);
+                break;
+            case "E":
+                description = activity + " " + curr[3];
+                currTask = new Event(description, i, isDone);
+                break;
             }
             todoList.add(currTask);
         }
@@ -80,23 +81,24 @@ public class Data {
      */
     public void save(List<Task> tasks) throws IOException {
         FileWriter writer = new FileWriter(this.path.toString());
+
         for (Task task : tasks) {
             String line = "";
-            //int index = task.index;
-            int done = task.isDone ? 1 : 0;
-            String description = task.description;
-            switch (task.type) {
-                case TODO:
-                    line = String.format("T---%d---%s", done, description);
-                    break;
-                case DEADLINE:
-                case EVENT:
-                    int idx = description.indexOf('/');
-                    String activity = description.substring(0, idx - 1);
-                    String timing = description.substring(idx);
-                    line = String.format("%s---%d---%s---%s",
-                            task.type == TaskType.DEADLINE ? "D" : "E", done, activity, timing);
-                    break;
+            int done = task.hasDone() ? 1 : 0;
+            String description = task.getDescription();
+
+            switch (task.getType()) {
+            case TODO:
+                line = String.format("T---%d---%s", done, description);
+                break;
+            case DEADLINE:
+            case EVENT:
+                int idx = description.indexOf('/');
+                String activity = description.substring(0, idx - 1);
+                String timing = description.substring(idx);
+                line = String.format("%s---%d---%s---%s",
+                        task.getType() == TaskType.DEADLINE ? "D" : "E", done, activity, timing);
+                break;
             }
             writer.write(line + "\n");
         }

@@ -9,8 +9,7 @@ import java.time.format.DateTimeParseException;
  * Event class which carries tasks of type Event and extends of the base Task class.
  */
 public class Event extends Task {
-
-    public LocalDateTime time;
+    protected LocalDateTime time;
 
     /**
      * Constructor for tasks of event type.

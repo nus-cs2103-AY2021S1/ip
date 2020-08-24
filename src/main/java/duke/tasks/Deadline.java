@@ -11,8 +11,6 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends Task {
 
-    public LocalDateTime time;
-
     /**
      * Constructor for tasks of deadline type.
      *
@@ -22,6 +20,7 @@ public class Deadline extends Task {
      * @throws DukeInvalidTimeException Wrong definition for the task timing
      */
 
+    protected LocalDateTime time;
     public Deadline(String description, int index, boolean isDone) throws DukeInvalidTimeException {
         super(description, index, isDone);
         super.type = TaskType.DEADLINE;

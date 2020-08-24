@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Ui {
 
-    public static String line = "---------------------------------------------------";
+    protected String line = "---------------------------------------------------";
 
     /**
      * Default constructor with welcome message.

@@ -4,16 +4,11 @@ package duke.classes;
  * Enum class for categorising the commands given to the scanner.
  */
 public enum Commands {
+
     LIST {
         @Override
         public String toString() {
             return "list";
-        }
-    },
-    BYE {
-        @Override
-        public String toString() {
-            return "bye";
         }
     },
     TODO {
@@ -57,5 +52,12 @@ public enum Commands {
         public String toString() {
             return "done";
         }
+    },
+    BYE {
+        @Override
+        public String toString() {
+            return "bye";
+        }
     }
+
 }

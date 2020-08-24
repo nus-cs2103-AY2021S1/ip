@@ -4,12 +4,12 @@ package duke.tasks;
  * Base class for tasks in the chatbot and utilised by the main types of tasks.
  */
 public class Task {
-    public String description;
-    public boolean isDone;
-    public int index;
-    public final String done = "[\u2713] ";
-    public final String start = "[\u2718] ";
-    public TaskType type;
+    protected String description;
+    protected boolean isDone;
+    protected int index;
+    protected final String done = "[\u2713] ";
+    protected final String start = "[\u2718] ";
+    protected TaskType type;
 
     /**
      * Constructor for a new Task, the task is set to incomplete by default.
@@ -38,6 +38,35 @@ public class Task {
         this.index = index;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean hasDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public TaskType getType() {
+        return type;
+    }
+
+
     /**
      * Method that returns the text version of task with index.
      *
@@ -45,7 +74,7 @@ public class Task {
      */
 
     public String getStatusWithIndex() {
-        return String.format("%s. %s%s", index, isDone ? this.done : this.start, this.description);
+        return String.format("%s. %s", index, toString());
     }
 
     /**
