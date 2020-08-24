@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Task {
     private boolean done;
-    protected String description;
+    protected final String description;
 
     public Task(String task) {
         this.description = task;

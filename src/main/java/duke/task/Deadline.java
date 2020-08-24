@@ -5,13 +5,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Deadline extends Task {
-    private String by;
+    private final String by;
     private LocalDate localDate;
     private String time;
 
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+        
         ArrayList<Object> dateAndTime = dateAndTimeFormatter(by);
         localDate = null;
         time = null;
@@ -40,8 +41,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        
-        return "[D]" + super.toString() + "(by: " + by + ") " + getFormattedBy();
+        return "[D]" + super.toString() + " (by: " + by + ") " + getFormattedBy();
     }
     
     @Override

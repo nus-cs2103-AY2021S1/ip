@@ -5,10 +5,9 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class Layout {
-    private String line = "\t";
 
     public void printLine() {
-        line = "\t";
+        String line = "\t";
         for (int i = 0; i < 50; i++) {
             line += "\u2500";
         }

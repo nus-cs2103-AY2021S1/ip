@@ -5,11 +5,12 @@ import duke.task.TaskList;
 import java.util.Scanner;
 
 public class Ui {
-    private final Layout layout = new Layout();
+    private final Layout layout;
     private final TaskList tasks;
     
     public Ui(TaskList tasks) {
         this.tasks = tasks;
+        layout = new Layout();
     }
     
     private void greet() {

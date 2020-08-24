@@ -6,13 +6,14 @@ import java.util.ArrayList;
 
 public class Event extends Task {
     
-    private String eventTime;
+    private final String eventTime;
     private LocalDate localDate;
     private String time;
 
     public Event(String description, String eventTime) {
         super(description);
         this.eventTime = eventTime;
+        
         ArrayList<Object> dateAndTime = dateAndTimeFormatter(eventTime);
         localDate = null;
         time = null;
@@ -41,7 +42,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + eventTime + ") "+ getFormattedBy();    }
+        return "[E]" + super.toString() + " (at: " + eventTime + ") "+ getFormattedBy();
+    }
 
     @Override
     public String toSave() {
