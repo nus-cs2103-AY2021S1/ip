@@ -15,8 +15,6 @@ public class Task {
 
     public void doTask() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:\n"
-            + this.toString());
     }
 
     @Override
