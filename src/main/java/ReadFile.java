@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,6 +24,8 @@ public class ReadFile {
     public static void main(String[] args) {
         try {
             printFileContents("data");
+            LocalDate k = LocalDate.parse("2019-12-01");
+            System.out.println(k.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }

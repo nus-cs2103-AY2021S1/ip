@@ -6,29 +6,6 @@ import java.io.FileNotFoundException;
 
 public class Duke {
 
-//    static void addTask(String task, ArrayList<Task> store) {
-//        String type = task.split(" ", 2)[0];
-//        String title = task.split(" ", 2)[1];
-//        if (type.equals("todo")) {
-//            store.add(new Todo(title));
-//            System.out.println("Got it. I've added this task:\n" + store.get(store.size() - 1));
-//        } else {
-//            String description = title.split("/", 2)[0];
-//            Task newTask;
-//
-//            if (type.equals("deadline")) {
-//                String by = title.split("/by", 2)[1];
-//                newTask = new Deadline(description, by);
-//                store.add(newTask);
-//            }
-//            if (type.equals("event")) {
-//                String at = title.split("/at", 2)[1];
-//                newTask = new Event(description, at);
-//                store.add(newTask);
-//            }
-//        }
-//    }
-
     public static void doneTask(ArrayList<Task> store, int num) {
         store.get(num-1).markAsDone();
         System.out.println("Nice! This task is marked as done!");

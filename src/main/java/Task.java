@@ -25,12 +25,12 @@ public class Task {
             Task newTask;
 
             if (type.equals("deadline")) {
-                String by = title.split("/by", 2)[1];
+                String by = title.split("/by ", 2)[1];
                 newTask = new Deadline(description, by);
                 store.add(newTask);
             }
             if (type.equals("event")) {
-                String at = title.split("/at", 2)[1];
+                String at = title.split("/at ", 2)[1];
                 newTask = new Event(description, at);
                 store.add(newTask);
             }
