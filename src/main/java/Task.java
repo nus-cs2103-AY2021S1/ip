@@ -7,6 +7,12 @@ abstract class Task implements Serializable {
     protected boolean isDone;
 
     // Constructor
+
+    /**
+     * Creates a generic task.
+     * @param description description of the task.
+     * @throws EmptyBodyException If description is empty.
+     */
     public Task(String description) throws EmptyBodyException {
         if (description.isEmpty()) {
             throw new EmptyBodyException("description", this.getClass().toString());
@@ -17,10 +23,13 @@ abstract class Task implements Serializable {
     }
 
     // Methods
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (this.isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }

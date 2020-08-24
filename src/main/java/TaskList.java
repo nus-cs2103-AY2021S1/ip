@@ -8,11 +8,21 @@ public class TaskList implements Serializable {
     private final List<Task> taskList;
 
     // Constructor
+
+    /**
+     * Creates a new TaskList.
+     */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
     // Methods
+
+    /**
+     * Adds a new task into the TaskList.
+     * @param newTask task to be added into the TaskList.
+     * @return String denoting result of adding the task into the TaskList.
+     */
     public String createTask(Task newTask) {
         taskList.add(newTask);
         int newSize = taskList.size();
@@ -22,6 +32,12 @@ public class TaskList implements Serializable {
         return todoText;
     }
 
+    /**
+     * Marks a task with specified task number in TaskList as done.
+     * @param taskNumber task number of task to be marked as done.
+     * @return String denoting result of marking task with specified task number as done.
+     * @throws IndexOutOfBoundsDukeException If task number given is not valid.
+     */
     public String markAsDone(int taskNumber) throws IndexOutOfBoundsDukeException {
         try {
             Task task = taskList.get(taskNumber - 1);
@@ -34,6 +50,12 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Deletes a task with specified task number.
+     * @param taskNumber task number of task to be deleted.
+     * @return String denoting result of deleting task.
+     * @throws IndexOutOfBoundsDukeException If task number given is not valid.
+     */
     public String deleteTask(int taskNumber) throws IndexOutOfBoundsDukeException {
         try {
             Task task = taskList.get(taskNumber - 1);

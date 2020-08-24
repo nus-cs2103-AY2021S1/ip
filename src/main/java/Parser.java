@@ -2,8 +2,18 @@ import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class to handle parsing of input into commands.
+ */
 public class Parser {
 
+    /**
+     * Parses the given command in string form into a Command object.
+     * @param textCommand the command to be parsed in string formed.
+     * @return Command after being parsed.
+     * @throws EmptyBodyException If command in string form is empty.
+     * @throws UnknownInputException If command in string form is not a recognised command.
+     */
     public static Command parse(String textCommand) throws EmptyBodyException, UnknownInputException {
         String[] words = textCommand.split(" ", 2);
         String firstWord = words[0];

@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class representing commands to add task to TaskList
+ */
 public class AddCommand extends Command {
 
     // Attributes
@@ -14,6 +17,15 @@ public class AddCommand extends Command {
     }
 
     // Methods
+
+    /**
+     * Executes the command to add a task by adding task into given TaskList.
+     * @param tasks TaskList representing list of current tasks.
+     * @param ui Ui object to handle printing of outputs.
+     * @param storage Storage object to handle saving of outputs to computer
+     * @throws EmptyBodyException If command is to add event or deadline but no date and time is provided.
+     * @throws UnknownInputException If an unrecognised command is given.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws EmptyBodyException, UnknownInputException {
         switch (this.type) {
@@ -53,6 +65,10 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Returns whether the command is a command to exit.
+     * @return false.
+     */
     @Override
     public boolean isExit() {
         return false;
