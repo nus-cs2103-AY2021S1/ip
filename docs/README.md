@@ -2,23 +2,19 @@
 
 ## Features 
 
-### To-Do List 
-This application features a fully-functional to-do list that assists the user with storing their tasks, and allow them to delete it after they have completed.
+### Feature 1 
+Description of feature.
 
 ## Usage
 
-### `todo` - creates a to-do task
+### `Keyword` - Describe action
 
-This command creates a to-do task.
+Describe action and its outcome.
 
 Example of usage: 
 
-` todo borrow book`
+`keyword (optional arguments)`
 
 Expected outcome:
 
-` Got it. I've added this task: 
-       [T][DONE] borrow book
-     Now you have 5 tasks in the list.
-`
-
+`outcome`
