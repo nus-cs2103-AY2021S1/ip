@@ -37,8 +37,8 @@ public class DoneCommandTest {
         Storage storage = new Storage();
         DoneCommand doneCommand = new DoneCommand(0);
         doneCommand.execute(tasks, ui, storage);
-        String expectedPrintStatement = "\t Nice! I've marked this task as done:\n" +
-                "\t   [T][✓] eat\n";
+        String expectedPrintStatement = "\t Nice! I've marked this task as done:\n"
+                + "\t   [T][✓] eat\n";
         assertEquals(1, tasks.getNumberOfTask());
         assertEquals(expectedPrintStatement, OUT_CONTENT.toString());
     }

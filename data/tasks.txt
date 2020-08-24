@@ -1,0 +1,6 @@
+T | 0 | read book
+D | 0 | findBook | 12/02/1111 12:30
+E | 1 | return book | 12/12/2222 12:12
+T | 0 | eat
+T | 0 | sleep
+T | 0 | findbook
