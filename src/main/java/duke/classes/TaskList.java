@@ -11,16 +11,36 @@ import duke.tasks.Todo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that carries the data structure for storing tasks and supports operations for the tasklist.
+ */
 public class TaskList {
     public List<Task> todoList;
+
+    /**
+     * No-arguments constructor for new tasklist.
+     */
 
     public TaskList() {
         this.todoList = new ArrayList<>();
     }
 
+    /**
+     * Class constructor for pre-existing lists that have data already saved onto local hard disk.
+     *
+     * @param list Currently saved list
+     */
+
     public TaskList(List<Task> list) {
         this.todoList = list;
     }
+
+    /**
+     * Method to store a regular task.
+     *
+     * @param item           Task
+     * @throws BlahException Thrown for 'blah' commands
+     */
 
     public void storeTask(String item) throws BlahException {
         int count = todoList.size() + 1;
@@ -33,6 +53,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method that creates, stores and returns a Todo task.
+     *
+     * @param                     todo Task
+     * @return                    Todo Task object
+     * @throws EmptyDukeException For incomplete command
+     */
 
     public Todo storeTodo(String todo) throws EmptyDukeException {
         int count = todoList.size() + 1;
@@ -47,6 +74,16 @@ public class TaskList {
             return curr;
         }
     }
+
+    /**
+     * Method that creates, stores and returns a deadline task.
+     *
+     * @param deadline                  Deadline task
+     * @return                          Deadline task
+     * @throws EmptyDukeException       For incomplete command
+     * @throws DukeInvalidTimeException For incorrect dates
+     */
+
     public Deadline storeDeadline(String deadline) throws EmptyDukeException, DukeInvalidTimeException {
         int count = todoList.size() + 1;
         if (count > 100) {
@@ -60,6 +97,16 @@ public class TaskList {
             return curr;
         }
     }
+
+    /**
+     * Method that creates, stores and returns an event task.
+     *
+     * @param event                     Event task
+     * @return                          Event task
+     * @throws EmptyDukeException       For incomplete command
+     * @throws DukeInvalidTimeException For incorrect dates
+     */
+
     public Event storeEvent(String event) throws EmptyDukeException, DukeInvalidTimeException {
         int count = todoList.size() + 1;
         if (count > 100) {
@@ -74,12 +121,28 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method that marks a task as done and returns the task.
+     *
+     * @param command   Carries the 'done (integer)' command
+     * @return          completed Task
+     */
+
     public Task markDone(String command) {
         int taskNo = Character.getNumericValue(command.charAt(5)) - 1;
         Task task = todoList.get(taskNo);
         task.isDone = true;
         return task;
     }
+
+    /**
+     * Method that takes in the current list and command, before proceeding to
+     * remove a task in the list based on number in the command.
+     *
+     * @param command   Carries the 'delete (integer)' command
+     * @param list      Todo List given for modification
+     * @return          Task deleted
+     */
 
     public Task delete(String command, List<Task> list) {
         int taskNo = Character.getNumericValue(command.charAt(7)) - 1;

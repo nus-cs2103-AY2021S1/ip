@@ -12,6 +12,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The Duke class implements the DukeChatBot that is wired to store, display, update and delete
+ * a variety of tasks.
+ *
+ * @author Rishi Ravikumar
+ */
 public class Duke {
     public static List<Task> todoList; //= new ArrayList<>();
     public static String line = "---------------------------------------------------";
@@ -20,6 +26,11 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Constructor whereby the duke class loads data from a pre-defined path on the hard disk.
+     *
+     * @param path File path for local data
+     */
     public Duke(String path) {
         try {
             data = new Data(path);
@@ -33,21 +44,19 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method whereby the Duke chatbot runs.
+     *
+     * @param args Command to run program
+     */
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        String welcome = line + "\nHello! I'm Duke!\n" +
-//                "What can I do for you?\n";
-//        //System.out.println(logo + "\n" + welcome);
-//        System.out.println(welcome);
-        //new Duke("data/duke.txt").runDuke();
-
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * Void method that abstracts away most the logic behind running the Duke chatbot.
+     *
+     */
     public void run() {
         this.ui = new Ui();
         this.parser = new Parser();
@@ -65,6 +74,13 @@ public class Duke {
             System.out.println("FAILURE: Could not save data to main/data directory.");
         }
     }
+
+    /**
+     * Void method that carries the logic behind assigning an action based on the command.
+     *
+     * @param command Type of command
+     * @param task Actual task
+     */
 
     public void assign(Commands command, String task) {
         switch (command) {
@@ -93,6 +109,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Void method that carries the logic behind assigning the unconventional tasks.
+     * tasks like normal tasks and blah.
+     *
+     * @param task Actual task
+     */
+
     public void assignOtherTasks(String task) {
         try {
             this.taskList.storeTask(task);
@@ -101,6 +124,13 @@ public class Duke {
             this.ui.printError(e.toString());
         }
     }
+
+    /**
+     * Void method that abstracts away the logic behind assigning a method based on task type.
+     *
+     * @param commands Commands of TODO, DEADLINE & EVENT
+     * @param task Actual activity
+     */
 
     public void decideTaskType(Commands commands, String task) {
         Task todo = null;
