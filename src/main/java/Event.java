@@ -20,4 +20,10 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " +
                 atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
+    @Override
+    public String toStorageString() {
+        if (super.isDone) return "E | 1 | " + description + " | " + at;
+        else return "E | 0 | " + description + " | " + at;
+    }
+
 }

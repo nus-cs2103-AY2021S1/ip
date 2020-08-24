@@ -20,4 +20,10 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " +
                 byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
+
+    @Override
+    public String toStorageString() {
+        if (super.isDone) return "D | 1 | " + description + " | " + by;
+        else return "D | 0 | " + description + " | " + by;
+    }
 }
