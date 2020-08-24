@@ -1,5 +1,8 @@
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -13,6 +16,8 @@ public class Duke {
     static String directoryPath = "src/main/data/";
     static String dataFilePath = "src/main/data/data.txt";
     static File dataFile;
+    static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    static DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     public static void main(String[] args) throws IOException {
         try {
@@ -26,6 +31,7 @@ public class Duke {
             }
 
             readFile();
+
             dukeBot();
         } catch (IOException e) {
             System.out.println("An error occurred");
@@ -43,11 +49,13 @@ public class Duke {
                 } else if (task.startsWith("[D]")) {
                     int pos = task.indexOf("(by: ");
                     lst.add(new Deadline(isDone(task.substring(4, 5)),
-                            task.substring(7, pos - 1), task.substring(pos + 5, task.length() - 1)));
+                            task.substring(7, pos - 1),
+                            LocalDate.parse(task.substring(pos + 5, task.length() - 1), displayFormatter)));
                 } else if (task.startsWith("[E]")) {
                     int pos = task.indexOf("(at: ");
                     lst.add(new Event(isDone(task.substring(4, 5)),
-                            task.substring(7, pos - 1), task.substring(pos + 5, task.length() - 1)));
+                            task.substring(7, pos - 1),
+                            LocalDate.parse(task.substring(pos + 5, task.length() - 1), displayFormatter)));
                 }
             }
         } catch (FileNotFoundException e) {
@@ -122,7 +130,8 @@ public class Duke {
                         throw new MissingDateTimeException("deadline");
                     }
                     int pos = userInput.indexOf("/by");
-                    formatAddTask(new Deadline(userInput.substring(9, pos - 1), userInput.substring(pos + 4)));
+                    LocalDate date = LocalDate.parse(userInput.substring(pos + 4), inputFormatter);
+                    formatAddTask(new Deadline(userInput.substring(9, pos - 1), date));
                 } else if (userInput.startsWith("event")) {
                     if (userInput.substring(5).isEmpty()) {
                         throw new MissingTaskDescriptionException("event");
@@ -131,7 +140,10 @@ public class Duke {
                         throw new MissingDateTimeException("event");
                     }
                     int pos = userInput.indexOf("/at");
-                    formatAddTask(new Event(userInput.substring(6, pos - 1), userInput.substring(pos + 4)));
+                    LocalDate date = LocalDate.parse(userInput.substring(pos + 4), inputFormatter);
+                    formatAddTask(new Event(userInput.substring(6, pos - 1), date));
+                } else if (userInput.startsWith("date")) {
+                    formatShowTasksOnDate(LocalDate.parse(userInput.substring(5), inputFormatter));
                 } else {
                     throw new InvalidDukeCommandException();
                 }
@@ -141,6 +153,8 @@ public class Duke {
             format("Bye. Hope to see you again soon!");
         } catch (MissingTaskDescriptionException | InvalidDukeCommandException | MissingTaskIndexException | InvalidTaskIndexException | MissingDateTimeException e) {
             System.out.println(line + "\n" + e + "\n" + line);
+        } catch (DateTimeParseException e) {
+            System.out.println(line + "\n" + "☹ OOPS!!! The format of the date given is invalid." + "\n" + line);
         }
     }
 
@@ -188,5 +202,32 @@ public class Duke {
         System.out.println(String.format("Now you have %d %s in the list.", size, size == 1 ? "task" : "tasks"));
         System.out.println(line);
         saveTaskList();
+    }
+
+    public static void formatShowTasksOnDate(LocalDate queryDate) {
+        ArrayList<Task> tasksOnDate = new ArrayList<>();
+        for (Task task : lst) {
+            if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                if (deadline.date.equals(queryDate)) {
+                    tasksOnDate.add(deadline);
+                }
+            } else if (task instanceof Event) {
+                Event event = (Event) task;
+                if (event.date.equals(queryDate)) {
+                    tasksOnDate.add(event);
+                }
+            }
+        }
+        System.out.println(line);
+        if (!tasksOnDate.isEmpty()) {
+            System.out.println(String.format("The following deadline/event(s) is/are scheduled on %s.", queryDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))));
+            for (int i = 1; i <= tasksOnDate.size(); i++) {
+                System.out.println(i + "." + tasksOnDate.get(i-1));
+            }
+        } else {
+            System.out.println(String.format("There are no deadline/event(s) scheduled on %s.", queryDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))));
+        }
+        System.out.println(line);
     }
 }

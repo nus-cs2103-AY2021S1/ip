@@ -1,19 +1,24 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
 
-    public String dateTime;
+    public LocalDate date;
 
-    public Deadline(String name, String dateTime) {
+    public Deadline(String name, LocalDate date) {
         super(name);
-        this.dateTime = dateTime;
+        this.date = date;
     }
 
-    public Deadline(boolean isDone, String name, String dateTime) {
+    public Deadline(boolean isDone, String name, LocalDate date) {
         super(isDone, name);
-        this.dateTime = dateTime;
+        this.date = date;
     }
 
     @Override
     public String toString() {
-        return String.format("%s%s (by: %s)", "[D]", super.toString(), dateTime);
+        return String.format("%s%s (by: %s)", "[D]", super.toString(),
+                date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 }
