@@ -1,4 +1,5 @@
 public enum ExceptionType {
+    TOO_MUCH_ARGUMENTS("Too much arguments supplied for %s"),
     NO_ARGUMENTS_SUPPLIED("No arguments supplied for %s"),
     INVALID_ARGUMENT("Invalid value of %s with '%s'"),
     INVALID_NUMBER("'%s' is not a valid number"),
