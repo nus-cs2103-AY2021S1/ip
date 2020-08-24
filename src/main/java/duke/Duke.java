@@ -27,7 +27,7 @@ public class Duke {
     }
 
     /**
-     * Run Duke.
+     * Runs Duke.
      *
      * @throws DukeException
      */

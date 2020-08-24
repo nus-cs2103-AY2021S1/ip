@@ -11,7 +11,7 @@ public class DukeException extends Exception {
     protected DukeCommandType commandType;
 
     /**
-     * Initialise DukeException using exception type.
+     * Initialises DukeException using exception type.
      *
      * @param e
      * @param exceptionType
@@ -22,7 +22,7 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Initialise DukeException using exception type and command type.
+     * Initialises DukeException using exception type and command type.
      *
      * @param e
      * @param exceptionType
