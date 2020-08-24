@@ -2,6 +2,10 @@ public enum DukeCommandType {
     TODO,
     DEADLINE,
     EVENT,
+    LIST,
     DONE,
-    DELETE
+    DELETE,
+    HELP,
+    UNKNOWN,
+    EXIT
 }
