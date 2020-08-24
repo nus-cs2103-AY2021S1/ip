@@ -49,17 +49,17 @@ public class Storage {
 
         //Split the string according to the ,
         String[] data = string.split("~");
-        Command command;
+        TaskCommand taskCommand;
 
         try{
             //Get the command based on the first entry
-            command = Command.valueOf(data[0].toUpperCase());
+            taskCommand = TaskCommand.valueOf(data[0].toUpperCase());
         } catch (IllegalArgumentException e){
             throw new UltronException(data[0], ExceptionType.INVALID_COMMAND);
         }
 
         //Return the task based on the data
-        return command.commandParser.apply(data[1]);
+        return taskCommand.commandParser.apply(data[1]);
 
     }
 
@@ -68,7 +68,7 @@ public class Storage {
      * @return taskArrayList An Arraylist containing the tasks stored
      * @throws UltronException If there is an error decoding the file or if there is an IO error
      */
-    public ArrayList<Task> fetchAll() throws UltronException{
+    public ArrayList<Task> load() throws UltronException{
 
         ArrayList<Task> taskArrayList = new ArrayList<>();
 
@@ -111,7 +111,7 @@ public class Storage {
     public static void main(String[] args){
         Storage hello = new Storage("data.txt");
         try{
-            ArrayList<Task> lst = hello.fetchAll();
+            ArrayList<Task> lst = hello.load();
             lst.add(new Todo("hello"));
             lst.add(new Deadline("hello", "Tomorrow"));
             for(Task tsk: lst){
