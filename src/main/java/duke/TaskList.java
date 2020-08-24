@@ -1,9 +1,11 @@
 package duke;
-
 import task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Class responsible for adding and deletion of tasks
+ */
 
 public class TaskList {
     List<Task> taskList;

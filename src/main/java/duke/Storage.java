@@ -10,18 +10,22 @@ import task.Task;
 import task.TodoTask;
 
 import java.io.*;
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Storage Class which handles reading and writing tasks from txt file
+ */
+
 public class Storage {
     private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
-
     }
 
     public List<Task> load() throws DukeException {
@@ -29,6 +33,11 @@ public class Storage {
         return parseFile(file);
     }
 
+    /**
+     * Reads the file from the file at location filePath
+     * @return File located at location filePath
+     * @throws DukeException Exception when there are errors in file reading
+     */
     public File readFile() throws DukeException {
         try {
             String FOLDERPATH = "data";
@@ -54,7 +63,12 @@ public class Storage {
     }
 
 
-
+    /**
+     * ReadLine takes in a String and returns a Task
+     * @param line String containing information about a Task
+     * @return Task which corresponds to the String line
+     * @throws DukeException Exception when there are errors in reading the line.
+     */
     public Task readLine(String line) throws DukeException {
         Pattern todoPattern = Pattern.compile("T \\| ([01]) \\| (.+)");
         Pattern deadlinePattern = Pattern.compile("D \\| ([01]) \\| (.+?) \\| (.+)");
@@ -76,6 +90,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses the contents of the file given into a list of tasks
+     * @param file File that needs to parsed
+     * @return ArrayList containing Task Objects
+     * @throws DukeException Exceptions in parsing the file
+     */
     public List<Task> parseFile(File file) throws DukeException {
         List<Task> result = new ArrayList<>();
         try {
@@ -97,6 +117,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the contents of the taskList into a txt file
+     * @param taskList ArrayList containing tasks to be saved
+     * @throws DukeException Exceptions in saving tasks
+     */
     public void saveTasks(TaskList taskList) throws DukeException {
         try {
             File file = readFile();

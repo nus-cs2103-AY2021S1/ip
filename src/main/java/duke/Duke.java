@@ -1,5 +1,9 @@
-package duke;
+/**
+ * Duke is a chatbot that allows users to create, delete and complete tasks, which include todos,\
+ * events, and deadlines
+ */
 
+package duke;
 import command.Command;
 import exception.DukeException;
 
@@ -27,6 +31,9 @@ public class Duke {
 
     }
 
+    /**
+     * This method runs the chatbot, accepting user input and adding it to a task list.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

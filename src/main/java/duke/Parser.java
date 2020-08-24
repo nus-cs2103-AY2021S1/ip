@@ -20,17 +20,23 @@ public class Parser {
     static Pattern delete = Pattern.compile("delete ([0-9]+)");
     static Pattern datePattern = Pattern.compile("^([0-9]{1,2})[/-]([0-9]{1,2})[/-]([0-9]{4}) ([0-9]{4})$");
 
+    /**
+     * Static method that takes in a String and returns a Command
+     * @param str String to be parsed
+     * @return Object of the Command Class
+     * @throws DukeException Any exceptions with parsing
+     */
     public static Command parse(String str) throws DukeException {
         if (str.equals("bye")) {
             return new ByeCommand();
         } else if (str.equals("list")) {
             return new ListCommand();
         } else {
-            switch(str.split(" ")[0]) {
+            switch (str.split(" ")[0]) {
                 case "done":
                     Matcher doneMatcher = done.matcher(str);
                     if (doneMatcher.find()) {
-                    int taskNum = Integer.parseInt(doneMatcher.group(1));
+                        int taskNum = Integer.parseInt(doneMatcher.group(1));
                         return new DoneCommand(taskNum);
                     } else {
                         throw new EmptyDescriptionException("done");
@@ -72,46 +78,14 @@ public class Parser {
                     throw new InvalidInputException();
             }
         }
-
-
-
-//        else if (str.split(" ")[0].equals("done")) {
-//            Matcher doneMatcher = done.matcher(str);
-//            if (doneMatcher.find()) {
-//                int taskNum = Integer.parseInt(doneMatcher.group(1));
-//                    return new command.DoneCommand(taskNum);
-//            } else {
-//                throw new exception.EmptyDescriptionException("done");
-//            }
-//        } else if (str.split(" ")[0].equals("delete")) {
-//            Matcher deleteMatcher = delete.matcher(str);
-//            if (deleteMatcher.find()) {
-//                int taskNum = Integer.parseInt(deleteMatcher.group(1));
-//                return new command.DeleteCommand(taskNum);
-//            } else {
-//                throw new exception.EmptyDescriptionException("delete");
-//            }
-//        } else if (str.split(" ")[0].equals("todo")) {
-//            Matcher todoMatcher = todo.matcher(str);
-//            if (todoMatcher.find()) {
-//                String todo = todoMatcher.group(1);
-//                return new command.TodoCommand(todo);
-//            } else {
-//                throw new exception.EmptyDescriptionException("todo");
-//            }
-//        }
-
-
-
-
-//
-//        else {
-//            throw new exception.InvalidInputException();
-//        }
-
     }
 
-
+    /**
+     * Static method that takes in a string and converts it into a LocalDateTime object
+     * @param dateString String representing a date in dd/MM/yyyy HHmm format
+     * @return Object of the LocalDateTime class
+     * @throws InvalidDateException Exception when the format of the string is invalid
+     */
 
     public static LocalDateTime parseDate(String dateString) throws InvalidDateException {
         Matcher dateMatcher = datePattern.matcher(dateString);

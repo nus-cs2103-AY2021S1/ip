@@ -1,9 +1,11 @@
 package duke;
-
 import exception.DukeException;
 import task.Task;
-
 import java.util.Scanner;
+
+/**
+ * Class that handles interactions with the user
+ */
 
 public class Ui {
     private String line = "____________________________________________________________";
@@ -58,6 +60,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Uses the Java Scanner to read User Input and trims it
+     * @return String containing the trimmed user input
+     * @throws DukeException When the user input given is invalid
+     */
     public String readCommand() throws DukeException {
         String line = sc.nextLine();
         if (line != null) {
