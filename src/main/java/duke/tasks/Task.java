@@ -4,6 +4,12 @@ public class Task {
     protected final String description;
     protected boolean isDone;
 
+    /**
+     * Task constructor
+     *
+     * @param description Description string
+     * @param isDone Completion status of task
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

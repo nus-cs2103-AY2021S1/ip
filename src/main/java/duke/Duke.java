@@ -3,11 +3,19 @@ package duke;
 import duke.command.Command;
 import duke.tasks.TaskList;
 
+/**
+ * Duke main class
+ */
 public class Duke {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Duke constructor
+     *
+     * @param filePath Filepath of .txt file to save tasks in
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -19,6 +27,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

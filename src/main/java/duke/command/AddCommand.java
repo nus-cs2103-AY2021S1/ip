@@ -7,15 +7,33 @@ import duke.ActionType;
 import duke.DukeException;
 import duke.tasks.*;
 
+/**
+ * Command for adding tasks into list
+ */
 public class AddCommand extends Command {
     private final String input;
     private final ActionType actionType;
+
+    /**
+     * AddCommand constructor
+     *
+     * @param input User input (without type of task written in front)
+     * @param actionType Dictates type of task to be added
+     */
     public AddCommand(String input, ActionType actionType) {
         super(false);
         this.input = input;
         this.actionType = actionType;
     }
 
+    /**
+     * Creates new task and adds it into list, then makes Ui print the task info
+     *
+     * @param tasks List of tasks
+     * @param ui User interface to print task
+     * @param storage File storage object
+     * @throws DukeException if exception encountered
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task newTask = null;
