@@ -4,11 +4,14 @@ package duke;
  * Task class will handle user's tasks.
  */
 public class Task {
-    protected String description; // Description of the task
-    protected boolean isDone; // Status of the completion of the task
+
+    /** Description of the task */
+    protected String description;
+    /** Status of the completion of the task */
+    protected boolean isDone;
 
     /**
-     * Initialise Task using description only.
+     * Initialises Task using description only.
      * @param description
      */
     public Task(String description) {
@@ -17,7 +20,7 @@ public class Task {
     }
 
     /**
-     * Initialise Task using description and isDone.
+     * Initialises Task using description and isDone.
      * Used when knowledge about isDone is needed, eg. loading existing list from hard disk.
      * @param description
      * @param isDone
@@ -49,7 +52,8 @@ public class Task {
     }
 
     /**
-     * Return string format of task.
+     * Returns string format of task.
+     *
      * @return String description of to-do task
      */
     @Override
@@ -58,7 +62,8 @@ public class Task {
     }
 
     /**
-     * Return string format of to-do task that will be written on a text file.
+     * Returns string format of to-do task that will be written on a text file.
+     *
      * @return String description of to-do task
      */
     public String writeToFile() {

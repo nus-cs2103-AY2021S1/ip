@@ -7,6 +7,7 @@ class ToDos extends Task {
 
     /**
      * Initialise ToDos using description only.
+     *
      * @param description
      */
     public ToDos(String description) {
@@ -16,6 +17,7 @@ class ToDos extends Task {
     /**
      * Initialise ToDos using description and isDone.
      * Used when knowledge about isDone is needed, eg. loading existing list from hard disk.
+     *
      * @param description
      * @param isDone
      */
@@ -25,6 +27,7 @@ class ToDos extends Task {
 
     /**
      * Return string format of to-do task.
+     *
      * @return String description of to-do task
      */
     @Override
@@ -34,6 +37,7 @@ class ToDos extends Task {
 
     /**
      * Return string format of to-do task that will be written on a text file.
+     *
      * @return String description of to-do task
      */
     @Override

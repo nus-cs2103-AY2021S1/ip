@@ -5,11 +5,14 @@ package duke;
  */
 public class DukeException extends Exception {
 
-    protected DukeExceptionType exceptionType; // Exception type
-    protected DukeCommandType commandType; // Command type
+    /** Exception type */
+    protected DukeExceptionType exceptionType;
+    /** Command type */
+    protected DukeCommandType commandType;
 
     /**
      * Initialise DukeException using exception type.
+     *
      * @param e
      * @param exceptionType
      */
@@ -20,6 +23,7 @@ public class DukeException extends Exception {
 
     /**
      * Initialise DukeException using exception type and command type.
+     *
      * @param e
      * @param exceptionType
      * @param commandType
@@ -31,7 +35,8 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Prints error messages depending on the exception type and command type.
+     * Returns error messages depending on the exception type and command type.
+     *
      * @return error messages
      */
     @Override
@@ -92,7 +97,7 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Error in user's input due to wrong time format.
+     * Returns error in user's input due to wrong time format.
      */
     public static void wrongTimeFormat() {
         System.err.println("    ERROR IN ADDING DEADLINE: WRONG FORMAT\n    Format: YYYY-MM-DD\n");

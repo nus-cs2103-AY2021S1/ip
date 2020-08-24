@@ -5,9 +5,12 @@ package duke;
  */
 public class Duke {
 
-    private Storage storage; // User's storage
-    private TaskList tasks; // User's task list
-    private Ui ui; // Ui to interact with user
+    /** User's storage */
+    private Storage storage;
+    /** User's task list */
+    private TaskList tasks;
+    /** Ui to interact with user */
+    private Ui ui;
 
     /**
      * Initialises Duke and objects required.
@@ -25,16 +28,18 @@ public class Duke {
 
     /**
      * Run Duke.
+     *
      * @throws DukeException
      */
     public void run() throws DukeException {
         Ui.greeting();
-        Parser.parse(tasks);
+        Parser.parseInputs(tasks);
         storage.save(TaskList.tasks);
     }
 
     /**
      * Entry point for Duke to start.
+     *
      * @param args
      * @throws DukeException
      */

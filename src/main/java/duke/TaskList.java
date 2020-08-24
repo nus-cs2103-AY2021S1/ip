@@ -6,12 +6,22 @@ import java.util.ArrayList;
  * TaskList class contains the task list and all operations that modify task in the list.
  */
 public class TaskList {
-    static ArrayList<Task> tasks;
 
+    /** User's list of tasks */
+    protected static ArrayList<Task> tasks;
+
+    /**
+     * Initialises user's list of tasks.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Adds task into user's list of tasks.
+     *
+     * @param task
+     */
     public static void addTask(Task task) {
         tasks.add(task);
         String str = "   ____________________________________________________________"
@@ -24,6 +34,7 @@ public class TaskList {
 
     /**
      * Prints user's list of tasks.
+     *
      * @throws DukeException
      */
     public static void getListOfTasks() throws DukeException {
@@ -47,6 +58,7 @@ public class TaskList {
 
     /**
      * Marks a task as done when user completes it.
+     *
      * @param index
      */
     public static void done(Integer index) {
@@ -59,7 +71,8 @@ public class TaskList {
     }
 
     /**
-     * Delete a task from the list.
+     * Deletes a task from the list.
+     *
      * @param index
      */
     public static void delete(Integer index) {

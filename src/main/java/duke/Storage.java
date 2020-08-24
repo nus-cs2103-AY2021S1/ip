@@ -1,6 +1,10 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +12,8 @@ import java.util.ArrayList;
  */
 public class Storage {
 
-    private final String path; // File path
+    /** File path */
+    private final String path;
 
     /**
      * Initialise storage to a designated general file path
@@ -18,7 +23,8 @@ public class Storage {
     }
 
     /**
-     * Load data from the file to the bot when the bot just started running.
+     * Loads data from the file to the bot when the bot just started running.
+     *
      * @param tasks
      */
     public void load(TaskList tasks) {
@@ -51,7 +57,8 @@ public class Storage {
     }
 
     /**
-     * Save changes of the list to the file when bot stopped running.
+     * Saves changes of the list to the file when bot stopped running.
+     *
      * @param tasks
      */
     public void save(ArrayList<Task> tasks) {

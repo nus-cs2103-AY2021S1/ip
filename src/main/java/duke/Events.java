@@ -8,11 +8,14 @@ import java.time.format.DateTimeFormatter;
  */
 public class Events extends Task {
 
-    protected LocalDate scheduled; // Scheduled event date in LocalDate format
-    protected String date; // Scheduled event date in String format
+    /** Scheduled event date in LocalDate format */
+    protected LocalDate scheduled;
+    /** Scheduled event date in String format */
+    protected String date;
 
     /**
      * Initialises Events using description and scheduled event date.
+     *
      * @param description
      * @param scheduled
      */
@@ -25,6 +28,7 @@ public class Events extends Task {
     /**
      * Initialises Events using description, scheduled event date and isDone.
      * Used when knowledge about isDone is needed, eg. loading existing list from hard disk.
+     *
      * @param description
      * @param scheduled
      * @param isDone
@@ -36,7 +40,8 @@ public class Events extends Task {
     }
 
     /**
-     * Return string format of event.
+     * Returns string format of event.
+     *
      * @return String description of event
      */
     @Override
@@ -45,7 +50,8 @@ public class Events extends Task {
     }
 
     /**
-     * Return string format of event that will be written on a text file.
+     * Returns string format of event that will be written on a text file.
+     *
      * @return String description of event
      */
     @Override
