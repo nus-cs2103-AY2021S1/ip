@@ -1,5 +1,8 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class Duke {
 
@@ -42,32 +45,36 @@ public class Duke {
 
     public static class Deadline extends Task {
 
-        String deadline;
+        LocalDateTime deadline;
 
-        public Deadline(String description, String deadline) {
+        public Deadline(String description, String deadline) throws DateTimeParseException {
             super(description, "D");
-            this.deadline = deadline;
+            this.deadline = LocalDateTime.parse(deadline,
+                    DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
         }
 
         @Override
         public String toString() {
-            return String.format("%s (by: %s)", super.toString(), this.deadline);
+            return String.format("%s (by: %s)", super.toString(),
+                    this.deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")));
         }
 
     }
 
     public static class Event extends Task {
 
-        String time;
+        LocalDateTime time;
 
-        public Event(String description, String time) {
+        public Event(String description, String time) throws DateTimeParseException {
             super(description, "E");
-            this.time = time;
+            this.time = LocalDateTime.parse(time,
+                    DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
         }
 
         @Override
         public String toString() {
-            return String.format("%s (at: %s)", super.toString(), this.time);
+            return String.format("%s (at: %s)", super.toString(),
+                    this.time.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")));
         }
 
     }
@@ -193,13 +200,19 @@ public class Duke {
                         }
                         description.deleteCharAt(description.length() - 1);
                         time.deleteCharAt(time.length() - 1);
-                        task = new Deadline(description.toString(), time.toString());
-                        list.add(task);
-                        System.out.println(line + "\n    Got it. I've added this task:\n        "
-                                + task.toString()
-                                + "\n    You now have " + list.size()
-                                + (list.size() == 1 ? " task" : " tasks")
-                                + " in your list.\n" + line);
+                        try {
+                            task = new Deadline(description.toString(), time.toString());
+                            list.add(task);
+                            System.out.println(line + "\n    Got it. I've added this task:\n        "
+                                    + task.toString()
+                                    + "\n    You now have " + list.size()
+                                    + (list.size() == 1 ? " task" : " tasks")
+                                    + " in your list.");
+                        } catch (DateTimeParseException dtpe) {
+                            System.out.println("    Error: Please use the following format instead:\n"
+                                    + "        dd-MM-yyyy HHmm");
+                        }
+                        System.out.println(line);
                         break;
                     }
                     case "event": {
@@ -224,13 +237,19 @@ public class Duke {
                         }
                         description.deleteCharAt(description.length() - 1);
                         time.deleteCharAt(time.length() - 1);
-                        task = new Event(description.toString(), time.toString());
-                        list.add(task);
-                        System.out.println(line + "\n    Got it. I've added this task:\n        "
-                                + task.toString()
-                                + "\n    You now have " + list.size()
-                                + (list.size() == 1 ? " task" : " tasks")
-                                + " in your list.\n" + line);
+                        try {
+                            task = new Event(description.toString(), time.toString());
+                            list.add(task);
+                            System.out.println(line + "\n    Got it. I've added this task:\n        "
+                                    + task.toString()
+                                    + "\n    You now have " + list.size()
+                                    + (list.size() == 1 ? " task" : " tasks")
+                                    + " in your list.");
+                        } catch (DateTimeParseException dtpe) {
+                            System.out.println("    Error: Please use the following format instead:\n"
+                                    + "        dd-MM-yyyy HHmm");
+                        }
+                        System.out.println(line);
                         break;
                     }
                     default:
