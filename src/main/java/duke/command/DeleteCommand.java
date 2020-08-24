@@ -3,8 +3,17 @@ package duke.command;
 import duke.*;
 import duke.exception.*;
 
+/**
+ * Representing a command to delete task.
+ */
 public class DeleteCommand extends Command {
 
+    /**
+     * Class constructor.
+     * @param command String parsed by Parser object.
+     * @param extra String parsed by Parser object representing
+     *              argument for delete command.
+     */
     public DeleteCommand(String command, String extra) {
         super(command, extra);
     }

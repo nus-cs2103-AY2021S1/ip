@@ -3,8 +3,17 @@ package duke.command;
 import duke.*;
 import duke.exception.*;;
 
+/**
+ * Represents command to mark task as done.
+ */
 public class DoneCommand extends Command {
 
+    /**
+     * Class constructor.
+     * @param command String parsed by Parser object.
+     * @param extra String parsed by Parser object representing
+     *              argument for done command.
+     */
     public DoneCommand(String command, String extra) {
         super(command, extra);
     }

@@ -6,6 +6,9 @@ import duke.exception.DukeException;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Driver class for chat bot.
+ */
 public class Duke {
 
     private final Scanner sc;
@@ -13,6 +16,9 @@ public class Duke {
     private final TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Class constructor.
+     */
     public Duke() {
         sc = new Scanner(System.in);
         storage = new Storage();
@@ -40,6 +46,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Driver method for chat bot.
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke().start();
     }
