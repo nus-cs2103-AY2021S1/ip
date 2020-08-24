@@ -1,5 +1,8 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.io.File;
 
 public class Duke {
 
@@ -88,7 +91,52 @@ public class Duke {
         return toBeRet;
     }
 
+    public static void writeSaveData(File saveData) throws FileNotFoundException, DukeException {
+        Scanner s = new Scanner(saveData);
+
+        while(s.hasNextLine()) {
+            String temp = s.nextLine();
+            String[] curr = temp.split(", ", 6);
+//            System.out.println(Arrays.toString(curr));
+            if (curr[0].equals("T")) {
+                Task newToDo = new ToDo(curr[2]);
+                if (curr[1].equals("1")) {
+                    newToDo.markAsDone();
+                }
+                list.add(newToDo);
+            } else if (curr[0].equals("D")){
+                Task newDeadline = new Deadline(curr[2], curr[3]);
+                if (curr[1].equals("1")) {
+                    newDeadline.markAsDone();
+                }
+                list.add(newDeadline);
+            } else if (curr[0].equals("E"))  {
+                Task newEvent = new Event(curr[2], curr[3]);
+                if (curr[1].equals("1")) {
+                    newEvent.markAsDone();
+                }
+                list.add(newEvent);
+            }
+        }
+    }
+
     public static void main(String[] args) {
+
+        // checking if the data stored exists & writes if exists
+        try {
+            File dir = new File("data");
+            if (dir.exists()) {
+                File saveData = new File("data/Duke.txt");
+                if (saveData.exists()) {
+                    writeSaveData(saveData);
+                }
+            }
+        } catch (FileNotFoundException ex1) {
+            System.out.println(ex1);
+        } catch (DukeException ex2) {
+            System.out.println(ex2);
+        }
+
         Scanner scanner = new Scanner(System.in);
         String nextLine = "";
         // Introduction
