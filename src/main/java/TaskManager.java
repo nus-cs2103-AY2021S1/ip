@@ -44,10 +44,14 @@ class TaskManager {
         
     }
 
-    public void deleteTask(int taskNum) {
-        Task task = tasks.remove(taskNum - 1);
-        System.out.println(String.format("Successfully removed the following task:\n %s", task));
-        System.out.println(String.format("You have a total of %d tasks left", tasks.size()));
-        save();
+    public void deleteTask(int taskNum) throws DukeException {
+        try {
+            Task task = tasks.remove(taskNum - 1);
+            System.out.println(String.format("Successfully removed the following task:\n %s", task));
+            System.out.println(String.format("You have a total of %d tasks left", tasks.size()));
+            save();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("you gave an invalid task number!");
+        }
     }
 }
