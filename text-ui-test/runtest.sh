@@ -14,6 +14,12 @@ then
     rm ACTUAL.TXT
 fi
 
+# delete output from previous run
+if [ -e "./data/" ]
+then
+    rm -r data/
+fi
+
 # compile the code into the bin folder, terminates if error occurred
 if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java
 then

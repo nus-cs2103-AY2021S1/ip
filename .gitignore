@@ -15,6 +15,7 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+text-ui-test/data/
 
 # task list txt and other data
 /data/
