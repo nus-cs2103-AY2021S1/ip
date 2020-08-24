@@ -15,6 +15,10 @@ public abstract class Task implements Serializable, Schedulable {
 
     abstract String getDateLine();
 
+    public boolean hasADate() {
+        return false;
+    };
+
     public String showTask() {
         return this.task;
     }
@@ -54,6 +58,7 @@ public abstract class Task implements Serializable, Schedulable {
     /* ----------------------------------------- Subclasses--------------------------------------------- */
 
     private static class EmptyTask extends Task{
+
         private EmptyTask() {
             super(null);
             super.state = null;
@@ -76,6 +81,7 @@ public abstract class Task implements Serializable, Schedulable {
     }
 
     private static class DoneTask extends Task{
+
         private DoneTask(String nums) {
             super(nums);
             super.state = null;
@@ -99,14 +105,22 @@ public abstract class Task implements Serializable, Schedulable {
 
     private static class Events extends Task {
         private String date;
+        private TaskDate tDate;
+
         private Events(String task, String date) {
             super(task);
             this.date = date;
+            this.tDate = new TaskDate(date);
+        }
+
+        @Override
+        public boolean hasADate() {
+            return true;
         }
 
         @Override
         public String getDateLine() {
-            return this.date;
+            return this.tDate.toString();
         }
 
         @Override
@@ -140,15 +154,22 @@ public abstract class Task implements Serializable, Schedulable {
 
     private static class Deadlines extends Task {
         private String deadline;
+        private TaskDate tDate;
 
         private Deadlines(String task, String deadline) {
             super(task);
             this.deadline = deadline;
+            this.tDate = new TaskDate(deadline);
+        }
+
+        @Override
+        public boolean hasADate() {
+            return true;
         }
 
         @Override
         public String getDateLine() {
-            return this.deadline;
+            return this.tDate.toString();
         }
 
         @Override
