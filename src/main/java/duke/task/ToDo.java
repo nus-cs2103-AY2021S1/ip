@@ -4,7 +4,6 @@ package duke.task;
  * A type of Task that has description only
  */
 public class ToDo extends Task {
-
     /**
      * Constructor for creating ToDo object
      *

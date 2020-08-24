@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Scanner;
+
 import duke.task.Task;
 
 /**
@@ -11,7 +12,8 @@ public class Ui {
      * Shows line divider
      */
     public void showLine() {
-        System.out.println("_____________________________________________________________");
+        System.out.println(
+                "_____________________________________________________________");
     }
 
     /**
@@ -25,7 +27,8 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         showLine();
-        System.out.println("Beep Boop! Hello there!\n" + "What can I do for you?");
+        System.out.println("Beep Boop! Hello there!\n"
+                + "What can I do for you?");
         showLine();
         System.out.println("Welcome back! Here are the tasks in your list:");
         for (Task task : Duke.getTasks().getListOfTasks()) {

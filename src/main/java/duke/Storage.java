@@ -1,11 +1,12 @@
 package duke;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.task.Deadline;
@@ -38,10 +39,12 @@ public class Storage {
             return new ToDo(string.substring(7), status);
         } else if (string.charAt(1) == 'D') {
             int endIndex = string.indexOf("(by:") - 1;
-            return new Deadline(string.substring(7, endIndex), string.substring(endIndex + 6, string.length() - 1), status);
+            return new Deadline(string.substring(7, endIndex),
+                    string.substring(endIndex + 6, string.length() - 1), status);
         } else {
             int endIndex = string.indexOf("(at:") - 1;
-            return new Event(string.substring(7, endIndex), string.substring(endIndex + 6, string.length() - 1), status);
+            return new Event(string.substring(7, endIndex),
+                    string.substring(endIndex + 6, string.length() - 1), status);
         }
     }
 
@@ -77,7 +80,7 @@ public class Storage {
      * @throws IOException if filePath does not exist
      */
     public ArrayList<Task> load() throws IOException {
-        ArrayList<Task> task = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(this.filePath);
         if (!f.exists()) {
             f.createNewFile();
@@ -85,8 +88,8 @@ public class Storage {
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
             String currentTask = s.nextLine();
-            task.add(genTaskFromString(currentTask));
+            tasks.add(genTaskFromString(currentTask));
         }
-        return task;
+        return tasks;
     }
 }

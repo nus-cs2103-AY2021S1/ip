@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -51,7 +50,7 @@ public class Duke {
             String fullCommand = ui.readCommand();
             ui.showLine();
             Parser.parse(fullCommand);
-            isExit = Parser.isExit;
+            isExit = Parser.getExitStatus();
             if (!isExit) {
                 ui.showLine();
             }
