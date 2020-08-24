@@ -1,9 +1,11 @@
 public class Event extends Task{
-    String date;
 
     public Event(String description, String date) {
-        super(description);
-        this.date = date;
+        super(description, date);
+    }
+
+    public String writeToFile() {
+        return "E|" + super.writeToFile();
     }
 
     @Override

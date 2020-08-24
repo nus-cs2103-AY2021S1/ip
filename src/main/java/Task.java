@@ -7,9 +7,11 @@ public class Task {
 
     String description;
     Status status = Status.INCOMPLETE;
+    String date;
 
-    public Task (String description) {
+    public Task (String description, String date) {
         this.description = description;
+        this.date = date;
         this.status = Status.INCOMPLETE;
     }
 
@@ -18,6 +20,12 @@ public class Task {
     }
 
     public boolean isDone() { return this.status == Status.COMPLETED; }
+
+    public String writeToFile() {
+        return (this.status.equals(Status.COMPLETED) ? "1" : "0")
+                + "|" + this.description
+                + (this.date.isBlank() ? "" : ("|" + this.date));
+    }
 
     public String toString() {
         return (this.status == Status.COMPLETED ? "[\u2718]" : "[\u2713]") + this.description;

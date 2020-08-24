@@ -1,4 +1,9 @@
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     private final String border = "----------------------------------------------------------------------------\n";
@@ -62,7 +67,7 @@ public class Duke {
         );
     }
 
-    public void noIndexKeyedError() {
+    public void printNoIndexKeyedError() {
         System.out.println(
             this.border
             + "Master please enter a task number so that I know which to handle.\n"
@@ -110,7 +115,7 @@ public class Duke {
         );
     }
 
-    public void printNoDateinput(String command) {
+    public void printNoDateInput(String command) {
         System.out.println(
             this.border
             + "Master Please enter the date for your " + command + " task.\n"
@@ -128,7 +133,7 @@ public class Duke {
         }
     }
 
-    public void addTaskHadler(String command, String parameters) throws DukeExceptions.IncompleteCommandException {
+    public void addTaskHandler(String command, String parameters) throws DukeExceptions.IncompleteCommandException {
         if (!parameters.isBlank()) {
             Task newTask = this.taskList.addTask(command, parameters);
             this.printAddedNewTask(newTask, this.taskList.getNoTask());
@@ -151,7 +156,20 @@ public class Duke {
         return this.isRunning;
     }
 
-    public void run(commands command, String parameters) {
+    public void updateFile(File taskList) {
+        try {
+            FileWriter updateFile = new FileWriter(taskList.getPath());
+            ArrayList<Task> tasks = this.taskList.getTaskList();
+            for (Task task : tasks) {
+                updateFile.write(task.writeToFile() + "\n");
+            }
+            updateFile.close();
+        } catch (IOException e){
+
+        }
+    }
+
+    public boolean run(commands command, String parameters) {
         if (command == commands.BYE) {
             this.isRunning = false;
         } else if (command == commands.LIST) {
@@ -164,16 +182,18 @@ public class Duke {
             } catch (IndexOutOfBoundsException e) {
                 this.printIndexSizeMismatchError();
             } catch (NumberFormatException e) {
-                this.noIndexKeyedError();
+                this.printNoIndexKeyedError();
             }
+            return true;
         } else if (command == commands.EVENT || command == commands.TODO || command == commands.DEADLINE) {
             try {
-                this.addTaskHadler(command.toString().toLowerCase(), parameters);
+                this.addTaskHandler(command.toString().toLowerCase(), parameters);
             } catch (DukeExceptions.IncompleteCommandException e) {
                 this.printIncompleteCommandError(command.toString().toLowerCase());
             } catch (ArrayIndexOutOfBoundsException e) {
-                this.printNoDateinput(command.toString().toLowerCase());
+                this.printNoDateInput(command.toString().toLowerCase());
             }
+            return true;
         } else if (command == commands.DELETE){
             try {
                 this.deleteTaskHandler(parameters);
@@ -182,9 +202,11 @@ public class Duke {
             } catch (IndexOutOfBoundsException e) {
                 this.printIndexSizeMismatchError();
             } catch (NumberFormatException e) {
-                this.noIndexKeyedError();
+                this.printNoIndexKeyedError();
             }
+            return true;
         }
+        return false;
     }
 
 
@@ -196,15 +218,28 @@ public class Duke {
         String command;
         String parameters;
 
-        while (duke.isRunning()){
-            command = sc.next().toUpperCase();
-            parameters = sc.nextLine().toLowerCase();
-            try {
-                duke.run(Duke.commands.valueOf(command), parameters);
-            } catch (IllegalArgumentException e) {
-                duke.printUnrecognizableCommandError();
+        try {
+            File taskList = new File("./data/data.txt");
+            if (!taskList.exists()) {
+                taskList.getParentFile().mkdir();
+                taskList.createNewFile();
             }
+            while (duke.isRunning()) {
+                boolean hasChange = false;
+                command = sc.next().toUpperCase();
+                parameters = sc.nextLine().toLowerCase();
+                try {
+                    hasChange = duke.run(Duke.commands.valueOf(command), parameters);
+                } catch (IllegalArgumentException e) {
+                    duke.printUnrecognizableCommandError();
+                }
+                if (hasChange) {
+                    duke.updateFile(taskList);
+                }
+            }
+            duke.printFarewell();
+        } catch (IOException e) {
+
         }
-        duke.printFarewell();
     }
 }

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class TaskList {
     ArrayList<Task> taskList = new ArrayList<>();
@@ -47,6 +48,10 @@ public class TaskList {
             }
         }
         return true;
+    }
+
+    public ArrayList getTaskList(){
+        return this.taskList;
     }
 
     public String toString() {

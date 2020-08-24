@@ -1,6 +1,11 @@
 public class Todo extends Task{
+
     public Todo(String description) {
-        super(description);
+        super(description,"");
+    }
+
+    public String writeToFile() {
+        return "T|" + super.writeToFile();
     }
 
     @Override
