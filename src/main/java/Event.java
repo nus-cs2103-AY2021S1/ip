@@ -1,19 +1,14 @@
-public class Event extends Task {
-    private String time;
-    public Event(String description, String time) {
-        super(description);
-        this.time = time;
+public class Event extends TimeTask {
+    public Event(String description, String time) throws DukeException {
+        super(description, time);
     }
+    @Override
     public String getTaskIdentifier() {
         return "E";
     }
-
     @Override
-    public String toString() {
-        return super.toString()
-                + " (at: "
-                + this.time
-                + ")";
+    public String getDateDescriptor() {
+        return "at";
     }
 
     public static void eventCommand(TaskList taskList, String[] args) throws  DukeException {

@@ -2,7 +2,7 @@ public class Todo extends Task{
     public Todo(String description) {
         super(description);
     }
-    protected String getTaskIdentifier(){
+    public String getTaskIdentifier(){
         return "T";
     }
 

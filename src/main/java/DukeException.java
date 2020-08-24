@@ -10,7 +10,9 @@ public class DukeException extends Exception {
         DONE_OUT_OF_RANGE("sir that number is too many for the list sir please\n"
                 + "choose a lower number for the list please sir"),
         DELETE_OUT_OF_RANGE("sir that number is too many for the list sir please\n"
-                + "choose a lower number for the list please sir");
+                + "choose a lower number for the list please sir"),
+        DATE_PARSE_ERROR("sir the date of format is wrong sir please try\n"
+                + "\"yyyy-mm-dd\", eg \"2020-08-24\" sir");
 
         private final String message;
         Errors(String message) {
