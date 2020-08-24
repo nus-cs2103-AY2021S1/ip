@@ -51,6 +51,6 @@ public enum Command {
     }
 
     public DukeException matchError(){
-        return new DukeException(this.matchError);
+        return this.matchError.create();
     }
 }

@@ -22,6 +22,6 @@ public class Parser {
             return;
         }
         // if we are here means no command has matched
-        throw new DukeException(DukeException.Errors.UNKNOWN_COMMAND);
+        throw DukeException.Errors.UNKNOWN_COMMAND.create();
     }
 }

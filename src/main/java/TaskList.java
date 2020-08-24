@@ -40,14 +40,14 @@ public class TaskList {
     public static void deleteCommand(TaskList taskList, String[] args) throws  DukeException {
         int idx = Integer.parseInt(args[0]);
         if(idx > taskList.size())
-            throw new DukeException(DukeException.Errors.DELETE_OUT_OF_RANGE);
+            throw DukeException.Errors.DELETE_OUT_OF_RANGE.create();
         Task selected = taskList.deleteItem(idx-1);
         Util.systemMessage("sir this task has been remove sir:\n  " + selected);
     }
     public static void doneCommand(TaskList taskList, String[] args) throws  DukeException {
         int idx = Integer.parseInt(args[0]);
         if(idx > taskList.size())
-            throw new DukeException(DukeException.Errors.DONE_OUT_OF_RANGE);
+            throw DukeException.Errors.DONE_OUT_OF_RANGE.create();
         Task selected = taskList.markItem(idx-1);
         Util.systemMessage("afternoon sir i have mark this task done sir:\n  " + selected);
     }

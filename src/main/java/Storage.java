@@ -82,7 +82,7 @@ public class Storage {
         try (FileWriter fw = new FileWriter(this.filePath)) {
             this.gsonObject.toJson(taskList, TaskList.class, fw);
         } catch (IOException e) {
-            throw new DukeException(DukeException.Errors.FILE_WRITE_ERROR);
+            throw DukeException.Errors.FILE_WRITE_ERROR.create();
         }
     }
 
@@ -92,7 +92,7 @@ public class Storage {
         try (Reader reader = Files.newBufferedReader(path)) {
             return gsonObject.fromJson(reader, TaskList.class);
         } catch (IOException e) {
-            throw new DukeException(DukeException.Errors.FILE_READ_ERROR);
+            throw DukeException.Errors.FILE_READ_ERROR.create();
         }
     }
 

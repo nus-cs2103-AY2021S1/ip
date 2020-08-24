@@ -10,7 +10,7 @@ public abstract class TimeTask extends Task {
         try {
             this.date = LocalDate.parse(dateString);
         } catch (DateTimeParseException e) {
-            throw new DukeException(DukeException.Errors.DATE_PARSE_ERROR);
+            throw DukeException.Errors.DATE_PARSE_ERROR.create();
         }
     }
 

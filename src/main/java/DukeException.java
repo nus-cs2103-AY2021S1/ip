@@ -24,6 +24,9 @@ public class DukeException extends Exception {
         public String toString() {
             return message;
         }
+        public DukeException create() {
+            return new DukeException(this);
+        }
     }
     public DukeException(Errors error) {
         super(error.toString());
