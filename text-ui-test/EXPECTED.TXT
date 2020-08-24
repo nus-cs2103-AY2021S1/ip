@@ -4,7 +4,7 @@
     ____________________________________________________________
 
     ____________________________________________________________
-    Got it! I have added this todo to the list!
+    Got it! I have added this task to the list!
       [T][✗] borrow book
     Now you have 1 tasks in the list.
     ____________________________________________________________
@@ -19,13 +19,13 @@
     ____________________________________________________________
 
     ____________________________________________________________
-    Got it! I have added this deadline to the list!
+    Got it! I have added this task to the list!
       [D][✗] return book (by: Aug 30 2020 11:59 PM)
     Now you have 2 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
-    Got it! I have added this event to the list!
+    Got it! I have added this task to the list!
       [E][✗] project meeting (at: Sep 1 2020 02:00 PM)
     Now you have 3 tasks in the list.
     ____________________________________________________________

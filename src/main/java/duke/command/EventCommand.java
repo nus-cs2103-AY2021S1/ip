@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.TaskList;
 import duke.Storage;
 import duke.Ui;
@@ -9,10 +10,15 @@ public class EventCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Storage storage, Ui ui) {
-        Event event = ui.getEvent();
-        taskList.addTask(event);
-        ui.addTask(event, taskList);
-        storage.addData(event.store());
+        try {
+            Event event = ui.getEvent();
+            taskList.addTask(event);
+            ui.addTask(event, taskList);
+            storage.addData(event.store());
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        }
+
     }
 
     @Override
