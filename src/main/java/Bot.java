@@ -66,6 +66,10 @@ public class Bot {
             });
 
         this.ui.endLog();
+
+        // save the tasks every time, i suppose.
+        this.tasks.save();
+
         return true;
     }
 
@@ -169,6 +173,7 @@ public class Bot {
     private Optional<Task> parseTaskNumber(String cmd, String input) {
 
         try {
+            // this is some cursed use of optional
             var idx = new Scanner(input).nextInt();
             return Optional.of(this.tasks.getTaskByNumber(idx)
                 .orElseThrow(() -> new IndexOutOfBoundsException("")));
