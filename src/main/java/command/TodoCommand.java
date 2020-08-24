@@ -7,6 +7,8 @@ import exception.DukeException;
 import task.Task;
 import task.TodoTask;
 
+import java.util.Objects;
+
 public class TodoCommand extends Command {
     String todo;
 
@@ -20,6 +22,14 @@ public class TodoCommand extends Command {
     public TodoCommand(String todo) {
         super(CommandType.Todo);
         this.todo = todo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TodoCommand that = (TodoCommand) o;
+        return Objects.equals(todo, that.todo);
     }
 
 }

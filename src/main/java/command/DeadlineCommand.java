@@ -7,6 +7,7 @@ import task.DeadlineTask;
 import task.Task;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class DeadlineCommand extends Command {
     String taskName;
@@ -23,6 +24,15 @@ public class DeadlineCommand extends Command {
         super(CommandType.Deadline);
         this.taskName = taskName;
         this.deadline = deadline;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DeadlineCommand that = (DeadlineCommand) o;
+        return Objects.equals(taskName, that.taskName) &&
+                Objects.equals(deadline, that.deadline);
     }
 
 }
