@@ -1,6 +1,4 @@
-package Tasks;
-
-import Tasks.Task;
+package tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

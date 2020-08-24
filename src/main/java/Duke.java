@@ -1,4 +1,4 @@
-import Utility.*;
+import utility.*;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;

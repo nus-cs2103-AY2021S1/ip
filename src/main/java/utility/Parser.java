@@ -1,7 +1,4 @@
-package Utility;
-
-import Utility.Choice;
-import Utility.DukeException;
+package utility;
 
 import java.util.ArrayList;
 import java.util.Arrays;
