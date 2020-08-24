@@ -1,16 +1,27 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Gel {
-    public static void keepingList() {
+
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
+
+    public Gel (String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        try {
+            taskList = storage.load();
+        } catch (FileNotFoundException e) {
+            taskList = new TaskList();
+        }
+    }
+
+    public void run() {
         // initialise list and scanner
         try {
-            FileManager.checkFileExistence();
-            TaskList taskList = FileManager.readTaskList();
+            storage.checkFileExistence();
             Scanner sc = new Scanner(System.in);
 
             System.out.println("    Hello! I'm Gel\n    What can I do for you?\n");
@@ -23,7 +34,7 @@ public class Gel {
                 try {
                     switch (keyword) {
                     case "bye": { //bye
-                        FileManager.updateFile(taskList);
+                        storage.updateFile(taskList);
                         System.out.println("\n    Bye. Hope to see you again soon!\n");
                         break label;
                     }
@@ -100,5 +111,9 @@ public class Gel {
         } catch (IOException e) {
             System.out.println(e.getLocalizedMessage());
         }
+    }
+
+    public static void main(String[] args) {
+        new Gel("data/tasks.txt").run();
     }
 }

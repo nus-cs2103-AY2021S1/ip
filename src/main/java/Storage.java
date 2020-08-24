@@ -1,12 +1,20 @@
 import java.io.*;
-import java.nio.Buffer;
 import java.util.List;
 import java.util.Scanner;
 
-public class FileManager {
+public class Storage {
 
-    public static void checkFileExistence() throws IOException {
-        File dataDir = new File("data");
+    String filePath;
+    String directoryPath;
+
+    public Storage(String filePath) {
+        int fileIndex = filePath.lastIndexOf("/");
+        this.directoryPath = filePath.substring(0, fileIndex);
+        this.filePath = filePath;
+    }
+
+    public void checkFileExistence() throws IOException {
+        File dataDir = new File(directoryPath);
         if (!dataDir.exists()) {
             boolean bool = dataDir.mkdir();
             if (bool) {
@@ -15,12 +23,12 @@ public class FileManager {
                 System.out.println("Failed to create data directory");
             }
         }
-        File file = new File("data/gel.txt");
+        File file = new File(filePath);
         boolean newFileCreated = file.createNewFile();
     }
 
-    public static void updateFile(TaskList taskList) throws IOException {
-        FileWriter fw = new FileWriter("data/gel.txt");
+    public void updateFile(TaskList taskList) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
         BufferedWriter bw = new BufferedWriter(fw);
         List<Task> listOfTask = taskList.getListOfTask();
         for (Task task : listOfTask) {
@@ -45,8 +53,8 @@ public class FileManager {
         fw.close();
     }
 
-    public static TaskList readTaskList() throws FileNotFoundException {
-        File file = new File("data/gel.txt");
+    public TaskList load() throws FileNotFoundException {
+        File file = new File(filePath);
         Scanner sc = new Scanner(file);
         TaskList taskList = new TaskList();
         while (sc.hasNextLine()) {
