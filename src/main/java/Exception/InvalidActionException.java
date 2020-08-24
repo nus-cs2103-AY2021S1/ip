@@ -5,4 +5,7 @@ public class InvalidActionException extends DukeException {
     public InvalidActionException() {
         super(DESCRIPTION);
     }
+    public InvalidActionException(String message) {
+        super(message);
+    }
 }
