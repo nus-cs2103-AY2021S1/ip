@@ -31,7 +31,7 @@ class Ui {
      * Receives command from user.
      * Handling of "bye" command takes place here, for now.
      *
-     * @param s
+     * @param s command given by user
      * @return -1 indicating failure, 0 indicating end of program, 1 indicating program is running
      */
     public int takeCommand(String s) {
