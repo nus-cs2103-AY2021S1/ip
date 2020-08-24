@@ -1,4 +1,11 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URI;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.IllegalFormatException;
 import java.util.Scanner;
 
 public class Duke {
@@ -23,20 +30,22 @@ public class Duke {
     private static DukeCommand getDukeCommand(String input) {
         // convert string command to command action
         switch (input) {
-            case LIST_COMMAND:
-                return DukeCommand.LIST;
-            case DELETE_TASK:
-                return DukeCommand.DELETE;
-            case DONE_COMMAND:
-                return DukeCommand.DONE;
-            case ADD_TODO:
-                return DukeCommand.ADD_TODO;
-            case ADD_EVENT:
-                return DukeCommand.ADD_EVENT;
-            case ADD_DEADLINE:
-                return DukeCommand.ADD_DEADLINE;
-            default:
-                return DukeCommand.UNKNOWN;
+        case LIST_COMMAND:
+            return DukeCommand.LIST;
+        case DELETE_TASK:
+            return DukeCommand.DELETE;
+        case DONE_COMMAND:
+            return DukeCommand.DONE;
+        case ADD_TODO:
+            return DukeCommand.ADD_TODO;
+        case ADD_EVENT:
+            return DukeCommand.ADD_EVENT;
+        case ADD_DEADLINE:
+            return DukeCommand.ADD_DEADLINE;
+        case EXIT_COMMAND:
+            return DukeCommand.EXIT;
+        default:
+            return DukeCommand.UNKNOWN;
         }
     }
 
@@ -58,26 +67,34 @@ public class Duke {
         DukeCommand command = getDukeCommand(commandInput.toString());
         try {
             switch (command) {
-                case LIST:
-                    listTasks();
-                    break;
-                case DONE:
-                    completeTask(args);
-                    break;
-                case ADD_TODO:
-                    addTodo(args);
-                    break;
-                case ADD_EVENT:
-                    addEvent(args);
-                    break;
-                case ADD_DEADLINE:
-                    addDeadline(args);
-                    break;
-                case DELETE:
-                    deleteTask(args);
-                    break;
-                default:
-                    throw new DukeUnknownCommandException(ERROR_MESSAGE + "\nWas the command valid?");
+            case LIST:
+                listTasks();
+                break;
+            case DONE:
+                completeTask(args);
+                writeFile();
+                break;
+            case ADD_TODO:
+                addTodo(args);
+                writeFile();
+                break;
+            case ADD_EVENT:
+                addEvent(args);
+                writeFile();
+                break;
+            case ADD_DEADLINE:
+                addDeadline(args);
+                writeFile();
+                break;
+            case DELETE:
+                deleteTask(args);
+                writeFile();
+                break;
+            case EXIT:
+                exitDuke();
+                break;
+            default:
+                throw new DukeUnknownCommandException(ERROR_MESSAGE + "\nWas the command valid?");
             }
         } catch (DukeUnknownCommandException | DukeIncompleteCommandException | DukeInvalidArgumentException e) {
             printWithDivider(e.getMessage());
@@ -147,20 +164,95 @@ public class Duke {
         }
     }
 
+    private static boolean hasExited = false;
+
+    private static void exitDuke() {
+        writeFile();
+        printWithDivider(EXIT_MESSAGE);
+        hasExited = true;
+    }
+
+    private static String DIR_PATH = "./data/";
+    private static String FILE_PATH = DIR_PATH + "taskList.txt";
+
+    private static void readFile() {
+        Path path = Path.of(FILE_PATH);
+        URI uri = path.toUri();
+        File file = new File(uri);
+
+        if (file.exists()) {
+            try {
+                Scanner reader = new Scanner(file);
+                while (reader.hasNextLine()) {
+                    String line = reader.nextLine();
+                    String[] lineList = line.split(" \\| ");
+                    if (lineList.length == 3 && lineList[0].equals(Todo.STORE_TODO)) {
+                        boolean isComplete = lineList[2].equals(Task.STORE_COMPLETED);
+                        Todo todo = new Todo(lineList[1], isComplete);
+                        taskList.add(todo);
+                    } else if (lineList.length == 4
+                            && (lineList[0].equals(Deadline.STORE_DEADLINE)
+                            || lineList[0].equals(Event.STORE_EVENT))) {
+                        boolean isComplete = lineList[3].equals(Task.STORE_COMPLETED);
+                        switch (lineList[0]) {
+                        case Event.STORE_EVENT:
+                            Event event = new Event(lineList[1], lineList[2], isComplete);
+                            taskList.add(event);
+                            break;
+                        case Deadline.STORE_DEADLINE:
+                            Deadline deadline = new Deadline(lineList[1], lineList[2], isComplete);
+                            taskList.add(deadline);
+                            break;
+                        }
+                    } else {
+                        throw new IllegalStateException();
+                    }
+                }
+            } catch (FileNotFoundException ignored) {
+            } catch (IllegalStateException e) {
+                printWithDivider(ERROR_MESSAGE + "\nThe file has been corrupted.");
+            }
+        }
+    }
+
+    private static void writeFile() {
+        URI uri = Path.of(FILE_PATH).toUri();
+        File file = new File(uri);
+
+        try {
+            if (!file.exists()) {
+                URI dirUri = Path.of(DIR_PATH).toUri();
+                File dirFile = new File(dirUri);
+                if (!dirFile.exists()) {
+                    dirFile.mkdir();
+                }
+
+                file.createNewFile();
+            }
+
+            FileWriter writer = new FileWriter(file);
+            for (int i = 0; i < taskList.size(); i++) {
+                writer.write(taskList.get(i).toStorageString());
+                if (i != taskList.size() - 1) {
+                    writer.write("\n");
+                }
+            }
+            writer.close();
+        } catch (IOException ignored) {
+        }
+    }
+
+
     private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         printWithDivider(HELLO_MESSAGE);
-        while (true) {
+        readFile();
+
+        while (!hasExited) {
             String input = sc.nextLine();
-            if (input.equals(EXIT_COMMAND)) {
-                printWithDivider(EXIT_MESSAGE);
-                break;
-            } else {
-                processInput(input);
-            }
+            processInput(input);
         }
 
         sc.close();
