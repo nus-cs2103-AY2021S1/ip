@@ -5,9 +5,9 @@ public class Deadline extends Task {
     private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private final LocalDate deadline;
 
-    public Deadline(String description, boolean isDone) {
-        super(description.split(" /by ")[0], false);
-        this.deadline = LocalDate.parse(description.split(" /by ")[1]);
+    public Deadline(String description, LocalDate deadline, boolean isDone) {
+        super(description, isDone);
+        this.deadline = deadline;
     }
 
     @Override

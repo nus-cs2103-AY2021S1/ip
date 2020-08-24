@@ -1,5 +1,5 @@
+import java.time.LocalDate;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 enum actionType {
     QUIT,
@@ -54,6 +54,7 @@ public class Duke {
             while (true) {
                 next = sc.nextLine();
                 actionType action = getAction(next);
+                System.out.println(action);
                 switch (action) {
                 case QUIT:
                     ui.goodbye();
@@ -101,7 +102,10 @@ public class Duke {
                     if (next.length() < 7) {
                         throw new DukeException("Event cannot be empty _(´ཀ`」 ∠)_");
                     } else {
-                        Task newEvent = new Event(next.substring(6), false);
+                        String[] split = next.substring(6).split(" /at ");
+                        String eventDesc = split[0];
+                        LocalDate eventTime = LocalDate.parse(split[1]);
+                        Task newEvent = new Event(eventDesc, eventTime, false);
                         tasks.getList().add(newEvent);
                         storage.updateFile(tasks);
                         System.out.println("Added: " + newEvent.toString());
@@ -112,7 +116,10 @@ public class Duke {
                     if (next.length() < 10) {
                         throw new DukeException("Deadline cannot be empty _(´ཀ`」 ∠)_");
                     } else {
-                        Task newDeadline = new Deadline(next.substring(9), false);
+                        String[] split = next.substring(9).split(" /by ");
+                        String deadlineDesc = split[0];
+                        LocalDate deadline = LocalDate.parse(split[1]);
+                        Task newDeadline = new Deadline(deadlineDesc, deadline, false);
                         tasks.getList().add(newDeadline);
                         storage.updateFile(tasks);
                         System.out.println("Added: " + newDeadline.toString());

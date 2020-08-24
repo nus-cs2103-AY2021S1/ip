@@ -5,9 +5,9 @@ public class Event extends Task {
     private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private final LocalDate eventTime;
 
-    public Event(String description, boolean isDone) {
-        super(description.split(" /at ")[0], false);
-        this.eventTime = LocalDate.parse(description.split(" /at ")[1]);
+    public Event(String description, LocalDate eventTime, boolean isDone) {
+        super(description, isDone);
+        this.eventTime = eventTime;
     }
 
     @Override
