@@ -1,19 +1,26 @@
 package duke;
 
-import duke.TaskList;
-
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Storage class will save changes made to the task list and load user's existing tasks when ran.
+ */
 public class Storage {
 
-    private final String path;
+    private final String path; // File path
 
+    /**
+     * Initialise storage to a designated general file path
+     */
     public Storage() {
         this.path = "data/listOfTasks.txt";
     }
 
-
+    /**
+     * Load data from the file to the bot when the bot just started running.
+     * @param tasks
+     */
     public void load(TaskList tasks) {
         try {
             File file = new File(this.path);
@@ -43,6 +50,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Save changes of the list to the file when bot stopped running.
+     * @param tasks
+     */
     public void save(ArrayList<Task> tasks) {
         try {
             File file = new File(this.path);

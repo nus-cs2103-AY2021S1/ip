@@ -1,11 +1,16 @@
 package duke;
 
-import duke.CommandHandler;
-import duke.TaskList;
-
 import java.util.Scanner;
 
+/**
+ * Parser class will take in user's inputs and make sense of it.
+ */
 public class Parser {
+    /**
+     * Interprets the command type from user's input and calls CommandHandler to process the commands.
+     * @param tasks
+     * @throws DukeException
+     */
     public static void parse(TaskList tasks) throws DukeException {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
