@@ -11,7 +11,7 @@ public class Storage {
 
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
-        tasks = DukeFileReader.readStorageTasks(filepath);
+
         return tasks;
     }
 }

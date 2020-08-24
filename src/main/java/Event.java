@@ -1,14 +1,16 @@
+import java.time.LocalDateTime;
+
 // a task that need to specify exact date and time
 public class Event extends Task {
 
-    protected String at;
+    protected LocalDateTime at;
 
-    public Event(String description, String at) {
+    public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
     }
 
-    public Event(Boolean isDone, String description, String at) {
+    public Event(Boolean isDone, String description, LocalDateTime at) {
         super(isDone, description);
         this.at = at;
     }
