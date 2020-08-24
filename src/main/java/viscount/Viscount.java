@@ -5,7 +5,7 @@ import viscount.exception.ViscountException;
 import viscount.exception.ViscountIOException;
 
 public class Viscount {
-    private static final String DATA_FILE_PATH = System.getProperty("user.dir") + "/data/viscount.txt";
+    private static final String DATA_DIRECTORY_PATH = System.getProperty("user.dir") + "/data/";
     
     private Storage storage;
     private TaskList tasks;
@@ -47,7 +47,8 @@ public class Viscount {
     }
 
     public static void main(String[] args) {
-        Viscount viscount = new Viscount(DATA_FILE_PATH);
+        System.out.println(System.getProperty("user.dir"));
+        Viscount viscount = new Viscount(DATA_DIRECTORY_PATH);
         if (viscount.shouldRun) {
             viscount.run();
         } else {

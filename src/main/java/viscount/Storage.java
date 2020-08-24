@@ -20,11 +20,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
+    private static final String DATA_FILE_NAME = "viscount.txt";
     
+    private String dataDirectoryPath;
     private String filePathString;
     
-    public Storage(String filePathString) {
-        this.filePathString = filePathString;
+    public Storage(String dataDirectoryPath) {
+        this.dataDirectoryPath = dataDirectoryPath;
+        this.filePathString = dataDirectoryPath + DATA_FILE_NAME;
     }
 
     public void saveToDisk(List<Task> tasks) throws ViscountIOException {
@@ -43,6 +46,12 @@ public class Storage {
     }
 
     public List<Task> loadFromDisk() throws ViscountIOException {
+        File directory = new File(dataDirectoryPath);
+        
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        
         Path filePath = Paths.get(filePathString);
         boolean doesFileExist = Files.exists(filePath);
         List<Task> tasks = new ArrayList<>();
