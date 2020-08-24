@@ -1,6 +1,9 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -61,6 +64,7 @@ public class Duke {
         WRONG_TYPE,
         UNRECOGNIZED,
         DIRECTORY_NOT_FOUND,
+        WRONG_TIME_FORMAT,
     }
     
     private enum Commands {
@@ -154,6 +158,10 @@ public class Duke {
             message = " I cannot find the directory :( \n" +
                     " Terminating Hotline... \n";
             break;
+        case WRONG_TIME_FORMAT:
+            message = " I cannot recognize the date you put in :( \n" +
+                    " Terminating Hotline... \n";
+            break;
         default:
             message = " Command not recognized :( \n" +
                     " Terminating Hotline... \n";
@@ -174,20 +182,22 @@ public class Duke {
                 String type = inputs[0];
                 boolean isDone = inputs[1].equals("1");
                 String description = inputs[2];
-                String time;
+                LocalDate time;
                 if (type.equals("T")) {
                     tasks.add(new ToDo(description, isDone));
                 } else if (type.equals(("D"))) {
-                    time = inputs[3];
+                    time = LocalDate.parse(inputs[3]);
                     tasks.add(new Deadline(description, isDone, time));
                 } else if (type.equals("E")) {
-                    time = inputs[3];
+                    time = LocalDate.parse(inputs[3]);
                     tasks.add(new Event(description, isDone, time));
                 }
                 taskCount += 1;
             }
         } catch (IOException error) {
             generateException(Errors.DIRECTORY_NOT_FOUND);
+        } catch (DateTimeParseException error) {
+            generateException(Errors.WRONG_TIME_FORMAT);
         }
     }
     
@@ -253,7 +263,7 @@ public class Duke {
                     }
                     String description;
                     String[] content;
-                    String time;
+                    LocalDate time;
                     switch (command) {
                     case TODO:
                         description = input.substring(5);
@@ -267,7 +277,7 @@ public class Duke {
                             generateException(Errors.UNDEFINED_DEADLINE_TIME);
                         }
                         description = content[0];
-                        time = content[1];
+                        time = LocalDate.parse(content[1]);
                         tasks.add(new Deadline(description, false, time));
                         taskCount += 1;
                         describe(taskCount - 1);
@@ -278,7 +288,7 @@ public class Duke {
                             generateException(Errors.UNDEFINED_EVENT_TIME);
                         }
                         description = content[0];
-                        time = content[1];
+                        time = LocalDate.parse(content[1]);
                         tasks.add(new Event(description, false, time));
                         taskCount += 1;
                         describe(taskCount - 1);
@@ -295,6 +305,8 @@ public class Duke {
             }
         } catch(IllegalArgumentException error) { 
             generateException(Errors.UNRECOGNIZED);
+        } catch(DateTimeParseException error) {
+            generateException(Errors.WRONG_TIME_FORMAT);
         }
     }
 
