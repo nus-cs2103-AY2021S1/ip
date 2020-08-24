@@ -1,14 +1,16 @@
 public class Duke {
-    private static TaskList list;
-    private static Storage storage;
+    private TaskList list;
+    private Storage storage;
+    private Ui ui;
 
-    public static void main(String[] args) {
-        Ui.printGreeting();
-
-        storage = new Storage(".//data//duke.data");
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
         list = storage.loadFile();
+    }
 
-        Ui ui = new Ui();
+    private void run() {
+        Ui.printGreeting();
 
         String input = ui.getInput();
         Command command = Parser.parse(input);
@@ -20,7 +22,10 @@ public class Duke {
         }
 
         storage.saveFile(list);
-
         Ui.printGoodbye();
+    }
+
+    public static void main(String[] args) {
+        new Duke(".//data//duke.data").run();
     }
 }
