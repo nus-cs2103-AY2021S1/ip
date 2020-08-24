@@ -40,13 +40,25 @@ public class TaskList {
             + " sir";
     }
 
-    @Override
-    public String toString() {
+    /**
+     * Formats a List of Tasks into a human readable list.
+     * Ignore null indices. This is used for the find command.
+     * @param items List of items to print.
+     * @return formatted String.
+     */
+    public static String enumerateItems(List<Task> items) {
         StringBuilder numberedItems = new StringBuilder();
-        for (int i = 0; i < this.items.size(); i++) {
-            numberedItems.append(i + 1).append(". ").append(this.items.get(i)).append("\n");
+        for (int i = 0; i < items.size(); i++) {
+            Task item = items.get(i);
+            if (item != null) {
+                numberedItems.append(i + 1).append(". ").append(item).append("\n");
+            }
         }
         return numberedItems.toString();
+    }
+
+    public String toString() {
+        return enumerateItems(this.items);
     }
 
     /**

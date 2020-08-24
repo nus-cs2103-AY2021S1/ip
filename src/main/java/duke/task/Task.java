@@ -32,6 +32,14 @@ public abstract class Task {
             + this.description;
     }
 
+    /**
+     * Getter function for description.
+     * @return String description.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
     private String squareBox(String str) {
         return "[" + str + "]";
     }
