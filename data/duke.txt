@@ -1,6 +1,2 @@
-D | 1 | ddd | friday
-D | 1 | ddd | friday
-D | 0 | asjdhavsda | today
-D | 0 | ass | now
-D | 1 | do this | tmr
-E | 0 | blah | friday
+T | 1 | hello
+E | 1 | meet him | monday

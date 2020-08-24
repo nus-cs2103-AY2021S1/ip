@@ -36,14 +36,6 @@ public class Duke {
         }
     }
 
-//    public static void saveTaskList(String filePath) throws FileNotFoundException {
-//        File f = new File(filePath);
-//        Scanner fileScanner = new Scanner(f);
-//        while (fileScanner.hasNext()) {
-//            System.out.println(fileScanner.nextLine());
-//        }
-//    }
-
     // Adds text in file to tasks in an ArrayList
     public static void addFileContentsToArrayList(String filePath, ArrayList<Task> tasks) throws FileNotFoundException {
         File f = new File(filePath);
@@ -54,20 +46,11 @@ public class Duke {
         }
     }
 
-
     private static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
-
-//    private static void appendToFile(String filePath, String textToAppend) throws IOException {
-//        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
-//        fw.write(textToAppend);
-//        fw.close();
-//    }
-
-
 
 
     public static void main(String[] args) {
@@ -105,7 +88,6 @@ public class Duke {
         while (sc.hasNext()) {
             str = sc.next();
             Task t = new Task(str);
-
             if (str.isBlank()) {
                 // no user input, does not register as an entry
             } else {
@@ -136,6 +118,7 @@ public class Duke {
                         }
 
                         System.out.println("    " + toPrint);
+
                     }
 
                 } else if (t.isTodo()) {
@@ -146,12 +129,9 @@ public class Duke {
                         System.out.println("    Got it. I've added this task:\n"
                                             + "        " + todo + '\n'
                                             + "    Now you have " + tasks.size() + " tasks in the list.");
-
-
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
-
                 } else if (t.isDeadline()) {
                     try {
                         t.validate();
@@ -164,7 +144,6 @@ public class Duke {
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
-
                 } else if (t.isEvent()) {
                     try {
                         t.validate();
@@ -177,13 +156,11 @@ public class Duke {
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
-
                 } else if (t.getFirstWord().equals("done")) {
                     int taskNumber = t.getNumber();
                     tasks.get(taskNumber - 1).markAsDone();
                     System.out.println("    Nice! I've marked this task as done:\n"
                                         + "        " + tasks.get(taskNumber - 1));
-
                 } else if (str.equals("bye")) {
 
                     System.out.println("    Bye. Hope to see you again soon!\n"
@@ -217,6 +194,7 @@ public class Duke {
         } catch (IOException e) {
             System.out.println("Oops, something went wrong: " + e.getMessage());
         }
+
 
     }
 }
