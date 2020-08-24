@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,9 +22,9 @@ public class Duke {
                 if (details[0].equals("T")) {
                     list.add(new ToDo(details[2]));
                 } else if (details[0].equals("D")) {
-                    list.add(new Deadline(details[2], details[3]));
+                    list.add(new Deadline(details[2], LocalDate.parse(details[3])));
                 } else {
-                    list.add(new Event(details[2], details[3]));
+                    list.add(new Event(details[2], LocalDate.parse(details[3])));
                 }
                 if (details[1].equals("1")) {
                     list.get(list.size() - 1).done();
@@ -44,10 +45,10 @@ public class Duke {
                 details[0] = "T";
             } else if (task instanceof Deadline) {
                 details[0] = "D";
-                details[3] = ((Deadline) task).by;
+                details[3] = ((Deadline) task).by.toString();
             } else {
                 details[0] = "E";
-                details[3] = ((Event) task).duration;
+                details[3] = ((Event) task).duration.toString();
             }
             if (task.isDone) {
                 details[1] = "1";
@@ -132,7 +133,7 @@ public class Duke {
                 throw new DukeException("Please use the format: deadline (name) /by (when)");
             }
             String name = split[0];
-            String by = split[1];
+            LocalDate by = LocalDate.parse(split[1]);
             task = new Deadline(name, by);
         } else if (input.startsWith("event ") || input.equals("event")) {
             if (input.length() < 7 || input.substring(6).trim().isEmpty()) {
@@ -144,7 +145,7 @@ public class Duke {
                 throw new DukeException("Please use the format: event (name) /at (what time)");
             }
             String name = split[0];
-            String duration = split[1];
+            LocalDate duration = LocalDate.parse(split[1]);
             task = new Event(name, duration);
         } else {
             System.out.println("I'm sorry, but I don't know what that means.");
