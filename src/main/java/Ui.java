@@ -1,9 +1,7 @@
-import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
 
-    private final String SEPARATOR = "   --------------------------------------------------------------\n";
     private final Scanner scanner;
 
     protected Ui() {
@@ -15,9 +13,10 @@ public class Ui {
     }
 
     protected void printMsg(String msg) {
-        System.out.print(SEPARATOR);
+        String separator = "   --------------------------------------------------------------\n";
+        System.out.print(separator);
         System.out.printf("    %s\n", msg);
-        System.out.println(SEPARATOR);
+        System.out.println(separator);
     }
 
     protected void greetings() {
