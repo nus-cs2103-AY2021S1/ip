@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class DukeIOException extends DukeException {
-	DukeIOException(String error) {
+	public DukeIOException(String error) {
 		super(error);
 	}
 }

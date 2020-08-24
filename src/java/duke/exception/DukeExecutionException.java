@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class DukeExecutionException extends DukeException {
-	DukeExecutionException(String error) {
+	public DukeExecutionException(String error) {
 		super(error);
 	}
 }

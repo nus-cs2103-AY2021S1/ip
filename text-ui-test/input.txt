@@ -1,7 +1,7 @@
 list
-todo Todo
-deadline Deadline /by deadline
-event Event /at event
+todo duke.task.Todo
+deadline duke.task.Deadline /by deadline
+event duke.task.Event /at event
 list
 done 1
 list

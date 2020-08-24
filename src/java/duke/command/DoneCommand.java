@@ -1,11 +1,19 @@
-public class DeleteCommand extends Command {
+package duke.command;
+
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.exception.DukeArgumentException;
+import duke.exception.DukeExecutionException;
+import duke.exception.DukeIOException;
+
+public class DoneCommand extends Command {
 
 	int index;
 
-	DeleteCommand(String args) throws DukeArgumentException {
+	public DoneCommand(String args) throws DukeArgumentException {
 		try {
 			int index = Integer.parseInt(args);
-			this.index = index;
+			this.index = index - 1;
 		} catch (NumberFormatException ne) {
 			throw new DukeArgumentException("Invalid index");
 		}
@@ -17,9 +25,9 @@ public class DeleteCommand extends Command {
 	}
 
 	@Override
-	void execute(Storage storage) throws DukeExecutionException {
+	public void execute(Storage storage) throws DukeExecutionException {
 		try {
-			Ui.showTaskDeletion(storage.delete(index));
+			Ui.showTaskCompletion(storage.complete(index));
 		} catch (IndexOutOfBoundsException e) {
 			throw new DukeExecutionException(String.format("Could not execute command due to the index %d being out " +
 					"of range", index));

@@ -1,3 +1,14 @@
+package duke.parser;
+
+import duke.command.*;
+import duke.exception.DukeArgumentException;
+import duke.exception.DukeException;
+import duke.exception.DukeIOException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -16,15 +27,15 @@ public final class Parser {
 	private final static String DEADLINE = "deadline";
 
 	/**
-	 * Reads a String and splits it to create a new Task based on its type and values.
+	 * Reads a String and splits it to create a new duke.Tasks.Task based on its type and values.
 	 * Format: Type | Completed | Name | Time
-	 * Example: "[D],, 1,, Deadline,, 23-08-2020"
+	 * Example: "[D],, 1,, duke.Tasks.Deadline,, 23-08-2020"
 	 *
 	 * @param line the String from the csv to be parsed
-	 * @return A Task object
+	 * @return A duke.Tasks.Task object
 	 * @throws DukeException if the line does not follow the given regex.
 	 */
-	static Task parseLine(String line) throws DukeIOException {
+	public static Task parseLine(String line) throws DukeIOException {
 		String[] values = line.split(regex);
 		switch (values[0]) {
 		case "[T]":
@@ -39,7 +50,7 @@ public final class Parser {
 		}
 	}
 
-	static String convertTask(Task task) {
+	public static String convertTask(Task task) {
 		String[] args = task.toArray();
 		String result = "";
 		for (String s : args) {
@@ -48,7 +59,7 @@ public final class Parser {
 		return result + "\n";
 	}
 
-	static Command parseCommand(String text) throws DukeArgumentException {
+	public static Command parseCommand(String text) throws DukeArgumentException {
 		String[] parsedInput = text.split(" ", 2);
 		switch (parsedInput[0].toLowerCase()) {
 		case BYE:
@@ -66,7 +77,7 @@ public final class Parser {
 		case DEADLINE:
 			return new DeadlineCommand(parsedInput[1]);
 		default:
-			throw new DukeArgumentException("Command did not match any known commands");
+			throw new DukeArgumentException("duke.commands.Command did not match any known commands");
 		}
 	}
 

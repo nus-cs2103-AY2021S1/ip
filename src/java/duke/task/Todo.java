@@ -1,10 +1,12 @@
+package duke.task;
+
 public class Todo extends Task {
 
-	Todo(String name) {
+	public Todo(String name) {
 		super(name);
 	}
 
-	Todo(String name, String completed) {
+	public Todo(String name, String completed) {
 		super(name, completed);
 	}
 

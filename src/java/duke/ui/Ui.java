@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.task.Task;
+
 /**
  * Utility class containing String formatting and printing
  */
@@ -23,7 +27,7 @@ public final class Ui {
 	 */
 	public static void wrapText(String text) {
 		printStartLine();
-		System.out.println(text);
+		System.out.println(text.trim());
 		printEndLine();
 	}
 

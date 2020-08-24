@@ -1,7 +1,11 @@
+package duke.command;
+
+import duke.storage.Storage;
+
 public class ExitCommand extends Command {
 
 	@Override
-	void execute(Storage storage) {
+	public void execute(Storage storage) {
 		// Do nothing.
 	}
 

@@ -1,3 +1,9 @@
+package duke.storage;
+
+import duke.exception.DukeIOException;
+import duke.parser.Parser;
+import duke.task.Task;
+
 import java.io.*;
 
 
@@ -7,7 +13,7 @@ public class Storage {
 	TaskList tasks;
 
 	/**
-	 * Constructor for a Storage object.
+	 * Constructor for a duke.storage.Storage object.
 	 *
 	 * @param path The path to read/write the file to
 	 * @throws IOException if it is unable to create the file or if an IO error occurs
@@ -24,7 +30,7 @@ public class Storage {
 				tasks.add(Parser.parseLine(line));
 			}
 		} catch (IOException ie) {
-			throw new DukeIOException("Could not create Storage object due to IO error.");
+			throw new DukeIOException("Could not create duke.storage.Storage object due to IO error.");
 		}
 	}
 

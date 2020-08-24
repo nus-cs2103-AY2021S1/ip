@@ -1,10 +1,17 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.exception.DukeExecutionException;
+import duke.task.Todo;
+
 import java.io.IOException;
 
 public class TodoCommand extends Command {
 
 	Todo todo;
 
-	TodoCommand(String name) {
+	public TodoCommand(String name) {
 		this.todo = new Todo(name);
 	}
 
@@ -14,7 +21,7 @@ public class TodoCommand extends Command {
 	}
 
 	@Override
-	void execute(Storage storage) throws DukeExecutionException {
+	public void execute(Storage storage) throws DukeExecutionException {
 		try {
 			storage.add(todo);
 			Ui.showTaskAddition(todo);
