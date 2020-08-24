@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class TaskList implements Serializable {
-    protected ArrayList<Task> list;
+    protected ArrayList<Task> tasks;
 
-    public TaskList(ArrayList<Task> list) {
-        this.list = list;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public TaskList() {
@@ -16,25 +16,25 @@ public class TaskList implements Serializable {
     }
 
     public void add(Task task) {
-        list.add(task);
+        tasks.add(task);
     }
 
     public Task markTaskAsDone(int index) {
-        Task task = list.get(index);
+        Task task = tasks.get(index);
         task.setDone(true);
         return task;
     }
 
     public Task get(int index) {
-        return list.get(index);
+        return tasks.get(index);
     }
 
     public Task remove(int index) {
-        return list.remove(index);
+        return tasks.remove(index);
     }
 
     public int size() {
-        return list.size();
+        return tasks.size();
     }
 
     public boolean isEmpty() {
@@ -50,11 +50,11 @@ public class TaskList implements Serializable {
             return false;
         }
         TaskList taskList = (TaskList) o;
-        return Objects.equals(list, taskList.list);
+        return Objects.equals(tasks, taskList.tasks);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(list);
+        return Objects.hash(tasks);
     }
 }

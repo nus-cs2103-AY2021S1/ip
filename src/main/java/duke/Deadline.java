@@ -9,7 +9,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, LocalDate date) {
         super(description);
-        this.by = date;
+        by = date;
     }
 
     @Override
