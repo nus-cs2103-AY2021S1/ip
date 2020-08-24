@@ -5,10 +5,16 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Gets input from user and passes information to user.
+ */
 public class Ui {
     public static String greeting = "Hello, I'm Duke, your personal assistant. \n What can I do for you?";
     public static String home = System.getProperty("user.home");//home = C:/Users/david
 
+    /**
+     * Greets with user.
+     */
     public void greeting() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -19,6 +25,10 @@ public class Ui {
         System.out.println(greeting);
     }
 
+    /**
+     * Interacts with user.
+     * @throws IOException
+     */
     public void run() throws IOException {
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {

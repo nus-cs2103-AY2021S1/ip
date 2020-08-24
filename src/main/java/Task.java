@@ -1,3 +1,6 @@
+/**
+ * Represents a task.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -14,10 +17,18 @@ public class Task {
         this.type = type;
     }
 
+    /**
+     * Tells whether the task is done.
+     *
+     * @return An icon, either a tick or a cross, representing whether the task is done.
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Changes the status of the task to done.
+     */
     public void done() {
         this.isDone = true;
         int indexOf0 = unparseMessage.indexOf('0');

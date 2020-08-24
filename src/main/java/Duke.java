@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents a Duke assistant.
+ * @author davidsqf
+ *
+ */
 public class Duke {
     public Storage storage;
     public TaskList tasks;
@@ -23,6 +28,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Initiates the whole process.
+     * @throws IOException
+     */
     public void run() throws IOException {
         ui.greeting();
         ui.run();

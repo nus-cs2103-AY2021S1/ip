@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Handles all issues related to File.txt.
+ */
 public class Storage {
     public static String filePath;
     public static File f;
@@ -15,6 +18,13 @@ public class Storage {
         this.f = new File(filePath);
     }
 
+    /**
+     * Loads the information written on File.txt.
+     *
+     * @param f File.txt.
+     * @return A list of tasks loaded from the file.
+     * @throws FileNotFoundException
+     */
     public static List<Task> load(File f) throws FileNotFoundException {
         List<Task> temp = new ArrayList<>();
         Scanner scFile = new Scanner(f);
@@ -44,8 +54,8 @@ public class Storage {
         boolean done;
         String description;
         String due;
-        int i = data.charAt(1);
-        if (i == 1) {
+        char i = data.charAt(1);
+        if (i == '1') {
             done = true;
         } else {
             done = false;
@@ -54,7 +64,7 @@ public class Storage {
         description = data.substring(2, indexOfComma);
         due = data.substring(indexOfComma+1);
         LocalDate ddl = LocalDate.parse(due);
-        return new Deadline(done, description, ddl);
+        return new Deadline(done,description, ddl);
     }
 
     private static Task parseEvent(String data) {
@@ -62,8 +72,8 @@ public class Storage {
         boolean done;
         String description;
         String due;
-        int i = data.charAt(1);
-        if (i == 1) {
+        char i = data.charAt(1);
+        if (i == '1') {
             done = true;
         } else {
             done = false;
@@ -80,8 +90,8 @@ public class Storage {
         boolean done;
         String description;
         String due;
-        int i = data.charAt(1);
-        if (i == 1) {
+        char i = data.charAt(1);
+        if (i == '1') {
             done = true;
         } else {
             done = false;
@@ -90,6 +100,12 @@ public class Storage {
         return new Todo(done, description);
     }
 
+    /**
+     * Writes tasks in the tasklist onto the file.
+     *
+     * @param list The tasklist temporarily storing all tasks.
+     * @throws IOException
+     */
     public static void writeData(List<Task> list) throws IOException {
         f.deleteOnExit();//delete the old file
         File file = new File(filePath);

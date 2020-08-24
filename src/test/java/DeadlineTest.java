@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
-
+/**
+ * Tests method in Deadline.
+ */
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
