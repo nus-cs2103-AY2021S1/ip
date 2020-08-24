@@ -5,12 +5,17 @@ import duke.Command;
 import duke.Parser;
 import duke.DukeException;
 
+/**
+ * Represents a Duke chat bot. A <code>Duke</code> object
+ * has a specific storage instance, a list of tasks, and
+ * a user interface.
+ */
 public class Duke {
     private final Storage storage;
     private final TaskList list;
     private final Ui ui;
 
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         TaskList list1;
         this.storage = new Storage(filePath);
         try {
@@ -25,7 +30,7 @@ public class Duke {
         this.ui = new Ui();
     }
 
-    public void run() {
+    private void run() {
         ui.printLogo();
         ui.printWelcomeMessage();
         boolean isExit = false;
@@ -41,9 +46,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Duke ChatBot with storage file at ./data/duke.txt.
+     */
     public static void main(String[] args) {
         // Duke chatBot = new Duke("../data/duke.txt");
         Duke chatBot = new Duke("./data/duke.txt");
         chatBot.run();
     }
 }
+
