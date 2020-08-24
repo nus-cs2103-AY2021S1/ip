@@ -13,6 +13,14 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Returns the description of the task.
+     *
+     * @return the description of the task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -34,6 +42,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "]" + " " + this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }

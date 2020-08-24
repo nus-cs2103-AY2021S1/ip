@@ -39,6 +39,28 @@ public class TaskList {
         }
     }
 
+    public Task[] findTasks(String searchTerm) {
+        ArrayList<Task> tasksFound = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.getDescription().contains(searchTerm)) {
+                tasksFound.add(task);
+            }
+        }
+        return tasksFound.toArray(new Task[tasksFound.size()]);
+    }
+
+    public String[] findTasksToString(String searchTerm) {
+        ArrayList<String> tasksFound = new ArrayList<>();
+        int counter = 1;
+        for (Task task : this.taskList) {
+            if (task.getDescription().contains(searchTerm)) {
+                tasksFound.add(counter + "." + task.toString());
+                counter++;
+            }
+        }
+        return tasksFound.toArray(new String[tasksFound.size()]);
+    }
+
     public Task deleteTask(int taskNumberToMark) {
         Task taskToMark = this.taskList.remove(taskNumberToMark - 1);
         return taskToMark;
