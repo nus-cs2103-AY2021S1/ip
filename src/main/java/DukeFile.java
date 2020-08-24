@@ -47,5 +47,9 @@ public class DukeFile {
     public static DukeFile createDukeFile(String fileName) {
         return new DukeFile(fileName);
     }
+
+    public ArrayList<String> getRecords() {
+        return this.recordArrayLst;
+    }
 }
 
