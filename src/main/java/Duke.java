@@ -12,7 +12,7 @@ public class Duke {
     private final String DONE_TASK_MARKED_MESSAGE = "    Nice! I've marked this task as done:";
     private final String DELETE_TASK_MARKED_MESSAGE = "    Noted. I've removed this task:";
 
-    private final String NO_TASK_MESSAGE = "    Sorry the task does not exists";
+    private final String NO_TASK_MESSAGE = "    Sorry the task does not exists";    
     private final String ADDED_TASK_MESSAGE = "    Got it. I've added this task:";
     private final String INVALID_DONE_MESSAGE = "    Sorry done cannot be empty ";
     private final String INVALID_TODO_MESSAGE = "    Sorry todo cannot be empty ";
@@ -32,43 +32,47 @@ public class Duke {
     }
 
     private String processCommand(String[] parsedUserInput) {
-        String cmd = parsedUserInput[0];
-        Command checkedCommand = Command.valueOfUserCommand(cmd);
-        String resultString;
+        try {
+            String cmd = parsedUserInput[0];
+            Command checkedCommand = Command.valueOfUserCommand(cmd);
+            String resultString;
 
-        if (checkedCommand == null) {
-            resultString = INVALID_COMMAND_MESSAGE;
-        } else {
-            switch (checkedCommand) {
-                case LIST:
-                    resultString = listTask();
-                    break;
-                case BYE:
-                    resultString = exit();
-                    break;
-                case DONE:
-                    resultString =  done(parsedUserInput);
-                    break;
-                case TODO:
-                    resultString =  addToDo(parsedUserInput) ;
-                    break;
-                case EVENT:
-                    resultString = ADDED_TASK_MESSAGE + "\n" + outputIndent + addEvent(parsedUserInput) + "\n"
-                        + getNumOfTaskMessage();
-                    break;
-                case DEADLINE:
-                    resultString = ADDED_TASK_MESSAGE + "\n" + outputIndent + addDeadline(parsedUserInput) + "\n"
-                            + getNumOfTaskMessage();
-                    break;
-                case DELETE:
-                    resultString = delete(parsedUserInput);
-                    break;
-                default:
-                    resultString = "";
-                    break;
+            if (checkedCommand == null) {
+                resultString = INVALID_COMMAND_MESSAGE;
+            } else {
+                switch (checkedCommand) {
+                    case LIST:
+                        resultString = listTask();
+                        break;
+                    case BYE:
+                        resultString = exit();
+                        break;
+                    case DONE:
+                        resultString = done(parsedUserInput);
+                        break;
+                    case TODO:
+                        resultString = addToDo(parsedUserInput);
+                        break;
+                    case EVENT:
+                        resultString = ADDED_TASK_MESSAGE + "\n" + outputIndent + addEvent(parsedUserInput) + "\n"
+                                + getNumOfTaskMessage();
+                        break;
+                    case DEADLINE:
+                        resultString = ADDED_TASK_MESSAGE + "\n" + outputIndent + addDeadline(parsedUserInput) + "\n"
+                                + getNumOfTaskMessage();
+                        break;
+                    case DELETE:
+                        resultString = delete(parsedUserInput);
+                        break;
+                    default:
+                        resultString = "";
+                        break;
+                }
             }
+            return upperLine + resultString + "\n" + lowerLine;
+        } catch (IndexOutOfBoundsException e) {
+            return upperLine + INVALID_COMMAND_MESSAGE + "\n" + lowerLine;
         }
-        return upperLine + resultString +"\n" + lowerLine;
     }
 
     private String listTask() {
