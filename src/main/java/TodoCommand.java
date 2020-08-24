@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class TodoCommand extends Command {
     public boolean execute() {
         ui.askTodo();
