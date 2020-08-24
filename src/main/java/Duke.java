@@ -1,11 +1,20 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     static Scanner scanner = new Scanner(System.in);
-    static ArrayList<Task> taskList = new ArrayList<>();
+    static ArrayList<Task> taskList;
+    private static final FileClass fileClass = new FileClass();
 
     public static void main(String[] args) {
+        try {
+            taskList = fileClass.loadTaskList();
+        } catch (FileNotFoundException e) {
+            System.out.println("FILE NOT FOUND");
+            taskList = new ArrayList<>();
+        }
+
         showGreeting();
         String[] inputArr = getInputArr();
         String command = inputArr[0];
@@ -66,6 +75,7 @@ public class Duke {
     }
 
     private static void showGoodbye() {
+        fileClass.writeToFile(taskList);
         String message = "Alright I'll see you around!";
         System.out.println(wrapMessage(message));
     }

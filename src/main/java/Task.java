@@ -1,6 +1,10 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+    public static ArrayList<Task> taskList = new ArrayList<>();
 
     public Task(String description) {
         this.description = description;
@@ -15,6 +19,10 @@ public class Task {
         return description;
     }
 
+    public boolean getDone() {
+        return isDone;
+    }
+
     public void markAsDone() {
         isDone = true;
     }
@@ -25,5 +33,9 @@ public class Task {
                 + "]"
                 + " "
                 + getDescription();
+    }
+
+    public String toFileString() {
+        return getDescription();
     }
 }
