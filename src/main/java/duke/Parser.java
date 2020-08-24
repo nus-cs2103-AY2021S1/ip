@@ -19,6 +19,7 @@ public class Parser {
     static Pattern done = Pattern.compile("done ([0-9]+)");
     static Pattern delete = Pattern.compile("delete ([0-9]+)");
     static Pattern datePattern = Pattern.compile("^([0-9]{1,2})[/-]([0-9]{1,2})[/-]([0-9]{4}) ([0-9]{4})$");
+    static Pattern find = Pattern.compile("find (.+)");
 
     public static Command parse(String str) throws DukeException {
         if (str.equals("bye")) {
@@ -68,47 +69,17 @@ public class Parser {
                     } else {
                         throw new EmptyDescriptionException("event");
                     }
+                case "find":
+                    Matcher findMatcher = find.matcher(str);
+                    if (findMatcher.find()) {
+                        return new FindCommand(findMatcher.group(1));
+                    } else {
+                        throw new EmptyDescriptionException("find");
+                    }
                 default:
                     throw new InvalidInputException();
             }
         }
-
-
-
-//        else if (str.split(" ")[0].equals("done")) {
-//            Matcher doneMatcher = done.matcher(str);
-//            if (doneMatcher.find()) {
-//                int taskNum = Integer.parseInt(doneMatcher.group(1));
-//                    return new command.DoneCommand(taskNum);
-//            } else {
-//                throw new exception.EmptyDescriptionException("done");
-//            }
-//        } else if (str.split(" ")[0].equals("delete")) {
-//            Matcher deleteMatcher = delete.matcher(str);
-//            if (deleteMatcher.find()) {
-//                int taskNum = Integer.parseInt(deleteMatcher.group(1));
-//                return new command.DeleteCommand(taskNum);
-//            } else {
-//                throw new exception.EmptyDescriptionException("delete");
-//            }
-//        } else if (str.split(" ")[0].equals("todo")) {
-//            Matcher todoMatcher = todo.matcher(str);
-//            if (todoMatcher.find()) {
-//                String todo = todoMatcher.group(1);
-//                return new command.TodoCommand(todo);
-//            } else {
-//                throw new exception.EmptyDescriptionException("todo");
-//            }
-//        }
-
-
-
-
-//
-//        else {
-//            throw new exception.InvalidInputException();
-//        }
-
     }
 
 
