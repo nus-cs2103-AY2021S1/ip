@@ -34,7 +34,6 @@ public class Duke {
         try {
             FileWriter writer = new FileWriter(file);
             writer.close();
-
             for (Task t : arr) {
                 FileWriter fileWriter = new FileWriter(file, true);
                 fileWriter.write(t.writeToFile());
@@ -137,24 +136,7 @@ public class Duke {
         System.out.println(LINE);
         saveFile();
     }
-    private static File getFile() {
-        File route = new File("./data");
-        if(!route.exists()) {
-            route.mkdirs();
-        }
 
-        File file = new File(DATA_PATH);
-
-        try {
-            if(!file.exists()) {
-                file.createNewFile();
-            }
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
-
-        return file;
-    }
     private static void loadSave() {
         try {
             Path path = Paths.get(DATA_PATH);
@@ -162,15 +144,15 @@ public class Duke {
             while(sc.hasNextLine()) {
                 String[] parts = sc.nextLine().split("//");
                 switch (parts[0]) {
-                    case "T":
-                        arr.add(new ToDo(parts[2], parts[1].equals("1")));
-                        break;
-                    case "E":
-                        arr.add(new Event(parts[2], parts[1].equals("1"), parts[3]));
-                        break;
-                    case "D":
-                        arr.add(new Deadline(parts[2], parts[1].equals("1"), parts[3]));
-                        break;
+                case "T":
+                    arr.add(new ToDo(parts[2], parts[1].equals("1")));
+                    break;
+                case "E":
+                    arr.add(new Event(parts[2], parts[1].equals("1"), parts[3]));
+                    break;
+                case "D":
+                    arr.add(new Deadline(parts[2], parts[1].equals("1"), parts[3]));
+                    break;
                 }
 
             }
