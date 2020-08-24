@@ -1,18 +1,18 @@
-package main.java;
+package main.java.duke;
 
-class CompleteTaskCommand extends Command {
+class DeleteTaskCommand extends Command {
 
     final int taskIndex;
 
-    CompleteTaskCommand(int taskIndex) {
+    DeleteTaskCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
     @Override
     protected void execute(Storage storage, TaskList tasks, Ui ui) {
-        Task task = tasks.completeTaskAt(this.taskIndex);
+        Task task = tasks.deleteTaskAt(this.taskIndex);
         if (task != null) {
-            ui.printCompleteTask(task);
+            ui.printDeleteTask(tasks, task);
         } else {
             ui.printInvalidTaskIndex();
         }

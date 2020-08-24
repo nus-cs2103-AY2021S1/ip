@@ -1,4 +1,4 @@
-package main.java;
+package main.java.duke;
 
 class Ui {
     private String horizontalLine = "    ____________________________________________________________";
