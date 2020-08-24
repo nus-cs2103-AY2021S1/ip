@@ -5,22 +5,41 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) throws IOException, DukeException {
-        Processor p = new Processor();
-        Scanner sc = new Scanner(System.in);
-        String logo = " ______  ___       __         __        _____\n"
-                + "   |    /         /  \\       /  \\     /\n"
-                + "   |    \\___     /____\\     /____\\   |\n"
-                + "   |        \\   /      \\   /      \\   \\\n"
-                + " ------  ___/  /        \\ /        \\    -----\n";
-        System.out.println("Hello! I'm\n" + logo + "\nWhat can I do for you?");
-        String next = "";
-        p.readFile();
-        while (!next.equals("bye")) {
-            p.process(next);
-            next = sc.nextLine();
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    private Parser parser;
+
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage();
+        parser = new Parser();
+        try {
+            tasks = new TaskList(storage.readFile());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
-        System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public void run() {
+        ui.showWelcome();
+        String fullCommand = "";
+        while (!fullCommand.equals("bye")) {
+            try {
+                Command command = parser.findCommand(fullCommand);
+                command.execute(this.tasks, this.ui, this.storage);
+                storage.save(tasks.getList());
+                fullCommand = ui.readCommand();
+            } catch (DukeException | IOException e) {
+                ui.showError(e.getMessage());
+                fullCommand = ui.readCommand();
+            }
+        }
+        ui.showExit();
+    }
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }
 

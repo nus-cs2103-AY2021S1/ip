@@ -21,7 +21,6 @@ public class Deadline extends Task{
             try {
                 d1 += " " + LocalDate.parse(descriptions[i]).format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
             } catch (DateTimeParseException e) {
-                System.out.println(descriptions[i]);
                 d1 += " " + descriptions[i];
             }
         }
