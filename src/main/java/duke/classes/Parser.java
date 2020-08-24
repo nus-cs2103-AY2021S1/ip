@@ -25,6 +25,8 @@ public class Parser {
     public Commands analyse(String command) {
         if (command.startsWith("list")) {
             return Commands.LIST;
+        } else if (command.startsWith("find")) {
+            return Commands.FIND;
         } else if (command.startsWith("todo")) {
             return Commands.TODO;
         } else if (command.startsWith("deadline")) {

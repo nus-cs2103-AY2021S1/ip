@@ -4,7 +4,12 @@ package duke.classes;
  * Enum class for categorising the commands given to the scanner.
  */
 public enum Commands {
-
+    FIND {
+        @Override
+        public String toString(){
+            return "find";
+        }
+    },
     LIST {
         @Override
         public String toString() {
