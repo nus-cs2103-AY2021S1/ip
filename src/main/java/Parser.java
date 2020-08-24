@@ -109,4 +109,19 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the find Order from user.
+     * Gives the keyword.
+     *
+     * @param resource User input string representing find order.
+     * @return Keyword user is searching for.
+     * @throws InvalidParameterException If there is no keyword followed.
+     */
+    public String parseFindOrder(String resource) throws InvalidParameterException {
+        if (resource.length() <= 4) {
+            throw new InvalidParameterException();
+        }
+        String findingKeyWord = resource.substring(5);
+        return findingKeyWord;
+    }
 }

@@ -1,5 +1,6 @@
 package main.java;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -82,6 +83,23 @@ public class TaskList {
     public void deleteTask(int index) {
         this.taskList.remove(index);
         this.storage.save(taskList);
+    }
+
+    /**
+     * Finds all tasks that contain given keyword.
+     * Gives a list of Task that contains searching results.
+     *
+     * @param keyWord Keyword needed to match.
+     * @return A List of result tasks.
+     */
+    public List<Task> find(String keyWord) {
+        List<Task> resultList = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).getContent().contains(keyWord)) {
+                resultList.add(taskList.get(i));
+            }
+        }
+        return resultList;
     }
 
     /**

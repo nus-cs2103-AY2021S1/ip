@@ -1,5 +1,7 @@
 package main.java;
 
+import java.util.List;
+
 /**
  * Holds the interaction between user and program.
  */
@@ -147,6 +149,11 @@ public class Ui {
                 "-> delete {order of task in task list}\n");
     }
 
+    public void invalidFindOrder() {
+        System.out.println(invalidOrder("find") +
+                "-> find {keyword}\n");
+    }
+
     /**
      * Informs user the task operation is not exist.
      */
@@ -186,6 +193,23 @@ public class Ui {
                         "\n-> event {task content} /{time} || add an event task" +
                         "\n-> list   || list all tasks" +
                         "\n-> done {order of task in task list}   || mark a task as done\n");
+    }
+
+    /**
+     * Prints result of find order.
+     *
+     * @param resultList List of result from find order.
+     */
+    public void showFindResult(List<Task> resultList) {
+        System.out.println("//////////Matching Result In Your List///////////\n");
+        if (resultList.size() == 0) {
+            System.out.println("No Match Result...\n");
+        } else {
+            for (int i = 0; i < resultList.size(); i++) {
+                System.out.println(i + ". " + resultList.get(i).toString());
+            }
+        }
+        System.out.println("\n//////////////////////////////////////////////////\n");
     }
 
     /**

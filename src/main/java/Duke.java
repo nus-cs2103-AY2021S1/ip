@@ -88,6 +88,13 @@ public class Duke {
                 } catch (Exception e) {
                     ui.invalidDeleteOrder();
                 }
+            } else if (userInput.startsWith("find")) {
+                try {
+                    String keyWord = parser.parseFindOrder(userInput);
+                    ui.showFindResult(taskList.find(keyWord));
+                } catch (InvalidParameterException e) {
+                    ui.invalidFindOrder();
+                }
             } else {
                 ui.generalError();
             }
