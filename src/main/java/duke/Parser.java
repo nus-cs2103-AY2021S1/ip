@@ -1,3 +1,7 @@
+package duke;
+
+import duke.exception.DukeException;
+
 import java.util.Arrays;
 
 public class Parser {
