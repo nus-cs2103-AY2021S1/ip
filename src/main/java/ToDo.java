@@ -9,6 +9,13 @@ public class ToDo extends Task {
         return "[T]" + super.toString();
     }
 
+    public static ToDo createTask(String details) throws DukeException {
+        if (details == null) {
+            throw new DukeException("I need something to work with.");
+        }
+        return new ToDo(details);
+    }
+
     public String encode() {
         return String.format("T|%s|%s", super.completed ? "Y" : "N", super.description);
     }

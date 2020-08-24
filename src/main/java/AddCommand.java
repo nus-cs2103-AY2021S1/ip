@@ -1,0 +1,40 @@
+public class AddCommand extends Command {
+
+    private Task createdTask;
+    private int remainingTaskCount;
+
+    AddCommand(TaskType type, String taskParameters) throws DukeException {
+        switch(type) {
+        case DEADLINE:
+            createdTask = Deadline.createTask(taskParameters);
+            break;
+        case EVENT:
+            createdTask = Event.createTask(taskParameters);
+            break;
+        case TODO:
+            createdTask = ToDo.createTask(taskParameters);
+            break;
+        default:
+            throw new DukeException("I don't understand.");
+        }
+    }
+
+    public void execute(TaskList list, Storage storage) {
+        list.add(createdTask);
+        this.remainingTaskCount = list.taskCount();
+        super.completed = true;
+    }
+
+    public void printFeedback(Ui ui) {
+        if (super.completed) {
+            String feedback = String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in your list.\n", createdTask.toString(), remainingTaskCount);
+            ui.formattedPrint(ui.prependIndent(feedback, 1));
+        } else {
+            throw new DukeException("The command has not been executed.");
+        }
+    }
+
+    public boolean isExit() {
+        return false;
+    }
+}

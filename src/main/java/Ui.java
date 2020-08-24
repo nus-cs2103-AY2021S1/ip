@@ -10,7 +10,7 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
-    public static String prependIndent(String content, int indent) {
+    public String prependIndent(String content, int indent) {
         String spaces = "";
         for (int i = 0; i < indent; i++) {
             spaces += " ";
@@ -23,7 +23,7 @@ public class Ui {
         return result;
     }
 
-    public static void formattedPrint(String content) {
+    public void formattedPrint(String content) {
         System.out.print(prependIndent(DIVIDER, 4));
         System.out.print(prependIndent(content, 4));
         System.out.println(prependIndent(DIVIDER, 4));

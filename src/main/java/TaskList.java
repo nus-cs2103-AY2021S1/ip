@@ -14,29 +14,25 @@ public class TaskList implements Iterable<Task> {
         this.store = list;
     }
 
-    public String add(Task item) {
+    public Task add(Task item) {
         this.store.add(item);
-        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in your list.\n",
-                item.toString(),
-                this.store.size());
+        return item;
     }
 
-    public String markAsDone(int index) throws DukeException {
+    public Task markAsDone(int index) throws DukeException {
         try {
             Task selected = store.get(index);
             selected.setCompleted();
-            return String.format("Nice! I've marked this task as done:\n  %s\n", selected.toString());
+            return selected;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("I couldn't find that task. Are you trying to make 2020 worse?");
         }
     }
 
-    public String deleteTask(int index) throws DukeException {
+    public Task deleteTask(int index) throws DukeException {
         try {
             Task removed = store.remove(index);
-            return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in your list.",
-                    removed.toString(),
-                    this.store.size());
+            return removed;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("I couldn't find that task. Are you trying to make 2020 worse?");
         }
@@ -48,6 +44,10 @@ public class TaskList implements Iterable<Task> {
             list += String.format("%d.%s\n", i + 1, this.store.get(i).toString());
         }
         return list;
+    }
+
+    public int taskCount() {
+        return this.store.size();
     }
 
     @Override
