@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Calendar;
@@ -21,13 +22,15 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        System.out.println(duke.toString());
-        //echo();
-        duke.receiveInput();
+        duke.start();
     }
 
-    @Override
-    public String toString() {
+    public void start() {
+        greet();
+        receiveInput();
+    }
+
+    private void greet() {
 //        String donLogo = "  ______      _______     ____    __    \n"
 //                + " |   _  \\    /   _   \\   |    \\  |  |\n"
 //                + " |  | |  |  |   | |   |  |  |\\ \\ |  |\n"
@@ -41,10 +44,10 @@ public class Duke {
                 + "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-' \n";
         String msg = "Hola! I'm Dongo :) \n" +
                 "How can I help you?";
-        return donLogo + "\n" + msg;
+        System.out.println(donLogo + "\n" + msg);
     }
 
-    public void receiveInput() {
+    private void receiveInput() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
@@ -65,10 +68,7 @@ public class Duke {
                         listItems();
                         break;
                     case BYE:
-                        sc.close();
-                        System.out.println("Time to say goodbye :( \n" +
-                                "Have a great day!");
-                        System.exit(0);
+                        processBye(sc);
                         return;
                     case DONE:
                         processDone(command);
@@ -126,6 +126,14 @@ public class Duke {
 //                }
 //            }
 //        }
+    }
+
+    private void processBye(Scanner sc) {
+        sc.close();
+        System.out.println("Time to say goodbye :( \n" +
+                "Have a great day!");
+        System.exit(0);
+        return;
     }
 
     private String removeFirstWord(String command) throws DukeException {
