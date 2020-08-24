@@ -3,6 +3,7 @@ package duke.task;
 import duke.io.Parser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Represents a task. 
@@ -61,6 +62,11 @@ public class Task {
     protected ArrayList<Object> dateAndTimeFormatter(String date) {
         Parser parser = new Parser();
         return parser.dateAndTimeFormatter(date);
+    }
+    
+    public boolean containsWord(String word) {
+        String [] arr = description.split(" ");
+        return Arrays.stream(arr).filter(str -> str.equals(word)).toArray().length > 0;
     }
     
 }
