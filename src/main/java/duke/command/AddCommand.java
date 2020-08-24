@@ -36,4 +36,9 @@ public class AddCommand extends Command {
         tasks.addTask(taskToBeAdded);
         ui.printAdded(taskToBeAdded, tasks.getSize());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof AddCommand;
+    }
 }

@@ -13,4 +13,9 @@ public class UnknownCommand extends Command {
     public void execute(Storage storage, TaskList tasks, Ui ui) throws DukeInvalidCommandException {
         throw new DukeInvalidCommandException();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof UnknownCommand;
+    }
 }

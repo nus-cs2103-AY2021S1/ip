@@ -21,4 +21,9 @@ public class DeleteCommand extends Command {
             throw new DukeInvalidTaskException();
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof DeleteCommand;
+    }
 }

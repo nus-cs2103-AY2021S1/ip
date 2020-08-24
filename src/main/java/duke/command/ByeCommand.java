@@ -15,4 +15,9 @@ public class ByeCommand extends Command {
         ui.printSave();
         ui.printFarewell();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ByeCommand;
+    }
 }

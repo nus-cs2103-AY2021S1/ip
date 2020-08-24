@@ -15,4 +15,9 @@ public class ListCommand extends Command {
             System.out.println(i + 1 + "." + tasks.getTask(i));
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ListCommand;
+    }
 }
