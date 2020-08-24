@@ -10,6 +10,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The Parser class comprehends and carries out the user commands
+ * It is used in the Ui class
+ */
 public class Parser {
     public  Parser(){}
 
@@ -17,6 +21,12 @@ public class Parser {
         System.out.println("-------------------------------");
     }
 
+    /**
+     * Constructor for loading deadlines using switch and case
+     * @param sc            the scanner used to take in the user commands
+     * @param todoList      the array list the stores all the todos
+     * @param store         the Storage that handles the loading and saving of tasks into the schedule text file
+     */
     public void parse(Scanner sc, ArrayList<Task> todoList, Storage store) throws IOException {
         String command = sc.next();
         switch (command) {

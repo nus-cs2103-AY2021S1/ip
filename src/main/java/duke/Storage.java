@@ -9,19 +9,35 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * The Storage class deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
 
     String filepath;
+
+    /**
+     * Constructor for a new driver system
+     * @param filepath  the file path of the schedule text file
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Writes tasks into the schedule file
+     * @param task      the task that's to be written into the text file
+     */
     public void write(Task task) throws IOException {
         FileWriter todoWriter = new FileWriter(this.filepath, true);
         todoWriter.write(task.splitToString());
         todoWriter.close();
     }
 
+    /**
+     * Loads a schedule file
+     * @return  a TaskList that has all the tasks in the schedule text file
+     */
     public TaskList load() throws IOException {
         ArrayList<Task> todoList = new ArrayList<Task>();
         BufferedReader reader = new BufferedReader(new FileReader(this.filepath));
@@ -41,6 +57,10 @@ public class Storage {
         return new TaskList(todoList);
     }
 
+    /**
+     * Writes tasks into the schedule file
+     * @param tl      the TaskList that's to be over written into the text file
+     */
     public void overwrite(TaskList tl) throws IOException {
         FileWriter todoWriter = new FileWriter(this.filepath, false);
         for (Task task: tl.todoList
