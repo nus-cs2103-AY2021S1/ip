@@ -70,4 +70,8 @@ public class DukeException extends Exception {
         }
         return error;
     }
+
+    public static void wrongTimeFormat() {
+        System.err.println("    ERROR IN ADDING DEADLINE: WRONG FORMAT\n    Format: YYYY-MM-DD\n");
+    }
 }

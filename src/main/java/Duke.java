@@ -1,94 +1,41 @@
-import java.io.*;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    static ArrayList<Task> tasks = new ArrayList<>();
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    public static void addTask(Task task) {
-        tasks.add(task);
-        String str = "   ____________________________________________________________"
-                + "\n    Got it. I've added this task:"
-                + "\n      " + task
-                + "\n    Now you have " + tasks.size() + " task(s) in the list."
-                + "\n   ____________________________________________________________\n";
-        System.out.println(str);
-    }
-
-    private static final String path = "data/listOfTasks.txt";
-
-    public static void readFile(ArrayList<Task> tasks) {
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage();
+        tasks = new TaskList();
         try {
-            File file = new File(path);
-            FileReader fr = new FileReader(file);
-            BufferedReader br = new BufferedReader(fr);
-            String line = br.readLine();
-            while (line != null) {
-                String[] details = line.split(" \\| ");
-                boolean isDone = details[1].equals("1") ? true : false;
-                switch (details[0]) {
-                    case "T":
-                        tasks.add(new ToDos(details[2], isDone));
-                        break;
-                    case "D":
-                        tasks.add(new Deadlines(details[2], details[3], isDone));
-                        break;
-                    case "E":
-                        tasks.add(new Events(details[2], details[3], isDone));
-                        break;
-                }
-                line = br.readLine();
-            }
-            br.close();
-            fr.close();
-        } catch (IOException e) {
-            System.err.println (e);
+            storage.load(tasks);
+        } catch (Exception e){
+            Ui.showLoadingError();
         }
     }
 
-    public static void writeFile(ArrayList<Task> tasks) {
-        try {
-            File file = new File(path);
-            file.getParentFile().mkdirs();
-            FileWriter fw;
-            if (file.exists()) {
-                fw = new FileWriter(file, false);
-            } else {
-                fw = new FileWriter(file, true);
-            }
-            for (Task task : tasks) {
-                fw.write(task.writeToFile() + "\n");
-            }
-            fw.close();
-        } catch (IOException e) {
-            System.err.println (e);
-        }
-    }
-
-    public static void main(String[] args) throws DukeException {
+    public void run() throws DukeException {
         Scanner sc = new Scanner(System.in);
-
-        readFile(tasks);
-
-        CommandHandler.greeting();
-
+        Ui.greeting();
         String input = sc.nextLine();
         while (!input.isEmpty()) {
             if (input.equals("bye")) {
-                CommandHandler.bye();
+                Ui.exit();
                 break;
             } else if (input.equals("help")) {
-                CommandHandler.getListOfCommands();
+                Ui.getListOfCommands();
             } else if (input.equals("list")) {
-                Task.getListOfTasks(tasks);
+                tasks.getListOfTasks();
             } else if (input.startsWith("todo")) {
                 String task;
                 try {
                     task = input.split("todo ")[1];
                     Task newTask = new ToDos(task);
-                    addTask(newTask);
+                   tasks.addTask(newTask);
                 } catch (ArrayIndexOutOfBoundsException exception) {
                     try {
                         throw new DukeException("", DukeExceptionType.MISSING_DESCRIPTION, DukeCommandType.TODO);
@@ -123,9 +70,9 @@ public class Duke {
                             } else {
                                 try {
                                     Task newTask = new Deadlines(task, due);
-                                    addTask(newTask);
+                                    tasks.addTask(newTask);
                                 } catch (DateTimeParseException e) {
-                                    CommandHandler.wrongTimeFormat();
+                                    DukeException.wrongTimeFormat();
                                 }
                             }
                         } catch (DukeException e){
@@ -161,12 +108,12 @@ public class Duke {
                                 throw new DukeException("", DukeExceptionType.MISSING_TIMING, DukeCommandType.DEADLINE);
                             } else {
                                 Task newTask = new Events(task, due);
-                                addTask(newTask);
+                                tasks.addTask(newTask);
                             }
                         } catch (DukeException e){
                             System.err.println(e);
                         } catch (DateTimeParseException e) {
-                            CommandHandler.wrongTimeFormat();
+                            DukeException.wrongTimeFormat();
                         }
                     }
                 } catch (DukeException e) {
@@ -175,7 +122,7 @@ public class Duke {
             } else if (input.startsWith("done")) {
                 try {
                     int index = Integer.parseInt(input.split(" ")[1]);
-                    Task.done(tasks, index);
+                    tasks.done(index);
                 } catch (IndexOutOfBoundsException exception) {
                     try {
                         throw new DukeException("", DukeExceptionType.INVALID_INDEX, DukeCommandType.DONE);
@@ -188,7 +135,7 @@ public class Duke {
             } else if (input.startsWith("delete")) {
                 try {
                     int index = Integer.parseInt(input.split(" ")[1]);
-                    Task.delete(tasks, index);
+                    tasks.delete(index);
                 } catch (IndexOutOfBoundsException exception) {
                     try {
                         throw new DukeException("", DukeExceptionType.INVALID_INDEX, DukeCommandType.DELETE);
@@ -209,6 +156,10 @@ public class Duke {
             }
             input = sc.nextLine();
         }
-        writeFile(tasks);
+        storage.save(TaskList.tasks);
+    }
+
+    public static void main(String[] args) throws DukeException {
+        new Duke().run();
     }
 }
