@@ -34,9 +34,14 @@ class TaskManager {
         }
     }
 
-    public void markDone(int taskNum) {
-        tasks.get(taskNum - 1).markDone();
-        save();
+    public void markDone(int taskNum) throws DukeException {
+        try {
+            tasks.get(taskNum - 1).markDone();
+            save();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("you gave an invalid task number!");
+        }
+        
     }
 
     public void deleteTask(int taskNum) {
