@@ -21,6 +21,22 @@ public class TaskDate implements Comparable<TaskDate> {
     private LocalDate date;
 
     /**
+     * Returns true if the given date string is in valid format that Duke accepts.
+     *
+     * @param date date string
+     * @return true if date format is valid, false if date format is not valid
+     */
+    public static boolean isValidFormat(String date) {
+        try {
+            LocalDate.parse(date, UK_DATE_FORMAT);
+            LocalDate.parse(date);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    /**
      * Constructor for a TaskDate. Specified date string has to be in correct format.
      * Acceptable formats:
      * 1. MM/dd/uuuu

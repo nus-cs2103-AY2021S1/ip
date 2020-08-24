@@ -2,14 +2,15 @@ package dependencies.parser;
 
 import dependencies.dukeexceptions.DukeException;
 import dependencies.dukeexceptions.EmptyTaskException;
+import dependencies.dukeexceptions.InvalidDateException;
 import dependencies.dukeexceptions.UnknownCommandException;
 import dependencies.executable.Command;
 import dependencies.executable.Executable;
 import dependencies.task.Task;
+import dependencies.task.TaskDate;
 
 import java.util.Locale;
 import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 class Checker {
     private Executable command;
@@ -70,7 +71,7 @@ class Checker {
         else if (checkForWord(s, "done")) {
             String task = cutOutTheWord(s, "done");
             if (task.isBlank() || task.isEmpty()) {
-                throw new EmptyTaskException("Sorry, you have to tell me which task you have completed.");
+                throw new EmptyTaskException("Error: Done task cannot be empty");
             }
             Task t = Task.createMiscTask(task);
             e = Command.createDoneCommand(t);
@@ -79,38 +80,44 @@ class Checker {
             String task = cutOutTheWord(s, "todo");
             Task t = Task.createTodo(task);
             if (task.isEmpty() || task.isBlank()) {
-                throw new EmptyTaskException("Sorry, but your description of a task cannot be empty. -_-");
+                throw new EmptyTaskException("Error: Todo task cannot be empty");
             }
             e = Command.createAddCommand(t);
 
         } else if (checkForWord(s, "event")) {
             String task = cutOutTheWord(s, "event");
             if (task.isBlank() || task.isEmpty()) {
-                throw new EmptyTaskException("Please tell me the event that will be happening!");
+                throw new EmptyTaskException("Error: Event task cannot be empty");
             }
             String[] arr = task.split("/?at");
+            if (!TaskDate.isValidFormat(arr[1].trim())) {
+                throw new InvalidDateException("Error: Date format not accepted.");
+            }
             Task t = Task.createEvent(arr[0].trim(), arr[1].trim());
             e = Command.createAddCommand(t);
 
         } else  if (checkForWord(s, "deadline")) {
             String task = cutOutTheWord(s, "deadline");
             if (task.isEmpty() || task.isBlank()) {
-                throw new EmptyTaskException("Please describe what you need to do.");
+                throw new EmptyTaskException("Error: Deadline tasks cannot be empty");
             }
             String[] arr = task.split("/?by");
+            if (!TaskDate.isValidFormat(arr[1].trim())) {
+                throw new InvalidDateException("Error: Date format not accepted.");
+            }
             Task t = Task.createEvent(arr[0].trim(), arr[1].trim());
             e = Command.createAddCommand(t);
 
         } else if (checkForWord(s, "delete")) {
             String task = cutOutTheWord(s, "delete");
             if (task.isEmpty() || task.isBlank()) {
-                throw new EmptyTaskException("You have to tell me what to delete! LOL");
+                throw new EmptyTaskException("Error: Task to be deleted cannot be empty");
             }
             Task t = Task.createMiscTask(task);
             e = Command.createDeleteCommand(t);
 
         } else {
-            throw new UnknownCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new UnknownCommandException("Error: Unknown command");
         }
 
         return new Checker(e);
@@ -134,7 +141,6 @@ class Checker {
      * @return
      */
     private static String cutOutTheWord(String line, String cmd) {
-        // TODO: Should I use ENGLISH or UK????
         String c2 = cmd.toUpperCase(Locale.UK);
         String l2 = line.toUpperCase(Locale.UK);
         int idx = l2.indexOf(c2);
