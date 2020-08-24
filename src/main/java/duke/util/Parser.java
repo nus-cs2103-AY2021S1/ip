@@ -9,8 +9,22 @@ import duke.task.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Helps parse user input.
+ */
 public class Parser {
 
+    /**
+     * Parses an input string and returns a Command based on the input.
+     *
+     * @param input User input that is provided.
+     * @return Command.
+     * @throws InvalidDescriptionException If description format for new task is wrong.
+     * @throws InvalidCommandException     If no such command exists.
+     * @throws InvalidEventException       If event command format is wrong.
+     * @throws InvalidDeadlineException    If deadline command format is wrong.
+     * @throws InvalidDateFormatException  If date is not given in correct format.
+     */
     public static Command parse(String input) throws InvalidDescriptionException, InvalidCommandException,
             InvalidEventException, InvalidDeadlineException, InvalidDateFormatException {
         String[] splitString = input.split(" ", 2);
@@ -39,6 +53,17 @@ public class Parser {
         }
     }
 
+    /**
+     * Helps parse input related to adding tasks.
+     *
+     * @param command     The command string that was input.
+     * @param description The remaining part of the command string.
+     * @return AddCommand.
+     * @throws InvalidEventException      If event command format is wrong.
+     * @throws InvalidDeadlineException   If deadline command format is wrong.
+     * @throws InvalidCommandException    If no such command exists.
+     * @throws InvalidDateFormatException If date is not given in correct format.
+     */
     private static Command parseTask(String command, String description)
             throws InvalidEventException, InvalidDeadlineException, InvalidCommandException, InvalidDateFormatException {
         String splitted[];
