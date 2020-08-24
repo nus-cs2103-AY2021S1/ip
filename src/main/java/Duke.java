@@ -157,43 +157,55 @@ public class Duke {
         printPrompt(output.toString());
     }
 
-    public static void saveTasks() throws IOException {
-        Path path = Paths.get("data");
-        Files.createDirectories(path);
-        Path file = Paths.get("data/duke.txt");
+    public static void saveTasks() throws DukeException {
+        try {
+            Path path = Paths.get("data");
+            Files.createDirectories(path);
+            Path file = Paths.get("data/duke.txt");
 
-        List<String> data = tasks.stream().map(Task::toSaveData).collect(Collectors.toList());
-        Files.write(file, data);
+            List<String> data = tasks.stream().map(Task::toSaveData).collect(Collectors.toList());
+            Files.write(file, data);
+        } catch(IOException e) {
+            throw new DukeException("Unable to save file! Exiting without saving :-(");
+        }
     }
 
-    public static void loadTasks() throws IOException, DukeException {
+    public static void loadTasks() throws DukeException {
         Path file = Paths.get("data/duke.txt");
 
         if (Files.exists(file)) {
-            List<String> data = Files.readAllLines(file);
+            try {
+                List<String> data = Files.readAllLines(file);
 
-            for (String line : data) {
-                String[] params = line.split("\\s\\|\\s");
-                String type = params[0];
-                String description = params[2];
-                boolean isDone = params[1].equals("1");
+                for (String line : data) {
+                    String[] params = line.split("\\s\\|\\s");
+                    String type = params[0];
+                    String description = params[2];
+                    boolean isDone = params[1].equals("1");
 
-                switch (type) {
-                    case "T":
-                        addTodo(description, isDone);
+                    if (!params[1].equals("0") && !params[1].equals("1")) {
+                        throw new DukeException();
+                    }
 
-                        break;
-                    case "D":
-                        addDeadline(description, params[3], isDone);
+                    switch (type) {
+                        case "T":
+                            addTodo(description, isDone);
 
-                        break;
-                    case "E":
-                        addEvent(description, params[3], isDone);
+                            break;
+                        case "D":
+                            addDeadline(description, params[3], isDone);
 
-                        break;
-                    default:
-                        break;
+                            break;
+                        case "E":
+                            addEvent(description, params[3], isDone);
+
+                            break;
+                        default:
+                            throw new DukeException();
+                    }
                 }
+            } catch(DukeException | IOException | ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Data file is corrupt. Ignoring saved tasks :-(");
             }
         }
     }
@@ -204,7 +216,7 @@ public class Duke {
         printGreeting();
         try {
             loadTasks();
-        } catch (DukeException | IOException e) {
+        } catch(DukeException e) {
             printPrompt(e.getMessage());
         }
 
@@ -256,7 +268,7 @@ public class Duke {
                     default:
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
-            } catch (DukeException e) {
+            } catch(DukeException e) {
                 printPrompt(e.getMessage());
             }
 
@@ -266,7 +278,7 @@ public class Duke {
         scanner.close();
         try {
             saveTasks();
-        } catch (IOException e) {
+        } catch(DukeException e) {
             printPrompt(e.getMessage());
         }
         printPrompt("Bye. Hope to see you again soon!");
