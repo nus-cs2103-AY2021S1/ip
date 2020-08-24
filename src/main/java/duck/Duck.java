@@ -7,21 +7,11 @@ import java.util.Scanner;
 
 public class Duck {
 
-    private final String LINE = Colour.Blue("____________________________________________________________");
-    private final String INDENT = "    ";
+    private Ui userInterface;
     private List<Task> tasks = new ArrayList<>();
 
-    public void printLine() {
-        System.out.println(INDENT + LINE);
-    }
-
-    public void respond(List<String> responses) {
-        printLine();
-        for (String s : responses) {
-            System.out.print(INDENT);
-            System.out.println(s);
-        }
-        printLine();
+    public Duck(Ui ui) {
+        this.userInterface = ui;
     }
 
     private String[] parseWithDate(String s, String sep) throws DuckException {
@@ -42,7 +32,7 @@ public class Duck {
         List<String> welcomeMessage = new ArrayList<>();
         welcomeMessage.add("Hello! I'm Duck");
         welcomeMessage.add("What can I do for you?");
-        respond(welcomeMessage);
+        userInterface.respond(welcomeMessage);
 
         boolean run = true;
         Scanner sc = new Scanner(System.in);
@@ -152,7 +142,7 @@ public class Duck {
             } catch (DuckException e) {
                 responses.add(e.toString());
             } finally {
-                respond(responses);
+                userInterface.respond(responses);
             }
         }
     }
