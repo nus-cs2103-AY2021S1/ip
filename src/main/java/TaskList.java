@@ -180,7 +180,10 @@ public class TaskList {
         System.out.println("\t___________________________________________________________________________\n");
     }
 
-    void deleteTask(int index) {
+    void deleteTask(int index) throws InvalidArgumentException {
+        if (index > list.size()) {
+            throw new InvalidArgumentException("☹ OOPS!!! The task index you give is not found.");
+        }
         System.out.println("\t___________________________________________________________________________");
         System.out.println("\t Noted. I've removed this task:");
         System.out.println("\t   " + this.list.get(index - 1));
