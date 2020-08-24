@@ -1,5 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;  // Import the File class
@@ -96,6 +97,7 @@ public class Duke {
 
         } else if (user_input.split(" ")[0].equals("deadline")) {
             // make deadline
+            // check if input is valid
             if (user_input.split(" ", 2).length == 1) {
                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
             }
@@ -103,10 +105,13 @@ public class Duke {
             if (task.split(" /by ", 2).length < 2) {
                 throw new DukeException("☹ OOPS!!! The description and time is required for deadline");
             }
+            // get description
             String description = task.split(" /by ", 2)[0];
+            // get time
             String time = task.split(" /by ")[1];
-
-            Task deadline = new Deadline(description, time);
+            LocalDate l_time = LocalDate.parse(time);
+            // add deadline
+            Task deadline = new Deadline(description, l_time);
             taskList.add(deadline);
             if (!loading) {
                 System.out.println("Got it. I've added this task:");
@@ -123,10 +128,12 @@ public class Duke {
             if (task.split(" /at ", 2).length < 2) {
                 throw new DukeException("☹ OOPS!!! The description and time is required for event");
             }
-            String description = task.split(" /at ", 2)[0];
-            String time = task.split(" /at ")[1];
 
-            Task event = new Event(description, time);
+            String description = user_input.split(" /at ", 2)[0];
+            String time = task.split(" /at ")[1];
+            LocalDate l_time = LocalDate.parse(time);
+            // add event
+            Task event = new Event(description, l_time);
             taskList.add(event);
             if (!loading){
                 System.out.println("Got it. I've added this task:");
