@@ -2,8 +2,8 @@ package main.java.Task;
 
 public class toDo extends Task{
 
-    public toDo(String task, boolean complete) {
-        super(task, complete);
+    public toDo(String task, boolean isComplete) {
+        super(task, isComplete);
     }
 
     /**
@@ -13,7 +13,7 @@ public class toDo extends Task{
      */
     @Override
     public String stringify(){
-        if(this.complete == true) {
+        if(this.isComplete == true) {
             return "[T][✓] " + this.task;
         }else{
             return "[T][✗] " + this.task;

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]

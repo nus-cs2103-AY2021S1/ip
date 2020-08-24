@@ -129,7 +129,7 @@ public class Parser {
                 }
 
             case "bye":
-                return new byeCommand(tasklist);
+                return new endCommand(tasklist);
 
             default:
                 duke.ui.badInput();

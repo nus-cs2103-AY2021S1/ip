@@ -40,30 +40,27 @@ public class Storage {
                         : strCurrentLine.substring(strCurrentLine.indexOf("✗")+3);
 
                 switch (taskType){
-                    case "T":
-                        arr.add(new toDo(taskDetails,taskCompletion));
-                        break;
-                    case "D":
-                        String deadlineString = taskDetails.substring(0,taskDetails.indexOf("("));
-                        String taskDeadlineString = taskDetails.substring(taskDetails.indexOf("by:")+3,taskDetails.indexOf(")"));
-                        LocalDate taskDeadline = LocalDate.parse(taskDeadlineString);
-                        arr.add(new Deadline(deadlineString,taskCompletion,taskDeadline));
-                        break;
-                    case "E":
-                        String eventString = taskDetails.substring(0,taskDetails.indexOf("("));
-                        String eventDateString = taskDetails.substring(taskDetails.indexOf("at:")+3,taskDetails.indexOf(")"));
-                        LocalDate eventDate = LocalDate.parse(eventDateString);
-                        arr.add(new Event(eventString,taskCompletion,eventDate));
+                case "T":
+                    arr.add(new toDo(taskDetails,taskCompletion));
+                    break;
 
-
-
+                case "D":
+                    String deadlineString = taskDetails.substring(0,taskDetails.indexOf("("));
+                    String taskDeadlineString = taskDetails.substring(taskDetails.indexOf("by:")+3,taskDetails.indexOf(")"));
+                    LocalDate taskDeadline = LocalDate.parse(taskDeadlineString);
+                    arr.add(new Deadline(deadlineString,taskCompletion,taskDeadline));
+                    break;
+                case "E":
+                    String eventString = taskDetails.substring(0,taskDetails.indexOf("("));
+                    String eventDateString = taskDetails.substring(taskDetails.indexOf("at:")+3,taskDetails.indexOf(")"));
+                    LocalDate eventDate = LocalDate.parse(eventDateString);
+                    arr.add(new Event(eventString,taskCompletion,eventDate));
                 }
             }
 
         } catch (IOException e) {
-//            e.printStackTrace();
+            e.printStackTrace();
         } finally {
-
             try {
                 if (objReader != null)
                     objReader.close();

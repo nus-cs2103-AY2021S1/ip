@@ -2,8 +2,9 @@ package main.java.Commands;
 
 import main.java.Task.TaskList;
 
-public class byeCommand extends Command {
-    public byeCommand(TaskList taskList){
+public class endCommand extends Command {
+
+    public endCommand(TaskList taskList){
         super(taskList);
     }
 
@@ -11,8 +12,7 @@ public class byeCommand extends Command {
      * Executes the command to end the loop in the main method and end the program.
      */
     @Override
-    public void execute()
-    {
+    public void execute() {
         this.isExit = true;
     }
 }
