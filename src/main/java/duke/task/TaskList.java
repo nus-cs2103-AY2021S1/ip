@@ -6,6 +6,9 @@ import duke.io.Storage;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a current task list manager.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private Storage storage;
@@ -30,6 +33,12 @@ public class TaskList {
         DELETE
     }
 
+    /**
+     * Add specific tasks to task list.
+     * 
+     * @param type Type of task.
+     * @param arr Array of words from the tasks's description and (if any) date.
+     */
     public void addTask(Type type, String [] arr) {
         Task task;
         
@@ -66,11 +75,21 @@ public class TaskList {
             layout.print(e.getMessage());
         }
     }
-    
+
+    /**
+     * Get task list and display it to the user.
+     */
     public void showTasks() {
         layout.printTaskList(tasks);
     }
 
+    /**
+     * Modify specific tasks in the task list.
+     * Actions include deleting and marking a task as done.
+     * 
+     * @param type Type of action to execute: delete or mark done.
+     * @param i Index of the task in the task list.
+     */
     public void modifyTask(Action type, String i) {
         try {
             int index = Integer.parseInt(i);
@@ -94,7 +113,11 @@ public class TaskList {
         }
 
     }
-    
+
+    /**
+     * Store task list in hard disk.
+     * Exit process.
+     */
     public void closeDuke() {
         storage.writeFile(tasks);
         layout.print("Bye. Hope to see you again soon!");

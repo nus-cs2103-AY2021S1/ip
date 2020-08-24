@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a specific task.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {
