@@ -19,6 +19,14 @@ public class Duke {
         }
     }
 
+    public TaskList getTasks() {
+        return this.tasks;
+    }
+
+    public Storage getStorage() {
+        return this.storage;
+    }
+
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -36,6 +44,26 @@ public class Duke {
             }
         }
     }
+
+    public void testRun(String[] input) {
+        ui.showWelcome();
+        for (String line : input) {
+            try {
+                Parser parser = new Parser(line);
+                Command c = parser.parse();
+                c.execute(tasks, ui, storage);
+                if (c.isExit()) {
+                    break;
+                }
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine(); // show the divider line ("_______")
+            }
+        }
+    }
+
+
     public static void main(String[] args) {
          new Duke("data/tasks.txt").run();
     }

@@ -26,6 +26,11 @@ public class Storage {
         }
     }
 
+    public void delete() {
+        File fw = new File(this.filePath);
+        System.out.println(fw.delete());
+    }
+
     public String[] load() throws DukeException {
         try {
             File file = new File(this.filePath);
