@@ -29,6 +29,8 @@ public class Parser {
                 return new DateCommand(queryArr[1]);
             case "bye":
                 return new ExitCommand();
+            case "find":
+                return new FindCommand(queryArr[1]);
             default:
                 return new AddCommand(queryArr[0], queryArr[1]);
             }
