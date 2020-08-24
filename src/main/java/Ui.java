@@ -10,6 +10,7 @@ public class Ui {
     }
 
     public void run() {
+        greet();
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             // Listens for input

@@ -11,6 +11,10 @@ public class TaskListHandler {
         return taskList;
     }
 
+    public void addToList(Task t) {
+        taskList.add(t);
+    }
+
     public ArrayList<Task> clearList() {
         this.taskList = new ArrayList<>();
         System.out.println("The list of tasks has been cleared.");
@@ -31,10 +35,6 @@ public class TaskListHandler {
         }
         indent(1);
         System.out.println("You have " + taskList.size() + " task(s) in the list");
-    }
-
-    public void addToList(Task t) {
-        taskList.add(t);
     }
 
     public static void indent(int times) {
