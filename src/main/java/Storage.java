@@ -53,10 +53,10 @@ public class Storage {
         fw.close();
     }
 
-    public TaskList load() throws FileNotFoundException {
+    public TaskList load(Ui ui) throws FileNotFoundException {
         File file = new File(filePath);
         Scanner sc = new Scanner(file);
-        TaskList taskList = new TaskList();
+        TaskList taskList = new TaskList(ui);
         while (sc.hasNextLine()) {
             String description = sc.nextLine();
             String[] desArr = description.split(",");

@@ -4,36 +4,32 @@ import java.util.List;
 
 public class TaskList {
     private List<Task> listOfTask;
+    private Ui ui;
 
-    public TaskList() {
+    public TaskList(Ui ui) {
         listOfTask = new ArrayList<>();
+        this.ui = ui;
     }
 
     public void showListOfTask() {
-        System.out.println("\n    Here are the task(s) in your list:");
-        for (int i = 1; i <= listOfTask.size(); i++) {
-            Task task = listOfTask.get(i - 1);
-            System.out.println("    " + i + "." + task);
-        }
-        System.out.println();
+        ui.showListOfTask(this.listOfTask);
     }
 
-    public void doneTask(String input) {
+    public void doneTask(String input) throws GelException{
         int index = Integer.parseInt(input.substring(5)) - 1;
+        if (index >= listOfTask.size() || index < 0) {
+            throw new GelException("    Please input a valid number from 1 - " + listOfTask.size());
+        }
         Task taskToBeDone = listOfTask.remove(index);
         taskToBeDone.markAsDone();
         listOfTask.add(index, taskToBeDone);
-        System.out.println("\n    Nice! I've marked this task as done:");
-        System.out.println("    " + taskToBeDone);
-        System.out.println();
+        ui.markTaskAsDoneMsg(taskToBeDone);
     }
 
     public void deleteTask(String deleteNumber) throws Exception {
         int taskNo = Integer.parseInt(deleteNumber);
-        Task taskToBeDone = listOfTask.remove(taskNo - 1);
-        System.out.println("\n    Noted. I've removed this task:");
-        System.out.println("    " + taskToBeDone);
-        System.out.println("    Now you have " + listOfTask.size() + " task(s) in the list.\n");
+        Task taskToBeDeleted = listOfTask.remove(taskNo - 1);
+        ui.taskRemoveMsg(taskToBeDeleted, listOfTask.size());
     }
 
     public void addDeadline(String input, int dateIndex) throws GelException {
@@ -42,9 +38,7 @@ public class TaskList {
         LocalDateTime byDateTime = Parser.toDateTime(by);
         Deadline deadline = new Deadline(description, byDateTime);
         listOfTask.add(deadline);
-        System.out.println("\n    Got it. I've added this task:");
-        System.out.println("      " + deadline);
-        System.out.println("    Now you have " + listOfTask.size() + " task(s) in the list.\n");
+        ui.addTaskToListMsg(deadline, listOfTask.size());
     }
 
     public void addEvent(String input, int dateIndex) throws GelException {
@@ -53,18 +47,14 @@ public class TaskList {
         LocalDateTime atDateTime = Parser.toDateTime(at);
         Event event = new Event(description, atDateTime);
         listOfTask.add(event);
-        System.out.println("\n    Got it. I've added this task:");
-        System.out.println("      " + event);
-        System.out.println("    Now you have " + listOfTask.size() + " task(s) in the list.\n");
+        ui.addTaskToListMsg(event, listOfTask.size());
     }
 
     public void addTodo(String input) {
         String description = input.substring(5);
         Todo todo = new Todo(description);
         listOfTask.add(todo);
-        System.out.println("\n    Got it. I've added this task:");
-        System.out.println("      " + todo);
-        System.out.println("    Now you have " + listOfTask.size() + " task(s) in the list.\n");
+        ui.addTaskToListMsg(todo, listOfTask.size());
     }
 
     public void addTodoFromFile(String description, int done) {
