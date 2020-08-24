@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DataManager {
-    final String filePath = "data/data.txt";
+    private final String filePath = "data/data.txt";
 
     public void save(TaskList taskList) throws DukeException {
         List<Task> tasks = taskList.getAllTasks();
@@ -24,23 +24,23 @@ public class DataManager {
                 switch (task.taskType) {
                 case TODO:
                     ToDo todo = (ToDo) task;
-                    stringToWrite = todo.taskType.name() + "|" +
-                            (todo.isDone ? "true" : "false") + "|" +
-                            todo.description;
+                    stringToWrite = todo.taskType.name() + "|"
+                            + (todo.isDone ? "true" : "false") + "|"
+                            + todo.description;
                     break;
                 case EVENT:
                     Event event = (Event) task;
-                    stringToWrite = event.taskType.name() + "|" +
-                            (event.isDone ? "true" : "false") + "|" +
-                            event.description + "|" +
-                            event.time.format(DateTimeFormatter.ISO_LOCAL_DATE);
+                    stringToWrite = event.taskType.name() + "|"
+                            + (event.isDone ? "true" : "false") + "|"
+                            + event.description + "|"
+                            + event.time.format(DateTimeFormatter.ISO_LOCAL_DATE);
                     break;
                 case DEADLINE:
                     Deadline deadline = (Deadline) task;
-                    stringToWrite = deadline.taskType.name() + "|" +
-                            (deadline.isDone ? "true" : "false") + "|" +
-                            deadline.description + "|" +
-                            deadline.time.format(DateTimeFormatter.ISO_LOCAL_DATE);
+                    stringToWrite = deadline.taskType.name() + "|"
+                            + (deadline.isDone ? "true" : "false") + "|"
+                            + deadline.description + "|"
+                            + deadline.time.format(DateTimeFormatter.ISO_LOCAL_DATE);
                     break;
                 }
                 fw.write(stringToWrite + "\n");
@@ -69,13 +69,18 @@ public class DataManager {
                 try {
                     switch (taskType) {
                     case TODO:
-                        taskList.add(new ToDo(data[2], Boolean.parseBoolean(data[1])));
+                        taskList.add(new ToDo(data[2],
+                                Boolean.parseBoolean(data[1])));
                         break;
                     case EVENT:
-                        taskList.add(new Event(data[2], Boolean.parseBoolean(data[1]), LocalDate.parse(data[3])));
+                        taskList.add(new Event(data[2],
+                                Boolean.parseBoolean(data[1]),
+                                LocalDate.parse(data[3])));
                         break;
                     case DEADLINE:
-                        taskList.add(new Deadline(data[2], Boolean.parseBoolean(data[1]), LocalDate.parse(data[3])));
+                        taskList.add(new Deadline(data[2],
+                                Boolean.parseBoolean(data[1]),
+                                LocalDate.parse(data[3])));
                         break;
                     default:
                         throw new DukeException("Invalid data format provided!");

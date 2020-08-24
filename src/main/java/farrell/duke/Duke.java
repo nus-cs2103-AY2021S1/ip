@@ -3,9 +3,10 @@ package main.java.farrell.duke;
 import java.time.LocalDate;
 
 public class Duke {
-    static TaskList taskList;
-    static DataManager dataManager = new DataManager();
-    static UiManager uiManager = new UiManager();
+    private static TaskList taskList;
+    private static DataManager dataManager = new DataManager();
+    private static UiManager uiManager = new UiManager();
+
     public static void main(String[] args) {
         uiManager.displayStartMessage();
 
@@ -54,14 +55,16 @@ public class Duke {
             int doneNumber = Integer.parseInt(parameters);
             taskList.updateDone(doneNumber);
             dataManager.save(taskList);
-            uiManager.printInWindow("Nice! I've marked the this as done.\n" + taskList.getTask(doneNumber).toString());
+            uiManager.printInWindow("Nice! I've marked the this as done.\n"
+                    + taskList.getTask(doneNumber).toString());
             break;
         case LIST:
             uiManager.printInWindow(taskList.toString());
             break;
         case DELETE:
             int deleteNumber = Integer.parseInt(parameters);
-            uiManager.printInWindow("I've removed this task:\n" + taskList.getTask(deleteNumber).toString());
+            uiManager.printInWindow("I've removed this task:\n"
+                    + taskList.getTask(deleteNumber).toString());
             taskList.deleteTask(deleteNumber);
             dataManager.save(taskList);
             break;

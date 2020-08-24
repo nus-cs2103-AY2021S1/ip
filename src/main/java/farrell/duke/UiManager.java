@@ -3,23 +3,22 @@ package main.java.farrell.duke;
 import java.util.Scanner;
 
 public class UiManager {
-    final String logo =
-            " _\n" +
-            "//\\\n" +
-            "V  \\\n" +
-            " \\  \\_\n" +
-            "  \\,'.`-.\n" +
-            "   |\\ `. `.\n" +
-            "   ( \\  `. `-.                        _,.-:\\\n" +
-            "    \\ \\   `.  `-._             __..--' ,-';/\n" +
-            "     \\ `.   `-.   `-..___..---'   _.--' ,'/\n" +
-            "      `. `.    `-._        __..--'    ,' /\n" +
-            "        `. `-_     ``--..''       _.-' ,'\n" +
-            "          `-_ `-.___        __,--'   ,'\n" +
-            "             `-.__  `----\"\"\"    __.-'\n" +
-            "                   `--..____..--'";
+    private final String logo = " _\n"
+            + "//\\\n"
+            + "V  \\\n"
+            + " \\  \\_\n"
+            + "  \\,'.`-.\n"
+            + "   |\\ `. `.\n"
+            + "   ( \\  `. `-.                        _,.-:\\\n"
+            + "    \\ \\   `.  `-._             __..--' ,-';/\n"
+            + "     \\ `.   `-.   `-..___..---'   _.--' ,'/\n"
+            + "      `. `.    `-._        __..--'    ,' /\n"
+            + "        `. `-_     ``--..''       _.-' ,'\n"
+            + "          `-_ `-.___        __,--'   ,'\n"
+            + "             `-.__  `----\"\"\"    __.-'\n"
+            + "                   `--..____..--'";
 
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     public boolean hasUserInput() {
         return scanner.hasNextLine();
