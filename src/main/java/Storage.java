@@ -53,7 +53,7 @@ public class Storage {
 
         try{
             //Get the command based on the first entry
-            taskCommand = TaskCommand.valueOf(data[0].toUpperCase());
+            taskCommand = TaskCommand.valueOf(data[0].toLowerCase());
         } catch (IllegalArgumentException e){
             throw new UltronException(data[0], ExceptionType.INVALID_COMMAND);
         }
@@ -83,6 +83,7 @@ public class Storage {
         } catch (FileNotFoundException e){
             return taskArrayList;
         }
+
     }
 
     public void writeAll(ArrayList<Task> taskArrayList) throws UltronException{
@@ -109,7 +110,7 @@ public class Storage {
 
 
     public static void main(String[] args){
-        Storage hello = new Storage("data.txt");
+        Storage hello = new Storage("data/data.txt");
         try{
             ArrayList<Task> lst = hello.load();
             lst.add(new Todo("hello"));
