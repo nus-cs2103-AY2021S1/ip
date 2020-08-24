@@ -5,8 +5,8 @@ package tasks;
  */
 
 public class Task {
-    protected String name;
-    protected boolean done;
+    private String name;
+    private boolean done;
 
     public Task(String name, boolean done) {
         this.name = name;
@@ -21,8 +21,13 @@ public class Task {
      * Prints a tick or X symbol.
      * @return a tick or X symbol.
      */
+
     public String getStatusIcon() {
         return (done ? "\u2713" : "\u2718");
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public String toString() {

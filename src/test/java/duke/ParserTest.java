@@ -27,9 +27,13 @@ public class ParserTest {
         assertEquals(new Parser().parse("delete 2").getClass(), DeleteCommand.class);
     }
     @Test
-    public void parse_AddString_prints() {
+    public void parse_addString_prints() {
         assertEquals(new Parser().parse("todo buy new pants").getClass(), AddCommand.class);
         assertEquals(new Parser().parse("deadline Assignment /by 25/08/2020 09:00").getClass(), AddCommand.class);
         assertEquals(new Parser().parse("event IPPT /at 31/10/2020 10:30").getClass(), AddCommand.class);
+    }
+    @Test
+    public void parse_FindString_prints() {
+        assertEquals(new Parser().parse("find book").getClass(), FindCommand.class);
     }
 }
