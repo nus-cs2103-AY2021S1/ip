@@ -60,7 +60,7 @@ abstract public class Task {
         taskList.get(idx - 1).markAsDone();
     }
 
-    public static void generateTaskList(List<String> tasks) {
+    public static void generateTaskList(List<String> tasks) throws DukeException {
         for (String task : tasks) {
             if (task.length() < 1) {
                 continue;
