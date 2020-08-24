@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import duke.exception.ReadFailedException;
 
 /**
- * The type Tasks.
+ * The Tasks, which stores a list containing tasks.
  */
 public class Tasks {
     /**
@@ -105,6 +105,22 @@ public class Tasks {
         ArrayList<Task> taskList = new ArrayList<>();
         for (Task task : this.tasks) {
             if (Task.isDateEqual(task, date)) {
+                taskList.add(task);
+            }
+        }
+        return taskList;
+    }
+
+    /**
+     * Returns a task list that has the description.
+     *
+     * @param description the description.
+     * @return the task list.
+     */
+    public ArrayList<Task> findByDescription(String description) {
+        ArrayList<Task> taskList = new ArrayList<>();
+        for (Task task : this.tasks) {
+            if (task.containsDescription(description)) {
                 taskList.add(task);
             }
         }

@@ -56,7 +56,8 @@ public class Task {
     }
 
     /**
-     * Is date equal boolean.
+     * Returns true if the task is a todo or deadline and
+     * the date of task is equal to the date, false otherwise.
      *
      * @param task the task.
      * @param date the date.
@@ -106,6 +107,16 @@ public class Task {
         default:
             throw new ReadFailedException("tasks");
         }
+    }
+
+    /**
+     * Returns true if the description of the task contains the query string, false otherwise.
+     *
+     * @param string the query string.
+     * @return the boolean.
+     */
+    public boolean containsDescription(String string) {
+        return description.contains(string);
     }
 
     /**

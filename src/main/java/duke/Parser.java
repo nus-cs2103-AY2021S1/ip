@@ -7,7 +7,8 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
-import duke.command.FindCommand;
+import duke.command.FindDateCommand;
+import duke.command.FindDescriptionCommand;
 import duke.command.ListCommand;
 import duke.command.TaskCommand;
 import duke.exception.DukeException;
@@ -29,7 +30,7 @@ public class Parser {
      * Returns the command after parsing the input.
      *
      * @param input the input.
-     * @return the command.
+     * @return Command the command.
      * @throws DukeException If the input cannot be parsed.
      */
     public static Command parse(String input) throws DukeException {
@@ -49,6 +50,8 @@ public class Parser {
             return getEventTaskCommand(input);
         case "deadline":
             return getDeadlineTaskCommand(input);
+        case "date":
+            return getFindDateCommand(input);
         case "find":
             return getFindCommand(input);
         default:
@@ -214,34 +217,56 @@ public class Parser {
     }
 
     /**
-     * Returns find command.
+     * Returns find date command.
      *
      * @param input the input.
-     * @return the find command.
-     * @throws EmptyInputException   If the item is not in input.
-     * @throws InvalidInputException If the item cannot be parsed.
+     * @return the find date command.
+     * @throws EmptyInputException   If the date is not in input.
+     * @throws InvalidInputException If the date cannot be parsed.
      */
-    private static FindCommand getFindCommand(String input) throws EmptyInputException,
+    private static FindDateCommand getFindDateCommand(String input) throws EmptyInputException,
             InvalidInputException {
         String dateStr;
         try {
             dateStr = input.substring(5).trim();
         } catch (IndexOutOfBoundsException ex) {
-            throw new EmptyInputException("The item to be retrieved is not specified.");
+            throw new EmptyInputException("The date to be searched is not specified.");
         }
 
         if (dateStr.length() < 1) {
-            throw new EmptyInputException("The item to be retrieved is not specified.");
+            throw new EmptyInputException("The date to be searched is not specified.");
         }
 
         LocalDate localDate;
         try {
             localDate = LocalDate.parse(dateStr.trim());
         } catch (DateTimeParseException ex) {
-            String message = "The date to be retrieved is invalid, it should be in YYYY-MM-DD format.";
+            String message = "The date to be searched is invalid, it should be in YYYY-MM-DD format.";
             throw new InvalidInputException(message);
         }
 
-        return new FindCommand(localDate);
+        return new FindDateCommand(localDate);
+    }
+
+    /**
+     * Returns find description command.
+     *
+     * @param input the input.
+     * @return the find description command.
+     * @throws EmptyInputException If the description is not in input.
+     */
+    private static FindDescriptionCommand getFindCommand(String input) throws EmptyInputException {
+        String itemStr;
+        try {
+            itemStr = input.substring(5).trim();
+        } catch (IndexOutOfBoundsException ex) {
+            throw new EmptyInputException("The task to be searched is not specified.");
+        }
+
+        if (itemStr.length() < 1) {
+            throw new EmptyInputException("The task to be searched is not specified.");
+        }
+
+        return new FindDescriptionCommand(itemStr);
     }
 }
