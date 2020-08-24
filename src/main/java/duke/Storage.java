@@ -5,7 +5,6 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.TaskList;
 import tasks.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -18,7 +17,6 @@ import java.util.Scanner;
  * Handles the reading and writing of the data.txt file on the user's hard-disk
  */
 public class Storage {
-
     TaskList tasks;
     File file;
 

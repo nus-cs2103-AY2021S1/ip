@@ -28,7 +28,8 @@ public class DeleteCommand extends Command {
      * @throws InvalidFileException If the file to be written to cannot not found
      */
     @Override
-    public void exec(TaskList tasks, Ui ui, Storage storage) throws TaskNotFoundException, InvalidTaskNumberException, InvalidFileException {
+    public void exec(TaskList tasks, Ui ui, Storage storage) throws TaskNotFoundException,
+            InvalidTaskNumberException, InvalidFileException {
         ui.printDelTask(tasks, index);
         deleteTask(index, tasks);
         storage.writeToFile("data.txt", tasks.writeString());

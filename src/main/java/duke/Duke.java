@@ -3,7 +3,6 @@ package duke;
 import commands.Command;
 import exceptions.DukeException;
 import tasks.TaskList;
-
 import java.io.FileNotFoundException;
 import java.nio.file.Paths;
 
@@ -21,7 +20,7 @@ class Duke {
     /**
      * Attempts to read an existing stored data.txt file, and creates a new data.txt file if one is not found
      */
-    Duke() {
+    private Duke() {
         this.tasks = new TaskList();
         this.quit = false;
         this.ui = new Ui();
@@ -40,7 +39,7 @@ class Duke {
      * command is received.
      */
 
-    void run() {
+    private void run() {
         ui.showWelcome();
         while (!quit) {
             String input = ui.takeInput();
