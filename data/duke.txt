@@ -1,4 +1,0 @@
-T | 1 | read book
-D | 0 | return book | Aug 23 2020 | 0
-E | 0 | project meeting | Aug 24 2020 04:00pm | 1
-T | 1 | join sports club
