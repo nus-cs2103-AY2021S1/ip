@@ -14,14 +14,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents the program storage, which can load and save tasks.
+ */
 public class Storage {
 
     private final String filePath;
 
+    /**
+     * Initializes a newly created Storage with a file path.
+     * @param filePath path of the saved tasks file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks into a task list.
+     * @return list of tasks.
+     * @throws DukeException if there are any I/O issues.
+     */
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
         try {
@@ -40,6 +52,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Loads tasks from a file to a list.
+     * @param tasks list of tasks.
+     * @throws DukeException if there are any I/O issues.
+     */
     private void loadFromFile(List<Task> tasks) throws DukeException {
         try {
             File f = new File(this.filePath);
@@ -69,6 +86,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Processes a string from the save file to a task.
+     * @param type type of task.
+     * @param attr attributes of task.
+     * @return task derived from string.
+     */
     private Task taskCreator(String type, String[] attr) {
         String meta = attr[3];
         if (meta.contains(" ")) {
@@ -87,6 +110,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks for any formatting issues from the save file.
+     * @param attr attributes of task.
+     * @param lineCounter current line number.
+     * @throws DukeException if there are any formatting issues.
+     */
     private void formatCheck(String[] attr, int lineCounter) throws DukeException {
         if (attr.length < 3 || (!attr[1].equals("V") && !attr[1].equals("X"))
                 || ((attr[0].equals("D") || attr[0].equals("E")) && attr.length != 4)
@@ -95,7 +124,12 @@ public class Storage {
         }
     }
 
-    public void save(List<Task> tasks) throws DukeException{
+    /**
+     * Saves the list of tasks to a file.
+     * @param tasks list of tasks.
+     * @throws DukeException if there are any I/O issues.
+     */
+    public void save(List<Task> tasks) throws DukeException {
         StringBuilder taskData = new StringBuilder();
         for (Task ts : tasks) {
             taskData.append(ts.formatTask()).append("\n");
@@ -107,6 +141,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes a line to a file.
+     * @param textToAdd text to be written.
+     * @throws IOException if there are any I/O issues.
+     */
     private void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         fw.write(textToAdd);
