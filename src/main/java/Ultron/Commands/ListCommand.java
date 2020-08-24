@@ -23,7 +23,7 @@ public class ListCommand extends Command {
         if(taskList.size() == 0){
 
             //When there is no task
-            ui.print("You have no business with me");
+            ui.print("You have no business with me\n");
 
         } else {
 
