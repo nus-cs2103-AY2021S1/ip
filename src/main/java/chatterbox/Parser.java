@@ -30,9 +30,12 @@ public class Parser {
         // Get first word of input
         String command = (input + " ").split(" ")[0];
 
+        // Check if description of command is empty
         if (!input.contains(" ") || input.substring(input.indexOf(' ')).strip().equals("")) {
             throw new ChatterboxException("The description of a " + command + " cannot be empty");
         }
+
+        // Return a Task based on the command word
         String contents = input.substring(input.indexOf(' ') + 1);
         switch (command) {
         case "deadline":

@@ -8,7 +8,9 @@ public class Deadline extends Task {
             String[] split = s.split("/", 2);
             String dateTime = split[1].substring(split[1].indexOf(' ') + 1);
             deadline = Parser.parseDateTime(dateTime);
-            if (deadline != null) dateTime = deadline.format(DF);
+            if (deadline != null) {
+                dateTime = deadline.format(DF);
+            }
             return split[0] + "(" + split[1].split(" ")[0] + ": " + dateTime + ")";
         } else {
             return s;
