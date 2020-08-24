@@ -60,13 +60,12 @@ class Parser {
             return new ListTasksCommand();
         case("todo"):
             return new CreateTodoCommand(body, false);
-            break;
         }
 
         return new InvalidCommand();
     }
 
-    private static LocalDate genDate(String input) throws NumberFormatException {
+    static LocalDate genDate(String input) throws NumberFormatException {
         String[] strings = input.split(Parser.dateSeparator, 3);
         int[] ints = new int[3];
         for(int i = 0; i < 3; i++) {

@@ -10,10 +10,11 @@ class CompleteTaskCommand extends Command {
 
     @Override
     protected void execute(Storage storage, TaskList tasks, Ui ui) {
-        if (tasks.completeTaskAt(this.taskIndex)) {
-            // TODO Ui: task completed successfully
+        Task task = tasks.completeTaskAt(this.taskIndex);
+        if (task != null) {
+            ui.printCompleteTask(task);
         } else {
-            // TODO Ui: out of range
+            ui.printInvalidTaskIndex();
         }
     }
 }

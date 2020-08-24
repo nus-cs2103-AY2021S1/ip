@@ -18,7 +18,7 @@ class CreateDeadlineCommand extends Command {
 
     @Override
     protected void execute(Storage storage, TaskList tasks, Ui ui) {
-        tasks.addDeadline(this.description, this.isComplete, this.date);
-        // TODO Ui: create deadline
+        Deadline deadline = tasks.addDeadline(this.description, this.isComplete, this.date);
+        ui.printCreateTask(tasks, deadline);
     }
 }

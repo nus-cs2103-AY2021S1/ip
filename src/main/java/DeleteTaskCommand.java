@@ -10,10 +10,11 @@ class DeleteTaskCommand extends Command {
 
     @Override
     protected void execute(Storage storage, TaskList tasks, Ui ui) {
-        if (tasks.deleteTaskAt(this.taskIndex)) {
-            // TODO Ui: task deleted successfully
+        Task task = tasks.deleteTaskAt(this.taskIndex);
+        if (task != null) {
+            ui.printDeleteTask(tasks, task);
         } else {
-            // TODO Ui: out of range
+            ui.printInvalidTaskIndex();
         }
     }
 }

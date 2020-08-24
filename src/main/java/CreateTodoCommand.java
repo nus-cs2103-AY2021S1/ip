@@ -13,7 +13,7 @@ class CreateTodoCommand extends Command {
 
     @Override
     protected void execute(Storage storage, TaskList tasks, Ui ui) {
-        tasks.addTodo(this.description, this.isComplete);
-        // TODO Ui: successfully create todo
+        ToDo todo = tasks.addTodo(this.description, this.isComplete);
+        ui.printCreateTask(tasks, todo);
     }
 }

@@ -11,7 +11,7 @@ class TaskList {
         this.taskArrayList = new ArrayList<>();
     }
 
-    private boolean isEmpty() {
+    boolean isEmpty() {
         return taskArrayList.size() == 0;
     }
 
@@ -26,14 +26,15 @@ class TaskList {
     /**
      * Deletes the task with index specified by taskIndex
      * @param taskIndex current index of the task
-     * @return true if the task is deleted successfully, false otherwise
+     * @return Deleted task if deletion is successful, null otherwise
      */
-    boolean deleteTaskAt(int taskIndex) {
+    Task deleteTaskAt(int taskIndex) {
         if (taskIndex >= 0 && taskIndex < this.taskArrayList.size()) {
+            Task task = this.getTaskAt(taskIndex);
             this.taskArrayList.remove(taskIndex);
-            return true;
+            return task;
         } else {
-            return false;
+            return null;
         }
     }
 
@@ -43,26 +44,39 @@ class TaskList {
 
     /**
      * Creates a new ToDo and adds it to the task list
+     * @param description Description of the todo
+     * @param isComplete Whether the todo is complete
+     * @return Created todo
      */
-    void addTodo(String description, boolean isComplete) {
+    ToDo addTodo(String description, boolean isComplete) {
         ToDo todo = new ToDo(description, isComplete);
         this.taskArrayList.add(todo);
+        return todo;
     }
 
     /**
      * Creates a new deadline and adds it to the task list
+     * @param description Description of the deadline
+     * @param isComplete Whether the deadline is complete
+     * @param date Date of the deadline
+     * @return Created deadline
      */
-    void addDeadline(String description, boolean isComplete, LocalDate date) {
+    Deadline addDeadline(String description, boolean isComplete, LocalDate date) {
         Deadline deadline = new Deadline(description, isComplete, date);
         this.taskArrayList.add(deadline);
+        return deadline;
     }
 
     /**
      * Creates a new event and adds it to the task list
+     * @param description Description of the event
+     * @param isComplete Whether the event is complete
+     * @param date Date of the event
      */
-    void addEvent(String description, boolean isComplete, LocalDate date) {
+    Event addEvent(String description, boolean isComplete, LocalDate date) {
         Event event = new Event(description, isComplete, date);
         this.taskArrayList.add(event);
+        return event;
     }
 
     @Override
@@ -84,14 +98,15 @@ class TaskList {
     /**
      * Marks the task with index specified by taskIndex as complete
      * @param taskIndex current index of the task
-     * @return true if the task is marked complete successfully, false otherwise
+     * @return Completed task if completion is successful, null otherwise
      */
-    boolean completeTaskAt(int taskIndex) {
+    Task completeTaskAt(int taskIndex) {
         if (taskIndex >= 0 && taskIndex < this.taskArrayList.size()) {
-            this.taskArrayList.get(taskIndex).completeTask();
-            return true;
+            Task task = this.taskArrayList.get(taskIndex);
+            task.completeTask();
+            return task;
         } else {
-            return false;
+            return null;
         }
     }
 }

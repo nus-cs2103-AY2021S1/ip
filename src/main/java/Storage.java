@@ -23,31 +23,35 @@ class Storage {
 
     /**
      * Loads data from file specified by pathName into a task list
-     * @return TaskList that reflects all the data in the file specified by pathName
+     * @return TaskList represented by the data in the file specified by pathName. task list is empty if loading of
+     * data was unsuccessful
      */
-    TaskList loadTaskList() {
-        File dukeData = new File(this.pathName);
-        TaskList taskList = new TaskList();
-        if (dukeData.exists()) {
+    TaskList loadTasks() {
+        TaskList tasks = new TaskList();
+        if (this.file.exists()) {
             try {
-                BufferedReader csvReader = new BufferedReader(new FileReader(dukeData));
-                String eachRow;
-                while ((eachRow = csvReader.readLine()) != null) {
-                    String[] dataStringArray = eachRow.split(dataSeparator);
-                    System.out.println(dataStringArray[0] + dataStringArray[1] + dataStringArray[2]);
-                    Task eachTask = Duke.genTask(dataStringArray);
-                    if (eachTask != null) {
-                        taskList.addToList(eachTask);
-                    }
+                BufferedReader csvReader = new BufferedReader(new FileReader(this.file));
+                String eachDataEntry;
+                while ((eachDataEntry = csvReader.readLine()) != null) {
+                    String[] strings = eachDataEntry.split(this.dataSeparator);
+                    this.addTaskFromData(tasks, strings);
                 }
-            } catch (java.io.FileNotFoundException e) {
-                System.out.println("(FILE NOT FOUND) THIS MESSAGE SHOULD NEVER APPEAR");
-            } catch (java.io.IOException e) {
-                System.out.println("(ERROR READING FILE) THIS MESSAGE SHOULD NEVER APPEAR");
+            } catch (IOException ignored) {
             }
-            return taskList;
-        } else {
-            return null;
+        }
+        return tasks;
+    }
+
+    void addTaskFromData(TaskList tasks, String[] strings) {
+        if (strings.length > 0) {
+            String taskType = strings[0];
+            if (taskType.equals("todo") && strings.length == 3) {
+                tasks.addTodo(strings[2], Boolean.parseBoolean(strings[1]));
+            } else if (taskType.equals("deadline") && strings.length == 4) {
+                tasks.addDeadline(strings[2], Boolean.parseBoolean(strings[1]), Parser.genDate(strings[3]));
+            } else if (taskType.equals("event") && strings.length == 4) {
+                tasks.addEvent(strings[2], Boolean.parseBoolean(strings[1]), Parser.genDate(strings[3]));
+            }
         }
     }
 
@@ -57,7 +61,9 @@ class Storage {
      */
     boolean resetFile() {
         try {
-            return this.file.delete() && this.file.createNewFile();
+            this.file.delete();
+            this.file.createNewFile();
+            return true;
         } catch (IOException e) {
             return false;
         }
@@ -77,8 +83,10 @@ class Storage {
                     csvWriter.append(s);
                     csvWriter.append(this.dataSeparator);
                 }
+                csvWriter.append("\n");
             }
-            csvWriter.append("\n");
+            csvWriter.flush();
+            csvWriter.close();
             return true;
         } catch (IOException e) {
             return false;

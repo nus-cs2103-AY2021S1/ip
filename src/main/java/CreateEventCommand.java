@@ -18,6 +18,7 @@ class CreateEventCommand extends Command {
 
     @Override
     protected void execute(Storage storage, TaskList tasks, Ui ui) {
-        tasks.addEvent(description, isComplete, date);
+        Event event = tasks.addEvent(description, isComplete, date);
+        ui.printCreateTask(tasks, event);
     }
 }
