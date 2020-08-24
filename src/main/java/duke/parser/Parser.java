@@ -8,15 +8,29 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Class to parse raw input from user and run commands from the input.
+ */
 public class Parser {
     private final TaskList taskList;
     private final Ui ui;
 
+    /**
+     * Constructor for Parser.
+     * @param taskList TaskList to pass to commands.
+     * @param ui Ui object that commands will use.
+     */
     public Parser(TaskList taskList, Ui ui) {
         this.taskList = taskList;
         this.ui = ui;
     }
 
+    /**
+     * Parses the String input, then runs the respective Command (if input is valid)
+     * using the Parser object's internal TaskList and Ui objects.
+     * @param input String raw input from user.
+     * @throws DukeException If there are any parse errors, or Command has any errors.
+     */
     public void parseAndRun(String input) throws DukeException {
         for (Command command : Command.values()) {
             Optional<Matcher> maybeMatcher = command.matcher(input);

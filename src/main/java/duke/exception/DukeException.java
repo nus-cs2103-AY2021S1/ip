@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Custom exception class for Duke-related exceptions.
+ */
 public class DukeException extends Exception {
     public enum Errors {
         UNKNOWN_COMMAND("sorry sir i dont understand your command sir\n"

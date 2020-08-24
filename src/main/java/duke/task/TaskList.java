@@ -3,6 +3,9 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Wrapper for the list of Tasks stored in Duke.
+ */
 public class TaskList {
     private final List<Task> items;
 
@@ -22,6 +25,12 @@ public class TaskList {
         return this.items.size();
     }
 
+    /**
+     * Adds a new Task to the TaskList.
+     * Returns a formatted String that should be printed to the user.
+     * @param task Task to add.
+     * @return String output to print.
+     */
     public String add(Task task) {
         this.items.add(task);
         return "morning sir i have added this to the list sir:\n"
@@ -52,6 +61,11 @@ public class TaskList {
         return enumerateItems(this.items);
     }
 
+    /**
+     * Calls the markAsDone method of the Task stored in this TaskList at index idx.
+     * @param idx Index of Task to markAsDone.
+     * @return Task of item that was just marked.
+     */
     public Task markItem(int idx) {
         Task selected = this.items.get(idx);
         selected.markAsDone();

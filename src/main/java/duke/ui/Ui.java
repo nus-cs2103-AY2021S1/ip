@@ -2,6 +2,9 @@ package duke.ui;
 
 import java.util.Scanner;
 
+/**
+ * Class to handle and abstract Ui (currently stdio) operations.
+ */
 public class Ui {
     private static final String logo =
         "               /,   ,|   ,|     \n"
@@ -22,6 +25,9 @@ public class Ui {
     private final Scanner scanner;
     private boolean isActive;
 
+    /**
+     * Constructor for Ui object.
+     */
     public Ui() {
         this.scanner = new Scanner(System.in);
         this.isActive = true;
@@ -35,6 +41,9 @@ public class Ui {
         return this.isActive;
     }
 
+    /**
+     * Closes this Ui object, and sets isActive() to false.
+     */
     public void close() {
         this.scanner.close();
         this.isActive = false;

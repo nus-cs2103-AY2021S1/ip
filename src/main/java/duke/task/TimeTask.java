@@ -6,10 +6,10 @@ import java.time.format.DateTimeParseException;
 
 import duke.exception.DukeException;
 
-public abstract class TimeTask extends Task {
+abstract class TimeTask extends Task {
     private final LocalDate date;
 
-    public TimeTask(String description, String dateString) throws DukeException {
+    protected TimeTask(String description, String dateString) throws DukeException {
         super(description);
         try {
             this.date = LocalDate.parse(dateString);
@@ -18,6 +18,12 @@ public abstract class TimeTask extends Task {
         }
     }
 
+    /**
+     * Date descriptor used to format output.
+     * e.g. "at" for Event (Event at ...).
+     * Used only for toString formatting. Does not affect Command's match function.
+     * @return String date descriptor.
+     */
     public abstract String getDateDescriptor();
 
     protected String dateString() {
