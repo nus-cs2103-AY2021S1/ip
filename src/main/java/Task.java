@@ -85,6 +85,28 @@ public class Task {
         }
     }
 
+    public String taskToText() { // converts description text to file text
+        String des = this.description;
+        String task = des.substring(des.indexOf(" ") + 1);
+        if (this.isTodo()) {
+            return (this.isDone ? "T | 1 | " + task
+                                : "T | 0 | " + task);
+        } else if (this.isDeadline()) {
+            return (this.isDone ? "D | 1 | " + task.substring(0, task.indexOf('/') - 1)
+                                             + " | " + this.getDate()
+                                : "D | 0 | " + task.substring(0, task.indexOf('/') - 1)
+                                             + " | " + this.getDate());
+        } else if (this.isEvent()) {
+            return (this.isDone ? "E | 1 | " + task.substring(0, task.indexOf('/') - 1)
+                                             + " | " + this.getDate()
+                                : "E | 0 | " + task.substring(0, task.indexOf('/') - 1)
+                                             + " | " + this.getDate());
+        } else {
+            return "";
+        }
+    }
+
+
     @Override
     public String toString() {
         String des = this.description;
