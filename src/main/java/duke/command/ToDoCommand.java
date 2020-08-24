@@ -1,8 +1,14 @@
-package duke;
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.task.Task;
+import duke.TaskList;
+import duke.Ui;
 
 public class ToDoCommand extends Command {
     private Task task;
-   ToDoCommand(Task task) {
+   public ToDoCommand(Task task) {
        this.task = task;
    }
     

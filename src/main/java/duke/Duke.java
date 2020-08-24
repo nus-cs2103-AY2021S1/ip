@@ -1,7 +1,5 @@
 package duke;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
+import duke.command.Command;
 
 public class Duke {
 

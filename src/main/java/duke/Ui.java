@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -27,7 +29,7 @@ public class Ui {
     }
     
     // Formatting and UI
-    String replyFormatter(String reply) {
+    public String replyFormatter(String reply) {
         String partition = "__________________________";
         return String.format(partition + "\n%s\n" + partition, reply);
     }
