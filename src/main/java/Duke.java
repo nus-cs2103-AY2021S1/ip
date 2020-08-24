@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -107,14 +110,20 @@ public class Duke {
                     }
                     String[] task = input.substring(9).split(" /by ");
                     taskName = task[0];
-                    String timeBy = task[1];
-                    Task taskCreated = new Deadline(taskName, timeBy);
+                    String timeBy = task[1].replace(' ', 'T');
+                    System.out.println("After formatting: " + timeBy);
+                    Task taskCreated = new Deadline(taskName, LocalDateTime.parse(timeBy,
+                            DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")));
+                    System.out.println("Success");
                     tasks.add(taskCreated);
                     System.out.println("Got it. I've added this task:" +
                             "\n\t" + taskCreated);
                     printTotalNumberOfTasks();
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Invalid description of a deadline item!");
+                } catch (DateTimeParseException f) {
+                    throw new DukeException("Please enter deadline in this format: dd/MM/yyyy timeIn24Hr"
+                            + "\nE.g. 01/12/2020 2359");
                 }
             } else if (taskType.equals("event")) {
                 try {
@@ -123,14 +132,19 @@ public class Duke {
                     }
                     String[] task = input.substring(6).split(" /at ");
                     taskName = task[0];
-                    String timeAt = task[1];
-                    Task taskCreated = new Event(taskName, timeAt);
+                    String timeAt = task[1].replace(' ', 'T');
+
+                    Task taskCreated = new Event(taskName, LocalDateTime.parse(timeAt,
+                            DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")));
                     tasks.add(taskCreated);
                     System.out.println("Got it. I've added this task:" +
                             "\n\t" + taskCreated);
                     printTotalNumberOfTasks();
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Invalid description of an event!");
+                } catch (DateTimeParseException f) {
+                    throw new DukeException("Please enter event time in this format: dd/MM/yyyy timeIn24Hr"
+                            + "\nE.g. 01/12/2020 2359");
                 }
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means!");
