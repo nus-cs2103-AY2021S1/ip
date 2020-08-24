@@ -2,6 +2,8 @@ package tasks;
 
 import storage.Storage;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+
 import static java.lang.Integer.parseInt;
 
 /**
@@ -42,6 +44,26 @@ public class TaskList {
      */
     protected int getNumList() {
         return this.tasks.size();
+    }
+
+    public boolean containsWord(String text, String keyword) {
+        /*String regexFormat = "(?i).*?\\b%s\\b.*?";
+        String regex = String.format(regexFormat, Pattern.quote(keyword));
+        return text.matches(regex);*/
+        return text.contains(keyword);
+    }
+
+    public boolean findInList(String keyword) {
+        boolean isMatch = false;
+        int i = 1;
+        for (Task task : tasks) {
+            if (containsWord(task.getTaskName(), keyword)) {
+                isMatch = true;
+                System.out.println(i + ". " + task);
+                i++;
+            }
+        }
+        return isMatch;
     }
 
     /**

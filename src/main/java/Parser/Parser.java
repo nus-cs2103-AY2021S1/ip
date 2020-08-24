@@ -84,8 +84,7 @@ public class Parser {
                 storage.setDoneLine(index);
                 String doneTask = storage.printLine(index);
                 doneTask = storage.processLine(doneTask);
-
-                System.out.println("Tasks.Task marked as done! Good job!");
+                System.out.println("Task marked as done! Good job!");
                 System.out.println(doneTask);
             } catch (IndexOutOfBoundsException e) {
                 indexOutOfBounds();
@@ -194,6 +193,18 @@ public class Parser {
         }
     }
 
+    public void handleFind(String command) throws DukeException {
+        String[] findCommand = command.split("\\W+");
+        if (findCommand.length == 1) {
+            throw new DukeException("Oh no! Did you FIND out your problem? (The description of fine can't be empty!)");
+        } else {
+            String taskName = command.substring(command.indexOf("find") + 5);
+            System.out.println("Here's what I've found for you:");
+            tasks.findInList(taskName);
+            System.out.println("Hope you found it useful!");
+        }
+    }
+
     /**
      * Reads the user's input and manages it according to the input.
      * @param command the input given by the user
@@ -221,6 +232,9 @@ public class Parser {
                 break;
             case "event":
                 handleEvent(command);
+                break;
+            case "find":
+                handleFind(command);
                 break;
             default:
                 System.out.println("Sorry! I don't understand that command. Please try again!");
