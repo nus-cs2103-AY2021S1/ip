@@ -1,4 +1,4 @@
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 
 public class TaskList implements Serializable {
@@ -25,7 +25,8 @@ public class TaskList implements Serializable {
         taskList.remove(task);
     }
 
-    public void addTask(Task task) {
+    public void addTask(Task task) throws FileNotFoundException {
         taskList.add(task);
+        }
     }
-}
+
