@@ -1,7 +1,7 @@
 package duke.task;
 
 public abstract class Task {
-    protected String description;
+    protected final String description;
     protected boolean isDone;
 
     public Task(String description) {
@@ -31,6 +31,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", getTaskType(),getStatusIcon(), description);
+        return String.format("[%s][%s] %s", getTaskType(), getStatusIcon(), description);
     }
 }

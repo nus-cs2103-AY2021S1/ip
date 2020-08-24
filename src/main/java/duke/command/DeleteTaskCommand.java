@@ -13,6 +13,7 @@ public class DeleteTaskCommand implements Command {
     public DeleteTaskCommand(int n) {
         this.n = n;
     }
+
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) throws DukeError {
         if (n < 1 || n > taskList.numberOfTasks()) {

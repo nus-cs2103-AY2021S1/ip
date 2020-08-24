@@ -8,7 +8,7 @@ import duke.main.UI;
 import duke.task.Task;
 
 public class AddTaskCommand implements Command {
-    Task task;
+    final Task task;
 
     public AddTaskCommand(Task task) {
         this.task = task;
