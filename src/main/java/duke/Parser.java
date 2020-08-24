@@ -1,8 +1,13 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Parser {
@@ -29,7 +34,7 @@ public class Parser {
                 }
                 for (Task task :
                         todoList) {
-                    System.out.println(todoList.indexOf(task) + 1 + ". " + task.toString());
+                    System.out.println(todoList.indexOf(task) + 1 + " " + task.toString());
                 }
                 printLine();
                 break;
