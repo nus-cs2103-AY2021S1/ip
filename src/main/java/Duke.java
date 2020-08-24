@@ -23,7 +23,7 @@ public class Duke {
             ui.askForCommand();
             String s = sc.nextLine();
             Command cmd = CommandHandler.parseCommand(s);
-            cmd.setTaskManager(taskManager);
+            cmd.setUtility(taskManager, ui, sc);
             boolean result = cmd.execute();
             running = result;
         }

@@ -6,6 +6,8 @@ public class CommandHandler {
             return new ExitCommand();
             case "list":
             return new ListCommand();
+            case "todo":
+            return new TodoCommand();
             default:
             return new ErrorCommand();
         }

@@ -33,4 +33,11 @@ public class Ui {
         System.out.println("GOODBYE!");
         System.out.println(LINE);
     }
+
+    public void askTodo() {
+        System.out.println(LINE);
+        System.out.println("What is the name of your Todo?"); 
+        System.out.println(LINE);
+        System.out.print("> ");
+    }
 }
