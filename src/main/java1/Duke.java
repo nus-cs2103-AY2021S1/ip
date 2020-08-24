@@ -1,10 +1,10 @@
-package main.java;
+package java1;
 
-import main.java.exception.*;
-import main.java.parser.Parser;
-import main.java.tasklist.*;
-import main.java.storage.*;
-import main.java.ui.*;
+import java1.exception.*;
+import java1.parser.Parser;
+import java1.tasklist.*;
+import java1.storage.*;
+import java1.ui.*;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -19,7 +19,7 @@ public class Duke {
 
     public Duke(String filePath) {
         ui = new Ui();
-        System.out.println(filePath);
+
         storage = new Storage(filePath);
 
         try {

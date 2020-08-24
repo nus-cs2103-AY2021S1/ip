@@ -1,8 +1,8 @@
-package main.java.tasklist;
+package java1.tasklist;
 
 import java.util.ArrayList;
 
-import main.java.storage.Storage;
+import java1.storage.Storage;
 
 public class TaskList {
     private ArrayList<Task> todoList;
