@@ -33,6 +33,8 @@ public class Parser {
                 return new AddCommand(event);
             case VIEW:
                 return new ViewCommand(splitCommand[1]);
+            case FIND:
+                return new FindCommand(splitCommand[1]);
             default:
                 throw new IllegalArgumentException();
             }
