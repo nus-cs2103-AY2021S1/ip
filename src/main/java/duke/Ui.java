@@ -25,11 +25,11 @@ public class Ui {
     }
 
     public void sayGoodbye() {
-        printReply(replyFormatter("SAYONARA!"));
+        printReply("SAYONARA!");
     }
     
     // Formatting and UI
-    public String replyFormatter(String reply) {
+    public static String replyFormatter(String reply) {
         String partition = "__________________________";
         return String.format(partition + "\n%s\n" + partition, reply);
     }

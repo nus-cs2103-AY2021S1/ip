@@ -15,7 +15,7 @@ public class Duke {
         try {
             taskItems = new TaskList(storage.loadTasksFromMemory());
         } catch (DukeException e) {
-//            ui.showLoadingError();
+            ui.showError(e.getMessage());
             taskItems = new TaskList();
         }
     }    
