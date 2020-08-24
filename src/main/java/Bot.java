@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -6,23 +5,19 @@ import java.util.Scanner;
 // The bot that handles inputs and give responses
 public class Bot {
     private static final String divider = "\t____________________________________________________________\n";
+    // Before A-TextUiTesting, scanner is defined in the getInput() method,
+    // and everything is fine if Duke.java is run directly in terminal.
+    // However, it might cause issues when we use script to automate text ui testing (I find that out when I implement TextUiTesting),
+    // From A-TextUiTesting onward, scanner is defined outside of the getInput() method.
 
     Scanner sc = new Scanner(System.in);
-    LinkedList<Task> taskList = new LinkedList<>();
+    List<Task> taskList = new LinkedList<>();
 
     //start the bot
     public void start() {
-        try {
-            connectWithStorage();
-        } catch (DukeException e) {
-            giveResponse(e.getMessage());
-        }
-
         String greeting = "Hello! I'm Duke\n" +
                 "\t What can I do for you?";
         giveResponse(greeting);
-
-
         String input = getInput();
         while (!input.equals("bye")) {
             try {
@@ -35,23 +30,13 @@ public class Bot {
                 } else {
                     addTask(input);
                 }
-                Storage.saveList(taskList);
             } catch (DukeException e) {
                 giveResponse(e.getMessage());
             }
+
             input = getInput();
         }
         giveResponse("Bye. Hope to see you again soon!");
-    }
-
-    private void connectWithStorage() throws DukeException{
-        try {
-            taskList = Storage.readList();
-        } catch (NoDataException e) {
-            throw new DukeException("No data found! You can try to add a few tasks!");
-        } catch (IOException e) {
-            throw new DukeException("I cannot access the data file!");
-        }
     }
 
     //print out the response
@@ -69,29 +54,29 @@ public class Bot {
         Task newTask;
         if (command.startsWith("todo")) {
             if (command.length() <= 5) {
-                throw new DukeException("The description of a todo cannot be empty.");
+                throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
             }
             newTask = new Todo(command.substring(5));
         } else if (command.startsWith("deadline")) {
             if (command.length() <= 9) {
-                throw new DukeException("The description of a deadline cannot be empty.");
+                throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
             }
             String description = command.substring(9);
             int index = description.indexOf("/by");
             if (index == -1 || description.length() - index <= 4 ) {
-                throw new DukeException("I don't know when the deadline is");
+                throw new DukeException("\u2639 OOPS!!! I don't know when the deadline is");
             }
             String by = description.substring(index + 4);
             description = description.substring(0, index - 1);
             newTask = new Deadline(description, by);
         } else if (command.startsWith("event")) {
             if (command.length() <= 6) {
-                throw new DukeException("The description of a event cannot be empty.");
+                throw new DukeException("\u2639 OOPS!!! The description of a event cannot be empty.");
             }
             String description = command.substring(6);
             int index = description.indexOf("/at");
             if (index == -1 || description.length() - index <= 4 ) {
-                throw new DukeException("I don't know when the event take place");
+                throw new DukeException("\u2639 OOPS!!! I don't know when the event take place");
             }
             String at = description.substring(index + 4);
             description = description.substring(0, index - 1);
@@ -109,17 +94,17 @@ public class Bot {
     // mark a task as completed
     private void completeTask(String command) throws DukeException {
         if (command.length() <= 5) {
-            throw new DukeException("I don't know which task should be marked as completed.");
+            throw new DukeException("\u2639 OOPS!!! I don't know which task should be marked as completed.");
         }
         int index;
         try {
             index = Integer.parseInt(command.substring(5)) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("The task index should be a number.");
+            throw new DukeException("\u2639 OOPS!!! The task index should be a number.");
         }
 
         if (index < 0) {
-            throw new DukeException("The task index should be a positive number.");
+            throw new DukeException("\u2639 OOPS!!! The task index should be a positive number.");
         }
         Task task = taskList.get(index);
         task.markAsDone();
@@ -129,17 +114,17 @@ public class Bot {
     // delete a task
     private void deleteTask(String command) throws DukeException {
         if (command.length() <= 7) {
-            throw new DukeException("I don't know which task should be deleted.");
+            throw new DukeException("\u2639 OOPS!!! I don't know which task should be deleted.");
         }
         int index;
         try {
             index = Integer.parseInt(command.substring(7)) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("The task index should be a number.");
+            throw new DukeException("\u2639 OOPS!!! The task index should be a number.");
         }
 
         if (index < 0) {
-            throw new DukeException("The task index should be a positive number.");
+            throw new DukeException("\u2639 OOPS!!! The task index should be a positive number.");
         }
         Task task = taskList.get(index);
         taskList.remove(index);

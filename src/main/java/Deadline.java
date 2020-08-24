@@ -1,29 +1,14 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 public class Deadline extends Task {
 
-    protected LocalDate byDate;
+    protected String by;
 
-    public Deadline(String description, String byDate) throws DukeException {
+    public Deadline(String description, String by) {
         super(description);
-        try {
-            this.byDate = LocalDate.parse(byDate);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid date detected! Please enter date as yyyy-mm-dd.");
-        }
+        this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
-    }
-
-    @Override
-    public String toStorageString() {
-        if (super.isDone) return "D | 1 | " + description + " | " + by;
-        else return "D | 0 | " + description + " | " + by;
+        return "[D]" + super.toString() + " (by: " + by + ")";
     }
 }
