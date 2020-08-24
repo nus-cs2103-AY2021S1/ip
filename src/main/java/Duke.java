@@ -1,13 +1,12 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 public class Duke {
 
     public static void main(String[] args) throws DukeException {
         UI ui = new UI();
         ui.welcome();
-        Tasks tasks = Tasks.read();
+        Tasks tasks = Storage.read();
         String input = ui.getInput();
         while (!input.equals("bye")) {
             try {

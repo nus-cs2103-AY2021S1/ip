@@ -1,10 +1,8 @@
-import java.io.*;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Tasks implements java.io.Serializable {
 
-    public static final File storage_file = Paths.get("tasks.ser").toFile();
+    private final Storage storage = new Storage();
     private ArrayList<Task> tasks;
 
     public Tasks() {
@@ -14,7 +12,7 @@ public class Tasks implements java.io.Serializable {
     public void addTask(Task task) {
         tasks.add(task);
         UI.print("added: " + task.toString() + numTasks());
-        store();
+        Storage.store(this);
     }
 
     public String numTasks() {
@@ -42,7 +40,7 @@ public class Tasks implements java.io.Serializable {
             throw new DukeException("invalid task number");
         }
         tasks.remove(i);
-        store();
+        Storage.store(this);
     }
 
     public void setDone(int i, boolean value) throws DukeException {
@@ -50,44 +48,11 @@ public class Tasks implements java.io.Serializable {
             throw new DukeException("invalid task number");
         }
         tasks.get(i).done = value;
-        store();
+        Storage.store(this);
     }
 
     public void store() {
-        try {
-            FileOutputStream fileOut = new FileOutputStream(storage_file);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(this);
-            out.close();
-        } catch (FileNotFoundException e) {
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Storage.store(this);
     }
 
-    public static Tasks read() {
-        try {
-            Tasks t = null;
-            FileInputStream fileIn = new FileInputStream(storage_file);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            t = (Tasks) in.readObject();
-            in.close();
-            fileIn.close();
-            return t;
-        } catch (FileNotFoundException i) {
-            try{
-                storage_file.createNewFile();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            return new Tasks();
-        } catch (IOException i) {
-            i.printStackTrace();
-            return new Tasks();
-        } catch (ClassNotFoundException c) {
-            System.out.println("Employee class not found");
-            c.printStackTrace();
-            return new Tasks();
-        }
-    }
 }
