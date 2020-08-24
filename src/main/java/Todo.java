@@ -8,4 +8,8 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    public String storedTaskString() {
+        return "T" + "@" + super.storedTaskString();
+    }
 }

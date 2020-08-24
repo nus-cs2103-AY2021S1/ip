@@ -56,4 +56,10 @@ public class Deadline extends Task {
                 + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + ", " + this.time + ")";
     }
+
+    public String storedTaskString() {
+        return "D" + "@" + super.storedTaskString()
+                + "@" + this.userInputDate + "@" + this.userInputTime;
+    }
+
 }

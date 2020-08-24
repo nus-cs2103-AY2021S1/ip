@@ -57,4 +57,10 @@ public class Event extends Task{
                 + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + ", " + this.time + ")";
     }
+
+    public String storedTaskString() {
+        return "E" + "@" + super.storedTaskString()
+                + "@" + this.userInputDate + "@" + this.userInputTime;
+    }
+
 }

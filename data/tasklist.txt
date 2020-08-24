@@ -1,4 +1,6 @@
-
-[D][0] results  (by: Dec 12 2020, 2.00pm)
-[T][0] playing w elephants
-[E][1] party  (at: Jan 2 2020, 12.00am - 1.30am)
+D@0@party@2020-12-13@1300
+T@1@elephant party
+D@1@party@2020-12-12@1800
+D@0@party@2020-12-12@1800
+D@0@party@2020-12-12@1300
+D@0@party@2020-12-12@1800

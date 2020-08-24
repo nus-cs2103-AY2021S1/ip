@@ -22,4 +22,8 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + taskName;
     }
+
+    public String storedTaskString() {
+        return this.getStatusIcon() + "@" + taskName;
+    }
 }

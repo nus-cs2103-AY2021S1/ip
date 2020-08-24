@@ -1,9 +1,9 @@
 format
 list
 todo swimming in sea
-deadline 321 /by 0
+deadline swimming /by 2020-05-27 1430
 list
-event 456 /at 7
+event swimming /at 2021-03-20 1500-1600
 todo racing car
 list
 done 1
