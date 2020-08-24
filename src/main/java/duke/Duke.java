@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Duke {
@@ -24,14 +23,6 @@ public class Duke {
         return tasks;
     }
 
-    /**
-     * Takes in user inputs. Program terminates when the String "bye" is entered.
-     * Program stores user inputs as Tasks and returns the list when the String "list" is entered.
-     * Tasks are categorised into "todo", "deadline" (to specify "by") and "event"  (to specify "at").
-     * When "done xx" is entered, Task xx in the list is marked as done.
-     * When "delete xx" is entered, Task xx in the list is removed from the list.
-     */
-
     public void run() throws IOException {
         ui.showWelcome();
         boolean isExit = false;
@@ -39,7 +30,7 @@ public class Duke {
             String fullCommand = ui.readCommand();
             ui.showLine();
             Parser.parse(fullCommand);
-            isExit = Parser.isExit;
+            isExit = Parser.getExitStatus();
             if (!isExit) {
                 ui.showLine();
             }
