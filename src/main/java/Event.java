@@ -7,6 +7,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String toSaveFormat() {
+        return String.format("E | %d | %s | %s", this.isDone ? 1 : 0, this.description, this.at);
+    }
+    
+    @Override
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(), this.at);
     }
