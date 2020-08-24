@@ -2,7 +2,20 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static final String DIVIDER = "________________________________________________________\n";
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
+
+    Duke(String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        try {
+            taskList = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            taskList = new TaskList();
+        }
+    }
 
     enum Command {
         EXIT("bye"),
@@ -29,72 +42,36 @@ public class Duke {
         }
     }
 
-    // TODO: Consider moving prependIndent to utils class/package for usage in other classes.
-    private static String prependIndent(String content, int indent) {
-        String spaces = "";
-        for (int i = 0; i < indent; i++) {
-            spaces += " ";
-        }
-        String[] contentArray = content.split("\n");
-        String result = "";
-        for (int i = 0; i < contentArray.length; i++) {
-            result += spaces + contentArray[i] + "\n";
-        }
-        return result;
-    }
-
-    private static void formattedPrint(String content) {
-        System.out.print(prependIndent(DIVIDER, 4));
-        System.out.print(prependIndent(content, 4));
-        System.out.println(prependIndent(DIVIDER, 4));
-    }
-
-    private static void greet() {
-        String welcomeMessage = "Konnichiwa!\n"
-                + "What can I do for you?\n";
-        System.out.printf(prependIndent(DIVIDER, 4));
-        System.out.printf(prependIndent(welcomeMessage, 5));
-        System.out.println(prependIndent(DIVIDER, 4));
-    }
-
-    private static void exit() {
-        String exitMessage = "Ja ne!\n";
-        System.out.printf(prependIndent(DIVIDER, 4));
-        System.out.printf(prependIndent(exitMessage, 5));
-        System.out.println(prependIndent(DIVIDER, 4));
-    }
-
-    private static void chat() {
-        TaskList storage = Storage.load(Storage.FILE_PATH);
-        Scanner sc = new Scanner(System.in);
-        String rawInput = "";
-        Boolean exit = false;
-        while (!exit) {
-            rawInput = sc.nextLine();
+    private void run() {
+        ui.greet();
+        Boolean isExit = false;
+        while (!isExit) {
+            String fullCommand = ui.readCommand();
             try {
-                String[] inputs = rawInput.split(" ", 2);
+                String[] inputs = fullCommand.split(" ", 2);
                 // By spec, inputs is guaranteed to have at least one element.
                 String commandString = inputs[0];
                 Command command = Command.findCommand(commandString);
                 switch (command) {
                 case EXIT:
-                    Storage.save(storage, Storage.FILE_PATH);
-                    exit = true;
+                    storage.save(this.taskList);
+                    isExit = true;
+                    ui.exit();
                     break;
                 case LIST:
-                    formattedPrint(prependIndent(storage.listItems(), 1));
+                    Ui.formattedPrint(Ui.prependIndent(taskList.listItems(), 1));
                     break;
                 case DONE:
                     try {
-                        int index = Integer.parseInt(rawInput.split(" ")[1]) - 1;
-                        formattedPrint(prependIndent(storage.markAsDone(index), 1));
+                        int index = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
+                        Ui.formattedPrint(Ui.prependIndent(taskList.markAsDone(index), 1));
                         break;
                     } catch (NumberFormatException e) {
                         throw new DukeException("This isn't harry potter, please use only integers.");
                     }
                 case DEADLINE:
                     try {
-                        formattedPrint(prependIndent(storage.add(Deadline.createTask(inputs[1])), 1));
+                        Ui.formattedPrint(Ui.prependIndent(taskList.add(Deadline.createTask(inputs[1])), 1));
                         break;
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("What are you rushing for? To wait?");
@@ -102,36 +79,34 @@ public class Duke {
                 case TODO:
                     try {
                         ToDo newToDo = new ToDo(inputs[1]);
-                        formattedPrint(prependIndent(storage.add(newToDo), 1));
+                        Ui.formattedPrint(Ui.prependIndent(taskList.add(newToDo), 1));
                         break;
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("I know your life is empty but your todo can't be empty.");
                     }
                 case EVENT:
                     try {
-                        formattedPrint(prependIndent(storage.add(Event.createTask(inputs[1])), 1));
+                        Ui.formattedPrint(Ui.prependIndent(taskList.add(Event.createTask(inputs[1])), 1));
                         break;
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Are you going to attend a nameless event?");
                     }
                 case DELETE:
                     try {
-                        int index = Integer.parseInt(rawInput.split(" ")[1]) - 1;
-                        formattedPrint(prependIndent(storage.deleteTask(index), 1));
+                        int index = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
+                        Ui.formattedPrint(Ui.prependIndent(taskList.deleteTask(index), 1));
                         break;
                     } catch (NumberFormatException e) {
                         throw new DukeException("This isn't harry potter, please use only integers.");
                     }
                 }
             } catch (DukeException e) {
-                formattedPrint(prependIndent(e.getMessage(), 1));
+                Ui.formattedPrint(Ui.prependIndent(e.getMessage(), 1));
             }
         }
     }
 
     public static void main(String[] args) {
-        greet();
-        chat();
-        exit();
+        new Duke(Storage.FILE_PATH).run();
     }
 }

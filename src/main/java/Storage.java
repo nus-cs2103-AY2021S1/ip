@@ -5,13 +5,21 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
 
     public static final String FILE_PATH = "duke/localData/data.duke";
 
-    public static void save(TaskList list, String filePath) throws DukeException {
+    private String filePath;
+
+    Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public void save(TaskList list) throws DukeException {
         String[] directories = filePath.split("/");
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, directories);
@@ -33,14 +41,14 @@ public class Storage {
     }
 
     // TODO: Consider moving decoding switch statement to its own method or under a util class.
-    public static TaskList load(String filePath) {
+    public List<Task> load() throws DukeException {
         try {
             String[] directories = filePath.split("/");
             String home = System.getProperty("user.home");
             Path path = Paths.get(home, directories);
             File history = new File(path.toString());
             Scanner sc = new Scanner(history);
-            TaskList loadTaskList = new TaskList();
+            List<Task> temporaryList = new ArrayList<>();
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 Task loadedTask = null;
@@ -57,13 +65,13 @@ public class Storage {
                 default:
                     throw new DukeException("There's something wrong with my memory...");
                 }
-                loadTaskList.add(loadedTask);
+                temporaryList.add(loadedTask);
             }
-            return loadTaskList;
+            return temporaryList;
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("There's something wrong with my memory...");
         } catch (FileNotFoundException e) {
-            return new TaskList();
+            throw new DukeException("I lost my memories.");
         }
     }
 }

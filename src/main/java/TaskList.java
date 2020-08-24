@@ -10,6 +10,10 @@ public class TaskList implements Iterable<Task> {
         this.store = new ArrayList<>();
     }
 
+    TaskList(List<Task> list) {
+        this.store = list;
+    }
+
     public String add(Task item) {
         this.store.add(item);
         return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in your list.\n",
