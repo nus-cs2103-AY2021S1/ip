@@ -15,7 +15,7 @@ public class Event extends Task {
         super(description, isDone, TaskType.EVENT);
         this.date = date;
     }
-    
+
     public boolean isDateEqual(LocalDate date) {
         return date.equals(this.date);
     }
@@ -24,11 +24,11 @@ public class Event extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         return date.format(formatter);
     }
-    
+
     @Override
     public String getData() {
         return String.format("%s_%s ", super.getData(), date);
-    } 
+    }
 
     @Override
     public String toString() {

@@ -15,7 +15,7 @@ public class Deadline extends Task {
         super(description, isDone, TaskType.DEADLINE);
         this.deadline = deadline;
     }
-    
+
     public boolean isDateEqual(LocalDate date) {
         return date.equals(this.deadline);
     }

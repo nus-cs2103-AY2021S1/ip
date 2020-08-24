@@ -1,31 +1,19 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.Tasks;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Ui {
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public Ui() {
         this.scanner = new Scanner(System.in);
-    }
-
-    private void printDashes() {
-        int length = 60;
-        System.out.println("_".repeat(length));
-    }
-
-    public void printWithDashes(String str) {
-        printDashes();
-        System.out.println(str);
-        printDashes();
     }
 
     public void showWelcome() {
@@ -36,6 +24,17 @@ public class Ui {
                 + " |____/ \\__,_|_|\\_\\___|\n\n";
         String greeting = logo + " Hello! I'm Duke\n" + " What can I do for you?";
         printWithDashes(greeting);
+    }
+
+    public void printWithDashes(String str) {
+        printDashes();
+        System.out.println(str);
+        printDashes();
+    }
+
+    private void printDashes() {
+        int length = 60;
+        System.out.println("_".repeat(length));
     }
 
     public void printExitMessage() {
@@ -50,16 +49,16 @@ public class Ui {
         printWithDashes(message);
     }
 
+    public void printList(Tasks tasks) {
+        StringBuilder builder = new StringBuilder(" Here are the tasks in your list:\n");
+        printWithDashes(printListItems(builder, tasks.getTasks()).toString());
+    }
+
     private StringBuilder printListItems(StringBuilder builder, ArrayList<Task> list) {
         for (int i = 0; i < list.size(); i++) {
             builder.append(String.format(" %s. %s\n", i + 1, list.get(i)));
         }
         return builder;
-    }
-
-    public void printList(Tasks tasks) {
-        StringBuilder builder = new StringBuilder(" Here are the tasks in your list:\n");
-        printWithDashes(printListItems(builder, tasks.getTasks()).toString());
     }
 
     public void printFound(LocalDate localDate, ArrayList<Task> list) {
@@ -86,7 +85,7 @@ public class Ui {
 
     public String readCommand() {
         if (this.scanner.hasNextLine()) {
-            return this.scanner.nextLine(); 
+            return this.scanner.nextLine();
         } else {
             this.scanner.close();
             return "bye";

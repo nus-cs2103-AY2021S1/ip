@@ -1,12 +1,14 @@
 package duke.task;
 
-import duke.exception.ReadFailedException;
-
 import java.time.LocalDate;
-
 import java.util.function.Function;
 
+import duke.exception.ReadFailedException;
+
 public class Task {
+    protected static final String CROSS_ICON = "\u2718";
+    protected static final String TICK_ICON = "\u2713";
+
     protected String description;
     protected boolean isDone;
     protected final TaskType type;
@@ -22,9 +24,23 @@ public class Task {
         this.isDone = isDone;
         this.type = type;
     }
-    
+
     public boolean hasDate() {
         return this.type != TaskType.TODO;
+    }
+
+    public static boolean isDateEqual(Task task, LocalDate date) {
+        if (!task.hasDate()) {
+            return false;
+        }
+        switch (task.type) {
+        case DEADLINE:
+            return ((Deadline) task).isDateEqual(date);
+        case EVENT:
+            return ((Event) task).isDateEqual(date);
+        default:
+            return false;
+        }
     }
 
     public void markAsDone() {
@@ -36,19 +52,19 @@ public class Task {
         Function<String, LocalDate> toDate = date -> LocalDate.parse(date.trim());
 
         switch (stringArr[0]) {
-            case "T":
-                return new Todo(stringArr[2], isDone.apply(stringArr[0]));
-            case "E":
-                return new Event(stringArr[2], toDate.apply(stringArr[3]), isDone.apply(stringArr[0]));
-            case "D":
-                return new Deadline(stringArr[2], toDate.apply(stringArr[3]), isDone.apply(stringArr[0]));
-            default:
-                throw new ReadFailedException("tasks");
+        case "T":
+            return new Todo(stringArr[2], isDone.apply(stringArr[0]));
+        case "E":
+            return new Event(stringArr[2], toDate.apply(stringArr[3]), isDone.apply(stringArr[0]));
+        case "D":
+            return new Deadline(stringArr[2], toDate.apply(stringArr[3]), isDone.apply(stringArr[0]));
+        default:
+            throw new ReadFailedException("tasks");
         }
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); // return tick or cross symbols
+        return (isDone ? TICK_ICON : CROSS_ICON); // return tick or cross symbols
     }
 
     public String getData() {

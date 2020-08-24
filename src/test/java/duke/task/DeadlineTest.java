@@ -1,22 +1,22 @@
 package duke.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class DeadlineTest {
-    private Deadline createDeadline() {
-        return new Deadline("description", LocalDate.parse("2020-04-03"));
-    }
-
     @Test
     public void testIsDateEquals() {
         assertTrue(createDeadline().isDateEqual(LocalDate.parse("2020-04-03")));
         assertFalse(createDeadline().isDateEqual(LocalDate.parse("2020-04-08")));
+    }
+
+    private Deadline createDeadline() {
+        return new Deadline("description", LocalDate.parse("2020-04-03"));
     }
 
     @Test

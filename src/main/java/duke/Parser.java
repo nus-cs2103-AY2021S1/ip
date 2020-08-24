@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -18,9 +21,6 @@ import duke.task.Event;
 import duke.task.TaskType;
 import duke.task.Todo;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 public class Parser {
     private static DoneCommand getDoneCommand(String input) throws EmptyInputException, UnknownInputException {
         String taskIndexStr;
@@ -33,14 +33,14 @@ public class Parser {
         if (taskIndexStr.length() < 1) {
             throw new EmptyInputException("The task to be marked as done is not specified.");
         }
-        
+
         int taskIndex;
         try {
             taskIndex = Integer.parseInt(taskIndexStr) - 1;
         } catch (IndexOutOfBoundsException | NumberFormatException ex) {
             throw new UnknownInputException();
         }
-        
+
         return new DoneCommand(taskIndex);
     }
 
@@ -55,17 +55,17 @@ public class Parser {
         if (taskIndexStr.length() < 1) {
             throw new EmptyInputException("The task to be deleted is not specified.");
         }
-        
+
         int taskIndex;
         try {
             taskIndex = Integer.parseInt(taskIndexStr) - 1;
         } catch (IndexOutOfBoundsException | NumberFormatException ex) {
             throw new UnknownInputException();
         }
-        
+
         return new DeleteCommand(taskIndex);
     }
-    
+
     private static FindCommand getFindCommand(String input) throws EmptyInputException, InvalidInputException {
         String dateStr;
         try {
@@ -84,10 +84,10 @@ public class Parser {
         } catch (DateTimeParseException ex) {
             throw new InvalidInputException("The date to be retrieved is invalid, it should be in YYYY-MM-DD format.");
         }
-        
+
         return new FindCommand(localDate);
     }
-    
+
     private static TaskCommand getTodoTaskCommand(String input) throws EmptyTaskException {
         if (input.length() == 4) {
             throw new EmptyTaskException("description", TaskType.TODO);
@@ -97,7 +97,7 @@ public class Parser {
         if (description.length() < 1) {
             throw new EmptyTaskException("description", TaskType.TODO);
         }
-        
+
         Todo todo = new Todo(description);
         return new TaskCommand(todo);
     }
@@ -117,6 +117,7 @@ public class Parser {
         if (dateStr.length() < 1) {
             throw new EmptyTaskException("date", TaskType.EVENT);
         }
+
         LocalDate localDate;
         try {
             localDate = LocalDate.parse(dateStr.trim());
@@ -124,7 +125,7 @@ public class Parser {
             throw new InvalidTaskException("The date of event is invalid, it should be in YYYY-MM-DD format.");
         }
 
-        Event event =  new Event(description, localDate);
+        Event event = new Event(description, localDate);
         return new TaskCommand(event);
     }
 
@@ -154,28 +155,28 @@ public class Parser {
         Deadline deadline = new Deadline(description, localDeadline);
         return new TaskCommand(deadline);
     }
-    
+
     public static Command parse(String input) throws DukeException {
         String keyword = input.split(" ")[0];
         switch (keyword) {
-            case "bye":
-                return new ByeCommand();
-            case "list":
-                return new ListCommand();
-            case "done":
-                return getDoneCommand(input);
-            case "delete":
-                return getDeleteCommand(input);
-            case "todo":
-                return getTodoTaskCommand(input);
-            case "event":
-                return getEventTaskCommand(input);
-            case "deadline":
-                return getDeadlineTaskCommand(input);
-            case "find":
-                return getFindCommand(input);
-            default:
-                throw new UnknownInputException();
+        case "bye":
+            return new ByeCommand();
+        case "list":
+            return new ListCommand();
+        case "done":
+            return getDoneCommand(input);
+        case "delete":
+            return getDeleteCommand(input);
+        case "todo":
+            return getTodoTaskCommand(input);
+        case "event":
+            return getEventTaskCommand(input);
+        case "deadline":
+            return getDeadlineTaskCommand(input);
+        case "find":
+            return getFindCommand(input);
+        default:
+            throw new UnknownInputException();
         }
     }
 }

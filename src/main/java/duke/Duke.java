@@ -1,11 +1,11 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.exception.ReadFailedException;
 import duke.task.Tasks;
-
-import java.io.IOException;
 
 public class Duke {
     private Storage storage;
