@@ -22,6 +22,13 @@ public class DateTimeHandler {
     }
 
     public static Pair<LocalDateTime, LocalDateTime> parseEventTimings(String eventTiming) {
+        int acceptableLength1 = STANDARD_DATETIME_FORMAT_STRING.length() + 1 + STANDARD_2400_FORMAT_STRING.length();
+        int acceptableLength2 = STANDARD_DATETIME_FORMAT_STRING.length() * 2 + 1;
+        if (eventTiming.length() != acceptableLength1 && eventTiming.length() != acceptableLength2) {
+            throw new DukeException(eventTiming + " is not a valid event timing. Please use either\n"
+                    + STANDARD_DATETIME_FORMAT_STRING + "-" + STANDARD_DATETIME_FORMAT_STRING + " (24hr)\n"
+                    + STANDARD_DATETIME_FORMAT_STRING + "-" + STANDARD_2400_FORMAT_STRING + " (24hr)");
+        }
         String firstTiming = eventTiming.substring(0, STANDARD_DATETIME_FORMAT_STRING.length());
         String secondTiming = eventTiming.substring(STANDARD_DATETIME_FORMAT_STRING.length() + 1);
         try {
@@ -32,6 +39,10 @@ public class DateTimeHandler {
             } else {
                 LocalTime time = LocalTime.parse(secondTiming, STANDARD_2400_FORMAT);
                 dateTime2 = LocalDateTime.of(dateTime1.toLocalDate(), time);
+            }
+
+            if (dateTime2.compareTo(dateTime1) < 0) {
+                throw new DukeException("End timing must be later than start timing!");
             }
             return Pair.of(dateTime1, dateTime2);
 
