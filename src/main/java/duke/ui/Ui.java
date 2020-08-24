@@ -6,7 +6,6 @@ public class Ui {
     private static final String LINE = "\t____________________________________________________________";
     private static final Scanner sc = new Scanner(System.in);
     public Ui() {
-
     }
 
     public void sendGreeting() {

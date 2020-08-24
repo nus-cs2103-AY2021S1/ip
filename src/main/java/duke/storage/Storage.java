@@ -1,8 +1,10 @@
 package duke.storage;
 
-import duke.task.*;
-import duke.tasklist.*;
-
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.tasklist.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,7 +24,6 @@ public class Storage {
         File file = new File(FILE_PATH);
         file.getParentFile().mkdirs();
     }
-
 
     public void save(TaskList list) {
         try {
@@ -65,15 +66,15 @@ public class Storage {
                     isDone = true;
                 }
                 switch (type) {
-                    case "T":
-                        task = new Todo(content, isDone);
-                        break;
-                    case "D":
-                        task = new Deadline(description, isDone, time);
-                        break;
-                    case "E":
-                        task = new Event(description, isDone, time);
-                        break;
+                case "T":
+                    task = new Todo(content, isDone);
+                    break;
+                case "D":
+                    task = new Deadline(description, isDone, time);
+                    break;
+                case "E":
+                    task = new Event(description, isDone, time);
+                    break;
                 }
                 list.add(task);
             }
@@ -82,5 +83,4 @@ public class Storage {
             return new ArrayList<>();
         }
     }
-
 }
