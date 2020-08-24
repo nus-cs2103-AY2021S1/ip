@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents the user interface that outputs information to the user.
+ */
 public class Ui {
 
     public Ui() {
@@ -10,6 +13,9 @@ public class Ui {
         System.out.println("The test file cannot be loaded properly.");
     }
 
+    /**
+     * Introduces the bot.
+     */
     public void introduce() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

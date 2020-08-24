@@ -3,12 +3,22 @@ package duke;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+/**
+ * Represents a parser object that interprets user inputs.
+ */
 public class Parser {
 
-    public Parser() {
+    public Parser() {}
 
-    }
-
+    /**
+     * Interprets the given user input with the current task list and storage.
+     *
+     * @param input Current input string of the user.
+     * @param taskList Current list of tasks of the user.
+     * @param storage Current storage of the user.
+     * @throws duke.DukeException
+     * @throws FileNotFoundException
+     */
     public void interpret(String input, duke.TaskList taskList, duke.Storage storage) throws duke.DukeException, FileNotFoundException {
         ArrayList<duke.Task> list = taskList.getList();
         if (input.equals("list")) {

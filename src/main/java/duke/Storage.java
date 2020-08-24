@@ -6,6 +6,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * Represents a storage object that deals with outputting and inputting tasks from a tasks.txt file.
+ */
 public class Storage {
 
     BufferedReader br;
@@ -34,6 +37,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the tasks.txt file when the bot is run.
+     *
+     * @return List of tasks.
+     * @throws IOException
+     * @throws duke.DukeException
+     */
     public ArrayList<duke.Task> loadTask() throws IOException, duke.DukeException {
         ArrayList<duke.Task> list = new ArrayList<>();
         String line = this.br.readLine();
@@ -71,6 +81,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Updates the tasks.txt file whenever a task is added or removed from the task list.
+     *
+     * @param list Task list.
+     * @throws FileNotFoundException
+     */
     public void update(ArrayList<duke.Task> list) throws FileNotFoundException {
         this.printWriter = new PrintWriter(filepath);
         this.list = list;

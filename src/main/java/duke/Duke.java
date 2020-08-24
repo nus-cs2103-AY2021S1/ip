@@ -2,11 +2,11 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a task manager bot named Duke.
+ */
 public class Duke {
 
     private duke.Storage storage;
@@ -25,10 +25,10 @@ public class Duke {
     }
 
     public static void main(String[] args) throws duke.DukeException, IOException {
-        new Duke("data/tasks.txt").run();
+        new Duke("data/tasks.txt").runBot();
     }
 
-    public void run() throws duke.DukeException, FileNotFoundException {
+    public void runBot() throws duke.DukeException, FileNotFoundException {
         ui.introduce();
 
         Scanner sc = new Scanner(System.in);

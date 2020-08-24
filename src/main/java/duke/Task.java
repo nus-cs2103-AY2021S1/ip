@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents a task object.
+ */
 public class Task {
     private String name;
     private Boolean isDone;

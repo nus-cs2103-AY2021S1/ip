@@ -5,6 +5,9 @@ import duke.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task that takes place on a date.
+ */
 public class Event extends Task {
 
     private LocalDate date;
