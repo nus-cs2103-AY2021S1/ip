@@ -1,11 +1,12 @@
 todo borrow book
+deadline return 1st book /by 2/3/2008 1200
 todo read book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+deadline return book /by 2/3/2008
+event project meeting /at 29/2/2002
 deadline do homework /by no idea :-p
 list
 done 3
 delete 2
-delete 5
+delete 6
 list
 bye

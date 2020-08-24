@@ -1,56 +1,63 @@
-Hello I'm chatterbox.Chatterbox. What can I do for you?
+Hello I'm Chatterbox. What can I do for you?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Got it. I've added this task: 
-[T][✗]  borrow book
+[T][✗] borrow book
 Now you have 1 tasks in the list
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Got it. I've added this task: 
-[T][✗]  read book
+[D][✗] return 1st book (by: Mar 2 2008 1200H)
 Now you have 2 tasks in the list
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Got it. I've added this task: 
-[D][✗]  return book (by: Sunday)
+[T][✗] read book
 Now you have 3 tasks in the list
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Got it. I've added this task: 
-[E][✗]  project meeting (at: Mon 2-4pm)
+[D][✗] return book (by: Mar 2 2008 0000H)
 Now you have 4 tasks in the list
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Got it. I've added this task: 
-[D][✗]  do homework (by: no idea :-p)
+[E][✗] project meeting (at: Mar 1 2002 0000H)
 Now you have 5 tasks in the list
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Got it. I've added this task: 
+[D][✗] do homework (by: no idea :-p)
+Now you have 6 tasks in the list
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-1. [T][✗]  borrow book
-2. [T][✗]  read book
-3. [D][✗]  return book (by: Sunday)
-4. [E][✗]  project meeting (at: Mon 2-4pm)
-5. [D][✗]  do homework (by: no idea :-p)
+1. [T][✗] borrow book
+2. [D][✗] return 1st book (by: Mar 2 2008 1200H)
+3. [T][✗] read book
+4. [D][✗] return book (by: Mar 2 2008 0000H)
+5. [E][✗] project meeting (at: Mar 1 2002 0000H)
+6. [D][✗] do homework (by: no idea :-p)
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Nice! I've marked this task as done: 
-[D][✓]  return book (by: Sunday)
+[T][✓] read book
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Noted! I've removed this task from your list: 
-[T][✗]  read book
- Now you have 4 tasks in the list.
+[D][✗] return 1st book (by: Mar 2 2008 1200H)
+ Now you have 5 tasks in the list.
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ☹ OOPS!!! Invalid task number.
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-1. [T][✗]  borrow book
-2. [D][✓]  return book (by: Sunday)
-3. [E][✗]  project meeting (at: Mon 2-4pm)
-4. [D][✗]  do homework (by: no idea :-p)
+1. [T][✗] borrow book
+2. [T][✓] read book
+3. [D][✗] return book (by: Mar 2 2008 0000H)
+4. [E][✗] project meeting (at: Mar 1 2002 0000H)
+5. [D][✗] do homework (by: no idea :-p)
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
