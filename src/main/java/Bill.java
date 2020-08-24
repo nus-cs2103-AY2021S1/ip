@@ -3,8 +3,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+<<<<<<< HEAD
 import java.util.*;
 import java.io.File;
+=======
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+>>>>>>> branch-Level-8
 
 public class Bill {
     
@@ -42,7 +53,7 @@ public class Bill {
         } else {
             for (int i = 0; i < list_of_Content.size(); i = i + 1) {
                 String counter = Integer.toString(i + 1) + ". ";
-                System.out.println(counter + list_of_Content.get(i));
+                System.out.println(counter + list_of_Content.get(i).timeConverted());
             }
         }
         System.out.println(horizontal_line);
@@ -91,7 +102,7 @@ public class Bill {
                         current.set_Task_As_Done();
                         System.out.println(horizontal_line);
                         System.out.println("Nice! I've marked this task as done: ");
-                        System.out.println(current);
+                        System.out.println(current.timeConverted());
                         System.out.println(horizontal_line);
 
                     } else if (firstChar.equals("delete")) {
@@ -133,7 +144,7 @@ public class Bill {
                             list_of_Content.add(new_task);
                             System.out.println(horizontal_line);
                             System.out.println("Got it. I've added this task: ");
-                            System.out.println(new_task);
+                            System.out.println(new_task.timeConverted());
                             System.out.println("Now you have " + list_of_Content.size() + " tasks in the list.");
                             System.out.println(horizontal_line);
                         } else if (firstChar.equals("deadline")) {
@@ -154,7 +165,7 @@ public class Bill {
                             list_of_Content.add(deadline);
                             System.out.println(horizontal_line);
                             System.out.println("Got it. I've added this task: ");
-                            System.out.println(deadline);
+                            System.out.println(deadline.timeConverted());
                             System.out.println("Now you have " + list_of_Content.size() + " tasks in the list.");
                             System.out.println(horizontal_line);
                         } else if (firstChar.equals("event")) {
@@ -176,7 +187,7 @@ public class Bill {
                             list_of_Content.add(event);
                             System.out.println(horizontal_line);
                             System.out.println("Got it. I've added this task: ");
-                            System.out.println(event);
+                            System.out.println(event.timeConverted());
                             System.out.println("Now you have " + list_of_Content.size() + " tasks in the list.");
                             System.out.println(horizontal_line);
                         } else {

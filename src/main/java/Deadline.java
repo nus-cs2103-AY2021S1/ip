@@ -11,8 +11,19 @@ public class Deadline extends Task {
         return "D" + " | " + super.fileFormat() + " | " + deadline;
     }
 
+<<<<<<< HEAD
+=======
+    public String timeConverted() {
+        timeParser inputTime = new timeParser(deadline);
+        String outputTime = inputTime.timeConverter();
+        return "D" + " | " + super.fileFormat() + " | " + outputTime;
+
+    }
+
+>>>>>>> branch-Level-8
     @Override
     public String toString() {
+        
         return "[D]" +  super.toString() + " (by: " + deadline + ")";
     }
 }
