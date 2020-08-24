@@ -8,6 +8,16 @@ public class Todo extends Task {
     }
 
     @Override
+    String getType() {
+        return "todo";
+    }
+
+    @Override
+    String getTime() {
+        return "0";
+    }
+
+    @Override
     Todo completeTask() {
         return new Todo(this.name, true);
     }

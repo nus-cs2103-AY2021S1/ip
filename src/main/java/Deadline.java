@@ -12,12 +12,22 @@ public class Deadline extends Task {
     }
 
     @Override
+    String getType() {
+        return "deadline";
+    }
+
+    @Override
+    String getTime() {
+        return deadline;
+    }
+
+    @Override
     Deadline completeTask() {
         return new Deadline(this.name, true, this.deadline);
     }
 
     @Override
     public String toString() {
-        return "[deadline]" + super.toString() + "(by: " + this.deadline + ")";
+        return "[deadline]" + super.toString() + " (by: " + this.deadline + ")";
     }
 }

@@ -12,6 +12,12 @@ public class Task {
         this.completed = completed;
     }
 
+    String getName() { return this.name; }
+
+    String getType() { return ""; }
+
+    String getTime() { return ""; }
+
     public String getStatusIcon() {
         return (this.completed ? "o" : "x"); //return O or X symbols
     }

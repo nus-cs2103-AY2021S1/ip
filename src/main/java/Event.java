@@ -12,12 +12,22 @@ public class Event extends Task {
     }
 
     @Override
+    String getType() {
+        return "event";
+    }
+
+    @Override
+    String getTime() {
+        return time;
+    }
+
+    @Override
     Event completeTask() {
         return new Event(this.name, true, this.time);
     }
 
     @Override
     public String toString() {
-        return "[event]" + super.toString() + "(at: " + this.time + ")";
+        return "[event]" + super.toString() + " (at: " + this.time + ")";
     }
 }
