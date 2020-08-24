@@ -118,7 +118,7 @@ public class Duke {
                         break;
                     case "D":
                         int indexOfLine = name.indexOf("|");
-                        temp.add(new Deadline(name.substring(0, indexOfLine - 1), isTaskDone, name.substring(indexOfLine + 1)));
+                        temp.add(new Deadline(name.substring(0, indexOfLine - 1), isTaskDone, name.substring(indexOfLine + 2)));
                         break;
                     case "E":
                         indexOfLine = name.indexOf("|");
@@ -145,7 +145,7 @@ public class Duke {
                 if (task instanceof Todo) {
                     pw.println(task.getType() + " | " + task.isDone() + " | " + task.getName());
                 } else {
-                    pw.println(task.getType() + " | " + task.isDone() + " | " + task.getName() + " |" + task.getEnd());
+                    pw.println(task.getType() + " | " + task.isDone() + " | " + task.getName() + " | " + task.getEnd());
                 }
             }
             pw.close();

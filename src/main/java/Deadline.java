@@ -40,13 +40,13 @@ public class Deadline extends Task {
 
     @Override
     public String getEnd() {
-        return this.end;
+        return this.deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
     @Override
     public String toString(){
         return isDone
-                ? "[D][✓] " + this.getName() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"
-                : "[D][✗] " + this.getName() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                ? "[D][✓] " + this.getName() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")"
+                : "[D][✗] " + this.getName() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")";
     }
 }
