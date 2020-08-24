@@ -7,12 +7,12 @@ import exception.DukeException;
 
 public class ListCommand extends Command {
 
-    @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.displayTaskList(taskList);
-    }
+  @Override
+  public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    ui.displayTaskList(taskList);
+  }
 
-    public ListCommand() {
-        super(Command.CommandType.List);
-    }
+  public ListCommand() {
+    super(Command.CommandType.List);
+  }
 }

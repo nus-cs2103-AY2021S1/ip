@@ -8,10 +8,16 @@
 plugins {
     id 'com.github.johnrengelman.shadow' version '6.0.0'
     id 'java'
+    id 'com.github.sherter.google-java-format' version '0.9'
+
 }
 
 jar {
     manifest {
         attributes 'Main-Class': 'duke.Duke'
     }
+}
+
+repositories {
+    jcenter()  // or mavenCentral()
 }
