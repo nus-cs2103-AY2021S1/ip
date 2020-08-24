@@ -1,4 +1,4 @@
-class InadequateCommandException extends IncorrectCommandException {
+class InadequateCommandException extends DukeException {
     private String typeOfTask;
     private String[] missingSections;
 

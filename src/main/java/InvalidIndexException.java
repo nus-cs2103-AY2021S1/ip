@@ -1,4 +1,4 @@
-public class InvalidIndexException extends IncorrectCommandException {
+public class InvalidIndexException extends DukeException {
     InvalidIndexException() {
         super();
     }
