@@ -1,14 +1,11 @@
 public abstract class Task {
 
-    public static int numberOfTask = 0;
-
     protected String description;
     protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        numberOfTask++;
     }
 
     public String getStatusIcon() {

@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +13,7 @@ public class Duke {
     private final String DONE_TASK_MARKED_MESSAGE = "    Nice! I've marked this task as done:";
     private final String DELETE_TASK_MARKED_MESSAGE = "    Noted. I've removed this task:";
 
-    private final String NO_TASK_MESSAGE = "    Sorry the task does not exists";    
+    private final String NO_TASK_MESSAGE = "    Sorry the task does not exists";
     private final String ADDED_TASK_MESSAGE = "    Got it. I've added this task:";
     private final String INVALID_DONE_MESSAGE = "    Sorry done cannot be empty ";
     private final String INVALID_TODO_MESSAGE = "    Sorry todo cannot be empty ";
@@ -20,10 +21,18 @@ public class Duke {
 
     private List<Task> lstOfTask = new ArrayList<>();
 
+    private void startup() {
+        try {
+            populateToLstOfTask();
+        } catch (IOException e) {
+            System.out.println(e.toString()+" Error trying to load tasks");
+        }
+    }
+
     private String greetUser() {
-        return upperLine + indent + "Hello! I'm Duke" + "\n"
-                + indent + "What can I do for you?" +"\n"
-                + lowerLine;
+            return upperLine + indent + "Hello! I'm Duke" + "\n"
+                    + indent + "What can I do for you?" + "\n"
+                    + lowerLine;
     }
 
     private String[] parseString(String input) {
@@ -93,6 +102,7 @@ public class Duke {
     }
 
     private String exit() {
+        saveTaskContents();
         return outputIndent + "Bye. Hope to see you again soon!" + "\n";
     }
 
@@ -149,10 +159,10 @@ public class Duke {
     }
 
     private String addEvent(String[] parsedUserInput) {
-        String taskDescription ="";
+        String taskDescription = "";
         for(int i = 1; i < parsedUserInput.length; i++) {
             if (i == parsedUserInput.length-1) {
-             taskDescription += parsedUserInput[i];
+                taskDescription += parsedUserInput[i];
             } else {
                 taskDescription += parsedUserInput[i] + " ";
             }
@@ -172,8 +182,9 @@ public class Duke {
         for(int i = 1; i < parsedUserInput.length; i++) {
             if (i == parsedUserInput.length-1) {
                 taskDescription += parsedUserInput[i];
+            } else {
+                taskDescription += parsedUserInput[i] + " ";
             }
-            taskDescription += parsedUserInput[i] + " ";
         }
 
         String[] deadlineArray = taskDescription.split(" /by ");
@@ -193,10 +204,87 @@ public class Duke {
         return "    Now you have " + getNumOfTask() + " tasks in the list";
     }
 
-    public static void main(String[] args) {
+    private void createNewTextFileCalledTask() {
+        File file = new File("Tasks.txt");
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveTaskContents() {
+        try {
+            FileWriter fw = new FileWriter("Tasks.txt");
+
+            createNewTextFileCalledTask();
+
+
+            for (Task t : lstOfTask) {
+                String taskString = t.toString();
+                fw.write(taskString + "\n");
+            }
+
+            fw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void populateToLstOfTask() throws IOException {
+
+        File file = new File("Tasks.txt");
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
+
+        String st = br.readLine();
+
+        while (st != null) {
+            Task t = parser(st);
+            lstOfTask.add(t);
+            st = br.readLine();
+        }
+
+    }
+
+    private Task parser(String str) {
+        try {
+            String type = str.substring(1, 2);
+            String status = str.substring(4, 5);
+            String descriptionAndDate = str.substring(6);
+            String[] arr = descriptionAndDate.split("\\(");
+            String description = arr[0].trim();
+            String date = "";
+            Task task;
+
+
+            if (type.equals("E") || type.equals("D")) {
+                date = arr[1].substring(4).replace(")", "");
+            }
+
+            if (type.equals("T")) {
+                task = new ToDo(description);
+            } else if (type.equals("E")) {
+                task = new Event(description, date);
+            } else { // "D"
+                task = new Deadline(description, date);
+            }
+
+            if (status.equals("\u2713")) {
+                task.markAsDone();
+            }
+            return task;
+        }catch (IndexOutOfBoundsException|NullPointerException e) {
+            System.out.println(e.getMessage() + "Error in tasks file");
+            throw e;
+        }
+    }
+
+    public static void main(String[] args)  {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
-
+        duke.startup();
         System.out.println(duke.greetUser());;
 
         while (sc.hasNext()) {
@@ -204,7 +292,14 @@ public class Duke {
             String[] parsedString = duke.parseString(input);
             String output = duke.processCommand(parsedString);
             System.out.println(output);
+
+            if (input.equals("bye")) {
+                break;
+            }
         }
 
+
     }
+
+
 }
