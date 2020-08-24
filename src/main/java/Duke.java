@@ -1,13 +1,6 @@
 package main.java;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.security.InvalidParameterException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -66,6 +59,13 @@ public class Duke {
                     ui.taskDoesNotExist();
                 } catch (Exception e) {
                     ui.invalidDeleteOrder();
+                }
+            } else if (userInput.startsWith("find")) {
+                try {
+                    String keyWord = parser.parseFindOrder(userInput);
+                    ui.showFindResult(taskList.find(keyWord));
+                } catch (InvalidParameterException e) {
+                    ui.invalidFindOrder();
                 }
             } else {
                 ui.generalError();

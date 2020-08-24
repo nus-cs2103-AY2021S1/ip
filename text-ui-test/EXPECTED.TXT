@@ -80,6 +80,18 @@ You have 4 tasks in your list currently.
 
 Now you have 3 tasks in your list.
 
+//////////Matching Result In Your List///////////
+
+0. [D][×] CS2103 project submission (by Aug 01 2020)  <-
+1. [D][×] CS2103 tP (by Aug 01 2020)  <-
+
+//////////////////////////////////////////////////
+
+
+-> Oops, there is an error...
+-> please add correct description to "find" order
+-> find {keyword}
+
 
 -> Current List:
 

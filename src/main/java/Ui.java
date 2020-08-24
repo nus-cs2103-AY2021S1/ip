@@ -1,5 +1,7 @@
 package main.java;
 
+import java.util.List;
+
 public class Ui {
 
     public Ui() {
@@ -94,6 +96,11 @@ public class Ui {
                 "-> delete {order of task in task list}\n");
     }
 
+    public void invalidFindOrder() {
+        System.out.println(invalidOrder("find") +
+            "-> find {keyword}\n");
+    }
+
     public void taskDoesNotExist() {
         System.out.println("\n-> Sorry, this task does not exist...\n");
     }
@@ -115,6 +122,18 @@ public class Ui {
                         "\n-> event {task content} /{time} || add an event task" +
                         "\n-> list   || list all tasks" +
                         "\n-> done {order of task in task list}   || mark a task as done\n");
+    }
+
+    public void showFindResult(List<Task> resultList) {
+        System.out.println("//////////Matching Result In Your List///////////\n");
+        if (resultList.size() == 0) {
+            System.out.println("No Match Result...\n");
+        } else {
+            for (int i = 0; i < resultList.size(); i++) {
+                System.out.println(i + ". " + resultList.get(i).toString());
+            }
+        }
+        System.out.println("\n//////////////////////////////////////////////////\n");
     }
 
     public void goodBye() {

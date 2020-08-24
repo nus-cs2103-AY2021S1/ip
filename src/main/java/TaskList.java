@@ -1,5 +1,7 @@
 package main.java;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class TaskList {
@@ -36,6 +38,16 @@ public class TaskList {
     public void deleteTask(int index) {
         this.taskList.remove(index);
         this.storage.save(taskList);
+    }
+
+    public List<Task> find(String keyWord) {
+        List<Task> resultList = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).getContent().contains(keyWord)) {
+                resultList.add(taskList.get(i));
+            }
+        }
+        return resultList;
     }
 
     @Override

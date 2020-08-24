@@ -11,5 +11,7 @@ deadline a
 done
 hahahhahahhahaa
 delete 2
+find CS2103
+find
 list
 bye

@@ -77,4 +77,11 @@ public class Parser {
         }
     }
 
+    public String parseFindOrder(String resource) throws InvalidParameterException {
+        if (resource.length() <= 4) {
+            throw new InvalidParameterException();
+        }
+        String findingKeyWord = resource.substring(5);
+        return findingKeyWord;
+    }
 }
