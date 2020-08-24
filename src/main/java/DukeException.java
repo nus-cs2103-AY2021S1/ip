@@ -5,6 +5,10 @@ public class DukeException extends Exception {
         this.message = message;
     }
 
+    public String getMessage() {
+        return "    " + message;
+    }
+
     public String toString() {
         return this.message;
     }

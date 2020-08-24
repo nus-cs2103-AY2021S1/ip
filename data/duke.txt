@@ -1,3 +1,6 @@
 T | 1 | read book
-D | 1 | return book | June 6th
+D | 1 | return book | 6/6/2020 1800
+E | 0 | meeting | mon 2-4pm
 T | 0 | study
+D | 0 | proposal | 2/4/2021 2359
+E | 0 | training | tues 4-6pm
