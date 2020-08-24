@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -12,7 +14,7 @@ public class Ui {
     }
 
     public void showWelcome() {
-        System.out.println("Hello from Duke\nHow may I be of service " +
+        System.out.println("Hello from duke.Duke\nHow may I be of service " +
                 "to you this fine day sire?");
     }
 
@@ -21,7 +23,7 @@ public class Ui {
     }
 
     public void showLoadingError(String errorMessage) {
-        System.out.println("I am unable to load the saved tasks " + errorMessage);
+        System.out.println("I am unable to load the saved duke.tasks " + errorMessage);
     }
 
     public void showError(String errorMessage) {

@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -8,7 +10,7 @@ public class Task {
     }
 
     /**
-     * Constructor to use when reading data from the hard disk upon Duke start up.
+     * Constructor to use when reading data from the hard disk upon duke.Duke start up.
      * @param description is the details of the task.
      * @param isDone determines whether the task is marked as completed.
      */

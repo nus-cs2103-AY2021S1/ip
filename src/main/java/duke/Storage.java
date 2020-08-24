@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
@@ -31,8 +38,8 @@ public class Storage {
     }
 
     /**
-     * Converts string from task storage file to a task list for Duke to use.
-     * @return a list of Tasks readable by Duke.
+     * Converts string from task storage file to a task list for duke.Duke to use.
+     * @return a list of Tasks readable by duke.Duke.
      */
     public ArrayList<Task> getAllTasks() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();

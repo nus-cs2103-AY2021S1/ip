@@ -1,4 +1,6 @@
-T | 0 | go for run
+T | 1 | drink water
 T | 1 | walk the dog
 T | 1 | go jogging
-E | 0 | dinner | Aug 23 2020, 19:00:00
+T | 0 | drink water
+T | 0 | read book
+T | 0 | jumping jacks
