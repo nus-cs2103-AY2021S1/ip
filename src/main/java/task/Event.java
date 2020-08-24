@@ -18,7 +18,8 @@ public class Event extends Task{
         this.time = command[1];
         this.isParsedDate = false;
         try {
-            this.dateTime = LocalDate.parse(this.time);
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            this.dateTime = LocalDate.parse(this.time, format);
             this.isParsedDate = true;
         }
         catch (Exception e){
