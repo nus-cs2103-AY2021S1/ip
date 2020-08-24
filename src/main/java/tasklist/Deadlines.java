@@ -1,3 +1,5 @@
+package main.java.tasklist;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -13,6 +15,10 @@ public class Deadlines extends Task {
         super(task,isDone);
         LocalDateTime dateTime = LocalDateTime.parse(deadline, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         this.deadline = dateTime;
+    }
+
+    public LocalDateTime getDeadline() {
+        return this.deadline;
     }
 
     @Override

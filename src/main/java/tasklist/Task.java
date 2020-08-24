@@ -1,3 +1,5 @@
+package main.java.tasklist;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -14,6 +16,14 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "[" + "\u2713" + "]" : "[" + "\u2718" + "]"); //return tick or X symbols
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean checkDone() {
+        return this.isDone;
     }
 
     public void markDone() {

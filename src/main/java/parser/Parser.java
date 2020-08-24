@@ -1,21 +1,12 @@
-import java.io.IOException;
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
+package main.java.parser;
+
+import main.java.tasklist.*;
+import main.java.exception.*;
 import java.time.DateTimeException;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class Duke {
-
-    public static void greeting() {
-
-        String border = "    ============================================================";
-
-        System.out.println(border);
-        System.out.println("    Hello! I'm Duke" + "\n" + "    What can I do for you?");
-        System.out.println(border);
-    }
+public class Parser {
 
     public static void commandTask(String input, TaskList newList) throws DukeException {
 
@@ -136,65 +127,4 @@ public class Duke {
             }
         }
     }
-
-
-
-    public static void main(String[] args) {
-        String underscore = "    ____________________________________________________________";
-        greeting();
-
-        Scanner sc = new Scanner(System.in);
-        String home = System.getProperty("user.home");
-
-        try {
-            File f = new File(home + "/Desktop/ip/data/duke.txt");
-
-            TaskList newList = new TaskList(f);
-
-            while(sc.hasNext()) {
-                String input = sc.nextLine();
-                System.out.println(underscore);
-                try {
-                    String[] splitInput = input.split(" ");
-                    if (splitInput[0].equals("bye")) {
-                        System.out.println("     Bye. Hope to see you again soon!");
-                        return;
-                    } else {
-                        commandHandler(input, newList);
-                    }
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-                System.out.println(underscore);
-            }
-        } catch (FileNotFoundException e) {
-            File newFile = new File(home + "/Desktop/ip/data/duke.txt");
-            try {
-                newFile.createNewFile();
-
-                TaskList newList = new TaskList(newFile);
-
-                while(sc.hasNext()) {
-                    String input = sc.nextLine();
-                    System.out.println(underscore);
-                    try {
-                        String[] splitInput = input.split(" ");
-                        if (splitInput[0].equals("bye")) {
-                            System.out.println("     Bye. Hope to see you again soon!");
-                            return;
-                        } else {
-                            commandHandler(input, newList);
-                        }
-                    } catch (DukeException error) {
-                        System.out.println(error.getMessage());
-                    }
-                    System.out.println(underscore);
-                }
-            } catch (IOException ex) {
-                System.out.println("An error occurred, file could not be created.");
-            }
-        }
-        sc.close();
-    }
 }
-

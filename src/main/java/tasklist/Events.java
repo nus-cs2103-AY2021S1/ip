@@ -1,3 +1,5 @@
+package main.java.tasklist;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -13,6 +15,10 @@ public class Events extends Task {
         super(task, isDone);
         LocalDateTime dateTime = LocalDateTime.parse(at, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         this.at = dateTime;
+    }
+
+    public LocalDateTime checkAt() {
+        return this.at;
     }
 
     @Override
