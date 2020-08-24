@@ -76,7 +76,7 @@ public class Parser {
         }
     }
 
-    public static void commandHandler(String input, TaskList newList) throws DukeException {
+    public static void commandParser(String input, TaskList newList) throws DukeException {
         String[] splitInput = input.split(" ");
 
         if (splitInput[0].equals("list")) {

@@ -19,6 +19,7 @@ public class Duke {
 
     public Duke(String filePath) {
         ui = new Ui();
+        System.out.println(filePath);
         storage = new Storage(filePath);
 
         try {
@@ -50,7 +51,7 @@ public class Duke {
                     ui.sayBye();
                     return;
                 } else {
-                    Parser.commandHandler(input, tasks);
+                    Parser.commandParser(input, tasks);
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
@@ -63,7 +64,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(pathDirectory + "/duke.txt").run();
+        new Duke(pathDirectory + "/data/duke.txt").run();
     }
 
 }

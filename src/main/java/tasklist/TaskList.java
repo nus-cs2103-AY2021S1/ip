@@ -1,6 +1,7 @@
 package main.java.tasklist;
 
 import java.util.ArrayList;
+
 import main.java.storage.Storage;
 
 public class TaskList {
@@ -15,7 +16,7 @@ public class TaskList {
     }
 
     public void addTask(Task task) {
-        String path = "/Users/joshua/Desktop/ip/data/duke.txt";
+        String path = System.getProperty("user.dir") + "/data/duke.txt";
 
         Storage.saveTask(path, this.todoList, task);
         this.todoList.add(task);
@@ -32,7 +33,7 @@ public class TaskList {
     }
 
     public void removeTask(int index) {
-        String path = "/Users/joshua/Desktop/ip/data/duke.txt";
+        String path = System.getProperty("user.dir") + "/data/duke.txt";
 
         Task removedTask = this.todoList.get(index);
         this.todoList.remove(index);
@@ -54,7 +55,7 @@ public class TaskList {
     }
 
     public void updateDone() {
-        String path = "/Users/joshua/Desktop/ip/data/duke.txt";
+        String path = System.getProperty("user.dir") + "/data/duke.txt";
         Storage.updateTask(path, this.todoList);
     }
 }

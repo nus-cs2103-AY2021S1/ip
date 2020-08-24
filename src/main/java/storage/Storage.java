@@ -95,7 +95,7 @@ public class Storage {
         }
     }
 
-    public static String formatString(Task task) {
+    private static String formatString(Task task) {
         if(task instanceof Todos) {
             if (task.checkDone()) {
                 String s = "T,1," + task.getDescription();
