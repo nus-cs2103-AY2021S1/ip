@@ -13,7 +13,7 @@ public class Ui {
      * Constructor to create a new Ui object, which will be used by Duke to interact with the user.
      */
     Ui() {
-       this.sc = new Scanner(System.in);
+        this.sc = new Scanner(System.in);
     }
 
     /**

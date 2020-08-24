@@ -38,8 +38,8 @@ public class DeleteCommand extends Command {
 
             storage.deleteTask(index);
 
-            ui.print("Noted. I've removed this task:\n" +
-                    deletedTask.toString() + "\nNow you have " + (listSize)
+            ui.print("Noted. I've removed this task:\n"
+                    + deletedTask.toString() + "\nNow you have " + (listSize)
                     + (listSize > 1 ? " tasks" : " task")
                     + " in the list.");
 

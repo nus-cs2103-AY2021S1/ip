@@ -43,27 +43,27 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         switch (c) {
-            case TODO:
-                addToDoTask(this.userInput, taskList, ui, storage);
-                break;
-            case EVENT:
-                addEventTask(this.userInput, taskList, ui, storage);
-                break;
-            case DEADLINE:
-                addDeadlineTask(this.userInput, taskList, ui, storage);
-                break;
-            default:
-                throw new DukeException("I don't recognize the type of task you are trying to add");
+        case TODO:
+            addToDoTask(this.userInput, taskList, ui, storage);
+            break;
+        case EVENT:
+            addEventTask(this.userInput, taskList, ui, storage);
+            break;
+        case DEADLINE:
+            addDeadlineTask(this.userInput, taskList, ui, storage);
+            break;
+        default:
+            throw new DukeException("I don't recognize the type of task you are trying to add");
         }
 
     }
 
-    private static boolean emptyToDoDescription(String userInput) {
+    private static boolean checkForEmptyDescription(String userInput) {
         return userInput.length() <= 4;
     }
 
     private void addToDoTask(String userInput ,TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        if (emptyToDoDescription(userInput)) {
+        if (checkForEmptyDescription(userInput)) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
 
@@ -99,8 +99,8 @@ public class AddCommand extends Command {
         taskList.add(newTask);
         storage.createTask(newTask); // Add to storage database
         int listSize = taskList.size();
-        ui.print("Got it. I've added this task:\n   " +
-                newTask.toString() + "\nNow you have " + (listSize)
+        ui.print("Got it. I've added this task:\n   "
+                + newTask.toString() + "\nNow you have " + (listSize)
                 + (listSize > 1 ? " tasks" : " task")
                 + " in the list.");
 
