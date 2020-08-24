@@ -7,7 +7,7 @@ import task.Task;
 public class Ui {
   private String line = "____________________________________________________________";
   String welcomeMessage = "Hello! I'm Duke\n What can I do for you?";
-  String goodbyeMessage = "Bye! Message me anytime!!";
+  String goodbyeMessage = "Bye! Message me anytime!";
   Scanner sc = new Scanner(System.in);
 
   public void showLine() {
