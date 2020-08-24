@@ -6,7 +6,6 @@ import java.io.FileWriter;
 
 public class test {
     public static void main(String[] args) throws IOException {
-
 //        Scanner sc = new Scanner(System.in);
 //        String echo = sc.nextLine();
 //        task t = new Todo(echo);
