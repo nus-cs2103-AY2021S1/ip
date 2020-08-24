@@ -28,6 +28,17 @@ public class Todo extends Task {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (o instanceof Todo) {
+            Todo t = (Todo) o;
+            return isComplete == t.isComplete
+                    && description.equals(t.description);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public String toString() {
         return printCompletionFlag() + " | T | " + description;
     }
