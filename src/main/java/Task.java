@@ -1,8 +1,12 @@
 package main.java;
 
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
-    private String name;
+    private final String name;
     private boolean isDone;
+    protected static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    protected static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     public Task(String name) {
         this.name = name;
@@ -10,7 +14,7 @@ public abstract class Task {
     }
 
     public void setDone() throws TaskDoneException{
-        if (isDone == true) {
+        if (isDone) {
             throw new TaskDoneException();
         }
         this.isDone = true;
