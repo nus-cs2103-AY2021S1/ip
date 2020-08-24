@@ -2,12 +2,23 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline is a type of Task, which takes in a specific date/time.
+ */
 public class Deadline extends Task {
     protected String connector;
     protected LocalDate date;
     protected LocalTime time;
     protected boolean hasTime;
 
+    /**
+     * Constructor that creates a new Deadline object based on stored data or input.
+     *
+     * @param description describes the deadline.
+     * @param id position of deadline.
+     * @param dueDateTime when it is due by.
+     * @param stored whether it is from stored.txt or a new input.
+     */
     Deadline(String description, int id, String dueDateTime, boolean stored) {
         super(description, id);
         if (stored) { // stored data

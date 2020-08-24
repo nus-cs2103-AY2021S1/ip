@@ -5,17 +5,29 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Contains the task list, handles all of the list manipulations + checks.
+ */
 public class ListOfItems {
     List<Task> list;
     int index;
     String divider = "____________________________________________________________";
     String tabSpacing = "   ";
 
+    /**
+     * Initialises a new ArrayList, and index starts from 0.
+     */
     ListOfItems() {
         this.list = new ArrayList<>();
         this.index = 0;
     }
 
+    /**
+     * Handles all of the information from "stored.txt" and adds it to the list.
+     * It also updates the index with every addition.
+     *
+     * @param input a line from "stored.txt".
+     */
     void addStored(String input) {
         char type = input.charAt(1);
         boolean isDone = input.charAt(4) == '✓';
@@ -51,6 +63,11 @@ public class ListOfItems {
         }
     }
 
+    /**
+     * Retrieves the list and prints out every task.
+     *
+     * @throws DukeException if list is empty.
+     */
     void getList() throws DukeException {
         System.out.println(divider);
         if (list.size() == 0) {
@@ -64,6 +81,12 @@ public class ListOfItems {
         System.out.println(divider);
     }
 
+    /**
+     * Marks a particular task is done.
+     *
+     * @param input user input.
+     * @throws DukeException if number given is invalid.
+     */
     void doneItem(String input) throws DukeException {
         try {
             int number = Integer.parseInt(input.substring(5)); // retrieve number after "done "
@@ -82,6 +105,13 @@ public class ListOfItems {
         }
     }
 
+    /**
+     * Deletes a particular task.
+     * Modifies other task's index if necessary, so that list is still in chronological order.
+     *
+     * @param input user input.
+     * @throws DukeException if number given is invalid.
+     */
     void deleteItem(String input) throws DukeException {
         try {
             int number = Integer.parseInt(input.substring(7));
@@ -102,6 +132,13 @@ public class ListOfItems {
         }
     }
 
+    /**
+     * Adds a new task to the list.
+     * Checks what type of task is given and initialise a new sub-class of Task (To-do, Deadline, or Event).
+     *
+     * @param input user input.
+     * @throws DukeException if incomplete commands are given.
+     */
     void addItem(String input) throws DukeException {
         String addedMessage = "Got it. I've added this task: ";
         String totalMessage = "Now you have " + (index + 1) + " task(s) in the list.";
@@ -185,6 +222,12 @@ public class ListOfItems {
         }
     }
 
+    /**
+     * Checks and outputs all of the tasks that are due by a specific date.
+     *
+     * @param input user input.
+     * @throws DukeException if input does not follow this format: "items due by DD/MM/YYYY".
+     */
     void checkBy(String input) throws DukeException {
         try {
             boolean hasResults = false;
@@ -212,6 +255,13 @@ public class ListOfItems {
         }
     }
 
+    /**
+     * Checks and outputs all of the task that are due before a specific date and/or time.
+     *
+     * @param input user input.
+     * @throws DukeException if input does not follow this format: "items due before DD/MM/YYYY"
+     * or "items due before DD/MM/YYYY HHmm".
+     */
     void checkBefore(String input) throws DukeException {
         try {
             boolean hasResults = false;

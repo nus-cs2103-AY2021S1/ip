@@ -1,13 +1,28 @@
+/**
+ * Parser deals with deciphering the user commands.
+ */
 public class Parser {
 
     HandleFile handleFile;
     ListOfItems listOfItems;
 
+    /**
+     * Constructor initialises a new Parser object.
+     *
+     * @param list list of tasks.
+     * @param handleFile handles "stored.txt" file.
+     */
     Parser(ListOfItems list, HandleFile handleFile) {
         this.handleFile = handleFile;
         this.listOfItems = list;
     }
 
+    /**
+     * Handles the user input and direct the input to the respective method in ListOfItems.
+     * If it is not a valid command, a Duke Exception will be thrown.
+     *
+     * @param input user input.
+     */
     void run(String input) {
         try {
             if (input.equals("list")) {
