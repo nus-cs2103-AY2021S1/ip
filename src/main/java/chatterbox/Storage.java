@@ -39,7 +39,9 @@ public class Storage {
         Scanner scanner = new Scanner(saveFile);
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            if (line.strip().equals("")) continue;
+            if (line.strip().equals("")) {
+                continue;
+            }
             try {
                 Task t = Parser.parseTask(line.substring(line.indexOf(' ') + 1));
                 t.setDone(Boolean.parseBoolean(line.substring(0, line.indexOf(' '))));

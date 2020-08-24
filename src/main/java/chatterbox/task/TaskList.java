@@ -64,7 +64,9 @@ public class TaskList {
      * @throws IOException  If task list fails to save.
      */
     public void setTaskAsDone(int taskNo) throws ChatterboxException, IOException {
-        if (taskNo < 0 || taskNo >= tasks.size()) throw new ChatterboxException("Invalid task number.");
+        if (taskNo < 0 || taskNo >= tasks.size()) {
+            throw new ChatterboxException("Invalid task number.");
+        }
 
         Task t = tasks.get(taskNo);
         t.setDone(true);
@@ -80,7 +82,9 @@ public class TaskList {
      * @throws IOException  If task list fails to save.
      */
     public void deleteTask(int taskNo) throws ChatterboxException, IOException {
-        if (taskNo < 0 || taskNo >= tasks.size()) throw new ChatterboxException("Invalid task number.");
+        if (taskNo < 0 || taskNo >= tasks.size()) {
+            throw new ChatterboxException("Invalid task number.");
+        }
 
         Task t = tasks.remove(taskNo);
         Ui.showDeleteTaskMessage(t, tasks.size());

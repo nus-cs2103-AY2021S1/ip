@@ -23,14 +23,14 @@ public class Ui {
 
     public static void showAddTaskMessage(Task t, int totalTasks) {
         showMessage("Got it. I've added this task: \n"
-                + t + "\n"
-                + "Now you have " + totalTasks + " tasks in the list");
+            + t + "\n"
+            + "Now you have " + totalTasks + " tasks in the list");
     }
 
     public static void showDeleteTaskMessage(Task t, int totalTasks) {
         showMessage("Noted! I've removed this task from your list: \n"
-                + t + "\n"
-                + " Now you have " + totalTasks + " tasks in the list.");
+            + t + "\n"
+            + " Now you have " + totalTasks + " tasks in the list.");
     }
 
     /**
