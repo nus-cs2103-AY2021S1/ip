@@ -3,8 +3,10 @@ import main.java.TaskDoneException;
 import main.java.TaskManager;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -60,8 +62,15 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         TaskManager taskManager = new TaskManager();
-        File file = new File("src/data/duke.txt");
-        taskManager.readFile(file);
+        File file =  new File("src/data/duke.txt");
+        try {
+            if (!file.createNewFile()){
+                taskManager.readFile(file);
+            }
+        } catch (IOException err) {
+            echo("IOException when trying to check if file exists");
+        }
+
         echo("Duke at your service. How may I help?");
         outerLoop:
         while (sc.hasNext()) {
@@ -103,14 +112,17 @@ public class Duke {
                     echo("Here are the tasks in your list\n" + taskManager.toString());
                 }
                 break;
-
             //3 different types of task
             case "event":
                 try {
                     Task addedEvent = taskManager.addEvent(words[1], words[2]);
                     echoNewTask(addedEvent, taskManager.getTotalTask());
                 } catch (IndexOutOfBoundsException err) {
-                    echo("Error: The description for Event can't be empty");
+                    echo("Error: Please key in the date & time as yyyy-mm-dd hh:mm hh:mm" +
+                            "(Time in 24 hour format)");
+                } catch (DateTimeParseException err) {
+                    echo("Error: Please key in the date & time as yyyy-mm-dd hh:mm hh:mm" +
+                            "(Time in 24 hour format)");
                 }
                 break;
             case "todo":

@@ -25,12 +25,12 @@ public class Event extends Task {
 
     @Override
     public String toSaveFormat() {
-        return "E" + super.toSaveFormat() + " | " + time;
+        return String.format("E%s| %s %s %s", super.toSaveFormat(), SAVE_DATE_FORMATTER.format(date),
+                Task.TIME_FORMATTER.format(startTime), Task.TIME_FORMATTER.format(endTime));
     }
 
     @Override
     public String toString() {
-        System.out.println(this.startTime);
         String dateTime = Task.DATE_FORMATTER.format(date);
         dateTime += " " + Task.TIME_FORMATTER.format(startTime);
         dateTime += " - " + Task.TIME_FORMATTER.format(endTime);
