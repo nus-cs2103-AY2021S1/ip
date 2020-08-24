@@ -40,4 +40,18 @@ public class Ui {
         System.out.println(LINE);
         System.out.print("> ");
     }
+
+    public void askDeadlineName() {
+        System.out.println(LINE);
+        System.out.println("What is the name of your Deadline?"); 
+        System.out.println(LINE);
+        System.out.print("> ");
+    }
+
+    public void askDeadlineDate() {
+        System.out.println(LINE);
+        System.out.println("When is the deadline? (Give in this format: day month year)"); 
+        System.out.println(LINE);
+        System.out.print("> ");
+    }
 }
