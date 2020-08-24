@@ -9,10 +9,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class to manage loading and saving of tasks in text file
+ */
 public class Storage {
     private final String filePath;
     private File data;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+
+    /**
+     * Storage constructor
+     *
+     * @param filePath Filepath of .txt file to save tasks in
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         try {
@@ -23,6 +32,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads saved tasks into list for use
+     *
+     * @return ArrayList containing all saved tasks
+     */
     public ArrayList<Task> getTasks() {
         ArrayList<Task> list = new ArrayList<>();
         try {
@@ -54,6 +68,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Writes tasks into file
+     *
+     * @param tasks List of tasks to be saved
+     */
     public void updateFile(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);

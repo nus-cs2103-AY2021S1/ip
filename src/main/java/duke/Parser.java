@@ -3,6 +3,13 @@ package duke;
 import duke.command.*;
 
 public class Parser {
+    /**
+     * Parses user input and returns the correct command to execute
+     *
+     * @param input User input
+     * @return Correct command for Duke to execute
+     * @throws DukeException if exception encountered
+     */
     public static Command parse(String input) throws DukeException {
         if (input.equalsIgnoreCase("bye")) {
             return new ExitCommand();

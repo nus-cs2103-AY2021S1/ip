@@ -5,16 +5,27 @@ import duke.tasks.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * Ui class to deal with user interaction
+ */
 public class Ui {
     private static final Scanner sc = new Scanner(System.in);
     private void showLine() {
         System.out.println("   __________________________________________________________________");
     }
 
+    /**
+     * Returns next line of user input
+     *
+     * @return Next line of user input
+     */
     public String readCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * Prints welcome message
+     */
     public void showWelcome() {
         showLine();
         System.out.println("    Hello, I'm Duke");
@@ -33,6 +44,11 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prints list of existing tasks
+     *
+     * @param tasks List of tasks
+     */
     public void printList(TaskList tasks) {
         showLine();
         if (tasks.size() == 0) {
@@ -46,6 +62,12 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prints appropriate message for task depending on action type
+     *
+     * @param task Task to be printed
+     * @param action Action type; determines format of text that is printed
+     */
     public void printTask(Task task, ActionType action) {
         showLine();
         switch(action){
@@ -62,11 +84,19 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prints total number of tasks
+     *
+     * @param tasks List of tasks
+     */
     public void printTotalTasks(TaskList tasks) {
         System.out.println("    Total tasks: " + tasks.size());
         showLine();
     }
 
+    /**
+     * Prints goodbye message
+     */
     public void goodbye() {
         showLine();
         System.out.println("    See you again soon (hopefully)! :>");
