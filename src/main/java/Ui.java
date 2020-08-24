@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,7 +31,7 @@ public class Ui {
         printNumTask(numLeft);
     }
 
-    public void printList(Storage storage) {
+    public void printList(Storage storage) throws IOException {
         ArrayList<Task> arrTask = storage.load();
         printNumTask(arrTask.size());
         System.out.println(INDENT + "Here are the tasks in your list:");
@@ -42,6 +43,7 @@ public class Ui {
     public void printNew(Task task, String type, int numTask) {
         System.out.println(String.format("%sAdding %s to the list:",INDENT ,type));
         System.out.println(String.format("%s %s", INDENT, task.getOutput()));
+        printNumTask(numTask);
     }
 
     public void bye() {

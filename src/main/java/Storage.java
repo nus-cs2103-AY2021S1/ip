@@ -14,7 +14,24 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    ArrayList<Task> load() {
+    void createFile() throws IOException {
+        try {
+            File directory = new File("./data");
+            File file = new File("./data/data.txt");
+            if (!directory.exists()) {
+                directory.mkdir();
+                if (!file.exists()) {
+                    file.getParentFile().mkdir();
+                    file.createNewFile();
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    ArrayList<Task> load() throws IOException {
+        createFile();
         ArrayList<Task> arr = new ArrayList<>();
         try {
             Path path = Paths.get(filePath);
