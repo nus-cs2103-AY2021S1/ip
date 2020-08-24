@@ -30,46 +30,73 @@ OOPS! The description of a task cannot be empty
 ____________________________________________________________
 ____________________________________________________________
 OOPS. You need to put "/at [date]" after inputting an Event.
+The following DateTimeFormat is valid:
+{YYYY-MM-DD}T{HH:MM:SS}
+{YYYY-MM-DD}T{HH:MM}
+{YYYY-MM-DD}
+{HH:MM:SS}
+{HH:MM}
 ____________________________________________________________
 ____________________________________________________________
 OOPS. You need to put "/at [date]" after inputting an Event.
+The following DateTimeFormat is valid:
+{YYYY-MM-DD}T{HH:MM:SS}
+{YYYY-MM-DD}T{HH:MM}
+{YYYY-MM-DD}
+{HH:MM:SS}
+{HH:MM}
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
-[E][✗]  bfast  (at: 10am-1030am)
-Now you have 2 tasks in the list.
+OOPS. You need to put "/at [date]" after inputting an Event.
+The following DateTimeFormat is valid:
+{YYYY-MM-DD}T{HH:MM:SS}
+{YYYY-MM-DD}T{HH:MM}
+{YYYY-MM-DD}
+{HH:MM:SS}
+{HH:MM}
 ____________________________________________________________
 ____________________________________________________________
 1. [T][✗]  sleep
-2. [E][✗]  bfast  (at: 10am-1030am)
 ____________________________________________________________
 ____________________________________________________________
 OOPS! The description of a task cannot be empty
 ____________________________________________________________
 ____________________________________________________________
 OOPS. You need to put "/by [date]" after inputting a Deadline.
+The following DateTimeFormat is valid:
+{YYYY-MM-DD}T{HH:MM:SS}
+{YYYY-MM-DD}T{HH:MM}
+{YYYY-MM-DD}
+{HH:MM:SS}
+{HH:MM}
 ____________________________________________________________
 ____________________________________________________________
 OOPS. You need to put "/by [date]" after inputting a Deadline.
+The following DateTimeFormat is valid:
+{YYYY-MM-DD}T{HH:MM:SS}
+{YYYY-MM-DD}T{HH:MM}
+{YYYY-MM-DD}
+{HH:MM:SS}
+{HH:MM}
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
-[D][✗]  project  (by: 20-08-2020 2359)
-Now you have 3 tasks in the list.
+OOPS. You need to put "/by [date]" after inputting a Deadline.
+The following DateTimeFormat is valid:
+{YYYY-MM-DD}T{HH:MM:SS}
+{YYYY-MM-DD}T{HH:MM}
+{YYYY-MM-DD}
+{HH:MM:SS}
+{HH:MM}
 ____________________________________________________________
 ____________________________________________________________
 1. [T][✗]  sleep
-2. [E][✗]  bfast  (at: 10am-1030am)
-3. [D][✗]  project  (by: 20-08-2020 2359)
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
-[E][✓]  bfast  (at: 10am-1030am)
+Invalid index.
+You have 1 task on your list.
 ____________________________________________________________
 ____________________________________________________________
 1. [T][✗]  sleep
-2. [E][✓]  bfast  (at: 10am-1030am)
-3. [D][✗]  project  (by: 20-08-2020 2359)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
@@ -77,20 +104,18 @@ Nice! I've marked this task as done:
 ____________________________________________________________
 ____________________________________________________________
 1. [T][✓]  sleep
-2. [E][✓]  bfast  (at: 10am-1030am)
-3. [D][✗]  project  (by: 20-08-2020 2359)
 ____________________________________________________________
 ____________________________________________________________
 Invalid index.
-You have 3 tasks on your list.
+You have 1 task on your list.
 ____________________________________________________________
 ____________________________________________________________
 Invalid index.
-You have 3 tasks on your list.
+You have 1 task on your list.
 ____________________________________________________________
 ____________________________________________________________
-Noted. I've removed this task:
-[D][✗]  project  (by: 20-08-2020 2359)
+Invalid index.
+You have 1 task on your list.
 ____________________________________________________________
 ____________________________________________________________
 Bye! Thank you for chatting with Bolot!

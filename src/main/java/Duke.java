@@ -1,3 +1,8 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -77,7 +82,7 @@ public class Duke {
     private void addTask(Command firstWord, String input) throws EmptyTaskException, InvalidDateException {
 
         String task;
-        String date = "";
+        LocalDateTime date = null;
 
         try {
             task = input.substring(firstWord.toString().length() + 1);
@@ -88,10 +93,14 @@ public class Duke {
         if (firstWord == Command.todo) {
             list.add(new ToDo(task));
         } else {
+
             try {
+
                 task = task.substring(0, task.indexOf('/'));
-                date = input.substring(input.indexOf('/') + 4);
-            } catch (StringIndexOutOfBoundsException indexError) {
+                date = getDateTime(input.substring(input.indexOf('/') + 4));
+
+            } catch (StringIndexOutOfBoundsException | InvalidDateException e) {
+
                 if (firstWord == Command.deadline) {
                     throw new DeadlineInvalidDate();
                 } else if (firstWord == Command.event) {
@@ -104,6 +113,7 @@ public class Duke {
             } else if (firstWord == Command.event) {
                 list.add(new Event(task, date));
             }
+
         }
 
         System.out.println("Got it. I've added this task:");
@@ -193,6 +203,25 @@ public class Duke {
 
         bye();
 
+    }
+
+    private LocalDateTime getDateTime(String dateString) throws InvalidDateException {
+
+        try {
+
+            if (dateString.length() == 19 || dateString.length() == 16) {
+                return LocalDateTime.parse(dateString);
+            } else if (dateString.contains("-")) {
+                return LocalDateTime.of(LocalDate.parse(dateString), LocalTime.MAX);
+            } else if (dateString.contains(":")) {
+                return LocalDateTime.of(LocalDate.now(), LocalTime.parse(dateString));
+            } else {
+                throw new InvalidDateException();
+            }
+
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException();
+        }
     }
 
     public static void main(String[] args) {
