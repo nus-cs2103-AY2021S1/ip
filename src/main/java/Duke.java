@@ -13,7 +13,7 @@ import java.io.FileWriter;
 public class Duke {
     final static String DATA_DIRECTORY = "./data";
     final static String TASKS_DIRECTORY = "./data/tasks.txt";
-    final static String lineBreak = "=========================================================================";
+    final static String LINE_BREAK = "=========================================================================";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -24,7 +24,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\n" +
                 "What can I do for you today? (type: \"help\" to view list of commands)\n" +
-                lineBreak);
+                LINE_BREAK);
 
         Scanner scanner = new Scanner(System.in);
         //obtains cached task history
@@ -100,16 +100,16 @@ public class Duke {
                     updateTaskFile(pastInputs);
                     System.out.println("You now have " + pastInputs.size() + " task(s) in your list");
                 }
-                System.out.println(lineBreak);
+                System.out.println(LINE_BREAK);
             } catch (InvalidKeyWordException ex) {
                 System.out.println(ex.getMessage());
-                System.out.println(lineBreak);
+                System.out.println(LINE_BREAK);
             } catch (EmptyTaskException ex) {
                 System.out.println(ex.getMessage());
-                System.out.println(lineBreak);
+                System.out.println(LINE_BREAK);
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
-                System.out.println(lineBreak);
+                System.out.println(LINE_BREAK);
             }
         }
     }
