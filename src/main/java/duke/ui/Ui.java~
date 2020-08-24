@@ -51,7 +51,6 @@ public class Ui {
                 "<description> and due by <time>)\n" +
                         "8. event <description> /at <time> (adds event to list with " +
                 "<description> and occurs at <time>)\n" +
-                        "9. find <word> (list tasks that contain <word> in description)\n" +
                 endLine);
     }
 
