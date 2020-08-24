@@ -7,7 +7,6 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class FileManager{
-
     
     public static void add(String location, String text) throws IOException {
         FileWriter f = new FileWriter(location,true);

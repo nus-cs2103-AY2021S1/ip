@@ -1,4 +1,5 @@
 public class Todo extends task{
+    
     private String type = "[T]";
     private String date;
 

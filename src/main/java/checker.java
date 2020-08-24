@@ -2,6 +2,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class checker {
+
     public static int inputChecker(String echo) {
         int isDone = 0;
         Scanner sc = new Scanner(echo);
