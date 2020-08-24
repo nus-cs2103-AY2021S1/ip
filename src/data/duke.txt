@@ -1,4 +1,6 @@
 
 [T][1] read harry potter
-[E][0] orbital splashdown /at 2020-08-26
+[E][1] orbital splashdown /at 2020-08-26
 [E][1] family day /at 2020-08-24
+[T][1] study
+[D][0] ip /by 2020-08-27

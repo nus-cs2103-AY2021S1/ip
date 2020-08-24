@@ -1,235 +1,38 @@
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.time.DateTimeException;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.time.LocalDate;
 
 public class Duke {
-    private static void printTasks(ArrayList<Task> list) {
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(i + 1 + ". " + list.get(i).display());
-        }
-    }
-    
-    private static void printTaskAdded(Task task, ArrayList<Task> list) {
-        System.out.println("Added task: " + task.display()
-                + "\nYou have " + list.size() + " task(s) left in your list.");
-    }
-    
-    private static String formatDate(String dateString) {
-        if (dateString.contains("/")) {
-            dateString = dateString.replaceAll("\\/", "-");
-        }
-        String[] dateStringArr = dateString.split("-");
-        dateString = "";
-        for (int i = 0; i < dateStringArr.length; i++) {
-            if (dateStringArr[i].length() < 2) {
-                dateStringArr[i] = "0" + dateStringArr[i];
-            }
-            if (i > 0) {
-                dateString = dateString + "-" + dateStringArr[i];
-            } else {
-                dateString = dateStringArr[i];
-            }
-        }
-        return dateString;
-    }
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    private static ArrayList<Task> handleDoneInput(String input, ArrayList<Task> list) throws DukeException{
-        int index;
-        if (!input.substring(4).trim().isEmpty()
-                && input.substring(4).trim().matches("[0-9]+")) { //to make sure the input after "done" is a number
-            index = Integer.parseInt(input.substring(4).trim()); //convert string to integer
-            if (index >= 1) { //if input index is valid
-                Task newTask = list.get(index - 1).markAsDone();
-                list.set(index - 1, newTask);
-                System.out.println("Marked task as done:\n" + newTask.display());
-                return list;
-            } else {
-                throw new DukeException("Please enter a valid task number to mark as done (index is not valid)");
-            }
-        } else {
-            throw new DukeException("Please enter a valid task number to mark as done (substring doesn't match regex)");
-        }
-    }
-
-    private static ArrayList<Task> handleDeleteInput(String input, ArrayList<Task> list) throws DukeException {
-        int index;
-        if (!input.substring(6).trim().isEmpty()
-                && input.substring(6).trim().matches("[0-9]+")) { //to make sure the input after "done" is a number
-            index = Integer.parseInt(input.substring(6).trim()); //convert string to integer
-            if (index >= 1) { //if input index is valid
-                Task removed = list.get(index - 1);
-                list.remove(index - 1);
-                System.out.println("Removed task:\n" + removed.display()
-                        + "\nYou have " + list.size() + " task(s) left in your list.");
-                return list;
-            } else {
-                throw new DukeException("Please enter a valid task number to delete (index is not valid)");
-            }
-        } else {
-            throw new DukeException("Please enter a valid task number to delete (substring doesn't match regex)");
-        }
-    }
-
-    private static ArrayList<Task> handleTodoInput(String input, ArrayList<Task> list) throws DukeException, IOException {
-        if (!input.substring(4).trim().isEmpty()) { //to make sure to do task is not empty
-            String description = input.substring(4);
-            Task newTask = new Todo(description.trim());
-            list.add(newTask);
-            printTaskAdded(newTask, list);
-            return list;
-        } else {
-            throw new DukeException("Please enter a valid todo");
-        }
-    }
-
-    private static ArrayList<Task> handleDeadlineInput(String input, ArrayList<Task> list) throws DukeException, IOException {
-        if (!input.substring(8).trim().isEmpty() //to make sure deadline is not empty
-                && input.substring(8).trim().contains("/by") //to make sure deadline contains /by
-                && !input.substring(8).trim().startsWith("/by") //to make sure deadline contains a task description
-                && !input.substring(8).trim().endsWith("/by")) { //to make sure deadline contains a deadline
-            String descriptionAndTime = input.substring(8);
-            String description = descriptionAndTime.trim().split("/by ")[0];
-            String by = descriptionAndTime.trim().split("/by ")[1].trim();
-            try {
-                if (by.contains(" ")) { //user gave a time input
-                    String dateString = by.split(" ")[0].trim();
-                    String timeString = by.split(" ")[1].trim();
-                    dateString = formatDate(dateString);
-                    LocalDate d1 = LocalDate.parse(dateString);
-                    if (timeString.length() == 4) {
-                        try {
-                            int time = Integer.parseInt(timeString); //convert string to integer wrap in try catch?
-                            if (time >= 0000 && time <= 2359) {
-                                Task newTask = new Deadline(description.trim(), d1, timeString);
-                                list.add(newTask);
-                                printTaskAdded(newTask, list);
-                                return list;
-                            } else {
-                                throw new DukeException("Please enter a valid time between 0000 and 2359");
-                            }
-                        } catch (NumberFormatException nfe) {
-                            throw new DukeException("Please input the time in the right format (eg. 1800)");
-                        }
-                    } else {
-                        Task newTask = new Deadline(description.trim(), d1);
-                        list.add(newTask);
-                        printTaskAdded(newTask, list);
-                        return list;
-                    }
-                } else { //user didn't give a time input
-                    by = formatDate(by);
-                    LocalDate d1 = LocalDate.parse(by);
-                    Task newTask = new Deadline(description.trim(), d1);
-                    list.add(newTask);
-                    printTaskAdded(newTask, list);
-                    return list;
-                }
-            } catch (DateTimeException dte) {
-                throw new DukeException("Please enter your date and time in the format yyyy-mm-dd hhmm (eg. 2020-08-23 1800)");
-            }
-        } else {
-            throw new DukeException("Please enter a valid deadline");
-        }
-    }
-
-    private static ArrayList<Task> handleEventInput(String input, ArrayList<Task> list) throws DukeException {
-        if (!input.substring(5).trim().isEmpty() //to make sure event is not empty
-                && input.substring(5).trim().contains("/at") //to make sure event contains at
-                && !input.substring(5).trim().startsWith("/at") //to make sure event description is not empty
-                && !input.substring(5).trim().endsWith("/at")) { //to make sure event contains a time/date
-            String descriptionAndTime = input.substring(5);
-            String description = descriptionAndTime.split("/at ")[0];
-            String at = descriptionAndTime.split("/at ")[1].trim();
-            try {
-                if (at.contains(" ")) { //user gave a time input
-                    String dateString = at.split(" ")[0].trim();
-                    String timeString = at.split(" ")[1].trim();
-                    dateString = formatDate(dateString);
-                    LocalDate d2 = LocalDate.parse(dateString);
-                    if (timeString.length() == 4) {
-                        try {
-                            int time = Integer.parseInt(timeString); //convert string to integer
-                            if (time >= 0000 && time <= 2359) {
-                                Task newTask = new Event(description.trim(), d2, timeString);
-                                list.add(newTask);
-                                printTaskAdded(newTask, list);
-                                return list;
-                            } else {
-                                throw new DukeException("Please enter a valid time between 0000 and 2359");
-                            }
-                        } catch (NumberFormatException nfe) {
-                            throw new DukeException("Please input the time in the right format (eg. 1800)");
-                        }
-                    } else {
-                        Task newTask = new Event(description.trim(), d2);
-                        list.add(newTask);
-                        printTaskAdded(newTask, list);
-                        return list;
-                    }
-                } else { //user didn't give a time input
-                    at = formatDate(at);
-                    LocalDate d2 = LocalDate.parse(at);
-                    Task newTask = new Event(description.trim(), d2);
-                    list.add(newTask);
-                    printTaskAdded(newTask, list);
-                    return list;
-                }
-            } catch (DateTimeException dte) {
-                throw new DukeException("Please enter your date and time in the format yyyy-mm-dd hhmm (eg. 2020-08-23 1800)");
-            }
-        } else {
-            throw new DukeException("Please enter a valid event");
-        }
-    }
-    public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Yooo, I'm Duke.\nWhat can I do for you today?\nPlease enter dates and times in this format: yyyy-mm-dd hhmm"); //Greeting
-
-        ArrayList<Task> list = FileClass.readFileContents("src/data/duke.txt");
-        String input = sc.nextLine();
+    public Duke(String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
         try {
-            while (!input.isEmpty()) {
-                if (input.equalsIgnoreCase("bye")) { //if user types "bye"
-                    System.out.println("Bye bye!!! See you again next time :)");
-                    input = "";
-                    sc.close();
-                } else if (input.equalsIgnoreCase("list")) { //if user types "list"
-                    System.out.println("Here are the tasks in your list:");
-                    printTasks(list);
-                    input = sc.nextLine();
-                } else if (input.toLowerCase().startsWith("done")) { //if user input starts with "done"
-                    list = handleDoneInput(input, list);
-                    FileClass.writeListToFile("src/data/duke.txt", list);
-                    input = sc.nextLine();
-                } else if (input.toLowerCase().startsWith("delete")) {
-                    list = handleDeleteInput(input, list);
-                    FileClass.writeListToFile("src/data/duke.txt", list);
-                    input = sc.nextLine();
-                } else if (input.toLowerCase().startsWith("todo")) {
-                    list = handleTodoInput(input, list);
-                    FileClass.writeListToFile("src/data/duke.txt", list);
-                    input = sc.nextLine();
-                } else if (input.toLowerCase().startsWith("deadline")) {
-                    list = handleDeadlineInput(input, list);
-                    FileClass.writeListToFile("src/data/duke.txt", list);
-                    input = sc.nextLine();
-                } else if (input.toLowerCase().startsWith("event")) {
-                    list = handleEventInput(input, list);
-                    FileClass.writeListToFile("src/data/duke.txt", list);
-                    input = sc.nextLine();
-                } else {
-                    throw new DukeException("Please enter a valid deadline");
-                }
+            tasks = new TaskList(storage.load());
+        } catch (DukeException de) {
+            ui.printLoadingError(de);
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.printGreeting();
+
+        String input;
+        boolean isEnd = false;
+
+        try {
+            while (!isEnd) {
+                input = ui.readCommand();
+                isEnd = Parser.execute(tasks, ui, storage, input);
             }
         } catch (DukeException de) {
-            System.out.println(de);
-        } catch (FileNotFoundException fnfe) {
-            System.out.println(fnfe);
-        } catch (IOException ioe){
-            System.out.println(ioe);
+            ui.printLoadingError(de);
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("src/data/duke.txt").run();
     }
 }
