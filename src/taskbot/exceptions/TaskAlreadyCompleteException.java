@@ -1,6 +1,6 @@
 package taskbot.exceptions;
 
-public class TaskAlreadyCompleteException extends Exception {
+public class TaskAlreadyCompleteException extends TaskbotException {
     public TaskAlreadyCompleteException(String msg) {
         super(msg);
     }

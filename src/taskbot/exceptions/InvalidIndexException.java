@@ -5,7 +5,7 @@ package taskbot.exceptions;
  * task from the list but gets IndexOutOfBounds error
  */
 
-public class InvalidIndexException extends Exception {
+public class InvalidIndexException extends TaskbotException {
     public InvalidIndexException(String msg) {
         super(msg);
     }
