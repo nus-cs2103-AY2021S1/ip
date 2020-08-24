@@ -1,15 +1,18 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public class Deadline extends Task {
 
-    String date;
+    LocalDate date;
 
-    Deadline(String task, String date) {
+    Deadline(String task, LocalDate date) {
         super(task);
         this.date = date;
     }
 
-    Deadline(String task, boolean done, String date) {
-        super(task);
-        this.done = done;
+    Deadline(String task, boolean done, LocalDate date) {
+        super(task, done);
         this.date = date;
     }
 
@@ -20,6 +23,12 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[Deadline] " + super.toString() + " (by: " + this.date + ")";
+        String dateString = "No date set";
+        if (this.date != null) {
+            DateTimeFormatter formatters = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+            dateString = this.date.format(formatters);
+        }
+
+        return "[Deadline] " + super.toString() + " (by: " + dateString + ")";
     }
 }

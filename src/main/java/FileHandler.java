@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,6 +49,7 @@ public class FileHandler {
 
     public boolean updateFile(DukeList list) {
         try {
+            System.out.println("Saving changes...");
             File file = getFile();
             FileWriter writer = new FileWriter(file);
             for (Task t : list.getList()) {
@@ -55,7 +57,7 @@ public class FileHandler {
                 writer.write("\n");
             }
             writer.close();
-            System.out.println("Saved changes.");
+            System.out.println("Changes saved.");
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -73,15 +75,20 @@ public class FileHandler {
                     boolean done = matcher.group(2).equals("1");
                     String task = matcher.group(3);
                     String date = matcher.group(4);
+                    LocalDate localDate = null;
+
+                    if (date != null && !date.equals("null")) {
+                        localDate = LocalDate.parse(date);
+                    }
                     switch (matcher.group(1)) {
                         case ("T"):
                             list.addItem(new Todo(task, done));
                             break;
                         case ("D"):
-                            list.addItem(new Deadline(task, done, date));
+                            list.addItem(new Deadline(task, done, localDate));
                             break;
                         case ("E"):
-                            list.addItem(new Event(task, done, date));
+                            list.addItem(new Event(task, done, localDate));
                             break;
                     }
                 }
