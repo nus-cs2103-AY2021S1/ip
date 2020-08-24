@@ -2,7 +2,8 @@
 import java.io.CharArrayReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -125,8 +126,7 @@ public class Duke {
                 Storage.store(taskList);
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
-            } catch (DateTimeParseException exception) {
-                System.out.println(exception.getMessage());
+
             }
         }
     }
