@@ -14,17 +14,17 @@ public class Processor {
         System.out.println("_________________________________________");
     }
 
-    public ArrayList<Task> processorDone(ArrayList<Task> arraylst, int index) {
+    public String processorDone(ArrayList<Task> arraylst, int index) {
         int i = index - 1;
         arraylst.get(i).setDone();
         System.out.println("_________________________________________");
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(index + "." + arraylst.get(i).toString());
         System.out.println("_________________________________________");
-        return arraylst;
+        return arraylst.get(i).toString();
     }
 
-    public ArrayList<Task> processorDelete(ArrayList<Task> arraylst, int index) {
+    public void processorDelete(ArrayList<Task> arraylst, int index) {
         int i = index - 1;
         Task removed_task = arraylst.get(i);
         arraylst.remove(i);
@@ -33,10 +33,9 @@ public class Processor {
         System.out.println(removed_task.toString());
         System.out.println("Now you have " + arraylst.size() + " tasks in the list.");
         System.out.println("_________________________________________");
-        return arraylst;
     }
 
-    public ArrayList<Task> processorAdd(String cmd, ArrayList<Task> arraylst) throws DukeException {
+    public String processorAdd(String cmd, ArrayList<Task> arraylst) throws DukeException {
         String[] stringarr = cmd.split(" ", 2);
         if (stringarr[0].equals("todo")) {
             if (stringarr.length <= 1) {
@@ -75,6 +74,6 @@ public class Processor {
         System.out.println(latesttask.toString());
         System.out.println("Now you have " + arraylst.size() + " tasks in the list.");
         System.out.println("_________________________________________");
-        return arraylst;
+        return latesttask.toString();
     }
 }
