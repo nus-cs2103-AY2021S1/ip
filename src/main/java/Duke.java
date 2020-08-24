@@ -3,9 +3,17 @@ import java.util.Scanner;
 public class Duke {
     private TaskList taskList;
     private Parser parser;
+    private Storage storage;
     public Duke() {
-        this.taskList = new TaskList();
-        this.parser = new Parser(this.taskList);
+        try {
+            this.storage = new Storage("test.json");
+            this.taskList = this.storage.load();
+        } catch (DukeException e) {
+            Util.systemMessage(e.getMessage());
+            this.taskList = new TaskList();
+        } finally {
+            this.parser = new Parser(this.taskList);
+        }
     }
 
     public void run() {
@@ -15,6 +23,7 @@ public class Duke {
         while (!input.equals("bye")) {
             try {
                 parser.parseAndRun(input);
+                this.storage.save(this.taskList);
             } catch (DukeException e) {
                 Util.systemMessage(e.getMessage());
             }

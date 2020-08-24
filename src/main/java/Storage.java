@@ -1,9 +1,16 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.*;
 
 public class Storage {
-    private String filePath;
+    private final String filePath;
     private final Gson gsonObject;
     private static final GsonBuilder gsonBuilder = new GsonBuilder();
     private static final JsonSerializer<TaskList> taskListSerializer = (src, typeOfSrc, context) -> {
@@ -16,8 +23,7 @@ public class Storage {
         return list;
     };
     private static final JsonDeserializer<TaskList> taskListDeserializer = (json, typeOfT, context) -> {
-        TaskList result = new TaskList();
-        List<Task> resultInternalList = result.getItemsList();
+        List<Task> tasks = new ArrayList<>();
         JsonArray taskElems = json.getAsJsonArray();
         for (JsonElement elem : taskElems) {
             JsonObject elemObject = elem.getAsJsonObject();
@@ -41,9 +47,9 @@ public class Storage {
             if (elemObject.get("isDone").getAsBoolean()) {
                 task.markAsDone();
             }
-            resultInternalList.add(task);
+            tasks.add(task);
         }
-        return result;
+        return new TaskList(tasks);
     };
 
     static {
@@ -51,22 +57,27 @@ public class Storage {
         gsonBuilder.registerTypeAdapter(TaskList.class, taskListDeserializer);
     }
 
-    public Storage(String filePath) {
+    public Storage(String filePath){
         this.filePath = filePath;
         this.gsonObject = gsonBuilder.create();
     }
 
-    /*
-    public void save(TaskList taskList) {
-        String json = this.gsonObject.toJson(taskList, TaskList.class);
-        // TODO save json to file
+    public void save(TaskList taskList) throws DukeException {
+        try (FileWriter fw = new FileWriter(this.filePath)) {
+            this.gsonObject.toJson(taskList, TaskList.class, fw);
+        } catch (IOException e) {
+            throw new DukeException(DukeException.Errors.FILE_WRITE_ERROR);
+        }
     }
 
     public TaskList load() throws DukeException {
-        // TODO load file here
-        String input = "";
-        return this.gsonObject.fromJson("", TaskList.class);
+        Path path = Paths.get(filePath);
+        if (!path.toFile().isFile()) return new TaskList();
+        try (Reader reader = Files.newBufferedReader(path)) {
+            return gsonObject.fromJson(reader, TaskList.class);
+        } catch (IOException e) {
+            throw new DukeException(DukeException.Errors.FILE_READ_ERROR);
+        }
     }
-     */
 
 }
