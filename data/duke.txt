@@ -1,2 +1,1 @@
-T | true | work
-D | false | homework  | sunday
+D | false | work  | 2012-12-31
