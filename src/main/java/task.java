@@ -57,5 +57,6 @@ public class task {
         System.out.println(line1);
         System.out.println(line2);
         System.out.println(line3);
+        
     }
 }
