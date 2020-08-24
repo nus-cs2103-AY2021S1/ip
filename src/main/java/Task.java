@@ -19,9 +19,13 @@ public class Task {
         return this.description;
     }
 
+    public String getSaveFormat() {
+        return String.format("%s | %s", this.isDone ? "1" : "0", this.getDescription());
+    }
+
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return String.format("[%s]%s", this.getStatusIcon(), this.description);
     }
 
 }
