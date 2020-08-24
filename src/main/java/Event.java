@@ -18,7 +18,7 @@ public class Event extends Task {
     @Override
     public String store() {
         String done = this.done ? "T " : "F ";
-        return "E " + done + this.details + " /at " + this.date;
+        return "E " + done + this.details + " /at " + this.date + "\n";
     }
 
     @Override

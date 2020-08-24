@@ -10,7 +10,7 @@ public class ToDo extends Task {
     @Override
     public String store() {
         String done = this.done ? "T " : "F ";
-        return "T " + done + this.details;
+        return "T " + done + this.details + "\n";
     }
 
     @Override

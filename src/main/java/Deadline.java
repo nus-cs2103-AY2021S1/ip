@@ -19,7 +19,7 @@ public class Deadline extends Task {
     @Override
     public String store() {
         String done = this.done ? "T " : "F ";
-        return "D " + done + this.details + " /by " + this.date;
+        return "D " + done + this.details + " /by " + this.date + "\n";
     }
 
     @Override
