@@ -13,10 +13,10 @@ public class Event extends Task {
         this.dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
-    Event(String taskString, String preposition, String eventString, boolean status) {
+    Event(String taskString, String preposition, String dateTimeString, boolean status) {
         super(taskString);
         this.preposition = preposition;
-        this.eventString = eventString;
+        this.dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         this.status = status;
     }
 
@@ -30,6 +30,7 @@ public class Event extends Task {
 
     @Override
     public String toDataString() {
-        return "event//" + taskString + "//" + preposition + "//" + eventString + "//" + status;
+        return "event//" + taskString + "//" + preposition + "//"
+                + dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + "//" + status;
     }
 }

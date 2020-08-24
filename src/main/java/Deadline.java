@@ -15,10 +15,10 @@ public class Deadline extends Task{
         this.dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
-    Deadline(String taskString, String preposition, String deadlineString, boolean status) {
+    Deadline(String taskString, String preposition, String dateTimeString, boolean status) {
         super(taskString);
         this.preposition = preposition;
-        this.deadlineString = deadlineString;
+        this.dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         this.status = status;
     }
 
@@ -32,6 +32,7 @@ public class Deadline extends Task{
 
     @Override
     public String toDataString() {
-        return "deadline//" + taskString + "//" + preposition + "//" + deadlineString + "//" + status;
+        return "deadline//" + taskString + "//" + preposition + "//"
+                + dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + "//" + status;
     }
 }
