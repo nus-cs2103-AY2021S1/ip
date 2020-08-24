@@ -40,6 +40,7 @@ public class Ui {
         System.out.println("    Type 'done' followed by the task number " +
                 "and I'll mark it as done");
         System.out.println("    Type 'list' to see the list");
+        System.out.println("    Type 'find' followed by keyword to search for tasks");
         System.out.println("    Type 'bye' to exit");
         showLine();
     }
@@ -81,6 +82,20 @@ public class Ui {
             System.out.println("    Added: ");
         }
         System.out.println("      " + task.toString());
+        showLine();
+    }
+
+    public void search(TaskList tasks, String input) {
+        int count = 1;
+        showLine();
+        System.out.println("    Matching tasks:");
+        for (Task task: tasks.getList()) {
+            String taskString = task.toString();
+            if (taskString.contains(input)) {
+                System.out.println("      " + count + ". " + taskString);
+                count++;
+            }
+        }
         showLine();
     }
 

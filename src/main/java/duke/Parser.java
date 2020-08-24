@@ -23,6 +23,9 @@ public class Parser {
         } else if (input.length() >= 4 && input.substring(0, 4).equalsIgnoreCase("done")) {
             int taskIndex = Integer.parseInt(input.substring(5)) - 1;
             return new MarkDoneCommand(taskIndex);
+        } else if (input.length() >= 4 && input.substring(0, 4).equalsIgnoreCase("find")) {
+                String search = input.substring(5);
+                return new FindCommand(search);
         } else if (input.length() >= 6 && input.substring(0, 6).equalsIgnoreCase("delete")) {
             int taskIndex = Integer.parseInt(input.substring(7)) - 1;
             return new DeleteCommand(taskIndex);
