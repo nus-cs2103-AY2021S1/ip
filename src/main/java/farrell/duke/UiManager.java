@@ -7,23 +7,22 @@ import java.util.Scanner;
  * This class uses System.in to receive inputs from the user and System.out to display its output.
  */
 public class UiManager {
-    final String logo =
-            " _\n" +
-            "//\\\n" +
-            "V  \\\n" +
-            " \\  \\_\n" +
-            "  \\,'.`-.\n" +
-            "   |\\ `. `.\n" +
-            "   ( \\  `. `-.                        _,.-:\\\n" +
-            "    \\ \\   `.  `-._             __..--' ,-';/\n" +
-            "     \\ `.   `-.   `-..___..---'   _.--' ,'/\n" +
-            "      `. `.    `-._        __..--'    ,' /\n" +
-            "        `. `-_     ``--..''       _.-' ,'\n" +
-            "          `-_ `-.___        __,--'   ,'\n" +
-            "             `-.__  `----\"\"\"    __.-'\n" +
-            "                   `--..____..--'";
+    private final String logo = " _\n"
+            + "//\\\n"
+            + "V  \\\n"
+            + " \\  \\_\n"
+            + "  \\,'.`-.\n"
+            + "   |\\ `. `.\n"
+            + "   ( \\  `. `-.                        _,.-:\\\n"
+            + "    \\ \\   `.  `-._             __..--' ,-';/\n"
+            + "     \\ `.   `-.   `-..___..---'   _.--' ,'/\n"
+            + "      `. `.    `-._        __..--'    ,' /\n"
+            + "        `. `-_     ``--..''       _.-' ,'\n"
+            + "          `-_ `-.___        __,--'   ,'\n"
+            + "             `-.__  `----\"\"\"    __.-'\n"
+            + "                   `--..____..--'";
 
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     /**
      * Checks if there is any outstanding user input.

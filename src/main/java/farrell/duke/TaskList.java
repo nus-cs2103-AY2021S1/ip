@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class TaskList {
     /** The list of tasks */
-    List<Task> taskList;
+    private List<Task> taskList;
 
     TaskList() {
         this.taskList = new ArrayList<>();

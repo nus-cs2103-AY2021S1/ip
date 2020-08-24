@@ -6,14 +6,15 @@ import java.time.LocalDate;
  * A personal assistant chatbot that helps to keep track of tasks.
  */
 public class Duke {
+<<<<<<< HEAD
     /** The list of tasks being tracked */
-    static TaskList taskList;
+    private static TaskList taskList;
 
     /** An object that handles saving and loading data */
-    static DataManager dataManager = new DataManager();
+    private static DataManager dataManager = new DataManager();
 
     /** An object that handles user interaction */
-    static UiManager uiManager = new UiManager();
+    private static UiManager uiManager = new UiManager();
 
     /**
      * Displays a welcome message, then runs the main program loop.
@@ -81,14 +82,16 @@ public class Duke {
             int doneNumber = Integer.parseInt(parameters);
             taskList.updateDone(doneNumber);
             dataManager.save(taskList);
-            uiManager.printInWindow("Nice! I've marked the this as done.\n" + taskList.getTask(doneNumber).toString());
+            uiManager.printInWindow("Nice! I've marked the this as done.\n"
+                    + taskList.getTask(doneNumber).toString());
             break;
         case LIST:
             uiManager.printInWindow(taskList.toString());
             break;
         case DELETE:
             int deleteNumber = Integer.parseInt(parameters);
-            uiManager.printInWindow("I've removed this task:\n" + taskList.getTask(deleteNumber).toString());
+            uiManager.printInWindow("I've removed this task:\n"
+                    + taskList.getTask(deleteNumber).toString());
             taskList.deleteTask(deleteNumber);
             dataManager.save(taskList);
             break;
