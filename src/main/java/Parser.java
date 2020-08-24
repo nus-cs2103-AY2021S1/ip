@@ -59,6 +59,8 @@ public class Parser {
             command = Commands.DATE;
             this.description = description.substring(5);
             return new DateCommand(this.description);
+        } else if (description.equals("bye")) {
+            return new ByeCommand();
         } else if (entered) {
             throw new DukeException("you gotta put in a correct command.");
         } else {

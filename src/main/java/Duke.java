@@ -25,15 +25,16 @@ public class Duke {
     public void run() {
         ui.showWelcome();
         String fullCommand = "";
-        while (!fullCommand.equals("bye")) {
+        boolean isExit = false;
+        while (!isExit) {
             try {
+                fullCommand = ui.readCommand();
                 Command command = parser.findCommand(fullCommand);
                 command.execute(this.tasks, this.ui, this.storage);
                 storage.save(tasks.getList());
-                fullCommand = ui.readCommand();
+                isExit = command.isExit();
             } catch (DukeException | IOException e) {
                 ui.showError(e.getMessage());
-                fullCommand = ui.readCommand();
             }
         }
         ui.showExit();

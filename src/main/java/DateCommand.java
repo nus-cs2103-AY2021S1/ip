@@ -10,12 +10,12 @@ public class DateCommand extends Command{
         for (Task i : tasklist.getList()) {
             if (i instanceof Deadline) {
                 if(((Deadline) i).hasDate(description)) {
-                    System.out.println(i);
+                    ui.showMessage(i.toString());
                     dateExists = true;
                 }
             } else if (i instanceof Event) {
                 if (((Event) i).hasDate(description)) {
-                    System.out.println(i);
+                    ui.showMessage(i.toString());
                     dateExists = true;
                 }
             }
