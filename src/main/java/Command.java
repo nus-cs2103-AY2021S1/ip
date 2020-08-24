@@ -1,6 +1,10 @@
-public interface Command {
+public abstract class Command {
 
-    public void execute(TaskList taskList, Ui ui, Storage storage);
+    public boolean isExit() {
+        return false;
+    }
+
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
 
 
 }

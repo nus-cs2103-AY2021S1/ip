@@ -1,4 +1,4 @@
-public class AddCommand implements Command {
+public class AddCommand extends Command {
 
     protected static final String ADDED_MESSAGE = "Got it. I've added this task: ";
 

@@ -1,4 +1,4 @@
-public class DeleteCommand implements Command {
+public class DeleteCommand extends Command {
 
     protected static final String DELETE_MESSAGE = "Noted. I've removed this task: ";
 

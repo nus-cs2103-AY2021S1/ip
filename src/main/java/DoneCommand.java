@@ -1,4 +1,4 @@
-public class DoneCommand implements Command {
+public class DoneCommand extends Command {
 
     protected static final String DONE_MESSAGE = "Nice! I've marked this task as done: ";
 
