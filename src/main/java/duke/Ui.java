@@ -119,6 +119,16 @@ public class Ui {
     }
 
     /**
+     * Prints the tasks that contain the specified keyword.
+     * @param taskList The task list to find the tasks in.
+     * @param keyword The string that the tasks you are finding should contain.
+     */
+    public void printFindTasks(TaskList taskList, String keyword) {
+        TaskList tasksWithKeyword = taskList.getTasksWithKeyword(keyword);
+        printResponse("Here are the matching tasks in your list:" + tasksWithKeyword);
+    }
+
+    /**
      * Prints the error message of the exception.
      * @param e The exception to get the message from.
      */

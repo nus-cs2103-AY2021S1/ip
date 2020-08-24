@@ -11,7 +11,8 @@ public enum CommandInstruction {
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event"),
-    VIEW("view");
+    VIEW("view"),
+    FIND("find");
 
     private final String instruction;
 

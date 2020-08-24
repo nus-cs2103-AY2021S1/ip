@@ -73,6 +73,22 @@ public class TaskList {
     }
 
     /**
+     * Gets all the tasks in this task list that contains the keyword as a task list.
+     * @param keyword The string that the tasks you are finding should contain.
+     * @return The task list with all the tasks that contain the keyword.
+     */
+    public TaskList getTasksWithKeyword(String keyword) {
+        TaskList result = new TaskList();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.toString().contains(keyword)) {
+                result.addTask(task);
+            }
+        }
+        return result;
+    }
+
+    /**
      * Adds a task to this task list.
      * @param task The task to be added to this task list.
      * @return The task that was added.
