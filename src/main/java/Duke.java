@@ -1,17 +1,3 @@
-import java.time.LocalDate;
-import java.util.Scanner;
-
-enum actionType {
-    QUIT,
-    LIST,
-    MARK_DONE,
-    DELETE,
-    ADD_TODO,
-    ADD_DEADLINE,
-    ADD_EVENT,
-    WRONG_INPUT
-}
-
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -28,111 +14,20 @@ public class Duke {
         }
     }
 
-    private actionType getAction(String input) {
-        return input.equalsIgnoreCase("bye")
-                ? actionType.QUIT
-                : input.equalsIgnoreCase("list")
-                ? actionType.LIST
-                : input.length() >= 4 && input.substring(0, 4).equalsIgnoreCase("done")
-                ? actionType.MARK_DONE
-                : input.length() >= 6 && input.substring(0, 6).equalsIgnoreCase("delete")
-                ? actionType.DELETE
-                : input.length() >= 4 && input.substring(0, 4).equalsIgnoreCase("todo")
-                ? actionType.ADD_TODO
-                : input.length() >= 5 && input.substring(0, 5).equalsIgnoreCase("event")
-                ? actionType.ADD_EVENT
-                : input.length() >= 8 && input.substring(0, 8).equalsIgnoreCase("deadline")
-                ? actionType.ADD_DEADLINE
-                : actionType.WRONG_INPUT;
-    }
-
     public void run() {
-        try {
-            Scanner sc = new Scanner(System.in);
-            ui.showWelcome();
-            String next;
-            while (true) {
-                next = sc.nextLine();
-                actionType action = getAction(next);
-                System.out.println(action);
-                switch (action) {
-                case QUIT:
-                    ui.goodbye();
-                    sc.close();
-                    System.exit(0);
-                    break;
-                case LIST:
-                    ui.printList(tasks);
-                    break;
-                case MARK_DONE:
-                    int taskNo = Integer.parseInt(next.substring(5));
-                    if (taskNo > tasks.getList().size()) {
-                        throw new DukeException("Task does not exist _(´ཀ`」 ∠)_");
-                    } else {
-                        Task completedTask = tasks.getList().get(taskNo - 1);
-                        completedTask.markAsDone();
-                        storage.updateFile(tasks);
-                        System.out.println("Task marked complete:");
-                        System.out.println(completedTask.toString());
-                    }
-                    break;
-                case DELETE:
-                    int deleteNo = Integer.parseInt(next.substring(7));
-                    if (deleteNo > tasks.getList().size()) {
-                        throw new DukeException("Task does not exist _(´ཀ`」 ∠)_");
-                    } else {
-                        Task deletedTask = tasks.getList().remove(deleteNo - 1);
-                        storage.updateFile(tasks);
-                        System.out.println("Task deleted:");
-                        System.out.println(deletedTask.toString());
-                    }
-                    break;
-                case ADD_TODO:
-                    if (next.length() < 6) {
-                        throw new DukeException("Task cannot be empty _(´ཀ`」 ∠)_");
-                    } else {
-                        Task newTodo = new ToDo(next.substring(5), false);
-                        tasks.getList().add(newTodo);
-                        storage.updateFile(tasks);
-                        System.out.println("Added: " + newTodo.toString());
-                        System.out.println("Total tasks: " + tasks.getList().size());
-                    }
-                    break;
-                case ADD_EVENT:
-                    if (next.length() < 7) {
-                        throw new DukeException("Event cannot be empty _(´ཀ`」 ∠)_");
-                    } else {
-                        String[] split = next.substring(6).split(" /at ");
-                        String eventDesc = split[0];
-                        LocalDate eventTime = LocalDate.parse(split[1]);
-                        Task newEvent = new Event(eventDesc, eventTime, false);
-                        tasks.getList().add(newEvent);
-                        storage.updateFile(tasks);
-                        System.out.println("Added: " + newEvent.toString());
-                        System.out.println("Total tasks: " + tasks.getList().size());
-                    }
-                    break;
-                case ADD_DEADLINE:
-                    if (next.length() < 10) {
-                        throw new DukeException("Deadline cannot be empty _(´ཀ`」 ∠)_");
-                    } else {
-                        String[] split = next.substring(9).split(" /by ");
-                        String deadlineDesc = split[0];
-                        LocalDate deadline = LocalDate.parse(split[1]);
-                        Task newDeadline = new Deadline(deadlineDesc, deadline, false);
-                        tasks.getList().add(newDeadline);
-                        storage.updateFile(tasks);
-                        System.out.println("Added: " + newDeadline.toString());
-                        System.out.println("Total tasks: " + tasks.getList().size());
-                    }
-                    break;
-                case WRONG_INPUT:
-                    throw new DukeException("I have no idea what that means ¯\\_(ツ)_/¯");
-                }
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
+
     }
 
     public static void main(String[] args) {

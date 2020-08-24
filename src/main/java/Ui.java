@@ -1,8 +1,13 @@
-import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Ui {
+    private static final Scanner sc = new Scanner(System.in);
     private void showLine() {
-        System.out.println("________________________________________________________________________");
+        System.out.println("   __________________________________________________________________");
+    }
+
+    public String readCommand() {
+        return sc.nextLine();
     }
 
     public void showWelcome() {
@@ -25,21 +30,41 @@ public class Ui {
 
     public void printList(TaskList tasks) {
         showLine();
-        ArrayList<Task> list = tasks.getList();
-        if (list.size() == 0) {
+        if (tasks.size() == 0) {
             System.out.println("    List is empty");
         } else {
             System.out.println("    Items in list:");
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println("    " + (i + 1) + ". " + list.get(i).toString());
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println("      " + (i + 1) + ". " + tasks.get(i).toString());
             }
         }
         showLine();
     }
 
+    public void printTask(Task task, ActionType action) {
+        showLine();
+        switch(action){
+        case MARK_DONE:
+            System.out.println("    Task marked complete:");
+            break;
+        case DELETE:
+            System.out.println("    Task deleted:");
+            break;
+        default:
+            System.out.println("    Added: ");
+        }
+        System.out.println("      " + task.toString());
+        showLine();
+    }
+
+    public void printTotalTasks(TaskList tasks) {
+        System.out.println("    Total tasks: " + tasks.size());
+        showLine();
+    }
+
     public void goodbye() {
         showLine();
-        System.out.println("    See you again (hopefully)! :>");
+        System.out.println("    See you again soon (hopefully)! :>");
         showLine();
     }
 }
