@@ -25,4 +25,8 @@ public class Task {
     public String toString() {
         return ("[" + this.type + "][" + this.getStatusIcon() + "] " + this.description);
     }
+
+    public String getType() {
+        return this.type;
+    }
 }

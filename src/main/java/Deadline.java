@@ -11,4 +11,8 @@ public class Deadline extends Task {
     public String toString () {
         return super.toString() + " (by: " + timing + ")";
     }
+    
+    public String getTiming() {
+        return this.timing;
+    }
 }
