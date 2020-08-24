@@ -1,4 +1,6 @@
-abstract class Task {
+package Task;
+
+abstract public class Task {
 
     protected final String name;
     protected final boolean isDone;

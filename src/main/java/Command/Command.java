@@ -1,4 +1,10 @@
-abstract class Command {
+package Command;
+import Task.TaskList;
+import ParserStorageUi.Ui;
+import ParserStorageUi.Storage;
+import Exceptions.*;
+
+abstract public class Command {
 
     protected final String command;
 

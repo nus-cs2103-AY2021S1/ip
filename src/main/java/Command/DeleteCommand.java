@@ -1,4 +1,10 @@
-public class DeleteCommand extends Command{
+package Command;
+
+import Command.Command;
+import ParserStorageUi.*;
+import Task.*;
+
+public class DeleteCommand extends Command {
 
     public DeleteCommand(String command){
         super(command);
