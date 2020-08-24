@@ -3,7 +3,6 @@ package duke;
 import commands.Command;
 import exceptions.DukeException;
 import tasks.TaskList;
-
 import java.io.FileNotFoundException;
 import java.nio.file.Paths;
 
@@ -18,7 +17,7 @@ class Duke {
     private Storage storage;
     private Parser parser;
 
-    Duke() {
+    private Duke() {
         this.tasks = new TaskList();
         this.quit = false;
         this.ui = new Ui();
@@ -36,7 +35,7 @@ class Duke {
      * Allows the system to begin taking in user input and edits the stored data accordingly
      */
 
-    void run() {
+    private void run() {
         ui.showWelcome();
         while (!quit) {
             String input = ui.takeInput();

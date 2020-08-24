@@ -1,7 +1,5 @@
 package tasks;
 
-import tasks.Task;
-
 public class Todo extends Task {
     public Todo(String name, boolean done) {
         super(name, done);

@@ -1,6 +1,12 @@
 package duke;
 
-import commands.*;
+import commands.ExitCommand;
+import commands.Command;
+import commands.ListCommand;
+import commands.HelpCommand;
+import commands.DoneCommand;
+import commands.DeleteCommand;
+import commands.AddCommand;
 
 public class Parser {
 

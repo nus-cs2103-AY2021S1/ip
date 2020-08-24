@@ -5,7 +5,6 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.TaskList;
 import tasks.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,7 +14,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Storage {
-
     TaskList tasks;
     File file;
 
