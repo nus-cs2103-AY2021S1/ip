@@ -16,13 +16,25 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * The class that saves and loads data.
+ */
 public class Storage {
     private final String filepath;
 
+    /**
+     * Initialisation of the Storage class which requires a filepath to save and load data from.
+     * @param filepath The relative filepath from where Duke was ran, to save and load data from
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Loads data using the filepath given.
+     * @param ui Needed to display the outcome to the user
+     * @return Returns the saved TaskList, if there is any
+     */
     public TaskList loadData(UI ui) {
         Path path = FileSystems.getDefault().getPath(filepath);
         if (!Files.exists(path)) return new TaskList();
@@ -73,6 +85,11 @@ public class Storage {
         return new TaskList();
     }
 
+    /**
+     * Saves data using the filepath given.
+     * @param ui Needed to display the outcome to the user
+     * @param taskList The TaskList being saved into the filepath
+     */
     public void saveData(UI ui, TaskList taskList) {
         try {
             File data = new File(filepath);

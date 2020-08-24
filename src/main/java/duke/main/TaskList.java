@@ -4,6 +4,9 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * The class that is responsible of taking care of the user's list of tasks.
+ */
 public class TaskList {
     private static ArrayList<Task> taskList;
 

@@ -10,7 +10,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The class that parses the user's input into commands that Duke can understand.
+ */
 public abstract class Parser {
+    /**
+     * Reads the user's input and returns a command for Duke to execute.
+     * @param inputLine The user's input
+     * @return Returns an executable command based on the user's input
+     */
     public static Command parse(String inputLine) {
         String[] arr = inputLine.split(" ");
 

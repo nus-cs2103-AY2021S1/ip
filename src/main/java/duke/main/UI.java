@@ -5,9 +5,15 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The class that interacts with the user.
+ */
 public class UI {
     private static Scanner sc;
 
+    /**
+     * Initialises the UI class.
+     */
     public UI() {
         sc = new Scanner(System.in);
     }
@@ -16,6 +22,10 @@ public class UI {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Reads in the user's input.
+     * @return Returns the trimmed version of the user's input
+     */
     public String readCommand() {
         return sc.nextLine().trim();
     }
@@ -26,23 +36,42 @@ public class UI {
         showLine();
     }
 
+    /**
+     * Displays the welcome message to the user.
+     */
     public void showWelcome() {
         showCmd(" Hello! I'm Duke!");
     }
 
+    /**
+     * Displays the goodbye message to the user.
+     */
     public void showGoodbye() {
         showCmd(" Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Displays the error message to the user.
+     * @param error The error that was thrown
+     */
     public void showError(String error) {
         showCmd(error);
     }
 
+    /**
+     * Displays the added task message to the user.
+     * @param task The task that was added
+     * @param n The size of the TaskList after the task was added
+     */
     public void addTask(String task, int n) {
         String s = " Got it. I've added this task:\n   " + task + "\n";
         showCmd(s.concat(displayListSize(n)));
     }
 
+    /**
+     * Displays the list of tasks to the user.
+     * @param taskList The TaskList of the user
+     */
     public void displayList(ArrayList<Task> taskList) {
         if (taskList.isEmpty()) {
             showCmd("You have no tasks left! Good job my child!");
@@ -61,6 +90,11 @@ public class UI {
         }
     }
 
+    /**
+     * Displays the size of the TaskList to the user.
+     * @param n The size of the TaskList
+     * @return Returns the String message to be concatenated with the display message.
+     */
     public String displayListSize(int n) {
         if (n == 0) {
             return (" Great job son! You're left with no more tasks!");
@@ -73,31 +107,55 @@ public class UI {
         }
     }
 
+    /**
+     * Displays the start saving message to the user.
+     */
     public void startSaving() {
         System.out.println("Saving...");
     }
 
+    /**
+     * Displays the save was successful message to the user.
+     */
     public void saveSuccess() {
         System.out.println("Saved successfully!");
     }
 
+    /**
+     * Displays the start loading message to the user.
+     */
     public void startLoading() {
         System.out.println("Fetching old data...");
     }
 
+    /**
+     * Displays the load was successful message to the user.
+     */
     public void loadSuccess() {
         System.out.println("Data successfully loaded! ^^");
     }
 
+    /**
+     * Displays the task was successfully done message to the user.
+     * @param task The task that was successfully completed
+     */
     public void doneTask(String task) {
         showCmd(String.format("Great job! I'll mark '%s' as done for you. ^^", task));
     }
 
+    /**
+     * Displays the task was successfully deleted message to the user.
+     * @param task The task that was successfully deleted
+     * @param n The number of remaining tasks
+     */
     public void deleteTask(String task, int n) {
         String s = " Noted. I've removed this task:\n  " + task + "\n";
         showCmd(s.concat(displayListSize(n)));
     }
 
+    /**
+     * Displays the help message to the user.
+     */
     public void showHelp() {
         showCmd("Here are the list of commands you can use:\n" +
                 "help\nlist\nsave\nbye\ntodo 'TASK'\ndeadline 'TASK' /by 'dd/MM/yyyy HH:mm'\n" +
