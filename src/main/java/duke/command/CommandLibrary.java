@@ -6,7 +6,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-public class CommandLibrary {
+class CommandLibrary {
     public static final CommandExecutable deadlineCommand = (taskList, ui, args) -> {
         String description = args[0].trim();
         if (args.length != 2 || description.equals("")) {

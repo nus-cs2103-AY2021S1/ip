@@ -6,10 +6,10 @@ import java.time.format.DateTimeParseException;
 
 import duke.exception.DukeException;
 
-public abstract class TimeTask extends Task {
+abstract class TimeTask extends Task {
     private final LocalDate date;
 
-    public TimeTask(String description, String dateString) throws DukeException {
+    protected TimeTask(String description, String dateString) throws DukeException {
         super(description);
         try {
             this.date = LocalDate.parse(dateString);
