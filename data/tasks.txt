@@ -1,0 +1,4 @@
+T | 1 | do homework
+D | 0 | finish assignment | 2020-12-09 2000
+E | 0 | meet friends | 2020-12-15 0800 to 2020-12-15 0900
+

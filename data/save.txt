@@ -1,3 +1,5 @@
 T | 0 | eat food
 D | 0 | finish assignment | 2020-12-15 1200
 E | 0 | meet a study group | 2020-12-15 1500 to 2020-12-15 1600
+T | 0 | buy apples
+
