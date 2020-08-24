@@ -124,7 +124,7 @@ public class Duke {
     private static String getTaskDescription(String[] inputArr) {
         String desc = "";
         int i = 1;
-        while ((i < inputArr.length) && (!inputArr[i].contains("/"))) {
+        while ((i < inputArr.length) && (!inputArr[i].contains("/by")) && (!inputArr[i].contains("/at"))) {
             // Get description of the task, which is after the command in inputArr
             desc = desc + inputArr[i] + " ";
             i++;
@@ -135,7 +135,7 @@ public class Duke {
     private static String getTaskTimeDate(String[] inputArr) {
         String dateTime = "";
         int i = 0;
-        while (!inputArr[i].contains("/")) {
+        while (!inputArr[i].contains("/by") && (!inputArr[i].contains("/at"))) {
             // Get description of the task, which is after the command in inputArr
             i++;
         }

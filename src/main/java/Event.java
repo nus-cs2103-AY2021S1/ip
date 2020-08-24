@@ -1,10 +1,18 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
     protected String at;
 
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.at = parseDeadline(at);
+    }
+
+    private String parseDeadline(String at) {
+        LocalDate d = LocalDate.parse(at);
+        return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override
