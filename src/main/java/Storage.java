@@ -35,6 +35,7 @@ public class Storage {
         }
     }
 
+
     // method to load the asset into items
     public ArrayList<Task> load(){
         ArrayList<Task> items = new ArrayList<>();
@@ -70,10 +71,11 @@ public class Storage {
     }
 
     // method to persist the items into asset
-    public boolean persistData(ArrayList<Task> items){
+    public boolean persistTaskList(TaskList taskList){
         try {
             BufferedWriter output = new BufferedWriter(new FileWriter(FILE_PATH));
-            for (Task task : items) {
+            for (int i = 0; i < taskList.size(); i++) {
+                Task task = taskList.get(i);
                 String isLoaded = task.isDone() ? "1" : "0";
                 if (task.getClass().isAssignableFrom(ToDo.class)) {
                     String s = "T@" + isLoaded + "@" + task.description;
