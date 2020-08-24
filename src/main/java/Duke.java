@@ -1,3 +1,4 @@
+
 import java.io.CharArrayReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -44,43 +45,37 @@ public class Duke {
         int taskNumber;
         switch (command.getCategory()) {
             case TODO:
-                System.out.println("-------------------------------------------\n" +
-                                               "Got it. I've added this task:");
                 Todo newTask = new Todo(command.getDescription());
                 taskList.addTask(newTask);
                 System.out.println(newTask +
-                                        String.format("\nNow you have %d tasks in the list.\n", taskList.getTaskLength())
-                                               + "-------------------------------------------");
+                        String.format("\nNow you have %d tasks in the list.\n", taskList.getTaskLength())
+                        + "-------------------------------------------");
                 break;
             case DEADLINE:
-                System.out.println("-------------------------------------------\n" +
-                                                "Got it. I've added this task:");
                 Deadline newDeadline = new Deadline(command.getDescription());
                 taskList.addTask(newDeadline);
                 System.out.println(newDeadline +
-                                        String.format("\nNow you have %d tasks in the list.\n", taskList.getTaskLength())
-                                                + "-------------------------------------------");
+                        String.format("\nNow you have %d tasks in the list.\n", taskList.getTaskLength())
+                        + "-------------------------------------------");
                 break;
             case EVENT:
-                System.out.println("-------------------------------------------\n" +
-                                                "Got it. I've added this task:");
                 Event newEvent = new Event(command.getDescription());
                 taskList.addTask(newEvent);
                 System.out.println(newEvent +
-                                        String.format("\nNow you have %d tasks in the list.\n", taskList.getTaskLength())
-                                                + "-------------------------------------------");
+                        String.format("\nNow you have %d tasks in the list.\n", taskList.getTaskLength())
+                        + "-------------------------------------------");
 
                 break;
             case LIST:
                 System.out.println("-------------------------------------------\n" +
-                                        "Here are the tasks in your list:");
+                        "Here are the tasks in your list:");
                 taskList.showList();
                 System.out.println(String.format("Now you have %d tasks in the list.\n", taskList.getTaskLength()) +
-                                   "-------------------------------------------");
+                        "-------------------------------------------");
                 break;
             case DONE:
                 System.out.println("-------------------------------------------\n" +
-                                      "Nice! I've marked this task as done:");
+                        "Nice! I've marked this task as done:");
                 taskNumber = Integer.parseInt(command.getDescription());
                 Task doneTask = taskList.getTask(taskNumber);
                 doneTask.markAsDone();
@@ -88,7 +83,7 @@ public class Duke {
                 break;
             case DELETE:
                 System.out.println("-------------------------------------------\n" +
-                                       " Noted. I've removed this task:\n");
+                        " Noted. I've removed this task:\n");
                 taskNumber = Integer.parseInt(command.getDescription());
                 Task deletedTask = taskList.getTask(taskNumber);
                 taskList.removeTask(deletedTask);
@@ -96,8 +91,8 @@ public class Duke {
                 break;
             case BYE: //bye
                 System.out.println("-------------------------------------------\n" +
-                                   "Bye bye! Hope to see you again soon!\n" +
-                                   "-------------------------------------------");
+                        "Bye bye! Hope to see you again soon!\n" +
+                        "-------------------------------------------");
                 System.exit(0);
                 break;
         }
@@ -116,17 +111,19 @@ public class Duke {
                 "-------------------------------------------\n");
     }
 
-    public static void main(String[] args) {
-        printHello();
 
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        printHello();
         Scanner sc = new Scanner(System.in);
         String input;
-        TaskList taskList = new TaskList();
+
+        TaskList taskList = Storage.load();
         while (true) {
             try {
                 input = sc.nextLine(); //1. read input
                 Command command = decideCategory(input);
                 processCommand(command, taskList);
+                Storage.store(taskList);
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
 
