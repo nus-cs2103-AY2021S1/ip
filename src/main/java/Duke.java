@@ -17,7 +17,6 @@ public class Duke {
     }
 
     public void run() {
-
         this.dukeUi.welcomeMessage();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {

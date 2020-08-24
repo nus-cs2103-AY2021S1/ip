@@ -18,17 +18,31 @@ public class Processor {
             int index = Integer.parseInt(stringarr[1]);
             processorDelete(arraylst, index);
             dukeFile.deleteRecord(index);
+        } else if (stringarr[0].equals("find")) {
+            String key = stringarr[1];
+            processorFind(arraylst, key);
         } else {
             String record = processorAdd(command, arraylst);
             dukeFile.saveRecord(record);
         }
     }
 
+    public void processorFind(ArrayList<Task> arraylst, String key) {
+        int counter = 1;
+        System.out.println("_________________________________________\n" + "Here are the matching tasks in your list:");
+        for (int i = 0; i < arraylst.size(); i++) {
+            if (arraylst.get(i).getTask().contains(key)) {
+                System.out.println(counter + "." + arraylst.get(i).toString());
+                counter++;
+            }
+        }
+        System.out.println("_________________________________________");
+    }
+
     public void processorList(ArrayList<Task> arraylst) {
         System.out.println("_________________________________________\n" + "Here are the tasks in your list:");
         for (int i = 0; i < arraylst.size(); i++) {
             int index = i+1;
-            String checked = arraylst.get(i).getDone() ? "O" : "X";
             System.out.println(index + "." + arraylst.get(i).toString());
         }
         System.out.println("_________________________________________");
