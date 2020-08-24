@@ -77,7 +77,7 @@ public class TaskList {
         for (Task task : list) {
             String description = task.getTask();
             if (description.contains(keyword)) {
-                result += "[" + count++ + task.toString().substring(2) + "\n";
+                result += count++ + "." + task.toString() + "\n";
             }
         }
         if (count == 1) {
