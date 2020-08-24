@@ -124,7 +124,8 @@ public class ParserTest {
         });
 
         String expectedMessage = "Sorry! Format of date is wrong. " +
-                "Example input should be deadline return book /by 2/12/2019 1800.";
+                "Example input should be deadline return book /by 2/12/2019 1800. " +
+                "Please fix storage file before loading Duke again.";
         String actualMessage = e.getMessage();
 
         assertEquals(expectedMessage, actualMessage);

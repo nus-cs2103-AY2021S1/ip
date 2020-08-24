@@ -10,12 +10,6 @@ public class Deadlines extends Task {
     public Deadlines(String task, String dateAndTime) {
         //date = 2019-12-02 1800
         String[] dateAndTimeArr = dateAndTime.split(" ");
-//        // date = 'by Sunday'
-//        String date = task.substring(task.indexOf("/") + 1, task.length());
-//        date = com.duke.events.Task.reformatDate(date); // (by: Sunday)
-//
-//        // task = return book
-//        task = task.substring(0, task.indexOf("/") - 1);
         this.task = task;
         this.date = LocalDate.parse(dateAndTimeArr[0]);
         this.time = Integer.parseInt(dateAndTimeArr[1]);
@@ -30,6 +24,11 @@ public class Deadlines extends Task {
         this.done = done;
     }
 
+    /**
+     * Returns a string representation of the contents of the specified array.
+     *
+     * @return String Returns a string representation of the contents of the specified array.
+     */
     @Override
     public String toString() {
         String doneIndicator = this.done ? "[✓]" : "[✗]";
@@ -49,6 +48,11 @@ public class Deadlines extends Task {
         return "[D]" + doneIndicator + " " + this.task + " (by: " + date + ", " + time + ")";
     }
 
+    /**
+     * Returns a string representation of the Deadline object to be saved in persistent file.
+     *
+     * @return String Returns a string representation of the Deadline object to be saved in persistent file.
+     */
     @Override
     public String parseToSaveFormat() {
         String res = "";

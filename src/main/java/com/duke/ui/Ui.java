@@ -24,14 +24,40 @@ public class Ui {
         this.taskList = null;
     }
 
-    private void reply() {
+    /**
+     * Adds entry into Duke and replies with response.
+     *
+     */
+    private void addItem(String taskType, String task) throws DukeException {
         Ui.sectionize();
+        String date = "";
+        switch (taskType) {
+            case ("todo"):
+                this.taskList.addItem(new ToDos(task));
+                break;
+            case ("event"):
+                String[] taskAndDateArr = Parser.splitTaskAndDate(task);
+                task = taskAndDateArr[0];
+                date = taskAndDateArr[1];
+                taskList.addItem(new Deadlines(task, date));
+                break;
+            case ("deadline"):
+                taskAndDateArr = Parser.splitTaskAndDate(task);
+                task = taskAndDateArr[0];
+                date = taskAndDateArr[1];
+                taskList.addItem(new Deadlines(task, date));
+                break;
+        }
         System.out.println("\tGot it. I've added this task: ");
         System.out.println("\t\t" + this.taskList.getList().get(this.taskList.size() - 1).toString());
         System.out.println("\tNow you have " + this.taskList.size() + " tasks in the list.");
         Ui.sectionize();
     }
 
+    /**
+     * Prints entries stored in Duke.
+     *
+     */
     private void listItems() {
         Ui.sectionize();
         System.out.println("\tHere are the tasks in your list:");
@@ -62,6 +88,11 @@ public class Ui {
         Ui.sectionize();
     }
 
+    /**
+     * Removes specified entry from Duke and prints reply.
+     *
+     * @param index index of entry to be removed.
+     */
     private void remove(int index) {
         try {
             Task task = this.taskList.remove(index);
@@ -77,10 +108,15 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints welcome message for Duke.
+     *
+     */
     public void showWelcome() {
         System.out.println("Hello! I'm DukeBot");
         System.out.println("What can I do for you?");
     }
+
     private static void sectionize() {
         System.out.println("\t____________________________________________________________");
     }
@@ -89,12 +125,20 @@ public class Ui {
         return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
+    /**
+     * Initializes Duke with no entries.
+     *
+     */
     public static void initialize() {
         Ui ui = new Ui(new TaskList());
         ui.showWelcome();
         ui.listen();
     }
 
+    /**
+     * Initializes Duke from persistent file.
+     *
+     */
     public static void initialize(TaskList taskList) {
         Ui ui = new Ui(taskList);
         ui.showWelcome();
@@ -110,6 +154,14 @@ public class Ui {
         System.exit(0);
     }
 
+    /**
+     * Listens from commands from user.
+     * Possible commands include: "done 1", "delete 2", "bye", "list".
+     * Possible event command: "event halloween party /at 2/12/2019 1800".
+     * Possible deadline command: "deadline add comments /by 2/12/2019 1800".
+     * Possible todo command: "todo read book".
+     *
+     */
     private void listen() {
         String input = scanner.nextLine();
         if (Parser.isDone(input)) {
@@ -137,23 +189,14 @@ public class Ui {
                 //System.out.println(task);
                 switch (taskType) {
                     case ("todo"):
-                        taskList.addItem(new ToDos(task));
-                        this.reply();
+                        this.addItem(taskType, task);
                         break;
                     case ("deadline"):
                         // date = 'by Sunday'
-                        taskAndDateArr = Parser.splitTaskAndDate(task);
-                        task = taskAndDateArr[0];
-                        date = taskAndDateArr[1];
-                        taskList.addItem(new Deadlines(task, date));
-                        this.reply();
+                        this.addItem(taskType, task);
                         break;
                     case ("event"):
-                        taskAndDateArr = Parser.splitTaskAndDate(task);
-                        task = taskAndDateArr[0];
-                        date = taskAndDateArr[1];
-                        taskList.addItem(new Events(task, date));
-                        this.reply();
+                        this.addItem(taskType, task);
                         break;
                     default:
                         throw new DukeException(Ui.errorMessage());

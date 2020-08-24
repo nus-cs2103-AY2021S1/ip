@@ -33,20 +33,28 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks saved in storage file into List when program starts.
+     *
+     * @return List returns list with tasks saved as entries.
+     * @throws DukeException throws DukeException if file fails to load.
+     * @throws DukeException throws DukeException if entry in file has incorrectly saved format.
+     */
     public List<Task> load() throws DukeException {
-        try{
+        try {
             File f = new File(this.filePath);
             Scanner s = new Scanner(f);
             List<Task> taskArr = new ArrayList<>();
             while (s.hasNext()) {
                 String taskString = s.nextLine();
-                String[] taskStringArr = taskString.split(" - ");
-                Task task = Parser.parseTask(taskStringArr);
+                Task task = Parser.parseTask(taskString);
                 taskArr.add(task);
             }
             return taskArr;
         } catch (FileNotFoundException e) {
             throw new DukeException("File failed to load. Initializing new File...");
+        } catch (DukeException e) {
+            throw e;
         }
     }
 
@@ -54,6 +62,11 @@ public class Storage {
         return task.parseToSaveFormat();
     }
 
+    /**
+     * Saves tasks from List into a persistent file.
+     *
+     * @throws IOException throws IOException if file saving fails.
+     */
     public static void saveListToFile(TaskList taskList) throws IOException {
         FileWriter fileWriter = new FileWriter((FILE_PATH));
         String input = "";

@@ -10,12 +10,22 @@ public class ToDos extends Task {
         super(task, done);
     }
 
+    /**
+     * Returns a string representation of the contents of the specified array.
+     *
+     * @return String Returns a string representation of the contents of the specified array.
+     */
     @Override
     public String toString() {
         String doneIndicator = this.done ? "[✓]" : "[✗]";
         return "[T]" + doneIndicator + " " + this.task;
     }
 
+    /**
+     * Returns a string representation of the Deadline object to be saved in persistent file.
+     *
+     * @return String Returns a string representation of the ToDos object to be saved in persistent file.
+     */
     @Override
     public String parseToSaveFormat() {
         String isDoneStr = this.done ? "1" : "0";

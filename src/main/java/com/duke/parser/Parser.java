@@ -10,6 +10,13 @@ import java.time.LocalDate;
 
 public class Parser {
 
+    /**
+     * Returns boolean on whether format is correct for a 'done' command.
+     * If format is wrong, returns false, else returns true.
+     *
+     * @param input Input command to check format.
+     * @return boolean.
+     */
     public static boolean isDone(String input) {
         String[] inputArr = input.split(" ");
         return inputArr.length == 2
@@ -17,6 +24,13 @@ public class Parser {
                 && isNumber(input.substring(5,6));
     }
 
+    /**
+     * Returns boolean on whether format is correct for a 'delete' command.
+     * If format is wrong, returns false, else returns true.
+     *
+     * @param input Input command to check format.
+     * @return boolean.
+     */
     public static boolean isDelete(String input) {
         String[] inputArr = input.split(" ");
         return inputArr.length == 2
@@ -33,6 +47,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns boolean on whether format is correct for a create task command.
+     * This includes checks for 'todo', 'deadline' or 'event' tasks.
+     * If format is wrong, returns false, else returns true.
+     *
+     * @param input Input command to check format.
+     * @return boolean.
+     */
     public static boolean correctInputFormat(String input) {
         String[] inputArr = input.split(" ", 2);
         if (inputArr.length == 1) {
@@ -52,44 +74,58 @@ public class Parser {
         return todoBool || deadlineBool || eventBool;
     }
 
-    public static Task parseTask(String[] arr) {
-        try {
-            String taskCode = arr[0];
-            String isDoneStr = arr[1];
-            boolean isDone = isDoneStr.equals("1") ? true : false;
-            String task = arr[2];
+    /**
+     * Parses a string saved from Storage into a Task Object.
+     * This includes 'todo', 'deadline' or 'event' tasks.
+     * If format is wrong, throws DukeException.
+     *
+     * @param taskString Input taskString to check format.
+     * @return Task if taskString is in correct format.
+     * @throws DukeException if format is wrong.
+     */
+    public static Task parseTask(String taskString) throws DukeException {
+        String[] taskStringArr = taskString.split(" - ");
+        String taskCode = taskStringArr[0];
+        String isDoneStr = taskStringArr[1];
+        boolean isDone = isDoneStr.equals("1") ? true : false;
+        String task = taskStringArr[2];
 
-            //if toDo item
-            if (taskCode.equals("T")) {
-                ToDos todo = new ToDos(task, isDone);
-                return todo;
-                //if deadline item
-            } else if (taskCode.equals("D")) {
-                String date = arr[3];
-                date = parseDate(date);
-                Deadlines deadline = new Deadlines(task, date, isDone);
-                return deadline;
-                //if events item
-            } else {
-                String date = arr[3];
-                date = parseDate(date);
-                Events event = new Events(task, date, isDone);
-                return event;
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            System.exit(1);
-            return null;
+        //if toDo item
+        if (taskCode.equals("T")) {
+            ToDos todo = new ToDos(task, isDone);
+            return todo;
+            //if deadline item
+        } else if (taskCode.equals("D")) {
+            String date = taskStringArr[3];
+            date = parseDate(date);
+            Deadlines deadline = new Deadlines(task, date, isDone);
+            return deadline;
+            //if events item
+        } else {
+            String date = taskStringArr[3];
+            date = parseDate(date);
+            Events event = new Events(task, date, isDone);
+            return event;
         }
     }
 
+    /**
+     * Parses a date saved from a Storage file.
+     * Parses into LocalDate format and time in 24-hour format (HHMM) concatenated in a string.
+     * For example, transforms an input "at 2/12/2019 1800" to "2019-12-02 1800".
+     *
+     * @param date Input date to be parsed.
+     * @return String date in LocalDate format and time in 24-hour format (HHMM).
+     * @throws DukeException if input format is incorrect.
+     */
     public static String parseDate(String date) throws DukeException {
         //date input could be "at 2/12/2019 1800"
         //returns "2019-12-02 1800"
         try {
             String errMessage = "Sorry! Format of date is wrong. " +
                     "Example input should be " +
-                    "deadline return book /by 2/12/2019 1800.";
+                    "deadline return book /by 2/12/2019 1800. " +
+                    "Please fix storage file before loading Duke again.";
 
             String[] strArr = date.split(" ");
             if (strArr.length != 3 && strArr.length != 2) {
@@ -128,6 +164,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a date into a format savable to Storage file.
+     * Parses from LocalDate format to Storage file format.
+     * For example, transforms an input "2019-12-02" to "2/12/2019".
+     *
+     * @param date Input LocalDate object to be parsed.
+     * @return String date in Storage file format.
+     */
     public static String parseDateToSaveFormat(LocalDate date) {
         int day = date.getDayOfMonth();
         int month = date.getMonthValue();
@@ -139,6 +183,14 @@ public class Parser {
         return day + "/" + monthStr + "/" + year;
     }
 
+    /**
+     * Parses a task command into an array containing the task and date.
+     * Transforms an input "event halloween party /at 2/12/2019 1800" to "[event halloween party, at 2/12/2019 1800]".
+     *
+     * @param task Input task to be parsed.
+     * @return String[] Array of strings containing task and date.
+     * @throws DukeException throws DukeException if format of input command is wrong.
+     */
     public static String[] splitTaskAndDate(String task) throws DukeException {
         try {
             // date = "at 2/12/2019 1800"

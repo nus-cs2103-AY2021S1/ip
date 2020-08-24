@@ -9,11 +9,6 @@ public class Events extends Task {
 
     public Events(String task, String dateAndTime) {
 //        // date = 'at Sunday 2-4pm'
-//        String time = task.substring(task.indexOf("/") + 1, task.length());
-//        time = Task.reformatDate(time); // (by: Sunday)
-//
-//        // task = project meeting
-//        task = task.substring(0, task.indexOf("/") - 1);
         String[] dateAndTimeArr = dateAndTime.split(" ");
         this.task = task;
         this.date = LocalDate.parse(dateAndTimeArr[0]);
@@ -29,6 +24,11 @@ public class Events extends Task {
         this.done = done;
     }
 
+    /**
+     * Returns a string representation of the contents of the specified array.
+     *
+     * @return String Returns a string representation of the contents of the specified array.
+     */
     @Override
     public String toString() {
         String doneIndicator = this.done ? "[✓]" : "[✗]";
@@ -48,6 +48,11 @@ public class Events extends Task {
         return "[E]" + doneIndicator + " " + this.task + " (at: " + date + ", " + time + ")";
     }
 
+    /**
+     * Returns a string representation of the Deadline object to be saved in persistent file.
+     *
+     * @return String Returns a string representation of the Events object to be saved in persistent file.
+     */
     @Override
     public String parseToSaveFormat() {
         String res = "";
