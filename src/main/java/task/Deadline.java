@@ -4,7 +4,7 @@ import exception.EmptyTaskException;
 import exception.MissingDateException;
 
 public class Deadline extends Task {
-    String dueDate;
+    private String dueDate;
 
     public Deadline(String description, String dueDate) {
         super(description);
