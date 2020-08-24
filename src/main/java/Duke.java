@@ -5,6 +5,11 @@ import duke.*;
 
 public class Duke {
 
+    /**
+     * The main method, when run, runs the Duke Program.
+     *
+     * @param args NA
+     */
     public static void main(String[] args) {
         Storage storage = new Storage("src/main/data/", "src/main/data/data.txt");
         try {
