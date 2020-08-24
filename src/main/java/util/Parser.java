@@ -1,3 +1,13 @@
+package util;
+
+import command.AddCommand;
+import command.Command;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.ExitCommand;
+import command.ListCommand;
+import duke.DukeException;
+
 public class Parser {
     // all valid actions
     private enum Action {
@@ -21,7 +31,7 @@ public class Parser {
     private void validateCommandDesc(String desc, Action type) throws DukeException {
         String result = desc.trim();
         if (result.isEmpty()) {
-            throw new DukeException("Command description cannot be empty");
+            throw new DukeException("command.Command description cannot be empty");
         }
         if (type == Action.DEADLINE) {
             if (!result.contains("/by") || result.split("/by").length <= 1 || result.split("/by")[0].isEmpty()) {

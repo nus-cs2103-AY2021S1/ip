@@ -1,3 +1,13 @@
+package command;
+
+import task.Task;
+import task.ToDoTask;
+import task.DeadlineTask;
+import task.EventTask;
+import util.Storage;
+import util.TaskList;
+import util.Ui;
+
 import java.io.IOException;
 
 public class AddCommand extends Command {

@@ -20,7 +20,7 @@ The following task has been marked as done:
 2. [D][✓] buy birthday gift for friend  (by: 30 Aug 2020 6:00PM)
 3. [E][✘] family dinner with uncle  (at: 12 Dec 2020 7:00PM)
 ------------------------------------------------------
-Command description cannot be empty
+command.Command description cannot be empty
 ------------------------------------------------------
 I can't help you with that request, try something else.
 ------------------------------------------------------

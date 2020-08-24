@@ -1,6 +1,14 @@
+package duke;
+
+import command.Command;
+import command.ExitCommand;
+import util.Parser;
+import util.Storage;
+import util.TaskList;
+import util.Ui;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 
 public class Duke {
     // file dir

@@ -1,3 +1,10 @@
+package command;
+
+import task.Task;
+import util.Storage;
+import util.TaskList;
+import util.Ui;
+
 import java.io.IOException;
 
 public class DoneCommand extends Command {
