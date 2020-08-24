@@ -1,7 +1,5 @@
 package Task;
 
-import Task.Task;
-
 public class ToDo extends Task {
 
     public ToDo(String description) {
@@ -9,12 +7,7 @@ public class ToDo extends Task {
     }
 
     public String toString() {
-        String icon;
-        if (this.completed) {
-            icon = "[" + "\u2713" + "]";
-        } else {
-            icon = "[" + "\u2718" + "]";
-        }
+        String icon = this.completed ? "[" + "\u2713" + "]" : "[" + "\u2718" + "]";
         return "[T]" + icon + " " + this.description;
     }
 }
