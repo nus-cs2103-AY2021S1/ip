@@ -47,7 +47,7 @@ public class Chatterbox {
         }
 
         // Get first word of input
-        String command = (input + " ").split(" ")[0];
+        String command = (input + " ").split(" ")[0].toLowerCase();
 
         // Process command
         if (command.equals("list")) {
