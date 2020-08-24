@@ -1,13 +1,13 @@
 public class Deadline extends Task {
-    private String completeBy;
 
-    public Deadline(String deadlineName, String completeBy) {
-        super(deadlineName);
-        this.completeBy = completeBy;
+    public Deadline(String deadlineName, String deadlineTime) {
+        super(deadlineName, deadlineTime);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + completeBy + ")";
+        TimeParser timeParser = new TimeParser(localDate);
+        String formattedTime = timeParser.getFormattedTime();
+        return "[D]" + super.toString() + " (by: " + formattedTime + ")";
     }
 }
