@@ -13,6 +13,7 @@ public class DeadlineCommand extends Command {
         this.deadline = deadline;
     }
 
+    @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.add(deadline);
         storage.save(taskList);

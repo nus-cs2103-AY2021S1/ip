@@ -12,7 +12,8 @@ public class ViewallCommand extends Command {
     public ViewallCommand(LocalDate date) {
         this.date = date;
     }
-    
+
+    @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList filtered = taskList.viewAll(date);
         ui.print("Here are the tasks on given date:");

@@ -1,7 +1,21 @@
 package duke;
 
+import java.util.Scanner;
+
 public class Ui {
-    public Ui() {}
+    Scanner sc;
+    
+    public Ui() {
+        sc = new Scanner(System.in);
+    }
+    
+    public String readCommand() {
+        if(sc.hasNext()) {
+            return sc.nextLine();
+        } else {
+            return "";
+        }
+    }
     
     public void print(String message) {
         System.out.print("     ");
@@ -20,9 +34,7 @@ public class Ui {
     }
 
     public void showCloseMessage() {
-        buildChatFence();
         print("Bye? I hope it's not forever! Come back soon!");
-        buildChatFence();
     }
 
     public void printAddConfirmation(String message, int size) {

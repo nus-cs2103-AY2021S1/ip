@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.CommandTypes;
 import duke.command.DeadlineCommand;
@@ -39,6 +40,8 @@ public class Parser {
         }
 
         switch (command) {
+        case BYE:
+            return new ByeCommand();
         case LIST:
             // we ignore the argument after `list`.
             return new ListCommand();
