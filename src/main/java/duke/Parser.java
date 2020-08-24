@@ -9,6 +9,8 @@ import duke.command.EventCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.command.ViewallCommand;
+import duke.task.Deadline;
+import duke.task.Event;
 import exception.DeadlineInvalidUsageException;
 import exception.EventInvalidUsageException;
 import exception.InvalidUsageException;

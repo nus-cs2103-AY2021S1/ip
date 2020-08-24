@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import exception.EventInvalidUsageException;
 
@@ -39,6 +39,10 @@ public class Event extends Task {
     @Override
     public String getDescription() {
         return super.getDescription() + " | " + this.at;
+    }
+    
+    public LocalDate getDate() {
+        return this.at;
     }
 
     private static LocalDate parseDate(String str) {

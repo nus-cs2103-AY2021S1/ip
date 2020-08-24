@@ -17,7 +17,7 @@ public class ViewallCommand extends Command {
         TaskList filtered = taskList.viewAll(date);
         ui.print("Here are the tasks on given date:");
         for (int i = 0; i < filtered.size(); i++) {
-            ui.print(String.format("%d. %s%n", i + 1, filtered.show(i)));
+            ui.print(String.format("%d. %s", i + 1, filtered.show(i)));
         }
     }
 }

@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Todo;
+import duke.task.Todo;
 import duke.Ui;
 
 public class TodoCommand extends Command {

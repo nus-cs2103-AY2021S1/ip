@@ -1,6 +1,9 @@
 package duke;
 
-import java.time.DateTimeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,8 +46,8 @@ public class TaskList {
                 this.taskList
                         .stream()
                         .filter(x ->
-                                (x instanceof Event && ((Event) x).at.equals(date))
-                                        || (x instanceof Deadline && ((Deadline) x).by.equals(date)))
+                                (x instanceof Event && ((Event) x).getDate().equals(date))
+                                        || (x instanceof Deadline && ((Deadline) x).getDate().equals(date)))
                         .collect(Collectors.toList()));
     }
 }
