@@ -4,8 +4,22 @@ public class DeleteCommand implements Command {
 
     private int itemIndex;
 
-    public DeleteCommand(int itemIndex) {
+    private DeleteCommand(int itemIndex) {
         this.itemIndex = itemIndex;
+    }
+
+    public static DeleteCommand parse(String command) {
+        String[] details = command.split(" ");
+        if (details.length == 1) {
+            throw new DukeException("Please specify a task to delete!");
+        }
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(details[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid number input!");
+        }
+        return new DeleteCommand(taskNumber);
     }
 
     @Override
