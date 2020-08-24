@@ -48,7 +48,10 @@ public class DukeService {
         }
         try {
             String[] titleComponents = title.split("/at", 2);
-            Task task = new EventTask(titleComponents[0].trim(), titleComponents[1].trim());
+            String[] dateAndTime = titleComponents[1].trim().split("\\s+", 2);
+            String[] times =  dateAndTime[1].split("-", 2);
+            Task task = new EventTask(titleComponents[0].trim(),
+                    dateAndTime[0].trim(), times[0].trim(), times[1].trim());
             dukeDomain.addToList(task);
             dukeDomain.outputTask(task);
         } catch (IndexOutOfBoundsException exception) {
