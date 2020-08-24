@@ -9,7 +9,7 @@ public class Todo extends Task {
      * @param description describes the To-do.
      * @param id position of the To-do.
      */
-    Todo(String description, int id) {
+    public Todo(String description, int id) {
         super(description, id);
     }
 

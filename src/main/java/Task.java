@@ -2,6 +2,7 @@
  * Task is the parent class of To-do, Deadline, and Event.
  */
 public class Task {
+
     protected String description;
     protected boolean isDone;
     protected int id;

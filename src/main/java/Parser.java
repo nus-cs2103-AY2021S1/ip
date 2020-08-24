@@ -3,8 +3,8 @@
  */
 public class Parser {
 
-    HandleFile handleFile;
-    ListOfItems listOfItems;
+    protected HandleFile handleFile;
+    protected ListOfItems listOfItems;
 
     /**
      * Constructor initialises a new Parser object.
@@ -12,7 +12,7 @@ public class Parser {
      * @param list list of tasks.
      * @param handleFile handles "stored.txt" file.
      */
-    Parser(ListOfItems list, HandleFile handleFile) {
+    public Parser(ListOfItems list, HandleFile handleFile) {
         this.handleFile = handleFile;
         this.listOfItems = list;
     }
@@ -23,7 +23,7 @@ public class Parser {
      *
      * @param input user input.
      */
-    void run(String input) {
+    protected void run(String input) {
         try {
             if (input.equals("list")) {
                 listOfItems.getList();
@@ -33,9 +33,11 @@ public class Parser {
             } else if (input.contains("delete")) {
                 listOfItems.deleteItem(input);
                 handleFile.writeFile(listOfItems);
-            } else if (input.contains("items due by")) { // check items due on a specific date
+            } else if (input.contains("items due by")) {
+                // check items due on a specific date
                 listOfItems.checkBy(input);
-            } else if (input.contains("items due before")) { // check items due before a specific date + time
+            } else if (input.contains("items due before")) {
+                // check items due before a specific date + time
                 listOfItems.checkBefore(input);
             } else {
                 listOfItems.addItem(input);

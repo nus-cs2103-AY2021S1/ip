@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
  * Event is a type of Task, which takes in a specific date/time.
  */
 public class Event extends Task {
+
     protected String connector;
     protected LocalDate date;
     protected LocalTime startTime;
@@ -19,13 +20,15 @@ public class Event extends Task {
      * @param duration duration of event.
      * @param stored whether it is from stored.txt or a new input.
      */
-    Event(String description, int id, String duration, boolean stored) {
+    public Event(String description, int id, String duration, boolean stored) {
         super(description, id);
-        if (stored) { //stored data
+        if (stored) {
+            //stored data
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/MMM/yyyy");
             DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("h:mma");
             String[] dateTime = duration.split(" ");
             this.connector = dateTime[0];
+
             String date = dateTime[1] + "/" + dateTime[2] + "/" + dateTime[3].substring(0, dateTime[3].length() - 1);
             this.date = LocalDate.parse(date, dateFormat);
 
@@ -47,9 +50,9 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E][" + this.getStatusIcon() + "] " + this.description + "(" +
-                this.connector + " " + this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) +
-                ", " + this.startTime.format(DateTimeFormatter.ofPattern("h:mma")) + " - " +
-                this.endTime.format(DateTimeFormatter.ofPattern("h:mma")) + ")";
+        return "[E][" + this.getStatusIcon() + "] " + this.description + "("
+                + this.connector + " " + this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                + ", " + this.startTime.format(DateTimeFormatter.ofPattern("h:mma")) + " - "
+                + this.endTime.format(DateTimeFormatter.ofPattern("h:mma")) + ")";
     }
 }

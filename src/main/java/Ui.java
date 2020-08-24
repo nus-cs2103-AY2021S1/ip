@@ -4,8 +4,9 @@ import java.util.Scanner;
  * Ui class deals with all of the interactions with the user.
  */
 public class Ui {
-    Parser parser;
-    String divider = "____________________________________________________________";
+
+    protected Parser parser;
+    protected String divider = "____________________________________________________________";
 
     /**
      * Constructor creates an Ui object.
@@ -21,7 +22,7 @@ public class Ui {
     /**
      * Greets the user when the program starts.
      */
-    void hello() {
+    protected void hello() {
         String intro = "Hello! I'm Bob\n" +
                 "What can I do for you?\n";
         System.out.println(divider + "\n" + intro + "\n" + divider);
@@ -30,7 +31,7 @@ public class Ui {
     /**
      * Handles all of the user inputs and passes it to the parser.
      */
-    void run() {
+    protected void run() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -44,7 +45,7 @@ public class Ui {
     /**
      * Handles it when the user wants to exit the program.
      */
-    void goodbye() {
+    protected void goodbye() {
         String message = "Bye. Hope to see you again soon! :)";
         System.out.println(divider + "\n" + message + "\n" + divider);
     }
