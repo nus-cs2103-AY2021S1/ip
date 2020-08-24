@@ -1,10 +1,10 @@
-package commands;
+package dd.commands;
 
-import datetimehandler.DateTimeHandler;
-import storage.DataStorage;
-import tasks.Task;
-import tasks.TaskList;
-import ui.Ui;
+import dd.datetimehandler.DateTimeHandler;
+import dd.storage.DataStorage;
+import dd.tasks.Task;
+import dd.tasks.TaskList;
+import dd.ui.Ui;
 
 import java.util.ArrayList;
 

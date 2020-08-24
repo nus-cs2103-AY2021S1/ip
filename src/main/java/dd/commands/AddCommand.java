@@ -1,12 +1,12 @@
-package commands;
+package dd.commands;
 
-import datetimehandler.DateTimeHandler;
-import storage.DataStorage;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.TaskList;
-import tasks.Todo;
-import ui.Ui;
+import dd.datetimehandler.DateTimeHandler;
+import dd.storage.DataStorage;
+import dd.tasks.Deadline;
+import dd.tasks.Event;
+import dd.tasks.TaskList;
+import dd.tasks.Todo;
+import dd.ui.Ui;
 
 public class AddCommand extends Command {
 

@@ -1,6 +1,6 @@
-package parser;
+package dd.parser;
 
-import commands.*;
+import dd.commands.*;
 
 public class Parser {
     public static Command parse(String input) {

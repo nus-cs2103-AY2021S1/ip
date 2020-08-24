@@ -1,8 +1,8 @@
-package commands;
+package dd.commands;
 
-import storage.DataStorage;
-import tasks.TaskList;
-import ui.Ui;
+import dd.storage.DataStorage;
+import dd.tasks.TaskList;
+import dd.ui.Ui;
 
 public class ExitCommand extends Command {
 

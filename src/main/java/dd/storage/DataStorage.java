@@ -1,15 +1,11 @@
-package storage;
+package dd.storage;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import dd.tasks.Task;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class DataStorage {
 
@@ -25,13 +21,12 @@ public class DataStorage {
 
     public void convertData(ArrayList<Task> taskList) throws IOException {
         FileWriter fw = new FileWriter("../src/data/duke.txt");
-        ArrayList<Task> tasks = taskList;
-        String input = tasks.get(0).saveString();
-        tasks.remove(0);
+        String input = taskList.get(0).saveString();
+        taskList.remove(0);
 
-        while (!tasks.isEmpty()) {
-            input = input + "\n" + tasks.get(0).saveString();
-            tasks.remove(0);
+        while (!taskList.isEmpty()) {
+            input = input + "\n" + taskList.get(0).saveString();
+            taskList.remove(0);
         }
 
         fw.write(input);

@@ -1,8 +1,10 @@
-import commands.Command;
-import parser.Parser;
-import storage.DataStorage;
-import tasks.TaskList;
-import ui.Ui;
+package dd;
+
+import dd.commands.Command;
+import dd.parser.Parser;
+import dd.storage.DataStorage;
+import dd.tasks.TaskList;
+import dd.ui.Ui;
 
 import java.io.IOException;
 

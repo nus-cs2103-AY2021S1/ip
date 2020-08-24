@@ -1,4 +1,4 @@
-package tasks;
+package dd.tasks;
 
 public class Task {
     protected String description;
@@ -23,7 +23,6 @@ public class Task {
 
     @Override
     public String toString() {
-        String output = "[" + this.getStatusIcon() + "] " + this.description;
-        return output;
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
