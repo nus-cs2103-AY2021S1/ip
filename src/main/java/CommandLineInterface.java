@@ -2,17 +2,21 @@ import task.Todo;
 import task.Event;
 import task.Deadline;
 import task.TaskManager;
-import task.CommandTypes;
+
+import commands.CommandTypes;
+
 import utils.Formatter;
 import utils.Colour;
+import utils.ResourceHandler;
+
 import exceptions.DukeException;
 
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class CommandLineInterface {
     private static final int dividerLength = 70;
     private static final int leftPadding = 7;
-    private static final String welcomeMessage = "Hello! I'm Erica \n" + "How may I be of assistance?\n";
     private static final String goodbyeMessage = "Bye. Hope my service has been satisfactory."
             + "Hope to see you again soon.";
     private static final String invalidTaskIndexErrorMessage = "Invalid task index! Please choose another index.";
@@ -23,8 +27,8 @@ public class CommandLineInterface {
     private static final TaskManager taskManager = new TaskManager();
 
 
-    public static void run(){
-        formatter.print(welcomeMessage);
+    public static void run() {
+        formatter.print(ResourceHandler.getMessage("commandline.welcomeMessage"));
         while (scanner.hasNext()) {
             try {
                 String userInput = scanner.nextLine();
@@ -39,7 +43,7 @@ public class CommandLineInterface {
                         break;
 
                     case BYE:
-                        formatter.print(goodbyeMessage);
+                        formatter.print(ResourceHandler.getMessage("commandline.farewellMessage"));
                         return;
 
                     case TODO:
@@ -71,23 +75,25 @@ public class CommandLineInterface {
                         try {
                             int taskIndex = Integer.parseInt(words[1]);
                             formatter.print(taskManager.markTaskAsDone(taskIndex));
-                        } catch (IndexOutOfBoundsException e){
-                            throw new DukeException(invalidTaskIndexErrorMessage);
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException(
+                                    ResourceHandler.getMessage("commandline.invalidTaskIndexErrorMessage"));
                         }
                         break;
 
                     case DELETE:
-                        try{
+                        try {
                             int taskIndex = Integer.parseInt(words[1]);
                             formatter.print(taskManager.deleteTask(taskIndex));
-                        } catch (IndexOutOfBoundsException e){
-                            throw new DukeException(invalidTaskIndexErrorMessage);
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException(
+                                    ResourceHandler.getMessage("commandline.invalidTaskIndexErrorMessage"));
                         }
                 }
             } catch (DukeException e) {
                 formatter.print(e.toString());
-            } catch(IllegalArgumentException e){
-                formatter.print(Colour.Red(invalidCommandInput));
+            } catch (IllegalArgumentException e) {
+                formatter.print(Colour.Red(ResourceHandler.getMessage("commandline.invalidCommandInputMessage")));
             }
         }
         scanner.close();

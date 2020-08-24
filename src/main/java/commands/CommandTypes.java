@@ -1,92 +1,93 @@
-package task;
+package commands;
 
 import exceptions.DukeException;
+
+import utils.ResourceHandler;
 
 import java.util.regex.Pattern;
 
 public enum CommandTypes {
-    BYE{
-        private static final String invalidCommandInput = "OOPS!!!! I'm sorry, but I don't know what that means";
+    BYE {
         @Override
-        public void checkInput (String input) throws DukeException{
+        public void checkInput(String input) throws DukeException {
             String patternString = "^(?)bye\\s*$";
-            if(!Pattern.matches(patternString, input)){
-                throw new DukeException(invalidCommandInput);
+            if (!Pattern.matches(patternString, input)) {
+                throw new DukeException(ResourceHandler.getMessage("commandline.invalidCommandInputMessage"));
             }
         }
     },
-    LIST{
-        private static final String invalidCommandInput = "OOPS!!!! I'm sorry, but I don't know what that means";
+    LIST {
         @Override
-        public void checkInput (String input) throws DukeException{
+        public void checkInput(String input) throws DukeException {
             String patternString = "^(?)list\\s*$";
-            if(!Pattern.matches(patternString, input)){
-                throw new DukeException(invalidCommandInput);
+            if (!Pattern.matches(patternString, input)) {
+                throw new DukeException(ResourceHandler.getMessage("commandline.invalidCommandInputMessage"));
             }
         }
     },
-    TODO{
-        private static final String todoErrorMessage = "OOPS!!! The description of a todo cannot be empty";
+    TODO {
         @Override
-        public void checkInput (String input) throws DukeException{
-           String content = input.replaceFirst("^todo", "");
-           if(content.isBlank()){
-               throw new DukeException(todoErrorMessage);
-           }
+        public void checkInput(String input) throws DukeException {
+            String content = input.replaceFirst("^todo", "");
+            if (content.isBlank()) {
+                throw new DukeException(ResourceHandler.getMessage("command.invalidTodoCommand"));
+            }
         }
     },
-    EVENT{
-        private static final String eventErrorMessage = "OOPS!!! The description of an event cannot be empty.";
+    EVENT {
         private static final String noDateTimeErrorMessage = "OOPS!!! Missing deadline date/time";
+
         @Override
-        public void checkInput (String input) throws DukeException{
+        public void checkInput(String input) throws DukeException {
             input = input.replaceFirst("^event", "");
             String[] inputArgs = input.split("\\s*/at\\s*");
-            try{
+            try {
                 String task = inputArgs[0];
-                if(task.isBlank()){
-                    throw new DukeException(eventErrorMessage);
+                if (task.isBlank()) {
+                    throw new DukeException(ResourceHandler.getMessage("command.invalidEventCommand"));
                 }
                 String dateTime = inputArgs[1];
-            } catch(ArrayIndexOutOfBoundsException e){
-                throw new DukeException(noDateTimeErrorMessage);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException(ResourceHandler.getMessage("command.missingDateAndTimeForEvent"));
             }
         }
     },
-    DEADLINE{
-        private static final String deadlineErrorMessage = "OOPS!!! The description of a deadline cannot be empty.";
+    DEADLINE {
         private static final String noDateTimeErrorMessage = "OOPS!!! Missing deadline date/time";
+
         @Override
-        public void checkInput(String input) throws DukeException{
+        public void checkInput(String input) throws DukeException {
             input = input.replaceFirst("^(?i)deadline", "");
             String[] inputArgs = input.split("\\s*/by\\s*");
-            try{
+            try {
                 String task = inputArgs[0];
-                if(task.isBlank()){
-                    throw new DukeException(deadlineErrorMessage);
+                if (task.isBlank()) {
+                    throw new DukeException(ResourceHandler.getMessage("command.invalidDeadlineCommand"));
                 }
                 String dateTime = inputArgs[1];
-            } catch(ArrayIndexOutOfBoundsException e){
-                throw new DukeException(noDateTimeErrorMessage);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException(ResourceHandler.getMessage("command.missingDateAndTimeForDeadline"));
             }
         }
     },
-    DONE{
+    DONE {
         private static final String invalidTaskIndexErrorMessage = "Invalid task index! Please choose another index.";
+
         @Override
-        public void checkInput(String input) throws DukeException{
+        public void checkInput(String input) throws DukeException {
             String patternString = "^(?i)done\\s+\\d+\\s*$";
-            if(!Pattern.matches(patternString, input)){
+            if (!Pattern.matches(patternString, input)) {
                 throw new DukeException(invalidTaskIndexErrorMessage);
             }
         }
     },
-    DELETE{
+    DELETE {
         private static final String invalidTaskIndexErrorMessage = "Invalid task index! Please choose another index.";
+
         @Override
         public void checkInput(String input) throws DukeException {
             String patternString = "^(?i)delete\\s+\\d+\\s*$";
-            if(!Pattern.matches(patternString, input)){
+            if (!Pattern.matches(patternString, input)) {
                 throw new DukeException(invalidTaskIndexErrorMessage);
             }
 

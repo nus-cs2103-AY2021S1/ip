@@ -1,6 +1,7 @@
 package task;
 
 import utils.Colour;
+import utils.ResourceHandler;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -65,9 +66,8 @@ public class TaskManager {
     public String markTaskAsDone(int taskIndex) {
         Task updatedTask = tasks.get(taskIndex - 1).markTaskAsDone();
         tasks.set(taskIndex - 1, updatedTask);
-        String taskDoneMessage = "Good job on completing this task! I have marked this task as done: ";
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(taskDoneMessage + "\n");
+        String taskDoneMessage = ResourceHandler.getMessage("taskManager.taskDoneMessage");
+        StringBuilder stringBuilder = new StringBuilder(taskDoneMessage);
         stringBuilder.append(Colour.Green(updatedTask.toString()));
         return stringBuilder.toString();
     }
