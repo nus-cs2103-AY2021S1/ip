@@ -1,8 +1,10 @@
+package tasks;
+
 /**
- * Represents a general Task object
+ * Represents a general tasks.Task object
  */
 
-class Task {
+public class Task {
     protected String name;
     protected boolean done;
 
