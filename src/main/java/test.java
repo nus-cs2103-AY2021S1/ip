@@ -6,11 +6,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class test {
+    public enum level{
+        Todo,Deadline,Event
+    }
     public static void main(String[] args){
-//        Scanner sc = new Scanner(System.in);
-//        String echo = sc.nextLine();
+        Scanner sc = new Scanner(System.in);
+        String echo = sc.nextLine();
 //        task t = new Todo(echo);
-//        Deadline d = new Deadline(echo);
+        Deadline d = new Deadline(echo, "[D]");
 //        try {
 //            d.addDate("12-12-2020 1800");
 //            d.getDT();
@@ -18,11 +21,17 @@ public class test {
 //            System.out.println(e);
 //        }
 //        String date = "by: Monday";
-//        d.addDate(date);
+//        String date = "12-12-2020 1200";
+//        try {
+//            d.addDate(date);
+//        } catch(ErrorExceptions e){
+//            System.out.println("Failed");
+//        }
+        System.out.println(d.read());
 //        System.out.println(d.read());
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm");
+//        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm");
 //        LocalDateTime dt = DateTimeManager.setDateTime("2019-12-01T18:00");
-        LocalDateTime dt = LocalDateTime.parse("12-12-2020 1800",format);
-        System.out.println(dt.format(DateTimeFormatter.ofPattern("MMM dd uuuu HHmm")));
+//        LocalDateTime dt = LocalDateTime.parse("12-12-2020 1800",format);
+//        System.out.println(dt.format(DateTimeFormatter.ofPattern("MMM dd uuuu HHmm")));
     }
 }
