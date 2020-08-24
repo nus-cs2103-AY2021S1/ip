@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Processor {
 
@@ -51,7 +52,8 @@ public class Processor {
                 throw new DukeException("_________________________________________\n" + message + "\n_________________________________________");
             } else {
                 String[] secondarr = stringarr[1].split("/by", 2);
-                Deadline deadline = new Deadline(secondarr[0], secondarr[1]);
+                LocalDate date = LocalDate.parse(secondarr[1].trim());
+                Deadline deadline = new Deadline(secondarr[0], date);
                 arraylst.add(deadline);
             }
         } else if (stringarr[0].equals("event")) {
