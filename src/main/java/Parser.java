@@ -1,7 +1,5 @@
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 
 public class Parser {
 
@@ -18,7 +16,7 @@ public class Parser {
         } else if (order.length() >= 4 && order.substring(0, 4).equals("done")) {
             int index = Integer.parseInt(order.substring(5))-1;
             Task temp = TaskList.list.get(index);
-            temp.done();
+            temp.finish();
             TaskList.list.set(index, temp);
             Storage.writeData(TaskList.list);
             return "    Great! I have marked this task as done:\n" + temp;

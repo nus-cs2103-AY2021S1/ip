@@ -3,10 +3,10 @@ public class Todo extends Task {
         super(description);
     }
 
-    public Todo(boolean done, String description) {
-        super(done, description, 'T');
+    public Todo(boolean isDone, String description) {
+        super(isDone, description, 'T');
         String unparseMessage = "T";
-        if (done) {
+        if (isDone) {
             unparseMessage += "1";
         } else {
             unparseMessage += "0";

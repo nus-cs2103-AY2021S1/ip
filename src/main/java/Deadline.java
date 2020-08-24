@@ -8,11 +8,11 @@ public class Deadline extends Task {
         this.due = due;
     }
 
-    public Deadline(boolean done, String description, LocalDate due) {
-        super(done, description,'D');
+    public Deadline(boolean isDone, String description, LocalDate due) {
+        super(isDone, description,'D');
         this.due = due;
         String unparseMessage = "D";
-        if (done) {
+        if (isDone) {
             unparseMessage += "1";
         } else {
             unparseMessage += "0";

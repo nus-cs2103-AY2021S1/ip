@@ -8,11 +8,11 @@ public class Event extends Task{
         this.time = time;
     }
 
-    public Event(boolean done, String description, LocalDate due) {
-        super(done, description,'E');
+    public Event(boolean isDone, String description, LocalDate due) {
+        super(isDone, description,'E');
         this.time = due;
         String unparseMessage = "E";
-        if (done) {
+        if (isDone) {
             unparseMessage += "1";
         } else {
             unparseMessage += "0";
