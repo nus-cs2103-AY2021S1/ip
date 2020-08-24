@@ -1,8 +1,10 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BotHandler {
-    private static ArrayList<Task> lst = new ArrayList<>();
+    private final static ArrayList<Task> lst = new ArrayList<>();
 
     private static void displayList() throws DuckieException{
         if (lst.size() == 0) {
@@ -12,7 +14,7 @@ public class BotHandler {
         BotResponses.displayListReply(lst);
     }
 
-    private static void addTask(String input, String type) throws DuckieException{
+    private static void addTask(String input, String type) throws DuckieException, IOException {
         Task t1;
         try {
             if (type.equals("todo")) {
@@ -28,23 +30,78 @@ public class BotHandler {
                     t1 = new Event(description, time);
                 }
             }
+            lst.add(t1);
+            writeToFile();
+        } catch (IOException e) {
+            throw e;
         } catch (Exception e) {
-            throw new DuckieInsufficientInfoException();
+            throw new DuckieNoIndexException();
         }
-        lst.add(t1);
         BotResponses.addTaskReply(t1, lst);
     }
 
-    private static void checkTask(int ind) {
+    private static void checkTask(int ind) throws IOException {
         Task t1 = lst.get(ind - 1);
         t1.checked();
+        writeToFile();
         BotResponses.checkTaskReply(t1);
     }
 
-    public static void deleteTask(int ind) {
+    public static void deleteTask(int ind) throws IOException {
         Task t1 = lst.get(ind - 1);
         lst.remove(ind - 1);
+        writeToFile();
         BotResponses.deleteTaskReply(t1);
+    }
+
+    public static void processData(Scanner sc) throws DuckieException {
+        while(sc.hasNextLine()) {
+            String task = sc.nextLine();
+            String[] taskBreakdown = task.split("\\|");
+
+            String type = taskBreakdown[0].strip();
+            String isDone = taskBreakdown[1].strip();
+            String description = taskBreakdown[2].strip();
+            if (type.equals("T")) {
+                Todo taskToDo = new Todo(description);
+                if (isDone.equals("1")) {
+                    taskToDo.checked();
+                }
+                lst.add(taskToDo);
+            } else if (type.equals("D")) {
+                String date = taskBreakdown[3].strip();
+                Deadline taskD = new Deadline(description, date);
+                if (isDone.equals("1")) {
+                    taskD.checked();
+                }
+                lst.add(taskD);
+            } else {
+                String dateTime = taskBreakdown[3].strip();
+                Event taskE = new Event(description, dateTime);
+                if (isDone.equals("1")) {
+                    taskE.checked();
+                }
+                lst.add(taskE);
+            }
+        }
+        System.out.println("\t" + "Loading tasks...");
+        displayList();
+    }
+
+    private static void writeToFile() throws IOException {
+        String cwd = System.getProperty("user.dir");
+        String dukeFile = cwd + "/data/duckie.txt";
+        System.out.println(dukeFile);
+        FileWriter fw = new FileWriter(dukeFile);
+        String toWrite = "";
+        for (Task t1: lst) {
+            toWrite += (t1.getType() + (t1.isCompleted() ? " | 1 | " : " | 0 | ")
+                        + t1.getDescription())
+                        + (t1.getDate() != null ? "| " + t1.getDate() : "")
+                        + System.lineSeparator();
+        }
+        fw.write(toWrite);
+        fw.close();
     }
 
     //Check if a String only
@@ -93,6 +150,8 @@ public class BotHandler {
                 }
             } catch (DuckieException e) {
                 System.out.println(e.getMessage());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }

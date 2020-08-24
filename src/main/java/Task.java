@@ -11,6 +11,22 @@ public class Task {
         this.isDone = true;
     }
 
+    public boolean isCompleted() {
+        return this.isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String getType() {
+        return null;
+    }
+
+    public String getDate() {
+        return null;
+    }
+
     @Override
     public String toString() {
         String tick = "✔";
