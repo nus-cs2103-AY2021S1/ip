@@ -8,7 +8,6 @@ del ACTUAL.TXT
 
 REM compile the code into the bin folder
 javac  -cp ..\src\ -Xlint:none -encoding UTF-8 -d ..\bin ..\src\main\java\duke\exception\*.java ..\src\main\java\duke\*.java ..\src\main\java\duke\task\*.java
-pause
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
