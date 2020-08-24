@@ -1,6 +1,6 @@
-package Tasks;
+package Duke.Tasks;
 
-import Errors.InvalidCommandException;
+import Duke.Errors.InvalidCommandException;
 
 public abstract class Task {
     protected String description;

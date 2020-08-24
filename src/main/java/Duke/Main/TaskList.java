@@ -1,7 +1,7 @@
-package Main;
+package Duke.Main;
 
-import Errors.InvalidIndexException;
-import Tasks.Task;
+import Duke.Errors.InvalidIndexException;
+import Duke.Tasks.Task;
 
 import java.util.List;
 

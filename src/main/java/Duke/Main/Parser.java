@@ -1,6 +1,6 @@
-package Main;
+package Duke.Main;
 
-import Errors.*;
+import Duke.Errors.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
