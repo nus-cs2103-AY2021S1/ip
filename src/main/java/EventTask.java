@@ -1,13 +1,15 @@
 package main.java;
 
-import java.time.LocalDate;
+import main.java.Task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class EventTask extends Task {
-    public static final String EVENT ="[E]";
-
+    public static final String DEADLINE = "[E]";
     private LocalDateTime dateTime;
+
+    public EventTask() {}
     public EventTask(String description, LocalDateTime dateTime) {
         super(description);
         this.dateTime = dateTime;
@@ -17,19 +19,18 @@ public class EventTask extends Task {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDateTime(LocalDateTime date) {
+        this.dateTime = date;
     }
-
-    public EventTask() {}
 
     public String getType() {
-        return EVENT;
+        return DEADLINE;
     }
+
 
     @Override
     public String toString() {
-        return EVENT + super.toString() + " (at: "
+        return DEADLINE + super.toString() + " (by: "
                 + this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyy, h a")) + ")";
     }
 }
