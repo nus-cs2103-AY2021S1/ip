@@ -10,9 +10,13 @@ public class DukeDate {
     LocalDate date;
 
     //stringDateTime in format yyyy-mm-dd
-    public DukeDate(String stringDate) throws DateTimeParseException {
-        this.stringDate = stringDate;
-        this.date = LocalDate.parse(stringDate);
+    public DukeDate(String stringDate) throws DukeException {
+        try {
+            this.stringDate = stringDate;
+            this.date = LocalDate.parse(stringDate);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date!");
+        }
     }
 
     public String getStringDate() {
