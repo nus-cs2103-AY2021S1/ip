@@ -1,4 +1,4 @@
-public class MissingSpecifiedDeleteError extends Exception {
+public class MissingSpecifiedDeleteError extends DukeException {
     public MissingSpecifiedDeleteError(String message) {
         super(message);
     }

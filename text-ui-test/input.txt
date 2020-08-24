@@ -1,8 +1,8 @@
-deadline cs2103 project /by 20
-event welcome tea angklung /at 17 from 7-9 p.m.
-deadline
-todo read book
-todo
-deadline sleep
+list
+todo sleep
+done 4
+done 2
+list
+delete 3
 list
 bye
