@@ -14,10 +14,18 @@ import java.time.temporal.ChronoUnit;
 
 public class Duke {
 
-    public static void main(String[] args) throws DukeException, IOException {
+    private Storage storage;
+    private TaskList tasklist;
+    //private Ui ui;
 
-        ArrayList<Task> arrList= new ArrayList<>();
-        readTasks(arrList);
+    public Duke (String filePath){
+        this.storage = new Storage(filePath);
+        this.tasklist = new TaskList(storage.arr);
+    }
+
+    public static void main(String[] args) throws DukeException, IOException {
+        Duke duke = new Duke("duke.txt");
+        ArrayList<Task> arrList = duke.tasklist.list;
 
         Scanner scanner = new Scanner(System.in);
 
@@ -42,7 +50,7 @@ public class Duke {
                     if (taskNumber >= arrList.size()) {
                         throw new DukeArrayException();
                     }
-                    Task taskCompleted = arrList.get(taskNumber);
+                    Task taskCompleted = (Task) arrList.get(taskNumber);
                     taskCompleted.complete = true;
                     System.out.println("Nice! I've marked this task as done:\n" + "[✓] " + taskCompleted.task);
                 }catch(DukeArrayException e){
@@ -57,25 +65,7 @@ public class Duke {
                     }
                     //add todo
             }else if(userinput.contains("delete")) {
-                try {
-                    if (userinput.length() <= 6) {
-                        throw new DukeException();
-                    }
-                    int taskNumber = Integer.parseInt(userinput.substring(7)) - 1;
-                    if (taskNumber > arrList.size()) {
-                        throw new DukeArrayException();
-                    }
-                    Task taskDeleted = arrList.get(taskNumber);
-                    arrList.remove(taskNumber);
-                    System.out.println("I have removed the task:\n" + taskDeleted.stringify() + "\n" + "Now you have " +
-                            arrList.size() + " tasks in the list.");
-                } catch (DukeArrayException e) {
-                    System.out.println("Number cannot be longer than the list.");
-                } catch (DukeException e) {
-                    System.out.println("Must include number after 'delete'");
-                } catch (NumberFormatException e) {
-                    System.out.println("Must include number after 'delete'");
-                }
+                duke.tasklist.deleteTask(userinput);
             } else if(userinput.contains("todo")){
                     try {
                         if (userinput.length() < 5) {
@@ -152,72 +142,9 @@ public class Duke {
                             "6)delete - to delete tasks from the list");
                 }
             }
-        saveTasks(arrList);
+        duke.storage.saveTasks(arrList);
         System.out.println("Bye. Hope to see you again soon!");
     }
-    public static void readTasks(ArrayList<Task> arr){
-        BufferedReader objReader = null;
-        try {
-            String strCurrentLine;
-
-            objReader = new BufferedReader(new FileReader("duke.txt"));
-
-            while ((strCurrentLine = objReader.readLine()) != null) {
-                String taskType = strCurrentLine.substring(1,2);
-                boolean taskCompletion = strCurrentLine.contains("✗")?false:true;
-                String taskDetails = taskCompletion
-                        ? strCurrentLine.substring(strCurrentLine.indexOf("✓")+3)
-                        : strCurrentLine.substring(strCurrentLine.indexOf("✗")+3);
-
-                switch (taskType){
-                    case "T":
-                        arr.add(new toDo(taskDetails,taskCompletion));
-                        break;
-                    case "D":
-                        String deadlineString = taskDetails.substring(0,taskDetails.indexOf("("));
-                        String taskDeadlineString = taskDetails.substring(taskDetails.indexOf("by:")+3,taskDetails.indexOf(")"));
-                        LocalDate taskDeadline = LocalDate.parse(taskDeadlineString);
-                        arr.add(new Deadline(deadlineString,taskCompletion,taskDeadline));
-                        break;
-                    case "E":
-                        String eventString = taskDetails.substring(0,taskDetails.indexOf("("));
-                        String eventDateString = taskDetails.substring(taskDetails.indexOf("at:")+3,taskDetails.indexOf(")"));
-                        LocalDate eventDate = LocalDate.parse(eventDateString);
-                        arr.add(new Event(eventString,taskCompletion,eventDate));
 
 
-
-                }
-            }
-
-        } catch (IOException e) {
-//            e.printStackTrace();
-        } finally {
-
-            try {
-                if (objReader != null)
-                    objReader.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-    public static void saveTasks(ArrayList<Task> arr){
-        try {
-            // Creates a FileWriter
-            FileWriter file = new FileWriter("duke.txt");
-
-            // Creates a BufferedWriter
-            BufferedWriter output = new BufferedWriter(file);
-
-            // Writes the string to the file
-            for(int i = 0 ; i < arr.size() ; i ++ ) {
-                output.write(arr.get(i).stringify()+"\n");
-            }
-            // Closes the writer
-            output.close();
-        } catch (Exception e) {
-            e.getStackTrace();
-        }
-    }
 }
