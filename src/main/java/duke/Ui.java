@@ -2,7 +2,8 @@ package duke;
 
 import java.util.LinkedList;
 import java.util.Scanner;
-import duke.task.*;
+
+import duke.task.Task;
 
 /**
  * A class to handle the internal logic regarding interactions with the user.
@@ -18,7 +19,8 @@ public class Ui {
      */
     public void printList(LinkedList<Task> list) {
         if (list.size() == 0) {
-            System.out.println("     You have no tasks in your list now! Type todo, event or deadline to add some!");
+            System.out.println("     You have no tasks in your list now! " +
+                    "Type todo, event or deadline to add some!");
         } else {
             System.out.println("     Here are the tasks in your list:");
             for (int i = 1; i <= list.size(); i++) {
@@ -28,10 +30,12 @@ public class Ui {
     }
 
     /**
-     * Print a spicified line in the required format.
+     * Print a specified line in the required format.
      * @param line the line of the string that needs to be printed
      */
-    public void printLine(String line) { System.out.println("     " + line); }
+    public void printLine(String line) {
+        System.out.println("     " + line);
+    }
 
     /**
      * Read next line from the user input.
@@ -53,25 +57,28 @@ public class Ui {
      * @param num the number of tasks Duke fetched from the local database.
      */
     public void showLoaded(int num) {
-        System.out.println("     Previous data found!\n     Now you have " + num + " task in the list!");
+        System.out.println("     Previous data found!\n     Now you have " + num
+                + " task in the list!");
     }
 
     /**
      * Show that Duke did not find data from the local database and created a new data file.
      */
     public void showLoadedNew() {
-        System.out.println("     Did not find any previous stored data and new data file created! Welcome!");
+        System.out.println("     Did not find any previous stored data and " +
+                "new data file created! Welcome!");
     }
 
     /**
      * Show that Duke encounters an error when accessing the file.
      */
     public void showLoadingError() {
-        System.out.println("     Oops! Cannot access your data file and no new data file has been created!");
+        System.out.println("     Oops! Cannot access your data file and no " +
+                "new data file has been created!");
     }
 
     /**
-     * Print welcome to the user;
+     * Print welcome to the user.
      */
     public void welcome() {
         printHorizontal();

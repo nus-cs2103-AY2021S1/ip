@@ -1,21 +1,22 @@
 package duke.command;
 
-import duke.*;
-import duke.task.*;
-import duke.exception.*;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.IllegalDoneArgument;
+import duke.task.Task;
 
 /**
  * The command to delete a specified task from a designated task list.
  */
 public class CommandDelete implements Command {
-    private int n;
+    private int index;
 
     /**
      * Construct a new command to delete a task at specified index.
-     * @param n the index (can be invalid) of the task to be deleted
+     * @param index the index (can be invalid) of the task to be deleted
      */
-    public CommandDelete(int n) {
-        this.n = n;
+    public CommandDelete(int index) {
+        this.index = index;
     }
 
     /**
@@ -25,11 +26,11 @@ public class CommandDelete implements Command {
      * @throws Exception throw when the index <code>n</code> is out of range
      */
     public void execute(TaskList tasks, Ui ui) throws Exception {
-        if (n < 0 || n >= tasks.size()) {
+        if (index < 0 || index >= tasks.size()) {
             throw new IllegalDoneArgument();
         }
-        Task deleted = tasks.getList().get(n);
-        tasks.remove(n);
+        Task deleted = tasks.getList().get(index);
+        tasks.remove(index);
         ui.printLine("Noted! I've removed this task:");
         ui.printLine(deleted.toString());
         ui.printLine("Now you have " + tasks.size() + " tasks in the list.");
@@ -39,5 +40,7 @@ public class CommandDelete implements Command {
      * Return false since the command is not to exit.
      * @return <code>false</code>
      */
-    public boolean isExit() { return false; }
+    public boolean isExit() {
+        return false;
+    }
 }

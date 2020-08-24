@@ -1,7 +1,8 @@
 package duke.command;
 
-import duke.*;
-import duke.exception.*;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.IllegalDoneArgument;
 
 /**
  * The command to mark a task of given index as done.
@@ -36,5 +37,7 @@ public class CommandDone implements Command {
      * Return <code>false</code> since the command is not to exit.
      * @return <code>false</code>
      */
-    public boolean isExit() { return false; }
+    public boolean isExit() {
+        return false;
+    }
 }

@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.*;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * The command to list all task of a designated task list.
@@ -11,11 +12,15 @@ public class CommandList implements Command {
      * @param tasks the <code>TaskList</code> to operate on
      * @param ui the <code>Ui</code> to handle the interface updates
      */
-    public void execute(TaskList tasks, Ui ui) { ui.printList(tasks.getList()); }
+    public void execute(TaskList tasks, Ui ui) {
+        ui.printList(tasks.getList());
+    }
 
     /**
      * Return <code>false</code> since the command is not exit.
      * @return <code>false</code>
      */
-    public boolean isExit() { return false; }
+    public boolean isExit() {
+        return false;
+    }
 }

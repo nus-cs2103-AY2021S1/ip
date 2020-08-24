@@ -1,27 +1,44 @@
 package duke;
 
-import duke.task.*;
-import duke.exception.*;
-import duke.command.*;
+import duke.command.Command;
+import duke.command.CommandAdd;
+import duke.command.CommandBye;
+import duke.command.CommandDelete;
+import duke.command.CommandDone;
+import duke.command.CommandList;
+import duke.exception.IllegalCommandException;
+import duke.exception.IllegalDeleteArgument;
+import duke.exception.IllegalDoneArgument;
+import duke.exception.NoDescriptionException;
+import duke.exception.NoTimeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Class to understand user's command.
- * The essential functionality of this helper class is to map user command to <code>Command</code> objects.
+ * The essential functionality of this helper class is to map user command to
+ * <code>Command</code> objects.
  */
 public class Parser {
 
     /**
      * Map a response string to an executable <code>Command</code> object.
-     * This methods map a response string to an executable <code>Command</code> object. When converting, commands that
-     * Duke cannot understand will lead to exception throwing.
+     * This methods map a response string to an executable <code>Command</code>
+     * object. When converting, commands that Duke cannot understand will lead
+     * to exception throwing.
      * @param response one-line input from the user
      * @return a <code>Command</code> object that Duke can execute
-     * @throws Exception exceptions when Duke cannot understands the command or when the command does not have the
-     * required format.
+     * @throws Exception exceptions when Duke cannot understands the command or
+     *         when the command does not have the required format.
      */
     public Command parse(String response) throws Exception {
-        if (response.equals("bye")) return new CommandBye();
-        else if (response.equals("list")) return new CommandList();
+        if (response.equals("bye")) {
+            return new CommandBye();
+        } else if (response.equals("list")) {
+            return new CommandList();
+        }
 
         String keyWord = response.split(" ")[0];
 
@@ -67,7 +84,8 @@ public class Parser {
                     if (nameAndTime.split(" /by ").length == 1) {
                         throw new NoTimeException("deadline");
                     }
-                    newTask = new Deadline(response.substring(9).split(" /by ")[0], response.substring(9).split(" /by ")[1]);
+                    newTask = new Deadline(response.substring(9).split(" /by ")[0],
+                            response.substring(9).split(" /by ")[1]);
                     break;
                 }
                 case "event": {
@@ -78,7 +96,8 @@ public class Parser {
                     if (nameAndTime.split(" /at ").length == 1) {
                         throw new NoTimeException("event");
                     }
-                    newTask = new Event(response.substring(6).split(" /at ")[0], response.substring(6).split(" /at ")[1]);
+                    newTask = new Event(response.substring(6).split(" /at ")[0],
+                            response.substring(6).split(" /at ")[1]);
                     break;
                 }
                 default:

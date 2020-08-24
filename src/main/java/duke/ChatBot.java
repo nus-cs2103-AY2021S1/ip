@@ -1,7 +1,7 @@
 package duke;
 
-import duke.exception.*;
-import duke.command.*;
+import duke.exception.NoDataFileException;
+import duke.command.Command;
 import java.io.IOException;
 
 /**
@@ -14,9 +14,10 @@ public class ChatBot {
 
     /**
      * Constructor of the chat bot.
-     * Construct a new chat bot with new UI, and initialised storage handling. Try to load the previous data file,
-     * if failed create a new data file. If Duke cannot create a new one, <code>IOException</code> will be caught and
-     * prints information for the user.
+     * Construct a new chat bot with new UI, and initialised storage handling.
+     * Try to load the previous data file, if failed create a new data file.
+     * If Duke cannot create a new one, <code>IOException</code> will be caught
+     * and prints information for the user.
      */
     public ChatBot() {
         ui = new Ui();

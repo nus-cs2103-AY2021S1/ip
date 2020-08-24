@@ -9,9 +9,9 @@ public class Task {
 
     /**
      * Construct a new Task with a given description.
-     * This method is intended to serve as a dummy task generator for placeholder purposes. Please do NOT construct
-     * tasks using this method. Instead, use the constructors of its subclasses, i.e. <code>Deadline</code>,
-     * <code>Event</code>, and <code>Todo</code>.
+     * This method is intended to serve as a dummy task generator for placeholder purposes.
+     * Please do NOT construct tasks using this method. Instead, use the constructors of its
+     * subclasses, i.e. <code>Deadline</code>, <code>Event</code>, and <code>Todo</code>.
      * @param description the name of the task to be created
      */
     public Task(String description) {
@@ -36,11 +36,15 @@ public class Task {
 
     /**
      * Return the string that is intended to be stored in the local database.
-     * @return the string to be stored in the local database, the format is understandable for <code>Storage</code>
+     * @return the string to be stored in the local database, the format is understandable
+     *         for <code>Storage</code>
      */
     public String toDataString() {
-        if (isDone) return "? | 1 | " + description;
-        else return "? | 0 | " + description;
+        if (isDone) {
+            return "? | 1 | " + description;
+        } else {
+            return "? | 0 | " + description;
+        }
     }
 
     /**
