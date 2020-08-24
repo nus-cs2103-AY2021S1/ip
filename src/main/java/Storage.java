@@ -48,11 +48,11 @@ public class Storage {
         }
     }
 
-    public void saveTaskList(List<Task> listOfTasks) throws DukeException {
+    public void saveTaskList(TaskList tasks) throws DukeException {
         FileWriter fileWriter;
         try {
             fileWriter = new FileWriter(this.file);
-            for (Task task : listOfTasks) {
+            for (Task task : tasks.getListOfTasks()) {
                 if (task instanceof Todo) {
                     fileWriter.write(String.join(Storage.SEPARATOR,
                             Storage.TODO_FORMAT, isDoneToFormat(task.getIsDone()), task.getDescription()));

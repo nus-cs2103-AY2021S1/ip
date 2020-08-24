@@ -8,15 +8,15 @@ import java.time.format.DateTimeFormatter;
 
 public class Duke {
     private Storage storage;
-    private List<Task> listOfTasks;
+    private TaskList tasks;
 
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         try {
-            this.listOfTasks = this.storage.load();
+            this.tasks = new TaskList(this.storage.load());
         } catch (DukeException e) {
-            System.out.println(e);
-            this.listOfTasks = new ArrayList<>();
+            System.out.println(e.getMessage());
+            this.tasks = new TaskList();
         }
     }
 
@@ -45,44 +45,40 @@ public class Duke {
                         System.out.println("Goodbye! Shutting down now...");
                         exitProgram = true;
                     } else if (userInputArgs[0].equals(Command.LIST.getName())) {
-                        int n = listOfTasks.size();
+                        List<Task> taskList;
                         try {
                             LocalDate date = LocalDate.parse(userInputArgs[1]);
                             System.out.println(String.format(
                                     "Here are the tasks in your list on %s:",
                                     date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))));
-                            for (int i = 0; i < n; i++) {
-                                Task task = listOfTasks.get(i);
-                                boolean print = (task instanceof Event && ((Event) task).isOnDate(date))
-                                        || (task instanceof Deadline && ((Deadline) task).isOnDate(date));
-                                if (print) {
-                                    System.out.println(String.format("%d.%s", i + 1, task));
-                                }
-                            }
+                            taskList = this.tasks.getListOfTasks(date);
                         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
                             System.out.println("Here are the tasks in your list:");
-                            for (int i = 0; i < n; i++) {
-                                System.out.println(String.format("%d.%s", i + 1, listOfTasks.get(i)));
-                            }
+                            taskList = this.tasks.getListOfTasks();
+                        }
+                        int idx = 1;
+                        for (Task task : taskList) {
+                            System.out.println(String.format("%d.%s", idx, task.toString()));
+                            idx += 1;
                         }
                     } else {
                         if (userInputArgs[0].equals(Command.DONE.getName())) {
-                            Task task = markTaskDone(listOfTasks, userInputArgs);
+                            Task task = markTaskDone(userInputArgs);
                             System.out.println("Nice! I've marked this task as done:");
                             Duke.printWithIndent(task.toString());
                         } else if (userInputArgs[0].equals(Command.DELETE.getName())) {
-                            Task task = deleteTask(listOfTasks, userInputArgs);
+                            Task task = deleteTask(userInputArgs);
                             System.out.println("Noted. I've removed this task:");
                             Duke.printWithIndent(task.toString());
-                            System.out.println(String.format("Now you have %d tasks in the list.", listOfTasks.size()));
+                            System.out.println(String.format("Now you have %d tasks in the list.", this.tasks.size()));
                         } else {
                             Task task = createTask(userInputArgs);
-                            listOfTasks.add(task);
+                            this.tasks.addTask(task);
                             System.out.println("Got it. I've added this task:");
                             Duke.printWithIndent(task.toString());
-                            System.out.println(String.format("Now you have %d tasks in the list.", listOfTasks.size()));
+                            System.out.println(String.format("Now you have %d tasks in the list.", this.tasks.size()));
                         }
-                        storage.saveTaskList(this.listOfTasks);
+                        storage.saveTaskList(this.tasks);
                     }
                 } catch (DukeException err) {
                     System.out.println(err.getMessage());
@@ -92,35 +88,25 @@ public class Duke {
         }
     }
 
-    private static Task markTaskDone(List<Task> listOfTasks, String[] userInputArgs) throws DukeException {
+    private Task markTaskDone(String[] userInputArgs) throws DukeException {
         try {
             int idx = Integer.parseInt(userInputArgs[1]);
-            if (idx <= 0 || idx > listOfTasks.size()) {
-                throw new DukeException("The task cannot be found.");
-            }
-            Task task = listOfTasks.get(idx - 1);
-            task.markAsDone();
-            return task;
+            return this.tasks.markTaskDone(idx - 1);
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The number of the task to be marked as done has to be provided.");
         }
     }
 
-    private static Task deleteTask(List<Task> listOfTasks, String[] userInputArgs) throws DukeException {
+    private Task deleteTask(String[] userInputArgs) throws DukeException {
         try {
             int idx = Integer.parseInt(userInputArgs[1]);
-            if (idx <= 0 || idx > listOfTasks.size()) {
-                throw new DukeException("The task cannot be found.");
-            }
-            Task task = listOfTasks.get(idx - 1);
-            listOfTasks.remove(idx - 1);
-            return task;
+            return this.tasks.deleteTask(idx - 1);
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The number of the task to be deleted has to be provided.");
         }
     }
 
-    private static Task createTask(String[] userInputArgs) throws DukeException {
+    private Task createTask(String[] userInputArgs) throws DukeException {
         if (userInputArgs[0].equals(Command.TODO.getName())) {
             String description = Duke.reassembleString(userInputArgs, 1, userInputArgs.length);
             if (description.equals("")) {
