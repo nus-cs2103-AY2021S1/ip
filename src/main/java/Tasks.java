@@ -1,15 +1,21 @@
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class Tasks implements java.io.Serializable{
+public class Tasks implements java.io.Serializable {
 
+    public static final File storage_file = Paths.get("tasks.ser").toFile();
     private ArrayList<Task> tasks;
 
-    public Tasks(){
+    public Tasks() {
         tasks = new ArrayList<>();
     }
+
     public void addTask(Task task) {
         tasks.add(task);
         Duke.print("added: " + task.toString() + numTasks());
+        store();
     }
 
     public String numTasks() {
@@ -26,24 +32,63 @@ public class Tasks implements java.io.Serializable{
     }
 
     public Task get(int i) throws DukeException {
-        if(i < 0 || i >= tasks.size()){
+        if (i < 0 || i >= tasks.size()) {
             throw new DukeException("invalid task number");
         }
         return tasks.get(i);
     }
 
     public void remove(int i) throws DukeException {
-        if(i < 0 || i >= tasks.size()){
+        if (i < 0 || i >= tasks.size()) {
             throw new DukeException("invalid task number");
         }
         tasks.remove(i);
+        store();
     }
 
     public void setDone(int i, boolean value) throws DukeException {
-        if(i < 0 || i >= tasks.size()){
+        if (i < 0 || i >= tasks.size()) {
             throw new DukeException("invalid task number");
         }
         tasks.get(i).done = value;
+        store();
     }
 
+    public void store() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream(storage_file);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(this);
+            out.close();
+        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Tasks read() {
+        try {
+            Tasks t = null;
+            FileInputStream fileIn = new FileInputStream(storage_file);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            t = (Tasks) in.readObject();
+            in.close();
+            fileIn.close();
+            return t;
+        } catch (FileNotFoundException i) {
+            try{
+                storage_file.createNewFile();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            return new Tasks();
+        } catch (IOException i) {
+            i.printStackTrace();
+            return new Tasks();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Employee class not found");
+            c.printStackTrace();
+            return new Tasks();
+        }
+    }
 }

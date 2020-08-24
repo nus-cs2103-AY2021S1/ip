@@ -15,7 +15,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         print(WELCOME);
-        Tasks tasks = new Tasks();
+//        Tasks tasks = new Tasks();
+        Tasks tasks = Tasks.read();
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
