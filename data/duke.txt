@@ -1,1 +1,2 @@
-D | 0 | return book | Mon 9pm
+T | 1 | buy book
+D | 1 | return book | 12am

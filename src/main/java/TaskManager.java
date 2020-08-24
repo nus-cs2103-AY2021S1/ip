@@ -14,6 +14,10 @@ public class TaskManager {
         this.tasks = new ArrayList<>();
     }
 
+    public TaskManager(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     public void initialise() {
         this.greet();
         Scanner sc = new Scanner(System.in);
