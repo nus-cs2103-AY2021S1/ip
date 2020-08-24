@@ -16,7 +16,7 @@ public class Task {
     public String markAsDone() {
         this.isDone = true;
         String message = "Nice! I've marked this task as done:";
-        return String.format("%s%n   %s%n", message, this.toString());
+        return String.format("%s%n  %s%n", message, this.toString());
     }
 
     public String getType() {
