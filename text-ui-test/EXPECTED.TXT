@@ -17,7 +17,7 @@
 
     ________________________________________________________
      Got it. I've added this task:
-       [D][✘] return book (by: Aug 22nd)
+       [D][✘] return book (by: 14 Aug 2019)
      Now you have 3 tasks in your list.
     ________________________________________________________
 
@@ -25,12 +25,12 @@
      Here are the tasks in your list:
      1.[T][✘] borrow book
      2.[T][✘] read book
-     3.[D][✘] return book (by: Aug 22nd)
+     3.[D][✘] return book (by: 14 Aug 2019)
     ________________________________________________________
 
     ________________________________________________________
      Got it. I've added this task:
-       [E][✘] celebrate birthday (at: Aug 22nd 1000-2200hrs)
+       [E][✘] celebrate birthday (at: 22 Aug 2020 10:00)
      Now you have 4 tasks in your list.
     ________________________________________________________
 
@@ -38,8 +38,8 @@
      Here are the tasks in your list:
      1.[T][✘] borrow book
      2.[T][✘] read book
-     3.[D][✘] return book (by: Aug 22nd)
-     4.[E][✘] celebrate birthday (at: Aug 22nd 1000-2200hrs)
+     3.[D][✘] return book (by: 14 Aug 2019)
+     4.[E][✘] celebrate birthday (at: 22 Aug 2020 10:00)
     ________________________________________________________
 
     ________________________________________________________
@@ -51,8 +51,8 @@
      Here are the tasks in your list:
      1.[T][✓] borrow book
      2.[T][✘] read book
-     3.[D][✘] return book (by: Aug 22nd)
-     4.[E][✘] celebrate birthday (at: Aug 22nd 1000-2200hrs)
+     3.[D][✘] return book (by: 14 Aug 2019)
+     4.[E][✘] celebrate birthday (at: 22 Aug 2020 10:00)
     ________________________________________________________
 
     ________________________________________________________
@@ -63,8 +63,8 @@
      Here are the tasks in your list:
      1.[T][✓] borrow book
      2.[T][✘] read book
-     3.[D][✘] return book (by: Aug 22nd)
-     4.[E][✘] celebrate birthday (at: Aug 22nd 1000-2200hrs)
+     3.[D][✘] return book (by: 14 Aug 2019)
+     4.[E][✘] celebrate birthday (at: 22 Aug 2020 10:00)
     ________________________________________________________
 
     ________________________________________________________
@@ -95,13 +95,13 @@
      Here are the tasks in your list:
      1.[T][✓] borrow book
      2.[T][✘] read book
-     3.[D][✘] return book (by: Aug 22nd)
-     4.[E][✘] celebrate birthday (at: Aug 22nd 1000-2200hrs)
+     3.[D][✘] return book (by: 14 Aug 2019)
+     4.[E][✘] celebrate birthday (at: 22 Aug 2020 10:00)
     ________________________________________________________
 
     ________________________________________________________
      Noted. I've removed this task:
-       [D][✘] return book (by: Aug 22nd)
+       [D][✘] return book (by: 14 Aug 2019)
      Now you have 3 tasks in your list.
     ________________________________________________________
 
@@ -117,7 +117,7 @@
      Here are the tasks in your list:
      1.[T][✓] borrow book
      2.[T][✘] read book
-     3.[E][✘] celebrate birthday (at: Aug 22nd 1000-2200hrs)
+     3.[E][✘] celebrate birthday (at: 22 Aug 2020 10:00)
     ________________________________________________________
 
     ________________________________________________________

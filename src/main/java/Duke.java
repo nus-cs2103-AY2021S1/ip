@@ -95,15 +95,8 @@ public class Duke {
                     }
                 case DEADLINE:
                     try {
-                        String deadlineDescription = inputs[1].split("/")[0].trim();
-                        try {
-                            String due = inputs[1].split("/by", 2)[1].trim();
-                            Deadline newDeadline = new Deadline(deadlineDescription, due);
-                            formattedPrint(prependIndent(storage.add(newDeadline), 1));
-                            break;
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            throw new DukeException("So you never did plan on doing it huh...");
-                        }
+                        formattedPrint(prependIndent(storage.add(Deadline.createTask(inputs[1])), 1));
+                        break;
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("What are you rushing for? To wait?");
                     }
@@ -117,15 +110,8 @@ public class Duke {
                     }
                 case EVENT:
                     try {
-                        String eventDescription = inputs[1].split("/")[0].trim();
-                        try {
-                            String time = inputs[1].split("/at", 2)[1].trim();
-                            Event newEvent = new Event(eventDescription, time);
-                            formattedPrint(prependIndent(storage.add(newEvent), 1));
-                            break;
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            throw new DukeException("Wow that sure is one long event...");
-                        }
+                        formattedPrint(prependIndent(storage.add(Event.createTask(inputs[1])), 1));
+                        break;
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Are you going to attend a nameless event?");
                     }

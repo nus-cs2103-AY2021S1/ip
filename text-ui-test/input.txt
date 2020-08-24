@@ -1,8 +1,8 @@
 todo borrow book
 todo read book
-deadline return book /by Aug 22nd
+deadline return book /by 14 Aug 2019
 list
-event celebrate birthday /at Aug 22nd 1000-2200hrs
+event celebrate birthday /at 22 Aug 2020 10:00
 list
 done 1
 list
