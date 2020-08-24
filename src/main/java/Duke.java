@@ -1,14 +1,27 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
     enum Command {
         BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ArrayList<Task> ls = new ArrayList<>();
         String horizontalDiv = "____________________________________________________________";
+
+        String filePath = new File("").getAbsolutePath();
+        filePath += "\\todolist.txt";
+        System.out.println(filePath);
+        File f = new File(filePath);
+        boolean exists = f.exists();
+        if (!exists) {
+            f.createNewFile();
+        }
+
         // Using Scanner for Getting Input from User
         Scanner in = new Scanner(System.in);
 
