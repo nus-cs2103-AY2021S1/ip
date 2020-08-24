@@ -5,6 +5,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Duke Object
+     *
+     * @param filePath The path to the txt file to store the data.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -16,6 +21,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke chatbot programme
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -34,6 +42,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method to start the Duke chatbot programme
+     *
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         String currentDir = System.getProperty("user.dir");
         String path = currentDir + File.separator + "data" + File.separator + "duke.txt";

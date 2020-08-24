@@ -5,6 +5,12 @@ public class Deadline extends Task {
     protected String by;
     protected LocalDateTime dateTime;
 
+    /**
+     * Creates a Deadline object that represents a deadline.
+     *
+     * @param description Description of the deadline.
+     * @param by The time of the deadline.
+     */
     public Deadline(String description, String by) {
         super(description);
         String[] dateAndTime = by.split(" ");
@@ -17,10 +23,20 @@ public class Deadline extends Task {
         this.dateTime = dateTime;
     }
 
+    /**
+     * Return the Deadline time.
+     *
+     * @return The Deadline time.
+     */
     public String getBy() {
         return this.by;
     }
 
+    /**
+     * Return the string to be printed out for Deadline.
+     *
+     * @return The string to be printed out for Deadline.
+     */
     @Override
     public String toString() {
         String period = dateTime.getHour() >= 12 ? "PM" : "AM";

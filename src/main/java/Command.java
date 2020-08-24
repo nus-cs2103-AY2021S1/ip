@@ -2,6 +2,11 @@ public abstract class Command {
 
     protected boolean isExit;
 
+    /**
+     * Creates an abstract Command Object.
+     *
+     * @param isExit whether the programme should end
+     */
     public Command(boolean isExit) {
         this.isExit = isExit;
     }

@@ -1,5 +1,12 @@
 public class Parser {
 
+    /**
+     * Return the Command to be exectued.
+     *
+     * @param command The command from the user.
+     * @return The Command to be executed.
+     * @throws DukeException when the input is not valid.
+     */
     public static Command parse(String command) throws DukeException {
         if (command.equals("bye")) {
             return new ByeCommand();

@@ -15,6 +15,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Load the file if it exists or creates it if it does not.
+     *
+     * @return The List of Tasks.
+     * @throws DukeException when the file cannot be found or read.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
@@ -65,7 +71,17 @@ public class Storage {
         return new ArrayList<>();
     }
 
-    public void writeNewDataToFile(String taskType, String done, String description, String deadline) {
+    /**
+     * Add new Task to the file.
+     *
+     * @param taskType The type of the Task.
+     * @param done Whether the task is completed.
+     * @param description Description of the Task.
+     * @param deadline The time attached to the Task.
+     * @throws DukeException When there is error writing to the file.
+     */
+    public void writeNewDataToFile(String taskType, String done, String description, String deadline)
+            throws DukeException{
         try {
             FileWriter myWriter = new FileWriter(filePath, true);
             switch (taskType) {
@@ -80,11 +96,23 @@ public class Storage {
             }
         } catch (IOException ex) {
             System.out.println("Problem writing to file" + ex);
+            throw new DukeException("Error writing to file.");
         }
     }
 
+    /**
+     * Edit a Task in the file.
+     *
+     * @param taskNumber The index of the Task.
+     * @param taskType The type of the Task.
+     * @param done Whether the task is completed.
+     * @param description Description of the Task.
+     * @param deadline The time attached to the Task.
+     * @param total The total number of Tasks in the list.
+     * @throws DukeException When there is error writing to the file.
+     */
     public void editCurrentDataInFile(int taskNumber, String taskType, String done,
-                                             String description, String deadline, int total) {
+                                             String description, String deadline, int total) throws DukeException {
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
 
@@ -126,10 +154,18 @@ public class Storage {
         }
         catch (IOException e) {
             System.out.println("Error editing file: " + e.getMessage());
+            throw new DukeException("Error editing file");
         }
     }
 
-    public static void deleteCurrentDataInFile(int taskNumber, int total) {
+    /**
+     * Delete a Task in the file.
+     *
+     * @param taskNumber The index of the Task.
+     * @param total The total number of Tasks in the list.
+     * @throws DukeException When there is error writing to the file.
+     */
+    public static void deleteCurrentDataInFile(int taskNumber, int total) throws DukeException {
         try {
             String currentDir = System.getProperty("user.dir");
             String pathToFile = currentDir + File.separator + "data" + File.separator + "duke.txt";
@@ -159,7 +195,8 @@ public class Storage {
             fw.close();
         }
         catch (Exception ex) {
-            System.out.println("Error deleting line: " + ex.getMessage());
+            System.out.println("Error deleting task: " + ex.getMessage());
+            throw new DukeException("Error deleting task.");
         }
     }
 }
