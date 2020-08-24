@@ -1,4 +1,5 @@
 package main.java;
+import java.time.DateTimeException;
 import java.util.*;
 
 enum Command {
@@ -8,8 +9,8 @@ enum Command {
     DELETE,
     TODO,
     DEADLINE,
-    EVENT;
-
+    EVENT,
+    CLEAR;
 }
 
 public class Duke {
@@ -39,6 +40,11 @@ public class Duke {
             String[] splitted2 = token.split(" ", 2);
             for (String tokenn : splitted2) out.add(tokenn);
         }
+        if (out.get(0).equals("todo") || out.get(0).equals("deadline") || out.get(0).equals("event")) {
+            if (out.size() >= 3) out.remove(2);
+            if (out.size() <= 2) out.add("null");
+            out.add("0");
+        }
         return out;
     }
     private static void handleCommand(String cmd) {
@@ -66,6 +72,10 @@ public class Duke {
                 break;
             case DELETE:
                 handleRemove(Integer.parseInt(tokens.get(1)));
+                break;
+            case CLEAR:
+                Tasks.clearAll();
+                System.out.println("All tasks cleared!");
                 break;
             case TODO:
             case DEADLINE:
@@ -95,6 +105,9 @@ public class Duke {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Missing argument(s)");
             return;
+        } catch (DateTimeException e) {
+            System.out.println(e.getMessage());
+            return;
         } catch (Exception e) {
             System.out.println("An expected error has occurred.");
             return;
@@ -117,6 +130,7 @@ public class Duke {
 
     public static void main(String[] args) {
         greet();
+
         Tasks.readFile();
         Scanner sc = new Scanner(System.in);
         String input;
@@ -125,6 +139,7 @@ public class Duke {
             handleCommand(input);
         }
         while (!input.equals("bye"));
+        sc.close();
     }
 }
 
