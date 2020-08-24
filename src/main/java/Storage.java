@@ -3,10 +3,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FileParser {
-    public static List<Task> loadData(List<Task> list) throws Exception {
+public class Storage {
+    String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public List<Task> loadData() throws Exception {
+        List<Task> list = new ArrayList<>();
         try{
-            FileInputStream readData = new FileInputStream("data/dukedata.ser");
+            FileInputStream readData = new FileInputStream(filePath);
             ObjectInputStream readStream = new ObjectInputStream(readData);
             ArrayList<Task> loadedList = (ArrayList<Task>) readStream.readObject();
             readStream.close();
@@ -21,9 +28,9 @@ public class FileParser {
         return list;
     }
 
-    public static void writeData(List<Task> list) {
+    public void writeData(List<Task> list) {
         try{
-            FileOutputStream writeData = new FileOutputStream("data/dukedata.ser");
+            FileOutputStream writeData = new FileOutputStream(filePath);
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
             writeStream.writeObject(list);
             writeStream.flush();

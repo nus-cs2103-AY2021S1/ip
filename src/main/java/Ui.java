@@ -1,9 +1,8 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class EventHandler {
-    public static String iterateToDo(List<Task> arr) {
+public class Ui {
+    public String iterateToDo(List<Task> arr) {
         String output = "";
         int counter = 1;
         for (Task task : arr) {
@@ -17,10 +16,13 @@ public class EventHandler {
         return output;
     }
 
-    public static void handle() throws Exception {
+    public void showLoadingError() {
+        System.out.println("☹ AIYO!!! I cannot load the file sia...");
+    }
+
+    public void initialise(TaskList list, Storage storage) throws Exception {
         String hor_line = "____________________________________\n";
-        List<Task> todo_list = new ArrayList<Task>();
-        todo_list = FileParser.loadData(todo_list);
+        List<Task> todo_list = list.getList();
         String logo = " _ .-') _               .-. .-')     ('-.  \n"
                 + "( (  OO) )              \\  ( OO )  _(  OO)  \n"
                 + " \\     .'_  ,--. ,--.   ,--. ,--. (,------. \n"
@@ -55,7 +57,7 @@ public class EventHandler {
                         System.out.println(hor_line + "Task deleted liao: \n" + todo_list.get(number - 1).toString() + "\n" +
                                 "You got " + Integer.toString(counter - 1) + " tasks left. \n" + hor_line);
                         todo_list.remove(number - 1);
-                        FileParser.writeData(todo_list);
+                        storage.writeData(todo_list);
                         counter --;
                     }
                 } else if (command.startsWith("done")) {
@@ -68,7 +70,7 @@ public class EventHandler {
                         todo_list.set(number, todo_list.get(number).markDone());
                         System.out.println(hor_line + "Swee! Now I will mark this as done: \n" +
                                 todo_list.get(number).toString() + "\n" + hor_line);
-                        FileParser.writeData(todo_list);
+                        storage.writeData(todo_list);
                     }
                 } else if (command.startsWith("todo")) {
                     if (command.equals("todo")) {
@@ -80,7 +82,7 @@ public class EventHandler {
                         System.out.println(hor_line + "Okok. I add for you: \n" +
                                 todo_list.get(counter).toString() + "\n" +
                                 "You got " + Integer.toString(counter + 1) + " tasks in the list.\n" + hor_line);
-                        FileParser.writeData(todo_list);
+                        storage.writeData(todo_list);
                         counter++;
                     }
                 } else if (command.startsWith("deadline")) {
@@ -96,7 +98,7 @@ public class EventHandler {
                         System.out.println(hor_line + "Okok. I help you add this task: \n" +
                                 todo_list.get(counter).toString() + "\n" + "You got " +
                                 Integer.toString(counter + 1) + " tasks in the list.\n" + hor_line);
-                        FileParser.writeData(todo_list);
+                        storage.writeData(todo_list);
                         counter++;
                     }
                 } else if (command.startsWith("event")) {
@@ -112,7 +114,7 @@ public class EventHandler {
                         System.out.println(hor_line + "Okay. I've added this task: \n"
                                 + todo_list.get(counter).toString() + "\n" +  "You got " +
                                 Integer.toString(counter + 1) + " tasks in the list.\n" + hor_line);
-                        FileParser.writeData(todo_list);
+                        storage.writeData(todo_list);
                         counter++;
                     }
                 }else {
