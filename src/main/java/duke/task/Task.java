@@ -1,3 +1,4 @@
+package duke.task;
 public class Task {
     protected String taskName;
     protected boolean done;
@@ -9,7 +10,7 @@ public class Task {
         this.taskType = taskType;
     }
 
-    protected void setDone() {
+    public void setDone() {
         this.done = true;
     }
 
