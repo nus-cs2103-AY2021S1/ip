@@ -1,8 +1,12 @@
-package main.java;
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class ListCommand extends Command {
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.getSize() == 0) {
             ui.showMessage("You have no tasks currently :)");
         } else {

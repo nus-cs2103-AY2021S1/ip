@@ -1,4 +1,11 @@
-package main.java;
+package duke.command;
+
+import duke.*;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 import java.time.format.DateTimeParseException;
 
@@ -19,7 +26,7 @@ public class AddCommand extends Command{
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DateTimeParseException, DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DateTimeParseException, DukeException {
         Task newTask;
 
         switch (taskCategory) {

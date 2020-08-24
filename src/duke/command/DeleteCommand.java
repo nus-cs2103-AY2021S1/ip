@@ -1,4 +1,8 @@
-package main.java;
+package duke.command;
+
+import duke.*;
+import duke.exception.DukeException;
+import duke.task.Task;
 
 public class DeleteCommand extends Command {
     int taskNumberToDelete;
@@ -8,7 +12,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (taskNumberToDelete > tasks.getSize() | taskNumberToDelete < 1) {
             throw new DukeException("There is no such task number.");
         } else {

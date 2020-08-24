@@ -1,4 +1,9 @@
-package main.java;
+package duke;
+
+import duke.command.*;
+import duke.exception.CommandNotFoundException;
+import duke.exception.DukeException;
+import duke.exception.IncompleteCommandException;
 
 public class Parser {
     String input;
@@ -59,7 +64,7 @@ public class Parser {
         case "delete":
             return new DeleteCommand(getTaskNumber());
         case "todo":
-            return new AddCommand("todo", getTaskDescription());
+            return new AddCommand("todo", getTaskMessage());
         case "event":
             try {
                 return new AddCommand("event", getTaskDescription(), getTaskTime());
