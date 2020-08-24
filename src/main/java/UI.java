@@ -15,7 +15,7 @@ public class UI {
         return scanner.nextLine();
     }
 
-    void welcome(Tasks tasks){
+    void welcome(TaskList tasks){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

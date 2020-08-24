@@ -1,7 +1,7 @@
 public class Duke {
 
     public static void main(String[] args) throws DukeException {
-        Tasks tasks = Storage.read();
+        TaskList tasks = Storage.read();
         UI ui = new UI();
         ui.welcome(tasks);
         String input = ui.getInput();

@@ -1,13 +1,13 @@
 import java.io.*;
 import java.nio.file.Paths;
 
-public class Storage implements Serializable {
+public class Storage {
     public static final File storage_file = Paths.get("tasks.ser").toFile();
 
     public Storage() {
     }
 
-    public static void store(Tasks t) {
+    public static void store(TaskList t) {
         try {
             //noinspection ResultOfMethodCallIgnored
             storage_file.createNewFile(); //creates file if it does not exist
@@ -20,25 +20,25 @@ public class Storage implements Serializable {
         }
     }
 
-    public static Tasks read() {
+    public static TaskList read() {
         try {
-            Tasks t = null;
+            TaskList t = null;
             FileInputStream fileIn = new FileInputStream(storage_file);
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            t = (Tasks) in.readObject();
+            t = (TaskList) in.readObject();
             in.close();
             fileIn.close();
             t.loadMessage = "Successfully loaded from storage. " + t.numTasks();
             return t;
         } catch (FileNotFoundException i) {
-            return new Tasks();
+            return new TaskList();
         } catch (IOException i) {
             i.printStackTrace();
-            return new Tasks();
+            return new TaskList();
         } catch (ClassNotFoundException c) {
             System.out.println("Employee class not found");
             c.printStackTrace();
-            return new Tasks();
+            return new TaskList();
         }
     }
 }

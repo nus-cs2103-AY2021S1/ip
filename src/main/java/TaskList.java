@@ -1,12 +1,11 @@
 import java.util.ArrayList;
 
-public class Tasks implements java.io.Serializable {
+public class TaskList implements java.io.Serializable {
 
-    private final Storage storage = new Storage();
     private ArrayList<Task> tasks;
     String loadMessage = "";
 
-    public Tasks() {
+    public TaskList() {
         tasks = new ArrayList<>();
     }
 

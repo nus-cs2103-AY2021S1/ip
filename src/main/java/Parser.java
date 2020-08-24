@@ -2,8 +2,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    Tasks tasks;
-    public Parser(Tasks tasks){
+    TaskList tasks;
+    public Parser(TaskList tasks){
         this.tasks = tasks;
     }
     void parse(String input) throws DukeException {
