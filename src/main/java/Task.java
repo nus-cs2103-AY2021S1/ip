@@ -16,4 +16,9 @@ public class Task {
         String symbol = (this.done ? "[\u2713] " : "[\u2718] ");
         return symbol + this.description;
     }
+    
+    public String saveToHardDisk() {
+        int isDone = this.done ? 1 : 0;
+        return " | " + isDone + " | " + this.description;
+    }
 }
