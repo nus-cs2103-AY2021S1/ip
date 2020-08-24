@@ -13,7 +13,7 @@ What can I do for you?
 
 Yes boss, I have added this task to your list:
 
-[T][?] read book
+[T][?] work
 
 Currently you have 1 tasks in your list.
 
@@ -34,7 +34,7 @@ Erm, you are asking me to mark task 3 but there is/are only 1 tasks. Please ente
 
 Yes boss, I have added this task to your list:
 
-[D][?] return book  (by: Monday, 24 August 2020, 08:00PM)
+[D][?] project work  (by: Monday, 24 August 2020, 08:00PM)
 
 Currently you have 2 tasks in your list.
 
@@ -175,8 +175,8 @@ Or, "event birthday /at 2020/12/09 0000".
 ==========================================================================================================================================
 
 You have 4 unfinished tasks.
-1. [T][?] read book
-2. [D][?] return book  (by: Monday, 24 August 2020, 08:00PM)
+1. [T][?] work
+2. [D][?] project work  (by: Monday, 24 August 2020, 08:00PM)
 3. [E][?] project meeting  (at: Wednesday, 23 September 2020, 04:35AM)
 4. [E][?] birthday party  (at: Wednesday, 9 December 2020, 12:00AM)
 
@@ -186,7 +186,7 @@ You have 4 unfinished tasks.
 
 I have marked the task as done, good job boss.
 
-[T][?] read book
+[T][?] work
 
 ==========================================================================================================================================
 
@@ -204,16 +204,40 @@ Sorry, I can't guess your task that well. Please enter a description for your ta
 
 ==========================================================================================================================================
 
+I found these tasks containing "work" in your list.
+
+[T][?] work
+[D][?] project work  (by: Monday, 24 August 2020, 08:00PM)
+
+==========================================================================================================================================
+
+==========================================================================================================================================
+
+I don't know what you want me to find boss. :( Please enter a description for me to search.
+
+==========================================================================================================================================
+
+==========================================================================================================================================
+
+I found these tasks containing "project" in your list.
+
+[D][?] project work  (by: Monday, 24 August 2020, 08:00PM)
+[E][?] project meeting  (at: Wednesday, 23 September 2020, 04:35AM)
+
+==========================================================================================================================================
+
+==========================================================================================================================================
+
 I have deleted the task.
 
-Deleted: [D][?] return book  (by: Monday, 24 August 2020, 08:00PM)
+Deleted: [D][?] project work  (by: Monday, 24 August 2020, 08:00PM)
 
 ==========================================================================================================================================
 
 ==========================================================================================================================================
 
 You have 2 unfinished tasks.
-1. [T][?] read book
+1. [T][?] work
 2. [E][?] project meeting  (at: Wednesday, 23 September 2020, 04:35AM)
 3. [E][?] birthday party  (at: Wednesday, 9 December 2020, 12:00AM)
 
@@ -248,7 +272,7 @@ Sorry but there is no valid task number. Please enter a valid task number.
 ==========================================================================================================================================
 
 You have 1 unfinished tasks.
-1. [T][?] read book
+1. [T][?] work
 2. [E][?] project meeting  (at: Wednesday, 23 September 2020, 04:35AM)
 3. [E][?] birthday party  (at: Wednesday, 9 December 2020, 12:00AM)
 
@@ -258,7 +282,7 @@ You have 1 unfinished tasks.
 
 I have deleted the task.
 
-Deleted: [T][?] read book
+Deleted: [T][?] work
 
 ==========================================================================================================================================
 

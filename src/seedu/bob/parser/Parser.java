@@ -1,10 +1,9 @@
 package seedu.bob.parser;
 
 import seedu.bob.commands.*;
+import seedu.bob.exceptions.BobEmptyFindException;
 import seedu.bob.exceptions.BobEmptyTaskException;
 import seedu.bob.exceptions.BobInvalidCommandException;
-
-import java.io.IOException;
 
 public class Parser {
     /**
@@ -13,7 +12,8 @@ public class Parser {
      * @return Updated Bob.
      * @throws BobInvalidCommandException If user input is not recognised.
      */
-    public static Command parse(String input) throws BobInvalidCommandException, BobEmptyTaskException {
+    public static Command parse(String input)
+            throws BobInvalidCommandException, BobEmptyTaskException, BobEmptyFindException {
         if (input.equals("bye")) {
             return new ExitCommand();
         } else if (input.equals("list")) {
@@ -29,6 +29,8 @@ public class Parser {
         } else if (input.length() >= 8 && input.startsWith("deadline")) {
             return new DeadlineCommand(input.substring(8));
             // If user's command is invalid/not recognisable by Bob
+        } else if (input.length() >= 4 && input.startsWith("find")) {
+            return new FindCommand(input.substring((4)));
         } else {
             throw new BobInvalidCommandException();
         }

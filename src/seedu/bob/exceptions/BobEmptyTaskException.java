@@ -16,7 +16,7 @@ public class BobEmptyTaskException extends BobException {
     }
 
     /**
-     * Overriden toString method.
+     * Overridden toString method.
      * @return String value of the BobEmptyTaskException.
      */
     @Override
