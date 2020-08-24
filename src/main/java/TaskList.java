@@ -9,40 +9,9 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-//    public TaskList(String filepath) {
-//        try {
-//            FileReader file = new FileReader(filepath);
-//            BufferedReader reader = new BufferedReader(file);
-//            String line;
-//            while ((line = reader.readLine()) != null){
-//                tasks.add(getTask(line));
-//            }
-//            file.close();
-//        } catch (IOException e){
-//            tasks = new ArrayList<>();
-//        }
-//    }
-//
-//    private tasks.Task getTask(String line){
-//        tasks.Task task;
-//        if (line.charAt(1) == 'T'){
-//            task = new tasks.ToDos(line.substring(6));
-//        } else if (line.charAt(1) == 'D'){
-//            int index = line.indexOf("|");
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-//            LocalDateTime date = LocalDateTime.parse(line.substring(index + 1).trim(), formatter);
-//            task = new tasks.Deadline(line.substring(6, index), date);
-//        } else {
-//            int index = line.indexOf("|");
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-//            LocalDateTime date = LocalDateTime.parse(line.substring(index + 1).trim(), formatter);
-//            task = new tasks.Event(line.substring(6, index), date);
-//        }
-//        if (line.charAt(4) == '✓'){
-//            task.updateStatus();
-//        }
-//        return task;
-//    }
+    public ArrayList<Task> getTasks(){
+        return this.tasks;
+    }
 
     public void update(Task task){
         tasks.add(task);

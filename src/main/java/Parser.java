@@ -47,6 +47,7 @@ public class Parser {
             System.out.println("Oops!!! I'm sorry, but the description of a todo cannot be empty\n_____________________________");
         }
     }
+
     public static void isNumeric(int n, TaskList list) throws InvalidNumberException{
         if (list.getSize() < n || n <= 0){
             throw new InvalidNumberException("The number provided is bigger tha the list size");
@@ -91,6 +92,45 @@ public class Parser {
             System.out.println("_____________________________");
         } else {
             throw new InvalidDeadlineException();
+        }
+    }
+
+    public static String getEventTest(String word) throws InvalidEventException {
+        if (word.contains("/at") && !word.substring(word.indexOf("/at") + 3).equals("")){
+            word = word.substring(5);
+            int index = word.indexOf("/at");
+            String str = word.substring(index + 3).trim();
+            String datestr = str.replaceAll("-", "/");
+            String[] datearr = datestr.split("/");
+            if (datearr.length < 2){
+                throw new InvalidEventException();
+            }
+            if (datearr[0].length() < 2){
+                datestr = "0" + datestr;
+                datearr[0] = "0" + datearr[0];
+            }
+            if (datearr[1].length() < 2){
+                datestr = datearr[0] + "/0" + datearr[1] + "/" + datearr[2];
+            }
+            if (!datestr.contains(":")){
+                String[] arr = datestr.split(" ");
+                if (arr.length > 2){
+                    throw new InvalidEventException();
+                }
+                arr[1] = arr[1].substring(0, 2) + ":" + arr[1].substring(2);
+                datestr = arr[0] + " " + arr[1];
+            }
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                LocalDateTime date = LocalDateTime.parse(datestr, formatter);
+                Event event =  new Event(word.substring(0, index), date);
+                return event.toString();
+            } catch (DateTimeParseException e){
+                System.out.println("Incorrect Date format used");
+                return null;
+            }
+        } else {
+            throw new InvalidEventException();
         }
     }
 
