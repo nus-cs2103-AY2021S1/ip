@@ -55,7 +55,11 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 // Prints the given list
-                handler.printList();
+                try {
+                    handler.printList();
+                } catch (DukeException e) {
+                    e.printStackTrace(System.out);
+                }
             } else if (input.startsWith("done ") || input.equals("done")) {
                  try {
                      Task currentTask = TaskHandler.modifyTask(input, list, TaskHandler.operationType.DONE);
@@ -63,6 +67,7 @@ public class Duke {
                      storage.saveToFile(list);
                  } catch (DukeException e) {
                      e.printStackTrace(System.out);
+                     DukeException.tryAgain();
                  }
             } else if (input.startsWith("delete ") || input.equals("delete")){
                 try {
@@ -71,6 +76,7 @@ public class Duke {
                     storage.saveToFile(list);
                 } catch (DukeException e) {
                     e.printStackTrace(System.out);
+                    DukeException.tryAgain();
                 }
             } else if (input.startsWith("todo ") || input.equals("todo")) {
                 // Create and store todos given in list
@@ -81,6 +87,7 @@ public class Duke {
                     storage.saveToFile(list);
                 } catch (DukeException e){
                     e.printStackTrace(System.out);
+                    DukeException.tryAgain();
                 }
             } else if (input.startsWith("deadline ") || input.equals("deadline")) {
                 // Create and store deadlines given in list
@@ -91,6 +98,7 @@ public class Duke {
                     storage.saveToFile(list);
                 }  catch (DukeException e){
                     e.printStackTrace(System.out);
+                    DukeException.tryAgain();
                 }
 
             } else if (input.startsWith("event ") || input.equals("event")) {
@@ -102,13 +110,26 @@ public class Duke {
                     storage.saveToFile(list);
                 } catch (DukeException e){
                     e.printStackTrace(System.out);
+                    DukeException.tryAgain();
                 }
-            } else {
+            } else if (input.startsWith("clear")) {
+                try {
+                    list = handler.clearList();
+                    for (Task t1 : list) {
+                        System.out.println(t1);
+                    }
+                    storage.saveToFile(list);
+                } catch (DukeException e){
+                    e.printStackTrace(System.out);
+                    DukeException.tryAgain();
+                }
+            }else {
                 // Other commands
                 try {
                     TaskHandler.receiveInvalidCommand();
                 } catch (DukeException e) {
                     e.printStackTrace(System.out);
+                    DukeException.tryAgain();
                 }
             }
             System.out.println();

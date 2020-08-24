@@ -15,10 +15,16 @@ public class TaskHandler {
         return taskList;
     }
 
-    public void printList() {
+    public ArrayList<Task> clearList() {
+        this.taskList = new ArrayList<>();
+        System.out.println("The list of tasks has been cleared.");
+        return taskList;
+    }
+
+    public void printList() throws DukeException {
         if (taskList.isEmpty()) {
             // Asks user for tasks when printing empty list
-            System.out.println("Empty list, pls add tasks to list first");
+            throw new DukeException("\u2639 Oops, the list of tasks is empty, pls add tasks first.");
         }
         int listPos = 1;
         indent(1);
