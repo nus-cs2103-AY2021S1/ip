@@ -1,0 +1,2 @@
+ede01d7b-7432-4a69-983f-d158d9cee8ba|T|true|wash clothes
+5c3f35d6-e669-485d-80dc-a83e6a8d3b79|D|false|homework|Sunday
