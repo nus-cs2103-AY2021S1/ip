@@ -1,12 +1,11 @@
 public class Todo extends Task {
 
     public Todo (String task) {
-        super(task);
+        super(task, Tasktype.TODO, "");
     }
 
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
+    public Todo (String task, boolean isDone) {
+        super(task, Tasktype.TODO, "", isDone);
     }
 
 }
