@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,20 +37,26 @@ public class TaskList {
         System.out.println("    Now you have " + listOfTask.size() + " task(s) in the list.\n");
     }
 
-    public void addDeadline(String input, int dateIndex) {
+    public void addDeadline(String input, int dateIndex) throws GelException {
         String by = input.substring(dateIndex + 4);
         String description = input.substring(9, dateIndex - 1);
-        Deadline deadline = new Deadline(description, by);
+//        Deadline deadline = new Deadline(description, by);
+        LocalDateTime byDateTime = Parser.toDateTime(by);
+//        String description = input.substring(8, dateIndex);
+        Deadline deadline = new Deadline(description, byDateTime);
         listOfTask.add(deadline);
         System.out.println("\n    Got it. I've added this task:");
         System.out.println("      " + deadline);
         System.out.println("    Now you have " + listOfTask.size() + " task(s) in the list.\n");
     }
 
-    public void addEvent(String input, int dateIndex) {
+    public void addEvent(String input, int dateIndex) throws GelException {
         String at = input.substring(dateIndex + 4);
         String description = input.substring(6, dateIndex - 1);
-        Event event = new Event(description, at);
+//        Event event = new Event(description, at);
+        LocalDateTime atDateTime = Parser.toDateTime(at);
+//        String description = input.substring(5, dateIndex);
+        Event event = new Event(description, atDateTime);
         listOfTask.add(event);
         System.out.println("\n    Got it. I've added this task:");
         System.out.println("      " + event);
@@ -73,7 +81,9 @@ public class TaskList {
     }
 
     public void addEventFromFile(String description, String at, int done) {
-        Event event = new Event(description, at);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM uuuu HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(at, formatter);
+        Event event = new Event(description, dateTime);
         if (done == 1) {
             event.markAsDone();
         }
@@ -81,7 +91,9 @@ public class TaskList {
     }
 
     public void addDeadlineFromFile(String description, String by, int done) {
-        Deadline deadline = new Deadline(description, by);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM uuuu HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(by, formatter);
+        Deadline deadline = new Deadline(description, dateTime);
         if (done == 1) {
             deadline.markAsDone();
         }
