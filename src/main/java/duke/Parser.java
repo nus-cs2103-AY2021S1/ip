@@ -9,7 +9,7 @@ public class Parser {
 
     public static Command parse(String fullCommand) throws DukeException {
         try {
-            String[] splitCommand = fullCommand.split(" ", 2);
+            String[] splitCommand = fullCommand.trim().split(" ", 2);
             CommandInstruction instruction = CommandInstruction.valueOf(splitCommand[0].toUpperCase());
             switch (instruction) {
             case LIST:
