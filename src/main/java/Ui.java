@@ -6,7 +6,6 @@ public class Ui {
     protected static final String PRESPACING = "     ";
 
     protected static final String OPENING_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
-    protected static final String CLOSING_MESSAGE = "Bye. Hope to see you again soon!";
 
     private Scanner scanner;
 
@@ -26,10 +25,6 @@ public class Ui {
         outputMessage(getOpeningText());
     }
 
-    public void close() {
-        outputMessage(getClosingText());
-    }
-
     protected static String processString(String string) {
         return LINE_BREAK  + PRESPACING
                 + string.replaceAll("\n", '\n' + PRESPACING)
@@ -39,10 +34,6 @@ public class Ui {
 
     private String getOpeningText() {
         return OPENING_MESSAGE;
-    }
-
-    private String getClosingText() {
-        return CLOSING_MESSAGE;
     }
 
 
