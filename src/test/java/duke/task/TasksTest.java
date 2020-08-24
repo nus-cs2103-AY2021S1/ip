@@ -9,7 +9,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Test Tasks.
+ */
 public class TasksTest {
+    /**
+     * Returns a tasks.
+     *
+     * @return the tasks.
+     */
     private Tasks createTasks() {
         Tasks tasks = new Tasks();
         tasks.addTask(new Todo("todo"));
@@ -18,16 +26,27 @@ public class TasksTest {
         return tasks;
     }
 
+    /**
+     * Test getTasks method.
+     */
     @Test
     public void testGetTasks() {
         assertEquals(createTasks().getSize(), createTasks().getTasks().size());
     }
 
+    /**
+     * Test getTask method with success.
+     *
+     * @throws IndexOutOfBoundsException If the task cannot be retrieved.
+     */
     @Test 
     public void testGetTask_success() throws IndexOutOfBoundsException {
         assertEquals(new Todo("todo").toString(), createTasks().getTask(0).toString());
     }
 
+    /**
+     * Test getTask method with exception thrown.
+     */
     @Test 
     public void testGetTask_exceptionThrown() {
         try {
@@ -38,11 +57,17 @@ public class TasksTest {
         }
     }
 
+    /**
+     * Test getSize method.
+     */
     @Test
     public void testGetSize() {
         assertEquals(3, createTasks().getSize());
     }
 
+    /**
+     * Test getData method.
+     */
     @Test
     public void testGetData() {
         String expected = new Todo("todo").getData() + "\n";
@@ -51,6 +76,11 @@ public class TasksTest {
         assertEquals(expected, createTasks().getData());
     }
 
+    /**
+     * Test addTask method with success.
+     *
+     * @throws ReadFailedException If the task cannot be read.
+     */
     @Test 
     public void testAddTask_success() throws ReadFailedException {
         Tasks tasks1 = new Tasks();
@@ -60,6 +90,9 @@ public class TasksTest {
         assertEquals(3, tasks1.getSize());
     }
 
+    /**
+     * Test addTask method with exception thrown.
+     */
     @Test
     public void testAddTask_ExceptionThrown() {
         try {
@@ -70,6 +103,11 @@ public class TasksTest {
         }
     }
 
+    /**
+     * Test removeTask method with success.
+     *
+     * @throws IndexOutOfBoundsException the index out of bounds exception.
+     */
     @Test 
     public void testRemoveTask_success() throws IndexOutOfBoundsException {
         Tasks tasks = createTasks();
@@ -77,6 +115,9 @@ public class TasksTest {
         assertEquals(2, tasks.getSize());
     }
 
+    /**
+     * Test removeTask method with exception thrown.
+     */
     @Test
     public void testRemoveTask_ExceptionThrown() {
         try {
@@ -87,6 +128,9 @@ public class TasksTest {
         }        
     }
 
+    /**
+     * Test findByDate method.
+     */
     @Test     
     public void testFindByDate() {
         assertEquals(0, createTasks().findByDate(LocalDate.parse("2020-05-20")).size());

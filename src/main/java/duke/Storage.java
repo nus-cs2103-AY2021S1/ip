@@ -12,15 +12,37 @@ import java.io.IOException;
 
 import java.util.Scanner;
 
+/**
+ * The Storage deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
+    /**
+     * The file path where the file is located.
+     */
     private final String filePath;
+    /**
+     * The File to be read and written.
+     */
     private File file;
-    
+
+    /**
+     * Instantiates a new Storage.
+     * Create a file using the file path.
+     * 
+     * @param filePath the file path.
+     * @throws IOException If the file cannot be created.
+     */
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
         this.file = createEmptyFile();
     }
-    
+
+    /**
+     * Returns an empty file.
+     *
+     * @return the file.
+     * @throws IOException If the file cannot be created.
+     */
     private File createEmptyFile() throws IOException {
         File file = new File(this.filePath);
         file.getParentFile().mkdirs();
@@ -30,13 +52,26 @@ public class Storage {
         file.setWritable(true, false);
         return file;
     }
-    
+
+    /**
+     * Write data.
+     *
+     * @param data       the data.
+     * @param appendMode true if data is to be appended, false otherwise.
+     * @throws IOException If the file cannot be written.
+     */
     private void writeData(String data, boolean appendMode) throws IOException {
         FileWriter fileWriter = new FileWriter(file, appendMode);
         fileWriter.write(data);
         fileWriter.close();
     }
-    
+
+    /**
+     * Returns tasks by reading the file.
+     *
+     * @return the tasks
+     * @throws ReadFailedException If the file cannot be read.
+     */
     public Tasks getTasks() throws ReadFailedException {        
         Tasks tasks = new Tasks();
         Scanner scanner;
@@ -55,11 +90,23 @@ public class Storage {
         
         return tasks;
     }
-    
+
+    /**
+     * Adds the task.
+     *
+     * @param task the task.
+     * @throws IOException If the task cannot be added.
+     */
     public void addTask(Task task) throws IOException {
         this.writeData(task.getData() + "\n", true);
     }
-    
+
+    /**
+     * Updates the tasks.
+     *
+     * @param newTasks the new tasks.
+     * @throws IOException If the tasks cannot be updated.
+     */
     public void updateTasks(Tasks newTasks) throws IOException {
         this.writeData(newTasks.getData(), false);
     }    

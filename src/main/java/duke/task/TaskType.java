@@ -1,5 +1,19 @@
 package duke.task;
 
+/**
+ * The enum Task type.
+ */
 public enum TaskType {
-    TODO, EVENT, DEADLINE
+    /**
+     * Todo task type.
+     */
+    TODO,
+    /**
+     * Event task type.
+     */
+    EVENT,
+    /**
+     * Deadline task type.
+     */
+    DEADLINE
 }
