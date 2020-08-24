@@ -27,4 +27,22 @@ public class TaskList {
         }
         return string;
     }
+
+    public static String find(String toBeFound) {
+        String noSuchTask = "   Sorry, I cannot find tasks containing the keyword " + "\'" + toBeFound + "\'.";
+        String string = "Here are the tasks I find:";
+        int i = 1;
+        for (Task task: list) {
+            if (task.toString().contains(toBeFound)) {
+                string += "\n" + i + ". " + task;
+                i++;
+            }
+        }
+
+        if (i > 1) {
+            return string;
+        } else {
+            return noSuchTask;
+        }
+    }
 }

@@ -74,8 +74,14 @@ public class Parser {
             } else {
                 return "    Sorry, you have not specified which task to be deleted.";
             }
-        }
-        else {
+        } else if (order.length() >= 5 && order.substring(0, 4).equals("find")) {
+            if (order.length() > 5) {
+                String toBeFound = order.substring(5);
+                return TaskList.find(toBeFound);
+            } else {
+                return "    Please specify what you wish to find.";
+            }
+        } else {
             return "    Sorry, I don't understand."; //handles all unexpected inputs
         }
     }
