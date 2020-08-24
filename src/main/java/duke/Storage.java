@@ -1,9 +1,11 @@
+package duke;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.regex.Pattern;
 
-class Storage {
+public class Storage {
     
     private final Path filePath;
     

@@ -1,4 +1,11 @@
-class InvalidCommand extends Command {
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.UI;
+import duke.task.TaskList;
+
+public class InvalidCommand extends Command {
 
     public InvalidCommand() {
     }

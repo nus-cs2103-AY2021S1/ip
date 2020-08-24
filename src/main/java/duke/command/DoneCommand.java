@@ -1,6 +1,13 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.UI;
+import duke.task.TaskList;
+
 import java.io.IOException;
 
-class DoneCommand extends Command {
+public class DoneCommand extends Command {
     
     private final int argument;
 

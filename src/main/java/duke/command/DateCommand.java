@@ -1,4 +1,11 @@
-class DateCommand extends Command {
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.UI;
+import duke.task.TaskList;
+
+public class DateCommand extends Command {
     
     private final String argument;
 

@@ -1,4 +1,6 @@
-enum CommandType {
+package duke.command;
+
+public enum CommandType {
     BYE,
     DATE,
     DEADLINE,

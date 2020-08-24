@@ -1,6 +1,8 @@
+package duke;
+
 import java.util.Scanner;
 
-class UI {
+public class UI {
 
     private static final String DIVIDER = "___________________________________________________________________________";
 

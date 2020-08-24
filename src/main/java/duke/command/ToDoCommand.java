@@ -1,6 +1,14 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.UI;
+import duke.task.TaskList;
+import duke.task.ToDo;
+
 import java.io.IOException;
 
-class ToDoCommand extends Command {
+public class ToDoCommand extends Command {
     
     private final String argument;
 

@@ -1,10 +1,14 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
-class Event extends Task {
+public class Event extends Task {
 
     private final LocalDate startDate;
     private final LocalTime startTime;
@@ -19,12 +23,12 @@ class Event extends Task {
 
         String eventName = eventArguments[0];
         if (eventName.isBlank()) {
-            throw new DukeException("Event name cannot be blank!");
+            throw new DukeException("duke.task.Event name cannot be blank!");
         }
 
         String startDateTime = eventArguments[1];
         if (startDateTime.isBlank()) {
-            throw new DukeException("Event time cannot be blank!");
+            throw new DukeException("duke.task.Event time cannot be blank!");
         }
         
         String[] datetime = startDateTime.split(" ");

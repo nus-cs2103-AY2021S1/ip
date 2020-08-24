@@ -1,10 +1,14 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
-class Deadline extends Task {
+public class Deadline extends Task {
 
     private final LocalDate deadlineDate;
     private final LocalTime deadlineTime;
@@ -20,12 +24,12 @@ class Deadline extends Task {
 
         String deadlineName = deadlineArguments[0];
         if (deadlineName.isBlank()) {
-            throw new DukeException("Deadline name cannot be blank!");
+            throw new DukeException("duke.task.Deadline name cannot be blank!");
         }
 
         String deadlineDateTime = deadlineArguments[1];
         if (deadlineDateTime.isBlank()) {
-            throw new DukeException("Deadline time cannot be blank!");
+            throw new DukeException("duke.task.Deadline time cannot be blank!");
         }
 
         String[] datetime = deadlineDateTime.split(" ");

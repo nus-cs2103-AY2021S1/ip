@@ -1,6 +1,8 @@
+package duke.task;
+
 import java.time.LocalDate;
 
-abstract class Task {
+public abstract class Task {
 
     final String taskData;
     boolean isDone = false;
