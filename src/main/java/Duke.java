@@ -3,68 +3,42 @@ import java.util.Scanner;
 import java.io.File;
 
 public class Duke {
-    public static void main(String[] args) {
-        try {
-            init();
-        } catch (IOException e) {
-            System.out.println("Oops! An error has occurred when reading data from local disk.");
-        }
-    }
+    private TaskList tasks;
+    private final Ui ui;
+    private final Storage storage;
 
-    static void init() throws IOException {
-        final String FILE_PATH = "data/data.txt";
-        String logo = "         ,---._                                                            \n" +
-                        "       .-- -.' \\    ,---,       ,-.----.                 ,---,  .--.--.    \n" +
-                        "       |    |   :  '  .' \\      \\    /  \\        ,---.,`--.' | /  /    '.  \n" +
-                        "       :    ;   | /  ;    '.    ;   :    \\      /__./||   :  :|  :  /`. /  \n" +
-                        "       :        |:  :       \\   |   | .\\ : ,---.;  ; |:   |  ';  |  |--`   \n" +
-                        "       |    :   ::  |   /\\   \\  .   : |: |/___/ \\  | ||   :  ||  :  ;_     \n" +
-                        "       :         |  :  ' ;.   : |   |  \\ :\\   ;  \\ ' |'   '  ; \\  \\    `.  \n" +
-                        "       |    ;   ||  |  ;/  \\   \\|   : .  / \\   \\  \\: ||   |  |  `----.   \\ \n" +
-                        "   ___ l         '  :  | \\  \\ ,';   | |  \\  ;   \\  ' .'   :  ;  __ \\  \\  | \n" +
-                        " /    /\\    J   :|  |  '  '--'  |   | ;\\  \\  \\   \\   '|   |  ' /  /`--'  / \n" +
-                        "/  ../  `..-    ,|  :  :        :   ' | \\.'   \\   `  ;'   :  |'--'.     /  \n" +
-                        "\\    \\         ; |  | ,'        :   : :-'      :   \\ |;   |.'   `--'---'   \n" +
-                        " \\    \\      ,'  `--''          |   |.'         '---\" '---'                \n" +
-                        "  \"---....--'                   `---'                                      \n";
-        System.out.println("\tHello boss! This is\n" + logo);
-        Tasks tasks = new Tasks();
+    Duke() {
+        tasks = new TaskList();
+        ui = new Ui();
+        storage = new Storage("data/data.txt");
         try {
-            File f = new File(FILE_PATH);
-            if (!f.exists()) {
-                if (f.getParentFile().mkdirs() && f.createNewFile()) {
-                    System.out.println("\tStorage space for you tasks has been initialized successfully.");
-                }
-            } else {
-                tasks.processStorage(f, new Scanner(f));
-            }
+            tasks = new TaskList(storage.processStorage());
         } catch (IOException e) {
-            System.out.println("Oops! Something went wrong when loading your tasks from storage.");
             e.printStackTrace();
-            return;
+            System.out.println(e.getMessage());
         }
-        System.out.println("\tWhat can I do for you?");
-        System.out.println("\t___________________________________________________________________________\n");
-
-        Scanner s = new Scanner(System.in);
-        String input = s.nextLine();
-        while (!input.equals("bye")) {
-            try {
-                tasks.processInput(input);
-            } catch (DukeException e) {
-                System.out.println("\t___________________________________________________________________________");
-                System.out.println("\t " + e.getMessage());
-                System.out.println("\t___________________________________________________________________________\n");
-            }
-            input = s.nextLine();
-        }
-        tasks.writeData();
-        bye();
     }
 
-    static void bye() {
-        System.out.println("\t___________________________________________________________________________");
-        System.out.println("\t Bye. Hope to see you again soon");
-        System.out.println("\t___________________________________________________________________________\n");
+    void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.displayMessage(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
     }
 }
