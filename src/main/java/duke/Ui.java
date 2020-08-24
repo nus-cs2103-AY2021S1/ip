@@ -1,7 +1,13 @@
 package duke;
 
+/**
+ * Ui class will handle the interactions with the user.
+ */
 public class Ui {
 
+    /**
+     * Prints logo and greets the user.
+     */
     public static void greeting() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -15,6 +21,9 @@ public class Ui {
         System.out.println(logo + greet);
     }
 
+    /**
+     * Prints a list of commands which the user can use.
+     */
     public static void getListOfCommands() {
         String commands = "   ____________________________________________________________"
                 + "\n    Here are all your commands:"
@@ -28,6 +37,9 @@ public class Ui {
         System.out.println(commands);
     }
 
+    /**
+     * Prints bye and quit the bot.
+     */
     public static void exit() {
         String bye = "   ____________________________________________________________"
                 + "\n    Bye! Hope to see you again soon."
@@ -35,6 +47,9 @@ public class Ui {
         System.out.println(bye);
     }
 
+    /**
+     * Prints error in loading the data from the file.
+     */
     public static void showLoadingError() {
         System.err.println("    ERROR IN LOADING YOUR DATA :-(\n");
     }
