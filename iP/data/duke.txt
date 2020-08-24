@@ -1,6 +1,5 @@
-todo borrow book
+todo homework
 done 1
-todo borrow book
-event project meeting /at Mon 2-4pm
-event return book /at Sunday
-deadline return book /by Sunday
+todo this
+deadline this /by 2019-10-02
+event event event this /at 2019-10-02

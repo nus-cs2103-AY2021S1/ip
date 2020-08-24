@@ -2,143 +2,135 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    private Storage storage;
+    public TaskList tasks;
+    private Ui ui;
 
-        System.out.println(
-            "Hello! I'm Duke\n" +
-            "What can I do for you?");
-
-        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
-        String user_input = "";
-        // load saved data
-        try{
-            loadData();
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            // need empty tasks to load properly
+            tasks = new TaskList();
+            tasks = new TaskList(storage.load(this));
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (DukeException e) {
-            e.printStackTrace();
-        }
-
-        // main task
-        while (true) {
-            user_input = scanner.nextLine();  // Read user input
-            try {
-                user_input_handler(user_input, false);
-            } catch (DukeException | IOException e) {
-                System.out.println(e.getMessage());
-            }
-
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
     }
 
-    static ArrayList<Task> taskList = new ArrayList<Task>();
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                /*
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+                 */
+                user_input_handler(fullCommand, false);
+            } catch (DukeException | IOException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
 
-    static void user_input_handler(String user_input, boolean loading) throws DukeException, IOException {
-        if (user_input.equals("bye")) {
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
+    }
+
+    public void user_input_handler(String user_input, boolean loading) throws DukeException, IOException {
+        String instructionType = Parser.parseInstruction(user_input);
+
+        if (instructionType.equals("bye")) {
             // quit
-            System.out.println("Bye. Hope to see you again soon!");
+            ui.showGoodBye();
             System.exit(0);
 
-        } else if (user_input.equals("list")) {
+        } else if (instructionType.equals("list")) {
             // list task
-            System.out.println("Here are the tasks in your list:");
-            int index = 1;
-            for (Task task : taskList) {
-                System.out.println(String.format("%s. %s", index, task));
-                index += 1;
-            }
+            ui.showListOfTask(tasks.taskList);
 
-
-        } else if (user_input.split(" ")[0].equals("done")) {
+        } else if (instructionType.equals("done")) {
             // mark done
-            int index = Integer.parseInt(user_input.split(" ")[1]) - 1;
-            Task chosenTask = taskList.get(index);
+            // parse instruction
+            int index = Parser.parseMarkDoneInstr(user_input);
+            // execute
+            Task chosenTask = tasks.getTask(index);
             chosenTask.markAsDone();
             if (!loading){
-                System.out.println("Nice! I've marked this task as done: ");
-                System.out.println(chosenTask);
+                ui.showMarkedDoneTask(chosenTask);
             }
 
-        } else if (user_input.split(" ")[0].equals("delete")) {
-            //delete task
-            int index = Integer.parseInt(user_input.split(" ")[1]) - 1;
-            Task chosenTask = taskList.get(index);
-            taskList.remove(index);
+        } else if (instructionType.equals("delete")) {
+            // delete task
+            // parse instruction
+            int index = Parser.parseDeleteInstr(user_input);
+            // execute
+            Task chosenTask = tasks.getTask(index);
+            tasks.deleteTask(index);
             if (!loading){
-                System.out.println("Noted. I've removed this task: ");
-                System.out.println(chosenTask);
-                System.out.println(String.format("Now you have %s tasks in the list.", taskList.size()));
+                ui.showDeletedTask(chosenTask, tasks.taskList);
             }
 
-        } else if (user_input.split(" ")[0].equals("todo")) {
-            // make to do
-            if (user_input.split(" ", 2).length == 1) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-            }
-            String description = user_input.split(" ", 2)[1];
-            Task todo = new Todo(description);
-            taskList.add(todo);
-            if (!loading){
-                System.out.println("Got it. I've added this task:");
-                System.out.println(todo);
-                System.out.println(String.format("Now you have %s tasks in the list.", taskList.size()));
+        } else if (instructionType.equals("todo")) {
+            // make todo
+            try {
+                // parse instruction
+                String description = Parser.parseAddTodoInstr(user_input);
+                // execute
+                Task todo = new Todo(description);
+                tasks.addTask(todo);
+                if (!loading){
+                    ui.showAddedTask(todo, tasks.taskList);
+                }
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
             }
 
-        } else if (user_input.split(" ")[0].equals("deadline")) {
+        } else if (instructionType.equals("deadline")) {
             // make deadline
-            // check if input is valid
-            if (user_input.split(" ", 2).length == 1) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-            }
-            String task = user_input.split(" ", 2)[1];
-            if (task.split(" /by ", 2).length < 2) {
-                throw new DukeException("☹ OOPS!!! The description and time is required for deadline");
-            }
-            // get description
-            String description = task.split(" /by ", 2)[0];
-            // get time
-            String time = task.split(" /by ")[1];
-            LocalDate l_time = LocalDate.parse(time);
-            // add deadline
-            Task deadline = new Deadline(description, l_time);
-            taskList.add(deadline);
-            if (!loading) {
-                System.out.println("Got it. I've added this task:");
-                System.out.println(deadline);
-                System.out.println(String.format("Now you have %s tasks in the list.", taskList.size()));
+            try {
+                // parse instruction
+                HashMap<String, Object> parsedData = Parser.parseAddDeadlineInstr(user_input);
+                String description = (String) parsedData.get("description");
+                LocalDate l_time = (LocalDate) parsedData.get("time");
+                // execute
+                Task deadline = new Deadline(description, l_time);
+                tasks.addTask(deadline);
+                if (!loading) {
+                    ui.showAddedTask(deadline, tasks.taskList);
+                }
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
             }
 
-        } else if (user_input.split(" ")[0].equals("event")){
+        } else if (instructionType.equals("event")){
             // make event
-            if (user_input.split(" ", 2).length == 1) {
-                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
-            }
-            String task = user_input.split(" ", 2)[1];
-            if (task.split(" /at ", 2).length < 2) {
-                throw new DukeException("☹ OOPS!!! The description and time is required for event");
-            }
-
-            String description = user_input.split(" /at ", 2)[0];
-            String time = task.split(" /at ")[1];
-            LocalDate l_time = LocalDate.parse(time);
-            // add event
-            Task event = new Event(description, l_time);
-            taskList.add(event);
-            if (!loading){
-                System.out.println("Got it. I've added this task:");
-                System.out.println(event);
-                System.out.println(String.format("Now you have %s tasks in the list.", taskList.size()));
+            try {
+                // parse instruction
+                HashMap<String, Object> parsedData = Parser.parseAddEventInstr(user_input);
+                String description = (String) parsedData.get("description");
+                LocalDate l_time = (LocalDate) parsedData.get("time");
+                // execute
+                Task event = new Event(description, l_time);
+                tasks.addTask(event);
+                if (!loading){
+                    ui.showAddedTask(event, tasks.taskList);
+                }
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
             }
 
         } else {
@@ -149,59 +141,6 @@ public class Duke {
         }
 
         // save Data for every user input
-        saveData(taskList);
+        Storage.save(tasks.taskList);
     }
-
-    static void loadData() throws DukeException, IOException {
-        // read file
-        try {
-            File file = new File("./data/duke.txt");
-            Scanner reader = new Scanner(file);
-            while (reader.hasNextLine()) {
-                String user_input = reader.nextLine();
-                user_input_handler(user_input, true);
-            }
-            reader.close();
-        } catch (FileNotFoundException e) {
-            // check if folder exists
-            File path = new File("./data/");
-            if (!path.isDirectory()){
-                // data folder doesn't exist so create it
-                path.mkdir();
-            }
-            File file = new File("./data/duke.txt");
-            file.createNewFile(); // create file
-            // Load again
-            loadData();
-        }
-    }
-
-    static void saveData(ArrayList<Task> taskList) throws IOException {
-        File file = new File("./data/duke.txt");
-        FileWriter fileWriter = new FileWriter(file, false);
-        int index = 1;
-        for (Task task: taskList) {
-            // convert task into instruction(user input)
-            String taskInst = "";
-            if (task instanceof Todo) {
-                Todo todo = (Todo) task;
-                taskInst = String.format("todo %s\n", todo.description);
-            } else if (task instanceof Event) {
-                Event event = (Event) task;
-                taskInst = String.format("event %s /at %s\n", event.description, event.eventTime);
-            } else if (task instanceof Deadline) {
-                Deadline deadline = (Deadline) task;
-                taskInst = String.format("deadline %s /by %s\n", task.description, deadline.deadline);
-            }
-            //write instruction to text file
-            fileWriter.write(taskInst);
-            // add done instruction if task is done
-            if (task.isDone) {
-                fileWriter.write(String.format("done %s\n", index));
-            }
-            index += 1;
-        }
-        fileWriter.close();
-    }
-
 }
