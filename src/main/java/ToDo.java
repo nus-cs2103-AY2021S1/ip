@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class ToDo extends Task {
 
     private ToDo (String task, boolean isDone) {
@@ -11,6 +13,11 @@ public class ToDo extends Task {
     @Override
     public ToDo markDone() {
         return new ToDo(task, true);
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return LocalDate.now();
     }
 
     @Override
