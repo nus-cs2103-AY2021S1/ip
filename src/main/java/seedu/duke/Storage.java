@@ -23,7 +23,6 @@ public class Storage {
 
     private static void clearTasks() throws IOException {
         FileWriter storageWriter = new FileWriter(STORAGE_PATH, false);
-        // replace the original content with an empty string
         storageWriter.write("");
         storageWriter.close();
     }
