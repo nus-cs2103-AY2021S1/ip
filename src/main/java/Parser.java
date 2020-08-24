@@ -13,6 +13,8 @@ public class Parser {
         } else if (commandMessage.contains("delete")) {
             int order = parseInt(commandMessage.substring(commandMessage.length() - 1));
             command = new Command("delete", order);
+        } else if (commandMessage.contains("find")) {
+            command = new Command("find", commandMessage.substring(commandMessage.indexOf(' ') + 1));
         } else if (commandMessage.equals("bye")) {
             command = new Command("bye");
         } else {
