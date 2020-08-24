@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DukeLogic {
@@ -111,7 +112,7 @@ public class DukeLogic {
                 }
                 String taskName = command.substring(command.indexOf("event ") + 6, command.indexOf(" /at"));
                 String taskDate = command.substring(command.indexOf("/at ") + 4);
-                this.taskList.add(new Event(taskName, taskDate));
+                this.taskList.add(new Event(taskName, LocalDate.parse(taskDate)));
                 break;
             }
             case "deadline": {
@@ -120,7 +121,7 @@ public class DukeLogic {
                 }
                 String taskName = command.substring(command.indexOf("deadline ") + 9, command.indexOf(" /by"));
                 String taskDate = command.substring(command.indexOf("/by ") + 4);
-                this.taskList.add(new Deadline(taskName, taskDate));
+                this.taskList.add(new Deadline(taskName, LocalDate.parse(taskDate)));
                 break;
             }
         }
