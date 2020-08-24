@@ -147,7 +147,7 @@ public class Duke {
 
     public static void handleDeadline(String detail) throws DukeException {
         try {
-            String[] split = detail.split(" /by", 2);
+            String[] split = detail.split(" /by ", 2);
             Task task = new Deadline(split[0], split[1]);
             tasks.add(task);
             String numTasks = "Now you have " + tasks.size() + " tasks in the list.\n";
@@ -161,7 +161,7 @@ public class Duke {
 
     public static void handleEvent(String detail) throws DukeException {
         try {
-            String[] split = detail.split(" /at", 2);
+            String[] split = detail.split(" /at ", 2);
             Task task = new Event(split[0], split[1]);
             tasks.add(task);
             String numTasks = "Now you have " + tasks.size() + " tasks in the list.\n";
