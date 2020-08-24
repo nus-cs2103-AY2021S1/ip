@@ -1,5 +1,6 @@
 import exceptions.InvalidDeadlineException;
 import exceptions.InvalidEventException;
+import exceptions.InvalidNumberException;
 import exceptions.UnknownCommandException;
 
 import java.util.Scanner;
@@ -67,6 +68,12 @@ public class UI {
                         System.out.println("Oops seems like your event is invalid. " +
                                 "Please check your /at tag");
                         System.out.println("_____________________________");
+                    }
+                } else if (request[0].equals("find")){
+                    try {
+                        Parser.find(input, list);
+                    } catch (InvalidNumberException ex){
+                        System.out.println("More than one keyword was entered");
                     }
                 } else {
                     Parser.delete(request[1], list);

@@ -225,7 +225,7 @@ public class Parser {
      * @throws UnknownCommandException
      */
     public static void validity(String line) throws UnknownCommandException {
-        ArrayList<String> list = new ArrayList<>(Arrays.asList("delete", "done", "todo", "event", "deadline"));
+        ArrayList<String> list = new ArrayList<>(Arrays.asList("delete", "done", "todo", "event", "deadline", "find"));
         String[] words = line.split(" ");
         if (list.contains(words[0]) && words.length > 1){
 
@@ -234,12 +234,19 @@ public class Parser {
         }
     }
 
-    /**
-     * Get the todo object from the user input
-     * @param work The String containing the description of the todo object
-     * @return A ToDos object
-     * @throws EmptyTodoException
-     */
+    public static void find(String input, TaskList tasks) throws InvalidNumberException{
+        String[] requests = input.split(" ");
+        if (requests.length != 2){
+            throw new InvalidNumberException("More than one keyword was provided");
+        }
+        for (int i = 1; i <= tasks.getSize(); i++){
+            if (tasks.get(i).getWork().contains(requests[1])){
+                System.out.println(tasks.get(i));
+            }
+        }
+        System.out.println("_____________________________");
+    }
+
     public static ToDos getTodo(String work) throws EmptyTodoException{
         if (work.length() > 4){
             return new ToDos(work.substring(4));
