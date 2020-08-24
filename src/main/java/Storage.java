@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class FileController {
+public class Storage {
     private final static String filePath = "list.txt";
 
     private static String convertToText(TaskType type, int done, String name, String time) {

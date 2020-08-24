@@ -19,8 +19,8 @@ public class Event extends Task {
     public String toString() {
         String status = String.format("[E][%s] ", (super.done ? "✓" : "✗"));
         String time = date == null
-                ? String.format(" (by: %s)", eventTime)
-                : " (by: " + DateParser.format(date) + ")";
+                ? String.format(" (at: %s)", eventTime)
+                : " (at: " + DateParser.format(date) + ")";
         return status + this.getName() + time;
     }
 }
