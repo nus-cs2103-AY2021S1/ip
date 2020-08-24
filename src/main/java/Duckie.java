@@ -1,43 +1,22 @@
+import java.io.File;
+import java.io.IOException;
 import java.net.IDN;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duckie {
-    private final static String INDENT = "    ";
-    private final static String horizL = INDENT +
-            "____________________________________________________________";
-    private final static String logo = INDENT
-            + "           ____                   _      _\n"
-            + INDENT + "    __    |  _ \\   _   _    ___  | | _  (_)  ___     __\n"
-            + INDENT + "___( o)>  | | | | | | | | /  __| | |/ / | | / _ \\  <(o )___ \n"
-            + INDENT + "\\ <_. )   | |_| | | | | | | (__  |   <  | | | __/   ( ._> /\n"
-            + INDENT + " `---'    |____/  \\___,_|  \\ __| |_|\\_\\ |_| \\___|    `___' \n";
     private static ArrayList<Task> lst = new ArrayList<>();
-
-    private static void intro() {
-        System.out.println(horizL + "\n" + logo + "\n" +
-                INDENT + "Quack. Duckie is here to remember your tasks!\n" +
-                INDENT + "You can begin by adding tasks!\n" + horizL);
-    }
-
-    private static void ending() {
-        System.out.println("\n" + INDENT +
-                "Quack! Hope to see you again!\n" + horizL);
-    }
 
     private static void displayList() throws DuckieException{
         if (lst.size() == 0) {
             throw new DuckieNoListException();
         }
 
-        int index = 1;
-        System.out.println(horizL);
-        System.out.println(INDENT + "Quack! You have these in your list: ");
-        for (Task task : lst) {
-            System.out.println(INDENT + index + ". " + task);
-            index++;
-        }
-        System.out.println(horizL);
+        BotResponses.displayListReply(lst);
     }
 
     private static void addTask(String input, String type) throws DuckieException{
@@ -60,26 +39,19 @@ public class Duckie {
             throw new DuckieNoInfoException();
         }
         lst.add(t1);
-        System.out.println(horizL);
-        System.out.println(INDENT + "Quack! Added: " + t1);
-        System.out.println(INDENT + "Now you have " + lst.size() + " task(s) in the list.");
-        System.out.println(horizL);
+        BotResponses.addTaskReply(t1, lst);
     }
 
     private static void checkTask(int ind) {
-        System.out.println(horizL);
         Task t1 = lst.get(ind - 1);
         t1.checked();
-        System.out.println(INDENT + "Quack! I've marked this task as done: \n" +
-                 INDENT + t1 + "\n" + horizL);
+        BotResponses.checkTaskReply(t1);
     }
 
     public static void deleteTask(int ind) {
-        System.out.println(horizL);
         Task t1 = lst.get(ind - 1);
         lst.remove(ind - 1);
-        System.out.println(INDENT + "Quack! I've remove this task: \n" +
-                INDENT + t1 + "\n" + horizL);
+        BotResponses.deleteTaskReply(t1);
     }
 
     //Check if a String only
@@ -87,8 +59,7 @@ public class Duckie {
         return (s.length() > 0 && s.split("\\s+").length == 1);
     }
 
-    public static void main(String[] args) {
-        Duckie.intro();
+    private static void serve() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             try {
@@ -96,7 +67,7 @@ public class Duckie {
                 String input = initialInput.strip();
                 System.out.println(input);
                 if (input.equalsIgnoreCase("bye")) {
-                    System.out.print(horizL);
+                    System.out.print(BotResponses.getHorizL());
                     break;
                 } else if (input.equalsIgnoreCase("list")) {
                     Duckie.displayList();
@@ -125,14 +96,46 @@ public class Duckie {
                 } else if (input.toLowerCase().indexOf("event") == 0) {
                     Duckie.addTask(input, "event");
                 } else {
-                    throw new DuckieException(horizL + "\n" + INDENT
-                            + "Sorry, Duckie does not know what you are trying to do.\n"
-                            + horizL);
+                    throw new DuckieInvalidCommandException();
                 }
             } catch (DuckieException e) {
                 System.out.println(e.getMessage());
             }
         }
-        Duckie.ending();
+    }
+
+    public static File openFile() {
+        String cwd = System.getProperty("user.dir");
+        Path dirPath = Paths.get(cwd, "data");
+        Path filePath = Paths.get(cwd, "data", "duke.txt");
+        try {
+            File file = new File(String.valueOf(filePath));
+            if (!file.exists()) {
+                File dir = new File(String.valueOf(dirPath));
+                if (!dir.exists()) {
+                    if (dir.mkdirs() && file.createNewFile()) {
+                        System.out.println("Memory File created successfully!");
+                    } else {
+                        System.out.println("Quack! Unable to create file!");
+                    }
+                } else {
+                    if (file.createNewFile()) {
+                        System.out.println("Memory File created successfully!");
+                    } else {
+                        System.out.println("Quack! Unable to create file!");
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Quack! Encounter problem while loading data!")
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        BotResponses.intro();
+        Duckie.serve();
+        BotResponses.ending();
     }
 }
