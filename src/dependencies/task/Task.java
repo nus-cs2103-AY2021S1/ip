@@ -15,6 +15,10 @@ public abstract class Task implements Serializable {
 
     abstract String getDateLine();
 
+    public boolean hasADate() {
+        return false;
+    };
+
     public String showTask() {
         return this.task;
     }
@@ -110,6 +114,11 @@ public abstract class Task implements Serializable {
         }
 
         @Override
+        public boolean hasADate() {
+            return true;
+        }
+
+        @Override
         public String getDateLine() {
             return this.tDate.toString();
         }
@@ -151,6 +160,11 @@ public abstract class Task implements Serializable {
             super(task);
             this.deadline = deadline;
             this.tDate = new TaskDate(deadline);
+        }
+
+        @Override
+        public boolean hasADate() {
+            return true;
         }
 
         @Override
