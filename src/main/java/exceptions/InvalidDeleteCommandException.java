@@ -1,3 +1,5 @@
+package exceptions;
+
 public class InvalidDeleteCommandException extends DukeException {
 
     public InvalidDeleteCommandException() {
