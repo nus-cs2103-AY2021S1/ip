@@ -10,6 +10,8 @@ ITS ME:
 8888888 888    Y888     888     888   T88b  "Y88888P"  8888888P"   "Y88888P"     888
 I want to know EVERYTHING ABOUT YOU
 __________________________
+./data directory created
+duke.txt created in ./data
 __________________________
 Got it. I've added this task:
     [T][✘] borrow book
@@ -17,47 +19,47 @@ Now you have 1 tasks in the list
 __________________________
 __________________________
 Got it. I've added this task:
-    [D][✘] return book (by: Sunday)
+    [D][✘] return book (by: 2020-12-2 )
 Now you have 2 tasks in the list
 __________________________
 __________________________
 Got it. I've added this task:
-    [E][✘] project meeting (at: Mon 2-4pm)
+    [E][✘] project meeting (at: 2012-11-3)
 Now you have 3 tasks in the list
 __________________________
 __________________________
 1. [T][✘] borrow book
-2. [D][✘] return book (by: Sunday)
-3. [E][✘] project meeting (at: Mon 2-4pm)
+2. [D][✘] return book (by: 2020-12-2 )
+3. [E][✘] project meeting (at: 2012-11-3)
 
 __________________________
 __________________________
 Nice! I've marked this task as done:
-[D][✓] return book (by: Sunday)
+[D][✓] return book (by: 2020-12-2 )
 __________________________
 __________________________
 1. [T][✘] borrow book
-2. [D][✓] return book (by: Sunday)
-3. [E][✘] project meeting (at: Mon 2-4pm)
+2. [D][✓] return book (by: 2020-12-2 )
+3. [E][✘] project meeting (at: 2012-11-3)
 
 __________________________
 __________________________
-Something is amiss `(OCO)/ !!: Invalid Command Exception
+Something is amiss `(OCO)/ !!: Invalid Command Exception, start every cmd with todo, deadline or event
 __________________________
 __________________________
 Something is amiss `(OCO)/ !!: Task number does not exist
 __________________________
 __________________________
-Something is amiss `(OCO)/ !!: No arguments specified for event
+Something is amiss `(OCO)/ !!: Invalid arguments specified for event
 __________________________
 __________________________
 HAI. I've deleted this task:
-    [E][✘] project meeting (at: Mon 2-4pm)
+    [E][✘] project meeting (at: 2012-11-3)
 Now you have 2 tasks in the list
 __________________________
 __________________________
 1. [T][✘] borrow book
-2. [D][✓] return book (by: Sunday)
+2. [D][✓] return book (by: 2020-12-2 )
 
 __________________________
 __________________________

@@ -1,19 +1,25 @@
+package duke;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class DataSaver {
-    public static final String FILE_PATH = "data/duke.txt";
+public class Storage {
+    private String filePath;
+    
+    
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
 
     /**
      * Handles logic where ./data or duke.txt does not exists by creating them.
      */
-    private static void handleFileOrDirectoryDoesNotExist(File savedTasks) throws IOException {
+    private void handleFileOrDirectoryDoesNotExist(File savedTasks) throws IOException {
         if(savedTasks.getParentFile().mkdirs()) {
             System.out.println("./data directory created");
         }
@@ -22,14 +28,14 @@ public class DataSaver {
         }
     }
 
-    public static void saveTaskToMemory(List<Task> taskList) throws DukeException {
-        File savedTasks = new File(FILE_PATH);
+    public void saveTaskToMemory(List<Task> taskList) throws DukeException {
+        File savedTasks = new File(filePath);
         try {
             if (!savedTasks.exists()) {
                 handleFileOrDirectoryDoesNotExist(savedTasks);
             }
             // Once file path exists, instantiate FileWriter Object.
-            FileWriter fw = new FileWriter(FILE_PATH);
+            FileWriter fw = new FileWriter(filePath);
             String taskToWrite = "";
             for (Task task: taskList) {
                 if (task instanceof ToDo) {
@@ -55,10 +61,10 @@ public class DataSaver {
      * Loads Tasks array from memory, else returns an empty array 
      * @return
      */
-    public static ArrayList<Task> loadTasksFromMemory() throws DukeException {
-        ArrayList<Task> tasksInMemory = new ArrayList<>();
+    public List<Task> loadTasksFromMemory() throws DukeException {
+        List<Task> tasksInMemory = new ArrayList<>();
         try {
-            File savedTasks = new File(FILE_PATH);
+            File savedTasks = new File(filePath);
             // file or directory does not exists, make parent directory and file
             if (!savedTasks.exists()) {
                 handleFileOrDirectoryDoesNotExist(savedTasks);
@@ -88,7 +94,7 @@ public class DataSaver {
                     taskToAdd = new Event(description, isDone, LocalDate.parse(time));
                     break;
                 default:
-                   throw new DukeException("Task cannot be read from Duke.txt");
+                   throw new DukeException("duke.Task cannot be read from Duke.txt");
                 }
                 tasksInMemory.add(taskToAdd);
             }
