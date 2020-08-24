@@ -7,6 +7,7 @@ import java.util.Date;
  * Encapsulate the deadline class
  */
 public class Deadline extends Task {
+
     private Date time;
     private SimpleDateFormat formatter;
 
@@ -36,6 +37,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toFileString() {
-        return "D\n"+super.toFileString()+formatter.format(time) + "\n";
+        return "D\n" + super.toFileString() + formatter.format(time) + "\n";
     }
 }

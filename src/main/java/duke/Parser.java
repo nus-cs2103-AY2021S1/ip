@@ -28,46 +28,44 @@ public class Parser {
      */
     public static Command parse(String command) throws DukeException {
         ArrayList<String> tokens = new ArrayList<String>(Arrays.asList(command.split(" ")));
-        if (tokens.size()==0||tokens.get(0).equals("")){
+        if (tokens.size()==0 || tokens.get(0).equals("")) {
             throw new EmptyCommandException();
         }
-        DukeCommand cmd = DukeCommand.getCommand(tokens.get(0));
-        if (cmd == null) {
-            throw new InvalidCommandException("I do not recognise this command!");
-        }
-        if (cmd == DukeCommand.BYE){
+        String cmd = tokens.get(0);
+
+        if (cmd.equals("bye")){
             return new ExitCommand();
-        } else if (cmd == DukeCommand.DONE||cmd == DukeCommand.DELETE) {
+        } else if (cmd.equals("done") || cmd.equals("delete")) {
             if (tokens.size() < 2) {
                 throw new MissingArgumentException("Must provide number after command!");
             }
             int ind;
-            try{
-                ind = Integer.parseInt(tokens.get(1))-1;
+            try {
+                ind = Integer.parseInt(tokens.get(1)) - 1;
             } catch(Exception ex) {
                 throw new InvalidCommandException(tokens.get(1)+" is not a number!");
             }
-            if (cmd == DukeCommand.DONE) {
+            if (cmd.equals("done")) {
                 return new DoneCommand(ind);
             } else {
                 return new DeleteCommand(ind);
             }
-        } else if (cmd == DukeCommand.LIST) {
+        } else if (cmd.equals("list")) {
             return new ListCommand();
-        } else {
+        } else if (cmd.equals("todo") || cmd.equals("event") || cmd.equals("deadline")){
 
             SimpleDateFormat readformatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
             Task toAdd;
 
-            if (cmd == DukeCommand.TODO) {
+            if (cmd.equals("todo")) {
                 if (tokens.size() < 2) {
                     throw new MissingArgumentException("todo cannot be empty!");
                 }
                 toAdd = new ToDo(stringCombiner(tokens, 1, tokens.size()));
-            } else if (cmd == DukeCommand.DEADLINE) {
+            } else if (cmd.equals("deadline")) {
                 int ind = 0;
                 boolean found= false;
-                while (!found && ind < tokens.size()-1) {
+                while (!found && ind < tokens.size() - 1) {
                     ind++;
                     if (tokens.get(ind).equals("/by")) {
                         found = true;
@@ -79,13 +77,13 @@ public class Parser {
                 if (ind == 1) {
                     throw new MissingArgumentException("Deadline needs a name!");
                 }
-                if (ind == tokens.size()-1) {
+                if (ind == tokens.size() - 1) {
                     throw new MissingArgumentException("Deadline needs a deadline time!");
                 }
                 Date date;
-                try{
-                    date = readformatter.parse(stringCombiner(tokens,ind+1, tokens.size()));
-                } catch(Exception ex) {
+                try {
+                    date = readformatter.parse(stringCombiner(tokens,ind + 1, tokens.size()));
+                } catch (Exception ex) {
                     throw new InvalidCommandException("Provide a proper date and time!");
                 }
 
@@ -93,7 +91,7 @@ public class Parser {
             } else {
                 int ind = 0;
                 boolean found= false;
-                while (!found && ind < tokens.size()-1) {
+                while (!found && ind < tokens.size() - 1) {
                     ind++;
                     if (tokens.get(ind).equals("/at")) {
                         found = true;
@@ -105,20 +103,21 @@ public class Parser {
                 if (ind == 1) {
                     throw new MissingArgumentException("Event needs a name!");
                 }
-                if (ind == tokens.size()-1) {
+                if (ind == tokens.size() - 1) {
                     throw new MissingArgumentException("Event needs a event time!");
                 }
                 Date date;
-                try{
+                try {
                     date = readformatter.parse(stringCombiner(tokens,ind+1, tokens.size()));
-                } catch(Exception ex) {
+                } catch (Exception ex) {
                     throw new InvalidCommandException("Provide a proper date and time!");
                 }
-                toAdd =  new Event(stringCombiner(tokens, 1, ind),
-                        date);
+                toAdd =  new Event(stringCombiner(tokens, 1, ind), date);
             }
             return new AddCommand(toAdd);
 
+        } else {
+            throw new InvalidCommandException("I do not recognise this command!");
         }
     }
 

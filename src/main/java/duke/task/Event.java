@@ -7,6 +7,7 @@ import java.util.Date;
  * Encapsulate the event class
  */
 public class Event extends Task {
+
     private Date time;
     private SimpleDateFormat formatter;
 
@@ -36,6 +37,6 @@ public class Event extends Task {
      */
     @Override
     public String toFileString() {
-        return "E\n"+super.toFileString()+formatter.format(time) + "\n";
+        return "E\n" + super.toFileString() + formatter.format(time) + "\n";
     }
 }

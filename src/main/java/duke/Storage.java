@@ -37,9 +37,9 @@ public class Storage {
     public TaskList writeData(TaskList taskList) throws DukeFileException {
         if (taskList != null) {
             try{
-                FileWriter writer = new FileWriter(this.filePath);
+                FileWriter writer = new FileWriter(filePath);
                 StringBuilder str = new StringBuilder();
-                for(Task task : taskList.getTasks()) {
+                for (Task task : taskList.getTasks()) {
                     str.append(task.toFileString());
                     str.append("\n");
                 }
@@ -61,7 +61,7 @@ public class Storage {
     public TaskList loadData() throws DukeFileException {
         TaskList taskList = new TaskList();
         try {
-            File file = new File(this.filePath);
+            File file = new File(filePath);
             if (file.exists()) {
                 Scanner sc = new Scanner(file);
                 while (sc.hasNext()) {

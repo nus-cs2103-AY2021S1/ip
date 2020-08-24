@@ -4,6 +4,7 @@ package duke.task;
  * Encapsulate the task class
  */
 public class Task {
+
     protected String description;
     protected boolean done = false;
 
@@ -11,9 +12,8 @@ public class Task {
      * Creates a new task
      * @param description Description of the task
      */
-    public Task(String description){
+    public Task(String description) {
         this.description = description;
-
     }
 
     /**
@@ -21,7 +21,7 @@ public class Task {
      * @return Description of the task
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -38,7 +38,7 @@ public class Task {
     @Override
     public String toString() {
 
-        return (this.done ? "[✓]":"[✘]")+" "+this.description;
+        return (this.done ? "[✓]" : "[✘]") + " " + this.description;
     }
 
     /**
@@ -47,7 +47,7 @@ public class Task {
      */
     public String toFileString() {
         StringBuilder str = new StringBuilder();
-        str.append(this.done ? "T" :"F");
+        str.append(this.done ? "T" : "F");
         str.append("\n");
         str.append(this.description);
         str.append("\n");

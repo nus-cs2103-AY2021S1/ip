@@ -69,7 +69,7 @@ public class TaskList {
         StringBuilder str = new StringBuilder();
         str.append("Here are the tasks in your list:\n");
         int i=0;
-        for(Task task:tasks){
+        for(Task task : tasks){
             str.append(String.format("%d.%s", ++i, task));
             if (i != tasks.size()) {
                 str.append("\n");
