@@ -1,17 +1,37 @@
 package duke.command;
 
+import duke.exception.InvalidTaskDateTimeException;
 import duke.storage.*;
 import duke.task.*;
 import duke.tasklist.*;
 import duke.ui.*;
 
+/**
+ * Represents an action to add new Todo.
+ */
 public class AddTodoCommand extends Command {
+
+    /** Description of Todo to be added */
     private final String description;
+
+    /**
+     * Constructs a <code>AddTodoCommand</code> object.
+     *
+     * @param description Description of Todo to be added.
+     */
     public AddTodoCommand(String description) {
         super(false);
         this.description = description;
     }
 
+    /**
+     * Adds a Todo to the TaskList and notify the user if successful.
+     *
+     * @param tasks TaskList to store Task.
+     * @param ui Ui to interact with users.
+     * @param storage Storage use by Duke to save and load files.
+     * @return Nothing.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = new Todo(description);
@@ -24,6 +44,12 @@ public class AddTodoCommand extends Command {
                 " in the list.");
     }
 
+    /**
+     * Returns a String description of the number of Task.
+     *
+     * @param noOfTask Number of Task in TaskList
+     * @return String description of the number of Task.
+     */
     public static String getTaskDescription(int noOfTask) {
         String taskDescription = "";
         if (noOfTask > 1) {
@@ -32,10 +58,5 @@ public class AddTodoCommand extends Command {
             taskDescription = noOfTask + " task";
         }
         return taskDescription;
-    }
-
-    @Override
-    public boolean getIsExit() {
-        return isExit;
     }
 }

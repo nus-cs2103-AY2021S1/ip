@@ -8,22 +8,32 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a <code>Storage</code> class that saves and loads
+ * tasks.
+ */
 public class Storage {
-    private final Path path;
+
+    /** Path to text file which contains the stored tasks */
     private static final String FILE_PATH = "./data/tasks.txt";
 
+    /**
+     * Constructs a <code>Storage</code> object with a dedicated
+     * file path.
+     */
     public Storage() {
-        path = Paths.get(FILE_PATH);
         File file = new File(FILE_PATH);
         file.getParentFile().mkdirs();
     }
 
-
+    /**
+     * Saves the tasks into a text file.
+     *
+     * @return Nothing.
+     */
     public void save(TaskList list) {
         try {
             int counter = list.getNumberOfTask();
@@ -42,6 +52,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the tasks into a text file.
+     *
+     * @return Nothing.
+     */
     public ArrayList<Task> load() {
         try {
             ArrayList<Task> list = new ArrayList<>();
