@@ -3,13 +3,24 @@ import java.util.List;
 import java.util.ArrayList;
 
 class Task {
-    String message;
+    private String message;
+    private boolean isDone;
+
     Task(String message) {
         this.message = message;
+        this.isDone = false;
     }
 
     public String getMessage() {
         return message;
+    }
+
+    public String getStatusIcon() {
+        return "[" + (isDone ? "\u2713" : "\u2718") + "] ";
+    }
+
+    public void setDone() {
+        this.isDone = true;
     }
 
 }
@@ -27,8 +38,11 @@ public class Duke {
 
     public static void main(String[] args) {
         // greeting and exit messages strings
+        // list and mark strings
         String messageHello = "Hello! I'm Duke\n" + SPACE + " " + "What can I do for you?";
         String messageBye = "Bye. Hope to see you again soon!";
+        String messageList = "Here are the tasks in your list:\n";
+        String messageMarked = "Nice! I've marked this task as done:\n";
 
         // set up scanner
         Scanner scanner = new Scanner(System.in);
@@ -49,12 +63,20 @@ public class Duke {
                 break;
             } else if (currentCommand.equals("list")) {
                 System.out.print(SPACE + LINE);
+                System.out.print(SPACE + messageList);
                 int counter = 1;
-                for (Task task: list) {
-                    System.out.println(SPACE + " " + counter + ". " + task.getMessage());
-                    counter ++;
+                for (Task task : list) {
+                    System.out.println(SPACE + " " + counter + "." + task.getStatusIcon()
+                            + task.getMessage());
+                    counter++;
                 }
                 System.out.println(SPACE + LINE);
+            } else if (currentCommand.split(" ")[0].equals("done")) {
+                int index = Integer.parseInt(currentCommand.split(" ")[1]) - 1;
+                Task task = list.get(index);
+                task.setDone();
+                System.out.println(format(messageMarked + SPACE + "   "
+                        +task.getStatusIcon() + task.getMessage()));
             } else {
                 list.add(new Task(currentCommand));
                 System.out.println(format("added: " + currentCommand));
