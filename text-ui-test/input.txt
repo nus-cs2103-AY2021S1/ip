@@ -10,5 +10,6 @@ event CS2103
 deadline a
 done
 hahahhahahhahaa
+delete 2
 list
 bye
