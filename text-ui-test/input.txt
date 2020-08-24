@@ -1,5 +1,1 @@
-todo borrow book
-deadline die /by Sunday
-event die again /at Mon 2-4pm
 list
-bye

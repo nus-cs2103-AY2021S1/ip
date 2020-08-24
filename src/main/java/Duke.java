@@ -11,33 +11,31 @@ public class Duke {
     private Parser parser;
 
     public Duke() {
-        ui = new Ui();
-        storage = new Storage();
-        parser = new Parser();
+        this.ui = new Ui();
+        this.storage = new Storage();
+        this.parser = new Parser();
         try {
-            tasks = new TaskList(storage.readFile());
+            this.tasks = new TaskList(storage.readFile());
         } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
+            this.ui.showLoadingError();
+            this.tasks = new TaskList();
         }
     }
 
     public void run() {
-        ui.showWelcome();
-        String fullCommand = "";
+        this.ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
-                fullCommand = ui.readCommand();
-                Command command = parser.findCommand(fullCommand);
+                String fullCommand = this.ui.readCommand();
+                Command command = this.parser.findCommand(fullCommand);
                 command.execute(this.tasks, this.ui, this.storage);
-                storage.save(tasks.getList());
+                this.storage.save(tasks.getList());
                 isExit = command.isExit();
             } catch (DukeException | IOException e) {
-                ui.showError(e.getMessage());
+                this.ui.showError(e.getMessage());
             }
         }
-        ui.showExit();
     }
     public static void main(String[] args) {
         new Duke().run();

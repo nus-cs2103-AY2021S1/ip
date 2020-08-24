@@ -1,2 +1,3 @@
-D|F||2010-10-10
-T|F|die
+T|F|borrow book
+D|F|die |Sunday
+E|F|die again |Mon2-4pm
