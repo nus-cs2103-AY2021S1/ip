@@ -3,16 +3,28 @@ package tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Creates a task with a datetime and description
+ */
 public class Task {
     private boolean done;
     private String work;
     private LocalDateTime date;
 
+    /**
+     * Initializes a task with the user given description
+     * @param work A String with the user description
+     */
     public Task(String work){
         this.done = false;
         this.work = work;
     }
 
+    /**
+     * Initializes a task with user given description and datetime
+     * @param work A String containing the user given description
+     * @param date A LocalDateTime object containing the timing of the deadline/task
+     */
     public Task(String work, LocalDateTime date){
         this.work = work;
         this.date = date;

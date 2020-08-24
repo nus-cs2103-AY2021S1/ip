@@ -8,10 +8,28 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Made to store and retrieve the data in duke.txt
+ * A storage object will have a particular filepath
+ * from which it will read and write the tasklist to
+ */
 public class Storage {
+    /**
+     * Filepath refers to the path of the file which we will interact with
+     */
     private String filePath;
+    /**
+     * The tasklist which will contain the data from the file and which will
+     * be updated based on user input
+     */
     private TaskList list;
     private ArrayList<Task> tasks = new ArrayList<>();
+
+    /**
+     * Gets the filepath and uses this filepath to find the file which
+     * initialize the tasklist.
+     * @param filepath A string to enable us to access the file to get the tasklist
+     */
     public Storage (String filepath) {
         this.filePath = filepath;
         try {
@@ -27,6 +45,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the file at the given path and parses the Strings inside into task objects
+     * which can be added to the tasklist
+     * @param line
+     * @return A Task object which could be a todo, deadline or event
+     */
     private Task getTask(String line){
         Task task;
         if (line.charAt(1) == 'T'){
@@ -53,6 +77,11 @@ public class Storage {
         return this.list;
     }
 
+    /**
+     * Writes the tasklist into the file at the filepath of this storage object in a format which
+     * can be easily parsed when the chatbot is rerun. If the file or folder doesn't exist then,
+     * a new file will be made
+     */
     public void save(){
         try {
             String folderPath = "Data";

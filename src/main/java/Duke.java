@@ -1,14 +1,26 @@
 import exceptions.DukeException;
 
+/**
+ * Initializes the chatbot and starts up the UI to take in user input
+ */
 public class Duke {
-    private Storage storage;
+    /**
+     * ui refers to the User Interface object which will be used to accept user input
+     */
     private UI ui;
 
+    /**
+     * Uses the filepath to intiialize the storage and hence, the UI object
+     * @param filePath
+     */
     public Duke(String filePath){
-        this.storage = new Storage(filePath);
+        Storage storage = new Storage(filePath);
         this.ui = new UI(storage);
     }
 
+    /**
+     * Looks for user input using the UI object
+     */
     public void run(){
         ui.welcome();
         ui.run();
