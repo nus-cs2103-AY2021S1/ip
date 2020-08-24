@@ -6,8 +6,22 @@ import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
 
+/**
+ * Deals with making sense of the user command
+ */
 public class Parser {
     public static boolean isExit = false;
+
+    /**
+     * Takes in a single line of command. isExit becomes true when the String "bye" is entered,
+     * prompting the main program to exit.
+     * Program stores user inputs as Tasks and returns the list when the String "list" is entered.
+     * Tasks are categorised into "todo", "deadline" (to specify "by") and "event"  (to specify "at").
+     * When "done xx" is entered, Task xx in the list is marked as done.
+     * When "delete xx" is entered, Task xx in the list is removed from the list.
+     *
+     * @param command input string from user
+     */
     public static void parse(String command) {
         if (command.equals("bye")) {
             isExit = true;
