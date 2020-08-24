@@ -1,18 +1,22 @@
+package duke.task;
+
+import duke.task.Task;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Event extends Task {
+public class Deadline extends Task {
 
     protected Date date;
     protected boolean isTime;
 
-    public Event (String description, Date date, boolean isTime) {
+    public Deadline (String description, Date date, boolean isTime) {
         super(description);
         this.date = date;
         this.isTime = isTime;
     }
 
-    public Event (String description, Date date, boolean isTime, boolean isDone) {
+    public Deadline (String description, Date date, boolean isTime, boolean isDone) {
         super(description, isDone);
         this.date = date;
         this.isTime = isTime;
@@ -29,12 +33,12 @@ public class Event extends Task {
     @Override
     public String toString() {
         String s = isTime ? "MMM dd yyyy hh:mma" : "MMM dd yyyy";
-        return "[E]" + super.toString() + " (at: " + new SimpleDateFormat(s).format(date) + ")";
+        return "[D]" + super.toString() + " (by: " + new SimpleDateFormat(s).format(date) + ")";
     }
 
     @Override
     public String toStoredTextString() {
         String s = isTime ? "MMM dd yyyy hh:mma" : "MMM dd yyyy";
-        return "E | " + super.toStoredTextString() + " | " + new SimpleDateFormat(s).format(date) + " | " + (isTime ? "1" : "0");
+        return "D | " + super.toStoredTextString() + " | " + new SimpleDateFormat(s).format(date) + " | " + (isTime ? "1" : "0");
     }
 }

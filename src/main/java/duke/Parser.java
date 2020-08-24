@@ -1,4 +1,10 @@
-import java.security.Key;
+package duke;
+
+import duke.command.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

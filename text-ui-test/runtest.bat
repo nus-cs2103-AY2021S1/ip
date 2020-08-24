@@ -9,7 +9,10 @@ del ACTUAL.TXT
 del data\duke.txt
 
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\*.java
+
+
+javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\duke\*.java
+
 
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********

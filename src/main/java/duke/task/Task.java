@@ -1,6 +1,8 @@
+package duke.task;
+
 //@@author CS2103T-week2-project-task3
 //Reused from https://nus-cs2103-ay2021s1.github.io/website/schedule/week2/project.html
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
