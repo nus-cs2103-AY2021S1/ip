@@ -83,16 +83,16 @@ public class Storage {
         try {
             switch(action) {
             case ADD:
-                FileWriter fw = new FileWriter("./data/tasklist.txt", true);
+                FileWriter fw = new FileWriter(this.filepath, true);
                 fw.write(task.storedTaskString() + "\n");
                 fw.close();
                 System.out.println("Success!");
                 break;
 
             case DELETE:
-                File inputFile = new File("./data/tasklist.txt");
+                File inputFile = new File(this.filepath);
                 File tempFile = new File("./data/myTempFile.txt");
-                BufferedReader reader = new BufferedReader(new FileReader("./data/tasklist.txt"));
+                BufferedReader reader = new BufferedReader(new FileReader(this.filepath));
                 BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
                 String lineToRemove = task.storedTaskString();
@@ -119,9 +119,9 @@ public class Storage {
                 break;
 
             case MARK_DONE:
-                File taskFile = new File("./data/tasklist.txt");
+                File taskFile = new File(this.filepath);
                 File temFile = new File("./data/myTemFile.txt");
-                BufferedReader br = new BufferedReader(new FileReader("./data/tasklist.txt"));
+                BufferedReader br = new BufferedReader(new FileReader(this.filepath));
                 BufferedWriter bw = new BufferedWriter(new FileWriter(temFile));
 
                 String lineToMarkDone = task.storedTaskString();
