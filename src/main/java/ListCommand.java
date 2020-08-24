@@ -13,7 +13,7 @@ public class ListCommand extends Command{
      * @param storage writing of the save file
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        if(tasks.getTasks().size() == 0) {
+        if (tasks.getTasks().size() == 0) {
             ui.printOutput("\tList is empty! Start adding some tasks");
         } else {
             System.out.println("\t Here are the tasks in your list:");

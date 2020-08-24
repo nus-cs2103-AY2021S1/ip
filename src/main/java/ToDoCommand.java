@@ -1,5 +1,5 @@
 /**
- * Adds the todos entry into Duke's list
+ * Adds the todos entry into Duke's list.
  */
 public class ToDoCommand extends Command {
     public ToDoCommand(String input) {
@@ -7,15 +7,16 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * Executes the command to add the todos entry
-     * @param tasks list of tasks given
-     * @param ui handles the output to print
-     * @param storage writes the save file
-     * @throws InvalidInputException if input of todos is wrong
-     * @throws InvalidSaveFileException if writing the save file goes wrong
+     * Executes the command to add the todos entry.
+     *
+     * @param tasks List of tasks given.
+     * @param ui Handles the output to print.
+     * @param storage Writes the save file.
+     * @throws InvalidInputException If input of todos is wrong.
+     * @throws InvalidSaveFileException If writing the save file goes wrong.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidSaveFileException {
-        if(super.input.length() <= 5) {
+        if (super.input.length() <= 5) {
             throw new InvalidInputException("\t☹ OOPS!!! The description of a todo cannot be empty.");
         }
         ToDos task = new ToDos(super.input.substring(5));
@@ -26,8 +27,8 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * Lets the main logic know that it can not quit yet
-     * @return false to prevent the loop for exiting
+     * Lets the main logic know that it can not quit yet.
+     * @return False to prevent the loop for exiting.
      */
     public boolean isExit() {
         return false;

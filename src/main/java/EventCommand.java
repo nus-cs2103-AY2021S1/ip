@@ -24,7 +24,7 @@ public class EventCommand extends Command{
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateTimeFormatException,
             InvalidInputException, InvalidSaveFileException {
-        if(super.input.length() <= 6) {
+        if (super.input.length() <= 6) {
             throw new InvalidInputException("\t☹ OOPS!!! The description of an event cannot be empty.");
         }
         String[] splitWord = super.input.split("/");

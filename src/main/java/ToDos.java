@@ -3,7 +3,7 @@
  * into Duke
  */
 public class ToDos extends Task {
-    public ToDos( String taskDesc) {
+    public ToDos (String taskDesc) {
         super(taskDesc);
     }
 
