@@ -16,7 +16,7 @@ public class DateTimeHandler {
         try {
             return LocalDateTime.parse(dateTime, STANDARD_DATETIME_FORMAT);
         } catch (DateTimeParseException e) {
-            throw new DukeException(dateTime + "is an invalid datetime format! Please use "
+            throw new DukeException(dateTime + " is an invalid datetime format! Please use "
                     + STANDARD_DATETIME_FORMAT_STRING + " (24hr)");
         }
     }

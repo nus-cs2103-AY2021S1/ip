@@ -8,7 +8,7 @@ public class DateTimeHandlerTest {
      * Tests to see if parseDateTime handles Strings properly.
      */
     @Test
-    public void parseDateTime_validStrings_success() {
+    public void parseDateTime_stringInputs_success() {
         String input1 = "21-09-2020 0800";
         String input2 = "21-09-2020 0800-21-09-2020 1000";
         String input3 = "23-09-2020 1000";

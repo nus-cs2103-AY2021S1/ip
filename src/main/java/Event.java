@@ -23,6 +23,12 @@ public class Event extends Task {
      */
     public Event(String taskDescription) {
         super(taskDescription.split(SPLITTER)[0]);
+        String[] details = taskDescription.split(SPLITTER);
+        if (details.length == 1) {
+            throw new DukeException("Please specify a timing!");
+        } else if (details.length > 2) {
+            throw new DukeException("Please follow the format of \"{task} /at {deadline}\"");
+        }
         processEventTimingString(taskDescription.split(SPLITTER)[1]);
     }
 
@@ -97,8 +103,8 @@ public class Event extends Task {
             throw new DukeException("Invalid completion status! Ensure that it is either 0 or 1");
         }
         Event event = new Event(details[2], details[3]);
-        boolean done = details[1].equals("1");
-        if (done) {
+        boolean isDone = details[1].equals("1");
+        if (isDone) {
             event.markDone();
         }
         return event;

@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Encapsulates Tasks with deadlines.
@@ -12,8 +13,8 @@ public class Deadline extends Task {
     /** Symbol representing the type of Task this is */
     protected static final String SYMBOL = "D";
 
-    /** Deadline of the task represented by a String */
-    protected String deadline;
+    /** Deadline of the task */
+    protected LocalDateTime deadline;
 
     /**
      * Creates a new Deadline object from the full deadline description that includes the deadline.
@@ -21,7 +22,13 @@ public class Deadline extends Task {
      */
     public Deadline(String taskDescription) {
         super(taskDescription.split(SPLITTER)[0]);
-        deadline = taskDescription.split(SPLITTER)[1];
+        String[] details = taskDescription.split(SPLITTER);
+        if (details.length == 1) {
+            throw new DukeException("Please specify a deadline!");
+        } else if (details.length > 2) {
+            throw new DukeException("Please follow the format of \"{task} /by {deadline}\"");
+        }
+        deadline = DateTimeHandler.parseDateTime(taskDescription.split(SPLITTER)[1]);
     }
 
     /**
@@ -31,7 +38,7 @@ public class Deadline extends Task {
      */
     private Deadline(String deadlineDescription, String deadline) {
         super(deadlineDescription);
-        this.deadline = deadline;
+        this.deadline = DateTimeHandler.parseDateTime(deadline);
     }
 
     /**
@@ -41,7 +48,16 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s (by: %s)", SYMBOL, super.toString(), deadline);
+        return String.format("[%s]%s (by: %s)", SYMBOL, super.toString(),
+                getTimingString());
+    }
+
+    /**
+     * Adjusts the String forms of the start and end timing for output
+     * @return string of the start and end timings
+     */
+    private String getTimingString() {
+        return DateTimeHandler.STANDARD_DATETIME_FORMAT.format(deadline);
     }
 
     /**
@@ -54,7 +70,7 @@ public class Deadline extends Task {
                 SYMBOL,
                 (isCompleted() ? 1 : 0),
                 description,
-                deadline);
+                getTimingString());
     }
 
     /**
@@ -69,7 +85,12 @@ public class Deadline extends Task {
         } else if (!(details[1].equals("1") || details[1].equals("0"))) {
             throw new DukeException("Invalid completion status! Ensure that it is either 0 or 1");
         }
-        return new Deadline(details[2], details[3]);
+        boolean isDone = details[1].equals("1") ? true : false;
+        Deadline newDeadline = new Deadline(details[2], details[3]);
+        if (isDone) {
+            newDeadline.markDone();
+        }
+        return newDeadline;
     }
 
 
