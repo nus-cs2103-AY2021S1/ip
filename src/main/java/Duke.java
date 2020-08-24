@@ -1,7 +1,11 @@
+import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
     public static void main(String[] args) throws DukeException {
@@ -31,7 +35,7 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:");
                     Input inputType = inputs.get(numTaskDone - 1);
                     inputType.taskDone();
-                    System.out.println("[/] " + inputType.content + " " + inputType.time);
+                    System.out.println("[/] " + inputType.content + " " + inputType.printTime);
                 } else if (nextLine.startsWith("remove")) {
                     if (nextLine.equals("remove") || nextLine.equals("remove ")) {
                         throw new DukeException("OOPS!!! The description of remove cannot be empty");
@@ -43,9 +47,9 @@ public class Duke {
                     System.out.println("Noted. I've removed this task:");
                     Input inputType = inputs.get(numTaskDone -1);
                     if (inputType.done) {
-                        System.out.println("  " + inputType.id + "[/] " + inputType.content + inputType.time);
+                        System.out.println("  " + inputType.id + "[/] " + inputType.content + inputType.printTime);
                     } else {
-                        System.out.println("  " + inputType.id + "[x] " + inputType.content + inputType.time);
+                        System.out.println("  " + inputType.id + "[x] " + inputType.content + inputType.printTime);
                     }
                     inputs.remove(numTaskDone -1);
                     System.out.println("Now you have " + inputs.size() + " tasks in the list.");
@@ -65,22 +69,22 @@ public class Duke {
                         throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                     }
                     int charLoc = nextLine.indexOf("/by");
-                    Deadline deadline = new Deadline(nextLine.substring(9, charLoc), nextLine.substring(charLoc + 3));
+                    Deadline deadline = new Deadline(nextLine.substring(9, charLoc), nextLine.substring(charLoc + 4));
                     inputs.add(deadline);
                     int count = inputs.size();
                     System.out.println("Got it. I've added this task: \n" + "  [D][x] " + deadline.content +
-                            deadline.time + "\n Now you have " + count + " tasks in the list");
+                            deadline.printTime + "\n Now you have " + count + " tasks in the list");
                     Storage.writeToFile(inputs);
                 } else if (nextLine.startsWith("event")) {
                     if (nextLine.equals("event") || nextLine.equals("event ")) {
                         throw new DukeException("OOPS!!! The description of an event cannot be empty.");
                     }
                     int charLoc = nextLine.indexOf("/at");
-                    Event event = new Event(nextLine.substring(6, charLoc), nextLine.substring(charLoc + 3));
+                    Event event = new Event(nextLine.substring(6, charLoc), nextLine.substring(charLoc + 4));
                     inputs.add(event);
                     int count = inputs.size();
                     System.out.println("Got it. I've added this task: \n" + "  [E][x] " + event.content +
-                            event.time + "\n Now you have " + count + " tasks in the list");
+                            event.printTime + "\n Now you have " + count + " tasks in the list");
                     Storage.writeToFile(inputs);
                 } else if (nextLine.equals("list")) {
                     if (inputs.size() == 0) {
@@ -91,11 +95,11 @@ public class Duke {
                         for (int i = 1; i <= len; i++) {
                             Input inputType = inputs.get(i - 1);
                             if (inputType.done) {
-                                System.out.println(i + ". " + inputType.id + "[/] " + inputType.content + " " +
-                                        inputType.time);
+                                System.out.println(i + ". " + inputType.id + "[/] " + inputType.content +
+                                        inputType.printTime);
                             } else {
-                                System.out.println(i + ". " + inputType.id + "[x] " + inputType.content + " " +
-                                        inputType.time);
+                                System.out.println(i + ". " + inputType.id + "[x] " + inputType.content + 
+                                        inputType.printTime);
                             }
                         }
                     }
@@ -116,7 +120,8 @@ public class Duke {
         boolean done;
         String content;
         String id;
-        String time;
+        LocalDate time;
+        String printTime;
 
         Input(String content) {
             this.content = content;
@@ -137,13 +142,15 @@ public class Duke {
         Todo(String content) {
             super(content);
             this.id = "[T]";
-            this.time = "";
+            this.time = null;
+            this.printTime = "";
         }
 
         Todo(boolean done, String content) {
             super(done, content);
             this.id = "[T]";
-            this.time = "";
+            this.time = null;
+            this.printTime = "";
         }
     }
 
@@ -151,14 +158,16 @@ public class Duke {
 
         Deadline(String content, String deadlineTime) {
             super(content);
-            this.time = "(by:" + deadlineTime + ")";
+            this.time = LocalDate.parse(deadlineTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             this.id = "[D]";
+            this.printTime = "(" + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
 
         Deadline(boolean done, String content, String deadlineTime) {
             super(done, content);
-            this.time = "(by:" + deadlineTime + ")";
+            this.time = LocalDate.parse(deadlineTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             this.id = "[D]";
+            this.printTime = "(" + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
     }
 
@@ -166,14 +175,16 @@ public class Duke {
 
         Event(String content, String eventTime) {
             super(content);
-            this.time = "(at:" + eventTime + ")";
+            this.time = LocalDate.parse(eventTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             this.id = "[E]";
+            this.printTime = "(" + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
 
         Event(boolean done, String content, String eventTime) {
             super(done, content);
-            this.time = "(at:" + eventTime + ")";
+            this.time = LocalDate.parse(eventTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             this.id = "[E]";
+            this.printTime = "(" + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
     }
     
