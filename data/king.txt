@@ -1,3 +1,0 @@
-T@1@sing
-D@1@meeting@2019-03-02T14:00
-T@1@run

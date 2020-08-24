@@ -1,3 +1,4 @@
+clear list
 blah
 todo read book
 deadline return book /by 2/03/2020 1400

@@ -1,8 +1,2 @@
 D@1@return book@2020-03-02T14:00
 E@0@project meeting@Mon 2-4pm
-T@0@read book
-D@0@return book@2020-03-02T14:00
-E@0@project meeting@Mon 2-4pm
-T@0@read book
-D@0@return book@2020-03-02T14:00
-E@0@project meeting@Mon 2-4pm
