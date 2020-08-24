@@ -66,6 +66,21 @@ public class TaskList {
         task.markAsDone(true);
     }
 
+    public String filteredToString(String matchString) {
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < taskList.size(); i++) {
+            if(taskList.get(i).description.contains(matchString)) {
+                sb.append(i + 1)
+                        .append(". ")
+                        .append(taskList.get(i).toString());
+                if (i < taskList.size() - 1) {
+                    sb.append("\n");
+                }
+            }
+        }
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
