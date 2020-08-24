@@ -56,7 +56,6 @@ public class DukeTest {
     public void Test2()  {
         try {
             FileWriter fw = new FileWriter("text-ui-test/input.txt");
-
             fw.append("event book club /at 12:00-14:00\n");
             fw.append("todo read book\n");
             fw.append("deadline submission /by 2019 12 12\n");
@@ -66,8 +65,7 @@ public class DukeTest {
             fw.append("bye\n");
             fw.close();
             FileWriter fileWriter = new FileWriter("text-ui-test/EXPECTED.TXT");
-
-            fileWriter.write("  ____________________________________________________________\n" +
+            fileWriter.append("  ____________________________________________________________\n" +
                     "  Hello! I'm Duke\n" +
                     "  What can I do for you?\n" +
                     "  ____________________________________________________________\n" +
@@ -124,12 +122,10 @@ public class DukeTest {
                     "  Bye. Hope to see you again soon!\n" +
                     "  ____________________________________________________________\n" +
                     "\n");
-            File f = new File("text-ui-test/EXPECTED.TXT");
-            Scanner sc = new Scanner(f);
-            System.out.println(sc.nextLine());
+            fileWriter.close();
              Duke.main(new String[10]);
-            //boolean equal = equal("text-ui-test/EXPECTED.TXT", "text-ui-test/ACTUAL.TXT");
-            //assertTrue(equal);
+            boolean equal = equal("text-ui-test/EXPECTED.TXT", "text-ui-test/ACTUAL.TXT");
+            assertTrue(equal);
         }catch (IOException f){
 
         }
@@ -137,19 +133,18 @@ public class DukeTest {
     @Test
     public void Test3(){
         try {
-            /*FileWriter fw = new FileWriter("text-ui-test/input.txt");
-            FileWriter fileWriter = new FileWriter("text-ui-test/EXPECTED.TXT");
-            fw.append("event concert /at 12:00-10:00\n");
-            fw.append("todo buy book\n");
-            fw.append("done 1\n");
-            fw.append("event book club /at 12:00-10:00\n");
-            fw.append("delete 2\n");
-            fw.append("deadline submission /by 2020 11 14\n");
-            fw.append("list\n");
-            fw.append("blah\n");
-            fw.append("bye\n");
-            fw.close();*/
-            FileWriter fileWriter = new FileWriter("text-ui-test/EXPECTED.TXT");
+         FileWriter fw = new FileWriter("text-ui-test/input.txt");
+         FileWriter fileWriter = new FileWriter("text-ui-test/EXPECTED.TXT");
+         fw.write("event concert /at 12:00-10:00\n" +
+                 "todo buy book\n" +
+                 "done 1\n" +
+                 "event book club /at 12:00-10:00\n" +
+                 "delete 2\n" +
+                 "deadline submission /by 2020 11 14\n" +
+                 "list\n" +
+                 "blah\n" +
+                 "bye\n");
+         fw.close();
             fileWriter.write("  ____________________________________________________________\n" +
                     "  Hello! I'm Duke\n" +
                     "  What can I do for you?\n" +
@@ -166,14 +161,14 @@ public class DukeTest {
                     "\n" +
                     "  Got it. I've added this task:\n" +
                     "  [T][✗] buy book\n" +
-                    "  Now you have 1 tasks in the list.\n" +
+                    "  Now you have 4 tasks in the list.\n" +
                     "  ____________________________________________________________\n" +
                     "\n" +
                     "done 1\n" +
                     "  ____________________________________________________________\n" +
                     "\n" +
                     "   Nice! I've marked this task as done:\n" +
-                    "   [T][✓] buy book\n" +
+                    "   [E][✓] book club(at: 12:00-14:00)\n" +
                     "  ____________________________________________________________\n" +
                     "\n" +
                     "event book club /at 12:00-10:00\n" +
@@ -185,7 +180,9 @@ public class DukeTest {
                     "delete 2\n" +
                     "  ____________________________________________________________\n" +
                     "\n" +
-                    "  '☹' OOPS!!! The ID is not yet defined.\n" +
+                    "   Noted. I've removed this task:\n" +
+                    "   [T][✗] read book\n" +
+                    "  Now you have 4 tasks in the list.\n" +
                     "  ____________________________________________________________\n" +
                     "\n" +
                     "deadline submission /by 2020 11 14\n" +
@@ -193,15 +190,17 @@ public class DukeTest {
                     "\n" +
                     "  Got it. I've added this task:\n" +
                     "  [D][✗] submission(by: 14 Nov 2020)\n" +
-                    "  Now you have 2 tasks in the list.\n" +
+                    "  Now you have 5 tasks in the list.\n" +
                     "  ____________________________________________________________\n" +
                     "\n" +
                     "list\n" +
                     "  ____________________________________________________________\n" +
                     "\n" +
                     "   Here are the tasks in your list:\n" +
-                    "  1.[T][✓] buy book\n" +
-                    "  2.[D][✗] submission(by: 14 Nov 2020)\n" +
+                    "  1.[E][✓] book club(at: 12:00-14:00)\n" +
+                    "  3.[D][✗] submission(by: 12 Dec 2019)\n" +
+                    "  4.[T][✗] buy book\n" +
+                    "  5.[D][✗] submission(by: 14 Nov 2020)\n" +
                     "  ____________________________________________________________\n" +
                     "\n" +
                     "blah\n" +
@@ -216,21 +215,14 @@ public class DukeTest {
                     "  Bye. Hope to see you again soon!\n" +
                     "  ____________________________________________________________\n" +
                     "\n");
-
-            //System.out.println(sc.nextLine());
-            //Duke.main(new String[10]);
+            fileWriter.close();
+            Duke.main(new String[10]);
             boolean equal = equal("text-ui-test/EXPECTED.TXT", "text-ui-test/ACTUAL.TXT");
-            //assertTrue(equal);
+            assertTrue(equal);
         }catch (IOException f){
 
         }
     }
-    @Test
-    public void testing() throws IOException {
-        FileWriter fileWriter = new FileWriter("text-ui-test/EXPECTED.TXT");
-        FileWriter f = new FileWriter("text-ui-test/input.txt");
-        f.write("haha");
-        fileWriter.write("haha");
-    }
+
 
 }
