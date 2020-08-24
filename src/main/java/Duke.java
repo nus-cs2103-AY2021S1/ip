@@ -10,7 +10,7 @@ public class Duke {
             this.storage = new Storage(filePath);
             storage.loadData(tasks);
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            ui.showErrorLoad(e.getMessage());
             tasks.empty();
         }
     }

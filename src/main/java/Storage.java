@@ -8,6 +8,10 @@ import java.util.Scanner;
 public class Storage {
     protected File data;
 
+    public Storage() {
+        //do nothing
+    }
+
     public Storage (String filePath) throws DukeException {
         String folder = filePath.split("/")[0];
         String file = filePath.split("/")[1];

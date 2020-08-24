@@ -29,6 +29,10 @@ public class Ui {
         System.out.println(SPACE1 + errorMessage);
     }
 
+    public void showErrorLoad(String errorMessage) {
+        System.out.println("\n" + errorMessage);
+        System.out.println("Initialize an empty TaskList!\n");
+    }
     public void showLine() {
         System.out.println(LINE_BREAK);
     }
