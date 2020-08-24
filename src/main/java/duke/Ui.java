@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner sc;
 
-    Ui() {
+    public Ui() {
         this.sc = new Scanner(System.in);
     }
     public void showWelcome() {

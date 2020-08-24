@@ -17,6 +17,7 @@ public class Deadline extends Task {
     public String getDate() {
         return this.date;
     }
+
     private String convertDate() {
         String d1 = "";
         String[] descriptions = this.date.split(" ");
