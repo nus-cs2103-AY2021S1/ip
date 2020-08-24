@@ -23,6 +23,46 @@ class Task {
         this.isDone = true;
     }
 
+    public String getTypeLetter() {
+        // dummy value
+        return "";
+    }
+}
+
+class Todo extends Task {
+    Todo(String message) {
+        super(message);
+    }
+
+    @Override
+    public String getTypeLetter() {
+        // dummy value
+        return "[T]";
+    }
+}
+
+class Event extends Task {
+    Event(String message) {
+        super(message);
+    }
+
+    @Override
+    public String getTypeLetter() {
+        // dummy value
+        return "[E]";
+    }
+}
+
+class Deadline extends Task {
+    Deadline(String message) {
+        super(message);
+    }
+
+    @Override
+    public String getTypeLetter() {
+        // dummy value
+        return "[D]";
+    }
 }
 
 public class Duke {
@@ -39,10 +79,11 @@ public class Duke {
     public static void main(String[] args) {
         // greeting and exit messages strings
         // list and mark strings
-        String messageHello = "Hello! I'm Duke\n" + SPACE + " " + "What can I do for you?";
-        String messageBye = "Bye. Hope to see you again soon!";
-        String messageList = "Here are the tasks in your list:\n";
-        String messageMarked = "Nice! I've marked this task as done:\n";
+        final String messageHello = "Hello! I'm Duke\n" + SPACE + " " + "What can I do for you?";
+        final String messageBye = "Bye. Hope to see you again soon!";
+        final String messageList = "Here are the task(s) in your list:\n";
+        final String messageMarked = "Nice! I've marked this task as done:\n";
+        final String messageAdded = "Got it. I've added this task:\n";
 
         // set up scanner
         Scanner scanner = new Scanner(System.in);
@@ -57,6 +98,8 @@ public class Duke {
         // echo the command or say bye
         while (scanner.hasNextLine()) {
             String currentCommand = scanner.nextLine();
+            String taskType = currentCommand.split(" ")[0];
+
             if (currentCommand.equals("bye")) {
                 System.out.println(format(messageBye));
                 scanner.close();
@@ -66,20 +109,44 @@ public class Duke {
                 System.out.print(SPACE + messageList);
                 int counter = 1;
                 for (Task task : list) {
-                    System.out.println(SPACE + " " + counter + "." + task.getStatusIcon()
-                            + task.getMessage());
+                    System.out.println(SPACE + " " + counter + "." + task.getTypeLetter()
+                            + task.getStatusIcon() + task.getMessage());
                     counter++;
                 }
                 System.out.println(SPACE + LINE);
-            } else if (currentCommand.split(" ")[0].equals("done")) {
-                int index = Integer.parseInt(currentCommand.split(" ")[1]) - 1;
-                Task task = list.get(index);
-                task.setDone();
-                System.out.println(format(messageMarked + SPACE + "   "
-                        +task.getStatusIcon() + task.getMessage()));
             } else {
-                list.add(new Task(currentCommand));
-                System.out.println(format("added: " + currentCommand));
+                try {
+                    String priorCommand = currentCommand.split(" ")[0];
+                    String extraCommand = currentCommand.split(" ", 2)[1];
+                    if (priorCommand.equals("done")) {
+                        int index = Integer.parseInt(extraCommand) - 1;
+                        Task task = list.get(index);
+                        task.setDone();
+                        System.out.println(format(messageMarked + SPACE + "   "
+                                + task.getTypeLetter() + task.getStatusIcon() + task.getMessage()));
+                    } else {
+                        Task task;
+                        if (priorCommand.equals("deadline")) {
+                            task = new Deadline(extraCommand);
+                        } else if (priorCommand.equals("event")) {
+                            task = new Event(extraCommand);
+                        } else if (priorCommand.equals("todo")) {
+                            task = new Todo(extraCommand);
+                        } else {
+                            // error
+                            // throw exception
+                            // dummy initialization
+                            task = new Task("");
+                        }
+
+                        list.add(task);
+                        System.out.println(format(messageAdded + SPACE + "   "
+                                + task.getTypeLetter() + task.getStatusIcon() + task.getMessage()
+                                + "\n " + SPACE + "Now you have " + list.size() + " task(s) in the list."));
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                    // handle exception
+                }
             }
         }
     }
