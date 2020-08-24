@@ -9,9 +9,13 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class Storage {
+    /** The task list */
     private ArrayList<String> lines;
+    /** The directoryPath */
     private String directoryPath;
+    /** The filePath */
     private String filePath;
+    /** The File object with filePath as its param */
     private File data;
 
     /**
