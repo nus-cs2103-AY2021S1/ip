@@ -1,2 +1,2 @@
-T|0| helloworld
-E|0| shave head | sunday
+T|0|shave head
+D|1|do work|sunday

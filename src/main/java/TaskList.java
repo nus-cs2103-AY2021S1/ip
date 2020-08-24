@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 
 public class TaskList {
-    ArrayList<Task> taskList = new ArrayList<>();
+    ArrayList<Task> taskList = new ArrayList<Task>();
 
     public Task addTask(String taskType, String taskDescription) {
         Task newTask;

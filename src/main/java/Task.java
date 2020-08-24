@@ -23,8 +23,8 @@ public class Task {
 
     public String writeToFile() {
         return (this.status.equals(Status.COMPLETED) ? "1" : "0")
-                + "|" + this.description
-                + (this.date.isBlank() ? "" : ("|" + this.date));
+                + "|" + this.description.strip()
+                + (this.date.isBlank() ? "" : ("|" + this.date.strip()));
     }
 
     public String toString() {
