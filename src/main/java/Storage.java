@@ -50,7 +50,7 @@ public class Storage {
         // creates data directory if it does not exist
         file.getParentFile().mkdirs();
 
-        // creates duke.txt if it does not exist
+        // creates tasks.txt if it does not exist
         if (!file.exists()) {
             file.createNewFile();
         }
@@ -79,7 +79,6 @@ public class Storage {
                 cur.markAsDone();
             }
             TaskList.taskList.add(cur);
-//            longCommand = sc.next();
         }
         sc.close();
     }
