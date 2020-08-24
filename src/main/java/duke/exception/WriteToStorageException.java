@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class WriteToStorageException extends DukeException {
     @Override
     public String getMessage() {

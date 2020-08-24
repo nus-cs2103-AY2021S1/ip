@@ -1,5 +1,8 @@
-import java.time.LocalDateTime;
-import java.util.Scanner;
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.task.Ui;
 
 public class Duke {
 

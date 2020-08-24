@@ -1,5 +1,14 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.exception.DukeException;
+import duke.exception.InvalidArgumentException;
+import duke.task.Task;
+import duke.task.Ui;
+
 public class DeleteCommand implements Command {
-    private int index;
+    private final int index;
 
     public DeleteCommand(int index) {
         this.index = index;

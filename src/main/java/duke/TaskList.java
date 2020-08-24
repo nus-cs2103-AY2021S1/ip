@@ -1,5 +1,9 @@
+package duke;
+
+import duke.exception.WriteToStorageException;
+import duke.task.*;
+
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +22,7 @@ public class TaskList {
     public Storage getStore() {
         return store;
     }
-    void addTask(Task task) throws WriteToStorageException {
+    public void addTask(Task task) throws WriteToStorageException {
         taskList.add(task);
         try {
             store.writeData(task);
@@ -26,7 +30,7 @@ public class TaskList {
             throw new WriteToStorageException();
         }
     }
-    void doneTask(int index) throws WriteToStorageException {
+    public void doneTask(int index) throws WriteToStorageException {
         taskList.get(index).markAsDone();
         try {
             store.rewriteData(taskList);

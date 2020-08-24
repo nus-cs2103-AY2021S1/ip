@@ -1,18 +1,22 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+package duke;
+
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.exception.EmptyArgumentException;
+import duke.exception.InvalidArgumentException;
+import duke.exception.InvalidCommandException;
+import duke.task.*;
+
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class Parser {
 
     private static Command parseDone(String input) throws DukeException {
         if(input.matches("done\\s*")) {
-            throw new EmptyArgumentException("Task Index");
+            throw new EmptyArgumentException("duke.task.Task Index");
         }
         if(!input.matches("done \\d+")) {
-            throw new InvalidArgumentException("Task Index");
+            throw new InvalidArgumentException("duke.task.Task Index");
         }
         String[] arr = input.split(" ");
         int index = Integer.parseInt(arr[1]) - 1;
@@ -49,10 +53,10 @@ public class Parser {
     }
     private static Command parseDelete(String input) throws DukeException {
         if(input.matches("delete\\s*")) {
-            throw new EmptyArgumentException("Task Index");
+            throw new EmptyArgumentException("duke.task.Task Index");
         }
         if(!input.matches("delete \\d+")) {
-            throw new InvalidArgumentException("Task Index");
+            throw new InvalidArgumentException("duke.task.Task Index");
         }
         String[] arr = input.split(" ");
         int index = Integer.parseInt(arr[1]) - 1;

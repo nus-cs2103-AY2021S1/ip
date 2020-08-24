@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.exception.DukeException;
+import duke.exception.InvalidArgumentException;
+import duke.task.Ui;
+
 public class DoneCommand implements Command {
     private int index;
     public DoneCommand(int index) {

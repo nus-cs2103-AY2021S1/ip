@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class CorruptedDataFileException extends DukeException {
 
     public CorruptedDataFileException() {
