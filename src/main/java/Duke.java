@@ -2,71 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    enum Type {
-        TODO, DEADLINE, EVENT;
-    }
-
-    static class Task {
-        boolean completed = false;
-        Type type;
-        String name;
-
-        Task(String name) {
-            this.name = name;
-        }
-
-//        Task(String name, Type type) {
-//            this.name = name;
-//            this.type = type;
-//        }
-
-        public void setCompleted() {
-            completed = true;
-        }
-
-        @Override
-        public String toString() {
-            return (completed ? "[✓]" : "[✗]") + " " + name;
-        }
-
-    }
-
-    static class Todo extends Task {
-        Todo(String name) {
-            super(name);
-        }
-
-        @Override
-        public String toString() {
-            return "[T]" + super.toString();
-        }
-    }
-
-    static class Deadline extends Task {
-        String deadline;
-        Deadline(String name, String deadline) {
-            super(name);
-            this.deadline = deadline;
-        }
-
-        @Override
-        public String toString() {
-            return "[D]" + super.toString() + " (by: " + deadline + ")";
-        }
-    }
-
-    static class Event extends Task {
-        String time;
-        Event(String name, String time) {
-            super(name);
-            this.time = time;
-        }
-
-        @Override
-        public String toString() {
-            return "[T]" + super.toString() + " (at: " + time + ")";
-        }
-    }
+    static ArrayList<Task> list = new ArrayList<>();
 
     static boolean isNum(String s) {
         if (s == null) {
@@ -82,14 +18,14 @@ public class Duke {
 
     static Task createTask(String s) throws DukeException {
         String[] task = s.split(" ");
-        Type type;
+        Task.Type type;
         if (task.length > 0) {
             if (task[0].equals("todo")) {
-                type = Type.TODO;
+                type = Task.Type.TODO;
             } else if (task[0].equals("deadline")) {
-                type = Type.DEADLINE;
+                type = Task.Type.DEADLINE;
             } else if (task[0].equals("event")) {
-                type = Type.EVENT;
+                type = Task.Type.EVENT;
             } else {
                 throw new DukeException(DukeException.IGNORE);
             }
@@ -121,8 +57,6 @@ public class Duke {
                 "\t____________________________________________________________\n");
     }
 
-    static ArrayList<Task> list = new ArrayList<>();
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String s;
@@ -130,7 +64,6 @@ public class Duke {
                 "\tWhat can I do for you?\n");
         while(!(s = scanner.nextLine()).equals("bye")) {
             String[] done = s.split(" ");
-//            String[] task = new String[2];
             if (done.length == 2 && (done[0].equals("done") || done[0].equals("delete")) && isNum(done[1])
                     && Integer.parseInt(done[1]) <= list.size() && Integer.parseInt(done[1]) > 0) {
                 if(done[0].equals("done")) {
@@ -164,29 +97,9 @@ public class Duke {
                     }
                 }
             }
-//            else if (done.length > 0 &&
-//                    (done[0].equals("todo") ||
-//                            (done[0].equals("deadline") /*&& (task = s.split(" /by ")).length == 2*/) ||
-//                            (done[0].equals("event") /*&& (task = s.split(" /at ")).length == 2*/))){
-//                if(done[0].equals("todo")) {
-//                    if(done.length < 2) {
-//                        print("\t☹ OOPS!!! The description of a todo cannot be empty.\n");
-//                        continue;
-//                    }
-////                    list.add(new Todo(s.replaceFirst("todo ", "")));
-////                    list.add(new Todo(done[1]));
-//                } else if(done[0].equals("deadline")) {
-////                    list.add(new Deadline(task[0].replaceFirst("deadline ", ""), task[1]));
-//                } else {
-////                    list.add(new Event(task[0].replaceFirst("event ", ""), task[1]));
-//                }
-//                print("\tGot it. I've added this task: \n" +
-//                        "\t" + list.get(list.size()-1) + "\n" +
-//                        "\tNow you have " + list.size() + " tasks in the list.\n");
-//            } else {
-//                print("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
-//            }
         }
+
         print("\tBye. Hope to see you again soon!\n");
+
     }
 }
