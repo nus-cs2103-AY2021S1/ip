@@ -93,6 +93,17 @@ public class Command {
                 ui.onAdd(newTask, tasks.size());
                 break;
         }
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Command) {
+            Command c = (Command) o;
+            return this.type.equals(c.type);
+        } else {
+            return false;
+        }
     }
 }

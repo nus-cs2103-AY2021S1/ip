@@ -29,4 +29,16 @@ public class Task {
     public String toString() {
         return ("[" + (isDone ? "V" : "X") + "] " + desc);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Task) {
+            Task c = (Task) o;
+            return this.desc.equals(c.desc);
+        } else {
+            return false;
+        }
+    }
 }
