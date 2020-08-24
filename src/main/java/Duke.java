@@ -1,5 +1,12 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
 
@@ -86,14 +93,72 @@ public class Duke {
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-
     }
 
-    public static void echo(){
+    public static ArrayList<Task> reader(File file) throws FileNotFoundException {
+        Scanner s = new Scanner(file);
+        ArrayList<Task> list = new ArrayList<>();
+        while (s.hasNextLine()) {
+            String line = s.nextLine();
+            String splitOn = "\\s*-\\s*";
+            String[] words = line.split(splitOn);
+            int done = Integer.parseInt(words[1]);
+            if (words.length == 3) {
+                ToDo toDo = new ToDo(words[2]);
+                if (done == 1) {
+                    toDo.done();
+                }
+                list.add(toDo);
+            } else {
+                if (words[0].equals("[E]")) {
+                    Event event = new Event(words[2], words[3]);
+                    if (done == 1) {
+                        event.done();
+                    }
+                    list.add(event);
+                } else {
+                    Deadline deadline = new Deadline(words[2], words[3]);
+                    if (done == 1) {
+                        deadline.done();
+                    }
+                    list.add(deadline);
+                }
+            }
+        }
+        return list;
+    }
+
+    public static void fileUpdate(ArrayList<Task> list, Path path) throws IOException {
+        FileWriter fw = new FileWriter(path.toString());
+        for (Task t : list) {
+            int done = t.isDone ? 1 : 0;
+            if (t instanceof Event) {
+                fw.write("[E]-" + done + "-" + t.desc + "-" +
+                        ((Event) t).at + System.getProperty("line.separator"));
+            } else if (t instanceof Deadline) {
+                fw.write("[D]-" + done + "-" + t.desc + "-" +
+                        ((Deadline) t).by + System.getProperty("line.separator"));
+            } else {
+                fw.write("[T]-" + done + "-" + t.desc +
+                        System.getProperty("line.separator"));
+            }
+        }
+        fw.close();
+    }
+
+    public static void echo() throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
+        Path path = Paths.get("src/main/java/data/duke.txt");
+        if (Files.exists(path)) {
+            ArrayList<Task> current = reader(new File(path.toString()));
+            list.addAll(current);
+        } else {
+            File f = new File(path.toString());
+        }
+
         while (scanner.hasNextLine()) {
-            String line =scanner.nextLine();
+            String line = scanner.nextLine();
             if (line.equals("bye")) {
                 System.out.println("Bye! Hope to see you again ;)");
                 break;
@@ -109,9 +174,10 @@ public class Duke {
                     try {
                         int index = compDel(line, list.size());
                         list.get(index).done();
+                        fileUpdate(list, path);
                         System.out.println("Nice! I've marked this task as done:");
                         System.out.println(list.get(index).toString());
-                    } catch (DukeException e) {
+                    } catch (DukeException | IOException e) {
                         System.out.println(e.getMessage());
                     }
                 } else if (words[0].equals("delete")) {
@@ -119,20 +185,22 @@ public class Duke {
                         int index = compDel(line, list.size());
                         Task task = list.get(index);
                         list.remove(index);
+                        fileUpdate(list, path);
                         System.out.println("Noted. I've removed this task:");
                         System.out.println(task.toString());
                         System.out.println("Now you have " + list.size() + " tasks in the list.");
-                    } catch (DukeException e) {
+                    } catch (DukeException | IOException e) {
                         System.out.println(e.getMessage());
                     }
                 } else {
                     try {
                         Task task = taskClassify(line);
                         list.add(task);
+                        fileUpdate(list, path);
                         System.out.println("Got it. I've added this task:");
                         System.out.println("  " + task.toString());
                         System.out.println("Now you have " + list.size() + " tasks in the list.");
-                    } catch (DukeException e) {
+                    } catch (DukeException | IOException e) {
                         System.out.println(e.getMessage());
                     }
                 }
@@ -140,7 +208,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
