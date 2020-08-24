@@ -2,6 +2,9 @@ import main.java.Task;
 import main.java.TaskDoneException;
 import main.java.TaskManager;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -57,6 +60,8 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         TaskManager taskManager = new TaskManager();
+        File file = new File("src/data/duke.txt");
+        taskManager.readFile(file);
         echo("Duke at your service. How may I help?");
         outerLoop:
         while (sc.hasNext()) {
@@ -64,16 +69,23 @@ public class Duke {
             String[] words = interpretInput(input);
             String command = words[0];
             switch (command) {
-            case "bye" :
-                echo("Bye. See you again, bro!");
-                break outerLoop;
+            case "bye":
+                try {
+                    FileWriter fw = new FileWriter(file);
+                    fw.write(taskManager.toSaveFormat());
+                    fw.close();
+                    echo("Bye. See you again, bro!");
+                    break outerLoop;
+                } catch (IOException err) {
+                    System.out.println("Error saving data to the file");
+                }
             case "done":
                 try {
                     int index = Integer.parseInt(words[1]);
                     taskManager.doTask(index);
                     echo("Nice! I have marked this task as done:\n" +
                             taskManager.getTaskStatus(index));
-                } catch (NumberFormatException err){
+                } catch (NumberFormatException err) {
                     echo("Error. Please key in an integer after \"done\"");
                 } catch (IndexOutOfBoundsException err) {
                     echo("Error. You don't have task #" + words[1] +
@@ -128,7 +140,7 @@ public class Duke {
                     Task deletedTask = taskManager.deleteTask(index);
                     echo("Nice! I have deleted this task:\n" +
                             deletedTask);
-                } catch (NumberFormatException err){
+                } catch (NumberFormatException err) {
                     echo("Error. Please key in an integer after \"done\"");
                 } catch (IndexOutOfBoundsException err) {
                     echo("Error. You don't have task #" + words[1] +
@@ -137,7 +149,7 @@ public class Duke {
                 break;
             //When command does not match any of those above
             default:
-                echo("OOPS!!! I don't know what does it mean by: \"" + input + "\"" );
+                echo("OOPS!!! I don't know what does it mean by: \"" + input + "\"");
                 break;
             }
         }
