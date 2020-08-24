@@ -3,8 +3,15 @@ package duke.command;
 import duke.*;
 import duke.exception.*;
 
+/**
+ * Represents command that is not recognised by chat bot.
+ */
 public class UnknownCommand extends Command {
 
+    /**
+     * Class constructor.
+     * @param command String parsed by Parser object.
+     */
     public UnknownCommand(String command) {
         super(command);
     }

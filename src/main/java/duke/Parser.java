@@ -3,6 +3,9 @@ package duke;
 import duke.command.*;
 import duke.exception.*;
 
+/**
+ * Parse user inputs and translate them into commands to be executed by the chat bot.
+ */
 public class Parser {
 
     private static final String BYE = "bye";
@@ -13,6 +16,12 @@ public class Parser {
     private static final String LIST = "list";
     private static final String TODO = "todo";
 
+    /**
+     * Parses the user input to determine what command the user intended to run.
+     * @param input String representing user input.
+     * @return A Command object.
+     * @throws DukeEmptyArgumentException If argument of done and delete commands are empty.
+     */
     public static Command parse(String input) throws DukeEmptyArgumentException {
         String command = input.strip();
         String[] commandWordArray = command.split(" ");

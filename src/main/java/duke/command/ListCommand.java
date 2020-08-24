@@ -2,8 +2,15 @@ package duke.command;
 
 import duke.*;
 
+/**
+ * Represents command to show list of tasks.
+ */
 public class ListCommand extends Command {
 
+    /**
+     * Class constructor.
+     * @param command String parsed by Parser object.
+     */
     public ListCommand(String command) {
         super(command);
     }

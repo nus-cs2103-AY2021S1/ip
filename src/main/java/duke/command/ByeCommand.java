@@ -3,8 +3,16 @@ package duke.command;
 import duke.*;
 import java.io.IOException;
 
+/**
+ * Represents a command to shut down chat bot.
+ */
 public class ByeCommand extends Command {
 
+    /**
+     * Class constructor
+     * @param command String parsed by Parser object
+     * @param isExit Boolean indicating if chat bot should shut down.
+     */
     public ByeCommand(String command, boolean isExit) {
         super(command, true);
     }

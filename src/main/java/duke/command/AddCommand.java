@@ -6,8 +6,16 @@ import duke.task.*;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a command to add a task.
+ */
 public class AddCommand extends Command {
 
+    /**
+     * Class constructor.
+     * @param command
+     * @param extra
+     */
     public AddCommand(String command, String extra) {
         super(command, extra);
     }
