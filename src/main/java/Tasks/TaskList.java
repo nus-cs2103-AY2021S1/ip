@@ -173,7 +173,7 @@ public class TaskList {
      */
     public String searchTask(String keyword) {
         int taskId = 0;
-        StringBuilder results = new StringBuilder("Here is your results:");
+        StringBuilder results = new StringBuilder("Here is the result:");
 
         for (int i = 0; i < this.taskListLen(); i++) {
             Task task = this.taskList.get(i);

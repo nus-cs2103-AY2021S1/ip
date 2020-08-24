@@ -21,4 +21,6 @@ done 5
 delete 3
 delete 5
 list
+find text
+find hello
 bye

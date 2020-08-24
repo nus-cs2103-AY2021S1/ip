@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
 
-    private Storage store = new Storage("test.txt");
-    private TaskList taskList = new TaskList(store);
+    private final Storage store = new Storage("test.txt");
+    private final TaskList taskList = new TaskList(store);
 
     @Test
     public void addTask() {
@@ -50,6 +50,14 @@ public class TaskListTest {
                 + "1. [T][✘] read book\n"
                 + "2. [T][✘] return book\n"
                 + "3. [T][✘] borrow book";
+        assertEquals(expResult, actResult);
+    }
+
+    @Test
+    public void searchTask() {
+        String actResult = this.taskList.searchTask("read");
+        String expResult = "Here is the result:\n"
+                + "1. [T][✘] read book";
         assertEquals(expResult, actResult);
     }
 
