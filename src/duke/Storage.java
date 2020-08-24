@@ -8,13 +8,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage for loading and saving tasks to file.
+ */
 public class Storage {
     private String filePath;
 
+    /** Creates a new Storage with the given filePath.
+     *
+     * @param filePath a relative URL giving the base location of the file to write to
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /** Saves the tasks to the file located at filePath.
+     * Tasks are saved in the format
+     * "<taskCategory> | <taskStatus> | <taskDescription> | <taskTime>".
+     *
+     * @param tasks
+     */
     public void save(TaskList tasks) {
         try {
             String fileData = tasks.getAllTasksPlainText();
@@ -26,11 +39,11 @@ public class Storage {
         }
     }
 
-    public void delete() {
-        File fw = new File(this.filePath);
-        System.out.println(fw.delete());
-    }
-
+    /** Loads tasks from the file located at filePath.
+     *
+     * @return A array of strings, each representing a newline found in the file.
+     * @throws DukeException if there is no file at filePath.
+     */
     public String[] load() throws DukeException {
         try {
             File file = new File(this.filePath);

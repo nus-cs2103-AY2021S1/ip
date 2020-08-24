@@ -3,10 +3,21 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 
+/**
+ * Entry point of the Duke application.
+ * Initializes the application and starts the interaction with the user.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * Returns a Duke.
+     *
+     * @param filePath Location of file to load tasks from.
+     * @return a duke for the current program.
+     */
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -23,10 +34,9 @@ public class Duke {
         return this.tasks;
     }
 
-    public Storage getStorage() {
-        return this.storage;
-    }
-
+    /**
+     * Runs the program until termination.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -45,6 +55,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program with each of the strings in the argument. For testing purposes.
+     * @param input test commands for Duke to carry out.
+     */
     public void testRun(String[] input) {
         ui.showWelcome();
         for (String line : input) {
@@ -62,7 +76,6 @@ public class Duke {
             }
         }
     }
-
 
     public static void main(String[] args) {
          new Duke("data/tasks.txt").run();
