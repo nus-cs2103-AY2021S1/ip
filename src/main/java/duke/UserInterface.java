@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.List;
 
 public class UserInterface {
@@ -16,7 +18,7 @@ public class UserInterface {
     private static final String INVALID_TODO_MESSAGE = "    Sorry todo cannot be empty ";
     private static final String INVALID_DELETE_MESSAGE = "    Sorry delete cannot be empty ";
 
-    private static final String GREET_USER_LINE_1 = "Hello! I'm Duke";
+    private static final String GREET_USER_LINE_1 = "Hello! I'm duke.Duke";
     private static final String GREET_USER_LINE_2 = "What can I do for you?";
 
     private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
