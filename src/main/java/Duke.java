@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -56,6 +59,7 @@ public class Duke {
         UNDEFINED_EVENT_TIME,
         WRONG_TYPE,
         UNRECOGNIZED,
+        WRONG_TIME_FORMAT,
     }
     
     private enum Commands {
@@ -145,6 +149,10 @@ public class Duke {
             message = " Event date cannot be empty :( \n" +
                     " Terminating Hotline... \n";
             break;
+        case WRONG_TIME_FORMAT:
+            message = " I cannot recognize the date you put in :( \n" +
+                    " Terminating Hotline... \n";
+            break;
         default:
             message = " Command not recognized :( \n" +
                     " Terminating Hotline... \n";
@@ -196,7 +204,7 @@ public class Duke {
                     }
                     String description;
                     String[] content;
-                    String time;
+                    LocalDate time;
                     switch (command) {
                     case TODO:
                         description = input.substring(5);
@@ -210,7 +218,7 @@ public class Duke {
                             generateException(Errors.UNDEFINED_DEADLINE_TIME);
                         }
                         description = content[0];
-                        time = content[1];
+                        time = LocalDate.parse(content[1]);
                         tasks.add(new Deadline(description, false, time));
                         taskCount += 1;
                         describe(taskCount - 1);
@@ -221,7 +229,7 @@ public class Duke {
                             generateException(Errors.UNDEFINED_EVENT_TIME);
                         }
                         description = content[0];
-                        time = content[1];
+                        time = LocalDate.parse(content[1]);
                         tasks.add(new Event(description, false, time));
                         taskCount += 1;
                         describe(taskCount - 1);
@@ -238,6 +246,8 @@ public class Duke {
             }
         } catch(IllegalArgumentException error) { 
             generateException(Errors.UNRECOGNIZED);
+        } catch(DateTimeParseException error) {
+            generateException(Errors.WRONG_TIME_FORMAT);
         }
     }
 
