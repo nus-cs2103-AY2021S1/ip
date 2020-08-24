@@ -14,7 +14,7 @@ public class Duke {
 
     private static String DATA_PATHNAME = "data/duke.txt";
 
-    private List<Task> tasks;
+    private TaskList tasks;
     private Storage storage;
 
     private Ui ui = new Ui();
@@ -40,8 +40,8 @@ public class Duke {
                 break;
             }
             case UPDATE: {
-                int currentIndex = tasks.indexOf(task);
-                fileContent.set(currentIndex, convertTaskToText(task));
+                //int currentIndex = tasks.indexOf(task);
+                //fileContent.set(currentIndex, convertTaskToText(task));
                 break;
             }
             case DELETE: {
@@ -53,72 +53,15 @@ public class Duke {
         fw.close();
     }
 
-    void addTask(String task, String date, TaskType taskType) throws DukeException {
-        try {
-            Task t;
-            switch (taskType) {
-                case TODO: {
-                    t = new TodoTask(task);
-                    tasks.add(t);
-                    break;
-                }
-                case DEADLINE: {
-                    t = new DeadlineTask(task, date);
-                    tasks.add(t);
-                    break;
-                }
-                case EVENT: {
-                    t = new EventTask(task, date);
-                    tasks.add(t);
-                    break;
-                }
-                default:
-                    throw new DukeException("Invalid Task Type");
-            }
-
-            writeToFile(FileWriterCommand.APPEND, t);
-            System.out.println("Got it. I've added this task:\n " + t);
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        } catch (IOException exception) {
-            System.out.println(exception);
-        }
-
-    }
-
-    void completeTask(int index) {
-        try {
-            Task completedTask = tasks.get(index - 1);
-            completedTask.markAsDone();
-            writeToFile(FileWriterCommand.UPDATE, completedTask);
-            System.out.println("Nice! I've marked this task as done:\n " + completedTask);
-        } catch (IOException exception) {
-            System.out.println(exception);
-        }
-    }
-
-    void deleteTask (int index) {
-        try  {
-        Task deletedTask = tasks.get(index - 1);
-        tasks.remove(index - 1);
-
-        writeToFile(FileWriterCommand.DELETE, deletedTask);
-
-        System.out.println("Noted. I've removed this task:\n" + deletedTask);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-
-        } catch (IOException exception) {
-            System.out.println(exception);
-        }
-    }
 
     void initializeChatbot() {
         ui.greet();
         storage = new Storage(DATA_PATHNAME);
         try {
-            tasks = storage.load();
+            tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             e.printStackTrace();
-            tasks = new ArrayList<>();
+            tasks = new TaskList();
         }
         Scanner sc = new Scanner(System.in);
         boolean hasEnded = false;
@@ -147,7 +90,8 @@ public class Duke {
                         if (task.isEmpty()) {
                             throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
-                        addTask(task,null,TaskType.TODO);
+                        tasks.addTask(task,null,TaskType.TODO);
+                        System.out.println(tasks);
                         break;
                     }
                     case DEADLINE: {
@@ -158,7 +102,8 @@ public class Duke {
                         if (task.length < 2) {
                             throw new InvalidInputException("☹ OOPS!!! The deadline of a deadline task cannot be empty.");
                         }
-                        addTask(task[0], task[1], TaskType.DEADLINE);
+                        tasks.addTask(task[0], task[1], TaskType.DEADLINE);
+                        System.out.println(tasks);
                         break;
                     }
                     case EVENT: {
@@ -169,7 +114,8 @@ public class Duke {
                         if (task.length < 2) {
                             throw new InvalidInputException("☹ OOPS!!! The timing of an event task cannot be empty.");
                         }
-                        addTask(task[0], task[1], TaskType.EVENT);
+                        tasks.addTask(task[0], task[1], TaskType.EVENT);
+                        System.out.println(tasks);
                         break;
                     }
                     case DONE: {
@@ -177,7 +123,7 @@ public class Duke {
                         if (index > tasks.size() || index < 1) {
                             throw new InvalidIndexException("☹ OOPS!!! There is no such task.");
                         }
-                        completeTask(index);
+                        tasks.completeTask(index);
                         break;
                     }
                     case DELETE: {
@@ -185,7 +131,8 @@ public class Duke {
                         if (index > tasks.size() || index < 1) {
                             throw new InvalidIndexException("☹ OOPS!!! There is no such task.");
                         }
-                        deleteTask(index);
+                        tasks.deleteTask(index);
+                        System.out.println(tasks);
                         break;
                     }
                     default: {
