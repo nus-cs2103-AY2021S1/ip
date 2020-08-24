@@ -1,5 +1,8 @@
 package main.java.farrell.duke;
 
+/**
+ * Encapsulates data for a todo task.
+ */
 public class ToDo extends Task {
 
     ToDo(String description) throws DukeException{
