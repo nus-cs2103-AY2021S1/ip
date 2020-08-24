@@ -2,9 +2,9 @@ public class Task {
     private final String description;
     private boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
@@ -12,7 +12,11 @@ public class Task {
     }
 
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
+    }
+
+    public String toSaveData() {
+        return String.valueOf(isDone ? 1 : 0) + " | " + description;
     }
 
     @Override

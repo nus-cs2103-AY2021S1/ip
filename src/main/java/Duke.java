@@ -1,6 +1,11 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Duke {
     private final static List<Task> tasks = new ArrayList<>();
@@ -43,52 +48,64 @@ public class Duke {
                 + (tasks.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
-    public static void addTodo(String description) throws DukeException {
+    public static Todo addTodo(String description) throws DukeException {
+        return addTodo(description, false);
+    }
+
+    public static Todo addTodo(String description, boolean isDone) throws DukeException {
         if (description.equals("")) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
 
-        Todo todo = new Todo(description);
+        Todo todo = new Todo(description, isDone);
 
         tasks.add(todo);
-        printAddTask(todo);
+        return todo;
     }
 
-    public static void addDeadline(String input) throws DukeException {
+    public static Deadline addDeadline(String input) throws DukeException {
         int index = input.indexOf(" /by ");
         String description = index == -1 ? input : input.substring(0, index);
         String by = index == -1 ? "" : input.substring(index + 5);
 
+        return addDeadline(description, by, false);
+    }
+
+    public static Deadline addDeadline(String description, String by, boolean isDone) throws DukeException {
         if (description.equals("")) {
             throw new DukeException("The description of a deadline cannot be empty.");
         } else if (by.equals("")) {
             throw new DukeException("The date/time of an event cannot be empty.");
         }
 
-        Deadline deadline = new Deadline(description, by);
+        Deadline deadline = new Deadline(description, by, isDone);
 
         tasks.add(deadline);
-        printAddTask(deadline);
+        return deadline;
     }
 
-    public static void addEvent(String input) throws DukeException {
+    public static Event addEvent(String input) throws DukeException {
         int index = input.indexOf(" /at ");
         String description = index == -1 ? input : input.substring(0, index);
         String at = index == -1 ? "" : input.substring(index + 5);
 
+        return addEvent(description, at, false);
+    }
+
+    public static Event addEvent(String description, String at, boolean isDone) throws DukeException {
         if (description.equals("")) {
             throw new DukeException("The description of an event cannot be empty.");
         } else if (at.equals("")) {
             throw new DukeException("The date/time of an event cannot be empty.");
         }
 
-        Event event = new Event(description, at);
+        Event event = new Event(description, at, isDone);
 
         tasks.add(event);
-        printAddTask(event);
+        return event;
     }
 
-    public static void doTask(String otherInput) throws DukeException {
+    public static Task doTask(String otherInput) throws DukeException {
         if (otherInput.equals("")) {
             throw new DukeException("Task number required for the done command.");
         } else if (!otherInput.chars().allMatch(Character::isDigit)) {
@@ -104,11 +121,10 @@ public class Duke {
         Task task = tasks.get(taskNo - 1);
 
         task.markAsDone();
-        printPrompt("Nice! I've marked this task as done:\n  "
-                + task);
+        return task;
     }
 
-    public static void deleteTask(String otherInput) throws DukeException {
+    public static Task deleteTask(String otherInput) throws DukeException {
         if (otherInput.equals("")) {
             throw new DukeException("Task number required for the delete command.");
         } else if (!otherInput.chars().allMatch(Character::isDigit)) {
@@ -124,9 +140,7 @@ public class Duke {
         Task task = tasks.get(taskNo - 1);
 
         tasks.remove(task);
-        printPrompt("Noted. I've removed this task:\n  "
-                + task + "\n" + "Now you have " + tasks.size()
-                + (tasks.size() == 1 ? " task" : " tasks") + " in the list.");
+        return task;
     }
 
     public static void listTasks() throws DukeException {
@@ -143,10 +157,56 @@ public class Duke {
         printPrompt(output.toString());
     }
 
+    public static void saveTasks() throws IOException {
+        Path path = Paths.get("data");
+        Files.createDirectories(path);
+        Path file = Paths.get("data/duke.txt");
+
+        List<String> data = tasks.stream().map(Task::toSaveData).collect(Collectors.toList());
+        Files.write(file, data);
+    }
+
+    public static void loadTasks() throws IOException, DukeException {
+        Path file = Paths.get("data/duke.txt");
+
+        if (Files.exists(file)) {
+            List<String> data = Files.readAllLines(file);
+
+            for (String line : data) {
+                String[] params = line.split("\\s\\|\\s");
+                String type = params[0];
+                String description = params[2];
+                boolean isDone = params[1].equals("1");
+
+                switch (type) {
+                    case "T":
+                        addTodo(description, isDone);
+
+                        break;
+                    case "D":
+                        addDeadline(description, params[3], isDone);
+
+                        break;
+                    case "E":
+                        addEvent(description, params[3], isDone);
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         printGreeting();
+        try {
+            loadTasks();
+        } catch (DukeException | IOException e) {
+            printPrompt(e.getMessage());
+        }
 
         String input = scanner.nextLine();
 
@@ -166,23 +226,31 @@ public class Duke {
 
                         break;
                     case "done":
-                        doTask(otherInput);
+                        Task doneTask = doTask(otherInput);
+                        printPrompt("Nice! I've marked this task as done:\n  "
+                                + doneTask);
 
                         break;
                     case "delete":
-                        deleteTask(otherInput);
+                        Task deletedTask = deleteTask(otherInput);
+                        printPrompt("Noted. I've removed this task:\n  "
+                                + deletedTask + "\n" + "Now you have " + tasks.size()
+                                + (tasks.size() == 1 ? " task" : " tasks") + " in the list.");
 
                         break;
                     case "todo":
-                        addTodo(otherInput);
+                        Todo todo = addTodo(otherInput);
+                        printAddTask(todo);
 
                         break;
                     case "deadline":
-                        addDeadline(otherInput);
+                        Deadline deadline = addDeadline(otherInput);
+                        printAddTask(deadline);
 
                         break;
                     case "event":
-                        addEvent(otherInput);
+                        Event event = addEvent(otherInput);
+                        printAddTask(event);
 
                         break;
                     default:
@@ -196,6 +264,11 @@ public class Duke {
         }
 
         scanner.close();
+        try {
+            saveTasks();
+        } catch (IOException e) {
+            printPrompt(e.getMessage());
+        }
         printPrompt("Bye. Hope to see you again soon!");
     }
 }
