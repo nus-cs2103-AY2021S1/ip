@@ -1,4 +1,4 @@
-first line
-second line
-first line
-second line
+T | 1 | read book
+D | 0 | return book | June 6th
+E | 1 | project meeting | Aug 6th 2-4pm
+T | 0 | join sports club

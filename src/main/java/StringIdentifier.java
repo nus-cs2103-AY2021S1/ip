@@ -5,6 +5,11 @@ public class StringIdentifier {
     private static boolean isProgramRunning = true;
     private static List<Task> lst = new ArrayList<>();
 
+    public StringIdentifier() {}
+    public StringIdentifier(List<Task> lst) {
+        this.lst = lst;
+    }
+
     public boolean isRunning() {
         return this.isProgramRunning;
     }
