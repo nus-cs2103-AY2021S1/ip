@@ -10,12 +10,4 @@ public class Event extends TimeTask {
     public String getDateDescriptor() {
         return "at";
     }
-
-    public static void eventCommand(TaskList taskList, String[] args) throws  DukeException {
-        String description = args[0].trim();
-        if(args.length!=2 || description.equals(""))
-            throw DukeException.Errors.EVENT_BAD_FORMAT.create();
-        String time = args[1];
-        taskList.add(new Event(description, time));
-    }
 }

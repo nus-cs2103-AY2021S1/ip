@@ -10,12 +10,4 @@ public class Deadline extends TimeTask {
     public String getDateDescriptor() {
         return "by";
     }
-
-    public static void deadlineCommand(TaskList taskList, String[] args) throws  DukeException {
-        String description = args[0].trim();
-        if(args.length!=2 || description.equals(""))
-            throw DukeException.Errors.DEADLINE_BAD_FORMAT.create();
-        String time = args[1];
-        taskList.add(new Deadline(description, time));
-    }
 }

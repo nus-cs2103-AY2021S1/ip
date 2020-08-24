@@ -3,8 +3,10 @@ import java.util.Optional;
 
 public class Parser {
     private TaskList taskList;
-    public Parser(TaskList taskList) {
+    private Ui ui;
+    public Parser(TaskList taskList, Ui ui) {
         this.taskList = taskList;
+        this.ui = ui;
     }
     public void parseAndRun(String input) throws DukeException {
         for (Command command : Command.values()) {
@@ -18,7 +20,7 @@ public class Parser {
             for (int i=1;i<=count;i++) {
                 args[i-1] = matcher.group(i);
             }
-            command.dispatch(this.taskList, args);
+            command.dispatch(this.taskList, this.ui, args);
             return;
         }
         // if we are here means no command has matched

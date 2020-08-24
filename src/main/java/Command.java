@@ -3,35 +3,39 @@ import java.util.regex.Pattern;
 import java.util.Optional;
 
 public enum Command {
-    TODO (Todo::todoCommand,
+    TODO (CommandLibrary.todoCommand,
             DukeException.Errors.TODO_EMPTY_DESCRIPTION,
             "(.*)",
             "todo"),
-    DEADLINE (Deadline::deadlineCommand,
+    DEADLINE (CommandLibrary.deadlineCommand,
             DukeException.Errors.DEADLINE_BAD_FORMAT,
             "(.*?) /by (.*)",
             "deadline"),
-    EVENT (Event::eventCommand,
+    EVENT (CommandLibrary.eventCommand,
             DukeException.Errors.EVENT_BAD_FORMAT,
             "(.*) /at (.*)",
             "event"),
-    LIST (TaskList::listCommand,
+    LIST (CommandLibrary.listCommand,
             DukeException.Errors.UNKNOWN_COMMAND,
             "",
             "list"),
+    BYE (CommandLibrary.byeCommand,
+            DukeException.Errors.UNKNOWN_COMMAND,
+            "",
+            "bye"),
     // TODO add more specific errors for these two below
-    DONE (TaskList::doneCommand,
+    DONE (CommandLibrary.doneCommand,
             DukeException.Errors.UNKNOWN_COMMAND,
             "(\\d+)",
             "done"),
-    DELETE (TaskList::deleteCommand,
+    DELETE (CommandLibrary.deleteCommand,
             DukeException.Errors.UNKNOWN_COMMAND,
             "(\\d+)",
             "delete");
-    private CommandExecutable exec;
-    private DukeException.Errors matchError;
-    private Pattern format;
-    private String name;
+    private final CommandExecutable exec;
+    private final DukeException.Errors matchError;
+    private final Pattern format;
+    private final String name;
 
     Command(CommandExecutable exec, DukeException.Errors matchError, String formatString, String name) {
         this.exec = exec;
@@ -46,8 +50,8 @@ public enum Command {
         return Optional.of(matcher);
     }
 
-    public void dispatch(TaskList taskList, String[] args) throws DukeException {
-        this.exec.run(taskList, args);
+    public void dispatch(TaskList taskList, Ui ui, String[] args) throws DukeException {
+        this.exec.run(taskList, ui, args);
     }
 
     public DukeException matchError(){
