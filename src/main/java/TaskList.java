@@ -1,10 +1,7 @@
-import java.io.*;
 import java.util.ArrayList;
 
-public class TaskList implements Serializable {
+public class TaskList {
     ArrayList<Task> taskList = new ArrayList<>();
-
-    private final static long serialVersionUID = 1234L;
 
     public void showList(){
         int counter = 1;
@@ -13,6 +10,7 @@ public class TaskList implements Serializable {
             counter++;
         }
     }
+
     public int getTaskLength() {
         return taskList.size();
     }
@@ -25,8 +23,7 @@ public class TaskList implements Serializable {
         taskList.remove(task);
     }
 
-    public void addTask(Task task) throws FileNotFoundException {
+    public void addTask(Task task) {
         taskList.add(task);
-        }
     }
-
+}
