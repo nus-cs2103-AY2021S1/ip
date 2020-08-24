@@ -1,3 +1,10 @@
+package duke;
+
+import duke.command.Command;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+
 import java.util.Scanner;
 
 public class Duke {

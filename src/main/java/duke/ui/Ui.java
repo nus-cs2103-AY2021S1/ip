@@ -1,3 +1,4 @@
+package duke.ui;
 public class Ui {
 
     public void showLine() {
