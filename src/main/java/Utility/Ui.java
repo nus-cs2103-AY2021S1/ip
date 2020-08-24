@@ -1,3 +1,5 @@
+package Utility;
+
 public class Ui {
 
     public void showWelcome() {

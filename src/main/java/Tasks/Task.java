@@ -1,8 +1,10 @@
+package Tasks;
+
 public class Task {
     private boolean done;
     private String name;
 
-    Task(String name) {
+    public Task(String name) {
         this.done = false; // new tasks are not done
         this.name = name;
     }
@@ -22,5 +24,9 @@ public class Task {
         } else {
             return "[✗] " + this.name;
         }
+    }
+
+    public String toWrite() {
+        return "";
     }
 }

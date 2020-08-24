@@ -1,3 +1,10 @@
+package Utility;
+
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -39,11 +46,19 @@ public class Storage {
                     newList.add(new Event(line.substring(7, posE), line.substring(posE + 4)));
                 case 'D':
                     int posD = getPosition(line, '/');
+                    /*
+                    System.out.println("posD " +  posD);
+                    System.out.println(line);
+                    System.out.println(line.substring(7, posD));
+                    System.out.println(line.substring(posD + 4));
+                    */
                     newList.add(new Deadline(line.substring(7, posD), line.substring(posD + 4)));
                 default:
                     System.out.println("Can't read line");
             }
         }
+        // NO IDEA WHY IS THERE ANOTHER LAST ELEMENT CAUSING EXCEPTION BUT JUST DELETE IT WTV
+        newList.remove(newList.size()-1);
         return newList;
     }
 
@@ -52,7 +67,12 @@ public class Storage {
         String textToAdd = "";
         // convert ArrayList contents to string
         for (Task t : ls) {
-            textToAdd = textToAdd + t.toString() + "\n";
+            if (t instanceof Event || t instanceof Deadline) {
+                textToAdd = textToAdd + t.toWrite() + "\n";
+            } else {
+                textToAdd = textToAdd + t.toString() + "\n";
+            }
+
         }
         fw.write(textToAdd);
         fw.close();

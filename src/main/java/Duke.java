@@ -1,7 +1,7 @@
+import Utility.*;
+
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
 

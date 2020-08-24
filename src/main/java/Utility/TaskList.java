@@ -1,9 +1,17 @@
+package Utility;
+
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.Todo;
+import Utility.DukeException;
+
 import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> taskList;
 
-    TaskList(ArrayList<Task> taskList) {
+    public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
@@ -50,7 +58,7 @@ public class TaskList {
 
     public void addEvent(String input) throws DukeException {
         if (input.length() <= 6) {
-            throw new DukeException("Exception occurred: Name not found for Event.");
+            throw new DukeException("Exception occurred: Name not found for Tasks.Event.");
         }
         int pos = getPosition(input, '/');
         String description = input.substring(6, pos);
@@ -61,7 +69,7 @@ public class TaskList {
 
     public void addDeadline(String input) throws DukeException {
         if (input.length() <= 9) {
-            throw new DukeException("Exception occurred: Name not found for Deadline.");
+            throw new DukeException("Exception occurred: Name not found for Tasks.Deadline.");
         }
         int pos = getPosition(input, '/');
         String description = input.substring(9, pos);
