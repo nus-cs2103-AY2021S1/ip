@@ -19,4 +19,8 @@ public class Task {
         return "[" + (status ? "\u2713" : "\u2718") + "] " + this.name;
     }
 
+    public String getDate() {
+        return null;
+    }
+
 }
