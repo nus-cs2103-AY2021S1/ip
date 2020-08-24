@@ -4,6 +4,6 @@ public class DukeException extends Exception {
     }
 
     public DukeException(String msg) {
-        super(msg);
+        super("\u2639 OOPS!!! " + msg);
     }
 }
