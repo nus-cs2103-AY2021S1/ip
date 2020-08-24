@@ -14,15 +14,16 @@ public class PersonalAssistant {
         store = new ArrayList<>();
         reader = new Scanner(System.in);
 
-        // Initializes storage folder & file
-        File storageFolder = new File("./data");
-        if (!storageFolder.exists()) {
-            storageFolder.mkdir();
-        }
+        try {
+            // Initializes storage folder & file
+            File storageFolder = new File("./data");
+            storageFolder.mkdir(); // creates folder if it doesn't exist
 
-        File storageFile = new File("./data/duke.txt");
-        if (!storageFile.exists()) {
-            storageFile.createNewFile();
+            File storageFile = new File("./data/duke.txt");
+            storageFile.createNewFile(); // creates file if it doesn't exist
+        } catch (Exception e) {
+            System.out.println("Failed to initialize storage");
+            System.exit(1);
         }
     }
 
