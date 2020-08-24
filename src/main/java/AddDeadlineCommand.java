@@ -1,5 +1,5 @@
-public class DeadlineCommand extends Command {
-    public DeadlineCommand(String[] parsedCommand) {
+public class AddDeadlineCommand extends Command {
+    public AddDeadlineCommand(String[] parsedCommand) {
         super(parsedCommand);
     }
 

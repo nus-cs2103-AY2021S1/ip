@@ -1,5 +1,5 @@
-public class ToDoCommand extends Command {
-    public ToDoCommand(String[] parsedCommand) {
+public class AddToDoCommand extends Command {
+    public AddToDoCommand(String[] parsedCommand) {
         super(parsedCommand);
     }
 
