@@ -1,2 +1,2 @@
 ToDo | done | borrow book
-Event | undone | swimming | 2pm tdy
+Event | done | swimming | 2pm tdy

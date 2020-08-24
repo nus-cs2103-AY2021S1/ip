@@ -14,12 +14,13 @@ public class Duke {
 
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
+        Save save;
 
         //loading
-        Save save = new Save("data/duke.txt");
+        save = new Save("data/duke.txt");
         try {
             tasks = save.read();
-        } catch (FileNotFoundException ex){
+        } catch (FileNotFoundException | SecurityException ex){
             System.err.println(ex.getMessage());
         }
 
