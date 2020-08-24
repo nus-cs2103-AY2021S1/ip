@@ -7,6 +7,7 @@ import task.Deadline;
 import task.Event;
 import task.ToDo;
 
+import exception.InvalidDateException;
 import exception.EmptyTaskException;
 import exception.InvalidCommandException;
 import exception.InvalidIndexException;
@@ -14,7 +15,7 @@ import exception.MissingDateException;
 
 public class Duke {
     private static final String LINES = "____________________\n";
-    private static List<Task> tasks = new ArrayList<>(100);
+    private static final List<Task> tasks = new ArrayList<>(100);
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -30,6 +31,7 @@ public class Duke {
                 String input = sc.nextLine();
                 if (input.equals("bye")) {
                     System.out.println(LINES + farewell + LINES);
+                    sc.close();
                     break;
                 } else if (input.equals("list")) {
                     list();
@@ -42,7 +44,8 @@ public class Duke {
                 } else {
                     addTask(input);
                 }
-            } catch (InvalidCommandException | MissingDateException | InvalidIndexException | EmptyTaskException e) {
+            } catch (InvalidCommandException | MissingDateException | InvalidIndexException
+                    | EmptyTaskException | InvalidDateException e) {
                 System.out.println(e);
             }
         }
@@ -68,8 +71,8 @@ public class Duke {
                 + "\n" + LINES);
     }
 
-    private static void addTask(String task)
-            throws InvalidCommandException, EmptyTaskException, MissingDateException {
+    private static void addTask(String task) throws InvalidCommandException,
+            EmptyTaskException, MissingDateException, InvalidDateException {
         Task newTask;
 
         if (task.startsWith("todo")) {

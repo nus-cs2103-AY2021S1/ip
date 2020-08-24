@@ -1,26 +1,38 @@
 package task;
 
 import exception.EmptyTaskException;
+import exception.InvalidDateException;
 import exception.MissingDateException;
 
-public class Event extends Task {
-    String date;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
-    private Event(String description, String date) {
+public class Event extends Task {
+    private final LocalDate date;
+
+    private Event(String description, LocalDate date) {
         super(description);
         this.date = date;
     }
 
     public static Event create(String task)
-            throws EmptyTaskException, MissingDateException {
+            throws EmptyTaskException, MissingDateException, InvalidDateException {
         if (task.length() <= 6) throw new EmptyTaskException("event");
         String[] taskInfo = task.substring(6).split(" /at ", 2);
         if (taskInfo.length < 2) throw new MissingDateException();
-        return new Event(taskInfo[0], taskInfo[1]);
+        LocalDate dateTime = null;
+        for (DateTimeFormat format : DateTimeFormat.values()) {
+            try {
+                dateTime = LocalDate.parse(taskInfo[1], format.toDateFormat());
+            } catch (DateTimeParseException e) { }
+        }
+        if (dateTime == null) throw new InvalidDateException();
+        return new Event(taskInfo[0], dateTime);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date + ")";
+        String dateTime = date.format(DateTimeFormat.FORMAT5.toDateFormat());
+        return "[E]" + super.toString() + " (at: " + dateTime + ")";
     }
 }
