@@ -1,11 +1,49 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileNotFoundException;
 
 public class Duke {
 
-    public static void main(String[] args) throws DukeException {
+//    static void addTask(String task, ArrayList<Task> store) {
+//        String type = task.split(" ", 2)[0];
+//        String title = task.split(" ", 2)[1];
+//        if (type.equals("todo")) {
+//            store.add(new Todo(title));
+//            System.out.println("Got it. I've added this task:\n" + store.get(store.size() - 1));
+//        } else {
+//            String description = title.split("/", 2)[0];
+//            Task newTask;
+//
+//            if (type.equals("deadline")) {
+//                String by = title.split("/by", 2)[1];
+//                newTask = new Deadline(description, by);
+//                store.add(newTask);
+//            }
+//            if (type.equals("event")) {
+//                String at = title.split("/at", 2)[1];
+//                newTask = new Event(description, at);
+//                store.add(newTask);
+//            }
+//        }
+//    }
+
+    public static void doneTask(ArrayList<Task> store, int num) {
+        store.get(num-1).markAsDone();
+        System.out.println("Nice! This task is marked as done!");
+        System.out.println(store.get(num-1));
+    }
+
+    public static void main(String[] args) throws DukeException, IOException, FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> store = new ArrayList<>();
+        String file2 = "dataa";
+        try {
+            ReadFile.updateContents(file2, store);
+        } catch (FileNotFoundException e) {
+            System.out.println(new DukeException("file not found"));
+        }
 
         System.out.println("Hello! I'm meimei ^_^\nI could scream at you all day!");
         String command = sc.nextLine();
@@ -20,10 +58,11 @@ public class Duke {
                 command = sc.nextLine();
             }
             else if (key.equals("done")) {
-                int k = Integer.parseInt(command.split(" ")[1]);
-                store.get(k-1).markAsDone();
-                System.out.println("Nice! This task is marked as done!");
-                System.out.println(store.get(k-1));
+//                int k = Integer.parseInt(command.split(" ")[1]);
+//                store.get(k-1).markAsDone();
+//                System.out.println("Nice! This task is marked as done!");
+//                System.out.println(store.get(k-1));
+                doneTask(store, Integer.parseInt(command.split(" ")[1]));
                 command = sc.nextLine();
             }
             else if (key.equals("delete")) {
@@ -38,26 +77,7 @@ public class Duke {
             //adding of task
             else {
                 try {
-                    String remain = command.split(" ", 2)[1];
-                    if (key.equals("todo")) {
-                        store.add(new Todo(remain));
-                        System.out.println("Got it. I've added this task:\n" + store.get(store.size() - 1));
-                    } else {
-                        String description = remain.split("/", 2)[0];
-                        Task task = new Task("");
-
-                        if (key.equals("deadline")) {
-                            String by = remain.split("/by", 2)[1];
-                            task = new Deadline(description, by);
-                            store.add(task);
-                        }
-                        if (key.equals("event")) {
-                            String at = remain.split("/at", 2)[1];
-                            task = new Event(description, at);
-                            store.add(task);
-                        }
-                        System.out.println("Got it. I've added this task:\n" + task.toString());
-                    }
+                    Task.addTask(command, store, true);
                     System.out.println("Now you have " + store.size() + " tasks in the list.");
                 } catch (ArrayIndexOutOfBoundsException e) {
                     if (key.equals("todo")) {
@@ -73,6 +93,17 @@ public class Duke {
                     }
                 }
                 command = sc.nextLine();
+            }
+        }
+        if (store.isEmpty()) {
+            WriteFile.writeToFile(file2, "");
+        } else {
+            for (int i = 0; i < store.size(); i++) {
+                if (i == 0) {
+                    WriteFile.writeToFile(file2, store.get(i).inputStyle());
+                } else {
+                    WriteFile.appendToFile(file2, System.lineSeparator() + store.get(i).inputStyle());
+                }
             }
         }
         System.out.println("Bye. Meimei will miss you!");

@@ -5,6 +5,15 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
     }
+    public Deadline(String description, String by, boolean done) {
+        super(description, done);
+        this.by = by;
+    }
+
+    @Override
+    public String inputStyle() {
+        return "deadline " + super.inputStyle() + " /by" + by;
+    }
 
     @Override
     public String toString() {

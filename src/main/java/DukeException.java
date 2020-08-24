@@ -12,6 +12,10 @@ public class DukeException extends Exception {
     @Override
     public String toString() {
         //super(cause);
-        return "☹ OOPS!!! The description of a "+ msg + " cannot be empty.";
+        if (msg.equals("file not found")) {
+            return "no databse found! pls try again ^__^";
+        } else {
+            return "☹ OOPS!!! The description of a " + msg + " cannot be empty.";
+        }
     }
 }
