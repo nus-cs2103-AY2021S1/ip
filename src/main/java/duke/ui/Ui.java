@@ -8,6 +8,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class Ui {
+  /**
+   * Returns a string representing the task list in a human readable format
+   *
+   * @param tasks task list of tasks to be printed
+   * @return a string representing the task list in a human readable format
+   */
   public static String getListString(TaskList tasks) {
     StringBuilder output = new StringBuilder();
     int index = 1;
@@ -18,6 +24,15 @@ public class Ui {
     return output.toString();
   }
 
+  /**
+   * Returns a string representing the list of the tasks that matches the specified date in the task
+   * list in a human readable format
+   *
+   * @param tasks task list of tasks
+   * @param date of the tasks to be found in the output string
+   * @return a string representing the list of the tasks that matches the specified date in the task
+   *     list
+   */
   public static String getListDate(TaskList tasks, LocalDate date) {
     StringBuilder output = new StringBuilder();
     int index = 1;
