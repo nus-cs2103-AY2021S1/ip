@@ -8,7 +8,7 @@ import duke.exception.DukeException;
 
 public abstract class TimeTask extends Task {
     private final LocalDate date;
-    public abstract String getDateDescriptor();
+
     public TimeTask(String description, String dateString) throws DukeException {
         super(description);
         try {
@@ -18,6 +18,8 @@ public abstract class TimeTask extends Task {
         }
     }
 
+    public abstract String getDateDescriptor();
+
     protected String dateString() {
         return this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
@@ -25,10 +27,10 @@ public abstract class TimeTask extends Task {
     @Override
     public String toString() {
         return super.toString()
-                + " ("
-                + this.getDateDescriptor()
-                + ": "
-                + this.dateString()
-                + ")";
+            + " ("
+            + this.getDateDescriptor()
+            + ": "
+            + this.dateString()
+            + ")";
     }
 }

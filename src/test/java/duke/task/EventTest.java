@@ -1,8 +1,9 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 import duke.exception.DukeException;
 
@@ -16,7 +17,7 @@ public class EventTest {
     @Test
     void testRejectsBadInputs() {
         assertThrows(DukeException.class, () ->
-                new Event("test", "bad input"));
+            new Event("test", "bad input"));
     }
 
     @Test

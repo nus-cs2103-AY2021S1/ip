@@ -19,15 +19,13 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializer;
 
 import duke.exception.DukeException;
-import duke.task.TaskList;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Event;
 import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 public class Storage {
-    private final String filePath;
-    private final Gson gsonObject;
     private static final GsonBuilder gsonBuilder = new GsonBuilder();
     private static final JsonSerializer<TaskList> taskListSerializer = (src, typeOfSrc, context) -> {
         JsonArray list = new JsonArray();
@@ -71,8 +69,24 @@ public class Storage {
         }
         return new TaskList(tasks);
     };
+
+    static {
+        gsonBuilder.registerTypeAdapter(TaskList.class, taskListSerializer);
+        gsonBuilder.registerTypeAdapter(TaskList.class, taskListDeserializer);
+    }
+
+    private final String filePath;
+    private final Gson gsonObject;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+        this.gsonObject = gsonBuilder.create();
+    }
+
     private static String parseDate(JsonElement elem) throws JsonParseException {
-        if (elem == null) return null;
+        if (elem == null) {
+            return null;
+        }
         JsonObject obj = elem.getAsJsonObject();
         try {
             int year = obj.get("year").getAsInt();
@@ -82,16 +96,6 @@ public class Storage {
         } catch (NullPointerException e) {
             throw new JsonParseException("Invalid date format.");
         }
-    }
-
-    static {
-        gsonBuilder.registerTypeAdapter(TaskList.class, taskListSerializer);
-        gsonBuilder.registerTypeAdapter(TaskList.class, taskListDeserializer);
-    }
-
-    public Storage(String filePath){
-        this.filePath = filePath;
-        this.gsonObject = gsonBuilder.create();
     }
 
     public void save(TaskList taskList) throws DukeException {
@@ -104,7 +108,9 @@ public class Storage {
 
     public TaskList load() throws DukeException {
         Path path = Paths.get(filePath);
-        if (!path.toFile().isFile()) return new TaskList();
+        if (!path.toFile().isFile()) {
+            return new TaskList();
+        }
         try (Reader reader = Files.newBufferedReader(path)) {
             return gsonObject.fromJson(reader, TaskList.class);
         } catch (IOException e) {
