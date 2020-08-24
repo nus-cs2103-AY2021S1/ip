@@ -39,7 +39,7 @@ public class King {
                     default:
                         loadedItem = new Event(data[2],data[3]);
                 }
-                if (data[1].equals(1)){
+                if (data[1].equals("1")){
                     loadedItem.markAsDone();
                 }
                 items.add(loadedItem);
