@@ -2,9 +2,6 @@ package chatterbox.task;
 
 import chatterbox.Parser;
 
-/**
- * Task with a deadline (must be done by a certain date).
- */
 public class Deadline extends Task {
     private String format(String s) {
         if (s.contains("/")) {
@@ -18,13 +15,8 @@ public class Deadline extends Task {
         }
     }
 
-    /**
-     * Stores the original user input including the command word, then formats and sets task content.
-     *
-     * @param contents  User input without the command word.
-     */
     public Deadline(String contents) {
-        inputString = this.getClass().getSimpleName().toLowerCase() + " " + contents;
+        super.inputString = this.getClass().getSimpleName().toLowerCase() + " " + contents;
         setContents(format(contents));
     }
 

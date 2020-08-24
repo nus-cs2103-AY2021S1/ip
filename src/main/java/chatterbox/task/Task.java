@@ -3,9 +3,6 @@ package chatterbox.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * General task.
- */
 public class Task {
     protected static final DateTimeFormatter DF = DateTimeFormatter.ofPattern("MMM d yyyy HHmm'H'");
     protected LocalDateTime deadline;
@@ -26,11 +23,6 @@ public class Task {
         return isDone;
     }
 
-    /**
-     * Returns the original user input string used to create this task.
-     *
-     * @return Original user input string.
-     */
     public String getInputString() {
         return inputString;
     }

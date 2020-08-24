@@ -23,7 +23,7 @@ public class ParserTest {
     @Test
     public void parse_emptyCommandDescription_exceptionThrown() {
         try {
-            Parser.parseTask("todo");
+            Parser.parse("todo");
             fail();
         } catch (ChatterboxException e) {
             assertEquals("The description of a todo cannot be empty", e.getMessage());
@@ -33,7 +33,7 @@ public class ParserTest {
     @Test
     public void parse_invalidCommand_exceptionThrown() {
         try {
-            Parser.parseTask("todos check");
+            Parser.parse("todos check");
             fail();
         } catch (ChatterboxException e) {
             assertEquals("Invalid command.", e.getMessage());

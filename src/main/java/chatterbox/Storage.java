@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Handles the loading and saving of tasks.
- */
 public class Storage {
     private static final String SAVE_FOLDER_PATH = "./data";
     private static final String SAVE_FILE_PATH = SAVE_FOLDER_PATH + "/chatterbox.txt";
@@ -27,12 +24,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Gets task items from the saved file and parses them into a list of Task objects.
-     *
-     * @return  The list of tasks saved in the file.
-     * @throws IOException  If the file cannot be read or parsed properly.
-     */
     public List<Task> getItems() throws IOException {
         List<Task> items = new ArrayList<>();
         ensureExistence();
@@ -41,7 +32,7 @@ public class Storage {
             String line = scanner.nextLine();
             if (line.strip().equals("")) continue;
             try {
-                Task t = Parser.parseTask(line.substring(line.indexOf(' ') + 1));
+                Task t = Parser.parse(line.substring(line.indexOf(' ') + 1));
                 t.setDone(Boolean.parseBoolean(line.substring(0, line.indexOf(' '))));
                 items.add(t);
             } catch (ChatterboxException | IndexOutOfBoundsException e) {
@@ -51,12 +42,6 @@ public class Storage {
         return items;
     }
 
-    /**
-     * Saves the list of Task objects into the save file in text format.
-     *
-     * @param items List of Task objects to save.
-     * @throws IOException  If the program is unable to write to the save file.
-     */
     public void saveItems(List<Task> items) throws IOException {
         StringBuilder saveText = new StringBuilder();
         for (Task t : items) {
