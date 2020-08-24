@@ -35,7 +35,7 @@ public class task {
         else{
             done = "[X]";
         }
-        return done + " " + this.name;
+        return this.index + ". " + done + " " + this.name;
     }
 
     public String read2(){
