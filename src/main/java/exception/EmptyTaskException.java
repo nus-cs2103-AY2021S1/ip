@@ -9,9 +9,6 @@ public class EmptyTaskException extends Exception {
 
     @Override
     public String toString() {
-        String lines = "____________________\n";
-        return lines + "You can't add a non-existent "
-                + taskType + ", silly!\n"
-                + lines;
+        return "You can't add a non-existent " + taskType + ", silly!";
     }
 }
