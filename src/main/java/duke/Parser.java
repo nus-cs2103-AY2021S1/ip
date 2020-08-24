@@ -24,10 +24,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    Parser() {
-    }
 
-    public Command parseCommand(String input) throws InvalidUsageException, UnknownCommandException {
+    public static Command parseCommand(String input) throws InvalidUsageException, UnknownCommandException {
         String[] commands = parseInput(input);
         CommandTypes command;
 
@@ -123,7 +121,7 @@ public class Parser {
      * @param input user input
      * @return an array, first element is command, second element is input
      */
-    private String[] parseInput(String input) {
+    private static String[] parseInput(String input) {
         return input.split("\\s+", 2);
     }
 }

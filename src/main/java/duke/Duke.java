@@ -11,12 +11,10 @@ import java.util.Scanner;
 public class Duke {
     TaskList taskList;
     Storage storage;
-    Parser parser;
     Ui ui;
 
     public Duke() {
         ui = new Ui();
-        parser = new Parser();
         storage = new Storage();
     }
 
@@ -32,7 +30,7 @@ public class Duke {
 
                 // handle commands
                 try {
-                    Command command = parser.parseCommand(input);
+                    Command command = Parser.parseCommand(input);
                     command.execute(taskList, ui, storage);
                     isExit = command.isExit();
                 } catch (InvalidUsageException | UnknownCommandException ex) {
