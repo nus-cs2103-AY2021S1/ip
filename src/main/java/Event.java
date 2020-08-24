@@ -3,9 +3,9 @@
  * An Event is a task that start at a specific time and ends at a specific time.
  */
 public class Event extends Task {
-    private final String time;
+    private final TimeWrapper time;
 
-    private Event(String description, String time, boolean isDone) {
+    private Event(String description, TimeWrapper time, boolean isDone) {
         super(description, isDone);
         this.time = time;
     }
@@ -17,7 +17,7 @@ public class Event extends Task {
      * @return New uncompleted event.
      */
     public static Event getEvent(String description, String time) {
-        return new Event(description, time, false);
+        return new Event(description, TimeWrapper.getTimeWrapper(time), false);
     }
 
     /**
@@ -26,6 +26,14 @@ public class Event extends Task {
     @Override
     public Task markComplete() {
         return new Event(description, time, true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isSameTime(String date) {
+        return time.equals(TimeWrapper.getTimeWrapper(date));
     }
 
     @Override
