@@ -45,6 +45,40 @@ public class TaskList {
     }
 
     /**
+     * Returns a array of Tasks within the taskList that match the searchTerm.
+     *
+     * @param searchTerm
+     * @return a array of Tasks within the taskList that match the searchTerm.
+     */
+    public Task[] findTasks(String searchTerm) {
+        ArrayList<Task> tasksFound = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.getDescription().contains(searchTerm)) {
+                tasksFound.add(task);
+            }
+        }
+        return tasksFound.toArray(new Task[tasksFound.size()]);
+    }
+
+    /**
+     * Returns a array of the string representation of Tasks within the taskList that match the searchTerm.
+     *
+     * @param searchTerm
+     * @return a array of the string representation of Tasks within the taskList that match the searchTerm.
+     */
+    public String[] findTasksToString(String searchTerm) {
+        ArrayList<String> tasksFound = new ArrayList<>();
+        int counter = 1;
+        for (Task task : this.taskList) {
+            if (task.getDescription().contains(searchTerm)) {
+                tasksFound.add(counter + "." + task.toString());
+                counter++;
+            }
+        }
+        return tasksFound.toArray(new String[tasksFound.size()]);
+    }
+
+    /**
      * Deletes a task from the task list.
      *
      * @param taskNumberToMark the position of the task to delete within the tasklist.
@@ -71,6 +105,7 @@ public class TaskList {
      * Adds a task to the taskList.
      *
      * @param newTask the task to be added.
+     *
      * @return the task that was added.
      */
     public Task addTask(Task newTask) {

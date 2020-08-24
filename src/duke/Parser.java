@@ -1,11 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.ListCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
+import duke.command.*;
 
 import duke.exception.CommandNotFoundException;
 import duke.exception.DukeException;
@@ -105,6 +100,8 @@ public class Parser {
             return new DoneCommand(getTaskNumber());
         case "delete":
             return new DeleteCommand(getTaskNumber());
+        case "find":
+            return new FindCommand(getTaskDescription());
         case "todo":
             return new AddCommand("todo", getTaskMessage());
         case "event":
