@@ -1,5 +1,7 @@
+package task;
+
 public class Todo extends Task {
-    Todo(String item, boolean completed) {
+    public Todo(String item, boolean completed) {
         super(item, completed);
     }
 

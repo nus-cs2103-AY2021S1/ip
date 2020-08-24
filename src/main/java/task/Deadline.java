@@ -1,3 +1,5 @@
+package task;
+
 import java.time.LocalDate;
 
 public class Deadline extends Task {
@@ -5,7 +7,7 @@ public class Deadline extends Task {
     private LocalDate dueDate;
     private String input;
 
-    Deadline(String item, String dateTime, LocalDate dueDate, String input, boolean completed) {
+    public Deadline(String item, String dateTime, LocalDate dueDate, String input, boolean completed) {
         super(item, completed);
         this.dateTime = dateTime;
         this.dueDate = dueDate;

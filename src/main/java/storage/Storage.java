@@ -1,7 +1,11 @@
+package storage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
+import taskList.TaskList;
+import duke.DukeException;
 
 public class Storage {
     private String filePath;

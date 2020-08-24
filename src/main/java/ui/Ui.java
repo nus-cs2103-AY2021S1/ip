@@ -1,4 +1,8 @@
+package ui;
+
 import java.util.Scanner;
+import parser.Parser;
+import duke.DukeException;
 
 public class Ui {
     private String line = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
@@ -6,7 +10,7 @@ public class Ui {
     private boolean ongoing;
     private Parser parser;
 
-    Ui(Parser parser) {
+    public Ui(Parser parser) {
         ongoing = false;
         this.parser = parser;
     }
