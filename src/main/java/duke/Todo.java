@@ -22,8 +22,8 @@ public class Todo extends Task {
      * @return String of .txt format
      */
     @Override
-    public String textFormat() {
-        return "todo, " + super.textFormat();
+    public String getTxtFormat() {
+        return "todo, " + super.getTxtFormat();
     }
 
     /**

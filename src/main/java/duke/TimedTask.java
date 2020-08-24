@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  * Inherits from abstract class Task.
  */
 public abstract class TimedTask extends Task {
-    protected LocalDateTime datetime;
+    protected LocalDateTime dateTime;
     protected static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d-M-yyyy k:mm");
     protected static final DateTimeFormatter printFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh.mma");
 
@@ -21,7 +21,7 @@ public abstract class TimedTask extends Task {
      */
     protected TimedTask(String description, String datetime) {
         super(description);
-        this.datetime = LocalDateTime.parse(datetime, TimedTask.inputFormatter);
+        this.dateTime = LocalDateTime.parse(datetime, TimedTask.inputFormatter);
     }
 
     /**
@@ -30,8 +30,8 @@ public abstract class TimedTask extends Task {
      *
      * @return date and time string.
      */
-    protected String datetimeString() {
-        return this.datetime.format(TimedTask.printFormatter);
+    protected String getDateTimeString() {
+        return this.dateTime.format(TimedTask.printFormatter);
     }
 
     /**
@@ -40,7 +40,7 @@ public abstract class TimedTask extends Task {
      * @return LocalDate date.
      */
     protected LocalDate getDate() {
-        return this.datetime.toLocalDate();
+        return this.dateTime.toLocalDate();
     }
 
 }

@@ -5,7 +5,7 @@ package duke;
  */
 public abstract class Task {
     protected String description;
-    protected boolean done = false;
+    protected boolean isDone = false;
 
     /**
      * Constructor that initializes with description.
@@ -16,17 +16,13 @@ public abstract class Task {
         this.description = description;
     }
 
-    private boolean isDone() {
-        return this.done;
-    }
-
     /**
      * Marks this task as done, and returns this task.
      *
      * @return this Task object.
      */
-    protected Task markAsDone() {
-        this.done = true;
+    protected Task setDone() {
+        this.isDone = true;
         return this;
     }
 
@@ -36,8 +32,8 @@ public abstract class Task {
      *
      * @return String of .txt format
      */
-    protected String textFormat() {
-        return (this.done ? "1, " : "0, ") + this.description;
+    protected String getTxtFormat() {
+        return (this.isDone ? "1, " : "0, ") + this.description;
     }
 
     /**
@@ -47,7 +43,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        String status = this.done ? "[✓]" : "[✗]";
+        String status = (this.isDone) ? "[✓]" : "[✗]";
         return status + " " + description;
     }
 
