@@ -33,6 +33,35 @@
   <!-- All Java AST specific tests live under TreeWalker module. -->
   <module name="TreeWalker">
 
+    <module name="Regexp">
+      <property name="format" value="\Apackage.*"/>
+      <property name="message" value='Check that every class is in a package."' />
+      <property name="severity" value="warning"/>
+    </module>
+
+    <module name="RegexpSinglelineJava">
+      <!-- Checks that Boolean variable names sound like booleans. -->
+      <property name="format" value="(B|b)oolean (?!(has|can|is)).* =" />
+      <property name="message" value='Check that boolean variables are named to sound like booleans."' />
+      <property name="severity" value="warning"/>
+    </module>
+
+    <module name="RegexpSinglelineJava">
+      <!-- Checks that Boolean method names sound like booleans. -->
+      <property name="format" value="(B|b)oolean (?!(has|can|is)).*\(.*\) ?\{" />
+      <property name="message" value='Check that boolean variables are named to sound like booleans."' />
+      <property name="severity" value="warning"/>
+    </module>
+
+    <!--
+    <module name="RegexpSinglelineJava">
+      comment Checks that names for Lists are plural. TODO: somehow this doesnt work /comment
+      <property name="format" value="List ?&lt;.*&gt; .*?(?!s)(;| =)" />
+      <property name="message" value='Check that plural form should be used on names representing a collection of objects.."' />
+      <property name="severity" value="warning"/>
+    </module>
+    -->
+
     <!-- Required to allow exceptions in code style -->
     <module name="SuppressionCommentFilter">
       <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([\w\|]+)"/>
@@ -388,6 +417,10 @@
     </module>
 
     <module name="InvalidJavadocPosition"/>
+
+    <module name="MissingJavadocType">
+      <property name="scope" value="public"/>
+    </module>
 
     <module name="MissingJavadocMethodCheck">
       <property name="minLineCount" value="1"/>
