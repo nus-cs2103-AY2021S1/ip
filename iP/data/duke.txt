@@ -2,4 +2,4 @@ todo homework
 done 1
 todo this
 deadline this /by 2019-10-02
-event event event this /at 2019-10-02
+event event event event this /at 2019-10-02

@@ -1,11 +1,8 @@
-import java.io.FileWriter;
+package duke;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
-import java.io.File;  // Import the File class
-import java.io.FileNotFoundException;
+
 
 public class Duke {
     private Storage storage;
