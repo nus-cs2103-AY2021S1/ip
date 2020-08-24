@@ -26,7 +26,7 @@ public abstract class Command {
     }
 
     public enum CommandType {
-        Bye, Todo, Deadline, Event, Done, Delete, List
+        Bye, Todo, Deadline, Event, Done, Delete, List, Find
     }
 
     Command(CommandType type) {

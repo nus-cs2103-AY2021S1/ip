@@ -73,4 +73,16 @@ public class Ui {
             throw new DukeException("Please type in a command!");
         }
     }
+
+    public void displayMatchingTasks(TaskList filteredTaskList) {
+
+        if (filteredTaskList.getSize() > 0) {
+            System.out.println("Here are the matching tasks in your list");
+            for (int i = 0; i < filteredTaskList.getTaskList().size(); i++) {
+                System.out.println(i + 1 + "." + filteredTaskList.getTaskList().get(i));
+            }
+        } else {
+            System.out.println("You have no matching tasks!");
+        }
+    }
 }

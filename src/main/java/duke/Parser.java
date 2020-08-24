@@ -19,6 +19,7 @@ public class Parser {
     static Pattern done = Pattern.compile("done ([0-9]+)");
     static Pattern delete = Pattern.compile("delete ([0-9]+)");
     static Pattern datePattern = Pattern.compile("^([0-9]{1,2})[/-]([0-9]{1,2})[/-]([0-9]{4}) ([0-9]{4})$");
+    static Pattern find = Pattern.compile("find (.+)");
 
     /**
      * Static method that takes in a String and returns a Command
@@ -73,6 +74,13 @@ public class Parser {
                         return new EventCommand(eventMatcher.group(1), timing);
                     } else {
                         throw new EmptyDescriptionException("event");
+                    }
+                case "find":
+                    Matcher findMatcher = find.matcher(str);
+                    if (findMatcher.find()) {
+                        return new FindCommand(findMatcher.group(1));
+                    } else {
+                        throw new EmptyDescriptionException("find");
                     }
                 default:
                     throw new InvalidInputException();
