@@ -110,6 +110,23 @@ public class Task {
         }
     }
 
+    public ToDo convertToTodo() {
+        ToDo todo = new ToDo(this.description);
+        todo.isDone = this.isDone;
+        return todo;
+    }
+
+    public Deadline convertToDeadline() {
+        Deadline d = new Deadline(this.description, this.getDate());
+        d.isDone = this.isDone;
+        return d;
+    }
+
+    public Event convertToEvent() {
+        Event e = new Event(this.description, this.getDate());
+        e.isDone = this.isDone;
+        return e;
+    }
 
     @Override
     public String toString() {
