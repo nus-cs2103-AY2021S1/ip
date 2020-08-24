@@ -24,6 +24,14 @@ public class ToDo extends Task {
         return new ToDo(description, true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getDataString() {
+        return String.format("T|%d|%s", isDone ? 1 : 0, description);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
