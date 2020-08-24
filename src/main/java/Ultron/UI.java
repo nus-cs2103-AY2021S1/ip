@@ -32,6 +32,10 @@ public class UI {
         return input;
     }
 
+    public void print(String argument){
+        System.out.println(argument);
+    }
+
     public void printEnd() {
         // Print the end message
         showLine();
