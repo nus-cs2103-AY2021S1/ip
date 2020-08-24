@@ -21,7 +21,7 @@ public class Storage {
     private String fileName;
 
     /** Boolean for whether or not Storage should append data to the data file */
-    private boolean appendToFile = false;
+    private boolean canAppendToFile = false;
 
     public Storage(String fileName) {
         this.fileName = fileName;
@@ -29,7 +29,7 @@ public class Storage {
 
     public Storage(String fileName, boolean appendToFile) {
         this.fileName = fileName;
-        this.appendToFile = appendToFile;
+        this.canAppendToFile = appendToFile;
     }
 
     /**
@@ -46,32 +46,33 @@ public class Storage {
                 boolean isDone = taskInfo[1].equals(String.valueOf(1)) ? true : false;
                 String taskName = taskInfo[2];
                 Task taskToAdd;
+
                 switch (taskType) {
-                    case "T":
-                        taskToAdd = new Todo(taskName);
-                        if (isDone) {
-                            taskToAdd.markAsDone();
-                        }
-                        taskList.add(taskToAdd);
-                        break;
-                    case "E":
-                        String at = taskInfo[3];
-                        taskToAdd = new Event(taskName, at);
-                        if (isDone) {
-                            taskToAdd.markAsDone();
-                        }
-                        taskList.add(taskToAdd);
-                        break;
-                    case "D":
-                        String by = taskInfo[3];
-                        taskToAdd = new Deadline(taskName, by);
-                        if (isDone) {
-                            taskToAdd.markAsDone();
-                        }
-                        taskList.add(taskToAdd);
-                        break;
-                    default:
-                        break;
+                case "T":
+                    taskToAdd = new Todo(taskName);
+                    if (isDone) {
+                        taskToAdd.markAsDone();
+                    }
+                    taskList.add(taskToAdd);
+                    break;
+                case "E":
+                    String at = taskInfo[3];
+                    taskToAdd = new Event(taskName, at);
+                    if (isDone) {
+                        taskToAdd.markAsDone();
+                    }
+                    taskList.add(taskToAdd);
+                    break;
+                case "D":
+                    String by = taskInfo[3];
+                    taskToAdd = new Deadline(taskName, by);
+                    if (isDone) {
+                        taskToAdd.markAsDone();
+                    }
+                    taskList.add(taskToAdd);
+                    break;
+                default:
+                    break;
                 }
             }
             return taskList;
@@ -136,23 +137,24 @@ public class Storage {
         String isDone = taskInfo[1].equals(String.valueOf(1)) ? "[\u2713] " : "[\u2718] ";
         String taskName = taskInfo[2];
         String result = "";
+
         switch (taskType) {
-            case "T":
-                result = String.format("[T]%1$s%2$s", isDone, taskName);
-                break;
-            case "E":
-                String at = taskInfo[3];
-                at = LocalDate.parse(at).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-                result = String.format("[E]%1$s%2$s (at: %3$s)", isDone, taskName, at);
-                break;
-            case "D":
-                String by = taskInfo[3];
-                by = LocalDate.parse(by).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-                result = String.format("[D]%1$s%2$s (by: %3$s)", isDone, taskName, by);
-                break;
-            default:
-                result = "There's been an error!";
-                break;
+        case "T":
+            result = String.format("[T]%1$s%2$s", isDone, taskName);
+            break;
+        case "E":
+            String at = taskInfo[3];
+            at = LocalDate.parse(at).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            result = String.format("[E]%1$s%2$s (at: %3$s)", isDone, taskName, at);
+            break;
+        case "D":
+            String by = taskInfo[3];
+            by = LocalDate.parse(by).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            result = String.format("[D]%1$s%2$s (by: %3$s)", isDone, taskName, by);
+            break;
+        default:
+            result = "There's been an error!";
+            break;
         }
         return result;
     }
@@ -190,7 +192,7 @@ public class Storage {
      * @throws IOException if there is a problem reading the file
      */
     protected void writeToFile(String text) throws IOException{
-        FileWriter writer = new FileWriter(this.fileName, this.appendToFile);
+        FileWriter writer = new FileWriter(this.fileName, this.canAppendToFile);
         BufferedWriter bufferedWriter = new BufferedWriter(writer);
         bufferedWriter.write(text);
         bufferedWriter.newLine();
@@ -219,8 +221,8 @@ public class Storage {
      */
     public String printLine(int lineNumber) throws IOException {
         lineNumber = lineNumber - 1;
-        String lineToRemove = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
-        return lineToRemove;
+        String lineToPrint = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
+        return lineToPrint;
     }
 
     /**
@@ -233,9 +235,11 @@ public class Storage {
         File tempFile = new File("duke_data_temp.txt");
         BufferedReader reader = new BufferedReader(new FileReader(currFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
         lineNumber = lineNumber - 1;
         String lineToRemove = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
         String currLine;
+
         while((currLine = reader.readLine()) != null) {
             String trimLine = currLine.trim();
             if (trimLine.equals(lineToRemove)) {
@@ -243,8 +247,10 @@ public class Storage {
             }
             writer.write(currLine + '\n');
         }
+
         writer.close();
         reader.close();
+
         if (currFile.delete()) {
             if (!tempFile.renameTo(currFile)) {
                 fileError();
@@ -264,12 +270,14 @@ public class Storage {
         File tempFile = new File("duke_data_temp.txt");
         BufferedReader reader = new BufferedReader(new FileReader(currFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
         lineNumber = lineNumber - 1;
         String lineToUpdate = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
         String[] taskInfo = lineToUpdate.trim().split(" [|] ");
         taskInfo[1] = String.valueOf(1);
         String doneLine = String.join(" | ", taskInfo);
         String currLine;
+
         while((currLine = reader.readLine()) != null) {
             String trimLine = currLine.trim();
             if (trimLine.equals(lineToUpdate)) {
@@ -278,8 +286,10 @@ public class Storage {
                 writer.write(currLine + '\n');
             }
         }
+
         writer.close();
         reader.close();
+
         if (currFile.delete()) {
             if (!tempFile.renameTo(currFile)) {
                 fileError();
