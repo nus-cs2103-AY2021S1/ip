@@ -30,10 +30,12 @@ public class Ui {
     }
 
     public void printTaskList(TaskList tasks) {
-        for (int i = 0; i < tasks.size(); i++)
+        for (int i = 0; i < tasks.size(); i++) {
             System.out.printf("     %d.%s\n", i + 1, tasks.get(i));
-        if (tasks.size() == 0)
+        }
+        if (tasks.size() == 0) {
             System.out.println("     There are no tasks yet!");
+        }
         System.out.print(SEPARATOR);
     }
 
