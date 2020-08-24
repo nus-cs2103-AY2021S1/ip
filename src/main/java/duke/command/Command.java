@@ -8,6 +8,9 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Stores all the commands to be run.
+ */
 public enum Command {
     TODO(CommandLibrary.todoCommand,
             DukeException.Errors.TODO_EMPTY_DESCRIPTION,

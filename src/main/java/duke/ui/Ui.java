@@ -2,6 +2,9 @@ package duke.ui;
 
 import java.util.Scanner;
 
+/**
+ * Class to handle and abstract Ui (currently stdio) operations.
+ */
 public class Ui {
     private static final String logo =
         "               /,   ,|   ,|     \n"

@@ -8,6 +8,9 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Class to parse raw input from user and run commands from the input.
+ */
 public class Parser {
     private final TaskList taskList;
     private final Ui ui;

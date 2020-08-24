@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Abstract class for Task-related classes to inherit from.
+ */
 public abstract class Task {
     private final String description;
     private boolean isDone;

@@ -3,6 +3,9 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Wrapper for the list of Tasks stored in Duke.
+ */
 public class TaskList {
     private final List<Task> items;
 

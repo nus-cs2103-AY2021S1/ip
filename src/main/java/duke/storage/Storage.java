@@ -25,6 +25,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 
+/**
+ * Class to store TaskList objects as json files.
+ */
 public class Storage {
     private static final GsonBuilder gsonBuilder = new GsonBuilder();
     private static final JsonSerializer<TaskList> taskListSerializer = (src, typeOfSrc, context) -> {

@@ -6,6 +6,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Runs the application.
+ */
 public class Duke {
     private final Parser parser;
     private final Ui ui;
