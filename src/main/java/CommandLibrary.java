@@ -33,9 +33,8 @@ public class CommandLibrary {
         Task selected = taskList.markItem(idx-1);
         ui.systemMessage("afternoon sir i have mark this task done sir:\n  " + selected);
     };
-    public static final CommandExecutable listCommand = (taskList, ui, args) ->  {
+    public static final CommandExecutable listCommand = (taskList, ui, args) ->
         ui.systemMessage(taskList.toString());
-    };
     public static final CommandExecutable byeCommand = (taskList, ui, args) ->  {
         ui.close();
         ui.systemMessage("bye sir thanks for using me sir hope to see you again sir");

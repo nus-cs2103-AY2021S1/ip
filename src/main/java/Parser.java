@@ -2,8 +2,8 @@ import java.util.regex.Matcher;
 import java.util.Optional;
 
 public class Parser {
-    private TaskList taskList;
-    private Ui ui;
+    private final TaskList taskList;
+    private final Ui ui;
     public Parser(TaskList taskList, Ui ui) {
         this.taskList = taskList;
         this.ui = ui;

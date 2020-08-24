@@ -34,7 +34,7 @@ public class Ui {
         this.isActive = false;
     }
     public void welcomeMessage() {
-        this.systemMessage(this.logo);
+        this.systemMessage(logo);
     }
     public void systemMessage(String input) {
         System.out.println(horizontalRule+indent(input)+"\n"+horizontalRule);

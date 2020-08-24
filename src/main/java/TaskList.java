@@ -23,11 +23,11 @@ public class TaskList {
                 + " sir";
     }
     public String toString() {
-        String numberedItems = "";
+        StringBuilder numberedItems = new StringBuilder();
         for (int i=0;i<this.items.size();i++) {
-            numberedItems += (i+1) + ". " + this.items.get(i) + "\n";
+            numberedItems.append(i + 1).append(". ").append(this.items.get(i)).append("\n");
         }
-        return numberedItems;
+        return numberedItems.toString();
     }
     public Task markItem(int idx) {
         Task selected = this.items.get(idx);
