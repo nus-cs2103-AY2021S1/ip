@@ -1,8 +1,10 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Storage class is responsible to save the existing list
@@ -43,9 +45,20 @@ public class Storage {
      * @throws IOException if storage file cannot be found.
      */
     public void handleLoad() throws IOException {
-        BufferedReader taskLoader = new BufferedReader(new FileReader(path));
-        String longCommand = taskLoader.readLine();
-        while (longCommand != null) {
+        File file = new File(this.path);
+
+        // creates data directory if it does not exist
+        file.getParentFile().mkdirs();
+
+        // creates duke.txt if it does not exist
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+
+        Scanner sc = new Scanner(file);
+
+        while (sc.hasNext()) {
+            String longCommand = sc.nextLine();
             String[] keywords = longCommand.split(" \\|\\| ");
             Task cur = null;
             switch (keywords[1]) {
@@ -66,8 +79,8 @@ public class Storage {
                 cur.markAsDone();
             }
             TaskList.taskList.add(cur);
-            longCommand = taskLoader.readLine();
+//            longCommand = sc.next();
         }
-        taskLoader.close();
+        sc.close();
     }
 }

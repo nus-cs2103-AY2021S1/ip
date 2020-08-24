@@ -27,21 +27,12 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
-
-    /**
-     * Determine which filepath to return depending if it is run
-     * from duke class or runtest.bat.
-     */
-    private final static String FILEPATH = System.getProperty("user.dir") + (System.getProperty("user.dir").endsWith("text-ui-test")
-            ? "/saved-tasks.txt"
-            : "/text-ui-test/saved-tasks.txt");
-
     /**
      * Constructor for Duke.
      */
-    public Duke() {
+    public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(FILEPATH);
+        storage = new Storage(filePath);
         taskList = new TaskList();
     }
 
@@ -52,7 +43,7 @@ public class Duke {
      * @throws IOException if file does not exist.
      */
     public static void main(String[] args) throws IOException {
-        new Duke().run();
+        new Duke("data/tasks.txt").run();
     }
 
     /**
