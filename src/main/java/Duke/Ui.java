@@ -28,6 +28,27 @@ public class Ui {
         System.out.println(divider);
     }
 
+    /**
+     * Same as listTasks() except that the message printed out is slightly different. If the ArrayList supplied is
+     * empty, a "no matching tasks" message would be printed.
+     *
+     * @param lines The list of tasks to print out.
+     */
+    public static void listMatchingTasks(ArrayList<String> lines) {
+        System.out.println(divider);
+        if (lines.size() > 0) {
+            System.out.println("Here are the matching tasks in your list!");
+            for (int i = 0; i < lines.size(); i++) {
+                int numbering = i + 1;
+                String task = lines.get(i);
+                System.out.println(numbering + "." + task);
+            }
+        } else {
+            System.out.println("Unfortunately no tasks matches your keyword :(");
+        }
+        System.out.println(divider);
+    }
+
     public static void bye() {
         System.out.println(divider + "Bye! See you next time!" + "\n" + divider);
     }
@@ -48,6 +69,7 @@ public class Ui {
             System.out.println(divider + "Sorry, the list is full!\n" + divider);
         }
     }
+
 
     public static void handleDukeException(DukeException e) {
         System.out.println(divider + e.getMessage() + "\n" + divider);
