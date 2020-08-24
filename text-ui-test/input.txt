@@ -22,5 +22,9 @@ delete 0
 delete 4
 delete 4
 list
+find
+find libbbbb
+find library
+find book
 blahblah
 bye

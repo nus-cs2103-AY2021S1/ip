@@ -3,16 +3,26 @@ package duke;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Encapsulates a single command for the Duke program.
+ */
 public class Command {
     protected TaskType taskType;
     protected Integer index;
     protected String description;
     protected LocalDate date;
 
+    /**
+     * Creates an invalid command.
+     */
     public Command() {
         taskType = null;
     }
 
+    /**
+     * Creates a Command representing a task of either LIST/BYE.
+     * @param taskType the type of task
+     */
     public Command(TaskType taskType) {
         switch (taskType) {
         case LIST:
@@ -28,6 +38,11 @@ public class Command {
         date = null;
     }
 
+    /**
+     * Creates a Command representing a task of either DELETE or DONE.
+     * @param taskType the type of task
+     * @param index index of TaskList the action is to be applied to
+     */
     public Command(TaskType taskType, Integer index) {
         switch (taskType) {
         case DELETE:
@@ -43,8 +58,17 @@ public class Command {
         date = null;
     }
 
+    /**
+     * Creates a Command representing a task of TODO.
+     * @param taskType the type of task
+     * @param description the description of the task
+     */
     public Command(TaskType taskType, String description) {
-        if (taskType != TaskType.TODO) {
+        switch (taskType) {
+        case TODO:
+        case FIND:
+            break;
+        default:
             throw new IllegalArgumentException("A date parameter is required for this kind of TaskType");
         }
         this.taskType = taskType;
@@ -53,6 +77,12 @@ public class Command {
         date = null;
     }
 
+    /**
+     * Creates a Command representing a task of either a DEADLINE or EVENT.
+     * @param taskType the type of task
+     * @param description the description of the task
+     * @param date the date of the task
+     */
     public Command(TaskType taskType, String description, LocalDate date) {
         switch (taskType) {
         case DEADLINE:
@@ -68,14 +98,26 @@ public class Command {
         this.date = date;
     }
 
+    /**
+     * Returns the TaskType of the Command.
+     * @return the TaskType of the command
+     */
     public TaskType getTaskType() {
         return taskType;
     }
 
+    /**
+     * Returns the respective date of the Command.
+     * @return the date of the command
+     */
     public LocalDate getDate() {
         return date;
     }
 
+    /**
+     * Returns true if the Command object is valid.
+     * @return true if the command is valid
+     */
     public boolean isValid() {
         return taskType != null;
     }
@@ -86,6 +128,10 @@ public class Command {
             + "\nYou now have " + taskList.size() + " task(s) in the list!";
     }
 
+    /**
+     * Executes the Command.
+     * @param list the TaskList this command is to be applied to
+     */
     public void execute(TaskList list) {
         if (!isValid()) {
             return;
@@ -121,6 +167,17 @@ public class Command {
                 break;
             case EVENT:
                 print = addToList(list, new Event(description, date));
+                break;
+            case FIND:
+                TaskList foundList = list.find(description);
+                print = "Here are your search results:";
+                if (foundList.isEmpty()) {
+                    print += "\nWe didn't find any tasks relevant to your search term.";
+                } else {
+                    for (int i = 0; i < foundList.size(); i++) {
+                        print += "\n " + (i + 1) + ": " + foundList.get(i);
+                    }
+                }
                 break;
             case BYE:
                 break;

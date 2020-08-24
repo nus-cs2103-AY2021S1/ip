@@ -2,7 +2,15 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Encapsulates the parsing method of the Duke program.
+ */
 public class Parser {
+    /**
+     * Parses the input into a Command
+     * @param input the input command from the user
+     * @return a command that can be executed
+     */
     public static Command parse(String input) {
         String[] splitInput = input.split(" ");
 
@@ -23,8 +31,9 @@ public class Parser {
                 int index = Integer.parseInt(splitInput[1]);
                 return new Command(taskType, index);
             case TODO:
+            case FIND:
                 if (input.length() <= 5 || input.split(" ").length < 2) {
-                    throw new IllegalArgumentException("The description of a todo cannot be empty.");
+                    throw new IllegalArgumentException("The description of this TaskType cannot be empty.");
                 }
                 return new Command(taskType, input.substring(5));
             case DEADLINE:
