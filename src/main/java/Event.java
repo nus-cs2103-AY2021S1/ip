@@ -6,6 +6,15 @@ public class Event extends Task {
         this.by = by;
     }
 
+    public Event(String description, boolean isDone, String by) {
+        super(description, isDone);
+        this.by = by;
+    }
+
+    public String getBy() {
+        return by;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + by + ")";

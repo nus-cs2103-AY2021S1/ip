@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -43,12 +44,12 @@ public class Duke {
         }
     }
 
-    public void runDuke() {
-        messageEcho("Hello! I'm Duke\nWhat can I do for you?");
+    public void runDuke() throws IOException {
 
+        ArrayList<Task> list = FileReader.getCurrentTasks();
+        messageEcho("Hello! I'm Duke!\n" + listIterator(list));
         Scanner sc = new Scanner(System.in);
 
-        ArrayList<Task> list = new ArrayList<>();
         while (sc.hasNext()) {
             String word = sc.nextLine();
             try {
@@ -155,10 +156,16 @@ public class Duke {
                 messageEcho(e.getMessage());
             }
         }
+
+        FileReader.saveFile(list);
     }
 
 
     public static void main(String[] args) {
-        new Duke().runDuke();
+        try {
+            new Duke().runDuke();
+        } catch (IOException e) {
+            e.getMessage();
+        }
     }
 }
