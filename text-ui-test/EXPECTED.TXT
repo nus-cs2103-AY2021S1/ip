@@ -27,40 +27,40 @@ Hai! I have added this task to your list:
 You now have 3 tasks in your list. Gambatte!
 
 Hai! I have added this task to your list:
-[DEADLINE] [✘] CS2103  (by: 20 August 2020)
+[DEADLINE] [✘] CS2103 (by: 20 August 2020)
 You now have 4 tasks in your list. Gambatte!
 
 Hai! I have added this task to your list:
-[DEADLINE] [✘] final assignment  (by: 19 September 2020)
+[DEADLINE] [✘] final assignment (by: 19 September 2020)
 You now have 5 tasks in your list. Gambatte!
 
 NANI??! Enter your deadline name & an end-time!
 
 Hai! I have added this task to your list:
-[EVENT] [✘] run  (at: Utown 10pm)
+[EVENT] [✘] run (at: Utown 10pm)
 You now have 6 tasks in your list. Gambatte!
 
 Please enter a valid event! Remember to add '/at'
 
 Hai! I have added this task to your list:
-[EVENT] [✘] gym  (at: Utown 10pm)
+[EVENT] [✘] gym (at: Utown 10pm)
 You now have 7 tasks in your list. Gambatte!
 
 NANI??! Enter your event name & an event timing!
 
 Hai! I have added this task to your list:
-[EVENT] [✘] dance  (at: school)
+[EVENT] [✘] dance (at: school)
 You now have 8 tasks in your list. Gambatte!
 
 Here are your tasks!
 1. [TODO] [✓] study for exams
 2. [TODO] [✘] buy food
 3. [TODO] [✘] pray
-4. [DEADLINE] [✘] CS2103  (by: 20 August 2020)
-5. [DEADLINE] [✘] final assignment  (by: 19 September 2020)
-6. [EVENT] [✘] run  (at: Utown 10pm)
-7. [EVENT] [✘] gym  (at: Utown 10pm)
-8. [EVENT] [✘] dance  (at: school)
+4. [DEADLINE] [✘] CS2103 (by: 20 August 2020)
+5. [DEADLINE] [✘] final assignment (by: 19 September 2020)
+6. [EVENT] [✘] run (at: Utown 10pm)
+7. [EVENT] [✘] gym (at: Utown 10pm)
+8. [EVENT] [✘] dance (at: school)
 
 Hai! This task has been deleted!
 [TODO] [✘] pray
@@ -78,19 +78,19 @@ Sugoi! This task is done!
 [TODO] [✓] buy food
 
 Sugoi! This task is done!
-[DEADLINE] [✓] final assignment  (by: 19 September 2020)
+[DEADLINE] [✓] final assignment (by: 19 September 2020)
 
 Here are your tasks!
 1. [TODO] [✓] study for exams
 2. [TODO] [✓] buy food
-3. [DEADLINE] [✘] CS2103  (by: 20 August 2020)
-4. [DEADLINE] [✓] final assignment  (by: 19 September 2020)
-5. [EVENT] [✘] run  (at: Utown 10pm)
-6. [EVENT] [✘] gym  (at: Utown 10pm)
-7. [EVENT] [✘] dance  (at: school)
+3. [DEADLINE] [✘] CS2103 (by: 20 August 2020)
+4. [DEADLINE] [✓] final assignment (by: 19 September 2020)
+5. [EVENT] [✘] run (at: Utown 10pm)
+6. [EVENT] [✘] gym (at: Utown 10pm)
+7. [EVENT] [✘] dance (at: school)
 
 Hai! This task has been deleted!
-[DEADLINE] [✓] final assignment  (by: 19 September 2020)
+[DEADLINE] [✓] final assignment (by: 19 September 2020)
 You now have 6 tasks in your list. Gambatte!
 
 Hai! This task has been deleted!
