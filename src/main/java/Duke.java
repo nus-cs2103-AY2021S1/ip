@@ -1,9 +1,33 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.File;
 
 public class Duke {
 
     private static ArrayList<Task> lst = new ArrayList<>();
+
+    public static void saveToHardDisk() {
+        File f;
+        f = new File("data");
+        if (!f.isDirectory()) {
+            f.mkdirs();
+        }
+        f = new File("data/duke.txt");
+        try {
+            f.createNewFile();
+            FileWriter fw = new FileWriter(f, true);
+            for (Task t : lst) {
+                fw.write(t + System.lineSeparator());
+            }
+            fw.write(System.lineSeparator());
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     public static void showList() {
         System.out.println("-------------------------------------------------------------------------------------");
@@ -20,6 +44,7 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println("    " + lst.get(i));
         System.out.println("-------------------------------------------------------------------------------------");
+        saveToHardDisk();
     }
 
     public static void addTask(Task t) {
@@ -29,6 +54,7 @@ public class Duke {
         System.out.println("    " + lst.get(lst.size() - 1));
         System.out.println("Now you have " + lst.size() + " tasks in the list.");
         System.out.println("-------------------------------------------------------------------------------------");
+        saveToHardDisk();
     }
 
     public static void deleteTask(int i) {
@@ -38,7 +64,9 @@ public class Duke {
         System.out.println("    " + t);
         System.out.println("Now you have " + lst.size() + " tasks in the list.");
         System.out.println("-------------------------------------------------------------------------------------");
+        saveToHardDisk();
     }
+
     public static void processString(String st) throws InvalidDoneException, InvalidTaskArgumentException,
             InvalidDeleteException, InvalidCommandException {
         if (st.equals("list")) {
@@ -114,7 +142,7 @@ public class Duke {
             throw new InvalidCommandException("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
-
+    
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
