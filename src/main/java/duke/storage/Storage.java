@@ -1,3 +1,11 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,7 +16,7 @@ import java.util.Scanner;
 
 public class Storage {
 	static String SAVED_TASK_PATH;
-	Storage(String path) {
+	public Storage(String path) {
 		SAVED_TASK_PATH = path;
 	}
 

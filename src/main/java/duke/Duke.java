@@ -1,6 +1,15 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class Duke {
 
-    enum TaskType {
+    public enum TaskType {
         TODO("todo"),
         EVENT("event"),
         DEADLINE("deadline");
