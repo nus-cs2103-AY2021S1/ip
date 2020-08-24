@@ -35,6 +35,7 @@ public class Storage {
 
     /**
      * Loads file from storage file
+     *
      * @return a list of task saved in storage file
      * @throws StorageException on I/O error or parse error
      */
@@ -89,6 +90,7 @@ public class Storage {
 
     /**
      * Create storage file (and parent folders)
+     *
      * @param path file string
      * @throws IOException on I/O error
      */
@@ -106,7 +108,7 @@ public class Storage {
 
     /**
      * Parse storage data by the following format task_type | task_status | task_description | task_date(optional)
-     * 
+     *
      * @param line lines in storage file
      * @return {@code Task} object represented by the line
      * @throws StorageException on parse error

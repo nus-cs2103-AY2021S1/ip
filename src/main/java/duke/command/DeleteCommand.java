@@ -17,9 +17,9 @@ public class DeleteCommand extends Command {
     /**
      * Removes a specific task from task list and save the changes to storage file
      *
-     * @param tasks current task list
-     * @param ui       text ui interface
-     * @param storage  storage file
+     * @param tasks   current task list
+     * @param ui      text ui interface
+     * @param storage storage file
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

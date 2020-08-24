@@ -37,6 +37,14 @@ public class Event extends Task {
         }
     }
 
+    private static LocalDate parseDate(String str) {
+        return LocalDate.parse(str);
+    }
+
+    private static String showDate(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("MMM d, yyyy"));
+    }
+
     /**
      * Show task's name and status
      *
@@ -59,13 +67,5 @@ public class Event extends Task {
 
     public LocalDate getDate() {
         return this.at;
-    }
-
-    private static LocalDate parseDate(String str) {
-        return LocalDate.parse(str);
-    }
-
-    private static String showDate(LocalDate date) {
-        return date.format(DateTimeFormatter.ofPattern("MMM d, yyyy"));
     }
 }

@@ -31,10 +31,10 @@ public class Parser {
 
     /**
      * Main method to call to parse user commands
-     * 
+     *
      * @param input user commands
      * @return a {@code Command} object representing user actions
-     * @throws InvalidUsageException on malformed commands
+     * @throws InvalidUsageException   on malformed commands
      * @throws UnknownCommandException on unsupported command types
      */
     public static Command parseCommand(String input) throws InvalidUsageException, UnknownCommandException {

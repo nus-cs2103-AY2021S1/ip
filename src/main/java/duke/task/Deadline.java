@@ -1,7 +1,6 @@
 package duke.task;
 
 import exception.DeadlineInvalidUsageException;
-import exception.EventInvalidUsageException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -35,6 +34,14 @@ public class Deadline extends Task {
         }
     }
 
+    private static LocalDate parseDate(String str) {
+        return LocalDate.parse(str);
+    }
+
+    private static String showDate(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("MMM d, yyyy"));
+    }
+
     /**
      * Show task's name and status
      *
@@ -57,13 +64,5 @@ public class Deadline extends Task {
 
     public LocalDate getDate() {
         return this.by;
-    }
-
-    private static LocalDate parseDate(String str) {
-        return LocalDate.parse(str);
-    }
-
-    private static String showDate(LocalDate date) {
-        return date.format(DateTimeFormatter.ofPattern("MMM d, yyyy"));
     }
 }

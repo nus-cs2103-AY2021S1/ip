@@ -25,7 +25,7 @@ public class TaskList {
 
     /**
      * Removes a specific task based on task number
-     * 
+     *
      * @param taskNumber task index
      * @return removed task
      */
@@ -35,7 +35,7 @@ public class TaskList {
 
     /**
      * Marks a task as done
-     * 
+     *
      * @param taskNumber task index
      * @return updated task
      */
@@ -46,7 +46,7 @@ public class TaskList {
 
     /**
      * Show task description
-     * 
+     *
      * @param taskNumber task index
      * @return string description of task showing status, type and task description
      */
@@ -56,7 +56,7 @@ public class TaskList {
 
     /**
      * Get all tasks stored
-     * 
+     *
      * @return list of tasks stored
      */
     public List<Task> getAll() {
@@ -65,7 +65,7 @@ public class TaskList {
 
     /**
      * Get number of tasks stored
-     * 
+     *
      * @return size of taskList
      */
     public int size() {
@@ -74,7 +74,7 @@ public class TaskList {
 
     /**
      * Returns a task list containing all tasks on the date
-     * 
+     *
      * @param date date in ISO-8601 format
      * @return all tasks on 1 date
      */
@@ -90,7 +90,7 @@ public class TaskList {
 
     /**
      * Find all tasks that contain a specific keyword
-     * 
+     *
      * @param keyword user-inputted keyword
      * @return a Tasklist containing all tasks that contain a specific keyword
      */

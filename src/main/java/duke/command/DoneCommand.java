@@ -17,9 +17,9 @@ public class DoneCommand extends Command {
     /**
      * Mark a specific task as done and save it to storage file
      *
-     * @param tasks current task list
-     * @param ui       text ui interface
-     * @param storage  storage file
+     * @param tasks   current task list
+     * @param ui      text ui interface
+     * @param storage storage file
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

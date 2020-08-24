@@ -10,7 +10,7 @@ import duke.task.Todo;
  */
 public class TodoCommand extends Command {
     Todo todo;
-    
+
     public TodoCommand(String description) {
         this.todo = new Todo(description);
     }
@@ -18,9 +18,9 @@ public class TodoCommand extends Command {
     /**
      * Insert a new todo into the current task list and save it to the storage file
      *
-     * @param tasks current task list
-     * @param ui       text ui interface
-     * @param storage  storage file
+     * @param tasks   current task list
+     * @param ui      text ui interface
+     * @param storage storage file
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
