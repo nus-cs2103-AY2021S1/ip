@@ -45,6 +45,11 @@ public class Parser {
             }
         } else if (cmd == DukeCommand.LIST) {
             return new ListCommand();
+        } else if (tokens.get(0).equals("find")) {
+            if (tokens.size() < 2) {
+                throw new MissingArgumentException("Must provide keyword after command!");
+            }
+            return new FindCommand(tokens.get(1));
         } else {
 
             SimpleDateFormat readformatter = new SimpleDateFormat("dd/MM/yyyy HHmm");

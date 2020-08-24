@@ -42,8 +42,24 @@ public class TaskList {
     }
 
     public String printTasks() {
+        return "Here are the tasks in your list:\n" + printOutTasks(tasks);
+    }
+
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
+    }
+
+    public String printTasksWithKeyword(String Keyword) {
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        for (Task t : tasks) {
+            if (t.satisfyKeyword(Keyword)) {
+                tasks.add(t);
+            }
+        }
+        return "Here are the matching tasks in your list: \n" + printOutTasks(tasks);
+    }
+    public String printOutTasks(ArrayList<Task> tasks) {
         StringBuilder str = new StringBuilder();
-        str.append("Here are the tasks in your list:\n");
         int i=0;
         for(Task task:tasks){
             str.append(String.format("%d.%s", ++i, task));
@@ -52,9 +68,6 @@ public class TaskList {
             }
         }
         return str.toString();
-    }
-    public ArrayList<Task> getTasks() {
-        return this.tasks;
     }
 
 }

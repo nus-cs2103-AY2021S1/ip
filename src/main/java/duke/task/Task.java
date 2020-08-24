@@ -16,6 +16,16 @@ public class Task {
         done = true;
     }
 
+    public boolean satisfyKeyword(String keyword) {
+        String[] tokens = description.split(" ");
+        boolean found = false;
+        for (int i = 0; i < tokens.length && !found; i++) {
+            if (tokens[i].equalsIgnoreCase(keyword)) {
+                found = true;
+            }
+        }
+        return found;
+    }
     @Override
     public String toString() {
 
