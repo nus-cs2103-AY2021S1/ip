@@ -10,9 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Encapsulates behavior for reading and writing to files.
+ */
 public class DataManager {
+    /** The file path to save and load data from */
     final String filePath = "data/data.txt";
 
+    /**
+     * Writes the contents of a list of tasks to a file.
+     *
+     * @param taskList The list of tasks to save.
+     * @throws DukeException If a problem is encountered when writing to the file.
+     */
     public void save(TaskList taskList) throws DukeException {
         List<Task> tasks = taskList.getAllTasks();
         try {
@@ -51,6 +61,12 @@ public class DataManager {
         }
     }
 
+    /**
+     * Loads task data from a file.
+     *
+     * @return A list of tasks.
+     * @throws DukeException If a problem is encountered when opening the file
+     */
     public TaskList load() throws DukeException {
         File dataFile = new File(filePath);
 

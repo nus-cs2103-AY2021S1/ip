@@ -4,7 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Encapsulates data for an event task
+ */
 public class Event extends Task {
+    /** The time when the event is occurring */
     LocalDate time;
 
     Event(String description, LocalDate time) {

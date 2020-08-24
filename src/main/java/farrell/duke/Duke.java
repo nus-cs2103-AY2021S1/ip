@@ -2,10 +2,29 @@ package main.java.farrell.duke;
 
 import java.time.LocalDate;
 
+/**
+ * A personal assistant chatbot that helps to keep track of tasks.
+ */
 public class Duke {
+    /** The list of tasks being tracked */
     static TaskList taskList;
+
+    /** An object that handles saving and loading data */
     static DataManager dataManager = new DataManager();
+
+    /** An object that handles user interaction */
     static UiManager uiManager = new UiManager();
+
+    /**
+     * Displays a welcome message, then runs the main program loop.
+     * The main program loop consists of the following:
+     * 1. Obtaining user input.
+     * 2. Parsing user input to the corresponding command.
+     * 3. Execute the command.
+     * 4. Display the program output to the user.
+     *
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         uiManager.displayStartMessage();
 
@@ -28,6 +47,14 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes a command.
+     *
+     * @param command The command to execute.
+     * @param parameters Parameters relevant to the execution of the command.
+     * @return 1 if the program should continue. 0 if the program should exit.
+     * @throws DukeException If an invalid command is given.
+     */
     public static int processCommand(CommandType command, String parameters) throws DukeException{
         switch(command) {
         case TODO:
