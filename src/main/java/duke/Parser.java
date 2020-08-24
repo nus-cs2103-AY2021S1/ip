@@ -3,10 +3,26 @@ package duke;
 import duke.command.*;
 import duke.task.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+import java.util.List;
 
+/**
+ * Deals with making sense of the user command.
+ */
 public class Parser {
+    
+    /** List of all the valid date inputs. */
+    private static final List<String> formatStrings = Arrays.asList("d/M/y", "y-M-d");
 
+    /**
+     * Parses the input command from the user into a command that the Chatbot can understand.
+     * @param fullCommand The command from the user.
+     * @return The command that can be interpreted from the user.
+     * @throws DukeException If there was some problems with understanding the user's commands.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         try {
             String[] splitCommand = fullCommand.trim().split(" ", 2);
@@ -25,11 +41,11 @@ public class Parser {
                 return new AddCommand(todo);
             case DEADLINE:
                 String[] splitDeadline = splitCommand[1].split(" /by ", 2);
-                Deadline deadline = new Deadline(splitDeadline[0], splitDeadline[1]);
+                Deadline deadline = new Deadline(splitDeadline[0], parseDate(splitDeadline[1]));
                 return new AddCommand(deadline);
             case EVENT:
                 String[] splitEvent = splitCommand[1].split(" /at ", 2);
-                Event event = new Event(splitEvent[0], splitEvent[1]);
+                Event event = new Event(splitEvent[0], parseDate(splitEvent[1]));
                 return new AddCommand(event);
             case VIEW:
                 return new ViewCommand(splitCommand[1]);
@@ -45,5 +61,26 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new DukeException("☹ OOPS!!! The date is not valid.");
         }
+    }
+
+
+    /**
+     * Parses input dates in the correct format into the local date format.
+     * @param string The date to be parsed.
+     * @return Local date format of the input date.
+     * @throws DateTimeParseException If the input date is not of an acceptable format.
+     */
+    public static LocalDate parseDate(String string) throws DateTimeParseException {
+        for (int i = 0; i < formatStrings.size(); i++) {
+            String formatString = formatStrings.get(i);
+            try {
+                return LocalDate.parse(string, DateTimeFormatter.ofPattern(formatString));
+            } catch (DateTimeParseException e) {
+                if (i == formatStrings.size() - 1) {
+                    throw e;
+                }
+            }
+        }
+        return null;
     }
 }
