@@ -1,3 +1,11 @@
+package duke;
+
+import task.Deadline;
+import task.Event;
+import task.Todo;
+import task.TaskType;
+import task.Task;
+
 import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;

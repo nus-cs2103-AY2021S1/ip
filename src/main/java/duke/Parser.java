@@ -1,3 +1,7 @@
+package duke;
+
+import task.TaskType;
+
 import java.security.InvalidParameterException;
 
 public class Parser {

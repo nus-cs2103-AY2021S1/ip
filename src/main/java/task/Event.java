@@ -1,10 +1,13 @@
+package task;
+
 import java.time.LocalDate;
+import utility.DateParser;
 
 public class Event extends Task {
     private final String eventTime;
     private LocalDate date = null;
 
-    Event(String name, String eventTime) {
+    public Event(String name, String eventTime) {
         super(name);
         this.eventTime = eventTime;
         try {

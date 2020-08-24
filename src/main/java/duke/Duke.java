@@ -1,5 +1,5 @@
-import java.io.IOException;
-import java.security.InvalidParameterException;
+package duke;
+
 import java.util.Scanner;
 
 public class Duke {

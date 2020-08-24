@@ -1,3 +1,7 @@
+package duke;
+
+import task.TaskType;
+
 import java.io.IOException;
 import java.security.InvalidParameterException;
 
