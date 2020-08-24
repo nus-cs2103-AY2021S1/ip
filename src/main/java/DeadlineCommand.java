@@ -1,5 +1,5 @@
 public class DeadlineCommand extends Command {
-    public boolean execute(){
+    public boolean execute() throws DukeException {
         ui.askDeadlineName();
         String deadlineName = sc.nextLine();
         ui.askDeadlineDate();

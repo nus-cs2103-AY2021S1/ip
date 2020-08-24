@@ -11,5 +11,5 @@ public abstract class Command {
         this.sc = sc;
     }
 
-    public abstract boolean execute();
+    public abstract boolean execute() throws DukeException;
 }

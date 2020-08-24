@@ -24,8 +24,12 @@ public class Duke {
             String s = sc.nextLine();
             Command cmd = CommandHandler.parseCommand(s);
             cmd.setUtility(taskManager, ui, sc);
-            boolean result = cmd.execute();
-            running = result;
+            try {
+                boolean result = cmd.execute();
+                running = result;
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
         }
         ui.showExitScreen();
         sc.close();
