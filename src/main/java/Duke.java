@@ -1,8 +1,10 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static Storage storage = new Storage("data", "data/duke.txt");
+    private static ArrayList<Task> tasks = new ArrayList<>(storage.readFromFile());
 
     public static void main(String[] args) {
         greet();
@@ -46,6 +48,11 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done:" +
                 "\n\t" + task);
         System.out.println("---------------------------------------------------");
+        try {
+            storage.rewriteFile(tasks);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void deleteTask(int index) {
@@ -55,6 +62,12 @@ public class Duke {
                 "\n\t" + task);
         printTotalNumberOfTasks();
         System.out.println("---------------------------------------------------");
+        try {
+            storage.rewriteFile(tasks);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private static void handleTask(String input) throws DukeException {
@@ -97,8 +110,11 @@ public class Duke {
                     System.out.println("Got it. I've added this task:" +
                             "\n\t" + taskCreated);
                     printTotalNumberOfTasks();
+                    storage.appendToFile(System.lineSeparator() + taskCreated.toText());
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Please include description!");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             } else if (taskType.equals("deadline")) {
                 try {
@@ -113,8 +129,11 @@ public class Duke {
                     System.out.println("Got it. I've added this task:" +
                             "\n\t" + taskCreated);
                     printTotalNumberOfTasks();
+                    storage.appendToFile(System.lineSeparator() + taskCreated.toText());
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Invalid description of a deadline item!");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             } else if (taskType.equals("event")) {
                 try {
@@ -129,8 +148,11 @@ public class Duke {
                     System.out.println("Got it. I've added this task:" +
                             "\n\t" + taskCreated);
                     printTotalNumberOfTasks();
+                    storage.appendToFile(System.lineSeparator() + taskCreated.toText());
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Invalid description of an event!");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means!");
