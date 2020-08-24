@@ -7,8 +7,8 @@ public class Todo extends Task {
     }
 
     @Override
-    public String textFormat() {
-        return "todo, " + super.textFormat();
+    public String getTxtFormat() {
+        return "todo, " + super.getTxtFormat();
     }
 
     @Override
