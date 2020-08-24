@@ -8,7 +8,8 @@ import duke.Ui;
 public abstract class Command {
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
-    public Command() { };
+    public Command() {
+    };
 
     public boolean isExit() {
         return false;

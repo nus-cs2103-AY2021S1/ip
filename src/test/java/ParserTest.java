@@ -10,21 +10,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParserTest {
 
     @Test
-    public void todoParseTest(){
+    public void toDoParsing_todoMessage_matchesToDo(){
         String testInput = "todo read book";
         Parser testParser = new Parser(testInput);
         assertEquals("todo", testParser.getTaskCategory());
     }
 
     @Test
-    public void eventTimeParseTest() throws DukeException {
+    public void eventParsing_eventFullMessage_matchesTaskTime() throws DukeException {
         String testInput = "event read book /by 2020-14-05";
         Parser testParser = new Parser(testInput);
         assertEquals("2020-14-05", testParser.getTaskTime());
     }
 
     @Test
-    public void eventAddTest() throws DukeException {
+    public void eventCreation_eventFullMessage_taskAdded() throws DukeException {
         String testInput = "event finish level-7 /by 2020-08-25";
         Parser testParser = new Parser(testInput);
         TaskList tasks = new TaskList();

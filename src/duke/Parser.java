@@ -1,6 +1,12 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.ListCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+
 import duke.exception.CommandNotFoundException;
 import duke.exception.DukeException;
 import duke.exception.IncompleteCommandException;
@@ -36,8 +42,7 @@ public class Parser {
         boolean hasTime = taskMessageArr.length > 1 &&
                 taskMessageArr[1].split(" ", 2).length > 1;
         if (!hasTime) {
-            throw new DukeException("Please specify the time of task " +
-                    "e.g. event finish book /by 2019-15-10");
+            throw new DukeException("Please specify the time of task e.g. event finish book /by 2019-15-10");
         } else {
             return taskMessageArr[1].split(" ", 2)[1];
         }
@@ -68,14 +73,14 @@ public class Parser {
         case "event":
             try {
                 return new AddCommand("event", getTaskDescription(), getTaskTime());
-            } catch (Exception e) {
-                throw new DukeException("Datetime could not be recognised. Use yyyy-mm-dd format e.g. 2019-10-15");
+            } catch (DukeException e) {
+                throw e;
             }
         case "deadline":
             try {
                 return new AddCommand("deadline", getTaskDescription(), getTaskTime());
-            } catch (Exception e) {
-                throw new DukeException("Datetime could not be recognised. Use yyyy-mm-dd format e.g. 2019-10-15");
+            } catch (DukeException e) {
+                throw e;
             }
         default:
             throw new CommandNotFoundException();
