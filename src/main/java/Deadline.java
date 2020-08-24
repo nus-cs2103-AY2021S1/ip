@@ -1,14 +1,34 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
 
-    private String due;
+    private static final String DEADLINE_DELIMITER = "/by";
 
-    public Deadline(String description, String due) {
+    private LocalDateTime dateTime;
+
+    public Deadline(String description, LocalDateTime dateTime) {
         super(description);
-        this.due = due;
+        this.dateTime = dateTime;
+    }
+
+    public static Deadline createTask(String details) {
+        if (details == null) {
+            throw new DukeException("I need something to work with.");
+        }
+        String[] detailsArray = details.split(DEADLINE_DELIMITER, 2);
+        try {
+            String description = detailsArray[0].trim();
+            String dateTimeString = detailsArray[1].trim();
+            LocalDateTime dateTime = DateParser.parseString(dateTimeString);
+            return new Deadline(description, dateTime);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("So you never did plan on doing it huh...");
+        }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + due + ")";
+        return "[D]" + super.toString() + " (by: " + DateParser.parseLocalDateTime(this.dateTime) + ")";
     }
 }
