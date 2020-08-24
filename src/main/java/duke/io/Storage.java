@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 public class Storage {
     
-    private String filePath;
+    private final String filePath;
     private File file;
     private Scanner sc;
     private Layout layout;
@@ -38,20 +38,16 @@ public class Storage {
         
         try {
             sc = new Scanner(file);
-            
         } catch (FileNotFoundException e) {
-            
             //Create data folder
             file = new File("data");
             file.mkdir();
             try {
-                
                 //Create text file
                 file = new File("data/duke.txt");
                 file.createNewFile();
                 
                 sc = new Scanner(file);
-                
             } catch (IOException i) {
                 DukeException d = new DukeException("Unable to create file");
                 layout.print(d.getMessage());
@@ -106,7 +102,6 @@ public class Storage {
             String newData = "";
             for(int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
-                //newData += "\n" + duke.task.toSave();
                 newData += i == 0 ? task.toSave() : "\n" + task.toSave();
             }
             fileWriter.write(newData);

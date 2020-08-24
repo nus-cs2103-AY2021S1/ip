@@ -10,10 +10,10 @@ import java.util.ArrayList;
  * Represents a current task list manager.
  */
 public class TaskList {
-    private ArrayList<Task> tasks;
-    private Storage storage;
-    private Parser parser;
-    private Layout layout;
+    private final ArrayList<Task> tasks;
+    private final Storage storage;
+    private final Parser parser;
+    private final Layout layout;
     
     public TaskList(ArrayList<Task> tasks, Storage storage) {
         this.tasks = tasks;
