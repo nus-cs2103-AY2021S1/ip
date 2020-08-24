@@ -31,7 +31,7 @@ public class Ui {
     }
 
     public void showAdd(Task task, int size) {
-        System.out.println("Added task.Task!");
+        System.out.println("Added task!");
         System.out.println(task);
         showTaskQty(size);
 
@@ -42,7 +42,7 @@ public class Ui {
     }
 
     public void showDelete(Task task, int size) {
-        System.out.println("Deleting task.Task: ");
+        System.out.println("Deleting task: ");
         System.out.println(task);
         showTaskQty(size);
     }
