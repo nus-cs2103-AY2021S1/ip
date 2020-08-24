@@ -1,3 +1,4 @@
+package duke.exception;
 public class InvalidCommand extends Exception{
     private String errorMessage;
     public InvalidCommand(String errorMessage) {

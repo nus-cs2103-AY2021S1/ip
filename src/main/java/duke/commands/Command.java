@@ -1,4 +1,10 @@
-public class Command {
+package duke.commands;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
+public abstract class Command {
     protected boolean isExit;
     private int itemIndex;
 
@@ -11,6 +17,5 @@ public class Command {
         return this.isExit;
     }
 
-    public void execute(Ui ui, Storage listStorage, TaskList taskList) {
-    }
+    public abstract void execute(Ui ui, Storage listStorage, TaskList taskList);
 }

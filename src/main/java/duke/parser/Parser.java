@@ -1,4 +1,18 @@
+package duke.parser;
+
 import java.time.LocalDate;
+
+import duke.Ui;
+import duke.commands.AddCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ListCommand;
+import duke.exception.InvalidCommand;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.ToDo;
 
 public class Parser {
     public Parser() {
@@ -73,7 +87,6 @@ public class Parser {
                 if (command.split(" ").length > 1) {
                     throw new InvalidCommand("You have to view your entire to-do list!");
                 }
-                //list out items in to-do list
                 ListCommand lc = new ListCommand();
                 return lc;
             } else if (command.contains("delete")) {

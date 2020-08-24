@@ -1,5 +1,19 @@
-import java.io.*;
+package duke;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
+import duke.tasks.ToDo;
+import duke.tasks.Event;
+import duke.tasks.Deadline;
+import duke.tasks.Task;
+import duke.Ui;
+
 
 public class Storage {
     private final String DATAFILEDIRECTORY = System.getProperty("user.dir") + (System.getProperty("user.dir").endsWith("text-ui-test") ? "/../data/" : "/data/");
@@ -15,7 +29,7 @@ public class Storage {
         try {
             rb = new BufferedReader(new FileReader(this.storageFile));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("File cannot be found");
         }
         String newLine = "";
         try {

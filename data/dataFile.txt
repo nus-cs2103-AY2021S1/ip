@@ -1,3 +1,10 @@
 T | 1 | borrow books
 D | 0 | return book | 2020-10-05
-D | 1 | do homework | 2020-09-10
+T | 1 | borrow books
+D | 0 | return book | 2020-10-05
+E | 0 | project meeting | 2020-08-09
+D | 0 | do homework | 2020-09-10
+T | 1 | borrow books
+D | 0 | return book | 2020-10-05
+E | 0 | project meeting | 2020-08-09
+D | 0 | do homework | 2020-09-10
