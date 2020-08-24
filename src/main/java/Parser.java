@@ -66,7 +66,8 @@ public class Parser {
 
             } else if (type.equals("event")) {
                 String time = commandMessage.substring(commandMessage.indexOf("/at") + 4);
-                String description = commandMessage.substring(commandMessage.indexOf(' ') + 1, commandMessage.indexOf('/') - 1);
+                String description = commandMessage.substring(commandMessage.indexOf(' ') + 1,
+                        commandMessage.indexOf('/') - 1);
 
                 String s = "";
 

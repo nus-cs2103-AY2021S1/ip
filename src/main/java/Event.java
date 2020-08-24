@@ -28,7 +28,8 @@ public class Event extends Task {
         if (date == null) {
             return "[E]" + super.toString() + " (at: " + time + ")";
         } else {
-            return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter
+                    .ofPattern("MMM d yyyy")) + ")";
         }
     }
 }

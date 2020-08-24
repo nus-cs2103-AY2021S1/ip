@@ -27,7 +27,8 @@ public class Deadline extends Task {
         if (date == null) {
             return "[D]" + super.toString() + " (by: " + by + ")";
         } else {
-            return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter
+                    .ofPattern("MMM d yyyy")) + ")";
         }
 
     }
