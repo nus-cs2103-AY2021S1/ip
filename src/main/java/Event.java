@@ -32,7 +32,7 @@ public class Event extends Task {
     }
 
     public String encode() {
-        return String.format("E|%s|%s|%s", super.completed ? "Y" : "N", this.time, super.description);
+        return String.format("E|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(this.dateTime), super.description);
     }
 
     public static Event decode(String code) throws DukeException {
@@ -41,7 +41,7 @@ public class Event extends Task {
             if (content.length != 4) {
                 throw new Error("Your data is corrupt.");
             }
-            Event newEvent = new Event(content[3], content[2]);
+            Event newEvent = new Event(content[3], DateParser.parseString(content[2]));
             if (content[1].equals("Y")) {
                 newEvent.setCompleted();
             }
