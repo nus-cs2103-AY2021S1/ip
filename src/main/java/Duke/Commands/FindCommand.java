@@ -39,13 +39,13 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if(string.length() == 4 || string.length() == 5){
-            throw new FindException();
+            throw new FindException(false, "");
         }else{
             String find = string.substring(5);
             String[] strings = find.split(" ", -2);
             setTasks(strings, tasks);
             if(this.tasks.size() == 0){
-
+                throw new FindException(true, find);
             }else{
                 System.out.println("  Here are the matching tasks in your list:");
                 for(Task task : this.tasks){
