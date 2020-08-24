@@ -1,3 +1,0 @@
-T | 1 | read book
-D | 0 | return book |   June 6th
-D | 1 | project meeting |   Aug 6th 2-4pm

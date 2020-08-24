@@ -13,16 +13,6 @@ public class Event extends Task{
     }
 
     @Override
-    public String getType(){
-        return "D";
-    }
-
-    @Override
-    public String getEnd(){
-        return this.end;
-    }
-
-    @Override
     public String toString(){
         return isDone
                 ? "[E][✓] " + this.getName() + " (by: " + this.end + ")"

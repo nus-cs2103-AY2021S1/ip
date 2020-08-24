@@ -13,16 +13,6 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getType(){
-        return "D";
-    }
-
-    @Override
-    public String getEnd() {
-        return this.end;
-    }
-
-    @Override
     public String toString(){
         return isDone
                 ? "[D][✓] " + this.getName() + " (by: " + this.end + ")"

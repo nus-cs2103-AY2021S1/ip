@@ -1,9 +1,5 @@
 public class Todo extends Task {
 
-    public Todo(String name) {
-        super(name, false);
-    }
-
     public Todo (String name , boolean isDone) {
         super(name, isDone);
     }
@@ -11,16 +7,6 @@ public class Todo extends Task {
     @Override
     public Task setToTrue(){
         return new Todo(this.name, true);
-    }
-
-    @Override
-    public String getType(){
-        return "T";
-    }
-
-    @Override
-    public String getEnd(){
-        return null;
     }
 
     @Override

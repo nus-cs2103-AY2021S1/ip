@@ -1,44 +1,14 @@
-import java.io.*;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-
 public class Duke {
 
     private static String line = "________________________________________________";
-    private static String end = "bye";
-    private static String done = "done";
-    private static String delete = "delete";
-    private static String listing = "list";
-    private static FileWriter fw;
-    private static PrintWriter pw;
-    private static FileReader fr;
-    private static BufferedReader br;
-
-    public static void openFile() {
-        try {
-            fr = new FileReader("data/duke.txt");
-            br = new BufferedReader(fr);
-        } catch (IOException e){
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public static void closeFile() {
-        pw.close();
-    }
 
     public static void display(String text) {
         System.out.println(line);
         System.out.println(text);
         System.out.println(line);
-    }
-
-    public static void printWelcomeMessage() {
-        String logo = "Hello I'm Verzachtend \n" +
-                "What can I do for you?\n" +
-                "BE YOURSELF, NEVER SURRENDER AND KEEP A SMILE ON YOUR FACE";
-        System.out.println(logo);
     }
 
     public static Task assignTask(String type, String name) throws NoTaskException, InvalidCommandException, NoDateException {
@@ -103,66 +73,20 @@ public class Duke {
         return curr;
     }
 
-    public static ArrayList<Task> insertTasks(){
-        String task;
-        ArrayList<Task> temp = new ArrayList<>();
-        try {
-            while ((task = br.readLine()) != null) {
-                String type = task.substring(0, 1);
-                String name = task.substring(8);
-                int isDone = Integer.parseInt(task.substring(4, 5));
-                boolean isTaskDone = isDone == 1;
-                switch (type) {
-                    case "T":
-                        temp.add(new Todo(name, isTaskDone));
-                        break;
-                    case "D":
-                        int indexOfLine = name.indexOf("|");
-                        temp.add(new Deadline(name.substring(0, indexOfLine - 1), isTaskDone, name.substring(indexOfLine + 1)));
-                        break;
-                    case "E":
-                        indexOfLine = name.indexOf("|");
-                        temp.add(new Event(name.substring(0, indexOfLine - 1), isTaskDone, name.substring(indexOfLine + 1)));
-                        break;
-                }
-            }
-            br.close();
-        } catch (IOException e) {
-            System.out.println(line);
-            System.out.println(e.getMessage());
-            System.out.println(line);
-        }
-
-        return temp;
-    }
-
-    public static void putToDatabase(ArrayList<Task> tasks) {
-
-        try {
-            fw = new FileWriter("data/duke.txt");
-            pw = new PrintWriter(fw);
-            for (Task task : tasks) {
-                if (task instanceof Todo) {
-                    pw.println(task.getType() + " | " + task.isDone() + " | " + task.getName());
-                } else {
-                    pw.println(task.getType() + " | " + task.isDone() + " | " + task.getName() + " |" + task.getEnd());
-                }
-            }
-            pw.close();
-        } catch (IOException e) {
-            System.out.println(line);
-            System.out.println(e.getMessage());
-            System.out.println(line);
-        }
-    }
-
     public static void main(String[] args) {
-        printWelcomeMessage();
-        openFile();
         Scanner scan = new Scanner(System.in);
+        String logo = "Hello I'm Verzachtend \n" +
+                "What can I do for you?\n" +
+                "BE YOURSELF, NEVER SURRENDER AND KEEP A SMILE ON YOUR FACE";
+        System.out.println(logo);
 
-        ArrayList<Task> tasks = insertTasks();
+        String end = "bye";
+        String done = "done";
+        String delete = "delete";
+        ArrayList<Task> tasks = new ArrayList<>();
         String echo = scan.nextLine();
+        String listing = "list";
+
         while (!echo.equals(end)) {
             String displayText = "";
             if (echo.equals(listing)) {
@@ -209,7 +133,6 @@ public class Duke {
 
 
             } else {
-
                 String firstWord = echo.toLowerCase().contains("todo") ? "todo"
                         : echo.toLowerCase().contains("deadline") ? "deadline"
                         : echo.toLowerCase().contains("event") ? "event"
@@ -240,7 +163,6 @@ public class Duke {
             }
             echo = scan.nextLine();
         }
-        putToDatabase(tasks);
         System.out.println(line);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(line);
