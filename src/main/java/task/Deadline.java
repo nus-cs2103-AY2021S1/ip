@@ -14,6 +14,15 @@ public class Deadline extends Task{
     }
 
     @Override
+    public String encode() {
+        String encoded = "deadline " + item + " \\/by " + time;
+        if(this.done){
+            encoded = encoded + "\n" + "done";
+        }
+        return encoded;
+    }
+
+    @Override
     public String toString() {
         return super.toString() + " (by: " + time + ")";
     }

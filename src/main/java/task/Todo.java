@@ -5,4 +5,13 @@ public class Todo extends Task{
         super(item);
         taskType = "T";
     }
+
+    @Override
+    public String encode() {
+        String encoded = "todo " + item;
+        if(this.done){
+            encoded = encoded + "\n" + "done";
+        }
+        return encoded;
+    }
 }

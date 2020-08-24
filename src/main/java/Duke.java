@@ -1,8 +1,6 @@
 import task.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,16 +16,14 @@ public class Duke {
     private static List<Task> taskList;
 
     private static void loadTasks(){
-        ArrayList<Task> taskList = new ArrayList<>();
         File f = new File(FILEPATH);
 
         try {
             Scanner fileReader = new Scanner(f);
             while(fileReader.hasNextLine()){
                 String input = fileReader.nextLine();
-                if(input.startsWith("done ")){
-                    String indexStr = input.replaceAll("[^0-9]", "");
-                    int index = Integer.parseInt(indexStr) - 1;
+                if(input.contentEquals("done")){
+                    int index = taskList.size() - 1;
                     taskList.get(index).setDone();
                 }
                 else if(input.startsWith("todo ") || input.equals("todo")){
@@ -68,12 +64,20 @@ public class Duke {
     }
 
 
-    private static void saveTasks(){
-
+    private static void saveTasks() throws IOException{
+        FileWriter fw = new FileWriter(FILEPATH);
+        BufferedWriter bw = new BufferedWriter(fw);
+        for(Task t : taskList){
+            bw.write(t.encode());
+            bw.newLine();
+        }
+        bw.close();
     }
 
     public static void main(String[] args) {
+        taskList = new ArrayList<>();
         loadTasks();
+
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you today?");
 
@@ -144,8 +148,15 @@ public class Duke {
             }
             else{
                 System.out.println("\t" + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                continue;
             }
-            //saveTasks();
+
+            try {
+                saveTasks();
+            }
+            catch (IOException e){
+                System.out.println("\t" + "Unable to save to file.");
+            }
         }
     }
 }

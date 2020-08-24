@@ -2,7 +2,7 @@ package task;
 
 public abstract class Task {
     protected String item;
-    private boolean done;
+    protected boolean done;
     protected String taskType;
     protected Task(){
         this.item = "";
@@ -21,6 +21,7 @@ public abstract class Task {
     public void setDone() {
         done = true;
     }
+    public abstract String encode();
 
     @Override
     public String toString() {
