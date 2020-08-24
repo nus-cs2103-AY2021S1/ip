@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,24 +57,24 @@ public class Duke {
                 throw new DukeException("The description of a deadline cannot be empty.");
             }
             String details = input.substring(9).trim();
-            String[] split = details.split("/by ");
+            String[] split = details.split(" /by ");
             if (split.length != 2) {
                 throw new DukeException("Please use the format: deadline (name) /by (when)");
             }
             String name = split[0];
-            String by = split[1];
+            LocalDate by = LocalDate.parse(split[1]);
             task = new Deadline(name, by);
         } else if (input.startsWith("event ") || input.equals("event")) {
             if (input.length() < 7 || input.substring(6).trim().isEmpty()) {
                 throw new DukeException("The description of a deadline cannot be empty.");
             }
             String details = input.substring(6).trim();
-            String[] split = details.split("/at ");
+            String[] split = details.split(" /at ");
             if (split.length != 2) {
                 throw new DukeException("Please use the format: event (name) /at (what time)");
             }
             String name = split[0];
-            String duration = split[1];
+            LocalDate duration = LocalDate.parse(split[1]);
             task = new Event(name, duration);
         } else {
             System.out.println("I'm sorry, but I don't know what that means.");
