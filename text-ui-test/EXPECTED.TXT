@@ -3,124 +3,119 @@ Hello, I'm Duke, your personal assistant!
 What can I do for you?
 ____________________________________________________________
 ____________________________________________________________
-Error! We had a problem understanding your message.
+There was an error parsing your command.
 The description of a todo cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
-Error! We had a problem understanding your message.
+There was an error parsing your command.
 The description of a todo cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
 Sure, I've added this task to your list:
-[T][X] read book
+ [T][X] read book
 You now have 1 task(s) in the list!
 ____________________________________________________________
 ____________________________________________________________
-Error! We had a problem understanding your message.
-The description of a deadline cannot be empty.
+There was an error parsing your command.
+The description of this kind of task cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
-Error! We had a problem understanding your message.
-A date needs to be provided with /by when adding a deadline.
-Usage: deadline return book /by 2020-12-30
+There was an error parsing your command.
+A date needs to be provided with /by or /at.
+Usage: deadline return book /by 2020-12-30 OR event library renewal /at 2020-12-29
 ____________________________________________________________
 ____________________________________________________________
 Sure, I've added this task to your list:
-[D][X] return book (by: 25 December 2020)
+ [D][X] return book (by: 25 December 2020)
 You now have 2 task(s) in the list!
 ____________________________________________________________
 ____________________________________________________________
-Error! We had a problem understanding your message.
-The description of an event cannot be empty.
+There was an error parsing your command.
+The description of this kind of task cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
-Error! We had a problem understanding your message.
-A date needs to be provided with /at when adding a event.
-Usage: event library renewal /at 2020-12-31
+There was an error parsing your command.
+A date needs to be provided with /by or /at.
+Usage: deadline return book /by 2020-12-30 OR event library renewal /at 2020-12-29
 ____________________________________________________________
 ____________________________________________________________
 Sure, I've added this task to your list:
-[E][X] library renewal (at: 26 December 2020)
+ [E][X] library renewal (at: 26 December 2020)
 You now have 3 task(s) in the list!
 ____________________________________________________________
 ____________________________________________________________
 Sure, I've added this task to your list:
-[T][X] do homework
+ [T][X] do homework
 You now have 4 task(s) in the list!
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1: [T][X] read book
-2: [D][X] return book (by: 25 December 2020)
-3: [E][X] library renewal (at: 26 December 2020)
-4: [T][X] do homework
+ 1: [T][X] read book
+ 2: [D][X] return book (by: 25 December 2020)
+ 3: [E][X] library renewal (at: 26 December 2020)
+ 4: [T][X] do homework
 ____________________________________________________________
 ____________________________________________________________
-Error! We had a problem understanding your message.
-The index of the task to be marked done must be provided.
+There was an error parsing your command.
+The index of the task must be provided.
 ____________________________________________________________
 ____________________________________________________________
-Error! We had a problem understanding your message.
-The index of the task to be marked done must be provided.
+There was an error parsing your command.
+The index of the task must be provided.
 ____________________________________________________________
 ____________________________________________________________
-Error! We had a problem understanding your message.
-The index provided is too small.
-Input an integer that is 1 or greater.
-____________________________________________________________
-____________________________________________________________
-Error! We had a problem understanding your message.
-The index provided is too large.
+The index you provided was out of bounds.
 Run list to see your list of tasks.
 ____________________________________________________________
 ____________________________________________________________
-Great Job! I've marked this task as done:
-[D][Y] return book (by: 25 December 2020)
+The index you provided was out of bounds.
+Run list to see your list of tasks.
 ____________________________________________________________
 ____________________________________________________________
-Great Job! I've marked this task as done:
-[T][Y] do homework
+Great! I've marked this task as done:
+ [D][Y] return book (by: 25 December 2020)
+____________________________________________________________
+____________________________________________________________
+Great! I've marked this task as done:
+ [T][Y] do homework
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1: [T][X] read book
-2: [D][Y] return book (by: 25 December 2020)
-3: [E][X] library renewal (at: 26 December 2020)
-4: [T][Y] do homework
+ 1: [T][X] read book
+ 2: [D][Y] return book (by: 25 December 2020)
+ 3: [E][X] library renewal (at: 26 December 2020)
+ 4: [T][Y] do homework
 ____________________________________________________________
 ____________________________________________________________
-Error! We had a problem understanding your message.
-The index of the task to be deleted must be provided.
+There was an error parsing your command.
+The index of the task must be provided.
 ____________________________________________________________
 ____________________________________________________________
-Error! We had a problem understanding your message.
-The index of the task to be deleted must be provided.
+There was an error parsing your command.
+The index of the task must be provided.
 ____________________________________________________________
 ____________________________________________________________
-Error! We had a problem understanding your message.
-The index provided is too small.
-Input an integer that is 1 or greater.
+The index you provided was out of bounds.
+Run list to see your list of tasks.
 ____________________________________________________________
 ____________________________________________________________
 Sure, I've deleted this task from your list:
-[T][Y] do homework
+ [T][Y] do homework
 You now have 3 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
-Error! We had a problem understanding your message.
-The index provided is too large.
+The index you provided was out of bounds.
 Run list to see your list of tasks.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1: [T][X] read book
-2: [D][Y] return book (by: 25 December 2020)
-3: [E][X] library renewal (at: 26 December 2020)
+ 1: [T][X] read book
+ 2: [D][Y] return book (by: 25 December 2020)
+ 3: [E][X] library renewal (at: 26 December 2020)
 ____________________________________________________________
 ____________________________________________________________
-Error! We had a problem understanding your message.
-Your input must start with one of the following:
-"todo", "deadline", "event", "list", "done" or "delete".
+There was an error parsing your command.
+blahblah is not a valid TaskType.
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon! :)
