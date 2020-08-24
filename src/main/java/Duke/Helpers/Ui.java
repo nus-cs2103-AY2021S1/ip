@@ -3,9 +3,12 @@ package Duke.Helpers;
 import Duke.Duke;
 import Duke.Errors.DukeException;
 
+import java.util.Scanner;
+
 public class Ui {
     String curr;
     int currNum = 0;
+    Scanner sc = new Scanner(System.in);
     public void showLoadingError(DukeException d){
         System.out.println(d.getMessage());
     }
@@ -17,7 +20,11 @@ public class Ui {
         System.out.println("  ____________________________________________________________\n");
     }
     public String readCommand(){
-        return this.curr;
+        if(sc.hasNext()){
+            return sc.nextLine();
+        }else{
+            return null;
+        }
     }
     public void curr(){
         System.out.println(this.curr);

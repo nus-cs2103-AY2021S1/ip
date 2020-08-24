@@ -1,4 +1,4 @@
-E | 1 | book club | 12:00-14:00
-D | 0 | submission | 12 Dec 2019
-T | 0 | buy book
-D | 0 | submission | 14 Nov 2020
+T | 0 | read book
+T | 0 | whatever
+T | 0 | omg
+T | 1 | look

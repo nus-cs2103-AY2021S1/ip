@@ -11,7 +11,9 @@ public class ListCommand extends Command {
     }
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         super.execute(tasks, ui, storage);
-        Task.listing();
+        for(int i = 0; i < tasks.getAllTasks().size(); i++){
+            System.out.println(tasks.getAllTasks().get(i));
+        }
     }
 
 }

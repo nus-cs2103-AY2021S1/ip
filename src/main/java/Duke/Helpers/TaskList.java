@@ -1,18 +1,19 @@
 package Duke.Helpers;
 import Duke.Duke;
+import Duke.Tasks.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    List<String> allTasks;
-    public TaskList(List<String> tasks){
+    List<Task> allTasks;
+    public TaskList(List<Task> tasks){
         this.allTasks = new ArrayList<>(tasks);
     }
     public TaskList(){
         allTasks = new ArrayList<>();
     }
-    public List<String> getAllTasks(){
+    public List<Task> getAllTasks(){
         return allTasks;
     }
 }

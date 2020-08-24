@@ -37,11 +37,18 @@ abstract public class Task {
         tasks.add(this);
     }
 
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
     /**
      * this prints out that this task is added successfully to the task.
      */
-    public void output(String s) throws DukeException {
-        update(s);
+    public void output(String s) {
         System.out.println("  Got it. I've added this task:\n  " + this.toString() + "\n" +
                 "  Now you have " + tasks.size() + " tasks in the list.");
     }
@@ -61,7 +68,6 @@ abstract public class Task {
                 System.out.println("   Noted. I've removed this task:");
                 System.out.println("   " + tasks.get(ID - 1).toString());
                 System.out.println("  Now you have " + tasks.size() + " tasks in the list.");
-                update(s);
     }
     public boolean isDeleted(){
         return deleted;
@@ -77,9 +83,12 @@ abstract public class Task {
                 tasks.get(ID - 1).done = true;
                 System.out.println("   Nice! I've marked this task as done:");
                 System.out.println("   " + tasks.get(ID - 1).toString());
-                update(s);
+                //update(s);
     }
 
+    public void setDone(boolean done) {
+        this.done = done;
+    }
 
     /**
      * This prints out all tje Since it needs to assign truth to task from tasks,
@@ -87,7 +96,6 @@ abstract public class Task {
      * and also gives info on whether it is present or not.
      */
     public static void listing() {
-
         System.out.println("   Here are the tasks in your list:");
         for (Task task : tasks) {
             if (!task.deleted) {
@@ -103,6 +111,15 @@ abstract public class Task {
             }
         }
         return s;
+    }
+    public static void append(String filePath) throws DukeException{
+        try {
+            FileWriter fw = new FileWriter(filePath, true);
+            fw.write(listUpdate());
+            fw.close();
+        } catch (IOException i) {
+            throw new FileAbsentException(filePath);
+        }
     }
     public static void update(String filePath) throws DukeException {
             try {
@@ -127,7 +144,6 @@ abstract public class Task {
      */
     public String toString() {
         if (this.done) {
-
             return "[" + "\u2713" + "] " + this.name;
         }
         return "[" + "\u2717" + "] " + this.name;
