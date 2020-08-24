@@ -18,13 +18,13 @@ public class Parser {
             }
             case "done": {
                 if (!isNumeric(commands[1])) {
-                    throw new DukeException(" ☹ OOPS!!! The usage of done command is incorrect.");
+                    throw new DukeException(" ☹ OOPS!!! The argument of done command is not a number.");
                 }
                 return commands;
             }
             case "delete": {
                 if (!isNumeric(commands[1])) {
-                    throw new DukeException(" ☹ OOPS!!! The usage of delete command is incorrect.");
+                    throw new DukeException(" ☹ OOPS!!! The argument of delete command is not a number.");
                 }
                 return commands;
             }
@@ -64,7 +64,7 @@ public class Parser {
 
     private static boolean isNumeric(String str){
         for (int i = str.length(); --i >= 0;) {
-            if (!Character.isDigit(str.charAt(i))) {
+            if (!(Character.isDigit(str.charAt(i)) || str.charAt(i) == ' ')) {
                 return false;
             }
         } return true;
