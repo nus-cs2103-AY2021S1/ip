@@ -33,7 +33,7 @@ public class AddDeadlineCommand extends AddCommand {
             } catch (IOException e) {
                 System.err.println(e.getMessage());
             }
-        } catch (IndexOutOfBoundsException | WrongFormatException | DateTimeException e)
+        } catch (IndexOutOfBoundsException | WrongFormatException | DateTimeException | NumberFormatException e)
         { // duke.command.Command is in a wrong format
             throw new DeadlineWrongFormatException();
         }
