@@ -80,4 +80,11 @@ public class Ui {
         System.out.println(LINE);
         System.out.print("> ");
     }
+
+    public void askTaskNumToDelete() {
+        System.out.println(LINE);
+        System.out.println("What is the number of the task you wish to delete?"); 
+        System.out.println(LINE);
+        System.out.print("> ");
+    }
 }
