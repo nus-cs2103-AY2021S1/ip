@@ -1,4 +1,8 @@
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -67,8 +71,7 @@ public class Duke {
                                 + getNumOfTaskMessage();
                         break;
                     case DEADLINE:
-                        resultString = ADDED_TASK_MESSAGE + "\n" + outputIndent + addDeadline(parsedUserInput) + "\n"
-                                + getNumOfTaskMessage();
+                        resultString =  addDeadline(parsedUserInput);
                         break;
                     case DELETE:
                         resultString = delete(parsedUserInput);
@@ -177,23 +180,38 @@ public class Duke {
         return outputIndent+event.toString();
     }
 
+    private LocalDateTime parseDateAndTime(String dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        LocalDateTime d1 = LocalDateTime.parse(dateTime,formatter);
+        return d1;
+    }
+
     private String addDeadline(String[] parsedUserInput) {
-        String taskDescription ="";
-        for(int i = 1; i < parsedUserInput.length; i++) {
-            if (i == parsedUserInput.length-1) {
-                taskDescription += parsedUserInput[i];
-            } else {
-                taskDescription += parsedUserInput[i] + " ";
+        try {
+            String taskDescription = "";
+            for (int i = 1; i < parsedUserInput.length; i++) {
+                if (i == parsedUserInput.length - 1) {
+                    taskDescription += parsedUserInput[i];
+                } else {
+                    taskDescription += parsedUserInput[i] + " ";
+                }
             }
+
+
+            String[] deadlineArray = taskDescription.split(" /by ");
+            String description = deadlineArray[0];
+            String date = deadlineArray[1];
+
+
+            LocalDateTime d1 = parseDateAndTime(date);
+            Deadline deadline = new Deadline(description, d1);
+            lstOfTask.add(deadline);
+            return ADDED_TASK_MESSAGE + "\n" + outputIndent + outputIndent + deadline.toString()+ "\n"
+                    + getNumOfTaskMessage();
+        } catch (DateTimeParseException e) {
+            return outputIndent+ "Please give a valid date: " +"\n"
+                    + outputIndent+ e.getMessage();
         }
-
-        String[] deadlineArray = taskDescription.split(" /by ");
-        String description = deadlineArray[0];
-        String date = deadlineArray[1];
-
-        Deadline deadline = new Deadline(description, date.trim());
-        lstOfTask.add(deadline);
-        return outputIndent + deadline.toString();
     }
 
     public int getNumOfTask() {
@@ -268,7 +286,7 @@ public class Duke {
             } else if (type.equals("E")) {
                 task = new Event(description, date);
             } else { // "D"
-                task = new Deadline(description, date);
+                task = new Deadline(description, parseDateAndTime(date));
             }
 
             if (status.equals("\u2713")) {
