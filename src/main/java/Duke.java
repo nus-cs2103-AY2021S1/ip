@@ -84,7 +84,6 @@ public class Duke {
      * Driver function
      */
     public static void run() {
-        //System.out.println("[project_root]/data/duke.txt");
         Scanner scanner = new Scanner(System.in);
         String currentWord = scanner.nextLine();
         try {

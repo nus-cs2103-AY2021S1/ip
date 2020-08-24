@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String folderPath = "/Users/admin/ip/data/";
+    private static final String folderPath = "data/";
     private final String storagePath;
 
     public Storage(String fileName) {
