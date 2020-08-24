@@ -6,8 +6,8 @@ public class ToDos extends Task {
         super(task);
     }
 
-    public ToDos(String task, boolean done) {
-        super(task, done);
+    public ToDos(String task, boolean isDone) {
+        super(task, isDone);
     }
 
     /**
@@ -17,7 +17,7 @@ public class ToDos extends Task {
      */
     @Override
     public String toString() {
-        String doneIndicator = this.done ? "[✓]" : "[✗]";
+        String doneIndicator = this.isDone ? "[✓]" : "[✗]";
         return "[T]" + doneIndicator + " " + this.task;
     }
 
@@ -28,7 +28,7 @@ public class ToDos extends Task {
      */
     @Override
     public String parseToSaveFormat() {
-        String isDoneStr = this.done ? "1" : "0";
+        String isDoneStr = this.isDone ? "1" : "0";
         String res = "T - " + isDoneStr + " - " + this.task;
         return res;
     }

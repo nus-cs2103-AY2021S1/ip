@@ -6,8 +6,8 @@ public class ToDos extends Task {
         super(task);
     }
 
-    public ToDos(String task, boolean done) {
-        super(task, done);
+    public ToDos(String task, boolean isDone) {
+        super(task, isDone);
     }
 
     @Override

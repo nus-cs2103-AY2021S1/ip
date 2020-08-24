@@ -21,7 +21,7 @@ public class Parser {
         String[] inputArr = input.split(" ");
         return inputArr.length == 2
                 && input.substring(0, 4).equals("done")
-                && isNumber(input.substring(5,6));
+                && isNumber(input.substring(5, 6));
     }
 
     /**
@@ -35,7 +35,7 @@ public class Parser {
         String[] inputArr = input.split(" ");
         return inputArr.length == 2
                 && input.substring(0, 6).equals("delete")
-                && isNumber(input.substring(7,8));
+                && isNumber(input.substring(7, 8));
     }
 
     private static boolean isNumber(String input) {
@@ -55,23 +55,23 @@ public class Parser {
      * @param input Input command to check format.
      * @return boolean.
      */
-    public static boolean correctInputFormat(String input) {
+    public static boolean isCorrectInputFormat(String input) {
         String[] inputArr = input.split(" ", 2);
         if (inputArr.length == 1) {
             return false;
         }
         //correct todo format
-        boolean todoBool = inputArr.length == 2 && inputArr[0].equals("todo");
+        boolean isTodoBool = inputArr.length == 2 && inputArr[0].equals("todo");
 
         String taskWithDate = inputArr[1];
         String[] taskAndDateArr = taskWithDate.split(" /");
         //correct deadline format
-        boolean deadlineBool = taskAndDateArr.length == 2 && inputArr[0].equals("deadline");
+        boolean isDeadlineBool = taskAndDateArr.length == 2 && inputArr[0].equals("deadline");
 
         //correct event format
-        boolean eventBool = taskAndDateArr.length == 2 && inputArr[0].equals("event");
+        boolean isEventBool = taskAndDateArr.length == 2 && inputArr[0].equals("event");
 
-        return todoBool || deadlineBool || eventBool;
+        return isTodoBool || isDeadlineBool || isEventBool;
     }
 
     /**

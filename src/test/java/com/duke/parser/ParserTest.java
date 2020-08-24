@@ -60,7 +60,7 @@ public class ParserTest {
     @Test
     public void correctInputFormatTest_incorrectToDoInput_returnFalse() {
         String input = "todoeatfood";
-        boolean actualOutput = Parser.correctInputFormat(input);
+        boolean actualOutput = Parser.isCorrectInputFormat(input);
         boolean expectedOutput = false;
         assertEquals(expectedOutput, actualOutput);
     }
@@ -68,7 +68,7 @@ public class ParserTest {
     @Test
     public void correctInputFormatTest_correctToDoInput_returnTrue() {
         String input = "todo eat food";
-        boolean actualOutput = Parser.correctInputFormat(input);
+        boolean actualOutput = Parser.isCorrectInputFormat(input);
         boolean expectedOutput = true;
         assertEquals(expectedOutput, actualOutput);
     }
@@ -76,7 +76,7 @@ public class ParserTest {
     @Test
     public void correctInputFormatTest_incorrectDeadlineInput_returnFalse() {
         String input = "deadlines finishwritingJUnittests/by2/12/20191800";
-        boolean actualOutput = Parser.correctInputFormat(input);
+        boolean actualOutput = Parser.isCorrectInputFormat(input);
         boolean expectedOutput = false;
         assertEquals(expectedOutput, actualOutput);
     }
@@ -84,7 +84,7 @@ public class ParserTest {
     @Test
     public void correctInputFormatTest_correctDeadlineInput_returnTrue() {
         String input = "deadline finish writing JUnit tests /by 2/12/2019 1800";
-        boolean actualOutput = Parser.correctInputFormat(input);
+        boolean actualOutput = Parser.isCorrectInputFormat(input);
         boolean expectedOutput = true;
         assertEquals(expectedOutput, actualOutput);
     }
@@ -92,7 +92,7 @@ public class ParserTest {
     @Test
     public void correctInputFormatTest_incorrectEventsInput_returnFalse() {
         String input = "eventcs2103Tfinals/at2/12/20191800";
-        boolean actualOutput = Parser.correctInputFormat(input);
+        boolean actualOutput = Parser.isCorrectInputFormat(input);
         boolean expectedOutput = false;
         assertEquals(expectedOutput, actualOutput);
     }
@@ -100,7 +100,7 @@ public class ParserTest {
     @Test
     public void correctInputFormatTest_correctEventsInput_returnTrue() {
         String input = "event CS2103T finals /at 2/12/2019 1800";
-        boolean actualOutput = Parser.correctInputFormat(input);
+        boolean actualOutput = Parser.isCorrectInputFormat(input);
         boolean expectedOutput = true;
         assertEquals(expectedOutput, actualOutput);
     }

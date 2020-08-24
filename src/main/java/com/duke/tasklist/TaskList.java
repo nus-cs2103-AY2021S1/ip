@@ -70,5 +70,5 @@ public class TaskList {
      */
     public Task remove(int index) {
         return this.list.remove(index);
-    };
+    }
 }

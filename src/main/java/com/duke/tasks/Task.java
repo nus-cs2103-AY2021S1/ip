@@ -2,21 +2,21 @@ package com.duke.tasks;
 
 public class Task {
     protected String task;
-    protected boolean done;
+    protected boolean isDone;
 
     public Task() {
         this.task = null;
-        this.done = false;
+        this.isDone = false;
     }
 
-    public Task(String task, boolean done) {
+    public Task(String task, boolean isDone) {
         this.task = task;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     public Task(String task) {
         this.task = task;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -25,7 +25,7 @@ public class Task {
      * @param bool boolean on whether task is done or not.
      */
     public void setDone(boolean bool) {
-        this.done = bool;
+        this.isDone = bool;
     }
 
     /**
@@ -42,7 +42,9 @@ public class Task {
      *
      * @return boolean returns done attribute of Task object.
      */
-    public boolean getDone() { return this.done; }
+    public boolean getDone() {
+        return this.isDone;
+    }
 
     /**
      * Reformats date into format displayable.
@@ -65,7 +67,7 @@ public class Task {
      */
     // Task - 1 - read book
     public String parseToSaveFormat() {
-        String isDoneStr = this.done ? "1" : "0";
+        String isDoneStr = this.isDone ? "1" : "0";
         return "Task - " + isDoneStr + " - " + this.task;
     }
 }

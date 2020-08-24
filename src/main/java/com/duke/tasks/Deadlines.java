@@ -1,6 +1,7 @@
 package com.duke.tasks;
 
 import com.duke.parser.Parser;
+
 import java.time.LocalDate;
 
 public class Deadlines extends Task {
@@ -15,13 +16,13 @@ public class Deadlines extends Task {
         this.time = Integer.parseInt(dateAndTimeArr[1]);
     }
 
-    public Deadlines(String task, String dateAndTime, boolean done) {
+    public Deadlines(String task, String dateAndTime, boolean isDone) {
         String[] dateAndTimeArr = dateAndTime.split(" ");
 
         this.task = task;
         this.date = LocalDate.parse(dateAndTimeArr[0]);
         this.time = Integer.parseInt(dateAndTimeArr[1]);
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
@@ -31,7 +32,7 @@ public class Deadlines extends Task {
      */
     @Override
     public String toString() {
-        String doneIndicator = this.done ? "[✓]" : "[✗]";
+        String doneIndicator = this.isDone ? "[✓]" : "[✗]";
         int dayOfMonth = this.date.getDayOfMonth();
         String month = this.date.getMonth().toString();
         int year = this.date.getYear();
@@ -56,7 +57,7 @@ public class Deadlines extends Task {
     @Override
     public String parseToSaveFormat() {
         String res = "";
-        String isDoneStr = this.done ? "1" : "0";
+        String isDoneStr = this.isDone ? "1" : "0";
         String dateSaveFormatStr = Parser.parseDateToSaveFormat(this.date);
         res = "D - " + isDoneStr + " - " + this.task + " - " + dateSaveFormatStr + " " + this.time;
         return res;
