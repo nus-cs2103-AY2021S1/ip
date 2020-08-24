@@ -12,7 +12,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws ViscountException {
         Task newTask = getNewTask();
         tasks.add(newTask);
         storage.saveToDisk(tasks.getTasks());

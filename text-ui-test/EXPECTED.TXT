@@ -135,8 +135,7 @@ Alas, the description of the /on argument cannot be empty.
 __________________________________________________
 
 __________________________________________________
-Here are the todos in your list:
-1.[T][?] t1
+Alas, this command does not support /on.
 __________________________________________________
 
 __________________________________________________

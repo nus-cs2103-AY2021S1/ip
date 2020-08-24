@@ -28,6 +28,10 @@ public class Ui {
         speak("Farewell my friend, I hope to see you again!");
     }
     
+    public void showErrorExit() {
+        System.out.println(">> Viscount shutting down.");
+    }
+    
     public String readInput() {
         return scanner.nextLine();
     }

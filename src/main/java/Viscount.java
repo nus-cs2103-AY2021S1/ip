@@ -9,14 +9,17 @@ public class Viscount {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private boolean shouldRun;
     
     public Viscount(String filePathString) {
         this.storage = new Storage(filePathString);
         this.ui = new Ui();
         try {
             this.tasks = new TaskList(storage.loadFromDisk());
-        } catch (IOException e) {
-            
+            this.shouldRun = true;
+        } catch (ViscountIOException e) {
+            ui.showError(e.getMessage());
+            this.shouldRun = false;
         }
     }
     
@@ -35,10 +38,19 @@ public class Viscount {
             }
         }
         
+        exit();
+    }
+    
+    private void exit() {
         ui.showExit();
     }
 
     public static void main(String[] args) {
-        new Viscount(DATA_FILE_PATH).run();
+        Viscount viscount = new Viscount(DATA_FILE_PATH);
+        if (viscount.shouldRun) {
+            viscount.run();
+        } else {
+            viscount.exit();
+        }
     }
 }

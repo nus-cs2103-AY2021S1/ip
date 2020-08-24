@@ -23,7 +23,7 @@ public class Storage {
         this.filePathString = filePathString;
     }
 
-    public void saveToDisk(List<Task> tasks) {
+    public void saveToDisk(List<Task> tasks) throws ViscountIOException {
         Path filePath = Paths.get(filePathString);
         List<String> savedData = new ArrayList<>();
 
@@ -34,48 +34,54 @@ public class Storage {
         try {
             Files.write(filePath, savedData, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            // TODO handle
+            throw new ViscountIOException("saving");
         }
     }
 
-    public List<Task> loadFromDisk() throws IOException {
+    public List<Task> loadFromDisk() throws ViscountIOException {
         Path filePath = Paths.get(filePathString);
         boolean doesFileExist = Files.exists(filePath);
         List<Task> tasks = new ArrayList<>();
 
         if (doesFileExist) {
-            File f = new File(filePathString);
-            Scanner sc = new Scanner(f);
-            
-            while (sc.hasNext()) {
-                String line = sc.nextLine();
-                if (line.isEmpty()) {
-                    // If the data file has empty lines, skip them
-                    continue;
-                } else {
-                    List<String> taskData = Arrays.asList(line.split("\\|"));
+            try {
+                File f = new File(filePathString);
+                Scanner sc = new Scanner(f);
 
-                    TaskType taskType = TaskType.valueOf(taskData.get(0));
-                    boolean isDone = !taskData.get(1).equals("0");
-                    String taskDescription = taskData.get(2);
-
-                    if (taskType == TaskType.TODO) {
-                        tasks.add(new Todo(taskDescription, isDone));
-                    } else if (taskType == TaskType.DEADLINE) {
-                        LocalDateTime dueDate = Parser.parseDateTime(
-                                taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
-                        tasks.add(new Deadline(taskDescription, isDone, dueDate));
-                    } else if (taskType == TaskType.EVENT) {
-                        LocalDateTime eventTime = Parser.parseDateTime(
-                                taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
-                        tasks.add(new Event(taskDescription, isDone, eventTime));
+                while (sc.hasNext()) {
+                    String line = sc.nextLine();
+                    if (line.isEmpty()) {
+                        // If the data file has empty lines, skip them
+                        continue;
                     } else {
-                        // TODO handle corrupted data
+                        List<String> taskData = Arrays.asList(line.split("\\|"));
+
+                        TaskType taskType = TaskType.valueOf(taskData.get(0));
+                        boolean isDone = !taskData.get(1).equals("0");
+                        String taskDescription = taskData.get(2);
+
+                        if (taskType == TaskType.TODO) {
+                            tasks.add(new Todo(taskDescription, isDone));
+                        } else if (taskType == TaskType.DEADLINE) {
+                            LocalDateTime dueDate = Parser.parseDateTime(
+                                    taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
+                            tasks.add(new Deadline(taskDescription, isDone, dueDate));
+                        } else if (taskType == TaskType.EVENT) {
+                            LocalDateTime eventTime = Parser.parseDateTime(
+                                    taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
+                            tasks.add(new Event(taskDescription, isDone, eventTime));
+                        }
                     }
                 }
+            } catch (Exception e) {
+                throw new ViscountIOException("loading");
             }
         } else {
-            Files.write(filePath, new ArrayList<String>(), StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
+            try {
+                Files.write(filePath, new ArrayList<String>(), StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
+            } catch (IOException e) {
+                throw new ViscountIOException("creating a new file for");
+            }
         }
         
         return tasks;

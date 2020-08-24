@@ -34,7 +34,7 @@ public class Parser {
                 dateString = String.join(" ", arguments.subList(onArgumentIndex + 1, arguments.size()));
 
                 if (modifier.equals("todo")) {
-                    // TODO handle unsupported exception with todo /on
+                    throw new ViscountUnsupportedOperationException("/on");
                 } else if (dateString.isEmpty()) {
                     throw new ViscountMissingArgumentDescriptionException("/on");
                 }
