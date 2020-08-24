@@ -35,16 +35,19 @@ public class Parser {
         else throw new InvalidParameterException("Invalid input");
     }
 
-    public static String getName(String line) throws NullPointerException{
+    public static String getName(String line) throws NullPointerException, InvalidParameterException {
         String name;
-        if (taskType(line) == TaskType.TODO) {
-            name = line.substring(5);
+        try {
+            if (taskType(line) == TaskType.TODO) {
+                name = line.substring(5);
+            } else if (taskType(line) == TaskType.DEADLINE) {
+                name = line.split(" /by ")[0].substring(9);
+            } else {
+                name = line.split(" /at ")[0].substring(6);
+            }
         }
-        else if (taskType(line) == TaskType.DEADLINE) {
-            name = line.split(" /by ")[0].substring(9);
-        }
-        else {
-            name = line.split(" /at ")[0].substring(6);
+        catch (InvalidParameterException e) {
+            throw new InvalidParameterException("Invalid parameters");
         }
         if (name.isEmpty()) {
             throw new NullPointerException("Null Object");
