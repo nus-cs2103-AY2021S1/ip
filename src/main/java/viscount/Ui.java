@@ -2,12 +2,13 @@ package viscount;
 
 import viscount.task.Task;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
     private static final String VISCOUNT_LOGO =
-            "        _  _____  _____                  _    \n" +
+            "        _  _____  _____                  _    \n" + 
                     "       (_)/ ____|/ ____|                | |   \n" +
                     " __   ___| (___ | |     ___  _   _ _ __ | |_  \n" +
                     " \\ \\ / / |\\___ \\| |    / _ \\| | | | '_ \\| __| \n" +
@@ -21,17 +22,17 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
     
+    public Ui(InputStream is) {
+        this.scanner = new Scanner(is);
+    }
+    
     public void showWelcome() {
         System.out.println(Ui.VISCOUNT_LOGO);
-        speak("Good day to you! I'm viscount.Viscount.\nWhat can I do for you on this blessed day?");
+        speak("Good day to you! I'm Viscount.\nWhat can I do for you on this blessed day?");
     }
     
     public void showExit() {
         speak("Farewell my friend, I hope to see you again!");
-    }
-    
-    public void showErrorExit() {
-        System.out.println(">> viscount.Viscount shutting down.");
     }
     
     public String readInput() {
