@@ -2,7 +2,10 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -167,44 +170,44 @@ class Todo extends Task {
 }
 
 class Deadline extends Task {
-    String deadline;
+    LocalDate date;
 
     Deadline(String task, String deadline) {
         super(task);
-        this.deadline = deadline;
+        this.date = LocalDate.parse(deadline);
         updateRep();
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.deadline + ")";
+        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
     public void updateRep() {
         super.updateRep();
-        this.saveRep = "D%d%" + this.done + "%d%" + this.task + "%d%" + this.deadline;
+        this.saveRep = "D%d%" + this.done + "%d%" + this.task + "%d%" + this.date;
     }
 }
 
 class Event extends Task {
-    String duration;
+    LocalDate date;
 
     Event(String task, String duration) {
         super(task);
-        this.duration = duration;
+        this.date = LocalDate.parse(duration);
         updateRep();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.duration + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
     public void updateRep() {
         super.updateRep();
-        this.saveRep = "E%d%" + this.done + "%d%" + this.task + "%d%" + this.duration;
+        this.saveRep = "E%d%" + this.done + "%d%" + this.task + "%d%" + this.date;
     }
 }
 
