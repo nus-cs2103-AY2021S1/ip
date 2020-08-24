@@ -1,9 +1,11 @@
 package duke.command;
 
+import java.util.List;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.Todo;
 
 public class CommandLibrary {
@@ -47,9 +49,20 @@ public class CommandLibrary {
         ui.systemMessage("afternoon sir i have mark this task done sir:\n  " + selected);
     };
     public static final CommandExecutable listCommand = (taskList, ui, args) ->
-            ui.systemMessage(taskList.toString());
+        ui.systemMessage(taskList.toString());
     public static final CommandExecutable byeCommand = (taskList, ui, args) -> {
         ui.close();
         ui.systemMessage("bye sir thanks for using me sir hope to see you again sir");
+    };
+    public static final CommandExecutable findCommand = (taskList, ui, args) -> {
+        List<Task> items = taskList.getItemsList();
+        for (int i = 0; i < items.size(); i++) {
+            // if description does not contain string
+            if (!items.get(i).getDescription().contains(args[0])) {
+                items.set(i, null);
+            }
+        }
+        ui.systemMessage("sir i found your items sir look:");
+        ui.systemMessage(TaskList.enumerateItems(items));
     };
 }

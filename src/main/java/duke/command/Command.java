@@ -37,7 +37,11 @@ public enum Command {
     DELETE(CommandLibrary.deleteCommand,
             DukeException.Errors.UNKNOWN_COMMAND,
             "(\\d+)",
-            "delete");
+            "delete"),
+    FIND(CommandLibrary.findCommand,
+            DukeException.Errors.UNKNOWN_COMMAND,
+            "(.*)",
+            "find");
     private final CommandExecutable exec;
     private final DukeException.Errors matchError;
     private final Pattern format;
