@@ -34,6 +34,9 @@ public class Parser {
             case "delete":
                 num = Integer.parseInt(splitString[1]);
                 return new DeleteCommand(num);
+            case "find":
+                String matchString = splitString[1].trim();
+                return new FindCommand(matchString);
             default:
                 throw new InvalidCommandException();
         }
