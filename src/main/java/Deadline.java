@@ -3,7 +3,8 @@ import java.time.LocalDateTime;
 public class Deadline extends Task {
     public static final String STORE_DEADLINE = "D";
 
-    private static final String DELIMITER = " /by ";
+    private static final String DELIMITER_COMMAND = " /by ";
+    private static final String DELIMITER_STORAGE = " //| ";
 
     private LocalDateTime deadline;
 
@@ -18,7 +19,7 @@ public class Deadline extends Task {
     }
 
     public static Deadline create(String args) throws TaskException {
-        String[] argsList = args.split(DELIMITER);
+        String[] argsList = args.split(DELIMITER_COMMAND);
         if (argsList.length < 2) {
             throw new TaskException("Not enough arguments");
         } else {
@@ -27,9 +28,22 @@ public class Deadline extends Task {
         }
     }
 
+    public static Deadline parseStorageString(String storageString) throws TaskException {
+        String[] inputList = storageString.split(DELIMITER_STORAGE);
+        if (inputList.length < 3) {
+            throw new TaskException("Invalid storage string");
+        }
+        return new Deadline(inputList[0], inputList[1], decodeCompletionFlag(inputList[2]));
+    }
+
+    @Override
+    public TaskType getTaskType() {
+        return TaskType.DEADLINE;
+    }
+
     @Override
     public String toStorageString() {
-        return STORE_DEADLINE + " | " + description + " | " + deadline + " | " + getCompletionFlagStorage();
+        return description + DELIMITER_STORAGE + deadline + DELIMITER_STORAGE + storeCompletionFlag();
     }
 
     @Override

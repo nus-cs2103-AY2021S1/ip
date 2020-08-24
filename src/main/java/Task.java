@@ -30,6 +30,8 @@ public abstract class Task {
         }
     }
 
+    public abstract TaskType getTaskType();
+
     public Task completeTask() {
         isComplete = true;
         return this;
@@ -40,8 +42,12 @@ public abstract class Task {
         return "[" + completionFlag + "]";
     }
 
-    protected String getCompletionFlagStorage() {
+    protected String storeCompletionFlag() {
         return isComplete ? STORE_COMPLETED : STORE_INCOMPLETE;
+    }
+
+    protected static boolean decodeCompletionFlag(String flag) {
+        return flag.equals(STORE_COMPLETED);
     }
 
     public abstract String toStorageString();
