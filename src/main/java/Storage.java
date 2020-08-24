@@ -25,15 +25,16 @@ public class Storage {
      */
     public boolean checkOrCreate() throws IOException {
         File file = new File(this.filePath);
-        return file.getParentFile().mkdirs() && file.createNewFile();
+        boolean createdDirectory = file.getParentFile().mkdirs();
+        boolean createdFile = file.createNewFile();
+        return createdDirectory || createdFile;
     }
 
     /**
      * Saves a list to the file. Creates the file if it does not exist
-     * @param lst list to save to the file
-     * @param <T> type parameter of object inside list
+     * @param lst TaskList to save to the file
      */
-    public <T> void save(List<T> lst){
+    public void save(TaskList lst){
         try {
             checkOrCreate();
             FileOutputStream fileOutputStream = new FileOutputStream(this.filePath);
@@ -46,28 +47,27 @@ public class Storage {
     }
 
     /**
-     * Reads from the file containing a list and returns the list. If file does not exist, returns an
+     * Reads from the file containing a TaskList and returns it. If file does not exist, returns an
      * empty file.
-     * @param <T> type parameter of object inside the list
-     * @return a list of objects from the file if file exists, otherwise an empty list
+     * @return the TaskList read from the file, otherwise an empty TaskList
      */
-    public <T> List<T> read() {
+    public TaskList read() {
         try {
             if (checkOrCreate()) {
                 System.out.println("File does not exist, creating file");
-                return new ArrayList<>();
+                return new TaskList();
             } else {
                 System.out.println("Todo file found, reading file");
                 FileInputStream fileInputStream = new FileInputStream(this.filePath);
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-                @SuppressWarnings("unchecked")
-                List<T> lst = (List<T>) objectInputStream.readObject();
+                TaskList lst = (TaskList) objectInputStream.readObject();
+                objectInputStream.close();
                 return lst;
             }
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error reading file");
             e.printStackTrace();
-            return new ArrayList<>(); // Returns an empty list so that program can keep running
+            return new TaskList(); // Returns an empty list so that program can keep running
         }
     }
 }

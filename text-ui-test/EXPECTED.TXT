@@ -1,105 +1,83 @@
+File does not exist, creating file
     ____________________________________________________________
     Hello! I'm DUKE
     I was created for the module CS2103T
     What can I do for you?
     ____________________________________________________________
-
     ____________________________________________________________
     Got it. I've added this task:
      [T][✘] read book
     Now you have 1 tasks in the list
     ____________________________________________________________
-
     ____________________________________________________________
-    Got it. I've added this task:
-     [D][✘] return book (by: June 6th)
-    Now you have 2 tasks in the list
+    :((( OOPS!!! I'm sorry, but I don't know what June 6th means :-(
     ____________________________________________________________
-
     ____________________________________________________________
     Got it. I've added this task:
      [E][✘] project meeting (at: Aug 6th 2-4pm)
-    Now you have 3 tasks in the list
+    Now you have 2 tasks in the list
     ____________________________________________________________
-
     ____________________________________________________________
     Got it. I've added this task:
      [T][✘] join sports club
-    Now you have 4 tasks in the list
+    Now you have 3 tasks in the list
     ____________________________________________________________
-
     ____________________________________________________________
     Got it. I've added this task:
      [T][✘] borrow book
-    Now you have 5 tasks in the list
+    Now you have 4 tasks in the list
     ____________________________________________________________
-
     ____________________________________________________________
-    EmptyBodyException: :((( OOPS!!! The date and time of a event cannot be empty.
+    :((( OOPS!!! The date and time of a event cannot be empty.
     ____________________________________________________________
-
     ____________________________________________________________
-    EmptyBodyException: :((( OOPS!!! The task number of a task cannot be empty.
+    :((( OOPS!!! The task number of a task cannot be empty.
     ____________________________________________________________
-
     ____________________________________________________________
     Here are the tasks in your list:
      1. [T][✘] read book
-     2. [D][✘] return book (by: June 6th)
-     3. [E][✘] project meeting (at: Aug 6th 2-4pm)
-     4. [T][✘] join sports club
-     5. [T][✘] borrow book
+     2. [E][✘] project meeting (at: Aug 6th 2-4pm)
+     3. [T][✘] join sports club
+     4. [T][✘] borrow book
     ____________________________________________________________
-
     ____________________________________________________________
-    IndexOutOfBoundsDukeException: :((( OOPS!!! Cannot find task 10 with only 5 task
+    :((( OOPS!!! Cannot find task 10 with only 4 task
     ____________________________________________________________
-
     ____________________________________________________________
-    IndexOutOfBoundsDukeException: :((( OOPS!!! Cannot find task 6 with only 5 task
+    :((( OOPS!!! Cannot find task 6 with only 4 task
     ____________________________________________________________
-
     ____________________________________________________________
     Here are the tasks in your list:
      1. [T][✘] read book
-     2. [D][✘] return book (by: June 6th)
-     3. [E][✘] project meeting (at: Aug 6th 2-4pm)
-     4. [T][✘] join sports club
-     5. [T][✘] borrow book
+     2. [E][✘] project meeting (at: Aug 6th 2-4pm)
+     3. [T][✘] join sports club
+     4. [T][✘] borrow book
     ____________________________________________________________
-
     ____________________________________________________________
-    UnknownInputException: :((( OOPS!!! I'm sorry, but I don't know what HAHAHAHAHAHHA means :-(
+    :((( OOPS!!! I'm sorry, but I don't know what HAHAHAHAHAHHA means :-(
     ____________________________________________________________
-
     ____________________________________________________________
     Nice! I've marked this task as done:
-     [E][✓] project meeting (at: Aug 6th 2-4pm)
+     [T][✓] join sports club
     ____________________________________________________________
-
-    ____________________________________________________________
-    Here are the tasks in your list:
-     1. [T][✘] read book
-     2. [D][✘] return book (by: June 6th)
-     3. [E][✓] project meeting (at: Aug 6th 2-4pm)
-     4. [T][✘] join sports club
-     5. [T][✘] borrow book
-    ____________________________________________________________
-
-    ____________________________________________________________
-    IndexOutOfBoundsDukeException: :((( OOPS!!! Cannot find task 0 with only 5 task
-    ____________________________________________________________
-
     ____________________________________________________________
     Here are the tasks in your list:
      1. [T][✘] read book
-     2. [D][✘] return book (by: June 6th)
-     3. [E][✓] project meeting (at: Aug 6th 2-4pm)
-     4. [T][✘] join sports club
-     5. [T][✘] borrow book
+     2. [E][✘] project meeting (at: Aug 6th 2-4pm)
+     3. [T][✓] join sports club
+     4. [T][✘] borrow book
     ____________________________________________________________
-
+    ____________________________________________________________
+    :((( OOPS!!! Cannot find task 0 with only 4 task
+    ____________________________________________________________
+    ____________________________________________________________
+    Here are the tasks in your list:
+     1. [T][✘] read book
+     2. [E][✘] project meeting (at: Aug 6th 2-4pm)
+     3. [T][✓] join sports club
+     4. [T][✘] borrow book
+    ____________________________________________________________
     ____________________________________________________________
     Bye. Hope to see you again soon!
+     File saved!
     ____________________________________________________________
-
