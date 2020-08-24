@@ -18,7 +18,7 @@ public class Todo extends Task {
     }
 
     public String formatTask() {
-        return ("T" + " | " + (isDone ? "V" : "X") + " | " + desc);
+        return ("T | " + (isDone ? "V" : "X") + " | " + desc);
     }
 
     @Override

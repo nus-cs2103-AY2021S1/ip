@@ -22,7 +22,7 @@ public class Task {
     }
 
     public String formatTask() {
-        return ("P" + " | " + (isDone ? "V" : "X") + " | " + desc);
+        return ("P | " + (isDone ? "V" : "X") + " | " + desc);
     }
 
     @Override
