@@ -3,24 +3,66 @@
    What can I do for you?
   _________________________________________________________________
   _________________________________________________________________
-   Got it. I've added this task:
-     [T][✘] Ask for Help
-   Now you have 2 tasks in the list.
+   Here are the tasks in your list:
+   1.[T][✓] read book
+   2.[D][✘] return book (by: June 6th)
+   3.[E][✘] project meeting (at: Aug 6th 2-4pm)
+   4.[T][✓] join sports club
   _________________________________________________________________
   _________________________________________________________________
-   Got it. I've added this task:
-     [D][✘] CS2103T iP (by: 20/8/20)
+   Noted. I've removed this task:
+     [T][✓] read book
    Now you have 3 tasks in the list.
+  _________________________________________________________________
+  _________________________________________________________________
+   Got it. I've added this task:
+     [T][✘] read book
+   Now you have 4 tasks in the list.
   _________________________________________________________________
   _________________________________________________________________
    Nice! I've marked this task as done:
      [T][✓] read book
   _________________________________________________________________
   _________________________________________________________________
+   Noted. I've removed this task:
+     [D][✘] return book (by: June 6th)
+   Now you have 3 tasks in the list.
+  _________________________________________________________________
+  _________________________________________________________________
+   Got it. I've added this task:
+     [D][✘] return book (by: June 6th)
+   Now you have 4 tasks in the list.
+  _________________________________________________________________
+  _________________________________________________________________
+   Noted. I've removed this task:
+     [E][✘] project meeting (at: Aug 6th 2-4pm)
+   Now you have 3 tasks in the list.
+  _________________________________________________________________
+  _________________________________________________________________
+     [E][✘] project meeting (at: Aug 6th 2-4pm)
+   Got it. I've added this task:
+   Now you have 4 tasks in the list.
+  _________________________________________________________________
+  _________________________________________________________________
+   Noted. I've removed this task:
+     [T][✓] join sports club
+   Now you have 3 tasks in the list.
+  _________________________________________________________________
+  _________________________________________________________________
+   Got it. I've added this task:
+     [T][✘] join sports club
+   Now you have 4 tasks in the list.
+  _________________________________________________________________
+  _________________________________________________________________
+   Nice! I've marked this task as done:
+     [T][✓] join sports club
+  _________________________________________________________________
+  _________________________________________________________________
    Here are the tasks in your list:
    1.[T][✓] read book
-   2.[T][✘] Ask for Help
-   3.[D][✘] CS2103T iP (by: 20/8/20)
+   2.[D][✘] return book (by: June 6th)
+   3.[E][✘] project meeting (at: Aug 6th 2-4pm)
+   4.[T][✓] join sports club
   _________________________________________________________________
   _________________________________________________________________
    Bye. Hope to see you again soon!
