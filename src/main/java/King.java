@@ -1,11 +1,8 @@
 package main.java;
 import java.io.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class King {
@@ -201,7 +198,7 @@ public class King {
         String logo =
                 " ____  __.__\n" +
                         "|    |/ _|__| ____    ____\n" +
-                        "|      < |  |/    \\  / ___\\ \n" +
+                        "|      < |  |/    \\  / ___\\\n" +
                         "|    |  \\|  |   |  \\/ /_/  >\n" +
                         "|____|__ \\__|___|  /\\___  /\n" +
                         "        \\/       \\//_____/\n";
