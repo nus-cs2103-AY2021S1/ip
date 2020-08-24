@@ -35,7 +35,7 @@ public class task {
         else{
             done = "[X]";
         }
-        return this.index + ". " + done + " " + this.name;
+        return done + " " + this.name;
     }
 
     public String read2(){
@@ -57,6 +57,5 @@ public class task {
         System.out.println(line1);
         System.out.println(line2);
         System.out.println(line3);
-         
     }
 }
