@@ -1,4 +1,6 @@
-package main.java;
+package duke.task;
+
+import duke.DukeException;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -7,17 +9,17 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDate duration;
 
-    Event(String title, LocalDate duration) {
+    public Event(String title, LocalDate duration) {
         super(title);
         this.duration = duration;
     }
 
-    Event(String title, boolean isDone, LocalDate duration) {
+    public Event(String title, boolean isDone, LocalDate duration) {
         super(title, isDone);
         this.duration = duration;
     }
 
-    static Event of(String command) throws DukeException {
+    public static Event of(String command) throws DukeException {
         if (command.length() <= 6) {
             throw new DukeException("Event cannot be empty.");
         }
@@ -28,13 +30,12 @@ public class Event extends Task {
         try {
             return new Event(split[0], LocalDate.parse(split[1]));
         } catch (DateTimeException e) {
-            System.out.println("Please provide date in yyyy-mm-dd format.");
-            return null;
+            throw new DukeException("Please provide date in yyyy-mm-dd format.");
         }
     }
 
     @Override
-    LocalDate getDate() {
+    public LocalDate getDate() {
         return this.duration;
     }
 

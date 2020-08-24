@@ -1,16 +1,19 @@
-package main.java;
+package duke.task;
+
+import duke.DukeException;
 
 import java.time.LocalDate;
 
 public class ToDo extends Task {
-    ToDo(String title) {
+    public ToDo(String title) {
         super(title);
     }
-    ToDo(String title, boolean isDone) {
+
+    public ToDo(String title, boolean isDone) {
         super(title, isDone);
     }
 
-    static ToDo of(String command) throws DukeException {
+    public static ToDo of(String command) throws DukeException {
         if (command.length() <= 5) {
             throw new DukeException("ToDo cannot be empty.");
         }
@@ -27,7 +30,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    LocalDate getDate() {
+    public LocalDate getDate() {
         return null;
     }
 }

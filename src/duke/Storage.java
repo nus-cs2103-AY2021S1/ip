@@ -1,4 +1,6 @@
-package main.java;
+package duke;
+
+import duke.task.Task;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,34 +12,31 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    static String directory = "/data";
-    static String filename = "/data/taskList.txt";
+    String filepath;
     File file;
 
-    Storage() {
-        this.file = new File(filename);
+    Storage(String filepath) throws DukeException {
+        int i = filepath.lastIndexOf("/");
+        if (i != -1) {
+            String directory = filepath.substring(0, i);
+            new File(directory).mkdirs();
+        }
+        this.filepath = filepath;
+        this.file = new File(filepath);
+        try {
+            this.file.createNewFile();
+        } catch (IOException e) {
+            throw new DukeException("Problem reading file.");
+        }
     }
 
-    List<Task> readFromFile() {
-        List<Task> taskList = new ArrayList<>();
+    public TaskList readTasks() {
+        TaskList taskList = new TaskList();
         try {
-            new File(Storage.directory).mkdir();
-            this.file.createNewFile();
             Scanner scanner = new Scanner(this.file);
             while (scanner.hasNextLine()) {
-                String[] input = scanner.nextLine().split("\\s\\|\\s");
-                boolean isDone = input[1].equals("1");
-                switch (input[0]) {
-                case "E":
-                    taskList.add(new Event(input[2], isDone, LocalDate.parse(input[3])));
-                    break;
-                case "T":
-                    taskList.add(new ToDo(input[2], isDone));
-                    break;
-                case "D":
-                    taskList.add(new Deadline(input[2], isDone, LocalDate.parse(input[3])));
-                    break;
-                }
+                String input = scanner.nextLine();
+                taskList.add(input);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,9 +46,9 @@ public class Storage {
         return taskList;
     }
 
-    void writeToFile(List<? extends Task> taskList) {
+    public void writeToFile(TaskList taskList) {
         try {
-            FileWriter fileWriter = new FileWriter(Storage.filename);
+            FileWriter fileWriter = new FileWriter(this.filepath);
             taskList.forEach(task -> {
                 try {
                     fileWriter.write(task.print() + System.lineSeparator());
@@ -63,9 +62,9 @@ public class Storage {
         }
     }
 
-    void appendToFile(Task task) {
+    public void appendToFile(Task task) {
         try {
-            FileWriter fileWriter = new FileWriter(Storage.filename, true);
+            FileWriter fileWriter = new FileWriter(this.filepath, true);
             fileWriter.write(task.print() + System.lineSeparator());
             fileWriter.close();
         } catch (IOException e) {

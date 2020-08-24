@@ -1,4 +1,6 @@
-package main.java;
+package duke.task;
+
+import duke.DukeException;
 
 import java.time.LocalDate;
 
@@ -6,22 +8,22 @@ public abstract class Task {
     private String title;
     private boolean isDone;
 
-    Task(String title) {
+    public Task(String title) {
         this.title = title;
         this.isDone = false;
     }
 
-    Task(String title, boolean isDone) {
+    public Task(String title, boolean isDone) {
         this.title = title;
         this.isDone = isDone;
     }
 
-    void markAsDone() {
+    public Task markAsDone() throws DukeException {
         if (this.isDone) {
-            System.out.println("Already done.");
+            throw new DukeException("Already marked as done.");
         } else {
             this.isDone = true;
-            System.out.println("Marked as done: " + this);
+            return this;
         }
     }
 
@@ -35,6 +37,5 @@ public abstract class Task {
         return status + " | " + this.title;
     }
 
-    abstract LocalDate getDate();
-
+    public abstract LocalDate getDate();
 }

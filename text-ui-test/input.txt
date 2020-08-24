@@ -1,11 +1,15 @@
+hello :)
 list
+todo
 todo buy textbook
 deadline CS2103T project /by 2020-08-30
 event CS2100 lecture /at tue 4-6pm
 done 1
+done a
+done 100
 list
 list 2020-08-30
-todo
-hello :)
-done 100
+delete 1
+list
+list 2020-08-29
 bye
