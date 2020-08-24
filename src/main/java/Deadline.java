@@ -6,8 +6,7 @@ public class Deadline extends Task {
   protected String by;
   protected LocalDate date;
   protected LocalTime time;
-  protected DateTimeFormatter dateParser =
-          DateTimeFormatter.ofPattern("dd/MM/yy");
+  protected DateTimeFormatter dateParser = DateTimeFormatter.ofPattern("dd/MM/yy");
   protected DateTimeFormatter timeParser = DateTimeFormatter.ofPattern("HH:mm");
 
   public Deadline(String description, String by) {
@@ -27,7 +26,18 @@ public class Deadline extends Task {
     if (time == null) {
       return "[D]" + super.toString() + " (by: " + dateParser.format(date) + ")";
     } else {
-      return "[D]" + super.toString() + " (by: " + dateParser.format(date) + " " + timeParser.format(time) + ")";
+      return "[D]"
+          + super.toString()
+          + " (by: "
+          + dateParser.format(date)
+          + " "
+          + timeParser.format(time)
+          + ")";
     }
+  }
+
+  @Override
+  public String toFile() {
+    return "D | " + getStatusCode() + " | " + description + " | " + by;
   }
 }

@@ -1,7 +1,11 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.File;
 
 public class Duke {
   public static String duke = "Duke> ";
@@ -12,6 +16,9 @@ public class Duke {
           + "| | | | | | | |/ / _ \\\n"
           + "| |_| | |_| |   <  __/\n"
           + "|____/ \\__,_|_|\\_\\___|\n";
+  public static String home = System.getProperty("user.home");
+  public static String filePath = home + "/Desktop/duke.txt";
+  // do a check whether file exists
 
   public static void main(String[] args) {
 
@@ -22,6 +29,11 @@ public class Duke {
     ArrayList<Task> list = new ArrayList<>();
 
     startupMsg();
+    try {
+      list = loadFile(filePath);
+    } catch (DukeException e) {
+      System.out.println(duke + "Load File is missing!");
+    }
 
     while (true) {
       System.out.print(cmd);
@@ -29,7 +41,6 @@ public class Duke {
       if (userInput.equals("bye")) {
         break;
       }
-
       int idx = 0;
       switch (userInput) {
         case "list":
@@ -61,7 +72,6 @@ public class Duke {
                 }
                 int[] tasksArray =
                     Arrays.stream(userInput.split(" ")).mapToInt(Integer::parseInt).toArray();
-
                 ArrayList<Task> doneTasks = new ArrayList<>();
                 for (int index : tasksArray) {
                   try {
@@ -87,6 +97,11 @@ public class Duke {
               }
             } while (!validInput);
           }
+          try {
+            saveFile(list, filePath);
+          } catch (DukeException e) {
+            System.out.println(duke + e.getMessage());
+          }
           break;
         case "todo":
           do {
@@ -107,17 +122,22 @@ public class Duke {
               System.out.println(duke + e.getMessage());
             }
           } while (!validInput);
+          try {
+            saveFile(list, filePath);
+          } catch (DukeException e) {
+            System.out.println(duke + e.getMessage());
+          }
           break;
         case "deadline":
           do {
-            System.out.println(duke + "Enter task details: '<Task Details> /by <dd/MM/yy> and/or <HH:mm>'");
+            System.out.println(duke + "Enter task details:");
             System.out.print(cmd);
             try {
               userInput = sc.nextLine();
               if (!userInput.contains("/by")) {
                 validInput = false;
                 throw new DukeException(
-                    "Yo! Command Syntax Error.");
+                    "Yo! Command Syntax Error. '<Task Details> /by <Deadline>'");
               }
               s = userInput.split(" /by ");
               if (s.length <= 1) {
@@ -134,17 +154,22 @@ public class Duke {
               System.out.println(duke + e.getMessage());
             }
           } while (!validInput);
+          try {
+            saveFile(list, filePath);
+          } catch (DukeException e) {
+            System.out.println(duke + e.getMessage());
+          }
           break;
         case "event":
           do {
-            System.out.println(duke + "Enter Event details: '<Event Details> /at <dd/MM/yy> and/or <HH:mm>'");
+            System.out.println(duke + "Enter Event details:");
             System.out.print(cmd);
             try {
               userInput = sc.nextLine();
               if (!userInput.contains("/at")) {
                 validInput = false;
                 throw new DukeException(
-                    "Yo! Command Syntax Error.");
+                    "Yo! Command Syntax Error. '<Event Details> /at <Event Time>'");
               }
               s = userInput.split(" /at ");
               if (s.length <= 1) {
@@ -161,6 +186,11 @@ public class Duke {
               System.out.println(duke + e.getMessage());
             }
           } while (!validInput);
+          try {
+            saveFile(list, filePath);
+          } catch (DukeException e) {
+            System.out.println(duke + e.getMessage());
+          }
           break;
         case "delete":
           if (list.isEmpty()) {
@@ -184,7 +214,6 @@ public class Duke {
                         .sorted(Collections.reverseOrder())
                         .mapToInt(Integer::parseInt)
                         .toArray();
-
                 ArrayList<Task> deletedTasks = new ArrayList<>();
                 for (int index : tasksArray) {
                   try {
@@ -209,6 +238,11 @@ public class Duke {
                 System.out.println(duke + e.getMessage());
               }
             } while (!validInput);
+          }
+          try {
+            saveFile(list, filePath);
+          } catch (DukeException e) {
+            System.out.println(duke + e.getMessage());
           }
           break;
         case "help":
@@ -243,5 +277,54 @@ public class Duke {
             + "'delete' \n"
             + "'bye'";
     System.out.println(s + msg);
+  }
+
+  private static ArrayList<Task> loadFile(String filePath) throws DukeException {
+    ArrayList<Task> list = new ArrayList<>();
+    try {
+      File file = new File(filePath);
+      Scanner sc = new Scanner(file);
+
+      while (sc.hasNextLine()) {
+        String[] line = sc.nextLine().split(" \\| ");
+        Task t;
+
+        switch (line[0]) {
+          case "T":
+            t = new Todo(line[2]);
+            break;
+          case "D":
+            t = new Deadline(line[2], line[3]);
+            break;
+          case "E":
+            t = new Event(line[2], line[3]);
+            break;
+          default:
+            throw new DukeException("Failed to load tasks, check file for syntax errors");
+        }
+
+        if (line[1].equals("1")) {
+          t.setDone();
+        }
+        list.add(t);
+      }
+      sc.close();
+      return list;
+    } catch (FileNotFoundException e) {
+      throw new DukeException("File Not Found.");
+    }
+  }
+
+  private static void saveFile(ArrayList<Task> list, String filePath) throws DukeException {
+    try {
+      FileWriter fw = new FileWriter(filePath);
+      for (Task t : list) {
+        fw.write(t.toFile());
+        fw.write(System.lineSeparator());
+      }
+      fw.close();
+    } catch (IOException e) {
+      throw new DukeException("Save to File Failed.");
+    }
   }
 }

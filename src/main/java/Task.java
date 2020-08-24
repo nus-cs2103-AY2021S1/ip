@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
   protected String description;
   protected boolean isDone;
 
@@ -9,6 +9,10 @@ public class Task {
 
   public String getStatusIcon() {
     return (isDone ? "\u2713" : "\u2718"); // return tick or X symbols
+  }
+
+  public int getStatusCode() {
+    return (isDone ? 1 : 0);
   }
 
   public String getTaskName() {
@@ -22,4 +26,6 @@ public class Task {
   public String toString() {
     return "[" + getStatusIcon() + "] " + getTaskName();
   }
+
+  public abstract String toFile();
 }
