@@ -14,8 +14,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public Deadline markTaskAsDone() {
-        return new Deadline(this.content, this.dateTime, true);
+    public String toDataFileFormat() {
+        return String.format("D | %d | %s | %s", isDone ? 1 : 0, content, dateTime);
     }
 
     @Override

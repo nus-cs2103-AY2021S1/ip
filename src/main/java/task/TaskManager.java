@@ -20,10 +20,13 @@ public class TaskManager {
     }
 
     public String deleteTask(int taskIndex){
-        Task deletedTask = tasks.remove(taskIndex);
+        Task deletedTask = tasks.remove(taskIndex - 1);
         String output = "Noted. I have removed the task: \n";
         return output + Colour.Red(deletedTask.toString());
+    }
 
+    public List<Task> getTasks(){
+        return this.tasks;
     }
 
     public int getCompletedTasks() {
@@ -64,7 +67,8 @@ public class TaskManager {
     }
 
     public String markTaskAsDone(int taskIndex) {
-        Task updatedTask = tasks.get(taskIndex - 1).markTaskAsDone();
+        Task updatedTask = tasks.get(taskIndex - 1);
+        updatedTask.markTaskAsDone();
         tasks.set(taskIndex - 1, updatedTask);
         String taskDoneMessage = ResourceHandler.getMessage("taskManager.taskDoneMessage");
         StringBuilder stringBuilder = new StringBuilder(taskDoneMessage);

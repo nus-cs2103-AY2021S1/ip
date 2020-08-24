@@ -14,8 +14,8 @@ public class Event extends Task {
     }
 
     @Override
-    public Event markTaskAsDone() {
-        return new Event(this.content, this.dateTime, true);
+    public String toDataFileFormat() {
+        return String.format("E | %d | %s | %s", isDone ? 1 : 0, content, dateTime);
     }
 
     @Override

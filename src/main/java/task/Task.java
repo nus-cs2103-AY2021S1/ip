@@ -1,6 +1,6 @@
 package task;
 
-abstract public class Task {
+public class Task {
     protected String content;
     protected boolean isDone;
 
@@ -14,13 +14,15 @@ abstract public class Task {
         this.isDone = isDone;
     }
 
-    public abstract Task markTaskAsDone();
-
-    public String getContent() {
-        return this.content;
+    public String toDataFileFormat() {
+        return String.format("? | %d | %s", isDone ? 1 : 0, this.content);
     }
 
-    public boolean getIsDone(){
+    public void markTaskAsDone(){
+        isDone = true;
+    };
+
+    public boolean getIsDone() {
         return this.isDone;
     }
 

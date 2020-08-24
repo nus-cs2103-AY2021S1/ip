@@ -1,7 +1,4 @@
-import task.Todo;
-import task.Event;
-import task.Deadline;
-import task.TaskManager;
+import task.*;
 
 import commands.CommandTypes;
 
@@ -11,23 +8,23 @@ import utils.ResourceHandler;
 
 import exceptions.DukeException;
 
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class CommandLineInterface {
-    private static final int dividerLength = 70;
-    private static final int leftPadding = 7;
-    private static final String goodbyeMessage = "Bye. Hope my service has been satisfactory."
-            + "Hope to see you again soon.";
-    private static final String invalidTaskIndexErrorMessage = "Invalid task index! Please choose another index.";
-    private static final String invalidCommandInput = "OOPS!!!! I'm sorry, but I don't know what that means";
-
+    private static final int DIVIDER_LENGTH = 70;
+    private static final int LEFT_PADDING = 7;
     private static final Scanner scanner = new Scanner(System.in);
-    private static final Formatter formatter = new Formatter(dividerLength, leftPadding);
-    private static final TaskManager taskManager = new TaskManager();
+    private static final Formatter formatter = new Formatter(DIVIDER_LENGTH, LEFT_PADDING);
+    private final Storage storage;
+    private final TaskManager taskManager;
+
+    public CommandLineInterface(){
+        this.storage = new Storage();
+        this.taskManager = storage.load();
+    }
 
 
-    public static void run() {
+    public void run() {
         formatter.print(ResourceHandler.getMessage("commandline.welcomeMessage"));
         while (scanner.hasNext()) {
             try {
@@ -44,6 +41,7 @@ public class CommandLineInterface {
 
                     case BYE:
                         formatter.print(ResourceHandler.getMessage("commandline.farewellMessage"));
+                        storage.save(taskManager);
                         return;
 
                     case TODO:
