@@ -12,6 +12,8 @@ then
     rm ACTUAL.TXT
 fi
 
+export LC_ALL=en_GB.UTF-8
+
 # compile the code into the bin folder, terminates if error occurred
 if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/viscount/*.java ../src/main/java/viscount/command/*.java ../src/main/java/viscount/exception/*.java ../src/main/java/viscount/task/*.java
 then

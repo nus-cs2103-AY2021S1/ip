@@ -47,7 +47,6 @@ public class Viscount {
     }
 
     public static void main(String[] args) {
-        System.out.println(System.getProperty("user.dir"));
         Viscount viscount = new Viscount(DATA_DIRECTORY_PATH);
         if (viscount.shouldRun) {
             viscount.run();
