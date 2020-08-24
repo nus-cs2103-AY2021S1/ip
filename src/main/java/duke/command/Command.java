@@ -1,10 +1,8 @@
 package duke.command;
 
 import duke.Bot;
-import duke.task.Task;
-
-import java.util.List;
+import duke.task.TaskList;
 
 public interface Command {
-    public void execute(Bot bot, List<Task> list);
+    public void execute(Bot bot, TaskList list);
 }
