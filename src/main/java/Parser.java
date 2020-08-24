@@ -14,13 +14,17 @@ public class Parser {
         try {
             int index = Integer.parseInt(request);
             isNumeric(index, list);
-            System.out.println("The event has been removed as per your request: \n " + list.get(index));
+            System.out.println("The event has been removed as per your request: \n " +
+                    list.get(index));
             list.delete(index);
-            System.out.println("Now you have " + list.getSize() + " tasks in the list+ \n_____________________________");
+            System.out.println("Now you have " + list.getSize() + " tasks in the list+ \n" +
+                    "_____________________________");
         } catch (NumberFormatException e) {
-            System.out.println("You have not provided a valid number\n_____________________________");
+            System.out.println("You have not provided a valid number\n" +
+                    "_____________________________");
         } catch (InvalidNumberException e) {
-            System.out.println("The number provided was greater or lesser than the number of items in the list\n_____________________________");
+            System.out.println("The number provided was greater or lesser than the number of items in the list\n" +
+                    "_____________________________");
         }
     }
     public static void update(String request, TaskList list){
@@ -28,10 +32,12 @@ public class Parser {
             int index = Integer.parseInt(request);
             isNumeric(index, list);
             list.updateStatus(index);
-            System.out.println("Nice! I've marked this task as done: \n " + list.get(index));
+            System.out.println("Nice! I've marked this task as done: \n " +
+                    list.get(index));
             System.out.println("Now you have " + list.getSize() + " tasks in the list \n_____________________________");
         } catch (NumberFormatException e) {
-            System.out.println("You have not provided a valid number\n_____________________________");
+            System.out.println("You have not provided a valid number\n" +
+                    "_____________________________");
         } catch (InvalidNumberException e) {
             System.out.println("The number provided was greater or lesser than the number of items in the list\n_____________________________");
         }

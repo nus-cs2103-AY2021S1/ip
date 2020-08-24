@@ -1,5 +1,3 @@
-import exceptions.DukeException;
-
 public class Duke {
     private Storage storage;
     private UI ui;
@@ -15,7 +13,7 @@ public class Duke {
         ui.escape();
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         new Duke("Data/duke.txt").run();
     }
 }

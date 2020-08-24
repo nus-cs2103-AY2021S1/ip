@@ -15,7 +15,8 @@ public class UI {
 
     public void welcome() {
         System.out.println("_____________________________");
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm Duke\n" +
+                "What can I do for you?");
         System.out.println("_____________________________");
     }
 
@@ -42,21 +43,24 @@ public class UI {
                     try {
                         Parser.getDeadline(input, list);
                     } catch (InvalidDeadlineException ex) {
-                        System.out.println("Oops, somewhere your deadline was wrong. Please check whether you used a /by tag");
+                        System.out.println("Oops, somewhere your deadline was wrong. " +
+                                "Please check whether you used a /by tag");
                         System.out.println("_____________________________");
                     }
                 } else if (request[0].equals("event")) {
                     try {
                         Parser.getEvent(input, list);
                     } catch (InvalidEventException ex) {
-                        System.out.println("Oops seems like your event is invalid. Please check your /at tag");
+                        System.out.println("Oops seems like your event is invalid. " +
+                                "Please check your /at tag");
                         System.out.println("_____________________________");
                     }
                 } else {
                     Parser.delete(request[1], list);
                 }
             } catch (UnknownCommandException ex) {
-                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n_____________________________");
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                        "_____________________________");
             }
             input = sc.nextLine();
         }
@@ -65,6 +69,7 @@ public class UI {
     public void escape(){
         storage.save();
         System.out.println("_____________________________");
-        System.out.println("Bye. Hope to see you again soon!\n_____________________________");
+        System.out.println("Bye. Hope to see you again soon!\n" +
+                "_____________________________");
     }
 }
