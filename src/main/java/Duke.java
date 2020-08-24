@@ -1,3 +1,9 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,6 +19,10 @@ public class Duke {
 
 
     public static void main(String[] args) throws DukeException{
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+
         ArrayList<Task> listOfTask = new ArrayList<>();
         String breakline = "    ______________________________________________________";
         String logo = "     ____        _        \n"
@@ -59,15 +69,26 @@ public class Duke {
                         throw new DukeException("   ☹ OOPS!!! The description of the command deadline cannot be empty.");
                     }
                     String[] content = userWord[1].split("/by", 2);
-                    if (content.length == 1 || content[1].equals("")) {
-                        throw new DukeException("   ☹ OOPS!!! We can't seem to find your deadline. Please type /by before your preferred timing");
+                    if (content.length == 1 || content[0].equals("")) {
+                        throw new DukeException("   ☹ OOPS!!! We can't seem to find your event description.");
                     }
-                    Deadline newD = new Deadline(content[0], content[1]);
-                    listOfTask.add(newD);
-                    System.out.println(breakline);
-                    System.out.println("    Got it. I've added this task: \n     " + newD.toString());
-                    System.out.println("    Now you have " + listOfTask.size() + " tasks in the list.");
-                    System.out.println(breakline);
+                    if (content[1].equals("")) {
+                        throw new DukeException("   ☹ OOPS!!! We can't seem to find your event time. Please type /by before your preferred timing");
+                    }
+                    try {
+                        String[] dateTime = content[1].split(" ",3);
+                        LocalDate localDate = LocalDate.from(dateFormatter.parse(dateTime[1]));
+                        LocalTime localTime = LocalTime.from(timeFormatter.parse(dateTime[2]));
+                        Deadline newD = new Deadline(content[0], localDate, localTime);
+                        listOfTask.add(newD);
+                        System.out.println(breakline);
+                        System.out.println("    Got it. I've added this task: \n     " + newD.toString());
+                        System.out.println("    Now you have " + listOfTask.size() + " tasks in the list.");
+                        System.out.println(breakline);
+                    } catch (DateTimeParseException error) {
+                        throw new DukeException("   ☹ OOPS!!! It seems like you've provided us with the wrong date time format for your event. " +
+                                "Please structure it as yyyy-mm-dd hh:mm");
+                    }
                     break;
 
                 case "event":
@@ -75,15 +96,28 @@ public class Duke {
                         throw new DukeException("   ☹ OOPS!!! The description of the command event cannot be empty.");
                     }
                     String[] content2 = userWord[1].split("/at", 2);
-                    if (content2.length == 1 || content2[1].equals("")) {
+                    if (content2.length == 1 || content2[0].equals("")) {
+                        throw new DukeException("   ☹ OOPS!!! We can't seem to find your event description.");
+                    }
+                    if (content2[1].equals("")) {
                         throw new DukeException("   ☹ OOPS!!! We can't seem to find your event time. Please type /at before your preferred timing");
                     }
-                    Event newE = new Event(content2[0], content2[1]);
-                    listOfTask.add(newE);
-                    System.out.println(breakline);
-                    System.out.println("    Got it. I've added this task: \n     " + newE.toString());
-                    System.out.println("    Now you have " + listOfTask.size() + " tasks in the list.");
-                    System.out.println(breakline);
+                    try {
+                        String[] dateTime = content2[1].split(" ",3);
+                        LocalDate localDate = LocalDate.from(dateFormatter.parse(dateTime[1]));
+                        LocalTime localTime = LocalTime.from(timeFormatter.parse(dateTime[2]));
+                        Event newE = new Event(content2[0], localDate, localTime);
+                        listOfTask.add(newE);
+                        System.out.println(breakline);
+                        System.out.println("    Got it. I've added this task: \n     " + newE.toString());
+                        System.out.println("    Now you have " + listOfTask.size() + " tasks in the list.");
+                        System.out.println(breakline);
+
+                    } catch (DateTimeParseException error) {
+                        throw new DukeException("   ☹ OOPS!!! It seems like you've provided us with the wrong date time format for your event. " +
+                                "Please structure it as yyyy-mm-dd hh:mm");
+                    }
+
                     break;
 
                 case "done":
