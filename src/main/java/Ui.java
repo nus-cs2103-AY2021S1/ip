@@ -5,6 +5,8 @@ public class Ui {
     public static final String line = "____________________________________________________________";
     private final String botName = "Bolot";
 
+    private final Scanner sc = new Scanner(System.in);
+
     private void printLogo() {
         System.out.println("Greetings, human. I am");
         System.out.println(" ______      ___   _____       ___    _________");
@@ -27,6 +29,7 @@ public class Ui {
     }
 
     public void bye() {
+        sc.close();
         System.out.println("Bye! Thank you for chatting with " + botName + "!");
         System.out.println("Hope to see you again soon!");
     }
@@ -36,8 +39,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        return sc.hasNextLine() ? sc.nextLine() : null;
+        return sc.nextLine();
     }
 
     public void showError(String errorMessage) {
@@ -45,6 +47,6 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        System.out.println("Loading error");
+        System.out.println("Unable to load the data. Creating new file...");
     }
 }
