@@ -1,6 +1,8 @@
 package main.java;
 
 import main.java.Commands.*;
+import main.java.DukeException.DukeArrayException;
+import main.java.DukeException.DukeException;
 import main.java.Task.Deadline;
 import main.java.Task.Event;
 import main.java.Task.TaskList;
@@ -12,11 +14,11 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     Duke duke;
 
-     Parser(Duke duke){
+     public Parser(Duke duke){
          this.duke = duke;
      }
 
-     Command parse(String userInput, TaskList tasklist) {
+     public Command parse(String userInput, TaskList tasklist) {
 
          String commandType;
          String description = null;
@@ -108,10 +110,10 @@ public class Parser {
             case "bye":
                 return new byeCommand(tasklist);
 
-
+            default:
+                duke.ui.badInput();
 
         }
-        duke.ui.badInput();
         return new Command(tasklist);
     }
 

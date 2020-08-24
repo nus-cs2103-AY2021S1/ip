@@ -1,6 +1,7 @@
 package main.java;
 
 import main.java.Commands.Command;
+import main.java.DukeException.DukeException;
 import main.java.Task.Task;
 import main.java.Task.TaskList;
 
