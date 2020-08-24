@@ -53,7 +53,6 @@ public class Storage {
      **/
     private Task decode(String string) throws UltronException{
 
-
         //Split the string according to the ,
         String[] data = string.split("~");
         TaskCommand taskCommand;
@@ -67,7 +66,7 @@ public class Storage {
 
         //Return the task based on the data
         Task task = taskCommand.commandParser.apply(data[2]);
-        if (data[1].equals("\u2713"))
+        if (data[1].equals("1"))
             task.markDone();
 
 

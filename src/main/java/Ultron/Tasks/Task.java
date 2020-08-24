@@ -32,7 +32,7 @@ public abstract class Task {
 
     public abstract String getType();
     public String getCommand(){
-        return getStatusIcon() + "~";
+        return (isDone() ? "1" : "0") + "~";
     }
 
     public void markDone() {
