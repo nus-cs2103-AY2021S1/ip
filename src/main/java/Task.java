@@ -1,9 +1,12 @@
 package main.java;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public abstract class Task {
     private final String name;
+    protected Optional<LocalDate> date;
     private boolean isDone;
     protected static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
     protected static final DateTimeFormatter SAVE_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -12,6 +15,15 @@ public abstract class Task {
     public Task(String name) {
         this.name = name;
         this.isDone = false;
+        this.date = Optional.empty();
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = Optional.of(date);
+    }
+
+    public Optional<LocalDate> getDate() {
+        return this.date;
     }
 
     public void setDone() throws TaskDoneException{

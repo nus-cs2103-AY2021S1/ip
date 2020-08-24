@@ -3,7 +3,6 @@ import main.java.TaskDoneException;
 import main.java.TaskManager;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -62,8 +61,9 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         TaskManager taskManager = new TaskManager();
-        File file =  new File("src/data/duke.txt");
+        File file =  new File("./src/data/duke.txt");
         try {
+            //if file exists Read
             if (!file.createNewFile()){
                 taskManager.readFile(file);
             }
