@@ -1,6 +1,2 @@
-D | 1 | ddd | friday
-D | 1 | ddd | friday
-D | 0 | asjdhavsda | today
-D | 0 | ass | now
-D | 1 | do this | tmr
-E | 0 | blah | friday
+D | 1 | do this | 2019-12-15
+E | 0 | do this | 2020-01-23
