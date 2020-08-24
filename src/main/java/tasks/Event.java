@@ -12,9 +12,6 @@ public class Event extends Task {
         this.date = date;
     }
 
-    public Event(String work, String deadline){
-        super(work + "(at:" + deadline);
-    }
     public String toString(){
         return "[E]" + super.toString() + "(at: " + date.format(format) + ")";
     }
