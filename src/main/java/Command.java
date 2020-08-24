@@ -22,6 +22,11 @@ public class Command {
         this.order = order;
     }
 
+    public Command(String type, String command) {
+        this.type = type;
+        this.command = command;
+    }
+
     public Command(String type, String command, String time, LocalDate date, boolean hasDate) {
         this.type = type;
         this.command = command;
@@ -32,6 +37,20 @@ public class Command {
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> lists = tasks.getTasks();
+
+        if (type.equals("find")) {
+            System.out.println("Here are the matching tasks in your list:");
+            int j = 1;
+            for (int i = 0; i < lists.size(); i++) {
+                Task task = lists.get(i);
+                if (task.toString().contains(command)) {
+                    System.out.println(j + "." + task.toString());
+                    j++;
+                }
+            }
+            return;
+        }
+
         if (command.equals("list")) {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < lists.size(); i++) {
