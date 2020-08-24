@@ -1,3 +1,5 @@
+package duck;
+
 public class Deadline extends  Task {
 
     private String date;

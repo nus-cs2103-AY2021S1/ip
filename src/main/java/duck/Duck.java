@@ -1,3 +1,5 @@
+package duck;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
@@ -5,15 +7,15 @@ import java.util.Scanner;
 
 public class Duck {
 
-    private static final String LINE = Colour.Blue("____________________________________________________________");
-    private static final String INDENT = "    ";
-    private static List<Task> tasks = new ArrayList<>();
+    private final String LINE = Colour.Blue("____________________________________________________________");
+    private final String INDENT = "    ";
+    private List<Task> tasks = new ArrayList<>();
 
-    public static void printLine() {
+    public void printLine() {
         System.out.println(INDENT + LINE);
     }
 
-    public static void respond(List<String> responses) {
+    public void respond(List<String> responses) {
         printLine();
         for (String s : responses) {
             System.out.print(INDENT);
@@ -22,7 +24,7 @@ public class Duck {
         printLine();
     }
 
-    private static String[] parseWithDate(String s, String sep) throws DuckException {
+    private String[] parseWithDate(String s, String sep) throws DuckException {
         String[] split = s.split(sep);
 
         if (split.length < 2) {
@@ -32,11 +34,11 @@ public class Duck {
         return split;
     }
 
-    private static String getNumberOfTasks() {
-        return "Now you have " + Duck.tasks.size() + " tasks in the list.";
+    private String getNumberOfTasks() {
+        return "Now you have " + this.tasks.size() + " tasks in the list.";
     }
 
-    public static void main(String[] args) {
+    public void run() {
         List<String> welcomeMessage = new ArrayList<>();
         welcomeMessage.add("Hello! I'm Duck");
         welcomeMessage.add("What can I do for you?");
@@ -57,8 +59,8 @@ public class Duck {
                         break;
                 case LIST:
                         responses.add("Here are the tasks in your list");
-                        for (int i = 0; i < Duck.tasks.size(); i++) {
-                            String item = "" + (i + 1) + ". " + Duck.tasks.get(i).getStatus();
+                        for (int i = 0; i < this.tasks.size(); i++) {
+                            String item = "" + (i + 1) + ". " + this.tasks.get(i).getStatus();
                             responses.add(item);
                         }
                         break;
@@ -70,12 +72,12 @@ public class Duck {
                         try {
                             int taskNumber = Integer.parseInt(inputSplit[1]);
 
-                            if (taskNumber > Duck.tasks.size()) {
+                            if (taskNumber > this.tasks.size()) {
                                 throw new DuckException("No such task with that number!");
 
                             } else {
                                 responses.add("Nice! I've marked this as " + Colour.Green("done"));
-                                Task task = Duck.tasks.get(taskNumber - 1);
+                                Task task = this.tasks.get(taskNumber - 1);
                                 task.markDone();
                                 responses.add("  " + task.getStatus());
                             }
@@ -92,16 +94,16 @@ public class Duck {
                         try {
                             int taskNumber = Integer.parseInt(inputSplit[1]);
 
-                            if (taskNumber > Duck.tasks.size()) {
+                            if (taskNumber > this.tasks.size()) {
                                 throw new DuckException("No such task with that number!");
 
                             } else {
                                 responses.add("Noted. I've removed this task");
-                                Task task = Duck.tasks.get(taskNumber - 1);
-                                Duck.tasks.remove(taskNumber - 1);
+                                Task task = this.tasks.get(taskNumber - 1);
+                                this.tasks.remove(taskNumber - 1);
 
                                 responses.add("  " + task.getStatus());
-                                responses.add(Duck.getNumberOfTasks());
+                                responses.add(getNumberOfTasks());
                             }
                         } catch (NumberFormatException e) {
                             throw new DuckException("Invalid number provided");
@@ -123,24 +125,24 @@ public class Duck {
                             newTask = new Todo(description);
                         } else if (option.equals(Option.DEADLINE)) {
 
-                            String[] parsedString = Duck.parseWithDate(description, "/by");
+                            String[] parsedString = parseWithDate(description, "/by");
                             String desc, date;
                             desc = parsedString[0].strip();
                             date = parsedString[1].strip();
 
                             newTask = new Deadline(desc, date);
                         } else {
-                            String[] parsedString = Duck.parseWithDate(description, "/at");
+                            String[] parsedString = parseWithDate(description, "/at");
                             String desc, date;
                             desc = parsedString[0].strip();
                             date = parsedString[1].strip();
                             newTask = new Event(desc, date);
                         }
 
-                        Duck.tasks.add(newTask);
+                        this.tasks.add(newTask);
                         responses.add("Got it. I've added this task");
                         responses.add("  " + newTask.getStatus());
-                        responses.add(Duck.getNumberOfTasks());
+                        responses.add(getNumberOfTasks());
                         break;
                 case UNRECOGNIZED:
                 default:

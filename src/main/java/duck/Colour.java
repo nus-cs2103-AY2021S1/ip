@@ -1,3 +1,5 @@
+package duck;
+
 public class Colour {
     public static String Red(String s) {
         return "\033[0;31m" + s + "\033[0m";
