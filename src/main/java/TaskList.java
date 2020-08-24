@@ -71,6 +71,22 @@ public class TaskList {
         }
     }
 
+    protected void findTask(String keyword) {
+        String result = "Here are the matching tasks I could find:\n";
+        int count = 1;
+        for (Task task : list) {
+            String description = task.getTask();
+            if (description.contains(keyword)) {
+                result += "[" + count++ + task.toString().substring(2) + "\n";
+            }
+        }
+        if (count == 1) {
+            System.out.println("Sorry, I could not find any matching tasks :(\n");
+        } else {
+            System.out.println(result);
+        }
+    }
+
     @Override
     public String toString() {
         String message = "";

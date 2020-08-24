@@ -86,8 +86,12 @@ public class Parser {
                 list.addTask(eventTask);
             } else if (input.startsWith("delete")) {
                 list.deleteTask(input);
-            }
-            else {
+            } else if (input.startsWith("find")) {
+                if (input.equals("find")) {
+                    throw new DukeException("OOPS!!! Please give me a keyword to search.\n");
+                }
+                list.findTask(input.substring(5));
+            } else {
                 //unrecognised command
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.\n");
             }
