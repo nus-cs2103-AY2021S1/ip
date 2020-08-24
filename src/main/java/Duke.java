@@ -2,21 +2,16 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import java.io.File;
-import java.io.FileWriter;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 public class Duke {
-    // file path
-    public final static String FILEPATH = System.getProperty("user.dir") 
-            + (System.getProperty("user.dir").endsWith("text-ui-test") 
-            ? "/test_data/duke.txt"
-            : "/data/duke.txt");
+    private Storage storage;
+    private Ui ui;
+    
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+    }
     
     // list storage
     private static ArrayList<Task> tasks;
@@ -35,7 +30,7 @@ public class Duke {
     private static String eventTimeSpecifier = Task.Command.EVENT.getTimeSpecifier();
 
     // list of messages
-    private static String exitMsg = "Bye human. See you again soon!";
+    
     private static String doneMsg = "Good job bud! I've marked this task as done:";
     private static String deleteMsg = "Noted. I've deleted this task:";
     private static String showTasksMsg = "Here are the task(s) in your lists:";
@@ -65,24 +60,15 @@ public class Duke {
     private static String greeting = "Hello human, I'm Duke the supporting chatbot\n"
             + "What can I do for you?";
 
-    // main
-    public static void main(String[] args) {
-        Storage storage = new Storage(FILEPATH);
-        
+    public void run() {
         // read file
         tasks = storage.load();
-        
-        // greeting
-        System.out.println(logo + "\n" + horizontalLine);
-        System.out.println(greeting + "\n" + horizontalLine);
-        System.out.println(cmdReq);
 
-        // getting command
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+        ui.showWelcome();
+        String input = ui.requestCommand();
+        
         String[] inputSplitted = input.split("\\s+", 2);
         while (!input.equals(exitCmd)) {
-            System.out.println(horizontalLine);
             try {
                 if (input.equals("list")) { // command is "list"
                     if (tasks.size() == 0) {
@@ -187,7 +173,7 @@ public class Duke {
                     } else {
                         System.out.println(incorrectDateFormatMsg);
                     }
-                    
+
                 } else { // any other commands
                     throw new IncorrectCommandException();
                 }
@@ -198,14 +184,22 @@ public class Duke {
             } catch (IncorrectCommandException e) {
                 System.out.println(unrecognizedCmdMsg);
             }
-            System.out.println(horizontalLine);
-            System.out.println(cmdReq);
-            input = sc.nextLine();
+            input = ui.requestCommand();
             inputSplitted = input.split("\\s+", 2);
         }
 
         // exit
         storage.write(tasks);
-        System.out.println(horizontalLine + "\n" +  exitMsg + "\n" + horizontalLine);
+        ui.showGoodbye();
+    }
+    // main
+    public static void main(String[] args) {
+        // file path
+        String FILEPATH = System.getProperty("user.dir")
+                + (System.getProperty("user.dir").endsWith("text-ui-test")
+                ? "/test_data/duke.txt"
+                : "/data/duke.txt");
+        
+        new Duke(FILEPATH).run();
     }
 }
