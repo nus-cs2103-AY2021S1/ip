@@ -1,20 +1,23 @@
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String HOME_DIRECTORY = System.getProperty("user.dir") + "/data/";
+    private static final String FILE_NAME = "duke.txt";
     static Scanner scanner = new Scanner(System.in);
-    static ArrayList<Task> taskList;
-    private static final FileClass fileClass = new FileClass();
+    private Storage storage;
+    private TaskList tasks;
 
-    public static void main(String[] args) {
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
         try {
-            taskList = fileClass.loadTaskList();
-        } catch (FileNotFoundException e) {
-            System.out.println("FILE NOT FOUND");
-            taskList = new ArrayList<>();
+            tasks = new TaskList(storage.load(filePath));
+        } catch (DukeException e) {
+//            ui.showLoadingError();
+            tasks = new TaskList();
         }
+    }
 
+    public void run() {
         showGreeting();
         String[] inputArr = getInputArr();
         String command = inputArr[0];
@@ -63,27 +66,35 @@ public class Duke {
         showGoodbye();
     }
 
-    private static String[] getInputArr() {
+    public static void main(String[] args) {
+        new Duke(HOME_DIRECTORY + FILE_NAME).run();
+    }
+
+    private String[] getInputArr() {
         String input = scanner.nextLine();
         return input.split("\\s+");
     }
 
-    private static void showGreeting() {
+    private void showGreeting() {
         String message = "Eh what's up\n"
                 + "What do you want?";
         System.out.println(wrapMessage(message));
     }
 
-    private static void showGoodbye() {
-        fileClass.writeToFile(taskList);
+    private void showGoodbye() {
+        try {
+            storage.write(tasks);
+        } catch (DukeException e) {
+            System.out.println("Cannot write to file!");
+        }
         String message = "Alright I'll see you around!";
         System.out.println(wrapMessage(message));
     }
 
-    private static void showList() {
+    private void showList() {
         String message = "Here are the tasks in your list:\n";
-        for (int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.get(i);
+        for (int i = 0; i < tasks.getSize(); i++) {
+            Task task = tasks.getTask(i);
             message += (i + 1)
                     + ". "
                     + task
@@ -92,7 +103,7 @@ public class Duke {
         System.out.println(wrapMessage(message));
     }
 
-    private static void addTask(String type, String[] inputArr) throws DukeException {
+    private void addTask(String type, String[] inputArr) throws DukeException {
         String dateTime = "";
         String desc = "";
         Task task;
@@ -120,18 +131,18 @@ public class Duke {
             throw new IllegalStateException("Unexpected type value: " + type);
         }
 
-        taskList.add(task);
+        tasks.addTask(task);
 
         String message = "Got it. I've added this task:\n"
                 + task
                 + "\n"
                 + "Now you have "
-                + taskList.size()
+                + tasks.getSize()
                 + " tasks in the list.";
         System.out.println(wrapMessage(message));
     }
 
-    private static String getTaskDescription(String[] inputArr) {
+    private String getTaskDescription(String[] inputArr) {
         String desc = "";
         int i = 1;
         while ((i < inputArr.length) && (!inputArr[i].contains("/by")) && (!inputArr[i].contains("/at"))) {
@@ -142,7 +153,7 @@ public class Duke {
         return desc.substring(0, desc.length() - 1);
     }
 
-    private static String getTaskTimeDate(String[] inputArr) {
+    private String getTaskTimeDate(String[] inputArr) {
         String dateTime = "";
         int i = 0;
         while (!inputArr[i].contains("/by") && (!inputArr[i].contains("/at"))) {
@@ -157,31 +168,31 @@ public class Duke {
         return dateTime.substring(0, dateTime.length() - 1);
     }
 
-    private static void deleteTask(String[] inputArr) {
+    private void deleteTask(String[] inputArr) {
         String lastChar = inputArr[inputArr.length - 1];
         int i = Integer.parseInt(lastChar);
-        Task task = taskList.get(i - 1);
-        taskList.remove(task);
+        Task task = tasks.getTask(i - 1);
+        tasks.removeTask(task);
         String message = "Noted! I've removed this task:\n"
                 + task
                 + "\n"
                 + "Now you have "
-                + taskList.size()
+                + tasks.getSize()
                 + " tasks in the list.";
         System.out.println(wrapMessage(message));
     }
 
-    private static void doneTask(String[] inputArr) {
+    private void doneTask(String[] inputArr) {
         String lastChar = inputArr[inputArr.length - 1];
         int i = Integer.parseInt(lastChar);
-        Task task = taskList.get(i - 1);
+        Task task = tasks.getTask(i - 1);
         task.markAsDone();
         String message = "Nice! I've marked this task as done:\n"
                 + task;
         System.out.println(wrapMessage(message));
     }
 
-    private static String wrapMessage(String message) {
+    private String wrapMessage(String message) {
         if (message.endsWith("\n")) {
             // If the message ends with a newline, remove the newline
             message = message.substring(0, message.length() - 1);

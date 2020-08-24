@@ -7,21 +7,21 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description);
-        this.at = parseDeadline(at);
+        this.at = at;
     }
 
-    private String parseDeadline(String at) {
+    private String parseDateTime(String at) {
         LocalDate d = LocalDate.parse(at);
         return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return "[E]" + super.toString() + " (at: " + parseDateTime(at) + ")";
     }
 
     @Override
     public String toFileString() {
-        return "E\n" + super.getDone() + "\n" + super.toFileString() + "\n" + this.at + "\n\n";
+        return "E\n" + super.getDone() + "\n" + super.toFileString() + "\n" + at + "\n\n";
     }
 }
