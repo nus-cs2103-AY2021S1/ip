@@ -6,7 +6,9 @@ import duke.task.Deadline;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-/** EventCommand adds a deadline task to the task list */
+/**
+ * EventCommand adds a deadline task to the task list
+ */
 public class DeadlineCommand extends CreateCommand {
   public DeadlineCommand(String commandString) {
     super(CommandType.DEADLINE, commandString);
