@@ -20,6 +20,11 @@ public class Storage {
     private final static String DIRECTORY_PATH = "data";
     private final static String STORAGE_PATH = "data/duke.txt";
 
+    /**
+     * Initialize storage by checking if storage file path exists and if not create the appropriate directory and file.
+     *
+     * @throws IOException if error when creating the storage directory and/or file
+     */
     public void initializeStorage() throws IOException {
         File storageDirectory = new File(DIRECTORY_PATH);
         if (!storageDirectory.exists()) {
@@ -31,6 +36,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Parse the storage file and convert each line in the file from the storage String to the appropriate Task
+     * object.
+     *
+     * @return a List of Tasks containing all Tasks that are stored in the storage file
+     */
     public List<Task> getTasks() {
         File storageFile = new File(STORAGE_PATH);
         List<Task> tasks = new ArrayList<>();
@@ -49,6 +60,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Replace the contents of the storage file with the Tasks in the given List of tasks.
+     *
+     * @param taskList a List containing Tasks to replace existing Tasks stored in the storage file
+     */
     public void updateTasks(List<Task> taskList) {
         try {
             FileWriter storageWriter = new FileWriter(STORAGE_PATH, true);

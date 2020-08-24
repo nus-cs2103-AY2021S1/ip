@@ -10,12 +10,22 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Parse Strings that create Commands.
+ */
 public class Parser {
 
     private final Set<String> commands = new HashSet<>(Arrays.asList("bye", "list", "done", "delete", "deadline",
                 "event", "todo"));
     private final Set<String> singleArgCommands = new HashSet<>(Arrays.asList("bye", "list"));
 
+    /**
+     * Parse a provided String and return the corresponding Command.
+     *
+     * @param commandStr the String to parse
+     * @return the appropriate Command that corresponds to the String provided
+     * @throws DukeException if unable to parse String provided and decide on Command to return
+     */
     public Command parse(String commandStr) throws DukeException {
         String[] parts = split(commandStr);
         String commandName = parts[0].trim();

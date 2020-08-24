@@ -23,7 +23,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Create a Event with the user entered description and date String, store it in TaskList,
+     * Create a Event with the user entered description and datetime String, store it in TaskList,
      * print feedback to user and store the new Deadline in Storage.
      *
      * @param tasks task list containing all tasks

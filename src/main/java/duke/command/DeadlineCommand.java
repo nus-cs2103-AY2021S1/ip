@@ -23,7 +23,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Create a Deadline with the user entered description and due-date String, store it in TaskList,
+     * Create a Deadline with the user entered description and due-datetime String, store it in TaskList,
      * print feedback to user and store the new Deadline in Storage.
      *
      * @param tasks task list containing all tasks

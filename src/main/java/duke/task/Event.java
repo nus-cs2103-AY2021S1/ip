@@ -2,6 +2,9 @@ package duke.task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a Task that has a set date and time when it will be completed/occur.
+ */
 public class Event extends Task {
 
     private LocalDateTime date;

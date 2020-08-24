@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represent tasks which user enter into the app.
+ */
 public class Task {
 
     protected boolean isCompleted;
@@ -16,10 +19,20 @@ public class Task {
         this.isCompleted = completed;
     }
 
+    /**
+     * Mark a Task as completed.
+     *
+     * @return new Task object which has isCompleted set to true
+     */
     public Task markCompleted() {
         return new Task(description, true);
     }
 
+    /**
+     * Get a String representation of the Task that is used for storage.
+     *
+     * @return a String representation of the Task for storage
+     */
     public String getStorageString() {
         char done = isCompleted ? '1' : '0';
         return String.format("%s | %s | %s", symbol, done, description);

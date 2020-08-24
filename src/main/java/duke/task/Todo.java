@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represent a basic Task that the user has to complete.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {
