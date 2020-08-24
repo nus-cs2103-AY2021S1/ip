@@ -99,6 +99,7 @@ public abstract class Task implements Serializable {
 
     private static class Events extends Task {
         private String date;
+        private TaskDate tDate;
         private Events(String task, String date) {
             super(task);
             this.date = date;
@@ -140,6 +141,7 @@ public abstract class Task implements Serializable {
 
     private static class Deadlines extends Task {
         private String deadline;
+        private TaskDate tDate;
 
         private Deadlines(String task, String deadline) {
             super(task);
