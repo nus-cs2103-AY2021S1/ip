@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an instruction from a user to add a new task to the list
+ */
 public class AddCommand extends Command {
     String text;
 
@@ -20,8 +23,20 @@ public class AddCommand extends Command {
         this.text = text;
     }
 
+    /**
+     * Executes the command to add the task to the list
+     * @param tasks The current TaskList
+     * @param ui The Ui object in use
+     * @param storage The Storage object in use
+     * @throws InvalidTaskException If the task name is empty
+     * @throws UnknownCmdException If an unknown command is entered
+     * @throws InvalidTimeException If the time for the task is invalid
+     * @throws InvalidFileException If the file to be written to cannot be found
+     * @throws BadDtFormatException If the format of the date and time entered does not match
+     */
     @Override
-    public void exec(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskException, UnknownCmdException, InvalidTimeException, InvalidFileException, BadDtFormatException {
+    public void exec(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskException, UnknownCmdException,
+            InvalidTimeException, InvalidFileException, BadDtFormatException {
         String[] info = extractInfo(text);
         if (info[0].equals("todo")) {
             tasks.addItem(new Todo(info[1], false));
@@ -93,7 +108,8 @@ public class AddCommand extends Command {
         } else {
             int splitTime = store[0].equals("deadline") ? content.indexOf("/by") : content.indexOf("/at");
             if (splitTime < 0) {
-                throw new InvalidTimeException("Please use /by (deadlines) or /at (events)! to indicate the date or time!");
+                throw new InvalidTimeException("Please use /by (deadlines) or /at (events)! to " +
+                        "indicate the date or time!");
             }
             String name = content.substring(0, splitTime).strip();
             String time = content.substring(splitTime + 3).strip();

@@ -5,6 +5,9 @@ import tasks.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * Handles interactions with users, namely accepting inputs and printing of info
+ */
 public class Ui {
     Scanner sc;
 
@@ -12,6 +15,10 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Reads an input from a user
+     * @return The user's input
+     */
     public String takeInput() {
         return sc.nextLine();
     }

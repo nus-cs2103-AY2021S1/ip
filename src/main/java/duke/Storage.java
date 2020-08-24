@@ -14,6 +14,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * Handles the reading and writing of the data.txt file on the user's hard-disk
+ */
 public class Storage {
 
     TaskList tasks;
@@ -24,6 +27,9 @@ public class Storage {
         this.tasks = tasks;
     }
 
+    /**
+     * Used if the file cannot be found in the working directory
+     */
     public Storage() {
         this.file = new File("data.txt");
     }
@@ -54,7 +60,7 @@ public class Storage {
     }
 
     /**
-     * Writes data into a file
+     * Writes data into a .txt file
      * @param path Path to the file
      * @param text Text to be written into the file
      * @throws InvalidFileException File was not found at the end of the input path

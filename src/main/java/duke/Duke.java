@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.nio.file.Paths;
 
 /**
- * Over-arching class containing the main information and methods of the Duke bot.
+ * Over-arching class containing the main information of the Duke bot.
  */
 
 class Duke {
@@ -18,6 +18,9 @@ class Duke {
     private Storage storage;
     private Parser parser;
 
+    /**
+     * Attempts to read an existing stored data.txt file, and creates a new data.txt file if one is not found
+     */
     Duke() {
         this.tasks = new TaskList();
         this.quit = false;
@@ -33,7 +36,8 @@ class Duke {
     }
 
     /**
-     * Allows the system to begin taking in user input and edits the stored data accordingly
+     * Allows the system to begin taking in user input and edits the stored data accordingly. Runs until an "exit"
+     * command is received.
      */
 
     void run() {

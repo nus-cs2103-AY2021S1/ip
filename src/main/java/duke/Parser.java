@@ -2,6 +2,9 @@ package duke;
 
 import commands.*;
 
+/**
+ * Handles parsing of inputs from the user and generates Command objects accordingly
+ */
 public class Parser {
 
     private boolean quit = false;
@@ -10,6 +13,11 @@ public class Parser {
         return quit;
     }
 
+    /**
+     * Parses and makes sense of the user input
+     * @param input The user's input string
+     * @return A Command object corresponding to what the user has input
+     */
     public Command parse(String input) {
         if (input.equals("exit")) {
             quit = true;
