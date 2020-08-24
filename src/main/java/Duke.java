@@ -13,6 +13,8 @@ public class Duke {
     public static FileWriter writer;
 
     public static void main(String[] args) throws DukeException, IOException {
+        // 1. edit the completeness
+        // 2. delete taks
 
         // Opening
         String open = "_______________________________________ \n"
@@ -24,7 +26,7 @@ public class Duke {
 
         file = new File("data/duke.txt");
         readSavedData(file);
-        writer = new FileWriter(file, true);
+        writer = new FileWriter(file);
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
         while(running) {
@@ -80,6 +82,7 @@ public class Duke {
         }
 
         // Closing
+        saveData();
         scanner.close();
         writer.close();
         String close = "_______________________________________ \n"
@@ -124,7 +127,6 @@ public class Duke {
     public static void handleTodo(String todoDescription) throws IOException {
         ToDo newToDo = new ToDo(todoDescription, false);
         taskList.add(newToDo);
-        writer.write(newToDo.toEncoding() + System.lineSeparator());
         String output = LINE + "Got it. I've added this task: \n"
                 + taskList.get(taskList.size() - 1) + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list."
@@ -136,7 +138,6 @@ public class Duke {
         String[] details = deadlineDetails.split(" /by ", 2);
         Deadline newDeadline = new Deadline(details[0], details[1], false);
         taskList.add(newDeadline);
-        writer.write(newDeadline.toEncoding() + System.lineSeparator());
         String output = LINE + "Got it. I've added this task: \n"
                 + taskList.get(taskList.size() - 1) + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list."
@@ -148,7 +149,6 @@ public class Duke {
         String[] details = eventDetails.split(" /at ", 2);
         Event newEvent = new Event(details[0], details[1], false);
         taskList.add(newEvent);
-        writer.write(newEvent.toEncoding() + System.lineSeparator());
         String output = LINE + "Got it. I've added this task: \n"
                 + taskList.get(taskList.size() - 1) + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list."
@@ -195,4 +195,9 @@ public class Duke {
         }
     }
 
+    public static void saveData() throws IOException {
+        for (Task task: taskList) {
+            writer.write(task.toEncoding() + System.lineSeparator());
+        }
+    }
 }

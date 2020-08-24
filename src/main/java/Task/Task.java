@@ -1,6 +1,6 @@
 package Task;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean completed;
 
@@ -22,4 +22,6 @@ public class Task {
     public void setCompleted() {
         this.completed = true;
     }
+
+    public abstract String toEncoding();
 }

@@ -1,4 +1,1 @@
-T>0>hi
-T>0>eat
-T>0>sleep
-T>0>now
+T>0>t1
