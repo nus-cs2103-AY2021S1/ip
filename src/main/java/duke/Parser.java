@@ -2,8 +2,13 @@ package main.java.duke;
 
 import java.io.FileNotFoundException;
 
+/**
+ * Parser deals with users' commands, differentiates each type of task.
+ */
 public class Parser {
-
+    /**
+     * Command enum lists out all the types of commands.
+     */
     public enum Command {
         BYE("bye"), LIST("list"), DONE("done"), TODO("todo"), DEADLINE("deadline"), EVENT("event"), DELETE("delete"), FILTER("filter");
         public String value;
@@ -12,6 +17,16 @@ public class Parser {
         }
     }
 
+    /**
+     * Executes user's commands.
+     * 
+     * @param tasks list of current tasks.
+     * @param ui UI for client.
+     * @param storage save and display data from database.
+     * @param userInput user's command.
+     * @return boolean terminate when it returns true.
+     * @throws FileNotFoundException If the file path cannot be found.
+     */
     public static boolean execute(TaskList tasks, Ui ui, Storage storage, String userInput) throws FileNotFoundException {
         if (userInput.equals(Command.BYE.value)) {
             ui.sayGoodbye();
