@@ -16,6 +16,11 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public String toSaveFormat() {
+        String status = isDone ? "1" : "0";
+        return " | " + status + " | " + name ;
+    }
+
     @Override
     public String toString() {
         //String icon = isDone ? "\u2713" : "\u2718";

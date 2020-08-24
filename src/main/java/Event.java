@@ -9,6 +9,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String toSaveFormat() {
+        return "E" + super.toSaveFormat() + " | " + time;
+    }
+
+    @Override
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(), this.time);
     }
