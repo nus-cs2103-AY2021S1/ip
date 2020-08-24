@@ -19,6 +19,18 @@ public abstract class Task {
     public abstract LocalDate getDate();
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Task) {
+            Task t = (Task) o;
+            return t.task.equals(this.task);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public String toString() {
         String symbol = isDone ? "[✓] " : "[✗] ";
         return String.format("%s %s", symbol, task);

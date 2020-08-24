@@ -21,6 +21,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public boolean equals(Object o) {
+        return o instanceof ToDo && super.equals(o);
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

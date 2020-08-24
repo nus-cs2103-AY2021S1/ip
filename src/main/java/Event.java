@@ -48,6 +48,19 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Event) {
+            Event e = (Event) o;
+            return e.task.equals(this.task) && e.startDate.equals(startDate)
+                    && e.endDate.equals(endDate);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + dateFormat();
     }

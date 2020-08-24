@@ -91,7 +91,8 @@ public class Duke {
         }
     }
 
-    private void addTask(Command firstWord, String input) throws EmptyTaskException, InvalidDateException {
+    private void addTask(Command firstWord, String input) throws
+            EmptyTaskException, InvalidDateException, DuplicateTaskException {
 
         String task;
         LocalDateTime date = null;
@@ -104,7 +105,14 @@ public class Duke {
         }
 
         if (firstWord == Command.todo) {
-            list.add(new ToDo(task));
+
+            Task toDo = new ToDo(task);
+            if (list.contains(toDo)) {
+                throw new DuplicateTaskException();
+            }
+
+            list.add(toDo);
+
         } else {
 
             try {
@@ -136,13 +144,26 @@ public class Duke {
             }
 
             if (firstWord == Command.deadline) {
-                list.add(new Deadline(task, date));
-            } else if (firstWord == Command.event) {
-                if (endDate != null) {
-                    list.add(new Event(task, date, endDate));
-                } else {
-                    list.add(new Event(task, date));
+
+                Deadline deadline = new Deadline(task, date);
+
+                if (list.contains(deadline)) {
+                    throw new DuplicateTaskException();
                 }
+
+                list.add(deadline);
+
+            } else if (firstWord == Command.event) {
+
+                Event event = endDate != null
+                        ? new Event(task, date, endDate)
+                        : new Event(task, date);
+
+                if (list.contains(event)) {
+                    throw new DuplicateTaskException();
+                }
+
+                list.add(event);
             }
 
         }
@@ -225,11 +246,15 @@ public class Duke {
                 saveTasks();
 
             } catch (DukeException error) {
+
                 System.out.println(error.getMessage());
+
             } catch (IndexOutOfBoundsException indexError) {
+
                 System.out.println("Invalid index.");
                 String taskText = list.size() == 1 ? " task " : " tasks ";
                 System.out.println("You have " + list.size() + taskText + "on your list.");
+
             }
 
             System.out.println(line);
