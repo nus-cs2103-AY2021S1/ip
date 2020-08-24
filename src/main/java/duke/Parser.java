@@ -1,7 +1,16 @@
 package duke;
 
+/**
+ * Responsible to make sense of user input in Duke and converts it to command.
+ */
 public class Parser {
 
+    /**
+     * Takes in a user query string, and interprets it into commands.
+     *
+     * @param query user input query.
+     * @return Command instance.
+     */
     public static Command parse(String query) throws DukeException {
         String[] queryArr = query.split(" ", 2);
 
