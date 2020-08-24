@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Scanner;
 
 class Storage {
-    final String FILE_PATH = "../tasks.txt";
+    final static String TASKS_TEXT_FILE_PATH = "../tasks.txt";
 
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
         
         try {
-            File f = new File(FILE_PATH);
+            File f = new File(TASKS_TEXT_FILE_PATH);
             Scanner sc = new Scanner(f);
             
             while (sc.hasNext()) {
@@ -43,13 +43,23 @@ class Storage {
             // TODO: Customise font
             System.out.println("File \"tasks.txt\" does not exist. Attempting to create one for you.");
             try {
-                FileWriter fw = new FileWriter(FILE_PATH);
+                FileWriter fw = new FileWriter(TASKS_TEXT_FILE_PATH);
                 fw.close();
                 System.out.println("Successfully created file tasks.txt");
                 return tasks;
             } catch (IOException ioException) {
                 throw new DukeException(ioException.getMessage());
             }
+        }
+    }
+
+    public static void writeTasksFile(String fileContent) {
+        try {
+            FileWriter fw = new FileWriter(TASKS_TEXT_FILE_PATH, false);
+            fw.write(fileContent);
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong while saving to the backend: " + e.getMessage());
         }
     }
 }
