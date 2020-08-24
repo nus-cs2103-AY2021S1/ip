@@ -1,3 +1,5 @@
+package duke;
+
 public enum DukeExceptionType {
     EMPTY_LIST,
     MISSING_DESCRIPTION,

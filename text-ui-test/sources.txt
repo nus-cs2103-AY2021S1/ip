@@ -1,9 +1,9 @@
-../src/main/java/ToDos.java
-../src/main/java/DukeCommandType.java
-../src/main/java/Task.java
+../src/main/java/duke.ToDos.java
+../src/main/java/duke.DukeCommandType.java
+../src/main/java/duke.Task.java
 ../src/main/java/DukeStorage.java
-../src/main/java/Events.java
-../src/main/java/Duke.java
-../src/main/java/DukeExceptionType.java
-../src/main/java/Deadlines.java
-../src/main/java/DukeException.java
+../src/main/java/duke.Events.java
+../src/main/java/duke.Duke.java
+../src/main/java/duke.DukeExceptionType.java
+../src/main/java/duke.Deadlines.java
+../src/main/java/duke.DukeException.java

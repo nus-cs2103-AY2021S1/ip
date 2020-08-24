@@ -1,3 +1,8 @@
+package duke;
+
+import duke.DukeCommandType;
+import duke.DukeExceptionType;
+
 public class DukeException extends Exception {
 
     protected DukeExceptionType exceptionType;

@@ -1,3 +1,8 @@
+package duke;
+
+import duke.CommandHandler;
+import duke.TaskList;
+
 import java.util.Scanner;
 
 public class Parser {

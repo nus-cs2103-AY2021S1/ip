@@ -1,4 +1,8 @@
+package duke;
+
 import java.time.format.DateTimeParseException;
+
+import static duke.DukeCommandType.*;
 
 public class CommandHandler {
     String input;
@@ -20,7 +24,7 @@ public class CommandHandler {
                 tasks.addTask(newTask);
             } catch (ArrayIndexOutOfBoundsException exception) {
                 try {
-                    throw new DukeException("", DukeExceptionType.MISSING_DESCRIPTION, DukeCommandType.TODO);
+                    throw new DukeException("", DukeExceptionType.MISSING_DESCRIPTION, TODO);
                 } catch (DukeException e) {
                     System.err.println(e);
                 }
@@ -29,27 +33,27 @@ public class CommandHandler {
         case DEADLINE:
             try {
                 if (input.split("deadline ").length < 2) {
-                    throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
+                    throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DEADLINE);
                 } else if (input.contains("/at")) {
-                    throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
+                    throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DEADLINE);
                 } else if (!input.contains("/by ")) {
                     if (input.equals("deadline /by")) {
-                        throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
+                        throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DEADLINE);
                     } else {
-                        throw new DukeException("", DukeExceptionType.MISSING_TIMING, DukeCommandType.DEADLINE);
+                        throw new DukeException("", DukeExceptionType.MISSING_TIMING, DEADLINE);
                     }
                 } else if (input.split("/by ").length < 2) {
-                    throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
+                    throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DEADLINE);
                 } else {
                     try {
                         task = input.split("deadline ")[1].split("/by ")[0];
                         String due = input.split("deadline ")[1].split("/by ")[1];
                         if (task.equals("") && due.equals("")) {
-                            throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.DEADLINE);
+                            throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DEADLINE);
                         } else if (task.equals("")) {
-                            throw new DukeException("", DukeExceptionType.MISSING_DESCRIPTION, DukeCommandType.DEADLINE);
+                            throw new DukeException("", DukeExceptionType.MISSING_DESCRIPTION, DEADLINE);
                         } else if (due.equals("")) {
-                            throw new DukeException("", DukeExceptionType.MISSING_TIMING, DukeCommandType.DEADLINE);
+                            throw new DukeException("", DukeExceptionType.MISSING_TIMING, DEADLINE);
                         } else {
                             try {
                                 Task newTask = new Deadlines(task, due);
@@ -69,27 +73,27 @@ public class CommandHandler {
         case EVENT:
             try {
                 if (input.split("event ").length < 2) {
-                    throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
+                    throw new DukeException("", DukeExceptionType.WRONG_FORMAT, EVENT);
                 } else if (input.contains("/by")) {
-                    throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
+                    throw new DukeException("", DukeExceptionType.WRONG_FORMAT, EVENT);
                 } else if (!input.contains("/at ")) {
                     if (input.equals("event /at")) {
-                        throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
+                        throw new DukeException("", DukeExceptionType.WRONG_FORMAT, EVENT);
                     } else {
-                        throw new DukeException("", DukeExceptionType.MISSING_TIMING, DukeCommandType.EVENT);
+                        throw new DukeException("", DukeExceptionType.MISSING_TIMING, EVENT);
                     }
                 } else if (input.split("/at ").length < 2) {
-                    throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
+                    throw new DukeException("", DukeExceptionType.WRONG_FORMAT, EVENT);
                 } else {
                     try {
                         task = input.split("event ")[1].split("/at ")[0];
                         String due = input.split("event ")[1].split("/at ")[1];
                         if (task.equals("") && due.equals("")) {
-                            throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DukeCommandType.EVENT);
+                            throw new DukeException("", DukeExceptionType.WRONG_FORMAT, EVENT);
                         } else if (task.equals("")) {
-                            throw new DukeException("", DukeExceptionType.MISSING_DESCRIPTION, DukeCommandType.DEADLINE);
+                            throw new DukeException("", DukeExceptionType.MISSING_DESCRIPTION, DEADLINE);
                         } else if (due.equals("")) {
-                            throw new DukeException("", DukeExceptionType.MISSING_TIMING, DukeCommandType.DEADLINE);
+                            throw new DukeException("", DukeExceptionType.MISSING_TIMING, DEADLINE);
                         } else {
                             Task newTask = new Events(task, due);
                             tasks.addTask(newTask);
@@ -113,7 +117,7 @@ public class CommandHandler {
                 tasks.done(index);
             } catch (IndexOutOfBoundsException exception) {
                 try {
-                    throw new DukeException("", DukeExceptionType.INVALID_INDEX, DukeCommandType.DONE);
+                    throw new DukeException("", DukeExceptionType.INVALID_INDEX, DONE);
                 } catch (DukeException e) {
                     System.err.println(e);
                 }
@@ -125,7 +129,7 @@ public class CommandHandler {
                 tasks.delete(index);
             } catch (IndexOutOfBoundsException exception) {
                 try {
-                    throw new DukeException("", DukeExceptionType.INVALID_INDEX, DukeCommandType.DELETE);
+                    throw new DukeException("", DukeExceptionType.INVALID_INDEX, DELETE);
                 } catch (DukeException e) {
                     System.err.println(e);
                 }
