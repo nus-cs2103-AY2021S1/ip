@@ -19,20 +19,20 @@ public class Parser {
         }
 
         switch (c) { // Determine output from user input
-            case BYE:
-                return new ByeCommand();
-            case LIST:
-                return new ListCommand();
-            case TODO:
-            case EVENT:
-            case DEADLINE:
-                return new AddCommand(fullCommand, c);
-            case DONE:
-                return new DoneCommand(fullCommand);
-            case DELETE:
-                return new DeleteCommand(fullCommand);
-            default:
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        case BYE:
+            return new ByeCommand();
+        case LIST:
+            return new ListCommand();
+        case TODO:
+        case EVENT:
+        case DEADLINE:
+            return new AddCommand(fullCommand, c);
+        case DONE:
+            return new DoneCommand(fullCommand);
+        case DELETE:
+            return new DeleteCommand(fullCommand);
+        default:
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
 
     }

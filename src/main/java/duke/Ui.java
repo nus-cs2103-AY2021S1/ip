@@ -6,7 +6,7 @@ public class Ui {
     private final Scanner sc;
 
     Ui() {
-       this.sc = new Scanner(System.in);
+        this.sc = new Scanner(System.in);
     }
 
     public String readCommand() {

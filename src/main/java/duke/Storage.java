@@ -56,20 +56,20 @@ public class Storage {
             }
 
             switch (taskType) {
-                case 'T':
-                    taskList.add(new ToDo(taskDetails, isDone));
-                    break;
-                case 'E':
-                    String eventDescription = taskString.substring(8, taskString.lastIndexOf("|") - 1);
-                    taskList.add(new Event(eventDescription, isDone, formatTaskDateTime(taskDetails)));
-                    break;
-                case 'D':
-                    String deadlineDescription = taskString.substring(8, taskString.lastIndexOf("|") - 1);
-                    taskList.add(new Deadline(deadlineDescription, isDone, formatTaskDateTime(taskDetails)));
-                    break;
-                default:
-                    System.out.println("Unable to determine type of task");
-                    break;
+            case 'T':
+                taskList.add(new ToDo(taskDetails, isDone));
+                break;
+            case 'E':
+                String eventDescription = taskString.substring(8, taskString.lastIndexOf("|") - 1);
+                taskList.add(new Event(eventDescription, isDone, formatTaskDateTime(taskDetails)));
+                break;
+            case 'D':
+                String deadlineDescription = taskString.substring(8, taskString.lastIndexOf("|") - 1);
+                taskList.add(new Deadline(deadlineDescription, isDone, formatTaskDateTime(taskDetails)));
+                break;
+            default:
+                System.out.println("Unable to determine type of task");
+                break;
             }
         }
 
@@ -77,9 +77,9 @@ public class Storage {
     }
 
     private String formatTaskDateTime(String dateTime) {
-        String[] date_time = dateTime.split(",");
-        String date = date_time[0]; // MMM DD YYYY
-        String time = date_time[1]; // HH:MM:SS
+        String[] date_times = dateTime.split(",");
+        String date = date_times[0]; // MMM DD YYYY
+        String time = date_times[1]; // HH:MM:SS
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d yyyy");
         LocalDate newDate = LocalDate.parse(date, format);
