@@ -1,7 +1,5 @@
 public class ToDo extends Task{
 
-    protected String dateAndOrTime;
-
     ToDo(String description) {
         super(description);
     }
