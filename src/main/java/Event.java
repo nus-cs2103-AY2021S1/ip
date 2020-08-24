@@ -21,7 +21,8 @@ class Event extends Task {
     @Override
     public String saveText() {
         String completeStatus = super.isCompleted() ? "1" : "0";
-;        return "E," + completeStatus + "," + super.getName() + "," + start + "," + end;
+        DateFormat dateFormat = new SimpleDateFormat("dd MM yyyy HH:mm");
+;        return "E," + completeStatus + "," + super.getName() + "," + dateFormat.format(start) + "," + dateFormat.format(end);
     }
 
     @Override

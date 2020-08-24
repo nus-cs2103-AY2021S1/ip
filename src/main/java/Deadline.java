@@ -19,7 +19,8 @@ class Deadline extends Task {
     @Override
     public String saveText() {
         String completeStatus = super.isCompleted() ? "1" : "0";
-;        return "D," + completeStatus + "," + super.getName() + "," + dueDate;
+        DateFormat dateFormat = new SimpleDateFormat("dd MM yyyy");
+;        return "D," + completeStatus + "," + super.getName() + "," + dateFormat.format(dueDate);
     }
 
     @Override

@@ -1,6 +1,6 @@
 public class ListCommand extends Command {
     public boolean execute() {
-        super.tm.listTasks();
+        tm.listTasks();
         return true;
     }
 }

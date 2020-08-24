@@ -11,7 +11,7 @@ public class Duke {
         try {
             this.taskManager = new TaskManager(new Storage().load());
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e);
         }
     }
 
@@ -28,7 +28,7 @@ public class Duke {
                 boolean result = cmd.execute();
                 running = result;
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                System.out.println(e);
             }
         }
         ui.showExitScreen();
