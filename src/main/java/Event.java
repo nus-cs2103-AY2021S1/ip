@@ -1,27 +1,22 @@
 package main.java;
 
+import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
 class Event extends Task {
 
-    Event(String description, String dateTimeString) {
-        super(false, description, dateTimeString);
-    }
-
-    Event(boolean isCompleted, String description, String dateTimeString) {
-        super(isCompleted, description, dateTimeString);
+    Event(String description, boolean isComplete, LocalDate date) {
+        super(description, isComplete, date);
     }
 
     @Override
     String[] getDataString() {
-        return new String[] {"deadline", String.valueOf(isCompleted), description, String.valueOf(dateTime.getYear()),
-                dateTime.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH), String.valueOf(dateTime.getDayOfMonth()),
-                String.valueOf(dateTime.getHour()), String.valueOf(dateTime.getMinute())};
+        return new String[] {"deadline", String.valueOf(isComplete), this.description, this.date.toString()};
     }
 
     @Override
     public String toString() {
-        return "[E][" + super.getStatusIcon() + "] " + super.description + " (at: " + super.getDateTimeString() + ")";
+        return "[E][" + super.getStatusIcon() + "] " + super.description + " (at: " + super.getDateString() + ")";
     }
 }

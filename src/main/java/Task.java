@@ -1,35 +1,23 @@
 package main.java;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
 abstract class Task {
 
     final String description;
-    final LocalDateTime dateTime;
-    boolean isCompleted;
+    final LocalDate date;
+    boolean isComplete;
 
-    Task(boolean isCompleted, String description, String dateTimeString) {
-        this.isCompleted = isCompleted;
+    Task(String description, boolean isCompleted, LocalDate date) {
+        this.date = date;
         this.description = description;
-
-        if (dateTimeString == null) {
-            this.dateTime = null;
-        } else {
-            // Assume dateTime format is yyyy-mm-dd-hh-mm
-            String[] dateTimeParserString = dateTimeString.split("-");
-            int[] dateTimeParserIntegers = new int[5];
-            for (int i = 0; i < dateTimeParserIntegers.length; i++) {
-                dateTimeParserIntegers[i] = Integer.parseInt(dateTimeParserString[i]);
-            }
-            this.dateTime = LocalDateTime.of(dateTimeParserIntegers[0], dateTimeParserIntegers[1],
-                    dateTimeParserIntegers[2], dateTimeParserIntegers[3], dateTimeParserIntegers[4]);
-        }
+        this.isComplete = isCompleted;
     }
 
     String getStatusIcon() {
-        if (this.isCompleted) {
+        if (this.isComplete) {
             return "\u2713";
         } else {
             return "\u2718";
@@ -37,23 +25,21 @@ abstract class Task {
     }
 
     void completeTask() {
-        this.isCompleted = true;
+        this.isComplete = true;
     }
 
-    String getDateTimeString() {
-        if (this.dateTime == null) {
+    String getDateString() {
+        if (this.date == null) {
             return null;
         } else {
-            return this.dateTime.getYear() + " " +
-                    this.dateTime.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " +
-                    this.dateTime.getDayOfMonth() + " " +
-                    this.dateTime.getHour() + ":" +
-                    this.dateTime.getMinute();
+            return this.date.getYear() + " " +
+                    this.date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " +
+                    this.date.getDayOfMonth();
         }
     }
 
     String[] getDataString() {
-        return new String[] {"task", String.valueOf(isCompleted), description};
+        return new String[] {"task", String.valueOf(isComplete), description};
     }
 
     @Override

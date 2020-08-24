@@ -1,5 +1,6 @@
 package main.java;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 class TaskList {
@@ -43,24 +44,24 @@ class TaskList {
     /**
      * Creates a new ToDo and adds it to the task list
      */
-    void addTodo() {
-        ToDo todo = new ToDo();
+    void addTodo(String description, boolean isComplete) {
+        ToDo todo = new ToDo(description, isComplete);
         this.taskArrayList.add(todo);
     }
 
     /**
      * Creates a new deadline and adds it to the task list
      */
-    void addDeadline() {
-        Deadline deadline = new Deadline();
+    void addDeadline(String description, boolean isComplete, LocalDate date) {
+        Deadline deadline = new Deadline(description, isComplete, date);
         this.taskArrayList.add(deadline);
     }
 
     /**
      * Creates a new event and adds it to the task list
      */
-    void addEvent() {
-        Event event = new Event();
+    void addEvent(String description, boolean isComplete, LocalDate date) {
+        Event event = new Event(description, isComplete, date);
         this.taskArrayList.add(event);
     }
 

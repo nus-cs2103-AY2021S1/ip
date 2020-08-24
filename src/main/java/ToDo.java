@@ -2,17 +2,13 @@ package main.java;
 
 class ToDo extends Task {
 
-    ToDo(String description) {
-        super(false, description, null);
-    }
-
-    ToDo(boolean isCompleted, String description) {
-        super(isCompleted, description, null);
+    ToDo(String description, boolean isComplete) {
+        super(description, isComplete, null);
     }
 
     @Override
     String[] getDataString() {
-        return new String[] {"todo", String.valueOf(isCompleted), description};
+        return new String[] {"todo", String.valueOf(isComplete), description};
     }
 
     @Override
