@@ -24,16 +24,18 @@ public class Event extends Task {
         this.endTime = null;
     }
 
-    public Event(String description, LocalDate date, LocalTime startTime) {
+    public Event(String description, Boolean isDone, LocalDate date, LocalTime startTime) {
         super(description);
         this.date = date;
+        this.isDone = isDone;
         this.startTime = startTime;
         this.endTime = null;
     }
 
-    public Event(String description, LocalDate date, LocalTime startTime, LocalTime endTime) {
+    public Event(String description, Boolean isDone, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(description);
         this.date = date;
+        this.isDone = isDone;
         this.startTime = startTime;
         this.endTime = endTime;
     }
@@ -44,6 +46,14 @@ public class Event extends Task {
 
     public LocalDate getDate() {
         return this.date;
+    }
+
+    public LocalTime getStartTime() {
+        return this.startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return this.endTime;
     }
 
     @Override
@@ -68,7 +78,7 @@ public class Event extends Task {
     @Override
     public Event markAsDone() {
         //int index = taskNum - 1;
-        Event newTask = new Event(this.getDescription(), true, this.date);
+        Event newTask = new Event(this.getDescription(), true, this.date, this.startTime, this.endTime);
         return newTask;
     }
 

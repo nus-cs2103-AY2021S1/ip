@@ -190,7 +190,6 @@ public class Duke {
             updateData(this.todos);
 
         } catch (DukeException d) {
-            System.out.println(d.getMessage());
             throw new DoneException("Please enter a valid task number");
         }
     }
@@ -226,7 +225,7 @@ public class Duke {
                     } else {
                         String time = dateTime[1];
                         LocalTime localTime = LocalTime.parse(time);
-                        deadline = new Deadline(task, localDate, localTime);
+                        deadline = new Deadline(task, false, localDate, localTime);
                     }
                     saveToList(deadline);
                 } catch (DateTimeParseException e) {
@@ -268,13 +267,13 @@ public class Duke {
                         if (startEndTime.length < 2) {
                             String startTime = startEndTime[0];
                             LocalTime localTime = LocalTime.parse(startTime);
-                            event = new Event(eventDesc, localDate, localTime);
+                            event = new Event(eventDesc, false, localDate, localTime);
                         } else {
                             String startTime = startEndTime[0];
                             String endTime = startEndTime[1];
                             LocalTime localStartTime = LocalTime.parse(startTime);
                             LocalTime localEndTime = LocalTime.parse(endTime);
-                            event = new Event(eventDesc, localDate, localStartTime, localEndTime);
+                            event = new Event(eventDesc, false, localDate, localStartTime, localEndTime);
                         }
                     }
 
@@ -386,21 +385,61 @@ public class Duke {
                         }
 
                     } else if (identifier.equals("E")) {
-                        String date = parsed[3];
+                        String dateAndTime = parsed[3];
+                        String[] dateTime = dateAndTime.split("\\s", 2);
+                        String date = dateTime[0];
                         LocalDate localDate = LocalDate.parse(date);
-                        if(doneIndicator.equals("1")) {
-                            task = new Event(taskName, true, localDate);
+
+                        if(dateTime.length < 2) {
+                            if (doneIndicator.equals("1")) {
+                                task = new Event(taskName, true, localDate);
+                            } else {
+                                task = new Event(taskName, localDate);
+                            }
+
                         } else {
-                            task = new Event(taskName, localDate);
+                            String time = dateTime[1];
+                            String[] startEndTime = time.split("-");
+                            String startTime = startEndTime[0];
+                            LocalTime localStartTime = LocalTime.parse(startTime);
+
+                            if(startEndTime.length < 2) {
+                                if (doneIndicator.equals("1")) {
+                                    task = new Event(taskName, true, localDate, localStartTime);
+                                } else {
+                                    task = new Event(taskName, false, localDate, localStartTime);
+                                }
+                            } else {
+                                String endTime = startEndTime[1];
+                                LocalTime localEndTime = LocalTime.parse(endTime);
+                                if (doneIndicator.equals("1")) {
+                                    task = new Event(taskName, true, localDate, localStartTime, localEndTime);
+                                } else {
+                                    task = new Event(taskName, false, localDate, localStartTime, localEndTime);
+                                }
+                            }
                         }
 
                     } else if (identifier.equals("D")) {
-                        String date = parsed[3];
+                        String dateAndTime = parsed[3];
+                        String[] dateTime = dateAndTime.split("\\s", 2);
+                        String date = dateTime[0];
                         LocalDate localDate = LocalDate.parse(date);
-                        if(doneIndicator.equals("1")) {
-                            task = new Deadline(taskName, true, localDate);
+
+                        if(dateTime.length < 2) {
+                            if (doneIndicator.equals("1")) {
+                                task = new Deadline(taskName, true, localDate);
+                            } else {
+                                task = new Deadline(taskName, localDate);
+                            }
                         } else {
-                            task = new Deadline(taskName, localDate);
+                            String time = dateTime[1];
+                            LocalTime localTime = LocalTime.parse(time);
+                            if (doneIndicator.equals("1")) {
+                                task = new Deadline(taskName, true, localDate, localTime);
+                            } else {
+                                task = new Deadline(taskName, false, localDate, localTime);
+                            }
                         }
 
                     } else {
@@ -432,11 +471,31 @@ public class Duke {
                 if(type.equals("T")) {
                     stored = String.format("%s | %d | %s", type, status ? 1 : 0, taskName);
                 } else if (type.equals("E")) {
-                    LocalDate date = ((Event) task).getDate();
-                    stored = String.format("%s | %d | %s | %s", type, status ? 1 : 0, taskName, date);
+                    Event event = (Event) task;
+                    LocalDate date = event.getDate();
+                    LocalTime startTime = event.getStartTime();
+                    LocalTime endTime = event.getEndTime();
+
+                    if(startTime == null) {
+                        stored = String.format("%s | %d | %s | %s", type, status ? 1 : 0, taskName, date);
+                    } else if(endTime == null) {
+                        stored = String.format("%s | %d | %s | %s | %s", type, status ? 1 : 0, taskName, date, startTime);
+                    } else {
+                        stored = String.format("%s | %d | %s | %s | %s-%s", type, status ? 1 : 0, taskName, date, startTime, endTime);
+                    }
+
                 } else if (type.equals("D")) {
-                    LocalDate date = ((Deadline) task).getDeadline();
-                    stored = String.format("%s | %d | %s | %s", type, status ? 1 : 0, taskName, date);
+                    Deadline deadline = (Deadline) task;
+                    LocalDate date = deadline.getDeadline();
+                    LocalTime time = deadline.getTime();
+
+                    if(time == null) {
+                        stored = String.format("%s | %d | %s | %s", type, status ? 1 : 0, taskName, date);
+                    } else {
+                        stored = String.format("%s | %d | %s | %s | %s", type, status ? 1 : 0, taskName, date, time);
+
+                    }
+
                 }
                 writer.write(stored);
                 writer.newLine();

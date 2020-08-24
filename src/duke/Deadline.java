@@ -20,8 +20,9 @@ public class Deadline extends Task {
         this.time = null;
     }
 
-    public Deadline(String description, LocalDate deadline, LocalTime time) {
+    public Deadline(String description, Boolean isDone, LocalDate deadline, LocalTime time) {
         super(description);
+        this.isDone = isDone;
         this.deadline = deadline;
         this.time = time;
     }
@@ -32,6 +33,10 @@ public class Deadline extends Task {
 
     public LocalDate getDeadline() {
         return this.deadline;
+    }
+
+    public LocalTime getTime() {
+        return this.time;
     }
 
     @Override
@@ -47,7 +52,7 @@ public class Deadline extends Task {
     @Override
     public Deadline markAsDone() {
         //int index = taskNum - 1;
-        Deadline newTask = new Deadline(this.getDescription(), true, this.deadline);
+        Deadline newTask = new Deadline(this.getDescription(), true, this.deadline, this.time);
         return newTask;
     }
 
