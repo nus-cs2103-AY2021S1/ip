@@ -1,3 +1,10 @@
+package storage;
+
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,7 +14,7 @@ import java.util.Scanner;
 public class DataStorage {
 
     public ArrayList<Task> loadData() throws IOException {
-        File f = new File("./src/data/duke.txt"); // create a File for the given file path
+        File f = new File("../src/data/duke.txt"); // create a File for the given file path
         if (f.createNewFile()) {
             System.out.println("New data created: " + f.getName());
         } else {
@@ -52,7 +59,7 @@ public class DataStorage {
     }
 
     public void convertData(ArrayList<Task> taskList) throws IOException {
-        FileWriter fw = new FileWriter("./src/data/duke.txt");
+        FileWriter fw = new FileWriter("../src/data/duke.txt");
         ArrayList<Task> tasks = taskList;
         String input = tasks.get(0).saveString();
         tasks.remove(0);

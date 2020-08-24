@@ -1,3 +1,7 @@
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

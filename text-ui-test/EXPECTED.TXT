@@ -1,3 +1,4 @@
+New data created: duke.txt
 Hi! I'm
  ____   ____
 |  _ \ |  _ \
@@ -15,22 +16,22 @@ _________________________________________
 I don't understand :( Please input date as DD-MM-YYYY or DD-MM-YYYY HHmm
 Example: 31-12-2020 or 31-12-2020 2359
 _________________________________________
-Ok, Deadline added:
+Ok, tasks.Deadline added:
   [D][?] return book (by: 06 Sep 2020)
 You now have 2 task(s) in your list!
 _________________________________________
 I don't understand :( Please input date as DD-MM-YYYY or DD-MM-YYYY HHmm
 Example: 31-12-2020 or 31-12-2020 2359
 _________________________________________
-Ok, Event added:
+Ok, tasks.Event added:
   [E][?] lesson (at: 06 Sep 2020 02:00 PM)
 You now have 3 task(s) in your list!
 _________________________________________
-Event date not detected, try again!
+tasks.Event date not detected, try again!
 Please input event as 'event (title) /at (date)'
 Example: event group meeting /at 31-12-2020
 _________________________________________
-Ok, Event added:
+Ok, tasks.Event added:
   [E][?] project meeting (at: 09 Sep 2020 06:30 PM)
 You now have 4 task(s) in your list!
 _________________________________________
@@ -79,3 +80,4 @@ No tasks found on 10-09-2020!
 _________________________________________
 You're leaving? Bye :( Come back soon!
 _________________________________________
+Updated your data!
