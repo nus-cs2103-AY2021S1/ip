@@ -24,7 +24,7 @@ public class Duke {
 
         System.out.println(border + "Hi! I'm Wyre, your Personal Assistant Chatbot! :>\nWhat can I do for you today?"
                 + border);
-        while(true) {
+        while(sc.hasNextLine()) {
             try {
                 command = sc.nextLine();
                 //command = original.replaceAll("\\s", ""); // remove all spaces from command
