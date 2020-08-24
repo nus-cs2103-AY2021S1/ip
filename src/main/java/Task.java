@@ -1,6 +1,7 @@
 package main.java;
 
 public class Task {
+
     protected boolean status; //false for Not done; true for done
     protected String content;
 
@@ -18,9 +19,13 @@ public class Task {
         this.status = true;
     }
 
-    public boolean isDone() { return this.status; }
+    public boolean isDone() {
+        return this.status;
+    }
 
-    public String getContent() { return this.content; }
+    public String getContent() {
+        return this.content;
+    }
 
     @Override
     public String toString() {

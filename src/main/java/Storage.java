@@ -32,7 +32,7 @@ public class Storage {
     public List<Task> load() {
         List<Task> result = new ArrayList<>();
         Scanner storage;
-        try{
+        try {
             storage = new Scanner(storageFile);
 
             while (storage.hasNext()) {
@@ -57,7 +57,7 @@ public class Storage {
     }
 
     public void save(List<Task> taskList) {
-        try{
+        try {
             FileWriter fileWriter = new FileWriter(storageFile);
 
             String data = "";

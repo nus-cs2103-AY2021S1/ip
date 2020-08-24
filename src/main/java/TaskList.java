@@ -21,7 +21,7 @@ public class TaskList {
         this.storage.save(taskList);
     }
 
-    public Task getTask(int index) throws IndexOutOfBoundsException{
+    public Task getTask(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= taskList.size()) {
             throw new IndexOutOfBoundsException();
         }

@@ -43,7 +43,8 @@ public class Parser {
         return result;
     }
 
-    public int parseDoneOrder(String resource, TaskList taskList) throws IndexOutOfBoundsException, Exception{
+    public int parseDoneOrder(String resource, TaskList taskList)
+        throws IndexOutOfBoundsException, Exception {
         if (resource.length() <= 4) {
             throw new Exception();
         }
@@ -60,7 +61,8 @@ public class Parser {
         }
     }
 
-    public int parseDeleteOrder(String resource, TaskList taskList) throws IndexOutOfBoundsException, Exception {
+    public int parseDeleteOrder(String resource, TaskList taskList)
+        throws IndexOutOfBoundsException, Exception {
         if (resource.length() <= 6) {
             throw new Exception();
         }

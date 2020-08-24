@@ -1,13 +1,7 @@
 package main.java;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+
 import java.security.InvalidParameterException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -48,7 +42,8 @@ public class Duke {
                 } catch (Exception e) {
                     ui.invalidDoneOrder();
                 }
-            } else if (userInput.startsWith("todo") || userInput.startsWith("deadline") || userInput.startsWith("event")) {
+            } else if (userInput.startsWith("todo") || userInput.startsWith("deadline") || userInput
+                .startsWith("event")) {
                 try {
                     Task newTask = parser.parseTask(userInput);
                     taskList.addNewTask(newTask);
