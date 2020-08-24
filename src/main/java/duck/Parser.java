@@ -1,6 +1,7 @@
 package duck;
 
 import duck.exception.DuckException;
+import duck.task.Task;
 
 public class Parser {
     private static final String[] dateSeparators = {"/at", "/by"};
@@ -37,6 +38,20 @@ public class Parser {
         }
 
         return date;
+    }
+
+    public static int parseTaskNumber(String input) throws DuckException {
+        String[] inputSplit = input.split("\\s+");
+        if (inputSplit.length != 2) {
+            throw new DuckException("Please provide a task number!");
+        }
+
+        try {
+            int taskNumber = Integer.parseInt(inputSplit[1]);
+            return taskNumber;
+        } catch (NumberFormatException e) {
+            throw new DuckException("Invalid number provided");
+        }
     }
 
 }
