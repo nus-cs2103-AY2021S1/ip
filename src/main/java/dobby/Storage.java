@@ -24,7 +24,7 @@ public class Storage {
             while (scanner.hasNext()) {
                 String str = scanner.nextLine();
                 try {
-                    (this.tasks).creatingFromStorage(str);
+                    (this.tasks).createFromStorage(str);
                 } catch (ParseException e) { // should never be called
                     Ui.reply("\n    " + e.getMessage() + "\n    ");
                 }
@@ -34,6 +34,7 @@ public class Storage {
             System.exit(1);
         }
     }
+
     public void rewriteFile() {
         try {
             FileWriter fw = new FileWriter(this.filePath);

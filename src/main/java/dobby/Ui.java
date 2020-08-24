@@ -29,6 +29,7 @@ public class Ui {
          }
          return text;
     }
+
     public static void reply(String message) {
         System.out.println("    " + UNDERSCORE + message + UNDERSCORE);
     }

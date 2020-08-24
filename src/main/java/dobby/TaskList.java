@@ -9,12 +9,11 @@ import main.java.dobby.task.*;
 public class TaskList {
     private ArrayList<Task> tasks;
 
-    TaskList () {
+    public TaskList () {
         tasks = new ArrayList<Task>();
     }
 
-    public void creatingFromStorage (String str) throws ParseException {
-        // System.out.println(str);
+    public void createFromStorage (String str) throws ParseException {
         boolean isDone = str.charAt(4) == '\u2713';
         Task task;
         if (str.charAt(1) == 'T') { // TODO
@@ -22,7 +21,7 @@ public class TaskList {
             task = new Todo(decription);
             tasks.add(task);
         } else if (str.charAt(1) == 'D') { // DEADLINE
-            String description = str.substring(str.indexOf(' ') + 1, str.indexOf("(by: "));
+            String description = str.substring(str.indexOf(' ') + 1, str.indexOf("(by: ") - 1);
             String by = str.substring(str.indexOf("(by: ") + 5, str.length() - 1); //Aug 28 2020 4:00 pm
             int thirdIndex = by.indexOf(' ', 10);
             String dt = by.substring(0, thirdIndex);
@@ -31,7 +30,7 @@ public class TaskList {
             task = new Deadline(description, tm, date);
             tasks.add(task);
         } else { // EVENT
-            String description = str.substring(str.indexOf(' ') + 1, str.indexOf("(at: "));
+            String description = str.substring(str.indexOf(' ') + 1, str.indexOf("(at: ") - 1);
             String at = str.substring(str.indexOf("(at: ") + 5, str.length() - 1);
             int thirdIndex = at.indexOf(' ', 10);
             String dt = at.substring(0, thirdIndex);
@@ -80,6 +79,7 @@ public class TaskList {
         }
         return counter == 0 ? message + "The task list is currently empty.\n    " : message;
     }
+
     public Task getTask (int index) {
         return this.tasks.get(index);
     }

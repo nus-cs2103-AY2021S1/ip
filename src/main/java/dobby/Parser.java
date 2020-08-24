@@ -32,7 +32,8 @@ public class Parser {
                 Todo todo = new Todo(text);
                 (this.tasks).addToList(todo);
                 message = "\n    Great! I've added the following task:\n      " + todo.getDescription() +
-                        String.format("\n    Now you have %d tasks in the list.\n    ", (this.tasks).getSize());
+                        String.format("\n    Now you have %d task%s in the list.\n    ",
+                                (this.tasks).getSize(), (this.tasks).getSize() > 1 ? "s" : "");
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DobbyException("\n    Incorrect usage of command. Description cannot be empty. Please try again."
                         + (Commands.TODO).getUsage() + "\n    ");
@@ -62,7 +63,7 @@ public class Parser {
                     throw new DobbyException("\n    Incorrect usage of command. Description cannot be empty. Please try again."
                             + (Commands.DEADLINE).getUsage()  + "\n    ");
                 } else { // no deadline details specified
-                    throw new DobbyException("\n    Incorrect usage of command. main.java.dobby.task.Deadline details cannot be empty. Please try again."
+                    throw new DobbyException("\n    Incorrect usage of command. Deadline details cannot be empty. Please try again."
                             + (Commands.DEADLINE).getUsage()  + "\n    ");
                 }
             } catch (DateTimeParseException e) {
