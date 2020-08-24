@@ -33,7 +33,7 @@ public abstract class FileToTaskListConverter {
             return list;
         } catch (FileNotFoundException e) {
             File directory = data.getParentFile();
-            System.out.println(directory);
+
             try {
                 if (directory.exists() && directory.isDirectory()) {
                     data.createNewFile();
