@@ -54,4 +54,23 @@ public class Ui {
         System.out.println(LINE);
         System.out.print("> ");
     }
+
+    public void askEventName() {
+        System.out.println(LINE);
+        System.out.println("What is the name of your Event?"); 
+        System.out.println(LINE);
+        System.out.print("> ");
+    }
+    public void askEventStartTime() {
+        System.out.println(LINE);
+        System.out.println("When is the start of your event? (Give in this format: day month year hour:min)"); 
+        System.out.println(LINE);
+        System.out.print("> ");
+    }
+    public void askEventEndTime() {
+        System.out.println(LINE);
+        System.out.println("When is the end of your event? (Give in this format: day month year hour:min)"); 
+        System.out.println(LINE);
+        System.out.print("> ");
+    }
 }
