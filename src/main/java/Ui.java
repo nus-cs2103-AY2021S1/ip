@@ -21,30 +21,30 @@ public class Ui {
     }
 
     void printNumTask(int numTask) {
-        System.out.println(String.format("%sNow you have %d tasks in the list.", INDENT, numTask));
+        System.out.println(String.format("%syou have %d tasks in the list.", INDENT, numTask));
     }
 
     void showDelete(Task removed, int numLeft) {
-        showLine();
         System.out.println(INDENT + "Tasked removed: ");
         System.out.println(INDENT + removed.getOutput());
         printNumTask(numLeft);
-        showLine();
     }
 
     public void printList(Storage storage) {
         ArrayList<Task> arrTask = storage.load();
-        System.out.println(LINE);
+        printNumTask(arrTask.size());
         System.out.println(INDENT + "Here are the tasks in your list:");
         for(int i = 0; i < arrTask.size(); i++) {
             System.out.println(String.format("%s%d. %s",INDENT,  i + 1, arrTask.get(i).getOutput()));
         }
-        System.out.println(LINE);
+    }
+
+    public void printNew(Task task, String type, int numTask) {
+        System.out.println(String.format("%sAdding %s to the list:",INDENT ,type));
+        System.out.println(String.format("%s %s", INDENT, task.getOutput()));
     }
 
     public void bye() {
-        System.out.println(LINE);
         System.out.println(INDENT + "Bye. Hope to see you again soon!");
-        System.out.println(LINE);
     }
 }
