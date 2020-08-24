@@ -3,10 +3,22 @@ package duke;
 import duke.task.*;
 import duke.exception.*;
 import duke.command.*;
-import java.io.IOException;
 
+/**
+ * Class to understand user's command.
+ * The essential functionality of this helper class is to map user command to <code>Command</code> objects.
+ */
 public class Parser {
 
+    /**
+     * Map a response string to an executable <code>Command</code> object.
+     * This methods map a response string to an executable <code>Command</code> object. When converting, commands that
+     * Duke cannot understand will lead to exception throwing.
+     * @param response one-line input from the user
+     * @return a <code>Command</code> object that Duke can execute
+     * @throws Exception exceptions when Duke cannot understands the command or when the command does not have the
+     * required format.
+     */
     public Command parse(String response) throws Exception {
         if (response.equals("bye")) return new CommandBye();
         else if (response.equals("list")) return new CommandList();
@@ -73,11 +85,6 @@ public class Parser {
                     throw new IllegalCommandException(response);
             }
             return new CommandAdd(newTask);
-//            System.out.println("     Got it. I've added this task:");
-//            System.out.println("       " + newTask);
-//            list.add(newTask);
-//            System.out.println("     Now you have " + list.size() + " tasks in the list.");
-//            printHorizontal();
         }
     }
 
