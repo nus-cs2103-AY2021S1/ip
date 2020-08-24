@@ -10,24 +10,44 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The Ui interacts with the user..
+ */
 public class Ui {
+    /**
+     * The Scanner to read inputs.
+     */
     private Scanner scanner;
 
+    /**
+     * Instantiates a new Ui and initialises the scanner.
+     */
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Print dashes.
+     */
     private void printDashes() {
         int length = 60;
         System.out.println("_".repeat(length));
     }
 
+    /**
+     * Print the string with dashes.
+     *
+     * @param str the str.
+     */
     public void printWithDashes(String str) {
         printDashes();
         System.out.println(str);
         printDashes();
     }
 
+    /**
+     * Print welcome message.
+     */
     public void showWelcome() {
         String logo = "  ____        _        \n"
                 + " |  _ \\ _   _| | _____ \n"
@@ -38,11 +58,20 @@ public class Ui {
         printWithDashes(greeting);
     }
 
+    /**
+     * Print exit message.
+     */
     public void printExitMessage() {
         String bye = "Bye. Hope to see you again soon!";
         printWithDashes(" " + bye);
     }
 
+    /**
+     * Print add task.
+     *
+     * @param task   the task.
+     * @param length the length of the tasks.
+     */
     public void printAddTask(Task task, int length) {
         String message = " Got it. I've added this task:\n";
         message += " " + task;
@@ -50,6 +79,13 @@ public class Ui {
         printWithDashes(message);
     }
 
+    /**
+     * Returns list items to be printed.
+     *
+     * @param builder the string builder.
+     * @param list    the list.
+     * @return the string builder.
+     */
     private StringBuilder printListItems(StringBuilder builder, ArrayList<Task> list) {
         for (int i = 0; i < list.size(); i++) {
             builder.append(String.format(" %s. %s\n", i + 1, list.get(i)));
@@ -57,11 +93,22 @@ public class Ui {
         return builder;
     }
 
+    /**
+     * Print list.
+     *
+     * @param tasks the tasks.
+     */
     public void printList(Tasks tasks) {
         StringBuilder builder = new StringBuilder(" Here are the tasks in your list:\n");
         printWithDashes(printListItems(builder, tasks.getTasks()).toString());
     }
 
+    /**
+     * Print found.
+     *
+     * @param localDate the date.
+     * @param list      the list.
+     */
     public void printFound(LocalDate localDate, ArrayList<Task> list) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         String formattedDate = localDate.format(formatter);
@@ -70,20 +117,41 @@ public class Ui {
         printWithDashes(printListItems(builder, list).toString());
     }
 
+    /**
+     * Print mark task as done.
+     *
+     * @param task the task.
+     */
     public void printMarkTaskAsDone(Task task) {
         printWithDashes(" Nice! I've marked this task as done:\n " + task);
     }
 
+    /**
+     * Print delete task.
+     *
+     * @param task   the task.
+     * @param length the length of the tasks.
+     */
     public void printDeleteTask(Task task, int length) {
         String message = " Noted. I've removed this task:\n " + task;
         message += String.format("\n Now you have %s task%s in the list.", length, length > 1 ? "s" : "");
         printWithDashes(message);
     }
 
+    /**
+     * Print duke exception.
+     *
+     * @param ex the exception.
+     */
     public void printDukeException(DukeException ex) {
         printWithDashes(" ERROR: " + ex.getMessage());
     }
 
+    /**
+     * Returns the input by reading commands.
+     *
+     * @return the input.
+     */
     public String readCommand() {
         if (this.scanner.hasNextLine()) {
             return this.scanner.nextLine(); 

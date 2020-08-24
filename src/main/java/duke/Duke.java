@@ -7,11 +7,28 @@ import duke.task.Tasks;
 
 import java.io.IOException;
 
+/**
+ * The main class, Duke.
+ */
 public class Duke {
+    /**
+     * The Storage deals with loading tasks from the file and saving tasks in the file.
+     */
     private Storage storage;
+    /**
+     * The Tasks contains the task list.
+     */
     private Tasks tasks;
+    /**
+     * The Ui interacts with the user.
+     */
     private Ui ui;
 
+    /**
+     * Instantiates a new Duke.
+     *
+     * @param filePath the file path of data to be read.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         try {
@@ -23,6 +40,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns an Initialised storage.
+     *
+     * @param filePath the file path.
+     * @return the initialised storage.
+     * @throws ReadFailedException If reading the data failed.
+     */
     private static Storage initialiseStorage(String filePath) throws ReadFailedException {
         Storage storage;
         try {
@@ -33,6 +57,11 @@ public class Duke {
         return storage;
     }
 
+    /**
+     * Runs Duke by reading inputs using ui, generate commands using parser, executing commands and using
+     * ui to print output.
+     * Catch DukeExceptions and print it using ui.
+     */
     public void run() {
         this.ui.showWelcome();
         boolean isExit = false;
@@ -48,6 +77,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Instantiates Duke and runs it.
+     * The main method.
+     *
+     * @param args unused.
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

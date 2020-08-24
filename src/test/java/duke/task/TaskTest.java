@@ -11,19 +11,40 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Tests Task.
+ */
 public class TaskTest {
+    /**
+     * Returns a todo.
+     *
+     * @return the task.
+     */
     private Task createTodo() {
         return new Todo("todo");
     }
 
+    /**
+     * Returns an event.
+     *
+     * @return the task.
+     */
     private Task createEvent() {
         return new Event("event", LocalDate.parse("2020-03-23"));
     }
 
+    /**
+     * Returns a deadline.
+     *
+     * @return the task.
+     */
     private Task createDeadline() {
         return new Deadline("deadline", LocalDate.parse("2020-03-07"));
     }
 
+    /**
+     * Test hasDate method.
+     */
     @Test
     public void testHasDate() {
         assertFalse(createTodo().hasDate());
@@ -31,6 +52,9 @@ public class TaskTest {
         assertTrue(createDeadline().hasDate());
     }
 
+    /**
+     * Test markAsDone method.
+     */
     @Test 
     public void testMarkAsDone() {
         Task task = createTodo();
@@ -38,6 +62,11 @@ public class TaskTest {
         assertEquals("[T][\u2713] todo", task.toString());
     }
 
+    /**
+     * Test createTask method with success.
+     *
+     * @throws ReadFailedException If the task cannot be read.
+     */
     @Test 
     public void testCreateTask_success() throws ReadFailedException {
         assertEquals(createTodo().toString(), 
@@ -49,6 +78,9 @@ public class TaskTest {
         
     }
 
+    /**
+     * Test createTask method with exception thrown.
+     */
     @Test
     public void testCreateTask_ExceptionThrown() {
         try {
@@ -59,20 +91,29 @@ public class TaskTest {
         }
     }
 
+    /**
+     * Test getStatusIcon method.
+     */
     @Test 
     public void testGetStatusIcon() {
         assertEquals("\u2718", createTodo().getStatusIcon());
-//        Task task = createTodo();
-//        task.markAsDone();
-//        assertEquals("\u2713", task.getStatusIcon());
+        Task task = createTodo();
+        task.markAsDone();
+        assertEquals("\u2713", task.getStatusIcon());
     }
 
+    /**
+     * Test getData method.
+     */
     @Test
     public void testGetData() {
         assertEquals("T_0_todo", createTodo().getData());
     }
 
 
+    /**
+     * Test toString method.
+     */
     @Test
     public void testToString() {
         assertEquals("[T][\u2713] todo", createTodo().toString());

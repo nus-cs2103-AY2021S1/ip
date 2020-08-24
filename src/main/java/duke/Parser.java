@@ -21,7 +21,18 @@ import duke.task.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The Parser deals with making sense of the user command.
+ */
 public class Parser {
+    /**
+     * Returns done command.
+     *
+     * @param input the input.
+     * @return the done command.
+     * @throws EmptyInputException   If the task number is not in input.
+     * @throws UnknownInputException If the task number cannot be parsed.
+     */
     private static DoneCommand getDoneCommand(String input) throws EmptyInputException, UnknownInputException {
         String taskIndexStr;
         try {
@@ -44,6 +55,14 @@ public class Parser {
         return new DoneCommand(taskIndex);
     }
 
+    /**
+     * Returns delete command.
+     *
+     * @param input the input.
+     * @return the delete command.
+     * @throws EmptyInputException   If the task number is not in input.
+     * @throws UnknownInputException If the task number cannot be parsed.
+     */
     private static DeleteCommand getDeleteCommand(String input) throws EmptyInputException, UnknownInputException {
         String taskIndexStr;
         try {
@@ -65,7 +84,15 @@ public class Parser {
         
         return new DeleteCommand(taskIndex);
     }
-    
+
+    /**
+     * Returns find command.
+     *
+     * @param input the input.
+     * @return the find command.
+     * @throws EmptyInputException   If the item is not in input.
+     * @throws InvalidInputException If the item cannot be parsed.
+     */
     private static FindCommand getFindCommand(String input) throws EmptyInputException, InvalidInputException {
         String dateStr;
         try {
@@ -87,7 +114,14 @@ public class Parser {
         
         return new FindCommand(localDate);
     }
-    
+
+    /**
+     * Returns task command with todo.
+     *
+     * @param input the input.
+     * @return the task command with todo.
+     * @throws EmptyTaskException If the description in input is empty.
+     */
     private static TaskCommand getTodoTaskCommand(String input) throws EmptyTaskException {
         if (input.length() == 4) {
             throw new EmptyTaskException("description", TaskType.TODO);
@@ -102,6 +136,14 @@ public class Parser {
         return new TaskCommand(todo);
     }
 
+    /**
+     * Returns task command with event.
+     *
+     * @param input the input.
+     * @return the task command with event.
+     * @throws EmptyTaskException   If the description or date in input is empty.
+     * @throws InvalidTaskException If the /at command is not in input or the date cannot be parsed.
+     */
     private static TaskCommand getEventTaskCommand(String input) throws EmptyTaskException, InvalidTaskException {
         int slashIndex = input.indexOf("/at");
         if (slashIndex == -1) {
@@ -128,6 +170,14 @@ public class Parser {
         return new TaskCommand(event);
     }
 
+    /**
+     * Returns task command with deadline.
+     *
+     * @param input the input.
+     * @return the deadline task command.
+     * @throws EmptyTaskException   If the description or date in input is empty.
+     * @throws InvalidTaskException If the /by command is not in input or the date cannot be parsed.
+     */
     private static Command getDeadlineTaskCommand(String input) throws EmptyTaskException, InvalidTaskException {
         int slashIndex = input.indexOf("/by");
         if (slashIndex == -1) {
@@ -154,7 +204,14 @@ public class Parser {
         Deadline deadline = new Deadline(description, localDeadline);
         return new TaskCommand(deadline);
     }
-    
+
+    /**
+     * Returns the command after parsing the input.
+     *
+     * @param input the input.
+     * @return the command.
+     * @throws DukeException If the input cannot be parsed.
+     */
     public static Command parse(String input) throws DukeException {
         String keyword = input.split(" ")[0];
         switch (keyword) {
