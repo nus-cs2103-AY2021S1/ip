@@ -54,6 +54,14 @@ public class Parser {
             } catch (NumberFormatException e) {
                 System.out.println(divider + "Invalid input for delete command!" + "\n" + divider);
             }
+        } else if (inputString.indexOf("find ") == 0) {
+            if (inputString.length() == 5) {
+                throw new DukeException("What are you trying to find?");
+            } else {
+                String keyword = inputString.substring(5);
+                ArrayList<String> matchingTasks = lines.find(keyword);
+                Ui.listMatchingTasks(matchingTasks);
+            }
         } else {
             Task task = null;
             if (inputString.indexOf("todo") == 0) {

@@ -38,4 +38,21 @@ public class TaskList {
     public int getNumberOfItems() {
         return numberOfItems;
     }
+
+    /**
+     * Finds all tasks that contains the keyword
+     *
+     * @param keyword The keyword that we want our resulting tasks to have
+     * @return An arrayList containing the tasks that contains the keyword
+     */
+    public ArrayList<String> find(String keyword) {
+        ArrayList<String> matchingTasks = new ArrayList<>();
+        for (int i = 0; i < lines.size(); i++) {
+            String task = lines.get(i);
+            if (task.contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
 }
