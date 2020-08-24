@@ -1,3 +1,12 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.tasks.CommandWords;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.ui.Message;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -34,15 +43,15 @@ public class Duke {
         try {
             String[] parsedOutput = parser.parseCommand(input);
             String command = parsedOutput[0];
-            if (command.equals(Command.EXIT_CMD.getCmd())) {
+            if (command.equals(CommandWords.EXIT_CMD.getCmd())) {
                 response = exit();
-            } else if (command.equals(Command.LIST_CMD.getCmd())) {
+            } else if (command.equals(CommandWords.LIST_CMD.getCmd())) {
                 response.add(Message.FETCHING_MSG.getMsg());
                 ArrayList<Task> allTasks = myTasks.getAllTasks();
                 for (Task t : allTasks) {
                     response.add(t.getID() + "." + t.toString());
                 }
-            } else if (Duke.mode.equals(Command.ECHO_MODE.getCmd())) {
+            } else if (Duke.mode.equals(CommandWords.ECHO_MODE.getCmd())) {
                 response = echo(input);
             } else {
                 response = handleTask(parsedOutput, myTasks);
@@ -58,8 +67,8 @@ public class Duke {
     private static ArrayList<String> handleTask(String[] parsedOutput, TaskList tasks) throws DukeException {
         String command = parsedOutput[0];
         ArrayList<String> response = new ArrayList<>();
-        if (command.equals(Command.DELETE_CMD.getCmd()) || command.equals(Command.DONE_CMD.getCmd())) {
-            boolean toDelete = command.equals(Command.DELETE_CMD.getCmd());
+        if (command.equals(CommandWords.DELETE_CMD.getCmd()) || command.equals(CommandWords.DONE_CMD.getCmd())) {
+            boolean toDelete = command.equals(CommandWords.DELETE_CMD.getCmd());
             int taskID = Integer.parseInt(parsedOutput[1]);
             if (toDelete) {
                 response.add(Message.DELETE_MSG.getMsg());

@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.exception.DukeException;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -8,7 +12,7 @@ public class TaskList {
     }
     
     // side effect: create & add task + return response
-    protected String addEntry(String[] parsedOutput) {
+    public String addEntry(String[] parsedOutput) {
         String command = parsedOutput[0];
         switch (command) {
         case "T":
@@ -29,7 +33,7 @@ public class TaskList {
     }
     
     // side effect: completes task + returns string for completed task
-    protected String completeTask(int taskID) throws DukeException {
+    public String completeTask(int taskID) throws DukeException {
         verifyTaskValidity(taskID);
         taskList.set(taskID - 1, taskList.get(taskID - 1).complete());
         return taskList.get(taskID - 1).toString();
@@ -56,7 +60,7 @@ public class TaskList {
     }
     
     public ArrayList<Task> getAllTasks() {
-        return taskList;
+        return this.taskList;
     }
     
     public String getCurrentStatus() {

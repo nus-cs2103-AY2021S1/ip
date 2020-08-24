@@ -1,3 +1,5 @@
+package duke.tasks;
+
 public class Event extends Task {
     private static final String DELIMITER = "at",
             TIME_DELIMITER = "-";

@@ -1,3 +1,5 @@
+package duke.ui;
+
 import java.util.HashMap;
 import java.util.Map;
 
