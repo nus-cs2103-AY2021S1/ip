@@ -151,6 +151,31 @@ public class TaskList {
         }
     }
 
+    public void find(String input) {
+        try {
+            checkForItem(input.substring(5), "find");
+            String keyword = input.substring(5);
+            ArrayList<Task> keywordInTasks = new ArrayList<>();
+            for (int i = 0; i < this.taskLists.size(); i++) {
+                Task current = this.taskLists.get(i);
+                if (current.toString().contains(keyword)) {
+                    keywordInTasks.add(current);
+                }
+            }
+            if (keywordInTasks.size() == 0) {
+                Ui.print("There are no tasks related to this keyword!");
+            } else {
+                String info = "Here are the matching tasks in your list: \n";
+                for (int i = 0; i < keywordInTasks.size(); i++) {
+                    info += keywordInTasks.get(i).toString() + "\n";
+                }
+                Ui.print(info);
+            }
+        } catch (DukeException err) {
+            System.out.println(err.getMessage());
+        }
+    }
+
     /**
      * Iterates through the arraylist of tasks and print it out.
      *

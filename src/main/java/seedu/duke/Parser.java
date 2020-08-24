@@ -29,9 +29,11 @@ public class Parser {
                         if (!input.contains("bye")) {
                             if (!input.contains("list")) {
                                 if (!input.contains("delete")) {
-                                    Ui.printLines();
-                                    throw new DukeException("I don't know what that means! Try again.\n"
-                                            + "\n-----------------------------------------------\n");
+                                    if (!input.contains("find")) {
+                                        Ui.printLines();
+                                        throw new DukeException("I don't know what that means! Try again.\n"
+                                                + "\n-----------------------------------------------\n");
+                                    }
                                 }
                             }
                         }
@@ -61,8 +63,8 @@ public class Parser {
                 taskLists.addDeadline(input);
             } else if (input.contains("event")) {
                 taskLists.addEvent(input);
-            } else {
-
+            } else if (input.contains("find")){
+                taskLists.find(input);
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
