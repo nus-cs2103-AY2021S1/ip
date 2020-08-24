@@ -13,13 +13,27 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
+/**
+ * Encapsulates the storage class
+ */
 public class Storage {
     private static SimpleDateFormat writeformatter = new SimpleDateFormat ("MMM dd yyyy hh:mm a");
     private String filePath;
 
+    /**
+     * Creates a new storage
+     * @param filePath Path of the storage file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
+    /**
+     * Writes the data of the TaskList into a file
+     * @param taskList TaskList to be written to file
+     * @return TaskList
+     * @throws DukeFileException If the file cannot be written to
+     */
     public TaskList writeData(TaskList taskList) throws DukeFileException {
         if (taskList != null) {
             try{
@@ -39,6 +53,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Loads the TaskList data from a file
+     * @return TaskList that was loaded
+     * @throws DukeFileException If the file cannot be read from
+     */
     public TaskList loadData() throws DukeFileException {
         TaskList taskList = new TaskList();
         try {

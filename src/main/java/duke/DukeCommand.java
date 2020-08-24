@@ -1,7 +1,17 @@
 package duke;
 
+/**
+ * Encapsulates Duke Commands as enums
+ */
+
 public enum DukeCommand {
     LIST, DELETE, TODO, DONE, DEADLINE, EVENT, BYE;
+
+    /**
+     * Returns the appropriate Duke command given a string
+     * @param str Given string
+     * @return Duke command
+     */
     public static DukeCommand getCommand(String str) {
         switch(str) {
             case "list":

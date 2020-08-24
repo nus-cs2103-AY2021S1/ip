@@ -15,8 +15,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
+/**
+ * Encapsulates the logic for the parser class
+ */
 public class Parser {
 
+    /**
+     * Returns a command given a command string
+     * @param command Command given
+     * @return Given Commmand
+     * @throws DukeException If the command is invalid
+     */
     public static Command parse(String command) throws DukeException {
         ArrayList<String> tokens = new ArrayList<String>(Arrays.asList(command.split(" ")));
         if (tokens.size()==0||tokens.get(0).equals("")){
@@ -114,7 +123,7 @@ public class Parser {
     }
 
 
-    public static String stringCombiner(ArrayList<String> tokens, int start, int end) {
+    private static String stringCombiner(ArrayList<String> tokens, int start, int end) {
         StringBuilder str = new StringBuilder();
         for (int i = start; i < end; i++) {
             str.append(tokens.get(i));
