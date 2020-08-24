@@ -4,19 +4,20 @@ public class Deadline extends Task {
     public static final String STORE_DEADLINE = "D";
 
     private static final String DELIMITER = " /by ";
+
     private LocalDateTime deadline;
 
-    public Deadline(String description, LocalDateTime deadline) {
+    public Deadline(String description, LocalDateTime deadline) throws TaskException {
         super(description);
         this.deadline = deadline;
     }
 
-    public Deadline(String description, String deadline, boolean isCompleted) {
+    public Deadline(String description, String deadline, boolean isCompleted) throws TaskException {
         super(description, isCompleted);
         this.deadline = LocalDateTime.parse(deadline);
     }
 
-    public static Deadline create(String args) {
+    public static Deadline create(String args) throws TaskException {
         String[] argsList = args.split(DELIMITER);
         if (argsList.length < 2) {
             throw new TaskException("Not enough arguments");
@@ -33,6 +34,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return printCompletionFlag() + " | D | " + description + " | By: " + deadline.format(Task.DATE_FORMAT);
+        return printCompletionFlag() + " | D | " + description + " | By: " + deadline.format(Task.DISPLAY_FORMAT);
     }
 }

@@ -214,7 +214,7 @@ public class Duke {
                     }
                 }
             } catch (FileNotFoundException ignored) {
-            } catch (IllegalStateException e) {
+            } catch (TaskException | IllegalStateException e) {
                 printWithDivider(ERROR_MESSAGE + "\nThe file has been corrupted.");
             }
         }

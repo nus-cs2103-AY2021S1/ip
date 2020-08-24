@@ -1,11 +1,11 @@
 public class Todo extends Task {
     public static final String STORE_TODO = "T";
 
-    public Todo(String description) {
+    public Todo(String description) throws TaskException {
         super(description);
     }
 
-    public Todo(String description, boolean isComplete) {
+    public Todo(String description, boolean isComplete) throws TaskException {
         super(description, isComplete);
     }
 

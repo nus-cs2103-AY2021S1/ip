@@ -4,37 +4,34 @@ public abstract class Task {
     private static final String COMPLETE = "\u2713";
     private static final String NOT_COMPLETE = "\u2718";
 
-    public static final String STORE_COMPLETED = "COMP";
-    public static final String STORE_INCOMPLETE = "ICOMP";
+    public static final String STORE_COMPLETED = COMPLETE;
+    public static final String STORE_INCOMPLETE = NOT_COMPLETE;
 
-    protected static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM YY HH:mm");
+    protected static final DateTimeFormatter DISPLAY_FORMAT = DateTimeFormatter.ofPattern("dd MMM YY HH:mm");
     protected static final DateTimeFormatter READER_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     protected String description;
     protected boolean isComplete = false;
 
-    protected Task(String description) {
-        if (description.equals("")) {
-            throw new TaskException("Did you provide any description for this todo task?");
-        }
+    protected Task(String description) throws TaskException {
+        verifyArgs(description);
         this.description = description;
     }
 
-    protected Task(String description, boolean isComplete) {
-        if (description.equals("")) {
-            throw new TaskException("Did you provide any description for this todo task?");
-        }
+    protected Task(String description, boolean isComplete) throws TaskException {
+        verifyArgs(description);
         this.description = description;
         this.isComplete = isComplete;
     }
 
-    public Task completeTask() {
-        isComplete = true;
-        return this;
+    private void verifyArgs(String description) throws TaskException {
+        if (description.equals("")) {
+            throw new TaskException("Did you provide any description for this todo task?");
+        }
     }
 
-    public Task resetTask() {
-        isComplete = false;
+    public Task completeTask() {
+        isComplete = true;
         return this;
     }
 
