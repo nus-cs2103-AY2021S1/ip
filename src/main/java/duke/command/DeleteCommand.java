@@ -5,13 +5,23 @@ import duke.TaskList;
 import duke.Ui;
 import exception.InvalidUsageException;
 
-public class DeleteCommand extends Command{
+/**
+ * Remove a task
+ */
+public class DeleteCommand extends Command {
     int taskNumber;
 
-    public DeleteCommand(int taskNumber){
+    public DeleteCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
 
+    /**
+     * Removes a specific task from task list and save the changes to storage file
+     *
+     * @param taskList current task list
+     * @param ui       text ui interface
+     * @param storage  storage file
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         // Check that the task number makes sense.

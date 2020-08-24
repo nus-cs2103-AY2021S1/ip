@@ -17,6 +17,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the storage file that handles storage operations
+ */
 public class Storage {
     
     public static final String DEFAULT_STORAGE_FILEPATH = "data/duke.txt";
@@ -29,7 +32,12 @@ public class Storage {
     public Storage(String filePath) {
         path = Paths.get(filePath);
     }
-    
+
+    /**
+     * Loads file from storage file
+     * @return a list of task saved in storage file
+     * @throws StorageException on I/O error or parse error
+     */
     public List<Task> load() throws StorageException {
         try {
             createFileIfNotExists(path);
@@ -53,7 +61,7 @@ public class Storage {
     }
 
     /**
-     * Update the `duke.txt` file that is used for saving tasks
+     * Save tasks to storage file
      *
      * @param tasks a list of task to save
      * @return true indicating storage is updated, or false indicating storage fails to update
@@ -78,7 +86,12 @@ public class Storage {
             return false;
         }
     }
-    
+
+    /**
+     * Create storage file (and parent folders)
+     * @param path file string
+     * @throws IOException on I/O error
+     */
     private void createFileIfNotExists(Path path) throws IOException {
         Path folderPath = Path.of("data");
         Path filePath = folderPath.resolve("duke.txt");
@@ -90,7 +103,14 @@ public class Storage {
             Files.createFile(filePath);
         }
     }
-    
+
+    /**
+     * Parse storage data by the following format task_type | task_status | task_description | task_date(optional)
+     * 
+     * @param line lines in storage file
+     * @return {@code Task} object represented by the line
+     * @throws StorageException on parse error
+     */
     private Task parseStorageData(String line) throws StorageException {
         // split by the pipe `|` token
         String[] tokens = line.split("(\\s)*(\\|)(\\s)*");

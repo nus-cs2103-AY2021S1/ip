@@ -23,8 +23,19 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents parser class to parse user commands
+ */
 public class Parser {
 
+    /**
+     * Main method to call to parse user commands
+     * 
+     * @param input user commands
+     * @return a {@code Command} object representing user actions
+     * @throws InvalidUsageException on malformed commands
+     * @throws UnknownCommandException on unsupported command types
+     */
     public static Command parseCommand(String input) throws InvalidUsageException, UnknownCommandException {
         String[] commands = parseInput(input);
         CommandTypes command;

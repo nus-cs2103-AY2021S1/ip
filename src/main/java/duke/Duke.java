@@ -1,16 +1,17 @@
 package duke;
 
 import duke.command.Command;
-import duke.command.CommandTypes;
 import exception.*;
 
-import java.time.DateTimeException;
-
-import java.util.Scanner;
-
+/**
+ * Main class for the Duke application
+ */
 public class Duke {
+    // current task list 
     TaskList taskList;
+    // storage file
     Storage storage;
+    // text ui interface
     Ui ui;
 
     public Duke() {
@@ -18,6 +19,9 @@ public class Duke {
         storage = new Storage();
     }
 
+    /**
+     * Main method to start the application
+     */
     public void start() {
         try {
             this.taskList = new TaskList(storage.load());

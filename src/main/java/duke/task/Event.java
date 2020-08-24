@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an {@code Event} object. Inherits from {@code Task} object
+ */
 public class Event extends Task {
     protected LocalDate at;
 
@@ -14,6 +17,14 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Factory method for {@code Event} object
+     *
+     * @param event event description
+     * @param at    event date in ISO-8601 format
+     * @return the Event object
+     * @throws EventInvalidUsageException on empty description or wrong date format
+     */
     public static Event create(String event, String at) throws EventInvalidUsageException {
         if (event.equals("")) {
             throw new EventInvalidUsageException("Event description cannot be empty.");
@@ -26,6 +37,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Show task's name and status
+     *
+     * @return a string that represents the task
+     */
     @Override
     public String showTask() {
         return String.format("[%s]%s (at: %s)", this.getType(), super.showTask(), showDate(this.at));
@@ -40,7 +56,7 @@ public class Event extends Task {
     public String getDescription() {
         return super.getDescription() + " | " + this.at;
     }
-    
+
     public LocalDate getDate() {
         return this.at;
     }

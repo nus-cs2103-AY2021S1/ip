@@ -1,6 +1,7 @@
 package duke.task;
 
 import exception.DeadlineInvalidUsageException;
+import exception.EventInvalidUsageException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,6 +15,14 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Factory method for {@code Deadline} object
+     *
+     * @param deadline deadline description
+     * @param by       deadline date in ISO-8601 format
+     * @return the Deadline object
+     * @throws DeadlineInvalidUsageException on empty description or wrong date format
+     */
     public static Deadline create(String deadline, String by) throws DeadlineInvalidUsageException {
         if (deadline.equals("")) {
             throw new DeadlineInvalidUsageException("Deadline description cannot be empty.");
@@ -26,6 +35,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Show task's name and status
+     *
+     * @return a string that represents the task
+     */
     @Override
     public String showTask() {
         return String.format("[%s]%s (by: %s)", this.getType(), super.showTask(), showDate(this.by));
@@ -44,7 +58,7 @@ public class Deadline extends Task {
     public LocalDate getDate() {
         return this.by;
     }
-    
+
     private static LocalDate parseDate(String str) {
         return LocalDate.parse(str);
     }

@@ -10,7 +10,7 @@ public abstract class Task {
     }
 
     /**
-     * Represent task's name and status
+     * Show task's name and status
      *
      * @return a string that represents the task
      */
