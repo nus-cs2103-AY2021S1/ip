@@ -1,15 +1,26 @@
+import java.time.LocalDate;
+
 public class Event extends Task {
-    private String eventTime;
+    private final String eventTime;
+    private LocalDate date = null;
 
     Event(String name, String eventTime) {
         super(name);
         this.eventTime = eventTime;
+        try {
+            date = LocalDate.parse(eventTime);
+        }
+        catch (Exception e) {
+            date = null;
+        }
     }
 
     @Override
     public String toString() {
         String status = String.format("[E][%s] ", (super.done ? "✓" : "✗"));
-        String time = String.format(" (at: %s)", eventTime);
+        String time = date == null
+                ? String.format(" (by: %s)", eventTime)
+                : " (by: " + DateParser.format(date) + ")";
         return status + this.getName() + time;
     }
 }
