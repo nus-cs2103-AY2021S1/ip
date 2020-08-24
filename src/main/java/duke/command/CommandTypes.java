@@ -9,4 +9,5 @@ public enum CommandTypes {
     DEADLINE,
     EVENT,
     VIEWALL,
+    FIND,
 }

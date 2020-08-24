@@ -87,4 +87,18 @@ public class TaskList {
                                         || (x instanceof Deadline && ((Deadline) x).getDate().equals(date)))
                         .collect(Collectors.toList()));
     }
+
+    /**
+     * Find all tasks that contain a specific keyword
+     * 
+     * @param keyword user-inputted keyword
+     * @return a Tasklist containing all tasks that contain a specific keyword
+     */
+    public TaskList find(String keyword) {
+        return new TaskList(
+                this.taskList
+                        .stream()
+                        .filter(x -> x.getDescription().contains(keyword))
+                        .collect(Collectors.toList()));
+    }
 }
