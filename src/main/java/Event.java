@@ -7,6 +7,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String getDate() {
+        return at.substring(0, 11);
+    }
+
     @Override
     public String saveString() {
         if (this.isDone) {

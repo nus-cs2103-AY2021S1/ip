@@ -12,44 +12,70 @@ Ok, To-do added:
   [T][?] read book
 You now have 1 task(s) in your list!
 _________________________________________
+I don't understand :( Please input date as DD-MM-YYYY or DD-MM-YYYY HHmm
+Example: 31-12-2020 or 31-12-2020 2359
+_________________________________________
 Ok, Deadline added:
-  [D][?] return book (by: June 6th)
+  [D][?] return book (by: 06 Sep 2020)
 You now have 2 task(s) in your list!
 _________________________________________
-Event date not detected, try again!
+I don't understand :( Please input date as DD-MM-YYYY or DD-MM-YYYY HHmm
+Example: 31-12-2020 or 31-12-2020 2359
 _________________________________________
 Ok, Event added:
-  [E][?] project meeting (at: Aug 6th)
+  [E][?] lesson (at: 06 Sep 2020 02:00 PM)
 You now have 3 task(s) in your list!
+_________________________________________
+Event date not detected, try again!
+Please input event as 'event (title) /at (date)'
+Example: event group meeting /at 31-12-2020
+_________________________________________
+Ok, Event added:
+  [E][?] project meeting (at: 09 Sep 2020 06:30 PM)
+You now have 4 task(s) in your list!
 _________________________________________
 Ok, To-do added:
   [T][?] join sports club
+You now have 5 task(s) in your list!
+_________________________________________
+Here is your current list of task(s)!
+1. [T][?] read book
+2. [D][?] return book (by: 06 Sep 2020)
+3. [E][?] lesson (at: 06 Sep 2020 02:00 PM)
+4. [E][?] project meeting (at: 09 Sep 2020 06:30 PM)
+5. [T][?] join sports club
+_________________________________________
+I don't understand :( Please input date as DD-MM-YYYY
+Example: 31-12-2020
+_________________________________________
+Here is your list of task(s) on 06-09-2020:
+1. [D][?] return book (by: 06 Sep 2020)
+2. [E][?] lesson (at: 06 Sep 2020 02:00 PM)
+_________________________________________
+Wow!! Good job!!
+  [T][?] read book
+_________________________________________
+Wow!! Good job!!
+  [D][?] return book (by: 06 Sep 2020)
+_________________________________________
+Alright! I've deleted the task:
+  [D][?] return book (by: 06 Sep 2020)
 You now have 4 task(s) in your list!
 _________________________________________
 Here is your current list of task(s)!
 1. [T][?] read book
-2. [D][?] return book (by: June 6th)
-3. [E][?] project meeting (at: Aug 6th)
+2. [E][?] lesson (at: 06 Sep 2020 02:00 PM)
+3. [E][?] project meeting (at: 09 Sep 2020 06:30 PM)
 4. [T][?] join sports club
 _________________________________________
-Wow!! Good job!!
-  [T][?] read book
-_________________________________________
-Alright! I've deleted the task:
-  [T][?] read book
-You now have 3 task(s) in your list!
-_________________________________________
-Wow!! Good job!!
-  [E][?] project meeting (at: Aug 6th)
-_________________________________________
-Here is your current list of task(s)!
-1. [D][?] return book (by: June 6th)
-2. [E][?] project meeting (at: Aug 6th)
-3. [T][?] join sports club
+Here is your list of task(s) on 06-09-2020:
+1. [E][?] lesson (at: 06 Sep 2020 02:00 PM)
 _________________________________________
 hmm.. I don't think thats a valid task, try again?
 _________________________________________
 hmm.. I don't think thats a valid task, try again?
+_________________________________________
+No tasks found on 10-09-2020!
 _________________________________________
 You're leaving? Bye :( Come back soon!
 _________________________________________

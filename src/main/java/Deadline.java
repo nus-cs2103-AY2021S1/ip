@@ -7,6 +7,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public String getDate() {
+        return by.substring(0, 11);
+    }
+
     @Override
     public String saveString() {
         if (this.isDone) {

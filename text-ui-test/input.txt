@@ -1,14 +1,21 @@
 hi
 todo read book
-deadline return book /by June 6th
+deadline return book /by September 6th
+deadline return book /by 06-09-2020
+event lesson /at 06-09-2020 2pm
+event lesson /at 06-09-2020 1400
 event project meeting
-event project meeting /at Aug 6th
+event project meeting /at 09-09-2020 1830
 todo join sports club
 list
+check 06-09-2020 2359
+check 06-09-2020
 done 1
-delete 1
 done 2
+delete 2
 list
-delete 4
+check 06-09-2020
+delete 10
 done 0
+check 10-09-2020
 bye
