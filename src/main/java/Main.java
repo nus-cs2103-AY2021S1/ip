@@ -11,16 +11,11 @@ public class Main {
 
     public static void main(String[] args) {
         var tasks = new TaskList(new Database(DB_PATH));
-        var bot = new Bot(BOT_NAME, tasks);
+        var ui = new Frontend(BOT_NAME);
+        var bot = new Bot(ui, tasks);
 
-        var sc = new Scanner(System.in);
-
-        bot.greet();
-        System.out.printf("> ");
-        while (sc.hasNextLine() && bot.processCommand(sc.nextLine())) {
-            System.out.printf("> ");
-        }
-
-        tasks.save();
+        ui.greet();
+        while (ui.readLine().map(bot::processCommand).orElse(false))
+            ;
     }
 }

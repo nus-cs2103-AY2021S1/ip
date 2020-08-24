@@ -16,18 +16,12 @@ import java.util.NoSuchElementException;
 
 public class Bot {
 
-    private final String name;
     private final TaskList tasks;
     private final Frontend ui;
 
-    public Bot(String name, TaskList tasks) {
-        this.name = name;
-        this.tasks = tasks;
-        this.ui = new Frontend(name);
-    }
-
-    public void greet() {
-        this.ui.greet();
+    public Bot(Frontend ui, TaskList tasks) {
+        this.tasks  = tasks;
+        this.ui     = ui;
     }
 
     public boolean processCommand(String str) {
