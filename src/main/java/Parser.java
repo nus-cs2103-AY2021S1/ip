@@ -3,8 +3,17 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Represents a parser which is used to parse user's input.
+ */
 public class Parser {
-
+    /**
+     * Takes in user's order and passes order to TaskList and Storage.
+     *
+     * @param order User's input order.
+     * @return Response to the user.
+     * @throws IOException
+     */
     public static String process(String order) throws IOException {
         if (order.equals("bye")) {
             Storage.writeData(TaskList.list);//write data into the new file before exiting
@@ -73,6 +82,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Converts a task into a string to write in File.txt.
+     *
+     * @param task Task to be written in File.txt.
+     * @return A string to be written in File.txt.
+     */
     public static String unparse(Task task) {
         return task.unparseMessage;
     }

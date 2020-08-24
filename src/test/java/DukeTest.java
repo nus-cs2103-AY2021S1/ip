@@ -2,6 +2,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests Duke class.
+ */
 public class DukeTest {
     @Test
     public void dummyTest(){
