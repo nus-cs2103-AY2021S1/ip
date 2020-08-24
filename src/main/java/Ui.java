@@ -25,12 +25,18 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        String error = "error loading Duke, Duke is terminated";
+        String error = "error loading Duke";
         System.out.println(error);
     }
 
     public void showWelcome() {
         String greeting = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(greeting);
+    }
+
+    public void closeDuke() {
+        String bye = "Bye. Hope to see you again soon!";
+        sc.close();
+        System.out.println(bye);
     }
 }
