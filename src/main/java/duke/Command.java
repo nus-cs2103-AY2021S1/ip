@@ -125,12 +125,12 @@ public class Command {
                 break;
             case FIND:
                 TaskList foundList = list.find(description);
-                print = "We found these tasks in your list:";
+                print = "Here are your search results:";
                 if (foundList.isEmpty()) {
                     print += "\nWe didn't find any tasks relevant to your search term.";
                 } else {
                     for (int i = 0; i < foundList.size(); i++) {
-                        print += "\n " + (i + 1) + ": " + list.get(i);
+                        print += "\n " + (i + 1) + ": " + foundList.get(i);
                     }
                 }
                 break;
