@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-
-
 public class Deadline extends Task{
     private String date;
     private LocalDate dateTime;
@@ -14,7 +12,6 @@ public class Deadline extends Task{
         super(taskName);
         if(!date.equals(null) && !date.equals(" ")){
             this.date = date;
-            System.out.println(date);
             try{
                 this.dateTime = LocalDate.parse(date);
             } catch (DateTimeParseException err) {
