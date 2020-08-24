@@ -37,6 +37,8 @@ public abstract class Task {
         return done ? '\u2713' : '\u2718';
     }
 
+    public abstract String getParentCommand();
+
     @Override
     public String toString() {
         return String.format("[%c][%c] %s", getTaskType(), getStatusIcon(), getDescription());
