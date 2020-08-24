@@ -100,7 +100,7 @@ public class UI {
 
     public void showHelp() {
         showCmd("Here are the list of commands you can use:\n" +
-                "help\nlist\nsave\nbye\ntodo 'TASK'\ndeadline 'TASK' /by 'DATE & TIME'\n" +
-                "event 'TASK' /by 'DATE & TIME'\ndone 'n'\ndelete 'n'");
+                "help\nlist\nsave\nbye\ntodo 'TASK'\ndeadline 'TASK' /by 'dd/MM/yyyy HH:mm'\n" +
+                "event 'TASK' /at 'dd/MM/yyyy HH:mm'\ndone 'n'\ndelete 'n'");
     }
 }
