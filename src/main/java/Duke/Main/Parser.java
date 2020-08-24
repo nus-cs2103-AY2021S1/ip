@@ -7,6 +7,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
+    /**
+     * Converts a date string into LocalDateTime object
+     * @param by
+     * @return LocalDateTime object
+     */
     public static LocalDateTime strToDate(String by) {
         String[] arr = by.split("\\s+");
         LocalDate localDate;
@@ -37,6 +42,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a LocalDateTime object into a String for printing on Duke
+     * @param datetime LocalDateTime object
+     * @return Parsed String
+     */
     public static String parseDateTime(LocalDateTime datetime) {
         return datetime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h.mma"));
     }

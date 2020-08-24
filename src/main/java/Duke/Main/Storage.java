@@ -30,11 +30,20 @@ public class Storage {
         this.filepath = filepath;
     }
 
+    /**
+     * Resets the entire txt file
+     * @throws IOException
+     */
     private void resetFile() throws IOException {
         FileWriter fw = new FileWriter(filepath, false);
         fw.close();
     }
 
+    /**
+     * Appends string to txt file
+     * @param textToAppend
+     * @throws IOException
+     */
     public void appendToFile(String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filepath, true); // create a FileWriter in append mode
         BufferedWriter bw = new BufferedWriter(fw);
@@ -42,6 +51,11 @@ public class Storage {
         bw.close();
     }
 
+    /**
+     * Returns the entire txt file
+     * @return List of Tasks from file
+     * @throws IOException
+     */
     public List<Task> getFileContents() throws IOException {
         FileReader fr = new FileReader(filepath);
         BufferedReader br = new BufferedReader(fr);
@@ -74,6 +88,10 @@ public class Storage {
         return lst;
     }
 
+    /**
+     * Rewrites the file contents, each line corresponding to each element of list
+     * @param lst
+     */
     public void rewriteFileContents(List<Task> lst) {
         try {
             resetFile();

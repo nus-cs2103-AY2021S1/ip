@@ -2,6 +2,10 @@ package Duke.Main;
 
 import java.util.Scanner;
 
+/**
+ * Duke is a chatbot that allows crud operations, and can add three different types of task,
+ * namely todo, events, and deadlines
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -17,6 +21,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Run command to start Duke
+     * @param sc Scanner for input
+     */
     public void run(Scanner sc) {
         this.ui.showWelcome();
         this.ui.checkCommands(sc, this.tasks);

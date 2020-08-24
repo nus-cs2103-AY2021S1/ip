@@ -11,10 +11,12 @@ public abstract class Task {
         this.done = done;
     }
 
-    public static String getDesc(String s) {
-        return s.substring(7);
-    }
-
+    /**
+     * Takes in an array of Task values to form into a String to be stored on database
+     * @param arr String Array of Task values
+     * @return String to be saved to database
+     * @throws Exception
+     */
     public static String stringFormat(String[] arr) throws Exception {
         String s;
         switch (arr[0]) {
@@ -33,14 +35,18 @@ public abstract class Task {
         return s;
     }
 
-    public String getStatus() {
-        return this.done;
-    }
-
+    /**
+     * Sets Status of Task to be done or not.
+     * @param checked String "0" to represent false, and "1" for true
+     */
     public void setStatus(String checked) {
         this.done = checked;
     }
 
+    /**
+     * abstract object for child classes to return Task as a String Array of values
+     * @return String Array of values
+     */
     public abstract String[] getStringArr();
 
     @Override

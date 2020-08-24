@@ -16,11 +16,19 @@ public class Ui {
 		echo("☹ OOPS!!! An error occurred while loading from the .txt file");
 	}
 
+	/**
+	 * Echo command to provide basic styling
+	 * @param s String to echo
+	 */
 	public static void echo(String s) {
 		String line = "____________________________________________________________";
 		System.out.printf("%s\n%s\n%s\n", line, s, line);
 	}
 
+	/**
+	 * Prints the provided List
+	 * @param lst List of Tasks
+	 */
 	private void printList(List<Task> lst) {
 		String s = "";
 		for (int i = 1; i <= lst.size(); i++) {
@@ -31,10 +39,18 @@ public class Ui {
 		Ui.echo(s);
 	}
 
+	/**
+	 * Show welcome message
+	 */
 	public void showWelcome() {
-		Ui.echo("Hello! I'm Duke.Main.Duke\nWhat can I do for you?");
+		Ui.echo("Hello! I'm Duke\nWhat can I do for you?");
 	}
 
+	/**
+	 * Main command to check inputs and output the bot "answers"
+	 * @param sc Scanner to check inputs
+	 * @param tasks TaskList object to manipulate database
+	 */
 	public void checkCommands(Scanner sc, TaskList tasks) {
 		loop: while (sc.hasNextLine()) {
 			String sentence = sc.nextLine();
