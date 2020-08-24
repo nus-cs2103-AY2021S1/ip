@@ -1,6 +1,10 @@
 /**
  * The todo is a subclass of Task and it is used to describe tasks that have no specific deadline
  */
+package Duke.Tasks;
+
+import Duke.Duke;
+
 public class todo extends Task {
     /**
      *

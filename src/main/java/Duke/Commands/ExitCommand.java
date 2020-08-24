@@ -1,7 +1,11 @@
-import Exceptions.DukeException;
+package Duke.Commands;
+import Duke.Errors.DukeException;
+import Duke.Helpers.Storage;
+import Duke.Helpers.TaskList;
+import Duke.Helpers.Ui;
 
 public class ExitCommand extends Command {
-    ExitCommand(String string) {
+    public ExitCommand(String string) {
         super(string);
     }
 

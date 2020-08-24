@@ -1,7 +1,13 @@
-import Exceptions.*;
+package Duke.Commands;
+import Duke.Errors.DeleteException;
+import Duke.Errors.DukeException;
+import Duke.Helpers.Storage;
+import Duke.Helpers.TaskList;
+import Duke.Helpers.Ui;
+import Duke.Tasks.Task;
 
 public class DeleteCommand extends Command {
-    DeleteCommand(String string) {
+    public DeleteCommand(String string) {
         super(string);
     }
 
@@ -11,7 +17,7 @@ public class DeleteCommand extends Command {
         if (string.length() == 4 || string.length() == 5) {
            throw new DeleteException(true, false);
         }else{
-            int ID = Integer.parseInt(string.substring(5));
+            int ID = Integer.parseInt(string.substring(7));
             if (ID > Task.getNum()) {
                 throw new DeleteException(false, false);
             }else {
@@ -19,7 +25,7 @@ public class DeleteCommand extends Command {
                 if(task.isDeleted()){
                     throw new DeleteException(false, true);
                 }else{
-                    Task.deleteDone(ID, storage.filePath);
+                    Task.deleteDone(ID, storage.getFilePath());
                 }
             }
         }

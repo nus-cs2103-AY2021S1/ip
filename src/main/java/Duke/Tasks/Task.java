@@ -1,10 +1,11 @@
+package Duke.Tasks;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Exceptions.DoneException;
-import Exceptions.FileAbsentException;
+import Duke.Errors.DukeException;
+import Duke.Errors.FileAbsentException;
 
 /**
  * This Task is made abstract because it is never intialized in the actual code, however, it is used so that polymorphism
@@ -39,7 +40,7 @@ abstract public class Task {
     /**
      * this prints out that this task is added successfully to the task.
      */
-    public void output(String s) {
+    public void output(String s) throws DukeException {
         update(s);
         System.out.println("  Got it. I've added this task:\n  " + this.toString() + "\n" +
                 "  Now you have " + tasks.size() + " tasks in the list.");
@@ -55,14 +56,14 @@ abstract public class Task {
      *           is previously deleted, it prints that it was deleted.
      *           Else, it prints that it is successfully deleted.
      */
-    public static void deleteDone(int ID, String s) {
+    public static void deleteDone(int ID, String s) throws DukeException {
                 tasks.get(ID - 1).deleted = true;
                 System.out.println("   Noted. I've removed this task:");
                 System.out.println("   " + tasks.get(ID - 1).toString());
                 System.out.println("  Now you have " + tasks.size() + " tasks in the list.");
                 update(s);
     }
-    boolean isDeleted(){
+    public boolean isDeleted(){
         return deleted;
     }
     /**
@@ -71,7 +72,7 @@ abstract public class Task {
      *           If the task is deleted, it would print that it was deleted.
      *           Else, it prints that it is successfully completed.
      */
-    public static void setDone(int ID, String s) {
+    public static void setDone(int ID, String s) throws DukeException{
 
                 tasks.get(ID - 1).done = true;
                 System.out.println("   Nice! I've marked this task as done:");
@@ -103,13 +104,13 @@ abstract public class Task {
         }
         return s;
     }
-    public static void update(String filePath) {
+    public static void update(String filePath) throws DukeException {
             try {
                 FileWriter fw = new FileWriter(filePath);
                 fw.write(listUpdate());
                 fw.close();
             } catch (IOException i) {
-                System.out.println(new FileAbsentException().toString());
+                throw new FileAbsentException(filePath);
             }
     }
     public String inputListFormat(){

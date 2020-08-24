@@ -1,7 +1,13 @@
-import Exceptions.*;
+package Duke.Commands;
+import Duke.Errors.DoneException;
+import Duke.Errors.DukeException;
+import Duke.Helpers.Storage;
+import Duke.Helpers.TaskList;
+import Duke.Helpers.Ui;
+import Duke.Tasks.Task;
 
 public class DoneCommand extends Command {
-    DoneCommand(String string) {
+    public DoneCommand(String string) {
         super(string);
     }
 
@@ -18,7 +24,7 @@ public class DoneCommand extends Command {
             if (task.isDeleted()) {
                 throw new DoneException(false, true);
             } else {
-                Task.setDone(ID, storage.filePath);
+                Task.setDone(ID, storage.getFilePath());
             }
         }
         }

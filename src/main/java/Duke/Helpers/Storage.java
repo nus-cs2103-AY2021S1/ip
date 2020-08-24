@@ -1,17 +1,19 @@
-import Exceptions.DukeException;
-import Exceptions.FIleEmptyException;
-import Exceptions.FileAbsentException;
+package Duke.Helpers;
+import Duke.Errors.DukeException;
+import Duke.Errors.FIleEmptyException;
+import Duke.Errors.FileAbsentException;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
     String filePath;
-    Storage(String filePath){
+    public Storage(String filePath){
         this.filePath = filePath;
     }
     public List<String> load() throws DukeException {
@@ -27,9 +29,16 @@ public class Storage {
             if(xs.size() == 0){
                 throw new FIleEmptyException();
             }
+            FileWriter fw = new FileWriter(this.filePath);
+            fw.write("");
+            fw.close();
             return xs;
-        }catch (FileNotFoundException error){
-            throw new FileAbsentException();
+        } catch (IOException error){
+            throw new FileAbsentException(this.filePath);
         }
+    }
+
+    public String getFilePath() {
+        return filePath;
     }
 }

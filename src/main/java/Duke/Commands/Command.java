@@ -1,4 +1,9 @@
-import Exceptions.*;
+package Duke.Commands;
+import Duke.Errors.DukeException;
+import Duke.Helpers.Storage;
+import Duke.Helpers.TaskList;
+import Duke.Helpers.Ui;
+
 abstract public class Command {
     String string;
     boolean exit = false;
@@ -9,11 +14,11 @@ abstract public class Command {
         return exit;
     }
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.currNum++;
-        if (ui.currNum >= tasks.allTasks.size()) {
+        ui.increment();
+        if (ui.getCurrNum()>= tasks.getAllTasks().size()) {
             exit = true;
         }else {
-            ui.curr = tasks.allTasks.get(ui.currNum);
+            ui.setCurr(tasks.getAllTasks().get(ui.getCurrNum()));
         }
 
     }

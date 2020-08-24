@@ -1,8 +1,9 @@
-package Exceptions;
+package Duke.Errors;
 /**
  * This DeadlineException is used to print out exceptions when there is an incomplete input where wither the description
  * or date is absent.
  */
+
 public class DeadlineException extends DukeException{
     /**
      * description tests shows whether the description is present in the input of the user or not.
@@ -25,8 +26,8 @@ public class DeadlineException extends DukeException{
      */
     public String toString(){
         if(this.description){
-            return "  '\u2639' OOPS!!! The description of a deadline cannot be empty.\n";
+            return "  '\u2639' OOPS!!! The description of a deadline cannot be empty.";
         }
-        return "  '\u2639' OOPS!!! The specific date/time of a deadline cannot be empty.\n";
+        return "  '\u2639' OOPS!!! The specific date/time of a deadline cannot be empty.";
     }
 }

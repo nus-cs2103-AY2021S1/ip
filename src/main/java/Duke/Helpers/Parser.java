@@ -1,5 +1,7 @@
-import Exceptions.DukeException;
-import Exceptions.WrongInputException;
+package Duke.Helpers;
+import Duke.Commands.*;
+import Duke.Errors.DukeException;
+import Duke.Errors.WrongInputException;
 
 public class Parser {
     public static Command parse(String string) throws DukeException {
