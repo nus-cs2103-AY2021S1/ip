@@ -9,13 +9,15 @@ public abstract class Task {
         this.status = false;
     }
 
-    public void markAsDone() {
-        this.status = true;
+    public void setStatus(Boolean b) {
+        this.status = b;
     }
 
     public String toString() {
         return this.taskString;
     }
+
+    public abstract String toDataString();
 
     public boolean getStatus() {
         return this.status;

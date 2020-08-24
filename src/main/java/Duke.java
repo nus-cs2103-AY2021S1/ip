@@ -9,13 +9,34 @@
 //    }
 //}
 
-import java.util.Arrays;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+
+        File d = new File("data");
+        File f = new File("data/task.txt");
+        try {
+            if (!d.exists()) {
+                if(d.mkdir()) {
+                    System.out.println("New data directory created");
+                }
+            }
+
+            if(f.createNewFile()) {
+                System.out.println("new task data file created");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 
         String welcomeMessage = (
             "____________________________________________________________\n" +
@@ -26,17 +47,25 @@ public class Duke {
 
         System.out.println(welcomeMessage);
 
+
+
+        ArrayList<Task> inputList = new ArrayList<Task>();
+
+        try {
+            StringProcessor.readFileContents(f, inputList);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
+        System.out.println("Loading done");
+
         Scanner sc = new Scanner(System.in);
 
         String currInput = sc.nextLine();
 
-        List<Task> inputList = new ArrayList<>();
-
         while (!currInput.equals("bye")) {
 
-            String toSplit = String.valueOf(currInput);
-            String[] splitString = toSplit.split(" ");
-
+            String[] splitString = currInput.split(" ");
 
             if (currInput.equals("list")) {
 
@@ -50,7 +79,7 @@ public class Duke {
                 // can add error handling exception in case out of bounds
                 // can add error handling for exception already done
                 int index = Integer.parseInt(splitString[1]);
-                inputList.get(index - 1).markAsDone();
+                inputList.get(index - 1).setStatus(true);
 
                 System.out.println("____________________________________________________________");
                 for (int i = 0; i < inputList.size(); i++) {
@@ -91,6 +120,12 @@ public class Duke {
             "     Bye. Hope to see you again soon!\n" +
             "____________________________________________________________"
         );
+
+        try {
+            StringProcessor.writeToFile(f, inputList);
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
 
         System.out.println(endMessage);
 
