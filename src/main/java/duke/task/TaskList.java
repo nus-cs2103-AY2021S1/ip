@@ -1,7 +1,7 @@
 package duke.task;
 
-import duke.DukeException;
-import duke.Messenger;
+import duke.exceptions.DukeException;
+import duke.ui.Messenger;
 
 import java.util.ArrayList;
 

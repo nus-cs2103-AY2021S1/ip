@@ -1,6 +1,6 @@
 package duke.utils;
 
-import duke.Messenger;
+import duke.ui.Messenger;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.types.TaskType;

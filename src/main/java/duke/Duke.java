@@ -1,6 +1,7 @@
 package duke;
 
 import duke.task.TaskList;
+import duke.ui.Ui;
 import duke.utils.Storage;
 
 /**
@@ -9,6 +10,8 @@ import duke.utils.Storage;
 public class Duke {
     /**
      * Executes the program.
+     * Reads in a saved file if there is one and loads the data into the program.
+     * Saves the data in the program and overwrite the save file when quitting.
      *
      * @param args command line arguments to be fed to the program.
      */

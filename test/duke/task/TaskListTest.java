@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.exceptions.DukeException;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;

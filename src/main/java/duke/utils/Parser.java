@@ -1,7 +1,7 @@
 package duke.utils;
 
-import duke.DukeException;
-import duke.Messenger;
+import duke.ui.Messenger;
+import duke.exceptions.DukeException;
 import duke.types.ActionType;
 import duke.types.TaskType;
 
@@ -23,7 +23,7 @@ public class Parser {
      */
     public String[] extractAction(String command) throws DukeException {
         // command is empty
-        if (command.equals("")) {
+        if (command.matches(" *")) {
             throw new DukeException(Messenger.EMPTY_COMMAND_ERROR);
         }
 

@@ -1,5 +1,6 @@
-package duke;
+package duke.ui;
 
+import duke.exceptions.DukeException;
 import duke.task.TaskList;
 import duke.utils.Parser;
 

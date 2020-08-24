@@ -1,7 +1,8 @@
 package duke.types;
 
 /**
- * Encapsulate a ActionType enum class that represents the actions of a command.
+ * Encapsulate a ActionType enum class that represents the type of actions of a command.
+ * The class includes three action types: delete, done and find
  */
 public enum ActionType {
     DELETE("delete"),
@@ -11,12 +12,12 @@ public enum ActionType {
     private final String type;
 
     /**
-     * Constructs a ActionType object with the type given.
+     * Constructs a ActionType object with the type of action given.
      *
-     * @param type a string representing the type.
+     * @param actionType a string representing the type of action.
      */
-    ActionType(String type) {
-        this.type = type;
+    ActionType(String actionType) {
+        type = actionType;
     }
 
     /**
