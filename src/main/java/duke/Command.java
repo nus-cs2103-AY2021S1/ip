@@ -1,3 +1,5 @@
+package duke;
+
 public class Command {
     boolean isExit = false;
 

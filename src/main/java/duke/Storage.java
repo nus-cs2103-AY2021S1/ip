@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,7 +16,7 @@ public class Storage {
 
     public void update(TaskList tasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(Duke.filePath);
+            FileWriter fw = new FileWriter("./data/duke.txt");
             for (int i = 1; i < tasks.getTasklist().size() + 1; i++) {
                 Task t = tasks.get(i - 1);
                 fw.write(t.fileFormat() + "\n");

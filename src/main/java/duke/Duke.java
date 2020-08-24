@@ -1,7 +1,9 @@
+package duke;
+
 import java.util.ArrayList;
 
 public class Duke {
-    public static String filePath = "data/duke.txt";
+    public static String filePath = "./data/duke.txt";
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
@@ -33,6 +35,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke("./data/duke.txt").run();
     }
 }
