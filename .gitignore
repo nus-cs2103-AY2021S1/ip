@@ -2,6 +2,7 @@
 /.idea/
 /out/
 /*.iml
+src/test/.idea
 
 # Gradle build files
 /.gradle/
@@ -17,3 +18,5 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 
 /data/
+
+src/test/out
