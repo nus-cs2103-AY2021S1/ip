@@ -1,7 +1,10 @@
 package main.java;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class TaskManager {
     private List<Task> tasks;
@@ -34,6 +37,66 @@ public class TaskManager {
 
     public void doTask(int index) throws TaskDoneException {
         this.tasks.get(index-1).setDone();
+    }
+
+    public String[] readSavedData(String data) {
+        String[] result = data.split(" \\| ");
+        for (int i = 0; i < result.length; i ++) {
+            result[i] = result[i].trim();
+        }
+        return result;
+    }
+
+    private void createSavedTask(String[] args) throws BadFormatFileException {
+        Task newTask;
+        switch(args[0]) {
+        case "T":
+            newTask = addToDo(args[2]);
+            break;
+        case "D":
+            newTask = addDeadLine(args[2], args[3]);
+            break;
+        case "E":
+            newTask = addEvent(args[2], args[3]);
+            break;
+        default:
+            newTask = null;
+        }
+        if (args[1].equals("1")) {
+            try {
+                newTask.setDone();
+            } catch (TaskDoneException err) {
+                System.out.println("Error in Saved Files");
+            } catch (NullPointerException err) {
+                throw new BadFormatFileException();
+            }
+        }
+    }
+
+    public void readFile(File path) {
+        try {
+            Scanner scanner = new Scanner(path);
+            String nextLine;
+            String[] readData;
+            while (scanner.hasNext()) {
+                nextLine = scanner.nextLine();
+                readData = readSavedData(nextLine);
+                createSavedTask(readData);
+            }
+        } catch (FileNotFoundException err) {
+            System.out.println("File not found");
+        } catch (BadFormatFileException err) {
+            System.out.println("File is corrupted");
+            tasks = new ArrayList<Task>();
+        }
+    }
+
+    public String toSaveFormat() {
+        String result = "";
+        for(Task t: tasks) {
+            result += t.toSaveFormat() + "\n";
+        }
+        return result;
     }
 
     public Task deleteTask(int index) {
