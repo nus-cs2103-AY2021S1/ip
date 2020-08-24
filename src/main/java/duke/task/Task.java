@@ -32,6 +32,22 @@ public class Task {
     }
 
     /**
+     * Checks if the task satisfies the given keyword
+     * @param keyword Keyword Given
+     * @return True if task satisfies keyword
+     */
+    public boolean satisfyKeyword(String keyword) {
+        String[] tokens = description.split(" ");
+        boolean found = false;
+        for (int i = 0; i < tokens.length && !found; i++) {
+            if (tokens[i].equalsIgnoreCase(keyword)) {
+                found = true;
+            }
+        }
+        return found;
+    }
+
+    /**
      * Returns the string representation of the task
      * @return String representation of the task
      */

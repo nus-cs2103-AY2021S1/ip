@@ -52,7 +52,12 @@ public class Parser {
             }
         } else if (cmd.equals("list")) {
             return new ListCommand();
-        } else if (cmd.equals("todo") || cmd.equals("event") || cmd.equals("deadline")){
+        } else if (tokens.get(0).equals("find")) {
+            if (tokens.size() < 2) {
+                throw new MissingArgumentException("Must provide keyword after command!");
+            }
+            return new FindCommand(tokens.get(1));
+        } else if (cmd.equals("todo") || cmd.equals("event") || cmd.equals("deadline")) {
 
             SimpleDateFormat readformatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
             Task toAdd;

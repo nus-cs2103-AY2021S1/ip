@@ -66,9 +66,27 @@ public class TaskList {
      * @return String that represent all the tasks
      */
     public String printTasks() {
+        return "Here are the tasks in your list:\n" + printOutTasks(tasks);
+    }
+
+    /**
+     * Returns a string that represents all the tasks that fulfills the keyword
+     * @param Keyword Keyword
+     * @return String that represents all the tasks that satisfies the keyword
+     */
+    public String printTasksWithKeyword(String keyword) {
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        for (Task t : this.tasks) {
+            if (t.satisfyKeyword(keyword)) {
+                tasks.add(t);
+            }
+        }
+        return "Here are the matching tasks in your list: \n" + printOutTasks(tasks);
+    }
+
+    private String printOutTasks(ArrayList<Task> tasks) {
         StringBuilder str = new StringBuilder();
-        str.append("Here are the tasks in your list:\n");
-        int i=0;
+        int i = 0;
         for(Task task : tasks){
             str.append(String.format("%d.%s", ++i, task));
             if (i != tasks.size()) {
@@ -77,6 +95,7 @@ public class TaskList {
         }
         return str.toString();
     }
+
 
     /**
      * Returns the ArrayList of tasks
