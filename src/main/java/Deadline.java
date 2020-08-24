@@ -7,14 +7,22 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     protected LocalDate by;
 
-    public Deadline(String description, String by) throws DateTimeParseException {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
-        this.by = LocalDate.parse(by);
+        try {
+            this.by = LocalDate.parse(by);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Datetime could not be recognised. Use yyyy-mm-dd format e.g. 2019-10-15");
+        }
     }
 
-    public Deadline(String description, boolean isDone, String by) throws DateTimeParseException {
+    public Deadline(String description, boolean isDone, String by) throws DukeException {
         super(description, isDone);
-        this.by = LocalDate.parse(by);
+        try {
+            this.by = LocalDate.parse(by);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Loading: Datetime could not be recognised. Use yyyy-mm-dd format e.g. 2019-10-15");
+        }
     }
 
     @Override
