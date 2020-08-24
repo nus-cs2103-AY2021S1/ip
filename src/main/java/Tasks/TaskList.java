@@ -164,4 +164,26 @@ public class TaskList {
             }
         }
     }
+
+    public String searchTask(String keyword) {
+        int taskId = 0;
+        StringBuilder results = new StringBuilder("Here is your results:");
+
+        for (int i = 0; i < this.taskListLen(); i++) {
+            Task task = this.taskList.get(i);
+            boolean hasKeyword = task.getDescription().contains(keyword);
+            if(hasKeyword) {
+                taskId++;
+                results.append("\n");
+                results.append(taskId);
+                results.append(". ");
+                results.append(task);
+            }
+        }
+        if (taskId == 0) {
+            return "Opps!! MUG don't have the task you searching :)";
+        } else {
+            return results.toString();
+        }
+    }
 }

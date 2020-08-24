@@ -10,6 +10,7 @@ public enum Command {
     DELETE,
     EVENT,
     LIST,
-    TODO
+    TODO,
+    FIND
 }
 
