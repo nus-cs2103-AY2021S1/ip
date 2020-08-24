@@ -86,7 +86,8 @@ public class TaskList implements Iterable<Task> {
             if (timedTasks.isEmpty()) {
                 throw new DukeException("OOPS!!! I'm sorry, your list is empty :<");
             } else {
-                return new TaskList(new ArrayList<>(timedTasks));
+                return new TaskList(timedTasks);
+                //return new TaskList(new ArrayList<>(timedTasks));
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid date-time format! (/at...)");
@@ -121,4 +122,14 @@ public class TaskList implements Iterable<Task> {
         }
         return output.toString();
     }
+
+    public TaskList findTask(String keyword) throws DukeException {
+        ArrayList<Task> keywordTasks = new ArrayList<>(this.list);
+        keywordTasks.removeIf(i -> i.getDescription().contains(keyword));
+        if (keywordTasks.isEmpty()) {
+            throw new DukeException("OOPS!!! I'm sorry, no such keyword :<");
+        }
+        return new TaskList(keywordTasks);
+    }
+
 }
