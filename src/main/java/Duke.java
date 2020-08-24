@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -55,6 +57,15 @@ public class Duke {
             print(result);
         }
     }
+    static LocalDateTime parseDateTime(String s) {
+        // s will be in the format : yyyy-mm-dd HHmm
+        // return format : yyyy-mm-ddTHH:mm
+        String[] dateTimeSplit = s.split(" ");
+        String date = dateTimeSplit[0];
+        String hour = dateTimeSplit[1].substring(0, 2);
+        String min = dateTimeSplit[1].substring(2);
+        return LocalDateTime.parse(date + "T" + hour + ":" + min);
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -90,20 +101,23 @@ public class Duke {
                     if(input.matches("deadline\\s*")) {
                         throw new EmptyArgumentException("deadline's description");
                     }
-                    if(!input.matches("deadline .+/by.+")) {
-                        throw new InvalidArgumentException("deadline's description");
+                    if(!input.matches("deadline .+/by \\d{4}-\\d{1,2}-\\d{1,2} \\d{4}")) {
+                        throw new InvalidArgumentException("deadline's description (proper date format: yyyy-mm-dd HHmm)");
                     }
                     String[] split = input.substring(9).split("/by");
-                    addTask(new Deadline(split[0].stripTrailing(), split[1].stripLeading()), tasks);
+                    String dateTimeString = split[1].stripLeading();
+                    LocalDateTime dateTime = parseDateTime(dateTimeString);
+                    addTask(new Deadline(split[0].stripTrailing(), dateTime), tasks);
                 } else if (input.matches("event.*")) {
                     if(input.matches("event\\s*")) {
                         throw new EmptyArgumentException("event's description");
                     }
-                    if(!input.matches("event .+/at.+")) {
-                        throw new InvalidArgumentException("event description");
+                    if(!input.matches("event .+/at \\d{4}-\\d{1,2}-\\d{1,2} \\d{4}")) {
+                        throw new InvalidArgumentException("event description (proper date format: yyyy-mm-dd HHmm)");
                     }
                     String[] split = input.substring(6).split("/at");
-                    addTask(new Event(split[0].stripTrailing(), split[1].stripLeading()), tasks);
+                    String dateTimeString = split[1].stripLeading();
+                    addTask(new Event(split[0].stripTrailing(), parseDateTime(dateTimeString)), tasks);
                 } else if (input.matches("delete.*")) {
                     if(input.matches("delete\\s*")) {
                         throw new EmptyArgumentException("Task Index");
