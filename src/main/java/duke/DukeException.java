@@ -1,4 +1,4 @@
-import javax.swing.plaf.DesktopIconUI;
+package duke;
 
 public class DukeException extends Exception {
     private DukeException(String msg) {
@@ -10,11 +10,11 @@ public class DukeException extends Exception {
     }
 
     public static DukeException typeMismatch(String command) {
-        return new DukeException("Error! Integer should follow '" + command + "' command.");
+        return new DukeException("Error! Integer should follow '" + command + "' duke.command.");
     }
 
     public static DukeException outOfBounds() {
-        return new DukeException("Error! Enter a valid task number.");
+        return new DukeException("Error! Enter a valid duke.task number.");
     }
 
     public static DukeException emptyDesc(String taskType) {
@@ -26,7 +26,7 @@ public class DukeException extends Exception {
     }
 
     public static DukeException missingTask() {
-        return new DukeException("Error! No task description provided.");
+        return new DukeException("Error! No duke.task description provided.");
     }
 
     public static DukeException missingTime(String byOrAt) {
@@ -46,7 +46,7 @@ public class DukeException extends Exception {
     }
 
     public static DukeException wrongDueInFormat() {
-        return new DukeException("Error! 'due in' command is in the wrong format.");
+        return new DukeException("Error! 'due in' duke.command is in the wrong format.");
     }
 
     public static DukeException loadingError(String path) {

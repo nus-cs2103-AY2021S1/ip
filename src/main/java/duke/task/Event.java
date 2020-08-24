@@ -1,12 +1,14 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
-public class Deadline extends Task {
+public class Event extends Task {
     private LocalDateTime dateTime;
     private String time;
 
-    public Deadline(String s, LocalDateTime dateTime) {
+    public Event(String s, LocalDateTime dateTime) {
         super(s);
         this.dateTime = dateTime;
         String minute = dateTime.getMinute() < 10
@@ -25,8 +27,8 @@ public class Deadline extends Task {
         int year = dateTime.getYear();
         String dueDate = String.format("%s %d %d, %s", month, day, year, time);
         return done
-                ? "[D][✓] " + text + " (by: " + dueDate + ")"
-                : "[D][✗] " + text + " (by: " + dueDate + ")";
+                ? "[E][✓] " + text + " (at: " + dueDate + ")"
+                : "[E][✗] " + text + " (at: " + dueDate + ")";
     }
 
     public boolean compareTime(LocalDateTime now, long hours) {
@@ -41,7 +43,7 @@ public class Deadline extends Task {
         String minutes = rawDateTime.replaceAll(pattern, "$3");
         String newDateTime = date + " " + hours + minutes;
         return done
-                ? "done deadline " + text + " /by " + newDateTime
-                : "deadline " + text + " /by " + newDateTime;
+                ? "done event " + text + " /at " + newDateTime
+                : "event " + text + " /at " + newDateTime;
     }
 }

@@ -1,18 +1,26 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.TaskType;
+
 import java.time.LocalDateTime;
 
-public class DeadlineCommand extends Command {
+public class EventCommand extends Command {
     private String task;
     private LocalDateTime dateTime;
 
-    public DeadlineCommand(String task, LocalDateTime dateTime) {
+    public EventCommand(String task, LocalDateTime dateTime) {
         this.task = task;
         this.dateTime = dateTime;
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (LocalDateTime.now().isBefore(dateTime)) {
-            tasks.add(task, dateTime, TaskType.DEADLINE);
-            ui.say("Added Deadline '" + task + "' to your list!");
+            tasks.add(task, dateTime, TaskType.EVENT);
+            ui.say("Added Event '" + task + "' to your list!");
         } else {
             throw(DukeException.pastDateTime());
         }
