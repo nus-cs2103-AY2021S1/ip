@@ -53,29 +53,29 @@ public class Duke {
             } else {
                 int indexOfCommand = name.indexOf("/");
                 String deadline = name.substring(indexOfCommand + 4);
-                if (type.equals("deadline")) {
-                    try {
-                        String currname = name.substring(9);
-                        if (indexOfCommand > -1 ) {
-                            return new Deadline(name.substring(9, indexOfCommand - 1), false, deadline);
-                        } else {
-                            throw new NoDateException("☹ OOPS!!! Please specify the deadline!");
+                    if (type.equals("deadline")) {
+                        try {
+                            String currname = name.substring(9);
+                            if (indexOfCommand > -1 ) {
+                                return new Deadline(name.substring(9, indexOfCommand - 1), false, deadline);
+                            } else {
+                                throw new NoDateException("☹ OOPS!!! Please specify the deadline!");
+                            }
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new NoTaskException("☹ OOPS!!! The description of a deadline cannot be empty.");
                         }
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new NoTaskException("☹ OOPS!!! The description of a deadline cannot be empty.");
-                    }
-                } else {
-                    try {
-                        String currname = name.substring(6);
-                        if (indexOfCommand > -1 ) {
-                            return new Deadline(name.substring(6, indexOfCommand - 1), false, deadline);
-                        } else {
-                            throw new NoDateException("☹ OOPS!!! Please specify when the event is going to be held!");
+                    } else {
+                        try {
+                            String currname = name.substring(6);
+                            if (indexOfCommand > -1 ) {
+                                return new Deadline(name.substring(6, indexOfCommand - 1), false, deadline);
+                            } else {
+                                throw new NoDateException("☹ OOPS!!! Please specify when the event is going to be held!");
+                            }
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new NoTaskException("☹ OOPS!!! The description of a event cannot be empty.");
                         }
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new NoTaskException("☹ OOPS!!! The description of a event cannot be empty.");
                     }
-                }
             }
         } catch (NullPointerException e) {
             throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -118,7 +118,7 @@ public class Duke {
                         break;
                     case "D":
                         int indexOfLine = name.indexOf("|");
-                        temp.add(new Deadline(name.substring(0, indexOfLine - 1), isTaskDone, name.substring(indexOfLine + 1)));
+                        temp.add(new Deadline(name.substring(0, indexOfLine - 1), isTaskDone, name.substring(indexOfLine + 2)));
                         break;
                     case "E":
                         indexOfLine = name.indexOf("|");
@@ -145,7 +145,7 @@ public class Duke {
                 if (task instanceof Todo) {
                     pw.println(task.getType() + " | " + task.isDone() + " | " + task.getName());
                 } else {
-                    pw.println(task.getType() + " | " + task.isDone() + " | " + task.getName() + " |" + task.getEnd());
+                    pw.println(task.getType() + " | " + task.isDone() + " | " + task.getName() + " | " + task.getEnd());
                 }
             }
             pw.close();
