@@ -35,6 +35,14 @@ public class Deadline extends Task {
         }
     }
 
+    public boolean isOnDate(LocalDate date) {
+        if (this.byDate != null) {
+            return date.compareTo(this.byDate) == 0;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + getFormattedBy() + ")";

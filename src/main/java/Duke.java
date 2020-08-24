@@ -2,6 +2,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -30,11 +33,27 @@ public class Duke {
                     if (userInput.equals(Command.BYE.getName())) {
                         System.out.println("Goodbye! Shutting down now...");
                         exitProgram = true;
-                    } else if (userInput.equals(Command.LIST.getName())) {
+                    } else if (userInputArgs[0].equals(Command.LIST.getName())) {
                         int n = listOfTasks.size();
-                        System.out.println("Here are the tasks in your list:");
-                        for (int i = 0; i < n; i++) {
-                            System.out.println(String.format("%d.%s", i + 1, listOfTasks.get(i)));
+                        try {
+                            LocalDate date = LocalDate.parse(userInputArgs[1]);
+                            System.out.println(String.format(
+                                    "Here are the tasks in your list on %s:",
+                                    date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))));
+                            int idx = 1;
+                            for (Task task : listOfTasks) {
+                                boolean print = (task instanceof Event && ((Event) task).isOnDate(date))
+                                        || (task instanceof Deadline && ((Deadline) task).isOnDate(date));
+                                if (print) {
+                                    System.out.println(String.format("%d.%s", idx, task));
+                                    idx += 1;
+                                }
+                            }
+                        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
+                            System.out.println("Here are the tasks in your list:");
+                            for (int i = 0; i < n; i++) {
+                                System.out.println(String.format("%d.%s", i + 1, listOfTasks.get(i)));
+                            }
                         }
                     } else if (userInputArgs[0].equals(Command.DONE.getName())) {
                         Task task = markTaskDone(listOfTasks, userInputArgs);

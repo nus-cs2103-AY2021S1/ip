@@ -35,6 +35,14 @@ public class Event extends Task {
         }
     }
 
+    public boolean isOnDate(LocalDate date) {
+        if (this.atDate != null) {
+            return date.compareTo(this.atDate) == 0;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.getFormattedAt() + ")";
