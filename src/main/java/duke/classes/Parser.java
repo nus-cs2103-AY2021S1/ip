@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Parser {
 
-    public Scanner scan;
+    protected Scanner scan;
 
     public Parser() {
         this.scan = new Scanner(System.in);

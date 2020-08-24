@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    public LocalDateTime time;
+    protected LocalDateTime time;
     public Deadline(String description, int index, boolean isDone) throws DukeInvalidTimeException {
         super(description, index, isDone);
         super.type = TaskType.DEADLINE;

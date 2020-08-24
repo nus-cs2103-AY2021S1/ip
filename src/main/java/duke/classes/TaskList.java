@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    public List<Task> todoList;
+
+    protected List<Task> todoList;
 
     public TaskList() {
         this.todoList = new ArrayList<>();
@@ -77,15 +78,15 @@ public class TaskList {
     public Task markDone(String command) {
         int taskNo = Character.getNumericValue(command.charAt(5)) - 1;
         Task task = todoList.get(taskNo);
-        task.isDone = true;
+        task.setDone(true);
         return task;
     }
 
-    public Task delete(String command, List<Task> list) {
+    public Task delete(String command) {
         int taskNo = Character.getNumericValue(command.charAt(7)) - 1;
-        Task task = list.remove(taskNo);
-        for (int i = taskNo; i < list.size(); i++) {
-            todoList.get(i).index = todoList.get(i).index - 1;
+        Task task = todoList.remove(taskNo);
+        for (int i = taskNo; i < todoList.size(); i++) {
+            todoList.get(i).setIndex(todoList.get(i).getIndex() - 1);
         }
         return task;
     }

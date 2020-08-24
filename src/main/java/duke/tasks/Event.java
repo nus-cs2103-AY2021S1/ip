@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    public LocalDateTime time;
+    protected LocalDateTime time;
 
     public Event(String description, int index, boolean isDone) throws DukeInvalidTimeException {
         super(description, index, isDone);
