@@ -20,6 +20,7 @@ public class Parser {
         switch(cmd[0].toLowerCase()) {
         case("bye"):
         case("list"):
+        case "find":
             return cmd;
         case("print"):
             //check if is valid date

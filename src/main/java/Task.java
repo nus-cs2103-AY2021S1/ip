@@ -16,6 +16,10 @@ abstract class Task {
         this.isDone = true;
     }
 
+    public boolean searchFound(String keyword) {
+        return description.contains(keyword);
+    }
+
     protected String getStatusIcon() {
         return isDone ? "\u2713" : "\u2718"; //return tick or X symbols
     }

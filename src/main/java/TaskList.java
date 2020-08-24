@@ -59,6 +59,16 @@ public class TaskList {
         return taskList.size();
     }
 
+    public List<Task> getTasksWithKeyWord(String keyword) {
+        List<Task> list = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.searchFound(keyword)) {
+                list.add(task);
+            }
+        }
+        return list;
+    }
+
     @Override
     public String toString() {
         StringBuilder content = new StringBuilder();
