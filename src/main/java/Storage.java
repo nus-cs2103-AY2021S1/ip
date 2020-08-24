@@ -5,7 +5,7 @@ public class Storage {
     //store and load tasks (store tasklist)
     private final static long serialVersionUID = 7526472295622776147L;
 
-    public static TaskList load() throws FileNotFoundException, IOException, ClassNotFoundException { //load a tasklist from the text file
+    public static TaskList load() throws IOException, ClassNotFoundException { //load a tasklist from the text file
         try {
             FileInputStream fin = new FileInputStream("Duke.txt");
             ObjectInputStream ois = new ObjectInputStream(fin);

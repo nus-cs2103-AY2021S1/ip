@@ -1,41 +1,46 @@
-import java.io.*;
+
+import java.io.CharArrayReader;
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
 enum Category {
-    TODO, DEADLINE, EVENT, LIST, BYE, DONE, DELETE, READ
+    TODO, DEADLINE, EVENT, LIST, BYE, DONE, DELETE
 }
 
 public class Duke {
+    //2/ valid or invalid
+    //todo read book
+    //deadline read book /by 6pm
     public static Command decideCategory(String input) throws IllegalArgumentException {
         String[] wordsArray = input.split(" ", 2);
         String categoryWord = wordsArray[0];
         String description = wordsArray.length == 2 ? wordsArray[1] : null;
-        switch (categoryWord) {
-            case "todo":
-                return new TodoCommand(Category.TODO, description);
-            case "deadline":
-                return new DeadlineCommand(Category.DEADLINE, description);
-            case "event":
-                return new EventCommand(Category.EVENT, description);
-            case "done":
-                return new DoneCommand(Category.DONE, description);
-            case "delete":
-                return new DeleteCommand(Category.DELETE, description);
-            case "list":
-                return new ListCommand(Category.LIST, description);
-            case "bye":
-                return new ByeCommand(Category.BYE, description);
-            default:
-                throw new IllegalArgumentException("-------------------------------------------\n" +
-                        "☹ OOPS!!! Invalid input. Try again!\n"
-                        + "-------------------------------------------");
-        }
+            switch (categoryWord) {
+                case "todo":
+                    return new TodoCommand(Category.TODO, description);
+                case "deadline":
+                    return new DeadlineCommand(Category.DEADLINE, description);
+                case "event":
+                    return new EventCommand(Category.EVENT, description);
+                case "done":
+                    return new DoneCommand(Category.DONE, description);
+                case "delete":
+                    return new DeleteCommand(Category.DELETE, description);
+                case "list":
+                    return new ListCommand(Category.LIST, description);
+                case "bye":
+                    return new ByeCommand(Category.BYE, description);
+                default:
+                    throw new IllegalArgumentException("-------------------------------------------\n" +
+                            "☹ OOPS!!! Invalid input. Try again!\n"
+                            + "-------------------------------------------");
+            }
     }
 
-
-    public static void processCommand(Command command, TaskList taskList) throws IOException {
+    public static void processCommand(Command command, TaskList taskList) {
         int taskNumber;
         switch (command.getCategory()) {
             case TODO:
@@ -105,6 +110,7 @@ public class Duke {
                 "-------------------------------------------\n");
     }
 
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         printHello();
         Scanner sc = new Scanner(System.in);
@@ -121,8 +127,6 @@ public class Duke {
                 System.out.println(exception.getMessage());
             } catch (DateTimeParseException exception) {
                 System.out.println(exception.getMessage());
-            } catch (FileNotFoundException exception) {
-                System.out.println("File does not exist yet :(");
             }
         }
     }
