@@ -37,25 +37,14 @@ public class Command {
 
     /**
      * Execute the command and store the task into the list.
-     * @param tasks The tasklist object that contains the list of tasks.
-     * @param ui The ui object.
+     *
+     * @param tasks   The tasklist object that contains the list of tasks.
+     * @param ui      The ui object.
      * @param storage The storage object
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> lists = tasks.getTasks();
 
-        if (type.equals("find")) {
-            System.out.println("Here are the matching tasks in your list:");
-            int j = 1;
-            for (int i = 0; i < lists.size(); i++) {
-                Task task = lists.get(i);
-                if (task.toString().contains(command)) {
-                    System.out.println(j + "." + task.toString());
-                    j++;
-                }
-            }
-            return;
-        }
 
         if (command.equals("list")) {
             System.out.println("Here are the tasks in your list:");
@@ -93,6 +82,17 @@ public class Command {
                 } else {
                     lists.add(new Event(command, time));
                 }
+            } else if (type.equals("find")) {
+                System.out.println("Here are the matching tasks in your list:");
+                int j = 1;
+                for (int i = 0; i < lists.size(); i++) {
+                    Task task = lists.get(i);
+                    if (task.toString().contains(command)) {
+                        System.out.println(j + "." + task.toString());
+                        j++;
+                    }
+                }
+                return;
             } else {
                 lists.add(new ToDo(command));
             }
