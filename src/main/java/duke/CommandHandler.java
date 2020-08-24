@@ -15,7 +15,7 @@ public class CommandHandler {
     protected DukeCommandType commandType;
 
     /**
-     * Initialise CommandHandler with user's input and its command type.
+     * Initialises CommandHandler with user's input and its command type.
      *
      * @param input
      * @param commandType
@@ -26,7 +26,7 @@ public class CommandHandler {
     }
 
     /**
-     * Handle user's inputs depending on command type.
+     * Handles user's inputs depending on command type.
      *
      * @param input
      * @param commandType

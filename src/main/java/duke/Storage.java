@@ -16,7 +16,7 @@ public class Storage {
     private final String path;
 
     /**
-     * Initialise storage to a designated general file path
+     * Initialises storage to a designated general file path
      */
     public Storage() {
         this.path = "data/listOfTasks.txt";
