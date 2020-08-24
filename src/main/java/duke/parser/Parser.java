@@ -1,5 +1,6 @@
 package duke.parser;
 
+import duke.*;
 import duke.command.*;
 import duke.exception.*;
 import duke.tasklist.*;
@@ -22,7 +23,7 @@ public class Parser {
         } else if (input.startsWith("delete")) {
             return parseDelete(input, tasks);
         } else if (input.startsWith("retrieve")) {
-            return parseRetrieve(input, tasks);
+            return parseRetrieve(input);
         } else {
             throw new InvalidCommandException();
         }
@@ -58,7 +59,7 @@ public class Parser {
                     throw new NoTaskContentException("OOPS!!! The description of a todo cannot be empty.");
                 } else {
                     String description = splitInput[1];
-                    return new AddTodoCommand("todo", description);
+                    return new AddTodoCommand(description);
                 }
             } else if (taskWord.equals("deadline")) {
                 if (splitInput.length != 2) {
@@ -107,7 +108,7 @@ public class Parser {
         }
     }
 
-    public static Command parseRetrieve(String input, TaskList tasks) throws DukeException {
+    public static Command parseRetrieve(String input) throws DukeException {
         try {
             String[] splitInput = input.split(" ");
             if (splitInput.length == 1) {

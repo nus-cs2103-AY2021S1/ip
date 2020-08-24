@@ -26,7 +26,7 @@ public class Ui {
         return sc.nextLine();
     }
 
-   public void showError(Exception e) {
+    public void showError(Exception e) {
         System.out.println("\t " + e.getMessage());
    }
 

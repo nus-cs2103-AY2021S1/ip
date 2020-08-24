@@ -6,11 +6,9 @@ import duke.tasklist.*;
 import duke.ui.*;
 
 public class AddTodoCommand extends Command {
-    private final String typeOfTask;
     private final String description;
-    public AddTodoCommand(String typeOfTask, String description) {
+    public AddTodoCommand(String description) {
         super(false);
-        this.typeOfTask = typeOfTask;
         this.description = description;
     }
 
