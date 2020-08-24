@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Duke {
-    public final static String pathDirectory = System.getProperty("user.dir");
+    //public final static String pathDirectory = System.getProperty("user.dir");
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
@@ -31,7 +31,7 @@ public class Duke {
 
                 tasks = new TaskList(storage.load());
             } catch (IOException ex) {
-                //System.out.println("An error occurred, file could not be created.");
+                System.out.println("An error occurred, file could not be created.");
                 e.printStackTrace();
             }
         }
@@ -63,7 +63,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(pathDirectory + "/data/duke.txt").run();
+        new Duke("/Users/joshua/Desktop/ip/data/duke.txt").run();
     }
 
 }

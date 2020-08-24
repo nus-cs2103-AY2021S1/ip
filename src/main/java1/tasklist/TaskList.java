@@ -16,7 +16,7 @@ public class TaskList {
     }
 
     public void addTask(Task task) {
-        String path = System.getProperty("user.dir") + "/data/duke.txt";
+        String path = "/Users/joshua/Desktop/ip/data/duke.txt";
 
         Storage.saveTask(path, this.todoList, task);
         this.todoList.add(task);
@@ -33,7 +33,7 @@ public class TaskList {
     }
 
     public void removeTask(int index) {
-        String path = System.getProperty("user.dir") + "/data/duke.txt";
+        String path = "/Users/joshua/Desktop/ip/data/duke.txt";
 
         Task removedTask = this.todoList.get(index);
         this.todoList.remove(index);
@@ -55,7 +55,7 @@ public class TaskList {
     }
 
     public void updateDone() {
-        String path = System.getProperty("user.dir") + "/data/duke.txt";
+        String path = "/Users/joshua/Desktop/ip/data/duke.txt";
         Storage.updateTask(path, this.todoList);
     }
 }
