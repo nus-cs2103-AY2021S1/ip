@@ -24,4 +24,10 @@ public class Ui {
         print("Bye? I hope it's not forever! Come back soon!");
         buildChatFence();
     }
+
+    public void printAddConfirmation(String message, int size) {
+        print("Got it. I've added this task:");
+        print(message);
+        print(String.format("Now you have %d %s in the list", size, size > 1 ? "tasks" : "task"));
+    }
 }

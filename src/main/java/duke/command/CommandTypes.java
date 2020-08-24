@@ -1,6 +1,6 @@
-package duke;
+package duke.command;
 
-public enum Commands {
+public enum CommandTypes {
     BYE,
     LIST,
     DONE,

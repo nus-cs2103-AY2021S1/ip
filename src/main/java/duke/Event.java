@@ -14,23 +14,6 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public static Event create(String event) throws EventInvalidUsageException {
-        String[] parsedEvent = event.split("\\s*/at\\s*", 2);
-
-        if (parsedEvent.length < 2) {
-            throw new EventInvalidUsageException("You should specify a date by using `/at`");
-        }
-        if (parsedEvent[0].equals("")) {
-            throw new EventInvalidUsageException("Event description cannot be empty.");
-        }
-
-        try {
-            return new Event(parsedEvent[0], parseDate(parsedEvent[1]));
-        } catch (DateTimeParseException ex) {
-            throw new EventInvalidUsageException("Deadline date must be of the form yyyy-mm-dd.");
-        }
-    }
-
     public static Event create(String event, String at) throws EventInvalidUsageException {
         if (event.equals("")) {
             throw new EventInvalidUsageException("Event description cannot be empty.");

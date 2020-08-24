@@ -38,8 +38,7 @@ public class TaskList {
         return this.taskList.size();
     }
 
-    public TaskList viewAll(String dateStr) throws DateTimeException {
-        LocalDate date = LocalDate.parse(dateStr);
+    public TaskList viewAll(LocalDate date) {
         return new TaskList(
                 this.taskList
                         .stream()

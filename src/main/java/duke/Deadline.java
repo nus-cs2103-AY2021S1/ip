@@ -15,23 +15,6 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public static Deadline create(String deadline) throws DeadlineInvalidUsageException {
-        String[] parsedDeadline = deadline.split("\\s*/by\\s*", 2);
-
-        if (parsedDeadline.length < 2) {
-            throw new DeadlineInvalidUsageException("You should specify the deadline by using `/by`");
-        }
-        if (parsedDeadline[0].equals("")) {
-            throw new DeadlineInvalidUsageException("Deadline description cannot be empty.");
-        }
-
-        try {
-            return new Deadline(parsedDeadline[0], parseDate(parsedDeadline[1]));
-        } catch (DateTimeParseException ex) {
-            throw new DeadlineInvalidUsageException("Deadline date must be of the form yyyy-mm-dd.");
-        }
-    }
-
     public static Deadline create(String deadline, String by) throws DeadlineInvalidUsageException {
         if (deadline.equals("")) {
             throw new DeadlineInvalidUsageException("Deadline description cannot be empty.");
