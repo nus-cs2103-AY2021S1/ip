@@ -55,6 +55,14 @@ public class Storage {
 
     public void save(){
         try {
+            String folderPath = "Data";
+            File directory = new File(folderPath);
+            if (!directory.isDirectory()){
+                File folder = new File(folderPath);
+                if (!folder.mkdir()){
+                    System.out.println("cannot make a folder");
+                }
+            }
             File file = new File(this.filePath);
             file.createNewFile();
             FileWriter writer = new FileWriter(file);
