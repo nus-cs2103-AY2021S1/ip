@@ -18,6 +18,13 @@ import main.exception.InvalidTaskException;
 import main.exception.EmptyMessageException;
 import main.exception.UnknownCommandException;
 
+/**
+ * Handles the parsing of user inputs.
+ * @author Joshua Liang XingYa
+ * @author joshualiang.xy@gmail.com
+ * @version v0.1
+ * @since v0.1
+ */
 public class Parser {
     private static final String EXIT_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
@@ -84,6 +91,19 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the input in the form of a string array and returns the
+     * corresponding Command.
+     * @param input the user input as a string array.
+     * @return a Command based on the input.
+     * @throws InvalidTaskException if the selected task does not exist.
+     * @throws EmptyMessageException if the description of the task is empty.
+     * @throws UnknownCommandException if the command given is unknown.
+     * @throws InvalidDateException if the deadline or event dates are invalid.
+     * @throws InvalidDeadlineFormatException if the format of deadline
+     * command is invalid.
+     * @throws InvalidEventFormatException if the format of event is invalid.
+     */
     public static Command parse(String[] input)
             throws InvalidTaskException,
                 EmptyMessageException,
