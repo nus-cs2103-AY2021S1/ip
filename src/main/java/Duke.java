@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,14 +14,19 @@ public class Duke {
     private enum InstructionGuide {
         // For formatting purposes, except for the last guide, the guides must end with a guideBreaker
         // It splits them into paragraphs
-        LevelInformation("* Level 6: Allowing Delete. Follow the Task Input Instructions for more\n" +
+        LevelInformation("* Level 8: Formatting Time. Follow the Task Input Instructions for more\n" +
                 "* Do try to avoid ambiguous inputs, " +
                 "such as [keywords] + [random gibberish] as I cannot recognise them!\n" +
                 "\tI'm not very smart (yet) :(", false),
 
         TaskInput(" todo [Task Description] - Inputs a TODO DukeTask\n" +
-                " deadline [Task Description] /by [Date] - Inputs a DEADLINE DukeTask, along with INDICATOR /by\n" +
-                " event [Task Description] /at [Date] - Inputs an EVENT DukeTask, along with INDICATOR /at", false),
+                " deadline [Task Description] /by [Date] - Inputs a DEADLINE DukeTask, followed by with INDICATOR /by and a DATE\n" +
+                " event [Task Description] /at [Date] - Inputs an EVENT DukeTask, followed by with INDICATOR /at and a DATE", false),
+
+        TaskInputSpecifications("TO NOTE:\n" +
+                " FORMAT FOR DATE: \"DD/MM/YYYY hh/mm/ss\"\n" +
+                " \tDD, MM, YYYY are the date, month and year respectively (IN INTEGERS)\n" +
+                " \thh, mm, ss are the hour (in 24 HOUR NOTATION), minutes and seconds respectively (IN INTEGERS)", false),
 
         AvailableInstruction(" help - Display Available Instructions\n" +
                 " bye - Terminate Duke\n" +
@@ -54,6 +61,7 @@ public class Duke {
                 InstructionGuide.LevelInformation +
                 "TASK INPUT INSTRUCTIONS:\n" + // Task Input Instructions
                 InstructionGuide.TaskInput +
+                InstructionGuide.TaskInputSpecifications +
                 "AVAILABLE INSTRUCTIONS:\n" + // Available Instructions
                 InstructionGuide.AvailableInstruction), // END OF INSTRUCTIONS)
 
@@ -199,13 +207,19 @@ public class Duke {
                             throw new InvalidFormatException(DEADLINE);
                         } else {
                             String deadlineDesc = mergeArray(instructionArray, 1, byIndex);
-                            String deadlineDatetime = mergeArray(instructionArray, byIndex + 1, instrLen);
+                            if (instructionArray.length < byIndex + 3) { // account for index + date + time
+                                throw new MissingFieldException(EVENT + ": Date and Time");
+                            }
+                            String date = instructionArray[byIndex + 1];
+                            String time = instructionArray[byIndex + 2];
+
+                            // parse date and time into LocalDateTime object
+                            LocalDateTime dateTime = parseDateAndTime(DEADLINE, date, time);
+
                             if (deadlineDesc.equals("")) {
                                 throw new MissingFieldException(DEADLINE + ": Description");
-                            } else if (deadlineDatetime.equals("")) {
-                                throw new MissingFieldException(DEADLINE + ": Date and Time");
                             } else {
-                                DeadlineTask deadlinetask = new DeadlineTask(deadlineDesc, deadlineDatetime);
+                                DeadlineTask deadlinetask = new DeadlineTask(deadlineDesc, dateTime);
                                 inputList.add(deadlinetask);
                                 System.out.println("Task Added: " + deadlinetask.toString());
                                 System.out.println(getTaskSize(inputList));
@@ -218,13 +232,19 @@ public class Duke {
                             throw new InvalidFormatException(EVENT);
                         } else {
                             String eventDesc = mergeArray(instructionArray, 1, atIndex);
-                            String eventDatetime = mergeArray(instructionArray, atIndex + 1, instrLen);
+                            if (instructionArray.length < atIndex + 3) { // account for index + date + time
+                                throw new MissingFieldException(EVENT + ": Date and Time");
+                            }
+                            String date = instructionArray[atIndex + 1];
+                            String time = instructionArray[atIndex + 2];
+
+                            // parse date and time into LocalDateTime object
+                            LocalDateTime dateTime = parseDateAndTime(EVENT, date, time);
+
                             if (eventDesc.equals("")) {
                                 throw new MissingFieldException(EVENT + ": Description");
-                            } else if (eventDatetime.equals("")) {
-                                throw new MissingFieldException(EVENT + ": Date and Time");
                             } else {
-                                EventTask eventTask = new EventTask(eventDesc, eventDatetime);
+                                EventTask eventTask = new EventTask(eventDesc, dateTime);
                                 inputList.add(eventTask);
                                 System.out.println("Task Added: " + eventTask.toString());
                                 System.out.println(getTaskSize(inputList));
@@ -291,5 +311,81 @@ public class Duke {
 
     private static String getTaskSize(ArrayList<DukeTask> tasks) {
         return String.format("You now have %d %s", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
+    }
+
+    private static LocalDateTime parseDateAndTime(String locator, String date, String time) throws InvalidFormatException {
+        // INPUT DATE FORMAT: DD/MM/YYYY
+        // INPUT TIME FORMAT: hh/mm/ss
+        int CURRENT_YEAR = 2020;
+        int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0;
+
+        String[] dateArray = date.split("/");
+        String[] timeArray = time.split("/");
+
+        if (dateArray.length != 3 || timeArray.length != 3) {
+            throw new InvalidFormatException(locator + " DATE AND TIME");
+        }
+
+        try {
+            day = Integer.parseInt(dateArray[0]);
+            month = Integer.parseInt(dateArray[1]);
+            year = Integer.parseInt(dateArray[2]);
+
+            hour = Integer.parseInt(timeArray[0]);
+            minute = Integer.parseInt(timeArray[1]);
+            second = Integer.parseInt(timeArray[2]);
+        } catch (NumberFormatException nfe) {
+            throw new InvalidFormatException(locator + " DATE AND TIME");
+        }
+
+        // input validation for time
+        if (hour < 0 || hour > 23 || minute < 0 || minute > 59 || second < 0 || second > 59) {
+            throw new InvalidFormatException(locator + " TIME FORMAT");
+        }
+
+        // input validation for date
+        if (year < 0 || month < 0 || month > 12 || day < 0) {
+            throw new InvalidFormatException(locator + " DATE FORMAT");
+        }
+
+        switch (month) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                if (day > 31) {
+                    throw new InvalidFormatException(locator + " DATE FORMAT");
+                }
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                if (day > 30) {
+                    throw new InvalidFormatException(locator + " DATE FORMAT");
+                }
+                break;
+            default:
+                if ((isLeapYear(year) && day > 29) || (!isLeapYear(year) && day > 28)){
+                    throw new InvalidFormatException(locator + " DATE FORMAT");
+                }
+        }
+
+        return LocalDateTime.of(year, month, day, hour, minute, second);
+    }
+
+    private static boolean isLeapYear(int year) {
+        boolean isLeap = false;
+        if (year % 4 == 0) {
+            if(year % 100 == 0) {
+                isLeap = year % 400 == 0;
+            } else {
+                isLeap = true;
+            }
+        }
+        return isLeap;
     }
 }

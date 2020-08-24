@@ -1,17 +1,22 @@
-public class EventTask extends DukeTask {
-    private final String datetime;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public EventTask(String description, String datetime) {
+public class EventTask extends DukeTask {
+    private final LocalDateTime datetime;
+
+    public EventTask(String description, LocalDateTime datetime) {
         super(description);
         this.datetime = datetime;
     }
 
     public String getDatetime() {
-        return datetime;
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm:ss a");
+        return datetime.format(df);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + String.format(" (at: %s)",datetime);
+        return "[E]" + super.toString() + String.format(" (at: %s)", getDatetime());
     }
 }
