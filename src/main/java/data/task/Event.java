@@ -1,3 +1,7 @@
+package data.task;
+
+import data.exception.DukeInvalidUserInputException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -10,7 +14,7 @@ public class Event extends Task {
     private LocalTime endTime;
     private String dateTimeTxt;
 
-    public Event(String description, String dateTime) throws DukeInvalidUserInputException{
+    public Event(String description, String dateTime) throws DukeInvalidUserInputException {
         super(description);
         convertDateTime(dateTime);
     }

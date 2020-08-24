@@ -1,5 +1,7 @@
+package data.exception;
+
 public class DukeInvalidUserInputException extends DukeException{
-    DukeInvalidUserInputException(String msg) {
+    public DukeInvalidUserInputException(String msg) {
         super(msg);
     }
 }

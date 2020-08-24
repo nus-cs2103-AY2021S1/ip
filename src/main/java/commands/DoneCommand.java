@@ -1,3 +1,9 @@
+package commands;
+
+import data.exception.DukeInvalidUserInputException;
+import data.task.TaskList;
+import storage.Storage;
+
 public class DoneCommand extends Command {
 
     private TaskList taskList;
@@ -11,7 +17,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute() throws DukeInvalidUserInputException{
+    public void execute() throws DukeInvalidUserInputException {
         //Get number after done keyword
         if (this.user_input.length() == 4) {
             throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of a done must not be empty.");

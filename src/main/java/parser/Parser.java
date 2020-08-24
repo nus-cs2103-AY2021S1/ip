@@ -1,3 +1,11 @@
+package parser;
+
+import commands.*;
+import data.exception.DukeIllegalCommandException;
+import data.task.TaskList;
+import storage.Storage;
+import ui.Ui;
+
 public class Parser {
 
     private TaskList taskList;
@@ -10,7 +18,7 @@ public class Parser {
         this.ui = ui;
     }
 
-    public Command parseCommand(String user_input) throws  DukeIllegalCommandException {
+    public Command parseCommand(String user_input) throws DukeIllegalCommandException {
         String[] user_inputArr = user_input.split(" ");
         String keyword = user_inputArr[0];
         switch (keyword) {

@@ -1,7 +1,11 @@
+package data.task;
+
 //A task represents an item in Duke's todoList
 //A task consists of:
 // 1) Content Description
 // 2) Status (isDone or not)
+
+import data.exception.DukeInvalidUserInputException;
 
 public abstract class Task {
     private String description;

@@ -1,3 +1,13 @@
+package commands;
+
+import data.exception.DukeIllegalCommandException;
+import data.exception.DukeInvalidUserInputException;
+import data.task.Event;
+import data.task.TaskList;
+import parser.Parser;
+import storage.Storage;
+import ui.Ui;
+
 public class EventCommand extends Command{
 
     private TaskList taskList;
