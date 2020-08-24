@@ -1,10 +1,7 @@
 package duke.storage;
 
 import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -102,17 +99,16 @@ public class Storage {
 		}
 
 		if (directoryNotFound) {
-			throw new DukeException("Tried to find " + fullPath + "\n"
-					+ "but File/Directory at path " + fileInDirectory.getAbsolutePath()
-					+ " could not be found.");
+			return false;
 		} else {
 			return true;
 		}
 	}
 
-	public void updateStorage(String textForUpdate) throws DukeException {
+	public void updateStorage(TaskList tasks) throws DukeException {
 		try {
 			FileWriter fw = new FileWriter(SAVED_TASK_PATH);
+			String textForUpdate = convertTaskListToSaveFormat(tasks);
 			fw.write(textForUpdate);
 			fw.close();
 		} catch (IOException e) {
@@ -123,14 +119,56 @@ public class Storage {
 	void createFile() throws DukeException {
 		File newFile = new File(SAVED_TASK_PATH);
 		try {
+			String[] pathStringArray = SAVED_TASK_PATH.split("/");
+			StringBuilder currentPath = new StringBuilder();
+			newFile.getParentFile().mkdirs();
 			if (newFile.createNewFile()) {
-				// successfully created file
+				// successfully created new file
 			} else {
-				throw new DukeException("Save file already exists at " + newFile.getAbsolutePath());
+				throw new DukeException("Could not create a save file at " + newFile.getAbsolutePath());
 			}
 		} catch (IOException e) {
+			System.out.println(e.getMessage());
 			throw new DukeException("Could not create a save file at " + newFile.getAbsolutePath());
 		}
+	}
+
+	String convertTaskListToSaveFormat(TaskList taskList) throws DukeException {
+		StringBuilder stringBuilder = new StringBuilder();
+		for (int i = 0; i < taskList.numberOfTasks(); i++) {
+			Task task = taskList.getTask(i);
+			String saveTaskString = convertTaskToSaveFormat(task);
+			stringBuilder.append(saveTaskString + "\n");
+		}
+
+		return stringBuilder.toString();
+	}
+
+	String convertTaskToSaveFormat(Task task) throws DukeException {
+		String taskType;
+		String description = task.getDescription();
+		int taskDone = task.isDone() ? 1 : 0;
+		String resultString;
+		if (task instanceof ToDo) {
+			taskType = "T";
+			resultString = taskType + " | " + taskDone + " | " + description;
+		} else if (task instanceof Deadline) {
+			Deadline deadline = (Deadline) task;
+			taskType = "D";
+			String date = deadline.getLocalDate().toString();
+			String time = deadline.getLocalTime().toString();
+			resultString = taskType + " | " + taskDone + " | " + description + " | " + date + " | " + time;
+		} else if (task instanceof Event) {
+			Event event = (Event) task;
+			taskType = "E";
+			String date = event.getLocalDate().toString();
+			String time = event.getLocalTime().toString();
+			resultString = taskType + " | " + taskDone + " | " + description + " | " + date + " | " + time;
+		} else {
+			throw new DukeException("Unable to save task, unknown task type");
+		}
+
+		return resultString;
 	}
 
 }

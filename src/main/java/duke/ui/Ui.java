@@ -19,17 +19,17 @@ public class Ui {
 
 	public void showWelcome() {
 		System.out.println(OPENING);
-		showLine();
 		printMessage("Hello! I'm Duke.\nHow can I help you today?");
-		showLine();
 	}
 
 	public void printMessage(String message) {
+		showLine();
 		String[] splitByNewLine = message.split("\\r?\\n");
 		for (String str : splitByNewLine) {
 			indent();
 			System.out.println(str);
 		}
+		showLine();
 	}
 
 	public String readCommand() {
@@ -38,11 +38,13 @@ public class Ui {
 	}
 
 	public void showError(String errorMessage) {
+		showLine();
 		String[] splitByNewLine = errorMessage.split("\\r?\\n");
 		for (String str : splitByNewLine) {
 			indent();
 			System.out.println("!!! " + str + " !!!");
 		}
+		showLine();
 	}
 
 	public void showLoadingError() {

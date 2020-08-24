@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
 		try {
 			Task taskToDelete = taskList.getTask(indexOfTask);
 			taskList.deleteTask(indexOfTask);
-			storage.updateStorage(convertTaskListToSaveFormat(taskList));
+			storage.updateStorage(taskList);
 			ui.printMessage("Noted. I've removed this task.\n" +
 					taskToDelete.toString() + "\n" +
 					"Now you have " + taskList.numberOfTasks() + " tasks in the list.");

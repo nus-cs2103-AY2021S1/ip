@@ -16,7 +16,7 @@ public class DoneCommand extends Command {
 	public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 		Task taskToSetDone = taskList.getTask(indexOfTask);
 		taskList.setTaskDone(indexOfTask);
-		storage.updateStorage(convertTaskListToSaveFormat(taskList));
+		storage.updateStorage(taskList);
 		ui.printMessage("Nice! I've marked this task as done:\n" +
 				taskToSetDone.toString());
 	}

@@ -16,8 +16,7 @@ public class AddCommand extends Command {
 	@Override
 	public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 		tasks.addTask(taskToAdd);
-		String stringToWriteToStorage = convertTaskListToSaveFormat(tasks);
-		storage.updateStorage(stringToWriteToStorage);
+		storage.updateStorage(tasks);
 		ui.printMessage("Got it. I've added this task:\n" +
 				taskToAdd.toString() + "\n" +
 				"Now you have " + tasks.numberOfTasks() + " tasks in the list.");
