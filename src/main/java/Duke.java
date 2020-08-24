@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,9 +9,67 @@ public class Duke {
 
     private final static ArrayList<Task> list = new ArrayList<>();
 
+    public static void loadDataFile() throws IOException {
+        File file = new File("data/duke.txt");
+        boolean hasFolder = file.getParentFile().mkdirs();
+        boolean hasFile = file.createNewFile();
+        if (!hasFile && !hasFolder) {
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext()) {
+                String task = sc.nextLine();
+                String[] details = task.split(" \\| ");
+                if (details[0].equals("T")) {
+                    list.add(new ToDo(details[2]));
+                } else if (details[0].equals("D")) {
+                    list.add(new Deadline(details[2], details[3]));
+                } else {
+                    list.add(new Event(details[2], details[3]));
+                }
+                if (details[1].equals("1")) {
+                    list.get(list.size() - 1).done();
+                }
+            }
+            sc.close();
+        }
+    }
+
+    public static void updateDataFile() throws IOException {
+        File directory = new File("");
+        FileWriter writer = new FileWriter(directory.getAbsolutePath() + "/data/duke.txt");
+        PrintWriter print_line = new PrintWriter(writer);
+        for (Task task : list) {
+            String[] details = new String[4];
+            details[2] = task.name;
+            if (task instanceof ToDo) {
+                details[0] = "T";
+            } else if (task instanceof Deadline) {
+                details[0] = "D";
+                details[3] = ((Deadline) task).by;
+            } else {
+                details[0] = "E";
+                details[3] = ((Event) task).duration;
+            }
+            if (task.isDone) {
+                details[1] = "1";
+            } else {
+                details[1] = "0";
+            }
+            String textLine = details[0] + " | " + details[1] + " | " + details[2]
+                    + " | " + details[3];
+            print_line.printf("%s" + "%n", textLine);
+        }
+        print_line.close();
+    }
+
     public static void start() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        try {
+            loadDataFile();
+            System.out.println("Hello! I'm Duke");
+            System.out.println("What can I do for you?");
+        } catch (java.io.IOException error) {
+            error.printStackTrace();
+            System.exit(-1);
+        }
     }
 
     public static void reply(String input) {
@@ -21,23 +83,32 @@ public class Duke {
                 }
             }
         } else if (input.startsWith("done ") || input.equals("done")) {
-            if (input.length() < 6 || input.substring(5).trim().isEmpty()) {
-                System.out.println("Which task do you want to mark as done?");
-            } else {
-                String item = input.substring(5).trim();
-                markAsDone(item);
+            try {
+                markAsDone(input);
+                updateDataFile();
+            } catch (DukeException | IOException error) {
+                System.out.println(error.getMessage());
+            } catch (NumberFormatException error) {
+                System.out.println("Please provide a valid task number to mark as done");
+            } catch (IndexOutOfBoundsException error) {
+                System.out.println("This task is not in your list");
             }
         } else if (input.startsWith("delete ") || input.equals("delete")) {
-            if (input.length() < 8 || input.substring(7).trim().isEmpty()) {
-                System.out.println("Which task do you want to delete?");
-            } else {
-                String item = input.substring(7).trim();
-                deleteTask(item);
+            try {
+                deleteTask(input);
+                updateDataFile();
+            } catch (DukeException | IOException error) {
+                System.out.println(error.getMessage());
+            } catch (NumberFormatException error) {
+                System.out.println("Please provide a valid task number to delete");
+            } catch (IndexOutOfBoundsException error) {
+                System.out.println("This task is not in your list");
             }
         } else {
             try {
                 addTask(input);
-            } catch (DukeException error) {
+                updateDataFile();
+            } catch (DukeException | IOException error) {
                 System.out.println(error.getMessage());
             }
         }
@@ -56,7 +127,7 @@ public class Duke {
                 throw new DukeException("The description of a deadline cannot be empty.");
             }
             String details = input.substring(9).trim();
-            String[] split = details.split("/by ");
+            String[] split = details.split(" /by ");
             if (split.length != 2) {
                 throw new DukeException("Please use the format: deadline (name) /by (when)");
             }
@@ -68,7 +139,7 @@ public class Duke {
                 throw new DukeException("The description of a deadline cannot be empty.");
             }
             String details = input.substring(6).trim();
-            String[] split = details.split("/at ");
+            String[] split = details.split(" /at ");
             if (split.length != 2) {
                 throw new DukeException("Please use the format: event (name) /at (what time)");
             }
@@ -89,36 +160,28 @@ public class Duke {
         }
     }
 
-    public static void markAsDone(String item) {
-        try {
-            int index = Integer.parseInt(item) - 1;
-            if (index > -1 && index < list.size()) {
-                list.get(index).done();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(list.get(index));
-            } else {
-                System.out.println("This task is not in your list");
-            }
-        } catch (NumberFormatException error) {
-            System.out.println("Please provide a valid task number to mark as done");
+    public static void markAsDone(String input) throws DukeException {
+        if (input.length() < 6 || input.substring(5).trim().isEmpty()) {
+            throw new DukeException("Which task do you want to mark as done?");
         }
+        String item = input.substring(5).trim();
+        int index = Integer.parseInt(item) - 1;
+        list.get(index).done();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(list.get(index));
     }
 
-    public static void deleteTask(String item) {
-        try {
-            int index = Integer.parseInt(item) - 1;
-            if (index > -1 && index < list.size()) {
-                Task deletedTask = list.get(index);
-                list.remove(index);
-                System.out.println("Noted. I've removed this task:");
-                System.out.println(deletedTask);
-                System.out.println("You now have " + list.size() + " tasks in your list");
-            } else {
-                System.out.println("This task is not in your list");
-            }
-        } catch (NumberFormatException error) {
-            System.out.println("Please provide a valid task number to delete");
+    public static void deleteTask(String input) throws DukeException {
+        if (input.length() < 8 || input.substring(7).trim().isEmpty()) {
+            throw new DukeException("Which task do you want to delete?");
         }
+        String item = input.substring(7).trim();
+        int index = Integer.parseInt(item) - 1;
+        Task deletedTask = list.get(index);
+        list.remove(index);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(deletedTask);
+        System.out.println("You now have " + list.size() + " tasks in your list");
     }
 
     public static void exit() {
@@ -133,6 +196,7 @@ public class Duke {
             reply(input);
             input = sc.nextLine();
         }
+        sc.close();
         exit();
     }
 }
