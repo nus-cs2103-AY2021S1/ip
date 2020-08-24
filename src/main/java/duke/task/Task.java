@@ -3,6 +3,7 @@ package duke.task;
 import java.io.Serializable;
 
 public class Task implements Serializable {
+
     private String name;
     private boolean isDone;
 
