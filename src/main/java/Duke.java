@@ -1,11 +1,29 @@
 import javax.swing.*;
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException, ClassNotFoundException {
         ArrayList<Task> store = new ArrayList<Task>();
+        try {
+            Path relativePath = Paths.get("data/store.ser");
+            Path absolutePath = relativePath.toAbsolutePath();
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("" + absolutePath));
+            ArrayList<Task> array = (ArrayList<Task>) in.readObject();
+            in.close();
+            for (Task task : array) {
+                store.add(task);
+            }
+        } catch (EOFException e) {
+
+        } catch (IOException e) {
+            System.out.println(e);
+            throw new IOException(e);
+        }
         Scanner scan = new Scanner(System.in);
         String intro = "-------------------------\n"
                 + "Hello! I'm Duke\n"
@@ -41,44 +59,96 @@ public class Duke {
                 System.out.println("-------------------------");
                 next = scan.nextLine();
             } else if (next.contains("todo")) {
-                if (next.length() == 4) {
-                    throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+                try {
+                    if (next.length() == 4) {
+                        throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    ToDos curr = new ToDos(next.substring(5));
+                    store.add(curr);
+                    System.out.println("-------------------------");
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
+                            + curr.getDescription());
+                    System.out.println("Now you have " + store.size() + " tasks in the list.");
+                    System.out.println("-------------------------");
+                    Path relativePath = Paths.get("data/duke.txt");
+                    Path absolutePath = relativePath.toAbsolutePath();
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("" + absolutePath));
+                    writer.append('\n');
+                    StringBuilder result = new StringBuilder("");
+                    for (Task task : store) {
+                        if (task.getDescription() != null) {
+                            result.append("[" + task.getType() + "]" + "[" + task.getStatusIcon() + "] " + task.getDescription());
+                            result.append("\n");
+                        }
+                    }
+                    writer.append(result);
+                    writer.close();
+                    next = scan.nextLine();
+                } catch (IOException e) {
+                    System.out.println(e);
+                    throw new IOException("Please create a folder called \"data\" in the project root!");
                 }
-                ToDos curr = new ToDos(next.substring(5));
-                store.add(curr);
-                System.out.println("-------------------------");
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
-                    + curr.getDescription());
-                System.out.println("Now you have " + store.size() + " tasks in the list.");
-                System.out.println("-------------------------");
-                next = scan.nextLine();
             } else if (next.contains("deadline")) {
-                Deadlines curr = new Deadlines(next.substring(9));
-                String description = curr.getDescription();
-                int index = description.indexOf("/") + 4;
-                curr.setDeadline(description.substring(index));
-                store.add(curr);
-                System.out.println("-------------------------");
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
-                        + curr.getDescription().substring(0,description.indexOf("/")) + "(by: " + curr.getDeadline() + ")");
-                System.out.println("Now you have " + store.size() + " tasks in the list.");
-                System.out.println("-------------------------");
-                next = scan.nextLine();
+                try {
+                    Deadlines curr = new Deadlines(next.substring(9));
+                    String description = curr.getDescription();
+                    int index = description.indexOf("/") + 4;
+                    curr.setDeadline(description.substring(index));
+                    store.add(curr);
+                    System.out.println("-------------------------");
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
+                            + curr.getDescription().substring(0, description.indexOf("/")) + "(by: " + curr.getDeadline() + ")");
+                    System.out.println("Now you have " + store.size() + " tasks in the list.");
+                    System.out.println("-------------------------");
+                    Path relativePath = Paths.get("data/duke.txt");
+                    Path absolutePath = relativePath.toAbsolutePath();
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("" + absolutePath));
+                    writer.append('\n');
+                    StringBuilder result = new StringBuilder("");
+                    for (Task task : store) {
+                        if (task.getDescription() != null) {
+                            result.append("[" + task.getType() + "]" + "[" + task.getStatusIcon() + "] " + task.getDescription());
+                            result.append("\n");
+                        }
+                    }
+                    writer.append(result);
+                    writer.close();
+                    next = scan.nextLine();
+                } catch (IOException e) {
+                    throw new IOException("Please create a folder called \"data\" in the project root!");
+                }
             } else if (next.contains("event")) {
-                Events curr = new Events(next.substring(6));
-                String description = curr.getDescription();
-                int index = description.indexOf("/") + 4;
-                curr.setStart(description.substring(index));
-                store.add(curr);
-                System.out.println("-------------------------");
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
-                        + curr.getDescription().substring(0,description.indexOf("/")) + "(at: " + curr.getStart() + ")");
-                System.out.println("Now you have " + store.size() + " tasks in the list.");
-                System.out.println("-------------------------");
-                next = scan.nextLine();
+                try {
+                    Events curr = new Events(next.substring(6));
+                    String description = curr.getDescription();
+                    int index = description.indexOf("/") + 4;
+                    curr.setStart(description.substring(index));
+                    store.add(curr);
+                    System.out.println("-------------------------");
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
+                            + curr.getDescription().substring(0, description.indexOf("/")) + "(at: " + curr.getStart() + ")");
+                    System.out.println("Now you have " + store.size() + " tasks in the list.");
+                    System.out.println("-------------------------");
+                    Path relativePath = Paths.get("data/duke.txt");
+                    Path absolutePath = relativePath.toAbsolutePath();
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("" + absolutePath));
+                    writer.append('\n');
+                    StringBuilder result = new StringBuilder("");
+                    for (Task task : store) {
+                        if (task.getDescription() != null) {
+                            result.append("[" + task.getType() + "]" + "[" + task.getStatusIcon() + "] |" + task.getDescription());
+                            result.append("\n");
+                        }
+                    }
+                    writer.append(result);
+                    writer.close();
+                    next = scan.nextLine();
+                } catch (IOException e) {
+                    throw new IOException("Please create a folder called \"data\" in the project root!");
+                }
             } else if (next.contains("delete")) {
                 if (next.length() == 6) {
                     throw new DukeException("\u2639 OOPS!!! Please specify what task to delete.");
@@ -103,6 +173,14 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println("-------------------------");
                 scan.close();
+                Path relativePath = Paths.get("data/store.ser");
+                Path absolutePath = relativePath.toAbsolutePath();
+                ObjectOutputStream out = new ObjectOutputStream(
+                        new FileOutputStream("" + absolutePath)
+                );
+                out.writeObject(store);
+                out.flush();
+                out.close();
                 break;
             }
         }
