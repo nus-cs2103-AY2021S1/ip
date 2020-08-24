@@ -47,7 +47,7 @@ public class Ui {
     }
 
     public static void showList(TaskList tasks) {
-        System.out.println(Ui.getListString(tasks));
+        System.out.print(Ui.getListString(tasks));
     }
 
     public static void showListDate(TaskList tasks, LocalDate date) {
