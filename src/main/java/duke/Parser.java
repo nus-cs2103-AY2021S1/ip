@@ -4,7 +4,8 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
-import duke.command.FindCommand;
+import duke.command.FindDateCommand;
+import duke.command.FindDescriptionCommand;
 import duke.command.ListCommand;
 import duke.command.TaskCommand;
 import duke.exception.DukeException;
@@ -66,26 +67,43 @@ public class Parser {
         return new DeleteCommand(taskIndex);
     }
     
-    private static FindCommand getFindCommand(String input) throws EmptyInputException, InvalidInputException {
+    private static FindDateCommand getFindDateCommand(String input) throws EmptyInputException,
+            InvalidInputException {
         String dateStr;
         try {
             dateStr = input.substring(5).trim();
         } catch (IndexOutOfBoundsException ex) {
-            throw new EmptyInputException("The item to be retrieved is not specified.");
+            throw new EmptyInputException("The date to be searched is not specified.");
         }
 
         if (dateStr.length() < 1) {
-            throw new EmptyInputException("The item to be retrieved is not specified.");
+            throw new EmptyInputException("The date to be searched is not specified.");
         }
 
         LocalDate localDate;
         try {
             localDate = LocalDate.parse(dateStr.trim());
         } catch (DateTimeParseException ex) {
-            throw new InvalidInputException("The date to be retrieved is invalid, it should be in YYYY-MM-DD format.");
+            throw new InvalidInputException("The date to be searched is invalid, it should be in YYYY-MM-DD" +
+                    " format.");
         }
         
-        return new FindCommand(localDate);
+        return new FindDateCommand(localDate);
+    }
+
+    private static FindDescriptionCommand getFindCommand(String input) throws EmptyInputException {
+        String itemStr;
+        try {
+            itemStr = input.substring(5).trim();
+        } catch (IndexOutOfBoundsException ex) {
+            throw new EmptyInputException("The task to be searched is not specified.");
+        }
+
+        if (itemStr.length() < 1) {
+            throw new EmptyInputException("The task to be searched is not specified.");
+        }
+
+        return new FindDescriptionCommand(itemStr);
     }
     
     private static TaskCommand getTodoTaskCommand(String input) throws EmptyTaskException {
@@ -172,6 +190,8 @@ public class Parser {
                 return getEventTaskCommand(input);
             case "deadline":
                 return getDeadlineTaskCommand(input);
+            case "date":
+                return getFindDateCommand(input);
             case "find":
                 return getFindCommand(input);
             default:

@@ -33,11 +33,17 @@ delete 3
 delete 747
 event dfgdg /at 2020-10-22
 deadline dasd /by 2020-10-22
+date
+date 
+dateasdf
+date asdas
+date2020-24-22
+date 2020-2132
+date 2020-24-22
+date 2020-12-22
+date 2020-10-22
 find
 find 
 findasdf
-find asdas
-find2020-24-22
-find 2020-2132
-find 2020-24-22
-find 2020-10-22
+find argwf
+find d

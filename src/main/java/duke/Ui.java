@@ -65,9 +65,25 @@ public class Ui {
     public void printFound(LocalDate localDate, ArrayList<Task> list) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         String formattedDate = localDate.format(formatter);
-        String intro = String.format(" Here are the tasks that I've found on %s:\n", formattedDate);
-        StringBuilder builder = new StringBuilder(intro);
-        printWithDashes(printListItems(builder, list).toString());
+        if (list.size() == 0) {
+            String message = String.format(" I couldn't find anything on %s.", formattedDate); 
+            printWithDashes(message);
+        } else {            
+            String intro = String.format(" Here are the tasks that I've found on %s:\n", formattedDate);
+            StringBuilder builder = new StringBuilder(intro);
+            printWithDashes(printListItems(builder, list).toString());
+        }
+    }
+
+    public void printFound(String description, ArrayList<Task> list) {
+        if (list.size() == 0) {
+            String message = String.format(" I couldn't find anything matching %s.", description); 
+            printWithDashes(message);
+        } else {
+            String intro = String.format(" Here are the tasks that I've found matching %s:\n", description);
+            StringBuilder builder = new StringBuilder(intro);
+            printWithDashes(printListItems(builder, list).toString());
+        }        
     }
 
     public void printMarkTaskAsDone(Task task) {

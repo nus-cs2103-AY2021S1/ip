@@ -58,4 +58,14 @@ public class Tasks {
         }
         return taskList;
     }
+
+    public ArrayList<Task> findByDescription(String description) {
+        ArrayList<Task> taskList = new ArrayList<>();
+        for (Task task: this.tasks) {
+            if (task.containsDescription(description)) {
+                taskList.add(task);
+            }
+        }
+        return taskList;
+    }
 }
