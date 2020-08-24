@@ -48,6 +48,7 @@ public class Duke {
 
     }
 
+    
     public static void writeFile() throws IOException{
         String line = "";
         File file = new File("./data\\duke.txt");
