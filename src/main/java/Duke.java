@@ -1,6 +1,6 @@
 import main.java.Task;
 import main.java.TaskDoneException;
-import main.java.TaskManager;
+import main.java.TaskList;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -60,12 +60,12 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        TaskManager taskManager = new TaskManager();
+        TaskList taskList = new TaskList();
         File file =  new File("./src/data/duke.txt");
         try {
             //if file exists Read
             if (!file.createNewFile()){
-                taskManager.readFile(file);
+                taskList.readFile(file);
             }
         } catch (IOException err) {
             echo("IOException when trying to check if file exists");
@@ -83,7 +83,7 @@ public class Duke {
             case "bye":
                 try {
                     FileWriter fw = new FileWriter(file);
-                    fw.write(taskManager.toSaveFormat());
+                    fw.write(taskList.toSaveFormat());
                     fw.close();
                     echo("Bye. See you again, bro!");
                     break outerLoop;
@@ -93,9 +93,9 @@ public class Duke {
             case "done":
                 try {
                     int index = Integer.parseInt(words[1]);
-                    taskManager.doTask(index);
+                    taskList.doTask(index);
                     echo("Nice! I have marked this task as done:\n" +
-                            taskManager.getTaskStatus(index));
+                            taskList.getTaskStatus(index));
                 } catch (NumberFormatException err) {
                     echo("Error. Please key in an integer after \"done\"");
                 } catch (IndexOutOfBoundsException err) {
@@ -106,17 +106,17 @@ public class Duke {
                 }
                 break;
             case "list":
-                if (taskManager.getTotalTask() == 0) {
+                if (taskList.getTotalTask() == 0) {
                     echo("Currently, you have no tasks on hand");
                 } else {
-                    echo("Here are the tasks in your list\n" + taskManager.toString());
+                    echo("Here are the tasks in your list\n" + taskList.toString());
                 }
                 break;
             //3 different types of task
             case "event":
                 try {
-                    Task addedEvent = taskManager.addEvent(words[1], words[2]);
-                    echoNewTask(addedEvent, taskManager.getTotalTask());
+                    Task addedEvent = taskList.addEvent(words[1], words[2]);
+                    echoNewTask(addedEvent, taskList.getTotalTask());
                 } catch (IndexOutOfBoundsException err) {
                     echo("Error: Please key in the date & time as yyyy-mm-dd hh:mm hh:mm" +
                             "(Time in 24 hour format)");
@@ -130,8 +130,8 @@ public class Duke {
                     if (words.length > 2) {
                         throw new IllegalArgumentException();
                     }
-                    Task addedToDo = taskManager.addToDo(words[1]);
-                    echoNewTask(addedToDo, taskManager.getTotalTask());
+                    Task addedToDo = taskList.addToDo(words[1]);
+                    echoNewTask(addedToDo, taskList.getTotalTask());
                 } catch (IndexOutOfBoundsException err) {
                     echo("Error: The description for ToDo can't be empty");
                 } catch (IllegalArgumentException err) {
@@ -140,8 +140,8 @@ public class Duke {
                 break;
             case "deadline":
                 try {
-                    Task addedDeadline = taskManager.addDeadLine(words[1], words[2]);
-                    echoNewTask(addedDeadline, taskManager.getTotalTask());
+                    Task addedDeadline = taskList.addDeadLine(words[1], words[2]);
+                    echoNewTask(addedDeadline, taskList.getTotalTask());
                 } catch (IndexOutOfBoundsException err) {
                     echo("Error: The description for deadline can't be empty");
                 }
@@ -151,7 +151,7 @@ public class Duke {
             case "delete":
                 try {
                     int index = Integer.parseInt(words[1]);
-                    Task deletedTask = taskManager.deleteTask(index);
+                    Task deletedTask = taskList.deleteTask(index);
                     echo("Nice! I have deleted this task:\n" +
                             deletedTask);
                 } catch (NumberFormatException err) {

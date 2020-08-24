@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TaskManager {
+public class TaskList {
     private List<Task> tasks;
 
-    public TaskManager(){
+    public TaskList(){
         this.tasks = new ArrayList<Task>();
     }
 
