@@ -20,7 +20,7 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    protected boolean checkStatus() {
+    protected boolean isDone() {
         return isDone;
     }
 

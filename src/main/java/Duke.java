@@ -2,6 +2,6 @@ public class Duke {
 
     public static void main(String[] args) {
         DukeController controller = new DukeController();
-        controller.simulate();
+        controller.run();
     }
 }

@@ -4,13 +4,12 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class ComplexTaskManager {
+public class AddComplexTaskCommand extends AddCommand {
 
-    private final String taskDetails;
     private final TaskType taskType;
 
-    protected ComplexTaskManager(String taskDetails, TaskType taskType) {
-        this.taskDetails = taskDetails;
+    protected AddComplexTaskCommand(String taskDetails, TaskType taskType) {
+        super(taskDetails);
         this.taskType = taskType;
     }
 
@@ -22,7 +21,7 @@ public class ComplexTaskManager {
         }
     }
 
-    protected ComplexTask getTask() throws DukeException {
+    protected void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputArr = taskDetails.split(identifier(), 2);
         if (inputArr.length == 1) {
             if (taskType == TaskType.DEADLINE) {
@@ -33,15 +32,17 @@ public class ComplexTaskManager {
         }
         checkIfEmpty(inputArr);
         String date = inputArr[1].trim();
+        ComplexTask ct;
         if (isDateAndTimeFormat(date.replace(" ", "T"))) {
-            return new ComplexTask(inputArr[0], dateAndTimeToString(date), taskType);
+            ct = new ComplexTask(inputArr[0], dateAndTimeToString(date), taskType);
         } else if (isDateFormat(date)) {
-            return new ComplexTask(inputArr[0], dateToString(date), taskType);
+            ct = new ComplexTask(inputArr[0], dateToString(date), taskType);
         } else if (isTimeFormat(date)) {
-            return new ComplexTask(inputArr[0], timeToString(date), taskType);
+            ct = new ComplexTask(inputArr[0], timeToString(date), taskType);
         } else {
-            return new ComplexTask(inputArr[0], date, taskType);
+            ct = new ComplexTask(inputArr[0], date, taskType);
         }
+        addTask(ct, tasks, ui, storage);
     }
 
     private void checkIfEmpty(String[] inputArr) throws DukeException {

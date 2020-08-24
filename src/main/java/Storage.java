@@ -6,13 +6,15 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
-public class FileManager {
+public class Storage {
 
     private final String dataDir = System.getProperty("user.dir") + "/data";
     private final String filePath = dataDir + "/duke.csv";
+    private final Ui ui;
 
-    protected FileManager() {
+    protected Storage() {
         createFile();
+        this.ui = new Ui();
     }
 
     private void createFile() {
@@ -22,7 +24,7 @@ public class FileManager {
             File newFile = new File(filePath);
             newFile.createNewFile();
         } catch (IOException e) {
-            Ui.fileCreationError();
+            ui.fileCreationError();
         }
     }
 
@@ -34,7 +36,7 @@ public class FileManager {
             if (header != null) {
                 String line = br.readLine();
                 while (line != null) {
-                    Task newTask = CSVParser.parseToTask(line);
+                    Task newTask = CSVConverter.parseToTask(line, ui);
                     if (newTask != null) {
                         taskList.add(newTask);
                     }
@@ -43,23 +45,23 @@ public class FileManager {
             }
             return taskList;
         } catch (IOException e) {
-            Ui.fileReadingError();
+            ui.fileReadingError();
             return taskList;
         }
     }
 
-    protected void update(List<Task> tasks) {
+    protected void update(TaskList tasks) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
             String header = "Task type  ,Description  ,Time  ,Status\n";
             StringBuilder stringBuilder = new StringBuilder(header);
-            for (Task task : tasks) {
+            for (Task task : tasks.getTasks()) {
                 stringBuilder.append(convertToCSVFormat(task));
             }
             fileWriter.write(stringBuilder.toString());
             fileWriter.close();
         } catch (IOException e) {
-            Ui.fileUpdateError();
+            ui.fileUpdateError();
         }
     }
 

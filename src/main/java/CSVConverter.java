@@ -1,5 +1,5 @@
-public class CSVParser {
-    protected static Task parseToTask(String input) {
+public class CSVConverter {
+    protected static Task parseToTask(String input, Ui ui) {
         try {
             String[] inputArr = input.split("\\s{2},", 4);
             if (inputArr.length < 4) {
@@ -15,13 +15,13 @@ public class CSVParser {
                 return new ToDo(description, isDone);
             } else if (taskType.equals("EVENT")) {
                 return new ComplexTask(description, time, TaskType.EVENT);
-            } else if (taskType.equals("DEADLINE")) { // DEADLINE
+            } else if (taskType.equals("DEADLINE")) {
                 return new ComplexTask(description, time, TaskType.DEADLINE);
             } else {
                 throw new InvalidFileFormatException();
             }
         } catch (InvalidFileFormatException e) {
-            Ui.printBasic(e.getMessage());
+            ui.printBasic(e.getMessage());
             return null;
         }
     }

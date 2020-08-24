@@ -1,35 +1,27 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class DukeController {
 
-    private final Manager manager;
-    private final FileManager fileManager = new FileManager();
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
 
     protected DukeController() {
-        this.manager = new Manager(new ArrayList<Task>(fileManager.getTasks()), fileManager);
+        this.ui = new Ui();
+        this.storage = new Storage();
+        this.tasks = new TaskList(storage.getTasks());
     }
 
-    protected void simulate() {
-        Scanner sc = new Scanner(System.in);
-        Ui.greetings();
-        while (true) {
+    protected void run() {
+        ui.greetings();
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                String input = sc.nextLine();
-                System.out.println(input);
-                String[] arr = Parser.parse(input);
-                String keyWord = arr[0];
-                String restOfWord = arr[1];
-                if (keyWord.equals("bye")) {
-                    Ui.goodBye();
-                    break;
-                } else {
-                    manager.manageInput(keyWord, restOfWord);
-                }
+                String input = ui.readCommand();
+                Command c = Parser.parse(input);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
             } catch (DukeException e) {
-                Ui.printMsg(e.getMessage());
+                ui.printMsg(e.getMessage());
             }
         }
-        sc.close();
     }
 }
