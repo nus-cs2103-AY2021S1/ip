@@ -12,11 +12,6 @@ public class BobListIndexOutOfBoundsException extends BobException {
     private final int taskNo;
     private final String action;
 
-//    /** Divider */
-//    private static final String DIVIDER =
-//            "============================================================================================"
-//                + "==============\n";
-
     /**
      * Creates a BobListIndexOutOfBoundsException.
      * @param totalNoOfTasks Total number of task in Bob's list.

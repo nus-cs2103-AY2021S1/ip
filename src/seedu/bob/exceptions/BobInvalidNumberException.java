@@ -8,11 +8,6 @@ import seedu.bob.common.Messages;
  * @author Lim Zi Yang
  */
 public class BobInvalidNumberException extends BobException {
-    /** Error message */
-
-//    /** Divider */
-//    private static final String DIVIDER =
-//            "========================================================================================\n";
 
     /**
      * Creates a BobInvalidNumberException.

@@ -8,10 +8,6 @@ import seedu.bob.common.Messages;
  */
 public class BobEmptyTaskException extends BobException {
 
-//    /** Divider */
-//    private static final String DIVIDER =
-//            "===========================================================================================\n";
-
     /**
      * Creates a BobEmptyTaskException.
      */
