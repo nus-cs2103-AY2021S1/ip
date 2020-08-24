@@ -1,8 +1,5 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 
 public class Duke {
 
@@ -10,21 +7,16 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-//    public Duke(String filePath) {
-//        ui = new Ui();
-//        storage = new Storage(filePath);
-//        try {
-//            tasks = new TaskList(storage.load());
-//        } catch (FileNotFoundException e) {
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException e) {
 //            ui.showError(e.getMessage());
 //            ui.showLoadingError();
-//            tasks = new TaskList();
-//        }
-//    }
-
-    public Duke() {
-        ui = new Ui();
-        tasks = new TaskList();
+            tasks = new TaskList();
+        }
     }
 
     public void run() {
@@ -39,6 +31,8 @@ public class Duke {
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
+            } catch (IOException e) {
+                ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
             }
@@ -46,6 +40,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke("data/duke.txt").run();
     }
 }

@@ -105,22 +105,29 @@ public class Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTodoDescripDukeException,
-            InvalidDeadlineDescripDukeException, InvalidEventDescripDukeException,
+            InvalidDeadlineDescripDukeException, InvalidEventDescripDukeException, IOException,
             InvalidFirstDukeException {
         if (commandType.equals(CommandType.PRINTALLTASKS)) {
             printAllTask(tasks);
+        } else if (commandType.equals(CommandType.EXITDUKE)) {
+            ui.closeDuke();
         } else if (commandType.equals(CommandType.MARKASDONE)){
             int counter = Integer.parseInt(commandArr[1]);
             tasks.getTask(counter - 1).markAsDone();
+            storage.saveToFile(tasks.tasks);
         } else if (commandType.equals(CommandType.DELETETASK)){
             int counter = Integer.parseInt(commandArr[1]);
             deleteTask(counter - 1, tasks);
+            storage.saveToFile(tasks.tasks);
         } else if (commandType.equals(CommandType.ADDTODO)){
             tasks.addTask(createTodo());
+            storage.saveToFile(tasks.tasks);
         } else if (commandType.equals(CommandType.ADDDEADLINE)) {
             tasks.addTask(createDeadline());
+            storage.saveToFile(tasks.tasks);
         } else if (commandType.equals(CommandType.ADDEVENT)) {
             tasks.addTask(createEvent());
+            storage.saveToFile(tasks.tasks);
         } else {}
     }
 
