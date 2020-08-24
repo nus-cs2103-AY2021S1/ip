@@ -16,9 +16,7 @@ public class Duke {
 
     private List<Task> tasks = new ArrayList<>();
 
-    void greet() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-    }
+    private Ui ui = new Ui();
 
     String convertTaskToText (Task task) {
         if (task instanceof TodoTask) {
@@ -86,13 +84,6 @@ public class Duke {
 
     }
 
-    void listTasks() {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 1; i <= tasks.size(); i ++) {
-            System.out.println(i + ". " + tasks.get(i - 1));
-        }
-    }
-
     void completeTask(int index) {
         try {
             Task completedTask = tasks.get(index - 1);
@@ -117,10 +108,6 @@ public class Duke {
         } catch (IOException exception) {
             System.out.println(exception);
         }
-    }
-
-    void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
     }
 
     void loadFile() {
@@ -184,7 +171,7 @@ public class Duke {
 
 
     void initializeChatbot() {
-        greet();
+        ui.greet();
         loadFile();
         Scanner sc = new Scanner(System.in);
         boolean hasEnded = false;
@@ -200,12 +187,12 @@ public class Duke {
 
                 switch(command) {
                     case BYE: {
-                        exit();
+                        ui.exit();
                         hasEnded = true;
                         break;
                     }
                     case LIST: {
-                        listTasks();
+                        ui.listTasks(tasks);
                         break;
                     }
                     case TODO: {
