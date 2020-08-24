@@ -1,10 +1,10 @@
 abstract public class Task {
     private String description;
-    private boolean done;
+    private boolean isDone;
 
     public Task(String d) {
         this.description = d;
-        this.done = false;
+        this.isDone = false;
     }
 
     public String getDescription() {
@@ -12,17 +12,17 @@ abstract public class Task {
     }
 
     public boolean getDone() {
-        return this.done;
+        return this.isDone;
     }
 
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public String getStatus() {
-        String check = this.done ? "\u2713" : "\u2718";
+        String check = this.isDone ? "\u2713" : "\u2718";
         String status = "[" + check + "] " + this.getDescription();
-        return this.done ?
+        return this.isDone ?
                 Colour.Green(status)
                 :
                 Colour.Red(status);

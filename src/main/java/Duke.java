@@ -51,18 +51,18 @@ public class Duke {
             Option option = Option.from(inputSplit[0]);
             try {
                 switch (option) {
-                    case BYE:
+                case BYE:
                         responses.add("Bye. Hope to see you again soon!");
                         run = false;
                         break;
-                    case LIST:
+                case LIST:
                         responses.add("Here are the tasks in your list");
                         for (int i = 0; i < Duke.tasks.size(); i++) {
                             String item = "" + (i + 1) + ". " + Duke.tasks.get(i).getStatus();
                             responses.add(item);
                         }
                         break;
-                    case DONE:
+                case DONE:
                         if (inputSplit.length != 2) {
                             throw new DukeException("Please provide a task number!");
                         }
@@ -84,7 +84,7 @@ public class Duke {
                         }
 
                         break;
-                    case DELETE:
+                case DELETE:
                         if (inputSplit.length != 2) {
                             throw new DukeException("Please provide a task number!");
                         }
@@ -108,9 +108,9 @@ public class Duke {
                         }
 
                         break;
-                    case TODO:
-                    case DEADLINE:
-                    case EVENT:
+                case TODO:
+                case DEADLINE:
+                case EVENT:
                         Task newTask;
 
                         String description = String.join(" ", Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
@@ -142,8 +142,8 @@ public class Duke {
                         responses.add("  " + newTask.getStatus());
                         responses.add(Duke.getNumberOfTasks());
                         break;
-                    case UNRECOGNIZED:
-                    default:
+                case UNRECOGNIZED:
+                default:
                         throw new DukeException("Instruction not recognized");
 
                 }
