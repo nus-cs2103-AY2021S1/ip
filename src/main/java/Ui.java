@@ -16,13 +16,8 @@ public class Ui {
         return output;
     }
 
-    public void showLoadingError() {
-        System.out.println("☹ AIYO!!! I cannot load the file sia...");
-    }
-
-    public void initialise(TaskList list, Storage storage) throws Exception {
+    public void showWelcome() {
         String hor_line = "____________________________________\n";
-        List<Task> todo_list = list.getList();
         String logo = " _ .-') _               .-. .-')     ('-.  \n"
                 + "( (  OO) )              \\  ( OO )  _(  OO)  \n"
                 + " \\     .'_  ,--. ,--.   ,--. ,--. (,------. \n"
@@ -35,6 +30,16 @@ public class Ui {
 
         System.out.println("Hello from\n" + logo);
         System.out.println(hor_line + "Hello! I'm Duke la\n" + "What can I do for you ah?\n" + hor_line);
+    }
+
+    public void showLoadingError() {
+        System.out.println("☹ AIYO!!! I cannot load the file sia...");
+    }
+
+    public void initialise(TaskList list, Storage storage) throws Exception {
+        String hor_line = "____________________________________\n";
+        List<Task> todo_list = list.getList();
+        showWelcome();
         int counter = todo_list.size();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
