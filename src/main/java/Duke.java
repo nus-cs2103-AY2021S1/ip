@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -104,8 +105,56 @@ public class Duke {
         }
     }
 
+    private static void saveFile(File f, ArrayList<Task> ls) throws IOException {
+        ArrayList<String> arrayList = new ArrayList<>();
+        String link = " >> ";
+        FileWriter fw = new FileWriter(f.getAbsolutePath());
+
+        if (ls.size() == 0) {
+            fw.write("");
+        } else {
+            for (Task task : ls) {
+                if (task instanceof Todo) {
+                    String str;
+                    if (!task.isDone) {
+                        str = "T" + link + "0" + link + task.getDescription();
+                    } else {
+                        str = "T" + link + "1" + link + task.getDescription();
+                    }
+                    arrayList.add(str);
+
+                } else if (task instanceof Event) {
+                    String str;
+                    if (!task.isDone) {
+                        str = "E" + link + "0" + link + task.getDescription() + link + ((Event) task).getAt();
+                    } else {
+                        str = "E" + link + "1" + link + task.getDescription() + link + ((Event) task).getAt();
+                    }
+                    arrayList.add(str);
+
+                } else if (task instanceof Deadline) {
+                    String str;
+                    if (!task.isDone) {
+                        str = "D" + link + "0" + link + task.getDescription() + link + ((Deadline) task).getBy();
+                    } else {
+                        str = "D" + link + "1" + link + task.getDescription() + link + ((Deadline) task).getBy();
+                    }
+                    arrayList.add(str);
+                } else {
+                    System.out.println("One of your task is neither a Todo, Event or Deadline");
+                }
+            }
+
+            for (String str : arrayList) {
+                fw.write(str + System.lineSeparator());
+            }
+        }
+
+        fw.close();
+    }
+
     public static void main(String[] args) throws IOException {
-        ArrayList<Task> ls = new ArrayList<>();
+        ArrayList<Task> ls;
         String horizontalDiv = "____________________________________________________________";
 
         String filePath = new File("").getAbsolutePath();
@@ -116,6 +165,7 @@ public class Duke {
             f.createNewFile();
         }
 
+        // retrieve any existing to-do list file
         ls = loadFile(f);
 
         // Using Scanner for Getting Input from User
@@ -138,6 +188,10 @@ public class Duke {
                 System.out.println(horizontalDiv);
                 System.out.println("Bye! Hope to see you again soon!");
                 System.out.println(horizontalDiv);
+
+                // rewrite the file to update latest changes
+                saveFile(f, ls);
+
                 break WhileLoop;
 
             case LIST:
