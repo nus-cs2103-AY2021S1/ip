@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private final String lineSeparator = "***********************";
+    private final String LINE_SEPARATOR = "***********************";
     private Scanner scanner;
 
     public Ui() {
@@ -12,9 +12,9 @@ public class Ui {
     }
 
     public void printMessage(String msg) {
-        System.out.println(lineSeparator);
+        System.out.println(LINE_SEPARATOR);
         System.out.println(msg);
-        System.out.println(lineSeparator);
+        System.out.println(LINE_SEPARATOR);
     }
 
     public void greet() {
