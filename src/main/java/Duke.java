@@ -2,8 +2,13 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
 
 public class Duke {
+    File dataFile;
+    List<Task> listOfTasks;
 
     public static void main(String[] args) {
         String name = "Omega";
@@ -11,12 +16,70 @@ public class Duke {
         System.out.println("Hi! I am " + name + ", your personal assistant.");
         System.out.println("How may I help you today?");
         Duke.printHorizontalLine();
-        Duke.interactWithUser();
+        new Duke().interactWithUser();
     }
 
-    private static void interactWithUser() {
+    private ArrayList<Task> loadTaskList() throws IOException {
+        this.dataFile = new File("data/duke.txt");
+        if (dataFile.exists()) {
+            ArrayList<Task> taskList = new ArrayList<>();
+            Scanner scn = new Scanner(dataFile);
+            while (scn.hasNextLine()) {
+                String[] data = scn.nextLine().split("/");
+                switch (data[0]) {
+                    case "T":
+                        taskList.add(new Todo(data[2], data[1].equals("1")));
+                        break;
+                    case "E":
+                        taskList.add(new Event(data[2], data[1].equals("1"), data[3]));
+                        break;
+                    case "D":
+                        taskList.add(new Deadline(data[2], data[1].equals("1"), data[3]));
+                        break;
+                }
+            }
+            scn.close();
+            return taskList;
+        } else {
+            dataFile.getParentFile().mkdirs();
+            dataFile.createNewFile();
+            return new ArrayList<>();
+        }
+    }
+
+    private void saveTaskList() throws DukeException {
+        FileWriter fileWriter;
+        try {
+            fileWriter = new FileWriter(this.dataFile);
+            for (Task task : this.listOfTasks) {
+                if (task instanceof Todo) {
+                    fileWriter.write(String.format("%s/%s/%s",
+                            "T", task.getIsDone() ? "1" : "0", task.getDescription()));
+                } else if (task instanceof Event) {
+                    fileWriter.write(String.format("%s/%s/%s/%s",
+                            "E", task.getIsDone() ? "1" : "0", task.getDescription(), ((Event) task).getAt()));
+                } else if (task instanceof Deadline) {
+                    fileWriter.write(String.format("%s/%s/%s/%s",
+                            "D", task.getIsDone() ? "1" : "0", task.getDescription(), ((Deadline) task).getBy()));
+                } else {
+                    throw new DukeException("Sorry, there is an error saving the task list here.");
+                }
+                fileWriter.write(System.lineSeparator());
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new DukeException("Sorry, there is an error saving the task list here.");
+        }
+    }
+
+    private void interactWithUser() {
         boolean exitProgram = false;
-        List<Task> listOfTasks = new ArrayList<>();
+        try {
+             listOfTasks = this.loadTaskList();
+        } catch (IOException e) {
+            System.out.println("Sorry this is an error loading the data");
+            return;
+        }
         Scanner scn = new Scanner(System.in);
         while (!exitProgram) {
             System.out.println();
@@ -36,21 +99,24 @@ public class Duke {
                         for (int i = 0; i < n; i++) {
                             System.out.println(String.format("%d.%s", i + 1, listOfTasks.get(i)));
                         }
-                    } else if (userInputArgs[0].equals(Command.DONE.getName())) {
-                        Task task = markTaskDone(listOfTasks, userInputArgs);
-                        System.out.println("Nice! I've marked this task as done:");
-                        Duke.printWithIndent(task.toString());
-                    } else if (userInputArgs[0].equals(Command.DELETE.getName())) {
-                        Task task = deleteTask(listOfTasks, userInputArgs);
-                        System.out.println("Noted. I've removed this task:");
-                        Duke.printWithIndent(task.toString());
-                        System.out.println(String.format("Now you have %d tasks in the list.", listOfTasks.size()));
                     } else {
-                        Task task = createTask(userInputArgs);
-                        listOfTasks.add(task);
-                        System.out.println("Got it. I've added this task:");
-                        Duke.printWithIndent(task.toString());
-                        System.out.println(String.format("Now you have %d tasks in the list.", listOfTasks.size()));
+                        if (userInputArgs[0].equals(Command.DONE.getName())) {
+                            Task task = markTaskDone(listOfTasks, userInputArgs);
+                            System.out.println("Nice! I've marked this task as done:");
+                            Duke.printWithIndent(task.toString());
+                        } else if (userInputArgs[0].equals(Command.DELETE.getName())) {
+                            Task task = deleteTask(listOfTasks, userInputArgs);
+                            System.out.println("Noted. I've removed this task:");
+                            Duke.printWithIndent(task.toString());
+                            System.out.println(String.format("Now you have %d tasks in the list.", listOfTasks.size()));
+                        } else {
+                            Task task = createTask(userInputArgs);
+                            listOfTasks.add(task);
+                            System.out.println("Got it. I've added this task:");
+                            Duke.printWithIndent(task.toString());
+                            System.out.println(String.format("Now you have %d tasks in the list.", listOfTasks.size()));
+                        }
+                        saveTaskList();
                     }
                 } catch (DukeException err) {
                     System.out.println(err.getMessage());
