@@ -1,6 +1,7 @@
-//  ToDos: tasks without any date/time attached to it
-//  e.g., visit new theme park
+package task;
 
+//  ToDos: data.tasks without any date/time attached to it
+//  e.g., visit new theme park
 public class Todo extends Task {
 
     public Todo(String description) {
@@ -13,7 +14,7 @@ public class Todo extends Task {
 
     @Override
     public String fileFormat() {
-        return String.format("%1$s|%2$s|%3$s", "T", this.isDone ? "0" : "1", this.description);
+        return String.format("%1$s/%2$s/%3$s", "T", super.isDone ? "0" : "1", super.description);
     }
 
     @Override

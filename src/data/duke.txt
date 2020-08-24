@@ -1,6 +1,0 @@
-T|1|read book
-D|0|return book|Tue, 25 Aug 2020 10:00 AM
-E|1|project meeting|Sun, 18 Oct 2020 02:30 PM
-T|1|join sports club
-T|0|walk dog
-D|1|submit assignment|Mon, 07 Sep 2020 11:59 PM

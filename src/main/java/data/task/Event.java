@@ -1,8 +1,9 @@
-//  Events: tasks that start at a specific time and ends at a specific time
-//  e.g., team project meeting on 2/10/2019 2-4pm
+package task;
 
 import java.time.LocalDateTime;
 
+//  Events: data.tasks that start at a specific time and ends at a specific time
+//  e.g., team project meeting on 2/10/2019 2-4pm
 public class Event extends Task {
 
     protected LocalDateTime dateTime;
@@ -22,7 +23,7 @@ public class Event extends Task {
 
     @Override
     public String fileFormat() {
-        return String.format("%1$s|%2$s|%3$s|%4$s", "E", this.isDone ? "0" : "1", this.description, this.dateTimeStr);
+        return String.format("%1$s/%2$s/%3$s/%4$s", "E", super.isDone ? "0" : "1", super.description, this.dateTimeStr);
     }
 
     @Override
