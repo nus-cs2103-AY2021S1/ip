@@ -31,7 +31,9 @@ public abstract class Task {
     }
 
     public abstract String getType();
-    public abstract String getCommand();
+    public String getCommand(){
+        return getStatusIcon() + "~";
+    }
 
     public void markDone() {
 

@@ -57,7 +57,7 @@ public class Deadline extends Task {
 
     @Override
     public String getCommand() {
-        return String.format("%s /by %s", getMessage(), getDate());
+        return super.getCommand() + String.format("%s /by %s", getMessage(), getDate());
     }
 
     public static Task parseCommand(final String args) {

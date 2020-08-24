@@ -57,7 +57,7 @@ public class Event extends Task {
 
     @Override
     public String getCommand() {
-        return String.format("%s /at %s", getMessage(), getDate());
+        return super.getCommand() + String.format("%s /at %s", getMessage(), getDate());
     }
 
     public static Task parseCommand(final String args) {

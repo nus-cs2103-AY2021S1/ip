@@ -21,7 +21,7 @@ public class Todo extends Task {
 
     @Override
     public String getCommand() {
-        return String.format("%s", getMessage());
+        return super.getCommand() + String.format("%s", getMessage());
     }
 
     @Override

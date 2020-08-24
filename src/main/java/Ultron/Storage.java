@@ -66,7 +66,12 @@ public class Storage {
         }
 
         //Return the task based on the data
-        return taskCommand.commandParser.apply(data[1]);
+        Task task = taskCommand.commandParser.apply(data[2]);
+        if (data[1].equals("\u2713"))
+            task.markDone();
+
+
+        return task;
 
     }
 
