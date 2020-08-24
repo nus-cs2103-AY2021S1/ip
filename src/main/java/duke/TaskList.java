@@ -9,7 +9,8 @@ public class TaskList {
 
     private static final int TASK_LIMIT = 100;
 
-    private final List<Task> taskList = new ArrayList<>(TASK_LIMIT);
+    private final List<Task> taskList
+            = new ArrayList<>(TASK_LIMIT);
 
     public void addTask(Task task) {
         taskList.add(task);

@@ -12,7 +12,7 @@ public class ListCommand extends Command {
     public void execute(Storage storage, TaskList tasks, Ui ui) {
         ui.printList(tasks);
         for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.println(i + 1 + "." + tasks.getTask(i));
+            System.out.println(i + TASK_INDEX + "." + tasks.getTask(i));
         }
     }
 
