@@ -65,7 +65,7 @@ public class Storage {
 
     public void saveFile(TaskList list) {
         try {
-            File file = Paths.get(".//data//duke.data").toFile();
+            File file = path.toFile();
             //@@author ktaekwon000-reused
             //Reused from https://stackoverflow.com/a/16111797 with minor modifications
             FileOutputStream fos = new FileOutputStream(file);
