@@ -21,6 +21,11 @@ public class Event extends Task {
         timing = taskDescription.split(SPLITTER)[1];
     }
 
+    /**
+     * Creates a new Event object by manually setting the description and timing
+     * @param eventDescription description of the event task only
+     * @param timing string description of the timing of the event
+     */
     private Event(String eventDescription, String timing) {
         super(eventDescription);
         this.timing = timing;

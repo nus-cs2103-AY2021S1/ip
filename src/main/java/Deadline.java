@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * Encapsulates Tasks with deadlines.
  * Object carries information of the task to be completed and the deadline.
@@ -24,9 +26,8 @@ public class Deadline extends Task {
 
     /**
      * Creates a new Deadline object by manually inputting t
-     * 1
-     * @param deadlineDescription
-     * @param deadline
+     * @param deadlineDescription description of the task only
+     * @param deadline string description of the deadline
      */
     private Deadline(String deadlineDescription, String deadline) {
         super(deadlineDescription);
