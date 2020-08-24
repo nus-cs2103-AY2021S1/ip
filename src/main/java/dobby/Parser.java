@@ -1,5 +1,8 @@
+package main.java.dobby;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import main.java.dobby.task.*;
 
 public class Parser {
     private TaskList tasks;
@@ -59,7 +62,7 @@ public class Parser {
                     throw new DobbyException("\n    Incorrect usage of command. Description cannot be empty. Please try again."
                             + (Commands.DEADLINE).getUsage()  + "\n    ");
                 } else { // no deadline details specified
-                    throw new DobbyException("\n    Incorrect usage of command. Deadline details cannot be empty. Please try again."
+                    throw new DobbyException("\n    Incorrect usage of command. main.java.dobby.task.Deadline details cannot be empty. Please try again."
                             + (Commands.DEADLINE).getUsage()  + "\n    ");
                 }
             } catch (DateTimeParseException e) {
@@ -109,7 +112,7 @@ public class Parser {
                 text = text.substring(4).trim();
                 int index = Integer.parseInt(text);
                 if ((this.tasks).getSize() < index) { // if index is out of range throw exception
-                    throw new DobbyException("\n    Incorrect usage of command. Task number must be within the correct range."
+                    throw new DobbyException("\n    Incorrect usage of command. main.java.dobby.task.Task number must be within the correct range."
                             + (Commands.DONE).getUsage() + "\n    ");
                 }
                 Task task = (this.tasks).getTask(index - 1);
@@ -126,7 +129,7 @@ public class Parser {
                 text = text.substring(6).trim();
                 int index = Integer.parseInt(text);
                 if ((this.tasks).getSize() < index) { // if index is out of range throw exception
-                    throw new DobbyException("\n    Incorrect usage of command. Task number must be within the correct range."
+                    throw new DobbyException("\n    Incorrect usage of command. main.java.dobby.task.Task number must be within the correct range."
                             + (Commands.DELETE).getUsage() + "\n    ");
                 }
                 Task task = tasks.getTask(index - 1);

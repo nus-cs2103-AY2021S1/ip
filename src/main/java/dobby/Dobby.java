@@ -1,3 +1,5 @@
+package main.java.dobby;
+
 import java.util.Scanner;
 
 public class Dobby {

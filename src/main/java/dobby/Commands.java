@@ -1,3 +1,5 @@
+package main.java.dobby;
+
 public enum Commands {
     TODO("\n      todo _description_"),
     DEADLINE("\n      deadline _description_ /by dd/mm/yyyy hhhh(optional)"),

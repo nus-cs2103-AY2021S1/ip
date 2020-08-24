@@ -1,3 +1,5 @@
+package main.java.dobby.task;
+
 public class Task {
     private final String description;
     private boolean isDone;
