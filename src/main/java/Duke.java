@@ -3,8 +3,18 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
+import java.io.IOException;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class Duke {
+    final static String DATA_DIRECTORY = "./data";
+    final static String TASKS_DIRECTORY = "./data/tasks.txt";
+    final static String lineBreak = "=========================================================================";
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -14,11 +24,11 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\n" +
                 "What can I do for you today? (type: \"help\" to view list of commands)\n" +
-                "=========================================================================");
+                lineBreak);
 
         Scanner scanner = new Scanner(System.in);
-        List<Task> pastInputs = new ArrayList<>();
-
+        //obtains cached task history
+        List<Task> pastInputs = loadData();
         boolean terminated = false;
 
         while (!terminated && scanner.hasNext()) {
@@ -60,9 +70,6 @@ public class Duke {
                             pastInputs.set(taskNumber - 1, doneTask);
                             System.out.println("Duke says: Good Job! I've marked this task as done:");
                             System.out.println(doneTask);
-                        } catch (NumberFormatException ex) {
-                            pastInputs.add(new Task(userInput));
-                            System.out.println("Duke added into your task list: " + userInput);
                         } catch (Exception ex) {
                             System.out.println("Duke says: Please try again with a valid task number");
                         }
@@ -71,8 +78,10 @@ public class Duke {
                         System.out.println("Duke added into your task list:\n" + userInput);
                         System.out.println("You now have " + pastInputs.size() + " task(s) in your list");
                     }
+                    updateTaskFile(pastInputs);
                 } else if (keyWord.equals("delete")) {
                     pastInputs = deleteTask(pastInputs, splitInput);
+                    updateTaskFile(pastInputs);
                 } else {
                     String[] data = processInput(splitInput);
                     if (keyWord.equals("todo")) {
@@ -83,23 +92,24 @@ public class Duke {
                         Deadline deadline = new Deadline(data[0], data[1]);
                         pastInputs.add(deadline);
                         System.out.println("Duke added into your task list:\n" + deadline);
-                    } else if (keyWord.equals("event")){
+                    } else if (keyWord.equals("event")) {
                         Event event = new Event(data[0], data[1]);
                         pastInputs.add(event);
                         System.out.println("Duke added into your task list:\n" + event);
                     }
+                    updateTaskFile(pastInputs);
                     System.out.println("You now have " + pastInputs.size() + " task(s) in your list");
                 }
-                System.out.println("=========================================================================");
+                System.out.println(lineBreak);
             } catch (InvalidKeyWordException ex) {
                 System.out.println(ex.getMessage());
-                System.out.println("=========================================================================");
+                System.out.println(lineBreak);
             } catch (EmptyTaskException ex) {
                 System.out.println(ex.getMessage());
-                System.out.println("=========================================================================");
+                System.out.println(lineBreak);
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
-                System.out.println("=========================================================================");
+                System.out.println(lineBreak);
             }
         }
     }
@@ -115,7 +125,7 @@ public class Duke {
         reservedKeyWords.add("event");
         reservedKeyWords.add("todo");
         reservedKeyWords.add("bye");
-        
+
         if (!reservedKeyWords.contains(word)) {
             throw new InvalidKeyWordException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -152,7 +162,7 @@ public class Duke {
                 }
             }
             //index 0 is description, index 1 is date/time
-            return new String[] {des, dateAndOrTime};
+            return new String[]{des, dateAndOrTime};
 
         } else if (array[0].equals("deadline")) {
             String des = "";
@@ -172,7 +182,7 @@ public class Duke {
                 }
             }
             //index 0 is description, index 1 is date/time
-            return new String[] {des, dateAndOrTime};
+            return new String[]{des, dateAndOrTime};
         } else if (array[0].equals("todo")) {
             String des = "";
             for (int i = 1; i < array.length; i++) {
@@ -182,9 +192,9 @@ public class Duke {
                 }
             }
             //index 0 is description
-            return new String[] {des};
+            return new String[]{des};
         }
-        return new String[] {};
+        return new String[]{};
     }
 
     public static List<Task> deleteTask(List<Task> current, String[] input) throws DeleteFailureException {
@@ -202,6 +212,130 @@ public class Duke {
             }
         } catch (IndexOutOfBoundsException e) {
             throw new DeleteFailureException("Duke says: Please try again with a valid number.");
+        }
+    }
+
+    //handles loading of data
+    public static List<Task> loadData() {
+        try {
+            File dataDir = new File(DATA_DIRECTORY);
+            File tasks = new File(TASKS_DIRECTORY);
+
+            if (dataDir.exists()) {
+                //directory exists, now check if tasks.txt exists
+                boolean isCreated = tasks.createNewFile();
+                if (isCreated) {
+                    //tasks.txt does not exist
+                    return new ArrayList<>();
+                } else {
+                    //tasks.txt exists
+                    List<Task> current = new ArrayList<>();
+                    BufferedReader br = new BufferedReader(new FileReader(TASKS_DIRECTORY));
+                    String line = br.readLine();
+
+                    while (line != null) {
+                        //parses the string to become a task
+                        current.add(taskParser(line));
+                        line = br.readLine();
+                    }
+                    br.close();
+                    return current;
+                }
+            } else {
+                //if directory does not exist, make directory and tasks txt file
+                if (dataDir.mkdir()) {
+                    //data folder directory successful, make tasks.txt file now
+                    tasks.createNewFile();
+                    return new ArrayList<>();
+                } else {
+                    //fail to make data folder directory
+                    System.out.println("Error: Directory failed to be created");
+                }
+            }
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return new ArrayList<>();
+    }
+
+    //parses and reads the given string and returns a task
+    public static Task taskParser(String string) {
+        //<type>!@%<status>!@%<description>!@%<date/time(if applicable)>
+        String[] data = string.split("!@%");
+        String type = data[0];
+        String status = data[1];
+        String description = data[2];
+        String dateOrTime = data.length > 3 ? data[3] : "";
+
+        //returns a task based on type, marks a task as done if status is 1
+        if (type.equals("T")) {
+            ToDo todo = new ToDo(description);
+            if (status.equals("1")) {
+                todo.markDone();
+            }
+            return todo;
+        } else if (type.equals("D")) {
+            Deadline deadline = new Deadline(description, dateOrTime);
+            if (status.equals("1")) {
+                deadline.markDone();
+            }
+            return deadline;
+        } else {
+            Event event = new Event(description, dateOrTime);
+            if (status.equals("1")) {
+                event.markDone();
+            }
+            return event;
+        }
+    }
+
+    //creates a new task.txt file with updated tasks that overwrites the existing one
+    public static void updateTaskFile(List<Task> taskList) {
+        try {
+            //create temp text file
+            String tempDir = "./data/temp.txt";
+            File temp = new File(tempDir);
+            
+            File oldFile = new File(TASKS_DIRECTORY);
+            if (temp.createNewFile()) {
+                BufferedWriter output = new BufferedWriter(new FileWriter(temp, true));
+                String toAppend;
+                for (int i = 0; i < taskList.size(); i++) {
+                    Task curr = taskList.get(i);
+                    //adds the updated task list to temp file by converting it to the
+                    //form: <type>!@%<status>!@%<description>!@%<date/time(if applicable)>
+                    //so that our parser can read
+                    if (curr instanceof ToDo) {
+                        ToDo todo = (ToDo) curr;
+                        toAppend = "T!@%" + (todo.isDone ? "1!@%" :"0!@%") + todo.description + "!@%";
+                    } else if (curr instanceof Deadline) {
+                        Deadline deadline = (Deadline) curr;
+                        toAppend = "D!@%" + (deadline.isDone ? "1!@%" :"0!@%") + deadline.description + "!@%"
+                                + deadline.dateAndOrTime;
+                    } else {
+                        Event event = (Event) curr;
+                        toAppend = "E!@%" + (event.isDone ? "1!@%" :"0!@%") + event.description + "!@%"
+                                    + event.dateAndOrTime;
+                    }
+                    output.write(toAppend);
+                    output.newLine();
+                }
+                output.close();
+
+                //checks if old file is deleted and new file is renamed
+                if(oldFile.delete()) {
+                    if(!temp.renameTo(oldFile)) {
+                        System.out.println("Error in renaming new file.");
+                    }
+                } else {
+                    System.out.println("Error in deleting old file");
+                }
+            } else {
+                System.out.println("Error: temp file not created");
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
