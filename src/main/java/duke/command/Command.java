@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.exception.*;
-import duke.storage.*;
-import duke.tasklist.*;
-import duke.ui.*;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a general action to be completed.

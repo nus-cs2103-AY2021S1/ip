@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.storage.*;
-import duke.tasklist.*;
-import duke.ui.*;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents an action to delete a Task from TaskList.
@@ -33,11 +33,11 @@ public class DeleteCommand extends Command{
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         int noOfTask = tasks.getNumberOfTask() - 1;
-        ui.printMessage("Noted. I've removed this task:\n\t   " +
-                tasks.getTask(taskNumber) + "\n\t " +
-                "Now you have " +
-                getTaskDescription(noOfTask) +
-                " in the list.");
+        ui.printMessage("Noted. I've removed this task:\n\t   "
+                + tasks.getTask(taskNumber) + "\n\t "
+                + "Now you have "
+                + getTaskDescription(noOfTask)
+                + " in the list.");
         tasks.removeTask(taskNumber);
         storage.save(tasks);
     }

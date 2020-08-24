@@ -1,10 +1,12 @@
 package duke.command;
 
-import duke.exception.*;
-import duke.storage.*;
-import duke.task.*;
-import duke.tasklist.*;
-import duke.ui.*;
+import duke.exception.DukeException;
+import duke.exception.InvalidTaskDateTimeException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 import java.time.format.DateTimeParseException;
 
@@ -46,11 +48,11 @@ public class AddDeadlineCommand extends Command{
             Task task = new Deadline(description, by);
             tasks.addTask(task);
             storage.save(tasks);
-            ui.printMessage("Got it. I've added this deadline: \n\t   " +
-                    task + "\n\t " +
-                    "Now you have " +
-                    getTaskDescription(tasks.getNumberOfTask()) +
-                    " in the list.");
+            ui.printMessage("Got it. I've added this deadline: \n\t   "
+                    + task + "\n\t "
+                    + "Now you have "
+                    + getTaskDescription(tasks.getNumberOfTask())
+                    + " in the list.");
         } catch (DateTimeParseException e) {
             throw new InvalidTaskDateTimeException();
         }

@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.storage.*;
-import duke.tasklist.*;
-import duke.ui.*;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents an action to say bye to the user before exiting the programme.

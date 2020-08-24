@@ -1,11 +1,12 @@
 package duke;
 
-import duke.command.*;
-import duke.exception.*;
-import duke.parser.*;
-import duke.storage.*;
-import duke.tasklist.*;
-import duke.ui.*;
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 
 /**
  * The Duke programme implements an application that allow users

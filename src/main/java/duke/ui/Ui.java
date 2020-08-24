@@ -18,7 +18,8 @@ public class Ui {
     /**
      * Constructs an <code>Ui</code> object.
      */
-    public Ui() {}
+    public Ui() {
+    }
 
     /**
      * Sends a greeting to users.

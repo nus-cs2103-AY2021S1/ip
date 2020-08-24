@@ -53,7 +53,8 @@ public class Deadline extends Task{
      */
     @Override
     public String toFileString() {
-        return "D | " + super.toFileString() + " | " + by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        return "D | " + super.toFileString() + " | "
+                + by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
     /**

@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.storage.*;
-import duke.tasklist.*;
-import duke.ui.*;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents an action to mark a Task from TaskList as done.
@@ -34,8 +34,8 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.doTask(taskNumber);
         storage.save(tasks);
-        ui.printMessage("Nice! I've marked this task as done:\n\t   " +
-                tasks.getTask(taskNumber));
+        ui.printMessage("Nice! I've marked this task as done:\n\t   "
+                + tasks.getTask(taskNumber));
     }
 
 }

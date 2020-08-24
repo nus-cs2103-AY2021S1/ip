@@ -1,10 +1,13 @@
 package duke.command;
 
-import duke.exception.*;
-import duke.storage.*;
-import duke.task.*;
-import duke.tasklist.*;
-import duke.ui.*;
+import duke.exception.DukeException;
+import duke.exception.InvalidTaskDateException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -67,7 +70,8 @@ public class RetrieveCommand extends Command {
             if (hasTasks) {
                 ui.printMessage(sb.delete(sb.length() - 3, sb.length() - 1).toString());
             } else {
-                    ui.printMessage(String.format("You do not have any deadlines or events happening on %s! :)",
+                    ui.printMessage(String.format(
+                            "You do not have any deadlines or events happening on %s! :)",
                                     date.format(DateTimeFormatter.ofPattern("dd MMMM yyyy"))));
             }
         } catch (DateTimeParseException e) {
