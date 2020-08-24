@@ -1,105 +1,75 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ChatBot {
 
-    private static ArrayList<Task> taskList = new ArrayList<>();
+    static boolean ended = false;
 
     public static void start(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Hello I'm Duke!\nWhat can I do for you?");
-        boolean ended = false;
-        while(!ended){
-            String query = scanner.nextLine();
-            String resp = ChatBot.response(query);
-            ended = ChatBot.isEnd(query);
-            if(!ended){
-                System.out.println(resp);
+        try {
+            DataStorageInterface.initStorage();
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Hello I'm Duke!\nWhat can I do for you?");
+            while (!ChatBot.ended) {
+                try {
+                    String query = scanner.nextLine();
+                    String resp = ChatBot.response(query);
+                    System.out.println(resp);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
+        } catch(DukeException e){
+            System.out.println("ChatBot initialisation failed.");
         }
-        System.out.println("Bye. Hope to see you again soon!");
     }
 
-    private static String response(String query){
+    private static String response(String query) throws Exception{
         String[] splitQuery = query.split("\\s+");
         String command = splitQuery[0].toLowerCase();
         String[] cRemoved = removeCommandString(splitQuery);
         switch (command){
+            case "bye":
+                Bye bye = new Bye();
+                bye.endBot();
+                return bye.response();
+            case "help":
+                Help help = new Help(splitQuery);
+                return help.response();
             case "done":
-                if(splitQuery.length != 2){
-                    return "Error: Usage of command 'done' should be done as follows: 'done <task number>'";
-                }
-                return markedAsDone(splitQuery[1]);
+                Done done = new Done(cRemoved);
+                return done.markedAsDone(splitQuery[1]);
             case "clear":
-                return "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+                Clear clear = new Clear();
+                return clear.response();
             case "list":
-                return listOfTasks();
+                Ls ls = new Ls();
+                return ls.response();
             case "todo":
                 String editedQ = concatenateStrArr(cRemoved);
-                Task toDo = ChatBot.addToDo(editedQ);
-                return taskAdded(toDo);
+                Task toDo = DataStorageInterface.addToDo(editedQ);
+                return DataStorageInterface.taskAdded(toDo);
             case "deadline":
                 String title = getTitle(cRemoved);
                 String preposition = getPreposition(cRemoved);
                 String dateTime = getDateTime(cRemoved);
-                Task deadline = ChatBot.addDeadline(title,preposition,dateTime);
-                return taskAdded(deadline);
+                Task deadline = DataStorageInterface.addDeadline(title,preposition,dateTime);
+                return DataStorageInterface.taskAdded(deadline);
             case "event":
                 String ttle = getTitle(cRemoved);
                 String ppstn = getPreposition(cRemoved);
                 String dT = getDateTime(cRemoved);
-                Task event = ChatBot.addEvent(ttle,ppstn,dT);
-                return taskAdded(event);
+                Task event = DataStorageInterface.addEvent(ttle,ppstn,dT);
+                return DataStorageInterface.taskAdded(event);
             default:
-                return "Error: Unknown command. Type 'help' to get the list of commands";
+                throw new UnknownCommandException(command);
         }
     }
 
-    private static String listOfTasks(){
-        StringBuilder acc = new StringBuilder();
-        int i = 0;
-        for (Task t: taskList){
-            i++;
-            acc.append(String.format("%d. %s\n", i, t));
-        }
-        return acc.toString();
-    }
-
-    private static Task addToDo(String query){
-        Task newTask = new ToDo(query);
-        taskList.add(newTask);
-        return newTask;
-    }
-
-    private static Task addDeadline(String title, String preposition, String dateTime){
-        Task newTask = new Deadline(title,preposition,dateTime);
-        taskList.add(newTask);
-        return newTask;
-    }
-
-    private static Task addEvent(String title, String preposition, String dateTime){
-        Task newTask = new Event(title,preposition,dateTime);
-        taskList.add(newTask);
-        return newTask;
-    }
-
-    private static String markedAsDone(String listIndex){
-        int idx = Integer.parseInt(listIndex) - 1;
-        if (idx<0||idx>taskList.size()){
-            return "Error: Please enter a number that is in range of the task numbers";
-        } else{
-            Task curr = taskList.get(idx);
-            if(curr.isDone()){
-                return "Error: This task has already been marked as done";
-            }
-            curr.markDone();
-            return String.format("Nice I have marked this task as done:\n\t%s\nNow you have %d tasks left",curr,taskList.size());
-        }
-    }
-
-    private static String taskAdded(Task task){
-        return "Got it. I've added this task:\n\t" + task.toString() + String.format("\nNow you have %d tasks in the list",taskList.size());
-    }
+    /***
+     * All methods below are to do with string preprocessing before being passed
+     * to the relevant commands.
+     *
+     */
 
     private static String[] removeCommandString(String[] splitQuery){
         splitQuery[0] = "";
@@ -147,10 +117,5 @@ public class ChatBot {
             i++;
         }
         return accTaskDateTime.toString();
-    }
-
-    private static boolean isEnd(String query){
-        String editedQuery = query.stripLeading().stripTrailing();
-        return "bye".equalsIgnoreCase(editedQuery);
     }
 }

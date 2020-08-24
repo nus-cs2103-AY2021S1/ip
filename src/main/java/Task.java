@@ -1,5 +1,5 @@
-public abstract class Task{
-    private String title;
+public abstract class Task extends Command{
+    private final String title;
     private boolean isDone = false;
 
     Task(String title){
