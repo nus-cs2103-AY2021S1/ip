@@ -23,8 +23,8 @@ public class Deadline extends TimedTask {
      * @return String of .txt format
      */
     @Override
-    protected String textFormat() {
-        return "deadline, " + super.textFormat() + "/by" + this.datetime.format(Deadline.inputFormatter);
+    protected String getTxtFormat() {
+        return "deadline, " + super.getTxtFormat() + "/by" + this.dateTime.format(Deadline.inputFormatter);
     }
 
     /**
@@ -34,6 +34,7 @@ public class Deadline extends TimedTask {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + super.datetimeString() + ")";
+        return "[D]" + super.toString()
+                + " (by: " + super.getDateTimeString() + ")";
     }
 }
