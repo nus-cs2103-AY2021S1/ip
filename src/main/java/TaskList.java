@@ -17,17 +17,6 @@ public class TaskList {
         list = taskArrayList;
     }
 
-    public void displayContent() {
-
-        //Iterate through the list of tasks
-        for (int i = 0; i < this.list.size(); ++i) {
-
-            //Print the index and the message of the task
-            System.out.printf("%d.%s%n", i + 1, this.get(i));
-        }
-
-    }
-
     public ArrayList<Task> getList(){
         return list;
     }
