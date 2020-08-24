@@ -1,6 +1,7 @@
 package exception;
 
 public class DukeException {
+
     private final static String line = "\t____________________________________________________________\n";
 
     public static void invalidCommand() {
@@ -44,7 +45,8 @@ public class DukeException {
     }
 
     public static void errorLoadingTextIntoTaskList() {
-        System.out.println("<<IGNORE THIS ERROR IF IT IS YOUR FIRST TIME USING THE APPLICATION AND HAVE NOT ADD ANYTHING INTO TASK LIST!>>");
+        System.out.println("<<IGNORE THIS ERROR IF IT IS YOUR FIRST TIME USING THE APPLICATION " +
+                "AND HAVE NOT ADD ANYTHING INTO TASK LIST!>>");
         System.out.println("<<ERROR IS THROWN BECAUSE data\\duke.txt\\ HAS NOT BEEN CREATED YET ON FIRST RUN>>");
         System.out.println("Something went wrong while loading duke.txt into task list \n");
     }

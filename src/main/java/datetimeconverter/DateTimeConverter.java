@@ -12,6 +12,7 @@ public class DateTimeConverter {
     public static String formatDateTime(String input) {
         // Make a copy of the input string
         String result = input;
+
         // Format the following date and time formats
         List<String> formatStrings = Arrays.asList(
                 "dd/MM/yyyy HHmm", "d/MM/yyyy HHmm",
@@ -27,6 +28,7 @@ public class DateTimeConverter {
             try {
                 formatter = DateTimeFormatter.ofPattern(formatString);
                 dateTime = LocalDateTime.parse(result, formatter);
+
                 // E.g Convert 2/12/2019 1800 to Monday, December 02, 2019 06:00 PM
                 result = dateTime.format(DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy hh:mm a"));
             } catch (DateTimeParseException e) {

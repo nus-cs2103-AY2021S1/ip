@@ -12,6 +12,7 @@ import task.tasks.Task;
 import storage.Storage;
 
 public class Parser {
+
     public static void run() {
         Scanner sc = new Scanner(System.in);
         String userCommand;
@@ -24,11 +25,14 @@ public class Parser {
             userCommand = sc.nextLine();
             if (userCommand.equals("bye")) {
                 break;
-            } else if (userCommand.equals("list")) { // Show list of tasks
+            } else if (userCommand.equals("list")) {
+                // Show list of tasks
                 TaskDescription.showAllTask(tasklist.getTasks());
-            } else if (userCommand.contains("done")) { // e.g done 1
+            } else if (userCommand.contains("done")) {
+                // e.g done 1
                 tasklist.markTaskDone(userCommand);
-            } else if (userCommand.contains("todo") || userCommand.contains("deadline") || userCommand.contains("event")) { // Add Task, e.g todo work
+            } else if (userCommand.contains("todo") || userCommand.contains("deadline") || userCommand.contains("event")) {
+                // Add Task, e.g todo work
                 tasklist.addTask(userCommand);
             } else if (userCommand.contains("delete")) {
                 tasklist.deleteTask(userCommand);
