@@ -37,9 +37,9 @@ public class DeleteCommand extends Command{
         taskList.remove(index);
 
         //Print the delete message
-        System.out.printf("What are you doing removing this?!?!\n  "
+        ui.print(String.format("What are you doing removing this?!?!\n  "
                         + "%s\nNow you have %d burdens%n",
                 tsk,
-                taskList.size());
+                taskList.size()));
     }
 }

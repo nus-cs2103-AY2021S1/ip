@@ -18,7 +18,7 @@ public class HelpCommand extends Command {
         if (this.getArguments().trim().length() > 0)
             throw new UltronException("list", ExceptionType.TOO_MUCH_ARGUMENTS);
 
-        System.out.println("Heh I guess I could help an insect like you:\n"
+        ui.print("Heh I guess I could help an insect like you:\n"
                 + "- help                      : Get help for the commands\n"
                 + "- todo (name)               : Adds a todo to the list\n"
                 + "- event (name) /at (date)   : Adds an event at date\n"

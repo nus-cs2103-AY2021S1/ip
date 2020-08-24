@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
         }
 
         //Print the done message
-        System.out.printf("Finally! Making yourself useful\n"
-                + "  %s%n", taskList.get(index));
+        ui.print(String.format("Finally! Making yourself useful\n"
+                + "  %s%n", taskList.get(index)));
     }
 }

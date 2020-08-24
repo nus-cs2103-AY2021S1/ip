@@ -58,8 +58,8 @@ public class TaskAllocator extends Command{
         taskList.add(task);
 
         //Print out the message
-        System.out.printf("Can't you keep track of '%s' yourself?\n"
+        ui.print(String.format("Can't you keep track of '%s' yourself?\n"
                         + "Now you have %d burdens%n",
-                task, taskList.size());
+                task, taskList.size()));
     }
 }

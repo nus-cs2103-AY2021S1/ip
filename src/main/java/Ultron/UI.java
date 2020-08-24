@@ -33,14 +33,12 @@ public class UI {
     }
 
     public void print(String argument){
-        System.out.println(argument);
+        System.out.print(argument);
     }
 
     public void printEnd() {
         // Print the end message
-        showLine();
-        System.out.println("Clearly you were not worth my time.\n");
-        showLine();
+        System.out.println("Clearly you were not worth my time.");
     }
 
     public void printIntro() {

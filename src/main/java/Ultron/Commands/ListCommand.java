@@ -23,7 +23,7 @@ public class ListCommand extends Command {
         if(taskList.size() == 0){
 
             //When there is no task
-            System.out.println("You have no business with me");
+            ui.print("You have no business with me");
 
         } else {
 
@@ -34,7 +34,7 @@ public class ListCommand extends Command {
             for(int i = 0; i< taskList.size(); ++i){
 
                 //Print out each item on the list
-                System.out.printf("%d.%s\n", i+1, taskList.get(i));
+                ui.print(String.format("%d.%s\n", i+1, taskList.get(i)));
 
             }
 

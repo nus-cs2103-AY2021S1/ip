@@ -22,6 +22,6 @@ public class ByeCommand extends Command{
         //Save the storage
         storage.writeAll(taskList.getList());
 
-        System.out.printf("Clearly you were not worth my time.\n");
+        ui.printEnd();
     }
 }
