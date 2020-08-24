@@ -1,7 +1,7 @@
 package tasks;
 
 /**
- * Represents a general tasks.Task object
+ * Represents a general Task object with a name
  */
 
 public class Task {
@@ -17,8 +17,12 @@ public class Task {
         this.done = done;
     }
 
+    /**
+     * Prints a tick or X symbol.
+     * @return a tick or X symbol.
+     */
     public String getStatusIcon() {
-        return (done ? "\u2713" : "\u2718"); // return tick or X symbols
+        return (done ? "\u2713" : "\u2718");
     }
 
     public String toString() {

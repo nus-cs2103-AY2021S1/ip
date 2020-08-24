@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents an Event task
+ * Represents an Event task with a name and a LocalDateTime object.
  */
 
 public class Event extends Task {

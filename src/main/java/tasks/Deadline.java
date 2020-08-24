@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a Deadline task
+ * Represents a Deadline task with a name and a LocalDateTime object.
  */
 
 public class Deadline extends Task {

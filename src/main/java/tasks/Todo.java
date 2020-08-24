@@ -1,6 +1,8 @@
 package tasks;
 
-import tasks.Task;
+/**
+ * Represents a Todo task with a name
+ */
 
 public class Todo extends Task {
     public Todo(String name, boolean done) {

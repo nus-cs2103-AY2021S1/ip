@@ -7,6 +7,10 @@ import exceptions.InvalidTaskNumberException;
 import exceptions.TaskNotFoundException;
 import tasks.TaskList;
 
+/**
+ * Represents an instruction from the user to delete a task from the list
+ */
+
 public class DeleteCommand extends Command {
     int index;
 
@@ -14,6 +18,15 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Executes the command to delete the task from the TaskList
+     * @param tasks The current TaskList
+     * @param ui The Ui object in use
+     * @param storage The Storage object in use
+     * @throws TaskNotFoundException If input task number is not found in the list
+     * @throws InvalidTaskNumberException If the user enters a non-integer argument
+     * @throws InvalidFileException If the file to be written to cannot not found
+     */
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) throws TaskNotFoundException, InvalidTaskNumberException, InvalidFileException {
         ui.printDelTask(tasks, index);
@@ -23,9 +36,9 @@ public class DeleteCommand extends Command {
 
     /**
      * Deletes an input task from the list
-     * @param idx Number of the task indicated to be deleted
+     * @param idx Index of the task indicated to be deleted
      * @throws TaskNotFoundException If input task number is not found in the list
-     * @throws InvalidTaskNumberException If user enters a non-integer input
+     * @throws InvalidTaskNumberException If user enters a non-integer argument
      */
     public void deleteTask(int idx, TaskList tasks) throws TaskNotFoundException, InvalidTaskNumberException {
         try {

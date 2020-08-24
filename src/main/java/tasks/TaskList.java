@@ -1,20 +1,16 @@
 package tasks;
 
-import tasks.Task;
-
 import java.util.ArrayList;
 
 /**
- * Represents a data structure to contain an array of tasks.Task objects
+ * Represents a data structure to contain an ArrayList of Task objects.
  */
 
 public class TaskList {
 
-    private int numTasks;
     private ArrayList<Task> list;
 
     public TaskList() {
-        this.numTasks = 1;
         this.list = new ArrayList<>();
     }
 
@@ -23,7 +19,6 @@ public class TaskList {
      * @param item The task to be added
      */
     public void addItem(Task item) {
-        numTasks++;
         list.add(item);
     }
 
@@ -31,9 +26,6 @@ public class TaskList {
         return list.size();
     }
 
-    public int getNumTasks() {
-        return numTasks;
-    }
     public ArrayList<Task> getTasks() {
         return list;
     }
