@@ -8,12 +8,20 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import duke.task.*;
 import duke.exception.*;
-import duke.command.*;
-import java.io.IOException;
 
 public class Storage {
     private static final String path = "data/duke.txt";
 
+    /**
+     * Read stored task list from the disk data file.
+     * This method loads the stored task list from the disk data file. If the file cannot be found, <code>Storage</code>
+     * will create a new file for the user and throws <code>NoDataFileException</code> to notify the chat bot. If there
+     * is an error accessing the file and new file cannot be created, <code>IOException</code> will be thrown to notify
+     * the chat bot.
+     * @return a <code>LinkedList</code> of tasks read from the data file
+     * @throws IOException throw if there is some error accessing the file and we cannot create a new one
+     * @throws NoDataFileException throw if there is no file copy and Duke has successfully created a new one
+     */
     public static LinkedList<Task> readList() throws IOException, NoDataFileException {
         LinkedList<Task> list = new LinkedList<>();
 
@@ -54,6 +62,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Write a list of tasks to the local data file.
+     * Write a list of tasks to the local data file, the format of the data file can be understood by
+     * <code>Storage</code>, so that it can read the file and convert back to a list of tasks.
+     * @param list the list of tasks to be written into the data file
+     */
     public static void save(LinkedList<Task> list) {
         try {
           FileWriter writer = new FileWriter(path);

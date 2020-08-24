@@ -4,12 +4,20 @@ import duke.exception.*;
 import duke.command.*;
 import java.io.IOException;
 
-// The chat bot class to handle the internal logic
+/**
+ * The chat bot class to handle the internal logic.
+ */
 public class ChatBot {
     private final Ui ui;
     private final Parser parser;
     private TaskList tasks;
 
+    /**
+     * Constructor of the chat bot.
+     * Construct a new chat bot with new UI, and initialised storage handling. Try to load the previous data file,
+     * if failed create a new data file. If Duke cannot create a new one, <code>IOException</code> will be caught and
+     * prints information for the user.
+     */
     public ChatBot() {
         ui = new Ui();
         ui.showLoading();
@@ -25,7 +33,9 @@ public class ChatBot {
         }
     }
 
-    // The entry point to run the chat bot
+    /**
+     * The entry point to run the chat bot.
+     */
     public void start() {
         ui.welcome();
         boolean isExit = false;
