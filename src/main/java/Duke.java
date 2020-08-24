@@ -2,31 +2,31 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static String horiLine = "____________________________________________________________" + "\n";
+    private static String HORIZONTAL_LINE = "____________________________________________________________" + "\n";
     private static ArrayList<Task> List = new ArrayList<>();
 
     private static void greet() {
         String greeting = "Hello! I'm Duke" + "\n" + "What can I do for you?" + "\n";
-        System.out.println(horiLine + greeting + horiLine);
+        System.out.println(HORIZONTAL_LINE + greeting + HORIZONTAL_LINE);
     }
 
     private static void addTask(Task task) {
         List.add(task);
-        System.out.println(horiLine
+        System.out.println(HORIZONTAL_LINE
                 + "Got it. I've added this task: " + "\n"
                 + task.toString() + "\n"
                 + String.format("Now you have %s tasks in the list.", List.size()) + "\n"
-                + horiLine);
+                + HORIZONTAL_LINE);
     }
     
     private static void deleteTask(int i) {
         Task task = List.get(i - 1);
         List.remove(i - 1);
-        System.out.println(horiLine
+        System.out.println(HORIZONTAL_LINE
                 + "Noted. I've removed this task: " + "\n"
                 + task.toString() + "\n"
                 + String.format("Now you have %s tasks in the list.", List.size()) + "\n"
-                + horiLine);
+                + HORIZONTAL_LINE);
     }
 
     private static void echo() {
@@ -37,17 +37,17 @@ public class Duke {
             try {
                 if (input.equals("bye")) { //exit condition
                     String goodbye = "Bye. Hope to see you again soon!";
-                    System.out.println(horiLine + goodbye + "\n" + horiLine);
+                    System.out.println(HORIZONTAL_LINE + goodbye + "\n" + HORIZONTAL_LINE);
                     break;
                 } else if (input.equals("list")) {
-                    System.out.println(horiLine + "Here are the tasks in your list:");
+                    System.out.println(HORIZONTAL_LINE + "Here are the tasks in your list:");
                     int i = 1;
                     for (Task task : List) {
                         //print out task with numbering
                         System.out.println(String.format("%s.", i) + task.toString());
                         i++;
                     }
-                    System.out.println(horiLine);
+                    System.out.println(HORIZONTAL_LINE);
                 } else if (input.startsWith("done")) {
                     String[] number = input.split("done ");
                     markDone(Integer.parseInt(number[1]));
@@ -91,7 +91,7 @@ public class Duke {
                     throw new DukeUnknownArgumentException("");
                 }
             } catch (Exception e) {
-                System.out.println(horiLine + e + "\n" + horiLine);
+                System.out.println(HORIZONTAL_LINE + e + "\n" + HORIZONTAL_LINE);
             }
         }
         sc.close();
@@ -100,8 +100,8 @@ public class Duke {
     private static void markDone(int i) {
         Task task = List.get(i - 1);
         task.setDone();
-        System.out.println(horiLine + "Nice! I've marked this task as done:" +  "\n" +
-                task.toString() + "\n" + horiLine);
+        System.out.println(HORIZONTAL_LINE + "Nice! I've marked this task as done:" +  "\n" +
+                task.toString() + "\n" + HORIZONTAL_LINE);
     }
 
     public static void main(String[] args) {
