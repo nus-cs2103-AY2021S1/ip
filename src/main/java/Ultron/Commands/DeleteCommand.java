@@ -11,8 +11,6 @@ import Ultron.Exceptions.UltronException;
 
 public class DeleteCommand extends Command{
 
-    private String arguments;
-
     public DeleteCommand(String arguments){
         super(false, arguments);
     }

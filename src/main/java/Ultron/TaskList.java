@@ -9,12 +9,6 @@ public class TaskList {
     //Store the internal list
     private final ArrayList<Task> list;
 
-    public TaskList() {
-
-        //Create a new arraylist to store the tasks
-        list = new ArrayList<>();
-    }
-
     public TaskList(ArrayList<Task> taskArrayList){
 
         //Set the arraylist to the list
@@ -26,7 +20,6 @@ public class TaskList {
     }
 
     public int size() {
-
 
         //Get the size of the list
         return this.list.size();
