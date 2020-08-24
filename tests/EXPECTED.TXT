@@ -79,10 +79,10 @@ currently tracking 7 tasks (3 pending, 4 done, 57.1% complete)
   7. [D] [✘] not so important thing (by: 31 December 9999)
 --------------------------------------
 >
-error: task number '10' was out of bounds
+error: task '10' does not exist
 --------------------------------------
 >
-error: task number '-19' was out of bounds
+error: task '-19' does not exist
 --------------------------------------
 >
 error: expected an integer task number ('asdf' invalid)
@@ -94,7 +94,7 @@ deleted task:
 currently tracking 6 tasks (3 pending, 3 done, 50.0% complete)
 --------------------------------------
 >
-task 1 is already marked as done:
+task is already marked as done:
   [T] [✓] task two
 --------------------------------------
 >

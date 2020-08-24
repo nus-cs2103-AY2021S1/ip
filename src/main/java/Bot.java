@@ -17,28 +17,18 @@ import java.util.NoSuchElementException;
 public class Bot {
 
     private final String name;
-    private List<Task> tasks;
+    private final TaskList tasks;
+    private final Frontend ui;
 
-    public Bot(String name) {
-
+    public Bot(String name, TaskList tasks) {
         this.name = name;
-        this.tasks = new ArrayList<>();
+        this.tasks = tasks;
+        this.ui = new Frontend(name);
     }
 
     public void greet() {
-
-        println("Hello, I'm %s", this.name);
-        println("What can I do for you?");
+        this.ui.greet();
     }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    public List<Task> getTasks() {
-        return this.tasks;
-    }
-
 
     public boolean processCommand(String str) {
 
@@ -50,7 +40,7 @@ public class Bot {
         var cmd = sc.next().strip();
 
         if (cmd.equals("bye")) {
-            println("goodbye");
+            this.ui.println("goodbye");
             return false;
         }
 
@@ -58,7 +48,7 @@ public class Bot {
             ? sc.nextLine().strip()
             : "";
 
-        beginLog();
+        this.ui.beginLog();
 
         Optional.ofNullable(Map.<String, BiConsumer<String, String>>of(
             "done",     this::cmdDone,
@@ -72,10 +62,10 @@ public class Bot {
             .ifPresentOrElse(x -> {
                 x.accept(cmd, input);
             }, () -> {
-                println("unknown command '%s'", cmd);
+                this.ui.println("unknown command '%s'", cmd);
             });
 
-        endLog();
+        this.ui.endLog();
         return true;
     }
 
@@ -84,9 +74,9 @@ public class Bot {
     private void cmdReset(String cmd, String input) {
         assert cmd.equals("reset");
 
-        this.tasks.clear();
+        this.tasks.clearTasks();
 
-        println("cleared all tasks.");
+        this.ui.println("cleared all tasks.");
     }
 
     private void cmdList(String cmd, String input) {
@@ -95,10 +85,12 @@ public class Bot {
 
         this.printTaskStatistics();
 
-        Stream.iterate(0, x -> x + 1)
-            .map(i -> String.format("  %d. %s", 1 + i, this.tasks.get(i)))
-            .limit(this.tasks.size())
-            .forEach(Bot::println);
+        // TODO: write a Stream.zip to get rid of this monstrosity
+        Stream.iterate(1, x -> x + 1)
+            // TODO: don't force unwrap
+            .map(i -> String.format("  %d. %s", i, this.tasks.getTaskByNumber(i).get()))
+            .limit(this.tasks.count())
+            .forEach(x -> this.ui.println("%s", x));
     }
 
     private void cmdDelete(String cmd, String input) {
@@ -106,12 +98,12 @@ public class Bot {
         assert cmd.equals("delete");
 
         this.parseTaskNumber(cmd, input)
-            .ifPresent(idx -> {
+            .ifPresent(task -> {
 
-                var task = this.tasks.remove((int) idx);
+                this.tasks.removeTask(task);
 
-                println("deleted task:");
-                println("  %s\n", task);
+                this.ui.println("deleted task:");
+                this.ui.println("  %s\n", task);
 
                 this.printTaskStatistics();
             });
@@ -122,21 +114,18 @@ public class Bot {
         assert cmd.equals("done");
 
         this.parseTaskNumber(cmd, input)
-            .ifPresent(idx -> {
-
-                var task = this.tasks.get(idx);
-                assert task != null;
+            .ifPresent(task -> {
 
                 if (task.isDone()) {
 
-                    println("task %d is already marked as done:", idx + 1);
-                    println("  %s", task);
+                    this.ui.println("task is already marked as done:");
+                    this.ui.println("  %s", task);
 
                 } else {
                     task.markAsDone();
 
-                    println("marked as done:");
-                    println("  %s\n", task);
+                    this.ui.println("marked as done:");
+                    this.ui.println("  %s\n", task);
 
                     this.printTaskStatistics();
                 }
@@ -167,38 +156,29 @@ public class Bot {
                 assert false;
             }
 
-            this.tasks.add(task);
-            println("added: %s", task);
+            this.tasks.addTask(task);
+            this.ui.println("added: %s", task);
 
         } catch (InvalidInputException e) {
 
-            println("error: %s", e);
-            println("usage: %s", e.getUsage());
+            this.ui.println("error: %s", e);
+            this.ui.println("usage: %s", e.getUsage());
         }
     }
 
-    private Optional<Integer> parseTaskNumber(String cmd, String input) {
+    private Optional<Task> parseTaskNumber(String cmd, String input) {
 
         try {
-            // one-indexed
-            var idx = new Scanner(input).nextInt() - 1;
-
-            if (idx < 0 || idx >= this.tasks.size())
-                throw new IndexOutOfBoundsException();
-
-            return Optional.of(idx);
+            var idx = new Scanner(input).nextInt();
+            return Optional.of(this.tasks.getTaskByNumber(idx)
+                .orElseThrow(() -> new IndexOutOfBoundsException("")));
 
         } catch (InputMismatchException e) {
-
-            println("error: expected an integer task number ('%s' invalid)", input);
-
+            this.ui.println("error: expected an integer task number ('%s' invalid)", input);
         } catch (NoSuchElementException e) {
-
-            println("error: expected a task number for '%s' command", cmd);
-
+            this.ui.println("error: expected a task number for '%s' command", cmd);
         } catch (IndexOutOfBoundsException e) {
-
-            println("error: task number '%s' was out of bounds", input);
+            this.ui.println("error: task '%s' does not exist", input);
         }
 
         return Optional.empty();
@@ -207,32 +187,10 @@ public class Bot {
     private void printTaskStatistics() {
 
         var doneTasks = this.tasks.stream().filter(x -> x.isDone()).count();
-        var pendingTasks = this.tasks.size() - doneTasks;
+        var pendingTasks = this.tasks.count() - doneTasks;
 
-        println("currently tracking %d task%s (%d pending, %d done, %.1f%% complete)",
-            this.tasks.size(), this.tasks.size() == 1 ? "" : "s", pendingTasks, doneTasks,
-            this.tasks.isEmpty() ? 100.0 : 100.0 * ((double) doneTasks / this.tasks.size()));
-    }
-
-
-
-
-
-
-
-    private static void println(String fmt, Object... args) {
-
-        System.out.printf(fmt, args);
-        System.out.println();
-    }
-
-    private static void beginLog() {
-
-        println("");
-    }
-
-    private static void endLog() {
-
-        println("--------------------------------------");
+        this.ui.println("currently tracking %d task%s (%d pending, %d done, %.1f%% complete)",
+            this.tasks.count(), this.tasks.count() == 1 ? "" : "s", pendingTasks, doneTasks,
+            this.tasks.count() == 0 ? 100.0 : 100.0 * ((double) doneTasks / this.tasks.count()));
     }
 }
