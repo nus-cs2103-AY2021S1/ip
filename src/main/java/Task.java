@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     private final String description;
     private boolean isDone;
@@ -11,8 +13,8 @@ public class Task {
         return this.description;
     }
 
-    public String getTime() {
-        return "";
+    public LocalDate getTime() {
+        return LocalDate.now();
     }
 
     public String getStatusIcon() {

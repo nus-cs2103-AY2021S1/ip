@@ -3,6 +3,8 @@ import java.util.List;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class TaskManager {
 
@@ -51,26 +53,27 @@ public class TaskManager {
             if (command.equals("bye")) { // Exits while loop
                 isExit = true;
             } else if (command.equals("list")) {
-                displayTasks();
+                this.displayTasks();
             } else if (command.equals("done")) {
-                markTaskAsDone(inputArray[1]);
+                this.markTaskAsDone(inputArray[1]);
             } else if (command.equals("todo")) {
                 String description = inputArray[1];
                 Task task = new Todo(description);
-                addTask(task);
+                this.addTask(task);
             } else if (command.equals("deadline")) {
                 String[] deadline = inputArray[1].split("/by");
                 String description = deadline[0].trim();
                 String by = deadline[1].trim();
-                Task task = new Deadline(description, by);
-                addTask(task);
+                LocalDate date = LocalDate.parse(by);
+                Task task = new Deadline(description, date);
+                this.addTask(task);
             } else if (command.equals("event")) {
                 String[] event = inputArray[1].split("/at");
                 String description = event[0].trim();
                 String at = event[1].trim();
-                System.out.println(at);
-                Task task = new Event(description, at);
-                addTask(task);
+                LocalDate date = LocalDate.parse(at);
+                Task task = new Event(description, date);
+                this.addTask(task);
             } else if (command.equals("delete")) {
                 deleteTask(inputArray[1]);
             } else {
@@ -91,6 +94,10 @@ public class TaskManager {
                     errorMessage = "Please indicate a timing using the \"/at\" keyword.\n";
                 }
             }
+            throw new DukeException(errorMessage);
+        } catch (DateTimeParseException e) {
+            errorMessage = "Invalid date format! "
+                    + "Please use the proper date format i.e. yyyy-MM-dd\n";
             throw new DukeException(errorMessage);
         }
     }
@@ -157,10 +164,10 @@ public class TaskManager {
                 if (letter == 'T') {
                     data = letter + " | " + bit + " | " + description;
                 } else if (letter == 'D') {
-                    String time = task.getTime();
+                    String time = task.getTime().toString();
                     data = letter + " | " + bit + " | " + description + " | " + time; 
                 } else { // letter == 'E'
-                    String time = task.getTime();
+                    String time = task.getTime().toString();
                     data = letter + " | " + bit + " | " + description + " | " + time; 
                 }
                 myWriter.write(data + "\n");
