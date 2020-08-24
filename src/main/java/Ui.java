@@ -73,4 +73,11 @@ public class Ui {
         System.out.println(LINE);
         System.out.print("> ");
     }
+
+    public void askTaskNumToComplete() {
+        System.out.println(LINE);
+        System.out.println("What is the number of the task you wish to mark as complete?"); 
+        System.out.println(LINE);
+        System.out.print("> ");
+    }
 }
