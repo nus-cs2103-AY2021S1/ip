@@ -7,6 +7,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class Duke {
 
@@ -72,16 +77,19 @@ public class Duke {
 
     public static class Deadline extends Task {
 
-        String deadline;
+        LocalDateTime deadline;
 
-        public Deadline(String description, String deadline, boolean isDone) {
+        public Deadline(String description, String deadline, boolean isDone)
+            throws DateTimeParseException {
             super(description, "D", isDone);
-            this.deadline = deadline;
+            this.deadline = LocalDateTime.parse(deadline,
+                    DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
         }
 
         @Override
         public String toString() {
-            return String.format("%s (by: %s)", super.toString(), this.deadline);
+            return String.format("%s (by: %s)", super.toString(),
+                    this.deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")));
         }
 
         @Override
@@ -93,16 +101,19 @@ public class Duke {
 
     public static class Event extends Task {
 
-        String time;
+        LocalDateTime time;
 
-        public Event(String description, String time, boolean isDone) {
+        public Event(String description, String time, boolean isDone)
+            throws DateTimeParseException {
             super(description, "E", isDone);
-            this.time = time;
+            this.time = LocalDateTime.parse(time,
+                    DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
         }
 
         @Override
         public String toString() {
-            return String.format("%s (at: %s)", super.toString(), this.time);
+            return String.format("%s (at: %s)", super.toString(),
+                    this.time.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")));
         }
 
         @Override
@@ -291,22 +302,28 @@ public class Duke {
                         }
                         description.deleteCharAt(description.length() - 1);
                         time.deleteCharAt(time.length() - 1);
-                        task = new Deadline(description.toString(), time.toString(), false);
-                        list.add(task);
-                        System.out.println(line + "\n    Got it. I've added this task:\n        "
-                                + task.toString()
-                                + "\n    You now have " + list.size()
-                                + (list.size() == 1 ? " task" : " tasks")
-                                + " in your list.\n" + line);
-                        String toWrite = list.stream()
-                                .map(Task::toSave)
-                                .reduce((x, y) -> x + "\n" + y)
-                                .orElse("");
                         try {
-                            FileWriter fw = new FileWriter("./src/main/data/duke.txt");
-                            fw.write(toWrite);
-                            fw.close();
-                        } catch (IOException ignored) { }
+                            task = new Deadline(description.toString(), time.toString(), false);
+                            list.add(task);
+                            System.out.println(line + "\n    Got it. I've added this task:\n        "
+                                    + task.toString()
+                                    + "\n    You now have " + list.size()
+                                    + (list.size() == 1 ? " task" : " tasks")
+                                    + " in your list.");
+                            String toWrite = list.stream()
+                                    .map(Task::toSave)
+                                    .reduce((x, y) -> x + "\n" + y)
+                                    .orElse("");
+                            try {
+                                FileWriter fw = new FileWriter("./src/main/data/duke.txt");
+                                fw.write(toWrite);
+                                fw.close();
+                            } catch (IOException ignored) { }
+                        } catch (DateTimeParseException dtpe) {
+                            System.out.println("    Error: Please use the following format instead:\n"
+                                    + "        dd-MM-yyyy HHmm");
+                        }
+                        System.out.println(line);
                         break;
                     }
                     case "event": {
@@ -331,22 +348,28 @@ public class Duke {
                         }
                         description.deleteCharAt(description.length() - 1);
                         time.deleteCharAt(time.length() - 1);
-                        task = new Event(description.toString(), time.toString(), false);
-                        list.add(task);
-                        System.out.println(line + "\n    Got it. I've added this task:\n        "
-                                + task.toString()
-                                + "\n    You now have " + list.size()
-                                + (list.size() == 1 ? " task" : " tasks")
-                                + " in your list.\n" + line);
-                        String toWrite = list.stream()
-                                .map(Task::toSave)
-                                .reduce((x, y) -> x + "\n" + y)
-                                .orElse("");
                         try {
-                            FileWriter fw = new FileWriter("./src/main/data/duke.txt");
-                            fw.write(toWrite);
-                            fw.close();
-                        } catch (IOException ignored) { }
+                            task = new Event(description.toString(), time.toString(), false);
+                            list.add(task);
+                            System.out.println(line + "\n    Got it. I've added this task:\n        "
+                                    + task.toString()
+                                    + "\n    You now have " + list.size()
+                                    + (list.size() == 1 ? " task" : " tasks")
+                                    + " in your list.");
+                            String toWrite = list.stream()
+                                    .map(Task::toSave)
+                                    .reduce((x, y) -> x + "\n" + y)
+                                    .orElse("");
+                            try {
+                                FileWriter fw = new FileWriter("./src/main/data/duke.txt");
+                                fw.write(toWrite);
+                                fw.close();
+                            } catch (IOException ignored) { }
+                        } catch (DateTimeParseException dtpe) {
+                            System.out.println("    Error: Please use the following format instead:\n"
+                                    + "        dd-MM-yyyy HHmm");
+                        }
+                        System.out.println(line);
                         break;
                     }
                     default:
