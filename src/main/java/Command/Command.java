@@ -1,4 +1,4 @@
-package Command;
+package command;
 
 /**
  * All the eligible command.

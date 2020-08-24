@@ -1,6 +1,6 @@
-import Storage.Storage;
-import Tasks.TaskList;
-import Ui.Ui;
+import storage.Storage;
+import tasks.TaskList;
+import ui.Ui;
 
 import java.util.Scanner;
 
@@ -25,11 +25,11 @@ public class Mug {
         this.ui.welcome();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-           String input = sc.nextLine();
-           System.out.println(this.ui.readCommand(input, this.tasks));
-           if(input.trim().equals("bye")) {
-               break;
-           }
+            String input = sc.nextLine();
+            System.out.println(this.ui.readCommand(input, this.tasks));
+            if (input.trim().equals("bye")) {
+                break;
+            }
         }
     }
 

@@ -1,11 +1,12 @@
-package Tasks;
+package tasks;
 
-import Command.Command;
-import MugException.MugException;
-import Parser.Parser;
-import Storage.Storage;
+import command.Command;
+import mugexception.MugException;
+import parser.Parser;
+import storage.Storage;
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 
 /**
@@ -42,7 +43,7 @@ public class TaskList {
      * @return list of Task in String.
      */
     public String readList() {
-        if(this.taskListLen() == 0) {
+        if (this.taskListLen() == 0) {
             return "MUG don't have any of your task \"_\"";
         } else {
             int taskId = 1;
@@ -71,28 +72,28 @@ public class TaskList {
         try {
             Task task;
             switch (command) {
-                case TODO:
-                    task = new Todo(info);
-                    break;
-                case DEADLINE:
-                    String[] dInfo = info.split(" /by ");
-                    Parser.input(command, dInfo.length, true);
-                    Parser.info(command, dInfo[1], true);
-                    String deadlineEvent = dInfo[0];
-                    LocalDate deadlineTime = Parser.date(dInfo[1]);
-                    task = new Deadline(deadlineEvent, deadlineTime);
-                    break;
-                case EVENT:
-                    String[] eInfo = info.split(" /at ");
-                    Parser.input(command, eInfo.length, true);
-                    Parser.info(command, eInfo[1], true);
-                    String eventEvent = eInfo[0];
-                    LocalDate eventTime = Parser.date(eInfo[1]);
-                    task = new Event(eventEvent, eventTime);
-                    break;
-                default:
-                    task = new Task(info);
-                    break;
+            case TODO:
+                task = new Todo(info);
+                break;
+            case DEADLINE:
+                String[] dInfo = info.split(" /by ");
+                Parser.input(command, dInfo.length, true);
+                Parser.info(command, dInfo[1], true);
+                String deadlineEvent = dInfo[0];
+                LocalDate deadlineTime = Parser.date(dInfo[1]);
+                task = new Deadline(deadlineEvent, deadlineTime);
+                break;
+            case EVENT:
+                String[] eInfo = info.split(" /at ");
+                Parser.input(command, eInfo.length, true);
+                Parser.info(command, eInfo[1], true);
+                String eventEvent = eInfo[0];
+                LocalDate eventTime = Parser.date(eInfo[1]);
+                task = new Event(eventEvent, eventTime);
+                break;
+            default:
+                task = new Task(info);
+                break;
             }
             this.taskList.add(task);
             store.appendTask(command, info);
@@ -115,7 +116,7 @@ public class TaskList {
      * @return Message when task delete.
      */
     public String deleteTask(int taskId) {
-        if ( taskId > this.taskListLen()) {
+        if (taskId > this.taskListLen()) {
             return "MUG don't have this task to Delete @_@";
         } else {
             try {

@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 /**
  * Create Todo objects extends from Task class.

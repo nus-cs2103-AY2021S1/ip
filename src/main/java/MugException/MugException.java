@@ -1,4 +1,4 @@
-package MugException;
+package mugexception;
 
 /**
  * Error that cause by Mug.

@@ -1,7 +1,7 @@
-package Parser;
+package parser;
 
-import Command.Command;
-import MugException.MugException;
+import command.Command;
+import mugexception.MugException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -20,7 +20,7 @@ public class Parser {
      * @throws MugException If splitNum less than 2.
      */
     public static void input(Command command, int splitNum, boolean isTime) throws MugException {
-        if (splitNum < 2 ) {
+        if (splitNum < 2) {
             if ((isTime && command == Command.DEADLINE)
             ) {
                 throw new MugException("HEY!!! Feed me with {/by [date]}. MUG is hungry T_T");
@@ -101,7 +101,7 @@ public class Parser {
                 throw new MugException("HEY!!! Don't be stingy give MUG more information >.<");
             }
             return index;
-        } catch ( NumberFormatException ex) {
+        } catch (NumberFormatException ex) {
             throw new MugException("Please feed MUG an integer number ~_~");
         }
     }
