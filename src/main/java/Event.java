@@ -1,11 +1,11 @@
 public class Event extends Task{
 
-    private final String task;
-    private final String time;
+    private String task;
+    private String time;
 
     protected Event(String task, String time) {
-            this.task = task;
-            this.time = time;
+        this.task = task;
+        this.time = time;
     }
 
     @Override

@@ -3,12 +3,12 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
 
-    private final String task;
-    private final LocalDate deadline;
+    private String task;
+    private LocalDate deadline;
 
     protected Deadline(String task, LocalDate deadline) {
-            this.task = task;
-            this.deadline = deadline;
+        this.task = task;
+        this.deadline = deadline;
     }
 
     @Override

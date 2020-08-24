@@ -1,15 +1,16 @@
 public abstract class Task {
 
-    private boolean done = false;
+    private boolean isDone = false;
 
     abstract protected String getTask();
 
     protected void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     protected boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
 }
+

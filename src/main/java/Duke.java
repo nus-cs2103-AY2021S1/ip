@@ -37,7 +37,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException, DukeException {
-
         if (!Files.exists(Paths.get("data"))) {
             Files.createDirectory(Paths.get("data"));
         }
@@ -46,7 +45,6 @@ public class Duke {
         }
 
         new Duke("data/Duke.txt").run();
-
     }
 
 }
