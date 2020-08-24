@@ -6,24 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class TaskManager {
+class Storage {
     final String FILE_PATH = "../tasks.txt";
-    private List<Task> tasks;
 
-    public TaskManager() {
-        this.tasks = new ArrayList<>();
-    }
-
-    public TaskManager(List<Task> tasks) {
-        this.tasks = tasks;
+    public List<Task> load() throws DukeException {
+        List<Task> tasks = new ArrayList<>();
         
-    }
-
-    private void init() throws DukeException {
         try {
             File f = new File(FILE_PATH);
             Scanner sc = new Scanner(f);
-
+            
             while (sc.hasNext()) {
                 String taskInfo = sc.nextLine();
                 String[] arr = taskInfo.split(",");
@@ -46,55 +38,18 @@ class TaskManager {
                 }
             }
             sc.close();
+            return tasks;
         } catch (FileNotFoundException e) {
+            // TODO: Customise font
             System.out.println("File \"tasks.txt\" does not exist. Attempting to create one for you.");
             try {
                 FileWriter fw = new FileWriter(FILE_PATH);
                 fw.close();
                 System.out.println("Successfully created file tasks.txt");
+                return tasks;
             } catch (IOException ioException) {
-                System.out.println("Oops something went wrong: " + ioException.getMessage());
+                throw new DukeException(ioException.getMessage());
             }
         }
-    }
-
-    public void add(Task task) {
-        tasks.add(task);
-        save();
-    }
-
-    private void save() {
-        try {
-            FileWriter fw = new FileWriter(FILE_PATH, false);
-            StringBuffer sb = new StringBuffer();
-            for (Task task : tasks) {
-                sb.append(task.saveText() + "\n");
-            }
-            fw.write(sb.toString());
-            fw.close();
-        } catch (IOException ioException) {
-            System.out.println("Oops something went wrong while writing to \"tasks.txt\": " + ioException.getMessage());
-        }
-    }
-
-    public void listTasks() {
-        int i = 1;
-        System.out.println("*Here are all your tasks");
-        for (Task task: tasks) {
-            System.out.println(i + ". " + task);
-            i++;
-        }
-    }
-
-    public void markDone(int taskNum) {
-        tasks.get(taskNum - 1).markDone();
-        save();
-    }
-
-    public void deleteTask(int taskNum) {
-        Task task = tasks.remove(taskNum - 1);
-        System.out.println(String.format("Successfully removed the following task:\n %s", task));
-        System.out.println(String.format("You have a total of %d tasks left", tasks.size()));
-        save();
     }
 }

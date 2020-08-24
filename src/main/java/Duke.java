@@ -2,8 +2,15 @@ import java.util.*;
 
 public class Duke {
     Ui ui;
+    TaskManager taskManager;
+
     Duke() {
         this.ui = new Ui();
+        try {
+            this.taskManager = new TaskManager(new Storage().load());
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void start() {
@@ -17,13 +24,7 @@ public class Duke {
 
         System.out.println(line);
         TaskManager tm;
-        try {
-            tm = new TaskManager();
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Program will close.");
-            return;
-        }
+        tm = new TaskManager();
         Scanner sc = new Scanner(System.in);
         
         while(true) {
