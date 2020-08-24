@@ -15,4 +15,15 @@ public class DisplayListCommand implements Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof DisplayListCommand) {
+            return true;
+        } else {
+            return true;
+        }
+    }
 }
