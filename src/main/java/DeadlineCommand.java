@@ -15,10 +15,11 @@ public class DeadlineCommand extends Command{
             throw new InvalidInputException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
         }
         String[] splitWord = super.input.split("/");
+        String desc = splitWord[0].substring(9,splitWord[0].length()-1);
         String deadline = splitWord[1].substring(3);
         Deadlines task;
         try {
-            task = new Deadlines(splitWord[0].substring(9), LocalDateTime.parse(deadline,dtf));
+            task = new Deadlines(desc, LocalDateTime.parse(deadline,dtf));
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeFormatException("\tDeadline input must follow a certain format: yyyy-mm-dd HH:mm " +
                     "e.g. 2020-08-23 16:45");

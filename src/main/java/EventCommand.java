@@ -16,10 +16,11 @@ public class EventCommand extends Command{
             throw new InvalidInputException("\t☹ OOPS!!! The description of an event cannot be empty.");
         }
         String[] splitWord = super.input.split("/");
+        String desc = splitWord[0].substring(6,splitWord[0].length()-1);
         String timing = splitWord[1].substring(3);
         Events task;
         try {
-            task = new Events(splitWord[0].substring(6),LocalDateTime.parse(timing,dtf) );
+            task = new Events(desc,LocalDateTime.parse(timing,dtf) );
         } catch(DateTimeParseException e) {
             throw new InvalidDateTimeFormatException("\tEvent timing input must follow a certain format: yyyy-mm-dd HH:mm " +
                     "e.g. 2020-08-23 16:45");

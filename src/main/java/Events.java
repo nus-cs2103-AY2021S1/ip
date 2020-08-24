@@ -12,7 +12,7 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " +
+        return "[E]" + super.toString() + " (at: " +
                 timing.format(DateTimeFormatter.ofPattern("HH:mm MMM d yyyy"))+ ")";
     }
 }
