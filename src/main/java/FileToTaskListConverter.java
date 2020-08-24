@@ -52,17 +52,18 @@ public abstract class FileToTaskListConverter {
 
         char type = info.charAt(1);
         boolean isDone = Character.toString(info.charAt(4)).equals("✓");
+        int indexOfAction = info.indexOf(" ") + 1;
         int indexOfOpenBrackets = info.indexOf("(");
         int indexOfCloseBrackets = info.indexOf(")");
 
         switch (type) {
         case 'T':
-            return new ToDoTask(info.substring(7), isDone);
+            return new ToDoTask(info.substring(indexOfAction), isDone);
         case 'D':
-            return new DeadlineTask(info.substring(7,indexOfOpenBrackets - 1),
+            return new DeadlineTask(info.substring(indexOfAction, indexOfOpenBrackets - 1),
                     info.substring(indexOfOpenBrackets + 5, indexOfCloseBrackets), isDone);
         case 'E':
-            return new EventTask(info.substring(7,indexOfOpenBrackets - 1),
+            return new EventTask(info.substring(indexOfAction, indexOfOpenBrackets - 1),
                     info.substring(indexOfOpenBrackets + 5, indexOfCloseBrackets), isDone);
         default:
             return new Task("No Task !!!!");
