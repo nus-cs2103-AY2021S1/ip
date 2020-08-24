@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DeadlineTask extends Task {
-    private LocalDateTime deadline;
+    private final LocalDateTime deadline;
 
     public DeadlineTask(String description, boolean isDone, String deadline) {
         super(description, isDone);
