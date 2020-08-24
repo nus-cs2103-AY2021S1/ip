@@ -55,6 +55,11 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Returns the description of the Task.
+     *
+     * @return Description of the Task.
+     */
     public String getDescription() {
         return this.description;
     }

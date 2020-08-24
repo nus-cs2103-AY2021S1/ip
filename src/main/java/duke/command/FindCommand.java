@@ -5,14 +5,32 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents an action to search for Task that contains keywords input by user.
+ */
 public class FindCommand extends Command {
+
+    /** Keywords to search for */
     private final String content;
 
+    /**
+     * Constructs a <code>FindCommand</code> object.
+     *
+     * @param content Keywords to search for.
+     */
     public FindCommand(String content) {
         super(false);
         this.content = content;
     }
 
+    /**
+     * Search for Task in TaskList containing keywords input by user and list them out.
+     *
+     * @param tasks TaskList to store Task.
+     * @param ui Ui to interact with users.
+     * @param storage Storage use by Duke to save and load files.
+     * @return Nothing.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuffer sb = new StringBuffer();

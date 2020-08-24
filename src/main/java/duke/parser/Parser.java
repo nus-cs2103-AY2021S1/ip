@@ -1,24 +1,7 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.ByeCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.ListCommand;
-import duke.command.AddTodoCommand;
-import duke.command.AddDeadlineCommand;
-import duke.command.AddEventCommand;
-import duke.command.RetrieveCommand;
-import duke.exception.DukeException;
-import duke.exception.InvalidCommandException;
-import duke.exception.NoTaskException;
-import duke.exception.InvalidDeleteException;
-import duke.exception.InvalidDoneException;
-import duke.exception.NoTaskContentException;
-import duke.exception.NoTaskDurationException;
-import duke.exception.InvalidTaskNumberException;
-import duke.exception.InvalidTaskDateException;
-import duke.exception.NoTaskDateTimeException;
+import duke.command.*;
+import duke.exception.*;
 import duke.tasklist.TaskList;
 
 import java.time.LocalDate;
@@ -193,6 +176,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the FindCommand if user input is valid.
+     *
+     * @param input User input to Duke.
+     * @return FindCommand.
+     * @throws DukeException If user input is not valid.
+     */
     private static Command parseFind(String input, TaskList tasks) throws DukeException {
         String[] splitInput = input.split(" ", 2);
         if (splitInput.length != 2 || splitInput[1].trim().equals("")) {
