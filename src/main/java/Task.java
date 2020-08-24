@@ -1,4 +1,6 @@
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
     protected boolean isComplete;
     protected int index;
     protected String instructions;
