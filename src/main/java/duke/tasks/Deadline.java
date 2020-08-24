@@ -23,13 +23,13 @@ public class Deadline extends Task {
 
     public static Deadline createDeadline(String description, String by) throws DukeException {
         String[] dateAndTime = by.split(" ");
-        String userInputDate = dateAndTime[0];
-        String userInputTime = dateAndTime[1];
         try {
+            String userInputDate = dateAndTime[0];
+            String userInputTime = dateAndTime[1];
             LocalDate date = LocalDate.parse(userInputDate);
             String time = timeFormat(userInputTime);
             return new Deadline(description, userInputDate, userInputTime, date, time);
-        } catch(DateTimeParseException e) {
+        } catch(DateTimeParseException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Rawr! Dino could not add your task. "
                     + "Make sure your format is correct."
                     + "\nFormats to input a task can be found by entering 'format'.");
