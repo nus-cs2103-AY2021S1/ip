@@ -1,5 +1,5 @@
 public abstract class Task {
-    protected abstract String getTaskIdentifier();
+    public abstract String getTaskIdentifier();
     private final String description;
     private boolean isDone;
     public Task(String description) {

@@ -1,19 +1,14 @@
-public class Deadline extends Task {
-    private String time;
-    public Deadline(String description, String time) {
-        super(description);
-        this.time = time;
+public class Deadline extends TimeTask {
+    public Deadline(String description, String time) throws DukeException {
+        super(description, time);
     }
+    @Override
     public String getTaskIdentifier() {
         return "D";
     }
-
     @Override
-    public String toString() {
-        return super.toString()
-                + " (by: "
-                + this.time
-                + ")";
+    public String getDateDescriptor() {
+        return "by";
     }
 
     public static void deadlineCommand(TaskList taskList, String[] args) throws  DukeException {
