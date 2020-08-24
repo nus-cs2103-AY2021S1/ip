@@ -1,11 +1,92 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+
 public class Chat {
     private boolean isRunning;
     private NumberedList<Task> list;
+    private static final String DATA_DIR_PATHNAME = "data/";
+    private static final String DATA_FILE_PATHNAME = DATA_DIR_PATHNAME + "botbot.txt";
 
     Chat() {
         isRunning = true;
         list = new NumberedList<>();
+        loadData();
         greet();
+    }
+    
+    void loadData() {
+        File dataDir = new File(DATA_DIR_PATHNAME);
+        File dataFile = new File(DATA_FILE_PATHNAME);
+        if (!dataDir.isDirectory()) {
+            dataDir.mkdir();
+            try {
+                dataFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (!dataFile.isFile()) {
+            try {
+                dataFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            readData();
+        }
+    }
+    
+    void readData() {
+        try {
+            FileInputStream file = new FileInputStream(DATA_FILE_PATHNAME);
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                String data = sc.nextLine();
+                String[] dataArr = data.split("\\|");
+                char taskType = dataArr[0].charAt(0);
+                boolean isDone = dataArr[1].equals("1");
+                String description = dataArr[2];
+                if (taskType == Todo.TYPE_CODE) {
+                    list.add(new Todo(description, isDone));
+                } else if (taskType == Deadline.TYPE_CODE) {
+                    String by = dataArr[3];
+                    list.add(new Deadline(description, isDone, by));
+                } else if (taskType == Event.TYPE_CODE) {
+                    String at = dataArr[3];
+                    list.add(new Event(description, isDone, at));
+                }
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("    oops! your data file is missing!");
+        }
+    }
+    
+    void saveData() {
+        try {
+            FileWriter fw = new FileWriter(DATA_FILE_PATHNAME);
+            for (Task task : list) {
+                List<String> temp = new LinkedList<>();
+                temp.add(String.valueOf(task.getType()));
+                temp.add(task.getStatus());
+                temp.add(task.getDescription());
+                if (task instanceof Deadline) {
+                    temp.add(task.getBy());
+                } else if (task instanceof Event) {
+                    temp.add(task.getAt());
+                }
+                String data = String.join("|", temp);
+                fw.write(data + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     static void greet() {
@@ -66,6 +147,7 @@ public class Chat {
 
     void addToList(Task task) {
         list.add(task);
+        saveData();
         int numOfTasks = list.size();
         System.out.println(String.format("    ok! I've added this task:\n      %s\n    you now have %d task"
                 + (numOfTasks > 1 ? "s" : "") + " in your list\n", task, numOfTasks));
@@ -76,6 +158,7 @@ public class Chat {
             int id = Integer.parseInt(input.substring("delete ".length())) - 1;
             Task task = list.get(id);
             list.remove(id);
+            saveData();
             int numOfTasks = list.size();
             System.out.println(String.format("    ok! I've removed this task:\n      %s\n    you now have "
                     + "%d task" + (numOfTasks > 1 ? "s" : "") + " in your list\n", task, numOfTasks));
@@ -97,6 +180,7 @@ public class Chat {
             int id = Integer.parseInt(input.substring("done ".length())) - 1;
             Task task = list.get(id);
             task.markAsDone();
+            saveData();
             System.out.println("    nice! I've marked this task as done:\n      " + task + "\n");
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             System.out.println("    oops! invalid task number!\n");
