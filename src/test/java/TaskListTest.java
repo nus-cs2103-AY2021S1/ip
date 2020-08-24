@@ -1,3 +1,7 @@
+import duke.Deadline;
+import duke.Task;
+import duke.TaskList;
+import duke.Todo;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;

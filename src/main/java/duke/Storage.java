@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +22,9 @@ public class Storage {
             list = loadedList;
         }catch (Exception ex) {
             if (ex instanceof FileNotFoundException) {
-                throw new FileNotFoundException("☹ OOPS!!! I can't find your file!");
+                throw new FileNotFoundException("☹ OOPS!!! I can't find your file leh!");
             } else {
-                throw new Exception("☹ OOPS!!! There was an error in loading file.");
+                throw new Exception("☹ OOPS!!! I can't load your file leh...");
             }
         }
         return list;

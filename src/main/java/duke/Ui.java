@@ -1,9 +1,9 @@
+package duke;
+
 import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
-
-
     public void showWelcome() {
         String hor_line = "____________________________________\n";
         String logo = " _ .-') _               .-. .-')     ('-.  \n"
