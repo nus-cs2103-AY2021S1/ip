@@ -26,6 +26,6 @@ public class Event extends Task {
 
     @Override
     public String toDataString() {
-        return "event/" + taskString + "/" + preposition + "/" + eventString + "/" + status;
+        return "event//" + taskString + "//" + preposition + "//" + eventString + "//" + status;
     }
 }

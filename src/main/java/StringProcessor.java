@@ -66,7 +66,7 @@ public class StringProcessor {
     }
 
     public static Task stringDataProcessor(String rawInput) throws InvalidInputException{
-        String[] splitString = rawInput.split("/");
+        String[] splitString = rawInput.split("//");
 
         int splitStringLength = splitString.length;
 
