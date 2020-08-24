@@ -1,9 +1,11 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.StringBuilder;
 
 public class Sparrow {
-    public static ArrayList<Task> taskList = new ArrayList<Task>();
+    public static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         greet();
@@ -20,49 +22,58 @@ public class Sparrow {
         String[] commandArr = command.trim().split("\\s+", 2);
         try {
             switch (commandArr[0]) {
-                case "bye":
-                    reply("Bye. Hope t' see ye again soon!");
-                    return false;
-                case "list":
-                    displayList();
+            case "bye":
+                reply("Bye. Hope t' see ye again soon!");
+                return false;
+            case "list":
+                if (commandArr.length == 1) {
+                    displayList(taskList);
                     break;
-                case "done":
+                } else if (commandArr.length == 2) {
                     try {
-                        markAsDone(commandArr[1]);
-                        break;
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new MissingTaskNumberException("No task number passed to done command.", e);
-                    }
-                case "todo":
-                    try {
-                        addTask("todo", commandArr[1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new EmptyTodoDescriptionException("No description provided for todo.", e);
+                        displayList(filterList(commandArr[1]));
+                    } catch (DateTimeParseException e) {
+                        System.out.println(standardExceptionMessage() + "Please enter a date in this format: yyyy-mm-dd");
                     }
                     break;
-                case "deadline":
-                    try {
-                        addTask("deadline", commandArr[1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new EmptyDeadlineDescriptionException("No description provided for deadline.", e);
-                    }
+                }
+            case "done":
+                try {
+                    markAsDone(commandArr[1]);
                     break;
-                case "event":
-                    try {
-                        addTask("event", commandArr[1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new EmptyEventDescriptionException("No description provided for event.", e);
-                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new MissingTaskNumberException("No task number passed to done command.", e);
+                }
+            case "todo":
+                try {
+                    addTask("todo", commandArr[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new EmptyTodoDescriptionException("No description provided for todo.", e);
+                }
+                break;
+            case "deadline":
+                try {
+                    addTask("deadline", commandArr[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new EmptyDeadlineDescriptionException("No description provided for deadline.", e);
+                }
+                break;
+            case "event":
+                try {
+                    addTask("event", commandArr[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new EmptyEventDescriptionException("No description provided for event.", e);
+                }
+                break;
+            case "delete":
+                try {
+                    deleteTask(commandArr[1]);
                     break;
-                case "delete":
-                    try {
-                        deleteTask(commandArr[1]);
-                        break;
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new MissingTaskNumberException("No task number passed to delete command.", e);
-                    }
-                default:
-                    throw new UnknownCommandException(commandArr[0]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new MissingTaskNumberException("No task number passed to delete command.", e);
+                }
+            default:
+                throw new UnknownCommandException(commandArr[0]);
             }
         } catch (MissingTaskNumberException e) {
             System.out.println(standardExceptionMessage() + "️ Please enter a task number after the \"done\"/\"delete\" command.");
@@ -106,35 +117,37 @@ public class Sparrow {
         StringBuilder sb = new StringBuilder("Aye Aye Captain! I've added this task:\n  ");
         try {
             switch (type) {
-                case "todo":
-                    Todo todo = new Todo(details);
-                    taskList.add(todo);
-                    sb.append(todo);
+            case "todo":
+                Todo todo = new Todo(details);
+                taskList.add(todo);
+                sb.append(todo);
+                break;
+            case "deadline":
+                try {
+                    String[] taskDetails = details.trim().split("/by");
+                    String description = taskDetails[0];
+                    LocalDate dueDate = stringToDate(taskDetails[1].trim());
+
+                    Deadline deadline = new Deadline(description, dueDate);
+                    taskList.add(deadline);
+                    sb.append(deadline);
                     break;
-                case "deadline":
-                    try {
-                        String[] taskDetails = details.trim().split("/by");
-                        String description = taskDetails[0];
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new InvalidDeadlineByException("/by not passed", e);
+                }
+            case "event":
+                try {
+                    String[] taskDetails = details.trim().split("/at");
+                    String description = taskDetails[0];
+                    LocalDate date = stringToDate(taskDetails[1].trim());
 
-                        Deadline deadline = new Deadline(description, taskDetails[1].trim());
-                        taskList.add(deadline);
-                        sb.append(deadline);
-                        break;
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new InvalidDeadlineByException("/by not passed", e);
-                    }
-                case "event":
-                    try {
-                        String[] taskDetails = details.trim().split("/at");
-                        String description = taskDetails[0];
-
-                        Event event = new Event(description, taskDetails[1].trim());
-                        taskList.add(event);
-                        sb.append(event);
-                        break;
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new InvalidEventAtException("/at not passed", e);
-                    }
+                    Event event = new Event(description, date);
+                    taskList.add(event);
+                    sb.append(event);
+                    break;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new InvalidEventAtException("/at not passed", e);
+                }
 
             }
             String summary = String.format("\nNow you have %d task(s) in the list.", taskList.size());
@@ -144,16 +157,66 @@ public class Sparrow {
             System.out.println(standardExceptionMessage() + "️ Please pass a /by to the deadline");
         } catch (InvalidEventAtException e) {
             System.out.println(standardExceptionMessage() + "️ Please pass a /at to the event");
+        } catch (DateTimeParseException e) {
+            System.out.println(standardExceptionMessage() + "Please enter a date in this format: yyyy-mm-dd");
         }
     }
 
-    public static void displayList() {
+    public static void displayList(ArrayList<Task> taskList) {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list: \n");
         for (int i = 0; i < taskList.size(); i++) {
             String temp = String.format("%d. %s\n", i + 1, taskList.get(i));
             sb.append(temp);
         }
         reply(sb.toString());
+    }
+
+    public static ArrayList<Task> filterList(String dateFilter) throws DateTimeParseException {
+        String[] dateArr = dateFilter.trim().split("\\s+", 2);
+        LocalDate dateToCompare = stringToDate(dateArr[1]);
+        ArrayList<Task> filteredList = new ArrayList<>();
+
+        switch (dateArr[0]) {
+        case "on":
+            for (Task task : taskList) {
+                LocalDate taskDate;
+
+                // Get date from Deadline/Event
+                if (task instanceof Deadline) {
+                    taskDate = ((Deadline) task).getDueDate();
+                } else if (task instanceof Event) {
+                    taskDate = ((Event) task).getDate();
+                } else {
+                    continue;
+                }
+
+                // Check if task's date is on date specified
+                if (taskDate.isEqual(dateToCompare)) {
+                    filteredList.add(task);
+                }
+            }
+            break;
+        case "before":
+            for (Task task : taskList) {
+                LocalDate taskDate;
+
+                // Get date from Deadline/Event
+                if (task instanceof Deadline) {
+                    taskDate = ((Deadline) task).getDueDate();
+                } else if (task instanceof Event) {
+                    taskDate = ((Event) task).getDate();
+                } else {
+                    continue;
+                }
+
+                // Check if task's date is before date specified
+                if (taskDate.isBefore(dateToCompare)) {
+                    filteredList.add(task);
+                }
+            }
+            break;
+        }
+        return filteredList;
     }
 
     public static void markAsDone(String taskNum) {
@@ -169,9 +232,9 @@ public class Sparrow {
             System.out.println("Please enter a valid task number.");
         }
     }
-    
+
     public static String standardExceptionMessage() {
-       return "ARR!\uD83C\uDFF4\u200D\u2620\uFE0F️ ";
+        return "ARR!\uD83C\uDFF4\u200D\u2620\uFE0F️ ";
     }
 
     public static void deleteTask(String taskNum) {
@@ -186,5 +249,9 @@ public class Sparrow {
         } catch (NumberFormatException e) {
             System.out.println("Please enter a valid task number.");
         }
+    }
+
+    public static LocalDate stringToDate(String dateStr) throws DateTimeParseException {
+        return LocalDate.parse(dateStr);
     }
 }
