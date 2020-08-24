@@ -8,10 +8,9 @@ import java.util.ArrayList;
  * Represents a printer. 
  */
 public class Layout {
-    private String line = "\t";
 
     public void printLine() {
-        line = "\t";
+        String line = "\t";
         for (int i = 0; i < 50; i++) {
             line += "\u2500";
         }
