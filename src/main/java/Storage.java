@@ -27,28 +27,28 @@ public class Storage {
         return new Storage(filePath);
     }
 
-    public List<Task> readStoredData() {
+    public TaskList readStoredData() {
         File file = new File(filePath);
         try {
             Scanner scanner = new Scanner(file);
-            List<Task> listOfTasks = new ArrayList<>();
+            TaskList taskList = new TaskList();
             while (scanner.hasNext()) {
                 String line = scanner.nextLine();
                 try {
-                    listOfTasks.add(createTask(line));
+                    taskList.add(createTask(line));
                 } catch (InvalidSymbolException e) {
                     System.err.println("Not a valid line: " + line);
                     continue;
                 }
             }
-            return listOfTasks;
+            return taskList;
         } catch (FileNotFoundException e1) {
             try {
                 file.createNewFile();
             } catch (IOException e2) {
                 e2.printStackTrace();
             }
-            return new ArrayList<>();
+            return new TaskList();
         }
     }
 
@@ -66,11 +66,11 @@ public class Storage {
         }
     }
 
-    public void updateFile(List<Task> listOfTasks) {
+    public void updateFile(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(filePath);
             boolean isFirst = true;
-            for (Task task : listOfTasks) {
+            for (Task task : taskList) {
                 if (isFirst) {
                     isFirst = false;
                     writer.write(task.getSummary());

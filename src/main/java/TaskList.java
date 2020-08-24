@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class TaskList {
+public class TaskList implements Iterable<Task> {
 
     protected List<Task> listOfTasks;
 
@@ -9,12 +10,16 @@ public class TaskList {
         listOfTasks = new ArrayList<>();
     }
 
-    public void addTask(Task task) {
+    public void add(Task task) {
         listOfTasks.add(task);
     }
 
-    public Task deleteTask(int index) {
+    public Task delete(int index) {
         return listOfTasks.remove(index - 1);
+    }
+
+    public Iterator<Task> iterator() {
+        return listOfTasks.iterator();
     }
 
 
