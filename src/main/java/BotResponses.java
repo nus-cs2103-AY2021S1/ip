@@ -37,7 +37,7 @@ public class BotResponses {
     public static void displayListReply(ArrayList<Task> lst) {
         int index = 1;
         System.out.println(horizL);
-        System.out.println(INDENT + "Quack! You have these in your list: ");
+        System.out.println(INDENT + "Quack! You have these in your list currently: ");
         for (Task task : lst) {
             System.out.println(INDENT + index + ". " + task);
             index++;
