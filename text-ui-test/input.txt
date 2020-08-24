@@ -1,6 +1,6 @@
 todo buy keyboard
-deadline buy birthday gift for friend /by Saturday
-event family dinner with uncle /at Sun 6-8pm
+deadline buy birthday gift for friend /by 2020-08-30 1800
+event family dinner with uncle /at 2020-12-12 1900
 list
 done 2
 list

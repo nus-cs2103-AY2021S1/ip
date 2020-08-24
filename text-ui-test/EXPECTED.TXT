@@ -1,28 +1,32 @@
------ Serina here, what would you like to do?
------ Received, added the following task:
-[T][✘] buy keyboard
-You now have 1 pending tasks.
------ Received, added the following task:
-[D][✘] buy birthday gift for friend (by: Saturday)
-You now have 2 pending tasks.
------ Received, added the following task:
-[E][✘] family dinner with uncle (at: Sun 6-8pm)
-You now have 3 pending tasks.
------ Your Tasks: 
+Serina here, how can I assist you?
+------------------------------------------------------
+The following task has been added: 
+0. [T][✘] buy keyboard
+------------------------------------------------------
+The following task has been added: 
+1. [D][✘] buy birthday gift for friend  (by: 30 Aug 2020 6:00PM)
+------------------------------------------------------
+The following task has been added: 
+2. [E][✘] family dinner with uncle  (at: 12 Dec 2020 7:00PM)
+------------------------------------------------------
 1. [T][✘] buy keyboard
-2. [D][✘] buy birthday gift for friend (by: Saturday)
-3. [E][✘] family dinner with uncle (at: Sun 6-8pm)
------ Alright, marked the following task as done: 
-[D][✓] buy birthday gift for friend (by: Saturday)
------ Your Tasks: 
+2. [D][✘] buy birthday gift for friend  (by: 30 Aug 2020 6:00PM)
+3. [E][✘] family dinner with uncle  (at: 12 Dec 2020 7:00PM)
+------------------------------------------------------
+The following task has been marked as done: 
+2. [D][✓] buy birthday gift for friend  (by: 30 Aug 2020 6:00PM)
+------------------------------------------------------
 1. [T][✘] buy keyboard
-2. [D][✓] buy birthday gift for friend (by: Saturday)
-3. [E][✘] family dinner with uncle (at: Sun 6-8pm)
------ You entered a valid command but I can't carry it out. Command description cannot be empty.
------ I can't help you with that request, try something else.
------ Received, deleted the following task:
-[D][✓] buy birthday gift for friend (by: Saturday)
-You now have 2 pending tasks.
------ Your Tasks: 
+2. [D][✓] buy birthday gift for friend  (by: 30 Aug 2020 6:00PM)
+3. [E][✘] family dinner with uncle  (at: 12 Dec 2020 7:00PM)
+------------------------------------------------------
+Command description cannot be empty
+------------------------------------------------------
+I can't help you with that request, try something else.
+------------------------------------------------------
+The following task has been deleted: 
+2. [D][✓] buy birthday gift for friend  (by: 30 Aug 2020 6:00PM)
+------------------------------------------------------
 1. [T][✘] buy keyboard
-2. [E][✘] family dinner with uncle (at: Sun 6-8pm)
+2. [E][✘] family dinner with uncle  (at: 12 Dec 2020 7:00PM)
+------------------------------------------------------

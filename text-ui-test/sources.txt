@@ -1,6 +1,16 @@
+../src/main/java/TaskList.java
+../src/main/java/Storage.java
+../src/main/java/DeleteCommand.java
+../src/main/java/ListCommand.java
+../src/main/java/Parser.java
 ../src/main/java/ToDoTask.java
 ../src/main/java/EventTask.java
+../src/main/java/Command.java
+../src/main/java/AddCommand.java
+../src/main/java/Ui.java
 ../src/main/java/DeadlineTask.java
 ../src/main/java/Task.java
+../src/main/java/ExitCommand.java
 ../src/main/java/Duke.java
+../src/main/java/DoneCommand.java
 ../src/main/java/DukeException.java
