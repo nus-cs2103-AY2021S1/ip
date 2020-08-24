@@ -7,6 +7,9 @@ public class DeadlineTask extends Task {
     }
 
     @Override
+    public String fileString() {return "D | " + super.toString() + " | " + due; }
+
+    @Override
     public String toString() {
         return "[D] " + super.toString() + " (by: " + due + ")";
     }

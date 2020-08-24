@@ -1,21 +1,37 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    ArrayList<Task> taskList;
+    static ArrayList<Task> taskList;
+    static String filePath = "data/duke.txt";
 
     public Duke() {
         this.taskList = new ArrayList<>();
     }
 
     public void init() {
-        System.out.println("Hello! I'm Dukebb :)\n" + "What can I do for you?");
+        System.out.println("Hello! I'm Duke baby :)\n" + "What can I do for you?");
     }
     public void run() {
         Scanner scanner = new Scanner(System.in);
     }
 
-    public static void main(String[] args) {
+
+    /** Updates the file in hard disk based on the new taskList. **/
+    public static void updateFile(String filePath, ArrayList<Task> taskList) throws IOException {
+        FileWriter fileWriter = new FileWriter(filePath);
+        for (int index = 0; index < taskList.size(); index++) {
+            Task task = taskList.get(index);
+            fileWriter.write(task.fileString() + "\n");
+        }
+        fileWriter.close();
+    }
+
+    public static void main(String[] args) throws IOException {
         Duke duke = new Duke();
         duke.run();
         duke.init();
@@ -60,6 +76,7 @@ public class Duke {
                     System.out.println("Got it. I've added this task:");
                     System.out.println("\t" + newTask);
                     System.out.println("Now you have " + String.valueOf(taskList.size()) + " tasks in your list.");
+                    updateFile(filePath, taskList );
 
                 } else if (input.length() >= 8 && input.substring(0, 8).equals("deadline")) {
                     if (input.length() == 8 || (input.length() == 9 && input.substring(8,9).equals(" "))) {
