@@ -4,6 +4,7 @@ public class Tasks implements java.io.Serializable {
 
     private final Storage storage = new Storage();
     private ArrayList<Task> tasks;
+    String loadMessage = "";
 
     public Tasks() {
         tasks = new ArrayList<>();

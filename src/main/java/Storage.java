@@ -28,6 +28,7 @@ public class Storage implements Serializable {
             t = (Tasks) in.readObject();
             in.close();
             fileIn.close();
+            t.loadMessage = "Successfully loaded from storage. " + t.numTasks();
             return t;
         } catch (FileNotFoundException i) {
             return new Tasks();

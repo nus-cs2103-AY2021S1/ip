@@ -1,9 +1,9 @@
 public class Duke {
 
     public static void main(String[] args) throws DukeException {
-        UI ui = new UI();
-        ui.welcome();
         Tasks tasks = Storage.read();
+        UI ui = new UI();
+        ui.welcome(tasks);
         String input = ui.getInput();
         Parser parser = new Parser(tasks);
         while (!input.equals("bye")) {
