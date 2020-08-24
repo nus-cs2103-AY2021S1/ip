@@ -30,6 +30,22 @@ public class TaskList {
         }
     }
 
+    public void findAndShowTasks(String keyword) {
+        keyword = keyword.strip();
+        if (keyword.equals("")) {
+            printAllTasks();
+        } else {
+            StringBuilder foundTasks = new StringBuilder("\nI've found these matching tasks in your list!\n");
+            for (int i = 0; i < tasks.size(); i++) {
+                Task t = tasks.get(i);
+                if (t.inputString.contains(keyword)) {
+                    foundTasks.append(i + 1).append(". ").append(t).append("\n");
+                }
+            }
+            Ui.showMessage(foundTasks.toString());
+        }
+    }
+
     /**
      * Prints the full task list.
      */

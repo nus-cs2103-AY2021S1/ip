@@ -61,5 +61,20 @@ Noted! I've removed this task from your list:
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+I've found these matching tasks in your list!
+1. [T][✗] borrow book
+2. [T][✓] read book
+3. [D][✗] return book (by: Mar 2 2008 0000H)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+I've found these matching tasks in your list!
+3. [D][✗] return book (by: Mar 2 2008 0000H)
+5. [D][✗] do homework (by: no idea :-p)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Goodbye! Hope to see you again soon!
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
