@@ -1,10 +1,15 @@
 package duke.task;
 
-public class Todo extends Task{
+/**
+ * Represents a Todo item in Duke.
+ */
+public class Todo extends Task {
     public Todo(String description) {
         super(description);
     }
-    public String getTaskIdentifier(){
+
+    @Override
+    public String getTaskIdentifier() {
         return "T";
     }
 }

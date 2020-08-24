@@ -19,15 +19,16 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializer;
 
 import duke.exception.DukeException;
-import duke.task.TaskList;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Event;
 import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
+/**
+ * Class to store TaskList objects as json files.
+ */
 public class Storage {
-    private final String filePath;
-    private final Gson gsonObject;
     private static final GsonBuilder gsonBuilder = new GsonBuilder();
     private static final JsonSerializer<TaskList> taskListSerializer = (src, typeOfSrc, context) -> {
         JsonArray list = new JsonArray();
@@ -71,8 +72,28 @@ public class Storage {
         }
         return new TaskList(tasks);
     };
+
+    static {
+        gsonBuilder.registerTypeAdapter(TaskList.class, taskListSerializer);
+        gsonBuilder.registerTypeAdapter(TaskList.class, taskListDeserializer);
+    }
+
+    private final String filePath;
+    private final Gson gsonObject;
+
+    /**
+     * Constructor for Storage.
+     * @param filePath Relative String filepath to the input json file.
+     */
+    public Storage(String filePath) {
+        this.filePath = filePath;
+        this.gsonObject = gsonBuilder.create();
+    }
+
     private static String parseDate(JsonElement elem) throws JsonParseException {
-        if (elem == null) return null;
+        if (elem == null) {
+            return null;
+        }
         JsonObject obj = elem.getAsJsonObject();
         try {
             int year = obj.get("year").getAsInt();
@@ -84,16 +105,11 @@ public class Storage {
         }
     }
 
-    static {
-        gsonBuilder.registerTypeAdapter(TaskList.class, taskListSerializer);
-        gsonBuilder.registerTypeAdapter(TaskList.class, taskListDeserializer);
-    }
-
-    public Storage(String filePath){
-        this.filePath = filePath;
-        this.gsonObject = gsonBuilder.create();
-    }
-
+    /**
+     * Saves TaskList in Json format to the filepath supplied to the constructor.
+     * @param taskList TaskList to save.
+     * @throws DukeException If there is any IOException.
+     */
     public void save(TaskList taskList) throws DukeException {
         try (FileWriter fw = new FileWriter(this.filePath)) {
             this.gsonObject.toJson(taskList, TaskList.class, fw);
@@ -102,9 +118,16 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads TaskList from a previously saved Json file. Uses filepath supplied to constructor.
+     * @return TaskList parsed from Json file.
+     * @throws DukeException If any parsing errors occur (wrong format, etc).
+     */
     public TaskList load() throws DukeException {
         Path path = Paths.get(filePath);
-        if (!path.toFile().isFile()) return new TaskList();
+        if (!path.toFile().isFile()) {
+            return new TaskList();
+        }
         try (Reader reader = Files.newBufferedReader(path)) {
             return gsonObject.fromJson(reader, TaskList.class);
         } catch (IOException e) {

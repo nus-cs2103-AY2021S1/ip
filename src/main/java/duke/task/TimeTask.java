@@ -8,8 +8,8 @@ import duke.exception.DukeException;
 
 public abstract class TimeTask extends Task {
     private final LocalDate date;
-    public abstract String getDateDescriptor();
-    public TimeTask(String description, String dateString) throws DukeException {
+
+    protected TimeTask(String description, String dateString) throws DukeException {
         super(description);
         try {
             this.date = LocalDate.parse(dateString);
@@ -18,6 +18,14 @@ public abstract class TimeTask extends Task {
         }
     }
 
+    /**
+     * Date descriptor used to format output.
+     * e.g. "at" for Event (Event at ...).
+     * Used only for toString formatting. Does not affect Command's match function.
+     * @return String date descriptor.
+     */
+    public abstract String getDateDescriptor();
+
     protected String dateString() {
         return this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
@@ -25,10 +33,10 @@ public abstract class TimeTask extends Task {
     @Override
     public String toString() {
         return super.toString()
-                + " ("
-                + this.getDateDescriptor()
-                + ": "
-                + this.dateString()
-                + ")";
+            + " ("
+            + this.getDateDescriptor()
+            + ": "
+            + this.dateString()
+            + ")";
     }
 }

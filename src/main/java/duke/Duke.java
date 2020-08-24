@@ -1,16 +1,23 @@
 package duke;
 
-import duke.storage.Storage;
-import duke.parser.Parser;
-import duke.ui.Ui;
 import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
+/**
+ * Runs the application.
+ */
 public class Duke {
-    private TaskList taskList;
-    private Storage storage;
     private final Parser parser;
     private final Ui ui;
+    private TaskList taskList;
+    private Storage storage;
+
+    /**
+     * Constructor for the Duke object.
+     */
     public Duke() {
         this.ui = new Ui();
         try {
@@ -24,7 +31,17 @@ public class Duke {
         }
     }
 
-    public void run() {
+    /**
+     * Main function/entrypoint. Will create a new Duke instance and begin interaction with the user immediately.
+     * Takes in no command line arguments.
+     * @param args command line arguments.
+     */
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
+    }
+
+    private void run() {
         ui.welcomeMessage();
         while (ui.isActive()) {
             String input = ui.nextLine();
@@ -35,10 +52,6 @@ public class Duke {
                 ui.systemMessage(e.getMessage());
             }
         }
-    }
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
     }
 
 }
