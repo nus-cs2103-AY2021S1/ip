@@ -4,8 +4,22 @@ public class DoneCommand implements Command {
 
     private int doneIndex;
 
-    public DoneCommand(int doneIndex) {
+    private DoneCommand(int doneIndex) {
         this.doneIndex = doneIndex;
+    }
+
+    public static DoneCommand parse(String command) {
+        String[] details = command.split(" ", 2);
+        if (details.length == 1) {
+            throw new DukeException("Please specify a task to complete!");
+        }
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(details[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid number input!");
+        }
+        return new DoneCommand(taskNumber);
     }
 
     @Override
