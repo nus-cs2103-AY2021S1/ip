@@ -11,8 +11,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/** Represents the command that displays all tasks happening today to the user when executed. */
 public class TodayCommand extends Command {
 
+    /** Displays all tasks happening today to the user.
+     *
+     * @param taskList The taskList involved.
+     * @param ui The ui involved to show messages to the user.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui) {
         LocalDateTime now = LocalDate.now().atStartOfDay();

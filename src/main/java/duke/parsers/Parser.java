@@ -7,8 +7,20 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
+/** Represents a parser that parses user inputs into the relevant commands. */
 public class Parser {
 
+    /** Parses the user input into the relevant command.
+     *
+     * @param userInput The user input.
+     * @return The command that corresponds to the user input.
+     * @throws EmptyTaskDescriptionException If the user inputs a task without the description.
+     * @throws DukeDateTimeParseException If the user inputs the date or time in a wrong format.
+     * @throws EmptyTaskDoneException If the user inputs done without a task.
+     * @throws EmptyTaskDeletedException If the user inputs deleted without a task.
+     * @throws EmptyDueDateException If the user inputs deadline without a due date.
+     * @throws EmptyEventDateException If the user inputs an event without the date and/or time.
+     */
     public static Command parse(String userInput) throws EmptyTaskDescriptionException, DukeDateTimeParseException,
             EmptyTaskDoneException, EmptyTaskDeletedException,
             EmptyDueDateException, EmptyEventDateException {

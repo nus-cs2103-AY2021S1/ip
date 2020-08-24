@@ -1,6 +1,6 @@
 package duke.storage;
 
-import duke.exceptions.InvalidFIlePathException;
+import duke.exceptions.InvalidFilePathException;
 import duke.exceptions.StorageException;
 import duke.exceptions.TaskListTranslatorException;
 import duke.tasklist.TaskList;
@@ -13,19 +13,26 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+/** Represents the storage of the system that handles reading and writing to files. */
 public class Storage {
 
     private final Path path;
     private static final String DEFAULT_FILEPATH = "./data/duke.txt";
 
+    /** Constructs a Storage object with the default file path. */
     public Storage() {
         this(DEFAULT_FILEPATH);
     }
 
-    public Storage(String filePath) throws InvalidFIlePathException {
+    /** Constructs a Storage object with the specified file path.
+     *
+     * @param filePath The file path of the file where the tasks are stored.
+     * @throws InvalidFilePathException If the file path is invalid (does not end with ".txt").
+     */
+    public Storage(String filePath) throws InvalidFilePathException {
         path = Paths.get(filePath);
         if (!isValidPath(path)) {
-            throw new InvalidFIlePathException();
+            throw new InvalidFilePathException();
         }
         File file = new File(filePath);
         file.getParentFile().mkdirs();
@@ -35,6 +42,12 @@ public class Storage {
         return filePath.toString().endsWith(".txt");
     }
 
+    /** Loads the file contents.
+     *
+     * @return The {@link TaskList} containing the tasks in the file or an empty {@link TaskList}
+     * if the file does not exist.
+     * @throws TaskListTranslatorException If the file contents are in an invalid format.
+     */
     public TaskList load() throws TaskListTranslatorException {
         if (!Files.exists(path) || !Files.isRegularFile(path)) {
             return new TaskList();
@@ -48,6 +61,11 @@ public class Storage {
         }
     }
 
+    /** Saves a {@link TaskList} into the file.
+     *
+     * @param taskList The {@link TaskList} to be saved.
+     * @throws StorageException If there is a problem writing to the file.
+     */
     public void save(TaskList taskList) throws StorageException {
         try {
             List<String> encodedTaskList = TaskListTranslator.encode(taskList);

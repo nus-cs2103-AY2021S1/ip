@@ -6,12 +6,14 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/** Main class where the program is run. */
 public class Duke {
 
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
 
+    /** Constructs a Duke object. */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
@@ -23,6 +25,7 @@ public class Duke {
         duke.run();
     }
 
+    /** Runs the program until termination. */
     public void run() {
         ui.showGreeting();
         boolean isExit = false;

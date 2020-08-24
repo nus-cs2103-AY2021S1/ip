@@ -11,8 +11,15 @@ import duke.tasks.Todo;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Represents the translator that handles the conversion of {@link TaskList} to a List of Strings. */
 public class TaskListTranslator {
 
+    /** Decodes a List of Strings into a TaskList.
+     *
+     * @param lines The list of Strings.
+     * @return The taskList.
+     * @throws TaskListTranslatorException If the lines have an invalid format.
+     */
     public static TaskList decode(List<String> lines) throws TaskListTranslatorException {
 
         try {
@@ -46,6 +53,11 @@ public class TaskListTranslator {
         }
     }
 
+    /** Encodes a {@link TaskList} into a list of Strings to be saved into a file.
+     *
+     * @param taskList The {@link TaskList}.
+     * @return The list of Strings.
+     */
     public static List<String> encode(TaskList taskList) {
         ArrayList<String> strings = new ArrayList<>();
         List<Task> tasks = taskList.getTasks();

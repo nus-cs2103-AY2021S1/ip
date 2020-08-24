@@ -1,6 +1,6 @@
 package duke.storage;
 
-import duke.exceptions.InvalidFIlePathException;
+import duke.exceptions.InvalidFilePathException;
 import duke.exceptions.TaskListTranslatorException;
 import duke.parsers.DukeDateTimeParser;
 import duke.tasklist.TaskList;
@@ -31,7 +31,7 @@ public class StorageTest {
 
     @Test
     public void constructor_noTxtExtension_exceptionThrown() throws Exception {
-        assertThrows(InvalidFIlePathException.class, () ->
+        assertThrows(InvalidFilePathException.class, () ->
                 new Storage(TEST_DATA_FOLDER + "/" + "InvalidFileName"));
     }
 
