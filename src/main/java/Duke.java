@@ -1,8 +1,5 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.IOException;
-import java.io.FileWriter;
 
 enum actionType {
     QUIT,
@@ -16,7 +13,22 @@ enum actionType {
 }
 
 public class Duke {
-    private static actionType getAction(String input) {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.getTasks());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            tasks = new TaskList();
+        }
+    }
+
+    private actionType getAction(String input) {
         return input.equalsIgnoreCase("bye")
                 ? actionType.QUIT
                 : input.equalsIgnoreCase("list")
@@ -34,95 +46,42 @@ public class Duke {
                 : actionType.WRONG_INPUT;
     }
 
-    private static ArrayList<Task> getTasks(File data) {
-        ArrayList<Task> list = new ArrayList<>();
+    public void run() {
         try {
-            Scanner dataScanner = new Scanner(data);
-            while (dataScanner.hasNext()) {
-                String next = dataScanner.nextLine();
-                char taskType = next.charAt(1);
-                boolean isDone = next.charAt(4) == '\u2713';
-                String description = next.substring(7);
-                if (taskType == 'T') {
-                    list.add(new ToDo(description, isDone));
-                } else if (taskType == 'D') {
-                    String[] split = description.split("[(]by:");
-                    String deadlineDesc = split[0] + "/by" + split[1].substring(0, split[1].length() - 1);
-                    list.add(new Deadline(deadlineDesc, isDone));
-                } else if (taskType == 'E') {
-                    String[] split = description.split("[(]at:");
-                    String eventDesc = split[0] + "/at" + split[1].substring(0, split[1].length() - 1);
-                    list.add(new Event(eventDesc, isDone));
-                } else {
-                    throw new DukeException("File reading error _(´ཀ`」 ∠)_");
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return list;
-    }
-
-    private static void updateFile(ArrayList<Task> list) throws IOException {
-        FileWriter fw = new FileWriter("src/main/data.txt");
-        for (Task task: list) {
-            String taskString = task.toString();
-            fw.write(taskString + System.lineSeparator());
-        }
-        fw.close();
-    }
-
-    public static void main(String[] args) {
-        try {
-            Ui ui = new Ui();
             Scanner sc = new Scanner(System.in);
-            File data = new File("src/main/data.txt");
-            ArrayList<Task> list;
-            if (data.createNewFile()) {
-                list = new ArrayList<>();
-            } else {
-                list = getTasks(data);
-            }
             ui.showWelcome();
             String next;
             while (true) {
                 next = sc.nextLine();
                 actionType action = getAction(next);
-                switch(action) {
+                switch (action) {
                 case QUIT:
-                    System.out.println("Bye! :>");
+                    ui.goodbye();
                     sc.close();
                     System.exit(0);
                     break;
                 case LIST:
-                    if (list.size() == 0) {
-                        System.out.println("List is empty");
-                    } else {
-                        System.out.println("Items in list:");
-                        for (int i = 0; i < list.size(); i++) {
-                            System.out.println((i + 1) + ". " + list.get(i).toString());
-                        }
-                    }
+                    ui.printList(tasks);
                     break;
                 case MARK_DONE:
                     int taskNo = Integer.parseInt(next.substring(5));
-                    if (taskNo > list.size()) {
+                    if (taskNo > tasks.getList().size()) {
                         throw new DukeException("Task does not exist _(´ཀ`」 ∠)_");
                     } else {
-                        Task completedTask = list.get(taskNo - 1);
+                        Task completedTask = tasks.getList().get(taskNo - 1);
                         completedTask.markAsDone();
-                        updateFile(list);
+                        storage.updateFile(tasks);
                         System.out.println("Task marked complete:");
                         System.out.println(completedTask.toString());
                     }
                     break;
                 case DELETE:
                     int deleteNo = Integer.parseInt(next.substring(7));
-                    if (deleteNo > list.size()) {
+                    if (deleteNo > tasks.getList().size()) {
                         throw new DukeException("Task does not exist _(´ཀ`」 ∠)_");
                     } else {
-                        Task deletedTask = list.remove(deleteNo - 1);
-                        updateFile(list);
+                        Task deletedTask = tasks.getList().remove(deleteNo - 1);
+                        storage.updateFile(tasks);
                         System.out.println("Task deleted:");
                         System.out.println(deletedTask.toString());
                     }
@@ -132,10 +91,10 @@ public class Duke {
                         throw new DukeException("Task cannot be empty _(´ཀ`」 ∠)_");
                     } else {
                         Task newTodo = new ToDo(next.substring(5), false);
-                        list.add(newTodo);
-                        updateFile(list);
+                        tasks.getList().add(newTodo);
+                        storage.updateFile(tasks);
                         System.out.println("Added: " + newTodo.toString());
-                        System.out.println("Total tasks: " + list.size());
+                        System.out.println("Total tasks: " + tasks.getList().size());
                     }
                     break;
                 case ADD_EVENT:
@@ -143,10 +102,10 @@ public class Duke {
                         throw new DukeException("Event cannot be empty _(´ཀ`」 ∠)_");
                     } else {
                         Task newEvent = new Event(next.substring(6), false);
-                        list.add(newEvent);
-                        updateFile(list);
+                        tasks.getList().add(newEvent);
+                        storage.updateFile(tasks);
                         System.out.println("Added: " + newEvent.toString());
-                        System.out.println("Total tasks: " + list.size());
+                        System.out.println("Total tasks: " + tasks.getList().size());
                     }
                     break;
                 case ADD_DEADLINE:
@@ -154,10 +113,10 @@ public class Duke {
                         throw new DukeException("Deadline cannot be empty _(´ཀ`」 ∠)_");
                     } else {
                         Task newDeadline = new Deadline(next.substring(9), false);
-                        list.add(newDeadline);
-                        updateFile(list);
+                        tasks.getList().add(newDeadline);
+                        storage.updateFile(tasks);
                         System.out.println("Added: " + newDeadline.toString());
-                        System.out.println("Total tasks: " + list.size());
+                        System.out.println("Total tasks: " + tasks.getList().size());
                     }
                     break;
                 case WRONG_INPUT:
@@ -165,7 +124,11 @@ public class Duke {
                 }
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("src/main/data.txt").run();
     }
 }

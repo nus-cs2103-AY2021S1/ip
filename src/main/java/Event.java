@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-    LocalDate eventTime;
+    private final LocalDate eventTime;
 
     public Event(String description, boolean isDone) {
         super(description.split(" /at ")[0], false);

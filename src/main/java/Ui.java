@@ -1,5 +1,7 @@
+import java.util.ArrayList;
+
 public class Ui {
-    public void showLine() {
+    private void showLine() {
         System.out.println("________________________________________________________________________");
     }
 
@@ -18,6 +20,26 @@ public class Ui {
                 "and I'll mark it as done");
         System.out.println("    Type 'list' to see the list");
         System.out.println("    Type 'bye' to exit");
+        showLine();
+    }
+
+    public void printList(TaskList tasks) {
+        showLine();
+        ArrayList<Task> list = tasks.getList();
+        if (list.size() == 0) {
+            System.out.println("    List is empty");
+        } else {
+            System.out.println("    Items in list:");
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println("    " + (i + 1) + ". " + list.get(i).toString());
+            }
+        }
+        showLine();
+    }
+
+    public void goodbye() {
+        showLine();
+        System.out.println("    See you again (hopefully)! :>");
         showLine();
     }
 }
