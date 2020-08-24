@@ -17,13 +17,13 @@ public class Duke {
         System.out.println(border);
     }
 
-    public static void commandTask(String input, TaskList newList) throws NoDescriptionException, InvalidCommandException, InvalidTaskException {
+    public static void commandTask(String input, TaskList newList) throws DukeException {
 
         String[] splitString = input.split(" ",2);
 
         if (splitString[0].equals("todo")) {
             if(splitString.length == 1) {
-                throw new NoDescriptionException("    ☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException("    ☹ OOPS!!! The description of a todo cannot be empty.");
             } else {
                 String info = splitString[1];
                 Todos newTodo = new Todos(info);
@@ -32,12 +32,12 @@ public class Duke {
 
         } else if (splitString[0].equals("deadline")) {
             if(splitString.length == 1) {
-                throw new NoDescriptionException("    ☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("    ☹ OOPS!!! The description of a deadline cannot be empty.");
             } else {
                 String info = splitString[1];
                 String[] information = info.split(" /by ");
                 if (information.length == 1) {
-                    throw new InvalidTaskException("    ☹ OOPS!!! Please specify the deadline time");
+                    throw new DukeException("    ☹ OOPS!!! Please specify the deadline time");
                 } else {
                     String description = information[0];
                     String by = information[1];
@@ -57,13 +57,13 @@ public class Duke {
 
         } else if (splitString[0].equals("event")) {
             if(splitString.length == 1) {
-                throw new NoDescriptionException("    ☹ OOPS!!! The description of an event cannot be empty.");
+                throw new DukeException("    ☹ OOPS!!! The description of an event cannot be empty.");
             } else {
                 String info = splitString[1];
                 String[] information = info.split(" /at ");
 
                 if (information.length == 1) {
-                    throw new InvalidTaskException("    ☹ OOPS!!! Please state the event time");
+                    throw new DukeException("    ☹ OOPS!!! Please state the event time");
                 } else {
                     String description = information[0];
                     String at = information[1];
@@ -81,11 +81,11 @@ public class Duke {
             }
 
         } else {
-            throw new InvalidCommandException("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    public static void commandHandler(String input, TaskList newList) throws InvalidDoneDeleteException {
+    public static void commandHandler(String input, TaskList newList) throws DukeException {
         String[] splitInput = input.split(" ");
 
         if (splitInput[0].equals("list")) {
@@ -93,49 +93,45 @@ public class Duke {
 
         } else if (splitInput[0].equals("done")) {
             if (splitInput.length == 1) {
-                throw new InvalidDoneDeleteException("    ☹ OOPS!!! Please specify which task is done");
+                throw new DukeException("    ☹ OOPS!!! Please specify which task is done");
             } else {
                 String taskNumberString = splitInput[1];
                 try {
                     int taskNumberInt = Integer.parseInt(taskNumberString) - 1;
 
                     if (taskNumberInt + 1 > newList.getLength()) {
-                        throw new InvalidDoneDeleteException("    ☹ OOPS!!! Your task number is out of bounds");
+                        throw new DukeException("    ☹ OOPS!!! Your task number is out of bounds");
                     } else {
                         Task t = newList.get(taskNumberInt);
                         t.markDone();
                         newList.updateDone();
                     }
                 } catch (NumberFormatException e) {
-                    throw new InvalidDoneDeleteException("    ☹ OOPS!!! Invalid task number.");
+                    throw new DukeException("    ☹ OOPS!!! Invalid task number.");
 
                 }
             }
         } else if (splitInput[0].equals("delete")) {
             if (splitInput.length == 1) {
-                throw new InvalidDoneDeleteException("    ☹ OOPS!!! Please specify which task you want to delete");
+                throw new DukeException("    ☹ OOPS!!! Please specify which task you want to delete");
             } else {
                 String taskNumberString = splitInput[1];
                 try {
                     int taskNumberInt = Integer.parseInt(taskNumberString) - 1;
 
                     if (taskNumberInt + 1 > newList.getLength()) {
-                        throw new InvalidDoneDeleteException("    ☹ OOPS!!! Your task number is out of bounds");
+                        throw new DukeException("    ☹ OOPS!!! Your task number is out of bounds");
                     } else {
                         newList.removeTask(taskNumberInt);
                     }
                 } catch (NumberFormatException e) {
-                    throw new InvalidDoneDeleteException("    ☹ OOPS!!! Invalid task number.");
+                    throw new DukeException("    ☹ OOPS!!! Invalid task number.");
                 }
             }
         } else {
             try {
                 commandTask(input,newList);
-            } catch (InvalidCommandException e) {
-                System.out.println(e.getMessage());
-            } catch (NoDescriptionException e) {
-                System.out.println(e.getMessage());
-            } catch (InvalidTaskException e) {
+            } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -166,7 +162,7 @@ public class Duke {
                     } else {
                         commandHandler(input, newList);
                     }
-                } catch (InvalidDoneDeleteException e) {
+                } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
                 System.out.println(underscore);
@@ -189,7 +185,7 @@ public class Duke {
                         } else {
                             commandHandler(input, newList);
                         }
-                    } catch (InvalidDoneDeleteException error) {
+                    } catch (DukeException error) {
                         System.out.println(error.getMessage());
                     }
                     System.out.println(underscore);
