@@ -1,3 +1,6 @@
+/**
+ * Represents an event task at a certain time.
+ */
 public class Event extends Task{
 
     private final String task;
@@ -8,6 +11,11 @@ public class Event extends Task{
             this.time = time;
     }
 
+    /**
+     * Returns the task description of this Event.
+     *
+     * @return String of task description.
+     */
     @Override
     protected String getTask() {
         return this.task;

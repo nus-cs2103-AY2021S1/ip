@@ -2,6 +2,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a parser to make sense of user input and saved data.
+ */
 public class Parser {
 
     private TaskList list;
@@ -12,6 +15,13 @@ public class Parser {
         this.list = list;
     }
 
+    /**
+     * Parses a String and creates a task based on the String.
+     * Used to recreate tasks from previously saved data upon start up.
+     *
+     * @param line The line which is to be parsed.
+     * @return Task object as described by the line.
+     */
     protected Task parseFileData(String line) {
         char taskType = line.charAt(3);
         boolean isDone = line.charAt(6) == '\u2713';
@@ -35,6 +45,12 @@ public class Parser {
         return task;
     }
 
+    /**
+     * Parses a String and performs actions based on the String.
+     * Used to process user input and commands.
+     *
+     * @param input The user input which is to be parsed.
+     */
     protected void parseUserInput(String input) throws DukeException, IOException {
         System.out.print("\n");
 

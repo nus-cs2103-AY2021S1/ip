@@ -1,3 +1,6 @@
+/**
+ * Represents the user interface that deals with user interactions.
+ */
 public class Ui {
 
     protected void start() {

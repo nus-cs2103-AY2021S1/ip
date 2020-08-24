@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a list of tasks to keep track of.
+ * A task is represented as a Task object.
+ */
 public class TaskList {
 
     private final List<Task> list = new ArrayList<>();
@@ -23,12 +27,20 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds task to the task list and saves it.
+     *
+     * @param task Task to be added.
+     */
     protected void addTask(Task task) throws IOException {
         list.add(task);
         System.out.println("Added: " + task + "\n");
         storage.saveTasks(toString());
     }
 
+    /**
+     * Marks a task as done.
+     */
     protected void markTaskDone(String command) throws DukeException {
         try {
             int listIndex = Integer.parseInt(command.substring(5));
@@ -42,6 +54,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task from the list.
+     */
     protected void deleteTask(String command) throws DukeException {
         try {
             int listIndex = Integer.parseInt(command.substring(7));
