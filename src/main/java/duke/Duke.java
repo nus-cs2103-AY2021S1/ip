@@ -6,12 +6,22 @@ import duke.task.TaskList;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Personal Assistant that keeps track of a user's list of tasks.
+ */
 public class Duke {
     private static final Path storageFilePath = Paths.get(".", "data", "test.txt");
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Constructor to create a Duke object.
+     * <p>
+     * Duke consists of a <code>Ui</code>, <code>TaskList</code>, and <code>Storage</code> which
+     * is responsible for user interactions, keeping track of user's tasks, and writing tasks
+     * to the user's local storage respectively.
+     */
     Duke() {
         this.ui = new Ui();
         this.storage = new Storage(Duke.storageFilePath);
@@ -23,6 +33,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Begins running Duke, and waits for user input to interact with Duke.
+     *
+     * @param args user input from the command line.
+     */
     public static void main(String[] args){
         new Duke().run();
     }

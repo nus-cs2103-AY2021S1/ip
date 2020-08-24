@@ -12,10 +12,22 @@ import duke.task.TaskList;
 public class DeleteCommand extends Command {
     private final String userInput;
 
+    /**
+     * Constructor to create a delete command.
+     * @param userInput command give from user via command line.
+     */
     public DeleteCommand(String userInput) {
         this.userInput = userInput;
     }
 
+    /**
+     * Delete a task from Duke's TaskList and update Duke's storage.
+     *
+     * @param taskList the List containing all the tasks that Duke has stored.
+     * @param ui a Ui object for interaction with users.
+     * @param storage the database for Duke to save all tasks to the user's local storage.
+     * @throws DukeException when the task to be deleted does not exist in Duke's TaskList.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {

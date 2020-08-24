@@ -2,10 +2,14 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * A Parser to take in user input and determines the Command given to Duke.
+ */
 public class Parser {
 
     /**
      * Parse user input and returns an enum of the command.
+     *
      * @param fullCommand is the user input from the terminal.
      * @return an enum representing the command from the user.
      */

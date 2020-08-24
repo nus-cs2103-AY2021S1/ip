@@ -12,11 +12,24 @@ import duke.task.TaskList;
 public class DoneCommand extends Command {
     private final String userInput;
 
+    /**
+     * Constructor to create a delete command.
+     *
+     * @param userInput command given from user via command line.
+     */
     public DoneCommand(String userInput) {
         this.userInput = userInput;
 
     }
 
+    /**
+     * Mark a task as completed, updates Duke's TaskList as well as Storage.
+     *
+     * @param taskList the List containing all the tasks that Duke has stored.
+     * @param ui a Ui object for interaction with users.
+     * @param storage the database for Duke to save all tasks to the user's local storage.
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {

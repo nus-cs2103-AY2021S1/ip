@@ -18,10 +18,18 @@ import java.io.FileWriter;
 import java.nio.file.Path;
 
 
+/**
+ * Storage links the TaskList from Duke to the user's local storage.
+ */
 public class Storage {
     private final Path pathToStorage;
     private List<String> allTasks;
 
+    /**
+     * Constructor to create a Storage object, which will be used when Duke creates, updates, or deletes Tasks.
+     *
+     * @param pathToStorage the path to the user's storage where the Tasks will be stored.
+     */
     public Storage(Path pathToStorage) {
         this.pathToStorage = pathToStorage;
         try {
@@ -40,7 +48,8 @@ public class Storage {
     }
 
     /**
-     * Converts string from task storage file to a task list for duke.Duke to use.
+     * Converts string from task storage file to a task list for Duke to use.
+     *
      * @return a list of Tasks readable by duke.Duke.
      */
     public ArrayList<Task> getAllTasks() throws DukeException {
@@ -102,6 +111,9 @@ public class Storage {
         return ans;
     }
 
+    /**
+     * Saves all the Tasks from the TaskList into the user's local storage.
+     */
     public void writeToStorage() {
         try {
             File storageFile = new File(String.valueOf(pathToStorage));
@@ -115,16 +127,32 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds a new Task to the local storage.
+     *
+     * @param task the Task to be added.
+     */
     public void createTask(Task task) {
         this.allTasks.add(task.toString());
         writeToStorage();
     }
 
+    /**
+     * Updates an existing task in the local storage.
+     *
+     * @param task the task to be updated.
+     * @param taskIndex the index of the Task in the List of all the Tasks.
+     */
     public void updateTask(Task task, int taskIndex) {
         this.allTasks.set(taskIndex, task.toString());
         writeToStorage();
     }
 
+    /**
+     * Removes an existing from the local storage.
+     *
+     * @param taskIndex the index of the task in the List of all the Tasks to be deleted.
+     */
     public void deleteTask(int taskIndex) {
         this.allTasks.remove(taskIndex);
         writeToStorage();
