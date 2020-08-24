@@ -2,7 +2,19 @@ package main.java;
 
 import java.util.List;
 
-public class Chat {
+public class UI {
+
+    // Prints the welcome message
+    public static String welcome(){
+        String logo =
+                " ____  __.__\n" +
+                        "|    |/ _|__| ____    ____\n" +
+                        "|      < |  |/    \\  / ___\\ \n" +
+                        "|    |  \\|  |   |  \\/ /_/  >\n" +
+                        "|____|__ \\__|___|  /\\___  /\n" +
+                        "        \\/       \\//_____/\n";
+        return logo + "\n" + "Hello! I'm King\nWhat can I do for you?";
+    }
 
     // Returns a printable chatBox around a single-line string
     public static String chatBox(String chatContent){
