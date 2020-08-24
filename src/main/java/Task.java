@@ -1,3 +1,9 @@
+/**
+ * Encapsulates the task into a class. The 'Task' class
+ * supports getting status icon, getting description,
+ * marking the task as done and converting the task
+ * to a string.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

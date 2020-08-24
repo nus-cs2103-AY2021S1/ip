@@ -35,6 +35,12 @@ public class Command {
         this.hasDate = hasDate;
     }
 
+    /**
+     * Execute the command and store the task into the list.
+     * @param tasks The tasklist object that contains the list of tasks.
+     * @param ui The ui object.
+     * @param storage The storage object
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> lists = tasks.getTasks();
 
