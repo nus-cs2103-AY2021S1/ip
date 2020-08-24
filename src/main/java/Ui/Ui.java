@@ -43,7 +43,7 @@ public class Ui {
     /**
      * Shows a line to separate the user and Cait's messages.
      */
-    protected void showLine() {
+    public void showLine() {
         System.out.println("***********************************************************************");
     }
 
@@ -61,18 +61,16 @@ public class Ui {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
+            showLine();
             if (command.equals("bye") || command.equals("Bye")) {
                 this.isExit = true;
-                //showLine();
                 showBye();
-                //showLine();
                 sc.close();
                 break;
             } else {
-                //showLine();
                 parser.manageTask(command);
-                //showLine();
             }
+            showLine();
         }
     }
 

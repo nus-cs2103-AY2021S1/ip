@@ -232,7 +232,7 @@ public class Storage {
      */
     public void deleteFromFile(int lineNumber) throws IOException{
         File currFile = new File(this.fileName);
-        File tempFile = new File("duke_data_temp.txt");
+        File tempFile = new File("cait_data_temp.txt");
         BufferedReader reader = new BufferedReader(new FileReader(currFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
@@ -267,7 +267,7 @@ public class Storage {
      */
     public void setDoneLine(int lineNumber) throws IOException  {
         File currFile = new File(this.fileName);
-        File tempFile = new File("duke_data_temp.txt");
+        File tempFile = new File("cait_data_temp.txt");
         BufferedReader reader = new BufferedReader(new FileReader(currFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 

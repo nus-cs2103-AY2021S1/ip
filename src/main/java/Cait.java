@@ -32,6 +32,7 @@ public class Cait {
      */
     public void run() {
         ui.showGreeting();
+        ui.showLine();
         boolean isExit = ui.isExit();
         while (!isExit) {
             ui.readInput();
@@ -43,6 +44,6 @@ public class Cait {
      * Creates a new Cait object and starts running.
      */
     public static void main(String[] args) {
-        new Cait("duke_data.txt").run();
+        new Cait("cait_data.txt").run();
     }
 }

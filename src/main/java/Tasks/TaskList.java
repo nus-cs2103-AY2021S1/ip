@@ -2,7 +2,6 @@ package tasks;
 
 import storage.Storage;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 import static java.lang.Integer.parseInt;
 
@@ -46,6 +45,12 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    /**
+     * Checks if the text has a specified keyword
+     * @param text the string of text to be searched
+     * @param keyword the keyboard to search for
+     * @return true if the text has the specified keyword
+     */
     public boolean containsWord(String text, String keyword) {
         /*String regexFormat = "(?i).*?\\b%s\\b.*?";
         String regex = String.format(regexFormat, Pattern.quote(keyword));
@@ -53,6 +58,11 @@ public class TaskList {
         return text.contains(keyword);
     }
 
+    /**
+     * Checks if any tasks in the list has the specified keyword
+     * @param keyword the keyword to find in the tasks
+     * @return true if there are any tasks that has the keyword
+     */
     public boolean findInList(String keyword) {
         boolean isMatch = false;
         int i = 1;

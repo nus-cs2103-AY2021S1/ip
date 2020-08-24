@@ -1,6 +1,8 @@
 todo borrow book
 deadline return book /by 2020-09-04
 event project meeting /at 2020-10-15
+find book
+find nothing
 list
 done 1
 list

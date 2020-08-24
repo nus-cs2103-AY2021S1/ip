@@ -193,6 +193,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the command for find.
+     * @param command the user's input
+     * @throws DukeException if the user doesn't give a description for find
+     */
     public void handleFind(String command) throws DukeException {
         String[] findCommand = command.split("\\W+");
         if (findCommand.length == 1) {
@@ -200,8 +205,12 @@ public class Parser {
         } else {
             String taskName = command.substring(command.indexOf("find") + 5);
             System.out.println("Here's what I've found for you:");
-            tasks.findInList(taskName);
-            System.out.println("Hope you found it useful!");
+            boolean hasTasks = tasks.findInList(taskName);
+            if (hasTasks) {
+                System.out.println("Hope you found it useful!");
+            } else {
+                System.out.println("Oh! Looks like there aren't any tasks that has this word!");
+            }
         }
     }
 
