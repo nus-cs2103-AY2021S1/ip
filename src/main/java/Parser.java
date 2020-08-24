@@ -58,7 +58,12 @@ public class Parser {
                 System.out.println("Here are your tasks:");
                 System.out.println(list);
             } else if (input.startsWith("done")) {
-                list.markTaskDone(input);
+                try {
+                    int listIndex = Integer.parseInt(input.substring(5));
+                    list.markTaskDone(listIndex);
+                } catch (Exception error) {
+                    throw new DukeException("OOPS!!! Please choose a valid task index to mark as done.\n");
+                }
             } else if (input.startsWith("todo")) {
                 if (input.equals("todo")) {
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
@@ -85,7 +90,12 @@ public class Parser {
                 Event eventTask = new Event(task, time);
                 list.addTask(eventTask);
             } else if (input.startsWith("delete")) {
-                list.deleteTask(input);
+                try {
+                    int listIndex = Integer.parseInt(input.substring(7));
+                    list.deleteTask(listIndex);
+                } catch (Exception error) {
+                    throw new DukeException("OOPS!!! Please choose a valid task index to delete.\n");
+                }
             } else if (input.startsWith("find")) {
                 if (input.equals("find")) {
                     throw new DukeException("OOPS!!! Please give me a keyword to search.\n");

@@ -13,10 +13,8 @@ public class TaskList {
 
     private List<Task> list = new ArrayList<>();
     private Storage storage;
-    private static String doneErrorMessage = "OOPS!!! Please choose a valid task index to mark as done.\n";
-    private static String deleteErrorMessage = "OOPS!!! Please choose a valid task index to delete.\n";
 
-    TaskList(Storage storage) throws FileNotFoundException, DukeException {
+    TaskList(Storage storage) throws FileNotFoundException {
         this.storage = storage;
         Scanner scanner = storage.load();
         Parser parser = new Parser();
@@ -40,37 +38,36 @@ public class TaskList {
 
     /**
      * Marks a task as done.
+     *
+     * @param listIndex Index of the task in the list to be marked as done.
      */
-    protected void markTaskDone(String command) throws DukeException {
-        try {
-            int listIndex = Integer.parseInt(command.substring(5));
+    protected void markTaskDone(int listIndex) throws IOException {
             Task task = list.get(listIndex - 1);
             task.markDone();
             System.out.printf("Hurray! %s is now done.\n", task.getTask());
             System.out.println(task + "\n");
             storage.saveTasks(toString());
-        } catch (Exception error) {
-            throw new DukeException(doneErrorMessage);
-        }
     }
 
     /**
      * Deletes a task from the list.
+     *
+     * @param listIndex Index of the task in the list to be marked deleted.
      */
-    protected void deleteTask(String command) throws DukeException {
-        try {
-            int listIndex = Integer.parseInt(command.substring(7));
+    protected void deleteTask(int listIndex) throws IOException {
             Task task = list.get(listIndex - 1);
             list.remove(listIndex - 1);
             System.out.printf("Okay %s has been deleted.\n", task.getTask());
             System.out.println(task);
             System.out.println("You now have " + list.size() + " tasks.\n");
             storage.saveTasks(toString());
-        } catch (Exception error) {
-            throw new DukeException(deleteErrorMessage);
-        }
     }
 
+    /**
+     * Finds tasks that match a specified keyword.
+     *
+     * @param keyword The keyword to be matched.
+     */
     protected void findTask(String keyword) {
         String result = "Here are the matching tasks I could find:\n";
         int count = 1;
