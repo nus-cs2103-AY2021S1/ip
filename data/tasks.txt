@@ -1,0 +1,4 @@
+todo|✘|read book
+deadline|✓|do this|Mon 1pm
+event|✘|do that|Tue 2-5pm
+todo|✘|do those

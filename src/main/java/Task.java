@@ -23,6 +23,14 @@ public class Task {
         }
     }
 
+    public void setWhetherTaskDone(String whetherIsDone) {
+         isDone = whetherIsDone.equals("true");
+    }
+
+    public String writeToFile() {
+        return this.getStatusSymbol() + "|" + this.taskName;
+    }
+
     @Override
     public String toString() {
         return "[" +

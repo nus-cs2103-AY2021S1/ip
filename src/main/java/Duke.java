@@ -13,6 +13,8 @@ public class Duke {
     private static ArrayList<Task> listOfTasks = new ArrayList<>();
 
     public static void main(String[] args) {
+        Storage storage = new Storage("data/tasks.txt", "data");
+        storage.read(listOfTasks);
         greet();
         while (scanner.hasNextLine()) {
             try {
@@ -136,6 +138,7 @@ public class Duke {
                         }
                     }
                 }
+                storage.write(listOfTasks);
             } catch (InvalidInputException e) {
                 System.out.println(LINE_DIVIDER);
                 System.out.println("     " +e.getMessage());

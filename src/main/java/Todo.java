@@ -5,6 +5,13 @@ public class Todo extends Task {
     }
 
     @Override
+    public String writeToFile() {
+        return "todo" + "|" + this.getStatusSymbol() + "|"
+                + this.taskName;
+
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

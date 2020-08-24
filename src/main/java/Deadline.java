@@ -7,6 +7,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String writeToFile() {
+        return "deadline" + "|" + this.getStatusSymbol() + "|"
+                + this.taskName + "|" + this.completeBy;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + completeBy + ")";
     }
