@@ -14,14 +14,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Deals with reading and writing of Task List in the text form.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Class constructor.
+     * @param filePath The filePath of the storage text file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    public List<Task> load() throws DukeInvalidDataException, DukeInvalidStoragePathException, DukeInvalidData, DukeInvalidDateTimeInputException {
+    /**
+     * Reads the text file and returns the list of tasks in the text.
+     *
+     * @return The list of tasks in storage text file.
+     * @throws DukeInvalidDataException If the Storage text file is corrupted.
+     * @throws DukeInvalidStoragePathException If the Storage path is invalid.
+     * @throws DukeInvalidDateTimeInputException If the Date Time in storage file is invalid.
+     */
+    public List<Task> load() throws DukeInvalidDataException, DukeInvalidDateTimeInputException {
         File file = new File(filePath);
         List<Task> list = new ArrayList<>();
         try {
@@ -84,6 +99,13 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Writes and save the Storage text file with the list of tasks.
+     *
+     * @param taskList The TaskList with list of tasks.
+     * @throws IOException If the filePath is invalid.
+     * @throws DukeInvalidIndexException If the index exceeds list size.
+     */
     public void save(TaskList taskList) throws IOException, DukeInvalidIndexException {
         File file = new File(filePath);
         FileWriter writer = new FileWriter(file);
