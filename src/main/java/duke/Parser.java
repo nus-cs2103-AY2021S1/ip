@@ -2,7 +2,15 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Encapsulates the parsing method of the Duke program.
+ */
 public class Parser {
+    /**
+     * Parses the input into a Command
+     * @param input the input command from the user
+     * @return a command that can be executed
+     */
     public static Command parse(String input) {
         String[] splitInput = input.split(" ");
 

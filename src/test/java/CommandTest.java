@@ -5,6 +5,9 @@ import duke.TaskList;
 import duke.TaskType;
 import duke.Todo;
 
+/**
+ * A test class wrapping around the test methods for the class Command.
+ */
 public class CommandTest {
     @Test
     public void addToList_simpleTodo_Success() {

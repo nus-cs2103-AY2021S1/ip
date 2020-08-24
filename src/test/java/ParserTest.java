@@ -5,6 +5,9 @@ import duke.Command;
 import duke.Parser;
 import duke.TaskType;
 
+/**
+ * A test class wrapping around the test methods for the class Parser.
+ */
 public class ParserTest {
     @Test
     public void simpleTodo_todoReadBook_Success() {
