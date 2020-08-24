@@ -6,6 +6,11 @@ import java.io.IOException;
 
 public class StorageTest {
 
+    /**
+     * Tests if the Storage class creates the necessary files and folders should they be missing.
+     *
+     * @throws Exception Exception is thrown if the test case fails.
+     */
     @Test
     public void testFileCreation() throws Exception {
         File dir = new File("src/main/data/");
@@ -37,7 +42,7 @@ public class StorageTest {
         newFile.delete();
         newDir.delete();
     }
-
+    
     @Test
     public void testDataCreation() throws Exception {
         Storage storage1 = new Storage("src/main/data/", "src/main/data/data.txt");

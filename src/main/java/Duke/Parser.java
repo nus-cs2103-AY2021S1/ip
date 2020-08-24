@@ -6,18 +6,42 @@ public class Parser {
     private TaskList lines;
     private boolean carryOn = true;
 
+    /**
+     * The constructor of the Parser object. It takes in an ArrayList{@link ArrayList} which represents
+     * the current set of tasks. The arrayList is then converted into a TaskList object for easier manipulation of the
+     * items.
+     *
+     * @param lines the list of tasks.
+     */
     public Parser(ArrayList<String> lines) {
         this.lines = new TaskList(lines);
     }
 
+    /**
+     * Checks if Duke should carry on.
+     *
+     * @return True if Duke is not terminated with a Bye command, false otherwise.
+     */
     public boolean continueDuke() {
         return carryOn;
     }
 
+    /**
+     * Simply returns the current set of lines. This should be called when Duke is terminated.
+     *
+     * @return The finalized set of lines
+     */
     public ArrayList<String> finalizedLines() {
         return lines.getList();
     }
 
+    /**
+     * Parses the input given by the users. The method checks if the user's input is a done, list, delete, bye or add
+     * command and executes the appropriate response. If the input is invalid, a DukeException is thrown.
+     *
+     * @param inputString The user input to be parsed
+     * @throws DukeException The exception explaining why the input was invalid
+     */
     public void parse(String inputString) throws DukeException {
         String divider = "************************************************\n";
         if (inputString.indexOf("done ") == 0) {
