@@ -4,14 +4,13 @@ bleh
 bleh kjhfkdsh
 todo
 event
-event bfast
 event bfast /at
-event bfast /at 10am-1030am
+event bfast /at 2020-08-24T10:00 to 12:00
 list
 deadline
 deadline project
-deadline project /by
-deadline project /by 20-08-2020 2359
+deadline project /by 2020-08-27
+list 2020-08-24
 list
 done 2
 list

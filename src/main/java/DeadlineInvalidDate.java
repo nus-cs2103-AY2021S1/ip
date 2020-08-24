@@ -1,5 +1,6 @@
-public class DeadlineInvalidDate extends InvalidDateException {
+public class DeadlineInvalidDate extends InvalidDateTimeException {
     public DeadlineInvalidDate() {
-        super("OOPS. You need to put \"/by [date]\" after inputting a Deadline.");
+        super("OOPS. You need to put \"/by [DateTimeFormat]\"\n" +
+                "after a Deadline.");
     }
 }

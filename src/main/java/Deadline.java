@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -17,6 +18,11 @@ public class Deadline extends Task {
     @Override
     public Deadline markDone() {
         return new Deadline(task, deadline, true);
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return deadline.toLocalDate();
     }
 
     @Override

@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import java.util.Scanner;
@@ -83,6 +84,7 @@ public class Duke {
 
         String task;
         LocalDateTime date = null;
+        LocalDateTime endDate = null;
 
         try {
             task = input.substring(firstWord.toString().length() + 1);
@@ -97,7 +99,21 @@ public class Duke {
             try {
 
                 task = task.substring(0, task.indexOf('/'));
-                date = getDateTime(input.substring(input.indexOf('/') + 4));
+                date = firstWord == Command.event
+                        ? input.contains("to ")
+                        ? getDateTime(input.substring(input.indexOf("/at") + 4, input.indexOf("to ")))
+                        : getDateTime(input.substring(input.indexOf("/at") + 4))
+                        : getDateTime(input.substring(input.indexOf("/by") + 4));
+
+                if (firstWord == Command.event && input.contains("to ")) {
+                    String endDateString = input.substring(input.indexOf("to ") + 3);
+
+                    if (endDateString.length() <= 8) {
+                        endDate = LocalDateTime.of(date.toLocalDate(), LocalTime.parse(endDateString));
+                    } else {
+                        endDate = getDateTime(endDateString);
+                    }
+                }
 
             } catch (StringIndexOutOfBoundsException | InvalidDateException e) {
 
@@ -111,7 +127,11 @@ public class Duke {
             if (firstWord == Command.deadline) {
                 list.add(new Deadline(task, date));
             } else if (firstWord == Command.event) {
-                list.add(new Event(task, date));
+                if (endDate != null) {
+                    list.add(new Event(task, date, endDate));
+                } else {
+                    list.add(new Event(task, date));
+                }
             }
 
         }
@@ -154,14 +174,18 @@ public class Duke {
 
                 if (firstWord == Command.list) {
 
-                    printList();
+                    if (input.trim().equals(firstWord.name())) {
+                        printList();
+                    } else {
+                        LocalDate date = getDateTime(input.substring(
+                                firstWord.name().length()).trim()).toLocalDate();
+                        printList(date);
+                    }
 
                 } else if (firstWord == Command.done || firstWord == Command.delete) {
 
                     if (input.equals(firstWord.toString())) {
-                        System.out.print("Invalid format. After ");
-                        System.out.print("\"" + firstWord + "\", ");
-                        System.out.println("you need to put a positive integer");
+                        throw new NoIndexException(firstWord.name());
                     } else {
 
                         try {
@@ -176,9 +200,7 @@ public class Duke {
                             }
 
                         } catch (NumberFormatException numError) {
-                            System.out.print("Invalid format. After ");
-                            System.out.print("\"" + firstWord + "\", ");
-                            System.out.println("you need to put a positive integer");
+                            throw new NoIndexException(firstWord.name());
                         }
                     }
 
@@ -197,7 +219,6 @@ public class Duke {
             }
 
             System.out.println(line);
-
             input = sc.nextLine();
         }
 
@@ -206,6 +227,8 @@ public class Duke {
     }
 
     private LocalDateTime getDateTime(String dateString) throws InvalidDateException {
+
+        dateString = dateString.trim();
 
         try {
 
@@ -221,6 +244,27 @@ public class Duke {
 
         } catch (DateTimeParseException e) {
             throw new InvalidDateException();
+        }
+    }
+
+    private void printList(LocalDate date) {
+
+        int i = 0;
+        for(Task task: list) {
+            if (task.getDate().equals(date)) {
+                if (i == 0) {
+                    System.out.println("Here's your list on " +
+                            date.format(DateTimeFormatter.ofPattern("dd MMM y:")));
+                }
+
+                System.out.println((i + 1) + ". " + task);
+                i++;
+            }
+        }
+
+        if (i == 0 || list.size() == 0) {
+            System.out.println("You have nothing to do on " +
+                    date.format(DateTimeFormatter.ofPattern("dd MMM y.")));
         }
     }
 
