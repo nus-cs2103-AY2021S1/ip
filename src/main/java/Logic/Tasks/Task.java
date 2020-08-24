@@ -1,3 +1,5 @@
+package Logic.Tasks;
+
 public class Task {
 
     private String name;
@@ -10,6 +12,10 @@ public class Task {
 
     public void completed(){
         this.isDone = true;
+    }
+
+    public String toData(){
+        return (isDone ? "1|" : "0|") + name + "|";
     }
 
     @Override
