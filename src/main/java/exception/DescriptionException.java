@@ -1,6 +1,8 @@
+package exception;
+
 public class DescriptionException extends DukeException {
-    protected String command;
-    DescriptionException(String command) {
+    private String command;
+    public DescriptionException(String command) {
         this.command = command;
     }
 

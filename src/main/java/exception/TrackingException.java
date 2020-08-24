@@ -1,6 +1,8 @@
+package exception;
+
 public class TrackingException extends DukeException {
     protected String command;
-    TrackingException(String command) {
+    public TrackingException(String command) {
         this.command = command;
     }
 

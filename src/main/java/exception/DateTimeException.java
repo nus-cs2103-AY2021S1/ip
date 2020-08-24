@@ -1,6 +1,7 @@
-public class DateTimeException extends DukeException {
-    DateTimeException() {
+package exception;
 
+public class DateTimeException extends DukeException {
+    public DateTimeException() {
     }
 
     public String toString() {
