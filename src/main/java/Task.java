@@ -1,20 +1,9 @@
 public class Task {
     protected String description;
     protected taskStatus status;
-    protected taskType type;
 
     enum taskStatus {
-        DONE("1"), NOTDONE("0");
-
-        public final String num;
-
-        taskStatus(String num) {
-            this.num = num;
-        }
-
-        public String getNum() {
-            return num;
-        }
+        DONE, NOTDONE
     }
 
     enum taskType {
@@ -24,13 +13,6 @@ public class Task {
     public Task(String desc, String type) {
         this.status = taskStatus.NOTDONE;
         this.description = desc;
-        if (type.equals("todo")) {
-            this.type = taskType.TODO;
-        } else if (type.equals("deadline")) {
-            this.type = taskType.DEADLINE;
-        } else {
-            this.type = taskType.EVENT;
-        }
     }
 
     public String getStatusIcon() {

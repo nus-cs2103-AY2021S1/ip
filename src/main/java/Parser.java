@@ -1,65 +1,52 @@
-import java.util.ArrayList;
+public class Parser {
 
-public class TaskHandler {
-    protected ArrayList<Task> taskList;
-
-    enum operationType {
-        DONE, DELETE
-    }
-
-    public TaskHandler(ArrayList<Task> list) {
-        this.taskList = list;
-    }
-
-    public ArrayList<Task> getTaskList() {
-        return taskList;
-    }
-
-    public ArrayList<Task> clearList() {
-        this.taskList = new ArrayList<>();
-        System.out.println("The list of tasks has been cleared.");
-        return taskList;
-    }
-
-    public void printList() throws DukeException {
-        if (taskList.isEmpty()) {
-            // Asks user for tasks when printing empty list
-            throw new DukeException("\u2639 Oops, the list of tasks is empty, pls add tasks first.");
+    public static Command parse(String input, TaskListHandler handler) throws DukeException {
+        String firstWord = input.split(" ")[0];
+        switch (firstWord) {
+        case "bye":
+            return new ByeCommand();
+        case "list":
+            return new ListCommand();
+        case "done":
+            Task currentTask = Parser.parseModifyTaskCommand(input, handler);
+            return new DoneCommand(currentTask);
+        case "delete":
+            Task delTask = Parser.parseModifyTaskCommand(input, handler);
+            return new DeleteCommand(delTask);
+        case "todo":
+            Task newToDo = Parser.parseNewTaskCommand(input, Task.taskType.TODO);
+            return new TodoCommand(newToDo);
+        case "deadline":
+            Task newDeadline = Parser.parseNewTaskCommand(input, Task.taskType.DEADLINE);
+            return new DeadlineCommand(newDeadline);
+        case "event":
+            Task newEvent = Parser.parseNewTaskCommand(input, Task.taskType.EVENT);
+            return new EventCommand(newEvent);
+        case "clear":
+            return new ClearCommand();
+        default:
+            return new InvalidCommand();
         }
-        int listPos = 1;
-        indent(1);
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++,listPos++) {
-            indent(2);
-            System.out.println(listPos + ". " + taskList.get(i));
-        }
-        indent(1);
-        System.out.println("You have " + taskList.size() + " task(s) in the list");
     }
 
-    public static Task modifyTask(String input, ArrayList<Task> list, TaskHandler.operationType currentOp) throws DukeException {
+    public static Task parseModifyTaskCommand(String input,TaskListHandler handler) throws DukeException {
         String[] stringArr = input.split(" ");
-        String lowerCaseOperation = currentOp.toString().toLowerCase();
+        // DONE OR DELETE
+        String lowerCaseOperation = stringArr[0].toLowerCase();
         if (stringArr.length != 2 ) {
             // if multiple tasks are given as arguments
             throw new DukeException("\u2639 Oops, pls enter only one task number after " + lowerCaseOperation);
         }
         try {
             // Finding the actual task
-            int indexOfDone = Integer.parseInt(stringArr[1]) - 1;
-            Task currentTask = list.get(indexOfDone);
-            if (currentOp == operationType.DELETE) {
-                list.remove(currentTask);
-            } else if (currentOp == operationType.DONE) {
-                currentTask.markAsDone();
-            }
-            return currentTask;
+            int indexOfTask = Integer.parseInt(stringArr[1]) - 1;
+            return handler.getTaskList().get(indexOfTask);
         } catch (IndexOutOfBoundsException | NumberFormatException e){
             throw new DukeException("\u2639 Oops, pls enter a valid task number after " + lowerCaseOperation);
         }
     }
 
-    public static Task processNewTask(String input, Task.taskType tasktype) throws DukeException {
+    public static Task parseNewTaskCommand(String input, Task.taskType tasktype) throws DukeException {
         // Sorts the input into a task with or without time
         if (tasktype == Task.taskType.TODO) {
             // Without time
@@ -72,13 +59,13 @@ public class TaskHandler {
         }
         if (tasktype == Task.taskType.DEADLINE) {
             try {
-                return processTaskWithTime(input, tasktype, "/by");
+                return parseTaskWithTime(input, tasktype, "/by");
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("\u2639 Oops, use add deadline format: deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')]");
             }
         } else if (tasktype == Task.taskType.EVENT) {
             try {
-                return processTaskWithTime(input, tasktype, "/at");
+                return parseTaskWithTime(input, tasktype, "/at");
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("\u2639 Oops, use add event format: event [task] /at [time]");
             }
@@ -87,7 +74,7 @@ public class TaskHandler {
         }
     }
 
-    public static Task processTaskWithTime(String input, Task.taskType tasktype, String separator) throws DukeException {
+    public static Task parseTaskWithTime(String input, Task.taskType tasktype, String separator) throws DukeException {
         // Process string to find task description and time
         String taskDesc = input.substring(tasktype.name().length() + 1, input.indexOf(separator) - 1);
         checkIsFieldEmpty("taskDesc", taskDesc);
@@ -106,15 +93,5 @@ public class TaskHandler {
         if (field.trim().isEmpty()) {
             throw new DukeException("\u2639 Oops, " + nameOfField + " cannot be empty");
         }
-    }
-
-    public static void indent(int times) {
-        for (int i=0; i<times; i++) {
-            System.out.print("    ");
-        }
-    }
-
-    public static void receiveInvalidCommand() throws DukeException {
-        throw new DukeException("\u2639 Oops, I'm sorry but I don't know what that means :-(");
     }
 }

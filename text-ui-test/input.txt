@@ -1,4 +1,4 @@
-restart
+clear
 deadline submit assignment /by tues 9pm
 list
 event meeting /at monday 2pm
