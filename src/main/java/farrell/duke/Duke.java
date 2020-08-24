@@ -68,6 +68,10 @@ public class Duke {
         case BYE:
             uiManager.printInWindow("Bye. Hope to see you again soon!");
             return 0;
+        case FIND:
+            String filteredList = taskList.filteredToString(parameters);
+            uiManager.printInWindow("Here are the matching tasks in your list:\n" + filteredList);
+            break;
         case UNDEFINED:
             throw new DukeException("I don't know what that means!");
         default:

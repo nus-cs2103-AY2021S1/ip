@@ -8,6 +8,7 @@ public enum CommandType {
     LIST,
     DELETE,
     BYE,
+    FIND,
     UNDEFINED;
 
     public static CommandType enumFromString(String string) throws DukeException {
