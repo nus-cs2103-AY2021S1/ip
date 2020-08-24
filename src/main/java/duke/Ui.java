@@ -66,7 +66,7 @@ public class Ui {
      */
     public void showLoadedNew() {
         System.out.println("     Did not find any previous stored data and " +
-                "new data file created! Welcome!");
+                "new data file created!\n     Welcome!");
     }
 
     /**

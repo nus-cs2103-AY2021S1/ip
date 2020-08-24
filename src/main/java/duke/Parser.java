@@ -1,11 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.CommandAdd;
-import duke.command.CommandBye;
-import duke.command.CommandDelete;
-import duke.command.CommandDone;
-import duke.command.CommandList;
+import duke.command.*;
 import duke.exception.IllegalCommandException;
 import duke.exception.IllegalDeleteArgument;
 import duke.exception.IllegalDoneArgument;
@@ -42,7 +37,11 @@ public class Parser {
 
         String keyWord = response.split(" ")[0];
 
-        if (keyWord.equals("done")) {
+        if (keyWord.equals("find")) {
+            if (response.split(" ").length == 1) {
+                throw new NoDescriptionException("find");
+            } else return new CommandFind(response.substring(5));
+        } else if (keyWord.equals("done")) {
             if (response.split(" ").length == 1) {
                 throw new NoDescriptionException("done");
             }
