@@ -81,8 +81,8 @@ public class TaskList {
     }
 
     public void addEventFromFile(String description, String at, int done) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM uuuu HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(at, formatter);
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM uuuu HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(at);
         Event event = new Event(description, dateTime);
         if (done == 1) {
             event.markAsDone();
@@ -91,8 +91,8 @@ public class TaskList {
     }
 
     public void addDeadlineFromFile(String description, String by, int done) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM uuuu HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(by, formatter);
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM uuuu HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(by);
         Deadline deadline = new Deadline(description, dateTime);
         if (done == 1) {
             deadline.markAsDone();
