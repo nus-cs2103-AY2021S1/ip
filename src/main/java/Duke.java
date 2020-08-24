@@ -34,7 +34,7 @@ public class Duke {
         validTaskTypes.add(EVENT);
     }
 
-    protected final List<Task> taskRecords;
+    protected final TaskList taskRecords;
     protected final Storage storage;
 
     public Duke() {
@@ -93,7 +93,7 @@ public class Duke {
         if (taskNumber > taskRecords.size()) {
             throw new DukeException("No such task!");
         }
-        Task taskRemoved = taskRecords.remove(taskNumber - 1);;
+        Task taskRemoved = taskRecords.remove(taskNumber);;
         return processString(REMOVED_MESSAGE + '\n'
                 + "   " + taskRemoved + '\n'
                 + createTaskNumberCountMessage(taskRecords.size()));

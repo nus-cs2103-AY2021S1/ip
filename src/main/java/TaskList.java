@@ -14,7 +14,11 @@ public class TaskList implements Iterable<Task> {
         listOfTasks.add(task);
     }
 
-    public Task delete(int index) {
+    public Task get(int index) {
+        return listOfTasks.get(index - 1);
+    }
+
+    public Task remove(int index) {
         return listOfTasks.remove(index - 1);
     }
 
@@ -22,6 +26,9 @@ public class TaskList implements Iterable<Task> {
         return listOfTasks.iterator();
     }
 
+    public int size() {
+        return listOfTasks.size();
+    }
 
 
 }
