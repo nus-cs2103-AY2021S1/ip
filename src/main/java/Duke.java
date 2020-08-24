@@ -1,17 +1,87 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
 
 public class Duke {
 
     static String line = "____________________________________________________________";
     static String userInput = "";
     static ArrayList<Task> lst = new ArrayList<>();
+    static String directoryPath = "src/main/data/";
+    static String dataFilePath = "src/main/data/data.txt";
+    static File dataFile;
 
-    public static void main(String[] args) {
-        DukeBot();
+    public static void main(String[] args) throws IOException {
+        try {
+            File directory = new File(directoryPath);
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            dataFile = new File(dataFilePath);
+            if (!dataFile.exists()) {
+                dataFile.createNewFile();
+            }
+
+            readFile();
+            dukeBot();
+        } catch (IOException e) {
+            System.out.println("An error occurred");
+            e.printStackTrace();
+        }
     }
 
-    public static void DukeBot() {
+    private static void readFile() {
+        try {
+            Scanner sc = new Scanner(dataFile);
+            while (sc.hasNextLine()) {
+                String task = sc.nextLine();
+                if (task.startsWith("[T]")) {
+                    lst.add(new ToDo(isDone(task.substring(4, 5)), task.substring(7)));
+                } else if (task.startsWith("[D]")) {
+                    int pos = task.indexOf("(by: ");
+                    lst.add(new Deadline(isDone(task.substring(4, 5)),
+                            task.substring(7, pos - 1), task.substring(pos + 5, task.length() - 1)));
+                } else if (task.startsWith("[E]")) {
+                    int pos = task.indexOf("(at: ");
+                    lst.add(new Event(isDone(task.substring(4, 5)),
+                            task.substring(7, pos - 1), task.substring(pos + 5, task.length() - 1)));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred");
+            e.printStackTrace();
+        }
+    }
+
+    private static boolean isDone(String symbol) {
+        String tick = "" + '\u2713';
+        return symbol.equals(tick);
+    }
+
+    private static void saveTaskList() {
+        StringBuilder sb = new StringBuilder();
+        for (Task task : lst) {
+            sb.append(task);
+            sb.append("\n");
+        }
+        try {
+            writeToFile(sb.toString());
+        } catch (IOException e) {
+            System.out.println("An error occurred");
+            e.printStackTrace();
+        }
+    }
+
+    private static void writeToFile(String textToAdd) throws IOException {
+        FileWriter fileWriter = new FileWriter(dataFilePath);
+        fileWriter.write(textToAdd);
+        fileWriter.close();
+    }
+
+    public static void dukeBot() {
         try {
             Scanner input = new Scanner(System.in);
 
@@ -95,6 +165,7 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(lst.get(num));
         System.out.println(line);
+        saveTaskList();
     }
 
     public static void formatAddTask(Task task) {
@@ -105,6 +176,7 @@ public class Duke {
         System.out.println(task);
         System.out.println(String.format("Now you have %d %s in the list.", size, size == 1 ? "task" : "tasks"));
         System.out.println(line);
+        saveTaskList();
     }
 
     public static void formatDeleteTask(int num) {
@@ -115,5 +187,6 @@ public class Duke {
         int size = lst.size();
         System.out.println(String.format("Now you have %d %s in the list.", size, size == 1 ? "task" : "tasks"));
         System.out.println(line);
+        saveTaskList();
     }
 }
