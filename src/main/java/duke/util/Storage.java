@@ -6,6 +6,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Responsible for local disk file operations.
+ */
 public class Storage {
 
     private String filePath;
@@ -14,6 +17,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads a list of tasks from disk.
+     * @return TaskList with loaded list.
+     */
     public TaskList load() {
         List<Task> lst;
         try {
@@ -27,6 +34,10 @@ public class Storage {
         return new TaskList(lst);
     }
 
+    /**
+     * Saves a list of tasks to disk.
+     * @param lst The TaskList to save to disk.
+     */
     public void save(TaskList lst) {
         try {
             new File(filePath).getParentFile().mkdirs();

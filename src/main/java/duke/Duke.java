@@ -7,6 +7,9 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/**
+ * Represents the Duke program.
+ */
 public class Duke {
 
     private TaskList tasks;
@@ -24,6 +27,9 @@ public class Duke {
         duke.run();
     }
 
+    /**
+     * Starts execution of the Duke program.
+     */
     public void run() {
         ui.printHello();
         tasks = storage.load();
