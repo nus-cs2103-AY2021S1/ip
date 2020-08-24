@@ -1,15 +1,19 @@
 package main.java;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDateTime by;
 
-    Deadline(String description, String by){
+    Deadline(String description, LocalDateTime by){
         super(description);
         this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMM d, yyyy hh.mm a");
+        return "[D]" + super.toString() + " (by: " + formatter.format(by) + ")";
     }
 }

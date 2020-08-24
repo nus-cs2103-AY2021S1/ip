@@ -1,6 +1,11 @@
 package main.java;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class King {
@@ -34,12 +39,12 @@ public class King {
                         loadedItem = new ToDo(data[2]);
                         break;
                     case "D":
-                        loadedItem = new Deadline(data[2],data[3]);
+                        loadedItem = new Deadline(data[2],LocalDateTime.parse(data[3]));
                         break;
                     default:
                         loadedItem = new Event(data[2],data[3]);
                 }
-                if (data[1].equals(1)){
+                if (data[1].equals("1")){
                     loadedItem.markAsDone();
                 }
                 items.add(loadedItem);
@@ -74,6 +79,17 @@ public class King {
             output.close();
         } catch (IOException e){
             System.out.println(Chat.errorBox("Error was encountered when saving list to asset."));
+        }
+    }
+
+    private LocalDateTime StringToLocalDateTime(String localDateTime) throws KingException{
+        try{
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+            return LocalDateTime.parse(localDateTime,formatter);
+        } catch (Exception e){
+            throw new KingException("Date and Time must be formatted as /by <date> <time>. E.g. 2/1/2020 1400", new Throwable(
+                    "bad datetime"
+            ));
         }
     }
 
@@ -127,16 +143,18 @@ public class King {
         } else if (phrase.startsWith("deadline ") || (phrase.startsWith("deadline") && phraseLength == 8)) {
             String item = phrase.substring(8).trim();
             String[] tokens = item.split(" /by ");
-            if (tokens.length == 2) {
-                Deadline deadline = new Deadline(tokens[0],tokens[1]);
-                items.add(deadline);
-                return Chat.addItemChatBox(deadline.toString(),items.size());
-            } else if(tokens.length < 2){
-                throw new KingException("Deadline description and time CANNOT be empty!", new Throwable("empty field"));
-            } else {
-                throw new KingException("Follow the syntax: deadline <description> /by <time>", new Throwable(
+            if (tokens.length != 2){
+                throw new KingException("Follow the syntax: deadline <description> /by <date> <time>", new Throwable(
                         "bad deadline"
                 ));
+            }
+            try {
+                LocalDateTime datetime = StringToLocalDateTime(tokens[1]);
+                Deadline deadline = new Deadline(tokens[0],datetime);
+                items.add(deadline);
+                return Chat.addItemChatBox(deadline.toString(),items.size());
+            } catch (KingException e) {
+                throw e;
             }
         } else if (phrase.startsWith("delete ") || (phrase.startsWith("delete") && phraseLength == 6)) {
             String stringItem = phrase.substring(6).trim();
