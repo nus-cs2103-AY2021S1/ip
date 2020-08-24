@@ -1,15 +1,21 @@
 import java.util.Scanner;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskManager {
-    
+
     private final List<Task> tasks;
 
     private boolean isExit = false;
 
     public TaskManager() {
         this.tasks = new ArrayList<>();
+    }
+
+    public TaskManager(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public void initialise() {
@@ -19,6 +25,7 @@ public class TaskManager {
             try {
                 String input = sc.nextLine();
                 handleInput(input);
+                this.saveTasks();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
@@ -75,8 +82,7 @@ public class TaskManager {
                 if (isTask(command)) {
                     errorMessage = "OOPS!!! Description of a task cannot be empty :(\n";
                 } else if (command.equals("done") || command.equals("delete")) {
-                    errorMessage = "Missing task number! "
-                            + "Please ensure to key in the task number :)\n";
+                    errorMessage = "Missing task number! " + "Please ensure to key in the task number :)\n";
                 }
             } else { // Deadline/Event missing their respective keywords
                 if (command.equals("deadline")) {
@@ -87,12 +93,10 @@ public class TaskManager {
             }
             throw new DukeException(errorMessage);
         }
-    } 
+    }
 
     private boolean isTask(String command) {
-        return command.equals("todo") 
-                || command.equals("deadline")
-                || command.equals("event");
+        return command.equals("todo") || command.equals("deadline") || command.equals("event");
     }
 
     private void addTask(Task task) {
@@ -108,12 +112,24 @@ public class TaskManager {
             Task task = tasks.remove(index);
             System.out.println("Noted. The following task is removed:");
             System.out.println(task);
-            System.out.println("Now you have "
-                    + tasks.size() + " task(s) in the list." + "\n");
+            System.out.println("Now you have " + tasks.size() + " task(s) in the list." + "\n");
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             // Invalid task number or number out of range
-            String errorMessage = "Invalid task number! "
-                    + "Please enter a valid task number :)\n";
+            String errorMessage = "Invalid task number! " + "Please enter a valid task number :)\n";
+            throw new DukeException(errorMessage);
+        }
+    }
+
+    private void markTaskAsDone(String taskNumber) throws DukeException {
+        try {
+            int index = Integer.parseInt(taskNumber) - 1;
+            Task task = tasks.get(index);
+            task.markAsDone();
+            System.out.println("Good job! I've marked this task as done:");
+            System.out.println(task + "\n");
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            // Invalid task number or number out of range
+            String errorMessage = "Invalid task number! " + "Please enter a valid task number :)\n";
             throw new DukeException(errorMessage);
         }
     }
@@ -130,18 +146,28 @@ public class TaskManager {
         }
     }
 
-    private void markTaskAsDone(String taskNumber) throws DukeException {
+    private void saveTasks() {
         try {
-            int index = Integer.parseInt(taskNumber) - 1;
-            Task task = tasks.get(index);
-            task.markAsDone();
-            System.out.println("Good job! I've marked this task as done:");
-            System.out.println(task + "\n");
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            // Invalid task number or number out of range
-            String errorMessage = "Invalid task number! "
-                    + "Please enter a valid task number :)\n";
-            throw new DukeException(errorMessage);
+            FileWriter myWriter = new FileWriter("data/duke.txt");
+            for (Task task : tasks) {
+                char letter = task.toString().charAt(1);
+                int bit = task.isDone() ? 1 : 0;
+                String description = task.getDescription();
+                String data;
+                if (letter == 'T') {
+                    data = letter + " | " + bit + " | " + description;
+                } else if (letter == 'D') {
+                    String time = task.getTime();
+                    data = letter + " | " + bit + " | " + description + " | " + time; 
+                } else { // letter == 'E'
+                    String time = task.getTime();
+                    data = letter + " | " + bit + " | " + description + " | " + time; 
+                }
+                myWriter.write(data + "\n");
+            }
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
