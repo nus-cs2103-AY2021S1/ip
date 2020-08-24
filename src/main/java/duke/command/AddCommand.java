@@ -1,4 +1,11 @@
+package duke.command;
+
 import java.time.LocalDate;
+import duke.Ui;
+import duke.Storage;
+import duke.ActionType;
+import duke.DukeException;
+import duke.tasks.*;
 
 public class AddCommand extends Command {
     private final String input;
@@ -15,14 +22,14 @@ public class AddCommand extends Command {
         switch(actionType) {
         case ADD_TODO:
             if (input.length() < 6) {
-                throw new DukeException("Task cannot be empty _(´ཀ`」 ∠)_");
+                throw new DukeException("duke.tasks.Task cannot be empty _(´ཀ`」 ∠)_");
             } else {
                 newTask = new ToDo(input.substring(5), false);
             }
             break;
         case ADD_EVENT:
             if (input.length() < 7) {
-                throw new DukeException("Event cannot be empty _(´ཀ`」 ∠)_");
+                throw new DukeException("duke.tasks.Event cannot be empty _(´ཀ`」 ∠)_");
             } else {
                 String[] split = input.substring(6).split(" /at ");
                 String eventDesc = split[0];
@@ -32,7 +39,7 @@ public class AddCommand extends Command {
             break;
         case ADD_DEADLINE:
             if (input.length() < 10) {
-                throw new DukeException("Deadline cannot be empty _(´ཀ`」 ∠)_");
+                throw new DukeException("duke.tasks.Deadline cannot be empty _(´ཀ`」 ∠)_");
             } else {
                 String[] split = input.substring(9).split(" /by ");
                 String deadlineDesc = split[0];

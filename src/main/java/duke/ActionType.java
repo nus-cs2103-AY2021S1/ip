@@ -1,4 +1,6 @@
-enum ActionType {
+package duke;
+
+public enum ActionType {
     MARK_DONE,
     DELETE,
     ADD_TODO,

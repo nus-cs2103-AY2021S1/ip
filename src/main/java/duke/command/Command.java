@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Ui;
+import duke.Storage;
+import duke.DukeException;
+import duke.tasks.TaskList;
+
 public abstract class Command {
     private final boolean isExit;
 
