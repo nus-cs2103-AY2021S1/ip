@@ -1,4 +1,7 @@
+package duke;
 
+import duke.command.Command;
+import duke.task.TaskList;
 
 public class Duke {
 

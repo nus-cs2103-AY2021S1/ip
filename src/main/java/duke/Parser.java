@@ -1,3 +1,12 @@
+package duke;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+
 import java.util.Arrays;
 
 public class Parser {

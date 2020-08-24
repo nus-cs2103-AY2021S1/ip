@@ -1,3 +1,14 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -11,12 +22,12 @@ public class AddCommand extends Command {
     protected String[] stringArray;
     protected boolean isDone;
 
-    AddCommand(String[] stringArray) {
+    public AddCommand(String[] stringArray) {
         super(stringArray);
         this.isDone = false;
     }
 
-    AddCommand(String[] stringArray, boolean isDone) {
+    public AddCommand(String[] stringArray, boolean isDone) {
         super(stringArray);
         this.isDone = isDone;
     }

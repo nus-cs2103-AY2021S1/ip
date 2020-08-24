@@ -1,6 +1,14 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class DoneCommand extends Command {
 
-    DoneCommand(String[] stringArray) {
+    public DoneCommand(String[] stringArray) {
         super(stringArray);
     }
 
