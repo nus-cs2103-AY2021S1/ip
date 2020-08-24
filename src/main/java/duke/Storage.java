@@ -9,25 +9,33 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Storage is used to store data in hardware and displays available data in client's server.
+ */
 class Storage {
     private String filePath;
-//    private String directoryName = "./data";
     private Scanner inputSource;
 
+    /**
+     * Constructor of Storage class.
+     * 
+     * @param filePath relative address of file path
+     */
     public Storage(String filePath) {
         try {
-            //if (Files.isDirectory(Path.of(directoryName))) {
             this.filePath = filePath;
             inputSource = new Scanner(new File(filePath));
-//            } else {
-//                throw new NotDirectoryException("Directory: " + directoryName + " cannot be found!");
-//            }
         } catch (FileNotFoundException e) {
             System.out.println("File: " + filePath + " cannot be found!");
             System.exit(0);
         }
     }
 
+    /**
+     * Loads all data from database.
+     * 
+     * @return List list of tasks in database.
+     */
     public List<Task> load() {
         List<Task> list = new ArrayList<>();
         while (inputSource.hasNextLine()) {
@@ -48,6 +56,12 @@ class Storage {
         return list;
     }
 
+    /**
+     * Saves tasks in database.
+     * 
+     * @param list list of data that clients enter.
+     * @throws FileNotFoundException If the file path cannot be found.
+     */
     public void saveTasks(List<Task> list) throws FileNotFoundException {
         PrintWriter printWriter = new PrintWriter(new FileOutputStream(filePath));
         for(Task task: list) {
