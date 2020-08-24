@@ -9,13 +9,13 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected Optional<LocalTime> time;
 
-    public Deadline(String desc, boolean isDone, LocalDate date) {
+    public Deadline(String desc, LocalDate date, boolean isDone) {
         super(desc, isDone);
         this.date = date;
         this.time = Optional.empty();
     }
 
-    public Deadline(String desc, boolean isDone, LocalDate date, LocalTime time) {
+    public Deadline(String desc, LocalDate date, LocalTime time, boolean isDone) {
         super(desc, isDone);
         this.date = date;
         this.time = Optional.ofNullable(time);
@@ -23,8 +23,8 @@ public class Deadline extends Task {
 
     @Override
     public Task setDone() {
-        Task doneTask = this.time.map(localTime -> new Deadline(this.desc, this.isDone, this.date, localTime))
-                .orElseGet(() -> new Deadline(this.desc, this.isDone, this.date));
+        Task doneTask = this.time.map(localTime -> new Deadline(this.desc, this.date, localTime, this.isDone))
+                .orElseGet(() -> new Deadline(this.desc, this.date, this.isDone));
         doneTask.isDone = true;
         return doneTask;
     }

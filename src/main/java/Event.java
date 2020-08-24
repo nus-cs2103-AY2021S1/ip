@@ -9,13 +9,13 @@ public class Event extends Task {
     protected LocalDate date;
     protected Optional<LocalTime> time;
 
-    public Event(String desc, boolean isDone, LocalDate date) {
+    public Event(String desc, LocalDate date, boolean isDone) {
         super(desc, isDone);
         this.date = date;
         this.time = Optional.empty();
     }
 
-    public Event(String desc, boolean isDone, LocalDate date, LocalTime time) {
+    public Event(String desc, LocalDate date, LocalTime time, boolean isDone) {
         super(desc, isDone);
         this.date = date;
         this.time = Optional.ofNullable(time);
@@ -23,8 +23,8 @@ public class Event extends Task {
 
     @Override
     public Task setDone() {
-        Task doneTask = this.time.map(localTime -> new Event(this.desc, this.isDone, this.date, localTime))
-                .orElseGet(() -> new Event(this.desc, this.isDone, this.date));
+        Task doneTask = this.time.map(localTime -> new Event(this.desc, this.date, localTime, this.isDone))
+                .orElseGet(() -> new Event(this.desc, this.date, this.isDone));
         doneTask.isDone = true;
         return doneTask;
     }
