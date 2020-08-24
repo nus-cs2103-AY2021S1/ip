@@ -36,6 +36,8 @@ public class Duke {
         this.database = Database.dbInstance();
         //this.taskList = new TaskList();
         printWelcomeMessage();
+        this.taskList = this.database.getTaskListFromDatabase();
+
         getUserInput(this.taskList);
     }
 

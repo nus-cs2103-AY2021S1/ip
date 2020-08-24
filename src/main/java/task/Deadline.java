@@ -17,11 +17,19 @@ public class Deadline extends Task {
         this.deadline = super.description.substring(super.description.indexOf('/') + 1);
     }
 
+    public Deadline(int doneStatus, String detail, String deadline) {
+        super(detail);
+        if (doneStatus == 1) super.isDone = true;
+        this.detail = detail;
+        this.deadline = deadline;
+    }
+
     @Override
     public String formatTaskForDatabase() {
         int status = super.isDone ? 1 : 0;
         return "D|" + status + "|" + detail + "|" + deadline;
     }
+
 
     @Override
     public String toString() {

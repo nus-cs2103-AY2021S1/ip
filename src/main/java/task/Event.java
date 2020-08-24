@@ -19,11 +19,20 @@ public class Event extends Task {
         this.timing = super.description.substring(super.description.indexOf('/') + 1);
     }
 
+    public Event(int doneStatus, String detail, String timing) {
+        super(detail);
+        if (doneStatus == 1) super.isDone = true;
+        this.detail = detail;
+        this.timing = timing;
+    }
+
+
     @Override
     public String formatTaskForDatabase() {
         int status = super.isDone ? 1 : 0;
         return "E|" + status + "|" + detail + "|" + timing;
     }
+
 
     @Override
     public String toString() {

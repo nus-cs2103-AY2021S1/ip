@@ -16,8 +16,7 @@ public class Output {
         } else if (s.isEmpty()) {
             System.out.println("Please enter a command");
         } else if (s.equals("list")) {
-            System.out.println("Here are the tasks in your list:");
-            taskList.forEach(task -> System.out.print(task));
+            listResponse(taskList);
         } else if (s.length() >= 4 && s.startsWith("done")) {
             try {
                 doneResponse(taskList, s);
@@ -39,6 +38,14 @@ public class Output {
         }
         else {
             throw new InvalidCommandException("Please enter a valid command for me!");
+        }
+    }
+
+    public void listResponse(ArrayList<Task> taskList) {
+        System.out.println("Here are the tasks in your list");
+        for (int i = 0; i < taskList.size(); i++) {
+            String output = (i + 1) + "." + taskList.get(i);
+            System.out.println(output);
         }
     }
 
