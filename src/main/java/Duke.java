@@ -40,7 +40,7 @@ public class Duke {
         System.out.println("-------------------------------------------------------------------------------------");
     }
     public static void processString(String st) throws InvalidDoneException, InvalidTaskArgumentException,
-            InvalidDeleteException, InvalidCommandException {
+            InvalidDeleteException, InvalidCommandException, DateException {
         if (st.equals("list")) {
             showList();
         } else if ((st.length() >= 4) && (st.substring(0, 4).equals("done"))) {
@@ -133,8 +133,8 @@ public class Duke {
         while (!s.equals("bye")) {
             try {
                 processString(s);
-            } catch (InvalidTaskArgumentException | InvalidDoneException | InvalidCommandException |
-                    InvalidDeleteException e) {
+            } catch (InvalidTaskArgumentException |  InvalidDoneException | InvalidCommandException |
+                    InvalidDeleteException | DateException e) {
                 System.out.println("-------------------------------------------------------------------------------------");
                 System.out.println(e.getMessage());
                 System.out.println("-------------------------------------------------------------------------------------");
