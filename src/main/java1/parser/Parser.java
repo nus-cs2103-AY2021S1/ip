@@ -5,6 +5,7 @@ import java1.exception.*;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  * The Parser class is responsible for handling input commands.
@@ -132,6 +133,22 @@ public class Parser {
                     }
                 } catch (NumberFormatException e) {
                     throw new DukeException("    ☹ OOPS!!! Invalid task number.");
+                }
+            }
+        } else if (splitInput[0].equals("find")) {
+            if (splitInput.length == 1) {
+                throw new DukeException("    ☹ OOPS!!! Please specify the keyword to find");
+            } else {
+                String[] findArray = input.split(" ", 2);
+                String keywords = findArray[1];
+                ArrayList<Task> temp = newList.findTasks(keywords);
+
+                System.out.println("     Here are the tasks in your list:");
+                for (int i = 0; i < temp.size(); i++) {
+                    int listNumber = i + 1;
+                    Task currentTask = temp.get(i);
+
+                    System.out.println("     " + listNumber + "." + currentTask.toString());
                 }
             }
         } else {

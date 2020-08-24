@@ -70,6 +70,16 @@ public class TaskList {
         }
     }
 
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> temp = new ArrayList<>();
+        for (int i  = 0; i < this.todoList.size(); i++) {
+            if(this.todoList.get(i).getDescription().contains(keyword)) {
+                temp.add(this.todoList.get(i));
+            }
+        }
+        return temp;
+    }
+
     /**
      * Updates a task as done and update storage.
      */
