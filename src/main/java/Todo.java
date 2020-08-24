@@ -1,5 +1,4 @@
 public class Todo extends Task {
-    protected String by;
 
     public Todo(String description) {
         super(description);
@@ -20,6 +19,12 @@ public class Todo extends Task {
     @Override
     public Todo markAsDone() {
         return new Todo(this.description, true);
+    }
+
+    @Override
+    public String stringify() {
+        String number = isDone ? "1" : "0";
+        return "T | " + number + " | " + super.description;
     }
 
     @Override
