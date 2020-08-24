@@ -21,14 +21,14 @@ import dependencies.dukeexceptions.MissingListException;
  * Errors and excpetions thrown during the reading and writing is handled here.
  *
  */
-public class Loader {
+public class Storage {
 
     private final Path DIR_PATH;
     private final Path FILE_PATH;
 
     private boolean isFilePresent;
 
-    public Loader(String cwd, String dir, String fileName) {
+    public Storage(String cwd, String dir, String fileName) {
         DIR_PATH = Paths.get(cwd, dir);
         FILE_PATH = DIR_PATH.resolve(fileName);
         isFilePresent = Files.exists(FILE_PATH);

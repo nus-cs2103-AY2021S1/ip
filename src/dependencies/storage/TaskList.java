@@ -4,31 +4,21 @@ import dependencies.dukeexceptions.MissingListException;
 import dependencies.task.Schedulable;
 import dependencies.task.Task;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.IOException;
-
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import java.util.ArrayList;
 
 
-public class Store {
+public class TaskList {
 
     /** Loader Object to read and write to save file. */
-    private Loader l;
+    private Storage l;
 
     /** todoList that stores the tasks. */
     private ArrayList<Schedulable> todoList;
 
     /** Private constructor */
-    private Store() {
-        l = new Loader(".", "data", "taskdata.txt");
+    private TaskList() {
+        l = new Storage(".", "data", "taskdata.txt");
 
         // Checks if there are any save files of todoList.
         // If there is, attempt to read the object as arraylist.
@@ -53,8 +43,8 @@ public class Store {
      *
      * @return the Store object
      */
-    public static Store initStorage() {
-        return new Store();
+    public static TaskList initStorage() {
+        return new TaskList();
     }
 
     /**
