@@ -54,6 +54,7 @@ public abstract class Task implements Serializable {
     /* ----------------------------------------- Subclasses--------------------------------------------- */
 
     private static class EmptyTask extends Task{
+
         private EmptyTask() {
             super(null);
             super.state = null;
@@ -76,6 +77,7 @@ public abstract class Task implements Serializable {
     }
 
     private static class DoneTask extends Task{
+
         private DoneTask(String nums) {
             super(nums);
             super.state = null;
@@ -100,14 +102,16 @@ public abstract class Task implements Serializable {
     private static class Events extends Task {
         private String date;
         private TaskDate tDate;
+
         private Events(String task, String date) {
             super(task);
             this.date = date;
+            this.tDate = new TaskDate(date);
         }
 
         @Override
         public String getDateLine() {
-            return this.date;
+            return this.tDate.toString();
         }
 
         @Override
@@ -146,11 +150,12 @@ public abstract class Task implements Serializable {
         private Deadlines(String task, String deadline) {
             super(task);
             this.deadline = deadline;
+            this.tDate = new TaskDate(deadline);
         }
 
         @Override
         public String getDateLine() {
-            return this.deadline;
+            return this.tDate.toString();
         }
 
         @Override
