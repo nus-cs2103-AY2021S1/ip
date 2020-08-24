@@ -15,15 +15,16 @@ public class Duke {
 
     private Ui ui;
     private Storage storage;
-    private List<Task> tasks;
+    private TaskList taskList;
 
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
+        taskList = new TaskList(storage.readFile());
     }
 
 
-    public void readAndEcho(List<Task> list) {
+    public void readAndEcho() {
         //Reading in user input
 
         String input = ui.readInput();
@@ -34,7 +35,7 @@ public class Duke {
             try {
                 //Print list when user inputs "list"
                 if (input.equals("list")) {
-                    ui.printList(list);
+                    ui.printList(taskList.getTasks());
                 }
                 // Mark task as done when user inputs "done"
                 else if (inputArr[0].equals("done")) {
@@ -42,7 +43,8 @@ public class Duke {
                         throw new DukeException("Task to be done not specified :(\n");
                     }
                     String taskNumber = inputArr[1];
-                    markTaskDoneInList(list, Integer.parseInt(taskNumber) - 1);
+                    Task task = taskList.markTaskDoneInList(Integer.parseInt(taskNumber) - 1);
+                    ui.printMarkedTask(task);
                 }
 
                 else if (inputArr[0].equals("delete")) {
@@ -50,7 +52,8 @@ public class Duke {
                         throw new DukeException("Task to delete not specified :(\n");
                     }
                     String taskNumber = inputArr[1];
-                    deleteTaskFromList(list, Integer.parseInt(taskNumber) - 1);
+                    Task task = taskList.deleteTaskFromList(Integer.parseInt(taskNumber) - 1);
+                    ui.printDeletedTask(task, taskList.size());
                 }
                 //Add a new task to the list
                 else {
@@ -61,8 +64,8 @@ public class Duke {
                         }
                         String todoName = input.substring(5);
                         ToDo todo = new ToDo(todoName);
-                        list.add(todo);
-                        ui.printAddTask(todo, list.size());
+                        taskList.addTask(todo);
+                        ui.printAddTask(todo, taskList.size());
                     }
                     //Add a new deadline task
                     else if (inputArr[0].equals("deadline")) {
@@ -85,8 +88,8 @@ public class Duke {
                             isTime = true;
                         }
                         Deadline deadline = new Deadline(deadlineArr[0], date, isTime);
-                        list.add(deadline);
-                        ui.printAddTask(deadline, list.size());
+                        taskList.addTask(deadline);
+                        ui.printAddTask(deadline, taskList.size());
                     }
                     //Add a new Event task
                     else if (inputArr[0].equals("event")) {
@@ -108,15 +111,15 @@ public class Duke {
                             isTime = true;
                         }
                         Event event = new Event(eventArr[0], date, isTime);
-                        list.add(event);
-                        ui.printAddTask(event, list.size());
+                        taskList.addTask(event);
+                        ui.printAddTask(event, taskList.size());
                     }
                     //Unrecognised command
                     else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
                     }
                 }
-                storage.writeToFile(list);
+                storage.writeToFile(taskList.getTasks());
             } catch (TaskException e) {
                 ui.printString(e.toString());
             } catch (DukeException e) {
@@ -136,32 +139,13 @@ public class Duke {
         ui.printGoodbye();
     }
 
-    private void deleteTaskFromList(List<Task> list, int taskNumber) throws DukeException {
-        if (taskNumber < 0 || taskNumber > list.size() - 1) {
-            throw new DukeException("Please enter a valid task number\n");
-        } else {
-            Task task = list.get(taskNumber);
-            list.remove(task);
-            ui.printDeletedTask(task, list.size());
-        }
-    }
 
 
-    private void markTaskDoneInList(List<Task> list, Integer taskNumber) throws DukeException {
-        if (taskNumber < 0 || taskNumber > list.size() - 1) {
-            throw new DukeException("Please enter a valid task number\n");
-        } else {
-            Task task = list.get(taskNumber);
-            task.markDone();
-            ui.printMarkedTask(task);
-        }
 
-    }
 
     public void run() {
         ui.printGreeting();
-        tasks = storage.readFile();
-        readAndEcho(tasks);
+        readAndEcho();
     }
 
 

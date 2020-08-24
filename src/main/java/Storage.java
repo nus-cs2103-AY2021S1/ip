@@ -9,7 +9,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
@@ -23,8 +22,8 @@ public class Storage {
         this.filepath = Paths.get(System.getProperty("user.dir") + filepath);
     }
 
-    public List<Task> readFile() {
-        List<Task> tasks = new ArrayList<>();
+    public ArrayList<Task> readFile() {
+        ArrayList<Task> tasks = new ArrayList<>();
         //From https://www.sghill.net/how-do-i-make-cross-platform-file-paths-in-java.html
         if (!Files.isRegularFile(filepath)) {
             createFile();
@@ -81,7 +80,7 @@ public class Storage {
         }
     }
 
-    public void writeToFile(List<Task> arrayList) {
+    public void writeToFile(ArrayList<Task> arrayList) {
         try {
             FileWriter fw = new FileWriter(filepath.toString());
             for (Task task : arrayList) {

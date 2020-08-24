@@ -1,0 +1,46 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class TaskList {
+    ArrayList<Task> tasks;
+
+    protected TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    protected TaskList() {
+        tasks = new ArrayList<>();
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
+    public Task markTaskDoneInList(int taskNumber) throws DukeException {
+        if (taskNumber < 0 || taskNumber > tasks.size() - 1) {
+            throw new DukeException("Please enter a valid task number\n");
+        } else {
+            Task task = tasks.get(taskNumber);
+            task.markDone();
+            return task;
+        }
+    }
+
+    public Task deleteTaskFromList(int taskNumber) throws DukeException {
+        if (taskNumber < 0 || taskNumber > tasks.size() - 1) {
+            throw new DukeException("Please enter a valid task number\n");
+        } else {
+            Task task = tasks.get(taskNumber);
+            tasks.remove(task);
+            return task;
+        }
+    }
+
+    public int size() {
+        return tasks.size();
+    }
+
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+}
