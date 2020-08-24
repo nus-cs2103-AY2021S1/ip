@@ -8,13 +8,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The Storage class can (i) load the data from duke.txt, (ii) save a task onto duke.txt,
+ *  (iii) rewrite duke.txt when a task is removed or updated.
+ */
+
 public class Storage {
     protected File f;
 
+    /**
+     * Creates and initialises a Storage object
+     * @param filePath the path of the file to be read
+     */
     public Storage(String filePath) {
         this.f = new File(filePath);
     }
 
+    /**
+     * Loads the data on duke.txt.
+     * @return An ArrayList of tasks from duke.txt.
+     * @throws FileNotFoundException if there is no file found to load from.
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         Scanner s = new Scanner(this.f);
         ArrayList<Task> list = new ArrayList<>();
@@ -51,6 +65,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Saves a task onto duke.txt
+     * @param path The file path of duke.txt
+     * @param todoList The current task ArrayList
+     * @param task The task to be saved
+     */
     public static void saveTask(String path, ArrayList<Task> todoList, Task task ) {
         try {
             String s = formatString(task);
@@ -65,7 +85,12 @@ public class Storage {
         }
     }
 
-    public static void removeTask(String path, ArrayList<Task> todoList ) {
+    /**
+     * Rewrites duke.txt with the tasks from the todoList
+     * @param path The file path of duke.txt
+     * @param todoList The current task ArrayList
+     */
+    public static void rewriteList(String path, ArrayList<Task> todoList ) {
         try {
             String allTasks = formatString(todoList.get(0));
             for (int i = 1; i < todoList.size(); i++) {
@@ -76,21 +101,6 @@ public class Storage {
             writeToFile(path, allTasks);
         } catch (IOException e) {
             System.out.println("exception");
-        }
-    }
-
-    public static void updateTask(String path, ArrayList<Task> todoList) {
-        try {
-            String allTasks = formatString(todoList.get(0));
-
-            for (int i = 1; i < todoList.size(); i++) {
-                Task t = todoList.get(i);
-                String s = formatString(t);
-                allTasks = allTasks + "\n" + s;
-            }
-            writeToFile(path, allTasks);
-        } catch (IOException e) {
-            System.out.println(e);
         }
     }
 

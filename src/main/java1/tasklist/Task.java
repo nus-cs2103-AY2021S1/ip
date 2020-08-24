@@ -1,5 +1,8 @@
 package java1.tasklist;
 
+/**
+ * Encapsulates a Task object in the Duke.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -14,6 +17,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Gets the status icon, if status is done a tick symbol is returned, else a cross symbol is returned.
+     * @return A string object of the status symbol.
+     */
     public String getStatusIcon() {
         return (isDone ? "[" + "\u2713" + "]" : "[" + "\u2718" + "]"); //return tick or X symbols
     }
@@ -26,6 +33,9 @@ public class Task {
         return this.isDone;
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void markDone() {
         if(this.isDone == false) {
             this.isDone = true;

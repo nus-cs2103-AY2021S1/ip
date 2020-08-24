@@ -10,11 +10,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Duke {
-    //public final static String pathDirectory = System.getProperty("user.dir");
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Creates and initialises a Duke.
+     * @param filePath The path of duke.txt file
+     */
     public Duke(String filePath) {
         ui = new Ui();
 
@@ -37,6 +40,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke object after it has been initialised.
+     */
     public void run() {
         ui.greeting();
         Scanner sc = new Scanner(System.in);
