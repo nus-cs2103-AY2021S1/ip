@@ -11,13 +11,27 @@ import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
 
+/**
+ *  Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructor for creating storage object
+     *
+     * @param filePath relative directory of the storage file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Generates a Task object given string of form: [Type of Task][symbol] description (by: )/(at: )
+     *
+     * @param string task in string form
+     * @return corresponding Task object
+     */
     public static Task genTaskFromString(String string) {
         boolean status = (string.charAt(4) == '\u2713');
         if (string.charAt(1) == 'T') {
@@ -31,12 +45,23 @@ public class Storage {
         }
     }
 
+    /**
+     * Clears the storage file
+     *
+     * @throws IOException if filePath does not exist
+     */
     public void clear() throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         fw.write("");
         fw.close();
     }
 
+    /**
+     * Saves the given task list to the storage filePath
+     *
+     * @param tasksToSave a TaskList of all existing tasks
+     * @throws IOException if filePath does not exist
+     */
     public void save(TaskList tasksToSave) throws IOException {
         FileWriter fw = new FileWriter(this.filePath, true);
         for (Task task : tasksToSave.getListOfTasks())
@@ -44,6 +69,13 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Locate the storage file (creating a new file if it does not exist) and adds
+     * all the existing tasks in the file to an ArrayList
+     *
+     * @return ArrayList of all existing tasks
+     * @throws IOException if filePath does not exist
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> task = new ArrayList<>();
         File f = new File(this.filePath);

@@ -3,12 +3,20 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Main class that runs the Duke program
+ */
 public class Duke {
 
     private Storage storage;
     private static TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for creating Duke object
+     *
+     * @param filePath relative directory of the storage file
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,18 +28,22 @@ public class Duke {
         }
     }
 
+    /**
+     * Getter to retrieve tasks
+     *
+     * @return list of tasks
+     */
     public static TaskList getTasks() {
         return tasks;
     }
 
     /**
-     * Takes in user inputs. Program terminates when the String "bye" is entered.
-     * Program stores user inputs as Tasks and returns the list when the String "list" is entered.
-     * Tasks are categorised into "todo", "deadline" (to specify "by") and "event"  (to specify "at").
-     * When "done xx" is entered, Task xx in the list is marked as done.
-     * When "delete xx" is entered, Task xx in the list is removed from the list.
+     * Main function that runs the program
+     * If the exit command is not given, the program will continue to read user inputs
+     * Otherwise the storage is cleared and updated with the existing tasks
+     *
+     * @throws IOException if storage is not found
      */
-
     public void run() throws IOException {
         ui.showWelcome();
         boolean isExit = false;
