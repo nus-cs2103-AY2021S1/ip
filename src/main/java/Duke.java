@@ -7,6 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Duke {
     static String INDENT = "    ";
@@ -32,14 +37,14 @@ public class Duke {
                    tasklist.add(task);
                    break;
                case "D":
-                   task = new Deadline(description, args[3]);
+                   task = new Deadline(description, LocalDateTime.parse(args[3]));
                    if (done) {
                        task.markAsDone();
                    }
                    tasklist.add(task);
                    break;
                case "E":
-                   task = new Event(description, args[3]);
+                   task = new Event(description, LocalDateTime.parse(args[3]));
                    if (done) {
                        task.markAsDone();
                    }
@@ -127,11 +132,11 @@ public class Duke {
     }
     static void print(String str){
         String[] arr = str.split("\n");
-        String res = "";
-        for(int i = 0; i < arr.length; i++ ){
-            res += INDENT + arr[i] + "\n";
+        StringBuilder res = new StringBuilder();
+        for (String s : arr) {
+            res.append(INDENT).append(s).append("\n");
         }
-        String intro = divider +  res + divider;
+        String intro = divider +  res.toString() + divider;
         System.out.println(intro);
     }
     static void addTask(Task task, List<Task> taskList) {
@@ -147,12 +152,21 @@ public class Duke {
         if(list.size() == 0) {
             print("No task added yet!");
         } else {
-            String result = "Here are the tasks in your list:\n";
+            StringBuilder result = new StringBuilder("Here are the tasks in your list:\n");
             for(int i = 0; i < list.size(); i++) {
-                result += "" + (i + 1)+ ". " + list.get(i).toString() + ( i + 1 == list.size() ? "" : "\n");
+                result.append(i + 1).append(". ").append(list.get(i).toString()).append(i + 1 == list.size() ? "" : "\n");
             }
-            print(result);
+            print(result.toString());
         }
+    }
+    static LocalDateTime parseDateTime(String s) {
+        // s will be in the format : yyyy-mm-dd HHmm
+        // return format : yyyy-mm-ddTHH:mm
+        String[] dateTimeSplit = s.split(" ");
+        String date = dateTimeSplit[0];
+        String hour = dateTimeSplit[1].substring(0, 2);
+        String min = dateTimeSplit[1].substring(2);
+        return LocalDateTime.parse(date + "T" + hour + ":" + min);
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -190,20 +204,23 @@ public class Duke {
                     if(input.matches("deadline\\s*")) {
                         throw new EmptyArgumentException("deadline's description");
                     }
-                    if(!input.matches("deadline .+/by.+")) {
-                        throw new InvalidArgumentException("deadline's description");
+                    if(!input.matches("deadline .+/by \\d{4}-\\d{1,2}-\\d{1,2} \\d{4}")) {
+                        throw new InvalidArgumentException("deadline's description (proper date format: yyyy-mm-dd HHmm)");
                     }
                     String[] split = input.substring(9).split("/by");
-                    addTask(new Deadline(split[0].stripTrailing(), split[1].stripLeading()), tasks);
+                    String dateTimeString = split[1].stripLeading();
+                    LocalDateTime dateTime = parseDateTime(dateTimeString);
+                    addTask(new Deadline(split[0].stripTrailing(), dateTime), tasks);
                 } else if (input.matches("event.*")) {
                     if(input.matches("event\\s*")) {
                         throw new EmptyArgumentException("event's description");
                     }
-                    if(!input.matches("event .+/at.+")) {
-                        throw new InvalidArgumentException("event description");
+                    if(!input.matches("event .+/at \\d{4}-\\d{1,2}-\\d{1,2} \\d{4}")) {
+                        throw new InvalidArgumentException("event description (proper date format: yyyy-mm-dd HHmm)");
                     }
                     String[] split = input.substring(6).split("/at");
-                    addTask(new Event(split[0].stripTrailing(), split[1].stripLeading()), tasks);
+                    String dateTimeString = split[1].stripLeading();
+                    addTask(new Event(split[0].stripTrailing(), parseDateTime(dateTimeString)), tasks);
                 } else if (input.matches("delete.*")) {
                     if(input.matches("delete\\s*")) {
                         throw new EmptyArgumentException("Task Index");
