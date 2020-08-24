@@ -14,6 +14,9 @@ public abstract class Command {
     protected String extra;
     protected boolean isExit;
 
+    protected static final int PARSE_INDEX = 1;
+    protected static final int TASK_INDEX = 1;
+
     /**
      * Class constructor without additional arguments.
      * @param command String parsed by Parser object.
@@ -54,7 +57,8 @@ public abstract class Command {
         return isExit;
     }
 
-    public abstract void execute(Storage storage, TaskList tasks, Ui ui) throws IOException,
-            DukeEmptyArgumentException, DukeInvalidCommandException, DukeInvalidDateException,
+    public abstract void execute(Storage storage, TaskList tasks, Ui ui)
+            throws IOException, DukeEmptyArgumentException,
+            DukeInvalidCommandException, DukeInvalidDateException,
             DukeInvalidArgumentException, DukeInvalidTaskException;
 }

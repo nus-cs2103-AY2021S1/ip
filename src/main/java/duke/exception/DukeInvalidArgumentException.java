@@ -10,6 +10,7 @@ public class DukeInvalidArgumentException extends DukeException {
      * @param command String of command to be executed.
      */
     public DukeInvalidArgumentException(String command) {
-        super("Please enter a valid argument for " + command + "!");
+        super("Please enter a valid argument for "
+                + command + "!");
     }
 }

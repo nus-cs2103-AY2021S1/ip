@@ -19,10 +19,14 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) throws DukeInvalidArgumentException, DukeInvalidTaskException {
+    public void execute(Storage storage, TaskList tasks, Ui ui)
+            throws DukeInvalidArgumentException,
+            DukeInvalidTaskException {
         try {
-            int taskNum = Integer.parseInt(extra) - 1;
-            ui.printDeleted(tasks.getTask(taskNum), tasks.getSize() - 1);
+            int taskNum = Integer.parseInt(extra)
+                    - PARSE_INDEX;
+            ui.printDeleted(tasks.getTask(taskNum),
+                    tasks.getSize() - TASK_INDEX);
             tasks.deleteTask(taskNum);
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException(command);

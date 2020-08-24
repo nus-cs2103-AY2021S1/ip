@@ -7,7 +7,8 @@ import duke.task.*;
  */
 public class Ui {
 
-    private static final String BORDER = "==========================================";
+    private static final String BORDER
+            = "==========================================";
 
     /**
      * Prints out the greeting message to the user.
@@ -23,7 +24,8 @@ public class Ui {
      * Prints out the farewell message to the user.
      */
     public void printFarewell() {
-        System.out.println("Thanks for chatting with me, see you soon!\n"
+        System.out.println("Thanks for chatting with me, "
+                + "see you soon!\n"
                 + BORDER);
     }
 
@@ -32,14 +34,16 @@ public class Ui {
      * @param tasks TaskList object of the chat bot.
      */
     public void printList(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
+        System.out.println("Here are the tasks"
+                + " in your list:");
     }
 
     /**
      * Prints out the message to inform user that tasks have been saved onto tasks.csv file.
      */
     public void printSave() {
-        System.out.println("List saved to hard disk at data/tasks.csv");
+        System.out.println("List saved to hard disk "
+                + "at data/tasks.csv");
     }
 
     /**
@@ -50,7 +54,9 @@ public class Ui {
      */
     public void printAdded(Task task, int taskNumber) {
         System.out.println(">" + "added: " + task + "<");
-        System.out.println("You now have " + taskNumber + " task(s) in your list.");
+        System.out.println("You now have "
+                + taskNumber
+                + " task(s) in your list.");
     }
 
     /**
@@ -61,7 +67,9 @@ public class Ui {
      */
     public void printDeleted(Task task, int taskNumber) {
         System.out.println("I have deleted this task: \n" + task);
-        System.out.println("You now have " + taskNumber + " task(s) in your list.");
+        System.out.println("You now have "
+                + taskNumber
+                + " task(s) in your list.");
     }
 
     /**

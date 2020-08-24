@@ -10,6 +10,7 @@ public class DukeInvalidDateException extends DukeException {
      * @param command String of the command executed.
      */
     public DukeInvalidDateException(String command) {
-        super("Please enter a valid date for " + command + "!");
+        super("Please enter a valid date for "
+                + command + "!");
     }
 }

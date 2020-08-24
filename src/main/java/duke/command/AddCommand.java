@@ -21,7 +21,8 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) throws DukeInvalidDateException,
+    public void execute(Storage storage, TaskList tasks, Ui ui)
+            throws DukeInvalidDateException,
             DukeInvalidArgumentException {
         Task taskToBeAdded = null;
         if (command.equals("todo")) {
@@ -29,11 +30,13 @@ public class AddCommand extends Command {
         }
         try {
             if (command.equals("deadline")) {
-                taskToBeAdded = new Deadline(extra.substring(0, extra.indexOf("/") - 1),
+                taskToBeAdded = new Deadline(
+                        extra.substring(0, extra.indexOf("/") - 1),
                         extra.substring(extra.indexOf("/") + 4));
             }
             if (command.equals("event")) {
-                taskToBeAdded = new Event(extra.substring(0, extra.indexOf("/") - 1),
+                taskToBeAdded = new Event(
+                        extra.substring(0, extra.indexOf("/") - 1),
                         extra.substring(extra.indexOf("/") + 4));
             }
         } catch (DateTimeParseException e) {

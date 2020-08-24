@@ -31,9 +31,4 @@ public class Todo extends Task {
     public String write() {
         return "\ntodo," + super.write();
     }
-
-//    public static void main(String[] args) {
-//        Task todo = new Todo("read book");
-//        System.out.println(todo);
-//    }
 }
