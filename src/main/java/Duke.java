@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Duke {
@@ -130,21 +133,25 @@ public class Duke {
     }
 
     public void addDeadline(String item) throws DukeException {
-        String[] splitItem = item.split("/by");
+        String[] splitItem = item.split("/by ");
         if (splitItem.length == 1) {
             throw new DukeException("Incorrect format. Please add a deadline to finish task by.");
         }
-        Deadline newTask = new Deadline(splitItem[0], splitItem[1]);
+        LocalDate dueDate = Deadline.formatDate(splitItem[1]);
+        String dateTime = Deadline.formatDateString(dueDate, splitItem[1]);
+        Deadline newTask = new Deadline(splitItem[0], dateTime, dueDate, splitItem[1]);
         todoList.add(newTask);
         System.out.printf(taskFormat, newTask.getItem());
     }
 
     public void addEvent(String item) throws DukeException {
-        String[] splitItem = item.split("/at");
+        String[] splitItem = item.split("/at ");
         if (splitItem.length == 1) {
             throw new DukeException("Incorrect format. Please add a time/date the event is held at.");
         }
-        Event newTask = new Event(splitItem[0], splitItem[1]);
+        LocalDate dueDate = Deadline.formatDate(splitItem[1]);
+        String dateTime = Deadline.formatDateString(dueDate, splitItem[1]);
+        Event newTask = new Event(splitItem[0], dateTime, dueDate, splitItem[1]);
         todoList.add(newTask);
         System.out.printf(taskFormat, newTask.getItem());
     }
