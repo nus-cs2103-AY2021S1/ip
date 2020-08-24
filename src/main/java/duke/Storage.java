@@ -11,17 +11,49 @@ import java.util.ArrayList;
  */
 public class Storage {
 
-    BufferedReader br;
-    PrintWriter printWriter;
-    ArrayList<duke.Task> list;
-    String filepath;
+    private BufferedReader br;
+    private PrintWriter printWriter;
+    private ArrayList<duke.Task> list;
+    private String filepath;
+
+    public BufferedReader getBr() {
+        return br;
+    }
+
+    public PrintWriter getPrintWriter() {
+        return printWriter;
+    }
+
+    public ArrayList<Task> getList() {
+        return list;
+    }
+
+    public String getFilepath() {
+        return filepath;
+    }
+
+    public void setBr(BufferedReader br) {
+        this.br = br;
+    }
+
+    public void setPrintWriter(PrintWriter printWriter) {
+        this.printWriter = printWriter;
+    }
+
+    public void setList(ArrayList<Task> list) {
+        this.list = list;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
+    }
 
     public Storage(String filepath) throws IOException {
         try{
-            this.filepath = filepath;
-            this.br = new BufferedReader(new FileReader(filepath));
+            setFilepath(filepath);
+            setBr(new BufferedReader(new FileReader(filepath)));
         } catch (FileNotFoundException e) {
-            this.filepath = "data/tasks.txt";
+            setFilepath("data/tasks.txt");
             String directoryName = "data";
             String fileName = "tasks.txt";
             File directory = new File(directoryName);
@@ -32,8 +64,8 @@ public class Storage {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            this.br = new BufferedReader(new FileReader("data/tasks.txt"));
-            this.printWriter = new PrintWriter("data/tasks.txt");
+            setBr(new BufferedReader(new FileReader("data/tasks.txt")));
+            setPrintWriter(new PrintWriter("data/tasks.txt"));
         }
     }
 
@@ -46,10 +78,12 @@ public class Storage {
      */
     public ArrayList<duke.Task> loadTask() throws IOException, duke.DukeException {
         ArrayList<duke.Task> list = new ArrayList<>();
-        String line = this.br.readLine();
+        String line = getBr().readLine();
         System.out.println(line);
         System.out.println("aaa");
-        if (line == null) return list;
+        if (line == null) {
+            return list;
+        }
         while (!line.isEmpty()) {
             boolean isDone = String.valueOf(line.charAt(6)).equals("\u2713");
             if (String.valueOf(line.charAt(3)).equals("T")) {
@@ -77,7 +111,7 @@ public class Storage {
             }
             line = this.br.readLine();
         }
-        this.list = list;
+        setList(list);
         return list;
     }
 
@@ -88,8 +122,8 @@ public class Storage {
      * @throws FileNotFoundException
      */
     public void update(ArrayList<duke.Task> list) throws FileNotFoundException {
-        this.printWriter = new PrintWriter(filepath);
-        this.list = list;
+        setPrintWriter(new PrintWriter(filepath));
+        setList(list);
         StringBuilder listOutput = new StringBuilder();
         for (int j = 0; j < list.size(); j++) {
             int num = j + 1;
@@ -97,8 +131,7 @@ public class Storage {
             listOutput.append(num + "." + task.toString() + "\n");
         }
         String text = listOutput.toString();
-        this.printWriter.println(text);
-        this.printWriter.close();
+        getPrintWriter().println(text);
+        getPrintWriter().close();
     }
-
 }

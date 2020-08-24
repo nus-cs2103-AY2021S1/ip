@@ -17,6 +17,7 @@ public class Deadline extends duke.Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.getStatusIcon() + " " + super.getItemName() + "(by: " + date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
+        return "[D]" + super.getStatusIcon() + " " + super.getItemName() + "(by: " +
+                date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
     }
 }

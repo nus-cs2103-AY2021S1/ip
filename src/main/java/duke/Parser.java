@@ -19,7 +19,8 @@ public class Parser {
      * @throws duke.DukeException
      * @throws FileNotFoundException
      */
-    public void interpret(String input, duke.TaskList taskList, duke.Storage storage) throws duke.DukeException, FileNotFoundException {
+    public void interpret(String input, duke.TaskList taskList, duke.Storage storage)
+            throws duke.DukeException, FileNotFoundException {
         ArrayList<duke.Task> list = taskList.getList();
         if (input.equals("list")) {
             if (list.isEmpty()) {
@@ -78,8 +79,8 @@ public class Parser {
                     storage.update(list);
                 } else {
                     // throw exception
-                    throw new duke.DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task with the " +
-                            "starting keyword \"todo\" or \"deadline\" or \"event\".");
+                    throw new duke.DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task " +
+                            "with the starting keyword \"todo\" or \"deadline\" or \"event\".");
                 }
             } else {
                 // throw exception
@@ -94,8 +95,8 @@ public class Parser {
                     throw new duke.DukeException("OOPS!!! The description of an event cannot be empty.");
                 } else {
                     // throw idk what it means exception
-                    throw new duke.DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task with the " +
-                            "starting keyword \"todo\" or \"deadline\" or \"event\".");
+                    throw new duke.DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task " +
+                            "with the starting keyword \"todo\" or \"deadline\" or \"event\".");
                 }
             }
         }

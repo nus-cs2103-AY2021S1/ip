@@ -5,9 +5,7 @@ package duke;
  */
 public class Ui {
 
-    public Ui() {
-
-    }
+    public Ui() {}
 
     public void showLoadingError() {
         System.out.println("The test file cannot be loaded properly.");

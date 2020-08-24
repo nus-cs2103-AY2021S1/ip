@@ -4,6 +4,7 @@ package duke;
  * Represents a task object.
  */
 public class Task {
+
     private String name;
     private Boolean isDone;
 
@@ -24,8 +25,11 @@ public class Task {
         isDone = true;
     }
 
+    /**
+     * @return String that represents a tick or X icon.
+     */
     public String getStatusIcon() {
-        return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
+        return (isDone ? "[\u2713]" : "[\u2718]");
     }
 
     @Override

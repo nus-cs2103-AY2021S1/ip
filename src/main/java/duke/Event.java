@@ -1,7 +1,5 @@
 package duke;
 
-import duke.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -19,6 +17,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.getStatusIcon() + " " + super.getItemName() + "(at: " + date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
+        return "[E]" + super.getStatusIcon() + " " + super.getItemName() + "(at: " +
+                date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
     }
 }
