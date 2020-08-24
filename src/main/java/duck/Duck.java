@@ -1,5 +1,11 @@
 package duck;
 
+import duck.exception.DuckException;
+import duck.task.Deadline;
+import duck.task.Event;
+import duck.task.Task;
+import duck.task.Todo;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;

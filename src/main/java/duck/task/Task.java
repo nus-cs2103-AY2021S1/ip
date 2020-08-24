@@ -1,4 +1,6 @@
-package duck;
+package duck.task;
+
+import duck.Colour;
 
 abstract public class Task {
     private String description;

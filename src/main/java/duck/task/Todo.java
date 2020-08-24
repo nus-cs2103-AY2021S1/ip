@@ -1,4 +1,6 @@
-package duck;
+package duck.task;
+
+import duck.Colour;
 
 public class Todo extends Task {
     public Todo(String d) {
