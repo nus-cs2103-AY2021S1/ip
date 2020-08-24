@@ -1,0 +1,5 @@
+T | 1 | Sample task
+D | 1 | Sample task | 2020-05-05 0000
+D | 1 | Sample task | 2019-05-05 0000
+E | 0 | Sample task | 2020-10-10 0000
+E | 1 | Sample task | 2019-10-10 0000

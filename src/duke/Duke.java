@@ -14,7 +14,7 @@ public class Duke {
 
     Duke() {
         ui = new Ui();
-        storage = new Storage();
+        storage = new Storage("data/storage.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {

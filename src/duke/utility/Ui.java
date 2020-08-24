@@ -86,7 +86,7 @@ public class Ui {
 
     public String eachTaskBefore(LocalDate date, List<Task> tasks) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Here is the tasks after "
+        sb.append("Here is the tasks before "
                 + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ":\n");
         int count = 1;
         for (Task task : tasks) {

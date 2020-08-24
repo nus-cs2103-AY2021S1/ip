@@ -1,3 +1,4 @@
 T | 1 | burrow book
 D | 0 | project | 2020-08-22 1800
 E | 1 | concert | 2020-06-06 1129
+T | 0 | return book

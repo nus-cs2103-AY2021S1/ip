@@ -13,12 +13,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    private Path dataPath;
     private Path storagePath;
 
-    public Storage() {
-        this.dataPath = Paths.get("data");
-        this.storagePath = Paths.get("data", "storage.txt");
+    public Storage(String filePath) {
+        this.storagePath = Paths.get(filePath);
     }
 
     public void saveTaskToFile(Task task) throws DukeException {
@@ -93,15 +91,14 @@ public class Storage {
 
     private void createStorageFile() throws DukeException {
         try {
+            Path dataPath = storagePath.getParent();
             File dataFile = new File(dataPath.toString());
 
             if (!dataFile.exists()) {
                 dataFile.mkdir();
             }
 
-            Path storagePath = Paths.get("data", "storage.txt");
             File storageFile = new File(storagePath.toString());
-
 
             if (!storageFile.exists()) {
                 storageFile.createNewFile();

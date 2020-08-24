@@ -31,7 +31,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-
     public static String parseForSave(Task task) {
         String taskName = task.getTaskName();
         String isDone = task.isDone() ? "1" : "0";
@@ -88,7 +87,6 @@ public class Parser {
         String command = userInputArr[0];
         String arg = null;
 
-
         if (userInputArr.length != 1) {
             arg = userInputArr[1];
         }
@@ -98,24 +96,26 @@ public class Parser {
         } else if (command.equals(Command.LIST_COMMAND)) {
             return new ListCommand();
         } else if (command.equals(Command.DONE_COMMAND)) {
-            int taskNumber;
-            try {
-                if (arg == null) {
-                    throw new DoneException();
-                }
+            if (arg == null) {
+                throw new DoneException();
+            }
 
+            int taskNumber;
+
+            try {
                 taskNumber = Integer.parseInt(arg);
             } catch (NumberFormatException e) {
                 throw new InvalidTaskNumberException();
             }
             return new DoneCommand(taskNumber);
         } else if (command.equals(Command.DELETE_COMMAND)) {
-            int taskNumber;
-            try {
-                if (arg == null) {
-                    throw new DeleteException();
-                }
+            if (arg == null) {
+                throw new DeleteException();
+            }
 
+            int taskNumber;
+
+            try {
                 taskNumber = Integer.parseInt(arg);
             } catch (NumberFormatException e) {
                 throw new InvalidTaskNumberException();
