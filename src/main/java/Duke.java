@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -16,6 +18,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         ArrayList<Task> orderList = new ArrayList<Task>();
         Scanner sc =  new Scanner(System.in);
         String seperateLine = "    _______________________________________";
@@ -74,13 +77,13 @@ public class Duke {
                             if (splitAgain.length == 1) {
                                 throw new NoTimeException(command[0]);
                             }
-                            orderList.add(new Deadline(splitAgain[0], splitAgain[1]));
+                            orderList.add(new Deadline(splitAgain[0], LocalDateTime.parse(splitAgain[1], validFormat)));
                         } else if(command[0].equals("event")) {
                             String[] splitAgain = command[1].split("/by ");
                             if (splitAgain.length == 1) {
                                 throw new NoTimeException(command[0]);
                             }
-                            orderList.add(new Event(splitAgain[0], splitAgain[1]));
+                            orderList.add(new Event(splitAgain[0], LocalDateTime.parse(splitAgain[1], validFormat)));
                         } else if(command[0].equals("todo")) {
                             orderList.add( new Todo(command[1]));
                         } else {
