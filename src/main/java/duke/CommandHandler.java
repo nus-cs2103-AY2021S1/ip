@@ -1,17 +1,22 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
+
 import static duke.DukeCommandType.*;
 
 /**
  * CommandHandler class will handle all the related mechanisms initiated by user's command.
  */
 public class CommandHandler {
-    String input; // User's input
-    protected DukeCommandType commandType; // Input's command type
+
+    /** User's input */
+    private String input;
+    /** Input's command type */
+    protected DukeCommandType commandType;
 
     /**
-     * Initialise CommandHandler with user's input and its command type.
+     * Initialises CommandHandler with user's input and its command type.
+     *
      * @param input
      * @param commandType
      */
@@ -21,13 +26,14 @@ public class CommandHandler {
     }
 
     /**
-     * Handler for user's inputs depending on command type.
+     * Handles user's inputs depending on command type.
+     *
      * @param input
      * @param commandType
      * @param tasks
      * @throws DukeException
      */
-    public static void commandHandler(String input, DukeCommandType commandType, TaskList tasks) throws DukeException {
+    public static void handleCommands(String input, DukeCommandType commandType, TaskList tasks) throws DukeException {
         String task;
         switch (commandType) {
             case TODO:

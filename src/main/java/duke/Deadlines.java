@@ -8,11 +8,14 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadlines extends Task {
 
-    protected LocalDate deadline; // Deadline in LocalDate format
-    protected String due; // Deadline in String format
+    /** Deadline in LocalDate format */
+    protected LocalDate deadline;
+    /** Deadline in String format */
+    private String due;
 
     /**
      * Initialises Deadlines using description and deadline.
+     *
      * @param description
      * @param deadline
      */
@@ -25,6 +28,7 @@ public class Deadlines extends Task {
     /**
      * Initialises Deadlines using description, deadline and isDone.
      * Used when knowledge about isDone is needed, eg. loading existing list from hard disk.
+     *
      * @param description
      * @param deadline
      * @param isDone
@@ -36,7 +40,8 @@ public class Deadlines extends Task {
     }
 
     /**
-     * Return string format of deadline.
+     * Returns string format of deadline.
+     *
      * @return String description of deadline
      */
     @Override
@@ -45,7 +50,8 @@ public class Deadlines extends Task {
     }
 
     /**
-     * Return string format of deadline that will be written on a text file.
+     * Returns string format of deadline that will be written on a text file.
+     *
      * @return String description of deadline
      */
     @Override
