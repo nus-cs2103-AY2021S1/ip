@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 public class Duke {
@@ -71,6 +73,15 @@ public class Duke {
                         newTask = new Event(subst[0], subst[1]);
                         tasks.addTask(newTask);
                         break;
+//                    case "serialize":
+//                        ObjectOutputStream out = null;
+//                        try {
+//                            out = new ObjectOutputStream(System.out);
+//                            out.writeObject(tasks);
+//                            out.close();
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
                     default:
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
 //                        break;

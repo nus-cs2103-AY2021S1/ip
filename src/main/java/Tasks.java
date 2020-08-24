@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Tasks {
+public class Tasks implements java.io.Serializable{
 
     private ArrayList<Task> tasks;
 
