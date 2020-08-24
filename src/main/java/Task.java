@@ -1,6 +1,7 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String data;
 
     public Task(String description) {
         this.description = description;
@@ -18,5 +19,13 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    public int getDataStatus() {
+        return (isDone ? 1 : 0);
+    }
+
+    public String getData() {
+        return "| " + getDataStatus() + " | " + this.description;
     }
 }

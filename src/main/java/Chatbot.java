@@ -1,7 +1,14 @@
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Chatbot {
     private int lengthOfLine = 55;
-    ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
+    private String directoryPath = "data";
+    private String filePath = directoryPath + "/duke.txt";
 
     public String getHorizontalLine() {
         String line = "";
@@ -11,10 +18,62 @@ public class Chatbot {
         return line;
     }
 
-    public String[] parseStringBySpace(String str) throws DukeException {
+    public void readFile() {
+        // load the file first
+        File directory = new File(directoryPath);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        File f = new File(filePath);
+        try {
+            if (f.createNewFile()) {
+                // file does not exist
+                System.out.println("A data file has been created for you");
+            } else {
+                // file exist
+                System.out.println("Here are your existing tasks");
+                Scanner s = new Scanner(f);
+                while (s.hasNext()) {
+                    System.out.println(s.nextLine());
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void saveTasks() {
+        for (Task t: tasks) {
+            String taskData = t.getData();
+            appendToFile(filePath, taskData);
+        }
+    }
+
+    public void writeToFile(String filePath, String textToAdd) {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            fw.write(textToAdd + System.lineSeparator());
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void appendToFile(String filePath, String textToAdd) {
+        try {
+            FileWriter fw = new FileWriter(filePath, true);
+            fw.write(textToAdd + System.lineSeparator());
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public String[] parseString(String str) throws DukeException {
         String[] split1 = str.split(" ", 2);
         if (split1.length < 2 || split1[1].equals("")) {
-            if (split1[0].equals("list")) {
+            if (split1[0].equals("list") || split1[0].equals("bye")) {
                 String[] res = {split1[0]};
                 return res;
             } else if (split1[0].equals("done")) {
@@ -129,6 +188,6 @@ public class Chatbot {
                 "          `.   `,      `.  .'\n" +
                 "            \"._.'        `'";
         System.out.println("Hello from Moomin\n" + logo);
-        System.out.println("What can I do for you?");
+        System.out.println("I'm your personal assistant.");
     }
 }

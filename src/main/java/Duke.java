@@ -5,17 +5,19 @@ public class Duke {
         Chatbot bot = new Chatbot();
         String line = bot.getHorizontalLine();
         bot.greet();
+        bot.readFile();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             System.out.println(line);
             String str = sc.nextLine();
             try {
-                String[] res = bot.parseStringBySpace(str);
+                String[] res = bot.parseString(str);
                 if (res[0].equals("bye")) {
                     // exit
                     System.out.println("Bye. Hope to see you again soon!");
                     System.out.println(line);
                     sc.close();
+                    bot.saveTasks();
                     return;
                 } else if (res[0].equals("list")) {
                     // list all tasks
@@ -45,6 +47,7 @@ public class Duke {
                     }
                     System.out.println(line);
                 }
+
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
                 System.out.println(line);
