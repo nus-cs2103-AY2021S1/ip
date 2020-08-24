@@ -44,9 +44,9 @@ public class Parser {
                         .append(System.lineSeparator())
                         .append(newTask)
                         .append(System.lineSeparator())
-                        .append("Now you have ")
+                        .append("You now have ")
                         .append(taskList.size())
-                        .append(" task(s) left");
+                        .append(" task(s) in this list");
             }
         } catch (InvalidIndexException | InvalidDateException | InvalidCommandException |
                 MissingDateException | EmptyTaskException e) {
