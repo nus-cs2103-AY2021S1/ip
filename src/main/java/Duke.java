@@ -1,4 +1,9 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -72,7 +77,7 @@ public class Duke {
                                 }
                             }
                         }
-                        Task task = new Deadline(sd, sb);
+                        Task task = new Deadline(sd, LocalDate.parse(sb));
                         lst.add(task);
                         System.out.println("_____________________________________________________\n" + 
                                 "Got it. I've added this task:\n" + "  " + task.toString() + "\n" +
@@ -89,14 +94,15 @@ public class Duke {
                             if (b) {
                                 sd += strArr[i] + " ";
                             } else {
-                                if(i == strArr.length - 2) {
+                                if (i == strArr.length - 2) {
                                     sa = sa + strArr[i + 1];
                                 } else {
                                     sa = sa + strArr[i + 1] + " ";
                                 }
                             }
                         }
-                        Task task = new Event(sd, sa);
+                        
+                        Task task = new Event(sd, LocalDate.parse(sa));
                         lst.add(task);
                         System.out.println("_____________________________________________________\n" + 
                                 "Got it. I've added this task:\n" + "  " + task.toString() + "\n" +
@@ -119,6 +125,6 @@ public class Duke {
         } else if (!arr[0].equals("todo") && !arr[0].equals("deadline") && !arr[0].equals("event") &&
                 !arr[0].equals("list") && !arr[0].equals("bye") && !arr[0].equals("done") && !arr[0].equals("delete")) {
             throw new DukeException("other");
-        }
+        } 
     }
 }
