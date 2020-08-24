@@ -1,6 +1,8 @@
+clear
 todo read book
 todo
-deadline return book /by 2am
+deadline return book /by 16/6/2020 1651
+event return nothing /at 31/2/2021 1100
 done 1
 done 9
 delete 2

@@ -11,6 +11,11 @@ Hello from
 
 
 ++++++++++++++++++++++++++++++++++++++++++
+All tasks cleared!
+------------------------------------------
+
+
+++++++++++++++++++++++++++++++++++++++++++
 Got it. I've added this task:
     [T][✘] read book
 Now you have 1 tasks in the list.
@@ -24,8 +29,13 @@ Missing argument(s)
 
 ++++++++++++++++++++++++++++++++++++++++++
 Got it. I've added this task:
-    [D][✘] return book (by: 2am)
+    [D][✘] return book (by: 2020-06-16T16:51)
 Now you have 2 tasks in the list.
+------------------------------------------
+
+
+++++++++++++++++++++++++++++++++++++++++++
+Invalid date 'FEBRUARY 31'
 ------------------------------------------
 
 
@@ -42,7 +52,7 @@ Out of range argument for DONE command.
 
 ++++++++++++++++++++++++++++++++++++++++++
 Noted. I've removed this task:
-    [D][✘] return book (by: 2am)
+    [D][✘] return book (by: 2020-06-16T16:51)
 Now you have 1 tasks in the list.
 ------------------------------------------
 

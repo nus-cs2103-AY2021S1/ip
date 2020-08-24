@@ -1,16 +1,10 @@
 package main.java;
 
-import java.io.File;
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
 
-public class Tasks {
+public class TaskList {
     private static List<Task> database = new ArrayList<>();
 
     public static Task addTask(List<String> tokens) {
@@ -64,49 +58,28 @@ public class Tasks {
         return database.remove(index - 1);
     }
 
+    public static void readFile() {
+        List<List<String>> data = Storage.readFile();
+        for (List<String> tokens: data) {
+            addTask(tokens);
+        }
+    }
+
+    public static void writeFile() {
+        Storage.writeFile(database);
+    }
+
     public static int count() { return database.size();}
 
     public static void clearAll() {
         database.clear();
     }
 
-    public static void readFile() {
-        File dir = new File("./tmp/data");
-        dir.mkdirs();
-        File f = new File(dir, "storage.txt");
-        try {
-            f.createNewFile();
-            Scanner s = new Scanner(f);
-            while (s.hasNext()) {
-                String[] tokens = s.nextLine().split("%%%");
-                List<String> tokenss = new ArrayList<>(Arrays.asList(tokens));
-                //tokenss.add(2, "null");
-                addTask(tokenss);
-            }
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
-    }
-
-    public static void writeFile() {
-        File dir = new File("./tmp/data");
-        try {
-            FileWriter fw = new FileWriter(new File(dir, "storage.txt"));
-            for (int i = 0; i < database.size(); i++) {
-                Task task = database.get(i);
-                fw.write(task.serialize() + "\n");
-            }
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Something went wrong: " + e);
-        }
-    }
-
-    public static void printTasks() {
+    public static List<String> printTasks() {
+        List<String> output = new ArrayList<>();
         for (int i = 0; i < database.size(); i++) {
-            System.out.println((i + 1) + "." + database.get(i));
+            output.add((i + 1) + "." + database.get(i));
         }
+        return output;
     }
 }

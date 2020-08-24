@@ -1,3 +1,8 @@
+D:\stuDYING\Current-modules\CS2103T\ip\src\main\java\Command.java
+D:\stuDYING\Current-modules\CS2103T\ip\src\main\java\Commands.java
 D:\stuDYING\Current-modules\CS2103T\ip\src\main\java\Duke.java
+D:\stuDYING\Current-modules\CS2103T\ip\src\main\java\Parser.java
+D:\stuDYING\Current-modules\CS2103T\ip\src\main\java\Storage.java
 D:\stuDYING\Current-modules\CS2103T\ip\src\main\java\Task.java
-D:\stuDYING\Current-modules\CS2103T\ip\src\main\java\Tasks.java
+D:\stuDYING\Current-modules\CS2103T\ip\src\main\java\TaskList.java
+D:\stuDYING\Current-modules\CS2103T\ip\src\main\java\Ui.java
