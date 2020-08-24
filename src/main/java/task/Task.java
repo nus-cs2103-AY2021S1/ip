@@ -1,8 +1,8 @@
 package task;
 
 public abstract class Task {
-    private String description;
-    private boolean isDone;
+    protected String description;
+    protected boolean isDone;
 
     Task(String description) {
         this.description = description;
@@ -16,6 +16,8 @@ public abstract class Task {
     public String getStatus() {
         return isDone ? "[\u2713] " : "[\u2718] ";
     }
+
+    public abstract String print();
 
     @Override
     public String toString() {
