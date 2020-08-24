@@ -80,7 +80,7 @@ public class TaskList {
      * Get task list and display it to the user.
      */
     public void showTasks() {
-        layout.printTaskList(tasks);
+        layout.printTaskList(false, tasks);
     }
 
     /**
@@ -113,6 +113,21 @@ public class TaskList {
         }
 
     }
+
+    public void findTask(String [] arr) {
+        String filterWord;
+        try {
+            filterWord = parser.getFilterWord(arr);
+            ArrayList<Task> shallowCopy = new ArrayList<>(tasks);
+            shallowCopy.removeIf(task -> 
+                !(task.containsWord(filterWord))
+            );
+            layout.printTaskList(true, shallowCopy);
+        } catch (DukeException e) {
+            layout.print(e.getMessage());
+        }
+    }
+
 
     /**
      * Store task list in hard disk.

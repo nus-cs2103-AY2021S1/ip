@@ -26,6 +26,7 @@ public class Parser {
                 "event <description> \\at <event date> -add event with date ",
                 "\t deadline and date can be formatted as : yyyy-mm-dd or dd/mm/yyyy and HHmm or HH.mm a",
                 "done <duke.task number> - marks duke.task as done",
+                "find <one filter word> - finds task with specified word", 
                 "bye - goodbye!"
         };
         layout.printCommands(arr);
@@ -65,6 +66,9 @@ public class Parser {
             case "todo":
                 tasks.addTask(TaskList.Type.TODO, arr);
                 break;
+            case "find":
+                tasks.findTask(arr);
+                break;
             default:
                 DukeException e = new DukeException("I do not understand your command");
                 layout.print(e.getMessage());
@@ -101,6 +105,20 @@ public class Parser {
         }
        
         return new String[]{date.toString(), description.toString()};
+    }
+    
+    public String getFilterWord(String [] arr) throws DukeException{
+        if (arr.length < 2) {
+            throw new DukeException("Please specify a filter word");
+        } 
+        if (arr.length > 2) {
+            throw new DukeException("Please only specify 1 filter word");
+        }
+        StringBuilder filterWord = new StringBuilder();
+        for (int i = 1; i < arr.length; i++) {
+            filterWord.append(arr[i]);
+        }
+        return filterWord.toString();
     }
 
     /**
