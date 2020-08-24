@@ -1,3 +1,4 @@
-[T][✓] read book 
-[T][✓] test 
-[D][✓] test 2 (by: 12 Dec 1212 1200)
+[T][X] read 
+[D][X] test 2 (by: 12 Dec 1212 1200)
+[D][X] test 3 (by: 11 Nov 2020 1100)
+[E][X] test 4 (at: 10 Oct 2020 1000)

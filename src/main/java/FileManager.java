@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -38,14 +40,28 @@ public class FileManager{
         Scanner sc = new Scanner(s);
         String date = "";
         try{
-            sc.next();
             String current = sc.next();
             while(current.charAt(0)!='('){
-                sc.next();
+                current = sc.next();
             }
-            date = current;
-        } catch(NoSuchElementException e){}
-        return date;
+            current = sc.next();
+            while(current.charAt(current.length()-1)!=')'){
+                date = date + current + " ";
+                current = sc.next();
+            }
+            int l = current.length()-1;
+            String last = "";
+            for(int i=0; i<l; i++){
+                last = last + current.charAt(i);
+            }
+            date = date + last;
+        } catch(NoSuchElementException e){
+            System.out.println(e);
+        }
+//        System.out.println(date);
+        DateTimeFormatter d = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
+        LocalDateTime dt = LocalDateTime.parse(date,d);
+        return dt.format(DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm"));
     }
     private static int getType(String s) throws ErrorExceptions{
         Scanner sc = new Scanner(s);

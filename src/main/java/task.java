@@ -64,10 +64,10 @@ public class task {
                 String t = sc.next();
                 try{
                     String DT = d + " " + t;
-                    System.out.println(DT);
+//                    System.out.println(DT);
                     LocalDateTime dt = DateTimeManager.setDateTime(DT);
                     this.date = dt;
-                    System.out.println("Done");
+//                    System.out.println("Done");
                 } catch(DateTimeParseException e){
                     throw new ErrorExceptions("Wrong date time format! dd-mm-yyyy HHMM \n" + e);
                 }
