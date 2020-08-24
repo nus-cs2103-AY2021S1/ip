@@ -6,14 +6,10 @@ public class Todo extends Task {
 
     public Todo(String s) throws InvalidDescriptionException {
         super(s);
-        if (s.isBlank()) {
-            throw new InvalidDescriptionException("Please add a nice description to your todo :)");
-        }
     }
 
-    public Todo(int doneStatus, String s) {
-        super(s);
-        if (doneStatus == 1) super.isDone = true;
+    public Todo(int doneStatus, String s)  {
+        super(doneStatus ,s);
     }
 
 

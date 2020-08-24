@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -66,10 +67,10 @@ public class Database {
         if (typeOfTask.equals("T")) {
             return new Todo(doneStatus, details);
         } else if (typeOfTask.equals("D")) {
-            String timing = parts[3];
+            LocalDateTime timing = LocalDateTime.parse(parts[3]);
             return new Deadline(doneStatus, details, timing);
         } else if (typeOfTask.equals("E")) {
-            String timing = parts[3];
+            LocalDateTime timing = LocalDateTime.parse(parts[3]);
             return new Event(doneStatus, details, timing);
         }
         return null;

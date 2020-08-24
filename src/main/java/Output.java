@@ -7,6 +7,9 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Output {
@@ -35,8 +38,7 @@ public class Output {
             } catch (InvalidTaskIndexException e) {
                 System.out.println(e.getMessage());
             }
-        }
-        else {
+        } else {
             throw new InvalidCommandException("Please enter a valid command for me!");
         }
     }
@@ -79,30 +81,48 @@ public class Output {
 
     public void deadlineResponse(ArrayList<Task> taskList, String command) {
         try {
-            Deadline deadline = new Deadline(command.substring(8));
+            String detail = formatTimingInput("/by", command.substring(8))[0];
+            String timing = formatTimingInput("/by", command.substring(8))[1].trim();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(timing, formatter);
+
+            Deadline deadline = new Deadline(detail, dateTime);
             taskList.add(deadline);
+
             System.out.println("Got it. I've added this task:\n" +
                     deadline + "\nNow you have " + taskList.size() + " in the list");
         } catch (MissingTimingException | InvalidDescriptionException e) {
             System.out.println(e.getMessage());
+        } catch (DateTimeParseException e) {
+            System.out.println("Please enter timing in '/by 12-30-2020 23:59' format");
         }
     }
 
 
     public void eventResponse(ArrayList<Task> taskList, String command) {
         try {
-            Event event = new Event(command.substring(5));
+            String detail = formatTimingInput("/at", command.substring(5))[0];
+            String timing = formatTimingInput("/at", command.substring(5))[1].trim();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(timing, formatter);
+
+            Event event = new Event(detail, dateTime);
             taskList.add(event);
+
             System.out.println("Got it. I've added this task:\n" +
                     event + "\nNow you have " + taskList.size() + " in the list");
         } catch (MissingTimingException | InvalidDescriptionException e) {
             System.out.println(e.getMessage());
+        } catch (DateTimeParseException e) {
+            System.out.println("Please enter timing in '/by 12-30-2020 23:59' format");
         }
     }
 
     public void deleteTask(ArrayList<Task> taskList, String command) throws InvalidTaskIndexException {
         int numTodos = taskList.size();
-        if (command.length() <= 7 ) throw new InvalidTaskIndexException("Please include the index of the task!");
+        if (command.length() <= 7) throw new InvalidTaskIndexException("Please include the index of the task!");
         try {
             int todoIndex = Integer.parseInt(command.substring(7, 8));
             if (todoIndex <= numTodos && todoIndex > 0) {
@@ -116,5 +136,15 @@ public class Output {
             System.out.println("Please enter the index of the task you want to remove!");
         }
 
+    }
+
+    public String[] formatTimingInput(String format, String input) throws MissingTimingException {
+        if (!input.contains(format)) {
+            String message = "Don't forget to add a timing in '"
+                    + format + " 12-12-2020 23:59' format";
+            throw new MissingTimingException(message);
+        }
+        String[] parts = input.trim().split(format);
+        return parts;
     }
 }

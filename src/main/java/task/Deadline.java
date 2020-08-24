@@ -1,38 +1,34 @@
 package task;
 
 import exceptions.InvalidDescriptionException;
-import exceptions.MissingTimingException;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class Deadline extends Task {
-    private String detail;
-    private String deadline;
-    public Deadline(String s) throws MissingTimingException, InvalidDescriptionException {
-        super(s);
-        if (s.isBlank()) {
-            throw new InvalidDescriptionException("Please add a description for your deadline!");
-        } else if (!s.contains("/")) {
-            throw new MissingTimingException("Don't forget to add a timing for your deadline!");
-        }
-        this.detail = super.description.substring(0, super.description.indexOf("/"));
-        this.deadline = super.description.substring(super.description.indexOf('/') + 1);
+    private LocalDateTime deadline;
+
+    public Deadline(String detail, LocalDateTime deadline) throws InvalidDescriptionException {
+        super(detail);
+        this.deadline = deadline;
     }
 
-    public Deadline(int doneStatus, String detail, String deadline) {
-        super(detail);
-        if (doneStatus == 1) super.isDone = true;
-        this.detail = detail;
+    public Deadline(int doneStatus, String detail, LocalDateTime deadline) {
+        super(doneStatus, detail);
         this.deadline = deadline;
     }
 
     @Override
     public String formatTaskForDatabase() {
         int status = super.isDone ? 1 : 0;
-        return "D|" + status + "|" + detail + "|" + deadline;
+        return "D|" + status + "|" + super.description + "|" + this.deadline;
     }
 
 
     @Override
     public String toString() {
-        return "[D]" + super.toString()+ detail + "(by: " + deadline + ")";
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+        return "[D]" + super.toString()+ " " + super.description + "(by:" + deadline.format(dateTimeFormatter) + ")";
     }
 }
