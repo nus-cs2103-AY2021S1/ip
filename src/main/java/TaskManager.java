@@ -29,9 +29,11 @@ public class TaskManager {
                 if (taskDetails[0].equals("T")) {
                     task = new ToDo(taskDetails[2]);
                 } else if (taskDetails[0].equals("D")) {
-                    task = new Deadline(taskDetails[2], taskDetails[3]);
+                    task = new Deadline(taskDetails[2], 
+                            DateFormatter.extractTimestampInput(taskDetails[3]));
                 } else {
-                    task = new Event(taskDetails[2], taskDetails[3]);
+                    task = new Event(taskDetails[2], 
+                            DateFormatter.extractTimestampInput(taskDetails[3]));
                 }
                 
                 if (taskDetails[1].equals("1")) {
@@ -47,6 +49,8 @@ public class TaskManager {
             } catch (IOException e2) {
                 e2.printStackTrace();
             }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
         return result;
     }

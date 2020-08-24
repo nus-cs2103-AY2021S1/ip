@@ -23,13 +23,18 @@ public class DateFormatter {
             }
         }
 
-        throw new DukeException("Invalid input for date. Given '"+strDate+"', "
+        throw new DukeException("Invalid input for date. Given '" + strDate + "', "
                 + "expecting format yyyy-MM-dd hhmm or yyyy-MM-dd.");
     }
     // @@author
     
-    public static String formatDate(Date date) {
+    public static String formatDisplay(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm");
+        return dateFormat.format(date);
+    }
+
+    public static String formatSave(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hhmm");
         return dateFormat.format(date);
     }
 }

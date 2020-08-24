@@ -1,2 +1,2 @@
-T | 1 | your mom
-T | 1 | asdkfasdf
+D | 0 | asdfad | 2020-08-10 0600
+E | 1 | asdfadsfa | 1010-08-10 0600
