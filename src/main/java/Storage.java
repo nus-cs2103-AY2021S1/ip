@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-public class FileSaver {
+public class Storage {
 
     public static final String FILE_PATH = "duke/localData/data.duke";
 

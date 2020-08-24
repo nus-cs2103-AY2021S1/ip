@@ -65,7 +65,7 @@ public class Duke {
     }
 
     private static void chat() {
-        TaskList storage = FileSaver.load(FileSaver.FILE_PATH);
+        TaskList storage = Storage.load(Storage.FILE_PATH);
         Scanner sc = new Scanner(System.in);
         String rawInput = "";
         Boolean exit = false;
@@ -78,7 +78,7 @@ public class Duke {
                 Command command = Command.findCommand(commandString);
                 switch (command) {
                 case EXIT:
-                    FileSaver.save(storage, FileSaver.FILE_PATH);
+                    Storage.save(storage, Storage.FILE_PATH);
                     exit = true;
                     break;
                 case LIST:
