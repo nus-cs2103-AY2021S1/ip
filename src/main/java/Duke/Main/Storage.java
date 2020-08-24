@@ -1,9 +1,8 @@
 package Duke.Main;
 
-import Duke.Tasks.Deadline;
-import Duke.Tasks.Event;
-import Duke.Tasks.Task;
-import Duke.Tasks.Todo;
+import Duke.Tasks.*;
+
+import java.io.File;
 
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -18,6 +17,16 @@ public class Storage {
     private String filepath;
 
     public Storage(String filepath) {
+        File file = new File(filepath);
+
+        //Create the file if it does not exist
+        try {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        } catch (Exception e) {
+            System.out.println("Error occurred while creating file in Storage");
+        }
+
         this.filepath = filepath;
     }
 

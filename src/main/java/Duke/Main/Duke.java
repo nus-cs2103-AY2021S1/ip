@@ -25,7 +25,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        new Duke("./src/main/java/data/tasks.txt").run(sc);
+        new Duke("./data/tasks.txt").run(sc);
         // This path works for intelliJ, but doesn't work if u directly compile classes in `main/java`
     }
 }
