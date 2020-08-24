@@ -62,7 +62,12 @@ public class TaskList implements Serializable {
     public Task remove(int index) {
         return list.remove(index);
     }
-    
+
+    /**
+     * Returns a TaskList where all the terms' descriptions contain the search term
+     * @param term the String to search for
+     * @return the filtered TaskList
+     */
     public TaskList find(String term) {
         ArrayList<Task> newList = new ArrayList<>(list);
         newList.removeIf((task -> !task.getDescription().contains(term)));
