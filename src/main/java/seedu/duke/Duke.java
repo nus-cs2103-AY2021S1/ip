@@ -3,12 +3,22 @@ package seedu.duke;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Main class to run Duke program.
+ * Creates and stores tasks such as todo, event and deadline.
+ */
+
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Initialize the Duke class and creates an instance of Storage, Tasklist, Ui and Parser.
+     *
+     * @param filePath directory of txt file
+     */
     public Duke(String filePath) {
         try {
             this.storage = new Storage(filePath);
@@ -24,6 +34,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Method to run Duke program.
+     */
     public void run() {
         ui.intro();
         while (ui.getContinue()) {
@@ -31,6 +44,7 @@ public class Duke {
         }
         ui.bye();
     }
+
     public static void main(String[] args) {
         Duke duke = new Duke("data/duke.txt");
         duke.run();

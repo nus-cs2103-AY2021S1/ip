@@ -1,22 +1,41 @@
 package seedu.duke;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * Class that stores all the tasks in an arraylist.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 
+    /**
+     * Initialize an instance of Tasklist.
+     *
+     * @param ls Arraylist of Tasks to be completed.
+     */
     public TaskList(ArrayList<Task> ls) {
         this.taskList = ls;
     }
 
+    /**
+     * Check if a input for a new task is valid.
+     *
+     * @param input Name of the task.
+     * @param task Task type.
+     * @throws DukeException if empty input is given.
+     */
     public void checkForItem(String input, String task) throws DukeException {
         if (input.isBlank()) {
             throw new DukeException("The description of a " + task + " cannot be empty!");
         }
     }
 
+    /**
+     * Mark the task as done in a list.
+     *
+     * @param userInput Task to be completed.
+     */
     public void completeTask(String userInput) {
         try {
             int index = userInput.charAt(5) - '0';
@@ -38,6 +57,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Task to be deleted from tasklist.
+     *
+     * @param userInput String of the task to be deleted.
+     */
     public void deleteTask(String userInput) {
         int index = userInput.charAt(7) - '0';
         if (index < 1 || index > taskList.size()) {
@@ -52,6 +76,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Todo to be added to tasklist.
+     *
+     * @param userInput String of the todo.
+     */
     public void addToDo(String userInput) {
         try {
             this.checkForItem(userInput.substring(4), "todo");
@@ -70,6 +99,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deadline to be added to tasklist.
+     *
+     * @param userInput String of the deadline.
+     */
     public void addDeadline(String userInput) {
         try {
             checkForItem(userInput.substring(8), "deadline");
@@ -91,6 +125,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Event to be added to the tasklist.
+     *
+     * @param userInput String of the event.
+     */
     public void addEvent(String userInput) {
         try {
             checkForItem(userInput.substring(5), "event");
@@ -112,6 +151,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Iterates through the arraylist of tasks and print it out.
+     *
+     * @return String describing each tasks in the list.
+     */
     @Override
     public String toString() {
         String temp = "";

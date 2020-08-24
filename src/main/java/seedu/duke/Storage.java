@@ -3,11 +3,21 @@ package seedu.duke;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Class that store, read and write data to local txt file.
+ */
 public class Storage {
     private final static String DIRECTORY_PATH = "data";
     private final static String STORAGE_PATH = "data/duke.txt";
     private String filepath;
 
+    /**
+     * Initialize an instance of Storage class.
+     * Creates new folder and file if directory did not exist.
+     *
+     * @param filePath Directory of file.
+     * @throws IOException If invalid path name given.
+     */
     public Storage(String filePath) throws IOException {
         File folderDirectory = new File(DIRECTORY_PATH);
         if (!folderDirectory.exists()) {
@@ -21,12 +31,23 @@ public class Storage {
 
     }
 
+    /**
+     * Erase and wipe out all data in the txt file.
+     *
+     * @throws IOException If invalid path name given.
+     */
     private static void clearTasks() throws IOException {
         FileWriter storageWriter = new FileWriter(STORAGE_PATH, false);
         storageWriter.write("");
         storageWriter.close();
     }
 
+    /**
+     * Writes new task to local txt file.
+     *
+     * @param task Name of the task to be written.
+     * @throws IOException If invalid path name given.
+     */
     public static void addTask(String task) throws IOException {
         File data = new File(STORAGE_PATH);
         FileWriter writer = new FileWriter(data, true);
@@ -36,6 +57,15 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Load up existing data in a txt file stored in locally when Duke program starts.
+     *
+     * @param ls of tasks stored in ArrayList.
+     *
+     * @return Arraylist storing Tasks.
+     * @throws FileNotFoundException If no file is found on the local directory.
+     * @throws IOException If invalid input given.
+     */
     public static ArrayList<Task> load(ArrayList<Task> ls) throws FileNotFoundException, IOException {
         File data = new File(STORAGE_PATH);
         FileReader fr = new FileReader(data);
@@ -81,6 +111,12 @@ public class Storage {
         return ls;
     }
 
+    /**
+     * Make task as complete in a local txt file.
+     *
+     * @param taskNo Index of the task.
+     * @param size Size of tasklist.
+     */
     public static void completeTask(int taskNo, int size) {
         try {
             File data = new File(STORAGE_PATH);
@@ -104,6 +140,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Delete a task locally from the txt file.
+     *
+     * @param index Index of the task.
+     * @param size Size of the tasklist.
+     */
     public static void deleteTask(int index, int size) {
         try {
             File data = new File(STORAGE_PATH);

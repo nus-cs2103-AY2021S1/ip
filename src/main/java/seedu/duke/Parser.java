@@ -1,10 +1,26 @@
 package seedu.duke;
+
+/**
+ * Parser processes each command from Ui and executes program accordingly.
+ */
 public class Parser {
     private TaskList taskList;
 
+    /**
+     * Initialize an instance of a Parser.
+     *
+     * @param taskList List of Tasks stored in a TaskList class.
+     */
     public Parser(TaskList taskList) {
         this.taskList = taskList;
     }
+
+    /**
+     * Check for invalid inputs.
+     *
+     * @param input String that is input by user.
+     * @throws DukeException if input does not contain any of the keywords in the method.
+     */
     public void checkForInvalidInput(String input) throws DukeException {
         if (!input.contains("todo")) {
             if (!input.contains("deadline")) {
@@ -24,6 +40,12 @@ public class Parser {
             }
         }
     }
+
+    /**
+     * Process input by user and execute accordingly.
+     *
+     * @param input String input by user.
+     */
     public void read(String input) {
         try {
             this.checkForInvalidInput(input);
@@ -47,6 +69,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Print out list of Tasks.
+     */
     public void showTaskList() {
         Ui.print(taskList.toString());
     }
