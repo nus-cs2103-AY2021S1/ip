@@ -9,4 +9,6 @@ done 3
 delete 2
 delete 6
 list
+find book
+find deadline
 bye
