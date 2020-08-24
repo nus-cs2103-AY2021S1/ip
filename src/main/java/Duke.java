@@ -36,13 +36,6 @@ public class Duke {
         }
     }
 
-//    public static void saveTaskList(String filePath) throws FileNotFoundException {
-//        File f = new File(filePath);
-//        Scanner fileScanner = new Scanner(f);
-//        while (fileScanner.hasNext()) {
-//            System.out.println(fileScanner.nextLine());
-//        }
-//    }
 
     // Adds text in file to tasks in an ArrayList
     public static void addFileContentsToArrayList(String filePath, ArrayList<Task> tasks) throws FileNotFoundException {
@@ -60,14 +53,6 @@ public class Duke {
         fw.write(textToAdd);
         fw.close();
     }
-
-//    private static void appendToFile(String filePath, String textToAppend) throws IOException {
-//        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
-//        fw.write(textToAppend);
-//        fw.close();
-//    }
-
-
 
 
     public static void main(String[] args) {
@@ -92,6 +77,7 @@ public class Duke {
         String filePath = "/Users/tengjianling/ip/data/duke.txt";
         String fileString = ""; // used to overwrite .txt file after while loop
 
+
         // add tasks from file to ArrayList
         try {
             addFileContentsToArrayList(filePath, tasks);
@@ -100,6 +86,7 @@ public class Duke {
         } catch (FileNotFoundException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
+
 
         // loop through user input bye he inputs "bye"
         while (sc.hasNext()) {
@@ -136,6 +123,7 @@ public class Duke {
                         }
 
                         System.out.println("    " + toPrint);
+
                     }
 
                 } else if (t.isTodo()) {

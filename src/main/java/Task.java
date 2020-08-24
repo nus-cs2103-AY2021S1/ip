@@ -101,6 +101,10 @@ public class Task {
                                              + " | " + this.getDate()
                                 : "E | 0 | " + task.substring(0, task.indexOf('/') - 1)
                                              + " | " + this.getDate());
+
+
+
+
         } else {
             return "";
         }
