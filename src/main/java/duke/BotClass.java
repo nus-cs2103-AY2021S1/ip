@@ -1,19 +1,16 @@
 package duke;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Implementation of the Bot interface. Includes getters for Duke to actually
  * execute the actions.
  */
 public class BotClass implements Bot {
     private boolean stop;
-    private List<String> response;
+    private StringBuilder response;
 
     public BotClass() {
         stop = false;
-        response = new ArrayList<>();
+        response = new StringBuilder();
     }
 
     @Override
@@ -23,15 +20,13 @@ public class BotClass implements Bot {
 
     @Override
     public void sayLine(String string) {
-        response.add(string);
+        if (response.length() != 0) {
+            response.append("\n");
+        }
+        response.append(string);
     }
 
-    @Override
-    public void sayLines(List<String> strings) {
-        response.addAll(strings);
-    }
-
-    public List<String> getLines() { return response; }
+    public String getMessage() { return response.toString(); }
 
     public boolean stopped() { return stop; }
 }

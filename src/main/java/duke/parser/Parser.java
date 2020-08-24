@@ -11,8 +11,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 
-import java.util.Arrays;
-
 public class Parser {
     public static Command parse(String input) {
         input = input.strip();
@@ -53,7 +51,7 @@ public class Parser {
                 return new ErrorCommand("Sorry, I don't understand that!");
             }
         } catch (DukeParsingException e) {
-            return new ErrorCommand(e.getDukeMessage());
+            return new ErrorCommand(e.getMessage());
         }
     }
 
@@ -72,19 +70,19 @@ public class Parser {
             return Integer.parseInt(args);
         } catch (NumberFormatException e) {
             throw new DukeParsingException(
-                    Arrays.asList(String.format("You need to tell me the number of the task %s.",
-                            taskDescription), "Eg. " + example));
+                    String.format("You need to tell me the number of the task %s. Eg. %s",
+                            taskDescription, example));
         }
     }
 
     private static String[] parseDeadlineEventArgs(String args, String splitAround, String taskType,
-                                            String example) throws DukeParsingException {
+            String example) throws DukeParsingException {
         String[] argsSplit = args.split("\\s+" + splitAround + "\\s+", 2);
         if (argsSplit.length != 2 || argsSplit[0].isBlank() || argsSplit[1].isBlank()) {
             String n = taskType.matches("^a|e|i|o|u") ? "n" : ""; // starts with vowel
-            throw new DukeParsingException(Arrays
-                    .asList(String.format("Couldn't add %s! To add a%s %s, talk to me using the",
-                            taskType, n, taskType), "format: " + example));
+            throw new DukeParsingException(
+                    String.format("Couldn't add %s! To add a%s %s, talk to me using the format: %s",
+                            taskType, n, taskType, example));
         }
         return argsSplit;
     }

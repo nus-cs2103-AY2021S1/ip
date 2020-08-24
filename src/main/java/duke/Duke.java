@@ -32,7 +32,7 @@ public class Duke {
             String input = sc.nextLine();
             BotClass bot = new BotClass();
             Parser.parse(input).execute(bot, list);
-            ui.say(bot.getLines());
+            ui.say(bot.getMessage());
             if (bot.stopped()) {
                 stop = true;
             }
