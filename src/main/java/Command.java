@@ -1,24 +1,21 @@
-import java.util.function.Function;
+public abstract class Command {
 
-public enum Command {
+    private boolean isExit;
+    private String arguments;
 
-    //The main State of tasks
-    TODO(Todo::parseCommand),
-    EVENT(Event::parseCommand),
-    DEADLINE(Deadline::parseCommand);
-
-    //Create a variable to store the Function
-    protected final Function<String, Task> commandParser;
-
-    //Constructor for the function
-    Command(final Function<String, Task> commandParser) {
-        this.commandParser = commandParser;
+    public Command(boolean isExit, String arguments){
+        this.isExit = isExit;
+        this.arguments = arguments;
     }
 
-    //Get the task given description
-    public Task createTask(final String description) {
-        return commandParser.apply(description);
+    public abstract void execute(TaskList taskList, UI ui, Storage storage) throws UltronException;
+
+    public boolean isExit(){
+        return isExit;
     }
 
+    protected String getArguments(){
+        return this.arguments;
+    }
 
 }
