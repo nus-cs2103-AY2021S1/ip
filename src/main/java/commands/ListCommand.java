@@ -16,4 +16,9 @@ public class ListCommand extends Command{
     public void execute() {
         this.ui.showTaskList(this.taskList.getTaskList());
     }
+
+    @Override
+    public String toString() {
+        return "ListCommand";
+    }
 }

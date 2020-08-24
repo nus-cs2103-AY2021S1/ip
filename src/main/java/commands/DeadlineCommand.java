@@ -51,4 +51,9 @@ public class DeadlineCommand extends Command{
             throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of a deadline must not be empty.");
         }
     }
+
+    @Override
+    public String toString() {
+        return "DeadlineCommand";
+    }
 }

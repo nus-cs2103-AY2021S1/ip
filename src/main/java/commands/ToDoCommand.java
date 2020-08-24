@@ -35,4 +35,9 @@ public class ToDoCommand extends Command {
             throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of a todo must not be empty.");
         }
     }
+
+    @Override
+    public String toString() {
+        return "ToDoCommand";
+    }
 }

@@ -20,6 +20,9 @@ public class Parser {
 
     public Command parseCommand(String user_input) throws DukeIllegalCommandException {
         String[] user_inputArr = user_input.split(" ");
+        if (user_inputArr.length == 0) {
+            throw new DukeIllegalCommandException("");
+        }
         String keyword = user_inputArr[0];
         switch (keyword) {
             case "list":
@@ -45,6 +48,4 @@ public class Parser {
         String[] user_inputArr = user_input.split(" ");
         return user_inputArr[0];
     }
-
-
 }

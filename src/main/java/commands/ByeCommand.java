@@ -15,4 +15,9 @@ public class ByeCommand extends Command{
         this.ui.showExit();
         System.exit(0);
     }
+
+    @Override
+    public String toString() {
+        return "ByeCommand";
+    }
 }

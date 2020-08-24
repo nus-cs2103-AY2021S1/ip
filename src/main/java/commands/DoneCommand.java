@@ -33,4 +33,9 @@ public class DoneCommand extends Command {
             throw new DukeInvalidUserInputException("Oh dear, it appears that item does not exist.");
         }
     }
+
+    @Override
+    public String toString() {
+        return "DoneCommand";
+    }
 }

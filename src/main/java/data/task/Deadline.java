@@ -33,7 +33,7 @@ public class Deadline extends Task {
         return "D | " + super.toTxtFormat() + " | " + this.dateTimeTxt;
     }
 
-    public static Deadline parse(String txtFormat, String[] txtArray) throws DukeInvalidUserInputException {
+    public static Deadline parse(String[] txtArray) throws DukeInvalidUserInputException {
         String dateTime = LocalDateTime.parse(txtArray[3].trim(),
                 DateTimeFormatter.ofPattern("d MMMM yyyy hh:mm a")).toString().replace('T', ' ');
         dateTime = dateTime.substring(0, dateTime.indexOf(':')) + dateTime.substring(dateTime.indexOf(':') + 1);

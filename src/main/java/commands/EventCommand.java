@@ -51,4 +51,9 @@ public class EventCommand extends Command{
             throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of an event must not be empty.");
         }
     }
+
+    @Override
+    public String toString() {
+        return "EventCommand";
+    }
 }

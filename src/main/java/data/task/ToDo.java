@@ -9,7 +9,7 @@ public class ToDo extends Task {
         return "T | " + super.toTxtFormat();
     }
 
-    public static ToDo parse(String txtFormat, String[] txtArray) {
+    public static ToDo parse(String[] txtArray) {
         ToDo toDo = new ToDo(txtArray[2].trim());
         if (txtArray[1].trim().equals("1")) {
             toDo.markAsDone();

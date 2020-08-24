@@ -38,9 +38,9 @@ public abstract class Task {
         char firstLetter = txtFormat.charAt(0);
         String[] txtArray = txtFormat.split("\\|");
         if (firstLetter == 'T') {
-            return ToDo.parse(txtFormat, txtArray);
+            return ToDo.parse(txtArray);
         } else if (firstLetter == 'D') {
-            return Deadline.parse(txtFormat, txtArray);
+            return Deadline.parse(txtArray);
         } else if (firstLetter == 'E') {
             return Event.parse(txtArray);
         } else {
