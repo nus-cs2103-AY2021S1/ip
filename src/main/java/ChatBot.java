@@ -6,10 +6,10 @@ import java.util.ArrayList;
  * Encapsulates the chatBot and its behavior.
  */
 public class ChatBot {
-    private String logo;
-    private String user;
-    private String botName;
-    private List<Task> toDoList;
+    String logo;
+    String user;
+    String botName;
+    List<Task> toDoList;
 
     /**
      * Instantiates a chatBot with a name.
