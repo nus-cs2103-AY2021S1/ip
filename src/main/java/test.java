@@ -1,52 +1,37 @@
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Scanner;
-import java.io.File;
-import java.io.IOException;
-import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class test {
-    public static void main(String[] args) throws IOException {
-//        Scanner sc = new Scanner(System.in);
-//        String echo = sc.nextLine();
+    public enum level{
+        Todo,Deadline,Event
+    }
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        String echo = sc.nextLine();
 //        task t = new Todo(echo);
-//        Deadline d = new Deadline(echo);
-//        String date = "by: Monday";
-//        d.addDate(date);
-//        System.out.println(d.read());
+        Deadline d = new Deadline(echo, "[D]");
 //        try {
-//            FileWriter myWriter = new FileWriter("filename.txt");
-//            myWriter.write("Files in Java might be tricky, but it is fun enough!");
-//            myWriter.close();
-//            System.out.println("Successfully wrote to the file.");
-//        } catch (IOException e) {
-//            System.out.println("An error occurred.");
-//            e.printStackTrace();
+//            d.addDate("12-12-2020 1800");
+//            d.getDT();
+//        } catch(ErrorExceptions e){
+//            System.out.println(e);
 //        }
-
-        String fileDir = "./DukeTodoSave.txt";
-        File save = new File(fileDir);
-//        if(!save.exists()){ // create the text file
-//            System.out.println("Save file does not exist, creating it now!");
-//            try{
-//                save.createNewFile();
-//            } catch(IOException e){
-//                System.out.println("Error creating the save file!");
-//                System.out.println(e);
-//            }
+//        String date = "by: Monday";
+//        String date = "12-12-2020 1200";
+//        try {
+//            d.addDate(date);
+//        } catch(ErrorExceptions e){
+//            System.out.println("Failed");
 //        }
-//        else{
-//            Scanner sc = new Scanner(save);
-//            while(sc.hasNext()){
-//                System.out.println(sc.nextLine());
-//            }
-//        FileWriter fw = new FileWriter(fileDir);
-//        fw.write("test1");
-//        fw.write("test2");
-//        fw.close();
-        ArrayList<task> store = new ArrayList<>();
-        FileManager.read(save,store);
-        for(task i:store){
-            System.out.println(i.read());
-        }
+        System.out.println(d.read());
+//        System.out.println(d.read());
+//        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm");
+//        LocalDateTime dt = DateTimeManager.setDateTime("2019-12-01T18:00");
+//        LocalDateTime dt = LocalDateTime.parse("12-12-2020 1800",format);
+//        System.out.println(dt.format(DateTimeFormatter.ofPattern("MMM dd uuuu HHmm")));
     }
 }

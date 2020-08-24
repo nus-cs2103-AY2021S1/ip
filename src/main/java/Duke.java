@@ -40,7 +40,7 @@ public class Duke {
                 if(type == 1){
                     try{
                         String name = checker.name(echo);
-                        Todo t = new Todo(name);
+                        Todo t = new Todo(name, "[T]");
                         store.add(t);
                         t.print();
                         try{
@@ -58,7 +58,7 @@ public class Duke {
                         String name = checker.name(echo);
                         try{
                             String date = checker.dateFinder(echo,2);
-                            Deadline d = new Deadline(name);
+                            Deadline d = new Deadline(name,"[D]");
                             d.addDate(date);
                             store.add(d);
                             d.print();
@@ -81,7 +81,7 @@ public class Duke {
                         String name = checker.name(echo);
                         try{
                             String date = checker.dateFinder(echo,3);
-                            Event e = new Event(name);
+                            Event e = new Event(name,"[E]");
                             e.addDate(date);
                             store.add(e);
                             e.print();
@@ -112,7 +112,7 @@ public class Duke {
                             task l = store.get(index-1);
                             l.done();
                             System.out.println("Nice! I've marked this task as done: ");
-                            System.out.println("  " + l.read2());
+                            System.out.println("  " + l.read());
                             try{
                                 FileManager.edit(fileDir,store);
                             } catch(IOException e){

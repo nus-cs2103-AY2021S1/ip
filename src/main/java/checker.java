@@ -85,22 +85,21 @@ public class checker {
                 next = sc.next();
                 N = "" + next.charAt(0);
             }
-            int length = next.length();
+//            int length = next.length();
             String action = "";
-            for(int i=1; i<length; i++){
-                action = action + next.charAt(i);
-            }
-            action = "(" + action + ": ";
+//            for(int i=1; i<length; i++){
+//                action = action + next.charAt(i);
+//            }
+//            action = action + " ";
             try{
                 String day = sc.next();
                 action = action + day;
                 try{
                     String time = sc.next();
-                    action = action + " " + time + ")";
+                    action = action + " " + time;
                 }
                 catch(NoSuchElementException e){
                     if(type == 2){
-                        action = action + ")";
                     }
                     else{
                         throw new ErrorExceptions("Wrong event command format, missing timeslot");
