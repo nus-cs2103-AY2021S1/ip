@@ -26,53 +26,45 @@ You have 2 items.
 -------------------------------------
 -------------------------------------
 Successfully added event:
-[✘] | E | meeting | At: Mon
+[✘] | E | meeting | At: 30 Jul 20 15:00
 -------------------------------------
 -------------------------------------
 Successfully added event:
-[✘] | E | lunch with friends | At: Mon 3 pm
+[✘] | E | lunch with friends | At: 17 Jul 20 15:00
 -------------------------------------
 -------------------------------------
 Hmm I didn't quite catch that.
-Did you provide a date and description for this event?
--------------------------------------
--------------------------------------
-Hmm I didn't quite catch that.
-Did you provide a date and description for this event?
+Please provide a valid event date in DD/MM/YYYY HH:mm format.
 -------------------------------------
 -------------------------------------
 You have 4 items.
 
 1: [✘] | T | test
 2: [✘] | T | read book
-3: [✘] | E | meeting | At: Mon
-4: [✘] | E | lunch with friends | At: Mon 3 pm
+3: [✘] | E | meeting | At: 30 Jul 20 15:00
+4: [✘] | E | lunch with friends | At: 17 Jul 20 15:00
 -------------------------------------
 -------------------------------------
 Successfully added deadline:
-[✘] | D | quiz1 | By: Tues
+[✘] | D | quiz1 | By: 30 Aug 20 23:59
 -------------------------------------
 -------------------------------------
 Successfully added deadline:
-[✘] | D | quiz2 submission | By: Tues 2 pm
+[✘] | D | quiz2 submission | By: 29 Aug 20 22:00
 -------------------------------------
 -------------------------------------
 Hmm I didn't quite catch that.
-Did you provide a deadline and description for this deadline?
--------------------------------------
--------------------------------------
-Hmm I didn't quite catch that.
-Did you provide a deadline and description for this deadline?
+Please provide a valid deadline in DD/MM/YYYY HH:mm format."
 -------------------------------------
 -------------------------------------
 You have 6 items.
 
 1: [✘] | T | test
 2: [✘] | T | read book
-3: [✘] | E | meeting | At: Mon
-4: [✘] | E | lunch with friends | At: Mon 3 pm
-5: [✘] | D | quiz1 | By: Tues
-6: [✘] | D | quiz2 submission | By: Tues 2 pm
+3: [✘] | E | meeting | At: 30 Jul 20 15:00
+4: [✘] | E | lunch with friends | At: 17 Jul 20 15:00
+5: [✘] | D | quiz1 | By: 30 Aug 20 23:59
+6: [✘] | D | quiz2 submission | By: 29 Aug 20 22:00
 -------------------------------------
 -------------------------------------
 Hmm I didn't quite catch that.
@@ -91,24 +83,24 @@ You have 6 items.
 
 1: [✓] | T | test
 2: [✘] | T | read book
-3: [✘] | E | meeting | At: Mon
-4: [✘] | E | lunch with friends | At: Mon 3 pm
-5: [✘] | D | quiz1 | By: Tues
-6: [✘] | D | quiz2 submission | By: Tues 2 pm
+3: [✘] | E | meeting | At: 30 Jul 20 15:00
+4: [✘] | E | lunch with friends | At: 17 Jul 20 15:00
+5: [✘] | D | quiz1 | By: 30 Aug 20 23:59
+6: [✘] | D | quiz2 submission | By: 29 Aug 20 22:00
 -------------------------------------
 -------------------------------------
 Nice! I've marked this task as done:
-[✓] | E | meeting | At: Mon
+[✓] | E | meeting | At: 30 Jul 20 15:00
 -------------------------------------
 -------------------------------------
 You have 6 items.
 
 1: [✓] | T | test
 2: [✘] | T | read book
-3: [✓] | E | meeting | At: Mon
-4: [✘] | E | lunch with friends | At: Mon 3 pm
-5: [✘] | D | quiz1 | By: Tues
-6: [✘] | D | quiz2 submission | By: Tues 2 pm
+3: [✓] | E | meeting | At: 30 Jul 20 15:00
+4: [✘] | E | lunch with friends | At: 17 Jul 20 15:00
+5: [✘] | D | quiz1 | By: 30 Aug 20 23:59
+6: [✘] | D | quiz2 submission | By: 29 Aug 20 22:00
 -------------------------------------
 -------------------------------------
 Nice! I've marked this task as done:
@@ -119,10 +111,10 @@ You have 6 items.
 
 1: [✓] | T | test
 2: [✘] | T | read book
-3: [✓] | E | meeting | At: Mon
-4: [✘] | E | lunch with friends | At: Mon 3 pm
-5: [✘] | D | quiz1 | By: Tues
-6: [✘] | D | quiz2 submission | By: Tues 2 pm
+3: [✓] | E | meeting | At: 30 Jul 20 15:00
+4: [✘] | E | lunch with friends | At: 17 Jul 20 15:00
+5: [✘] | D | quiz1 | By: 30 Aug 20 23:59
+6: [✘] | D | quiz2 submission | By: 29 Aug 20 22:00
 -------------------------------------
 -------------------------------------
 Hmm I didn't quite catch that.
@@ -140,33 +132,33 @@ Noted. I've deleted this task:
 You have 5 items.
 
 1: [✘] | T | read book
-2: [✓] | E | meeting | At: Mon
-3: [✘] | E | lunch with friends | At: Mon 3 pm
-4: [✘] | D | quiz1 | By: Tues
-5: [✘] | D | quiz2 submission | By: Tues 2 pm
+2: [✓] | E | meeting | At: 30 Jul 20 15:00
+3: [✘] | E | lunch with friends | At: 17 Jul 20 15:00
+4: [✘] | D | quiz1 | By: 30 Aug 20 23:59
+5: [✘] | D | quiz2 submission | By: 29 Aug 20 22:00
 -------------------------------------
 -------------------------------------
 Noted. I've deleted this task:
-[✘] | E | lunch with friends | At: Mon 3 pm
+[✘] | E | lunch with friends | At: 17 Jul 20 15:00
 -------------------------------------
 -------------------------------------
 You have 4 items.
 
 1: [✘] | T | read book
-2: [✓] | E | meeting | At: Mon
-3: [✘] | D | quiz1 | By: Tues
-4: [✘] | D | quiz2 submission | By: Tues 2 pm
+2: [✓] | E | meeting | At: 30 Jul 20 15:00
+3: [✘] | D | quiz1 | By: 30 Aug 20 23:59
+4: [✘] | D | quiz2 submission | By: 29 Aug 20 22:00
 -------------------------------------
 -------------------------------------
 Noted. I've deleted this task:
-[✘] | D | quiz1 | By: Tues
+[✘] | D | quiz1 | By: 30 Aug 20 23:59
 -------------------------------------
 -------------------------------------
 You have 3 items.
 
 1: [✘] | T | read book
-2: [✓] | E | meeting | At: Mon
-3: [✘] | D | quiz2 submission | By: Tues 2 pm
+2: [✓] | E | meeting | At: 30 Jul 20 15:00
+3: [✘] | D | quiz2 submission | By: 29 Aug 20 22:00
 -------------------------------------
 -------------------------------------
 Bye! See you around!

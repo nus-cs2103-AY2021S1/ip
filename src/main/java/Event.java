@@ -1,16 +1,19 @@
+
+import java.time.LocalDateTime;
+
 public class Event extends Task {
     public static final String STORE_EVENT = "E";
     private static final String DELIMITER = " /at ";
-    private String dateInfo;
+    private LocalDateTime dateInfo;
 
-    public Event(String description, String dateInfo) {
+    public Event(String description, LocalDateTime dateInfo) {
         super(description);
         this.dateInfo = dateInfo;
     }
 
     public Event(String description, String dateInfo, boolean isComplete) {
         super(description, isComplete);
-        this.dateInfo = dateInfo;
+        this.dateInfo = LocalDateTime.parse(dateInfo);
     }
 
     public static Event create(String args) {
@@ -18,7 +21,8 @@ public class Event extends Task {
         if (argsList.length < 2) {
             throw new TaskException("Not enough arguments");
         } else {
-            return new Event(argsList[0], argsList[1]);
+            LocalDateTime date = LocalDateTime.parse(argsList[1], Task.READER_FORMAT);
+            return new Event(argsList[0], date);
         }
     }
 
@@ -29,6 +33,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return printCompletionFlag() + " | E | " + description + " | At: " + dateInfo;
+        return printCompletionFlag() + " | E | " + description + " | At: " + dateInfo.format(Task.DATE_FORMAT);
     }
 }

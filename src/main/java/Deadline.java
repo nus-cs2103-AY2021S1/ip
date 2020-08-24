@@ -1,25 +1,28 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
     public static final String STORE_DEADLINE = "D";
 
     private static final String DELIMITER = " /by ";
-    private String deadline;
+    private LocalDateTime deadline;
 
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, LocalDateTime deadline) {
         super(description);
         this.deadline = deadline;
     }
 
     public Deadline(String description, String deadline, boolean isCompleted) {
         super(description, isCompleted);
-        this.deadline = deadline;
+        this.deadline = LocalDateTime.parse(deadline);
     }
 
     public static Deadline create(String args) {
-        String[] argsList = args.split(" /by ");
+        String[] argsList = args.split(DELIMITER);
         if (argsList.length < 2) {
             throw new TaskException("Not enough arguments");
         } else {
-            return new Deadline(argsList[0], argsList[1]);
+            LocalDateTime date = LocalDateTime.parse(argsList[1], Task.READER_FORMAT);
+            return new Deadline(argsList[0], date);
         }
     }
 
@@ -30,6 +33,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return printCompletionFlag() + " | D | " + description + " | By: " + deadline;
+        return printCompletionFlag() + " | D | " + description + " | By: " + deadline.format(Task.DATE_FORMAT);
     }
 }
