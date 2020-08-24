@@ -8,7 +8,7 @@ public class DoneCommand extends Command {
     }
 
     public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
-        Task task = list.markAsDone(this.index);
+        Task task = list.setDone(this.index);
         String textOutput = "Nice! I've marked this task as done:\n";
         textOutput += task;
         storage.updateTextFile(list);

@@ -67,7 +67,7 @@ public class TaskList implements Iterable<Task> {
         if (input.isEmpty()) {
             throw new DukeException("OOPS!!! I'm sorry, the description cannot be empty :<");
         }
-        task = done ? task.markAsDone() : task;
+        task = done ? task.setDone() : task;
         this.list.add(task);
         return task;
     }
@@ -93,9 +93,9 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
-    public Task markAsDone(int i) throws DukeException {
+    public Task setDone(int i) throws DukeException {
         try {
-            return this.list.get(i).markAsDone();
+            return this.list.get(i).setDone();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! I'm sorry, the task number is out of range :<");
         }
@@ -117,7 +117,7 @@ public class TaskList implements Iterable<Task> {
             output.append(taskNum);
             output.append(".");
             output.append(this.list.get(i).toString());
-            output.append(i == this.size() - 1 ? "" : '\n');
+            output.append((i == this.size() - 1) ? "" : '\n');
         }
         return output.toString();
     }

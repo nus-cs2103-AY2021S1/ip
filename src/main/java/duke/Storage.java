@@ -39,7 +39,7 @@ public class Storage {
             StringBuilder text = new StringBuilder();
             FileWriter fw = new FileWriter(this.file);
             for (Task task : list) {
-                text.append(task.textFormat());
+                text.append(task.getTxtFormat());
                 text.append("\n");
             }
             fw.write(text.toString());

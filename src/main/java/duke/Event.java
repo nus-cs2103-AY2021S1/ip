@@ -7,12 +7,13 @@ public class Event extends TimedTask {
     }
 
     @Override
-    protected String textFormat() {
-        return "event, " + super.textFormat() + "/at" + this.datetime.format(Event.inputFormatter);
+    protected String getTxtFormat() {
+        return "event, " + super.getTxtFormat() + "/at" + this.dateTime.format(Event.inputFormatter);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + super.datetimeString() + ")";
+        return "[E]" + super.toString()
+                + " (at: " + super.getDateTimeString() + ")";
     }
 }
