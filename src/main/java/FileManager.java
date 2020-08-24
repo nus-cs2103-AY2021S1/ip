@@ -94,13 +94,13 @@ public class FileManager{
                     String name = FileManager.getName(current);
                     boolean done = FileManager.getDone(current);
                     if(type == 1){
-                        Todo t =new Todo(name);
+                        Todo t = new Todo(name,"[T]");
                         t.done();
                         store.add(t);
                     } else if(type == 2){
                         try {
                             String date = FileManager.getDate(current);
-                            Deadline d = new Deadline(name);
+                            Deadline d = new Deadline(name,"[D]");
                             d.done();
                             d.addDate(date);
                             store.add(d);
@@ -110,7 +110,7 @@ public class FileManager{
                     } else{
                         try {
                             String date = FileManager.getDate(current);
-                            Event e = new Event(name);
+                            Event e = new Event(name,"[E]");
                             e.done();
                             e.addDate(date);
                             store.add(e);
