@@ -1,0 +1,2 @@
+D | 1 | return book  |  Wednesday
+E | 0 | project meeting  |  Sun 2-4pm

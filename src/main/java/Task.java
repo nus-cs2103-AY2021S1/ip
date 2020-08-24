@@ -15,6 +15,18 @@ public class Task {
         Duke.printLine();
 
     }
+
+    public String writerSave(){
+        String store = "D |";
+        if(isDone){
+            store += " 1 |";
+        } else {
+            store += " 0 |";
+        }
+        store += " "  + this.description;
+        return store;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
