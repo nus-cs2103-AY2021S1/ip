@@ -10,11 +10,11 @@ public class Duke {
 
     public static void greeting() {
 
-        String underscore = "    ____________________________________________________________";
+        String border = "    ============================================================";
 
-        System.out.println(underscore);
+        System.out.println(border);
         System.out.println("    Hello! I'm Duke" + "\n" + "    What can I do for you?");
-        System.out.println(underscore);
+        System.out.println(border);
     }
 
     public static void commandTask(String input, TaskList newList) throws NoDescriptionException, InvalidCommandException, InvalidTaskException {

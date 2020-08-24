@@ -11,8 +11,7 @@ public class Deadlines extends Task {
 
     public Deadlines(String task, String deadline, boolean isDone) {
         super(task,isDone);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(deadline, formatter);
+        LocalDateTime dateTime = LocalDateTime.parse(deadline, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         this.deadline = dateTime;
     }
 

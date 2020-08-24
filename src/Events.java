@@ -11,8 +11,7 @@ public class Events extends Task {
 
     public Events(String task, String at, boolean isDone) {
         super(task, isDone);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(at, formatter);
+        LocalDateTime dateTime = LocalDateTime.parse(at, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         this.at = dateTime;
     }
 
