@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.DukeException;
+
 public class Event extends TimeTask {
     public Event(String description, String time) throws DukeException {
         super(description, time);

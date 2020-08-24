@@ -1,6 +1,12 @@
+package duke.command;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Optional;
+
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 public enum Command {
     TODO (CommandLibrary.todoCommand,
@@ -44,7 +50,7 @@ public enum Command {
         this.name = name;
     }
 
-    Optional<Matcher> matcher(String rawInput) {
+    public Optional<Matcher> matcher(String rawInput) {
         if(!rawInput.startsWith(this.name)) return Optional.empty();
         Matcher matcher =  this.format.matcher(rawInput.substring(this.name.length()).trim());
         return Optional.of(matcher);

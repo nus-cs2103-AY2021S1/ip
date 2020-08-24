@@ -1,5 +1,12 @@
+package duke.parser;
+
 import java.util.regex.Matcher;
 import java.util.Optional;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class Parser {
     private final TaskList taskList;

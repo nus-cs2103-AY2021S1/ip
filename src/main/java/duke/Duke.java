@@ -1,4 +1,10 @@
+package duke;
 
+import duke.storage.Storage;
+import duke.parser.Parser;
+import duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.task.TaskList;
 
 public class Duke {
     private TaskList taskList;

@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+
 public class CommandLibrary {
     public static final CommandExecutable deadlineCommand = (taskList, ui, args) ->  {
         String description = args[0].trim();
