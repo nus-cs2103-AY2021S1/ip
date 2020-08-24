@@ -149,4 +149,16 @@ public class ParserTest {
             assertEquals("OOPS! I'm sorry but I don't know what that means :-(", e.getMessage());
         }
     }
+
+    @Test
+    public void parse_find_success() {
+        Command command = Parser.parse("find something");
+        assertTrue(command instanceof FindCommand);
+    }
+
+    @Test
+    public void parse_findWithEmptySearchWord_exceptionThrown() {
+        assertThrows(EmptySearchWordException.class,
+                () -> Parser.parse("find"));
+    }
 }

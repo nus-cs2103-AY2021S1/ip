@@ -5,12 +5,14 @@ import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodayCommand;
 
 import duke.exceptions.DukeDateTimeParseException;
 import duke.exceptions.EmptyDueDateException;
 import duke.exceptions.EmptyEventDateException;
+import duke.exceptions.EmptySearchWordException;
 import duke.exceptions.EmptyTaskDeletedException;
 import duke.exceptions.EmptyTaskDescriptionException;
 import duke.exceptions.EmptyTaskDoneException;
@@ -38,7 +40,7 @@ public class Parser {
      */
     public static Command parse(String userInput) throws EmptyTaskDescriptionException, DukeDateTimeParseException,
             EmptyTaskDoneException, EmptyTaskDeletedException,
-            EmptyDueDateException, EmptyEventDateException {
+            EmptyDueDateException, EmptyEventDateException, EmptySearchWordException {
 
         String[] arr = userInput.strip().split(" ", 2);
         switch (arr[0].strip().toLowerCase()) {
@@ -65,6 +67,11 @@ public class Parser {
             return parseDelete(arr[1].strip());
         case "today":
             return parseToday();
+        case "find":
+            if (arr.length < 2) {
+                throw new EmptySearchWordException();
+            }
+            return parseFind(arr[1].strip().toLowerCase());
         default:
             throw new InvalidCommandException();
         }
@@ -130,6 +137,10 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new InvalidTaskException();
         }
+    }
+
+    private static FindCommand parseFind(String searchWord) {
+        return new FindCommand(searchWord);
     }
 
     private static ListCommand parseList() {

@@ -18,6 +18,14 @@ public class Task {
         this.isDone = false;
     }
 
+    /** Returns the description of the task.
+     *
+     * @return The task description.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
     private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
