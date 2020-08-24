@@ -50,7 +50,12 @@ public class TaskList {
     }
 
     public Task get(int index) {
-        return tasks.get(index);
+        if (index < size() && index >= 0) {
+            return tasks.get(index);
+        } else {
+            return null;
+        }
+
     }
 
     public int size() {
