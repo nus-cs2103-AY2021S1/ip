@@ -2,7 +2,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
 
 public class Event extends Task {
     protected String at;
@@ -28,7 +27,7 @@ public class Event extends Task {
 
     private String getFormattedAt() {
         if (this.atDateTime != null) {
-            return this.atDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+            return this.atDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm:ss a"));
         } else if (this.atDate != null) {
             return this.atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } else {

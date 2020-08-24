@@ -2,7 +2,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
 
 public class Deadline extends Task {
     protected String by;
@@ -28,7 +27,7 @@ public class Deadline extends Task {
 
     private String getFormattedBy() {
         if (this.byDateTime != null) {
-            return this.byDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+            return this.byDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm:ss a"));
         } else if (this.byDate != null) {
             return this.byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } else {
