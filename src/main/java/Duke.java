@@ -75,7 +75,7 @@ public class Duke {
         String deadline;
 
         public Deadline(String description, String deadline, boolean isDone) {
-            super(description, "D", false);
+            super(description, "D", isDone);
             this.deadline = deadline;
         }
 
@@ -96,7 +96,7 @@ public class Duke {
         String time;
 
         public Event(String description, String time, boolean isDone) {
-            super(description, "E", false);
+            super(description, "E", isDone);
             this.time = time;
         }
 
