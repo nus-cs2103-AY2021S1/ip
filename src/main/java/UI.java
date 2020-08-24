@@ -10,23 +10,12 @@ public class UI {
         scanner = new Scanner(System.in);
     }
 
-    public String wrapper(final String message) {
+    public void showError(final String message) {
         //Wrapper when printing the error message
-        return "Heh, you can't even type in a correct command\n"
+        System.out.println("Heh, you can't even type in a correct command\n"
                 + message
                 + "\nI'll give u a pity tip\n"
-                + "Use 'help' for more information";
-    }
-
-    public void helpMessage() {
-        System.out.println("Heh I guess I could help an insect like you:\n"
-                + "- help                      : Get help for the commands\n"
-                + "- todo (name)               : Adds a todo to the list\n"
-                + "- event (name) /at (date)   : Adds an event at date\n"
-                + "- deadline (name) /by (date): "
-                + "Adds a deadline which expires by date\n"
-                + "- delete (number)           : Removes a todo from the list\n"
-        );
+                + "Use 'help' for more information");
     }
 
     public String getInput() {
