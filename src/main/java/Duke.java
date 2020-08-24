@@ -15,6 +15,10 @@ public class Duke {
 
     private void start() {
         ui.showStartScreen();
+        boolean running = true;
+        while (running) {
+            ui.askForCommand();
+        }
     }
 
     public static void main(String[] args) {

@@ -14,6 +14,12 @@ class Ui {
         System.out.println(LINE + "\n");
     }
 
+    public void askForCommand() {
+        System.out.println(LINE);
+        System.out.println("What is your command?"); 
+        System.out.println(LINE + "\n");
+    }
+
     public void showErrorScreen(String errorMessage) {
         System.out.println(LINE);
         System.out.println("Oh no, something went wrong!");
