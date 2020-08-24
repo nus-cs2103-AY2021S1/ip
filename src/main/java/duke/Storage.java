@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -10,6 +12,7 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import duke.task.*;
 
 
 public class Storage {

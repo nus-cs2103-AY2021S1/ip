@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.Storage;
+import duke.Ui;
+import duke.task.Event;
+
 public class EventCommand extends Command {
 
     @Override

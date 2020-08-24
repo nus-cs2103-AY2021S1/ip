@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.Storage;
+import duke.Ui;
+import duke.task.Deadline;
+
 public class DeadlineCommand extends Command {
 
     @Override

@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.Storage;
+import duke.Ui;
+import duke.DukeException;
+import duke.task.Task;
+
 public class DeleteCommand extends Command {
 
     @Override
