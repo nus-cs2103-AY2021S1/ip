@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RetrieveCommandTest {
+public class FindCommandTest {
     private final ByteArrayOutputStream OUT_CONTENT = new ByteArrayOutputStream();
     private final PrintStream ORIGINAL_OUT = System.out;
 
@@ -36,20 +36,26 @@ public class RetrieveCommandTest {
     @Test
     public void testExecute() throws DukeException {
         TaskList tasks = new TaskList();
-        Task task1 = new Todo("eat");
-        Task task2 = new Deadline("sleep", "12/02/2012 12:12");
-        Task task3 = new Event("play", "12/04/2014 12:14");
+        Task task1 = new Todo("borrow book");
+        Task task2 = new Deadline("readbook", "12/02/2012 12:12");
+        Task task3 = new Event("return book", "12/04/2014 12:14");
+        Task task4 = new Todo("eat");
+        Task task5 = new Todo("sleep");
         tasks.addTask(task1);
         tasks.addTask(task2);
         tasks.addTask(task3);
+        tasks.addTask(task4);
+        tasks.addTask(task5);
         Ui ui = new Ui();
         Storage storage = new Storage();
-        RetrieveCommand retrieveCommand = new RetrieveCommand(LocalDate.parse("12/02/2012",
-                DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-        retrieveCommand.execute(tasks, ui, storage);
-        String expectedPrintStatement = "\t Here are the deadlines and events happening on 12 February 2012:\n"
-                + "\t 1.[D][✘] sleep (by: 12 February 2012, 12:12 PM) \n";
+        FindCommand findCommand = new FindCommand("book");
+        findCommand.execute(tasks, ui, storage);
+        String expectedPrintStatement = "\t Here are the matching tasks in your list:\n"
+                + "\t 1.[T][✘] borrow book\n"
+                + "\t 2.[D][✘] readbook (by: 12 February 2012, 12:12 PM)\n"
+                + "\t 3.[E][✘] return book (at: 12 April 2014, 12:14 PM) \n";
         assertEquals(expectedPrintStatement, OUT_CONTENT.toString());
     }
 }
+
 

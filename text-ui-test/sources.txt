@@ -14,10 +14,12 @@
 ../src/main/java/duke/command/RetrieveCommand.java
 ../src/main/java/duke/command/AddDeadlineCommand.java
 ../src/main/java/duke/command/AddTodoCommand.java
+../src/main/java/duke/command/FindCommand.java
 ../src/main/java/duke/command/DoneCommand.java
 ../src/main/java/duke/Duke.java
 ../src/main/java/duke/exception/NoTaskContentException.java
 ../src/main/java/duke/exception/NoTaskDurationException.java
+../src/main/java/duke/exception/NoFindContentException.java
 ../src/main/java/duke/exception/InvalidCommandException.java
 ../src/main/java/duke/exception/NoTaskException.java
 ../src/main/java/duke/exception/InvalidTaskNumberException.java

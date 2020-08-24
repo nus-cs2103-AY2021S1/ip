@@ -18,7 +18,7 @@ fi
 #then
 if
   ! (
-    find ../src/main/java -name "*.java" >sources.txt
+    find ../src/main/java -name "*.java" > sources.txt
     javac -cp ../src -Xlint:none -d ../bin @sources.txt
   )
 then

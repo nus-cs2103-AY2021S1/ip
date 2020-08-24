@@ -24,6 +24,8 @@ public class Parser {
             return parseDelete(input, tasks);
         } else if (input.startsWith("retrieve")) {
             return parseRetrieve(input);
+        } else if (input.startsWith("find")) {
+            return parseFind(input, tasks);
         } else {
             throw new InvalidCommandException();
         }
@@ -119,6 +121,16 @@ public class Parser {
             }
         } catch (DateTimeParseException e) {
             throw new InvalidTaskDateException();
+        }
+    }
+
+    private static Command parseFind(String input, TaskList tasks) throws DukeException {
+        String[] splitInput = input.split(" ", 2);
+        if (splitInput.length != 2 || splitInput[1].trim().equals("")) {
+                throw new NoFindContentException();
+        } else {
+            String content = splitInput[1];
+            return new FindCommand(content);
         }
     }
 }

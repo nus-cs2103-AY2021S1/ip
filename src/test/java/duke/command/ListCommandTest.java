@@ -43,10 +43,10 @@ public class ListCommandTest {
         Storage storage = new Storage();
         ListCommand listCommand = new ListCommand();
         listCommand.execute(tasks, ui, storage);
-        String expectedPrintStatement = "\t Here are the tasks in your list:\n" +
-                "\t 1.[T][✘] eat\n" +
-                "\t 2.[D][✘] sleep (by: 12 February 2012, 12:12 PM)\n" +
-                "\t 3.[E][✘] play (at: 12 April 2014, 12:14 PM) \n";
+        String expectedPrintStatement = "\t Here are the tasks in your list:\n"
+                + "\t 1.[T][✘] eat\n"
+                + "\t 2.[D][✘] sleep (by: 12 February 2012, 12:12 PM)\n"
+                + "\t 3.[E][✘] play (at: 12 April 2014, 12:14 PM) \n";
         assertEquals(expectedPrintStatement, OUT_CONTENT.toString());
     }
 }
