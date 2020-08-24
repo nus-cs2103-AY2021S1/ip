@@ -30,6 +30,13 @@ public class Deadline extends Task {
             this.deadline.format(DateTimeFormatter.ofPattern("d MMMM yyyy")));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof Deadline)
+            && ((Deadline) other).getName().equals(this.getName())
+            && ((Deadline) other).getDeadline().equals(this.getDeadline());
+    }
+
     public static Deadline parse(String input) throws InvalidInputException {
 
         var parts = DatedTask.parse("deadline", input, "by", getUsage());

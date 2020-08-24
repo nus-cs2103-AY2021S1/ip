@@ -30,6 +30,13 @@ public class Event extends Task {
             this.eventDate.format(DateTimeFormatter.ofPattern("d MMMM yyyy")));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof Event)
+            && ((Event) other).getName().equals(this.getName())
+            && ((Event) other).getEventDate().equals(this.getEventDate());
+    }
+
     public static Event parse(String input) throws InvalidInputException {
 
         var parts = DatedTask.parse("event", input, "at", getUsage());
