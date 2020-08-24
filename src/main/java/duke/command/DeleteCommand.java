@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(Storage storage, TaskList taskList, Ui ui) {
         try {
-            taskList.deleteTask(storage, this.input);
+            ui.showSuccess(taskList.deleteTask(storage, this.input));
         } catch(DukeException e) {
             ui.showError(e.getMessage());
         }

@@ -15,7 +15,7 @@ public class MarkDoneCommand extends Command {
     @Override
     public void execute(Storage storage, TaskList taskList, Ui ui) {
         try {
-            taskList.markDone(storage, this.input);
+            ui.showSuccess(taskList.markDone(storage, this.input));
         } catch(DukeException e) {
             ui.showError(e.getMessage());
         }

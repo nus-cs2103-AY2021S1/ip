@@ -7,27 +7,29 @@ import java.time.format.DateTimeParseException;
 
 public class Event extends Task{
 
-    protected String at;
     protected LocalDate date;
     protected String time;
     protected String userInputDate;
     protected String userInputTime;
 
-    public Event(String description, String at) throws DukeException {
+    private Event(String description, String userInputDate, String userInputTime,
+                  LocalDate date, String time) {
         super(description);
-        this.at = at;
-        this.dateAndTimeFormat(at);
+        this.userInputDate = userInputDate;
+        this.userInputTime = userInputTime;
+        this.date = date;
+        this.time = time;
     }
 
-    public void dateAndTimeFormat(String by) throws DukeException {
-        String[] dateAndTime = by.split(" ");
-        this.userInputDate = dateAndTime[0];
-        this.userInputTime = dateAndTime[1];
+    public static Event createEvent(String description, String at) throws DukeException {
+        String[] dateAndTime = at.split(" ");
+        String userInputDate = dateAndTime[0];
+        String userInputTime = dateAndTime[1];
         try {
-            this.date = LocalDate.parse(dateAndTime[0]);
-            String[] startAndEndTime = dateAndTime[1].split("-");
-            this.time = timeFormat(startAndEndTime[0]) + " - " + timeFormat(startAndEndTime[1]);
-
+            LocalDate date = LocalDate.parse(userInputDate);
+            String[] startAndEndTime = userInputTime.split("-");
+            String time = timeFormat(startAndEndTime[0]) + " - " + timeFormat(startAndEndTime[1]);
+            return new Event(description, userInputDate, userInputTime, date, time);
         } catch(DateTimeParseException e) {
             throw new DukeException("Rawr! Dino could not add your task. "
                     + "Make sure your format is correct."
@@ -35,7 +37,7 @@ public class Event extends Task{
         }
     }
 
-    public String timeFormat(String time) throws DukeException {
+    private static String timeFormat(String time) throws DukeException {
         int hour = Integer.parseInt(time.substring(0, 2));
         int min = Integer.parseInt(time.substring(2, 4));
 

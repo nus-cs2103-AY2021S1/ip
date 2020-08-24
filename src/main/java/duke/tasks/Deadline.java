@@ -7,26 +7,28 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
 
-    protected String by;
     protected String userInputDate;
     protected String userInputTime;
     protected LocalDate date;
     protected String time;
 
-    public Deadline(String description, String by) throws DukeException {
+    private Deadline(String description, String userInputDate, String userInputTime,
+                     LocalDate date, String time) {
         super(description);
-        this.by = by;
-        this.dateAndTimeFormat(by);
+        this.userInputDate = userInputDate;
+        this.userInputTime = userInputTime;
+        this.date = date;
+        this.time = time;
     }
 
-    public void dateAndTimeFormat(String by) throws DukeException {
+    public static Deadline createDeadline(String description, String by) throws DukeException {
         String[] dateAndTime = by.split(" ");
-        this.userInputDate = dateAndTime[0];
-        this.userInputTime = dateAndTime[1];
+        String userInputDate = dateAndTime[0];
+        String userInputTime = dateAndTime[1];
         try {
-            this.date = LocalDate.parse(dateAndTime[0]);
-            this.time = timeFormat(dateAndTime[1]);
-
+            LocalDate date = LocalDate.parse(userInputDate);
+            String time = timeFormat(userInputTime);
+            return new Deadline(description, userInputDate, userInputTime, date, time);
         } catch(DateTimeParseException e) {
             throw new DukeException("Rawr! Dino could not add your task. "
                     + "Make sure your format is correct."
@@ -34,7 +36,7 @@ public class Deadline extends Task {
         }
     }
 
-    public String timeFormat(String time) throws DukeException {
+    private static String timeFormat(String time) throws DukeException {
         int hour = Integer.parseInt(time.substring(0, 2));
         int min = Integer.parseInt(time.substring(2, 4));
 

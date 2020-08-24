@@ -17,7 +17,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(Storage storage, TaskList taskList, Ui ui) {
         try {
-            taskList.addTask(storage, this.input, this.inputWords);
+            ui.showSuccess(taskList.addTask(storage, this.input, this.inputWords));
         } catch(DukeException e) {
             ui.showError(e.getMessage());
         }

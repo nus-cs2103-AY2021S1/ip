@@ -61,7 +61,7 @@ public class Storage {
 
                         case "D":
                             String taskDeadline = taskSplit[3] + " " + taskSplit[4];
-                            Deadline deadline = new Deadline(taskDesc, taskDeadline);
+                            Deadline deadline = Deadline.createDeadline(taskDesc, taskDeadline);
                             if(taskDone.equals("1")) {
                                 deadline.markAsDone();
                             }
@@ -70,7 +70,7 @@ public class Storage {
 
                         case "E":
                             String taskDateTime = taskSplit[3] + " " + taskSplit[4];
-                            Event event = new Event(taskDesc, taskDateTime);
+                            Event event = Event.createEvent(taskDesc, taskDateTime);
                             if(taskDone.equals("1")) {
                                 event.markAsDone();
                             }

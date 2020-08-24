@@ -35,7 +35,7 @@ public class TaskList {
         }
     }
 
-    public void deleteTask(Storage storage, String input) throws DukeException {
+    public String deleteTask(Storage storage, String input) throws DukeException {
         int taskNumber = Integer.parseInt(input.split(" ")[1]);
         if (taskNumber > this.taskList.size() || taskNumber < 1) {
             // task number is not valid
@@ -46,39 +46,36 @@ public class TaskList {
             Task toDelete = this.taskList.get(taskIndex);
             this.taskList.remove(taskIndex);
             storage.writeToFile(toDelete, DukeAction.DELETE);
-            System.out.println("Rawr! Dino has deleted " + "Task " + taskNumber
+            return "Rawr! Dino has deleted " + "Task " + taskNumber
                     + " from your list:\n" + toDelete
-                    + "\nNumber of tasks in list: " + this.taskList.size());
+                    + "\nNumber of tasks in list: " + this.taskList.size();
         }
     }
 
-    public void addTask(Storage storage, String input, String[] inputWords) throws DukeException {
+    public String addTask(Storage storage, String input, String[] inputWords) throws DukeException {
         try {
+            String successStatement;
             switch (inputWords[0]) {
             case "todo":
                 String task = input.substring(5);
                 Todo todo = new Todo(task);
                 this.taskList.add(todo);
                 storage.writeToFile(todo, DukeAction.ADD);
-                System.out.println("Dino has added to your list of tasks:\n"
+                successStatement = "Dino has added to your list of tasks:\n"
                         + todo
-                        + "\nNumber of tasks in list: " + this.taskList.size());
+                        + "\nNumber of tasks in list: " + this.taskList.size();
                 break;
             case "deadline":
                 String[] taskBy = input.substring(9).split(" /by");
                 if(taskBy.length == 2 && !taskBy[0].equals("")) {
                     // condition checks that input has task description and date/time
                     // task deadline taken as string after first '/by'
-                    try {
-                        Deadline deadline = new Deadline(taskBy[0], taskBy[1].substring(1));
-                        this.taskList.add(deadline);
-                        storage.writeToFile(deadline, DukeAction.ADD);
-                        System.out.println("Dino has added to your list of tasks:\n"
-                                + deadline
-                                + "\nNumber of tasks in list: " + this.taskList.size());
-                    } catch(DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
+                    Deadline deadline = Deadline.createDeadline(taskBy[0], taskBy[1].substring(1));
+                    this.taskList.add(deadline);
+                    storage.writeToFile(deadline, DukeAction.ADD);
+                    successStatement = "Dino has added to your list of tasks:\n"
+                            + deadline
+                            + "\nNumber of tasks in list: " + this.taskList.size();
                 } else {
                     throw new DukeException("Rawr! Dino could not add your task. "
                             + "Make sure your format is correct."
@@ -91,17 +88,12 @@ public class TaskList {
                     // condition checks that input has task description and date/time
 
                     // task deadline taken as string after first '/at'
-                    try {
-                        Event event = new Event(eventAt[0], eventAt[1].substring(1));
-                        this.taskList.add(event);
-                        storage.writeToFile(event, DukeAction.ADD);
-                        System.out.println("Dino has added to your list of tasks:\n"
-                                + event
-                                + "\nNumber of tasks in list: " + this.taskList.size());
-                    } catch(DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
-
+                    Event event = Event.createEvent(eventAt[0], eventAt[1].substring(1));
+                    this.taskList.add(event);
+                    storage.writeToFile(event, DukeAction.ADD);
+                    successStatement = "Dino has added to your list of tasks:\n"
+                            + event
+                            + "\nNumber of tasks in list: " + this.taskList.size();
                 } else {
                     throw new DukeException("Rawr! Dino could not add your task. "
                             + "Make sure your format is correct."
@@ -114,6 +106,7 @@ public class TaskList {
                         + "Make sure your format is correct."
                         + "\nFormats to input a task can be found by entering 'format'.");
             }
+            return successStatement;
         } catch(IndexOutOfBoundsException e) {
             // invalid task format entered
             throw new DukeException("Rawr! Dino could not add your task. "
@@ -122,7 +115,7 @@ public class TaskList {
         }
     }
 
-    public void markDone(Storage storage, String input) throws DukeException {
+    public String markDone(Storage storage, String input) throws DukeException {
         int taskNumber = Integer.parseInt(input.split(" ")[1]);
         if (taskNumber > this.taskList.size() || taskNumber < 1) {
             // task number is not valid
@@ -133,8 +126,8 @@ public class TaskList {
             Task doneTask = this.taskList.get(taskIndex);
             storage.writeToFile(doneTask, DukeAction.MARK_DONE);
             doneTask.markAsDone();
-            System.out.println("Great! Dino has marked " + "Task " + taskNumber
-                    + " as done:\n" + doneTask);
+            return "Great! Dino has marked " + "Task " + taskNumber
+                    + " as done:\n" + doneTask;
         }
     }
 

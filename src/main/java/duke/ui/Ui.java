@@ -46,4 +46,8 @@ public class Ui {
         System.out.println(message);
     }
 
+    public void showSuccess(String message) {
+        System.out.println(message);
+    }
+
 }
