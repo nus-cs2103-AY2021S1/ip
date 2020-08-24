@@ -1,39 +1,24 @@
 package duke;
 
-/**
- * DukeException stores all duke-specific exceptions.
- */
+import duke.DukeCommandType;
+import duke.DukeExceptionType;
+
 public class DukeException extends Exception {
 
-    protected DukeExceptionType exceptionType; // Exception type
-    protected DukeCommandType commandType; // Command type
+    protected DukeExceptionType exceptionType;
+    protected DukeCommandType commandType;
 
-    /**
-     * Initialise DukeException using exception type.
-     * @param e
-     * @param exceptionType
-     */
     public DukeException(String e, DukeExceptionType exceptionType) {
         super(e);
         this.exceptionType = exceptionType;
     }
 
-    /**
-     * Initialise DukeException using exception type and command type.
-     * @param e
-     * @param exceptionType
-     * @param commandType
-     */
     public DukeException(String e, DukeExceptionType exceptionType, DukeCommandType commandType) {
         super(e);
         this.exceptionType = exceptionType;
         this.commandType = commandType;
     }
 
-    /**
-     * Prints error messages depending on the exception type and command type.
-     * @return error messages
-     */
     @Override
     public String toString(){
         String error = "";
@@ -91,9 +76,6 @@ public class DukeException extends Exception {
         return error;
     }
 
-    /**
-     * Error in user's input due to wrong time format.
-     */
     public static void wrongTimeFormat() {
         System.err.println("    ERROR IN ADDING DEADLINE: WRONG FORMAT\n    Format: YYYY-MM-DD\n");
     }

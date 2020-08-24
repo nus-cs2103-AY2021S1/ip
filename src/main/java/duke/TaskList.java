@@ -2,9 +2,6 @@ package duke;
 
 import java.util.ArrayList;
 
-/**
- * TaskList class contains the task list and all operations that modify task in the list.
- */
 public class TaskList {
     static ArrayList<Task> tasks;
 
@@ -22,10 +19,6 @@ public class TaskList {
         System.out.println(str);
     }
 
-    /**
-     * Prints user's list of tasks.
-     * @throws DukeException
-     */
     public static void getListOfTasks() throws DukeException {
         if (tasks.isEmpty()) {
             try {
@@ -45,10 +38,6 @@ public class TaskList {
         }
     }
 
-    /**
-     * Marks a task as done when user completes it.
-     * @param index
-     */
     public static void done(Integer index) {
         tasks.get(index - 1).markAsDone();
         String str = "   ____________________________________________________________"
@@ -58,10 +47,6 @@ public class TaskList {
         System.out.println(str);
     }
 
-    /**
-     * Delete a task from the list.
-     * @param index
-     */
     public static void delete(Integer index) {
         String str = "   ____________________________________________________________"
                 + "\n    Noted. I've removed this task:\n      "
@@ -70,4 +55,6 @@ public class TaskList {
                 + "\n   ____________________________________________________________\n";
         System.out.println(str);
     }
+
+
 }
