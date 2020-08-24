@@ -24,7 +24,7 @@ import java.util.Set;
 public class Parser {
 
     private final Set<String> commands = new HashSet<>(Arrays.asList("bye", "list", "done", "delete", "deadline",
-                "event", "todo"));
+                "event", "todo", "find"));
     private final Set<String> singleArgCommands = new HashSet<>(Arrays.asList("bye", "list"));
 
     /**
@@ -57,6 +57,8 @@ public class Parser {
             return new EventCommand(eventParts[0].trim(), eventParts[1].trim());
         case "todo":
             return new TodoCommand(commandArgs);
+        case "find":
+            return new FindCommand(commandArgs);
         default:
             throw new UnknownCommandException(commandName);
         }
