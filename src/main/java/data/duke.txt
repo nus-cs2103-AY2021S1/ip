@@ -1,5 +1,7 @@
-T , 1 , read book
-E , 1 , project meeting , Aug 6th 2-4pm
-T , 1 , join sports club
-T , 1 , eat rice
-E , 0 , cook , later
+T , 0 , homework , 
+D , 1 , return book , 2020-07-30
+E , 1 , read book , 2020-08-01
+E , 0 , huh , 2015-04-12
+E , 1 , ije , 2012-01-02
+
+
