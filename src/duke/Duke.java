@@ -14,7 +14,7 @@ public class Duke {
 
     private List<Task> todos;
 
-    public Duke() {
+    private Duke() {
         todos = new ArrayList<Task>();
         this.todos = todos;
     }
@@ -128,7 +128,7 @@ public class Duke {
 //        }
     }
 
-    public String removeFirstWord(String command) throws DukeException {
+    private String removeFirstWord(String command) throws DukeException {
         try {
             String[] cmd = command.split(" ", 2);
             return cmd[1];
@@ -137,7 +137,7 @@ public class Duke {
         }
     }
 
-    public void processDelete(String command) throws DeleteException {
+    private void processDelete(String command) throws DeleteException {
         try {
             String theRest = removeFirstWord(command);
             Integer taskNum = Integer.parseInt(theRest);
@@ -149,11 +149,11 @@ public class Duke {
         }
     }
 
-    public void deleteTask(int taskNum) throws DeleteException {
-        if(taskNum <= 0 || taskNum >= todos.size()) {
+    private void deleteTask(int index) throws DeleteException {
+        if(index < 0 || index > todos.size()) {
             throw new DeleteException("Please enter a valid task number.");
         } else {
-            Task task = this.todos.get(taskNum);
+            Task task = this.todos.get(index);
             this.todos.remove(task);
             System.out.println("Noted. I've removed this task for you: \n"
                     + task.toString() + "\n"
@@ -162,18 +162,19 @@ public class Duke {
 
     }
 
-    public void processDone(String command) throws DoneException {
+    private void processDone(String command) throws DoneException {
         try {
             String theRest = removeFirstWord(command);
             Integer taskNum = Integer.parseInt(theRest);
             markTaskAsDone(taskNum);
 
         } catch (DukeException d) {
-            throw new DoneException("Please specify what you have already done.");
+            System.out.println(d.getMessage());
+            throw new DoneException("Please enter a valid task number");
         }
     }
 
-    public void processTodo(String command) throws TodoException {
+    private void processTodo(String command) throws TodoException {
         try {
             String theRest = removeFirstWord(command);
             Todo todo = new Todo(theRest);
@@ -183,7 +184,7 @@ public class Duke {
         }
     }
 
-    public void processDeadline(String command) throws DeadlineException {
+    private void processDeadline(String command) throws DeadlineException {
         try {
             String theRest = removeFirstWord(command);
             String[] taskAndDeadlineAndTime = theRest.split(" /by ", 2);
@@ -220,7 +221,7 @@ public class Duke {
         }
     }
 
-    public void processEvent(String command) throws EventException {
+    private void processEvent(String command) throws EventException {
         try {
             String theRest = removeFirstWord(command);
             String[] eventAndDateAndTime = theRest.split(" /at ", 2);
@@ -240,9 +241,20 @@ public class Duke {
                     if(dateTime.length < 2) {
                         event = new Event(eventDesc, localDate);
                     } else {
+
                         String time = dateTime[1];
-                        LocalTime localTime = LocalTime.parse(time);
-                        event = new Event(eventDesc, localDate, localTime);
+                        String[] startEndTime = time.split("-");
+                        if (startEndTime.length < 2) {
+                            String startTime = startEndTime[0];
+                            LocalTime localTime = LocalTime.parse(startTime);
+                            event = new Event(eventDesc, localDate, localTime);
+                        } else {
+                            String startTime = startEndTime[0];
+                            String endTime = startEndTime[1];
+                            LocalTime localStartTime = LocalTime.parse(startTime);
+                            LocalTime localEndTime = LocalTime.parse(endTime);
+                            event = new Event(eventDesc, localDate, localStartTime, localEndTime);
+                        }
                     }
 
                     saveToList(event);
@@ -260,7 +272,7 @@ public class Duke {
         }
     }
 
-    public void processShow(String command) throws CalendarException {
+    private void processShow(String command) throws CalendarException {
         try {
             String date = removeFirstWord(command);
             showCalendar(date);
@@ -269,7 +281,7 @@ public class Duke {
         }
     }
 
-    public void listItems() {
+    private void listItems() {
         if(this.todos.size() == 0) {
             System.out.println("You don't have any task in your list.");
         } else {
@@ -283,14 +295,14 @@ public class Duke {
         }
     }
 
-    public void saveToList(Task todo) {
+    private void saveToList(Task todo) {
         this.todos.add(todo);
         System.out.println("Okay~ I've added this task: \n" + todo.toString());
         System.out.println("Now you have " + this.todos.size() + " task(s) in the list.");
     }
 
-    public void markTaskAsDone(int taskNum) throws DoneException {
-        if (taskNum <= 0 || taskNum >= todos.size() ) {
+    private void markTaskAsDone(int taskNum) throws DoneException {
+        if (taskNum <= 0 || taskNum > todos.size() ) {
             throw new DoneException("Please enter a valid task number.");
         } else {
             int index = taskNum - 1;
@@ -303,7 +315,7 @@ public class Duke {
         }
     }
 
-    public void showCalendar(String date) {
+    private void showCalendar(String date) {
         LocalDate localDate = LocalDate.parse(date);
         Boolean hasSomething = false;
         System.out.println("Tasks on : " + localDate.getDayOfWeek() + ", "

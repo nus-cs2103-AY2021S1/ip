@@ -7,24 +7,35 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     private LocalDate date;
-    private LocalTime time;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     public Event(String description, LocalDate date) {
         super(description);
         this.date = date;
-        this.time = null;
+        this.startTime = null;
+        this.endTime = null;
     }
 
     public Event(String description, Boolean isDone, LocalDate date) {
         super(description, isDone);
         this.date = date;
-        this.time = null;
+        this.startTime = null;
+        this.endTime = null;
     }
 
-    public Event(String description, LocalDate date, LocalTime time) {
+    public Event(String description, LocalDate date, LocalTime startTime) {
         super(description);
         this.date = date;
-        this.time = time;
+        this.startTime = startTime;
+        this.endTime = null;
+    }
+
+    public Event(String description, LocalDate date, LocalTime startTime, LocalTime endTime) {
+        super(description);
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public String getType() {
@@ -37,13 +48,21 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return this.time != null
-                ? "[" + this.getType()  + "]" + this.getStatusIcon() + " " + this.description + " (at:"
-                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + " " + this.time.format(DateTimeFormatter.ISO_LOCAL_TIME) + ")"
+        if(this.startTime != null && this.endTime != null) {
+            return "[" + this.getType() + "]" + this.getStatusIcon() + " " + this.description + " (at:"
+                    + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                    + " " + this.startTime.format(DateTimeFormatter.ISO_LOCAL_TIME)
+                    + " - " + this.endTime.format(DateTimeFormatter.ISO_LOCAL_TIME) + ")";
 
-                : "[" + this.getType()  + "]" + this.getStatusIcon() + " " + this.description + " (at:"
-                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        } else if (this.startTime != null) {
+            return "[" + this.getType() + "]" + this.getStatusIcon() + " " + this.description + " (at:"
+                    + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                    + " " + this.startTime.format(DateTimeFormatter.ISO_LOCAL_TIME) + ")";
+
+        } else {
+            return "[" + this.getType() + "]" + this.getStatusIcon() + " " + this.description + " (at:"
+                    + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        }
     }
 
     @Override
