@@ -1,10 +1,19 @@
+package duke;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+
+import duke.command.Command;
+import duke.common.CustomException;
+import duke.common.Ui;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+
 
 public class Duke {
-//    private static ArrayList<Task> tasks;
 
     private Storage storage;
     private TaskList tasks;

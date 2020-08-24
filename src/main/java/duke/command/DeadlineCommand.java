@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.common.CustomException;
+import duke.common.Ui;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.io.IOException;
 
 public class DeadlineCommand extends Command {

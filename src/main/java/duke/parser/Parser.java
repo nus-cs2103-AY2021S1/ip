@@ -1,3 +1,15 @@
+package duke.parser;
+
+import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.DeleteCommand;
+import duke.command.ToDoCommand;
+import duke.command.DeadlineCommand;
+import duke.command.EventCommand;
+import duke.common.CustomException;
+
 public class Parser {
 
     public static Command parse(String command) throws CustomException {
