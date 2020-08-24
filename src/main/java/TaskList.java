@@ -37,7 +37,7 @@ public class TaskList {
 
     public void addDeadline(String input, int dateIndex) {
         String by = input.substring(dateIndex + 4);
-        String description = input.substring(8, dateIndex);
+        String description = input.substring(9, dateIndex - 1);
         Deadline deadline = new Deadline(description, by);
         listOfTask.add(deadline);
         System.out.println("\n    Got it. I've added this task:");
@@ -47,7 +47,7 @@ public class TaskList {
 
     public void addEvent(String input, int dateIndex) {
         String at = input.substring(dateIndex + 4);
-        String description = input.substring(5, dateIndex);
+        String description = input.substring(6, dateIndex - 1);
         Event event = new Event(description, at);
         listOfTask.add(event);
         System.out.println("\n    Got it. I've added this task:");
@@ -56,7 +56,7 @@ public class TaskList {
     }
 
     public void addTodo(String input) {
-        String description = input.substring(4);
+        String description = input.substring(5);
         Todo todo = new Todo(description);
         listOfTask.add(todo);
         System.out.println("\n    Got it. I've added this task:");
@@ -64,4 +64,31 @@ public class TaskList {
         System.out.println("    Now you have " + listOfTask.size() + " task(s) in the list.\n");
     }
 
+    public void addTodoFromFile(String description, int done) {
+        Todo todo = new Todo(description);
+        if (done == 1) {
+            todo.markAsDone();
+        }
+        listOfTask.add(todo);
+    }
+
+    public void addEventFromFile(String description, String at, int done) {
+        Event event = new Event(description, at);
+        if (done == 1) {
+            event.markAsDone();
+        }
+        listOfTask.add(event);
+    }
+
+    public void addDeadlineFromFile(String description, String by, int done) {
+        Deadline deadline = new Deadline(description, by);
+        if (done == 1) {
+            deadline.markAsDone();
+        }
+        listOfTask.add(deadline);
+    }
+
+    public List<Task> getListOfTask() {
+        return this.listOfTask;
+    }
 }
