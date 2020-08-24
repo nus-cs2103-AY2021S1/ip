@@ -1,4 +1,5 @@
-import java.lang.reflect.Array;
+package duke.task;
+
 import java.util.ArrayList;
 
 public class Task {

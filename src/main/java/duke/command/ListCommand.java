@@ -1,5 +1,10 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 public class ListCommand extends Command {
-    private Task tasks;
 
     public ListCommand() {
         super();
