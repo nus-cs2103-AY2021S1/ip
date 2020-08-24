@@ -1,35 +1,14 @@
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 public class Deadline extends Task {
 
-    protected LocalDate localDate;
-    protected LocalTime localTime;
+    protected String dateAndOrTime;
 
-    Deadline(String description, String localDate, String localTime) {
+    Deadline(String description, String dateAndOrTime) {
         super(description);
-        this.localDate = localDate != null ? LocalDate.parse(localDate) : null;
-        this.localTime = localTime != null ? LocalTime.parse(localTime) : null;
-    }
-
-    public boolean hasDate() {
-        return this.localDate != null;
-    }
-
-    public boolean hasTime() {
-        return this.localTime != null;
+        this.dateAndOrTime = dateAndOrTime;
     }
 
     @Override
     public String toString() {
-        String toReturn = "[D]" + super.toString();
-        if (this.hasDate()) {
-            if (this.hasTime()) {
-                toReturn += "(at: " + this.localDate + " " + this.localTime + ")";
-            } else {
-                toReturn +="(at: " + this.localDate + ")";
-            }
-        }
-        return toReturn;
+        return "[D]" + super.toString() + "(by: " + dateAndOrTime + ")";
     }
 }
