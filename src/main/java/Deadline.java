@@ -11,7 +11,7 @@ public class Deadline extends Task {
     Deadline(String description, String dueTime) {
         super(description);
         this.dueTimeStr = dueTime;
-        Optional<LocalDate> optDate = ParseDate.parse(dueTime);
+        Optional<LocalDate> optDate = DateParser.parse(dueTime);
         if (optDate.isPresent()) {
             this.dueTime = optDate.get();
             isInDateFormat = true;

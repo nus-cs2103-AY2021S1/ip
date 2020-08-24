@@ -67,8 +67,10 @@ public class Duke {
 
     // main
     public static void main(String[] args) {
+        Storage storage = new Storage(FILEPATH);
+        
         // read file
-        tasks = readFile(FILEPATH);
+        tasks = storage.load();
         
         // greeting
         System.out.println(logo + "\n" + horizontalLine);
@@ -171,7 +173,7 @@ public class Duke {
                         System.out.println(taskReport());
                     }
                 } else if (inputSplitted[0].equals(findCmd)){
-                    Optional<LocalDate> optDate = ParseDate.parse(inputSplitted[1]);
+                    Optional<LocalDate> optDate = DateParser.parse(inputSplitted[1]);
                     if (optDate.isPresent()) {
                         LocalDate date = optDate.get();
                         System.out.println(findResultMsg);
@@ -203,85 +205,7 @@ public class Duke {
         }
 
         // exit
-        writeFile(FILEPATH, tasks);
+        storage.write(tasks);
         System.out.println(horizontalLine + "\n" +  exitMsg + "\n" + horizontalLine);
-    }
-    
-    // get the data from the file and put it into an array list
-    private static ArrayList<Task> readFile(String filePath) {
-        File f = new File(filePath);
-        ArrayList<Task> tasks = new ArrayList<>();
-        try {
-            Scanner sc = new Scanner(f);
-            while (sc.hasNext()) {
-                String nextTask = sc.nextLine();
-                String[] splitted = nextTask.split("\\s+", 3);
-                String type = splitted[0];
-                boolean isDone = splitted[1].equals("D");
-                Task newTask;
-                if (type.equals("T")) {
-                    String description = splitted[2];
-                    newTask = new ToDo(description);
-                } else {
-                    int timeIdx = splitted[2].indexOf(" /time");
-                    String description = splitted[2].substring(0, timeIdx);
-                    String time = splitted[2].substring(timeIdx + 7);
-                    if (type.equals("D")) {
-                        newTask = new Deadline(description, time);
-                    } else {
-                        newTask = new Event(description, time);
-                    }
-                }
-                if (isDone) {
-                    newTask.markAsDone();
-                }
-                tasks.add(newTask);
-            }
-            sc.close();
-        } catch (FileNotFoundException e){
-            try {
-                String DIRECTORY_PATH = FILEPATH.substring(0, FILEPATH.length() - 8);
-                File directory = new File(DIRECTORY_PATH);
-                if (!directory.exists()) {
-                    directory.mkdir();
-                }
-                f.createNewFile();
-            } catch (IOException e1) {
-                
-            }
-        }
-        
-        return tasks;
-    }
-    
-    // store data to the file when the program exits
-    private static void writeFile(String filePath, ArrayList<Task> tasks) {
-        try {
-            File f = new File(filePath);
-            if (f.exists()) {
-                f.delete();
-            }
-            f.createNewFile();
-            FileWriter fw = new FileWriter(filePath, true);
-            for (int i = 0; i < tasks.size(); i++) {
-                Task task = tasks.get(i);
-                String type, description, time, status;
-                description = task.getDescription();
-                status = task.isDone() ? "D" : "ND";
-                time = task.getTime().equals("") ? "" : "/time " + task.getTime();
-                if (task instanceof ToDo) {
-                    type = "T";
-                } else if (task instanceof Deadline) {
-                    type = "D";
-                } else {
-                    type = "E";
-                }
-                String dataPresentation = type + " " + status + " " + description + " " + time + "\n";
-                fw.write(dataPresentation);
-            }
-            fw.close();
-        } catch (IOException e){
-            System.out.println(e);
-        }
     }
 }
