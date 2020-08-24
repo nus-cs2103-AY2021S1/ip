@@ -1,4 +1,4 @@
-public class CorruptedDataFileException extends Exception {
+public class CorruptedDataFileException extends DukeException {
 
     public CorruptedDataFileException() {
     }

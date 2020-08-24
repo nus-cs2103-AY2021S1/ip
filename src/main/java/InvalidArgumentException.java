@@ -1,4 +1,4 @@
-public class InvalidArgumentException extends Exception {
+public class InvalidArgumentException extends DukeException{
     private String arg;
 
     public InvalidArgumentException() {

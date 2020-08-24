@@ -1,4 +1,4 @@
-public class EmptyArgumentException extends Exception {
+public class EmptyArgumentException extends DukeException {
     private String arg;
 
     public EmptyArgumentException() {
