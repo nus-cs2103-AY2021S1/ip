@@ -1,7 +1,11 @@
+import java.io.FileOutputStream;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.nio.file.Files;
 
 public class Duke {
     public static String duke = "Duke> ";
@@ -11,6 +15,9 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+    public static String home = System.getProperty("user.home");
+    public static Path path = Paths.get(home, "Desktop", "Duke" );
+    //do a check whether dir exists
 
     public static void main(String[] args) {
 
@@ -30,7 +37,7 @@ public class Duke {
             }
 
             int idx = 0;
-            switch(userInput) {
+            switch (userInput) {
                 case "list":
                     if (list.isEmpty()) {
                         System.out.println(duke + "Your Task List is empty.");
@@ -40,7 +47,7 @@ public class Duke {
                             System.out.println(++idx + ". " + t.toString());
                         }
                     }
-                break;
+                    break;
                 case "done":
                     if (list.isEmpty()) {
                         System.out.println(duke + "Your Task List is empty. There's nothing to be done.");
@@ -87,7 +94,7 @@ public class Duke {
                             }
                         } while (!validInput);
                     }
-                break;
+                    break;
                 case "todo":
                     do {
                         System.out.println(duke + "Enter task details:");
@@ -231,5 +238,14 @@ public class Duke {
         String msg = "Available Commands: \n" + "'todo' \n" + "'deadline' \n" + "'event' \n" + "'list' \n" +
                 "'delete' \n" + "'bye'";
         System.out.println(s + msg);
+    }
+
+    private static void loadTxt() {
+
+
+    }
+
+    private static void saveTxt(ArrayList<Task> t) {
+        
     }
 }
