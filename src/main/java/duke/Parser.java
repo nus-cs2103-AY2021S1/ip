@@ -43,6 +43,7 @@ public class Parser {
 
     public void sortInput (String next, TaskList list, Storage storage, Ui ui ) {
         try {
+            next = next.trim();
 
             if (next.equalsIgnoreCase("list")) {      //Listing out all the tasks             
                 ui.showList(list);

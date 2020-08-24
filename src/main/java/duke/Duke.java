@@ -1,5 +1,8 @@
 package duke;
 
+import java.io.File;
+import java.io.IOException;
+
 public class Duke {
     
     private final Ui ui;
@@ -33,8 +36,17 @@ public class Duke {
         ui.showByeMessage();
     }
     
-    public static void main(String[] args) {
-        new Duke("data/data.txt").run();
+    public static void main(String[] args) throws IOException {
+        String path = "data/data.txt";
+        File directory = new File ("/data/");
+        File file = new File ("/data/data.txt");
+        
+        if (!directory.exists()) {
+            directory.mkdir();
+            file.createNewFile();
+        }
+        
+        new Duke(path).run(); 
     }
 }
 
