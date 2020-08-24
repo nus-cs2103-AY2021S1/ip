@@ -49,6 +49,11 @@ public class ToDo extends Task {
         } else if (!(details[1].equals("1") || details[1].equals("0"))) {
             throw new DukeException("Invalid completion status! Ensure that it is either 0 or 1");
         }
-        return new ToDo(details[2]);
+        boolean isDone = details[1].equals("1");
+        ToDo newToDo = new ToDo(details[2]);
+        if (isDone) {
+            newToDo.markDone();
+        }
+        return newToDo;
     }
 }
