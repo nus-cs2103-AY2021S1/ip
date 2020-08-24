@@ -11,6 +11,7 @@ import exception.DateTimeException;
 import exception.DescriptionException;
 import exception.DukeException;
 import exception.TrackingException;
+
 import storage.Storage;
 
 import java.time.LocalDate;
@@ -86,7 +87,7 @@ public class Parser {
                 if (!fullInput.contains(" /at ")) {
                     throw new TrackingException("event");
                 }
-                String[] temp =(fullInput).split(" /at ");
+                String[] temp = descriptionDate.split(" /at ");
                 String description = temp[0];
                 String atString = temp[1];
 
