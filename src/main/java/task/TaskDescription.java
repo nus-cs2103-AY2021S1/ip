@@ -37,4 +37,22 @@ public class TaskDescription {
         System.out.println("\tNow you have " + tasks.size() + " tasks in the list.\n");
         System.out.println("\t____________________________________________________________\n");
     }
+
+    public static void searchedTaskDescription(List<Task> searchedTasks) {
+        if (searchedTasks.size() > 0) { // Items found with find command
+            System.out.println("\t____________________________________________________________\n");
+            System.out.println("\tHere are the matching tasks in your list:\n");
+            for (int i = 0; i < searchedTasks.size(); i++) {
+                int serialNumber = i + 1;
+                Task task = searchedTasks.get(i);
+                System.out.println("\t" + serialNumber + "." + task);
+            }
+            System.out.println("\t____________________________________________________________\n");
+        } else { // No items found with find command
+            System.out.println("\t____________________________________________________________\n");
+            System.out.println("\tNo items with the finding keyword specified found in list.\n");
+            System.out.println("\t____________________________________________________________\n");
+        }
+
+    }
 }
