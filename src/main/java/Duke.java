@@ -1,11 +1,13 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Duke {
     Ui ui;
     TaskManager taskManager;
+    CommandHandler commandHandler;
 
     Duke() {
         this.ui = new Ui();
+        this.commandHandler = new CommandHandler();
         try {
             this.taskManager = new TaskManager(new Storage().load());
         } catch (DukeException e) {
@@ -16,9 +18,17 @@ public class Duke {
     private void start() {
         ui.showStartScreen();
         boolean running = true;
+        Scanner sc = new Scanner(System.in);
         while (running) {
             ui.askForCommand();
+            String cmd = sc.nextLine();
+            if (cmd.equals("bye")) {
+                running = false;
+            } else {
+                commandHandler.doCommand(cmd);
+            }
         }
+        sc.close();
     }
 
     public static void main(String[] args) {
