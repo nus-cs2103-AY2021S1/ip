@@ -7,6 +7,9 @@ public class byeCommand extends Command {
         super(taskList);
     }
 
+    /**
+     * Executes the command to end the loop in the main method and end the program.
+     */
     @Override
     public void execute()
     {

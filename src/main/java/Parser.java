@@ -3,10 +3,7 @@ package main.java;
 import main.java.Commands.*;
 import main.java.DukeException.DukeArrayException;
 import main.java.DukeException.DukeException;
-import main.java.Task.Deadline;
-import main.java.Task.Event;
-import main.java.Task.TaskList;
-import main.java.Task.toDo;
+import main.java.Task.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -18,6 +15,15 @@ public class Parser {
          this.duke = duke;
      }
 
+    /**
+     * Parses the user input and returns a Command to be executed.
+     *
+     * @param userInput User input from the user.
+     * @param tasklist Current task list.
+     * @return Command to be executed.
+     * @throws DateTimeParseException if user input for date is not in the correct format.
+     * @throws DukeException if user input is invalid.
+     */
      public Command parse(String userInput, TaskList tasklist) {
 
          String commandType;
@@ -87,7 +93,22 @@ public class Parser {
                 break;
 
             case "delete":
-                return new deleteCommand(tasklist, userInput);
+                try {
+                    if (userInput.length() <= 6) {
+                        throw new DukeException();
+                    }
+                    int taskNumber = Integer.parseInt(userInput.substring(7)) - 1;
+                    if (taskNumber > tasklist.list.size()) {
+                        throw new DukeArrayException();
+                    }
+                    return new deleteCommand(tasklist,taskNumber);
+                } catch (DukeArrayException e) {
+                    System.out.println("Number cannot be longer than the list.");
+                } catch (DukeException e) {
+                    System.out.println("Must include number after 'delete'");
+                } catch (NumberFormatException e) {
+                    System.out.println("Must include number after 'delete'");
+                }
 
             case "done":
                 try {

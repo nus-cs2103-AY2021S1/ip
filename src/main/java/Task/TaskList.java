@@ -12,28 +12,24 @@ public class TaskList {
         this.list = tasklist;
     }
 
-    public void deleteTask(String userinput){
-        try {
-            if (userinput.length() <= 6) {
-                throw new DukeException();
-            }
-            int taskNumber = Integer.parseInt(userinput.substring(7)) - 1;
-            if (taskNumber > list.size()) {
-                throw new DukeArrayException();
-            }
-            Task taskDeleted = list.get(taskNumber);
-            list.remove(taskNumber);
-            System.out.println("I have removed the task:\n" + taskDeleted.stringify() + "\n" + "Now you have " +
+    /**
+     * Deletes the task from the Task List.
+     *
+     * @param taskNumber Task number to be deleted.
+     */
+    public void deleteTask(int taskNumber){
+        Task taskDeleted = list.get(taskNumber);
+        list.remove(taskNumber);
+        System.out.println("I have removed the task:\n" + taskDeleted.stringify() + "\n" + "Now you have " +
                     list.size() + " tasks in the list.");
-        } catch (DukeArrayException e) {
-            System.out.println("Number cannot be longer than the list.");
-        } catch (DukeException e) {
-            System.out.println("Must include number after 'delete'");
-        } catch (NumberFormatException e) {
-            System.out.println("Must include number after 'delete'");
-        }
+
     }
 
+    /**
+     * Adds the task to the Task List
+     *
+     * @param task Task to be added.
+     */
     public void addTask(Task task){
         list.add(task);
         System.out.println(
@@ -42,12 +38,20 @@ public class TaskList {
                         + "Now you have " + list.size() + " task(s) in the list.");
     }
 
+    /**
+     * Mark the task as completed.
+     *
+     * @param taskNumber Task number of the task to be marked as completed.
+     */
     public void completeTask(int taskNumber){
         Task taskCompleted = this.list.get(taskNumber);
         taskCompleted.complete = true;
         System.out.println("Nice! I've marked this task as done:\n" + "[✓] " + taskCompleted.task);
     }
 
+    /**
+     * Shows the Task list.
+     */
     public void showList(){
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {

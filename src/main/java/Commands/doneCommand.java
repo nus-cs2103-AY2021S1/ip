@@ -9,6 +9,9 @@ public class doneCommand extends Command{
         this.taskNumber = taskNumber;
     }
 
+    /**
+     * Executes the command to mark a task as done.
+     */
     @Override
     public void execute(){
         this.tasklist.completeTask(taskNumber);
