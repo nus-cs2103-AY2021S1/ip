@@ -7,6 +7,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.command.ViewallCommand;
@@ -109,6 +110,12 @@ public class Parser {
                 return new ViewallCommand(date);
             } catch (ArrayIndexOutOfBoundsException | DateTimeException ex) {
                 throw new ViewallInvalidUsageException("Date should be in yyyy-mm-dd format.");
+            }
+        case FIND:
+            try {
+                return new FindCommand(commands[1]);
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                throw new InvalidUsageException("Usage: find <keyword>");
             }
         default:
             throw new UnknownCommandException();

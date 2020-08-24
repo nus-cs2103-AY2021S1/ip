@@ -32,7 +32,7 @@ public class TaskList {
     public String show(int taskNumber) {
         return taskList.get(taskNumber).showTask();
     }
-    
+
     public List<Task> getAll() {
         return this.taskList;
     }
@@ -48,6 +48,20 @@ public class TaskList {
                         .filter(x ->
                                 (x instanceof Event && ((Event) x).getDate().equals(date))
                                         || (x instanceof Deadline && ((Deadline) x).getDate().equals(date)))
+                        .collect(Collectors.toList()));
+    }
+
+    /**
+     * Find all tasks that contain a specific keyword
+     * 
+     * @param keyword user-inputted keyword
+     * @return a Tasklist containing all tasks that contain a specific keyword
+     */
+    public TaskList find(String keyword) {
+        return new TaskList(
+                this.taskList
+                        .stream()
+                        .filter(x -> x.getDescription().contains(keyword))
                         .collect(Collectors.toList()));
     }
 }
