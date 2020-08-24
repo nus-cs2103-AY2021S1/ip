@@ -420,6 +420,7 @@
 
     <module name="MissingJavadocType">
       <property name="scope" value="public"/>
+      <property name="severity" value="warning"/>
     </module>
 
     <module name="MissingJavadocMethodCheck">
