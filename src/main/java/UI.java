@@ -1,5 +1,4 @@
 package main.java;
-
 import java.util.List;
 
 public class UI {
@@ -39,19 +38,15 @@ public class UI {
                 "\t==================================\n";
     }
 
-    // Returns a printable chatBox numbering each item in given a list
-    public static <T> String numberedListChatBox(List<T> chatContent){
+    // Returns a printable chatBox numbering each item in given a TaskList
+    public static String listTaskList(TaskList taskList){
         StringBuilder formatted = new StringBuilder();
-        int len = chatContent.size();
-        if (len != 0){
-            int number = 1;
-            for (T item : chatContent){
-                formatted.append("\t" + Integer.toString(number) + ". " + item.toString() + "\n");
-                number++;
-            }
+        int len = taskList.size();
+        for (int number = 0; number < len; number++){
+            formatted.append("\t" + (number+1) + ". " + taskList.get(number).toString() + "\n");
         }
         return "\t== King says =====================\n" +
-                "\tHere are the items in your list:\n" +
+                "\tThere are " + len + " items in your list:\n" +
                 formatted.toString() +
                 "\t==================================\n";
     }
