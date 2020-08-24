@@ -1,7 +1,4 @@
-import task.Todo;
-import task.Event;
-import task.Deadline;
-import task.TaskManager;
+import task.*;
 
 import commands.CommandTypes;
 
@@ -17,10 +14,6 @@ import java.util.Scanner;
 public class CommandLineInterface {
     private static final int dividerLength = 70;
     private static final int leftPadding = 7;
-    private static final String goodbyeMessage = "Bye. Hope my service has been satisfactory."
-            + "Hope to see you again soon.";
-    private static final String invalidTaskIndexErrorMessage = "Invalid task index! Please choose another index.";
-    private static final String invalidCommandInput = "OOPS!!!! I'm sorry, but I don't know what that means";
 
     private static final Scanner scanner = new Scanner(System.in);
     private static final Formatter formatter = new Formatter(dividerLength, leftPadding);
@@ -37,6 +30,7 @@ public class CommandLineInterface {
                 commandType.checkInput(userInput.toLowerCase());
                 String content, dateTime;
                 String[] userInputArgs;
+                DukeDateTime dukeDateTime;
                 switch (commandType) {
                     case LIST:
                         formatter.print(taskManager.getAllTasks());
@@ -58,7 +52,8 @@ public class CommandLineInterface {
                         userInputArgs = userInput.split("\\s*/by\\s*");
                         content = userInputArgs[0].trim();
                         dateTime = userInputArgs[1];
-                        Deadline newDeadlineTask = new Deadline(content, dateTime);
+                        dukeDateTime = DateTimeParser.parseDateTime(dateTime);
+                        Deadline newDeadlineTask = new Deadline(content, dukeDateTime);
                         formatter.print(taskManager.addTask(newDeadlineTask));
                         break;
 
@@ -67,7 +62,8 @@ public class CommandLineInterface {
                         userInputArgs = userInput.split("\\s*/at\\s*");
                         content = userInputArgs[0].trim();
                         dateTime = userInputArgs[1];
-                        Event newEventTask = new Event(content, dateTime);
+                        dukeDateTime = DateTimeParser.parseDateTime(dateTime);
+                        Event newEventTask = new Event(content, dukeDateTime);
                         formatter.print(taskManager.addTask(newEventTask));
                         break;
 

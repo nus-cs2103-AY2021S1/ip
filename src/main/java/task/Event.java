@@ -1,21 +1,16 @@
 package task;
 
 public class Event extends Task {
-    private final String dateTime;
+    private final DukeDateTime dateTime;
 
-    public Event(String content, String dateTime) {
+    public Event(String content, DukeDateTime dateTime) {
         super(content);
         this.dateTime = dateTime;
     }
 
-    public Event(String content, String dateTime, boolean isDone) {
+    public Event(String content, DukeDateTime dateTime, boolean isDone) {
         super(content, isDone);
         this.dateTime = dateTime;
-    }
-
-    @Override
-    public Event markTaskAsDone() {
-        return new Event(this.content, this.dateTime, true);
     }
 
     @Override

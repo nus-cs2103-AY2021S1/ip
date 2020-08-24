@@ -1,6 +1,6 @@
 package task;
 
-abstract public class Task {
+public class Task {
     protected String content;
     protected boolean isDone;
 
@@ -14,7 +14,9 @@ abstract public class Task {
         this.isDone = isDone;
     }
 
-    public abstract Task markTaskAsDone();
+    public void markTaskAsDone(){
+        isDone = true;
+    };
 
     public String getContent() {
         return this.content;
