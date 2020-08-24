@@ -1,5 +1,5 @@
-deadline do 2103 homework /by Thursday
-event meet jason leo /at 5pm Monday
+deadline do 2103 homework /by 2020-05-25
+event meet jason leo /at 2020-05-06 12:23 14:45
 list
 todo write resume
 done 2
