@@ -1,5 +1,9 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
@@ -15,8 +19,50 @@ public class Duke {
         return true;
     }
 
+    public static ArrayList<Task> loadData() throws IOException {
+        ArrayList<Task> orderList = new ArrayList<>();
+
+        try {
+            File dataStorage = new File("data/duke.txt");
+            Scanner s = new Scanner(dataStorage);
+            while (s.hasNext()) {
+                String curr = s.nextLine();
+                String[] currTask = curr.split("|");
+                Boolean isDone = currTask[1] == "1";
+                if (currTask[0] == "T") {
+                    orderList.add(new Todo(currTask[2], isDone));
+                } else if(currTask[0] == "D") {
+                    orderList.add(new Deadline(currTask[2], currTask[3], isDone));
+                } else if(currTask[0] == "E") {
+                    orderList.add(new Event(currTask[2], currTask[3], isDone));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            if (new File("data").mkdir()) {
+                System.out.println("folder data does not exist yet.");
+            } else if(new File("data/duke.txt").createNewFile()) {
+                System.out.println("File duke.txt does not exist yet.");
+            }
+        }
+
+        return orderList;
+
+    }
+
+    public static void writeData(ArrayList<Task> orderlist) {
+        try {
+            FileWriter fw = new FileWriter("data/duke.txt", false);
+            for (Task task : orderlist) {
+                fw.write(task.fileFormattedString() + "\n");
+            }
+            fw.close();
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
-        ArrayList<Task> orderList = new ArrayList<Task>();
         Scanner sc =  new Scanner(System.in);
         String seperateLine = "    _______________________________________";
         String spaceBeforeOder = "      ";
@@ -26,6 +72,7 @@ public class Duke {
         String order = sc.nextLine();
         int numOfOders = 0;
         try {
+            ArrayList<Task> orderList = loadData();
             while (!order.equals("bye")) {
                 if (order.equals("list")) {
                     System.out.println(seperateLine);
@@ -48,6 +95,7 @@ public class Duke {
                             System.out.println(seperateLine);
                             System.out.println(spaceBeforeOder + "Nice! I've marked this task as done:");
                             System.out.println(spaceBeforeOder + "  " + orderList.get(toMark));
+                            writeData(orderList);
                             System.out.println(spaceBeforeOder + "Now you have " + numOfOders + " tasks in the list.");
                             System.out.println(seperateLine);
                         }
@@ -61,6 +109,7 @@ public class Duke {
                             System.out.println(seperateLine);
                             System.out.println(spaceBeforeOder + "Noted. I've removed this task:");
                             System.out.println(spaceBeforeOder + "  " + removed);
+                            writeData(orderList);
                             System.out.println(spaceBeforeOder + "Now you have " + (numOfOders - 1) + " tasks in the list.");
                             System.out.println(seperateLine);
                             numOfOders--;
@@ -74,15 +123,15 @@ public class Duke {
                             if (splitAgain.length == 1) {
                                 throw new NoTimeException(command[0]);
                             }
-                            orderList.add(new Deadline(splitAgain[0], splitAgain[1]));
+                            orderList.add(new Deadline(splitAgain[0], splitAgain[1], false));
                         } else if(command[0].equals("event")) {
-                            String[] splitAgain = command[1].split("/by ");
+                            String[] splitAgain = command[1].split("/at ");
                             if (splitAgain.length == 1) {
                                 throw new NoTimeException(command[0]);
                             }
-                            orderList.add(new Event(splitAgain[0], splitAgain[1]));
+                            orderList.add(new Event(splitAgain[0], splitAgain[1], false));
                         } else if(command[0].equals("todo")) {
-                            orderList.add( new Todo(command[1]));
+                            orderList.add( new Todo(command[1], false));
                         } else {
                             throw new NoSuchOrderException();
                         }
@@ -90,6 +139,7 @@ public class Duke {
                         System.out.println(seperateLine);
                         System.out.println(spaceBeforeOder + "Got it. I've added this task: ");
                         System.out.println(spaceBeforeOder + "  " + orderList.get(numOfOders));
+                        writeData(orderList);
                         System.out.println(spaceBeforeOder + "Now you have " + (numOfOders + 1) + " tasks in the list.");
                         System.out.println(seperateLine);
                         numOfOders++;
@@ -100,6 +150,8 @@ public class Duke {
                 order = sc.nextLine();
             }
         } catch (NoDescriptionException | NoTimeException | NoSuchOrderException | NoTaskChosenException | NoThisNumOfTaskException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
