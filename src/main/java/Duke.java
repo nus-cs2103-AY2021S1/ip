@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.time.LocalDate;
 public class Duke {
 
     private static String line = "________________________________________________";
