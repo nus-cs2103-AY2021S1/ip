@@ -1,4 +1,4 @@
-package task;
+package data.task;
 
 //  ToDos: data.tasks without any date/time attached to it
 //  e.g., visit new theme park

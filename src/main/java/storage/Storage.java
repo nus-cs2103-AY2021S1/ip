@@ -1,16 +1,18 @@
+package storage;
+
+import data.TaskList;
+import data.exception.IllegalValueException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Storage {
 
-    private static final String DEFAULT_STORAGE_FILEPATH = "src/data/duke.txt";
+    private static final String DEFAULT_STORAGE_FILEPATH = "src/storageData/duke.txt";
     private String filePath;
     private File file;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy hh:mm a");
