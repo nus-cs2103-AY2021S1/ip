@@ -51,6 +51,25 @@ public class Processor {
                             + temp + "\nYou have "
                             + list.size() + " tasks in the list.");
                     break;
+                case DATE:
+                    boolean dateExists = false;
+                    for (Task i : list) {
+                        if (i instanceof Deadline) {
+                            if(((Deadline) i).hasDate(this.description)) {
+                                System.out.println(i);
+                                dateExists = true;
+                            }
+                        } else if (i instanceof Event) {
+                            if (((Event) i).hasDate(this.description)) {
+                                System.out.println(i);
+                                dateExists = true;
+                            }
+                        }
+                    }
+                    if (!dateExists) {
+                        System.out.println("No events/deadlines with this date!");
+                    }
+                    break;
                 default:
                     System.out.println("Error! Please key in what type of task it is.");
             }
@@ -124,10 +143,16 @@ public class Processor {
             }
             command = Commands.DELETE;
             this.description = description.split(" ")[1];
+        } else if (description.length() >= 4 && description.substring(0,4).equals("date")) {
+            if (description.substring(3).split(" ").length == 1 || description.substring(3).split(" ").length > 2 ) {
+                throw new DukeException(("you need to input a legit date for e.g: 29-01-19, no more and no less."));
+            }
+            command = Commands.DATE;
+            this.description = description.substring(5);
         } else if (entered) {
             throw new DukeException("you gotta put in a correct command.");
         } else {
-            throw new DukeException("type in 'todo', 'deadline', 'event' to start!");
+            throw new DukeException("type in 'todo', 'deadline', 'event' to start!\nAlso, type 'date' and key in a date in YYYY-MM-DD format to search for events/deadlines happening on that date!");
         }
         entered = true;
     }
