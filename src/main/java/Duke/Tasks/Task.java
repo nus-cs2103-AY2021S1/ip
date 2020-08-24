@@ -38,6 +38,14 @@ abstract public class Task {
     }
 
     /**
+     * gives name of task
+     * @return name of task
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * setter that sets Done to the done value stated
      * @param done value given to set it to done var
      */
