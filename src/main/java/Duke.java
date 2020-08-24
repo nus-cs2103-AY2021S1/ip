@@ -1,11 +1,19 @@
-import java.util.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    public Storage storage;
+
     // arraylist to store all text entered by user
-    public static ArrayList<Task> stored = new ArrayList<>();
+    public ArrayList<Task> stored;
+
+    public Duke(String filePath) {
+        this.storage = new Storage(filePath);
+        this.stored = storage.tasks;
+    }
 
     public static void main(String[] args) {
+        Duke duke = new Duke("duke.txt");
         // displayed once main is run, without input from user
         String greetings =
             "____________________________________________________________\n" +
@@ -23,7 +31,7 @@ public class Duke {
 
             System.out.println("____________________________________________________________");
             try {
-                processInput(trimmedInput);
+                duke.processInput(trimmedInput);
             } catch (DukeException ex) {
                 System.out.print(ex);
             }
@@ -43,7 +51,7 @@ public class Duke {
     }
 
     // method to mark task as done
-    public static void markTaskDone(String input) throws DukeException {
+    public void markTaskDone(String input) throws DukeException {
         int taskNo = Integer.parseInt(input.substring(5));
         // verify task number exists, then mark as done
         if (taskNo - 1 < stored.size()) {
@@ -62,7 +70,7 @@ public class Duke {
     }
 
     // method to delete task
-    public static void deleteTask(String input) throws DukeException {
+    public void deleteTask(String input) throws DukeException {
         int taskNo = Integer.parseInt(input.substring(7));
         // verify task number exists, then delete
         if (taskNo - 1 < stored.size()) {
@@ -78,8 +86,11 @@ public class Duke {
     }
 
     // method to process user input to identify commands
-    public static void processInput(String input) throws DukeException {
+    public void processInput(String input) throws DukeException {
         if (input.equals("bye")) {
+            // Save tasks to "duke.txt" to be loaded when Duke starts up
+            storage.saveTasks(stored);
+
             // print goodbye message
             String goodbye = "Bye. Hope to see you again soon!";
             System.out.println(goodbye);
