@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -21,12 +23,14 @@ public class Duke {
         while (!input.equals("bye")) {
             try {
                 if (input.isEmpty()) {
+                    input = scanner.nextLine();
                     continue;
                 }
                 String[] words = input.split(" ");
                 String command = words[0];
                 Task newTask;
                 String[] subst;
+                LocalDate date;
                 switch (command) {
                     case "list":
                         tasks.print_tasks();
@@ -59,8 +63,13 @@ public class Duke {
                         if (subst.length < 2) {
                             throw new DukeException("The due date must be specified.");
                         }
-                        newTask = new Deadline(subst[0], subst[1]);
-                        tasks.addTask(newTask);
+                        try{
+                            date = LocalDate.parse(subst[1]);
+                            newTask = new Deadline(subst[0], date);
+                            tasks.addTask(newTask);
+                        } catch (DateTimeParseException e){
+                            throw new DukeException(e.getMessage());
+                        }
                         break;
                     case "event":
                         if (input.length() < 7) {
@@ -70,8 +79,13 @@ public class Duke {
                         if (subst.length < 2) {
                             throw new DukeException("The event date must be specified.");
                         }
-                        newTask = new Event(subst[0], subst[1]);
-                        tasks.addTask(newTask);
+                        try{
+                            date = LocalDate.parse(subst[1]);
+                            newTask = new Event(subst[0], date);
+                            tasks.addTask(newTask);
+                        } catch (DateTimeParseException e){
+                            throw new DukeException(e.getMessage());
+                        }
                         break;
 //                    case "serialize":
 //                        ObjectOutputStream out = null;
