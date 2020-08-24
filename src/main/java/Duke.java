@@ -2,8 +2,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
+import java.io.File;
+import java.io.IOException;
 
 public class Duke {
+    File dataFile;
 
     public static void main(String[] args) {
         String name = "Omega";
@@ -11,12 +14,46 @@ public class Duke {
         System.out.println("Hi! I am " + name + ", your personal assistant.");
         System.out.println("How may I help you today?");
         Duke.printHorizontalLine();
-        Duke.interactWithUser();
+        new Duke().interactWithUser();
     }
 
-    private static void interactWithUser() {
+    private ArrayList<Task> loadTaskList() throws IOException {
+        this.dataFile = new File("data/duke.txt");
+        if (dataFile.exists()) {
+            ArrayList<Task> taskList = new ArrayList<>();
+            Scanner scn = new Scanner(dataFile);
+            while (scn.hasNextLine()) {
+                String[] data = scn.nextLine().split("/");
+                switch (data[0]) {
+                    case "T":
+                        taskList.add(new Todo(data[2], data[1].equals("1")));
+                        break;
+                    case "E":
+                        taskList.add(new Event(data[2], data[1].equals("1"), data[3]));
+                        break;
+                    case "D":
+                        taskList.add(new Deadline(data[2], data[1].equals("1"), data[3]));
+                        break;
+                }
+            }
+            scn.close();
+            return taskList;
+        } else {
+            dataFile.getParentFile().mkdirs();
+            dataFile.createNewFile();
+            return new ArrayList<>();
+        }
+    }
+
+    private void interactWithUser() {
         boolean exitProgram = false;
-        List<Task> listOfTasks = new ArrayList<>();
+        List<Task> listOfTasks;
+        try {
+             listOfTasks = this.loadTaskList();
+        } catch (IOException e) {
+            System.out.println("Sorry this is an error loading the data");
+            return;
+        }
         Scanner scn = new Scanner(System.in);
         while (!exitProgram) {
             System.out.println();
