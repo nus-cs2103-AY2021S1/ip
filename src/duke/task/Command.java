@@ -1,8 +1,12 @@
-package duke;
+package duke.task;
 
-abstract class Command {
-    String task;
-    Boolean isExit;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
+public abstract class Command {
+    public String task;
+    public Boolean isExit;
 
     public Command(String task) {
         this.task = task;

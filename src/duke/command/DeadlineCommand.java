@@ -1,4 +1,10 @@
-package duke;
+package duke.command;
+
+import duke.*;
+import duke.exception.DeadlineException;
+import duke.exception.DukeException;
+import duke.task.Command;
+import duke.task.Deadline;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

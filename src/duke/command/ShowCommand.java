@@ -1,4 +1,10 @@
-package duke;
+package duke.command;
+
+import duke.task.Command;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.CalendarException;
 
 public class ShowCommand extends Command {
 

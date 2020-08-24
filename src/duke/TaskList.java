@@ -1,5 +1,12 @@
 package duke;
 
+import duke.exception.CalendarException;
+import duke.exception.DeleteException;
+import duke.exception.DoneException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;

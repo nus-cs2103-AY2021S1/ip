@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.*;
+import duke.task.Command;
+import duke.task.Todo;
 
 public class TodoCommand extends Command {
 

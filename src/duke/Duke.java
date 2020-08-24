@@ -1,5 +1,8 @@
 package duke;
 
+import duke.exception.DukeException;
+import duke.task.Command;
+
 import java.io.IOException;
 
 public class Duke {
