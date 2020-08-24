@@ -1,6 +1,7 @@
-T | 1 | drink water
 T | 1 | walk the dog
 T | 1 | go jogging
-T | 0 | drink water
 T | 0 | read book
 T | 0 | jumping jacks
+E | 1 | dinner party | Nov 12 2020, 15:30:00
+D | 0 | individual project | Aug 25 2020, 16:00:00
+E | 0 | birthday | Aug 1 2020, 14:00:00

@@ -6,6 +6,8 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -59,11 +61,11 @@ public class Storage {
                     break;
                 case 'E':
                     String eventDescription = taskString.substring(8, taskString.lastIndexOf("|") - 1);
-                    taskList.add(new Event(eventDescription, isDone, taskDetails));
+                    taskList.add(new Event(eventDescription, isDone, formatTaskDateTime(taskDetails)));
                     break;
                 case 'D':
                     String deadlineDescription = taskString.substring(8, taskString.lastIndexOf("|") - 1);
-                    taskList.add(new Deadline(deadlineDescription, isDone, taskDetails));
+                    taskList.add(new Deadline(deadlineDescription, isDone, formatTaskDateTime(taskDetails)));
                     break;
                 default:
                     System.out.println("Unable to determine type of task");
@@ -72,6 +74,32 @@ public class Storage {
         }
 
         return taskList;
+    }
+
+    private String formatTaskDateTime(String dateTime) {
+        String[] date_time = dateTime.split(",");
+        String date = date_time[0]; // MMM DD YYYY
+        String time = date_time[1]; // HH:MM:SS
+
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d yyyy");
+        LocalDate newDate = LocalDate.parse(date, format);
+        int monthInt = newDate.getMonthValue();
+        String year = String.valueOf(newDate.getYear());
+        int dayInt = newDate.getDayOfMonth();
+
+        String month = monthInt >= 10
+                ? String.valueOf(monthInt)
+                : "0".concat(String.valueOf(monthInt));
+
+        String day = dayInt >= 10
+                ? String.valueOf(dayInt)
+                : "0".concat(String.valueOf(dayInt));
+
+        String hourAndMinutes = time.substring(0, time.lastIndexOf(":"));
+
+        // Return YYYY/MM/DD HH:MM
+        String ans = year + "/" + month + "/" + day + hourAndMinutes;
+        return ans;
     }
 
     public void writeToStorage() {
