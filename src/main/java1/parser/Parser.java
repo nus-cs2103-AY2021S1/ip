@@ -6,8 +6,17 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The Parser class is responsible for handling input commands.
+ */
 public class Parser {
 
+    /**
+     * Handles commands regarding tasks(ie. todos, deadlines, events).
+     * @param input The command input.
+     * @param newList The current TaskList.
+     * @throws DukeException if there is an error with the input or input is not given in the correct format.
+     */
     public static void commandTask(String input, TaskList newList) throws DukeException {
 
         String[] splitString = input.split(" ",2);
@@ -76,6 +85,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles all non-task related commands(commands that do not begin with a task type).
+     * @param input The input command.
+     * @param newList The current TaskList.
+     * @throws DukeException if there is an error with the input or input is not given in the correct format.
+     */
     public static void commandParser(String input, TaskList newList) throws DukeException {
         String[] splitInput = input.split(" ");
 
