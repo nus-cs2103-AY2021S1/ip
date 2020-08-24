@@ -195,9 +195,51 @@ public class Duke {
                 } else if (t.getFirstWord().equals("delete")) {
                     int taskNumber = t.getNumber();
                     System.out.println("    Noted. I've removed this task:\n"
-                                        + "        " + tasks.get(taskNumber - 1));
+                            + "        " + tasks.get(taskNumber - 1));
                     tasks.remove(taskNumber - 1);
                     System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
+                } else if (t.getFirstWord().equals("get")) {
+
+                    System.out.println("Here are your tasks on this date:");
+
+                    String date = str.substring(4);
+                    String tasksOnDate = "";
+                    for (int i = 0; i < tasks.size(); i++) {
+                        Task curr = tasks.get(i);
+                        if (curr.isTodo()) {
+                            ToDo todo = new ToDo(curr.getDescription());
+                            if (curr.isDone) {
+                                todo.markAsDone();
+                            }
+
+                            if (curr.getDate().equals(date)) {
+                                tasksOnDate += todo + "\n";
+                            }
+                        } else if (curr.isDeadline()) {
+                            Deadline deadline = new Deadline(curr.getDescription(), curr.getDate());
+                            if (curr.isDone) {
+                                deadline.markAsDone();
+                            }
+                            if (curr.getDate().equals(date)) {
+                                tasksOnDate += deadline + "\n";
+                            }
+                        } else {
+                            Event event = new Event(curr.getDescription(), curr.getDate());
+                            if (curr.isDone) {
+                                event.markAsDone();
+                            }
+                            if (curr.getDate().equals(date)) {
+                                tasksOnDate += event + "\n";
+                            }
+                        }
+                    }
+
+                    if (!tasksOnDate.isBlank()) {
+                        System.out.println(tasksOnDate);
+                    } else {
+                        System.out.println("No tasks on this date.");
+                    }
+
                 } else {
                     try {
                         t.validate();
