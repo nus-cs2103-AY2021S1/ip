@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -30,11 +31,10 @@ public class Duke {
                 + "\n_________________________________________");
     }
 
-    public static void list(Duke dd) {
-        System.out.println("Here is your current list of task(s)!");
+    public static void list(ArrayList<Task> taskList) {
         int curr = 0;
-        while (curr < dd.taskSize) {
-            System.out.println((curr + 1) + ". " + dd.taskList.get(curr));
+        while (curr < taskList.size()) {
+            System.out.println((curr + 1) + ". " + taskList.get(curr));
             curr += 1;
         }
     }
@@ -47,35 +47,61 @@ public class Duke {
         System.out.println("You now have " + dd.taskSize + " task(s) in your list!");
     }
 
-    public static void addDeadline(Duke dd, String input) {
+    public static void addDeadline(Duke dd, String input, DateTimeHandler dth) {
         input = input.substring(9);
         String[] temp = input.split(" /by "); // create array of [task desc, task date]
 
         if (temp.length == 2) {
-            // valid
-            dd.taskList.add(new Deadline(temp[0], temp[1]));
-            System.out.println("Ok, Deadline added:\n  " + dd.taskList.get(dd.taskSize));
-            dd.taskSize += 1;
-            System.out.println("You now have " + dd.taskSize + " task(s) in your list!");
-        } else {
-            // no valid date
-            System.out.println("Due date not detected, try again!");
+            boolean validInput = dth.checkInput(temp[1]);
+
+            if (validInput) {
+                // valid
+                String formattedDate = dth.categorizeInput(temp[1]);
+                dd.taskList.add(new Deadline(temp[0], formattedDate));
+                System.out.println("Ok, Deadline added:\n  " + dd.taskList.get(dd.taskSize));
+                dd.taskSize += 1;
+                System.out.println("You now have " + dd.taskSize + " task(s) in your list!");
+            }
+            else {
+                // not valid date
+                System.out.println("I don't understand :( Please input date as DD-MM-YYYY or DD-MM-YYYY HHmm\n"
+                        + "Example: 31-12-2020 or 31-12-2020 2359");
+            }
+        }
+        else {
+            // no date input
+            System.out.println("Due date not detected, try again!\n"
+                    + "Please input deadline as 'deadline (title) /by (date)'\n"
+                    + "Example: deadline return book /by 31-12-2020");
         }
     }
 
-    public static void addEvent(Duke dd, String input) {
+    public static void addEvent(Duke dd, String input, DateTimeHandler dth) {
         input = input.substring(6);
         String[] temp = input.split(" /at "); // create array of [task desc, task date]
 
         if (temp.length == 2) {
-            // valid
-            dd.taskList.add(new Event(temp[0], temp[1]));
-            System.out.println("Ok, Event added:\n  " + dd.taskList.get(dd.taskSize));
-            dd.taskSize += 1;
-            System.out.println("You now have " + dd.taskSize + " task(s) in your list!");
-        } else {
-            // no valid date
-            System.out.println("Event date not detected, try again!");
+            boolean validInput = dth.checkInput(temp[1]);
+
+            if (validInput) {
+                // valid
+                String formattedDate = dth.categorizeInput(temp[1]);
+                dd.taskList.add(new Event(temp[0], formattedDate));
+                System.out.println("Ok, Event added:\n  " + dd.taskList.get(dd.taskSize));
+                dd.taskSize += 1;
+                System.out.println("You now have " + dd.taskSize + " task(s) in your list!");
+            }
+            else {
+                // not valid date
+                System.out.println("I don't understand :( Please input date as DD-MM-YYYY or DD-MM-YYYY HHmm\n"
+                        + "Example: 31-12-2020 or 31-12-2020 2359");
+            }
+        }
+        else {
+            // no date input
+            System.out.println("Event date not detected, try again!\n"
+                    + "Please input event as 'event (title) /at (date)'\n"
+                    + "Example: event group meeting /at 31-12-2020");
         }
     }
 
@@ -119,6 +145,29 @@ public class Duke {
         }
     }
 
+    public static void checkDate(String input, DateTimeHandler dth, Duke dd) {
+        String date = input.substring(6);
+        boolean validInput = dth.checkInput(date);
+
+        if (validInput && date.length() == 10) {
+            // valid
+            ArrayList<Task> tasksOnDate = dth.filterDate(date, dd.taskList);
+
+            if (tasksOnDate.isEmpty()) {
+                System.out.println("No tasks found on " + date + "!");
+            }
+            else {
+                System.out.println("Here is your list of task(s) on " + date + ":");
+                list(tasksOnDate);
+            }
+        }
+        else {
+            // not valid date
+            System.out.println("I don't understand :( Please input date as DD-MM-YYYY\n"
+                    + "Example: 31-12-2020");
+        }
+    }
+
     public static void main(String[] args) {
         greeting();
 
@@ -129,6 +178,7 @@ public class Duke {
         String list = "list";
 
         Duke dd = new Duke();
+        DateTimeHandler dth = new DateTimeHandler();
 
         if (input.equals(bye)) {
             exit();
@@ -137,23 +187,27 @@ public class Duke {
             // does not exit
             while (!input.equals(bye)) {
                 if (input.equals(list)) {
-                    list(dd);
+                    System.out.println("Here is your current list of task(s)!");
+                    list(dd.taskList);
                 }
                 // input tasks
                 else if (input.startsWith("todo")) {
                     addTodo(dd, input);
                 }
                 else if (input.startsWith("deadline")) {
-                    addDeadline(dd, input);
+                    addDeadline(dd, input, dth);
                 }
                 else if (input.startsWith("event")) {
-                    addEvent(dd, input);
+                    addEvent(dd, input, dth);
                 }
                 else if (input.startsWith("done")) {
                     done(dd, input);
                 }
                 else if (input.startsWith("delete")) {
                     delete(dd, input);
+                }
+                else if (input.startsWith("check")) {
+                    checkDate(input, dth, dd);
                 }
                 else {
                     // not valid task
