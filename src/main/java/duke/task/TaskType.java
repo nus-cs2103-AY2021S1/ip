@@ -1,3 +1,5 @@
+package duke.task;
+
 public enum TaskType {
     DEADLINE("ID_D"),
     EVENT("ID_E"),
@@ -41,7 +43,7 @@ public enum TaskType {
             }
             return string.toString();
         } catch (IndexOutOfBoundsException e) {
-            throw new TaskTypeDecodeException("Storage string has been malformed.");
+            throw new TaskTypeDecodeException("duke.storage.Storage string has been malformed.");
         }
     }
 }

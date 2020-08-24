@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.storage.StorageException;
+import duke.task.TaskException;
+import duke.task.TaskList;
+
 public abstract class Command {
 
     protected final String args;
@@ -6,7 +13,7 @@ public abstract class Command {
         this.args = args;
     }
 
-    protected boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 

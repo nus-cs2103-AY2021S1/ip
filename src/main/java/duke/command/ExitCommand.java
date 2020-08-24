@@ -1,6 +1,13 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.storage.StorageException;
+import duke.task.TaskException;
+import duke.task.TaskList;
+
 public class ExitCommand extends Command {
 
-    protected ExitCommand(String args) {
+    public ExitCommand(String args) {
         super(args);
     }
 

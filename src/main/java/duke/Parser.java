@@ -1,3 +1,13 @@
+package duke;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.CompleteCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.task.TaskType;
+
 public class Parser {
     private static final String COMMAND_EXIT = "bye";
     private static final String COMMAND_LIST = "list";

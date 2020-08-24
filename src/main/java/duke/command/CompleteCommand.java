@@ -1,6 +1,14 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.storage.StorageException;
+import duke.task.Task;
+import duke.task.TaskException;
+import duke.task.TaskList;
+
 public class CompleteCommand extends Command {
 
-    protected CompleteCommand(String args){
+    public CompleteCommand(String args){
         super(args);
     }
 

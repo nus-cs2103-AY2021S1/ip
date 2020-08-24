@@ -1,3 +1,13 @@
+package duke;
+
+import duke.command.Command;
+import duke.storage.Storage;
+import duke.storage.StorageException;
+import duke.task.TaskException;
+import duke.task.TaskList;
+import duke.ui.UI;
+import duke.ui.UIException;
+
 public class Duke {
     private TaskList taskList;
     private Storage storage;
@@ -26,8 +36,13 @@ public class Duke {
                 ui.printResult(result);
                 ui.showLine();
                 isExit = command.isExit();
-            } catch (UIException | DukeUnknownCommandException | StorageException | TaskException e) {
-                e.printStackTrace();
+            } catch (UIException e) {
+                ui.showLine();
+                ui.showErrorMessage(e.getMessage());
+                ui.showLine();
+            } catch (DukeUnknownCommandException | StorageException | TaskException e) {
+                ui.showErrorMessage(e.getMessage());
+                ui.showLine();
             }
         }
 
