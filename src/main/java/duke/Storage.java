@@ -1,8 +1,12 @@
 package main.java.duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
-class Storage {
+public class Storage {
 
     /** Data separator to separate different data in the same entry */
     private final String dataSeparator = "\uff5c";
@@ -59,7 +63,7 @@ class Storage {
      * Clears all the contents in the file
      * @return true if the contents are cleared successfully, false otherwise
      */
-    boolean resetFile() {
+    public boolean resetFile() {
         try {
             this.file.delete();
             this.file.createNewFile();
@@ -74,7 +78,7 @@ class Storage {
      * @param taskList Task list to be saved
      * @return true if saving is successful, false otherwise
      */
-    boolean saveTaskList(TaskList taskList) {
+    public boolean saveTaskList(TaskList taskList) {
         try {
             FileWriter csvWriter = new FileWriter(this.file);
             for (int i = 0; i < taskList.getNumOfTasks(); i++) {
@@ -91,8 +95,5 @@ class Storage {
         } catch (IOException e) {
             return false;
         }
-
     }
-
-
 }

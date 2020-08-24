@@ -1,6 +1,8 @@
 package main.java.duke;
 
-class Ui {
+import main.java.duke.task.Task;
+
+public class Ui {
     private String horizontalLine = "    ____________________________________________________________";
     private String textIndentation = "     ";
 
@@ -28,7 +30,7 @@ class Ui {
      * Prints strings upon completing a task
      * @param task Completed task
      */
-    void printCompleteTask(Task task) {
+    public void printCompleteTask(Task task) {
         String[] strings = new String[] {this.completeTaskMessage, task.toString()};
         this.print(strings);
     }
@@ -38,7 +40,7 @@ class Ui {
      * @param tasks Current task list
      * @param task Created task
      */
-    void printCreateTask(TaskList tasks, Task task) {
+    public void printCreateTask(TaskList tasks, Task task) {
         String[] strings = new String[] {this.addTaskMessage, task.toString(), getNumOfTasksString(tasks)};
         this.print(strings);
     }
@@ -48,7 +50,7 @@ class Ui {
      * @param tasks Current task list
      * @param task Deleted task
      */
-    void printDeleteTask(TaskList tasks, Task task) {
+    public void printDeleteTask(TaskList tasks, Task task) {
         String[] strings = new String[] {this.deleteTaskMessage, task.toString(),getNumOfTasksString(tasks)};
         this.print(strings);
     }
@@ -56,7 +58,7 @@ class Ui {
     /**
      * Prints strings upon handling an invalid input
      */
-    void printInvalidInput() {
+    public void printInvalidInput() {
         String[] strings = new String[] {this.invalidSyntaxMessage};
         this.print(strings);
     }
@@ -64,7 +66,7 @@ class Ui {
     /**
      * Prints strings upon receiving an invalid task index
      */
-    void printInvalidTaskIndex() {
+    public void printInvalidTaskIndex() {
         String[] strings = new String[] {this.invalidTaskIndexMessage};
         this.print(strings);
     }
@@ -73,7 +75,7 @@ class Ui {
      * Prints string representation of all tasks
      * @param tasks Current task list
      */
-    void printList(TaskList tasks) {
+    public void printList(TaskList tasks) {
         if (tasks.isEmpty()) {
             String[] strings = new String[] {this.zeroTasksMessage};
             this.print(new String[] {this.zeroTasksMessage});
@@ -97,7 +99,7 @@ class Ui {
     /**
      * Prints strings upon exit
      */
-    void printExit() {
+    public void printExit() {
         String[] strings = new String[] {this.exitMessage};
         this.print(strings);
     }

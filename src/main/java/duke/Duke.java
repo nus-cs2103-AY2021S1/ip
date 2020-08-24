@@ -1,5 +1,8 @@
 package main.java.duke;
 
+import main.java.duke.command.Command;
+import main.java.duke.command.ExitCommand;
+
 import java.util.Scanner;
 
 public class Duke {

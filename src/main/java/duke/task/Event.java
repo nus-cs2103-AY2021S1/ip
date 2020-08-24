@@ -1,15 +1,15 @@
-package main.java.duke;
+package main.java.duke.task;
 
 import java.time.LocalDate;
 
-class Event extends Task {
+public class Event extends Task {
 
-    Event(String description, boolean isComplete, LocalDate date) {
+    public Event(String description, boolean isComplete, LocalDate date) {
         super(description, isComplete, date);
     }
 
     @Override
-    String[] getDataString() {
+    public String[] getDataString() {
         return new String[] {"deadline", String.valueOf(isComplete), this.description, this.date.toString()};
     }
 

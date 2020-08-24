@@ -1,13 +1,13 @@
-package main.java.duke;
+package main.java.duke.task;
 
-class ToDo extends Task {
+public class ToDo extends Task {
 
-    ToDo(String description, boolean isComplete) {
+    public ToDo(String description, boolean isComplete) {
         super(description, isComplete, null);
     }
 
     @Override
-    String[] getDataString() {
+    public String[] getDataString() {
         return new String[] {"todo", String.valueOf(isComplete), description};
     }
 

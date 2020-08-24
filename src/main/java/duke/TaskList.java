@@ -1,9 +1,14 @@
 package main.java.duke;
 
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.ToDo;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-class TaskList {
+public class TaskList {
 
     final ArrayList<Task> taskArrayList;
 
@@ -28,7 +33,7 @@ class TaskList {
      * @param taskIndex current index of the task
      * @return Deleted task if deletion is successful, null otherwise
      */
-    Task deleteTaskAt(int taskIndex) {
+    public Task deleteTaskAt(int taskIndex) {
         if (taskIndex >= 0 && taskIndex < this.taskArrayList.size()) {
             Task task = this.getTaskAt(taskIndex);
             this.taskArrayList.remove(taskIndex);
@@ -48,7 +53,7 @@ class TaskList {
      * @param isComplete Whether the todo is complete
      * @return Created todo
      */
-    ToDo addTodo(String description, boolean isComplete) {
+    public ToDo addTodo(String description, boolean isComplete) {
         ToDo todo = new ToDo(description, isComplete);
         this.taskArrayList.add(todo);
         return todo;
@@ -61,7 +66,7 @@ class TaskList {
      * @param date Date of the deadline
      * @return Created deadline
      */
-    Deadline addDeadline(String description, boolean isComplete, LocalDate date) {
+    public Deadline addDeadline(String description, boolean isComplete, LocalDate date) {
         Deadline deadline = new Deadline(description, isComplete, date);
         this.taskArrayList.add(deadline);
         return deadline;
@@ -73,7 +78,7 @@ class TaskList {
      * @param isComplete Whether the event is complete
      * @param date Date of the event
      */
-    Event addEvent(String description, boolean isComplete, LocalDate date) {
+    public Event addEvent(String description, boolean isComplete, LocalDate date) {
         Event event = new Event(description, isComplete, date);
         this.taskArrayList.add(event);
         return event;
@@ -100,7 +105,7 @@ class TaskList {
      * @param taskIndex current index of the task
      * @return Completed task if completion is successful, null otherwise
      */
-    Task completeTaskAt(int taskIndex) {
+    public Task completeTaskAt(int taskIndex) {
         if (taskIndex >= 0 && taskIndex < this.taskArrayList.size()) {
             Task task = this.taskArrayList.get(taskIndex);
             task.completeTask();

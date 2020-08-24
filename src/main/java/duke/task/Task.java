@@ -1,10 +1,10 @@
-package main.java.duke;
+package main.java.duke.task;
 
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
-abstract class Task {
+public abstract class Task {
 
     final String description;
     final LocalDate date;
@@ -24,7 +24,7 @@ abstract class Task {
         }
     }
 
-    void completeTask() {
+    public void completeTask() {
         this.isComplete = true;
     }
 
@@ -38,7 +38,7 @@ abstract class Task {
         }
     }
 
-    String[] getDataString() {
+    public String[] getDataString() {
         return new String[] {"task", String.valueOf(isComplete), description};
     }
 
