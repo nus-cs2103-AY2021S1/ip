@@ -6,6 +6,10 @@ import java.nio.file.Paths;
 
 import java.util.Scanner;
 
+/**
+ * Represents a Personal Assistant Chatbot.
+ * It keeps track of various tasks to be done.
+ */
 public class Duke {
 
     private Storage storage;
@@ -20,6 +24,9 @@ public class Duke {
         this.ui = new Ui();
     }
 
+    /**
+     * Initiates and runs the main programme.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         String input;

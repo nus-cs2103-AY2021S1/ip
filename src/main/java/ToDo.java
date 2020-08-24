@@ -1,3 +1,6 @@
+/**
+ * Represents a todo task.
+ */
 public class ToDo extends Task {
 
     private final String task;
@@ -7,6 +10,11 @@ public class ToDo extends Task {
             this.task = task;
     }
 
+    /**
+     * Returns the task description of this ToDo.
+     *
+     * @return String of task description.
+     */
     @Override
     protected String getTask() {
         return this.task;

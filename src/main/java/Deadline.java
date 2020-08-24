@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task which has a deadline.
+ */
 public class Deadline extends Task{
 
     private final String task;
@@ -11,6 +14,11 @@ public class Deadline extends Task{
             this.deadline = deadline;
     }
 
+    /**
+     * Returns the task description of this Deadline.
+     *
+     * @return String of task description.
+     */
     @Override
     protected String getTask() {
         return this.task;
