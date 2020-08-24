@@ -1,19 +1,21 @@
 import java.util.*;
 
 public class Duke {
+    Ui ui;
+    Duke() {
+        this.ui = new Ui();
+    }
+
+    private void start() {
+        ui.showStartScreen();
+    }
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        new Duke().start();
 
         String line = "------------------------";
 
         System.out.println(line);
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke \nWhat can I do for you?");
-
         TaskManager tm;
         try {
             tm = new TaskManager();
