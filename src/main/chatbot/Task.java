@@ -1,10 +1,12 @@
+import java.time.LocalDate;
+
 public class Task {
     protected final String description;
     protected final String type;
     protected final boolean isDone;
-    protected final String timestamp;
+    protected final LocalDate timestamp;
 
-    protected Task(String description, String type, boolean isDone, String timestamp) {
+    protected Task(String description, String type, boolean isDone, LocalDate timestamp) {
         this.description = description;
         this.isDone = isDone;
         this.type = type;
@@ -17,6 +19,10 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    public LocalDate getDate() {
+        return this.timestamp;
     }
 
     public Task markDone() {

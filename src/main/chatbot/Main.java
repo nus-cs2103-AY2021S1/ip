@@ -1,3 +1,7 @@
+import java.lang.reflect.Array;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -29,7 +33,7 @@ public class Main {
 
         switch (cmd) {
             case LIST:
-                taskManager.listAll();
+                ui.list(taskManager.getTasks());
                 break;
             case DONE:
                 int ind1 = Integer.parseInt(text.split(" ")[1]) - 1;
@@ -79,6 +83,15 @@ public class Main {
                     }
                 } catch (ChatbotException e) {
                     ui.display(e.getMessage());
+                }
+                break;
+            case DATE:
+                try {
+                    ArrayList<Task> tasks = taskManager.retrieveTasksOnDate(
+                            LocalDate.parse(trailing));
+                    ui.list(tasks);
+                } catch (DateTimeParseException e) {
+                    ui.display("Please enter a valid date (yyyy-mm-dd).");
                 }
                 break;
             case BYE:

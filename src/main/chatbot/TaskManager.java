@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.Iterator;
 
 public class TaskManager {
 
@@ -16,10 +18,6 @@ public class TaskManager {
 
     public Task getTask(int index) {
         return this.tasks.get(index);
-    }
-
-    public void listAll() {
-        taskPrinter.list(this.tasks);
     }
 
     public int count() {
@@ -45,6 +43,19 @@ public class TaskManager {
             throw new ChatbotException("That item does not exist!");
         }
         return true;
+    }
+
+    public ArrayList<Task> retrieveTasksOnDate(LocalDate date) {
+        Iterator<Task> iter = this.tasks.iterator();
+        ArrayList<Task> tasks = new ArrayList<>();
+        while (iter.hasNext()) {
+            Task tsk = iter.next();
+            LocalDate taskDate = tsk.getDate();
+            if (taskDate != null && taskDate.equals(date)) {
+                tasks.add(tsk);
+            }
+        }
+        return tasks;
     }
 
     public boolean markAsDone(int index) {

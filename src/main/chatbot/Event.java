@@ -1,6 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
 
-    public Event(String description, boolean isDone, String timestamp) {
+    public Event(String description, boolean isDone, LocalDate timestamp) {
         super(description, "E", isDone, timestamp);
     }
 
@@ -10,12 +14,15 @@ public class Event extends Task {
         }
 
         String description = raw.split("/at")[0].trim();
-        String timestamp;
+        LocalDate timestamp;
 
         try {
-            timestamp = raw.split("/at")[1].trim();
+            String dateString = raw.split("/at")[1].trim();
+            timestamp = LocalDate.parse(dateString);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ChatbotException("Ooopsss (>.>) Event? At what date??!!");
+        } catch (DateTimeParseException e) {
+            throw new ChatbotException("Please enter a valid date (yyyy-mm-dd).");
         }
         return new Event(description, false, timestamp);
     }
@@ -27,6 +34,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + this.timestamp + ")";
+        String formattedDate = this.timestamp.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return super.toString() + " (at: " + formattedDate + ")";
     }
 }

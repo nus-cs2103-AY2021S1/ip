@@ -10,11 +10,11 @@ public class TaskPrinter implements Printable<Task> {
 
     public void list(ArrayList<Task> ls) {
         System.out.println("    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("    ####################### Your Tasks: ########################");
+        System.out.println("    ######################## Your Tasks ########################");
         System.out.println("    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
         if (ls.size() == 0 ) {
-            System.out.println("    You have no tasks at the moment.");
+            System.out.println("    No task here.");
             return;
         }
 

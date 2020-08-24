@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.stream.Stream;
@@ -31,10 +32,10 @@ public class Storage {
                         task = new Todo(description, isDone);
                         break;
                     case "D":
-                        task = new Deadline(description, isDone, timestamp);
+                        task = new Deadline(description, isDone, LocalDate.parse(timestamp));
                         break;
                     case "E":
-                        task = new Event(description, isDone, timestamp);
+                        task = new Event(description, isDone, LocalDate.parse(timestamp));
                         break;
                     default:
                         break;
@@ -57,7 +58,7 @@ public class Storage {
         String dataStr = "";
         while (iter.hasNext()) {
             Task tsk = (Task)iter.next();
-            String timestamp = tsk.timestamp.length() == 0 ? "-" : tsk.timestamp;
+            String timestamp = tsk.timestamp == null ? "-" : tsk.timestamp.toString();
             String entry = tsk.type + " | " +
                     tsk.getStatus() + " | " +
                     tsk.description + " | " +
