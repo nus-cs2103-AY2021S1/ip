@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
 
@@ -60,6 +61,8 @@ public class Duke {
                 }
             } catch (DukeCommandException | DukeIndexException | DukeTaskException | DukeListException e) {
                 System.out.print(String.format("  ERROR: %s\n", e.getMessage()));
+            } catch (DateTimeParseException e) {
+                System.out.print(String.format("  ERROR: INPUT DATE TIME FORMAT IS WRONG. \n"));
             }
             input = sc.nextLine();
         }
@@ -104,7 +107,9 @@ public class Duke {
 
         try {
 
-            if (tag.equals("todo")) {
+            if (message.isEmpty()) {
+                throw new IndexOutOfBoundsException();
+            } else if (tag.equals("todo")) {
                 newTask = new Todo(message);
             } else if (tag.equals("deadline")) {
                 parsedMessage = message.split("/by ");
