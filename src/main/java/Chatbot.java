@@ -76,16 +76,6 @@ public class Chatbot {
         }
     }
 
-    public void writeToFile(String filePath, String textToAdd) {
-        try {
-            FileWriter fw = new FileWriter(filePath);
-            fw.write(textToAdd + System.lineSeparator());
-            fw.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     public void appendToFile(String filePath, String textToAdd) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
