@@ -48,13 +48,14 @@ public class Duke {
      * @throws EmptyDateException
      */
     public static String findTime(String task, String keyword) throws EmptyDateException {
-        String[] array = task.split("/" + keyword);
+        String[] array = task.split("/" + keyword + " ");
         if (array.length < 2) {
             throw new EmptyDateException();
         } else {
             return array[1];
         }
     }
+
 
     public static int[] timeSplitter(String time) {
         String[] stringArr = time.split("-");
@@ -63,6 +64,22 @@ public class Duke {
             timeArr[i] = Integer.parseInt(stringArr[i]);
         }
         return timeArr;
+    }
+
+    public static boolean isValidDate(String time) throws IllegalArgumentException {
+        String[] stringArr = time.split("-");
+        if (stringArr.length != 3) {
+            throw new IllegalArgumentException("Entered date is in the wrong format. Please " +
+                    "specify in this format YYYY-MM-DD");
+        }
+
+        return true;
+    }
+
+    public static boolean hasTime(String time) {
+        String[] stringArr = time.split(" ");
+        return stringArr.length == 2;
+
     }
 
     /**
@@ -114,6 +131,7 @@ public class Duke {
                                     taskList.deleteTask(taskNumber - 1);
                                 }
 
+
                             } else if (command.equals("todo")) {
                                 String description = findDescription(join(split(currentWord), 1));
                                 Task newTask = new ToDo(description);
@@ -123,20 +141,24 @@ public class Duke {
                                 String detail = join(split(currentWord), 1);
                                 String description = findDescription(detail);
                                 String deadlineTime = findTime(detail, "by");
-                                Task newTask = new DeadLine(description, deadlineTime);
+                                isValidDate(deadlineTime);
+                                boolean hasTime = hasTime(deadlineTime);
+                                Task newTask = new DeadLine(description, deadlineTime, hasTime, false);
                                 taskList.addTask(newTask);
                             } else {
                                 String detail = join(split(currentWord), 1);
                                 String description = findDescription(detail);
                                 String time = findTime(detail, "at");
-                                Task newTask = new Event(description, time);
+                                isValidDate(time);
+                                boolean hasTime = hasTime(time);
+                                Task newTask = new Event(description, time, hasTime, false);
                                 taskList.addTask(newTask);
                             }
+
                         }
                     } else {
                         throw new InvalidCommandException();
                     }
-
                 } catch (InvalidIndexException err) {
                     System.out.println(err.toString());
                 } catch (EmptyTaskException err) {
@@ -145,15 +167,15 @@ public class Duke {
                     System.out.println(err.toString());
                 } catch (InvalidCommandException err) {
                     System.out.println(err.toString());
+                } catch (IllegalArgumentException err) {
+                    System.out.println(err.toString());
                 } finally {
                     storage.writeTasks(taskList);
                     currentWord = scanner.nextLine();
+
                 }
             }
-
-
-
-        System.out.println("Bye. Hope to see you again soon!");
+            System.out.println("Bye. Hope to see you again soon!");
         } catch (IOException err) {
             System.out.println(err.toString());
         }

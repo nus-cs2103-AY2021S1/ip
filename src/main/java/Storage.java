@@ -70,18 +70,22 @@ public class Storage {
     public TaskList formTaskList(List<String> taskListInString) {
         TaskList taskList = new TaskList();
         for (String taskInString : taskListInString) {
+            // parser work
             String[] arr = taskInString.split(" \\| ");
             String command = arr[0];
             String isDone = arr[1];
             String description = arr[2];
-            String time = arr.length == 3 ? "" : arr[3];
+            String timeNotProcessed = arr.length == 3 ? "" : arr[3];
+            boolean hasTime = !timeNotProcessed.equals("");
+            String timeProcessed = timeNotProcessed.replace("T", " ");
+
             Task task;
             if (command.equals("T")) {
                 task = new ToDo(description, isDone.equals("\u2713"));
             } else if (command.equals("E")) {
-                task = new Event(description, time, isDone.equals("\u2713"));
+                task = new Event(description, timeProcessed, hasTime, isDone.equals("\u2713"));
             } else {
-                task = new DeadLine(description, time, isDone.equals("\u2713"));
+                task = new DeadLine(description, timeProcessed, hasTime, isDone.equals("\u2713"));
             }
             taskList.addTask(task);
         }

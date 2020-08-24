@@ -1,3 +1,1 @@
-T | ✘ | play games
-T | ✘ | finish assignment
-D | ✘ | play dota  |  Mon 6pm
+E | ✘ | read book  | 2020-10-03T10:00
