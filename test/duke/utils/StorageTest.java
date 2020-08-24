@@ -1,6 +1,6 @@
 package duke.utils;
 
-import duke.task.TaskList;
+import duke.tasks.TaskList;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;

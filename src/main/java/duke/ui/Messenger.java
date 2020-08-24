@@ -1,6 +1,6 @@
 package duke.ui;
 
-import duke.task.Task;
+import duke.tasks.Task;
 
 public class Messenger {
     /**

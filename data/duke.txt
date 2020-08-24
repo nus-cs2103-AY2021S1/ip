@@ -1,8 +1,0 @@
-<<<<<<< HEAD
-todo|borrow book
-deadline|return book|Aug 23 2020
-=======
-event|return book|Aug 25 2020
-deadline|do homework|Aug 27 2020
-deadline|read notes|Aug 30 2020
->>>>>>> branch-Level-9

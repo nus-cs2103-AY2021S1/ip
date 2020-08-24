@@ -1,8 +1,8 @@
 package duke.utils;
 
 import duke.ui.Messenger;
-import duke.task.Task;
-import duke.task.TaskList;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 import duke.types.TaskType;
 
 import java.io.File;
