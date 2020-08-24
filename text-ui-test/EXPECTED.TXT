@@ -19,7 +19,10 @@
     _______________________________________________________________________
 
     _______________________________________________________________________
-       *Please add in a space character after your command.*
+     Here are the tasks in your list:
+     1.[D][?] return book (by: June 6th)
+     2.[E][?] project meeting (at: Aug 6th 2-4pm)
+    _______________________________________________________________________
 
     _______________________________________________________________________
      Got it. I've added this task:
@@ -46,14 +49,51 @@
      eg. deadline return book to Jurong Regional Library /by 6th June 2020
 
     _______________________________________________________________________
-       *Please add in a space character after your command.*
+     Got it. I've added this task:
+       [D][?] finish project CS2103T (by: today)
+     Now you have 5 task(s) in the list.
+    _______________________________________________________________________
+
+    _______________________________________________________________________
+       *Invalid command.*
+     Commands: bye, list, todo, event, deadline, delete
+
+    _______________________________________________________________________
+     Got it. I've added this task:
+       [T][?] Oral Presentation preparations
+     Now you have 6 task(s) in the list.
+    _______________________________________________________________________
+
+    _______________________________________________________________________
+       *Invalid command.*
+     Commands: bye, list, todo, event, deadline, delete
+
+    _______________________________________________________________________
+     Here are the tasks in your list:
+     1.[D][?] return book (by: June 6th)
+     2.[E][?] project meeting (at: Aug 6th 2-4pm)
+     3.[D][?] return book (by: Sunday)
+     4.[E][?] project meeting (at: Mon 2-4pm)
+     5.[D][?] finish project CS2103T (by: today)
+     6.[T][?] Oral Presentation preparations
+    _______________________________________________________________________
 
     _______________________________________________________________________
      Noted. I've removed this task:
        [D][?] return book (by: June 6th)
-     Now you have 3 task(s) in the list.
+     Now you have 5 task(s) in the list.
     _______________________________________________________________________
 
     _______________________________________________________________________
-       *Please add in a space character after your command.*
+     Here are the tasks in your list:
+     1.[E][?] project meeting (at: Aug 6th 2-4pm)
+     2.[D][?] return book (by: Sunday)
+     3.[E][?] project meeting (at: Mon 2-4pm)
+     4.[D][?] finish project CS2103T (by: today)
+     5.[T][?] Oral Presentation preparations
+    _______________________________________________________________________
+
+    _______________________________________________________________________
+     Bye. Hope to see you again soon!
+    _______________________________________________________________________
 

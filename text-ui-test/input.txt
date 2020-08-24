@@ -6,6 +6,11 @@ event project meeting /at Mon 2-4pm
 done 4
 done 5
 deadline finish project CS2103T /at today
+deadline finish project CS2103T /by today
+todoOP1
+todo Oral Presentation preparations
 hello
+list
 delete 1
+list
 bye

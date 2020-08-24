@@ -13,17 +13,15 @@ public class StringIdentifier {
         System.out.println("    _______________________________________________________________________");
 
         int commandSpace = str.indexOf(" ");
-        if (commandSpace < 0) {
-            throw new DukeException("       *Please add in a space character after your command.*\n");
 
-        } else if (str.equals("bye ")) {
+        if (str.equals("bye")) {
             close();
 
-        } else if (commandSpace <= 3) {
-            throw new DukeException("       *Invalid command.*\n     Commands: bye, list, todo, event, deadline, delete\n");
-
-        } else if (str.equals("list ")) {
+        } else if (str.equals("list")) {
             displayList();
+
+        } else if (commandSpace < 0) {
+            throw new DukeException("       *Invalid command.*\n     Commands: bye, list, todo, event, deadline, delete\n");
 
         } else if (str.substring(0, 5).equals("done ")) {
             int length = str.length();
