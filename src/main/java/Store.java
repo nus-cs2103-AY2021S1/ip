@@ -1,7 +1,8 @@
+import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Store {
+public class Store implements Iterable<Task> {
 
     private List<Task> store;
 
@@ -43,5 +44,10 @@ public class Store {
             list += String.format("%d.%s\n", i + 1, this.store.get(i).toString());
         }
         return list;
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return this.store.iterator();
     }
 }

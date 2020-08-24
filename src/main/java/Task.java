@@ -1,7 +1,7 @@
-public class Task {
+public abstract class Task implements Encodable<Task> {
 
-    private String description;
-    private boolean completed;
+    protected String description;
+    protected boolean completed;
 
     public Task(String description) {
         this.description = description;
