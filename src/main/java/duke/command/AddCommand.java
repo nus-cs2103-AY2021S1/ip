@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+import duke.exception.DukeInvalidIndexException;
 import duke.task.Task;
 import duke.TaskList;
 
@@ -21,8 +22,8 @@ public class AddCommand implements Command {
             tasks.addTask(this.task);
             storage.save(tasks);
             ui.showAdded(this.task, tasks.getSize());
-        } catch (IOException e) {
-            ui.printWindow(e.getMessage());
+        } catch (IOException | DukeInvalidIndexException e) {
+            ui.showError(e);
         }
         return true;
     }

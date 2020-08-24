@@ -32,8 +32,8 @@ public class TaskList {
             Task toBeDeleted = get(index);
             this.list.remove(index);
             return toBeDeleted;
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeInvalidIndexException();
+        } catch (DukeInvalidIndexException e) {
+            throw e;
         }
     }
 
@@ -42,8 +42,8 @@ public class TaskList {
             Task task = get(index);
             task.markAsDone();
             return task;
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeInvalidIndexException();
+        } catch (DukeInvalidIndexException e) {
+            throw e;
         }
     }
 
@@ -70,8 +70,12 @@ public class TaskList {
         return list.size();
     }
 
-    public Task get(int index) {
-        return this.list.get(index);
+    public Task get(int index) throws DukeInvalidIndexException {
+        try {
+            return this.list.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeInvalidIndexException();
+        }
     }
 
     public String getTasksOnDate(LocalDate date) {

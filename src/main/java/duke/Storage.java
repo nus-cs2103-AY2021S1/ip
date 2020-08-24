@@ -1,16 +1,12 @@
 package duke;
 
-import duke.exception.DukeInvalidData;
-import duke.exception.DukeInvalidDataException;
-import duke.exception.DukeInvalidDateTimeInputException;
-import duke.exception.DukeInvalidStoragePathException;
+import duke.exception.*;
 import duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -88,7 +84,7 @@ public class Storage {
         return list;
     }
 
-    public void save(TaskList taskList) throws IOException {
+    public void save(TaskList taskList) throws IOException, DukeInvalidIndexException {
         File file = new File(filePath);
         FileWriter writer = new FileWriter(file);
         for (int i = 0; i < taskList.getSize(); i++) {

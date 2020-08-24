@@ -20,9 +20,7 @@ public class DoneCommand implements Command {
             tasks.markDone(index);
             storage.save(tasks);
             ui.showMarkDone(tasks.get(index));
-        } catch (DukeInvalidIndexException e) {
-            ui.showError(e);
-        } catch (IOException e) {
+        } catch (DukeInvalidIndexException | IOException e) {
             ui.showError(e);
         }
         return true;
