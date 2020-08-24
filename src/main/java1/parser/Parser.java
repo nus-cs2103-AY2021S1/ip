@@ -13,7 +13,7 @@ public class Parser {
         String[] splitString = input.split(" ",2);
 
         if (splitString[0].equals("todo")) {
-            if(splitString.length == 1) {
+            if (splitString.length == 1) {
                 throw new DukeException("    ☹ OOPS!!! The description of a todo cannot be empty.");
             } else {
                 String info = splitString[1];
@@ -22,7 +22,7 @@ public class Parser {
             }
 
         } else if (splitString[0].equals("deadline")) {
-            if(splitString.length == 1) {
+            if (splitString.length == 1) {
                 throw new DukeException("    ☹ OOPS!!! The description of a deadline cannot be empty.");
             } else {
                 String info = splitString[1];
@@ -47,7 +47,7 @@ public class Parser {
             }
 
         } else if (splitString[0].equals("event")) {
-            if(splitString.length == 1) {
+            if (splitString.length == 1) {
                 throw new DukeException("    ☹ OOPS!!! The description of an event cannot be empty.");
             } else {
                 String info = splitString[1];
