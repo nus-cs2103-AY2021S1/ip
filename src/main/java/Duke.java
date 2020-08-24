@@ -1,5 +1,5 @@
-import javax.sound.midi.ShortMessage;
 import java.io.*;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -217,6 +217,8 @@ public class Duke {
                                 System.err.println(e);
                             } catch (IOException e) {
                                 e.printStackTrace();
+                            } catch (DateTimeParseException e){
+                                System.err.println(e.getMessage());
                             }
                         }
                     } catch(DukeException e){
