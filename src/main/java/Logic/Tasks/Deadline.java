@@ -1,21 +1,29 @@
 package Logic.Tasks;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalTime localTime;
+    protected LocalDate localDate;
 
-    public Deadline(String name, String by) {
+    public Deadline(String name, LocalDate localDate, LocalTime localTime) {
         super(name);
-        this.by = by;
+        this.localDate = localDate;
+        this.localTime = localTime;
     }
 
     @Override
     public String toData(){
         return "D|" + super.toData() + this.by;
     }
-
+    
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        String date = this.localDate.format(DateTimeFormatter.ofPattern("E MMM d yyyy"));
+        String time = this.localTime.format(DateTimeFormatter.ofPattern("HH mm a"));
+        return "[D]" + super.toString() + " (by: " + date + " " + time + ")";
     }
 }
