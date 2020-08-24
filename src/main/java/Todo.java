@@ -19,6 +19,6 @@ public class Todo extends Task{
 
     @Override
     public String toDataString() {
-        return "todo/" + taskString + "/" + status;
+        return "todo//" + taskString + "//" + status;
     }
 }
