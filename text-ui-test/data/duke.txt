@@ -1,2 +1,2 @@
-D | 1 | return book  |  Wednesday
-E | 0 | project meeting  |  Sun 2-4pm
+T | 0 | borrow book
+E | 0 | project meeting | 01-01-2020 12:30

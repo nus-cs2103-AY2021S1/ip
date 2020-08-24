@@ -25,62 +25,45 @@ OOPS!!! The description of a deadline time cannot be empty.
  ____________________________________________________________
  ____________________________________________________________
 Got it. I've added this task:
-[D][✘] return book  (by:  Wednesday)
+[D][✘] return book (by: 23 Feb 2020, 12:00 am)
 Now you have 2 tasks in the list.
+ ____________________________________________________________
+ ____________________________________________________________
+OOPS!!! The invalid date format has been keyed in. PLease enter in dd-MM-yyyy HH:mm format
  ____________________________________________________________
  ____________________________________________________________
 OOPS!!! The description of a event time cannot be empty.
  ____________________________________________________________
  ____________________________________________________________
 Got it. I've added this task:
-[E][✘] project meeting  (at:  Sun 2-4pm)
+[E][✘] project meeting (at: 1 Jan 2020, 12:30 pm)
 Now you have 3 tasks in the list.
  ____________________________________________________________
  ____________________________________________________________
+OOPS!!! The invalid date format has been keyed in. PLease enter in dd-MM-yyyy HH:mm format
+ ____________________________________________________________
+ ____________________________________________________________
 Nice! I've marked this task as done:
-[D][✓] return book  (by:  Wednesday)
+[D][✓] return book (by: 23 Feb 2020, 12:00 am)
  ____________________________________________________________
  ____________________________________________________________
  Here are the tasks in your list:
 1.[T][✘] borrow book
-2.[D][✓] return book  (by:  Wednesday)
-3.[E][✘] project meeting  (at:  Sun 2-4pm)
- ____________________________________________________________
- ____________________________________________________________
-OOPS!!! The invalid done number.
- ____________________________________________________________
- ____________________________________________________________
- Here are the tasks in your list:
-1.[T][✘] borrow book
-2.[D][✓] return book  (by:  Wednesday)
-3.[E][✘] project meeting  (at:  Sun 2-4pm)
- ____________________________________________________________
- ____________________________________________________________
-OOPS!!! The invalid delete number.
- ____________________________________________________________
- ____________________________________________________________
- Here are the tasks in your list:
-1.[T][✘] borrow book
-2.[D][✓] return book  (by:  Wednesday)
-3.[E][✘] project meeting  (at:  Sun 2-4pm)
+2.[D][✓] return book (by: 23 Feb 2020, 12:00 am)
+3.[E][✘] project meeting (at: 1 Jan 2020, 12:30 pm)
  ____________________________________________________________
  ____________________________________________________________
 Noted. I've removed this task:
-[T][✘] borrow book
+[D][✓] return book (by: 23 Feb 2020, 12:00 am)
 Now you have 2 tasks in the list.
  ____________________________________________________________
  ____________________________________________________________
  Here are the tasks in your list:
-1.[D][✓] return book  (by:  Wednesday)
-2.[E][✘] project meeting  (at:  Sun 2-4pm)
+1.[T][✘] borrow book
+2.[E][✘] project meeting (at: 1 Jan 2020, 12:30 pm)
  ____________________________________________________________
  ____________________________________________________________
 OOPS!!! The invalid delete number.
- ____________________________________________________________
- ____________________________________________________________
- Here are the tasks in your list:
-1.[D][✓] return book  (by:  Wednesday)
-2.[E][✘] project meeting  (at:  Sun 2-4pm)
  ____________________________________________________________
  ____________________________________________________________
 Bye. Hope to see you again soon!

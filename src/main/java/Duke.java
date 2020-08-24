@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -130,6 +131,10 @@ public class Duke {
                 } catch (DukeDeleteException e) {
                     printLine();
                     System.out.println("OOPS!!! The invalid delete number.");
+                    printLine();
+                } catch (DateTimeParseException e){
+                    printLine();
+                    System.out.println("OOPS!!! The invalid date format has been keyed in. PLease enter in dd-MM-yyyy HH:mm format");
                     printLine();
                 }
                 if (sc.hasNext()) {
