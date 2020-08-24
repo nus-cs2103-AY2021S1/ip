@@ -8,7 +8,7 @@ Hello! I'm Duke
 What can I do for you?
 _____________________________________________________
 Got it. I've added this task:
-  [T][✘] todo borrow book
+  [T][✘] borrow book 
 Now you have 1 tasks in the list.
 _____________________________________________________
 _____________________________________________________
@@ -28,7 +28,7 @@ Now you have 4 tasks in the list.
 _____________________________________________________
 _____________________________________________________
 Here are the tasks in your list:
-1. [T][✘] todo borrow book
+1. [T][✘] borrow book 
 2. [D][✘] return book (by: Sunday)
 3. [E][✘] project meeting (at: Mon 2-4pm)
 4. [D][✘] do homework (by: no idea :-p)
@@ -39,7 +39,7 @@ Nice! I've marked this task as done:
 _____________________________________________________
 _____________________________________________________
 Here are the tasks in your list:
-1. [T][✘] todo borrow book
+1. [T][✘] borrow book 
 2. [D][✓] return book (by: Sunday)
 3. [E][✘] project meeting (at: Mon 2-4pm)
 4. [D][✘] do homework (by: no idea :-p)

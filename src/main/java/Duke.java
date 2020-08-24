@@ -1,29 +1,31 @@
+import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static final String PATH = "data/duke.txt";
+            
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo + "\nHello! I'm Duke" + "\nWhat can I do for you?");
-
-        List<Task> lst = new ArrayList<>();
+        
+        ArrayList<Task> lst = loadFile();
+        //ArrayList<Task> lst = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-        boolean boo = true;
-        while (boo){
+        while (sc.hasNext()){
             String str = sc.nextLine();
             String[] strArr = str.split(" ");
             try {
                 check(strArr);
                 if (str.equals("bye")) {
-                    boo = false;
                     System.out.println("_____________________________________________________\n" + 
                             "Bye. Hope to see you again soon!\n" +
                             "_____________________________________________________");
+                    System.exit(0);
                 } else if (str.equals("list")) {
                     System.out.println("_____________________________________________________\n" + 
                             "Here are the tasks in your list:");
@@ -37,6 +39,7 @@ public class Duke {
                             "Nice! I've marked this task as done: \n" + "  " +
                             lst.get(Integer.parseInt(strArr[1]) - 1).toString() +
                             "\n_____________________________________________________");
+                    writeFile(lst);
                 } else if (strArr[0].equals("delete")) {
                     int i = Integer.parseInt(strArr[1]) - 1;
                     Task t = lst.get(Integer.parseInt(strArr[1]) - 1);
@@ -46,14 +49,20 @@ public class Duke {
                             t.toString() + "\n" +
                             "Now you have " + lst.size() + " tasks in the list.\n" +
                             "_____________________________________________________");
+                    writeFile(lst);
                 } else {
                     if (strArr[0].equals("todo")) {
-                        Task task = new Todo(str);
+                        String sd = "";
+                        for (int i = 1; i < strArr.length; i++) {
+                            sd += strArr[i] + " ";
+                        }
+                        Task task = new Todo(sd);
                         lst.add(task);
                         System.out.println("_____________________________________________________\n" + 
                                 "Got it. I've added this task:\n" + "  " + task.toString() + "\n" +
                                 "Now you have " + lst.size() + " tasks in the list.\n" +
                                 "_____________________________________________________");
+                        writeFile(lst);
                     } else if (strArr[0].equals("deadline")) {
                         String sd = "";
                         String sb = "";
@@ -78,6 +87,7 @@ public class Duke {
                                 "Got it. I've added this task:\n" + "  " + task.toString() + "\n" +
                                 "Now you have " + lst.size() + " tasks in the list.\n" +
                                 "_____________________________________________________");
+                        writeFile(lst);
                     } else if (strArr[0].equals("event")) {
                         String sd = "";
                         String sa = "";
@@ -85,6 +95,7 @@ public class Duke {
                         for (int i = 1; i < strArr.length - 1; i++) {
                             if (strArr[i].equals("/at")) {
                                 b = false;
+                                sd = sd.substring(0, sd.length() - 1);
                             }
                             if (b) {
                                 sd += strArr[i] + " ";
@@ -102,6 +113,7 @@ public class Duke {
                                 "Got it. I've added this task:\n" + "  " + task.toString() + "\n" +
                                 "Now you have " + lst.size() + " tasks in the list.\n" +
                                 "_____________________________________________________");
+                        writeFile(lst);
                     }
                 }
             } catch (Exception e) {
@@ -120,5 +132,41 @@ public class Duke {
                 !arr[0].equals("list") && !arr[0].equals("bye") && !arr[0].equals("done") && !arr[0].equals("delete")) {
             throw new DukeException("other");
         }
+    }
+    
+    public static ArrayList<Task> loadFile() throws IOException {
+        File file = new File(PATH);
+        ArrayList<Task> taskList = new ArrayList<>();
+        if(file.exists()) {
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line = null;
+            while((line = br.readLine()) != null) {
+                String[] strArr = line.split(" , ");
+                switch(strArr[0]) { 
+                    case "T":
+                        taskList.add(new Todo(strArr[1], strArr[2]));
+                        break; 
+                    case "D":
+                        taskList.add(new Deadline(strArr[1], strArr[2], strArr[3]));
+                        break;
+                    case "E":
+                        taskList.add(new Event(strArr[1], strArr[2], strArr[3]));
+                        break;
+                }
+            }
+        } else {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        }
+        return taskList;
+    }
+    
+    public static void writeFile(ArrayList<Task> tasks) throws IOException {
+        FileWriter writer = new FileWriter(PATH);
+        for(Task task : tasks) {
+            writer.write(task.saveString() + "\n");
+        }
+        writer.close();
     }
 }
