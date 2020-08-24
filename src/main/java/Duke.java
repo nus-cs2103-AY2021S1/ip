@@ -3,6 +3,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
 
@@ -25,6 +28,23 @@ public class Duke {
         }
     }
 
+    private static String timeConverter(String input) throws DukeException{
+        try {
+            String ret = "";
+            int hour = Integer.parseInt(input) / 100;
+            if (hour >= 12) {
+                ret = "PM";
+                ret = String.valueOf(hour == 12 ? 12 : hour - 12).concat(ret);
+            } else {
+                ret = "AM";
+                ret = String.valueOf(hour).concat(ret);
+            }
+            return ret;
+        } catch (NumberFormatException ex) {
+            throw new DukeException("Time in wrong format!");
+        }
+    }
+
     public static Task addItem(String input) throws DukeException {
         String arr[] = input.split(" ", 2);
         Task curr = new Task("");
@@ -34,19 +54,26 @@ public class Duke {
             curr = new ToDo(arr[1]);
             list.add(curr);
         } else if (arr[0].equals("deadline")) {
-            String info[] = arr[1].split("/by", 2);
+            String info[] = arr[1].split("/by ", 2);
             if (info.length == 1) {
-                throw new DukeException("Deadline not provided!");
+                throw new DukeException("Deadline not provided or incorrect format!");
             } else {
-                curr = new Deadline(info[0], info[1]);
+                String correct = info[1].replace("/", "-");
+                LocalDate newDate = LocalDate.parse(correct);
+                curr = new Deadline(info[0], newDate);
                 list.add(curr);
             }
         } else if (arr[0].equals("event")) {
-            String info[] = arr[1].split("/at", 2);
+            String info[] = arr[1].split("/at ", 2);
             if (info.length == 1) {
-                throw new DukeException("Time not provided!");
+                throw new DukeException("Date/Time not provided in correct format!");
             } else {
-                curr = new Event(info[0], info[1]);
+                String[] data = info[1].split(" ", 2);
+
+                String correct =  data[0].replace("/", "-");
+                LocalDate newDate = LocalDate.parse(correct);
+                String newTime = timeConverter(data[1]);
+                curr = new Event(info[0], newDate, newTime);
                 list.add(curr);
             }
         }
@@ -105,13 +132,20 @@ public class Duke {
                 }
                 list.add(newToDo);
             } else if (curr[0].equals("D")){
-                Task newDeadline = new Deadline(curr[2], curr[3]);
+                // Assumes that date input is correct
+                String correct =  curr[3].replace("/", "-");
+                LocalDate newDate = LocalDate.parse(correct);
+                Task newDeadline = new Deadline(curr[2], newDate);
                 if (curr[1].equals("1")) {
                     newDeadline.markAsDone();
                 }
                 list.add(newDeadline);
             } else if (curr[0].equals("E"))  {
-                Task newEvent = new Event(curr[2], curr[3]);
+                String[] data = curr[3].split(" ", 2);
+                String correct =  data[0].replace("/", "-");
+                LocalDate newDate = LocalDate.parse(correct);
+                String newTime = timeConverter(data[1]);
+                Task newEvent = new Event(curr[2], newDate, newTime);
                 if (curr[1].equals("1")) {
                     newEvent.markAsDone();
                 }
