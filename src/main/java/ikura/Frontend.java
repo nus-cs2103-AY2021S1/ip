@@ -5,15 +5,22 @@ package ikura;
 
 import java.util.Scanner;
 import java.util.Optional;
+import java.io.PrintStream;
 
 public class Frontend {
 
     private final Scanner sc;
     private final String name;
+    private final PrintStream out;
 
     public Frontend(String name) {
-        this.name = name;
-        this.sc = new Scanner(System.in);
+        this(name, new Scanner(System.in), System.out);
+    }
+
+    public Frontend(String name, Scanner scanner, PrintStream out) {
+        this.name   = name;
+        this.sc     = scanner;
+        this.out    = out;
     }
 
     public void greet() {
@@ -22,7 +29,7 @@ public class Frontend {
     }
 
     public Optional<String> readLine() {
-        System.out.printf("> ");
+        this.out.printf("> ");
 
         return this.sc.hasNextLine()
             ? Optional.of(this.sc.nextLine())
@@ -30,8 +37,8 @@ public class Frontend {
     }
 
     public void println(String fmt, Object... args) {
-        System.out.printf(fmt, args);
-        System.out.println();
+        this.out.printf(fmt, args);
+        this.out.println();
     }
 
     public void beginLog() {
