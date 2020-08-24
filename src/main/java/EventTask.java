@@ -7,6 +7,9 @@ public class EventTask extends Task{
     }
 
     @Override
+    public String fileString() {return "E | " + super.fileString() + " | " + due; }
+
+    @Override
     public String toString() {
         return "[E] " + super.toString() + " (at: " + due + ")";
     }
