@@ -5,8 +5,8 @@ package tasks;
  */
 
 public class Task {
-    protected String name;
-    protected boolean done;
+    private String name;
+    private boolean done;
 
     public Task(String name, boolean done) {
         this.name = name;
@@ -15,6 +15,10 @@ public class Task {
 
     public void setDone(boolean done) {
         this.done = done;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public String getStatusIcon() {

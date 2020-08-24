@@ -6,7 +6,8 @@ import tasks.TaskList;
 import java.util.Scanner;
 
 public class Ui {
-    Scanner sc;
+    private Scanner sc;
+    private final String ln = "----------------------------------------------------------------";
 
     public Ui() {
         this.sc = new Scanner(System.in);
@@ -33,7 +34,10 @@ public class Ui {
                 : " tasks in your list."));
     }
     public void printList(TaskList tasks) {
+        System.out.println("Here are your tasks:");
+        System.out.println(ln);
         System.out.println(tasks);
+        System.out.println(ln);
     }
     public void printExitMessage() {
         System.out.println("Goodbye!");
@@ -46,5 +50,12 @@ public class Ui {
     }
     public void printDelTask(TaskList tasks, int idx) {
         System.out.println("The task " + tasks.getTasks().get(idx - 1) + " has been removed.");
+    }
+    public void printFindTask(String str, int num) {
+        if (num == 0) {
+            System.out.println("I couldn't find any tasks matching your keyword.");
+        } else {
+            System.out.println("I found " + num + (num > 1 ? " tasks " : " task ") + "matching your keyword.\n" + str);
+        }
     }
 }

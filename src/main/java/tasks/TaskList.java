@@ -10,11 +10,9 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    private int numTasks;
     private ArrayList<Task> list;
 
     public TaskList() {
-        this.numTasks = 1;
         this.list = new ArrayList<>();
     }
 
@@ -23,7 +21,6 @@ public class TaskList {
      * @param item The task to be added
      */
     public void addItem(Task item) {
-        numTasks++;
         list.add(item);
     }
 
@@ -31,9 +28,6 @@ public class TaskList {
         return list.size();
     }
 
-    public int getNumTasks() {
-        return numTasks;
-    }
     public ArrayList<Task> getTasks() {
         return list;
     }
