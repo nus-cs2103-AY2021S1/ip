@@ -1,7 +1,11 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class TaskList {
     ArrayList<Task> taskList = new ArrayList<>();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
     public Task addTask(String taskType, String taskDescription) {
         Task newTask;
@@ -11,12 +15,12 @@ public class TaskList {
             String[] desAndDate = taskDescription.split("/at");
             String date = desAndDate[1];
             taskDescription = desAndDate[0] ;
-            newTask = new Event(taskDescription, date);
+            newTask = new Event(taskDescription, LocalDateTime.parse(date.strip(), formatter));
         } else {
             String[] desAndDate = taskDescription.split("/by");
             String date = desAndDate[1];
             taskDescription = desAndDate[0] ;
-            newTask = new Deadline(taskDescription, date);
+            newTask = new Deadline(taskDescription, LocalDateTime.parse(date.strip(), formatter));
         }
         this.taskList.add(newTask);
         return newTask;
@@ -37,6 +41,17 @@ public class TaskList {
     }
 
     public int getNoTask() { return  this.taskList.size(); }
+
+    public String getTaskDueOn(String dueDate){
+        String output = "";
+
+        for (Task task : this.taskList) {
+            if (task.isDueOn(LocalDate.parse(dueDate.strip(), DateTimeFormatter.ofPattern("dd-MM-yyyy")))) {
+                output += task.toString() + "\n";
+            }
+        }
+        return (output == "" ? "None\n" : output) ;
+    }
 
     public boolean isEmpty() { return this.taskList.isEmpty();}
 

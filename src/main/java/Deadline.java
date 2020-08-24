@@ -1,13 +1,14 @@
-public class Deadline extends Task{
-    String date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String date) {
-        super(description);
-        this.date = date;
+public class Deadline extends Task{
+
+    public Deadline(String description, LocalDateTime dueDate) {
+        super(description, dueDate);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by :" + this.date + ")";
+        return "[D]" + super.toString() + " (by :" + super.getDateString() + ")";
     }
 }

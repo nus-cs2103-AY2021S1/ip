@@ -29,4 +29,5 @@ public class DukeExceptions {
             return "Master the list is empty";
         }
     }
+
 }

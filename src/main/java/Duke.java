@@ -1,3 +1,8 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,6 +17,7 @@ public class Duke {
         TODO,
         EVENT,
         DEADLINE,
+        DATE
     }
 
     public void printGreeting() {
@@ -147,6 +153,16 @@ public class Duke {
         }
     }
 
+    public void getTaskOn(String dueDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        System.out.println(
+            this.border
+            + "Master here are the tasks due on " + dueDate.strip() + " :\n"
+            + this.taskList.getTaskDueOn(dueDate)
+            + this.border
+        );
+    }
+
     public boolean isRunning() {
         return this.isRunning;
     }
@@ -173,8 +189,10 @@ public class Duke {
                 this.printIncompleteCommandError(command.toString().toLowerCase());
             } catch (ArrayIndexOutOfBoundsException e) {
                 this.printNoDateinput(command.toString().toLowerCase());
+            } catch (DateTimeParseException e) {
+                System.out.println("incorrect date time format dd-mm-yyyy hhmm");
             }
-        } else if (command == commands.DELETE){
+        } else if (command == commands.DELETE) {
             try {
                 this.deleteTaskHandler(parameters);
             } catch (DukeExceptions.NoTaskToDeleteException e) {
@@ -184,9 +202,10 @@ public class Duke {
             } catch (NumberFormatException e) {
                 this.noIndexKeyedError();
             }
+        } else if (command == commands.DATE) {
+            this.getTaskOn(parameters);
         }
     }
-
 
     public static void main(String[] args) {
 
