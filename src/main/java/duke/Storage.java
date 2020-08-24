@@ -18,7 +18,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    private static Task genTaskFromString(String string) {
+    public static Task genTaskFromString(String string) {
         boolean status = (string.charAt(4) == '\u2713');
         if (string.charAt(1) == 'T') {
             return new ToDo(string.substring(7), status);
