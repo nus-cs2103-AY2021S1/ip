@@ -5,6 +5,12 @@ import java.io.Reader;
 
 public class Ui {
     private final BufferedReader INPUT_LINE;
+    private final String logo = " ______   _____  _____  ___  ____   ________  \n" +
+                                "|_   _ `.|_   _||_   _||_  ||_  _| |_   __  | \n" +
+                                "  | | `. \\ | |    | |    | |_/ /     | |_ \\_| \n" +
+                                "  | |  | | | '    ' |    |  __'.     |  _| _  \n" +
+                                " _| |_.' /  \\ \\__/ /    _| |  \\ \\_  _| |__/ | \n" +
+                                "|______.'    `.__.'    |____||____||________| ";
 
     /**
      * Instantiates Ui object and BufferedReader object to scan user input.
@@ -32,7 +38,7 @@ public class Ui {
      * @return void
      */
     public void printWelcomeMessage() {
-        System.out.println("Hello there! My name is Duke." + "\nHow may I assist you today?");
+        System.out.println("Hello there! My name is \n" + logo + "\nHow may I assist you today?");
         printBorder();
     }
 

@@ -52,7 +52,7 @@ public class Parser {
 
                 if (numOfInput < 4) {
                     throw new DukeException("☹ Oh no! The correct way to log an event is: (event) " +
-                            "(description) (/at) (date)");
+                                            "(description) (/at) (date)");
                 }
 
                 boolean checkForEvent = false;

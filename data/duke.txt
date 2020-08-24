@@ -1,4 +1,2 @@
-D|1|submit project|30/8/2020 2359
-T|1|read book
-E|1|project meeting|16/1/2012 1342
-D|0|project|12/2/2013 1203
+D|0|return book|5/7/2018 1800
+E|0|project meeting|12/3/2019 1100

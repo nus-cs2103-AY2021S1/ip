@@ -16,13 +16,14 @@ public class Duke {
      * Loads input file and starts parsing.
      * @return void
      */
-    public void execute() {
+    public void execute() throws DukeException {
         try {
             TaskList inputArray = new TaskList(storage.load());
             arrayOfTasks = inputArray;
         } catch (DukeException error) {
-            System.out.println("File cannot be loaded from the specified file path. Please try again!");
             arrayOfTasks = new TaskList();
+            throw new DukeException("Unable to load data from 'duke.txt'. Please ensure that you have" +
+                                    " a 'data' folder that contains 'duke.txt' in project directory.");
         } 
 
         ui.printWelcomeMessage();
@@ -67,7 +68,7 @@ public class Duke {
      * @param args CMD arguments
      * @return void
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Duke runDuke = new Duke("data/duke.txt");
         runDuke.execute();
     }

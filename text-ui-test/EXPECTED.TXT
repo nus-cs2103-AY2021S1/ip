@@ -1,4 +1,10 @@
-Hello there! My name is Duke.
+Hello there! My name is
+ ______   _____  _____  ___  ____   ________
+|_   _ `.|_   _||_   _||_  ||_  _| |_   __  |
+  | | `. \ | |    | |    | |_/ /     | |_ \_|
+  | |  | | | '    ' |    |  __'.     |  _| _
+ _| |_.' /  \ \__/ /    _| |  \ \_  _| |__/ |
+|______.'    `.__.'    |____||____||________|
 How may I assist you today?
 ---------------------------
 Thank you for your input. The following task has been added to the list:
@@ -6,38 +12,24 @@ Thank you for your input. The following task has been added to the list:
 You have a total of 1 task in the list.
 ---------------------------
 Thank you for your input. The following task has been added to the list:
- [D][✘] return book (by: June 6th)
+ [D][✘] return book (by: 5th of July 2018, 6pm)
 You have a total of 2 tasks in the list.
 ---------------------------
 Thank you for your input. The following task has been added to the list:
- [E][✘] project meeting (at: Aug 6th 2-4pm)
+ [E][✘] project meeting (at: 12th of March 2019, 11am)
 You have a total of 3 tasks in the list.
 ---------------------------
-Thank you for your input. The following task has been added to the list:
- [T][✘] join sports club
-You have a total of 4 tasks in the list.
----------------------------
-Thank you for your input. The following task has been added to the list:
- [T][✘] borrow book
-You have a total of 5 tasks in the list.
----------------------------
 These are the tasks in your list:
-1. [T][✘] read book
-2. [D][✘] return book (by: June 6th)
-3. [E][✘] project meeting (at: Aug 6th 2-4pm)
-4. [T][✘] join sports club
-5. [T][✘] borrow book
----------------------------
-Thank you for your input. The following task has been added to the list:
- [D][✘] return book (by: Sunday)
-You have a total of 6 tasks in the list.
----------------------------
-Thank you for your input. The following task has been added to the list:
- [E][✘] project meeting (at: Mon 2-4pm)
-You have a total of 7 tasks in the list.
+1.[T][✘] read book
+2.[D][✘] return book (by: 5th of July 2018, 6pm)
+3.[E][✘] project meeting (at: 12th of March 2019, 11am)
 ---------------------------
 The following task has been successfully removed:
- [T][✘] read book
-You have a total of 6 tasks in the list.
+[T][✘] read book
+You have a total of 2 tasks in the list.
 ---------------------------
+These are the matching tasks in your list:
+1.[D][✘] return book (by: 5th of July 2018, 6pm)
+---------------------------
+Tasks have been successfully saved to duke.txt!
 Goodbye. Hope to see you again soon!
