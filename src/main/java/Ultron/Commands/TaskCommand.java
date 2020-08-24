@@ -1,4 +1,11 @@
+package Ultron.Commands;
+
 import java.util.function.Function;
+
+import Ultron.Tasks.Deadline;
+import Ultron.Tasks.Task;
+import Ultron.Tasks.Event;
+import Ultron.Tasks.Todo;
 
 public enum TaskCommand {
 
@@ -8,7 +15,7 @@ public enum TaskCommand {
     deadline(Deadline::parseCommand);
 
     //Create a variable to store the Function
-    protected final Function<String, Task> commandParser;
+    public final Function<String, Task> commandParser;
 
     //Constructor for the function
     TaskCommand(final Function<String, Task> commandParser) {

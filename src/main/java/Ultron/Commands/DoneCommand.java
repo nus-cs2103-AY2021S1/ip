@@ -1,3 +1,12 @@
+package Ultron.Commands;
+
+import Ultron.Exceptions.ExceptionType;
+import Ultron.Exceptions.UltronException;
+import Ultron.Parser;
+import Ultron.Storage;
+import Ultron.TaskList;
+import Ultron.UI;
+
 public class DoneCommand extends Command {
 
     public DoneCommand(String arguments){

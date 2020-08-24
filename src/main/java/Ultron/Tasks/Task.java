@@ -1,3 +1,5 @@
+package Ultron.Tasks;
+
 public abstract class Task {
 
     //Store the messages

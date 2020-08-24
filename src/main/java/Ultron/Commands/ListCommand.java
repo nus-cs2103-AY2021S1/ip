@@ -1,3 +1,11 @@
+package Ultron.Commands;
+
+import Ultron.Exceptions.ExceptionType;
+import Ultron.Exceptions.UltronException;
+import Ultron.Storage;
+import Ultron.TaskList;
+import Ultron.UI;
+
 public class ListCommand extends Command {
 
     public ListCommand(String arguments){
@@ -5,14 +13,11 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws UltronException{
+    public void execute(TaskList taskList, UI ui, Storage storage) throws UltronException {
 
         //Check if there are arguments
-        if (this.getArguments().trim().length() > 0){
-
+        if (this.getArguments().trim().length() > 0)
             throw new UltronException("list", ExceptionType.TOO_MUCH_ARGUMENTS);
-
-        }
 
         //If the list is empty
         if(taskList.size() == 0){

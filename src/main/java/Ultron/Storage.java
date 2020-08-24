@@ -1,3 +1,5 @@
+package Ultron;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -6,6 +8,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import Ultron.Tasks.Task;
+import Ultron.Exceptions.UltronException;
+import Ultron.Exceptions.ExceptionType;
+import Ultron.Commands.TaskCommand;
 
 /**
  * The main Storage class for Ultron
@@ -108,20 +115,4 @@ public class Storage {
         }
     }
 
-
-    public static void main(String[] args){
-        Storage hello = new Storage("data/data.txt");
-        try{
-            ArrayList<Task> lst = hello.load();
-            lst.add(new Todo("hello"));
-            lst.add(new Deadline("hello", "Tomorrow"));
-            for(Task tsk: lst){
-                System.out.println(tsk);
-            }
-            hello.writeAll(lst);
-        } catch (UltronException e){
-            System.out.println(e.getMessage());
-        }
-
-    }
 }

@@ -1,6 +1,15 @@
+package Ultron.Commands;
+
+import Ultron.Exceptions.ExceptionType;
+import Ultron.Exceptions.UltronException;
+import Ultron.Storage;
+import Ultron.TaskList;
+import Ultron.Tasks.Task;
+import Ultron.UI;
+
 public class TaskAllocator extends Command{
 
-    private TaskCommand taskCommand;
+    private final TaskCommand taskCommand;
 
     public TaskAllocator(String command, String arguments) throws UltronException {
 

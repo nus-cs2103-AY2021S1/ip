@@ -1,37 +1,39 @@
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+package Ultron.Tasks;
+
 import java.util.Date;
+import java.text.DateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
-public class Event extends Task {
+public class Deadline extends Task {
 
     //Store the variables
     private String at = null;
     private Date date = null;
     private static final Pattern DATEMATCH =
-            Pattern.compile("^(.*) (/at) (.*)$");
+            Pattern.compile("^(.*) (/by) (.*)$");
     private static final DateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm");
 
     //Constructor for the event class
-    public Event(final String description, final String at) {
+    public Deadline(final String description, final String by) {
 
         //Call the superclass constructor
         super(description);
 
         //Store the at variable
-        this.at = at;
+        at = by;
     }
 
     //Constructor for the event class
-    public Event(final String description, final Date at) {
+    public Deadline(final String description, final Date by) {
 
         //Call the superclass constructor
         super(description);
 
         //Store the at variable
-        this.date = at;
+        date = by;
     }
 
     /**
@@ -41,25 +43,24 @@ public class Event extends Task {
     public String getDate() {
         if (at != null){
             //Return the date
-            return at;
+            return this.at;
         } else {
-            return new SimpleDateFormat("dd-MM-yyyy HHmm").format(date);
+          return new SimpleDateFormat("dd-MM-yyyy HHmm").format(date);
         }
 
     }
 
     @Override
     public String getType() {
-        return "EVENT";
+        return "DEADLINE";
     }
 
     @Override
     public String getCommand() {
-        return String.format("%s /at %s", getMessage(), getDate());
+        return String.format("%s /by %s", getMessage(), getDate());
     }
 
     public static Task parseCommand(final String args) {
-
         //Create the matcher
         Matcher matcher = DATEMATCH.matcher(args);
 
@@ -77,20 +78,19 @@ public class Event extends Task {
             Date date1 = format.parse(date);
 
             //Pass the date to the constructor
-            return new Event(name, date1);
+            return new Deadline(name, date1);
         } catch (ParseException e){
 
             //Pass the 2 arguments into the function
-            return new Event(name, date);
+            return new Deadline(name, date);
         }
-
 
     }
 
     @Override
     public String toString() {
-        return "[E]"
+        return "[D]"
                 + super.toString()
-                + String.format(" (at: %s)", this.getDate());
+                + String.format(" (by: %s)", this.getDate());
     }
 }

@@ -1,7 +1,14 @@
+package Ultron.Commands;
+
+import Ultron.Storage;
+import Ultron.UI;
+import Ultron.TaskList;
+import Ultron.Exceptions.UltronException;
+
 public abstract class Command {
 
-    private boolean isExit;
-    private String arguments;
+    private final boolean isExit;
+    private final String arguments;
 
     public Command(boolean isExit, String arguments){
         this.isExit = isExit;

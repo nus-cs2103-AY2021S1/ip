@@ -1,3 +1,5 @@
+package Ultron.Exceptions;
+
 public class UltronException extends Exception {
 
     public UltronException(final String inputString,

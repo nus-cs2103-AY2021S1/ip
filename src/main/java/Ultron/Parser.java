@@ -1,4 +1,15 @@
-import java.util.ArrayList;
+package Ultron;
+
+import Ultron.Commands.Command;
+import Ultron.Commands.TaskAllocator;
+import Ultron.Commands.ByeCommand;
+import Ultron.Commands.ListCommand;
+import Ultron.Commands.HelpCommand;
+import Ultron.Commands.DeleteCommand;
+import Ultron.Commands.DoneCommand;
+import Ultron.Exceptions.UltronException;
+import Ultron.Exceptions.ExceptionType;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,30 +22,29 @@ public class Parser {
 
         //Switch case to process the commands
         switch (input) {
+        //If the user keys in bye
+        case "bye":
+            return new ByeCommand(arguments);
 
-            //If the user keys in bye
-            case "bye":
-                return new ByeCommand(arguments);
+        //If the user keys in list
+        case "list":
+            return new ListCommand(arguments);
 
-            //If the user keys in list
-            case "list":
-                return new ListCommand(arguments);
+        //Check if the user is asking for help
+        case "help":
+            return new HelpCommand(arguments);
 
-            //Check if the user is asking for help
-            case "help":
-                return new HelpCommand(arguments);
+        //Check if the user is deleting some of the items
+        case "delete":
+            return new DeleteCommand(arguments);
 
-            //Check if the user is deleting some of the items
-            case "delete":
-                return new DeleteCommand(arguments);
+        //Check if the user is done with any task
+        case "done":
+            return new DoneCommand(arguments);
 
-            //Check if the user is done with any task
-            case "done":
-                return new DoneCommand(arguments);
-
-            //Otherwise it will be a task to be added
-            default:
-                return new TaskAllocator(input, arguments);
+        //Otherwise it will be a task to be added
+        default:
+            return new TaskAllocator(input, arguments);
         }
 
     }
