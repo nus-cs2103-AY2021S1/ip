@@ -58,6 +58,10 @@ public class Task {
         return 0 + "," + description;
     }
 
+    /**
+     * Gets description of task.
+     * @return String description of Task object.
+     */
     public String getDescription() {
         return description;
     }

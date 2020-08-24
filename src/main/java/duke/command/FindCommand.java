@@ -2,8 +2,16 @@ package duke.command;
 
 import duke.*;
 
+/**
+ * Represents a command to find mathcing keywords in list.
+ */
 public class FindCommand extends Command {
 
+    /**
+     * Class constructor.
+     * @param command String parsed by Parser object.
+     * @param extra String keyword of task to be searched.
+     */
     public FindCommand(String command, String extra) {
         super(command, extra);
     }

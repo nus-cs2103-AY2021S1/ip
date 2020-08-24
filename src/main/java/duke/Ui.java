@@ -39,7 +39,15 @@ public class Ui {
     }
 
     /**
-     * Prints out the message to inform user that tasks have been saved onto tasks.csv file.
+     * Prints out to the user to indicate an empty list.
+     */
+    public void printNoTasks() {
+        System.out.println("Oops! Your list is empty!");
+    }
+
+    /**
+     * Prints out the message to inform user that tasks have
+     * been saved onto tasks.csv file.
      */
     public void printSave() {
         System.out.println("List saved to hard disk "
@@ -47,10 +55,12 @@ public class Ui {
     }
 
     /**
-     * Prints out the task that user has added into TaskList object and also the number of tasks
+     * Prints out the task that user has added into
+     * TaskList object and also the number of tasks
      * currently in the list.
      * @param task Task object user added.
-     * @param taskNumber Integer number representing number of Task objects in the TaskList object.
+     * @param taskNumber Integer number representing number of
+     *                   Task objects in the TaskList object.
      */
     public void printAdded(Task task, int taskNumber) {
         System.out.println(">" + "added: " + task + "<");
@@ -63,7 +73,8 @@ public class Ui {
      * Prints out the task that user deleted and also the number of tasks
      * currently in the list.
      * @param task Task object user deleted.
-     * @param taskNumber Integer number represent number of Task objects remaining in the TaskList object.
+     * @param taskNumber Integer number represent number of
+     *                   Task objects remaining in the TaskList object.
      */
     public void printDeleted(Task task, int taskNumber) {
         System.out.println("I have deleted this task: \n" + task);
@@ -74,7 +85,7 @@ public class Ui {
 
     /**
      * Prints out the task that user has marked as done.
-     * @param tasks Task object marked done by user.
+     * @param tasks TaskList object of the chat bot.
      * @param taskNumber Integer number representing the index of the task
      *                   that was marked as done.
      */
@@ -83,10 +94,19 @@ public class Ui {
                 + tasks.getTask(taskNumber));
     }
 
+    /**
+     * Prints out the tasks that user wants to find.
+     * @param tasks TaskList object of the chat bot.
+     */
     public void printFind(TaskList tasks) {
         System.out.println("Here are the matching tasks in your list:");
     }
 
+    /**
+     * Prints out to the user that no tasks corresponding
+     * to the keyword was found.
+     * @param match
+     */
     public void printNoMatch(String match) {
         System.out.println("Sorry! No matches found for " + match + ".");
     }

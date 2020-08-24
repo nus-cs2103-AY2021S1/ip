@@ -27,7 +27,8 @@ public class Parser {
      * @throws DukeEmptyArgumentException If argument of done and delete commands are empty.
      */
     public static Command parse(String input)
-            throws DukeEmptyArgumentException {
+            throws DukeEmptyArgumentException,
+            DukeEmptyDescriptionException {
         String command = input.strip();
         String[] commandWordArray = command.split(SPACE);
         if (command.equals(BYE)) {
@@ -55,12 +56,21 @@ public class Parser {
         if (commandWordArray[0].equals(TODO)
                 || commandWordArray[0].equals(DEADLINE)
                 || commandWordArray[0].equals(EVENT)) {
+            if (command.substring(commandWordArray[0].length())
+                    .isBlank()) {
+                throw new DukeEmptyDescriptionException(DONE);
+            }
             return new AddCommand(commandWordArray[0],
                     command.substring(commandWordArray[0].length()
                             + SLASH_INDEX));
         }
         if (commandWordArray[0].equals(FIND)) {
-            return new FindCommand(commandWordArray[0], commandWordArray[1]);
+            if (command.substring(commandWordArray[0].length())
+                    .isBlank()) {
+                throw new DukeEmptyArgumentException(DONE);
+            }
+            return new FindCommand(commandWordArray[0],
+                    commandWordArray[1]);
         }
         return new UnknownCommand(command);
     }

@@ -4,27 +4,32 @@ What can I do for you today?
 ==========================================
 >added: [T][✘] borrow book<
 You now have 1 task(s) in your list.
->added: [D][✘] return book (by: Sunday)<
+>added: [D][✘] return book (by: 24 Aug 2020, 11:59 PM)<
 You now have 2 task(s) in your list.
->added: [E][✘] project meeting (at: Mon 2-4pm)<
+>added: [E][✘] project meeting (by: 26 Aug 2020, 04:00 PM)<
 You now have 3 task(s) in your list.
 Here are the tasks in your list:
 1.[T][✘] borrow book
-2.[D][✘] return book (by: Sunday)
-3.[E][✘] project meeting (at: Mon 2-4pm)
+2.[D][✘] return book (by: 24 Aug 2020, 11:59 PM)
+3.[E][✘] project meeting (by: 26 Aug 2020, 04:00 PM)
 That task does not exist in the list!
 Please enter a valid argument for done!
 I have marked this task as done: 
 [T][✓] borrow book
 Here are the tasks in your list:
 1.[T][✓] borrow book
-2.[D][✘] return book (by: Sunday)
-3.[E][✘] project meeting (at: Mon 2-4pm)
+2.[D][✘] return book (by: 24 Aug 2020, 11:59 PM)
+3.[E][✘] project meeting (by: 26 Aug 2020, 04:00 PM)
+Here are the matching tasks in your list:
+1.[T][✓] borrow book
+2.[D][✘] return book (by: 24 Aug 2020, 11:59 PM)
 Invalid command!
 Invalid command!
 Invalid command!
 That task does not exist in the list!
 I have deleted this task: 
-[D][✘] return book (by: Sunday)
+[D][✘] return book (by: 24 Aug 2020, 11:59 PM)
+You now have 2 task(s) in your list.
+List saved to hard disk at data/tasks.csv
 Thanks for chatting with me, see you soon!
 ==========================================
