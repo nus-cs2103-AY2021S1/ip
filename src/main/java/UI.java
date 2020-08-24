@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class UI {
+class UI {
 
     private static final String DIVIDER = "___________________________________________________________________________";
 
@@ -11,10 +11,12 @@ public class UI {
             "  / ____ \\  | |____  | |      | | \\ \\  | |____  | |__| |\n" +
             " /_/    \\_\\ |______| |_|      |_|  \\_\\ |______| |_____/ \n";
     
-    private Scanner sc;
+    private final Scanner sc;
+    private boolean hasClosed;
     
     public UI() {
-        Scanner sc = new Scanner(System.in);
+        hasClosed = false;
+        sc = new Scanner(System.in);
     }
 
     public void printToConsole(String message) {
@@ -30,6 +32,7 @@ public class UI {
     
     public void close() {
         printToConsole("Goodbye!");
+        hasClosed = true;
         sc.close();
     }
     
@@ -38,7 +41,7 @@ public class UI {
     }
     
     public boolean hasNextCommand() {
-        return sc.hasNextLine();
+        return !hasClosed && sc.hasNextLine();
     }
     
 }

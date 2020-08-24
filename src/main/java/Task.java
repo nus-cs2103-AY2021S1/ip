@@ -1,11 +1,11 @@
 import java.time.LocalDate;
 
-public abstract class Task {
+abstract class Task {
 
-    protected String taskData;
-    protected boolean isDone = false;
+    final String taskData;
+    boolean isDone = false;
 
-    protected Task(String taskData) {
+    Task(String taskData) {
         this.taskData = taskData;
     }
 

@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
-public class Deadline extends Task {
+class Deadline extends Task {
 
     private final LocalDate deadlineDate;
     private final LocalTime deadlineTime;

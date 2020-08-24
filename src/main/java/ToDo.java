@@ -1,4 +1,4 @@
-public class ToDo extends Task {
+class ToDo extends Task {
 
     public static ToDo createNewToDo(String argument) throws DukeException {
         if (argument.isBlank()) {

@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
-public class Event extends Task {
+class Event extends Task {
 
     private final LocalDate startDate;
     private final LocalTime startTime;

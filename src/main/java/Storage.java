@@ -3,7 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.regex.Pattern;
 
-public class Storage {
+class Storage {
     
     private final Path filePath;
     

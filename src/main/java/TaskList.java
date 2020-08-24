@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TaskList {
+class TaskList {
 
-    private List<Task> tasks;
+    private final List<Task> tasks;
     
     public TaskList() {
         this.tasks = new ArrayList<>();
