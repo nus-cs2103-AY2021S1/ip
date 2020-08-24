@@ -1,6 +1,12 @@
 package duke.classes;
 
 public enum Commands {
+    FIND {
+        @Override
+        public String toString(){
+            return "find";
+        }
+    },
     LIST {
         @Override
         public String toString() {

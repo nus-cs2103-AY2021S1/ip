@@ -71,6 +71,13 @@ public class Duke {
             case LIST:
                 this.ui.displayList(this.taskList.todoList);
                 break;
+            case FIND:
+                try {
+                    this.ui.displayList(this.taskList.find(task));
+                } catch (DukeInvalidTimeException e) {
+                    this.ui.printError(e.toString());
+                }
+                break;
             case TODO:
             case EVENT:
             case DEADLINE:

@@ -21,8 +21,12 @@ public class Ui {
 
     public void displayList(List<Task> list) {
         System.out.println(line);
-        for (Task task : list) {
-            System.out.println(task.getStatusWithIndex());
+        if (list.size() == 0) {
+            System.out.println("Sorry. No matches found!");
+        } else {
+            for (Task task : list) {
+                System.out.println(task.getStatusWithIndex());
+            }
         }
     }
 

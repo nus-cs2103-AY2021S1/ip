@@ -3,13 +3,12 @@ package duke.classes;
 import duke.exceptions.BlahException;
 import duke.exceptions.DukeInvalidTimeException;
 import duke.exceptions.EmptyDukeException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import duke.tasks.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     public List<Task> todoList;
@@ -89,5 +88,42 @@ public class TaskList {
         }
         return task;
     }
+
+    public List<Task> find(String query) throws DukeInvalidTimeException {
+
+        query = query.substring(5);
+        List<Task> queriedList = new ArrayList<>();
+
+        for (Task task : this.todoList) {
+            String description = task.description;
+            String[] keywords;
+            switch (task.type) {
+                case TODO:
+                    keywords = description.split("\\s");
+                    for (String keyword : keywords) {
+                        if (keyword.equals(query)) {
+                            queriedList.add(new Todo(description, queriedList.size() + 1, task.isDone));
+                        }
+                    }
+                    break;
+                case EVENT:
+                case DEADLINE:
+                    // to retrieve just the activity
+                    keywords = description.substring(0, description.indexOf("/") - 1).split("\\s");
+                    for (String keyword : keywords) {
+                        if (keyword.equals(query)) {
+                            queriedList.add(task.type == TaskType.DEADLINE
+                                    ? new Deadline(description, queriedList.size() + 1, task.isDone)
+                                    : new Event(description, queriedList.size() + 1, task.isDone));
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        return queriedList;
+    }
+
 
 }
