@@ -14,10 +14,11 @@ public class Storage {
     String filepath;
 
     public Storage(String filepath) throws IOException {
-        this.filepath = filepath;
         try{
+            this.filepath = filepath;
             this.br = new BufferedReader(new FileReader(filepath));
         } catch (FileNotFoundException e) {
+            this.filepath = "data/tasks.txt";
             String directoryName = "data";
             String fileName = "tasks.txt";
             File directory = new File(directoryName);
@@ -29,7 +30,6 @@ public class Storage {
                 file.createNewFile();
                 System.out.println("aaa");
             }
-            System.out.println("xxx");
             this.br = new BufferedReader(new FileReader("data/tasks.txt"));
             this.printWriter = new PrintWriter("data/tasks.txt");
         }

@@ -16,6 +16,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.getStatusIcon() + " " + super.getItemName() + "(at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.getStatusIcon() + " " + super.getItemName() + "(at: " + date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
     }
 }
