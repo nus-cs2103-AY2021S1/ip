@@ -3,8 +3,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private final LocalDateTime startDate;
+    private final LocalDateTime endDate;
 
     private Event (String task, LocalDateTime startDate, LocalDateTime endDate, boolean isDone) {
         super(task, isDone);
@@ -37,6 +37,19 @@ public class Event extends Task {
         }
     }
 
+    private String dateSaveFormat() {
+        String startDateString = String.format("%sT%s",
+                startDate.format(DateTimeFormatter.ofPattern("y-MM-dd")),
+                startDate.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+
+        String endDateString = endDate != null
+                ? String.format("%sT%s", endDate.format(DateTimeFormatter.ofPattern("y-MM-dd")),
+                    endDate.format(DateTimeFormatter.ofPattern("HH:mm:ss")))
+                : "XXXXXXXXXXXXXXXXXXX";
+
+        return startDateString + " to " + endDateString;
+    }
+
     @Override
     public Event markDone() {
         return new Event(task, startDate, endDate, true);
@@ -53,11 +66,25 @@ public class Event extends Task {
             return true;
         } else if (o instanceof Event) {
             Event e = (Event) o;
-            return e.task.equals(this.task) && e.startDate.equals(startDate)
-                    && e.endDate.equals(endDate);
+
+            if (e.endDate == null && endDate == null) {
+                return e.task.equals(this.task) && e.startDate.equals(startDate);
+            } else if (e.endDate != null && endDate != null) {
+                return e.task.equals(this.task) && e.startDate.equals(startDate)
+                        && e.endDate.equals(endDate);
+            } else {
+                return false;
+            }
+
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String saveFormat() {
+        return "E" + super.saveFormat() + dateSaveFormat();
+
     }
 
     @Override

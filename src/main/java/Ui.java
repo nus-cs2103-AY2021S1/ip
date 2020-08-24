@@ -3,11 +3,7 @@ import java.util.Scanner;
 public class Ui {
 
     public static final String line = "____________________________________________________________";
-    private final String botName;
-
-    public Ui(String botName) {
-        this.botName = botName;
-    }
+    private final String botName = "Bolot";
 
     private void printLogo() {
         System.out.println("Greetings, human. I am");
@@ -31,10 +27,8 @@ public class Ui {
     }
 
     public void bye() {
-        System.out.println(line);
         System.out.println("Bye! Thank you for chatting with " + botName + "!");
         System.out.println("Hope to see you again soon!");
-        System.out.println(line);
     }
 
     public void showLine() {
@@ -48,5 +42,9 @@ public class Ui {
 
     public void showError(String errorMessage) {
         System.out.println(errorMessage);
+    }
+
+    public void showLoadingError() {
+        System.out.println("Loading error");
     }
 }

@@ -35,4 +35,9 @@ public abstract class Task {
         String symbol = isDone ? "[✓] " : "[✗] ";
         return String.format("%s %s", symbol, task);
     }
+
+    public String saveFormat() {
+        String isDoneString = isDone ? "1" : "0";
+        return String.format("%s %s ", isDoneString, task);
+    }
 }

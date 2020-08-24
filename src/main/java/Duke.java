@@ -1,15 +1,23 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Duke {
 
-    private final String name = "Bolot";
-
     private final Ui ui;
-    private final TaskList tasks;
+    private TaskList tasks;
     private final Storage storage;
 
     public Duke(String filePath) {
+        ui = new Ui();
         storage = new Storage(filePath);
-        tasks = new TaskList();
-        ui = new Ui(name);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
     }
 
     public void run() {

@@ -7,7 +7,15 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    private ArrayList<Task> list = new ArrayList<>();
+    private ArrayList<Task> list;
+
+    public TaskList(ArrayList<Task> taskList) {
+        this.list = taskList;
+    }
+
+    public TaskList() {
+        this.list = new ArrayList<>();
+    }
 
     public void processList(String fullCommand) throws InvalidDateException {
         if (fullCommand.trim().equalsIgnoreCase("list")) {
@@ -56,91 +64,6 @@ public class TaskList {
                     date.format(DateTimeFormatter.ofPattern("dd MMM y.")));
         }
     }
-
-//    public void addTask(Command command, String input) throws
-//            EmptyTaskException, InvalidDateException, DuplicateTaskException {
-//
-//        String task;
-//        LocalDateTime date = null;
-//        LocalDateTime endDate = null;
-//
-//        try {
-//            task = input.substring(command.toString().length() + 1);
-//        } catch (StringIndexOutOfBoundsException indexError) {
-//            throw new EmptyTaskException();
-//        }
-//
-//        if (command == Command.todo) {
-//
-//            Task toDo = new ToDo(task);
-//            if (list.contains(toDo)) {
-//                throw new DuplicateTaskException();
-//            }
-//
-//            list.add(toDo);
-//
-//        } else {
-//
-//            try {
-//
-//                task = task.substring(0, task.indexOf('/'));
-//                date = command == Command.event
-//                        ? input.contains("to ")
-//                        ? getDateTime(input.substring(input.indexOf("/at") + 4, input.indexOf("to ")))
-//                        : getDateTime(input.substring(input.indexOf("/at") + 4))
-//                        : getDateTime(input.substring(input.indexOf("/by") + 4));
-//
-//                if (command == Command.event && input.contains("to ")) {
-//                    String endDateString = input.substring(input.indexOf("to ") + 3);
-//
-//                    if (endDateString.length() <= 8) {
-//                        endDate = LocalDateTime.of(date.toLocalDate(), LocalTime.parse(endDateString));
-//                    } else {
-//                        endDate = getDateTime(endDateString);
-//                    }
-//                }
-//
-//            } catch (StringIndexOutOfBoundsException | InvalidDateException e) {
-//
-//                if (command == Command.deadline) {
-//                    throw new DeadlineInvalidDate();
-//                } else if (command == Command.event) {
-//                    throw new EventInvalidDate();
-//                }
-//            }
-//
-//            if (command == Command.deadline) {
-//
-//                Deadline deadline = new Deadline(task, date);
-//
-//                if (list.contains(deadline)) {
-//                    throw new DuplicateTaskException();
-//                }
-//
-//                list.add(deadline);
-//
-//            } else if (command == Command.event) {
-//
-//                Event event = endDate != null
-//                        ? new Event(task, date, endDate)
-//                        : new Event(task, date);
-//
-//                if (list.contains(event)) {
-//                    throw new DuplicateTaskException();
-//                }
-//
-//                list.add(event);
-//            }
-//
-//        }
-//
-//        storage.saveTasks(list);
-//
-//        System.out.println("Got it. I've added this task:");
-//        System.out.println(list.get(list.size() - 1).toString());
-//
-//        printListSize();
-//    }
 
     public void addToDo(String input) throws DuplicateTaskException, EmptyTaskException {
         try {
@@ -229,21 +152,6 @@ public class TaskList {
         }
     }
 
-//    public void processDone(String fullCommand) throws NoIndexException {
-//        if (fullCommand.equals(Command.done.name())) {
-//            throw new NoIndexException(Command.done.name());
-//        } else {
-//
-//            try {
-//                int taskNo = Integer.parseInt(fullCommand.substring(5)) - 1;
-//                markDone(taskNo);
-//
-//            } catch (NumberFormatException numError) {
-//                throw new NoIndexException(Command.done.name());
-//            }
-//        }
-//    }
-
     public void markDone(int taskNo) throws InvalidIndexException {
         try {
             list.set(taskNo, list.get(taskNo).markDone());
@@ -254,25 +162,6 @@ public class TaskList {
             throw new InvalidIndexException(list.size());
         }
     }
-
-//    public void processDelete(String fullCommand) throws NoIndexException {
-//        if (fullCommand.equals(Command.delete.name())) {
-//
-//            throw new NoIndexException(Command.delete.name());
-//
-//        } else {
-//
-//            try {
-//
-//                int taskNo = Integer.parseInt(fullCommand.substring(7)) - 1;
-//                deleteTask(taskNo);
-//
-//            } catch (NumberFormatException numError) {
-//                throw new NoIndexException(Command.delete.name());
-//            }
-//
-//        }
-//    }
 
     public void deleteTask(int taskNo) throws InvalidIndexException {
         try {

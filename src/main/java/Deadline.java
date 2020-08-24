@@ -38,6 +38,13 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String saveFormat() {
+        return "D" + super.saveFormat() + String.format("%sT%s",
+                deadline.format(DateTimeFormatter.ofPattern("y-MM-dd")),
+                deadline.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + String.format(" (by: %s)",
                 deadline.format(DateTimeFormatter.ofPattern("dd MMM y, h:mm a")));
