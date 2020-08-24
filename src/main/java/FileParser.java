@@ -1,42 +1,35 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class FileParser {
-    public static void parseAndAddToList(List<Task> list, String line) {
-        String[] line_arr = line.split(" / ");
-        if (line_arr[0].equals("T")) {
-            if (line_arr[1].equals("1")) {
-                list.add(new Todo(true, list.size() + 1, line_arr[2]));
-            } else if (line_arr[1].equals("0")) {
-                list.add(new Todo(false, list.size() + 1, line_arr[2]));
-            }
-        } else if (line_arr[0].equals("E")) {
-            if (line_arr[1].equals("1")) {
-                list.add(new Event(true, list.size() + 1, line_arr[2], line_arr[3]));
-            } else if (line_arr[1].equals("0")) {
-                list.add(new Event(false, list.size() + 1, line_arr[2], line_arr[3]));
-            }
-        } else if (line_arr[0].equals("D")) {
-            if (line_arr[1].equals("1")) {
-                list.add(new Deadline(true, list.size() + 1, line_arr[2], line_arr[3]));
-            } else if (line_arr[1].equals("0")) {
-                list.add(new Deadline(false, list.size() + 1, line_arr[2], line_arr[3]));
+    public static List<Task> loadData(List<Task> list) throws Exception {
+        try{
+            FileInputStream readData = new FileInputStream("data/dukedata.ser");
+            ObjectInputStream readStream = new ObjectInputStream(readData);
+            ArrayList<Task> loadedList = (ArrayList<Task>) readStream.readObject();
+            readStream.close();
+            list = loadedList;
+        }catch (Exception ex) {
+            if (ex instanceof FileNotFoundException) {
+                throw new FileNotFoundException("☹ OOPS!!! I can't find your file!");
+            } else {
+                throw new Exception("☹ OOPS!!! There was an error in loading file.");
             }
         }
+        return list;
     }
 
-    // reads file and returns a list with value stored
-    public static void initialiseFile(List<Task> list) throws FileNotFoundException {
-        try {
-            File file = new File("data/duke.txt");
-            Scanner fr = new Scanner(file);
-            while (fr.hasNextLine()) {
-                parseAndAddToList(list, fr.nextLine());
-            }
-        } catch (FileNotFoundException ex) {
-            System.out.println("☹ OOPS!!! I can't find your file!");
+    public static void writeData(List<Task> list) {
+        try{
+            FileOutputStream writeData = new FileOutputStream("data/dukedata.ser");
+            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+            writeStream.writeObject(list);
+            writeStream.flush();
+            writeStream.close();
+        }catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
