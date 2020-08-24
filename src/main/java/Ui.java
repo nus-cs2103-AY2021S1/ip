@@ -81,6 +81,11 @@ public class Ui {
         System.out.print("> ");
     }
 
+    public void taskCompleted(Task task) {
+        System.out.println("Nice, I've marked this task as done!");
+        System.out.println(task);
+    }
+
     public void askTaskNumToDelete() {
         System.out.println(LINE);
         System.out.println("What is the number of the task you wish to delete?"); 
