@@ -8,11 +8,18 @@ import java.io.IOException;
 import java.io.FileWriter;
 import java.util.List;
 
+/**
+ * This class provides an interface for keeping and retrieving the tasks on hard disk memory
+ */
 public class Storage {
 
     String filepath;
     Parser parser;
 
+    /**
+     * Constructor for instantiating a Storage
+     * @param filepath Specifies which file path should this Storage be working on
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
         this.parser = new Parser();
@@ -28,6 +35,10 @@ public class Storage {
         }
     }
 
+    /**
+     * This method provides the save feature for the tasks
+     * @param lstOfTask The list provided by Duke after execution
+     */
     public void saveTaskContents(List<Task> lstOfTask) {
         try {
             FileWriter fw = new FileWriter("Tasks.txt");
@@ -47,6 +58,11 @@ public class Storage {
         }
     }
 
+    /**
+     * This method provides the load feature for task to be loaded onto a list.
+     * @param lstOfTask The list that data will be populated on.
+     * @throws IOException The exception arises when there are issues reading from a file
+     */
     public void populateToLstOfTask(List<Task> lstOfTask) throws IOException {
 
         File file = new File("Tasks.txt");
