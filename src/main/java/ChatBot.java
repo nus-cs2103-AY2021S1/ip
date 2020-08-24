@@ -1,10 +1,9 @@
-package main.java;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ChatBot {
 
-    private static ArrayList<Task> taskList = new ArrayList<Task>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void start(){
         Scanner scanner = new Scanner(System.in);
@@ -57,13 +56,13 @@ public class ChatBot {
     }
 
     private static String listOfTasks(){
-        String acc = "";
+        StringBuilder acc = new StringBuilder();
         int i = 0;
         for (Task t: taskList){
             i++;
-            acc = acc + String.format("%d. %s\n",i,t);
+            acc.append(String.format("%d. %s\n", i, t));
         }
-        return acc;
+        return acc.toString();
     }
 
     private static Task addToDo(String query){
@@ -108,23 +107,23 @@ public class ChatBot {
     }
 
     private static String concatenateStrArr(String[] strArr){
-        String acc = "";
+        StringBuilder acc = new StringBuilder();
         for (String s: strArr) {
-            if(s != "") {
-                acc = acc + " " + s;
+            if(!s.equals("")) {
+                acc.append(" ").append(s);
             }
         }
-        return acc;
+        return acc.toString();
     }
 
     private static String getTitle(String[] splitQuery){
-        String accTaskTitle = "";
+        StringBuilder accTaskTitle = new StringBuilder();
         int i = 1;
         while(!splitQuery[i].startsWith("/")){
-            accTaskTitle = accTaskTitle + " " + splitQuery[i];
+            accTaskTitle.append(" ").append(splitQuery[i]);
             i++;
         }
-        return accTaskTitle;
+        return accTaskTitle.toString();
     }
 
     private static String getPreposition(String[] splitQuery){
@@ -137,17 +136,17 @@ public class ChatBot {
     }
 
     private static String getDateTime(String[] splitQuery){
-        String accTaskDateTime = "";
+        StringBuilder accTaskDateTime = new StringBuilder();
         int i = 0;
         while(!splitQuery[i].startsWith("/")){
             i++;
         }
         i++;
         while(i < splitQuery.length){
-            accTaskDateTime = accTaskDateTime + " " + splitQuery[i];
+            accTaskDateTime.append(" ").append(splitQuery[i]);
             i++;
         }
-        return accTaskDateTime;
+        return accTaskDateTime.toString();
     }
 
     private static boolean isEnd(String query){

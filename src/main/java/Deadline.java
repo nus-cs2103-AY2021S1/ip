@@ -1,5 +1,3 @@
-package main.java;
-
 public class Deadline extends Task{
     String deadline;
     String preposition;

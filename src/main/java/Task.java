@@ -1,5 +1,3 @@
-package main.java;
-
 public abstract class Task{
     private String title;
     private boolean isDone = false;
@@ -9,7 +7,7 @@ public abstract class Task{
     }
 
     private String doneToString(){
-        return isDone ? "[✓]": "[✗]";
+        return isDone ? "[DONE]": "[X]";
     }
 
     public void markDone(){
