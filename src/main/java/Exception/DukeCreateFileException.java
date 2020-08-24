@@ -1,8 +1,6 @@
-package main.java;
+package main.java.Exception;
 
-import java.io.IOException;
-
-public class DukeCreateFileException extends DukeException{
+public class DukeCreateFileException extends DukeException {
     @Override
     public String toString(){
         return super.toString() + "Failed to create a file";

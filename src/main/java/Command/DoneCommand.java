@@ -1,11 +1,11 @@
 package main.java.Command;
 
-import main.java.Parser;
-import main.java.NoIndexException;
-import main.java.Storage;
-import main.java.Task;
-import main.java.TaskList;
-import main.java.Ui;
+import main.java.Parser.Parser;
+import main.java.Exception.NoIndexException;
+import main.java.Storage.Storage;
+import main.java.Task.Task;
+import main.java.Task.TaskList;
+import main.java.Ui.Ui;
 
 import java.io.IOException;
 

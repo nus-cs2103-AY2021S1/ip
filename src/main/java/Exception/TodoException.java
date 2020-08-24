@@ -1,4 +1,6 @@
-package main.java;
+package main.java.Exception;
+
+import main.java.Exception.DukeException;
 
 public class TodoException extends DukeException {
 

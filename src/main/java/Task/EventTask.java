@@ -1,16 +1,14 @@
-package main.java;
+package main.java.Task;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class DeadlineTask extends Task{
-    public static final String DEADLINE = "[D]";
+public class EventTask extends Task {
+    public static final String DEADLINE = "[E]";
     private LocalDateTime dateTime;
 
-    public DeadlineTask() {}
-    public DeadlineTask(String description, LocalDateTime dateTime) {
+    public EventTask() {}
+    public EventTask(String description, LocalDateTime dateTime) {
         super(description);
         this.dateTime = dateTime;
     }
@@ -19,7 +17,7 @@ public class DeadlineTask extends Task{
         return dateTime;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDateTime(LocalDateTime date) {
         this.dateTime = date;
     }
 

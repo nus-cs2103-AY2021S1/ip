@@ -1,12 +1,12 @@
 package main.java.Command;
 
-import main.java.AnonymousException;
-import main.java.DescriptionException;
-import main.java.DukeDateTimeParserException;
-import main.java.NoIndexException;
-import main.java.Storage;
-import main.java.TaskList;
-import main.java.Ui;
+import main.java.Exception.AnonymousException;
+import main.java.Exception.DescriptionException;
+import main.java.Exception.DukeDateTimeParserException;
+import main.java.Exception.NoIndexException;
+import main.java.Storage.Storage;
+import main.java.Task.TaskList;
+import main.java.Ui.Ui;
 
 import java.io.IOException;
 
@@ -21,6 +21,8 @@ public abstract class Command {
     public static String TODO_COMMAND ="todo";
     public static String SHOW_AFTER_COMMAND = "show after";
     public static String SHOW_BEFORE_COMMAND = "show before";
+    public static String DELETE_ALL_COMMAND = "delete all";
+    public static String DONE_ALL_COMMAND = "done all";
 
     public boolean isExit;
 

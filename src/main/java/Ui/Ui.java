@@ -1,4 +1,8 @@
-package main.java;
+package main.java.Ui;
+
+import main.java.Storage.Storage;
+import main.java.Task.Task;
+import main.java.Task.TaskList;
 
 import java.util.Scanner;
 
@@ -36,13 +40,15 @@ public class Ui {
 
     public void commandList(){
         messageTemplate( formatCommandList("COMMAND", "FORMAT")
-                + formatCommandList("todo","todo <TASK_NAME>")
-                + formatCommandList("event","event <EVENT_NAME> /at <yyyy-MM-dd> <HH:mm>")
                 + formatCommandList("deadline", "deadline <DEADLINE_NAME> /by <yyyy-MM-dd> <HH:mm>")
                 + formatCommandList("delete", "delete <TASK_NUMBER>")
+                + formatCommandList("delete all", "delete all")
                 + formatCommandList("done", "done <TASK_NUMBER>")
+                + formatCommandList("done all", "done all")
+                + formatCommandList("event","event <EVENT_NAME> /at <yyyy-MM-dd> <HH:mm>")
                 + formatCommandList("show after", "show after <yyyy-MM-dd>")
                 + formatCommandList("show before", "show before <yyyy-MM-dd>")
+                + formatCommandList("todo","todo <TASK_NAME>")
         );
     }
 
@@ -54,7 +60,7 @@ public class Ui {
         return DOUBLE_TAB + message;
     }
 
-    public TaskList execute(TaskList tasks, Ui ui,Storage storage) {
+    public TaskList execute(TaskList tasks, Ui ui, Storage storage) {
 
         return tasks;
     }

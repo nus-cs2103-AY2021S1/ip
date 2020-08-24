@@ -1,4 +1,4 @@
-package main.java;
+package main.java.Exception;
 
 public class DukeDateTimeParserException extends DukeException {
 

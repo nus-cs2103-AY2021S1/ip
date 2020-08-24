@@ -1,4 +1,4 @@
-package main.java;
+package main.java.Task;
 
 public class Task {
     private String description;

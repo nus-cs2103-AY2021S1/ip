@@ -1,6 +1,4 @@
-package main.java;
-
-import java.io.FileNotFoundException;
+package main.java.Exception;
 
 public class DukeFileNotFoundException extends DukeException {
 

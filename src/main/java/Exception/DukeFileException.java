@@ -1,6 +1,4 @@
-package main.java;
-
-import java.io.IOException;
+package main.java.Exception;
 
 public class DukeFileException extends DukeException {
 

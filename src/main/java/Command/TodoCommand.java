@@ -1,11 +1,11 @@
 package main.java.Command;
 
-import main.java.DescriptionException;
-import main.java.Parser;
-import main.java.Storage;
-import main.java.TaskList;
-import main.java.TodoTask;
-import main.java.Ui;
+import main.java.Exception.DescriptionException;
+import main.java.Parser.Parser;
+import main.java.Storage.Storage;
+import main.java.Task.TaskList;
+import main.java.Task.TodoTask;
+import main.java.Ui.Ui;
 
 import java.io.IOException;
 

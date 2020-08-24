@@ -1,8 +1,10 @@
-package main.java;
+package main.java.Parser;
 
 import main.java.Command.Command;
 import main.java.Command.DeadlineCommand;
+import main.java.Command.DeleteAllCommand;
 import main.java.Command.DeleteCommand;
+import main.java.Command.DoneAllCommand;
 import main.java.Command.DoneCommand;
 import main.java.Command.EventCommand;
 import main.java.Command.ExitCommand;
@@ -12,6 +14,13 @@ import main.java.Command.ShowAfterCommand;
 import main.java.Command.ShowBeforeCommand;
 import main.java.Command.TodoCommand;
 import main.java.Command.WrongCommand;
+import main.java.Exception.DescriptionException;
+import main.java.Exception.DukeDateTimeParserException;
+import main.java.Exception.NoIndexException;
+import main.java.Task.DeadlineTask;
+import main.java.Task.EventTask;
+import main.java.Task.Task;
+import main.java.Task.TodoTask;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -72,27 +81,31 @@ public class Parser {
     }
 
     public static Command commandParser(String command) {
-        if (command.equals(Command.EXIT_COMMAND)) {
+        if (command.toLowerCase().equals(Command.EXIT_COMMAND)) {
             return new ExitCommand();
-        } else if (command.equals(Command.LIST_COMMAND)) {
+        } else if (command.toLowerCase().equals(Command.LIST_COMMAND)) {
             return new ListCommand();
-        } else if (command.contains(Command.DONE_COMMAND)) {
+        } else if(command.toLowerCase().equals(Command.DONE_ALL_COMMAND)) {
+            return new DoneAllCommand();
+        }else if (command.toLowerCase().contains(Command.DONE_COMMAND)) {
             return new DoneCommand(command);
-        } else if (command.contains(Command.TODO_COMMAND)) {
+        } else if (command.toLowerCase().contains(Command.TODO_COMMAND)) {
             return new TodoCommand(command);
-        } else if (command.contains(Command.DEADLINE_COMMAND)) {
+        } else if (command.toLowerCase().contains(Command.DEADLINE_COMMAND)) {
             return new DeadlineCommand(command);
-        } else if (command.contains(Command.EVENT_COMMAND)) {
+        } else if (command.toLowerCase().contains(Command.EVENT_COMMAND)) {
             return new EventCommand(command);
-        } else if (command.equals(Command.HELP_COMMAND)){
+        } else if (command.toLowerCase().equals(Command.HELP_COMMAND)) {
             return new HelpCommand();
-        } else if (command.contains(Command.DELETE_COMMAND)){
+        } else if(command.toLowerCase().contains(Command.DELETE_ALL_COMMAND)) {
+            return new DeleteAllCommand();
+        } else if (command.toLowerCase().contains(Command.DELETE_COMMAND)){
             return new DeleteCommand(command);
-        } else if (command.contains(Command.SHOW_AFTER_COMMAND)) {
+        } else if (command.toLowerCase().contains(Command.SHOW_AFTER_COMMAND)) {
             return new ShowAfterCommand(command);
-        } else if (command.contains(Command.SHOW_BEFORE_COMMAND)) {
+        } else if (command.toLowerCase().contains(Command.SHOW_BEFORE_COMMAND)) {
             return new ShowBeforeCommand(command);
-        } else {
+        }else {
             return new WrongCommand(command);
         }
     }

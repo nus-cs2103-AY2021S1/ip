@@ -1,4 +1,6 @@
-package main.java;
+package main.java.Task;
+
+import main.java.Task.Task;
 
 public class TodoTask extends Task {
     private static final String TODO = "[T]";
