@@ -1,3 +1,5 @@
+package Logic.Tasks;
+
 public class Deadline extends Task {
 
     protected String by;
@@ -5,6 +7,11 @@ public class Deadline extends Task {
     public Deadline(String name, String by) {
         super(name);
         this.by = by;
+    }
+
+    @Override
+    public String toData(){
+        return "D|" + super.toData() + this.by;
     }
 
     @Override
