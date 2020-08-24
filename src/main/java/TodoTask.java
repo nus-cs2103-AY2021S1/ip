@@ -5,7 +5,7 @@ public class TodoTask extends Task {
     }
 
     @Override
-    public String fileString() {return "T | " + super.toString(); }
+    public String fileString() {return "T | " + super.fileString(); }
 
     @Override
     public String toString() {

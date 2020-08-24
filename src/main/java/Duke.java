@@ -16,6 +16,17 @@ public class Duke {
     public void init() {
         System.out.println("Hello! I'm Duke baby :)\n" + "What can I do for you?");
     }
+
+    /** Helper method to list out all the current tasks **/
+    public static void printTaskList(ArrayList<Task> taskList) {
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < taskList.size(); i++) {
+            String stringCount = String.valueOf(i + 1);
+            System.out.println(stringCount + ". " + taskList.get(i));
+        }
+    }
+
+
     public void run() {
         Scanner scanner = new Scanner(System.in);
     }
@@ -42,11 +53,7 @@ public class Duke {
             try {
                 String input = scanner.nextLine();
                 if (input.equals("list")) {
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        String stringCount = String.valueOf(i + 1);
-                        System.out.println(stringCount + ". " + taskList.get(i));
-                    }
+                    printTaskList(taskList);
                 } else if (input.length() >= 6 && input.substring(0, 4).equals("done")) {
                     int index = Integer.valueOf(input.substring(5)) - 1;
                     Task currentTask = taskList.get(index);
@@ -54,6 +61,7 @@ public class Duke {
                     taskList.set(index, currentTask);
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("\t" + currentTask);
+                    updateFile(filePath, taskList );
 
                 } else if (input.length() >= 8 && input.substring(0, 6).equals("delete")) {
                     int index = Integer.valueOf(input.substring(7)) - 1;
@@ -62,6 +70,7 @@ public class Duke {
                     System.out.println("Noted. I've removed this task:");
                     System.out.println("\t" + currentTask);
                     System.out.println("Now you have " + String.valueOf(taskList.size()) + " tasks in the list.");
+                    updateFile(filePath, taskList );
                 } else if (input.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
@@ -90,6 +99,7 @@ public class Duke {
                     System.out.println("Got it. I've added this task:");
                     System.out.println("\t" + newTask);
                     System.out.println("Now you have " + String.valueOf(taskList.size()) + " tasks in your list.");
+                    updateFile(filePath, taskList );
 
                 } else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
                     if (input.length() == 5 || (input.length() == 6 && input.substring(5,6).equals(" "))) {
@@ -103,6 +113,7 @@ public class Duke {
                     System.out.println("Got it. I've added this task:");
                     System.out.println("\t" + newTask);
                     System.out.println("Now you have " + String.valueOf(taskList.size()) + " tasks in your list.");
+                    updateFile(filePath, taskList );
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
