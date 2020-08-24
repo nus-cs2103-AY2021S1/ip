@@ -1,6 +1,9 @@
 package duke.command;
 
-import duke.*;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class DoneCommand extends Command {
     private int taskNumber;
