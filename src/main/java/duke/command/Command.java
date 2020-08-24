@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.*;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Interface for all command classes.
@@ -8,5 +9,6 @@ import duke.*;
  */
 public interface Command {
     void execute(TaskList tasks, Ui ui) throws Exception;
+
     boolean isExit();
 }

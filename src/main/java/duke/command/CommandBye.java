@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.*;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Command to exit.
@@ -10,7 +11,9 @@ public class CommandBye implements Command {
      * Return <code>true</code> since the command is exit.
      * @return <code>true</code>
      */
-    public boolean isExit() { return true; }
+    public boolean isExit() {
+        return true;
+    }
 
     /**
      * Execute the command by printing goodbye.

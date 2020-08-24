@@ -1,7 +1,8 @@
 package duke.command;
 
-import duke.*;
-import duke.task.*;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
 
 /**
  * Command to add a task to a designated list.
@@ -13,7 +14,9 @@ public class CommandAdd implements Command {
      * Construct a new command to add a specified task.
      * @param newTask the new task to be added by <code>CommandAdd</code>
      */
-    public CommandAdd(Task newTask) { this.newTask = newTask; }
+    public CommandAdd(Task newTask) {
+        this.newTask = newTask;
+    }
 
     /**
      * Add the new task to a specified <code>TaskList</code> with interface updates.
@@ -22,15 +25,17 @@ public class CommandAdd implements Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui) {
-       ui.printLine("Got it. I've added this task:");
-       ui.printLine(newTask.toString());
-       tasks.add(newTask);
-       ui.printLine("Now you have " + tasks.size() + " tasks in the list.");
+        ui.printLine("Got it. I've added this task:");
+        ui.printLine(newTask.toString());
+        tasks.add(newTask);
+        ui.printLine("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     /**
-     * Retrn <code>false</code> since the command is not exit.
+     * Return <code>false</code> since the command is not exit.
      * @return false
      */
-    public boolean isExit() { return false; }
+    public boolean isExit() {
+        return false;
+    }
 }

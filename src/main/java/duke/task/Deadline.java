@@ -16,13 +16,14 @@ public class Deadline extends Task {
      * Construct a new deadline task from specified description and due date.
      * @param description the description of the task to be created
      * @param by the string indicates the deadline
-     *           If the string <code>by</code> is of pattern that Duke understands, Duke will save the deadline as
-     *           a date. Otherwise, Duke will understand this as a string.
+     *           If the string <code>by</code> is of pattern that Duke understands,
+     *           Duke will save the deadline as a date. Otherwise, Duke will
+     *           understand this as a string.
      */
     public Deadline(String description, String by) {
         super(description);
         this.byString = by;
-        try{
+        try {
             this.byString = by;
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
@@ -32,12 +33,16 @@ public class Deadline extends Task {
 
     /**
      * Return the string that is intended to be stored in the local database.
-     * @return the string to be stored in the local database, the format is understandable for <code>Storage</code>
+     * @return the string to be stored in the local database, the format is
+     *         understandable for <code>Storage</code>
      */
     @Override
     public String toDataString() {
-        if (super.isDone) return "D | 1 | " + description + " | " + byString;
-        else return "D | 0 | " + description + " | " + byString;
+        if (super.isDone) {
+            return "D | 1 | " + description + " | " + byString;
+        } else {
+            return "D | 0 | " + description + " | " + byString;
+        }
     }
 
     /**
@@ -47,7 +52,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (this.by != null) {
-            return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
-        } else return "[D]" + super.toString() + " (by: " + byString + ")";
+            return "[D]" + super.toString() + " (by: "
+                    + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        } else {
+            return "[D]" + super.toString() + " (by: " + byString + ")";
+        }
     }
 }
