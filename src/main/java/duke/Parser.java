@@ -1,5 +1,10 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 public class Parser {
     public static boolean isExit = false;
