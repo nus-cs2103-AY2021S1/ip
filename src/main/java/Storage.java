@@ -1,17 +1,16 @@
 package main.java;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 
 class Storage {
 
-    /** Pathname of the file. Note that loading and saving is done on the same file. */
-    private final String pathName;
-
     /** Data separator to separate different data in the same entry */
     private final String dataSeparator = "\uff5c";
+
+    private final File file;
+
+    /** Pathname of the file. Note that loading and saving is done on the same file. */
+    private final String pathName;
 
     /**
      * Sole constructor
@@ -19,22 +18,7 @@ class Storage {
      */
     Storage(String pathName) {
         this.pathName = pathName;
-    }
-
-    /**
-     * Saves data in current task list into file specified by pathName
-     * @throws java.io.IOException If file save is unsuccessful
-     */
-    void saveTaskList(TaskList taskList) throws java.io.IOException {
-        FileWriter csvWriter = new FileWriter(this.pathName);
-        for (int i = 0; i < taskList.getNumOfTasks(); i++) {
-            String[] dataStringArray = taskList.getTaskAt(i).getDataString();
-            for (String s : dataStringArray) {
-                csvWriter.append(s);
-                csvWriter.append(this.dataSeparator);
-            }
-        }
-        csvWriter.append("\n");
+        this.file = new File(this.pathName);
     }
 
     /**
@@ -66,4 +50,41 @@ class Storage {
             return null;
         }
     }
+
+    /**
+     * Clears all the contents in the file
+     * @return true if the contents are cleared successfully, false otherwise
+     */
+    boolean resetFile() {
+        try {
+            return this.file.delete() && this.file.createNewFile();
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Saves data in current task list into file specified by pathName
+     * @param taskList Task list to be saved
+     * @return true if saving is successful, false otherwise
+     */
+    boolean saveTaskList(TaskList taskList) {
+        try {
+            FileWriter csvWriter = new FileWriter(this.file);
+            for (int i = 0; i < taskList.getNumOfTasks(); i++) {
+                String[] dataStringArray = taskList.getTaskAt(i).getDataString();
+                for (String s : dataStringArray) {
+                    csvWriter.append(s);
+                    csvWriter.append(this.dataSeparator);
+                }
+            }
+            csvWriter.append("\n");
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+
+    }
+
+
 }

@@ -22,12 +22,46 @@ class TaskList {
         return this.taskArrayList.get(taskIndex);
     }
 
-    void deleteTaskAt(int taskIndex) {
-        this.taskArrayList.remove(taskIndex);
+    /**
+     * Deletes the task with index specified by taskIndex
+     * @param taskIndex current index of the task
+     * @return true if the task is deleted successfully, false otherwise
+     */
+    boolean deleteTaskAt(int taskIndex) {
+        if (taskIndex >= 0 && taskIndex < this.taskArrayList.size()) {
+            this.taskArrayList.remove(taskIndex);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     int getNumOfTasks() {
         return this.taskArrayList.size();
+    }
+
+    /**
+     * Creates a new ToDo and adds it to the task list
+     */
+    void addTodo() {
+        ToDo todo = new ToDo();
+        this.taskArrayList.add(todo);
+    }
+
+    /**
+     * Creates a new deadline and adds it to the task list
+     */
+    void addDeadline() {
+        Deadline deadline = new Deadline();
+        this.taskArrayList.add(deadline);
+    }
+
+    /**
+     * Creates a new event and adds it to the task list
+     */
+    void addEvent() {
+        Event event = new Event();
+        this.taskArrayList.add(event);
     }
 
     @Override
@@ -43,6 +77,20 @@ class TaskList {
                 output.append(eachTaskString);
             }
             return output.deleteCharAt(output.length()-1).toString();
+        }
+    }
+
+    /**
+     * Marks the task with index specified by taskIndex as complete
+     * @param taskIndex current index of the task
+     * @return true if the task is marked complete successfully, false otherwise
+     */
+    boolean completeTaskAt(int taskIndex) {
+        if (taskIndex >= 0 && taskIndex < this.taskArrayList.size()) {
+            this.taskArrayList.get(taskIndex).completeTask();
+            return true;
+        } else {
+            return false;
         }
     }
 }

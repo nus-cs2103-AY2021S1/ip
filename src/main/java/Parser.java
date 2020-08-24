@@ -2,29 +2,44 @@ package main.java;
 
 class Parser {
 
-    Command parse(String input) {
+    static Command parse(String input) {
 
-        String[] prefixParser = input.split(" ", 2);
-        String prefix = prefixParser[0];
-        String body = prefixParser[1];
+        String[] splitter = input.split(" ", 2);
+        String prefix = splitter[0];
+        String body = null;
+        if (splitter.length == 2) {
+            body = splitter[1];
+        }
 
         switch(prefix) {
         case("bye"):
             return new ExitCommand();
         case("deadline"):
-            return new CreateDeadlineCommand();
+            return new CreateDeadlineCommand(body);
         case("delete"):
-            return new DeleteTaskCommand();
+            try {
+                int taskIndex = Integer.parseInt(body);
+                return new DeleteTaskCommand(taskIndex - 1);
+            } catch (NumberFormatException ignored) {
+            }
+            break;
+
         case("done"):
-            return new CompleteTaskCommand();
+            try {
+                int taskIndex = Integer.parseInt(body);
+                return new CompleteTaskCommand(taskIndex - 1);
+            } catch (NumberFormatException ignored) {
+            }
+            break;
+
         case("event"):
-            return new CreateEventCommand();
+            return new CreateEventCommand(body);
         case("list"):
             return new ListTasksCommand();
         case("todo"):
-            return new CreateTodoCommand();
-        default:
-            return new InvalidCommand();
+            return new CreateTodoCommand(body);
         }
+
+        return new InvalidCommand();
     }
 }
