@@ -35,13 +35,24 @@ public abstract class Task {
         isDone = true;
         return this;
     }
-
-    // presentation:
+    
     public String getStatusIcon() {
-        //return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-        return "[" + (isDone ? "Done" : "Not done") + "]";
+        return "[" + (isDone ? "\u2713" : "\u2718") + "]"; //return tick or X symbols
+        //return "[" + (isDone ? "Done" : "Not done") + "]";
     }
 
+    public boolean isDone() {
+        return this.isDone;    
+    }
+    
+    public String getDescription() {
+        return this.description;
+    }
+    
+    public String getTime() {
+        return "";
+    }
+    
     public abstract String getTypeIcon();
 
     @Override
