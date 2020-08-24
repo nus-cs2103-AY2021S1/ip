@@ -10,17 +10,14 @@ public class Deadline extends Task {
     public String fileFormat() {
         return "D" + " | " + super.fileFormat() + " | " + deadline;
     }
-
-<<<<<<< HEAD
-=======
+    
     public String timeConverted() {
         timeParser inputTime = new timeParser(deadline);
         String outputTime = inputTime.timeConverter();
         return "D" + " | " + super.fileFormat() + " | " + outputTime;
 
     }
-
->>>>>>> branch-Level-8
+    
     @Override
     public String toString() {
         

@@ -10,8 +10,6 @@ public class Event extends Task {
     public String fileFormat() {
         return "E" + " | " + super.fileFormat() + " | " + duration;
     }
-<<<<<<< HEAD
-=======
     
     public String timeConverted() {
         timeParser inputTime = new timeParser(duration);
@@ -19,7 +17,6 @@ public class Event extends Task {
         return "E" + " | " + super.fileFormat() + " | " + outputTime;
         
     }
->>>>>>> branch-Level-8
 
     @Override
     public String toString() {

@@ -3,10 +3,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-<<<<<<< HEAD
 import java.util.*;
 import java.io.File;
-=======
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -15,7 +13,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
->>>>>>> branch-Level-8
 
 public class Bill {
     
@@ -58,6 +55,25 @@ public class Bill {
         }
         System.out.println(horizontal_line);
     }
+
+    private static void findKeyword(String keyword) {
+
+        int no_of_tasks = list_of_Content.size();
+        int counter = 1;
+        System.out.println(horizontal_line);
+        if (no_of_tasks == 0) {
+            System.out.println("There is no tasks in the list ");
+        } else {
+            for (int i = 0; i < list_of_Content.size(); i = i + 1) {
+                if (list_of_Content.get(i).containKeyWord(keyword)) {
+                    System.out.println(counter + list_of_Content.get(i).timeConverted());
+                    counter = counter + 1;
+                }
+               
+            }
+        }
+        System.out.println(horizontal_line);
+    }
     
     public static void main(String[] args) throws IOException {
         
@@ -80,6 +96,9 @@ public class Bill {
                     if (input.equals("list")) {
                         System.out.println("Here are the tasks in your list: ");
                         print_the_list();
+                    } else if (firstChar.equals("find")) {
+                        String keyword = isDone[isDone.length - 1];
+                        findKeyword(keyword);
                     } else if (firstChar.equals("done")) {
 
                         if (isDone.length == 1) {

@@ -11,12 +11,6 @@ public class Task {
         this.isDone = false;
     }
 
-//    public Task(String new_task, String time) {
-//        this.new_task = new_task;
-//        this.isDone = false;
-//        this.time = time;
-//    }
-
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
@@ -28,16 +22,16 @@ public class Task {
     public String fileFormat() {
         return this.getStatusIcon() + " | " + new_task;
     }
-<<<<<<< HEAD
-=======
-
+    
     public String timeConverted() {
         return this.getStatusIcon() + " | " + new_task;
 
     } 
     
+    public boolean containKeyWord(String keyword) {
+        return new_task.contains(keyword);
+    }
     
->>>>>>> branch-Level-8
     
     @Override
     public String toString() {
