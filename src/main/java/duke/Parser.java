@@ -1,7 +1,18 @@
 package duke;
 
-import duke.command.*;
-import duke.task.*;
+import duke.command.Command;
+import duke.command.CommandInstruction;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.ViewCommand;
+
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
