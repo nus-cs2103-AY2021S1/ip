@@ -10,17 +10,17 @@ import java.util.Arrays;
 public class HelpCommand extends Command {
 
     @Override
-    public boolean hasUndo() {
-        return false;
-    }
-
-    @Override
     public void execute() {
         System.out.println("Command list:");
         Arrays.stream(Parser.values())
                 .map((p) -> " " + p.toString().toLowerCase())
                 .forEach(System.out::print);
         System.out.println();
+    }
+
+    @Override
+    public boolean hasUndo() {
+        return false;
     }
 
     @Override

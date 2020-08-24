@@ -20,11 +20,6 @@ public class SaveCommand extends Command {
     }
 
     @Override
-    public boolean hasUndo() {
-        return false;
-    }
-
-    @Override
     public void execute() {
         try {
             // Open file for write/overwrite
@@ -38,6 +33,11 @@ public class SaveCommand extends Command {
         } catch (IOException e) {
             System.out.println("Error: Could not save to file. Ensure directory exists and file is not in use");
         }
+    }
+
+    @Override
+    public boolean hasUndo() {
+        return false;
     }
 
     @Override

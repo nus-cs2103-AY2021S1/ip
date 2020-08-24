@@ -16,13 +16,13 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public boolean hasUndo() {
-        return false;
+    public void execute() {
+        System.out.println(this.message);
     }
 
     @Override
-    public void execute() {
-        System.out.println(this.message);
+    public boolean hasUndo() {
+        return false;
     }
 
     @Override

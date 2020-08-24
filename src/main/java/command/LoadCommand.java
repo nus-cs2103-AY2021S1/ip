@@ -28,13 +28,7 @@ public class LoadCommand extends Command {
     }
 
     @Override
-    public boolean hasUndo() {
-        return false;
-    }
-
-    @Override
     public void execute() {
-
         // Empty current list
         taskList.clear();
 
@@ -68,6 +62,11 @@ public class LoadCommand extends Command {
         }
 
         System.out.println("Load: " + taskList.size() + " entries");
+    }
+
+    @Override
+    public boolean hasUndo() {
+        return false;
     }
 
     @Override

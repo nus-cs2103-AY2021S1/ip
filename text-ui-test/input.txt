@@ -45,4 +45,9 @@ delete 2
 list
 load save.txt
 list
+find
+find lkaksdjfl
+find 12342341234
+find book
+find ts cl
 bye

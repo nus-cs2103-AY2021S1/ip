@@ -17,11 +17,6 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public boolean hasUndo() {
-        return false;
-    }
-
-    @Override
     public void execute() {
 
         if (taskList.isEmpty()) {
@@ -34,6 +29,11 @@ public class ListCommand extends Command {
                 .map((task) -> index.incrementAndGet() + ". " + task.toString() )
                 .forEach(System.out::println);
 
+    }
+
+    @Override
+    public boolean hasUndo() {
+        return false;
     }
 
     @Override

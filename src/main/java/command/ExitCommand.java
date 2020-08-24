@@ -6,6 +6,11 @@ package command;
 public class ExitCommand extends Command{
 
     @Override
+    public void execute() {
+        // Nothing to do
+    }
+
+    @Override
     public boolean hasUndo() {
         return false;
     }
@@ -13,11 +18,6 @@ public class ExitCommand extends Command{
     @Override
     public boolean isExit() {
         return true;
-    }
-
-    @Override
-    public void execute() {
-        // Nothing to do
     }
 
     @Override
