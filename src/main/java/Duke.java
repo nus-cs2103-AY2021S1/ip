@@ -9,34 +9,20 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private String indent = "    ";
-    private String outputIndent = "    ";
-    public String upperLine = indent + "___________________________________________________" + "\n";
-    public String lowerLine =  indent + "___________________________________________________" +"\n";
-    private final String INVALID_COMMAND_MESSAGE = "    Sorry couldn't recognise command";
-    private final String DONE_TASK_MARKED_MESSAGE = "    Nice! I've marked this task as done:";
-    private final String DELETE_TASK_MARKED_MESSAGE = "    Noted. I've removed this task:";
-
-    private final String NO_TASK_MESSAGE = "    Sorry the task does not exists";
-    private final String ADDED_TASK_MESSAGE = "    Got it. I've added this task:";
-    private final String INVALID_DONE_MESSAGE = "    Sorry done cannot be empty ";
-    private final String INVALID_TODO_MESSAGE = "    Sorry todo cannot be empty ";
-    private final String INVALID_DELETE_MESSAGE = "    Sorry delete cannot be empty ";
-
+    private UserInterface ui;
     private List<Task> lstOfTask = new ArrayList<>();
+
+    public Duke() {
+        this.ui = new UserInterface();
+    }
 
     private void startup() {
         try {
             populateToLstOfTask();
+            ui.greetUser();
         } catch (IOException e) {
             System.out.println(e.toString()+" Error trying to load tasks");
         }
-    }
-
-    private String greetUser() {
-            return upperLine + indent + "Hello! I'm Duke" + "\n"
-                    + indent + "What can I do for you?" + "\n"
-                    + lowerLine;
     }
 
     private String[] parseString(String input) {
@@ -44,72 +30,51 @@ public class Duke {
         return tokens;
     }
 
-    private String processCommand(String[] parsedUserInput) {
+    private void processCommand(String[] parsedUserInput) {
         try {
             String cmd = parsedUserInput[0];
             Command checkedCommand = Command.valueOfUserCommand(cmd);
-            String resultString;
-
             if (checkedCommand == null) {
-                resultString = INVALID_COMMAND_MESSAGE;
+                ui.showInvalidCommandMessage();
             } else {
                 switch (checkedCommand) {
                     case LIST:
-                        resultString = listTask();
+                        ui.listTask(lstOfTask);
                         break;
                     case BYE:
-                        resultString = exit();
+                        exit();
+                        ui.showExitMessage();
                         break;
                     case DONE:
-                        resultString = done(parsedUserInput);
+                        done(parsedUserInput);
                         break;
                     case TODO:
-                        resultString = addToDo(parsedUserInput);
+                        addToDo(parsedUserInput);
                         break;
                     case EVENT:
-                        resultString = ADDED_TASK_MESSAGE + "\n" + outputIndent + addEvent(parsedUserInput) + "\n"
-                                + getNumOfTaskMessage();
+                        addEvent(parsedUserInput);
                         break;
                     case DEADLINE:
-                        resultString =  addDeadline(parsedUserInput);
+                        addDeadline(parsedUserInput);
                         break;
                     case DELETE:
-                        resultString = delete(parsedUserInput);
-                        break;
-                    default:
-                        resultString = "";
+                        delete(parsedUserInput);
                         break;
                 }
             }
-            return upperLine + resultString + "\n" + lowerLine;
+
         } catch (IndexOutOfBoundsException e) {
-            return upperLine + INVALID_COMMAND_MESSAGE + "\n" + lowerLine;
+           ui.showInvalidCommandMessage();
         }
     }
 
-    private String listTask() {
-        String outputIndent = "    ";
-        StringBuilder concat = new StringBuilder();
-        for (int i = 0; i < lstOfTask.size(); i++) {
-            Task task = lstOfTask.get(i);
-            int taskNumber = i + 1;
-            String s="";
-            if (i == lstOfTask.size() -1) {
-                s = outputIndent + taskNumber + "." + task.toString();
-            } else {
-                s = outputIndent + taskNumber + "." + task.toString() + "\n";
-            }
-            concat.append(s);
-        }
-        return concat.toString();
-    }
 
-    private String exit() {
+
+    private void exit() {
         saveTaskContents();
-        return outputIndent + "Bye. Hope to see you again soon!" + "\n";
     }
 
-    private String done(String[] parsedUserInput) {
+    private void done(String[] parsedUserInput) {
 
         try {
             String doneTask = parsedUserInput[1];
@@ -117,30 +82,26 @@ public class Duke {
             int identifierNumberInArrayList = doneTaskNumber - 1;
             Task task = this.lstOfTask.get(identifierNumberInArrayList);
             task.markAsDone();
-            return DONE_TASK_MARKED_MESSAGE + "\n"
-                    + outputIndent + outputIndent + task.toString();
+
         } catch (IndexOutOfBoundsException e1) {
-            return INVALID_DONE_MESSAGE;
+            ui.showInvalidDoneCommand();
         }
     }
 
-    private String delete(String[] parsedUserInput) {
+    private void delete(String[] parsedUserInput) {
         try {
             String deleteTask = parsedUserInput[1];
             int doneTaskNumber = Integer.parseInt(deleteTask);
             int identifierNumberInArrayList = doneTaskNumber - 1;
             Task task = this.lstOfTask.get(identifierNumberInArrayList);
             lstOfTask.remove(identifierNumberInArrayList);
-            return DELETE_TASK_MARKED_MESSAGE + "\n"
-                    + outputIndent + outputIndent + task.toString() + "\n"
-                    + getNumOfTaskMessage();
+            ui.showDeleteTaskMessage(task, getNumOfTask());
         } catch (IndexOutOfBoundsException e1) {
-            return INVALID_DELETE_MESSAGE;
+           ui.showInvalidDeleteCommand();
         }
-
     }
 
-    private String addToDo(String[] parsedUserInput) {
+    private void addToDo(String[] parsedUserInput) {
         try {
             String test = parsedUserInput[1];
             String taskDescription = "";
@@ -153,15 +114,13 @@ public class Duke {
             }
             ToDo td = new ToDo(taskDescription);
             lstOfTask.add(td);
-            return ADDED_TASK_MESSAGE + "\n"
-                    + outputIndent + outputIndent + td.toString() + "\n"
-                    + getNumOfTaskMessage();
+            ui.showAddedTaskMessage(td,getNumOfTask());
         } catch (IndexOutOfBoundsException e1) {
-            return INVALID_TODO_MESSAGE;
+            ui.showInvalidTodoCommand();
         }
     }
 
-    private String addEvent(String[] parsedUserInput) {
+    private void addEvent(String[] parsedUserInput) {
         String taskDescription = "";
         for(int i = 1; i < parsedUserInput.length; i++) {
             if (i == parsedUserInput.length-1) {
@@ -177,7 +136,7 @@ public class Duke {
 
         Event event = new Event(description, date.trim());
         lstOfTask.add(event);
-        return outputIndent+event.toString();
+        ui.showAddedTaskMessage(event, getNumOfTask());
     }
 
     private LocalDateTime parseDateAndTime(String dateTime) {
@@ -186,7 +145,7 @@ public class Duke {
         return d1;
     }
 
-    private String addDeadline(String[] parsedUserInput) {
+    private void addDeadline(String[] parsedUserInput) {
         try {
             String taskDescription = "";
             for (int i = 1; i < parsedUserInput.length; i++) {
@@ -206,20 +165,14 @@ public class Duke {
             LocalDateTime d1 = parseDateAndTime(date);
             Deadline deadline = new Deadline(description, d1);
             lstOfTask.add(deadline);
-            return ADDED_TASK_MESSAGE + "\n" + outputIndent + outputIndent + deadline.toString()+ "\n"
-                    + getNumOfTaskMessage();
+            ui.showAddedTaskMessage(deadline, getNumOfTask());
         } catch (DateTimeParseException e) {
-            return outputIndent+ "Please give a valid date: " +"\n"
-                    + outputIndent+ e.getMessage();
+            ui.showInvalidDateFormatGiven();
         }
     }
 
     public int getNumOfTask() {
         return lstOfTask.size();
-    }
-
-    private String getNumOfTaskMessage() {
-        return "    Now you have " + getNumOfTask() + " tasks in the list";
     }
 
     private void createNewTextFileCalledTask() {
@@ -303,14 +256,11 @@ public class Duke {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
         duke.startup();
-        System.out.println(duke.greetUser());;
 
         while (sc.hasNext()) {
             String input = sc.nextLine();
             String[] parsedString = duke.parseString(input);
-            String output = duke.processCommand(parsedString);
-            System.out.println(output);
-
+            duke.processCommand(parsedString);
             if (input.equals("bye")) {
                 break;
             }
