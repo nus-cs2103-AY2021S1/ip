@@ -1,4 +1,7 @@
-package PACKAGE_NAME;
+public class TaskException extends Exception {
 
-public class TaskException {
+    public TaskException(String msg) {
+        super(msg);
+    }
+
 }

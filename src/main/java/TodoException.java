@@ -1,4 +1,7 @@
-package PACKAGE_NAME;
+public class TodoException extends TaskException {
 
-public class TodoException {
+    public TodoException(String msg) {
+        super(msg);
+    }
+
 }

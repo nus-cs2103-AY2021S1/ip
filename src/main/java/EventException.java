@@ -1,4 +1,7 @@
-package PACKAGE_NAME;
+public class EventException extends TaskException {
 
-public class EventException {
+    public EventException(String msg) {
+        super(msg);
+    }
+
 }

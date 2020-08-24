@@ -1,4 +1,6 @@
-package PACKAGE_NAME;
+public class DeleteException extends Exception {
 
-public class DeleteException {
+    public DeleteException(String msg) {
+        super(msg);
+    }
 }

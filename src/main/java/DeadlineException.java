@@ -1,4 +1,6 @@
-package PACKAGE_NAME;
+public class DeadlineException extends TaskException {
 
-public class DeadlineException {
+    public DeadlineException(String msg) {
+        super(msg);
+    }
 }

@@ -1,6 +1,7 @@
 ../src/main/java/EventException.java
 ../src/main/java/DeadlineException.java
 ../src/main/java/TaskException.java
+../src/main/java/DeleteException.java
 ../src/main/java/Event.java
 ../src/main/java/DoneException.java
 ../src/main/java/TodoException.java

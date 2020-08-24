@@ -14,6 +14,13 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public static Task create(String description) throws TaskException {
+        if (description.length() == 0) {
+            throw new TaskException(" ☹ OOPS!!! The description of a task cannot be empty.");
+        }
+        return new Task(description);
+    }
+
     //Methods
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols

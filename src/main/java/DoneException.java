@@ -1,4 +1,6 @@
-package PACKAGE_NAME;
+public class DoneException extends Exception {
 
-public class DoneException {
+    public DoneException(String msg) {
+        super(msg);
+    }
 }
