@@ -116,7 +116,6 @@ public class Duke {
                 "-------------------------------------------\n");
     }
 
-
     public static void main(String[] args) {
         printHello();
 
@@ -130,6 +129,7 @@ public class Duke {
                 processCommand(command, taskList);
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
+
             }
         }
     }
