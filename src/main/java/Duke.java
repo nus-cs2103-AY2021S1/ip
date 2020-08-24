@@ -13,6 +13,8 @@ import java.io.FileWriter;
  * (ii) Checking Tasks as completed
  * (iii) Viewing current task list
  *
+ * Duke stores the task list in a txt file which is first created
+ * when the user does not have such a file.
  * @author Andy Wu
  */
 
