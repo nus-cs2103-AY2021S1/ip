@@ -69,7 +69,6 @@ public class Duke {
                 throw new DukeException("Date/Time not provided in correct format!");
             } else {
                 String[] data = info[1].split(" ", 2);
-
                 String correct =  data[0].replace("/", "-");
                 LocalDate newDate = LocalDate.parse(correct);
                 String newTime = timeConverter(data[1]);
@@ -102,6 +101,7 @@ public class Duke {
     }
 
     public static Task doneItem(String input) throws DukeException {
+        System.out.println("I am confusion");
         String info[] = input.split(" ", 2);
         Task toBeRet = new Task("");
         if (info.length == 1) {
