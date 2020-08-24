@@ -31,7 +31,7 @@ public class DoneCommand extends Command {
             throw new DukeIllegalArgumentException("Task index out of bound!");
         }
         IDuke newDuke = doneTask(index);
-        System.out.println(TextFormatter.getFormattedText(
+        System.out.print(TextFormatter.getFormattedText(
                 Message.MARKED_DONE.toString() + newDuke.getTask(index)));
         newDuke.getStorage().save(newDuke.getTasks().getList());
         return newDuke;

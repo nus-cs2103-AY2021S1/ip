@@ -90,13 +90,13 @@ public class Duke implements IDuke {
             Command c = Parser.parse(command);
             return c.setDuke(this).execute();
         } catch (DukeIllegalArgumentException e) {
-            System.out.println(TextFormatter.getFormattedText(
+            System.out.print(TextFormatter.getFormattedText(
                     "Meow?!! " + e.getMessage()));
         } catch (DukeUnrecognizedArgumentException e) {
-            System.out.println(TextFormatter.getFormattedText(
+            System.out.print(TextFormatter.getFormattedText(
                     Message.CAT_DOUBT.toString()));
         } catch (Exception e) {
-            System.out.println(TextFormatter.getFormattedText(
+            System.out.print(TextFormatter.getFormattedText(
                     Message.CAT_CRY.toString() + e));
         }
 

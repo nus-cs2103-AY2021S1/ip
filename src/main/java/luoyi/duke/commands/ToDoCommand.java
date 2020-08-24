@@ -5,22 +5,20 @@ import luoyi.duke.common.TextFormatter;
 import luoyi.duke.data.Duke;
 import luoyi.duke.data.IDuke;
 import luoyi.duke.data.exception.DukeIllegalArgumentException;
-import luoyi.duke.data.task.Deadline;
 import luoyi.duke.data.task.ITask;
 import luoyi.duke.data.task.TaskList;
+import luoyi.duke.data.task.ToDo;
 import luoyi.duke.storage.Storage;
 
-public class DeadlineCommand extends Command {
+public class ToDoCommand extends Command {
     private final String description;
-    private final String time;
-    private DeadlineCommand(String description, String time, IDuke duke) {
+    private ToDoCommand(String description, IDuke duke) {
         super(-1, duke);
         this.description = description;
-        this.time = time;
     }
 
-    public static DeadlineCommand getDeadlineCommand(String description, String time) {
-        return new DeadlineCommand(description, time, null);
+    public static ToDoCommand getToDoCommand(String description) {
+        return new ToDoCommand(description, null);
     }
 
     @Override
@@ -28,25 +26,20 @@ public class DeadlineCommand extends Command {
         if (duke == null) {
             throw new RuntimeException(Message.ERR_DUKE_NOT_INIT.toString());
         }
-        return handleDeadline(description, time);
+        return handleToDo(description);
     }
 
-    private IDuke handleDeadline(String description, String time)
-            throws DukeIllegalArgumentException {
+    private IDuke handleToDo(String description) throws DukeIllegalArgumentException {
         if (description.matches("\\s*")) {
             throw new DukeIllegalArgumentException(
-                    "The description of deadline cannot be empty!");
+                    "The description of todo cannot be empty!");
         }
-        if (time.matches("\\s*")) {
-            throw new DukeIllegalArgumentException(
-                    "The time of deadline cannot be empty!");
-        }
-        ITask task = Deadline.getDeadline(description, time);
+        ITask task = ToDo.getToDo(description);
         IDuke newDuke = storeTask(task);
-        System.out.println(TextFormatter.getFormattedText(
+        System.out.print(TextFormatter.getFormattedText(
                 "Got it. I've added this task:\n\t" + task.toString()
-                        + "\nNow you have " +  newDuke.getNumTask()
-                        + " task(s) in the list."));
+                        + "\nNow you have "
+                        +  newDuke.getNumTask() + " task(s) in the list."));
         return newDuke;
     }
 
@@ -60,6 +53,6 @@ public class DeadlineCommand extends Command {
 
     @Override
     public Command setDuke(IDuke duke) {
-        return new DeadlineCommand(description, time, duke);
+        return new ToDoCommand(description, duke);
     }
 }

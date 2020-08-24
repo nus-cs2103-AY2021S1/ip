@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
             throw new DukeIllegalArgumentException("Task index out of bound!");
         }
         IDuke newDuke = deleteTask(index);
-        System.out.println(TextFormatter.getFormattedText(
+        System.out.print(TextFormatter.getFormattedText(
                 Message.REMOVED_TASK.toString() + "\n\t" + duke.getTask(index)
                 + "\n Now you have " + newDuke.getNumTask() + " task(s) in the list."));
         return newDuke;
