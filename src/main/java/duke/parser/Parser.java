@@ -9,8 +9,20 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The <code>Parser</code> class make sense of the
+ * user inputs. Decides which command to call or exception to throw.
+ */
 public class Parser {
 
+    /**
+     * Returns the commands to call based on user inputs.
+     *
+     * @param input User input to Duke.
+     * @param tasks TasksList use by Duke to store the tasks.
+     * @return A command to call.
+     * @throws DukeException If user input is not valid.
+     */
     public static Command parse(String input, TaskList tasks) throws DukeException {
         if (input.equals("bye")) {
             return new ByeCommand();
@@ -29,6 +41,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the ListCommand if user input is valid.
+     *
+     * @param tasks TasksList use by Duke to store the tasks.
+     * @return ListCommand.
+     * @throws DukeException If user input is not valid.
+     */
     public static Command parseList(TaskList tasks) throws DukeException {
         if (tasks.getNumberOfTask() <= 0) {
             throw new NoTaskException();
@@ -37,6 +56,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the DoneCommand if user input is valid.
+     *
+     * @param input User input to Duke.
+     * @param tasks TasksList use by Duke to store the tasks.
+     * @return DoneCommand.
+     * @throws DukeException If user input is not valid.
+     */
     public static Command parseDone(String input, TaskList tasks) throws DukeException {
         String[] splitInput = input.split(" ");
         if (splitInput.length != 2 || !splitInput[1].matches("[0-9]+")) {
@@ -51,6 +78,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns commands to add tasks if user input is valid.
+     *
+     * @param input User input to Duke.
+     * @return commands that add tasks
+     * @throws DukeException If user input is not valid.
+     */
     public static Command parseAddTask(String input) throws DukeException {
             String[] splitInput = input.split(" ", 2);
             String taskWord = splitInput[0];
@@ -94,6 +128,14 @@ public class Parser {
             }
     }
 
+    /**
+     * Returns the DeleteCommand if user input is valid.
+     *
+     * @param input User input to Duke.
+     * @param tasks TasksList use by Duke to store the tasks.
+     * @return DeleteCommand.
+     * @throws DukeException If user input is not valid.
+     */
     public static Command parseDelete(String input, TaskList tasks) throws DukeException {
         String[] splitInput = input.split(" ");
         if (splitInput.length != 2 || !splitInput[1].matches("[0-9]+")) {
@@ -108,6 +150,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the RetrieveCommand if user input is valid.
+     *
+     * @param input User input to Duke.
+     * @return RetrieveCommand.
+     * @throws DukeException If user input is not valid.
+     */
     public static Command parseRetrieve(String input) throws DukeException {
         try {
             String[] splitInput = input.split(" ");

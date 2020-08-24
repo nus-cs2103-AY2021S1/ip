@@ -10,16 +10,36 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an action to retrieve Deadline and Event occurring on
+ * a specific date from TaskList.
+ */
 public class RetrieveCommand extends Command {
+
+    /** Date of Deadline and Event to be retrieved */
     private final LocalDate date;
 
+    /**
+     * Constructs a <code>RetrieveCommand</code> object.
+     *
+     * @param date Date of Deadline and Event to be retrieved.
+     */
     public RetrieveCommand(LocalDate date) {
         super(false);
         this.date = date;
     }
 
+    /**
+     * Retrieves Deadline and Event that has the same LocalDate as the user input.
+     *
+     * @param tasks TaskList to store Task.
+     * @param ui Ui to interact with users.
+     * @param storage Storage use by Duke to save and load files.
+     * @throws InvalidTaskDateException If date and time format is invalid.
+     * @return Nothing.
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskDateException {
         try {
             StringBuffer sb = new StringBuffer();
             int index = 1;
@@ -54,10 +74,5 @@ public class RetrieveCommand extends Command {
             throw new InvalidTaskDateException();
         }
 
-    }
-
-    @Override
-    public boolean getIsExit() {
-        return isExit;
     }
 }
