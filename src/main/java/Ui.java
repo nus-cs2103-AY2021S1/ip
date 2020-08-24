@@ -2,19 +2,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
-    public String iterateToDo(List<Task> arr) {
-        String output = "";
-        int counter = 1;
-        for (Task task : arr) {
-            if (task == null) {
-                break;
-            } else {
-                output += Integer.toString(counter) + ". " + task.toString() + "\n";
-                counter++;
-            }
-        }
-        return output;
-    }
+
 
     public void showWelcome() {
         String hor_line = "____________________________________\n";
@@ -51,7 +39,7 @@ public class Ui {
                     break;
                 } else if (command.equals("list")) {
                     System.out.println(hor_line + "Here are the things you need to do lor: \n");
-                    System.out.println(iterateToDo(todo_list) + hor_line);
+                    System.out.println(list.iterateToDo() + hor_line);
                 } else if (command.startsWith("delete")) {
                     if (command.equals("delete")) {
                         throw new ResponseException(hor_line + "☹ AIYO!!! Please state which task to delete la... \n" +
@@ -61,7 +49,7 @@ public class Ui {
                         int number = Integer.parseInt(index);
                         System.out.println(hor_line + "Task deleted liao: \n" + todo_list.get(number - 1).toString() + "\n" +
                                 "You got " + Integer.toString(counter - 1) + " tasks left. \n" + hor_line);
-                        todo_list.remove(number - 1);
+                        list.deleteTask(number);
                         storage.writeData(todo_list);
                         counter --;
                     }
@@ -83,7 +71,7 @@ public class Ui {
                                 + hor_line);
                     } else {
                         String instructions = command.substring(5);
-                        todo_list.add(counter, new Todo(false, counter + 1, instructions));
+                        list.addTask(counter, new Todo(false, counter + 1, instructions));
                         System.out.println(hor_line + "Okok. I add for you: \n" +
                                 todo_list.get(counter).toString() + "\n" +
                                 "You got " + Integer.toString(counter + 1) + " tasks in the list.\n" + hor_line);
@@ -99,7 +87,7 @@ public class Ui {
                         String[] arr = instructions.split("/by");
                         instructions = arr[0].substring(0, arr[0].length() - 1);
                         String date = arr[1].substring(1);
-                        todo_list.add(counter, new Deadline(false, counter + 1, instructions, date));
+                        list.addTask(counter, new Deadline(false, counter + 1, instructions, date));
                         System.out.println(hor_line + "Okok. I help you add this task: \n" +
                                 todo_list.get(counter).toString() + "\n" + "You got " +
                                 Integer.toString(counter + 1) + " tasks in the list.\n" + hor_line);
@@ -115,7 +103,7 @@ public class Ui {
                         String[] arr = instructions.split("/at");
                         instructions = arr[0].substring(0, arr[0].length() - 1);
                         String time = arr[1].substring(1);
-                        todo_list.add(counter, new Event(false, counter + 1, instructions, time));
+                        list.addTask(counter, new Event(false, counter + 1, instructions, time));
                         System.out.println(hor_line + "Okay. I've added this task: \n"
                                 + todo_list.get(counter).toString() + "\n" +  "You got " +
                                 Integer.toString(counter + 1) + " tasks in the list.\n" + hor_line);

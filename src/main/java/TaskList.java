@@ -15,4 +15,26 @@ public class TaskList {
     public List<Task> getList() {
         return this.list;
     }
+
+    public String iterateToDo() {
+        String output = "";
+        int counter = 1;
+        for (Task task : list) {
+            if (task == null) {
+                break;
+            } else {
+                output += Integer.toString(counter) + ". " + task.toString() + "\n";
+                counter++;
+            }
+        }
+        return output;
+    }
+
+    public void deleteTask(int number) {
+        this.list.remove(number - 1);
+    }
+
+    public void addTask(int counter, Task task) {
+        this.list.add(counter, task);
+    }
 }
