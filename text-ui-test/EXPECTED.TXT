@@ -21,7 +21,7 @@ Here's all your tasks to complete:
 2. [D][✘] return book (by: Sep 4 2020)
 3. [E][✘] project meeting (at: Oct 15 2020)
 Time to get to work! :D
-Tasks.Task marked as done! Good job!
+Task marked as done! Good job!
 [T][✓] borrow book
 Here's all your tasks to complete:
 1. [T][✓] borrow book
