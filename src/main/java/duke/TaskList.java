@@ -106,4 +106,15 @@ public class TaskList {
             ui.printLineBackground();
         }
     }
+    
+    public void findTasks(String keyword) {
+        ui.printLineBackground();
+        System.out.println("        Here are the matching tasks in your list:");
+        for(int i=0; i<tasks.size(); i++) {
+            if(tasks.get(i).getDescription().contains(keyword)) {
+                System.out.println("        " + (i+1) + "." + tasks.get(i));
+            }
+        }
+        ui.printLineBackground();
+    }
 }

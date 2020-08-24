@@ -90,4 +90,8 @@ abstract class Task {
      * Get task representation in hardware as string.
      */
     public abstract String toStringFile();
+    
+    public String getDescription() {
+        return description;
+    }
 }

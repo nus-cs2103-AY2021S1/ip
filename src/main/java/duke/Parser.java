@@ -10,7 +10,8 @@ public class Parser {
      * Command enum lists out all the types of commands.
      */
     public enum Command {
-        BYE("bye"), LIST("list"), DONE("done"), TODO("todo"), DEADLINE("deadline"), EVENT("event"), DELETE("delete"), FILTER("filter");
+        BYE("bye"), LIST("list"), DONE("done"), TODO("todo"), DEADLINE("deadline"), 
+              EVENT("event"), DELETE("delete"), FILTER("filter"), FIND("find");
         public String value;
         Command(String value) {
             this.value = value;
@@ -36,7 +37,7 @@ public class Parser {
         } else if (userInput.equals(Command.LIST.value)) {
             tasks.showTasks();
 
-        }  else if (userInput.startsWith(Command.DONE.value)) {
+        } else if (userInput.startsWith(Command.DONE.value)) {
             try {
                 int taskPosition = Integer.parseInt(userInput.substring(5));
                 tasks.setDone(taskPosition);
@@ -62,7 +63,7 @@ public class Parser {
                 int keywordPosition = userInput.indexOf("/by");
                 String description = userInput.substring(spacePosition + 1, keywordPosition - 1);
                 String by = userInput.substring(keywordPosition + 4);
-                tasks.addDeadline(description,by);
+                tasks.addDeadline(description, by);
                 storage.saveTasks(tasks.getTasksList());
             } catch (StringIndexOutOfBoundsException e) {
                 ui.showInvalidFormatCommandDescription();
@@ -94,7 +95,15 @@ public class Parser {
             String[] inputArray = userInput.split(" ");
             tasks.filterTask(inputArray);
 
-        } else {
+        } else if (userInput.startsWith(Command.FIND.value)) {
+            try {
+                String keyword = userInput.substring(6);
+                tasks.findTasks(keyword.trim());
+
+            } catch (StringIndexOutOfBoundsException e) {
+                ui.showInvalidFormatCommandDescription();
+            }
+        }else {
             ui.showMeaninglessCommandDescription();
         }
         return false;
