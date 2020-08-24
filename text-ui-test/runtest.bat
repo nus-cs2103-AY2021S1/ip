@@ -5,6 +5,7 @@ if not exist ..\bin mkdir ..\bin
 
 REM delete output from previous run
 del ACTUAL.TXT
+del D:\uni\CS2103T\Duke(iP)\ip\text-ui-test\data\duke.txt
 
 REM compile the code into the bin folder
 javac  -cp ..\src -Xlint:none -d ..\bin D:\uni\CS2103T\Duke(iP)\ip\src\main\java\Duke.java D:\uni\CS2103T\Duke(iP)\ip\src\main\java\Task\* D:\uni\CS2103T\Duke(iP)\ip\src\main\java\DukeExceptions.java

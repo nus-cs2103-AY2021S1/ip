@@ -13,11 +13,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String base = "[D]";
+        String base = "[D] ";
         if (taskCompleted) {
-            base = base + "[✓] ";
+            base = base + "[✓]";
         } else {
-            base = base + "[✗] ";
+            base = base + "[✗]";
         }
         base = base + taskDescription + "(by:" + date + ")";
         return base;

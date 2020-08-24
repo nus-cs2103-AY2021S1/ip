@@ -1,9 +1,13 @@
 import Task.Event;
 import Task.Task;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import Task.*;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Duke {
     private final static String GREETING_MESSAGE = "Buenos Dias! Soy Duke, como estas mi amigo?";
@@ -22,6 +26,8 @@ public class Duke {
     public static void main(String[] args) {
         System.out.println(GREETING_MESSAGE);
 
+        loadFile(System.getProperty("user.dir") + "/data/duke.txt");
+
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String userInput = sc.next();
@@ -36,7 +42,7 @@ public class Duke {
                             System.out.println((i + 1) + ". " + userInputsList.get(i).toString());
                         }
                     } catch (DukeExceptions e) {
-                        System.out.println(e);
+                        System.out.println(e.toString());
                     }
                     break;
                 case TERMINATION:
@@ -57,15 +63,16 @@ public class Duke {
                             throw new DukeExceptions("☹ OOPS !!! Incapaz de completar");
                         }
                         positionDone = positionDone - 1;
-                        if (positionDone < userInputsList.size() && positionDone > 0) {
+                        if (positionDone < userInputsList.size() && positionDone >= 0) {
                             System.out.println("Agradable! He marcado esta tarea como hecha:");
                             userInputsList.get(positionDone).completeTask();
                             System.out.println(userInputsList.get(positionDone));
+                            saveFile(false);
                         } else {
                             throw new DukeExceptions("☹ OOPS !!! ¡Esta tarea aún no existe!");
                         }
                     } catch (DukeExceptions e) {
-                        System.out.println(e);
+                        System.out.println(e.toString());
                     }
                     break;
                 case TASK_TODO:
@@ -78,10 +85,10 @@ public class Duke {
                         Todo newTodo = new Todo(position, userInput);
                         userInputsList.add(newTodo);
                         System.out.println("Entendido. He agregado esta tarea:\n" +
-                                newTodo +
-                                "\nAhora tienes " + userInputsList.size() +" tareas en la lista. ");
+                                newTodo);
+                        saveFile(true);
                     } catch(DukeExceptions e) {
-                        System.out.println(e);
+                        System.out.println(e.toString());
                     }
                     break;
                 case TASK_DEADLINE:
@@ -104,10 +111,10 @@ public class Duke {
                         newDeadline.setTime(dateDescription);
                         userInputsList.add(newDeadline);
                         System.out.println("Entendido. He agregado esta tarea:\n" +
-                                newDeadline +
-                                "\nAhora tienes " + userInputsList.size() + " tareas en la lista. ");
+                                newDeadline);
+                        saveFile(true);
                     } catch(DukeExceptions e) {
-                        System.out.println(e);
+                        System.out.println(e.toString());
                     }
                     break;
                 case TASK_EVENT:
@@ -130,10 +137,10 @@ public class Duke {
                         newEvent.setTime(dateDescription);
                         userInputsList.add(newEvent);
                         System.out.println("Entendido. He agregado esta tarea:\n" +
-                                newEvent +
-                                "\nAhora tienes " + userInputsList.size() + " tareas en la lista. ");
+                                newEvent);
+                        saveFile(true);
                     } catch(DukeExceptions e) {
-                        System.out.println(e);
+                        System.out.println(e.toString());
                     }
                     break;
                 case DELETE_EVENT:
@@ -150,23 +157,23 @@ public class Duke {
                             throw new DukeExceptions("☹ OOPS !!! No se puede borrar");
                         }
                         positionDone = positionDone - 1;
-                        if (positionDone < userInputsList.size() && positionDone > 0) {
+                        if (positionDone < userInputsList.size() && positionDone >= 0) {
                             System.out.println("Célebre. He eliminado esta tarea:");
                             System.out.println(userInputsList.get(positionDone));
                             userInputsList.remove(positionDone);
-                            System.out.println("Ahora tienes " + userInputsList.size() + " tareas en la lista. ");
+                            saveFile(true);
                         } else {
                             throw new DukeExceptions("☹ OOPS !!! ¡Esta tarea aún no existe!");
                         }
                     } catch (DukeExceptions e) {
-                        System.out.println(e);
+                        System.out.println(e.toString());
                     }
                     break;
                 default:
                     try {
                         throw new DukeExceptions("OOPS !!! Lo siento, pero no sé qué significa eso :-(");
                     } catch(DukeExceptions e) {
-                        System.out.println(e);
+                        System.out.println(e.toString());
                     }
             }
             if (userInput.equals(TERMINATION)) {
@@ -175,4 +182,71 @@ public class Duke {
             }
         }
     }
+
+    public static void saveFile(boolean printLine) {
+        if (printLine) {
+            System.out.println("Ahora tienes " + userInputsList.size() + " tareas en la lista.");
+        }
+        String filepath = System.getProperty("user.dir") + "/data/duke.txt";
+        try {
+            FileWriter dukeFileWriter = new FileWriter(filepath, false);
+            for (int i = 0; i < userInputsList.size(); i++) {
+                dukeFileWriter.write(userInputsList.get(i).toString() + "\n");
+            }
+            dukeFileWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    public static void loadFile(String filepath) {
+        File dukeFile = new File(filepath);
+        if (dukeFile.exists()) {
+            try {
+                Scanner sc1 = new Scanner(dukeFile);
+                while(sc1.hasNext()) {
+                    String loadedInput = sc1.nextLine();
+                    if (loadedInput.substring(0, 3).equals("[T]")) {
+                        Todo newTodo = new Todo(userInputsList.size(), loadedInput.substring(7));
+                        if (loadedInput.substring(4, 7).equals("[✓]")) {
+                            newTodo.completeTask();
+                        }
+                        userInputsList.add(newTodo);
+                    } else if (loadedInput.substring(0, 3).equals("[D]")) {
+                        int byPosition = loadedInput.indexOf("by:");
+                        Deadline newDeadline = new Deadline(userInputsList.size(),
+                                loadedInput.substring(7, byPosition));
+                        if (loadedInput.substring(4, 7).equals("[✓]")) {
+                            newDeadline.completeTask();
+                        }
+                        newDeadline.setTime(loadedInput.substring(byPosition + 3));
+                        userInputsList.add(newDeadline);
+                    } else if (loadedInput.substring(0, 3).equals("[E]")) {
+                        int atPosition = loadedInput.indexOf("at:");
+                        Event newEvent = new Event(userInputsList.size(),
+                                loadedInput.substring(7, atPosition));
+                        if (loadedInput.substring(4, 7).equals("[✓]")) {
+                            newEvent.completeTask();
+                        }
+                        newEvent.setTime(loadedInput.substring(atPosition + 3));
+                        userInputsList.add(newEvent);
+                    }
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println(e.toString());
+            }
+        } else {
+            try {
+                File dukeParent = new File(dukeFile.getParent());
+                if (!dukeParent.exists()) {
+                    dukeParent.mkdirs();
+                }
+                dukeFile.createNewFile();
+            } catch (IOException e) {
+                System.out.println(e.toString());
+            }
+        }
+    }
+
+
 }
