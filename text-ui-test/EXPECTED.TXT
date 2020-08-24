@@ -1,65 +1,58 @@
-#    #   ##   # ###### ###### #    #
-#   #   #  #  #     #  #      ##   #
-####   #    # #    #   #####  # #  #
-#  #   ###### #   #    #      #  # #
-#   #  #    # #  #     #      #   ##
-#    # #    # # ###### ###### #    #
-
 Konichiwa! Welcome to Kaizen
 I am Kai, what can I do for you today?
 
 No tasks at the moment! Good job!
 
-Kai: Hai! I have added this task to your list:
+Hai! I have added this task to your list:
 [TODO] [✘] study for exams
 You now have 1 tasks in your list. Gambatte!
 
-Kai: Hai! I have added this task to your list:
+Hai! I have added this task to your list:
 [TODO] [✘] buy food
 You now have 2 tasks in your list. Gambatte!
 
-Kai: Here are your tasks!
+Here are your tasks!
 1. [TODO] [✘] study for exams
 2. [TODO] [✘] buy food
 
-Kai: Sugoi! This task is done!
+Sugoi! This task is done!
 [TODO] [✓] study for exams
 
 oops type wrong is not an integer!
 
 Sorry, no such task to mark as done!
 
-Kai: Hai! I have added this task to your list:
+Hai! I have added this task to your list:
 [TODO] [✘] pray
 You now have 3 tasks in your list. Gambatte!
 
-Kai: Hai! I have added this task to your list:
+Hai! I have added this task to your list:
 [DEADLINE] [✘] CS2103  (by: 20 August 2020)
 You now have 4 tasks in your list. Gambatte!
 
-Kai: Hai! I have added this task to your list:
+Hai! I have added this task to your list:
 [DEADLINE] [✘] final assignment  (by: 19 September 2020)
 You now have 5 tasks in your list. Gambatte!
 
 NANI??! Enter your deadline name & an end-time!
 
-Kai: Hai! I have added this task to your list:
+Hai! I have added this task to your list:
 [EVENT] [✘] run  (at: Utown 10pm)
 You now have 6 tasks in your list. Gambatte!
 
 Please enter a valid event! Remember to add '/at'
 
-Kai: Hai! I have added this task to your list:
+Hai! I have added this task to your list:
 [EVENT] [✘] gym  (at: Utown 10pm)
 You now have 7 tasks in your list. Gambatte!
 
 NANI??! Enter your event name & an event timing!
 
-Kai: Hai! I have added this task to your list:
+Hai! I have added this task to your list:
 [EVENT] [✘] dance  (at: school)
 You now have 8 tasks in your list. Gambatte!
 
-Kai: Here are your tasks!
+Here are your tasks!
 1. [TODO] [✓] study for exams
 2. [TODO] [✘] buy food
 3. [TODO] [✘] pray
@@ -69,7 +62,7 @@ Kai: Here are your tasks!
 7. [EVENT] [✘] gym  (at: Utown 10pm)
 8. [EVENT] [✘] dance  (at: school)
 
-Kai: Hai! This task has been deleted!
+Hai! This task has been deleted!
 [TODO] [✘] pray
 You now have 7 tasks in your list. Gambatte!
 
@@ -81,13 +74,13 @@ NANI??! Enter a description for your event!
 
 NANI??! Please say something that I can understand!
 
-Kai: Sugoi! This task is done!
+Sugoi! This task is done!
 [TODO] [✓] buy food
 
-Kai: Sugoi! This task is done!
+Sugoi! This task is done!
 [DEADLINE] [✓] final assignment  (by: 19 September 2020)
 
-Kai: Here are your tasks!
+Here are your tasks!
 1. [TODO] [✓] study for exams
 2. [TODO] [✓] buy food
 3. [DEADLINE] [✘] CS2103  (by: 20 August 2020)
@@ -96,14 +89,14 @@ Kai: Here are your tasks!
 6. [EVENT] [✘] gym  (at: Utown 10pm)
 7. [EVENT] [✘] dance  (at: school)
 
-Kai: Hai! This task has been deleted!
+Hai! This task has been deleted!
 [DEADLINE] [✓] final assignment  (by: 19 September 2020)
 You now have 6 tasks in your list. Gambatte!
 
-Kai: Hai! This task has been deleted!
+Hai! This task has been deleted!
 [TODO] [✓] study for exams
 You now have 5 tasks in your list. Gambatte!
 
 Which task do you want to delete? Please key in the task number!
 
-Kai: Sayonara! See you again my friend!
+Sayonara! See you again my friend!

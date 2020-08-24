@@ -1,29 +1,16 @@
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 
 /**
  * Encapsulates the chatBot and its behavior.
  */
 public class ChatBot {
-    String logo;
-    String user;
-    String botName;
-    List<Task> toDoList;
+    TaskList<Task> toDoList;
 
     /**
      * Instantiates a chatBot with a name.
-     * @param botName the name of the chatBot
      */
-    ChatBot(String botName) {
-        logo = logo = "#    #   ##   # ###### ###### #    #\n"
-                + "#   #   #  #  #     #  #      ##   #\n"
-                + "####   #    # #    #   #####  # #  #\n"
-                + "#  #   ###### #   #    #      #  # #\n"
-                + "#   #  #    # #  #     #      #   ##\n"
-                + "#    # #    # # ###### ###### #    #\n";
-        this.botName = botName;
-        toDoList = new ArrayList<>();
+    ChatBot() {
+        toDoList = new TaskList<>();
     }
 
     /**
@@ -31,11 +18,9 @@ public class ChatBot {
      */
     void welcome() {
          String welcomeMessage = "Konichiwa! Welcome to Kaizen\n"
-                 + "I am " + this.botName + ", what can I do for you today?\n";
+                 + "I am Kai, what can I do for you today?\n";
 
-        System.out.println(this.logo
-                + "\n"
-                + welcomeMessage);
+        System.out.println(welcomeMessage);
     }
 
     /**
@@ -69,6 +54,7 @@ public class ChatBot {
                 } else {
                     throw new DukeException("NANI??! Please say something that I can understand!\n");
                 }
+
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
@@ -86,8 +72,7 @@ public class ChatBot {
             return;
         }
 
-        System.out.println(this.botName + ": "
-                + "Here are your tasks!");
+        System.out.println("Here are your tasks!");
         for (int i = 0; i < toDoList.size(); i++) {
             System.out.println((i+1) + ". "
                     + toDoList.get(i));
@@ -116,7 +101,7 @@ public class ChatBot {
             Task currentTask = this.toDoList.get(taskNumber - 1);
             Task newTask = currentTask.markAsDone();
             this.toDoList.set(taskNumber - 1, newTask);
-            System.out.println(this.botName + ": " + "Sugoi! This task is done!");
+            System.out.println("Sugoi! This task is done!");
             System.out.println(newTask + "\n");
 
         } catch (NumberFormatException e) {
@@ -204,8 +189,7 @@ public class ChatBot {
      */
     void addTask(Task taskToAdd) {
         this.toDoList.add(taskToAdd);
-        System.out.println(this.botName + ": "
-                + "Hai! I have added this task to your list:\n"
+        System.out.println("Hai! I have added this task to your list:\n"
                 + taskToAdd);
         printToDoListSize();
     }
@@ -229,7 +213,7 @@ public class ChatBot {
             }
 
             Task currentTask = this.toDoList.get(taskNumber - 1);
-            System.out.println(this.botName + ": " + "Hai! This task has been deleted!");
+            System.out.println("Hai! This task has been deleted!");
             this.toDoList.remove(currentTask);
             System.out.println(currentTask);
             printToDoListSize();
@@ -252,7 +236,6 @@ public class ChatBot {
      * Says 'bye' to the user.
      */
     void bye() {
-        System.out.println(this.botName + ": "
-                + "Sayonara! See you again my friend!");
+        System.out.println("Sayonara! See you again my friend!");
     }
 }
