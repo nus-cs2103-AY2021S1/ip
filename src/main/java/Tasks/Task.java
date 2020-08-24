@@ -1,3 +1,7 @@
+package Tasks;
+
+import Errors.InvalidCommandException;
+
 public abstract class Task {
     protected String description;
     protected String done;

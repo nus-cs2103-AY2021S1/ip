@@ -1,3 +1,11 @@
+package Main;
+
+import Errors.*;
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.Todo;
+
 import java.util.Scanner;
 import java.time.LocalDateTime;
 
@@ -24,7 +32,7 @@ public class Ui {
 	}
 
 	public void showWelcome() {
-		Ui.echo("Hello! I'm Duke\nWhat can I do for you?");
+		Ui.echo("Hello! I'm Main.Duke\nWhat can I do for you?");
 	}
 
 	public void checkCommands(Scanner sc, TaskList tasks) {
