@@ -1,4 +1,3 @@
-import java.util.Optional;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -11,14 +10,6 @@ public class Duke {
     String byeLine;
     String errorLine;
     String indent;
-    
-    static String COMMAND_DONE = "done";
-    static String COMMAND_LIST = "list";
-    static String COMMAND_DELETE = "delete";
-    static String COMMAND_TODO = "todo";
-    static String COMMAND_EVENT = "event";
-    static String COMMAND_DEADLINE = "deadline";
-    static String COMMAND_EXIT = "bye";
 
     Duke() {
         tasks = new ArrayList<>();
@@ -50,10 +41,10 @@ public class Duke {
 
     public boolean handleInput(String input) {
         String[] processedInput = input.split(" ");
-        if (input.equals(COMMAND_EXIT)) {
+        if (DukeCommand.equalsCommand(input, DukeCommand.EXIT)) {
             exit();
             return true;
-        } else if (input.equals(COMMAND_LIST)) {
+        } else if (DukeCommand.equalsCommand(input, DukeCommand.LIST)) {
             System.out.println(indent + listTaskLine);
             for (Task task : tasks) {
                 System.out.println(indent + (tasks.indexOf(task) + 1) + "." + task.toString()
@@ -64,7 +55,7 @@ public class Duke {
             }
             System.out.println(indent + listTaskLine);
             return false;
-        } else if (processedInput[0].equals(COMMAND_DONE)) {
+        } else if (DukeCommand.equalsCommand(processedInput[0], DukeCommand.DONE)) {
             if (processedInput.length == 1) {
                 DukeException e = new DukeNoItemToMarkDoneException(input);
                 displayError(e.toString());
@@ -85,7 +76,7 @@ public class Duke {
                     + "\n" + indent + doneTaskLine
             );
             return false;
-        } else if (processedInput[0].equals(COMMAND_TODO)) {
+        } else if (DukeCommand.equalsCommand(processedInput[0], DukeCommand.TODO)) {
             if (processedInput.length == 1) {
                 DukeException e = new DukeNoDescriptionException(input);
                 displayError(e.toString());
@@ -96,7 +87,7 @@ public class Duke {
             tasks.add(task);
             displayAddTaskSuccess(task, tasks.size());
             return false;
-        } else if (processedInput[0].equals(COMMAND_DEADLINE)) {
+        } else if (DukeCommand.equalsCommand(processedInput[0], DukeCommand.DEADLINE)) {
             if (processedInput.length == 1) {
                 DukeException e = new DukeNoDescriptionException(input);
                 displayError(e.toString());
@@ -107,7 +98,7 @@ public class Duke {
             tasks.add(task);
             displayAddTaskSuccess(task, tasks.size());
             return false;
-        } else if (processedInput[0].equals(COMMAND_EVENT)) {
+        } else if (DukeCommand.equalsCommand(processedInput[0], DukeCommand.EVENT)) {
             if (processedInput.length == 1) {
                 DukeException e = new DukeNoDescriptionException(input);
                 displayError(e.toString());
@@ -124,7 +115,7 @@ public class Duke {
                     + indent + addTaskLine
             );
             return false;
-        } else if (processedInput[0].equals(COMMAND_DELETE)) {
+        } else if (DukeCommand.equalsCommand(processedInput[0], DukeCommand.DELETE)) {
             if (processedInput.length == 1) {
                 DukeException e = new DukeNoItemToDeleteException(input);
                 displayError(e.toString());
