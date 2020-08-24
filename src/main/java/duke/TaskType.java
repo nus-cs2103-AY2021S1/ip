@@ -1,3 +1,5 @@
+package duke;
+
 public enum TaskType {
     TODO, DEADLINE, EVENT, LIST, DONE, DELETE, BYE;
 
