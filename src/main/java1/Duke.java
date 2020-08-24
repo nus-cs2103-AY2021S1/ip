@@ -1,5 +1,3 @@
-package java1;
-
 import java1.exception.*;
 import java1.parser.Parser;
 import java1.tasklist.*;
@@ -29,11 +27,12 @@ public class Duke {
         } catch (FileNotFoundException e) {
             File newFile = new File(filePath);
             try {
-                newFile.createNewFile();
+                boolean success = newFile.createNewFile();
 
                 tasks = new TaskList(storage.load());
             } catch (IOException ex) {
-                System.out.println("An error occurred, file could not be created.");
+                //System.out.println("An error occurred, file could not be created.");
+                e.printStackTrace();
             }
         }
     }
