@@ -13,9 +13,17 @@ public class DukeList {
         this.completedTasks = 0;
     }
 
+    public List<Task> getList() {
+        return this.list;
+    }
+
     public String addItem(Task item) {
         this.list.add(item);
-        this.activeTasks += 1;
+        if (item.done) {
+            this.completedTasks += 1;
+        } else {
+            this.activeTasks += 1;
+        }
         return "added: " + item + "\nActive Tasks: " +
                 this.activeTasks + "\nCompleted Tasks: " + this.completedTasks;
     }
