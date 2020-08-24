@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.text.ParseException;
+import java.time.LocalDateTime;
 
 public class Command {
     CommandType commandType;
@@ -82,31 +84,36 @@ public class Command {
         return newTask;
     }
 
-    public Task createDeadline() throws InvalidDeadlineDescripDukeException {
+    public Task createDeadline() throws InvalidDeadlineDescripDukeException, ParseException {
         if (commandArr.length == 1) {
             throw new InvalidDeadlineDescripDukeException();
         }
+        // /by 2/12/2019 1800
         String[] modifiedCommand = removeFirst(commandArr);
         String[] upper = removeAfterWord(modifiedCommand, "/by");
         String[] lower = keepAfterWord(modifiedCommand, "/by");
-        Task newTask = new Deadline(joinString(upper), joinString(lower));
+        LocalDateTime dateAndTime = Parser.changeDateAndTime(lower);
+        Task newTask = new Deadline(joinString(upper), dateAndTime);
         return newTask;
     }
 
-    public Task createEvent() throws InvalidEventDescripDukeException {
+    public Task createEvent() throws InvalidEventDescripDukeException, ParseException {
         if (commandArr.length == 1) {
             throw new InvalidEventDescripDukeException();
         }
         String[] modifiedCommand = removeFirst(commandArr);
         String[] upper = removeAfterWord(modifiedCommand, "/at");
         String[] lower = keepAfterWord(modifiedCommand, "/at");
-        Task newTask = new Event(joinString(upper), joinString(lower));
+        LocalDateTime dateAndTime = Parser.changeDateAndTime(lower);
+        Task newTask = new Event(joinString(upper), dateAndTime);
         return newTask;
+        // deadline eat dinner with family /at 2000-08-1818:
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTodoDescripDukeException,
-            InvalidDeadlineDescripDukeException, InvalidEventDescripDukeException, IOException,
-            InvalidFirstDukeException {
+            InvalidDeadlineDescripDukeException, InvalidEventDescripDukeException,
+            InvalidFirstDukeException, ParseException, IOException {
+
         if (commandType.equals(CommandType.PRINTALLTASKS)) {
             printAllTask(tasks);
         } else if (commandType.equals(CommandType.EXITDUKE)) {
@@ -139,4 +146,5 @@ public class Command {
             return false;
         }
     }
+
 }

@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 
 public class Duke {
 
@@ -29,7 +30,7 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException e) {
+            } catch (DukeException | ParseException e) {
                 ui.showError(e.getMessage());
             } catch (IOException e) {
                 ui.showError(e.getMessage());

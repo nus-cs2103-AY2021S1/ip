@@ -1,2 +1,4 @@
 [T][✗] read book
 [T][✗] eat fruits
+[D][✗] return books (by: May 20 2000, 12:12PM)
+[E][✗] eat dinner with family (at: Aug 18 2000, 06:18PM)

@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class StorageParser {
 
     public static boolean isDone(String symbol) {
@@ -22,12 +25,16 @@ public class StorageParser {
             boolean isDone = isDone(typeAndIsDoneArr[1]);
             String organisedDescription = splitTask[1].replaceAll(" \\(by: ","|").replaceAll("\\)","");
             String[] splitDescription = organisedDescription.split("\\|");
-            task = new Deadline(isDone, splitDescription[0], splitDescription[1]);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mma");
+            LocalDateTime localDateAndTime = LocalDateTime.parse(splitDescription[1], formatter);
+            task = new Deadline(isDone, splitDescription[0], localDateAndTime);
         } else if (typeAndIsDoneArr[0].equals("E")) {
             boolean isDone = isDone(typeAndIsDoneArr[1]);
             String organisedDescription = splitTask[1].replaceAll(" \\(at: ","|").replaceAll("\\)","");
             String[] splitDescription = organisedDescription.split("\\|");
-            task = new Event(isDone, splitDescription[0], splitDescription[1]);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mma");
+            LocalDateTime localDateAndTime = LocalDateTime.parse(splitDescription[1], formatter);
+            task = new Event(isDone, splitDescription[0], localDateAndTime);
         } else {
             System.out.println("error in reading input");
         }
@@ -36,6 +43,6 @@ public class StorageParser {
 
     public static void main(String[] args) {
         System.out.println(StorageParser.parse("[T][✗] read book"));
-        System.out.println(StorageParser.parse("[D][✗] return book (by: 3 mar)"));
+        System.out.println(StorageParser.parse("[D][✗] return book (by: Oct 15 2019, 12:00PM)"));
     }
 }
