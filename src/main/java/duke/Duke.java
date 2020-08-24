@@ -14,7 +14,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -50,6 +50,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException {
-        new Duke("C:\\Users\\Cedric\\Desktop\\Repo\\iP\\src\\main\\java\\data\\duke.txt").run();
+        new Duke("src/main/java/data/duke.txt").run();
     }
 }

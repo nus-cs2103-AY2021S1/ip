@@ -44,9 +44,12 @@ public class Storage {
         fw.close();
     }
 
-    public ArrayList<Task> load() throws FileNotFoundException {
+    public ArrayList<Task> load() throws IOException {
         ArrayList<Task> task = new ArrayList<>();
         File f = new File(this.filePath);
+        if (!f.exists()) {
+            f.createNewFile();
+        }
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
             String currentTask = s.nextLine();
