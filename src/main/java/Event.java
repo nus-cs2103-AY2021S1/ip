@@ -10,6 +10,11 @@ public class Event extends Task {
         this.at = LocalDate.parse(at);
     }
 
+    public Event(String description, LocalDate date) {
+        super(description);
+        this.at = date;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString()

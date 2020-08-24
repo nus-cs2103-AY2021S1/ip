@@ -10,6 +10,11 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
+    public Deadline(String description, LocalDate date) {
+        super(description);
+        this.by = date;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString()
