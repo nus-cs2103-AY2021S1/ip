@@ -1,6 +1,6 @@
-public class invalidCommand extends Exception{
+public class InvalidCommand extends Exception{
     private String errorMessage;
-    public invalidCommand(String errorMessage) {
+    public InvalidCommand(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 

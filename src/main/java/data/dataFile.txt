@@ -1,4 +1,0 @@
-T | 1 | borrow books
-D | 0 | return book | Sunday
-E | 0 | project meeting | Mon 2-4pm
-D | 1 | do homework | no idea :-p
