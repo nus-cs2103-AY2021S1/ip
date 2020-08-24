@@ -1,3 +1,9 @@
 T | 0 | borrow book
-D | 0 | return book | Sunday
-E | 0 | project meeting | Mon 2-4pm
+D | 0 | return book | Dec 15 2020
+E | 0 | project meeting | Oct 15 2020
+T | 0 | borrow book
+D | 0 | return book | Dec 15 2020
+E | 0 | project meeting | Oct 15 2020
+T | 0 | exercise
+D | 0 | LCC essay | Sep 24 2020
+E | 0 | judo competition | Nov 23 2020

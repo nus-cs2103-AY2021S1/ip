@@ -3,3 +3,5 @@ public class DukeException extends Exception {
         super(errorMessage);
     }
 }
+
+// consider exception when 2022-9-15 is given instead of 2022-09-15

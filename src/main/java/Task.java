@@ -1,11 +1,17 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected String data;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
@@ -14,6 +20,11 @@ public class Task {
 
     public void markAsDone() {
         isDone = true;
+    }
+
+
+    public LocalDate getDate() {
+        return null;
     }
 
     @Override

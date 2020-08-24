@@ -1,6 +1,12 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Duke {
+
+    enum Command {
+        BYE, LIST, DONE, DELETE, DATE
+    }
+
     public static void main(String[] args) {
         Chatbot bot = new Chatbot();
         String line = bot.getHorizontalLine();
@@ -35,6 +41,12 @@ public class Duke {
                     int taskNo = Integer.parseInt(numStr);
                     bot.deleteTask(taskNo);
                     System.out.println(line);
+                } else if (res[0].equals("date")) {
+                    // list all tasks on that date
+                    String dateStr = res[1];
+                    LocalDate date = LocalDate.parse(dateStr);
+                    bot.listTasksOn(date);
+                    System.out.println(line);
                 } else {
                     // add tasks
                     String taskType = res[0];
@@ -42,12 +54,12 @@ public class Duke {
                     if (res.length == 2) {
                         bot.addTask(taskType, taskDescription);
                     } else {
-                        String time = res[2];
-                        bot.addTask(taskType, taskDescription, time);
+                        String time = res[2].replaceAll(" ", "").replaceAll("/", "-");;
+                        LocalDate date = LocalDate.parse(time);
+                        bot.addTask(taskType, taskDescription, date);
                     }
                     System.out.println(line);
                 }
-
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
                 System.out.println(line);

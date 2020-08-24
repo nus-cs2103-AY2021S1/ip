@@ -1,9 +1,13 @@
 todo borrow book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+deadline return book /by 2020-12-15
+event project meeting /at 2020-10-15
 list
 done 1
 done 2
 list
 delete 2
 list
+todo exercise
+deadline LCC essay /by 2020-09-24
+event judo competition /at 2020-11-23
+date 2020-09-24
