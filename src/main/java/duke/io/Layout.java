@@ -21,10 +21,14 @@ public class Layout {
         printLine();
     }
 
-    public void printTaskList(ArrayList<Task> arr) {
+    public void printTaskList(boolean isFindCommand, ArrayList<Task> arr) {
         printLine();
         if (arr.size() != 0) {
-            System.out.println("\tHere are the tasks in your list: ");
+            if (isFindCommand) {
+                System.out.println("\tHere are the matching tasks in your list: ");
+            } else {
+                System.out.println("\tHere are the tasks in your list: ");   
+            }
             for (int i = 0; i < arr.size(); i++) {
                 Task task = arr.get(i);
                 System.out.println("\t" + (i + 1) + "." + task.toString());
@@ -34,6 +38,8 @@ public class Layout {
         }
         printLine();
     }
+    
+    
 
     public void printMarkedDone(Task task) {
         printLine();

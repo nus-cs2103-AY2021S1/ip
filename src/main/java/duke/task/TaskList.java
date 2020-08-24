@@ -68,7 +68,7 @@ public class TaskList {
     }
     
     public void showTasks() {
-        layout.printTaskList(tasks);
+        layout.printTaskList(false, tasks);
     }
 
     public void modifyTask(Action type, String i) {
@@ -94,6 +94,21 @@ public class TaskList {
         }
 
     }
+    
+    public void findTask(String [] arr) {
+        String filterWord;
+        try {
+            filterWord = parser.getFilterWord(arr);
+            ArrayList<Task> shallowCopy = new ArrayList<>(tasks);
+            shallowCopy.removeIf(task -> 
+                !(task.containsWord(filterWord))
+            );
+            layout.printTaskList(true, shallowCopy);
+        } catch (DukeException e) {
+            layout.print(e.getMessage());
+        }
+    }
+    
     
     public void closeDuke() {
         storage.writeFile(tasks);
