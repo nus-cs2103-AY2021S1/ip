@@ -1,3 +1,7 @@
+package duke;
+
+import duke.commands.*;
+
 public class Parser {
     private Commands command;
     boolean entered = false;

@@ -1,11 +1,15 @@
+package duke.tasks;
+
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task {
+public class Deadline extends Task {
     String date;
 
-    Event(String description, String date) {
+    public Deadline(String description, String date) {
         super(description);
         this.date = date;
     }
@@ -46,6 +50,8 @@ public class Event extends Task {
     }
 
     public String toString() {
-        return "[E][" + getStatusIcon() + "] " + this.description + "(at:" + convertDate() + ")";
+        return "[D][" + getStatusIcon() + "] " + this.description + "(by:" + convertDate() + ")";
     }
 }
+
+

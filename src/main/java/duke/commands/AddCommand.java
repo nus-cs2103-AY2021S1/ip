@@ -1,10 +1,17 @@
-import java.util.List;
+package duke.commands;
 
-public class AddCommand extends Command{
+import duke.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
+
+
+public class AddCommand extends Command {
     private final Commands c;
     private final String description;
 
-    AddCommand(Commands c, String description) {
+    public AddCommand(Commands c, String description) {
         this.c = c;
         this.description = description;
     }

@@ -1,7 +1,15 @@
-public class DateCommand extends Command{
+package duke.commands;
+
+import duke.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+
+public class DateCommand extends Command {
     private String description;
 
-    DateCommand(String description) {
+    public DateCommand(String description) {
         this.description = description;
     }
 
