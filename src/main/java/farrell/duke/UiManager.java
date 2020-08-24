@@ -35,7 +35,7 @@ public class UiManager {
     }
 
     public void printInWindow(String text) {
-        String divider = "---------------------------------------------";
+        final String divider = "---------------------------------------------";
         System.out.println(divider);
         System.out.println(text);
         System.out.println(divider);
