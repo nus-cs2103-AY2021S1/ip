@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.StringJoiner;
 
 public class Duke {
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static ArrayList<Task> tasks = TaskManager.readFile();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -106,6 +106,7 @@ public class Duke {
             String by = input[1];
             Task task = new Deadline(description, by);
             tasks.add(task);
+            TaskManager.saveFile(tasks);
             String response = String.format(
                     "I've added this task:\n  %s \nNow you have %s tasks in the list.",
                     task, tasks.size()
@@ -123,6 +124,7 @@ public class Duke {
         }
 
         Task task = tasks.remove(index-1);
+        TaskManager.saveFile(tasks);
         String response = String.format("Noted. I've removed this task:\n"
                 + "%s\n"
                 + "Now you have %d tasks in the list.", task, tasks.size());
@@ -137,6 +139,7 @@ public class Duke {
 
         Task task = tasks.get(index-1);
         task.completeTask();
+        TaskManager.saveFile(tasks);
         String response = "Nice! I've marked this task as done:\n  " + task.toString();
         printResponse(response);
     }
@@ -148,6 +151,7 @@ public class Duke {
             String at = input[1];
             Task task = new Event(description, at);
             tasks.add(task);
+            TaskManager.saveFile(tasks);
             String response = String.format(
                     "I've added this task:\n  %s \nNow you have %s tasks in the list.",
                     task, tasks.size()
@@ -176,6 +180,7 @@ public class Duke {
         String description = String.join(" ", descriptionArray);
         Task task = new ToDo(description);
         tasks.add(task);
+        TaskManager.saveFile(tasks);
         String response = String.format(
                 "I've added this task:\n  %s \nNow you have %s tasks in the list.",
                 task, tasks.size()
