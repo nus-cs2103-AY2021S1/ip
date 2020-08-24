@@ -51,4 +51,3 @@ public class Events extends Task {
     @Override
     public String writeToFile() { return "E" + super.writeToFile() + " | " + date; }
 }
-
