@@ -1,6 +1,6 @@
 {
   "name": "ip",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "This project is part of a module for CS2103 Software Engineering in NUS.",
   "directories": {
     "doc": "docs"
