@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -63,6 +66,15 @@ public class Main {
                 int ind2 = Integer.parseInt(text.split(" ")[1]) - 1;
                 tskManager.removeTask(ind2);
                 break;
+            case DATE:
+                try {
+                    ArrayList<Task> tasks = tskManager.retrieveTasksOnDate(
+                            LocalDate.parse(trailing));
+                    tskPrint.list(tasks);
+                } catch (DateTimeParseException e) {
+                    tskPrint.display("Please enter a valid date (yyyy-mm-dd).");
+                }
+                break;
             case BYE:
                 tskPrint.display("Bye, hope to see you again soon.");
                 break;
@@ -102,10 +114,10 @@ public class Main {
                                 task = new Todo(description, isDone);
                                 break;
                             case "D":
-                                task = new Deadline(description, isDone, timestamp);
+                                task = new Deadline(description, isDone, LocalDate.parse(timestamp));
                                 break;
                             case "E":
-                                task = new Event(description, isDone, timestamp);
+                                task = new Event(description, isDone, LocalDate.parse(timestamp));
                                 break;
                             default:
                                 break;

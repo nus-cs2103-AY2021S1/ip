@@ -1,6 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    public Deadline(String description, boolean isDone, String timestamp) {
+    public Deadline(String description, boolean isDone, LocalDate timestamp) {
         super(description, "D", isDone, timestamp);
     }
 
@@ -9,11 +13,14 @@ public class Deadline extends Task {
             throw new ChatbotException("Ooopsss (>.>) Deadline cannot be empty!!");
         }
         String description = raw.split("/by")[0].trim();
-        String timestamp;
+        LocalDate timestamp;
         try {
-            timestamp = raw.split("/by")[1].trim();
+            String dateString = raw.split("/by")[1].trim();
+            timestamp = LocalDate.parse(dateString);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ChatbotException("Ooopsss (>.>) Deadline? By when??!!");
+        } catch (DateTimeParseException e) {
+            throw new ChatbotException("Please enter a valid date (yyyy-mm-dd).");
         }
         return new Deadline(description, false, timestamp);
     }
@@ -25,6 +32,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + this.timestamp + ")";
+        String formattedDate = this.timestamp.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return super.toString() + " (by: " + formattedDate + ")";
     }
 }

@@ -1,15 +1,18 @@
+import java.lang.reflect.Array;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.nio.file.Files;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class TaskManager {
 
     private static TaskManager tskManager = null;
-    private TaskPrinter taskPrinter;
-    private ArrayList<Task> tasks;
+    private final TaskPrinter taskPrinter;
+    private final ArrayList<Task> tasks;
 
     private TaskManager() {
         this.tasks = new ArrayList<>();
@@ -30,16 +33,20 @@ public class TaskManager {
     private void updateStore() {
         Path path = Path.of("src","main", "chatbot", "data.txt");
         try {
-            Iterator iter = tasks.iterator();
+            Iterator<Task> iter = tasks.iterator();
             String dataStr = "";
             while (iter.hasNext()) {
-                Task tsk = (Task)iter.next();
-                String timestamp = tsk.timestamp.length() == 0 ? "-" : tsk.timestamp;
+                Task tsk = iter.next();
+                String timestamp = tsk.timestamp == null
+                        ? "-"
+                        : tsk.timestamp.toString();
+
                 String entry = tsk.type + " | " +
                         tsk.getStatus() + " | " +
                         tsk.description + " | " +
                         timestamp  +
                         System.lineSeparator();
+
                 dataStr = dataStr + entry;
             }
             Files.write(path, dataStr.getBytes());
@@ -63,6 +70,18 @@ public class TaskManager {
         taskPrinter.display("Alright. I've removed this task:\n        " + removed +
                 String.format("\n    Now you have %d task(s) in the list.", count()));
         updateStore();
+    }
+
+    public ArrayList<Task> retrieveTasksOnDate(LocalDate date) {
+        Iterator<Task> iter = this.tasks.iterator();
+        ArrayList<Task> tasks = new ArrayList<>();
+        while (iter.hasNext()) {
+            Task tsk = iter.next();
+            if (tsk.getDate().equals(date)) {
+                tasks.add(tsk);
+            };
+        }
+        return tasks;
     }
 
     public void listAll() {
