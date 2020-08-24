@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
 
     enum Status {
@@ -7,12 +11,12 @@ public class Task {
 
     String description;
     Status status = Status.INCOMPLETE;
-    String date;
+    LocalDateTime dueDate;
 
-    public Task (String description, String date) {
+    public Task (String description, LocalDateTime dueDate) {
         this.description = description;
-        this.date = date;
         this.status = Status.INCOMPLETE;
+        this.dueDate = dueDate;
     }
 
     public void markDone() {
@@ -21,10 +25,16 @@ public class Task {
 
     public boolean isDone() { return this.status == Status.COMPLETED; }
 
+
     public String writeToFile() {
         return (this.status.equals(Status.COMPLETED) ? "1" : "0")
-                + "|" + this.description.strip()
-                + (this.date.isBlank() ? "" : ("|" + this.date.strip()));
+                + "|" + this.description.strip();
+    }
+
+    public boolean isDueOn(LocalDate Date) { return this.dueDate.toLocalDate().isEqual(Date); }
+
+    public String getDateString() {
+        return this.dueDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm")).toString();
     }
 
     public String toString() {

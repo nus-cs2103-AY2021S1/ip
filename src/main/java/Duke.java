@@ -1,5 +1,10 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
@@ -17,6 +22,7 @@ public class Duke {
         TODO,
         EVENT,
         DEADLINE,
+        DATE
     }
 
     public void printGreeting() {
@@ -96,6 +102,16 @@ public class Duke {
         }
     }
 
+    public void getTaskOn(String dueDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        System.out.println(
+            this.border
+            + "Master here are the tasks due on " + dueDate.strip() + " :\n"
+            + this.taskList.getTaskDueOn(dueDate)
+            + this.border
+        );
+    }
+
     public boolean isRunning() {
         return this.isRunning;
     }
@@ -121,6 +137,7 @@ public class Duke {
         } else if (command == commands.DONE) {
             try {
                 this.doneHandler(parameters);
+                return true;
             } catch (DukeExceptions.NoUndoneTaskException e) {
                 DukeExceptions.printNoUndoneTaskError();
             } catch (IndexOutOfBoundsException e) {
@@ -128,19 +145,21 @@ public class Duke {
             } catch (NumberFormatException e) {
                 DukeExceptions.noIndexKeyedError();
             }
-            return true;
         } else if (command == commands.EVENT || command == commands.TODO || command == commands.DEADLINE) {
             try {
                 this.addTaskHandler(command.toString().toLowerCase(), parameters);
+                return true;
             } catch (DukeExceptions.IncompleteCommandException e) {
                 DukeExceptions.printIncompleteCommandError(command.toString().toLowerCase());
             } catch (ArrayIndexOutOfBoundsException e) {
                 DukeExceptions.printNoDateInput(command.toString().toLowerCase());
+            } catch (DateTimeParseException e) {
+                DukeExceptions.printIncorrectDateFormatError();
             }
-            return true;
-        } else if (command == commands.DELETE){
+        } else if (command == commands.DELETE) {
             try {
                 this.deleteTaskHandler(parameters);
+                return true;
             } catch (DukeExceptions.NoTaskToDeleteException e) {
                 DukeExceptions.printNoTaskToDeleteError();
             } catch (IndexOutOfBoundsException e) {
@@ -148,11 +167,11 @@ public class Duke {
             } catch (NumberFormatException e) {
                 DukeExceptions.noIndexKeyedError();
             }
-            return true;
+        } else if (command == commands.DATE) {
+            this.getTaskOn(parameters);
         }
         return false;
     }
-
 
     public static void main(String[] args) {
 

@@ -86,4 +86,13 @@ public class DukeExceptions {
             + "----------------------------------------------------------------------------\n"
         );
     }
+
+    public static void printIncorrectDateFormatError() {
+        System.out.println(
+            "----------------------------------------------------------------------------\n"
+            + "Master the input date should be dd-mm-yyyy hhmm !\n"
+            + "----------------------------------------------------------------------------\n"
+        );
+    }
+
 }
