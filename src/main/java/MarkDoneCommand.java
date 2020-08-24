@@ -10,7 +10,7 @@ public class MarkDoneCommand extends Command {
         try {
             taskList.markDone(storage, this.input);
         } catch(DukeException e) {
-            System.out.println(e.getMessage());
+            ui.showError(e.getMessage());
         }
     }
 }

@@ -12,7 +12,7 @@ public class AddCommand extends Command {
         try {
             taskList.addTask(storage, this.input, this.inputWords);
         } catch(DukeException e) {
-            System.out.println(e.getMessage());
+            ui.showError(e.getMessage());
         }
     }
 }

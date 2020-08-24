@@ -10,7 +10,7 @@ public class ListCommand extends Command {
         try {
             taskList.printList();
         } catch(DukeException e) {
-            System.out.println(e.getMessage());
+            ui.showError(e.getMessage());
         }
     }
 }

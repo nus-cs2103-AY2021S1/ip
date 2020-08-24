@@ -41,4 +41,8 @@ public class Ui {
                 + "\nTo delete a task from your list, input 'delete <task number>'.");
     }
 
+    public void showError(String message) {
+        System.out.println(message);
+    }
+
 }

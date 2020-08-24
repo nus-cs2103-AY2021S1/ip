@@ -10,7 +10,7 @@ public class DeleteCommand extends Command {
         try {
             taskList.deleteTask(storage, this.input);
         } catch(DukeException e) {
-            System.out.println(e.getMessage());
+            ui.showError(e.getMessage());
         }
     }
 }

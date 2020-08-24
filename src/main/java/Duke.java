@@ -12,7 +12,7 @@ public class Duke {
         try {
             this.tasks = new TaskList(storage.loadData());
         } catch (DukeException e) {
-            //ui.showLoadingError();
+            ui.showError(e.getMessage());
             this.tasks = new TaskList();
         }
     }
@@ -29,7 +29,7 @@ public class Duke {
                 c.execute(storage, tasks, ui);
                 isBye = c.isBye;
             } catch (DukeException e) {
-                //ui.showError(e.getMessage());
+                ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
             }
