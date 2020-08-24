@@ -1,21 +1,31 @@
 package main.java;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Task {
     protected String type;
     protected String description;
-    protected String time;
+    protected LocalDateTime time;
     protected boolean isDone = false;
 
-    public Task(String description, String time) {
+    public Task(String description, LocalDateTime time) {
         type = "Task";
         this.description = description;
         this.time = time;
     }
 
     public void markAsDone() {isDone = true;}
+
+    public String serialize() {
+        String datetimeString = time.getDayOfMonth() + "/" +
+                time.getMonthValue() + "/" +
+                time.getYear() + " " +
+                (time.getHour() * 100 + time.getMinute());
+        if (time.equals(LocalDateTime.MIN)) datetimeString = "null";
+        return type + "%%%" + description + "%%%" + datetimeString + "%%%" + (isDone ? 1 : 0);
+    }
 
     @Override
     public String toString() {
@@ -25,8 +35,8 @@ public class Task {
 
 class Todo extends Task {
     public Todo(String description) {
-        super(description, null);
-        super.type = "Todo";
+        super(description, LocalDateTime.MIN);
+        super.type = "todo";
     }
 
     @Override
@@ -38,9 +48,9 @@ class Todo extends Task {
 }
 
 class Deadline extends Task {
-    public Deadline(String description, String time) {
+    public Deadline(String description, LocalDateTime time) {
         super(description, time);
-        super.type = "Deadline";
+        super.type = "deadline";
     }
 
     @Override
@@ -53,9 +63,9 @@ class Deadline extends Task {
 }
 
 class Event extends Task {
-    public Event(String description, String time) {
+    public Event(String description, LocalDateTime time) {
         super(description, time);
-        super.type = "Event";
+        super.type = "event";
     }
 
     @Override

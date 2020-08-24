@@ -1,5 +1,6 @@
 package main.java;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,20 +9,30 @@ public class Tasks {
 
     public static Task addTask(List<String> tokens) {
         Task task;
+        String datetimeString = tokens.get(2).trim();
+        LocalDateTime datetime = LocalDateTime.MIN;
+        if (!datetimeString.equals("null")) {
+            String[] timeTokens = datetimeString.split(" |/");
+            int time = timeTokens.length >= 4 ? Integer.parseInt(timeTokens[3]) : 0;
+            datetime = LocalDateTime.of(Integer.parseInt(timeTokens[2]),
+                    Integer.parseInt(timeTokens[1]),
+                    Integer.parseInt(timeTokens[0]),
+                    time / 100, time % 100);
+        }
         switch (tokens.get(0)) {
             case "todo":
-                task = new Todo(tokens.get(1));
+                task = new Todo(tokens.get(1).trim());
                 break;
             case "deadline":
-                task = new Deadline(tokens.get(1), tokens.get(3));
+                task = new Deadline(tokens.get(1).trim(), datetime);
                 break;
             case "event":
-                task = new Event(tokens.get(1), tokens.get(3));
+                task = new Event(tokens.get(1).trim(), datetime);
                 break;
             default:
                 throw new Error("An unexpected error has occurred");
-
         }
+        if (tokens.get(3).equals("1")) task.markAsDone();
         database.add(task);
         return task;
     }
