@@ -6,7 +6,7 @@ public class ToDo extends Task {
 
     public static ToDo createNewToDo(String argument) throws DukeException {
         if (argument.isBlank()) {
-            throw new DukeException("duke.task.Task name cannot be empty!");
+            throw new DukeException("Task name cannot be empty!");
         }
 
         return new ToDo(argument);

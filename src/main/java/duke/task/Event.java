@@ -23,12 +23,12 @@ public class Event extends Task {
 
         String eventName = eventArguments[0];
         if (eventName.isBlank()) {
-            throw new DukeException("duke.task.Event name cannot be blank!");
+            throw new DukeException("Event name cannot be blank!");
         }
 
         String startDateTime = eventArguments[1];
         if (startDateTime.isBlank()) {
-            throw new DukeException("duke.task.Event time cannot be blank!");
+            throw new DukeException("Event time cannot be blank!");
         }
         
         String[] datetime = startDateTime.split(" ");

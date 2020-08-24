@@ -24,12 +24,12 @@ public class Deadline extends Task {
 
         String deadlineName = deadlineArguments[0];
         if (deadlineName.isBlank()) {
-            throw new DukeException("duke.task.Deadline name cannot be blank!");
+            throw new DukeException("Deadline name cannot be blank!");
         }
 
         String deadlineDateTime = deadlineArguments[1];
         if (deadlineDateTime.isBlank()) {
-            throw new DukeException("duke.task.Deadline time cannot be blank!");
+            throw new DukeException("Deadline time cannot be blank!");
         }
 
         String[] datetime = deadlineDateTime.split(" ");

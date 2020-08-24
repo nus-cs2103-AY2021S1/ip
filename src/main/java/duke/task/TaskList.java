@@ -48,7 +48,7 @@ public class TaskList {
 
     public String markTaskAsDone(int taskID, Storage storage) throws DukeException, IOException {
         if (taskID < 1 || taskID > tasks.size()) {
-            throw new DukeException("duke.task.Task ID is invalid!");
+            throw new DukeException("Task ID is invalid!");
         }
 
         Task task = tasks.get(taskID - 1);
@@ -57,25 +57,25 @@ public class TaskList {
         String newTaskString = task.generateStorageString();
         storage.editLineInStorage(oldTaskString, newTaskString);
 
-        return String.format("Nice! I've marked this duke.task as done.\n%s", task.toString());
+        return String.format("Nice! I've marked this task as done.\n%s", task.toString());
     }
 
     public String deleteTask(int taskID, Storage storage) throws DukeException, IOException {
         if (taskID < 1 || taskID > tasks.size()) {
-            throw new DukeException("duke.task.Task ID is invalid!");
+            throw new DukeException("Task ID is invalid!");
         }
 
         Task task = tasks.get(taskID - 1);
         storage.deleteLineFromStorage(task.generateStorageString());
         tasks.remove(taskID - 1);
 
-        return String.format("Nice! I've marked this duke.task as done.\n%s\nNow you have %d tasks in the list",
+        return String.format("Nice! I've marked this task as done.\n%s\nNow you have %d tasks in the list",
                 task.toString(), tasks.size());
     }
 
     public String addTaskToList(Task task) {
         tasks.add(task);
-        return String.format("Got it. I've added this duke.task: \n%s\nNow you have %d tasks in the list",
+        return String.format("Got it. I've added this task: \n%s\nNow you have %d tasks in the list",
                 task.toString(), tasks.size());
     }
 
@@ -109,7 +109,7 @@ public class TaskList {
             if (entry.length == 3) {
                 String taskType = entry[0];
                 if (!entry[1].toUpperCase().equals("TRUE") && !entry[1].toUpperCase().equals("FALSE")) {
-                    throw new DukeException("One or more duke.task statuses are not stored correctly");
+                    throw new DukeException("One or more task statuses are not stored correctly");
                 }
                 boolean taskIsDone = Boolean.parseBoolean(entry[1]);
                 String taskArgument = entry[2];
@@ -127,7 +127,7 @@ public class TaskList {
                     newTask = Deadline.createNewDeadline(taskArgument);
                     break;
                 default:
-                    throw new DukeException("One or more duke.task types are not stored correctly");
+                    throw new DukeException("One or more task types are not stored correctly");
                 }
 
                 if (taskIsDone) {
