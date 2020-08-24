@@ -16,10 +16,7 @@ public class Storage {
     }
 
     public ArrayList<Task> load() throws DukeException {
-//        String currentDir = System.getProperty("user.dir");
-//        String path = currentDir + File.separator + "data" + File.separator + "duke.txt";
         ArrayList<Task> tasks = new ArrayList<>();
-//        int total = 0;
         File f = new File(filePath);
         if (f.exists() && !f.isDirectory()) {
             try {
@@ -34,7 +31,6 @@ public class Storage {
                                 todo.markAsDone();
                             }
                             tasks.add(todo);
-//                            total++;
                             break;
                         case "D":
                             Deadline deadline = new Deadline(data[2], data[3]);
@@ -42,7 +38,6 @@ public class Storage {
                                 deadline.markAsDone();
                             }
                             tasks.add(deadline);
-//                            total++;
                             break;
                         case "E":
                             Event event = new Event(data[2], data[3]);
@@ -50,7 +45,6 @@ public class Storage {
                                 event.markAsDone();
                             }
                             tasks.add(event);
-//                            total++;
                             break;
                     }
                 }
@@ -58,13 +52,11 @@ public class Storage {
             } catch (IOException ex) {
                 System.out.println("Error reading file" + ex);
                 throw new DukeException("Error reading file");
-//                return new ArrayList<>();
             }
         } else {
             try {
                 f.getParentFile().mkdirs();
                 f.createNewFile();
-//                return new ArrayList<>();
             } catch (IOException ex) {
                 System.out.println("Error creating file" + ex);
                 throw new DukeException("Error reading file");
@@ -74,8 +66,6 @@ public class Storage {
     }
 
     public void writeNewDataToFile(String taskType, String done, String description, String deadline) {
-//        String currentDir = System.getProperty("user.dir");
-//        String path = currentDir + File.separator + "data" + File.separator + "duke.txt";
         try {
             FileWriter myWriter = new FileWriter(filePath, true);
             switch (taskType) {
@@ -96,8 +86,6 @@ public class Storage {
     public void editCurrentDataInFile(int taskNumber, String taskType, String done,
                                              String description, String deadline, int total) {
         try {
-//            String currentDir = System.getProperty("user.dir");
-//            String pathToFile = currentDir + File.separator + "data" + File.separator + "duke.txt";
             BufferedReader br = new BufferedReader(new FileReader(filePath));
 
             //String buffer to store contents of the file
@@ -106,16 +94,12 @@ public class Storage {
             //Keep track of the line number
             int linenumber = 1;
             String line;
-            System.out.println("total: " + total);
-            System.out.println("tasknumer: " + taskNumber);
 
             while ((line = br.readLine()) != null) {
                 //Store each valid line in the string buffer
                 if (linenumber != taskNumber && linenumber != total) {
-                    System.out.println("linenumber: " + linenumber + " line: " + line);
                     sb.append(line + "\n");
                 } else if (linenumber != taskNumber) {
-                    System.out.println("linenumber: " + linenumber + " line: " + line);
                     sb.append(line);
                 } else {
                     String data;
@@ -124,7 +108,6 @@ public class Storage {
                     } else {
                         data = taskType + " | " + done + " | " + description + " | " + deadline;
                     }
-                    System.out.println("linenumber: " + linenumber + " line: " + line);
 
                     if (linenumber == total) {
                         sb.append(data);

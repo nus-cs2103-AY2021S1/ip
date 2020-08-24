@@ -16,7 +16,6 @@ public class DeleteCommand extends Command {
         int taskIndex = Integer.parseInt(splitStr[1]) - 1;
         Task task = tasks.getTask(taskIndex);
         tasks.removeTask(taskIndex);
-//        total--;
         storage.deleteCurrentDataInFile(taskIndex + 1, tasks.getSize());
         System.out.println("    Noted. I've removed this task:\n      " + task + "\n    Now you have "
                 + tasks.getSize() + " tasks in the list.");

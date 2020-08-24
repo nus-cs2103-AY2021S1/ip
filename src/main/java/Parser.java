@@ -18,28 +18,5 @@ public class Parser {
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-
-//        else {
-//            try {
-//                if (command.contains("done")) {
-//                    return new DoneCommand(command);
-//                } else if (command.contains("todo")) {
-//                    return new AddTodoCommand(command);
-//                } else if (command.contains("deadline")) {
-//                    return new AddDeadlineCommand(command);
-//                } else if (command.contains("event")) {
-//                    return new AddEventCommand(command);
-//                } else if (command.contains("delete")) {
-//                    return new DeleteCommand(command);
-//                } else {
-//                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-//                }
-//            } catch (DukeException ex) {
-//                System.out.println("    ___________________________________________________________");
-//                System.out.println("    " + ex);
-//                System.out.println("    ___________________________________________________________");
-//            }
-//        }
-//        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }
