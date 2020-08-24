@@ -12,10 +12,12 @@ public class Chatbot {
 
     private BufferedReader textParser;
     private List<Task> storedTasks;
+    private Storage storage;
 
-    public Chatbot(InputStream in) {
+    public Chatbot(InputStream in, String filePath) {
         textParser = new BufferedReader(new InputStreamReader(in));
         storedTasks = new ArrayList<>();
+        storage = Storage.init(filePath);
     }
 
     private String indentText(String textToIndent) {
@@ -136,6 +138,43 @@ public class Chatbot {
         printWithDecorations("sInCe yOu'rE So hElPlEsS, "
                 + "i'lL ReMeMbEr \""+ task.toString() + "\" FoR YoU.\n"
                 + "yOu hAvE MaDe mE ReMeMbEr " + storedTasks.size() +" tAsK(s).");
+
+        save();
+    }
+
+    private void save() {
+        List<String> taskSummary = new ArrayList<>();
+
+        for (Task task : storedTasks) {
+            taskSummary.add(task.summarize());
+        }
+
+        storage.save(taskSummary);
+    }
+
+    private void load() {
+        List<String> taskSummary = storage.load();
+
+        for (String summary : taskSummary) {
+            String[] args = summary.split("\\s\\|\\s");
+
+            boolean isDone = args[1].equals("1") ? true : false;
+
+            switch (args[0]) {
+            case "T":
+                storedTasks.add(new Todo(args[2], isDone));
+                break;
+            case "D":
+                storedTasks.add(new Deadline(args[2], isDone, args[3]));
+                break;
+            case "E":
+                storedTasks.add(new Event(args[2], isDone, args[3]));
+                break;
+            default:
+                storedTasks.add(new Task(args[2], isDone));
+                break;
+            }
+        }
     }
 
     private void list() {
@@ -167,6 +206,8 @@ public class Chatbot {
             throw new IncorrectArgumentException("sToP TrYiNg tO FoOl mE. tHe \"done\" ComMand"
                     + " mUsT Be FolLoWed bY tHe InDEx Of THe TAsK.");
         }
+
+        save();
     }
 
     public void delete(String[] args) throws IncorrectArgumentException {
@@ -187,6 +228,8 @@ public class Chatbot {
             throw new IncorrectArgumentException("sToP TrYiNg tO FoOl mE. tHe \"delete\" ComMand"
                     + " mUsT Be FolLoWed bY tHe InDEx Of THe TAsK.");
         }
+
+        save();
     }
 
     public Todo createTodo(String[] args) throws IncorrectArgumentException {
@@ -244,6 +287,8 @@ public class Chatbot {
 
     public void start() {
         CommandStatus status = CommandStatus.SUCCESS;
+
+        load();
 
         printWithDecorations("yOu HavE nO cOnTrOL ovEr ME!");
 
