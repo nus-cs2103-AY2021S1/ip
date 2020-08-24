@@ -26,17 +26,17 @@ public class Ui {
 	}
 
 	/**
-	 * Prints the provided List
+	 * Gets the provided List
 	 * @param lst List of Tasks
 	 */
-	private void printList(List<Task> lst) {
+	private String getList(List<Task> lst) {
 		String s = "";
 		for (int i = 1; i <= lst.size(); i++) {
 			Task item = lst.get(i - 1);
 			s += String.format("%d.%s", i, item);
 			s += (i == lst.size()) ? "" : "\n";
 		}
-		Ui.echo(s);
+		return s;
 	}
 
 	/**
@@ -110,8 +110,15 @@ public class Ui {
 									tasks.getSize()));
 						}
 						break;
+					case "find":
+						List<Task> foundTasks = tasks.findTasks(comText);
+						Ui.echo(String.format(
+								"Here are the matching tasks in your list:\n%s",
+								getList(foundTasks))
+						);
+						break;
 					case "list":
-						printList(tasks.getList());
+						Ui.echo(getList(tasks.getList()));
 						break;
 					case "done":
 						if (arr.length != 2) {
