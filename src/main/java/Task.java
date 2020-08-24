@@ -1,25 +1,25 @@
 public class Task {
-    protected String description;
-    protected boolean isDone;
+  protected String description;
+  protected boolean isDone;
 
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
+  public Task(String description) {
+    this.description = description;
+    this.isDone = false;
+  }
 
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-    }
+  public String getStatusIcon() {
+    return (isDone ? "\u2713" : "\u2718"); // return tick or X symbols
+  }
 
-    public String getTaskName() {
-        return description;
-    }
+  public String getTaskName() {
+    return description;
+  }
 
-    public void setDone() {
-        this.isDone = true;
-    }
+  public void setDone() {
+    this.isDone = true;
+  }
 
-    public String toString() {
-        return "[" + getStatusIcon() + "] " + getTaskName();
-    }
+  public String toString() {
+    return "[" + getStatusIcon() + "] " + getTaskName();
+  }
 }
