@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.task.Task;
 import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -56,6 +57,19 @@ public class Parser {
                 System.out.println(Duke.getTasks().remove(taskToDelete));
                 System.out.println("Now you have " + Duke.getTasks().size()
                         + " tasks in your list.");
+            }
+        } else if (command.startsWith("find")) {
+            if (command.length() == 4) {
+                System.out.println(new DukeException("Hold up! Please specify keyword.").getMessage());
+            } else {
+                System.out.println("Here are the matching tasks in your list:");
+                String keyword = command.substring(5);
+                for (int i = 1; i < Duke.getTasks().size() + 1; i++) {
+                    Task currentTask = Duke.getTasks().get(i - 1);
+                    if (currentTask.toString().contains(keyword)) {
+                        System.out.println(i + ". " + currentTask);
+                    }
+                }
             }
         } else {
             if (!command.startsWith("todo") && !command.startsWith("deadline")
