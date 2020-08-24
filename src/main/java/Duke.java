@@ -30,9 +30,9 @@ public class Duke {
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
         String echo = sc.nextLine();
-        if(echo.equals("")){
-            System.out.println("Oops, there is nothing here! Please type a command!");
-        }
+//        if(echo.equals("")){
+//            System.out.println("Oops, there is nothing here! Please type a command!");
+//        }
         while(echo.equals("bye") == false){
             try{
                 int index = checker.inputChecker(echo);
