@@ -47,7 +47,7 @@ public class Parser {
                 if (input.equals("todo")) {
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
                 }
-                ToDo toDoTask = new ToDo(input);
+                ToDo toDoTask = new ToDo(input.substring(5));
                 list.addTask(toDoTask);
             } else if (input.startsWith("deadline")) {
                 if (input.equals("deadline")) {
