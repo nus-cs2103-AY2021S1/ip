@@ -38,7 +38,7 @@ public abstract class Task {
         } else if (firstLetter == 'D') {
             return Deadline.parse(txtFormat, txtArray);
         } else if (firstLetter == 'E') {
-            return Event.parse(txtFormat, txtArray);
+            return Event.parse(txtArray);
         } else {
             return null;
         }

@@ -1,4 +1,4 @@
-public class DukeInvalidUserInputException extends Exception{
+public class DukeInvalidUserInputException extends DukeException{
     DukeInvalidUserInputException(String msg) {
         super(msg);
     }

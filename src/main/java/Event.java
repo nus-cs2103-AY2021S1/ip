@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -33,9 +34,27 @@ public class Event extends Task {
         return "E | " + super.toTxtFormat() + " | " + this.dateTimeTxt;
     }
 
-    public static Event parse(String txtFormat, String[] txtArray) throws DukeInvalidUserInputException {
-        Event event = new Event(txtArray[2].trim(), txtArray[3].trim());
-        if (txtArray[1].trim().equals("1")) {
+    public static Event parse(String[] txtArray) throws DukeInvalidUserInputException {
+        String done = txtArray[1].trim();
+        String description = txtArray[2].trim();
+        String[] unFormattedDateTime = txtArray[3].trim().split(" ");
+
+        String unformattedDate =unFormattedDateTime[0] + " " + unFormattedDateTime[1] + " " + unFormattedDateTime[2];
+        String unformattedStartTime = unFormattedDateTime[3] + " " + unFormattedDateTime[4];
+        String unformattedEndTime = unFormattedDateTime[6] + " " + unFormattedDateTime[7];
+
+        String formattedDate = LocalDate.parse(unformattedDate, DateTimeFormatter.ofPattern("d MMMM yyyy")).toString();
+        String startLocalTime = LocalTime.parse(unformattedStartTime, DateTimeFormatter.ofPattern("hh:mm a")).toString();
+        String endLocalTime = LocalTime.parse(unformattedEndTime, DateTimeFormatter.ofPattern("hh:mm a")).toString();
+
+        String formattedStartTime = startLocalTime.substring(0, startLocalTime.indexOf(':')) +
+                startLocalTime.substring(startLocalTime.indexOf(':') + 1);
+        String formattedEndTime = endLocalTime.substring(0, endLocalTime.indexOf(':')) +
+                endLocalTime.substring(endLocalTime.indexOf(':') + 1);
+
+        String finalDateTime = formattedDate + " " + formattedStartTime + "-" + formattedEndTime;
+        Event event = new Event(description, finalDateTime);
+        if (done.equals("1")) {
             event.markAsDone();
         }
         return event;
