@@ -71,7 +71,7 @@ public class Ui {
     public void intro() {
         System.out.println(INDENT + HORIZONTAL_LINE);
         System.out.println(SOCCAT);
-        System.out.println("    Hello! I'm Soccat duke.command.Duke\n" +
+        System.out.println("    Hello! I'm Soccat Duke\n" +
                 "    What do you meow?");
         System.out.println(INDENT + HORIZONTAL_LINE);
     }
