@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -12,6 +13,17 @@ public class PersonalAssistant {
     public PersonalAssistant() {
         store = new ArrayList<>();
         reader = new Scanner(System.in);
+
+        // Initializes storage folder & file
+        File storageFolder = new File("./data");
+        if (!storageFolder.exists()) {
+            storageFolder.mkdir();
+        }
+
+        File storageFile = new File("./data/duke.txt");
+        if (!storageFile.exists()) {
+            storageFile.createNewFile();
+        }
     }
 
     public void run() {
