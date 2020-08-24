@@ -1,5 +1,7 @@
 package command;
 
+import java.util.Objects;
+
 /**
  * A class representing a CDuke command
  */
@@ -9,7 +11,7 @@ public abstract class Command {
      * Does the command modify the taskList
      * @return true if yes, otherwise no
      */
-    public boolean isModifying() {
+    public boolean hasUndo() {
         return true;
     }
 
@@ -31,4 +33,15 @@ public abstract class Command {
      */
     public abstract void undo();
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getClass().toGenericString());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (this == obj) return true;
+        return this.hashCode() == obj.hashCode();
+    }
 }

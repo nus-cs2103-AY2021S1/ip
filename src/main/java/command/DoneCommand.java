@@ -2,6 +2,8 @@ package command;
 
 import task.Task;
 
+import java.util.Objects;
+
 /**
  * Mark task as done
  */
@@ -23,5 +25,18 @@ public class DoneCommand extends Command {
     public void undo() {
         task.setCompleted(false);
         System.out.println("\t# Undo Done: " + task.toString());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DoneCommand)) return false;
+        DoneCommand that = (DoneCommand) o;
+        return task.equals(that.task);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(task);
     }
 }

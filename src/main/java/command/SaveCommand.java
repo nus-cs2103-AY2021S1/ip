@@ -20,7 +20,7 @@ public class SaveCommand extends Command {
     }
 
     @Override
-    public boolean isModifying() {
+    public boolean hasUndo() {
         return false;
     }
 

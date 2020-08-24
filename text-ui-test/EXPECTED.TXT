@@ -82,4 +82,22 @@ Index Error: delete {index}
 4. [D][✗] drink coffee (by: 07 Jun 2020 11:59PM)
 5. [E][✗] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
 6. [T][✗] say goodbye
+Command list:
+ help bye list done delete todo deadline event save load
+Save: 6 entries
+	- Delete: [T][✗] say goodbye
+	# Done: [E][✓] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
+	- Delete: [D][✗] drink coffee (by: 07 Jun 2020 11:59PM)
+	# Done: [T][✓] join sports club
+	- Delete: [D][✓] return book (by: 06 Jun 2020 11:59PM)
+1. [T][✗] readbook
+2. [T][✓] join sports club
+3. [E][✓] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
+Load: 6 entries
+1. [T][✗] readbook
+2. [D][✓] return book (by: 06 Jun 2020 11:59PM)
+3. [T][✓] join sports club
+4. [D][✗] drink coffee (by: 07 Jun 2020 11:59PM)
+5. [E][✗] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
+6. [T][✗] say goodbye
 Bye. Hope to see you again soon!

@@ -2,12 +2,14 @@ package cmd;
 
 import command.*;
 import misc.DukeDateTime;
-import task.*;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
 
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -82,7 +84,7 @@ public enum Parser {
     DEADLINE {
         @Override
         public Command generate(List<Task> taskList, String commandParam) {
-            Pattern p = Pattern.compile("^(.+)\\/by(.+)$");
+            Pattern p = Pattern.compile("^(.+)/by(.+)$");
             Matcher m = p.matcher(commandParam);
 
             if (!m.matches() || m.group(1).isBlank() || m.group(2).isBlank()) {
@@ -92,7 +94,7 @@ public enum Parser {
             try {
                 Task task = new Deadline(
                         m.group(1).trim(),
-                        DukeDateTime.generate(m.group(2).trim())
+                        new DukeDateTime(m.group(2).trim())
                 );
                 return new AddCommand(taskList, task);
             } catch (DateTimeParseException e) {
@@ -104,7 +106,7 @@ public enum Parser {
     EVENT {
         @Override
         public Command generate(List<Task> taskList, String commandParam) {
-            Pattern p = Pattern.compile("^(.+)\\/from(.+)\\/till(.+)$");
+            Pattern p = Pattern.compile("^(.+)/from(.+)/till(.+)$");
             Matcher m = p.matcher(commandParam);
 
             if (!m.matches() || m.group(1).isBlank() || m.group(2).isBlank() || m.group(3).isBlank()) {
@@ -114,8 +116,8 @@ public enum Parser {
             try {
                 Task task = new Event(
                         m.group(1).trim(),
-                        DukeDateTime.generate(m.group(2).trim()),
-                        DukeDateTime.generate(m.group(3).trim())
+                        new DukeDateTime(m.group(2).trim()),
+                        new DukeDateTime(m.group(3).trim())
                 );
                 return new AddCommand(taskList, task);
             } catch (DateTimeParseException e) {
@@ -166,7 +168,7 @@ public enum Parser {
         Matcher matcher = pattern.matcher(input);
 
         // No input received
-        if (!matcher.matches()) return new InvalidCommand();
+        if (!matcher.matches()) return new InvalidCommand("Empty input!");
 
         // Find the matching command
         String firstWord = matcher.group(1).toUpperCase();

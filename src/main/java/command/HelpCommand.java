@@ -3,7 +3,6 @@ package command;
 import cmd.Parser;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * Display list of available command
@@ -11,7 +10,7 @@ import java.util.stream.Collectors;
 public class HelpCommand extends Command {
 
     @Override
-    public boolean isModifying() {
+    public boolean hasUndo() {
         return false;
     }
 

@@ -2,6 +2,7 @@ package task;
 
 import misc.DukeDateTime;
 
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.time.LocalDateTime;
@@ -35,6 +36,21 @@ public class Event extends Task{
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Event)) return false;
+        if (!super.equals(o)) return false;
+        Event event = (Event) o;
+        return getStart().equals(event.getStart()) &&
+                getEnd().equals(event.getEnd());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getStart(), getEnd());
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + eventStart.pretty() + " till: " + eventEnd.pretty() + ")";
     }
@@ -54,8 +70,8 @@ public class Event extends Task{
         return new Event(
                 Boolean.parseBoolean(scanner.next()),
                 scanner.next(),
-                DukeDateTime.generate(scanner.next()),
-                DukeDateTime.generate(scanner.next())
+                new DukeDateTime(scanner.next()),
+                new DukeDateTime(scanner.next())
         );
     }
 

@@ -3,6 +3,7 @@ package command;
 import task.Task;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Remove task from taskList
@@ -27,5 +28,19 @@ public class DeleteCommand extends Command {
     public void undo() {
         this.taskList.add(task);
         System.out.println("\t+ Undo Delete: " + task.toString());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DeleteCommand)) return false;
+        DeleteCommand that = (DeleteCommand) o;
+        return taskList.equals(that.taskList) &&
+                task.equals(that.task);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(taskList, task);
     }
 }

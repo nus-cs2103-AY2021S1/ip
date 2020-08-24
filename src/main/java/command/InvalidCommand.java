@@ -1,9 +1,5 @@
 package command;
 
-import task.Task;
-
-import java.util.List;
-
 /**
  * TODO: Convert invalid command to Duke Exception
  */
@@ -20,7 +16,7 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public boolean isModifying() {
+    public boolean hasUndo() {
         return false;
     }
 

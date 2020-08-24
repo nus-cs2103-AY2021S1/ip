@@ -1,5 +1,7 @@
 package task;
 
+import java.util.Objects;
+
 /**
  * A task is a is an item that has a description and is completable
  */
@@ -39,6 +41,20 @@ public abstract class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task)) return false;
+        Task task = (Task) o;
+        return isCompleted() == task.isCompleted() &&
+                getDescription().equals(task.getDescription());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isCompleted(), getDescription());
     }
 
     @Override

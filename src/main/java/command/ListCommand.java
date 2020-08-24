@@ -17,7 +17,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public boolean isModifying() {
+    public boolean hasUndo() {
         return false;
     }
 

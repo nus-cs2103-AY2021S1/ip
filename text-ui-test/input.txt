@@ -35,4 +35,14 @@ delete 4
 list
 todo say goodbye
 list
+help
+save save.txt
+delete 6
+done 5
+delete 4
+done 3
+delete 2
+list
+load save.txt
+list
 bye

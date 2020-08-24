@@ -2,6 +2,7 @@ package task;
 
 import misc.DukeDateTime;
 
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.time.LocalDateTime;
@@ -28,6 +29,20 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Deadline)) return false;
+        if (!super.equals(o)) return false;
+        Deadline deadline1 = (Deadline) o;
+        return getDeadline().equals(deadline1.getDeadline());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getDeadline());
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + deadline.pretty() + ")";
     }
@@ -47,7 +62,7 @@ public class Deadline extends Task {
         return new Deadline(
                 Boolean.parseBoolean(scanner.next()),
                 scanner.next(),
-                DukeDateTime.generate(scanner.next())
+                new DukeDateTime(scanner.next())
         );
     }
 }

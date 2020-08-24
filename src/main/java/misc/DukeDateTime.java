@@ -3,64 +3,97 @@ package misc;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
 /**
  * The DukeDateTime class keeps track of a LocalDateTime
+ * Only keep track of day, month, year, hour and minutes
+ * Predefined formats: DukeDateTime.FORMAT, DukeDateTime.PRETTY
  */
 public class DukeDateTime implements Comparable<DukeDateTime> {
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("ddMMyyyy HHmm");
+    public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("ddMMyyyy HHmm");
+    public static final DateTimeFormatter PRETTY = DateTimeFormatter.ofPattern("dd MMM yyyy KK:mma");
+
     private final LocalDateTime localDateTime;
 
-    private DukeDateTime(LocalDateTime localDate) {
-        this.localDateTime = localDate;
+    /**
+     * Initialise DukeDateTime with current date and time
+     */
+    public DukeDateTime() { this(LocalDateTime.now().format(FORMAT)); }
+
+    /**
+     * Initialise DukeDateTime with specified time, following DukeDateTime.FORMAT format
+     * @param localDateTime The string representation of LocalDateTime in DukeDateTime.FORMAT format
+     * @throws DateTimeParseException If the String cannot be parsed
+     */
+    public DukeDateTime(String localDateTime) throws DateTimeParseException {
+        this.localDateTime = LocalDateTime.parse(localDateTime, FORMAT);
     }
 
+    /**
+     * Initialise DukeDateTime with specified LocalDateTime
+     * @param localDateTime The LocalDateTime to initialize with
+     */
+    public DukeDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
+    }
+
+    /**
+     * Get the embedded localDateTime object
+     * @return The localDateTime object referenced by dukeDateTime
+     */
     public LocalDateTime get() {
         return this.localDateTime;
     }
 
     /**
-     * Generate a DukeDate representing a specified datetime
-     * e.g. "01112020 1800" means "01 Nov 2020 06:00pm"
-     *
-     * @param dateTime The dateTime in the format "ddMMyyyy HHmm"
-     * @return A DukeDateTime representing the specified dateTime
-     * @throws DateTimeParseException If the dateTime does not follow the specified format
-     */
-    public static DukeDateTime generate(String dateTime) throws DateTimeParseException {
-        // Build a localDateTime
-        LocalDateTime localDateTime = LocalDateTime.parse(dateTime, FORMATTER);
-        return new DukeDateTime(localDateTime);
-    }
-
-    /**
-     * Get a pretty print of DukeDate
-     * Format is "dd MMM yyyy KK:mma"
+     * Get a pretty print of DukeDateTime
+     * Format is specified in DukeDateTime.PRETTY
+     * (i.e. dd MMM yyyy KK:mma)
      * (e.g. 18 May 2020 08:20pm)
      *
-     * @return The date represented by DukeDate
+     * @return The pretty print of DukeDateTime
      */
     public String pretty() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy KK:mma");
-        return this.localDateTime.format(formatter);
+        return this.localDateTime.format(PRETTY);
     }
 
     /**
-     * Converts DukeDateTime to its String representation
+     * Get the String format of DukeDateTime
+     * Format is specified in DukeDateTime.FORMAT
+     * (i.e. ddMMyyyy HHmm)
+     * (e.g. 22082020 1800)
      *
-     * The String representation can be fed to DukeDateTime.generate
-     * to reobtain the original DukeDateTime
-     *
-     * @return The String representation of this object
+     * @return The String representation of DukeDateTime
      */
     @Override
     public String toString() {
-        return this.localDateTime.format(FORMATTER);
+        return this.localDateTime.format(FORMAT);
     }
 
+    /**
+     * Compare the LocalDateTime in this DukeDateTime Object with another DukeDateTime Object
+     * Uses the compareTo() method specified in LocalDateTime
+     *
+     * @param o The other DukeDateTime
+     * @return -1 if this is smaller, 1 if this is bigger, or 0 if they are similar
+     */
     @Override
     public int compareTo(DukeDateTime o) {
         return this.localDateTime.compareTo(o.get());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DukeDateTime)) return false;
+        DukeDateTime that = (DukeDateTime) o;
+        return localDateTime.equals(that.localDateTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(localDateTime);
     }
 }

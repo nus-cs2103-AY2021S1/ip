@@ -6,7 +6,7 @@ package command;
 public class ExitCommand extends Command{
 
     @Override
-    public boolean isModifying() {
+    public boolean hasUndo() {
         return false;
     }
 
@@ -25,4 +25,5 @@ public class ExitCommand extends Command{
         // Operation unsupported
         System.out.println("Undo: ExitCommand");
     }
+
 }
