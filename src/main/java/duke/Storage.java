@@ -21,14 +21,14 @@ import java.util.List;
  * Represents the storage file that handles storage operations
  */
 public class Storage {
-    
+
     public static final String DEFAULT_STORAGE_FILEPATH = "data/duke.txt";
     public final Path path;
-    
+
     public Storage() {
         this(DEFAULT_STORAGE_FILEPATH);
-    } 
-    
+    }
+
     public Storage(String filePath) {
         path = Paths.get(filePath);
     }

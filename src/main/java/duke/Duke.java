@@ -1,7 +1,9 @@
 package duke;
 
 import duke.command.Command;
-import exception.*;
+import exception.InvalidUsageException;
+import exception.StorageException;
+import exception.UnknownCommandException;
 
 /**
  * Main class for the Duke application
@@ -27,7 +29,7 @@ public class Duke {
             this.taskList = new TaskList(storage.load());
             ui.showWelcomeMessage();
             boolean isExit = false;
-            
+
             while (!isExit) {
                 String input = ui.readCommand();
                 ui.buildChatFence();

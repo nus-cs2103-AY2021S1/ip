@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.task.Deadline;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Deadline;
 
 /**
  * Add a new deadline into the task list
@@ -23,11 +23,11 @@ public class DeadlineCommand extends Command {
      * @param storage  storage file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.add(deadline);
-        storage.save(taskList);
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        tasks.add(deadline);
+        storage.save(tasks);
 
-        int size = taskList.size();
-        ui.printAddConfirmation(taskList.show(size - 1), size);
+        int size = tasks.size();
+        ui.printAddConfirmation(tasks.show(size - 1), size);
     }
 }

@@ -3,7 +3,6 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import exception.InvalidUsageException;
 
 /**
  * Mark a task done
@@ -18,18 +17,18 @@ public class DoneCommand extends Command {
     /**
      * Mark a specific task as done and save it to storage file
      *
-     * @param taskList current task list
+     * @param tasks current task list
      * @param ui       text ui interface
      * @param storage  storage file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         // Check that the task number makes sense.
-        if (taskNumber >= 0 && taskNumber < taskList.size()) {
-            taskList.markAsDone(taskNumber);
-            storage.save(taskList);
+        if (taskNumber >= 0 && taskNumber < tasks.size()) {
+            tasks.markAsDone(taskNumber);
+            storage.save(tasks);
             ui.print("Good job! I've marked this task as done:");
-            ui.print(taskList.show(taskNumber));
+            ui.print(tasks.show(taskNumber));
         } else {
             ui.print("Sorry, I can't find it in your list!");
         }

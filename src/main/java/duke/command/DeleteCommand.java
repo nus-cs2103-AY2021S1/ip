@@ -3,7 +3,6 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import exception.InvalidUsageException;
 
 /**
  * Remove a task
@@ -18,19 +17,19 @@ public class DeleteCommand extends Command {
     /**
      * Removes a specific task from task list and save the changes to storage file
      *
-     * @param taskList current task list
+     * @param tasks current task list
      * @param ui       text ui interface
      * @param storage  storage file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         // Check that the task number makes sense.
-        if (taskNumber >= 0 && taskNumber < taskList.size()) {
+        if (taskNumber >= 0 && taskNumber < tasks.size()) {
             ui.print("Noted. I've removed this task: ");
-            ui.print(taskList.remove(taskNumber).showTask());
+            ui.print(tasks.remove(taskNumber).showTask());
             ui.print(String.format("Now you have %d %s in the list",
-                    taskList.size(), taskList.size() > 1 ? "tasks" : "task"));
-            storage.save(taskList);
+                    tasks.size(), tasks.size() > 1 ? "tasks" : "task"));
+            storage.save(tasks);
         } else {
             ui.print("Sorry, I can't find it in your list!");
         }

@@ -24,8 +24,8 @@ public class ViewallCommand extends Command {
      * @param storage  storage file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        TaskList filtered = taskList.viewAll(date);
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        TaskList filtered = tasks.viewAll(date);
         ui.print("Here are the tasks on given date:");
         for (int i = 0; i < filtered.size(); i++) {
             ui.print(String.format("%d. %s", i + 1, filtered.show(i)));

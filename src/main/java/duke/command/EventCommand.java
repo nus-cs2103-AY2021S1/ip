@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.task.Event;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Event;
 
 /**
  * Add a new event into the task list
@@ -23,11 +23,11 @@ public class EventCommand extends Command {
      * @param storage  storage file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.add(event);
-        storage.save(taskList);
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        tasks.add(event);
+        storage.save(tasks);
 
-        int size = taskList.size();
-        ui.printAddConfirmation(taskList.show(size - 1), size);
+        int size = tasks.size();
+        ui.printAddConfirmation(tasks.show(size - 1), size);
     }
 }

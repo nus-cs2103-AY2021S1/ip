@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
     Scanner sc;
-    
+
     public Ui() {
         sc = new Scanner(System.in);
     }
@@ -18,13 +18,13 @@ public class Ui {
      * @return user command
      */
     public String readCommand() {
-        if(sc.hasNext()) {
+        if (sc.hasNext()) {
             return sc.nextLine();
         } else {
             return "";
         }
     }
-
+    
     /**
      * Prints chatbot response 
      * 
@@ -34,7 +34,7 @@ public class Ui {
         System.out.print("     ");
         System.out.println(message);
     }
-
+    
     /**
      * Build line separator
      */
