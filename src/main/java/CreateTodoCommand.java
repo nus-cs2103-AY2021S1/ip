@@ -4,7 +4,7 @@ class CreateTodoCommand extends Command {
 
     private final String description;
 
-    private final boolean isComplete
+    private final boolean isComplete;
 
     CreateTodoCommand(String description, boolean isComplete) {
         this.description = description;
@@ -13,7 +13,7 @@ class CreateTodoCommand extends Command {
 
     @Override
     protected void execute(Storage storage, TaskList tasks, Ui ui) {
-        tasks.addTodo(this.description);
+        tasks.addTodo(this.description, this.isComplete);
         // TODO Ui: successfully create todo
     }
 }
