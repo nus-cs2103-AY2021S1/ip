@@ -2,6 +2,7 @@ import main.java.Task;
 import main.java.TaskDoneException;
 import main.java.TaskManager;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -95,6 +96,9 @@ public class Duke {
                     echoNewTask(addedDeadline, taskManager.getTotalTask());
                 } catch (IndexOutOfBoundsException err) {
                     echo("Error: The description for deadline can't be empty");
+                } catch (DateTimeParseException err) {
+                    echo("Error: Please key in the date & time as yyyy-mm-dd hh:mm" +
+                            "(Time in 24 hour format)");
                 }
                 break;
             //3 different types of task
@@ -103,7 +107,11 @@ public class Duke {
                     Task addedEvent = taskManager.addEvent(words[1], words[2]);
                     echoNewTask(addedEvent, taskManager.getTotalTask());
                 } catch (IndexOutOfBoundsException err) {
-                    echo("Error: The description for Event can't be empty");
+                    echo("Error: Please key in the date & time as yyyy-mm-dd hh:mm hh:mm" +
+                            "Time in 24 hour format");
+                } catch (DateTimeParseException err) {
+                    echo("Error: Please key in the date & time as yyyy-mm-dd hh:mm hh:mm" +
+                            "(Time in 24 hour format");
                 }
                 break;
             case "todo":
