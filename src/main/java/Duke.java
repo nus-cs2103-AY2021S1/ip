@@ -70,7 +70,7 @@ public class Duke {
                             throw new DukeEmptyDeadlineException(input);
                         }
                         String deadliner = stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
-                        String[] deadlinerparts = deadliner.split("/by");
+                        String[] deadlinerparts = deadliner.split(" /by ");
                         if(deadlinerparts.length == 1){
                             throw new DukeEmptyDeadlineTImeException(input);
                         }
@@ -82,7 +82,7 @@ public class Duke {
                             throw new DukeEmptyEventException(input);
                         }
                         String eventer = stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
-                        String[] eventParts = eventer.split("/at");
+                        String[] eventParts = eventer.split(" /at ");
                         if (eventParts.length == 1) {
                             throw new DukeEmptyEventTimeException(input);
                         }
