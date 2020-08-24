@@ -7,10 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Holds the storage work of duke program.
+ */
 public class Storage {
 
+    /** File object of data file. */
     File storageFile;
 
+    /**
+     * Initializes the storage object.
+     * @param fileName File path and name of data file, in string format.
+     */
     public Storage(String fileName) {
         File temp = new File(fileName);
         if (!temp.exists()) {
@@ -29,6 +37,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads data from data file.
+     * Parses data to list of tasks.
+     * If no data in data file, gives an empty list.
+     * @return List of stored tasks.
+     */
     public List<Task> load() {
         List<Task> result = new ArrayList<>();
         Scanner storage;
@@ -56,6 +70,10 @@ public class Storage {
         return result;
     }
 
+    /**
+     * Saves list of tasks into data file.
+     * @param taskList List of tasks.
+     */
     public void save(List<Task> taskList) {
         try{
             FileWriter fileWriter = new FileWriter(storageFile);
