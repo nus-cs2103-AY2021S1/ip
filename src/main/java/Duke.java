@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -181,6 +182,17 @@ public class Duke {
                     generateTxt(tasks,data);
                     continue;
                 }
+
+                if (process[0].equals("check")) {
+                    System.out.println("Hey! I have printed out the tasks that match the date:");
+                    String target = process[1];
+                    for (Task task : tasks) {
+                        if (task.getDate().equals(target)) {
+                            System.out.println(task);
+                        }
+                    }
+                    continue;
+                }
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(SPACE1 + "Sorry, I can't seem " +
                         "to find the task...");
@@ -190,7 +202,6 @@ public class Duke {
                 System.out.println("txt file update unsuccessful " + e.getMessage());
                 continue;
             }
-
 
             String firstWord = process[0];
             Task current;
@@ -224,15 +235,16 @@ public class Duke {
                     throw new DukeException("nothing understood");
                 }
                 }
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println(SPACE1 + "The description of " +
-                        "a task cannot be empty!");
+            } catch (NumberFormatException | DateTimeException e) {
+                System.out.println(SPACE1 + "Invalid date format detected!");
                 continue;
-            } catch (DukeException e) {
+
+            } catch (DukeException | ArrayIndexOutOfBoundsException e) {
                 String type = e.getMessage();
-                if (type.equals("better description")) {
+                if (type.equals("better description") ||
+                        e instanceof ArrayIndexOutOfBoundsException) {
                     System.out.println(SPACE1 + "I need a better " +
-                            "description of the task and time!");
+                            "description of the task!");
                 } else if (type.equals("nothing understood")) {
                     System.out.println(SPACE1 + "I don't understand you at all...");
                 }
