@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Encapsulates the storage into a class. The class supports loading tasks from the file,
+ * reading task from the file and writing to the file.
+ */
 public class Storage {
     public String filePath;
     public List<Task> tasks;
@@ -15,6 +19,11 @@ public class Storage {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Load the tasks to the list of tasks.
+     * @return The list of tasks
+     * @throws DukeException if the file does not exist.
+     */
     public List<Task> load() throws DukeException {
         File f = new File(filePath);
         if (f.exists()) {
@@ -33,6 +42,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Read the tasks from the file.
+     * @param f The file that contains the list of tasks.
+     * @param lists The list that the tasks are read into.
+     */
     public static void readTask(File f, List<Task> lists) {
         try {
             Scanner s = new Scanner(f);
@@ -68,6 +82,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Write teh tasks into the file.
+     * @param lists The list of tasks.
+     * @throws IOException If the file does not exist.
+     */
     public static void writeToFile(List<Task> lists) throws IOException {
         FileWriter fw = new FileWriter("data/duke.txt");
         String textToAdd = "";

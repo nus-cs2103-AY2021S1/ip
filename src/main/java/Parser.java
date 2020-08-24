@@ -2,6 +2,10 @@ import java.time.LocalDate;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * Encapsulates parser into a class. The class supports parsing the command messages
+ * from the user into different commands.
+ */
 public class Parser {
     public static Command parse(String commandMessage) throws DukeException {
         Command command;
