@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
 
 public class Duke {
     public static void main(String[] args) throws DukeException {
@@ -15,7 +16,8 @@ public class Duke {
             System.out.println("Hello! I'm Duke \n"
                     + "What can I do for you?");
             Scanner sc = new Scanner(System.in);
-            List<Input> inputs = new ArrayList<>();
+            //List<Input> inputs = new ArrayList<>();
+            List<Input> inputs = Storage.readFile();
             while (true) {
                 String nextLine = sc.nextLine();
                 if (nextLine.startsWith("done")) {
@@ -47,6 +49,7 @@ public class Duke {
                     }
                     inputs.remove(numTaskDone -1);
                     System.out.println("Now you have " + inputs.size() + " tasks in the list.");
+                    Storage.writeToFile(inputs);
                 } else if (nextLine.startsWith("todo")) {
                      if (nextLine.equals("todo") || nextLine.equals("todo ")) {
                          throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
@@ -56,6 +59,7 @@ public class Duke {
                      int count = inputs.size();
                      System.out.println("Got it. I've added this task: \n" + "  [T][x] " + todo.content +
                              "\n Now you have " + count + " tasks in the list");
+                    Storage.writeToFile(inputs);
                 } else if (nextLine.startsWith("deadline")) {
                     if (nextLine.equals("deadline") || nextLine.equals("deadline ")) {
                         throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
@@ -66,6 +70,7 @@ public class Duke {
                     int count = inputs.size();
                     System.out.println("Got it. I've added this task: \n" + "  [D][x] " + deadline.content +
                             deadline.time + "\n Now you have " + count + " tasks in the list");
+                    Storage.writeToFile(inputs);
                 } else if (nextLine.startsWith("event")) {
                     if (nextLine.equals("event") || nextLine.equals("event ")) {
                         throw new DukeException("OOPS!!! The description of an event cannot be empty.");
@@ -76,6 +81,7 @@ public class Duke {
                     int count = inputs.size();
                     System.out.println("Got it. I've added this task: \n" + "  [E][x] " + event.content +
                             event.time + "\n Now you have " + count + " tasks in the list");
+                    Storage.writeToFile(inputs);
                 } else if (nextLine.equals("list")) {
                     if (inputs.size() == 0) {
                         System.out.println("No tasks in list");
@@ -106,7 +112,7 @@ public class Duke {
         }
     }
         
-    public static class Input {
+    public static class Input implements Serializable {
         boolean done;
         String content;
         String id;
@@ -179,6 +185,38 @@ public class Duke {
             this.msg = msg;
         }
     }
+    
+    public static class Storage {
+        static String filepath = "listStore.ser";
+                
+        static void writeToFile(List<Input> list) {
+            try {
+                FileOutputStream writeData = new FileOutputStream(filepath);
+                ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+                writeStream.writeObject(list);
+                writeStream.flush();
+                writeStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        static List<Input> readFile() {
+            try {
+                FileInputStream readData = new FileInputStream(filepath);
+                ObjectInputStream readStream = new ObjectInputStream(readData);
+                List<Input> inputList = (List<Input>) readStream.readObject();
+                readStream.close();
+                return inputList;
+            } catch (FileNotFoundException e) {
+                return new ArrayList<>();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        
+     }
     
 
 }
