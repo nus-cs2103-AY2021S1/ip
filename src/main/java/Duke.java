@@ -1,5 +1,9 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
 
 public class Duke {
     private static final String logo = " _   _       _   _ _            \n" +
@@ -56,6 +60,7 @@ public class Duke {
         UNDEFINED_EVENT_TIME,
         WRONG_TYPE,
         UNRECOGNIZED,
+        DIRECTORY_NOT_FOUND,
     }
     
     private enum Commands {
@@ -145,6 +150,10 @@ public class Duke {
             message = " Event date cannot be empty :( \n" +
                     " Terminating Hotline... \n";
             break;
+        case DIRECTORY_NOT_FOUND:
+            message = " I cannot find the directory :( \n" +
+                    " Terminating Hotline... \n";
+            break;
         default:
             message = " Command not recognized :( \n" +
                     " Terminating Hotline... \n";
@@ -152,6 +161,54 @@ public class Duke {
         }
         throw new DukeException("\n" + divider + "\n" + message + divider + "\n");
     }
+
+    private static void parseTasks() throws DukeException {
+        try {
+            File data = new File("./tasks.txt");
+            if (!data.exists()) {
+                data.createNewFile();
+            }
+            Scanner sc = new Scanner(data);
+            while (sc.hasNextLine()) {
+                String[] inputs = sc.nextLine().split(" \\| ");
+                String type = inputs[0];
+                boolean isDone = inputs[1].equals("1");
+                String description = inputs[2];
+                String time;
+                if (type.equals("T")) {
+                    tasks.add(new ToDo(description, isDone));
+                } else if (type.equals(("D"))) {
+                    time = inputs[3];
+                    tasks.add(new Deadline(description, isDone, time));
+                } else if (type.equals("E")) {
+                    time = inputs[3];
+                    tasks.add(new Event(description, isDone, time));
+                }
+                taskCount += 1;
+            }
+        } catch (IOException error) {
+            generateException(Errors.DIRECTORY_NOT_FOUND);
+        }
+    }
+    
+    private static void saveTasks() {
+        try {
+            File location = new File("./tasks.txt");
+            if (!location.exists()) {
+                location.createNewFile();
+            }
+            PrintWriter writer = new PrintWriter(new FileWriter(location));
+            for (int i = 0; i < taskCount; i++) {
+                writer.println(tasks.get(i).saveToHardDisk());
+            }
+            writer.close();
+        } catch (IOException error) {
+            String message = " I cannot find the directory :( \n" +
+                    " Terminating Hotline... \n";
+            System.out.println("\n" + divider + "\n" + message + divider + "\n");
+        }
+    }
+    
 
     private static void echo() throws DukeException {
         try {
@@ -243,10 +300,13 @@ public class Duke {
 
     public static void main(String[] args) {
         try {
+            parseTasks();
             greetings();
             echo();
         } catch (DukeException error) {
             System.out.println(error);
+        } finally {
+            saveTasks();
         }
     }
 }

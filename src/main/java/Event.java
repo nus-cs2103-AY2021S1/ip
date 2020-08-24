@@ -10,4 +10,9 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.time + ")";
     }
+
+    @Override
+    public String saveToHardDisk() {
+        return "E" + super.saveToHardDisk() + " | " + this.time;
+    }
 }
