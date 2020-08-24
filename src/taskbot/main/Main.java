@@ -8,6 +8,11 @@ import taskbot.exceptions.EmptyArgumentException;
 import taskbot.exceptions.InvalidCommandException;
 import taskbot.exceptions.InvalidIndexException;
 
+import taskbot.storage.Storage;
+import taskbot.task.TaskList;
+
+import static taskbot.helper.Helper.handleException;
+
 /**
  * This is the main class which handles user input.
  */
@@ -28,13 +33,20 @@ public class Main {
                 "  |____|  (____  /____  >__|_ \\|______  /\\____/|__|  \n" +
                 "               \\/     \\/     \\/       \\/             ";
 
-        //Initialising the Taskbot
+        //Initialise Taskbot
         Taskbot tb = new Taskbot(logo);
 
         //Prints the title to the console and greets the user
         tb.printTitle();
-        tb.greet();
 
+        //Create a new storage database
+        Storage storage = new Storage();
+
+        //Initialise the task list with the database
+        TaskList taskList = new TaskList(storage);
+
+        //Greet the user
+        tb.greet();
         //Initialises a Scanner to take in user input
         Scanner sc = new Scanner(System.in);
 
@@ -53,39 +65,39 @@ public class Main {
                 //instructs the bot given the command, throwing the required exceptions when necessary
                 switch (cmd) {
                     case LIST:
-                        tb.listTasks();
+                        taskList.listTasks();
                         break;
                     case DONE:
                         if (key.length == 1 || key[1].strip().length() == 0) {
                             throw new EmptyArgumentException("Please enter the index of the task you wish to complete.");
                         }
                         taskIndex = Integer.parseInt(key[1]) - 1;
-                        tb.completeTask(taskIndex);
+                        taskList.completeTask(taskIndex);
                         break;
                     case DELETE:
                         if (key.length == 1 || key[1].strip().length() == 0) {
                             throw new EmptyArgumentException("Please enter the index of the task you wish to delete.");
                         }
                         taskIndex = Integer.parseInt(key[1]) - 1;
-                        tb.deleteTask(taskIndex);
+                        taskList.deleteTask(taskIndex);
                         break;
                     case TODO:
                         if (key.length == 1 || key[1].strip().length() == 0) {
                             throw new EmptyArgumentException("The description of a todo cannot be empty. Please input a valid description.");
                         }
-                        tb.addTodoTask(key[1]);
+                        taskList.addTodoTask(key[1]);
                         break;
                     case EVENT:
                         if (key.length == 1 || key[1].strip().length() == 0) {
                             throw new EmptyArgumentException("The description of an event cannot be empty. Please input a valid description.");
                         }
-                        tb.addEventTask(key[1]);
+                        taskList.addEventTask(key[1]);
                         break;
                     case DEADLINE:
                         if (key.length == 1 || key[1].strip().length() == 0) {
                             throw new EmptyArgumentException("The description of a deadline cannot be empty. Please input a valid description.");
                         }
-                        tb.addDeadlineTask(key[1]);
+                        taskList.addDeadlineTask(key[1]);
                         break;
                     case NONE:
                         throw new InvalidCommandException("That was not a valid command. Please try again.");
@@ -96,9 +108,9 @@ public class Main {
                 cmd = Command.NONE;
                 } catch (NumberFormatException e) {
                     InvalidIndexException wfe = new InvalidIndexException("Please enter a valid index for the task.");
-                    tb.handleException(wfe);
+                    handleException(wfe);
                 } catch (InvalidCommandException | EmptyArgumentException e) {
-                    tb.handleException(e);
+                    handleException(e);
                 }
             }
 
