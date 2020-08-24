@@ -48,7 +48,7 @@ public class Storage {
             } catch (IOException e2) {
                 e2.printStackTrace();
             }
-            return List.of();
+            return new ArrayList<>();
         }
     }
 
@@ -78,6 +78,7 @@ public class Storage {
                     writer.write('\n' + task.getSummary());
                 }
             }
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
