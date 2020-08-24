@@ -7,7 +7,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String taskFileFormat() {
+    public String taskFileString() {
         return "T | " + (super.isDone ? "1 |" : "0 |") + super.description;
     }
 

@@ -18,7 +18,7 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public abstract String taskFileFormat();
+    public abstract String taskFileString();
 
     public abstract LocalDate getDate();
 

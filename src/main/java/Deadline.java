@@ -19,7 +19,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String taskFileFormat() {
+    public String taskFileString() {
         return "D | " + (super.isDone ? "1 |" : "0 |") + super.description + " | " +
                 this.deadlineDate.toString() + " "+ this.deadlineTime.toString();
     }

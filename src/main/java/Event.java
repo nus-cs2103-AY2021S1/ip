@@ -19,7 +19,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String taskFileFormat() {
+    public String taskFileString() {
         return "E | " + (super.isDone ? "1 |" : "0 |") + super.description + " | " +
                 this.eventDate.toString() + " " + this.eventTime.toString();
     }
