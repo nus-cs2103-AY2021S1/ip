@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -5,11 +8,21 @@ import java.util.regex.PatternSyntaxException;
 
 
 public class Duke {
+    //private static final String FILEPATH = System.getProperty("user.dir");
     static String bot = "Dave says:\n";
     static String line = "_______________________________________________________________";
 
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
+
+        //loading
+        Save save = new Save("data/duke.txt");
+        try {
+            tasks = save.read();
+        } catch (FileNotFoundException ex){
+            System.err.println(ex.getMessage());
+        }
+
 
         //Initial greetings
         System.out.println(line);
@@ -36,6 +49,7 @@ public class Duke {
                         System.out.println(line);
                         System.out.println(bot + "Goodbye! Hope to see you again soon! ^_^");
                         System.out.println(line);
+                        System.exit(0);
                         break;
                     case LIST:
                         if (userInput.equals("list")) {
@@ -137,7 +151,10 @@ public class Duke {
                     default:
                         throw new DukeException("You have keyed in an invalid command!\n(Valid commands: todo, deadline, event, list, delete, bye, done)");
                 }
-            } catch (DukeException ex) {
+
+                save.writeToFile(tasks);
+
+            } catch (DukeException | IOException ex) {
                 System.out.println(line);
                 System.out.print(bot);
                 System.out.println(ex.getMessage());
