@@ -43,4 +43,9 @@ public class CommandTest {
     void create_commandTypeBye_returnByeCommand() throws DukeException {
         assert Command.create(CommandType.BYE, "something") instanceof ByeCommand;
     }
+
+    @Test
+    void create_commandTypeFind_returnFindCommand() throws DukeException {
+        assert Command.create(CommandType.FIND, "something") instanceof FindCommand;
+    }
 }

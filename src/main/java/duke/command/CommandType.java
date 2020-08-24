@@ -1,8 +1,6 @@
 package duke.command;
 
-/**
- * CommandType represents all the valid commands available
- */
+/** CommandType represents all the valid commands available */
 public enum CommandType {
   LIST_DATE("date"),
   LIST("list"),
@@ -11,7 +9,8 @@ public enum CommandType {
   EVENT("event"),
   DONE("done"),
   BYE("bye"),
-  DELETE("delete");
+  DELETE("delete"),
+  FIND("find");
 
   private String name;
 
