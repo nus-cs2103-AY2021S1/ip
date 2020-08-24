@@ -1,15 +1,34 @@
 package main.java;
 
-public class Event extends Task {
-    private String time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
-    public Event(String name, String time) {
+public class Event extends Task {
+    private LocalDate date;
+    private LocalTime startTime;
+    private LocalTime endTime;
+
+    public Event(String name, String eventDetail) throws DateTimeParseException, IndexOutOfBoundsException{
         super(name);
-        this.time = time;
+        String[] input = eventDetail.split("\\s+");
+        try {
+            date = LocalDate.parse(input[0]);
+            startTime = LocalTime.parse(input[1]);
+            endTime = LocalTime.parse(input[2]);
+        } catch (DateTimeParseException err) {
+            throw err;
+        } catch (IndexOutOfBoundsException err) {
+            throw err;
+        }
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.time);
+        System.out.println(this.startTime);
+        String dateTime = Task.DATE_FORMATTER.format(date);
+        dateTime += " " + Task.TIME_FORMATTER.format(startTime);
+        dateTime += " - " + Task.TIME_FORMATTER.format(endTime);
+        return String.format("[E]%s (at: %s)", super.toString(), dateTime);
     }
 }
