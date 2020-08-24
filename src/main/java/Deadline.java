@@ -9,7 +9,7 @@ public class Deadline extends Task{
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = by.trim();
         String[] timeComponent = by.split(" ");
         this.date = LocalDate.parse(format(timeComponent[0].trim()));
         String hour = timeComponent[1].substring(0,2);
