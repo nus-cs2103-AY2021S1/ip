@@ -2,12 +2,16 @@ package duke.command;
 
 import duke.*;
 import duke.exceptions.DukeException;
+import duke.exceptions.WrongDateFormatException;
 import duke.parser.DateParser;
 import duke.task.Deadline;
 import duke.task.TaskList;
 
 import java.time.LocalDateTime;
 
+/**
+ * Command to create a Deadline Task. Created by using "deadline description /by DD MMM YYYY hhmm"
+ */
 public class DeadlineCommand extends Command {
 
     private final String description;
@@ -18,8 +22,17 @@ public class DeadlineCommand extends Command {
         this.dateStr = dateStr;
     }
 
+    /**
+     * Create a Deadline with the user entered description and due-date String, store it in TaskList,
+     * print feedback to user and store the new Deadline in Storage.
+     *
+     * @param tasks task list containing all tasks
+     * @param ui ui for interaction with user
+     * @param storage storage to retrieve and store tasks entered by user
+     * @throws DukeException if invalid date String provided
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws WrongDateFormatException {
         LocalDateTime deadlineDateTime = DateParser.parseString(dateStr);
         Deadline deadline = new Deadline(description, deadlineDateTime);
         tasks.addTask(deadline);
