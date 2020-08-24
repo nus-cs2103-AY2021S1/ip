@@ -28,7 +28,6 @@ public class Storage {
             File file = new File(directoryName + "/" + fileName);
             if (!file.exists()) {
                 file.createNewFile();
-                System.out.println("aaa");
             }
             this.br = new BufferedReader(new FileReader("data/tasks.txt"));
             this.printWriter = new PrintWriter("data/tasks.txt");
@@ -38,7 +37,9 @@ public class Storage {
     public ArrayList<duke.Task> loadTask() throws IOException, duke.DukeException {
         ArrayList<duke.Task> list = new ArrayList<>();
         String line = this.br.readLine();
-
+        System.out.println(line);
+        System.out.println("aaa");
+        if (line == null) return list;
         while (!line.isEmpty()) {
             boolean isDone = String.valueOf(line.charAt(6)).equals("\u2713");
             if (String.valueOf(line.charAt(3)).equals("T")) {
