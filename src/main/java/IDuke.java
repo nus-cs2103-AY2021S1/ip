@@ -1,5 +1,3 @@
-import java.util.List;
-
 public interface IDuke {
     /**
      * Prints greeting message.
@@ -10,19 +8,6 @@ public interface IDuke {
      * Prints goodbye message.
      */
     void bye();
-
-    /**
-     * Stores a task in the bot.
-     *
-     * @param task User input task.
-     * @return Updated Duke object.
-     */
-    IDuke storeTask(ITask task);
-
-    /**
-     * Prints the current list.
-     */
-    void displayTasks();
 
     /**
      * Gets a specific task from the list.
@@ -36,7 +21,7 @@ public interface IDuke {
      *
      * @return The specified task
      */
-    List<? extends ITask> getTasks();
+    TaskList getTasks();
 
     /**
      * Gets the number of tasks in the list.
@@ -52,4 +37,6 @@ public interface IDuke {
      * @return Resulting Duke object.
      */
     IDuke handleCommand(String command);
+
+    Storage getStorage();
 }

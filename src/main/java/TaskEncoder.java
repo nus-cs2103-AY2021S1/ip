@@ -5,8 +5,6 @@ import java.util.List;
  * Encodes the tasks in a Duke object to a string for storage.
  */
 public class TaskEncoder {
-    private static StringBuilder encodedTask = new StringBuilder();
-
     /**
      * Returns a list of encoded task strings of a Duke object.
      *

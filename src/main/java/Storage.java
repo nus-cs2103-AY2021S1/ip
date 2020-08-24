@@ -11,10 +11,10 @@ import java.util.Scanner;
 /**
  * Encapsulate operations related to storage of tasks.
  */
-public class StorageManager {
+public class Storage {
     private final Path filePath;
 
-    private StorageManager(Path filePath) {
+    private Storage(Path filePath) {
         this.filePath = filePath;
     }
 
@@ -25,8 +25,8 @@ public class StorageManager {
      * @param filePath Path to the storage file.
      * @return StorageManager class.
      */
-    public static StorageManager getStorageManager(String filePath) {
-        StorageManager sm = new StorageManager(Path.of(filePath));
+    public static Storage getStorage(String filePath) {
+        Storage sm = new Storage(Path.of(filePath));
         try {
             sm.preparePath();
             return sm;
