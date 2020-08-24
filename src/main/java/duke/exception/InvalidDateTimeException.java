@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class InvalidDateTimeException extends InvalidDateException {
 
     public static String DTF = "The following DateTimeFormat is valid:\n"

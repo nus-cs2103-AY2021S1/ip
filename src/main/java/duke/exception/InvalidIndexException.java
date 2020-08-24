@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class InvalidIndexException extends DukeException {
     public InvalidIndexException(int listSize) {
         super("Invalid index.\n" +

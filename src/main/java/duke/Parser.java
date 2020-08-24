@@ -1,9 +1,15 @@
+package duke;
+
+import duke.command.*;
+import duke.exception.NoIndexException;
+import duke.exception.UnrecognizedTaskException;
+
 public class Parser {
 
-//    private TaskList taskList;
+//    private duke.TaskList taskList;
 //    private static final String end = "bye";
 
-//    public Parser(TaskList taskList) {
+//    public duke.Parser(duke.TaskList taskList) {
 //        this.taskList = taskList;
 //    }
 
@@ -67,9 +73,9 @@ public class Parser {
         }
 
 //        try {
-//            return Command.valueOf(firstWord);
+//            return duke.command.Command.valueOf(firstWord);
 //        } catch (IllegalArgumentException illegalArg) {
-//            throw new UnrecognizedTaskException();
+//            throw new duke.exception.UnrecognizedTaskException();
 //        }
     }
 
@@ -79,21 +85,21 @@ public class Parser {
 //
 //            try {
 //
-//                Command command = getCommand(fullCommand.trim());
+//                duke.command.Command command = getCommand(fullCommand.trim());
 //
-//                if (command == Command.list) {
+//                if (command == duke.command.Command.list) {
 //
 //                    taskList.processList(fullCommand);
 //
-//                } else if (command == Command.done) {
+//                } else if (command == duke.command.Command.done) {
 //                    taskList.processDone(fullCommand);
-//                } else if (command == Command.delete) {
+//                } else if (command == duke.command.Command.delete) {
 //                    taskList.processDelete(fullCommand);
 //                } else {
 //                    taskList.addTask(command, fullCommand.trim());
 //                }
 //
-//            } catch (DukeException error) {
+//            } catch (duke.exception.DukeException error) {
 //
 //                System.out.println(error.getMessage());
 //

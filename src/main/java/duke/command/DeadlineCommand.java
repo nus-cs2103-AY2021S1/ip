@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.TaskList;
+
 public class DeadlineCommand extends AddTaskCommand {
     public DeadlineCommand(String input) {
         this.input = input;

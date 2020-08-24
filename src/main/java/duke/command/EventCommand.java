@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.TaskList;
+
 public class EventCommand extends AddTaskCommand {
     public EventCommand(String input) {
         this.input = input;
