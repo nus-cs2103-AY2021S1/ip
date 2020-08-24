@@ -2,7 +2,8 @@ import java.time.LocalDateTime;
 
 public class Deadline extends Task {
 
-    protected LocalDateTime by;
+    protected String by;
+    protected LocalDateTime dateTime;
 
     public Deadline(String description, String by) {
         super(description);
@@ -11,7 +12,9 @@ public class Deadline extends Task {
         String time = dateAndTime[1];
         LocalDateTime dateTime = LocalDateTime.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]),
                 Integer.parseInt(date[0]), Integer.parseInt(time.substring(0,2)), Integer.parseInt(time.substring(2)));
-        this.by = dateTime;
+
+        this.by = by;
+        this.dateTime = dateTime;
     }
 
     public String getBy() {
@@ -20,15 +23,16 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String period = by.getHour() >= 12 ? "PM" : "AM";
-        String hour = by.getHour() > 12 ? Integer.toString(by.getHour() - 12) : Integer.toString(by.getHour());
+        String period = dateTime.getHour() >= 12 ? "PM" : "AM";
+        String hour = dateTime.getHour() > 12 ? Integer.toString(dateTime.getHour() - 12)
+                : Integer.toString(dateTime.getHour());
 
-        if (by.getMinute() > 0) {
-            return "[D]" + super.toString() + " (by: " + by.getDayOfMonth() + " " + by.getMonth() + " " + by.getYear()
-                    + " " + hour + "." + by.getMinute() + period + ")";
+        if (dateTime.getMinute() > 0) {
+            return "[D]" + super.toString() + " (by: " + dateTime.getDayOfMonth() + " " + dateTime.getMonth() + " "
+                    + dateTime.getYear() + " " + hour + "." + dateTime.getMinute() + period + ")";
         } else {
-            return "[D]" + super.toString() + " (by: " + by.getDayOfMonth() + " " + by.getMonth() + " " + by.getYear()
-                    + " " + hour + period + ")";
+            return "[D]" + super.toString() + " (by: " + dateTime.getDayOfMonth() + " " + dateTime.getMonth() + " "
+                    + dateTime.getYear() + " " + hour + period + ")";
         }
     }
 }
