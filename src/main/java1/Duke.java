@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Duke {
-    //public final static String pathDirectory = System.getProperty("user.dir");
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
