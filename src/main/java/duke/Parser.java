@@ -15,6 +15,7 @@ public class Parser {
     private static final String DELETE = "delete";
     private static final String DONE = "done";
     private static final String EVENT = "event";
+    private static final String FIND = "find";
     private static final String LIST = "list";
     private static final String SPACE = " ";
     private static final String TODO = "todo";
@@ -57,6 +58,9 @@ public class Parser {
             return new AddCommand(commandWordArray[0],
                     command.substring(commandWordArray[0].length()
                             + SLASH_INDEX));
+        }
+        if (commandWordArray[0].equals(FIND)) {
+            return new FindCommand(commandWordArray[0], commandWordArray[1]);
         }
         return new UnknownCommand(command);
     }

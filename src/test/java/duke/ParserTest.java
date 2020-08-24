@@ -43,4 +43,10 @@ public class ParserTest {
         Command c = Parser.parse("unknown");
         assertEquals(c, new UnknownCommand("unknown"));
     }
+
+    @Test
+    public void findTest() throws DukeException {
+        Command c = Parser.parse("find book");
+        assertEquals(c, new FindCommand("find", "book"));
+    }
 }

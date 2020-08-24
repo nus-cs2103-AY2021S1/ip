@@ -82,4 +82,12 @@ public class Ui {
         System.out.println("I have marked this task as done: \n"
                 + tasks.getTask(taskNumber));
     }
+
+    public void printFind(TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+    public void printNoMatch(String match) {
+        System.out.println("Sorry! No matches found for " + match + ".");
+    }
 }
