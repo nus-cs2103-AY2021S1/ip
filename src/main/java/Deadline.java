@@ -32,4 +32,11 @@ public class Deadline extends Task {
                         : dueTimeStr)    
                 + ")";
     }
+    
+    public boolean isDueOn(LocalDate cmpDate) {
+        if (!isInDateFormat) {
+            return false;
+        }
+        return cmpDate.isEqual(dueTime);
+    }
 }

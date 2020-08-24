@@ -16,6 +16,7 @@ public class Event extends Task {
             try {
                 String startStr = eventTime.substring(0, idx);
                 String endStr = eventTime.substring(idx + 4);
+                // accepts date in format yyyy-MM-dd
                 startTime = LocalDate.parse(startStr);
                 endTime = LocalDate.parse(endStr);
                 isInDateFormat = true;
@@ -41,5 +42,12 @@ public class Event extends Task {
                         + " to " + endTime.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
                     : eventTime) 
                 + ")";
+    }
+    
+    public boolean isOccuringOn(LocalDate cmpDate) {
+        if (!isInDateFormat) {
+            return false;
+        }
+        return cmpDate.compareTo(startTime) > 0 && cmpDate.compareTo(endTime) < 0;
     }
 }

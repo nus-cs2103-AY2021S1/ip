@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Duke {
     // list storage
     private static ArrayList<Task> tasks = new ArrayList<>();
@@ -12,6 +15,9 @@ public class Duke {
     private static String todoCmd = Task.Command.TODO.getCmd();
     private static String deadlineCmd = Task.Command.DEADLINE.getCmd();
     private static String eventCmd = Task.Command.EVENT.getCmd();
+    private static String findCmd = "find";
+    
+    // time specifier
     private static String deadlineTimeSpecifier = Task.Command.DEADLINE.getTimeSpecifier();
     private static String eventTimeSpecifier = Task.Command.EVENT.getTimeSpecifier();
 
@@ -29,6 +35,9 @@ public class Duke {
     private static String invalidIdxMsg() {
         return "Invalid index. Please input a number between 1 and " + tasks.size();
     }
+    private static String incorrectDateFormatMsg = "Sorry, I cannot understand the date, "
+            + "try to format it in the format: yyyy-MM-dd";
+    private static String findResultMsg = "Here are the tasks happening on that date:";
 
     private static String taskReport() {
         return "You have " + tasks.size() + " tasks in your list";
@@ -124,17 +133,17 @@ public class Duke {
                         }
                         if (timeIdx == 0 || content.indexOf(timeSpecifier) == 0) {
                             throw new InadequateCommandException(type,
-                                    new String[] {"description"});
+                                    new String[]{"description"});
                         }
                         if (timeIdx == -1 || timeIdx + 5 >= content.length()) {
                             throw new InadequateCommandException(type,
-                                    new String[] {"time"});
+                                    new String[]{"time"});
                         }
                         String description = content.substring(0, timeIdx);
                         String time = content.substring(timeIdx + 5, content.length());
                         if (time.split("\\s+").length == 0) {
                             throw new InadequateCommandException(type,
-                                    new String[] {"time"});
+                                    new String[]{"time"});
                         }
                         Task newTask = isDeadline
                                 ? new Deadline(description, time)
@@ -143,6 +152,20 @@ public class Duke {
                         System.out.println(addSuccessfulMsg);
                         System.out.println(newTask);
                         System.out.println(taskReport());
+                    }
+                } else if (inputSplitted[0].equals(findCmd)){
+                    try {
+                        LocalDate date = LocalDate.parse(inputSplitted[1]);
+                        System.out.println(findResultMsg);
+                        for (int i = 0; i < tasks.size(); i++) {
+                            Task task = tasks.get(i);
+                            if ((task instanceof Deadline && ((Deadline) task).isDueOn(date)) 
+                                    || (task instanceof Event && ((Event) task).isOccuringOn(date))) {
+                                System.out.println(task);
+                            }
+                        }
+                    } catch (DateTimeParseException e) {
+                        System.out.println(incorrectDateFormatMsg);
                     }
                 } else { // any other commands
                     throw new IncorrectCommandException();
