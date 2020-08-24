@@ -1,7 +1,7 @@
 package duke;
 
 public enum TaskType {
-    TODO, DEADLINE, EVENT, LIST, DONE, DELETE, BYE;
+    TODO, DEADLINE, EVENT, LIST, DONE, DELETE, BYE, FIND;
 
     public static TaskType of(String str) {
         str = str.toLowerCase();
@@ -20,6 +20,8 @@ public enum TaskType {
             return DELETE;
         case "bye":
             return BYE;
+        case "find":
+            return FIND;
         default:
             throw new IllegalArgumentException(str + " is not a valid TaskType.");
         }

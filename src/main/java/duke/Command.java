@@ -42,7 +42,11 @@ public class Command {
     }
 
     public Command(TaskType taskType, String description) {
-        if (taskType != TaskType.TODO) {
+        switch (taskType) {
+        case TODO:
+        case FIND:
+            break;
+        default:
             throw new IllegalArgumentException("A date parameter is required for this kind of TaskType");
         }
         this.taskType = taskType;
@@ -118,6 +122,17 @@ public class Command {
                 break;
             case EVENT:
                 print = addToList(list, new Event(description, date));
+                break;
+            case FIND:
+                TaskList foundList = list.find(description);
+                print = "Here are your search results:";
+                if (foundList.isEmpty()) {
+                    print += "\nWe didn't find any tasks relevant to your search term.";
+                } else {
+                    for (int i = 0; i < foundList.size(); i++) {
+                        print += "\n " + (i + 1) + ": " + foundList.get(i);
+                    }
+                }
                 break;
             case BYE:
                 break;

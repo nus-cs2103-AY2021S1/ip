@@ -33,6 +33,12 @@ public class TaskList implements Serializable {
         return list.remove(index);
     }
 
+    public TaskList find(String term) {
+        ArrayList<Task> newList = new ArrayList<>(list);
+        newList.removeIf((task -> !task.getDescription().contains(term)));
+        return new TaskList(newList);
+    }
+
     public int size() {
         return list.size();
     }

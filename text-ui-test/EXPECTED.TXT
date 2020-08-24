@@ -4,11 +4,11 @@ What can I do for you?
 ____________________________________________________________
 ____________________________________________________________
 There was an error parsing your command.
-The description of a todo cannot be empty.
+The description of this TaskType cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
 There was an error parsing your command.
-The description of a todo cannot be empty.
+The description of this TaskType cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
 Sure, I've added this task to your list:
@@ -112,6 +112,23 @@ Here are the tasks in your list:
  1: [T][X] read book
  2: [D][Y] return book (by: 25 December 2020)
  3: [E][X] library renewal (at: 26 December 2020)
+____________________________________________________________
+____________________________________________________________
+There was an error parsing your command.
+The description of this TaskType cannot be empty.
+____________________________________________________________
+____________________________________________________________
+Here are your search results:
+We didn't find any tasks relevant to your search term.
+____________________________________________________________
+____________________________________________________________
+Here are your search results:
+ 1: [E][X] library renewal (at: 26 December 2020)
+____________________________________________________________
+____________________________________________________________
+Here are your search results:
+ 1: [T][X] read book
+ 2: [D][Y] return book (by: 25 December 2020)
 ____________________________________________________________
 ____________________________________________________________
 There was an error parsing your command.
