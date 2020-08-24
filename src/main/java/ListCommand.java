@@ -1,11 +1,14 @@
 public class ListCommand extends Command {
 
-    public ListCommand(Category category, String description) throws IllegalArgumentException {
-        super(category);
-        if(description != null){
-            throw new IllegalArgumentException("-------------------------------------------\n" +
-                    "☹ OOPS!!! Invalid input. Try again!\n"
-                    +"-------------------------------------------");
-        }
+    public ListCommand(String description) throws IllegalArgumentException {
+        super(description);
+    }
+
+    public void execute(TaskList taskList) {
+        System.out.println("-------------------------------------------\n" +
+                "Here are the tasks in your list:");
+        taskList.showList();
+        System.out.println(String.format("Now you have %d tasks in the list.\n", taskList.getTaskLength()) +
+                "-------------------------------------------");
     }
 }

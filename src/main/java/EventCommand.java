@@ -1,14 +1,16 @@
+import java.time.LocalDateTime;
+
 public class EventCommand extends Command {
 
-    public EventCommand(Category category, String description) throws IllegalArgumentException {
-        super(category, description);
-        if(description == null) {
-            throw new IllegalArgumentException("-------------------------------------------\n" +
-                    "☹ OOPS!!! The description of an event cannot be empty. Try again!\n"
-                    +"-------------------------------------------");
-        } else {
-            System.out.println("-------------------------------------------\n" +
-                    "Got it. I've added this task:");
-        }
+    public EventCommand(String deadlineName, LocalDateTime deadlineDateTime) throws IllegalArgumentException {
+        super(deadlineName, deadlineDateTime);
+    }
+
+    public void execute(TaskList taskList) {
+        Event newEvent = new Event(this.getTaskName(), this.getTaskDateTime());
+        taskList.addTask(newEvent);
+        System.out.println(newEvent +
+                String.format("\nNow you have %d tasks in the list.\n", taskList.getTaskLength())
+                + "-------------------------------------------");
     }
 }

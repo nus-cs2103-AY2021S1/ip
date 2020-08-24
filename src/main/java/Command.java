@@ -1,21 +1,27 @@
+import java.time.LocalDateTime;
+
 public class Command {
-    private Category category;
-    private String description;
+    private String taskName;
+    private LocalDateTime taskDateTime;
 
-    public Command(Category category) {
-        this.category = category;
+    public Command(String taskName) {
+        this.taskName = taskName;
     }
 
-    public Command(Category category, String description) {
-        this.category = category;
-        this.description = description;
+    public Command(String taskName, LocalDateTime taskDateTime) {
+        this.taskName = taskName;
+        this.taskDateTime = taskDateTime;
     }
 
-    public Category getCategory() {
-        return this.category;
+    public String getTaskName() {
+        return this.taskName;
     }
 
-    public String getDescription() {
-        return this.description;
+    public LocalDateTime getTaskDateTime() {
+        return this.taskDateTime;
+    }
+
+    public void execute(TaskList taskList) {
+        throw new UnsupportedOperationException("This method is to be implemented by child classes");
     }
 }

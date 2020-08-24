@@ -1,11 +1,13 @@
 public class ByeCommand extends Command {
 
-    public ByeCommand(Category category, String description) throws IllegalArgumentException {
-        super(category);
-        if(description != null){
-            throw new IllegalArgumentException("-------------------------------------------\n" +
-                    "☹ OOPS!!! Invalid input. Try again!\n"
-                    +"-------------------------------------------");
-        }
+    public ByeCommand(String description) throws IllegalArgumentException {
+        super(description);
+    }
+
+    public void execute(TaskList taskList) {
+        System.out.println("-------------------------------------------\n" +
+                "Bye bye! Hope to see you again soon!\n" +
+                "-------------------------------------------");
+        System.exit(0);
     }
 }

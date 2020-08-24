@@ -25,7 +25,7 @@ public class TaskList implements Serializable {
         taskList.remove(task);
     }
 
-    public void addTask(Task task) throws FileNotFoundException {
+    public void addTask(Task task) {
         taskList.add(task);
         }
     }
