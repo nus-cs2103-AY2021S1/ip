@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Parser {
@@ -8,7 +9,7 @@ public class Parser {
 
     }
 
-    public void interpret(String input, duke.TaskList taskList, duke.Storage storage) throws duke.DukeException {
+    public void interpret(String input, duke.TaskList taskList, duke.Storage storage) throws duke.DukeException, FileNotFoundException {
         ArrayList<duke.Task> list = taskList.getList();
         if (input.equals("list")) {
             if (list.isEmpty()) {

@@ -1,0 +1,5 @@
+1.[T][✘] read book
+2.[T][✘] study book
+3.[T][✘] learn things
+4.[D][✘] return book (by: 2019-10-15)
+

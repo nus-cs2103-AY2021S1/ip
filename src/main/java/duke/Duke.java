@@ -17,7 +17,7 @@ public class Duke {
         ui = new Ui();
         storage = new duke.Storage(filepath);
         try {
-            tasks = new duke.TaskList(storage.load());
+            tasks = new duke.TaskList(storage.loadTask());
         } catch (duke.DukeException e) {
             ui.showLoadingError();
             tasks = new duke.TaskList();
@@ -25,7 +25,7 @@ public class Duke {
     }
 
     public static void main(String[] args) throws duke.DukeException, IOException {
-        new Duke("data/duke.txt").run();
+        new Duke("data/tasks.txt").run();
     }
 
     public void run() throws duke.DukeException, FileNotFoundException {

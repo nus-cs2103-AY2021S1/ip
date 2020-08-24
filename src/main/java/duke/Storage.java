@@ -8,17 +8,18 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    BufferedReader reader;
+    BufferedReader br;
     PrintWriter printWriter;
     ArrayList<duke.Task> list;
+    String filepath;
 
     public Storage(String filepath) throws IOException {
+        this.filepath = filepath;
         try{
-            this.reader = new BufferedReader(new FileReader(filepath));
-            this.printWriter = new PrintWriter(filepath);
+            this.br = new BufferedReader(new FileReader(filepath));
         } catch (FileNotFoundException e) {
-            String directoryName = "/data";
-            String fileName = "duke.txt";
+            String directoryName = "data";
+            String fileName = "tasks.txt";
             File directory = new File(directoryName);
             if (!directory.exists()) {
                 directory.mkdir();
@@ -26,20 +27,19 @@ public class Storage {
             File file = new File(directoryName + "/" + fileName);
             if (!file.exists()) {
                 file.createNewFile();
+                System.out.println("aaa");
             }
-            this.reader = new BufferedReader(new FileReader("data/duke.txt"));
-            this.printWriter = new PrintWriter("data/duke.txt");
+            System.out.println("xxx");
+            this.br = new BufferedReader(new FileReader("data/tasks.txt"));
+            this.printWriter = new PrintWriter("data/tasks.txt");
         }
     }
 
-    public ArrayList<duke.Task> load() throws IOException, duke.DukeException {
-        // returns the string list from the txt file
+    public ArrayList<duke.Task> loadTask() throws IOException, duke.DukeException {
         ArrayList<duke.Task> list = new ArrayList<>();
-        String line;
-        System.out.println("bbb");
+        String line = this.br.readLine();
 
-        while ((line = this.reader.readLine()) != null) {
-            System.out.println("xxx");
+        while (!line.isEmpty()) {
             boolean isDone = String.valueOf(line.charAt(6)).equals("\u2713");
             if (String.valueOf(line.charAt(3)).equals("T")) {
                 Todo todo = new Todo(line.substring(9));
@@ -64,12 +64,14 @@ public class Storage {
             } else {
                 throw new duke.DukeException("OOPS!!! I'm sorry, but I don't know what that line means.");
             }
+            line = this.br.readLine();
         }
         this.list = list;
         return list;
     }
 
-    public void update(ArrayList<duke.Task> list) {
+    public void update(ArrayList<duke.Task> list) throws FileNotFoundException {
+        this.printWriter = new PrintWriter(filepath);
         this.list = list;
         StringBuilder listOutput = new StringBuilder();
         for (int j = 0; j < list.size(); j++) {
