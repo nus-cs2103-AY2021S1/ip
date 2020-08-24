@@ -27,6 +27,8 @@ public class Parser {
             return new ByeCommand();
         case LIST:
             return new ListCommand();
+        case FIND:
+            return new FindCommand(fullCommand);
         case TODO:
         case EVENT:
         case DEADLINE:
