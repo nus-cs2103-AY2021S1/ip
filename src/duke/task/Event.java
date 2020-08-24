@@ -7,8 +7,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
+    /** the time by which the task starts */
     protected LocalDate at;
 
+    /**
+     * Creates a Event with the specified description and event time.
+     *
+     * @param description the description of the task
+     * @param at the time by which the task should starts at.
+     * @throws DukeException if the event time cannot be parsed.
+     */
     public Event(String description, String at) throws DukeException {
         super(description);
         try {
@@ -18,6 +26,14 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Creates a Event with the specified description and event time.
+     *
+     * @param description the description of the task
+     * @param isDone the completion status of the task.
+     * @param at the time by which the task should starts at.
+     * @throws DukeException if the event time cannot be parsed.
+     */
     public Event(String description, boolean isDone, String at) throws DukeException  {
         super(description, isDone);
         try {
@@ -27,6 +43,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns a plainText formatted string representation of the task, for saving and loading into a text file.
+     *
+     * @return a plainText formatted string representation of the task.
+     */
     @Override
     public String getPlainText() {
         return super.getPlainText() + " | " + at;
