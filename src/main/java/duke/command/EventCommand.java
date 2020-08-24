@@ -1,10 +1,10 @@
-package duke.command;
+package main.java.duke.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-import duke.task.Event;
+import main.java.duke.DukeException;
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.Ui;
+import main.java.duke.task.Event;
 
 public class EventCommand implements Command {
     String command;

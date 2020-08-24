@@ -1,9 +1,9 @@
-package duke;
+package main.java.duke;
 
-import duke.command.*;
+import main.java.duke.command.*;
 
 public class Parser {
-    static Command parse(String command) throws DukeException {
+    public static Command parse(String command) throws DukeException {
         String[] inputArray = command.split("\\s+");
             switch (inputArray[0]) {
             case "bye":

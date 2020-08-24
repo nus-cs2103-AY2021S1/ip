@@ -1,10 +1,7 @@
-package duke;
+package main.java.duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
+import main.java.duke.task.Task;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Ui {
@@ -12,7 +9,7 @@ public class Ui {
     private static final String indentation = "      ";
     private Scanner scanner;
 
-    Ui() {
+    public Ui() {
         this.scanner = new Scanner(System.in);
     }
 

@@ -1,6 +1,6 @@
-package duke.task;
+package main.java.duke.task;
 
-import duke.DukeException;
+import main.java.duke.DukeException;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
