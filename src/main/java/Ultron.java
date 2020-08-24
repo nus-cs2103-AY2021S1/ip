@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Ultron {
 
@@ -24,7 +22,7 @@ public class Ultron {
             this.taskList = new TaskList(storage.load());
 
         }catch (UltronException e){
-            System.out.println(e);
+
             //Initialise the blank arraylist
             this.taskList = new TaskList(new ArrayList<>());
 
