@@ -24,4 +24,9 @@ public class Deadline extends Task {
     public String toString() {
         return String.format("%s (by: %s)", super.toString(), by);
     }
+
+    @Override
+    public String getParentCommand() {
+        return "deadline " + getDescription() + " /by " + by;
+    }
 }

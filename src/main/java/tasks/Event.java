@@ -24,4 +24,9 @@ public class Event extends Task {
     public String toString() {
         return String.format("%s (at: %s)", super.toString(), at);
     }
+
+    @Override
+    public String getParentCommand() {
+        return "event " + getDescription() + " /at " + at;
+    }
 }
