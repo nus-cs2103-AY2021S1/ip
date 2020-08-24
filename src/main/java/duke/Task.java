@@ -12,6 +12,10 @@ public abstract class Task implements Serializable {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setDone(boolean done) {
         isDone = done;
     }
