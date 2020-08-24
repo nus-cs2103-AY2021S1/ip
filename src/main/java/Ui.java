@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Ui {
     public static String greeting = "Hello, I'm Duke, your personal assistant. \n What can I do for you?";
     public static String home = System.getProperty("user.home");//home = C:/Users/david
-
+    public PlayBot bot;
     /**
      * Greets with user.
      */
@@ -27,10 +27,29 @@ public class Ui {
      */
     public void run() throws IOException {
         Scanner sc = new Scanner(System.in);
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             String order = sc.nextLine();
             String reply = Parser.process(order);
             System.out.println(reply);
+        }
+    }
+
+    public void setBot(PlayBot bot) {
+        this.bot = bot;
+    }
+
+    public void play() {
+        bot.greeting();
+        Scanner scPlay = new Scanner(System.in);
+        bot.setName(scPlay.nextLine());
+        bot.intro();
+        while (scPlay.hasNextLine()) {
+            String playerMove = scPlay.nextLine();
+            if (playerMove.equals("bye")) {
+                break;
+            } else {
+                bot.respond(playerMove);
+            }
         }
     }
 

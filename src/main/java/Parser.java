@@ -81,6 +81,11 @@ public class Parser {
             } else {
                 return "    Please specify what you wish to find.";
             }
+        } else if (order.equals("play")) {
+            Ui ui = new Ui();
+            ui.setBot(new PlayBot());
+            ui.play();
+            return "";
         } else {
             return "    Sorry, I don't understand."; //handles all unexpected inputs
         }
