@@ -84,10 +84,11 @@ public class Duke {
      * Driver function
      */
     public static void run() {
+        //System.out.println("[project_root]/data/duke.txt");
         Scanner scanner = new Scanner(System.in);
         String currentWord = scanner.nextLine();
         try {
-            Storage storage = new Storage("duke2.txt");
+            Storage storage = new Storage("duke.txt");
             TaskList taskList = storage.formTaskList(storage.readStorageFile());
             while (!currentWord.equals("bye")) {
                 String command = split(currentWord)[0];
@@ -149,10 +150,11 @@ public class Duke {
                     storage.writeTasks(taskList);
                     currentWord = scanner.nextLine();
                 }
-
             }
 
-            System.out.println("Bye. Hope to see you again soon!");
+
+
+        System.out.println("Bye. Hope to see you again soon!");
         } catch (IOException err) {
             System.out.println(err.toString());
         }
