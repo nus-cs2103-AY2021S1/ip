@@ -3,57 +3,42 @@ import java.util.Scanner;
 import java.io.File;
 
 public class Duke {
-    private TaskList taskList;
+    private TaskList tasks;
     private final Ui ui;
+    private final Storage storage;
 
     Duke() {
-        taskList = new TaskList();
+        tasks = new TaskList();
         ui = new Ui();
+        storage = new Storage("data/data.txt");
+        try {
+            tasks = new TaskList(storage.processStorage());
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
     }
 
-    void run() throws DukeException {
-        final String FILE_PATH = "data/data.txt";
-        ui.displayLogo();
-        try {
-            File f = new File(FILE_PATH);
-            if (!f.exists()) {
-                if (f.getParentFile().mkdirs() && f.createNewFile()) {
-                    System.out.println("\tStorage space for you tasks has been initialized successfully.");
-                }
-            } else {
-                taskList.processStorage(f, new Scanner(f));
-            }
-        } catch (IOException e) {
-            System.out.println("Oops! Something went wrong when loading your tasks from storage.");
-            e.printStackTrace();
-            throw new DukeException(e.getMessage());
-        }
-        ui.greet();
-
-        Scanner s = new Scanner(System.in);
-        String input = s.nextLine();
-        while (!input.equals("bye")) {
+    void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                taskList.processInput(input);
+                String fullCommand = ui.readCommand();
+                ui.showLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
             } catch (DukeException e) {
-                ui.echo(e.getMessage());
+                ui.displayMessage(e.getMessage());
+            } finally {
+                ui.showLine();
             }
-            input = s.nextLine();
         }
-        try {
-            taskList.writeData();
-        } catch (IOException e) {
-            throw new DukeException(e.getMessage());
-        }
-        ui.bye();
     }
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        try {
-            duke.run();
-        } catch (DukeException e) {
-            System.out.println("Oops! An unexpected error has occurred.");
-        }
+        duke.run();
     }
 }
