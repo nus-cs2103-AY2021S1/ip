@@ -24,7 +24,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String period = dateTime.getHour() >= 12 ? "PM" : "AM";
-        String hour = dateTime.getHour() > 12 ? Integer.toString(dateTime.getHour() - 12)
+        String hour = dateTime.getHour() > 12
+                ? Integer.toString(dateTime.getHour() - 12)
                 : Integer.toString(dateTime.getHour());
 
         if (dateTime.getMinute() > 0) {
