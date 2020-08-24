@@ -2,19 +2,19 @@ import java.util.Scanner;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.io.IOException;
-import java.util.stream.Stream;
 
 public class Main {
 
-    private static TaskManager tskManager;
+    private static TaskManager taskManager;
+    private static Storage taskStorage;
+    private static TaskPrinter ui;
+    private static final Path DEFAULT_LOC = Path.of("src","main", "chatbot", "data.txt");
 
     private static boolean getUserInput(Scanner s) {
         return s.hasNextLine();
     }
 
     private static void handleUserInput(String userInput) {
-
-        TaskPrinter tskPrint = new TaskPrinter();
         String text = userInput.trim();
         String leading = text.split(" ")[0].trim();
         String trailing = text.substring(leading.length()).trim();
@@ -23,48 +23,67 @@ public class Main {
         try {
              cmd = Command.valueOf(leading.toUpperCase());
         } catch (IllegalArgumentException e){
-            tskPrint.display("Arghh! I do not know what you mean, are you using the right\n    " +
+            ui.display("Arghh! I do not know what you mean, are you using the right\n    " +
                     "commands?");
         }
 
         switch (cmd) {
             case LIST:
-                tskManager.listAll();
+                taskManager.listAll();
                 break;
             case DONE:
                 int ind1 = Integer.parseInt(text.split(" ")[1]) - 1;
-                tskManager.markAsDone(ind1);
+                try {
+                    if (taskManager.markAsDone(ind1)) {
+                        taskStorage.saveTasks(DEFAULT_LOC);
+                    }
+                } catch (ChatbotException e) {
+                    ui.display(e.getMessage());
+                }
                 break;
             case TODO:
                 try {
                     Todo task = Todo.newTodo(trailing);
-                    tskManager.addTask(task);
+                    if (taskManager.addTask(task)) {
+                        taskStorage.saveTasks(DEFAULT_LOC);
+                    }
                 } catch (ChatbotException e) {
-                    tskPrint.display(e.getMessage());
+                    ui.display(e.getMessage());
                 }
                 break;
             case DEADLINE:
                 try {
                     Deadline deadline = Deadline.newDeadline(trailing);
-                    tskManager.addTask(deadline);
+                    if (taskManager.addTask(deadline)) {
+                        taskStorage.saveTasks(DEFAULT_LOC);
+                    }
                 } catch (ChatbotException e) {
-                    tskPrint.display(e.getMessage());
+                    ui.display(e.getMessage());
                 }
                 break;
             case EVENT:
                 try {
                     Event event = Event.newEvent(trailing);
-                    tskManager.addTask(event);
+                    if (taskManager.addTask(event)) {
+                        taskStorage.saveTasks(DEFAULT_LOC);
+                    }
                 } catch (ChatbotException e) {
-                    tskPrint.display(e.getMessage());
+                    ui.display(e.getMessage());
                 }
                 break;
             case DELETE:
                 int ind2 = Integer.parseInt(text.split(" ")[1]) - 1;
-                tskManager.removeTask(ind2);
+                try {
+                    if (taskManager.removeTask(ind2)) {
+                        taskStorage.saveTasks(DEFAULT_LOC);
+                    }
+                } catch (ChatbotException e) {
+                    ui.display(e.getMessage());
+                }
                 break;
             case BYE:
-                tskPrint.display("Bye, hope to see you again soon.");
+                ui.display("Bye, hope to see you again soon.");
+                System.exit(0);
                 break;
             default:
                 break;
@@ -73,54 +92,37 @@ public class Main {
 
     public static void main(String[] args) {
 
-        tskManager = TaskManager.getInstance();
-
-        System.out.println(
-                "   ####################################################\n" +
-                "   #                                                  #\n" +
-                "   #  Hey there, I'm Hanry Kun the impatient ChatBot. #\n" +
-                "   #  What can I do for you? (-.-)                    #\n" +
-                "   #                                                  #\n" +
-                "   ####################################################"
-        );
-
-        // program setup
-        try {
-            Path path = Path.of("src","main", "chatbot", "data.txt");
-            if (Files.exists(path)) {
-                Stream<Task> taskStream = Files.lines(path).map(line -> {
-                        String[] lineData = line.split("\\|");
-
-                        String type = lineData[0].trim();
-                        boolean isDone = lineData[1].trim().equals("1");
-                        String description = lineData[2].trim();
-                        String timestamp = lineData[3].trim();
-
-                        Task task = null;
-                        switch (type) {
-                            case "T":
-                                task = new Todo(description, isDone);
-                                break;
-                            case "D":
-                                task = new Deadline(description, isDone, timestamp);
-                                break;
-                            case "E":
-                                task = new Event(description, isDone, timestamp);
-                                break;
-                            default:
-                                break;
-                        }
-                        return task;
-                });
-                tskManager.loadTasks(taskStream);
-            } else {
-                Files.createFile(path);
-            }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+        taskManager = new TaskManager();
+        taskStorage = new Storage(taskManager);
+        ui = new TaskPrinter();
 
         Scanner sc = new Scanner(System.in);
+
+        // check for file existence
+        if (Files.exists(DEFAULT_LOC)) {
+            try {
+                // if exists, load tasks
+                taskStorage.loadTasks(DEFAULT_LOC);
+            } catch (ChatbotException e) {
+                ui.display(e.getMessage());
+            }
+        } else {
+            try {
+                // if not exists, create new file
+                Files.createFile(DEFAULT_LOC);
+            } catch (IOException e) {
+                ui.display("Failure: couldn't create file");
+            }
+        }
+
+        System.out.println(
+                        "   ####################################################\n" +
+                        "   #                                                  #\n" +
+                        "   #  Hey there, I'm Hanry Kun the impatient ChatBot. #\n" +
+                        "   #  What can I do for you? (-.-)                    #\n" +
+                        "   #                                                  #\n" +
+                        "   ####################################################"
+        );
 
         while(getUserInput(sc)) {
             String userInput = sc.nextLine();
