@@ -1,3 +1,0 @@
-1.[T][DONE] hello 
-2.[E][NOT DONE] meet (at: 3pm) 
-3.[D][NOT DONE] hw (by: tonight) 
