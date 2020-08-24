@@ -18,7 +18,7 @@ public class Ui {
         say("Unable to load tasks.");
     }
 
-    public void welcome() {
+    public void showWelcome() {
         String logo =
                 "█████████████████████████████████████████████████████████████\n" +
                         "█░░░░░░░░░░░░░░███░░░░░░░░░░░░░░░░░░░░░░░░░█░░░░░░░░░░░░░░███\n" +
@@ -37,17 +37,9 @@ public class Ui {
         say(welcome);
     }
 
-    public void takeUserInput(TaskList tasks) {
+    public String readCommand() {
         String input = sc.nextLine();
-        while (!input.equals("bye")) {
-            try {
-                String response = Parser.parseInput(tasks, input);
-                say(response);
-            } catch (DukeException e) {
-                say(e.getMessage());
-            }
-            input = sc.nextLine();
-        }
+        return input;
     }
 
     public void end() {
