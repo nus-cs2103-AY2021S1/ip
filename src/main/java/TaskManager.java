@@ -10,12 +10,16 @@ class TaskManager {
     final String FILE_PATH = "../tasks.txt";
     private List<Task> tasks;
 
-    public TaskManager() {
+    public TaskManager() throws DukeException {
         this.tasks = new ArrayList<>();
-        init();
+        try {
+            init();
+        } catch (DukeException e) {
+            throw new DukeException("Something went wrong when initialising the Task Manager.\nError: " + e.getMessage());
+        }
     }
 
-    private void init() {
+    private void init() throws DukeException {
         try {
             File f = new File(FILE_PATH);
             Scanner sc = new Scanner(f);

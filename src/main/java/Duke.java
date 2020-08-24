@@ -14,7 +14,14 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
 
-        TaskManager tm = new TaskManager();
+        TaskManager tm;
+        try {
+            tm = new TaskManager();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Program will close.");
+            return;
+        }
         Scanner sc = new Scanner(System.in);
         
         while(true) {
