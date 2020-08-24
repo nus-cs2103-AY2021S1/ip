@@ -29,7 +29,7 @@ public class BotHandler {
                 }
             }
         } catch (Exception e) {
-            throw new DuckieNoInfoException();
+            throw new DuckieInsufficientInfoException();
         }
         lst.add(t1);
         BotResponses.addTaskReply(t1, lst);
@@ -69,7 +69,7 @@ public class BotHandler {
                     if (lst.size() == 0) {
                         throw new DuckieNoListException();
                     } else if (is_word(input)) {
-                        throw new DuckieNoInfoException();
+                        throw new DuckieInsufficientInfoException();
                     }
                     int ind = Integer.parseInt(input.split(" ")[1]);
 

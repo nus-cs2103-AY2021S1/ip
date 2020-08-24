@@ -1,5 +1,5 @@
 public class DuckieNoIndexException extends DuckieException {
-    protected final static String INDENT = "    ";
+    protected final static String INDENT = "\t";
     protected final static String horizL = INDENT +
             "____________________________________________________________";
 

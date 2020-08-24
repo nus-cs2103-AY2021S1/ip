@@ -2,7 +2,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class BotResponses {
-    private final static String INDENT = "    ";
+    private final static String INDENT = "\t";
     private final static String horizL = INDENT +
             "____________________________________________________________";
     private final static String logo = INDENT
