@@ -78,6 +78,10 @@ public class Storage {
     private final String filePath;
     private final Gson gsonObject;
 
+    /**
+     * Constructor for Storage.
+     * @param filePath Relative String filepath to the input json file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.gsonObject = gsonBuilder.create();
@@ -98,6 +102,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves TaskList in Json format to the filepath supplied to the constructor.
+     * @param taskList TaskList to save.
+     * @throws DukeException If there is any IOException.
+     */
     public void save(TaskList taskList) throws DukeException {
         try (FileWriter fw = new FileWriter(this.filePath)) {
             this.gsonObject.toJson(taskList, TaskList.class, fw);
@@ -106,6 +115,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads TaskList from a previously saved Json file. Uses filepath supplied to constructor.
+     * @return TaskList parsed from Json file.
+     * @throws DukeException If any parsing errors occur (wrong format, etc).
+     */
     public TaskList load() throws DukeException {
         Path path = Paths.get(filePath);
         if (!path.toFile().isFile()) {

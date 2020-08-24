@@ -50,6 +50,13 @@ public enum Command {
         this.name = name;
     }
 
+    /**
+     * Parses the String input and returns a Optional.of(regex.Matcher) if there is a match,
+     * otherwise returns Optional.empty(). The matcher will be configured to return the arguments
+     * to the Command in its capture groups. The regex used to match can be found in the Command enum.
+     * @param rawInput String raw input from the user.
+     * @return Optional regex.Matcher if there is a match, else empty().
+     */
     public Optional<Matcher> matcher(String rawInput) {
         if (!rawInput.startsWith(this.name)) {
             return Optional.empty();
