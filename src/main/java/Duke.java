@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.Scanner;
 
 public class Duke {
@@ -65,7 +66,7 @@ public class Duke {
     }
 
     private static void chat() {
-        Store storage = new Store();
+        Store storage = FileSaver.load(FileSaver.FILE_PATH);
         Scanner sc = new Scanner(System.in);
         String rawInput = "";
         Boolean exit = false;
@@ -78,6 +79,7 @@ public class Duke {
                 Command command = Command.findCommand(commandString);
                 switch (command) {
                 case EXIT:
+                    FileSaver.save(storage, FileSaver.FILE_PATH);
                     exit = true;
                     break;
                 case LIST:
