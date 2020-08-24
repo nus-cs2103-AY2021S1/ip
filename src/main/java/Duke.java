@@ -1,81 +1,14 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Duke {
 
     private final static ArrayList<Task> list = new ArrayList<>();
 
-    public static void loadDataFile() throws IOException {
-        File directory = new File("");
-        String targetPath = directory.getAbsolutePath() + "/data/duke.txt";
-        java.nio.file.Path path = Path.of(targetPath);
-        File file = new File(targetPath);
-        boolean isDirectoryExist = java.nio.file.Files.exists(path);
-        if (!isDirectoryExist) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
-        } else {
-            Scanner sc = new Scanner(file);
-            while (sc.hasNext()) {
-                String task = sc.nextLine();
-                String[] details = task.split(" \\| ");
-                if (details[0].equals("T")) {
-                    list.add(new ToDo(details[2]));
-                } else if (details[0].equals("D")) {
-                    list.add(new Deadline(details[2], details[3]));
-                } else {
-                    list.add(new Event(details[2], details[3]));
-                }
-                if (details[1].equals("1")) {
-                    list.get(list.size() - 1).done();
-                }
-            }
-            sc.close();
-        }
-    }
-
-    public static void updateDataFile() throws IOException {
-        File directory = new File("");
-        FileWriter writer = new FileWriter(directory.getAbsolutePath() + "/data/duke.txt");
-        PrintWriter print_line = new PrintWriter(writer);
-        for (int i = 0; i < list.size(); i++) {
-            Task task = list.get(i);
-            String[] details = new String[4];
-            details[2] = task.name;
-            if (task instanceof ToDo) {
-                details[0] = "T";
-            } else if (task instanceof Deadline) {
-                details[0] = "D";
-                details[3] = ((Deadline) task).by;
-            } else {
-                details[0] = "E";
-                details[3] = ((Event) task).duration;
-            }
-            if (task.isDone) {
-                details[1] = "1";
-            } else {
-                details[1] = "0";
-            }
-            String textLine = details[0] + " | " + details[1] + " | " + details[2]
-                    + " | " + details[3];
-            print_line.printf("%s" + "%n", textLine);
-        }
-        print_line.close();
-    }
-
     public static void start() {
-        try {
-            loadDataFile();
-            System.out.println("Hello! I'm Duke");
-            System.out.println("What can I do for you?");
-        } catch (java.io.IOException error) {
-            System.out.println("File could not be loaded");
-        }
+        System.out.println("Hello! I'm Duke");
+        System.out.println("What can I do for you?");
     }
 
     public static void reply(String input) {
@@ -91,8 +24,7 @@ public class Duke {
         } else if (input.startsWith("done ") || input.equals("done")) {
             try {
                 markAsDone(input);
-                updateDataFile();
-            } catch (DukeException | IOException error) {
+            } catch (DukeException error) {
                 System.out.println(error.getMessage());
             } catch (NumberFormatException error) {
                 System.out.println("Please provide a valid task number to mark as done");
@@ -102,8 +34,7 @@ public class Duke {
         } else if (input.startsWith("delete ") || input.equals("delete")) {
             try {
                 deleteTask(input);
-                updateDataFile();
-            } catch (DukeException | IOException error) {
+            } catch (DukeException error) {
                 System.out.println(error.getMessage());
             } catch (NumberFormatException error) {
                 System.out.println("Please provide a valid task number to delete");
@@ -113,8 +44,7 @@ public class Duke {
         } else {
             try {
                 addTask(input);
-                updateDataFile();
-            } catch (DukeException | IOException error) {
+            } catch (DukeException error) {
                 System.out.println(error.getMessage());
             }
         }
@@ -133,24 +63,24 @@ public class Duke {
                 throw new DukeException("The description of a deadline cannot be empty.");
             }
             String details = input.substring(9).trim();
-            String[] split = details.split(" /by ");
+            String[] split = details.split("/by ");
             if (split.length != 2) {
                 throw new DukeException("Please use the format: deadline (name) /by (when)");
             }
             String name = split[0];
-            String by = split[1];
+            LocalDate by = LocalDate.parse(split[1]);
             task = new Deadline(name, by);
         } else if (input.startsWith("event ") || input.equals("event")) {
             if (input.length() < 7 || input.substring(6).trim().isEmpty()) {
                 throw new DukeException("The description of a deadline cannot be empty.");
             }
             String details = input.substring(6).trim();
-            String[] split = details.split(" /at ");
+            String[] split = details.split("/at ");
             if (split.length != 2) {
                 throw new DukeException("Please use the format: event (name) /at (what time)");
             }
             String name = split[0];
-            String duration = split[1];
+            LocalDate duration = LocalDate.parse(split[1]);
             task = new Event(name, duration);
         } else {
             System.out.println("I'm sorry, but I don't know what that means.");
@@ -202,7 +132,6 @@ public class Duke {
             reply(input);
             input = sc.nextLine();
         }
-        sc.close();
         exit();
     }
 }
