@@ -4,7 +4,7 @@ package duke;
  * Represents a specific task type of the Duke program.
  */
 public enum TaskType {
-    TODO, DEADLINE, EVENT, LIST, DONE, DELETE, BYE;
+    TODO, DEADLINE, EVENT, LIST, DONE, DELETE, BYE, FIND;
 
     /**
      * Returns a relevant TaskType when given a String input.
@@ -28,6 +28,8 @@ public enum TaskType {
             return DELETE;
         case "bye":
             return BYE;
+        case "find":
+            return FIND;
         default:
             throw new IllegalArgumentException(str + " is not a valid TaskType.");
         }

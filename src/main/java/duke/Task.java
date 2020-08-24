@@ -19,6 +19,10 @@ public abstract class Task implements Serializable {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Sets the done-ness of the task.
      * @param done the done-ness to be applied on the task.

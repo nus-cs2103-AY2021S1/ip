@@ -62,6 +62,12 @@ public class TaskList implements Serializable {
     public Task remove(int index) {
         return list.remove(index);
     }
+    
+    public TaskList find(String term) {
+        ArrayList<Task> newList = new ArrayList<>(list);
+        newList.removeIf((task -> !task.getDescription().contains(term)));
+        return new TaskList(newList);
+    }
 
     /**
      * Returns the size of the TaskList.
