@@ -5,11 +5,6 @@ import java.time.format.FormatStyle;
 public class Event extends Task {
     protected LocalDate at;
 
-    public Event(String description, String at) {
-        super(description);
-        this.at = LocalDate.parse(at);
-    }
-
     public Event(String description, LocalDate date) {
         super(description);
         this.at = date;

@@ -5,11 +5,6 @@ import java.time.format.FormatStyle;
 public class Deadline extends Task {
     protected LocalDate by;
 
-    public Deadline(String description, String by) {
-        super(description);
-        this.by = LocalDate.parse(by);
-    }
-
     public Deadline(String description, LocalDate date) {
         super(description);
         this.by = date;

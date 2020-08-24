@@ -1,8 +1,6 @@
 import java.time.LocalDate;
 
 public class Command {
-    public static final String LINE = "____________________________________________________________";
-
     protected TaskType taskType;
     protected Integer index;
     protected String description;
@@ -68,24 +66,12 @@ public class Command {
         return taskType;
     }
 
-    public Integer getIndex() {
-        return index;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public LocalDate getDate() {
         return date;
     }
 
     public boolean isValid() {
         return taskType != null;
-    }
-
-    private static void printWrappedString(String txt) {
-        System.out.println(LINE + "\n" + txt + "\n" + LINE);
     }
 
     private static String addToList(TaskList taskList, Task task) {
@@ -139,7 +125,7 @@ public class Command {
         } catch (IndexOutOfBoundsException e) {
             print = "The index you provided was out of bounds.\nRun list to see your list of tasks.";
         } finally {
-            printWrappedString(print);
+            Ui.print(print);
         }
     }
 }

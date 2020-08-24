@@ -8,28 +8,9 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 public class Duke {
-    public static final String LINE = "____________________________________________________________";
-    private static final String WELCOME_MESSAGE = "Hello, I'm Duke, your personal assistant!\n"
-        + "What can I do for you?";
-    private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon! :)";
-
     private static TaskList list;
-
-    private static String makeWrappedString(String txt) {
-        return LINE + "\n" + txt + "\n" + LINE;
-    }
-
-    private static void addToList(Task task) {
-        list.add(task);
-        System.out.println(LINE
-            + "\nSure, I've added this task to your list:\n"
-            + task
-            + "\nYou now have " + list.size() + " task(s) in the list!\n"
-            + LINE);
-    }
 
     private static void makeDataFile() throws IOException {
         File file = Paths.get(".", "data", "duke.data").toFile();
@@ -41,7 +22,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        System.out.println(makeWrappedString(WELCOME_MESSAGE));
+        Ui.printGreeting();
 
         try {
             File file = Paths.get(".", "data", "duke.data").toFile();
@@ -61,21 +42,21 @@ public class Duke {
                     Files.createDirectories(dataFolder);
                     makeDataFile();
                 } catch (IOException e) {
-                    System.out.println(e.getMessage());
+                    Ui.print(e.getMessage());
                 }
             } catch (IOException e) {
-                System.out.println("There was an error initialising your save file.\n" + e);
+                Ui.print("There was an error initialising your save file.\n" + e);
             }
         }
 
-        Scanner sc = new Scanner(System.in);
+        Ui ui = new Ui();
 
-        String input = sc.nextLine();
+        String input = ui.getInput();
         Command command = Parser.parse(input);
         while (command.getTaskType() != TaskType.BYE) {
             command.execute(list);
 
-            input = sc.nextLine();
+            input = ui.getInput();
             command = Parser.parse(input);
         }
 
@@ -89,9 +70,9 @@ public class Duke {
             oos.close();
             //@@author
         } catch (IOException e) {
-            System.out.println("There was an error saving your data.\n" + e);
+            Ui.print("There was an error saving your data.\n" + e.getMessage());
         }
 
-        System.out.println(makeWrappedString(GOODBYE_MESSAGE));
+        Ui.printGoodbye();
     }
 }

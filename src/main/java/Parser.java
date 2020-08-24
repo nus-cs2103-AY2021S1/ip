@@ -1,12 +1,6 @@
 import java.time.LocalDate;
 
 public class Parser {
-    public static final String LINE = "____________________________________________________________";
-
-    private static void printWrappedString(String txt) {
-        System.out.println(LINE + "\n" + txt + "\n" + LINE);
-    }
-
     public static Command parse(String input) {
         String[] splitInput = input.split(" ");
 
@@ -48,7 +42,7 @@ public class Parser {
                     + "\"todo\", \"deadline\", \"event\", \"list\", \"done\" or \"delete\".");
             }
         } catch (IllegalArgumentException e) {
-            printWrappedString("There was an error parsing your command.\n" + e.getMessage());
+            Ui.print("There was an error parsing your command.\n" + e.getMessage());
             return new Command();
         }
     }
