@@ -7,15 +7,20 @@ import java.util.List;
  */
 public class TaskList {
 
-    /** List of tasks */
+    /**
+     * List of tasks
+     */
     private List<Task> taskList;
 
-    /** Storage of data file */
+    /**
+     * Storage of data file
+     */
     private Storage storage;
 
     /**
      * Initializes the task list object with a storage.
      * Loads tasks from storage to list of tasks.
+     *
      * @param storage Storage object of data file.
      */
     public TaskList(Storage storage) {
@@ -25,6 +30,7 @@ public class TaskList {
 
     /**
      * Gives the count of tasks in the list of tasks.
+     *
      * @return Number of tasks in the list.
      */
     public int taskCount() {
@@ -34,6 +40,7 @@ public class TaskList {
     /**
      * Adds a new Task to task list.
      * Updates the data file.
+     *
      * @param newTask New task to be added.
      */
     public void addNewTask(Task newTask) {
@@ -43,11 +50,12 @@ public class TaskList {
 
     /**
      * Gives the task at a specific position of task list.
+     *
      * @param index Index of wanting task.
      * @return Task founded at the given index.
      * @throws IndexOutOfBoundsException If the index given is out of bound.
      */
-    public Task getTask(int index) throws IndexOutOfBoundsException{
+    public Task getTask(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= taskList.size()) {
             throw new IndexOutOfBoundsException();
         }
@@ -57,6 +65,7 @@ public class TaskList {
     /**
      * Marks the task at a specific position as done.
      * Have checked index before calling this method, needn't throw exceptions.
+     *
      * @param index Index of marking task.
      */
     public void markDone(int index) {
@@ -67,6 +76,7 @@ public class TaskList {
     /**
      * Deletes a task at specific position.
      * Have checked index before calling this method, needn't throw exceptions.
+     *
      * @param index Index of deleting task.
      */
     public void deleteTask(int index) {
@@ -76,6 +86,7 @@ public class TaskList {
 
     /**
      * Gives String representation of the list of tasks.
+     *
      * @return String representation of the list of tasks.
      */
     @Override

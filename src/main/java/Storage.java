@@ -12,11 +12,14 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    /** File object of data file. */
+    /**
+     * File object of data file.
+     */
     File storageFile;
 
     /**
      * Initializes the storage object.
+     *
      * @param fileName File path and name of data file, in string format.
      */
     public Storage(String fileName) {
@@ -41,12 +44,13 @@ public class Storage {
      * Loads data from data file.
      * Parses data to list of tasks.
      * If no data in data file, gives an empty list.
+     *
      * @return List of stored tasks.
      */
     public List<Task> load() {
         List<Task> result = new ArrayList<>();
         Scanner storage;
-        try{
+        try {
             storage = new Scanner(storageFile);
 
             while (storage.hasNext()) {
@@ -72,10 +76,11 @@ public class Storage {
 
     /**
      * Saves list of tasks into data file.
+     *
      * @param taskList List of tasks.
      */
     public void save(List<Task> taskList) {
-        try{
+        try {
             FileWriter fileWriter = new FileWriter(storageFile);
 
             String data = "";

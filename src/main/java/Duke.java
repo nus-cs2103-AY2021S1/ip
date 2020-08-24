@@ -8,21 +8,30 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    /** Holds the storage of data */
+    /**
+     * Holds the storage of data
+     */
     private Storage storage;
 
-    /** Manages the list of tasks */
+    /**
+     * Manages the list of tasks
+     */
     private TaskList taskList;
 
-    /** Parses input strings from user to task objects */
+    /**
+     * Parses input strings from user to task objects
+     */
     private Parser parser;
 
-    /** Holds the user interface part */
+    /**
+     * Holds the user interface part
+     */
     private Ui ui;
 
     /**
      * Initializes Duke object.
      * Finishes essential settings.
+     *
      * @param filePath Path of data file.
      */
     public Duke(String filePath) {
@@ -59,7 +68,8 @@ public class Duke {
                 } catch (Exception e) {
                     ui.invalidDoneOrder();
                 }
-            } else if (userInput.startsWith("todo") || userInput.startsWith("deadline") || userInput.startsWith("event")) {
+            } else if (userInput.startsWith("todo") || userInput.startsWith("deadline") || userInput
+                    .startsWith("event")) {
                 try {
                     Task newTask = parser.parseTask(userInput);
                     taskList.addNewTask(newTask);
@@ -88,6 +98,7 @@ public class Duke {
     /**
      * Starts Duke program.
      * Gives path of data file.
+     *
      * @param args Default.
      */
     public static void main(String[] args) {

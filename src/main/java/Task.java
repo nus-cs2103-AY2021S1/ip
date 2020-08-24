@@ -5,15 +5,20 @@ package main.java;
  */
 public class Task {
 
-    /** Stores status of the task, false for Not done; true for done */
+    /**
+     * Stores status of the task, false for Not done; true for done
+     */
     protected boolean status;
 
-    /** Stores the content of the task */
+    /**
+     * Stores the content of the task
+     */
     protected String content;
 
     /**
      * Initializes the task with content.
      * Sets the status to false(not done).
+     *
      * @param content Content of the task object.
      */
     public Task(String content) {
@@ -23,7 +28,8 @@ public class Task {
 
     /**
      * Initializes the task with content and status.
-     * @param status Status of the task.
+     *
+     * @param status  Status of the task.
      * @param content Content of the task object.
      */
     public Task(boolean status, String content) {
@@ -40,18 +46,25 @@ public class Task {
 
     /**
      * Gives whether this task is done.
+     *
      * @return Status of the task.
      */
-    public boolean isDone() { return this.status; }
+    public boolean isDone() {
+        return this.status;
+    }
 
     /**
      * Gives the content of the task.
+     *
      * @return Content of the task.
      */
-    public String getContent() { return this.content; }
+    public String getContent() {
+        return this.content;
+    }
 
     /**
      * Gives the string representation of the task.
+     *
      * @return String representation of the task.
      */
     @Override

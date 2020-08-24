@@ -9,6 +9,7 @@ public class Todo extends Task {
     /**
      * Initializes the todo object.
      * Sets status to false(not done).
+     *
      * @param content Content of the todo object.
      */
     public Todo(String content) {
@@ -17,7 +18,8 @@ public class Todo extends Task {
 
     /**
      * Initializes the todo object.
-     * @param status Status of the todo object
+     *
+     * @param status  Status of the todo object
      * @param content Content of the todo object.
      */
     public Todo(boolean status, String content) {
@@ -26,6 +28,7 @@ public class Todo extends Task {
 
     /**
      * Gives the string representation of the todo object.
+     *
      * @return String representation of the todo object.
      */
     @Override

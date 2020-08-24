@@ -21,6 +21,7 @@ public class Ui {
 
     /**
      * Prints history tasks.
+     *
      * @param taskList Task list with past tasks.
      */
     public void showHistory(TaskList taskList) {
@@ -34,6 +35,7 @@ public class Ui {
     /**
      * Prints all tasks to screen.
      * If there is no task in task list, inform the user.
+     *
      * @param taskList List of all tasks.
      */
     public void listTask(TaskList taskList) {
@@ -50,7 +52,8 @@ public class Ui {
      * Informs user the new task addition.
      * Prints information base on type of task.
      * Informs user the count of tasks in task list.
-     * @param newTask New task adding.
+     *
+     * @param newTask  New task adding.
      * @param taskList List of all tasks.
      */
     public void newTaskAdded(Task newTask, TaskList taskList) {
@@ -80,16 +83,18 @@ public class Ui {
 
     /**
      * Gives information of invalid order.
+     *
      * @param orderName Order name of invalid order.
      * @return String representation of invalid order.
      */
     public String invalidOrder(String orderName) {
         return "\n-> Oops, there is an error...\n" +
-            "-> please add correct description to \"" + orderName + "\" order\n";
+                "-> please add correct description to \"" + orderName + "\" order\n";
     }
 
     /**
      * Informs user with the failure of parsing inputs.
+     *
      * @param userInput User input of order.
      */
     public void parseFail(String userInput) {
@@ -151,15 +156,18 @@ public class Ui {
 
     /**
      * Informs user the done order has been operated successfully.
+     *
      * @param task Task marked as done.
      */
     public void taskDone(Task task) {
-        System.out.println("\n-> Good job! I have marked this task as done:\n" + task.toString() + "\n");
+        System.out
+                .println("\n-> Good job! I have marked this task as done:\n" + task.toString() + "\n");
     }
 
     /**
      * Informs user the delete order has been operated successfully.
-     * @param taskList List of tasks.
+     *
+     * @param taskList     List of tasks.
      * @param deletingTask Task being deleted
      */
     public void taskDeleted(TaskList taskList, Task deletingTask) {

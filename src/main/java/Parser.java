@@ -15,6 +15,7 @@ public class Parser {
 
     /**
      * Parses user input string represent Todo/Deadline/Event object to actual object.
+     *
      * @param resource User input string.
      * @return Represented object of user input string.
      * @throws InvalidParameterException If user input string is in wrong format.
@@ -57,13 +58,14 @@ public class Parser {
     /**
      * Parses the done order from user.
      * Gives the index of target task.
+     *
      * @param resource User input string representing done order.
      * @param taskList TaskList object of the program.
      * @return Index of target task in taskList.
      * @throws IndexOutOfBoundsException If user inputs an index not in task list.
-     * @throws Exception If user inputs done order in wrong format.
+     * @throws Exception                 If user inputs done order in wrong format.
      */
-    public int parseDoneOrder(String resource, TaskList taskList) throws IndexOutOfBoundsException, Exception{
+    public int parseDoneOrder(String resource, TaskList taskList) throws IndexOutOfBoundsException, Exception {
         if (resource.length() <= 4) {
             throw new Exception();
         }
@@ -83,11 +85,12 @@ public class Parser {
     /**
      * Parses the delete order from user.
      * Gives the index of target task.
+     *
      * @param resource User input string representing delete order.
      * @param taskList TaskList object of the program.
      * @return Index of deleting task in taskList.
      * @throws IndexOutOfBoundsException If user inputs an index not in task list.
-     * @throws Exception If user inputs deleting order in wrong format.
+     * @throws Exception                 If user inputs deleting order in wrong format.
      */
     public int parseDeleteOrder(String resource, TaskList taskList) throws IndexOutOfBoundsException, Exception {
         if (resource.length() <= 6) {
