@@ -2,6 +2,7 @@ package duke;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TaskList implements Serializable {
     protected ArrayList<Task> list;
@@ -38,5 +39,22 @@ public class TaskList implements Serializable {
 
     public boolean isEmpty() {
         return size() == 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        TaskList taskList = (TaskList) o;
+        return Objects.equals(list, taskList.list);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(list);
     }
 }

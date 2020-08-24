@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Command {
     protected TaskType taskType;
@@ -129,5 +130,25 @@ public class Command {
         } finally {
             Ui.print(print);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Command command = (Command) o;
+        return taskType == command.taskType &&
+            Objects.equals(index, command.index) &&
+            Objects.equals(description, command.description) &&
+            Objects.equals(date, command.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(taskType, index, description, date);
     }
 }
