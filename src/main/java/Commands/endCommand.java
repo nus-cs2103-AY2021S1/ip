@@ -2,14 +2,14 @@ package main.java.Commands;
 
 import main.java.Task.TaskList;
 
-public class byeCommand extends Command {
-    public byeCommand(TaskList taskList){
+public class endCommand extends Command {
+
+    public endCommand(TaskList taskList){
         super(taskList);
     }
 
     @Override
-    public void execute()
-    {
+    public void execute() {
         this.isExit = true;
     }
 }

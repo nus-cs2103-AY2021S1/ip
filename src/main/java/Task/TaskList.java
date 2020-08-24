@@ -44,7 +44,7 @@ public class TaskList {
 
     public void completeTask(int taskNumber){
         Task taskCompleted = this.list.get(taskNumber);
-        taskCompleted.complete = true;
+        taskCompleted.isComplete = true;
         System.out.println("Nice! I've marked this task as done:\n" + "[✓] " + taskCompleted.task);
     }
 

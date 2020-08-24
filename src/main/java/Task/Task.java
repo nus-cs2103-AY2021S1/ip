@@ -2,14 +2,15 @@ package main.java.Task;
 
 public class Task{
     public String task;
-    public boolean complete;
-    public Task(String task, boolean complete){
+    public boolean isComplete;
+
+    public Task(String task, boolean isComplete){
         this.task = task;
-        this.complete = complete;
+        this.isComplete = isComplete;
     }
 
     public String stringify(){
-        if(this.complete == true) {
+        if(this.isComplete == true) {
             return "[T][✓] " + this.task;
         }else{
             return "[T][✗] " + this.task;
