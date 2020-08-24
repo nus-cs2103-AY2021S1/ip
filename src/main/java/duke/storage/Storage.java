@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 
 public class Storage {
   private final BufferedWriter writer;
+  public static final Path dataDir = Paths.get(System.getProperty("user.dir"),"data" );
 
   private Storage(BufferedWriter writer) {
     this.writer = writer;
@@ -24,13 +25,11 @@ public class Storage {
    * @throws DukeException that there is an io error
    */
   public static Storage create(String fileName) throws DukeException {
-    String projectDir = System.getProperty("user.dir");
-    Path dataDir = Paths.get(projectDir, "data");
     try {
-      if (!Files.exists(dataDir)) {
-        Files.createDirectory(dataDir);
+      if (!Files.exists(Storage.dataDir)) {
+        Files.createDirectory(Storage.dataDir);
       }
-      Path filePath = Paths.get(dataDir.toString(), fileName);
+      Path filePath = Paths.get(Storage.dataDir.toString(), fileName);
       BufferedWriter writer = Files.newBufferedWriter(filePath);
       return new Storage(writer);
     } catch (IOException e) {
