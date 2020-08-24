@@ -1,9 +1,7 @@
 public class Event extends Task {
-    private String timePeriod;
 
-    public Event(String eventName, String timePeriod) {
-        super(eventName);
-        this.timePeriod = timePeriod;
+    public Event(String eventName, String eventTime) {
+        super(eventName, eventTime);
     }
 
     @Override
@@ -14,6 +12,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + timePeriod + ")";
+        TimeParser timeParser = new TimeParser(localDate);
+        String formattedTime = timeParser.getFormattedTime();
+        return "[E]" + super.toString() + " (at: " + formattedTime + ")";
     }
 }
