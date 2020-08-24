@@ -1,14 +1,36 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Event extends Task {
 
-    protected String dateAndOrTime;
+    protected LocalDate localDate;
+    protected LocalTime localTime;
 
-    Event(String description, String dateAndOrTime) {
+    Event(String description, String localDate, String localTime) {
         super(description);
-        this.dateAndOrTime = dateAndOrTime;
+        this.localDate = localDate != "" ? LocalDate.parse(localDate) : null;
+        this.localTime = localTime != "" ? LocalTime.parse(localTime) : null;
+    }
+
+    public boolean hasDate() {
+        return this.localDate != null;
+    }
+
+    public boolean hasTime() {
+        return this.localTime != null;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + dateAndOrTime + ")";
+        String toReturn = "[E]" + super.toString();
+        if (this.hasDate()) {
+            if (this.hasTime()) {
+                toReturn += "(at: " + this.localDate + " " + this.localTime + ")";
+            } else {
+                toReturn +="(at: " + this.localDate + ")";
+            }
+        }
+        return toReturn;
     }
+
 }
