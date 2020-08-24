@@ -84,6 +84,10 @@ public class DukeService {
         dukeDomain.printResponse(response);
     }
 
+    public void saveList() {
+        dukeDomain.saveList();
+    }
+
     public void printList() {
         dukeDomain.printList();
     }
