@@ -24,6 +24,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + (super.status ? "[√] " : "[×] ") + super.content + "(on " + time
-            .format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")" + "  <-";
+                .format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")" + "  <-";
     }
 }

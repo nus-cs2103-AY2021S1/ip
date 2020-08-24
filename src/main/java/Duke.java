@@ -43,7 +43,7 @@ public class Duke {
                     ui.invalidDoneOrder();
                 }
             } else if (userInput.startsWith("todo") || userInput.startsWith("deadline") || userInput
-                .startsWith("event")) {
+                    .startsWith("event")) {
                 try {
                     Task newTask = parser.parseTask(userInput);
                     taskList.addNewTask(newTask);
