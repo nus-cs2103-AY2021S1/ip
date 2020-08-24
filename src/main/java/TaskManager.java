@@ -25,13 +25,14 @@ class TaskManager {
         Storage.writeTasksFile(sb.toString());
     }
 
-    public void listTasks() {
+    public String listTasks() {
         int i = 1;
-        System.out.println("*Here are all your tasks");
+        StringBuffer sb = new StringBuffer("Here are your tasks\n");
         for (Task task: tasks) {
-            System.out.println(i + ". " + task);
+            sb.append("\n" + i + ". " + task);
             i++;
         }
+        return sb.toString();
     }
 
     public Task markDone(int taskNum) throws DukeException {
