@@ -1,6 +1,4 @@
-import exceptions.CommandException;
-
-import java.util.stream.Stream;
+package command;
 
 public enum Command {
     EXIT_CMD    ("bye", true),
@@ -23,6 +21,10 @@ public enum Command {
         return cmdString;
     }
 
+    public boolean isNoArgs() {
+        return noArgs;
+    }
+
     @Override
     public String toString() {
         return cmdString;
@@ -30,15 +32,6 @@ public enum Command {
 
     public String strip(String input) {
         return input.substring(cmdString.length()).strip();
-    }
-
-    public static Command parseCommand(String input) throws CommandException {
-        return Stream.of(values())
-                .filter(cmd -> cmd.noArgs
-                        ? input.equals(cmd.cmdString)
-                        : input.startsWith(cmd.cmdString))
-                .findFirst()
-                .orElseThrow(() -> new CommandException(input, "Unknown command"));
     }
 
 }
