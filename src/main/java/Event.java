@@ -1,12 +1,16 @@
-public class Event extends Task {
-    protected String at;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String at) {
+public class Event extends Task {
+    protected LocalDate at;
+
+    public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
     }
 
-    public Event(String done, String description, String at) {
+    public Event(String done, String description, LocalDate at) {
         super(description);
         this.at = at;
         this.isDone = done.equals("1");
@@ -14,11 +18,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return "[E]" + super.toString() + " (at: " + this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
     
     @Override
     public String saveString() {
-        return "E" + super.saveString() + ", " + this.at;
+        return "E" + super.saveString() + " , " + this.at;
     }
 }

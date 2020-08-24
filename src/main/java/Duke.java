@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Duke {
@@ -70,6 +71,7 @@ public class Duke {
                         for (int i = 1; i < strArr.length - 1; i++) {
                             if (strArr[i].equals("/by")) {
                                 b = false;
+                                sd = sd.substring(0, sd.length() - 1);
                             }
                             if (b) {
                                 sd += strArr[i] + " ";
@@ -81,7 +83,7 @@ public class Duke {
                                 }
                             }
                         }
-                        Task task = new Deadline(sd, sb);
+                        Task task = new Deadline(sd, LocalDate.parse(sb));
                         lst.add(task);
                         System.out.println("_____________________________________________________\n" + 
                                 "Got it. I've added this task:\n" + "  " + task.toString() + "\n" +
@@ -100,14 +102,15 @@ public class Duke {
                             if (b) {
                                 sd += strArr[i] + " ";
                             } else {
-                                if(i == strArr.length - 2) {
+                                if (i == strArr.length - 2) {
                                     sa = sa + strArr[i + 1];
                                 } else {
                                     sa = sa + strArr[i + 1] + " ";
                                 }
                             }
                         }
-                        Task task = new Event(sd, sa);
+                        
+                        Task task = new Event(sd, LocalDate.parse(sa));
                         lst.add(task);
                         System.out.println("_____________________________________________________\n" + 
                                 "Got it. I've added this task:\n" + "  " + task.toString() + "\n" +
@@ -131,7 +134,7 @@ public class Duke {
         } else if (!arr[0].equals("todo") && !arr[0].equals("deadline") && !arr[0].equals("event") &&
                 !arr[0].equals("list") && !arr[0].equals("bye") && !arr[0].equals("done") && !arr[0].equals("delete")) {
             throw new DukeException("other");
-        }
+        } 
     }
     
     public static ArrayList<Task> loadFile() throws IOException {
@@ -148,10 +151,10 @@ public class Duke {
                         taskList.add(new Todo(strArr[1], strArr[2]));
                         break; 
                     case "D":
-                        taskList.add(new Deadline(strArr[1], strArr[2], strArr[3]));
+                        taskList.add(new Deadline(strArr[1], strArr[2], LocalDate.parse(strArr[3])));
                         break;
                     case "E":
-                        taskList.add(new Event(strArr[1], strArr[2], strArr[3]));
+                        taskList.add(new Event(strArr[1], strArr[2], LocalDate.parse(strArr[3])));
                         break;
                 }
             }
