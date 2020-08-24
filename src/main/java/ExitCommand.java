@@ -1,13 +1,28 @@
+/**
+ * Represents the command to close Duke
+ */
 public class ExitCommand extends Command {
 
     public ExitCommand(String input) {
         super(input);
     }
 
+    /**
+     * Executes the command to save the files for closing
+     * @param tasks List of tasks that Duke is handling
+     * @param ui handles what the user reads
+     * @param storage writes the save file
+     * @throws InvalidSaveFileException if there is an issue writing the save file
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidSaveFileException {
-        System.out.println("\tBye. Hope to see you again soon!");
+        ui.printOutput("\tBye. Hope to see you again soon!");
         storage.saveFile(tasks.getTasks());
     }
+
+    /**
+     * Lets the main logic know to exit the loop
+     * @return true to exiting the loop
+     */
     public boolean isExit() {
         return true;
     }

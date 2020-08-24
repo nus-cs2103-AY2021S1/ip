@@ -7,12 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Handles saving of the list and reading it upon startup
+ */
 public class Storage {
     private String fileLocation;
     public Storage(String fileLocation) {
         this.fileLocation = fileLocation;
     }
 
+    /**
+     * Called upon startup. Reads save file if there is one, else creates
+     * a blank save file.
+     * @return a List populated by the Task from previous save file
+     * @throws InvalidSaveFileException if there is an issue with creating the save file
+     */
     public List<Task> readFile() throws InvalidSaveFileException {
         List<Task> toDoList = new ArrayList<Task>();
         File dir = new File("data");
@@ -61,6 +70,12 @@ public class Storage {
         }
         return toDoList;
     }
+
+    /**
+     * Called every time the list is updated or Duke is closed.
+     * @param toDoList the current tasks in Duke
+     * @throws InvalidSaveFileException if there is an issue creating or writing the save file
+     */
     public void saveFile(List<Task> toDoList) throws InvalidSaveFileException {
         File dir = new File("data");
         if(!dir.exists()) {

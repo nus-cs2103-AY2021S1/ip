@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Handles what the user will be seeing when running Duke
+ */
 public class Ui {
 
     Scanner sc;
@@ -10,6 +13,9 @@ public class Ui {
         System.out.println("\t____________________________________________________________");
     }
 
+    /**
+     * Show user the greeting message
+     */
     public void showGreeting() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -22,11 +28,27 @@ public class Ui {
         System.out.println("\t____________________________________________________________");
     }
 
+    /**
+     * Show error message thrown
+     * @param errorMsg error message of thrown error
+     */
     public void showError(String errorMsg) {
         System.out.println(errorMsg);
     }
 
+    /**
+     * Reads in the next input line from user
+     * @return the next input from user
+     */
     public String readCommand() {
         return sc.nextLine();
+    }
+
+    /**
+     * Print the message according to the input given
+     * @param input Output for the user to read
+     */
+    public void printOutput(String input) {
+        System.out.println(input);
     }
 }

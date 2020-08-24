@@ -1,3 +1,8 @@
+/**
+ * Represents a Duke object. Handles all the logic running
+ * of Duke
+ */
+
 public class Duke {
 
     private String fileLocation;
@@ -16,6 +21,11 @@ public class Duke {
             taskList = new TaskList();
         }
     }
+
+    /**
+     * Driving method of Duke, handles all the running process
+     *
+     */
     public void run() {
         ui.showGreeting();
         boolean isExit = false;
