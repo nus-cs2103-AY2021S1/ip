@@ -114,14 +114,17 @@ public class Duke {
         if (deadlineName.isEmpty()) {
             throw new DukeException("You must provide a name for the deadline task!");
         }
-        System.out.println("when is the due date: ");
+        System.out.println("when is the due date (Day Month Year): ");
         String dueDate = sc.nextLine();
         if (dueDate.isEmpty()) {
             throw new DukeException("You must provide a due date for the deadline task!");
         }
-        tasks.add(new Deadline(deadlineName, dueDate));
-        System.out.println("*added: " + deadlineName);
-        
+        try {
+            tasks.add(new Deadline(deadlineName, dueDate));
+            System.out.println("*added: " + deadlineName);
+        } catch (DukeException e) {
+            throw e;
+        }
     }
 
     private static void event(Scanner sc, List<Task> tasks) throws DukeException {
@@ -130,18 +133,23 @@ public class Duke {
         if (eventName.isEmpty()) {
             throw new DukeException("You must provide a name for the event!");
         }
-        System.out.println("when does the event start: ");
+        System.out.println("when does the event start (Day Month Year Hour:Minute): ");
         String start = sc.nextLine();
         if (start.isEmpty()) {
             throw new DukeException("You must provide a start time for the event!");
         }
-        System.out.println("when does the event end: ");
+        System.out.println("when does the event end (Day Month Year Hour:Minute): ");
         String end = sc.nextLine();
         if (end.isEmpty()) {
             throw new DukeException("You must provide an end time for the event!");
         }
-        tasks.add(new Event(eventName, start, end));
-        System.out.println("*added: " + eventName);
+        try {
+            tasks.add(new Event(eventName, start, end));
+            System.out.println("*added: " + eventName);
+        } catch (DukeException e) {
+            throw e;
+        }
+        
     }
 
     private static void delete(Scanner sc, List<Task> tasks) throws DukeException {

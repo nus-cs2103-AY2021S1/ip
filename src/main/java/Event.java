@@ -1,15 +1,26 @@
-class Event extends Task {
-    private String start;
-    private String end;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    Event(String name, String start, String end) {
+class Event extends Task {
+    private Date start;
+    private Date end;
+
+    Event(String name, String start, String end) throws DukeException {
         super(name);
-        this.start = start;
-        this.end = end;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MM yyyy HH:mm");
+        try {        
+            this.start = formatter.parse(start);
+            this.end = formatter.parse(end);
+        } catch (ParseException e) {
+            throw new DukeException("Date format is invalid!");
+        }
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (start: %s, end: %s)", super.toString(), start, end);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        return String.format("[E]%s (start: %s, end: %s)", super.toString(), dateFormat.format(start), dateFormat.format(end));
     }
 }
