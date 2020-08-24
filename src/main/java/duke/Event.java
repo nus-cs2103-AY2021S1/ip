@@ -17,7 +17,7 @@ public class Event extends Task {
      */
     public Event(String description, LocalDate date) {
         super(description);
-        this.at = date;
+        at = date;
     }
 
     @Override

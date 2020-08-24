@@ -9,14 +9,15 @@ import java.util.Objects;
  * Represents a list of Tasks for the Duke program.
  */
 public class TaskList implements Serializable {
-    protected ArrayList<Task> list;
+    protected ArrayList<Task> tasks;
+
 
     /**
      * Instantiates a TaskList with a specific List.
-     * @param list the list to instantiate the TaskList with.
+     * @param tasks the list to instantiate the TaskList with.
      */
-    public TaskList(List<Task> list) {
-        this.list = new ArrayList<>(list);
+    public TaskList(List<Task> tasks) {
+        this.tasks = new ArrayList<>(tasks);
     }
 
     /**
@@ -31,7 +32,7 @@ public class TaskList implements Serializable {
      * @param task the task to be added
      */
     public void add(Task task) {
-        list.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -40,7 +41,7 @@ public class TaskList implements Serializable {
      * @return the task that was marked as done
      */
     public Task markTaskAsDone(int index) {
-        Task task = list.get(index);
+        Task task = tasks.get(index);
         task.setDone(true);
         return task;
     }
@@ -51,7 +52,7 @@ public class TaskList implements Serializable {
      * @return the task at the 0-based index
      */
     public Task get(int index) {
-        return list.get(index);
+        return tasks.get(index);
     }
 
     /**
@@ -60,7 +61,7 @@ public class TaskList implements Serializable {
      * @return the task that was removed
      */
     public Task remove(int index) {
-        return list.remove(index);
+        return tasks.remove(index);
     }
 
     /**
@@ -69,7 +70,7 @@ public class TaskList implements Serializable {
      * @return the filtered TaskList
      */
     public TaskList find(String term) {
-        ArrayList<Task> newList = new ArrayList<>(list);
+        ArrayList<Task> newList = new ArrayList<>(tasks);
         newList.removeIf((task -> !task.getDescription().contains(term)));
         return new TaskList(newList);
     }
@@ -79,7 +80,7 @@ public class TaskList implements Serializable {
      * @return the size of the TaskList
      */
     public int size() {
-        return list.size();
+        return tasks.size();
     }
 
     /**
@@ -99,11 +100,11 @@ public class TaskList implements Serializable {
             return false;
         }
         TaskList taskList = (TaskList) o;
-        return Objects.equals(list, taskList.list);
+        return Objects.equals(tasks, taskList.tasks);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(list);
+        return Objects.hash(tasks);
     }
 }

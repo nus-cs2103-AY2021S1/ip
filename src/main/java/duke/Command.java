@@ -26,15 +26,16 @@ public class Command {
     public Command(TaskType taskType) {
         switch (taskType) {
         case LIST:
+            // Fallthrough
         case BYE:
             break;
         default:
             throw new IllegalArgumentException("You need to provide an index or description.");
         }
         this.taskType = taskType;
-        this.index = null;
-        this.description = null;
-        this.date = null;
+        index = null;
+        description = null;
+        date = null;
     }
 
     /**
@@ -45,6 +46,7 @@ public class Command {
     public Command(TaskType taskType, Integer index) {
         switch (taskType) {
         case DELETE:
+            // Fallthrough
         case DONE:
             break;
         default:
@@ -52,8 +54,8 @@ public class Command {
         }
         this.taskType = taskType;
         this.index = index;
-        this.description = null;
-        this.date = null;
+        description = null;
+        date = null;
     }
 
     /**
@@ -70,9 +72,9 @@ public class Command {
             throw new IllegalArgumentException("A date parameter is required for this kind of TaskType");
         }
         this.taskType = taskType;
-        this.index = null;
+        index = null;
         this.description = description;
-        this.date = null;
+        date = null;
     }
 
     /**
@@ -82,15 +84,16 @@ public class Command {
      * @param date the date of the task
      */
     public Command(TaskType taskType, String description, LocalDate date) {
-        switch(taskType) {
+        switch (taskType) {
         case DEADLINE:
+            // Fallthrough
         case EVENT:
             break;
         default:
             throw new IllegalArgumentException("A date parameter is irrelevant to the TaskType.");
         }
         this.taskType = taskType;
-        this.index = null;
+        index = null;
         this.description = description;
         this.date = date;
     }
@@ -198,10 +201,10 @@ public class Command {
             return false;
         }
         Command command = (Command) o;
-        return taskType == command.taskType &&
-            Objects.equals(index, command.index) &&
-            Objects.equals(description, command.description) &&
-            Objects.equals(date, command.date);
+        return taskType == command.taskType
+            && Objects.equals(index, command.index)
+            && Objects.equals(description, command.description)
+            && Objects.equals(date, command.date);
     }
 
     @Override

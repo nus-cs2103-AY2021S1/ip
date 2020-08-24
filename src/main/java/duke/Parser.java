@@ -19,9 +19,11 @@ public class Parser {
 
             switch (taskType) {
             case LIST:
+                // Fallthrough
             case BYE:
                 return new Command(taskType);
             case DELETE:
+                // Fallthrough
             case DONE:
                 if (splitInput.length < 2 || !splitInput[1].matches("\\d+")) {
                     throw new IllegalArgumentException("The index of the task must be provided.");
@@ -35,6 +37,7 @@ public class Parser {
                 }
                 return new Command(taskType, input.substring(5));
             case DEADLINE:
+                // Fallthrough
             case EVENT:
                 int indexOfBy = input.indexOf(taskType == TaskType.EVENT ? " /at " : " /by ");
                 if (input.length() <= (taskType == TaskType.EVENT ? 6 : 9) || splitInput.length < 2) {

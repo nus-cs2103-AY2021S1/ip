@@ -16,8 +16,9 @@ public abstract class Task implements Serializable {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
+
 
     /**
      * Returns the description of this task.
@@ -29,10 +30,10 @@ public abstract class Task implements Serializable {
 
     /**
      * Sets the done-ness of the task.
-     * @param done the done-ness to be applied on the task.
+     * @param isDone the done-ness to be applied on the task.
      */
-    public void setDone(boolean done) {
-        isDone = done;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**
@@ -57,8 +58,7 @@ public abstract class Task implements Serializable {
             return false;
         }
         Task task = (Task) o;
-        return isDone == task.isDone &&
-            Objects.equals(description, task.description);
+        return isDone == task.isDone && Objects.equals(description, task.description);
     }
 
     @Override
