@@ -1,9 +1,14 @@
 import java.util.ArrayList;
+import java.util.List;
+
+import java.time.LocalDate;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
 import java.io.IOException;
-import java.util.List;
+import java.time.format.DateTimeParseException;
 
 public class Chatbot {
     private enum CommandStatus {
@@ -207,12 +212,18 @@ public class Chatbot {
         }
 
         String description;
-        String by;
+        LocalDate by;
         int index = findIndex(args, "/by");
 
         if (index != -1) {
             description = strArrJoin(args, 1, index, " ");
-            by = strArrJoin(args, index + 1, args.length, " ");
+
+            try {
+                by = LocalDate.parse(strArrJoin(args, index + 1, args.length, " "));
+            } catch (DateTimeParseException e) {
+                throw new IncorrectArgumentException("sToP TrYiNg tO FoOl mE."
+                        + " dAtE MuSt bE In yEaR-MoNtH-DaY FoRmAt.");
+            }
         } else {
             throw new IncorrectArgumentException("sToP TrYiNg tO FoOl mE."
                     + " tHe tImE MuSt cOmE BeFoRe \"/by\".");
@@ -228,12 +239,17 @@ public class Chatbot {
         }
 
         String description;
-        String at;
+        LocalDate at;
         int index = findIndex(args, "/at");
 
         if (index != -1) {
             description = strArrJoin(args, 1, index, " ");
-            at = strArrJoin(args, index + 1, args.length, " ");
+            try {
+                at = LocalDate.parse(strArrJoin(args, index + 1, args.length, " "));
+            } catch (DateTimeParseException e) {
+                throw new IncorrectArgumentException("sToP TrYiNg tO FoOl mE."
+                        + " dAtE MuSt bE In yEaR-MoNtH-DaY FoRmAt.");
+            }
         } else {
             throw new IncorrectArgumentException("sToP TrYiNg tO FoOl mE."
                     + " tHe tImE MuSt cOmE BeFoRe \"/at\".");
