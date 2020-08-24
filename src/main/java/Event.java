@@ -1,4 +1,5 @@
 public class Event extends task{
+
     private String type = "[E]";
     private String date;
 

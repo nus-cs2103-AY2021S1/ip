@@ -1,4 +1,5 @@
 public class Deadline extends task{
+
     private String type = "[D]";
     private String date;
 
