@@ -2,11 +2,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Store implements Iterable<Task> {
+public class TaskList implements Iterable<Task> {
 
     private List<Task> store;
 
-    Store() {
+    TaskList() {
         this.store = new ArrayList<>();
     }
 

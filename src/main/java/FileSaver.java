@@ -2,18 +2,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Scanner;
 
 public class FileSaver {
 
     public static final String FILE_PATH = "duke/localData/data.duke";
 
-    public static void save(Store list, String filePath) throws DukeException {
+    public static void save(TaskList list, String filePath) throws DukeException {
         String[] directories = filePath.split("/");
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, directories);
@@ -35,14 +33,14 @@ public class FileSaver {
     }
 
     // TODO: Consider moving decoding switch statement to its own method or under a util class.
-    public static Store load(String filePath) {
+    public static TaskList load(String filePath) {
         try {
             String[] directories = filePath.split("/");
             String home = System.getProperty("user.home");
             Path path = Paths.get(home, directories);
             File history = new File(path.toString());
             Scanner sc = new Scanner(history);
-            Store loadStore = new Store();
+            TaskList loadTaskList = new TaskList();
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 Task loadedTask = null;
@@ -59,13 +57,13 @@ public class FileSaver {
                 default:
                     throw new DukeException("There's something wrong with my memory...");
                 }
-                loadStore.add(loadedTask);
+                loadTaskList.add(loadedTask);
             }
-            return loadStore;
+            return loadTaskList;
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("There's something wrong with my memory...");
         } catch (FileNotFoundException e) {
-            return new Store();
+            return new TaskList();
         }
     }
 }
