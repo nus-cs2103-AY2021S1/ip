@@ -3,9 +3,11 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
     TaskList tasks;
-    public Parser(TaskList tasks){
+
+    public Parser(TaskList tasks) {
         this.tasks = tasks;
     }
+
     void parse(String input) throws DukeException {
         String[] words = input.split(" ");
         String command = words[0];

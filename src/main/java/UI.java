@@ -11,11 +11,11 @@ public class UI {
         System.out.print(LINE + str + LINE);
     }
 
-    String getInput(){
+    String getInput() {
         return scanner.nextLine();
     }
 
-    void welcome(TaskList tasks){
+    void welcome(TaskList tasks) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -25,7 +25,7 @@ public class UI {
         print(WELCOME + tasks.loadMessage);
     }
 
-    void bye(){
+    void bye() {
         print(BYE);
     }
 }
