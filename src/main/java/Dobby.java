@@ -17,8 +17,8 @@ public class Dobby {
         ui.greet();
         Scanner scanner = new Scanner(System.in);
         this.storage.readFile();
-        while (scanner.hasNext()) {
-            String text = scanner.nextLine();
+        while (true) {
+            String text = ui.getInput();
             try {
                 ui.reply(parser.getMessage(text));
             } catch (DobbyException e) { // prints error message
