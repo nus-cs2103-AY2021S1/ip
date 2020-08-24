@@ -121,8 +121,6 @@ public class Duke {
                 System.out.println(exception.getMessage());
             } catch (DateTimeParseException exception) {
                 System.out.println(exception.getMessage());
-            } catch (FileNotFoundException exception) {
-                System.out.println("File does not exist yet :(");
             }
         }
     }
