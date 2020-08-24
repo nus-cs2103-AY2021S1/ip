@@ -30,7 +30,12 @@ public class TaskList {
         }
     }
 
-    public void findAndShowTasks(String keyword) {
+    /**
+     * Find all tasks that match the given keyword and print them.
+     *
+     * @param keyword   Keyword to match the tasks with.
+     */
+    public void findAndPrintTasks(String keyword) {
         keyword = keyword.strip();
         if (keyword.equals("")) {
             printAllTasks();

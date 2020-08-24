@@ -68,7 +68,7 @@ public class Chatterbox {
                 tasks.deleteTask(taskNo);
             }
         } else if (command.equals("find")) {
-            tasks.findAndShowTasks(input.split(" ", 2)[1]);
+            tasks.findAndPrintTasks(input.split(" ", 2)[1]);
         } else if (command.equals("deadline") || command.equals("todo") || command.equals("event")) {
             Task t = Parser.parseTask(input);
             tasks.addTask(t);
