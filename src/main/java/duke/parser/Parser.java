@@ -8,6 +8,7 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.command.FindCommand;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.UnknownCommandException;
