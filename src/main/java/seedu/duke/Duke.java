@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Duke {
     private Storage storage;
-    private TaskList taskList;
+    private TaskList taskLists;
     private Ui ui;
     private Parser parser;
 
@@ -25,11 +25,11 @@ public class Duke {
         } catch (IOException e) {
         }
         try {
-            taskList = new TaskList(storage.load(new ArrayList<Task>()));
-            this.parser = new Parser(taskList);
+            taskLists = new TaskList(storage.load(new ArrayList<Task>()));
+            this.parser = new Parser(taskLists);
             this.ui = new Ui(parser);
         } catch (IOException e) {
-            this.parser = new Parser(taskList);
+            this.parser = new Parser(taskLists);
             this.ui = new Ui(parser);
         }
     }

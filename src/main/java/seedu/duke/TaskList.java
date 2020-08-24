@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Class that stores all the tasks in an arraylist.
  */
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> taskLists;
 
     /**
      * Initialize an instance of Tasklist.
@@ -15,7 +15,7 @@ public class TaskList {
      * @param ls Arraylist of Tasks to be completed.
      */
     public TaskList(ArrayList<Task> ls) {
-        this.taskList = ls;
+        this.taskLists = ls;
     }
 
     /**
@@ -39,16 +39,16 @@ public class TaskList {
     public void completeTask(String userInput) {
         try {
             int index = userInput.charAt(5) - '0';
-            if (index < 1 || index > taskList.size()) {
+            if (index < 1 || index > taskLists.size()) {
                 Ui.print("Index out of range! Try Again.\n");
             } else {
-                if (taskList.get(index - 1).getIsDone()) {
+                if (taskLists.get(index - 1).getIsDone()) {
                     Ui.print("This task has already been completed!");
                 } else {
-                    taskList.get(index - 1).markAsDone();
-                    Storage.completeTask(index - 1, taskList.size());
+                    taskLists.get(index - 1).markAsDone();
+                    Storage.completeTask(index - 1, taskLists.size());
                     String info = "  Nice! I have marked this task as done:\n";
-                    info += taskList.get(index - 1).toString() + "\n";
+                    info += taskLists.get(index - 1).toString() + "\n";
                     Ui.print(info);
                 }
             }
@@ -64,14 +64,14 @@ public class TaskList {
      */
     public void deleteTask(String userInput) {
         int index = userInput.charAt(7) - '0';
-        if (index < 1 || index > taskList.size()) {
+        if (index < 1 || index > taskLists.size()) {
             Ui.print("Index out of range! Try Again.\n");
         } else {
             String info = "Noted. I have removed this task:\n";
-            info += "  " + taskList.get(index - 1).toString() + "\n";
-            taskList.remove(index - 1);
-            Storage.deleteTask(index - 1, taskList.size());
-            info += "Now you have " + taskList.size() + " tasks in the list" + "\n";
+            info += "  " + taskLists.get(index - 1).toString() + "\n";
+            taskLists.remove(index - 1);
+            Storage.deleteTask(index - 1, taskLists.size());
+            info += "Now you have " + taskLists.size() + " tasks in the list" + "\n";
             Ui.print(info);
         }
     }
@@ -89,8 +89,8 @@ public class TaskList {
             Todo temp = new Todo(task);
             Storage.addTask(temp.getStorageString("T"));
             info += "  " + temp.toString() + "\n";
-            this.taskList.add(temp);
-            info += "Now you have " + taskList.size() + " tasks in the list\n";
+            this.taskLists.add(temp);
+            info += "Now you have " + taskLists.size() + " tasks in the list\n";
             Ui.print(info);
         } catch (DukeException err) {
             System.out.println(err.getMessage());
@@ -114,9 +114,9 @@ public class TaskList {
             Deadline temp = new Deadline(task, time);
             String formatDate = temp.getFormattedDate();
             info += "  " + temp.toString() + "\n";
-            taskList.add(temp);
+            taskLists.add(temp);
             Storage.addTask(temp.getStorageString("D", formatDate));
-            info += "Now you have " + taskList.size() + " tasks in the list\n";
+            info += "Now you have " + taskLists.size() + " tasks in the list\n";
             Ui.print(info);
         } catch (DukeException err) {
             System.out.println(err.getMessage());
@@ -141,8 +141,8 @@ public class TaskList {
             String formatDate = temp.getFormattedDate();
             info += "  " + temp.toString() + "\n";
             Storage.addTask(temp.getStorageString("E", formatDate));
-            taskList.add(temp);
-            info += "Now you have " + taskList.size() + " tasks in the list\n";
+            taskLists.add(temp);
+            info += "Now you have " + taskLists.size() + " tasks in the list\n";
             Ui.print(info);
         } catch (DukeException err) {
             System.out.println(err.getMessage());
@@ -160,8 +160,8 @@ public class TaskList {
     public String toString() {
         String temp = "";
         temp += ("  Here are the tasks in your list:\n");
-        for (int i = 0; i < taskList.size(); i++) {
-            temp += ("  " + (i + 1) + ". " + taskList.get(i).toString() + " \n");
+        for (int i = 0; i < taskLists.size(); i++) {
+            temp += ("  " + (i + 1) + ". " + taskLists.get(i).toString() + " \n");
         }
         return temp;
     }

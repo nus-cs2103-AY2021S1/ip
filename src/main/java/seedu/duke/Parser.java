@@ -4,15 +4,15 @@ package seedu.duke;
  * Parser processes each command from Ui and executes program accordingly.
  */
 public class Parser {
-    private TaskList taskList;
+    private TaskList taskLists;
 
     /**
      * Initialize an instance of a Parser.
      *
-     * @param taskList List of Tasks stored in a TaskList class.
+     * @param taskLists List of Tasks stored in a TaskList class.
      */
-    public Parser(TaskList taskList) {
-        this.taskList = taskList;
+    public Parser(TaskList taskLists) {
+        this.taskLists = taskLists;
     }
 
     /**
@@ -52,15 +52,15 @@ public class Parser {
             if (input.equals("list")) {
                 this.showTaskList();
             } else if (input.contains("done")) {
-                taskList.completeTask(input);
+                taskLists.completeTask(input);
             } else if (input.contains("delete")) {
-                taskList.deleteTask(input);
+                taskLists.deleteTask(input);
             } else if (input.contains("todo")) {
-                taskList.addToDo(input);
+                taskLists.addToDo(input);
             } else if (input.contains("deadline")) {
-                taskList.addDeadline(input);
+                taskLists.addDeadline(input);
             } else if (input.contains("event")) {
-                taskList.addEvent(input);
+                taskLists.addEvent(input);
             } else {
 
             }
@@ -73,6 +73,6 @@ public class Parser {
      * Print out list of Tasks.
      */
     public void showTaskList() {
-        Ui.print(taskList.toString());
+        Ui.print(taskLists.toString());
     }
 }
