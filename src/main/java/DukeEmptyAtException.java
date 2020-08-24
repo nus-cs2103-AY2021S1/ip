@@ -1,5 +1,5 @@
 public class DukeEmptyAtException extends DukeTaskException {
-    DukeEmptyAtException(String message) {
-        super(message);
+    public DukeEmptyAtException() {
+        super("☹ OOPS!!! The event time cannot be empty.");
     }
 }

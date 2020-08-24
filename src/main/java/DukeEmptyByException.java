@@ -1,5 +1,5 @@
 public class DukeEmptyByException extends DukeTaskException {
-    DukeEmptyByException(String message) {
-        super(message);
+    public DukeEmptyByException() {
+        super("☹ OOPS!!! The deadline cannot be empty.");
     }
 }

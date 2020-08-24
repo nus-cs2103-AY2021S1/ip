@@ -1,4 +1,4 @@
-public class DukeInvalidData extends DukeException {
+public class DukeInvalidData extends DukeStorageException {
     DukeInvalidData(String message) {
         super(message);
     }

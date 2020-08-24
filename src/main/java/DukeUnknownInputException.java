@@ -1,5 +1,5 @@
 public class DukeUnknownInputException extends DukeTaskException {
-    DukeUnknownInputException(String message) {
-        super(message);
+    public DukeUnknownInputException() {
+        super("☹ OOPS!!! I'm sorry, but I don't know what that meows :-(");
     }
 }

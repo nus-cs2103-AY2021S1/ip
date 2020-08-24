@@ -10,50 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Data {
-    private String filePath;
-    private List<Task> tasksList;
+public class Storage {
+    private final String filePath;
 
-    Data(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
-        try {
-            this.tasksList = read(filePath);
-        } catch (DukeInvalidData | DukeInvalidDateTimeInputException e) {
-            System.out.println(e.getMessage());
-            this.tasksList = new ArrayList<>();
-        }
-    }
-
-    public List<Task> getTasksList() {
-        return tasksList;
-    }
-
-    public void add(Task task) {
-        this.tasksList.add(task);
-        try {
-            this.save();
-        } catch (IOException e) {
-            System.out.println("Saving error! Data not saved.");
-        }
-    }
-
-    public void delete(int index) {
-        this.tasksList.remove(index);
-        try {
-            this.save();
-        } catch (IOException e) {
-            System.out.println("Saving error! Data not saved.");
-        }
-    }
-
-    public void markDone(int index) {
-        Task t = tasksList.get(index);
-        t.markAsDone();
-        try {
-            this.save();
-        } catch (IOException e) {
-            System.out.println("Saving error! Data not saved.");
-        }
     }
 
     private static List<LocalDateTime> customDateTimeFormatter(String dateTimeString) throws DukeInvalidDateTimeInputException {
@@ -94,7 +55,7 @@ public class Data {
         return results;
     }
 
-    static List<Task> read(String filePath) throws DukeInvalidData, DukeInvalidDateTimeInputException {
+    public List<Task> load() throws DukeInvalidDataException, DukeInvalidStoragePathException, DukeInvalidData, DukeInvalidDateTimeInputException {
         File file = new File(filePath);
         List<Task> list = new ArrayList<>();
         try {
@@ -157,32 +118,32 @@ public class Data {
         return list;
     }
 
-    private void save() throws IOException {
+    public void save(TaskList taskList) throws IOException {
         File file = new File(filePath);
         FileWriter writer = new FileWriter(file);
-        for (int i = 0; i < tasksList.size(); i++) {
-            Task task = tasksList.get(i);
+        for (int i = 0; i < taskList.getSize(); i++) {
+            Task task = taskList.get(i);
             TaskType type = task.taskType;
             String s = "";
             switch (type) {
                 case TODO:
-                    s = String.format("T | %d | %s", task.isDone ? 1 : 0, task.description);
+                    s = String.format("T | %d | %s", task.getIsDone() ? 1 : 0, task.getDescription());
                     break;
                 case DEADLINE:
                     Deadline deadline = (Deadline) task;
-                    s = String.format("D | %d | %s | %s", deadline.isDone ? 1 : 0,
-                            deadline.description, deadline.getBy());
+                    s = String.format("D | %d | %s | %s", deadline.getIsDone() ? 1 : 0,
+                            deadline.getDescription(), deadline.getBy());
                     break;
                 case EVENT:
                     Event event = (Event) task;
-                    s = String.format("E | %d | %s | %s", event.isDone ? 1 : 0,
-                            event.description, event.getAt());
+                    s = String.format("E | %d | %s | %s", event.getIsDone() ? 1 : 0,
+                            event.getDescription(), event.getAt());
                     break;
                 default:
                     break;
             }
 
-            if (i != tasksList.size() - 1) {
+            if (i != taskList.getSize() - 1) {
                 s += "\n";
             }
             writer.write(s);
