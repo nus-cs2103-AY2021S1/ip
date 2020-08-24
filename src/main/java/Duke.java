@@ -1,22 +1,30 @@
 package main.java;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.security.InvalidParameterException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Main part of logic of Duke.
+ */
 public class Duke {
 
+    /** Holds the storage of data */
     private Storage storage;
+
+    /** Manages the list of tasks */
     private TaskList taskList;
+
+    /** Parses input strings from user to task objects */
     private Parser parser;
+
+    /** Holds the user interface part */
     private Ui ui;
 
+    /**
+     * Initializes Duke object.
+     * Finishes essential settings.
+     * @param filePath Path of data file.
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         taskList = new TaskList(storage);
@@ -24,6 +32,9 @@ public class Duke {
         ui = new Ui();
     }
 
+    /**
+     * Holds management of operations.
+     */
     private void run() {
 
         ui.welcomeWord();
@@ -74,6 +85,11 @@ public class Duke {
         inputScanner.close();
     }
 
+    /**
+     * Starts Duke program.
+     * Gives path of data file.
+     * @param args Default.
+     */
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
     }
