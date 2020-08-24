@@ -17,7 +17,7 @@ __________________________________________________________
 
 __________________________________________________________
 Got it. I've added this task:
-[E][✘] rotaract club presentation (at: Sun 8am)
+[E][✘] rotaract club presentation (at: Dec 20 2019 09:10)
 Now you have 3 tasks in the list.
 __________________________________________________________
 
@@ -30,7 +30,7 @@ __________________________________________________________
 Here are the tasks in your list:
 1. [T][✓] CS2100
 2. [T][✘] CS2101
-3. [E][✘] rotaract club presentation (at: Sun 8am)
+3. [E][✘] rotaract club presentation (at: Dec 20 2019 09:10)
 __________________________________________________________
 
 __________________________________________________________
@@ -46,8 +46,13 @@ __________________________________________________________
 __________________________________________________________
 
 __________________________________________________________
+☹ OOPS!!! The format of your input time seems to be wrong.
+Try the following time format: YYYY-MM-DD HH:MM
+__________________________________________________________
+
+__________________________________________________________
 Got it. I've added this task:
-[D][✘] CS2103 quiz (by: Mon 12am)
+[D][✘] CS2103 quiz (by: Dec 21 2019 19:10)
 Now you have 4 tasks in the list.
 __________________________________________________________
 
@@ -60,8 +65,8 @@ __________________________________________________________
 Here are the tasks in your list:
 1. [T][✓] CS2100
 2. [T][✓] CS2101
-3. [E][✘] rotaract club presentation (at: Sun 8am)
-4. [D][✘] CS2103 quiz (by: Mon 12am)
+3. [E][✘] rotaract club presentation (at: Dec 20 2019 09:10)
+4. [D][✘] CS2103 quiz (by: Dec 21 2019 19:10)
 __________________________________________________________
 
 __________________________________________________________
@@ -86,27 +91,27 @@ __________________________________________________________
 
 __________________________________________________________
 ☹ OOPS!!! The format of event command seems to be wrong.
-Try the following format: event task /at time
+Try the following format: event task /at YYYY-MM-DD HH:MM
 __________________________________________________________
 
 __________________________________________________________
 ☹ OOPS!!! The format of deadline command seems to be wrong.
-Try the following format: deadline task /by time
+Try the following format: deadline task /by YYYY-MM-DD HH:MM
 __________________________________________________________
 
 __________________________________________________________
 Nice! I've marked this task as done:
-[E][✓] rotaract club presentation (at: Sun 8am)
+[E][✓] rotaract club presentation (at: Dec 20 2019 09:10)
 __________________________________________________________
 
 __________________________________________________________
 Nice! I've marked this task as done:
-[D][✓] CS2103 quiz (by: Mon 12am)
+[D][✓] CS2103 quiz (by: Dec 21 2019 19:10)
 __________________________________________________________
 
 __________________________________________________________
 Noted. I've removed this task:
-[E][✓] rotaract club presentation (at: Sun 8am)
+[E][✓] rotaract club presentation (at: Dec 20 2019 09:10)
 Now you have 3 tasks in the list.
 __________________________________________________________
 
@@ -114,7 +119,7 @@ __________________________________________________________
 Here are the tasks in your list:
 1. [T][✓] CS2100
 2. [T][✓] CS2101
-3. [D][✓] CS2103 quiz (by: Mon 12am)
+3. [D][✓] CS2103 quiz (by: Dec 21 2019 19:10)
 __________________________________________________________
 
 __________________________________________________________
@@ -123,7 +128,7 @@ __________________________________________________________
 
 __________________________________________________________
 ☹ OOPS!!! The format of event command seems to be wrong.
-Try the following format: event task /at time
+Try the following format: event task /at YYYY-MM-DD HH:MM
 __________________________________________________________
 
 __________________________________________________________

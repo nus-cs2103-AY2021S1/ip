@@ -1,12 +1,13 @@
 todo CS2100
 todo CS2101
-event rotaract club presentation /at Sun 8am
+event rotaract club presentation /at 2019-12-20 09:10
 done 1
 list
 done -1
 done 5
 done 1
-deadline CS2103 quiz /by Mon 12am
+deadline CS2103 quiz /by mon 19:10
+deadline CS2103 quiz /by 2019-12-21 19:10
 done 2
 list
 done s

@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -108,7 +111,7 @@ public class Duke {
                     if (deadlineDateArray.length != 2) {
                         throw new InvalidDeadlineFormatException();
                     }
-                    Deadline newDeadlineTask = new Deadline(deadlineDateArray[0], deadlineDateArray[1]);
+                    Deadline newDeadlineTask = new Deadline(deadlineDateArray[0], Time.getFormatedTime(deadlineDateArray[1]));
                     list.add(newDeadlineTask);
                     messageEcho(
                             "Got it. I've added this task:\n" + newDeadlineTask.toString() +
@@ -140,7 +143,7 @@ public class Duke {
                     if (eventDateArray.length != 2) {
                         throw new InvalidEventFormatException();
                     }
-                    Event newEventTask = new Event(eventDateArray[0], eventDateArray[1]);
+                    Event newEventTask = new Event(eventDateArray[0], Time.getFormatedTime(eventDateArray[1]));
                     list.add(newEventTask);
                     messageEcho(
                             "Got it. I've added this task:\n" + newEventTask.toString() +
