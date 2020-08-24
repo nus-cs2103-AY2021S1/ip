@@ -1,10 +1,12 @@
-import exception.EmptyTaskException;
-import exception.InvalidCommandException;
-import exception.InvalidDateException;
-import exception.InvalidIndexException;
-import exception.MissingDateException;
+package duke.main;
 
-import task.Task;
+import duke.exception.EmptyTaskException;
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDateException;
+import duke.exception.InvalidIndexException;
+import duke.exception.MissingDateException;
+
+import duke.task.Task;
 
 public class Parser {
     private final TaskList taskList;
@@ -46,8 +48,8 @@ public class Parser {
                         .append(taskList.size())
                         .append(" task(s) left");
             }
-        } catch (InvalidIndexException | InvalidDateException | InvalidCommandException
-                | EmptyTaskException | MissingDateException e) {
+        } catch (InvalidIndexException | InvalidDateException | InvalidCommandException |
+                MissingDateException | EmptyTaskException e) {
             reply.append(e.toString());
         }
         return reply.toString();

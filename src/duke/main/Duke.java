@@ -1,3 +1,5 @@
+package duke.main;
+
 public class Duke {
     private final Ui ui;
     private final TaskList taskList;

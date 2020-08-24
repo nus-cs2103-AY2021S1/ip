@@ -1,6 +1,6 @@
-package task;
+package duke.task;
 
-import exception.EmptyTaskException;
+import duke.exception.EmptyTaskException;
 
 public class ToDo extends Task {
     public ToDo(String description) {

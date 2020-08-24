@@ -1,8 +1,8 @@
-package task;
+package duke.task;
 
-import exception.EmptyTaskException;
-import exception.InvalidDateException;
-import exception.MissingDateException;
+import duke.exception.EmptyTaskException;
+import duke.exception.InvalidDateException;
+import duke.exception.MissingDateException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

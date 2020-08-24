@@ -1,13 +1,15 @@
-import exception.EmptyTaskException;
-import exception.InvalidCommandException;
-import exception.InvalidDateException;
-import exception.InvalidIndexException;
-import exception.MissingDateException;
+package duke.main;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
+import duke.exception.EmptyTaskException;
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDateException;
+import duke.exception.InvalidIndexException;
+import duke.exception.MissingDateException;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -68,8 +70,8 @@ public class TaskList {
         return stringBuilder.toString();
     }
 
-    Task add(String task) throws EmptyTaskException, MissingDateException,
-            InvalidDateException, InvalidCommandException {
+    Task add(String task) throws MissingDateException,
+            InvalidDateException, InvalidCommandException, EmptyTaskException {
         Task newTask;
         if (task.startsWith("todo")) {
             newTask = ToDo.create(task);

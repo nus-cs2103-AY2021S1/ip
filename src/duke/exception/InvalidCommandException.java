@@ -1,4 +1,4 @@
-package exception;
+package duke.exception;
 
 public class InvalidCommandException extends Exception {
     @Override
