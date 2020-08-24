@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private String day = null;
     /**
-     *
+     * this assigns the name and day values
      * @param name super(name) so that it does whatever is mentioned in the parent class
      * @param day assigns this.day to day value
      */
@@ -33,67 +33,14 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + "(by: " + this.day + ")";
     }
 
+    /**
+     * gives a specific string representation for that in the tasks.txt file and overrides that in Task to make
+     * it unique to that for Deadline
+     * @return the string representation
+     */
     public String inputListFormat() {
         return "D" + super.inputListFormat() + " | " + this.day;
     }
-    public static LocalDate localDate(String string) {
-        try{
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
-            LocalDate parsedDate = LocalDate.parse(string, formatter);
-            return parsedDate;
-        }catch (DateTimeException d) {
-            /*try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd, HH:mm");
-                LocalDateTime parsedDate = LocalDateTime.parse(string, formatter);
-                return parsedDate;
-            } catch (DateTimeException g) {
-                try {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-                    LocalTime parsedDate = LocalTime.parse(string, formatter);
-                } catch (DateTimeException f) {
-                    System.out.println(f.toString());
-                }
-            } */
-            throw d;
-        }
-    }
-    public static LocalDateTime localDateTime(String string){
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd, HH:mm");
-            LocalDateTime parsedDate = LocalDateTime.parse(string, formatter);
-            return parsedDate;
-        } catch (DateTimeException g) {
-            throw g;
-        }
-    }
-    public static LocalTime localTime(String string){
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-            LocalTime parsedDate = LocalTime.parse(string, formatter);
-            return parsedDate;
-        } catch (DateTimeException f) {
-            throw f;
-        }
-    }
-    public static Deadline provide(String name, String string) throws DukeException {
-        Deadline e;
-        try{
-            LocalDate parsedDate = localDate(string);
-            e = new Deadline(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy")));
-        }catch (DateTimeException d) {
-            try {
-                LocalDateTime parsedDate = localDateTime(string);
-                e = new Deadline(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")));
-            } catch (DateTimeException g) {
-                try {
-                    LocalTime parsedDate = localTime(string);
-                    e = new Deadline(name, parsedDate.format(DateTimeFormatter.ofPattern("HH:mm")));
-                } catch (DateTimeException f) {
-                    throw new DeadlineException(false, true);
-                }
-            } }
-        return e;
 
-    }
 }
 

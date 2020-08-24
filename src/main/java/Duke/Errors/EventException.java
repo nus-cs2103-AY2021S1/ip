@@ -16,7 +16,7 @@ public class EventException extends DukeException {
     private boolean diff;
     private boolean invalid;
     /**
-     *
+     * this assigns the variables above to its respective values.
      * @param description input, depending on whether the description is present or not in the input.txt file. If
      *                    present it is false else it is true.
      */

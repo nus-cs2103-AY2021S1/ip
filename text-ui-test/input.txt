@@ -1,4 +1,1 @@
 T | 0 | read book
-T | 0 | whatever
-T | 0 | omg
-T | 1 | look

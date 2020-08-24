@@ -12,7 +12,7 @@ public class DeadlineException extends DukeException{
     private boolean description;
     private boolean format;
     /**
-     *
+     *constructor for deadline exception that assigns description and format values
      * @param description input, depneding on whether the description is present or not in the input.txt file. If present it is false
      *   else it is true.
      */

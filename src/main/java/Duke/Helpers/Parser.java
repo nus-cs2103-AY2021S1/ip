@@ -3,8 +3,17 @@ import Duke.Commands.*;
 import Duke.Errors.DukeException;
 import Duke.Errors.WrongInputException;
 
+/**
+ * This is a Parser class that determines which command operation to choose, which in turn determines
+ * the action to be taken.
+ */
 public class Parser {
-    public static Command parse(String string) throws DukeException {
+    /**
+     * This returns a Command, depending on the string being input
+     * @param string where the first words determines command to be returned
+     * @return Command is returned based on the first word of param string
+     */
+    public static Command parse(String string)  {
         if (string.length() >= 3 && string.equals("bye")) {
             return new ExitCommand(string);
         }else if (string.length() >= 4 && string.equals("list")) {

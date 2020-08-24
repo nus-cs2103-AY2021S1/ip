@@ -22,6 +22,12 @@ public class todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    /**
+     * gives a specific string representation for that in the tasks.txt file and overrides that in Task to make
+     * it unique to that for todo
+     * @return the string representation
+     */
     public String inputListFormat(){
         return "T" + super.inputListFormat();
     }

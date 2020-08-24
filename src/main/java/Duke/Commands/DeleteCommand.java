@@ -39,15 +39,12 @@ public class DeleteCommand extends Command {
            throw new DeleteException(true, false);
         }else{
             int ID = Integer.parseInt(string.substring(7));
-            if (ID > Task.getNum()) {
+            if (ID > tasks.getAllTasks().size()) {
                 throw new DeleteException(false, false);
             }else {
-                Task task = Task.tasks.get(ID - 1);
-                if(task.isDeleted()){
-                    throw new DeleteException(false, true);
-                }else{
+
                     rewrite(storage, tasks, ID);
-                }
+
             }
         }
 

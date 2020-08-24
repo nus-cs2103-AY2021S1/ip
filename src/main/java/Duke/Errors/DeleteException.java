@@ -12,7 +12,7 @@ public class DeleteException extends DukeException {
     private boolean IDabsent;
     private boolean deleted;
     /**
-     *
+     * constructor that assigns tne 2 variables its respective values
      * @param IDabsent input, depneding on whether the ID is present or not in the input.txt file. If present it is false
      *   else it is true.
      */

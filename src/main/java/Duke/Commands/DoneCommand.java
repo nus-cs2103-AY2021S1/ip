@@ -14,15 +14,11 @@ public class DoneCommand extends Command {
     public DoneCommand(String string) {
         super(string);
     }
-    public void Done(int ID){
-        Task.tasks.get(ID - 1).setDone(true);
-        System.out.println("   Nice! I've marked this task as done:");
-        System.out.println("   " + Task.tasks.get(ID - 1).toString());
-    }
+
     public void rewrite(Storage storage, TaskList tasks, int ID) throws FileAbsentException {
-        System.out.println("   Nice! I've marked this task as done:");
-        System.out.println("   " + Task.tasks.get(ID - 1).toString());
         tasks.getAllTasks().get(ID - 1).setDone(true);
+        System.out.println("   Nice! I've marked this task as done:");
+        System.out.println("   " + tasks.getAllTasks().get(ID - 1).toString());
         String s = "";
         for(int i = 0; i < tasks.getAllTasks().size(); i++){
             s = s + tasks.getAllTasks().get(i).inputListFormat() + "\n";

@@ -15,11 +15,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
-    String filePath;
+    private String filePath;
+
+    /**
+     * constructor assigns filePath to filePath
+     * @param filePath assigns this value to variable
+     */
     public Storage(String filePath){
         this.filePath = filePath;
     }
+
+    /**
+     * converts the string form of tasks on the file to Task objects
+     * @return the List of tasks containing Task instead of String
+     * @throws DukeException when a file with FilePath doesnt exist.
+     */
     public List<Task> load() throws DukeException {
         File f = new File(this.filePath);
         try {
@@ -73,6 +87,10 @@ public class Storage {
         }
     }
 
+    /**
+     * gives the filePath
+     * @return the value of filePath
+     */
     public String getFilePath() {
         return filePath;
     }
