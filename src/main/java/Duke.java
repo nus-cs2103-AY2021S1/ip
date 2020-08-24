@@ -1,22 +1,84 @@
 import task.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 
 public class Duke {
+    private static final String FILEPATH = "duke.txt";
+    private static final String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+    private static List<Task> taskList;
+
+    private static void loadTasks(){
+        ArrayList<Task> taskList = new ArrayList<>();
+        File f = new File(FILEPATH);
+
+        try {
+            Scanner fileReader = new Scanner(f);
+            while(fileReader.hasNextLine()){
+                String input = fileReader.nextLine();
+                if(input.startsWith("done ")){
+                    String indexStr = input.replaceAll("[^0-9]", "");
+                    int index = Integer.parseInt(indexStr) - 1;
+                    taskList.get(index).setDone();
+                }
+                else if(input.startsWith("todo ") || input.equals("todo")){
+                    input = input.substring(4).trim();
+                    try {
+                        Task newTask = new Todo(input);
+                        taskList.add(newTask);
+                    }
+                    catch(EmptyStringException e){
+                        System.out.println("\t" + "Error encountered in save file.");
+                    }
+                }
+                else if(input.startsWith("deadline ") || input.equals("deadline")){
+                    input = input.substring(8).trim();
+                    try {
+                        Task newTask = new Deadline(input);
+                        taskList.add(newTask);
+                    }
+                    catch(EmptyStringException e){
+                        System.out.println("\t" + "Error encountered in save file.");
+                    }
+                }
+                else if(input.startsWith("event ") || input.equals("event")){
+                    input = input.substring(5).trim();
+                    try {
+                        Task newTask = new Event(input);
+                        taskList.add(newTask);
+                    }
+                    catch(EmptyStringException e){
+                        System.out.println("\t" + "Error encountered in save file.");
+                    }
+                }
+            }
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("Previous file not found, creating a new save file");
+        }
+    }
+
+
+    private static void saveTasks(){
+
+    }
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        loadTasks();
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you today?");
 
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
-        List<Task> taskList = new ArrayList<>();
+
 
         while(true){
             String input = scanner.nextLine();
@@ -83,6 +145,7 @@ public class Duke {
             else{
                 System.out.println("\t" + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+            //saveTasks();
         }
     }
 }
