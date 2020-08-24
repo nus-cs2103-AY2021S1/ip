@@ -376,27 +376,43 @@ public class Duke {
                 throw new StorageException(line + "is in invalid format.");
             } else {
                     String identifier = parsed[0]; //get the type of task
+                    String doneIndicator = parsed[1];
                     String taskName = parsed[2];
                     if (identifier.equals("T")) {
-                        task = new Todo(taskName);
+                        if(doneIndicator.equals("1")) {
+                            task = new Todo(taskName, true);
+                        } else {
+                            task = new Todo(taskName);
+                        }
+
                     } else if (identifier.equals("E")) {
                         String date = parsed[3];
                         LocalDate localDate = LocalDate.parse(date);
-                        task = new Event(taskName, localDate);
+                        if(doneIndicator.equals("1")) {
+                            task = new Event(taskName, true, localDate);
+                        } else {
+                            task = new Event(taskName, localDate);
+                        }
+
                     } else if (identifier.equals("D")) {
                         String date = parsed[3];
                         LocalDate localDate = LocalDate.parse(date);
-                        task = new Deadline(taskName, localDate);
+                        if(doneIndicator.equals("1")) {
+                            task = new Deadline(taskName, true, localDate);
+                        } else {
+                            task = new Deadline(taskName, localDate);
+                        }
+
                     } else {
                         throw new StorageException("Invalid format. Moving on to the next task.");
                     }
 
             }
 
-            String doneIndicator = parsed[1];
-            if (doneIndicator.equals("1")) {
-                task.markAsDone();
-            }
+//            String doneIndicator = parsed[1];
+//            if (doneIndicator.equals("1")) {
+//                task.markAsDone();
+//            }
             return task;
 
         } catch(DateTimeParseException e) {
