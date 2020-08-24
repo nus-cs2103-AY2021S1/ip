@@ -1,6 +1,8 @@
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.io.File;
 
@@ -9,18 +11,112 @@ public class Duke {
         BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE
     }
 
+    private static ArrayList<Task> loadFile(File file) throws FileNotFoundException {
+        ArrayList<String> result = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
+
+        try (Scanner s = new Scanner(new FileReader(file))) {
+            while (s.hasNext()) {
+                result.add(s.nextLine());
+            }
+        }
+        for (int i = 0; i < result.size(); i++) {
+            String str = result.get(i);
+            String[] arr = str.split(" >> ", -1);
+
+            switch (arr[0]) {
+            case "T":
+                // It is a to-do task
+                try {
+                    if (Integer.valueOf(arr[1]).equals(0)) {
+                        // Incomplete task
+                        Task task = new Todo(arr[2]);
+                        taskList.add(task);
+                    } else if (Integer.valueOf(arr[1]).equals(1)) {
+                        // Completed task
+                        Task task = new Todo(arr[2]);
+                        task.markAsDone();
+                        taskList.add(task);
+                    } else {
+                        // Not recognised format
+                        printFormatError(i);
+                    }
+                } catch (Exception ex) {
+                    printFormatError(i);
+                }
+
+                break;
+            case "D":
+                // It is a deadline task
+                try {
+                    if (Integer.valueOf(arr[1]).equals(0)) {
+                        // Incomplete task
+                        Task task = new Deadline(arr[2], arr[3]);
+                        taskList.add(task);
+                    } else if (Integer.valueOf(arr[1]).equals(1)) {
+                        // Completed task
+                        Task task = new Deadline(arr[2], arr[3]);
+                        task.markAsDone();
+                        taskList.add(task);
+                    } else {
+                        // Not recognised format
+                        printFormatError(i);
+                    }
+                } catch (Exception ex) {
+                    printFormatError(i);
+                }
+
+                break;
+            case "E":
+                // It is an Event task
+                try {
+                    if (Integer.valueOf(arr[1]).equals(0)) {
+                        // Incomplete task
+                        Task task = new Event(arr[2], arr[3]);
+                        taskList.add(task);
+                    } else if (Integer.valueOf(arr[1]).equals(1)) {
+                        // Completed task
+                        Task task = new Event(arr[2], arr[3]);
+                        task.markAsDone();
+                        taskList.add(task);
+                    } else {
+                        // Not recognised format
+                        printFormatError(i);
+                    }
+                } catch (Exception ex) {
+                    printFormatError(i);
+                }
+
+                break;
+            default:
+                // No such type
+                printFormatError(i);
+                break;
+            }
+        }
+        return taskList;
+    }
+
+    private static void printFormatError(int i) {
+        System.out.println("Hello! Looks like there is a format error in your saved file!");
+        if (i >= 0) {
+            System.out.println("The line on " + (i + 1) + " will be ignored");
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         ArrayList<Task> ls = new ArrayList<>();
         String horizontalDiv = "____________________________________________________________";
 
         String filePath = new File("").getAbsolutePath();
         filePath += "\\todolist.txt";
-        System.out.println(filePath);
         File f = new File(filePath);
         boolean exists = f.exists();
         if (!exists) {
             f.createNewFile();
         }
+
+        ls = loadFile(f);
 
         // Using Scanner for Getting Input from User
         Scanner in = new Scanner(System.in);
@@ -28,6 +124,7 @@ public class Duke {
         System.out.println(horizontalDiv);
         System.out.println("Hello! I'm Dude\n" + "What can I do for you today?");
         System.out.println(horizontalDiv);
+
         WhileLoop:
         while (in.hasNextLine()) {
             String str = in.nextLine();
