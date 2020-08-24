@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,20 +36,22 @@ public class TaskList {
         System.out.println("    Now you have " + listOfTask.size() + " task(s) in the list.\n");
     }
 
-    public void addDeadline(String input, int dateIndex) {
+    public void addDeadline(String input, int dateIndex) throws GelException {
         String by = input.substring(dateIndex + 4);
+        LocalDateTime byDateTime = Parser.toDateTime(by);
         String description = input.substring(8, dateIndex);
-        Deadline deadline = new Deadline(description, by);
+        Deadline deadline = new Deadline(description, byDateTime);
         listOfTask.add(deadline);
         System.out.println("\n    Got it. I've added this task:");
         System.out.println("      " + deadline);
         System.out.println("    Now you have " + listOfTask.size() + " task(s) in the list.\n");
     }
 
-    public void addEvent(String input, int dateIndex) {
+    public void addEvent(String input, int dateIndex) throws GelException {
         String at = input.substring(dateIndex + 4);
+        LocalDateTime atDateTime = Parser.toDateTime(at);
         String description = input.substring(5, dateIndex);
-        Event event = new Event(description, at);
+        Event event = new Event(description, atDateTime);
         listOfTask.add(event);
         System.out.println("\n    Got it. I've added this task:");
         System.out.println("      " + event);

@@ -1,9 +1,15 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public class Event extends Task {
 
-    protected String at;
+    protected String atString;
+    protected LocalDateTime at;
 
-    public Event(String description, String at) {
+    public Event(String description, LocalDateTime at) {
         super(description);
+        this.atString = at.format(DateTimeFormatter.ofPattern("dd MMM uuuu HH:mm"));
         this.at = at;
     }
 
