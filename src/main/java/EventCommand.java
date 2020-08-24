@@ -6,6 +6,9 @@ public class EventCommand extends Command {
             throw new IllegalArgumentException("-------------------------------------------\n" +
                     "☹ OOPS!!! The description of an event cannot be empty. Try again!\n"
                     +"-------------------------------------------");
+        } else {
+            System.out.println("-------------------------------------------\n" +
+                    "Got it. I've added this task:");
         }
     }
 }
