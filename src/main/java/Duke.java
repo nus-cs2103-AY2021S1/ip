@@ -15,7 +15,7 @@ public class Duke {
                 + "    format: deadline {description} /by {yyyy-mm-dd} \n"
                 + "event: \n"
                 + "    add an event with a description, date, start time and end time. \n"
-                + "    format: event {description} /at {yyyy-mm-dd} {hh-mm} {hh-mm}\n"
+                + "    format: event {description} /at {yyyy-mm-dd} {hh:mm} {hh:mm}\n"
                 + "done: \n"
                 + "    mark an item as done. \n    format: done {taskNumber} \n"
                 + "delete: \n"
