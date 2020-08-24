@@ -1,6 +1,11 @@
 import Task.Event;
 import Task.Task;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import Task.*;
@@ -17,6 +22,8 @@ public class Duke {
     private final static String DELETE_EVENT = "delete";
     private final static String DEADLINE_DATE = "/by";
     private final static String EVENT_DATE = "/at";
+    private final static DateTimeFormatter ACCEPTED_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private final static DateTimeFormatter NEW_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mma");
     private static ArrayList<Task> userInputsList = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -57,7 +64,7 @@ public class Duke {
                             throw new DukeExceptions("☹ OOPS !!! Incapaz de completar");
                         }
                         positionDone = positionDone - 1;
-                        if (positionDone < userInputsList.size() && positionDone > 0) {
+                        if (positionDone < userInputsList.size() && positionDone >= 0) {
                             System.out.println("Agradable! He marcado esta tarea como hecha:");
                             userInputsList.get(positionDone).completeTask();
                             System.out.println(userInputsList.get(positionDone));
@@ -96,12 +103,18 @@ public class Duke {
                         int byPosition = userInput.indexOf(DEADLINE_DATE);
                         int position = userInputsList.size() + 1;
                         String taskDescription = userInput.substring(0, byPosition);
-                        String dateDescription = userInput.substring(byPosition + 3);
+                        String dateDescription = userInput.substring(byPosition + 4);
+                        LocalDateTime date;
+                        try {
+                            date = LocalDateTime.parse(dateDescription, ACCEPTED_DATETIME_FORMAT);
+                        } catch (DateTimeParseException e) {
+                            throw new DukeExceptions("☹ OOPS !!! Formato de fecha y hora incorrecto. Formatee como dd/MM/yyyy HHmm");
+                        }
                         if (dateDescription.isEmpty()) {
                             throw new DukeExceptions("☹ OOPS !!! Debe establecer una fecha límite para esta tarea.");
                         }
                         Deadline newDeadline = new Deadline(position, taskDescription);
-                        newDeadline.setTime(dateDescription);
+                        newDeadline.setTime(date);
                         userInputsList.add(newDeadline);
                         System.out.println("Entendido. He agregado esta tarea:\n" +
                                 newDeadline +
@@ -122,12 +135,18 @@ public class Duke {
                         int atPosition = userInput.indexOf(EVENT_DATE);
                         int position = userInputsList.size() + 1;
                         String taskDescription = userInput.substring(0, atPosition);
-                        String dateDescription = userInput.substring(atPosition + 3);
+                        String dateDescription = userInput.substring(atPosition + 4);
+                        LocalDateTime date;
+                        try {
+                            date = LocalDateTime.parse(dateDescription, ACCEPTED_DATETIME_FORMAT);
+                        } catch (DateTimeParseException e) {
+                            throw new DukeExceptions("☹ OOPS !!! Formato de fecha y hora incorrecto. Formatee como dd/MM/yyyy HHmm");
+                        }
                         if (dateDescription.isEmpty()) {
                             throw new DukeExceptions("☹ OOPS !!! Debe establecer la hora del evento para esta tarea.");
                         }
                         Event newEvent = new Event(position, taskDescription);
-                        newEvent.setTime(dateDescription);
+                        newEvent.setTime(date);
                         userInputsList.add(newEvent);
                         System.out.println("Entendido. He agregado esta tarea:\n" +
                                 newEvent +

@@ -1,10 +1,12 @@
 package Task;
 
+import java.time.LocalDateTime;
+
 public class Task {
     protected int position;
     protected String taskDescription;
     protected boolean taskCompleted;
-    protected String date;
+    protected LocalDateTime date;
 
     public Task(int position, String taskDescription) {
         this.position = position;
