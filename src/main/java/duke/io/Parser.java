@@ -13,7 +13,10 @@ public class Parser {
     public Parser() {
         this.layout = new Layout();
     }
-    
+
+    /**
+     * Return all valid commands that Duke can execute.
+     */
     public void getCommands() {
         String[] arr = new String[]{
                 "Here are all your commands:",
@@ -28,6 +31,13 @@ public class Parser {
         layout.printCommands(arr);
     }
 
+    /**
+     * Read commands by user and execute associated action.
+     * 
+     * @param sc Scanner that listens to user input.
+     * @param arr Array of words in user input.
+     * @param tasks TaskList object to execute task management actions.
+     */
     public void readCommands(Scanner sc, String[] arr, TaskList tasks) {
         switch (arr[0]) {
             case "bye":
@@ -62,6 +72,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Return date and description of task from user input.
+     * 
+     * @param arr Array of words in user input.
+     * @return Array of date and description.
+     */
     public String [] getDateAndDescription(String [] arr) {
         boolean reached = false;
         StringBuilder date = new StringBuilder();
@@ -87,7 +103,13 @@ public class Parser {
         return new String[]{date.toString(), description.toString()};
     }
 
-
+    /**
+     * Return specified date and time in a different format 
+     * if valid date and time are given.
+     * 
+     * @param date Date to format.
+     * @return ArrayList of LocalDate object and String that represents 12 hour time.
+     */
     public ArrayList<Object> dateAndTimeFormatter(String date) {
         String [] arr = date.split(" ");
         LocalDate localDate = null;

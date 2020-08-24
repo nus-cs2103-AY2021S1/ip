@@ -13,13 +13,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a storage to store user's task list.
+ */
 public class Storage {
     
     private String filePath;
     private File file;
     private Scanner sc;
     private Layout layout;
-    
+
+    /**
+     * Constructs Storage object.
+     * Creates  duke.txt inside a data folder if file or directory not found.
+     * 
+     * @param filePath Path of data file to store task list.
+     */
     public Storage(String filePath) {
         
         //Find text file inside data folder
@@ -49,7 +58,12 @@ public class Storage {
             }
         }
     }
-    
+
+    /**
+     * Load task list from data file and store in ArrayList.
+     * 
+     * @return ArrayList<Task> initialised with tasks from the previous use.
+     */
     public ArrayList<Task> load() {
             Task task;
             ArrayList<Task> tasks = new ArrayList<>();
@@ -80,6 +94,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Store updated task list in data file.
+     * 
+     * @param tasks Tasks to store.
+     */
     public void writeFile(ArrayList<Task> tasks) {
         FileWriter fileWriter;
         try {

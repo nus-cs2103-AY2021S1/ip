@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Represents a specific task with a deadline.
+ */
 public class Deadline extends Task {
     private String by;
     private LocalDate localDate;
@@ -22,7 +25,13 @@ public class Deadline extends Task {
             time = (String) dateAndTime.get(1);
         }
     }
-    
+
+    /**
+     * Returns formatted data and time if valid date and time was inputted.
+     * Date is stored as LocalDate object.
+     * 
+     * @return date followed by time.
+     */
     public String getFormattedBy() {
         String formattedBy = "";
         if (localDate != null) {

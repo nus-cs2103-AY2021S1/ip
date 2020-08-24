@@ -7,7 +7,9 @@ import duke.io.Ui;
 import duke.io.Layout;
 import duke.task.DukeException;
 
-
+/**
+ * Represents a task manager, Duke.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasksData;
@@ -27,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Listen to user input.
+     */
     public void run() {
         ui.listen();
     }

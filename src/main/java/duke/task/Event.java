@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Represents a specific task with event details.
+ */
 public class Event extends Task {
     
     private String eventTime;
@@ -24,6 +27,12 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns formatted data and time if valid date and time was inputted.
+     * Date is stored as LocalDate object.
+     * 
+     * @return date followed by time.
+     */
     public String getFormattedBy() {
         String formattedBy = "";
         if (localDate != null) {

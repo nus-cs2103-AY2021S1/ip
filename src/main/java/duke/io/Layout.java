@@ -4,6 +4,9 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a printer. 
+ */
 public class Layout {
     private String line = "\t";
 
