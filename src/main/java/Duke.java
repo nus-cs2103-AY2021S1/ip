@@ -384,7 +384,7 @@ public class Duke {
      * @param args optional and will be treated as the first user input.
      */
     public static void main(String[] args) {
-        String lvl = "7";
+        String lvl = "8";
         String logo = "                                                 _     _\n"
                 + " _______  _______  _______  _______  __   __    (c).-.(c)\n"
                 + "|       ||       ||  _    ||  _    ||  | |  |    / ._. \\ \n"
