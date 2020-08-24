@@ -1,12 +1,9 @@
 package duke;
 
 import duke.command.Command;
-import duke.command.CommandTypes;
-import exception.*;
-
-import java.time.DateTimeException;
-
-import java.util.Scanner;
+import exception.InvalidUsageException;
+import exception.StorageException;
+import exception.UnknownCommandException;
 
 public class Duke {
     TaskList taskList;
@@ -23,7 +20,7 @@ public class Duke {
             this.taskList = new TaskList(storage.load());
             ui.showWelcomeMessage();
             boolean isExit = false;
-            
+
             while (!isExit) {
                 String input = ui.readCommand();
                 ui.buildChatFence();

@@ -40,7 +40,7 @@ public class Event extends Task {
     public String getDescription() {
         return super.getDescription() + " | " + this.at;
     }
-    
+
     public LocalDate getDate() {
         return this.at;
     }

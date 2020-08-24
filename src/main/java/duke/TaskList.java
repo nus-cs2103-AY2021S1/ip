@@ -32,7 +32,7 @@ public class TaskList {
     public String show(int taskNumber) {
         return taskList.get(taskNumber).showTask();
     }
-    
+
     public List<Task> getAll() {
         return this.taskList;
     }

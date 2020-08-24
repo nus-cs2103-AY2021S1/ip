@@ -4,24 +4,24 @@ import java.util.Scanner;
 
 public class Ui {
     Scanner sc;
-    
+
     public Ui() {
         sc = new Scanner(System.in);
     }
-    
+
     public String readCommand() {
-        if(sc.hasNext()) {
+        if (sc.hasNext()) {
             return sc.nextLine();
         } else {
             return "";
         }
     }
-    
+
     public void print(String message) {
         System.out.print("     ");
         System.out.println(message);
     }
-    
+
     public void buildChatFence() {
         print("----------------------------------------");
     }

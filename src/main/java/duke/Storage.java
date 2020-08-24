@@ -18,18 +18,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    
+
     public static final String DEFAULT_STORAGE_FILEPATH = "data/duke.txt";
     public final Path path;
-    
+
     public Storage() {
         this(DEFAULT_STORAGE_FILEPATH);
-    } 
-    
+    }
+
     public Storage(String filePath) {
         path = Paths.get(filePath);
     }
-    
+
     public List<Task> load() throws StorageException {
         try {
             createFileIfNotExists(path);
@@ -78,7 +78,7 @@ public class Storage {
             return false;
         }
     }
-    
+
     private void createFileIfNotExists(Path path) throws IOException {
         Path folderPath = Path.of("data");
         Path filePath = folderPath.resolve("duke.txt");
@@ -90,7 +90,7 @@ public class Storage {
             Files.createFile(filePath);
         }
     }
-    
+
     private Task parseStorageData(String line) throws StorageException {
         // split by the pipe `|` token
         String[] tokens = line.split("(\\s)*(\\|)(\\s)*");

@@ -2,22 +2,22 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.task.Todo;
 import duke.Ui;
+import duke.task.Todo;
 
 public class TodoCommand extends Command {
     Todo todo;
-    
+
     public TodoCommand(String description) {
         this.todo = new Todo(description);
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.add(this.todo);
-        storage.save(taskList);
-        
-        int size = taskList.size();
-        ui.printAddConfirmation(taskList.show(size - 1), size);
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        tasks.add(this.todo);
+        storage.save(tasks);
+
+        int size = tasks.size();
+        ui.printAddConfirmation(tasks.show(size - 1), size);
     }
 }

@@ -44,7 +44,7 @@ public class Deadline extends Task {
     public LocalDate getDate() {
         return this.by;
     }
-    
+
     private static LocalDate parseDate(String str) {
         return LocalDate.parse(str);
     }

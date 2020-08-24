@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
     TaskList taskList;
-    
+
     @BeforeEach
     public void initEach() {
         List<Task> task = new ArrayList<>();
@@ -20,13 +20,13 @@ public class TaskListTest {
         task.add(new Todo("return book"));
         taskList = new TaskList(task);
     }
-    
+
     @Test
     public void addTask() {
         taskList.add(new Todo("help a friend"));
         assertEquals(taskList.size(), 3);
     }
-    
+
     @Test
     public void removeTask() {
         taskList.remove(1);
