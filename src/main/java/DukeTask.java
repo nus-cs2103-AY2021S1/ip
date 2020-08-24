@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public abstract class DukeTask {
     private final String description;
     private boolean isDone;
@@ -26,5 +28,30 @@ public abstract class DukeTask {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DukeTask dukeTask = (DukeTask) o;
+        return isDone == dukeTask.isDone &&
+                description.equals(dukeTask.description);
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        DukeTask clone = null;
+        try {
+            clone = (DukeTask) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+        return clone;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, isDone);
     }
 }
