@@ -1,16 +1,14 @@
 package duke;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
 import duke.exception.ReadFailedException;
 import duke.task.Task;
 import duke.task.Tasks;
-
-import java.io.File;
-import java.io.FileWriter;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import java.util.Scanner;
 
 /**
  * The Storage deals with loading tasks from the file and saving tasks in the file.
@@ -23,12 +21,12 @@ public class Storage {
     /**
      * The File to be read and written.
      */
-    private File file;
+    private final File file;
 
     /**
      * Instantiates a new Storage.
      * Create a file using the file path.
-     * 
+     *
      * @param filePath the file path.
      * @throws IOException If the file cannot be created.
      */
@@ -54,25 +52,12 @@ public class Storage {
     }
 
     /**
-     * Write data.
-     *
-     * @param data       the data.
-     * @param appendMode true if data is to be appended, false otherwise.
-     * @throws IOException If the file cannot be written.
-     */
-    private void writeData(String data, boolean appendMode) throws IOException {
-        FileWriter fileWriter = new FileWriter(file, appendMode);
-        fileWriter.write(data);
-        fileWriter.close();
-    }
-
-    /**
      * Returns tasks by reading the file.
      *
      * @return the tasks
      * @throws ReadFailedException If the file cannot be read.
      */
-    public Tasks getTasks() throws ReadFailedException {        
+    public Tasks getTasks() throws ReadFailedException {
         Tasks tasks = new Tasks();
         Scanner scanner;
         try {
@@ -80,14 +65,14 @@ public class Storage {
         } catch (FileNotFoundException ex) {
             throw new ReadFailedException("tasks");
         }
-        
+
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] stringArr = line.split("_");
             tasks.addTask(stringArr);
         }
         scanner.close();
-        
+
         return tasks;
     }
 
@@ -102,6 +87,19 @@ public class Storage {
     }
 
     /**
+     * Write data.
+     *
+     * @param data       the data.
+     * @param appendMode true if data is to be appended, false otherwise.
+     * @throws IOException If the file cannot be written.
+     */
+    private void writeData(String data, boolean appendMode) throws IOException {
+        FileWriter fileWriter = new FileWriter(file, appendMode);
+        fileWriter.write(data);
+        fileWriter.close();
+    }
+
+    /**
      * Updates the tasks.
      *
      * @param newTasks the new tasks.
@@ -109,5 +107,5 @@ public class Storage {
      */
     public void updateTasks(Tasks newTasks) throws IOException {
         this.writeData(newTasks.getData(), false);
-    }    
+    }
 }

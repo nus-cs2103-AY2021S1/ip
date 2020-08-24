@@ -1,15 +1,26 @@
 package duke.task;
 
-import duke.exception.ReadFailedException;
-
 import java.time.LocalDate;
-
 import java.util.function.Function;
+
+import duke.exception.ReadFailedException;
 
 /**
  * The Task with description, isDone and type.
  */
 public class Task {
+    /**
+     * The constant CROSS_ICON.
+     */
+    protected static final String CROSS_ICON = "\u2718";
+    /**
+     * The constant TICK_ICON.
+     */
+    protected static final String TICK_ICON = "\u2713";
+    /**
+     * The Type of task.
+     */
+    protected final TaskType type;
     /**
      * The Description.
      */
@@ -18,10 +29,6 @@ public class Task {
      * True if task is done, false otherwise.
      */
     protected boolean isDone;
-    /**
-     * The Type of task.
-     */
-    protected final TaskType type;
 
     /**
      * Instantiates a new Task.
@@ -49,19 +56,33 @@ public class Task {
     }
 
     /**
+     * Is date equal boolean.
+     *
+     * @param task the task.
+     * @param date the date.
+     * @return the boolean.
+     */
+    public static boolean isDateEqual(Task task, LocalDate date) {
+        if (!task.hasDate()) {
+            return false;
+        }
+        switch (task.type) {
+        case DEADLINE:
+            return ((Deadline) task).isDateEqual(date);
+        case EVENT:
+            return ((Event) task).isDateEqual(date);
+        default:
+            return false;
+        }
+    }
+
+    /**
      * Returns true, if task has a date, false otherwise.
      *
      * @return the boolean.
      */
     public boolean hasDate() {
         return this.type != TaskType.TODO;
-    }
-
-    /**
-     * Mark a task as done.
-     */
-    public void markAsDone() {
-        this.isDone = true;
     }
 
     /**
@@ -76,24 +97,22 @@ public class Task {
         Function<String, LocalDate> toDate = date -> LocalDate.parse(date.trim());
 
         switch (stringArr[0]) {
-            case "T":
-                return new Todo(stringArr[2], isDone.apply(stringArr[0]));
-            case "E":
-                return new Event(stringArr[2], toDate.apply(stringArr[3]), isDone.apply(stringArr[0]));
-            case "D":
-                return new Deadline(stringArr[2], toDate.apply(stringArr[3]), isDone.apply(stringArr[0]));
-            default:
-                throw new ReadFailedException("tasks");
+        case "T":
+            return new Todo(stringArr[2], isDone.apply(stringArr[0]));
+        case "E":
+            return new Event(stringArr[2], toDate.apply(stringArr[3]), isDone.apply(stringArr[0]));
+        case "D":
+            return new Deadline(stringArr[2], toDate.apply(stringArr[3]), isDone.apply(stringArr[0]));
+        default:
+            throw new ReadFailedException("tasks");
         }
     }
 
     /**
-     * Returns status icon of the task.
-     *
-     * @return the status icon.
+     * Mark a task as done.
      */
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); // return tick or cross symbols
+    public void markAsDone() {
+        this.isDone = true;
     }
 
     /**
@@ -113,6 +132,16 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%S][%s] %s", type.toString().charAt(0), this.getStatusIcon(), this.description);
+        return String.format("[%S][%s] %s", type.toString().charAt(0), this.getStatusIcon(),
+                this.description);
+    }
+
+    /**
+     * Returns status icon of the task.
+     *
+     * @return the status icon.
+     */
+    public String getStatusIcon() {
+        return (isDone ? TICK_ICON : CROSS_ICON); // return tick or cross symbols
     }
 }

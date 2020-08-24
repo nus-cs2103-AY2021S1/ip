@@ -1,22 +1,17 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import duke.Storage;
 import duke.Ui;
 import duke.task.Task;
 import duke.task.Tasks;
 
-import java.time.LocalDate;
-
-import java.util.ArrayList;
-
 /**
  * The Find command finds tasks with the same date.
  */
 public class FindCommand extends Command {
-    /**
-     * The Command type.
-     */
-    private final CommandType commandType;
     /**
      * The Date.
      */

@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -18,13 +21,41 @@ import duke.task.Event;
 import duke.task.TaskType;
 import duke.task.Todo;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 /**
  * The Parser deals with making sense of the user command.
  */
 public class Parser {
+    /**
+     * Returns the command after parsing the input.
+     *
+     * @param input the input.
+     * @return the command.
+     * @throws DukeException If the input cannot be parsed.
+     */
+    public static Command parse(String input) throws DukeException {
+        String keyword = input.split(" ")[0];
+        switch (keyword) {
+        case "bye":
+            return new ByeCommand();
+        case "list":
+            return new ListCommand();
+        case "done":
+            return getDoneCommand(input);
+        case "delete":
+            return getDeleteCommand(input);
+        case "todo":
+            return getTodoTaskCommand(input);
+        case "event":
+            return getEventTaskCommand(input);
+        case "deadline":
+            return getDeadlineTaskCommand(input);
+        case "find":
+            return getFindCommand(input);
+        default:
+            throw new UnknownInputException();
+        }
+    }
+
     /**
      * Returns done command.
      *
@@ -33,7 +64,8 @@ public class Parser {
      * @throws EmptyInputException   If the task number is not in input.
      * @throws UnknownInputException If the task number cannot be parsed.
      */
-    private static DoneCommand getDoneCommand(String input) throws EmptyInputException, UnknownInputException {
+    private static DoneCommand getDoneCommand(String input) throws EmptyInputException,
+            UnknownInputException {
         String taskIndexStr;
         try {
             taskIndexStr = input.substring(5).trim();
@@ -44,14 +76,14 @@ public class Parser {
         if (taskIndexStr.length() < 1) {
             throw new EmptyInputException("The task to be marked as done is not specified.");
         }
-        
+
         int taskIndex;
         try {
             taskIndex = Integer.parseInt(taskIndexStr) - 1;
         } catch (IndexOutOfBoundsException | NumberFormatException ex) {
             throw new UnknownInputException();
         }
-        
+
         return new DoneCommand(taskIndex);
     }
 
@@ -63,7 +95,8 @@ public class Parser {
      * @throws EmptyInputException   If the task number is not in input.
      * @throws UnknownInputException If the task number cannot be parsed.
      */
-    private static DeleteCommand getDeleteCommand(String input) throws EmptyInputException, UnknownInputException {
+    private static DeleteCommand getDeleteCommand(String input) throws EmptyInputException,
+            UnknownInputException {
         String taskIndexStr;
         try {
             taskIndexStr = input.substring(7).trim();
@@ -74,45 +107,15 @@ public class Parser {
         if (taskIndexStr.length() < 1) {
             throw new EmptyInputException("The task to be deleted is not specified.");
         }
-        
+
         int taskIndex;
         try {
             taskIndex = Integer.parseInt(taskIndexStr) - 1;
         } catch (IndexOutOfBoundsException | NumberFormatException ex) {
             throw new UnknownInputException();
         }
-        
+
         return new DeleteCommand(taskIndex);
-    }
-
-    /**
-     * Returns find command.
-     *
-     * @param input the input.
-     * @return the find command.
-     * @throws EmptyInputException   If the item is not in input.
-     * @throws InvalidInputException If the item cannot be parsed.
-     */
-    private static FindCommand getFindCommand(String input) throws EmptyInputException, InvalidInputException {
-        String dateStr;
-        try {
-            dateStr = input.substring(5).trim();
-        } catch (IndexOutOfBoundsException ex) {
-            throw new EmptyInputException("The item to be retrieved is not specified.");
-        }
-
-        if (dateStr.length() < 1) {
-            throw new EmptyInputException("The item to be retrieved is not specified.");
-        }
-
-        LocalDate localDate;
-        try {
-            localDate = LocalDate.parse(dateStr.trim());
-        } catch (DateTimeParseException ex) {
-            throw new InvalidInputException("The date to be retrieved is invalid, it should be in YYYY-MM-DD format.");
-        }
-        
-        return new FindCommand(localDate);
     }
 
     /**
@@ -131,7 +134,7 @@ public class Parser {
         if (description.length() < 1) {
             throw new EmptyTaskException("description", TaskType.TODO);
         }
-        
+
         Todo todo = new Todo(description);
         return new TaskCommand(todo);
     }
@@ -144,7 +147,8 @@ public class Parser {
      * @throws EmptyTaskException   If the description or date in input is empty.
      * @throws InvalidTaskException If the /at command is not in input or the date cannot be parsed.
      */
-    private static TaskCommand getEventTaskCommand(String input) throws EmptyTaskException, InvalidTaskException {
+    private static TaskCommand getEventTaskCommand(String input) throws EmptyTaskException,
+            InvalidTaskException {
         int slashIndex = input.indexOf("/at");
         if (slashIndex == -1) {
             throw new InvalidTaskException("The /at command cannot be found.");
@@ -159,14 +163,16 @@ public class Parser {
         if (dateStr.length() < 1) {
             throw new EmptyTaskException("date", TaskType.EVENT);
         }
+
         LocalDate localDate;
         try {
             localDate = LocalDate.parse(dateStr.trim());
         } catch (DateTimeParseException ex) {
-            throw new InvalidTaskException("The date of event is invalid, it should be in YYYY-MM-DD format.");
+            String message = "The date of event is invalid, it should be in YYYY-MM-DD format.";
+            throw new InvalidTaskException(message);
         }
 
-        Event event =  new Event(description, localDate);
+        Event event = new Event(description, localDate);
         return new TaskCommand(event);
     }
 
@@ -178,7 +184,8 @@ public class Parser {
      * @throws EmptyTaskException   If the description or date in input is empty.
      * @throws InvalidTaskException If the /by command is not in input or the date cannot be parsed.
      */
-    private static Command getDeadlineTaskCommand(String input) throws EmptyTaskException, InvalidTaskException {
+    private static Command getDeadlineTaskCommand(String input) throws EmptyTaskException,
+            InvalidTaskException {
         int slashIndex = input.indexOf("/by");
         if (slashIndex == -1) {
             throw new InvalidTaskException("The /by command cannot be found.");
@@ -198,7 +205,8 @@ public class Parser {
         try {
             localDeadline = LocalDate.parse(deadlineStr.trim());
         } catch (DateTimeParseException ex) {
-            throw new InvalidTaskException("The deadline of deadline is invalid, it should be in YYYY-MM-DD format.");
+            String message = "The deadline of deadline is invalid, it should be in YYYY-MM-DD format.";
+            throw new InvalidTaskException(message);
         }
 
         Deadline deadline = new Deadline(description, localDeadline);
@@ -206,33 +214,34 @@ public class Parser {
     }
 
     /**
-     * Returns the command after parsing the input.
+     * Returns find command.
      *
      * @param input the input.
-     * @return the command.
-     * @throws DukeException If the input cannot be parsed.
+     * @return the find command.
+     * @throws EmptyInputException   If the item is not in input.
+     * @throws InvalidInputException If the item cannot be parsed.
      */
-    public static Command parse(String input) throws DukeException {
-        String keyword = input.split(" ")[0];
-        switch (keyword) {
-            case "bye":
-                return new ByeCommand();
-            case "list":
-                return new ListCommand();
-            case "done":
-                return getDoneCommand(input);
-            case "delete":
-                return getDeleteCommand(input);
-            case "todo":
-                return getTodoTaskCommand(input);
-            case "event":
-                return getEventTaskCommand(input);
-            case "deadline":
-                return getDeadlineTaskCommand(input);
-            case "find":
-                return getFindCommand(input);
-            default:
-                throw new UnknownInputException();
+    private static FindCommand getFindCommand(String input) throws EmptyInputException,
+            InvalidInputException {
+        String dateStr;
+        try {
+            dateStr = input.substring(5).trim();
+        } catch (IndexOutOfBoundsException ex) {
+            throw new EmptyInputException("The item to be retrieved is not specified.");
         }
+
+        if (dateStr.length() < 1) {
+            throw new EmptyInputException("The item to be retrieved is not specified.");
+        }
+
+        LocalDate localDate;
+        try {
+            localDate = LocalDate.parse(dateStr.trim());
+        } catch (DateTimeParseException ex) {
+            String message = "The date to be retrieved is invalid, it should be in YYYY-MM-DD format.";
+            throw new InvalidInputException(message);
+        }
+
+        return new FindCommand(localDate);
     }
 }

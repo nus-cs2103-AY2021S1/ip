@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.Ui;
 import duke.exception.InvalidTaskNumberException;
@@ -7,16 +9,10 @@ import duke.exception.SaveTaskFailedException;
 import duke.task.Task;
 import duke.task.Tasks;
 
-import java.io.IOException;
-
 /**
  * The Delete command which deletes a task.
  */
 public class DeleteCommand extends Command {
-    /**
-     * The Command type.
-     */
-    private final CommandType commandType;
     /**
      * The Task index of task to be deleted.
      */
@@ -41,7 +37,8 @@ public class DeleteCommand extends Command {
      * @throws InvalidTaskNumberException If the task number is invalid.
      * @throws SaveTaskFailedException    If the task list cannot be saved.
      */
-    public void execute(Tasks tasks, Ui ui, Storage storage) throws InvalidTaskNumberException, SaveTaskFailedException {
+    public void execute(Tasks tasks, Ui ui, Storage storage)
+            throws InvalidTaskNumberException, SaveTaskFailedException {
         try {
             Task task = tasks.getTask(taskIndex);
             tasks.removeTask(taskIndex);

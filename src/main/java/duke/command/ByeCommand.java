@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.Ui;
 import duke.Storage;
+import duke.Ui;
 import duke.task.Tasks;
 
 /**
@@ -9,9 +9,9 @@ import duke.task.Tasks;
  */
 public class ByeCommand extends Command {
     /**
-     * The Command type.
+     * The constant EXIT_STATUS.
      */
-    private final CommandType commandType;
+    private static final int EXIT_STATUS = 0;
 
     /**
      * Instantiates a new Bye command.
@@ -29,6 +29,6 @@ public class ByeCommand extends Command {
      */
     public void execute(Tasks tasks, Ui ui, Storage storage) {
         ui.printExitMessage();
-        System.exit(0);
+        System.exit(EXIT_STATUS);
     }
 }

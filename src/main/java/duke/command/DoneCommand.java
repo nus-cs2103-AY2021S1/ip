@@ -1,21 +1,17 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.Ui;
 import duke.exception.InvalidTaskNumberException;
 import duke.exception.SaveTaskFailedException;
 import duke.task.Tasks;
 
-import java.io.IOException;
-
 /**
  * The Done command marks a task as done.
  */
 public class DoneCommand extends Command {
-    /**
-     * The Command type.
-     */
-    private final CommandType commandType;
     /**
      * The Task index of the task to be marked as done.
      */
@@ -40,7 +36,8 @@ public class DoneCommand extends Command {
      * @throws InvalidTaskNumberException If the task number is invalid.
      * @throws SaveTaskFailedException    If the task list cannot be saved.
      */
-    public void execute(Tasks tasks, Ui ui, Storage storage) throws InvalidTaskNumberException, SaveTaskFailedException {
+    public void execute(Tasks tasks, Ui ui, Storage storage)
+            throws InvalidTaskNumberException, SaveTaskFailedException {
         try {
             tasks.getTask(this.taskIndex).markAsDone();
             storage.updateTasks(tasks);

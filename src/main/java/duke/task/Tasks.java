@@ -1,19 +1,18 @@
 package duke.task;
 
-import duke.exception.ReadFailedException;
-
 import java.time.LocalDate;
-
 import java.util.ArrayList;
 
+import duke.exception.ReadFailedException;
+
 /**
- * The Tasks, which stores a list containing tasks.
+ * The type Tasks.
  */
 public class Tasks {
     /**
      * The List of tasks.
      */
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Instantiates a new Tasks, initialise the task list.
@@ -59,7 +58,7 @@ public class Tasks {
      */
     public String getData() {
         String data = "";
-        for (Task task: tasks) {
+        for (Task task : tasks) {
             data += task.getData() + "\n";
         }
         return data;
@@ -68,7 +67,7 @@ public class Tasks {
     /**
      * Adds a task.
      * Create a task then add it to the task list.
-     * 
+     *
      * @param stringArr the string arr.
      * @throws ReadFailedException If the stringArr cannot be read.
      */
@@ -104,12 +103,9 @@ public class Tasks {
      */
     public ArrayList<Task> findByDate(LocalDate date) {
         ArrayList<Task> taskList = new ArrayList<>();
-        for (Task task: this.tasks) {
-            if (task.hasDate()) {
-                boolean isEqual = task.type == TaskType.DEADLINE
-                        ? ((Deadline) task).isDateEqual(date)
-                        : ((Event) task).isDateEqual(date);
-                if (isEqual) taskList.add(task);
+        for (Task task : this.tasks) {
+            if (Task.isDateEqual(task, date)) {
+                taskList.add(task);
             }
         }
         return taskList;

@@ -1,20 +1,30 @@
 package duke.task;
 
-import duke.exception.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import duke.exception.ReadFailedException;
 
 /**
  * Tests Task.
  */
 public class TaskTest {
+    /**
+     * Test hasDate method.
+     */
+    @Test
+    public void testHasDate() {
+        assertFalse(createTodo().hasDate());
+        assertTrue(createEvent().hasDate());
+        assertTrue(createDeadline().hasDate());
+    }
+
     /**
      * Returns a todo.
      *
@@ -43,19 +53,9 @@ public class TaskTest {
     }
 
     /**
-     * Test hasDate method.
-     */
-    @Test
-    public void testHasDate() {
-        assertFalse(createTodo().hasDate());
-        assertTrue(createEvent().hasDate());
-        assertTrue(createDeadline().hasDate());
-    }
-
-    /**
      * Test markAsDone method.
      */
-    @Test 
+    @Test
     public void testMarkAsDone() {
         Task task = createTodo();
         task.markAsDone();
@@ -67,24 +67,24 @@ public class TaskTest {
      *
      * @throws ReadFailedException If the task cannot be read.
      */
-    @Test 
+    @Test
     public void testCreateTask_success() throws ReadFailedException {
-        assertEquals(createTodo().toString(), 
-                Task.createTask(new String[] {"T", "0", "todo"}).toString());
-        assertEquals(createEvent().toString(), 
-                Task.createTask(new String[] {"E", "0", "event", "2020-03-23"}).toString());
-        assertEquals(createDeadline().toString(), 
-                Task.createTask(new String[] {"D", "0", "deadline", "2020-03-07"}).toString());
-        
+        assertEquals(createTodo().toString(),
+                Task.createTask(new String[]{"T", "0", "todo"}).toString());
+        assertEquals(createEvent().toString(),
+                Task.createTask(new String[]{"E", "0", "event", "2020-03-23"}).toString());
+        assertEquals(createDeadline().toString(),
+                Task.createTask(new String[]{"D", "0", "deadline", "2020-03-07"}).toString());
+
     }
 
     /**
      * Test createTask method with exception thrown.
      */
     @Test
-    public void testCreateTask_ExceptionThrown() {
+    public void testCreateTask_exceptionThrown() {
         try {
-            Task.createTask(new String[] {"J", "0", "todo"});
+            Task.createTask(new String[]{"J", "0", "todo"});
             fail(); // the test should not reach this line
         } catch (ReadFailedException ex) {
             assertEquals("Failed to read tasks!", ex.getMessage());
@@ -94,7 +94,7 @@ public class TaskTest {
     /**
      * Test getStatusIcon method.
      */
-    @Test 
+    @Test
     public void testGetStatusIcon() {
         assertEquals("\u2718", createTodo().getStatusIcon());
         Task task = createTodo();
@@ -116,6 +116,6 @@ public class TaskTest {
      */
     @Test
     public void testToString() {
-        assertEquals("[T][\u2713] todo", createTodo().toString());
+        assertEquals("[T][\u2718] todo", createTodo().toString());
     }
 }

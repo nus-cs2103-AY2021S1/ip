@@ -1,16 +1,20 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.exception.ReadFailedException;
 import duke.task.Tasks;
 
-import java.io.IOException;
-
 /**
  * The main class, Duke.
  */
 public class Duke {
+    /**
+     * The Ui interacts with the user.
+     */
+    private final Ui ui;
     /**
      * The Storage deals with loading tasks from the file and saving tasks in the file.
      */
@@ -19,10 +23,6 @@ public class Duke {
      * The Tasks contains the task list.
      */
     private Tasks tasks;
-    /**
-     * The Ui interacts with the user.
-     */
-    private Ui ui;
 
     /**
      * Instantiates a new Duke.
@@ -58,6 +58,16 @@ public class Duke {
     }
 
     /**
+     * Instantiates Duke and runs it.
+     * The main method.
+     *
+     * @param args unused.
+     */
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+
+    /**
      * Runs Duke by reading inputs using ui, generate commands using parser, executing commands and using
      * ui to print output.
      * Catch DukeExceptions and print it using ui.
@@ -75,15 +85,5 @@ public class Duke {
                 this.ui.printDukeException(ex);
             }
         }
-    }
-
-    /**
-     * Instantiates Duke and runs it.
-     * The main method.
-     *
-     * @param args unused.
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

@@ -46,16 +46,6 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the formatted deadline.
-     *
-     * @return the formatted deadline.
-     */
-    private String getFormattedDeadline() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        return deadline.format(formatter);
-    }
-
-    /**
      * Returns data of the event.
      * Used to store the event.
      *
@@ -74,5 +64,15 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return super.toString() + " (by: " + this.getFormattedDeadline() + ")";
+    }
+
+    /**
+     * Returns the formatted deadline.
+     *
+     * @return the formatted deadline.
+     */
+    private String getFormattedDeadline() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return deadline.format(formatter);
     }
 }

@@ -1,26 +1,17 @@
 package duke.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests Event.
  */
 public class EventTest {
-    /**
-     * Returns an event.
-     *
-     * @return the event.
-     */
-    private Event createEvent() {
-        return new Event("description", LocalDate.parse("2020-04-03"));
-    }
-
     /**
      * Test isDateEquals method.
      */
@@ -28,6 +19,15 @@ public class EventTest {
     public void testIsDateEquals() {
         assertTrue(createEvent().isDateEqual(LocalDate.parse("2020-04-03")));
         assertFalse(createEvent().isDateEqual(LocalDate.parse("2020-04-08")));
+    }
+
+    /**
+     * Returns an event.
+     *
+     * @return the event.
+     */
+    private Event createEvent() {
+        return new Event("description", LocalDate.parse("2020-04-03"));
     }
 
     /**
@@ -43,6 +43,6 @@ public class EventTest {
      */
     @Test
     public void testToString() {
-        assertEquals("[E][\u2713] description (at: 03 Apr 2020)", createEvent().toString());
+        assertEquals("[E][\u2718] description (at: 03 Apr 2020)", createEvent().toString());
     }
 }

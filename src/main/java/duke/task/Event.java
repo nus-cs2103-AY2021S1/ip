@@ -46,22 +46,11 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the formatted date.
-     *
-     * @return the formatted date.
-     */
-    private String getFormattedDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        return date.format(formatter);
-    }
-
-    /**
      * Returns data of the event.
      * Used to store the event.
      *
      * @return the data.
      */
-    @Override
     public String getData() {
         return String.format("%s_%s ", super.getData(), date);
     }
@@ -74,5 +63,15 @@ public class Event extends Task {
     @Override
     public String toString() {
         return super.toString() + " (at: " + this.getFormattedDate() + ")";
+    }
+
+    /**
+     * Returns the formatted date.
+     *
+     * @return the formatted date.
+     */
+    private String getFormattedDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return date.format(formatter);
     }
 }

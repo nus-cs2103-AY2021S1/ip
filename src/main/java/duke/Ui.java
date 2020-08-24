@@ -1,14 +1,13 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.Tasks;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * The Ui interacts with the user..
@@ -17,7 +16,7 @@ public class Ui {
     /**
      * The Scanner to read inputs.
      */
-    private Scanner scanner;
+    private final Scanner scanner;
 
     /**
      * Instantiates a new Ui and initialises the scanner.
@@ -27,11 +26,16 @@ public class Ui {
     }
 
     /**
-     * Print dashes.
+     * Print welcome message.
      */
-    private void printDashes() {
-        int length = 60;
-        System.out.println("_".repeat(length));
+    public void showWelcome() {
+        String logo = "  ____        _        \n"
+                + " |  _ \\ _   _| | _____ \n"
+                + " | | | | | | | |/ / _ \\\n"
+                + " | |_| | |_| |   <  __/\n"
+                + " |____/ \\__,_|_|\\_\\___|\n\n";
+        String greeting = logo + " Hello! I'm Duke\n" + " What can I do for you?";
+        printWithDashes(greeting);
     }
 
     /**
@@ -46,16 +50,11 @@ public class Ui {
     }
 
     /**
-     * Print welcome message.
+     * Print dashes.
      */
-    public void showWelcome() {
-        String logo = "  ____        _        \n"
-                + " |  _ \\ _   _| | _____ \n"
-                + " | | | | | | | |/ / _ \\\n"
-                + " | |_| | |_| |   <  __/\n"
-                + " |____/ \\__,_|_|\\_\\___|\n\n";
-        String greeting = logo + " Hello! I'm Duke\n" + " What can I do for you?";
-        printWithDashes(greeting);
+    private void printDashes() {
+        int length = 60;
+        System.out.println("_".repeat(length));
     }
 
     /**
@@ -80,6 +79,16 @@ public class Ui {
     }
 
     /**
+     * Print list.
+     *
+     * @param tasks the tasks.
+     */
+    public void printList(Tasks tasks) {
+        StringBuilder builder = new StringBuilder(" Here are the tasks in your list:\n");
+        printWithDashes(printListItems(builder, tasks.getTasks()).toString());
+    }
+
+    /**
      * Returns list items to be printed.
      *
      * @param builder the string builder.
@@ -91,16 +100,6 @@ public class Ui {
             builder.append(String.format(" %s. %s\n", i + 1, list.get(i)));
         }
         return builder;
-    }
-
-    /**
-     * Print list.
-     *
-     * @param tasks the tasks.
-     */
-    public void printList(Tasks tasks) {
-        StringBuilder builder = new StringBuilder(" Here are the tasks in your list:\n");
-        printWithDashes(printListItems(builder, tasks.getTasks()).toString());
     }
 
     /**
@@ -154,7 +153,7 @@ public class Ui {
      */
     public String readCommand() {
         if (this.scanner.hasNextLine()) {
-            return this.scanner.nextLine(); 
+            return this.scanner.nextLine();
         } else {
             this.scanner.close();
             return "bye";

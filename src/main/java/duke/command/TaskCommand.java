@@ -1,21 +1,17 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
-import duke.task.Tasks;
 import duke.Ui;
 import duke.exception.SaveTaskFailedException;
 import duke.task.Task;
-
-import java.io.IOException;
+import duke.task.Tasks;
 
 /**
  * The Task command adds a task.
  */
 public class TaskCommand extends Command {
-    /**
-     * The Command type.
-     */
-    private final CommandType commandType;
     /**
      * The Task to be added.
      */
@@ -28,7 +24,7 @@ public class TaskCommand extends Command {
      */
     public TaskCommand(Task task) {
         this.commandType = CommandType.TASK;
-        this.task = task;    
+        this.task = task;
     }
 
     /**
@@ -39,7 +35,7 @@ public class TaskCommand extends Command {
      * @param storage loads and save tasks.
      * @throws SaveTaskFailedException If the task cannot be saved.
      */
-    public void execute(Tasks tasks, Ui ui, Storage storage) throws SaveTaskFailedException {        
+    public void execute(Tasks tasks, Ui ui, Storage storage) throws SaveTaskFailedException {
         tasks.addTask(this.task);
         try {
             storage.addTask(task);

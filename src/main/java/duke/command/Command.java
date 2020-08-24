@@ -12,7 +12,7 @@ public abstract class Command {
     /**
      * The Command type.
      */
-    private CommandType commandType;
+    protected CommandType commandType;
 
     /**
      * True if program should terminate, false otherwise.

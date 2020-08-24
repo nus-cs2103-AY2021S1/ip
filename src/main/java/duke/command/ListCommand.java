@@ -1,18 +1,13 @@
 package duke.command;
 
 import duke.Storage;
-import duke.task.Tasks;
 import duke.Ui;
+import duke.task.Tasks;
 
 /**
  * The List command prints the task list.
  */
 public class ListCommand extends Command {
-    /**
-     * The Command type.
-     */
-    private final CommandType commandType;
-
     /**
      * Instantiates a new List command.
      */
