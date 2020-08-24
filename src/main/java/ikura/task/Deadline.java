@@ -1,9 +1,13 @@
 // Deadline.java
 // Copyright (c) 2020, zhiayang, Apache License 2.0.
 
+package ikura.task;
+
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import ikura.util.InvalidInputException;
 
 public class Deadline extends Task {
 

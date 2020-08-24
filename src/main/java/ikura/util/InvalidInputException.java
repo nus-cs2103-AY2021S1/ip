@@ -1,6 +1,8 @@
 // InvalidInputException.java
 // Copyright (c) 2020, zhiayang, Apache License 2.0.
 
+package ikura.util;
+
 public class InvalidInputException extends Exception {
 
 	private final String usage;

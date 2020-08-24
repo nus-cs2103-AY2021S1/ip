@@ -1,12 +1,17 @@
 // TaskList.java
 // Copyright (c) 2020, zhiayang, Apache License 2.0.
 
+package ikura;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import java.io.IOException;
+
+import ikura.task.Task;
+import ikura.util.InvalidDatabaseException;
 
 public class TaskList {
 
@@ -43,6 +48,14 @@ public class TaskList {
 
     public Stream<Task> stream() {
         return this.tasks.stream();
+    }
+
+    public long getNumPendingTasks() {
+        return this.tasks.stream().filter(x -> !x.isDone()).count();
+    }
+
+    public long getNumCompletedTasks() {
+        return this.tasks.stream().filter(x -> x.isDone()).count();
     }
 
     public void addTask(Task task) {

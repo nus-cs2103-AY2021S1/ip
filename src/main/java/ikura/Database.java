@@ -1,6 +1,8 @@
 // Database.java
 // Copyright (c) 2020, zhiayang, Apache License 2.0.
 
+package ikura;
+
 import java.util.List;
 import java.util.Optional;
 import java.nio.file.Path;
@@ -11,6 +13,16 @@ import java.util.stream.Stream;
 import java.util.stream.Collectors;
 import java.util.function.Function;
 import java.time.format.DateTimeFormatter;
+
+import ikura.task.Task;
+import ikura.task.Todo;
+import ikura.task.Event;
+import ikura.task.Deadline;
+import ikura.task.DatedTask;
+
+import ikura.util.Either;
+import ikura.util.InvalidInputException;
+import ikura.util.InvalidDatabaseException;
 
 public class Database {
 

@@ -1,6 +1,8 @@
 // Bot.java
 // Copyright (c) 2020, zhiayang, Apache License 2.0.
 
+package ikura;
+
 import java.util.Map;
 import java.util.List;
 import java.util.Arrays;
@@ -13,6 +15,15 @@ import java.util.function.BiConsumer;
 
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
+
+import ikura.task.Task;
+import ikura.task.Todo;
+import ikura.task.Event;
+import ikura.task.Deadline;
+
+import ikura.util.Pair;
+import ikura.util.StreamUtils;
+import ikura.util.InvalidInputException;
 
 public class Bot {
 
@@ -83,11 +94,9 @@ public class Bot {
 
         this.printTaskStatistics();
 
-        // TODO: write a Stream.zip to get rid of this monstrosity
-        Stream.iterate(1, x -> x + 1)
-            // TODO: don't force unwrap
-            .map(i -> String.format("  %d. %s", i, this.tasks.getTaskByNumber(i).get()))
-            .limit(this.tasks.count())
+        StreamUtils.indexed(this.tasks.stream())
+            .map(p -> p.mapFst(x -> x + 1))             // convert to 1-indexed for printing
+            .map(t -> String.format("  %d. %s", t.fst(), t.snd()))
             .forEach(x -> this.ui.println("%s", x));
     }
 
@@ -185,8 +194,8 @@ public class Bot {
 
     private void printTaskStatistics() {
 
-        var doneTasks = this.tasks.stream().filter(x -> x.isDone()).count();
-        var pendingTasks = this.tasks.count() - doneTasks;
+        var doneTasks = this.tasks.getNumCompletedTasks();
+        var pendingTasks = this.tasks.getNumPendingTasks();
 
         this.ui.println("currently tracking %d task%s (%d pending, %d done, %.1f%% complete)",
             this.tasks.count(), this.tasks.count() == 1 ? "" : "s", pendingTasks, doneTasks,

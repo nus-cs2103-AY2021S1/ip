@@ -4,6 +4,11 @@
 import java.util.Scanner;
 import java.io.IOException;
 
+import ikura.Bot;
+import ikura.Frontend;
+import ikura.Database;
+import ikura.TaskList;
+
 public class Main {
 
     private static final String BOT_NAME  = "ikurabowl";

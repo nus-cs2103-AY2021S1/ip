@@ -1,6 +1,8 @@
 // Either.java
 // Copyright (c) 2020, zhiayang, Apache License 2.0.
 
+package ikura.util;
+
 import java.util.Optional;
 
 public class Either<L, R> {
