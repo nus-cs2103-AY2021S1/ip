@@ -15,7 +15,6 @@ public class Event extends Task {
     public Event(String description, String dueDate) {
         this.description = description;
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        System.out.println(dueDate);
         this.dueDate = LocalDateTime.parse(dueDate, dateFormat);
     }
 
