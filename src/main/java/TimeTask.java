@@ -12,7 +12,6 @@ public abstract class TimeTask extends Task {
         } catch (DateTimeParseException e) {
             throw new DukeException(DukeException.Errors.DATE_PARSE_ERROR);
         }
-
     }
 
     protected String dateString() {

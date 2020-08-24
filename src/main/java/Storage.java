@@ -30,19 +30,23 @@ public class Storage {
             Task task;
             String description = elemObject.get("description").getAsString();
             String taskType = elemObject.get("taskType").getAsString();
-            String time = elemObject.get("time") == null ? null : elemObject.get("time").getAsString();
-            switch (taskType) {
-            case "T":
-                task = new Todo(description);
-                break;
-            case "E":
-                task = new Event(description, time);
-                break;
-            case "D":
-                task = new Deadline(description, time);
-                break;
-            default:
-                throw new JsonParseException("Invalid task type.");
+            String time = parseDate(elemObject.get("date"));
+            try {
+                switch (taskType) {
+                case "T":
+                    task = new Todo(description);
+                    break;
+                case "E":
+                    task = new Event(description, time);
+                    break;
+                case "D":
+                    task = new Deadline(description, time);
+                    break;
+                default:
+                    throw new JsonParseException("Invalid task type.");
+                }
+            } catch (DukeException e) {
+                throw new JsonParseException("Invalid date format.");
             }
             if (elemObject.get("isDone").getAsBoolean()) {
                 task.markAsDone();
@@ -51,6 +55,18 @@ public class Storage {
         }
         return new TaskList(tasks);
     };
+    private static String parseDate(JsonElement elem) throws JsonParseException {
+        if (elem == null) return null;
+        JsonObject obj = elem.getAsJsonObject();
+        try {
+            int year = obj.get("year").getAsInt();
+            int month = obj.get("month").getAsInt();
+            int date = obj.get("day").getAsInt();
+            return String.format("%04d-%02d-%02d", year, month, date);
+        } catch (NullPointerException e) {
+            throw new JsonParseException("Invalid date format.");
+        }
+    }
 
     static {
         gsonBuilder.registerTypeAdapter(TaskList.class, taskListSerializer);
