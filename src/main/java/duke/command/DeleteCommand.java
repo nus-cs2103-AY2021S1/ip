@@ -23,4 +23,8 @@ public class DeleteCommand extends Command {
             throw e;
         }
     }
+
+    public int getTaskNumber() {
+        return taskNumber;
+    }
 }

@@ -8,11 +8,11 @@ import java.util.List;
 public class TaskList {
     private ArrayList<Task> tasks;
 
-    protected TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
-    protected TaskList() {
+    public TaskList() {
         tasks = new ArrayList<>();
     }
 

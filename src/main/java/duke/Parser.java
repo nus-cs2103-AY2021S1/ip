@@ -14,7 +14,7 @@ public class Parser {
     private static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    protected Parser() {
+    public Parser() {
     }
 
     public Command parse(String userInput) throws DukeException {

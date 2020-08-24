@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Ui {
 
     Scanner scanner;
-    protected Ui() {
+    public Ui() {
         scanner = new Scanner(System.in);
     }
 
