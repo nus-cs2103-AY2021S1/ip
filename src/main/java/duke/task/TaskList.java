@@ -57,4 +57,15 @@ public class TaskList {
         }
         return tasks.toString();
     }
+
+    public List<NumberedTask> getMatchingTasks(String keyword) {
+        List<NumberedTask> result = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currentTask = taskList.get(i);
+            if (currentTask.toString().contains(keyword)) {
+                result.add(new NumberedTask(i + 1, currentTask));
+            }
+        }
+        return result;
+    }
 }
