@@ -5,6 +5,11 @@ import java.util.List;
 public class TaskList {
     private ArrayList<Task> taskList = new ArrayList<>();
 
+    public Task addTask(Task task) {
+        taskList.add(task);
+        return task;
+    }
+
     public Task addTodo(String args) throws TaskException {
         Todo todo = new Todo(args);
         taskList.add(todo);
@@ -33,7 +38,7 @@ public class TaskList {
 
     public Task completeTask(String index) throws InvalidTaskIndexException {
         try {
-            int intIndex = Integer.parseInt(index);
+            int intIndex = Integer.parseInt(index) - 1;
             return completeTask(intIndex);
         } catch (NumberFormatException e) {
             throw new InvalidTaskIndexException("Invalid task index");
@@ -50,7 +55,7 @@ public class TaskList {
 
     public Task deleteTask(String index) throws InvalidTaskIndexException {
         try {
-            int intIndex = Integer.parseInt(index);
+            int intIndex = Integer.parseInt(index) - 1;
             return deleteTask(intIndex);
         } catch (NumberFormatException e) {
             throw new InvalidTaskIndexException("Invalid task index");

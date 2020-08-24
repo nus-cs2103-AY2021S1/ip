@@ -49,13 +49,13 @@ public class Storage {
                 String taskStorageLine = TaskType.getStorageLine(line, taskType);
                 switch (taskType) {
                 case DEADLINE:
-                    Deadline.parseStorageString(taskStorageLine);
+                    taskList.addTask(Deadline.parseStorageString(taskStorageLine));
                     break;
                 case EVENT:
-                    Event.parseStorageString(taskStorageLine);
+                    taskList.addTask(Event.parseStorageString(taskStorageLine));
                     break;
                 case TODO:
-                    Todo.parseStorageString(taskStorageLine);
+                    taskList.addTask(Todo.parseStorageString(taskStorageLine));
                     break;
                 }
             }

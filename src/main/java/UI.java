@@ -17,7 +17,9 @@ public class UI {
     }
 
     public void showHelloMessage() {
+        showLine();
         System.out.println(HELLO_MESSAGE);
+        showLine();
     }
 
     public void showExitMessage() {
@@ -41,7 +43,11 @@ public class UI {
         }
     }
 
-    public void closeUI() {
+    public void printResult(String message) {
+        System.out.println(message);
+    }
+
+    public void closeScanner() {
         scanner.close();
     }
 }

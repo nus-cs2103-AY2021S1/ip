@@ -7,16 +7,14 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Storage storage) throws TaskException, StorageException {
+    public String execute(TaskList taskList, Storage storage) {
         StringBuilder string = new StringBuilder();
-        boolean isFirst = true;
         List<Task> list = taskList.getTaskList();
-        for (Task task : list) {
-            if (isFirst) {
-                string.append(task.toString());
-            } else {
-                string.append("\n").append(task.toString());
+        for (int i = 0; i < list.size(); i++) {
+            if (i != 0) {
+                string.append("\n");
             }
+            string.append((i + 1) + ". ").append(list.get(i).toString());
         }
         return string.toString();
     }

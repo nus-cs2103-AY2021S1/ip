@@ -8,6 +8,6 @@ public class DeleteCommand extends Command {
     public String execute(TaskList taskList, Storage storage) throws InvalidTaskIndexException, StorageException {
         Task deletedTask = taskList.deleteTask(args);
         storage.save(taskList);
-        return deletedTask.toString();
+        return "Alright! Deleting this:\n" + args + ". " + deletedTask.toString();
     }
 }

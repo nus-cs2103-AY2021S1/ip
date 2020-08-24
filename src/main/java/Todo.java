@@ -1,8 +1,4 @@
 public class Todo extends Task {
-    public static final String STORE_TODO = "T";
-
-    private static final String DELIMITER_STORAGE = " //| ";
-
     public Todo(String description) throws TaskException {
         super(description);
     }

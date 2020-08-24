@@ -22,6 +22,6 @@ public class AddCommand extends Command {
             break;
         }
         storage.save(taskList);
-        return newTask.toString();
+        return "Alright! Adding one more item:\n" + newTask.toString();
     }
 }

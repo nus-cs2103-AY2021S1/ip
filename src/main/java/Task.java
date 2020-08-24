@@ -7,6 +7,7 @@ public abstract class Task {
     public static final String STORE_COMPLETED = COMPLETE;
     public static final String STORE_INCOMPLETE = NOT_COMPLETE;
 
+    protected static final String DELIMITER_STORAGE = " :: ";
     protected static final DateTimeFormatter DISPLAY_FORMAT = DateTimeFormatter.ofPattern("dd MMM YY HH:mm");
     protected static final DateTimeFormatter READER_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 

@@ -1,10 +1,7 @@
 import java.time.LocalDateTime;
 
 public class Event extends Task {
-    public static final String STORE_EVENT = "E";
-
     private static final String DELIMITER_COMMAND = " /at ";
-    private static final String DELIMITER_STORAGE = " //| ";
 
     private LocalDateTime dateInfo;
 

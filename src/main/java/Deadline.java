@@ -1,10 +1,7 @@
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
-    public static final String STORE_DEADLINE = "D";
-
     private static final String DELIMITER_COMMAND = " /by ";
-    private static final String DELIMITER_STORAGE = " //| ";
 
     private LocalDateTime deadline;
 

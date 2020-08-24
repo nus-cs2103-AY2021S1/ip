@@ -3,7 +3,7 @@ public enum TaskType {
     EVENT("ID_E"),
     TODO("ID_T");
 
-    private static final String IDENTIFIER_DELIMITER = " \\| ";
+    private static final String IDENTIFIER_DELIMITER = " :: ";
 
     private final String id;
 
@@ -18,23 +18,22 @@ public enum TaskType {
     public static TaskType decodeTaskType(String storageString) throws TaskTypeDecodeException {
         try {
             String identifier = storageString.split(IDENTIFIER_DELIMITER)[0];
-            switch (identifier) {
-            case Deadline.STORE_DEADLINE:
+            if (identifier.equals(TaskType.DEADLINE.id)) {
                 return TaskType.DEADLINE;
-            case Event.STORE_EVENT:
+            } else if (identifier.equals(TaskType.EVENT.id)) {
                 return TaskType.EVENT;
-            case Todo.STORE_TODO:
+            } else if (identifier.equals(TaskType.TODO.id)) {
                 return TaskType.TODO;
-            default:
+            } else {
                 throw new TaskTypeDecodeException("Unknown task type");
             }
         } catch (IndexOutOfBoundsException e) {
-             throw new TaskTypeDecodeException("Invalid storage string.");
+            throw new TaskTypeDecodeException("Invalid storage string.");
         }
     }
 
     public static String getStorageLine(String input, TaskType tasktype) throws TaskTypeDecodeException {
-        int start = tasktype.toString().length() + IDENTIFIER_DELIMITER.length();
+        int start = tasktype.id.length() + IDENTIFIER_DELIMITER.length();
         try {
             StringBuilder string = new StringBuilder();
             for (int i = start; i < input.length(); i++) {
