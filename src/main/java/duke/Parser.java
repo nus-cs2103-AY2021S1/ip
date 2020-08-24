@@ -10,6 +10,7 @@ public class Parser {
     private static final String DELETE = "delete";
     private static final String DONE = "done";
     private static final String EVENT = "event";
+    private static final String FIND = "find";
     private static final String LIST = "list";
     private static final String TODO = "todo";
 
@@ -37,6 +38,9 @@ public class Parser {
         if (commandWordArray[0].equals(TODO) || commandWordArray[0].equals(DEADLINE)
                 || commandWordArray[0].equals(EVENT)) {
             return new AddCommand(commandWordArray[0], command.substring(commandWordArray[0].length() + 1));
+        }
+        if (commandWordArray[0].equals(FIND)) {
+            return new FindCommand(commandWordArray[0], commandWordArray[1]);
         }
         return new UnknownCommand(command);
     }
