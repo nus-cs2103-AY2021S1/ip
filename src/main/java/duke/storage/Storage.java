@@ -19,6 +19,16 @@ public class Storage {
 
     public Storage(String filePath) {
         Storage.filePath = filePath;
+        try {
+
+            // returns pathnames for files and directory
+            File f = new File(filePath);
+            f.getParentFile().mkdir();
+            f.createNewFile();
+        } catch(Exception e) {
+            // if any error occurs
+            e.printStackTrace();
+        }
     }
 
     public static void writeToFile(ArrayList<Task> toDoList) throws IOException {
