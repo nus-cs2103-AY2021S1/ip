@@ -8,8 +8,9 @@ public class DataStorage {
     public static void init() throws DukeException{
         commandInit.add(new Bye());
         commandInit.add(new Clear());
-        commandInit.add(new Done(new String[]{"",""}));
         commandInit.add(new Deadline("init","by","startOfEpoch"));
+        commandInit.add(new Delete(new String[]{"",""}));
+        commandInit.add(new Done(new String[]{"",""}));
         commandInit.add(new Event("init","on","startOfEpoch"));
         commandInit.add(new Help(new String[]{"help"}));
         commandInit.add(new Ls());

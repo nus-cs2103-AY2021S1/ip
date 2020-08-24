@@ -24,11 +24,14 @@ public class DataStorageInterface {
         return curr;
     }
 
+    public static Task remove(int index){
+        return DataStorage.taskList.remove(index);
+    }
+
     public static int getSize(){
         return DataStorage.taskList.size();
     }
 
-    //TODO: make a method called getAmountNotDone to get the number of tasks not yet finished for the markedAsDone method in Done class
     public static int getTasksNotDone(){
         int counter = 0;
         for(Task t:DataStorage.taskList){
@@ -72,7 +75,7 @@ public class DataStorageInterface {
             i++;
             acc.append(String.format("%d. %s\n", i, t));
         }
-        return acc.toString();
+        return acc.toString().isEmpty()?"There are no Tasks in the list":acc.toString();
     }
 
     //TODO: Possibly requires a newline char

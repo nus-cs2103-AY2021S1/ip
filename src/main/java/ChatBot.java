@@ -32,15 +32,30 @@ public class ChatBot {
                 Bye bye = new Bye();
                 bye.endBot();
                 return bye.response();
-            case "help":
-                Help help = new Help(splitQuery);
-                return help.response();
-            case "done":
-                Done done = new Done(cRemoved);
-                return done.markedAsDone(splitQuery[1]);
             case "clear":
                 Clear clear = new Clear();
                 return clear.response();
+            case "deadline":
+                String title = getTitle(cRemoved);
+                String preposition = getPreposition(cRemoved);
+                String dateTime = getDateTime(cRemoved);
+                Task deadline = DataStorageInterface.addDeadline(title,preposition,dateTime);
+                return DataStorageInterface.taskAdded(deadline);
+            case "delete":
+                Delete delete = new Delete(cRemoved);
+                return delete.deleteTask(splitQuery[1]);
+            case "done":
+                Done done = new Done(cRemoved);
+                return done.markedAsDone(splitQuery[1]);
+            case "event":
+                String ttle = getTitle(cRemoved);
+                String ppstn = getPreposition(cRemoved);
+                String dT = getDateTime(cRemoved);
+                Task event = DataStorageInterface.addEvent(ttle,ppstn,dT);
+                return DataStorageInterface.taskAdded(event);
+            case "help":
+                Help help = new Help(splitQuery);
+                return help.response();
             case "list":
                 Ls ls = new Ls();
                 return ls.response();
@@ -48,18 +63,6 @@ public class ChatBot {
                 String editedQ = concatenateStrArr(cRemoved);
                 Task toDo = DataStorageInterface.addToDo(editedQ);
                 return DataStorageInterface.taskAdded(toDo);
-            case "deadline":
-                String title = getTitle(cRemoved);
-                String preposition = getPreposition(cRemoved);
-                String dateTime = getDateTime(cRemoved);
-                Task deadline = DataStorageInterface.addDeadline(title,preposition,dateTime);
-                return DataStorageInterface.taskAdded(deadline);
-            case "event":
-                String ttle = getTitle(cRemoved);
-                String ppstn = getPreposition(cRemoved);
-                String dT = getDateTime(cRemoved);
-                Task event = DataStorageInterface.addEvent(ttle,ppstn,dT);
-                return DataStorageInterface.taskAdded(event);
             default:
                 throw new UnknownCommandException(command);
         }
