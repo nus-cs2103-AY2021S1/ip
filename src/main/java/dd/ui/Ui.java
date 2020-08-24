@@ -1,8 +1,10 @@
+package ui;
+
 import java.util.Scanner;
 
 public class Ui {
 
-    private Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
 
     public void greeting() {
         String logo = " ____   ____\n"
@@ -16,6 +18,10 @@ public class Ui {
 
     public void printLine() {
         System.out.println("_________________________________________");
+    }
+
+    public void printTasksSize(int taskSize) {
+        System.out.println("You now have " + taskSize + " task(s) in your list!");
     }
 
     public String readInput() {
