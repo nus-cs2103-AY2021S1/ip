@@ -15,9 +15,9 @@ IF ERRORLEVEL 1 (
 REM no error here, errorlevel == 0
 
 REM run the program, feed commands from the input files and redirect the output to the ACTUAL.TXT
-java -classpath ..\bin Viscount < input1.txt >> ACTUAL.TXT
-java -classpath ..\bin Viscount < input2.txt >> ACTUAL.TXT
-java -classpath ..\bin Viscount < input3.txt >> ACTUAL.TXT
+java -classpath ..\bin viscount.Viscount < input1.txt >> ACTUAL.TXT
+java -classpath ..\bin viscount.Viscount < input2.txt >> ACTUAL.TXT
+java -classpath ..\bin viscount.Viscount < input3.txt >> ACTUAL.TXT
 
 REM delete data afterwards
 del data\viscount.txt

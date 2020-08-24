@@ -13,16 +13,16 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java
+if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/viscount/*.java ../src/main/java/viscount/command/*.java ../src/main/java/viscount/exception/*.java ../src/main/java/viscount/task/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
 fi
 
 # run the program, feed commands from input files and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Viscount < input1.txt >> ACTUAL.TXT
-java -classpath ../bin Viscount < input2.txt >> ACTUAL.TXT
-java -classpath ../bin Viscount < input3.txt >> ACTUAL.TXT
+java -classpath ../bin viscount.Viscount < input1.txt >> ACTUAL.TXT
+java -classpath ../bin viscount.Viscount < input2.txt >> ACTUAL.TXT
+java -classpath ../bin viscount.Viscount < input3.txt >> ACTUAL.TXT
 
 # delete data afterwards
 if [ -e "data/viscount.txt" ]

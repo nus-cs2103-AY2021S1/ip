@@ -1,4 +1,6 @@
-import java.io.IOException;
+package viscount;
+
+import viscount.task.Task;
 
 import java.util.List;
 import java.util.Scanner;
@@ -21,7 +23,7 @@ public class Ui {
     
     public void showWelcome() {
         System.out.println(Ui.VISCOUNT_LOGO);
-        speak("Good day to you! I'm Viscount.\nWhat can I do for you on this blessed day?");
+        speak("Good day to you! I'm viscount.Viscount.\nWhat can I do for you on this blessed day?");
     }
     
     public void showExit() {
@@ -29,7 +31,7 @@ public class Ui {
     }
     
     public void showErrorExit() {
-        System.out.println(">> Viscount shutting down.");
+        System.out.println(">> viscount.Viscount shutting down.");
     }
     
     public String readInput() {

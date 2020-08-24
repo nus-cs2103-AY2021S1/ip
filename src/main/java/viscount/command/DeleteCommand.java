@@ -1,3 +1,9 @@
+package viscount.command;
+
+import viscount.*;
+import viscount.exception.ViscountException;
+import viscount.task.Task;
+
 public class DeleteCommand extends Command {
     private int taskIndex;
 

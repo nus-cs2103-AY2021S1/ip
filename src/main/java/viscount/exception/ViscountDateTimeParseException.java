@@ -1,3 +1,5 @@
+package viscount.exception;
+
 public class ViscountDateTimeParseException extends ViscountException {
     private static final String DATE_ERROR_MESSAGE = "Alas, I do not understand. Please format your %s\n"
             + "in this format: dd-MM-yyyy\n"

@@ -1,3 +1,9 @@
+package viscount.command;
+
+import viscount.*;
+import viscount.task.*;
+import viscount.exception.ViscountException;
+
 import java.time.LocalDateTime;
 
 public class AddCommand extends Command {

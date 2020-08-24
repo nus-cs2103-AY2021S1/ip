@@ -1,3 +1,7 @@
+package viscount.task;
+
+import viscount.Parser;
+
 import java.time.LocalDateTime;
 
 public class Event extends Task {
