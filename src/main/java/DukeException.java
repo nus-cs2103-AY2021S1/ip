@@ -10,7 +10,9 @@ public class DukeException extends Exception {
         DONE_OUT_OF_RANGE("sir that number is too many for the list sir please\n"
                 + "choose a lower number for the list please sir"),
         DELETE_OUT_OF_RANGE("sir that number is too many for the list sir please\n"
-                + "choose a lower number for the list please sir");
+                + "choose a lower number for the list please sir"),
+        FILE_READ_ERROR("sir there is some error in read file i make new list ok?"),
+        FILE_WRITE_ERROR("sir there is some error in write file, oopsies!");
 
         private final String message;
         Errors(String message) {
