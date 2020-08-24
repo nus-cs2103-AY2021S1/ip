@@ -36,12 +36,7 @@ public class ListCommand extends Command {
 
     private void handleDisplay() {
         TaskList list = duke.getTasks();
-        if (list.size() == 0) {
-            System.out.println(TextFormatter.getFormattedText(
-                    Message.ERR_NO_TASK_IN_LIST.toString()));
-        } else {
-            displayTasks(list);
-        }
+        displayTasks(list);
     }
 
     private void handleDisplay(String date) {
@@ -50,12 +45,7 @@ public class ListCommand extends Command {
                 .range(0, list.size())
                 .filter(x -> list.get(x).isSameTime(date))
                 .toArray();
-        if (indexes.length == 0) {
-            System.out.println(TextFormatter.getFormattedText(
-                    Message.ERR_NO_MATCHING_TASK.toString()));
-        } else {
-            Ui.displayTasks(list, indexes, date);
-        }
+        Ui.displayTasks(list, indexes, date);
     }
 
     public void displayTasks(TaskList list) {
