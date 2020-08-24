@@ -9,6 +9,11 @@ public class Deadline extends Task{
         this.deadline = deadline;
     }
 
+    /**
+     * Returns the description of the task and its completion in a string.
+     *
+     * @return Description of task in a String.
+     */
     @Override
     public String stringify(){
         if(this.complete == true) {

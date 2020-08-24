@@ -6,6 +6,11 @@ public class toDo extends Task{
         super(task, complete);
     }
 
+    /**
+     * Returns the description of the task and its completion in a string.
+     *
+     * @return Description of task in a String.
+     */
     @Override
     public String stringify(){
         if(this.complete == true) {

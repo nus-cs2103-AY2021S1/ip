@@ -19,6 +19,12 @@ public class Storage {
         readTasks();
     }
 
+    /**
+     * Reads duke.txt for any pre-logged task list and appends the tasks inside to the current Task List.
+     * Creates a duke.txt file if it is not found in the directory.
+     *
+     * @throws IOException when file is unreadable.
+     */
     public void readTasks(){
         BufferedReader objReader = null;
         try {
@@ -66,6 +72,12 @@ public class Storage {
             }
         }
     }
+
+    /**
+     * Saves all the tasks in the Task List when program ends(ie. when the user input is 'bye').
+     *
+     * @param arr Current task list.
+     */
     public void saveTasks(ArrayList<Task> arr){
         try {
             // Creates a FileWriter
