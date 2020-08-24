@@ -1,7 +1,9 @@
 package taskbot.main;
 
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+import taskbot.exceptions.InvalidDateTimeException;
 import taskbot.logic.Taskbot;
 
 import taskbot.exceptions.EmptyArgumentException;
@@ -21,7 +23,7 @@ public class Main {
     public enum Command {
         LIST, DONE, NONE,
         TODO, DEADLINE, EVENT,
-        EXIT, DELETE
+        EXIT, DELETE, UPCOMING
     }
 
     public static void main(String[] args) throws Exception {
@@ -64,46 +66,57 @@ public class Main {
 
                 //instructs the bot given the command, throwing the required exceptions when necessary
                 switch (cmd) {
-                    case LIST:
-                        taskList.listTasks();
-                        break;
-                    case DONE:
-                        if (key.length == 1 || key[1].strip().length() == 0) {
-                            throw new EmptyArgumentException("Please enter the index of the task you wish to complete.");
-                        }
-                        taskIndex = Integer.parseInt(key[1]) - 1;
-                        taskList.completeTask(taskIndex);
-                        break;
-                    case DELETE:
-                        if (key.length == 1 || key[1].strip().length() == 0) {
-                            throw new EmptyArgumentException("Please enter the index of the task you wish to delete.");
-                        }
-                        taskIndex = Integer.parseInt(key[1]) - 1;
-                        taskList.deleteTask(taskIndex);
-                        break;
-                    case TODO:
-                        if (key.length == 1 || key[1].strip().length() == 0) {
-                            throw new EmptyArgumentException("The description of a todo cannot be empty. Please input a valid description.");
-                        }
-                        taskList.addTodoTask(key[1]);
-                        break;
-                    case EVENT:
-                        if (key.length == 1 || key[1].strip().length() == 0) {
-                            throw new EmptyArgumentException("The description of an event cannot be empty. Please input a valid description.");
-                        }
-                        taskList.addEventTask(key[1]);
-                        break;
-                    case DEADLINE:
-                        if (key.length == 1 || key[1].strip().length() == 0) {
-                            throw new EmptyArgumentException("The description of a deadline cannot be empty. Please input a valid description.");
-                        }
-                        taskList.addDeadlineTask(key[1]);
-                        break;
-                    case NONE:
-                        throw new InvalidCommandException("That was not a valid command. Please try again.");
-                    case EXIT:
-                        break label;
+                case LIST:
+                    taskList.listTasks();
+                    break;
+                case UPCOMING:
+                    if (key.length == 1 || key[1].strip().length() == 0) {
+                        throw new EmptyArgumentException("Please enter the number of days.");
+                    }
+                    try {
+                        taskList.getUpcoming(Integer.parseInt(key[1]));
+                    } catch (NumberFormatException e) {
+                        throw new InvalidCommandException("Please enter a valid digit for days.");
+                    }
+                    break;
+                case DONE:
+                    if (key.length == 1 || key[1].strip().length() == 0) {
+                        throw new EmptyArgumentException("Please enter the index of the task you wish to complete.");
+                    }
+                    taskIndex = Integer.parseInt(key[1]) - 1;
+                    taskList.completeTask(taskIndex);
+                    break;
+                case DELETE:
+                    if (key.length == 1 || key[1].strip().length() == 0) {
+                        throw new EmptyArgumentException("Please enter the index of the task you wish to delete.");
+                    }
+                    taskIndex = Integer.parseInt(key[1]) - 1;
+                    taskList.deleteTask(taskIndex);
+                    break;
+                case TODO:
+                    if (key.length == 1 || key[1].strip().length() == 0) {
+                        throw new EmptyArgumentException("The description of a todo cannot be empty. Please input a valid description.");
+                    }
+                    taskList.addTodoTask(key[1]);
+                    break;
+                case EVENT:
+                    if (key.length == 1 || key[1].strip().length() == 0) {
+                        throw new EmptyArgumentException("The description of an event cannot be empty. Please input a valid description.");
+                    }
+                    taskList.addEventTask(key[1]);
+                    break;
+                case DEADLINE:
+                    if (key.length == 1 || key[1].strip().length() == 0) {
+                        throw new EmptyArgumentException("The description of a deadline cannot be empty. Please input a valid description.");
+                    }
+                    taskList.addDeadlineTask(key[1]);
+                    break;
+                case NONE:
+                    throw new InvalidCommandException("That was not a valid command. Please try again.");
+                case EXIT:
+                    break label;
                 }
+
                 //Reset the cmd for the next user input
                 cmd = Command.NONE;
                 } catch (NumberFormatException e) {
@@ -111,6 +124,9 @@ public class Main {
                     handleException(wfe);
                 } catch (InvalidCommandException | EmptyArgumentException e) {
                     handleException(e);
+                } catch (DateTimeParseException dtpe) {
+                    InvalidDateTimeException idte = new InvalidDateTimeException("Invalid format for date and time.\nPlease use the following format (military time): YYYY-MM-DD HHmm");
+                    handleException(idte);
                 }
             }
 
@@ -125,22 +141,24 @@ public class Main {
      */
     public static Command getCommand(String input) {
         switch (input) {
-            case "bye":
-                return Command.EXIT;
-            case "list":
-                return Command.LIST;
-            case "done":
-                return Command.DONE;
-            case "todo":
-                return Command.TODO;
-            case "deadline":
-                return Command.DEADLINE;
-            case "event":
-                return Command.EVENT;
-            case "delete":
-                return Command.DELETE;
-            default:
-                return Command.NONE;
+        case "bye":
+            return Command.EXIT;
+        case "list":
+            return Command.LIST;
+        case "done":
+            return Command.DONE;
+        case "todo":
+            return Command.TODO;
+        case "deadline":
+            return Command.DEADLINE;
+        case "event":
+            return Command.EVENT;
+        case "delete":
+            return Command.DELETE;
+        case "upcoming":
+            return Command.UPCOMING;
+        default:
+            return Command.NONE;
         }
     }
 

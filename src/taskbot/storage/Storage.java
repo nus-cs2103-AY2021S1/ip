@@ -1,6 +1,8 @@
 package taskbot.storage;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import java.nio.file.Path;
@@ -99,7 +101,7 @@ public class Storage {
                 case "event":
                     isDone = bufferedReader.readLine().equals("1");
                     description = bufferedReader.readLine();
-                    String at = bufferedReader.readLine();
+                    LocalDateTime at = LocalDateTime.parse(bufferedReader.readLine());
                     //Creates the event
                     Event event = new Event(description, at, isDone);
                     //Adds the task to the list
@@ -108,7 +110,7 @@ public class Storage {
                 case "deadline":
                     isDone = bufferedReader.readLine().equals("1");
                     description = bufferedReader.readLine();
-                    String by = bufferedReader.readLine();
+                    LocalDateTime by = LocalDateTime.parse(bufferedReader.readLine());
                     //Creates the deadline
                     Deadline deadline = new Deadline(description, by, isDone);
                     //Adds the task to the list
@@ -155,7 +157,7 @@ public class Storage {
                     bufferedWriter.write(task.getTask());
                     bufferedWriter.newLine();
 
-                    bufferedWriter.write(((Event) task).getAt());
+                    bufferedWriter.write(((Event) task).getAt().toString());
                     bufferedWriter.newLine();
                 } else if (task instanceof Deadline) {
                     bufferedWriter.write("deadline");
@@ -167,7 +169,7 @@ public class Storage {
                     bufferedWriter.write(task.getTask());
                     bufferedWriter.newLine();
 
-                    bufferedWriter.write(((Deadline) task).getBy());
+                    bufferedWriter.write(((Deadline) task).getBy().toString());
                     bufferedWriter.newLine();
                 }
             }

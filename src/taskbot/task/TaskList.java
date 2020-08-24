@@ -5,6 +5,11 @@ import taskbot.exceptions.TaskAlreadyCompleteException;
 import taskbot.exceptions.WrongFormatException;
 import taskbot.storage.Storage;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import static taskbot.helper.Helper.borderString;
@@ -52,7 +57,7 @@ public class TaskList {
      * @param task The task to be added
      */
     public void addTodoTask(String task) {
-        //Makes a new taskbot.task.Todo task
+        //Makes a new todo task
         Todo newTask = new Todo(task);
         //Adds the new task to the list
         tasks.add(newTask);
@@ -67,7 +72,7 @@ public class TaskList {
      * Adds an event Task to the list
      * @param input The task to be added followed by time
      */
-    public void addEventTask(String input) {
+    public void addEventTask(String input) throws DateTimeParseException {
         try {
             //splits the input according to whitespace
             String[] parsedString = input.split("/at");
@@ -75,12 +80,16 @@ public class TaskList {
             if (parsedString.length != 2) {
                 throw new WrongFormatException("Wrong format for event. Please ensure that you provide a description and time, delimited by /at");
             }
+            LocalDateTime dateTime = parseDateTime(parsedString[1].stripLeading());
             //Makes a new Event task
-            Event newTask = new Event(parsedString[0], parsedString[1].stripLeading());
+            Event newTask = new Event(parsedString[0], dateTime);
+
             //Adds the new task to the list
             tasks.add(newTask);
+
             //Update the storage
             storage.setTasksList(tasks);
+
             //Informs the user that the task has been added
             borderString("I have added an Event:\n" + newTask +
                     "\n" + listTaskSize());
@@ -93,25 +102,38 @@ public class TaskList {
      * Adds a deadline Task to the list
      * @param input The task to be added followed by time
      */
-    public void addDeadlineTask(String input) {
+    public void addDeadlineTask(String input) throws DateTimeParseException {
         try {
             //splits the input according to whitespace
             String[] parsedString = input.split("/by");
             if (parsedString.length != 2) {
                 throw new WrongFormatException("Wrong format for deadline. Please ensure that you provide a description and time, delimited by /by");
             }
+
+            LocalDateTime dateTime = parseDateTime(parsedString[1].stripLeading());
             //Makes a new Deadline task
-            Deadline newTask = new Deadline(parsedString[0], parsedString[1].stripLeading());
+            Deadline newTask = new Deadline(parsedString[0], dateTime);
+
             //Adds the new task to the list
             tasks.add(newTask);
+
             //Update the storage
             storage.setTasksList(tasks);
+
             //Informs the user that the task has been added
             borderString("I have added a Deadline:\n" + newTask +
                     "\n" + listTaskSize());
         } catch (WrongFormatException e) {
             handleException(e);
         }
+    }
+    /**
+     * Checks if the given dateTime is valid.
+     * @param str Localized date and time.
+     */
+    public LocalDateTime parseDateTime(String str) throws DateTimeParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        return LocalDateTime.parse(str, formatter);
     }
 
     /**
@@ -165,5 +187,40 @@ public class TaskList {
             InvalidIndexException iie = new InvalidIndexException("You have specified an index not within the ranges of the list. Please try again.");
             handleException(iie);
         }
+    }
+
+    /**
+     * Lists the upcoming tasks.
+     * @param days Number of days ahead to check for tasks.
+     */
+    public void getUpcoming(int days) {
+        //If tasks is empty
+        if (tasks.size() == 0) {
+            borderString("You currently have no tasks pending.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder("These are the following task(s) to complete:\n");
+        //size of the tasks
+        int size = tasks.size();
+        //Threshold for time of tasks
+        LocalDateTime threshold = LocalDate.now().plusDays(days).atTime(LocalTime.MAX);
+        //Builds the list of tasks
+        for (int i = 0; i < size - 1; i++) {
+            Task task = tasks.get(i);
+            if (task instanceof Deadline) {
+                if (((Deadline) task).getBy().isAfter(threshold)) {
+                    continue;
+                }
+            } else if (task instanceof Event) {
+                if (((Event) task).getAt().isAfter(threshold)) {
+                    continue;
+                }
+            }
+            sb.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+        }
+        sb.append(size).append(". ").append(tasks.get(size - 1));
+        //Prints the string
+        borderString(sb.toString());
     }
 }
