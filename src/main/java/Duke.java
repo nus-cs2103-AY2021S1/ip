@@ -6,7 +6,7 @@ public class Duke {
     private Storage storage;
     public Duke() {
         try {
-            this.storage = new Storage("test.json");
+            this.storage = new Storage("duke.json");
             this.taskList = this.storage.load();
         } catch (DukeException e) {
             Util.systemMessage(e.getMessage());
