@@ -3,7 +3,7 @@
  */
 public abstract class Task {
 
-    private boolean done = false;
+    private boolean isDone = false;
 
     abstract protected String getTask();
 
@@ -11,14 +11,15 @@ public abstract class Task {
      * Marks the task object as done.
      */
     protected void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * Checks if the task is done.
      */
     protected boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
 }
+

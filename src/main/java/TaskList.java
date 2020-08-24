@@ -11,10 +11,10 @@ import java.util.Scanner;
  */
 public class TaskList {
 
-    private final List<Task> list = new ArrayList<>();
-    private final Storage storage;
-    private static final String doneErrorMessage = "OOPS!!! Please choose a valid task index to mark as done.\n";
-    private static final String deleteErrorMessage = "OOPS!!! Please choose a valid task index to delete.\n";
+    private List<Task> list = new ArrayList<>();
+    private Storage storage;
+    private static String doneErrorMessage = "OOPS!!! Please choose a valid task index to mark as done.\n";
+    private static String deleteErrorMessage = "OOPS!!! Please choose a valid task index to delete.\n";
 
     TaskList(Storage storage) throws FileNotFoundException, DukeException {
         this.storage = storage;

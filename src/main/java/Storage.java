@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private final String filePath;
+    private String filePath;
 
     protected Storage(String filePath) {
         this.filePath = filePath;
