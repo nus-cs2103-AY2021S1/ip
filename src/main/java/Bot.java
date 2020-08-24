@@ -73,7 +73,7 @@ public class Bot {
                 if (cmdLine.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                 }
-                split = command.substring(9).split("/by", 2);
+                split = command.substring(9).split("/by ", 2);
                 Task deadline = new Deadline(split[0], split[1]);
                 taskList.add(deadline);
                 printTask(deadline, Action.ADD);
@@ -83,7 +83,7 @@ public class Bot {
                 if (cmdLine.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
                 }
-                split = command.substring(6).split("/at", 2);
+                split = command.substring(6).split("/at ", 2);
                 Task event = new Event(split[0], split[1]);
                 taskList.add(event);
                 printTask(event, Action.ADD);
