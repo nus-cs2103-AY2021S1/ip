@@ -1,5 +1,4 @@
 import java.io.*;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
@@ -14,7 +13,7 @@ public class Tasks implements java.io.Serializable {
 
     public void addTask(Task task) {
         tasks.add(task);
-        Duke.print("added: " + task.toString() + numTasks());
+        UI.print("added: " + task.toString() + numTasks());
         store();
     }
 
@@ -24,11 +23,11 @@ public class Tasks implements java.io.Serializable {
     }
 
     public void print_tasks() {
-        System.out.print(Duke.LINE);
+        System.out.print(UI.LINE);
         for (int i = 0; i < tasks.size(); i++) {
             System.out.print((i + 1) + "." + tasks.get(i));
         }
-        System.out.print(Duke.LINE);
+        System.out.print(UI.LINE);
     }
 
     public Task get(int i) throws DukeException {

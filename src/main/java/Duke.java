@@ -1,30 +1,18 @@
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
-    final static String BYE = "aight imma head out\n";
-    final static String WELCOME = "Hello! I'm Duke\nWhat can I do for you?\n";
-    final static String LINE = "____________________________________________________________\n";
 
     public static void main(String[] args) throws DukeException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        print(WELCOME);
-//        Tasks tasks = new Tasks();
+        UI ui = new UI();
+        ui.welcome();
         Tasks tasks = Tasks.read();
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        String input = ui.getInput();
         while (!input.equals("bye")) {
             try {
                 if (input.isEmpty()) {
-                    input = scanner.nextLine();
+                    input = ui.getInput();
                     continue;
                 }
                 String[] words = input.split(" ");
@@ -42,10 +30,10 @@ public class Duke {
                         Task task = tasks.get(i);
                         if(command.equals("done")){
                             tasks.setDone(i, true);
-                            print("Nice! I've marked this task as done: \n" + task);
+                            UI.print("Nice! I've marked this task as done: \n" + task);
                         } else if(command.equals("delete")) {
                             tasks.remove(i);
-                            print("Noted. I've removed this task: \n" + task + tasks.numTasks());
+                            UI.print("Noted. I've removed this task: \n" + task + tasks.numTasks());
                         }
                         break;
                     case "todo":
@@ -88,31 +76,17 @@ public class Duke {
                             throw new DukeException(e.getMessage());
                         }
                         break;
-//                    case "serialize":
-//                        ObjectOutputStream out = null;
-//                        try {
-//                            out = new ObjectOutputStream(System.out);
-//                            out.writeObject(tasks);
-//                            out.close();
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
                     default:
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
 //                        break;
                 }
             } catch (DukeException e) {
-                print(e.getMessage() + "\n");
+                UI.print(e.getMessage() + "\n");
             }
 
-//            System.out.println(LINE + input + "\n" + LINE);
-            input = scanner.nextLine();
+            input = ui.getInput();
         }
-        print(BYE);
-    }
-
-    public static void print(String str) {
-        System.out.print(LINE + str + LINE);
+        ui.bye();
     }
 
 }
