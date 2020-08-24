@@ -6,6 +6,10 @@ import java.util.List;
 public class TaskList {
     private ArrayList<Task> taskList = new ArrayList<>();
 
+    public void clear(){
+        taskList.clear();
+    }
+
     public int size(){
         return taskList.size();
     }

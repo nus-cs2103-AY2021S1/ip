@@ -19,6 +19,9 @@ public class Parser {
         String reply;
         if (phrase.equals("list")){
             return UI.listTaskList(taskList);
+        } else if (phrase.equals("clear list")){
+            taskList.clear();
+            reply = UI.chatBox("I have cleared the list!");
         } else if((phrase.startsWith("done") && phraseLength == 4) || phrase.startsWith("done ")){
             String stringItem = phrase.substring(4).trim();
             try {
