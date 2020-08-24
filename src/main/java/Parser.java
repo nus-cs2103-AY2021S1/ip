@@ -15,6 +15,8 @@ public class Parser {
             return new AddEventCommand(command);
         } else if (command.contains("delete")) {
             return new DeleteCommand(command);
+        } else if (command.contains("find")) {
+            return new FindCommand(command);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
