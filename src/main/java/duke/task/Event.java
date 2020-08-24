@@ -4,8 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event extends Task {
+
     private Date time;
     private SimpleDateFormat formatter;
+
     public Event(String desc, Date time) {
         super(desc);
         this.time = time;
@@ -20,6 +22,6 @@ public class Event extends Task {
 
     @Override
     public String toFileString() {
-        return "E\n"+super.toFileString()+formatter.format(time) + "\n";
+        return "E\n" + super.toFileString() + formatter.format(time) + "\n";
     }
 }

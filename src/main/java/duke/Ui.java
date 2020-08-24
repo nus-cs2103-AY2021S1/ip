@@ -11,6 +11,7 @@ public class Ui {
     public Ui() {
         sc = new Scanner(System.in);
     }
+
     public void showLine() {
         System.out.println("------------");
     }

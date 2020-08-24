@@ -29,7 +29,8 @@ class DeadlineTest {
                             "do\n" +
                             "Sep 10 2012 07:00 PM\n",
                     new Deadline("do",
-                            new SimpleDateFormat("dd/MM/yyyy HHmm").parse("10/09/2012 1900")).toFileString());
+                            new SimpleDateFormat("dd/MM/yyyy HHmm").parse("10/09/2012 1900")).
+                            toFileString());
         } catch (ParseException e) {
             e.printStackTrace();
         }
