@@ -9,7 +9,15 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * class consisting of static methods which are used to make sense of the user commands
+ */
 public class Parser {
+    /**
+     * Removes the user requested task from the tasklist
+     * @param request A string containing the integer value of the index.
+     * @param list The tasklist object containing all the stored tasks.
+     */
     public static void delete(String request, TaskList list){
         try {
             int index = Integer.parseInt(request);
@@ -27,6 +35,12 @@ public class Parser {
                     "_____________________________");
         }
     }
+
+    /**
+     * Marks the task at the user requested index as done
+     * @param request A String containing the integer value of the index
+     * @param list The tasklist object containing all the stored tasks.
+     */
     public static void update(String request, TaskList list){
         try {
             int index = Integer.parseInt(request);
@@ -43,6 +57,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Adds a toDo object containing the description provided to the list of tasks
+     * @param request A String containing the description of the todo object that needs to be added
+     * @param list The tasklist object containing all the stored tasks.
+     */
+
     public static void addTodo(String request, TaskList list){
         try {
             ToDos todo = getTodo(request);
@@ -54,12 +74,24 @@ public class Parser {
         }
     }
 
+    /**
+     * Checking if the index provided by the user is of the right size
+     * @param n The index provided by the user
+     * @param list The tasklist object containing all the stored tasks.
+     * @throws InvalidNumberException
+     */
     public static void isNumeric(int n, TaskList list) throws InvalidNumberException{
         if (list.getSize() < n || n <= 0){
             throw new InvalidNumberException("The number provided is bigger tha the list size");
         }
     }
 
+    /**
+     * Adds a deadline object with description and datetime into the tasklist provided
+     * @param word The input provided by the user with the description of the deadline as well as the date and time
+     * @param list The tasklist object containing all the stored tasks.
+     * @throws InvalidDeadlineException
+     */
     public static void getDeadline(String word, TaskList list) throws InvalidDeadlineException {
         if (word.contains("/by") && !word.substring(word.indexOf("/by") + 3).equals("")){
             word = word.substring(8);
@@ -140,6 +172,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Adds an event object with description and datetime into the tasklist provided
+     * @param word The input provided by the user with the description of the event as well as the date and time
+     * @param list The tasklist object containing all the stored tasks.
+     * @throws InvalidEventException
+     */
     public static void getEvent(String word, TaskList list) throws InvalidEventException {
         if (word.contains("/at") && !word.substring(word.indexOf("/at") + 3).equals("")){
             word = word.substring(5);
@@ -181,6 +219,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if a command provided by the user is valid
+     * @param line The String input from the user
+     * @throws UnknownCommandException
+     */
     public static void validity(String line) throws UnknownCommandException {
         ArrayList<String> list = new ArrayList<>(Arrays.asList("delete", "done", "todo", "event", "deadline"));
         String[] words = line.split(" ");
@@ -191,6 +234,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Get the todo object from the user input
+     * @param work The String containing the description of the todo object
+     * @return A ToDos object
+     * @throws EmptyTodoException
+     */
     public static ToDos getTodo(String work) throws EmptyTodoException{
         if (work.length() > 4){
             return new ToDos(work.substring(4));

@@ -4,15 +4,25 @@ import exceptions.UnknownCommandException;
 
 import java.util.Scanner;
 
+/**
+ * The User Interface Object with a scanner and storage object that takes in and stores user input
+ */
 public class UI {
     Scanner sc;
     Storage storage;
 
+    /**
+     * Initializes a UI object with the ability to scan for user input and store it
+     * @param store
+     */
     public UI(Storage store) {
         this.storage = store;
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Prints a welcome message for the users
+     */
     public void welcome() {
         System.out.println("_____________________________");
         System.out.println("Hello! I'm Duke\n" +
@@ -20,6 +30,9 @@ public class UI {
         System.out.println("_____________________________");
     }
 
+    /**
+     * Takes in user input and uses regex to analyze it and then chooses a parser method to make sense of it
+     */
     public void run() {
         String input = sc.nextLine();
         TaskList list = storage.load();
@@ -66,6 +79,9 @@ public class UI {
         }
     }
 
+    /**
+     * Stores the resultant tasklist in a file and prints a simple goodbye message for the user
+     */
     public void escape(){
         storage.save();
         System.out.println("_____________________________");
