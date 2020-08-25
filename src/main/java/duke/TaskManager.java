@@ -1,5 +1,10 @@
+package duke;
+
 import java.util.List;
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
+import duke.task.Task;
 
 public class TaskManager {
 

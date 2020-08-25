@@ -1,3 +1,5 @@
+package duke.command;
+
 public abstract class AddCommand extends Command {
 
     protected final String description;
