@@ -23,6 +23,9 @@ public class Duke {
     // Scanner
     private final Scanner sc = new Scanner(System.in);
 
+    /**
+     * Runs the Duke bot.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
