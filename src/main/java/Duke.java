@@ -54,7 +54,7 @@ public class Duke {
             System.out.println("An error occurred while trying to read the tasklist save file!");
             e.printStackTrace();
         }
-        return result;
+        return result; 
     }
     public static Task getTask(String in) {
         String taskName;
