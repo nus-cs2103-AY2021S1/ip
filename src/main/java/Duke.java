@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
     static List<Task> list = new ArrayList<>();
+    static final String line = "--------------------------------------------------"; //50 dashes
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -12,6 +13,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        System.out.println(line);
         bot();
     }
 
@@ -80,6 +82,7 @@ public class Duke {
             System.out.println("added: " + newTask.toString());
             System.out.println("Now you have "+list.size()+" tasks in the list.");
         }
+        System.out.println(line);
 
     }
 
@@ -89,11 +92,13 @@ public class Duke {
         System.out.println(list.get(num-1).toString());
         list.remove(num-1);
         System.out.println("Now you have "+list.size()+" tasks in the list.");
+        System.out.println(line);
     }
 
     public static void done(int num){
         list.set(num-1, list.get(num-1).completedTask());
         System.out.println("Now you have "+list.size()+" tasks in the list.");
+        System.out.println(line);
     }
 
     public static void printList(){
@@ -102,6 +107,7 @@ public class Duke {
             System.out.println(tempIndex + "." + x.toString());
             tempIndex += 1;
         }
+        System.out.println(line);
     }
 
 
