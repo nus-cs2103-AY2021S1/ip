@@ -1,9 +1,9 @@
-package storages;
+package storage;
 
-import tasks.DeadlineTask;
-import tasks.EventTask;
-import tasks.Task;
-import tasks.ToDoTask;
+import task.DeadlineTask;
+import task.EventTask;
+import task.Task;
+import task.ToDoTask;
 
 import java.io.File;
 import java.io.FileNotFoundException;

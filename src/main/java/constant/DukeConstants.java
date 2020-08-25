@@ -1,4 +1,4 @@
-package constants;
+package constant;
 
 public class DukeConstants {
     public static final String LOGO = " ____        _        \n"

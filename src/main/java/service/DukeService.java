@@ -1,10 +1,10 @@
-package services;
+package service;
 
-import domains.DukeDomain;
-import tasks.DeadlineTask;
-import tasks.EventTask;
-import tasks.Task;
-import tasks.ToDoTask;
+import domain.DukeDomain;
+import task.DeadlineTask;
+import task.EventTask;
+import task.Task;
+import task.ToDoTask;
 
 public class DukeService {
 

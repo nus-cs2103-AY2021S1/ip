@@ -1,7 +1,7 @@
-package parsers;
+package parser;
 
-import commands.*;
-import constants.DukeConstants;
+import command.*;
+import constant.DukeConstants;
 import enums.TaskEnum;
 
 

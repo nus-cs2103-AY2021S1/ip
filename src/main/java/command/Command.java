@@ -1,6 +1,6 @@
-package commands;
+package command;
 
-import services.DukeService;
+import service.DukeService;
 
 public abstract class Command {
     String input;

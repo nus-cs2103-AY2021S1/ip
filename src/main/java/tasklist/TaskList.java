@@ -1,7 +1,7 @@
-package tasklists;
+package tasklist;
 
-import constants.DukeConstants;
-import tasks.Task;
+import constant.DukeConstants;
+import task.Task;
 
 import java.util.List;
 

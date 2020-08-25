@@ -1,9 +1,9 @@
 package ui;
 
-import parsers.Parser;
-import commands.Command;
-import constants.DukeConstants;
-import services.DukeService;
+import parser.Parser;
+import command.Command;
+import constant.DukeConstants;
+import service.DukeService;
 
 import java.util.Objects;
 import java.util.Scanner;

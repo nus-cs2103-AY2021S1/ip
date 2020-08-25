@@ -1,3 +1,5 @@
+package duke;
+
 import ui.Ui;
 
 public class Duke {

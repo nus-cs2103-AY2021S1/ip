@@ -1,9 +1,9 @@
-package domains;
+package domain;
 
-import constants.DukeConstants;
-import storages.Storage;
-import tasklists.TaskList;
-import tasks.Task;
+import constant.DukeConstants;
+import storage.Storage;
+import tasklist.TaskList;
+import task.Task;
 
 public class DukeDomain {
 

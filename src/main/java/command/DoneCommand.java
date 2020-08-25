@@ -1,6 +1,6 @@
-package commands;
+package command;
 
-import services.DukeService;
+import service.DukeService;
 
 public class DoneCommand extends Command {
     public DoneCommand(String input) {

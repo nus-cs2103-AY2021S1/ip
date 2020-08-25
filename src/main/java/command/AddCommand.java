@@ -1,7 +1,7 @@
-package commands;
+package command;
 
 import enums.TaskEnum;
-import services.DukeService;
+import service.DukeService;
 
 public class AddCommand extends Command {
     private final TaskEnum taskType;
