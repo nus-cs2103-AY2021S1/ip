@@ -1,12 +1,36 @@
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    public static ArrayList<Task> initializeTasks(String filePath) throws FileNotFoundException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+    private String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+    public TaskList load() throws DukeException {
+        File f = new File(this.filePath); // create a File for the given file path
+        if (!f.exists()) {
+            final File parentDir = new File("data");
+            parentDir.mkdir();
+            final String hash = "tasks";
+            final String fileName = hash + ".txt";
+            final File file = new File(parentDir, fileName);
+            try {
+                file.createNewFile();
+                System.out.println("Created path data/tasks.txt");
+            } catch (IOException e) {
+                System.out.println("Could not create file.");
+            }
+        }
+        Scanner s;
+        try {
+            s = new Scanner(f); // create a Scanner using the File as the source
+        } catch (Exception e) {
+            throw new DukeException("File not found.");
+        }
         ArrayList<Task> loadedTasks = new ArrayList<>();
         while (s.hasNext()) {
             String task = s.nextLine();
@@ -55,6 +79,25 @@ public class Storage {
                     break;
             }
         }
-        return loadedTasks;
+
+        return new TaskList(loadedTasks);
+    }
+
+    private static void writeToFile(String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter("data/tasks.txt");
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    public static void store(ArrayList<Task> tasks) {
+        try {
+            StringBuilder textToAdd = new StringBuilder();
+            for (Task task : tasks) {
+                textToAdd.append(task.toString()).append(System.lineSeparator());
+            }
+            writeToFile(textToAdd.toString());
+        } catch (IOException e) {
+            System.out.println("Something Went wrong: " + e.getMessage());
+        }
     }
 }
