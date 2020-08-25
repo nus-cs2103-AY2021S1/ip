@@ -15,4 +15,5 @@ event project meeting /at 2020-08-24
 list
 deadline iP week 3 /by 2020-08-27
 list
+delete 1
 bye

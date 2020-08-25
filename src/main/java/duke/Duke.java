@@ -19,7 +19,6 @@ public class Duke {
             tasks = new TaskList(storage.processStorage());
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println(e.getMessage());
         }
     }
 
