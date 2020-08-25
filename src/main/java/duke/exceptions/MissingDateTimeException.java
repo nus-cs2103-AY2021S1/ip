@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class MissingDateTimeException extends DukeException {
 
     public MissingDateTimeException() {

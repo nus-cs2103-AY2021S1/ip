@@ -1,3 +1,9 @@
+package duke.parsers;
+
+import duke.commands.*;
+import duke.exceptions.*;
+import duke.tasks.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

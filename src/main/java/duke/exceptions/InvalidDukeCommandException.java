@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class InvalidDukeCommandException extends DukeException {
 
     public InvalidDukeCommandException() {
