@@ -1,18 +1,18 @@
-package Task;
-import java.time.LocalDate;
+package task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
 
-public class Event extends Task {
-    protected String at;
-    protected LocalDateTime atDateTime;
+public class Deadline extends Task {
+    protected String by;
+    protected LocalDateTime byDateTime;
 
-    public Event(String description, String at, boolean isDone) {
+    public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
-        this.at = at;
+        this.by = by;
         try {
-            this.atDateTime = LocalDateTime.parse(reformatedDateTime());
+            this.byDateTime = LocalDateTime.parse(reformatedDateTime());
         } catch (DateTimeParseException e) {
             System.out.println("Invalid input! Enter appropriate date and time format");
         }
@@ -20,21 +20,21 @@ public class Event extends Task {
 
     public String toString() {
         String icon = this.completed ? "[" + "\u2713" + "]" : "[" + "\u2718" + "]";
-        if (atDateTime == null) {
-            return "[E]" + icon + " " + this.description + " (at: " + this.at + ")";
+        if (this.byDateTime == null) {
+            return "[D]" + icon + " " + this.description + " (by: " + this.by + ")";
         } else {
-            return "[E]" + icon + " " + this.description + " (at: "
-                    + this.atDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
+            return "[D]" + icon + " " + this.description + " (by: "
+                    + this.byDateTime.format(DateTimeFormatter.ofPattern("MMM d yyy HH:mm")) + ")";
         }
     }
 
     public String toEncoding() {
         int completedBinary = this.completed ? 1 : 0;
-        return "E>" + completedBinary + ">" + this.description + ">" + this.at;
+        return "D>" + completedBinary + ">" + this.description + ">" + this.by;
     }
 
     private String reformatedDateTime() {
-        String[] bySplit = this.at.split(" ", 2);
+        String[] bySplit = this.by.split(" ", 2);
         String date = bySplit[0];
         String[] dateSplit = date.split("/", 3);
         String time = bySplit[1];
@@ -44,6 +44,6 @@ public class Event extends Task {
     }
 
     public boolean isDate(LocalDate dateFilter) {
-        return this.atDateTime.toLocalDate().equals(dateFilter);
+        return this.byDateTime.toLocalDate().equals(dateFilter);
     }
 }
