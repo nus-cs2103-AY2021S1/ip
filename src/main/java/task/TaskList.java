@@ -1,4 +1,8 @@
-package main.java;
+package main.java.task;
+
+import main.java.misc.Parser;
+import main.java.misc.Storage;
+import main.java.exception.InvalidArgumentException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

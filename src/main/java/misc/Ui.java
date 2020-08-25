@@ -1,4 +1,4 @@
-package main.java;
+package main.java.misc;
 
 import java.util.List;
 import java.util.Scanner;

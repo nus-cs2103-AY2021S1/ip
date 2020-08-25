@@ -1,5 +1,12 @@
 package main.java;
 
+import main.java.command.Commands;
+import main.java.exception.InvalidArgumentException;
+import main.java.exception.UserException;
+import main.java.misc.Parser;
+import main.java.misc.Ui;
+import main.java.task.TaskList;
+
 public class Duke {
 
     public static void run() {

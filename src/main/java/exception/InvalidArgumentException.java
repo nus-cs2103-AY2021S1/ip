@@ -1,4 +1,4 @@
-package main.java;
+package main.java.exception;
 
 public class InvalidArgumentException extends UserException {
     public InvalidArgumentException(String message) {

@@ -1,4 +1,6 @@
-package main.java;
+package main.java.misc;
+
+import main.java.exception.InvalidArgumentException;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;

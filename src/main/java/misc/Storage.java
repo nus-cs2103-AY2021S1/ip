@@ -1,4 +1,6 @@
-package main.java;
+package main.java.misc;
+
+import main.java.task.Task;
 
 import java.io.File;
 import java.io.FileWriter;
