@@ -48,8 +48,10 @@ public class TaskDate implements Serializable, Comparable<TaskDate> {
     public TaskDate(String date) {
         if (date.contains("/")) {
             LocalDate date1 = LocalDate.parse(date, UK_DATE_FORMAT);
+            this.date = date1;
         } else {
             LocalDate date1 = LocalDate.parse(date);
+            this.date = date1;
         }
     }
 
@@ -65,12 +67,15 @@ public class TaskDate implements Serializable, Comparable<TaskDate> {
     }
 
     @Override
+    /**
+     * Returns date in string format e.g. "Oct 05 2020"
+     */
     public String toString() {
         return date.format(DateTimeFormatter.ofPattern("MMM dd uuuu"));
     }
 
 
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
         //create dates from strings
 //        LocalDate d1 = LocalDate.parse("2019-12-01");
 //        LocalDate d2 = LocalDate.parse("2019-12-02");
@@ -95,6 +100,10 @@ public class TaskDate implements Serializable, Comparable<TaskDate> {
 //        System.out.println(d4); // -> 2019-10-15
 //        System.out.println(d4.format(DateTimeFormatter.ofPattern("MMM d uuuu")) + " HI"); // -> Oct 15 2019
 //        System.out.println(TaskDate.isValidFormat("2019-05-15"));
-    }
+//        TaskDate d1 = new TaskDate("2019-05-08");
+//        TaskDate d2 = new TaskDate("20/08/2020");
+//        TaskDate d3 = new TaskDate("20/08/2020");
+//        System.out.println(d1.compareTo(d3));
+//    }
 
 }
