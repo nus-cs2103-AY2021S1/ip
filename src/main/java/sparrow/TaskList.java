@@ -33,7 +33,17 @@ public class TaskList {
         }
         Ui.reply(sb.toString());
     }
-
+    /**
+     * Displays list of tasks passed as argument.
+     */
+    public void displayList(ArrayList<Task> tasks) {
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list: \n");
+        for (int i = 0; i < tasks.size(); i++) {
+            String temp = String.format("%d. %s\n", i + 1, tasks.get(i));
+            sb.append(temp);
+        }
+        Ui.reply(sb.toString());
+    }
     /**
      * Adds a task to task list.
      * @param type Type of Task to be added.
@@ -180,5 +190,15 @@ public class TaskList {
         } catch (NumberFormatException e) {
             System.out.println("Please enter a valid task number.");
         }
+    }
+
+    public ArrayList<Task> findTasks(String taskStr) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(taskStr)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
     }
 }
