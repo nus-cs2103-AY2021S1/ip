@@ -32,7 +32,7 @@ public class Ui {
     
     public static void showTasks(TaskList tasks) {
         String lazyHumanBash = "You have nothing in your list. Find something to do you human!";
-        String showTasksMsg = "Here are the task(s) in your lists:";
+        String showTasksMsg = "Here are the task(s) in your list:";
         if (tasks.size() == 0) {
             System.out.println(lazyHumanBash);
         } else {
