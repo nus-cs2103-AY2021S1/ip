@@ -214,7 +214,7 @@ public class TaskList {
                         return false;
                     }
                 }
-                return true;
+                return this.addedOrDeletedTask.equals(temp.addedOrDeletedTask);
             } else {
                 return false;
             }
