@@ -18,6 +18,11 @@ public class TaskList {
         this.taskList = new ArrayList<>(tasks);
     }
 
+    /**
+     * Prints list of Task in the task list.
+     *
+     * @throws DukeException  If there is no task in the list.
+     */
     public void printList() throws DukeException {
         if(this.taskList.size() != 0) {
             // Dino lists out all items in list
@@ -35,6 +40,17 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns string specifying successful deletion of task from task list.
+     * If the task number to delete is valid, removes task from task list
+     * and writes this action to the hard disk.
+     *
+     * @param storage Storage used to write to delete task from hard disk.
+     * @param input String of input that describes task to delete.
+     *
+     * @return String string specifying successful deletion of task
+     * @throws DukeException  If task number is invalid.
+     */
     public String deleteTask(Storage storage, String input) throws DukeException {
         int taskNumber = Integer.parseInt(input.split(" ")[1]);
         if (taskNumber > this.taskList.size() || taskNumber < 1) {
@@ -52,7 +68,20 @@ public class TaskList {
         }
     }
 
-    public String addTask(Storage storage, String input, String[] inputWords) throws DukeException {
+    /**
+     * Returns string specifying successful adding of task to task list.
+     * If input is in correct format for creation of Todo, Deadline or
+     * Event, method adds task to the task list, and writes this action
+     * to the hard disk.
+     *
+     * @param storage Storage used to write to add task to hard disk.
+     * @param input String of input that describes task to add.
+     *
+     * @return String string specifying successful deletion of task
+     * @throws DukeException  If invalid format for task creation is input.
+     */
+    public String addTask(Storage storage, String input) throws DukeException {
+        String[] inputWords = input.split(" ");
         try {
             String successStatement;
             switch (inputWords[0]) {
@@ -115,6 +144,17 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns string specifying successful marking done of task in task list.
+     * If input task number is valid, method marks the task as done,
+     * and writes this action to the hard disk.
+     *
+     * @param storage Storage used to write to mark done for task in hard disk.
+     * @param input String of input that describes task to mark as done.
+     *
+     * @return String string specifying successful marking done of task.
+     * @throws DukeException  If invalid task number is input.
+     */
     public String markDone(Storage storage, String input) throws DukeException {
         int taskNumber = Integer.parseInt(input.split(" ")[1]);
         if (taskNumber > this.taskList.size() || taskNumber < 1) {

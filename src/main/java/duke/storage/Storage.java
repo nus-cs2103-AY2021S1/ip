@@ -7,7 +7,12 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,6 +26,12 @@ public class Storage {
         this.dirpath = filepath.substring(0, 6);
     }
 
+    /**
+     * Returns the list of tasks stored in the hard disk.
+     *
+     * @return List list of Task stored in hard disk.
+     * @throws DukeException If could not load task information from hard disk.
+     */
     public List<Task> loadData() throws DukeException {
         //read Duke's data file and load tasks into tasks list
         List<Task> tasks = new ArrayList<>();
@@ -88,6 +99,16 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes action done to task into hard disk.
+     * If action is ADD, Dino adds task to hard disk.
+     * If action is DELETE, Dino deletes task from hard disk.
+     * If action is MARK_DONE, Dino marks the specific task in hard disk as done.
+     *
+     * @param task Task to be acted upon.
+     * @param action DukeAction action done to task.
+     * @throws DukeException If Dino could not write to hard disk.
+     */
     public void writeToFile(Task task, DukeAction action) throws DukeException {
         try {
             switch(action) {

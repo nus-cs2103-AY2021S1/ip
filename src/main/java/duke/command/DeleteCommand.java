@@ -12,6 +12,14 @@ public class DeleteCommand extends Command {
         this.input = input;
     }
 
+
+    /**
+     * Executes deletion of task in TaskList and shows success/error information.
+     *
+     * @param storage Storage where deletion of task is written in hard disk.
+     * @param taskList TaskList where task is deleted.
+     * @param ui Ui that shows success/error messages from the deletion action.
+     */
     @Override
     public void execute(Storage storage, TaskList taskList, Ui ui) {
         try {
