@@ -1,7 +1,7 @@
 package duke.parser;
 
-
 import duke.command.*;
+
 import duke.exception.DukeException;
 import duke.exception.InadequateCommandException;
 import duke.exception.InvalidIndexException;
@@ -76,6 +76,7 @@ public class Parser {
                 timeSpecifier = EventCommand.TIME_SPECIFIER;
                 isDeadline = false;
             }
+            
             if (splitted.length == 1) {
                 throw new InadequateCommandException(type, new String[] {"description", "time"});
             } else {
@@ -90,17 +91,23 @@ public class Parser {
                     String[] missing = {"description", "time"};
                     throw new InadequateCommandException(type, missing);
                 }
+                
                 if (timeIdx == 0 || content.indexOf(timeSpecifier) == 0) {
                     throw new InadequateCommandException(type, new String[]{"description"});
                 }
+                
                 if (timeIdx == -1 || timeIdx + 5 >= content.length()) {
                     throw new InadequateCommandException(type, new String[]{"time"});
                 }
+                
                 String description = content.substring(0, timeIdx);
                 String time = content.substring(timeIdx + 5);
+                
                 if (time.split("\\s+").length == 0) {
                     throw new InadequateCommandException(type, new String[]{"time"});
                 }
+                
+                // return
                 if (isDeadline) {
                     return new DeadlineCommand(description, time);
                 } else {
