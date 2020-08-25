@@ -1,11 +1,12 @@
 todo read book
-deadline return book /by june
-event project meeting /at 3pm
-sdf
-todo join club
-todo borrow book
-done 3
-done 4
+event graduation /at 2018-11-27
+deadline 2103 project /by 2020-08-26
 list
-delete 4
+done 2
+delete 3
 list
+get_event 2018-11-27
+event more graduation /at 2018-11-27
+list
+get_event 2018-11-27
+bye

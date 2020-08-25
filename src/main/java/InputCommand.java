@@ -7,4 +7,6 @@ public enum InputCommand {
     DELETE,
     INVALID,
     BYE,
+    GET_EVENT,
+    GET_DEADLINE,
 }

@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 public class Duke {
 
@@ -85,6 +86,16 @@ public class Duke {
         return stringArray;
     }
 
+    private static void findTask(LocalDate date) {
+        System.out.println(divider);
+        for (Task t : list) {
+            if (t.getDate().equals(date)) {
+                System.out.println("   " + t.toString());
+            }
+        }
+        System.out.println(divider + "\n");
+    }
+
     private static void wrapMessage(String message) {
         System.out.println(divider);
         System.out.println("   " + message);
@@ -132,39 +143,45 @@ public class Duke {
 
             try {
                 switch (inputCommand) {
-                    case BYE:
-                        byeMessage();
-                        return;
-                    case LIST:
-                        showList();
-                        break;
-                    case DONE:
-                        if (isValidIndex(input)) {
-                            Task task = list.get(getIndex(input));
-                            task.markAsDone();
-                            doneMessage(task);
-                        } else {
-                            throw new DukeException("You don't have such task in your list...");
-                        }
-                        break;
-                    case DELETE:
-                        deletedMessage(list.get(getIndex(input)));
-                        deleteTask(input);
-                        break;
-                    case TODO:
-                        addList(new Todo(getTodoDescription(input)));
-                        addedMessage(new Todo(getTodoDescription(input)));
-                        break;
-                    case DEADLINE:
-                        addList(new Deadline(getDeadlineStrings(input)[0], getDeadlineStrings(input)[1]));
-                        addedMessage(new Deadline(getDeadlineStrings(input)[0], getDeadlineStrings(input)[1]));
-                        break;
-                    case EVENT:
-                        addList(new Event(getEventTimeStrings(input)[0], getEventTimeStrings(input)[1]));
-                        addedMessage(new Event(getEventTimeStrings(input)[0], getEventTimeStrings(input)[1]));
-                        break;
-                    default:
-                        throw new DukeException("Give me a valid banana (input)!");
+                case BYE:
+                    byeMessage();
+                    return;
+                case LIST:
+                    showList();
+                    break;
+                case DONE:
+                    if (isValidIndex(input)) {
+                        Task task = list.get(getIndex(input));
+                        task.markAsDone();
+                        doneMessage(task);
+                    } else {
+                        throw new DukeException("You don't have such task in your list...");
+                    }
+                    break;
+                case DELETE:
+                    deletedMessage(list.get(getIndex(input)));
+                    deleteTask(input);
+                    break;
+                case TODO:
+                    addList(new Todo(getTodoDescription(input)));
+                    addedMessage(new Todo(getTodoDescription(input)));
+                    break;
+                case DEADLINE:
+                    addList(new Deadline(getDeadlineStrings(input)[0], getDeadlineStrings(input)[1]));
+                    addedMessage(new Deadline(getDeadlineStrings(input)[0], getDeadlineStrings(input)[1]));
+                    break;
+                case EVENT:
+                    addList(new Event(getEventTimeStrings(input)[0], getEventTimeStrings(input)[1]));
+                    addedMessage(new Event(getEventTimeStrings(input)[0], getEventTimeStrings(input)[1]));
+                    break;
+                case GET_DEADLINE:
+                    findTask(LocalDate.parse(input.substring(13)));
+                    break;
+                case GET_EVENT:
+                    findTask(LocalDate.parse(input.substring(10)));
+                    break;
+                default:
+                    throw new DukeException("Give me a valid banana (input)!");
                 }
             } catch (DukeException e){
                 wrapMessage(e.toString());
