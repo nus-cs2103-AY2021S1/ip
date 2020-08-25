@@ -15,22 +15,22 @@ public class Main {
 
 
     public static void main(String[] args) throws Exception {
-        //Initialise Taskbot & required classes
+        // Initialise Taskbot & required classes
         Ui ui = new Ui();
 
-        //Prints the title to the console and greets the user
+        // Prints the title to the console and greets the user
         ui.printTitle();
         Storage storage = new Storage(System.getProperty("user.dir"));
         TaskList taskList = new TaskList(storage);
         ui.greet();
 
-        //Exit condition
+        // Exit condition
         boolean isExit = false;
 
-        //Loops while the user does not input "bye"
+        // Loops while the user does not input "bye"
         while (!isExit) {
             try {
-                //Gets the full command, basically use Scanner //
+                // Gets the full command, basically use Scanner //
                 String command = ui.readCommand();
                 ui.showLine();
                 Command cmd = Parser.parse(command);

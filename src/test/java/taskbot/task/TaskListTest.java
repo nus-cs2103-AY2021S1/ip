@@ -20,25 +20,25 @@ public class TaskListTest {
     private TaskList taskList;
     private ArrayList<Task> tasks;
 
-    //Used to test console output
+    // Used to test console output
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     public TaskListTest() {
         tasks = new ArrayList<>();
-        //Adds task stubs
+        // Adds task stubs
         for (int i = 1; i < 4; i++) {
             tasks.add(new TaskStub("Task " + i));
         }
         taskList = new TaskList(tasks);
     }
 
-    //Helps to test System.out.println output
+    // Helps to test System.out.println output
     @BeforeEach
     public void setUpStream() {
         System.setOut(new PrintStream(outContent));
     }
 
-    //Restores the output stream to System.out
+    // Restores the output stream to System.out
     @AfterEach
     public void restoreStream() {
         System.setOut(System.out);
@@ -76,7 +76,7 @@ public class TaskListTest {
             taskList.addTodoTask(task);
             assertEquals(expected, outContent.toString());
 
-            //Reset the TaskList
+            // Reset the TaskList
             taskList = new TaskList(tasks);
         } catch (Exception e) {
             fail();
@@ -94,7 +94,7 @@ public class TaskListTest {
             taskList.addEventTask(task);
             assertEquals(expected, outContent.toString());
 
-            //Reset the TaskList
+            // Reset the TaskList
             taskList = new TaskList(tasks);
         } catch (Exception e) {
             fail();
@@ -112,7 +112,7 @@ public class TaskListTest {
             taskList.addDeadlineTask(task);
             assertEquals(expected, outContent.toString());
 
-            //Reset the TaskList
+            // Reset the TaskList
             taskList = new TaskList(tasks);
         } catch (Exception e) {
             fail();
@@ -127,7 +127,7 @@ public class TaskListTest {
                     "    Task 3\r\n";
             assertEquals(expected, outContent.toString());
 
-            //Reset the TaskList
+            // Reset the TaskList
             taskList = new TaskList(tasks);
         } catch (Exception e) {
             fail();
@@ -143,7 +143,7 @@ public class TaskListTest {
                     "You now have 2 task(s) in the list.\r\n";
             assertEquals(expected, outContent.toString());
 
-            //Reset the TaskList
+            // Reset the TaskList
             taskList = new TaskList(tasks);
         } catch (Exception e) {
             fail();
@@ -155,13 +155,13 @@ public class TaskListTest {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
             LocalDateTime currentDateTime = LocalDateTime.now();
-            //Task without any time
+            // Task without any time
             tasks.add(new TaskStub("Task 1"));
-            //Current time
+            // Current time
             tasks.add(new TimedTaskStub("Timed Task 1", currentDateTime));
-            //1 Day later
+            // 1 Day later
             tasks.add(new TimedTaskStub("Timed Task 2", currentDateTime.plusDays(1)));
-            //7 Days later
+            // 7 Days later
             tasks.add(new TimedTaskStub("Timed Task 3", currentDateTime.plusDays(7)));
 
             taskList = new TaskList(tasks);
@@ -175,7 +175,7 @@ public class TaskListTest {
                     ")\n";
             assertEquals(expected, outContent.toString());
 
-            //Reset the TaskList
+            // Reset the TaskList
             taskList = new TaskList(tasks);
         } catch (Exception e) {
             fail();
