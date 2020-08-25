@@ -22,14 +22,14 @@ public class Task {
     }
 
     /**
-     * marks this instance of Task as done.
+     * Marks this instance of Task as done.
      */
     public void markDone() {
         this.isDone = true;
     }
 
     /**
-     * marks this instance of Task as undone.
+     * Marks this instance of Task as undone.
      */
     public void markUndone() {
         this.isDone = false;

@@ -70,7 +70,7 @@ public class Storage {
     }
 
     /**
-     * Write a string input to the text file.
+     * Writes a string input to the text file.
      * @param input
      */
     public void writeToFile(String input) {
