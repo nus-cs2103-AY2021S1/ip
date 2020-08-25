@@ -24,32 +24,32 @@ public class Storage {
 
     }
 
-    public ArrayList<Task> load(){
+    public TaskList load(){
         if(!Files.exists(path) || !Files.isRegularFile(path)){
-            return new ArrayList<Task>();
+            return new TaskList();
         }
         try {
             return convertTextToTask(Files.readAllLines(path));
         } catch (FileNotFoundException e){
             UI.printFormattedMessage("ERROR: There is an error in reading the files");
-            return new ArrayList<Task>();
+            return new TaskList();
         } catch (IOException e) {
             UI.printFormattedMessage("ERROR: There is an error with the inputs from the txt file");
-            return new ArrayList<Task>();
+            return new TaskList();
         }
     }
 
 
-    public ArrayList<String> convertArrayToSaveFormat(ArrayList<Task> stringStore) {
+    public ArrayList<String> convertArrayToSaveFormat(TaskList tasklist) {
         ArrayList<String> strings = new ArrayList<>();
-        for(Task tasks: stringStore){
+        for(Task tasks: tasklist.getTasks()){
             strings.add(tasks.writerSave());
         }
         return strings;
     }
 
-    public ArrayList<Task> convertTextToTask(List<String> lines){
-            ArrayList<Task> tasks = new ArrayList<>();
+    public TaskList convertTextToTask(List<String> lines){
+            TaskList tasks = new TaskList();
             try{
                 for (String line : lines) {
                     String[] currLine = line.split(" \\| ");
@@ -64,7 +64,7 @@ public class Storage {
                     if (currLine[1].equals("1")) {
                     currTask.markAsDone();
                     }
-                    tasks.add(currTask);
+                    tasks.addTask(currTask);
                 }
             } catch(ArrayIndexOutOfBoundsException e) {
                 UI.printFormattedMessage("ERROR: Incorrect inputs in data file!");
