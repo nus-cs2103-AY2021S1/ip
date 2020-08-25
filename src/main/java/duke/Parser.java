@@ -26,7 +26,6 @@ public class Parser {
             list.add(input.substring(spaceIndex+1,slashIndex));
             list.add(input.substring(infoIndex+1));
         }
-        System.out.println(list.toString());
         return list.toArray(new String[0]);
     }
 }

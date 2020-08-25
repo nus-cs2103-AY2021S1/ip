@@ -25,6 +25,20 @@ public class TaskList {
         return newTask;
     }
 
+    public String find(String keyword) {
+        String result = "";
+        for (Task t : tasks) {
+            if (t.getName().contains(keyword)){
+                if (result != "") {
+                    result += "\n   " + t.toString();
+                } else {
+                    result = "  " + t.toString();
+                }
+            }
+        }
+        return result;
+    }
+
     public Task addDeadLine(String name, String time) throws DukeException {
         Task newTask = new Deadline(name,time);
         tasks.add(newTask);

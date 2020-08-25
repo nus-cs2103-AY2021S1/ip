@@ -22,6 +22,14 @@ public abstract class Task {
         this.date = Optional.empty();
     }
 
+    /**
+     * Return the Name of the Task.
+     * @return String representing the name of Task.
+     */
+    public String getName() {
+        return name;
+    }
+
     public void setDate(LocalDate date) {
         this.date = Optional.of(date);
     }

@@ -109,7 +109,16 @@ public class Duke {
                 }
                 break;
 
-            //When command does not match any of those above
+            case "find":
+                String result = taskList.find(words[1]);
+                if (result == ""){
+                    ui.show("No match found");
+                } else {
+                    ui.show("These following tasks match the keyword you entered: \n" + result);
+                }
+                break;
+
+            //No Match Found
             default:
                 ui.showError("OOPS!!! I don't know what does it mean by: \"" + input + "\"" );
                 break;
