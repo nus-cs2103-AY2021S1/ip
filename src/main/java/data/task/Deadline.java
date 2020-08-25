@@ -31,4 +31,5 @@ public class Deadline extends Task {
     public String fileFormat() {
         return String.format("%1$s/%2$s/%3$s/%4$s", "D", super.getStatusIcon(), super.description, this.deadlineStr);
     }
+
 }

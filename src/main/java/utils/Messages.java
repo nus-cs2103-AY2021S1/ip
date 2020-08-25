@@ -20,5 +20,4 @@ public class Messages {
             "Invalid date and time format! It should be in this format: [DD/MM/YYYY HHmm].\n" +
             "\tExample: 12/12/2020 0945";
 
-
 }

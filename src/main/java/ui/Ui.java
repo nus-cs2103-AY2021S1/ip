@@ -61,10 +61,7 @@ public class Ui {
     }
 
     public void showWelcomeMessage() {
-        showToUser(
-                DIVIDER,
-                Messages.MESSAGE_WELCOME,
-                DIVIDER);
+        showToUser(DIVIDER, Messages.MESSAGE_WELCOME, DIVIDER);
     }
 
     public void showGoodbyeMessage() {
@@ -98,6 +95,7 @@ public class Ui {
         }
         return formatted.toString();
     }
+
     private static String getIndexedListItem(int visibleIndex, String listItem) {
         return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
     }

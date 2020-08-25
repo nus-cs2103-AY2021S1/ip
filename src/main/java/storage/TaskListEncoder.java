@@ -5,7 +5,7 @@ import data.TaskList;
 import java.util.ArrayList;
 import java.util.List;
 
-// Encodes the data.TaskList object into a data file for storage.
+// Encodes the TaskList object into a data file for storage.
 public class TaskListEncoder {
 
     public static List<String> encodeTaskList(TaskList toSave) {

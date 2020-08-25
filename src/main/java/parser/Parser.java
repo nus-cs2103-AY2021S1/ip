@@ -10,6 +10,7 @@ import commands.ListCommand;
 import commands.ExitCommand;
 import commands.HelpCommand;
 import commands.IncorrectCommand;
+
 import utils.Messages;
 
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     public static final Pattern ADD_TODO_FORMAT = Pattern.compile("(?<description>.*)");
@@ -44,31 +46,31 @@ public class Parser {
 
         switch (commandWord) {
 
-            case AddTodoCommand.COMMAND_WORD:
-                return prepareAddTodo(arguments);
+        case AddTodoCommand.COMMAND_WORD:
+            return prepareAddTodo(arguments);
 
-            case AddDeadlineCommand.COMMAND_WORD:
-                return prepareAddDeadline(arguments);
+        case AddDeadlineCommand.COMMAND_WORD:
+            return prepareAddDeadline(arguments);
 
-            case AddEventCommand.COMMAND_WORD:
-                return prepareAddEvent(arguments);
+        case AddEventCommand.COMMAND_WORD:
+            return prepareAddEvent(arguments);
 
-            case DoneCommand.COMMAND_WORD:
-                return prepareDone(arguments);
+        case DoneCommand.COMMAND_WORD:
+            return prepareDone(arguments);
 
-            case DeleteCommand.COMMAND_WORD:
-                return prepareDelete(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return prepareDelete(arguments);
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
 
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
-            case HelpCommand.COMMAND_WORD: // Fallthrough
+        case HelpCommand.COMMAND_WORD: // Fallthrough
 
-            default:
-                return new HelpCommand();
+        default:
+            return new HelpCommand();
         }
     }
 
@@ -90,6 +92,7 @@ public class Parser {
             return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddDeadlineCommand.MESSAGE_USAGE));
         }
+
         try {
             LocalDateTime deadline = getLocalDateTime(matcher.group("deadline").trim());
             return new AddDeadlineCommand(matcher.group("description"), deadline);
@@ -155,4 +158,5 @@ public class Parser {
         }
         return Integer.parseInt(matcher.group("targetIndex"));
     }
+
 }

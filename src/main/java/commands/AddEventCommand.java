@@ -19,10 +19,6 @@ public class AddEventCommand extends AddCommand {
         this.toAdd = new Event(description, dateTime);
     }
 
-    public AddEventCommand(Event toAdd) {
-        this.toAdd = toAdd;
-    }
-
     public Event getEvent() {
         return toAdd;
     }
@@ -32,4 +28,5 @@ public class AddEventCommand extends AddCommand {
         taskList.add(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd, taskList.size()));
     }
+
 }

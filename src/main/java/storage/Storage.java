@@ -13,6 +13,7 @@ import java.util.List;
 public class Storage {
 
     private static final String DEFAULT_STORAGE_FILEPATH = "src/storageData/duke.txt";
+
     private String filePath;
     private File file;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy hh:mm a");
@@ -36,8 +37,9 @@ public class Storage {
     public Storage(String filePath) throws InvalidStorageFilePathException {
         this.filePath = filePath;
         this.file = new File(filePath);
-        if (!this.file.exists())
+        if (!this.file.exists()) {
             throw new InvalidStorageFilePathException("File not found.");
+        }
     }
 
     public TaskList load() throws StorageOperationException, FileNotFoundException, IllegalValueException {

@@ -17,10 +17,6 @@ public class AddTodoCommand extends AddCommand {
         this.toAdd = new Todo(description);
     }
 
-    public AddTodoCommand(Todo toAdd) {
-        this.toAdd = toAdd;
-    }
-
     public Todo getTodo() {
         return toAdd;
     }
@@ -30,4 +26,5 @@ public class AddTodoCommand extends AddCommand {
         taskList.add(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd, taskList.size()));
     }
+
 }

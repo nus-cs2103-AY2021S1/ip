@@ -8,8 +8,10 @@ import data.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -47,14 +49,14 @@ public class TaskListDecoder {
         final String arguments = matcher.group("arguments");
 
         switch (taskType) {
-            case "T":
-                return addTodo(isDone, arguments);
-            case "D":
-                return addDeadline(isDone, arguments);
-            case "E":
-                return addEvent(isDone, arguments);
-            default:
-                throw new Storage.StorageOperationException("Encoded data.task in invalid format. Unable to decode.");
+        case "T":
+            return addTodo(isDone, arguments);
+        case "D":
+            return addDeadline(isDone, arguments);
+        case "E":
+            return addEvent(isDone, arguments);
+        default:
+            throw new Storage.StorageOperationException("Encoded data.task in invalid format. Unable to decode.");
         }
     }
 
