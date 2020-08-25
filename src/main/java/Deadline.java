@@ -8,7 +8,7 @@ public class Deadline extends Task {
     protected LocalDateTime by; //deadline
 
     public Deadline(String description, String by) {
-        super(description);
+        super(description, Type.DEADLINE);
         //SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
         this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
     }
@@ -20,7 +20,7 @@ public class Deadline extends Task {
 
     @Override
     public String getTime() {
-        return this.by.toString();
+        return this.by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
     }
 
 
