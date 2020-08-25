@@ -1,12 +1,13 @@
+package viscount.exception;
+
 public class ViscountException extends Exception {
     private static final String ERROR_MESSAGE = "Alas, I do apologise but I don't know what that means.";
 
     public ViscountException() {
-        super();
+        super(ViscountException.ERROR_MESSAGE);
     }
-
-    @Override
-    public String toString() {
-        return ViscountException.ERROR_MESSAGE;
+    
+    public ViscountException(String errorMessage) {
+        super(errorMessage);
     }
 }

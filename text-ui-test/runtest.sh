@@ -12,15 +12,25 @@ then
     rm ACTUAL.TXT
 fi
 
+export LC_ALL=en_GB.UTF-8
+
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/Viscount.java
+if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/viscount/*.java ../src/main/java/viscount/command/*.java ../src/main/java/viscount/exception/*.java ../src/main/java/viscount/task/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
 fi
 
-# run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input.txt > ACTUAL.TXT
+# run the program, feed commands from input files and redirect the output to the ACTUAL.TXT
+java -classpath ../bin viscount.Viscount < input1.txt >> ACTUAL.TXT
+java -classpath ../bin viscount.Viscount < input2.txt >> ACTUAL.TXT
+java -classpath ../bin viscount.Viscount < input3.txt >> ACTUAL.TXT
+
+# delete data afterwards
+if [ -e "data/viscount.txt" ]
+then
+    rm data/viscount.txt
+fi
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
