@@ -11,40 +11,68 @@ Here are the tasks in your list:
 1.[D][✘] prepare for presentation (by: today 7pm)
 2.[T][✘] go cycling
 Got it. I've added this task:
-[E][✘] watch horror movie with friends (at: 12am)
+[D][✘] learn how to swim (by: Oct 15 2020)
 Now you have 3 tasks in the list.
+Got it. I've added this task:
+[E][✘] watch horror movie with friends (at: 12am)
+Now you have 4 tasks in the list.
 Not sure what you mean. Please ensure your command format is correct and try again.
-The number entered is invalid. You have 3 tasks in your list.
+The number entered is invalid. You have 4 tasks in your list.
 Nice! I've marked this task as done:
 [T][✓] go cycling
 Hey! Todo description shouldn't be blank.
 Hey! Deadline description shouldn't be blank.
 Got it. I've added this task:
+[E][✘] discover north pole (at: Sep 20 2020)
+Now you have 5 tasks in the list.
+Got it. I've added this task:
 [D][✘] do homework (by: Monday 6pm)
-Now you have 4 tasks in the list.
-The number entered is invalid. You have 4 tasks in your list.
+Now you have 6 tasks in the list.
+The number entered is invalid. You have 6 tasks in your list.
 Here are the tasks in your list:
 1.[D][✘] prepare for presentation (by: today 7pm)
 2.[T][✓] go cycling
-3.[E][✘] watch horror movie with friends (at: 12am)
-4.[D][✘] do homework (by: Monday 6pm)
+3.[D][✘] learn how to swim (by: Oct 15 2020)
+4.[E][✘] watch horror movie with friends (at: 12am)
+5.[E][✘] discover north pole (at: Sep 20 2020)
+6.[D][✘] do homework (by: Monday 6pm)
 Do try again by adding a time you need to get this done by.
 Nice! I've marked this task as done:
-[E][✓] watch horror movie with friends (at: 12am)
+[D][✓] learn how to swim (by: Oct 15 2020)
 Hey! Event description shouldn't be blank.
 Not sure what you mean. Please ensure your command format is correct and try again.
 Here are the tasks in your list:
 1.[D][✘] prepare for presentation (by: today 7pm)
 2.[T][✓] go cycling
-3.[E][✓] watch horror movie with friends (at: 12am)
-4.[D][✘] do homework (by: Monday 6pm)
+3.[D][✓] learn how to swim (by: Oct 15 2020)
+4.[E][✘] watch horror movie with friends (at: 12am)
+5.[E][✘] discover north pole (at: Sep 20 2020)
+6.[D][✘] do homework (by: Monday 6pm)
 Not sure what you mean. Please ensure your command format is correct and try again.
 Do try again by adding a time where the event takes place.
 Noted. I've removed this task:
 [D][✘] prepare for presentation (by: today 7pm)
-Now you have 3 tasks in the list.
+Now you have 5 tasks in the list.
 Here are the tasks in your list:
 1.[T][✓] go cycling
-2.[E][✓] watch horror movie with friends (at: 12am)
-3.[D][✘] do homework (by: Monday 6pm)
+2.[D][✓] learn how to swim (by: Oct 15 2020)
+3.[E][✘] watch horror movie with friends (at: 12am)
+4.[E][✘] discover north pole (at: Sep 20 2020)
+5.[D][✘] do homework (by: Monday 6pm)
+Got it. I've added this task:
+[D][✘] fix the car (by: Aug 27 2020, 06:00 PM)
+Now you have 6 tasks in the list.
+Got it. I've added this task:
+[E][✘] run in a stream (at: Aug 29 2020, 10:00 AM)
+Now you have 7 tasks in the list.
+Nice! I've marked this task as done:
+[D][✓] fix the car (by: Aug 27 2020, 06:00 PM)
+Here are the tasks in your list:
+1.[T][✓] go cycling
+2.[D][✓] learn how to swim (by: Oct 15 2020)
+3.[E][✘] watch horror movie with friends (at: 12am)
+4.[E][✘] discover north pole (at: Sep 20 2020)
+5.[D][✘] do homework (by: Monday 6pm)
+6.[D][✓] fix the car (by: Aug 27 2020, 06:00 PM)
+7.[E][✘] run in a stream (at: Aug 29 2020, 10:00 AM)
 Bye. Hope to see you again soon!
