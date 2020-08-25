@@ -8,6 +8,12 @@ import duke.task.Todo;
 
 public class Parser {
 
+    /**
+     * Parses an input string and gives the corresponding command
+     * @param input the input typed in by the user
+     * @return the command that corresponds to the input
+     * @throws DukeException if the input is invalid or illegal
+     */
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) return new ByeCommand();
         else if (input.equals("list")) return new ListCommand();
