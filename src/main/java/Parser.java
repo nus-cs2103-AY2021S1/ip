@@ -48,6 +48,12 @@ public class Parser {
                     } catch (DukeException | IOException e) {
                         System.out.println(e.getMessage());
                     }
+                } else if (words[0].equals("find")) {
+                    if (words.length > 1) {
+                        String keyword = line.substring(5);
+                        TaskList matches = matchFinder(tasks, keyword);
+                        ui.foundMatches(matches);
+                    }
                 } else {
                     try {
                         Task task = taskClassify(line);
@@ -117,6 +123,17 @@ public class Parser {
             }
         }
         return tasks;
+    }
+
+    public static TaskList matchFinder(TaskList tasks, String keyword) {
+        TaskList matches = new TaskList();
+        for (Task task : tasks.getList()) {
+            String desc = task.desc;
+            if (desc.contains(keyword)) {
+                matches.add(task);
+            }
+        }
+        return matches;
     }
 
     /**

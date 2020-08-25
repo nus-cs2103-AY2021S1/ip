@@ -60,6 +60,16 @@ public class Ui {
         System.out.println("Now you have " + size + " tasks in the list.");
     }
 
+
+    public void foundMatches(TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        int counter = 1;
+        for (Task task : tasks.getList()) {
+            System.out.println(counter + "." + task.toString());
+            counter++;
+        }
+    }
+
     /**
      * Displays bye message.
      */
