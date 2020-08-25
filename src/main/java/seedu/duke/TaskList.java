@@ -50,8 +50,10 @@ public class TaskList {
 
         if (taskList.size() > 0) {
             System.out.println("Here are the tasks happening on: " + date.format(formatter));
-            for (Task task: taskList) {
-                System.out.println(task);
+            for (int i = 0; i < taskList.size(); i++) {
+                int taskNo = i + 1;
+                Task task = taskList.get(i);
+                System.out.println(taskNo + "." + task);
             }
         } else {
             System.out.println("You don't have anything on: " + date.format(formatter) + " :)))");
@@ -100,6 +102,29 @@ public class TaskList {
                     "[" + taskToBeDeleted.getStatusIcon() + "] " +
                     taskToBeDeleted.getDescription());
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        }
+    }
+
+    public void searchKeyword(String keyword) throws DukeException {
+        if (tasks.size() <= 0) {
+            throw new DukeException("You don't have any tasks.");
+        }
+        ArrayList<Task> taskList = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.getDescription().contains(keyword)) {
+                taskList.add(task);
+            }
+        }
+
+        if (taskList.size() > 0) {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < taskList.size(); i++) {
+                int taskNo = i + 1;
+                Task task = taskList.get(i);
+                System.out.println(taskNo + "." + task);
+            }
+        } else {
+            System.out.println("You don't have anything related to " + "\""+ keyword + "\"");
         }
     }
 }

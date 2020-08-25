@@ -59,6 +59,8 @@ public class Parser {
                 // create date command: "date 2020-09-24"
                 LocalDate time = LocalDate.parse(commandBody);
                 return new DateCommand(time);
+            } else if (commandWord.equals("find")) {
+                return new FindCommand(commandBody);
             } else {
                 // add command
                 Task newTask = Parser.parseTask(str);
