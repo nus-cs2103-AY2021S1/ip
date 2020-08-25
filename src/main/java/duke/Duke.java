@@ -7,11 +7,18 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Main class, responsible for running the program.
+ */
 public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
-    
+
+    /**
+     * Creates a <code>Duke</code> object.
+     * @param filePath The path of the data file that this object interacts with
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -38,7 +48,11 @@ public class Duke {
             }
         }
     }
-    // main
+
+    /**
+     * Main function.
+     * @param args
+     */
     public static void main(String[] args) {
         // file path
         String FILEPATH = System.getProperty("user.dir")

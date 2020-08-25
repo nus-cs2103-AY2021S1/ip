@@ -16,13 +16,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Retrieves data from the database and write new data to it.
+ */
 public class Storage {
     private String filePath;
-    
+
+    /**
+     * Creats a new <code>Storage</code> object.
+     * @param filePath The path of the file that this object interacts with
+     */
     public Storage(String filePath) {
         this.filePath = filePath;    
     }
-    
+
+    /**
+     * Read the data from the file at the file path.
+     * @return An <code>ArrayList</code> containing the <code>Task</code>s in the database
+     * @throws DukeException If there is any unexpected error in the loading process
+     */
     public ArrayList<Task> load() throws DukeException {
         File f = new File(filePath);
         ArrayList<Task> tasks = new ArrayList<>();
@@ -62,13 +74,17 @@ public class Storage {
                 }
                 f.createNewFile();
             } catch (IOException e1) {
-                throw new DukeException("");
+                throw new DukeException("Cannot read file");
             }
         }
         return tasks;
     }
 
-    public void write(TaskList tasks) {
+    /**
+     * Writes the data to the file at the file path.
+     * @param tasks The data to be written
+     */
+    public void write(TaskList tasks) throws DukeException {
         try {
             File f = new File(filePath);
             if (f.exists()) {
@@ -94,7 +110,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e){
-            System.out.println(e);
+            throw new DukeException("Cannot write file");
         }
     }
 }

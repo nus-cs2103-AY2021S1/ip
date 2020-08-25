@@ -6,7 +6,16 @@ import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
 
 import java.util.Optional;
+
+/**
+ * Parses a date string to a <code>LocalDate</code> object.
+ */
 public class DateParser {
+    /**
+     * Parses a date string to a <code>LocalDate</code> object.
+     * @param dateStr The string representing the date
+     * @return An <code>Optional</code> of <code>LocalDate</code> parsed.
+     */
     public static Optional<LocalDate> parse(String dateStr) {
         String[] formats = {
                 "yyyy-MM-dd",

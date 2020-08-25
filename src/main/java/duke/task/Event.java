@@ -7,12 +7,20 @@ import java.time.format.DateTimeFormatter;
 
 import java.util.Optional;
 
+/**
+ * Represents an event task
+ */
 public class Event extends Task {
     private String eventTime;
     private LocalDate startTime;
     private LocalDate endTime;
     private boolean isInDateFormat;
 
+    /**
+     * Creates an <code>Event</code> object
+     * @param description The description of the event
+     * @param eventTime The duration which the event happens
+     */
     public Event(String description, String eventTime) {
         super(description);
         this.eventTime = eventTime;
@@ -29,11 +37,19 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Represents the type of this task through an icon.
+     * @return An icon
+     */
     @Override
     public String getTypeIcon() {
         return "[E]";
     }
 
+    /**
+     * Converts the task to string.
+     * @return The string representation of this task
+     */
     @Override
     public String toString() {
         return getTypeIcon() + " " + super.getStatusIcon() + " " + super.description + " (at: " 
@@ -43,7 +59,12 @@ public class Event extends Task {
                     : eventTime) 
                 + ")";
     }
-    
+
+    /**
+     * Checks whether this task is occuring on a specified day.
+     * @param cmpDate A date that is being queried
+     * @return True if this task occurs on that day, false otherwise
+     */
     public boolean isOccuringOn(LocalDate cmpDate) {
         if (!isInDateFormat) {
             return false;
@@ -51,6 +72,10 @@ public class Event extends Task {
         return cmpDate.compareTo(startTime) > 0 && cmpDate.compareTo(endTime) < 0;
     }
 
+    /**
+     * Gets the time that this task is due.
+     * @return The time string input by the user
+     */
     @Override
     public String getTime() {
         return eventTime;
