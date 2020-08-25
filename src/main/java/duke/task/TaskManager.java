@@ -70,6 +70,16 @@ public class TaskManager {
         return stringBuilder.toString();
     }
 
+    public List<Task> findTasksByKeyword(String keyword){
+        List<Task> filteredTasks = new ArrayList<>();
+        for(Task task : tasks){
+            if(task.getContent().contains(keyword)){
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks;
+    }
+
     public void markTaskAsDone(int taskIndex){
             Task updatedTask = tasks.get(taskIndex - 1);
             updatedTask.markTaskAsDone();
