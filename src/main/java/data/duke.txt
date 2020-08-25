@@ -1,3 +1,8 @@
-[T] @ [✓] @ read book @ 
-[E] @ [✘] @ project meeting @ Aug 6th 2-4pm
-[T] @ [✓] @ join sports club @ 
+[T] @ [✘] @ haha @ 
+[D] @ [✓] @ return book @ Dec 2 2019 0600 PM
+[D] @ [✘] @ return book @ Dec 2 2019
+[T] @ [✘] @ read book @ 
+[D] @ [✓] @ return book @ Dec 2 2019
+[D] @ [✘] @ return book @ May 8 2020 0600 PM
+[E] @ [✓] @ return book @ this week 5-7pm
+[D] @ [✘] @ testing @ Feb 1 3030 0400 PM

@@ -2,8 +2,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -47,17 +55,27 @@ public class Duke {
                             String[] newArrOfStr = line.split(" ", 2);
                             task = new Todo(newArrOfStr[1]);
                         } else if (identifier.equals("deadline")) {
-                            String[] firstSplit = line.split("/by ", 2);
-                            String time = firstSplit[1];
+                            String[] firstSplit = line.split(" /by ", 2);
                             String[] secondSplit = firstSplit[0].split(" ", 2);
-                            String description = secondSplit[1].substring(0, secondSplit[1].length() - 1);
-                            task = new Deadline(description, time);
+                            String description = secondSplit[1];
+                            String date = firstSplit[1];
+                            String[] dateSplit = date.split(" ", 0);
+
+                            if (dateSplit.length > 1) {
+                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                                LocalDateTime localDateTime = LocalDateTime.parse(date, formatter);
+                                task = new Deadline(description, localDateTime);
+                            } else {
+                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+                                LocalDate localDate = LocalDate.parse(date, formatter);
+                                task = new Deadline(description, localDate);
+                            }
                         } else if (identifier.equals("event")) {
-                            String[] firstSplit = line.split("/at ", 2);
-                            String time = firstSplit[1];
+                            String[] firstSplit = line.split(" /at ", 2);
+                            String by = firstSplit[1];
                             String[] secondSplit = firstSplit[0].split(" ", 2);
-                            String description = secondSplit[1].substring(0, secondSplit[1].length() - 1);
-                            task = new Event(description, time);
+                            String description = secondSplit[1];
+                            task = new Event(description, by);
                         } else {
                             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
@@ -98,7 +116,7 @@ public class Duke {
         printBorder();
         tasks.add(task);
         String textToAppend = task.getSymbol() + " @ " + task.getStatusIcon() + " @ "
-                + task.getDescription() + " @ " + task.getBy() + "\n";
+                + task.getDescription() + " @ " + task.getDate() + "\n";
         appendToFile(filePath, textToAppend);
 
         System.out.println(INDENTATION + "Got it. I've added this task:");
@@ -117,7 +135,7 @@ public class Duke {
         writeToFile(filePath, "");
         for (Task tsk : tasks) {
             String textToAppend = tsk.getSymbol() + " @ " + tsk.getStatusIcon() + " @ "
-                    + tsk.getDescription() + " @ " + tsk.getBy() + "\n";
+                    + tsk.getDescription() + " @ " + tsk.getDate() + "\n";
             appendToFile(filePath, textToAppend);
         }
 
@@ -134,7 +152,7 @@ public class Duke {
         writeToFile(filePath, "");
         for (Task tsk : tasks) {
             String textToAppend = tsk.getSymbol() + " @ " + tsk.getStatusIcon() + " @ "
-                    + tsk.getDescription() + " @ " + tsk.getBy() + "\n";
+                    + tsk.getDescription() + " @ " + tsk.getDate() + "\n";
             appendToFile(filePath, textToAppend);
         }
 
@@ -162,8 +180,17 @@ public class Duke {
                 if (symbol.equals("[T]")) {
                     newTask = new Todo(description);
                 } else if (symbol.equals("[D]")) {
-                    String by = arrOfStr[3];
-                    newTask = new Deadline(description, by);
+                    String date = arrOfStr[3];
+                    String[] dateSplit = date.split(" ", 0);
+                    if (dateSplit.length > 3) {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy hhmm a");
+                        LocalDateTime localDateTime = LocalDateTime.parse(date, formatter);
+                        newTask = new Deadline(description, localDateTime);
+                    } else {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                        LocalDate localDate = LocalDate.parse(date, formatter);
+                        newTask = new Deadline(description, localDate);
+                    }
                 } else {
                     String by = arrOfStr[3];
                     newTask = new Event(description, by);
