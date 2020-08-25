@@ -9,358 +9,53 @@ import java.util.Scanner;
 import java.lang.StringBuilder;
 
 public class Sparrow {
-    public static ArrayList<Task> taskList = new ArrayList<>();
+    private Storage storage;
+    private TaskList tasks;
+
+    public Sparrow(String filePath) {
+        storage = new Storage("data/Sparrow.txt");
+        try {
+            tasks = new TaskList(storage.loadFromFile());
+        } catch (AssertionError e ) {
+            System.out.println(standardExceptionMessage() + "file not loaded");
+            tasks = new TaskList();
+        }
+
+    }
+
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public TaskList getTasks() {
+        return tasks;
+    }
 
     public static void main(String[] args) {
-        boolean isInitialized = initialize();
-        assert(isInitialized);
-        greet();
+        Sparrow sparrow = new Sparrow("data/Sparrow.txt");
+        Ui.greet();
 
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
-        while (handle(command)) {
+        Parser parser = new Parser(sparrow.getTasks(), sparrow.getStorage());
+        while (parser.parse(command)) {
             command = sc.nextLine();
         }
         sc.close();
     }
 
-    public static boolean handle(String commandLine) {
-        String[] commandArr = commandLine.trim().split("\\s+", 2);
-        String command = commandArr[0];
-        try {
-            switch (command) {
-            case "bye":
-                reply("Bye. Hope t' see ye again soon!");
-                return false;
-            case "list":
-                if (commandArr.length == 1) {
-                    displayList(taskList);
-                    break;
-                } else if (commandArr.length == 2) {
-                    try {
-                        displayList(filterList(commandArr[1]));
-                    } catch (DateTimeParseException e) {
-                        System.out.println(standardExceptionMessage() + "Please enter a date in this format: yyyy-mm-dd");
-                    }
-                    break;
-                }
-            case "done":
-                try {
-                    markAsDone(commandArr[1]);
-                    saveTaskList();
-                    break;
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new MissingTaskNumberException("No task number passed to done command.", e);
-                }
-            case "todo":
-                try {
-                    addTask("todo", commandArr[1]);
-                    saveTaskList();
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new EmptyTodoDescriptionException("No description provided for todo.", e);
-                }
-                break;
-            case "deadline":
-                try {
-                    addTask("deadline", commandArr[1]);
-                    saveTaskList();
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new EmptyDeadlineDescriptionException("No description provided for deadline.", e);
-                }
-                break;
-            case "event":
-                try {
-                    addTask("event", commandArr[1]);
-                    saveTaskList();
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new EmptyEventDescriptionException("No description provided for event.", e);
-                }
-                break;
-            case "delete":
-                try {
-                    deleteTask(commandArr[1]);
-                    saveTaskList();
-                    break;
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new MissingTaskNumberException("No task number passed to delete command.", e);
-                }
-            default:
-                throw new UnknownCommandException(commandArr[0]);
-            }
-        } catch(MissingTaskNumberException e){
-            System.out.println(standardExceptionMessage() + "️ Please enter a task number after the \"done\"/\"delete\" command.");
-        } catch(EmptyTodoDescriptionException e){
-            System.out.println(standardExceptionMessage() + "️ The description of a todo cannot be empty.");
-        } catch(EmptyDeadlineDescriptionException e){
-            System.out.println(standardExceptionMessage() + "️ The description of a deadline cannot be empty.");
-        } catch(EmptyEventDescriptionException e){
-            System.out.println(standardExceptionMessage() + "️ The description of an event cannot be empty.");
-        } catch(UnknownCommandException e){
-            System.out.println(standardExceptionMessage() + "️ What be the meaning of this?");
-        }
-        return true;
-    }
-
-
-    public static void greet() {
-        String welcome = "  _  _ _   ___ _                    \n" +
-                " | || (_) |_ _( )_ __               \n" +
-                " | __ | |  | ||/| '  \\              \n" +
-                " |_||_|_| |___| |_|_|_|             \n" +
-                " / __|_ __  __ _ _ _ _ _ _____ __ __\n" +
-                " \\__ \\ '_ \\/ _` | '_| '_/ _ \\ V  V /\n" +
-                " |___/ .__/\\__,_|_| |_| \\___/\\_/\\_/ \n" +
-                "     |_|                            ";
-        System.out.println(welcome);
-        reply("How can I help ye?");
-    }
-
-    public static void reply(String message) {
-        System.out.println("    ________________________________________");
-        Scanner sc = new Scanner(message);
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine();
-            System.out.println("      " + line);
-        }
-        System.out.println("    ________________________________________");
-        sc.close();
-    }
-
-    public static void addTask(String type, String details) {
-        StringBuilder sb = new StringBuilder("Aye Aye Captain! I've added this task:\n  ");
-        try {
-            switch (type) {
-            case "todo":
-                Todo todo = new Todo(details);
-                taskList.add(todo);
-                sb.append(todo);
-                break;
-            case "deadline":
-                try {
-                    String[] taskDetails = details.trim().split("/by");
-                    String description = taskDetails[0];
-                    LocalDate dueDate = stringToDate(taskDetails[1].trim());
-
-                    Deadline deadline = new Deadline(description, dueDate);
-                    taskList.add(deadline);
-                    sb.append(deadline);
-                    break;
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new InvalidDeadlineByException("/by not passed", e);
-                }
-            case "event":
-                try {
-                    String[] taskDetails = details.trim().split("/at");
-                    String description = taskDetails[0];
-                    LocalDate date = stringToDate(taskDetails[1].trim());
-
-                    Event event = new Event(description, date);
-                    taskList.add(event);
-                    sb.append(event);
-                    break;
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new InvalidEventAtException("/at not passed", e);
-                }
-
-            }
-            String summary = String.format("\nNow you have %d task(s) in the list.", taskList.size());
-            sb.append(summary);
-            reply(sb.toString());
-        } catch (InvalidDeadlineByException e) {
-            System.out.println(standardExceptionMessage() + "️ Please pass a /by to the deadline");
-        } catch (InvalidEventAtException e) {
-            System.out.println(standardExceptionMessage() + "️ Please pass a /at to the event");
-        } catch (DateTimeParseException e) {
-            System.out.println(standardExceptionMessage() + "Please enter a date in this format: yyyy-mm-dd");
-        }
-    }
-
-    public static void displayList(ArrayList<Task> taskList) {
-        StringBuilder sb = new StringBuilder("Here are the tasks in your list: \n");
-        for (int i = 0; i < taskList.size(); i++) {
-            String temp = String.format("%d. %s\n", i + 1, taskList.get(i));
-            sb.append(temp);
-        }
-        reply(sb.toString());
-    }
-
-    public static ArrayList<Task> filterList(String dateFilter) throws DateTimeParseException {
-        String[] dateArr = dateFilter.trim().split("\\s+", 2);
-        LocalDate dateToCompare = stringToDate(dateArr[1]);
-        ArrayList<Task> filteredList = new ArrayList<>();
-
-        switch (dateArr[0]) {
-        case "on":
-            for (Task task : taskList) {
-                LocalDate taskDate;
-
-                // Get date from Deadline/Event
-                if (task instanceof Deadline) {
-                    taskDate = ((Deadline) task).getDueDate();
-                } else if (task instanceof Event) {
-                    taskDate = ((Event) task).getDate();
-                } else {
-                    continue;
-                }
-
-                // Check if task's date is on date specified
-                if (taskDate.isEqual(dateToCompare)) {
-                    filteredList.add(task);
-                }
-            }
-            break;
-        case "before":
-            for (Task task : taskList) {
-                LocalDate taskDate;
-
-                // Get date from Deadline/Event
-                if (task instanceof Deadline) {
-                    taskDate = ((Deadline) task).getDueDate();
-                } else if (task instanceof Event) {
-                    taskDate = ((Event) task).getDate();
-                } else {
-                    continue;
-                }
-
-                // Check if task's date is before date specified
-                if (taskDate.isBefore(dateToCompare)) {
-                    filteredList.add(task);
-                }
-            }
-            break;
-        }
-        return filteredList;
-    }
-
-    public static void markAsDone(String taskNum) {
-        try {
-            int taskNumber = Integer.parseInt(taskNum);
-            if (taskNumber <= taskList.size() && taskNumber > 0) {
-                taskList.get(taskNumber - 1).markAsDone();
-                reply("Jolly riddance! I've marked this task as done:\n" + taskList.get(taskNumber - 1));
-            } else {
-                System.out.println("Please enter a valid task number.");
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid task number.");
-        }
-    }
 
     public static String standardExceptionMessage() {
         return "ARR!\uD83C\uDFF4\u200D\u2620\uFE0F️ ";
     }
 
-    public static void deleteTask(String taskNum) {
-        try {
-            int taskNumber = Integer.parseInt(taskNum);
-            if (taskNumber <= taskList.size() && taskNumber > 0) {
-                Task removedTask = taskList.remove(taskNumber - 1);
-                reply("Jolly riddance! I've deleted this task:\n" + "  " + removedTask.toString() + String.format("\nNow you have %d task(s) in the list.", taskList.size()));
-            } else {
-                System.out.println("Please enter a valid task number.");
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid task number.");
-        }
-    }
+
 
     public static LocalDate stringToDate(String dateStr) throws DateTimeParseException {
         return LocalDate.parse(dateStr);
     }
 
-    public static void stringToTask(String input) {
-        String[] inputArr = input.split("\\s+\\|\\s+", 4);
-        boolean isTaskDone = Integer.parseInt(inputArr[1]) == 1;
-        switch (inputArr[0]) {
-        case "T":
-            Todo todo = new Todo(inputArr[2]);
-            if (isTaskDone) {
-                todo.markAsDone();
-            }
-            taskList.add(todo);
-            break;
-        case "D":
-            LocalDate dueDate = stringToDate(inputArr[3]);
-            Deadline deadline = new Deadline(inputArr[2], dueDate);
-            if (isTaskDone) {
-                deadline.markAsDone();
-            }
-            taskList.add(deadline);
-            break;
-        case "E":
-            LocalDate date = stringToDate(inputArr[3]);
-            Event event = new Event(inputArr[2], date);
-            if (isTaskDone) {
-                event.markAsDone();
-            }
-            taskList.add(event);
-            break;
-        default:
-            System.out.println("No matching task found, shouldn't end up here");
-        }
-    }
-    public static boolean initialize() {
-        boolean isDirCreated = false;
-        boolean isFileCreated = false;
-        // check if directory and file exist
-        File f = new File("data/Sparrow.txt");
-        if (f.exists()) {
-            try {
-                Scanner sc = new Scanner(f);
-                while (sc.hasNextLine()) {
-                    String task = sc.nextLine();
-                    stringToTask(task);
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        } else {
-            File g = new File("data");
-            if (!g.exists()) {
-                isDirCreated = g.mkdirs();
-            }
-            try {
-                isFileCreated = f.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return isDirCreated && isFileCreated;
-    }
 
 
-    public static String taskToString(Task task) {
-        StringBuilder sb = new StringBuilder(task.getDescription());
-        if (task.getIsDone()) {
-            sb.insert(0, "1 | ");
-        } else {
-            sb.insert(0, "0 | ");
-        }
 
-        if (task instanceof Todo) {
-            sb.insert(0,"T | ");
-        } else if (task instanceof Deadline) {
-            sb.insert(0,"D | ");
-            sb.append("| ").append(((Deadline) task).getDueDate());
-        } else if (task instanceof  Event) {
-            sb.insert(0,"E | ");
-            sb.append("| ").append(((Event) task).getDate());
-        }
-
-        sb.append("\n");
-
-        return sb.toString();
-    }
-
-    public static void saveTaskList() {
-        try {
-            FileWriter fw = new FileWriter("data/Sparrow.txt");
-            for (Task task : taskList) {
-                fw.append(taskToString(task));
-            }
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
