@@ -8,17 +8,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Display all items in taskList
  */
-public class ListCommand extends Command {
+public class ListCommand implements Command {
 
     private final List<Task> taskList;
 
     public ListCommand(List<Task> taskList) {
         this.taskList = taskList;
-    }
-
-    @Override
-    public boolean hasUndo() {
-        return false;
     }
 
     @Override
@@ -36,9 +31,4 @@ public class ListCommand extends Command {
 
     }
 
-    @Override
-    public void undo() {
-        // Operation unsupported
-        System.out.println("Undo: ListCommand");
-    }
 }

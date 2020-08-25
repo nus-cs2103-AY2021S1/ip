@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 /**
  * A Task with a startTime, and an endTime
  */
-public class Event extends Task{
+public class Event extends Task {
 
     private final DukeDateTime eventStart;
     private final DukeDateTime eventEnd;

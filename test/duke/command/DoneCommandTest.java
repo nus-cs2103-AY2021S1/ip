@@ -16,16 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class DoneCommandTest {
 
     @Test
-    void isModifying_true() {
-        assertTrue(new DoneCommand(null).hasUndo());
-    }
-
-    @Test
-    void isExit_false() {
-        assertFalse(new DoneCommand(null).isExit());
-    }
-
-    @Test
     void executeAndUndo() {
         DukeDateTime dateTime = new DukeDateTime(LocalDateTime.now().format(DukeDateTime.FORMAT));
         List<Task> taskList = new ArrayList<>(5);
@@ -46,9 +36,9 @@ class DoneCommandTest {
         assertFalse(taskList.get(2).isCompleted());
 
         // Actual test
-        Command c1 = new DoneCommand(task1);
-        Command c2 = new DoneCommand(task2);
-        Command c3 = new DoneCommand(task3);
+        UndoCommand c1 = new DoneCommand(task1);
+        UndoCommand c2 = new DoneCommand(task2);
+        UndoCommand c3 = new DoneCommand(task3);
 
         c1.execute();
         c2.execute();

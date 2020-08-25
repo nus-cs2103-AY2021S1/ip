@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * Mark duke.task as done
  */
-public class DoneCommand extends Command {
+public class DoneCommand implements UndoCommand {
 
     private final Task task;
 
@@ -28,11 +28,10 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof DoneCommand)) return false;
-        DoneCommand that = (DoneCommand) obj;
-
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DoneCommand)) return false;
+        DoneCommand that = (DoneCommand) o;
         return task.equals(that.task);
     }
 

@@ -10,29 +10,29 @@ public abstract class Task {
     private static final String SYMBOL_DONE = "✓";
     private static final String SYMBOL_UNDONE = "✗";
 
-    private boolean completed;
+    private boolean isCompleted;
     private String description;
 
     public Task(String description) {
-        this.completed = false;
+        this.isCompleted = false;
         this.description = description;
     }
 
-    public Task(boolean completed, String description) {
-        this.completed = completed;
+    public Task(boolean isCompleted, String description) {
+        this.isCompleted = isCompleted;
         this.description = description;
     }
 
     private String isCompletedSymbol() {
-        return this.completed ? SYMBOL_DONE : SYMBOL_UNDONE;
+        return this.isCompleted ? SYMBOL_DONE : SYMBOL_UNDONE;
     }
 
     public boolean isCompleted() {
-        return this.completed;
+        return this.isCompleted;
     }
 
     public void setCompleted(boolean completed) {
-        this.completed = completed;
+        this.isCompleted = completed;
     }
 
     public String getDescription() {

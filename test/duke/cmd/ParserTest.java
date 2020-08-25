@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ParserTest {
 
@@ -48,39 +49,37 @@ class ParserTest {
     @Test
     void parseExitCommand_success() {
         String input = "bye";
-        Command expected = new ExitCommand();
         Command actual = Parser.parse(taskList, input);
-        assertEquals(expected, actual);
+        assertTrue(actual instanceof ExitCommand);
     }
 
     @Test
     void parseHelpCommand_success() {
         String input = "help";
-        Command expected = new HelpCommand();
         Command actual = Parser.parse(taskList, input);
-        assertEquals(expected, actual);
+        assertTrue(actual instanceof HelpCommand);
     }
 
     @Test
     void parseInvalidCommand_success() {
-        Command expected = new InvalidCommand();
 
-        Command actual = Parser.parse(taskList, "");
-        assertEquals(expected, actual);
+        Command actual;
+
+        actual = Parser.parse(taskList, "");
+        assertTrue(actual instanceof InvalidCommand);
 
         actual = Parser.parse(taskList, "invalidone");
-        assertEquals(expected, actual);
+        assertTrue(actual instanceof InvalidCommand);
 
         actual = Parser.parse(taskList, "invalidone invalidtwo");
-        assertEquals(expected, actual);
+        assertTrue(actual instanceof InvalidCommand);
     }
 
     @Test
     void parseListCommand_success() {
         String input = "list";
-        Command expected = new ListCommand(taskList);
         Command actual = Parser.parse(taskList, input);
-        assertEquals(expected, actual);
+        assertTrue(actual instanceof ListCommand);
     }
 
     @Test

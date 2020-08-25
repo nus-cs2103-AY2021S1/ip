@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * Remove duke.task from taskList
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand implements UndoCommand {
 
     private final List<Task> taskList;
     private Task task;
@@ -31,11 +31,10 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof DeleteCommand)) return false;
-        DeleteCommand that = (DeleteCommand) obj;
-
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DeleteCommand)) return false;
+        DeleteCommand that = (DeleteCommand) o;
         return taskList.equals(that.taskList) &&
                 task.equals(that.task);
     }

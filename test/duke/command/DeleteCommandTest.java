@@ -16,15 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class DeleteCommandTest {
 
     @Test
-    void isModifying_true() {
-        assertTrue(new DeleteCommand(null, null).hasUndo());
-    }
-
-    @Test
-    void isExit_false() {
-        assertFalse(new DeleteCommand(null, null).isExit());
-    }
-    @Test
     void executeAndUndo() {
         DukeDateTime dateTime = new DukeDateTime(LocalDateTime.now().format(DukeDateTime.FORMAT));
         List<Task> taskList = new ArrayList<>(5);
@@ -40,9 +31,9 @@ class DeleteCommandTest {
         // Pre-test
         assertEquals(3, taskList.size());
 
-        Command c1 = new DeleteCommand(taskList, task1);
-        Command c2 = new DeleteCommand(taskList, task2);
-        Command c3 = new DeleteCommand(taskList, task3);
+        UndoCommand c1 = new DeleteCommand(taskList, task1);
+        UndoCommand c2 = new DeleteCommand(taskList, task2);
+        UndoCommand c3 = new DeleteCommand(taskList, task3);
 
         // Actual test
         c1.execute();

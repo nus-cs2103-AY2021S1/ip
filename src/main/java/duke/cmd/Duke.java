@@ -1,6 +1,7 @@
 package duke.cmd;
 
 import duke.command.Command;
+import duke.command.ExitCommand;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class Duke {
             command.execute();
 
             // Exit CDuke
-            if (command.isExit()) break;
+            if (command instanceof ExitCommand) break;
         }
 
         System.out.println(ENDING_GREETING);

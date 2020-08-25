@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class StorageTest {
+public class SaveAndLoadCommandTest {
 
     @Test
     void testSaveAndLoad() {

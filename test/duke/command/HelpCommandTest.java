@@ -11,16 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 class HelpCommandTest {
 
     @Test
-    void isModifying_false() {
-        assertFalse(new HelpCommand().hasUndo());
-    }
-
-    @Test
-    void isExit_false() {
-        assertFalse(new HelpCommand().isExit());
-    }
-
-    @Test
     void testExecute() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         PrintStream originalOut = System.out;

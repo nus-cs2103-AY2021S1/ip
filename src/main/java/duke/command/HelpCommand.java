@@ -7,12 +7,7 @@ import java.util.Arrays;
 /**
  * Display list of available duke.command
  */
-public class HelpCommand extends Command {
-
-    @Override
-    public boolean hasUndo() {
-        return false;
-    }
+public class HelpCommand implements Command {
 
     @Override
     public void execute() {
@@ -23,9 +18,4 @@ public class HelpCommand extends Command {
         System.out.println();
     }
 
-    @Override
-    public void undo() {
-        // Operation Unsupported
-        System.out.println("Undo: HelpCommand");
-    }
 }

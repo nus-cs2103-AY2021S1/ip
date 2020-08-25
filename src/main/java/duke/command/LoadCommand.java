@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 /**
  * Load taskList from file
  */
-public class LoadCommand extends Command {
+public class LoadCommand implements Command {
 
     private final List<Task> taskList;
     private final String filePath;
@@ -23,11 +23,6 @@ public class LoadCommand extends Command {
     public LoadCommand(List<Task> taskList, String filePath) {
         this.taskList = taskList;
         this.filePath = filePath;
-    }
-
-    @Override
-    public boolean hasUndo() {
-        return false;
     }
 
     @Override
@@ -66,8 +61,16 @@ public class LoadCommand extends Command {
     }
 
     @Override
-    public void undo() {
-        // Operation unsupported
-        System.out.println("Undo: LoadCommand");
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LoadCommand)) return false;
+        LoadCommand that = (LoadCommand) o;
+        return taskList.equals(that.taskList) &&
+                filePath.equals(that.filePath);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(taskList, filePath);
     }
 }

@@ -1,9 +1,11 @@
 package duke.command;
 
+import java.util.Objects;
+
 /**
  * Command that has no functionality other than printing to stdout
  */
-public class InvalidCommand extends Command {
+public class InvalidCommand implements Command {
 
     private final String message;
 
@@ -16,18 +18,20 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public boolean hasUndo() {
-        return false;
-    }
-
-    @Override
     public void execute() {
         System.out.println(this.message);
     }
 
     @Override
-    public void undo() {
-        // Operation unsupported
-        System.out.println("Undo: InvalidCommand");
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof InvalidCommand)) return false;
+        InvalidCommand that = (InvalidCommand) o;
+        return message.equals(that.message);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(message);
     }
 }

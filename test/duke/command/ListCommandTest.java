@@ -17,16 +17,6 @@ class ListCommandTest {
     private List<Task> taskList = new ArrayList<>(1);
 
     @Test
-    void isModifying_false() {
-        assertFalse(new ListCommand(taskList).hasUndo());
-    }
-
-    @Test
-    void isExit_false() {
-        assertFalse(new ListCommand(taskList).isExit());
-    }
-
-    @Test
     void testExecute() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         PrintStream originalOut = System.out;
