@@ -8,6 +8,7 @@ import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.exception.InvalidCommand;
 import duke.tasks.Deadline;
@@ -107,6 +108,19 @@ public class Parser {
                 }
             } else if (command.contains("bye")) {
                 return new ByeCommand();
+            } else if (command.contains("find")) {
+                try {
+                    String requestKeywords = command.substring(5);
+                    if (requestKeywords.length() == 0) {
+                        throw new InvalidCommand("OOPS!!! Please specify your task.");
+                    }
+                    FindCommand fc = new FindCommand(requestKeywords);
+                    return fc;
+                } catch(StringIndexOutOfBoundsException ex) {
+                    throw new InvalidCommand("OOPS!!! Please specify your task.");
+                } catch (InvalidCommand invalidCommand) {
+                    Ui.commandError(invalidCommand);
+                }
             } else {
                 throw new InvalidCommand("Please enter the correct command");
             }
