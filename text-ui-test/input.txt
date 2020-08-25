@@ -8,6 +8,6 @@ list
 delete 2
 list
 todo exercise
-deadline LCC essay /by 2020-09-24
+deadline LCC essay /by 2020/09/24
 event judo competition /at 2020-11-23
 date 2020-09-24

@@ -5,3 +5,4 @@ public class DukeException extends Exception {
 }
 
 // consider exception when 2022-9-15 is given instead of 2022-09-15
+// index out of bound exception
