@@ -45,6 +45,11 @@ public class Duke {
                     taskList.delete(parser.parseDelete(input));
                     ui.listOut(taskList);
                     break;
+                case FIND:
+                    TaskList newList = taskList.find(parser.parseFind(input));
+                    ui.listOut(String.format("I have found the following %d task(s)", newList.size()),
+                            newList);
+                    break;
                 case LIST:
                     ui.listOut(taskList);
                     break;

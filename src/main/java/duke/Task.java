@@ -1,16 +1,11 @@
 package duke;
 
-public class Task {
+public abstract class Task {
     protected String desc;
     protected boolean isDone;
 
     public Task(String desc) {
         this.desc = desc;
-    }
-
-    private Task(String desc, boolean done) {
-        this.desc = desc;
-        this.isDone = done;
     }
 
     public void markDone() {
@@ -22,7 +17,7 @@ public class Task {
         return String.format("[%c] %s", isDone ? '\u2713' : '\u2717', desc);
     }
 
-    public String toSaveString() {
-        return "error";
-    }
+    public abstract String toSaveString();
+
+    public abstract boolean contains(String s);
 }
