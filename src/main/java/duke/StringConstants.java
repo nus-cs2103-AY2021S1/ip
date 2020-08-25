@@ -1,3 +1,5 @@
+package duke;
+
 public class StringConstants {
     // Strings for printing
     public static final String LINE = "__________________________________________________";

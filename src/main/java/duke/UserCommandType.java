@@ -1,3 +1,5 @@
+package duke;
+
 public enum UserCommandType {
     TODO,
     DEADLINE,

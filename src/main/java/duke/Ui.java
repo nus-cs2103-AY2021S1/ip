@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
     public static void printWith4Indent(String message) {
         System.out.println(StringConstants.FOUR_SPACES + message);
