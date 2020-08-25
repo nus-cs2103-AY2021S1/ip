@@ -9,9 +9,16 @@ public class Deadline extends Task{
 
     public String formattedDescription() {
         String[] splitBySlash = super.description.split("/", 2);
-        String[] splitBySpace = splitBySlash[1].split(" ", 2);
-        return splitBySlash[0] + "(" + splitBySpace[0] + ": " + splitBySpace[1]
-                + ")";
+        if (splitBySlash.length > 1) {
+            // description came from user input
+            String[] splitBySpace = splitBySlash[1].split(" ", 2);
+            return splitBySlash[0] + "(" + splitBySpace[0] + ": " + splitBySpace[1]
+                    + ")";
+        } else {
+            // description came from System file.
+            return splitBySlash[0];
+        }
+
     }
 
     public String toString() {

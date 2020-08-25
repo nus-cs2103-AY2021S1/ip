@@ -1,5 +1,6 @@
 import main.java.*;
 
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -19,11 +20,74 @@ public class Duke {
         System.out.println(exception.getMessage());
     }
 
+    public static File retrieveTasklistFile() throws IOException {
+        String workingDir = System.getProperty("user.dir");
+        File file = new File(workingDir + File.separator
+                + "tasklist.txt");
+        return file;
+    }
+
 
     // Note that all the outputs are formatted with two spaces before.
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
+        // scanner used to scan the file.
+        Scanner fileScanner = null;
         ArrayList<Task> taskList = new ArrayList();
+        File file = null;
+        BufferedWriter bufferedWriter = null;
+        BufferedReader bufferedReader = null;
+        FileWriter appendFileWriter = null;
+        FileReader fileReader = null;
+
+        // set of code that reads System file on start of Duke program
+        // FileReader and BufferedReaders are instantiated here, used across the main method
+        // FileWriter and BufferedWriters are appending writers, used for operations other than done and delete
+        // overriding writers are used for done and delete commands.
+        try {
+            // the .txt file containing the tasklist
+            file = retrieveTasklistFile();
+
+            // if the file does not exist, create a new file at that directory.
+            if (!file.exists()) {
+                file.createNewFile();
+                fileScanner = new Scanner(file);
+                fileReader = new FileReader(file);
+                bufferedReader = new BufferedReader(fileReader);
+            } else {
+                fileScanner = new Scanner(file);
+                fileReader = new FileReader(file);
+                bufferedReader = new BufferedReader(fileReader);
+                // while there is still a line of string to read, populate the tasklist
+                while(fileScanner.hasNextLine()) {
+                    // dissect the line of String to create Task objects.
+                    String taskDesc = fileScanner.nextLine();
+                    String[] lineComponents = taskDesc.split(" ", 2);
+                    Task toAdd = null;
+                    if (taskDesc.contains("[T]")) {
+                        toAdd = new Todo(lineComponents[1]);
+                    } else if (taskDesc.contains("[D]")) {
+                        toAdd = new Deadline(lineComponents[1]);
+                    } else if (taskDesc.contains("[E]")) {
+                        toAdd = new Event(lineComponents[1]);
+                    } else {
+                        System.out.println("Couldn't read saved tasks from System");
+                    }
+                    if (taskDesc.contains("\u2713")) {
+                        // description has a tick
+                        toAdd.markDone();
+                    }
+                    taskList.add(toAdd);
+                }
+            }
+            // this fileWriter is used to appending operations
+            appendFileWriter = new FileWriter(file, true);
+            bufferedWriter = new BufferedWriter(appendFileWriter);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
         // welcome message
         horiLine(60);
         System.out.println("  Hello! I'm IntelliGent!\n  What can I do for you?");
@@ -37,6 +101,7 @@ public class Duke {
                 System.out.println("  Bye. Hope to see you again soon!");
                 horiLine(60);
                 sc.close();
+                fileScanner.close();
                 break;
             } else if (nextInput.equals("list")) {
                 horiLine(60);
@@ -46,20 +111,47 @@ public class Duke {
                 horiLine(60);
             } else if (commandComponents[0].equals("done")) {
                 horiLine(60);
-                int taskIndex = Integer.parseInt(commandComponents[1]) - 1;
-                Task toMark = taskList.get(taskIndex);
-                toMark.markDone();
-                System.out.println("  Nice! I've marked this task as done:");
-                System.out.println("    " + toMark.toString());
+                FileWriter overrideFileWriter = null;
+                BufferedWriter overrideBuffWriter = null;
+                try {
+                    overrideFileWriter = new FileWriter(file);
+                    overrideBuffWriter = new BufferedWriter(overrideFileWriter);
+                    int taskIndex = Integer.parseInt(commandComponents[1]) - 1;
+                    Task toMark = taskList.get(taskIndex);
+                    toMark.markDone();
+                    for (int i = 0; i < taskList.size(); i++) {
+                        Task toWrite = taskList.get(i);
+                        overrideBuffWriter.write(toWrite.toString() + System.lineSeparator());
+                    }
+                    overrideBuffWriter.flush();
+                    System.out.println("  Nice! I've marked this task as done:");
+                    System.out.println("    " + toMark.toString());
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
                 horiLine(60);
             } else if (commandComponents[0].equals("delete")) {
                 horiLine(60);
-                int taskIndex = Integer.parseInt(commandComponents[1]) - 1;
-                Task toDisplay = taskList.get(taskIndex);
-                taskList.remove(taskIndex);
-                System.out.println("  Noted. I've removed this task:");
-                System.out.println("    " + toDisplay.toString());
-                System.out.println("  Now you have " + taskList.size() + " tasks in the list.");
+
+                FileWriter overrideFileWriter = null;
+                BufferedWriter overrideBuffWriter = null;
+                try {
+                    overrideFileWriter = new FileWriter(file);
+                    overrideBuffWriter = new BufferedWriter(overrideFileWriter);
+                    int taskIndex = Integer.parseInt(commandComponents[1]) - 1;
+                    Task toDisplay = taskList.get(taskIndex);
+                    taskList.remove(taskIndex);
+                    for (int i = 0; i < taskList.size(); i++) {
+                        Task toWrite = taskList.get(i);
+                        overrideBuffWriter.write(toWrite.toString() + System.lineSeparator());
+                    }
+                    overrideBuffWriter.flush();
+                    System.out.println("  Noted. I've removed this task:");
+                    System.out.println("    " + toDisplay.toString());
+                    System.out.println("  Now you have " + taskList.size() + " tasks in the list.");
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
                 horiLine(60);
             } else {
                 // 1. split the input based on the first word(task type)
@@ -76,12 +168,16 @@ public class Duke {
                     } else {
                         try {
                             taskToAdd = new Event(commandComponents[1]);
+                            bufferedWriter.write(taskToAdd.toString() + System.lineSeparator());
+                            bufferedWriter.flush();
                             System.out.println("  Got it. I've added this task:\n"
                                     + "    " + taskToAdd.toString() + "\n  Now you have "
                                     + (taskList.size()+1) + " tasks in the list.");
                             taskList.add(taskToAdd);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             invalidInput("  \u2639 OOPS!!! An event task must be input with a forward slash and the deadline");
+                        } catch (IOException ioe) {
+                            ioe.printStackTrace();
                         }
                     }
                 } else if (taskType.equals("deadline")) {
@@ -93,12 +189,16 @@ public class Duke {
                         try {
                             // the exception is thrown when we call the toString method.
                             taskToAdd = new Deadline(commandComponents[1]);
+                            bufferedWriter.write(taskToAdd.toString() + System.lineSeparator());
+                            bufferedWriter.flush();
                             System.out.println("  Got it. I've added this task:\n"
                                     + "    " + taskToAdd.toString() + "\n  Now you have "
                                     + (taskList.size()+1) + " tasks in the list.");
                             taskList.add(taskToAdd);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             invalidInput("  \u2639 OOPS!!! A deadline task must be input with a forward slash and the deadline");
+                        } catch (IOException ioe) {
+                            ioe.printStackTrace();
                         }
                     }
                 } else if (taskType.equals("todo")){
@@ -107,11 +207,17 @@ public class Duke {
                         // description is empty
                         invalidInput("  \u2639 OOPS!!! The description of a todo cannot be empty.");
                     } else {
-                        taskToAdd = new Todo(commandComponents[1]);
-                        System.out.println("  Got it. I've added this task:\n"
-                                + "    " + taskToAdd.toString() + "\n  Now you have "
-                                + (taskList.size()+1) + " tasks in the list.");
-                        taskList.add(taskToAdd);
+                        try {
+                            taskToAdd = new Todo(commandComponents[1]);
+                            bufferedWriter.write(taskToAdd.toString() + System.lineSeparator());
+                            bufferedWriter.flush();
+                            System.out.println("  Got it. I've added this task:\n"
+                                    + "    " + taskToAdd.toString() + "\n  Now you have "
+                                    + (taskList.size()+1) + " tasks in the list.");
+                            taskList.add(taskToAdd);
+                        } catch (IOException ioe) {
+                            ioe.printStackTrace();
+                        }
                     }
                 } else {
                     // invalid input, detect it and create a DukeException,
