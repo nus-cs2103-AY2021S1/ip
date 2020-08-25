@@ -11,7 +11,7 @@ public class Duke {
 	private Storage storage;
 	private Ui ui;
 
-	Duke() {
+	public Duke() {
 		storage = new Storage(DATA_PATHNAME);
 		ui = new Ui();
 		try {
