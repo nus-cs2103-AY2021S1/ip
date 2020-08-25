@@ -22,7 +22,7 @@ public class TaskList {
                 task = new Todo(taskComponents[0], false);
                 break;
             case DEADLINE:
-                task = new Deadline(taskComponents[0], false, taskComponents[1]);
+                task = new Deadline(taskComponents[0], false, UserCommands.parseDateTime(taskComponents[1]));
                 break;
             case EVENT:
                 task = new Event(taskComponents[0], false, taskComponents[1]);

@@ -1,7 +1,10 @@
-public class Deadline extends Task {
-    private final String deadline;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String name, boolean done, String deadline) {
+public class Deadline extends Task {
+    private final LocalDateTime deadline;
+
+    public Deadline(String name, boolean done, LocalDateTime deadline) {
         super(name, done);
         this.deadline = deadline;
     }
@@ -9,7 +12,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String doneSymbol = isDone() ? "✓" : "✗";
-        return String.format("[D][%s] %s (by: %s)", doneSymbol, getName(), deadline);
+        return String.format("[D][%s] %s (by: %s)", doneSymbol, getName(),
+                deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm")));
     }
 
     @Override

@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -28,7 +30,7 @@ public class Saver {
                 if (components[0].equals("T")) {
                     tasks.add(new Todo(components[2], components[1].equals("1")));
                 } else if (components[0].equals("D")) {
-                    tasks.add(new Deadline(components[2], components[1].equals("1"), components[3]));
+                    tasks.add(new Deadline(components[2], components[1].equals("1"), LocalDateTime.parse(components[3])));
                 } else if (components[0].equals("E")) {
                     tasks.add(new Event(components[2], components[1].equals("1"), components[3]));
                 } else {
@@ -39,7 +41,7 @@ public class Saver {
         } catch (FileNotFoundException exception) {
             System.out.println("No save file detected");
             return new ArrayList<>();
-        } catch (InvalidSaveFileException exception) {
+        } catch (InvalidSaveFileException | DateTimeParseException exception) {
             System.out.println(exception.getMessage());
             return new ArrayList<>();
         }
