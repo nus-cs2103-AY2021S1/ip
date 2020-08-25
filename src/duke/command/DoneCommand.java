@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.task.Command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -31,5 +30,16 @@ public class DoneCommand extends Command {
         } catch (DukeException d) {
             throw new DoneException("Please enter a valid task number");
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other instanceof DoneCommand) {
+            DoneCommand doneCommand = (DoneCommand) other;
+            return this.task.equals(doneCommand.getTask());
+        }
+        return false;
     }
 }

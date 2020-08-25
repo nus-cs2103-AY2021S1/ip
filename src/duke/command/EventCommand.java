@@ -3,7 +3,6 @@ package duke.command;
 import duke.*;
 import duke.exception.DukeException;
 import duke.exception.EventException;
-import duke.task.Command;
 import duke.task.Event;
 
 import java.time.LocalDate;
@@ -74,5 +73,16 @@ public class EventCommand extends Command {
         } catch (DukeException d) {
             throw new EventException("Please specify the event name and date.");
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other instanceof EventCommand) {
+            EventCommand eventCommand = (EventCommand) other;
+            return this.task.equals(eventCommand.getTask());
+        }
+        return false;
     }
 }

@@ -1,8 +1,9 @@
-package duke.task;
+package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
 
 public abstract class Command {
     public String task;
@@ -33,4 +34,9 @@ public abstract class Command {
     }
 
     public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+
+    public String getTask() {
+        return this.task;
+    };
+
 }

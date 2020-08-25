@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.*;
+import duke.exception.CalendarException;
 import duke.exception.DeadlineException;
 import duke.exception.DukeException;
-import duke.task.Command;
 import duke.task.Deadline;
 
 import java.time.LocalDate;
@@ -51,7 +51,7 @@ public class DeadlineCommand extends Command {
                     storage.updateData(taskList.getTasks());
 
                 } catch (DateTimeParseException e) {
-                    System.out.println("Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
+                    throw new CalendarException("Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
                 }
 
             } catch (IndexOutOfBoundsException e) {
@@ -61,5 +61,16 @@ public class DeadlineCommand extends Command {
         } catch (DukeException d) {
             throw new DeadlineException("Please specify the task and deadline.");
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other instanceof DeadlineCommand) {
+            DeadlineCommand deadlineCommand = (DeadlineCommand) other;
+            return this.task.equals(deadlineCommand.getTask());
+        }
+        return false;
     }
 }

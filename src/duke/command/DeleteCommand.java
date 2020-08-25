@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.task.Command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -32,5 +31,16 @@ public class DeleteCommand extends Command {
         } catch (DukeException d) {
             throw new DeleteException("Please enter a number. I cannot delete nothing :(");
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other instanceof DeleteCommand) {
+            DeleteCommand deleteCommand = (DeleteCommand) other;
+            return this.task.equals(deleteCommand.getTask());
+        }
+        return false;
     }
 }

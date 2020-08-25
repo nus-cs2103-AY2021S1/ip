@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.task.Command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -23,5 +22,16 @@ public class ShowCommand extends Command {
 
     public void processShow(String date, TaskList taskList, Ui ui, Storage storage) throws CalendarException {
         taskList.showDate(date);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other instanceof ShowCommand) {
+            ShowCommand showCommand = (ShowCommand) other;
+            return this.task.equals(showCommand.getTask());
+        }
+        return false;
     }
 }
