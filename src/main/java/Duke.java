@@ -118,6 +118,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("src/data/duke.txt").run();
+        new Duke("data/duke.txt").run();
     }
 }

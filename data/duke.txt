@@ -1,6 +1,6 @@
 T | 1 | homework
-D | 1 | assignment 2 | 2020-08-22 23:59
-E | 1 | family dinner | 2020-08-24 16:00 18:00
+D | 0 | assignment 2 | 2020-08-22 23:59
+E | 0 | family dinner | 2020-08-24 16:00 18:00
 T | 1 | read book
 D | 0 | return book | 2020-06-06 23:59
 E | 1 | project meeting | 2020-08-06 14:00 16:00
