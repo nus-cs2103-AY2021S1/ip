@@ -10,4 +10,9 @@ public class DeadlineTask extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + deadline + ")";
     }
+
+    @Override
+    public String toSaveString() {
+        return String.format("D @@ %d @@ %s @@ %s", isDone ? 1 : 0, desc, deadline);
+    }
 }
