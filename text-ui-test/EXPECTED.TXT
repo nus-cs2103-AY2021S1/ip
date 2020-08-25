@@ -11,6 +11,18 @@ What can I do for you?
    --------------------------------------------------------------
 
    --------------------------------------------------------------
+    ☹OOPS!!! I'm sorry, but I don't know what that means.
+    Here are the available commands that I know:
+     1. todo _ (e.g. todo 3)
+     2. deadline `task name` /by `end time` (e.g. deadline Exercise /by Sunday)
+     3. `event name` /at `start time - end time` (e.g. meeting /at Sunday 2pm - 4pm)
+     4. list
+     5. done _ (e.g. done 4)
+     6. delete _ (e.g. delete 4)
+     7. bye
+   --------------------------------------------------------------
+
+   --------------------------------------------------------------
     Here are the tasks in your list:
      1.[T][✘] test case
    --------------------------------------------------------------

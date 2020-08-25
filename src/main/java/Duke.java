@@ -1,3 +1,5 @@
+import duke.DukeController;
+
 public class Duke {
 
     public static void main(String[] args) {
