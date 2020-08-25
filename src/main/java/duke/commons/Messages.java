@@ -1,4 +1,4 @@
-package duke.commons;
+package src.main.java.duke.commons;
 
 /**
  * Container for user visible messages.

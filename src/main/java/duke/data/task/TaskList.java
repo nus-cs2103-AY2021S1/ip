@@ -1,4 +1,4 @@
-package duke.data.task;
+package src.main.java.duke.data.task;
 
 import java.util.ArrayList;
 import java.util.Collection;

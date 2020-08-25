@@ -1,6 +1,6 @@
-package duke.commands;
+package src.main.java.duke.commands;
 
-import duke.data.task.Task;
+import src.main.java.duke.data.task.Task;
 
 import java.util.List;
 
@@ -16,6 +16,9 @@ public class ListCommand extends Command {
     public CommandResult execute() {
         List<Task> allTasks = duke.getTaskList().immutableListView();
         String result = "Display a list of tasks: \n";
+        if (allTasks.size() == 0 ) {
+            result = "There's nothing in the list :(";
+        }
         for (int i = 0; i < allTasks.size(); i++) {
             result += INDENT + (i + 1) + "." + allTasks.get(i) + "\n";
         }

@@ -1,6 +1,6 @@
-package duke.commands;
+package src.main.java.duke.commands;
 
-import duke.commons.Messages;
+import src.main.java.duke.commons.Messages;
 
 /**
  * Deletes a task identified using it's last displayed index from the address

@@ -1,8 +1,8 @@
-package duke.data;
+package src.main.java.duke.data;
 
-import duke.data.task.TaskList;
-import duke.data.task.TaskList.TaskNotFoundException;
-import duke.data.task.Task;
+import src.main.java.duke.data.task.TaskList;
+import src.main.java.duke.data.task.TaskList.TaskNotFoundException;
+import src.main.java.duke.data.task.Task;
 
 public class Duke {
 

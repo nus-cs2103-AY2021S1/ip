@@ -1,6 +1,6 @@
-package duke.commands;
+package src.main.java.duke.commands;
 
-import duke.data.task.Event;
+import src.main.java.duke.data.task.Event;
 
 public class AddEventCommand extends Command {
 

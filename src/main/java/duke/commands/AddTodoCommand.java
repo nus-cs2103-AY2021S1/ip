@@ -1,6 +1,6 @@
-package duke.commands;
+package src.main.java.duke.commands;
 
-import duke.data.task.Todo;
+import src.main.java.duke.data.task.Todo;
 
 public class AddTodoCommand extends Command {
 

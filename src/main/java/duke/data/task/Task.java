@@ -1,4 +1,4 @@
-package duke.data.task;
+package src.main.java.duke.data.task;
 
 /**
  * The task class that represents a task.

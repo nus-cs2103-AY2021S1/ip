@@ -1,6 +1,6 @@
-package duke.commands;
+package src.main.java.duke.commands;
 
-import duke.data.task.Deadline;
+import src.main.java.duke.data.task.Deadline;
 
 public class AddDeadlineCommand extends Command {
 
