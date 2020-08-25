@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 import duke.exception.InvalidCommand;
@@ -106,4 +108,10 @@ public class Ui {
         System.out.println(end_Greeting);
     }
 
+    public void printFoundItems(TaskList foundTasks, String keyword) {
+        System.out.println(this.lines);
+        System.out.println("     Here are the matching tasks for keyword \"" + keyword + "\" in your list:");
+        foundTasks.list();
+        System.out.println(lines);
+    }
 }
