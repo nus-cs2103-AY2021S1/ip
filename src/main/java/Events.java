@@ -1,9 +1,10 @@
 package main.java;
 
 public class Events extends Task {
-    String at;
+    private String at;
+    private String type = "Events";
     protected Events (String string) {
-        super(string.substring(0, string.indexOf("/") - 1));
+        super(string.substring(0, string.indexOf("/") - 1), string);
         this.at = string.substring(string.indexOf("/") + 4);
     }
     public String toString() {
