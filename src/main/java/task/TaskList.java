@@ -79,4 +79,26 @@ public class TaskList {
             throw new DukeException("Sorry, this task does not exist!\n");
         }
     }
+
+    /**
+     * Finds tasks with given keyword and prints them.
+     *
+     * @param keyword String that user wants to find task with.
+     * @throws DukeException if keyword is empty.
+     */
+    public void findTask(String keyword) throws DukeException {
+        if (keyword == null) {
+            throw new DukeException("Please indicate the keyword you wish to use to find tasks with.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++){
+                Task task = tasks.get(i);
+                boolean isFound = task.description.contains(keyword);
+
+                if (isFound){
+                    System.out.println((i + 1) + "." + task.toString());
+                }
+            }
+        }
+    }
 }
