@@ -4,7 +4,6 @@ package duke;
  * Encapsulates the duke.Ui and its behavior.
  */
 public class Ui {
-
     /**
      * Prints a welcome message for the user.
      */

@@ -50,7 +50,6 @@ public class AddDeadlineCommand extends Command {
                     + "Time should be HH:mm");
         }
 
-
         Task taskToAdd = new Deadline(deadlineName, formattedDeadline);
         addTask(tasks, taskToAdd);
     }
