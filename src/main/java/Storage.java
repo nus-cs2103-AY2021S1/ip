@@ -11,17 +11,7 @@ import java.util.Scanner;
 public class Storage {
     private final Path path;
 
-     public Storage(String filePath) throws IOException {
-//         try {
-//             String dir = System.getProperty("user.dir");
-//             path = Path.of(dir, filePath);
-//             if (Files.notExists(path)) {
-//                 File createDirectory = new File(String.valueOf(path));
-//                 //createDirectory.createNewFile();
-//             }
-//         } catch (IOException ex) {
-//             System.err.println("Error in creating duke.txt");
-//         }
+     public Storage(String filePath) throws IOException, DukeException {
          String dir = System.getProperty("user.dir");
          path = Path.of(dir, filePath);
          File file = new File(String.valueOf(path));
@@ -30,7 +20,7 @@ public class Storage {
          } try {
              file.createNewFile();
          } catch (IOException ex) {
-             System.err.println("Error in creating duke.txt");
+             throw new DukeException("Error in creating duke.txt");
          }
      }
 
