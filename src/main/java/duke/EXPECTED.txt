@@ -86,7 +86,7 @@ The list of tasks has been cleared.
     You have 0 task(s) in the list.
 
 DukeException: ? Oops, the list of tasks is empty, pls add tasks first.
-	at TaskListHandler.printList(TaskListHandler.java:23)
+	at taskListHandler.printList(taskListHandler.java:23)
 	at ListCommand.execute(ListCommand.java:6)
 	at Ui.run(Ui.java:19)
 	at Duke.initialize(Duke.java:11)

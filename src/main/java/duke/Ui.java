@@ -7,12 +7,11 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Ui {
-    protected TaskListHandler handler;
-    protected Storage storage;
     protected static boolean isRunning = true;
+    protected final taskListHandler handler;
+    protected final Storage storage;
 
-
-    public Ui(TaskListHandler handler, Storage storage) {
+    public Ui(taskListHandler handler, Storage storage) {
         this.handler = handler;
         this.storage = storage;
     }
@@ -41,7 +40,7 @@ public class Ui {
     }
 
     public static void indent(int times) {
-        for (int i=0; i<times; i++) {
+        for (int i=0; i < times; i++) {
             System.out.print("    ");
         }
     }

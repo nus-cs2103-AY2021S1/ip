@@ -6,12 +6,12 @@ public class Duke {
     }
 
     public static void initialize() {
-        Storage storage = new Storage("./src/main/java/duke/data");
-        if (Storage.isLoadingError) {
+        Storage storage = new Storage("./data");
+        if (Storage.hasLoadingError) {
             return;
         }
         Ui.greet();
-        TaskListHandler handler = new TaskListHandler(storage.getListFromFile());
+        taskListHandler handler = new taskListHandler(storage.getListFromFile());
         Ui userInterface = new Ui(handler, storage);
         userInterface.run();
     }

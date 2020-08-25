@@ -4,41 +4,41 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
-public class TaskListHandler {
-    protected ArrayList<Task> taskList;
+public class taskListHandler {
+    protected ArrayList<Task> tasks;
 
-    public TaskListHandler(ArrayList<Task> list) {
-        this.taskList = list;
+    public taskListHandler(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
-    public ArrayList<Task> getTaskList() {
-        return taskList;
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
     public void addToList(Task t) {
-        taskList.add(t);
+        tasks.add(t);
     }
 
     public ArrayList<Task> clearList() {
-        this.taskList = new ArrayList<>();
+        tasks = new ArrayList<>();
         System.out.println("The list of tasks has been cleared.");
-        return taskList;
+        return tasks;
     }
 
     public void printList() throws DukeException {
-        if (taskList.isEmpty()) {
+        if (tasks.isEmpty()) {
             // Asks user for tasks when printing empty list
             throw new DukeException("\u2639 Oops, the list of tasks is empty, pls add tasks first");
         }
         int listPos = 1;
         indent(1);
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++,listPos++) {
+        for (int i = 0; i < tasks.size(); i++, listPos++) {
             indent(2);
-            System.out.println(listPos + ". " + taskList.get(i));
+            System.out.println(listPos + ". " + tasks.get(i));
         }
         indent(1);
-        System.out.println("You have " + taskList.size() + " task(s) in the list");
+        System.out.println("You have " + tasks.size() + " task(s) in the list");
     }
 
     public static void indent(int times) {

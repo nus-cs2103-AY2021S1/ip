@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.TaskListHandler;
+import duke.taskListHandler;
 import duke.Ui;
 import duke.task.Task;
 
@@ -16,12 +16,12 @@ public class DoneCommand extends AbstractModifyTaskCommand {
     }
 
     @Override
-    public void execute(TaskListHandler handler, Storage storage) {
+    public void execute(taskListHandler handler, Storage storage) {
         try {
-            ArrayList<Task> taskList = handler.getTaskList();
+            ArrayList<Task> tasks = handler.getTasks();
             task.markAsDone();
-            Ui.printSuccess("done", task, taskList.size());
-            storage.saveToFile(taskList);
+            Ui.printSuccess("done", task, tasks.size());
+            storage.saveToFile(tasks);
         } catch (DukeException e) {
             e.printStackTrace(System.out);
             DukeException.tryAgain();
@@ -30,10 +30,14 @@ public class DoneCommand extends AbstractModifyTaskCommand {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Task)) return false;
-        Task taskx = (Task) o;
-        return taskx == task;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Task)) {
+            return false;
+        }
+        Task task1 = (Task) o;
+        return task1 == task;
     }
 
     @Override

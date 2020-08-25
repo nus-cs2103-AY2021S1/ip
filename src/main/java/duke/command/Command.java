@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.Storage;
-import duke.TaskListHandler;
+import duke.taskListHandler;
 
 public abstract class Command {
 
-    public abstract void execute(TaskListHandler handler, Storage storage);
+    public abstract void execute(taskListHandler handler, Storage storage);
 
 }

@@ -3,7 +3,7 @@ package duke.task;
 import java.util.Objects;
 
 public class Task {
-    protected String description;
+    protected final String description;
     protected taskStatus status;
 
     enum taskStatus {
@@ -14,23 +14,25 @@ public class Task {
         TODO, DEADLINE, EVENT
     }
 
-    public Task(String desc, String type) {
-        this.status = taskStatus.NOTDONE;
-        this.description = desc;
+    public Task(String description) {
+        status = taskStatus.NOTDONE;
+        this.description = description;
     }
 
     public String getStatusIcon() {
-        return (this.status == taskStatus.DONE
-                ? "\u2713" // return tick
-                : "\u2718");  // or X symbols
+        return (status == taskStatus.DONE
+            // return tick
+            ? "\u2713"
+            // or X symbols
+            : "\u2718");
     }
 
     public void markAsDone() {
-        this.status = taskStatus.DONE;
+        status = taskStatus.DONE;
     }
 
     public boolean isDone() {
-        return this.status == taskStatus.DONE;
+        return status == taskStatus.DONE;
     }
 
     public String toSaveFormat() {
@@ -39,15 +41,18 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + description;
+        return "[" + getStatusIcon() + "] " + description;
     }
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Task)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Task)) {
+            return false;
+        }
         Task task = (Task) o;
-        return description.equals(task.description) &&
-                status == task.status;
+        return description.equals(task.description) && status == task.status;
     }
 
     @Override

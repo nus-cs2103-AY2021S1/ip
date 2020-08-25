@@ -1,6 +1,15 @@
 package duke;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.ClearCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -8,7 +17,7 @@ import duke.task.Todo;
 
 public class Parser {
 
-    public static Command parse(String input, TaskListHandler handler) throws DukeException {
+    public static Command parse(String input, taskListHandler handler) throws DukeException {
         String firstWord = input.split(" ")[0];
         switch (firstWord) {
         case "bye":
@@ -37,7 +46,7 @@ public class Parser {
         }
     }
 
-    public static Task parseModifyTaskCommand(String input,TaskListHandler handler) throws DukeException {
+    public static Task parseModifyTaskCommand(String input,taskListHandler handler) throws DukeException {
         String[] stringArr = input.split(" ");
         // DONE OR DELETE
         String lowerCaseOperation = stringArr[0].toLowerCase();
@@ -48,7 +57,7 @@ public class Parser {
         try {
             // Finding the actual task
             int indexOfTask = Integer.parseInt(stringArr[1]) - 1;
-            return handler.getTaskList().get(indexOfTask);
+            return handler.getTasks().get(indexOfTask);
         } catch (IndexOutOfBoundsException e){
             throw new DukeException("\u2639 Oops, " + '"' + stringArr[1] + '"' + " is not a valid task number for " + lowerCaseOperation);
         } catch (NumberFormatException e){
@@ -83,7 +92,7 @@ public class Parser {
                 throw new DukeException("\u2639 Oops wrong format, use add event format: event [task] /at [time]");
             }
         } else {
-            return new Task("this task should not be created", "todo");
+            return new Task("this task should not be created");
         }
     }
 
