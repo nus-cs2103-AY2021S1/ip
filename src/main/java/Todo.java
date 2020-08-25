@@ -6,11 +6,7 @@ public class Todo extends Task {
 
     @Override
     public String getStoringFormat() {
-        if (this.isDone) {
-            return "T ~ 1 ~ " + this.description;
-        } else {
-            return "T ~ 0 ~ " + this.description;
-        }
+        return "T " + super.getStoringFormat();
     }
 
     @Override

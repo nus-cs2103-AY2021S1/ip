@@ -11,11 +11,7 @@ public class Deadline extends Task {
 
     @Override
     public String getStoringFormat() {
-        if (this.isDone) {
-            return "D ~ 1 ~ " + this.description + " ~ " + this.by;
-        } else {
-            return "D ~ 0 ~ " + this.description + " ~ " + this.by;
-        }
+        return "D " + super.getStoringFormat() + " ~ " + this.by;
     }
 
     @Override

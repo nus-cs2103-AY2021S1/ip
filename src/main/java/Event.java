@@ -11,11 +11,7 @@ public class Event extends Task{
 
     @Override
     public String getStoringFormat() {
-        if (this.isDone) {
-            return "E ~ 1 ~ " + this.description + " ~ " + this.at;
-        } else {
-            return "E ~ 0 ~ " + this.description + " ~ " + this.at;
-        }
+        return "E " + super.getStoringFormat() + " ~ " + this.at;
     }
 
     @Override
