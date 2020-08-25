@@ -2,8 +2,7 @@ package duke.command;
 
 import duke.Bot;
 import duke.task.Task;
-
-import java.util.List;
+import duke.task.TaskList;
 
 public class DoneCommand implements Command {
     private int index;
@@ -13,8 +12,8 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public void execute(Bot bot, List<Task> list) {
-        if (list.isEmpty()) {
+    public void execute(Bot bot, TaskList list) {
+        if (list.size() == 0) {
             bot.sayLine("Your list is empty.");
         } else if (index < 0) {
             bot.sayLine("That's not a valid number, please give a number from 1 to " + list.size() + ".");
@@ -25,7 +24,7 @@ public class DoneCommand implements Command {
             if (t.isDone()) {
                 bot.sayLine("You've already completed this task:");
             } else {
-                t.markAsDone();
+                list.markAsDone(index);
                 bot.sayLine("Nice! I've marked this task as done:");
             }
             bot.sayLine("  " + t.displayString());

@@ -55,13 +55,13 @@
   ____________________________________________________________________
 
   ____________________________________________________________________
-  You need to tell me the number of the task you have completed.
-  Eg. done 1
+  You need to tell me the number of the task you have completed. Eg.
+  done 1
   ____________________________________________________________________
 
   ____________________________________________________________________
-  You need to tell me the number of the task you have completed.
-  Eg. done 1
+  You need to tell me the number of the task you have completed. Eg.
+  done 1
   ____________________________________________________________________
 
   ____________________________________________________________________
@@ -98,8 +98,8 @@
   ____________________________________________________________________
 
   ____________________________________________________________________
-  Couldn't add event! To add a event, talk to me using the
-  format: event <description> /at <date>
+  Couldn't add event! To add a event, talk to me using the format:
+  event <description> /at <date>
   ____________________________________________________________________
 
   ____________________________________________________________________

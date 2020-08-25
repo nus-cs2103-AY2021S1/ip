@@ -1,12 +1,15 @@
 package duke;
 
 import duke.parser.Parser;
-import duke.task.Task;
+import duke.storage.TaskListStorage;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+
+// TODO: setup code style check
+// TODO: consider whether Commands should throw Exceptions, or stay as they are now
+// TODO: make Duke implement Bot
 
 public class Duke {
     public static void main(String[] args) {
@@ -27,7 +30,9 @@ public class Duke {
 
         boolean stop = false;
         Scanner sc = new Scanner(System.in);
-        List<Task> list = new ArrayList<>();
+        BotClass openTaskListBot = new BotClass();
+        TaskList list = new TaskListStorage("data/tasks.txt").load(openTaskListBot);
+        ui.say(openTaskListBot.getMessage());
         while (!stop) {
             String input = sc.nextLine();
             BotClass bot = new BotClass();

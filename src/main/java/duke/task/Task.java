@@ -5,15 +5,19 @@ public class Task {
     protected boolean done;
 
     public Task(String description) {
-        this.description = description;
-        done = false;
+        this(description, false);
+    }
+
+    public Task(String description, boolean isDone) {
+        this.description = sanitizeString(description);
+        done = isDone;
     }
 
     public boolean isDone() {
         return done;
     }
 
-    public void markAsDone() {
+    protected void markAsDone() {
         done = true;
     }
 
@@ -24,5 +28,13 @@ public class Task {
 
     protected String taskTypeString() {
         return "T";
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    protected static String sanitizeString(String s) {
+        return s.replaceAll("\t", "    ");
     }
 }
