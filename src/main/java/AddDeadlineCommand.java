@@ -1,3 +1,9 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
+
 public class AddDeadlineCommand extends Command {
     public AddDeadlineCommand(String[] parsedCommand) {
         super(parsedCommand);
@@ -18,13 +24,32 @@ public class AddDeadlineCommand extends Command {
 
         String[] descriptionArray = description.split("/by");
         if (descriptionArray.length != 2) {
-            throw new DukeException("NANI??! Enter your deadline name & an end-time!\n");
+            throw new DukeException("NANI??! Enter your deadline name & a date and time(optional) (e.g. 2020-01-30 18:30)!\n");
         }
 
         String deadlineName = descriptionArray[0];
         String deadlineEndTime = descriptionArray[1];
 
-        Task taskToAdd = new Deadline(deadlineName, deadlineEndTime);
+        // split to date and time
+        String[] deadlineEndingArray = deadlineEndTime.trim().split(" ");
+        // create a LocalDate object
+        String formattedDeadline;
+        try {
+            LocalDate lt = LocalDate.parse(deadlineEndingArray[0]);
+            formattedDeadline = lt.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+            if (deadlineEndingArray.length == 2) {
+                LocalTime t = LocalTime.parse(deadlineEndingArray[1]);
+                formattedDeadline += " "
+                        + DateTimeFormatter.ofPattern("hh:mm a").format(t);
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("NANI??! Enter a valid date and time(optional).\n"
+                    + "Date should be: yyyy-mm-dd.\n"
+                    + "Time should be HH:mm");
+        }
+
+
+        Task taskToAdd = new Deadline(deadlineName, formattedDeadline);
         addTask(tasks, taskToAdd);
     }
 
