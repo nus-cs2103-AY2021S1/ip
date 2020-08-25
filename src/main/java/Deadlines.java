@@ -2,8 +2,12 @@ public class Deadlines extends Task {
     private String by;
 
     Deadlines(String taskInfo , String by) {
-        super(taskInfo, TaskType.DEADLINE, by);
+        super(taskInfo, TaskType.DEADLINE);
         this.by = by;
+    }
+
+    public String returnTime() {
+        return by;
     }
 
     @Override

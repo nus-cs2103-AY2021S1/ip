@@ -2,8 +2,12 @@ public class Events extends Task {
     private String at;
 
     Events(String taskInfo , String at) {
-        super(taskInfo, TaskType.EVENT, at);
+        super(taskInfo, TaskType.EVENT);
         this.at = at;
+    }
+
+    public String returnTime() {
+        return at;
     }
 
     @Override
