@@ -1,5 +1,9 @@
 package dukeclass;
 
+/**
+ * A type of task.
+ * The task has a String message and a Boolean status.
+ */
 public class Todo extends Task{
 
     public static String icon = "T";

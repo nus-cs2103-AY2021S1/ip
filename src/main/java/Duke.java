@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Encapsulates a chat robot that you can chat with to set tasks for yourself.
+ */
 public class Duke {
 
     public static void main(String[] args) throws FileNotFoundException {

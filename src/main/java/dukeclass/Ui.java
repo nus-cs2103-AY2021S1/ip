@@ -1,5 +1,9 @@
 package dukeclass;
 
+
+/**
+ * Deals with interactions with the user
+ */
 public class Ui {
 
     public static String welcomeMessage() {
@@ -15,15 +19,27 @@ public class Ui {
                 + "____________________________________________________________\n";
     }
 
+    /**
+     * Prints the list of tasks
+     *
+     * @param list  list to be printed.
+     * @return list of String type.
+     */
     public static String printTaskList(TaskList list) {
         return "____________________________________________________________\n"
                 + list.toString() + "\n"
                 + "____________________________________________________________\n";
     }
 
-    public static String printTask(Task Task) {
+    /**
+     * Prints the tasks
+     *
+     * @param task  task to be printed.
+     * @return task of String type.
+     */
+    public static String printTask(Task task) {
         return "____________________________________________________________\n"
-                + Task.toString() + "\n"
+                + task.toString() + "\n"
                 + "____________________________________________________________\n";
     }
 
