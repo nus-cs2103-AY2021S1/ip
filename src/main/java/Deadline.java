@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 
 public class Deadline extends Task {
 
-   // protected String by;
+
     private LocalDateTime date;
 
     public Deadline(String description, LocalDateTime date) {
@@ -46,7 +46,6 @@ public class Deadline extends Task {
             throw new DukeException("Unable to decode Deadline");
         }
     }
-
 
 
     @Override

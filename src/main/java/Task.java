@@ -1,4 +1,4 @@
-public abstract class Task implements Encodable<Task>{
+public abstract class Task implements Encodable<Task> {
 
 
     protected String description;
@@ -24,7 +24,6 @@ public abstract class Task implements Encodable<Task>{
         String s = "[" + this.getStatusIcon() + "] " + this.description;
         return s;
     }
-
 
 
 }

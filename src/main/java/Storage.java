@@ -26,7 +26,6 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(path.toString());
             for (Task item : list) {
-                System.out.println(item.encode());
                 writer.write(item.encode() + "\n");
             }
             writer.close();

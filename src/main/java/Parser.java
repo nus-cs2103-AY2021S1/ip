@@ -4,7 +4,7 @@ public class Parser {
 
     public static void parseCode(TaskList taskList, UI ui, boolean flag) {
         while (!flag) {
-           String echo = ui.sc.nextLine();
+            String echo = ui.sc.nextLine();
             try {
                 String split = echo;
                 String arr[] = split.split(" ", 2);
@@ -65,7 +65,6 @@ public class Parser {
                             break;
                         }
                 }
-
 
 
             } catch (DukeException e) {

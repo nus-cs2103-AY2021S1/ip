@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class UI {
 
     public static final String line = "____________________________________________________________";
