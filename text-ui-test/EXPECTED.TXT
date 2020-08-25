@@ -12,66 +12,66 @@ What can I do for you?
 
 ------------------------------------------
 Got it. I've added this task:
-[T][✘] task1
+[T][X] task1
 Now you have 1 task in the list.
 ------------------------------------------
 
 ------------------------------------------
 Got it. I've added this task:
-[T][✘] task2
+[T][X] task2
 Now you have 2 tasks in the list.
 ------------------------------------------
 
 ------------------------------------------
 Here are the tasks in your list:
-1. [T][✘] task1
-2. [T][✘] task2
+1. [T][X] task1
+2. [T][X] task2
 ------------------------------------------
 
 ------------------------------------------
 Nice! I've marked this task as done:
-[T][✓] task2
+[T][Y] task2
 ------------------------------------------
 
 ------------------------------------------
 Here are the tasks in your list:
-1. [T][✘] task1
-2. [T][✓] task2
+1. [T][X] task1
+2. [T][Y] task2
 ------------------------------------------
 
 ------------------------------------------
 Noted. I've removed this task:
-[T][✓] task2
+[T][Y] task2
 Now you have 1 task in the list.
 ------------------------------------------
 
 ------------------------------------------
 Here are the tasks in your list:
-1. [T][✘] task1
+1. [T][X] task1
 ------------------------------------------
 
 ------------------------------------------
 Got it. I've added this task:
-[D][✘] task3 (by: Sunday)
+[D][X] task3 (by: Sunday)
 Now you have 2 tasks in the list.
 ------------------------------------------
 
 ------------------------------------------
 Got it. I've added this task:
-[E][✘] task4 (at: Mon 2-4pm)
+[E][X] task4 (at: Mon 2-4pm)
 Now you have 3 tasks in the list.
 ------------------------------------------
 
 ------------------------------------------
 Here are the tasks in your list:
-1. [T][✘] task1
-2. [D][✘] task3 (by: Sunday)
-3. [E][✘] task4 (at: Mon 2-4pm)
+1. [T][X] task1
+2. [D][X] task3 (by: Sunday)
+3. [E][X] task4 (at: Mon 2-4pm)
 ------------------------------------------
 
 ------------------------------------------
 Noted. I've removed this task:
-[T][✘] task1
+[T][X] task1
 Now you have 2 task in the list.
 ------------------------------------------
 
@@ -85,8 +85,8 @@ OOPS!!! I'm sorry, but I don't know what that means :-(
 
 ------------------------------------------
 Here are the tasks in your list:
-1. [D][✘] task3 (by: Sunday)
-2. [E][✘] task4 (at: Mon 2-4pm)
+1. [D][X] task3 (by: Sunday)
+2. [E][X] task4 (at: Mon 2-4pm)
 ------------------------------------------
 
 ------------------------------------------
