@@ -53,4 +53,19 @@ public class TaskList {
         }
         return msg;
     }
+
+    public String findTasksWith(String s) {
+        String msg = "";
+        int i = 1;
+        for (Task t: this.lst) {
+            if (t.getDescription().contains(s)) {
+                if (i == 1) {
+                    msg = ((i) + ". " + this.getTask(i++) + "\n");
+                } else {
+                    msg += ("\t" + (i++) + ". " + t + "\n");
+                }
+            }
+        }
+        return msg;
+    }
 }
