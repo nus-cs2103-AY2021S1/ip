@@ -7,7 +7,9 @@ public enum CommandType {
     DELETE("delete"),
     DONE("done"),
     ADD("add"),
-    FIND("find");
+    FIND("find"),
+    PENDING("pending"),
+    COMPLETED("completed");
 
     /**
      * Type of Command.

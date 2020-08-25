@@ -58,6 +58,14 @@ public class Task {
     }
 
     /**
+     * Returns if the Task is completed.
+     * @return Boolean to indicate if the Task is completed.
+     */
+    boolean isTaskDone() {
+        return isCompleted;
+    }
+
+    /**
      * Returns the type of the Task.
      * @return The type of the Task.
      */

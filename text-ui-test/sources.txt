@@ -11,9 +11,11 @@
 ../src/main/java/duke/command/ByeCommand.java
 ../src/main/java/duke/command/DeleteCommand.java
 ../src/main/java/duke/command/ListCommand.java
+../src/main/java/duke/command/PendingCommand.java
 ../src/main/java/duke/command/Command.java
 ../src/main/java/duke/command/AddCommand.java
 ../src/main/java/duke/command/FindCommand.java
+../src/main/java/duke/command/CompletedCommand.java
 ../src/main/java/duke/command/DoneCommand.java
 ../src/main/java/duke/command/ShowCommand.java
 ../src/main/java/duke/Duke.java

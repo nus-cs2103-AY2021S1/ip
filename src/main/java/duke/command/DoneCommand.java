@@ -7,6 +7,8 @@ import duke.exception.InvalidArgumentException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.io.IOException;
+
 public class DoneCommand extends Command {
     /**
      * Index of {@link Task} to be marked as completed.
@@ -38,7 +40,8 @@ public class DoneCommand extends Command {
             String msg = "Nice! I've marked this task as done:\n";
             msg += ("\t " + tasks.getTask(index));
             ui.displayMessage(msg);
-        } catch (DukeException e) {
+            storage.writeData(tasks.getTasks());
+        } catch (DukeException | IOException e) {
             ui.displayMessage(e.getMessage());
         }
     }
