@@ -12,25 +12,25 @@ public class Parser { //extract info and pass it to deadlinecommand
         String description = getDescription(input);
         switch (category) {
             case "todo":
-                parseTodoCommand(description);
-                //return new TodoCommand(Category.TODO, description);
+                return parseTodoCommand(description);
+            //return new TodoCommand(Category.TODO, description);
             case "deadline":
-                parseDeadlineCommand(description);
+                return parseDeadlineCommand(description);
                 //return new DeadlineCommand(Category.DEADLINE, description);
             case "event":
-                parseEventCommand(description);
+                return parseEventCommand(description);
                 //return new EventCommand(Category.EVENT, description);
             case "done":
-                parseDoneCommand(description);
+                return parseDoneCommand(description);
                 //return new DoneCommand(Category.DONE, description);
             case "delete":
-                parseDeleteCommand(description);
+                return parseDeleteCommand(description);
                 //return new DeleteCommand(Category.DELETE, description);
             case "list":
-                parseListCommand(description);
+                return parseListCommand(description);
                 //return new ListCommand(Category.LIST, description);
             case "bye":
-                parseByeCommand(description);
+                return parseByeCommand(description);
                 //return new ByeCommand(Category.BYE, description);
             default:
                 throw new IllegalArgumentException("-------------------------------------------\n" +

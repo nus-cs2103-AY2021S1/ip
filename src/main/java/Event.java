@@ -21,6 +21,6 @@ public class Event extends Task implements Serializable {
 
     @Override
     public String toString() {
-        return "[E]" + "[" + getStatusIcon() + "] " + eventName + " (at:" + getEventDateTime() + ")";
+        return "[E]" + "[" + getStatusIcon() + "] " + getDescription() + " (at:" + getEventDateTime() + ")";
     }
 }

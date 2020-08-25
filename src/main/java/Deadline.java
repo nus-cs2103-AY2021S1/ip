@@ -7,7 +7,6 @@ import java.util.Locale;
 public class Deadline extends Task implements Serializable {
 
     protected LocalDateTime deadlineDateTime;
-    protected String deadlineName;
 
     public Deadline(String deadlineName, LocalDateTime deadlineDateTime) {
         super(deadlineName);
@@ -21,6 +20,6 @@ public class Deadline extends Task implements Serializable {
 
     @Override
     public String toString() {
-            return "[D]" + "[" + getStatusIcon() + "] " + deadlineName + " (by: " + getDeadlineDateTime() + ")";
+            return "[D]" + "[" + getStatusIcon() + "] " + getDescription() + " (by: " + getDeadlineDateTime() + ")";
     }
 }
