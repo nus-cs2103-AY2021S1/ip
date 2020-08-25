@@ -84,6 +84,26 @@ public class Ui {
         System.out.println("\t" + task);
     }
 
+    public void showFindResults(ArrayList<Task> taskList, String user_input) {
+        String output = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currentTask = taskList.get(i);
+            if (i == taskList.size() - 1) {
+                output = output + (i + 1) + "." + currentTask;
+            } else {
+                output = output + (i + 1) + "." + currentTask + "\n";
+            }
+        }
+        String getListMsg = "Splendid! Here are the tasks in your list that matches " + "'" + user_input + "'" + ":";
+        String emptyListMsg = "Oh dear, it seems that there are no tasks that matches " + "'" + user_input + "'" + ".";
+        if (taskList.size() < 1) {
+            System.out.println(emptyListMsg);
+        } else {
+            System.out.println(getListMsg);
+            System.out.println(output);
+        }
+    }
+
     /**
      * Generates and prints the unknown error message upon encountering an unidentifiable error.
      */

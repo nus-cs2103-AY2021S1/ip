@@ -7,10 +7,12 @@ import data.exception.DukeInvalidUserInputException;
  */
 public abstract class Task {
     private String description;
+    private String[] descriptionArr; //to facilitate finding/searching of keyword
     private boolean isDone;
 
     public Task(String description) {
         this.description = description;
+        this.descriptionArr = description.split(" ");
         this.isDone = false;
     }
 
@@ -65,6 +67,20 @@ public abstract class Task {
         } else {
             return "0 | " + this.description;
         }
+    }
+
+    /**
+     * Checks whether the description of a task contains a specific keyword.
+     * @param keyword to be checked.
+     * @return whether the keyword is within the description.
+     */
+    public boolean descriptionContains(String keyword) {
+        for (String word : descriptionArr) {
+            if (word.toLowerCase().equals(keyword.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

@@ -21,8 +21,13 @@ public class Event extends Task {
         convertDateTime(dateTime);
     }
 
+    public LocalDate getDate() {
+        return this.date;
+    }
+
     /**
-     * Converts the given string into a LocalDate and LocalTime to be stored as the Event's date,start and end time.
+     * Converts the given string into a LocalDate and LocalTime to be
+     *     stored as the Event's date,start and end time.
      * @param dateTime to be converted into LocalDate and LocalTime.
      * @throws DukeInvalidUserInputException when an invalid a date time format is used as input.
      */
@@ -54,7 +59,8 @@ public class Event extends Task {
      * Parses a given string array into a Event task.
      * @param txtArray to be parsed into a Event task.
      * @return Event task based on input string array.
-     * @throws DukeInvalidUserInputException when an invalid date and time format is found in the input string array.
+     * @throws DukeInvalidUserInputException when an invalid date and time format
+     *     is found in the input string array.
      */
     public static Event parse(String[] txtArray) throws DukeInvalidUserInputException {
         String done = txtArray[1].trim();
