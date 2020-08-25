@@ -3,6 +3,10 @@
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 
+REM delete any exisiting save file
+if exist data\duke.txt del data\duke.txt
+if exist data rmdir data
+
 REM delete output from previous run
 del ACTUAL.TXT
 
@@ -21,3 +25,6 @@ java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT
+
+del data\duke.txt
+rmdir data

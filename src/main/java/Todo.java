@@ -11,6 +11,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String toSaveString() {
+        return (isDone ? 1 : 0) + "todo " + description;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
