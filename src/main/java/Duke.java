@@ -15,6 +15,7 @@ public class Duke {
                 String[] commandArr = command.split(" ", 2);
                 Task task;
                 String[] strings;
+                int index;
                 if (commandArr[0].equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
@@ -53,9 +54,14 @@ public class Duke {
                         }
                         break;
                     case "done":
-                        int index = Integer.parseInt(commandArr[1]) - 1;
+                        index = Integer.parseInt(commandArr[1]) - 1;
                         tasks.get(index).markAsDone();
                         System.out.println("Nice! I've marked this task as done:\n " + tasks.get(index));
+                        break;
+                    case "delete":
+                        index = Integer.parseInt(commandArr[1]) - 1;
+                        Task removedTask = tasks.remove(index);
+                        System.out.println("Noted. I've removed this task:\n " + removedTask + "\nNow you have " + tasks.size() + " tasks in the list.");
                         break;
                     default:
                         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");

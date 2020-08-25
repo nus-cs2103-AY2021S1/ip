@@ -1,5 +1,9 @@
 Hello! I'm Duke
 How can I help you?
-OOPS!!! I'm sorry, but I don't know what that means :-(
-OOPS!!! The description of a todo cannot be empty.
+Got it. I've added this task:
+ [T][?] my homework
+Now you have 1 tasks in the list.
+Noted. I've removed this task:
+ [T][?] my homework
+Now you have 0 tasks in the list.
 Bye. Hope to see you again soon!
