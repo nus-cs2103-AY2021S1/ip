@@ -8,7 +8,7 @@ public class Parser {
         String[] details = new String[3];
         String[] rawData = s.split(" ");
         String type = rawData[0];
-        String[] extractedDetails = extractDetails(rawData,type);
+        String[] extractedDetails = extractDetails(rawData, type);
         details[0] = type;
         details[1] = extractedDetails[0];
         details[2] = extractedDetails[1];
@@ -22,13 +22,19 @@ public class Parser {
         String s2 = "";
         int counter = 1;
 
-        switch(type) {
+        switch (type) {
             case "todo": //extract details
-                for (int i = 1; i < details.length; i++) {
-                    s1 = s1 + " " + details[i];
+                if (details.length == 1) {
+                    s[0] = null;
+                    break;
+                } else {
+                    for (int i = 1; i < details.length; i++) {
+                        s1 = s1 + " " + details[i];
+                    }
+                    s[0] = s1;
+                    break;
                 }
-                s[0] = s1;
-                break;
+
             case "deadline": //extract details and date
                 for (; counter < details.length; counter++) {
                     if (details[counter].equals("/by")) {
