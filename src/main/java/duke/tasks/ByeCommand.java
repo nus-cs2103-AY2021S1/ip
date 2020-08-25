@@ -1,3 +1,6 @@
+package duke.tasks;
+
+
 public class ByeCommand extends Command {
     public ByeCommand() { }
 

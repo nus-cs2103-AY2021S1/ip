@@ -1,3 +1,5 @@
+package duke.tasks;
+
 public class ListCommand extends Command{
     protected String list;
 

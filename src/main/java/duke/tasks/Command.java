@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.tasks.*;
+
 import java.io.IOException;
 
 public abstract class Command {

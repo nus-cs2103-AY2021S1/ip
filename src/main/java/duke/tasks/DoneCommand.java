@@ -1,3 +1,5 @@
+package duke.tasks;
+
 import java.io.IOException;
 
 public class DoneCommand extends Command {
@@ -15,5 +17,13 @@ public class DoneCommand extends Command {
         //write to file
         String s = storage.genList(tasks.getTaskLs());
         storage.writeToFile("data/duke.rtf", s);
+    }
+
+    public abstract static class Command {
+        public void execute(TaskList tasks, UI ui, Storage storage) throws IOException { }
+
+        public boolean isExit() {
+            return false;
+        }
     }
 }

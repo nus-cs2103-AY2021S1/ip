@@ -1,3 +1,5 @@
+package duke.tasks;
+
 import java.io.IOException;
 
 public class TodoCommand extends Command{
