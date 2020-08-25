@@ -6,14 +6,30 @@ import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Represents a DeleteCommand where user wants to delete a task.
+ */
 public class DeleteCommand extends Command {
 
     private int i;
 
+    /**
+     * Constructor for DeleteCommand class.
+     *
+     * @param i Index of task to be deleted.
+     */
     public DeleteCommand(int i) {
         this.i = i;
     }
 
+    /**
+     * Executes the command to delete a task from list of tasks.
+     *
+     * @param tasks Tasklist containing current tasks.
+     * @param ui Ui for displaying output.
+     * @param storage Storage of tasks in hard disk.
+     * @throws DukeException If command is invalid.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {

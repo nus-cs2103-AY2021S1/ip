@@ -6,14 +6,30 @@ import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Represents a DoneCommand where user wants to mark a task as done.
+ */
 public class DoneCommand extends Command {
 
     private int i;
 
+    /**
+     * Constructor for DoneCommand class.
+     *
+     * @param i Index of task to be marked as done.
+     */
     public DoneCommand(int i) {
         this.i = i;
     }
 
+    /**
+     * Executes the command to mark a task as done.
+     *
+     * @param tasks Tasklist containing current tasks.
+     * @param ui Ui for displaying output.
+     * @param storage Storage of tasks in hard disk.
+     * @throws DukeException If command is invalid.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
