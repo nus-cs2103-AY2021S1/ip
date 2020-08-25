@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -50,7 +52,11 @@ public class Duke {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
-                System.out.println("        " + e.getTargetException().getMessage());
+                if(e.getTargetException().getClass() == DateTimeParseException.class) {
+                    System.out.println("        Invalid date.");
+                } else {
+                    System.out.println("        " + e.getTargetException().getMessage());
+                }
             }
             System.out.println("        ____________________________________________________________\n");
         }
@@ -72,6 +78,8 @@ public class Duke {
                 FileInputStream fis = new FileInputStream(file);
                 List<Task> list = (List<Task>)SerializeUtil.deserialize(fis.readAllBytes());
                 DukeCommand.tasks = list;
+            } else {
+                DukeCommand.tasks = new ArrayList<Task>();
             }
         } catch(Exception e) {
             e.printStackTrace();
