@@ -54,7 +54,7 @@ public class Task {
 
     /**
      * Sets a task as completed
-     * @return A new Task
+     * @return A new Task whose status is completed
      */
     public Task setTaskAsCompleted() {
         return new Task(taskName, true);
