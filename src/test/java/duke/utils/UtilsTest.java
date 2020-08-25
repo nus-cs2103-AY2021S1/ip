@@ -1,38 +1,61 @@
 package duke.utils;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UtilsTest {
-    @Test
-    public void testConcatenate() {
+    private static Stream<Arguments> concatenateArguments() {
         String[] arr = new String[]{"This", "is", "," ,"a", "test", "case", "."};
-        assertEquals(Utils.concatenate(arr, 0, 7), "This is , a test case .");
-        assertEquals(Utils.concatenate(arr, 1, 6), "is , a test case");
-        assertEquals(Utils.concatenate(arr, 2, 3), ",");
-        assertEquals(Utils.concatenate(arr, 1, 1), "");
+        return Stream.of(
+                Arguments.of(arr, 0, 7, "This is , a test case ."),
+                Arguments.of(arr, 1, 6, "is , a test case"),
+                Arguments.of(arr, 2, 3, ","),
+                Arguments.of(arr, 1, 1, "")
+        );
     }
 
-    @Test
-    public void testGetIndexOf() {
-        String[] arr = new String[]{"This", "has", "/some", "*special*", "strings", "."};
-        assertEquals(Utils.getIndexOf(arr, "This"), 0);
-        assertEquals(Utils.getIndexOf(arr, "/some"), 2);
-        assertEquals(Utils.getIndexOf(arr, "*special*"), 3);
-        assertEquals(Utils.getIndexOf(arr, "."), 5);
-        assertEquals(Utils.getIndexOf(arr, "does not exist"), Utils.INDEX_NOT_FOUND);
+    @ParameterizedTest
+    @MethodSource("concatenateArguments")
+    public void testConcatenate(String[] arr, int start, int end, String actual) {
+        assertEquals(Utils.concatenate(arr, start, end), actual);
     }
 
-    @Test
-    public void testHasInteger() {
-        assertTrue(Utils.hasInteger(new String[]{"done", "2"}, 1));
-        assertTrue(Utils.hasInteger(new String[]{"done", "2", "extra"}, 1));
-        assertTrue(Utils.hasInteger(new String[]{"done", "extra", "2"}, 2));
+    private static Stream<Arguments> getIndexOfArguments() {
+        String[] arr = new String[]{"This", "is", "/some" ,"*special*", "test","."};
+        return Stream.of(
+                Arguments.of(arr, "This", 0),
+                Arguments.of(arr, "/some", 2),
+                Arguments.of(arr, "*special*", 3),
+                Arguments.of(arr, ".", 5),
+                Arguments.of(arr, "does not exist", Utils.INDEX_NOT_FOUND)
+        );
+    }
 
-        assertTrue(!Utils.hasInteger(new String[]{"done", "2.2"}, 1));
-        assertTrue(!Utils.hasInteger(new String[]{"done", "2.2"}, 0));
-        assertTrue(!Utils.hasInteger(new String[]{"done"}, 1));
+    @ParameterizedTest
+    @MethodSource("getIndexOfArguments")
+    public void testGetIndexOf(String[] arr, String target, int actual) {
+        assertEquals(Utils.getIndexOf(arr, target), actual);
+    }
+
+    private static Stream<Arguments> hasIntegerArguments() {
+        return Stream.of(
+                Arguments.of(new String[]{"done", "2"}, 1, true),
+                Arguments.of(new String[]{"done", "2", "extra"}, 1, true),
+                Arguments.of(new String[]{"done", "extra", "2"}, 2, true),
+                Arguments.of(new String[]{"done", "2.2"}, 1, false),
+                Arguments.of(new String[]{"done", "2.2"}, 0, false),
+                Arguments.of(new String[]{"done"}, 1, false)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("hasIntegerArguments")
+    public void testHasInteger(String[] arr, int index, boolean actual) {
+        assertEquals(Utils.hasInteger(arr, index), actual);
     }
 }

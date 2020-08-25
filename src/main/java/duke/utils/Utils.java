@@ -45,7 +45,7 @@ public final class Utils {
      * @return true if the specified element can be parsed into an Integer.
      */
     public static boolean hasInteger(String[] command, int index) {
-        if (command.length - 1 <= index) {
+        if (command.length - 1 < index) {
             return false;
         }
         return command[index].matches("\\d+");
