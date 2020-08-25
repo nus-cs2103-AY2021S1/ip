@@ -21,21 +21,20 @@ public class Event extends Task {
         }
     }
 
-    public String getDateTimeStart() {
-      return this.date + ", " + this.time;
-    }
-
-    Event(String description, boolean isDone, String at) {
+    Event(String description, boolean isDone, String dateTime) {
         super(description, isDone);
-        this.at = at;
+        String[] split = dateTime.split(",");
+
+        this.date = split[0].trim();
+        this.time = split[1].trim();
     }
 
     public String getStartDate() {
-      return this.at;
+      return this.date + ", " + this.time;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.getDateTimeStart() + ")";
+        return "[E]" + super.toString() + " (at: " + this.getStartDate() + ")";
     }
 }

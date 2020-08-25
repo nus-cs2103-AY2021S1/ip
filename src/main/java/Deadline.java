@@ -21,17 +21,16 @@ public class Deadline extends Task {
         }
     }
 
+    Deadline(String description, boolean isDone, String dateTime) {
+        super(description, isDone);
+        String[] split = dateTime.split(",");
+
+        this.date = split[0].trim();
+        this.time = split[1].trim();
+    }
+
     public String getDeadline() {
         return date + ", " + time;
-    }
-
-    Deadline(String description, boolean isDone, String by) {
-      super(description, isDone);
-      this.by = by;
-    }
-
-    public String getDeadline() {
-        return this.by;
     }
 
     @Override
