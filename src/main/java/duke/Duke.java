@@ -34,13 +34,12 @@ public class Duke {
             try {
                 Command command = Parser.parse(input);
                 command.execute(taskList, ui);
+                storage.save(taskList);
                 isExit = command.isExit();
             } catch (Exception ex) {
                 ui.show("\t " + ex.getMessage());
             }
         }
-
-        storage.save(taskList);
         System.exit(0);
     }
 }
