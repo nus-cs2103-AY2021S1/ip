@@ -28,7 +28,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String time = atTime == null
-                        ? ""
+                ? ""
                 : ", " + atTime.format(DateTimeFormatter.ofPattern("h.mma"));
         //special display of date and time
         return super.toString()

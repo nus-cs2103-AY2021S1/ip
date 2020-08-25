@@ -15,10 +15,10 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             list = new TaskList(storage.load());
-        } catch (DukeInvalidDataException e) {
+        } catch (DukeInvalidDataException | DukeInvalidStoragePathException dukeInvalidData) {
             ui.showLoadingError();
             list = new TaskList();
-        } catch (DukeInvalidDateTimeInputException e) {
+        } catch (DukeInvalidDateTimeInputException | DukeInvalidData e) {
             ui.showError(e);
             list = new TaskList();
         }

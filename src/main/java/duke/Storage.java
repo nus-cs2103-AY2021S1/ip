@@ -21,7 +21,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public List<Task> load() throws DukeInvalidDataException, DukeInvalidDateTimeInputException {
+    public List<Task> load() throws DukeInvalidDataException, DukeInvalidStoragePathException, DukeInvalidData, DukeInvalidDateTimeInputException {
         File file = new File(filePath);
         List<Task> list = new ArrayList<>();
         try {
@@ -42,7 +42,7 @@ public class Storage {
                     throw new DukeInvalidDataException("Oops data is invalid");
                 } else if (taskType.equals("D")) {
                     try {
-                        List<LocalDateTime> ldtList = Parser.getCustomDateTimeList(tokens[3]);
+                        List<LocalDateTime> ldtList = Parser.customDateTimeFormatter(tokens[3]);
                         LocalDate date = ldtList.get(0).toLocalDate();
                         LocalTime time = ldtList.size() == 2
                                 ? ldtList.get(1).toLocalTime()
@@ -52,7 +52,7 @@ public class Storage {
                         throw e;
                     }
                 } else if (taskType.equals("E")) {
-                    List<LocalDateTime> ldtList = Parser.getCustomDateTimeList(tokens[3]);
+                    List<LocalDateTime> ldtList = Parser.customDateTimeFormatter(tokens[3]);
                     LocalDate date = ldtList.get(0).toLocalDate();
                     LocalTime time = ldtList.size() == 2
                             ? ldtList.get(1).toLocalTime()

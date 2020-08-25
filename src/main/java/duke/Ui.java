@@ -95,8 +95,7 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        printWindow("Oops, error in loading the tasks! "
-                + "Please check the duke.txt file");
+        printWindow("Oops, error in loading the tasks! Please check the duke.txt file");
     }
 
     public void showList(TaskList tasks) {
