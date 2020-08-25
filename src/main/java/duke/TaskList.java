@@ -3,9 +3,10 @@ package duke;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class TaskList {
+public class TaskList implements Iterable<Task> {
     private List<Task> taskList;
 
     public TaskList() {
@@ -29,5 +30,10 @@ public class TaskList {
 
     public Task removeTask(int index) {
         return taskList.remove(index);
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return taskList.iterator();
     }
 }

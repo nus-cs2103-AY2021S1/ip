@@ -23,11 +23,15 @@ public class Ui {
     }
 
     public void printList(TaskList tasks) {
+        printList(tasks, "Here are all your burdens");
+    }
+
+    private void printList(TaskList tasks, String message) {
         final String CHECKMARK = "[✓]";
         final String CROSS = "[✗]";
 
         System.out.println(HORIZONTAL_RULE);
-        System.out.println("Here are all your burdens");
+        System.out.println(message);
 
         for (int i = 1; i <= tasks.numTasks(); i++) {
             Task item = tasks.getTask(i - 1);
@@ -37,6 +41,10 @@ public class Ui {
         }
 
         System.out.println(HORIZONTAL_RULE);
+    }
+
+    public void printFindResult(TaskList tasks) {
+        printList(tasks, "Found these for you, couch potato");
     }
 
     public void displayCompleteTask() {

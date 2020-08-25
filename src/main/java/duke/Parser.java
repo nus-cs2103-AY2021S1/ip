@@ -16,6 +16,8 @@ public class Parser {
             return new DoneCommand(Integer.parseInt(details) - 1);
         case "todo":
             return new ToDoCommand(details);
+        case "find":
+            return new FindCommand(details);
         case "deadline":
             parsedDetails = details.split(" /by ", 2);
             if (parsedDetails.length < 2) {
