@@ -13,6 +13,11 @@ public class Task {
         this.timestamp = timestamp;
     }
 
+
+    public String getDescription() {
+        return this.description;
+    }
+
     public String getStatus() {
         return isDone ? "1" : "0";
     }

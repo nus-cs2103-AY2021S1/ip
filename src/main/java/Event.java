@@ -10,7 +10,7 @@ public class Event extends Task {
 
     public static Event newEvent(String raw) throws ChatbotException {
         if (raw.length() == 0) {
-            throw new ChatbotException("Ooopsss (>.>) Event cannot be empty!!");
+            throw new ChatbotException("Event cannot be empty!!");
         }
 
         String description = raw.split("/at")[0].trim();
@@ -20,7 +20,7 @@ public class Event extends Task {
             String dateString = raw.split("/at")[1].trim();
             timestamp = LocalDate.parse(dateString);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new ChatbotException("Ooopsss (>.>) Event? At what date??!!");
+            throw new ChatbotException("Event? At what date??!!");
         } catch (DateTimeParseException e) {
             throw new ChatbotException(Message.INVALID_DATE);
         }
