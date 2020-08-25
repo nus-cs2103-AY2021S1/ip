@@ -46,6 +46,14 @@ public class Task implements ITask {
         return String.format("Ta|%d|%s", isDone ? 1 : 0, description);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
     public boolean isSameTime(String time) {
         return false;
     }

@@ -31,12 +31,13 @@ public class Ui {
     }
 
 
-    public static void displayTasks(TaskList list, int[] listIndex, String date) {
+    public static void displayTasks(TaskList list, int[] listIndex) {
         if (listIndex.length == 0) {
             System.out.print(TextFormatter.getFormattedText(
                     Message.ERR_NO_MATCHING_TASK.toString()));
         } else {
-            StringBuilder sb = new StringBuilder("Here are the task on " + date + ":\n");
+            StringBuilder sb = new StringBuilder(
+                    "Here are the task on you are looking for:\n");
             for (int index : listIndex) {
                 sb.append(" ").append(index + 1).append(". ")
                         .append(list.get(index).toString()).append("\n");

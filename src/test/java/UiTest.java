@@ -87,9 +87,9 @@ public class UiTest {
     @Test
     public void displayTasks_correctDate_matchingTaskPrinted() {
         TaskList list = setUpTestList();
-        Ui.displayTasks(list, new int[]{2, 3}, "20201111");
+        Ui.displayTasks(list, new int[]{2, 3});
         String expectedOutput = "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n"
-                + "∴‥\tHere are the task on 20201111:\n"
+                + "∴‥\tHere are the task on you are looking for:\n"
                 + "∴‥\t 3. [E][✓] Tutorial (at: 2020-11-11T11:22)\n"
                 + "∴‥\t 4. [E][✓] Lecture (at: 2020-11-12T10:45)\n"
                 + "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n";
@@ -99,7 +99,7 @@ public class UiTest {
     @Test
     public void displayTasks_noMatch_noMatchPromptPrinted() {
         TaskList list = setUpTestList();
-        Ui.displayTasks(list, new int[]{}, "20201113");
+        Ui.displayTasks(list, new int[]{});
         String expectedOutput = "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n"
                 + "∴‥\tOops! Looks like there's no matching task!\n"
                 + "∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n";

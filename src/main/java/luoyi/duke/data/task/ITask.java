@@ -23,6 +23,13 @@ public interface ITask {
     String getDataString();
 
     /**
+     * Returns the description of the task.
+     *
+     * @return
+     */
+    String getDescription();
+
+    /**
      * Checks if the task occurs at some date.
      *
      * @param date Date to check against.

@@ -56,6 +56,14 @@ public class Parser {
             }
             int index = Integer.parseInt(commandStr.split(" ")[1]);
             return DeleteCommand.getDeleteCommand(index);
+        } else if (commandStr.matches("^find.*")) {
+            // Handle find command
+            if (!commandStr.matches("^find .*")) {
+                throw new DukeIllegalArgumentException(
+                        Message.ERR_WRONG_DELETE_CMD.toString());
+            }
+            String searchString = commandStr.split(" ", 2)[1];
+            return FindCommand.getFindCommand(searchString);
         }
         throw new DukeUnrecognizedArgumentException(Message.ERR_WRONG_CMD.toString());
     }
