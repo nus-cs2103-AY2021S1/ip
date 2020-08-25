@@ -6,7 +6,16 @@ import duke.exception.DukeException;
 import duke.exception.InadequateCommandException;
 import duke.exception.InvalidIndexException;
 
+/**
+ * Parses the input from the user.
+ */
 public class Parser {
+    /**
+     * Parses the input from the user
+     * @param fullCommand The input from the user
+     * @return A <code>Command</code> object that can later be executed
+     * @throws DukeException If the parsing process faces any problem
+     */
     public static Command parse(String fullCommand) throws DukeException { 
         String[] splitted = fullCommand.split("\\s+", 2);
         
