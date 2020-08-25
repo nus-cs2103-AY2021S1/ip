@@ -4,9 +4,17 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class that handles any storage related changes.
+ *
+ * @author Kai Chao
+ * @version 1.0
+ * @since 26-08-2020
+ */
 public class Storage {
 
     String dirPath;
@@ -17,6 +25,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads data from the hard drive, creates any missing directories or files.
+     *
+     * @return An arraylist consisting of the saved tasks.
+     */
     //handles loading of data
     public List<Task> loadData() {
         try {
@@ -61,7 +74,11 @@ public class Storage {
         return new ArrayList<>();
     }
 
-    //creates a new task.txt file with updated tasks that overwrites the existing one
+    /**
+     * Creates a new tasks.txt file with updated tasks that overwrites the existing one.
+     *
+     * @param taskList The new taskList.
+     */
     public void updateTaskFile(TaskList taskList) {
         try {
             //create temp text file
@@ -79,16 +96,18 @@ public class Storage {
                     //so that our parser can read
                     if (curr instanceof ToDo) {
                         ToDo todo = (ToDo) curr;
-                        toAppend = "T!@%" + (todo.isDone ? "1!@%" : "0!@%") + todo.description + "!@%";
+                        toAppend = "T!@%" + (todo.isDone ? "1!@%" : "0!@%") + todo.description
+                                        + "!@%";
                     } else if (curr instanceof Deadline) {
                         Deadline deadline = (Deadline) curr;
-                        toAppend = "D!@%" + (deadline.isDone ? "1!@%" : "0!@%") + deadline.description + "!@%"
-                                + (deadline.localDate != null ? deadline.localDate : "") + "!@%"
+                        toAppend = "D!@%" + (deadline.isDone ? "1!@%" : "0!@%")
+                                + deadline.description + "!@%" +
+                                (deadline.localDate != null ? deadline.localDate : "") + "!@%"
                                 + (deadline.localTime != null ? deadline.localTime : "");
                     } else {
                         Event event = (Event) curr;
-                        toAppend = "E!@%" + (event.isDone ? "1!@%" : "0!@%") + event.description + "!@%"
-                                + (event.localDate != null ? event.localDate : "") + "!@%"
+                        toAppend = "E!@%" + (event.isDone ? "1!@%" : "0!@%") + event.description
+                                + "!@%" + (event.localDate != null ? event.localDate : "") + "!@%"
                                 + (event.localTime != null ? event.localTime : "");
                     }
                     output.write(toAppend);
@@ -112,7 +131,12 @@ public class Storage {
         }
     }
 
-    //reads the given string and returns a task
+    /**
+     * Reads a string of line in the file and returns a task.
+     *
+     * @param string The string to be read and converted into a task.
+     * @return The converted task.
+     */
     public Task readTaskFromFile(String string) {
         //<type>!@%<status>!@%<description>!@%<date>(if applicable)!@%<time>(if applicable)
         String[] data = string.split("!@%");

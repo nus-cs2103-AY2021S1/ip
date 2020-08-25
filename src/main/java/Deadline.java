@@ -2,6 +2,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Defines a Deadline type task.
+ *
+ * @author Kai Chao
+ * @version 1.0
+ * @since 26-08-2020
+ */
 public class Deadline extends Task {
 
     protected LocalDate localDate;
@@ -21,15 +28,21 @@ public class Deadline extends Task {
         return this.localTime != null;
     }
 
+    /**
+     * Prints the description of the Deadline, with date/time if available.
+     *
+     * @return String describing the Deadline task.
+     */
     @Override
     public String toString() {
         String toReturn = "[D]" + super.toString();
         if (this.hasDate()) {
             if (this.hasTime()) {
-                toReturn += " (by: " + this.localDate.format((DateTimeFormatter.ofPattern("MMM dd yyyy")))
-                                + " " + this.localTime + ")";
+                toReturn += " (by: " + this.localDate.format((
+                        DateTimeFormatter.ofPattern("MMM dd yyyy"))) + " " + this.localTime + ")";
             } else {
-                toReturn += " (by: " + this.localDate.format((DateTimeFormatter.ofPattern("MMM dd yyyy"))) + ")";
+                toReturn += " (by: " + this.localDate.format((
+                        DateTimeFormatter.ofPattern("MMM dd yyyy"))) + ")";
             }
         }
         return toReturn;

@@ -1,3 +1,10 @@
+/**
+ * Defines a generic type task.
+ *
+ * @author Kai Chao
+ * @version 1.0
+ * @since 26-08-2020
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

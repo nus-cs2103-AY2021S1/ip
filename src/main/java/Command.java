@@ -1,5 +1,12 @@
 import java.util.Arrays;
 
+/**
+ * The command class handles any command related situations.
+ *
+ * @author Kai Chao
+ * @version 1.0
+ * @since 26-08-2020
+ */
 public class Command {
 
     private Ui ui;
@@ -12,6 +19,14 @@ public class Command {
         this.terminated = false;
     }
 
+    /**
+     * Executes the respective command based on accepted keywords.
+     *
+     * @param userInput The input given by the user.
+     * @param tasks The current list of tasks.
+     * @param storage The current storage object.
+     * @throws DukeException If any Duke-type exceptions are thrown.
+     */
     public void execute(String userInput, TaskList tasks, Storage storage) throws DukeException {
         //determining user input type via the first word
         String[] splitInput = splitUserInput(userInput);
@@ -28,7 +43,8 @@ public class Command {
             doneCommand(splitInput, tasks, storage);
         } else if (keyWord.equals("delete")) {
             deleteCommand(tasks, splitInput, ui, storage);
-        } else if (keyWord.equals("todo") || keyWord.equals("deadline") || keyWord.equals("event")){
+        } else if (keyWord.equals("todo") || keyWord.equals("deadline")
+                    || keyWord.equals("event")) {
             addTaskCommand(splitInput, keyWord, tasks, storage);
         } else {
             throw new DukeException("Unknown execution error.");
@@ -47,6 +63,11 @@ public class Command {
         ui.showWelcome();
     }
 
+    /**
+     * Calls for the required ui methods when list keyword is used.
+     *
+     * @param tasks The current list of tasks.
+     */
     public void listCommand(TaskList tasks) {
         if (tasks.noOfTasks() == 0) {
             ui.showNoPastTasks();
@@ -63,47 +84,96 @@ public class Command {
         ui.showHelp();
     }
 
-    public void deleteCommand(TaskList tasks, String[] splitInput, Ui ui, Storage storage) throws DeleteFailureException {
+    /**
+     * Calls for the required methods to handle a task deleting situation.
+     *
+     * @param tasks The current list of tasks.
+     * @param splitInput A valid string array is of length 2, index 1 being the task number to
+     *     denote as done.
+     * @param ui The UI object used.
+     * @param storage The storage used.
+     * @throws DeleteFailureException If the deleting process fails.
+     */
+    public void deleteCommand(TaskList tasks, String[] splitInput, Ui ui, Storage storage)
+            throws DeleteFailureException {
         tasks.deleteTask(tasks, splitInput, ui);
         storage.updateTaskFile(tasks);
     }
 
-    public void doneCommand(String[] splitInput, TaskList tasks, Storage storage) throws DukeException {
+    /**
+     * Calls for the required methods to handle a done situation.
+     *
+     * @param splitInput A valid string array is of length 2, index 1 being the task number
+     *     to denote as done.
+     * @param tasks The current list of tasks.
+     * @param storage The storage used.
+     * @throws InvalidFormatException If the input format is wrong.
+     */
+    public void doneCommand(String[] splitInput, TaskList tasks, Storage storage)
+            throws InvalidFormatException {
         //checks the formatting of user input
         if (splitInput.length > 2) {
-            throw new DukeException("Please use the correct format: done <task number>");
+            throw new InvalidFormatException("Please use the correct format: done <task number>");
         }
         tasks.doneTask(splitInput, tasks, ui);
         storage.updateTaskFile(tasks);
     }
 
-    public void addTaskCommand(String[] splitInput, String keyWord, TaskList tasks, Storage storage) throws DukeException {
-        String[] data = processUserInput(splitInput);
+    /**
+     * Calls for the required methods to handle a task adding situation.
+     *
+     * @param splitInput A valid string array is of length 2, index 1 being the task number to
+     *     denote as done.
+     * @param keyWord The type of task.
+     * @param tasks The current list of tasks.
+     * @param storage The storage used.
+     * @throws DukeException If any Duke-type exceptions are encountered.
+     */
+    public void addTaskCommand(String[] splitInput, String keyWord, TaskList tasks, Storage storage)
+            throws DukeException {
+        String[] data = processUserTaskInput(splitInput);
         tasks.addTask(data, keyWord, tasks, ui);
         storage.updateTaskFile(tasks);
     }
 
+    /**
+     * Obtains the keyword in the user input to determine command needed.
+     *
+     * @param input The given keyword from user input.
+     * @throws InvalidKeyWordException If the keyword not valid.
+     */
     public String getKeyWord(String input) throws InvalidKeyWordException {
         String[] splitInput = splitUserInput(input);
         if (parser.isValidKeyWord(splitInput[0])) {
             return splitInput[0];
         } else {
-            throw new InvalidKeyWordException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidKeyWordException("☹ OOPS!!! I'm sorry, but I don't know what " +
+                    "that means :-(");
         }
     }
 
-    //returns an array with index 0:description, index 1:date (if applicable), index 2:time (if applicable)
-    public static String[] processUserInput(String[] array) throws DukeException {
+    /**
+     * Processes the user input (for task commands only).
+     *
+     * @param array Contains strings for task type, description, date/time if applicable.
+     * @throws InvalidFormatException If the input format is wrong.
+     * @throws EmptyTaskException If input task is not tagged with description.
+     */
+    public static String[] processUserTaskInput(String[] array) throws InvalidFormatException,
+            EmptyTaskException {
         Parser parser = new Parser();
         if (array.length <= 1) {
             if (array[0].equals("event")) {
-                throw new EmptyTaskException("☹ OOPS!!! The description of a event cannot be empty.");
+                throw new EmptyTaskException("☹ OOPS!!! The description of a event cannot " +
+                        "be empty.");
             } else if (array[0].equals("deadline")) {
-                throw new EmptyTaskException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new EmptyTaskException("☹ OOPS!!! The description of a deadline cannot " +
+                        "be empty.");
             } else if (array[0].equals("todo")) {
-                throw new EmptyTaskException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new EmptyTaskException("☹ OOPS!!! The description of a todo cannot " +
+                        "be empty.");
             } else {
-                throw new EmptyTaskException("Unknown error!");
+                throw new InvalidFormatException("Invalid format error!");
             }
         } else if (array[0].equals("event")) {
             String des = "";
@@ -127,7 +197,7 @@ public class Command {
             //after breaking point, there should only be a maximum of 2 items remaining
             //first item is date, second item is time
             if (dateTimeArr.length > 2) {
-                throw new DukeException("Please enter a valid format");
+                throw new InvalidFormatException("Please enter a valid format");
             } else {
                 if (dateTimeArr.length == 1) {
                     //only has date but no time
@@ -144,7 +214,8 @@ public class Command {
             } else {
                 //exception is thrown when the format is off, since there is no breaking point, or
                 //if the input date or time is wrong
-                throw new DukeException("Please use the correct format and include the keyword: /at");
+                throw new InvalidFormatException("Please use the correct format and include the " +
+                        "keyword: /at");
             }
         } else if (array[0].equals("deadline")) {
             String des = "";
@@ -168,7 +239,7 @@ public class Command {
             //after breaking point, there should only be a maximum of 2 items remaining
             //first item is date, second item is time
             if (dateTimeArr.length > 2) {
-                throw new DukeException("Please enter a valid format");
+                throw new InvalidFormatException("Please enter a valid format");
             } else {
                 if (dateTimeArr.length == 1) {
                     //only has date but no time
@@ -185,7 +256,8 @@ public class Command {
             } else {
                 //exception is thrown when the format is off, since there is no breaking point, or
                 //if the input date or time is wrong
-                throw new DukeException("Please use the correct format and include the keyword: /by");
+                throw new InvalidFormatException("Please use the correct format and include the " +
+                        "keyword: /by");
             }
         } else if (array[0].equals("todo")) {
             String des = "";
