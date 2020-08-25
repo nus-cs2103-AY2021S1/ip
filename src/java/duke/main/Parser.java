@@ -88,7 +88,7 @@ public class Parser {
     }
 
     private void find(String input) throws InvalidCommandException {
-        if (input.length() <= 5) {
+        if (input.length() <= 5 || !input.startsWith("find ")) {
             throw new InvalidCommandException();
         }
         String searchString = input.substring(5);
