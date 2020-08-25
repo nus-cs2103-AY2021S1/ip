@@ -75,12 +75,12 @@ public class ParserTest {
         String readDataNotDone = "T | 0 | Sample task";
         Task taskNotDone = Parser.parseForReadingFile(readDataNotDone);
 
-        Assertions.assertEquals("[T][✗] Sample task", taskNotDone.toString());
+        Assertions.assertEquals("[T][X] Sample task", taskNotDone.toString());
 
         String readDataDone = "T | 1 | Sample task";
         Task taskDone = Parser.parseForReadingFile(readDataDone);
 
-        Assertions.assertEquals("[T][✓] Sample task", taskDone.toString());
+        Assertions.assertEquals("[T][O] Sample task", taskDone.toString());
     }
 
     @Test
@@ -88,12 +88,12 @@ public class ParserTest {
         String readDataNotDone = "D | 0 | Sample task | 2020-01-01 0000";
         Task taskNotDone = Parser.parseForReadingFile(readDataNotDone);
 
-        Assertions.assertEquals("[D][✗] Sample task (by: Jan 01 2020 00:00)", taskNotDone.toString());
+        Assertions.assertEquals("[D][X] Sample task (by: Jan 01 2020 00:00)", taskNotDone.toString());
 
         String readDataDone = "D | 1 | Sample task | 2020-01-01 0000";
         Task taskDone = Parser.parseForReadingFile(readDataDone);
 
-        Assertions.assertEquals("[D][✓] Sample task (by: Jan 01 2020 00:00)", taskDone.toString());
+        Assertions.assertEquals("[D][O] Sample task (by: Jan 01 2020 00:00)", taskDone.toString());
     }
 
     @Test
@@ -101,12 +101,12 @@ public class ParserTest {
         String readDataNotDone = "E | 0 | Sample task | 2020-01-01 0000";
         Task taskNotDone = Parser.parseForReadingFile(readDataNotDone);
 
-        Assertions.assertEquals("[E][✗] Sample task (at: Jan 01 2020 00:00)", taskNotDone.toString());
+        Assertions.assertEquals("[E][X] Sample task (at: Jan 01 2020 00:00)", taskNotDone.toString());
 
         String readDataDone = "E | 1 | Sample task | 2020-01-01 0000";
         Task taskDone = Parser.parseForReadingFile(readDataDone);
 
-        Assertions.assertEquals("[E][✓] Sample task (at: Jan 01 2020 00:00)", taskDone.toString());
+        Assertions.assertEquals("[E][O] Sample task (at: Jan 01 2020 00:00)", taskDone.toString());
     }
 
     @Test

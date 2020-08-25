@@ -28,9 +28,9 @@ public abstract class Task {
     @Override
     public String toString() {
         if (status == Status.DONE) {
-            return "[✓] " + taskName;
+            return "[O] " + taskName;
         } else {
-            return "[✗] " + taskName;
+            return "[X] " + taskName;
         }
     }
 }

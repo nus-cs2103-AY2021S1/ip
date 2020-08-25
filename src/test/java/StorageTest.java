@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class StoragePathTest {
+public class StorageTest {
     @Test
     public void StorageSaveTest() {
         Path path = Paths.get("../../junit-test/ACTUAL_STORAGE_SAVE.txt");

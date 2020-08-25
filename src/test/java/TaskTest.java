@@ -28,9 +28,9 @@ public class TaskTest {
         Assertions.assertFalse(deadlineTask.isDone());
         Assertions.assertFalse(eventTask.isDone());
 
-        String toDoTaskExpectedNotDone = "[T][✗] Sample Task";
-        String deadlineTaskExpectedNotDone = "[D][✗] Sample Task (by: May 05 2020 00:00)";
-        String eventTaskExpectedNotDone = "[E][✗] Sample Task (at: Oct 10 2020 00:00)";
+        String toDoTaskExpectedNotDone = "[T][X] Sample Task";
+        String deadlineTaskExpectedNotDone = "[D][X] Sample Task (by: May 05 2020 00:00)";
+        String eventTaskExpectedNotDone = "[E][X] Sample Task (at: Oct 10 2020 00:00)";
 
         Assertions.assertEquals(toDoTaskExpectedNotDone, toDoTask.toString());
         Assertions.assertEquals(deadlineTaskExpectedNotDone, deadlineTask.toString());
@@ -44,9 +44,9 @@ public class TaskTest {
         Assertions.assertTrue(deadlineTask.isDone());
         Assertions.assertTrue(eventTask.isDone());
 
-        String toDoTaskExpectedDone = "[T][✓] Sample Task";
-        String deadlineTaskExpectedDone = "[D][✓] Sample Task (by: May 05 2020 00:00)";
-        String eventTaskExpectedDone = "[E][✓] Sample Task (at: Oct 10 2020 00:00)";
+        String toDoTaskExpectedDone = "[T][O] Sample Task";
+        String deadlineTaskExpectedDone = "[D][O] Sample Task (by: May 05 2020 00:00)";
+        String eventTaskExpectedDone = "[E][O] Sample Task (at: Oct 10 2020 00:00)";
 
         Assertions.assertEquals(toDoTaskExpectedDone, toDoTask.toString());
         Assertions.assertEquals(deadlineTaskExpectedDone, deadlineTask.toString());

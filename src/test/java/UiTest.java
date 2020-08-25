@@ -26,7 +26,7 @@ public class UiTest {
         Task toDoTask = new ToDoTask(taskName);
         toDoTask.setStatusToDone();
         String toDoTaskExpected = "Sucessfully marked this task as done:\n"
-                + "  " + "[T][✓] Sample task";
+                + "  " + "[T][O] Sample task";
         Assertions.assertEquals(toDoTaskExpected, ui.doneSuccess(toDoTask));
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -35,13 +35,13 @@ public class UiTest {
         Task deadlineTask = new DeadlineTask(taskName, date);
         deadlineTask.setStatusToDone();
         String deadlineTaskExpected = "Sucessfully marked this task as done:\n"
-                + "  " + "[D][✓] Sample task (by: Jan 01 2020 00:00)";
+                + "  " + "[D][O] Sample task (by: Jan 01 2020 00:00)";
         Assertions.assertEquals(deadlineTaskExpected, ui.doneSuccess(deadlineTask));
 
         Task eventTask = new EventTask(taskName, date);
         eventTask.setStatusToDone();
         String eventTaskExpected = "Sucessfully marked this task as done:\n"
-                + "  " + "[E][✓] Sample task (at: Jan 01 2020 00:00)";
+                + "  " + "[E][O] Sample task (at: Jan 01 2020 00:00)";
         Assertions.assertEquals(eventTaskExpected, ui.doneSuccess(eventTask));
     }
 
@@ -51,7 +51,7 @@ public class UiTest {
         Task toDoTask = new ToDoTask(taskName);
         toDoTask.setStatusToDone();
         String toDoTaskExpected = "Okay. I will delete this task:\n"
-                + "  " + "[T][✓] Sample task\n"
+                + "  " + "[T][O] Sample task\n"
                 + "Now you have 2 tasks in the list.";
         Assertions.assertEquals(toDoTaskExpected, ui.deleteSuccess(toDoTask, 2));
 
@@ -60,14 +60,14 @@ public class UiTest {
 
         Task deadlineTask = new DeadlineTask(taskName, date);
         String deadlineTaskExpected = "Okay. I will delete this task:\n"
-                + "  " + "[D][✗] Sample task (by: Jan 01 2020 00:00)\n"
+                + "  " + "[D][X] Sample task (by: Jan 01 2020 00:00)\n"
                 + "Now you have 1 task in the list.";
         Assertions.assertEquals(deadlineTaskExpected, ui.deleteSuccess(deadlineTask, 1));
 
         Task eventTask = new EventTask(taskName, date);
         eventTask.setStatusToDone();
         String eventTaskExpected = "Okay. I will delete this task:\n"
-                + "  " + "[E][✓] Sample task (at: Jan 01 2020 00:00)\n"
+                + "  " + "[E][O] Sample task (at: Jan 01 2020 00:00)\n"
                 + "Now you have 3 tasks in the list.";
         Assertions.assertEquals(eventTaskExpected, ui.deleteSuccess(eventTask, 3));
     }
@@ -78,7 +78,7 @@ public class UiTest {
         Task toDoTask = new ToDoTask(taskName);
         toDoTask.setStatusToDone();
         String toDoTaskExpected = "Okay. I will add this task:\n"
-                + "  " + "[T][✓] Sample task\n"
+                + "  " + "[T][O] Sample task\n"
                 + "Now you have 2 tasks in the list.";
         Assertions.assertEquals(toDoTaskExpected, ui.addSuccess(toDoTask, 2));
 
@@ -87,14 +87,14 @@ public class UiTest {
 
         Task deadlineTask = new DeadlineTask(taskName, date);
         String deadlineTaskExpected = "Okay. I will add this task:\n"
-                + "  " + "[D][✗] Sample task (by: Jan 01 2020 00:00)\n"
+                + "  " + "[D][X] Sample task (by: Jan 01 2020 00:00)\n"
                 + "Now you have 1 task in the list.";
         Assertions.assertEquals(deadlineTaskExpected, ui.addSuccess(deadlineTask, 1));
 
         Task eventTask = new EventTask(taskName, date);
         eventTask.setStatusToDone();
         String eventTaskExpected = "Okay. I will add this task:\n"
-                + "  " + "[E][✓] Sample task (at: Jan 01 2020 00:00)\n"
+                + "  " + "[E][O] Sample task (at: Jan 01 2020 00:00)\n"
                 + "Now you have 3 tasks in the list.";
         Assertions.assertEquals(eventTaskExpected, ui.addSuccess(eventTask, 3));
     }
@@ -119,9 +119,9 @@ public class UiTest {
         taskList.addTask(eventTask);
 
         String showListBeforeExpected = "Here is the tasks in your list:\n" +
-                "1. [T][✓] Sample task\n" +
-                "2. [D][✗] Sample task (by: Jan 01 2020 00:00)\n" +
-                "3. [E][✓] Sample task (at: Jan 01 2020 00:00)";
+                "1. [T][O] Sample task\n" +
+                "2. [D][X] Sample task (by: Jan 01 2020 00:00)\n" +
+                "3. [E][O] Sample task (at: Jan 01 2020 00:00)";
 
         Assertions.assertEquals(showListBeforeExpected, ui.showList(taskList));
 
@@ -129,11 +129,11 @@ public class UiTest {
         taskList.addTask(new EventTask("Another sample task", date));
 
         String showListAfterExpected = "Here is the tasks in your list:\n" +
-                "1. [T][✓] Sample task\n" +
-                "2. [D][✗] Sample task (by: Jan 01 2020 00:00)\n" +
-                "3. [E][✓] Sample task (at: Jan 01 2020 00:00)\n" +
-                "4. [T][✗] Another sample task\n" +
-                "5. [E][✗] Another sample task (at: Jan 01 2020 00:00)";
+                "1. [T][O] Sample task\n" +
+                "2. [D][X] Sample task (by: Jan 01 2020 00:00)\n" +
+                "3. [E][O] Sample task (at: Jan 01 2020 00:00)\n" +
+                "4. [T][X] Another sample task\n" +
+                "5. [E][X] Another sample task (at: Jan 01 2020 00:00)";
 
         Assertions.assertEquals(showListAfterExpected, ui.showList(taskList));
     }
@@ -167,8 +167,8 @@ public class UiTest {
             taskList.addTask(eventTask2);
 
             String expectedOutput = "Here is the tasks after Jan 01 2020:\n" +
-                    "1. [D][✓] Sample task (by: May 05 2020 00:00)\n" +
-                    "2. [E][✗] Sample task (at: Oct 10 2020 00:00)";
+                    "1. [D][O] Sample task (by: May 05 2020 00:00)\n" +
+                    "2. [E][X] Sample task (at: Oct 10 2020 00:00)";
 
             Assertions.assertEquals(expectedOutput, ui.eachTaskAfter(dateTest, taskList.getTasks()));
     }
@@ -202,8 +202,8 @@ public class UiTest {
         taskList.addTask(eventTask2);
 
         String expectedOutput = "Here is the tasks before Jan 01 2020:\n" +
-                "1. [D][✗] Sample task (by: May 05 2019 00:00)\n" +
-                "2. [E][✓] Sample task (at: Oct 10 2019 00:00)";
+                "1. [D][X] Sample task (by: May 05 2019 00:00)\n" +
+                "2. [E][O] Sample task (at: Oct 10 2019 00:00)";
 
         Assertions.assertEquals(expectedOutput, ui.eachTaskBefore(dateTest, taskList.getTasks()));
     }
