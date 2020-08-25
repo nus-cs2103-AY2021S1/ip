@@ -1,22 +1,13 @@
-public enum Command {
-    BYE("bye"),
-    COMMANDS("commands"),
-    DEADLINE("deadline"),
-    DELETE("delete"),
-    DONE("done"),
-    EVENT("event"),
-    LIST("list"),
-    TODO("todo"),
-    UNKNOWN("unknown");
-
-    private String label;
-
-    Command(String label) {
-        this.label = label;
+public abstract class Command {
+    private boolean shouldLoop;
+    
+    Command(boolean shouldLoop) {
+        this.shouldLoop = shouldLoop;
     }
-
-    @Override
-    public String toString() {
-        return this.label;
+    
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    
+    public boolean shouldLoop() {
+        return this.shouldLoop;
     }
 }
