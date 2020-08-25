@@ -1,7 +1,7 @@
 package command;
 
 /**
- * TODO: Convert invalid command to Duke Exception
+ * Notifies the user of invalid input
  */
 public class InvalidCommand extends Command {
 
@@ -20,6 +20,9 @@ public class InvalidCommand extends Command {
         return false;
     }
 
+    /**
+     * Notifies the user in case of an invalid input
+     */
     @Override
     public void execute() {
         System.out.println(this.message);
