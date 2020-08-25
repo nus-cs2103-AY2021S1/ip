@@ -1,11 +1,13 @@
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Events extends Task {
-    private String eventTime;
+    protected LocalDateTime eventTime;
 
     public Events(String taskTitle, String eventTime) {
         super(taskTitle, TaskTypes.EVENT);
-        this.eventTime = eventTime;
+        this.eventTime = LocalDateTime.parse(eventTime, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
     public static void addEventTask(String taskTitle, String eventTime, ArrayList<Task> tasks) {
@@ -14,8 +16,12 @@ public class Events extends Task {
         Feedbacks.addEventTaskMsg(tasks);
     }
 
+    public String printTime() {
+        return eventTime.format(DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a"));
+    }
+
     @Override
     public String toString() {
-        return super.toString() + " (at:" + eventTime + ")";
+        return super.toString() + " (at: " + printTime() + ")";
     }
 }

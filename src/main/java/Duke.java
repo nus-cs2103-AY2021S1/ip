@@ -43,8 +43,8 @@ public class Duke {
                 String taskTitle;
                 String deadlineTime;
                 try {
-                    taskTitle = inputMsg.split("deadline ")[1].split("/by")[0];
-                    deadlineTime = inputMsg.split("deadline ")[1].split("/by")[1];
+                    taskTitle = inputMsg.split("deadline ")[1].split("/by ")[0];
+                    deadlineTime = inputMsg.split("deadline ")[1].split("/by ")[1];
                     Deadlines.addDeadlineTask(taskTitle, deadlineTime, tasks);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     // if the user doesn't follow the correct format after the keyword "deadline"
@@ -52,8 +52,8 @@ public class Duke {
                 }
             } else if (inputMsg.startsWith("event")) {
                 try {
-                    String taskTitle = inputMsg.split("event ")[1].split("/at")[0];
-                    String eventTime = inputMsg.split("event ")[1].split("/at")[1];
+                    String taskTitle = inputMsg.split("event ")[1].split("/at ")[0];
+                    String eventTime = inputMsg.split("event ")[1].split("/at ")[1];
                     Events.addEventTask(taskTitle, eventTime, tasks);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     // if the user doesn't follow the correct format after the keyword "event"

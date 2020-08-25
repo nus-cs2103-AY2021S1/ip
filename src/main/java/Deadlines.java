@@ -1,11 +1,13 @@
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Deadlines extends Task {
-    private String deadlineTime;
+    private LocalDateTime deadlineTime;
 
     public Deadlines(String taskTitle, String deadlineTime) {
         super(taskTitle, TaskTypes.DEADLINE);
-        this.deadlineTime = deadlineTime;
+        this.deadlineTime = LocalDateTime.parse(deadlineTime, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
     public static void addDeadlineTask(String taskTitle, String deadlineTime, ArrayList<Task> tasks) {
@@ -14,8 +16,11 @@ public class Deadlines extends Task {
         Feedbacks.addDeadlineTaskMsg(tasks);
     }
 
+    public String printTime() {
+        return deadlineTime.format(DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a"));
+    }
     @Override
     public String toString() {
-        return super.toString() + " (by:" + deadlineTime + ")";
+        return super.toString() + " (by: " + printTime() + ")";
     }
 }
