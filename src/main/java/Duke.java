@@ -71,7 +71,7 @@ public class Duke {
                     try {
                         handleFilter(inputSplit[1]);
                     } catch (ArrayIndexOutOfBoundsException e) {
-
+                        System.out.println(LINE + "Invalid input! Please specify which date you want to filter \n" + LINE);
                     }
                 }
             } catch (DukeException e) {
@@ -100,9 +100,11 @@ public class Duke {
     public static void handleFilter(String date) {
         String output = "";
         for (int i = 1; i <= taskList.size(); i++) {
-            output = output + i + ". " + taskList.get(i - 1) + "\n";
+            if (taskList.get(i - 1).isDate(date)) {
+                output = output + i + ". " + taskList.get(i - 1) + "\n";
+            }
         }
-        System.out.println(LINE + "Here are the tasks in your list: \n" + output + LINE);
+        System.out.println(LINE + "Here are your task in your list due: \n" + output + LINE);
     }
 
     public static void handleDone(String taskIdString) throws DukeException {

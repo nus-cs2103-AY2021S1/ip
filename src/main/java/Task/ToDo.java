@@ -16,7 +16,7 @@ public class ToDo extends Task {
         return "T>" + completedBinary + ">" + this.description;
     }
 
-    public boolean isDate() {
+    public boolean isDate(String date) {
         return false;
     }
 }
