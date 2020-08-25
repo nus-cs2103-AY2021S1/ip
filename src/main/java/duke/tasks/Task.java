@@ -6,7 +6,7 @@ package duke.tasks;
  *
  */
 public class Task {
-    private boolean completed;
+    private boolean hasCompleted;
     private String taskName;
 
     /**
@@ -15,7 +15,7 @@ public class Task {
      */
     public Task(String name) {
         this.taskName = name;
-        this.completed = false;
+        this.hasCompleted = false;
     }
 
     /**
@@ -24,7 +24,7 @@ public class Task {
      * @return Current status of task;
      */
     protected String getStatus() {
-        return (this.completed ? "\u2713" : "\u2718");
+        return (this.hasCompleted ? "\u2713" : "\u2718");
     }
 
     /**
@@ -32,7 +32,7 @@ public class Task {
      *
      */
     public void markDone() {
-        this.completed = true;
+        this.hasCompleted = true;
     }
 
     /**

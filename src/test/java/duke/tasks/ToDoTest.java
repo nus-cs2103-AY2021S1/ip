@@ -7,13 +7,13 @@ public class ToDoTest {
     @Test
     public void dataStorage_displaysCorrectStorageName_displayZeroForUndone() {
         ToDo testToDoUndone = new ToDo("Testing");
-        assertEquals("T | 0 | Testing", testToDoUndone.dataStorage());
+        assertEquals("T | 0 | Testing", testToDoUndone.getDataStorageName());
     }
 
     @Test
     public void dataStorage_displaysCorrectStorageNameForDone_displayOneForDone() {
         ToDo testToDoUndone = new ToDo("Testing");
         testToDoUndone.markDone();
-        assertEquals("T | 1 | Testing", testToDoUndone.dataStorage());
+        assertEquals("T | 1 | Testing", testToDoUndone.getDataStorageName());
     }
 }

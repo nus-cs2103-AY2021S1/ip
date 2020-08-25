@@ -24,7 +24,7 @@ public abstract class Command {
      *
      * @return isExit property of the command.
      */
-    public boolean isExit() {
+    public boolean canExit() {
         return this.isExit;
     }
 

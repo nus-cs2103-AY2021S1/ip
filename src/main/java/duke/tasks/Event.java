@@ -26,8 +26,9 @@ public class Event extends Task{
      *
      * @return Representation of event task in backend data storage.
      */
-    public String dataStorage() {
-        return "E | " + (super.getStatus() == "\u2713" ? "1" : "0") + " | " + super.getTaskName() + " | " + this.time;
+    public String getDataStorageName() {
+        return "E | " + (super.getStatus() == "\u2713" ? "1" : "0") + " | " + super.getTaskName() + " | "
+                + this.time;
     }
 
     /**
@@ -37,6 +38,7 @@ public class Event extends Task{
      */
     @Override
     public String toString(){
-        return "[E]" + super.toString() + " (at: " + this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

@@ -26,8 +26,9 @@ public class Deadline extends Task{
      *
      * @return Representation of deadline task in backend data storage.
      */
-    public String dataStorage() {
-        return "D | " + (super.getStatus() == "\u2713" ? "1" : "0") + " | " + super.getTaskName() + " | " + this.time;
+    public String getDataStorageName() {
+        return "D | " + (super.getStatus() == "\u2713" ? "1" : "0") + " | " + super.getTaskName() + " | "
+                + this.time;
     }
 
     /**
@@ -37,6 +38,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

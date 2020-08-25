@@ -19,7 +19,7 @@ public class ToDo extends Task{
      *
      * @return Representation of to-do task in backend data storage.
      */
-    public String dataStorage() {
+    public String getDataStorageName() {
         return "T | " + (super.getStatus() == "\u2713" ? "1" : "0") + " | " + super.getTaskName();
     }
 
