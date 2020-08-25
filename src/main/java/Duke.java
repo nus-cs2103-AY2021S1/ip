@@ -1,7 +1,17 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+
 public class Duke {
+
+    // Filepath constants
+    private static final String path = "./data/duke.txt";
 
     // Constants related to display (including messages)
     private static final String LINE_BREAK = "\t____________________"
@@ -30,6 +40,7 @@ public class Duke {
     // static fields for the bot
     private static ArrayList<Task> store = new ArrayList<>(); // add input items here
     private static boolean isFirstRun = true; // is the bot run for the first time?
+    private static BufferedWriter writer; // writer to use
 
     // helper methods related to displaying
     private static void displayToScreen(String str) {
@@ -54,13 +65,55 @@ public class Duke {
         System.out.println(LINE_BREAK + "\n");
     }
 
+    // helper method to deal with initialization
+    private static void startHandler() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(new File(path)));
+            writer = new BufferedWriter(new FileWriter(new File(path), true));
+            while (reader.ready()) {
+                // read input and split by data
+                String[] currentLine = reader.readLine().split("\\s\\|\\s");
+
+                // handle different task cases, create them and and add to store
+                switch (currentLine[0]) {
+                    case "T":
+                        Task todoAdd = new ToDo(false, currentLine[2]);
+                        store.add(todoAdd);
+                        break;
+                    case "E":
+                        Task eventAdd = new Event(false, currentLine[2], currentLine[3]);
+                        store.add(eventAdd);
+                        break;
+                    case "D":
+                        Task deadlineAdd = new Deadline(false, currentLine[2], currentLine[3]);
+                        store.add(deadlineAdd);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            reader.close(); // close reader
+
+        } catch (IOException exc) {
+            // if file is not present, create it
+            try {
+                File newFile = new File(path);
+                newFile.createNewFile();// create file
+                writer = new BufferedWriter(new FileWriter(newFile));
+            } catch (IOException error) {
+                System.out.println("Something went wrong with creating the file");
+            }
+        }
+    }
+
     // helper methods related to commands
     // can consider using Enum for taskType
     private static void taskHandler(String input, String taskType) throws DukeException {
         switch (taskType) {
         case TODO_COMMAND:
             try {
-                String todoName = input.substring(input.indexOf("todo") + 5);
+                String todoName = input.substring(input.indexOf("todo") + 5).trim();
 
                 // case: check for "whitespace description"
                 if (todoName.matches("\\s+")) {
@@ -68,12 +121,20 @@ public class Duke {
                 }
 
                 // remove leading and trailing whitespace
-                Task newTodo = new ToDo(false, todoName.trim());
+                Task newTodo = new ToDo(false, todoName);
                 store.add(newTodo);
+
+                // write to file
+                writer.write("T | " + store.size() + " | " + todoName + "\n");
+                writer.close(); // update after every write
+                writer = new BufferedWriter(new FileWriter(new File(path), true));
+
                 displayModifiedTasks(newTodo, true);
             } catch (StringIndexOutOfBoundsException noDesc) {
                 // case: No description
                 throw DukeException.emptyDescription("todo");
+            } catch (IOException noFile) {
+                System.out.println("Something went wrong");
             }
             break;
         case EVENT_COMMAND:
@@ -84,8 +145,8 @@ public class Duke {
                     throw new DukeException("The '/at' tag is missing");
                 }
 
-                String eventTime = input.substring(eventMarker + 4);
-                String eventName = input.substring(6, eventMarker - 1);
+                String eventTime = input.substring(eventMarker + 4).trim();
+                String eventName = input.substring(6, eventMarker - 1).trim();
 
                 // case: check for "whitespace description or timeline"
                 if (eventTime.matches("\\s+") || eventName.matches("\\s+")) {
@@ -93,12 +154,20 @@ public class Duke {
                 }
 
                 // remove leading and trailing whitespace
-                Task newEvent = new Event(false, eventName.trim(), eventTime.trim());
+                Task newEvent = new Event(false, eventName, eventTime);
                 store.add(newEvent);
+
+                // write to file
+                writer.write("E | " + store.size() + " | " + eventName + " | " + eventTime + "\n");
+                writer.close(); // update after every write
+                writer = new BufferedWriter(new FileWriter(new File(path), true));
+
                 displayModifiedTasks(newEvent, true);
             } catch (StringIndexOutOfBoundsException noDescOrTimeEvent) {
                 // case: Either no description or no timeline
                 throw DukeException.emptyDescription("event");
+            } catch (IOException error) {
+                System.out.println("Something went wrong");
             }
             break;
         case DEADLINE_COMMAND:
@@ -109,8 +178,8 @@ public class Duke {
                     throw new DukeException("The '/by' tag is missing");
                 }
 
-                String deadlineTime = input.substring(deadlineMarker + 4);
-                String deadlineName = input.substring(9, deadlineMarker - 1);
+                String deadlineTime = input.substring(deadlineMarker + 4).trim();
+                String deadlineName = input.substring(9, deadlineMarker - 1).trim();
 
                 // case: check for "whitespace description or timeline"
                 if (deadlineTime.matches("\\s+") || deadlineName.matches("\\s+")) {
@@ -118,12 +187,20 @@ public class Duke {
                 }
 
                 // remove leading and trailing whitespace
-                Task newDeadline = new Deadline(false, deadlineName.trim(), deadlineTime.trim());
+                Task newDeadline = new Deadline(false, deadlineName, deadlineTime);
                 store.add(newDeadline);
+
+                // write to file
+                writer.write("D | " + store.size() + " | " + deadlineName + " | " + deadlineTime + "\n");
+                writer.close(); // update after every write
+                writer = new BufferedWriter(new FileWriter(new File(path), true));
+
                 displayModifiedTasks(newDeadline, true);
             } catch (StringIndexOutOfBoundsException noDescOrTimeDeadline) {
                 // case: Either no description or no timeline
                 throw DukeException.emptyDescription("deadline");
+            } catch (IOException err) {
+                System.out.println("Something went wrong");
             }
             break;
         default:
@@ -176,6 +253,7 @@ public class Duke {
         if (isFirstRun) {
             isFirstRun = false; // it's not first run anymore
             displayToScreen(WELCOME_MESSAGE);
+            startHandler();
         }
 
         // read input
@@ -217,6 +295,12 @@ public class Duke {
                 displayToScreen(e.getMessage());
                 input = sc.nextLine(); // continue reading input
             }
+        }
+
+        try {
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("error encountered");
         }
 
         // line reached upon command "bye", at which point quit and echo exit message

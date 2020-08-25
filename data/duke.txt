@@ -1,0 +1,4 @@
+T | 1 | mend ISB
+E | 2 | Ryan says Abujiji | 2pm
+D | 3 | brew tea | 3pm
+E | 4 | Ryan says hi | 9pm
