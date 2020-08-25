@@ -2,17 +2,17 @@ package duck.task;
 
 import duck.Colour;
 
-public class Event extends Task {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    private String date;
+public class Event extends TaskWithDate {
 
-    public Event(String desc, String date) {
-        super(desc);
-        this.date = date;
+    public Event(String desc, LocalDate date) {
+        super(desc, date);
     }
 
     @Override
     public String getStatus() {
-        return Colour.Cyan("[E]") + super.getStatus() + " (at: " + this.date + ")";
+        return Colour.Cyan("[E]") + super.getStatus() + " (at: " + super.getDateAsString() + ")";
     }
 }

@@ -11,6 +11,7 @@ public enum Option {
     TODO("todo"),
     EVENT("event"),
     DELETE("delete"),
+    DUE("due"),
     UNRECOGNIZED;
 
     private String name;

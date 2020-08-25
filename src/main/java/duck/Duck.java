@@ -5,8 +5,11 @@ import duck.task.Task;
 import duck.task.TaskFactory;
 import duck.task.TaskList;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Duck {
@@ -57,6 +60,23 @@ public class Duck {
             responses.add(statuses[i]);
         }
     }
+    public void listByDueDate(String input) {
+        Optional<LocalDate> optionalDate;
+        try {
+            optionalDate = Optional.ofNullable(Parser.parseDate(input));
+            responses.add("Here are the tasks up to the date: " +
+                    optionalDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        } catch (DuckException e) {
+            optionalDate = Optional.empty();
+            responses.add("Here are the tasks sorted by date");
+            responses.add("You can filter up to a date by using \"due [/at | /by] yyyy-mm-dd\"");
+        }
+
+        String[] statusesByDueDate = this.taskList.getStatusesByDate(optionalDate);
+        for (int i = 0; i < statusesByDueDate.length; i++) {
+            responses.add(statusesByDueDate[i]);
+        }
+    }
 
     public void markTaskAsDone(String input) throws DuckException {
         int taskNumber = Parser.parseTaskNumber(input);
@@ -82,6 +102,7 @@ public class Duck {
         responses.add("  " + newTask.getStatus());
         responses.add(getNumberOfTasks());
     }
+
 
 
     public void run() {
@@ -112,6 +133,9 @@ public class Duck {
                     break;
                 case DELETE:
                     deleteTask(input);
+                    break;
+                case DUE:
+                    listByDueDate(input);
                     break;
                 case TODO:
                 case DEADLINE:

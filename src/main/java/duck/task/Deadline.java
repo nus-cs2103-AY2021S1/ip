@@ -2,17 +2,17 @@ package duck.task;
 
 import duck.Colour;
 
-public class Deadline extends  Task {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    private String date;
+public class Deadline extends TaskWithDate {
 
-    public Deadline(String desc, String date) {
-        super(desc);
-        this.date = date;
+    public Deadline(String desc, LocalDate date) {
+        super(desc, date);
     }
 
     @Override
     public String getStatus() {
-        return Colour.Magenta("[D]") + super.getStatus() + " (by: " + this.date + ")";
+        return Colour.Magenta("[D]") + super.getStatus() + " (by: " + super.getDateAsString() + ")";
     }
 }
