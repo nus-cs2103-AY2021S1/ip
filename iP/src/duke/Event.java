@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
  * Event is a type of task
  * contains eventTime of task
  */
-public class Event extends Task{
+public class Event extends Task {
 
     protected LocalDate eventTime;
 

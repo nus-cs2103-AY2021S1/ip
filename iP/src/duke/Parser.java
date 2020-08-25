@@ -93,7 +93,7 @@ public class Parser {
         String description = user_input.split(" /at ", 2)[0];
         String time = task.split(" /at ")[1];
         LocalDate l_time = LocalDate.parse(time);
-        HashMap<String, Object> parsedData = new HashMap<String, Object>(){
+        HashMap<String, Object> parsedData = new HashMap<String, Object>() {
             { put("description", description); put("time", l_time); }
         };
         return parsedData;

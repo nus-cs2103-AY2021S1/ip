@@ -22,11 +22,13 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println(
+                "Hello from\n"
+                + logo);
 
         System.out.println(
-                "Hello! I'm Duke\n" +
-                "What can I do for you?");
+                "Hello! I'm Duke\n"
+                + "What can I do for you?");
     }
 
     /**
@@ -105,7 +107,4 @@ public class Ui {
         user_input = scanner.nextLine();  // Read user input
         return user_input;
     }
-
-
-
 }

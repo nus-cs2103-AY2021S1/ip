@@ -34,7 +34,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             // create folder if doesn't exist
             File path = new File("./data/");
-            if (!path.isDirectory()){
+            if (!path.isDirectory()) {
                 path.mkdir();
             }
             // create file if doesn't exist
@@ -82,5 +82,4 @@ public class Storage {
         }
         fileWriter.close();
     }
-
 }
