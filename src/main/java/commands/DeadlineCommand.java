@@ -8,6 +8,9 @@ import parser.Parser;
 import storage.Storage;
 import ui.Ui;
 
+/**
+ * Adds a Deadline task into the current task list of Duke.
+ */
 public class DeadlineCommand extends Command{
 
     private TaskList taskList;

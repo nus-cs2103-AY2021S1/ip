@@ -4,6 +4,9 @@ import data.exception.DukeInvalidUserInputException;
 import data.task.TaskList;
 import storage.Storage;
 
+/**
+ * Marks a specific task in the current task list of Duke as done.
+ */
 public class DoneCommand extends Command {
 
     private TaskList taskList;

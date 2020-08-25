@@ -3,11 +3,13 @@ package data.task;
 import data.exception.DukeInvalidUserInputException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A specific type of task that contains a description of a task and a specific date, start and end time.
+ */
 public class Event extends Task {
     private LocalDate date;
     private LocalTime startTime;
@@ -19,6 +21,11 @@ public class Event extends Task {
         convertDateTime(dateTime);
     }
 
+    /**
+     * Converts the given string into a LocalDate and LocalTime to be stored as the Event's date,start and end time.
+     * @param dateTime to be converted into LocalDate and LocalTime.
+     * @throws DukeInvalidUserInputException when an invalid a date time format is used as input.
+     */
     private void convertDateTime(String dateTime) throws DukeInvalidUserInputException {
         try {
             String[] dateTimeArr = dateTime.split(" ");
@@ -34,10 +41,20 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Converts the Event task into a string to be saved into a text file.
+     * @return Event task in the form of a string.
+     */
     public String toTxtFormat() {
         return "E | " + super.toTxtFormat() + " | " + this.dateTimeTxt;
     }
 
+    /**
+     * Parses a given string array into a Event task.
+     * @param txtArray to be parsed into a Event task.
+     * @return Event task based on input string array.
+     * @throws DukeInvalidUserInputException when an invalid date and time format is found in the input string array.
+     */
     public static Event parse(String[] txtArray) throws DukeInvalidUserInputException {
         String done = txtArray[1].trim();
         String description = txtArray[2].trim();

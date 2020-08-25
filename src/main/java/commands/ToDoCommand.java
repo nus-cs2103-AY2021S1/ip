@@ -6,6 +6,9 @@ import data.task.ToDo;
 import storage.Storage;
 import ui.Ui;
 
+/**
+ * Adds a To_Do task into the current task list of Duke.
+ */
 public class ToDoCommand extends Command {
 
     private TaskList taskList;
