@@ -6,11 +6,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Encapsulates the storage of data from duke to a file in the local hard drive
+ */
 public class Storage {
 
     /** Data separator to separate different data in the same entry */
     private final String dataSeparator = "\uff5c";
 
+    /** File representation of the file specified by the pathname */
     private final File file;
 
     /** Pathname of the file. Note that loading and saving is done on the same file. */
@@ -23,6 +27,24 @@ public class Storage {
     Storage(String pathName) {
         this.pathName = pathName;
         this.file = new File(this.pathName);
+    }
+
+    /**
+     * Creates new tasks based on the input strings read from the file and adds these tasks to the task list
+     * @param tasks Current task list
+     * @param strings Input strings read from the file
+     */
+    void addTaskFromData(TaskList tasks, String[] strings) {
+        if (strings.length > 0) {
+            String taskType = strings[0];
+            if (taskType.equals("todo") && strings.length == 3) {
+                tasks.addTodo(strings[2], Boolean.parseBoolean(strings[1]));
+            } else if (taskType.equals("deadline") && strings.length == 4) {
+                tasks.addDeadline(strings[2], Boolean.parseBoolean(strings[1]), Parser.genDate(strings[3]));
+            } else if (taskType.equals("event") && strings.length == 4) {
+                tasks.addEvent(strings[2], Boolean.parseBoolean(strings[1]), Parser.genDate(strings[3]));
+            }
+        }
     }
 
     /**
@@ -44,19 +66,6 @@ public class Storage {
             }
         }
         return tasks;
-    }
-
-    void addTaskFromData(TaskList tasks, String[] strings) {
-        if (strings.length > 0) {
-            String taskType = strings[0];
-            if (taskType.equals("todo") && strings.length == 3) {
-                tasks.addTodo(strings[2], Boolean.parseBoolean(strings[1]));
-            } else if (taskType.equals("deadline") && strings.length == 4) {
-                tasks.addDeadline(strings[2], Boolean.parseBoolean(strings[1]), Parser.genDate(strings[3]));
-            } else if (taskType.equals("event") && strings.length == 4) {
-                tasks.addEvent(strings[2], Boolean.parseBoolean(strings[1]), Parser.genDate(strings[3]));
-            }
-        }
     }
 
     /**

@@ -8,24 +8,40 @@ import main.java.duke.task.ToDo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Encapsulates a task list
+ */
 public class TaskList {
 
+    /** Task list */
     final ArrayList<Task> taskArrayList;
 
+    /**
+     * Constructor
+     */
     TaskList() {
         this.taskArrayList = new ArrayList<>();
     }
 
+    /**
+     * Checks if the task list is empty
+     * @return true if the task list is empty, false otherwise
+     */
     boolean isEmpty() {
         return taskArrayList.size() == 0;
     }
 
-    void addToList(Task addTask) {
-        this.taskArrayList.add(addTask);
-    }
-
+    /**
+     * Gets the task specified by its index in the task list
+     * @param taskIndex Current index of the task
+     * @return Task at specified index if it exists, null otherwise
+     */
     Task getTaskAt(int taskIndex) {
-        return this.taskArrayList.get(taskIndex);
+        if (taskIndex >= 0 && taskIndex < this.getNumOfTasks()) {
+            return this.taskArrayList.get(taskIndex);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -43,6 +59,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Gets the number of tasks in the current task list
+     * @return Number of tasks in the current task list
+     */
     int getNumOfTasks() {
         return this.taskArrayList.size();
     }
@@ -82,22 +102,6 @@ public class TaskList {
         Event event = new Event(description, isComplete, date);
         this.taskArrayList.add(event);
         return event;
-    }
-
-    @Override
-    public String toString() {
-        String textIndentation = "     ";
-        if (this.isEmpty()) {
-            return textIndentation + "Your task list is currently empty. YAY!!! :D";
-        } else {
-            StringBuilder output = new StringBuilder(textIndentation + "Here are the tasks in your list:\n");
-            int listSize = this.taskArrayList.size();
-            for (int i = 0; i < listSize; i++) {
-                String eachTaskString = textIndentation + (i + 1) + ". " + this.taskArrayList.get(i) + "\n";
-                output.append(eachTaskString);
-            }
-            return output.deleteCharAt(output.length()-1).toString();
-        }
     }
 
     /**
