@@ -7,12 +7,34 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Encapsulates a task that needs to be done by a certain date and time.
+ */
 public class Deadline extends Task {
 
+    /**
+     * Constant that determines the representation of this task's type.
+     */
     protected static final String TASK_TYPE = "D";
+
+    /**
+     * Constant that stores the date to finish the task by.
+     */
     protected LocalDate dateBy;
+
+    /**
+     * constant that store the time to finish the task by.
+     */
     protected LocalTime timeBy;
 
+    /**
+     * Initializes a new Deadline object.
+     * Converts the date and time to attend the event to LocalDate and LocalTime objects.
+     *
+     * @param description       The task to be completed.
+     * @param by                The date and time when it must be completed.
+     * @throws DukeException    If the program fails at any point.
+     */
     public Deadline(String description, String by) throws DukeException {
         super(description);
         try {
@@ -24,6 +46,16 @@ public class Deadline extends Task {
                     "'yyyy-MM-dd HH:MM' (24-hour time format).");
         }
     }
+
+    /**
+     * Initializes a new Deadline object.
+     * Converts the date and time to attend the event to LocalDate and LocalTime objects.
+     *
+     * @param description       The task to be completed.
+     * @param by                The date and time when it must be completed.
+     * @param isDone            Whether the task is done or not.
+     * @throws DukeException    If the program fails at any point.
+     */
     public Deadline(String description, String by, boolean isDone) throws DukeException {
         super(description, isDone);
         try {
@@ -36,6 +68,12 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns a string representation of the task in a save friendly format.
+     * The way it is saved affects how the .txt file is read in {@link duke.Storage}
+     *
+     * @return Save-friendly string of the task.
+     */
     @Override
     public String getSaveFormat() {
         return String.format("%s | %s | %s %s",
@@ -45,6 +83,12 @@ public class Deadline extends Task {
                 this.timeBy.format(DateTimeFormatter.ofPattern("HH:mm")));
     }
 
+    /**
+     * Returns a string representation of the task.
+     * Task is prepended by Deadline.TASK_TYPE.
+     *
+     * @return Data of the task in string format.
+     */
     @Override
     public String toString() {
         String modifier = (this.timeBy.isAfter(LocalTime.NOON)) ? "pm" : "am";

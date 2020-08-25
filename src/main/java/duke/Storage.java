@@ -14,10 +14,26 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * The link between the {@link duke.task.TaskList} and a local .txt file.
+ */
 public class Storage {
+    /**
+     * The filepath whether the data will be stored on the local machine.
+     */
     private final Path filePath;
+
+    /**
+     * A list of the tasks currently stored.
+     */
     private List<String> tasks;
 
+    /**
+     * Initializes a new storage object.
+     * Tries to create the needed directories and files if it doesn't exist yet.
+     *
+     * @param filePath the path at which data will be stored at.
+     */
     Storage(Path filePath) {
         this.filePath = filePath;
 
@@ -36,6 +52,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a list of tasks based on the data stored currently.
+     * Handles the creation of the task objects by manipulating the strings the tasks are stored in.
+     *
+     * @return List of tasks.
+     * @throws DukeException if program fails at any point.
+     */
     public List<Task> getTasks() throws DukeException {
         List<Task> tasks = new ArrayList<>();
 
@@ -84,12 +107,24 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Joins all the strings in the List of tasks in strings and separates them with a linebreak
+     * before writing it to a file.
+     *
+     * @throws IOException If the program fails at any point.
+     */
     public void write() throws IOException {
         String data = String.join("\n", this.tasks);
         Files.writeString(filePath, data, StandardCharsets.UTF_8, StandardOpenOption.WRITE,
                 StandardOpenOption.TRUNCATE_EXISTING);
     }
 
+    /**
+     * Saves a new task to the .txt file.
+     *
+     * @param task new task to be saved.
+     * @throws DukeException if the program fails to write.
+     */
     public void saveTask(Task task) throws DukeException {
         this.tasks.add(task.getSaveFormat());
 
@@ -100,6 +135,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates an existing task in the current tasks.
+     *
+     * @param id ID of task to update.
+     * @param task Task to update.
+     * @throws DukeException if the program fails to write.
+     */
     public void updateTask(int id, Task task) throws DukeException {
         this.tasks.set(id - 1, task.getSaveFormat());
 
@@ -110,6 +152,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes a task from the current tasks.
+     *
+     * @param id ID of the task to delete.
+     * @throws DukeException If the program fails to write.
+     */
     public void deleteTask(int id) throws DukeException {
         this.tasks.remove(id - 1);
 
