@@ -63,6 +63,11 @@ public class TaskDescription {
         System.out.println("\t____________________________________________________________\n");
     }
 
+    /**
+     * Renders tasks that user searched for.
+     *
+     * @param searchedTasks Searched tasks.
+     */
     public static void searchedTaskDescription(List<Task> searchedTasks) {
         if (searchedTasks.size() > 0) { // Items found with find command
             System.out.println("\t____________________________________________________________\n");
