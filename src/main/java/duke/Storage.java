@@ -51,27 +51,27 @@ public class Storage {
                     String savedTask = buffReader.readLine();
                     String type = savedTask.substring(0, 1);
                     switch (type) {
-                        case "T":
-                            list.add(new ToDo(savedTask.substring(4).trim(), savedTask.substring(2, 3).equals("T")));
-                            break;
-                        case "D":
-                            String deadlineDetails = savedTask.substring(4);
-                            String[] deadlineArr = deadlineDetails.split("/by");
-                            Deadline deadline = new Deadline(
-                                    deadlineArr[0].trim(),
-                                    savedTask.substring(2, 3).equals("T"),
-                                    LocalDateTime.parse(deadlineArr[1].trim()));
-                            list.add(deadline);
-                            break;
-                        case "E":
-                            String eventDetails = savedTask.substring(4);
-                            String[] eventArr = eventDetails.split("/at");
-                            Event event = new Event(
-                                    eventArr[0].trim(),
-                                    savedTask.substring(2, 3).equals("T"),
-                                    LocalDateTime.parse(eventArr[1].trim()));
-                            list.add(event);
-                            break;
+                    case "T":
+                        list.add(new ToDo(savedTask.substring(4).trim(), savedTask.substring(2, 3).equals("T")));
+                        break;
+                    case "D":
+                        String deadlineDetails = savedTask.substring(4);
+                        String[] deadlineArr = deadlineDetails.split("/by");
+                        Deadline deadline = new Deadline(
+                                deadlineArr[0].trim(),
+                                savedTask.substring(2, 3).equals("T"),
+                                LocalDateTime.parse(deadlineArr[1].trim()));
+                        list.add(deadline);
+                        break;
+                    case "E":
+                        String eventDetails = savedTask.substring(4);
+                        String[] eventArr = eventDetails.split("/at");
+                        Event event = new Event(
+                                eventArr[0].trim(),
+                                savedTask.substring(2, 3).equals("T"),
+                                LocalDateTime.parse(eventArr[1].trim()));
+                        list.add(event);
+                        break;
                     }
                 }
             } else {

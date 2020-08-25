@@ -3,7 +3,10 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import duke.task.*;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Event;
+import duke.task.Deadline;
 
 /**
  * The Ui class deals with interactions with the user.
@@ -15,6 +18,7 @@ public class Ui {
 
     public static final String LINE = "    ____________________________________________________________\n";
     private static DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
+
     private Scanner sc;
 
     /** Create and initiate an Ui object. */
@@ -39,10 +43,10 @@ public class Ui {
      * @param task The task that has being marked as done.
      */
     public void done(Task task) {
-        System.out.println(LINE +
-                "    Nice! I've marked this task as done:" + "\n" +
-                "    " + task.toString() + "\n" +
-                LINE);
+        System.out.println(LINE
+                + "    Nice! I've marked this task as done:" + "\n"
+                + "    " + task.toString() + "\n"
+                + LINE);
     }
 
     /**
@@ -124,11 +128,11 @@ public class Ui {
      * @param taskList The list of task remaining.
      */
     public void deleteTask(Task task, TaskList taskList) {
-        System.out.println(LINE +
-                "    Noted. I've removed this task:" + "\n" +
-                "      " + task.toString() + "\n" +
-                String.format("    Now you have %d tasks in the list.\n", taskList.size()) +
-                LINE);
+        System.out.println(LINE
+                + "    Noted. I've removed this task:" + "\n"
+                + "      " + task.toString() + "\n"
+                + String.format("    Now you have %d tasks in the list.\n", taskList.size())
+                + LINE);
     }
 
     /**
@@ -137,10 +141,10 @@ public class Ui {
      * @param taskList The list containing all tasks.
      */
     public void addTask(Task task, TaskList taskList) {
-        System.out.println(LINE +
-                "    Got it! I have added this task to the list!" + "\n" +
-                "      " + task + "\n" +
-                String.format("    Now you have %d tasks in the list.", taskList.size()) + "\n" +
-                LINE);
+        System.out.println(LINE
+                + "    Got it! I have added this task to the list!" + "\n"
+                + "      " + task + "\n"
+                + String.format("    Now you have %d tasks in the list.", taskList.size()) + "\n"
+                + LINE);
     }
 }

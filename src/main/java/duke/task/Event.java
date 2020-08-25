@@ -1,6 +1,5 @@
 package duke.task;
 
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -54,7 +53,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" +super.toString() + " (at: " +
-                this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a", Locale.ENGLISH)) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a", Locale.ENGLISH)) + ")";
     }
 }
