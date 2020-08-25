@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Ui {
 
     /** A decorative line to serve as a border. */
-    public static final String line = "____________________________________________________________";
+    public static final String LINE = "____________________________________________________________";
 
     /** The name of the Duke bot. */
     private final String botName = "Bolot";
@@ -26,10 +26,10 @@ public class Ui {
 
     /** Greets the user. */
     private void greet() {
-        System.out.println(line);
+        System.out.println(LINE);
         System.out.println("Hello! I am " + botName + ", your personal chat-bot companion.");
         System.out.println("How may I help you?");
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     /** Prints the logo and greets the user. */
@@ -47,7 +47,7 @@ public class Ui {
 
     /** Prints the border line. */
     public void showLine() {
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     /** Reads the input from the user. */

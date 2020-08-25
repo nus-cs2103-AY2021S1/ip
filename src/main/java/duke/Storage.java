@@ -54,13 +54,13 @@ public class Storage {
     /**
      * Saves the task list into a file.
      *
-     * @param taskList The task list to be saved.
+     * @param tasks The task list to be saved.
      */
-    public void saveTasks(ArrayList<Task> taskList) {
+    public void saveTasks(ArrayList<Task> tasks) {
 
         StringBuilder taskString = new StringBuilder();
 
-        for (Task task: taskList) {
+        for (Task task: tasks) {
             taskString.append(task.saveFormat());
             taskString.append("\n");
         }

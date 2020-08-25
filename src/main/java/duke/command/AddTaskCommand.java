@@ -22,7 +22,7 @@ public abstract class AddTaskCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         addTask(taskList, input);
-        storage.saveTasks(taskList.getList());
+        storage.saveTasks(taskList.getTasks());
         taskList.printNewTask();
     }
 
