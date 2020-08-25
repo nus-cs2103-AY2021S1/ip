@@ -18,8 +18,7 @@ public class BotResponses {
 
     public static void intro() {
         System.out.println(horizL + "\n" + logo + "\n" +
-                INDENT + "Quack. Duckie is here to remember your tasks!\n" +
-                INDENT + "You can begin by adding tasks!\n" + horizL);
+                INDENT + "Quack. Duckie is here to remember your tasks!");
     }
 
     public static void ending() {
