@@ -56,7 +56,7 @@ public class Storage {
     }
 
     public void writeData(List<Task> list) throws IOException {
-        FileWriter fw = new FileWriter("data/data.txt");
+        FileWriter fw = new FileWriter(FILE_PATH);
         for (Task t: list) {
             String toWrite = "";
             toWrite += (t.encode() + "\n");
