@@ -10,12 +10,22 @@ import main.command.Command;
 import main.parser.Parser;
 import main.exception.DukeException;
 
+/**
+ * Duke application.
+ * @author Joshua Liang XingYa
+ * @author joshualiang.xy@gmail.com
+ * @version v0.1
+ * @since v0.1
+ */
 public class Duke {
     private final Ui ui;
     private final Scanner sc;
     private final TaskList tasks;
     private boolean hasCommand;
 
+    /**
+     * Constructs the duke application.
+     */
     public Duke() {
         sc = new Scanner(System.in);
         hasCommand = false;
@@ -23,6 +33,9 @@ public class Duke {
         ui = new Ui();
     }
 
+    /**
+     * Initialises the duke application.
+     */
     public void initialise() {
         try {
             hasCommand = true;
