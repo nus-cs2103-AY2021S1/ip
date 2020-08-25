@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,9 +19,11 @@ public class Chatbot {
     protected final String ERROR_EMPTY_DEADLINE_TASK = "⚠⚠⚠ The description of a 'deadline' cannot be empty.";
     protected final String ERROR_EMPTY_EVENT_TASK = "⚠⚠⚠ The description of a 'event' cannot be empty.";
     protected final String ERROR_DEADLINE_FORMAT = "⚠⚠⚠ The description of 'deadline' should be accompanied"
-            + '\n' + INDENTATION + "    by '/by' followed by the date";
+            + '\n' + INDENTATION + "    by '/by' followed by the date in this format: 'yyyy-mm-dd'";
     protected final String ERROR_EVENT_FORMAT = "⚠⚠⚠ The description of 'event' should be accompanied"
-            + '\n' + INDENTATION + "    by '/at' followed by the date";
+            + '\n' + INDENTATION + "    by '/at' followed by the date in this format: 'yyyy-mm-dd'";
+    protected final String ERROR_INVALID_DATE = "⚠⚠⚠ Please input the proper date in this"
+            + '\n' + " format: 'yyyy-mm-dd'";
 
 
 
@@ -62,6 +66,8 @@ public class Chatbot {
     }
 
     private void taskHandler(TaskType type, String body) throws DukeException {
+
+        try {
             Task currentTask;
             if (type.equals(TaskType.TODO)) {
                 if (inquiry.equals("todo")) throw new DukeEmptyToDoException(ERROR_EMPTY_TODO_TASK);
@@ -79,7 +85,7 @@ public class Chatbot {
 
                 String deadline = arrOfString[1];
                 String description = arrOfString[0];
-                currentTask = new Deadline(description, deadline);
+                currentTask = new Deadline(description, LocalDate.parse(deadline));
             } else {
                 if (inquiry.equals("event")) {
                     throw new DukeEmptyEventException(ERROR_EMPTY_EVENT_TASK);
@@ -91,12 +97,15 @@ public class Chatbot {
                 }
                 String eventDate = arrOfString[1];
                 String description = arrOfString[0];
-                currentTask = new Event(description, eventDate);
+                currentTask = new Event(description, LocalDate.parse(eventDate));
             }
             addToPlanner(currentTask);
             reply("Got it. I've added this task:");
             reply(INDENTATION + currentTask.toString());
             reply("Now you have " + planner.size() + " tasks in the list.");
+        } catch (DateTimeParseException e) {
+            throw new DukeDateTimeParseException(ERROR_DEADLINE_FORMAT);
+        }
     }
 
     private void taskAction(TaskType type, String inquiry) throws DukeException {
