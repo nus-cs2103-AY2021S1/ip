@@ -1,13 +1,12 @@
 package duke.command;
 
 import duke.DukeDateTime;
-import org.junit.jupiter.api.Test;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ class DoneCommandTest {
 
     @Test
     void executeAndUndo() {
-        DukeDateTime dateTime = new DukeDateTime(LocalDateTime.now().format(DukeDateTime.FORMAT));
+        DukeDateTime dateTime = new DukeDateTime();
         List<Task> taskList = new ArrayList<>(5);
 
         Task task1 = new ToDo("Todo 1");

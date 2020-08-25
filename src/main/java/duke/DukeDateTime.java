@@ -1,101 +1,79 @@
 package duke;
 
+import duke.cmd.Duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 /**
- * The DukeDateTime class keeps track of a LocalDateTime
- * Only keep track of day, month, year, hour and minutes
- * Predefined formats: DukeDateTime.FORMAT, DukeDateTime.PRETTY
+ * DukeDateTime provides methods to convert String to LocalDateTime and vice versa
+ * Predefined formats:
+ *  - DukeDateTime.DEFAULT ("ddMMyyyy HHmm")
+ *  - DukeDateTime.PRETTY ("dd MMM yyyy KK:mma")
  */
-public class DukeDateTime implements Comparable<DukeDateTime> {
+public class DukeDateTime {
 
-    public static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("ddMMyyyy HHmm");
+    public static final DateTimeFormatter DEFAULT = DateTimeFormatter.ofPattern("ddMMyyyy HHmm");
     public static final DateTimeFormatter PRETTY = DateTimeFormatter.ofPattern("dd MMM yyyy KK:mma");
 
     private final LocalDateTime localDateTime;
 
     /**
-     * Initialise DukeDateTime with current date and time
+     * Construct a DukeDateTime based on current time
      */
-    public DukeDateTime() { this(LocalDateTime.now().format(FORMAT)); }
-
-    /**
-     * Initialise DukeDateTime with specified LocalDateTime
-     * @param localDateTime The LocalDateTime to initialize with
-     */
-    public DukeDateTime(LocalDateTime localDateTime) {
-        // Discard seconds and milliseconds from localDateTime
-        this(localDateTime.format(FORMAT));
+    public DukeDateTime() {
+        this.localDateTime = DukeDateTime.trim(LocalDateTime.now());
     }
 
     /**
-     * Initialise DukeDateTime with specified time, following DukeDateTime.FORMAT
-     * @param localDateTime The string representation of LocalDateTime in DukeDateTime.FORMAT
-     * @throws DateTimeParseException If the String cannot be parsed
+     * Construct a DukeDateTime based on given String
+     * @param dateTime A String in DukeDateTime.DEFAULT format ("ddMMyyyy HHmm")
      */
-    public DukeDateTime(String localDateTime) throws DateTimeParseException {
-        this.localDateTime = LocalDateTime.parse(localDateTime, FORMAT);
+    public DukeDateTime(String dateTime) {
+        this.localDateTime = LocalDateTime.parse(dateTime, DukeDateTime.DEFAULT);
     }
 
     /**
-     * Get the embedded localDateTime object
-     * @return The localDateTime object referenced by dukeDateTime
+     * Removes unused attributes, leaving only the day, month, year, hour, and minute
+     * @param localDateTime The LocalDateTime to be trimmed
+     * @return A LocalDateTime with only day, month, year, hour and minute attributes
      */
-    public LocalDateTime get() {
-        return this.localDateTime;
+    private static LocalDateTime trim(LocalDateTime localDateTime) {
+        return LocalDateTime.parse(localDateTime.format(DukeDateTime.DEFAULT), DukeDateTime.DEFAULT);
     }
 
     /**
-     * Get a pretty print of DukeDateTime
-     * Format is specified in DukeDateTime.PRETTY
+     * Convert a LocalDateTime into a String (Suitable for displaying)
+     * The String will be converted to DukeDateTime.PRETTY format
      * (i.e. dd MMM yyyy KK:mma)
      * (e.g. 18 May 2020 08:20pm)
      *
-     * @return The pretty print of DukeDateTime
+     * @return The String representation in DukeDateTime.PRETTY format
      */
     public String pretty() {
-        return this.localDateTime.format(PRETTY);
+        return localDateTime.format(DukeDateTime.PRETTY);
     }
 
     /**
-     * Get the String format of DukeDateTime
-     * Format is specified in DukeDateTime.FORMAT
+     * Convert a LocalDateTime into a String
+     * The String will be converted to DukeDateTime.DEFAULT format
      * (i.e. ddMMyyyy HHmm)
      * (e.g. 22082020 1800)
      *
-     * @return The String representation of DukeDateTime
+     * @return The String representation in DukeDateTime.DEFAULT format
      */
     @Override
     public String toString() {
-        return this.localDateTime.format(FORMAT);
+        return localDateTime.format(DukeDateTime.DEFAULT);
     }
 
-    /**
-     * Compares two DukeDateTime Object
-     *
-     * @param obj The other DukeDateTime
-     * @return -1 if this is smaller, 1 if this is bigger, or 0 if they are similar
-     */
     @Override
-    public int compareTo(DukeDateTime obj) {
-        return this.localDateTime.compareTo(obj.get());
-    }
-
-    /**
-     * DukeDateTime is equals to another object if the object is
-     * a LocalDateTime that does not contain seconds and milliseconds,
-     * and is equivalent to the LocalDateTime referenced in DukeDateTime
-     * @param obj The object to compare this DukeDateTime with
-     * @return true if they are equivalent, otherwise false
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof DukeDateTime)) return false;
-        DukeDateTime that = (DukeDateTime) obj;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DukeDateTime)) return false;
+        DukeDateTime that = (DukeDateTime) o;
         return localDateTime.equals(that.localDateTime);
     }
 

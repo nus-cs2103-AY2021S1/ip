@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.task.Task;
-import duke.task.TaskEnum;
+import duke.task.TaskFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -48,7 +48,7 @@ public class LoadCommand implements Command {
                     .map(line -> {
                          try {
                              String taskType = line.substring(0, line.indexOf(','));
-                             return TaskEnum.valueOf(taskType).fromCsv(line);
+                             return TaskFactory.valueOf(taskType).fromCsv(line);
                          } catch(Exception e) {
                              System.out.println("Corrupt entry: " + line);
                              return null;

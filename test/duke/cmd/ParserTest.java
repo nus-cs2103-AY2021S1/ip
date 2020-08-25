@@ -1,10 +1,10 @@
 package duke.cmd;
 
 import duke.command.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import duke.task.Task;
 import duke.task.ToDo;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,10 +68,10 @@ class ParserTest {
         actual = Parser.parse(taskList, "");
         assertTrue(actual instanceof InvalidCommand);
 
-        actual = Parser.parse(taskList, "invalidone");
+        actual = Parser.parse(taskList, "invalid");
         assertTrue(actual instanceof InvalidCommand);
 
-        actual = Parser.parse(taskList, "invalidone invalidtwo");
+        actual = Parser.parse(taskList, "invalid two");
         assertTrue(actual instanceof InvalidCommand);
     }
 

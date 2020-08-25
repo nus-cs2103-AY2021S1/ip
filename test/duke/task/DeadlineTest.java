@@ -10,19 +10,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class DeadlineTest {
 
     String string1 = "Test case 1";
-    LocalDateTime now1 = LocalDateTime.now().minusHours(3);
-    String input1 = now1.format(DukeDateTime.FORMAT);
-    DukeDateTime time1 = new DukeDateTime(input1);
+    DukeDateTime time1 = new DukeDateTime(LocalDateTime.now().minusHours(1).format(DukeDateTime.DEFAULT));
 
     String string2 = "Test case 2";
-    LocalDateTime now2 = LocalDateTime.now().minusHours(2);
-    String input2 = now2.format(DukeDateTime.FORMAT);
-    DukeDateTime time2 = new DukeDateTime(input2);
+    DukeDateTime time2 = new DukeDateTime();
 
     @Test
     void getDeadline() {
         Deadline testCase = new Deadline(string1, time1);
-        assertEquals(now1.toString().substring(0, 16), testCase.getDeadline().toString());
+        assertEquals(time1, testCase.getDeadline());
     }
 
     @Test
@@ -47,7 +43,7 @@ class DeadlineTest {
     void toCSV_fromCSV() {
         try {
             Task task1 = new Deadline(string1, time1);
-            Task task2 = Deadline.fromCsv(task1.toCsv());
+            Task task2 = TaskFactory.DEADLINE.fromCsv(task1.toCsv());
             assertEquals(task1.hashCode(), task2.hashCode());
         } catch (Exception e) {
             // Failed to convert csv to Deadline

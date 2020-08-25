@@ -3,8 +3,6 @@ package duke.task;
 import duke.DukeDateTime;
 
 import java.util.Objects;
-import java.util.Scanner;
-import java.time.LocalDateTime;
 
 /**
  * A Task with a startTime, and an endTime
@@ -20,18 +18,18 @@ public class Event extends Task {
         this.eventEnd = eventEnd;
     }
 
-    public Event(boolean completed, String description, DukeDateTime eventStart, DukeDateTime eventEnd) {
-        super(completed, description);
+    public Event(boolean isCompleted, String description, DukeDateTime eventStart, DukeDateTime eventEnd) {
+        super(isCompleted, description);
         this.eventStart = eventStart;
         this.eventEnd = eventEnd;
     }
 
-    public LocalDateTime getStart() {
-        return this.eventStart.get();
+    public DukeDateTime getStart() {
+        return this.eventStart;
     }
 
-    public LocalDateTime getEnd() {
-        return this.eventEnd.get();
+    public DukeDateTime getEnd() {
+        return this.eventEnd;
     }
 
     @Override
@@ -45,42 +43,21 @@ public class Event extends Task {
      */
     @Override
     public String toCsv() {
-        return TaskEnum.EVENT + "," + super.toCsv() + "," + eventStart + "," + eventEnd;
-    }
-
-    /**
-     * Initialize an event instance from it's csv representation
-     * @param csv An event in csv format
-     * @return The event represented by the csv
-     * @throws Exception If csv cannot be parsed into a event object
-     */
-    public static Task fromCsv(String csv) throws Exception{
-        Scanner scanner = new Scanner(csv);
-        scanner.useDelimiter(",");
-        scanner.next(); // Discard first match
-
-        // Construct task from csv
-        return new Event(
-                Boolean.parseBoolean(scanner.next()),
-                scanner.next(),
-                new DukeDateTime(scanner.next()),
-                new DukeDateTime(scanner.next())
-        );
+        return TaskFactory.EVENT + "," + super.toCsv() + "," + eventStart + "," + eventEnd;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Event)) return false;
-        if (!super.equals(obj)) return false;
-        Event event = (Event) obj;
-        return getStart().equals(event.getStart()) &&
-                getEnd().equals(event.getEnd());
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Event)) return false;
+        if (!super.equals(o)) return false;
+        Event event = (Event) o;
+        return eventStart.equals(event.eventStart) &&
+                eventEnd.equals(event.eventEnd);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getStart(), getEnd());
+        return Objects.hash(super.hashCode(), eventStart, eventEnd);
     }
-
 }

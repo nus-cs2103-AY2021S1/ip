@@ -3,8 +3,6 @@ package duke.task;
 import duke.DukeDateTime;
 
 import java.util.Objects;
-import java.util.Scanner;
-import java.time.LocalDateTime;
 
 /**
  * A Task with a deadline
@@ -18,13 +16,13 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
-    public Deadline(boolean completed, String description, DukeDateTime deadline) {
-        super(completed, description);
+    public Deadline(boolean isCompleted, String description, DukeDateTime deadline) {
+        super(isCompleted, description);
         this.deadline = deadline;
     }
     
-    public LocalDateTime getDeadline() {
-        return this.deadline.get();
+    public DukeDateTime getDeadline() {
+        return this.deadline;
     }
 
     @Override
@@ -38,26 +36,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toCsv() {
-        return TaskEnum.DEADLINE + "," + super.toCsv() + "," + deadline;
-    }
-
-    /**
-     * Initialize a deadline instance from it's csv representation
-     * @param csv A deadline in csv format
-     * @return The deadline represented by the csv
-     * @throws Exception If csv cannot be parsed into a deadline object
-     */
-    public static Task fromCsv(String csv) throws Exception {
-        Scanner scanner = new Scanner(csv);
-        scanner.useDelimiter(",");
-        scanner.next(); // Discard first match
-
-        // Construct task from csv
-        return new Deadline(
-                Boolean.parseBoolean(scanner.next()),
-                scanner.next(),
-                new DukeDateTime(scanner.next())
-        );
+        return TaskFactory.DEADLINE + "," + super.toCsv() + "," + deadline.toString();
     }
 
     @Override

@@ -13,7 +13,7 @@ public class HelpCommand implements Command {
     @Override
     public void execute() {
         System.out.println("Command list:");
-        Arrays.stream(CommandEnum.values())
+        Arrays.stream(CommandFactory.values())
                 .map((p) -> " " + p.toString().toLowerCase())
                 .forEach(System.out::print);
         System.out.println();

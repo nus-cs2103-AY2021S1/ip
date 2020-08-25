@@ -1,20 +1,19 @@
 package duke.command;
 
-import org.junit.jupiter.api.Test;
 import duke.task.Task;
 import duke.task.ToDo;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class ListCommandTest {
 
-    private List<Task> taskList = new ArrayList<>(1);
+    private final List<Task> taskList = new ArrayList<>(1);
 
     @Test
     void testExecute() {

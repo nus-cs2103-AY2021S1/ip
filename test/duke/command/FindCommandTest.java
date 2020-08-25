@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.command.FindCommand;
 import duke.task.Task;
 import duke.task.ToDo;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FindCommandTest {
 
-    private List<Task> taskList = new ArrayList<>(1);
+    private final List<Task> taskList = new ArrayList<>(1);
 
     @Test
     void testExecute() {

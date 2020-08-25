@@ -1,7 +1,7 @@
 package duke.cmd;
 
 import duke.command.Command;
-import duke.command.CommandEnum;
+import duke.command.CommandFactory;
 import duke.command.InvalidCommand;
 import duke.task.Task;
 
@@ -23,6 +23,9 @@ public class Parser {
      */
     public static Command parse(List<Task> taskList, String input) {
 
+        // Match the input pattern
+        // matcher.group(1) is used to identify the command type
+        // matcher.group(2) is used to extract command parameters
         Pattern pattern = Pattern.compile("^\\s*(\\S+)\\s*(.*)$");
         Matcher matcher = pattern.matcher(input);
 
@@ -31,10 +34,10 @@ public class Parser {
 
         // Find the matching duke.command
         String firstWord = matcher.group(1).toUpperCase();
-        return Arrays.stream(CommandEnum.values()) // parser is an enum of all valid commands
-                .filter(commandEnum -> commandEnum.toString().equals(firstWord))
+        return Arrays.stream(CommandFactory.values()) // parser is an enum of all valid commands
+                .filter(commandFactory -> commandFactory.toString().equals(firstWord))
                 .findFirst()
-                .map(commandEnum -> commandEnum.generate(taskList, matcher.group(2)))
+                .map(commandFactory -> commandFactory.generate(taskList, matcher.group(2)))
                 .orElse(new InvalidCommand());
     }
 
