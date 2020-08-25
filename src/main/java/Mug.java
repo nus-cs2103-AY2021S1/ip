@@ -1,5 +1,5 @@
 import storage.Storage;
-import tasks.TaskList;
+import tasklist.TaskList;
 import ui.Ui;
 
 import java.util.Scanner;

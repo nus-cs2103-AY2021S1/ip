@@ -3,7 +3,7 @@ package ui;
 import command.Command;
 import mugexception.MugException;
 import parser.Parser;
-import tasks.TaskList;
+import tasklist.TaskList;
 
 /**
  * User interaction.

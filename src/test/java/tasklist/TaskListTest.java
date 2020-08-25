@@ -1,7 +1,6 @@
-package task;
+package tasklist;
 
 import command.Command;
-import tasks.TaskList;
 import storage.Storage;
 
 import org.junit.jupiter.api.Test;

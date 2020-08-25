@@ -1,7 +1,7 @@
 package ui;
 
 import storage.Storage;
-import tasks.TaskList;
+import tasklist.TaskList;
 
 import org.junit.jupiter.api.Test;
 
