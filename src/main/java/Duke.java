@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -102,6 +104,14 @@ public class Duke {
                 String time = input.substring(index + 5);
                 Deadline newDeadline = new Deadline(description, time);
                 addNewTask(newDeadline);
+                String date = input.substring(index + 4);
+                try {
+                    LocalDate deadlineDate = LocalDate.parse(date);
+                    Deadline newDeadline = new Deadline(description, deadlineDate);
+                    addNewTask(newDeadline);
+                } catch (DateTimeParseException e) {
+                    throw new InvalidDateTimeException("deadline");
+                }
             }
         } else {
             throw new DukeException();
@@ -117,9 +127,14 @@ public class Duke {
             } else {
                 int index = input.indexOf(" /at ");
                 String description = input.substring(6, index);
-                String time = input.substring(index + 5);
-                Event newEvent = new Event(description, time);
-                addNewTask(newEvent);
+                String date = input.substring(index + 4);
+                try {
+                    LocalDate eventDate = LocalDate.parse(date);
+                    Event newEvent = new Event(description, eventDate);
+                    addNewTask(newEvent);
+                } catch (DateTimeParseException e) {
+                    throw new InvalidDateTimeException("event");
+                }
             }
         } else {
             throw new DukeException();
