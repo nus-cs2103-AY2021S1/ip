@@ -24,6 +24,38 @@ public class Duke {
                 );
     }
 
+    public static void printForDone(ArrayList<Task> arr, Task t) {
+        String keyword = "";
+        String toPrint = "";
+        if (t instanceof Deadline) {
+            keyword = "by";
+            toPrint = " (" + keyword + ": " + t.time + ")";
+        } else if (t instanceof Event) {
+            keyword = "at";
+            toPrint = " (" + keyword + ": " + t.time + ")";
+        }
+        System.out.println("Got it. I've marked this task as done:" + "\n" +
+                t.getIndicator() + t.getIcon() + t.name + toPrint + "\n" +
+                "Now you have " + arr.size() + " tasks in the list."
+        );
+    }
+
+    public static void printForDelete(ArrayList<Task> arr, Task t) {
+        String keyword = "";
+        String toPrint = "";
+        if (t instanceof Deadline) {
+            keyword = "by";
+            toPrint = " (" + keyword + ": " + t.time + ")";
+        } else if (t instanceof Event) {
+            keyword = "at";
+            toPrint = " (" + keyword + ": " + t.time + ")";
+        }
+        System.out.println("Got it. I've removed this task:" + "\n" +
+                t.getIndicator() + t.getIcon() + t.name + toPrint + "\n" +
+                "Now you have " + arr.size() + " tasks in the list."
+        );
+    }
+
     public static void main(String[] args) throws Exception {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
@@ -64,8 +96,7 @@ public class Duke {
                             } else {
                                 Task t = arr.get(taskNumber - 1);
                                 t.taskIsDone();
-                                System.out.println("Nice! Duke has marked this task as done: " + "\n");
-                                print(arr, t);
+                                printForDone(arr, t);
                             }
                             fc.listWriter(arr);
                         }
@@ -102,8 +133,7 @@ public class Duke {
                             } else {
                                 Task t = arr.get(taskNumber - 1);
                                 arr.remove(t);
-                                System.out.println("Nice! Duke has removed this task: " + "\n");
-                                print(arr, t);
+                                printForDelete(arr, t);
                                 fc.listWriter(arr);
                             }
                         }
