@@ -34,7 +34,8 @@ public class DeleteCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task task = taskList.getTask(index);
         taskList.removeTask(task);
-        ui.printDeleteTask(taskList, task);
+        ui.print("Noted. I've deleted this task:\n" + task);
+        ui.print("Now you have " + (taskList.getList().size()) + " tasks in the list." );
         storage.delete(task);
     }
 }

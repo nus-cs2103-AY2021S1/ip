@@ -15,7 +15,7 @@ public class TodoCommand extends Command{
     String description;
 
     /**
-     * Constructor of the Todo Class
+     * Constructor of the TodoCommand Class
      *
      * @param description
      */
@@ -36,7 +36,8 @@ public class TodoCommand extends Command{
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task task = new Todo(description);
         taskList.addTask(task);
-        ui.printAddTask(taskList);
+        ui.print("Got it. I've added this task:\n" + taskList.getTask(taskList.getList().size() - 1));
+        ui.print("Now you have " + taskList.getList().size() + " tasks in the list." );
         storage.save(task);
     }
 }

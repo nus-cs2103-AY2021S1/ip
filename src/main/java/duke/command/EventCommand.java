@@ -15,7 +15,7 @@ public class EventCommand extends Command {
     String description, date;
 
     /**
-     * Constructor of the Event Class
+     * Constructor of the EventCommand Class
      *
      * @param description description of the task
      * @param date date of the task
@@ -38,7 +38,8 @@ public class EventCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task task = new Event(description, date);
         taskList.addTask(task);
-        ui.printAddTask(taskList);
+        ui.print("Got it. I've added this task:\n" + taskList.getTask(taskList.getList().size() - 1));
+        ui.print("Now you have " + taskList.getList().size() + " tasks in the list." );
         storage.save(task);
     }
 }

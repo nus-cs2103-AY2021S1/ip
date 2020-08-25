@@ -1,7 +1,5 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.Scanner;
 
 /**
@@ -35,53 +33,10 @@ public class Ui {
     }
 
     /**
-     * Messages to be printed when a task is added
-     *
-     * @param taskList current list of tasks
+     * Prints messages to the user
      */
-    public void printAddTask(TaskList taskList) {
-        System.out.println("Got it. I've added this task:\n" + taskList.getTask(taskList.getList().size() - 1));
-        System.out.println("Now you have " + taskList.getList().size() + " tasks in the list." );
-    }
-
-    /**
-     * Messages to be printed when a task is deleted
-     *
-     * @param taskList current list of tasks
-     * @param task tasks that is deleted
-     */
-    public void printDeleteTask(TaskList taskList, Task task) {
-        System.out.println("Noted. I've deleted this task:\n" + task);
-        System.out.println("Now you have " + (taskList.getList().size()) + " tasks in the list." );
-    }
-
-    /**
-     * Messages to be printed when a task has been completed
-     * @param task task that has been completed
-     */
-    public void printDoneTask(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task);
-    }
-
-    /**
-     * Prints the current set of tasks in the list
-     *
-     * @param list current list of tasks
-     */
-    public void printList(TaskList list) {
-        int i = 1;
-        if (list.getList().isEmpty()) {
-            System.out.println("List is Empty");
-        }
-        for(Task t : list.getList()) {
-            System.out.println(i + "." + t);
-            i++;
-        }
-    }
-
-    public void printFind() {
-        System.out.println("Here are the matching tasks in your list:");
+    public void print(String str) {
+        System.out.println(str);
     }
 
     /**

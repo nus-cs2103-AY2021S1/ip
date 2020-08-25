@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Storage;
+import duke.exception.DoneException;
 import duke.task.Task;
 import duke.TaskList;
 import duke.Ui;
@@ -33,9 +34,14 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        Task task = taskList.getTask(index);
-        task.markAsDone();
-        ui.printDoneTask(task);
-        storage.replace(task);
+        try {
+            Task task = taskList.getTask(index);
+            task.markAsDone();
+            ui.print("Nice! I've marked this task as done:");
+            ui.print(task.toString());
+            storage.replace(task);
+        } catch (DoneException e) {
+            ui.print(e.getMessage());
+        }
     }
 }

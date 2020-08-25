@@ -17,16 +17,12 @@ public class Parser {
     protected static List<String> inputFormat = Arrays.asList("dd/MM/yyyy HHmm", "yyyy-mm-dd Haaa");
     protected static SimpleDateFormat outputFormat = new SimpleDateFormat("MMM dd yyyy h:mma");
 
-<<<<<<< HEAD
     /**
      * Converts the input date to another date format, if it exist
      * @param str users date input
      * @return String representation of the new date format or the original date input
      */
-    public static String DateParser(String str) {
-=======
     public static String dateParser(String str) {
->>>>>>> branch-A-CodingStandard
         Date date = null;
         for (String input : inputFormat) {
             try {
@@ -76,11 +72,7 @@ public class Parser {
                 formatChecker(inputArray);
                 String str = inputArray[1].split(" /", 2)[0];
                 String date = inputArray[1].split("/", 2)[1].split(" ", 2)[1];
-<<<<<<< HEAD
-                return new DeadlineCommand(str,dateParser(date));
-=======
-                return new DeadlineCommand(str, DateParser(date));
->>>>>>> branch-Level-9
+                return new DeadlineCommand(str, dateParser(date));
             }
             case "event": {
                 formatChecker(inputArray);

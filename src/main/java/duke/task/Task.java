@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.exception.DoneException;
+import duke.exception.DukeException;
+
 /**
  * Represents a task object
  * A <code>Task</code> object corresponds to a task created using the command
@@ -41,10 +44,14 @@ abstract public class Task {
     }
 
     /**
-     * Changes the status to the task to be completed
+     *
      */
-    public void markAsDone() {
-        status = 1;
+    public void markAsDone() throws DoneException {
+        if (status == 1) {
+            throw new DoneException("Task is already completed. Please re-enter:");
+        } else {
+            status = 1;
+        }
     }
 
     /**

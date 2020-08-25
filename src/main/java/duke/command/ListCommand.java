@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
 
 /**
  * Represent a "List" Command
@@ -19,6 +20,13 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printList(taskList);
+        int i = 1;
+        if (taskList.getList().isEmpty()) {
+            System.out.println("List is Empty");
+        }
+        for(Task t : taskList.getList()) {
+            System.out.println(i + "." + t);
+            i++;
+        };
     }
 }
