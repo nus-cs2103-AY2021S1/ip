@@ -67,12 +67,42 @@ public class TaskList {
     }
 
     /**
+     * Returns filtered tasks based on exact matching with keyword
+     *
+     * @return a list of tasks that satisfy the constraints
+     */
+    public TaskList filter(String keyword) {
+        List<Task> filteredList = new ArrayList<>();
+        for(Task task: list) {
+            if(task.toString().contains(keyword)) {
+                filteredList.add(task);
+            }
+        }
+        return new TaskList(filteredList);
+    }
+
+    /**
      * Returns itemized tasks, each with serial numbers (1-based)
      *
      * @return a list of strings of the form "1. deadline sample task /by time"
      */
     public List<String> itemize() {
         List<String> itemizedList = new ArrayList<>();
+        for(int i = 0; i < list.size(); i++) {
+            itemizedList.add((i + 1) + ". " + list.get(i));
+        }
+        return itemizedList;
+    }
+
+    /**
+     * Returns itemized tasks with an intro message, each with serial numbers (1-based)
+     *
+     * @param introText the text to be displayed before the itemized list
+     * @return a list of strings of the form "1. deadline sample task /by time"
+     */
+    public List<String> itemize(String introText) {
+        List<String> itemizedList = new ArrayList<>();
+        itemizedList.add(introText);
         for(int i = 0; i < list.size(); i++) {
             itemizedList.add((i + 1) + ". " + list.get(i));
         }
