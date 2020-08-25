@@ -2,6 +2,7 @@ package data.task;
 
 import ui.Ui;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -45,5 +46,46 @@ public class TaskList {
 
     public int getTotalTask() {
         return this.taskList.size();
+    }
+
+    /**
+     * Finds tasks that contain the input keyword within their descriptions.
+     * @param keyword to find.
+     * @return an array list of tasks that contain the keyword.
+     */
+    public ArrayList<Task> findTasksKeyword(String keyword) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.descriptionContains(keyword)) {
+                result.add(task);
+            }
+        }
+        return  result;
+    }
+
+    /**
+     * Finds tasks that contain the input date within their dates.
+     * @param date to find.
+     * @return an array list of tasks that contain the date.
+     */
+    public ArrayList<Task> findTasksDate(String date) {
+        ArrayList<Task> result = new ArrayList<>();
+        LocalDate inputDate = LocalDate.parse(date);
+        for (Task task : this.taskList) {
+            if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                if (deadline.getDate().equals(inputDate)) {
+                    result.add(task);
+                }
+            } else if (task instanceof Event) {
+                Event event = (Event) task;
+                if (event.getDate().equals(inputDate)) {
+                    result.add(task);
+                }
+            } else {
+                //ignore To_Do tasks as they do not have dates
+            }
+        }
+        return  result;
     }
 }
