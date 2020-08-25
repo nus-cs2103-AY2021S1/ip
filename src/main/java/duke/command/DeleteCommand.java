@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
     private int taskNo;
 
     /**
-     * Constructs a @DeleteCommand.
+     * Constructs a DeleteCommand.
      *
      * @param taskNo The task number to be deleted.
      */
@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the command by deleting a task with the given @taskNo.
+     * Executes the command by deleting a task with the given taskNo.
      *
      * @param taskList The task list that stores and modifies the list of saved tasks.
      * @param ui The UI of the bot.
@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
      * Compares with an object.
      *
      * @param o The object compared.
-     * @return True if the object is of type @DeleteCommand and has the same @taskNo.
+     * @return True if the object is of type DeleteCommand and has the same taskNo.
      */
     @Override
     public boolean equals(Object o) {

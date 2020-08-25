@@ -1,6 +1,6 @@
 package duke.exception;
 
-/** An exception when there is no keyword following a @find command. */
+/** An exception when there is no keyword following a find command. */
 public class NoKeywordException extends DukeException {
 
     /** Constructs a @NoKeywordException. */

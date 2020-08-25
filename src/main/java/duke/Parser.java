@@ -29,7 +29,7 @@ public class Parser {
      * @param fullCommand The user input.
      * @return A Command for the bot to do.
      * @throws UnrecognizedTaskException If the first word is not a recognized command.
-     * @throws NoIndexException If the command is @delete or @done and the index is < 0
+     * @throws NoIndexException If the command is delete or done and the index is < 0
      *         or larger than the size of the task list.
      * @throws EmptyTaskException If the command is an add task command such as todo,
      *         event, or deadline and is followed by no description.
@@ -108,8 +108,8 @@ public class Parser {
     /**
      * Makes sense of a string that represents date time in ISO format.
      * @param dateTimeString A String that represents the date time.
-     * @return The date time in @LocalDateTime
-     * @throws InvalidDateException If the @dateTimeString is not in a valid date time format.
+     * @return The date time in LocalDateTime
+     * @throws InvalidDateException If the dateTimeString is not in a valid date time format.
      */
     public static LocalDateTime getDateTime(String dateTimeString) throws InvalidDateException {
 

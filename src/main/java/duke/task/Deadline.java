@@ -11,7 +11,7 @@ public class Deadline extends Task {
     private LocalDateTime deadline;
 
     /**
-     * Constructs a @Deadline.
+     * Constructs a Deadline.
      *
      * @param task The description of the deadline.
      * @param deadline The date of the deadline.
@@ -23,7 +23,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructs an unfinished @Deadline.
+     * Constructs an unfinished Deadline.
      *
      * @param task The description of the deadline.
      * @param deadline The date of the deadline.
@@ -47,7 +47,7 @@ public class Deadline extends Task {
      * Compares with another object.
      *
      * @param o The object compared.
-     * @return True if the object compared is a @Deadline with the same task and deadline.
+     * @return True if the object compared is a Deadline with the same task and deadline.
      */
     @Override
     public boolean equals(Object o) {

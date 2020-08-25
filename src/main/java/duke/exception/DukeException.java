@@ -4,7 +4,7 @@ package duke.exception;
 public class DukeException extends Exception {
 
     /**
-     * Constructs a @DukeException with the given message.
+     * Constructs a DukeException with the given message.
      * @param msg The message to be printed.
      */
     public DukeException(String msg) {

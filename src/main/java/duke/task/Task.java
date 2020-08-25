@@ -12,7 +12,7 @@ public abstract class Task {
     protected final boolean isDone;
 
     /**
-     * Constructs a @Task.
+     * Constructs a Task.
      *
      * @param task The task description.
      * @param isDone The task's completion status.
@@ -23,7 +23,7 @@ public abstract class Task {
     }
 
     /**
-     * Constructs an uncompleted @Task.
+     * Constructs an uncompleted Task.
      *
      * @param task The task description.
      */
@@ -45,7 +45,7 @@ public abstract class Task {
      * Compares with another object.
      *
      * @param o The object compared.
-     * @return True if the object compared is a @Task with the same task description.
+     * @return True if the object compared is a Task with the same task description.
      */
     @Override
     public boolean equals(Object o) {

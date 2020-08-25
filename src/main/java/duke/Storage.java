@@ -23,7 +23,7 @@ public class Storage {
     private Path dukeFile;
 
     /**
-     * Constructs a @Storage.
+     * Constructs a Storage.
      *
      * @param filePath The filepath to store the data in.
      */
@@ -102,7 +102,7 @@ public class Storage {
      * Reads the saved tasks in the file.
      *
      * @param task The task to be read
-     * @return The task in the proper format, such as @ToDo, @Event, or @Deadline
+     * @return The task in the proper format, such as ToDo, Event, or Deadline
      */
     private Task readTask(String task) {
         switch (task.charAt(0)) {

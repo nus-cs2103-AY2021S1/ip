@@ -3,11 +3,11 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.TaskList;
 
-/** A command to add a @Deadline. */
+/** A command to add a Deadline. */
 public class DeadlineCommand extends AddTaskCommand {
 
     /**
-     * Constructs a @DeadlineCommand.
+     * Constructs a DeadlineCommand.
      *
      * @param input The description of the deadline.
      */
@@ -31,7 +31,7 @@ public class DeadlineCommand extends AddTaskCommand {
      * Compares with an object.
      *
      * @param o The object compared.
-     * @return True if the object is of type @DeadlineCommand and has the same @input.
+     * @return True if the object is of type DeadlineCommand and has the same input.
      */
     @Override
     public boolean equals(Object o) {

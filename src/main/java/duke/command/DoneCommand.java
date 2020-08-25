@@ -12,7 +12,7 @@ public class DoneCommand extends Command {
     private int taskNo;
 
     /**
-     * Constructs a @DoneCommand.
+     * Constructs a DoneCommand.
      *
      * @param taskNo The number of the task to be marked as done.
      */
@@ -22,12 +22,12 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the command by marking the task with the given @taskNo as done.
+     * Executes the command by marking the task with the given taskNo as done.
      *
      * @param taskList The task list that stores and modifies the list of saved tasks.
      * @param ui The UI of the bot.
      * @param storage The storage system of the bot.
-     * @throws DukeException If the @taskNo is invalid.
+     * @throws DukeException If the taskNo is invalid.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
@@ -39,7 +39,7 @@ public class DoneCommand extends Command {
      * Compares an object.
      *
      * @param o The object compared.
-     * @return True if the object is of type @DoneCommand and has the same @taskNo.
+     * @return True if the object is of type DoneCommand and has the same taskNo.
      */
     @Override
     public boolean equals(Object o) {
