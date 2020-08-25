@@ -38,6 +38,18 @@ public class Parser {
                 && isNumber(input.substring(7, 8));
     }
 
+    /**
+     * Returns boolean on whether format is correct for a 'find' command.
+     * If format is wrong, returns false, else returns true.
+     *
+     * @param input Input command to check format.
+     * @return boolean.
+     */
+    public static boolean isFind(String input) {
+        String[] inputArr = input.split(" ", 2);
+        return inputArr[0].equals("find") && inputArr.length == 2;
+    }
+
     private static boolean isNumber(String input) {
         try {
             Integer.parseInt(input);

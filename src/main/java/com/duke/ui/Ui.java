@@ -10,6 +10,10 @@ import com.duke.storage.Storage;
 import com.duke.tasklist.TaskList;
 
 import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -64,6 +68,51 @@ public class Ui {
             System.out.println("\t" + counter + "." + this.taskList.getItem(i).toString());
             counter++;
         }
+        Ui.sectionize();
+    }
+
+    /**
+     * Prints entries that match input keyword.
+     *
+     * @param input input keyword to match.
+     */
+    private void findItem(String input) {
+        int len = this.taskList.size();
+        ArrayList<Task> matchingTaskList = new ArrayList<>();
+        //loop through taskstring in tasklist and find matching keywords
+        for (int i = 0; i < len; i++) {
+            Task task = this.taskList.getItem(i);
+            String taskDescription = task.getTask();
+            if (taskDescription.contains(input)) {
+                matchingTaskList.add(task);
+            }
+        }
+        if (matchingTaskList.size() == 0) {
+            this.replyNoTaskFound(input);
+        } else {
+            this.replyTasksFound(matchingTaskList);
+        }
+    }
+
+    private void replyNoTaskFound(String input) {
+        Ui.sectionize();
+        System.out.println("\tI'm sorry, there are no tasks found with keyword " + input + ".");
+        Ui.sectionize();
+    }
+
+    /**
+     * Lists entries that match input keyword.
+     *
+     * @param taskList list of tasks that match input keyword.
+     */
+    private void replyTasksFound(List<Task> taskList) {
+        Ui.sectionize();
+        String reply = "\tHere are the matching tasks in your list:";
+        for (Task task : taskList) {
+            reply += "\n\t";
+            reply += task.toString();
+        }
+        System.out.println(reply);
         Ui.sectionize();
     }
 
@@ -169,6 +218,9 @@ public class Ui {
             exit();
         } else if (input.equals("list")) {
             this.listItems();
+        } else if (Parser.isFind(input)) {
+            String item = input.split(" ", 2)[1];
+            this.findItem(item);
         } else {
             try {
                 if (!Parser.isCorrectInputFormat(input)) {
