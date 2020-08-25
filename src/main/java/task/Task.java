@@ -14,14 +14,18 @@ public class Task {
         this.time = time;
     }
 
-    public void markAsDone() {isDone = true;}
+    public void markAsDone() {
+        isDone = true;
+    }
 
     public String serialize() {
         String datetimeString = time.getDayOfMonth() + "/" +
                 time.getMonthValue() + "/" +
                 time.getYear() + " " +
                 (time.getHour() * 100 + time.getMinute());
-        if (time.equals(LocalDateTime.MIN)) datetimeString = "null";
+        if (time.equals(LocalDateTime.MIN)) {
+            datetimeString = "null";
+        }
         return type + "%%%" + description + "%%%" + datetimeString + "%%%" + (isDone ? 1 : 0);
     }
 
