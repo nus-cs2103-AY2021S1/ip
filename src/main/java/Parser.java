@@ -10,33 +10,33 @@ public class Parser {
         String remaining = words.length > 1 ? words[1] : "";
 
         switch (firstWord) {
-            case "bye":
-                return new ExitCommand();
-            case "list":
-                return new ListCommand();
-            case "delete": {
-                if (remaining.equals("")) {
-                    throw new EmptyBodyException("task number", "task");
-                }
-                int taskNumber = Integer.parseInt(remaining);
-                return new DeleteCommand(taskNumber);
+        case "bye":
+            return new ExitCommand();
+        case "list":
+            return new ListCommand();
+        case "delete": {
+            if (remaining.equals("")) {
+                throw new EmptyBodyException("task number", "task");
             }
-            case "done":
-                if (remaining.equals("")) {
-                    throw new EmptyBodyException("task number", "task");
-                }
-                int taskNumber = Integer.parseInt(remaining);
-                return new DoneCommand(taskNumber);
-            case "todo":
-                return new AddCommand("todo", remaining);
-            case "deadline": {
-                return new AddCommand("deadline", remaining);
+            int taskNumber = Integer.parseInt(remaining);
+            return new DeleteCommand(taskNumber);
+        }
+        case "done":
+            if (remaining.equals("")) {
+                throw new EmptyBodyException("task number", "task");
             }
-            case "event": {
-                return new AddCommand("event", remaining);
-            }
-            default:
-                throw new UnknownInputException(firstWord);
+            int taskNumber = Integer.parseInt(remaining);
+            return new DoneCommand(taskNumber);
+        case "todo":
+            return new AddCommand("todo", remaining);
+        case "deadline": {
+            return new AddCommand("deadline", remaining);
+        }
+        case "event": {
+            return new AddCommand("event", remaining);
+        }
+        default:
+            throw new UnknownInputException(firstWord);
         }
     }
 }
