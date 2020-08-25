@@ -50,6 +50,8 @@ public class Feedbacks {
         String byeMsg = "\n___________________________________________________________"
                 + "\n |^_^|┛"
                 + "\n Bye. Hope to see you again soon!"
+                + "\n Your task list has been saved."
+                + "\n It will be automatically reloaded when you come back!"
                 + "\n___________________________________________________________\n";
 
         System.out.println(byeMsg);
