@@ -1,7 +1,7 @@
 package main.java;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -14,7 +14,7 @@ public class TaskList {
         this.todo = storage.load();
     }
 
-    public void delete(String line) throws DukeException, IOException {
+    public void delete(String line) throws DukeException {
         String[] splits = line.split("delete ");
         try{
             if(splits.length > 1) {
@@ -39,7 +39,7 @@ public class TaskList {
         }
     }
 
-    public void addEvent (String line) throws DukeInvalidDayException, DukeInvalidTaskException, IOException {
+    public void addEvent (String line) throws DukeInvalidDayException, DukeInvalidTaskException {
         String[] splits = line.split("event |/at ");
         if (splits.length > 2){
             Event task = new Event(splits[1], splits[2]);
@@ -56,7 +56,7 @@ public class TaskList {
         }
     }
 
-    public void addDeadline (String line) throws DukeInvalidDateException, DukeInvalidTaskException, IOException {
+    public void addDeadline (String line) throws DukeInvalidDateException, DukeInvalidTaskException {
         String[] splits = line.split("deadline |/by ");
         if (splits.length > 2) {
             Deadline task = new Deadline(splits[1], splits[2]);
@@ -73,7 +73,7 @@ public class TaskList {
         }
     }
 
-    public void addToDo (String line) throws DukeInvalidTaskException, IOException {
+    public void addToDo (String line) throws DukeInvalidTaskException {
         String[] splits = line.split("todo ");
         if(splits.length > 1) {
             Todo task = new Todo(splits[1]);

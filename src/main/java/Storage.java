@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,9 +13,9 @@ public class Storage {
     private File dataFile;
     private final String FILE_PATH;
 
-    public Storage(String filepath){
-        this.FILE_PATH = filepath;
-        dataFile = new File(filepath);
+    public Storage(String filePath){
+        this.FILE_PATH = filePath;
+        dataFile = new File(filePath);
         try {
             if (dataFile.createNewFile()) {
                 System.out.println("data file has been created");

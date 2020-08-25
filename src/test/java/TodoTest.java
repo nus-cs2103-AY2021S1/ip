@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoTest {
     @Test
-    public void Test(){
+    public void initializeTodo(){
         try {
             Todo task = new Todo("hi");
             String expected = "[T]" + "[✗] hi";

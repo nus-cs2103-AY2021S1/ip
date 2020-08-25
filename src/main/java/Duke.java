@@ -1,11 +1,9 @@
 import main.java.*;
 
 import java.io.IOException;
-import java.util.Scanner;
 import java.io.FileNotFoundException;
 
 public class Duke {
-    final static String UNDERSCORE = "____________________________________________________________ \n";
     private Storage storage;
     private Ui ui;
     private TaskList taskList;

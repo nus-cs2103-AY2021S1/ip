@@ -1,6 +1,5 @@
 package main.java;
 
-import java.awt.desktop.SystemSleepEvent;
 import java.util.ArrayList;
 import java.util.Scanner;
 

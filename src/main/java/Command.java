@@ -1,7 +1,5 @@
 package main.java;
 
-import java.io.IOException;
-
 public class Command {
     private String task;
     private String action;
@@ -13,8 +11,8 @@ public class Command {
         this.action = action;
     }
 
-    public void execute(TaskList taskList, Ui ui) throws IOException, DukeException {
-        if(action == null){
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
+        if (action == null) {
             ui.showInvalidCommand();
         } else if (action.equals("bye")) {
             this.end = true;
