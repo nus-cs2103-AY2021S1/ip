@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class TaskList {
-    public List<Task> taskList;
+    private List<Task> taskList;
     public TaskList(List<Task> read) {
         this.taskList = read;
     }
@@ -15,6 +15,14 @@ public class TaskList {
 
     public void delete(int toDelete) {
         taskList.remove(toDelete);
+    }
+
+    public Task get(int index) {
+        return taskList.get(index);
+    }
+
+    public List<Task> getTaskList() {
+        return taskList;
     }
 
     public int size() {
