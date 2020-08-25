@@ -9,6 +9,12 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, String type, boolean isDone) {
+        this.description = description;
+        this.type = type;
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
         return (isDone? "\u2713" : "\u2718");
     }

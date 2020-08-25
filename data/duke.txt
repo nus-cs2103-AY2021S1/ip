@@ -1,4 +1,6 @@
-T | 1 | read book
-D | 0 | return book | June 6th
-E | 0 | project meeting | Aug 6th 2-4pm
-T | 1 | join sports club
+[T][✓] read book
+[D][✘] return book (by: June 6th)
+[E][✓] project meeting (at: Aug 6th 2-4pm)
+[T][✘] join sports club
+[D][✘] CS2103T test (by: 17 Sept 2020 (Monday))
+[E][✓] lunch with project mates (at: Aug 8 2020 2pm)

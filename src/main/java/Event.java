@@ -6,6 +6,11 @@ public class Event extends Task {
         this.timeDescription = timeDescription;
     }
 
+    public Event(String description, String timeDescription, boolean isDone) {
+        super(description, "E", isDone);
+        this.timeDescription = timeDescription;
+    }
+
     @Override
     public String toString() {
         return "[" + getType() + "]" + "[" + getStatusIcon() + "] " + description

@@ -5,6 +5,11 @@ public class StringIdentifier {
     private static boolean isProgramRunning = true;
     private static List<Task> lst = new ArrayList<>();
 
+    public StringIdentifier() {}
+    public StringIdentifier(List<Task> lst) {
+        this.lst = lst;
+    }
+
     public boolean isRunning() {
         return this.isProgramRunning;
     }
@@ -137,5 +142,9 @@ public class StringIdentifier {
     public void close() {
         this.isProgramRunning = false;
         System.out.println("     Bye. Hope to see you again soon!");
+    }
+
+    public List<Task> getTasks() {
+        return lst;
     }
 }
