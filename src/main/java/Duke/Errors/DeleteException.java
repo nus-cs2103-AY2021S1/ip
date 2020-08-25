@@ -23,7 +23,7 @@ public class DeleteException extends DukeException {
     }
 
     /**
-     * doesn't take in any arguments, overrides the in-built toString() method.
+     * doesn't take in any arguments, overrides the in-built toString() method, for printing in getMessage().
      * @return returns a string depending on the scenario. If the IDabsent is true, then description that the description of
      * delete cannot be empty. If the ID is previously deleted, it prints that it was deleted.
      * Else, it means that the ID, of the Task given is not defined yet.
