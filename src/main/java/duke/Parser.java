@@ -30,6 +30,12 @@ public class Parser {
             return new ListCommand();
         } else if (fullCommand.equals("show")) {
             throw new InvalidArgumentException("☹ OOPS!!! The show command requires a date in yyyy-mm-dd.");
+        } else if (fullCommand.equals("find")) {
+            throw new InvalidArgumentException("☹ OOPS!!! The find command requires keyword.");
+        } else if (fullCommand.equals("delete")) {
+            throw new InvalidCommandException("☹ OOPS!!! The delete command requires the index of a task.");
+        } else if (fullCommand.equals("done")) {
+            throw new InvalidCommandException("☹ OOPS!!! The done command requires the index of a task.");
         } else if (fullCommandArray[0].equals("list")) {
             throw new InvalidArgumentException("☹ OOPS!!! The list command does not take any additional argument(s).");
         } else if (fullCommandArray[0].equals("bye")) {
@@ -41,14 +47,12 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 throw new InvalidArgumentException("☹ OOPS!!! The show command requires a date in yyyy-mm-dd.");
             }
-        } else if (fullCommand.equals("delete")) {
-            throw new InvalidCommandException("☹ OOPS!!! The delete command requires the index of a task.");
-        } else if (fullCommand.equals("done")) {
-            throw new InvalidCommandException("☹ OOPS!!! The done command requires the index of a task.");
         } else if (fullCommandArray[0].equals("done")) {
             return new DoneCommand(Integer.parseInt(fullCommandArray[1]));
         } else if (fullCommandArray[0].equals("delete")) {
             return new DeleteCommand(Integer.parseInt(fullCommandArray[1]));
+        } else if (fullCommandArray[0].equals("find")) {
+            return new FindCommand(fullCommandArray[1]);
         } else {
             String type = fullCommand.split(" ")[0];
             String temp = fullCommand.strip();
