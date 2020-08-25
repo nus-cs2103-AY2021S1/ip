@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Storage {
     //abstracts the file loading/checking process
     private File storeFile;
+
     Storage(String filePath) throws IOException {
         //check if file exists, else create file and directories
         Path testPath = Paths.get(filePath);
