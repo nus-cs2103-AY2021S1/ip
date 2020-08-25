@@ -52,9 +52,46 @@ public class DeadlineTest {
     }
 
     @Test
-    public void encode_decode_Success() {
-        Deadline deadline = Deadline.createTask("Description /by 20-12-2020 12:00");
-        assertNotNull(deadline.encode());
-        assertTrue(Deadline.decode(deadline.encode()).toString().equals(deadline.toString()));
+    public void encode_success() {
+        Deadline deadline = Deadline.createTask("Description /by 1 Jan 2020 11:59");
+        assertEquals("D|N|1 Jan 2020 11:59|Description", deadline.encode());
+    }
+
+    @Test
+    public void decode_success() {
+        Deadline deadline = Deadline.decode("D|N|1 Jan 2020 11:59|Description");
+        assertEquals("[D][✘] Description (by: 1 Jan 2020 11:59)", deadline.toString());
+    }
+
+    @Test
+    public void decode_missingCompletion_failure() {
+        DukeException thrown = assertThrows(DukeException.class, () -> {
+            Deadline deadline = Deadline.decode("D|1 Jan 2020 11:59|Description");
+        });
+        assertTrue(thrown.getMessage().contains("There are some holes in my memory..."));
+    }
+
+    @Test
+    public void decode_missingDescription_failure() {
+        DukeException thrown = assertThrows(DukeException.class, () -> {
+            Deadline deadline = Deadline.decode("D|N");
+        });
+        assertTrue(thrown.getMessage().contains("There are some holes in my memory..."));
+    }
+
+    @Test
+    public void decode_incorrectCompletion_failure() {
+        DukeException thrown = assertThrows(DukeException.class, () -> {
+            Deadline deadline = Deadline.decode("D|X|Description");
+        });
+        assertTrue(thrown.getMessage().contains("There are some holes in my memory..."));
+    }
+
+    @Test
+    public void decode_incorrectTaskType_failure() {
+        DukeException thrown = assertThrows(DukeException.class, () -> {
+            Deadline deadline = Deadline.decode("E|X|Description");
+        });
+        assertTrue(thrown.getMessage().contains("Something doesn't seem right..."));
     }
 }
