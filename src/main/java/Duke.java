@@ -16,7 +16,13 @@ public class Duke {
             todoList = data.loadData();
         } catch (IOException e) {
             System.out.println("FAILURE: Unable to load data from local drive.");
-            todoList = new ArrayList<>();
+            try {
+                data = new Data();
+                todoList = data.loadData();
+            } catch (IOException | ArrayIndexOutOfBoundsException err) {
+                System.out.println("FAILURE: Unable to create any file for saving data");
+            }
+
         }
     }
 

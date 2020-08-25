@@ -21,6 +21,12 @@ public class Data {
         }
     }
 
+    Data() throws IOException {
+        this.path = Path.of("src/main/data/duke.txt");
+        new File("src/main/data").mkdirs();
+        new File(this.path.toString()).createNewFile();
+    }
+
     public List<Task> loadData() throws FileNotFoundException {
         List<Task> todoList = new ArrayList<>();
         Scanner scanner = new Scanner(path.toFile());
