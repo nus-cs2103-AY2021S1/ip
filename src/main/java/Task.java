@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 /**
  * Represents a task to do and creates a parent class with child classes Event, ToDo, Deadline
  */
 public abstract class Task implements Encodable<Task>{
+=======
+public abstract class Task implements Encodable<Task> {
+>>>>>>> branch-A-CodingStandard
 
 
     protected String description;
@@ -37,7 +41,6 @@ public abstract class Task implements Encodable<Task>{
         String s = "[" + this.getStatusIcon() + "] " + this.description;
         return s;
     }
-
 
 
 }
