@@ -11,7 +11,8 @@ public enum UserCommand {
     DEADLINE("deadline"),
     EVENT("event"),
     DELETE("delete"),
-    CLEAR("clear");
+    CLEAR("clear"),
+    FIND("find");
 
     private final String command;
 
