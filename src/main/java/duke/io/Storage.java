@@ -1,5 +1,6 @@
 package duke.io;
 
+import duke.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -7,7 +8,11 @@ import duke.task.Todo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -18,7 +23,7 @@ public class Storage {
     this.filePath = filePath;
   }
 
-  public ArrayList<Task> load() {
+  public ArrayList<Task> load() throws DukeException {
     ArrayList<Task> taskArrayList = new ArrayList<>();
     File file = new File(filePath);
     try {
@@ -52,8 +57,58 @@ public class Storage {
         }
       }
     } catch (IOException fileNotFoundException) {
-      System.err.println("Failed to find file: " + fileNotFoundException.getMessage());
+      throw new DukeException("Failed to find file: " + fileNotFoundException.getMessage());
     }
     return taskArrayList;
+  }
+
+  public void write(TaskList taskList) {
+    createFile();
+    try {
+      FileWriter writer = new FileWriter(filePath);
+      for (Task task : taskList.taskArrayList) {
+        String taskType = task.getClass().getTypeName();
+        if (taskType.equals("duke.task.Todo")) {
+          writer.append(String.format("%s,%s,%s", taskType, task.isDone, task.description));
+        } else if (taskType.equals("duke.task.Deadline")) {
+          writer.append(
+              String.format(
+                  "%s,%s,%s,%s", taskType, task.isDone, task.description, ((Deadline) task).by));
+        } else {
+          writer.append(
+              String.format(
+                  "%s,%s,%s,%s,%s",
+                  taskType, task.isDone, task.description, ((Event) task).at, ((Event) task).end));
+        }
+        writer.write("\n");
+      }
+      writer.close();
+    } catch (IOException ioException) {
+      ioException.printStackTrace();
+    }
+  }
+
+  private void createFile() {
+    Path path = Paths.get(filePath).getParent();
+    if (Files.exists(path)) {
+      try {
+        File file = new File(filePath);
+        if (file.createNewFile()) {
+          System.out.println("File created at: " + file);
+        } else {
+          System.out.println("File already exist at: " + file);
+        }
+      } catch (IOException e) {
+        System.err.println("Failed to create file: " + e.getMessage());
+      }
+    } else {
+      try {
+        Files.createDirectories(path);
+        System.out.println("Directory created: " + path);
+      } catch (IOException e) {
+        System.err.println("Failed to create directory: " + e.getMessage());
+      }
+      createFile();
+    }
   }
 }

@@ -58,7 +58,7 @@ public class DeadlineCommand extends Command {
     System.out.printf("Now you have %o tasks in list.\n", taskList.sizeOfList());
     ui.showLine();
 
-    // add write to file method here
+    storage.write(taskList);
   }
 
   private static LocalDate dateToLocalDate(String[] date) throws DukeException {

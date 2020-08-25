@@ -16,14 +16,14 @@ public class ToDoCommand extends Command {
   @Override
   public void execute(TaskList taskList, Ui ui, Storage storage) {
     ui.showLine();
-    String description = fullCommand.substring(fullCommand.indexOf(" "));
+    String description = fullCommand.substring(fullCommand.indexOf(" ")).trim();
     System.out.println("Got it. I've added this task:");
     taskList.addTask(new Todo(description));
     System.out.println("\t" + taskList.retrieveTask(taskList.sizeOfList() - 1));
     System.out.printf("Now you have %o tasks in list.\n", taskList.sizeOfList());
     ui.showLine();
 
-    // add write to file method
+    storage.write(taskList);
   }
 
   @Override

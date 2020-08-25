@@ -51,7 +51,8 @@ public class EventCommand extends Command {
     System.out.println("\t" + taskList.retrieveTask(taskList.sizeOfList() - 1));
     System.out.printf("Now you have %o tasks in list.\n", taskList.sizeOfList());
     ui.showLine();
-    // add write to file method
+
+    storage.write(taskList);
   }
 
   private static LocalDate dateToLocalDate(String[] date) throws DukeException {
