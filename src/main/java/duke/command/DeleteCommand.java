@@ -9,10 +9,23 @@ import duke.ui.Ui;
 public class DeleteCommand extends Command {
 	int indexOfTask;
 
+	/**
+	 * Initializes the command with the index of the task to delete.
+	 *
+	 * @param indexOfTask The index of the task to delete.
+	 */
 	public DeleteCommand(int indexOfTask) {
 		this.indexOfTask = indexOfTask;
 	}
 
+	/**
+	 * Deletes the task in the TaskList, prints a message in the Ui, and updates the Storage.
+	 *
+	 * @param taskList The TaskList used by Duke.
+	 * @param ui The Ui used by Duke.
+	 * @param storage The Storage used by Duke.
+	 * @throws DukeException If fail to delete or to update storage.
+	 */
 	@Override
 	public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 		try {

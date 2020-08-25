@@ -8,7 +8,15 @@ import duke.ui.Ui;
 
 public class ListCommand extends Command {
 
-
+	/**
+	 * Formats all tasks in the TaskList into a message form, and prints the
+	 * list in the Ui.
+	 *
+	 * @param taskList The TaskList used by Duke.
+	 * @param ui The Ui used by Duke.
+	 * @param storage The Storage used by Duke.
+	 * @throws DukeException
+	 */
 	@Override
 	public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 		if (taskList.numberOfTasks() > 0) {

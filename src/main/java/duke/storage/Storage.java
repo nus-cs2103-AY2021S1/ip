@@ -12,11 +12,24 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
+
 	static String SAVED_TASK_PATH;
+
+	/**
+	 * Initializes Storage with the input path as the location for the storage file.
+	 *
+	 * @param path The path to store the storage file.
+	 */
 	public Storage(String path) {
 		SAVED_TASK_PATH = path;
 	}
 
+	/**
+	 * Returns an ArrayList of tasks from the storage file.
+	 *
+	 * @return The ArrayList of tasks from the storage file.
+	 * @throws DukeException If the storage file cannot be read, found or created if not created yet.
+	 */
 	public ArrayList<Task> load() throws DukeException {
 		return readAndLoadFromFile();
 	}
