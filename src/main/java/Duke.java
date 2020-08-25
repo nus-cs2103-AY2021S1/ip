@@ -1,10 +1,74 @@
 package main.java;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+    // ArrayList to store task
+    public static ArrayList<Task> STORAGE = new ArrayList<>();
+
+    // Method to convert task from hard disk
+    public static Task convertFromHardDisk(String s) {
+        String[] data = s.split(" / ");
+        String taskType = data[0];
+        boolean isDone = data[1].equals("1");
+        String description = data[2];
+        Task task;
+        if (taskType.equals("T")) {
+            task = new Todo(description);
+        } else if (taskType.equals("D")) {
+            String date = data[3];
+            task = new Deadline(description, date);
+        } else {
+            String date = data[3];
+            task = new Event(description, date);
+        }
+        if (isDone) {
+            task.markAsDone();
+        }
+        return task;
+    }
+
+    // Method to convert task to hard disk
+    public static String convertToHarDisk(Task t) {
+        String[] info = t.getInfo();
+        String taskType = info[0];
+        String description = info[1];
+        if (taskType.equals("T")) {
+            return taskType + " / " + (t.isDone() ? "1" : "0") + " / " + description;
+        } else if (taskType.equals("D")) {
+            return taskType + " / " + (t.isDone() ? "1" : "0") + " / " + description + " / " + info[2];
+        } else {
+            return taskType + " / " + (t.isDone() ? "1" : "0") + " / " + description + " / " + info[2];
+        }
+    }
+
+    // Method to write all task to hard disk
+    public static void writeToHardDisk() {
+        String projectRoot = System.getProperty("user.dir");
+        Path p2 = Paths.get(projectRoot, "data", "task.txt");
+        try {
+            FileWriter fw = new FileWriter(p2.toString());
+            StringBuilder text = new StringBuilder();
+            for (Task t : STORAGE) {
+                text.append(convertToHarDisk(t)).append("\n");
+            }
+            fw.write(text.toString());
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
 
@@ -16,11 +80,50 @@ public class Duke {
         System.out.println(line + "\n" + " Hey there! I am Popi" + "\n"
             + " How can I help you?" + "\n" + line + "\n");
 
-        // ArrayList to store text(s)
-        ArrayList<Task> storage = new ArrayList<>();
+        // Create paths for the file
+        String projectRoot = System.getProperty("user.dir");
+        // p1 is used for creating directory
+        Path p1 = Paths.get(projectRoot, "data");
+        Path p2 = Paths.get(projectRoot, "data", "task.txt");
+        String path = p2.toString();
+        File data = new File(path);
 
-        // Process user input(s).
+        // Make directory if it does not exist
+        if (!Files.exists(p1)) {
+            File temp = new File(p1.toString());
+            boolean created = temp.mkdir();
+            if (!created) {
+                System.out.println("Cannot create directory for storage file! List will not" + "\n" +
+                    "be saved until the directory and the file are created.");
+            }
+        }
+
+        // Input data to storage
+        try {
+            Scanner sc = new Scanner(data);
+            while (sc.hasNextLine()) {
+                // Convert line to task, then add to storage
+                STORAGE.add(convertFromHardDisk(sc.nextLine()));
+            }
+        } catch (FileNotFoundException e) {
+            try {
+                // Create file if it does not exist
+                /* The case for file does not exist is handled separately so that the
+                 * user does not need to delete the entire folder.
+                 */
+                boolean created = data.createNewFile();
+                if (!created) {
+                    System.out.println("Cannot create storage file! List will not be saved until the " +
+                        "file is created");
+                }
+            } catch (IOException x) {
+                x.printStackTrace();
+            }
+        }
+
+        // Process user input
         Scanner sc = new Scanner(System.in);
+        label:
         while (true) {
             String input = sc.nextLine();
             // Check input
@@ -28,36 +131,42 @@ public class Duke {
                 checkInput(input);
             } catch (UnknownInputException | TodoIncompleteException | EventIncompleteException
                 | DeadlineIncompleteException | DoneIncompleteException | NoInputException
-                    | DoneOutOfListException | DeleteIncompleteException| DeleteOutOfListException e) {
+                    | DoneOutOfListException | DeleteIncompleteException | DeleteOutOfListException e) {
                 System.out.println(line + "\n" + e.getMessage() + "\n" + line + "\n" + " ");
                 continue;
             }
             // Split string for command purposes
             String[] s = input.split(" ");
-            if (s[0].equals("bye")) {
+            switch (s[0]) {
+            case "bye":
                 System.out.println(line + "\n" + " Bye! Hope to see you again in the future!"
                     + "\n" + line + "\n");
-                break;
-            } else if (s[0].equals("list")) {
+                break label;
+            case "list":
                 System.out.println(line);
                 System.out.println(" These are the tasks in your list:");
-                for (int i = 0; i < storage.size(); i++) {
-                    Task t = storage.get(i);
+                for (int i = 0; i < STORAGE.size(); i++) {
+                    Task t = STORAGE.get(i);
                     System.out.println(" " + (i + 1) + "." + t.toString());
                 }
                 System.out.println(line);
-            } else if (s[0].equals("done")) {
-                Task t = storage.get(Integer.parseInt(s[1]) - 1);
+                break;
+            case "done": {
+                Task t = STORAGE.get(Integer.parseInt(s[1]) - 1);
                 t.markAsDone();
                 System.out.println(line + "\n" + " Yay! I have marked this task as done: " + "\n"
                     + "   " + t.toString() + "\n" + line);
-            } else if (s[0].equals("delete")) {
-                Task t = storage.get(Integer.parseInt(s[1]) - 1);
-                storage.remove(Integer.parseInt(s[1]) - 1);
+                break;
+            }
+            case "delete": {
+                Task t = STORAGE.get(Integer.parseInt(s[1]) - 1);
+                STORAGE.remove(Integer.parseInt(s[1]) - 1);
                 System.out.println(line + "\n" + " Okie! I have deleted this task: " + "\n"
-                    + "   " + t.toString() + "\n" + " Now you have " + storage.size() + (storage.size() > 1
-                        ? " tasks." : " task.") + "\n" + line);
-            } else {
+                    + "   " + t.toString() + "\n" + " Now you have " + STORAGE.size() + (STORAGE.size() > 1
+                    ? " tasks." : " task.") + "\n" + line);
+                break;
+            }
+            default: {
                 Task t;
                 if (s[0].equals("event")) {
                     // Split string to get date
@@ -76,11 +185,14 @@ public class Duke {
                 } else {
                     t = new Todo(input.substring(5));
                 }
-                storage.add(t);
+                STORAGE.add(t);
                 System.out.println(line + "\n" + " Okay! I have added this task:" + "\n" + "   "
-                    + t.toString() + "\n" + " Now you have " + storage.size() + (storage.size() > 1 ? " tasks."
-                        : " task.") + "\n" + line);
+                    + t.toString() + "\n" + " Now you have " + STORAGE.size() + (STORAGE.size() > 1 ? " tasks."
+                    : " task.") + "\n" + line);
+                break;
+                }
             }
+            writeToHardDisk();
         }
     }
 
@@ -106,15 +218,16 @@ public class Duke {
         } else if (!validCommand.contains(input[0])) {
             throw new UnknownInputException();
         } else if (input.length == 1) {
-            if (command.equals("done")) {
+            switch (command) {
+            case "done":
                 throw new DoneIncompleteException();
-            } else if (command.equals("deadline")) {
+            case "deadline":
                 throw new DeadlineIncompleteException();
-            } else if (command.equals("event")) {
+            case "event":
                 throw new EventIncompleteException();
-            } else if (command.equals("todo")) {
+            case "todo":
                 throw new TodoIncompleteException();
-            } else if (command.equals("delete")) {
+            case "delete":
                 throw new DeleteIncompleteException();
             }
         } else if (command.equals("done")) {

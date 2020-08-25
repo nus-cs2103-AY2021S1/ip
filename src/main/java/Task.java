@@ -30,6 +30,10 @@ public class Task {
         }
     }
 
+    public String[] getInfo() {
+        return new String[] {description};
+    }
+
     // Return string representation of Task, added with tick or x symbol
     @Override
     public String toString() {

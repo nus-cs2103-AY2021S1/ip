@@ -10,6 +10,12 @@ public class Event extends Task {
         this.date = date;
     }
 
+    // Get info to store in hard disk
+    @Override
+    public String[] getInfo() {
+        return new String[] {"E", description, date};
+    }
+
     // Return string representation of Event
     @Override
     public String toString() {
