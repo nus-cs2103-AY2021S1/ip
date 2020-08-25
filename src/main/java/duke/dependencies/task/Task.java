@@ -13,7 +13,7 @@ public abstract class Task implements Serializable, Schedulable {
         this.state = UNFINISHED;
     }
 
-    abstract String getDateLine();
+    abstract String getDateString();
 
     public boolean hasADate() {
         return false;
@@ -99,7 +99,7 @@ public abstract class Task implements Serializable, Schedulable {
         }
 
         @Override
-        public String getDateLine() {
+        public String getDateString() {
             return "";
         }
 
@@ -122,7 +122,7 @@ public abstract class Task implements Serializable, Schedulable {
         }
 
         @Override
-        public String getDateLine() {
+        public String getDateString() {
             return "";
         }
 
@@ -153,7 +153,7 @@ public abstract class Task implements Serializable, Schedulable {
         }
 
         @Override
-        public String getDateLine() {
+        public String getDateString() {
             return this.tDate.toString();
         }
 
@@ -173,7 +173,7 @@ public abstract class Task implements Serializable, Schedulable {
         }
 
         @Override
-        public String getDateLine() {
+        public String getDateString() {
             return "";
         }
 
@@ -202,7 +202,7 @@ public abstract class Task implements Serializable, Schedulable {
         }
 
         @Override
-        public String getDateLine() {
+        public String getDateString() {
             return this.tDate.toString();
         }
 
