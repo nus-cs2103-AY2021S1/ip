@@ -61,6 +61,7 @@ public class Duke {
                         ui.showTasks(taskList.toString());
                     }
                     break;
+
                 //3 different types of task
                 case "event":
                     try {
@@ -100,6 +101,16 @@ public class Duke {
                         //echo("Error. Please key in an integer after \"done\"");
                     } catch (IndexOutOfBoundsException err) {
                         ui.showError("Key in \"delete [x]\" to delete x^th item");
+                    }
+                    break;
+
+                //Find task by keyword
+                case "find":
+                    String result = taskList.find(words[1]);
+                    if (result == ""){
+                        ui.show("No match found");
+                    } else {
+                        ui.show("These following tasks match the keyword you entered: \n" + result);
                     }
                     break;
 

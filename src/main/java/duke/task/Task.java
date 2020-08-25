@@ -25,6 +25,15 @@ public abstract class Task {
         this.date = Optional.empty();
     }
 
+
+    /*
+     * Return the Name of the Task.
+     * @return String representing the name of Task.
+     */
+    public String getName() {
+        return name;
+    }
+
     /**
      * Assign a date to Task.
      * @param date Date for the Task is set to.

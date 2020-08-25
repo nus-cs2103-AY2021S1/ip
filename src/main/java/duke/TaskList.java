@@ -18,7 +18,7 @@ public class TaskList {
      * Initialise with no initial task on hand.
      */
     public TaskList(){
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -37,6 +37,25 @@ public class TaskList {
         Task newTask = new ToDo(name);
         tasks.add(newTask);
         return newTask;
+    }
+
+    /**
+     * Find for Tasks that contain the keyword.
+     * @param keyword The keyword to search.
+     * @return String representation of Tasks that contains the keyword
+     */
+    public String find(String keyword) {
+        String result = "";
+        for (Task t : tasks) {
+            if (t.getName().contains(keyword)){
+                if (result.equals("")) {
+                    result += "\n   " + t.toString();
+                } else {
+                    result = "  " + t.toString();
+                }
+            }
+        }
+        return result;
     }
 
     /**
