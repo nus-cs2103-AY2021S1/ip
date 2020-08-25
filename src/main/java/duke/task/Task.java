@@ -13,6 +13,7 @@ public class Task {
     /**
      * Creates a task with the specified String <code>description</code> and is
      * marked as undone.
+     *
      * @param description Description of the task.
      */
     public Task(String description) {
@@ -22,6 +23,7 @@ public class Task {
 
     /**
      * Returns the checked or unchecked symbol depending on where this task is done.
+     *
      * @return Checked or unchecked symbol.
      */
     public String getStatusIcon() {
@@ -33,7 +35,8 @@ public class Task {
     }
 
     /**
-     * Returns the first word of the user input
+     * Returns the first word of the user input.
+     *
      * @return First word of user input
      */
     public String getFirstWord() {
@@ -65,6 +68,7 @@ public class Task {
     /**
      * Returns the date specified by the user for deadlines and events.
      * If this task is a to do, return an empty string.
+     *
      * @return Date of task.
      */
     public String getDate() {
@@ -77,6 +81,7 @@ public class Task {
 
     /**
      * Checks if the task description is a single word.
+     *
      * @return True if description is a single word and false otherwise.
      */
     public boolean isSingleWord() {
@@ -85,6 +90,7 @@ public class Task {
 
     /**
      * Checks if the task is either a to do, deadline or event.
+     *
      * @return True if the task is neither a to do, deadline, or event and false otherwise
      */
     public boolean isInvalidTask() {
@@ -96,6 +102,7 @@ public class Task {
      * Checks if user input is a valid one. A valid input should be either a to do,
      * deadline, or event, with a description following it. For deadlines and events,
      * a date must also be specified.
+     *
      * @throws DukeException If user input is not valid
      */
     public void validate() throws DukeException {
@@ -120,7 +127,8 @@ public class Task {
     /**
      * Returns the task in a String format that is stored in the txt file.
      * e.g., <code>new Task("deadline do this /by 2020-01-01")</code> will
-     * return "D | 0 | do this | 2020-01-01"
+     * return "D | 0 | do this | 2020-01-01".
+     *
      * @return Task reformatted as a String
      */
     public String taskToText() { // converts description text to file text

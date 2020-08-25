@@ -12,6 +12,7 @@ public class Event extends Task {
     /**
      * Creates an Event with the specified <code>description</code> and
      * <code>at</code>.
+     *
      * @param description Description of the task.
      * @param at Date at which this event should occur.
      */

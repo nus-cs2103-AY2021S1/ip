@@ -38,7 +38,8 @@ public class TaskList {
     /**
      * Returns the list of tasks in the <code>TaskList</code> as a string,
      * where each line of the string corresponds to a <code>Task</code>.
-     * @return
+     *
+     * @return String where each line corresponds to a different task.
      */
     public String listToString() {
         String str = "";

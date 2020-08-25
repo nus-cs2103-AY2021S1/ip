@@ -20,6 +20,7 @@ public class ListCommand extends Command {
 
     /**
      * Lists out the tasks in <code>tasks</code>.
+     *
      * @param tasks List of <code>Task</code> objects.
      * @param ui Ui object created by Duke.
      * @param storage Storage object created by Duke.

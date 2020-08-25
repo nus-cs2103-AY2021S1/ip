@@ -16,9 +16,12 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    public static final String FILENAME = System.getProperty("user.dir") + "/data/duke.txt";
+
     /**
      * Creates a new Duke object with the specified file path.
-     * @param filePath
+     *
+     * @param filePath Path of the file.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -53,8 +56,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String filePath = "/Users/tengjianling/ip/data/duke.txt";
-        new Duke(filePath).run();
+        new Duke(FILENAME).run();
     }
 }
 

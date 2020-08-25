@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.Duke;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -25,6 +26,7 @@ public class Storage {
      * Returns a <code>Task</code> based on the input format from the txt file.
      * e.g. input = "D | 0 | do this | 2020-01-01" will return
      * <code>new Task("deadline do this /by 2020-01-01")</code>
+     *
      * @param input
      * @return Task derived from the input format in the txt file.
      */
@@ -59,6 +61,7 @@ public class Storage {
     /**
      * Adds each line of the file specified to the <code>tasksStrings</code>
      * array list as a different item.
+     *
      * @param tasksStrings String from txt file is added to this ArrayList.
      * @throws FileNotFoundException If the file specified cannot be found.
      */
@@ -75,6 +78,7 @@ public class Storage {
     /**
      * Returns an ArrayList of <code>Task</code> objects based on the String in
      * the txt file.
+     *
      * @return ArrayList of <code>Task</code> objects.
      * @throws DukeException If any of the <code>Task</code> objects is not valid.
      */
@@ -107,6 +111,7 @@ public class Storage {
     /**
      * Writes <code>String textToAdd</code> to the file specified in
      * <code>String filePath</code>.
+     *
      * @param filePath Path of the file to write to.
      * @param textToAdd Text to be written to the file specified in <code>filePath</code>.
      * @throws IOException
@@ -120,13 +125,14 @@ public class Storage {
     /**
      * Saves the text from <code>String textToAdd</code> to the file specified
      * in <code>String filePath</code>.
+     *
      * @param filePath Path of the file to write to.
      * @param textToAdd Text to be written to the file specified in <code>filePath</code>.
      */
     public static void save(String filePath, String textToAdd) {
         // writes fileString to .txt file
         try {
-            writeToFile("/Users/tengjianling/ip/data/duke.txt", textToAdd);
+            writeToFile(Duke.FILENAME, textToAdd);
         } catch (IOException e) {
             System.out.println("Oops, something went wrong: " + e.getMessage());
         }
