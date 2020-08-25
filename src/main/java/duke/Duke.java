@@ -7,7 +7,7 @@ public class Duke {
 
     public static void initialize() {
         Storage storage = new Storage("./data");
-        if (Storage.isLoadingError) {
+        if (Storage.hasLoadingError) {
             return;
         }
         Ui.greet();
