@@ -1,5 +1,6 @@
 import java.io.IOException;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Parser {
 
@@ -64,7 +65,12 @@ public class Parser {
     }
 
     private static String deadline(String body) {
-        return body.split(" /by ", 2)[1];
+        String time = body.split(" /by ", 2)[1];
+        if (time.equals("now")) {
+            return LocalDate.now().format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        } else {
+            return LocalDate.parse(time).format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        }
     }
 
     private static boolean isValidEFormat(String body) {
@@ -72,7 +78,12 @@ public class Parser {
     }
 
     private static String eventTime(String body) {
-        return body.split(" /at ", 2)[1];
+        String time = body.split(" /at ", 2)[1];
+        if (time.equals("now")) {
+            return LocalDate.now().format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        } else {
+            return LocalDate.parse(time).format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        }
     }
 
     public static boolean isBye(String input){
