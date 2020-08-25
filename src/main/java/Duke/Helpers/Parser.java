@@ -27,11 +27,13 @@ public class Parser {
                 return new EventCommand(string);
             } else if (string.length() >= 8 && string.substring(0, 8).equals("deadline")) {
                 return new DeadlineCommand(string);
+            } else if (string.length() >= 4 && string.substring(0, 4).equals("find")) {
+                return new FindCommand(string);
             } else {
                 return new RandomCommand(string);
             }
         }else{
-            return new ExitCommand(null);
+            return new ExitCommand(string);
         }
     }
 }
