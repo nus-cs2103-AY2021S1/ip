@@ -34,7 +34,7 @@ public class Duke {
             keyword = "at";
             toPrint = " (" + keyword + ": " + t.time + ")";
         }
-        System.out.println("Got it. I've marked this task as done:" + "\n" +
+        System.out.println("Got it. Duke has marked this task as done:" + "\n" +
                 t.getIndicator() + t.getIcon() + t.name + toPrint + "\n" +
                 "Now you have " + arr.size() + " tasks in the list."
         );
@@ -50,7 +50,7 @@ public class Duke {
             keyword = "at";
             toPrint = " (" + keyword + ": " + t.time + ")";
         }
-        System.out.println("Got it. I've removed this task:" + "\n" +
+        System.out.println("Got it. Duke has removed this task:" + "\n" +
                 t.getIndicator() + t.getIcon() + t.name + toPrint + "\n" +
                 "Now you have " + arr.size() + " tasks in the list."
         );
