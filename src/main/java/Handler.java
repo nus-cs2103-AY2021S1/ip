@@ -1,8 +1,9 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Handler {
 
-    public static void process(String input, Ui ui, TaskList tasks) throws DukeException {
+    public static void process(String input, Ui ui, TaskList tasks, Storage storage) throws DukeException, IOException {
         String[] parsed = input.split(" ", 2);
         String keyword = parsed[0];
         String body = "";
@@ -12,30 +13,47 @@ public class Handler {
             tasks.printList(ui);
             break;
         case "done":
-            if (isValidSize(body, tasks)) tasks.done(getNumber(body), ui);
-            else {
-                throw new DukeException("Invalid number");
+            if (isValidSize(body, tasks)) {
+                tasks.done(getNumber(body), ui);
+                storage.done(getNumber(body));
             }
+            else throw new DukeException("Invalid number");
             break;
         case "delete":
-            if (isValidSize(body, tasks)) tasks.delete(getNumber(body), ui);
+            if (isValidSize(body, tasks)) {
+                tasks.delete(getNumber(body), ui);
+                storage.delete(getNumber(body));
+            }
             else throw new DukeException("Invalid number");
             break;
         case "todo":
-            if (isValidTFormat(body)) tasks.addTask(new Todo(body), ui);
-            else throw new DukeException("Invalid format");
+            if (isValidTFormat(body)) {
+                Todo todo = new Todo(body);
+                tasks.addTask(todo, ui);
+                storage.addTask(todo);
+            }
+            else throw new DukeException("Invalid task format");
             break;
         case "deadline":
-            if (isValidDFormat(body)) tasks.addTask(new Deadline(desc(body), deadline(body)), ui);
-            else throw new DukeException("Invalid format");
+            if (isValidDFormat(body)) {
+                Deadline deadline = new Deadline(desc(body), deadline(body));
+                tasks.addTask(deadline, ui);
+                storage.addTask(deadline);
+            }
+            else throw new DukeException("Invalid task format");
             break;
         case "event":
-            if (isValidEFormat(body)) tasks.addTask(new Deadline(desc(body), eventTime(body)), ui);
-            else throw new DukeException("Invalid format");
+            if (isValidEFormat(body)) {
+                Event event = new Event(desc(body), eventTime(body));
+                tasks.addTask(event, ui);
+                storage.addTask(event);
+            }
+            else throw new DukeException("Invalid task format");
             break;
-        case "bye": // Fallthrough
+        case "bye":
+            break;
         default:
-            throw new DukeException("Not a task");
+            throw new DukeException("Invalid command");
         }
     }
 

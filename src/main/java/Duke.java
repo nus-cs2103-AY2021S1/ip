@@ -1,10 +1,20 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class Duke {
     private Ui ui;
     private TaskList tasks;
+    private Storage storage;
 
-    public Duke() {
+    public Duke(String filepath) {
         this.ui = new Ui();
-        this.tasks = new TaskList();
+        this.storage = new Storage(filepath);
+        try {
+            this.tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException | DukeException e) {
+            ui.getError(e);
+            this.tasks = new TaskList();
+        }
     }
 
     private void run() {
@@ -13,8 +23,8 @@ public class Duke {
         while (!isBye) {
             String input = ui.receive();
             try {
-                Handler.process(input, ui, tasks);
-            } catch (DukeException e) {
+                Handler.process(input, ui, tasks, storage);
+            } catch (DukeException | IOException e) {
                 ui.getError(e);
             } finally {
                 isBye = Handler.isBye(input);
@@ -24,6 +34,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke("data/tasks.txt").run();
     }
 }

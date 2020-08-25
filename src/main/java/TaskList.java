@@ -7,6 +7,10 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     public void printList(Ui ui) {
         if (tasks.size() == 0) ui.say("Your task list is currently empty.");
         else {

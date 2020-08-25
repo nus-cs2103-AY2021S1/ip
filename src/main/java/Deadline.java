@@ -4,4 +4,10 @@ public class Deadline extends TimedTask {
         super(description, deadline);
         super.type = Task.Type.DEADLINE;
     }
+
+    public Deadline(String description, String deadline, boolean isDone) {
+        super(description, deadline);
+        super.type = Task.Type.DEADLINE;
+        super.isDone = isDone;
+    }
 }

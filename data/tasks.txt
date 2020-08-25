@@ -1,0 +1,5 @@
+[T][✘] 1
+[D][✘] 2 - then
+[E][✘] 3 - when
+[D][✘] hey - t
+[D][✘] this - when

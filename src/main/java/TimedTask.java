@@ -8,6 +8,6 @@ public class TimedTask extends Task {
 
     @Override
     public String toString() {
-        return this.getTypeIcon() + this.getStatusIcon() + " " + this.description + " | " + this.time;
+        return this.getTypeIcon() + this.getStatusIcon() + " " + this.description + " - " + this.time;
     }
 }
