@@ -95,5 +95,15 @@ public class TaskList {
         return tasks.size();
     }
 
+    public void find(String substring) {
+        int counter = 1;
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).toString().contains(substring)) {
+                System.out.println(counter + "." + tasks.get(i));
+                counter++;
+            }
+        }
+    }
+
 
 }

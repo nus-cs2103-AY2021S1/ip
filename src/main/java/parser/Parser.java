@@ -53,8 +53,16 @@ public class Parser {
                 //Saves the task list into the hard drive and terminates the program.
                 this.storage.save(this.tasks);
                 this.isExit = true;
-            } else if (fullInput.startsWith("todo ")) {
-                //Checks for validity of input
+
+            } else if (fullInput.startsWith("find ")) {
+                if (fullInput.length() <= 5) {
+                    throw new DescriptionException("find");
+                }
+                this.tasks.find(fullInput.substring(5));
+
+            }
+
+            else if (fullInput.startsWith("todo ")) {
                 if (fullInput.length() <= 5) {
                     throw new DescriptionException("todo");
                 }
@@ -137,9 +145,9 @@ public class Parser {
                 //Adds task into task list.
                 this.tasks.add(task);
 
-            } else if (fullInput.equals("event") ||(fullInput).equals("deadline") ||(fullInput).equals("todo") ||
-                (fullInput).equals("done")) {
-                //Checks for invalid input where description is blank.
+            } else if (fullInput.equals("event") || fullInput.equals("deadline") || fullInput.equals("todo") ||
+                fullInput.equals("done") || fullInput.equals("find")) {
+
                 throw new DescriptionException(fullInput);
             } else {
                 //Checks for invalid input where command is unknown.
