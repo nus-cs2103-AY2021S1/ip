@@ -31,14 +31,10 @@ public class Storage {
         try {
             return convertTextToTask(Files.readAllLines(path));
         } catch (FileNotFoundException e){
-            Duke.printLine();
-            System.out.println("ERROR: There is an error in reading the files");
-            Duke.printLine();
+            UI.printFormattedMessage("ERROR: There is an error in reading the files");
             return new ArrayList<Task>();
         } catch (IOException e) {
-            Duke.printLine();
-            System.out.println("ERROR: There is an error with the inputs from the txt file");
-            Duke.printLine();
+            UI.printFormattedMessage("ERROR: There is an error with the inputs from the txt file");
             return new ArrayList<Task>();
         }
     }
@@ -71,9 +67,7 @@ public class Storage {
                     tasks.add(currTask);
                 }
             } catch(ArrayIndexOutOfBoundsException e) {
-                Duke.printLine();
-                System.out.println("ERROR: Incorrect inputs in data file!");
-                Duke.printLine();
+                UI.printFormattedMessage("ERROR: Incorrect inputs in data file!");
             }
             return tasks;
 
@@ -84,9 +78,7 @@ public class Storage {
         try{
             Files.write(path, strings);
         } catch (IOException e) {
-            Duke.printLine();
-            System.out.println("ERROR: There is error in writing to file");
-            Duke.printLine();
+            UI.printFormattedMessage("ERROR: There is error in writing to file");
         }
 
     }

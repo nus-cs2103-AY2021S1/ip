@@ -14,7 +14,6 @@ public class Duke {
 
         } catch (IOException e){
             System.out.println("ERROR: File Loadding error");
-
         }
     }
 
@@ -22,36 +21,17 @@ public class Duke {
     public static void main(String[] args) {
         Duke dukeMessager = new Duke();
         dukeMessager.run();
-
-
-
     }
 
     public void run() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
-        printLine();
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        printLine();
-
+        UI.printGreeting();
         if (sc.hasNext()) {
             String input = sc.nextLine();
             while (!input.equals(TaskElement.BYE.label)) {
                 try{
                     if (input.equals(TaskElement.LIST.label)) {
-                        printLine();
-                        System.out.println(" Here are the tasks in your list:");
-                        int sizeStore = stringStore.size();
-                        for (int i = 1; i < sizeStore + 1; i++) {
-                            System.out.println(i + "." + stringStore.get(i - 1));
-                        }
-                        printLine();
+                        UI.printListOfTasks(this.stringStore);
                     } else if (input.split(" ")[0].equals(TaskElement.DONE.label)) {
                         int doneTask = Integer.parseInt(input.split(" ")[1]) - 1;
                         if(doneTask + 1 > stringStore.size() || doneTask < 0){
@@ -65,7 +45,7 @@ public class Duke {
                         String tasker = stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
                         Todo todoTask = new Todo(tasker);
                         stringStore.add(todoTask);
-                        printer(todoTask);
+                        UI.printTaskAdd(todoTask, stringStore.size());
                     } else if (input.split(" ")[0].equals(TaskElement.DEADLINE.label)) {
                         if (input.split(" ").length == 1) {
                             throw new DukeEmptyDeadlineException(input);
@@ -77,7 +57,7 @@ public class Duke {
                         }
                         Deadline deadlineTask = new Deadline(deadlinerparts[0], deadlinerparts[1]);
                         stringStore.add(deadlineTask);
-                        printer(deadlineTask);
+                        UI.printTaskAdd(deadlineTask, stringStore.size());
                     } else if (input.split(" ")[0].equals(TaskElement.EVENT.label)) {
                         if (input.split(" ").length == 1) {
                             throw new DukeEmptyEventException(input);
@@ -89,64 +69,41 @@ public class Duke {
                         }
                         Event eventTask = new Event(eventParts[0], eventParts[1]);
                         stringStore.add(eventTask);
-                        printer(eventTask);
+                        UI.printTaskAdd(eventTask, this.stringStore.size());
                     } else if(input.split(" ")[0].equals(TaskElement.DELETE.label)){
                         int deleteTask = Integer.parseInt(input.split(" ")[1]) - 1;
                         if(deleteTask + 1 > stringStore.size() || deleteTask < 0){
                             throw new DukeDeleteException(input);
                         }
-                        deletePrinter(stringStore.get(deleteTask));
+                        UI.printDeleteMessage(stringStore.get(deleteTask), stringStore.size() - 1);
                         stringStore.remove(deleteTask);
                     } else {
                         throw new DukeUnknownInputException(input);
                     }
                 }  catch (DukeUnknownInputException e){
-                    printLine();
-                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    printLine();
+                    UI.printFormattedMessage("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 } catch (DukeEmptyToDoException e) {
-                    printLine();
-                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
-                    printLine();
+                    UI.printFormattedMessage("OOPS!!! The description of a todo cannot be empty.");
                 } catch (DukeEmptyEventException e) {
-                    printLine();
-                    System.out.println("OOPS!!! The description of a event cannot be empty.");
-                    printLine();
+                    UI.printFormattedMessage("OOPS!!! The description of a event cannot be empty.");
                 } catch (DukeEmptyDeadlineException e) {
-                    printLine();
-                    System.out.println("OOPS!!! The description of a deadline cannot be empty.");
-                    printLine();
+                    UI.printFormattedMessage("OOPS!!! The description of a deadline cannot be empty.");
                 } catch (DukeInvalidDoneNumException e) {
-                    printLine();
-                    System.out.println("OOPS!!! The invalid done number.");
-                    printLine();
+                    UI.printFormattedMessage("OOPS!!! The invalid done number.");
                 } catch (DukeEmptyDeadlineTImeException e) {
-                    printLine();
-                    System.out.println("OOPS!!! The description of a deadline time cannot be empty.");
-                    printLine();
+                    UI.printFormattedMessage("OOPS!!! The description of a deadline time cannot be empty.");
                 } catch (DukeEmptyEventTimeException e) {
-                    printLine();
-                    System.out.println("OOPS!!! The description of a event time cannot be empty.");
-                    printLine();
+                    UI.printFormattedMessage("OOPS!!! The description of a event time cannot be empty.");
                 } catch (DukeDeleteException e) {
-                    printLine();
-                    System.out.println("OOPS!!! The invalid delete number.");
-                    printLine();
+                    UI.printFormattedMessage("OOPS!!! The invalid delete number.");
                 } catch (DateTimeParseException e){
-                    printLine();
-                    System.out.println("OOPS!!! The invalid date format has been keyed in. PLease enter in dd-MM-yyyy HH:mm format");
-                    printLine();
+                    UI.printFormattedMessage("OOPS!!! The invalid date format has been keyed in. PLease enter in dd-MM-yyyy HH:mm format");
                 }
                 if (sc.hasNext()) {
                     input = sc.nextLine();
                 }
             }
-            printLine();
-            System.out.println("Bye. Hope to see you again soon!");
-            printLine();
-
-
-
+            UI.printByeMessage();
         }
         storage.save(storage.convertArrayToSaveFormat(this.stringStore));
     }
@@ -165,23 +122,6 @@ public class Duke {
 
         }
         return store;
-    }
-
-    public void printer(Task task){
-        printLine();
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + String.valueOf(this.stringStore.size()) + " tasks in the list.");
-        printLine();
-
-    }
-
-    public void deletePrinter(Task task){
-        printLine();
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + String.valueOf(this.stringStore.size() - 1) + " tasks in the list.");
-        printLine();
     }
 
     public static void printLine(){
