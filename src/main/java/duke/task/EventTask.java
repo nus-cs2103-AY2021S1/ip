@@ -6,9 +6,22 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an event task.
+ */
 public class EventTask extends Task {
+
+    /**
+     * Date of event.
+     */
     public LocalDateTime timing;
 
+    /**
+     * Constructs a new instance of an EventTask.
+     * @param description Description of event task.
+     * @param timing Timing of event task.
+     * @throws DukeException If timing is not in the form of "dd-MM-yyyy HH:mm".
+     */
     public EventTask(String description, String timing) throws DukeException {
         super(description);
         try {

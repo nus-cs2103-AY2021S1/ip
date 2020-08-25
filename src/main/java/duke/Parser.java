@@ -4,7 +4,17 @@ import duke.command.*;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidInputException;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
+    /**
+     * Parses user input into command for execution.
+     * @param fullCommand Full user input string.
+     * @return The command to be executed based on user input.
+     * @throws InvalidInputException If description is empty for adding new tasks.
+     * @throws InvalidCommandException If command is not defined.
+     */
     static Command parse (String fullCommand) throws InvalidInputException, InvalidCommandException {
         String[] commandArr = fullCommand.trim().split(" ", 2);
         switch(commandArr[0]) {
@@ -30,7 +40,14 @@ public class Parser {
         }
     }
 
-
+    /**
+     * Parses argument in the context of adding a new task.
+     * @param command Type of task added.
+     * @param taskDetails Details of task to be added.
+     * @return The prepared command to add new task.
+     * @throws InvalidInputException If taskDetails is empty or lacking date or timing for Deadline and Event Task.
+     * @throws InvalidCommandException If task type is not deadline, todo, event.
+     */
     static Command prepareAdd(String command, String taskDetails) throws InvalidInputException, InvalidCommandException {
         switch (command) {
             case "todo": {
@@ -65,11 +82,21 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses argument in the context of deleting a new task.
+     * @param index Index of task to be deleted.
+     * @return Returns a prepared command to delete specified task.
+     */
     static Command prepareDelete(String index) {
         int taskIndex = Integer.valueOf(index);
         return new DeleteCommand(taskIndex);
     }
 
+    /**
+     * Parses argument in the context of marking a task as completed.
+     * @param index Index of task to be mark as done.
+     * @return Returns a prepared command to mark task as completed.
+     */
     static Command prepareDone(String index) {
         int taskIndex = Integer.valueOf(index);
         return new DoneCommand(taskIndex);
