@@ -1,15 +1,29 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * <h>Ui</h>
+ * Deals with interactions with the user.
+ */
 public class Ui {
 
+    /**
+     * Constructor of Ui class.
+     */
     public Ui() {
     }
 
+    /**
+     * Prints a horizontal divider line.
+     */
     protected void horizontalDiv() {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Prints an error when there is format issue.
+     * @param i The position where the formatting has error.
+     */
     protected static void printFormatError(int i) {
         System.out.println("Hello! Looks like there is a format error in your saved file!");
         if (i >= 0) {
@@ -17,30 +31,46 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the starting welcome message of the bot
+     */
     public void showWelcome() {
         horizontalDiv();
         System.out.println("Hello! I'm Dude\n" + "What can I do for you today?");
         horizontalDiv();
     }
 
+    /**
+     * Prints to let user know what talking you.
+     */
     public void invalidInput() {
         horizontalDiv();
         System.out.println("Sorry! But I don't know what that means!");
         horizontalDiv();
     }
 
+    /**
+     * Prints to greet good bye to user.
+     */
     public void showBye() {
         horizontalDiv();
         System.out.println("Bye! Hope to see you again soon!");
         horizontalDiv();
     }
 
+    /**
+     * Prints that the number does not exist in the list.
+     */
     public void showDoneError() {
         horizontalDiv();
         System.out.println("Sorry! The number does not exist in the list!");
         horizontalDiv();
     }
 
+    /**
+     * Prints that you have mark that task as done.
+     * @param str String The task that is being marked as done.
+     */
     public void showDoneMsg(String str) {
         horizontalDiv();
         System.out.println("Nice! I've marked this task as done: ");
@@ -48,17 +78,28 @@ public class Ui {
         horizontalDiv();
     }
 
+    /**
+     * Prints that you do not have any task/
+     */
     public void showListNoTask() {
         horizontalDiv();
         System.out.println("Congratulations! You have currently no task.");
         horizontalDiv();
     }
 
+    /**
+     * Prints the header for listing the list.
+     */
     public void showListTask() {
         horizontalDiv();
         System.out.println("Here are the tasks in your list:");
     }
 
+    /**
+     * Prints the to-do task that have been added.
+     * @param ls TaskList
+     * @param newTask Task The new task to be added.
+     */
     public void showTodoMsg(TaskList ls, Task newTask) {
         horizontalDiv();
         System.out.println("Got it. I've added this task: \n" + newTask.toString());
@@ -70,6 +111,9 @@ public class Ui {
         horizontalDiv();
     }
 
+    /**
+     * Prints that your input for to-do task is wrong.
+     */
     public void showTodoError() {
         horizontalDiv();
         System.out.println("Sorry! The description of todo cannot be empty!!");
@@ -77,6 +121,11 @@ public class Ui {
         horizontalDiv();
     }
 
+    /**
+     * Prints that you have added the deadline task.
+     * @param ls TaskList
+     * @param newTask Task The new task to be added.
+     */
     public void showDeadlineEventMsg(TaskList ls, Task newTask) {
         horizontalDiv();
         System.out.println("Got it. I've added this task: \n" + newTask.toString());
@@ -88,6 +137,9 @@ public class Ui {
         horizontalDiv();
     }
 
+    /**
+     * Prints that user input for deadline task is wrong.
+     */
     public void showDeadlineFormatError() {
         horizontalDiv();
         System.out.println("Sorry! Please enter a date for the deadline using the command '/by'!");
@@ -95,6 +147,9 @@ public class Ui {
         horizontalDiv();
     }
 
+    /**
+     * Prints a warning to show there is not description for the task.
+     */
     public void showDeadlineError() {
         horizontalDiv();
         System.out.println("Sorry! The description of deadline cannot be empty!");
@@ -102,6 +157,9 @@ public class Ui {
         horizontalDiv();
     }
 
+    /**
+     * Prints there is a format error for the event task by the user.
+     */
     public void showEventFormatError() {
         horizontalDiv();
         System.out.println("Sorry! Please enter a duration for the event using the command '/at'!");
@@ -109,6 +167,9 @@ public class Ui {
         horizontalDiv();
     }
 
+    /**
+     * Prints warning that the description of event task cannot be empty.
+     */
     public void showEventError() {
         horizontalDiv();
         System.out.println("Sorry! The description of event cannot be empty!");
@@ -116,6 +177,11 @@ public class Ui {
         horizontalDiv();
     }
 
+    /**
+     * Prints the confirmation that the task has been deleted.
+     * @param ls TaskList
+     * @param tsk Task Task to be deleted.
+     */
     public void showDeleteMsg(TaskList ls, Task tsk) {
         horizontalDiv();
         System.out.println("Successfully deleted this task:");
@@ -128,18 +194,29 @@ public class Ui {
         horizontalDiv();
     }
 
+    /**
+     * Prints an error saying the that deletion cannot occur.
+     */
     public void showDeleteError() {
         horizontalDiv();
         System.out.println("Sorry! The number to be deleted does not exist in the list!");
         horizontalDiv();
     }
 
+    /**
+     * Prints that you have no task for all days.
+     */
     public void showCheckNoTask() {
         horizontalDiv();
         System.out.println("You have currently no task on all days!");
         horizontalDiv();
     }
 
+    /**
+     * Prints the number of task for the date that the user checked.
+     * @param counter int The number of task counted.
+     * @param date LocalDate The date the user is checking.
+     */
     public void showCheckTask(int counter, LocalDate date) {
         if (counter == 0) {
             System.out.println("You have currently no incomplete task on "
@@ -154,6 +231,9 @@ public class Ui {
         horizontalDiv();
     }
 
+    /**
+     * Prints the error saying your format of input for checking date is wrong.
+     */
     public void showCheckError() {
         horizontalDiv();
         System.out.println("Sorry! Seems like the format of your input is wrong ><");
