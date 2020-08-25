@@ -13,7 +13,7 @@ public class SerializeUtil {
             oos.writeObject(object);
             bytes = baos.toByteArray();
         } catch (Exception e) {
-            System.err.println("Failed to serialize" + e.getMessage());
+            System.err.println("Failed to serialize " + e.getMessage());
         }
         return bytes;
     }
@@ -26,7 +26,7 @@ public class SerializeUtil {
             bais = new ByteArrayInputStream(bytes);
             ois = new ObjectInputStream(bais);
         } catch (Exception e) {
-            System.err.println("Failed to deserialize" + e.getMessage());
+            System.err.println("Failed to deserialize " + e.getMessage());
         }
         return ois.readObject();
     }
