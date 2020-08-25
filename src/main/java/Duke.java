@@ -20,7 +20,6 @@ public class Duke {
         String open = "_______________________________________ \n"
                 + "Hello! I'm Duke \n"
                 + "What can I do for you? \n"
-                + "You can type 'help' to view commands \n"
                 + "_______________________________________ \n";
         System.out.println(open);
 
@@ -71,10 +70,6 @@ public class Duke {
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println(LINE + "Invalid input! Please specify which task you want to delete! \n" + LINE);
                     }
-                } else if (userCommand.equals("help")) { // Additional help feature
-                    handleHelp();
-                } else {
-                    System.out.println(LINE + "Invalid input! Please try again! \n" + LINE);
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
