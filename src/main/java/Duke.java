@@ -12,7 +12,10 @@ public class Duke {
     private final Storage storage;
     private final Parser parser;
 
-
+    /**
+     * Initialised Duke with a designated location to read and save the data.
+     * @param filePath File location to read and save data.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -25,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Start the program.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.showWelcome();
@@ -117,6 +123,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Driver for Duke.
+     * @param args User Input.
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
