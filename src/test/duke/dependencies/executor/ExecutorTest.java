@@ -3,10 +3,7 @@ package duke.dependencies.executor;
 import duke.dependencies.executable.Command;
 import duke.dependencies.executable.Executable;
 import duke.dependencies.task.Task;
-
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ExecutorTest {
 
