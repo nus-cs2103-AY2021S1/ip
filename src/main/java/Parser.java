@@ -38,7 +38,7 @@ public class Parser {
                 System.out.println("-------------------------");
                 for (Task task : store) {
                     if (task.getDescription() != null) {
-                        System.out.println(counter + ". [" + task.getStatusIcon() + "] " + task.getDescription());
+                        System.out.println(counter + ". [" + task.getType() + "][" + task.getStatusIcon() + "] " + task.getDescription());
                         counter++;
                     }
                 }
@@ -161,6 +161,12 @@ public class Parser {
                 System.out.println(curr);
                 System.out.println("Now you have " + store.size() + " tasks in the list.");
                 System.out.println("-------------------------");
+                break;
+            } else if (str.contains("find")) {
+                TaskList tasks = new TaskList(store);
+                int index = str.indexOf(" ") + 1;
+                String query = str.substring(index);
+                tasks.find(query);
                 break;
             } else if (!str.equals("bye")) {
                 System.out.println("-------------------------");
