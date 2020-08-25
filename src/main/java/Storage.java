@@ -113,6 +113,7 @@ public class Storage {
             String replacement2 = replacement1.replaceAll("✘", "0");
             fw.write(replacement2 + "\n");
         }
+
         fw.close();
     }
 }
