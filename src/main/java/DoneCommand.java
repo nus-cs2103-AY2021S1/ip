@@ -22,5 +22,6 @@ public class DoneCommand implements Command {
         }
         task.markAsDone();
         new Duke().print("Nice, I've marked this task as done:", "\t" + task.toString());
+        new Duke().writeFile(list);
     }
 }
