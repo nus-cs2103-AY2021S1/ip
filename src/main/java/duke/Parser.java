@@ -9,8 +9,19 @@ import duke.command.DoneCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 
+/**
+ * Parses the user's inputs and decides what to do depending on the input.
+ */
 public class Parser {
 
+    /**
+     * Returns a command object according to what the user input.
+     * Checks for the integrity of the command and rejects it if it fails by throwing and error.
+     *
+     * @param input User's input.
+     * @return command
+     * @throws DukeException If the command fails the integrity checks.
+     */
     public static Command parse(String input) throws DukeException {
         String[] commandDetail = input.split(" ", 2);
 

@@ -4,15 +4,39 @@ import duke.*;
 import duke.exception.DukeException;
 import duke.task.*;
 
+/**
+ * Encapsulates a command that will add a task according the the input it is given.
+ */
 public class AddCommand extends Command {
+    /**
+     * The command that will determine the type of task added.
+     */
     private final Commands command;
+
+    /**
+     * The user given input that determines the details of the task added.
+     */
     private final String input;
 
+    /**
+     * Initializes a new AddCommand instance.
+     *
+     * @param command   The command that determines the type of task added.
+     * @param input     The details of the task added.
+     */
     public AddCommand(Commands command, String input) {
         this.command = command;
         this.input = input;
     }
 
+    /**
+     * Executes the Todo, Deadline and Event commands by creating a task according to the command given.
+     *
+     * @param taskList          The list of tasks known by the chat bot.
+     * @param ui                The Ui that is used by the chat bot.
+     * @param storage           The storage used by the chat bot.
+     * @throws DukeException    If the execution fails at any step.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         switch (this.command) {
@@ -48,6 +72,16 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Adds and stores a new task in the task list and storage then prints out a message indicating that
+     * the task was successfully added.
+     *
+     * @param newTask   The new task to be added
+     * @param taskList  The list of tasks known by the chat bot.
+     * @param ui        The Ui that is used by the chat bot.
+     * @param storage   The storage used by the chat bot.
+     * @throws DukeException If the execution fails at any step.
+     */
     public void addTask(Task newTask, TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
             taskList.addTask(newTask);
