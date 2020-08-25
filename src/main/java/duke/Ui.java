@@ -51,7 +51,8 @@ public class Ui {
     public void onAdd(Task task, int size) {
         chatPrint("Got it. I've added this task:\n" +
                 tab + "   " + task + "\n" +
-                tab + "Now you have " + size + " tasks in the list.");    }
+                tab + "Now you have " + size + " tasks in the list.");
+    }
 
     public void chatPrint(String toPrint) {
         System.out.println(tab + line);
