@@ -1,14 +1,16 @@
+package duke.task;
+
 public class ToDo extends Task {
-    ToDo(String description) {
+    public ToDo(String description) {
         super(description);
     }
 
-    ToDo(String description, String completionStatus) {
+    public ToDo(String description, String completionStatus) {
         super(description, completionStatus);
     }
 
     @Override
-    String getType() {
+    public String getType() {
         return "T";
     }
 

@@ -1,9 +1,18 @@
+package duke.command;
+
+import duke.Storage;
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.exception.StorageAccessException;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.io.IOException;
 
 public class AddCommand extends Command {
     private final Task task;
 
-    AddCommand(Task task) {
+    public AddCommand(Task task) {
         this.task = task;
     }
 

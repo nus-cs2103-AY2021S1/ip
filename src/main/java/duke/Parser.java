@@ -1,6 +1,17 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
+
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.exception.InvalidArgumentException;
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidTaskTypeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskType;
+import duke.task.ToDo;
 
 public class Parser {
     static Command parse(String fullCommand) throws DukeException {

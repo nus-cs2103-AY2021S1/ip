@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -48,11 +55,11 @@ public class Storage {
         return list;
     }
 
-    void writeData(List<Task> list) throws IOException {
+    public void writeData(List<Task> list) throws IOException {
         FileWriter fw = new FileWriter("data/data.txt");
         for (Task t: list) {
             String toWrite = "";
-            toWrite += (t.getType() + " | " + (t.isCompleted ? "1" : "0") + " | " + t.description + (t.getDate() != null ? (" | " + t.getDate()) : "") + "\n");
+            toWrite += t.encode();
             fw.write(toWrite);
         }
         fw.close();
