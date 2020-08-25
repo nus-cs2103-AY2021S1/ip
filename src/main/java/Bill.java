@@ -180,6 +180,13 @@ public class Bill {
                             int index = input.indexOf("/by");
                             String task = input.substring(firstChar.length() + 1, index);
                             String time = input.substring(index + 4);
+
+//                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy HH:mm:ss a");
+//                            LocalDateTime localDate = LocalDate.parse(time, formatter);
+//                            System.out.println(localDate);
+//                            System.out.println(formatter.format(localDate));
+                            
+                            
                             Deadline deadline = new Deadline(task, time);
                             list_of_Content.add(deadline);
                             System.out.println(horizontal_line);

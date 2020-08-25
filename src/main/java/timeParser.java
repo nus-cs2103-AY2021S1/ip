@@ -1,16 +1,18 @@
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class timeParser {
 
-    private LocalDate inputTime;
+    private String inputTime;
 
     public timeParser(String inputTime) {
-        this.inputTime = LocalDate.parse(inputTime);
+        this.inputTime = inputTime;
     }
 
     public String timeConverter() {
-        return inputTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        LocalDateTime localDateTime = LocalDateTime.parse(inputTime,DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+        return localDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a"));
     }
 }
