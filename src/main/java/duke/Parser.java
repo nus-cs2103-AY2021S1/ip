@@ -1,14 +1,6 @@
 package main.java.duke;
 
-import main.java.duke.command.Command;
-import main.java.duke.command.CompleteTaskCommand;
-import main.java.duke.command.CreateDeadlineCommand;
-import main.java.duke.command.CreateEventCommand;
-import main.java.duke.command.CreateTodoCommand;
-import main.java.duke.command.DeleteTaskCommand;
-import main.java.duke.command.ExitCommand;
-import main.java.duke.command.InvalidInputCommand;
-import main.java.duke.command.ListTasksCommand;
+import main.java.duke.command.*;
 
 import java.time.LocalDate;
 
@@ -66,6 +58,8 @@ class Parser {
                 // return invalid command
             }
             break;
+        case("find"):
+            return new FindCommand(body);
         case("list"):
             return new ListTasksCommand();
         case("todo"):

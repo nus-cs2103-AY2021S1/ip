@@ -16,6 +16,8 @@ public class Ui {
     private String zeroTasksMessage = "Your task list is currently empty. YAY!!! :D";
     private String listTasksMessage = "Here are the tasks in your list:";
     private String invalidTaskIndexMessage = "Please enter a valid task index";
+    private String foundTasksMessage = "Here are the matching tasks in your list:";
+    private String foundZeroTasksMessage = "I'm sorry, but none of the tasks match the keyword";
 
     private String getNumOfTasksString(TaskList tasks) {
         int numOfTasks = tasks.getNumOfTasks();
@@ -115,5 +117,22 @@ public class Ui {
             System.out.println(string);
         }
         System.out.println(this.horizontalLine);
+    }
+
+    /**
+     * Prints strings upon finding matching tasks
+     * @param tasks Sublist of tasks
+     */
+    public void printTasksWithKeyword(Task[] tasks) {
+        String[] strings = new String[tasks.length + 1];
+        if (tasks.length == 0) {
+            strings[0] = this.foundZeroTasksMessage;
+        } else {
+            strings[0] = this.foundTasksMessage;
+            for (int i = 1; i < strings.length; i++) {
+                strings[i] = tasks[i - 1].toString();
+            }
+        }
+        this.print(strings);
     }
 }
