@@ -13,14 +13,17 @@ public class Handler {
             break;
         case "done":
             if (isValidSize(body, tasks)) tasks.done(getNumber(body), ui);
-            else throw new DukeException("Invalid number");
+            else {
+                throw new DukeException("Invalid number");
+            }
             break;
         case "delete":
             if (isValidSize(body, tasks)) tasks.delete(getNumber(body), ui);
             else throw new DukeException("Invalid number");
             break;
         case "todo":
-            tasks.addTask(new Todo(body), ui);
+            if (isValidTFormat(body)) tasks.addTask(new Todo(body), ui);
+            else throw new DukeException("Invalid format");
             break;
         case "deadline":
             if (isValidDFormat(body)) tasks.addTask(new Deadline(desc(body), deadline(body)), ui);
@@ -49,6 +52,10 @@ public class Handler {
 
     private static String desc(String body) {
         return body.split(" /", 2)[0];
+    }
+
+    private static boolean isValidTFormat(String body) {
+        return !body.equals("");
     }
 
     private static boolean isValidDFormat(String body) {

@@ -23,4 +23,8 @@ public class Ui {
     public void say(String something) {
         System.out.println(something);
     }
+
+    public void getError(Exception e) {
+        System.out.println(e.getMessage());
+    }
 }

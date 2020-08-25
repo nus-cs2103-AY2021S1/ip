@@ -1,2 +1,25 @@
-Duke: Hey There! What can I do for you?
-Duke: Bye! Hope to see you again.
+Hello! How may I help you?
+Not a task
+You have 1 items in your task list now.
+You have 2 items in your task list now.
+Invalid format
+You have 3 items in your task list now.
+Invalid format
+You have 4 items in your task list now.
+Here is your task list.
+1. [T][✘] quiz
+2. [T][✘] decorations
+3. [D][✘] homework | 5pm
+4. [D][✘] birthday | today
+Invalid number
+I have deleted this task!
+[T][✘] decorations
+You have 3 items in your task list now.
+I have marked it as done!
+[D][✓] birthday | today
+Here is your task list.
+1. [T][✘] quiz
+2. [D][✘] homework | 5pm
+3. [D][✓] birthday | today
+Not a task
+Bye. Hope to see you again!

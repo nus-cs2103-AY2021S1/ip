@@ -6,6 +6,11 @@ public class DukeException extends Exception {
     }
 
     @Override
+    public String getMessage() {
+        return this.exception;
+    }
+
+    @Override
     public String toString() {
         return "DukeException[" + this.exception + "]";
     }

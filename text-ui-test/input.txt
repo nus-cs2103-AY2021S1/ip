@@ -1,1 +1,13 @@
+test
+todo quiz
+todo decorations
+deadline homework /at 5pm
+deadline homework /by 5pm
+event birthday /by today
+event birthday /at today
+list
+done 6
+delete 2
+done 3
+list
 bye

@@ -15,7 +15,7 @@ public class Duke {
             try {
                 Handler.process(input, ui, tasks);
             } catch (DukeException e) {
-                // ...
+                ui.getError(e);
             } finally {
                 isBye = Handler.isBye(input);
             }
