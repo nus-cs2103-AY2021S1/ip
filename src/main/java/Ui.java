@@ -240,4 +240,28 @@ public class Ui {
         System.out.println("Here's an example: check 2020-08-08");
         horizontalDiv();
     }
+
+    /**
+     * Prints the description of finding the task.
+     * @param counter int Number of counted matches.
+     * @param str String The keyword.
+     */
+    public void showFindTask(int counter, String str) {
+        if (counter == 0) {
+            System.out.println("Looks like there is no task matching that keyword: " + str);
+            horizontalDiv();
+        } else if (counter == 1) {
+            System.out.println("^ Only the above task matched the keyword: '" + str + "' from your list.");
+            horizontalDiv();
+        } else {
+            System.out.println("^ The above are matching tasks with keyword: '" + str + "' from your list.");
+            horizontalDiv();
+        }
+    }
+
+    public void showFindError() {
+        horizontalDiv();
+        System.out.println("Key in something for me to find!");
+        horizontalDiv();
+    }
 }

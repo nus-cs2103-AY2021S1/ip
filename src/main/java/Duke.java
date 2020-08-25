@@ -21,7 +21,7 @@ public class Duke {
      * Command that user can input
      */
     enum Command {
-        BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, CHECK
+        BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, CHECK, FIND
     }
 
     /**
@@ -163,6 +163,27 @@ public class Duke {
                     }
                 } catch (Exception ex) {
                     ui.showCheckError();
+                }
+                break;
+            case FIND:
+                try {
+                    String keyword = arr[1];
+                    if (ls.isEmpty()) {
+                        ui.showCheckNoTask();
+                    } else {
+                        ui.horizontalDiv();
+                        int counter = 0;
+                        for (int i = 0; i < ls.size(); i++) {
+                            Task task = ls.get(i);
+                            if (task.getDescription().contains(keyword)) {
+                                counter++;
+                                System.out.println(counter + ". " + task.toString());
+                            }
+                        }
+                        ui.showFindTask(counter, keyword);
+                    }
+                } catch (Exception ex) {
+                    ui.showFindError();
                 }
                 break;
             default:
