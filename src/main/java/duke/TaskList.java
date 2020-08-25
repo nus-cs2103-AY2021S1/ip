@@ -1,6 +1,8 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     ArrayList<Task> store;
@@ -47,5 +49,13 @@ public class TaskList {
             data += task.toString() + "\n";
         }
         return data;
+    }
+
+    public ArrayList<Task> find(String text) {
+        List<Task> matchedTasks = store.stream().filter(
+                task -> task.getName().contains(text)
+        ).collect(Collectors.toList());
+
+        return new ArrayList<>(matchedTasks);
     }
 }

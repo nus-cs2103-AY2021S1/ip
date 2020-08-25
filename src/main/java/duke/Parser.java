@@ -128,6 +128,7 @@ public class Parser {
                 );
                 return new CreateTaskCommand(tasks, task);
             }
+
             case "deadline": {
                 // Deadline task
 
@@ -151,6 +152,15 @@ public class Parser {
             }
             case "list": {
                 return new ListCommand(tasks);
+            }
+            case "find": {
+                // Find task
+                if (tokens.length <= 1
+                        || tokens[1].equals("")) {
+                    throw new CommandMissingArgumentException();
+                }
+
+                return new FindCommand(tasks, tokens[1]);
             }
             case "done": {
                 // Handle incorrect argument lengths
