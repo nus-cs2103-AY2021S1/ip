@@ -20,9 +20,9 @@ public class DeadlineCommand implements Command {
         List<Task> taskList = tasks.getTaskList();
         int breakpoint = inputCommand.indexOf("/") - 1;
         if (inputCommand.length() <= "deadline ".length()) {
-            throw new DukeException("☹ OOPS!!! The description of a Deadline cannot be empty.\n");
-        } else if (breakpoint == -1) {
-            throw new DukeException("Hey a deadline cannot have no actual date!!\n");
+            throw new DukeException("☹ OOPS!!! The description of a Deadline cannot be empty.");
+        } else if (breakpoint == -2) {
+            throw new DukeException("Hey a deadline cannot have no actual date!!");
         }
         String description = inputCommand.substring("deadline".length() + 1, breakpoint);
         String dateTime = inputCommand.substring(breakpoint + 5);
