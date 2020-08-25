@@ -43,6 +43,16 @@ public class TaskList {
     }
 
     /**
+     * Returns list of tasks which description contains the keyword.
+     * @param keyword The keyword to be used to filter the tasks.
+     * @return The list of tasks.
+     */
+    public List<Task> getListOfTasks(String keyword) {
+        return this.listOfTasks.stream().filter(
+                task -> task.getDescription().contains(keyword)).collect(Collectors.toList());
+    }
+
+    /**
      * Marks the task at that particular index as done and returns that task.
      * @param idx The index to identify the task to be marked as done.
      * @return The task that has been marked as done.
