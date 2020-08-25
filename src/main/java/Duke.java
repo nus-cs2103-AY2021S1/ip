@@ -50,37 +50,50 @@ public class Duke {
             // Keep reading new line until file end
             while (taskReader.hasNextLine()) {
                 String taskString = taskReader.nextLine();
+                //System.out.println(taskString);
 
                 // Only work with non empty lines
                 if (taskString != "") {
                     switch (taskString.charAt(1)) {
                     case 'T':
-                        boolean isDone = taskString.split("  ")[0].equals("[Done]");
+                        boolean isDone = taskString.split("  ")[0]
+                                .substring(3)
+                                .equals("[Done]");
                         String description = taskString.split("  ")[1];
                         Task t = new ToDo(description);
                         if (isDone) {
+                            System.out.println("It is done!");
                             t.setDone();
                         }
                         savedTasks.add(t);
                         break;
                     case 'D':
-                        isDone = taskString.split("  ")[0].equals("[Done]");
-                        description = taskString.split("  ")[1].split("\\s[(]by:\\s")[0];
-                        String by = taskString.split("  ")[1].split("\\s[(]by:\\s")[1];
+                        isDone = taskString.split("  ")[0]
+                                .substring(3)
+                                .equals("[Done]");
+                        description = taskString.split("  ")[1]
+                                .split("\\s[(]by:\\s")[0];
+                        String by = taskString.split("  ")[1]
+                                .split("\\s[(]by:\\s")[1];
                         Deadline d = new Deadline(description, by);
                         if (isDone) {
+                            System.out.println("It is done!");
                             d.setDone();
                         }
                         savedTasks.add(d);
                         break;
                     case 'E':
-                        isDone = taskString.split("  ")[0].equals("[Done]");
-                        String[] stringSplit = taskString.split("  ")[1].split("\\s[(]at:\\s");
+                        isDone = taskString.split("  ")[0]
+                                .substring(3)
+                                .equals("[Done]");
+                        String[] stringSplit = taskString.split("  ")[1]
+                                .split("\\s[(]at:\\s");
                         description = stringSplit[0];
                         String start = stringSplit[1].split("-")[0];
                         String end = stringSplit[1].split("-")[1];
                         Event e = new Event(description, start, end);
                         if (isDone) {
+                            System.out.println("It is done!");
                             e.setDone();
                         }
                         savedTasks.add(e);
@@ -209,6 +222,19 @@ public class Duke {
             if (input.equals("to file")) {
                 saveToFile(listToString(userTasks));
                 System.out.println("File saved!!!!");
+                continue;
+            }
+
+            if (input.equals("from file")) {
+                ArrayList<Task> l = readFromFile();
+                int count = 1;
+                System.out.println("File is read!");
+                for (Task i : l) {
+                    System.out.println("    "
+                            + count + ". "
+                            + i.toString());
+                    count++;
+                }
                 continue;
             }
 
