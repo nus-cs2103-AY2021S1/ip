@@ -15,15 +15,16 @@ import java.util.List;
 public class Storage {
     File file;
     boolean added = false;
+
     Storage() throws IOException {
         String dir = System.getProperty("user.dir") + "/data";
         File path = new File(dir);
-        if(!path.exists()) {
+        if (!path.exists()) {
             path.mkdir();
         }
         file = new File(path + "/duke.txt");
         boolean result = file.createNewFile();
-        if(result) {
+        if (result) {
             System.out.println("file created " + file.getCanonicalPath());
         } else {
             System.out.println("file exists at: " + file.getCanonicalPath());
@@ -34,7 +35,8 @@ public class Storage {
      * Makes the storage file empty.
      */
     void reset() {
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file.getAbsolutePath()))) {
+        try (BufferedWriter bufferedWriter
+                     = new BufferedWriter(new FileWriter(file.getAbsolutePath()))) {
             bufferedWriter.write("");
             added = false;
         } catch (IOException e) {
@@ -48,33 +50,33 @@ public class Storage {
     ArrayList<Task> load() {
         System.out.println("reading... ");
         ArrayList<Task> list = new ArrayList<>();
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
+        try (BufferedReader bufferedReader
+                     = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
             String line = bufferedReader.readLine();
-            while(line != null) {
+            while (line != null) {
                 String[] parts = line.split("</>");
                 Task task;
                 if (parts[0].equals("TODO") && parts.length == 3) {
                     task = new Todo(parts[2]);
-                    if(parts[1].equals("true")) {
+                    if (parts[1].equals("true")) {
                         task.setCompleted();
                     }
                     list.add(task);
-                } else if (parts[0].equals("DEADLINE") && parts.length == 4){
+                } else if (parts[0].equals("DEADLINE") && parts.length == 4) {
                     task = new Deadline(parts[2], parts[3]);
-                    if(parts[1].equals("true")) {
+                    if (parts[1].equals("true")) {
                         task.setCompleted();
                     }
                     list.add(task);
                 } else if (parts[0].equals("EVENT") && parts.length == 4) {
                     task = new Event(parts[2], parts[3]);
-                    if(parts[1].equals("true")) {
+                    if (parts[1].equals("true")) {
                         task.setCompleted();
                     }
                     list.add(task);
                 }
                 line = bufferedReader.readLine();
             }
-//            System.out.println(list);
             added = true;
         } catch (FileNotFoundException e) {
             // Exception handling
@@ -94,33 +96,33 @@ public class Storage {
         if (added) {
             return;
         }
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
+        try (BufferedReader bufferedReader
+                     = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
             String line = bufferedReader.readLine();
-            while(line != null) {
+            while (line != null) {
                 String[] parts = line.split("</>");
                 Task task;
                 if (parts[0].equals("TODO") && parts.length == 3) {
                     task = new Todo(parts[2]);
-                    if(parts[1].equals("true")) {
+                    if (parts[1].equals("true")) {
                         task.setCompleted();
                     }
                     list.add(task);
-                } else if (parts[0].equals("DEADLINE") && parts.length == 4){
+                } else if (parts[0].equals("DEADLINE") && parts.length == 4) {
                     task = new Deadline(parts[2], parts[3]);
-                    if(parts[1].equals("true")) {
+                    if (parts[1].equals("true")) {
                         task.setCompleted();
                     }
                     list.add(task);
                 } else if (parts[0].equals("EVENT") && parts.length == 4) {
                     task = new Event(parts[2], parts[3]);
-                    if(parts[1].equals("true")) {
+                    if (parts[1].equals("true")) {
                         task.setCompleted();
                     }
                     list.add(task);
                 }
                 line = bufferedReader.readLine();
             }
-//            System.out.println(list);
             added = true;
         } catch (FileNotFoundException e) {
             // Exception handling
@@ -136,16 +138,17 @@ public class Storage {
      * @param task the task to be added
      */
     void addTask(Task task) {
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file.getAbsolutePath(), true))) {
+        try (BufferedWriter bufferedWriter
+                     = new BufferedWriter(new FileWriter(file.getAbsolutePath(), true))) {
             String separator = "</>";
             Task.Type type = task.getType();
-            String fileContent = type.toString() + separator + task.getCompleted() + separator + task.getName();
+            String fileContent = type.toString() + separator
+                    + task.getCompleted() + separator + task.getName();
             if (type == Task.Type.DEADLINE) {
                 fileContent += separator + ((Deadline) task).getDeadline();
             } else if (type == Task.Type.EVENT) {
                 fileContent += separator + ((Event) task).getTime();
             }
-//            System.out.println(type);
             bufferedWriter.write(fileContent);
             bufferedWriter.newLine();
         } catch (IOException e) {
@@ -159,11 +162,11 @@ public class Storage {
      * @param list the list containing the tasks to be added
      */
     void addAll(List<Task> list) {
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file.getAbsolutePath(), true))) {
-            for(Task t : list) {
+        try (BufferedWriter bufferedWriter
+                     = new BufferedWriter(new FileWriter(file.getAbsolutePath(), true))) {
+            for (Task t : list) {
                 addTask(t);
             }
-//            System.out.println(list);
         } catch (FileNotFoundException e) {
             // Exception handling
             System.out.println(e.getMessage());

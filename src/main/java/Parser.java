@@ -35,15 +35,17 @@ public class Parser {
         String[] done = s.split(" ");
         if (s.equals("bye")) {
             return Command.BYE;
-        } else if (done.length == 2 && (done[0].equals("done") || done[0].equals("delete")) && isNum(done[1])
-                && Integer.parseInt(done[1]) <= size && Integer.parseInt(done[1]) > 0) {
+        } else if (done.length == 2 && (done[0].equals("done")
+                || done[0].equals("delete"))
+                    && isNum(done[1]) && Integer.parseInt(done[1]) <= size
+                    && Integer.parseInt(done[1]) > 0) {
             whichTask = Integer.parseInt(done[1]) - 1;
-            if(done[0].equals("done")) {
+            if (done[0].equals("done")) {
                 return Command.DONE;
             } else {
                 return Command.DELETE;
             }
-        } else if(s.equals("list")) {
+        } else if (s.equals("list")) {
             return Command.LIST;
         } else {
             return Command.OTHERS;
