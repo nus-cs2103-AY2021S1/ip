@@ -15,6 +15,12 @@ public class EventCommand extends Command {
         super(task);
     }
 
+    /**
+     * Processes all the done command to determine the correct output.
+     * @param taskList List of tasks.
+     * @param ui UI of the bot.
+     * @param storage Storage managing the file in hard disk.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
@@ -24,6 +30,14 @@ public class EventCommand extends Command {
         }
     }
 
+    /**
+     * Processes all the event command to determine the correct output.
+     * @param theRest Parsed string containing task details.
+     * @param taskList List containing all the task(s).
+     * @param ui UI of the bot
+     * @param storage Storage managing the file in hard disk.
+     * @throws EventException If user's input is incomplete or in the wrong format.
+     */
     public void processEvent(String theRest, TaskList taskList, Ui ui, Storage storage) throws EventException {
         try {
             String[] eventAndDateAndTime = theRest.split(" /at ", 2);
@@ -75,6 +89,12 @@ public class EventCommand extends Command {
         }
     }
 
+    /**
+     *Evaluates whether this and other object if this and
+     * other object is the same or of the same type and task details.
+     * @param other Other object to compare.
+     * @return True if this object
+     */
     @Override
     public boolean equals(Object other) {
         if (this == other) {

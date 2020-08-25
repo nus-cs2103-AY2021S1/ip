@@ -22,12 +22,18 @@ import java.util.List;
 public class Storage {
 
     private static String filePath;
-    private TaskList taskList;
+    //private TaskList taskList;
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads the file from hard disk.
+     * @return List containing the parsed data from file.
+     * @throws IOException If file cannot be read or found.
+     * @throws DukeException If there is incorrect format in the file.
+     */
     public static List<Task> readFile() throws IOException, DukeException {
         Path folder = Path.of("data");
         Path file = folder.resolve(filePath);
@@ -58,6 +64,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Formats the data to more readable format.
+     * @param line String to be parsed.
+     * @return parsed Task.
+     * @throws DukeException If there is incorrect data format.
+     */
     private static Task parseData(String line) throws DukeException {
 
         try {
@@ -142,11 +154,6 @@ public class Storage {
                 }
 
             }
-
-//            String doneIndicator = parsed[1];
-//            if (doneIndicator.equals("1")) {
-//                duke.task.markAsDone();
-//            }
             return task;
 
         } catch(DateTimeParseException e) {
@@ -155,6 +162,10 @@ public class Storage {
 
     }
 
+    /**
+     * Updates the data in the file.
+     * @param tasks List containing all the updated tasks.
+     */
     public static void updateData(List<Task> tasks) {
         try {
             BufferedWriter writer = Files.newBufferedWriter(Path.of("data/tasks.txt"));
@@ -203,25 +214,5 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
-//    public static void showData() throws IOException {
-//        Path folder = Path.of("data");
-//        Path file = folder.resolve(filePath);
-//
-//        //Create a new directory by creating all parent directories first
-//        Files.createDirectories(folder);
-//
-//        //if user is new and file does not exist, create the file
-//        if(!Files.exists(file)) {
-//            Files.createFile(file);
-//        }
-//        //read from file
-//        BufferedReader reader = Files.newBufferedReader(file);
-//        String currentLine;
-//        System.out.println("Here are your duke.task(s) : ");
-//        while((currentLine = reader.readLine()) != null) {
-//            System.out.println(currentLine);
-//        }
-//    }
 
 }

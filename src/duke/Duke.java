@@ -24,6 +24,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke bot.
+     */
     public void run() {
         ui.greet();
         //storage.showData();
