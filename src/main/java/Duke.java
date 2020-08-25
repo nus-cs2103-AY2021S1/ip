@@ -34,10 +34,10 @@ public class Duke {
                     tasks.add(new Todo(strArray[2], "1".equals(strArray[1])));
                     break;
                 case "D":
-                    tasks.add(new Deadline(strArray[2], "1".equals(strArray[1]), strArray[3]));
+                    tasks.add(new Deadline(strArray[2], "1".equals(strArray[1]), LocalDate.parse(strArray[3])));
                     break;
                 case "E":
-                    tasks.add(new Event(strArray[2], "1".equals(strArray[1]), strArray[3]));
+                    tasks.add(new Event(strArray[2], "1".equals(strArray[1]), LocalDate.parse(strArray[3])));
                 }
             }
         } catch (IOException ex) {

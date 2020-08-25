@@ -7,7 +7,6 @@ public class Event extends Task {
     public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
-        this.at = at;
     }
 
     public Event(String description, boolean isDone, LocalDate at) {
@@ -16,7 +15,7 @@ public class Event extends Task {
     }
 
     public String getTime() {
-        return at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return at.toString();
     }
 
     @Override
