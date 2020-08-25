@@ -62,6 +62,7 @@ abstract public class Task {
             return " | 0 | " + this.name;
         }
     }
+
     /**
      * Overrides the toString methods
      *

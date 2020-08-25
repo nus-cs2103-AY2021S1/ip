@@ -17,12 +17,14 @@ public class TaskList {
     public TaskList(List<Task> tasks){
         this.allTasks = new ArrayList<>(tasks);
     }
+
     /**
      * another constructor, where the allTasks variable is just empty
      */
     public TaskList(){
         allTasks = new ArrayList<>();
     }
+
     /**
      * returns the List<Task> value
      * @return the List<Task> value
@@ -30,5 +32,4 @@ public class TaskList {
     public List<Task> getAllTasks(){
         return allTasks;
     }
-
 }

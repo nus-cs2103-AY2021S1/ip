@@ -20,7 +20,6 @@ public class DeadlineException extends DukeException{
     public DeadlineException(boolean description, boolean format){
         this.description = description;
         this.format = format;
-
     }
 
     /**
