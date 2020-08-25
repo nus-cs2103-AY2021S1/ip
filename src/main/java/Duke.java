@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,7 +22,6 @@ public class Duke {
         if(type == TaskType.TODO){
             int start = 0;
             while(!s.substring(start, start + 4).equals("todo")) start++;
-            System.out.println(start + 4);
             return s.substring(start + 4);
         }
         String firstWord = type == TaskType.EVENT ? "event" : "deadline", secondWord = type == TaskType.EVENT ? "/at" : "/by";
@@ -76,7 +76,50 @@ public class Duke {
         return res;
     }
 
-    public static void main(String[] args) {
+    public static void writeArrayList2file(ArrayList<Task> list, FileWriter fileWriter){
+        try{
+            for(int i = 0; i < list.size(); i++){
+                if(list.get(i) instanceof Todo){
+                    Todo todo = (Todo)list.get(i);
+                    fileWriter.write("T|" + (todo.isDone ? "1" : "0") + "|" + todo.getDescription() + "\n");
+                }
+                else if(list.get(i) instanceof Deadline){
+                    Deadline ddl = (Deadline)list.get(i);
+                    fileWriter.write("D|" + (ddl.isDone ? "1" : "0") + "|" + ddl.getDescription() +
+                            "|" + ddl.getBy() + "\n");
+                }
+                else{
+                    Event event = (Event)list.get(i);
+                    fileWriter.write("E|" + (event.isDone ? "1" : "0") + "|" + event.getDescription() +
+                            "|" + event.getAt() + "\n");
+                }
+            }
+            fileWriter.close();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<Task> readTextFile2List(BufferedReader reader) throws IOException {
+        ArrayList<Task> list = new ArrayList<>();
+        String line;
+        while((line = reader.readLine()) != null){
+            String[] part = line.split("\\|");
+            if(part[0].equals("T")){
+                list.add(new Todo(part[2], part[1].equals("1")));
+            }
+            else if(part[0].equals("D")){
+                list.add(new Deadline(part[2], part[3], part[1].equals("1")));
+            }
+            else{
+                list.add(new Event(part[2], part[3], part[1].equals("1")));
+            }
+        }
+        return list;
+    }
+
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -90,12 +133,23 @@ public class Duke {
                            "What can I do for you?" +
                            "\n____________________________________________________________");
 
+        ArrayList<Task> list;
+        File outputFile = new File("./data/duke.txt");
+        boolean dukeExist = false;
+        if(outputFile.exists()){
+            list = readTextFile2List(new BufferedReader(new FileReader("./data/duke.txt")));
+            dukeExist = true;
+        }
+        else{
+            list = new ArrayList<>();
+        }
+
         // add command entered by the user to the list
-        ArrayList<Task> list = new ArrayList<>();
         String inputCommand;
         String[] command;
         int ptr;
         Scanner sc = new Scanner(System.in);
+
         while(true){
             inputCommand = sc.nextLine();
             command = inputCommand.split(" ");
@@ -220,6 +274,12 @@ public class Duke {
                         "put the word \"todo\" or \"deadline\" or \"event\" in front of your description");
             }
         }
+
+        if(!dukeExist){
+            new File("./data").mkdir();
+        }
+        FileWriter fileWriter = new FileWriter("./data/duke.txt");
+        writeArrayList2file(list, fileWriter);
 
         System.out.println("____________________________________________________________\n" +
                            "Bye. Hope to see you again soon!" +
