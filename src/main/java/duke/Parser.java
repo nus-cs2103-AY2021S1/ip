@@ -2,6 +2,11 @@ package main.java.duke;
 
 public class Parser {
 
+    /**
+     * Returns a task object according to the type of Task added by the user
+     * @param input the string user input
+     * @return a task object according to the type of Task added by the user
+     */
     public Task handleInput(String input) {
         String[] commandComponents = input.split(" ", 2);
         String taskType = commandComponents[0];

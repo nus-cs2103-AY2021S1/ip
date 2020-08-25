@@ -6,18 +6,37 @@ public class TaskList {
 
     private ArrayList<Task> taskList = new ArrayList<>();
 
+    /**
+     * Create an isntance of TaskList which is a wrapper class for an ArrayList
+     * @param taskList
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
+    /**
+     * add a task to the list
+     * @param task to be added
+     * @return true if the task was successfully added, false otherwise
+     */
     public boolean addTask(Task task) {
         return this.taskList.add(task);
     }
 
+    /**
+     * returns the task removed
+     * @param taskIndex 0-indexed position of the task to be removed
+     * @return the task removed
+     */
     public Task removeTask(int taskIndex) {
         return this.taskList.remove(taskIndex);
     }
 
+    /**
+     * returns the task at the specified index parameter
+     * @param taskIndex 0-indexed position of the task to be retrieved without removing it.
+     * @return the task at the specified index parameter
+     */
     public Task getTask(int taskIndex) {
         return this.taskList.get(taskIndex);
     }

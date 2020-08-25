@@ -20,6 +20,10 @@ public class Deadline extends Task{
         return lc;
     }
 
+    /**
+     * Returns a formatted description of the Deadline task, with the date and time dateline wrapped in parenthesis
+     * @return a formatted description of the Deadline task, with the date and time dateline wrapped in parenthesis
+     */
     public String formattedDescription() {
         // an array where index 0 contains "deadline return book"
         // an array where index 1 contains "by 2019-10-15 1800"
@@ -48,6 +52,10 @@ public class Deadline extends Task{
 
     }
 
+    /**
+     * Returns a string representation of the Deadline object.
+     * @return a string representation of the Deadline object.
+     */
     public String toString() {
         return "[" + taskType + "]" + "[" + super.getStatusIcon()
                 + "] " + formattedDescription();

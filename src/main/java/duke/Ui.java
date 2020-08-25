@@ -10,11 +10,20 @@ public class Ui {
     private Storage storage = null;
     private Parser parser = new Parser();
 
+    /**
+     * Creates an instance of the Ui class
+     * @param taskList taskList object used to store tasks
+     * @param storage storage object used to read and write for the tasklist.txt file
+     */
     public Ui(TaskList taskList, Storage storage) {
         this.taskList = taskList;
         this.storage = storage;
     }
 
+    /**
+     * Prints the DukeException error message.
+     * @param errMsg
+     */
     public static void invalidInput(String errMsg) {
         DukeException exception = new DukeException(errMsg);
         System.out.println(exception.getMessage());
@@ -31,7 +40,9 @@ public class Ui {
     }
 
     /**
-     * Takes in user input via a Scanner and prints the respective results
+     * Takes in user input via a Scanner object. For commands bye, done and delete this
+     * method updates the TaskList object and writes the changes to the System via the Storage object.
+     * The inputting of new tasks is passed to the Parser object. Thereafter the application's responses are printed.
      */
     public void handleUserInput() {
         Scanner sc = new Scanner(System.in);
@@ -103,10 +114,5 @@ public class Ui {
         }
 
     }
-
-    public void printAllTasks(ArrayList<Task> taskList) {
-
-    }
-
 
 }

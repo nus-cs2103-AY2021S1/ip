@@ -19,8 +19,11 @@ public class Storage {
 
     private ArrayList<Task> startupTaskList = new ArrayList<>();
 
-    // FileReader and BufferedReaders are instantiated here, used across the main method
-    // FileWriter and BufferedWriters are appending writers, used for operations other than done and delete
+    /**
+     * Creates an instance of Storage and initializes File, Scanner, FileWriter, FileReader,
+     * BufferedWriter and BufferedReader, some of which are used to do appending operations on the tasklist.txt file
+     * @param filepath
+     */
     public Storage(String filepath) {
         // what about the IOException
         file = new File(filepath);

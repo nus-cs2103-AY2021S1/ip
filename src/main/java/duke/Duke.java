@@ -10,7 +10,7 @@ public class Duke {
 
     /**
      * Creates an instance of main.java.duke.Duke
-     * @param filepath the directory of main.java.duke.Duke application storage
+     * @param filepath the directory of the tasklist.txt file where tasks are stored
      */
     public Duke(String filepath) {
         storage = new Storage(filepath);
@@ -20,15 +20,13 @@ public class Duke {
     }
 
     /**
-     * Interacts with TaskList, Ui, Storage and Parser to facilitate the
-     * duke application
+     * Starts the user interface
      */
     public void run() {
         ui.handleUserInput();
     }
 
 
-    // Note that all the outputs are formatted with two spaces before.
     public static void main(String[] args) {
         String workingDir = System.getProperty("user.dir");
         Duke application = new Duke(workingDir + File.separator
