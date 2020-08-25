@@ -5,6 +5,11 @@ import viscount.task.Task;
 
 import java.util.List;
 
+/**
+ * Represents Viscount's task list.
+ * 
+ * Stores the task list and handles operations modifying it.
+ */
 public class TaskList {
     private List<Task> tasks;
     

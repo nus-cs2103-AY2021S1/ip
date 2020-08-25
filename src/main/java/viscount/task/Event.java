@@ -4,10 +4,16 @@ import viscount.Parser;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents an event, a type of task.
+ */
 public class Event extends Task {
     private static final String STRING_FORMAT = "[E][%s] %s (at: %s)";
     private static final String TASK_DATA_FORMAT = "%s|%d|%s|%s";
 
+    /**
+     * Events have an additional event time field.
+     */
     private LocalDateTime eventTime;
 
     public Event(String description, boolean isDone, LocalDateTime eventTime) {

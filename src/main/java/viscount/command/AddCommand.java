@@ -3,10 +3,12 @@ package viscount.command;
 import viscount.*;
 import viscount.exception.ViscountIOException;
 import viscount.task.*;
-import viscount.exception.ViscountException;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents an add command.
+ */
 public class AddCommand extends Command {
     private TaskType taskType;
     private String description;

@@ -2,6 +2,9 @@ package viscount.command;
 
 import viscount.*;
 
+/**
+ * Represents an exit command.
+ */
 public class ExitCommand extends Command {
 
     @Override

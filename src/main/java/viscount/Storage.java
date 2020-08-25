@@ -19,6 +19,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents Viscount's storage.
+ * 
+ * Handles loading tasks from data file and writing tasks to the file.
+ */
 public class Storage {
     private static final String DATA_FILE_NAME = "viscount.txt";
     

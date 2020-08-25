@@ -1,11 +1,13 @@
 package viscount.command;
 
 import viscount.*;
-import viscount.exception.ViscountException;
 import viscount.exception.ViscountIOException;
 import viscount.exception.ViscountIndexOutOfBoundsException;
 import viscount.task.Task;
 
+/**
+ * Represents a delete command.
+ */
 public class DeleteCommand extends Command {
     private int taskIndex;
 

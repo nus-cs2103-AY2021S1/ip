@@ -6,6 +6,11 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents Viscount's User Interface.
+ * 
+ * Handles interactions with the user.
+ */
 public class Ui {
     private static final String VISCOUNT_LOGO =
             "        _  _____  _____                  _    \n" + 

@@ -1,10 +1,12 @@
 package viscount.command;
 
 import viscount.*;
-import viscount.exception.ViscountException;
 import viscount.exception.ViscountIOException;
 import viscount.exception.ViscountIndexOutOfBoundsException;
 
+/**
+ * Represents a done command.
+ */
 public class DoneCommand extends Command {
     private int taskIndex;
     

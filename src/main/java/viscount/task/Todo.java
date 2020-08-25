@@ -2,6 +2,9 @@ package viscount.task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a todo, a type of task.
+ */
 public class Todo extends Task {
     private static final String STRING_FORMAT = "[T][%s] %s";
     private static final String TASK_DATA_FORMAT = "%s|%d|%s";

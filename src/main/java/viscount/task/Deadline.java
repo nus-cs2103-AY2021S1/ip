@@ -4,10 +4,16 @@ import viscount.Parser;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a deadline, a type of task.
+ */
 public class Deadline extends Task {
     private static final String STRING_FORMAT = "[D][%s] %s (by: %s)";
     private static final String TASK_DATA_FORMAT = "%s|%d|%s|%s";
 
+    /**
+     * Deadlines have an additional due date field.
+     */
     private LocalDateTime dueDate;
 
     public Deadline(String description, boolean isDone, LocalDateTime dueDate) {

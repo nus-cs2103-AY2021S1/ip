@@ -21,6 +21,11 @@ import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represent's Viscount's parser.
+ * 
+ * Handles making sense of the user's input commands.
+ */
 public class Parser {
     public static final DateTimeFormatter INPUT_DATE_TIME_FORMATTER = 
             DateTimeFormatter.ofPattern("dd-MM-yyyy[ HHmm]");
