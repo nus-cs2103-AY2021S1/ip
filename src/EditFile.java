@@ -1,9 +1,9 @@
 import java.io.*;
 
-public class EditiFile {
+public class EditFile {
     private String path;
 
-    public EditiFile(String path) {
+    public EditFile(String path) {
         this.path = path;
     }
 

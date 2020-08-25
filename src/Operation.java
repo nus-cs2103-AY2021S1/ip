@@ -39,8 +39,8 @@ public class Operation {
             } else {
                 Task task = memory.getMemory().get(num - 1);
                 task.setDone();
-                EditiFile editiFile = new EditiFile(Directory.FILEDIRECTORY.toString());
-                editiFile.setTaskDone(num);
+                EditFile editFile = new EditFile(Directory.FILEDIRECTORY.toString());
+                editFile.setTaskDone(num);
 
                 System.out.println(
                         new Formating<>(new Echo(Status.DONE.toString() + task)));
@@ -61,8 +61,8 @@ public class Operation {
 
                 Task task = memory.getMemory().get(num - 1);
                 memory.getMemory().remove(num - 1);
-                EditiFile editiFile = new EditiFile(Directory.FILEDIRECTORY.toString());
-                editiFile.deleteLine(num);
+                EditFile editFile = new EditFile(Directory.FILEDIRECTORY.toString());
+                editFile.deleteLine(num);
 
                 String response =
                         Status.DELETE.toString() +
