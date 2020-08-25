@@ -1,5 +1,3 @@
-package duke.tasks;
-
 public class Deadline extends Task {
     private static final String DELIMITER = "by";
     private String dateString = "";

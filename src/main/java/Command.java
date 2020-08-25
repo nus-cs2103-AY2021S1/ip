@@ -1,9 +1,7 @@
-package duke.tasks;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public enum CommandWords {
+public enum Command {
     LIST_MODE("list"),
     ECHO_MODE("echo"),
     TODO_CMD("todo"),
@@ -17,29 +15,29 @@ public enum CommandWords {
     
     
     private String cmd;
-    private static Map<String, CommandWords> keyableMap;
+    private static Map<String, Command> keyableMap;
     
-    CommandWords() {
+    Command() {
     } // constructor for INVALID
     
-    CommandWords(String cmd) {
+    Command(String cmd) {
         this.cmd = cmd;
     }
     
     // init for the enums class: fills in the hashmap of message-label pairs
     static {
-        Map<String, CommandWords> commandLabelMap = new HashMap<>();
-        for (CommandWords c : CommandWords.values()) {
+        Map<String, Command> commandLabelMap = new HashMap<>();
+        for (Command c : Command.values()) {
             commandLabelMap.put(c.getCmd(), c);
         }
-        CommandWords.keyableMap = commandLabelMap;
+        Command.keyableMap = commandLabelMap;
     }
     
     public String getCmd() {
         return this.cmd;
     }
     
-    public static String getTag(CommandWords c) {
+    public static String getTag(Command c) {
         switch (c.getCmd().charAt(0)) {
         case 'e':
             return "E";
@@ -58,8 +56,8 @@ public enum CommandWords {
         
     }
     
-    public static CommandWords getLabel(String msg) {
-        return keyableMap.getOrDefault(msg, CommandWords.INVALID);
+    public static Command getLabel(String msg) {
+        return keyableMap.getOrDefault(msg, Command.INVALID);
     }
     
 }

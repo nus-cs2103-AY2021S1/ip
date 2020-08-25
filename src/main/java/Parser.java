@@ -1,9 +1,3 @@
-package duke.parser;
-
-import duke.exception.DukeException;
-import duke.tasks.CommandWords;
-import duke.ui.Message;
-
 import java.util.StringTokenizer;
 
 public class Parser {
@@ -19,12 +13,12 @@ public class Parser {
         String[] words = input.split(" ");
         String command = words[0].toLowerCase().trim();
         
-        if (input.equals(CommandWords.EXIT_CMD.getCmd())) {
+        if (input.equals(Command.EXIT_CMD.getCmd())) {
             return new String[]{command};
-        } else if (input.equals(CommandWords.LIST_CMD.getCmd())) {
+        } else if (input.equals(Command.LIST_CMD.getCmd())) {
             return new String[]{command};
-        } else if (command.equals(CommandWords.DONE_CMD.getCmd())
-                || command.equals(CommandWords.DELETE_CMD.getCmd())) {
+        } else if (command.equals(Command.DONE_CMD.getCmd())
+                || command.equals(Command.DELETE_CMD.getCmd())) {
             return parseDoneDelete(input);
         } else {
             switch (command) {
@@ -41,11 +35,11 @@ public class Parser {
     }
     
     private String[] parseDoneDelete(String input) throws DukeException {
-        StringTokenizer tokenizer = new StringTokenizer(input);
-        if (tokenizer.countTokens() != 2) {
+        StringTokenizer st = new StringTokenizer(input);
+        if (st.countTokens() != 2) {
             throw new DukeException(Message.ERROR_DONEDELETE_ARGS.getMsg());
         }
-        String command = tokenizer.nextToken(), taskID = tokenizer.nextToken();
+        String command = st.nextToken(), taskID = st.nextToken();
         if (!isInteger(taskID)) {
             throw new DukeException(Message.ERROR_DONEDELETE_NOTINT.getMsg());
         }
@@ -53,14 +47,14 @@ public class Parser {
     }
     
     private String[] parseToDo(String input) throws DukeException {
-        StringTokenizer tokenizer = new StringTokenizer(input);
-        tokenizer.nextToken();
-        if (!tokenizer.hasMoreTokens()) {
+        StringTokenizer st = new StringTokenizer(input);
+        st.nextToken();
+        if (!st.hasMoreTokens()) {
             throw new DukeException(Message.ERROR_TODO_DESC.getMsg());
         }
         StringBuilder description = new StringBuilder();
-        while (tokenizer.hasMoreTokens()) {
-            description.append(tokenizer.nextToken()).append(" ");
+        while (st.hasMoreTokens()) {
+            description.append(st.nextToken()).append(" ");
         }
         return new String[]{"T", description.toString().stripTrailing()};
     }
