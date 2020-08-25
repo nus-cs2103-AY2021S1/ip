@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public abstract class Task {
 
     final String taskData;
-    boolean isDone = false;
+    private boolean isDone = false;
 
     Task(String taskData) {
         this.taskData = taskData;

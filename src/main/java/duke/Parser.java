@@ -1,6 +1,16 @@
 package duke;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.CommandType;
+import duke.command.DateCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
 
 public class Parser {
     
@@ -35,7 +45,5 @@ public class Parser {
         case INVALID: default:
             return new InvalidCommand();
         }
-        
     }
-    
 }
