@@ -42,7 +42,7 @@ public class Duke {
                     ui.showListTasks(tasks.getAllTasks());
                     break;
                 case "print":
-                    ui.showSameDateTasks(tasks.getSameDateTasks(processedCommand[1]));
+                    ui.showRequiredTasks(tasks.getSameDateTasks(processedCommand[1]));
                     break;
                 case "done":
                     Task doneTask = tasks.markDone(Integer.parseInt(processedCommand[1]));
@@ -72,6 +72,8 @@ public class Duke {
                     tasks.addTask(eventTsk);
                     ui.showAddTask(eventTsk);
                     break;
+                case "find":
+                    ui.showRequiredTasks(tasks.getTasksWithKeyWord(processedCommand[1]));
                 }
                 ui.showTotalTasks(tasks.getNumTasks());
                 storage.updateFile(tasks.toString()); //reload the file

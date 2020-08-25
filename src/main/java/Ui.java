@@ -61,9 +61,14 @@ public class Ui {
      * when user calls for 'print /date'.
      * @param taskList The list of tasks with same date.
      */
-    public void showSameDateTasks(List<Task> taskList){
-        for (Task tsk : taskList) {
-            System.out.println(tsk);
+    public void showRequiredTasks(List<Task> taskList) {
+        if (taskList.size() > 0) {
+            System.out.println("I how smart...I have matched your queries as below:");
+            for (Task tsk : taskList) {
+                System.out.println(tsk);
+            }
+        } else {
+            System.out.println("Wah cannot find any matching tasks leh...");
         }
     }
 
