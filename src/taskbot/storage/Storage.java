@@ -9,11 +9,18 @@ import java.nio.file.Paths;
 
 import taskbot.task.*;
 
+/**
+ * The database to store user tasks.
+ */
 public class Storage {
+    /** Stores the loaded list of tasks */
     private ArrayList<Task> tasks;
+    /** The directory path to retrieve the tasks from */
     private String dirPath;
     /**
-     * Creates a new Storage
+     * Creates a new Storage.
+     *
+     * @param dirPath The directory path.
      */
     public Storage(String dirPath) {
         tasks = new ArrayList<>();
@@ -27,12 +34,22 @@ public class Storage {
         loadTasks();
     }
 
+    /**
+     * @return The list of tasks.
+     */
     public ArrayList<Task> getTasksList() {
         return tasks;
     }
 
+    /**
+     * Saves the task list to list.
+     *
+     * @param tasks The list to update the disk with.
+     */
     public void setTasksList(ArrayList<Task> tasks) {
+        //Sets the local tasks list
         this.tasks = tasks;
+        //Saves the list to disk
         saveTasks();
     }
 
@@ -40,8 +57,8 @@ public class Storage {
      * Creates directory and file for task storage.
      * If directory and file already exists, this method
      * does nothing.
+     *
      * @return Message describing outcome.
-     * @throws IOException Thrown if file creation fails
      */
     private String createStorage() {
         //Create directory and file paths for storage
@@ -73,7 +90,7 @@ public class Storage {
     }
 
     /**
-     * Loads tasks from the database
+     * Loads tasks from the database.
      */
     private void loadTasks() {
         try {
@@ -128,7 +145,7 @@ public class Storage {
     }
 
     /**
-     * Writes the tasks to the database
+     * Writes the tasks to the database.
      */
     private void saveTasks() {
         //Makes new file instance
@@ -136,6 +153,8 @@ public class Storage {
         try {
             FileWriter fileWriter = new FileWriter(filePath.toString());
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            //Parses the tasks and writes them to disk in readable format
             for (Task task : tasks) {
                 if (task instanceof Todo) {
                     bufferedWriter.write("todo");

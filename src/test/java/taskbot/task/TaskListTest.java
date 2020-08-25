@@ -16,6 +16,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Tests the methods of the TaskList class.
+ */
 public class TaskListTest {
     private TaskList taskList;
     private ArrayList<Task> tasks;

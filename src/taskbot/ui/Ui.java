@@ -2,6 +2,9 @@ package taskbot.ui;
 
 import java.util.Scanner;
 
+/**
+ * Handles user input and interactions.
+ */
 public class Ui {
     private final String logo =
             "___________              __   __________        __   \n" +
@@ -21,28 +24,29 @@ public class Ui {
     }
 
     /**
-     * Prints out the title using the given logo
+     * Prints the title to the console.
      */
     public void printTitle() {
         System.out.println(logo);
     }
 
     /**
-     * Method invoked to greet the user
+     * Prints the greeting to the console.
      */
     public void greet() {
         System.out.printf("Hello there, my name is %s.\nHow may I be of assistance today?\n", name);
     }
 
     /**
-     * Method invoked to say goodbye to the user
+     * Prints a farewell message to the console.
      */
     public void sayBye() {
         System.out.println("Goodbye, I await your next visit.");
     }
 
     /**
-     * Prints the error message to console
+     * Prints the error message to console.
+     *
      * @param err The error message
      */
     public void showError(String err) {
@@ -50,7 +54,7 @@ public class Ui {
     }
 
     /**
-     * Prints a line to console.
+     * Prints a line separator to console.
      */
     public void showLine() {
         System.out.println("----------------------------------------------");
@@ -58,6 +62,7 @@ public class Ui {
 
     /**
      * Accepts user input.
+     *
      * @return The user input as a string, empty if no input.
      */
     public String readCommand() {

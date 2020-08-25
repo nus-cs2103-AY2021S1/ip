@@ -13,14 +13,21 @@ import taskbot.command.ExitCommand;
 import taskbot.exceptions.EmptyArgumentException;
 import taskbot.exceptions.InvalidCommandException;
 
+/**
+ * Parses the user input to give appropriate commands.
+ */
 public class Parser {
     /**
      * Determines the correct command to be used.
+     *
      * @param command The string to be parsed.
      * @return The command corresponding to the string.
      */
     public static Command parse(String command) throws InvalidCommandException, EmptyArgumentException {
+        /*Separates the command into the command keyword
+          and the required arguments. */
         String[] commandArgs = command.split(" ", 2);
+
         switch (commandArgs[0]) {
         case "todo":
             if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {

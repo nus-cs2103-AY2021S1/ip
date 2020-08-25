@@ -3,21 +3,27 @@ package taskbot.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Creates a task which must be completed
+ * by a specified time.
+ */
 public class Deadline extends TimedTask {
     /**
-     * Creates an incomplete deadline task
-     * @param task Description of task
-     * @param by Time to complete by
+     * Creates a deadline task.
+     *
+     * @param task Description of task.
+     * @param by Time to complete by.
      */
     public Deadline(String task, LocalDateTime by) {
         super(task, by);
     }
 
     /**
-<<<<<<< HEAD
-     * Creates a deadline task
-     * @param task Description of task
-     * @param by Time to complete by
+     * Creates a deadline task.
+     *
+     * @param task Description of task.
+     * @param by Time to complete by.
+     * @param isDone Whether the task is complete.
      */
     public Deadline(String task, LocalDateTime by, boolean isDone) {
         super(task, by, isDone);
@@ -25,6 +31,7 @@ public class Deadline extends TimedTask {
 
     /**
      * Gets the time of the deadline.
+     *
      * @return The time of the deadline.
      */
     public LocalDateTime getBy() {
