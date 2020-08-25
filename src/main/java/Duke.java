@@ -1,7 +1,11 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Duke {
     private static final String HORIZONTAL_LINE =
@@ -13,30 +17,82 @@ public class Duke {
     private static final String ERROR_PREFIX = "\t\u2639" + " OOPS!!! ";
     private static final String CURRENT_TASKS = "\tNow you have %d task(s) in the list.";
     private static final String INVALID_TASK = ERROR_PREFIX + "Sorry, that is not a valid task.";
+    private static final String ADD_TASK = "\tGot it. I've added this task:";
     private static final ArrayList<Task> list = new ArrayList<>();
+
+    private static File createTaskFile() {
+        File folder = new File("../data");
+        try {
+            if (!folder.exists()) {
+                folder.mkdir();
+            }
+            File taskFile = new File("../data/Duke.txt");
+            if (!taskFile.exists()) {
+                taskFile.createNewFile();
+            }
+            return taskFile;
+        } catch (IOException e) {
+            System.out.println("Error in getting file");
+            return null;
+        }
+    }
 
     private static void updateList(String userInput) {
         Scanner inputScanner = new Scanner(userInput);
         String command = inputScanner.next();
 
+        try {
+            Files.copy(Paths.get("../data/Duke.txt"), Paths.get("../data/temp.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        File copy = new File("../data/temp.txt");
+
         switch (command.toLowerCase()) {
         case "done":
-            int index = inputScanner.nextInt();
+            int index = inputScanner.nextInt() - 1;
             try {
-                Task task = list.get(index - 1);
+                FileWriter fw = new FileWriter("../data/Duke.txt");
+                Scanner taskScanner = new Scanner(copy);
+                Task task = list.get(index);
                 task.markAsDone();
                 System.out.println("\tNice! I've marked this as done:");
                 System.out.println("\t  " + task.toString());
+                for (int i = 0; i < list.size(); i++) {
+                    if (i == index) {
+                        fw.write(task.toFileString() + System.lineSeparator());
+                    } else {
+                        fw.write(taskScanner.nextLine() + System.lineSeparator());
+                    }
+                }
+                fw.close();
+                taskScanner.close();
+                Files.delete(Paths.get("../data/temp.txt"));
+            } catch (IOException e) {
+                System.out.println("Encountered an unexpected error with the file :(");
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(INVALID_TASK);
             }
             break;
         case "delete":
-            index = inputScanner.nextInt();
+            index = inputScanner.nextInt() - 1;
             try {
+                FileWriter fw = new FileWriter("../data/Duke.txt");
+                Scanner taskScanner = new Scanner(copy);
                 System.out.println("\tNoted. I've removed this task:");
-                System.out.println("\t" + list.remove(index - 1).toString());
+                Task task = list.remove(index);
+                System.out.println("\t" + task.toString());
                 System.out.println(String.format(CURRENT_TASKS, list.size()));
+                for (int i = 0; i < list.size(); i++) {
+                    if (i != index) {
+                        fw.write(taskScanner.nextLine() + System.lineSeparator());
+                    }
+                }
+                fw.close();
+                taskScanner.close();
+                Files.delete(Paths.get("../data/temp.txt"));
+            } catch (IOException e) {
+                System.out.println("Encountered an unexpected error with the file :(");
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(INVALID_TASK);
             }
@@ -46,11 +102,19 @@ public class Duke {
                 System.out.println(ERROR_PREFIX
                         + "The description of a todo cannot be empty.");
             } else {
-                System.out.println("\tGot it. I've added this task:");
-                ToDo todo = new ToDo(inputScanner.nextLine());
-                list.add(todo);
-                System.out.println("\t  " + todo.toString());
-                System.out.println(String.format(CURRENT_TASKS, list.size()));
+                try {
+                    FileWriter fw = new FileWriter("../data/Duke.txt", true);
+                    System.out.println(ADD_TASK);
+                    ToDo todo = new ToDo(inputScanner.nextLine());
+                    list.add(todo);
+                    System.out.println("\t  " + todo.toString());
+                    System.out.println(String.format(CURRENT_TASKS, list.size()));
+                    fw.write(todo.toFileString() + System.lineSeparator());
+                    fw.close();
+                    Files.delete(Paths.get("../data/temp.txt"));
+                } catch (IOException e) {
+                    System.out.println("Encountered an unexpected error with the file :(");
+                }
             }
             break;
         case "deadline":
@@ -58,16 +122,24 @@ public class Duke {
                 System.out.println(ERROR_PREFIX
                         + "The description of a deadline cannot be empty.");
             } else {
-                System.out.println("\tGot it. I've added this task:");
-                inputScanner.useDelimiter("( /by )");
-                String description = inputScanner.next();
-                inputScanner.reset();
-                inputScanner.next();
-                String by = inputScanner.nextLine().trim();
-                Deadline deadline = new Deadline(description, by);
-                list.add(deadline);
-                System.out.println("\t  " + deadline.toString());
-                System.out.println(String.format(CURRENT_TASKS, list.size()));
+                try {
+                    FileWriter fw = new FileWriter("../data/Duke.txt", true);
+                    System.out.println(ADD_TASK);
+                    inputScanner.useDelimiter("( /by )");
+                    String description = inputScanner.next();
+                    inputScanner.reset();
+                    inputScanner.next();
+                    String by = inputScanner.nextLine().trim();
+                    Deadline deadline = new Deadline(description, by);
+                    list.add(deadline);
+                    System.out.println("\t  " + deadline.toString());
+                    System.out.println(String.format(CURRENT_TASKS, list.size()));
+                    fw.write(deadline.toFileString() + System.lineSeparator());
+                    fw.close();
+                    Files.delete(Paths.get("../data/temp.txt"));
+                } catch (IOException e) {
+                    System.out.println("Encountered an unexpected error with the file :(");
+                }
             }
             break;
         case "event":
@@ -75,16 +147,24 @@ public class Duke {
                 System.out.println(ERROR_PREFIX
                         + "The description of an event cannot be empty.");
             } else {
-                System.out.println("\tGot it. I've added this task:");
-                inputScanner.useDelimiter("( /at )");
-                String description = inputScanner.next();
-                inputScanner.reset();
-                inputScanner.next();
-                String at = inputScanner.nextLine().trim();
-                Event event = new Event(description, at);
-                list.add(event);
-                System.out.println("\t  " + event.toString());
-                System.out.println(String.format(CURRENT_TASKS, list.size()));
+                try {
+                    FileWriter fw = new FileWriter("../data/Duke.txt", true);
+                    System.out.println(ADD_TASK);
+                    inputScanner.useDelimiter("( /at )");
+                    String description = inputScanner.next();
+                    inputScanner.reset();
+                    inputScanner.next();
+                    String at = inputScanner.nextLine().trim();
+                    Event event = new Event(description, at);
+                    list.add(event);
+                    System.out.println("\t  " + event.toString());
+                    System.out.println(String.format(CURRENT_TASKS, list.size()));
+                    fw.write(event.toFileString() + System.lineSeparator());
+                    fw.close();
+                    Files.delete(Paths.get("../data/temp.txt"));
+                } catch (IOException e) {
+                    System.out.println("Encountered an unexpected error with the file :(");
+                }
             }
             break;
         default:
@@ -96,6 +176,7 @@ public class Duke {
 
     public static void main(String[] args) {
         System.out.println(STANDARD_GREETING);
+        createTaskFile();
 
         Scanner scanner = new Scanner(System.in);
 
