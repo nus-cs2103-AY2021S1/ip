@@ -35,17 +35,22 @@ public class Deadline extends Task {
     }
     
     public void setDateTime(String dateString) throws DukeException {
-        dateString = dateString.strip();
-        String[] dateTimeSeparated = dateString.split(" ");
-        String date = dateTimeSeparated[0];
-        String time = dateTimeSeparated[1];
-        
-        DateTimeFormatter chosenDateFormatter = chooseDateFormatter(date);
-        DateTimeFormatter chosenTimeFormatter = chooseTimeFormatter(time);
-        LocalDate localDate = LocalDate.parse(date, chosenDateFormatter);
-        LocalTime localTime = LocalTime.parse(time, chosenTimeFormatter);
-        this.date = localDate;
-        this.time = localTime;
+        try {
+            dateString = dateString.strip();
+            String[] dateTimeSeparated = dateString.split(" ");
+            String date = dateTimeSeparated[0];
+            String time = dateTimeSeparated[1];
+            
+            DateTimeFormatter chosenDateFormatter = chooseDateFormatter(date);
+            DateTimeFormatter chosenTimeFormatter = chooseTimeFormatter(time);
+            LocalDate localDate = LocalDate.parse(date, chosenDateFormatter);
+            LocalTime localTime = LocalTime.parse(time, chosenTimeFormatter);
+            this.date = localDate;
+            this.time = localTime;
+        } catch (Exception e) {
+            throw new DukeException("what kinda date/time is that");
+            // todo: send this throwing of exception to the parser
+        }
     }
     
     private DateTimeFormatter chooseDateFormatter(String date) throws DukeException {

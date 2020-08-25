@@ -24,5 +24,6 @@ event /at 2-4pm
 delete 7
 deadline burn book /by 2/12/2019 1800
 deadline shred book /by 2020/12/2 2359
+deadline burn house /by 235262346
 list
 bye

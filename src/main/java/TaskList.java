@@ -9,9 +9,8 @@ public class TaskList implements Serializable {
     }
     
     // side effect: create & add task + return response
-    protected String addEntry(String[] parsedOutput) throws DukeException {
-        String command = parsedOutput[0];
-        switch (command) {
+    protected String addEntry(String[] parsedOutput, String commandTag) throws DukeException {
+        switch (commandTag) {
         case "T":
             ToDo newToDo = new ToDo(parsedOutput[1]);
             this.taskList.add(newToDo);
