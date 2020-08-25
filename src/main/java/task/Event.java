@@ -1,6 +1,7 @@
 package task;
 
 import java.time.LocalDate;
+
 import utility.DateParser;
 
 public class Event extends Task {
@@ -12,8 +13,7 @@ public class Event extends Task {
         this.eventTime = eventTime;
         try {
             date = LocalDate.parse(eventTime);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             date = null;
         }
     }

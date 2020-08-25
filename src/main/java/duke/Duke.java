@@ -19,15 +19,14 @@ public class Duke {
             if (command.isExit()) {
                 Ui.exit();
                 exit = true;
-            }
-            else {
+            } else {
                 command.execute();
                 line = scanner.nextLine();
             }
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         response();
     }
 }

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    private final static String filePath = "list.txt";
+    private final static String FILE_PATH = "list.txt";
 
     private static String convertToText(TaskType type, int done, String name, String time) {
         String t = type == TaskType.DEADLINE ? "D"
@@ -32,49 +32,45 @@ public class Storage {
                     todo.setDone();
                 }
                 return todo;
-            }
-            else if (ans[0].equals("D")) {
+            } else if (ans[0].equals("D")) {
                 Deadline deadline = new Deadline(ans[2], ans[3]);
                 if (ans[1].equals("1")) {
                     deadline.setDone();
                 }
                 return deadline;
-            }
-            else {
+            } else {
                 Event event = new Event(ans[2], ans[3]);
                 if (ans[1].equals("1")) {
                     event.setDone();
                 }
                 return event;
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw e;
         }
     }
 
     public static void createListFile() throws IOException {
-        Files.createFile(Paths.get(filePath));
+        Files.createFile(Paths.get(FILE_PATH));
     }
 
     public static void addToList(TaskType type, int done, String name, String time) throws IOException {
         try {
-            File file = new File(filePath);
+            File file = new File(FILE_PATH);
             if (!file.exists()) {
                 createListFile();
             }
-            FileWriter fw = new FileWriter(filePath, true);
+            FileWriter fw = new FileWriter(FILE_PATH, true);
             fw.write(convertToText(type, done, name, time));
             fw.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new IOException("File access failed");
         }
     }
 
     public static List<Task> readList() throws IOException {
         try {
-            File file = new File(filePath);
+            File file = new File(FILE_PATH);
             List<Task> list = new ArrayList<>();
             if (!file.exists()) {
                 createListFile();
@@ -88,15 +84,14 @@ public class Storage {
                 s.close();
                 return list;
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new IOException("File access failed");
         }
     }
 
     public static void setDone(int index) throws IOException {
-        try{
-            File file = new File(filePath);
+        try {
+            File file = new File(FILE_PATH);
             Scanner s = new Scanner(file);
             StringBuilder content = new StringBuilder();
             int count = 0;
@@ -108,17 +103,17 @@ public class Storage {
                 content.append(text).append(System.lineSeparator());
                 count++;
             }
-            FileWriter fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(FILE_PATH);
             fw.write(content.toString());
             fw.close();
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             throw new IOException("File access failed");
         }
     }
+
     public static void delete(int index) throws IOException {
-        try{
-            File file = new File(filePath);
+        try {
+            File file = new File(FILE_PATH);
             Scanner s = new Scanner(file);
             StringBuilder content = new StringBuilder();
             int count = 0;
@@ -129,11 +124,10 @@ public class Storage {
                 }
                 count++;
             }
-            FileWriter fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(FILE_PATH);
             fw.write(content.toString());
             fw.close();
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             throw new IOException("File access failed");
         }
     }

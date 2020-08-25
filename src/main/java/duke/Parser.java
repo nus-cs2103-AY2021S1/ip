@@ -24,19 +24,16 @@ public class Parser {
 
     public static TaskType taskType(String line) throws InvalidParameterException {
         if (line.length() > 8
-            && line.substring(0, 8).equals("deadline")
-            && line.contains(" /by ")) {
+                && line.substring(0, 8).equals("deadline")
+                && line.contains(" /by ")) {
             return TaskType.DEADLINE;
-        }
-        else if (line.length() > 5
+        } else if (line.length() > 5
                 && line.substring(0, 5).equals("event")
                 && line.contains(" /at ")) {
             return TaskType.EVENT;
-        }
-        else if (line.length() > 4 && line.substring(0, 4).equals("todo")) {
+        } else if (line.length() > 4 && line.substring(0, 4).equals("todo")) {
             return TaskType.TODO;
-        }
-        else throw new InvalidParameterException("Invalid input");
+        } else throw new InvalidParameterException("Invalid input");
     }
 
     public static String getName(String line) throws NullPointerException, InvalidParameterException {
@@ -49,25 +46,22 @@ public class Parser {
             } else {
                 name = line.split(" /at ")[0].substring(6);
             }
-        }
-        catch (InvalidParameterException e) {
+        } catch (InvalidParameterException e) {
             throw new InvalidParameterException("Invalid parameters");
         }
         if (name.isEmpty()) {
             throw new NullPointerException("Null Object");
-        }
-        else return name;
+        } else return name;
     }
 
-    public static String getTime(String line) throws ArrayIndexOutOfBoundsException{
+    public static String getTime(String line) throws ArrayIndexOutOfBoundsException {
         try {
             if (taskType(line) == TaskType.DEADLINE) {
                 return line.split(" /by ")[1];
             } else {
                 return line.split(" /at ")[1];
             }
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw e;
         }
     }

@@ -1,6 +1,7 @@
 package task;
 
 import java.time.LocalDate;
+
 import utility.DateParser;
 
 public class Deadline extends Task {
@@ -12,8 +13,7 @@ public class Deadline extends Task {
         this.ddl = ddl;
         try {
             date = LocalDate.parse(ddl);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             date = null;
         }
     }

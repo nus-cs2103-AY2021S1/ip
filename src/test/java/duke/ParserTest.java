@@ -25,8 +25,7 @@ public class ParserTest {
         try {
             assertEquals(TaskType.DEADLINE, Parser.taskType("deadline b Monday"));
             fail();
-        }
-        catch (InvalidParameterException e) {
+        } catch (InvalidParameterException e) {
             assertEquals("Invalid input", e.getMessage());
         }
     }

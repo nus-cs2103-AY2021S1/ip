@@ -20,51 +20,40 @@ public class Command {
         if (Parser.isList(line)) {
             try {
                 TaskList.printList();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 Ui.fileError();
             }
-        }
-        else if (Parser.isDone(line)) {
+        } else if (Parser.isDone(line)) {
             try {
                 int index = Integer.parseInt(line.substring(5));
                 TaskList.setDone(index);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 Ui.fileError();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Ui.commandError();
             }
-        }
-        else if (Parser.isDelete(line)) {
+        } else if (Parser.isDelete(line)) {
             try {
                 int index = Integer.parseInt(line.substring(7));
                 TaskList.delete(index);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 Ui.fileError();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Ui.commandError();
             }
-        }
-        else {
+        } else {
             try {
                 TaskType type = Parser.taskType(line);
                 if (type == TaskType.TODO) {
                     TaskList.add(type, Parser.getName(line));
-                }
-                else {
+                } else {
                     TaskList.add(type, Parser.getName(line), Parser.getTime(line));
                 }
-            }
-            catch (NullPointerException
+            } catch (NullPointerException
                     | ArrayIndexOutOfBoundsException
                     | InvalidParameterException e) {
                 Ui.commandError();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 Ui.fileError();
             }
         }
