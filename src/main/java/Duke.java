@@ -1,9 +1,14 @@
+import java.io.*;
+import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
     public static String line = "____________________________________________________________";
-    public static ArrayList<Task> list = new ArrayList<>();
+    public static List<Task> list = new ArrayList<>();
+    public static String home = System.getProperty("user.home");
+    public static java.nio.file.Path path = java.nio.file.Paths.get(home, "ip", "duke.txt");
+    public static Storage storage = new Storage();
 
     public static void start() {
          String logo = " ____        _        \n"
@@ -65,7 +70,7 @@ public class Duke {
             throw new IncompleteInputException();
         } else {
             String s = input.substring(5);
-            Todo todo = new Todo(s);
+            Todo todo = new Todo(s, false);
             list.add(todo);
             System.out.println("I've added this task:\n");
             System.out.println(todo.toString());
@@ -79,7 +84,7 @@ public class Duke {
         } else {
             String task = input.substring(6, input.indexOf('/') - 1);
             String date = input.substring(input.lastIndexOf("at") + 3);
-            Event event = new Event(task, date);
+            Event event = new Event(task, date, false);
             list.add(event);
             System.out.println("I've added this task:\n");
             System.out.println(event.toString());
@@ -93,7 +98,7 @@ public class Duke {
         } else {
             String task = input.substring(9, input.indexOf('/') - 1);
             String date = input.substring(input.lastIndexOf("by") + 3);
-            Deadline deadline = new Deadline(task, date);
+            Deadline deadline = new Deadline(task, date, false);
             list.add(deadline);
             System.out.println("I've added this task:\n");
             System.out.println(deadline.toString());
@@ -106,49 +111,57 @@ public class Duke {
         start();
 
         // Take in inputs
+        Storage storage = new Storage();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        while (!input.equals("bye")) {
-            try {
-                System.out.println(line);
+        try {
+            list = storage.readData();
 
-                // Show list
-                if (input.equals("list")) {
-                    list();
+            while (!input.equals("bye")) {
+                try {
+                    System.out.println(line);
 
-                    // Add task
-                } else if (input.contains("todo")) {
-                    todo(input);
+                    // Show list
+                    if (input.equals("list")) {
+                        list();
 
-                    // Add event
-                } else if (input.contains("event")) {
-                    event(input);
+                        // Add task
+                    } else if (input.contains("todo")) {
+                        todo(input);
 
-                    // Add deadline
-                } else if (input.contains("deadline")) {
-                    deadline(input);
+                        // Add event
+                    } else if (input.contains("event")) {
+                        event(input);
 
-                    // Complete task
-                } else if (input.contains("done")) {
-                    done(input);
+                        // Add deadline
+                    } else if (input.contains("deadline")) {
+                        deadline(input);
 
-                    // Delete task
-                } else if (input.contains("delete")) {
-                    delete(input);
+                        // Complete task
+                    } else if (input.contains("done")) {
+                        done(input);
 
-                } else {
-                    throw new WrongCommandException();
+                        // Delete task
+                    } else if (input.contains("delete")) {
+                        delete(input);
+
+                    } else {
+                        throw new WrongCommandException();
+                    }
+
+                    storage.addData(list);
+                    System.out.println(line);
+                    input = sc.nextLine();
+
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                    System.out.println(line);
+                    input = sc.nextLine();
                 }
-
-                System.out.println(line);
-                input = sc.nextLine();
-
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-                System.out.println(line);
-                input = sc.nextLine();
             }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
 
         // End

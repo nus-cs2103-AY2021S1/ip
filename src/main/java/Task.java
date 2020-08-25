@@ -2,9 +2,9 @@ public class Task {
     String task;
     boolean isCompleted;
 
-    public Task(String task) {
+    public Task(String task, boolean isCompleted) {
         this.task = task;
-        isCompleted = false;
+        this.isCompleted = isCompleted;
     }
 
     void completed() {

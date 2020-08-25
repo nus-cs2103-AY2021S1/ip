@@ -6,3 +6,4 @@
 ../src/main/java/Deadline.java
 ../src/main/java/IncompleteInputException.java
 ../src/main/java/DukeException.java
+../src/main/java/Todo.java
