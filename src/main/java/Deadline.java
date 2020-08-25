@@ -14,8 +14,8 @@ public class Deadline extends Task {
     @Override
     public Task fromString(String taskString) {
         boolean isDone = taskString.split(" ")[0].equals("[Done]");
-        String description = taskString.split(" ")[2].split("\\s(by:\\s)")[0];
-        String by = taskString.split(" ")[2].split("\\s(by:\\s)")[1];
+        String description = taskString.split(" ")[2].split("\\s[(]by:\\s")[0];
+        String by = taskString.split(" ")[2].split("\\s[(]by:\\s")[1];
         Deadline d = new Deadline(description, by);
         if (isDone) {
             d.setDone();
