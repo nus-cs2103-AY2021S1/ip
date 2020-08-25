@@ -30,7 +30,7 @@ public class DeadlineTest {
      * Tests to see if the Deadline class correctly rejects invalid String inputs.
      */
     @Test
-    public void createDeadline_invalidStrings_fail() {
+    public void createDeadline_invalidStrings_errorThrown() {
         try {
             String input1 = "meeting /by abcde";
             new Deadline(input1);

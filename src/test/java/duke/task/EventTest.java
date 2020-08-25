@@ -33,7 +33,7 @@ public class EventTest {
      * Tests to see if the Event correctly rejects invalid String inputs.
      */
     @Test
-    public void createEvent_invalidStrings_fail() {
+    public void createEvent_invalidStrings_errorThrown() {
         try {
             String input1 = "meeting /at 21-09-2020 0800-20-09-2020 0800"; //End timing earlier than start time
             new Event(input1);

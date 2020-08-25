@@ -27,7 +27,7 @@ public class DateTimeHandlerTest {
     }
 
     @Test
-    public void testParseDateTime_invalidStrings_fail() {
+    public void testParseDateTime_invalidStrings_errorThrown() {
         String input1 = "abcde";
         String input2 = "24-09-2020 100";
         String invalidError = "is an invalid datetime format! Please use";
@@ -57,7 +57,7 @@ public class DateTimeHandlerTest {
     }
 
     @Test
-    public void testParseEventTimings_invalidStrings_fail() {
+    public void testParseEventTimings_invalidStrings_errorThrown() {
         String input1 = "abcde";
         String input2 = "24-09-2000 180026-09-2000 2000";
         String input3 = "22-09-2000 1800 20-09-2000 2000";

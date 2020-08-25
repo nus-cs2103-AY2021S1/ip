@@ -23,7 +23,7 @@ public class TaskParserTest {
     }
 
     @Test
-    public void testParse_invalidString_fail() {
+    public void testParse_invalidString_errorThrown() {
         String input1 = "wrong abcde /by 20-12-2020 2359";
         String input2 = "to do something";
         try {
