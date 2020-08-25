@@ -95,6 +95,21 @@ public class TaskList {
         return convertTaskListToString(temp);
     }
 
+    /**
+     * Converts a task list to a numbered list filtered by a keyword.
+     *
+     * @param keyword String keyed in by the user as an argument.
+     * @return String with numbered list representation of the filtered task list.
+     */
+    public String taskListToKeywordFilteredString(String keyword) {
+        System.out.println(keyword);
+        List<Task> temp = tasks.stream()
+                .filter(task -> task.toString().contains(keyword))
+                .collect(Collectors.toList());
+
+        return convertTaskListToString(temp);
+    }
+
     public void loadDataFromStorage(Path filePath) throws DukeException, IOException {
         
         FileReader reader = new FileReader(filePath.toString());

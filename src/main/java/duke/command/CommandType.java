@@ -7,6 +7,7 @@ public enum CommandType {
     DELETE,
     DONE,
     EVENT,
+    FIND,
     INVALID,
     LIST,
     TODO,
