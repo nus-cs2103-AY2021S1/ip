@@ -1,11 +1,17 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
 
-    public static void start() {
+    public static void start(ArrayList<Task> loadedTasks) {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+        if (loadedTasks.size() != 0) {
+            tasks = (ArrayList<Task>) loadedTasks.clone();
+        }
         try {
             Scanner userInput = new Scanner(System.in);
             while (userInput.hasNext()) {
@@ -78,18 +84,38 @@ public class Duke {
                             System.out.println(newEvent.toString());
                             break;
                         default:
-                            System.out.println("dada");
                             throw new DukeException("OOPS!! I'm sorry, but I don't know what that means :-(");
-
                     }
                     System.out.println("Now, you have " + tasks.size() + " tasks in the list");
                 }
+                ArrayList<Task> tasksCopy = (ArrayList<Task>) tasks.clone();
+                Parser.parse(tasksCopy);
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
     }
+
     public static void main(String[] args) {
-        start();
+        File f = new File("data/duke.txt");
+        if (!f.exists()) {
+            final File parentDir = new File("data");
+            parentDir.mkdir();
+            final String hash = "duke";
+            final String fileName = hash + ".txt";
+            final File file = new File(parentDir, fileName);
+            try {
+                file.createNewFile();
+                System.out.println("Created path data/duke.txt");
+            } catch (IOException e) {
+                System.out.println("Could not create file.");
+            }
+        }
+        try {
+            ArrayList<Task> loadedTasks = Storage.initializeTasks("data/duke.txt");
+            start(loadedTasks);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
     }
 }
