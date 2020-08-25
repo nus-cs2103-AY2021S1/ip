@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -45,7 +46,7 @@ public class Duke {
                         String taskItems[] = remainingText.split(" /by ");
                         String description = taskItems[0].trim();
                         if(taskItems.length == 1) throw new DukeException("The date for a deadline cannot be empty.");
-                        String by = taskItems[1].trim();
+                        LocalDate by = LocalDate.parse(taskItems[1].trim());
                         Task task = new DeadlineTask(description, by);
                         new AddCommand(task, list).execute();
                         break;
@@ -55,7 +56,7 @@ public class Duke {
                         String taskItems[] = remainingText.split(" /at ");
                         String description = taskItems[0].trim();
                         if(taskItems.length == 1) throw new DukeException("The date for an event cannot be empty.");
-                        String at = taskItems[1].trim();
+                        LocalDate at = LocalDate.parse(taskItems[1].trim());
                         Task task = new EventTask(description, at);
                         new AddCommand(task, list).execute();
                         break;
