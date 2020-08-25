@@ -72,7 +72,10 @@ public class Parser {
                 Task addedEvent = addEvent(next, list);
                 ui.showAddTaskMessage(addedEvent, list.size());
                 storage.writeToDataFile(list);
-                
+
+            } else if (next.startsWith("find")) {
+                TaskList filter = find(next, list);
+                ui.showList(filter);
             } else {
                 throw new UnsupportedOperationException();
             }
@@ -133,5 +136,10 @@ public class Parser {
         Task t = new Event(description, time);
         list.addTask(t);
         return t;
+    }
+    
+    private TaskList find (String s, TaskList list) {
+        String search = s.substring(4).trim();
+        return list.filter(search);
     }
 }

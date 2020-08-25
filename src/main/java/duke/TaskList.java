@@ -36,4 +36,15 @@ public class TaskList {
         return taskList.get(index);
     }
     
+    public TaskList filter(String s) {
+        TaskList filter = new TaskList();
+        
+        for (int i = 0; i < this.size(); i++) {
+            if (this.get(i).getDescription().contains(s)) {
+                filter.addTask(this.get(i));
+            }
+        }
+        return filter;
+    }
+    
 }
