@@ -43,7 +43,7 @@ public class Duke {
                     throw new UnknownInputException();
                 }
             } catch (DukeException | IOException e) {
-                ui.handleException(e);
+                s = ui.handleException(e);
             }
         }
     }
