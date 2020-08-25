@@ -1,10 +1,26 @@
+/**
+ * Encapsulates Parser functionality to parse user input
+ */
 public class Parser {
+    /**
+     * Splits user input into command and description to facilitate processing.
+     * @param fullCommand full user input
+     * @return the appropriate Command
+     * @throws DukeException if user input is invalid
+     */
     static Command parse(String fullCommand) throws DukeException {
         String[] parsedCommand = fullCommand.split(" ", 2); // separates the first word from the rest
         String command = parsedCommand[0].toLowerCase();
         return callCommand(command, parsedCommand);
     }
 
+    /**
+     * Invokes the correct Command object based on the user's command
+     * @param command user's command input
+     * @param parsedCommand user's parsed input
+     * @return the appropriate Command
+     * @throws DukeException if user input is invalid
+     */
     static Command callCommand(String command, String[] parsedCommand) throws DukeException {
         if (command.equals(UserCommand.BYE.getCommand())) {
             return new ExitCommand(parsedCommand);
