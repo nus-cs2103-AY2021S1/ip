@@ -16,8 +16,7 @@ public abstract class Command {
     public boolean isFirstIndexEmpty() {
         return stringArray.length < 2 || stringArray[1].equals("");
     }
-
-    //Empty function to be overwridden
+    
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     public boolean isExit() {
