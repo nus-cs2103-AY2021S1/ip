@@ -62,7 +62,7 @@ public class Storage {
             }
             Files.write(Paths.get(filePath),fileContent);
             fw.close();
-        } catch (IOException e) {
+        } catch (IOException exception) {
            throw new DukeException("Write To File error");
         }
     }
@@ -77,30 +77,27 @@ public class Storage {
                 String[] details = sc.nextLine().split(" \\| ");
 
                 switch (details[0]) {
-                    case "T": {
-                        TodoTask todoTask = new TodoTask(details[2]);
-                        if (details[1].equals("1")) {
-                            todoTask.markAsDone();
-                        }
-                        tasks.add(todoTask);
-                        break;
+                case "T":
+                    TodoTask todoTask = new TodoTask(details[2]);
+                    if (details[1].equals("1")) {
+                        todoTask.markAsDone();
                     }
-                    case "D": {
-                        DeadlineTask deadlineTask = new DeadlineTask(details[2], details[3]);
-                        if (details[1].equals("1")) {
-                            deadlineTask.markAsDone();
-                        }
-                        tasks.add(deadlineTask);
-                        break;
+                    tasks.add(todoTask);
+                    break;
+                case "D":
+                    DeadlineTask deadlineTask = new DeadlineTask(details[2], details[3]);
+                    if (details[1].equals("1")) {
+                        deadlineTask.markAsDone();
                     }
-                    case "E": {
-                        EventTask eventTask = new EventTask(details[2], details[3]);
-                        if (details[1].equals("1")) {
-                            eventTask.markAsDone();
-                        }
-                        tasks.add(eventTask);
-                        break;
+                    tasks.add(deadlineTask);
+                    break;
+                case "E":
+                    EventTask eventTask = new EventTask(details[2], details[3]);
+                    if (details[1].equals("1")) {
+                        eventTask.markAsDone();
                     }
+                    tasks.add(eventTask);
+                    break;
                 }
             }
             sc.close();
