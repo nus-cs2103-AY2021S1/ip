@@ -1,16 +1,15 @@
 package main.java;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Deadline extends Task {
-    LocalDateTime  deadline;
-    static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-    static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
+    private LocalDateTime  deadline;
+    private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
+
     public Deadline(String description, String deadline) {
         super(description);
         this.deadline = LocalDateTime.parse(deadline, inputFormatter);
@@ -21,7 +20,7 @@ public class Deadline extends Task {
         this.deadline = LocalDateTime.parse(deadline, inputFormatter);
     }
 
-    String getDeadline() {
+    public String getDeadline() {
         return this.deadline.format(outputFormatter).toString();
     }
 

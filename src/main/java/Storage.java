@@ -4,12 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Storage {
-    File save;
-    FileWriter writer;
+    private File save;
+    private FileWriter writer;
 
     public Storage(String filePath) {
         this.save = new File(filePath);
@@ -65,6 +66,7 @@ public class Storage {
 
     public void updateSave(TaskList tasks) throws BobIOException, BobIndexOutOfBoundsException {
         FileWriter deleter = null;
+
         try {
             deleter = new FileWriter(save);
         } catch (IOException e) {
@@ -79,6 +81,7 @@ public class Storage {
                 throw new BobIOException();
             }
         }
+
         try {
             deleter.close();
         } catch (IOException e) {
@@ -109,5 +112,4 @@ public class Storage {
             throw new BobIOException();
         }
     }
-
 }

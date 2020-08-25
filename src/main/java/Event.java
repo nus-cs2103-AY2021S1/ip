@@ -1,16 +1,18 @@
 package main.java;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 
 
 public class Event extends Task {
-    LocalDateTime start;
-    LocalDateTime end;
-    static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-    static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
+    private LocalDateTime start;
+    private LocalDateTime end;
+    private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
+
     public Event (String description, String period) {
         super(description);
         this.start = LocalDateTime.parse(period.substring(0,15), inputFormatter);
@@ -38,7 +40,8 @@ public class Event extends Task {
             return true;
         } else if (o instanceof Event) {
             Event task = (Event) o;
-            return this.description.equals(task.description) && this.start.equals(task.start) && this.end.equals(task.end) && this.isDone == task.isDone;
+            return this.description.equals(task.description) && this.start.equals(task.start)
+                    && this.end.equals(task.end) && this.isDone == task.isDone;
         } else {
             return false;
         }
@@ -47,9 +50,11 @@ public class Event extends Task {
     @Override
     public String saveFormat() {
         if (isDone) {
-            return "E | 1 | " + this.getDescription() + " | " + this.start.format(inputFormatter) + " to " + this.end.format(inputFormatter);
+            return "E | 1 | " + this.getDescription() + " | " + this.start.format(inputFormatter)
+                    + " to " + this.end.format(inputFormatter);
         } else {
-            return "E | 0 | " + this.getDescription() + " | " + this.start.format(inputFormatter) + " to " + this.end.format(inputFormatter);
+            return "E | 0 | " + this.getDescription() + " | " + this.start.format(inputFormatter)
+                    + " to " + this.end.format(inputFormatter);
         }
     }
 }

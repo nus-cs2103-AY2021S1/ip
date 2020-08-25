@@ -3,7 +3,7 @@ package main.java;
 import java.util.ArrayList;
 
 public class TaskList {
-    ArrayList<Task> list;
+    private ArrayList<Task> list;
 
     public TaskList() {
         list = new ArrayList<Task>();
@@ -29,7 +29,11 @@ public class TaskList {
         }
     }
 
-    public int size() {return list.size(); }
+    public int size() {
+        return list.size();
+    }
 
-    public boolean isEmpty() {return list.isEmpty();}
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
 }

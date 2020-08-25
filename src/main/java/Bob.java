@@ -1,14 +1,5 @@
 import main.java.*;
 
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
-import java.util.Scanner;
-
 public class Bob {
     private TaskList tasks = new TaskList();
     private Storage storage;
@@ -18,6 +9,7 @@ public class Bob {
         ui = new UI();
         storage = new Storage(filePath);
         tasks = new TaskList();
+
         try {
             storage.initialiseStorage();
             storage.loadSave(tasks);
@@ -37,11 +29,10 @@ public class Bob {
                 isExit = c.isExit();
             } catch (BobException e) {
                 ui.printError(e.getMessage());
-            } finally {
-
             }
         }
     }
+
     public static void main(String[] args) {
         new Bob("data/save.txt").run();
     }
