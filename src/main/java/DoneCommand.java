@@ -1,10 +1,21 @@
+/**
+ * handles "done" Commands
+ */
 public class DoneCommand extends Command {
 
-    //constructor function - constructs an object
+    /**
+     * Constructor for DoneCommand
+     * @param description
+     * @throws IllegalArgumentException
+     */
     public DoneCommand(String description) throws IllegalArgumentException {
         super(description); //the task number to mark it as done
     }
 
+    /**
+     * marks the tasks as done and shows the done tasks
+     * @param taskList
+     */
     public void execute(TaskList taskList) {
         int taskNumber;
         taskNumber = Integer.parseInt(this.getTaskName());

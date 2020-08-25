@@ -1,9 +1,14 @@
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * deals with the interaction with the user
+ * prints necessary messages/ outputs
+ */
 public class TextUi {
+
     public static final String DIVIDER = "===================================================\n";
 
+    /**
+     * prints hello message with DUKE logo
+     */
     public static void printHello() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
@@ -15,6 +20,10 @@ public class TextUi {
         System.out.println(DIVIDER + "Hello! I'm Duke\n" + "What can I do for you?\n" + DIVIDER);
     }
 
+    /**
+     * categorises the user input into different task type
+     * @param input from the user
+     */
     public static void printTaskStatements(String input) {
         String category = Parser.getCategory(input);
         String description = Parser.getDescription(input);
@@ -44,7 +53,12 @@ public class TextUi {
         }
     }
 
-    public static void printTodo(String description) {
+    /**
+     * prints messages of todo task
+     * @param description
+     * @throws IllegalArgumentException
+     */
+    public static void printTodo(String description) throws IllegalArgumentException {
         if (description == null) {
             throw new IllegalArgumentException(DIVIDER +
                     "☹ OOPS!!! The description of a todo cannot be empty. Try again!\n" + DIVIDER);
@@ -53,7 +67,12 @@ public class TextUi {
         }
     }
 
-    public static void printDeadline(String description) {
+    /**
+     * prints messages of deadline task
+     * @param description
+     * @throws IllegalArgumentException
+     */
+    public static void printDeadline(String description) throws IllegalArgumentException {
         String[] descriptionArray = description.split("/by");
         String deadlineName = descriptionArray[0];
         if (deadlineName == null) {
@@ -68,7 +87,12 @@ public class TextUi {
         }
     }
 
-    public static void printEvent(String description) {
+    /**
+     * prints messages of event task
+     * @param description
+     * @throws IllegalArgumentException
+     */
+    public static void printEvent(String description) throws IllegalArgumentException {
         String[] descriptionArray = description.split("/at");
         String eventName = descriptionArray[0];
         if (eventName == null) {
@@ -83,7 +107,12 @@ public class TextUi {
         }
     }
 
-        public static void printDone(String description) {
+    /**
+     * prints messages of task that is to be marked done
+     * @param description
+     * @throws IllegalArgumentException
+     */
+        public static void printDone(String description) throws IllegalArgumentException {
             if (description == null) {
                 throw new IllegalArgumentException(DIVIDER +
                         "☹ OOPS!!! Not sure which task is to be indicated as done. Try again!\n" + DIVIDER);
@@ -92,7 +121,12 @@ public class TextUi {
             }
         }
 
-        public static void printDelete(String description) {
+    /**
+     * prints messages of task that is to be deleted
+     * @param description
+     * @throws IllegalArgumentException
+     */
+    public static void printDelete(String description) throws IllegalArgumentException {
             if (description == null) {
                 throw new IllegalArgumentException(DIVIDER +
                         "☹ OOPS!!! Not sure which task is to be deleted. Try again!\n" + DIVIDER);
@@ -101,7 +135,12 @@ public class TextUi {
             }
         }
 
-        public static void printList(String description) {
+    /**
+     * prints messages when user inputs list
+     * @param description
+     * @throws IllegalArgumentException
+     */
+        public static void printList(String description) throws IllegalArgumentException {
             if (description != null) {
                 throw new IllegalArgumentException(DIVIDER + "☹ OOPS!!! Invalid input. Try again!\n" + DIVIDER);
             } else {
@@ -109,7 +148,12 @@ public class TextUi {
             }
         }
 
-        public static void printBye(String description) {
+    /**
+     * prints messages when user inputs bye
+     * @param description
+     * @throws IllegalArgumentException
+     */
+        public static void printBye(String description) throws IllegalArgumentException {
             if (description != null) {
                 throw new IllegalArgumentException(DIVIDER + "☹ OOPS!!! Invalid input. Try again!\n" + DIVIDER);
             } else {

@@ -1,10 +1,20 @@
 import java.io.*;
-import java.util.List;
 
+/**
+ * handles the storing and loading of information (task list)
+ */
 public class Storage {
     private final static long serialVersionUID = 7526472295622776147L;
 
-    public static TaskList load() throws FileNotFoundException, IOException, ClassNotFoundException { //load a tasklist from the text file
+    /**
+     * loads the tasklist that user keyed in before terminating the bot
+     * hence, previous tasklist made available when the user runs the bot
+     * @return the tasklist in Duke.txt file
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+
+    public static TaskList load() throws IOException, ClassNotFoundException { //load a tasklist from the text file
         try {
             FileInputStream fin = new FileInputStream("Duke.txt");
             ObjectInputStream ois = new ObjectInputStream(fin);
@@ -20,6 +30,10 @@ public class Storage {
         }
     }
 
+    /**
+     * stores the tasks (user inputs) into Duke.txt file
+     * @param taskList
+     */
     public static void store(TaskList taskList) { //writing the tasklist to a text file
         try {
             FileOutputStream fos = new FileOutputStream("Duke.txt");
