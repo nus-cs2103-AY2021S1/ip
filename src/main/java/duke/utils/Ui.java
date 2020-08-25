@@ -1,5 +1,9 @@
 package duke.utils;
 
+/**
+ * Text UI of the application.
+ */
+
 public class Ui {
     private final static int DIVIDER_LENGTH = 80;
     private final static int LEFT_PADDING = 7;

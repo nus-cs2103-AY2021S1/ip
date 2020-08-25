@@ -5,6 +5,10 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Map;
 
+/**
+ * Interface which is used to retrieve string resources.
+ */
+
 public class ResourceHandler {
     private static final Locale defaultLocale = new Locale("en", "SG");
     private static final String filename = "Messages";
