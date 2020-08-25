@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents an object that deals with loading tasks from the file and saving
+ * tasks in the file.
+ */
 public class Storage {
     private String filePath;
 
@@ -17,7 +21,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    // converts text in file to task
+    /**
+     * Returns a <code>Task</code> based on the input format from the txt file.
+     * e.g. input = "D | 0 | do this | 2020-01-01" will return
+     * <code>new Task("deadline do this /by 2020-01-01")</code>
+     * @param input
+     * @return Task derived from the input format in the txt file.
+     */
     public static Task textToTask(String input) {
         String des = "";
         Character first = input.charAt(0);
@@ -46,6 +56,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds each line of the file specified to the <code>tasksStrings</code>
+     * array list as a different item.
+     * @param tasksStrings String from txt file is added to this ArrayList.
+     * @throws FileNotFoundException If the file specified cannot be found.
+     */
     public void fileContentToArrayList(ArrayList<String> tasksStrings) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -54,9 +70,14 @@ public class Storage {
             String input = s.nextLine();
             tasksStrings.add(input);
         }
-
     }
 
+    /**
+     * Returns an ArrayList of <code>Task</code> objects based on the String in
+     * the txt file.
+     * @return ArrayList of <code>Task</code> objects.
+     * @throws DukeException If any of the <code>Task</code> objects is not valid.
+     */
     public ArrayList<Task> load() throws DukeException {
         // converts text to tasks, duke exception to check if is valid task
         ArrayList<Task> tasksArray = new ArrayList<>();
@@ -80,19 +101,29 @@ public class Storage {
                 tasksArray.add(t.convertToEvent());
             }
         }
-
-
         return tasksArray;
     }
 
+    /**
+     * Writes <code>String textToAdd</code> to the file specified in
+     * <code>String filePath</code>.
+     * @param filePath Path of the file to write to.
+     * @param textToAdd Text to be written to the file specified in <code>filePath</code>.
+     * @throws IOException
+     */
     private static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * Saves the text from <code>String textToAdd</code> to the file specified
+     * in <code>String filePath</code>.
+     * @param filePath Path of the file to write to.
+     * @param textToAdd Text to be written to the file specified in <code>filePath</code>.
+     */
     public static void save(String filePath, String textToAdd) {
-
         // writes fileString to .txt file
         try {
             writeToFile("/Users/tengjianling/ip/data/duke.txt", textToAdd);

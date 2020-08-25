@@ -2,11 +2,19 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
+/**
+ * Represents a type of task, where a date must be specified
+ */
 public class Deadline extends Task {
     protected String by;
 
+    /**
+     * Creates a Deadline object with the specified <code>description</code> and
+     * <code>by</code>.
+     * @param description Description of the task.
+     * @param by Date by which this task should be completed.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
