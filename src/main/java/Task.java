@@ -2,8 +2,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
-    public boolean done;
-    public String task;
+    protected boolean done;
+    protected String task;
     public Task (String in) {
         task = in;
         done = false;

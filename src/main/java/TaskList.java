@@ -4,7 +4,7 @@ import java.util.List;
  * Stores the list of tasks.
  */
 public class TaskList {
-    public List<Task> taskList;
+    private List<Task> taskList;
 
     /**
      * Creates a new TaskList with the given pre-existing tasks.
@@ -24,6 +24,14 @@ public class TaskList {
 
     public void delete(int toDelete) {
         taskList.remove(toDelete);
+    }
+
+    public Task get(int index) {
+        return taskList.get(index);
+    }
+
+    public List<Task> getTaskList() {
+        return taskList;
     }
 
     public int size() {

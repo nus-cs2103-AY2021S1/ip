@@ -1,10 +1,5 @@
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.util.*;
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
     private static Storage storage;
@@ -38,7 +33,7 @@ public class Duke {
                 continue;
             } else if (cmd == Command.clear) {
                 storage.clear();
-                tasks.taskList = new ArrayList<Task>();
+                tasks = new TaskList(new ArrayList<Task>());
                 continue;
             } else if (cmd == Command.list) {
                 Ui.print(tasks.toString());
@@ -55,7 +50,7 @@ public class Duke {
                 if (current < 0 || current >= tasks.size()) {
                     Ui.errorMsg("that is not the number of a task in the list!");
                 } else {
-                    task = tasks.taskList.get(current);
+                    task = tasks.get(current);
                     if (task.done) {
                         Ui.errorMsg("you have already completed " + task.task + "!");
                         continue;
@@ -64,7 +59,7 @@ public class Duke {
                     Ui.print("congrats on finishing your task :) it's marked as done:\n\t" + task);
 
                 }
-            } else if (in.startsWith("delete ")){
+            } else if (cmd == Command.delete){
                 int current;
                 try {
                     current = Integer.parseInt(in.substring(7));
@@ -77,7 +72,7 @@ public class Duke {
                 if (current < 0 || current >= tasks.size()) {
                     Ui.errorMsg("that is not the number of a task in the list!");
                 } else {
-                    task = tasks.taskList.get(current);
+                    task = tasks.get(current);
                     tasks.delete(current);
                     Ui.print("i've removed the following task from the list:\n\t" + task + "\nnow you have " + tasks.size() + " items in your tasklist.");
 
@@ -91,7 +86,7 @@ public class Duke {
             } else {
                 Ui.errorMsg("i don't know what that means :(");
             }
-            storage.save(tasks.taskList);
+            storage.save(tasks.getTaskList());
 
         }
 

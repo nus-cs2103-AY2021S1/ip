@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 
 public class Event extends Task {
-    LocalDateTime startDate;
+    private LocalDateTime startDate;
     public Event(String in, LocalDateTime start) {
 
         super(in);
