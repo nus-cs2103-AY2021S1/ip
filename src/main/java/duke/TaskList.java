@@ -27,8 +27,7 @@ public class TaskList {
             Storage.addToList(TaskType.TODO, 0, taskName, "");
             Ui.userMessage("Got it. I've added the task:\n" + todo.toString());
             Ui.userMessage("Now you have " + taskList.size() + " tasks in the list.");
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new IOException("File access failed");
         }
     }
@@ -54,8 +53,7 @@ public class TaskList {
                 Ui.userMessage("Got it. I've added the task:\n" + event.toString());
             }
             Ui.userMessage("Now you have " + taskList.size() + " tasks in the list.");
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new IOException("File access failed");
         }
 
@@ -121,8 +119,7 @@ public class TaskList {
                 }
             }
             Ui.userMessage(sb.toString());
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             Ui.fileError();
         }
     }
