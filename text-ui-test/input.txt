@@ -1,10 +1,26 @@
-list
 todo read book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+deadline return book /by 2020-08-20
+event project meeting /at 2020-08-20
 list
 done 1
 done 2
 done 3
+list
+delete 1
+delete 2
+delete 3
 todo
+deadline
+event
 blah
+deadline homework submit
+deadline homework submit .by
+deadline homework submit /by invalid-format
+event run
+event run /at
+event run /at invalid-format
+date invalid-format
+date 2020-08-20
+done 1000
+delete 1000
+bye

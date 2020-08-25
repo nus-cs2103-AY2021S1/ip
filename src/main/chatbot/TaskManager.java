@@ -58,14 +58,14 @@ public class TaskManager {
         return tasks;
     }
 
-    public boolean markAsDone(int index) {
-        Task taskDone = getTask(index).markDone();
+    public boolean markAsDone(int index) throws ChatbotException {
         try {
+            Task taskDone = getTask(index).markDone();
             this.tasks.set(index, taskDone);
             taskPrinter.display("Nice! I've marked this task as done:\n    " +
                     "    " + taskDone);
         } catch (IndexOutOfBoundsException e) {
-            return false;
+            throw new ChatbotException("That item does not exist!");
         }
         return true;
     }
