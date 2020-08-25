@@ -17,6 +17,7 @@ public enum Message {
     ERR_WRONG_DEADLINE_CMD ("Wrong deadline command!\nFormat: deadline <taskName> /by <time>\n"),
     ERR_WRONG_EVENT_CMD ("Wrong event command!\nFormat: event <taskName> /at <time>\n"),
     ERR_WRONG_DELETE_CMD ("Wrong delete command!\nFormat: delete <taskId>\n"),
+    ERR_WRONG_FIND_CMD ("Wrong find command!\nFormat: find <description>\n"),
     ERR_WRONG_CMD ("Unrecognizable command!\n"),
     ERR_DUKE_NOT_INIT("Duke not initialised yet in execute command"),
     CAT_DOUBT ("Meow? Sorry I don't know what you are talking about...\n"),

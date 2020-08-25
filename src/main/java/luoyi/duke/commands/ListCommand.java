@@ -69,7 +69,7 @@ public class ListCommand extends Command {
                 .range(0, list.size())
                 .filter(x -> list.get(x).isSameTime(date))
                 .toArray();
-        Ui.displayTasks(list, indexes, date);
+        Ui.displayTasks(list, indexes);
     }
 
     /**
