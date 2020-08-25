@@ -8,8 +8,16 @@ public class Task {
         this.isDone = false;
     }
 
-    public void markDone(){
+    public String getType() {
+        return "";
+    }
+
+    public void markDone() {
         this.isDone = true;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     public String getStatusIcon() {
