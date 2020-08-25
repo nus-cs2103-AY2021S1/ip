@@ -8,14 +8,16 @@
 //        System.out.println("Hello from\n" + logo);
 //    }
 //}
-import dukeclass.*;
+import dukeclass.Parser;
+import dukeclass.Storage;
+import dukeclass.Task;
+import dukeclass.TaskList;
+import dukeclass.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
 
