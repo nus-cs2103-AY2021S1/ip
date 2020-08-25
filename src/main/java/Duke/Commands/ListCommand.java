@@ -18,7 +18,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     *
+     * lists all the tasks that are currently present in the tasks.
      * @param tasks to access the list and print them
      * @param ui
      * @param storage
