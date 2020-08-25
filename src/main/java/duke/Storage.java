@@ -10,15 +10,26 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     protected String filePath;
 
+    /**
+     * Construct a new Storage class initialized with the path of the target file.
+     * @param filePath the path of the file to load and store.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Save the list of tasks to the target file.
+     * @param taskList the list of tasks.
+     * @throws DukeException thrown if the file or folder does not exist or other IOException happens.
+     */
     public void store(List<Task> taskList) throws DukeException {
-
         File outFile;
         Writer out;
 
@@ -45,6 +56,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Load the list of task from the target file.
+     * @return a List of Task loaded from the target file.
+     * @throws DukeException thrown if the file or folder does not exist or other IOException happens.
+     */
     public List<Task> load() throws DukeException {
         List<Task> taskList = new ArrayList<>();
         FileReader fileReader;

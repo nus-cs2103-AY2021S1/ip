@@ -4,8 +4,17 @@ import duke.exception.DukeException;
 
 import java.util.Arrays;
 
+/**
+ * A class deals with making sense of the user command.
+ */
 public class Parser {
 
+    /**
+     * Parse the full command to a Array of String.
+     * @param command the full command from user's input.
+     * @return a Array of String parsed from the full command.
+     * @throws DukeException
+     */
     public static String[] parse(String command) throws DukeException {
         String[] commands = command.split(" ", 2);
         String[] temp;
