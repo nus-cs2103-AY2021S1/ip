@@ -48,6 +48,16 @@ public class Ui {
         });
     }
 
+    public static void find(List<String> tasks) {
+        wrap(() -> {
+            System.out.println("Here are the matching tasks in your list: ");
+            List<String> output = tasks;
+            for (String s : output) {
+                System.out.println(s);
+            }
+        });
+    }
+
     public static void done(String str) {
         wrap(() -> {
             System.out.println("Nice! I've marked this task as done:");
