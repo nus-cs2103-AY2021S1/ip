@@ -23,7 +23,7 @@ public class TaskList implements Iterable<Task> {
         return item;
     }
 
-    public Task markAsDone(int index) throws DukeException {
+    public Task markAsComplete(int index) throws DukeException {
         try {
             Task selected = store.get(index);
             selected.setCompleted();

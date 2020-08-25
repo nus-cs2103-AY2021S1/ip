@@ -9,7 +9,7 @@ public class Parser {
     enum Keyword {
         EXIT("exit"),
         LIST("list"),
-        DONE("done"),
+        COMPLETE("complete"),
         TODO("todo"),
         DEADLINE("deadline"),
         EVENT("event"),
@@ -41,10 +41,10 @@ public class Parser {
             return new ExitCommand();
         case LIST:
             return new ListCommand();
-        case DONE:
+        case COMPLETE:
             try {
                 int index = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
-                return new DoneCommand(index);
+                return new CompleteCommand(index);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("What did you complete exaclty?");
             } catch (NumberFormatException e) {

@@ -12,6 +12,10 @@ public class DeleteCommand extends Command {
     private Task deletedTask;
     private int remainingTaskCount;
 
+    public DeleteCommand() {
+        this.index = -1;
+    }
+
     public DeleteCommand(int index) {
         this.index = index;
     }
