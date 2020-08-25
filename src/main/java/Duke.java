@@ -82,9 +82,7 @@ public class Duke {
                             EventException ee = new EventException();
                             System.out.println(ee.errorMessage);
                         } else {
-                            String time = command.substring(indexOfSlash + 4);
-                            LocalDate parsed = LocalDate.parse(time);
-                            Event e = new Event(command.substring(6, indexOfSlash - 1), parsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                            Event e = new Event(command.substring(6, indexOfSlash - 1), command.substring(indexOfSlash + 4));
                             arr.add(e);
                             print(arr, e);
                             fc.listWriter(arr);
@@ -110,9 +108,7 @@ public class Duke {
                             DeadlineException de = new DeadlineException();
                             System.out.println(de.errorMessage);
                         } else {
-                            String time = command.substring(indexOfSlash + 4);
-                            LocalDate parsed = LocalDate.parse(time);
-                            Deadline d = new Deadline(command.substring(9, indexOfSlash - 1), parsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                            Deadline d = new Deadline(command.substring(9, indexOfSlash - 1), command.substring(indexOfSlash + 4));
                             arr.add(d);
                             print(arr, d);
                             fc.listWriter(arr);
