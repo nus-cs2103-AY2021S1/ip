@@ -13,7 +13,7 @@ public abstract class Command {
         this.itemIndex = -1;
     }
 
-    public boolean isExit() {
+    public boolean canExit() {
         return this.isExit;
     }
 

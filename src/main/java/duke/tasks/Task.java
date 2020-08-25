@@ -1,20 +1,20 @@
 package duke.tasks;
 
 public class Task {
-    private boolean completed;
+    private boolean hasCompleted;
     private String taskName;
 
     public Task(String name) {
         this.taskName = name;
-        this.completed = false;
+        this.hasCompleted = false;
     }
 
     protected String getStatus() {
-        return (this.completed ? "\u2713" : "\u2718");
+        return (this.hasCompleted ? "\u2713" : "\u2718");
     }
 
     public void markDone() {
-        this.completed = true;
+        this.hasCompleted = true;
     }
 
     protected String getTaskName() {

@@ -8,19 +8,20 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+
 import duke.tasks.ToDo;
 import duke.tasks.Event;
 import duke.tasks.Deadline;
 import duke.tasks.Task;
-import duke.Ui;
 
 
 public class Storage {
-    private final String DATAFILEDIRECTORY = System.getProperty("user.dir") + (System.getProperty("user.dir").endsWith("text-ui-test") ? "/../data/" : "/data/");
+    private final String DATA_FILE_DIRECTORY = System.getProperty("user.dir")
+            + (System.getProperty("user.dir").endsWith("text-ui-test") ? "/../data/" : "/data/");
     private File storageFile;
 
     public Storage(String fileName) {
-        this.storageFile = new File(DATAFILEDIRECTORY + fileName);
+        this.storageFile = new File(DATA_FILE_DIRECTORY + fileName);
     }
 
     public void loadData(TaskList currTaskList) {
@@ -51,7 +52,8 @@ public class Storage {
                     currTaskList.add(pastEvent);
                     newLine = rb.readLine();
                 } else if (newLine.charAt(0) == 'D') {
-                    Deadline pastDeadline = new Deadline(taskInput[2].trim(), LocalDate.parse(taskInput[3].trim()));
+                    Deadline pastDeadline = new Deadline(taskInput[2].trim(),
+                            LocalDate.parse(taskInput[3].trim()));
                     if (Integer.parseInt(taskInput[1].trim()) == 1) {
                         pastDeadline.markDone();
                     }
@@ -67,9 +69,9 @@ public class Storage {
 
     private void checkHistory() {
         try {
-            FileReader readFile = new FileReader(DATAFILEDIRECTORY);
+            FileReader readFile = new FileReader(DATA_FILE_DIRECTORY);
         } catch (FileNotFoundException e) {
-            File newData = new File(DATAFILEDIRECTORY);
+            File newData = new File(DATA_FILE_DIRECTORY);
             if(!newData.exists()) {
                 newData.mkdirs();
                 Ui.addDirectory();
@@ -90,13 +92,13 @@ public class Storage {
         try {
             fw = new FileWriter(this.storageFile,true);
             if (newTask instanceof ToDo) {
-                fw.write(((ToDo)newTask).dataStorage() + "\n");
+                fw.write(((ToDo)newTask).getDataStorageName() + "\n");
                 fw.close();
             } else if (newTask instanceof Deadline) {
-                fw.write(((Deadline)newTask).dataStorage() + "\n");
+                fw.write(((Deadline)newTask).getDataStorageName() + "\n");
                 fw.close();
             } else if (newTask instanceof Event) {
-                fw.write(((Event)newTask).dataStorage() + "\n");
+                fw.write(((Event)newTask).getDataStorageName() + "\n");
                 fw.close();
             }
         } catch (IOException e) {
@@ -105,7 +107,7 @@ public class Storage {
     }
 
     public void editTask(Task editedTask, int taskIndex, TaskList currentList) {
-        File toBeDeleted = new File (DATAFILEDIRECTORY + "dataList1.txt");
+        File toBeDeleted = new File (DATA_FILE_DIRECTORY + "dataList1.txt");
         BufferedReader readerBuffer = null;
         try {
             readerBuffer = new BufferedReader(new FileReader(this.storageFile));
@@ -115,17 +117,17 @@ public class Storage {
             String lineToChangeTo = "";
 
             if (editedTask instanceof Deadline) {
-                lineToEdit = ((Deadline) editedTask).dataStorage();
+                lineToEdit = ((Deadline) editedTask).getDataStorageName();
                 currentList.get(taskIndex).markDone();
-                lineToChangeTo = ((Deadline) editedTask).dataStorage();
+                lineToChangeTo = ((Deadline) editedTask).getDataStorageName();
             } else if (editedTask instanceof Event) {
-                lineToEdit = ((Event) editedTask).dataStorage();
+                lineToEdit = ((Event) editedTask).getDataStorageName();
                 currentList.get(taskIndex).markDone();
-                lineToChangeTo = ((Event) editedTask).dataStorage();
+                lineToChangeTo = ((Event) editedTask).getDataStorageName();
             } else {
-                lineToEdit = ((ToDo) editedTask).dataStorage();
+                lineToEdit = ((ToDo) editedTask).getDataStorageName();
                 currentList.get(taskIndex).markDone();
-                lineToChangeTo = ((ToDo) editedTask).dataStorage();
+                lineToChangeTo = ((ToDo) editedTask).getDataStorageName();
             }
 
             while (readingLine != null) {
@@ -159,18 +161,18 @@ public class Storage {
 
     public void deleteTask(Task removedTask) {
         try{
-            File removed = new File (DATAFILEDIRECTORY + "dataList1.txt");
+            File removed = new File (DATA_FILE_DIRECTORY + "dataList1.txt");
             BufferedReader reader = new BufferedReader(new FileReader(this.storageFile));
             BufferedWriter writer = new BufferedWriter(new FileWriter(removed));
             String currentLine = reader.readLine();
             String lineToRemove = "";
 
             if (removedTask instanceof Deadline) {
-                lineToRemove = ((Deadline) removedTask).dataStorage();
+                lineToRemove = ((Deadline) removedTask).getDataStorageName();
             } else if (removedTask instanceof Event) {
-                lineToRemove = ((Event) removedTask).dataStorage();
+                lineToRemove = ((Event) removedTask).getDataStorageName();
             } else {
-                lineToRemove = ((ToDo) removedTask).dataStorage();
+                lineToRemove = ((ToDo) removedTask).getDataStorageName();
             }
 
             while (currentLine != null) {

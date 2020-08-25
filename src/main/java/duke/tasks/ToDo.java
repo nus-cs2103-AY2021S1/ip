@@ -5,7 +5,7 @@ public class ToDo extends Task{
         super(taskName);
     }
 
-    public String dataStorage() {
+    public String getDataStorageName() {
         return "T | " + (super.getStatus() == "\u2713" ? "1" : "0") + " | " + super.getTaskName();
     }
 

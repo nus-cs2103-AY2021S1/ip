@@ -12,20 +12,25 @@ public class Ui {
     private String defaultGreeting;
     private static final Scanner sc = new Scanner(System.in);
     private Parser commandParser;
+
     public Ui(Storage listStorage, TaskList taskList) {
-        this.logo = " .d8888b.  888               888    888                  888888b.            888    \n" +
-                "d88P  Y88b 888               888    888                  888  \"88b           888    \n" +
-                "888    888 888               888    888                  888  .88P           888    \n" +
-                "888        88888b.   8888b.  888888 888888 888  888      8888888K.   .d88b.  888888 \n" +
-                "888        888 \"88b     \"88b 888    888    888  888      888  \"Y88b d88\"\"88b 888    \n" +
-                "888    888 888  888 .d888888 888    888    888  888      888    888 888  888 888    \n" +
-                "Y88b  d88P 888  888 888  888 Y88b.  Y88b.  Y88b 888      888   d88P Y88..88P Y88b.  \n" +
-                " \"Y8888P\"  888  888 \"Y888888  \"Y888  \"Y888  \"Y88888      8888888P\"   \"Y88P\"   \"Y888 \n" +
-                "                                                888                                 \n" +
-                "                                           Y8b d88P                                 \n" +
-                "                                            \"Y88P\"                                  ";
+        this.logo = " .d8888b.  888               888    888                  888888b.            888    \n"
+                + "d88P  Y88b 888               888    888                  888  \"88b           888    \n"
+                + "888    888 888               888    888                  888  .88P           888    \n"
+                + "888        88888b.   8888b.  888888 888888 888  888      8888888K.   .d88b.  888888 \n"
+                + "888        888 \"88b     \"88b 888    888    888  888      888  \"Y88b d88\"\"88b 888    "
+                + "\n" + "888    888 888  888 .d888888 888    888    888  888      888    888 888  888 888  "
+                + "  \n" + "Y88b  d88P 888  888 888  888 Y88b.  Y88b.  Y88b 888      " +
+                "888   d88P Y88..88P Y88b. " + " \n" + " \"Y8888P\"  888  888 \"Y888888  \"Y888  \"Y888  " +
+                "\"Y88888      8888888P\"   " + "\"Y88P\"   " + "\"Y888 \n" + "                   " +
+                "                             888" + "                            " + "     " + "\n" + "  " +
+                "                                       " + "  Y8b d88P                                 \n"
+                + "                                       "
+                + "     \"Y88P\"                                  ";
+
         this.lines = "    ____________________________________________________________";
-        this.defaultGreeting = this.lines + "\n" + "     Hello! I'm Chatty Bot \n" + "     What can I do for you?\n" + lines + "\n";
+        this.defaultGreeting = this.lines + "\n" + "     Hello! I'm Chatty Bot \n" + "     " +
+                "What can I do for you?\n" + lines + "\n";
         this.commandParser = new Parser();
     }
 
@@ -39,8 +44,7 @@ public class Ui {
         System.out.println(defaultGreeting);
     }
 
-    public void loadingFile() {
-
+    public void loadFile() {
         System.out.println(this.lines);
         System.out.println("     Previously saved list (if any) loaded. You may enter your commands now:");
         System.out.println(this.lines);
@@ -70,14 +74,15 @@ public class Ui {
     public void addTask(Task newTask, TaskList currList) {
         System.out.println(this.lines + "\n" + "     Got it. I've added this task:");
         System.out.println("       " + newTask);
-        System.out.println("     Now you have " + String.valueOf(currList.numTask()) + " task(s) in the list.");
+        System.out.println("     Now you have " + String.valueOf(currList.getNumTask()) +
+                " task(s) in the list.");
         System.out.println(this.lines);
     }
 
     public void listItems(TaskList currList) {
         System.out.println(this.lines);
         System.out.println("     Here are the tasks in your list:");
-        currList.list();
+        currList.listItems();
         System.out.println(this.lines);
     }
 
@@ -85,7 +90,8 @@ public class Ui {
         System.out.println(this.lines);
         System.out.println("     Alright, the following task has been removed");
         System.out.println("     " + removeTask);
-        System.out.println("     Now you have " + String.valueOf(currList.numTask()) + " task(s) in the list.");
+        System.out.println("     Now you have " + String.valueOf(currList.getNumTask()) +
+                " task(s) in the list.");
         System.out.println(this.lines);
     }
 

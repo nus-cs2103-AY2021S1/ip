@@ -18,7 +18,7 @@ public class Duke {
     public void run() {
         this.ui.printWelcome();
         this.listStorage.loadData(this.taskList);
-        this.ui.loadingFile();
+        this.ui.loadFile();
         
         boolean isExit = false;
         while(!isExit) {
@@ -26,7 +26,7 @@ public class Duke {
             Command c = Parser.parse(command);
             if (c!= null) {
                 c.execute(this.ui, this.listStorage, this.taskList);
-                isExit = c.isExit();
+                isExit = c.canExit();
             }
         }
     }

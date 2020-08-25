@@ -3,11 +3,12 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.exception.InvalidCommand;
 import duke.tasks.Task;
+import duke.exception.InvalidCommand;
 
 public class DoneCommand extends Command {
     private int taskIndex;
+
     public DoneCommand(int taskIndex) {
         super();
         this.taskIndex = taskIndex;

@@ -3,20 +3,19 @@ package duke.parser;
 import java.time.LocalDate;
 
 import duke.Ui;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.ToDo;
+import duke.exception.InvalidCommand;
 import duke.commands.AddCommand;
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.ListCommand;
-import duke.exception.InvalidCommand;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.ToDo;
 
 public class Parser {
     public Parser() {
-
     }
 
     public static Command parse(String command) {
