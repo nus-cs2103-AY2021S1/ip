@@ -2,6 +2,9 @@ import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
     protected String lines = "____________________________________________________________";
@@ -214,7 +217,11 @@ public class Duke {
                 && Character.toString(input.charAt(input.indexOf("/") - 1)).equals(" ")) {
             String desc = input.substring(9, input.indexOf("/") - 1);
             String by = input.substring(input.indexOf("/") + 4, input.length());
-            Task task = new Deadline(desc, by);
+            if (by.matches(".*[a-zA-Z]+.*")) {
+                throw new WrongFormatException("deadline");
+            }
+            LocalDate date = LocalDate.parse(by);
+            Task task = new Deadline(desc, date);
             this.addTaskToTasklist(task);
         } else {
             throw new WrongFormatException("deadline");

@@ -15,7 +15,7 @@ public class WrongFormatException extends DukeException{
         } else if (type.equals("deadline")) {
             return "____________________________________________________________"
                     + "\n"
-                    + " ☹ OOPS!!! Proper input format required! Proper format: deadline{space}{description}{space}/by{space}{due-date} ."
+                    + " ☹ OOPS!!! Proper input format required! Proper format: deadline{space}{description}{space}/by{space}{YYYY-MM-DD} ."
                     + "\n"
                     + "____________________________________________________________";
         } else if (type.equals("event")) {
