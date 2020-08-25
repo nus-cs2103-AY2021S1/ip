@@ -1,3 +1,8 @@
+package Duke;
+
+import Commands.Command;
+import Exceptions.DukeException;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -33,7 +38,7 @@ public class Duke {
                 ui.errorMessage(e.getMessage());
             }
         }
-
+        storage.saveFile(tasks.getTaskList());
     }
 
 

@@ -1,3 +1,5 @@
+package Exceptions;
+
 public class InvalidTimeException extends DukeException {
     public InvalidTimeException() {
         super("☹ OOPS!!! The format of your input time seems to be wrong.\n"

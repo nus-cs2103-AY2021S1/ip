@@ -1,3 +1,8 @@
+package Duke;
+
+import Exceptions.TaskCompletedException;
+import Tasks.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -21,6 +26,10 @@ public class TaskList {
 
     public Task getSpecificTask(int index) {
         return taskList.get(index);
+    }
+
+    public ArrayList<Task> getTaskList() {
+        return taskList;
     }
 
     public int getTaskListLength() {

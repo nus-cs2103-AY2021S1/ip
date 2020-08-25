@@ -1,6 +1,13 @@
+package Commands;
+
+import Duke.Storage;
+import Duke.TaskList;
+import Duke.Ui;
+import Exceptions.InvalidByeCommandException;
+
 public class ByeCommand extends Command {
 
-    ByeCommand(String fullCommand) {
+    public ByeCommand(String fullCommand) {
        super(fullCommand);
     }
 

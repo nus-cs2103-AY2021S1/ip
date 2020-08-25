@@ -1,3 +1,5 @@
+package Exceptions;
+
 public class InvalidEventFormatException extends DukeException{
     public InvalidEventFormatException() {
         super("☹ OOPS!!! The format of event command seems to be wrong.\n"

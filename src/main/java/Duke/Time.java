@@ -1,10 +1,14 @@
+package Duke;
+
+import Exceptions.InvalidTimeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Time {
 
-    public static LocalDateTime getFormatedTime(String dateString) throws InvalidTimeException{
+    public static LocalDateTime getFormatedTime(String dateString) throws InvalidTimeException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             return LocalDateTime.parse(dateString, formatter);

@@ -1,3 +1,5 @@
+package Exceptions;
+
 public class InvalidDeadlineFormatException extends DukeException {
     public InvalidDeadlineFormatException() {
         super("☹ OOPS!!! The format of deadline command seems to be wrong.\n"

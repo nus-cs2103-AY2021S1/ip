@@ -1,5 +1,14 @@
+package Commands;
+
+import Duke.Storage;
+import Duke.TaskList;
+import Duke.Ui;
+import Exceptions.IncorrectDoneInputException;
+import Exceptions.InvalidDoneFormatException;
+import Exceptions.TaskCompletedException;
+
 public class DoneCommand extends Command {
-    DoneCommand(String fullCommand) {
+    public DoneCommand(String fullCommand) {
         super(fullCommand);
     }
 
