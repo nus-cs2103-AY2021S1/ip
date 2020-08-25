@@ -37,6 +37,7 @@ public class Parser {
             case "todo":
             case "event":
             case "deadline":
+            case "find":
                 throw new JimmyException(ErrorMessage.EMPTY_DESCRIPTION);
 
             case "done":
@@ -90,6 +91,12 @@ public class Parser {
                     + " tasks in the list.";
                 break;
             
+            case "find":
+                String desc = msg.split("find ")[1];
+                String tasks = lst.findTasksWith(desc);
+                reply = "Here are the matching tasks in your list:\n\t" + tasks;
+                break;
+
             default:
                 throw new JimmyException(ErrorMessage.UNKNOWN_FUNCTION);
             }
