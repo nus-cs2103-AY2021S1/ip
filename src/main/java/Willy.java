@@ -61,32 +61,6 @@ public class Willy {
         System.out.println(style);
     }
 
-//    public static void updateStorage() {
-//        for (int i = 0; i < listOfTasks.size(); i++) {
-//            Task task = listOfTasks.get(i);
-//            String combinedTask = "";
-//            String taskType = listOfTasks.get(i).taskType.toString();
-//            if (taskType.equals("[T]")) {
-//                String taskStatus = task.getStatusIcon();
-//                String taskContent = task.task;
-//                combinedTask = taskType + "|" + taskStatus + "|" + taskContent;
-//            } else if (taskType.equals("[D]")) {
-//                DeadlineTask deadlineTask = (DeadlineTask) listOfTasks.get(i);
-//                String taskDeadline = deadlineTask.deadline;
-//                String taskStatus = deadlineTask.getStatusIcon();
-//                String taskContent = deadlineTask.task;
-//                combinedTask = taskType + "|" + taskStatus + "|" + taskContent + "|" + taskDeadline;
-//            } else if (taskType.equals("[E]")) {
-//                EventsTask eventsTask = (EventsTask) listOfTasks.get(i);
-//                String taskPeriod = eventsTask.period;
-//                String taskStatus = eventsTask.getStatusIcon();
-//                String taskContent = eventsTask.task;
-//                combinedTask = taskType + "|" + taskStatus + "|" + taskContent + "|" + taskPeriod;
-//            }
-//            storage.updateTaskInFile(combinedTask);
-//        }
-//    }
-
     public static void main(String[] args) throws WillyException {
         String logo = "__       ____       __\n"
                     + "\\  \\    /    \\    /  /\n"

@@ -35,43 +35,6 @@ public class TaskStore {
         }
     }
 
-//    public void writeTaskToFile(String taskToAdd) {
-//        try {
-//            FileWriter fw = new FileWriter(FILE_PATH);
-//            fw.write(taskToAdd);
-//            fw.close();
-//        } catch (IOException e){
-//            System.out.println(e.getMessage());
-//        }
-//    }
-
-//    public void updateTaskInFile(String taskToAdd) {
-//        try {
-//            FileWriter fw = new FileWriter(FILE_PATH);
-//            fw.write(taskToAdd + "\n") ;
-//            fw.close();
-//        } catch (IOException e){
-//            System.out.println(e.getMessage());
-//        }
-//    }
-
-//    // Loads Task in 'T | 1 | read book' format
-//    public void loadTasksFromStorage() throws FileNotFoundException {
-//        Scanner s = new Scanner(taskStorage); // create a Scanner using the File as the source
-//        ArrayList<Task> listOfTasks = new ArrayList<>();
-//        while (s.hasNext()) {
-//            String line = s.nextLine();
-//            String[] taskContents = line.split("\\|");
-//            String taskType = taskContents[0];
-//            String taskStatus = taskContents[1];
-//            String taskName = taskContents[2];
-//            String taskDate = taskContents[3];
-//
-//
-//
-//        }
-//    }
-
     public static void updateStorage(ArrayList<Task> listOfTasks) {
         try {
             FileWriter fw = new FileWriter(FILE_PATH);
@@ -85,13 +48,13 @@ public class TaskStore {
                     combinedTask = taskType + "|" + taskStatus + "|" + taskContent;
                 } else if (taskType.equals("[D]")) {
                     DeadlineTask deadlineTask = (DeadlineTask) listOfTasks.get(i);
-                    String taskDeadline = deadlineTask.deadline;
+                    String taskDeadline = deadlineTask.deadline.toString();
                     String taskStatus = deadlineTask.getStatusIcon();
                     String taskContent = deadlineTask.task;
                     combinedTask = taskType + "|" + taskStatus + "|" + taskContent + "|" + taskDeadline;
                 } else if (taskType.equals("[E]")) {
                     EventsTask eventsTask = (EventsTask) listOfTasks.get(i);
-                    String taskPeriod = eventsTask.period;
+                    String taskPeriod = eventsTask.period.toString();
                     String taskStatus = eventsTask.getStatusIcon();
                     String taskContent = eventsTask.task;
                     combinedTask = taskType + "|" + taskStatus + "|" + taskContent + "|" + taskPeriod;
