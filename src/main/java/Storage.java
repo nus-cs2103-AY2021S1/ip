@@ -1,18 +1,24 @@
 package main.java;
 
+import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.ArrayList;
+
 
 /**
  * This class consists of methods pertaining to the management of data storage for Bob.
  */
 public class Storage {
+
+    /** The File where data will be stored. */
     File save;
+
+    /** The FileWriter which will write data to storage. */
     FileWriter writer;
+
 
     /**
      * Constructs a text file for data storage at the provided file path.

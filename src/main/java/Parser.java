@@ -17,8 +17,7 @@ public class Parser {
         if (command.equals("list")) {
             return new ListCommand();
         } else if (command.contains("done")) {
-
-            int index;
+            int index = 0;
             try {
                 index = Integer.parseInt(command.substring(command.length() - 1));
             } catch (NumberFormatException e) {

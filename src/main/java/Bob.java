@@ -1,47 +1,40 @@
 import main.java.*;
 
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
-import java.util.Scanner;
-
 public class Bob {
     private TaskList tasks = new TaskList();
     private Storage storage;
-    private UI ui;
+    private UI uI;
 
     public Bob(String filePath) {
-        ui = new UI();
+        uI = new UI();
         storage = new Storage(filePath);
         tasks = new TaskList();
+
         try {
             storage.initialiseStorage();
             storage.loadSave(tasks);
         } catch (BobException e) {
-            ui.printError(e.getMessage());
+            uI.printError(e.getMessage());
         }
     }
 
     public void run() {
-        ui.greet();
+        uI.greet();
+
         boolean isExit = false;
+
         while (!isExit) {
             try {
-                String command = ui.readCommand();
+                String command = uI.readCommand();
                 Command c = Parser.parse(command);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, uI, storage);
                 isExit = c.isExit();
             } catch (BobException e) {
-                ui.printError(e.getMessage());
-            } finally {
-
+                uI.printError(e.getMessage());
             }
         }
     }
+
     public static void main(String[] args) {
         new Bob("data/save.txt").run();
     }

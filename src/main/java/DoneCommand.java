@@ -8,8 +8,9 @@ import java.io.IOException;
  * and update stored data respectively.
  */
 public class DoneCommand extends Command {
+
     /** The index of the task to be marked as done on the TaskList */
-    int index;
+    private int index;
 
     /** Constructs a DoneCommand by assigning a provided integer to the index parameter. */
     DoneCommand(int index) {

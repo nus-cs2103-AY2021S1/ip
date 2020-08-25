@@ -1,9 +1,9 @@
 package main.java;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Encapsulates a task with a deadline.
@@ -11,11 +11,11 @@ import java.time.temporal.ChronoUnit;
 
 public class Deadline extends Task {
     /**The deadline of the task to be completed by. */
-    LocalDateTime  deadline;
+    private LocalDateTime  deadline;
     /**The format of inputted dates that the class can accept. */
-    static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     /**The format of outputted dates by the class. */
-    static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
+    private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
 
     /**
      * Constructs a task that has not been completed
