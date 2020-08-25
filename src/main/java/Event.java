@@ -18,21 +18,11 @@ public class Event extends Task {
 
     @Override
     public String getStorageFormat() {
-        return "E | " + super.getStorageFormat() + " | " + eventTime;
+        return "E | " + super.getStorageFormat() + " | " + eventDateString;
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + eventDateString + ")";
-    }
-
-    public static Event makeTaskFromInput(String taskName, String time) throws DukeException {
-        if (taskName.isBlank()) {
-            throw DukeException.badEventTask();
-        } else if (time.isBlank()) {
-            throw DukeException.badEventDate();
-        }
-
-        return new Event(taskName, time);
     }
 }

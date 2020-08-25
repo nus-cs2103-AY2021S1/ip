@@ -8,18 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class DataStorage {
+public class Storage {
     private String filePath;
     private Scanner sc;
 
-    public DataStorage(String filePath) throws IOException {
+    public Storage(String filePath) throws IOException {
         if (!Files.exists(Paths.get(filePath))) {
             Files.createFile(Paths.get(filePath));
         }
         this.filePath = filePath;
     }
 
-    public List<Task> getTaskList() throws FileNotFoundException, DukeException {
+    public List<Task> load() throws FileNotFoundException, DukeException {
         List<Task> tasks = new ArrayList<>();
         List<String> linesOfFile = new ArrayList<>();
         try {
@@ -68,7 +68,15 @@ public class DataStorage {
         return tasks;
     }
 
-    public void writeTask(Task task) throws IOException {
-        Files.writeString(Paths.get(filePath), "\n" + task.getStorageFormat(), StandardOpenOption.APPEND);
+    public void storeTaskList(TaskList tasks) throws IOException {
+        Files.writeString(Paths.get(filePath), ""); // clear storage
+
+        for (int i = 0; i < tasks.numTasks(); i++) {
+            String formattedData = i == 0
+                    ? tasks.getTask(i).getStorageFormat()
+                    : "\n" + tasks.getTask(i).getStorageFormat();
+
+            Files.writeString(Paths.get(filePath), formattedData, StandardOpenOption.APPEND);
+        }
     }
 }
