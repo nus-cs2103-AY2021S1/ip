@@ -1,15 +1,18 @@
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class keeps track of, and manages the User's current list
  */
 public class Planner {
 
-    private List<Task> lst;
+    private ArrayList<Task> lst;
 
     public Planner () {
         this.lst = new ArrayList<>();
+    }
+
+    public ArrayList<Task> getList() {
+        return lst;
     }
 
     // This method is responsible for inserting text into list, and updating current index

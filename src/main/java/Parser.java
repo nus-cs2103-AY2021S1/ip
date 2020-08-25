@@ -1,12 +1,9 @@
 public class Parser {
 
-    private final Planner lst;
-
     public Parser() {
-        this.lst = new Planner();
     }
 
-    public String parse(String msg) throws JimmyException {
+    public static String parse(Planner lst, String msg) throws JimmyException {
 
         String[] arr = msg.split(" ");
         boolean isLong = arr.length > 1;
