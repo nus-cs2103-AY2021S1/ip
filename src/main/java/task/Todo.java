@@ -1,10 +1,11 @@
 package task;
 
+import exceptions.DukeException;
 import exceptions.InvalidDescriptionException;
 
 public class Todo extends Task {
 
-    public Todo(String s) throws InvalidDescriptionException {
+    public Todo(String s) throws DukeException {
         super(s);
     }
 
@@ -23,6 +24,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString() + super.description;
+        return "[T]" + super.toString() + " " + super.description;
     }
 }

@@ -1,44 +1,42 @@
+import Commands.Command;
+import Parser.Parser;
+import Storage.Storage;
+import Ui.Ui;
+import exceptions.DukeException;
 import exceptions.InvalidCommandException;
 import task.Task;
+import task.TaskList;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private ArrayList<Task> taskList = new ArrayList<>();
-    private Database database;
+    private TaskList taskList;
+    private Storage storage;
+    private Ui ui;
 
-
-    private void getUserInput(ArrayList<Task> taskList) {
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNextLine()) {
-            String input = sc.nextLine();
-            Output output = new Output();
-            try {
-                output.response(input, taskList);
-            } catch (InvalidCommandException e) {
-                System.out.println(e.getMessage());
-            }
-            if (input.equals("bye")) break;
-        }
-        this.database.updateDatabase(taskList);
-        sc.close();
+    public Duke() {
+        storage = Storage.dbInstance();
+        taskList = storage.getTaskListFromDatabase();
+        ui = new Ui();
     }
 
-    private void printWelcomeMessage() {
-        String welcome = "_____________________________________\n"
-                + "Hello! I'm Ray\n" + "Please input a command\n"
-                + "_____________________________________\n";
-        System.out.println(welcome);
-    }
 
     public void start() {
-        this.database = Database.dbInstance();
-        //this.taskList = new TaskList();
-        printWelcomeMessage();
-        this.taskList = this.database.getTaskListFromDatabase();
-
-        getUserInput(this.taskList);
+        ui.printWelcomeMessage();
+        ui.printDatabaseTasks(taskList);
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.printDivider();
+                Command command = Parser.parse(fullCommand);
+                command.execute(taskList, ui, storage);
+                isExit = command.isExit;
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public static void main(String[] args) {

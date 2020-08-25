@@ -1,7 +1,6 @@
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+package Storage;
+
+import task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,15 +10,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Database {
+public class Storage {
     private String directory;
     private File db;
 
-    public static Database dbInstance() {
-        return new Database().init();
+    public static Storage dbInstance() {
+        return new Storage().init();
     }
 
-    private Database init() {
+    private Storage init() {
         String projectRoot = new File(System.getProperty("user.dir"))
                 .getParentFile()
                 .getPath();
@@ -34,28 +33,19 @@ public class Database {
         return this;
     }
 
-    public ArrayList<Task> getTaskListFromDatabase() {
-        ArrayList<Task> taskList = new ArrayList<>();
+    public TaskList getTaskListFromDatabase() {
+        TaskList taskList = new TaskList();
         try {
             File file = new File(this.directory);
             Scanner scanner = new Scanner(file);
 
             while (scanner.hasNextLine()) {
-                taskList.add(createTaskFromDatabase(scanner.nextLine()));
+                taskList.addTask(createTaskFromDatabase(scanner.nextLine()));
             }
         } catch (FileNotFoundException e) {
             System.out.println("Database file does not exist in directory");
         }
-        listAllItemsFromDatabase(taskList);
         return taskList;
-    }
-
-    public void listAllItemsFromDatabase(ArrayList<Task> taskList) {
-        System.out.println("Your saved tasks:");
-        for (int i = 0; i < taskList.size(); i++) {
-            String output = (i + 1) + "." + taskList.get(i);
-            System.out.println(output);
-        }
     }
 
     public Task createTaskFromDatabase(String string) {
@@ -76,18 +66,8 @@ public class Database {
         return null;
     }
 
-    public void updateDatabase(ArrayList<Task> taskList) {
-        StringBuilder stringBuilder = new StringBuilder();
-        taskList.forEach(task -> stringBuilder.append(task.formatTaskForDatabase() + "\n"));
-
-
-        try {
-            FileWriter fileWriter = new FileWriter(this.directory);
-            fileWriter.write(stringBuilder.toString());
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println("Error while updating database file");
-        }
+    public String getDirectory() {
+        return this.directory;
     }
 
 }

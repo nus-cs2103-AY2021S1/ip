@@ -1,5 +1,6 @@
 package task;
 
+import exceptions.DukeException;
 import exceptions.InvalidDescriptionException;
 
 import java.time.LocalDateTime;
@@ -9,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
-    public Deadline(String detail, LocalDateTime deadline) throws InvalidDescriptionException {
+    public Deadline(String detail, LocalDateTime deadline) throws DukeException {
         super(detail);
         this.deadline = deadline;
     }

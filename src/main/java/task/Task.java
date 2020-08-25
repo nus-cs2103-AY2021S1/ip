@@ -1,14 +1,15 @@
 package task;
 
+import exceptions.DukeException;
 import exceptions.InvalidDescriptionException;
 
 public abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String s) throws InvalidDescriptionException {
+    public Task(String s) throws DukeException {
         if (s.isBlank()) {
-            throw new InvalidDescriptionException("Please add a nice description to your todo :)");
+            throw new DukeException("Please add a nice description to your task :)");
         }
         this.description = s;
         this.isDone = false;

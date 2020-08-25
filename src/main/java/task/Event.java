@@ -1,5 +1,6 @@
 package task;
 
+import exceptions.DukeException;
 import exceptions.InvalidDescriptionException;
 import exceptions.MissingTimingException;
 import task.Task;
@@ -10,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDateTime timing;
 
-    public Event(String detail, LocalDateTime timing) throws InvalidDescriptionException {
+    public Event(String detail, LocalDateTime timing) throws DukeException {
         super(detail);
         this.timing = timing;
     }
