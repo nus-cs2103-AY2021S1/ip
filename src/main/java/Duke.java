@@ -24,13 +24,18 @@ public class Duke {
         String filePath = Paths.get("..", "..", "..", "data", "Tasklist.txt")
                 .toString();
 
+        /*
+        // Uncomment for testing
+        String filePath = Paths.get("..","data", "Tasklist.txt")
+                .toString();
+        */
+
         try {
             FileWriter myFile = new FileWriter(filePath);
             myFile.write(output); // Output is already all tasks in a string
             myFile.close();
-            System.out.println("WRITTEN TO FILE THE WHOLE LIST!!!!");
+
         } catch (IOException ex) {
-            System.out.println("Error IDIOT!!!");
             ex.printStackTrace();
         }
     }
@@ -50,7 +55,6 @@ public class Duke {
             // Keep reading new line until file end
             while (taskReader.hasNextLine()) {
                 String taskString = taskReader.nextLine();
-                //System.out.println(taskString);
 
                 // Only work with non empty lines
                 if (taskString != "") {
@@ -62,7 +66,6 @@ public class Duke {
                         String description = taskString.split("  ")[1];
                         Task t = new ToDo(description);
                         if (isDone) {
-                            System.out.println("It is done!");
                             t.setDone();
                         }
                         savedTasks.add(t);
@@ -77,7 +80,6 @@ public class Duke {
                                 .split("\\s[(]by:\\s")[1];
                         Deadline d = new Deadline(description, by);
                         if (isDone) {
-                            System.out.println("It is done!");
                             d.setDone();
                         }
                         savedTasks.add(d);
@@ -93,7 +95,6 @@ public class Duke {
                         String end = stringSplit[1].split("-")[1];
                         Event e = new Event(description, start, end);
                         if (isDone) {
-                            System.out.println("It is done!");
                             e.setDone();
                         }
                         savedTasks.add(e);
@@ -102,7 +103,6 @@ public class Duke {
                 }
             }
         } catch (FileNotFoundException ex) {
-            System.out.println("Error IDIOT!!!");
             ex.printStackTrace();
         }
         return savedTasks;
@@ -183,6 +183,10 @@ public class Duke {
                                 + "    As you wish Sire. I have marked this task as done:\n"
                                 + "       " + userTasks.get(index).toString());
                     }
+
+                    // Update Tasklist.txt after marking task as done
+                    saveToFile(listToString(userTasks));
+
                 } catch (DukeException ex) {
                     System.out.print(servantSpeak);
                     System.out.println(ex);
@@ -206,35 +210,15 @@ public class Duke {
                                 + "       " + userTasks.get(index).toString());
                         userTasks.remove(index);
                     }
+
+                    // Update Tasklist.txt after removing task
+                    saveToFile(listToString(userTasks));
+
                 } catch (DukeException ex) {
                     System.out.print(servantSpeak);
                     System.out.println(ex);
                 }
                 System.out.println();
-                continue;
-            }
-
-            if (input.equals("to string")) {
-                System.out.println(listToString(userTasks));
-                continue;
-            }
-
-            if (input.equals("to file")) {
-                saveToFile(listToString(userTasks));
-                System.out.println("File saved!!!!");
-                continue;
-            }
-
-            if (input.equals("from file")) {
-                ArrayList<Task> l = readFromFile();
-                int count = 1;
-                System.out.println("File is read!");
-                for (Task i : l) {
-                    System.out.println("    "
-                            + count + ". "
-                            + i.toString());
-                    count++;
-                }
                 continue;
             }
 
@@ -321,6 +305,9 @@ public class Duke {
                     + userTasks.get(userTasks.size() - 1).toString() + "\n"
                     + "    Now you have " + userTasks.size()
                     + " tasks in the list.\n");
+
+            // Update Tasklist.txt after adding task
+            saveToFile(listToString(userTasks));
         }
     }
 }
