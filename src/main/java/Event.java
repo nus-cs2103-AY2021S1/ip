@@ -8,6 +8,11 @@ public class Event extends Task{
     }
 
     @Override
+    public String diskFormat() {
+        return "     E | " + super.diskFormat() + " | " + at;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }

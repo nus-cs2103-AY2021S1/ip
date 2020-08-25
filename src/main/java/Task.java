@@ -9,7 +9,7 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-//        return (isDone ? "tick" : "cross");
+        //return (isDone ? "tick" : "cross");
     }
 
     public void markAsDone() {
@@ -24,6 +24,14 @@ public class Task {
     public void printTask() {
         String output = "     " + this.toString();
         System.out.println(output);
+    }
+
+    public String getString() {
+        return "     " + this.toString();
+    }
+
+    public String diskFormat() {
+        return this.getStatusIcon() + " | " + this.description;
     }
 
     @Override

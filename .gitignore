@@ -20,5 +20,10 @@ src/main/java/Task.class
 src/main/java/Todo.class
 src/main/java/Event.class
 src/main/java/Deadline.class
+<<<<<<< HEAD
 src/main/java/Sparkles.txt
 text-ui-test/Sparkles.txt
+=======
+text-ui-test/Sparkles.txt
+src/main/java/Sparkles.txt
+>>>>>>> branch-level-7
