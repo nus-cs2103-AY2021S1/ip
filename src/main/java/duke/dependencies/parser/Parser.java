@@ -4,71 +4,192 @@ import duke.dependencies.dukeexceptions.DukeException;
 import duke.dependencies.dukeexceptions.EmptyTaskException;
 import duke.dependencies.dukeexceptions.InvalidDateException;
 import duke.dependencies.dukeexceptions.UnknownCommandException;
-import duke.dependencies.dukeexceptions.UnspecifiedDateException;
+import duke.dependencies.executable.Command;
+import duke.dependencies.executable.Executable;
+import duke.dependencies.task.Task;
+import duke.dependencies.task.TaskDate;
 
-import duke.dependencies.executor.Executor;
+import java.util.Locale;
+import java.util.regex.Pattern;
 
-/**
- * Parser class which parses the given input. Checks if any command is given
- * and command is valid. Also validates the format of the dates given and ensures/enforces user compliance to
- * input formats before parsing into an Executable
- */
-public class Parser {
-    /** Object for executing the commands. */
-    private static final Executor executor = Executor.initExecutor();
+class Checker {
+    private final Executable command;
 
     /**
-     * Private constructor for a Parser object.
-     */
-    private Parser() {}
-
-    /**
-     * Initializer for Parser.
+     * Constructor for the checker object. Validates the command given/if and creates an Executable object
+     * that can be passed to the executor.
      *
-     * @return The Parser object.
+     * @param e String to be parsed into an Executable for Executor.
      */
-    public static Parser initParser() {
-        return new Parser();
+    private Checker(Executable e) {
+        this.command = e;
     }
 
     /**
-     * Parses given command and determines if it is a valid command,
-     * and calls an executor to execute a valid command.
+     * Returns the Executable object.
+     * Executable object holds the Task object inside.
      *
-     * @param command
-     * @return Reply: what was done by the execution of input.
+     * @return The Executable object.
      */
-    public String parseAndExec(String command) {
-        Checker checker = null;
+    public Executable getExecutable() {
+        return this.command;
+    }
+
+    /**
+     * Static factory method for constructing the checker object.
+     * The Checker should have an Executable containing the task.
+     *
+     * @param s command
+     * @return Checker object
+     */
+    public static Checker parseAndCheck(String s) throws DukeException {
         try {
-            checker = Checker.parseAndCheck(command);
-            String reply;
-            reply = executor.receiveAndExec(checker.getExecutable());
-            return reply;
-//        } catch (EmptyTaskException e) {
-//            return e.toString();
-        } catch (EmptyTaskException e) {
-             System.out.println(e.getMessage());
-             return "You have to tell me what you want from me before I can do anything!!! O.o";
-
-        } catch (UnspecifiedDateException e) {
-            System.out.println(e.getMessage());
-            return "You need to give me the date!!!";
-
-        } catch (UnknownCommandException e) {
-            System.out.println(e.getMessage());
-            return "C'mon, you know I don't understand this!";
-
-        } catch (InvalidDateException e) {
-            System.out.println(e.getMessage());
-            return "I don't understand the date you are giving -_-\n" +
-                    "Please give in the following formats:\n" +
-                    "MM/dd/yyyy or yyyy-MM-dd";
-
+            return parseExplicitCommand(s);
         } catch (DukeException e) {
-            return "HUH???" + e.getMessage();
+            throw e;
         }
     }
 
+
+    /* -------------------------------------- END OF PUBLIC METHODS ----------------------------------------------- */
+
+    /**
+     * Checks for command that is passed in explicit format.
+     * eg.
+     * 1) "event (task) /at (date)"
+     * 2) "todo (task)"
+     * 3) "deadline (task) /by (date)"
+     *
+     * @param s input
+     * @return Checker object
+     */
+    private static Checker parseExplicitCommand(String s) throws DukeException {
+        Executable e;
+
+        /* LIST COMMAND */
+        if (s.contains("list") || s.contains("List")) {
+            e = Command.createListCommand(null);
+        }
+        /* DONE COMMAND */
+        else if (checkForWord(s, "done")) {
+            String task = cutOutTheWord(s, "done");
+            if (task.isBlank() || task.isEmpty()) {
+                throw new EmptyTaskException("Error: Done task cannot be empty");
+            }
+            Task t = Task.createMiscTask(task);
+            e = Command.createDoneCommand(t);
+
+        }
+        /* TODO_COMMAND */
+        else if (checkForWord(s, "todo")) {
+            String task = cutOutTheWord(s, "todo");
+            Task t = Task.createTodo(task);
+            if (task.isEmpty() || task.isBlank()) {
+                throw new EmptyTaskException("Error: Todo task cannot be empty");
+            }
+            e = Command.createAddCommand(t);
+
+        }
+        /* EVENT COMMAND */
+        else if (checkForWord(s, "event")) {
+            String task = cutOutTheWord(s, "event");
+            if (task.isBlank() || task.isEmpty()) {
+                throw new EmptyTaskException("Error: Event task cannot be empty");
+            }
+            String[] arr = task.split("/at");
+            if (!TaskDate.isValidFormat(arr[1].trim())) {
+                throw new InvalidDateException("Error: Date format not accepted.");
+            }
+            Task t = Task.createEvent(arr[0].trim(), arr[1].trim());
+            e = Command.createAddCommand(t);
+
+        }
+        /* DEADLINE COMMAND */
+        else  if (checkForWord(s, "deadline")) {
+            String task = cutOutTheWord(s, "deadline");
+            if (task.isEmpty() || task.isBlank()) {
+                throw new EmptyTaskException("Error: Deadline tasks cannot be empty");
+            }
+            String[] arr = task.split("/by");
+            if (!TaskDate.isValidFormat(arr[1].trim())) {
+                throw new InvalidDateException("Error: Date format not accepted.");
+            }
+            Task t = Task.createDeadline(arr[0].trim(), arr[1].trim());
+            e = Command.createAddCommand(t);
+
+        }
+        /* DELETE COMMAND */
+        else if (checkForWord(s, "delete")) {
+            String task = cutOutTheWord(s, "delete");
+            if (task.isEmpty() || task.isBlank()) {
+                throw new EmptyTaskException("Error: Task to be deleted cannot be empty");
+            }
+            Task t = Task.createMiscTask(task);
+            e = Command.createDeleteCommand(t);
+
+        }
+        /* FIND COMMAND */
+        else if (s.contains("find")) {
+            String task = cutOutTheWord(s,"find");
+            if (task.isEmpty() || task.isBlank()) {
+                throw new EmptyTaskException("Error: Empty field for find: keyword");
+            }
+            Task t = Task.createMiscTask(task);
+            e = Command.createFindCommand(t);
+        }
+        /* MYSTERIOUS ERROR/COMMAND */
+        else {
+            throw new UnknownCommandException("Error: Unknown command");
+        }
+
+        return new Checker(e);
+    }
+
+
+    /**
+     * Case insensitive check for a word.
+     * @param line
+     * @param word
+     * @return
+     */
+    private static boolean checkForWord(String line, String word) {
+        return Pattern.compile(Pattern.quote(word), Pattern.CASE_INSENSITIVE).matcher(line).find();
+    }
+
+    /**
+     * Case insensitive cutting out of the word.
+     * @param line
+     * @param cmd
+     * @return
+     */
+    private static String cutOutTheWord(String line, String cmd) {
+        String c2 = cmd.toUpperCase(Locale.UK);
+        String l2 = line.toUpperCase(Locale.UK);
+        int idx = l2.indexOf(c2);
+        return line.substring(idx + cmd.length()).trim();
+
+    }
+
+    private boolean isTodo(String s) {return false;}
+
+    public boolean isValidCommand(String s) {
+        return false;
+    }
+
+    /* ---------------------------------------- Additional Feature Section ------------------------------------------ */
+
+    /**
+     * Instead of parsing just natural language, this function will be able to parse a natural sentence.
+     * eg. "I have a meeting on Monday." -> "event meeting /at Monday"
+     * Remember to edit this only in the branch "add-ons".
+     *
+     * @param s
+     * @return
+     */
+    private static Checker parseNaturalLanguage(String s) {
+
+        return new Checker(null);
+
+    }
 
 }
