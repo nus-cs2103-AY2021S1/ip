@@ -1,5 +1,3 @@
-package main.java;
-
 import dependencies.parser.Parser;
 
 
