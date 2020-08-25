@@ -1,3 +1,11 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.MonthDay;
+import java.time.Year;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -43,8 +51,41 @@ public class Duke {
                 + (tasks.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
+    public static LocalDateTime parseDateTime(String input) throws DukeException {
+        String[] params = input.split("\\s");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M[/yyyy][/yy]");
+
+        try {
+            LocalDate date;
+            LocalTime time = LocalTime.MIDNIGHT;
+            TemporalAccessor result = dateFormatter.parseBest(params[0], LocalDate::from, MonthDay::from);
+
+            if (result instanceof LocalDate) {
+                date = ((LocalDate) result);
+            } else {
+                date = ((MonthDay) result).atYear(Year.now().getValue());
+            }
+
+            if (params.length == 2) {
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:m");
+                time = timeFormatter.parse(params[1], LocalTime::from);
+            } else if (params.length == 3) {
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:m a");
+                time = timeFormatter.parse(params[1] + " " + params[2], LocalTime::from);
+            }
+
+            return LocalDateTime.of(date, time);
+        } catch(DateTimeParseException e) {
+            throw new DukeException("Unable to parse date/time.\n \n"
+                    + "Please input your date/time in one of the following formats:\n"
+                    + "26/08\n" + "26/08 1:19\n" + "26/08 1:19 AM\n"
+                    + "26/08/20\n" + "26/08/20 1:19\n" + "26/08/20 1:19 AM\n"
+                    + "26/08/2020\n" + "26/08/2020 1:19\n" + "26/08/2020 1:19 AM");
+        }
+    }
+
     public static void addTodo(String description) throws DukeException {
-        if (description.equals("")) {
+        if (description.isEmpty()) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
 
@@ -57,14 +98,15 @@ public class Duke {
     public static void addDeadline(String input) throws DukeException {
         int index = input.indexOf(" /by ");
         String description = index == -1 ? input : input.substring(0, index);
-        String by = index == -1 ? "" : input.substring(index + 5);
+        String byStr = index == -1 ? "" : input.substring(index + 5);
 
-        if (description.equals("")) {
+        if (description.isEmpty()) {
             throw new DukeException("The description of a deadline cannot be empty.");
-        } else if (by.equals("")) {
+        } else if (byStr.isEmpty()) {
             throw new DukeException("The date/time of an event cannot be empty.");
         }
 
+        LocalDateTime by = parseDateTime(byStr);
         Deadline deadline = new Deadline(description, by);
 
         tasks.add(deadline);
@@ -74,14 +116,15 @@ public class Duke {
     public static void addEvent(String input) throws DukeException {
         int index = input.indexOf(" /at ");
         String description = index == -1 ? input : input.substring(0, index);
-        String at = index == -1 ? "" : input.substring(index + 5);
+        String atStr = index == -1 ? "" : input.substring(index + 5);
 
-        if (description.equals("")) {
+        if (description.isEmpty()) {
             throw new DukeException("The description of an event cannot be empty.");
-        } else if (at.equals("")) {
+        } else if (atStr.isEmpty()) {
             throw new DukeException("The date/time of an event cannot be empty.");
         }
 
+        LocalDateTime at = parseDateTime(atStr);
         Event event = new Event(description, at);
 
         tasks.add(event);
@@ -89,7 +132,7 @@ public class Duke {
     }
 
     public static void doTask(String otherInput) throws DukeException {
-        if (otherInput.equals("")) {
+        if (otherInput.isEmpty()) {
             throw new DukeException("Task number required for the done command.");
         } else if (!otherInput.chars().allMatch(Character::isDigit)) {
             throw new DukeException("Only positive integers allowed for the done command.");
@@ -109,7 +152,7 @@ public class Duke {
     }
 
     public static void deleteTask(String otherInput) throws DukeException {
-        if (otherInput.equals("")) {
+        if (otherInput.isEmpty()) {
             throw new DukeException("Task number required for the delete command.");
         } else if (!otherInput.chars().allMatch(Character::isDigit)) {
             throw new DukeException("Only positive integers allowed for the delete command.");
@@ -158,7 +201,7 @@ public class Duke {
             try {
                 switch (command) {
                     case "list":
-                        if (!otherInput.equals("")) {
+                        if (!otherInput.isEmpty()) {
                             throw new DukeException("I'm sorry, but I don't know what that means :-(");
                         }
 
