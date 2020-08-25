@@ -180,7 +180,7 @@ public class Duke {
      * Example: getStringAfterCharacter("abc def", ' ') returns "def"
      * @param task String to be operated on
      * @param character Character for the String to search for
-     * @return
+     * @return Substring after the character
      */
     static String getStringAfterCharacter(String task, Character character) {
         //gets String after character, e.g. if input is "Apple Juice" and character is " ", method returns "Juice"
@@ -202,7 +202,7 @@ public class Duke {
      * Example: getStringAfterCharacter("abc def", ' ') returns "abc"
      * @param task String to be operated on
      * @param character Character for the String to search for
-     * @return
+     * @return Substring after the character
      */
     static String getStringBeforeCharacter(String task, char character) {
         //gets a string before the first character
