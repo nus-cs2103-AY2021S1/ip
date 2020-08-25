@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -44,13 +47,15 @@ public class Bot {
                 this.printSection();
                 System.out.println(e.getMessage());
                 this.printSection();
+            } catch (DateTimeParseException e) {
+                System.out.println("Please input a valid format e.g. event party /at 2020-08-25 19:00-22:00");
             } catch (NumberFormatException e) {
                 this.printSection();
-                System.out.println("Please input a number");
+                System.out.println("Sorry I don't understand");
                 this.printSection();
             } catch (IndexOutOfBoundsException e) {
                 this.printSection();
-                System.out.println("Please input a valid number");
+                System.out.println("Sorry I don't understand");
                 this.printSection();
             } finally {
                 this.listen();
@@ -89,7 +94,14 @@ public class Bot {
         if (cut != -1) {
             String desc = next.substring(9, cut);
             String by = next.substring(cut + 5, next.length());
-            Deadline deadline = new Deadline(desc, by);
+            String[] dateAndTime = by.split(" ");
+            LocalDate date = LocalDate.parse(dateAndTime[0]);
+            Deadline deadline = null;
+            if (dateAndTime.length == 2) {
+                deadline = new Deadline(desc, date, LocalTime.parse(dateAndTime[1]));
+            } else {
+                deadline = new Deadline(desc, date);
+            }
             list.add(deadline);
             this.printSection();
             System.out.println("Got it. I've added this task:\n\t" + deadline);
@@ -104,8 +116,21 @@ public class Bot {
         int cut = next.indexOf(" /at ");
         if (cut != -1) {
             String desc = next.substring(6, cut);
-            String time = next.substring(cut + 5, next.length());
-            Event event = new Event(desc, time);
+            String at = next.substring(cut + 5, next.length());
+            String[] dateAndTime = at.split(" ");
+            LocalDate date = LocalDate.parse(dateAndTime[0]);
+            Event event = null;
+            if(dateAndTime.length == 2) {
+                String[] startAndEndTime = dateAndTime[1].split("-");
+                LocalTime startTime = LocalTime.parse(startAndEndTime[0]);
+                if (startAndEndTime.length == 2) {
+                    event = new Event(desc, date, startTime, LocalTime.parse(startAndEndTime[1]));
+                } else {
+                    event = new Event(desc, date, startTime);
+                }
+            } else {
+                event = new Event(desc, date);
+            }
             list.add(event);
             this.printSection();
             System.out.println("Got it. I've added this task:\n\t" + event);
