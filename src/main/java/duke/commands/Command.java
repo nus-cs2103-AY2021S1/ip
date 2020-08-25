@@ -14,12 +14,20 @@ public class Command {
     protected Duke duke;
     protected List<Task> taskList;
     private int targetIndex = -1;
+    private String targetString = "";
 
     /**
      * @param targetIndex last visible listing index of the target task
      */
     public Command(int targetIndex) {
         this.setTargetIndex(targetIndex);
+    }
+
+    /**
+     * @param targetString String that is the target
+     */
+    public Command(String targetString) {
+        this.setTargetString(targetString);
     }
 
     protected Command() {
@@ -46,4 +54,13 @@ public class Command {
     public void setTargetIndex(int targetIndex) {
         this.targetIndex = targetIndex;
     }
+
+    public String getTargetString() {
+        return targetString;
+    }
+
+    public void setTargetString(String targetString) {
+        this.targetString = targetString;
+    }
+
 }
