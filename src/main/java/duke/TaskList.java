@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -15,7 +17,7 @@ public class TaskList {
             throw new MissingTaskException();
         }
         Task task = store.remove(taskIndex);
-        System.out.println("Task deleted:");
+        System.out.println("duke.Task deleted:");
         System.out.println(task);
     }
     public void completeTask(Integer taskIndex) {
@@ -27,7 +29,7 @@ public class TaskList {
         // Set the task to done
         Task task = store.get(taskIndex);
         task.done();
-        System.out.println("Task marked as complete:");
+        System.out.println("duke.Task marked as complete:");
         System.out.println(task);
     }
 

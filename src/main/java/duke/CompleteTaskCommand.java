@@ -1,3 +1,5 @@
+package duke;
+
 public class CompleteTaskCommand implements Command {
     TaskList tasks;
     int taskIndex;

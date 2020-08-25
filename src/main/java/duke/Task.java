@@ -1,3 +1,5 @@
+package duke;
+
 public class Task {
     private Boolean isDone; // Whether a task is complete
     private String name; // The task name

@@ -1,7 +1,5 @@
-import java.io.File;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
+package duke;
+
 import java.util.Scanner;
 
 public class Ui {

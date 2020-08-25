@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Thrown if command missing arguments
  */

@@ -1,3 +1,5 @@
+package duke;
+
 public class CreateTaskCommand implements Command {
     TaskList tasks;
     Task task;

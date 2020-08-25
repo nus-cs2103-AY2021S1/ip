@@ -1,3 +1,5 @@
+package duke;
+
 public class DeleteTaskCommand implements Command {
     TaskList tasks;
     int taskIndex;
