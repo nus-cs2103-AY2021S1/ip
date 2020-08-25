@@ -22,13 +22,14 @@ public class Duke {
         String s;
         Ui.welcomeMessage();
         Parser.Command command;
-        while((command = Parser.parse(s = scanner.nextLine(), tasks.size())) != Parser.Command.BYE) {
+        while ((command = Parser.parse(s = scanner.nextLine(), tasks.size()))
+                != Parser.Command.BYE) {
             switch (command) {
                 default:
                     try {
                         Task task = Parser.createTask(s);
                         tasks.addTask(task);
-                        Ui.addTaskMessage(tasks.get(tasks.size()-1), tasks.size());
+                        Ui.addTaskMessage(tasks.get(tasks.size() - 1), tasks.size());
                     } catch (DukeException e) {
                         if (e.getMessage().equals(DukeException.IGNORE)) {
                             Ui.ignoreMessage();

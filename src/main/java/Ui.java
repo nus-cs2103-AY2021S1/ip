@@ -26,8 +26,8 @@ public class Ui {
     public static void list(TaskList tasks) {
         ArrayList<Task> list = tasks.taskList;
         String temp = "";
-        for(int i = 0; i < list.size(); i++) {
-            temp += "\t" + (i+1) + ". " + list.get(i) + "\n";
+        for (int i = 0; i < list.size(); i++) {
+            temp += "\t" + (i + 1) + ". " + list.get(i) + "\n";
         }
         print("\tHere are the tasks in your list:\n" + temp);
     }
