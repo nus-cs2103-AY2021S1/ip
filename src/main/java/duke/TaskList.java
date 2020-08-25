@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -12,6 +12,10 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * updating the taskList from the database if file is found
+     * @param s
+     */
     TaskList(List<String> s) {
         this.tasks = new ArrayList<>();
         for (int i = 0; i < s.size(); i++) {
@@ -19,12 +23,22 @@ public class TaskList {
         }
     }
 
+    /**
+     * method to mark a task in the list as done
+     * @param remain index of the task in list
+     */
+
     public static void doneTask(String remain) {
         int index = Integer.parseInt(remain);
         tasks.get(index-1).markAsDone();
         System.out.println("Nice! This task is marked as done!");
         System.out.println(tasks.get(index-1));
     }
+
+    /**
+     * method to add a todo item into the list
+     * @param command description of a todo
+     */
 
     public static void createTodo(String command) {
         if (command.isEmpty()) {
@@ -34,6 +48,11 @@ public class TaskList {
             Ui.addedTask(new Todo(command), tasks.size());
         }
     }
+
+    /**
+     * method to add an Event into the list
+     * @param command description of an event
+     */
 
     public static void createEvent(String command) {
         try {
@@ -47,6 +66,11 @@ public class TaskList {
             System.out.println(new DukeException("time"));
         }
     }
+
+    /**
+     * method to add a deadline into the list
+     * @param command description of an event
+     */
     public static void createDeadline(String command) {
         try {
             String description = command.split("/by ", 2)[0];
@@ -60,32 +84,10 @@ public class TaskList {
         }
     }
 
-//    public void addTask(String task, boolean print) {
-//        String type = task.split(" ", 2)[0];
-//        String title = task.split(" ", 2)[1];
-//
-//        //System.out.println(title);
-//        if (type.equals("todo")) {
-//            tasks.add(new Todo(title));
-//        } else {
-//            String description = title.split("/", 2)[0];
-//            Task newTask;
-//
-//            if (type.equals("deadline")) {
-//                String by = title.split("/by ", 2)[1];
-//                newTask = new Deadline(description, by);
-//                tasks.add(newTask);
-//            }
-//            if (type.equals("event")) {
-//                String at = title.split("/at ", 2)[1];
-//                newTask = new Event(description, at);
-//                tasks.add(newTask);
-//            }
-//        }
-//        if (print) {
-//            System.out.println("Got it. I've added this task:\n" + tasks.get(tasks.size() - 1));
-//        }
-//    }
+    /**
+     * method to recall the list of tasks
+     * @return
+     */
     public List<Task> getTaskList() {
         return tasks;
     }
@@ -118,18 +120,22 @@ public class TaskList {
         }
     }
 
-    public static void printList() {
+    public static void printTaskList() {
         System.out.println("Here are the tasks in your list: ");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i+1) + "." + tasks.get(i).toString());
         }
     }
 
+    /**
+     * method to delete a specific task at the index of the list
+     * @param command the specified index
+     */
+
     public static void deleteTask(String command) {
         int index = Integer.parseInt(command);
         Task k = tasks.get(index-1);
         tasks.remove(k);
         Ui.deletedTask(k);
-        //System.out.println(k);
     }
 }

@@ -1,14 +1,12 @@
-package Duke;
+package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Deadline extends Task {
     protected LocalDate by;
 
     public Deadline(String description, String by) {
         super(description);
-        //System.out.println(by);
         this.by = LocalDate.parse(by);
     }
     public Deadline(String description, String by, boolean done) {
@@ -16,6 +14,10 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
+    /**
+     * convert a Task string to a format that is "[task] [done/not done] /by [date]"
+     * @return a formatted string to be stored in a file
+     */
     @Override
     public String inputStyle() {
         return "deadline " + super.inputStyle() + "/by " + by;

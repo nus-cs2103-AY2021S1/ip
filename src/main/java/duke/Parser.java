@@ -1,12 +1,15 @@
-package Duke;
+package duke;
 public class Parser {
-    //String input;
 
     Parser() { }
 
+    /**
+     * split up the user input and recognise the executable functions
+     * @param input user input
+     */
     public void parse(String input) {
         if (input.contains("list")) {
-            TaskList.printList();
+            TaskList.printTaskList();
         } else if (input.contains("bye")) {
             Ui.bye();
         } else {

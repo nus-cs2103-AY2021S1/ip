@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -14,10 +14,13 @@ public class Event extends Task {
         super(description, done);
         this.at = LocalDate.parse(at);
     }
+    /**
+     * convert a Task string to a format that is "[task] [done/not done] /at [date]"
+     * @return a formatted string to be stored in a file
+     */
     @Override
     public String inputStyle() {
-        return "event " + super.inputStyle() + " /at " +
-                at;
+        return "event " + super.inputStyle() + " /at " + at;
     }
 
     @Override
