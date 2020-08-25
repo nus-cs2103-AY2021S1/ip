@@ -5,10 +5,18 @@ import seedu.bob.exceptions.BobEmptyFindException;
 import seedu.bob.storage.Storage;
 import seedu.bob.ui.Ui;
 
-
+/**
+ * Finds all tasks containing specific keyword.
+ */
 public class FindCommand extends Command {
     String input;
 
+    /**
+     * Creates a find command.
+     *
+     * @param input User input.
+     * @throws BobEmptyFindException If user input is empty.
+     */
     public FindCommand(String input) throws BobEmptyFindException {
 
         //Removes all whitespaces and checks if input is empty
