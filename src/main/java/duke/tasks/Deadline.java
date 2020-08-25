@@ -11,8 +11,8 @@ public class Deadline extends Task {
         this.time = time;
     }
 
-    public Deadline (String description, String time, boolean done) {
-        super (description, "Deadline", done);
+    public Deadline (String description, String time, boolean isDone) {
+        super (description, "Deadline", isDone);
         this.time = time;
     }
     
@@ -24,7 +24,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         Parser p = new Parser();
-        if (done) {
+        if (isDone) {
             return String.format ("[D][DONE] %s (by: %s)", this.description, p.convertDate(time));
         } else {
             return String.format ("[D][NOT DONE] %s (by: %s)", this.description, p.convertDate(time));

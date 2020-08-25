@@ -11,8 +11,8 @@ public class Event extends Task {
         this.time = time;
     }
     
-    public Event (String description, String time, boolean done) {
-        super (description, "Event", done);
+    public Event (String description, String time, boolean isDone) {
+        super (description, "Event", isDone);
         this.time = time;
     }
 
@@ -24,7 +24,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         Parser p = new Parser();
-        if (done) {
+        if (isDone) {
             return String.format ("[E][DONE] %s (at: %s)", this.description, p.convertDate(time));
         } else {
             return String.format ("[E][NOT DONE] %s (at: %s)", this.description, p.convertDate(time));

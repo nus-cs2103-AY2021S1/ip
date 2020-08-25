@@ -4,22 +4,22 @@ public class Task {
 
     protected String description;
     protected String type;
-    protected boolean done;
+    protected boolean isDone;
 
     public Task(String description, String type) {
         this.description = description;
         this.type = type;
-        this.done = false;
+        this.isDone = false;
     }
     
-    public Task (String description, String type, boolean done) {
+    public Task (String description, String type, boolean isDone) {
         this.description = description;
         this.type = type;
-        this.done = done;
+        this.isDone = isDone;
     }
     
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
@@ -28,7 +28,7 @@ public class Task {
      * @return Whether task is done 
      */
     public Boolean getDone(){
-        return this.done;
+        return this.isDone;
     }
 
     /**
@@ -55,7 +55,7 @@ public class Task {
 
     @Override
     public String toString(){
-        if (done) {
+        if (isDone) {
             return String.format ("[DONE] %s", this.description);
         } else {
             return String.format ("[NOT DONE] %s", this.description);
