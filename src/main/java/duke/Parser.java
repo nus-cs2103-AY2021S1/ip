@@ -2,7 +2,17 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * Parser class handles any incoming user input and generates the appropriate command
+ */
 public class Parser {
+    /**
+     * Genereating a Command object based on user input
+     * @param command User input as String
+     * @param list Current list of tasks
+     * @param storage Access to duke.ser
+     * @return The appropriate Command object
+     */
     public static Command parse(String command, TaskList list, Storage storage) {
         String hor_line = "____________________________________\n";
         Command c = new Command();

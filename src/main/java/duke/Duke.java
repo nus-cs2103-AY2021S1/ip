@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Main class to execute the todo list
+ */
 public class Duke {
 
     private TaskList tasks;

@@ -4,11 +4,20 @@ import duke.Event;
 import duke.Storage;
 import duke.TaskList;
 
+/**
+ * EventCommand class handles instructions when user wants to create Event
+ */
 public class EventCommand extends Command {
     public EventCommand(String command, TaskList list, Storage storage) {
         super(command, list, storage);
     }
 
+    /**
+     * Adds an Event object to TaskList object
+     * @param command User input
+     * @param list TaskList object containing all tasks
+     * @param storage Storage object that reads and writes to duke.ser
+     */
     @Override
     public void execute(String command, TaskList list, Storage storage) {
         String hor_line = "____________________________________\n";

@@ -4,11 +4,20 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Todo;
 
+/**
+ * TodoCommand class handles instructions when user wants to create Todo
+ */
 public class TodoCommand extends Command {
     public TodoCommand(String command, TaskList list, Storage storage) {
         super(command, list, storage);
     }
 
+    /**
+     * Adds a Todo object to TaskList object
+     * @param command User input
+     * @param list TaskList object containing all tasks
+     * @param storage Storage object that reads and writes to duke.ser
+     */
     @Override
     public void execute(String command, TaskList list, Storage storage) {
         String hor_line = "____________________________________\n";

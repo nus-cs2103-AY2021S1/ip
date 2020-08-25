@@ -2,6 +2,9 @@ package duke;
 
 import java.io.Serializable;
 
+/**
+ * Task class is a parent
+ */
 public class Task implements Serializable {
     protected boolean isComplete;
     protected int index;
@@ -13,6 +16,10 @@ public class Task implements Serializable {
         this.instructions = instructions;
     }
 
+    /**
+     * To change the status of a Task to done
+     * @return A completed Task object
+     */
     // mark a task as complete
     public Task markDone() {
         if (this instanceof Todo) {

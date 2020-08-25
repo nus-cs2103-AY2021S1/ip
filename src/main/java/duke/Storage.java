@@ -4,7 +4,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Storage class has access to duke.ser file for reading and writing of data
+ */
 public class Storage {
     String filePath;
 
@@ -12,6 +14,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Accesses duke.ser file in order to read and load in data as a List of Tasks
+     * @return List of stored Tasks
+     * @throws Exception FIle not found
+     */
     public List<Task> loadData() throws Exception {
         List<Task> list = new ArrayList<>();
         try{
@@ -30,6 +37,10 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Stores modified List of tasks and writes onto duke.ser for future access
+     * @param list List of stored Tasks
+     */
     public void writeData(List<Task> list) {
         try{
             FileOutputStream writeData = new FileOutputStream(filePath);
