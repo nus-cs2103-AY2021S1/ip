@@ -1,16 +1,8 @@
 import java.time.LocalDate;
 import java.util.Scanner;
 
-/**
- * Listener of inputs
- */
 public class Parser {
 
-    /**
-     * method to listen to inputs
-     * @param myTasklist the list to modify with inputs
-     * @param myUi the ui to get printing methods from
-     */
     public void listener(TaskList myTasklist, Ui myUi) {
         Scanner fetch = new Scanner(System.in);
         String currInput = fetch.nextLine();

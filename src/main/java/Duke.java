@@ -1,6 +1,4 @@
-/**
- * main class
- */
+
 public class Duke {
 
 
