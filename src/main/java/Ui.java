@@ -14,7 +14,7 @@ public class Ui {
 
     }
 
-    public static void weldome() {
+    public static void welcome() {
         String open = "_______________________________________ \n"
                 + "Hello! I'm Duke \n"
                 + "What can I do for you? \n"
@@ -90,7 +90,7 @@ public class Ui {
         System.out.println(output);
     }
 
-    public static void handleDeadline(String deadlineDetails) throws IOException {
+    public static void handleDeadline(String deadlineDetails) {
         String[] details = deadlineDetails.split(" /by ", 2);
         Deadline newDeadline = new Deadline(details[0], details[1], false);
         Duke.taskList.add(newDeadline);
@@ -101,7 +101,7 @@ public class Ui {
         System.out.println(output);
     }
 
-    public static void handleEvent(String eventDetails) throws IOException {
+    public static void handleEvent(String eventDetails) {
         String[] details = eventDetails.split(" /at ", 2);
         Event newEvent = new Event(details[0], details[1], false);
         Duke.taskList.add(newEvent);

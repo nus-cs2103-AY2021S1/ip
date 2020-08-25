@@ -9,8 +9,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Duke {
-    public static final String LINE = "_______________________________________\n";
-
     public Storage storage;
     public static TaskList taskList;
     public static Ui ui;
@@ -27,6 +25,7 @@ public class Duke {
     }
 
     public void run() {
+        ui.welcome();
         Scanner scanner = new Scanner(System.in);
         this.running = true;
         while(running) {
@@ -34,9 +33,10 @@ public class Duke {
             Parser.parse(userInput);
         }
         scanner.close();
+        ui.goodbye();
     }
 
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args) throws DukeException {
         new Duke("data/duke.txt").run();
     }
 }

@@ -15,39 +15,39 @@ public class Parser {
                 try {
                     Duke.ui.handleDone(inputSplit[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(LINE + "Invalid input! Please specify which task you have completed! \n" + LINE);
+                    throw new DukeException(LINE + "Invalid input! Please specify which task you have completed! \n" + LINE);
                 }
             } else if (userCommand.equals("todo")) { // Add new to do task
                 try {
                     Duke.ui.handleTodo(inputSplit[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(LINE + "Invalid input! Please specify your todo description! \n" + LINE);
+                    throw new DukeException(LINE + "Invalid input! Please specify your todo description! \n" + LINE);
                 }
             } else if (userCommand.equals("deadline")) { // Add new deadline
                 try {
                     Duke.ui.handleDeadline(inputSplit[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(LINE + "Invalid input! Please specify your deadline description and details! \n" + LINE);
+                    throw new DukeException(LINE + "Invalid input! Please specify your deadline description and details! \n" + LINE);
                 }
 
             } else if (userCommand.equals("event")) { // Add new event
                 try {
                     Duke.ui.handleEvent(inputSplit[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(LINE + "Invalid input! Please specify your event description and details! \n" + LINE);
+                    throw new DukeException(LINE + "Invalid input! Please specify your event description and details! \n" + LINE);
                 }
 
             } else if (userCommand.equals("delete")) { // Delete task
                 try {
                     Duke.ui.handleDelete(inputSplit[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(LINE + "Invalid input! Please specify which task you want to delete! \n" + LINE);
+                    throw new DukeException(LINE + "Invalid input! Please specify which task you want to delete! \n" + LINE);
                 }
             } else if (userCommand.equals("filter")) { // Filter taskList
                 try {
                     Duke.ui.handleFilter(inputSplit[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println(LINE + "Invalid input! Please specify which date you want to filter! \n" + LINE);
+                    throw new DukeException(LINE + "Invalid input! Please specify which date you want to filter! \n" + LINE);
                 }
             }
         } catch (DukeException e) {
