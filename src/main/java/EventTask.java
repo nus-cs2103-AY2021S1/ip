@@ -1,9 +1,11 @@
+import java.util.Date;
+
 public class EventTask extends Task {
-    String time;
+    Date time;
     public EventTask(
             Boolean isDone,
             String name,
-            String time
+            Date time
     ) {
         super(isDone, name);
         this.time = time;

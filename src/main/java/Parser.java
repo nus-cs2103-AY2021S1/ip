@@ -1,7 +1,9 @@
 import java.io.StreamCorruptedException;
-import java.lang.reflect.Array;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Parser {
     public static Integer parseInt(String str) {
@@ -14,13 +16,16 @@ public class Parser {
         }
     }
 
-    public static String[] tokenize(String str) {
-        return str.split(" ", 2);
+    public static Date parseDate(String dateStr) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-YYYY");
+        Date date = format.parse(dateStr);
+        return date;
     }
 
     // Parses lines of input
     // The parser is able to parse input from file
-    public static ArrayList<Task> parseFile(String string) throws StreamCorruptedException {
+    public static ArrayList<Task> parseFile(String string)
+            throws StreamCorruptedException, ParseException {
         Scanner scanner = new Scanner(string);
         ArrayList tasks = new ArrayList<>();
         while (scanner.hasNextLine()) {
@@ -32,7 +37,8 @@ public class Parser {
     }
 
     // Parses a single line of input from file
-    public static Task parseFileLine(String string) throws StreamCorruptedException {
+    public static Task parseFileLine(String string)
+            throws StreamCorruptedException, ParseException {
         String[] tokens = string.split("\\|");
         String type = tokens[0];
         switch (type) {
@@ -60,7 +66,7 @@ public class Parser {
                 return new EventTask(
                         tokens[1].equals("1"),
                         tokens[2],
-                        tokens[3]
+                        parseDate(tokens[3])
                 );
             }
             case "[D]": {
@@ -77,7 +83,7 @@ public class Parser {
                 return new DeadlineTask(
                         tokens[1].equals("1"),
                         tokens[2],
-                        tokens[3]
+                        parseDate(tokens[3])
                 );
             }
             default: {
@@ -87,7 +93,7 @@ public class Parser {
     }
 
     // Parses a single line of input from stdin into a command
-    public static Command parseLine(Storage store, String string) {
+    public static Command parseLine(Storage store, String string) throws ParseException {
         String[] tokens = string.split(",");
         String type = tokens[0];
         switch (type) {
@@ -116,7 +122,7 @@ public class Parser {
                 Task task = new EventTask(
                         false,
                         tokens[1],
-                        tokens[2]
+                        parseDate(tokens[2])
                 );
                 return new CreateTaskCommand(store, task);
             }
@@ -134,7 +140,7 @@ public class Parser {
                 Task task = new DeadlineTask(
                         false,
                         tokens[1],
-                        tokens[2]
+                        parseDate(tokens[2])
                 );
                 return new CreateTaskCommand(store, task);
             }

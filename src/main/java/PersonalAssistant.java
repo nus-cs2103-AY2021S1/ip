@@ -1,4 +1,5 @@
 import java.io.File;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -45,7 +46,6 @@ public class PersonalAssistant {
             System.out.println("Missing task!");
         } catch (Exception e) {
             System.out.println(e.toString());
-            throw e;
         } finally {
             this.getUserCommands();
         }
