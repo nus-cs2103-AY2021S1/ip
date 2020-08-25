@@ -5,6 +5,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String diskFormat() {
+        return "     T | " + super.diskFormat();
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
