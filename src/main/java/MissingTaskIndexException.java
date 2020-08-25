@@ -1,8 +1,6 @@
-public class MissingTaskIndexException extends Exception {
+public class MissingTaskIndexException extends DukeException {
 
-    @Override
-    public String toString() {
-        return "☹ OOPS!!! There isn't a task index inputted";
+    public MissingTaskIndexException() {
+        super("☹ OOPS!!! There isn't a task index inputted");
     }
-
 }

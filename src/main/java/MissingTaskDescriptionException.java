@@ -1,13 +1,6 @@
-public class MissingTaskDescriptionException extends Exception {
+public class MissingTaskDescriptionException extends DukeException {
 
-    public String taskType;
-
-    public MissingTaskDescriptionException(String taskType) {
-        this.taskType = taskType;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("☹ OOPS!!! The description of a %s cannot be empty.", taskType);
+    public MissingTaskDescriptionException() {
+        super("☹ OOPS!!! The description of a task cannot be empty.");
     }
 }

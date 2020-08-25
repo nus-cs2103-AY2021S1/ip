@@ -1,14 +1,6 @@
-public class MissingDateTimeException extends Exception {
+public class MissingDateTimeException extends DukeException {
 
-    public String taskType;
-
-    public MissingDateTimeException(String taskType) {
-        this.taskType = taskType;
+    public MissingDateTimeException() {
+        super ("☹ OOPS!!! The task does not have a date/time attached.");
     }
-
-    @Override
-    public String toString() {
-        return String.format("☹ OOPS!!! The %s does not have a date/time attached.", taskType);
-    }
-
 }

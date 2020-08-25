@@ -1,8 +1,6 @@
-public class InvalidTaskIndexException extends Exception {
+public class InvalidTaskIndexException extends DukeException {
 
-    @Override
-    public String toString() {
-        return "☹ OOPS!!! This task index does not exist in your list.";
+    public InvalidTaskIndexException() {
+        super("☹ OOPS!!! This task index does not exist in your list.");
     }
-
 }

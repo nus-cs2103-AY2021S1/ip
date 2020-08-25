@@ -5,6 +5,8 @@ if not exist ..\bin mkdir ..\bin
 
 REM delete output from previous run
 del ACTUAL.TXT
+del ..\text-ui-test\src\main\data\data.txt
+
 set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 REM compile the code into the bin folder
