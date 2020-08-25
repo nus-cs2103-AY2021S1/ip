@@ -61,6 +61,24 @@ public class UI {
         }
     }
 
+    public void displayMatchingList(ArrayList<Task> taskList) {
+        if (taskList.isEmpty()) {
+            showCmd(" I've found no matching tasks with the keyword! T_T\n Try again!");
+        } else {
+            String s = "";
+            if (taskList.size() == 1) {
+                s = s.concat(" Here is the matching task in your list:\n");
+            } else {
+                s = s.concat(" Here are the matching tasks in your list:\n");
+            }
+            for (int i = 0; i < taskList.size(); i++) {
+                s = s.concat(" " + (i+1) + "." + taskList.get(i) + "\n");
+            }
+            s = s.substring(0, s.length() - 1);
+            showCmd(s);
+        }
+    }
+
     public String displayListSize(int n) {
         if (n == 0) {
             return (" Great job son! You're left with no more tasks!");
