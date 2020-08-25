@@ -95,6 +95,7 @@ public class Duke {
                     String description = curr.getDescription();
                     int index = description.indexOf("/") + 4;
                     curr.setDeadline(description.substring(index));
+                    curr.setDateTime();
                     store.add(curr);
                     System.out.println("-------------------------");
                     System.out.println("Got it. I've added this task:");
@@ -125,6 +126,7 @@ public class Duke {
                     String description = curr.getDescription();
                     int index = description.indexOf("/") + 4;
                     curr.setStart(description.substring(index));
+                    curr.setDateTime();
                     store.add(curr);
                     System.out.println("-------------------------");
                     System.out.println("Got it. I've added this task:");

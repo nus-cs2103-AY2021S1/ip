@@ -1,3 +1,2 @@
 
-[T][✘] test
-[D][✘] running /by Sunday
+[D][✘] test /by 2018-10-15 1800
