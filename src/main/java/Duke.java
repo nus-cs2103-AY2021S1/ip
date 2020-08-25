@@ -1,5 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Duke {
 
@@ -39,6 +42,28 @@ public class Duke {
 
     private static void formatDeletedTask(Task task) {
         formatResponse("Noted. I've removed this task: ", INDENT + task, "Now you have " + (tasks.size() - 1) + " task" + (tasks.size() == 2 ? "" : "s") + " in the list.");
+    }
+
+    public static void saveList() {
+        File dir = new File("src/data");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+        try {
+            File file = new File("src/data/duke.txt");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file);
+            String contents = "";
+            for (Task task: tasks) {
+                contents += task.getSavedString() + "\n";
+            }
+            fw.write(contents);
+            fw.close();
+        } catch (IOException ex) {
+            formatResponse("Could not save tasks.");
+        }
     }
 
     private static void addTask(String display) {
@@ -91,6 +116,7 @@ public class Duke {
                     int idx = Integer.parseInt(String.valueOf(display.charAt(5))) - 1;
                     tasks.get(idx).markAsDone();
                     formatDoneTask(tasks.get(idx));
+                    saveList();
                 } catch (IndexOutOfBoundsException ex) {
                     formatResponse("Task index is empty / out of bounds.");
                 }
@@ -99,11 +125,13 @@ public class Duke {
                     int idx = Integer.parseInt(String.valueOf(display.charAt(7))) - 1;
                     formatDeletedTask(tasks.get(idx));
                     tasks.remove(idx);
+                    saveList();
                 } catch (IndexOutOfBoundsException ex) {
                     System.out.println("Task index is empty / out of bounds.");
                 }
             } else if (!display.equals("bye")) {
                 addTask(display);
+                saveList();
             }
         }
        formatResponse("Bye. Hope to see you again soon!");
