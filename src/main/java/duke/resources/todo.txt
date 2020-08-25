@@ -2,3 +2,7 @@
 D/0/ sleep /2020-01-12
 E/0/ drink /2019-12-01
 T/0/ 1
+T/0/ book
+T/0/ read book
+T/0/ steal book
+T/0/ return book
