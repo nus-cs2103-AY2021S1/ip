@@ -11,16 +11,35 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Stores the user's list of tasks.
+ */
 public class TaskList {
 
+    /** The user's list of tasks */
     private List<Task> taskList = new ArrayList<>();
 
+    /**
+     * Creates and initializes a list of tasks that is empty.
+     */
     public TaskList() {}
 
+    /**
+     * Creates and initializes a list of tasks and populates it with tasks specified by the listOfTasks.
+     *
+     * @param listOfTasks The list of tasks in String format, to populate the task list with.
+     * @throws WrongFormatException If an error is present in the format of a task in the save file.
+     */
     public TaskList(List<String> listOfTasks) throws WrongFormatException {
         initiateTaskList(listOfTasks);
     }
 
+    /**
+     * Populates the task list with tasks specified by the listOfTasks.
+     *
+     * @param listOfTasks The list of tasks in String format, to populate the task list with.
+     * @throws WrongFormatException If an error is present in the format of a task in the save file.
+     */
     private void initiateTaskList(List<String> listOfTasks) throws WrongFormatException {
         for (String s : listOfTasks) {
             String[] splitLine = s.split("\\|");
@@ -42,30 +61,68 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the list of tasks.
+     *
+     * @return The task list.
+     */
     public List<Task> getTaskList() {
         return taskList;
     }
 
+    /**
+     * Returns the task in the task list that has the index specified by taskIndex.
+     *
+     * @param taskIndex The index of the task in the task list.
+     * @return The task with the specified index.
+     */
     public Task getTask(int taskIndex) {
         return taskList.get(taskIndex);
     }
 
+    /**
+     * Adds a task to the task list.
+     *
+     * @param task The task to be added to the task list.
+     */
     public void addTask(Task task) {
         taskList.add(task);
     }
 
+    /**
+     * Removes a task from the task list.
+     *
+     * @param taskIndex The index of the task to be removed.
+     * @return The removed task.
+     */
     public Task removeTask(int taskIndex) {
         return taskList.remove(taskIndex);
     }
 
+    /**
+     * Returns the number of tasks in the task list.
+     *
+     * @return The number of tasks in the task list.
+     */
     public int getNumberOfTasks() {
         return taskList.size();
     }
 
+    /**
+     * Indicates if the task list is empty or not.
+     *
+     * @return true if the task list is empty; false otherwise.
+     */
     public boolean isEmpty() {
         return taskList.isEmpty();
     }
 
+    /**
+     * Returns the String representation of the task list where all the tasks are represented in a top-down
+     * sequential order based on their indexes in the list. Each task occupies one line.
+     *
+     * @return The String representation of the task list.
+     */
     @Override
     public String toString() {
         int index = 1;

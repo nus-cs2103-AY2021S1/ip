@@ -3,16 +3,32 @@ package duke.task;
 import duke.exception.WrongFormatException;
 
 /**
- * Encapsulates a to-do list type of task for the duke.Duke program. A task is
- * inclusive of a textual description and a boolean flag to mark whether it has
- * been completed or not.
+ * Encapsulates a task for the Duke program. A task is inclusive of a textual description and a boolean flag to mark
+ * whether it has been completed or not. There are several types of tasks, namely: to-do, event and deadline.
  */
 public class Task {
-    protected String description; // Describes the task
-    protected boolean isDone; // Marks whether the task is completed or not
-    protected String taskTypeSymbol; // [T], [D] or [E]
-    protected String taskTypeName; // To-Do, duke.task.Deadline or duke.task.Event task
 
+    /** Describes the task */
+    protected String description;
+
+    /** Marks whether the task has been completed or not */
+    protected boolean isDone;
+
+    /** The symbol that represents the type of task */
+    protected String taskTypeSymbol; // [T], [D] or [E]
+
+    /** The name of the task type */
+    protected String taskTypeName; // to-do, deadline or event
+
+    /**
+     * Creates and initializes a task.
+     *
+     * @param description The description of the task.
+     * @param taskTypeSymbol The symbol that represents the type of task.
+     * @param taskTypeName The name of the task type.
+     * @param isDone Marks whether the task has been completed or not.
+     * @throws WrongFormatException If no description is provided.
+     */
     public Task(String description, String taskTypeSymbol, String taskTypeName, boolean isDone)
             throws WrongFormatException {
         if (description.isEmpty()) {
@@ -24,18 +40,36 @@ public class Task {
         this.taskTypeName = taskTypeName;
     }
 
+    /**
+     * Indicates if the task is completed or not.
+     *
+     * @return "✓" if the task is completed; "✘" if it is not completed.
+     */
     public String getStatusIcon() {
-        return (isDone ? "✓" : "✘"); //return tick or X symbols
+        return (isDone ? "✓" : "✘");
     }
 
+    /**
+     * Marks the task as completed.
+     */
     public void markAsDone() {
         isDone = true;
     }
 
+    /**
+     * Formats the string that will be written in the save file to represent this particular task.
+     *
+     * @return The string that will be written in the save file to represent this particular task.
+     */
     public String stringToSaveInMemory() {
         return taskTypeSymbol + "|" + (isDone ? 1 : 0) + "|" + description;
     }
 
+    /**
+     * Formats the way the task is presented to the user as part of the task list.
+     *
+     * @return The String that represents the task when it is presented to the user as part of the task list.
+     */
     @Override
     public String toString() {
         return taskTypeSymbol + "[" + getStatusIcon() + "] " + description;
