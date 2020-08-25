@@ -10,6 +10,14 @@ import luoyi.duke.data.task.TaskList;
 import luoyi.duke.data.task.ToDo;
 import luoyi.duke.storage.Storage;
 
+/**
+ * ToDoCommand class to encapsulate a todo command.
+ * A todo command creates a new event task,
+ * which has a description.
+ *
+ * A command must be initiated with a Duke object before
+ * it can execute.
+ */
 public class ToDoCommand extends Command {
     private final String description;
     private ToDoCommand(String description, IDuke duke) {
@@ -17,10 +25,22 @@ public class ToDoCommand extends Command {
         this.description = description;
     }
 
+    /**
+     * Returns an ToDoCommand object.
+     *
+     * @param description Description of todo.
+     * @return ToDoCommand object with specified properties, not yet initiated with duke.
+     */
     public static ToDoCommand getToDoCommand(String description) {
         return new ToDoCommand(description, null);
     }
 
+    /**
+     * Executes the todo command.
+     * Duke object duke must be initiated.
+     *
+     * @return Resultant duke object.
+     */
     @Override
     public IDuke execute() {
         if (duke == null) {
@@ -29,6 +49,14 @@ public class ToDoCommand extends Command {
         return handleToDo(description);
     }
 
+    /**
+     * Handles the todo operation.
+     * Creates a new todo task and store it in the returning Duke object.
+     *
+     * @param description Description of the event.
+     * @return The resulting duke object after adding the todo.
+     * @throws DukeIllegalArgumentException If the description is incorrect.
+     */
     private IDuke handleToDo(String description) throws DukeIllegalArgumentException {
         if (description.matches("\\s*")) {
             throw new DukeIllegalArgumentException(
@@ -43,6 +71,13 @@ public class ToDoCommand extends Command {
         return newDuke;
     }
 
+    /**
+     * Adds task in Duke object.
+     * Also invokes storage class to store task list on disk.
+     *
+     * @param task The tasks to be stored.
+     * @return The resultant Duke object with the task stored.
+     */
     public IDuke storeTask(ITask task) {
         Storage storage = duke.getStorage();
         TaskList newList = new TaskList(duke.getTasks().getList());

@@ -8,16 +8,35 @@ import luoyi.duke.data.exception.DukeIllegalArgumentException;
 import luoyi.duke.data.task.TaskList;
 import luoyi.duke.storage.Storage;
 
+/**
+ * DoneCommand class to encapsulate a done command.
+ * A done command marks done a task at a specific index.
+ *
+ * A command must be initiated with a Duke object before
+ * it can execute.
+ */
 public class DoneCommand extends Command {
 
     private DoneCommand(int targetIndex, IDuke duke) {
         super(targetIndex, duke);
     }
 
+    /**
+     * Returns a new done command.
+     *
+     * @param targetIndex Index of task which will be removed.
+     * @return DoneCommand object with specified properties, not yet initiated with duke.
+     */
     public static DoneCommand getDoneCommand(int targetIndex) {
         return new DoneCommand(targetIndex, null);
     }
 
+    /**
+     * Executes the done command.
+     * Duke object duke must be initiated.
+     *
+     * @return Resultant duke object.
+     */
     @Override
     public IDuke execute() {
         if (duke == null) {
@@ -26,6 +45,14 @@ public class DoneCommand extends Command {
         return handleDone(targetIndex);
     }
 
+    /**
+     * Handles done command.
+     * Marks the task at index {@code index} as done.
+     *
+     * @param index Index of task to be marked done.
+     * @return Resultant duke object.
+     * @throws DukeIllegalArgumentException If index is invalid.
+     */
     private IDuke handleDone(int index) throws DukeIllegalArgumentException {
         if (index < 1 || index > duke.getNumTask()) {
             throw new DukeIllegalArgumentException("Task index out of bound!");
@@ -42,7 +69,7 @@ public class DoneCommand extends Command {
      * Task to be done is specified by its index id.
      *
      * @return Duke with task done.
-     * @throws DukeIllegalArgumentException If index out of bound.
+     * @throws DukeIllegalArgumentException If index is invalid.
      */
     private IDuke doneTask(int id) throws DukeIllegalArgumentException {
         TaskList list = duke.getTasks();

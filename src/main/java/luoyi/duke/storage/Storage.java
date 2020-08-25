@@ -23,7 +23,7 @@ public class Storage {
     }
 
     /**
-     * Factory method for creating StorageManager.
+     * Returns a StorageManager object.
      * Storage file path is created if missing.
      *
      * @param filePath Path to the storage file.
@@ -75,6 +75,11 @@ public class Storage {
 
     }
 
+    /**
+     * Returns a list of tasks by reading from hard disk.
+     *
+     * @return A list of tasks stored on hard disk.
+     */
     public List<ITask> read() {
         try {
             return TaskDecoder.decodeList(readFromFile());
@@ -85,6 +90,11 @@ public class Storage {
         throw new RuntimeException("Unable to read task list from disk, exiting...");
     }
 
+    /**
+     * Prepare the file path if the file path is not present.
+     *
+     * @throws IOException If IO operation failed.
+     */
     private void preparePath() throws IOException {
         if (!Files.exists(filePath.getParent())) {
             Files.createDirectory(filePath.getParent());

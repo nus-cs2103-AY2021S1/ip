@@ -16,14 +16,14 @@ public interface IDuke {
     void bye();
 
     /**
-     * Gets a specific task from the list.
+     * Returns a specific task from the list.
      *
-     * @return The specified task
+     * @return The specified task.
      */
     ITask getTask(int id);
 
     /**
-     * Gets a list of all the tasks.
+     * Returns a list of all the tasks.
      *
      * @return The specified task
      */

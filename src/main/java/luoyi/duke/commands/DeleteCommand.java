@@ -8,23 +8,34 @@ import luoyi.duke.data.exception.DukeIllegalArgumentException;
 import luoyi.duke.data.task.TaskList;
 import luoyi.duke.storage.Storage;
 
+
+/**
+ * DeleteCommand class to encapsulate a deadline command.
+ * A delete command deletes a task at a specific index.
+ *
+ * A command must be initiated with a Duke object before
+ * it can execute.
+ */
 public class DeleteCommand extends Command {
     private DeleteCommand(int targetIndex, IDuke duke) {
         super(targetIndex, duke);
     }
 
     /**
-     * Factory method for getting DeleteCommand.
+     * Returns a DeleteCommand object.
      *
      * @param targetIndex Index of task to be deleted.
-     * @return DeleteCommand object.
+     * @return DeleteCommand object with specified properties, not yet initiated with duke.
      */
     public static DeleteCommand getDeleteCommand(int targetIndex) {
         return new DeleteCommand(targetIndex, null);
     }
 
     /**
-     * {@inheritDoc}
+     * Executes command and delete the task at targetIndex in duke.
+     * Duke object duke must be first initiated.
+     *
+     * @return Resultant Duke object.
      */
     @Override
     public IDuke execute() {
@@ -34,7 +45,14 @@ public class DeleteCommand extends Command {
         return handleDelete(targetIndex);
     }
 
-    private IDuke handleDelete(int index) {
+    /**
+     * Handles delete operation on duke.
+     *
+     * @param index Index of task to delete.
+     * @return The resultant Duke object.
+     * @throws DukeIllegalArgumentException If index is invalid.
+     */
+    private IDuke handleDelete(int index) throws DukeIllegalArgumentException {
         if (index < 1 || index > duke.getNumTask()) {
             throw new DukeIllegalArgumentException("Task index out of bound!");
         }
