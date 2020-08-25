@@ -2,7 +2,7 @@ import java.util.Objects;
 
 public abstract class Task {
     private final String name;
-    private boolean Done = false;
+    private boolean isDone = false;
     private static final String MESSAGE_BLANK_TASK = "Did you casually forget to put in the description of the task?";
 
     public Task(String name) throws BlankTaskException {
@@ -22,16 +22,17 @@ public abstract class Task {
     }
 
     public boolean isDone() {
-        return Done;
+        return isDone;
     }
 
     public void markAsDone() {
-        Done = true;
+        isDone = true;
     }
 
     public abstract String[] attributeList();
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -39,11 +40,12 @@ public abstract class Task {
             return false;
         }
         Task task = (Task) o;
-        return Done == task.Done &&
+        return isDone == task.isDone &&
                 Objects.equals(name, task.name);
     }
 
-    @Override public int hashCode() {
-        return Objects.hash(name, Done);
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, isDone);
     }
 }

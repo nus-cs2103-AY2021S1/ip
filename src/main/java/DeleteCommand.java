@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class DeleteCommand extends Command {
-    private short id;
+    private final short id;
 
     public DeleteCommand(short id) {
         this.id = id;
@@ -15,7 +15,8 @@ public class DeleteCommand extends Command {
         storage.updateMemory(tasks.getList());
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -26,7 +27,8 @@ public class DeleteCommand extends Command {
         return id == that.id;
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         return Objects.hash(id);
     }
 }

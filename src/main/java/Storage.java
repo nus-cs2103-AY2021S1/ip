@@ -14,9 +14,9 @@ public class Storage {
         this.filepath = filepath;
     }
 
-    void updateMemory(ArrayList<Task> taskList) throws IOException {
+    void updateMemory(ArrayList<Task> tasks) throws IOException {
         StringBuilder taskListString = new StringBuilder();
-        for (Task task : taskList) {
+        for (Task task : tasks) {
             for (String attribute : task.attributeList()) {
                 taskListString.append(attribute).append("\n");
             }

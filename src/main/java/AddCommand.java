@@ -23,7 +23,8 @@ public class AddCommand extends Command {
         storage.updateMemory(tasks.getList());
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -37,7 +38,8 @@ public class AddCommand extends Command {
                 Objects.equals(time, that.time);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         return Objects.hash(type, name, date, time);
     }
 }

@@ -8,12 +8,6 @@ public class Event extends Task {
     private final LocalDate date;
     private final LocalTime time;
 
-    //    public Event(String name, LocalDate date) throws BlankTaskException {
-    //        super(name);
-    //        this.date = date;
-    //        this.time = null;
-    //    }
-
     public Event(String name, LocalDate date, LocalTime time) throws BlankTaskException {
         super(name);
         this.date = date;
@@ -34,11 +28,13 @@ public class Event extends Task {
                 + (time == null ? "" : ", " + time.format(DateTimeFormatter.ofPattern("h.mm a"))) + ")";
     }
 
-    @Override public String[] attributeList() {
+    @Override
+    public String[] attributeList() {
         return new String[] { "E", getName(), date.toString(), time.toString(), String.valueOf(isDone()) };
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -53,7 +49,8 @@ public class Event extends Task {
                 Objects.equals(time, event.time);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         return Objects.hash(super.hashCode(), date, time);
     }
 }
