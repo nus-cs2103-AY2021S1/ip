@@ -39,11 +39,11 @@ public class Storage {
         }
     }
 
-    public void saveTasks(ArrayList<Task> taskList) {
+    public void saveTasks(ArrayList<Task> tasks) {
 
         StringBuilder taskString = new StringBuilder();
 
-        for (Task task: taskList) {
+        for (Task task: tasks) {
             taskString.append(task.saveFormat());
             taskString.append("\n");
         }

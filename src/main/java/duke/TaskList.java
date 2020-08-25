@@ -1,6 +1,10 @@
 package duke;
 
-import duke.exception.*;
+import duke.exception.DeadlineInvalidDate;
+import duke.exception.DuplicateTaskException;
+import duke.exception.EventInvalidDate;
+import duke.exception.InvalidDateException;
+import duke.exception.InvalidIndexException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -10,19 +14,18 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
 
-    private ArrayList<Task> list;
+    private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> taskList) {
-        this.list = taskList;
+        this.tasks = taskList;
     }
 
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     @Override
@@ -31,7 +34,7 @@ public class TaskList {
             return true;
         } else if (o instanceof TaskList) {
             TaskList t = (TaskList) o;
-            return list.equals(t.list);
+            return tasks.equals(t.tasks);
         } else {
             return false;
         }
@@ -52,12 +55,12 @@ public class TaskList {
 
     private void printList() {
 
-        if (list.size() == 0) {
+        if (tasks.size() == 0) {
             System.out.println("You have nothing on your list!");
         }
 
         int i = 1;
-        for (Task todo : list) {
+        for (Task todo : tasks) {
             System.out.println(i + ". " + todo);
             i++;
         }
@@ -67,7 +70,7 @@ public class TaskList {
     private void printList(LocalDate date) {
 
         int i = 0;
-        for (Task task : list) {
+        for (Task task : tasks) {
             if (task.getDate().equals(date)) {
                 if (i == 0) {
                     System.out.println("Here's your list on " +
@@ -79,7 +82,7 @@ public class TaskList {
             }
         }
 
-        if (i == 0 || list.size() == 0) {
+        if (i == 0 || tasks.size() == 0) {
             System.out.println("You have nothing to do on " +
                     date.format(DateTimeFormatter.ofPattern("dd MMM y.")));
         }
@@ -87,11 +90,11 @@ public class TaskList {
 
     public void addToDo(String task) throws DuplicateTaskException {
         Task toDo = new ToDo(task.trim());
-        if (list.contains(toDo)) {
+        if (tasks.contains(toDo)) {
             throw new DuplicateTaskException();
         }
 
-        list.add(toDo);
+        tasks.add(toDo);
     }
 
     public void addEvent(String input) throws DuplicateTaskException, EventInvalidDate {
@@ -118,10 +121,10 @@ public class TaskList {
                     ? new Event(task, date, endDate)
                     : new Event(task, date);
 
-            if (list.contains(event)) {
+            if (tasks.contains(event)) {
                 throw new DuplicateTaskException();
             } else {
-                list.add(event);
+                tasks.add(event);
             }
 
         } catch (StringIndexOutOfBoundsException | InvalidDateException e) {
@@ -140,10 +143,10 @@ public class TaskList {
 
             Deadline deadline = new Deadline(task, date);
 
-            if (list.contains(deadline)) {
+            if (tasks.contains(deadline)) {
                 throw new DuplicateTaskException();
             } else {
-                list.add(deadline);
+                tasks.add(deadline);
             }
 
         } catch (StringIndexOutOfBoundsException | InvalidDateException e) {
@@ -153,40 +156,40 @@ public class TaskList {
 
     public void markDone(int taskIndex) throws InvalidIndexException {
         try {
-            list.set(taskIndex, list.get(taskIndex).markDone());
+            tasks.set(taskIndex, tasks.get(taskIndex).markDone());
 
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println(list.get(taskIndex));
+            System.out.println(tasks.get(taskIndex));
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidIndexException(list.size());
+            throw new InvalidIndexException(tasks.size());
         }
     }
 
     public void deleteTask(int taskIndex) throws InvalidIndexException {
         try {
-            Task deleted = list.get(taskIndex);
-            list.remove(taskIndex);
+            Task deleted = tasks.get(taskIndex);
+            tasks.remove(taskIndex);
 
             System.out.println("Noted. I've removed this task:");
             System.out.println(deleted);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidIndexException(list.size());
+            throw new InvalidIndexException(tasks.size());
         }
     }
 
     public void printListSize() {
-        String taskText = list.size() == 1 ? " task " : " tasks ";
-        System.out.println("You have " + list.size() + taskText + "on your list.");
+        String taskText = tasks.size() == 1 ? " task " : " tasks ";
+        System.out.println("You have " + tasks.size() + taskText + "on your list.");
     }
 
     public void printNewTask() {
         System.out.println("Got it. I've added this task:");
-        System.out.println(list.get(list.size() - 1).toString());
+        System.out.println(tasks.get(tasks.size() - 1).toString());
 
         printListSize();
     }
 
-    public ArrayList<Task> getList() {
-        return list;
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 }

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Ui {
 
-    public static final String line = "____________________________________________________________";
+    public static final String LINE = "____________________________________________________________";
     private final String botName = "Bolot";
 
     private final Scanner sc = new Scanner(System.in);
@@ -19,10 +19,10 @@ public class Ui {
     }
 
     private void greet() {
-        System.out.println(line);
+        System.out.println(LINE);
         System.out.println("Hello! I am " + botName + ", your personal chat-bot companion.");
         System.out.println("How may I help you?");
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     public void showWelcome() {
@@ -37,7 +37,7 @@ public class Ui {
     }
 
     public void showLine() {
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     public String readCommand() {
