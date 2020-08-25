@@ -17,6 +17,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toSaveString() {
+        return (isDone ? 1 : 0) + "deadline " + description + "/by " + by;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + by + ")";
     }
