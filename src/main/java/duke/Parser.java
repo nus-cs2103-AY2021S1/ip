@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 public class Parser {
         public static void parse(String input, TaskList tasks) throws DukeException {
+            Ui ui = new Ui();
             String[] splitArr = input.split(" ");
             if (input.equals("bye")) {
-                Ui.goodbye();
+                ui.goodbye();
             } else if (input.equals("list")) {
-                Ui.list(tasks);
+                ui.list(tasks);
             } else if (splitArr.length == 2 && splitArr[0].equals("done") && Integer.parseInt(splitArr[1]) > 0) {
                 int index = Integer.parseInt(splitArr[1]);
                 if (index > tasks.size() || index < 0) {
@@ -16,14 +17,14 @@ public class Parser {
                 }
                 tasks.get(index - 1).setDone();
                 Task t = tasks.get(index - 1);
-                Ui.done(t);
+                ui.done(t);
             } else if (splitArr.length == 2 && splitArr[0].equals("delete") && Integer.parseInt(splitArr[1]) > 0) {
                 int index = Integer.parseInt(splitArr[1]);
                 if (index > tasks.size() || index < 0) {
                     throw new DukeException("That task number does not exist.");
                 }
                 Task deletedTask = tasks.remove(index - 1);
-                Ui.delete(index - 1, deletedTask, tasks.size());
+                ui.delete(index - 1, deletedTask, tasks.size());
             } else {
                 switch (splitArr[0]) {
                     case "todo":
@@ -32,7 +33,7 @@ public class Parser {
                         }
                         Task newTask = new ToDo(input.substring(5));
                         tasks.add(newTask);
-                        Ui.add(newTask, tasks.size());
+                        ui.add(newTask, tasks.size());
                         break;
                     case "deadline":
                         if (splitArr.length <= 1) {
@@ -47,7 +48,7 @@ public class Parser {
                         try {
                             Task newDeadline = new Deadline(desc, date);
                             tasks.add(newDeadline);
-                            Ui.add(newDeadline, tasks.size());
+                            ui.add(newDeadline, tasks.size());
                         } catch (Exception e) {
                             throw new DukeException("Please enter a valid YYYY-MM-DD date format!");
                         }
@@ -65,7 +66,7 @@ public class Parser {
                         try {
                             Task newEvent = new Event(des, dat);
                             tasks.add(newEvent);
-                            Ui.add(newEvent, tasks.size());
+                            ui.add(newEvent, tasks.size());
                         } catch (Exception e) {
                             throw new DukeException("Please enter a valid YYYY-MM-DD date format!");
                         }
