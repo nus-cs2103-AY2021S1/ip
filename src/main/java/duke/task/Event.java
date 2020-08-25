@@ -15,12 +15,12 @@ public class Event extends Task {
     @Override
     public String toSaveFormat() {
         return String.format("E | %d | %s | %s", this.isDone ? 1 : 0, 
-                this.description, DateFormatter.formatSave(this.at)
-        );
+                this.description, DateFormatter.formatSave(this.at));
     }
     
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), DateFormatter.formatDisplay(this.at));
+        return String.format("[E]%s (at: %s)", super.toString(), 
+                DateFormatter.formatDisplay(this.at));
     }
 }
