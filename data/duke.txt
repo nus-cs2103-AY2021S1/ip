@@ -1,2 +1,5 @@
-Deadline,false,return book,2020-02-02T18:20
-Event,false,meeting,2020-08-23T18:00,2020-08-23T19:20
+duke.task.Deadline,true,return book,2020-02-02T18:20
+duke.task.Event,true,meeting,2020-08-23T18:00,2020-08-23T19:20
+duke.task.Event,false,ML,2020-08-25T11:10,2020-08-25T18:54
+duke.task.Deadline,false,submission,2020-08-26T19:00
+duke.task.Todo,false,drink water

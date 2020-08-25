@@ -1,10 +1,18 @@
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.io.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -216,9 +224,9 @@ public class Duke {
       FileWriter writer = new FileWriter(dir + File.separator + fileName);
       for (Task task : dataArr) {
         String taskType = task.getClass().getTypeName();
-        if (taskType.equals("Todo")) {
+        if (taskType.equals("duke.task.Todo")) {
           writer.append(String.format("%s,%s,%s", taskType, task.isDone, task.description));
-        } else if (taskType.equals("Deadline")) {
+        } else if (taskType.equals("duke.task.Deadline")) {
           writer.append(
               String.format(
                   "%s,%s,%s,%s", taskType, task.isDone, task.description, ((Deadline) task).by));
@@ -245,17 +253,17 @@ public class Duke {
         String[] tempArr = fileLine.split(",");
         String command = tempArr[0];
         switch (command) {
-          case "Todo":
+          case "duke.task.Todo":
             dataArr.add(new Todo(tempArr[2]));
             break;
-          case "Deadline":
+          case "duke.task.Deadline":
             Task tempDeadline = new Deadline(tempArr[2], LocalDateTime.parse(tempArr[3]));
             if (tempArr[1].equals("true")) {
               tempDeadline.markAsDone();
             }
             dataArr.add(tempDeadline);
             break;
-          case "Event":
+          case "duke.task.Event":
             Task tempEvent =
                 new Event(
                     tempArr[2], LocalDateTime.parse(tempArr[3]), LocalDateTime.parse(tempArr[4]));

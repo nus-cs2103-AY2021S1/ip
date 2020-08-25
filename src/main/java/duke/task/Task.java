@@ -1,6 +1,8 @@
+package duke.task;
+
 public class Task {
-  protected String description;
-  protected boolean isDone;
+  public String description;
+  public boolean isDone;
 
   public Task(String description) {
     this.description = description;
@@ -11,7 +13,7 @@ public class Task {
     return (isDone ? "\u2713" : "\u2718"); // return tick of X symbols
   }
 
-  protected void markAsDone() {
+  public void markAsDone() {
     this.isDone = true;
   }
 
