@@ -16,6 +16,9 @@ public class Operation {
             if (order.length() >= 6
                         && order.substring(0, 4).equals(Status.DONE.name().toLowerCase())) {
                 done(order);
+            } else if (order.length() >= 8
+                    && order.substring(0, 6).equals(Status.DELETE.name().toLowerCase())){
+                delete(order);
             } else if (order.length() == 0) { }
 
             else {
@@ -41,7 +44,32 @@ public class Operation {
             DukeException.numberFormatException();
         }
     }
-    
+
+    public void delete(String order) {
+        try {
+            int num =
+                    Integer.parseInt(new Formating<>(order.substring(6)).shorten().getContent());
+
+            if (num > memory.getMemory().size()) {
+                DukeException.numberExcessException();
+            } else {
+
+                Task task = memory.getMemory().get(num - 1);
+                memory.getMemory().remove(num - 1);
+
+                String response =
+                    Status.DELETE.toString() +
+                    task + "\n" +
+                    String.format
+                        (Status.REPORT.toString(), memory.getMemory().size());
+
+                System.out.println(
+                        new Formating<>(new Echo(response)));
+            }
+        } catch (NumberFormatException e) {
+            DukeException.numberFormatException();
+        }
+    }
 
     public void identifier(String description) {
         int len = description.length();
