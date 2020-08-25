@@ -1,11 +1,6 @@
 package duke.parser;
 
-import duke.command.AddCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.ListCommand;
-import duke.command.ExitCommand;
-import duke.command.Command;
+import duke.command.*;
 import duke.task.Task;
 
 /**
@@ -32,6 +27,8 @@ public class Parser {
             return new DeleteCommand(userInput);
         } else if (userInput.equals("bye")) {
             return new ExitCommand(userInput);
+        } else if (t.getFirstWord().equals("find")) {
+            return new FindCommand(userInput);
         } else {
             return new AddCommand(userInput);
         }
