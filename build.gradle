@@ -5,7 +5,7 @@ plugins {
 apply plugin: 'java'
 
 application {
-    mainClassName = "Tickbot"
+    mainClassName = "tickbot.Tickbot"
 }
 
 repositories {
