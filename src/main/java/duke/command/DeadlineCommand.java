@@ -6,6 +6,9 @@ import main.java.duke.TaskList;
 import main.java.duke.Ui;
 import main.java.duke.task.Deadline;
 
+/**
+ * Represents a <code>Command</code> telling Duke to create a new <code>Deadline</code>.
+ */
 public class DeadlineCommand implements Command {
     String command;
 

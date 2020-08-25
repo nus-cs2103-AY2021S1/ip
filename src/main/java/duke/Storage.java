@@ -8,10 +8,19 @@ import java.io.IOException;
 import java.time.DateTimeException;
 import java.util.Scanner;
 
+/**
+ * Represents a file on which the user's tasks are stored.
+ */
 public class Storage {
     String filepath;
     File file;
 
+    /**
+     * Class constructor.
+     *
+     * @param filepath directory and name of the file to save the user's tasks to
+     * @throws DukeException if there is a problem when creating a new file on the user's system
+     */
     Storage(String filepath) throws DukeException {
         int i = filepath.lastIndexOf("/");
         if (i != -1) {
@@ -27,6 +36,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from a file into the <code>TaskList</code> object.
+     *
+     * @return a list of tasks previously saved by the user
+     */
     public TaskList readTasks() {
         TaskList taskList = new TaskList();
         try {
@@ -43,6 +57,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes the list of tasks into a file from the start.
+     *
+     * @param taskList the user's current list of tasks
+     */
     public void writeToFile(TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter(this.filepath);
@@ -59,6 +78,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends a task to the back of a file.
+     *
+     * @param task the new task to be saved
+     */
     public void appendToFile(Task task) {
         try {
             FileWriter fileWriter = new FileWriter(this.filepath, true);

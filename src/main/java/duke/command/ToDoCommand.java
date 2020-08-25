@@ -6,6 +6,9 @@ import main.java.duke.TaskList;
 import main.java.duke.Ui;
 import main.java.duke.task.ToDo;
 
+/**
+ * Represents a <code>Command</code> telling Duke to create a new <code>ToDo</code>.
+ */
 public class ToDoCommand implements Command {
     String command;
 

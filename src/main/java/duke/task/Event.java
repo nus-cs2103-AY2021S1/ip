@@ -6,6 +6,9 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a <code>Task</code> that takes place on a certain date.
+ */
 public class Event extends Task {
     private LocalDate duration;
 

@@ -4,6 +4,9 @@ import main.java.duke.DukeException;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a <code>Task</code> with no additional details.
+ */
 public class ToDo extends Task {
     public ToDo(String title) {
         super(title);
