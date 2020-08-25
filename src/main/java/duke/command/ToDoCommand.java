@@ -8,10 +8,10 @@ import duke.Ui;
 
 public class ToDoCommand extends Command {
     private Task task;
-   public ToDoCommand(Task task) {
-       this.task = task;
-   }
-    
+    public ToDoCommand(Task task) {
+        this.task = task;
+    }
+
     @Override
     public void execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
         taskItems.addTask(task);

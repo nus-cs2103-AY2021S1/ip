@@ -33,7 +33,7 @@ public class Storage {
         }
     }
 
-    public void saveTaskToMemory(List<Task> taskList) throws DukeException {
+    public void saveTaskToMemory(List<Task> taskItems) throws DukeException {
         File savedTasks = new File(filePath);
         try {
             if (!savedTasks.exists()) {
@@ -42,7 +42,7 @@ public class Storage {
             // Once file path exists, instantiate FileWriter Object.
             FileWriter fw = new FileWriter(filePath);
             String taskToWrite = "";
-            for (Task task: taskList) {
+            for (Task task: taskItems) {
                 if (task instanceof ToDo) {
                     taskToWrite += String.format("T,%d,%s\n", task.getIsDone() ? 1 : 0, task.getDescription());
                 } else if (task instanceof Deadline) {
@@ -67,13 +67,13 @@ public class Storage {
      * @return
      */
     public List<Task> loadTasksFromMemory() throws DukeException {
-        List<Task> tasksInMemory = new ArrayList<>();
+        List<Task> storedTasks = new ArrayList<>();
         try {
             File savedTasks = new File(filePath);
             // file or directory does not exists, make parent directory and file
             if (!savedTasks.exists()) {
                 handleFileOrDirectoryDoesNotExist(savedTasks);
-                return tasksInMemory;
+                return storedTasks;
             }
             // read and return from saved file
             Scanner sc = new Scanner(savedTasks);
@@ -81,29 +81,29 @@ public class Storage {
                 Task taskToAdd;
                 String savedTask = sc.nextLine();
                 // Array of task type, status, description and time
-                String[] parsedTask = savedTask.split(",");
-                String taskType = parsedTask[0];
-                boolean isDone = parsedTask[1].equals("1") ? true : false;
-                String description = parsedTask[2];
+                String[] parsedTasks = savedTask.split(",");
+                String taskType = parsedTasks[0];
+                boolean isDone = parsedTasks[1].equals("1") ? true : false;
+                String description = parsedTasks[2];
                 String time;
                 switch (taskType) {
                 case "T":
                     taskToAdd = new ToDo(description, isDone);
                     break;
                 case "D":
-                    time = parsedTask[3];
+                    time = parsedTasks[3];
                     taskToAdd = new Deadline(description, isDone, LocalDate.parse(time));
                     break;
                 case "E":
-                    time = parsedTask[3];
+                    time = parsedTasks[3];
                     taskToAdd = new Event(description, isDone, LocalDate.parse(time));
                     break;
                 default:
                    throw new DukeException("duke.task.Task cannot be read from Duke.txt");
                 }
-                tasksInMemory.add(taskToAdd);
+                storedTasks.add(taskToAdd);
             }
-            return tasksInMemory;
+            return storedTasks;
         } catch (IOException exception) {
             throw new DukeException(String.format("File cannot be loaded %s", exception.getMessage()));
         }

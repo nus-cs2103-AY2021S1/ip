@@ -26,7 +26,7 @@ public class UiTest {
         System.setErr(originalErr);
     }
     @Test
-    public void greetingMessage_stringReturned() {
+    public void greetingMessage_messageSuccess() {
         Ui ui = new Ui();
         ui.sayGoodbye();
         assertEquals("SAYONARA!", 

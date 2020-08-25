@@ -3,7 +3,7 @@ import duke.command.Command;
 
 public class Duke {
 
-    public static final String FILE_PATH = "data/duke.txt";
+    private static final String FILE_PATH = "data/duke.txt";
     private Storage storage;
     private TaskList taskItems;
     private Ui ui;
@@ -21,7 +21,7 @@ public class Duke {
     }    
     
     public void run() {
-        ui.greeting();
+        ui.greetUser();
         boolean isExit = false;
         while(!isExit) {
             try {

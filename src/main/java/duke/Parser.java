@@ -21,8 +21,8 @@ public class Parser {
      * Parses user input and carry out operations on user's tasks
      */
     static Command parse(String reply) throws DukeException {
-        String[] replyArray = reply.split(" ");
-        String command = replyArray[0];
+        String[] commandAndArguments = reply.split(" ");
+        String command = commandAndArguments[0];
         if (command.equals("bye")) {
             return new ByeCommand();
         } else if (command.equals("list")) {

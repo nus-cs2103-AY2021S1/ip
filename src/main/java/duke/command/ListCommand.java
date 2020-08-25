@@ -8,7 +8,7 @@ import duke.Ui;
 public class ListCommand extends Command {
     @Override
     public void execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
-        ui.printReply(ui.replyFormatter(taskItems.toString()));
+        ui.printReply(ui.formatReply(taskItems.toString()));
     }
 
     @Override
