@@ -27,8 +27,15 @@ public class Duke {
                         task.markAsDone();
                         System.out.println("Nice! I've marked this task as done:\n  " + task);
                         break;
+                    case "delete":
+                        index = Integer.parseInt(arr[1]) - 1;
+                        task = tasks.get(index);
+                        tasks.remove(index);
+                        int size = tasks.size();
+                        System.out.println("Noted. I've removed this task:\n  " + task + "\nNow you have " + size + " tasks in the list.");
+                        break;
                     case "todo":
-                        if (arr.length == 1) {
+                        if (arr.length == 1 || arr[1].strip().equals("")) {
                             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                         }
                         task = new ToDo(arr[1]);
@@ -36,7 +43,7 @@ public class Duke {
                         System.out.println("Got it. I've added this task:\n  " + task + "\nNow you have " + tasks.size() + " tasks in the list.");
                         break;
                     case "deadline":
-                        if (arr.length == 1) {
+                        if (arr.length == 1 || arr[1].strip().equals("")) {
                             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                         }
                         String[] strings = arr[1].split("/by");
@@ -45,7 +52,7 @@ public class Duke {
                         System.out.println("Got it. I've added this task:\n  " + task + "\nNow you have " + tasks.size() + " tasks in the list.");
                         break;
                     case "event":
-                        if (arr.length == 1) {
+                        if (arr.length == 1 || arr[1].strip().equals("")) {
                             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
                         }
                         strings = arr[1].split("/at");
