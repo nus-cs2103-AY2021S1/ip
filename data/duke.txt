@@ -1,0 +1,6 @@
+1.[T][✓] Sleep
+2.[T][✘] Play
+3.[D][✓] CS2103 week 3 iP (by: lol)
+4.[E][✘] date with Amanda (at: today)
+5.[T][✘] sleep
+6.[T][✘] check if iP works

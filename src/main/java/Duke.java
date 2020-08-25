@@ -1,3 +1,8 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -5,16 +10,18 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void printTaskList(List<Task> taskList) {
+    public static String getTaskListString(List<Task> taskList) {
         if (taskList.size() == 0) {
-            System.out.println("You have no tasks!");
+            return "You have no tasks!";
         } else {
+            String taskListString = "";
             int taskNumber = 1;
             while (taskNumber < taskList.size() + 1) {
                 Task task = taskList.get(taskNumber - 1);
-                System.out.println(taskNumber + "." + task.toString());
+                taskListString += taskNumber + "." + task.toString() + "\n";
                 taskNumber++;
             }
+            return taskListString;
         }
     }
 
@@ -22,16 +29,16 @@ public class Duke {
         // If task number is not given
         if (command.equals("done") || command.equals("done ")) {
             throw new DukeException("OOPS!!! Please indicate the number of the task you have completed.");
-        } else {
-            try {
-                int taskNumber = Integer.parseInt(command.split(" ", 2)[1]);
-                Task completedTask = taskList.get(taskNumber - 1);
-                completedTask.markAsDone();
-                taskList.set(taskNumber - 1, completedTask);
-                System.out.println("Nice! I've marked this task as done:\n" + "  " + completedTask.toString());
-            } catch (IndexOutOfBoundsException | NumberFormatException indexException) {
-                throw new DukeException("OOPS!!! Please enter a valid task number.");
-            }
+        }
+
+        try {
+            int taskNumber = Integer.parseInt(command.split(" ", 2)[1]);
+            Task completedTask = taskList.get(taskNumber - 1);
+            completedTask.markAsDone();
+            taskList.set(taskNumber - 1, completedTask);
+            System.out.println("Nice! I've marked this task as done:\n" + "  " + completedTask.toString());
+        } catch (IndexOutOfBoundsException | NumberFormatException indexException) {
+            throw new DukeException("OOPS!!! Please enter a valid task number.");
         }
     }
 
@@ -105,6 +112,27 @@ public class Duke {
         }
     }
 
+    public static void saveToFile(List<Task> taskList) throws DukeException {
+        try {
+            java.nio.file.Path pathToDirectory = java.nio.file.Paths.get("data");
+            java.nio.file.Path pathToFile = java.nio.file.Paths.get("data", "duke.txt");
+
+            // Make data directory if it doesn't exist
+            if (!pathToDirectory.toFile().exists()) {
+                File data = new File(pathToDirectory.toString());
+                data.mkdir();
+            }
+
+            String latestTaskListString = getTaskListString(taskList);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(pathToFile.toString()));
+            writer.write(latestTaskListString);
+            writer.close();
+
+        } catch (IOException ioException) {
+            throw new DukeException("OOPS!! Unable to save task list.");
+        }
+    }
+
     public static void main(String[] args) {
         // Print introduction
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
@@ -125,23 +153,26 @@ public class Duke {
                 case "":
                     break;
                 case "list":
-                    printTaskList(taskList);
+                    System.out.println(getTaskListString(taskList));
                     break;
                 case "bye":
                     System.out.println("Bye. Hope to see you again soon!");
                     return;
-                case "done":
-                    markTaskAsDone(taskList, command);
-                    break;
                 case "todo":
                     // Fallthrough
                 case "deadline":
                     // Fallthrough
                 case "event":
                     addTaskToList(taskList, command);
+                    saveToFile(taskList);
+                    break;
+                case "done":
+                    markTaskAsDone(taskList, command);
+                    saveToFile(taskList);
                     break;
                 case "delete":
                     deleteTaskFromList(taskList, command);
+                    saveToFile(taskList);
                     break;
                 default:
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");

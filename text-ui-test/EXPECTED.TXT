@@ -1,18 +1,9 @@
-Hello! I'm Duke
-What can I do for you?
 You have no tasks!
-OOPS!!! You didn't provide any task details.
-OOPS!!! You didn't provide any task details.
 OOPS!!! You didn't provide any task details.
 Got it. I've added this task:
   [T][✘] Sample Todo Task
 Now you have 1 tasks in the list
 OOPS!!! You didn't provide any task details.
-OOPS!!! You didn't provide any task details.
-OOPS!!! You didn't provide any task details.
-OOPS!!! Please add both a description and deadline for your task!
-OOPS!!! Please add both a description and deadline for your task!
-OOPS!!! Please add both a description and deadline for your task!
 OOPS!!! Please add both a description and deadline for your task!
 OOPS!!! Please add both a description and deadline for your task!
 OOPS!!! Please add both a description and deadline for your task!
@@ -21,11 +12,6 @@ Got it. I've added this task:
   [D][✘] Sample Deadline Task (by: 2020)
 Now you have 2 tasks in the list
 OOPS!!! You didn't provide any task details.
-OOPS!!! You didn't provide any task details.
-OOPS!!! You didn't provide any task details.
-OOPS!!! Please add both a description and date for your event!
-OOPS!!! Please add both a description and date for your event!
-OOPS!!! Please add both a description and date for your event!
 OOPS!!! Please add both a description and date for your event!
 OOPS!!! Please add both a description and date for your event!
 OOPS!!! Please add both a description and date for your event!
@@ -33,8 +19,6 @@ OOPS!!! Please add both a description and date for your event!
 Got it. I've added this task:
   [E][✘] Sample Event (at: today)
 Now you have 3 tasks in the list
-OOPS!!! Please indicate the number of the task you have completed.
-OOPS!!! Please indicate the number of the task you have completed.
 OOPS!!! Please indicate the number of the task you have completed.
 OOPS!!! Please enter a valid task number.
 OOPS!!! Please enter a valid task number.
@@ -44,9 +28,7 @@ Nice! I've marked this task as done:
   [E][✓] Sample Event (at: today)
 OOPS!!! Please enter a valid task number.
 OOPS!!! Please enter a valid task number.
-OOPS!!! Please enter a valid task number.
-OOPS!!! Please enter a valid task number.
-OOPS!!! Please enter a valid task number.
+OOPS!!! Please indicate the number of the task you want to delete.
 OOPS!!! Please enter a valid task number.
 OOPS!!! Please enter a valid task number.
 Noted. I've removed this task:
@@ -56,3 +38,4 @@ OOPS!!! Please enter a valid task number.
 OOPS!!! Please enter a valid task number.
 OOPS!!! Please enter a valid task number.
 OOPS!!! I'm sorry, but I don't know what that means :-(
+Bye. Hope to see you again soon!
