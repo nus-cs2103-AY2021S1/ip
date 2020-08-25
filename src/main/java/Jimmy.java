@@ -4,13 +4,13 @@ public class Jimmy {
     //private Parser parser;
     private Ui ui;
     private Storage storage;
-    private Planner planner;
+    private TaskList planner;
 
     public Jimmy() {
         //this.parser = new Parser();
         this.ui = new Ui();
         this.storage = new Storage();
-        this.planner = new Planner();
+        this.planner = new TaskList();
     }
 
     public void run() {

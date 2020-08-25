@@ -3,7 +3,7 @@ public class Parser {
     public Parser() {
     }
 
-    public static String parse(Planner lst, String msg) throws JimmyException {
+    public static String parse(TaskList lst, String msg) throws JimmyException {
 
         String[] arr = msg.split(" ");
         boolean isLong = arr.length > 1;

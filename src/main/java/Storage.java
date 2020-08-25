@@ -75,7 +75,7 @@ public class Storage {
         return t;
     }
 
-    public void updateList(Planner p) {
+    public void updateList(TaskList p) {
 
         try {
             FileWriter fw = new FileWriter(this.file.getPath());
@@ -90,7 +90,7 @@ public class Storage {
         }
     }
 
-    public void loadList(Planner p) {
+    public void loadList(TaskList p) {
         try {
             FileReader fr = new FileReader(this.file.getPath());
             BufferedReader br = new BufferedReader(fr);

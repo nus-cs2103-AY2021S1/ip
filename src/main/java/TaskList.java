@@ -3,11 +3,11 @@ import java.util.ArrayList;
 /**
  * This class keeps track of, and manages the User's current list
  */
-public class Planner {
+public class TaskList {
 
     private ArrayList<Task> lst;
 
-    public Planner () {
+    public TaskList () {
         this.lst = new ArrayList<>();
     }
 
