@@ -65,7 +65,7 @@ public class TaskListTest {
 
             ArrayList<Task> list = new ArrayList<>();
             list.add(new Deadline("project",
-                    LocalDateTime.of(LocalDate.parse("2020-08-27"), LocalTime.MAX)));
+                    LocalDateTime.of(LocalDate.parse("2020-08-27"), LocalTime.parse("23:59"))));
 
             TaskList taskListTemplate = new TaskList(list);
 
