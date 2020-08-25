@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * The storage handler. Handles saving and loading of data using
+ * <code>Serializable</code> objects.
+ */
 public class Storage {
 
     private FileInputStream fileIn;
@@ -22,6 +26,14 @@ public class Storage {
 
     }
 
+    /**
+     * Factory method for creating a <code>Storage</code> instance.
+     *
+     * @param directoryPath the directory path
+     * @param fileName      the file name of the ser database
+     * @return the storage instance
+     * @throws DukeIOException when unable to create directory
+     */
     public static Storage createStorage(String directoryPath, String fileName) throws DukeIOException {
         Path dirPath = Paths.get(directoryPath);
 
@@ -44,6 +56,12 @@ public class Storage {
 
     }
 
+    /**
+     * Load the saved list from the database.
+     *
+     * @return the array list
+     * @throws DukeIOException when data is corrupted
+     */
     @SuppressWarnings("unchecked")
     public ArrayList<Task> load() throws DukeIOException {
 
@@ -63,6 +81,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Save a given list into the database.
+     *
+     * @param tasks the <code>Task</code> list to save
+     * @throws DukeIOException when unable to write to database
+     */
     public void save(ArrayList<Task> tasks) throws DukeIOException {
 
         //Solution below adapted from https://www.javatpoint.com/serialization-in-java

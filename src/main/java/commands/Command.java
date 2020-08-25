@@ -12,6 +12,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.IntStream;
 
+/**
+ * The enum of all valid Commands
+ */
 public enum Command {
     LIST {
         @Override
@@ -26,6 +29,9 @@ public enum Command {
                     .strip();
         }
     },
+    /**
+     * The Done.
+     */
     DONE {
         @Override
         public String execute(HashMap<String, String> parameters, TaskList tasks) throws DukeException {
@@ -121,6 +127,13 @@ public enum Command {
 
     private static final ResourceBundle strings = ResourceBundle.getBundle("resources.StringsBundle", Locale.ENGLISH);
 
+    /**
+     * Factory method to choose the appropriate <code>Command</code> from a given <code>String</code>
+     *
+     * @param command the command as a <code>String</code>
+     * @return the command as a <code>Command</code>
+     * @throws DukeUnrecognisedCommandException thrown when command is invalid
+     */
     public static Command createCommand(String command) throws DukeUnrecognisedCommandException {
         Command ret;
         if (command.equals(strings.getString("command.list"))) {
@@ -144,5 +157,13 @@ public enum Command {
         return ret;
     }
 
+    /**
+     * Executes the logic of the corresponding command.
+     *
+     * @param parameters the parameters
+     * @param tasks      the tasks list for manipulation
+     * @return the output of the command as a <code>String</code>
+     * @throws DukeException general parent exception
+     */
     public abstract String execute(HashMap<String, String> parameters, TaskList tasks) throws DukeException;
 }

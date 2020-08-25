@@ -7,6 +7,9 @@ import utils.UI;
 
 import java.util.*;
 
+/**
+ * The main driver Class for the Duke Application.
+ */
 public class Duke {
 
     private static ResourceBundle strings;
@@ -23,6 +26,11 @@ public class Duke {
         tasks.setObserver(storage);
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
 
         try {
