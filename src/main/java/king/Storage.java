@@ -20,14 +20,13 @@ public class Storage {
             System.out.println(UI.errorBox("Invalid file path"));
         } else {
             String path = tokens[0];
-            for (int i = 1; i < pathLength - 1; i++){
+            for (int i = 1; i < pathLength; i++){
                 File directory = new File(path);
                 if (!directory.exists()){
                     directory.mkdir();
                 }
                 path += "/" + tokens[i];
             }
-            path += "/" + tokens[pathLength-1];
             try {
                 data = new File(path);
                 data.createNewFile();
@@ -94,6 +93,7 @@ public class Storage {
             output.close();
         } catch (IOException e){
             System.out.println(UI.errorBox("Error was encountered when saving list to asset."));
+            return false;
         } catch (Exception e){
             return false;
         }
