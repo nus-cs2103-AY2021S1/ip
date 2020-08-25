@@ -11,8 +11,8 @@ public class Parser {
 
     /**
      * Creates a Parser that handles user input.
-     * @param tasks TaskList for methods to be called on
-     * @param storage Storage and retrieval of TaskList
+     * @param tasks TaskList for methods to be called on.
+     * @param storage Storage and retrieval of TaskList.
      */
     public Parser(TaskList tasks, Storage storage) {
         this.tasks = tasks;
@@ -22,8 +22,8 @@ public class Parser {
     /**
      * Returns boolean to tell program whether to exit.
      * Parses a line of user input and calls relevant methods.
-     * @param commandLine entire line of user input to be handled
-     * @return whether to exit program
+     * @param commandLine Entire line of user input to be handled.
+     * @return Whether to exit program
      */
     public boolean parse(String commandLine) {
         String[] commandArr = commandLine.trim().split("\\s+", 2);
@@ -36,7 +36,6 @@ public class Parser {
             case "list":
                 if (commandArr.length == 1) {
                     tasks.displayList();
-                    break;
                 } else if (commandArr.length == 2) {
                     try {
                         tasks.filterList(commandArr[1]);
@@ -44,8 +43,8 @@ public class Parser {
                     } catch (DateTimeParseException e) {
                         System.out.println(Sparrow.standardExceptionMessage() + "Please enter a date in this format: yyyy-mm-dd");
                     }
-                    break;
                 }
+                break;
             case "done":
                 try {
                     tasks.markAsDone(commandArr[1]);
@@ -58,26 +57,26 @@ public class Parser {
                 try {
                     tasks.addTask("todo", commandArr[1]);
                     storage.saveTaskList(tasks.getTasks());
+                    break;
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new EmptyTodoDescriptionException("No description provided for todo.", e);
                 }
-                break;
             case "deadline":
                 try {
                     tasks.addTask("deadline", commandArr[1]);
                     storage.saveTaskList(tasks.getTasks());
+                    break;
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new EmptyDeadlineDescriptionException("No description provided for deadline.", e);
                 }
-                break;
             case "event":
                 try {
                     tasks.addTask("event", commandArr[1]);
                     storage.saveTaskList(tasks.getTasks());
+                    break;
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new EmptyEventDescriptionException("No description provided for event.", e);
                 }
-                break;
             case "delete":
                 try {
                     tasks.deleteTask(commandArr[1]);
@@ -90,15 +89,20 @@ public class Parser {
                 throw new UnknownCommandException(commandArr[0]);
             }
         } catch(MissingTaskNumberException e){
-            System.out.println(Sparrow.standardExceptionMessage() + "️ Please enter a task number after the \"done\"/\"delete\" command.");
+            System.out.println(Sparrow.standardExceptionMessage() +
+                    "️ Please enter a task number after the \"done\"/\"delete\" command.");
         } catch(EmptyTodoDescriptionException e){
-            System.out.println(Sparrow.standardExceptionMessage() + "️ The description of a todo cannot be empty.");
+            System.out.println(Sparrow.standardExceptionMessage() +
+                    "️ The description of a todo cannot be empty.");
         } catch(EmptyDeadlineDescriptionException e){
-            System.out.println(Sparrow.standardExceptionMessage() + "️ The description of a deadline cannot be empty.");
+            System.out.println(Sparrow.standardExceptionMessage() +
+                    "️ The description of a deadline cannot be empty.");
         } catch(EmptyEventDescriptionException e){
-            System.out.println(Sparrow.standardExceptionMessage() + "️ The description of an event cannot be empty.");
+            System.out.println(Sparrow.standardExceptionMessage() +
+                    "️ The description of an event cannot be empty.");
         } catch(UnknownCommandException e){
-            System.out.println(Sparrow.standardExceptionMessage() + "️ What be the meaning of this?");
+            System.out.println(Sparrow.standardExceptionMessage() +
+                    "️ What be the meaning of this?");
         }
         return true;
     }

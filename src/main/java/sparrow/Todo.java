@@ -6,7 +6,7 @@ package sparrow;
 public class Todo extends Task {
     /**
      * Creates a Todo.
-     * @param description details of the todo
+     * @param description Details of the todo
      */
     public Todo(String description) {
         super(description);

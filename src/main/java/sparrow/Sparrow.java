@@ -12,11 +12,10 @@ public class Sparrow {
         storage = new Storage("data/sparrow.Sparrow.txt");
         try {
             tasks = new TaskList(storage.loadFromFile());
-        } catch (AssertionError e ) {
+        } catch (AssertionError e) {
             System.out.println(standardExceptionMessage() + "file not loaded");
             tasks = new TaskList();
         }
-
     }
 
     public Storage getStorage() {
@@ -52,7 +51,7 @@ public class Sparrow {
      * Converts String representation of date to LocalDate.
      * @param dateStr String representation of a date.
      * @return LocalDate object.
-     * @throws DateTimeParseException
+     * @throws DateTimeParseException If input String cannot be parsed.
      */
     public static LocalDate stringToDate(String dateStr) throws DateTimeParseException {
         return LocalDate.parse(dateStr);
