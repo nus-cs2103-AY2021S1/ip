@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Storage {
-    Path path;
+    private Path path;
 
     public Storage(String filePath) {
         this.path = Paths.get(filePath);
@@ -25,20 +25,20 @@ public class Storage {
             if (words.length == 3) {
                 ToDo toDo = new ToDo(words[2]);
                 if (done == 1) {
-                    toDo.done();
+                    toDo.setDone();
                 }
                 tasks.add(toDo);
             } else {
                 if (words[0].equals("[E]")) {
                     Event event = new Event(words[2], words[3]);
                     if (done == 1) {
-                        event.done();
+                        event.setDone();
                     }
                     tasks.add(event);
                 } else {
                     Deadline deadline = new Deadline(words[2], words[3]);
                     if (done == 1) {
-                        deadline.done();
+                        deadline.setDone();
                     }
                     tasks.add(deadline);
                 }
@@ -58,7 +58,7 @@ public class Storage {
 
     public static void fileUpdate(TaskList tasks, Path path) throws IOException {
         FileWriter fw = new FileWriter(path.toString());
-        for (Task t : tasks.list) {
+        for (Task t : tasks.getList()) {
             int done = t.isDone ? 1 : 0;
             if (t instanceof Event) {
                 fw.write("[E]@" + done + "@" + t.desc + "@" +

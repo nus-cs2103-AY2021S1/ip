@@ -15,7 +15,7 @@ public class Ui {
 
     public void list(TaskList tasks) {
         int count = 1;
-        for (Task task : tasks.list) {
+        for (Task task : tasks.getList()) {
             System.out.println(count + "." + task.toString());
             count++;
         }

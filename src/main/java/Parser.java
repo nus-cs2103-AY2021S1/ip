@@ -4,7 +4,7 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Parser {
-    Ui ui;
+    private Ui ui;
 
     public Parser(Ui ui) {
         this.ui = ui;
@@ -25,8 +25,8 @@ public class Parser {
                 String[] words = line.split("\\s+");
                 if (words[0].equals("done")) {
                     try {
-                        int index = compDel(line, tasks.size());
-                        tasks.get(index).done();
+                        int index = completeDelete(line, tasks.size());
+                        tasks.get(index).setDone();
                         Storage.fileUpdate(tasks, path);
                         ui.done(tasks, index);
                     } catch (DukeException | IOException e) {
@@ -34,8 +34,7 @@ public class Parser {
                     }
                 } else if (words[0].equals("delete")) {
                     try {
-                        int index = compDel(line, tasks.size());
-                        Task task = tasks.get(index);
+                        int index = completeDelete(line, tasks.size());
                         ui.remove(tasks, index);
                         tasks.delete(index);
                         Storage.fileUpdate(tasks, path);
@@ -56,7 +55,7 @@ public class Parser {
         }
     }
 
-    public static int compDel(String str, int numTask) throws DukeException {
+    public static int completeDelete(String str, int numTask) throws DukeException {
         String[] words = str.split("\\s+");
         int len = words.length;
         if (len == 2) {
@@ -77,76 +76,77 @@ public class Parser {
         String[] words = str.split("\\s+");
         int len = words.length;
 
-        if (words[0].equals("todo")) {
-            if (len == 1) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-            } else {
-                String desc = "";
-                for (int i = 1; i < len; i++) {
-                    if (i == len - 1) {
-                        desc += words[i];
-                        break;
+        switch (words[0]) {
+            case "todo":
+                if (len == 1) {
+                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                } else {
+                    String desc = "";
+                    for (int i = 1; i < len; i++) {
+                        if (i == len - 1) {
+                            desc += words[i];
+                            break;
+                        }
+                        desc += words[i] + " ";
                     }
-                    desc += words[i] + " ";
+                    return new ToDo(desc);
                 }
-                return new ToDo(desc);
-            }
-        } else if (words[0].equals("deadline")) {
-            if (len == 1) {
-                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-            } else {
-                String desc = "";
-                String time = "";
-                int count = 0;
-                for (int i = 1; i < len; i++) {
-                    if (words[i].equals("/by")) {
-                        count = i + 1;
-                        desc = desc.substring(0,desc.length() - 1);
-                        break;
+            case "deadline":
+                if (len == 1) {
+                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                } else {
+                    String desc = "";
+                    String time = "";
+                    int count = 0;
+                    for (int i = 1; i < len; i++) {
+                        if (words[i].equals("/by")) {
+                            count = i + 1;
+                            desc = desc.substring(0, desc.length() - 1);
+                            break;
+                        }
+                        desc += words[i] + " ";
                     }
-                    desc += words[i] + " ";
-                }
-                if (count == 0 || count == len) {
-                    throw new DukeException("OOPS!!! The date/time of a deadline cannot be empty.");
-                }
-                for (int j = count; j < len; j++) {
-                    if (j == len - 1) {
-                        time += words[j];
-                        break;
+                    if (count == 0 || count == len) {
+                        throw new DukeException("OOPS!!! The date/time of a deadline cannot be empty.");
                     }
-                    time += words[j] + " ";
-                }
-                return new Deadline(desc, time);
-            }
-        } else if (words[0].equals("event")) {
-            if (len == 1) {
-                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-            } else {
-                String desc = "";
-                String time = "";
-                int count = 0;
-                for (int i = 1; i < len; i++) {
-                    if (words[i].equals("/at")) {
-                        count = i + 1;
-                        desc = desc.substring(0, desc.length() - 1);
-                        break;
+                    for (int j = count; j < len; j++) {
+                        if (j == len - 1) {
+                            time += words[j];
+                            break;
+                        }
+                        time += words[j] + " ";
                     }
-                    desc += words[i] + " ";
+                    return new Deadline(desc, time);
                 }
-                if (count == 0 || count == len) {
-                    throw new DukeException("OOPS!!! The date/time of a deadline cannot be empty.");
-                }
-                for (int j = count; j < len; j++) {
-                    if (j == len - 1) {
-                        time += words[j];
-                        break;
+            case "event":
+                if (len == 1) {
+                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                } else {
+                    String desc = "";
+                    String time = "";
+                    int count = 0;
+                    for (int i = 1; i < len; i++) {
+                        if (words[i].equals("/at")) {
+                            count = i + 1;
+                            desc = desc.substring(0, desc.length() - 1);
+                            break;
+                        }
+                        desc += words[i] + " ";
                     }
-                    time += " " + words[j];
+                    if (count == 0 || count == len) {
+                        throw new DukeException("OOPS!!! The date/time of a deadline cannot be empty.");
+                    }
+                    for (int j = count; j < len; j++) {
+                        if (j == len - 1) {
+                            time += words[j];
+                            break;
+                        }
+                        time += " " + words[j];
+                    }
+                    return new Event(desc, time);
                 }
-                return new Event(desc, time);
-            }
-        } else {
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            default:
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
