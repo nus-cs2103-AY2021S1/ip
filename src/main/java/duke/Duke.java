@@ -26,7 +26,7 @@ public class Duke {
             storage.populateToLstOfTask(taskList.getLstOfTask());
             ui.greetUser();
         } catch (IOException e) {
-            System.out.println(e.toString()+" Error trying to load tasks");
+            System.out.println(e.toString() + " Error trying to load tasks");
         }
     }
 
@@ -38,36 +38,36 @@ public class Duke {
                 ui.showInvalidCommandMessage();
             } else {
                 switch (checkedCommand) {
-                    case LIST:
-                        ui.listTask(taskList.getLstOfTask());
-                        break;
-                    case BYE:
-                        exit();
-                        ui.showExitMessage();
-                        break;
-                    case DONE:
-                        done(parsedUserInput);
-                        break;
-                    case TODO:
-                        addToDo(parsedUserInput);
-                        break;
-                    case EVENT:
-                        addEvent(parsedUserInput);
-                        break;
-                    case DEADLINE:
-                        addDeadline(parsedUserInput);
-                        break;
-                    case DELETE:
-                        delete(parsedUserInput);
-                        break;
-                    case FIND:
-                        search(parsedUserInput);
-                        break;
+                case LIST:
+                    ui.listTask(taskList.getLstOfTask());
+                    break;
+                case BYE:
+                    exit();
+                    ui.showExitMessage();
+                    break;
+                case DONE:
+                    done(parsedUserInput);
+                    break;
+                case TODO:
+                    addToDo(parsedUserInput);
+                    break;
+                case EVENT:
+                    addEvent(parsedUserInput);
+                    break;
+                case DEADLINE:
+                    addDeadline(parsedUserInput);
+                    break;
+                case DELETE:
+                    delete(parsedUserInput);
+                    break;
+                case FIND:
+                    search(parsedUserInput);
+                    break;
                 }
             }
 
         } catch (IndexOutOfBoundsException e) {
-           ui.showInvalidCommandMessage();
+            ui.showInvalidCommandMessage();
         }
     }
 
@@ -101,7 +101,7 @@ public class Duke {
             lstOfTask.remove(identifierNumberInArrayList);
             ui.showDeleteTaskMessage(task, taskList.getNumOfTask());
         } catch (IndexOutOfBoundsException e1) {
-           ui.showInvalidDeleteCommand();
+            ui.showInvalidDeleteCommand();
         }
     }
 
@@ -110,7 +110,7 @@ public class Duke {
             String test = parsedUserInput[1];
             String taskDescription = "";
             for (int i = 1; i < parsedUserInput.length; i++) {
-                if (i == parsedUserInput.length -1) {
+                if (i == parsedUserInput.length - 1) {
                     taskDescription += parsedUserInput[i];
                 } else {
                     taskDescription += parsedUserInput[i] + " ";
@@ -118,7 +118,7 @@ public class Duke {
             }
             ToDo td = new ToDo(taskDescription);
             taskList.add(td);
-            ui.showAddedTaskMessage(td,taskList.getNumOfTask());
+            ui.showAddedTaskMessage(td, taskList.getNumOfTask());
         } catch (IndexOutOfBoundsException e1) {
             ui.showInvalidTodoCommand();
         }
@@ -126,8 +126,8 @@ public class Duke {
 
     private void addEvent(String[] parsedUserInput) {
         String taskDescription = "";
-        for(int i = 1; i < parsedUserInput.length; i++) {
-            if (i == parsedUserInput.length-1) {
+        for (int i = 1; i < parsedUserInput.length; i++) {
+            if (i == parsedUserInput.length - 1) {
                 taskDescription += parsedUserInput[i];
             } else {
                 taskDescription += parsedUserInput[i] + " ";
@@ -172,13 +172,13 @@ public class Duke {
     private void search(String[] parsedUserInput) {
         try {
             StringBuilder keyword = new StringBuilder(parsedUserInput[1]);
-            for(int i = 2; i < parsedUserInput.length; i++) {
+            for (int i = 2; i < parsedUserInput.length; i++) {
                 keyword.append(parsedUserInput[i]);
             }
 
             List<Task> lst = taskList.getLstOfTask();
             List<Task> resultList = new ArrayList<>();
-            for (int j = 0; j <taskList.getNumOfTask(); j++) {
+            for (int j = 0; j < taskList.getNumOfTask(); j++) {
                 Task t = lst.get(j);
                 String description = t.getDescription();
                 if (description.contains(keyword)) {
@@ -199,7 +199,7 @@ public class Duke {
 
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         Duke duke = new Duke("Tasks.txt");
         Scanner sc = new Scanner(System.in);
         duke.startup();

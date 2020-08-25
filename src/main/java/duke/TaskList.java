@@ -12,6 +12,7 @@ public class TaskList {
 
     /**
      * The constructor for the TaskList object
+     *
      * @param lstOfTask the list of task that is used to store tasks from duke
      */
     public TaskList(List<Task> lstOfTask) {
@@ -20,6 +21,7 @@ public class TaskList {
 
     /**
      * Thie method gives the number of tasks in the list.
+     *
      * @return returns size of task list.
      */
     public int getNumOfTask() {
@@ -32,6 +34,7 @@ public class TaskList {
 
     /**
      * This mmethod adds task to the list.
+     *
      * @param task The task to be added to the list.
      */
     public void add(Task task) {

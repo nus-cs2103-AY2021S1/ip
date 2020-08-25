@@ -18,6 +18,7 @@ public class Storage {
 
     /**
      * Constructor for instantiating a Storage
+     *
      * @param filepath Specifies which file path should this Storage be working on
      */
     public Storage(String filepath) {
@@ -37,6 +38,7 @@ public class Storage {
 
     /**
      * This method provides the save feature for the tasks
+     *
      * @param lstOfTask The list provided by Duke after execution
      */
     public void saveTaskContents(List<Task> lstOfTask) {
@@ -60,6 +62,7 @@ public class Storage {
 
     /**
      * This method provides the load feature for task to be loaded onto a list.
+     *
      * @param lstOfTask The list that data will be populated on.
      * @throws IOException The exception arises when there are issues reading from a file
      */

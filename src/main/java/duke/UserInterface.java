@@ -5,7 +5,7 @@ import java.util.List;
 public class UserInterface {
     private static final String INDENT = "    ";
     private static final String UPPER_LINE = INDENT + "___________________________________________________" + "\n";
-    private static final String LOWER_LINE =  INDENT + "___________________________________________________" +"\n";
+    private static final String LOWER_LINE = INDENT + "___________________________________________________" + "\n";
 
     private static final String DONE_TASK_MARKED_MESSAGE = "    Nice! I've marked this task as done:";
     private static final String DELETE_TASK_MARKED_MESSAGE = "    Noted. I've removed this task:";
@@ -42,7 +42,7 @@ public class UserInterface {
     //Given contents output line by line between the output lines
     public void outputUi(String... contents) {
         StringBuilder result = new StringBuilder(UPPER_LINE);
-        for (String s: contents) {
+        for (String s : contents) {
             result.append(INDENT).append(s).append("\n");
         }
         result.append(LOWER_LINE);
@@ -54,7 +54,7 @@ public class UserInterface {
     }
 
     public void showInvalidCommandMessage() {
-         outputUi(INVALID_COMMAND_MESSAGE);
+        outputUi(INVALID_COMMAND_MESSAGE);
     }
 
     public void showInvalidTodoCommand() {
@@ -98,7 +98,7 @@ public class UserInterface {
     }
 
     public void showSearchResults(List<Task> lstOfTask) {
-        outputUi(MATCH_SEARCH_RESULT_MESSAGE,listTaskOnly(lstOfTask));
+        outputUi(MATCH_SEARCH_RESULT_MESSAGE, listTaskOnly(lstOfTask));
     }
 
     public String listTaskOnly(List<Task> lstOfTask) {
@@ -107,8 +107,8 @@ public class UserInterface {
         for (int i = 0; i < lstOfTask.size(); i++) {
             Task task = lstOfTask.get(i);
             int taskNumber = i + 1;
-            String s="";
-            if (i == lstOfTask.size() -1) {
+            String s = "";
+            if (i == lstOfTask.size() - 1) {
                 s = outputIndent + taskNumber + "." + task.toString();
             } else {
                 s = outputIndent + taskNumber + "." + task.toString() + "\n";
@@ -124,8 +124,8 @@ public class UserInterface {
         for (int i = 0; i < lstOfTask.size(); i++) {
             Task task = lstOfTask.get(i);
             int taskNumber = i + 1;
-            String s="";
-            if (i == lstOfTask.size() -1) {
+            String s = "";
+            if (i == lstOfTask.size() - 1) {
                 s = outputIndent + taskNumber + "." + task.toString();
             } else {
                 s = outputIndent + taskNumber + "." + task.toString() + "\n";

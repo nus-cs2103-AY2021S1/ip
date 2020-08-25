@@ -23,6 +23,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "["+ getTaskType() +"]" +"["+ getStatusIcon()+ "]" + description + " " + "(by: " + formatDate() + ")";
+        return "[" + getTaskType() + "]" + "[" + getStatusIcon() + "]" + description + " " + "(by: " + formatDate() + ")";
     }
 }

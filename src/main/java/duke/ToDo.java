@@ -13,6 +13,6 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return "["+ getTaskType() +"]" +"["+ getStatusIcon()+ "]" + description;
+        return "[" + getTaskType() + "]" + "[" + getStatusIcon() + "]" + description;
     }
 }

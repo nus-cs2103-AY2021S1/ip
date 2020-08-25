@@ -15,7 +15,8 @@ public class Parser {
     /**
      * Empty constructor for instantiating
      */
-    public Parser() {}
+    public Parser() {
+    }
 
     /**
      * This method parse strings to Tasks.
@@ -50,7 +51,7 @@ public class Parser {
                 task.markAsDone();
             }
             return task;
-        }catch (IndexOutOfBoundsException|NullPointerException e) {
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
             System.out.println(e.getMessage() + "Error in tasks file");
             throw e;
         }
@@ -71,14 +72,13 @@ public class Parser {
      * This method provides a LocalDateTime object based on a given input string.
      *
      * @param dateTime The string that consists of date and time information.
-     * It must be in a fixed format.
-     *
+     *                 It must be in a fixed format.
      * @return returns a LocalDateTime object with
      * information stored for easy retrieval later on
      */
     LocalDateTime parseDateAndTime(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        LocalDateTime d1 = LocalDateTime.parse(dateTime,formatter);
+        LocalDateTime d1 = LocalDateTime.parse(dateTime, formatter);
         return d1;
     }
 }

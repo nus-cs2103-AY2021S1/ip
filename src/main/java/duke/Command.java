@@ -21,6 +21,7 @@ public enum Command {
 
     /**
      * This method checks the user command and links it to the command values stored.
+     *
      * @param userCommand The input command string by the user.
      * @return returns a command enum that has string values in it.
      */

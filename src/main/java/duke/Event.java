@@ -15,6 +15,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "["+ getTaskType() +"]" +"["+ getStatusIcon()+ "]"+ description + " " + "(at: " + date + ")";
+        return "[" + getTaskType() + "]" + "[" + getStatusIcon() + "]" + description + " " + "(at: " + date + ")";
     }
 }
