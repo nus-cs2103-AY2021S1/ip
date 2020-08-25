@@ -3,18 +3,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-<<<<<<< .merge_file_a01804
-
     static List<Task> list = new ArrayList<>();
-    static int index = 0;
-=======
-    static List<Task> list = new ArrayList<>();
-<<<<<<< HEAD
->>>>>>> .merge_file_a07988
-
-=======
     static final String line = "--------------------------------------------------"; //50 dashes
->>>>>>> 32c6ef0793bb972d423637fb0338749ea00d32a7
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -29,7 +19,6 @@ public class Duke {
 
     public static void bot(){
         Scanner sc = new Scanner(System.in);
-
         try {
             while (sc.hasNext()) {
                 String input = sc.nextLine();
@@ -109,11 +98,7 @@ public class Duke {
     public static void done(int num){
         list.set(num-1, list.get(num-1).completedTask());
         System.out.println("Now you have "+list.size()+" tasks in the list.");
-<<<<<<< HEAD
-<<<<<<< .merge_file_a01804
-=======
         System.out.println(line);
->>>>>>> 32c6ef0793bb972d423637fb0338749ea00d32a7
     }
 
     public static void printList(){
@@ -121,44 +106,10 @@ public class Duke {
         for (Task x: list){
             System.out.println(tempIndex + "." + x.toString());
             tempIndex += 1;
-=======
-        while(sc.hasNext()) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            } else if (input.equals("list")) {
-                printlist();
-            } else {
-                add(input);
-            }
         }
         System.out.println(line);
-    }
-
-    public static void add(String input){
-        list[index] = input;
-        index += 1;
-        System.out.println("added: " + input);
-    }
-
-    public static void printlist(){
-        int tempindex = 1;
-        for (int k =0; list[k] != null; k++ ){
-            System.out.println(tempindex + ". " + list[k]);
-            tempindex += 1;
->>>>>>> master
-=======
-    }
-
-    public static void printList(){
-        int tempIndex = 1;
-        for (Task x: list){
-            System.out.println(tempIndex + "." + x.toString());
-            tempIndex += 1;
->>>>>>> .merge_file_a07988
-        }
     }
 
 
 }
+
