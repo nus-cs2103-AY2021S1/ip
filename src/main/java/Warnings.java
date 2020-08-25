@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class Warnings extends Feedbacks {
     public static void invalidDoneTaskIndex(int tasksSize) {
         String warningMsg = "################################################################"
@@ -58,5 +60,27 @@ public class Warnings extends Feedbacks {
                 + "\n\n **Type 'help' to see what I can do. |^_^|"
                 + "\n################################################################";
         System.out.println(warningMsg);
+    }
+
+    public static void invalidFileInput(IOException e) {
+        String warningMsg1 = "################################################################"
+                + "\n [• ▂ •]What? "
+                + "\n Invalid data inside data/taskList.txt file..."
+                + "\n Details:";
+        System.out.println(warningMsg1);
+        System.err.println(e);
+        String warningMsg2 = "\n################################################################";
+        System.out.println(warningMsg2);
+    }
+
+    public static void invalidFileOutput(IOException e) {
+        String warningMsg1 = "################################################################"
+                + "\n [• ▂ •]What? "
+                + "\n Errors occurred when try to write data into data/taskList.txt file..."
+                + "\n Details:";
+        System.out.println(warningMsg1);
+        System.err.println(e);
+        String warningMsg2 = "\n################################################################";
+        System.out.println(warningMsg2);
     }
 }

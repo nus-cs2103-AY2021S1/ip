@@ -5,9 +5,9 @@ public class Task {
     protected boolean isDone;
     protected TaskTypes taskType;
 
-    public Task(String taskTitle, TaskTypes taskType) {
+    public Task(String taskTitle, Boolean isDone, TaskTypes taskType) {
         this.taskTitle = taskTitle;
-        this.isDone = false;
+        this.isDone = isDone;
         this.taskType = taskType;
     }
 
@@ -17,6 +17,10 @@ public class Task {
 
     public String getStatus() {
         return (isDone ? "✓" : "✗");
+    }
+
+    public String getStatusNum() {
+        return (isDone ? "1" : "0");
     }
 
     public static void doneTask(int index, ArrayList<Task> tasks) {
@@ -34,5 +38,9 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.taskType + "]" + "[" + getStatus() + "] " + taskTitle;
+    }
+
+    public String writeToFile() {
+        return this.taskType + " | " + getStatusNum() + " | " + taskTitle;
     }
 }
