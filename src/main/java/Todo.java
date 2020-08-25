@@ -11,4 +11,9 @@ public class Todo extends Task {
         return String.format("[%s][%s] %s",tag,symbol,taskName);
     }
 
+    @Override
+    public String safeFileFormat(){
+        int done = isDone ? 1 : 0;
+        return String.format("%s | %d | %s \n",tag,done,taskName);
+    }
 }

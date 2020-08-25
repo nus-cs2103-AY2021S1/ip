@@ -18,9 +18,19 @@ public class Deadline extends Task {
             return new Deadline(taskName,taskTime);
     }
 
+    public static Deadline create(String taskName, String taskTime){
+        return new Deadline(taskName,taskTime);
+    }
+
     @Override
     public String toString(){
         String symbol = isDone ? "\u2713" : "\u2718";
         return String.format("[%s][%s] %s (by: %s)",tag,symbol,taskName,by);
+    }
+
+    @Override
+    public String safeFileFormat(){
+        int done = isDone ? 1 : 0;
+        return String.format("%s | %d | %s | %s \n",tag,done,taskName,by);
     }
 }
