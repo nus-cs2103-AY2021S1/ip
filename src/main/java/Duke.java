@@ -21,16 +21,19 @@ public class Duke {
                         int doneIndex = UserCommands.getTaskIndex(userInput);
                         String[] doneMessages = userTaskList.markTaskDoneAtIndex(doneIndex);
                         PrintFunctions.printMessagesBetweenLines(doneMessages);
+                        userTaskList.saveTaskList();
                         break;
                     case DELETE:
                         int deleteIndex = UserCommands.getTaskIndex(userInput);
                         String[] deleteMessages = userTaskList.deleteTaskAtIndex(deleteIndex);
                         PrintFunctions.printMessagesBetweenLines(deleteMessages);
+                        userTaskList.saveTaskList();
                         break;
                     case TODO:
                     case DEADLINE:
                     case EVENT:
                         userTaskList.addTask(userInput, userCommandType);
+                        userTaskList.saveTaskList();
                         break;
                 }
             } catch (UserCommands.InvalidCommandException | TaskList.InvalidIndexException exception) {

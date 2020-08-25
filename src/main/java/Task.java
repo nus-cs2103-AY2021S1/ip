@@ -1,10 +1,10 @@
-public class Task {
+public abstract class Task {
     private final String name;
     private boolean done;
 
-    public Task(String name) {
+    public Task(String name, boolean done) {
         this.name = name;
-        this.done = false;
+        this.done = done;
     }
 
     public void markDone() {
@@ -24,4 +24,6 @@ public class Task {
         String doneSymbol = isDone() ? "✓" : "✗";
         return String.format("[%s] %s", doneSymbol, getName());
     }
+
+    public abstract String toSaveString();
 }

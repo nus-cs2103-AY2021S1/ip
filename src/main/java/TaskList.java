@@ -1,10 +1,12 @@
+import java.io.IOError;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
 
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        this.tasks = Saver.load();
     }
 
     private void addTask(Task task) {
@@ -17,13 +19,13 @@ public class TaskList {
 
         switch (userCommandType) {
             case TODO:
-                task = new Todo(taskComponents[0]);
+                task = new Todo(taskComponents[0], false);
                 break;
             case DEADLINE:
-                task = new Deadline(taskComponents[0], taskComponents[1]);
+                task = new Deadline(taskComponents[0], false, taskComponents[1]);
                 break;
             case EVENT:
-                task = new Event(taskComponents[0], taskComponents[1]);
+                task = new Event(taskComponents[0], false, taskComponents[1]);
                 break;
             default:
                 throw new UserCommands.InvalidCommandException();
@@ -79,6 +81,15 @@ public class TaskList {
             messages[i] = String.format("%d.%s", i + 1, task.toString());
         }
         PrintFunctions.printMessagesBetweenLines(messages);
+    }
+
+    public void saveTaskList() {
+        try {
+            Saver.save(tasks);
+        } catch (IOException exception) {
+            System.out.println(exception.getMessage());
+        }
+
     }
 
     public static class InvalidIndexException extends Exception {
