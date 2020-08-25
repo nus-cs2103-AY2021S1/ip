@@ -1,22 +1,34 @@
 public class Task {
-    protected boolean completionStatus;
+    protected boolean isCompleted;
     protected String taskName;
 
-    public Task(String name) {
+    protected Task(String name, boolean isCompleted) {
         this.taskName = name;
-        this.completionStatus = false;
+        this.isCompleted = isCompleted;
+    }
+
+    public static Task newTask(String name){
+        return new Task(name, false);
+    }
+
+    public static Task existingTask(String name, boolean isCompleted){
+        return new Task(name, isCompleted);
     }
 
     public Task markAsDone(){
-        this.completionStatus = true;
+        this.isCompleted = true;
         return this;
     }
 
     public String getStatusIcon() {
-        return (completionStatus ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isCompleted ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.taskName;
+    }
+
+    public String toSaveString(){
+        return (this.isCompleted ? "1" : "0") + " | " + this.taskName;
     }
 }
