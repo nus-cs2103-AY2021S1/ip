@@ -1,4 +1,6 @@
-public class inputProcessor {
+import java.util.Scanner;
+
+public class InputProcessor {
 
     static String logo = "      ____        _        \n"
             + "     |  _ \\ _   _| | _____ \n"
@@ -8,7 +10,8 @@ public class inputProcessor {
 
     static TaskListManager taskListManager;
 
-    public inputProcessor(){
+    public InputProcessor(){
+        taskListManager = new TaskListManager();
     }
 
     public static void greet(){
@@ -158,7 +161,41 @@ public class inputProcessor {
 
             }
         }
+    }
 
+    public void processInput(){
+
+        greet();
+
+        Scanner input = new Scanner(System.in);
+
+        String command;
+
+        while(input.hasNext()){
+
+            try{
+                command = input.nextLine();
+
+                if(command.equals("bye")){
+
+                    exit();
+
+                    input.close();
+
+                    break;
+
+                }else{
+
+                    processCommand(command);
+
+                }
+            } catch(Exception e){
+
+                System.out.println(e.getMessage());
+
+            }
+
+        }
     }
 
 
