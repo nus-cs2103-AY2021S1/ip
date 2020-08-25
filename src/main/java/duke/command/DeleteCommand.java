@@ -13,6 +13,14 @@ public class DeleteCommand implements Command {
         this.index = index;
     }
 
+
+    /**
+     * Deletes the task at a specified index (0-based)
+     *
+     * @param tasks current list of tasks to be deleted from
+     * @param ui user interface to show messages
+     * @param storage storage interface to write the current list of tasks in
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if(index < 0) {
