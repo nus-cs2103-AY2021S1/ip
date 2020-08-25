@@ -7,6 +7,13 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Creates a ToDo object representing the given command.
+     *
+     * @param task Command describing the ToDo to be created.
+     * @return ToDo object representing the task description.
+     * @throws EmptyTaskException If no text is provided after "todo ".
+     */
     public static ToDo create(String task) throws EmptyTaskException {
         if (task.length() <= 5) throw new EmptyTaskException("todo");
         return new ToDo(task.substring(5));

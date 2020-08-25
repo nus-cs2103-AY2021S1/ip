@@ -15,6 +15,14 @@ public class Parser {
         this.taskList = taskList;
     }
 
+    /**
+     * Interprets user input and executes commands.
+     * The method supports commands for adding, deleting, viewing and completing tasks.
+     * If invalid input is given, users are informed and told to try again.
+     *
+     * @param input User command in console.
+     * @return Output message upon execution of command.
+     */
     String parse(String input) {
         StringBuilder reply = new StringBuilder();
         try {

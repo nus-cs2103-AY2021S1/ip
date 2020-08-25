@@ -16,6 +16,12 @@ public class Duke {
         storage.write(taskList);
     }
 
+    /**
+     * Runs Duke chat-bot.
+     * It first initialises by reading a saved list of tasks in data/tasks.txt.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

@@ -16,6 +16,12 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Initialises the UI and accepts user inputs.
+     * If the user enters "bye" the UI and bot closes. Otherwise any
+     * input is parsed into a Parser object and interpreted, after which
+     * its output is displayed back to the user.
+     */
     void run() {
         System.out.println(LINE + "\n" + GREETING + "\n" + LINE);
         while (scanner.hasNext()) {

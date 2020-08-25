@@ -16,6 +16,17 @@ public class Event extends Task {
         this.date = date;
     }
 
+    /**
+     * Creates a new Event object represented by the given command.
+     * The command is split into two parts by the " /at " delimiter, with the
+     * first being the task description and the second being the event date.
+     *
+     * @param task Description of task to be converted to a Event.
+     * @return Event object representing the given description.
+     * @throws EmptyTaskException If there is no text after "event ".
+     * @throws MissingDateException If " /at " is not given or if there is no date provided.
+     * @throws InvalidDateException If the date provided is in the wrong format.
+     */
     public static Event create(String task)
             throws EmptyTaskException, MissingDateException, InvalidDateException {
         if (task.length() <= 6) throw new EmptyTaskException("event");
@@ -34,6 +45,13 @@ public class Event extends Task {
         return new Event(taskInfo[0], dateTime);
     }
 
+    /**
+     * Creates a new Event object represented by the given task details.
+     *
+     * @param task Description of task.
+     * @param date Date on which the task occurs.
+     * @return Event object representing the given details.
+     */
     public static Event create(String task, String date) {
         DateTimeFormatter format = DateFormat.FORMAT6.toDateFormat();
         return new Event(task, LocalDate.parse(date, format));
