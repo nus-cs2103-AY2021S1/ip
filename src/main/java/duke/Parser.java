@@ -32,6 +32,8 @@ public class Parser {
                 return new DoneCommand(sc.nextInt());
             case "delete":
                 return new DeleteCommand(sc.nextInt());
+            case "find":
+                return new FindCommand(sc.nextLine());
             default:
                 throw new DukeException("Sorry, I'm not sure what that means :(");
         }
