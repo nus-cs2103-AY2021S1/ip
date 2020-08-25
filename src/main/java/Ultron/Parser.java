@@ -14,13 +14,16 @@ import ultron.exceptions.ExceptionType;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Parser {
+public final class Parser {
 
     /**
      * The regex pattern for checking the commands and inputs.
      */
-    private static final Pattern pattern = Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
+    private static final Pattern PATTERN =
+            Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
 
+    private Parser() {
+    }
     /**
      * Check the input string and arguments.
      * @param command   Input command of the user
@@ -28,7 +31,9 @@ public class Parser {
      * @return Command corresponding to the input given by user
      * @throws UltronException if there are errors in getting the command
      */
-    private static Command checkInput(final String command, final String arguments) throws UltronException {
+    private static Command checkInput(final String command,
+                                      final String arguments)
+            throws UltronException {
 
         //Switch case to process the commands
         switch (command) {
@@ -88,9 +93,10 @@ public class Parser {
      * @return Command corresponding to the raw input
      * @throws UltronException
      */
-    public static Command parseCommand(String input) throws UltronException{
+    public static Command parseCommand(final String input)
+            throws UltronException {
         //Use regex to get the grp
-        Matcher inputs = pattern.matcher(input);
+        Matcher inputs = PATTERN.matcher(input);
 
         //Find the items in the group
         if (!inputs.find()) {

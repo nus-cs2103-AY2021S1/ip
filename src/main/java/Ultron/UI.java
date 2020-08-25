@@ -2,7 +2,7 @@ package ultron;
 
 import java.util.Scanner;
 
-public class UI {
+public final class UI {
 
     /**
      * Store the scanner object.
@@ -50,7 +50,7 @@ public class UI {
      * Prints a message.
      * @param argument  message to be printed
      */
-    public void print(String argument){
+    public void print(final String argument) {
         System.out.print(argument);
     }
 

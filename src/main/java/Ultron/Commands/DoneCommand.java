@@ -1,19 +1,19 @@
 package ultron.commands;
 
-import ultron.exceptions.ExceptionType;
-import ultron.exceptions.UltronException;
 import ultron.Parser;
 import ultron.Storage;
 import ultron.TaskList;
 import ultron.UI;
+import ultron.exceptions.ExceptionType;
+import ultron.exceptions.UltronException;
 
-public class DoneCommand extends Command {
+public final class DoneCommand extends Command {
 
     /**
      * Contructor for Done Command.
      * @param arguments
      */
-    public DoneCommand(String arguments){
+    public DoneCommand(final String arguments) {
         super(false, arguments);
     }
 
@@ -25,15 +25,17 @@ public class DoneCommand extends Command {
      * @throws UltronException if there are too much or too little arguments
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws UltronException {
+    public void execute(final TaskList taskList,
+                        final UI ui,
+                        final Storage storage) throws UltronException {
         //Initialise index
         int index = Parser.parseInteger(this.getArguments());
 
-        if (this.getArguments().trim().length() < 1){
+        if (this.getArguments().trim().length() < 1) {
             throw new UltronException("done", ExceptionType.NO_ARGUMENTS_SUPPLIED);
         }
-
-        if (this.getArguments().trim().length() > 1){
+        
+        if (this.getArguments().trim().length() > 1) {
             throw new UltronException("done", ExceptionType.TOO_MUCH_ARGUMENTS);
         }
 

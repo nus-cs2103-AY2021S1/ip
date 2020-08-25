@@ -6,13 +6,13 @@ import ultron.Storage;
 import ultron.TaskList;
 import ultron.UI;
 
-public class HelpCommand extends Command {
+public final class HelpCommand extends Command {
 
     /**
      * Constructor for the Help Command.
      * @param arguments Argument for the help command
      */
-    public HelpCommand(String arguments){
+    public HelpCommand(final String arguments) {
         super(false, arguments);
     }
 
@@ -24,10 +24,13 @@ public class HelpCommand extends Command {
      * @throws UltronException if the number of arguments > 0
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws UltronException {
+    public void execute(final TaskList taskList,
+                        final UI ui,
+                        final Storage storage) throws UltronException {
 
-        if (this.getArguments().trim().length() > 0)
+        if (this.getArguments().trim().length() > 0) {
             throw new UltronException("list", ExceptionType.TOO_MUCH_ARGUMENTS);
+        }
 
         ui.print("Heh I guess I could help an insect like you:\n"
                 + "- help                      : Get help for the commands\n"

@@ -4,7 +4,7 @@ import ultron.tasks.Task;
 
 import java.util.ArrayList;
 
-public class TaskList {
+public final class TaskList {
 
     /**
      * Store the internal list of tasks
@@ -16,7 +16,7 @@ public class TaskList {
      * It stores all of the tasks present.
      * @param taskArrayList Arraylist containing all the tasks
      */
-    public TaskList(ArrayList<Task> taskArrayList){
+    public TaskList(final ArrayList<Task> taskArrayList) {
 
         //Set the arraylist to the list
         list = taskArrayList;
@@ -26,7 +26,7 @@ public class TaskList {
      * Returns the arraylist of tasks.
      * @return ArrayList containing all of the tasks
      */
-    public ArrayList<Task> getList(){
+    public ArrayList<Task> getList() {
         return list;
     }
 

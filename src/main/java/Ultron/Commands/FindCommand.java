@@ -6,8 +6,6 @@ import ultron.UI;
 import ultron.exceptions.UltronException;
 import ultron.tasks.Task;
 
-import java.util.ArrayList;
-
 public class FindCommand extends Command{
     public FindCommand(String arguments){
         super(false, arguments);

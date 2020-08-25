@@ -45,7 +45,7 @@ public enum ExceptionType {
      * Different types of Exceptions.
      * @param errorMessage  Error Message to be shown
      */
-    ExceptionType(String errorMessage) {
+    ExceptionType(final String errorMessage) {
 
         //Store the error message
         this.errorMessage = errorMessage;
@@ -57,7 +57,8 @@ public enum ExceptionType {
      * @param inputArguments    Input arguments the user have given
      * @return  The message to be shown
      */
-    public String getMessage(String inputString, String inputArguments) {
+    public String getMessage(final String inputString,
+                             final String inputArguments) {
 
         //Return the string formatted error message
         return String.format(this.errorMessage, inputString, inputArguments);
@@ -68,7 +69,7 @@ public enum ExceptionType {
      * @param inputString   Input string that the user have given
      * @return The message to be shown
      */
-    public String getMessage(String inputString) {
+    public String getMessage(final String inputString) {
 
         //Return the formatted error message
         return String.format(this.errorMessage, inputString);

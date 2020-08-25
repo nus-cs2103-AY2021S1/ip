@@ -1,6 +1,6 @@
 package ultron.tasks;
 
-public class Todo extends Task {
+public final class Todo extends Task {
 
     /**
      * Todo Task.

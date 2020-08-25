@@ -1,11 +1,11 @@
 package ultron.commands;
 
-import java.util.function.Function;
-
 import ultron.tasks.Deadline;
-import ultron.tasks.Task;
 import ultron.tasks.Event;
+import ultron.tasks.Task;
 import ultron.tasks.Todo;
+
+import java.util.function.Function;
 
 public enum TaskCommand {
 
@@ -27,7 +27,7 @@ public enum TaskCommand {
     /**
      * To store the parseCommand method of the different classes.
      */
-    public final Function<String, Task> commandParser;
+    private final Function<String, Task> commandParser;
 
 
     /**
@@ -47,6 +47,10 @@ public enum TaskCommand {
      */
     public Task createTask(final String description) {
         return commandParser.apply(description);
+    }
+
+    public Function<String, Task> getCommandParser() {
+        return commandParser;
     }
 
 

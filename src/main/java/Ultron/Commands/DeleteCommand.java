@@ -8,13 +8,13 @@ import ultron.UI;
 import ultron.Storage;
 import ultron.exceptions.UltronException;
 
-public class DeleteCommand extends Command{
+public final class DeleteCommand extends Command {
 
     /**
      * Constructor for DeleteCommand.
      * @param arguments Arguments for delete command
      */
-    public DeleteCommand(String arguments){
+    public DeleteCommand(final String arguments) {
         super(false, arguments);
     }
 
@@ -26,7 +26,9 @@ public class DeleteCommand extends Command{
      * @throws UltronException if the arguments are invalid
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws UltronException{
+    public void execute(final TaskList taskList,
+                        final UI ui,
+                        final Storage storage) throws UltronException {
 
         //Initialise index
         int index = Parser.parseInteger(this.getArguments());

@@ -1,17 +1,17 @@
 package ultron.commands;
 
-import ultron.exceptions.UltronException;
-import ultron.exceptions.ExceptionType;
+import ultron.Storage;
 import ultron.TaskList;
 import ultron.UI;
-import ultron.Storage;
+import ultron.exceptions.ExceptionType;
+import ultron.exceptions.UltronException;
 
-public class ByeCommand extends Command{
+public final class ByeCommand extends Command {
     /**
      * Creates the bye command with arguments.
      * @param arguments Arguments for bye command
      */
-    public ByeCommand(String arguments){
+    public ByeCommand(final String arguments) {
         super(true, arguments);
     }
 
@@ -23,9 +23,11 @@ public class ByeCommand extends Command{
      * @throws UltronException
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws UltronException {
+    public void execute(final TaskList taskList,
+                        final UI ui,
+                        final Storage storage) throws UltronException {
 
-        if (this.getArguments().trim().length() > 0){
+        if (this.getArguments().trim().length() > 0) {
             throw new UltronException("bye", ExceptionType.TOO_MUCH_ARGUMENTS);
         }
 

@@ -1,15 +1,21 @@
 package ultron.tasks;
 
-import java.util.Date;
 import java.text.DateFormat;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class Deadline extends Task {
+public final class Deadline extends Task {
 
-    //Store the variables
+    /**
+     * Pattern string the regex for parsing the command.
+     */
+    private static final Pattern DATE_MATCH =
+            Pattern.compile("^(.*) (/by) (.*)$");
+    private static final DateFormat DATE_FORMAT =
+            new SimpleDateFormat("dd-MM-yyyy HHmm");
     /**
      * String to store the string time.
      */
@@ -19,13 +25,6 @@ public class Deadline extends Task {
      * String to store the date time.
      */
     private Date date = null;
-
-    /**
-     * Pattern string the regex for parsing the command.
-     */
-    private static final Pattern DATEMATCH =
-            Pattern.compile("^(.*) (/by) (.*)$");
-    private static final DateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm");
 
     /**
      * A Deadline Task.
@@ -57,47 +56,9 @@ public class Deadline extends Task {
         date = by;
     }
 
-    /**
-     * Get the date of the deadline.
-     * @return date Date of the event
-     */
-    //Getter for the date of the
-    public String getDate() {
-        if (at != null){
-            //Return the date
-            return this.at;
-        } else {
-          return new SimpleDateFormat("dd-MM-yyyy HHmm").format(date);
-        }
-
-    }
-
-    /**
-     * Return the Type of Task as a string.
-     * @return  String type
-     */
-    @Override
-    public String getType() {
-        return "DEADLINE";
-    }
-
-    /**
-     * Returns the task as a command string.
-     * @return String command
-     */
-    @Override
-    public String getCommand() {
-        return String.format("%s /by %s", getMessage(), getDate());
-    }
-
-    /**
-     * Parse the command for the deadline class.
-     * @param args arguments given for the command
-     * @return  Deadline with the arguments parsed
-     */
-    public static Deadline parseCommand(final String args) {
+    public static Task parseCommand(final String args) {
         //Create the matcher
-        Matcher matcher = DATEMATCH.matcher(args);
+        Matcher matcher = DATE_MATCH.matcher(args);
 
         //Check for matches
         matcher.find();
@@ -110,11 +71,11 @@ public class Deadline extends Task {
         try {
 
             //Parse the date
-            Date date1 = format.parse(date);
+            Date date1 = DATE_FORMAT.parse(date);
 
             //Pass the date to the constructor
             return new Deadline(name, date1);
-        } catch (ParseException e){
+        } catch (ParseException e) {
 
             //Pass the 2 arguments into the function
             return new Deadline(name, date);
@@ -126,6 +87,27 @@ public class Deadline extends Task {
      * String representation of deadline.
      * @return String representation of Deadline
      */
+    //Getter for the date of the
+    public String getDate() {
+        if (at != null) {
+            //Return the date
+            return this.at;
+        } else {
+            return new SimpleDateFormat("dd-MM-yyyy HHmm").format(date);
+        }
+
+    }
+
+    @Override
+    public String getType() {
+        return "DEADLINE";
+    }
+
+    @Override
+    public String getCommand() {
+        return String.format("%s /by %s", getMessage(), getDate());
+    }
+
     @Override
     public String toString() {
         return "[D]"

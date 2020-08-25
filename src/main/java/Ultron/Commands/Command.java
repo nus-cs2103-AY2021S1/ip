@@ -21,7 +21,7 @@ public abstract class Command {
      * @param isExit    boolean denoting if Ultron should exit after executing
      * @param arguments Argument for the command
      */
-    public Command(boolean isExit, String arguments){
+    public Command(final boolean isExit, final String arguments) {
         this.isExit = isExit;
         this.arguments = arguments;
     }
@@ -33,13 +33,15 @@ public abstract class Command {
      * @param storage   Storage for Ultron
      * @throws UltronException
      */
-    public abstract void execute(TaskList taskList, UI ui, Storage storage) throws UltronException;
-
+    public abstract void execute(TaskList taskList,
+                                 UI ui,
+                                 Storage storage) throws UltronException;
+                                 
     /**
      * Checks if Ultron should exit after the command.
      * @return boolean isExit
      */
-    public boolean isExit(){
+    public boolean isExit() {
         return isExit;
     }
 
@@ -47,7 +49,7 @@ public abstract class Command {
      * Gets the arguments for the command.
      * @return String arguments
      */
-    protected String getArguments(){
+    protected String getArguments() {
         return this.arguments;
     }
 

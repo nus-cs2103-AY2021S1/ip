@@ -7,8 +7,18 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Event extends Task {
-
+public final class Event extends Task {
+    
+    /**
+     * Store the regex for parsing the command for event.
+     */
+    private static final Pattern DATE_MATCH =
+            Pattern.compile("^(.*) (/at) (.*)$");
+    /**
+     * Store the date format regex.
+     */
+    private static final DateFormat DATE_FORMAT =
+            new SimpleDateFormat("dd-MM-yyyy HHmm");
     //Store the variables
     /**
      * Store the String form for time of event.
@@ -19,17 +29,6 @@ public class Event extends Task {
      * Store a date form for time of event.
      */
     private Date date = null;
-
-    /**
-     * Store the regex for parsing the command for event.
-     */
-    private static final Pattern DATEMATCH =
-            Pattern.compile("^(.*) (/at) (.*)$");
-
-    /**
-     * Store the date format regex.
-     */
-    private static final DateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm");
 
     /**
      * Task event.
@@ -64,7 +63,6 @@ public class Event extends Task {
      * Gets the date of the event.
      * @return date Date of the event
      */
-    //Getter for the date of the
     public String getDate() {
         if (at != null){
             //Return the date
@@ -101,7 +99,7 @@ public class Event extends Task {
     public static Event parseCommand(final String args) {
 
         //Create the matcher
-        Matcher matcher = DATEMATCH.matcher(args);
+        Matcher matcher = DATE_MATCH.matcher(args);
 
         //Check for matches
         matcher.find();
@@ -114,11 +112,11 @@ public class Event extends Task {
         try {
 
             //Parse the date
-            Date date1 = format.parse(date);
+            Date date1 = DATE_FORMAT.parse(date);
 
             //Pass the date to the constructor
             return new Event(name, date1);
-        } catch (ParseException e){
+        } catch (ParseException e) {
 
             //Pass the 2 arguments into the function
             return new Event(name, date);
@@ -127,10 +125,6 @@ public class Event extends Task {
 
     }
 
-    /**
-     * String representation of the class.
-     * @return String representation
-     */
     @Override
     public String toString() {
         return "[E]"

@@ -7,7 +7,7 @@ import ultron.TaskList;
 import ultron.tasks.Task;
 import ultron.UI;
 
-public class TaskAllocator extends Command{
+public final class TaskAllocator extends Command {
 
     /**
      * Store TaskCommand corresponding to the command.
@@ -20,7 +20,8 @@ public class TaskAllocator extends Command{
      * @param arguments Arguments given
      * @throws UltronException if the command is invalid
      */
-    public TaskAllocator(String command, String arguments) throws UltronException {
+    public TaskAllocator(final String command,
+                         final String arguments) throws UltronException {
 
         //Call the superclass
         super(false, arguments);
@@ -33,7 +34,7 @@ public class TaskAllocator extends Command{
 
             //Throw a Duke exception
             throw new UltronException(command,
-                ExceptionType.INVALID_COMMAND);
+                    ExceptionType.INVALID_COMMAND);
         }
     }
 
@@ -46,7 +47,9 @@ public class TaskAllocator extends Command{
      *                         if there was an error creating the task
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws UltronException {
+    public void execute(final TaskList taskList,
+                        final UI ui,
+                        final Storage storage) throws UltronException {
 
         //Init the enum states
         Task task;

@@ -1,17 +1,18 @@
 package ultron.commands;
 
-import ultron.exceptions.ExceptionType;
-import ultron.exceptions.UltronException;
 import ultron.Storage;
 import ultron.TaskList;
 import ultron.UI;
+import ultron.exceptions.ExceptionType;
+import ultron.exceptions.UltronException;
 
-public class ListCommand extends Command {
+public final class ListCommand extends Command {
+
     /**
      * Constructor for List command.
      * @param arguments Arguments needed for list command
      */
-    public ListCommand(String arguments){
+    public ListCommand(final String arguments) {
         super(false, arguments);
     }
 
@@ -23,14 +24,17 @@ public class ListCommand extends Command {
      * @throws UltronException if there are > 0 arguments
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) throws UltronException {
+    public void execute(final TaskList taskList,
+                        final UI ui,
+                        final Storage storage) throws UltronException {
 
         //Check if there are arguments
-        if (this.getArguments().trim().length() > 0)
+        if (this.getArguments().trim().length() > 0) {
             throw new UltronException("list", ExceptionType.TOO_MUCH_ARGUMENTS);
+        }
 
         //If the list is empty
-        if(taskList.size() == 0){
+        if (taskList.size() == 0) {
 
             //When there is no task
             ui.print("You have no business with me\n");
@@ -41,10 +45,10 @@ public class ListCommand extends Command {
             ui.print("Heh, you cant even remember what you had\n");
 
             //Iterate through the task and print it
-            for(int i = 0; i< taskList.size(); ++i){
+            for (int i = 0; i < taskList.size(); ++i) {
 
                 //Print out each item on the list
-                ui.print(String.format("%d.%s\n", i+1, taskList.get(i)));
+                ui.print(String.format("%d.%s\n", i + 1, taskList.get(i)));
 
             }
 
