@@ -8,10 +8,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Ui {
+    public static final String LINE = "_______________________________________\n";
+
+    public Ui() {
+
+    }
+
     public static void handleList() {
         String output = "";
-        for (int i = 1; i <= taskList.size(); i++) {
-            output = output + i + ". " + taskList.get(i - 1) + "\n";
+        for (int i = 1; i <= Duke.taskList.size(); i++) {
+            output = output + i + ". " + Duke.taskList.get(i - 1) + "\n";
         }
         System.out.println(LINE + "Here are the tasks in your list: \n" + output + LINE);
     }
@@ -22,9 +28,9 @@ public class Ui {
             String[] dateSplit = date.split("/", 3);
             String reformatedDate = dateSplit[2] + "-" + dateSplit[1] + "-" + dateSplit[0];
             LocalDate filterDate = LocalDate.parse(reformatedDate);
-            for (int i = 1; i <= taskList.size(); i++) {
-                if (taskList.get(i - 1).isDate(filterDate)) {
-                    output = output + i + ". " + taskList.get(i - 1) + "\n";
+            for (int i = 1; i <= Duke.taskList.size(); i++) {
+                if (Duke.taskList.get(i - 1).isDate(filterDate)) {
+                    output = output + i + ". " + Duke.taskList.get(i - 1) + "\n";
                 }
             }
             System.out.println(LINE + "Here are your task due on "
@@ -36,35 +42,35 @@ public class Ui {
 
     public static void handleDone(String taskIdString) throws DukeException {
         int taskId = Integer.parseInt(taskIdString);
-        if (taskId <= 0 || taskId > taskList.size()) {
+        if (taskId <= 0 || taskId > Duke.taskList.size()) {
             throw new DukeException(LINE + "Invalid input! That task does not exist! \n" + LINE);
         } else {
-            taskList.get(taskId - 1).setCompleted();
+            Duke.taskList.get(taskId - 1).setCompleted();
             System.out.println(LINE + "Nice! I've marked this task as done: \n"
-                    + taskList.get(taskId - 1) + "\n" + LINE);
+                    + Duke.taskList.get(taskId - 1) + "\n" + LINE);
         }
     }
 
     public static void handleDelete(String taskIdString) {
         int taskId = Integer.parseInt(taskIdString);
-        if (taskId <=0 || taskId > taskList.size()) {
+        if (taskId <=0 || taskId > Duke.taskList.size()) {
             System.out.println(LINE + "Invalid input! That task does not exist! \n" + LINE);
         } else {
-            int new_size = taskList.size() - 1;
+            int new_size = Duke.taskList.size() - 1;
             System.out.println(LINE + "Noted! I've deleted this task: \n"
-                    + taskList.get(taskId - 1) + "\n"
+                    + Duke.taskList.get(taskId - 1) + "\n"
                     + "Now you have " + new_size + " tasks in the list."
                     + "\n" + LINE);
-            taskList.remove(taskId - 1);
+            Duke.taskList.remove(taskId - 1);
         }
     }
 
     public static void handleTodo(String todoDescription) throws IOException {
         ToDo newToDo = new ToDo(todoDescription, false);
-        taskList.add(newToDo);
+        Duke.taskList.add(newToDo);
         String output = LINE + "Got it. I've added this task: \n"
-                + taskList.get(taskList.size() - 1) + "\n"
-                + "Now you have " + taskList.size() + " tasks in the list."
+                + Duke.taskList.get(Duke.taskList.size() - 1) + "\n"
+                + "Now you have " + Duke.taskList.size() + " tasks in the list."
                 + "\n" + LINE;
         System.out.println(output);
     }
@@ -72,10 +78,10 @@ public class Ui {
     public static void handleDeadline(String deadlineDetails) throws IOException {
         String[] details = deadlineDetails.split(" /by ", 2);
         Deadline newDeadline = new Deadline(details[0], details[1], false);
-        taskList.add(newDeadline);
+        Duke.taskList.add(newDeadline);
         String output = LINE + "Got it. I've added this task: \n"
-                + taskList.get(taskList.size() - 1) + "\n"
-                + "Now you have " + taskList.size() + " tasks in the list."
+                + Duke.taskList.get(Duke.taskList.size() - 1) + "\n"
+                + "Now you have " + Duke.taskList.size() + " tasks in the list."
                 + "\n" + LINE;
         System.out.println(output);
     }
@@ -83,10 +89,10 @@ public class Ui {
     public static void handleEvent(String eventDetails) throws IOException {
         String[] details = eventDetails.split(" /at ", 2);
         Event newEvent = new Event(details[0], details[1], false);
-        taskList.add(newEvent);
+        Duke.taskList.add(newEvent);
         String output = LINE + "Got it. I've added this task: \n"
-                + taskList.get(taskList.size() - 1) + "\n"
-                + "Now you have " + taskList.size() + " tasks in the list."
+                + Duke.taskList.get(Duke.taskList.size() - 1) + "\n"
+                + "Now you have " + Duke.taskList.size() + " tasks in the list."
                 + "\n" + LINE;
         System.out.println(output);
     }
