@@ -7,20 +7,41 @@ public class Events extends Task {
     private String start;
     private LocalDate date;
 
+    /**
+     * Class constructor specifying the Task start date.
+     * @param description
+     */
     public Events(String description) {
         super(description);
         this.type = "Events";
     }
 
+    /**
+     * Sets the start time to the specified string.
+     * @param start
+     */
     public void setStart(String start) {
         this.start = start;
     }
 
+    /**
+     * Returns the start time of the Event.
+     * @return the start time in String.
+     */
     public String getStart() {
         return this.start;
     }
 
+    /**
+     * Sets the LocalDate of the Event.
+     */
     public void setDateTime() {
+        int index = this.start.indexOf(" ");
+        String dateTemp = this.start.substring(0, index);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+        LocalDate date = LocalDate.parse(dateTemp);
+        this.date = date;
+        /*
         int index = this.start.indexOf(" ");
         String dateTemp = this.start.substring(0, index);
         int dateIndex = dateTemp.indexOf('/');
@@ -42,6 +63,7 @@ public class Events extends Task {
         LocalDate date = LocalDate.parse(dateTemp, formatter);
         this.date = date;
         System.out.println(date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+         */
     }
 
     public String toString() {

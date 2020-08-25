@@ -1,0 +1,4 @@
+
+[T][✘] |borrow book
+[D][✘] |return book /by 2020-07-20 1800
+[E][✘] |project meeting /at 2020-08-10 1900
