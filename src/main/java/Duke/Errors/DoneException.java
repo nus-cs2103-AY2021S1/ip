@@ -28,11 +28,11 @@ public class DoneException extends DukeException{
     @Override
     public String toString() {
         if(deleted){
-            return "  '\u2639' OOPS!!! This task has already been deleted.\n";
+            return "  '\u2639' OOPS!!! This task has already been deleted.";
         }
         if(IDabsent){
-            return "  '\u2639' OOPS!!! The description of a done cannot be empty.\n";
+            return "  '\u2639' OOPS!!! The description of a done cannot be empty.";
         }
-        return "  '\u2639' OOPS!!! The ID is not yet defined.\n";
+        return "  '\u2639' OOPS!!! The ID is not yet defined.";
     }
 }
