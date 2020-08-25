@@ -171,6 +171,16 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns string specifying successful finding of tasks that
+     * matches the user input keyword.
+     *
+     * @param input String of input keyword.
+     *
+     * @return String string specifying
+     * successful search of matching tasks
+     * @throws DukeException  If there are no matching tasks.
+     */
     public String findTask(String input) throws DukeException {
         String[] inputWords = input.split(" ");
         String keyWord = inputWords[1];
