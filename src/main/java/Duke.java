@@ -10,10 +10,10 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            manager = new TaskManager(storage.loadTasks(), ui);
+            manager = new TaskManager(storage.loadTasks());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            manager = new TaskManager(ui);
+            manager = new TaskManager();
         }
     }
 
