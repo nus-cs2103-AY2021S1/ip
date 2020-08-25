@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.CompleteCommand;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.task.TaskType;
 
@@ -14,6 +15,7 @@ import duke.task.TaskType;
 public class Parser {
     private static final String COMMAND_EXIT = "bye";
     private static final String COMMAND_LIST = "list";
+    private static final String COMMAND_FIND = "find";
     private static final String COMMAND_COMPLETE = "done";
     private static final String COMMAND_ADD_TODO = "todo";
     private static final String COMMAND_ADD_EVENT = "event";
@@ -58,6 +60,8 @@ public class Parser {
             return new ExitCommand(args);
         } else if (command.equals(COMMAND_LIST)) {
             return new ListCommand(args);
+        } else if (command.equals(COMMAND_FIND)) {
+            return new FindCommand(args);
         } else {
             throw new DukeUnknownCommandException("Unknown command");
         }

@@ -121,6 +121,22 @@ public class TaskList {
     }
 
     /**
+     * Searches the taskList for tasks whose description contains the searchTerm.
+     *
+     * @param searchTerm Search term to search with.
+     * @return List of tasks whose description has the search term.
+     */
+    public List<Task> findTasks(String searchTerm) {
+        ArrayList<Task> results = new ArrayList<>();
+        for (Task t : taskList) {
+            if (t.descriptionContains(searchTerm)) {
+                results.add(t);
+            }
+        }
+        return results;
+    }
+
+    /**
      * Returns a shallow copy of the ArrayList.
      *
      * @return Shallow copy of the ArrayList.

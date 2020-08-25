@@ -99,6 +99,16 @@ public abstract class Task {
     public abstract String toStorageString();
 
     /**
+     * Checks if the task's description contains the searchTerm.
+     *
+     * @param searchTerm Term to search with.
+     * @return True if the description has the given searchTerm.
+     */
+    public boolean descriptionContains(String searchTerm) {
+        return description.contains(searchTerm);
+    }
+
+    /**
      * Returns the string representation of the current instance.
      *
      * @return String representation of the current instance.
