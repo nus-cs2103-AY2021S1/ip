@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StorageTest {
     @Test
@@ -10,7 +10,7 @@ public class StorageTest {
             new Storage(wrongPath).load();
             fail();
         } catch (DukeException error) {
-            assertEquals("File cannot be loaded from the specified file path. Please try again!",
+            assertEquals("'duke.txt' cannot be loaded from the specified file path. Please try again.",
                                   error.getMessage());
         }
     }
@@ -19,6 +19,6 @@ public class StorageTest {
     public void changeFile_validInput_success() {
         Storage storage = new Storage("data/duke.txt");
         storage.changeFile();
-        assertEquals(storage.isFileChanged, true);
+        assertTrue(storage.isFileChanged);
     }
 }

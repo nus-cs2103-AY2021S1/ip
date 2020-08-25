@@ -5,12 +5,6 @@ import java.io.Reader;
 
 public class Ui {
     private final BufferedReader INPUT_LINE;
-    private final String logo = " ______   _____  _____  ___  ____   ________  \n" +
-                                "|_   _ `.|_   _||_   _||_  ||_  _| |_   __  | \n" +
-                                "  | | `. \\ | |    | |    | |_/ /     | |_ \\_| \n" +
-                                "  | |  | | | '    ' |    |  __'.     |  _| _  \n" +
-                                " _| |_.' /  \\ \\__/ /    _| |  \\ \\_  _| |__/ | \n" +
-                                "|______.'    `.__.'    |____||____||________| ";
 
     /**
      * Instantiates Ui object and BufferedReader object to scan user input.
@@ -25,10 +19,10 @@ public class Ui {
      * @return void
      */
     public void printTaskCount() {
-        if (Task.totalTasks > 1) {
-            System.out.println("You have a total of " + Task.totalTasks + " tasks in the list.");
+        if (Task.TOTAL_TASKS > 1) {
+            System.out.println("You have a total of " + Task.TOTAL_TASKS + " tasks in the list.");
         } else {
-            System.out.println("You have a total of " + Task.totalTasks + " task in the list.");
+            System.out.println("You have a total of " + Task.TOTAL_TASKS + " task in the list.");
         }
         printBorder();
     }
@@ -38,6 +32,12 @@ public class Ui {
      * @return void
      */
     public void printWelcomeMessage() {
+        String logo = " ______   _____  _____  ___  ____   ________  \n" +
+                      "|_   _ `.|_   _||_   _||_  ||_  _| |_   __  | \n" +
+                      "  | | `. \\ | |    | |    | |_/ /     | |_ \\_| \n" +
+                      "  | |  | | | '    ' |    |  __'.     |  _| _  \n" +
+                      " _| |_.' /  \\ \\__/ /    _| |  \\ \\_  _| |__/ | \n" +
+                      "|______.'    `.__.'    |____||____||________| ";
         System.out.println("Hello there! My name is \n" + logo + "\nHow may I assist you today?");
         printBorder();
     }
@@ -89,8 +89,7 @@ public class Ui {
             return INPUT_LINE.readLine();
         } catch (IOException error) {
             System.out.println("Error reading user input.");
-            String returnNull = null;
-            return returnNull;
+            return null;
         }
     }
 
@@ -125,12 +124,20 @@ public class Ui {
         System.out.print("---------------------------\n");
     }
 
+    /**
+     * Prints message to show matching tasks.
+     * @return void
+     */
     public void matchingMessage(TaskList arrayOfTasks) {
         System.out.println("These are the matching tasks in your list:");
         System.out.println(arrayOfTasks.toString());
         printBorder();
     }
 
+    /**
+     * Prints message to say that there are no matching tasks found.
+     * @return void
+     */
     public void noMatchMessage() {
         System.out.println("There are no matching tasks in your list.");
         printBorder();

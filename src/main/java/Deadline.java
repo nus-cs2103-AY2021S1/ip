@@ -10,7 +10,7 @@ public class Deadline extends Task {
     public Deadline(String description, String deadlineDate) {
         super(description, TaskType.DEADLINE);
         this.deadlineDate = new Date(deadlineDate);
-        Task.totalTasks++;
+        Task.TOTAL_TASKS++;
     }
 
     /**
@@ -23,7 +23,7 @@ public class Deadline extends Task {
         super(description, TaskType.DEADLINE);
         this.deadlineDate = new Date(deadlineDate);
         this.deadlineTime = new Timing(deadlineTime);
-        Task.totalTasks++;
+        Task.TOTAL_TASKS++;
     }
 
     /**
@@ -37,7 +37,7 @@ public class Deadline extends Task {
         super(description, TaskType.DEADLINE, boolDone);
         this.deadlineDate = new Date(deadlineDate);
         this.deadlineTime = new Timing(deadlineTime);
-        Task.totalTasks++;
+        Task.TOTAL_TASKS++;
     }
 
     /**

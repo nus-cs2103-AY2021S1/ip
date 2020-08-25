@@ -59,8 +59,8 @@ public class Parser {
                 StringBuilder eventString = new StringBuilder();
                 StringBuilder eventDateField = new StringBuilder();
                 StringBuilder eventTimingField = new StringBuilder();
-                String trimInput = inputLine.split("/at")[1].trim();
-                String[] splitElements = trimInput.split(" ");
+                String trimmedEvent = inputLine.split("/at")[1].trim();
+                String[] splitElements = trimmedEvent.split(" ");
                 int numOfElements = splitElements.length;
 
                 if (numOfElements != 2) {
@@ -106,8 +106,8 @@ public class Parser {
                 StringBuilder deadlineString = new StringBuilder();
                 StringBuilder dateField = new StringBuilder();
                 StringBuilder timingField = new StringBuilder();
-                String trimInput1 = inputLine.split("/by")[1].trim();
-                String[] splitElements1 = trimInput1.split(" ");
+                String trimmedDeadline = inputLine.split("/by")[1].trim();
+                String[] splitElements1 = trimmedDeadline.split(" ");
                 int noOfElements = splitElements1.length;
 
                 if (noOfElements != 2) {
@@ -149,8 +149,8 @@ public class Parser {
                     throw new DukeException("Please input task index as a valid integer.");
                 }
 
-                String tempStr = inputLine.split(" ")[1];
-                int indexOfTemp = Integer.parseInt(tempStr);
+                String indexToDelete = inputLine.split(" ")[1];
+                int indexOfTemp = Integer.parseInt(indexToDelete);
                 int currentTaskIndex = indexOfTemp - 1;
 
                 newTaskObject = new DeleteCommand(currentTaskIndex);

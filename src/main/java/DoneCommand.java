@@ -18,22 +18,16 @@ public class DoneCommand extends Command {
      * @param storage Storage object to aid in program execution.
      * @return void
      */
-    public void runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) {
-        try {
-            int arraySize = arrayOfTasks.taskArraySize();
-            if (taskIndex < 0 || taskIndex >= arraySize) {
-                throw new DukeException("The task number" + " (" + (taskIndex + 1) + ") " +
-                                        "that you have input can not be found in your list.");
-            } else {
-                // Do nothing.
-            }
-            arrayOfTasks.get(taskIndex).setDone();
-            Task doneTask = arrayOfTasks.get(taskIndex);
-            ui.doneMessage(doneTask);
-            storage.changeFile();
-        } catch (DukeException error) {
-            System.out.println(error);
+    public void runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) throws DukeException {
+        int arraySize = arrayOfTasks.taskArraySize();
+        if (taskIndex < 0 || taskIndex >= arraySize) {
+            throw new DukeException("The task number" + " (" + (taskIndex + 1) + ") " +
+                    "that you have input can not be found in your list.");
         }
+        arrayOfTasks.get(taskIndex).setDone();
+        Task doneTask = arrayOfTasks.get(taskIndex);
+        ui.doneMessage(doneTask);
+        storage.changeFile();
     }
 
     /**

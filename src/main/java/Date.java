@@ -1,8 +1,8 @@
 public class Date {
     private final int DAY, MONTH, YEAR;
     protected String date;
-    private static final String[] ARRAY_MONTHS = {"January", "February", "March", "April", "May", "June", "July", "August",
-            "September", "October", "November", "December"};
+    private static final String[] ARRAY_MONTHS = {"January", "February", "March", "April", "May", "June",
+                                                  "July", "August", "September", "October", "November", "December"};
 
     /**
      * Instantiates Date object.

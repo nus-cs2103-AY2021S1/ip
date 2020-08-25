@@ -34,7 +34,7 @@ public class TaskList {
      */
     public void deleteTask(int taskIndex) {
         arrayOfTasks.remove(taskIndex);
-        Task.totalTasks--;
+        Task.TOTAL_TASKS--;
     }
 
     /**

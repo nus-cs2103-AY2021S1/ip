@@ -17,7 +17,7 @@ public abstract class Command {
      * @param ui Ui object to aid in program execution.
      * @param storage Storage object to aid in program execution.
      */
-    public abstract void runCommand(TaskList taskList, Ui ui, Storage storage);
+    public abstract void runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Checks if the program has to exit Duke.

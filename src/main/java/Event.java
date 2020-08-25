@@ -10,7 +10,7 @@ public class Event extends Task {
     public Event(String description, String eventTime) {
         super(description, TaskType.EVENT);
         this.eventTime = new Timing(eventTime);
-        Task.totalTasks++;
+        Task.TOTAL_TASKS++;
     }
 
     /**
@@ -23,7 +23,7 @@ public class Event extends Task {
         super(description, TaskType.EVENT);
         this.eventDate = new Date(eventDate);
         this.eventTime = new Timing(eventTime);
-        Task.totalTasks++;
+        Task.TOTAL_TASKS++;
     }
 
     /**
@@ -37,7 +37,7 @@ public class Event extends Task {
         super(description, TaskType.EVENT, boolDone);
         this.eventDate = new Date(eventDate);
         this.eventTime = new Timing(eventTime);
-        Task.totalTasks++;
+        Task.TOTAL_TASKS++;
     }
 
     /**

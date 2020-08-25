@@ -64,7 +64,7 @@ public class Storage {
             bufferedReader.close();
             return outputTaskArray;
         } catch (Exception error) {
-            throw new DukeException("File cannot be loaded from the specified file path. Please try again!");
+            throw new DukeException("'duke.txt' cannot be loaded from the specified file path. Please try again.");
         }
 
     }
@@ -110,7 +110,7 @@ public class Storage {
             }
             writer.close();
         } catch (Exception error) {
-            throw new DukeException("Error writing to specified file path. Please try again!");
+            throw new DukeException("Error saving tasks to specified file path. Please try again.");
         }
     }
 

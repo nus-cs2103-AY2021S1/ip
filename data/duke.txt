@@ -1,2 +1,4 @@
 D|0|return book|5/7/2018 1800
-E|0|project meeting|12/3/2019 1100
+E|1|project meeting|12/3/2019 1100
+T|1|rest
+T|0|read book

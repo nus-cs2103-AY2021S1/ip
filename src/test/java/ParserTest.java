@@ -10,7 +10,8 @@ public class ParserTest {
     @Test
     public void parseCommand_invalidCommand_exceptionThrown() {
         try {
-            new Parser().parse(testCommand);
+            new Parser();
+            Parser.parse(testCommand);
             fail();
         } catch (DukeException error) {
             assertEquals("Catastrophe detected! I'm sorry, but '" + testCommand
@@ -28,7 +29,8 @@ public class ParserTest {
     @Test
     public void doneCommand_missingIndex_exceptionThrown() {
         try {
-            new Parser().parse("done");
+            new Parser();
+            Parser.parse("done");
             fail();
         } catch (DukeException error) {
             assertEquals("Please specify which task you have completed.", error.getMessage());
@@ -38,7 +40,8 @@ public class ParserTest {
     @Test
     public void eventCommand_missingTiming_exceptionThrown() {
         try {
-            new Parser().parse("event project meeting /at 4/1/2018");
+            new Parser();
+            Parser.parse("event project meeting /at 4/1/2018");
             fail();
         } catch (DukeException error) {
             assertEquals("Date and Timing fields has not been specified correctly. Please try again!",

@@ -24,7 +24,7 @@ public class Duke {
             arrayOfTasks = new TaskList();
             throw new DukeException("Unable to load data from 'duke.txt'. Please ensure that you have" +
                                     " a 'data' folder that contains 'duke.txt' in project directory.");
-        } 
+        }
 
         ui.printWelcomeMessage();
 
@@ -57,7 +57,8 @@ public class Duke {
                 ui.printBorder();
                 System.out.println("Tasks have been successfully saved to duke.txt!");
             } catch (DukeException error) { 
-                System.err.println("File cannot be saved to the specified file path. Please try again!");
+                System.err.println("Tasks cannot be saved to specified file path('data/duke.txt'). Please ensure " +
+                                   "that there is a 'data' folder containing 'duke.txt' and try again.");
             }
         }
         ui.printByeMessage();
