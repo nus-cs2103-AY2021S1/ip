@@ -1,10 +1,7 @@
 package duke;
 
 import duke.command.*;
-import duke.exception.EmptyTaskException;
-import duke.exception.InvalidDateException;
-import duke.exception.NoIndexException;
-import duke.exception.UnrecognizedTaskException;
+import duke.exception.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,7 +11,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     public static Command parse(String fullCommand)
-            throws UnrecognizedTaskException, NoIndexException, EmptyTaskException {
+            throws UnrecognizedTaskException, NoIndexException, EmptyTaskException, NoKeywordException {
 
         fullCommand = fullCommand.trim();
 
@@ -25,16 +22,18 @@ public class Parser {
         switch (firstWord) {
             case "todo":
                 return new ToDoCommand(getTask(fullCommand, "todo"));
-            // Fallthrough
+                // Fallthrough
             case "event":
                 return new EventCommand(getTask(fullCommand, "event"));
-            // Fallthrough
+                // Fallthrough
             case "deadline":
                 return new DeadlineCommand(getTask(fullCommand, "deadline"));
-            // Fallthrough
+                // Fallthrough
             case "list":
                 return new ListCommand(fullCommand);
-            // Fallthrough
+                // Fallthrough
+            case "find":
+                return new FindCommand(fullCommand);
             case "done":
 
                 if (fullCommand.equalsIgnoreCase("done")) {

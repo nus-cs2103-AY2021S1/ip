@@ -174,6 +174,32 @@ public class TaskList {
         }
     }
 
+    /** Finds tasks with the given @keyword.
+     *
+     * @param keyword The keyword to search for in tasks.
+     */
+    public void findTasks(String keyword) {
+
+        keyword = keyword.trim().toLowerCase();
+
+        int i = 0;
+        for (Task task: list) {
+            if (task.getTask().contains(keyword)) {
+                if (i == 0) {
+                    System.out.println("Here are the matching tasks on your list.");
+                }
+
+                System.out.print((i + 1) + ". ");
+                System.out.println(task);
+                i++;
+            }
+        }
+
+        if (i == 0) {
+            System.out.println("OOPS. There are no tasks on your list with the following keyword.");
+        }
+    }
+
     public void printListSize() {
         String taskText = list.size() == 1 ? " task " : " tasks ";
         System.out.println("You have " + list.size() + taskText + "on your list.");

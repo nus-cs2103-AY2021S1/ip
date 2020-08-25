@@ -18,6 +18,10 @@ public abstract class Task {
 
     public abstract Task markDone();
 
+    public String getTask() {
+        return this.task;
+    }
+
     public abstract LocalDate getDate();
 
     @Override
