@@ -5,11 +5,17 @@ import duke.task.Task;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A class to deal with the interactions with users.
+ */
 public class Ui {
     protected String logo;
     protected String line;
     protected Scanner sc;
 
+    /**
+     * Default constructor of Ui.
+     */
     public Ui() {
         this.logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -20,6 +26,9 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Print welcome.
+     */
     public void showWelcome() {
         System.out.println(line
                 + logo
@@ -27,16 +36,28 @@ public class Ui {
                 + line);
     }
 
+    /**
+     * Read the full command from user's input.
+     * @return String of the next input line.
+     */
     public String readCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * Print the error message of a DukeException.
+     * @param eMsg the error message of the DukeException.
+     */
     public void showError(String eMsg) {
         System.out.println(line
                 + eMsg + "\n"
                 + line);
     }
 
+    /**
+     * Print out the list of tasks.
+     * @param taskList the list of tasks.
+     */
     public void printList(List<Task> taskList) {
         System.out.print(line);
         System.out.println(" Here are the tasks in your list:");
@@ -46,6 +67,10 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Print out the Done command executed on a certain task.
+     * @param task the task to be done.
+     */
     public void printDone(Task task) {
         System.out.println(line
                 + " Nice! I've marked this task as done: "
@@ -53,6 +78,11 @@ public class Ui {
                 + line);
     }
 
+    /**
+     * Print out the Delete command executed on a certain task.
+     * @param task the task to be deleted.
+     * @param size the size of the task list after deletion.
+     */
     public void printDelete(Task task, int size) {
         System.out.println(line
                 + " Noted. I've removed this task: "
@@ -61,6 +91,11 @@ public class Ui {
                 + line);
     }
 
+    /**
+     * Print out the Add command.
+     * @param task the task to be added.
+     * @param size the size of the task list after addition.
+     */
     public void printAdd(Task task, int size) {
         System.out.println(line
                 + " Got it. I've added this task: ");
@@ -69,6 +104,9 @@ public class Ui {
                 + line);
     }
 
+    /**
+     * Say good bye to user.
+     */
     public void bye() {
         System.out.println(line + " Bye. Hope to see you again soon!\n" + line);
     }

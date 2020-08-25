@@ -3,11 +3,18 @@ package duke;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
+/**
+ * Main class of Duke.
+ */
 public class Duke {
     private Ui ui;
     private TaskList tasks;
     private Storage storage;
 
+    /**
+     * Construct the Duke initialized with the path of the target file to store and read.
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -19,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Run the Duke.
+     */
     public void run() {
         ui.showWelcome();
         String fullCommand = ui.readCommand();
@@ -36,6 +46,10 @@ public class Duke {
         ui.bye();
     }
 
+    /**
+     * Execute the program.
+     * @param args the argument Array of String.
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
