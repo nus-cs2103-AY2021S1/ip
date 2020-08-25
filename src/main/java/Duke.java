@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 
 public class Duke {
 
+    // Loop through every task and transform it into a string
     public static String listToString(ArrayList<Task> taskList) {
         String taskListStr = "";
         for (Task t : taskList) {
@@ -19,10 +20,13 @@ public class Duke {
     }
 
     public static void saveToFile(String output) {
-        String filePath = Paths.get("..", "..", "..", "data", "Tasklist.txt").toString();
+        // Get OS-independent file path
+        String filePath = Paths.get("..", "..", "..", "data", "Tasklist.txt")
+                .toString();
+
         try {
             FileWriter myFile = new FileWriter(filePath);
-            myFile.write(output);
+            myFile.write(output); // Output is already all tasks in a string
             myFile.close();
             System.out.println("WRITTEN TO FILE THE WHOLE LIST!!!!");
         } catch (IOException ex) {
@@ -31,17 +35,57 @@ public class Duke {
         }
     }
 
-    public static ArrayList<Task> readFromFile(String filePath) {
+    public static ArrayList<Task> readFromFile() {
+        // Initialise ArrayList to return
         ArrayList<Task> savedTasks = new ArrayList<Task>();
+
+        // Get OS-independent file path to read file
+        String filePath = Paths.get("..", "..", "..", "data", "Tasklist.txt")
+                .toString();
+
         try {
             File myFile = new File(filePath);
             Scanner taskReader = new Scanner(myFile);
+
+            // Keep reading new line until file end
             while (taskReader.hasNextLine()) {
-                String task = taskReader.nextLine();
-                if (task == "") {
-                    continue;
-                } else {
-                    break;
+                String taskString = taskReader.nextLine();
+
+                // Only work with non empty lines
+                if (taskString != "") {
+                    switch (taskString.charAt(1)) {
+                    case 'T':
+                        boolean isDone = taskString.split("  ")[0].equals("[Done]");
+                        String description = taskString.split("  ")[1];
+                        Task t = new ToDo(description);
+                        if (isDone) {
+                            t.setDone();
+                        }
+                        savedTasks.add(t);
+                        break;
+                    case 'D':
+                        isDone = taskString.split("  ")[0].equals("[Done]");
+                        description = taskString.split("  ")[1].split("\\s[(]by:\\s")[0];
+                        String by = taskString.split("  ")[1].split("\\s[(]by:\\s")[1];
+                        Deadline d = new Deadline(description, by);
+                        if (isDone) {
+                            d.setDone();
+                        }
+                        savedTasks.add(d);
+                        break;
+                    case 'E':
+                        isDone = taskString.split("  ")[0].equals("[Done]");
+                        String[] stringSplit = taskString.split("  ")[1].split("\\s[(]at:\\s");
+                        description = stringSplit[0];
+                        String start = stringSplit[1].split("-")[0];
+                        String end = stringSplit[1].split("-")[1];
+                        Event e = new Event(description, start, end);
+                        if (isDone) {
+                            e.setDone();
+                        }
+                        savedTasks.add(e);
+                        break;
+                    }
                 }
             }
         } catch (FileNotFoundException ex) {
@@ -205,44 +249,44 @@ public class Duke {
             String[] inputSplit;
             String description;
             switch (input.toLowerCase().split(" ")[0]) {
-                case "todo":
-                    description = input.substring(4);
-                    t = new ToDo(description);
+            case "todo":
+                description = input.substring(4);
+                t = new ToDo(description);
+                userTasks.add(t);
+                break;
+            case "deadline":
+                try {
+                    if (!hasDeadlineBy(input)) {
+                        throw new DukeException("", ExceptionType.DEADLINE_NO_BY);
+                    }
+                    inputSplit = input.split(" /by ");
+                    String by = inputSplit[1];
+                    description = inputSplit[0].substring(8);
+                    t = new Deadline(description, by);
                     userTasks.add(t);
                     break;
-                case "deadline":
-                    try {
-                        if (!hasDeadlineBy(input)) {
-                            throw new DukeException("", ExceptionType.DEADLINE_NO_BY);
-                        }
-                        inputSplit = input.split(" /by ");
-                        String by = inputSplit[1];
-                        description = inputSplit[0].substring(8);
-                        t = new Deadline(description, by);
-                        userTasks.add(t);
-                        break;
-                    } catch (DukeException ex) {
-                        System.out.print(servantSpeak);
-                        System.out.println(ex);
-                        continue;
+                } catch (DukeException ex) {
+                    System.out.print(servantSpeak);
+                    System.out.println(ex);
+                    continue;
+                }
+            case "event":
+                try {
+                    if (!hasEventStartEndTime(input)) {
+                        throw new DukeException("", ExceptionType.EVENT_NO_START_END);
                     }
-                case "event":
-                    try {
-                        if (!hasEventStartEndTime(input)) {
-                            throw new DukeException("", ExceptionType.EVENT_NO_START_END);
-                        }
-                        inputSplit = input.split(" /at ");
-                        String start = inputSplit[1].split("-")[0];
-                        String end = inputSplit[1].split("-")[1];
-                        description = inputSplit[0].substring(5);
-                        t = new Event(description, start, end);
-                        userTasks.add(t);
-                        break;
-                    } catch (DukeException ex) {
-                        System.out.print(servantSpeak);
-                        System.out.println(ex);
-                        continue;
-                    }
+                    inputSplit = input.split(" /at ");
+                    String start = inputSplit[1].split("-")[0];
+                    String end = inputSplit[1].split("-")[1];
+                    description = inputSplit[0].substring(5);
+                    t = new Event(description, start, end);
+                    userTasks.add(t);
+                    break;
+                } catch (DukeException ex) {
+                    System.out.print(servantSpeak);
+                    System.out.println(ex);
+                    continue;
+                }
             }
 
             // Standard reply from Duke for adding a task
