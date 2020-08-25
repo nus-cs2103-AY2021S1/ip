@@ -81,6 +81,23 @@ public class Duck {
         }
     }
 
+    /**
+     * Gets the list of statuses from TaskList and displays them.
+     *
+     * @param input Input from User.
+     * @throws DuckException If description field is empty.
+     */
+    public void listByFind(String input) throws DuckException {
+        input = input.substring(4);
+
+        String[] statusesByFind = this.taskList.getStatusesByFind(input);
+        responses.add("Here are the matching tasks in your list:");
+        for (int i = 0; i < statusesByFind.length; i++) {
+            responses.add(statusesByFind[i]);
+        }
+
+    }
+
     public void markTaskAsDone(String input) throws DuckException {
         int taskNumber = Parser.parseTaskNumber(input);
         Task task = this.taskList.markDone(taskNumber);
@@ -105,7 +122,6 @@ public class Duck {
         responses.add("  " + newTask.getStatus());
         responses.add(getNumberOfTasks());
     }
-
 
 
     public void run() {
@@ -139,6 +155,9 @@ public class Duck {
                     break;
                 case DUE:
                     listByDueDate(input);
+                    break;
+                case FIND:
+                    listByFind(input);
                     break;
                 case TODO:
                 case DEADLINE:

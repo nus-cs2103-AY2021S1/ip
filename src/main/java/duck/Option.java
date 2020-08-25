@@ -12,6 +12,7 @@ public enum Option {
     EVENT("event"),
     DELETE("delete"),
     DUE("due"),
+    FIND("find"),
     UNRECOGNIZED;
 
     private String name;

@@ -1,5 +1,6 @@
 package duck.task;
 
+import duck.Parser;
 import duck.exception.DuckException;
 
 
@@ -70,6 +71,23 @@ public class TaskList implements Serializable {
 
                 })
                 .map((task) -> task.getStatus())
+                .toArray(String[]::new);
+    }
+
+    /**
+     * Takes in a search input and parses for the description to filter by.
+     * Filters the list of Tasks based on their description and returns the
+     * statuses of those that match.
+     *
+     * @param input Input from user.
+     * @return String array containing statuses of tasks that match.
+     * @throws DuckException If description field is empty.
+     */
+    public String[] getStatusesByFind(String input) throws DuckException {
+        String description = Parser.parseDescription(input);
+        return this.tasks.stream()
+                .filter((task) -> task.getDescription().contains(description))
+                .map(Task::getStatus)
                 .toArray(String[]::new);
     }
 }
