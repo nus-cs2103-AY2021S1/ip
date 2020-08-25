@@ -7,9 +7,6 @@ import seedu.bob.common.Messages;
  */
 public class BobEmptyTaskException extends BobException {
 
-    /**
-     * Creates a BobEmptyTaskException.
-     */
     public BobEmptyTaskException () {
         super (Messages.EMPTYTASK);
     }

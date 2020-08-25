@@ -31,6 +31,7 @@ public class Bob {
         try {
             tempTasks = new Tasklist(storage);
         } catch (BobException | IOException e) {
+            System.out.println(Messages.LOADINGERROR);
             tempTasks = new Tasklist();
         }
         this.tasks = tempTasks;
@@ -59,7 +60,6 @@ public class Bob {
         }
     }
 
-
     /**
      * The main environment where Bob runs.
      *
@@ -68,8 +68,11 @@ public class Bob {
     public static void main(String[] args) {
          //File path of saved task list
          String filePath = System.getProperty("user.dir").endsWith("text-ui-test")
-                ? "test.txt"
-                : "data/bob.txt";
+                 ? "test.txt"
+                 : System.getProperty("user.dir").endsWith("ip")
+                 ? "data/bob.txt"
+                 // Creates a save file on the user's home directory if user is not in ip directory
+                 : System.getProperty("user.home") + "/bob.txt";
          try {
              new Bob(filePath).run();
          } catch (IOException e) {

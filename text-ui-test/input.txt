@@ -1,7 +1,7 @@
-todo read book
+todo work
 bad input
 done 3
-deadline return book /by 2020/08/24 2000
+deadline project work /by 2020/08/24 2000
 event project meeting /at 2020/09/23 0435
 event birthday party /at 2020/12/09 0000
 deadline assignment /at
@@ -22,6 +22,9 @@ list
 done1
 done
 todo
+find work
+find
+find project
 delete 2
 list
 event

@@ -112,6 +112,16 @@ public class Tasklist {
         return output.toString();
     }
 
+    public String findTasks(String input) {
+        StringBuilder tasksFound = new StringBuilder();
+        for (Task task: list) {
+            if (task.toString().contains(input)) {
+                tasksFound.append(task.toString()).append("\n");
+            }
+        }
+        return tasksFound.toString();
+    }
+
     @Override
     public String toString() {
         return getListSize() == 0

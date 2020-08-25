@@ -24,7 +24,8 @@ public class DeadlineCommand extends Command {
      * @throws BobEmptyTaskException If there is no description for deadline.
      */
     public DeadlineCommand(String input) throws BobEmptyTaskException {
-        if (input.length() == 0) {
+        //Removes all whitespaces and checks if input is empty
+        if (input.replaceAll("\\s+","").length() == 0) {
             throw new BobEmptyTaskException();
         }
 

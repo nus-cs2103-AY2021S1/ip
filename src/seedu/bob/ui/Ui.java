@@ -141,4 +141,14 @@ public class Ui {
     public void showUpdatingError() {
         showToUser(Messages.UPDATEERROR);
     }
+
+    public void showTasksFoundMessage(String input, String tasksFound) {
+        showToUser(Messages.findMessage(input), tasksFound);
+    }
+
+    public void showNoTaskFoundMessage(String input) {
+        showToUser(Messages.noTaskFoundMessage(input));
+    }
+
+
 }

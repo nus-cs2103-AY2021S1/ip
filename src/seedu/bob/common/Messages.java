@@ -19,6 +19,15 @@ public class Messages {
     public static final String ADDMSG = "Yes boss, I have added this task to your list:\n";
     public static final String DONEMSG = "I have marked the task as done, good job boss.\n";
     public static final String DELETEMSG = "I have deleted the task.\n";
+
+    public static String findMessage(String input) {
+        return "I found these tasks containing \"" + input + "\" in your list.\n";
+    }
+
+    public static String noTaskFoundMessage(String input) {
+        return "I can't find any task containing \"" + input + "\" in your list.\n";
+    }
+
     public static final String INVALIDCOMMAND =
             "Sorry boss, I am not smart enough to understand that. Please give me a valid instruction.\n";
     public static final String EMPTYTASK =
@@ -34,10 +43,12 @@ public class Messages {
         return "Erm, you are asking me to " + action + " task " + taskNo + " but there is/are only "
                 + totalNoOfTasks + " tasks. Please enter the correct number instead.";
     }
+    public static final String EMPTYFIND =
+            "I don't know what you want me to find boss. :( Please enter a description for me to search.\n";
     public static final String LOADINGERROR =
-            "Saved file containing your task list could not be load, might be corrupted. :(\n";
+            "Saved file containing your task list could not be load, so I have created a new task list for you.\n";
     public static final String UPDATEERROR =
             "Update to saved file has failed, file reader might be corrupted. :(\n";
     public static final String INVALIDPATHNAME =
-            "Couldn't recognise the file name. Please restart Bob with a different file name.\n";
+            "Couldn't recognise the file name. Please restart Bob with a different file path name.\n";
 }
