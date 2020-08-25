@@ -43,7 +43,7 @@ public class Deadline extends Task {
         if (code.charAt(0) == 'D') {
             String[] content = code.split("\\|", 4);
             if (content.length != 4) {
-                throw new Error("There are some holes in my memory...");
+                throw new DukeException("There are some holes in my memory...");
             }
             Deadline newDeadline = new Deadline(content[3], DateParser.parseString(content[2]));
             if (content[1].equals("Y")) {
