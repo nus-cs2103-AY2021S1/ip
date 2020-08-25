@@ -7,7 +7,10 @@ import duke.dependencies.task.Task;
 
 import java.util.ArrayList;
 
-
+/**
+ * Class that implements the list of Tasks the user has. Implemented with an ArrayList,
+ *
+ */
 public class TaskList {
 
     /** Loader Object to read and write to save file. */
@@ -52,7 +55,7 @@ public class TaskList {
      * Returns a String in the form of a list with \n appended
      * at the end of each item.
      *
-     * @return todoList in a form of a String
+     * @return Returns
      */
     public String getTodosInList() {
         StringBuilder sb = new StringBuilder();
@@ -79,8 +82,8 @@ public class TaskList {
      * Adds the specified task to the todoList. Returns a string representation
      * of the task that was added as a reply.
      *
-     * @param task
-     * @return a string represenitng the newly added task
+     * @param task Task object to be added.
+     * @return String representing the newly added task.
      */
     public String add(Task task) {
         todoList.add(task);
@@ -91,8 +94,8 @@ public class TaskList {
     /**
      * Finds the given task at index and completes it.
      *
-     * @param nums am array of numbers in string form
-     * @return a string represenitng the newly completed task.
+     * @param nums An array of numbers in string form.
+     * @return String representing the newly completed task.
      */
     public String done(Integer[] nums) {
         StringBuilder sb = new StringBuilder();
@@ -112,8 +115,8 @@ public class TaskList {
      * Finds all given task specified and deletes it from
      * list.
      *
-     * @param nums
-     * @return
+     * @param nums An array of numbers in string form.
+     * @return String representing the deleted task.
      */
     public String deleteTask(Integer nums) {
         Schedulable t = todoList.get(nums - 1);
@@ -125,7 +128,7 @@ public class TaskList {
     /**
      * Returns the number of tasks in the todoList. Includes completed task.
      *
-     * @return size of the list as a String
+     * @return Size of the list as a String.
      */
     public int getListSize() {
         return todoList.size();
@@ -134,7 +137,7 @@ public class TaskList {
     /**
      * Returns the number of completed tasks in the list.
      *
-     * @return number of completed tasks
+     * @return Integer number of completed items in the task list.
      */
     public int getNumOfCompleted() {
         int c = 0;
@@ -149,7 +152,7 @@ public class TaskList {
     /**
      * Returns the number of incomplete tasks in the list.
      *
-     * @return number of incomplete tasks
+     * @return Integer number of incomplete items in the task list.
      */
     public int getNumOfIncompleted() {
         int c = 0;
@@ -161,10 +164,5 @@ public class TaskList {
         return c;
     }
 
-//    public static void main(String[] args) {
-//        Store s = initStorage();
-//        s.add(Task.createDeadline("Homework", "End of time"));
-//        System.out.println(s.getTodosInList());
-//    }
 
 }

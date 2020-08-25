@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import static duke.dependencies.task.CompletionState.*;
 
+/**
+ * Represents a task, something that is associated with a given Executable/command from the user.
+ */
 public abstract class Task implements Serializable, Schedulable {
     protected CompletionState state;
     protected String task;
@@ -15,22 +18,41 @@ public abstract class Task implements Serializable, Schedulable {
 
     abstract String getDateString();
 
+    /**
+     * Returns whether the Task has a given date/deadline which is represented by a TaskDate object.
+     * @return True if the Task has a Task Date.
+     */
     public boolean hasADate() {
         return false;
     };
 
+    /**
+     * Returns the String describing this Task.
+     * @return String representation of this Task.
+     */
     public String showTask() {
         return this.task;
     }
 
+    /**
+     * Returns whether the Task is an empty Task.
+     * @return True if it is empty.
+     */
     public boolean isItEmpty() {
         return false;
     }
 
+    /**
+     * Completes this Task. This represents the user finishing this task.
+     */
     public void completed() {
         this.state = COMPLETED;
     }
 
+    /**
+     * Returns whether this Task is completed.
+     * @return True if the user has completed this task.
+     */
     public boolean isCompleted() {
         return state == COMPLETED;
     }
@@ -41,15 +63,15 @@ public abstract class Task implements Serializable, Schedulable {
      * Returns a task representing the corresponding task index in the todoList of the user.
      * Task corresponds to Done, Delete commands.
      *
-     * @param task this task should be in the inform "1" or "1 2 3"
-     * @return task
+     * @param task This task should be in the inform "1" or "1 2 3".
+     * @return Miscellaneous Task.
      */
     public static Task createMiscTask(String task) { return new DoneTask(task); }
 
     /**
      * Returns a task that is empty. Corresponds to a List command where there is no task.
      *
-     * @return empty task
+     * @return Empty Task.
      */
     public static Task createEmptyTask(){
         return new EmptyTask();
@@ -58,8 +80,8 @@ public abstract class Task implements Serializable, Schedulable {
     /**
      * Returns a task representing a todoTask. Task has no date or deadline associated.
      *
-     * @param task string describing the task
-     * @return todoTask
+     * @param task String describing the task.
+     * @return Todo Task.
      */
     public static Task createTodo(String task) {
         return new ToDos(task);
@@ -69,9 +91,9 @@ public abstract class Task implements Serializable, Schedulable {
      * Returns a task representing an event. Task will have a date associated with it,
      * specifying when the event is taking place.
      *
-     * @param task string describing the task
-     * @param date date string, in valid format: "dd/MM/uuuu" or "uuuy-MM-dd"
-     * @return eventTask
+     * @param task String describing the task.
+     * @param date Date string, in valid format: "dd/MM/uuuu" or "uuuy-MM-dd".
+     * @return Event Task.
      */
     public static Task createEvent(String task, String date) {
         return new Events(task, date);
@@ -81,9 +103,9 @@ public abstract class Task implements Serializable, Schedulable {
      * Returns a task representing a deadline. Deadlines has to be completed by the specified date
      * De deadline associatione is user referencion.
      *
-     * @param task string describing the task
-     * @param date date string, in valid format: "dd/MM/uuuu" or "uuuy-MM-dd"
-     * @return deadlineTask
+     * @param task String describing the task.
+     * @param date Date string, in valid format: "dd/MM/uuuu" or "uuuy-MM-dd".
+     * @return Deadline Task.
      */
     public static Task createDeadline(String task, String date) {
         return new Deadlines(task, date);

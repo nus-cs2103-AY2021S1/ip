@@ -55,6 +55,11 @@ public class TaskDate implements Serializable, Comparable<TaskDate> {
         }
     }
 
+    /**
+     * Establishes a natural ordering os TaskDates by Date precedence.
+     * @param o The other TaskDate to be compared to.
+     * @return -1, 0, 1 if this TaskDate is before , the same , after the other TaskDate.
+     */
     @Override
     public int compareTo(TaskDate o) {
         if (this.date.equals(o.date)) {
