@@ -20,6 +20,7 @@ public class CommandParser {
     protected static final String INDICATOR_DONE = "done";
     /** delete-type string indicator */
     protected static final String INDICATOR_DELETE = "delete";
+    protected static final String INDICATOR_FIND = "find";
 
     /**
      * Returns the appropriate command type based on the string input.
@@ -37,6 +38,8 @@ public class CommandParser {
             return DoneCommand.parse(userInput);
         } else if (firstWord.equals(INDICATOR_DELETE)) {
             return DeleteCommand.parse(userInput);
+        } else if (firstWord.equals(INDICATOR_FIND)) {
+            return FindCommand.parse(userInput);
         } else {
             return AddCommand.parse(userInput);
         }

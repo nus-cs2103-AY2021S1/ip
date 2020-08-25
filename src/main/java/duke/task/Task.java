@@ -45,6 +45,14 @@ public abstract class Task implements PrintSummary {
     }
 
     /**
+     * Returns the task description
+     * @return string of task description
+     */
+    public String getTaskDescription() {
+        return description;
+    }
+
+    /**
      * Returns the state of th:we Task, whether it is completed or not.
      * @return true if the task is completed, false otherwise
      */
