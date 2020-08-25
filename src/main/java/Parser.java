@@ -79,11 +79,9 @@ public class Parser {
                 Task t = null;
                 if (arr[0].equals("todo")) {
                     t = new Todo(msg);
-                }
-                else if (arr[0].equals("event")) {
+                } else if (arr[0].equals("event")) {
                     t = new Event(msg);
-                }
-                else {
+                } else {
                     t = new Deadline(msg);
                 }
                 lst.addTask(t);

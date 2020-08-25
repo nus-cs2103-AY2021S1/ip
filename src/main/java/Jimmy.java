@@ -18,8 +18,9 @@ public class Jimmy {
         while (!isExit) {
             try {
                 String command = ui.process();
-                if (command.equals("bye"))
+                if (command.equals("bye")) {
                     isExit = true;
+                }
                 String reply = Parser.parse(planner, command);
                 ui.print(reply);
             } catch (JimmyException e) {
