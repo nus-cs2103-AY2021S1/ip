@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -8,7 +9,28 @@ import java.time.format.DateTimeParseException;
 public class DateTimeHandler {
 
     /**
-     * Parses the date and time string into a format.
+     * Parses and formats the date string.
+     *
+     * @param date Unformatted date string.
+     * @return Date string in the format of "dd MMM YYYY".
+     * @throws DukeException If date input is invalid.
+     */
+    public static String parseDate(String date) throws DukeException {
+        try {
+            // Parse input
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d-M-yyyy");
+            LocalDate inputDate = LocalDate.parse(date, inputFormatter);
+
+            // Produce formatted output
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+            return inputDate.format(outputFormatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("\u2639 OOPS!!! Enter the date as \"dd-MM-yyyy\".\n");
+        }
+    }
+
+    /**
+     * Parses and formats the date and time string.
      *
      * @param dateTime Unformatted date and time string.
      * @return Date and time string in the format of "dd MMM YYYY, hh:ss".

@@ -46,6 +46,14 @@ Here are the task(s) in your list:
 2.[D][✘] return book (by: 01 Sep 2020, 06:00 PM)
 3.[E][✘] project meeting (at: 01 Sep 2020, 08:00 AM)
 
+☹ OOPS!!! Enter the date you want to get tasks from.
+
+☹ OOPS!!! Enter the date as "dd-MM-yyyy".
+
+Here are the task(s) from 01 Sep 2020:
+1. [D][✘] return book (by: 01 Sep 2020, 06:00 PM)
+2. [E][✘] project meeting (at: 01 Sep 2020, 08:00 AM)
+
 ☹ OOPS!!! Which task have you done?
 
 ☹ OOPS!!! Enter the index of the task done.
@@ -79,5 +87,8 @@ Here are the task(s) in your list:
 1.[T][✓] borrow book
 2.[D][✘] return book (by: 01 Sep 2020, 06:00 PM)
 3.[T][✘] join sports club
+
+Here are the task(s) from 01 Sep 2020:
+1. [D][✘] return book (by: 01 Sep 2020, 06:00 PM)
 
 Bye. Hope to see you again soon!

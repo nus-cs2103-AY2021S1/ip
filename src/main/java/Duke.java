@@ -53,6 +53,8 @@ public class Duke {
             deleteTask(input);
         } else if (input.contains("done")) {
             markTaskAsDone(input);
+        } else if (input.contains("get")) {
+            printTasksFromDate(input);
         } else if (input.contains("todo") || input.contains("event") || input.contains("deadline")) {
             createTask(input);
         } else {
@@ -128,6 +130,39 @@ public class Duke {
             throw new DukeException("\u2639 OOPS!!! Which task have you done?\n");
         } catch (NumberFormatException e) {
             throw new DukeException("\u2639 OOPS!!! Enter the index of the task done.\n");
+        }
+    }
+
+    /**
+     * Prints the tasks with the date required by the user.
+     *
+     * @param input Date of tasks required.
+     * @throws DukeException If the input is invalid.
+     */
+    private static void printTasksFromDate(String input) throws DukeException {
+        try {
+            String requiredDate = DateTimeHandler.parseDate(input.substring(4));
+            boolean hasRequiredTasks = false;
+            StringBuilder requiredTasks = new StringBuilder();
+            int number = 0;
+
+            for (int i = 0; i < tasks.size(); i++) {
+                String taskString = tasks.get(i).toString();
+                if (taskString.contains(requiredDate)) {
+                    hasRequiredTasks = true;
+                    number++;
+                    requiredTasks.append(number).append(". ").append(taskString).append("\n");
+                }
+            }
+
+            if (hasRequiredTasks) {
+                System.out.println("Here are the task(s) from " + requiredDate + ":");
+                System.out.println(requiredTasks);
+            } else {
+                System.out.println("You have no tasks from " + requiredDate + ".");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("\u2639 OOPS!!! Enter the date you want to get tasks from.\n");
         }
     }
 

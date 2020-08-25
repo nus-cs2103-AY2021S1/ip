@@ -12,6 +12,9 @@ event
 event project meeting /by
 event project meeting /at 1-9-2020 0800
 list
+get
+get 1/9/2020
+get 1-9-2020
 done
 done a
 done 3
@@ -23,5 +26,6 @@ delete
 delete a
 delete 3
 list
+get 1-9-2020
 bye
 blah
