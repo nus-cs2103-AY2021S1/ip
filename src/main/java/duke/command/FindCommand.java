@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
@@ -17,7 +18,11 @@ public class FindCommand extends Command {
     }
 
     public static FindCommand parse(String searchString) {
-        return new FindCommand(searchString);
+        String[] details = searchString.split(" ", 2);
+        if (details.length == 1) {
+            throw new DukeException("Please specify a keyword/keyphrase to search!");
+        }
+        return new FindCommand(details[1]);
     }
 
     @Override
