@@ -1,0 +1,7 @@
+java.io.FileNotFoundException: /Users/leeweiheng/Documents/NUS Modules/CS2103/Project/ip/src/data/store.ser (No such file or directory)
+java.io.IOException: java.io.FileNotFoundException: /Users/leeweiheng/Documents/NUS Modules/CS2103/Project/ip/src/data/store.ser (No such file or directory)
+-------------------------
+Hello! I'm Duke
+What can I do for you?
+-------------------------
+java.io.FileNotFoundException: /Users/leeweiheng/Documents/NUS Modules/CS2103/Project/ip/src/data/store.ser (No such file or directory)
