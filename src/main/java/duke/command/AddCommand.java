@@ -7,10 +7,19 @@ import duke.task.TaskException;
 import duke.task.TaskList;
 import duke.task.TaskType;
 
+/**
+ * Encapsulates the logic for adding tasks.
+ */
 public class AddCommand extends Command {
 
     private final TaskType taskType;
 
+    /**
+     * Constructs a AddCommand with a given TaskType.
+     *
+     * @param args Arguments for the command.
+     * @param taskType TaskType for which task to add.
+     */
     public AddCommand(String args, TaskType taskType) {
         super(args);
         this.taskType = taskType;

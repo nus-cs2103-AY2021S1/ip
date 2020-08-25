@@ -6,8 +6,16 @@ import duke.task.TaskList;
 
 import java.util.List;
 
+/**
+ * Encapsulates the logic for listing tasks.
+ */
 public class ListCommand extends Command {
 
+    /**
+     * Constructs a ListCommand.
+     *
+     * @param args Arguments are unused.
+     */
     public ListCommand(String args) {
         super(args);
     }
