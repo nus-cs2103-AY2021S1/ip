@@ -16,6 +16,7 @@ bin/
 # text files from testing
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+text-ui-test/data/tasklist.csv
 
 # codestyle checks
 checkstyle-8.2-all.jar
