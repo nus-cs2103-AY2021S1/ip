@@ -32,18 +32,24 @@ public class Storage {
         String currDir = System.getProperty("user.dir");
         Path folderPath = Paths.get(currDir, "data");
 
-        if (!Files.exists(folderPath)) Files.createDirectories(folderPath);
+        if (!Files.exists(folderPath)) {
+            Files.createDirectories(folderPath);
+        }
 
         Path filePath = Paths.get(currDir, "data", "tasks.csv");
         File file = filePath.toFile();
 
-        if (!file.exists()) file.createNewFile();
+        if (!file.exists()) {
+            file.createNewFile();
+        }
 
         FileWriter fw = new FileWriter(file);
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write("Task Type,Task Time,Done State,Task Name\n");
 
-        for (int i = 0; i < tasks.size(); i++) bw.write(tasks.get(i).write());
+        for (int i = 0; i < tasks.size(); i++) {
+            bw.write(tasks.get(i).write());
+        }
 
         bw.close();
     }
@@ -59,7 +65,9 @@ public class Storage {
         Path filePath = Paths.get(currDir, "data", "tasks.csv");
         File file = filePath.toFile();
 
-        if (!file.exists()) return;
+        if (!file.exists()) {
+            return;
+        }
 
         BufferedReader br = Files.newBufferedReader(filePath);
         br.readLine();

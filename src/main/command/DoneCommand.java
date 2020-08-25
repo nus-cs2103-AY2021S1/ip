@@ -32,8 +32,9 @@ public class DoneCommand implements Command {
      */
     @Override
     public void execute(Ui ui, TaskList tasks) throws InvalidTaskException {
-        if (taskNum < 1 || taskNum > tasks.size())
+        if (taskNum < 1 || taskNum > tasks.size()) {
             throw new InvalidTaskException();
+        }
         Task task = tasks.get(taskNum - 1);
         task.setDone();
         ui.printDoneSuccess(task);

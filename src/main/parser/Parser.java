@@ -26,29 +26,32 @@ import main.exception.UnknownCommandException;
  * @since v0.1
  */
 public class Parser {
-    private static final String EXIT_COMMAND = "bye";
-    private static final String LIST_COMMAND = "list";
-    private static final String DONE_COMMAND = "done";
-    private static final String TODO_COMMAND = "todo";
-    private static final String DEADLINE_COMMAND = "deadline";
-    private static final String EVENT_COMMAND = "event";
-    private static final String DELETE_COMMAND = "delete";
+    private static final String COMMAND_EXIT = "bye";
+    private static final String COMMAND_LIST = "list";
+    private static final String COMMAND_DONE = "done";
+    private static final String COMMAND_TODO = "todo";
+    private static final String COMMAND_DEADLINE = "deadline";
+    private static final String COMMAND_EVENT = "event";
+    private static final String COMMAND_DELETE = "delete";
 
     private static LocalDateTime toDateTime(String dateTime) throws InvalidDateException {
         String[] dateTimeSplit = dateTime.split(" ");
-        if (dateTimeSplit.length != 2)
+        if (dateTimeSplit.length != 2) {
             throw new InvalidDateException("     ☹ OOPS!!! Your date needs to"
                     + " have this format:\n     \"YYYY-MM-DD HHMM\"");
+        }
 
         String[] date = dateTimeSplit[0].split("-");
         String time = dateTimeSplit[1];
 
-        if (date.length != 3)
+        if (date.length != 3) {
             throw new InvalidDateException("     ☹ OOPS!!! Your date needs to"
                     + " have this format:\n     \"YYYY-MM-DD\"");
-        if (time.length() != 4)
+        }
+        if (time.length() != 4) {
             throw new InvalidDateException("     ☹ OOPS!!! Your time needs to"
                     + " have this format:\n     \"HHMM\"");
+        }
 
         try {
             int year = Integer.parseInt(date[0]);
@@ -74,17 +77,19 @@ public class Parser {
         String[] nameAndTime;
 
         switch (command) {
-        case TODO_COMMAND:
+        case COMMAND_TODO:
             return new AddTodoCommand(description);
-        case DEADLINE_COMMAND:
+        case COMMAND_DEADLINE:
             nameAndTime = description.split(" /by ", 2);
-            if (nameAndTime.length == 1)
+            if (nameAndTime.length == 1) {
                 throw new InvalidDeadlineFormatException();
+            }
             return new AddDeadlineCommand(nameAndTime[0], toDateTime(nameAndTime[1]));
-        case EVENT_COMMAND:
+        case COMMAND_EVENT:
             nameAndTime = description.split(" /at ", 2);
-            if (nameAndTime.length == 1)
+            if (nameAndTime.length == 1) {
                 throw new InvalidEventFormatException();
+            }
             return new AddEventCommand(nameAndTime[0], toDateTime(nameAndTime[1]));
         default:
             throw new UnknownCommandException();
@@ -116,22 +121,28 @@ public class Parser {
         int taskNum;
 
         switch (command) {
-        case EXIT_COMMAND:
+        case COMMAND_EXIT:
             return new ExitCommand();
-        case LIST_COMMAND:
+        case COMMAND_LIST:
             return new ListCommand();
-        case DONE_COMMAND:
-            if (isSingleArgument) throw new InvalidTaskException();
+        case COMMAND_DONE:
+            if (isSingleArgument) {
+                throw new InvalidTaskException();
+            }
             taskNum = Integer.parseInt(input[1]);
             return new DoneCommand(taskNum);
-        case DELETE_COMMAND:
-            if (isSingleArgument) throw new InvalidTaskException();
+        case COMMAND_DELETE:
+            if (isSingleArgument) {
+                throw new InvalidTaskException();
+            }
             taskNum = Integer.parseInt(input[1]);
             return new DeleteCommand(taskNum);
-        case TODO_COMMAND:
-        case DEADLINE_COMMAND:
-        case EVENT_COMMAND:
-            if (isSingleArgument) throw new EmptyMessageException(command);
+        case COMMAND_TODO:
+        case COMMAND_DEADLINE:
+        case COMMAND_EVENT:
+            if (isSingleArgument) {
+                throw new EmptyMessageException(command);
+            }
             return parseAdd(input);
         default:
             throw new UnknownCommandException();
