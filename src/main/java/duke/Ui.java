@@ -26,11 +26,11 @@ public class Ui {
     void showWelcome() {
         showLogo();
         System.out.println("\tWhat can I do for you?");
-        System.out.println("\t_________________________________\n");
+        System.out.println("\t___________________________________________\n");
     }
 
     void showLine() {
-        System.out.println("\t_________________________________");
+        System.out.println("\t___________________________________________");
     }
 
     public void bye() {
