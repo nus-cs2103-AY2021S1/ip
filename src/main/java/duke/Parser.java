@@ -42,6 +42,10 @@ public class Parser {
         return line.length() >= 6 && line.substring(0, 6).equals("delete");
     }
 
+    public static boolean isFind(String line) {
+        return line.length() >= 4 && line.substring(0, 4).equals("find");
+    }
+
     /**
      * Extracts task type from a given "add" command line
      * @param line string of a command
