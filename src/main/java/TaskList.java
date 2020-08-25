@@ -1,31 +1,32 @@
 package main.java;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class TaskList {
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
     public TaskList(){
         this.tasks = new ArrayList<Task>();
     }
 
-    public Task addToDo(String name){
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public Task addToDo(String name) {
         Task newTask = new ToDo(name);
         tasks.add(newTask);
         return newTask;
     }
 
-    public Task addDeadLine(String name, String time){
+    public Task addDeadLine(String name, String time) throws DukeException {
         Task newTask = new Deadline(name,time);
         tasks.add(newTask);
         return newTask;
     }
 
-    public Task addEvent(String name, String time){
+    public Task addEvent(String name, String time) throws DukeException{
         Task newTask = new Event(name, time);
         tasks.add(newTask);
         return newTask;
@@ -35,60 +36,8 @@ public class TaskList {
         return this.tasks.size();
     }
 
-    public void doTask(int index) throws TaskDoneException {
+    public void doTask(int index) throws DukeException {
         this.tasks.get(index-1).setDone();
-    }
-
-    public String[] readSavedData(String data) {
-        String[] result = data.split(" \\| ");
-        for (int i = 0; i < result.length; i ++) {
-            result[i] = result[i].trim();
-        }
-        return result;
-    }
-
-    private void createSavedTask(String[] args) throws BadFormatFileException {
-        Task newTask;
-        switch(args[0]) {
-        case "T":
-            newTask = addToDo(args[2]);
-            break;
-        case "D":
-            newTask = addDeadLine(args[2], args[3]);
-            break;
-        case "E":
-            newTask = addEvent(args[2], args[3]);
-            break;
-        default:
-            newTask = null;
-        }
-        if (args[1].equals("1")) {
-            try {
-                newTask.setDone();
-            } catch (TaskDoneException err) {
-                System.out.println("Error in Saved Files");
-            } catch (NullPointerException err) {
-                throw new BadFormatFileException();
-            }
-        }
-    }
-
-    public void readFile(File path) {
-        try {
-            Scanner scanner = new Scanner(path);
-            String nextLine;
-            String[] readData;
-            while (scanner.hasNext()) {
-                nextLine = scanner.nextLine();
-                readData = readSavedData(nextLine);
-                createSavedTask(readData);
-            }
-        } catch (FileNotFoundException err) {
-            System.out.println("File not found");
-        } catch (BadFormatFileException err) {
-            System.out.println("File is corrupted");
-            tasks = new ArrayList<Task>();
-        }
     }
 
     public String toSaveFormat() {
@@ -99,7 +48,11 @@ public class TaskList {
         return result;
     }
 
-    public Task deleteTask(int index) {
+    public Task deleteTask(int index) throws DukeException {
+        if (index-1 < 1 || index >= this.tasks.size()) {
+            throw new DukeException("Task #" + index + "does not exist.\n" +
+                    "To check for lists of Tasks, type \"list\"");
+        }
         return this.tasks.remove(index-1);
     }
 
