@@ -2,9 +2,12 @@ package tickbot.ui.text;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Map.Entry;
 import java.util.function.BiFunction;
 
 import tickbot.task.*;
@@ -75,6 +78,38 @@ public class Runner {
 
     void event(String[] args) {
         addTask(args, "Event", (content, time) -> new Event(false, content, time), "/at");
+    }
+
+    void find(String[] args) {
+        String searchText = "";
+        for (int i = 1; i < args.length; i++) {
+            searchText += args[i];
+        }
+        class Entry { 
+            int index;
+            Task task;
+            Entry(int index, Task task) {
+                this.index = index;
+                this.task = task;
+            }
+         }
+
+        List<Entry> result = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.getContent().contains(searchText)) {
+                result.add(new Entry(i + 1, task));
+            }
+        }
+        if (result.isEmpty()) {
+            Output.printMessage("Sorry, no related tasks found!");
+        } else {
+            Output.printMessage("Here are the matching tasks:");
+            for (Entry entry : result) {
+                Output.printMessage(String.format("%d. %s",
+                        entry.index, entry.task));
+            }
+        }
     }
 
     /**
