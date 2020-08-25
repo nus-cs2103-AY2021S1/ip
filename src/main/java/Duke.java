@@ -1,3 +1,5 @@
+import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,14 +14,128 @@ public class Duke {
     protected ArrayList<Task> TaskList = new ArrayList<>();
 
     private void start() {
-        System.out.println(greeting);
+        try {
+            this.importSavedDataToList();
+            Class myClass = getClass();
+            URL url = myClass.getResource("Data.txt");
+            if (url == null) {
+                File file = new File("Data.txt");
+                if (file.createNewFile()) {
+                    System.out.println(greeting);
+                } else {
+                    System.out.println(greeting);
+                }
+            } else {
+                System.out.println(greeting);
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
     }
 
+    private void importSavedDataToList() {
+        BufferedReader objReader = null;
+        try {
+            String strCurrentLine;
+            objReader = new BufferedReader(new FileReader("Data.txt"));
+            while ((strCurrentLine = objReader.readLine()) != null) {
+                String taskIcon = Character.toString(strCurrentLine.charAt(0));
+                String doneIcon = Character.toString(strCurrentLine.charAt(4));
+                boolean isDone = false;
+                if (doneIcon.equals("1")) {
+                    isDone = true;
+                }
+                if (taskIcon.equals("T")) {
+                    String description = strCurrentLine.substring(8);
+                    Todo task = new Todo(description, isDone);
+                    TaskList.add(task);
+                } else if (taskIcon.equals("D")) {
+                    int indexOfLastDivider = strCurrentLine.lastIndexOf("|");
+                    String description = strCurrentLine.substring(8, indexOfLastDivider - 1);
+                    String by = strCurrentLine.substring(indexOfLastDivider + 2);
+                    Deadline task = new Deadline(description, isDone, by);
+                    TaskList.add(task);
+                } else if (taskIcon.equals("E")) {
+                    int indexOfLastDivider = strCurrentLine.lastIndexOf("|");
+                    String description = strCurrentLine.substring(8, indexOfLastDivider - 1);
+                    String at = strCurrentLine.substring(indexOfLastDivider + 2);
+                    Event task = new Event(description, isDone, at);
+                    TaskList.add(task);
+                } else {
+                    System.out.println("Invalid first Character");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (objReader != null)
+                    objReader.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+
     private void end() {
+        this.saveListToData();
         System.out.println(lines);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(lines);
         System.exit(0);
+    }
+
+    private void clearData() {
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter("Data.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        writer.print("");
+        writer.close();
+    }
+
+    private void saveListToData() {
+        this.clearData();
+        for (Task task : this.TaskList) {
+            String input = "";
+            if (task instanceof Todo) {
+                if (task.isDone) {
+                    input = "T | 1 | " + task.description;
+                } else {
+                    input = "T | 0 | " + task.description;
+                }
+            } else if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                if (deadline.isDone) {
+                    input = "D | 1 | " + deadline.description + " | " + deadline.by;
+                } else {
+                    input = "D | 0 | " + deadline.description + " | " + deadline.by;
+                }
+            } else if (task instanceof Event) {
+                Event event = (Event) task;
+                if (event.isDone) {
+                    input = "E | 1 | " + event.description + " | " + event.at;
+                } else {
+                    input = "E | 0 | " + event.description + " | " + event.at;
+                }
+            } else {
+
+            }
+            try {
+                FileWriter writer = new FileWriter("Data.txt", true);
+                BufferedWriter bufferedWriter = new BufferedWriter(writer);
+                bufferedWriter.write(input);
+                bufferedWriter.newLine();
+                bufferedWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void provideList() {
@@ -31,6 +147,7 @@ public class Duke {
             System.out.println(outputLine);
         }
         System.out.println(lines);
+        this.saveListToData();
     }
 
     private void markAsDone(String input) {
@@ -42,6 +159,7 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println(chosen);
         System.out.println(lines);
+        this.saveListToData();
     }
 
     private void delete(String input) throws EmptyListException, InvalidListIndexException {
@@ -70,6 +188,9 @@ public class Duke {
         int listCount = this.TaskList.size();
         System.out.println(" Now you have " + Integer.toString(listCount) + " tasks in the list.");
         System.out.println(lines);
+        this.saveListToData();
+
+
     }
 
     private void createAndAddTodo(String input) throws EmptyDescriptionException, WrongFormatException {
@@ -85,7 +206,7 @@ public class Duke {
 
 
     private void createAndAddDeadline(String input) throws EmptyDescriptionException, WrongFormatException {
-        if (input.length() < 8 || input.substring(8).replaceAll("\\s", "").equals("") || !input.substring(9).equals("/")) {
+        if (input.length() < 9 || input.substring(8).replaceAll("\\s", "").equals("")) {
             throw new EmptyDescriptionException("deadline");
         } else if (input.contains("/by")
                 && Character.toString(input.charAt(8)).equals(" ")
@@ -101,7 +222,7 @@ public class Duke {
     }
 
     private void createAndAddEvent(String input) throws EmptyDescriptionException, WrongFormatException {
-        if (input.length() < 5 || input.substring(5).replaceAll("\\s", "").equals("") || !input.substring(6).equals("/")) {
+        if (input.length() < 6 || input.substring(5).replaceAll("\\s", "").equals("")) {
             throw new EmptyDescriptionException("event");
         } else if (input.contains("/at")
                 && Character.toString(input.charAt(5)).equals(" ")
