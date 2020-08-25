@@ -1,3 +1,5 @@
+package task;
+
 /**
  * The class to represent a task.
  */
@@ -5,9 +7,9 @@ public abstract class Task {
     private final String content;
     private boolean completed;
 
-    Task(String content) {
+    Task(boolean completed, String content) {
         this.content = content;
-        this.completed = false;
+        this.completed = completed;
     }
 
     public String getContent() {

@@ -1,8 +1,10 @@
+package task;
+
 public class Deadline extends Task {
     private final String time;
 
-    Deadline(String content, String time) {
-        super(content);
+    public Deadline(boolean completed, String content, String time) {
+        super(completed, content);
         this.time = time;
     }
 
