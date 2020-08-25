@@ -1,9 +1,11 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    protected LocalDate by;
+    public LocalDate by;
 
 
     public Event(String description, boolean isDone, LocalDate by) {

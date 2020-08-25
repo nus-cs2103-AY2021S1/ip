@@ -1,3 +1,12 @@
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeFileNotFoundException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -20,7 +29,6 @@ public class Storage {
 
         File dataDirectory = new File(dataPath);
         if (dataDirectory.mkdir()) {
-            System.out.println("Created " + dataPath);
             createFile(fileName);
         } else {
             this.file = new File(fileName);
@@ -30,19 +38,11 @@ public class Storage {
             Scanner sc = new Scanner(file);
             while(sc.hasNextLine()) {
                 String currentLine = sc.nextLine();
-//                System.out.println(currentLine);
                 String[] arrOfString = currentLine.split(" \\| ");
-
-//                for (int i = 0; i < arrOfString.length; i++) {
-//                    System.out.println(arrOfString[i]);
-//                }
-
                 Integer num = Integer.parseInt(arrOfString[1]);
                 Boolean isDone = num.equals(1);
                 String title = arrOfString[0];
                 String description = arrOfString[2];
-
-//                System.out.println(title + " " + description + " " + num);
                 if (title.equals("T")) {
                     this.list.add(new ToDo(description, isDone));
                 } else if (title.equals("D")) {
@@ -53,26 +53,25 @@ public class Storage {
             }
             return this.list;
         } catch (FileNotFoundException e) {
-            throw new DukeFileNotFoundException("File is not found");
+            throw new DukeFileNotFoundException();
         }
     }
 
-    void createFile(String name) {
+    void createFile(String name) throws DukeFileNotFoundException {
         File dukeFile = new File(name);
         try {
             if (dukeFile.createNewFile()) {
-                System.out.println("File created: " + dukeFile.getName());
+                System.out.println("     File created: " + dukeFile.getName());
                 this.file = dukeFile;
             } else {
-                System.out.println("File already exists.");
+                System.out.println("     File already exists.");
             }
         } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            throw new DukeFileNotFoundException();
         }
     }
 
-    void save(List<Task> list) throws DukeException {
+    public void save(List<Task> list) throws DukeException {
         try {
             FileWriter myWriter = new FileWriter(fileName);
             for (Task task: list) {
@@ -95,13 +94,7 @@ public class Storage {
             }
             myWriter.close();
         } catch (IOException e) {
-            throw new DukeException("File not Found");
+            throw new DukeFileNotFoundException();
         }
     }
-//
-//    public static void main(String[] args) {
-//        Storage storage = new Storage();
-//        storage.load();
-//    }
-
 }
