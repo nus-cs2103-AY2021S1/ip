@@ -1,6 +1,7 @@
 package king;
 
 public class KingException extends Exception {
+
     final String message;
     final Throwable error;
     KingException(String message, Throwable error) {

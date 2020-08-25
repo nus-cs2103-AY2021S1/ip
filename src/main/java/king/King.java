@@ -3,12 +3,13 @@ import tasks.TaskList;
 import java.util.Scanner;
 
 public class King {
-    Storage storage;
-    Parser parser;
-    TaskList taskList;
 
-    King(String filepath){
-        storage = new Storage(filepath);
+    private final Storage storage;
+    private final Parser parser;
+    private TaskList taskList;
+
+    King(String filePath){
+        storage = new Storage(filePath);
         taskList = new TaskList();
         taskList.addAll(storage.load());
         this.parser = new Parser(storage,taskList);
