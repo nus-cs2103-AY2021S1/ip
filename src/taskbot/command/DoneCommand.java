@@ -11,6 +11,7 @@ import taskbot.ui.Ui;
 public class DoneCommand extends Command {
     // The index of the task to be completed
     private int taskIndex;
+
     /**
      * Creates a DoneCommand.
      *
@@ -36,17 +37,17 @@ public class DoneCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        //Check if obj is compared with itself
+        // Check if obj is compared with itself
         if (obj == this) {
             return true;
         }
 
-        //Check if obj is an instance of this class
+        // Check if obj is an instance of this class
         if (!(obj instanceof DoneCommand)) {
             return false;
         }
 
-        //Compare taskIndex and return accordingly
+        // Compare taskIndex and return accordingly
         return taskIndex == ((DoneCommand) obj).getTaskIndex();
     }
 }

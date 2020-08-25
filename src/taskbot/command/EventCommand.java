@@ -36,17 +36,17 @@ public class EventCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        //Check if obj is compared with itself
+        // Check if obj is compared with itself
         if (obj == this) {
             return true;
         }
 
-        //Check if obj is an instance of this class
+        // Check if obj is an instance of this class
         if (!(obj instanceof EventCommand)) {
             return false;
         }
 
-        //Compare tasks and return accordingly
+        // Compare tasks and return accordingly
         return task.equals(((EventCommand) obj).getTask());
     }
 }

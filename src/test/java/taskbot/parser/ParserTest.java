@@ -87,7 +87,7 @@ public class ParserTest {
     public void testParseDone() {
         try {
             testCommand = "done 2";
-            //Index of tasks list will be 2 - 1 = 1
+            // Index of tasks list will be 2 - 1 = 1
             assertEquals(new DoneCommand(1), Parser.parse(testCommand));
         } catch (Exception e) {
             fail();
@@ -98,7 +98,7 @@ public class ParserTest {
     public void testParseDelete() {
         try {
             testCommand = "delete 2";
-            //Index of tasks list will be 2 - 1 = 1
+            // Index of tasks list will be 2 - 1 = 1
             assertEquals(new DeleteCommand(1), Parser.parse(testCommand));
         } catch (Exception e) {
             fail();

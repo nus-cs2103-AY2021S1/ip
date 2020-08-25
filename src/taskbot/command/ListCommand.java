@@ -21,13 +21,13 @@ public class ListCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        //Check if obj is compared with itself
+        // Check if obj is compared with itself
         if (obj == this) {
             return true;
         }
 
-        /*Check if obj is an instance of this class.
-          All ListCommand instances are equal.
+        /* Check if obj is an instance of this class.
+           All ListCommand instances are equal.
          */
         return obj instanceof ListCommand;
     }

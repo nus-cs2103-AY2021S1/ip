@@ -54,15 +54,15 @@ public class TaskList {
         }
 
         StringBuilder sb = new StringBuilder("These are the following task(s) to complete:\n");
-        //size of the tasks
+        // Size of the tasks
         int size = tasks.size();
-        //Builds the list of tasks
+        // Builds the list of tasks
         for (int i = 0; i < size - 1; i++) {
             sb.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
         sb.append(size).append(". ").append(tasks.get(size - 1));
 
-        //Prints the string
+        // Prints the string
         System.out.print(sb.toString());
     }
 
@@ -78,15 +78,15 @@ public class TaskList {
      * @param task The task to be added
      */
     public void addTodoTask(String task) {
-        //Makes a new todo task
+        // Makes a new todo task
         Todo newTask = new Todo(task);
         //Adds the new task to the list
         tasks.add(newTask);
-        //Update the storage
+        // Update the storage
         if (storage != null) {
             storage.setTasksList(tasks);
         }
-        //Informs the user that the task has been added
+        // Informs the user that the task has been added
         System.out.println("I have added a Todo:\n" + newTask +
                 "\n" + listTaskSize());
     }
@@ -97,25 +97,25 @@ public class TaskList {
      * @param input The task to be added followed by time.
      */
     public void addEventTask(String input) throws InvalidDateTimeException, WrongFormatException {
-        //splits the input according to whitespace
+        // Splits the input according to whitespace
         String[] parsedString = input.split("/at");
 
         if (parsedString.length != 2) {
             throw new WrongFormatException("Wrong format for event. Please ensure that you provide a description and time, delimited by /at");
         }
         LocalDateTime dateTime = parseDateTime(parsedString[1].stripLeading());
-        //Makes a new Event task
+        // Makes a new Event task
         Event newTask = new Event(parsedString[0], dateTime);
 
-        //Adds the new task to the list
+        // Adds the new task to the list
         tasks.add(newTask);
 
-        //Update the storage
+        // Update the storage
         if (storage != null) {
             storage.setTasksList(tasks);
         }
 
-        //Informs the user that the task has been added
+        // Informs the user that the task has been added
         System.out.println("I have added an Event:\n" + newTask +
                 "\n" + listTaskSize());
     }
@@ -126,25 +126,25 @@ public class TaskList {
      * @param input The task to be added followed by time.
      */
     public void addDeadlineTask(String input) throws InvalidDateTimeException, WrongFormatException {
-        //splits the input according to whitespace
+        // Splits the input according to whitespace
         String[] parsedString = input.split("/by");
         if (parsedString.length != 2) {
             throw new WrongFormatException("Wrong format for deadline. Please ensure that you provide a description and time, delimited by /by");
         }
 
         LocalDateTime dateTime = parseDateTime(parsedString[1].stripLeading());
-        //Makes a new Deadline task
+        // Makes a new Deadline task
         Deadline newTask = new Deadline(parsedString[0], dateTime);
 
-        //Adds the new task to the list
+        // Adds the new task to the list
         tasks.add(newTask);
 
-        //Update the storage
+        // Update the storage
         if (storage != null) {
             storage.setTasksList(tasks);
         }
 
-        //Informs the user that the task has been added
+        // Informs the user that the task has been added
         System.out.println("I have added a Deadline:\n" + newTask +
                 "\n" + listTaskSize());
     }
@@ -175,7 +175,7 @@ public class TaskList {
                 throw new TaskAlreadyCompleteException("The specified task has already been completed.");
             }
             tasks.get(taskIndex).completeTask();
-            //Update the storage
+            // Update the storage
             if (storage != null) {
                 storage.setTasksList(tasks);
             }
@@ -201,7 +201,7 @@ public class TaskList {
             String message = "Understood. The following task has been deleted.\n";
             message += "    " + tasks.get(taskIndex) + "\n";
             tasks.remove(taskIndex);
-            //Update the storage
+            // Update the storage
             if (storage != null) {
                 storage.setTasksList(tasks);
             }
@@ -226,11 +226,11 @@ public class TaskList {
         }
 
         StringBuilder sb = new StringBuilder("These are the following task(s) to complete:\n");
-        //size of the tasks
+        // Size of the tasks
         int size = tasks.size();
-        //Threshold for time of tasks
+        // Threshold for time of tasks
         LocalDateTime threshold = LocalDate.now().plusDays(days + 1).atTime(LocalTime.MIN);
-        //Builds the list of tasks
+        // Builds the list of tasks
         for (int i = 0; i < size; i++) {
             Task task = tasks.get(i);
             if (task instanceof TimedTask) {
@@ -240,7 +240,7 @@ public class TaskList {
             }
             sb.append(i + 1).append(". ").append(task).append("\n");
         }
-        //Prints the list of tasks that fall within the timeframe
+        // Prints the list of tasks that fall within the timeframe
         System.out.print(sb.toString());
     }
 

@@ -16,19 +16,19 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui) {
-        //The bot says bye and the program terminates
+        // Prints a farewell message to console and the program terminates
         ui.sayBye();
     }
 
     @Override
     public boolean equals(Object obj) {
-        //Check if obj is compared with itself
+        // Check if obj is compared with itself
         if (obj == this) {
             return true;
         }
 
-        /*Check if obj is an instance of this class.
-          All ExitCommand instances are equal.
+        /* Check if obj is an instance of this class.
+           All ExitCommand instances are equal.
          */
         return obj instanceof ExitCommand;
     }

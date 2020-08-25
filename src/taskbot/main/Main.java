@@ -13,10 +13,10 @@ import taskbot.task.TaskList;
  */
 public class Main {
     public static void main(String[] args) {
-        // Initialize TaskBot's UI
+        // Initialise Taskbot & required classes
         Ui ui = new Ui();
 
-        // Prints the title to the console
+        // Prints the title to the console and greets the user
         ui.printTitle();
 
         // Initialize database and task list
