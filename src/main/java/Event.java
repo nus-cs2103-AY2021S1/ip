@@ -1,9 +1,14 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public class Event extends Task {
-    protected String dateAndTime;
+    protected LocalDateTime dateAndTime;
 
     public Event(String description, String dateAndTime) {
-        super(description, Type.EVENT);
-        this.dateAndTime = dateAndTime;
+        super(description);
+        this.dateAndTime = LocalDateTime.parse(dateAndTime, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
+
     }
 
     public Event(String description, String dateAndTime, boolean isDone) {
@@ -19,6 +24,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dateAndTime + ")";
+        return "[E]" + super.toString() +
+                " (at: " + dateAndTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + ")";
     }
 }

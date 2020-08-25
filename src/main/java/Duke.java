@@ -1,10 +1,13 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+//import java.io.File;
+//import java.io.FileNotFoundException;
 import java.io.IOException;
+//import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.regex.PatternSyntaxException;
+import java.time.format.DateTimeParseException;
+
 
 
 public class Duke {
@@ -97,6 +100,8 @@ public class Duke {
                                 System.out.println(line);
                             } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex) {
                                 throw new DukeException("You have keyed in an invalid command for 'deadline'!");
+                            } catch (DateTimeParseException ex) {
+                                throw new DukeException("Please key in your deadline in the form:\n /by <dd/MM/yyyy hh:mm AM/PM>");
                             }
                         } else {
                             throw new DukeException("The description of a deadline cannot be empty!");
@@ -121,6 +126,8 @@ public class Duke {
                                 System.out.println(line);
                             } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex ) {
                                 throw new DukeException("You have keyed in an invalid command for 'event'!");
+                            } catch (DateTimeParseException ex) {
+                                throw new DukeException("Please key in your event in the form:\n /at <dd/MM/yyyy hh:mm AM/PM>");
                             }
                         } else {
                             throw new DukeException("The description of an event cannot be empty!");
