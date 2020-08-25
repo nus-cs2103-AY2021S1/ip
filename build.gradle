@@ -4,14 +4,6 @@ plugins {
 
 apply plugin: 'java'
 
-<<<<<<< .merge_file_JvCBn2
-ext {
-    javaMainClass = "Tickbot"
-}
-    
-application {
-    mainClassName = javaMainClass
-=======
 application {
     mainClassName = "Tickbot"
 }
@@ -24,7 +16,6 @@ dependencies {
     compile group: 'net.harawata', name: 'appdirs', version: '1.2.0'
     compile group: 'com.opencsv' , name: 'opencsv', version: '5.2'
     compile group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.25'
->>>>>>> .merge_file_cPn0q9
 }
 
 run {
