@@ -5,13 +5,13 @@ public class ToDo extends Task {
         super(details);
     }
 
-    public ToDo(String details, boolean done) {
-        super(details, done);
+    public ToDo(String details, boolean isDone) {
+        super(details, isDone);
     }
 
     @Override
     public String store() {
-        String done = this.done ? "T " : "F ";
+        String done = this.isDone ? "T " : "F ";
         return "T " + done + this.details + "\n";
     }
 

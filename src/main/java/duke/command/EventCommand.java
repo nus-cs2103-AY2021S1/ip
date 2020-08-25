@@ -18,7 +18,6 @@ public class EventCommand extends Command {
         } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
-
     }
 
     @Override

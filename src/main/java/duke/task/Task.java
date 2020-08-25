@@ -1,21 +1,21 @@
 package duke.task;
 
 public class Task {
-    protected boolean done;
+    protected boolean isDone;
     protected String details;
 
     public Task(String details) {
-        this.done = false;
+        this.isDone = false;
         this.details = details;
     }
 
     public Task(String details, boolean done) {
         this.details = details;
-        this.done = done;
+        this.isDone = done;
     }
 
     public void markAsDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public String store() {
@@ -24,7 +24,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String s = this.done ? "[✓] " : "[✗] ";
+        String s = this.isDone ? "[✓] " : "[✗] ";
         return s + this.details;
     }
 }

@@ -3,7 +3,6 @@ package duke;
 import java.nio.file.Path;
 import duke.command.*;
 
-
 public class Duke {
 
     public static final Path path = java.nio.file.Paths.get(".", "data.txt");

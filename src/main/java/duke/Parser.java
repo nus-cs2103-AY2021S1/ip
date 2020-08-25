@@ -14,22 +14,22 @@ public class Parser {
 
     public static Command parse(String command) throws DukeException {
         switch (command) {
-            case BYE:
-                return new ByeCommand();
-            case LIST:
-                return new ListCommand();
-            case DONE:
-                return new DoneCommand();
-            case TODO:
-                return new TodoCommand();
-            case EVENT:
-                return new EventCommand();
-            case DEADLINE:
-                return new DeadlineCommand();
-            case DELETE:
-                return new DeleteCommand();
-            default:
-                throw new DukeException("Oops! I'm sorry, but I don't know what that means");
+        case BYE:
+            return new ByeCommand();
+        case LIST:
+            return new ListCommand();
+        case DONE:
+            return new DoneCommand();
+        case TODO:
+            return new TodoCommand();
+        case EVENT:
+            return new EventCommand();
+        case DEADLINE:
+            return new DeadlineCommand();
+        case DELETE:
+            return new DeleteCommand();
+        default:
+            throw new DukeException("Oops! I'm sorry, but I don't know what that means");
         }
     }
 }
