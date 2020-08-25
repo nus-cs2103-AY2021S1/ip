@@ -99,6 +99,7 @@ class ListCommand extends Command {
  */
 class doneCommand extends Command {
     int doneTask;
+
     doneCommand(int task) {
         super();
         this.doneTask = task;
@@ -117,6 +118,7 @@ class doneCommand extends Command {
  */
 class deleteCommand extends Command {
     int deleteTask;
+
     deleteCommand(int task) {
         super();
         this.deleteTask = task;
@@ -136,6 +138,7 @@ class deleteCommand extends Command {
  */
 class todoCommand extends Command {
     String task;
+
     todoCommand(String toParse) {
         this.task = toParse;
     }
@@ -155,6 +158,7 @@ class todoCommand extends Command {
 class deadlineCommand extends Command {
     String task;
     String deadline;
+
     deadlineCommand(String toParse) {
         String[] split = toParse.split(" /by ");
         this.task = split[0];
