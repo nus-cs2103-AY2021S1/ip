@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -173,6 +175,7 @@ public class Duke {
     
     //handle deadline
     public void handleDeadline(String instruction) throws DukeException {
+        DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         int index = instruction.indexOf("/by");
         if (index == 8) {
             String emoji = Emoji.SMILE.toString();
@@ -195,7 +198,7 @@ public class Duke {
                         + "    You can do it by adding deadline after '/by '." + emoji ;
                 throw new DukeException(exceptionMsg);
             }
-            Deadline deadline = new Deadline(description, by);
+            Deadline deadline = new Deadline(description, LocalDateTime.parse(by.substring(1), validFormat));
             this.addDeadline(deadline);
         } else {
             String emoji = Emoji.SMILE.toString();
@@ -207,6 +210,7 @@ public class Duke {
     
     //handle event
     public void handleEvent(String instruction) throws DukeException {
+        DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         int index = instruction.indexOf("/at");
         if (index == 5) {
             String emoji = Emoji.SMILE.toString();
@@ -229,7 +233,7 @@ public class Duke {
                         + "    You can do it by adding time after '/at '." + emoji ;
                 throw new DukeException(exceptionMsg);
             }
-            Event event = new Event(description, time);
+            Event event = new Event(description, LocalDateTime.parse(time.substring(1), validFormat));
             this.addEvent(event);
         } else {
             String emoji = Emoji.SMILE.toString();
