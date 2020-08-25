@@ -4,7 +4,19 @@ public class Deadline extends Task {
 
     public Deadline(String deadlineTask, String byTime) {
         super(deadlineTask);
-        this.byTime = byTime;
+        this.byTime = TimeParser.parseTime(byTime);
+    }
+
+    @Override
+    public String[] taskToArray() {
+        String done;
+        if(this.isCompleted()) {
+            done = "0";
+        } else {
+            done = "1";
+        }
+        String[] str = new String[]{"D", done, this.getTaskName(), byTime};
+        return str;
     }
 
     @Override

@@ -10,8 +10,11 @@ public class TaskManager {
     }
 
     public void addTask(Task task) {
-        System.out.println(indentation + "Got it. I've added this task: ");
         taskList.add(task);
+    }
+
+    public void printAddedTask(Task task) {
+        System.out.println(indentation + "Got it. I've added this task: ");
         System.out.println(indentation + "  " + task.toString());
         System.out.println(indentation + "Now you have "+ taskList.size() + " tasks in the list.");
     }
@@ -37,5 +40,13 @@ public class TaskManager {
         System.out.println(indentation + "  " + task.toString());
         taskList.remove(n - 1);
         System.out.println(indentation + "Now you have "+ taskList.size() + " tasks in the list.");
+    }
+
+    public ArrayList<Task> getTaskList() {
+        return taskList;
+    }
+
+    public int getNumOfTask() {
+        return taskList.size();
     }
 }
