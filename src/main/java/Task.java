@@ -1,8 +1,14 @@
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
     String desc;
     boolean isDone;
     String symbol;
     String time = "";
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd MMM HH:mm");
+
+
 
     public Task(String desc) {
         this.desc = desc;
