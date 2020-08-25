@@ -1,4 +1,4 @@
-public class InvalidCommandException extends Exception{
+public class InvalidCommandException extends Exception {
     /**
      *
      */
@@ -14,5 +14,5 @@ public class InvalidCommandException extends Exception{
     public String toString() {
         return errorMessage;
     }
-    
+
 }

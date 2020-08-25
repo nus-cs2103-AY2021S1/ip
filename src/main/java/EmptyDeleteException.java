@@ -1,5 +1,5 @@
-public class EmptyDeleteException extends Exception{
-     /**
+public class EmptyDeleteException extends Exception {
+    /**
      *
      */
     private static final long serialVersionUID = 1L;
@@ -12,6 +12,6 @@ public class EmptyDeleteException extends Exception{
     @Override
     public String toString() {
         return errorMessage;
-    }       
-    
+    }
+
 }

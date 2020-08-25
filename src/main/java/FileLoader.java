@@ -25,7 +25,7 @@ public class FileLoader {
                 while (sc.hasNextLine()) {
                     String line = sc.nextLine();
                     String[] store = line.split(" ", 2);
-                    Duke.getTasks().add(new Task(store[1]));    
+                    Duke.getTasks().add(new Task(store[1]));
                 }
                 sc.close();
                 System.out.println("All the data has been loaded!");

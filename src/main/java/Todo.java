@@ -1,4 +1,4 @@
-public class Todo extends Task{
+public class Todo extends Task {
     protected String todo;
 
     public Todo(String todo) {

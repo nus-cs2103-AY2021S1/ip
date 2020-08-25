@@ -1,4 +1,4 @@
-public class EmptyTodoException extends Exception{
+public class EmptyTodoException extends Exception {
     /**
      *
      */
@@ -12,6 +12,6 @@ public class EmptyTodoException extends Exception{
     @Override
     public String toString() {
         return errorMessage;
-    }    
-    
+    }
+
 }

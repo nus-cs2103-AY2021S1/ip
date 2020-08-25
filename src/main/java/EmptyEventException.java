@@ -1,5 +1,5 @@
-public class EmptyEventException extends Exception{
-     /**
+public class EmptyEventException extends Exception {
+    /**
      *
      */
     private static final long serialVersionUID = 1L;
@@ -12,6 +12,6 @@ public class EmptyEventException extends Exception{
     @Override
     public String toString() {
         return errorMessage;
-    }     
-    
+    }
+
 }
