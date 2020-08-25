@@ -1,11 +1,17 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
 
+    private static Storage storage;
     private static Ui ui = new Ui();
     public static ArrayList<Task> list = new ArrayList<>();
 
@@ -23,32 +29,57 @@ public class Duke {
         }
     }
 
-    public static Task addItem(String input) throws DukeException {
-        String arr[] = input.split(" ", 2);
-        Task curr = new Task("");
-        if (arr.length == 1) {
-            throw new DukeException("The description of a " + arr[0] + " cannot be empty!");
-        } else if (arr[0].equals("todo")) {
-            curr = new ToDo(arr[1]);
-            list.add(curr);
-        } else if (arr[0].equals("deadline")) {
-            String info[] = arr[1].split("/by", 2);
-            if (info.length == 1) {
-                throw new DukeException("Deadline not provided!");
-            } else {
-                curr = new Deadline(info[0], info[1]);
-                list.add(curr);
-            }
-        } else if (arr[0].equals("event")) {
-            String info[] = arr[1].split("/at", 2);
-            if (info.length == 1) {
-                throw new DukeException("Time not provided!");
-            } else {
-                curr = new Event(info[0], info[1]);
-                list.add(curr);
-            }
+    public static LocalDate dateParser(String input) throws DukeException {
+        try {
+            input = input.replace("/", "-");
+            LocalDate ret = LocalDate.parse(input);
+            return ret;
+        } catch (DateTimeParseException ex1) {
+            throw new DukeException("Wrong formatting!");
         }
-        return curr;
+    }
+
+    public static String timeParser(String input) {
+        String ret = "";
+        int hour = Integer.valueOf(input)/100;
+        if (hour >= 12) {
+            ret = "PM";
+            ret = Integer.toString(hour == 12 ? 12 : hour - 12).concat(ret);
+        } else {
+            ret = "AM";
+            ret = Integer.toString(hour).concat(ret);
+        }
+        return ret;
+    }
+
+    public static Task addItem(String input) throws DukeException {
+
+            String arr[] = input.split(" ", 2);
+            Task curr = new Task("");
+            if (arr.length == 1) {
+                throw new DukeException("The description of a " + arr[0] + " cannot be empty!");
+            } else if (arr[0].equals("todo")) {
+                curr = new ToDo(arr[1]);
+                list.add(curr);
+            } else if (arr[0].equals("deadline")) {
+                String info[] = arr[1].split("/by ", 2);
+                if (info.length == 1) {
+                    throw new DukeException("Deadline not provided!");
+                } else {
+                    curr = new Deadline(info[0], dateParser(info[1]));
+                    list.add(curr);
+                }
+            } else if (arr[0].equals("event")) {
+                String info[] = arr[1].split("/at ", 2);
+                if (info.length == 1) {
+                    throw new DukeException("Time not provided!");
+                } else {
+                    String[] t = info[1].split(" ", 2);
+                    curr = new Event(info[0], dateParser(t[0]), timeParser(t[1]));
+                    list.add(curr);
+                }
+            }
+            return curr;
     }
 
     public static Task deleteItem(String input) throws DukeException{
@@ -89,51 +120,16 @@ public class Duke {
         return toBeRet;
     }
 
-    public static void writeSaveData() throws FileNotFoundException, DukeException {
-        try {
-            File dir = new File("data/Duke.txt");
-            if (dir.exists()) {
-                Scanner data = new Scanner(dir);
-
-                while(data.hasNextLine()) {
-                    String curr = data.nextLine();
-                    String[] info = curr.split(", ", 4);
-                    if (info[0].equals("T")) {
-                        ToDo tobeAdded = new ToDo(info[2]);
-                        if (info[1].equals("1")) {
-                            tobeAdded.markAsDone();
-                        }
-                        list.add(tobeAdded);
-                    } else if (info[0].equals("D")) {
-                        Deadline tobeAdded = new Deadline(info[2], info[3]);
-                        if (info[1].equals("1")) {
-                            tobeAdded.markAsDone();
-                        }
-                        list.add(tobeAdded);
-                    } else if (info[0].equals("E")) {
-                        Event tobeAdded = new Event(info[2], info[3]);
-                        if (info[1].equals("1")) {
-                            tobeAdded.markAsDone();
-                        }
-                        list.add(tobeAdded);
-                    }
-                }
-            }
-        } catch (FileNotFoundException ex1) {
-            throw new DukeException("Saved Data not found");
-        }
-    }
-
     public static void main(String[] args) {
+        storage = new Storage("data/Duke.txt");
         Scanner scanner = new Scanner(System.in);
+
         String nextLine = "";
 
         try {
-            writeSaveData();
-        } catch (FileNotFoundException ex1) {
+            list = storage.load();
+        } catch (DukeException ex1) {
             ui.showError(ex1.getMessage());
-        } catch (DukeException ex2) {
-            ui.showError(ex2.getMessage());
         }
 
         // Introduction
@@ -171,6 +167,14 @@ public class Duke {
                 nextLine = scanner.nextLine();
             } else if (nextLine.equals("list")) { // Case 5: Displaying List
                 ui.returnList();
+                nextLine = scanner.nextLine();
+            } else if (nextLine.equals("save")) { // Case 6: saving data onto Duke.txt
+                try {
+                    storage.overwriteData(list);
+                    ui.save();
+                } catch (IOException ex1) {
+                    ui.showError(ex1.getMessage());
+                }
                 nextLine = scanner.nextLine();
             } else { // Case 6: Default errors
                 ui.defaultError();

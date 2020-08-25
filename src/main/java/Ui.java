@@ -1,10 +1,11 @@
 public class Ui {
-    private String line = "-------------------------------------";
-    private String addedMsg = "Alright, I've added a new order: ";
-    private String doneMsg = "Great choice! I have taken your order: ";
-    private String deleteMsg = "Too bad. I'll remove the following order: ";
-    private String retListMsg = "Here's what you have ordered so far...";
-    private String defaultError = "Wat talking you?";
+    final private String line = "-------------------------------------";
+    final private String addedMsg = "Alright, I've added a new order: ";
+    final private String doneMsg = "Great choice! I have taken your order: ";
+    final private String deleteMsg = "Too bad. I'll remove the following order: ";
+    final private String saveMsg = "Aright, I have remembered your sins :)";
+    final private String retListMsg = "Here's what you have ordered so far...";
+    final private String defaultError = "Wat talking you?";
 
     public Ui() {
 
@@ -57,7 +58,11 @@ public class Ui {
         }
         System.out.println((line));
     }
-
+    public void save() {
+        System.out.println(line);
+        System.out.println(saveMsg);
+        System.out.println(line);
+    }
     public void defaultError() {
         System.out.println(line);
         System.out.println(defaultError);
