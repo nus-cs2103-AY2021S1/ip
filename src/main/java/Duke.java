@@ -1,7 +1,6 @@
-package duke;
-
-import duke.command.Command;
-import duke.task.TaskList;
+import command.Command;
+import exceptions.DukeException;
+import task.TaskList;
 
 public class Duke {
     protected Storage storage;

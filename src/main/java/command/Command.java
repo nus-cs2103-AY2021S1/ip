@@ -1,7 +1,7 @@
-package duke.command;
+package command;
 
-import duke.task.TaskList;
-import duke.DukeException;
+import exceptions.DukeException;
+import task.TaskList;
 
 public abstract class Command {
     TaskList tasks;

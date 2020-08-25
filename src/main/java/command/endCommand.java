@@ -1,6 +1,6 @@
-package duke.command;
+package command;
 
-import duke.task.TaskList;
+import task.TaskList;
 
 public class endCommand extends Command {
 

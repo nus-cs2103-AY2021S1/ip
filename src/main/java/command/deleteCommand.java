@@ -1,7 +1,7 @@
-package duke.command;
+package command;
 
-import duke.DukeException;
-import duke.task.TaskList;
+import exceptions.DukeException;
+import task.TaskList;
 
 public class deleteCommand extends Command {
     int taskNo;
