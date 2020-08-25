@@ -5,7 +5,18 @@ import duke.exception.DukeException;
 import duke.exception.UnknownCommandException;
 import duke.task.TaskType;
 
+/**
+ * Parses the user input and creating a command from it.
+ */
 public class Parser {
+
+    /**
+     * Parses the user input and returns the corresponding command.
+     *
+     * @param text User text input.
+     * @return Corresponding command.
+     * @throws DukeException If user input does not belong to the list of known commands.
+     */
     public static Command parse(String text) throws DukeException {
         String[] inputArr = deconstruct(text);
         String keyWord = getKeyWord(inputArr);

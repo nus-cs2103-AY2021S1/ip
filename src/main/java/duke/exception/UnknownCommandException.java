@@ -1,10 +1,21 @@
 package duke.exception;
 
+/**
+ * Thrown when the user inputs a command which is not part of the known commands.
+ * Proceeds to show the list of valid commands to the user.
+ */
 public class UnknownCommandException extends DukeException {
 
     private static final int NUM_OF_COMMANDS = 7;
     private static final String MSG_1 = "I'm sorry, but I don't know what that means.\n";
     private static final String MSG_2 = "    Here are the available commands that I know:\n";
+
+    /**
+     * Initializes the UnknownCommandException object.
+     */
+    public UnknownCommandException() {
+        super(UnknownCommandException.getListOfCommands());
+    }
 
     private static final String[] listOfCommands = new String[]{
             "todo _ (e.g. todo 3)",
@@ -26,9 +37,5 @@ public class UnknownCommandException extends DukeException {
         }
         str1.append(String.format("     %d. %s", NUM_OF_COMMANDS, listOfCommands[NUM_OF_COMMANDS - 1]));
         return str1.toString();
-    }
-
-    public UnknownCommandException() {
-        super(UnknownCommandException.getListOfCommands());
     }
 }

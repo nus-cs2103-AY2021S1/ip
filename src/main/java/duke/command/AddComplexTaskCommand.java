@@ -13,10 +13,19 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Adds a complex task into the task list.
+ */
 public class AddComplexTaskCommand extends AddCommand {
 
     private TaskType taskType;
 
+    /**
+     * Initialises the AddComplexTaskCommand object with the task details and task type.
+     *
+     * @param taskDetails Task details.
+     * @param taskType Type of Task.
+     */
     public AddComplexTaskCommand(String taskDetails, TaskType taskType) {
         super(taskDetails);
         this.taskType = taskType;
@@ -30,8 +39,16 @@ public class AddComplexTaskCommand extends AddCommand {
         }
     }
 
+    /**
+     * Adds a complex task into the TaskList Object.
+     *
+     * @param tasks Task List object.
+     * @param ui User Interface object.
+     * @param storage Storage object.
+     * @throws DukeException If input format is wrong.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String[] inputArr = taskDetails.split(identifier(), 2);
+        String[] inputArr = getTaskDetails().split(identifier(), 2);
         if (inputArr.length == 1) {
             if (taskType == TaskType.DEADLINE) {
                 throw new InvalidDeadlineException();
