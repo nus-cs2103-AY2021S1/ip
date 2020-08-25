@@ -111,10 +111,10 @@ public class Duke {
     }
 
     /**
-     * Adds task to list of tasks based on type specified.
+     * Prints out the task if user input matches any word from task.
      *
      * @param taskInfo  Description of todos task.
-     * @return True if user input matches any word from tasks list.
+     * @return True if user input matches any word from any task in tasks list.
      */
     public boolean foundMatchingTasks(String taskInfo) {
         boolean matched = false;
