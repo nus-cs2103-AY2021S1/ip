@@ -25,6 +25,10 @@ public class TaskList {
         this.tasks = initTasks(file);
     }
 
+    private TaskList(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     /**
      * Generates a list of tasks from a file's contents.
      * The method reads each line of the file representing a task and converts it into its
@@ -100,7 +104,7 @@ public class TaskList {
      */
     Task add(String task) throws MissingDateException,
             InvalidDateException, InvalidCommandException, EmptyTaskException {
-        Task newTask;
+        Task newTask = null;
         if (task.startsWith("todo")) {
             newTask = ToDo.create(task);
         } else if (task.startsWith("deadline")) {
@@ -151,6 +155,22 @@ public class TaskList {
      */
     int size() {
         return tasks.size();
+    }
+
+    /**
+     * Returns a TaskList containing all tasks with a given keyword in the description.
+     *
+     * @param search Keyword to filter tasks by.
+     * @return TaskList containing all tasks that match the keyword.
+     */
+    TaskList find(String search) {
+        List<Task> filtered = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.contains(search)) {
+                filtered.add(task);
+            }
+        }
+        return new TaskList(filtered);
     }
 
     @Override

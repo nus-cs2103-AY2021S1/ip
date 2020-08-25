@@ -24,6 +24,15 @@ public abstract class Task {
      */
     public abstract String print();
 
+    /**
+     * Checks if the task description contains a given keyword.
+     * @param keyword Keyword to be compared with task description.
+     * @return True if and only if the keyword can be found within the description.
+     */
+    public boolean contains(String keyword) {
+        return description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return getStatus() + description;
