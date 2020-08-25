@@ -1,8 +1,6 @@
 package main.java;
 
-import java.io.Serializable;
-
-public abstract class Task implements Serializable {
+public abstract class Task {
     private String name;
     private Boolean isDone;
 

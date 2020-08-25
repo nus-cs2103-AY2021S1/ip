@@ -1,8 +1,6 @@
 package main.java;
 
-import java.io.Serializable;
-
-public class Deadline extends Task implements Serializable {
+public class Deadline extends Task {
     private String end;
 
     public Deadline(String s, Boolean b, String e) {
