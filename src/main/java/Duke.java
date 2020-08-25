@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * Entry point of The program
+ * Entry point of the program
  */
 public class Duke {
     private Storage storage;
@@ -19,7 +19,7 @@ public class Duke {
     }
 
     /**
-     * Driver for logic code
+     * Runs the entire program with the main logic
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
