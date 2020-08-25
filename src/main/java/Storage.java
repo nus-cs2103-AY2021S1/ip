@@ -13,30 +13,34 @@ public class Storage {
         file = new File("data/duke.txt");
     }
 
-    public ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
-        if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
-        } else {
-            Scanner fileScanner = new Scanner(file);
-            while (fileScanner.hasNext()) {
-                String task = fileScanner.nextLine();
-                String[] taskSplit = task.split(">", 4);
-                String taskType = taskSplit[0];
-                boolean taskIsDone = taskSplit[1].equals("1") ? true : false;
-                String taskDescription = taskSplit[2];
-                if (taskType.equals("T")) {
-                    taskList.add(new ToDo(taskDescription, taskIsDone));
-                } else if (taskType.equals("D")) {
-                    String taskBy = taskSplit[3];
-                    taskList.add(new Deadline(taskDescription, taskBy, taskIsDone));
-                } else {
-                    String taskAt = taskSplit[3];
-                    taskList.add(new Event(taskDescription, taskAt, taskIsDone));
+        try {
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            } else {
+                Scanner fileScanner = new Scanner(file);
+                while (fileScanner.hasNext()) {
+                    String task = fileScanner.nextLine();
+                    String[] taskSplit = task.split(">", 4);
+                    String taskType = taskSplit[0];
+                    boolean taskIsDone = taskSplit[1].equals("1") ? true : false;
+                    String taskDescription = taskSplit[2];
+                    if (taskType.equals("T")) {
+                        taskList.add(new ToDo(taskDescription, taskIsDone));
+                    } else if (taskType.equals("D")) {
+                        String taskBy = taskSplit[3];
+                        taskList.add(new Deadline(taskDescription, taskBy, taskIsDone));
+                    } else {
+                        String taskAt = taskSplit[3];
+                        taskList.add(new Event(taskDescription, taskAt, taskIsDone));
+                    }
                 }
+                fileScanner.close();
             }
-            fileScanner.close();
+        } catch (IOException e) {
+            throw new DukeException("Error loading file!");
         }
         return taskList;
     }

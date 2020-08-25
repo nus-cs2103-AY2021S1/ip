@@ -14,6 +14,21 @@ public class Ui {
 
     }
 
+    public static void weldome() {
+        String open = "_______________________________________ \n"
+                + "Hello! I'm Duke \n"
+                + "What can I do for you? \n"
+                + "_______________________________________ \n";
+        System.out.println(open);
+    }
+
+    public static void goodbye() {
+        String close = "_______________________________________ \n"
+                + "Goodbye! See you soon! \n"
+                + "_______________________________________ \n";
+        System.out.println(close);
+    }
+
     public static void handleList() {
         String output = "";
         for (int i = 1; i <= Duke.taskList.size(); i++) {
@@ -61,11 +76,11 @@ public class Ui {
                     + Duke.taskList.get(taskId - 1) + "\n"
                     + "Now you have " + new_size + " tasks in the list."
                     + "\n" + LINE);
-            Duke.taskList.remove(taskId - 1);
+            Duke.taskList.delete(taskId - 1);
         }
     }
 
-    public static void handleTodo(String todoDescription) throws IOException {
+    public static void handleTodo(String todoDescription) {
         ToDo newToDo = new ToDo(todoDescription, false);
         Duke.taskList.add(newToDo);
         String output = LINE + "Got it. I've added this task: \n"
