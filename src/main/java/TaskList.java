@@ -154,6 +154,26 @@ public class TaskList {
         }
     }
 
+    public void findTask(String input) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task current = this.tasks.get(i);
+            if (current.getDescription().contains(input)) {
+                result.add(current);
+            }
+        }
+        if (result.size() < 1) {
+            System.out.printf("Luke:\n\tYou don't have any tasks in your list :(\nYou:\n");
+        } else {
+            String todoSummary = "Luke:\n\tHere are the tasks in your list.";
+            for (int i = 0; i < result.size(); i++) {
+                Task current = result.get(i);
+                todoSummary += String.format("\n\t%d.%s", i + 1, current);
+            }
+            System.out.printf("%s\nYou:\n", todoSummary);
+        }
+    }
+
     private String countTasks(ArrayList<Task> arrayList) {
         int n = arrayList.size();
         return n <= 1

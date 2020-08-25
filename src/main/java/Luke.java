@@ -65,6 +65,9 @@ public class Luke {
                 } catch (DeleteIndexOutofboundsException e) {
                     System.out.printf("Luke:%s\nYou:\n", e.getMessage());
                 }
+            } else if (Pattern.matches("^(find) *.*$", input)) {
+                input.replaceAll("find ", "");
+                taskList.findTask(input);
             } else if (input.equals("bye")) {
                 System.out.println("Luke:\n\tOh, are you leaving? Hope to see you soon!");
                 break;
