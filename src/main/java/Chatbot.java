@@ -46,77 +46,141 @@ public class Chatbot {
 
     public boolean chat(String s) throws IncorrectInputException {
 
-        if (s.equals("bye")) {
-            exit();
-            return false;
+        int j = s.indexOf(' ');
+        String firstword = "";
+        if (j > -1) {
+            firstword = s.substring(0, j);
+        } else {
+            firstword = s;
         }
 
-        if (s.equals("list")) {
-            generateList();
-            return true;
-        }
+        switch (firstword) {
+            case "bye":
+                exit();
+                return false;
+//            break;
+            case "list":
+                generateList();
+                return true;
+            case "done":
+                char x = s.charAt(s.length() - 1);
+                int i = Character.getNumericValue(x);
+                Task t = list.get(i - 1);
+                t.markAsDone();
+                list.set(i - 1, t);
+                System.out.println(line);
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(t.printTask());
+                System.out.println(line);
 
-        if (s.startsWith("done")) {
-            char x = s.charAt(s.length() - 1);
-            int i = Character.getNumericValue(x);
-            Task t = list.get(i - 1);
-            t.markAsDone();
-            list.set(i - 1, t);
-            System.out.println(line);
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(t.printTask());
-            System.out.println(line);
-
-            return true;
-        }
-
-        if (s.startsWith("delete")) {
-            char x = s.charAt(s.length() - 1);
-            int i = Character.getNumericValue(x);
-            delete(i);
-            return true;
-        }
-
-        try {
-            if (s.startsWith("deadline")) {
-                if (s.length() != "deadline".length()) {
-                    String[] value = s.split("(?<=/by) ");
-                    Deadline deadline = new Deadline(value[0].replace(" /by", ""), value[1]);
-                    list.add(deadline);
-                    addTask(deadline);
+                return true;
+            case "delete":
+                char y = s.charAt(s.length() - 1);
+                int k = Character.getNumericValue(y);
+                delete(k);
+                return true;
+            case "todo":
+                if (s.length() != "todo".length()) {
+                    list.add(new ToDo(s.replace("todo ", "")));
+                    addTask(new ToDo(s.replace("todo ", "")));
                     return true;
                 } else {
-                    throw new IncorrectInputException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    throw new IncorrectInputException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
-            }
-
-            if (s.startsWith("event")) {
+            case "event":
                 if (s.length() != "event".length()) {
-                    String[] value = s.split("(?<=/at) ");
-                    Event event = new Event(value[0].replace(" /at", ""), value[1]);
+                    String[] value = s.split(" /at ");
+                    Event event = new Event(value[0].replace("event ", ""), value[1]);
                     list.add(event);
                     addTask(event);
                     return true;
                 } else {
                     throw new IncorrectInputException("☹ OOPS!!! The description of an event cannot be empty.");
                 }
-            }
-
-            if (s.startsWith("todo")) {
-                if (s.length() != "todo".length()) {
-                    list.add(new ToDo(s));
-                    addTask(new ToDo(s));
+            case "deadline":
+                if (s.length() != "deadline".length()) {
+                    String[] value = s.split(" /by ");
+                    Deadline deadline = new Deadline(value[0].replace("deadline ", ""), value[1]);
+                    list.add(deadline);
+                    addTask(deadline);
                     return true;
                 } else {
-                    throw new IncorrectInputException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    throw new IncorrectInputException("☹ OOPS!!! The description of a deadline cannot be empty.");
                 }
-            }
-
-            throw new IncorrectInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            default:
+                throw new IncorrectInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        return false;
+//        if (s.equals("bye")) {
+//            exit();
+//            return false;
+//        }
+//
+//        if (s.equals("list")) {
+//            generateList();
+//            return true;
+//        }
+//
+//        if (s.startsWith("done")) {
+//            char x = s.charAt(s.length() - 1);
+//            int i = Character.getNumericValue(x);
+//            Task t = list.get(i - 1);
+//            t.markAsDone();
+//            list.set(i - 1, t);
+//            System.out.println(line);
+//            System.out.println("Nice! I've marked this task as done:");
+//            System.out.println(t.printTask());
+//            System.out.println(line);
+//
+//            return true;
+//        }
+//
+//        if (s.startsWith("delete")) {
+//            char x = s.charAt(s.length() - 1);
+//            int i = Character.getNumericValue(x);
+//            delete(i);
+//            return true;
+//        }
+//
+//        try {
+//            if (s.startsWith("deadline")) {
+//                if (s.length() != "deadline".length()) {
+//                    String[] value = s.split("(?<=/by) ");
+//                    Deadline deadline = new Deadline(value[0].replace(" /by", ""), value[1]);
+//                    list.add(deadline);
+//                    addTask(deadline);
+//                    return true;
+//                } else {
+//                    throw new IncorrectInputException("☹ OOPS!!! The description of a deadline cannot be empty.");
+//                }
+//            }
+//
+//            if (s.startsWith("event")) {
+//                if (s.length() != "event".length()) {
+//                    String[] value = s.split("(?<=/at) ");
+//                    Event event = new Event(value[0].replace(" /at", ""), value[1]);
+//                    list.add(event);
+//                    addTask(event);
+//                    return true;
+//                } else {
+//                    throw new IncorrectInputException("☹ OOPS!!! The description of an event cannot be empty.");
+//                }
+//            }
+//
+//            if (s.startsWith("todo")) {
+//                if (s.length() != "todo".length()) {
+//                    list.add(new ToDo(s));
+//                    addTask(new ToDo(s));
+//                    return true;
+//                } else {
+//                    throw new IncorrectInputException("☹ OOPS!!! The description of a todo cannot be empty.");
+//                }
+//            }
+//
+//            throw new IncorrectInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//        return false;
     }
 
     public void exit() {
