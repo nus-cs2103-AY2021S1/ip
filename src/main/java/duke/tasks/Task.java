@@ -10,11 +10,11 @@ public class Task {
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public boolean getDone() {
-        return this.isDone;
+        return isDone;
     }
 
     public String getStatusIcon() {
@@ -22,7 +22,7 @@ public class Task {
     }
 
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
 }

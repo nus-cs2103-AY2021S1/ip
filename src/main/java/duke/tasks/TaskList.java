@@ -6,33 +6,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private List<Task> list;
+    private List<Task> tasks;
 
     public TaskList(List<Task> tasks) {
-        this.list = tasks;
+        this.tasks = tasks;
     }
 
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     public void add(Task task) {
-        this.list.add(task);
+        tasks.add(task);
     }
 
     public void delete(int index) {
-        this.list.remove(index);
+        tasks.remove(index);
     }
 
     public Task get(int index) {
-        return this.list.get(index);
+        return tasks.get(index);
     }
 
     public int getSize() {
-        return this.list.size();
+        return tasks.size();
     }
 
     public List<Task> getList() {
-        return this.list;
+        return tasks;
     }
 }

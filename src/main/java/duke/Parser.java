@@ -3,9 +3,9 @@ package duke;
 import duke.commands.*;
 
 public class Parser {
-    private Commands command;
     boolean entered = false;
     String description = "";
+    private Commands command;
 
     public Command findCommand(String description) throws DukeException {
         if (description.length() == 0 && entered) {
@@ -47,7 +47,7 @@ public class Parser {
             command = Commands.EVENT;
             this.description = description.substring(6);
             return new AddCommand(command, this.description);
-        } else if (description.length() >= 6 && description.substring(0,6).equals("delete")) {
+        } else if (description.length() >= 6 && description.substring(0, 6).equals("delete")) {
             if (description.substring(5).split(" ").length == 1) {
                 throw new DukeException("you need to give a number.");
             } else if (description.split(" ").length > 2) {
@@ -56,8 +56,8 @@ public class Parser {
             command = Commands.DELETE;
             this.description = description.split(" ")[1];
             return new DeleteCommand(this.description);
-        } else if (description.length() >= 4 && description.substring(0,4).equals("date")) {
-            if (description.substring(3).split(" ").length == 1 || description.substring(3).split(" ").length > 2 ) {
+        } else if (description.length() >= 4 && description.substring(0, 4).equals("date")) {
+            if (description.substring(3).split(" ").length == 1 || description.substring(3).split(" ").length > 2) {
                 throw new DukeException(("you need to input a legit date for e.g: 29-01-19, no more and no less."));
             }
             command = Commands.DATE;

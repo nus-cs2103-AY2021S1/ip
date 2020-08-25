@@ -8,6 +8,7 @@ public class Ui {
     public Ui() {
         this.sc = new Scanner(System.in);
     }
+
     public void showWelcome() {
         String logo = " ______  ___       __         __        _____\n"
                 + "   |    /         /  \\       /  \\     /\n"
@@ -26,7 +27,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        return this.sc.nextLine();
+        return sc.nextLine();
     }
 
     public void showExit() {

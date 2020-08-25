@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Storage {
     private String database;
-    private List<Task> list = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
 
     public List<Task> readFile() throws DukeException {
         String currentDirectory = System.getProperty("user.dir");
@@ -25,12 +25,12 @@ public class Storage {
             File database = new File(dataFolder.getAbsolutePath() + File.separator + "database.txt");
             try {
                 Scanner s = new Scanner(database);
-                while(s.hasNext()) {
+                while (s.hasNext()) {
                     String task = s.nextLine();
                     convertIntoTasks(task);
                 }
                 this.database = database.getAbsolutePath();
-                return list;
+                return tasks;
             } catch (FileNotFoundException e) {
                 throw new DukeException("No file found sorry please make one");
             }
@@ -40,7 +40,7 @@ public class Storage {
             try {
                 database.createNewFile();
                 this.database = database.getAbsolutePath();
-                return list;
+                return tasks;
             } catch (IOException e) {
                 throw new DukeException("File already exists");
             }
@@ -55,24 +55,24 @@ public class Storage {
             if (descriptions[1].equals("T")) {
                 t.markAsDone();
             }
-            list.add(t);
+            tasks.add(t);
         } else if (descriptions[0].equals("D")) {
             t = new Deadline(descriptions[2], descriptions[3]);
             if (descriptions[1].equals("T")) {
                 t.markAsDone();
             }
-            list.add(t);
+            tasks.add(t);
         } else if (descriptions[0].equals("E")) {
             t = new Event(descriptions[2], descriptions[3]);
             if (descriptions[1].equals("T")) {
                 t.markAsDone();
             }
-            list.add(t);
+            tasks.add(t);
         }
     }
 
     public void save(List<Task> tasks) throws IOException {
-        FileWriter fw = new FileWriter(this.database);
+        FileWriter fw = new FileWriter(database);
         for (Task task : tasks) {
             if (task instanceof Todo) {
                 if (task.getDone()) {
@@ -92,7 +92,6 @@ public class Storage {
                 } else {
                     fw.write("E" + "|" + "F" + "|" + task.getDescription() + "|" + ((Event) task).getDate() + System.lineSeparator());
                 }
-            } else {
             }
         }
         fw.close();
