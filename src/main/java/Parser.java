@@ -11,10 +11,10 @@ public class Parser {
 
         String[] process = input.split(" ", 2);
 
-        String first = process[0];
+        String first = process[0].trim();
 
         try {
-            String second = process[1];
+            String second = process[1].trim();
             if (first.equals("done")) {
                 return new DoneCommand(second);
             }
@@ -27,11 +27,13 @@ public class Parser {
                 return new CheckCommand(second);
             }
 
+            if (first.equals("find")) {
+                return new FindCommand(second);
+            }
+
             return new AddCommand(first, second);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The description of the task cannot be empty!");
         }
-
     }
-
 }

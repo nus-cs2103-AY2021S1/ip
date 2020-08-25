@@ -16,7 +16,7 @@ public class Task {
     }
 
     public String toString() {
-        return "[" + (status ? "\u2713" : "\u2718") + "] " + this.name;
+        return "[" + (status ? "\u2713" : "\u2718") + "] " + this.name.trim();
     }
 
 
@@ -26,6 +26,10 @@ public class Task {
 
     public String getDate() {
         return "";
+    }
+
+    public String getName() {
+        return this.name.trim();
     }
 
 

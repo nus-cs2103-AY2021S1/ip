@@ -4,7 +4,7 @@ public class ListCommand extends Command {
         ui.showList();
         int count = 1;
         for (Task task : list.getList()) {
-            ui.showListTask(count, task);
+            ui.showTask(count, task);
             count++;
         }
     }

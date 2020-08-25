@@ -49,7 +49,7 @@ public class Ui {
         System.out.println(SPACE1 + "Please take a look at the tasks:");
     }
 
-    public void showListTask(int count, Task task) {
+    public void showTask(int count, Task task) {
         System.out.println(SPACE1 + count + ". " + task);
     }
 
@@ -65,7 +65,7 @@ public class Ui {
     }
 
     public void showCheck() {
-        System.out.println("Hey! I have printed out the tasks that match the date:");
+        System.out.println(SPACE1 + "Hey! I have printed out the tasks that match the date:");
     }
 
     public void showAdd(Task current, TaskList list) {
@@ -73,6 +73,14 @@ public class Ui {
                 SPACE2 + current);
         System.out.println(SPACE1 + "You have " +
                 list.getSize() + " tasks in your list now!");
+    }
+
+    public void showFind() {
+        System.out.println(SPACE1 + "Hey! I have printed out the tasks that match the name:");
+    }
+
+    public void showNothingFound() {
+        System.out.println(SPACE1 + "Hmm, I didn't find anything that match your input");
     }
 
 }
