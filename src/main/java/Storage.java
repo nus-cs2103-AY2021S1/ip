@@ -97,7 +97,7 @@ public class Storage {
                     if (curr instanceof ToDo) {
                         ToDo todo = (ToDo) curr;
                         toAppend = "T!@%" + (todo.isDone ? "1!@%" : "0!@%") + todo.description
-                                        + "!@%";
+                                + "!@%";
                     } else if (curr instanceof Deadline) {
                         Deadline deadline = (Deadline) curr;
                         toAppend = "D!@%" + (deadline.isDone ? "1!@%" : "0!@%")

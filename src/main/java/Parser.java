@@ -47,7 +47,7 @@ public class Parser {
             String day = splitDate[2];
             if (year.length() == 4 && month.length() == 2 && day.length() == 2 &&
                     Integer.parseInt(month) <= 12 && Integer.parseInt(month) >= 1 &&
-                        Integer.parseInt(day) >= 1 && Integer.parseInt(day) <= 31) {
+                    Integer.parseInt(day) >= 1 && Integer.parseInt(day) <= 31) {
                 return true;
             }
         }

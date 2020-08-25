@@ -44,7 +44,7 @@ public class Command {
         } else if (keyWord.equals("delete")) {
             deleteCommand(tasks, splitInput, ui, storage);
         } else if (keyWord.equals("todo") || keyWord.equals("deadline")
-                    || keyWord.equals("event")) {
+                || keyWord.equals("event")) {
             addTaskCommand(splitInput, keyWord, tasks, storage);
         } else {
             throw new DukeException("Unknown execution error.");
