@@ -26,7 +26,7 @@ public class Parser {
 
                 } else if (firstWord.equals("bye")) {
                     return new ExitCommand();
-                    
+
                 } else {
                     throw new WrongInputException();
                 }

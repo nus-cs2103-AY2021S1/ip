@@ -43,11 +43,14 @@ public class FindCommand extends Command {
         //try {
         List<Task> tasks = taskList.getTasks();
         List<Task> tasksFound = new ArrayList<>();
+        int num = 1;
 
+
+        System.out.println("Here are the matching task(s) in your list : ");
         for (Task task : tasks) {
             if (task.getDescription().contains(toFind)) {
                 tasksFound.add(task);
-                System.out.println(task.toString());
+                System.out.println(num + ". " + task.toString());
             }
         }
 
@@ -57,8 +60,5 @@ public class FindCommand extends Command {
         }
 
         return tasksFound;
-//        } catch (IndexOutOfBoundsException e) {
-//            throw new FindException("You have nothing in your list.");
-//        }
     }
 }
