@@ -93,9 +93,10 @@ public class Duke {
     public static void run() {
         Scanner scanner = new Scanner(System.in);
         String currentWord = scanner.nextLine();
+        Ui ui = new Ui();
+        Storage storage = new Storage("duke.txt");
         try {
-            Storage storage = new Storage("duke.txt");
-            TaskList taskList = storage.formTaskList(storage.readStorageFile());
+            TaskList taskList = storage.formTaskList();
             while (!currentWord.equals("bye")) {
                 String command = split(currentWord)[0];
                 try {

@@ -7,24 +7,23 @@ public class TaskList {
 
     public void addTask(Task task) {
         taskList.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task.toString());
-        System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
     }
 
     public Task getTask(int index) {
         return taskList.get(index);
     }
 
+    public int getSize() {
+        return taskList.size();
+    }
+
     public List<Task> getTaskList() {
         return this.taskList;
     }
+
     public void deleteTask(int index) {
         Task taskToBeDeleted = taskList.get(index);
         taskList.remove(taskToBeDeleted);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + taskToBeDeleted.toString());
-        System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
     }
 
     @Override

@@ -24,11 +24,11 @@ public class Storage {
         }
     }
 
-    public void addToFile(String textToAdd) throws IOException {
-        FileWriter fileWriter = new FileWriter(storagePath, true);
-        fileWriter.write(textToAdd);
-        fileWriter.close();
-    }
+//    public void addToFile(String textToAdd) throws IOException {
+//        FileWriter fileWriter = new FileWriter(storagePath, true);
+//        fileWriter.write(textToAdd);
+//        fileWriter.close();
+//    }
 
     /**
      * Method to take the list of tasks from the tasklist and then write it to the file
@@ -67,7 +67,8 @@ public class Storage {
     /**
      * Method to write from storage file to a task list
      */
-    public TaskList formTaskList(List<String> taskListInString) {
+    public TaskList formTaskList() throws IOException {
+        List<String> taskListInString = this.readStorageFile();
         TaskList taskList = new TaskList();
         for (String taskInString : taskListInString) {
             // parser work
@@ -78,7 +79,6 @@ public class Storage {
             String timeNotProcessed = arr.length == 3 ? "" : arr[3];
             boolean hasTime = !timeNotProcessed.equals("");
             String timeProcessed = timeNotProcessed.replace("T", " ");
-
             Task task;
             if (command.equals("T")) {
                 task = new ToDo(description, isDone.equals("\u2713"));

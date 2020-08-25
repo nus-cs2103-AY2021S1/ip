@@ -40,11 +40,10 @@ public class Parser {
         }
     }
 
-    public static boolean isValidDate(String time) throws IllegalArgumentException {
+    public static boolean isValidDate(String time) throws InvalidDateFormatException {
         String[] stringArr = time.split("-");
         if (stringArr.length != 3) {
-            throw new IllegalArgumentException("Entered date is in the wrong format. Please " +
-                    "specify in this format YYYY-MM-DD");
+            throw new InvalidDateFormatException(false);
         }
 
         return true;
