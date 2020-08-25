@@ -1,6 +1,6 @@
 public class DateException extends Exception {
 
-    public DateException(String mesg) {
-        super(mesg);
+    public DateException(String message) {
+        super(message);
     }
 }

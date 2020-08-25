@@ -21,5 +21,5 @@ abstract class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
-    public abstract String formattedString();
+    public abstract String getFormattedString();
 }

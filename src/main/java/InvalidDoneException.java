@@ -1,7 +1,7 @@
 public class InvalidDoneException extends Exception {
 
-    public InvalidDoneException(String mesg) {
-        super(mesg);
+    public InvalidDoneException(String message) {
+        super(message);
     }
 
 }
