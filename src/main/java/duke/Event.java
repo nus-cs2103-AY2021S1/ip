@@ -11,15 +11,7 @@ public class Event extends Task implements Serializable{
         super(s, b);
         time = t;
     }
-
-    public LocalDate getTime() {
-        return time;
-    }
-
-    public void setTime(LocalDate t) {
-        time = t;
-    }
-
+    
     @Override
     public String toString() {
         return "[E]" + "[" + (super.isDone() ? "O" : "X") + "] " + super.getName() + " (at: "
