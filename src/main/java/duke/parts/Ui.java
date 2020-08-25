@@ -1,3 +1,7 @@
+package duke.parts;
+
+import duke.task.Task;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -7,17 +11,17 @@ public class Ui {
     static String INDENT = "    ";
     Scanner sc = new Scanner(System.in);
 
-    void showWelcome() {
+    public void showWelcome() {
         System.out.println(LINE);
         System.out.println(INDENT + "Hello! What can I do for you?");
         System.out.println(LINE);
     }
 
-    void showLine() {
+    public void showLine() {
         System.out.println(LINE);
     }
 
-    String readCommand() {
+    public String readCommand() {
         return sc.nextLine();
     }
 
@@ -25,7 +29,7 @@ public class Ui {
         System.out.println(String.format("%syou have %d tasks in the list.", INDENT, numTask));
     }
 
-    void showDelete(Task removed, int numLeft) {
+    public void showDelete(Task removed, int numLeft) {
         System.out.println(INDENT + "Tasked removed: ");
         System.out.println(INDENT + removed.getOutput());
         printNumTask(numLeft);

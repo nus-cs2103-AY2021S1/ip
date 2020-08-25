@@ -1,3 +1,10 @@
+package duke.parts;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,7 +17,7 @@ import java.util.Scanner;
 public class Storage {
     String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -30,7 +37,7 @@ public class Storage {
         }
     }
 
-    ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() throws IOException {
         createFile();
         ArrayList<Task> arr = new ArrayList<>();
         try {

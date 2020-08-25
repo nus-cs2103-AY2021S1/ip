@@ -1,5 +1,7 @@
+package duke.error;
+
 public class IncorrectFormat  extends Exception{
-    IncorrectFormat() {
+    public IncorrectFormat() {
         super("Please use the correct format. Thank you");
     }
 }

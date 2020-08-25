@@ -1,14 +1,16 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Event extends Task{
     LocalDate time;
-    public Deadline(String description, String time) {
+    public Event(String description, String time) {
         super(description);
-        this.time = LocalDate.parse(time);;
+        this.time = LocalDate.parse(time);
     }
 
-    public Deadline(String description, boolean isDone, String time) {
+    public Event(String description, boolean isDone, String time) {
         super(description, isDone);
         this.time = LocalDate.parse(time);
     }
@@ -19,19 +21,17 @@ public class Deadline extends Task {
 
     @Override
     public String getStatusIcon() {
-        return String.format("[D]%s", super.getStatusIcon(), printTime());
+        return String.format("[E]%s", super.getStatusIcon(), printTime());
     }
 
     @Override
     public String writeToFile() {
         int done = isDone ? 1 : 0;
-        return String.format("D//%d//%s//%s\n", done, this.description, this.time );
-
+        return String.format("E//%d//%s//%s\n", done, this.description, this.time );
     }
 
     @Override
     public String getOutput() {
-        return String.format("%s %s(By: %s)", getStatusIcon(), this.description, printTime());
+        return String.format("%s %s(At: %s)", getStatusIcon(), this.description, printTime());
     }
-
 }
