@@ -2,8 +2,15 @@
  * A storage class that contains methods for loading and saving tasks.
  */
 
+package storage;
+
+import data.Deadline;
+import data.Event;
+import data.Task;
+import data.Todo;
+import exception.ChatbotException;
+
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -73,18 +80,18 @@ public class Storage {
 
     public void saveTasks(ArrayList<Task> taskList) throws ChatbotException {
 
-        Iterator iter = taskList.iterator();
+        Iterator<Task> iter = taskList.iterator();
         String dataStr = "";
 
         while (iter.hasNext()) {
-            Task tsk = (Task)iter.next();
-            String timestamp = tsk.timestamp == null ? "-" : tsk.timestamp.toString();
-            String entry = tsk.type + " | " +
+            Task tsk = iter.next();
+            String timestamp = tsk.getDate() == null ? "-" : tsk.getDate().toString();
+            String entry = tsk.getType() + " | " +
                     tsk.getStatus() + " | " +
-                    tsk.description + " | " +
+                    tsk.getDescription() + " | " +
                     timestamp  +
                     System.lineSeparator();
-            dataStr = dataStr + entry;
+            dataStr = dataStr.concat(entry);
         }
 
         try {

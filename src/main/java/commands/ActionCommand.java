@@ -1,3 +1,12 @@
+package commands;
+
+import common.Type;
+import data.Task;
+import data.TaskList;
+import exception.ChatbotException;
+import storage.Storage;
+import ui.Ui;
+
 /**
  * Represents a command to either delete or mark task as done given a type.
  */
@@ -18,7 +27,7 @@ public class ActionCommand extends Command {
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ChatbotException {
 
-        int index = -1;
+        int index;
 
         try {
             index = Integer.parseInt(body) - 1;

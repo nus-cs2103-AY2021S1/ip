@@ -3,6 +3,8 @@
  * or an invalid action is encountered.
  */
 
+package exception;
+
 public class ChatbotException extends Exception {
 
     String message;

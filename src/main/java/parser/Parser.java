@@ -2,6 +2,12 @@
  * A class that parses the command input given by the user.
  */
 
+package parser;
+
+import commands.*;
+import common.Type;
+import exception.ChatbotException;
+
 public class Parser {
 
     /**
@@ -10,7 +16,7 @@ public class Parser {
      * @return command matching the user input
      * @throws ChatbotException
      */
-    public static Command parse(String fullCmd) throws ChatbotException{
+    public static Command parse(String fullCmd) throws ChatbotException {
 
         String text = fullCmd.trim();
         String typeStr = text.split(" ")[0].trim();

@@ -1,3 +1,14 @@
+package commands;
+
+import common.Type;
+import data.Deadline;
+import data.Event;
+import data.TaskList;
+import data.Todo;
+import exception.ChatbotException;
+import storage.Storage;
+import ui.Ui;
+
 public class AddCommand extends Command {
 
     Type type;

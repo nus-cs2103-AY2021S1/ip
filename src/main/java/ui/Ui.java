@@ -3,6 +3,10 @@
  * from the user and displaying data, success/error messages to the user.
  */
 
+package ui;
+
+import data.Task;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;

@@ -2,6 +2,10 @@
  * Represents a task (e.g todo, deadline, event) with a description, type, completion status and date.
  */
 
+package data;
+
+import common.Type;
+
 import java.time.LocalDate;
 
 public class Task {
@@ -47,6 +51,10 @@ public class Task {
      */
     public LocalDate getDate() {
         return this.timestamp;
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     /**
