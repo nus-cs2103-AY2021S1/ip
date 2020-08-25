@@ -81,4 +81,11 @@ public class TaskList<Task> {
     ArrayList<Task> exportList() {
         return taskList;
     }
+
+    /**
+     * Clears the entire TaskList
+     */
+    void clearList() {
+        taskList = new ArrayList<>();
+    }
 }

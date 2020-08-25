@@ -10,7 +10,8 @@ public enum UserCommand {
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event"),
-    DELETE("delete");
+    DELETE("delete"),
+    CLEAR("clear");
 
     private final String command;
 
