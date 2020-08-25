@@ -2,7 +2,7 @@ plugins {
     id "application"
 }
 
-apply plugin: 'java'
+apply plugin: 'java-library'
 
 application {
     mainClassName = "tickbot.Tickbot"
@@ -28,4 +28,21 @@ dependencies {
 
 run {
     standardInput = System.in
+}
+
+task fatJar(type: Jar) {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE // allow duplicates
+    manifest {
+        attributes \
+            'Implementation-Title': 'Tickbot',
+            'Implementation-Version': '1.0',
+            'Main-Class': 'tickbot.Tickbot'
+    }
+    archiveBaseName = project.name
+    from {
+        configurations.compileClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    with jar
 }
