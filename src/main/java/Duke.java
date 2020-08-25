@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -21,7 +20,6 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
 
         String command = sc.nextLine();
-        ArrayList<Task> list = new ArrayList<>();
 
         while(!command.equals("bye")) {
             commandHandler.executeCommand(command);

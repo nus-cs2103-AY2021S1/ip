@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
@@ -52,6 +53,8 @@ public class DukeLogic {
         try {
             if(command.equals("list")){
                 printTaskList();
+            } else if (command.equals("today")){
+                printTasksToday();
             } else if (command.length() >= 4 && command.substring(0, 4).equals("done")){
                 completeTask(command);
                 updateFile();
@@ -77,8 +80,14 @@ public class DukeLogic {
             System.out.println("    Oh noes! I don't think you specified a valid task index :<");
             System.out.println("    ____________________________________________________________");
         } catch (IOException e) {
-            System.out.println("Oh dear! I can't seem to save your task permanently! ;A;");
-            System.out.println("Could you try exiting and entering the application before adding it again? m(_ _)m");
+            System.out.println("    ____________________________________________________________");
+            System.out.println("    Oh dear! I can't seem to save your task permanently! ;A;");
+            System.out.println("    Could you try exiting and entering the application before adding it again? m(_ _)m");
+            System.out.println("    ____________________________________________________________");
+        } catch (DateTimeParseException e) {
+            System.out.println("    ____________________________________________________________");
+            System.out.println("    Oops! Please make sure your date is of YYYY-MM-DD format ;A;");
+            System.out.println("    ____________________________________________________________");
         }
     }
 
@@ -89,6 +98,19 @@ public class DukeLogic {
         for(Task task: this.taskList) {
             System.out.println("    " + index + ". " + task);
             index++;
+        }
+        System.out.println("    ____________________________________________________________");
+    }
+
+    private void printTasksToday(){
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    Here are today's tasks!!");
+        int index = 1;
+        for(Task task: this.taskList) {
+            if(task.isToday()){
+                System.out.println("    " + index + ". " + task);
+                index++;
+            }
         }
         System.out.println("    ____________________________________________________________");
     }
@@ -142,7 +164,8 @@ public class DukeLogic {
                 command.split(" ")[0].equals("event");
     }
 
-    private void addTask(String command) throws IncompleteTaskException, IOException {
+
+    private void addTask(String command) throws IncompleteTaskException, DateTimeParseException, IOException {
         String typeOfTask = command.split(" ")[0];
         FileWriter fw = new FileWriter(filePath, true);
         switch (typeOfTask) {
