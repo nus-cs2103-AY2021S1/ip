@@ -2,6 +2,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Encapsulates data for a deadline task.
+ */
+
 public class Deadline extends Task {
 
     protected LocalDate time;

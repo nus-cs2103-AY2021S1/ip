@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * Encapsulates behavior for reading and writing to files.
+ */
+
 public class Storage {
     String filePath;
     public Storage(String filePath){

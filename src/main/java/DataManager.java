@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.FileWriter;
 import java.time.LocalDate;
 
+/**
+ * Encapsulates the data managing processes of the program.
+ */
+
 public class DataManager {
     static String filePath;
 

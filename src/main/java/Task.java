@@ -1,5 +1,8 @@
 public class Task {
+    /** The task's messages */
     protected String description;
+
+    /** Whether the task is Done*/
     protected boolean isDone;
 
     public Task(String description) {

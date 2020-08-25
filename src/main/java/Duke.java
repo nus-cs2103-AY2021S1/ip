@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.io.IOException;
 
+/**
+ * A chatbot reacting on tasks.
+ */
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
