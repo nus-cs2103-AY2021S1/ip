@@ -14,6 +14,7 @@ public class ConsoleUi implements Ui {
     public void printLine() {
         System.out.println(INDENT + LINE);
     }
+
     @Override
     public void respond(List<String> messages) {
         printLine();

@@ -35,12 +35,14 @@ public class LocalStorage implements Storage{
 
     }
 
+
     /**
      * Serializes the TaskList object and stores in a file.
      *
      * @param taskList List of tasks to be saved.
      * @throws DuckException If file is unable to be saved due to corruption.
      */
+
     public void save(TaskList taskList) throws DuckException {
         try {
             ensureFileExists();
@@ -50,7 +52,6 @@ public class LocalStorage implements Storage{
             out.close();
             file.close();
         } catch (IOException i) {
-            System.out.println(i);
             throw new DuckException("Failed to save file");
         }
     }
