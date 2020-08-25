@@ -1,11 +1,71 @@
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Formatter;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
     
-    public static void main(String[] args) throws MissingTaskDescriptionException, 
-            MissingTaskNumberException, CommandNotRecognisedException {
-
+    public static void main(String[] args) throws MissingTaskDescriptionException,
+            MissingTaskNumberException, CommandNotRecognisedException, IOException {
+        
+//        // create new File
+//        String path = "./data/duke.txt";
+//        File f = new File(path);
+//        boolean dir = f.getParentFile().mkdirs();
+//        if (dir) {
+//            System.out.println("directory created");
+//        } else {
+//            System.out.println("directory exist");
+//        }
+        
+        try {
+            String path = "./data/duke.txt";
+            File f = new File(path);
+            boolean dir = f.getParentFile().mkdirs();
+            
+            if (dir) {
+                FileOutputStream fileOutput = new FileOutputStream("./data/duke.txt");
+//                String s="dir success";
+//                byte b[]=s.getBytes();//converting string into byte array    
+//                fileOutput.write(b);
+//                fileOutput.close();
+                System.out.println("dir success");
+            } else {
+                boolean file = f.createNewFile();
+                if (file) {
+                    FileOutputStream fileOutput = new FileOutputStream("./data/duke.txt");
+//                    String s="dir fail file success.";
+//                    byte b[]=s.getBytes();//converting string into byte array    
+//                    fileOutput.write(b);
+//                    fileOutput.close();
+//                    System.out.println("dir fail file success");
+                } else {
+//                    System.out.println("dir fail file fail");
+                    byte[] bytes = Files.readAllBytes(Paths.get(path));
+                    List<String> allLines = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
+                }
+            }
+            
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        
+//        boolean file = f.createNewFile();
+//        if (file) {
+//            System.out.println("file created");
+//        } else {
+//            System.out.println("file exist");
+//        }
+//                
         // Contains all tasks
         ArrayList<Task> listOfTasks= new ArrayList<>();
         
@@ -217,7 +277,6 @@ public class Duke {
                   + "Oops! The task number cannot be missing :("
                   + "\r\n"
                   + horizontalLine);
-          
       }
     } 
 }
