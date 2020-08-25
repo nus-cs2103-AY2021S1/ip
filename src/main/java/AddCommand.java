@@ -2,9 +2,9 @@
  * Represents a command to add a task to the task list.
  */
 public class AddCommand extends Command {
-    CommandType addType;
-    String description;
-    String datetime;
+    private final CommandType addType;
+    private final String description;
+    private final String datetime;
 
     /**
      * Initializes the add command.

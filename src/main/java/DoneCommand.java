@@ -2,7 +2,7 @@
  * Represents a command to mark a task as done.
  */
 public class DoneCommand extends Command {
-    int index;
+    private final int index;
 
     /**
      * Initializes done command with the index the user inputted.

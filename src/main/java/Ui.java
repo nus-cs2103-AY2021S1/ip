@@ -7,7 +7,7 @@ import java.util.List;
  * Handles all interaction with the user, including the reading of user input and outputting text.
  */
 public class Ui {
-    Scanner scanner;
+    private final Scanner scanner;
 
     /**
      * Initializes the Ui object.

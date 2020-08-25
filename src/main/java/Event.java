@@ -7,9 +7,9 @@ import java.time.format.DateTimeParseException;
  * Represents an event that the user has.
  */
 public class Event extends Task {
-    protected String at;
-    protected LocalDate atDate;
-    protected LocalDateTime atDateTime;
+    private String at;
+    private LocalDate atDate;
+    private LocalDateTime atDateTime;
 
     /**
      * Initializes an event with its description, and when it will be.

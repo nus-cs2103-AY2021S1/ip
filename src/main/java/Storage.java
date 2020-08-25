@@ -14,7 +14,7 @@ public class Storage {
     private static final String DEADLINE_FORMAT = "D";
     private static final String SEPARATOR = "/";
 
-    private File file;
+    private final File file;
 
     /**
      * Initializes storage with the path to the data file.
@@ -38,15 +38,15 @@ public class Storage {
                 while (scn.hasNextLine()) {
                     String[] data = scn.nextLine().split(SEPARATOR);
                     switch (data[0]) {
-                        case Storage.TODO_FORMAT:
-                            taskList.add(new Todo(data[2], formatToIsDone(data[1])));
-                            break;
-                        case Storage.EVENT_FORMAT:
-                            taskList.add(new Event(data[2], formatToIsDone(data[1]), data[3]));
-                            break;
-                        case Storage.DEADLINE_FORMAT:
-                            taskList.add(new Deadline(data[2], formatToIsDone(data[1]), data[3]));
-                            break;
+                    case Storage.TODO_FORMAT:
+                        taskList.add(new Todo(data[2], convertFormatToIsDone(data[1])));
+                        break;
+                    case Storage.EVENT_FORMAT:
+                        taskList.add(new Event(data[2], convertFormatToIsDone(data[1]), data[3]));
+                        break;
+                    case Storage.DEADLINE_FORMAT:
+                        taskList.add(new Deadline(data[2], convertFormatToIsDone(data[1]), data[3]));
+                        break;
                     }
                 }
                 scn.close();
@@ -73,13 +73,13 @@ public class Storage {
             for (Task task : tasks.getListOfTasks()) {
                 if (task instanceof Todo) {
                     fileWriter.write(String.join(Storage.SEPARATOR,
-                            Storage.TODO_FORMAT, isDoneToFormat(task.getIsDone()), task.getDescription()));
+                            Storage.TODO_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription()));
                 } else if (task instanceof Event) {
                     fileWriter.write(String.join(Storage.SEPARATOR,
-                            Storage.EVENT_FORMAT, isDoneToFormat(task.getIsDone()), task.getDescription(), ((Event) task).getAt()));
+                            Storage.EVENT_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription(), ((Event) task).getAt()));
                 } else if (task instanceof Deadline) {
                     fileWriter.write(String.join(Storage.SEPARATOR,
-                            Storage.DEADLINE_FORMAT, isDoneToFormat(task.getIsDone()), task.getDescription(), ((Deadline) task).getBy()));
+                            Storage.DEADLINE_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription(), ((Deadline) task).getBy()));
                 } else {
                     throw new DukeException("Sorry, there is an error saving the task list here.");
                 }
@@ -91,11 +91,11 @@ public class Storage {
         }
     }
 
-    private boolean formatToIsDone(String taskDoneFormat) {
+    private boolean convertFormatToIsDone(String taskDoneFormat) {
         return taskDoneFormat.equals("1");
     }
 
-    private String isDoneToFormat(boolean isDone) {
+    private String convertIsDoneToFormat(boolean isDone) {
         return isDone ? "1" : "0";
     }
 }

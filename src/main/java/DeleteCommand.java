@@ -2,7 +2,7 @@
  * Represents a command to delete a task from the task list.
  */
 public class DeleteCommand extends Command {
-    int index;
+    private final int index;
 
     /**
      * Initializes delete command with the index the user inputted.

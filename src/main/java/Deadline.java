@@ -7,9 +7,9 @@ import java.time.format.DateTimeParseException;
  * Represents a deadline that the user has.
  */
 public class Deadline extends Task {
-    protected String by;
-    protected LocalDate byDate;
-    protected LocalDateTime byDateTime;
+    private String by;
+    private LocalDate byDate;
+    private LocalDateTime byDateTime;
 
     /**
      * Initializes a deadline with its description, and when it will be.

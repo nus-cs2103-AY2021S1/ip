@@ -4,7 +4,7 @@ import java.time.LocalDate;
  * Represents a command to list tasks.
  */
 public class ListCommand extends Command {
-    LocalDate date;
+    private LocalDate date;
 
     public ListCommand() {}
 
