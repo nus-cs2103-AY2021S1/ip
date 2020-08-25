@@ -55,7 +55,7 @@ public class FileOperation {
             }
             fileWriter.close();
         } catch (IOException e) {
-            System.err.println(e);
+            Warnings.invalidFileOutput(e);
         }
     }
 }
