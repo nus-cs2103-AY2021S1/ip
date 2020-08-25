@@ -1,14 +1,15 @@
 package src.main.java.duke;
 
+import src.main.java.duke.commands.Command;
+import src.main.java.duke.commands.CommandResult;
 import src.main.java.duke.commands.ExitCommand;
+import src.main.java.duke.data.Duke;
 import src.main.java.duke.parser.Parser;
 import src.main.java.duke.storage.StorageFile;
 import src.main.java.duke.storage.StorageFile.InvalidStorageFilePathException;
 import src.main.java.duke.storage.StorageFile.StorageOperationException;
 import src.main.java.duke.ui.TextUi;
-import src.main.java.duke.data.Duke;
-import src.main.java.duke.commands.CommandResult;
-import src.main.java.duke.commands.Command;
+
 
 
 /**
@@ -21,7 +22,9 @@ public class Main {
     private StorageFile storage;
     private Duke duke;
 
-    public static void main(String ... launchArgs) { new Main().run(launchArgs);}
+    public static void main(String... launchArgs) {
+        new Main().run(launchArgs);
+    }
 
     /**
      * Run the program until termination

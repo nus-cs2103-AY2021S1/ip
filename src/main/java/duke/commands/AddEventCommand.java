@@ -26,7 +26,7 @@ public class AddEventCommand extends Command {
             duke.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (Exception e) {
-            return new CommandResult("send help");
+            return new CommandResult("Oh no. Add event was not successful");
         }
     }
 }

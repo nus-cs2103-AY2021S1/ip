@@ -18,6 +18,10 @@ public class Event extends Task {
         this.dueDate = LocalDateTime.parse(dueDate, dateFormat);
     }
 
+    /**
+     * To String
+     * @return
+     */
     public String toString() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return "[E]" + super.toString() + "(at: " + dueDate.format(dateFormat) + ")";
@@ -32,5 +36,6 @@ public class Event extends Task {
      */
     public String toWriteString() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return "E " +  super.toWriteString() + " | " + dueDate.format(dateFormat); }
+        return "E " + super.toWriteString() + " | " + dueDate.format(dateFormat);
+    }
 }
