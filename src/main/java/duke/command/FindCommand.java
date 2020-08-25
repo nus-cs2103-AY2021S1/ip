@@ -1,9 +1,11 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.exception.EmptyFindException;
+
 import duke.storage.Storage;
+
 import duke.tasklist.TaskList;
+
 import duke.ui.Ui;
 
 public class FindCommand extends Command {
@@ -14,7 +16,7 @@ public class FindCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws EmptyFindException {
         if (input.isEmpty()) {
             throw new EmptyFindException();
         } else {
