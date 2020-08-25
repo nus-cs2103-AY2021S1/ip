@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Bot {
@@ -20,7 +21,7 @@ public class Bot {
         this.listen();
     }
 
-    private void listen() throws DukeException {
+    private void listen() throws DukeException, IOException {
         String next = sc.nextLine();
         if (next.equals("bye")) {
             this.tracker.printSection();
@@ -47,16 +48,12 @@ public class Bot {
                 this.tracker.printSection();
                 System.out.println(e.getMessage());
                 this.tracker.printSection();
+            } catch (DateTimeParseException e) {
+                System.out.println("Please input a valid format e.g. event party /at 2020-08-25 19:00-22:00");
             } catch (NumberFormatException e) {
                 this.tracker.printSection();
-                System.out.println("Please input a number");
+                System.out.println("Sorry I don't understand");
                 this.tracker.printSection();
-            } catch (IndexOutOfBoundsException e) {
-                this.tracker.printSection();
-                System.out.println("Please input a valid number");
-                this.tracker.printSection();
-            } catch (IOException e) {
-                e.printStackTrace();
             } finally {
                 this.listen();
             }

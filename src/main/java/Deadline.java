@@ -1,19 +1,32 @@
-public class Deadline extends Task {
-    protected String by;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    protected LocalDate date;
+    protected LocalTime time;
+
+    public Deadline(String description, LocalDate date) {
         super(description);
-        this.by = by;
+        this.date = date;
+    }
+
+    public Deadline(String description, LocalDate date, LocalTime time) {
+        super(description);
+        this.date = date;
+        this.time = time;
     }
 
     @Override
     public String txtFileFormat() {
-        return "D ~/~ " + super.txtFileFormat() + " ~/~ " + this.by;
+        return "D ~/~ " + super.txtFileFormat() + " ~/~ " + this.date.toString() +
+                (this.time != null ? " ~/~ " + this.time.toString() : "");
     }
 
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
+                " " + (time != null ? time.format(DateTimeFormatter.ofPattern("hh:mm a")) : "") + ")";
     }
 }

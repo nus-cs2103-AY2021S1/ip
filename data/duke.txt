@@ -1,6 +1,2 @@
-T ~/~ 0 ~/~ study
-D ~/~ 0 ~/~ homework ~/~ Aug 26th
-E ~/~ 1 ~/~ movie ~/~ Aug 27th 8-10pm
-D ~/~ 0 ~/~ pay bills ~/~ Aug 28th
-E ~/~ 0 ~/~ birthday party ~/~ Aug 29th 6-9pm
-T ~/~ 0 ~/~ walk dog
+D ~/~ 0 ~/~ hehehe ~/~ 2020-08-25 ~/~ 19:00
+E ~/~ 1 ~/~ ohohoh ~/~ 2020-08-25 ~/~ 19:00 ~/~ 22:00

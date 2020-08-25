@@ -1,6 +1,8 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +37,21 @@ public class Tracker {
                         t = new ToDo(splits[2]);
                         break;
                     case "D":
-                        t = new Deadline(splits[2], splits[3]);
+                        if (splits.length == 4) {
+                            t = new Deadline(splits[2], LocalDate.parse(splits[3]));
+                        } else if (splits.length == 5) {
+                            t = new Deadline(splits[2], LocalDate.parse(splits[3]), LocalTime.parse(splits[4]));
+                        }
                         break;
                     case "E":
-                        t = new Event(splits[2], splits[3]);
+                        if (splits.length == 4) {
+                            t = new Event(splits[2], LocalDate.parse(splits[3]));
+                        } else if (splits.length == 5) {
+                            t = new Event(splits[2], LocalDate.parse(splits[3]), LocalTime.parse(splits[4]));
+                        } else if (splits.length == 6) {
+                            t = new Event(splits[2], LocalDate.parse(splits[3]), LocalTime.parse(splits[4]),
+                                    LocalTime.parse(splits[5]));
+                        }
                         break;
                     default:
                         System.out.println("Sorry, there is an error with the hard disk!");
@@ -59,8 +72,9 @@ public class Tracker {
         this.printSection();
     }
 
-    public void markDone(String num) throws IOException {
+    public void markDone(String num) throws IOException, DukeException {
         int i = Integer.valueOf(num.substring(5, num.length()));
+        if (i > list.size()) throw new DukeException("Please input a number");
         list.get(i - 1).markAsDone();
         this.refreshTracker();
         this.printSection();
@@ -85,7 +99,14 @@ public class Tracker {
         if (cut != -1) {
             String desc = next.substring(9, cut);
             String by = next.substring(cut + 5, next.length());
-            Deadline deadline = new Deadline(desc, by);
+            String[] dateAndTime = by.split(" ");
+            LocalDate date = LocalDate.parse(dateAndTime[0]);
+            Deadline deadline = null;
+            if (dateAndTime.length == 2) {
+                deadline = new Deadline(desc, date, LocalTime.parse(dateAndTime[1]));
+            } else {
+                deadline = new Deadline(desc, date);
+            }
             list.add(deadline);
             writer.write(deadline.txtFileFormat());
             writer.newLine();
@@ -103,8 +124,21 @@ public class Tracker {
         int cut = next.indexOf(" /at ");
         if (cut != -1) {
             String desc = next.substring(6, cut);
-            String time = next.substring(cut + 5, next.length());
-            Event event = new Event(desc, time);
+            String at = next.substring(cut + 5, next.length());
+            String[] dateAndTime = at.split(" ");
+            LocalDate date = LocalDate.parse(dateAndTime[0]);
+            Event event = null;
+            if(dateAndTime.length == 2) {
+                String[] startAndEndTime = dateAndTime[1].split("-");
+                LocalTime startTime = LocalTime.parse(startAndEndTime[0]);
+                if (startAndEndTime.length == 2) {
+                    event = new Event(desc, date, startTime, LocalTime.parse(startAndEndTime[1]));
+                } else {
+                    event = new Event(desc, date, startTime);
+                }
+            } else {
+                event = new Event(desc, date);
+            }
             list.add(event);
             writer.write(event.txtFileFormat());
             writer.newLine();
