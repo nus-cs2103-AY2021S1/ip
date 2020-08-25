@@ -13,7 +13,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String writerSave(){
+    public String writeSaveFormat() {
         return String.format("E | %d | %s | %s", isDone ? 1 : 0, description, at);
     }
 

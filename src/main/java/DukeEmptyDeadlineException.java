@@ -1,5 +1,5 @@
 public class DukeEmptyDeadlineException extends DukeException {
-    DukeEmptyDeadlineException(String s){
+    DukeEmptyDeadlineException(String s) {
         super(s);
     }
 }
