@@ -80,6 +80,13 @@ public class Command implements Executable {
         return new Command(CommandType.DELETE, task);
     }
 
+    /**
+     * Returns a Command of type FIND. This command encapsulates the instruction to find tasks in the list that has
+     * words matching the keyword specified by the user in the 'task'.
+     * @param task Task object, which holds the keyword that has to be found in the list (This task
+     *             object is a Misc. Task).
+     * @return Command of type FIND.
+     */
     public static Command createFindCommand(Task task) {
         return new Command(CommandType.FIND, task);
     }
