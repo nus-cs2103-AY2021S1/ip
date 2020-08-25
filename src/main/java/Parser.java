@@ -42,6 +42,17 @@ public class Parser {
         System.out.println(line);
     }
 
+    public void generateSearch(ArrayList<Task> tasks) {
+        System.out.println(line);
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            System.out.println((i + 1) + ". " + t.printTask());
+        }
+        System.out.println(line);
+
+    }
+
     /**
      * Parse users' commands and respond to them.
      * @param s
@@ -63,6 +74,16 @@ public class Parser {
                 break;
             case "list":
                 generateList();
+                break;
+            case "find":
+                ArrayList<Task> hold = new ArrayList<>();
+                String d = s.substring(j + 1);
+                for (Task t : taskList.getList()) {
+                    if (t.name.contains(d)) {
+                        hold.add(t);
+                    }
+                }
+                generateSearch(hold);
                 break;
             case "done":
                 char x = s.charAt(s.length() - 1);

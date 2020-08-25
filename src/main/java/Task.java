@@ -1,7 +1,7 @@
 public class Task {
 
     private boolean completed;
-    private String name;
+    public String name;
 
     public Task(String name) {
         this.name = name;

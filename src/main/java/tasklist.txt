@@ -1,3 +1,4 @@
 T | 0 | eat dinner
 D | 0 | hw | Dec 12 2021 12:34
 E | 0 | sa | idk when
+T | 0 | eat lunch
