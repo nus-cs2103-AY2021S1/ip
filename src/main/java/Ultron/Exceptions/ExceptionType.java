@@ -1,4 +1,4 @@
-package Ultron.Exceptions;
+package ultron.exceptions;
 
 public enum ExceptionType {
     TOO_MUCH_ARGUMENTS("Too much arguments supplied for %s"),

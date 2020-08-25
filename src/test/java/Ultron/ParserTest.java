@@ -1,12 +1,12 @@
-package Ultron;
+package ultron;
 
-import Ultron.Commands.ByeCommand;
-import Ultron.Commands.DeleteCommand;
-import Ultron.Commands.DoneCommand;
-import Ultron.Commands.HelpCommand;
-import Ultron.Commands.ListCommand;
-import Ultron.Commands.TaskAllocator;
-import Ultron.Exceptions.UltronException;
+import ultron.commands.ByeCommand;
+import ultron.commands.DeleteCommand;
+import ultron.commands.DoneCommand;
+import ultron.commands.HelpCommand;
+import ultron.commands.ListCommand;
+import ultron.commands.TaskAllocator;
+import ultron.exceptions.UltronException;
 
 import org.junit.jupiter.api.Test;
 

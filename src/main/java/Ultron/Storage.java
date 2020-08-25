@@ -1,4 +1,4 @@
-package Ultron;
+package ultron;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,10 +9,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Ultron.Tasks.Task;
-import Ultron.Exceptions.UltronException;
-import Ultron.Exceptions.ExceptionType;
-import Ultron.Commands.TaskCommand;
+import ultron.tasks.Task;
+import ultron.exceptions.UltronException;
+import ultron.exceptions.ExceptionType;
+import ultron.commands.TaskCommand;
 
 /**
  * The main Storage class for Ultron
@@ -42,7 +42,7 @@ public class Storage {
           @param task Task to be encoded to string
          * @return String containing the command
          */
-        return String.format("%s~%s", task.getType(), task.getCommand());
+        return String.format("%s~%d~%s", task.getType(), task.isDone() ? 1 : 0, task.getCommand());
     }
 
     /**
