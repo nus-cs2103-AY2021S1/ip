@@ -62,7 +62,8 @@ public class TextUi {
         if (!(rawInputLine.contains("bye") || rawInputLine.contains("done") || rawInputLine.contains("todo")
                 || rawInputLine.contains("deadline") || rawInputLine.contains("list")
                 || rawInputLine.contains("event") || rawInputLine.contains("delete")
-                || rawInputLine.contains("time") || rawInputLine.contains("help"))) {
+                || rawInputLine.contains("time") || rawInputLine.contains("help")
+                || rawInputLine.contains("find"))) {
             return true;
         }
         return false;

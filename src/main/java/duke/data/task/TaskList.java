@@ -1,6 +1,7 @@
 package src.main.java.duke.data.task;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -38,6 +39,18 @@ public class TaskList implements Iterable<Task> {
      */
     public List<Task> immutableListView() {
         return Collections.unmodifiableList(internalList);
+    }
+
+    /**
+     * Returns an unmodifiable java List view with elements cast as immutable {@link Task}s.
+     * For use with other methods/libraries.
+     * Any changes to the internal list/elements are immediately visible in the returned list.
+     */
+    public List<Task> filteredView(String searchString) {
+        List<Task> filteredList = internalList
+                .stream()
+                .filter(task -> task.description.contains(searchString)).collect(Collectors.toList());
+        return Collections.unmodifiableList(filteredList);
     }
 
     /**
