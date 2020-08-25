@@ -7,12 +7,12 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
- * Represents all user interaction with Duke
+ * Represents all user interaction with Duke.
  */
 public class Ui {
     protected final taskListHandler handler;
     protected final Storage storage;
-    /** Class-wide variable to know whether to continue running user interface */
+    /** Class-wide variable to know whether to continue running user interface. */
     protected static boolean isRunning = true;
 
     public Ui(taskListHandler handler, Storage storage) {
@@ -71,7 +71,7 @@ public class Ui {
     }
 
     /**
-     * Prints success message and list size after task added/deleted
+     * Prints success message and list size after task added/deleted.
      *
      * @param operation Type of command.
      * @param currentTask Task that was modified.
@@ -104,21 +104,8 @@ public class Ui {
      */
     public static void greet() {
         drawTopBorder();
-        String logo = "\n"
-            + "    ██████  ██    ██ ██   ██ ███████\n"
-            + "    ██   ██ ██    ██ ██  ██  ██\n"
-            + "    ██   ██ ██    ██ █████   █████\n"
-            + "    ██   ██ ██    ██ ██  ██  ██\n"
-            + "    ██████   ██████  ██   ██ ███████\n";
-//        String logoSol = "\n" +
-//                "   ▄████████  ▄██████▄   ▄█       \n" +
-//                "  ███    ███ ███    ███ ███       \n" +
-//                "  ███    █▀  ███    ███ ███       \n" +
-//                "  ███        ███    ███ ███       \n" +
-//                "  ██████████ ███    ███ ███       \n" +
-//                "         ███ ███    ███ ███       \n" +
-//                "   ▄█    ███ ███    ███ ███▌      ▄ \n" +
-//                " ▄████████▀   ▀██████▀  █████▄▄▄███ \n";
+        String logo = "DUKE";
+
 
         System.out.println(logo);
         String greeting = "Hey! I'm Duke the chatbot!";

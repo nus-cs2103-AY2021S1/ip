@@ -5,6 +5,9 @@ public class Duke {
         initialize();
     }
 
+    /**
+     * Starts the chatbot.
+     */
     public static void initialize() {
         Storage storage = new Storage("./data");
         if (Storage.hasLoadingError) {
