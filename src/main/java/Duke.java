@@ -2,6 +2,7 @@ import main.java.*;
 
 import java.io.*;
 import java.lang.reflect.Array;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -178,6 +179,8 @@ public class Duke {
                             invalidInput("  \u2639 OOPS!!! An event task must be input with a forward slash and the deadline");
                         } catch (IOException ioe) {
                             ioe.printStackTrace();
+                        } catch (DateTimeParseException dtpe) {
+                            System.out.println("Sorry, please key in a valid date and time format");
                         }
                     }
                 } else if (taskType.equals("deadline")) {
@@ -199,6 +202,8 @@ public class Duke {
                             invalidInput("  \u2639 OOPS!!! A deadline task must be input with a forward slash and the deadline");
                         } catch (IOException ioe) {
                             ioe.printStackTrace();
+                        } catch (DateTimeParseException dtpe) {
+                            System.out.println("Sorry, please key in a valid date and time format");
                         }
                     }
                 } else if (taskType.equals("todo")){
