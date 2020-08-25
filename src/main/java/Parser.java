@@ -2,8 +2,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Represents the parser of the Duke application. The parser is responsible for
+ * processing user commands so that they can be understood by the application.
+ */
 public class Parser {
 
+    /**
+     * Processes the dates/times for deadlines and events in the task list.
+     * @param date a String that represents either a date in YYYY-MM-DD format, or a timestamp
+     *              in YYYY-MM-DD HHMM format.
+     * @return a String that represents an alternative format of the date/time.
+     * @throws DateException if the given date/time is not in the appropriate format.
+     */
     public static String processDate(String date) throws DateException {
         try {
             String[] dates = date.split(" ");
@@ -47,6 +58,22 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes the user command.
+     * @param s the user command
+     * @param size the size of the task list.
+     * @return a list of String objects that represent the appropriate command to
+     * be executed.
+     * @throws InvalidDoneException if for a done command, either no task is specified or the
+     * argument provided does not represent a valid task.
+     * @throws InvalidTaskArgumentException if the command to add tasks is not correctly or
+     * completely specified.
+     * @throws InvalidDeleteException if for a delete command, either no task is specified or the
+     * argument provided does not represent a valid task.
+     * @throws InvalidCommandException if the user command cannot be understood
+     * @throws DateException if the date/time provided for an event/deadline is not in the appropriate
+     * format.
+     */
     public ArrayList<String> processString(String s, int size)
             throws InvalidDoneException, InvalidTaskArgumentException,
             InvalidDeleteException, InvalidCommandException, DateException {

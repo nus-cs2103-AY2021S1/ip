@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the user interface for the Duke application. The user interface is responsible
+ * for receiving commands from and displaying messages to the user.
+ */
 public class Ui {
 
     private Scanner scanner;
@@ -13,6 +17,9 @@ public class Ui {
         System.out.println("-------------------------------------------------------------------------------------");
     }
 
+    /**
+     * Displays a welcome message to the user when the Duke application starts up.
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -26,18 +33,30 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Displays a farewell message to the user when the Duke application exits.
+     */
     public void showFarewell() {
         showLine();
         System.out.println("Bye. Hope to see you again soon!");
         showLine();
     }
 
+    /**
+     * Displays an error message to the user when the Duke application encounters
+     * an error.
+     * @param message the error message.
+     */
     public void showError(String message) {
         showLine();
         System.out.println(message);
         showLine();
     }
 
+    /**
+     * Displays a message indicating that a particular task has been marked as done.
+     * @param task the task that has been marked as done.
+     */
     public void showDone(Task task) {
         showLine();
         System.out.println("Nice! I've marked this task as done: ");
@@ -45,6 +64,12 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Displays a message indicating that a new task has been added to the task list.
+     * The total number of tasks in the task list after addition is also displayed.
+     * @param task the task that has been added to the task list.
+     * @param size the total number of tasks in the task list after addition.
+     */
     public void showAdd(Task task, int size) {
         showLine();
         System.out.println("Got it. I've added this task:");
@@ -53,6 +78,12 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Displays a message indicating that a task has been deleted from the task list.
+     * The total number of tasks in the task list after deletion is also displayed.
+     * @param task the task that has been deleted from the task list.
+     * @param size the total number of tasks in the task list after deletion.
+     */
     public void showDelete(Task task, int size) {
         showLine();
         System.out.println("Noted. I've removed this task:");
@@ -61,6 +92,10 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Displays the tasks in the task list.
+     * @param lst a list of String objects representing the tasks in the task list.
+     */
     public void showList(ArrayList<String> lst) {
         showLine();
         System.out.println("Here are the tasks in your list: ");
@@ -70,6 +105,10 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Reads the command entered by the user.
+     * @return the user command.
+     */
     public String readCommand() {
         return scanner.nextLine();
     }
