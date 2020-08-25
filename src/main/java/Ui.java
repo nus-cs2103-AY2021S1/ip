@@ -67,11 +67,13 @@ public class Ui {
         }
         System.out.println((line));
     }
+
     public void save() {
         System.out.println(line);
         System.out.println(saveMsg);
         System.out.println(line);
     }
+
     public void defaultError() {
         System.out.println(line);
         System.out.println(defaultError);

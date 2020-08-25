@@ -94,6 +94,7 @@ public class Duke {
         // Ending the bot
         ui.bye();
     }
+
     public static void main(String[] args) {
         new Duke("data/Duke.txt").run();
     }
