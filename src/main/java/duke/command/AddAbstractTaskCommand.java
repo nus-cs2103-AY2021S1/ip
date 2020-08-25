@@ -8,15 +8,24 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Generic add task command which inherits from generic command class.
+ * Parent to TodoCommand, DoneCommand and EventCommand.
+ * Takes in new task to be added to task list.
+ */
 public abstract class AddAbstractTaskCommand extends Command {
     protected final Task newTask;
 
-    // Contains the tasktype command which adds task to the list
-    // Parent for todo, event and deadline
     public AddAbstractTaskCommand(Task newTask) {
         this.newTask = newTask;
     }
 
+    /**
+     * Generic method for adding new task to the list, printing success and saving updated list to save file.
+     *
+     * @param handler Task list.
+     * @param storage Storage instance.
+     */
     @Override
     public void execute(TaskListHandler handler, Storage storage) {
         // Create and store events given in list

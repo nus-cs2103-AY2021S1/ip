@@ -9,12 +9,22 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Marks a provided task as done.
+ * Inherits from AbstractModifyTaskCommand which inherits from generic command class.
+ */
 public class DoneCommand extends AbstractModifyTaskCommand {
 
     public DoneCommand(Task task) {
         super(task);
     }
 
+    /**
+     * Marks given task as done, printing success and saving updated list to save file.
+     *
+     * @param handler Task list.
+     * @param storage Storage instance.
+     */
     @Override
     public void execute(TaskListHandler handler, Storage storage) {
         try {

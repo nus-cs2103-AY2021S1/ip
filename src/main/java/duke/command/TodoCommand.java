@@ -4,6 +4,10 @@ import duke.task.Task;
 
 import java.util.Objects;
 
+/**
+ * Adds a to do task to the list.
+ * Inherits from AddAbstractTaskCommand which inherits from generic command class.
+ */
 public class TodoCommand extends AddAbstractTaskCommand {
 
     public TodoCommand(Task newTask) {
