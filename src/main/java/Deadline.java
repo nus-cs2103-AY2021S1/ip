@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Deadline extends Task{
     protected String by;
 
@@ -37,8 +41,16 @@ public class Deadline extends Task{
         for(int i = index + 1; i < arr.length; i++) {
             time = time + arr[i] + " ";
         }
-
-        return new Deadline(description.trim(), time.trim());
+        
+        Date date;
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/M/yyyy hhmm");
+            date = formatter.parse(time.trim());
+        } catch (ParseException e) {
+            throw new DeadlineException(" ☹ OOPS!!! The time of a deadline must be in the format of dd/M/yyyy hhmm.");
+        }
+        
+        return new Deadline(description.trim(), new SimpleDateFormat("MMM dd yyyy HH:mm").format(date));
     }
 
     @Override
