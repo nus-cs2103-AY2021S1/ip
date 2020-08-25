@@ -19,7 +19,6 @@ public class Duke {
     public void run() {
         this.ui.showWelcomeMessage();
         Scanner sc = new Scanner(System.in);
-        boolean isExit = false;
 
         while (sc.hasNextLine()) {
             String fullCommand = sc.nextLine();

@@ -9,14 +9,13 @@ public class DeleteCommand extends Command {
     public CommandResult execute(TaskList tasks, Storage storage) {
         int index = Integer.parseInt(arguments) - 1;
         Task task = tasks.removeTask(index);
-
         try {
             storage.save(tasks.getTasks());
         } catch (DukeException e) {
             System.err.println(e);
         }
-
-        String message = this.DELETE_MESSAGE + task.toString() + tasks.replyNumTasks();
+        String message = this.DELETE_MESSAGE + "  " + task.toString()
+                + "\n" + tasks.replyNumTasks();
         return new CommandResult(message);
     }
 }

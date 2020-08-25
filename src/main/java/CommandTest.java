@@ -15,9 +15,8 @@ public class CommandTest {
         try {
             new Command("test").execute(new TaskList(), new Storage());
         } catch (DukeException e) {
-            assertEquals(
-                "This method is to be implemented by child classes",
-                e.getMessage()
+            assertEquals("This method is to be implemented by child classes",
+                    e.getMessage()
             );
         }
     }
