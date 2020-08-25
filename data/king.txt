@@ -1,3 +1,2 @@
-T@0@run
-T@0@read book
+T@1@run
 T@0@running
