@@ -7,67 +7,67 @@ There are no tasks in your list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[T][✗] read book
+[T][NOT DONE] read book
 Now you have 1 task in the list.
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
-[T][✓] read book
+[T][DONE] read book
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[D][✗] return book (by: Jun 06 2020)
+[D][NOT DONE] return book (by: Jun 06 2020)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
-[D][✓] return book (by: Jun 06 2020)
+[D][DONE] return book (by: Jun 06 2020)
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[E][✗] project meeting (at: Aug 06 2020)
+[E][NOT DONE] project meeting (at: Aug 06 2020)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[T][✗] join sports club
+[T][NOT DONE] join sports club
 Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
-[T][✓] join sports club
+[T][DONE] join sports club
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[T][✗] borrow book
+[T][NOT DONE] borrow book
 Now you have 5 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[T][✓] read book
-2.[D][✓] return book (by: Jun 06 2020)
-3.[E][✗] project meeting (at: Aug 06 2020)
-4.[T][✓] join sports club
-5.[T][✗] borrow book
+1.[T][DONE] read book
+2.[D][DONE] return book (by: Jun 06 2020)
+3.[E][NOT DONE] project meeting (at: Aug 06 2020)
+4.[T][DONE] join sports club
+5.[T][NOT DONE] borrow book
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
-[E][✗] project meeting (at: Aug 06 2020)
+[E][NOT DONE] project meeting (at: Aug 06 2020)
 Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 The following deadlines/events are scheduled on Jun 06 2020.
-1.[D][✓] return book (by: Jun 06 2020)
+1.[D][DONE] return book (by: Jun 06 2020)
 ____________________________________________________________
 ____________________________________________________________
 There are no deadlines/events scheduled on Jan 01 2020.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[T][✓] read book
-2.[D][✓] return book (by: Jun 06 2020)
-3.[T][✓] join sports club
-4.[T][✗] borrow book
+1.[T][DONE] read book
+2.[D][DONE] return book (by: Jun 06 2020)
+3.[T][DONE] join sports club
+4.[T][NOT DONE] borrow book
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!
