@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * Encapsulates details of a Task
+ * Encapsulates details of a duke.Task
  */
 public class Task {
     protected String description;

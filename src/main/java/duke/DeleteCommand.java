@@ -1,3 +1,5 @@
+package duke;
+
 public class DeleteCommand extends Command {
     public DeleteCommand(String[] parsedCommand) {
         super(parsedCommand);

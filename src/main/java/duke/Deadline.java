@@ -1,11 +1,13 @@
+package duke;
+
 /**
- * Encapsulates a Deadline item
+ * Encapsulates a duke.Deadline item
  */
 public class Deadline extends Task {
     String endDate;
 
     /**
-     * Instantiates a Deadline with a description of it.
+     * Instantiates a duke.Deadline with a description of it.
      * @param description the description of the deadline
      * @param endDate the end date of the deadline
      */
@@ -48,7 +50,7 @@ public class Deadline extends Task {
     @Override
     String toStorageRepresentation() {
         String result;
-        result = "Deadline" + "|";
+        result = "duke.Deadline" + "|";
         result += this.isDone ? "1" : "0";
         result += "|";
         result += this.description;

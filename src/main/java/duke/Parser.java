@@ -1,11 +1,13 @@
+package duke;
+
 /**
- * Encapsulates Parser functionality to parse user input
+ * Encapsulates duke.Parser functionality to parse user input
  */
 public class Parser {
     /**
      * Splits user input into command and description to facilitate processing.
      * @param fullCommand full user input
-     * @return the appropriate Command
+     * @return the appropriate duke.Command
      * @throws DukeException if user input is invalid
      */
     static Command parse(String fullCommand) throws DukeException {
@@ -15,10 +17,10 @@ public class Parser {
     }
 
     /**
-     * Invokes the correct Command object based on the user's command
+     * Invokes the correct duke.Command object based on the user's command
      * @param command user's command input
      * @param parsedCommand user's parsed input
-     * @return the appropriate Command
+     * @return the appropriate duke.Command
      * @throws DukeException if user input is invalid
      */
     static Command callCommand(String command, String[] parsedCommand) throws DukeException {

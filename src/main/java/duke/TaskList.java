@@ -1,21 +1,23 @@
+package duke;
+
 import java.util.ArrayList;
 
 /**
- * Encapsulates the TaskList containing the tasks.
- * @param <Task> the Task objects
+ * Encapsulates the duke.TaskList containing the tasks.
+ * @param <Task> the duke.Task objects
  */
 public class TaskList<Task> {
     ArrayList<Task> taskList;
 
     /**
-     * Instantiates new TaskList object to store Tasks.
+     * Instantiates new duke.TaskList object to store Tasks.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
     /**
-     * Instantiates TaskList Object to store existing Tasks.
+     * Instantiates duke.TaskList Object to store existing Tasks.
      * @param taskList
      */
     public TaskList(ArrayList<Task> taskList) {
@@ -23,7 +25,7 @@ public class TaskList<Task> {
     }
 
     /**
-     * Check if TaskList is empty.
+     * Check if duke.TaskList is empty.
      * @return if taskList is empty or not
      */
     boolean isEmpty() {
@@ -31,8 +33,8 @@ public class TaskList<Task> {
     }
 
     /**
-     * Checks TaskList size.
-     * @return the size of the TaskList
+     * Checks duke.TaskList size.
+     * @return the size of the duke.TaskList
      */
     int size() {
         return taskList.size();
@@ -48,7 +50,7 @@ public class TaskList<Task> {
     }
 
     /**
-     * Replaces a new Task at given position in line with immutability.
+     * Replaces a new duke.Task at given position in line with immutability.
      * @param position the position of the task
      * @param newTask the new task to input
      */
@@ -57,7 +59,7 @@ public class TaskList<Task> {
     }
 
     /**
-     * Adds a Task to TaskList.
+     * Adds a duke.Task to duke.TaskList.
      * @param taskToDo the task to be added
      */
     void add(Task taskToDo) {
@@ -65,7 +67,7 @@ public class TaskList<Task> {
     }
 
     /**
-     * Removes a Task from the TaskList.
+     * Removes a duke.Task from the duke.TaskList.
      * @param taskToRemove the task to be removed
      */
     void remove(Task taskToRemove) {
@@ -73,7 +75,7 @@ public class TaskList<Task> {
     }
 
     /**
-     * Exports the TaskList as an arrayList for easier processing.
+     * Exports the duke.TaskList as an arrayList for easier processing.
      * @return the arrayList containing the Tasks
      */
     ArrayList<Task> exportList() {

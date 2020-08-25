@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Encapsulates the error handling and printing of messages
  */

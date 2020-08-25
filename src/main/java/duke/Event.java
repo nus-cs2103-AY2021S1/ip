@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * Encapsulates an Event task
+ * Encapsulates an duke.Event task
  */
 public class Event extends Task {
     String timing;
@@ -48,7 +50,7 @@ public class Event extends Task {
     @Override
     String toStorageRepresentation() {
         String result;
-        result = "Event" + "|";
+        result = "duke.Event" + "|";
         result += this.isDone ? "1" : "0";
         result += "|";
         result += this.description;

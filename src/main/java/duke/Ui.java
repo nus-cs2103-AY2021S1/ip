@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * Encapsulates the Ui and its behavior.
+ * Encapsulates the duke.Ui and its behavior.
  */
 public class Ui {
 

@@ -1,3 +1,5 @@
+package duke;
+
 public class AddToDoCommand extends Command {
     public AddToDoCommand(String[] parsedCommand) {
         super(parsedCommand);

@@ -1,3 +1,5 @@
+package duke;
+
 public class AddEventCommand extends Command {
     public AddEventCommand(String[] parsedCommand) {
         super(parsedCommand);

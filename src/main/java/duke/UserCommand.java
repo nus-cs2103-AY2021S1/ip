@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Encapsulates all the commands recognised by chaBot
  */
