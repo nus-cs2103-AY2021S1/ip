@@ -33,7 +33,7 @@ public class Parser {
         case "clear":
             return new ClearCommand();
         default:
-            return new InvalidCommand();
+            return new InvalidCommand(input);
         }
     }
 
@@ -43,25 +43,30 @@ public class Parser {
         String lowerCaseOperation = stringArr[0].toLowerCase();
         if (stringArr.length != 2 ) {
             // if multiple tasks are given as arguments
-            throw new DukeException("\u2639 Oops, pls enter only one task number after " + lowerCaseOperation);
+            throw new DukeException("\u2639 Oops, too many task numbers after " + lowerCaseOperation);
         }
         try {
             // Finding the actual task
             int indexOfTask = Integer.parseInt(stringArr[1]) - 1;
             return handler.getTaskList().get(indexOfTask);
-        } catch (IndexOutOfBoundsException | NumberFormatException e){
-            throw new DukeException("\u2639 Oops, pls enter a valid task number after " + lowerCaseOperation);
+        } catch (IndexOutOfBoundsException e){
+            throw new DukeException("\u2639 Oops, " + '"' + stringArr[1] + '"' + " is not a valid task number for " + lowerCaseOperation);
+        } catch (NumberFormatException e){
+            throw new DukeException("\u2639 Oops, " + '"' + stringArr[1] + '"' + " is not a number");
         }
     }
 
     public static Task parseNewTaskCommand(String input, Task.taskType tasktype) throws DukeException {
         // Sorts the input into a task with or without time
+        try {
+            // if given empty arguments or space as task
+            String afterTask = input.split(" ")[1].trim();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("\u2639 Oops, the description of " + tasktype.toString().toLowerCase() + " cannot be empty");
+        }
+
         if (tasktype == Task.taskType.TODO) {
             // Without time
-            if (input.substring(4).trim().isEmpty()) {
-                // if given empty arguments or space as task
-                throw new DukeException("\u2639 Oops, the description of a todo cannot be empty.");
-            }
             String taskDesc = input.substring(5);
             return new Todo(taskDesc);
         }
@@ -69,13 +74,13 @@ public class Parser {
             try {
                 return parseTaskWithTime(input, tasktype, "/by");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("\u2639 Oops, use add deadline format: deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')]");
+                throw new DukeException("\u2639 Oops wrong format, use add deadline format: deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')]");
             }
         } else if (tasktype == Task.taskType.EVENT) {
             try {
                 return parseTaskWithTime(input, tasktype, "/at");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("\u2639 Oops, use add event format: event [task] /at [time]");
+                throw new DukeException("\u2639 Oops wrong format, use add event format: event [task] /at [time]");
             }
         } else {
             return new Task("this task should not be created", "todo");

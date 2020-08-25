@@ -67,6 +67,7 @@ public class Storage {
     }
 
     public ArrayList<Task> loadListFromFile() throws DukeException {
+        System.out.println("Loading from save file...");
         try {
             ArrayList<Task> list = new ArrayList<>();
             if (isEmptySave || savefile.length() == 0) {
@@ -85,9 +86,11 @@ public class Storage {
                 } else if (input.startsWith("deadline")) {
                     Task newDeadline = Parser.parseNewTaskCommand(input, Task.taskType.DEADLINE);
                     list.add(newDeadline);
-                } else {
+                } else if (input.startsWith("event")){
                     Task newEvent = Parser.parseNewTaskCommand(input, Task.taskType.EVENT);
                     list.add(newEvent);
+                } else {
+                    throw new DukeException("\u2639 Oops, error parsing " + '"' + input + '"' + " in save file");
                 }
             }
 
@@ -96,11 +99,13 @@ public class Storage {
                 int doneTaskIndex = Integer.parseInt(sc.next());
                 list.get(doneTaskIndex).markAsDone();
             }
-            System.out.println("Successfully loaded from save file: " + list.size() + " task(s)");
+            System.out.println("Successfully loaded: " + list.size() + " task(s)");
             return list;
 
-        } catch (IOException | NoSuchElementException | NumberFormatException e) {
-            throw new DukeException("\u2639 Oops, save file is corrupted!");
+        } catch (IOException e1) {
+            throw new DukeException("\u2639 Oops, error reading from " + location + filename);
+        } catch (NoSuchElementException | NumberFormatException e) {
+            throw new DukeException("\u2639 Oops, save file is corrupted, error encountered " + e.getLocalizedMessage().toLowerCase());
         }
     }
 
@@ -152,7 +157,7 @@ public class Storage {
             }
             writer.flush();
         } catch (IOException e) {
-            throw new DukeException("\u2639 Oops, error finding savefile to write to.");
+            throw new DukeException("\u2639 Oops, error saving to save file");
         }
     }
 }

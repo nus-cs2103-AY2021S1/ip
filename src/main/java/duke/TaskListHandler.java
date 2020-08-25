@@ -28,7 +28,7 @@ public class TaskListHandler {
     public void printList() throws DukeException {
         if (taskList.isEmpty()) {
             // Asks user for tasks when printing empty list
-            throw new DukeException("\u2639 Oops, the list of tasks is empty, pls add tasks first.");
+            throw new DukeException("\u2639 Oops, the list of tasks is empty, pls add tasks first");
         }
         int listPos = 1;
         indent(1);
