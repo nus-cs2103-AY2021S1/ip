@@ -1,6 +1,6 @@
 import parser.Parser;
 import storage.Storage;
-import tasks.TaskList;
+import tasklist.TaskList;
 import ui.Ui;
 
 /**

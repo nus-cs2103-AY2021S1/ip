@@ -1,6 +1,11 @@
-package tasks;
+package tasklist;
 
 import storage.Storage;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
+
 import java.util.ArrayList;
 
 import static java.lang.Integer.parseInt;

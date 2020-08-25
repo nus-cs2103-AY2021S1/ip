@@ -3,7 +3,7 @@ package parser;
 import DukeException.DukeException;
 import org.junit.jupiter.api.Test;
 import storage.Storage;
-import tasks.TaskList;
+import tasklist.TaskList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
