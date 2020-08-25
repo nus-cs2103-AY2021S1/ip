@@ -2,6 +2,9 @@ package utility;
 
 public class Ui {
 
+    /**
+     * Prints out the welcome text.
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -16,6 +19,9 @@ public class Ui {
         System.out.println(msg);
     }
 
+    /**
+     * Prints out a line.
+     */
     public void showLine() {
         System.out.println("____________________________________________________________");
     }

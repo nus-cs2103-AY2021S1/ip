@@ -13,12 +13,25 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
+    /**
+     * The directory path of the text file Duke reads and saves to.
+     */
     private String filePath;
 
+    /**
+     * Controls the reading and writing of data to hard disk.
+     * @param filePath The directory path of the text file Duke reads and saves to.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * returns the index of a specified character (first instance) in a string
+     * @param s The String input.
+     * @param target The character input.
+     * @return index.
+     */
     public static int getPosition(String s, char target) {
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
@@ -29,6 +42,11 @@ public class Storage {
         return -1;
     }
 
+    /**
+     * Reads the text file into ArrayList format to start the program
+     * @return ArrayList that will be the TaskList
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -62,6 +80,11 @@ public class Storage {
         return newList;
     }
 
+    /**
+     * Saves the tasks to a text file.
+     * @param ls the TaskList used.
+     * @throws IOException
+     */
     public void writeToFile(ArrayList<Task> ls) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         String textToAdd = "";

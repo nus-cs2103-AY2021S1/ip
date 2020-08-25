@@ -5,11 +5,30 @@ import java.util.Scanner;
 
 public class Duke {
 
+    /**
+     * Used for printing messages to enhance user experience.
+     */
     private Ui ui;
+
+    /**
+     * Controls the reading and writing of data to hard disk.
+     */
     private Storage storage;
+
+    /**
+     * Data structure for managing tasks.
+     */
     private TaskList tasks;
+
+    /**
+     * Responsible for reading user input and parsing it.
+     */
     private Parser parser;
 
+    /**
+     * Creates Duke, a personal assistant bot.
+     * @param filePath The directory path of the text file Duke reads and saves to.
+     */
     Duke(String filePath) {
         ui = new Ui();
         parser = new Parser();
@@ -18,9 +37,13 @@ public class Duke {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            tasks = new TaskList();
         }
     }
 
+    /**
+     * Starts the Duke personal assistant bot.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);  // Create a Scanner object
         ui.showWelcome();
@@ -64,6 +87,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Main program
+     * @param args
+     * @throws DukeException
+     * @throws FileNotFoundException
+     */
     public static void main(String[] args) throws DukeException, FileNotFoundException {
         new Duke("data.txt").run();
     }

@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Parser {
+
+    /**
+     * Reads user input and takes the first word to convert it
+     * into ENUM format.
+     * @param input User input in string.
+     * @return Choice ENUM
+     * @throws DukeException
+     */
     public Choice parseCommand(String input) throws DukeException {
         ArrayList<String> commands = new ArrayList<>(
                 Arrays.asList("DONE", "LIST", "DEADLINE", "EVENT", "TODO", "BYE", "DELETE"));
