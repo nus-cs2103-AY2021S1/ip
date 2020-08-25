@@ -1,11 +1,6 @@
 
-import java.io.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,25 +10,27 @@ public class Duke {
     static String sadFace = "(>人<)";
     static String spacing = "    ";
 
-    List<Task> ls = new ArrayList<>();
-
-
-    String folderPath = "data";
-    String filePath = folderPath + "/duke.txt";
-
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+    private Storage storage;
+    private TaskList tasks;
+    private UI ui;
 
 
     public static void main(String[] args) {
         System.out.println(face + spacing + "Hey hey I'm Poco");
-        Duke bot = new Duke();
+        Duke bot = new Duke("data/duke.txt");
         bot.processInput();
 
     }
 
-    void processInput() {
-        loadFile();
+    public Duke(String filePath) {
+        ui = new UI();
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.loadFile());
+    }
 
+    void processInput() {
         Scanner sc = new Scanner(System.in);
         String msg = sc.nextLine();
         while(!msg.equals("bye")) {
@@ -68,14 +65,11 @@ public class Duke {
     }
 
     void displayList() {
-        int count = 1;
         System.out.println(face3);
-        for(Task todo: ls) {
-            System.out.println(count + ". " + todo.toString());
-            count++;
-        }
-        if(count == 1) {
-            System.out.println("No more tasks! Poco is happy for you");
+        if(tasks.size() == 0) {
+            System.out.println("Yay, all done!");
+        } else {
+            System.out.println(tasks.toString());
         }
     }
 
@@ -86,115 +80,51 @@ public class Duke {
             String[] sp = new String[]{msg};
             switch (type) {
                 case TODO:
-                    ls.add(new ToDo(msg));
+                    tasks.add(new ToDo(msg));
                     break;
                 case EVENT:
                     sp = msg.split("/");
                     LocalDateTime ldt = LocalDateTime.parse(sp[1].trim(), formatter);
-                    ls.add(new Event(sp[0], ldt));
+                    tasks.add(new Event(sp[0], ldt));
                     break;
                 case DEADLINE:
-                    sp = msg.split(" /");
+                    sp = msg.split("/");
                     LocalDateTime ld = LocalDateTime.parse(sp[1].trim(), formatter);
-                    ls.add(new Deadline(sp[0], ld));
+                    tasks.add(new Deadline(sp[0], ld));
                     break;
             }
             System.out.println(face2 + spacing + "Poco has added " + sp[0] + " to your list");
-            System.out.println("Pending Tasks: " + ls.size());
+            System.out.println("Pending Tasks: " + tasks.size());
         }
-
-        saveFile();
-
+        storage.saveFile(tasks);
     }
 
     void done(int index) {
         index--;
-        if(index < 0 || index >= ls.size()) {
+        if(index < 0 || index >= tasks.size()) {
             System.out.println(sadFace + spacing + "Poco cannot find the task: " + index);
         } else {
-            ls.get(index).done();
+            tasks.done(index);
             System.out.println(face2 + spacing + "Good job!");
-            System.out.println(ls.get(index).toString());
+            System.out.println(tasks.get(index).toString());
         }
-
-        saveFile();
+        storage.saveFile(tasks);
     }
 
     void delete(int index) {
         index--;
-        if(index < 0 || index >= ls.size()) {
+        if(index < 0 || index >= tasks.size()) {
             index++;
             System.out.println(sadFace + spacing + "Poco cannot find the task: " + index);
         } else {
             System.out.println(face3 + spacing + "Poco has deleted the task");
-            System.out.println(ls.get(index).toString());
-            ls.remove(index);
+            System.out.println(tasks.get(index).toString());
+            tasks.remove(index);
         }
-
-        saveFile();
+        storage.saveFile(tasks);
     }
 
-    void loadFile() {
-        initFile();
 
-        try {
-            File f = new File(this.filePath);
-            BufferedReader reader = new BufferedReader(new FileReader(f));
-            //loads txt into ls
-            while(true) {
-                String line = reader.readLine();
-                if(line == null || line.isEmpty()) {
-                    //no more tasks
-                    break;
-                }
-                Task task = Task.parseToTask(line);
-                if(task != null) {
-                    ls.add(task);
-                }
-            }
-
-            reader.close();
-        } catch (IOException ex) {
-            System.out.println(ex.toString());
-        }
-
-    }
-
-    void saveFile() {
-        File f = new File(this.filePath);
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(f));
-            for(Task task : ls) {
-                writer.write(task.toString());
-                writer.newLine();
-            }
-            writer.close();
-        } catch (IOException ex) {
-            System.out.println(ex.toString());
-        }
-    }
-
-    void initFile() {
-        File dir = new File (this.folderPath);
-        //create dir if not there
-        if(!dir.isDirectory() ) {
-            if(!dir.mkdir()) {
-                System.out.println("Error creating folder");
-            }
-        }
-
-        File f = new File(this.filePath);
-        //create file if not there
-        if(!f.exists()) {
-            try {
-                if(!f.createNewFile()) {
-                    System.out.println("Error creating file");
-                }
-            } catch (IOException ex) {
-                System.out.println(ex.toString());
-            }
-        }
-    }
 }
 
 enum Type {
