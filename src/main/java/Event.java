@@ -3,8 +3,8 @@ public class Event extends Task {
 
     protected String at;
 
-    public Event(String description, String at) {
-        super(description.trim());
+    public Event(String description, String at, boolean isDone) {
+        super(description.trim(), isDone);
         this.at = at.trim();
     }
 

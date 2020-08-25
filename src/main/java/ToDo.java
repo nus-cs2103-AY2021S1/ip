@@ -1,8 +1,8 @@
 // partial solution copied from iP
 public class ToDo extends Task {
 
-    public ToDo(String description) {
-        super(description.trim());
+    public ToDo(String description, boolean isDone) {
+        super(description.trim(), isDone);
     }
 
     @Override
