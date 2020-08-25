@@ -8,7 +8,6 @@ public class Luke {
     public static void main(String[] args) {
         File tlFile = new File("./data/", "luke.txt");
         Scanner sc = new Scanner(System.in);
-//        ArrayList<Task> taskList = new ArrayList<>();
         TaskList taskList = new TaskList();
         taskList.readTasks(tlFile);
         System.out.printf("Luke:\n\tHey there! I'm Luke.\n\tPlease tell me what to add to your list.\nYou:\n");
