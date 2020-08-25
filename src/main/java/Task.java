@@ -11,7 +11,7 @@ public class Task {
         return this.task;
     }
 
-    public boolean getDone() {
+    public boolean isDone() {
         return this.done;
     }
 
