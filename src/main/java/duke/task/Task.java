@@ -8,7 +8,7 @@ package duke.task;
  */
 public abstract class Task {
     /** Description of the task. */
-    protected String description;
+    private String description;
     /** Represents task as done or not done. */
     protected boolean isDone;
 
@@ -63,5 +63,9 @@ public abstract class Task {
     public String toStoredTextString() {
         String done = (isDone) ? "1" : "0";
         return done + " | " + description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
