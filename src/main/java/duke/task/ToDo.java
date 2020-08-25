@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Class that represents a to do item in the taskList.
+ */
 public class ToDo extends Task {
     public ToDo(String description) {
         super(description);
@@ -9,11 +12,19 @@ public class ToDo extends Task {
         super(description, isDone);
     }
 
+    /**
+     * Shows the status and type of task.
+     * @return [T] and tick or cross depending in the status.
+     */
     @Override
     public String getStatusIcon() {
         return String.format("[T]%s ", super.getStatusIcon());
     }
 
+    /**
+     * Returns a string that can be stored in data.txt.
+     * @return String that has the details of this object.
+     */
     @Override
     public String writeToFile() {
         int done = isDone ? 1 : 0;
