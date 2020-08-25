@@ -2,11 +2,20 @@ package duke;
 
 import duke.commands.*;
 
+/**
+ * Parses user input to make sense of the command and find out what user wants.
+ */
 public class Parser {
     private Commands command;
     boolean entered = false;
     String description = "";
 
+    /**
+     * Parses user input and finds out of user input is valid and if it is, which specific command is given.
+     *
+     * @param description User input containing command and tasks description.
+     * @return Specific command that user keyed in.
+     */
     public Command findCommand(String description) throws DukeException {
         if (description.length() == 0 && entered) {
             throw new DukeException("there's no commands");
@@ -71,13 +80,5 @@ public class Parser {
             entered = true;
             throw new DukeException("type in 'todo', 'deadline', 'event' to start!\nAlso, type 'date' and key in a date in YYYY-MM-DD format to search for events/deadlines happening on that date!");
         }
-    }
-
-    public Commands getCommand() {
-        return this.command;
-    }
-
-    public String getDescription() {
-        return this.description;
     }
 }

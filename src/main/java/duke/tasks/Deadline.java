@@ -6,14 +6,28 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Type of task which includes end date.
+ */
 public class Deadline extends Task {
     String date;
 
+    /**
+     * Constructor to create Deadline object.
+     *
+     * @param description description of the task.
+     * @param date date of deadline.
+     */
     public Deadline(String description, String date) {
         super(description);
         this.date = date;
     }
 
+    /**
+     * Gets the date of deadline.
+     *
+     * @return date of the deadline.
+     */
     public String getDate() {
         return this.date;
     }
@@ -31,6 +45,13 @@ public class Deadline extends Task {
         return d1;
     }
 
+    /**
+     * Checks if the date provided exists in the list.
+     *
+     * @param date date that is being searched for in the list.
+     * @return true or false if date is in list or not.
+     * @throws DukeException if description provided does not match format of date.
+     */
     public boolean hasDate(String date) throws DukeException {
         try {
             LocalDate d1 = LocalDate.parse(date);
@@ -50,6 +71,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Prints out the task in correct format.
+     *
+     * @return task in the form of a string.
+     */
     public String toString() {
         return "[D][" + getStatusIcon() + "] " + this.description + "(by:" + convertDate() + ")";
     }

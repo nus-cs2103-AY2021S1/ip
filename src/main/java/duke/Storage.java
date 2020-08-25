@@ -13,10 +13,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 
+/**
+ * Saves and stores tasks that user has input.
+ */
 public class Storage {
     private String database;
     private List<Task> list = new ArrayList<>();
 
+    /**
+     * Reads the text file 'database.txt' which contains the saved tasks user input previously.
+     *
+     * @return List of tasks which user had from the last time they used the program.
+     */
     public List<Task> readFile() throws DukeException {
         String currentDirectory = System.getProperty("user.dir");
         File dataFolder = new File(currentDirectory + File.separator + "data");
@@ -71,6 +79,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the list of tasks into text file 'database.txt' and saves it for future use.
+     *
+     * @param tasks current list of tasks of user.
+     */
     public void save(List<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(this.database);
         for (Task task : tasks) {
