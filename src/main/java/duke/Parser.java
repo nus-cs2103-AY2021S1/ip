@@ -22,6 +22,10 @@ public class Parser {
         return line.length() >= 6 && line.substring(0, 6).equals("delete");
     }
 
+    public static boolean isFind(String line) {
+        return line.length() >= 4 && line.substring(0, 4).equals("find");
+    }
+
     public static TaskType taskType(String line) throws InvalidParameterException {
         if (line.length() > 8
             && line.substring(0, 8).equals("deadline")

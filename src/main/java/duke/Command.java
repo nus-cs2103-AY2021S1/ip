@@ -37,6 +37,18 @@ public class Command {
                 Ui.commandError();
             }
         }
+        else if (Parser.isFind(line)) {
+            try {
+                String word = line.substring(5);
+                TaskList.findTask(word);
+            }
+            catch (IOException e) {
+                Ui.fileError();
+            }
+            catch (Exception e) {
+                Ui.commandError();
+            }
+        }
         else if (Parser.isDelete(line)) {
             try {
                 int index = Integer.parseInt(line.substring(7));

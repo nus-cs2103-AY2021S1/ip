@@ -16,6 +16,9 @@ public class TaskList {
 
     public static void add(TaskType type, String taskName) throws IOException {
         try {
+            if (taskList.size() == 0) {
+                reloadList();
+            }
             Todo todo = new Todo(taskName);
             taskList.add(todo);
             Storage.addToList(TaskType.TODO, 0, taskName, "");
@@ -29,6 +32,9 @@ public class TaskList {
 
     public static void add(TaskType type, String taskName, String time) throws IOException {
         try {
+            if (taskList.size() == 0) {
+                reloadList();
+            }
             if (type == TaskType.DEADLINE) {
                 Deadline deadline = new Deadline(taskName, time);
                 taskList.add(deadline);
@@ -52,7 +58,47 @@ public class TaskList {
         return taskList;
     }
 
+    public static void reloadList() throws IOException {
+        taskList = Storage.readList();
+    }
+
+    public static void findTask(String word) throws IOException, InvalidParameterException {
+        if (word.isBlank()) {
+            throw new InvalidParameterException("Invalid input");
+        }
+        int n = taskList.size();
+        if (n == 0) { // empty or uninitialized
+            reloadList();
+            n = taskList.size();
+            if (n == 0) {
+                Ui.userMessage("There is no task in the list :)");
+                return;
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:");
+        int count = 1;
+        boolean found = false;
+        for (int i = 1; i <= n; i++) {
+            String task = taskList.get(i - 1).toString();
+            if (task.contains(word)) {
+                sb.append("\n").append(count).append(". ").append(task);
+                found = true;
+                count++;
+            }
+        }
+        if (!found) {
+            Ui.userMessage("There is no match in the list :(");
+        }
+        else {
+            Ui.userMessage(sb.toString());
+        }
+    }
+
     public static void setDone(int index) throws InvalidParameterException, IOException {
+        if (taskList.size() == 0) {
+            reloadList();
+        }
         if (index > taskList.size() || index <= 0) {
             throw new InvalidParameterException("Out of bound");
         }
@@ -63,6 +109,9 @@ public class TaskList {
     }
 
     public static void delete(int index) throws InvalidParameterException, IOException {
+        if (taskList.size() == 0) {
+            reloadList();
+        }
         if (index > taskList.size() || index <= 0) {
             throw new InvalidParameterException("Out of bound");
         }
@@ -77,7 +126,7 @@ public class TaskList {
         try {
             int n = taskList.size();
             if (n == 0) { // empty or uninitialized
-                taskList = Storage.readList();
+                reloadList();
                 n = taskList.size();
                 if (n == 0) {
                     Ui.userMessage("There is no task in the list :)");
