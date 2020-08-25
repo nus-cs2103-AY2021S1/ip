@@ -9,10 +9,17 @@ import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 
+/**
+ * The {@code Storage} class stores and retrieves tasks.
+ */
 public class Storage {
 
     private File file;
 
+    /**
+     * Initialises a Storage object by creating a new file or retrieving
+     * an existing file if possible.
+     */
     public Storage() {
         Path path = Paths.get("data/");
         try {
@@ -63,6 +70,11 @@ public class Storage {
         return t;
     }
 
+    /**
+     * Overrides (if existing file exists) and saves a {@code TaskList} to the file in the filepath.
+     * 
+     * @param p {@code TaskList} to be saved into file.
+     */
     public void updateList(TaskList p) {
 
         try {
@@ -78,6 +90,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Retrieves tasks (if present) from file in filepath and loads it into the {@code TaskList}.
+     * 
+     * @param p {@code TaskList} that will be loaded with tasks from previous iterations if present.
+     */
     public void loadList(TaskList p) {
         try {
             FileReader fr = new FileReader(this.file.getPath());
