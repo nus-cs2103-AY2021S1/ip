@@ -15,7 +15,7 @@ public class Event extends Task {
 
     public Event(String description, boolean isDone, String timeOfEvent) {
         super(description, isDone);
-        this.timeOfEvent = timeOfEvent;
+        this.timeOfEvent = LocalDateTime.parse(timeOfEvent);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class Event extends Task {
                 : "0";
         output[1] = "Event";
         output[2] = description;
-        output[3] = timeOfEvent;
+        output[3] = timeOfEvent.toString();
 
         return output;
     }
