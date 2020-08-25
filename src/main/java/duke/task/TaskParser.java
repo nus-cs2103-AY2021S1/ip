@@ -11,11 +11,11 @@ import java.util.List;
 
 public class TaskParser {
 
-    private static final String TO_DO = "todo";
-    private static final String DEADLINE = "deadline";
-    private static final String EVENT = "event";
+    protected static final String TO_DO = "todo";
+    protected static final String DEADLINE = "deadline";
+    protected static final String EVENT = "event";
 
-    private static final List<String> validTaskTypes;
+    protected static final List<String> validTaskTypes;
 
     static {
         validTaskTypes = new ArrayList<>();
@@ -41,7 +41,7 @@ public class TaskParser {
             addedTask = new Event(details[1]);
             break;
         default:
-            throw new DukeException("Not a valid type of command!");
+            throw new DukeException(details[0] + " is not a valid type of command!");
         }
         return addedTask;
 
