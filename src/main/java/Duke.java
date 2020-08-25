@@ -1,7 +1,6 @@
 /*input
 todo borrow book
-todo borrow store
-delete 1
+todo borrow A
 bye
 */
 import java.util.*;
@@ -24,10 +23,13 @@ public class Duke {
                     todoManager.listTask();
                 } else if (command.startsWith("done")) {
                     todoManager.markDone(command.substring(5));
+                    todoManager.writeToFile();
                 } else if (command.startsWith("deadline") || command.startsWith("event") || command.startsWith("todo")) {
                     todoManager.addTask(command);
+                    todoManager.writeToFile();
                 } else if (command.startsWith("delete")) {
                     todoManager.delete(command.substring(7));
+                    todoManager.writeToFile();
                 } else {
                     throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -37,7 +39,6 @@ public class Duke {
                 System.out.println(Helper.horiLine);
             }
         }
-
 
     }
 }
