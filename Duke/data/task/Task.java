@@ -1,10 +1,12 @@
-package Duke;
+package Duke.data.task;
+
+import java.util.Objects;
 
 /**
  * The task class that represents a task.
  *
  * @author Zeng Yu Ting
- * @version 1.0
+ * @version 3.0
  * @since 2020-15-08
  */
 public class Task {
@@ -32,7 +34,6 @@ public class Task {
      */
     public boolean markAsDone() {
         isDone = true;
-        System.out.println(this);
         return true;
     }
 
@@ -49,6 +50,7 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
+
 
     public String toWriteString() { return " | "+ (isDone ? "1" : "0") + " | " + description;}
 }

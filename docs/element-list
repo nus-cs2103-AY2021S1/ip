@@ -1,1 +1,9 @@
 Duke
+Duke.commands
+Duke.commons
+Duke.data
+Duke.data.exception
+Duke.data.task
+Duke.parser
+Duke.storage
+Duke.ui

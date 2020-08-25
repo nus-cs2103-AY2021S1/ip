@@ -1,4 +1,4 @@
-package Duke;
+package Duke.data.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * The Event class that represents a event task.
  *
  * @author Zeng Yu Ting
- * @version 1.0
+ * @version 3.0
  * @since 2020-15-08
  */
 public class Event extends Task {
@@ -30,5 +30,7 @@ public class Event extends Task {
     /**
      * This method returns the string to be written for the event.
      */
-    public String toWriteString() { return "E " +  super.toWriteString() + " | " + dueDate; }
+    public String toWriteString() {
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return "E " +  super.toWriteString() + " | " + dueDate.format(dateFormat); }
 }

@@ -1,13 +1,14 @@
-package Duke;
+package Duke.data.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
 /**
- * The Deadline class that represents a Deadline task.
+ * The Deadline class that represents a event task.
  *
  * @author Zeng Yu Ting
- * @version 1.0
+ * @version 3.0
  * @since 2020-15-08
  */
 public class Deadline extends Task {
@@ -30,5 +31,7 @@ public class Deadline extends Task {
     /**
      * This method returns the string to be written for the deadline task.
      */
-    public String toWriteString() { return "D " +  super.toWriteString() + " | " + dueDate; }
+    public String toWriteString() {
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return "D " +  super.toWriteString() + " | " + dueDate.format(dateFormat); }
 }

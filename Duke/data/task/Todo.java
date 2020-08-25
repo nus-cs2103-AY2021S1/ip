@@ -1,10 +1,10 @@
-package Duke;
+package Duke.data.task;
 
 /**
  * The Todo class that represents a Todo task.
  *
  * @author Zeng Yu Ting
- * @version 1.0
+ * @version 3.0
  * @since 2020-15-08
  */
 public class Todo extends Task {
