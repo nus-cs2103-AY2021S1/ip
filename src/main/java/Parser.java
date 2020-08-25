@@ -64,6 +64,10 @@ public class Parser {
                             System.out.println(new DukeException("☹ OOPS!!! There is no task at that list number to delete!", e));
                             break;
                         }
+                    case FIND:
+                        String findWord = arr[1];
+                        taskList.findTask(findWord);
+                        ui.addLines(taskList.printOutKeyWordList());
                 }
 
 

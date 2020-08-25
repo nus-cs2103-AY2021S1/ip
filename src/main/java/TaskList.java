@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class TaskList implements Iterable<Task> {
 
     public ArrayList<Task> ListOfItems;
+    public ArrayList<Task> ListOfKeyWordItems = new ArrayList<>();
     public String line = "____________________________________________________________";
     TaskList() {
         this.ListOfItems = new ArrayList<>();
@@ -40,6 +41,26 @@ public class TaskList implements Iterable<Task> {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("List does not contain the number specified");
         }
+    }
+
+    public void findTask(String Keyword){
+        ListOfKeyWordItems.clear();
+       for (Task item : ListOfItems) {
+if (item.toString().indexOf(Keyword) != -1) {
+    ListOfKeyWordItems.add(item);
+} else {
+
+}
+       }
+
+    }
+
+    public String printOutKeyWordList() {
+        String list = "\nHere are the matching tasks in your list:\n";
+        for (int i = 0; i < ListOfKeyWordItems.size(); i++) {
+            list += String.format("%d.%s\n", i + 1, ListOfKeyWordItems.get(i).toString());
+        }
+        return list;
     }
 
     public String printOutList() {
