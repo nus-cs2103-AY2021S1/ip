@@ -26,10 +26,6 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
     public Task markAsDone() {
         return new Task(this.description, true);
     }
