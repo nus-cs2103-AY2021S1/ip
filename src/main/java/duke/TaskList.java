@@ -54,7 +54,7 @@ public class TaskList {
     }
 
     public Task deleteTask(int index) throws DukeException {
-        if (index-1 < 1 || index >= this.tasks.size()) {
+        if (index-1 < 1 || index > this.tasks.size()) {
             throw new DukeException("Task #" + index + "does not exist.\n" +
                     "To check for lists of Tasks, type \"list\"");
         }
