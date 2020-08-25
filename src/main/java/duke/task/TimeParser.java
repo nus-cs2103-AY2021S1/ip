@@ -1,14 +1,21 @@
 package duke.task;
 
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 // import java.time.temporal.ChronoUnit;
 
 public class TimeParser {
-        public static String parseTime(String str) {
-            LocalDate date = LocalDate.parse(str);
-            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        public static String parseTime(String str) throws DukeException {
+            try {
+                LocalDate date = LocalDate.parse(str);
+                return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Time cannot been processed. Give the time strictly in yyyy-mm-dd format.");
+            }
         }
 
         public static boolean isValidTime(String str) {
