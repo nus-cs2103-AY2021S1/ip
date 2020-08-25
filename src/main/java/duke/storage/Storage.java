@@ -16,9 +16,24 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.Scanner;
 
+/**
+ * Encapsulates the logic for storing tasks.
+ *
+ * It will create folders and file based on the given filePath in the constructor.
+ *
+ * A connection to the file is created and maintained once this class is instantiated.
+ */
 public class Storage {
     private final File file;
 
+    /**
+     * Constructs a Storage class.
+     *
+     * A connection to the file is created and maintained once this class is instantiated.
+     *
+     * @param filePath File to save the tasks in.
+     * @throws StorageException If the path cannot be created.
+     */
     public Storage(String filePath) throws StorageException {
         try {
             Path path = Path.of(filePath);
@@ -30,6 +45,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates the directory if missing.
+     *
+     * @param file The file instance to save the tasks in.
+     * @throws StorageException If the path cannot be created.
+     */
     private void createFileIfMissing(File file) throws StorageException {
         if (!file.exists()) {
             File parentDirectory = file.getParentFile();
@@ -51,6 +72,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads from the file and insert in the TaskList.
+     *
+     * @param taskList TaskList instance to insert into
+     * @return The given taskList.
+     * @throws StorageException If the file cannot be read or is missing.
+     */
     public TaskList load(TaskList taskList) throws StorageException {
         try {
             Scanner reader = new Scanner(file);
@@ -81,6 +109,13 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the taskList into file.
+     *
+     * @param taskList The taskList to read from.
+     * @return The File instance that has been newly written.
+     * @throws StorageException If the file is missing or the task cannot be represented in storage.
+     */
     public File save(TaskList taskList) throws StorageException {
         try {
             FileWriter writer = new FileWriter(file);
@@ -89,12 +124,19 @@ public class Storage {
         } catch (IOException e) {
             throw new StorageException("File remains missing even after initialisation.");
         } catch (TaskTypeDecodeException e) {
-            throw new StorageException("File contains unknown task types.");
+            throw new StorageException("One or more tasks cannot be saved.");
         }
 
         return file;
     }
 
+    /**
+     * Iterates through the given taskList to get each storage representation.
+     *
+     * @param taskList TaskList to iterate over.
+     * @return StringBuilder with the storage representations separated by \n.
+     * @throws TaskTypeDecodeException If the task cannot be properly represented in storage.
+     */
     private StringBuilder getStorageString(TaskList taskList) throws TaskTypeDecodeException {
         StringBuilder string = new StringBuilder();
         boolean isFirst = true;

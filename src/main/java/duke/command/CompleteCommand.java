@@ -6,8 +6,16 @@ import duke.task.Task;
 import duke.task.TaskException;
 import duke.task.TaskList;
 
+/**
+ * Encapsulates the logic for completing tasks.
+ */
 public class CompleteCommand extends Command {
 
+    /**
+     * Constructs a CompleteCommand.
+     *
+     * @param args Arguments for the command.
+     */
     public CompleteCommand(String args){
         super(args);
     }

@@ -6,8 +6,16 @@ import duke.task.InvalidTaskIndexException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Encapsulates the logic for deleting tasks.
+ */
 public class DeleteCommand extends Command {
 
+    /**
+     * Constructs a DeleteCommand.
+     *
+     * @param args Arguments for the command.
+     */
     public DeleteCommand(String args) {
         super(args);
     }
