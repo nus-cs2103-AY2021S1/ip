@@ -1,15 +1,21 @@
+package duke.command;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 public class Parser {
 
     private TaskList list;
     private boolean isExit;
 
-    Parser(TaskList list) {
+    public Parser(TaskList list) {
         this.list = list;
         this.isExit = false;
     }

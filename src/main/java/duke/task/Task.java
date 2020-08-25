@@ -1,3 +1,4 @@
+package duke.task;
 public abstract class Task {
 
     boolean done;
@@ -23,7 +24,7 @@ public abstract class Task {
         return "Guess you made a mistake huh?\n" + this.toString();
     }
 
-    String getSaveString() {
+    public String getSaveString() {
         String result = "";
         if (this.done) {
             result += "[1] ";

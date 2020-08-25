@@ -1,3 +1,4 @@
+package duke.task;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ public class TaskList {
     int activeTasks;
     int completedTasks;
 
-    TaskList() {
+    public TaskList() {
         this.list = new ArrayList<>();
         this.activeTasks = 0;
         this.completedTasks = 0;
