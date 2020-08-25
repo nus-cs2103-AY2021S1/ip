@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.Task;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -28,10 +29,17 @@ public class Ui {
         printReply("SAYONARA!");
     }
     
-    // Formatting and UI
     public static String replyFormatter(String reply) {
         String partition = "__________________________";
         return String.format(partition + "\n%s\n" + partition, reply);
+    }
+    
+    public static String listFormatter(List<Task> taskItems) {
+        String formattedListString = "";
+        for (int i = 0; i < taskItems.size(); i ++) {
+            formattedListString+= String.format("%d. %s\n", i + 1, taskItems.get(i));
+        }
+        return formattedListString;
     }
 
     public void showError(String errorMessage) {
@@ -51,8 +59,11 @@ public class Ui {
         printReply(replyFormatter(String.format("HAI. I've deleted this task:\n    %s\nNow you have %d tasks in the list"
                 , task.toString(), taskItems.getSize())));
     }
-
-
+    
+    public void findTaskReply(List<Task> matchingTasks) { 
+        printReply(replyFormatter(String.format("HAI. Here are matching tasks:\n%s",listFormatter(matchingTasks))));
+    }
+    
     public void printReply(String reply) {
         System.out.println(reply);
     }

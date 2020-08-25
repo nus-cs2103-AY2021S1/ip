@@ -1,6 +1,8 @@
+clear
 todo borrow book
-deadline return book /by 2020-12-2 
-event project meeting /at 2012-11-3
+deadline return book /by 2020-12-02
+event project meeting /at 2012-11-03
+find book
 list
 done 2
 list

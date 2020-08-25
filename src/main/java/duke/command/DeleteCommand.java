@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
     public void execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
         try {
             // parse for argument - item number
-            int itemNumber = Integer.parseInt(args.split(" ")[1]) - 1;
+            int itemNumber = Integer.parseInt(args.split(" ")[1]);
             Task task = taskItems.removeTask(itemNumber);
             ui.deleteTaskReply(task, taskItems);
             storage.saveTaskToMemory(taskItems.getAll());
