@@ -45,8 +45,8 @@ public class UiTest {
         new Ui().showTasks(new TaskList(testSample));
 
         String expected = "Here are the task(s) in your list:" + System.lineSeparator()
-                + "1. [T] [" + CROSS_ICON + "] read book\n"
-                + "2. [D] [" + CROSS_ICON + "] submit project (by: 20 Apr 2019)\n"
+                + "1. [T] [" + CROSS_ICON + "] read book" + System.lineSeparator()
+                + "2. [D] [" + CROSS_ICON + "] submit project (by: 20 Apr 2019)" + System.lineSeparator()
                 + "3. [E] [" + CROSS_ICON + "] shoppee (at: from 12 Apr 2019 to 2 Sep 2019)" + System.lineSeparator();
 
         String actual = outputStreamCaptor.toString();

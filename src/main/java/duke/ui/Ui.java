@@ -9,12 +9,12 @@ public class Ui {
     private static String horizontalLine = "________________________________________";
     
     public static void showWelcome() {
-        String logo = " ____        _\n"
-                + "|  _ \\ _   _| | _____\n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String greeting = "Hello human, I'm Duke the supporting chatbot\n"
+        String logo = " ____        _" + System.lineSeparator()
+                + "|  _ \\ _   _| | _____" + System.lineSeparator()
+                + "| | | | | | | |/ / _ \\" + System.lineSeparator()
+                + "| |_| | |_| |   <  __/" + System.lineSeparator()
+                + "|____/ \\__,_|_|\\_\\___|" + System.lineSeparator();
+        String greeting = "Hello human, I'm Duke the supporting chatbot" + System.lineSeparator()
                 + "What can I do for you?";
         System.out.println(logo);
         System.out.println(horizontalLine);
