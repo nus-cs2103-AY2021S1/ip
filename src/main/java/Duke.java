@@ -8,11 +8,21 @@ import duke.storage.DukeIOException;
 import duke.storage.Storage;
 import duke.task.*;
 
+/**
+ * The class Duke denotes the faithful robot.
+ *
+ * @author Alvin Chee
+ */
 public class Duke {
     private TaskList tasks;
     private Storage storage;
     private UI ui;
 
+    /**
+     * Constructs a Duke robot.
+     *
+     * @param filePath  FilePath to store the data file.
+     */
     Duke(String filePath) {
         ui = new UI();
         storage = new Storage(filePath);
@@ -20,6 +30,9 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Prints the list of tasks.
+     */
     public void printList() {
         System.out.println("\tHere are the tasks in your list:");
         for(int i = 0; i < tasks.size(); i++) {
@@ -27,6 +40,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Marks task with task index in taskInfo as done.
+     *
+     * @param taskInfo  Description of task.
+     */
     public void markTaskDone(String taskInfo) throws DukeIndexOutOfBoundsException{
         if (taskInfo.length() <= 5) {
             throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
@@ -48,6 +66,11 @@ public class Duke {
         tasks.add(index, task);
     }
 
+    /**
+     * Adds todos task to list of tasks.
+     *
+     * @param taskInfo  Description of todos task.
+     */
     public void handleToDo(String taskInfo) throws DukeInvalidCommandException{
         if (taskInfo.trim().equals("todo")) {
             throw new DukeInvalidCommandException("The command is incomplete handsome :D");
@@ -56,6 +79,11 @@ public class Duke {
         tasks.addTask(new ToDos(taskInfo));
     }
 
+    /**
+     * Adds deadline task to list of tasks.
+     *
+     * @param taskInfo  Description of deadline task.
+     */
     public void handleDeadLine(String taskInfo) throws DukeInvalidCommandException, DukeDateTimeParseException{
         taskInfo = taskInfo.replace("deadline", "");
         String[] stringArr = taskInfo.split("/by", 2);
@@ -67,6 +95,11 @@ public class Duke {
         tasks.addTask(new Deadlines(taskInfo, by));
     }
 
+    /**
+     * Adds event task to list of tasks.
+     *
+     * @param taskInfo  Description of event task.
+     */
     public void handleEvent(String taskInfo) throws DukeInvalidCommandException, DukeDateTimeParseException{
         taskInfo = taskInfo.replace("event", "");
         String[] stringArr = taskInfo.split("/at", 2);
@@ -78,6 +111,11 @@ public class Duke {
         tasks.addTask(new Events(taskInfo, at));
     }
 
+    /**
+     * Adds task to list of tasks based on type specified.
+     *
+     * @param task  Description of todos task.
+     */
     public void handleTask(String task) {
         switch(task) {
         case "bye" :
@@ -116,6 +154,10 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * Bot introduces and gets input from user.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.showIntro();
@@ -126,11 +168,20 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * Gets file path based on user's system.
+     */
     public static String getFilePath() {
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "Duke", "data", "tasks.text");
         return path.toString();
     }
+
+    /**
+     * Executes all the operations stated.
+     *
+     * @param args  String arrays of operations.
+     */
     public static void main(String[] args) throws DukeRunTimeException {
         new Duke(getFilePath()).run();
         /*String logo = " ____        _        \n"

@@ -4,11 +4,22 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The class Events denotes a Events task.
+ *
+ * @author Alvin Chee
+ */
 public class Events extends Task {
     private String at;
     private LocalDateTime localDateTime;
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a");
 
+    /**
+     * Constructs a Events task
+     *
+     * @param taskInfo  Task description information.
+     * @param at  String description of time.
+     */
     public Events(String taskInfo , String at) {
         super(taskInfo, TaskType.EVENT);
         this.at = at;
@@ -20,10 +31,20 @@ public class Events extends Task {
 
     }
 
+    /**
+     * Returns string description of deadline.
+     *
+     * @return String description of deadline.
+     */
     public String returnTime() {
         return this.at;
     }
 
+    /**
+     * Return a done events task.
+     *
+     * @return A done events task.
+     */
     @Override
     public Events doneTask() {
         super.done = true;
