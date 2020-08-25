@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -45,9 +46,9 @@ public class Storage {
                 if (title.equals("T")) {
                     this.list.add(new ToDo(description, isDone));
                 } else if (title.equals("D")) {
-                    this.list.add(new Deadline(description, isDone, arrOfString[3]));
+                    this.list.add(new Deadline(description, isDone, LocalDate.parse(arrOfString[3])));
                 } else if (title.equals("E")) {
-                    this.list.add(new Event(description, isDone, arrOfString[3]));
+                    this.list.add(new Event(description, isDone, LocalDate.parse(arrOfString[3])));
                 }
             }
             return this.list;
