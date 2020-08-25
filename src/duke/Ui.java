@@ -1,4 +1,4 @@
-package main.java;
+package duke;
 
 public class Ui {
     String logo = " _       _ \n"

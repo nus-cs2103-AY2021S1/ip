@@ -1,4 +1,4 @@
-package main.java;
+package duke;
 
 import java.io.IOException;
 import java.time.LocalDate;
