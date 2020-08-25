@@ -11,6 +11,7 @@ public abstract class Task {
     private boolean completed;
 
     public abstract String getTaskType();
+    public abstract String getTimeMarker();
 
     Task(boolean completed, String content, LocalDate time) {
         this.content = content;
@@ -34,7 +35,19 @@ public abstract class Task {
         completed = status;
     }
 
-    protected String getCompleteMark() {
+    private String getCompleteMark() {
         return isCompleted() ? "✔︎" : "✘";
+    }
+
+    @Override
+    public String toString() {
+        String timeMarker = getTimeMarker();
+        if (timeMarker != null) {
+            return String.format("[%s][%s] %s (%s: %s)",
+                getTaskType(), getCompleteMark(), getContent(), timeMarker, getTime());
+        } else {
+            return String.format("[%s][%s] %s",
+                getTaskType(), getCompleteMark(), getContent());
+        }
     }
 }

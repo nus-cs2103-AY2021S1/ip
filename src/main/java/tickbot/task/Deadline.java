@@ -13,10 +13,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toString() {
-        String mark = getCompleteMark();
-        String content = getContent();
-        LocalDate time = getTime();
-        return String.format("[D][%s] %s (by: %s)", mark, content, time);
+    public String getTimeMarker() {
+        return "by";
     }
 }

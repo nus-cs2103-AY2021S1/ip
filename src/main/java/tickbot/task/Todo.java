@@ -11,9 +11,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String toString() {
-        String mark = getCompleteMark();
-        String content = getContent();
-        return String.format("[T][%s] %s", mark, content);
+    public String getTimeMarker() {
+        return null;
     }
 }

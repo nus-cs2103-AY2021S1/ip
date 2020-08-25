@@ -13,10 +13,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String toString() {
-        String mark = getCompleteMark();
-        String content = getContent();
-        LocalDate time = getTime();
-        return String.format("[E][%s] %s (at: %s)", mark, content, time);
+    public String getTimeMarker() {
+        return "at";
     }
 }
