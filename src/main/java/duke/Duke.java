@@ -1,15 +1,12 @@
 package duke;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Duke {
 
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
 
-    public Duke(String filePath) throws Exception {
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -25,6 +22,7 @@ public class Duke {
     }
 
     public static void main(String[] args) throws Exception {
+        // remember to change filepath to "../../../data/duke.ser" during jar build
         Duke duke = new Duke("data/duke.ser");
         duke.run();
     }
