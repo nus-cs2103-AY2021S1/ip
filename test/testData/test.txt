@@ -1,3 +1,3 @@
 todo//test 1//false
-deadline//test 2//by//today//false
-event//test 3//by//today//false
+deadline//test 2//by//1986-04-08 12:30//false
+event//test 3//by//1986-04-08 12:30//false

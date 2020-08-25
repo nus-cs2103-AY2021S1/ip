@@ -17,6 +17,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+
     public static void main(String[] args) throws FileNotFoundException {
 
         File d = new File("data");
@@ -36,23 +37,12 @@ public class Duke {
             e.printStackTrace();
         }
 
+        System.out.println(Ui.welcomeMessage());
 
-
-        String welcomeMessage = (
-            "____________________________________________________________\n" +
-            "     Hello! I'm Duke\n" +
-            "     What can I do for you?\n" +
-            "____________________________________________________________\n"
-        );
-
-        System.out.println(welcomeMessage);
-
-
-
-        ArrayList<Task> inputList = new ArrayList<Task>();
+        TaskList inputList = new TaskList();
 
         try {
-            StringProcessor.readFileContents(f, inputList);
+            Storage.readFileContents(f, inputList);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
@@ -69,11 +59,7 @@ public class Duke {
 
             if (currInput.equals("list")) {
 
-                System.out.println("____________________________________________________________");
-                for (int i = 0; i < inputList.size(); i++) {
-                    System.out.println(inputList.get(i).toString());
-                }
-                System.out.println("____________________________________________________________");
+                System.out.println(Ui.printTaskList(inputList));
 
             } else if (splitString[0].equals("done")) {
                 // can add error handling exception in case out of bounds
@@ -81,53 +67,35 @@ public class Duke {
                 int index = Integer.parseInt(splitString[1]);
                 inputList.get(index - 1).setStatus(true);
 
-                System.out.println("____________________________________________________________");
-                for (int i = 0; i < inputList.size(); i++) {
-                    System.out.println(inputList.get(i).toString());
-                }
-                System.out.println("____________________________________________________________");
+                System.out.println(Ui.printTaskList(inputList));
 
             } else if (splitString[0].equals("delete")) {
                 // can add error handling exception in case out of bounds
                 int index = Integer.parseInt(splitString[1]);
                 inputList.remove(index - 1);
 
-                System.out.println("____________________________________________________________");
-                for (int i = 0; i < inputList.size(); i++) {
-                    System.out.println(inputList.get(i).toString());
-                }
-                System.out.println("____________________________________________________________");
+                System.out.println(Ui.printTaskList(inputList));
 
             }else {
                 try {
-                    Task currTask = StringProcessor.stringProcessor(currInput);
+                    Task currTask = Parser.parser(currInput);
                     inputList.add(currTask);
-                    System.out.println("____________________________________________________________");
-                    System.out.println(currTask.toString());
-                    System.out.println("____________________________________________________________\n");
+                    System.out.println(Ui.printTask(currTask));
                 } catch(Exception e) {
-                    System.out.println("DUKE DOES NOT UNDERSTAND YOU!!!@#%#$%^!@^%\n" + e + "\nTRY AGAIN!!!");
+                    System.out.println(Ui.unknownInputErrorMessage(e));
                 }
             }
-
-
 
             currInput = sc.nextLine();
         }
 
-        String endMessage = (
-            "____________________________________________________________\n" +
-            "     Bye. Hope to see you again soon!\n" +
-            "____________________________________________________________"
-        );
-
         try {
-            StringProcessor.writeToFile(f, inputList);
+            Storage.writeToFile(f, inputList);
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
 
-        System.out.println(endMessage);
+        System.out.println(Ui.endMessage());
 
         sc.close();
 
