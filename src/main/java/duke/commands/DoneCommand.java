@@ -11,6 +11,10 @@ import duke.utils.Colour;
 import duke.utils.ResourceHandler;
 import duke.utils.Ui;
 
+/**
+ * Represents the command which will mark a particular task as completed upon execution.
+ */
+
 public class DoneCommand extends Command {
     private int completedTaskIndex;
 

@@ -10,6 +10,11 @@ import duke.task.TaskManager;
 import duke.utils.Colour;
 import duke.utils.Ui;
 
+/**
+ * Represents the user command which will add a task to the taskManager
+ * when the command is executed.
+ */
+
 public class AddCommand extends Command{
     private Task task;
 

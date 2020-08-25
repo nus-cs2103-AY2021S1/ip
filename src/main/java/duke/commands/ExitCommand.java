@@ -10,6 +10,10 @@ import duke.utils.Colour;
 import duke.utils.ResourceHandler;
 import duke.utils.Ui;
 
+/**
+ * Represents the command which will display the farewell message to the user upon execution.
+ */
+
 public class ExitCommand extends Command{
     @Override
     public void executeCommand(TaskManager taskManager, Ui formatter, Storage storage) {

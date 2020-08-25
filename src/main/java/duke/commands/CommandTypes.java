@@ -6,6 +6,10 @@ import duke.utils.ResourceHandler;
 
 import java.util.regex.Pattern;
 
+/**
+ * Command types that the user can use.
+ */
+
 public enum CommandTypes {
     BYE {
         @Override

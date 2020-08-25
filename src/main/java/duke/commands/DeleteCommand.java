@@ -11,6 +11,10 @@ import duke.utils.Colour;
 import duke.utils.ResourceHandler;
 import duke.utils.Ui;
 
+/**
+ * Represents the command which will delete a particular task when it is executed.
+ */
+
 public class DeleteCommand extends Command {
     private int taskIndex;
 
