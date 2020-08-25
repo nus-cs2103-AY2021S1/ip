@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.util.ArrayList;
 
 public class TaskList {
@@ -15,36 +13,29 @@ public class TaskList {
     public TaskList(ArrayList<String> taskStrings) {
         tasks = new ArrayList<>();
         for (String taskString : taskStrings) {
-            try {
-                this.tasks.add(lineToTask(taskString));
-            } catch (DukeException ignored) {
-            }
+            this.tasks.add(lineToTask(taskString));
         }
     }
 
-    public Task lineToTask(String taskString) throws DukeException {
+    public Task lineToTask(String taskString) {
         String[] taskLine = taskString.split("~");
         Task task = null;
-        try {
-            switch (taskLine[0]) {
-                case "T":
-                    task = new ToDo(taskLine[2]);
-                    break;
-                case "D":
-                    task = new Deadline(taskLine[2], taskLine[3]);
-                    break;
-                case "E":
-                    task = new Event(taskLine[2], taskLine[3]);
-                    break;
-            }
-            if (taskLine[1].equals("1")) {
-                assert task != null;
-                task.markAsDone();
-            }
-            return task;
-        } catch (DukeException ex) {
-            throw ex;
+        switch (taskLine[0]) {
+            case "T":
+                task = new ToDo(taskLine[2]);
+                break;
+            case "D":
+                task = new Deadline(taskLine[2], taskLine[3]);
+                break;
+            case "E":
+                task = new Event(taskLine[2], taskLine[3]);
+                break;
         }
+        if (taskLine[1].equals("1")) {
+            assert task != null;
+            task.markAsDone();
+        }
+        return task;
     }
 
     public String listTasks() {
