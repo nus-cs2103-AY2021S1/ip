@@ -1,16 +1,20 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public class Event extends Task {
 
-    protected String at;
+    protected LocalDate time;
 
-    public Event(String description, boolean isDone, String at) {
+    public Event(String description, boolean isDone, LocalDate time) {
         super(description, isDone);
-        this.at = at;
+        this.time = time;
     }
     public String getTime(){
-        return this.at;
+        return time.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
     }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + getTime() + ")";
     }
 }

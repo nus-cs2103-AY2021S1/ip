@@ -1,14 +1,13 @@
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.IOException;
-
+import java.time.LocalDate;
 
 public class Duke {
     public void run() throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello! I'm Duke\n"+"What can I do for you?");
-        ArrayList<Task> listOfItems = FileReader.loadTaskFromFile();
+        ArrayList<Task> listOfItems = DataManager.loadTaskFromFile();
         String echo= sc.nextLine();
         while(!echo.equals("bye")) {
             try {
@@ -48,7 +47,7 @@ public class Duke {
                             throw new InvalidDeadlineException();
                         }
                         String[] tempString = echo.substring(9).split(" /by");
-                        Deadline newDeadline = new Deadline(tempString[0], false, tempString[1]);
+                        Deadline newDeadline = new Deadline(tempString[0], false, LocalDate.parse(tempString[1]));
                         listOfItems.add(newDeadline);
                         System.out.println("Got it. I've added this task:\n" + newDeadline.toString()
                                 + "\nNow you have " + listOfItems.size() + " tasks in total");
@@ -59,7 +58,7 @@ public class Duke {
                             throw new InvalidEventException();
                         }
                         String[] tempString = echo.substring(7).split(" /at");
-                        Event newEvent = new Event(tempString[0], false,  tempString[1]);
+                        Event newEvent = new Event(tempString[0], false,  LocalDate.parse(tempString[1]));
                         listOfItems.add(newEvent);
                         System.out.println("Got it. I've added this task:\n" + newEvent.toString()
                                 + "\nNow you have " + listOfItems.size() + " tasks in total");
@@ -74,7 +73,7 @@ public class Duke {
             }
             echo = sc.nextLine();
         }
-        FileReader.writeToFile(listOfItems);
+        DataManager.writeToFile(listOfItems);
         System.out.println("Bye. Hope to see you again soon!");
     }
 
