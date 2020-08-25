@@ -107,12 +107,22 @@ public class Duke {
             BufferedWriter bw = new BufferedWriter(fw);
             for (int i = 0; i < taskList.size(); i++) {
                 Task task = taskList.get(i);
-                TaskType type = task.returnTaskType();
+                TaskType taskType = task.returnTaskType();
+                char taskTypeChar = taskType.toString().charAt(1);
                 int status = task.returnDoneStatus();
                 String taskInfo = task.returnTaskInfo();
-                String when = task.returnWhen();
-                when = when == null ? "" : " : " + when.trim();
-                String toWrite = type.toString().trim() + " : " + status + " : " + taskInfo.trim() + when;
+                String when = "";
+                switch(taskTypeChar) {
+                case 'D' :
+                    Deadlines deadline = (Deadlines)taskList.get(i);
+                    when = " : " + deadline.returnTime().trim();
+                    break;
+                case 'E' :
+                    Events event = (Events)taskList.get(i);
+                    when = " : " + event.returnTime().trim();
+                    break;
+                }
+                String toWrite = taskType.toString().trim() + " : " + status + " : " + taskInfo.trim() + when;
                 bw.write(toWrite);
                 bw.newLine();
             }
@@ -217,3 +227,4 @@ public class Duke {
         System.out.println("Hello from\n" + logo);*/
     }
 }
+

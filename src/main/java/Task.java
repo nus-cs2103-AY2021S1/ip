@@ -1,7 +1,6 @@
 public class Task {
     private String taskInfo;
     private TaskType taskType;
-    private String when;
     protected boolean done;
     protected static final int undoneNo = 0;
     protected static final int doneNo = 1;
@@ -11,11 +10,6 @@ public class Task {
         this.taskType = taskType;
     }
 
-    public Task(String taskInfo, TaskType tasktype, String when) {
-        this.taskInfo = taskInfo;
-        this.taskType = tasktype;
-        this.when = when;
-    }
     public Task doneTask() {
         this.done = true;
         return this;
@@ -31,9 +25,6 @@ public class Task {
 
     public String returnTaskInfo() {
         return taskInfo;
-    }
-    public String returnWhen() {
-        return when;
     }
 
     @Override

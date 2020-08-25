@@ -2,8 +2,12 @@ public class Deadlines extends Task {
     private String by;
 
     Deadlines(String taskInfo , String by) {
-        super(taskInfo, TaskType.DEADLINE, by);
+        super(taskInfo, TaskType.DEADLINE);
         this.by = by;
+    }
+
+    public String returnTime() {
+        return by;
     }
 
     @Override
@@ -17,3 +21,4 @@ public class Deadlines extends Task {
         return String.format("%s (by: %s)", super.toString(), this.by);
     }
 }
+
