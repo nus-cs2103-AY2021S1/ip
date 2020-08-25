@@ -70,7 +70,6 @@ public class Storage {
             try {
                 FileWriter writer = new FileWriter(file);
                 writer.close();
-
                 for (Task t : arr) {
                     FileWriter fileWriter = new FileWriter(file, true);
                     fileWriter.write(t.writeToFile());
