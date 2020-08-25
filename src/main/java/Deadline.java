@@ -9,8 +9,8 @@ public class Deadline extends Task {
 
     Deadline(String description, String localDate, String localTime) {
         super(description);
-        this.localDate = localDate != null ? LocalDate.parse(localDate) : null;
-        this.localTime = localTime != null ? LocalTime.parse(localTime) : null;
+        this.localDate = localDate != "" ? LocalDate.parse(localDate) : null;
+        this.localTime = localTime != "" ? LocalTime.parse(localTime) : null;
     }
 
     public boolean hasDate() {
