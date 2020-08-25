@@ -4,7 +4,7 @@ public class Deadline extends Task {
 
     public Deadline(String deadlineTask, String byTime) {
         super(deadlineTask);
-        this.byTime = TimeParser.parseTime(byTime);
+        this.byTime = byTime;
     }
 
     @Override

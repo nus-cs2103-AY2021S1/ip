@@ -11,7 +11,7 @@ public class TimeParser {
 
         public static boolean isValidTime(String str) {
             String[] arr = str.split("-", 3);
-            System.out.println(Arrays.toString(arr));
+//            System.out.println(Arrays.toString(arr));
             if (arr.length == 3) {
                 int year = Integer.parseInt(arr[0]);
                 int month = Integer.parseInt(arr[1]);

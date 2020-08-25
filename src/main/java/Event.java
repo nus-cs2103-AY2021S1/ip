@@ -4,7 +4,7 @@ public class Event extends Task {
 
     public Event(String eventTask, String atTime) {
         super(eventTask);
-        this.atTime = TimeParser.parseTime(atTime);
+        this.atTime = atTime;
     }
 
     @Override

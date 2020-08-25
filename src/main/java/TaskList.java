@@ -1,11 +1,11 @@
 
 import java.util.ArrayList;
 
-public class TaskManager {
+public class TaskList {
     private ArrayList<Task> taskList;
     private static final String indentation = "     ";
 
-    public TaskManager() {
+    public TaskList() {
         taskList = new ArrayList<>();
     }
 
