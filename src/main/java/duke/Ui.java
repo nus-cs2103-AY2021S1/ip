@@ -37,13 +37,23 @@ public class Ui {
                 + line);
     }
 
-    public void printList(List<Task> taskList) {
+    private void printLine() {
         System.out.print(line);
+    }
+
+    public void printList(List<Task> taskList) {
+        if (taskList.size() == 0) {
+            printLine();
+            System.out.println(" Oops, no task YET. Try to add one!");
+            printLine();
+            return;
+        }
+        printLine();
         System.out.println(" Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println(" " + (i + 1) + ". " + taskList.get(i));
         }
-        System.out.println(line);
+        printLine();
     }
 
     public void printDone(Task task) {
@@ -67,6 +77,21 @@ public class Ui {
         System.out.println("   " + task
                 + "\n Now you have " + size + " tasks in the list.\n"
                 + line);
+    }
+
+    public void printFind(List<Task> findResult) {
+        if (findResult.size() == 0) {
+            printLine();
+            System.out.println(" No task founded. Try to add one!");
+            printLine();
+            return;
+        }
+        printLine();
+        System.out.println(" Here are the matching tasks in your list:");
+        for (int i = 0; i < findResult.size(); i++) {
+            System.out.println(" " + (i + 1) + ". " + findResult.get(i));
+        }
+        printLine();
     }
 
     public void bye() {
