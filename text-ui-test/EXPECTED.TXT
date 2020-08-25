@@ -35,13 +35,13 @@
     ____________________________________________________________
     ____________________________________________________________
      Okies! I've added this task~
-       [D][?] finish nekobot (by: 20 Aug)
+       [D][?] finish nekobot (by: Aug 20 2019, Tuesday)
      Now you have 2 tasks in the list uwu
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list!!
     1. [T][?] exercise
-    2. [D][?] finish nekobot (by: 20 Aug)
+    2. [D][?] finish nekobot (by: Aug 20 2019, Tuesday)
     ____________________________________________________________
     ____________________________________________________________
     Oh dear! Your task description seems to be incomplete :<
@@ -51,34 +51,34 @@
     ____________________________________________________________
     ____________________________________________________________
      Okies! I've added this task~
-       [E][?] sleep (at: tonight)
+       [E][?] sleep (at: Aug 17 2029, Friday)
      Now you have 3 tasks in the list uwu
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list!!
     1. [T][?] exercise
-    2. [D][?] finish nekobot (by: 20 Aug)
-    3. [E][?] sleep (at: tonight)
+    2. [D][?] finish nekobot (by: Aug 20 2019, Tuesday)
+    3. [E][?] sleep (at: Aug 17 2029, Friday)
     ____________________________________________________________
     ____________________________________________________________
      Yay! I've marked this task as done :3
-       [D][?] finish nekobot (by: 20 Aug)
+       [D][?] finish nekobot (by: Aug 20 2019, Tuesday)
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list!!
     1. [T][?] exercise
-    2. [D][?] finish nekobot (by: 20 Aug)
-    3. [E][?] sleep (at: tonight)
+    2. [D][?] finish nekobot (by: Aug 20 2019, Tuesday)
+    3. [E][?] sleep (at: Aug 17 2029, Friday)
     ____________________________________________________________
     ____________________________________________________________
      Got it! I'll remove this task :>
-       [D][?] finish nekobot (by: 20 Aug)
+       [D][?] finish nekobot (by: Aug 20 2019, Tuesday)
      Only 2 tasks left!!
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list!!
     1. [T][?] exercise
-    2. [E][?] sleep (at: tonight)
+    2. [E][?] sleep (at: Aug 17 2029, Friday)
     ____________________________________________________________
     ____________________________________________________________
     Oh noes! I don't think you specified a valid task index :<
@@ -86,7 +86,7 @@
     ____________________________________________________________
     Here are the tasks in your list!!
     1. [T][?] exercise
-    2. [E][?] sleep (at: tonight)
+    2. [E][?] sleep (at: Aug 17 2029, Friday)
     ____________________________________________________________
     ____________________________________________________________
     Oh noes! I don't think you specified a valid task index :<
@@ -98,7 +98,7 @@
     ____________________________________________________________
     Here are the tasks in your list!!
     1. [T][?] exercise
-    2. [E][?] sleep (at: tonight)
+    2. [E][?] sleep (at: Aug 17 2029, Friday)
     ____________________________________________________________
     ____________________________________________________________
      Bye~ Hope to see you again soon ;w;
