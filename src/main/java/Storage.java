@@ -22,8 +22,10 @@ public class Storage {
         return tasks;
     }
 
-    public void write(TaskList tasks) {
-        // ...
+    public void write(TaskList tasks) throws IOException {
+        FileWriter writer = new FileWriter(file);
+        writer.write(tasks.toString());
+        writer.close();
     }
 
     private static Task getTask(String line) throws DukeException {
@@ -39,12 +41,12 @@ public class Storage {
             String[] dParsed = body.split(" - ", 2);
             String dDescription = dParsed[0];
             String deadline = dParsed[1];
-            return new Deadline(dDescription, deadline);
+            return new Deadline(dDescription, deadline, isDone);
         case "E":
             String[] eParsed = body.split(" - ", 2);
             String eDescription = eParsed[0];
             String eventTime = eParsed[1];
-            return new Event(eDescription, eventTime);
+            return new Event(eDescription, eventTime, isDone);
         default:
             throw new DukeException("Error finding task");
         }

@@ -23,11 +23,11 @@ public class Duke {
         while (!isBye) {
             String input = ui.receive();
             try {
-                Handler.process(input, ui, tasks, storage);
+                Parser.process(input, ui, tasks, storage);
             } catch (DukeException | IOException e) {
                 ui.getError(e);
             } finally {
-                isBye = Handler.isBye(input);
+                isBye = Parser.isBye(input);
             }
         }
         ui.goodbye();

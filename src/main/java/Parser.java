@@ -37,6 +37,7 @@ public class Parser {
         default:
             throw new DukeException("Invalid command");
         }
+        storage.write(tasks);
     }
 
     private static boolean isValidSize(String body, TaskList tasks) {

@@ -11,6 +11,15 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    @Override
+    public String toString() {
+        String listString = "";
+        for (Task task : tasks) {
+            listString += task + "\n";
+        }
+        return listString;
+    }
+
     public void printList(Ui ui) {
         if (tasks.size() == 0) ui.say("Your task list is currently empty.");
         else {
