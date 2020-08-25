@@ -41,7 +41,7 @@ public class Storage {
             }
             return loadedTask;
         } catch (FileNotFoundException err) {
-            throw new DukeException("File Not Found");
+            throw new DukeException("Can't Find Save File. Starting New");
         }
     }
 
