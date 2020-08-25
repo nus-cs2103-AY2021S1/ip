@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.exceptions.DukeException;
 
 import java.util.Iterator;
 import java.util.List;

@@ -1,6 +1,6 @@
 package duke.parser;
 
-import duke.DukeException;
+import duke.exceptions.DukeException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

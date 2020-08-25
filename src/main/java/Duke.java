@@ -1,4 +1,4 @@
-import duke.DukeException;
+import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.Storage;
 import duke.Ui;
