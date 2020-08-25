@@ -40,6 +40,8 @@ public class Parser {
             return new DeleteCommand(parsedCommand);
         } else if (command.equals(UserCommand.CLEAR.getCommand())) {
             return new ClearCommand(parsedCommand);
+        } else if (command.equals(UserCommand.FIND.getCommand())) {
+            return new FindCommand(parsedCommand);
         } else {
             throw new DukeException("NANI??! Please say something that I can understand!\n");
         }

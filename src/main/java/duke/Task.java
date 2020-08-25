@@ -38,6 +38,10 @@ public class Task {
             + "]";
     }
 
+    String getDescription() {
+        return this.description;
+    }
+
     /**
      * Marks a task as 'done'.
      * @return a task with a status of 'done'
