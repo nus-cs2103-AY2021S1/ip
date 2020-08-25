@@ -84,6 +84,11 @@ public class TaskList {
         System.out.println(str);
     }
 
+    /**
+     * Finds matching tasks based on keyword provided by user.
+     *
+     * @param keyword
+     */
     public static void findTasks(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task: tasks) {
