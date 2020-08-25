@@ -16,7 +16,7 @@ public class TaskDate implements Serializable, Comparable<TaskDate> {
     private static final DateTimeFormatter US_DATE_FORMAT = DateTimeFormatter.ofPattern("MM/dd/uuuu");
     private static final DateTimeFormatter UK_DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/uuuu");
 
-    private LocalDate date;
+    private final LocalDate date;
 
     /**
      * Returns true if the given date string is in valid format that Duke accepts.
@@ -47,11 +47,9 @@ public class TaskDate implements Serializable, Comparable<TaskDate> {
      */
     public TaskDate(String date) {
         if (date.contains("/")) {
-            LocalDate date1 = LocalDate.parse(date, UK_DATE_FORMAT);
-            this.date = date1;
+            this.date = LocalDate.parse(date, UK_DATE_FORMAT);
         } else {
-            LocalDate date1 = LocalDate.parse(date);
-            this.date = date1;
+            this.date = LocalDate.parse(date);
         }
     }
 
@@ -71,10 +69,10 @@ public class TaskDate implements Serializable, Comparable<TaskDate> {
         }
     }
 
-    @Override
     /**
      * Returns date in string format e.g. "Oct 05 2020"
      */
+    @Override
     public String toString() {
         return date.format(DateTimeFormatter.ofPattern("MMM dd uuuu"));
     }
