@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 public class ToDo extends Task {
 
     public ToDo(String description) {
@@ -32,7 +36,7 @@ public class ToDo extends Task {
             }
             return newToDo;
         } else {
-            throw new DukeException("Unable to decode ToDo.");
+            throw new DukeException("Unable to decode duke.task.ToDo.");
         }
     }
 }

@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.parser.DateParser;
+import duke.DukeException;
+
 import java.time.LocalDateTime;
 
 public class Event extends Task {

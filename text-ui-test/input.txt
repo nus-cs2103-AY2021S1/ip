@@ -19,4 +19,4 @@ delete 3
 delete 1.5
 delete 4
 list
-bye
+exit

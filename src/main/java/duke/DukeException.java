@@ -1,6 +1,8 @@
+package duke;
+
 public class DukeException extends RuntimeException {
 
-    DukeException(String message) {
+    public DukeException(String message) {
         super(String.format("Gomen nasai~ %s\n", message));
     }
 }

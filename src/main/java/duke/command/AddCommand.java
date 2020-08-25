@@ -1,9 +1,16 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.*;
+
 public class AddCommand extends Command {
 
     private Task createdTask;
     private int remainingTaskCount;
 
-    AddCommand(TaskType type, String taskParameters) throws DukeException {
+    public AddCommand(TaskType type, String taskParameters) throws DukeException {
         switch(type) {
         case DEADLINE:
             createdTask = Deadline.createTask(taskParameters);
@@ -25,7 +32,7 @@ public class AddCommand extends Command {
         super.completed = true;
     }
 
-    public void printFeedback(Ui ui) {
+    public void printFeedback(Ui ui) throws DukeException {
         if (super.completed) {
             String feedback = String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in your list.\n", createdTask.toString(), remainingTaskCount);
             ui.formattedPrint(ui.prependIndent(feedback, 1));

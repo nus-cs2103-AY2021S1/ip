@@ -1,10 +1,18 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class DeleteCommand extends Command {
 
     private int index;
     private Task deletedTask;
     private int remainingTaskCount;
 
-    DeleteCommand(int index) {
+    public DeleteCommand(int index) {
         this.index = index;
     }
 
@@ -16,7 +24,7 @@ public class DeleteCommand extends Command {
 
     public void printFeedback(Ui ui) throws DukeException {
         if (super.completed) {
-            String feedback = String.format("Noted.I've removed this task:\n  %s\nNow you have %d tasks in your list.",
+            String feedback = String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in your list.",
                     deletedTask.toString(),
                     remainingTaskCount);
             ui.formattedPrint(ui.prependIndent(feedback, 1));

@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.Encodable;
+
 public abstract class Task implements Encodable<Task> {
 
     protected String description;

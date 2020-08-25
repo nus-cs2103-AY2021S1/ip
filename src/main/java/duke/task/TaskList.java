@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
@@ -6,11 +10,11 @@ public class TaskList implements Iterable<Task> {
 
     private List<Task> store;
 
-    TaskList() {
+    public TaskList() {
         this.store = new ArrayList<>();
     }
 
-    TaskList(List<Task> list) {
+    public TaskList(List<Task> list) {
         this.store = list;
     }
 

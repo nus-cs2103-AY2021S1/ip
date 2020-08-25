@@ -1,9 +1,17 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class DoneCommand extends Command {
 
     private int index;
     private Task completedTask;
 
-    DoneCommand(int index) {
+    public DoneCommand(int index) {
         this.index = index;
     }
 

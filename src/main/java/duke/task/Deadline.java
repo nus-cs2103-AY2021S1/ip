@@ -1,5 +1,8 @@
+package duke.task;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
+import duke.DukeException;
+import duke.parser.DateParser;
 
 public class Deadline extends Task {
 
@@ -48,7 +51,7 @@ public class Deadline extends Task {
             }
             return newDeadline;
         } else {
-            throw new DukeException("Unable to decode Deadline.");
+            throw new DukeException("Unable to decode duke.task.Deadline.");
         }
     }
 }

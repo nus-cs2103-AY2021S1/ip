@@ -1,3 +1,9 @@
+package duke.parser;
+
+import duke.DukeException;
+import duke.command.*;
+import duke.task.TaskType;
+
 public class Parser {
 
     enum Keyword {
@@ -39,6 +45,8 @@ public class Parser {
             try {
                 int index = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
                 return new DoneCommand(index);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("What did you complete exaclty?");
             } catch (NumberFormatException e) {
                 throw new DukeException("This isn't harry potter, please use only integers.");
             }
@@ -46,6 +54,8 @@ public class Parser {
             try {
                 int index = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
                 return new DeleteCommand(index);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("What do you want to remove exactly?");
             } catch (NumberFormatException e) {
                 throw new DukeException("This isn't harry potter, please use only integers.");
             }
