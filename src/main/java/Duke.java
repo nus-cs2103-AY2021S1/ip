@@ -21,7 +21,7 @@ public class Duke {
                 String string = task.getDescription();
                 int index = Integer.parseInt(string.replaceAll("\\D",""));
                 tasks.get(index - 1).markAsDone();
-                System.out.println("Nice! I've marked this task as done:\n  " + tasks.get(index - 1));
+                System.out.println("Nice! I've marked this task as done:\n " + tasks.get(index - 1));
                 task = new Task(sc.nextLine());
             } else {
                 if (task.getDescription().contains("todo")) {
