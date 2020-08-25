@@ -46,7 +46,6 @@ public class Storage {
         for (String part : parts) {
             result.add(part.trim());
         }
-        System.out.println(result);
         return result.toArray(parts);
     }
 

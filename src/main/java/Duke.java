@@ -10,11 +10,13 @@ public class Duke {
     private final Ui ui;
     private TaskList taskList;
     private final Storage storage;
+    private final Parser parser;
 
 
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
+        this.parser = new Parser();
         try {
             this.taskList = new TaskList(storage.loadFile());
         } catch (DukeException e) {
@@ -23,38 +25,13 @@ public class Duke {
         }
     }
 
-
-    /**
-     * Take in the String input and split into the 3 parts, namely
-     * the command, the title and extra_descriptions.
-     * @param input The input from the users.
-     * @return a String array that contains different components of the input.
-     */
-    public static String[] interpretInput(String input) {
-        ArrayList<String> list = new ArrayList<>();
-        int spaceIndex = input.indexOf(" ");
-        int slashIndex = input.indexOf("/");
-        int infoIndex = input.indexOf(" ", slashIndex);
-        if (spaceIndex == -1) {
-            list.add(input);
-        } else if (slashIndex == -1) {
-            list.add(input.substring(0,spaceIndex));
-            list.add(input.substring(spaceIndex+1));
-        } else {
-            list.add(input.substring(0,spaceIndex));
-            list.add(input.substring(spaceIndex+1,slashIndex));
-            list.add(input.substring(infoIndex+1));
-        }
-        return list.toArray(new String[0]);
-    }
-
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.showWelcome();
         outerLoop:
         while (sc.hasNext()) {
             String input = sc.nextLine();
-            String[] words = interpretInput(input);
+            String[] words = parser.interpretInput(input);
             String command = words[0];
             switch (command) {
 
@@ -103,8 +80,6 @@ public class Duke {
                 } catch (IndexOutOfBoundsException err) {
                     ui.showError("Error: Please key in as: \n " +
                             "event [title]");
-                } catch (DukeException err) {
-                    ui.showError(err.getMessage());
                 }
                 break;
             case "deadline":
@@ -136,7 +111,7 @@ public class Duke {
 
             //When command does not match any of those above
             default:
-                //echo("OOPS!!! I don't know what does it mean by: \"" + input + "\"" );
+                ui.showError("OOPS!!! I don't know what does it mean by: \"" + input + "\"" );
                 break;
             }
         }
