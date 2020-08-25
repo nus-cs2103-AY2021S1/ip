@@ -13,7 +13,7 @@ public class Parser {
     
     public Parser() {}
     
-    public boolean isDate(String time) {
+    private boolean isDate(String time) {
         try {
             SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
             date.setLenient(false);
@@ -23,8 +23,16 @@ public class Parser {
         }
         return true;
     }
-    
 
+
+    /**
+     * Returns the date (MMM dd yyyy) of the specified time  
+     * Time must be formatted as yyyy-MM-dd to be converted to date
+     * If time does not match the format, the original time will be returned
+     *
+     * @param time Time specified in the task
+     * @return Time in date format
+     */
     public String convertDate(String time) {
         String s = "";
         try {
@@ -39,8 +47,16 @@ public class Parser {
         }
         return s;
     }
-    
 
+
+    /**
+     * Sends different instructions depending on user input
+     * 
+     * @param next Next line of input from the user
+     * @param list List of tasks
+     * @param storage Storage of tasks
+     * @param ui User interface to receive input and generate output to users
+     */
     public void sortInput (String next, TaskList list, Storage storage, Ui ui ) {
         try {
             next = next.trim();
@@ -78,31 +94,31 @@ public class Parser {
             }
             
         } catch (DukeException e) {
-            System.out.println ("Please specify a task description");
+            ui.showNoTaskInputException();
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println ("Please specify a time");
+            ui.showNoTimeInputException();
         } catch (IndexOutOfBoundsException e) {
-            System.out.println ("Task does not exist");
+            ui.showNoTaskExistException();
         } catch (UnsupportedOperationException e) {
-            System.out.println ("Sorry >_< I don't know what you mean...");
+            ui.showDoNotUnderstandMesssage();
         }
     }
 
 
-    public Task done(String s, TaskList list) throws IndexOutOfBoundsException {
+    private Task done(String s, TaskList list) throws IndexOutOfBoundsException {
         int index = Integer.parseInt(s.replaceAll("[^0-9]", "")) - 1;
         list.setDone(index);
         return list.get(index);
     }
     
-    public Task delete (String s, TaskList list) throws IndexOutOfBoundsException { 
+    private Task delete (String s, TaskList list) throws IndexOutOfBoundsException { 
         int index = Integer.parseInt(s.replaceAll("[^0-9]", "")) - 1;
         Task t = list.get(index);
         list.removeTask(index);
         return t;
     }
     
-    public Task addTodo (String s, TaskList list) throws DukeException {
+    private Task addTodo (String s, TaskList list) throws DukeException {
         String description = s.substring(4).trim();
         
         if (description.length() == 0) {
@@ -113,7 +129,7 @@ public class Parser {
         return t;
     }
     
-    public Task addDeadline (String s, TaskList list) throws DukeException, ArrayIndexOutOfBoundsException {
+    private Task addDeadline (String s, TaskList list) throws DukeException, ArrayIndexOutOfBoundsException {
         String description = s.split("/by")[0].substring(9).trim();
         String deadline = s.split("/by")[1].trim();
         if (description.length() == 0) {
@@ -124,7 +140,7 @@ public class Parser {
         return t;
     }
     
-    public Task addEvent (String s, TaskList list) throws DukeException, ArrayIndexOutOfBoundsException {
+    private Task addEvent (String s, TaskList list) throws DukeException, ArrayIndexOutOfBoundsException {
         String description = s.split("/at")[0].substring(5).trim();
         String time = s.split("/at")[1].trim();
         if (description.length() == 0) {

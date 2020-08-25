@@ -17,19 +17,34 @@ public class Task {
         this.type = type;
         this.done = done;
     }
-
+    
     public void markDone() {
         this.done = true;
     }
-    
+
+    /**
+     * Returns true if task is done
+     * 
+     * @return Whether task is done 
+     */
     public Boolean getDone(){
         return this.done;
     }
-    
+
+    /**
+     * Returns the description of task
+     * 
+     * @return Description of Task
+     */
     public String getDescription() {
         return this.description;
     }
-    
+
+    /**
+     * Returns the type of task
+     * 
+     * @return Type of task
+     */
     public String getType() {
         return this.type;
     }
