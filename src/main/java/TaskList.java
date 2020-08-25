@@ -6,43 +6,44 @@ public class TaskList {
 
     private ArrayList<Task> tasks = new ArrayList<Task>();
 
-    public ArrayList<Task> getTasks(){
+    public ArrayList<Task> getTasks() {
         return this.tasks;
     }
 
 
     // 4 type ways to add task
-    public void addTask(Task myTask){
+    public void addTask(Task myTask) {
         this.tasks.add(myTask);
         System.out.println("added: " + myTask);
     }
 
-    public void addTask(String type, String task) throws InSuffArgsException{
+    public void addTask(String type, String task) throws InSuffArgsException {
 
-        if(task.equals("")){
+        if (task.equals("")) {
             throw new InSuffArgsException();
         }
 
-        Task myTask = new Task(type,task);
+        Task myTask = new Task(type, task);
         addTask(myTask);
     }
 
-    public void addTask(String type, String task, LocalDate d1) throws InSuffArgsException{
+    public void addTask(String type, String task, LocalDate d1) throws InSuffArgsException {
 
-        if(task.equals("")){
+        if (task.equals("")) {
             throw new InSuffArgsException();
         }
 
-        Task myTask = new Task(type,task,d1);
+        Task myTask = new Task(type, task, d1);
         addTask(myTask);
     }
-    public void addTask(String type,String task,String deadLine) throws InSuffArgsException{
 
-        if(task.equals("")){
+    public void addTask(String type, String task, String deadLine) throws InSuffArgsException {
+
+        if (task.equals("")) {
             throw new InSuffArgsException();
         }
 
-        Task myTask = new Task(type,task,deadLine);
+        Task myTask = new Task(type, task, deadLine);
         this.tasks.add(myTask);
         System.out.println("added: " + myTask);
     }
@@ -73,9 +74,9 @@ public class TaskList {
         System.out.println(undone + " unfinished tasks in the list.");
     }
 
-    public void list(){
+    public void list() {
         for (int i = 0; i < this.tasks.size(); i++) {
-            System.out.println("" + (i + 1)+"." + this.tasks.get(i));
+            System.out.println("" + (i + 1) + "." + this.tasks.get(i));
         }
     }
 }

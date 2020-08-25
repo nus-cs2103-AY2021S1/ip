@@ -13,12 +13,12 @@ public class Task implements Serializable {
 
     public LocalDate localDeadline;
 
-    public boolean finished(){
+    public boolean finished() {
         return this.done;
     }
 
-    public void setDone(){
-        this.done=true;
+    public void setDone() {
+        this.done = true;
     }
 
     public Task(String type, String details) {
@@ -27,15 +27,16 @@ public class Task implements Serializable {
         this.details = details;
     }
 
-    public Task(String type, String details,String deadLine)  {
+    public Task(String type, String details, String deadLine) {
         this.type = type;
         this.details = details;
         this.deadLine = deadLine;
     }
-    public Task(String type, String details,LocalDate localDeadline)  {
+
+    public Task(String type, String details, LocalDate localDeadline) {
         this.type = type;
         this.details = details;
-        this.localDeadline=localDeadline;
+        this.localDeadline = localDeadline;
 
         deadLine = localDeadline.toString();
 
@@ -43,9 +44,9 @@ public class Task implements Serializable {
 
     @Override
     public String toString() {
-        String checkbox = done? "[✓]":"[✗]" ;
-        String myDeadline = deadLine==null? "": "-------"+deadLine;
+        String checkbox = done ? "[✓]" : "[✗]";
+        String myDeadline = deadLine == null ? "" : "-------" + deadLine;
 
-        return this.type+checkbox+" "+ this.details+" "+ myDeadline;
+        return this.type + checkbox + " " + this.details + " " + myDeadline;
     }
 }
