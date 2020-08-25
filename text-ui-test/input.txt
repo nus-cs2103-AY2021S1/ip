@@ -23,4 +23,6 @@ delete 3
 list
 blah
 event
+bye 2
+list 33
 bye
