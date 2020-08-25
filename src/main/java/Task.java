@@ -1,3 +1,5 @@
+import java.util.Date;
+
 enum TaskType {
     TODO{
         @Override
@@ -52,8 +54,13 @@ public abstract class Task {
         isDone = true;
     }
 
+
     public String getSavedString() {
-        return taskType.getSymbol() + " | " +  (isDone ? "1" : "0") + " | " + description;
+        return taskType.getSymbol() + " | " + (isDone ? "1" : "0") + " | " + description;
+    }
+
+    public boolean isOccuringOn(Date date) {
+        return false;
     }
 
     @Override
