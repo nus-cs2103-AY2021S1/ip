@@ -1,3 +1,5 @@
+package duke.enums;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 import java.util.Arrays;

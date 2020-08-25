@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Event extends Task {
     private static final String DELIMITER = "at",
             TIME_DELIMITER = "-";
@@ -21,7 +23,7 @@ public class Event extends Task {
     }
     
     @Override
-    protected boolean isComplete() {
+    public boolean isComplete() {
         return super.isComplete();
     }
     

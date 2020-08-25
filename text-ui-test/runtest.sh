@@ -13,7 +13,10 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java
+# shellcheck disable=SC2046
+if ! javac -cp ../src -Xlint:none -d ../bin $(find ../ *.java)
+# todo create proper testscript
+#../src/main/java/duke/Duke.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1

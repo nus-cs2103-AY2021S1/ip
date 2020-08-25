@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.enums.Message;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -68,10 +72,4 @@ public class TextUi implements Ui {
         return result;
     }
     
-    // leaving this here for echo-mode
-    private static ArrayList<String> echo(String output) {
-        ArrayList<String> response = new ArrayList<>();
-        response.add(output);
-        return (response);
-    }
 }

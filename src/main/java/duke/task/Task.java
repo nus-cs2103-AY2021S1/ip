@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.io.Serializable;
 
 public class Task implements Serializable {
@@ -14,21 +16,21 @@ public class Task implements Serializable {
         this.completed = false;
     }
     
-    protected Task complete() {
+    public Task complete() {
         this.completed = true;
         return this;
     }
     
-    protected Task decrementID() {
+    public Task decrementID() {
         --this.taskID;
         return this;
     }
     
-    protected static void decrementTaskCount() {
+    public static void decrementTaskCount() {
         --Task.taskCount;
     }
     
-    protected boolean isComplete() {
+    public boolean isComplete() {
         return this.completed;
     }
     

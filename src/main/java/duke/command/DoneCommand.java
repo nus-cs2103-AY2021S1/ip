@@ -1,20 +1,24 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.enums.Message;
+import duke.exception.DukeException;
+import duke.ui.Ui;
+
 import java.util.ArrayList;
 
-public class DeleteCommand implements Command {
-    
+public class DoneCommand implements Command {
     private final String[] parsedInput;
     
-    public DeleteCommand(String[] parsedInput) {
+    public DoneCommand(String[] parsedInput) {
         this.parsedInput = parsedInput;
     }
     
     @Override
     public void execute(TaskList tasks, Ui ui) throws DukeException {
         ArrayList<String> lines = new ArrayList<>();
-        int taskID = Integer.parseInt(this.parsedInput[1]);
-        lines.add(Message.DELETE_MSG.getMsg());
-        lines.add(tasks.deleteTask(taskID));
-        lines.add(tasks.getCurrentStatus());
+        lines.add(Message.DONE_MSG.getMsg());
+        lines.add(tasks.completeTask(Integer.parseInt(this.parsedInput[1])));
         ui.display(lines);
     }
     

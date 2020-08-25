@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -9,7 +17,7 @@ public class TaskList implements Serializable {
     }
     
     // side effect: create & add task + return response
-    protected String addEntry(String[] parsedOutput, String commandTag) throws DukeException {
+    public String addEntry(String[] parsedOutput, String commandTag) throws DukeException {
         switch (commandTag) {
         case "T":
             ToDo newToDo = new ToDo(parsedOutput[1]);
@@ -29,7 +37,7 @@ public class TaskList implements Serializable {
     }
     
     // side effect: completes task + returns string for completed task
-    protected String completeTask(int taskID) throws DukeException {
+    public String completeTask(int taskID) throws DukeException {
         verifyTaskValidity(taskID);
         taskList.set(taskID - 1, taskList.get(taskID - 1).complete());
         return taskList.get(taskID - 1).toString();

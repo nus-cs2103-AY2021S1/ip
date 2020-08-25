@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.enums.DateTimeFormat;
+import duke.exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -22,7 +27,7 @@ public class Deadline extends Task {
     }
     
     @Override
-    protected boolean isComplete() {
+    public boolean isComplete() {
         return super.isComplete();
     }
     

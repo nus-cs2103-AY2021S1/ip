@@ -1,3 +1,5 @@
+package duke.enums;
+
 import java.util.HashMap;
 import java.util.Map;
 
