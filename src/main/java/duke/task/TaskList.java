@@ -2,34 +2,28 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
-import duke.storage.FileWritingException;
-import duke.storage.TaskListStorage;
 
 public class TaskList {
     private List<Task> list;
-    private TaskListStorage storage;
-    private FileWritingExceptionHandler handler;
+    private SaveFunction saveFunction;
 
     public TaskList() {
         list = new ArrayList<>();
-        storage = null;
-        handler = (e) -> {};
+        saveFunction = (list) -> {};
     }
 
-    // make Duke implement error handler to avoid having to propagate error to Command classes
-    public void connectStorage(TaskListStorage storage, FileWritingExceptionHandler handler) {
-        this.storage = storage;
-        this.handler = handler;
+    public void connectStorage(SaveFunction function) {
+        saveFunction = function;
     }
 
     public void add(Task task) {
         list.add(task);
-        save();
+        saveFunction.save(this);
     }
 
     public Task delete(int index) {
         Task removed = list.remove(index);
-        save();
+        saveFunction.save(this);
         return removed;
     }
 
@@ -43,16 +37,6 @@ public class TaskList {
 
     public void markAsDone(int index) {
         get(index).markAsDone();
-        save();
-    }
-
-    private void save() {
-        if (storage != null) {
-            try {
-                storage.save(this);
-            } catch (FileWritingException e) {
-                handler.handle(e);
-            }
-        }
+        saveFunction.save(this);
     }
 }

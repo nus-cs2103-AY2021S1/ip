@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
-public class StorageHelper {
-    public static void save(Serializable object, String filepath) throws FileWritingException {
+class StorageHelper {
+    static void save(Serializable object, String filepath) throws FileWritingException {
         File file = new File(filepath);
 
         try {
@@ -20,7 +20,7 @@ public class StorageHelper {
         }
     }
 
-    public static <T> T open(Deserializer<T> deserializer, String filepath)
+    static <T> T open(Deserializer<T> deserializer, String filepath)
             throws FileMissingException, FileReadingException, DeserializingException {
         File file = new File(filepath);
 

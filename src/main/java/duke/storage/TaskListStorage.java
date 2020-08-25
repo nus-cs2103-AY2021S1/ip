@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import duke.Bot;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -16,12 +17,31 @@ public class TaskListStorage {
         this.filepath = filepath;
     }
 
-    public void save(TaskList tasklist) throws FileWritingException {
-        StorageHelper.save(() -> serializeTaskList(tasklist), filepath);
-    }
-
-    public TaskList open() throws FileMissingException, FileReadingException, DeserializingException {
-        return StorageHelper.open((s) -> deserializeTaskList(s), filepath);
+    public TaskList load(Bot bot) {
+        final String createNewListMessage = "I'll create a new list of tasks.";
+        TaskList list;
+        try {
+            list = StorageHelper.open((s) -> deserializeTaskList(s), filepath);
+            bot.sayLine(String.format( "Loaded tasks from %s.", filepath ));
+        } catch (FileMissingException e) {
+            bot.sayLine(String.format("Couldn't find the file %s. %s", filepath, createNewListMessage));
+            list = new TaskList();
+        } catch (FileReadingException e) {
+            bot.sayLine(String.format("Couldn't read the file %s. %s", filepath, createNewListMessage));
+            list = new TaskList();
+        } catch (DeserializingException e) {
+            bot.sayLine(String.format("I don't understand the data in %s. %s", filepath,
+                    createNewListMessage));
+            list = new TaskList();
+        }
+        list.connectStorage((taskList) -> {
+                try {
+                    StorageHelper.save(() -> serializeTaskList(taskList), filepath);
+                } catch (FileWritingException e) {
+                    // TODO show an error message. Need to make Duke implement Bot.
+                }
+        });
+        return list;
     }
 
     private String serializeTaskList(TaskList tasklist) {

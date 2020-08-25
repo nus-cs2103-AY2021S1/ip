@@ -1,5 +1,5 @@
 package duke.storage;
 
-public interface Serializable {
-    public String serialize();
+interface Serializable {
+    String serialize();
 }

@@ -1,7 +1,7 @@
 package duke.storage;
 
-public class FileReadingException extends Exception {
-    public FileReadingException(Exception e) {
+class FileReadingException extends Exception {
+    FileReadingException(Exception e) {
         // TODO
     }
 }

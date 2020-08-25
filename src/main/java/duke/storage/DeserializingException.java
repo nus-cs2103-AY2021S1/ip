@@ -1,5 +1,5 @@
 package duke.storage;
 
-public class DeserializingException extends Exception {
+class DeserializingException extends Exception {
 
 }
