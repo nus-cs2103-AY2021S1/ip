@@ -1,3 +1,4 @@
+import java.security.spec.ECField;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -79,6 +80,26 @@ public class Deadline extends Task {
 
         }
         return deadline;
+    }
+
+    public static Deadline of(String description, String by, boolean isDone){
+        Deadline ddl = new Deadline(description, by, isDone);
+        String[] dateAndTime = by.replace('/', '-').split(" ");
+        try{
+            LocalDate d = LocalDate.parse(dateAndTime[0]);
+            ddl.setDate(d);
+        }
+        catch (Exception e){
+
+        }
+        try{
+            LocalTime t = LocalTime.parse(dateAndTime[1]);
+            ddl.setTime(t);
+        }
+        catch (Exception e){
+
+        }
+        return ddl;
     }
 
     public Deadline(String description, String by) {

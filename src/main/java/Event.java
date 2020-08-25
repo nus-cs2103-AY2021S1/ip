@@ -81,6 +81,26 @@ public class Event extends Task {
         return event;
     }
 
+    public static Event of(String description, String at, boolean isDone){
+        Event event = new Event(description, at, isDone);
+        String[] dateAndTime = at.replace('/', '-').split(" ");
+        try{
+            LocalDate d = LocalDate.parse(dateAndTime[0]);
+            event.setDate(d);
+        }
+        catch (Exception e){
+
+        }
+        try{
+            LocalTime t = LocalTime.parse(dateAndTime[1]);
+            event.setTime(t);
+        }
+        catch (Exception e){
+
+        }
+        return event;
+    }
+
     public Event(String description, String at) {
         super(description);
         this.at = at;

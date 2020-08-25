@@ -112,10 +112,10 @@ public class Duke {
                 list.add(new Todo(part[2], part[1].equals("1")));
             }
             else if(part[0].equals("D")){
-                list.add(new Deadline(part[2], part[3], part[1].equals("1")));
+                list.add(Deadline.of(part[2], part[3], part[1].equals("1")));
             }
             else{
-                list.add(new Event(part[2], part[3], part[1].equals("1")));
+                list.add(Event.of(part[2], part[3], part[1].equals("1")));
             }
         }
         return list;
