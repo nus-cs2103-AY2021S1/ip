@@ -9,6 +9,9 @@ public class Task {
         this.name = name;
     }
 
+    public String getDescription() {
+        return this.name;
+    }
 
     public void markDone() {
         this.done = true;

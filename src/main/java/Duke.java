@@ -75,6 +75,9 @@ public class Duke {
                     case DEADLINE:
                         tasks.addDeadline(input);
                         break;
+                    case FIND:
+                        tasks.findTasks(input);
+                        break;
                     default:
                         System.out.println("Error in switch - Default case");
                         break;

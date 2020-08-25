@@ -77,6 +77,20 @@ public class TaskList {
     }
 
     /**
+     * Search for tasks for the same name.
+     * @param input
+     */
+    public void findTasks(String input) {
+        String query = input.substring(5);
+        for (int i = 0; i < taskList.size(); i++) {
+            Task t = taskList.get(i);
+            if (t.getDescription().contains(query)) {
+                System.out.println((i+1) + ". " + t);
+            }
+        }
+    }
+
+    /**
      * Mark a task as done.
      * @param input
      */

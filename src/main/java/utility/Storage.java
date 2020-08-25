@@ -72,7 +72,7 @@ public class Storage {
                     */
                     newList.add(new Deadline(line.substring(7, posD), line.substring(posD + 4)));
                 default:
-                    System.out.println("Can't read line");
+                    System.out.println("Can't read line - load()");
             }
         }
         // NO IDEA WHY IS THERE ANOTHER LAST ELEMENT CAUSING EXCEPTION BUT JUST DELETE IT WTV

@@ -14,7 +14,7 @@ public class Parser {
      */
     public Choice parseCommand(String input) throws DukeException {
         ArrayList<String> commands = new ArrayList<>(
-                Arrays.asList("DONE", "LIST", "DEADLINE", "EVENT", "TODO", "BYE", "DELETE"));
+                Arrays.asList("DONE", "LIST", "DEADLINE", "EVENT", "TODO", "BYE", "DELETE", "FIND"));
         String arr[] = input.split(" ");
         String command = arr[0].toUpperCase();
         if (!commands.contains(command)) {
