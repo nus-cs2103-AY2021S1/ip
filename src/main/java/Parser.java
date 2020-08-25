@@ -2,14 +2,28 @@ public class Parser {
 
     public static TaskList list_of_Content;
 
+    /**
+     * Returns a boolean to indicate whether program should exit.
+     * @param input user input.
+     * @return Returns a boolean.
+     */
     public static boolean exit(String input) {
         return input.equals("bye");
     }
 
+    /**
+     * initiate taskList for Parser.
+     * @param list TaskList that manages tasks.
+     */
     public static void initiateTaskList(TaskList list) {
         list_of_Content = list;
     }
-    
+
+    /**
+     * Processes input and add the tasks to taskList.
+     * @param input user input.
+     * @throws InvalidException InvalidException if input is illegal.
+     */
     public static void processInput(String input) throws InvalidException {
         
             int length = input.length();

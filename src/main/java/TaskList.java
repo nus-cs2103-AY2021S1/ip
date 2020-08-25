@@ -4,21 +4,35 @@ import java.util.ArrayList;
 public class TaskList {
     
     private List<Task> list_of_Content;
-    
+
+    /**
+     * Constructor for TaskList object.
+     */
     TaskList() {
         list_of_Content = new ArrayList<>();
     }
-    
+
+    /**
+     * Adds a task to taskList.
+     * @param task Task to be added.
+     */
     public void addTask (Task task) {
         list_of_Content.add(task);
     }
-    
+
+    /**
+     * Prints the current task.
+     * @param task Task to be printed.
+     */
     public void showNewContent(Task task) {
         System.out.println("Got it. I've added this task: ");
         System.out.println(task.toString());
         System.out.println("Now you have "+ list_of_Content.size() + " tasks in the list.");
     }
-    
+
+    /**
+     * Prints the whole taskList.
+     */
     public void showAllContent() {
             int no_of_tasks = list_of_Content.size();
 
@@ -35,12 +49,20 @@ public class TaskList {
             }
             ui.printHorizontalLine();
     }
-    
+
+    /**
+     * Returns the number of task in the list.
+     * @return Integer indicating number of task in list.
+     */
     public int getSizeOfList() {
         return list_of_Content.size();
     }
-    
 
+
+    /**
+     * Returns the taskList.
+     * @return TaskList.
+     */
     public List<Task> getTheList() {
         return list_of_Content;
     }
@@ -52,6 +74,10 @@ public class TaskList {
         System.out.println(task.toString());
     }
 
+    /**
+     * Deletes the nth task.
+     * @param n Index of the task to be deleted.
+     */
     public void removeTask(int n) {
         System.out.println("Noted. I've removed this task:");
         Task task = list_of_Content.get(n - 1);
@@ -60,6 +86,9 @@ public class TaskList {
         System.out.println("Now you have "+ list_of_Content.size() + " tasks in the list.");
     }
 
+    /**
+     * find whether the keyword from the user is in the list
+     */
     public void findKeyword(String keyword) {
 
         Ui ui = new Ui();

@@ -13,15 +13,27 @@ public class Ui {
     public Ui() {
         scanner = new Scanner(System.in);
     }
-    
+
+
+    /**
+     * Returns the user input.
+     * @return String of user input.
+     */
     public String getInput() {
         return scanner.nextLine();
     }
-    
+
+    /**
+     * Prints the horizontal line.
+     */
     public void printHorizontalLine() {
         System.out.println(horizontal_line);
     }
-    
+
+
+    /**
+     * Prints the welcome message
+     */
     public static void welcome_message() {
         System.out.println("Hello from Bill \n" + logo);
         System.out.println(horizontal_line);
@@ -30,6 +42,9 @@ public class Ui {
         System.out.println(horizontal_line);
     }
 
+    /**
+     * Prints the exit message.
+     */
     public static void session_end() {
         System.out.println(horizontal_line);
         System.out.println("Bye. Hope to see you again soon!");

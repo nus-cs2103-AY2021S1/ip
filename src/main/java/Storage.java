@@ -28,6 +28,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * read the content of the file in bill.txt
+     * @param file The file to be read.
+     */
     public static void read(File file) throws FileNotFoundException {
         Scanner scanner = new Scanner(file);
         if (!scanner.hasNextLine()) {
@@ -40,19 +44,12 @@ public class Storage {
             }
         }
     }
-//    public static void write(List<Task> list_of_Content) {
-//        try {
-//            FileWriter fileWriter = new FileWriter(filePath, true);
-//            for (Task task : list_of_Content) {
-//                fileWriter.write(task.timeConverted() + "\n");
-//            }
-//            fileWriter.close();
-//            read(file);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
+
+    /**
+     * Stores the updated Lists that contain the tasks to bill.txt.
+     * @param list_of_Content TaskList that manages tasks.
+     */
     public void write(List<Task> list_of_Content) {
         try {
             FileWriter fileWriter = new FileWriter(filePath, true);
