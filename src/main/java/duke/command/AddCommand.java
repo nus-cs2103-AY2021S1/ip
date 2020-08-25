@@ -10,6 +10,10 @@ import duke.task.ToDo;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a user command that adds a task to the task list.
+ * This includes user input of todo, deadline, and event.
+ */
 public class AddCommand extends Command {
     private String userInput;
 
@@ -17,10 +21,19 @@ public class AddCommand extends Command {
         this.userInput = userInput;
     }
 
+    // checks if the program should exit.
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Checks for the type of task added by the user based on the user input, and
+     * adds the appropriate type of task to the task list.
+     *
+     * @param tasks List of <code>Task</code> objects.
+     * @param ui Ui object created by Duke.
+     * @param storage Storage object created by Duke.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task t = new Task(userInput);
         try {

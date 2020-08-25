@@ -6,6 +6,9 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a user command that deletes a task from the task list.
+ */
 public class DeleteCommand extends Command {
     private String userInput;
 
@@ -17,6 +20,14 @@ public class DeleteCommand extends Command {
         return false;
     }
 
+    /**
+     * Checks for the number specified by the user, and deletes the task at that
+     * number accordingly.
+     *
+     * @param tasks List of <code>Task</code> objects.
+     * @param ui Ui object created by Duke.
+     * @param storage Storage object created by Duke.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String fileString = tasks.listToString();
 

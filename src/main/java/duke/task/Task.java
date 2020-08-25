@@ -2,15 +2,30 @@ package duke.task;
 
 import duke.exception.DukeException;
 
+/**
+ * Represents a task entry from the user. A <code>Task</code> object corresponds to
+ * either a to do, deadline, or event.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a task with the specified String <code>description</code> and is
+     * marked as undone.
+     *
+     * @param description Description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Returns the checked or unchecked symbol depending on where this task is done.
+     *
+     * @return Checked or unchecked symbol.
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
@@ -19,6 +34,11 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Returns the first word of the user input.
+     *
+     * @return First word of user input
+     */
     public String getFirstWord() {
         String[] arr = this.description.split(" ", 2);
         String firstWord = arr[0];
@@ -41,39 +61,50 @@ public class Task {
         return this.getFirstWord().equals("event");
     }
 
-    public int getNumber() {
-        String[] arr = this.description.split(" ", 2);
-        if (arr[0].equals("done") || arr[0].equals("delete")) {
-            String stringNum = arr[1];
-            return Integer.parseInt(stringNum);
-        }
-        return -1; // this is return when user did not input a 'done' or 'delete statement
-    }
-
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * Returns the date specified by the user for deadlines and events.
+     * If this task is a to do, return an empty string.
+     *
+     * @return Date of task.
+     */
     public String getDate() {
-
         String des = this.getDescription();
-
         if (des.indexOf('/') == -1) {
-
+            return "";
         }
-        return des.substring(des.indexOf('/') + 4, des.length());
+        return des.substring(des.indexOf('/') + 4);
     }
 
-
+    /**
+     * Checks if the task description is a single word.
+     *
+     * @return True if description is a single word and false otherwise.
+     */
     public boolean isSingleWord() {
         return !this.description.contains(" ");
     }
 
+    /**
+     * Checks if the task is either a to do, deadline or event.
+     *
+     * @return True if the task is neither a to do, deadline, or event and false otherwise
+     */
     public boolean isInvalidTask() {
         String firstWord = this.getFirstWord();
         return !(firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event"));
     }
 
+    /**
+     * Checks if user input is a valid one. A valid input should be either a to do,
+     * deadline, or event, with a description following it. For deadlines and events,
+     * a date must also be specified.
+     *
+     * @throws DukeException If user input is not valid
+     */
     public void validate() throws DukeException {
         if (this.isInvalidTask()) { // checks if input is not to do, deadline, or event
             throw new DukeException("   ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -93,6 +124,13 @@ public class Task {
         }
     }
 
+    /**
+     * Returns the task in a String format that is stored in the txt file.
+     * e.g., <code>new Task("deadline do this /by 2020-01-01")</code> will
+     * return "D | 0 | do this | 2020-01-01".
+     *
+     * @return Task reformatted as a String
+     */
     public String taskToText() { // converts description text to file text
         String des = this.description;
         String task = des.substring(des.indexOf(" ") + 1);
@@ -109,10 +147,6 @@ public class Task {
                     + " | " + this.getDate()
                     : "E | 0 | " + task.substring(0, task.indexOf('/') - 1)
                     + " | " + this.getDate());
-
-
-
-
         } else {
             return "";
         }
@@ -161,7 +195,6 @@ public class Task {
         String task = des.substring(des.indexOf(" "));
         if (this.isTodo()) {
             return "[" + this.getStatusIcon() + "] " + task;
-
         } else {
             return "[" + this.getStatusIcon() + "] " + task.substring(0, task.indexOf('/') - 1);
         }

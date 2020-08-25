@@ -4,6 +4,10 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list of tasks. A <code>TaskList</code> object corresponds to
+ * a list of todos, deadlines, and events based on user input.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
@@ -31,6 +35,12 @@ public class TaskList {
         this.tasks.remove(index);
     }
 
+    /**
+     * Returns the list of tasks in the <code>TaskList</code> as a string,
+     * where each line of the string corresponds to a <code>Task</code>.
+     *
+     * @return String where each line corresponds to a different task.
+     */
     public String listToString() {
         String str = "";
         for (int i = 0; i < tasks.size(); i++) {
