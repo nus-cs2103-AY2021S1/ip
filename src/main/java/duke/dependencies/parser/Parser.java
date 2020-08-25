@@ -12,7 +12,7 @@ import duke.dependencies.task.TaskDate;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-class Checker {
+class Parser {
     private final Executable command;
 
     /**
@@ -21,7 +21,7 @@ class Checker {
      *
      * @param e String to be parsed into an Executable for Executor.
      */
-    private Checker(Executable e) {
+    private Parser(Executable e) {
         this.command = e;
     }
 
@@ -42,7 +42,7 @@ class Checker {
      * @param s command
      * @return Checker object
      */
-    public static Checker parseAndCheck(String s) throws DukeException {
+    public static Parser parseAndCheck(String s) throws DukeException {
         try {
             return parseExplicitCommand(s);
         } catch (DukeException e) {
@@ -63,7 +63,7 @@ class Checker {
      * @param s input
      * @return Checker object
      */
-    private static Checker parseExplicitCommand(String s) throws DukeException {
+    private static Parser parseExplicitCommand(String s) throws DukeException {
         Executable e;
 
         /* LIST COMMAND */
@@ -142,7 +142,7 @@ class Checker {
             throw new UnknownCommandException("Error: Unknown command");
         }
 
-        return new Checker(e);
+        return new Parser(e);
     }
 
 
@@ -186,9 +186,9 @@ class Checker {
      * @param s
      * @return
      */
-    private static Checker parseNaturalLanguage(String s) {
+    private static Parser parseNaturalLanguage(String s) {
 
-        return new Checker(null);
+        return new Parser(null);
 
     }
 

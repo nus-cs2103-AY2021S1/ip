@@ -1,11 +1,11 @@
 package duke;
 
-import duke.dependencies.parser.Parser;
+import duke.dependencies.parser.Controller;
 
 
 /**
  * Class that separates the command checker/parser from the main(). Catches command that
- * ends/closes program, terminating it immediately.
+ * ends/closes program, terminating it immediately. Prints to std::out.
  *
  */
 class Ui {
@@ -18,7 +18,7 @@ class Ui {
                                     + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String CIAO = DIVIDER + "Spero di rivederti presto\n" + DIVIDER;
     private static final String CONVO_START = DIVIDER + LOGO + "\n" + GREETING + DIVIDER;
-    private  static final Parser PARSER = Parser.initParser();
+    private  static final Controller CONTROLLER = Controller.initParser();
     private static final String END = "end|ciao|bye|close|exit|nights|shutdown";
 
     /**
@@ -38,6 +38,7 @@ class Ui {
     /**
      * Receives command from user.
      * Handling of "bye" command takes place here, for now.
+     * This method is the main display method of Duke, and prints straight to std::out.
      *
      * @param s command given by user
      * @return -1 indicating failure, 0 indicating end of program, 1 indicating program is running
@@ -48,7 +49,7 @@ class Ui {
             end();
             return 0;
         }
-        String reply = PARSER.parseAndExec(s);
+        String reply = CONTROLLER.parseAndExec(s);
         // Error encountered
         if (reply.equals("Error")) {
             System.out.println(DIVIDER + reply + "\n" + DIVIDER);

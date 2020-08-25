@@ -13,22 +13,22 @@ import duke.dependencies.executor.Executor;
  * and command is valid. Also validates the format of the dates given and ensures/enforces user compliance to
  * input formats before parsing into an Executable
  */
-public class Parser {
+public class Controller {
     /** Object for executing the commands. */
     private static final Executor executor = Executor.initExecutor();
 
     /**
      * Private constructor for a Parser object.
      */
-    private Parser() {}
+    private Controller() {}
 
     /**
      * Initializer for Parser.
      *
      * @return The Parser object.
      */
-    public static Parser initParser() {
-        return new Parser();
+    public static Controller initParser() {
+        return new Controller();
     }
 
     /**
@@ -39,11 +39,11 @@ public class Parser {
      * @return Reply: what was done by the execution of input.
      */
     public String parseAndExec(String command) {
-        Checker checker = null;
+        Parser parser = null;
         try {
-            checker = Checker.parseAndCheck(command);
+            parser = Parser.parseAndCheck(command);
             String reply;
-            reply = executor.receiveAndExec(checker.getExecutable());
+            reply = executor.receiveAndExec(parser.getExecutable());
             return reply;
 //        } catch (EmptyTaskException e) {
 //            return e.toString();

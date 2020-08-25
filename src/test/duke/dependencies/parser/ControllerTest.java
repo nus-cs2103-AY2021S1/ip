@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ParserTest {
+class ControllerTest {
 
-    private final Parser p = Parser.initParser();
+    private final Controller p = Controller.initParser();
 
     private final String validList = "list";
     private final String validDelete = "delete 1";
