@@ -7,4 +7,4 @@ list
 done 1
 done 4
 delete 5
-
+bye

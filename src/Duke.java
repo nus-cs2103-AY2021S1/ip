@@ -6,23 +6,23 @@ import java.io.*;
 
 public class Duke {
     enum type {
-        TODO{
+        Todo {
             public String toString() {
                 return "todo";
             }
         },
-        DEADLINE{
+        Deadline {
             public String toString() {
                 return "deadline";
             }
         },
-        EVENT{
+        Event {
             @Override
             public String toString() {
                 return "event";
             }
         },
-        DELETE{
+        Delete {
             @Override
             public String toString() {
                 return "delete";
@@ -40,12 +40,11 @@ public class Duke {
 
     public static void main(String[] args) throws DukeException {
         try{
-            if(taskList.exists()){
+            if (taskList.exists()) {
                 FileReader fr = new FileReader(taskList);
                 BufferedReader br = new BufferedReader(fr);
-                String line;
-                while ((line = br.readLine()) != null) {
-                    String[] task = line.split(" \\| ", 4);
+                while ((br.readLine()) != null) {
+                    String[] task = br.readLine().split(" \\| ", 4);
                     rewriteList(task, tasks);
                 }
                 if (tasks.size() > 0) {
@@ -87,8 +86,8 @@ public class Duke {
                 }
             } else {
                 printBorder();
-                if (input.contains(type.TODO.toString()) || input.contains(type.DEADLINE.toString()) || input.contains(type.EVENT.toString()) || input.contains(type.DELETE.toString())) {
-                    if (input.contains(type.TODO.toString())) {
+                if (input.contains(type.Todo.toString()) || input.contains(type.Deadline.toString()) || input.contains(type.Event.toString()) || input.contains(type.Delete.toString())) {
+                    if (input.contains(type.Todo.toString())) {
                         try {
                             Todo t = new Todo(input.substring(5));
                             tasks.add(t);
@@ -98,7 +97,7 @@ public class Duke {
                         } catch (Exception e) {
                             throw new DukeException(" ☹ Insufficient details! The description of a todo cannot be empty.");
                         }
-                    } else if (input.contains(type.DEADLINE.toString())) {
+                    } else if (input.contains(type.Deadline.toString())) {
                         try {
                             String[] s = input.split("/by ", 2);
                             String[] s2 = s[1].split("-", 3);
@@ -116,7 +115,7 @@ public class Duke {
                         } catch (DateTimeParseException e) {
                             throw new DukeException(" ☹ Date wrongly entered, please format date in dd-MM-yyyy!");
                         }
-                    } else if (input.contains(type.EVENT.toString())) {
+                    } else if (input.contains(type.Event.toString())) {
                         try {
                             String[] s = input.split("/at ", 2);
                             String[] s2 = s[1].split("-", 3);
@@ -134,7 +133,7 @@ public class Duke {
                         } catch (DateTimeParseException e) {
                             throw new DukeException(" ☹ Date wrongly entered, please format date in dd-MM-yyyy!");
                         }
-                    } else if (input.contains(type.DELETE.toString())) {
+                    } else if (input.contains(type.Delete.toString())) {
                         try {
                             int index = Integer.parseInt(input.substring(7)) - 1;
                             Task t = tasks.get(index);
