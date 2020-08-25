@@ -19,4 +19,14 @@ public class TaskList extends ArrayList<Task> {
             throw new IndexOutOfBoundsException("No task with this number");
         }
     }
+
+    public TaskList find(String s) {
+        TaskList newList = new TaskList();
+        for (int i = 0; i < size(); i++) {
+            if (get(i).contains(s)) {
+                newList.add(get(i));
+            }
+        }
+        return newList;
+    }
 }

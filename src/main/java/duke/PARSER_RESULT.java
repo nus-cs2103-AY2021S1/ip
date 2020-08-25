@@ -5,5 +5,6 @@ public enum PARSER_RESULT {
     LIST,
     DONE,
     DELETE,
+    FIND,
     ADD
 }

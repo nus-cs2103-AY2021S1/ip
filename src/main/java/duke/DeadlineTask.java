@@ -33,4 +33,9 @@ public class DeadlineTask extends Task {
         return String.format("D @@ %d @@ %s @@ %s",
                 isDone ? 1 : 0, desc, deadlineString);
     }
+
+    @Override
+    public boolean contains(String s) {
+        return desc.contains(s) || deadlineString.contains(s);
+    }
 }

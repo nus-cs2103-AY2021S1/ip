@@ -15,4 +15,9 @@ public class ToDoTask extends Task {
     public String toSaveString() {
         return String.format("T @@ %d @@ %s", isDone ? 1 : 0, desc);
     }
+
+    @Override
+    public boolean contains(String s) {
+        return desc.contains(s);
+    }
 }
