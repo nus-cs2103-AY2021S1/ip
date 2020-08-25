@@ -7,6 +7,11 @@ import java.time.LocalDate;
  */
 public class Task {
     /**
+     * Keeps track of how many tasks have been created.
+     */
+    protected static int numOfTasks;
+
+    /**
      * The description of the Task.
      */
     protected String description;
@@ -17,22 +22,31 @@ public class Task {
     protected boolean isCompleted;
 
     /**
+     * The id of a Task.
+     */
+    protected final int id;
+
+    /**
      * Instantiates a new Task.
+     * Assigns its id to be the current number of Tasks + 1.
      * @param description The description fo the task.
      */
     Task(String description) {
         this.description = description;
         this.isCompleted = false;
+        this.id = numOfTasks++;
     }
 
     /**
      * Instantiates a new Task based on the completion status given.
+     * Assigns its id to be the current number of Tasks + 1.
      * @param description The description of the Task.
      * @param completionStatus The completion status of the Task.
      */
     Task(String description, String completionStatus) {
         this.description = description;
         this.isCompleted = completionStatus.equals("1");
+        this.id = numOfTasks++;
     }
 
     /**
@@ -60,6 +74,14 @@ public class Task {
     }
 
     /**
+     * Returns the id of the Task.
+     * @return The id of the Task.
+     */
+    int getId() {
+        return id;
+    }
+
+    /**
      * Marks the Task as completed.
      */
     void markAsDone() {
@@ -71,7 +93,11 @@ public class Task {
      * @return A String encoding of the Task.
      */
     public String encode() {
-        return (getType() + " | " + (isCompleted ? "1" : "0") + " | " + description + (getDate() != null ? (" | " + getDate()) : ""));
+        return (getId() + " | " + getType() + " | " + (isCompleted ? "1" : "0") + " | " + description + (getDate() != null ? (" | " + getDate()) : ""));
+    }
+
+    public boolean includesKeyword(String keyword) {
+        return description.toLowerCase().contains(keyword.toLowerCase());
     }
 
     /**

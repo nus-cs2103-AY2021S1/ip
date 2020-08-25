@@ -8,7 +8,9 @@ import duke.task.ToDo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -53,18 +55,18 @@ public class Storage {
         while (sc.hasNext()) {
             String data = sc.nextLine();
             String[] dataArray = data.split(" \\| ");
-            switch (dataArray[0]) {
-                case "T":
-                    list.add(new ToDo(dataArray[2], dataArray[1]));
-                    break;
-                case "E":
-                    list.add(new Event(dataArray[2], LocalDate.parse(dataArray[3]), dataArray[1]));
-                    break;
-                case "D":
-                    list.add(new Deadline(dataArray[2], LocalDate.parse(dataArray[3]), dataArray[1]));
-                    break;
-                default:
-                    throw new IOException("Invalid data");
+            switch (dataArray[1]) {
+            case "T":
+                list.add(new ToDo(dataArray[3], dataArray[2]));
+                break;
+            case "E":
+                list.add(new Event(dataArray[3], LocalDate.parse(dataArray[4]), dataArray[2]));
+                break;
+            case "D":
+                list.add(new Deadline(dataArray[3], LocalDate.parse(dataArray[4]), dataArray[2]));
+                break;
+            default:
+                throw new IOException("Invalid data");
             }
         }
         return list;

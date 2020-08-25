@@ -30,6 +30,12 @@ public class Parser {
             return new ListCommand();
         } else if (fullCommand.equals(CommandType.SHOW.getType())) {
             throw new InvalidArgumentException("☹ OOPS!!! The show command requires a date in yyyy-mm-dd.");
+        } else if (fullCommand.equals(CommandType.FIND.getType())) {
+            throw new InvalidArgumentException("☹ OOPS!!! The find command requires keyword.");
+        } else if (fullCommand.equals(CommandType.DELETE.getType())) {
+            throw new InvalidCommandException("☹ OOPS!!! The delete command requires the index of a task.");
+        } else if (fullCommand.equals(CommandType.DONE.getType())) {
+            throw new InvalidCommandException("☹ OOPS!!! The done command requires the index of a task.");
         } else if (fullCommandArray[0].equals(CommandType.LIST.getType())) {
             throw new InvalidArgumentException("☹ OOPS!!! The list command does not take any additional argument(s).");
         } else if (fullCommandArray[0].equals(CommandType.BYE.getType())) {
@@ -41,14 +47,12 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 throw new InvalidArgumentException("☹ OOPS!!! The show command requires a date in yyyy-mm-dd.");
             }
-        } else if (fullCommand.equals(CommandType.DELETE.getType())) {
-            throw new InvalidCommandException("☹ OOPS!!! The delete command requires the index of a task.");
-        } else if (fullCommand.equals(CommandType.DONE.getType())) {
-            throw new InvalidCommandException("☹ OOPS!!! The done command requires the index of a task.");
         } else if (fullCommandArray[0].equals(CommandType.DONE.getType())) {
             return new DoneCommand(Integer.parseInt(fullCommandArray[1]));
         } else if (fullCommandArray[0].equals(CommandType.DELETE.getType())) {
             return new DeleteCommand(Integer.parseInt(fullCommandArray[1]));
+        } else if (fullCommandArray[0].equals(CommandType.FIND.getType())) {
+            return new FindCommand(fullCommandArray[1]);
         } else {
             String type = fullCommand.split(" ")[0];
             String temp = fullCommand.strip();

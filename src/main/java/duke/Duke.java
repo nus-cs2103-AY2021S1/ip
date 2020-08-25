@@ -45,6 +45,7 @@ public class Duke {
                 ui.displayMessage(e.getMessage());
             } finally {
                 ui.showLine();
+                ui.newLine();
             }
         }
     }

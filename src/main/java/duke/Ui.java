@@ -42,14 +42,21 @@ public class Ui {
     void showWelcome() {
         showLogo();
         System.out.println("\tWhat can I do for you?");
-        System.out.println("\t___________________________________________\n");
+        System.out.println("\t_____________________________________________________\n");
     }
 
     /**
      * Prints a horizontal line.
      */
     void showLine() {
-        System.out.println("\t___________________________________________");
+        System.out.println("\t_____________________________________________________");
+    }
+
+    /**
+     * Prints a new empty line.
+     */
+    void newLine() {
+        System.out.println();
     }
 
     /**
