@@ -35,6 +35,7 @@ public class Ui {
     /** Prints the available input commands and their respective formatting requirements. */
     public void showHelp() {
         System.out.println("list: displays a sequential view of past inputs\n" +
+                "find <task description>: finds all the tasks matched\n" +
                 "done <task number>: denotes a task as done by checking it\n" +
                 "delete <task number>: deletes an existing task\n" +
                 "deadline <description> /by <YYYY-MM-DD> <HH:MM>: adds a deadline with " +
@@ -89,4 +90,23 @@ public class Ui {
         System.out.println(message);
     }
 
+    public void showFoundTasks(TaskList taskList, String desToFind) {
+        int number = 1;
+        boolean hasResults = false;
+        for (int i = 1; i <= taskList.noOfTasks(); i++) {
+            if (taskList.getTask(i - 1).description.contains(desToFind)) {
+                if (!hasResults) {
+                    System.out.println("Here are your tasks:");
+                }
+                System.out.println(number + ". " + taskList.getTask(i - 1));
+                number++;
+                hasResults = true;
+            }
+        }
+        if (hasResults) {
+            System.out.println("If you wish to mark a task as completed, input: done <task number>");
+        } else {
+            System.out.println("Sorry there are no matching results :(");
+        }
+    }
 }

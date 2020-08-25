@@ -20,6 +20,7 @@ public class Parser {
         Set<String> reservedKeyWords = new HashSet<>();
         reservedKeyWords.add("help");
         reservedKeyWords.add("list");
+        reservedKeyWords.add("find");
         reservedKeyWords.add("done");
         reservedKeyWords.add("delete");
         reservedKeyWords.add("deadline");
