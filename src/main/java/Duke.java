@@ -1,5 +1,6 @@
 import Task.*;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -110,7 +111,8 @@ public class Duke {
                     output = output + i + ". " + taskList.get(i - 1) + "\n";
                 }
             }
-            System.out.println(LINE + "Here are your task in your list due: \n" + output + LINE);
+            System.out.println(LINE + "Here are your task due on "
+                    + filterDate.format(DateTimeFormatter.ofPattern("MMM d yyy")) + ": \n" + output + LINE);
         } catch (DateTimeParseException e) {
             throw new DukeException(LINE + "Invalid input! Please enter a valid date! \n" + LINE);
         }

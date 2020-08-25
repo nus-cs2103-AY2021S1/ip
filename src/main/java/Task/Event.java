@@ -24,7 +24,7 @@ public class Event extends Task {
             return "[E]" + icon + " " + this.description + " (at: " + this.at + ")";
         } else {
             return "[E]" + icon + " " + this.description + " (at: "
-                    + this.atDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                    + this.atDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
         }
     }
 

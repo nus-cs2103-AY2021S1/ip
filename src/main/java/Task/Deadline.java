@@ -24,7 +24,7 @@ public class Deadline extends Task {
             return "[D]" + icon + " " + this.description + " (by: " + this.by + ")";
         } else {
             return "[D]" + icon + " " + this.description + " (by: "
-                    + this.byDateTime.format(DateTimeFormatter.ofPattern("MMM d yyy")) + ")";
+                    + this.byDateTime.format(DateTimeFormatter.ofPattern("MMM d yyy HH:mm")) + ")";
         }
     }
 
