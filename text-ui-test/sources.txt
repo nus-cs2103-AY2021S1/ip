@@ -1,9 +1,17 @@
+C:\repos\ip\src\main\java\Command.java
+C:\repos\ip\src\main\java\DateException.java
 C:\repos\ip\src\main\java\Deadline.java
 C:\repos\ip\src\main\java\Duke.java
+C:\repos\ip\src\main\java\DukeException.java
+C:\repos\ip\src\main\java\DukeTwin.java
 C:\repos\ip\src\main\java\Event.java
 C:\repos\ip\src\main\java\InvalidCommandException.java
 C:\repos\ip\src\main\java\InvalidDeleteException.java
 C:\repos\ip\src\main\java\InvalidDoneException.java
 C:\repos\ip\src\main\java\InvalidTaskArgumentException.java
+C:\repos\ip\src\main\java\Main.java
+C:\repos\ip\src\main\java\Parser.java
+C:\repos\ip\src\main\java\Storage.java
 C:\repos\ip\src\main\java\Task.java
+C:\repos\ip\src\main\java\TaskList.java
 C:\repos\ip\src\main\java\ToDo.java
