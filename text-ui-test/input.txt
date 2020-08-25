@@ -2,9 +2,9 @@ list
 todo
 go running
 event
-concert /at Mon 2pm-3pm
+concert /at 02/02/20 18:00
 deadline
-cs2103 proj /by Tues
+cs2103 proj /by 02/03/20 23:59
 list
 done
 3 1
@@ -14,13 +14,12 @@ delete
 2 99
 delete
 1 2
-delete
 list
-done
 help
 event
-briefing at Monday 3pm
+briefing at 07/01/20 14:00
 briefing /at
-briefing /at Monday 3pm
+briefing /at 07/01/20 14:00
 ls
+list
 bye

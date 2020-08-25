@@ -15,39 +15,37 @@ Duke> What can I do for you?
 >> Duke> I've added 'cs2103 proj' to your Task List
 >> Duke> Here's your Task List:
 1. [T][✘] go running
-2. [E][✘] concert (at: Mon 2pm-3pm)
-3. [D][✘] cs2103 proj (by: Tues)
+2. [E][✘] concert (at: 02/02/20 18:00)
+3. [D][✘] cs2103 proj (by: 02/03/20 23:59)
 >> Duke> Here's your Task List:
 1. [T][✘] go running
-2. [E][✘] concert (at: Mon 2pm-3pm)
-3. [D][✘] cs2103 proj (by: Tues)
+2. [E][✘] concert (at: 02/02/20 18:00)
+3. [D][✘] cs2103 proj (by: 02/03/20 23:59)
 Choose the task(s) to be marked as 'Done'
 >> Duke> Nice! I've marked the following as done:
-[D][✓] cs2103 proj (by: Tues)
+[D][✓] cs2103 proj (by: 02/03/20 23:59)
 [T][✓] go running
 >> Duke> Here's your Task List:
 1. [T][✓] go running
-2. [E][✘] concert (at: Mon 2pm-3pm)
-3. [D][✓] cs2103 proj (by: Tues)
+2. [E][✘] concert (at: 02/02/20 18:00)
+3. [D][✓] cs2103 proj (by: 02/03/20 23:59)
 >> Duke> Unrecognised Command :(, type 'help' for available commands.
 >> Duke> Here's your Task List:
 1. [T][✓] go running
-2. [E][✘] concert (at: Mon 2pm-3pm)
-3. [D][✓] cs2103 proj (by: Tues)
+2. [E][✘] concert (at: 02/02/20 18:00)
+3. [D][✓] cs2103 proj (by: 02/03/20 23:59)
 Choose the task(s) to be deleted.
 >> Duke> This task #99 does not exist.
 Duke> I've deleted the task(s) you specified:
-[E][✘] concert (at: Mon 2pm-3pm)
+[E][✘] concert (at: 02/02/20 18:00)
 >> Duke> Here's your Task List:
 1. [T][✓] go running
-2. [D][✓] cs2103 proj (by: Tues)
+2. [D][✓] cs2103 proj (by: 02/03/20 23:59)
 Choose the task(s) to be deleted.
 >> Duke> I've deleted the task(s) you specified:
-[D][✓] cs2103 proj (by: Tues)
+[D][✓] cs2103 proj (by: 02/03/20 23:59)
 [T][✓] go running
->> Duke> Your Task List is empty. There's nothing to be deleted.
 >> Duke> Your Task List is empty.
->> Duke> Your Task List is empty. There's nothing to be done.
 >> Here's what I can do:
 Available Commands:
 'todo'
@@ -63,4 +61,6 @@ Duke> Enter Event details:
 Duke> Enter Event details:
 >> Duke> I've added 'briefing' to your Task List
 >> Duke> Unrecognised Command :(, type 'help' for available commands.
+>> Duke> Here's your Task List:
+1. [E][✘] briefing (at: 07/01/20 14:00)
 >> Duke> See you soon!
