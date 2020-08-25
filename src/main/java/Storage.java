@@ -7,11 +7,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The Storage class deals with handling the writing and reading of data to the file specified
+ */
 
 public class Storage {
     private File dataFile;
     private final String FILE_PATH;
 
+    /**
+     * Initializes a storage object
+     *
+     * @param filepath String representing the filepath to load the file
+     */
     public Storage(String filepath){
         this.FILE_PATH = filepath;
         dataFile = new File(filepath);
@@ -24,6 +32,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends task to the file
+     *
+     * @param task String representing task to be appended
+     */
+
     public void appendFile (String task) {
         try {
             FileWriter fw = new FileWriter(FILE_PATH, true);
@@ -34,6 +48,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Overwrites the file with data from the list given
+     *
+     * @param list representing the list of tasks
+     */
     public void overwriteFile (ArrayList<Task> list) {
         try {
             FileWriter fw = new FileWriter(FILE_PATH);
@@ -56,6 +75,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the file into an array list.
+     *
+     * @return ArrayList<Task> list of tasks stored in the file
+     * @throws FileNotFoundException
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws FileNotFoundException, DukeException {
         ArrayList<Task> toReturn = new ArrayList<>();
         Scanner reader = new Scanner(dataFile);

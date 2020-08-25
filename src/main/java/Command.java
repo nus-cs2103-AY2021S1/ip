@@ -2,16 +2,33 @@ package main.java;
 
 import java.io.IOException;
 
+/**
+ * The command class is used to handle and execute commands
+ * after input by user is processed by the parser.
+ */
+
 public class Command {
     private String task;
     private String action;
     private boolean end;
 
+    /**
+     * Initializes a Command object
+     *
+     * @param task The input task given by the user
+     * @param action The type of action take as given by the task.
+     */
     public Command(String task, String action) {
         this.end = false;
         this.task = task;
         this.action = action;
     }
+    /**
+     * Executes the action on task given.
+     *
+     * @param taskList the current task list in use.
+     * @param ui the user interface object.
+     */
 
     public void execute(TaskList taskList, Ui ui) throws IOException, DukeException {
         if(action == null){
@@ -45,6 +62,11 @@ public class Command {
             ui.showInvalidCommand();
         }
     }
+
+    /**
+     * Returns a Boolean, with true indicating that the command given ends the interaction
+     * with the user, false indicating otherwise.
+     */
 
     public boolean isEnd(){
         return this.end;
