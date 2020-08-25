@@ -74,6 +74,9 @@ public class Ui {
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("The task number does not exist!");
                 }
+            } else if (commandComponents[0].equals("find")) {
+                String keyword = commandComponents[1];
+                System.out.println(taskList.searchWithKeyword(keyword));
             } else {
                 // pass user input to parser
                 if (commandComponents.length == 1) {
@@ -84,7 +87,7 @@ public class Ui {
                         if (toAdd == null) {
                             invalidInput("  \u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                         } else {
-                            storage.writeToFile(toAdd.toString() + System.lineSeparator());
+                            storage.writeToFile(toAdd.toString());
                             System.out.println("  Got it. I've added this task:\n"
                                     + "    " + toAdd.toString() + "\n  Now you have "
                                     + (taskList.size()+1) + " tasks in the list.");
