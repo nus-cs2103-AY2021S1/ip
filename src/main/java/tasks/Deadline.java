@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Deadlines have an additional time due (a {@code LocalDate} specified with /by).
+ */
 public class Deadline extends Task {
 
     // task must be done by this time

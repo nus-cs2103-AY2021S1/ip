@@ -2,15 +2,27 @@ package core;
 
 import java.util.Scanner;
 
+/**
+ * Controls user input and output.
+ */
 public class Ui {
 
     // user input
     private static final Scanner sc = new Scanner(System.in);
 
+    /**
+     * Retrieves a single command (line of input) from the user.
+     * @return a single command from the user
+     */
     public static String getCommand() {
         return sc.hasNextLine() ? sc.nextLine() : null;
     }
 
+    /**
+     * Checks if there is further input. There may be no further input if standard input
+     * was piped in, or if an EOF character was sent to the command line.
+     * @return {@code true} if there is no further input from the user
+     */
     public static boolean missingInput() {
         return !sc.hasNextLine();
     }

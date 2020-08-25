@@ -2,6 +2,10 @@ package tasks;
 
 import exceptions.DataException;
 
+/**
+ * An abstract task. All tasks have a description and completion status.
+ * They start as incomplete, and can be marked as complete later.
+ */
 public abstract class Task {
 
     // task description
@@ -26,6 +30,10 @@ public abstract class Task {
         return done;
     }
 
+    /**
+     * Retrieves a character representing the task type. This should be unique to each subclass.
+     * @return a character representing the task type
+     */
     protected abstract char getTaskType();
 
     public void markAsDone() {

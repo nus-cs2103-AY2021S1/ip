@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+/**
+ * Main class containing the entry point of the program.
+ */
 public class IPbot {
 
     // task list

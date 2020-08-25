@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Events have an additional event time (a {@code LocalDate} specified with /at).
+ */
 public class Event extends Task {
 
     // event held at this time

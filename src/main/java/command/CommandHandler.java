@@ -15,10 +15,18 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * A function that accepts and processes lines of user commands.
+ */
 public class CommandHandler implements Consumer<String> {
 
     private final boolean printOutput;
 
+    /**
+     * The {@code CommandHandler} can be configured to not print output to the UI.
+     * This is useful for restoring data from a save file.
+     * @param printOutput whether output should be printed
+     */
     public CommandHandler(boolean printOutput) {
         this.printOutput = printOutput;
     }
