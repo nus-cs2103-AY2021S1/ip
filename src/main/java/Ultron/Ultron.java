@@ -1,7 +1,7 @@
-package Ultron;
+package ultron;
 
-import Ultron.Exceptions.UltronException;
-import Ultron.Commands.Command;
+import ultron.exceptions.UltronException;
+import ultron.commands.Command;
 
 import java.util.ArrayList;
 

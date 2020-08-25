@@ -1,4 +1,4 @@
-package Ultron.Tasks;
+package ultron.tasks;
 
 public class Todo extends Task {
 
@@ -21,7 +21,7 @@ public class Todo extends Task {
 
     @Override
     public String getCommand() {
-        return super.getCommand() + String.format("%s", getMessage());
+        return String.format("%s", getMessage());
     }
 
     @Override

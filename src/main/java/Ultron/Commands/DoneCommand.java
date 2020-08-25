@@ -1,11 +1,11 @@
-package Ultron.Commands;
+package ultron.commands;
 
-import Ultron.Exceptions.ExceptionType;
-import Ultron.Exceptions.UltronException;
-import Ultron.Parser;
-import Ultron.Storage;
-import Ultron.TaskList;
-import Ultron.UI;
+import ultron.exceptions.ExceptionType;
+import ultron.exceptions.UltronException;
+import ultron.Parser;
+import ultron.Storage;
+import ultron.TaskList;
+import ultron.UI;
 
 public class DoneCommand extends Command {
 

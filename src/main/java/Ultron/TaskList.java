@@ -1,6 +1,6 @@
-package Ultron;
+package ultron;
 
-import Ultron.Tasks.Task;
+import ultron.tasks.Task;
 
 import java.util.ArrayList;
 

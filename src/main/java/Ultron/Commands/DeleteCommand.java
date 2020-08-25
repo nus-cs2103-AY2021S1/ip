@@ -1,12 +1,12 @@
-package Ultron.Commands;
+package ultron.commands;
 
-import Ultron.Exceptions.ExceptionType;
-import Ultron.Parser;
-import Ultron.TaskList;
-import Ultron.Tasks.Task;
-import Ultron.UI;
-import Ultron.Storage;
-import Ultron.Exceptions.UltronException;
+import ultron.exceptions.ExceptionType;
+import ultron.Parser;
+import ultron.TaskList;
+import ultron.tasks.Task;
+import ultron.UI;
+import ultron.Storage;
+import ultron.exceptions.UltronException;
 
 
 public class DeleteCommand extends Command{

@@ -1,4 +1,4 @@
-package Ultron.Tasks;
+package ultron.tasks;
 
 public abstract class Task {
 
@@ -31,9 +31,7 @@ public abstract class Task {
     }
 
     public abstract String getType();
-    public String getCommand(){
-        return (isDone() ? "1" : "0") + "~";
-    }
+    public abstract String getCommand();
 
     public void markDone() {
 

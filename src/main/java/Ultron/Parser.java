@@ -1,14 +1,14 @@
-package Ultron;
+package ultron;
 
-import Ultron.Commands.Command;
-import Ultron.Commands.TaskAllocator;
-import Ultron.Commands.ByeCommand;
-import Ultron.Commands.ListCommand;
-import Ultron.Commands.HelpCommand;
-import Ultron.Commands.DeleteCommand;
-import Ultron.Commands.DoneCommand;
-import Ultron.Exceptions.UltronException;
-import Ultron.Exceptions.ExceptionType;
+import ultron.commands.Command;
+import ultron.commands.TaskAllocator;
+import ultron.commands.ByeCommand;
+import ultron.commands.ListCommand;
+import ultron.commands.HelpCommand;
+import ultron.commands.DeleteCommand;
+import ultron.commands.DoneCommand;
+import ultron.exceptions.UltronException;
+import ultron.exceptions.ExceptionType;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

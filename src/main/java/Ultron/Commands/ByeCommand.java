@@ -1,10 +1,10 @@
-package Ultron.Commands;
+package ultron.commands;
 
-import Ultron.Exceptions.UltronException;
-import Ultron.Exceptions.ExceptionType;
-import Ultron.TaskList;
-import Ultron.UI;
-import Ultron.Storage;
+import ultron.exceptions.UltronException;
+import ultron.exceptions.ExceptionType;
+import ultron.TaskList;
+import ultron.UI;
+import ultron.Storage;
 
 public class ByeCommand extends Command{
 
