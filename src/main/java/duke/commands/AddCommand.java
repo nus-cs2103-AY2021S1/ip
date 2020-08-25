@@ -4,6 +4,8 @@ import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
 
+import static duke.utils.Messages.MESSAGE_ADD_TASK;
+
 /** Represents the command that adds a task to the taskList when executed. */
 public class AddCommand extends Command {
 
@@ -27,11 +29,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui) {
         taskList.addTask(toAdd);
-        ui.show(String.format(
-                "\t Got it. I've added this task:\n\t\t%s\n\t %s",
-                toAdd.toString(),
-                taskList.tasksRemaining()
-        ));
+        ui.show(String.format("%s\t\t%s\n\t %s", MESSAGE_ADD_TASK, toAdd.toString(), taskList.tasksRemaining()));
     }
 
 }

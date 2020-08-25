@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import static duke.utils.Messages.MESSAGE_TODAY;
+
 /** Represents the command that displays all tasks happening today to the user when executed. */
 public class TodayCommand extends Command {
 
@@ -41,7 +43,7 @@ public class TodayCommand extends Command {
     }
 
     private String tasksTodayString(ArrayList<Task> tasks) {
-        String response = "\t Here are your tasks today:\n";
+        String response = MESSAGE_TODAY;
         return ListCommand.tasksToString(tasks, response);
     }
 }

@@ -37,6 +37,7 @@ public class Parser {
      * @throws EmptyTaskDeletedException If the user inputs deleted without a task.
      * @throws EmptyDueDateException If the user inputs deadline without a due date.
      * @throws EmptyEventDateException If the user inputs an event without the date and/or time.
+     * @throws EmptySearchWordException If the user inputs find without a search word.
      */
     public static Command parse(String userInput) throws EmptyTaskDescriptionException, DukeDateTimeParseException,
             EmptyTaskDoneException, EmptyTaskDeletedException,

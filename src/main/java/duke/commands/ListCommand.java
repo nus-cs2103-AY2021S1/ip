@@ -6,6 +6,8 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+import static duke.utils.Messages.MESSAGE_LIST;
+
 /** Represents the command that lists out all tasks when executed. */
 public class ListCommand extends Command {
 
@@ -16,7 +18,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui) {
-        String response = "\t Here are the tasks in your list:\n";
+        String response = MESSAGE_LIST;
         ui.show(tasksToString(taskList.getTasks(), response));
     }
 

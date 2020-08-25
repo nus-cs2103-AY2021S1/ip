@@ -5,6 +5,8 @@ import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
 
+import static duke.utils.Messages.MESSAGE_DONE_TASK;
+
 /** Represents the command that marks a task as done when executed. */
 public class DoneCommand extends Command {
 
@@ -28,6 +30,6 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui) throws NoSuchTaskException {
         Task taskDone = taskList.markTaskAsDone(taskIndex);
-        ui.show(String.format("\t Nice! I've marked this task as done:\n\t\t%s", taskDone.toString()));
+        ui.show(String.format("%s\t\t%s", MESSAGE_DONE_TASK, taskDone.toString()));
     }
 }

@@ -6,6 +6,9 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+import static duke.utils.Messages.MESSAGE_FIND;
+import static duke.utils.Messages.MESSAGE_FIND_NO_MATCH;
+
 /** Represents the command that displays all tasks that match the user's search word
  * when executed.
  */
@@ -36,9 +39,9 @@ public class FindCommand extends Command {
             }
         }
         if (matchedTasks.size() == 0) {
-            ui.show("\t There are no tasks that matches your search word.");
+            ui.show(MESSAGE_FIND_NO_MATCH);
         } else {
-            String message = "\t Here are the matching tasks in your list:\n";
+            String message = MESSAGE_FIND;
             ui.show(ListCommand.tasksToString(matchedTasks, message));
         }
     }

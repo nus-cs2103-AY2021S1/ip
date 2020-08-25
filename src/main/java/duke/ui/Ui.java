@@ -2,6 +2,10 @@ package duke.ui;
 
 import java.util.Scanner;
 
+import static duke.utils.Messages.MESSAGE_BYE;
+import static duke.utils.Messages.MESSAGE_GREETING;
+import static duke.utils.Messages.MESSAGE_WELCOME;
+
 /** Represents the Ui of the system that handles user interaction. */
 public class Ui {
 
@@ -19,27 +23,21 @@ public class Ui {
     }
 
     private void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println(MESSAGE_WELCOME);
     }
 
     /** Displays the greeting to the user. Called when the user first runs the program. */
     public void showGreeting() {
         showWelcome();
         showLine();
-        System.out.println("\t Hello! I'm Duke\n"
-                + "\t What can I do for you?");
+        System.out.println(MESSAGE_GREETING);
         showLine();
     }
 
     /** Displays the goodbye message to the user. */
     public void showBye() {
         showLine();
-        System.out.println("\t Bye. Hope to see you again soon!");
+        System.out.println(MESSAGE_BYE);
         showLine();
     }
 

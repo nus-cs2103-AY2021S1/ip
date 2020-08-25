@@ -5,6 +5,8 @@ import duke.tasklist.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
 
+import static duke.utils.Messages.MESSAGE_DELETE_TASK;
+
 /** Represents the command that deletes a task when executed. */
 public class DeleteCommand extends Command {
 
@@ -28,9 +30,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui) throws NoSuchTaskException {
         Task taskDeleted = taskList.deleteTask(taskIndex);
-        ui.show(String.format("\t Noted. I've removed this task:\n\t\t%s\n\t %s",
-                taskDeleted.toString(),
-                taskList.tasksRemaining()
-        ));
+        ui.show(String.format("%s\t\t%s\n\t %s", MESSAGE_DELETE_TASK,
+                taskDeleted.toString(), taskList.tasksRemaining()));
     }
 }
