@@ -1,5 +1,5 @@
 package Task;
-import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -14,7 +14,7 @@ public class Event extends Task {
         try {
             this.atDateTime = LocalDateTime.parse(reformatedDateTime());
         } catch (DateTimeParseException e) {
-            this.atDateTime = null;
+            System.out.println("Invalid input! Enter appropriate date and time format");
         }
     }
 
@@ -41,5 +41,10 @@ public class Event extends Task {
         String hour = time.substring(0, 2);
         String minute = time.substring(2);
         return dateSplit[2] + "-" + dateSplit[1] + "-" + dateSplit[0] + "T" + hour + ":" + minute + ":00";
+    }
+
+    public boolean isDate(String date) {
+        LocalDate filterDate = LocalDate.parse(date);
+        return this.atDateTime.toLocalDate().equals(filterDate);
     }
 }

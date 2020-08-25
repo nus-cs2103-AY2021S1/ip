@@ -15,4 +15,8 @@ public class ToDo extends Task {
         int completedBinary = this.completed ? 1 : 0;
         return "T>" + completedBinary + ">" + this.description;
     }
+
+    public boolean isDate() {
+        return false;
+    }
 }

@@ -14,4 +14,5 @@ public abstract class Task {
     }
 
     public abstract String toEncoding();
+    public abstract boolean isDate();
 }
