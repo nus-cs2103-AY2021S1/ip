@@ -40,7 +40,7 @@ public class task {
     public String read(){
         String done = "";
         if(this.completed){
-            done = "[✓]";
+            done = "[O]";
         }
         else{
             done = "[X]";
@@ -101,5 +101,8 @@ public class task {
                     this.date.format(DateTimeFormatter.ofPattern("dd MMM uuuu HHmm")) + ")");
         }
         System.out.println("Now you have " + count + " tasks in the list.");
+    }
+    public static void changeCount(){
+        count = count - 1;
     }
 }

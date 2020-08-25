@@ -59,12 +59,17 @@ public class Duke {
                         try{
                             String date = checker.dateFinder(echo,2);
                             Deadline d = new Deadline(name,"[D]");
-                            d.addDate(date);
-                            store.add(d);
-                            d.print();
-                            try{
-                                FileManager.add(fileDir,d.read());
-                            } catch(IOException e){
+                            try {
+                                d.addDate(date);
+                                store.add(d);
+                                d.print();
+                                try{
+                                    FileManager.add(fileDir,d.read());
+                                } catch(IOException e){
+                                    System.out.println(e);
+                                }
+                            } catch (ErrorExceptions e){
+                                task.changeCount();
                                 System.out.println(e);
                             }
                         }
@@ -82,12 +87,17 @@ public class Duke {
                         try{
                             String date = checker.dateFinder(echo,3);
                             Event e = new Event(name,"[E]");
-                            e.addDate(date);
-                            store.add(e);
-                            e.print();
-                            try{
-                                FileManager.add(fileDir,e.read());
-                            } catch(IOException m){
+                            try {
+                                e.addDate(date);
+                                store.add(e);
+                                e.print();
+                                try{
+                                    FileManager.add(fileDir,e.read());
+                                } catch(IOException m){
+                                    System.out.println(m);
+                                }
+                            } catch(ErrorExceptions m){
+                                task.changeCount();
                                 System.out.println(m);
                             }
                         }

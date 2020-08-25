@@ -1,35 +1,38 @@
 Hello! I'm Duke
 What can I do for you?
+☹ OOPS!!! The description of a todo cannot be empty.
 Got it. I've added this task: 
   [T][X] test 1 
 Now you have 1 tasks in the list.
+1. [T][X] test 1 
+☹ OOPS!!! The description of a deadline cannot be empty.
+ErrorExceptions: Wrong deadline or event command format, missing /action: deadline
+ErrorExceptions: Wrong event command format, missing date
+ErrorExceptions: Missing time!
+ErrorExceptions: Missing time!
 Got it. I've added this task: 
-  [D][X] test 2 (by: Monday)
+  [D][X] test 2 (by: 12 Dec 2020 1200)
 Now you have 2 tasks in the list.
+1. [T][X] test 1 
+2. [D][X] test 2 (by: 12 Dec 2020 1200)
+☹ OOPS!!! The description of an event cannot be empty.
+ErrorExceptions: Wrong deadline or event command format, missing /action: deadline
+ErrorExceptions: Wrong event command format, missing date
+ErrorExceptions: Wrong event command format, missing timeslot
 Got it. I've added this task: 
-  [E][X] test 3 (at: Tuesday 2-3pm)
+  [E][X] test 3 (at: 11 Nov 2020 1100)
 Now you have 3 tasks in the list.
-Got it. I've added this task: 
-  [T][X] test 4 
-Now you have 4 tasks in the list.
-11. [T][X] test 1 
-22. [D][X] test 2 (by: Monday)
-33. [E][X] test 3 (at: Tuesday 2-3pm)
-44. [T][X] test 4 
-Invalid Command, I do not understand! ☹
+1. [T][X] test 1 
+2. [D][X] test 2 (by: 12 Dec 2020 1200)
+3. [E][X] test 3 (at: 11 Nov 2020 1100)
+Nice! I've marked this task as done: 
+  [D][O] test 2 (by: 12 Dec 2020 1200)
+1. [T][X] test 1 
+2. [D][O] test 2 (by: 12 Dec 2020 1200)
+3. [E][X] test 3 (at: 11 Nov 2020 1100)
 Noted. I've removed this task: 
-  [D][X] test 2 (by: Monday)
-Now you have 3 tasks in the list.
-11. [T][X] test 1 
-23. [E][X] test 3 (at: Tuesday 2-3pm)
-34. [T][X] test 4 
-There is no such task!
-11. [T][X] test 1 
-23. [E][X] test 3 (at: Tuesday 2-3pm)
-34. [T][X] test 4 
-Noted. I've removed this task: 
-  [T][X] test 4 
+  [T][X] test 1 
 Now you have 2 tasks in the list.
-11. [T][X] test 1 
-23. [E][X] test 3 (at: Tuesday 2-3pm)
+1. [D][O] test 2 (by: 12 Dec 2020 1200)
+2. [E][X] test 3 (at: 11 Nov 2020 1100)
 Bye. Hope to see you again soon!
