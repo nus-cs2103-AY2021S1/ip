@@ -11,18 +11,40 @@ import task.tasks.Event;
 
 import storage.Storage;
 
+/**
+ * Contains list of tasks and provide operations to manipulate this list of tasks.
+ */
 public class TaskList {
-
+    /**
+     * Task list.
+     */
     protected List<Task> tasks;
 
+    /**
+     * Creates TaskList object containing a list of tasks.
+     *
+     * @param tasks Task list.
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Retrieves task list from TaskList object.
+     *
+     * @return Task list.
+     */
     public List<Task> getTasks() {
         return this.tasks;
     }
 
+    /**
+     * Adds a task to task list.
+     *
+     * @param userCommand User input.
+     * @throws ArrayIndexOutOfBoundsException If /by or /at user input not written properly.
+     *                                        E.g deadline return book /bylmklmlmlkmlkmlmlmlmlmkl Sunday.
+     */
     public void addTask(String userCommand) {
         if (userCommand.contains("todo")) { // To Do
             // E.g todowork
@@ -70,6 +92,16 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a task in task list as completed.
+     *
+     * @param userCommand User input.
+     * @throws IndexOutOfBoundsException If given a non-existent task S/N number.
+     *                                   E.g "done 719329813298712398123" is not valid as number of tasks is cap to 100
+     *                                   by requirements. E.g "done 7" is not valid if there are only 6 tasks in the
+     *                                   task list.
+     * @throws NumberFormatException     If user input is invalid. E.g "done work".
+     */
     public void markTaskDone(String userCommand) {
         try {
             // E.g given "done 1", we split to ["done", "1"]
@@ -100,6 +132,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task in task list.
+     *
+     * @param userCommand User input.
+     * @throws IndexOutOfBoundsException If given a non-existent task S/N number.
+     *                                   E.g "delete 719329813298712398123" is not valid as number of tasks is cap to 100 by requirements.
+     *                                   E.g "delete 7" is not valid if there are only 6 tasks in the task list.
+     */
     public void deleteTask(String userCommand) {
         try {
             // E.g given "delete 1", we split to ["delete", "1"]
@@ -125,6 +165,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds a task in task list.
+     *
+     * @param userCommand User input.
+     */
     public void findTask(String userCommand) {
         // E.g given "find book", we split to ["find", "book"]
         String[] userCommandSplit = userCommand.split(" ", 2);
