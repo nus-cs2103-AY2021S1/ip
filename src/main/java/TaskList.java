@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
@@ -33,5 +34,17 @@ public class TaskList {
         this.updateStorage(storage);
         
         return task;
+    }
+    
+    public TaskList find(String searchString) {
+        List<Task> matchingTasks = new ArrayList<>();
+        
+        for (Task t : this.list) {
+            if (t.getDescription().contains(searchString)) {
+                matchingTasks.add(t);
+            }
+        }
+        
+        return new TaskList(matchingTasks);
     }
 }

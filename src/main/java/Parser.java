@@ -1,18 +1,18 @@
 public class Parser {
-    public String parse(String input, TaskList list, Storage storage) throws DukeException {
+    public String parse(String input, TaskList tasks, Storage storage) throws DukeException {
         String output;
         String[] command = input.split(" ", 2);
 
         if (input.equals("bye")) {
             output = "\tBye. Hope to see you again soon!";
         } else if (input.equals("list")) {
-            if (list.isEmpty()) {
+            if (tasks.isEmpty()) {
                 throw new DukeException("\t☹ OOPS!!! There is no task in the list.");
             }
             StringBuilder concat = new StringBuilder();
 
-            for (int i = 0; i < list.size(); i++) {
-                concat.append(String.format("\n\t%d. %s", i + 1, list.get(i)));
+            for (int i = 0; i < tasks.size(); i++) {
+                concat.append(String.format("\n\t%d. %s", i + 1, tasks.get(i)));
             }
 
             output = "\tHere are the tasks in your list: " + concat;
@@ -33,19 +33,19 @@ public class Parser {
                 throw new DukeException(("\t☹ OOPS!!! Invalid argument."));
             }
 
-            if (inputNumber > list.size()) {
-                throw new DukeException("\t☹ OOPS!!! There is only " + list.size() + " tasks in the list.");
+            if (inputNumber > tasks.size()) {
+                throw new DukeException("\t☹ OOPS!!! There is only " + tasks.size() + " tasks in the list.");
             }
 
             int index = inputNumber - 1;
-            Task targetTask = list.get(index);
+            Task targetTask = tasks.get(index);
 
             if (targetTask.getStatus()) {
                 throw new DukeException("\t☹ OOPS!!! You've already done that task.");
             }
 
             targetTask.setDone();
-            list.updateStorage(storage);
+            tasks.updateStorage(storage);
             output = "\tNice! I've marked this task as done: \n\t\t" + targetTask;
         } else if (command[0].equals("todo")) {
             if (command.length < 2 || command[1].isBlank()) {
@@ -54,8 +54,8 @@ public class Parser {
 
             ToDo newToDo = new ToDo(command[1]);
 
-            list.add(newToDo,storage);
-            output = "\tGot it. I've added this task: \n\t\t" + newToDo + "\n\tNow you have " + list.size() + " tasks in the list.";
+            tasks.add(newToDo,storage);
+            output = "\tGot it. I've added this task: \n\t\t" + newToDo + "\n\tNow you have " + tasks.size() + " tasks in the list.";
         } else if (command[0].equals("deadline")) {
             if (command.length < 2) {
                 throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -84,8 +84,8 @@ public class Parser {
 
             Deadline newDeadline = new Deadline(description, by);
 
-            list.add(newDeadline, storage);
-            output = "\tGot it. I've added this task: \n\t\t" + newDeadline + "\n\tNow you have " + list.size() + " tasks in the list.";
+            tasks.add(newDeadline, storage);
+            output = "\tGot it. I've added this task: \n\t\t" + newDeadline + "\n\tNow you have " + tasks.size() + " tasks in the list.";
         } else if (command[0].equals("event")) {
             if (command.length < 2) {
                 throw new DukeException("\t☹ OOPS!!! The description of a event cannot be empty.");
@@ -114,8 +114,8 @@ public class Parser {
 
             Event newEvent = new Event(description, at);
 
-            list.add(newEvent, storage);
-            output = "\tGot it. I've added this task: \n\t\t" + newEvent + "\n\tNow you have " + list.size() + " tasks in the list.";
+            tasks.add(newEvent, storage);
+            output = "\tGot it. I've added this task: \n\t\t" + newEvent + "\n\tNow you have " + tasks.size() + " tasks in the list.";
         } else if (command[0].equals("delete")) {
             if (command.length < 2) {
                 throw new DukeException("\t☹ OOPS!!! The description of a delete cannot be empty.");
@@ -133,13 +133,32 @@ public class Parser {
                 throw new DukeException(("\t☹ OOPS!!! Invalid argument."));
             }
 
-            if (inputNumber > list.size()) {
-                throw new DukeException("\t☹ OOPS!!! There is only " + list.size() + " tasks in the list.");
+            if (inputNumber > tasks.size()) {
+                throw new DukeException("\t☹ OOPS!!! There is only " + tasks.size() + " tasks in the list.");
             }
 
             int index = inputNumber - 1;
-            Task targetTask = list.remove(index, storage);
-            output = "\tNoted. I've removed this task: \n\t\t" + targetTask + "\n\tNow you have " + list.size() + " tasks in the list.";
+            Task targetTask = tasks.remove(index, storage);
+            output = "\tNoted. I've removed this task: \n\t\t" + targetTask + "\n\tNow you have " + tasks.size() + " tasks in the list.";
+        } else if (command[0].equals("find")) {
+            if (command.length < 2) {
+                throw new DukeException("\t☹ OOPS!!! The description of a find cannot be empty.");
+            }
+            
+            String searchString = command[1];
+            TaskList matchedTasks = tasks.find(searchString);
+            
+            if (matchedTasks.isEmpty()) {
+                throw new DukeException("\t☹ OOPS!!! There is no such task in the list.");
+            }
+
+            StringBuilder concat = new StringBuilder();
+
+            for (int i = 0; i < matchedTasks.size(); i++) {
+                concat.append(String.format("\n\t%d. %s", i + 1, matchedTasks.get(i)));
+            }
+            
+            output = "\tHere are the matching tasks in your list: " + concat;
         } else {
             throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
