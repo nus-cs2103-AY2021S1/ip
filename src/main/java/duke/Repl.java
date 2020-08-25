@@ -43,69 +43,69 @@ public class Repl {
                 // Check that the user input is of the correct format for the command.
                 command.validate(line);
                 switch (command) {
-                    case BYE:
-                        prettyPrinter.print(ResourceHandler.getString("repl.farewell"));
-                        return;
-                    case DEADLINE: {
-                        String lineWithoutCommand = line.replaceFirst("^deadline", "");
-                        String[] args = lineWithoutCommand.split("/by", 2);
-                        String deadlineName = args[0].trim();
-                        String dueDateString = args[1].trim();
-                        LocalDateTime dueDate = DateTimeParser.parseDateTime(dueDateString);
-                        prettyPrinter.print(taskManager.addTask(new Deadline(deadlineName, dueDate)));
-                        break;
+                case BYE:
+                    prettyPrinter.print(ResourceHandler.getString("repl.farewell"));
+                    return;
+                case DEADLINE: {
+                    String lineWithoutCommand = line.replaceFirst("^deadline", "");
+                    String[] args = lineWithoutCommand.split("/by", 2);
+                    String deadlineName = args[0].trim();
+                    String dueDateString = args[1].trim();
+                    LocalDateTime dueDate = DateTimeParser.parseDateTime(dueDateString);
+                    prettyPrinter.print(taskManager.addTask(new Deadline(deadlineName, dueDate)));
+                    break;
+                }
+                case DELETE: {
+                    String lineWithoutCommand = line.replaceFirst("^delete", "");
+                    String listIndexStr = lineWithoutCommand.trim();
+                    // `listIndexStr` is guaranteed to be a string made up of only digit characters.
+                    int listIndex = Integer.parseInt(listIndexStr) - 1;
+                    try {
+                        prettyPrinter.print(taskManager.removeTask(listIndex));
+                    } catch (IndexOutOfBoundsException e) {
+                        prettyPrinter.print(ResourceHandler.getString("repl.invalidTaskIndex"));
                     }
-                    case DELETE: {
-                        String lineWithoutCommand = line.replaceFirst("^delete", "");
-                        String listIndexStr = lineWithoutCommand.trim();
-                        // `listIndexStr` is guaranteed to be a string made up of only digit characters.
-                        int listIndex = Integer.parseInt(listIndexStr) - 1;
-                        try {
-                            prettyPrinter.print(taskManager.removeTask(listIndex));
-                        } catch (IndexOutOfBoundsException e) {
-                            prettyPrinter.print(ResourceHandler.getString("repl.invalidTaskIndex"));
-                        }
-                        break;
+                    break;
+                }
+                case DONE: {
+                    String lineWithoutCommand = line.replaceFirst("^done", "");
+                    String listIndexStr = lineWithoutCommand.trim();
+                    // `listIndexStr` is guaranteed to be a string made up of only digit characters.
+                    int listIndex = Integer.parseInt(listIndexStr) - 1;
+                    try {
+                        prettyPrinter.print(taskManager.markAsDone(listIndex));
+                    } catch (IndexOutOfBoundsException e) {
+                        prettyPrinter.print(ResourceHandler.getString("repl.invalidTaskIndex"));
                     }
-                    case DONE: {
-                        String lineWithoutCommand = line.replaceFirst("^done", "");
-                        String listIndexStr = lineWithoutCommand.trim();
-                        // `listIndexStr` is guaranteed to be a string made up of only digit characters.
-                        int listIndex = Integer.parseInt(listIndexStr) - 1;
-                        try {
-                            prettyPrinter.print(taskManager.markAsDone(listIndex));
-                        } catch (IndexOutOfBoundsException e) {
-                            prettyPrinter.print(ResourceHandler.getString("repl.invalidTaskIndex"));
-                        }
-                        break;
-                    }
-                    case EVENT: {
-                        String lineWithoutCommand = line.replaceFirst("^event", "");
-                        String[] args = lineWithoutCommand.split("/at", 2);
-                        String eventName = args[0].trim();
-                        String dateTimeString = args[1].trim();
-                        LocalDateTime dateTime = DateTimeParser.parseDateTime(dateTimeString);
-                        prettyPrinter.print(taskManager.addTask(new Event(eventName, dateTime)));
-                        break;
-                    }
-                    case LIST: {
-                        prettyPrinter.print(taskManager.toString());
-                        break;
-                    }
-                    case OVERDUE: {
-                        prettyPrinter.print(taskManager.getOverdueTasks());
-                        break;
-                    }
-                    case TODO: {
-                        String lineWithoutCommand = line.replaceFirst("^todo", "");
-                        String toDoName = lineWithoutCommand.trim();
-                        prettyPrinter.print(taskManager.addTask(new ToDo(toDoName)));
-                        break;
-                    }
-                    case UPCOMING: {
-                        prettyPrinter.print(taskManager.getUpcomingTasks());
-                        break;
-                    }
+                    break;
+                }
+                case EVENT: {
+                    String lineWithoutCommand = line.replaceFirst("^event", "");
+                    String[] args = lineWithoutCommand.split("/at", 2);
+                    String eventName = args[0].trim();
+                    String dateTimeString = args[1].trim();
+                    LocalDateTime dateTime = DateTimeParser.parseDateTime(dateTimeString);
+                    prettyPrinter.print(taskManager.addTask(new Event(eventName, dateTime)));
+                    break;
+                }
+                case LIST: {
+                    prettyPrinter.print(taskManager.toString());
+                    break;
+                }
+                case OVERDUE: {
+                    prettyPrinter.print(taskManager.getOverdueTasks());
+                    break;
+                }
+                case TODO: {
+                    String lineWithoutCommand = line.replaceFirst("^todo", "");
+                    String toDoName = lineWithoutCommand.trim();
+                    prettyPrinter.print(taskManager.addTask(new ToDo(toDoName)));
+                    break;
+                }
+                case UPCOMING: {
+                    prettyPrinter.print(taskManager.getUpcomingTasks());
+                    break;
+                } // I'm aware that this bracket looks very weird; you can thank the CS2103T style guide for this.
                 }
             } catch (DukeException e) {
                 prettyPrinter.print(e.getMessage());
