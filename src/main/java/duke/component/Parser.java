@@ -11,7 +11,12 @@ public class Parser {
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) return new ByeCommand();
         else if (input.equals("list")) return new ListCommand();
-        else if (input.startsWith("done")) {
+        else if (input.startsWith("find")) {
+            if (input.length() <= 5) {
+                throw new DukeException("Please enter the keyword you want to search!");
+            }
+            return new FindCommand(input.substring(5));
+        }else if (input.startsWith("done")) {
             if (input.length() <= 5) {
                 throw new DukeException("I don't know which task should be marked as completed.");
             }

@@ -18,6 +18,9 @@ done 0
 done 1
 done 3
 list
+find
+find boook
+find book
 delete
 delete two
 delete 0
