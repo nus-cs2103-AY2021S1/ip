@@ -1,6 +1,12 @@
 package ui;
 
+/**
+ * Deals with interactions with the user.
+ */
 public class UI {
+    /**
+     * Renders Kim Jong Un's portrait.
+     */
     public static void summonSupremeLeader() {
         System.out.println(
                 ".............................:7$8DDDDDDDDDDDD8DNDDDDNNNNO+.,~=~,....................................\n" +
@@ -87,6 +93,9 @@ public class UI {
                         "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNDDDDDDDNNNDDDDDDDD");
     }
 
+    /**
+     * Renders greeting message to user.
+     */
     public static void greet() {
         System.out.println("\t<CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE>\n");
         System.out.println("\tYOU HAVE SUMMONED THE GREAT KIM JONG DUKE.");
@@ -94,11 +103,17 @@ public class UI {
         System.out.println("\t<CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE>\n");
     }
 
+    /**
+     * Renders Kim Jong Un's portrait and greeting message to user.
+     */
     public static void summonSupremeLeaderAndGreet() {
         summonSupremeLeader();
         greet();
     }
 
+    /**
+     * Renders farewell message to user.
+     */
     public static void farewell() {
         System.out.println("\t<CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE>\n");
         System.out.println("\tBYE, GONNA GO NUKE AMERICA NOW!!!!!!!!!!!\n");

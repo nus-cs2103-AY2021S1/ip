@@ -19,10 +19,22 @@ import task.tasks.Event;
 
 import exception.DukeException;
 
+/**
+ * Deals with loading tasks from duke.txt and saving tasks in duke.txt.
+ */
 public class Storage {
+    /**
+     * Folder path of folder which duke.txt is found in.
+     */
     protected final static String FOLDERPATH = java.nio.file.Paths.get(System.getProperty("user.dir"), "data").toString();
+    /**
+     * File path of duke.txt.
+     */
     protected final static String FILEPATH = java.nio.file.Paths.get(System.getProperty("user.dir"), "data", "duke.txt").toString();
 
+    /**
+     * Creates a folder path for duke.txt if there isn't a folder for duke.txt.
+     */
     public static void createFolder() {
         try {
             File writingDirectory = new File(Storage.FOLDERPATH);
@@ -36,6 +48,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends text to duke.txt.
+     *
+     * @param textToAdd Text to be appended to duke.txt.
+     */
     public static void appendToFile(String textToAdd) {
         try {
             // Create src\main\java\data folder if needed
@@ -50,6 +67,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Amends text in duke.txt.
+     *
+     * @param currentText Targeted text to be amended.
+     * @param amendedText New text written in place of targeted text.
+     */
     public static void amendFile(String currentText, String amendedText) {
         try {
             File file = new File(Storage.FILEPATH);
@@ -65,6 +88,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes text in duke.txt.
+     *
+     * @param textToDelete Targeted text to be deleted.
+     */
     public static void deleteFromFile(String textToDelete) {
         try {
             File file = new File(Storage.FILEPATH);
@@ -80,6 +108,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Pulls all task data inside duke.txt into Kim Jong Duke's task list upon starting application.
+     *
+     * @return List of tasks.
+     */
     public static List<Task> loadTextIntoTaskList() {
         List<String> lines;
         List<Task> tasks = new ArrayList<>();

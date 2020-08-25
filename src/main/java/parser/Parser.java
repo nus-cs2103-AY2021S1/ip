@@ -11,7 +11,14 @@ import task.tasks.Task;
 
 import storage.Storage;
 
+/**
+ * Deals with making sense of the user command.
+ */
 public class Parser {
+    /**
+     * Takes in user input and executes further actions depending on the command word.
+     * Command words are list, find, todo, deadline, event, list, done, delete.
+     */
     public static void run() {
         Scanner sc = new Scanner(System.in);
         String userCommand;

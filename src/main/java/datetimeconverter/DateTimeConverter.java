@@ -7,8 +7,22 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Arrays;
 
+/**
+ * Accept dates in formats like dd-mm-yyyy and convert it to English date format.
+ */
 public class DateTimeConverter {
 
+    /**
+     * Accept dates in "dd/MM/yyyy HHmm", "d/MM/yyyy HHmm", "dd-MM-yyyy HHmm", "d-MM-yyyy HHmm",
+     * "dd/M/yyyy HHmm", "d/M/yyyy HHmm", "dd-M-yyyy HHmm", "d-M-yyyy HHmm" format and convert
+     * it to English date format (E.g Saturday, March 02, 2019 06:00 PM).
+     *
+     * @param input Date-Time pattern.
+     * @return English date format.
+     * @throws DateTimeParseException If unable to convert Date-Time pattern to English date format.
+     *                                If that happens, String input to formatDateTime(...) = String
+     *                                output from formatDateTime(...).
+     */
     public static String formatDateTime(String input) {
         // Make a copy of the input string
         String result = input;
