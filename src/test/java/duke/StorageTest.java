@@ -25,6 +25,7 @@ public class StorageTest {
             Storage storage = new Storage("storageTest");
             assertTrue(Files.exists(Paths.get("storageTest/duke.txt")));
             Files.deleteIfExists(Paths.get("storageTest/duke.txt"));
+            Files.deleteIfExists(Paths.get("storageTest"));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -21,6 +21,8 @@ public class DukeTest {
             Duke duke = new Duke("dukeTest");
             assertTrue(Files.exists(Paths.get("dukeTest/duke.txt")));
             Files.deleteIfExists(Paths.get("dukeTest/duke.txt"));
+            Files.deleteIfExists(Paths.get("dukeTest"));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
