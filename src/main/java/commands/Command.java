@@ -7,11 +7,17 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.IntStream;
+import java.nio.file.Path;
 
 public enum Command {
     LIST {
@@ -36,6 +42,7 @@ public enum Command {
             try {
                 int toMark = Integer.parseInt(parameters.get("argument")) - 1;
                 tasks.get(toMark).markAsDone();
+                updateData(tasks);
                 return String.format(strings.getString("output.done"), tasks.get(toMark)).strip();
             } catch (NumberFormatException e) {
                 throw new DukeInvalidParameterException(strings.getString("error.doneNum"), parameters);
@@ -56,7 +63,7 @@ public enum Command {
 
             Task toAdd = new Todo(parameters.get("argument"));
             tasks.add(toAdd);
-
+            updateData(tasks);
             return String.format(strings.getString("output.added"), toAdd, tasks.size());
         }
     },
@@ -69,7 +76,7 @@ public enum Command {
 
             Task toAdd = new Deadline(parameters.get("argument"), parameters.get(strings.getString("parameter.by")));
             tasks.add(toAdd);
-
+            updateData(tasks);
             return String.format(strings.getString("output.added"), toAdd, tasks.size());
         }
     },
@@ -82,7 +89,7 @@ public enum Command {
 
             Task toAdd = new Event(parameters.get("argument"), parameters.get(strings.getString("parameter.at")));
             tasks.add(toAdd);
-
+            updateData(tasks);
             return String.format(strings.getString("output.added"), toAdd, tasks.size());
         }
     },
@@ -94,7 +101,9 @@ public enum Command {
             }
             try {
                 int toDelete = Integer.parseInt(parameters.get("argument")) - 1;
-                return String.format(strings.getString("output.delete"), tasks.remove(toDelete), tasks.size()).strip();
+                String ret = String.format(strings.getString("output.delete"), tasks.remove(toDelete), tasks.size()).strip();
+                updateData(tasks);
+                return ret;
             } catch (NumberFormatException e) {
                 throw new DukeInvalidParameterException(strings.getString("error.deleteNum"), parameters);
             } catch (IndexOutOfBoundsException e) {
@@ -108,6 +117,31 @@ public enum Command {
             return strings.getString("output.bye");
         }
     };
+
+    protected void updateData(ArrayList<Task> tasks) {
+        //Solution below adapted from https://www.javatpoint.com/serialization-in-java
+        try {
+            Path dirPath = Paths.get("database");
+
+            File directory = new File(dirPath.normalize().toString());
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+
+            FileOutputStream fileOut = new FileOutputStream(dirPath.normalize().toString()+ "/tasks.ser");
+
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+
+            out.writeObject(tasks);
+            out.flush();
+
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
 
     private static final ResourceBundle strings = ResourceBundle.getBundle("resources.StringsBundle", Locale.ENGLISH);
 

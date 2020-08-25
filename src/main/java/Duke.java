@@ -2,6 +2,9 @@ import commands.Command;
 import exceptions.*;
 import tasks.*;
 
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Duke {
@@ -10,11 +13,33 @@ public class Duke {
     private static Scanner scanner;
     private static ArrayList<Task> tasks;
 
+    @SuppressWarnings("unchecked")
     private static void initializeDuke() {
         // read the appropriate string resources
         strings = ResourceBundle.getBundle("resources.StringsBundle", Locale.ENGLISH);
         scanner = new Scanner(System.in);
         tasks = new ArrayList<>();
+
+        //Solution below adapted from https://www.javatpoint.com/serialization-in-java
+        try {
+            Path dirPath = Paths.get("database");
+            File directory = new File(dirPath.normalize().toString());
+            if (!directory.exists()) {
+                return;
+            }
+
+            FileInputStream fileIn = new FileInputStream(dirPath.normalize().toString()+ "/tasks.ser");
+
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+
+
+            tasks = (ArrayList<Task>) in.readObject();
+
+            in.close();
+            fileIn.close();
+        } catch (IOException | ClassNotFoundException i) {
+            i.printStackTrace();
+        }
     }
 
     private static void printWithDecoration(Object object) {
