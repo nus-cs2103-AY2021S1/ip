@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AddDeadlineCommand extends Command{
+public class AddDeadlineCommand extends Command {
 
     public AddDeadlineCommand(String input) {
         this.input = input;
