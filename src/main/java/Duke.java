@@ -2,6 +2,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
@@ -60,7 +61,7 @@ public class Duke {
         Duke.addTask(new ToDos(taskInfo));
     }
 
-    public static void handleDeadLine(String taskInfo) throws DukeInvalidCommandException{
+    public static void handleDeadLine(String taskInfo) throws DukeInvalidCommandException, DukeDateTimeParseException{
         taskInfo = taskInfo.replace("deadline", "");
         String[] stringArr = taskInfo.split("/by", 2);
         if (stringArr.length != 2) {
@@ -71,7 +72,7 @@ public class Duke {
         Duke.addTask(new Deadlines(taskInfo, by));
     }
 
-    public static void handleEvent(String taskInfo) throws DukeInvalidCommandException{
+    public static void handleEvent(String taskInfo) throws DukeInvalidCommandException, DukeDateTimeParseException{
         taskInfo = taskInfo.replace("event", "");
         String[] stringArr = taskInfo.split("/at", 2);
         if (stringArr.length != 2) {
@@ -205,8 +206,9 @@ public class Duke {
                 System.out.println("\t" + err.getMessage());
             } catch (DukeIOException err) {
                 System.out.println("\t" + err.getMessage());
+            } catch (DukeDateTimeParseException err) {
+                System.out.println("\t" + err.getMessage());
             }
-
         }
     }
     public static void main(String[] args) throws DukeRunTimeException, DukeCompileTimeException{
