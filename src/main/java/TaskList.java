@@ -12,9 +12,9 @@ public class TaskList implements Serializable {
     /**
      * shows the entire task list
      */
-    public void showList(){
+    public void showList() {
         int counter = 1;
-        for(Task task: taskList) {
+        for (Task task : taskList) {
             System.out.println(counter + ". " + task);
             counter++;
         }
@@ -22,6 +22,7 @@ public class TaskList implements Serializable {
 
     /**
      * returns the total number of tasks in the task list
+     *
      * @return the number of tasks
      */
     public int getTaskLength() {
@@ -30,15 +31,17 @@ public class TaskList implements Serializable {
 
     /**
      * getter for the task of a particular number
+     *
      * @param index of the task
      * @return the task that user wants to retrieve (based on task number)
      */
-    public Task getTask(int index){
-        return taskList.get(index-1);
+    public Task getTask(int index) {
+        return taskList.get(index - 1);
     }
 
     /**
      * removes the tasks
+     *
      * @param task
      */
     public void removeTask(Task task) {
@@ -47,10 +50,11 @@ public class TaskList implements Serializable {
 
     /**
      * adds the tasks
+     *
      * @param task
      */
     public void addTask(Task task) {
         taskList.add(task);
-        }
     }
+}
 

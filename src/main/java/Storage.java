@@ -9,12 +9,13 @@ public class Storage {
     /**
      * loads the tasklist that user keyed in before terminating the bot
      * hence, previous tasklist made available when the user runs the bot
+     *
      * @return the tasklist in Duke.txt file
      * @throws IOException
      * @throws ClassNotFoundException
      */
 
-    public static TaskList load() throws IOException, ClassNotFoundException { //load a tasklist from the text file
+    public static TaskList load() throws IOException, ClassNotFoundException {
         try {
             FileInputStream fin = new FileInputStream("Duke.txt");
             ObjectInputStream ois = new ObjectInputStream(fin);
@@ -32,15 +33,15 @@ public class Storage {
 
     /**
      * stores the tasks (user inputs) into Duke.txt file
+     *
      * @param taskList
      */
-    public static void store(TaskList taskList) { //writing the tasklist to a text file
+    public static void store(TaskList taskList) {
         try {
             FileOutputStream fos = new FileOutputStream("Duke.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(taskList);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

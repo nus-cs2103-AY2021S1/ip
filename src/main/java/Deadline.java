@@ -15,6 +15,7 @@ public class Deadline extends Task implements Serializable {
 
     /**
      * Constructor of Deadline
+     *
      * @param deadlineName
      * @param deadlineDateTime
      */
@@ -25,6 +26,7 @@ public class Deadline extends Task implements Serializable {
 
     /**
      * formats the user input of the date and time
+     *
      * @return date and time of the deadline task
      * @throws DateTimeParseException
      */
@@ -35,11 +37,12 @@ public class Deadline extends Task implements Serializable {
 
     /**
      * shows the deadline description, date and time, as well as the icon
+     *
      * @return the string format of deadline
      */
 
     @Override
     public String toString() {
-            return "[D]" + "[" + getStatusIcon() + "] " + getDescription() + " (by: " + getDeadlineDateTime() + ")";
+        return "[D]" + "[" + getStatusIcon() + "] " + getDescription() + "(by: " + getDeadlineDateTime() + ")";
     }
 }

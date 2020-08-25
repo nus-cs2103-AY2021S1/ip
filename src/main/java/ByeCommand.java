@@ -5,6 +5,7 @@ public class ByeCommand extends Command {
 
     /**
      * Constructor for ByeCommand
+     *
      * @param description
      * @throws IllegalArgumentException
      */
@@ -14,6 +15,7 @@ public class ByeCommand extends Command {
 
     /**
      * terminates the bot
+     *
      * @param taskList
      */
     public void execute(TaskList taskList) {

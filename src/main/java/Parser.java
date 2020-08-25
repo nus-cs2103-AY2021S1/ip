@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 public class Parser {
     /**
      * parses the user input into commands based on the type of tasks
+     *
      * @param input
      * @return the command
      * @throws IllegalArgumentException
@@ -15,29 +16,30 @@ public class Parser {
         String category = getCategory(input);
         String description = getDescription(input);
         switch (category) {
-            case "todo":
-                return parseTodoCommand(description);
-            case "deadline":
-                return parseDeadlineCommand(description);
-            case "event":
-                return parseEventCommand(description);
-            case "done":
-                return parseDoneCommand(description);
-            case "delete":
-                return parseDeleteCommand(description);
-            case "list":
-                return parseListCommand(description);
-            case "bye":
-                return parseByeCommand(description);
-            default:
-                throw new IllegalArgumentException(TextUi.DIVIDER +
-                        "☹ OOPS!!! Invalid input. Try again!\n"
-                        + TextUi.DIVIDER);
+        case "todo":
+            return parseTodoCommand(description);
+        case "deadline":
+            return parseDeadlineCommand(description);
+        case "event":
+            return parseEventCommand(description);
+        case "done":
+            return parseDoneCommand(description);
+        case "delete":
+            return parseDeleteCommand(description);
+        case "list":
+            return parseListCommand(description);
+        case "bye":
+            return parseByeCommand(description);
+        default:
+            throw new IllegalArgumentException(TextUi.divider +
+                    "☹ OOPS!!! Invalid input. Try again!\n"
+                    + TextUi.divider);
         }
     }
 
     /**
      * getter for the category/ type of the task
+     *
      * @param input
      * @return the type of the task
      * @throws IllegalArgumentException
@@ -50,6 +52,7 @@ public class Parser {
 
     /**
      * getter for the description of the task
+     *
      * @param input
      * @return the task description
      */
@@ -62,6 +65,7 @@ public class Parser {
 
     /**
      * parse user input into TodoCommand
+     *
      * @param description
      * @return TodoCommand
      */
@@ -71,6 +75,7 @@ public class Parser {
 
     /**
      * parse user input into DeadlineCommand
+     *
      * @param description
      * @return DeadlineCommand
      */
@@ -85,6 +90,7 @@ public class Parser {
 
     /**
      * parse user input into EventCommand
+     *
      * @param description
      * @return EventCommand
      */
@@ -99,6 +105,7 @@ public class Parser {
 
     /**
      * parse user input into DoneCommand
+     *
      * @param description
      * @return DoneCommand
      */
@@ -108,6 +115,7 @@ public class Parser {
 
     /**
      * parse user input into DeleteCommand
+     *
      * @param description
      * @return DeleteCommand
      */
@@ -117,6 +125,7 @@ public class Parser {
 
     /**
      * parse user input into ListCommand
+     *
      * @param description
      * @return ListCommand
      */
@@ -126,6 +135,7 @@ public class Parser {
 
     /**
      * parse user input into ListCommand
+     *
      * @param description
      * @return ListCommand
      */

@@ -5,6 +5,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructor for DoneCommand
+     *
      * @param description
      * @throws IllegalArgumentException
      */
@@ -14,6 +15,7 @@ public class DoneCommand extends Command {
 
     /**
      * marks the tasks as done and shows the done tasks
+     *
      * @param taskList
      */
     public void execute(TaskList taskList) {
@@ -21,7 +23,7 @@ public class DoneCommand extends Command {
         taskNumber = Integer.parseInt(this.getTaskName());
         Task doneTask = taskList.getTask(taskNumber);
         doneTask.markAsDone();
-        System.out.println(doneTask + "\n" + TextUi.DIVIDER);
+        System.out.println(doneTask + "\n" + TextUi.divider);
     }
 }
 

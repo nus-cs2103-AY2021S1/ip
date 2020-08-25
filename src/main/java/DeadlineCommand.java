@@ -7,6 +7,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Constructor for DeadlineCommand
+     *
      * @param deadlineName
      * @param deadlineDateTime
      * @throws IllegalArgumentException
@@ -17,13 +18,13 @@ public class DeadlineCommand extends Command {
 
     /**
      * shows the deadline task added, updates the total number of tasks
+     *
      * @param taskList
      */
     public void execute(TaskList taskList) {
-            Deadline newDeadline = new Deadline(this.getTaskName(), this.getTaskDateTime());
-                taskList.addTask(newDeadline);
-                System.out.println(newDeadline +
-            String.format("\nNow you have %d tasks in the list.\n", taskList.getTaskLength())
-            + TextUi.DIVIDER);
+        Deadline newDeadline = new Deadline(this.getTaskName(), this.getTaskDateTime());
+        taskList.addTask(newDeadline);
+        System.out.println(newDeadline + String.format("\nNow you have %d tasks in the list.\n", taskList.getTaskLength())
+                + TextUi.divider);
     }
 }

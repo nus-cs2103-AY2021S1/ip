@@ -5,6 +5,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for DeleteCommand
+     *
      * @param description
      * @throws IllegalArgumentException
      */
@@ -14,6 +15,7 @@ public class DeleteCommand extends Command {
 
     /**
      * delete the tasks
+     *
      * @param taskList
      */
     public void execute(TaskList taskList) {
@@ -21,6 +23,6 @@ public class DeleteCommand extends Command {
         taskNumber = Integer.parseInt(this.getTaskName());
         Task deletedTask = taskList.getTask(taskNumber);
         taskList.removeTask(deletedTask);
-        System.out.println(deletedTask + "\n" + TextUi.DIVIDER);
+        System.out.println(deletedTask + "\n" + TextUi.divider);
     }
 }

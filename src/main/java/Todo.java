@@ -6,12 +6,14 @@
 public class Todo extends Task {
     /**
      * Constructor for Todo
+     *
      * @param description of the todo task
      */
 
     public Todo(String description) {
         super(description);
     }
+
     @Override
 
     /**

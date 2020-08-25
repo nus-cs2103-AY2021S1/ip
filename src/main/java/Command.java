@@ -9,6 +9,7 @@ public class Command {
 
     /**
      * Constructor of Commands
+     *
      * @param taskName
      */
     public Command(String taskName) {
@@ -17,6 +18,7 @@ public class Command {
 
     /**
      * Constructor for Deadline and Event Commands
+     *
      * @param taskName
      * @param taskDateTime
      */
@@ -27,6 +29,7 @@ public class Command {
 
     /**
      * getter for the name of the tasks
+     *
      * @return task name
      */
     public String getTaskName() {
@@ -35,6 +38,7 @@ public class Command {
 
     /**
      * getter for the deadline/ event date and time
+     *
      * @return deadline/ event date and time
      */
     public LocalDateTime getTaskDateTime() {
@@ -43,6 +47,7 @@ public class Command {
 
     /**
      * performs actions based on the tasks in the tasklist
+     *
      * @param taskList
      */
     public void execute(TaskList taskList) {

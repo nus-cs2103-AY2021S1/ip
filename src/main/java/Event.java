@@ -10,11 +10,11 @@ import java.util.Locale;
  */
 public class Event extends Task implements Serializable {
 
-   protected LocalDateTime eventDateTime;
-   protected String eventName;
+    protected LocalDateTime eventDateTime;
 
     /**
      * Constructor of Event
+     *
      * @param eventName
      * @param eventDateTime
      */
@@ -25,6 +25,7 @@ public class Event extends Task implements Serializable {
 
     /**
      * formats the user input
+     *
      * @return the formatted output of date and time
      * @throws DateTimeParseException when the user input format of the date and time is wrong
      */
@@ -35,10 +36,11 @@ public class Event extends Task implements Serializable {
 
     /**
      * shows the event description, event date and time, and event icon
+     *
      * @return the string format of Event
      */
     @Override
     public String toString() {
-        return "[E]" + "[" + getStatusIcon() + "] " + getDescription() + " (at:" + getEventDateTime() + ")";
+        return "[E]" + "[" + getStatusIcon() + "] " + getDescription() + "(at:" + getEventDateTime() + ")";
     }
 }

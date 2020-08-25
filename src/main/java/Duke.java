@@ -13,7 +13,7 @@ public class Duke {
      * 4. store the inputs in Duke.txt file
      *
      * @param args Unused
-     * @throws IOException if ObjectInputStream unable to read inputs
+     * @throws IOException            if ObjectInputStream unable to read inputs
      * @throws ClassNotFoundException if ObjectInputStream unable to read Object
      */
 

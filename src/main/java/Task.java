@@ -10,6 +10,7 @@ public class Task implements Serializable {
 
     /**
      * Constructor of Task
+     *
      * @param description
      */
     public Task(String description) {
@@ -20,10 +21,11 @@ public class Task implements Serializable {
     /**
      * getter for the icon status.
      * tick if the task is done; cross if the task is not done
+     *
      * @return string format of the icon
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     /**
@@ -35,6 +37,7 @@ public class Task implements Serializable {
 
     /**
      * getter for the task name
+     *
      * @return task name
      */
     public String getDescription() {
@@ -43,6 +46,7 @@ public class Task implements Serializable {
 
     /**
      * shows the task name, taskIcon
+     *
      * @return the string format of the task
      */
     public String toString() {
