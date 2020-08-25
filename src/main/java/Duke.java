@@ -77,6 +77,7 @@ public class Duke {
                     } catch (Exception ex) {
                         System.out.println(horizontalDiv);
                         System.out.println("Sorry! The description of todo cannot be empty!!");
+                        System.out.println("Here's an example: todo Homework");
                         System.out.println(horizontalDiv);
                     }
                     break;
@@ -99,11 +100,13 @@ public class Duke {
                         } catch (Exception ex) {
                             System.out.println(horizontalDiv);
                             System.out.println("Sorry! Please enter a date for the deadline using the command '/by'!");
+                            System.out.println("Here's an example: deadline CS2103T project /by 2020-08-26 23:59");
                             System.out.println(horizontalDiv);
                         }
                     } catch (Exception ex) {
                         System.out.println(horizontalDiv);
                         System.out.println("Sorry! The description of deadline cannot be empty!");
+                        System.out.println("Here's an example: deadline CS2103T project /by 2020-08-26 23:59");
                         System.out.println(horizontalDiv);
                     }
                     break;
@@ -126,11 +129,13 @@ public class Duke {
                         } catch (Exception ex) {
                             System.out.println(horizontalDiv);
                             System.out.println("Sorry! Please enter a duration for the event using the command '/at'!");
+                            System.out.println("Here's an example: event welcome tea /at 2020-08-29");
                             System.out.println(horizontalDiv);
                         }
                     } catch (Exception ex) {
                         System.out.println(horizontalDiv);
                         System.out.println("Sorry! The description of event cannot be empty!");
+                        System.out.println("Here's an example: event welcome tea /at 2020-08-29");
                         System.out.println(horizontalDiv);
                     }
                     break;
