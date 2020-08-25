@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deal with the reading from and writing to a file.
+ */
 public class Storage {
     private File file;
 
@@ -50,6 +53,11 @@ public class Storage {
         }
     };
 
+    /**
+     * Storage constructor.
+     * 
+     * @param filePath path of the the storage file.
+     */
     public Storage(String filePath) throws DukeException {
         this.file = new File("./data/dukeFile.txt");
         file.getParentFile().mkdirs();
@@ -61,6 +69,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Read data from the file and conver it to a list of tasks.
+     * 
+     * @return a list of tasks.
+     * @throws DukeException can't read or convert the file to a list of tasks.
+     */
     public ArrayList<Task> readFromFile() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner fileIn = null;
@@ -91,6 +105,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Write a list of tasks to the file.
+     * 
+     * @param tasks the list of tasks to be written to the file.
+     * @throws DukeException failed to write the list to the file.
+     */
     public void writeToFile(TaskList tasks) throws DukeException {
         try {
             FileWriter dukeFileWriter = new FileWriter(file);

@@ -2,6 +2,9 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Parse an input given to the Duke to a command.
+ */
 public class Parser {
     private enum CommandType {
         list, done, delete, todo, deadline, event
@@ -53,6 +56,13 @@ public class Parser {
         return date;
     }
 
+    /**
+     * Parse the input string to a command.
+     * 
+     * @param line the string to be parsed.
+     * @return command from the parsed string.
+     * @throws DukeException input string is an invalid command.
+     */
     public static Command parse(String line) throws DukeException {
         String[] commandLine = line.split(" ");
         int idx;
