@@ -95,6 +95,9 @@ public class TaskList {
         List<Task> matchList = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
             for (int j = 0; j < matchWords.length; j++) {
+                    if (matchWords[j].equals("")) {
+                        continue;   //In case of having alot of spaces in between two words.
+                    }
                     String pattern = "\\b" + matchWords[j] + "\\b";
                     Pattern p = Pattern.compile(pattern);
                     Matcher m = p.matcher(taskList.get(i).toString());

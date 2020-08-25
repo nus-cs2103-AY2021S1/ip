@@ -118,7 +118,7 @@ public class Duke {
      */
     public boolean foundMatchingTasks(String taskInfo) {
         boolean matched = false;
-        String[] taskInfos = taskInfo.split(" ");
+        String[] taskInfos = taskInfo.trim().split(" ");
         List<Task> matchList = tasks.returnMatchingTasks(taskInfos);
         for(int i = 0; i < matchList.size(); i++) {
             if (i == 0) {
