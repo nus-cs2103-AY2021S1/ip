@@ -10,6 +10,7 @@ import main.java.tasks.Todo;
 public class Converter {
 
     TaskList taskList = new TaskList();
+    Database database = Database.initializeDatabase();
 
     public Task convertTask(Commands command, String input) {
         try {
@@ -52,5 +53,13 @@ public class Converter {
 
     public int totalTasks() {
         return this.taskList.getNumberOfTasks();
+    }
+
+    public void storeTasks() {
+        this.database.updateDatabase(this.taskList.getList());
+    }
+
+    public void getSavedTasks() {
+        this.taskList.setList(this.database.retrieveTaskList());
     }
 }

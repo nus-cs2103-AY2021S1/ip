@@ -1,0 +1,3 @@
+T | true | go cycling
+D | true | do homework | Monday 6pm
+D | false | finish project | thursday
