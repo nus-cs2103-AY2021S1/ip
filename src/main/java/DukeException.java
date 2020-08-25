@@ -12,7 +12,8 @@ public class DukeException {
         empty_illegal,
         todo_empty,
         deadline_empty_incomplete,
-        event_empty_incomplete
+        event_empty_incomplete,
+        improper_dateTime
     }
 
     @Override
@@ -41,6 +42,10 @@ public class DukeException {
             case event_empty_incomplete:
                 output = "     ☹ OOPS!!! The description of an event cannot be empty or incomplete." +
                             "\n     Please follow the format: 'event MY_TASK /at DATE_OR_TIME'";
+                break;
+            case improper_dateTime:
+                output = "     ☹ OOPS!!! The time provided is in an incorrect form." +
+                        "\n     Please follow the format: 'YYYY-MM-DD HHMM' or 'YYYY-MM-DD'";
                 break;
             default:
                 output = "     ☹ OOPS!!! Unspecified problem detected!" + full_guide;
