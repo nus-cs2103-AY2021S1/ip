@@ -14,12 +14,13 @@ import java.util.Scanner;
 
 /**
  * Class to read the URL path to the locally saved tasks.
+ *
  * @author Kor Ming Soon
  */
 public class Storage {
 
-    private final Path path;
     private final static String DEFAULT_PATH = "./duke.txt";
+    private final Path path;
 
     /**
      * Constructor for the Storage object to track locally saved tasks.
@@ -42,7 +43,6 @@ public class Storage {
             String toBeSaved = "";
             switch (tasking.getTasktype()) {
                 case TODO:
-                    // if there is only todo, means only need retrieve event detail
                     toBeSaved = String.format("%s\t%s\t%s",
                             tasking.getTasktype(),
                             tasking.isTaskDone(),
@@ -50,7 +50,6 @@ public class Storage {
                     break;
                 case EVENT:
                 case DEADLINE:
-                    // event or deadline, means must retrieve, duration and detail of event
                     toBeSaved = String.format("%s\t%s\t%s\t%s",
                             tasking.getTasktype(),
                             tasking.isTaskDone(),
@@ -68,7 +67,7 @@ public class Storage {
         Scanner sc = new Scanner(path.toFile());
         List<Task> taskList = new ArrayList<>();
         while (sc.hasNext()) {
-            String[] storedTask =  sc.nextLine().split("\t");
+            String[] storedTask = sc.nextLine().split("\t");
             String tasktype = storedTask[0];
             boolean isDone = storedTask[1].equals("true");
             Task taskToBeAdded = null;
