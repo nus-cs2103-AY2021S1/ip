@@ -1,6 +1,7 @@
 package viscount.command;
 
 import viscount.*;
+
 import viscount.exception.ViscountException;
 
 public abstract class Command {

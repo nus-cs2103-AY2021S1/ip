@@ -1,6 +1,7 @@
 package viscount;
 
 import viscount.command.Command;
+
 import viscount.exception.ViscountException;
 import viscount.exception.ViscountIOException;
 

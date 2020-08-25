@@ -1,10 +1,10 @@
 package viscount;
 
-import viscount.task.Task;
-
 import java.io.InputStream;
 import java.util.List;
 import java.util.Scanner;
+
+import viscount.task.Task;
 
 public class Ui {
     private static final String VISCOUNT_LOGO =

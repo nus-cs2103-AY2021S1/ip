@@ -7,7 +7,7 @@ public class Todo extends Task {
     private static final String TASK_DATA_FORMAT = "%s|%d|%s";
 
     public Todo(String description, boolean isDone) {
-        super(TaskType.TODO, description, isDone);
+        super(TaskType.Todo, description, isDone);
     }
 
     @Override

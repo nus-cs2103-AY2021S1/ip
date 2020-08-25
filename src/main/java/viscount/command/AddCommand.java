@@ -1,10 +1,12 @@
 package viscount.command;
 
-import viscount.*;
-import viscount.task.*;
-import viscount.exception.ViscountException;
-
 import java.time.LocalDateTime;
+
+import viscount.*;
+
+import viscount.task.*;
+
+import viscount.exception.ViscountException;
 
 public class AddCommand extends Command {
     private TaskType taskType;
@@ -29,13 +31,13 @@ public class AddCommand extends Command {
         Task newTask = null;
         
         switch(taskType) {
-        case TODO:
+        case Todo:
             newTask = new Todo(description, false);
             break;
-        case DEADLINE:
+        case Deadline:
             newTask = new Deadline(description, false, dateTime);
             break;
-        case EVENT:
+        case Event:
             newTask = new Event(description, false, dateTime);
             break;
         default:

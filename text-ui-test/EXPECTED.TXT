@@ -118,20 +118,15 @@ Alas, I do apologise but I don't know what 'blah' means.
 __________________________________________________
 
 __________________________________________________
-Here are the todos in your list:
-1.[T][✘] t1
+Alas, I do apologise but I don't know what 'todo' means.
 __________________________________________________
 
 __________________________________________________
-Here are the deadlines in your list:
-1.[D][✘] t2 (by: Aug 23 2020, 14:00)
-2.[D][✘] t3 (by: Aug 26 2020, 00:00)
+Alas, I do apologise but I don't know what 'deadline' means.
 __________________________________________________
 
 __________________________________________________
-Here are the events in your list:
-1.[E][✘] t4 (at: Aug 23 2020, 18:00)
-2.[E][✘] t5 (at: Aug 26 2020, 19:00)
+Alas, I do apologise but I don't know what 'event' means.
 __________________________________________________
 
 __________________________________________________
@@ -149,13 +144,11 @@ Here are the tasks occurring on Aug 26 2020 in your list:
 __________________________________________________
 
 __________________________________________________
-Here are the deadlines occurring today in your list:
-
+Alas, I do apologise but I don't know what 'deadline' means.
 __________________________________________________
 
 __________________________________________________
-Here are the events occurring on Aug 26 2020 in your list:
-1.[E][✘] t5 (at: Aug 26 2020, 19:00)
+Alas, I do apologise but I don't know what 'event' means.
 __________________________________________________
 
 __________________________________________________

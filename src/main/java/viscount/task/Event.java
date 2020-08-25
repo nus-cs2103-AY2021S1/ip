@@ -1,8 +1,8 @@
 package viscount.task;
 
-import viscount.Parser;
-
 import java.time.LocalDateTime;
+
+import viscount.Parser;
 
 public class Event extends Task {
     private static final String STRING_FORMAT = "[E][%s] %s (at: %s)";
@@ -11,7 +11,7 @@ public class Event extends Task {
     private LocalDateTime eventTime;
 
     public Event(String description, boolean isDone, LocalDateTime eventTime) {
-        super(TaskType.EVENT, description, isDone);
+        super(TaskType.Event, description, isDone);
         this.eventTime = eventTime;
     }
 

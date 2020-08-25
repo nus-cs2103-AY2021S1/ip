@@ -1,7 +1,7 @@
 package viscount.task;
 
 public enum TaskType {
-    TODO, 
-    DEADLINE,
-    EVENT;
+    Todo,
+    Deadline,
+    Event;
 }

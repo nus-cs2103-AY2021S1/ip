@@ -1,5 +1,14 @@
 package viscount;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
+
+import java.util.Arrays;
+import java.util.List;
+
 import viscount.command.*;
 
 import viscount.exception.ViscountDateTimeParseException;
@@ -13,40 +22,33 @@ import viscount.exception.ViscountUnsupportedOperationException;
 
 import viscount.task.TaskType;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.TemporalAccessor;
-import java.util.Arrays;
-import java.util.List;
-
 public class Parser {
-    public static final DateTimeFormatter INPUT_DATE_TIME_FORMATTER = 
-            DateTimeFormatter.ofPattern("dd-MM-yyyy[ HHmm]");
-    public static final DateTimeFormatter TASK_DATA_DATE_TIME_FORMATTER = 
-            DateTimeFormatter.ofPattern("yyyyMMdd HHmm");
-    public static final DateTimeFormatter OUTPUT_DATE_FORMATTER = 
-            DateTimeFormatter.ofPattern("MMM dd yyyy");
-    public static final DateTimeFormatter OUTPUT_DATE_TIME_FORMATTER =
-            DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
+    public static final DateTimeFormatter INPUT_DATE_TIME_FORMATTER
+            = DateTimeFormatter.ofPattern("dd-MM-yyyy[ HHmm]");
+    public static final DateTimeFormatter TASK_DATA_DATE_TIME_FORMATTER
+            = DateTimeFormatter.ofPattern("yyyyMMdd HHmm");
+    public static final DateTimeFormatter OUTPUT_DATE_FORMATTER
+            = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    public static final DateTimeFormatter OUTPUT_DATE_TIME_FORMATTER
+            = DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
 
 
     public static Command parse(String rawCommand) throws ViscountException {
         List<String> arguments = Arrays.asList(rawCommand.split(" "));
         String baseCommand = arguments.get(0);
-        
-        if (baseCommand.equals("list")) {
+
+        switch (baseCommand) {
+        case "list":
             return parseListCommand(arguments);
-        } else if (baseCommand.equals("add")) {
+        case "add":
             return parseAddCommand(arguments);
-        } else if (baseCommand.equals("done")) {
+        case "done":
             return parseDoneCommand(arguments);
-        } else if (baseCommand.equals("delete")) {
+        case "delete":
             return parseDeleteCommand(arguments);
-        } else if (baseCommand.equals("bye")) {
+        case "bye":
             return new ExitCommand();
-        } else {
+        default:
             throw new ViscountUnknownCommandException(baseCommand);
         }
     }
@@ -94,7 +96,7 @@ public class Parser {
                 throw new ViscountMissingDescriptionException("todo");
             }
 
-            return new AddCommand(TaskType.TODO, description, null);
+            return new AddCommand(TaskType.Todo, description, null);
         } else if (taskTypeArgument.equals("deadline")) {
             int dueDateIndex = arguments.indexOf("/by");
 
@@ -112,7 +114,7 @@ public class Parser {
             } else {
                 try {
                     LocalDateTime dueDate = Parser.parseDateTime(dueDateString, INPUT_DATE_TIME_FORMATTER);
-                    return new AddCommand(TaskType.DEADLINE, description, dueDate);
+                    return new AddCommand(TaskType.Deadline, description, dueDate);
                 } catch (DateTimeParseException e) {
                     throw new ViscountDateTimeParseException("due date");
                 }
@@ -134,7 +136,7 @@ public class Parser {
             } else {
                 try {
                     LocalDateTime eventTime = Parser.parseDateTime(eventTimeString, INPUT_DATE_TIME_FORMATTER);
-                    return new AddCommand(TaskType.EVENT, description, eventTime);
+                    return new AddCommand(TaskType.Event, description, eventTime);
                 } catch (DateTimeParseException e) {
                     throw new ViscountDateTimeParseException("event date");
                 }
