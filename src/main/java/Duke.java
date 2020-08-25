@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,7 +7,7 @@ public class Duke {
 
     public static ArrayList<Task> taskList = new ArrayList<>();
     public static Scanner sc = new Scanner(System.in);
-    
+
     public static void inputList(String display) {
         for (int i = 0; i < taskList.size(); i++) {
             if (i == 0) {
@@ -15,17 +17,17 @@ public class Duke {
             System.out.println((i + 1) + ". " + task + "\n");
         }
         readUserInput();
-    
+
     }
-    
+
     public static void inputDone(String display) {
         int index = Integer.parseInt(display.substring(5));
         Task task = taskList.get(index - 1);
         task.markAsDone();
-        System.out.println("Nice! I've marked this task as done:\n" + task);
+        System.out.println("Nice! I've marked this task as done:\n" + task + "\n");
         readUserInput();
     }
-    
+
     public static void inputTodo(String display) {
         try {
             if (display.length() == 4 || display.length() == 5) {
@@ -35,13 +37,14 @@ public class Duke {
             Todo todo = new Todo(description);
             taskList.add(todo);
             System.out.println("Got it. I've added this task:\n" + todo + "\n"
-                    + "Now you have " + taskList.size() + " tasks in the list.");
+                    + "Now you have " + taskList.size() + " tasks in the list.\n");
         } catch (DukeException ex) {
             System.out.println(ex.getMessage());
         } finally {
             readUserInput();
         }
     }
+
 
     public static void inputDeadline(String display) {
         try {
@@ -57,13 +60,19 @@ public class Duke {
                 }
                 String description = display.substring(9, index);
                 String deadlineDate = display.substring(index + 4);
-                Deadline deadline = new Deadline(description, deadlineDate);
-                taskList.add(deadline);
-                System.out.println("Got it. I've added this task:\n" + deadline + "\n"
-                        + "Now you have " + taskList.size() + " tasks in the list.");
+
+                try {
+                    LocalDate date = LocalDate.parse(deadlineDate);
+                    Deadline deadline = new Deadline(description, date);
+                    taskList.add(deadline);
+                    System.out.println("Got it. I've added this task:\n" + deadline + "\n"
+                            + "Now you have " + taskList.size() + " tasks in the list.\n");
+                } catch (DateTimeParseException e) {
+                    System.out.println("Please key in the date in the format YYYY-MM-DD");
+                }
             } else {
                 throw new DukeException("☹ OOPS!!! The format is wrong. A dash is missing.");
-            }  
+            }
         } catch (DukeException ex) {
             System.out.println(ex.getMessage());
         } finally {
@@ -78,17 +87,22 @@ public class Duke {
             }
             if (display.contains("/")) {
                 int index = display.indexOf("/");
-                if (display.substring(index + 1).equals("") 
+                if (display.substring(index + 1).equals("")
                         || display.substring(index + 3).equals("")
-                        || display.substring(index + 4 ).equals("")) {
+                        || display.substring(index + 4).equals("")) {
                     throw new DukeException("☹ OOPS!!! Please key in a valid date and time.");
                 }
                 String description = display.substring(6, index);
                 String eventDate = display.substring(index + 4);
-                Event event = new Event(description, eventDate);
-                taskList.add(event);
-                System.out.println("Got it. I've added this task:\n" + event + "\n"
-                        + "Now you have " + taskList.size() + " tasks in the list.");
+                try {
+                    LocalDate date = LocalDate.parse(eventDate);
+                    Event event = new Event(description, date);
+                    taskList.add(event);
+                    System.out.println("Got it. I've added this task:\n" + event + "\n"
+                            + "Now you have " + taskList.size() + " tasks in the list.\n");
+                } catch (DateTimeParseException e) {
+                    System.out.println("Please key in the date in the format YYYY-MM-DD");
+                }
             } else {
                 throw new DukeException("☹ OOPS!!! The format is wrong. A dash is missing.");
             }
@@ -98,7 +112,8 @@ public class Duke {
             readUserInput();
         }
     }
-    
+
+
     public static void delete(String display) {
         try {
             if (display.length() == 6 || display.length() == 7) {
@@ -110,37 +125,33 @@ public class Duke {
             }
             Task task = taskList.get(index - 1);
             taskList.remove(index - 1);
-            System.out.println("Noted. I've removed this task:\n" + task + "\n" 
-                    + "Now you have " + taskList.size() + " tasks in the list.");
+            System.out.println("Noted. I've removed this task:\n" + task + "\n"
+                    + "Now you have " + taskList.size() + " tasks in the list.\n");
         } catch (DukeException ex) {
             System.out.println(ex.getMessage());
         } finally {
             readUserInput();
         }
     }
+    
+    public static void exit() {
+        System.out.println("Bye. Hope to see you again soon!");
+    }
 
     public static void readUserInput() {
-        
         String display = sc.nextLine();
-
         if (display.equals("bye")) {
-            System.out.println("Bye. Hope to see you again soon!");
-
+            exit();
         } else if (display.equals("list")) {
             inputList(display);
-
-        } else if (display.startsWith("done")) { 
+        } else if (display.startsWith("done")) {
             inputDone(display);
-
         } else if (display.startsWith("todo")) {
             inputTodo(display);
-
-        } else if (display.startsWith("deadline")) { 
+        } else if (display.startsWith("deadline")) {
             inputDeadline(display);
-
         } else if (display.startsWith("event")) {
             inputEvent(display);
-
         } else if (display.startsWith("delete")) {
             delete(display);
         } else {
@@ -164,4 +175,5 @@ public class Duke {
         System.out.println("Hello from\n" + logo + "\n" + greeting);
         readUserInput();
     }
-}
+}    
+
