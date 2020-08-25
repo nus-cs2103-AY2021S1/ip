@@ -32,3 +32,13 @@ cd text-ui-test
 # chmod +x # Only needed first time
 ./runtest.sh
 ```
+
+## Running Jar file
+
+Simply recompile the program.
+
+The run:
+
+```shell script
+java -jar out/artifacts/ip_jar/ip.jar
+```
