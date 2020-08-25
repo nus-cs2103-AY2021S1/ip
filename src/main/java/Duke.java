@@ -65,6 +65,16 @@ class Deadline extends Task {
     }
 }
 
+class Convert {
+    static String at(String time) {
+        return "";
+    }
+
+    static String by(String time) {
+        return "";
+    }
+}
+
 public class Duke {
     // constant SPACE and LINE for format purposes
     public static String SPACE = "     ";
