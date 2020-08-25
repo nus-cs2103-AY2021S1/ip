@@ -20,3 +20,5 @@ java -classpath ..\bin Main < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT
+
+del /Q .\data

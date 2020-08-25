@@ -12,12 +12,19 @@ import java.util.Scanner;
 public class Duck {
 
     private Ui userInterface;
+    private Storage storage;
     private TaskList taskList;
     private List<String> responses;
 
-    public Duck(Ui ui) {
+    public Duck(Ui ui, Storage storage) {
         this.userInterface = ui;
-        this.taskList = new TaskList();
+        this.storage = storage;
+        try {
+            this.taskList = storage.load();
+        } catch (DuckException e) {
+            this.taskList = new TaskList();
+        }
+
         this.responses = new ArrayList<>();
     }
 
@@ -35,6 +42,12 @@ public class Duck {
 
     public void shutdown() {
         responses.add("Bye. Hope to see you again soon!");
+        try {
+            this.storage.save(this.taskList);
+        } catch (DuckException e) {
+            responses.add("Failed to save file");
+        }
+
     }
 
     public void listTasks() {
@@ -73,7 +86,12 @@ public class Duck {
 
     public void run() {
         greet();
-
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                shutdown();
+            }
+        });
         boolean run = true;
         Scanner sc = new Scanner(System.in);
         while (run) {
