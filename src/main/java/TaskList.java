@@ -20,10 +20,6 @@ public class TaskList {
         this.taskList.set(index, task);
     }
 
-    public void addTask(Task task) {
-        this.taskList.add(task);
-    }
-
     public void removeTask(int index) {
         this.taskList.remove(index);
     }
@@ -37,11 +33,16 @@ public class TaskList {
                 current.removeTask(taskNumber - 1);
                 ui.showSuccessfulDelete(removedTask, updated.noOfTasks());
             } else {
-                throw new DeleteFailureException("Duke says: Please try again with a valid format.");
+                throw new DeleteFailureException("Duke says: Please try again with a " +
+                        "valid format.");
             }
         } catch (IndexOutOfBoundsException e) {
             throw new DeleteFailureException("Duke says: Please try again with a valid number.");
         }
+    }
+
+    public void addTask(Task task) {
+        this.taskList.add(task);
     }
 
     public void addTask(String[] data, String keyWord, TaskList tasks, Ui ui) {

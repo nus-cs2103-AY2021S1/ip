@@ -11,13 +11,13 @@ public class Task {
         return (isDone ? "✓" : "✘"); //return tick or X symbols
     }
 
-     public void markDone() {
+    public void markDone() {
         this.isDone = true;
-     }
+    }
 
-     @Override
+    @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description.trim();
-     }
+    }
 
 }

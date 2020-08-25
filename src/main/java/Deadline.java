@@ -26,10 +26,11 @@ public class Deadline extends Task {
         String toReturn = "[D]" + super.toString();
         if (this.hasDate()) {
             if (this.hasTime()) {
-                toReturn += " (by: " + this.localDate.format((DateTimeFormatter.ofPattern("MMM dd yyyy")))
-                                + " " + this.localTime + ")";
+                toReturn += " (by: " + this.localDate.format((
+                        DateTimeFormatter.ofPattern("MMM dd yyyy"))) + " " + this.localTime + ")";
             } else {
-                toReturn += " (by: " + this.localDate.format((DateTimeFormatter.ofPattern("MMM dd yyyy"))) + ")";
+                toReturn += " (by: " + this.localDate.format((
+                        DateTimeFormatter.ofPattern("MMM dd yyyy"))) + ")";
             }
         }
         return toReturn;

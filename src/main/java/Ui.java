@@ -1,6 +1,7 @@
 public class Ui {
 
-    final static String LINE_BREAK = "=========================================================================";
+    final String LINE_BREAK = "==========================================================" +
+            "===============";
 
     public void showWelcome() {
         String logo = " ____        _        \n"
@@ -20,15 +21,16 @@ public class Ui {
 
     public void showGoodbye() {
         System.out.println("Duke says: Goodbye and have a nice day! :D");
-
     }
 
     public void showHelp() {
         System.out.println("list: displays a sequential view of past inputs\n" +
                 "done <task number>: denotes a task as done by checking it\n" +
                 "delete <task number>: deletes an existing task\n" +
-                "deadline <description> /by <YYYY-MM-DD> <HH:MM>: adds a deadline with desired date/time\n" +
-                "event <description> /at <YYYY-MM-DD> <HH:MM>: adds an event with desired date/time\n" +
+                "deadline <description> /by <YYYY-MM-DD> <HH:MM>: adds a deadline with " +
+                "desired date/time\n" +
+                "event <description> /at <YYYY-MM-DD> <HH:MM>: adds an event with " +
+                "desired date/time\n" +
                 "todo <description>: adds a todo task\n" +
                 "bye: terminates program");
     }

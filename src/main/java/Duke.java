@@ -6,7 +6,7 @@ public class Duke {
     private Ui ui;
     private Command command;
 
-    public Duke(String dirPath, String filePath) {
+    Duke(String dirPath, String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(dirPath, filePath);
         this.tasks = new TaskList(storage.loadData());

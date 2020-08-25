@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +62,6 @@ public class Storage {
         return new ArrayList<>();
     }
 
-    //creates a new task.txt file with updated tasks that overwrites the existing one
     public void updateTaskFile(TaskList taskList) {
         try {
             //create temp text file
@@ -79,16 +79,18 @@ public class Storage {
                     //so that our parser can read
                     if (curr instanceof ToDo) {
                         ToDo todo = (ToDo) curr;
-                        toAppend = "T!@%" + (todo.isDone ? "1!@%" : "0!@%") + todo.description + "!@%";
+                        toAppend = "T!@%" + (todo.isDone ? "1!@%" : "0!@%") + todo.description
+                                + "!@%";
                     } else if (curr instanceof Deadline) {
                         Deadline deadline = (Deadline) curr;
-                        toAppend = "D!@%" + (deadline.isDone ? "1!@%" : "0!@%") + deadline.description + "!@%"
-                                + (deadline.localDate != null ? deadline.localDate : "") + "!@%"
+                        toAppend = "D!@%" + (deadline.isDone ? "1!@%" : "0!@%")
+                                + deadline.description + "!@%" +
+                                (deadline.localDate != null ? deadline.localDate : "") + "!@%"
                                 + (deadline.localTime != null ? deadline.localTime : "");
                     } else {
                         Event event = (Event) curr;
-                        toAppend = "E!@%" + (event.isDone ? "1!@%" : "0!@%") + event.description + "!@%"
-                                + (event.localDate != null ? event.localDate : "") + "!@%"
+                        toAppend = "E!@%" + (event.isDone ? "1!@%" : "0!@%") + event.description
+                                + "!@%" + (event.localDate != null ? event.localDate : "") + "!@%"
                                 + (event.localTime != null ? event.localTime : "");
                     }
                     output.write(toAppend);
@@ -112,7 +114,6 @@ public class Storage {
         }
     }
 
-    //reads the given string and returns a task
     public Task readTaskFromFile(String string) {
         //<type>!@%<status>!@%<description>!@%<date>(if applicable)!@%<time>(if applicable)
         String[] data = string.split("!@%");

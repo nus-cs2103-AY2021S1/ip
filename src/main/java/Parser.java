@@ -3,7 +3,6 @@ import java.util.Set;
 
 public class Parser {
 
-    //checks if keyword is valid
     public boolean isValidKeyWord(String word) {
         Set<String> reservedKeyWords = new HashSet<>();
         reservedKeyWords.add("help");
@@ -18,7 +17,6 @@ public class Parser {
         return reservedKeyWords.contains(word);
     }
 
-    //checks the format of a given date and checks if it is acceptable
     public boolean isValidDate(String date) {
         if (date.equals("")) {
             return true;
@@ -28,8 +26,9 @@ public class Parser {
             String year = splitDate[0];
             String month = splitDate[1];
             String day = splitDate[2];
-            if (year.length() == 4 && month.length() == 2 && day.length() == 2 && Integer.parseInt(month) <= 12
-                    && Integer.parseInt(month) >= 1 && Integer.parseInt(day) >= 1 && Integer.parseInt(day) <= 31) {
+            if (year.length() == 4 && month.length() == 2 && day.length() == 2 &&
+                    Integer.parseInt(month) <= 12 && Integer.parseInt(month) >= 1 &&
+                    Integer.parseInt(day) >= 1 && Integer.parseInt(day) <= 31) {
                 return true;
             }
         }

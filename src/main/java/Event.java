@@ -26,10 +26,11 @@ public class Event extends Task {
         String toReturn = "[E]" + super.toString();
         if (this.hasDate()) {
             if (this.hasTime()) {
-                toReturn += " (at: " + this.localDate.format((DateTimeFormatter.ofPattern("MMM dd yyyy")))
-                                + " " + this.localTime + ")";
+                toReturn += " (at: " + this.localDate.format((
+                        DateTimeFormatter.ofPattern("MMM dd yyyy"))) + " " + this.localTime + ")";
             } else {
-                toReturn += " (at: " + this.localDate.format((DateTimeFormatter.ofPattern("MMM dd yyyy"))) + ")";
+                toReturn += " (at: " + this.localDate.format((
+                        DateTimeFormatter.ofPattern("MMM dd yyyy"))) + ")";
             }
         }
         return toReturn;
