@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -25,13 +26,13 @@ public class Duke {
     }
 
     //Represents command inputs as constants
-    public enum Command {
+    private enum Command {
         LIST("list"), BYE("bye"), DELETE("delete"), DONE("done"),
         TODO("todo"), DEADLINE("deadline"), EVENT("event");
 
         private final String input;
 
-        private Command(String input) {
+        Command(String input) {
             this.input = input;
         }
 
@@ -108,7 +109,7 @@ public class Duke {
                 throw new DukeException("Wrong task number!");
             } else {
                 Task t = stored_task.get(taskNumber - 1);
-                if (t.checkIfDone()) {
+                if (t.isDone()) {
                     throw new DukeException("This task is already done: " + t.getDescription());
                 } else {
                     t.markAsDone();
@@ -150,6 +151,14 @@ public class Duke {
         }
     }
 
+    public String getStringFromArray(String[] inputArr, int indexFrom, int indexTo) {
+        String output = "";
+        for (int i = indexFrom; i < indexTo; i++){
+            output += inputArr[i] + " ";
+        }
+        return output;
+    }
+
     public void run() {
         boolean isInProgram = true;
         String greeting_message = line +
@@ -163,91 +172,62 @@ public class Duke {
         while (isInProgram) {
             try {
                 String input = sc.nextLine();
-                if (input.equals(Command.BYE.getInput())) {
+                String[] inputInformation = input.split(" ");
+                if (inputInformation[0].equals(Command.BYE.getInput())) {
                     System.out.println(exit_message);
                     isInProgram = false;
-                } else if (input.equals(Command.LIST.getInput())) {
+                } else if (inputInformation[0].equals(Command.LIST.getInput())) {
                     listStoredTasks();
-                } else if (input.startsWith(Command.DONE.getInput())) {
-                    if (input.length() > 4) {
-                        if (!input.substring(4, 5).equals(" ")) {
-                            throw new DukeException("My duck instincts tell me your input makes no sense...");
-                        } else {
-                            String taskNumberString = input.substring(5);
-                            if (isNumber(taskNumberString)) {
-                                int taskNumber = Integer.parseInt(input.substring(5));
-                                markTaskAsDone(taskNumber);
-                            } else {
-                                throw new DukeException("You need to input the task number!");
-                            }
-                        }
+                } else if (inputInformation[0].equals(Command.DONE.getInput())) {
+                    if (inputInformation.length > 1 && isNumber(inputInformation[1])) {
+                        int taskNumber = Integer.parseInt(inputInformation[1]);
+                        markTaskAsDone(taskNumber);
                     } else {
                         throw new DukeException("You need to include your task number to mark done...");
                     }
-                } else if (input.startsWith(Command.DELETE.getInput())) {
-                    if (input.length() > 6) {
-                        if (!input.substring(6, 7).equals(" ")) {
-                            throw new DukeException("My duck instincts tell me your input makes no sense...");
-                        } else {
-                            String taskNumberString = input.substring(7);
-                            if (isNumber(taskNumberString)) {
-                                int taskNumber = Integer.parseInt(input.substring(7));
-                                deleteTask(taskNumber);
-                            } else {
-                                throw new DukeException("You need to input the task number!");
-                            }
-                        }
+                } else if (inputInformation[0].equals(Command.DELETE.getInput())) {
+                    if (inputInformation.length > 1 && isNumber(inputInformation[1])) {
+                        int taskNumber = Integer.parseInt(inputInformation[1]);
+                        deleteTask(taskNumber);
                     } else {
                         throw new DukeException("You need to include your task number to delete...");
                     }
-                } else if (input.startsWith(Command.TODO.getInput())) {
-                    if (input.length() > 4) {
-                        if (!input.substring(4, 5).equals(" ")) {
-                            throw new DukeException("My duck instincts tell me your input makes no sense...");
-                        } else {
-                            ToDo newTask = new ToDo(input.substring(5));
-                            addTask(newTask);
-                        }
+                } else if (inputInformation[0].equals(Command.TODO.getInput())) {
+                    if (inputInformation.length > 1) {
+                        String description = getStringFromArray(inputInformation, 1, inputInformation.length);
+                        ToDo newTask = new ToDo(description);
+                        addTask(newTask);
                     } else {
                         throw new DukeException("Your todo description can't be empty...");
                     }
-                } else if (input.startsWith(Command.DEADLINE.getInput())) {
-                    if (input.length() > 8) {
-                        if (!input.substring(8, 9).equals(" ")) {
-                            throw new DukeException("My duck instincts tell me your input makes no sense...");
+                } else if (inputInformation[0].equals(Command.DEADLINE.getInput())) {
+                    if (inputInformation.length > 1) {
+                        int indexOfBy = Arrays.asList(inputInformation).indexOf("/by");
+                        if (indexOfBy == -1) {
+                            throw new DukeException("Did you include /by?");
                         } else {
-                            int indexOfBy = input.indexOf("/by");
-                            if (indexOfBy == -1) {
-                                throw new DukeException("Did you include /by?");
-                            } else {
-                                String description = input.substring(9, indexOfBy);
-                                String by = input.substring(indexOfBy + 3);
-                                Deadline newTask = new Deadline(description, by);
-                                addTask(newTask);
-                            }
+                            String description = getStringFromArray(inputInformation, 1, indexOfBy);
+                            String by = getStringFromArray(inputInformation, indexOfBy + 1, inputInformation.length);
+                            Deadline newTask = new Deadline(description, by);
+                            addTask(newTask);
                         }
                     } else {
                         throw new DukeException("Your deadline description can't be empty...");
                     }
-                } else if (input.startsWith(Command.EVENT.getInput())) {
-                    if (input.length() > 5) {
-                        if (!input.substring(5, 6).equals(" ")) {
-                            throw new DukeException("My duck instincts tell me your input makes no sense...");
+                } else if (inputInformation[0].equals(Command.EVENT.getInput())) {
+                    if (inputInformation.length > 1) {
+                        int indexOfAt = Arrays.asList(inputInformation).indexOf("/at");
+                        if (indexOfAt == -1) {
+                            throw new DukeException("Did you include /at?");
                         } else {
-                            int indexOfAt = input.indexOf("/at");
-                            if (indexOfAt == -1) {
-                                throw new DukeException("Did you include /at?");
-                            } else {
-                                String description = input.substring(6, indexOfAt);
-                                String at = input.substring(indexOfAt + 3);
-                                Event newTask = new Event(description, at);
-                                addTask(newTask);
-                            }
+                            String description = getStringFromArray(inputInformation, 1, indexOfAt);
+                            String at = getStringFromArray(inputInformation, indexOfAt + 1, inputInformation.length);
+                            Event newTask = new Event(description, at);
+                            addTask(newTask);
                         }
                     } else {
                         throw new DukeException("Your event description can't be empty...");
                     }
-
                 } else {
                     throw new DukeException("My duck instincts tell me your input makes no sense...");
                 }

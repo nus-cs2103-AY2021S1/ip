@@ -1,3 +1,5 @@
+import java.util.StringTokenizer;
+
 public class ToDo extends Task {
     /**
      * Constructor for ToDo.
@@ -8,13 +10,12 @@ public class ToDo extends Task {
         super(description);
     }
 
-    @Override
-    public String getStoredString(){
-        return "T" + super.toString();
+    public ToDo(String description, boolean isDone) {
+        super(description, isDone);
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[" + TaskType.TODO.getInitial() + "]" + super.toString();
     }
 }

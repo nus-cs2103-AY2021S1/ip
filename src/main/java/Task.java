@@ -5,6 +5,21 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    //Represents task initials as constants
+    public enum TaskType {
+        TODO("T"), DEADLINE("D"), EVENT("E");
+
+        private final String initial;
+
+        TaskType(String initial) {
+            this.initial = initial;
+        }
+
+        public String getInitial() {
+            return initial;
+        }
+    }
+
     /**
      * Constructor for Task.
      *
@@ -13,6 +28,11 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
     /**
@@ -45,15 +65,11 @@ public class Task {
      *
      * @return If Task is Done.
      **/
-    public boolean checkIfDone() {
+    public boolean isDone() {
         return isDone;
     }
 
-    public String getStoredString(){
-        return (isDone? "1 " : "0 ") + description;
-    }
-
-    public String toString(){
+    public String toString() {
         return getStatusIcon() + " " + description;
     }
 }
