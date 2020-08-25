@@ -11,11 +11,17 @@ public class Parser {
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Constructor for Parser.
+     */
     public Parser() {
         storage = new Storage("src/main/java/tasklist.txt");
         taskList = new TaskList();
     }
 
+    /**
+     * Greetings to welcome the user.
+     */
     public void greeting() {
         System.out.println(line);
         System.out.println("Hello! I'm Duke\n" +
@@ -23,6 +29,9 @@ public class Parser {
         System.out.println(line);
     }
 
+    /**
+     * Generate the list of tasks.
+     */
     public void generateList() {
         System.out.println(line);
         System.out.println("Here are the tasks in your list:");
@@ -33,6 +42,12 @@ public class Parser {
         System.out.println(line);
     }
 
+    /**
+     * Parse users' commands and respond to them.
+     * @param s
+     * @throws IOException
+     * @throws IncorrectInputException
+     */
     public void parse(String s) throws IOException, IncorrectInputException {
         try {
             int j = s.indexOf(' ');
@@ -135,6 +150,10 @@ public class Parser {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Leave a goodbye message.
+     */
     public void exit() {
         System.out.println(line);
         System.out.println("Bye. Hope to see you again soon!");

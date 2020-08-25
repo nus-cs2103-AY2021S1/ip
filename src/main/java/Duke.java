@@ -6,6 +6,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -16,6 +20,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Run the program to interact with users.
+     * @throws IOException
+     * @throws IncorrectInputException
+     */
     public void run() throws IOException, IncorrectInputException {
         ui.greeting();
         ui.interact();

@@ -8,6 +8,11 @@ public class Storage {
 
     File file;
     String filepath;
+
+    /**
+     * Constructor for Storage.
+     * @param filepath
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
         try {
@@ -22,6 +27,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Load all the tasks from the files.
+     * @return an arraylist of all the tasks
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> loadData() throws FileNotFoundException {
         Scanner reader = new Scanner(file);
         ArrayList<Task> list = new ArrayList<>();
@@ -59,6 +69,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Save new task to the file.
+     * @param task
+     * @throws IOException
+     */
     public void saveTask(Task task) throws IOException {
         BufferedWriter file = new BufferedWriter(new FileWriter(
                 filepath, true));
