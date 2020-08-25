@@ -3,17 +3,21 @@ package duke.task;
 import java.time.LocalDate;
 
 public class Task {
+    protected static int numOfTasks;
     protected String description;
     protected boolean isCompleted;
+    protected final int id;
 
     Task(String description) {
         this.description = description;
         this.isCompleted = false;
+        this.id = numOfTasks++;
     }
 
     Task(String description, String completionStatus) {
         this.description = description;
         this.isCompleted = completionStatus.equals("1");
+        this.id = numOfTasks++;
     }
 
     String getStatusIcon() {
@@ -22,6 +26,10 @@ public class Task {
 
     String getType() {
         return null;
+    }
+
+    int getId() {
+        return id;
     }
 
     LocalDate getDate() {
@@ -33,7 +41,11 @@ public class Task {
     }
 
     public String encode() {
-        return (getType() + " | " + (isCompleted ? "1" : "0") + " | " + description + (getDate() != null ? (" | " + getDate()) : ""));
+        return (getId() + " | " + getType() + " | " + (isCompleted ? "1" : "0") + " | " + description + (getDate() != null ? (" | " + getDate()) : ""));
+    }
+
+    public boolean includesKeyword(String keyword) {
+        return description.toLowerCase().contains(keyword.toLowerCase());
     }
 
     @Override

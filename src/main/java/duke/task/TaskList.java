@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TaskList {
@@ -51,15 +52,32 @@ public class TaskList {
     }
 
     public String showTasksOnDate(LocalDate date) {
-        Stream<Task> filtered = list.stream().filter(task -> task.getDate().equals(date));
-        AtomicInteger i = new AtomicInteger(1);
-        StringBuilder output = new StringBuilder();
-        filtered.forEach(task -> {
-            output.append("\t ").append(i.getAndIncrement()).append(".").append(task).append("\n");
-        });
-        if (i.intValue() == 1) {
-            return "\t No tasks found on " + date.format(DateTimeFormatter.ofPattern("MMMM d yyyy"));
+        List<Task> filtered = list.stream().filter(task -> task.getDate().equals(date)).collect(Collectors.toList());
+        if (filtered.size() == 0) {
+            return "There are no tasks happening on: " + date.format(DateTimeFormatter.ofPattern("MMMM d yyyy"));
         }
+        StringBuilder output = new StringBuilder();
+        output.append("Here are the tasks happening on: ").append(date).append("\n");
+
+        for (int i = 0; i < filtered.size(); i++) {
+            output.append(String.format("\t %d. %s" + (i == filtered.size() - 1 ? "" : "\n"), i + 1, filtered.get(i)));
+        }
+
+        return output.toString();
+    }
+
+    public String showMatchingTasks(String keyword) {
+        List<Task> matchingTasks = list.stream().filter(task -> task.includesKeyword(keyword)).collect(Collectors.toList());
+        if (matchingTasks.size() == 1) {
+            return "There are no tasks containing keyword: " + keyword;
+        }
+        StringBuilder output = new StringBuilder();
+        output.append("Here are the tasks containing keyword: ").append(keyword).append("\n");
+
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            output.append(String.format("\t %d. %s" + (i == matchingTasks.size() - 1 ? "" : "\n"), i + 1, matchingTasks.get(i)));
+        }
+
         return output.toString();
     }
 
