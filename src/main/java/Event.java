@@ -1,17 +1,11 @@
 package main.java;
 
-<<<<<<< HEAD
 import java.io.Serializable;
-
-public class Event extends Task implements Serializable {
-    private String time;
-=======
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
+public class Event extends Task implements Serializable{
     private LocalDate time;
->>>>>>> branch-Level-8
 
     public Event(String s, Boolean b, LocalDate t) {
         super(s, b);
