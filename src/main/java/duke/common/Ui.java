@@ -31,6 +31,15 @@ public class Ui {
         displayLine();
     }
 
+    public static void displayMatchingTasks(ArrayList<Task> tasks) {
+        displayLine();
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("    " + (i + 1) + ". " + tasks.get(i));
+        }
+        displayLine();
+    }
+
     public static void displayWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

@@ -21,6 +21,10 @@ public class ToDo extends Task {
         this.isDone = isDone;
     }
 
+    public boolean haveKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+
     /**
      * Overrides toString method of Task class
      *

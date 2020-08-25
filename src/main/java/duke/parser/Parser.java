@@ -1,13 +1,6 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.DeleteCommand;
-import duke.command.ToDoCommand;
-import duke.command.DeadlineCommand;
-import duke.command.EventCommand;
+import duke.command.*;
 import duke.common.CustomException;
 
 public class Parser {
@@ -24,6 +17,8 @@ public class Parser {
                 return new DoneCommand(Integer.parseInt(parts[1].trim()));
             case "delete":
                 return new DeleteCommand(Integer.parseInt(parts[1].trim()));
+            case "find":
+                return new FindCommand(parts[1].trim());
             case "todo":
                 return new ToDoCommand(parts[1].trim());
             case "deadline":

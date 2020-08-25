@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.common.CustomException;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -31,5 +33,19 @@ public class TaskList {
 
     public int getSize() {
         return tasks.size();
+    }
+
+    public ArrayList<Task> findTask(String keyword) throws CustomException {
+        ArrayList<Task> result = new ArrayList<>();
+        if (!keyword.isEmpty()) {
+            for (Task task : tasks) {
+                if (task.haveKeyword(keyword)) {
+                    result.add(task);
+                }
+            }
+        } else {
+            throw new CustomException("keyword is left blank.");
+        }
+        return result;
     }
 }
