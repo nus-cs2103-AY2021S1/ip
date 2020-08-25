@@ -6,6 +6,10 @@ import duke.resource.TaskList;
 import duke.task.Task;
 import duke.util.DukeException;
 
+/**
+ * Ui class that handles the user interaction component of the bot.
+ */
+
 public class Ui {
 
     private final Scanner sc;
@@ -13,9 +17,19 @@ public class Ui {
     private static final String LINE =
             "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
+    /**
+     * Constructor that creates a Ui object, with a Scanner that reads user input.
+     */
+
     public Ui() {
         sc = new Scanner(System.in);
     }
+
+    /**
+     * Prints to user if the given save file has loaded successfully and the tasks found
+     * in the save file.
+     * @param tasks a TaskList containing the tasks in the save file
+     */
 
     public void loaded(TaskList tasks) {
         System.out.println(
@@ -32,6 +46,13 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Prints to user if a Task has successfully been added to the TaskList and
+     * the current number of Tasks in it.
+     * @param tasks the TaskList associated with the current Duke object.
+     * @param task the Task that was added to the TaskList.
+     */
+
     public void printAdd(TaskList tasks, Task task) {
         System.out.println(
                 "    Got it. I've added this task:\n        " +
@@ -42,11 +63,20 @@ public class Ui {
                 LINE);
     }
 
+    /**
+     * Prints to user if the user has entered the terminate command.
+     */
+
     public void printBye() {
         System.out.println(
                 "    Bye. Hope to see you again soon!\n" +
                 LINE);
     }
+
+    /**
+     * Prints to user if a Task has been marked as complete.
+     * @param task the Task that was marked as complete.
+     */
 
     public void printDone(Task task) {
         System.out.println(
@@ -54,6 +84,13 @@ public class Ui {
                 task.toString() + "\n" +
                 LINE);
     }
+
+    /**
+     * Prints to user if a Task has successfully been deleted from the TaskList and
+     * the current number of Tasks in it.
+     * @param tasks the TaskList associated with the current Duke object.
+     * @param task the Task that was deleted from the TaskList.
+     */
 
     public void printDelete(TaskList tasks, Task task) {
         System.out.println(
@@ -65,11 +102,22 @@ public class Ui {
                 LINE);
     }
 
+    /**
+     * Prints to user if a DukeException has been caught, printing the corresponding
+     * error message.
+     * @param e a DukeException containing the error message
+     */
+
     public void printError(DukeException e) {
         System.out.println(
                 e.getMessage() + "\n" +
                 LINE);
     }
+
+    /**
+     * Prints to user the current Tasks found in the TaskList.
+     * @param list the TaskList associated with the current Duke object
+     */
 
     public void printList(TaskList list) {
         int i = 0;
@@ -80,15 +128,28 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Reads and returns the next line of user input.
+     * @return the next line of user input
+     */
+
     public String read() {
         return sc.nextLine();
     }
+
+    /**
+     * Prints a starting message to indicate that Duke is ready to take in user input.
+     */
 
     public void start() {
         System.out.println(
                 "    Awaiting input...\n" +
                 LINE);
     }
+
+    /**
+     * Prints a welcome message for the user.
+     */
 
     public void welcome() {
         String logo

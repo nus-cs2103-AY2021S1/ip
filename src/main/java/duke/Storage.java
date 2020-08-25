@@ -13,13 +13,30 @@ import duke.resource.TaskList;
 import duke.task.Task;
 import duke.util.DukeException;
 
+/**
+ * Storage class that handles the reading and writing process from a designated text file,
+ * referred to as a save file.
+ */
+
 public class Storage {
 
     private final String filePath;
 
+    /**
+     * Constructor that creates a Storage object.
+     * @param filePath the filepath task sessions will be saved in
+     */
+
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
+    /**
+     * Reads the save file and returns the List of Tasks in it. Throws a DukeException
+     * if the file is not found and proceeds to create one, or if a file cannot be created.
+     * @return a List of Tasks in the save file
+     * @throws DukeException thrown if a save file is not found or cannot be created
+     */
 
     public List<Task> load() throws DukeException {
         var list = new ArrayList<Task>();
@@ -49,6 +66,11 @@ public class Storage {
         }
         return list;
     }
+
+    /**
+     * Writes the current TaskList to a save file.
+     * @param tasks TaskList containing Tasks to write.
+     */
 
     public void save(TaskList tasks) {
         String toWrite = tasks.stream()

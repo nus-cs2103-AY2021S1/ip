@@ -9,14 +9,32 @@ import duke.util.DukeException;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Command class that handles the logic flow of commands input.
+ */
+
 public class Command {
 
     private final String[] input;
     private boolean terminate = false;
 
+    /**
+     * Constructor that creates a Command object.
+     * @param input command string that has been split
+     */
+
     public Command(String[] input) {
         this.input = input;
     }
+
+    /**
+     * Evaluates the syntax of the input command and executes it, throwing
+     * a DukeException if the syntax is incorrect.
+     * @param tasks the TaskList object associated with the current Duke object
+     * @param ui the Ui object associated with the current Duke object
+     * @param storage the Storage object associated with the current Duke object
+     * @throws DukeException thrown if any errors are detected with the input
+     */
 
     public void execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeException {

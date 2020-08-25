@@ -6,11 +6,20 @@ import duke.Command;
 import duke.Storage;
 import duke.Ui;
 
+/**
+ * Duke is a bot that functions as a user's task manager.
+ */
+
 public class Duke {
 
     private final Ui ui;
     private TaskList tasks;
     private final Storage storage;
+
+    /**
+     * Constructor that creates a Duke object.
+     * @param filePath the filepath task sessions will be saved in
+     */
 
     public Duke(String filePath) {
         this.ui = new Ui();
@@ -23,6 +32,10 @@ public class Duke {
             ui.printError(e);
         }
     }
+
+    /**
+     * Runs Duke's user input scanning that only terminates when a "bye" command is given.
+     */
 
     public void run() {
         ui.start();
