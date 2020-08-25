@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+
     private static final String INDENT = "    ";
     private static final String LINE = "____________________________________________________________";
     private static final ArrayList<Task> tasks = new ArrayList<>();
