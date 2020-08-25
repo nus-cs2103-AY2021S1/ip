@@ -2,6 +2,7 @@
 list
 bye
 */
+package duke;
 import java.util.*;
 
 public class Duke {

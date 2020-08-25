@@ -1,3 +1,4 @@
+package duke;
 public class Helper {
     public static String horiLine = "";
     public static void init() {
