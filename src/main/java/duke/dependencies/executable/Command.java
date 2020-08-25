@@ -10,8 +10,10 @@ import duke.dependencies.task.Task;
  *
  */
 public class Command implements Executable {
+
     private CommandType command;
     private Task task;
+
     private Command(CommandType command, Task task) {
         this.command = command;
         this.task = task;
@@ -89,5 +91,17 @@ public class Command implements Executable {
      */
     public static Command createFindCommand(Task task) {
         return new Command(CommandType.FIND, task);
+    }
+
+    public static Command createEventCommand(Task task) {
+        return new Command(CommandType.EVENT, task);
+    }
+
+    public static Command createDeadlineCommand(Task task) {
+        return new Command(CommandType.DEADLINE, task);
+    }
+
+    public static Command createTodoCommand(Task task) {
+        return new Command(CommandType.TODO, task);
     }
 }
