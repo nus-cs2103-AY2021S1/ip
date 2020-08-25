@@ -18,11 +18,10 @@ public class TaskList {
     }
 
     public void showTaskList() {
-        System.out.println("Here is your list of tasks:");
+        Ui.showMessage("Here is your list of tasks:");
         for (int i = 0; i < tasks.size(); i++) {
             Ui.showMessage((i + 1) + ". " + tasks.get(i) + "\n");
         }
-        return;
     }
 
     public void markTaskAsDone(int idx) throws DukeException {
