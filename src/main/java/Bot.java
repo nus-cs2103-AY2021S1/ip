@@ -20,41 +20,48 @@ public class Bot {
         while (sc.hasNextLine()) {
             try {
                 String s = sc.nextLine();
-                String[] arr = s.split(" ");
-                String[] arr1 = parser.getDetails(s);
-                if (arr1[0].equals("bye")) {
-                    return;
-                } else if (arr1[0].equals("list")) {
-                    returnListings(s);
-                } else if (arr1[0].equals("done")) {
-                    Integer value = Integer.valueOf(arr1[1]);
-                    doneListings(value);
-                } else if (arr1[0].equals("todo")) {
-                    if (arr1[1] == null) {
-                        throw new NoDescriptionException("todo");
-                    } else {
-                        addListings(arr1);
-                    }
-                } else if (arr1[0].equals("deadline")) {
-                    if (arr1[1] == null || arr1[2] == null) { //can be modified to do description AND time;
-                        throw new NoDescriptionException("deadline");
-                    } else {
-                        addListings(arr1);
-                    }
-                } else if (arr1[0].equals("event")) {
-                    if (arr1[0] == null || arr1[1] == null) {
-                        throw new NoDescriptionException("event");
-                    } else {
-                        addListings(arr1);
-                    }
-                } else if (arr1[0].equals("delete")) {
-                    Integer number = Integer.valueOf(arr1[1]) - 1;
-                    deleteMessage(number);
-                    list.remove((int) number);
-                } else {
-                    throw new UndefinedException();
+                String[] parsedInfo = parser.getDetails(s);
+                String command = parsedInfo[0];
+                String commandDetail = parsedInfo[1];
+                String dateInfo = parsedInfo[2];
+                switch (command) {
+                    case ("bye"):
+                        break;
+                    case ("list"):
+                        returnListings();
+                        break;
+                    case ("done"):
+                        doneListings(Integer.valueOf(commandDetail));
+                        break;
+                    case ("todo"):
+                        if (commandDetail == null) {
+                            throw new NoDescriptionException("todo");
+                        } else {
+                            addListings(parsedInfo);
+                        }
+                        break;
+                    case ("deadline"):
+                        if (commandDetail == null || dateInfo == null) { //can be modified to do description AND time;
+                            throw new NoDescriptionException("deadline");
+                        } else {
+                            addListings(parsedInfo);
+                        }
+                        break;
+                    case ("event"):
+                        if (commandDetail == null || dateInfo == null) {
+                            throw new NoDescriptionException("event");
+                        } else {
+                            addListings(parsedInfo);
+                        }
+                        break;
+                    case ("delete"):
+                        Integer number = Integer.valueOf(parsedInfo[1]) - 1;
+                        deleteMessage(number);
+                        list.remove((int) number);
+                        break;
+                    default:
+                        throw new UndefinedException();
                 }
-
             } catch (NoDescriptionException e) {
                 noDescriptionMessage(e.s);
             } catch (UndefinedException e) {
@@ -67,33 +74,35 @@ public class Bot {
     public void addListings(String[] details) {
         int size = list.size() + 1;
         String s = "";
-        if (details[0].equals("todo")) {
-            ToDo todo = new ToDo(details[1]);
-            list.add(todo);
-            s = line + "\n" + gotIt + "\n" + whiteSpaceSeven + todo.toString() +
-                    "\n" + "     Now you have " + size + " tasks in the list." + "\n" + line;
-            System.out.println(s);
-        } else if (details[0].equals("deadline")) {
-            String detail = details[1];
-            String timeDetail = details[2];
-            Deadline deadline = new Deadline(detail, timeDetail);
-            list.add(deadline);
-            s = line + "\n" + gotIt + "\n" + whiteSpaceSeven + deadline.toString() +
-                    "\n" + "     Now you have " + size + " tasks in the list." + "\n" + line;
-            System.out.println(s);
-        } else if (details[0].equals("event")) {
-            String detail = details[1];
-            String timeDetail = details[2];
-            Event event = new Event(detail, timeDetail);
-            list.add(event);
-            s = line + "\n" + gotIt + "\n" + whiteSpaceSeven + event.toString() +
-                    "\n" + "     Now you have " + size + " tasks in the list." + "\n" + line;
-            System.out.println(s);
+        String taskInfo = details[1];
+        String dateInfo = details[2];
+        switch (details[0]) {
+            case ("todo"):
+                ToDo todo = new ToDo(taskInfo);
+                list.add(todo);
+                s = line + "\n" + gotIt + "\n" + whiteSpaceSeven + todo.toString() +
+                        "\n" + "     Now you have " + size + " tasks in the list." + "\n" + line;
+                System.out.println(s);
+                break;
+            case ("deadline"):
+                Deadline deadline = new Deadline(taskInfo, dateInfo);
+                list.add(deadline);
+                s = line + "\n" + gotIt + "\n" + whiteSpaceSeven + deadline.toString() +
+                        "\n" + "     Now you have " + size + " tasks in the list." + "\n" + line;
+                System.out.println(s);
+                break;
+            case ("event"):
+                Event event = new Event(taskInfo, dateInfo);
+                list.add(event);
+                s = line + "\n" + gotIt + "\n" + whiteSpaceSeven + event.toString() +
+                        "\n" + "     Now you have " + size + " tasks in the list." + "\n" + line;
+                System.out.println(s);
+                break;
         }
     }
 
 
-    public void returnListings(String listing) {
+    public void returnListings() {
         System.out.println(line);
         System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
