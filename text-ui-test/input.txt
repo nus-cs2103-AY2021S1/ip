@@ -1,4 +1,20 @@
-todo borrow book
+help
+todo
+event
+deadline
+done
 list
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+todo dishes
+event birthday
+event birthday /at 2020-12-12
+event birthday /at 2020-12-12 12:12
+event birthday /at 2020/12/12
+deadline homework
+deadline homework /by 2020-12-12
+deadline homework /by 2020-12-12 12:12
+deadline homework /by 2020-1212
+done 1
+done 100
+delete 1
+delete 100
+bye
