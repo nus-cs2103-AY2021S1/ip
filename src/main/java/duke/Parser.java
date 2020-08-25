@@ -18,7 +18,8 @@ public class Parser {
         }
     }
 
-    public static Date parseDate(String dateStr) throws ParseException {
+    public static Date parseDate(String dateStr)
+            throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-YYYY");
         Date date = format.parse(dateStr);
         return date;
@@ -95,7 +96,8 @@ public class Parser {
     }
 
     // Parses a single line of input from stdin into a command
-    public static Command parseLine(TaskList tasks, String string) throws ParseException {
+    public static Command parseLine(TaskList tasks, String string)
+            throws ParseException {
         String[] tokens = string.split(",");
         String type = tokens[0];
         switch (type) {
