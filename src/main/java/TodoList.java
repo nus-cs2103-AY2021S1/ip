@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -91,6 +92,8 @@ public class TodoList {
             } catch (IndexOutOfBoundsException error) {
                 // When "done is followed by a number that is out of range
                 throw new DukeException("OOPS!!! That index is out of range!");
+            } catch (DateTimeParseException e) {
+                throw new DukeException("OOPS!!! Please enter the date in yyyy-mm-dd format!");
             }
         } catch (DukeException error) {
             System.out.println(error.getMessage());
