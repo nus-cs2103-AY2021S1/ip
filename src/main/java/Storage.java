@@ -15,6 +15,10 @@ public class Storage {
         this.file = new File(filePath);
     }
 
+    /**
+     * Reads a file line by line and returns the contents as a List of Strings
+     * @return List of Strings
+     */
     List<String> readFile() {
         List<String> items = new ArrayList<>();
         if (!this.file.exists()) {
@@ -32,6 +36,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads a List of Strings and re-writes the file at the location filePath
+     * @param sentences List of Sentences
+     * @return Whether operation succeeded
+     */
     boolean updateFile(List<String> sentences) {
         try {
             FileWriter fw = new FileWriter(this.filePath);
