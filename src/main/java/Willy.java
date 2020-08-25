@@ -99,6 +99,11 @@ public class Willy {
                     System.out.println(error);
                 }
             }
+            else if (message.contains("find")) {
+                    String keyword = message.substring(5);
+                    System.out.println(keyword);
+                    list.findTask(keyword);
+            }
             // else is nonsense which will produce error
             else {
                 WillyException error = new WillyException("Hmmm sorry I'm not sure what you are saying, try something else?:(");

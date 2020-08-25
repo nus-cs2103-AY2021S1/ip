@@ -1,6 +1,7 @@
 package main.java;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles the different actions that can be done by the bot.
@@ -61,6 +62,24 @@ public class TaskList {
         System.out.println(Willy.style);
         System.out.println("\tNiceee I've marked this task as done!");
         System.out.println("\t   " + task);
+        System.out.println(Willy.style);
+    }
+
+    public void findTask(String keyword) {
+        ArrayList<Task> keyList = new ArrayList<>();
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            if (listOfTasks.get(i).task.contains(keyword)) {
+                Task task = listOfTasks.get(i);
+                keyList.add(task);
+            }
+        }
+
+        System.out.println(Willy.style);
+        System.out.println("\t Here are the matching tasks in your list:");
+        for(int i = 0; i < keyList.size(); i++) {
+            Task task = keyList.get(i);
+            System.out.println("\t  " + (i + 1) + "." + task);
+        }
         System.out.println(Willy.style);
     }
 }
