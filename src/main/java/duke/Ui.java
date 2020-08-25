@@ -37,6 +37,16 @@ public class Ui {
         chatPrint(output.toString());
     }
 
+    public void onFind(List<Task> tasks) {
+        int id = 1;
+        StringBuilder output = new StringBuilder("Here are the matching tasks in your list:");
+        for (Task task : tasks) {
+            output.append("\n").append(tab).append(id).append(". ").append(task);
+            id++;
+        }
+        chatPrint(output.toString());
+    }
+
     public void onDone(Task task) {
         chatPrint("Nice! I've marked this task as done:\n" +
                 tab + "   " + task);
@@ -51,7 +61,8 @@ public class Ui {
     public void onAdd(Task task, int size) {
         chatPrint("Got it. I've added this task:\n" +
                 tab + "   " + task + "\n" +
-                tab + "Now you have " + size + " tasks in the list.");    }
+                tab + "Now you have " + size + " tasks in the list.");
+    }
 
     public void chatPrint(String toPrint) {
         System.out.println(tab + line);

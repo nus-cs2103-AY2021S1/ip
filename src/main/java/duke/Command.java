@@ -79,6 +79,9 @@ public class Command {
                 storage.save(tasks.getList());
                 ui.onDelete(rmTask, tasks.size());
                 break;
+            case "find":
+                ui.onFind(tasks.find(this.desc));
+                break;
             case "todo":
                 Task newTodo = tasks.addTodo(this.desc, false);
                 storage.save(tasks.getList());

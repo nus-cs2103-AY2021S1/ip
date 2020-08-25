@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
 
@@ -24,6 +25,11 @@ public class TaskList {
 
     public int size() {
         return this.tasks.size();
+    }
+
+    public List<Task> find(String key) {
+        return this.tasks.stream().filter(task -> task.getDesc().contains(key))
+                .collect(Collectors.toList());
     }
 
     public Task setDone(int idx) {

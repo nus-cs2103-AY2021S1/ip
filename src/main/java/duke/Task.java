@@ -15,6 +15,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public String getDesc() {
+        return this.desc;
+    }
+
     public Task setDone() {
         Task doneTask = new Task(this.desc);
         doneTask.isDone = true;
