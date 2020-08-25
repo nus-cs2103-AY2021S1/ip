@@ -1,7 +1,32 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.io.File;
+import java.io.IOException;
+
 public class Duke {
+
+    public static String listToString(ArrayList<Task> taskList) {
+        String taskListStr = "";
+        for (Task t : taskList) {
+            taskListStr += t.toString() + "\n";
+        }
+        return taskListStr;
+    }
+
+    public static void saveToFile(String output) {
+        try {
+            File myFile = new File("Tasklist.txt");
+            if (myFile.createNewFile()) {
+                System.out.println("File created: " + myFile.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException ex) {
+            System.out.println("Error IDIOT!!!");
+            ex.printStackTrace();
+        }
+    }
 
     public static boolean isEmptyInput(String input) {
         return input.isEmpty();
@@ -106,6 +131,11 @@ public class Duke {
                     System.out.println(ex);
                 }
                 System.out.println();
+                continue;
+            }
+
+            if (input.equals("to string")) {
+                System.out.println(listToString(userTasks));
                 continue;
             }
 
