@@ -23,6 +23,7 @@ public class Parser {
         commandsWithArgs.add(DoneCommand.COMMAND_WORD);
         commandsWithArgs.add(EventCommand.COMMAND_WORD);
         commandsWithArgs.add(ToDoCommand.COMMAND_WORD);
+        commandsWithArgs.add(FindCommand.COMMAND_WORD);
 
         if (commandsWithArgs.contains(commandWord)) {
             if (input.length > 1) {
@@ -49,6 +50,8 @@ public class Parser {
             return new ListCommand(arguments);
         case ToDoCommand.COMMAND_WORD:
             return new ToDoCommand(arguments);
+        case FindCommand.COMMAND_WORD:
+            return new FindCommand(arguments);
         default:
             throw new DukeException("OOPS! I'm sorry, but I don't know what that means.");
         }
