@@ -15,6 +15,8 @@ public class Parser {
      * @param input User input.
      * @return Updated Bob.
      * @throws BobInvalidCommandException If user input is not recognised.
+     * @throws BobEmptyTaskException If there is no task description.
+     * @throws BobEmptyFindException If there is no input for the search.
      */
     public static Command parse(String input)
             throws BobInvalidCommandException, BobEmptyTaskException, BobEmptyFindException {

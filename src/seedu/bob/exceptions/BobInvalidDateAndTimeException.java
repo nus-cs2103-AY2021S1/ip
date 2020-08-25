@@ -7,9 +7,6 @@ import seedu.bob.common.Messages;
  */
 public class BobInvalidDateAndTimeException extends BobException {
 
-    /**
-     * Creates a BobEmptyDateException.
-     */
     public BobInvalidDateAndTimeException () {
         super (Messages.INVALIDDATEANDTIME);
     }

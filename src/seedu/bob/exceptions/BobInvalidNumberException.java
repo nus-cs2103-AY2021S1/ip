@@ -7,9 +7,6 @@ import seedu.bob.common.Messages;
  */
 public class BobInvalidNumberException extends BobException {
 
-    /**
-     * Creates a BobInvalidNumberException.
-     */
     public BobInvalidNumberException () {
         super (Messages.INVALIDNUMBER);
     }

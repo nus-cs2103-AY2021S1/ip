@@ -7,9 +7,6 @@ import seedu.bob.common.Messages;
  */
 public class BobInvalidCommandException extends BobException {
 
-    /**
-     * Creates a BobInvalidCommandException.
-     */
     public BobInvalidCommandException () {
         super (Messages.INVALIDCOMMAND);
     }
