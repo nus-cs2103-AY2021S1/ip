@@ -31,12 +31,14 @@ public class Ui {
         System.out.println(divider + "\t " + response + "\n" + divider);
     }
 
+
     /**
      * Displays the task list given
      * @param taskList the task list to be displayed
      */
-    public void displayList(TaskList taskList){
-        String list = "Here are the tasks in your list:\n";
+    public void displayList(TaskList taskList, String description){
+
+        String list = description + "\n";
         for (int i = 1; i <= taskList.size(); i++) {
             list += "\t " + i + ". " + taskList.get(i - 1) + "\n";
         }

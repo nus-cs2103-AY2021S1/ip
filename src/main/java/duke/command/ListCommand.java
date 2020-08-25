@@ -21,6 +21,6 @@ public class ListCommand implements Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.displayList(taskList);
+        ui.displayList(taskList, "Here are the tasks in your list:");
     }
 }
