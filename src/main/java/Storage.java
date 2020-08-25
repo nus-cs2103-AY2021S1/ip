@@ -19,14 +19,17 @@ public class Storage {
         try {
             // Initializes storage folder & file
             File storageFolder = new File("./data");
-            storageFolder.mkdir(); // creates folder if it doesn't exist
+            if (!storageFolder.exists()) {
+                storageFolder.mkdir(); // creates folder if it doesn't exist
+            }
 
             File storageFile = new File("./data/duke.txt");
-            storageFile.createNewFile(); // creates file if it doesn't exist
+            if (!storageFile.exists()) {
+                storageFile.createNewFile(); // creates file if it doesn't exist
+            }
 
             // Initializes handle for writing to file
             this.fileHandle = storageFile;
-            this.writeHandle = new FileWriter("./data/duke.txt");
 
             // Try to open the file and parse the contents
             String data = Files.readString(Paths.get("./data/duke.txt"));
@@ -35,6 +38,7 @@ public class Storage {
             this.store = tasks;
         } catch (Exception e) {
             System.out.println("Failed to initialize storage");
+            System.out.println(e.toString());
             System.exit(1);
         }
     }
@@ -56,7 +60,7 @@ public class Storage {
             // Format the store output as a string
             String data = "";
             for ( Task task : store ) {
-                data += task.toString();
+                data += task.toString() + "\n";
             }
             // Write the store to file
             writeHandle.write(data);

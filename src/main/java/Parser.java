@@ -33,7 +33,7 @@ public class Parser {
 
     // Parses a single line of input from file
     public static Task parseFileLine(String string) throws StreamCorruptedException {
-        String[] tokens = string.split("|");
+        String[] tokens = string.split("\\|");
         String type = tokens[0];
         switch (type) {
             case "[T]": {
