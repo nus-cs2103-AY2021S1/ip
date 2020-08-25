@@ -45,4 +45,12 @@ public class TaskList {
         System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
     }
 
+    public List<Task> getList() {
+        return this.taskList;
+    }
+
+    public void setList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
+
 }

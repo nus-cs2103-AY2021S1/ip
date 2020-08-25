@@ -1,5 +1,6 @@
 Hello! I'm Duke
 What can I do for you?
+Here are your saved tasks:
 Got it. I've added this task:
 [D][✘] prepare for presentation (by: today 7pm)
 Now you have 1 tasks in the list.
