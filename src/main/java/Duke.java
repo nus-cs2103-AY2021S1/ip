@@ -3,9 +3,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+<<<<<<< .merge_file_a01804
 
     static List<Task> list = new ArrayList<>();
     static int index = 0;
+=======
+    static List<Task> list = new ArrayList<>();
+>>>>>>> .merge_file_a07988
 
 
     public static void main(String[] args) {
@@ -98,6 +102,7 @@ public class Duke {
     public static void done(int num){
         list.set(num-1, list.get(num-1).completedTask());
         System.out.println("Now you have "+list.size()+" tasks in the list.");
+<<<<<<< .merge_file_a01804
     }
 
     public static void printList(){
@@ -131,6 +136,15 @@ public class Duke {
             System.out.println(tempindex + ". " + list[k]);
             tempindex += 1;
 >>>>>>> master
+=======
+    }
+
+    public static void printList(){
+        int tempIndex = 1;
+        for (Task x: list){
+            System.out.println(tempIndex + "." + x.toString());
+            tempIndex += 1;
+>>>>>>> .merge_file_a07988
         }
     }
 
