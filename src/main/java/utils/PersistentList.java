@@ -8,6 +8,7 @@ import tasks.Task;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -37,7 +38,8 @@ public class PersistentList<E> implements List<E> {
      */
     public PersistentList(String filePath, Type listType, TypeAdapterFactory typeAdapterFactory) {
         storageManager = new StorageManager(filePath);
-        gson = new GsonBuilder().registerTypeAdapterFactory(typeAdapterFactory).setPrettyPrinting().create();
+        gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                .registerTypeAdapterFactory(typeAdapterFactory).setPrettyPrinting().create();
         this.listType = listType;
         list = readStateFromFile();
     }
