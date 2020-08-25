@@ -1,4 +1,6 @@
-E | 0 | project meeting | 2020-08-27
-D | 0 | finish assignment | 2020-08-28
+D | 1 | finish assignment | 2020-08-28
 T | 1 | math tutorial
 E | 0 | birthday party | 2020-08-30
+T | 0 | read book
+D | 1 | return book | 2020-08-29
+E | 0 | outing | 2020-09-03

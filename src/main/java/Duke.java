@@ -22,10 +22,10 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
-                String input = ui.readCommand();
-                manager.handleInput(input);
-                storage.saveTasks(manager.getTasks());
-                isExit = manager.isExit();
+                String fullCommand = ui.readCommand();
+                Command command = Parser.parseCommand(fullCommand);
+                command.execute(manager, ui, storage);
+                isExit = command.isExit();
             } catch (DukeException e) {
                 ui.showErrorMessage(e.getMessage());
             }
