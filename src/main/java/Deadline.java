@@ -13,6 +13,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getStoredString(){
+        return "D" + super.toString() + " " + by;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by:" + by + ")";
     }

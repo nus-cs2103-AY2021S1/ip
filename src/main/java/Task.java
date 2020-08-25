@@ -49,6 +49,10 @@ public class Task {
         return isDone;
     }
 
+    public String getStoredString(){
+        return (isDone? "1 " : "0 ") + description;
+    }
+
     public String toString(){
         return getStatusIcon() + " " + description;
     }
