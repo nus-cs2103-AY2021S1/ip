@@ -30,16 +30,6 @@ public class TaskList {
         return true;
     }
 
-    public Task removeTask(int index) throws ChatbotException {
-        Task removed;
-        try {
-            removed = this.tasks.remove(index);
-        } catch (IndexOutOfBoundsException e) {
-            throw new ChatbotException("That item does not exist!");
-        }
-        return removed;
-    }
-
     public ArrayList<Task> retrieveTasksOnDate(LocalDate date) {
         Iterator<Task> iter = this.tasks.iterator();
         ArrayList<Task> tasks = new ArrayList<>();
@@ -51,6 +41,16 @@ public class TaskList {
             }
         }
         return tasks;
+    }
+
+    public Task removeTask(int index) throws ChatbotException {
+        Task removed;
+        try {
+            removed = this.tasks.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new ChatbotException("That item does not exist!");
+        }
+        return removed;
     }
 
     public Task markAsDone(int index) throws ChatbotException {

@@ -12,16 +12,19 @@ public class Deadline extends Task {
         if (raw.length() == 0) {
             throw new ChatbotException("Ooopsss (>.>) Deadline cannot be empty!!");
         }
+
         String description = raw.split("/by")[0].trim();
         LocalDate timestamp;
+
         try {
             String dateString = raw.split("/by")[1].trim();
             timestamp = LocalDate.parse(dateString);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ChatbotException("Ooopsss (>.>) Deadline? By when??!!");
         } catch (DateTimeParseException e) {
-            throw new ChatbotException("Please enter a valid date (yyyy-mm-dd).");
+            throw new ChatbotException(Message.INVALID_DATE);
         }
+
         return new Deadline(description, false, timestamp);
     }
 

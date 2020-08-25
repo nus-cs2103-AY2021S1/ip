@@ -1,11 +1,34 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 public class Ui implements Printable<Task> {
+
+    Scanner sc;
+
+    public Ui() {
+        this.sc = new Scanner(System.in);
+    }
+
     private void display(String message) {
         System.out.println("    ____________________________________________________________");
         System.out.println("    " + message);
         System.out.println("    ____________________________________________________________");
+    }
+
+    public void greet() {
+        System.out.println(
+                "   ####################################################\n" +
+                        "   #                                                  #\n" +
+                        "   #  Hey there, I'm Hanry Kun the impatient ChatBot. #\n" +
+                        "   #  What can I do for you? (-.-)                    #\n" +
+                        "   #                                                  #\n" +
+                        "   ####################################################"
+        );
+    }
+
+    public String readCommand() {
+        return sc.nextLine();
     }
 
     public void addSuccess(Task task, int count) {

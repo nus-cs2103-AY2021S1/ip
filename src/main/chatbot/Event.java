@@ -22,8 +22,9 @@ public class Event extends Task {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ChatbotException("Ooopsss (>.>) Event? At what date??!!");
         } catch (DateTimeParseException e) {
-            throw new ChatbotException("Please enter a valid date (yyyy-mm-dd).");
+            throw new ChatbotException(Message.INVALID_DATE);
         }
+
         return new Event(description, false, timestamp);
     }
 
