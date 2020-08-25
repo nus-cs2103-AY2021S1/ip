@@ -15,7 +15,19 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.markDone(taskNo);
+        taskList.markDone(taskNo - 1);
         storage.saveTasks(taskList.getList());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (o instanceof DoneCommand) {
+            DoneCommand t = (DoneCommand) o;
+            return t.taskNo == this.taskNo;
+        } else {
+            return false;
+        }
     }
 }

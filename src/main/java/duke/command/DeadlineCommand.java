@@ -12,4 +12,16 @@ public class DeadlineCommand extends AddTaskCommand {
     public void addTask(TaskList taskList, String input) throws DukeException {
         taskList.addDeadline(input);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (o instanceof DeadlineCommand) {
+            DeadlineCommand t = (DeadlineCommand) o;
+            return t.input.equals(this.input);
+        } else {
+            return false;
+        }
+    }
 }

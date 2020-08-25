@@ -1,19 +1,20 @@
 package duke;
 
 import duke.command.*;
+import duke.exception.EmptyTaskException;
+import duke.exception.InvalidDateException;
 import duke.exception.NoIndexException;
 import duke.exception.UnrecognizedTaskException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
 
-//    private duke.TaskList taskList;
-//    private static final String end = "bye";
-
-//    public duke.Parser(duke.TaskList taskList) {
-//        this.taskList = taskList;
-//    }
-
-    public static Command parse(String fullCommand) throws UnrecognizedTaskException, NoIndexException {
+    public static Command parse(String fullCommand)
+            throws UnrecognizedTaskException, NoIndexException, EmptyTaskException {
 
         fullCommand = fullCommand.trim();
 
@@ -23,17 +24,17 @@ public class Parser {
 
         switch (firstWord) {
             case "todo":
-                return new ToDoCommand(fullCommand);
-                // Fallthrough
+                return new ToDoCommand(getTask(fullCommand, "todo"));
+            // Fallthrough
             case "event":
-                return new EventCommand(fullCommand);
-                // Fallthrough
+                return new EventCommand(getTask(fullCommand, "event"));
+            // Fallthrough
             case "deadline":
-                return new DeadlineCommand(fullCommand);
-                // Fallthrough
+                return new DeadlineCommand(getTask(fullCommand, "deadline"));
+            // Fallthrough
             case "list":
                 return new ListCommand(fullCommand);
-                // Fallthrough
+            // Fallthrough
             case "done":
 
                 if (fullCommand.equalsIgnoreCase("done")) {
@@ -41,7 +42,7 @@ public class Parser {
                 } else {
 
                     try {
-                        int taskNo = Integer.parseInt(fullCommand.substring(5)) - 1;
+                        int taskNo = Integer.parseInt(fullCommand.substring(5));
                         return new DoneCommand(taskNo);
 
                     } catch (NumberFormatException numError) {
@@ -55,7 +56,7 @@ public class Parser {
                 } else {
 
                     try {
-                        int taskNo = Integer.parseInt(fullCommand.substring(7)) - 1;
+                        int taskNo = Integer.parseInt(fullCommand.substring(7));
                         return new DeleteCommand(taskNo);
 
                     } catch (NumberFormatException numError) {
@@ -71,43 +72,34 @@ public class Parser {
                 throw new UnrecognizedTaskException();
                 // Fallthrough
         }
-
-//        try {
-//            return duke.command.Command.valueOf(firstWord);
-//        } catch (IllegalArgumentException illegalArg) {
-//            throw new duke.exception.UnrecognizedTaskException();
-//        }
     }
 
-//    public void parse(String fullCommand) {
-//
-//        while (!fullCommand.equalsIgnoreCase(end)) {
-//
-//            try {
-//
-//                duke.command.Command command = getCommand(fullCommand.trim());
-//
-//                if (command == duke.command.Command.list) {
-//
-//                    taskList.processList(fullCommand);
-//
-//                } else if (command == duke.command.Command.done) {
-//                    taskList.processDone(fullCommand);
-//                } else if (command == duke.command.Command.delete) {
-//                    taskList.processDelete(fullCommand);
-//                } else {
-//                    taskList.addTask(command, fullCommand.trim());
-//                }
-//
-//            } catch (duke.exception.DukeException error) {
-//
-//                System.out.println(error.getMessage());
-//
-//            } catch (IndexOutOfBoundsException indexError) {
-//
-//                System.out.println("Invalid index.");
-//                taskList.printListSize();
-//            }
-//        }
-//    }
+    private static String getTask(String fullCommand, String firstWord) throws EmptyTaskException {
+        try {
+            return fullCommand.substring(firstWord.length() + 1);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new EmptyTaskException();
+        }
+    }
+
+    public static LocalDateTime getDateTime(String dateTimeString) throws InvalidDateException {
+
+        dateTimeString = dateTimeString.trim();
+
+        try {
+
+            if (dateTimeString.length() == 19 || dateTimeString.length() == 16) {
+                return LocalDateTime.parse(dateTimeString);
+            } else if (dateTimeString.contains("-")) {
+                return LocalDateTime.of(LocalDate.parse(dateTimeString), LocalTime.parse("23:59"));
+            } else if (dateTimeString.contains(":")) {
+                return LocalDateTime.of(LocalDate.now(), LocalTime.parse(dateTimeString));
+            } else {
+                throw new InvalidDateException();
+            }
+
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException();
+        }
+    }
 }

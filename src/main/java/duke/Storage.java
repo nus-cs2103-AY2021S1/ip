@@ -75,7 +75,7 @@ public class Storage {
     private Task readTask(String task) {
         switch (task.charAt(0)) {
             case 'T':
-                ToDo toDo = new ToDo(task.substring(3));
+                ToDo toDo = new ToDo(task.substring(3).trim());
 
                 if (task.charAt(1) == '1') {
                     toDo = toDo.markDone();
@@ -85,7 +85,7 @@ public class Storage {
                 // Fallthrough
 
             case 'D':
-                Deadline deadline = new Deadline(task.substring(3, task.length() - 19),
+                Deadline deadline = new Deadline(task.substring(3, task.length() - 19).trim(),
                         LocalDateTime.parse(task.substring(task.length() - 19)));
 
                 if (task.charAt(1) == '1') {
@@ -97,7 +97,7 @@ public class Storage {
 
             case 'E':
 
-                String taskText = task.substring(3, task.length() - 43);
+                String taskText = task.substring(3, task.length() - 43).trim();
                 String startDateString = task.substring(task.length() - 42, task.length() - 23);
                 String endDateString = task.substring(task.length() - 19);
 
