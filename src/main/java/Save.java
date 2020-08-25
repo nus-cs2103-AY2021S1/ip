@@ -9,20 +9,29 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Save {
-    protected Path path;
+    private Path path;
 
-     public Save(String filePath) throws SecurityException {
-         try {
-             String dir = System.getProperty("user.dir");
-             path = Paths.get(dir, filePath);
-             if (Files.notExists(path)) {
-                 File createDirectory = new File(String.valueOf(path));
-                 createDirectory.mkdir();
-             }
-         } catch (SecurityException ex) {
-             System.err.println("Error");
+     public Save(String filePath) throws IOException {
+//         try {
+//             String dir = System.getProperty("user.dir");
+//             path = Path.of(dir, filePath);
+//             if (Files.notExists(path)) {
+//                 File createDirectory = new File(String.valueOf(path));
+//                 //createDirectory.createNewFile();
+//             }
+//         } catch (IOException ex) {
+//             System.err.println("Error in creating duke.txt");
+//         }
+         String dir = System.getProperty("user.dir");
+         path = Path.of(dir, filePath);
+         File file = new File(String.valueOf(path));
+         if (!file.exists()) {
+             file.getParentFile().mkdirs();
+         } try {
+             file.createNewFile();
+         } catch (IOException ex) {
+             System.err.println("Error in creating duke.txt");
          }
-
      }
 
      public void writeToFile(ArrayList<Task> tasks) throws IOException {
