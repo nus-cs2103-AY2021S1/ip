@@ -15,10 +15,10 @@ import java.time.LocalDateTime;
 public class Parser {
 
     private static Command parseDone(String input) throws DukeException {
-        if(input.matches("done\\s*")) {
+        if (input.matches("done\\s*")) {
             throw new EmptyArgumentException("duke.task.Task Index");
         }
-        if(!input.matches("done \\d+")) {
+        if (!input.matches("done \\d+")) {
             throw new InvalidArgumentException("duke.task.Task Index");
         }
         String[] arr = input.split(" ");
@@ -26,16 +26,16 @@ public class Parser {
         return new DoneCommand(index);
     }
     private static Command parseTodoTask(String input) throws DukeException {
-        if(input.matches("todo\\s*")) {
+        if (input.matches("todo\\s*")) {
             throw new EmptyArgumentException("todo's description");
         }
         return new AddTaskCommand(new Todo(input.substring(5)));
     }
     private static Command parseDeadlineTask(String input) throws DukeException {
-        if(input.matches("deadline\\s*")) {
+        if (input.matches("deadline\\s*")) {
             throw new EmptyArgumentException("deadline's description");
         }
-        if(!input.matches("deadline .+/by \\d{4}-\\d{1,2}-\\d{1,2} \\d{4}")) {
+        if (!input.matches("deadline .+/by \\d{4}-\\d{1,2}-\\d{1,2} \\d{4}")) {
             throw new InvalidArgumentException("deadline's description (proper date format: yyyy-mm-dd HHmm)");
         }
         String[] split = input.substring(9).split("/by");
@@ -44,10 +44,10 @@ public class Parser {
         return new AddTaskCommand(new Deadline(split[0].stripTrailing(), dateTime));
     }
     private static Command parseEventTask(String input) throws DukeException {
-        if(input.matches("event\\s*")) {
+        if (input.matches("event\\s*")) {
             throw new EmptyArgumentException("event's description");
         }
-        if(!input.matches("event .+/at \\d{4}-\\d{1,2}-\\d{1,2} \\d{4}")) {
+        if (!input.matches("event .+/at \\d{4}-\\d{1,2}-\\d{1,2} \\d{4}")) {
             throw new InvalidArgumentException("event description (proper date format: yyyy-mm-dd HHmm)");
         }
         String[] split = input.substring(6).split("/at");
@@ -55,10 +55,10 @@ public class Parser {
         return new AddTaskCommand(new Event(split[0].stripTrailing(), parseDateTime(dateTimeString)));
     }
     private static Command parseDelete(String input) throws DukeException {
-        if(input.matches("delete\\s*")) {
+        if (input.matches("delete\\s*")) {
             throw new EmptyArgumentException("duke.task.Task Index");
         }
-        if(!input.matches("delete \\d+")) {
+        if (!input.matches("delete \\d+")) {
             throw new InvalidArgumentException("duke.task.Task Index");
         }
         String[] arr = input.split(" ");

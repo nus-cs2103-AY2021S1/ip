@@ -27,7 +27,7 @@ public class Storage {
     }
 
     private List<Task> parseData(File f) throws FileNotFoundException {
-        List<Task> tasklist = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
@@ -37,32 +37,32 @@ public class Storage {
             String description = args[2];
             Task task;
             switch (args[0]) {
-                case "T":
-                    task = new Todo(description);
-                    if (done) {
-                        task.markAsDone();
-                    }
-                    tasklist.add(task);
-                    break;
-                case "D":
-                    task = new Deadline(description, LocalDateTime.parse(args[3]));
-                    if (done) {
-                        task.markAsDone();
-                    }
-                    tasklist.add(task);
-                    break;
-                case "E":
-                    task = new Event(description, LocalDateTime.parse(args[3]));
-                    if (done) {
-                        task.markAsDone();
-                    }
-                    tasklist.add(task);
-                    break;
-                default:
-                    System.out.println(Ui.INDENT + "Corrupted Data Entry found : " + str);
+            case "T":
+                task = new Todo(description);
+                if (done) {
+                    task.markAsDone();
+                }
+                tasks.add(task);
+                break;
+            case "D":
+                task = new Deadline(description, LocalDateTime.parse(args[3]));
+                if (done) {
+                    task.markAsDone();
+                }
+                tasks.add(task);
+                break;
+            case "E":
+                task = new Event(description, LocalDateTime.parse(args[3]));
+                if (done) {
+                    task.markAsDone();
+                }
+                tasks.add(task);
+                break;
+            default:
+                System.out.println(Ui.INDENT + "Corrupted Data Entry found : " + str);
             }
         }
-        return tasklist;
+        return tasks;
     }
 
     /**
@@ -85,7 +85,7 @@ public class Storage {
      */
     public void rewriteData(List<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(path.toString());
-        for(Task t : tasks) {
+        for (Task t : tasks) {
             fw.write(t.convertToData() + "\n");
         }
         fw.close();
@@ -94,16 +94,16 @@ public class Storage {
     /**
      * Initialise a TaskList from memory file
      *
-     * @param tasklist  TaskList to be initialised.
+     * @param tasks  TaskList to be initialised.
      */
-    public void initialiseTasks(List<Task> tasklist){
-        System.out.print(Ui.divider);
+    public void initialiseTasks(List<Task> tasks) {
+        System.out.print(Ui.DIVIDER);
         memoryFile = new File(path.toString());
         if (Files.exists(path)) {
             System.out.println(Ui.INDENT + "Loading Tasks from Memory...");
             try {
                 List<Task> memoryList = parseData(memoryFile);
-                tasklist.addAll(memoryList);
+                tasks.addAll(memoryList);
             } catch (FileNotFoundException e) {
                 System.out.println(Ui.INDENT + "Error loading data.");
             }
@@ -120,6 +120,6 @@ public class Storage {
                 System.out.print(Ui.INDENT + e.getMessage());
             }
         }
-        System.out.print(Ui.divider);
+        System.out.print(Ui.DIVIDER);
     }
 }

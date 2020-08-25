@@ -18,7 +18,7 @@ abstract public class Task {
     /**
      * Mark a task as done.
      */
-    public void markAsDone(){
+    public void markAsDone() {
         isDone = true;
     }
 

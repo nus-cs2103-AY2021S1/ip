@@ -1,11 +1,10 @@
 package duke;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
     public static final String INDENT = "    ";
-    public static final String divider = INDENT + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
+    public static final String DIVIDER = INDENT + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
     private Scanner sc;
 
     public Ui() {
@@ -18,7 +17,7 @@ public class Ui {
         for (String s : arr) {
             res.append(INDENT).append(s).append("\n");
         }
-        String intro = divider + res.toString() + divider;
+        String intro = DIVIDER + res.toString() + DIVIDER;
         System.out.println(intro);
     }
     public void showWelcome() {
@@ -34,16 +33,8 @@ public class Ui {
                         "| |              | || |              | || |              | || |              | |\n" +
                         "| '--------------' || '--------------' || '--------------' || '--------------' |\n" +
                         " '----------------'  '----------------'  '----------------'  '----------------'\n";
-        String intro =
-                "\n" +
-                "\n" +
-                logo +
-                "\n" +
-                        divider +
-                        INDENT +
-                "Hola! I am dook\n" +
-                        INDENT +
-                "how i can help u?\n" + divider;
+        String intro = "\n\n" + logo + "\n" + DIVIDER + INDENT + "Hola! I am dook\n" + INDENT
+                + "how i can help u?\n" + DIVIDER;
         System.out.println(intro);
     }
     public String readCommand() {

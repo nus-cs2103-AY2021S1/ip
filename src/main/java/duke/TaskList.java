@@ -11,14 +11,14 @@ import java.util.List;
  * Represents a list of Task objects. Contains functions to manipulate tasklist.
  */
 public class TaskList {
-    private static Storage store;
-    private List<Task> taskList;
+    private Storage store;
+    private List<Task> tasks;
 
 
     public TaskList(Storage store) {
         this.store = store;
-        this.taskList = new ArrayList<>();
-        store.initialiseTasks(taskList);
+        this.tasks = new ArrayList<>();
+        store.initialiseTasks(tasks);
     }
 
 
@@ -31,7 +31,7 @@ public class TaskList {
         return store;
     }
     public void addTask(Task task) throws WriteToStorageException {
-        taskList.add(task);
+        tasks.add(task);
         try {
             store.writeData(task);
         } catch (IOException e) {
@@ -45,9 +45,9 @@ public class TaskList {
      * @throws WriteToStorageException if Storage faces issues writing tasks.
      */
     public void doneTask(int index) throws WriteToStorageException {
-        taskList.get(index).markAsDone();
+        tasks.get(index).markAsDone();
         try {
-            store.rewriteData(taskList);
+            store.rewriteData(tasks);
         } catch (IOException e) {
             throw new WriteToStorageException();
         }
@@ -55,12 +55,12 @@ public class TaskList {
 
     @Override
     public String toString() {
-        if(taskList.size() == 0) {
+        if (tasks.size() == 0) {
             return "No task added yet!";
         } else {
             StringBuilder result = new StringBuilder("Here are the tasks in your list:\n");
-            for(int i = 0; i < taskList.size(); i++) {
-                result.append(i + 1).append(". ").append(taskList.get(i).toString()).append(i + 1 == taskList.size()
+            for (int i = 0; i < tasks.size(); i++) {
+                result.append(i + 1).append(". ").append(tasks.get(i).toString()).append(i + 1 == tasks.size()
                         ? "" : "\n");
             }
             return result.toString();
@@ -68,10 +68,10 @@ public class TaskList {
     }
 
     public Task getTask(int index) {
-        return taskList.get(index);
+        return tasks.get(index);
     }
     public int size() {
-        return taskList.size();
+        return tasks.size();
     }
 
     /**
@@ -80,6 +80,6 @@ public class TaskList {
      * @return return deleted Task object.
      */
     public Task remove(int index) {
-        return taskList.remove(index);
+        return tasks.remove(index);
     }
 }
