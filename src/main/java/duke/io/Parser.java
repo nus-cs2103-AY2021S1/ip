@@ -21,12 +21,14 @@ public class Parser {
         String[] arr = new String[]{
                 "Here are all your commands:",
                 "list- list all tasks",
-                "todo <description> - add duke.task",
-                "deadline <description> \\by <due date> -add duke.task with deadline",
+                "todo <description> - add task",
+                "deadline <description> \\by <due date> -add task with deadline",
                 "event <description> \\at <event date> -add event with date ",
-                "\t deadline and date can be formatted as : yyyy-mm-dd or dd/mm/yyyy and HHmm or HH.mm a",
-                "done <duke.task number> - marks duke.task as done",
-                "find <one filter word> - finds task with specified word", 
+                "date <one filter date> - finds task on specified date",
+                "\t date can be formatted as : yyyy-mm-dd or dd/mm/yyyy",
+                "\t time can be formatted as : HHmm or HH.mm a",
+                "done <duke.task number> - marks task as done",
+                "find <one filter word> - finds task with specified word",
                 "bye - goodbye!"
         };
         layout.printCommands(arr);
@@ -68,6 +70,9 @@ public class Parser {
                 break;
             case "find":
                 tasks.findTask(arr);
+                break;
+            case "date":
+                tasks.findTaskByDate(arr);
                 break;
             default:
                 DukeException e = new DukeException("I do not understand your command");
@@ -114,11 +119,17 @@ public class Parser {
         if (arr.length > 2) {
             throw new DukeException("Please only specify 1 filter word");
         }
-        StringBuilder filterWord = new StringBuilder();
-        for (int i = 1; i < arr.length; i++) {
-            filterWord.append(arr[i]);
+        return arr[1];
+    }
+    
+    public String getDate(String [] arr) throws DukeException {
+        if (arr.length < 2) {
+            throw new DukeException("Please specify a filter date");
         }
-        return filterWord.toString();
+        if (arr.length > 2) {
+            throw new DukeException("Please only specify 1 filter date");
+        }
+        return arr[1];
     }
 
     /**
@@ -147,7 +158,7 @@ public class Parser {
         return arrList;
     }
 
-    private LocalDate checkDate(String str) {
+    public LocalDate checkDate(String str) {
         String [] arr = str.split("/");
         String year;
         String month;

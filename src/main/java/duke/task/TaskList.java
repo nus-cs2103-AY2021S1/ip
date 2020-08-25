@@ -127,6 +127,21 @@ public class TaskList {
             layout.print(e.getMessage());
         }
     }
+    
+    public void findTaskByDate(String [] arr) {
+        String date;
+        try {
+            date = parser.getDate(arr);
+            ArrayList<Task> shallowCopy = new ArrayList<>(tasks);
+            shallowCopy.removeIf(task ->
+                    !(task.isSameDate(date))
+            );
+            layout.printTaskList(true, shallowCopy);
+        } catch (DukeException e) {
+            layout.print(e.getMessage());
+        }
+       
+    }
 
 
     /**

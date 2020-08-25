@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.io.Parser;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -70,6 +72,15 @@ public class Deadline extends Task {
             return false;
         }
     }
-
+    
+    @Override
+    public boolean isSameDate(String date) {
+        Parser parser = new Parser();
+        if (localDate != null) {
+            LocalDate inputDate = parser.checkDate(date);
+            return localDate.equals(inputDate);
+        }
+        return false;
+   }
    
 }

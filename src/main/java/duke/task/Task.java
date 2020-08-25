@@ -63,10 +63,25 @@ public class Task {
         Parser parser = new Parser();
         return parser.dateAndTimeFormatter(date);
     }
-    
+
+    /**
+     * Return true or false - whether task contains input word.
+     * @param word Input filter word.
+     * @return boolean.
+     */
     public boolean containsWord(String word) {
         String [] arr = description.split(" ");
         return Arrays.stream(arr).filter(str -> str.equals(word)).toArray().length > 0;
+    }
+
+    /**
+     * Return true or false - whether date of task is equal to input date.
+     * Always overriden.
+     * @param word Input date.
+     * @return boolean.
+     */
+    public boolean isSameDate(String word) {
+        return false;
     }
     
 }
