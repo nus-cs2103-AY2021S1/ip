@@ -8,8 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
-    public static List<String> parseCommand(String cmd) {
-        String[] splitted = cmd.split(" /");
+    /**
+     * Parses the user's input into a list of tokens.
+     * @param command user's input
+     * @return the list of tokens
+     */
+    public static List<String> parseCommand(String command) {
+        String[] splitted = command.split(" /");
         List<String> out = new ArrayList<>();
         for (String token : splitted) {
             String[] splitted2 = token.split(" ", 2);
@@ -23,6 +28,12 @@ public class Parser {
         return out;
     }
 
+    /**
+     * Parses a string of datetime into a LocalDateTime object, or throw an exception if the datetime is invalid.
+     * @param datetimeString the string of datetime
+     * @return the corresponding LocalDateTime object
+     * @throws InvalidArgumentException
+     */
     public static LocalDateTime stringToTime(String datetimeString) throws InvalidArgumentException {
         String[] timeTokens = datetimeString.split(" |/");
         int time = timeTokens.length >= 4 ? Integer.parseInt(timeTokens[3]) : 0;

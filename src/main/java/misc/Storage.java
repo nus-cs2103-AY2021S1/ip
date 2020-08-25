@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
+    /**
+     * Reads the storage.txt created in ./tmp/data, or create a new one if the file cannot be found.
+     * @return List of task in the file. Each task is represented with a list of tokens.
+     */
     public static List<List<String>> readFile() {
         List<List<String>> out = new ArrayList<>();
         File dir = new File("./tmp/data");
@@ -31,6 +35,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Overwrites the file ./tmp/data/storage.txt with information from the current list of tasks.
+     * @param database the current list of tasks
+     */
     public static void writeFile(List<Task> database) {
         File dir = new File("./tmp/data");
         try {

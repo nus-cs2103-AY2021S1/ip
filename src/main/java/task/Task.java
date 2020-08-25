@@ -8,14 +8,26 @@ public class Task {
     protected LocalDateTime time;
     protected boolean isDone = false;
 
+    /**
+     * Create a task with a title and its optional datetime
+     * @param description the title of the task
+     * @param time the time of the task
+     */
     public Task(String description, LocalDateTime time) {
         type = "Task";
         this.description = description;
         this.time = time;
     }
 
+    /**
+     * Marks the task as finished.
+     */
     public void markAsDone() {isDone = true;}
 
+    /**
+     * Serializes the task to be store in the disk.
+     * @return the serial of the task
+     */
     public String serialize() {
         String datetimeString = time.getDayOfMonth() + "/" +
                 time.getMonthValue() + "/" +

@@ -1,9 +1,19 @@
 package main.java.command;
 
+import main.java.exception.InvalidArgumentException;
+
 import java.util.List;
 
 public class Commands {
-    public static Command create(List<String> input) {
+    /**
+     * Creates a new command from the user's input.
+     * This method decide which type of command to be created based on the first token of the input, or throw
+     * an exception if the type of the command is invalid.
+     * @param input
+     * @return a command with the correct type
+     * @throws InvalidArgumentException
+     */
+    public static Command create(List<String> input) throws InvalidArgumentException {
         switch (input.get(0).toLowerCase()) {
             case "bye":
                 return new ByeCommand(input);
@@ -20,7 +30,7 @@ public class Commands {
             case "event":
                 return new TaskCommand(input);
             default:
-                throw new IllegalArgumentException("Command not found");
+                throw new InvalidArgumentException("Command not found");
         }
     }
 }

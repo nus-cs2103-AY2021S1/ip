@@ -9,6 +9,9 @@ import main.java.task.TaskList;
 
 public class Duke {
 
+    /**
+     * Run the program.
+     */
     public static void run() {
         TaskList taskList = new TaskList();
         Ui.start();
@@ -31,7 +34,6 @@ public class Duke {
             }
         }
         while (!input.equals("bye"));
-        Ui.close();
     }
 
     public static void main(String[] args) {
