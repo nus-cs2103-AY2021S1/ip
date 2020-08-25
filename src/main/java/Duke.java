@@ -39,6 +39,9 @@ public class Duke {
                 ui.lineBreak();
 
                 switch (command.name) {
+                case "find":
+                    tasks.findTasks(command.message);
+                    break;
                 case "bye":
                     System.out.println("That's it? That's a shame. Well, see you later then.");
                     ui.lineBreak();
@@ -54,7 +57,7 @@ public class Duke {
                     tasks.removeFromList(command.index);
                     break;
                 case "error":
-                    System.out.println(command.errorMessage);
+                    System.out.println(command.message);
                     break;
                 default:
                     tasks.addToList(command.task);
