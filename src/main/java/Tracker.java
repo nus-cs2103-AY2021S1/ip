@@ -63,13 +63,31 @@ public class Tracker {
         }
     }
 
-    public void displayList() {
-        this.printSection();
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(i + 1 + "." + list.get(i));
+    public void displayList(String next) throws DukeException {
+        String[] splits = next.split(" ");
+        if (splits.length == 1) {
+            this.printSection();
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println(i + 1 + "." + list.get(i));
+            }
+            this.printSection();
+        } else if (splits.length == 2){
+            LocalDate date = LocalDate.parse(splits[1]);
+            listTasksOnDate(date);
+        } else {
+            throw new DukeException("Sorry I don't understand");
         }
-        this.printSection();
+    }
+
+    public void listTasksOnDate(LocalDate date) {
+        int i = 1;
+        for (Task t : list) {
+            if(t.getDate().equals(date)) {
+                System.out.println(i + "." + t);
+                i++;
+            }
+        }
     }
 
     public void markDone(String num) throws IOException, DukeException {

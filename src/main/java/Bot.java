@@ -6,6 +6,11 @@ public class Bot {
     private Scanner sc = new Scanner(System.in);
     private Tracker tracker;
 
+    private static String instructions = "Instructions on using Duke:\n" +
+            "list : key in list to show your list of tasks. key in a date after list to show your list of tasks on that date\n" +
+            "date and time : follow yyyy-mm-dd format when keying in dates and hh:mm format when keying in times\n";
+
+
     public Bot(Tracker tracker) throws IOException {
         this.tracker = tracker;
     }
@@ -16,7 +21,8 @@ public class Bot {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + logo + "\n");
+        System.out.println(instructions);
         System.out.println("What can I do for you?");
         this.listen();
     }
@@ -26,12 +32,12 @@ public class Bot {
         if (next.equals("bye")) {
             this.tracker.printSection();
             System.out.println("Bye. Hope to see you again soon!");
-        } else if (next.equals("list")) {
-            this.tracker.displayList();
-            listen();
         } else {
             try {
-                if (next.startsWith("done ")) {
+                if (next.startsWith("list")) {
+                    this.tracker.displayList(next);
+                    listen();
+                } else if (next.startsWith("done ")) {
                     this.tracker.markDone(next);
                 } else if (next.startsWith("delete ")) {
                     this.tracker.delete(next);

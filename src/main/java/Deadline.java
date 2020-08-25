@@ -17,12 +17,15 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    public LocalDate getDate() {
+        return this.date;
+    }
+
     @Override
     public String txtFileFormat() {
         return "D ~/~ " + super.txtFileFormat() + " ~/~ " + this.date.toString() +
                 (this.time != null ? " ~/~ " + this.time.toString() : "");
     }
-
 
     @Override
     public String toString() {

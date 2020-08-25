@@ -25,6 +25,10 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
+    public LocalDate getDate() {
+        return this.date;
+    }
+
     @Override
     public String txtFileFormat() {
         return "E ~/~ " + super.txtFileFormat() + " ~/~ " + this.date.toString() +
