@@ -18,17 +18,33 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * Represents a class to manage the storing of the TaskList into a text file,
+ * and reading a text file to create a TaskList.
+ */
 public class Storage {
 
+    /** File path where the text file is stored. */
     private Path filepath;
 
+    /** Represents time and date. */
     private static final SimpleDateFormat dateTimeConverterFormat = new SimpleDateFormat("MMM dd yyyy hh:mma");
+    /** Represents date. */
     private static final SimpleDateFormat dateConverterFormat = new SimpleDateFormat("MMM dd yyyy");
 
+    /**
+     * Initialises Storage with filepath where text file is stored.
+     * @param filepath Filepath where the text file is stored.
+     */
     public Storage(String filepath) {
         this.filepath = Paths.get(System.getProperty("user.dir") + filepath);
     }
 
+    /**
+     * Reads existing text file and converts the text into tasks to be placed
+     * into an ArrayList. If the text file does not exists, it is created.
+     * @return an ArrayList containing the tasks from the text file.
+     */
     public ArrayList<Task> readFile() {
         ArrayList<Task> tasks = new ArrayList<>();
         //From https://www.sghill.net/how-do-i-make-cross-platform-file-paths-in-java.html
@@ -71,6 +87,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Creates the text file to contain the tasks at the filepath where
+     * it is supposed to be.
+     */
     public void createFile() {
         if (!Files.isDirectory(filepath.getParent())) {
             try {
@@ -87,6 +107,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts the tasks into String to be stored into the text file.
+     * @param arrayList ArrayList containing the tasks.
+     */
     public void writeToFile(ArrayList<Task> arrayList) {
         try {
             FileWriter fw = new FileWriter(filepath.toString());

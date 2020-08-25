@@ -9,14 +9,27 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Provides a class to interprets user inputs and converts them into Commands
+ * to be executed.
+ */
 public class Parser {
 
+    /** Represents date and time. */
     private static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    /** Represents date. */
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    public Parser() {
-    }
-
+    /**
+     * Returns different Commands depending on the keywords that the user inputs.
+     * These keywords include "bye", "list", "done", "delete", "todo",
+     * "event", "deadline". Words that are not recognised will not be read
+     * and the function will ask the user to input a valid keyword.
+     *
+     * @param userInput Input that the user typed in.
+     * @return Commands depending on which keyword the user used.
+     * @throws DukeException If user entered an invalid input.
+     */
     public Command parse(String userInput) throws DukeException {
         String[] userInputArr = userInput.split(" ");
         String userKeyword = userInputArr[0];
