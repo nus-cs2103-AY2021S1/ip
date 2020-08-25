@@ -25,7 +25,7 @@ public class Event extends Task implements Schedulable {
     }
 
     /**
-     * Constructs a new uncompleted {@code Event} object.
+     * Constructs a new {@code Event} object.
      *
      * @param name the name of the {@code Event}.
      * @param dateTime a {@code LocalDueDate} object representing the date and time of the {@code Event}.
