@@ -1,3 +1,7 @@
+/**
+ * Task is the parent class of Todo, Deadline and Event.
+ * Contains functions used by all 3 subclasses.
+ */
 class Task {
     boolean completed = false;
     String name;

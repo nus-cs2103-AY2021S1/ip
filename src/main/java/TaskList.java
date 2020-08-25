@@ -1,6 +1,8 @@
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * TaskList handles the list functions (get, add, remove, size) in the program and the storage.
+ */
 public class TaskList {
     Storage storage;
     ArrayList<Task> taskList;

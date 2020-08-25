@@ -2,6 +2,10 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.io.IOException;
 
+/**
+ * Duke asks user for their todos and makes a todo list.
+ * Tasks can be viewed in a list, marked as done and deleted.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -17,6 +21,10 @@ public class Duke {
         }
     }
 
+    /**
+     * This method collects commands from user until an exit command 'bye' is read.
+     * Valid commands will be executed.
+     */
     void run() {
         Scanner scanner = new Scanner(System.in);
         String s;
@@ -56,6 +64,9 @@ public class Duke {
         Ui.exitMessage();
     }
 
+    /**
+     * This method is the main method.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();

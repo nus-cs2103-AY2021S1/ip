@@ -1,13 +1,19 @@
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
+/**
+ * Parser processes strings.
+ */
 public class Parser {
     static int whichTask = -1;
+
+    /**
+     * All valid command types.
+     */
     enum Command {
         BYE, DONE, DELETE, LIST, OTHERS;
     }
 
-    static boolean isNum(String s) {
+    private static boolean isNum(String s) {
         if (s == null) {
             return false;
         }
@@ -19,6 +25,12 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Processes string and assign it to a command type.
+     * @param s command as a String
+     * @param size size of tasklist
+     * @return a Command enum item
+     */
     static Command parse(String s, int size) {
         String[] done = s.split(" ");
         if (s.equals("bye")) {
@@ -38,6 +50,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes strings that could be task making commands and returns the
+     * task with corresponding type if applicable.
+     * @param s command as a String
+     * @return a Task item
+     */
     static Task createTask(String s) throws DukeException, DateTimeParseException {
         String[] task = s.split(" ");
         Task.Type type;

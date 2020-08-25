@@ -8,6 +8,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Storage saves the list in a file so the state of the list can be preserved
+ * when the program restarts.
+ */
 public class Storage {
     File file;
     boolean added = false;
@@ -26,6 +30,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Makes the storage file empty.
+     */
     void reset() {
         try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file.getAbsolutePath()))) {
             bufferedWriter.write("");
@@ -35,6 +42,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses the text file into tasks and return them in a list.
+     */
     ArrayList<Task> load() {
         System.out.println("reading... ");
         ArrayList<Task> list = new ArrayList<>();
@@ -76,6 +86,10 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Parses the text file into tasks and add them to the list given as parameter.
+     * @param list the list for tasks to be added into
+     */
     void readAll(List<Task> list) {
         if (added) {
             return;
@@ -117,6 +131,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds one task to the storage file.
+     * @param task the task to be added
+     */
     void addTask(Task task) {
         try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file.getAbsolutePath(), true))) {
             String separator = "</>";
@@ -136,6 +154,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds all the tasks in the given list to the file.
+     * @param list the list containing the tasks to be added
+     */
     void addAll(List<Task> list) {
         try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file.getAbsolutePath(), true))) {
             for(Task t : list) {
@@ -149,9 +171,5 @@ public class Storage {
             // Exception handling
             System.out.println(e.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-
     }
 }

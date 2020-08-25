@@ -2,6 +2,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Deadline is a type of Task with deadline.
+ */
 class Deadline extends Task {
     LocalDate deadline;
 

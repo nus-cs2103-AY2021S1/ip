@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Ui contains all the responses the program can give to a command.
+ */
 public class Ui {
     private static void print(String s) {
         System.out.println("\t____________________________________________________________\n" +
@@ -7,7 +10,7 @@ public class Ui {
                 "\t____________________________________________________________\n");
     }
 
-    static void welcomeMessage() {
+    public static void welcomeMessage() {
         print("\tHello! I'm Duke\n" +
                 "\tWhat can I do for you?\n");
     }
