@@ -20,7 +20,7 @@ public class Duke {
         this.dukeUi.welcomeMessage();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            String cmd = sc.nextLine();
+            String cmd = sc.nextLine().trim().toLowerCase();
             if (!cmd.equals("bye")) {
                 try {
                     this.processor.process(cmd, this.arraylst, this.dukeFile);

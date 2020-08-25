@@ -31,7 +31,7 @@ public class Processor {
         int counter = 1;
         System.out.println("_________________________________________\n" + "Here are the matching tasks in your list:");
         for (int i = 0; i < arraylst.size(); i++) {
-            if (arraylst.get(i).getTask().contains(key)) {
+            if (arraylst.get(i).getTask().contains(key.trim().toLowerCase())) {
                 System.out.println(counter + "." + arraylst.get(i).toString());
                 counter++;
             }
