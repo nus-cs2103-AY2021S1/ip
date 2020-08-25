@@ -1,3 +1,11 @@
+package duke.util;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -9,7 +17,7 @@ public class Storage {
     private String dirName = "data/";
     private String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = dirName + filePath;
     }
     

@@ -1,7 +1,14 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+
 public abstract class Command {
     private boolean shouldLoop;
-    
-    Command(boolean shouldLoop) {
+
+    public Command(boolean shouldLoop) {
         this.shouldLoop = shouldLoop;
     }
     

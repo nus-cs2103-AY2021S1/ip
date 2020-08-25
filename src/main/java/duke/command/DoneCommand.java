@@ -1,7 +1,15 @@
+package duke.command;
+
+import duke.exception.InvalidDoneIndexException;
+import duke.util.Storage;
+import duke.task.Task;
+import duke.util.TaskList;
+import duke.util.Ui;
+
 public class DoneCommand extends Command {
     private int index;
-    
-    DoneCommand(int index) {
+
+    public DoneCommand(int index) {
         super(true);
         this.index = index;
     }

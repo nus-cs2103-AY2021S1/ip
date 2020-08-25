@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -13,8 +19,8 @@ public class HelpCommand extends Command {
             new ListCommand(),
             new ToDoCommand("dummy value")
     );
-    
-    HelpCommand() {
+
+    public HelpCommand() {
         super(true);
     }
 

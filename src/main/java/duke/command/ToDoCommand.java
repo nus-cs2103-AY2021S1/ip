@@ -1,7 +1,15 @@
+package duke.command;
+
+import duke.util.Storage;
+import duke.task.Task;
+import duke.util.TaskList;
+import duke.task.ToDo;
+import duke.util.Ui;
+
 public class ToDoCommand extends Command {
     String description;
-    
-    ToDoCommand(String description) {
+
+    public ToDoCommand(String description) {
         super(true);
         this.description = description;
     }

@@ -1,8 +1,10 @@
+package duke.util;
+
 public class Ui {
     private String line = "----------------------------------------------------------------";
 
     public void greet() {
-        String greeting = "Hello! I'm Duke \nWhat can I do for you?";
+        String greeting = "Hello! I'm duke.Duke \nWhat can I do for you?";
         printResponse(greeting);
     }
     

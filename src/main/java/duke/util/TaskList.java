@@ -1,14 +1,18 @@
+package duke.util;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.StringJoiner;
 
 public class TaskList {
     private ArrayList<Task> tasks;
-    
-    TaskList(ArrayList<Task> tasks) {
+
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
     
-    TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<>();
     }
     
