@@ -1,6 +1,7 @@
 package main.java;
 
 import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 
 /**
@@ -24,6 +25,7 @@ public class TaskList {
         this.storage = storage;
         this.todo = storage.load();
     }
+
 
     /**
      * Deletes the task from the task list.
@@ -82,6 +84,7 @@ public class TaskList {
         }
     }
 
+
     /**
      * Adds an deadline task to the task list.
      *
@@ -89,7 +92,6 @@ public class TaskList {
      * @throws DukeInvalidDateException
      * @throws DukeInvalidTaskException
      */
-
     public void addDeadline (String line) throws DukeInvalidDateException, DukeInvalidTaskException {
         String[] splits = line.split("deadline |/by ");
         if (splits.length > 2) {
@@ -113,7 +115,6 @@ public class TaskList {
      * @param line the line in which the command of adding todo task was given.
      * @throws DukeInvalidTaskException
      */
-
     public void addToDo (String line) throws DukeInvalidTaskException {
         String[] splits = line.split("todo ");
         if(splits.length > 1) {

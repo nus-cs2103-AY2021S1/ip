@@ -30,8 +30,8 @@ public class Command {
      * @param ui the user interface object.
      */
 
-    public void execute(TaskList taskList, Ui ui) throws IOException, DukeException {
-        if(action == null){
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
+        if (action == null) {
             ui.showInvalidCommand();
         } else if (action.equals("bye")) {
             this.end = true;

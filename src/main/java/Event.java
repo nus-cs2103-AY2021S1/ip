@@ -25,9 +25,9 @@ public class Event extends Task {
 
     public Event(String taskName, String day) throws DukeInvalidDayException, DukeInvalidTaskException {
         super(taskName);
-        if(!day.equals(null) && !day.equals(" ")) {
+        if (!day.equals(null) && !day.equals(" ")) {
             this.day = day;
-            try{
+            try {
                 this.dateTime = LocalDate.parse(day);
             } catch (DateTimeParseException err) {
                 System.out.println("for dates, please input the date in yyyy-mm-dd format");
@@ -44,7 +44,7 @@ public class Event extends Task {
      * @return a String representing the day.
      */
     public String getDate(){
-        if (dateTime != null){
+        if (dateTime != null) {
             return dateTime.toString();
         } else {
             return day;
