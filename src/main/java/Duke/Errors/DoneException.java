@@ -1,8 +1,9 @@
+package Duke.Errors;
+
 /**
  * This DoneException is used to print out exceptions when there is an incomplete input where the ID is absent or the ID
  * of that Task hasnt been defined yet.
  */
-package Duke.Errors;
 public class DoneException extends DukeException{
     /**
      * IDabsent tests shows whether the ID is present in the input of the user or not.

@@ -1,4 +1,5 @@
 package Duke.Errors;
+
 /**
  * This DeadlineException is used to print out exceptions when there is an incomplete input where wither the description
  * or date is absent.

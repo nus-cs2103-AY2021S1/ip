@@ -1,4 +1,5 @@
 package Duke.Errors;
+
 /**
  * This DeleteException is used to print out exceptions when there is an incomplete input where the ID is absent or the ID
  * of that Task hasn't been defined yet or it has previously been deleted.
