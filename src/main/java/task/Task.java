@@ -41,6 +41,13 @@ public class Task {
 
     public boolean isDueOn(LocalDate Date) { return this.dueDate.toLocalDate().isEqual(Date); }
 
+<<<<<<< HEAD
+=======
+    public boolean hasKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
+>>>>>>> branch-Level-9
     public String getDateString() {
         return this.dueDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm")).toString();
     }

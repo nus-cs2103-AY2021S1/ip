@@ -3,3 +3,8 @@ D|0|shave|2020-01-01T18:00
 D|0|shave|2020-01-02T16:05
 D|1|read|2020-01-01T00:00
 T|0|hello world
+<<<<<<< HEAD
+=======
+E|0|shave head|2020-01-01T18:00
+T|0|aefaefaewaa
+>>>>>>> branch-Level-9

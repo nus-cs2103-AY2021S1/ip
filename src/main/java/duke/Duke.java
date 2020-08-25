@@ -36,7 +36,8 @@ public class Duke {
         this.ui.printGreeting();
     }
 
-    public void doneHandler(String[] parameters) throws DukeExceptions.NoUndoneTaskException {
+
+    private void doneHandler(String[] parameters) throws DukeExceptions.NoUndoneTaskException {
         if (!this.taskList.isEmpty() || this.taskList.allDone()) {
             int index = Integer.parseInt(parameters[0].strip()) - 1;
             this.taskList.completeTask(index);
@@ -46,7 +47,8 @@ public class Duke {
         }
     }
 
-    public void addTaskHandler(Command command) throws DukeExceptions.IncompleteCommandException { ;
+
+    private void addTaskHandler(Command command) throws DukeExceptions.IncompleteCommandException { ;
         if (!command.isEmpty()) {
             Task newTask = this.taskList.addTask(command);
             this.ui.printAddedNewTask(newTask, this.taskList.getNoTask());
@@ -55,7 +57,8 @@ public class Duke {
         }
     }
 
-    public void deleteTaskHandler(String[] parameters) throws  DukeExceptions.NoTaskToDeleteException {
+
+    private void deleteTaskHandler(String[] parameters) throws  DukeExceptions.NoTaskToDeleteException {
         if (!this.taskList.isEmpty()) {
             int index = Integer.parseInt(parameters[0].strip()) - 1;
             Task task = this.taskList.deleteTask(index);
@@ -69,7 +72,8 @@ public class Duke {
         return this.isRunning;
     }
 
-    public void updateFile() {
+
+    private void updateFile() {
         try {
             this.storage.save(this.taskList);
         } catch (IOException e) {
@@ -102,9 +106,9 @@ public class Duke {
                 this.addTaskHandler(command);
                 this.updateFile();
             } catch (DukeExceptions.IncompleteCommandException e) {
-                DukeExceptions.printIncompleteCommandError(command.toString().toLowerCase());
+                DukeExceptions.printIncompleteCommandError();
             } catch (ArrayIndexOutOfBoundsException e) {
-                DukeExceptions.printNoDateInput(command.toString().toLowerCase());
+                DukeExceptions.printNoDateInput();
             } catch (DateTimeParseException e) {
                 DukeExceptions.printIncorrectDateFormatError();
             }
@@ -121,6 +125,8 @@ public class Duke {
             }
         } else if (command.getClass() == DateCommand.class ) {
             ui.printGetTaskOnDThisDate(command.getParameters()[0], this.taskList);
+        } else if (command.getClass() == FindCommand.class) {
+            ui.printFindKeyword(command.getParameters()[0], this.taskList);
         }
     }
 

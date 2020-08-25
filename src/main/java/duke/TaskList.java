@@ -80,6 +80,17 @@ public class TaskList {
         return (output == "" ? "None\n" : output) ;
     }
 
+    public String getTaskWithKeyword(String parameter) {
+        String output = "";
+
+        for (Task task : this.taskList) {
+            if (task.hasKeyword(parameter.strip())) {
+                output += task.toString() + "\n";
+            }
+        }
+        return (output == "" ? "None\n" : output) ;
+    }
+
     public boolean allDone() {
         for (Task task : this.taskList) {
             if (!task.isDone()) {

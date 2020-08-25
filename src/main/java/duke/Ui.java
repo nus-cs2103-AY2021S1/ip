@@ -78,4 +78,13 @@ public class Ui {
             + this.border
         );
     }
+
+    public void printFindKeyword(String parameter, TaskList taskList) {
+        System.out.println(
+            this.border
+            + "Master here are the tasks with keyword " + parameter.strip() + " :\n"
+            + taskList.getTaskWithKeyword(parameter)
+            + this.border
+        );
+    }
 }

@@ -1,4 +1,5 @@
 package duke;
+import command.Command;
 
 public class DukeExceptions {
 
@@ -56,10 +57,10 @@ public class DukeExceptions {
         );
     }
 
-    public static void printIncompleteCommandError(String command) {
+    public static void printIncompleteCommandError() {
         System.out.println(
             "----------------------------------------------------------------------------\n"
-            + "Master there is no description for " + command + " !\n"
+            + "Master there is no description entered !\n"
             + "----------------------------------------------------------------------------\n"
         );
     }
@@ -80,10 +81,10 @@ public class DukeExceptions {
         );
     }
 
-    public static void printNoDateInput(String command) {
+    public static void printNoDateInput() {
         System.out.println(
             "----------------------------------------------------------------------------\n"
-            + "Master Please enter the date for your " + command + " task.\n"
+            + "Master Please enter the date for your task.\n"
             + "----------------------------------------------------------------------------\n"
         );
     }

@@ -26,6 +26,8 @@ public class Parser {
                 return new TodoCommand(sc.nextLine());
             case "bye":
                 return new ByeCommand();
+            case "find":
+                return new FindCommand(sc.nextLine().strip());
             default:
                 throw new IllegalArgumentException();
         }
