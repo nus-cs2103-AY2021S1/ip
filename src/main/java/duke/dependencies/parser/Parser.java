@@ -43,7 +43,7 @@ public class Parser {
 //            return e.toString();
         } catch (EmptyTaskException e) {
              System.out.println(e.getMessage());
-             return "You have to tell me the task before I can do anything!!! O.o";
+             return "You have to tell me what you want from me before I can do anything!!! O.o";
 
         } catch (UnspecifiedDateException e) {
             System.out.println(e.getMessage());

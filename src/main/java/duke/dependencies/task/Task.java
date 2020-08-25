@@ -19,7 +19,7 @@ public abstract class Task implements Serializable, Schedulable {
         return false;
     };
 
-    public String showTask() {
+    public String showTaskDescription() {
         return this.task;
     }
 

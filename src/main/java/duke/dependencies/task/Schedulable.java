@@ -6,4 +6,6 @@ public interface Schedulable {
 
     public boolean isCompleted();
 
+    public String showTaskDescription();
+
 }

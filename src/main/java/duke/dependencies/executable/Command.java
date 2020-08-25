@@ -21,7 +21,9 @@ public class Command implements Executable {
         return this.task;
     }
 
-    /* -------------------------------------- Static Factory Methods ---------------------------------------------*/
+
+    /* -------------------------------------- Static Factory Methods --------------------------------------------------*/
+
 
     public static Command createAddCommand(Task task) {
         return new Command(CommandType.ADD, task);
@@ -37,5 +39,9 @@ public class Command implements Executable {
 
     public static Command createDeleteCommand(Task task) {
         return new Command(CommandType.DELETE, task);
+    }
+
+    public static Command createFindCommand(Task task) {
+        return new Command(CommandType.FIND, task);
     }
 }

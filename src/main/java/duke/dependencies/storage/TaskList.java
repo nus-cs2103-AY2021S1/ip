@@ -60,6 +60,8 @@ public class TaskList {
             sb.append(i+1);
             sb.append(". ");
             sb.append(todoList.get(i).toString());
+
+            // The last item should not have a newline character. List form.
             if (i != todoList.size() - 1) {
                 sb.append("\n");
             }
@@ -144,6 +146,27 @@ public class TaskList {
             }
         }
         return c;
+    }
+
+    /**
+     * Finds and returns all matching task that has the keyword in the task.
+     * @param keyword
+     * @return
+     */
+    public String findMatching(String keyword) {
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        for (Schedulable task : todoList) {
+            String taskString = task.toString();
+            if (taskString.contains(keyword)) {
+                sb.append(i++)
+                        .append(". ")
+                        .append(taskString)
+                        .append("\n");
+            }
+        }
+        sb.setLength(sb.length() - 1);
+        return sb.toString();
     }
 
     /**

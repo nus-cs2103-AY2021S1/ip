@@ -15,7 +15,7 @@ class TaskTest {
     @Test
     void showTask() {
         Task t = Task.createEvent("Meeting", "2020-08-05");
-        assertEquals("Meeting", t.showTask());
+        assertEquals("Meeting", t.showTaskDescription());
     }
 
 
@@ -30,7 +30,7 @@ class TaskTest {
     void createMiscTask() {
         Task t = Task.createMiscTask("1");
         assertAll(() -> assertFalse(t.hasADate()),
-                () -> assertEquals("1", t.showTask()),
+                () -> assertEquals("1", t.showTaskDescription()),
                 () -> assertNull(t.state));
 
     }
@@ -38,7 +38,7 @@ class TaskTest {
     @Test
     void test_createEmptyTask() {
         assertAll(() -> assertTrue(Task.createEmptyTask().isItEmpty()),
-                () -> assertNull(Task.createEmptyTask().showTask()));
+                () -> assertNull(Task.createEmptyTask().showTaskDescription()));
     }
 
     @Test
@@ -46,13 +46,13 @@ class TaskTest {
         Task t = Task.createTodo("Run");
         assertAll("Checking task",
                 () -> assertFalse(t.isItEmpty()),
-                () -> assertEquals("Run", t.showTask()));
+                () -> assertEquals("Run", t.showTaskDescription()));
     }
 
     @Test
     void createEvent() {
         Task t = Task.createEvent("Meeting", "08/12/2013");
-        assertAll(() -> assertEquals("Meeting", t.showTask()),
+        assertAll(() -> assertEquals("Meeting", t.showTaskDescription()),
                 () -> assertFalse(t.isItEmpty()),
                 () -> assertEquals("Dec 08 2013", t.getDateString()));
     }
@@ -60,7 +60,7 @@ class TaskTest {
     @Test
     void createDeadline() {
         Task t = Task.createDeadline("Return book", "30/08/2050");
-        assertAll(() -> assertEquals("Return book", t.showTask()),
+        assertAll(() -> assertEquals("Return book", t.showTaskDescription()),
                 () -> assertFalse(t.isItEmpty()),
                 () -> assertEquals("Aug 30 2050", t.getDateString()));
     }

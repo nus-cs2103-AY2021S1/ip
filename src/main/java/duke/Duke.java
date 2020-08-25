@@ -10,6 +10,7 @@ public class Duke {
         duke.start();
         Scanner sc = new Scanner(System.in);
         int x = 1;
+        //Loop until exit command given
         while (x > 0) {
             if (sc.hasNext()) {
                 x = duke.takeCommand(sc.nextLine());
