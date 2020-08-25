@@ -1,5 +1,6 @@
 package duke.storage;
 
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -67,11 +68,13 @@ public class TaskListStorage {
         tokens.add(task.isDone() ? "T" : "F");
         if (task instanceof Deadline) {
             tokens.set(0, "D");
-            tokens.add(((Deadline) task).getBy());
+            tokens.add(serializeDate(((Deadline) task).getDate()));
         }
         if (task instanceof Event) {
             tokens.set(0, "E");
-            tokens.add(((Event) task).getAt());
+            Event event = (Event) task;
+            tokens.add(serializeDate(event.getStart()));
+            tokens.add(serializeDate(event.getEnd()));
         }
         return String.join("\t", tokens);
     }
@@ -92,12 +95,13 @@ public class TaskListStorage {
                 task = new Task(description, isDone);
                 break;
             case "D":
-                String by = tokens[3];
-                task = new Deadline(description, isDone, by);
+                Date date = deserializeDate(tokens[3]);
+                task = new Deadline(description, isDone, date);
                 break;
             case "E":
-                String at = tokens[3];
-                task = new Event(description, isDone, at);
+                Date start = deserializeDate(tokens[3]);
+                Date end = deserializeDate(tokens[4]);
+                task = new Event(description, isDone, start, end);
                 break;
             default:
                 throw new DeserializingException();
@@ -105,6 +109,18 @@ public class TaskListStorage {
 
             return task;
         } catch (IndexOutOfBoundsException e) {
+            throw new DeserializingException();
+        }
+    }
+
+    private String serializeDate(Date date) {
+        return date.toInstant().toEpochMilli() + "";
+    }
+
+    private Date deserializeDate(String string) throws DeserializingException {
+        try {
+            return new Date(Long.parseLong(string));
+        } catch (NumberFormatException e) {
             throw new DeserializingException();
         }
     }

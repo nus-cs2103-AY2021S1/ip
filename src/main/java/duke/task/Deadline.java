@@ -1,20 +1,22 @@
 package duke.task;
 
-public class Deadline extends Task {
-    private String by;
+import java.util.Date;
 
-    public Deadline(String description, boolean isDone, String by) {
+public class Deadline extends Task {
+    private Date date;
+
+    public Deadline(String description, boolean isDone, Date date) {
         super(description, isDone);
-        this.by = sanitizeString(by);
+        this.date = date;
     }
 
-    public Deadline(String description, String by) {
-        this(description, false, by);
+    public Deadline(String description, Date date) {
+        this(description, false, date);
     }
 
     @Override
     public String displayString() {
-        return super.displayString() + String.format(" (by: %s)", by);
+        return super.displayString() + String.format(" (by: %s)", DateHelper.formatDate(date));
     }
 
     @Override
@@ -22,7 +24,7 @@ public class Deadline extends Task {
         return "D";
     }
 
-    public String getBy() {
-        return by;
+    public Date getDate() {
+        return date;
     }
 }
