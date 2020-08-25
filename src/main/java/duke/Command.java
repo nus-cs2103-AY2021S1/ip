@@ -14,6 +14,7 @@ public class Command {
 
     /**
      * Checks if the command is an "exit" command
+     *
      * @return exit or not
      */
     public boolean isExit() {

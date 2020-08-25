@@ -16,7 +16,8 @@ public class TaskList {
 
     /**
      * Creates a task and adds it to the task list: todo
-     * @param type task type
+     *
+     * @param type     task type
      * @param taskName task name
      * @throws IOException if error occurs in file accessing
      */
@@ -37,9 +38,10 @@ public class TaskList {
 
     /**
      * Creates a task and adds it to the task list: deadline or event
-     * @param type task type
+     *
+     * @param type     task type
      * @param taskName task name
-     * @param time time of the task
+     * @param time     time of the task
      * @throws IOException if error occurs in file accessing
      */
     public static void add(TaskType type, String taskName, String time) throws IOException {
@@ -69,7 +71,7 @@ public class TaskList {
         return taskList;
     }
 
-        public static void reloadList() throws IOException {
+    public static void reloadList() throws IOException {
         taskList = Storage.readList();
     }
 
@@ -100,17 +102,17 @@ public class TaskList {
         }
         if (!found) {
             Ui.userMessage("There is no match in the list :(");
-        }
-        else {
+        } else {
             Ui.userMessage(sb.toString());
         }
     }
 
     /**
      * Updates the task of a given index to "done"
+     *
      * @param index index of task to be updated
      * @throws InvalidParameterException if index is out of bound for task list
-     * @throws IOException if error occurs in file accessing
+     * @throws IOException               if error occurs in file accessing
      */
 
     public static void setDone(int index) throws InvalidParameterException, IOException {
@@ -128,9 +130,10 @@ public class TaskList {
 
     /**
      * Deletes the task of a given index
+     *
      * @param index index of task to be updated
      * @throws InvalidParameterException if index is out of bound for task list
-     * @throws IOException if error occurs in file accessing
+     * @throws IOException               if error occurs in file accessing
      */
     public static void delete(int index) throws InvalidParameterException, IOException {
         if (taskList.size() == 0) {
@@ -148,6 +151,7 @@ public class TaskList {
 
     /**
      * Prints out the task list
+     *
      * @throws IOException if error occurs in file accessing
      */
     public static void printList() throws IOException {
