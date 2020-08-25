@@ -7,7 +7,10 @@ public class Deadline extends Task {
         if (temp.length == 1) {
             throw new MissingDeadlineException("deadline");
         } else {
-            this.deadline = desc.split(" /by ", 2)[1];
+            String date = desc.split(" /by ", 2)[1];
+            this.deadline = containsTime(date)
+                                ? formatDateTime(date)
+                                : formatDate(date);
         }
     }
 
