@@ -8,6 +8,9 @@ import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.task.TaskType;
 
+/**
+ * Encapsulates the parsing of user inputs.
+ */
 public class Parser {
     private static final String COMMAND_EXIT = "bye";
     private static final String COMMAND_LIST = "list";
@@ -17,6 +20,13 @@ public class Parser {
     private static final String COMMAND_ADD_DEADLINE = "deadline";
     private static final String COMMAND_DELETE = "delete";
 
+    /**
+     * Processes the full user input.
+     *
+     * @param fullCommand user's input
+     * @return one of the subclasses of Command that represents the application logic
+     * @throws DukeUnknownCommandException if the user's command is unknown
+     */
     public static Command parse(String fullCommand) throws DukeUnknownCommandException {
         StringBuilder commandInput = new StringBuilder();
         StringBuilder argsInput = new StringBuilder();

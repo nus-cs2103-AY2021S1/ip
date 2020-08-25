@@ -8,11 +8,20 @@ import duke.task.TaskList;
 import duke.ui.UI;
 import duke.ui.UIException;
 
+/**
+ * Consolidates the various elements.
+ * Drives the application.
+ */
 public class Duke {
     private TaskList taskList;
     private Storage storage;
     private final UI ui;
 
+    /**
+     * Creates an instance of Duke.
+     *
+     * @param filepath Valid path relative to current root directory
+     */
     public Duke(String filepath) {
         ui = new UI();
         taskList = new TaskList();
@@ -24,6 +33,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Accepts user inputs.
+     * Processes inputs.
+     */
     private void run() {
         ui.showHelloMessage();
         boolean isExit = false;
