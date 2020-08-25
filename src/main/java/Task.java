@@ -12,14 +12,6 @@ public class Task {
                 + this.description;
     }
 
-    public Task fromString(String taskString) {
-        return new Task(taskString);
-    }
-
-    public boolean isDone() {
-        return this.isDone;
-    }
-
     public void setDone() {
         this.isDone = true;
     }
