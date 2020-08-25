@@ -5,7 +5,8 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 /**
- * Encapsulates a task. All types of task must extend from this class.
+ * Encapsulates a task
+ * All types of task must extend from this class
  */
 public abstract class Task {
 
@@ -20,6 +21,7 @@ public abstract class Task {
 
     /**
      * Constructor
+     *
      * @param description Description of the task
      * @param isCompleted Completion status of the task
      * @param date Date of the task, null if date is not associated with the task
@@ -33,13 +35,14 @@ public abstract class Task {
     /**
      * Marks the task as complete
      */
-    public void completeTask() {
+    public void setComplete() {
         this.isComplete = true;
     }
 
     /**
      * Gets the string representation of the task to be written into the file upon exit
-     * @return String representation of the task
+     *
+     * @return String representation of the task in the file
      */
     public String[] getDataString() {
         return new String[] {"task", String.valueOf(isComplete), description};
@@ -47,7 +50,8 @@ public abstract class Task {
 
     /**
      * Gets the string representation of the date of the task to be printed in the UI
-     * @return String representation of the date of the task
+     *
+     * @return String representation of the date of the task in the UI
      */
     String getDateString() {
         if (this.date == null) {
@@ -61,6 +65,7 @@ public abstract class Task {
 
     /**
      * Gets the status icon reflecting the completion status of the task
+     *
      * @return Status icon
      */
     String getStatusIcon() {
@@ -73,7 +78,8 @@ public abstract class Task {
 
     /**
      * Gets the string representation of the task to be printed in the UI
-     * @return String representation of the task
+     *
+     * @return String representation of the task in the UI
      */
     @Override
     public String toString() {

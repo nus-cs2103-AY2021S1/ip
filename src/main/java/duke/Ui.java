@@ -133,11 +133,11 @@ public class Ui {
 
     /**
      * Prints string representation of all tasks
+     *
      * @param tasks Current task list
      */
-    public void printList(TaskList tasks) {
+    public void printTaskList(TaskList tasks) {
         if (tasks.isEmpty()) {
-            String[] strings = new String[] {this.zeroTasksMessage};
             this.print(new String[] {this.zeroTasksMessage});
         } else {
             String[] strings = new String[tasks.getNumOfTasks() + 1];

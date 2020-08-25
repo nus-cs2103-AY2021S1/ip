@@ -16,6 +16,7 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Constructor
+     *
      * @param taskIndex Index of the task
      */
     public DeleteTaskCommand(int taskIndex) {
@@ -24,6 +25,7 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Executes the command to delete the task
+     *
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
@@ -31,6 +33,7 @@ public class DeleteTaskCommand extends Command {
     @Override
     public void execute(Storage storage, TaskList tasks, Ui ui) {
         Task task = tasks.deleteTaskAt(this.taskIndex);
+
         if (task != null) {
             ui.printDeleteTask(tasks, task);
         } else {

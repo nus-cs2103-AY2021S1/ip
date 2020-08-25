@@ -25,11 +25,13 @@ class Parser {
 
     /**
      * Parses the given input from the user
+     *
      * @param input Input from user
      * @return Command corresponding to the input
      */
     static Command parse(String input) {
 
+        // Parses initial input into prefix and body
         String[] parsedCommand = input.split(" ", 2);
         String prefix = parsedCommand[0];
         String body = null;
@@ -37,6 +39,7 @@ class Parser {
             body = parsedCommand[1];
         }
 
+        // command determined by prefix
         switch(prefix) {
         case("bye"):
             return new ExitCommand();
@@ -85,6 +88,7 @@ class Parser {
 
     /**
      * Converts a string representation of a date to a LocalDate
+     *
      * @param input String representation of a date
      * @return LocalDate of the date
      * @throws NumberFormatException Exception thrown if the string cannot be parsed into integers

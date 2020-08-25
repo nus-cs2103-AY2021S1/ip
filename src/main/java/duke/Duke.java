@@ -12,17 +12,19 @@ public class Duke {
 
     /**
      * Main method of duke
+     *
      * @param args String arguments (not necessary)
      */
     public static void main(String[] args) {
 
+        // Initialize variables
         String pathName = "./data/duke_data.csv";
-
         Storage storage = new Storage(pathName);
         TaskList tasks = storage.loadTasks();
         Ui ui = new Ui();
         ui.printHello();
 
+        // Initialize scanner to receive user inputs
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {
