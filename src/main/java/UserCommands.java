@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 public class UserCommands {
@@ -8,6 +11,7 @@ public class UserCommands {
     private static final String DONE_COMMAND = "done";
     private static final String DELETE_COMMAND = "delete";
     private static final String EXIT_COMMAND = "bye";
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
     public static UserCommandType parseUserCommand(String command) throws InvalidCommandException {
         if (command.equals(LIST_COMMAND)) {
@@ -43,15 +47,27 @@ public class UserCommands {
         } else if (taskType.equals(DEADLINE_COMMAND) || taskType.equals(EVENT_COMMAND)) {
             for (int i = 0; i < components.length - 1; i++) {
                 if (components[i].equals("/at") || components[i].equals("/by")) {
-                    return new String[]{ // Task name, Date
+                    return new String[]{ // Task name, Datetime
                             String.join(" ", Arrays.copyOfRange(components, 1, i)),
-                            String.join(" ", Arrays.copyOfRange(components, i + 1, components.length))
+                            i + 2 == components.length
+                                ? components[i + 1] + " 0000"
+                                : String.join(" ",
+                                    Arrays.copyOfRange(components, i + 1, components.length))
                     };
                 }
             }
             throw new InvalidCommandException("No date provided");
         } else {
             throw new InvalidCommandException();
+        }
+    }
+
+    public static LocalDateTime parseDateTime(String dateString) throws InvalidCommandException {
+        try {
+            return LocalDateTime.parse(dateString, dateTimeFormatter);
+        } catch (DateTimeParseException exception) {
+            throw new InvalidCommandException("Invalid date time format, " +
+                    "please specify your date in dd/MM/yyyy HHmm format");
         }
     }
 
