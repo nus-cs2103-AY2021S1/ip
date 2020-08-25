@@ -49,6 +49,9 @@ public class DukeException extends Exception {
             case UNKNOWN:
                 error += "    I DON'T KNOW WHAT YOU MEAN :-(\n";
                 break;
+            case NO_MATCHING_FOUND:
+                error += "    NO MATCHES FOUND :-(\n";
+                break;
             case WRONG_FORMAT:
                 switch (commandType) {
                     case DEADLINE:
