@@ -4,6 +4,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     public static final String LINE = "_______________________________________\n";
@@ -71,7 +73,7 @@ public class Duke {
                     try {
                         handleFilter(inputSplit[1]);
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println(LINE + "Invalid input! Please specify which date you want to filter \n" + LINE);
+                        System.out.println(LINE + "Invalid input! Please specify which date you want to filter! \n" + LINE);
                     }
                 }
             } catch (DukeException e) {
@@ -97,14 +99,21 @@ public class Duke {
         System.out.println(LINE + "Here are the tasks in your list: \n" + output + LINE);
     }
 
-    public static void handleFilter(String date) {
-        String output = "";
-        for (int i = 1; i <= taskList.size(); i++) {
-            if (taskList.get(i - 1).isDate(date)) {
-                output = output + i + ". " + taskList.get(i - 1) + "\n";
+    public static void handleFilter(String date) throws DukeException {
+        try {
+            String output = "";
+            String[] dateSplit = date.split("/", 3);
+            String reformatedDate = dateSplit[2] + "-" + dateSplit[1] + "-" + dateSplit[0];
+            LocalDate filterDate = LocalDate.parse(reformatedDate);
+            for (int i = 1; i <= taskList.size(); i++) {
+                if (taskList.get(i - 1).isDate(filterDate)) {
+                    output = output + i + ". " + taskList.get(i - 1) + "\n";
+                }
             }
+            System.out.println(LINE + "Here are your task in your list due: \n" + output + LINE);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(LINE + "Invalid input! Please enter a valid date! \n" + LINE);
         }
-        System.out.println(LINE + "Here are your task in your list due: \n" + output + LINE);
     }
 
     public static void handleDone(String taskIdString) throws DukeException {

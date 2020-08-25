@@ -1,5 +1,7 @@
 package Task;
 
+import java.time.LocalDate;
+
 public abstract class Task {
     protected String description;
     protected boolean completed;
@@ -14,5 +16,5 @@ public abstract class Task {
     }
 
     public abstract String toEncoding();
-    public abstract boolean isDate(String date);
+    public abstract boolean isDate(LocalDate dateFilter);
 }

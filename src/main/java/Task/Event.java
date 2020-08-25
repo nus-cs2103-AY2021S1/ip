@@ -43,8 +43,7 @@ public class Event extends Task {
         return dateSplit[2] + "-" + dateSplit[1] + "-" + dateSplit[0] + "T" + hour + ":" + minute + ":00";
     }
 
-    public boolean isDate(String date) {
-        LocalDate filterDate = LocalDate.parse(date);
-        return this.atDateTime.toLocalDate().equals(filterDate);
+    public boolean isDate(LocalDate dateFilter) {
+        return this.atDateTime.toLocalDate().equals(dateFilter);
     }
 }

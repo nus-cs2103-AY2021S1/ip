@@ -1,5 +1,7 @@
 package Task;
 
+import java.time.LocalDate;
+
 public class ToDo extends Task {
 
     public ToDo(String description, boolean isDone) {
@@ -16,7 +18,7 @@ public class ToDo extends Task {
         return "T>" + completedBinary + ">" + this.description;
     }
 
-    public boolean isDate(String date) {
+    public boolean isDate(LocalDate dateFilter) {
         return false;
     }
 }
