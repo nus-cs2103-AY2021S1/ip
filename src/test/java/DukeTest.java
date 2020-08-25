@@ -6,6 +6,6 @@ public class DukeTest {
     //tests if duke can run
     @Test
     public void dukeTest(){
-        new Duke("src/data/duke.txt").run();
+        new Duke("../../data/duke.txt").run();
     }
 }

@@ -1,7 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,76 +11,36 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() throws DukeException {
-        try {
-            ArrayList<Task> list = new ArrayList<>();
-            File f = new File(this.filePath); // create a File for the given file path
-            Scanner s = new Scanner(f); // create a Scanner using the File as the source
-            while (s.hasNext()) {
-                String taskString = s.nextLine();
-                if (!taskString.isEmpty()) {
-                    if (Character.toString(taskString.charAt(1)).equals("T")) {
-                        if (Character.toString(taskString.charAt(4)).equals("0")) {
-                            list.add(new Todo(taskString.substring(6).trim()));
-                        } else {
-                            list.add(new Todo(taskString.substring(6).trim(), true));
-                        }
-                    } else if (Character.toString(taskString.charAt(1)).equals("D")) {
-                        String description = taskString.substring(6).split("/by")[0].trim();
-                        String dateString = taskString.substring(6).split("/by")[1].trim();
-                        if (Character.toString(taskString.charAt(4)).equals("0")) { //task is marked as not done yet
-                            if (dateString.contains(" ")) { //2020-02-03 1800
-                                String date = dateString.split(" ")[0];
-                                String time = dateString.split(" ")[1].trim();
-                                LocalDate dateObj = LocalDate.parse(date);
-                                list.add(new Deadline(description, dateObj, time));
-                            } else { //2020-02-03
-                                LocalDate dateObj = LocalDate.parse(dateString);
-                                list.add(new Deadline(description, dateObj));
-                            }
-                        } else { //task is marked as done
-                            if (dateString.contains(" ")) { //2020-02-03 1800
-                                String date = dateString.split(" ")[0];
-                                String time = dateString.split(" ")[1].trim();
-                                LocalDate dateObj = LocalDate.parse(date);
-                                list.add(new Deadline(description, true, dateObj, time));
-                            } else { //2020-02-03
-                                LocalDate dateObj = LocalDate.parse(dateString);
-                                list.add(new Deadline(description, true, dateObj));
-                            }
-                        }
+    public TaskList load() throws DukeException {
+        File directory = new File("data/");
+        if (!directory.exists()){
+            directory.mkdir();
+        }
+        File f = new File(this.filePath);
+        if (f.exists()) {
+            try {
+                TaskList taskList = new TaskList();
+                Scanner s = new Scanner(f); // create a Scanner using the File as the source
+                while (s.hasNext()) {
+                    String taskString = s.nextLine();
+                    if (!taskString.isEmpty()) {
+                        Parser.addTaskFromFile(taskString, taskList);
                     } else {
-                        String description = taskString.substring(6).split("/at")[0].trim();
-                        String dateString = taskString.substring(6).split("/at")[1].trim();
-                        if (Character.toString(taskString.charAt(4)).equals("0")) { //task is marked as not done yet
-                            if (dateString.contains(" ")) { //2020-02-03 1800
-                                String date = dateString.split(" ")[0];
-                                String time = dateString.split(" ")[1].trim();
-                                LocalDate dateObj = LocalDate.parse(date);
-                                list.add(new Event(description, dateObj, time));
-                            } else { //2020-02-03
-                                LocalDate dateObj = LocalDate.parse(dateString);
-                                list.add(new Event(description, dateObj));
-                            }
-                        } else { //task is marked as done
-                            if (dateString.contains(" ")) { //2020-02-03 1800
-                                String date = dateString.split(" ")[0];
-                                String time = dateString.split(" ")[1].trim();
-                                LocalDate dateObj = LocalDate.parse(date);
-                                list.add(new Event(description, true, dateObj, time));
-                            } else { //2020-02-03
-                                LocalDate dateObj = LocalDate.parse(dateString);
-                                list.add(new Event(description, true, dateObj));
-                            }
-                        }
+                        continue;
                     }
-                } else {
-                    continue;
                 }
+                return taskList;
+            } catch (FileNotFoundException fnfe) {
+                throw new DukeException(fnfe.getMessage());
             }
-            return list;
-        } catch (FileNotFoundException fnfe) {
-            throw new DukeException("File not found :(");
+        } else { //file f doesn't exist
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                throw new DukeException(e.getMessage());
+            }
+            TaskList taskList = new TaskList();
+            return taskList;
         }
     }
 
@@ -102,7 +60,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException ioe) {
-            throw new DukeException("There is something wrong with the local copy of your file.");
+            throw new DukeException(ioe.getMessage());
         }
     }
 }

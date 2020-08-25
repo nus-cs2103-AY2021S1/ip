@@ -1,5 +1,3 @@
-import java.io.FileNotFoundException;
-
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -9,7 +7,7 @@ public class Duke {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = storage.load();
         } catch (DukeException de) {
             ui.printLoadingError(de);
             tasks = new TaskList();
@@ -33,6 +31,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("src/data/duke.txt").run();
+        new Duke("data/duke.txt").run();
     }
 }

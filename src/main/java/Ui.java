@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -28,5 +29,19 @@ public class Ui {
         for (int i = 0; i < list.size(); i++) {
             System.out.println(i + 1 + ". " + list.get(i).display());
         }
+    }
+
+    public static void printTaskAdded(Task task, ArrayList<Task> list) {
+        System.out.println("Added task: " + task.display()
+                + "\nYou have " + list.size() + " task(s) left in your list.");
+    }
+
+    public static void printMarkAsDone(Task newTask) {
+        System.out.println("Marked task as done:\n" + newTask.display());
+    }
+
+    public static void printRemoveTask(Task removed, ArrayList<Task> taskList) {
+        System.out.println("Removed task:\n" + removed.display()
+                + "\nYou have " + taskList.size() + " task(s) left in your list.");
     }
 }
