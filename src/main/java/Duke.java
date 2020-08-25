@@ -18,6 +18,7 @@ public class Duke {
             Task task = list.get(i);
             //System.out.println((i+1) + ". "+ task.toString());
             appendFile.write(task.toString());
+            appendFile.write("\n");
         }
         appendFile.close();
     }
@@ -43,12 +44,46 @@ public class Duke {
         String path = "out/todo.txt";
         File file = new File(path);
         if (file.isFile()) {
-
         } else {
             file.createNewFile();
         }
         Scanner fileSc = new Scanner(file);
 
+        //load data onto itemList
+        while (fileSc.hasNextLine()) {
+            Task newItem;
+            String taskString = fileSc.nextLine();
+            if (taskString.startsWith("[T]")) {
+                String name = taskString.substring(8);
+                if (taskString.charAt(5) == '\u2713') {
+                    newItem = new TODO(name, Task.Status.DONE);
+                } else {
+                    newItem = new TODO(name, Task.Status.PENDING);
+                }
+                itemList.add(newItem);
+            } else if (taskString.startsWith("[D]")) {
+                String name = taskString.split(" by: ")[0].substring(8);
+                String dueDate = taskString.split(" by: ")[1];
+                if (taskString.charAt(5) == '\u2713') {
+                    newItem = new Deadline(name, Task.Status.DONE,dueDate);
+                } else {
+                    newItem = new Deadline(name, Task.Status.PENDING,dueDate);
+                }
+                itemList.add(newItem);
+            } else if (taskString.startsWith("[E]")){
+                //System.out.println(taskString.split(" at: ").length);
+                String name = taskString.split(" at: ")[0].substring(8);
+                String dueDate = taskString.split(" at: ")[1];
+                if (taskString.charAt(5) == '\u2713') {
+                    newItem = new Event(name, Task.Status.DONE,dueDate);
+                } else {
+                    newItem = new Event(name, Task.Status.PENDING,dueDate);
+                }
+                itemList.add(newItem);
+            } else {
+                System.out.println("error");
+            }
+        }
 
 
 
@@ -59,9 +94,9 @@ public class Duke {
             //add items to list
             if (!userMessage.equals("bye") && !userMessage.equals("list")
                     && !userMessage.contains("done") && !userMessage.contains("delete")) {
-                Task newItem = new Task(userMessage, Task.Status.PENDING);
+                Task newItem;
                 if (userMessage.startsWith("todo")) {
-                    String name = userMessage.substring(4);
+                    String name = userMessage.substring(5);
                     if (!name.isEmpty() && !name.isBlank()) {
                         newItem = new TODO(name, Task.Status.PENDING);
                     } else {
@@ -72,7 +107,7 @@ public class Duke {
                         throw new DukeException("Sorry, incorrect format for Deadlines. \n Please specify a Due Date " +
                                 "(and task name)");
                     } else {
-                        String name = userMessage.split("/by")[0].substring(8);
+                        String name = userMessage.split("/by")[0].substring(9);
                         if (name.isEmpty() || name.isBlank()) {
                             throw new DukeException("Oops, tasks cannot be empty");
                         }
@@ -84,7 +119,7 @@ public class Duke {
                         throw new DukeException("Sorry, incorrect format for Events. \n Please specify a time " +
                                 "(and task name)");
                     } else {
-                        String name = userMessage.split("/at")[0].substring(5);
+                        String name = userMessage.split("/at")[0].substring(6);
                         if (name.isEmpty() || name.isBlank()) {
                             throw new DukeException("Oops, tasks cannot be empty");
                         }

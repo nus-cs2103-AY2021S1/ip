@@ -7,7 +7,7 @@ public class Deadline extends Task {
     }
 
     @Override public String toString() {
-        return "[D] " + this.status.statusToSymbol() + " " + this.name + " (by:" + dueDate + ")";
+        return "[D] " + this.status.statusToSymbol() + this.name + " by: " + dueDate;
     }
 
 }

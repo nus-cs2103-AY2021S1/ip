@@ -5,6 +5,6 @@ public class TODO extends Task {
     }
 
     @Override public String toString() {
-        return "[T] " + this.status.statusToSymbol() + " " + this.name;
+        return "[T] " + this.status.statusToSymbol() + this.name;
     }
 }
