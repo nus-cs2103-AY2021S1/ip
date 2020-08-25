@@ -1,6 +1,4 @@
 import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.LocalDateTime;
 
 import java.time.format.DateTimeFormatter;
@@ -66,14 +64,11 @@ public class Duke {
                 if (description.isBlank() || by.isBlank()) {
                     throw new DukeException("OOPS!!! Please add both a description and deadline for your task!");
                 } else {
-                    LocalDateTime dateTime = LocalDateTime.parse(by.trim(),
-                            DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+                    LocalDateTime dateTime = generateDateTime(by);
                     task = new Deadline(description.trim(), dateTime.toLocalDate(), dateTime.toLocalTime());
                 }
             } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
                 throw new DukeException("OOPS!!! Please add both a description and deadline for your task!");
-            } catch (DateTimeException dateTimeException) {
-                throw new DukeException("OOPS!!! Please enter a valid date and time in the format 'DD-MM-YYYY HHMM'!");
             }
             break;
         case "event":
@@ -83,7 +78,8 @@ public class Duke {
                 if (description.isBlank() || at.isBlank()) {
                     throw new DukeException("OOPS!!! Please add both a description and date for your event!");
                 } else {
-                    task = new Event(description.trim(), at.trim());
+                    LocalDateTime dateTime = generateDateTime(at);
+                    task = new Event(description.trim(), dateTime.toLocalDate(), dateTime.toLocalTime());
                 }
             } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
                 throw new DukeException("OOPS!!! Please add both a description and date for your event!");
@@ -112,6 +108,15 @@ public class Duke {
             } catch (IndexOutOfBoundsException | NumberFormatException exception) {
                 throw new DukeException("OOPS!!! Please enter a valid task number.");
             }
+        }
+    }
+
+    public static LocalDateTime generateDateTime(String dateTimeString) throws DukeException {
+        try {
+            return LocalDateTime.parse(dateTimeString.trim(),
+                    DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+        } catch (DateTimeException dateTimeException) {
+            throw new DukeException("OOPS!!! Please enter a valid date and time in the format 'DD-MM-YYYY HHMM'!");
         }
     }
 
