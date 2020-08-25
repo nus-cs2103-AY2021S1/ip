@@ -29,10 +29,14 @@ public class Deadline extends Task {
      */
     public static Deadline create(String task)
             throws EmptyTaskException, MissingDateException, InvalidDateException {
-        if (task.length() <= 9) throw new EmptyTaskException("deadline");
+        if (task.length() <= 9) {
+            throw new EmptyTaskException("deadline");
+        }
 
         String[] taskInfo = task.substring(9).split(" /by ", 2);
-        if (taskInfo.length < 2) throw new MissingDateException();
+        if (taskInfo.length < 2) {
+            throw new MissingDateException();
+        }
 
         LocalDate dateTime = null;
         for (DateFormat format : DateFormat.values()) {
@@ -40,8 +44,9 @@ public class Deadline extends Task {
                 dateTime = LocalDate.parse(taskInfo[1], format.toDateFormat());
             } catch (DateTimeParseException ignored) { }
         }
-        if (dateTime == null) throw new InvalidDateException();
-
+        if (dateTime == null) {
+            throw new InvalidDateException();
+        }
         return new Deadline(taskInfo[0], dateTime);
     }
 

@@ -3,7 +3,7 @@ package duke.task;
 import duke.exception.EmptyTaskException;
 
 public class ToDo extends Task {
-    public ToDo(String description) {
+    private ToDo(String description) {
         super(description);
     }
 
@@ -17,6 +17,16 @@ public class ToDo extends Task {
     public static ToDo create(String task) throws EmptyTaskException {
         if (task.length() <= 5) throw new EmptyTaskException("todo");
         return new ToDo(task.substring(5));
+    }
+
+    /**
+     * Creates a new ToDo object represented by its String when read from a file.
+     *
+     * @param description Description of task.
+     * @return Event object representing the given details.
+     */
+    public static ToDo createFromFile(String description) {
+        return new ToDo(description);
     }
 
     @Override
@@ -33,8 +43,12 @@ public class ToDo extends Task {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj instanceof ToDo) return description.equals(((ToDo) obj).description);
-        return false;
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof ToDo) {
+            return description.equals(((ToDo) obj).description);
+        } else {
+            return false;
+        }
     }
 }

@@ -29,10 +29,14 @@ public class Event extends Task {
      */
     public static Event create(String task)
             throws EmptyTaskException, MissingDateException, InvalidDateException {
-        if (task.length() <= 6) throw new EmptyTaskException("event");
+        if (task.length() <= 6) {
+            throw new EmptyTaskException("event");
+        }
 
         String[] taskInfo = task.substring(6).split(" /at ", 2);
-        if (taskInfo.length < 2) throw new MissingDateException();
+        if (taskInfo.length < 2) {
+            throw new MissingDateException();
+        }
 
         LocalDate dateTime = null;
         for (DateFormat format : DateFormat.values()) {
@@ -40,7 +44,9 @@ public class Event extends Task {
                 dateTime = LocalDate.parse(taskInfo[1], format.toDateFormat());
             } catch (DateTimeParseException ignored) { }
         }
-        if (dateTime == null) throw new InvalidDateException();
+        if (dateTime == null) {
+            throw new InvalidDateException();
+        }
 
         return new Event(taskInfo[0], dateTime);
     }
