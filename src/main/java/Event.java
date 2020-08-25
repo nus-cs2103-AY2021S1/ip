@@ -11,4 +11,9 @@ public class Event extends Task{
     public String toString() {
         return "[E]" + super.toString() + " (at: " + duration + ")";
     }
+    
+    @Override
+    public String saveAsText() {
+        return "E | " + super.saveAsText() + " | " + duration;
+    }
 }
