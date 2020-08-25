@@ -5,9 +5,6 @@ public class ByeCommand extends Command {
     }
 
     public void execute(TaskList taskList) {
-        System.out.println("-------------------------------------------\n" +
-                "Bye bye! Hope to see you again soon!\n" +
-                "-------------------------------------------");
         System.exit(0);
     }
 }

@@ -7,12 +7,10 @@ public class DoneCommand extends Command {
 
     public void execute(TaskList taskList) {
         int taskNumber;
-        System.out.println("-------------------------------------------\n" +
-                "Nice! I've marked this task as done:");
         taskNumber = Integer.parseInt(this.getTaskName());
         Task doneTask = taskList.getTask(taskNumber);
         doneTask.markAsDone();
-        System.out.println(doneTask + "\n-------------------------------------------");
+        System.out.println(doneTask + "\n" + TextUi.DIVIDER);
     }
 }
 

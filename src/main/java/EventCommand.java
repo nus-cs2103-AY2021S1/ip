@@ -1,3 +1,5 @@
+import org.w3c.dom.Text;
+
 import java.time.LocalDateTime;
 
 public class EventCommand extends Command {
@@ -11,6 +13,6 @@ public class EventCommand extends Command {
         taskList.addTask(newEvent);
         System.out.println(newEvent +
                 String.format("\nNow you have %d tasks in the list.\n", taskList.getTaskLength())
-                + "-------------------------------------------");
+                + TextUi.DIVIDER);
     }
 }

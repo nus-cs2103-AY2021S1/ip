@@ -10,7 +10,7 @@ public class Deadline extends Task implements Serializable {
 
     public Deadline(String deadlineName, LocalDateTime deadlineDateTime) {
         super(deadlineName);
-        this.deadlineDateTime = deadlineDateTime; //shift to parser.java (constructor takes in string and localdatetime
+        this.deadlineDateTime = deadlineDateTime;
     }
 
     public String getDeadlineDateTime() throws DateTimeParseException {

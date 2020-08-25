@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.List;
 
 public class Storage {
-    //store and load tasks (store tasklist)
     private final static long serialVersionUID = 7526472295622776147L;
 
     public static TaskList load() throws FileNotFoundException, IOException, ClassNotFoundException { //load a tasklist from the text file
@@ -26,7 +25,6 @@ public class Storage {
             FileOutputStream fos = new FileOutputStream("Duke.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(taskList);
-            //System.out.println("Task List is saved in Duke.txt file!");
         }
         catch (IOException e) {
             e.printStackTrace();
