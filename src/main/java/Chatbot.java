@@ -7,6 +7,7 @@ public class Chatbot {
 
     protected String inquiry;
     protected List<Task> planner;
+    protected Storage storage;
     protected final String INDENTATION = "     ";
     protected final String LINE = "    ____________________________________________________________";
     protected final String ERROR_INVALID_TASK = "⚠⚠⚠ I'm sorry, but I don't know what that means :-(";
@@ -22,42 +23,48 @@ public class Chatbot {
             + '\n' + INDENTATION + "    by '/at' followed by the date";
 
 
-
     public Chatbot() {
         this.inquiry = "";
         this.planner = new ArrayList<Task>();
+        this.storage = new Storage();
+
+        try {
+            this.planner = storage.load();
+//            storage.load();
+        } catch (DukeException e) {
+            reply(e.getMessage());
+        }
     }
 
 
     public void chat() {
-
-            introductions();
-            Scanner sc = new Scanner(System.in);
-            this.inquiry = sc.nextLine();
-            while (!inquiry.equals("bye")) {
-                try {
-                    if (inquiry.equals("list")) {
-                        list();
-                    } else if (inquiry.startsWith("todo")) {
-                        taskHandler(TaskType.TODO, inquiry);
-                    } else if (inquiry.startsWith("deadline")) {
-                        taskHandler(TaskType.DEADLINE, inquiry);
-                    } else if (inquiry.startsWith("event")) {
-                        taskHandler(TaskType.EVENT, inquiry);
-                    } else if (inquiry.startsWith("done")) {
-                        taskAction(TaskType.DONE, inquiry);
-                    } else if (inquiry.startsWith("delete")) {
-                        taskAction(TaskType.DELETE, inquiry);
-                    } else {
-                        throw new DukeInvalidTaskException(ERROR_INVALID_TASK);
-                    }
-                } catch (DukeException e) {
-                    reply(e.getMessage());
+        introductions();
+        Scanner sc = new Scanner(System.in);
+        this.inquiry = sc.nextLine();
+        while (!inquiry.equals("bye")) {
+            try {
+                if (inquiry.equals("list")) {
+                    list();
+                } else if (inquiry.startsWith("todo")) {
+                    taskHandler(TaskType.TODO, inquiry);
+                } else if (inquiry.startsWith("deadline")) {
+                    taskHandler(TaskType.DEADLINE, inquiry);
+                } else if (inquiry.startsWith("event")) {
+                    taskHandler(TaskType.EVENT, inquiry);
+                } else if (inquiry.startsWith("done")) {
+                    taskAction(TaskType.DONE, inquiry);
+                } else if (inquiry.startsWith("delete")) {
+                    taskAction(TaskType.DELETE, inquiry);
+                } else {
+                    throw new DukeInvalidTaskException(ERROR_INVALID_TASK);
                 }
-                System.out.println(LINE);
-                inquiry = sc.nextLine();
+            } catch (DukeException e) {
+                reply(e.getMessage());
             }
-            farewell();
+            System.out.println(LINE);
+            inquiry = sc.nextLine();
+        }
+        farewell();
 
     }
 
@@ -65,7 +72,7 @@ public class Chatbot {
             Task currentTask;
             if (type.equals(TaskType.TODO)) {
                 if (inquiry.equals("todo")) throw new DukeEmptyToDoException(ERROR_EMPTY_TODO_TASK);
-                currentTask = new ToDo(body.substring(5));
+                currentTask = new ToDo(body.substring(5), false);
 
             } else if (type.equals(TaskType.DEADLINE)) {
                 if (inquiry.equals("deadline")) {
@@ -79,7 +86,7 @@ public class Chatbot {
 
                 String deadline = arrOfString[1];
                 String description = arrOfString[0];
-                currentTask = new Deadline(description, deadline);
+                currentTask = new Deadline(description, false, deadline);
             } else {
                 if (inquiry.equals("event")) {
                     throw new DukeEmptyEventException(ERROR_EMPTY_EVENT_TASK);
@@ -91,7 +98,7 @@ public class Chatbot {
                 }
                 String eventDate = arrOfString[1];
                 String description = arrOfString[0];
-                currentTask = new Event(description, eventDate);
+                currentTask = new Event(description, false, eventDate);
             }
             addToPlanner(currentTask);
             reply("Got it. I've added this task:");
@@ -136,6 +143,11 @@ public class Chatbot {
     private void farewell() {
         reply("Bye. Hope to see you again soon!");
         System.out.println(LINE);
+        try {
+            storage.save(this.planner);
+        } catch (DukeException e) {
+            reply(e.getMessage());
+        }
     }
 
     public void reply (String string) {

@@ -2,8 +2,8 @@ public class Event extends Task {
 
     protected String by;
 
-    public Event(String description, String by) {
-        super(description);
+    public Event(String description, boolean isDone, String by) {
+        super(description, isDone);
         this.by = by;
     }
 
