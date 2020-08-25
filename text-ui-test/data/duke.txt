@@ -1,24 +1,5 @@
 Todo|1|buy food
-<<<<<<< HEAD
-duke.Deadline|0|final assignment | 19 September 2020
-duke.Deadline|0|gym | Utown 10pm
-duke.Deadline|0|dance | school
-Todo|0|study for exams
-Todo|0|buy food
-Todo|0|pray
-duke.Deadline|0|CS2103 | 20 August 2020
-duke.Deadline|0|final assignment | 19 September 2020
-duke.Deadline|0|run | Utown 10pm
-duke.Deadline|0|gym | Utown 10pm
-duke.Deadline|0|dance | school
-Todo|0|study for exams
-Todo|0|buy food
-Todo|0|pray
-duke.Deadline|0|CS2103 | 20 August 2020
-duke.Deadline|0|final assignment | 19 September 2020
-=======
-duke.Deadline|0|CS2103 | 20 August 2020
->>>>>>> branch-Level-8
-duke.Event|0|run | Utown 10pm
-duke.Event|0|gym | Utown 10pm
-duke.Event|0|dance | school
+Deadline|0|CS2103 | 20 August 2020
+Event|0|run | Utown 10pm
+Event|0|gym | Utown 10pm
+Event|0|dance | school
