@@ -1,5 +1,6 @@
-import java.util.Scanner;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
 
@@ -29,8 +30,10 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    // this function takes in the input from the user and adds it to the list of tasks Duke is tracking
-    // helper function
+    /*
+     this function takes in the input from the user and adds it to the list of tasks Duke is tracking
+     helper function
+    */
     public static void addTask(Task t, ArrayList<Task> tasks) {
         tasks.add(t);
         System.out.println(LINE);
@@ -62,7 +65,7 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    // this function deletes the task
+    // this function deletes the task per requested by the user
     public static void deleteTask(ArrayList<Task> tasks, int taskNumber) {
         Task t = tasks.get(taskNumber);
         tasks.remove(taskNumber);
@@ -73,7 +76,21 @@ public class Duke {
         System.out.println(LINE);
     }
 
+    /*
+     this function creates a file for the user if the user does not have a file
+     to store the tasks that Duke is to track
+    */
+    private static void createFile() {
+        File taskFile = new File("data/tasks.txt");
+        System.out.println(LINE);
+        System.out.println("Hello! Duke has noticed that you do not have a text file to store your tasks!");
+        System.out.println("As such, Duke has created an empty file, ready to store your tasks!");
+        System.out.println("This text file can be found at: " + taskFile.getAbsolutePath());
+        System.out.println(LINE);
+    }
+
     public static void main(String[] args) {
+        // welcome message printed when the user runs Duke
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -85,6 +102,7 @@ public class Duke {
         // this field keeps track of the tasks given to Duke
         ArrayList<Task> tasks = new ArrayList<>();
 
+        // this field is used to receive input given by the user
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             // if the user inputs a "bye" command, we simply break out of the Duke program
@@ -93,16 +111,20 @@ public class Duke {
                 break;
             }
 
-            // if the user inputs a "list" command, Duke will iterate through the added text and print them in the order
-            // they were given to Duke.
+            /*
+             if the user inputs a "list" command, Duke will iterate through the added text and print them in the order
+             they were given to Duke.
+            */
             if (sc.hasNext("list")) {
                 list(tasks);
                 sc.nextLine();
                 continue;
             }
 
-            // if the user inputs a "done" command followed by a valid number, Duke will change the valid numbered
-            // task to done
+            /*
+             if the user inputs a "done" command followed by a valid number,
+             Duke will change the respective numbered task to done
+            */
             if (sc.hasNext("done")) {
                 try {
                     sc.skip("done");
@@ -124,14 +146,7 @@ public class Duke {
                     System.out.println(LINE);
                     continue;
                 }
-                catch (NumberFormatException e) {
-                    System.out.println(LINE);
-                    System.out.println("     ☹ OOPS!!! The \"done\" command must be followed by a valid task number.");
-                    System.out.println(LINE);
-                    continue;
-                }
-
-                catch (InvalidNumberFromDoneCommandException e) {
+                catch (NumberFormatException | InvalidNumberFromDoneCommandException e) {
                     System.out.println(LINE);
                     System.out.println("     ☹ OOPS!!! The \"done\" command must be followed by a valid task number.");
                     System.out.println(LINE);
@@ -139,6 +154,10 @@ public class Duke {
                 }
             }
 
+            /*
+             if the user inputs an "event" command followed by a valid description and event timing,
+             Duke will create an event object and add it into the list of tasks to track
+            */
             if (sc.hasNext("event")) {
                 try {
                     sc.skip("event");
@@ -177,6 +196,10 @@ public class Duke {
 
             }
 
+            /*
+             if the user inputs a "deadline" command followed by a valid description and due date,
+             Duke will create a deadline object and add it into the list of tasks to track
+            */
             if (sc.hasNext("deadline")) {
                 try {
                     sc.skip("deadline");
@@ -215,6 +238,7 @@ public class Duke {
 
             }
 
+            // if the user inputs a "todo" command followed by a valid task, Duke will
             if (sc.hasNext("todo")) {
                 try {
                     sc.skip("todo");
@@ -247,7 +271,6 @@ public class Duke {
                         throw new InvalidNumberFromDoneCommandException();
                     }
                     deleteTask(tasks, taskNumber - 1);
-                    continue;
                 }
 
                 catch (MissingNumberFromCommandException e) {
@@ -267,6 +290,7 @@ public class Duke {
                 }
             }
 
+            // if the user inputs an invalid command, code in this block will be executed
             else {
                 try {
                     String command = sc.nextLine();
