@@ -7,6 +7,7 @@ import duke.Ui;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DoneCommand extends AbstractModifyTaskCommand {
 
@@ -25,5 +26,18 @@ public class DoneCommand extends AbstractModifyTaskCommand {
             e.printStackTrace(System.out);
             DukeException.tryAgain();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task)) return false;
+        Task taskx = (Task) o;
+        return taskx == task;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(task);
     }
 }
