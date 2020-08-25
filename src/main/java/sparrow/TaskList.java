@@ -80,11 +80,14 @@ public class TaskList {
             sb.append(summary);
             Ui.reply(sb.toString());
         } catch (InvalidDeadlineByException e) {
-            System.out.println(Sparrow.standardExceptionMessage() + "️ Please pass a /by to the deadline");
+            System.out.println(Sparrow.standardExceptionMessage() +
+                    "️ Please pass a /by to the deadline");
         } catch (InvalidEventAtException e) {
-            System.out.println(Sparrow.standardExceptionMessage() + "️ Please pass a /at to the event");
+            System.out.println(Sparrow.standardExceptionMessage() +
+                    "️ Please pass a /at to the event");
         } catch (DateTimeParseException e) {
-            System.out.println(Sparrow.standardExceptionMessage() + "Please enter a date in this format: yyyy-mm-dd");
+            System.out.println(Sparrow.standardExceptionMessage() +
+                    "Please enter a date in this format: yyyy-mm-dd");
         }
     }
 
@@ -104,7 +107,7 @@ public class TaskList {
             for (Task task : tasks) {
                 LocalDate taskDate;
 
-                // Get date from sparrow.Deadline/sparrow.Event
+                // Get date from Deadline/Event
                 if (task instanceof Deadline) {
                     taskDate = ((Deadline) task).getDueDate();
                 } else if (task instanceof Event) {
@@ -123,7 +126,7 @@ public class TaskList {
             for (Task task : tasks) {
                 LocalDate taskDate;
 
-                // Get date from sparrow.Deadline/sparrow.Event
+                // Get date from Deadline/Event
                 if (task instanceof Deadline) {
                     taskDate = ((Deadline) task).getDueDate();
                 } else if (task instanceof Event) {
@@ -161,7 +164,7 @@ public class TaskList {
     }
 
     /**
-     * Delets a task from the task list.
+     * Deletes a task from the task list.
      * @param taskNum Task number corresponding to the task to be deleted.
      */
     public void deleteTask(String taskNum) {
@@ -169,7 +172,8 @@ public class TaskList {
             int taskNumber = Integer.parseInt(taskNum);
             if (taskNumber <= tasks.size() && taskNumber > 0) {
                 Task removedTask = tasks.remove(taskNumber - 1);
-                Ui.reply("Jolly riddance! I've deleted this task:\n" + "  " + removedTask.toString() + String.format("\nNow you have %d task(s) in the list.", tasks.size()));
+                Ui.reply("Jolly riddance! I've deleted this task:\n" + "  " + removedTask.toString() +
+                        String.format("\nNow you have %d task(s) in the list.", tasks.size()));
             } else {
                 System.out.println("Please enter a valid task number.");
             }
