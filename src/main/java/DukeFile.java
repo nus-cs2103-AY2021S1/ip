@@ -37,9 +37,9 @@ public class DukeFile {
      * the method will save each element as a single task
      * in the text file.
      *
-     * @author Lee Penn Han
+     * @author Lee Penn Han.
      * @return Nothing.
-     * @throws IOException
+     * @throws IOException.
      */
     public void saveToFile() throws IOException {
         FileWriter fileWriter = new FileWriter(fileName);
@@ -55,9 +55,9 @@ public class DukeFile {
      * Stores the current task (Record) into the arraylist
      * as a String.
      *
-     * @author Lee Penn Han
+     * @author Lee Penn Han.
      * @return Nothing.
-     * @param record This is the Task to be saved
+     * @param record This is the Task to be saved.
      */
     public void saveRecord(String record) {
         recordArrayLst.add(record);
@@ -79,11 +79,11 @@ public class DukeFile {
 
     /**
      * Deletes the element in the Record ArrayList by using the
-     * index from User Input to identify the position
+     * index from User Input to identify the position.
      *
-     * @author Lee Penn Han
+     * @author Lee Penn Han.
      * @return Nothing.
-     * @param index The index of the targeted task in the list
+     * @param index The index of the targeted task in the list.
      */
     public void deleteRecord(int index) {
         int i = index - 1;
@@ -91,21 +91,21 @@ public class DukeFile {
     }
 
     /**
-     * Instantiates a DukeFile object
+     * Instantiates a DukeFile object.
      *
-     * @author Lee Penn Han
+     * @author Lee Penn Han.
      * @param fileName This is the filename that the tasks will be saved under.
-     * @return DukeFile object
+     * @return DukeFile object.
      */
     public static DukeFile createDukeFile(String fileName) {
         return new DukeFile(fileName);
     }
 
     /**
-     * Gets the arraylist of Records to be saved
+     * Gets the arraylist of Records to be saved.
      *
-     * @author Lee Penn Han
-     * @return Arraylist of Records to be saved
+     * @author Lee Penn Han.
+     * @return Arraylist of Records to be saved.
      */
     public ArrayList<String> getRecords() {
         return this.recordArrayLst;
