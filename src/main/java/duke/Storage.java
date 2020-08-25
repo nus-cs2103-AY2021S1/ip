@@ -16,12 +16,13 @@ import java.util.Scanner;
  * Represents all loading and saving operations to the save file.
  */
 public class Storage {
-    protected final File savefile;
-    protected FileWriter writer;
-    protected boolean isEmptySave;
-    protected static boolean isLoadingError = false;
+    protected static boolean hasLoadingError = false;
     protected final String location;
     protected final static String filename = "/save.txt";
+    protected final File savefile;
+    protected FileWriter writer;
+    /** Checks whether the user chooses to terminate when corrupted save file encountered. */
+    protected boolean isEmptySave;
     protected ArrayList<Task> listFromFile;
 
     /**
@@ -155,7 +156,7 @@ public class Storage {
             }
             return newList;
         } else {
-            isLoadingError = true;
+            hasLoadingError = true;
             return newList;
         }
     }
