@@ -23,11 +23,13 @@ import viscount.task.TaskType;
 public class ListCommand extends Command {
     private String taskTypeModifier;
     private String dateString;
+    private String findString;
     
-    public ListCommand(String taskTypeModifier, String dateString) {
+    public ListCommand(String taskTypeModifier, String dateString, String findString) {
         super();
         this.taskTypeModifier = taskTypeModifier;
         this.dateString = dateString;
+        this.findString = findString;
     }
 
     /**
@@ -39,9 +41,11 @@ public class ListCommand extends Command {
      * @throws ViscountDateTimeParseException If exception occurs with parsing date string
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws ViscountDateTimeParseException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws ViscountException {
         Predicate<Task> filterByModifier = task -> taskTypeModifier.isEmpty()
                 || task.getTaskType() == TaskType.valueOf(taskTypeModifier.toUpperCase());
+        
+        Predicate<Task> filterByDescription = task -> task.getDescription().contains(findString);
         
         List<Task> tasks = taskList.getTasks();
 
@@ -49,6 +53,7 @@ public class ListCommand extends Command {
             List<Task> filteredTasks = tasks
                     .stream()
                     .filter(filterByModifier)
+                    .filter(filterByDescription)
                     .collect(Collectors.toList());
             
             ui.showList(filteredTasks, taskTypeModifier, dateString);
@@ -62,6 +67,7 @@ public class ListCommand extends Command {
                         .stream()
                         .filter(Task::hasDateTime)
                         .filter(filterByModifier)
+                        .filter(filterByDescription)
                         .filter(task -> task.getDateTime().toLocalDate().isEqual(queriedDateTime.toLocalDate()))
                         .sorted(Comparator.comparing(Task::getDateTime))
                         .collect(Collectors.toList());

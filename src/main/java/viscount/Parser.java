@@ -73,14 +73,31 @@ public class Parser {
      */
     private static ListCommand parseListCommand(List<String> arguments) throws ViscountException {
         int onArgumentIndex = arguments.indexOf("/on");
+        int findArgumentIndex = arguments.indexOf("/find");
         String taskTypeModifier = "";
         String dateString = "";
+        String findString = "";
 
         if (onArgumentIndex == -1) {
-            taskTypeModifier = String.join(" ", arguments.subList(1, arguments.size()));
+            if (findArgumentIndex == -1) {
+                taskTypeModifier = String.join(" ", arguments.subList(1, arguments.size()));
+            } else {
+                taskTypeModifier = String.join(" ", arguments.subList(1, findArgumentIndex));
+                findString = String.join(" ", arguments.subList(findArgumentIndex + 1, arguments.size()));
+            }
         } else {
-            taskTypeModifier = String.join(" ", arguments.subList(1, onArgumentIndex));
-            dateString = String.join(" ", arguments.subList(onArgumentIndex + 1, arguments.size()));
+            if (findArgumentIndex == -1) {
+                taskTypeModifier = String.join(" ", arguments.subList(1, onArgumentIndex));
+                dateString = String.join(" ", arguments.subList(onArgumentIndex + 1, arguments.size()));
+            } else if (onArgumentIndex < findArgumentIndex) {
+                taskTypeModifier = String.join(" ", arguments.subList(1, onArgumentIndex));
+                dateString = String.join(" ", arguments.subList(onArgumentIndex + 1, findArgumentIndex));
+                findString = String.join(" ", arguments.subList(findArgumentIndex + 1, arguments.size()));
+            } else {
+                taskTypeModifier = String.join(" ", arguments.subList(1, findArgumentIndex));
+                findString = String.join(" ", arguments.subList(findArgumentIndex + 1, onArgumentIndex));
+                dateString = String.join(" ", arguments.subList(onArgumentIndex + 1, arguments.size()));
+            }
 
             if (taskTypeModifier.equals("todo")) {
                 throw new ViscountUnsupportedOperationException("/on");
@@ -97,7 +114,7 @@ public class Parser {
             }
         }
 
-        return new ListCommand(taskTypeModifier, dateString);
+        return new ListCommand(taskTypeModifier, dateString, findString);
     }
 
     /**

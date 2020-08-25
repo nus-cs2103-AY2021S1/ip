@@ -6,4 +6,9 @@ delete 1
 delete 3
 delete 2
 list
+add todo t3t4t5
+add deadline t2t3t4 /by 23-08-2020 1000
+list /find t3
+list /find t2 /on 23-08-2020
+list /on 23-08-2020 /find t2
 bye
