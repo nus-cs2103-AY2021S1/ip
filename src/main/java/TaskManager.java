@@ -9,12 +9,16 @@ public class TaskManager {
 
     private boolean isExit = false;
 
-    public TaskManager() {
+    private Ui ui;
+
+    public TaskManager(Ui ui) {
         this.tasks = new ArrayList<>();
+        this.ui = ui;
     }
 
-    public TaskManager(List<Task> tasks) {
+    public TaskManager(List<Task> tasks, Ui ui) {
         this.tasks = tasks;
+        this.ui = ui;
     }
 
     public List<Task> getTasks() {
@@ -25,15 +29,6 @@ public class TaskManager {
         return this.isExit;
     }
 
-    public void greet() {
-        System.out.println("Hello! I'm Duke.");
-        System.out.println("What can I do for you?\n");
-    }
-
-    public void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
-    }
-
     public void handleInput(String input) throws DukeException {
         String[] inputArray = input.split(" ", 2);
         String command = inputArray[0];
@@ -41,8 +36,9 @@ public class TaskManager {
         try {
             if (command.equals("bye")) { // Exits while loop
                 isExit = true;
+                this.ui.showExitMessage();
             } else if (command.equals("list")) {
-                this.displayTasks();
+                this.ui.displayTasks(this.tasks);
             } else if (command.equals("done")) {
                 this.markTaskAsDone(inputArray[1]);
             } else if (command.equals("todo")) {
@@ -96,19 +92,15 @@ public class TaskManager {
     }
 
     private void addTask(Task task) {
-        tasks.add(task);
-        System.out.println("Okay! Task added for you!");
-        System.out.println(task);
-        System.out.println("Now you have " + tasks.size() + " task(s) in the list." + "\n");
+        this.tasks.add(task);
+        this.ui.showAddMessage(task, this.tasks.size());
     }
 
     private void deleteTask(String taskNumber) throws DukeException {
         try {
             int index = Integer.parseInt(taskNumber) - 1;
-            Task task = tasks.remove(index);
-            System.out.println("Noted. The following task is removed:");
-            System.out.println(task);
-            System.out.println("Now you have " + tasks.size() + " task(s) in the list." + "\n");
+            Task task = this.tasks.remove(index);
+            this.ui.showDeleteMessage(task, this.tasks.size());
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             // Invalid task number or number out of range
             String errorMessage = "Invalid task number! " + "Please enter a valid task number :)\n";
@@ -119,26 +111,13 @@ public class TaskManager {
     private void markTaskAsDone(String taskNumber) throws DukeException {
         try {
             int index = Integer.parseInt(taskNumber) - 1;
-            Task task = tasks.get(index);
+            Task task = this.tasks.get(index);
             task.markAsDone();
-            System.out.println("Good job! I've marked this task as done:");
-            System.out.println(task + "\n");
+            this.ui.showDoneMessage(task);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             // Invalid task number or number out of range
             String errorMessage = "Invalid task number! " + "Please enter a valid task number :)\n";
             throw new DukeException(errorMessage);
-        }
-    }
-
-    private void displayTasks() {
-        if (tasks.isEmpty()) {
-            System.out.println("No tasks added to your list yet!\n");
-        } else {
-            System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < tasks.size(); i++) {
-                System.out.println(i + 1 + ". " + tasks.get(i));
-            }
-            System.out.println("");
         }
     }
 }

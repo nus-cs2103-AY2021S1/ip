@@ -1,40 +1,35 @@
-import java.util.List;
-import java.util.Scanner;
-
 public class Duke {
 
     private Storage storage;
 
     private TaskManager manager;
 
+    private Ui ui;
+
     public Duke(String filePath) {
+        ui = new Ui();
         storage = new Storage(filePath);
         try {
-            List<Task> tasks = storage.loadTasks();
-            manager = new TaskManager(tasks);
+            manager = new TaskManager(storage.loadTasks(), ui);
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            manager = new TaskManager();
+            manager = new TaskManager(ui);
         }
     }
 
     public void run() {
-        manager.greet();   
+        ui.showWelcomeMessage();   
         boolean isExit = false;
-        Scanner sc = new Scanner(System.in);
         while (!isExit) {
             try {
-                String input = sc.nextLine();
+                String input = ui.readCommand();
                 manager.handleInput(input);
-                List<Task> tasks = manager.getTasks();
-                storage.saveTasks(tasks);
+                storage.saveTasks(manager.getTasks());
                 isExit = manager.isExit();
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                ui.showErrorMessage(e.getMessage());
             }
         }
-        sc.close();
-        manager.exit();
     }
 
     public static void main(String[] args) {
