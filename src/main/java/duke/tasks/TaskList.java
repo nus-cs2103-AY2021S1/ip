@@ -40,6 +40,11 @@ public class TaskList {
         this.taskLs.forEach(n -> System.out.println(this.taskLs.indexOf(n) + 1 + ". " + n));
     }
 
+    public void findList(String toPrint) {
+        int i = 1;
+        this.taskLs.forEach(n -> System.out.println(this.taskLs.indexOf(n) + 1 + ". " + n));
+    }
+
     public void done(String toPrint) {
         String command = toPrint.replaceAll("[^\\d.]", "");
         int indexCommand = Integer.parseInt(command.trim());
@@ -98,6 +103,18 @@ public class TaskList {
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             Deadline.invalidInput();
         }
+    }
+
+    public void find(String toPrint) {
+        TaskList duplicateTaskLs = new TaskList();
+        duplicateTaskLs.taskLs = new ArrayList<>(this.getTaskLs());
+
+        toPrint = toPrint.substring(4);
+        String finalToPrint = toPrint;
+
+        duplicateTaskLs.taskLs.removeIf(n -> !n.getDescription().contains(finalToPrint));
+        System.out.println("Here are the matching tasks in your list: ");
+        duplicateTaskLs.findList("");
     }
 
 }

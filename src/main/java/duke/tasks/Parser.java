@@ -26,6 +26,9 @@ public class Parser {
         else if (toPrint.startsWith("bye")) {
             return new ByeCommand();
         }
+        else if (toPrint.startsWith("find")) {
+            return new FindCommand(toPrint);
+        }
         else {
             System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             return null;
