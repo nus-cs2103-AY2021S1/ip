@@ -1,8 +1,22 @@
+/**
+ * The {@code Parser} class processes and parses user input, coming up with a response.
+ */
 public class Parser {
 
+    /**
+     * Initialises Parser object.
+     */
     public Parser() {
     }
 
+    /**
+     * Processes user input and returns an appropriate reply.
+     * 
+     * @param lst The {@code TaskList} that keeps track of all pending tasks.
+     * @param msg User input.
+     * @return Response to user input.
+     * @throws JimmyException If user input contains an error.
+     */
     public static String parse(TaskList lst, String msg) throws JimmyException {
 
         String[] arr = msg.split(" ");
