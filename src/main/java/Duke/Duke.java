@@ -1,9 +1,4 @@
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.FileNotFoundException;
-
+package Duke;
 public class Duke {
 
     private Storage storage;
@@ -11,11 +6,6 @@ public class Duke {
     private Ui ui;
     private String filePath;
 
-    public static void doneTask(ArrayList<Task> store, int num) {
-        store.get(num-1).markAsDone();
-        System.out.println("Nice! This task is marked as done!");
-        System.out.println(store.get(num-1));
-    }
     public Duke(String filePath) {
         this.filePath = filePath;
         ui = new Ui();
