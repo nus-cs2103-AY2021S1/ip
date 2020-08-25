@@ -14,6 +14,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The class deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     String filePath;
 
@@ -21,6 +24,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Load the data in the file to the task list.
+     * @return
+     * @throws IOException
+     */
     public ArrayList<Task> loadData() throws IOException {
         DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         ArrayList<Task> orderList = new ArrayList<>();
@@ -54,6 +62,10 @@ public class Storage {
 
     }
 
+    /**
+     * Write the changed message into the file.
+     * @param orderlist
+     */
     public void writeData(ArrayList<Task> orderlist) {
         try {
             FileWriter fw = new FileWriter(filePath, false);

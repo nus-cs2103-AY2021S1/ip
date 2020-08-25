@@ -8,11 +8,18 @@ import Duke.Tool.TaskList;
 
 import java.io.IOException;
 
+/**
+ * The Duke server which can mange tasks.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * The constructor of the Duke server.
+     * @param filePath the path where the file is stored.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,6 +31,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Run the Duke server.
+     * @throws DukeException Exceptions throws in Duke.
+     */
     public void run() throws DukeException {
         ui.showLogo();
         ui.showGreeting();

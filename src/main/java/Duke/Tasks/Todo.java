@@ -4,17 +4,31 @@ import Duke.Tool.Storage;
 import Duke.Tool.TaskList;
 import Duke.Ui;
 
+/**
+ * Represent a to do task.
+ */
 public class Todo extends Task{
     public Todo(String description, boolean isDone) {
         super(description, isDone);
     }
 
+    /**
+     * mark the task as done.
+     * @return
+     */
     @Override
     public Todo markDone() {
         super.markDone();
         return this;
     }
 
+    /**
+     * Add the task into the list and print the added message.
+     * Write the changes into the file.
+     * @param tasklist
+     * @param ui
+     * @param storage
+     */
     @Override
     public void excute(TaskList tasklist, Ui ui, Storage storage) {
         tasklist.add(this);
@@ -22,11 +36,19 @@ public class Todo extends Task{
         storage.writeData(tasklist.taskList);
     }
 
+    /**
+     * String representation of the deadline task.
+     * @return
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Formatted String representation of the task.
+     * @return
+     */
     @Override
     public String fileFormattedString() {
         String doneOrNot = isDone ? "1" : "0";

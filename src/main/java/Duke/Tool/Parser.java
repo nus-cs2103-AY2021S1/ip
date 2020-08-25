@@ -6,9 +6,17 @@ import Duke.Tasks.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The class deals with making sense of the user command.
+ */
 public class Parser {
     public static DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    /**
+     * Check whether the characters in the string represents an integer.
+     * @param s
+     * @return
+     */
     public static boolean isInteger(String s) {
         if (s == null) {
             return false;
@@ -21,6 +29,12 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Parse the command from user and return the corresponding task.
+     * @param order the order from user.
+     * @param tl
+     * @return the task which can be understood by Duke.
+     */
     public static Task parse(String order, TaskList tl) {
         try {
             int numOfOrders = tl.getNumOfTasks();
