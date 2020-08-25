@@ -35,15 +35,6 @@ public class Duke {
                        TaskList.add(event);
                        add(event, TaskList);
                    }
-                   if (input.contains("delete")) {
-                       String[] textArray = input.split(" ", 2);
-                       int taskNum = Integer.parseInt(textArray[1]);
-                       Task deletedTask = TaskList.get(taskNum - 1);
-                       TaskList.remove(deletedTask);
-                       System.out.println("Noted. I've removed this task:\n"
-                               + deletedTask + "\nNow you have " + TaskList.size()
-                               + " tasks in the list");
-                   }
                } else if (input.equals("list")) {
                    printList(TaskList);
                } else if (input.contains("done")) {
