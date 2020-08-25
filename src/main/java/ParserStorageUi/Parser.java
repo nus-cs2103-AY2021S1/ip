@@ -4,30 +4,26 @@ import Command.*;
 
 public class Parser {
 
-    /** The variable that will make the program exit or quit **/
-    private static String end = "bye";
+    private static String COMMAND_END = "bye";
 
-    /** The variable that will make the program to done the specified task **/
-    private static String done = "done";
 
-    /** The variable that will make the program to delete the specified task **/
-    private static String delete = "delete";
+    private static String COMMAND_DONE = "done";
 
-    /** The variable that will make the program to list out all the current task **/
-    private static String listing = "list";
 
-    /**
-     * @param fullCommand
-     * @return the specified Command class
-     */
+    private static String COMMAND_DELETE = "delete";
+
+
+    private static String COMMAND_LIST = "list";
+
+
     public static Command parse(String fullCommand){
-        if (fullCommand.toLowerCase().contains(end)) {
+        if (fullCommand.toLowerCase().contains(COMMAND_END)) {
             return new ExitCommand(fullCommand);
-        } else if (fullCommand.equals(listing)) {
+        } else if (fullCommand.equals(COMMAND_LIST)) {
             return new ListCommand(fullCommand);
-        } else if (fullCommand.toLowerCase().contains(done)) {
+        } else if (fullCommand.toLowerCase().contains(COMMAND_DONE)) {
             return new DoneCommand(fullCommand);
-        } else if (fullCommand.toLowerCase().contains(delete)) {
+        } else if (fullCommand.toLowerCase().contains(COMMAND_DELETE)) {
             return new DeleteCommand(fullCommand);
         } else {
             return new AddCommand(fullCommand);

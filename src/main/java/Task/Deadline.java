@@ -14,15 +14,6 @@ public class Deadline extends Task {
 
     public Deadline(String name, boolean isDone, String end) throws WrongDateTimeFormatException {
         super(name, isDone);
-        /*String rest = end.substring(end.indexOf("/") + 1);
-        String rest1 = rest.substring(rest.indexOf("/" ) + 6);
-
-        this.deadline = LocalDate.of(Integer.parseInt(rest.substring(3,7)) ,
-                Integer.parseInt(rest.substring(0, rest.indexOf("/"))) ,
-                Integer.parseInt(end.substring(0,1)) ).atTime(
-                Integer.parseInt(rest1.substring(0,3),
-                        Integer.parseInt(rest1.substring(3));
-        );*/
         try {
             this.deadline = LocalDate.parse(end.substring(0, 10)).atTime(
                     Integer.parseInt(end.substring(11, 13)),
