@@ -21,6 +21,11 @@ import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represent's Viscount's parser.
+ * 
+ * Handles making sense of the user's input commands.
+ */
 public class Parser {
     public static final DateTimeFormatter INPUT_DATE_TIME_FORMATTER = 
             DateTimeFormatter.ofPattern("dd-MM-yyyy[ HHmm]");
@@ -31,7 +36,13 @@ public class Parser {
     public static final DateTimeFormatter OUTPUT_DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
 
-
+    /**
+     * Parses a raw command.
+     * 
+     * @param rawCommand Raw command in String form parsed.
+     * @return Command object representing the raw command.
+     * @throws ViscountException If command is unsupported or used wrongly.
+     */
     public static Command parse(String rawCommand) throws ViscountException {
         List<String> arguments = Arrays.asList(rawCommand.split(" "));
         String baseCommand = arguments.get(0);
@@ -50,7 +61,14 @@ public class Parser {
             throw new ViscountUnknownCommandException(baseCommand);
         }
     }
-    
+
+    /**
+     * Parses a list command.
+     * 
+     * @param arguments Arguments from user input.
+     * @return List command representing input from user.
+     * @throws ViscountException If command contains unknown arguments or was used wrongly.
+     */
     private static ListCommand parseListCommand(List<String> arguments) throws ViscountException {
         int onArgumentIndex = arguments.indexOf("/on");
         String modifier = "";
@@ -80,6 +98,13 @@ public class Parser {
         return new ListCommand(modifier, dateString);
     }
 
+    /**
+     * Parses an add command.
+     *
+     * @param arguments Arguments from user input.
+     * @return Add command representing input from user.
+     * @throws ViscountException If command contains unknown arguments or was used wrongly.
+     */
     private static AddCommand parseAddCommand(List<String> arguments) throws ViscountException {
         if (arguments.size() < 2) {
             throw new ViscountMissingArgumentException("task type");
@@ -144,6 +169,13 @@ public class Parser {
         }
     }
     
+    /**
+     * Parses a done command.
+     *
+     * @param arguments Arguments from user input.
+     * @return Done command representing input from user.
+     * @throws ViscountException If command contains unknown arguments or was used wrongly.
+     */
     private static DoneCommand parseDoneCommand(List<String> arguments) throws ViscountException {
         if (arguments.size() < 2) {
             throw new ViscountMissingArgumentException("task number");
@@ -158,6 +190,14 @@ public class Parser {
             throw new ViscountNumberFormatException(arguments.get(1));
         }
     }
+
+    /**
+     * Parses a delete command.
+     *
+     * @param arguments Arguments from user input.
+     * @return Delete command representing input from user.
+     * @throws ViscountException If command contains unknown arguments or was used wrongly.
+     */
     private static DeleteCommand parseDeleteCommand(List<String> arguments) throws ViscountException {
         if (arguments.size() < 2) {
             throw new ViscountMissingArgumentException("task number");
@@ -175,6 +215,15 @@ public class Parser {
 
     //@@author sc-arecrow-reused
     //Reused from https://stackoverflow.com/a/48281350 with minor modifications
+
+    /**
+     * Parses a String representing a date and time using the given formatter.
+     * 
+     * @param dateTimeString Date and time string parsed.
+     * @param formatter Formatter used.
+     * @return LocalDateTime object representing the date and time in the String.
+     * @throws DateTimeParseException If string parsed is formatted wrongly.
+     */
     public static LocalDateTime parseDateTime(String dateTimeString, DateTimeFormatter formatter)
             throws DateTimeParseException {
         LocalDateTime dateTime;

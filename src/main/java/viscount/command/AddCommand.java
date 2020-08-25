@@ -1,11 +1,14 @@
 package viscount.command;
 
 import viscount.*;
+import viscount.exception.ViscountIOException;
 import viscount.task.*;
-import viscount.exception.ViscountException;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents an add command.
+ */
 public class AddCommand extends Command {
     private TaskType taskType;
     private String description;
@@ -17,12 +20,20 @@ public class AddCommand extends Command {
         this.dateTime = dateTime;
     }
 
+    /**
+     * Executes the add command.
+     * 
+     * @param taskList Task list where tasks are stored.
+     * @param ui Ui to display response.
+     * @param storage Storage to save changes to disk.
+     * @throws ViscountIOException If exception occurs with writing to disk.
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ViscountException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws ViscountIOException {
         Task newTask = getNewTask();
-        tasks.add(newTask);
-        storage.saveToDisk(tasks.getTasks());
-        ui.showAdd(newTask, tasks.getTasksSize());
+        taskList.add(newTask);
+        storage.saveToDisk(taskList.getTasks());
+        ui.showAdd(newTask, taskList.getTasksSize());
     }
     
     private Task getNewTask() {

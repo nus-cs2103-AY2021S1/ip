@@ -2,6 +2,9 @@ package viscount.task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a todo, a type of task.
+ */
 public class Todo extends Task {
     private static final String STRING_FORMAT = "[T][%s] %s";
     private static final String TASK_DATA_FORMAT = "%s|%d|%s";
@@ -20,6 +23,11 @@ public class Todo extends Task {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Gives a task data representation of the task in String format.
+     * 
+     * @return Task data representation of the task.
+     */
     @Override
     public String toTaskData() {
         return String.format(Todo.TASK_DATA_FORMAT, taskType.name(), isDone ? 1 : 0, description);

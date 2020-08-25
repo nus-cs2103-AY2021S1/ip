@@ -4,6 +4,9 @@ import viscount.command.Command;
 import viscount.exception.ViscountException;
 import viscount.exception.ViscountIOException;
 
+/**
+ * Represents Viscount, a chatbot that helps the user keep track of tasks.
+ */
 public class Viscount {
     private static final String DATA_DIRECTORY_PATH = System.getProperty("user.dir") + "/data/";
     
@@ -23,7 +26,10 @@ public class Viscount {
             this.shouldRun = false;
         }
     }
-    
+
+    /**
+     * Runs Viscount.
+     */
     private void run() {
         ui.showWelcome();
         
@@ -41,11 +47,19 @@ public class Viscount {
         
         exit();
     }
-    
+
+    /**
+     * Closes Viscount.
+     */
     private void exit() {
         ui.showExit();
     }
 
+    /**
+     * Starts Viscount.
+     * 
+     * @param args Standard arguments
+     */
     public static void main(String[] args) {
         Viscount viscount = new Viscount(DATA_DIRECTORY_PATH);
         if (viscount.shouldRun) {

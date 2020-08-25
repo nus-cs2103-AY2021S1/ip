@@ -19,6 +19,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents Viscount's storage.
+ * 
+ * Handles loading tasks from data file and writing tasks to the file.
+ */
 public class Storage {
     private static final String DATA_FILE_NAME = "viscount.txt";
     
@@ -30,6 +35,12 @@ public class Storage {
         this.filePathString = dataDirectoryPath + DATA_FILE_NAME;
     }
 
+    /**
+     * Saves task list data to disk.
+     * 
+     * @param tasks Task list saved.
+     * @throws ViscountIOException If exception occurs when writing to disk.
+     */
     public void saveToDisk(List<Task> tasks) throws ViscountIOException {
         Path filePath = Paths.get(filePathString);
         List<String> savedData = new ArrayList<>();
@@ -45,6 +56,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads task list data from disk.
+     * 
+     * @return Task list loaded.
+     * @throws ViscountIOException If exception occurs when loading from disk or creating a new data file.
+     */
     public List<Task> loadFromDisk() throws ViscountIOException {
         File directory = new File(dataDirectoryPath);
         
