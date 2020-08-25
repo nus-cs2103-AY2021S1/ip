@@ -3,7 +3,7 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        DukeBot myDukeBot = new DukeBot();
+        Ui myDukeBot = new Ui();
         myDukeBot.greeting();
         myDukeBot.createDirectory("ToDo");
         myDukeBot.populateList();
