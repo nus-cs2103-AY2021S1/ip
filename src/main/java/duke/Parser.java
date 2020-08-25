@@ -13,11 +13,11 @@ public class Parser {
 
     protected String inputString;
 
-    Parser(String inputString) {
+    public Parser(String inputString) {
         this.inputString = inputString;
     }
 
-    public boolean stringContainsItemFromList(String inputStr, String[] items) {
+    public boolean containsString(String inputStr, String[] items) {
         return Arrays.stream(items).anyMatch(inputStr::contains);
     }
 
@@ -35,7 +35,7 @@ public class Parser {
             return new ListCommand(splitInput);
         } else if (commandType.equals("bye")) {
             return new ExitCommand(splitInput);
-        } else if (stringContainsItemFromList(commandType, addCommands)) {
+        } else if (containsString(commandType, addCommands)) {
             return new AddCommand(splitInput);
         } else {
             throw new DukeException("Your Input Command is not Recognized!");
@@ -49,7 +49,7 @@ public class Parser {
             String commandType = splitInput[0];
             if (commandType.equals("")) {
                 throw new DukeException("File has empty input String!");
-            } else if (stringContainsItemFromList(commandType, addCommands)) {
+            } else if (containsString(commandType, addCommands)) {
                 return new AddCommand(splitInput, isDone);
             } else {
                 throw new DukeException("Your Input Command from the file is not Recognized!");
