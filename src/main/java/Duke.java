@@ -1,4 +1,6 @@
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -77,16 +79,33 @@ public class Duke {
     }
 
     /*
-     this function creates a file for the user if the user does not have a file
-     to store the tasks that Duke is to track
+     this function creates a file for the user if the user does not have a file to store the tasks that Duke is to track
+
+     if a valid file exists, Duke simply notifies the user that it is currently reading from the file
     */
     private static void createFile() {
-        File taskFile = new File("data/tasks.txt");
-        System.out.println(LINE);
-        System.out.println("Hello! Duke has noticed that you do not have a text file to store your tasks!");
-        System.out.println("As such, Duke has created an empty file, ready to store your tasks!");
-        System.out.println("This text file can be found at: " + taskFile.getAbsolutePath());
-        System.out.println(LINE);
+
+        File taskFile = new File("src/main/java/tasks.txt");
+
+        try {
+            if (taskFile.createNewFile()) {
+                System.out.println(LINE);
+                System.out.println("Duke has noticed that you do not have a text file to store your tasks!");
+                System.out.println("As such, Duke has created an empty file, ready to store your tasks!");
+                System.out.println("This text file can be found at: " + taskFile.getAbsolutePath());
+                System.out.println(LINE);
+            }
+
+            else {
+                System.out.println(LINE);
+                System.out.println("Duke has noticed that you have a text file to store your tasks!");
+                System.out.println("Duke is currently reading the file from: " + taskFile.getAbsolutePath());
+                System.out.println(LINE);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void main(String[] args) {
@@ -98,6 +117,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         greeting();
+        createFile();
 
         // this field keeps track of the tasks given to Duke
         ArrayList<Task> tasks = new ArrayList<>();
