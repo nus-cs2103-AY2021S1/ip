@@ -1,6 +1,8 @@
 package commands;
 
-// Shows help instructions.
+/**
+ * Shows help instructions.
+ */
 public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";

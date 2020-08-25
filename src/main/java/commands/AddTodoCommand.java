@@ -2,7 +2,9 @@ package commands;
 
 import data.task.Todo;
 
-// Adds a data.tasks.Todo to the data.task list.
+/**
+ * Adds a Todo to the task list.
+ */
 public class AddTodoCommand extends AddCommand {
 
     public static final String COMMAND_WORD = "todo";

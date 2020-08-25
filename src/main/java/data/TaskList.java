@@ -5,6 +5,9 @@ import data.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the entire task list. Contains the data of all the tasks.
+ */
 public class TaskList {
     private final List<Task> taskList = new ArrayList<>();
 

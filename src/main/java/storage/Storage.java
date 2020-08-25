@@ -10,9 +10,14 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Represents the file used to store task list data.
+ */
 public class Storage {
 
+    /** Default file path used if the user doesn't provide the file name. */
     private static final String DEFAULT_STORAGE_FILEPATH = "src/storageData/duke.txt";
+
     private String filePath;
     private File file;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy hh:mm a");
@@ -29,10 +34,16 @@ public class Storage {
         }
     }
 
+    /**
+     * @throws InvalidStorageFilePathException if the default path is invalid
+     */
     public Storage() throws InvalidStorageFilePathException {
         this(DEFAULT_STORAGE_FILEPATH);
     }
 
+    /**
+     * @throws InvalidStorageFilePathException if the given file path is invalid
+     */
     public Storage(String filePath) throws InvalidStorageFilePathException {
         this.filePath = filePath;
         this.file = new File(filePath);
@@ -40,13 +51,24 @@ public class Storage {
             throw new InvalidStorageFilePathException("File not found.");
     }
 
-    public TaskList load() throws StorageOperationException, FileNotFoundException, IllegalValueException {
+    /**
+     * Loads the {@code TaskList} data from this storage file, and then returns it.
+     * Returns an empty {@code TaskList} if the file does not exist, or is not a regular file.
+     *
+     * @throws StorageOperationException if there were errors reading and/or converting data from file.
+     */
+    public TaskList load() throws StorageOperationException, FileNotFoundException {
         if (!this.file.exists()) {
             return new TaskList();
         }
         return TaskListDecoder.decodeTaskList(this.file);
     }
 
+    /**
+     * Saves the {@code taskList} data to the storage file.
+     *
+     * @throws StorageOperationException if there were errors converting and/or storing data to file.
+     */
     public void save(TaskList taskList) throws StorageOperationException {
         try {
             List<String> encodedTaskList = TaskListEncoder.encodeTaskList(taskList);

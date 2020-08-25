@@ -1,5 +1,8 @@
 package utils;
 
+/**
+ * Container for user visible messages.
+ */
 public class Messages {
 
     public static final String MESSAGE_INIT_FAILED = "Failed to initialise task list application. Exiting...";

@@ -1,6 +1,7 @@
 package storage;
 
 import data.TaskList;
+import data.exception.IllegalValueException;
 import data.task.Deadline;
 import data.task.Event;
 import data.task.Task;
@@ -16,7 +17,9 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// Decodes the storage data file into a data.tasks.Task List object.
+/**
+ * Decodes the storage data file into an {@code TaskList} object.
+ */
 public class TaskListDecoder {
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy hh:mm a");
@@ -25,6 +28,14 @@ public class TaskListDecoder {
     private static final Pattern DEADLINE_DATA_ARGS_FORMAT = Pattern.compile("(?<description>[^/]+)/(?<deadline>.*)");
     private static final Pattern EVENT_DATA_ARGS_FORMAT = Pattern.compile("(?<description>[^/]+)/(?<dateTime>.*)");
 
+    /**
+     * Decodes {@code encodedTaskList} into a {@code TaskList} containing the decoded tasks.
+     *
+     * @param file the storage file containing all the saved tasks
+     * @return a {@code TaskList object}
+     * @throws FileNotFoundException if the file is not found
+     * @throws Storage.StorageOperationException if the {@code encodedTaskList} is in an invalid format.
+     */
     public static TaskList decodeTaskList(File file) throws FileNotFoundException, Storage.StorageOperationException {
         Scanner s = new Scanner(file);
         List<Task> tasksList = new ArrayList<>();
@@ -36,10 +47,15 @@ public class TaskListDecoder {
         return new TaskList(tasksList);
     }
 
+    /**
+     * Decodes {@code encodedTask} into a {@code Todo}, {@code Deadline} or {@code Event}.
+     *
+     * @throws Storage.StorageOperationException if {@code encodedTask} is in an invalid format.
+     */
     private static Task decodeTaskFromString(String encodedTask) throws Storage.StorageOperationException {
         final Matcher matcher = TASK_DATA_ARGS_FORMAT.matcher(encodedTask);
         if (!matcher.matches()) {
-            throw new Storage.StorageOperationException("Encoded data.task in invalid format. Unable to decode.");
+            throw new Storage.StorageOperationException("Encoded task in invalid format. Unable to decode.");
         }
 
         final String taskType = matcher.group("taskType");
@@ -48,21 +64,29 @@ public class TaskListDecoder {
 
         switch (taskType) {
             case "T":
-                return addTodo(isDone, arguments);
+                return decodeTodo(isDone, arguments);
             case "D":
-                return addDeadline(isDone, arguments);
+                return decodeDeadline(isDone, arguments);
             case "E":
-                return addEvent(isDone, arguments);
+                return decodeEvent(isDone, arguments);
             default:
                 throw new Storage.StorageOperationException("Encoded data.task in invalid format. Unable to decode.");
         }
     }
 
+    /**
+     * Returns true if {@code matchedPrefix} is equal to the prefix for completed task.
+     */
     private static boolean isDonePrefix(String matchedPrefix) {
         return "O".equals(matchedPrefix);
     }
 
-    private static Todo addTodo(boolean isDone, String arguments) throws Storage.StorageOperationException {
+    /**
+     * Decodes {@code encodedTodo} into a {@code Todo}.
+     *
+     * @throws Storage.StorageOperationException if {@code encodedTodo} is in an invalid format.
+     */
+    private static Todo decodeTodo(boolean isDone, String arguments) throws Storage.StorageOperationException {
         final Matcher matcher = TODO_DATA_ARGS_FORMAT.matcher(arguments);
         if (!matcher.matches()) {
             throw new Storage.StorageOperationException("Encoded todo in invalid format. Unable to decode.");
@@ -70,7 +94,12 @@ public class TaskListDecoder {
         return new Todo(isDone, matcher.group("description"));
     }
 
-    private static Deadline addDeadline(boolean isDone, String arguments) throws Storage.StorageOperationException {
+    /**
+     * Decodes {@code encodedDeadline} into a {@code Deadline}.
+     *
+     * @throws Storage.StorageOperationException if {@code encodedDeadline} is in an invalid format.
+     */
+    private static Deadline decodeDeadline(boolean isDone, String arguments) throws Storage.StorageOperationException {
         final Matcher matcher = DEADLINE_DATA_ARGS_FORMAT.matcher(arguments);
         if (!matcher.matches()) {
             throw new Storage.StorageOperationException("Encoded deadline in invalid format. Unable to decode");
@@ -78,7 +107,12 @@ public class TaskListDecoder {
         return new Deadline(isDone, matcher.group("description"), getLocalDateTime(matcher.group("deadline")));
     }
 
-    private static Event addEvent(boolean isDone, String arguments) throws Storage.StorageOperationException {
+    /**
+     * Decodes {@code encodedEvent} into a {@code Event}.
+     *
+     * @throws Storage.StorageOperationException if {@code encodedEvent} is in an invalid format.
+     */
+    private static Event decodeEvent(boolean isDone, String arguments) throws Storage.StorageOperationException {
         final Matcher matcher = EVENT_DATA_ARGS_FORMAT.matcher(arguments);
         if (!matcher.matches()) {
             throw new Storage.StorageOperationException("Encoded event in invalid format. Unable to decode");

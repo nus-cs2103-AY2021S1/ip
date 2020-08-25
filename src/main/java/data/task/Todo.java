@@ -2,6 +2,10 @@ package data.task;
 
 //  ToDos: data.tasks without any date/time attached to it
 //  e.g., visit new theme park
+
+/**
+ * Represents a Todo task in the task list.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {

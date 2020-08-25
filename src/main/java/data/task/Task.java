@@ -2,6 +2,9 @@ package data.task;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Task in the task list.
+ */
 public abstract class Task {
 
     protected String description;
@@ -18,14 +21,25 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Returns the status icon of the task. "O" for completed task, "X" for uncompleted task.
+     * @return The status icon of the task
+     */
     public String getStatusIcon() {
         return (isDone ? "O" : "X"); //return O or X symbols
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Returns the string of the task to be added into the local storage file.
+     * @return The string of the task in the local storage file
+     */
     public abstract String fileFormat();
 
     @Override

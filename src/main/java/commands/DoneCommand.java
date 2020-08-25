@@ -3,7 +3,9 @@ package commands;
 import data.task.Task;
 import utils.Messages;
 
-// Marks a data.task identified done using it's last displayed index from the data.task list.
+/**
+ * Marks a task identified done using it's last displayed index from the task list.
+ */
 public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
