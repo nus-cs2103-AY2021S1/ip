@@ -2,7 +2,6 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.io.IOException;
-import static java.lang.System.exit;
 
 public class Duke {
     enum Instruction {
