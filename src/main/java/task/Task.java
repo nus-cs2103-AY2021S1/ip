@@ -5,11 +5,15 @@ package task;
  */
 public abstract class Task {
     private final String content;
+    private final String time;
     private boolean completed;
 
-    Task(boolean completed, String content) {
+    public abstract String getTaskType();
+
+    Task(boolean completed, String content, String time) {
         this.content = content;
         this.completed = completed;
+        this.time = time;
     }
 
     public String getContent() {
@@ -18,6 +22,10 @@ public abstract class Task {
 
     public boolean isCompleted() {
         return completed;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     public void setCompleted(boolean status) {
