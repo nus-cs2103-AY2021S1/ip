@@ -40,8 +40,6 @@ public class Storage {
             fw.close();
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Something went wrong: " + e);
         }
     }
 }

@@ -1,6 +1,5 @@
 package main.java;
 
-import java.time.DateTimeException;
 import java.util.List;
 
 public abstract class Command {
@@ -10,7 +9,7 @@ public abstract class Command {
         this.input = input;
     }
 
-    abstract void run();
+    abstract void run(TaskList taskList) throws UserException;
 }
 
 class ByeCommand extends Command {
@@ -19,8 +18,8 @@ class ByeCommand extends Command {
     }
 
     @Override
-    public void run() {
-        TaskList.writeFile();
+    public void run(TaskList taskList) {
+        taskList.save();
         Ui.bye();
     }
 }
@@ -31,9 +30,9 @@ class ListCommand extends Command {
     }
 
     @Override
-    public void run() {
-        Ui.list();
-        TaskList.printTasks();
+    public void run(TaskList taskList) {
+        Ui.list(taskList.printTasks());
+        taskList.printTasks();
     }
 }
 
@@ -43,14 +42,10 @@ class DoneCommand extends Command {
     }
 
     @Override
-    public void run() {
+    public void run(TaskList taskList) throws InvalidArgumentException {
         int index = Integer.parseInt(input.get(1));
-        try {
-            TaskList.iDone(index);
-            Ui.done(TaskList.getTask(index).toString());
-        } catch (IllegalArgumentException e) {
-            Ui.fail(e.getMessage());
-        }
+        taskList.finishTask(index);
+        Ui.done(taskList.getTask(index).toString());
     }
 }
 
@@ -60,14 +55,10 @@ class DeleteCommand extends Command {
     }
 
     @Override
-    public void run() {
+    public void run(TaskList taskList) throws InvalidArgumentException {
         int index = Integer.parseInt(input.get(1));
-        try {
-            Task task = TaskList.iRemove(index);
-            Ui.delete(task.toString(), TaskList.count());
-        } catch (IllegalArgumentException e) {
-            Ui.fail(e.getMessage());
-        }
+        Task task = taskList.removeTask(index);
+        Ui.delete(task.toString(), taskList.count());
     }
 }
 
@@ -77,8 +68,8 @@ class ClearCommand extends Command {
     }
 
     @Override
-    public void run() {
-        TaskList.clearAll();
+    public void run(TaskList taskList) {
+        taskList.clearAll();
         Ui.clear();
     }
 }
@@ -89,20 +80,10 @@ class TaskCommand extends Command {
     }
 
     @Override
-    public void run() {
+    public void run(TaskList taskList) throws UserException {
         Task task;
-        try {
-            task = TaskList.addTask(input);
-        } catch (IndexOutOfBoundsException e) {
-            Ui.fail("Missing argument(s)");
-            return;
-        } catch (DateTimeException e) {
-            Ui.fail(e.getMessage());
-            return;
-        } catch (Exception e) {
-            Ui.fail("An expected error has occurred.");
-            return;
-        }
-        Ui.task(task.toString());
+        if (input.size() < 4) throw new InvalidArgumentException("Missing argument(s)");
+        task = taskList.addTask(input);
+        Ui.task(task.toString(), taskList.count());
     }
 }

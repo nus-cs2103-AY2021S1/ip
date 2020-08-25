@@ -1,10 +1,12 @@
 package main.java;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
-    public static List<String> parse(String cmd) {
+    public static List<String> parseCommand(String cmd) {
         String[] splitted = cmd.split(" /");
         List<String> out = new ArrayList<>();
         for (String token : splitted) {
@@ -17,5 +19,18 @@ public class Parser {
             out.add("0");
         }
         return out;
+    }
+
+    public static LocalDateTime stringToTime(String datetimeString) throws InvalidArgumentException {
+        String[] timeTokens = datetimeString.split(" |/");
+        int time = timeTokens.length >= 4 ? Integer.parseInt(timeTokens[3]) : 0;
+        try {
+            return LocalDateTime.of(Integer.parseInt(timeTokens[2]),
+                    Integer.parseInt(timeTokens[1]),
+                    Integer.parseInt(timeTokens[0]),
+                    time / 100, time % 100);
+        } catch (DateTimeException e) {
+            throw new InvalidArgumentException("Invalid date");
+        }
     }
 }

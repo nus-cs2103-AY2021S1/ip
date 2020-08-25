@@ -3,12 +3,25 @@ package main.java;
 public class Duke {
 
     public static void run() {
+        TaskList taskList = new TaskList();
         Ui.start();
-        TaskList.readFile();
-        String input;
+        try {
+            taskList.initialize();
+        } catch (InvalidArgumentException e) {
+            Ui.wrap(() -> System.out.println("Error parsing file"));
+        }
+        String input = "";
+
         do {
-            input = Ui.feed();
-            Commands.create(Parser.parse(input)).run();
+            try {
+                input = Ui.feed();
+                Commands.create(Parser.parseCommand(input)).run(taskList);
+            } catch (UserException e) {
+                Ui.wrap(() -> System.out.println(e.getMessage()));
+            } catch (Exception e) {
+                System.out.println("Unhandled exception:");
+                System.out.println(e.getMessage());
+            }
         }
         while (!input.equals("bye"));
         Ui.close();

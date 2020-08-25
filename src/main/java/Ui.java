@@ -38,10 +38,10 @@ public class Ui {
         wrap(() -> System.out.println("See you again!"));
     }
 
-    public static void list() {
+    public static void list(List<String> tasks) {
         wrap(() -> {
             System.out.println("Here are the tasks in your list: ");
-            List<String> output = TaskList.printTasks();
+            List<String> output = tasks;
             for (String s : output) {
                 System.out.println(s);
             }
@@ -69,15 +69,11 @@ public class Ui {
         });
     }
 
-    public static void task(String task) {
+    public static void task(String task, int count) {
         wrap(() -> {
             System.out.println("Got it. I've added this task: ");
             System.out.println("    " + task);
-            System.out.printf("Now you have %d tasks in the list. \n", TaskList.count());
+            System.out.printf("Now you have %d tasks in the list. \n", count);
         });
-    }
-
-    public static void fail(String error) {
-        wrap(() -> System.out.println(error));
     }
 }

@@ -5,20 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private static List<Task> database = new ArrayList<>();
+    private List<Task> database = new ArrayList<>();
 
-    public static Task addTask(List<String> tokens) {
+    public Task addTask(List<String> tokens) throws InvalidArgumentException {
         Task task;
         String datetimeString = tokens.get(2).trim();
-        LocalDateTime datetime = LocalDateTime.MIN;
-        if (!datetimeString.equals("null")) {
-            String[] timeTokens = datetimeString.split(" |/");
-            int time = timeTokens.length >= 4 ? Integer.parseInt(timeTokens[3]) : 0;
-            datetime = LocalDateTime.of(Integer.parseInt(timeTokens[2]),
-                    Integer.parseInt(timeTokens[1]),
-                    Integer.parseInt(timeTokens[0]),
-                    time / 100, time % 100);
-        }
+        LocalDateTime datetime = (datetimeString.equals("null"))
+                ? LocalDateTime.MIN
+                : Parser.stringToTime(datetimeString);
+
         switch (tokens.get(0)) {
             case "todo":
                 task = new Todo(tokens.get(1).trim());
@@ -37,45 +32,45 @@ public class TaskList {
         return task;
     }
 
-    public static Task getTask(int index) {
+    public Task getTask(int index) throws InvalidArgumentException {
         if (index <= 0 || index > database.size()) {
-            throw new IllegalArgumentException("Invalid argument for the LIST command.");
+            throw new InvalidArgumentException("Invalid argument for the LIST command.");
         }
         return database.get(index - 1);
     }
 
-    public static void iDone(int index) {
+    public void finishTask(int index) throws InvalidArgumentException {
         if (index <= 0 || index > database.size()) {
-            throw new IllegalArgumentException("Out of range argument for DONE command.");
+            throw new InvalidArgumentException("Out of range argument for DONE command.");
         }
         database.get(index - 1).markAsDone();
     }
 
-    public static Task iRemove(int index) {
+    public Task removeTask(int index) throws InvalidArgumentException {
         if (index <= 0 || index > database.size()) {
-            throw new IllegalArgumentException("Out of range argument for DELETE command.");
+            throw new InvalidArgumentException("Out of range argument for DELETE command.");
         }
         return database.remove(index - 1);
     }
 
-    public static void readFile() {
+    public void initialize() throws InvalidArgumentException {
         List<List<String>> data = Storage.readFile();
         for (List<String> tokens: data) {
             addTask(tokens);
         }
     }
 
-    public static void writeFile() {
+    public void save() {
         Storage.writeFile(database);
     }
 
-    public static int count() { return database.size();}
+    public int count() { return database.size();}
 
-    public static void clearAll() {
+    public void clearAll() {
         database.clear();
     }
 
-    public static List<String> printTasks() {
+    public List<String> printTasks() {
         List<String> output = new ArrayList<>();
         for (int i = 0; i < database.size(); i++) {
             output.add((i + 1) + "." + database.get(i));
