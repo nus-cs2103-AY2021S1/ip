@@ -1,5 +1,7 @@
 package main.java;
 
+import main.java.tasks.*;
+
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -78,13 +80,13 @@ public class Storage {
                 Task task = taskList.get(i);
                 String isLoaded = task.isDone() ? "1" : "0";
                 if (task.getClass().isAssignableFrom(ToDo.class)) {
-                    String s = "T@" + isLoaded + "@" + task.description;
+                    String s = "T@" + isLoaded + "@" + task.getDescription();
                     output.write(s);
                 } else if (task.getClass().isAssignableFrom(Event.class)){
-                    String s = "E@" + isLoaded + "@" + task.description + "@" + ((Event) task).time;
+                    String s = "E@" + isLoaded + "@" + task.getDescription() + "@" + ((Event) task).getTime();
                     output.write(s);
                 } else {
-                    String s = "D@" + isLoaded + "@" + task.description + "@" + ((Deadline) task).by;
+                    String s = "D@" + isLoaded + "@" + task.getDescription() + "@" + ((Deadline) task).getBy();
                     output.write(s);
                 }
                 output.newLine();

@@ -1,4 +1,4 @@
-package main.java;
+package tasks;
 
 public class Task {
     protected TaskStates state;
@@ -7,6 +7,11 @@ public class Task {
     Task(String task){
         state = TaskStates.UNDONE;
         this.description = task;
+    }
+
+
+    public String getDescription(){
+        return description;
     }
 
     // set task as done

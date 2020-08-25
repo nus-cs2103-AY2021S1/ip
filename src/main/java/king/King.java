@@ -1,7 +1,5 @@
 package main.java;
-import com.sun.source.util.TaskListener;
-
-import java.util.ArrayList;
+import main.java.tasks.TaskList;
 import java.util.Scanner;
 
 public class King {
