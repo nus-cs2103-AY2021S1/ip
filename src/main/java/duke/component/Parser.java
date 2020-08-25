@@ -1,17 +1,16 @@
 package duke.component;
 
 import duke.command.*;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.task.*;
 
 public class Parser {
 
     public static Command parse(String input) throws DukeException {
-        if (input.equals("bye")) return new ByeCommand();
-        else if (input.equals("list")) return new ListCommand();
-        else if (input.startsWith("done")) {
+        if (input.equals("bye")){
+            return new ByeCommand();
+        } else if (input.equals("list")) {
+            return new ListCommand();
+        } else if (input.startsWith("done")) {
             if (input.length() <= 5) {
                 throw new DukeException("I don't know which task should be marked as completed.");
             }

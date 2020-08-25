@@ -1,8 +1,8 @@
 package duke.component;
 
-import duke.task.Task;
-
 import java.util.LinkedList;
+
+import duke.task.Task;
 
 public class TaskList{
     private LinkedList<Task> list;
