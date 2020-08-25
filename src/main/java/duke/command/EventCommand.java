@@ -6,6 +6,12 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.Event;
 
+/**
+ * The EventCommand class contains methods pertaining to the EventCommand.
+ *
+ *  @author  Yen Pin Hsuan
+ *  @version 1.0
+ */
 public class EventCommand extends Command {
 
     @Override

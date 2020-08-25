@@ -6,6 +6,12 @@ import duke.Ui;
 import duke.DukeException;
 import duke.task.Task;
 
+/**
+ * The DoneCommand class contains methods pertaining to the DoneCommand.
+ *
+ *  @author  Yen Pin Hsuan
+ *  @version 1.0
+ */
 public class DoneCommand extends Command {
     @Override
     public void execute(TaskList taskList, Storage storage, Ui ui){
