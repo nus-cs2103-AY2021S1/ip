@@ -29,7 +29,7 @@ public final class Parser {
 	/**
 	 * Reads a String and splits it to create a new duke.Tasks.Task based on its type and values.
 	 * Format: Type | Completed | Name | Time
-	 * Example: "[D],, 1,, duke.Tasks.Deadline,, 23-08-2020"
+	 * Example: "[D],, 1,, deadline,, 23-08-2020"
 	 *
 	 * @param line the String from the csv to be parsed
 	 * @return A duke.Tasks.Task object
