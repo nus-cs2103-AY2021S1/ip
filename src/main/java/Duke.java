@@ -118,7 +118,6 @@ public class Duke {
         }
     }
 
-<<<<<<< HEAD
     public static void saveToFile(List<Task> taskList) throws DukeException {
         try {
             java.nio.file.Path pathToDirectory = java.nio.file.Paths.get("data");
@@ -137,14 +136,15 @@ public class Duke {
 
         } catch (IOException ioException) {
             throw new DukeException("OOPS!! Unable to save task list.");
-=======
+        }
+    }
+
     public static LocalDateTime generateDateTime(String dateTimeString) throws DukeException {
         try {
             return LocalDateTime.parse(dateTimeString.trim(),
                     DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
         } catch (DateTimeException dateTimeException) {
             throw new DukeException("OOPS!!! Please enter a valid date and time in the format 'DD-MM-YYYY HHMM'!");
->>>>>>> branch-Level-8
         }
     }
 
