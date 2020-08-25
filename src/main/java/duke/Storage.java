@@ -99,7 +99,7 @@ public class Storage {
                     taskToAdd = new Event(description, isDone, LocalDate.parse(time));
                     break;
                 default:
-                   throw new DukeException("duke.task.Task cannot be read from Duke.txt");
+                   throw new DukeException("Task cannot be read from Duke.txt");
                 }
                 tasksInMemory.add(taskToAdd);
             }

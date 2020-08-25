@@ -23,7 +23,7 @@ public class DoneCommand extends Command {
             ui.doneTaskReply(task);
             storage.saveTaskToMemory(taskItems.getAll());
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("duke.task.Task number does not exist");
+            throw new DukeException("Task number does not exist");
         }
     }
 

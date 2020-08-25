@@ -1,13 +1,6 @@
 package duke;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.ListCommand;
-import duke.command.ToDoCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -27,6 +20,8 @@ public class Parser {
             return new ByeCommand();
         } else if (command.equals("list")) {
             return new ListCommand();
+        } else if (command.equals("clear")) {
+            return new ClearCommand();
         } else {
             try {
                 switch (command) {
@@ -34,6 +29,9 @@ public class Parser {
                     return new DoneCommand(reply);
                 case "delete":
                     return new DeleteCommand(reply);
+                case "find":
+                    String args = reply.substring(5);
+                    return new FindCommand(args);
                 case "todo":
                     Task newTodo = new ToDo(reply.substring(5));
                     return new ToDoCommand(newTodo);
@@ -51,7 +49,7 @@ public class Parser {
                     return new EventCommand(newEvent);
                 default:
                     throw new DukeException(
-                            "Invalid Command Exception, start every cmd with todo, deadline or event");
+                            String.format("Invalid Command Exception: %s is not a valid command.", command));
                 }
             } catch (DateTimeParseException e) {
                 throw new DukeException(String.format(

@@ -35,6 +35,10 @@ public class TaskList {
        return taskList.size();
     }
     
+    public void clearAll() {
+        taskList.clear();
+    }
+    
     @Override
     public String toString() {
             String formattedListString = "";
