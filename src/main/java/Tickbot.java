@@ -39,20 +39,13 @@ public class Tickbot {
             case "done": {
                 try {
                     int index = Integer.parseInt(args[1]) - 1;
-                    Task task = tasks.get(index);
-                    if (task.isCompleted()) {
-                        printMessage("Task already completed.");
-                    } else {
-                        task.setCompleted(true);
-                        printMessage("Task completed: " + task);
-                    }
+                    tasks.complete(index);
                 } catch (NumberFormatException err) {
                     printMessage("Invalid Syntax.");
                     printMessage("Usage: done <task_index>");
                 } catch (IndexOutOfBoundsException err) {
                     printMessage("Sorry, No such task found.");
                 }
-                tasks.update();
                 break;
             }
             case "delete": {
@@ -62,14 +55,12 @@ public class Tickbot {
                     tasks.remove(index);
                     printMessage("Task removed: " + task);
                     printMessage("You have " + tasks.size() + " task(s) in task list.");
-                    tasks.update();
                 } catch (NumberFormatException err) {
                     printMessage("Invalid Syntax.");
                     printMessage("Usage: delete <task_index>");
                 } catch (IndexOutOfBoundsException err) {
                     printMessage("Sorry, No such task found.");
                 }
-                tasks.update();
                 break;
             }
             case "list": {
@@ -143,7 +134,6 @@ public class Tickbot {
             tasks.add(task);
             printMessage(taskName + " added: " + task);
             printMessage("You have " + tasks.size() + " task(s) in task list.");
-            tasks.update();
         } catch (IndexOutOfBoundsException err) {
             printMessage("Please input valid time after " + timeMarker + ".");
             printAddTaskUsage(args[0], timeMarker);
