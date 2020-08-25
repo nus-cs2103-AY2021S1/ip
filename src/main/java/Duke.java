@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -101,10 +102,7 @@ public class Duke {
             } else {
                 int index = input.indexOf(" /by ");
                 String description = input.substring(9, index);
-                String time = input.substring(index + 5);
-                Deadline newDeadline = new Deadline(description, time);
-                addNewTask(newDeadline);
-                String date = input.substring(index + 4);
+                String date = input.substring(index + 5);
                 try {
                     LocalDate deadlineDate = LocalDate.parse(date);
                     Deadline newDeadline = new Deadline(description, deadlineDate);
@@ -127,7 +125,7 @@ public class Duke {
             } else {
                 int index = input.indexOf(" /at ");
                 String description = input.substring(6, index);
-                String date = input.substring(index + 4);
+                String date = input.substring(index + 5);
                 try {
                     LocalDate eventDate = LocalDate.parse(date);
                     Event newEvent = new Event(description, eventDate);
@@ -145,7 +143,7 @@ public class Duke {
         String input = sc.nextLine();
         if (input.equals("bye")) {
             endChat();
-        } else if (input.equals("list")) {
+        } else if (input.equals("list") || input.equals("list ")) {
             list();
             chat();
         } else {
@@ -183,9 +181,9 @@ public class Duke {
                     int index = s.lastIndexOf(" |");
                     String dateTime = s.substring(index + 3);
                     if (s.startsWith("D")) {
-                        currentTask = new Deadline(s.substring(8, index), dateTime);
+                        currentTask = new Deadline(s.substring(8, index), LocalDate.parse(dateTime));
                     } else if (s.startsWith("E")) {
-                        currentTask = new Event(s.substring(8, index), dateTime);
+                        currentTask = new Event(s.substring(8, index), LocalDate.parse(dateTime));
                     }
                 }
 
