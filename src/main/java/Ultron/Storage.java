@@ -14,15 +14,16 @@ import ultron.exceptions.UltronException;
 import ultron.exceptions.ExceptionType;
 import ultron.commands.TaskCommand;
 
-/**
- * The main Storage class for Ultron
- */
+
 public class Storage {
 
+    /**
+     * To store the datafile location.
+     */
     private final File f;
 
     /**
-     * The Storage class
+     * The Storage class.
      * This writes the data to a file and retrieves it when needed
      * @param path Path to the storage file
      */
@@ -33,7 +34,7 @@ public class Storage {
     }
 
     /**
-     * Encodes a Task to a string
+     * Encodes a Task to a string.
      * @param task A Task to be encoded
      * @return String The encoded String of the task
      */
@@ -46,7 +47,7 @@ public class Storage {
     }
 
     /**
-     * Decodes a string to a Task
+     * Decodes a string to a Task.
      * @param string String to be decoded to a Task
      * @return task A task based on the string
      * @throws UltronException If the command or line is invalid
@@ -75,7 +76,7 @@ public class Storage {
     }
 
     /**
-     * Fetches all of the data in the storage file to an arraylist of task
+     * Fetches all of the data in the storage file to an arraylist of task.
      * @return taskArrayList An Arraylist containing the tasks stored
      * @throws UltronException If there is an error decoding the file or if there is an IO error
      */
@@ -97,6 +98,11 @@ public class Storage {
 
     }
 
+    /**
+     * Writes all the task in the tasklist to a folder.
+     * @param taskArrayList     Tasklist containing all the tasks
+     * @throws UltronException  If there are any IO errors
+     */
     public void writeAll(ArrayList<Task> taskArrayList) throws UltronException{
 
         //Check if the directory exist

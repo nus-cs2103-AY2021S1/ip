@@ -7,11 +7,21 @@ import ultron.TaskList;
 import ultron.UI;
 
 public class ListCommand extends Command {
-
+    /**
+     * Constructor for List command.
+     * @param arguments Arguments needed for list command
+     */
     public ListCommand(String arguments){
         super(false, arguments);
     }
 
+    /**
+     * Execute the list command.
+     * @param taskList  List of tasks
+     * @param ui        UI for Ultron
+     * @param storage   Storage for Ultron
+     * @throws UltronException if there are > 0 arguments
+     */
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) throws UltronException {
 
@@ -28,7 +38,7 @@ public class ListCommand extends Command {
         } else {
 
             //Print the starting list
-            System.out.println("Heh, you cant even remember what you had");
+            ui.print("Heh, you cant even remember what you had\n");
 
             //Iterate through the task and print it
             for(int i = 0; i< taskList.size(); ++i){

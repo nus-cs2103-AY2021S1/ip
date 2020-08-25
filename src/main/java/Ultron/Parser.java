@@ -15,13 +15,22 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
-    //Get the pattern for the regex for parsing the command
+    /**
+     * The regex pattern for checking the commands and inputs.
+     */
     private static final Pattern pattern = Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
 
-    private static Command checkInput(final String input, final String arguments) throws UltronException {
+    /**
+     * Check the input string and arguments.
+     * @param command   Input command of the user
+     * @param arguments Arguments provided by the user
+     * @return Command corresponding to the input given by user
+     * @throws UltronException if there are errors in getting the command
+     */
+    private static Command checkInput(final String command, final String arguments) throws UltronException {
 
         //Switch case to process the commands
-        switch (input) {
+        switch (command) {
         //If the user keys in bye
         case "bye":
             return new ByeCommand(arguments);
@@ -44,11 +53,17 @@ public class Parser {
 
         //Otherwise it will be a task to be added
         default:
-            return new TaskAllocator(input, arguments);
+            return new TaskAllocator(command, arguments);
         }
 
     }
 
+    /**
+     * Parse the integer provided by the user.
+     * @param args
+     * @return int parsedInteger
+     * @throws UltronException if there is an error parsing the integer
+     */
     public static int parseInteger(final String args) throws UltronException {
         //Catch any errors in the number
         try {
@@ -63,6 +78,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parsing commands.
+     * @param input raw input of the user
+     * @return Command corresponding to the raw input
+     * @throws UltronException
+     */
     public static Command parseCommand(String input) throws UltronException{
         //Use regex to get the grp
         Matcher inputs = pattern.matcher(input);

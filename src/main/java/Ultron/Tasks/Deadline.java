@@ -10,12 +10,28 @@ import java.text.SimpleDateFormat;
 public class Deadline extends Task {
 
     //Store the variables
+    /**
+     * String to store the string time.
+     */
     private String at = null;
+
+    /**
+     * String to store the date time.
+     */
     private Date date = null;
+
+    /**
+     * Pattern string the regex for parsing the command.
+     */
     private static final Pattern DATEMATCH =
             Pattern.compile("^(.*) (/by) (.*)$");
     private static final DateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm");
 
+    /**
+     * A Deadline Task.
+     * @param description   Description for the task
+     * @param by            The deadline for the task in string format
+     */
     //Constructor for the event class
     public Deadline(final String description, final String by) {
 
@@ -26,6 +42,11 @@ public class Deadline extends Task {
         at = by;
     }
 
+    /**
+     * A Deadline Task.
+     * @param description   Description for the task
+     * @param by            The deadline for the task in Date format
+     */
     //Constructor for the event class
     public Deadline(final String description, final Date by) {
 
@@ -37,6 +58,7 @@ public class Deadline extends Task {
     }
 
     /**
+     * Get the date of the deadline.
      * @return date Date of the event
      */
     //Getter for the date of the
@@ -50,17 +72,30 @@ public class Deadline extends Task {
 
     }
 
+    /**
+     * Return the Type of Task as a string.
+     * @return  String type
+     */
     @Override
     public String getType() {
         return "DEADLINE";
     }
 
+    /**
+     * Returns the task as a command string.
+     * @return String command
+     */
     @Override
     public String getCommand() {
         return String.format("%s /by %s", getMessage(), getDate());
     }
 
-    public static Task parseCommand(final String args) {
+    /**
+     * Parse the command for the deadline class.
+     * @param args arguments given for the command
+     * @return  Deadline with the arguments parsed
+     */
+    public static Deadline parseCommand(final String args) {
         //Create the matcher
         Matcher matcher = DATEMATCH.matcher(args);
 
@@ -87,6 +122,10 @@ public class Deadline extends Task {
 
     }
 
+    /**
+     * String representation of deadline.
+     * @return String representation of Deadline
+     */
     @Override
     public String toString() {
         return "[D]"

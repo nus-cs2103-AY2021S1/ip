@@ -4,14 +4,24 @@ import java.util.Scanner;
 
 public class UI {
 
-    // Create the scanner object
+    /**
+     * Store the scanner object.
+     */
     private final Scanner scanner;
+
+    /**
+     * UI to handle all the displaying.
+     */
     public UI() {
 
         //Create a new scanner object
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Show the error as output to System out.
+     * @param message message to be shown
+     */
     public void showError(final String message) {
         //Wrapper when printing the error message
         System.out.println("Heh, you can't even type in a correct command\n"
@@ -20,6 +30,10 @@ public class UI {
                 + "Use 'help' for more information");
     }
 
+    /**
+     * Get a line of input from system in.
+     * @return String input received
+     */
     public String getInput() {
 
         //Declare type
@@ -32,15 +46,25 @@ public class UI {
         return input;
     }
 
+    /**
+     * Prints a message.
+     * @param argument  message to be printed
+     */
     public void print(String argument){
         System.out.print(argument);
     }
 
+    /**
+     * Prints the end message to stdout.
+     */
     public void printEnd() {
         // Print the end message
         System.out.println("Clearly you were not worth my time.");
     }
 
+    /**
+     * Prints the intro message.
+     */
     public void printIntro() {
         // Print the intro messages
 
@@ -60,6 +84,9 @@ public class UI {
         showLine();
     }
 
+    /**
+     * Prints the new line separator.
+     */
     public void showLine() {
         System.out.println("_______________________________"
                 + "_____________________________\n");

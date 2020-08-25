@@ -7,15 +7,25 @@ import java.util.ArrayList;
 
 public class Ultron {
 
-    //Task list to store the tasks
+    /**
+     * Task list to store the tasks.
+     */
     private TaskList taskList;
 
-    //Create a UI class
+    /**
+     * Store the UI class.
+     */
     private final UI ui;
 
-    //Get the storage
+    /**
+     * Store the Storage.
+     */
     private final Storage storage;
 
+    /**
+     * The Ultron class.
+     * @param path  path to the datafile which stores the tasks
+     */
     public Ultron(String path){
 
         //Create the Storage object
@@ -38,6 +48,9 @@ public class Ultron {
 
     }
 
+    /**
+     * Mainloop to run Ultron.
+     */
     public void mainLoop() {
 
         //Print the intro
@@ -60,6 +73,10 @@ public class Ultron {
         }
     }
 
+    /**
+     * Entry point of the code.
+     * @param args Command line arguments provided
+     */
     public static void main(final String[] args) {
 
         //Create a new duke

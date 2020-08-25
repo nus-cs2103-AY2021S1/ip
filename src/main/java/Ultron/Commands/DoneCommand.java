@@ -9,14 +9,29 @@ import ultron.UI;
 
 public class DoneCommand extends Command {
 
+    /**
+     * Contructor for Done Command.
+     * @param arguments
+     */
     public DoneCommand(String arguments){
         super(false, arguments);
     }
 
+    /**
+     * Execute the done command.
+     * @param taskList  List of tasks
+     * @param ui        UI for Ultron
+     * @param storage   Storage for Ultron
+     * @throws UltronException if there are too much or too little arguments
+     */
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) throws UltronException {
         //Initialise index
         int index = Parser.parseInteger(this.getArguments());
+
+        if (this.getArguments().trim().length() < 1){
+            throw new UltronException("done", ExceptionType.NO_ARGUMENTS_SUPPLIED);
+        }
 
         if (this.getArguments().trim().length() > 1){
             throw new UltronException("done", ExceptionType.TOO_MUCH_ARGUMENTS);
