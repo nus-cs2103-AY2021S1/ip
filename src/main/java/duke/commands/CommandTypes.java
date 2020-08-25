@@ -35,8 +35,6 @@ public enum CommandTypes {
         }
     },
     EVENT {
-        private static final String noDateTimeErrorMessage = "OOPS!!! Missing deadline date/time";
-
         @Override
         public void checkInput(String input) throws DukeException {
             input = input.replaceFirst("^event", "");
@@ -53,8 +51,6 @@ public enum CommandTypes {
         }
     },
     DEADLINE {
-        private static final String noDateTimeErrorMessage = "OOPS!!! Missing deadline date/time";
-
         @Override
         public void checkInput(String input) throws DukeException {
             input = input.replaceFirst("^(?i)deadline", "");
@@ -71,24 +67,20 @@ public enum CommandTypes {
         }
     },
     DONE {
-        private static final String invalidTaskIndexErrorMessage = "Invalid task index! Please choose another index.";
-
         @Override
         public void checkInput(String input) throws DukeException {
             String patternString = "^(?i)done\\s+\\d+\\s*$";
             if (!Pattern.matches(patternString, input)) {
-                throw new DukeException(invalidTaskIndexErrorMessage);
+                throw new DukeException(ResourceHandler.getMessage("commandline.invalidTaskIndexErrorMessage"));
             }
         }
     },
     DELETE {
-        private static final String invalidTaskIndexErrorMessage = "Invalid task index! Please choose another index.";
-
         @Override
         public void checkInput(String input) throws DukeException {
             String patternString = "^(?i)delete\\s+\\d+\\s*$";
             if (!Pattern.matches(patternString, input)) {
-                throw new DukeException(invalidTaskIndexErrorMessage);
+                throw new DukeException(ResourceHandler.getMessage("commandline.invalidTaskIndexErrorMessage"));
             }
 
         }

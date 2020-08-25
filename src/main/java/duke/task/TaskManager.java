@@ -1,8 +1,6 @@
 package duke.task;
 
-import duke.exceptions.InvalidTaskIndexException;
 import duke.utils.Colour;
-import duke.utils.ResourceHandler;
 
 import java.util.List;
 import java.util.ArrayList;

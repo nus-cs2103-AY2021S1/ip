@@ -8,7 +8,10 @@ import duke.commands.Command;
 import duke.commands.ListTasksCommand;
 import duke.commands.ExitCommand;
 
-import duke.task.*;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.task.DukeDateTime;
 
 import duke.utils.ResourceHandler;
 
