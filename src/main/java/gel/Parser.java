@@ -32,7 +32,7 @@ public class Parser {
             int minute = Integer.parseInt(time.substring(2));
             return LocalDateTime.of(year, month, dayOfMonth, hour, minute);
         } catch (Exception e) {
-            throw new GelException("    Please make sure that your date and time"
+            throw new GelException("    Please make sure that your date and time "
                     + "are numbers within the calendar and 24 hour clock");
         }
     }

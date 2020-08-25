@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class Storage {
 
-    String filePath;
-    String directoryPath;
+    private String filePath;
+    private String directoryPath;
 
     public Storage(String filePath) {
         int fileIndex = filePath.lastIndexOf("/");

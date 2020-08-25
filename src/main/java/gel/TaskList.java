@@ -34,7 +34,7 @@ public class TaskList {
         ui.markTaskAsDoneMsg(taskToBeDone);
     }
 
-    public void deleteTask(String deleteNumber) throws Exception {
+    public void deleteTask(String deleteNumber) {
         int taskNo = Integer.parseInt(deleteNumber);
         Task taskToBeDeleted = listOfTask.remove(taskNo - 1);
         ui.taskRemoveMsg(taskToBeDeleted, listOfTask.size());
