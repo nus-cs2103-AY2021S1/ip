@@ -12,6 +12,8 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    public static final String FILENAME = System.getProperty("user.dir") + "/data/duke.txt";
+
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -42,8 +44,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String filePath = "/Users/tengjianling/ip/data/duke.txt";
-        new Duke(filePath).run();
+
+        new Duke(FILENAME).run();
     }
 }
 

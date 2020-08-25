@@ -11,10 +11,7 @@ import duke.task.Task;
 public class Parser {
 
     public static Command parse(String userInput) {
-
-        String fileString = "";
         Task t = new Task(userInput);
-
 
         if (userInput.equals("list")) {
             return new ListCommand(userInput);
@@ -25,11 +22,8 @@ public class Parser {
         } else if (userInput.equals("bye")) {
             return new ExitCommand(userInput);
         } else {
-
             return new AddCommand(userInput);
         }
-
-
     }
 }
 

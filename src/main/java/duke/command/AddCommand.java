@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Duke;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -34,7 +35,7 @@ public class AddCommand extends Command {
                 fileString += todo.taskToText() + "\n";
 
                 // saves fileString to txt file
-                Storage.save("/Users/tengjianling/ip/data/duke.txt", fileString);
+                Storage.save(Duke.FILENAME, fileString);
 
                 // print template message
                 System.out.println("    Got it. I've added this task:\n"
@@ -47,7 +48,7 @@ public class AddCommand extends Command {
                 fileString += d.taskToText() + "\n";
 
                 // saves fileString to txt file
-                Storage.save("/Users/tengjianling/ip/data/duke.txt", fileString);
+                Storage.save(Duke.FILENAME, fileString);
 
                 System.out.println("    Got it. I've added this task:\n"
                         + "        " + d + '\n'
@@ -59,7 +60,7 @@ public class AddCommand extends Command {
                 fileString += e.taskToText() + "\n";
 
                 // saves fileString to txt file
-                Storage.save("/Users/tengjianling/ip/data/duke.txt", fileString);
+                Storage.save(Duke.FILENAME, fileString);
 
                 System.out.println("    Got it. I've added this task:\n"
                         + "        " + e + '\n'

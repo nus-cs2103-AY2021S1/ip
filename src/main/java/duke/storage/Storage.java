@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.Duke;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -25,7 +26,6 @@ public class Storage {
         if (first == 'T') {
             des = "todo ";
             des += input.substring(8);
-
         } else {
             String temp = input.substring(8);
             String taskDescription = temp.substring(0, temp.indexOf(" |"));
@@ -54,7 +54,6 @@ public class Storage {
             String input = s.nextLine();
             tasksStrings.add(input);
         }
-
     }
 
     public ArrayList<Task> load() throws DukeException {
@@ -80,8 +79,6 @@ public class Storage {
                 tasksArray.add(t.convertToEvent());
             }
         }
-
-
         return tasksArray;
     }
 
@@ -92,14 +89,12 @@ public class Storage {
     }
 
     public static void save(String filePath, String textToAdd) {
-
         // writes fileString to .txt file
         try {
-            writeToFile("/Users/tengjianling/ip/data/duke.txt", textToAdd);
+            writeToFile(Duke.FILENAME, textToAdd);
         } catch (IOException e) {
             System.out.println("Oops, something went wrong: " + e.getMessage());
         }
     }
-
 }
 

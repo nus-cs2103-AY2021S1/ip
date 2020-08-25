@@ -64,7 +64,6 @@ public class Task {
         return des.substring(des.indexOf('/') + 4, des.length());
     }
 
-
     public boolean isSingleWord() {
         return !this.description.contains(" ");
     }
@@ -109,10 +108,6 @@ public class Task {
                     + " | " + this.getDate()
                     : "E | 0 | " + task.substring(0, task.indexOf('/') - 1)
                     + " | " + this.getDate());
-
-
-
-
         } else {
             return "";
         }
@@ -161,7 +156,6 @@ public class Task {
         String task = des.substring(des.indexOf(" "));
         if (this.isTodo()) {
             return "[" + this.getStatusIcon() + "] " + task;
-
         } else {
             return "[" + this.getStatusIcon() + "] " + task.substring(0, task.indexOf('/') - 1);
         }

@@ -4,11 +4,8 @@ import java.awt.desktop.SystemEventListener;
 import java.util.Scanner;
 
 public class Ui {
-
-
     public void showLoadingError() {
         System.out.println("Something went wrong");
-
     }
 
     public void showWelcome() {
