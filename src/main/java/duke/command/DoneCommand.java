@@ -24,5 +24,6 @@ public class DoneCommand extends Command {
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("Can't complete a task that does not exist.");
         }
+        storage.save(tasks);
     }
 }

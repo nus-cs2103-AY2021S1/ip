@@ -16,9 +16,11 @@ public class AddCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        tasks.addTasks(task);
         String echoizer = "\t Got it. I've added this task:\n"
                 + "\t %s\n"
                 + "\t Now you have %d tasks in the list.\n";
-        ui.showAction(String.format(echoizer, task, tasks.size()));
+        ui.showAction(String.format(echoizer, task, tasks.numTasks()));
+        storage.save(tasks);
     }
 }

@@ -2,6 +2,7 @@ package duke.storage;
 
 import duke.exception.DukeException;
 import duke.task.Task;
+import duke.task.TaskList;
 
 import java.util.ArrayList;
 
@@ -14,17 +15,16 @@ import java.io.BufferedReader;
 
 public class Storage {
 
-    private String filePath;
-    private String folderPath;
+    private File file;
+    private File folder;
 
     public Storage(String filePath, String folderPath) {
-        this.filePath = System.getProperty("user.dir") + filePath;
-        this.folderPath = System.getProperty("user.dir") + folderPath;
+        this.file = new File(System.getProperty("user.dir") + filePath);
+        this.folder = new File(System.getProperty("user.dir") + folderPath);
+
     }
 
     public ArrayList<String> load() throws DukeException {
-        File folder = new File(folderPath);
-        File file = new File(filePath);
 
         if (!folder.exists()) {
             folder.mkdir();
@@ -44,7 +44,6 @@ public class Storage {
                 taskList.add(line);
             }
             bufferedReader.close();
-
         } catch (FileNotFoundException ex) {
             throw new DukeException("FileNotFoundException");
         } catch (IOException exception) {
@@ -53,8 +52,7 @@ public class Storage {
         return taskList;
     }
 
-    public void save(ArrayList<Task> taskList) {
-        File file = new File(filePath);
+    public void save(TaskList taskList) {
         try {
             file.createNewFile();
         } catch (IOException ex) {
@@ -63,9 +61,9 @@ public class Storage {
         FileWriter fileWriter;
         try {
             fileWriter = new FileWriter(file);
-            for (Task task : taskList) {
-                String taskLine = task.toData();
-                fileWriter.write(taskLine);
+            ArrayList<String> taskStrings = taskList.tasksToText();
+            for (String string : taskStrings) {
+                fileWriter.write(string);
             }
             fileWriter.close();
         } catch (IOException ex) {

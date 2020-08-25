@@ -21,9 +21,10 @@ public class DeleteCommand extends Command {
             tasks.tasks.remove(i - 1);
             ui.showAction(String.format("\t Noted. I've removed this task:\n"
                     + "\t   %s\n"
-                    + "\t Now you have %d tasks in the list.\n", t, tasks.size()));
+                    + "\t Now you have %d tasks in the list.\n", t, tasks.numTasks()));
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("Can't delete a task that does not exist.");
         }
+        storage.save(tasks);
     }
 }

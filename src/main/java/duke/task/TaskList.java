@@ -47,10 +47,6 @@ public class TaskList {
         }
     }
 
-    public void addTask(Task task) {
-        tasks.add(task);
-    }
-
     public String listTasks() {
         String tasks = "";
         Task t;
@@ -61,7 +57,19 @@ public class TaskList {
         return tasks;
     }
 
-    public int size() {
+    public void addTasks(Task task) {
+        tasks.add(task);
+    }
+
+    public int numTasks() {
         return tasks.size();
+    }
+
+    public ArrayList<String> tasksToText() {
+        ArrayList<String> strings = new ArrayList<>();
+        for (Task task : tasks) {
+            strings.add(task.toData());
+        }
+        return strings;
     }
 }

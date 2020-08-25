@@ -12,7 +12,7 @@ public class ExitCommand extends Command{
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showFarewell();
-        storage.save(tasks.tasks);
+        storage.save(tasks);
         System.exit(0);
     }
 
