@@ -18,6 +18,9 @@ public class Parser {
         this.tList = tList;
     }
 
+    /**
+     * Parses the user command and completes the task accordingly
+     */
     public void parseCommand() throws IOException {
         if (command.equals("bye")) {
             ui.showByeMessage();
