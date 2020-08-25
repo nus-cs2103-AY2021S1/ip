@@ -104,7 +104,7 @@ public class Duke {
                             list.get(taskNumber - 1).markedDone(true);
                             System.out.print(outputBreaker);
                             System.out.println("Congratulations! I've helped you mark the task as done:");
-                            System.out.print("\t" + list.get(taskNumber - 1).toString() + "\n");
+                            System.out.print("    " + list.get(taskNumber - 1).toString() + "\n");
 
                         } else {
                             // Index don't exist so throw exception
@@ -127,9 +127,9 @@ public class Duke {
                         if (checkList(list, taskNumber)) {
                             System.out.print(outputBreaker);
                             System.out.println("Noted! I've helped you remove the following task:");
-                            System.out.print("\t" + list.get(taskNumber - 1).toString() + "\n");
+                            System.out.print("    " + list.get(taskNumber - 1).toString() + "\n");
                             list.remove(taskNumber - 1);
-                            System.out.println("\tNow, there is " + list.size() + " tasks in the list!");
+                            System.out.println("    Now, there is " + list.size() + " tasks in the list!");
 
                         } else {
                             // Index don't exist so throw exception
