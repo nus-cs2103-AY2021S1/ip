@@ -65,7 +65,7 @@ public class TaskList {
     }
 
     /**
-     * Get size of task list.
+     * Gets size of task list.
      * 
      * @return number of items int taskList.
      */
@@ -74,8 +74,15 @@ public class TaskList {
     }
 
     /**
+     * Clears all tasks from taskList.
+     */
+    public void clearAll() {
+        taskList.clear();
+    }
+
+    /**
      * String representation of taskList.
-     * 
+     *
      * @return String object representing taskList.
      */
     @Override

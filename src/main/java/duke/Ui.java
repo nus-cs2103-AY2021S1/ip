@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.Task;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -35,12 +36,27 @@ public class Ui {
 
     /**
      * Wraps message in partitioning for clearer readability.
+     * 
      * @param reply to be wrapped in partition.
      * @return String representation of reply.
      */
     public static String replyFormatter(String reply) {
         String partition = "__________________________";
         return String.format(partition + "\n%s\n" + partition, reply);
+    }
+
+    /**
+     * Formats list object to be String representation.
+     * 
+     * @param taskItems taskItems to be converted to appropriate String representation.
+     * @return String representation of taskItems.
+     */
+    public static String listFormatter(List<Task> taskItems) {
+        String formattedListString = "";
+        for (int i = 0; i < taskItems.size(); i ++) {
+            formattedListString+= String.format("%d. %s\n", i + 1, taskItems.get(i));
+        }
+        return formattedListString;
     }
 
     /**
@@ -81,9 +97,14 @@ public class Ui {
                 , task.toString(), taskItems.getSize())));
     }
 
+    
+    public void findTaskReply(List<Task> matchingTasks) { 
+        printReply(replyFormatter(String.format("HAI. Here are matching tasks:\n%s",listFormatter(matchingTasks))));
+    }
+    
     /**
      * Prints String to console. 
-     * 
+     *
      * @param reply String to be printed.
      */
     public void printReply(String reply) {
