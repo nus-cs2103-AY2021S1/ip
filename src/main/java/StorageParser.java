@@ -14,8 +14,8 @@ public class StorageParser {
     public static Task parse(String input) {
         Task task = null;
         String[] splitTask = input.split(" ", 2);
-        String typeAndIsDone = splitTask[0].replaceFirst("\\]", "|").
-                replaceAll("\\[","").replaceAll("\\]","");
+        String typeAndIsDone = splitTask[0].replaceFirst("\\]", "|")
+                .replaceAll("\\[","").replaceAll("\\]","");
         String[] typeAndIsDoneArr = typeAndIsDone.split("\\|");
 
         if (typeAndIsDoneArr[0].equals("T")) {
@@ -23,14 +23,16 @@ public class StorageParser {
             task = new Todo(isDone, splitTask[1]);
         } else if (typeAndIsDoneArr[0].equals("D")) {
             boolean isDone = isDone(typeAndIsDoneArr[1]);
-            String organisedDescription = splitTask[1].replaceAll(" \\(by: ","|").replaceAll("\\)","");
+            String organisedDescription = splitTask[1].replaceAll(" \\(by: ","|")
+                    .replaceAll("\\)","");
             String[] splitDescription = organisedDescription.split("\\|");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mma");
             LocalDateTime localDateAndTime = LocalDateTime.parse(splitDescription[1], formatter);
             task = new Deadline(isDone, splitDescription[0], localDateAndTime);
         } else if (typeAndIsDoneArr[0].equals("E")) {
             boolean isDone = isDone(typeAndIsDoneArr[1]);
-            String organisedDescription = splitTask[1].replaceAll(" \\(at: ","|").replaceAll("\\)","");
+            String organisedDescription = splitTask[1].replaceAll(" \\(at: ","|")
+                    .replaceAll("\\)","");
             String[] splitDescription = organisedDescription.split("\\|");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mma");
             LocalDateTime localDateAndTime = LocalDateTime.parse(splitDescription[1], formatter);

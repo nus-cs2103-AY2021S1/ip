@@ -4,7 +4,7 @@ import java.util.Scanner;
  * Ui prints outputs to interact with users.
  */
 public class Ui {
-    Scanner sc;
+    private Scanner sc;
 
     /**
      * Ui constructor to initialise scanner.

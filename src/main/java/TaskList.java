@@ -5,7 +5,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    ArrayList<Task> tasks;
+    protected ArrayList<Task> tasks;
 
     /**
      * TaskList constructor initializing empty ArrayList.
