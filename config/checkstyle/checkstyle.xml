@@ -33,11 +33,7 @@
   <!-- All Java AST specific tests live under TreeWalker module. -->
   <module name="TreeWalker">
 
-    <module name="Regexp">
-      <property name="format" value="\Apackage.*"/>
-      <property name="message" value='Check that every class is in a package."' />
-      <property name="severity" value="warning"/>
-    </module>
+    <module name="PackageDeclaration"/>
 
     <module name="RegexpSinglelineJava">
       <!-- Checks that Boolean variable names sound like booleans. -->
@@ -52,15 +48,6 @@
       <property name="message" value='Check that boolean variables are named to sound like booleans."' />
       <property name="severity" value="warning"/>
     </module>
-
-    <!--
-    <module name="RegexpSinglelineJava">
-      comment Checks that names for Lists are plural. TODO: somehow this doesnt work /comment
-      <property name="format" value="List ?&lt;.*&gt; .*?(?!s)(;| =)" />
-      <property name="message" value='Check that plural form should be used on names representing a collection of objects.."' />
-      <property name="severity" value="warning"/>
-    </module>
-    -->
 
     <!-- Required to allow exceptions in code style -->
     <module name="SuppressionCommentFilter">
@@ -427,6 +414,36 @@
       <property name="minLineCount" value="1"/>
       <property name="allowMissingPropertyJavadoc" value="true"/>
       <property name="ignoreMethodNamesRegex" value="(set.*|get.*)"/>
+    </module>
+
+    <module name="MagicNumber"/>
+
+    <module name="VariableDeclarationUsageDistance">
+      <property name="severity" value="warning"/>
+    </module>
+
+    <module name="MethodLength">
+      <property name="max" value="30"/>
+      <property name="severity" value="warning"/>
+    </module>
+
+    <module name="NestedTryDepth">
+      <property name="max" value="2"/>
+      <property name="severity" value="warning"/>
+    </module>
+
+    <module name="NestedIfDepth">
+      <property name="max" value="2"/>
+      <property name="severity" value="warning"/>
+    </module>
+
+    <module name="NestedForDepth">
+      <property name="max" value="2"/>
+      <property name="severity" value="warning"/>
+    </module>
+
+    <module name="NPathComplexity">
+      <property name="severity" value="warning"/>
     </module>
 
   </module>
