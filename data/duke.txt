@@ -1,7 +1,8 @@
 [T][✓] read book
 [D][✘] return book (by: June 6 2020)
 [E][✓] project meeting (at: Aug 6 2020)
-[T][✘] join sports club
-[D][✘] CS2103T test (by: Sep 17 2020)
 [E][✓] lunch with project mates (at: Aug 8 2020)
-[D][✘] join art club (by: Apr 25 2020)
+[E][✓] lunch with JC friends (at: Sep 1 2020)
+[T][✘] watch anime Tower of God
+[D][✘] finish Black Clover (by: Aug 27 2020)
+[E][✘] AFA (at: Nov 5 2020)

@@ -3,42 +3,49 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        IntroModule.display();
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-        FileReading fileReader = new FileReading();
-        String FILE_PATH = "data/duke.txt";
+    public Duke(String filepath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filepath);
+
+        this.ui.displayWelcome();
 
         try {
-            fileReader.printFileContents(FILE_PATH);
+            this.storage.loadFileContents();
+            this.tasks = new TaskList(this.storage.getTaskList());
         } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            this.ui.displayLoadFileError();
+        } finally {
+            this.ui.displayLoadFileSuccess();
         }
+    }
 
-        StringIdentifier strIden = new StringIdentifier(fileReader.getTaskList());
-        /*
-        System.out.println("    _______________________________________________________________________");
-        strIden.displayList();
-        System.out.println("    _______________________________________________________________________\n");
-         */
-
+    public void run() {
+        Parser parser = new Parser(tasks);
         Scanner sc = new Scanner(System.in);
-        FileWriting fileWriter = new FileWriting();
 
-        while (strIden.isRunning()) {
+        while (parser.isRunning()) {
             String userInput = sc.nextLine();
 
             try {
-                strIden.checker(userInput);
+                parser.checker(userInput);
             } catch(DukeException e) {
-                System.out.println(e.getMessage());
+                ui.displayUserInputError(e.getMessage());
             }
 
             try {
-                fileWriter.writeToFile(FILE_PATH, strIden.getTasks());
+                storage.writeToFile(parser.getTasks());
             } catch (IOException e) {
-                System.out.println("Something went wrong: " + e.getMessage());
+                ui.displayUpdateFileError(e.getMessage());
             }
         }
+    }
+
+    public static void main(String[] args) {
+        String FILE_PATH = "data/duke.txt";
+        new Duke(FILE_PATH).run();
     }
 }

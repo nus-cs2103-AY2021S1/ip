@@ -1,26 +1,28 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
-public class FileReading {
-    private static List<Task> savedTasks = new ArrayList<>();
+public class Storage {
+    private static String filePath;
+    private static List<Task> savedTasks;
 
-    public static void printFileContents(String filePath) throws FileNotFoundException {
+    public Storage(String filePath) {
+        this.filePath = filePath;
+        this.savedTasks = new ArrayList<>();
+    }
+
+    public static void loadFileContents() throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
 
-        System.out.println("    _______________________________________________________________________");
-        System.out.println("     Here are the current tasks in your file:");
-
         while (s.hasNext()) {
             String taskSummary = s.nextLine();
-            System.out.println("     " + taskSummary);
-            FileReading.lineReader(taskSummary);
+            Storage.lineReader(taskSummary);
         }
-
-        System.out.println("    _______________________________________________________________________\n");
     }
 
     public static void lineReader(String task) {
@@ -37,7 +39,7 @@ public class FileReading {
             int end = task.length();
             description = task.substring(7, end);
             Todo newTodo = new Todo(description, isDone);
-            FileReading.savedTasks.add(newTodo);
+            Storage.savedTasks.add(newTodo);
 
         } else if (type.equals("E")) {
             int start = task.indexOf("(");
@@ -45,7 +47,7 @@ public class FileReading {
             timeDescription = task.substring(start + 5, end);
             description = task.substring(7, start);
             Event newEvent = new Event(description, timeDescription, isDone);
-            FileReading.savedTasks.add(newEvent);
+            Storage.savedTasks.add(newEvent);
 
         } else if (type.equals("D")) {
             int start = task.indexOf("(");
@@ -53,11 +55,22 @@ public class FileReading {
             timeDescription = task.substring(start + 5, end);
             description = task.substring(7, start);
             Deadline newDeadline = new Deadline(description, timeDescription, isDone);
-            FileReading.savedTasks.add(newDeadline);
+            Storage.savedTasks.add(newDeadline);
         }
     }
 
     public static List<Task> getTaskList() {
-        return FileReading.savedTasks;
+        return Storage.savedTasks;
+    }
+
+    public static void writeToFile(List<Task> tasksToWrite) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        int totalTasks = tasksToWrite.size();
+
+        for (int i = 0; i < totalTasks; i++) {
+            Task writeTask = tasksToWrite.get(i);
+            fw.write(writeTask.toString() + "\n");
+        }
+        fw.close();
     }
 }
