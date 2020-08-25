@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Duke {
     static String[] flavour = {"(Ф Д Ф)", "(=ↀ ω ↀ=)✧", "ฅ( *Φ ω Φ* ) ฅ", "( *Φ ω Φ* )", "(ꐦ°᷄ д °᷅)", "(ꐦ ಠ皿ಠ )", "(ꐦ°᷄ д °᷅)"};
@@ -102,7 +103,8 @@ public class Duke {
                                 throw new DukeNotSureException("What are deadlines :?             " + flavour[ran.nextInt(magic)]);
                             } else {
                                 String[] stuff = words[1].split(" /by ");
-                                Deadline newDL = new Deadline(stuff[0], stuff[1]);
+                                LocalDate day = LocalDate.parse(stuff[1]);
+                                Deadline newDL = new Deadline(stuff[0], day);
                                 ls.add(newDL);
                                 String thing = "Got it. I've added this task:\n" + newDL.getStatus().replaceAll("(?m)^", "\t")
                                         + "\nNow you have " + ls.size() + " tasks in the list.             " + flavour[ran.nextInt(magic)];
@@ -113,7 +115,8 @@ public class Duke {
                                 throw new DukeNotSureException("What event are you making :?");
                             } else {
                                 String[] stuff = words[1].split(" /at ");
-                                Event newE = new Event(stuff[0], stuff[1]);
+                                LocalDate day = LocalDate.parse(stuff[1]);
+                                Event newE = new Event(stuff[0], day);
                                 ls.add(newE);
                                 String thing = "Got it. I've added this task:\n" + newE.getStatus().replaceAll("(?m)^", "\t")
                                         + "\nNow you have " + ls.size() + " tasks in the list.             " + flavour[ran.nextInt(magic)];
