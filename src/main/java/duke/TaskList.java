@@ -13,18 +13,33 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/** Contains the task list. */
 public class TaskList {
 
+    /** The task list. */
     private ArrayList<Task> list;
 
+    /**
+     * Constructs a @TaskList.
+     *
+     * @param taskList The task list containing saved tasks.
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.list = taskList;
     }
 
+    /** Constructs a @TaskList. */
     public TaskList() {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Compares two objects.
+     *
+     * @param o The object to compare.
+     * @return True if the objects the same, in other words if the object is a @TaskList
+     *         with a list containing the same tasks.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -37,6 +52,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Processes the @list command.
+     *
+     * @param fullCommand The full command given by the user.
+     * @throws InvalidDateException If the command is of the format @list @[description]
+     *         but the @[description] is in not in a valid date format.
+     */
     public void processList(String fullCommand) throws InvalidDateException {
         if (fullCommand.trim().equalsIgnoreCase("list")) {
             printList();
@@ -50,6 +72,7 @@ public class TaskList {
         }
     }
 
+    /** Prints the tasks in the list. */
     private void printList() {
 
         if (list.size() == 0) {
@@ -64,6 +87,12 @@ public class TaskList {
 
     }
 
+    /**
+     * An overload of the @list command.
+     * Prints the tasks occurring on the same @date in the list.
+     *
+     * @param date The date given by the user.
+     */
     private void printList(LocalDate date) {
 
         int i = 0;
@@ -85,6 +114,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a @ToDo task to the task list.
+     *
+     * @param task The description of the @ToDo task.
+     * @throws DuplicateTaskException If an existing @ToDo task is already on the list.
+     */
     public void addToDo(String task) throws DuplicateTaskException {
         Task toDo = new ToDo(task.trim());
         if (list.contains(toDo)) {
@@ -94,6 +129,14 @@ public class TaskList {
         list.add(toDo);
     }
 
+    /**
+     * Adds an @Event to the task list.
+     *
+     * @param input The description of the @Event.
+     * @throws DuplicateTaskException If an existing @Event with the same description
+     *         and date is already on the list.
+     * @throws EventInvalidDate If the date of the event given is not in a valid date time format.
+     */
     public void addEvent(String input) throws DuplicateTaskException, EventInvalidDate {
 
         try {
@@ -130,6 +173,14 @@ public class TaskList {
 
     }
 
+    /**
+     * Adds a @Deadline to the task list.
+     *
+     * @param input The description of the deadline.
+     * @throws DuplicateTaskException If an exsiting @Deadline with the same description
+     *         and date is already on the list.
+     * @throws DeadlineInvalidDate If the date of the deadline given is not in a valid date time format.
+     */
     public void addDeadline(String input) throws DuplicateTaskException, DeadlineInvalidDate {
 
         try {
@@ -151,6 +202,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the task with the given index as done.
+     *
+     * @param taskIndex The index of the task to be marked.
+     * @throws InvalidIndexException If the @taskIndex < 0 or larger than the size of the @taskList.
+     */
     public void markDone(int taskIndex) throws InvalidIndexException {
         try {
             list.set(taskIndex, list.get(taskIndex).markDone());
@@ -162,6 +219,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes the task with the given index.
+     *
+     * @param taskIndex The index of the task to be deleted.
+     * @throws InvalidIndexException If the @taskIndex < 0 or larger than the size of the @taskList.
+     */
     public void deleteTask(int taskIndex) throws InvalidIndexException {
         try {
             Task deleted = list.get(taskIndex);
@@ -174,11 +237,13 @@ public class TaskList {
         }
     }
 
+    /** Prints the size of the @taskList. */
     public void printListSize() {
         String taskText = list.size() == 1 ? " task " : " tasks ";
         System.out.println("You have " + list.size() + taskText + "on your list.");
     }
 
+    /** Prints the recently added task. */
     public void printNewTask() {
         System.out.println("Got it. I've added this task:");
         System.out.println(list.get(list.size() - 1).toString());

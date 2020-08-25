@@ -1,6 +1,6 @@
 package duke;
 
-import duke.exception.DukeException;
+import duke.exception.FileLoadError;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -13,15 +13,27 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/** Deals with saving and loading the data into a file. */
 public class Storage {
 
+    /** The filepath to store the data. */
+    private final String filePath;
+
+    /** The path to an existing saved file. */
     private Path dukeFile;
 
+    /**
+     * Constructs a @Storage.
+     *
+     * @param filePath The filepath to store the data in.
+     */
     public Storage(String filePath) {
-        createFile(filePath);
+        this.filePath = filePath;
+        createFile();
     }
 
-    private void createFile(String filePath) {
+    /** Creates a file to save the data if it has not existed. */
+    private void createFile() {
         try {
 
             if (Files.notExists(Paths.get(filePath))) {
@@ -39,6 +51,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the task list into a file.
+     *
+     * @param taskList The task list to be saved.
+     */
     public void saveTasks(ArrayList<Task> taskList) {
 
         StringBuilder taskString = new StringBuilder();
@@ -55,23 +72,38 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> load() throws DukeException {
+    /**
+     * Loads the task list from the saved file.
+     *
+     * @return The task list.
+     * @throws FileLoadError If there is an error in reading or obtaining the file.
+     */
+    public ArrayList<Task> load() throws FileLoadError {
         try {
 
             ArrayList<Task> taskList = new ArrayList<>();
 
             for (String task : Files.readAllLines(dukeFile)) {
-                taskList.add(readTask(task));
+                Task t = readTask(task);
+                if (t != null) {
+                    taskList.add(readTask(task));
+                }
             }
 
             return taskList;
 
         } catch (IOException ioException) {
             ioException.printStackTrace();
-            throw new DukeException("Loading Error");
+            throw new FileLoadError();
         }
     }
 
+    /**
+     * Reads the saved tasks in the file.
+     *
+     * @param task The task to be read
+     * @return The task in the proper format, such as @ToDo, @Event, or @Deadline
+     */
     private Task readTask(String task) {
         switch (task.charAt(0)) {
             case 'T':

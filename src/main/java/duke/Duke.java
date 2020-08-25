@@ -3,12 +3,23 @@ package duke;
 import duke.exception.DukeException;
 import duke.command.Command;
 
+/** The duke bot that stores your tasks. */
 public class Duke {
 
+    /** Deals with interaction with the user. */
     private final Ui ui;
+
+    /** Contains the task list and add/delete operations for the task list */
     private TaskList tasks;
+
+    /** Deals with saving and loading the tasks from the file. */
     private final Storage storage;
 
+    /**
+     * Constructs a Duke bot.
+     *
+     * @param filePath The filepath to store the data in.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +31,7 @@ public class Duke {
         }
     }
 
+    /** Runs the bot, accepts tasks and saves them into the file. */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
