@@ -1,13 +1,15 @@
-public class DoneCommand extends Command {
+package duke;
+
+public class DeleteCommand extends Command {
     int idx;
 
-    DoneCommand(int idx) {
+    DeleteCommand(int idx) {
         super();
         this.idx = idx;
     }
 
     public void execute(TaskList taskList, Storage storage) throws DukeException {
-        taskList.markTaskAsDone(this.idx);
+        taskList.deleteTask(this.idx);
         storage.writeToFile(taskList);
     }
 }
