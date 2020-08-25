@@ -37,73 +37,70 @@ public class Storage {
             String[] arr = str.split(" >> ", -1);
 
             switch (arr[0]) {
-                case "T":
-                    // It is a to-do task
-                    try {
-                        if (Integer.valueOf(arr[1]).equals(0)) {
-                            // Incomplete task
-                            Task task = new Todo(arr[2]);
-                            taskList.add(task);
-                        } else if (Integer.valueOf(arr[1]).equals(1)) {
-                            // Completed task
-                            Task task = new Todo(arr[2]);
-                            task.markAsDone();
-                            taskList.add(task);
-                        } else {
-                            // Not recognised format
-                            Ui.printFormatError(i);
-                        }
-                    } catch (Exception ex) {
+            case "T":
+                // It is a to-do task
+                try {
+                    if (Integer.valueOf(arr[1]).equals(0)) {
+                        // Incomplete task
+                        Task task = new Todo(arr[2]);
+                        taskList.add(task);
+                    } else if (Integer.valueOf(arr[1]).equals(1)) {
+                        // Completed task
+                        Task task = new Todo(arr[2]);
+                        task.markAsDone();
+                        taskList.add(task);
+                    } else {
+                        // Not recognised format
                         Ui.printFormatError(i);
                     }
-
-                    break;
-                case "D":
-                    // It is a deadline task
-                    try {
-                        if (Integer.valueOf(arr[1]).equals(0)) {
-                            // Incomplete task
-                            Task task = new Deadline(arr[2], arr[3]);
-                            taskList.add(task);
-                        } else if (Integer.valueOf(arr[1]).equals(1)) {
-                            // Completed task
-                            Task task = new Deadline(arr[2], arr[3]);
-                            task.markAsDone();
-                            taskList.add(task);
-                        } else {
-                            // Not recognised format
-                            Ui.printFormatError(i);
-                        }
-                    } catch (Exception ex) {
-                        Ui.printFormatError(i);
-                    }
-
-                    break;
-                case "E":
-                    // It is an Event task
-                    try {
-                        if (Integer.valueOf(arr[1]).equals(0)) {
-                            // Incomplete task
-                            Task task = new Event(arr[2], arr[3]);
-                            taskList.add(task);
-                        } else if (Integer.valueOf(arr[1]).equals(1)) {
-                            // Completed task
-                            Task task = new Event(arr[2], arr[3]);
-                            task.markAsDone();
-                            taskList.add(task);
-                        } else {
-                            // Not recognised format
-                            Ui.printFormatError(i);
-                        }
-                    } catch (Exception ex) {
-                        Ui.printFormatError(i);
-                    }
-
-                    break;
-                default:
-                    // No such type
+                } catch (Exception ex) {
                     Ui.printFormatError(i);
-                    break;
+                }
+                break;
+            case "D":
+                // It is a deadline task
+                try {
+                    if (Integer.valueOf(arr[1]).equals(0)) {
+                        // Incomplete task
+                        Task task = new Deadline(arr[2], arr[3]);
+                        taskList.add(task);
+                    } else if (Integer.valueOf(arr[1]).equals(1)) {
+                        // Completed task
+                        Task task = new Deadline(arr[2], arr[3]);
+                        task.markAsDone();
+                        taskList.add(task);
+                    } else {
+                        // Not recognised format
+                        Ui.printFormatError(i);
+                    }
+                } catch (Exception ex) {
+                    Ui.printFormatError(i);
+                }
+                break;
+            case "E":
+                // It is an Event task
+                try {
+                    if (Integer.valueOf(arr[1]).equals(0)) {
+                        // Incomplete task
+                        Task task = new Event(arr[2], arr[3]);
+                        taskList.add(task);
+                    } else if (Integer.valueOf(arr[1]).equals(1)) {
+                        // Completed task
+                        Task task = new Event(arr[2], arr[3]);
+                        task.markAsDone();
+                        taskList.add(task);
+                    } else {
+                        // Not recognised format
+                        Ui.printFormatError(i);
+                    }
+                } catch (Exception ex) {
+                    Ui.printFormatError(i);
+                }
+                break;
+            default:
+                // No such type
+                Ui.printFormatError(i);
+                break;
             }
         }
         return taskList;
@@ -153,7 +150,6 @@ public class Storage {
                     System.out.println("One of your task is neither a Todo, Event or Deadline");
                 }
             }
-
             for (String str : arrayList) {
                 fw.write(str + System.lineSeparator());
             }
