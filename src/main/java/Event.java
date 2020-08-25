@@ -8,10 +8,9 @@ public class Event extends Task{
 
     public Event(String desc, String at) {
         super(desc);
-        String cleaned = at.replaceAll("\\s+", "");
-        this.at = cleaned;
+        this.at = at;
         try {
-            this.date = LocalDate.parse(cleaned);
+            this.date = LocalDate.parse(at);
         } catch (DateTimeParseException e) {
             date = null;
         }

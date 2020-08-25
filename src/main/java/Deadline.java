@@ -8,10 +8,9 @@ public class Deadline extends Task {
 
     public Deadline(String desc, String by) {
         super(desc);
-        String cleaned = by.replaceAll("\\s+", "");
-        this.by = cleaned;
+        this.by = by;
         try {
-            this.date = LocalDate.parse(cleaned);
+            this.date = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
             date = null;
         }

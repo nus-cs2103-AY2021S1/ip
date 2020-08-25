@@ -1,7 +1,6 @@
 import java.io.FileNotFoundException;
 
 public class Duke {
-    private Storage storage;
     private TaskList tasks;
     private Ui ui;
     String filePath;
@@ -13,12 +12,11 @@ public class Duke {
         this.filePath = filePath;
         this.ui = ui;
         this.tasks = tasks;
-        this.storage = storage;
     }
 
     public void run() {
         ui.showWelcome();
-        Parser parser = new Parser();
+        Parser parser = new Parser(ui);
         parser.parser(tasks, filePath);
     }
 

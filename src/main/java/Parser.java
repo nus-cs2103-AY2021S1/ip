@@ -1,11 +1,14 @@
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Parser {
-    public Parser() { }
+    Ui ui;
+
+    public Parser(Ui ui) {
+        this.ui = ui;
+    }
 
     public void parser(TaskList tasks, String filePath) {
         Scanner scanner = new Scanner(System.in);
@@ -14,14 +17,10 @@ public class Parser {
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             if (line.equals("bye")) {
-                System.out.println("Bye! Hope to see you again ;)");
+                ui.bye();
                 break;
             } else if (line.equals("list")) {
-                int count = 1;
-                for (Task task : tasks.list) {
-                    System.out.println(count + "." + task.toString());
-                    count++;
-                }
+                ui.list(tasks);
             } else {
                 String[] words = line.split("\\s+");
                 if (words[0].equals("done")) {
@@ -29,8 +28,7 @@ public class Parser {
                         int index = compDel(line, tasks.size());
                         tasks.get(index).done();
                         Storage.fileUpdate(tasks, path);
-                        System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(tasks.get(index).toString());
+                        ui.done(tasks, index);
                     } catch (DukeException | IOException e) {
                         System.out.println(e.getMessage());
                     }
@@ -38,11 +36,9 @@ public class Parser {
                     try {
                         int index = compDel(line, tasks.size());
                         Task task = tasks.get(index);
+                        ui.remove(tasks, index);
                         tasks.delete(index);
                         Storage.fileUpdate(tasks, path);
-                        System.out.println("Noted. I've removed this task:");
-                        System.out.println(task.toString());
-                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     } catch (DukeException | IOException e) {
                         System.out.println(e.getMessage());
                     }
@@ -51,9 +47,7 @@ public class Parser {
                         Task task = taskClassify(line);
                         tasks.add(task);
                         Storage.fileUpdate(tasks, path);
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println("  " + task.toString());
-                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                        ui.add(task, tasks.size());
                     } catch (DukeException | IOException e) {
                         System.out.println(e.getMessage());
                     }
@@ -89,7 +83,11 @@ public class Parser {
             } else {
                 String desc = "";
                 for (int i = 1; i < len; i++) {
-                    desc += " " + words[i];
+                    if (i == len - 1) {
+                        desc += words[i];
+                        break;
+                    }
+                    desc += words[i] + " ";
                 }
                 return new ToDo(desc);
             }
@@ -103,15 +101,20 @@ public class Parser {
                 for (int i = 1; i < len; i++) {
                     if (words[i].equals("/by")) {
                         count = i + 1;
+                        desc = desc.substring(0,desc.length() - 1);
                         break;
                     }
-                    desc += " " + words[i];
+                    desc += words[i] + " ";
                 }
                 if (count == 0 || count == len) {
                     throw new DukeException("OOPS!!! The date/time of a deadline cannot be empty.");
                 }
                 for (int j = count; j < len; j++) {
-                    time += " " + words[j];
+                    if (j == len - 1) {
+                        time += words[j];
+                        break;
+                    }
+                    time += words[j] + " ";
                 }
                 return new Deadline(desc, time);
             }
@@ -125,14 +128,19 @@ public class Parser {
                 for (int i = 1; i < len; i++) {
                     if (words[i].equals("/at")) {
                         count = i + 1;
+                        desc = desc.substring(0, desc.length() - 1);
                         break;
                     }
-                    desc += " " + words[i];
+                    desc += words[i] + " ";
                 }
                 if (count == 0 || count == len) {
                     throw new DukeException("OOPS!!! The date/time of a deadline cannot be empty.");
                 }
                 for (int j = count; j < len; j++) {
+                    if (j == len - 1) {
+                        time += words[j];
+                        break;
+                    }
                     time += " " + words[j];
                 }
                 return new Event(desc, time);
