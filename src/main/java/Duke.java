@@ -1,3 +1,9 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
+
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -60,10 +66,14 @@ public class Duke {
                 if (description.isBlank() || by.isBlank()) {
                     throw new DukeException("OOPS!!! Please add both a description and deadline for your task!");
                 } else {
-                    task = new Deadline(description.trim(), by.trim());
+                    LocalDateTime dateTime = LocalDateTime.parse(by.trim(),
+                            DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+                    task = new Deadline(description.trim(), dateTime.toLocalDate(), dateTime.toLocalTime());
                 }
             } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
                 throw new DukeException("OOPS!!! Please add both a description and deadline for your task!");
+            } catch (DateTimeException dateTimeException) {
+                throw new DukeException("OOPS!!! Please enter a valid date and time in the format 'DD-MM-YYYY HHMM'!");
             }
             break;
         case "event":
