@@ -3,10 +3,11 @@ package duck.task;
 import duck.Colour;
 import duck.exception.DuckException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskList {
+public class TaskList implements Serializable {
     private List<Task> tasks;
 
     public TaskList() {

@@ -2,7 +2,9 @@ package duck.task;
 
 import duck.Colour;
 
-abstract public class Task {
+import java.io.Serializable;
+
+abstract public class Task implements Serializable {
     private String description;
     private boolean isDone;
 
