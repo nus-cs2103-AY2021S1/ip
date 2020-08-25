@@ -1,3 +1,7 @@
+package gel;
+
+import gel.exception.GelException;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Scanner;

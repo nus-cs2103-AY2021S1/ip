@@ -1,3 +1,10 @@
+package gel;
+
+import gel.task.Deadline;
+import gel.task.Event;
+import gel.task.Task;
+import gel.task.Todo;
+
 import java.io.*;
 import java.util.List;
 import java.util.Scanner;

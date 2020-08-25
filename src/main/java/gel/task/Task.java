@@ -1,3 +1,5 @@
+package gel.task;
+
 public class Task {
     protected String description;
     protected boolean done;

@@ -1,3 +1,5 @@
+package gel.exception;
+
 public class GelException extends Exception {
 
     public GelException() {

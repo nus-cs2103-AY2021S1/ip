@@ -1,3 +1,11 @@
+package gel;
+
+import gel.exception.GelException;
+import gel.task.Deadline;
+import gel.task.Event;
+import gel.task.Task;
+import gel.task.Todo;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +23,7 @@ public class TaskList {
         ui.showListOfTask(this.listOfTask);
     }
 
-    public void doneTask(String input) throws GelException{
+    public void doneTask(String input) throws GelException {
         int index = Integer.parseInt(input.substring(5)) - 1;
         if (index >= listOfTask.size() || index < 0) {
             throw new GelException("    Please input a valid number from 1 - " + listOfTask.size());
