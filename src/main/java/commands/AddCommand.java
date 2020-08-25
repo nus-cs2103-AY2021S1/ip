@@ -33,28 +33,24 @@ public class AddCommand extends Command {
      * @throws InvalidTaskException If the task name is empty
      * @throws UnknownCmdException If an unknown command is entered
      * @throws InvalidTimeException If the time for the task is invalid
-     * @throws InvalidFileException If the file to be written to cannot be found
      * @throws BadDtFormatException If the format of the date and time entered does not match
      */
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskException, UnknownCmdException,
-            InvalidTimeException, InvalidFileException, BadDtFormatException {
+            InvalidTimeException, BadDtFormatException {
         String[] info = extractInfo(text);
         if (info[0].equals("todo")) {
             tasks.addItem(new Todo(info[1], false));
             ui.printAddTask(info[1]);
             ui.printListSize(tasks.size());
-            storage.writeToFile("data.txt", tasks.writeString());
         } else if (info[0].equals("deadline")) {
             tasks.addItem(new Deadline(info[1], stringToTime(info[2]), false));
             ui.printAddTask(info[1]);
             ui.printListSize(tasks.size());
-            storage.writeToFile("data.txt", tasks.writeString());
         } else {
             tasks.addItem(new Event(info[1], stringToTime(info[2]), false));
             ui.printAddTask(info[1]);
             ui.printListSize(tasks.size());
-            storage.writeToFile("data.txt", tasks.writeString());
         }
     }
 

@@ -7,6 +7,7 @@ import commands.HelpCommand;
 import commands.DoneCommand;
 import commands.DeleteCommand;
 import commands.AddCommand;
+import commands.FindCommand;
 
 /**
  * Handles parsing of inputs from the user and generates Command objects accordingly

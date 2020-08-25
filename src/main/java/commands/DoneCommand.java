@@ -25,14 +25,12 @@ public class DoneCommand extends Command {
      * @param storage The Storage object in use
      * @throws TaskNotFoundException If input task number is not found in the list
      * @throws InvalidTaskNumberException If the user enters a non-integer argument
-     * @throws InvalidFileException If the file to be written to cannot not found
      */
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) throws TaskNotFoundException,
-            InvalidTaskNumberException, InvalidFileException {
+            InvalidTaskNumberException {
         ui.printDoneTask();
         doneTask(index, tasks);
-        storage.writeToFile("data.txt", tasks.writeString());
     }
 
     /**
