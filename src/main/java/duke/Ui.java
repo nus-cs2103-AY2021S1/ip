@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -7,11 +9,11 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     
-    private final String instructions = "Hello! I'm Duke\n" +
+    private final String instructions = "Hello! I'm duke.Duke\n" +
             "Send me a task in one of the following formats and I'll store it for you.\n" +
-            "\tTodo: \"todo <description>\"\n" +
-            "\tDeadline: \"deadline <description> /by <YYYY-MM-DD>\"\n" +
-            "\tEvent: \"event <description> /at <YYYY-MM-DD>\"\n" +
+            "\tduke.Todo: \"todo <description>\"\n" +
+            "\tduke.Deadline: \"deadline <description> /by <YYYY-MM-DD>\"\n" +
+            "\tduke.Event: \"event <description> /at <YYYY-MM-DD>\"\n" +
             "Send \"list\" to see all tasks.\n" +
             "Send \"done <item number>\" to mark an item as done\n" +
             "Send \"delete <item number>\" to delete and item from the list\n" +

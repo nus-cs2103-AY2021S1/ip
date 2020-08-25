@@ -1,3 +1,5 @@
+package duke;
+
 public class Duke {
     private static final String FILE_PATH = (System.getProperty("user.dir").endsWith("text-ui-test") 
         ? System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length() - 13) + "/data/duke.txt"
