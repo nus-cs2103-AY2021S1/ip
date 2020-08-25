@@ -82,6 +82,11 @@ public class TaskList {
         tasks.add(task);
     }
 
+    /**
+     * Finds tasks using keyword.
+     * @param keyword Keyword that is used to find tasks.
+     * @return ArrayList of tasks containing tasks that match the keyword.
+     */
     public ArrayList<Task> findTasks(String keyword) {
         ArrayList<Task> foundTasks = new ArrayList<>();
 

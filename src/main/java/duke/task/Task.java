@@ -65,6 +65,10 @@ public abstract class Task {
         return done + " | " + description;
     }
 
+    /**
+     * Returns the description of the task.
+     * @return Description of task.
+     */
     public String getDescription() {
         return description;
     }
