@@ -29,11 +29,11 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Jimmy"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "jimmyJar"
     archiveClassifier = null
 }
 
@@ -42,5 +42,6 @@ checkstyle {
 }
 
 run{
+    enableAssertions = true
     standardInput = System.in
 }
