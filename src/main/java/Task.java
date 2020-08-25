@@ -1,11 +1,19 @@
 enum TaskType {
     TODO{
         @Override
+        public String getSymbol() {
+            return "T";
+        }
+        @Override
         public String toString() {
             return "todo";
         }
     },
     DEADLINE{
+        @Override
+        public String getSymbol() {
+            return "D";
+        }
         @Override
         public String toString() {
             return "deadline";
@@ -13,17 +21,22 @@ enum TaskType {
     },
     EVENT{
         @Override
+        public String getSymbol() {
+            return "E";
+        }
+        @Override
         public String toString() {
             return "event";
         }
-    }
+    };
+    public abstract String getSymbol();
 }
 
 public abstract class Task {
 
     protected String description;
     protected boolean isDone;
-    private final TaskType taskType;
+    protected final TaskType taskType;
 
     public Task(String description, TaskType taskType) {
         this.description = description;
@@ -39,8 +52,12 @@ public abstract class Task {
         isDone = true;
     }
 
+    public String getSavedString() {
+        return taskType.getSymbol() + " | " +  (isDone ? "1" : "0") + " | " + description;
+    }
+
     @Override
     public String toString() {
-        return getStatusIcon() + " " + description;
+        return "[" + taskType.getSymbol() + "]" + getStatusIcon() + " " + description;
     }
 }

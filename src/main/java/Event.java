@@ -1,6 +1,6 @@
 public class Event extends Task {
 
-    protected String at;
+    private final String at;
 
     public Event(String description, String at) {
         super(description, TaskType.EVENT);
@@ -8,8 +8,13 @@ public class Event extends Task {
     }
 
     @Override
+    public String getSavedString() {
+        return super.getSavedString() + " | " + at;
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return super.toString() + " (at: " + at + ")";
     }
     
 }
