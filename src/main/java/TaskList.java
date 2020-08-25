@@ -17,14 +17,30 @@ public class TaskList {
         return this.tasks;
     }
 
+    /**
+     * Retrieves a Task object that corresponds to the given index.
+     *
+     * @param i index of the Task object
+     * @return the Task object that corresponds to the given index
+     */
     public Task getTask(int i) {
         return this.tasks.get(i);
     }
 
+    /**
+     * Retrieves the number of tasks for the current TaskList.
+     *
+     * @return the size of the current TaskList
+     */
     public int getSize() {
         return this.tasks.size();
     }
 
+    /**
+     * Reads Tasks from the given file.
+     *
+     * @param file destination file
+     */
     public void readTasks(File file) {
         // read tasks from hard disk (./data/luke.txt)
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -49,6 +65,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Writes Tasks for the given file.
+     *
+     * @param file destination file
+     * @param task newly added task
+     */
     public void writeTasks(File file, Task task) {
         // add task to the list
         this.tasks.add(task);
@@ -77,6 +99,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Completes Tasks for the given file.
+     *
+     * @param file destination file
+     * @param task newly added task
+     */
     public void completeTask(String input) throws InvalidDoneException, DoneIndexOutofboundsException {
         if (input.equals("done") || input.equals("done ")) {
             throw new InvalidDoneException("\n\tThe index of done cannot be empty.\n\tPlease make sure you follow the correct format.");
