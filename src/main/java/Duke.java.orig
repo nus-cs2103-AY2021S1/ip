@@ -1,16 +1,30 @@
+<<<<<<< HEAD
 import java.io.*;
+||||||| 54ff0c6
+=======
 import java.time.format.DateTimeParseException;
+>>>>>>> branch-Level-8
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+<<<<<<< HEAD
+import java.util.Scanner;
+||||||| 54ff0c6
+=======
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+>>>>>>> branch-Level-8
 
 public class Duke {
 
     static String line = "_________________________________________________________________";
     static List<Task> list = new ArrayList<>();
+<<<<<<< HEAD
     static File file = new File("data/duke.txt");
+||||||| 54ff0c6
+    //static int index = 0;
+=======
+>>>>>>> branch-Level-8
 
     // greet while read all data from duke.txt
     public static void greeting() throws FileNotFoundException{
@@ -54,7 +68,15 @@ public class Duke {
         fw.close();
     }
 
+<<<<<<< HEAD
     public static void addTask(Task task) throws IOException {
+||||||| 54ff0c6
+    public static void addTask(Task task) {
+        //list[index] = task;
+        //index++;
+=======
+    public static void addTask(Task task) {
+>>>>>>> branch-Level-8
         list.add(task);
         System.out.println("\t" + line + "\n\tGot it. I've added this task:\n"
                 + "\t  " + task + "\n"
@@ -96,11 +118,19 @@ public class Duke {
         list.remove(num-1);
     }
 
+<<<<<<< HEAD
+||||||| 54ff0c6
+
+
+=======
     public static String getLocalDate(String time) {
         LocalDate d = LocalDate.parse(time);
         return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+
+
+>>>>>>> branch-Level-8
     public static void main(String[] args) {
         try {
             greeting();
