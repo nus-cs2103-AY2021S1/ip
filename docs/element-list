@@ -7,3 +7,6 @@ src.main.java.duke.data.task
 src.main.java.duke.parser
 src.main.java.duke.storage
 src.main.java.duke.ui
+src.test
+src.test.java.util
+test.java.storage

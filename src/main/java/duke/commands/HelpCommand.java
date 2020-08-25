@@ -1,5 +1,8 @@
 package src.main.java.duke.commands;
 
+/**
+ * Help function that helps the user to clarify doubts
+ */
 public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
