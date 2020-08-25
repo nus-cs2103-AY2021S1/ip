@@ -4,12 +4,17 @@ plugins {
 
 apply plugin: 'java'
 
-ext {
-    javaMainClass = "Tickbot"
-}
-    
 application {
-    mainClassName = javaMainClass
+    mainClassName = "Tickbot"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'net.harawata', name: 'appdirs', version: '1.2.0'
+    compile group: 'com.opencsv' , name: 'opencsv', version: '5.2'
 }
 
 run {
