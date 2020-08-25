@@ -2,7 +2,7 @@ package main.java.task;
 
 import java.time.LocalDateTime;
 
-class Todo extends Task {
+public class Todo extends Task {
     public Todo(String description) {
         super(description, LocalDateTime.MIN);
         super.type = "todo";

@@ -2,7 +2,7 @@ package main.java.task;
 
 import java.time.LocalDateTime;
 
-class Event extends Task {
+public class Event extends Task {
     public Event(String description, LocalDateTime time) {
         super(description, time);
         super.type = "event";

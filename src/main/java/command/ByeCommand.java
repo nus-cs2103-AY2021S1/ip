@@ -5,7 +5,7 @@ import main.java.task.TaskList;
 
 import java.util.List;
 
-class ByeCommand extends Command {
+public class ByeCommand extends Command {
     public ByeCommand(List<String> input) {
         super(input);
     }

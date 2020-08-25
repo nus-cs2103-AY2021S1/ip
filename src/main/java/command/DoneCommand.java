@@ -6,7 +6,7 @@ import main.java.task.TaskList;
 
 import java.util.List;
 
-class DoneCommand extends Command {
+public class DoneCommand extends Command {
     public DoneCommand(List<String> input) {
         super(input);
     }

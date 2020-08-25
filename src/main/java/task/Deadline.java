@@ -2,7 +2,7 @@ package main.java.task;
 
 import java.time.LocalDateTime;
 
-class Deadline extends Task {
+public class Deadline extends Task {
     public Deadline(String description, LocalDateTime time) {
         super(description, time);
         super.type = "deadline";

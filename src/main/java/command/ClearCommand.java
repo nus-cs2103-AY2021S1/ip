@@ -5,7 +5,7 @@ import main.java.task.TaskList;
 
 import java.util.List;
 
-class ClearCommand extends Command {
+public class ClearCommand extends Command {
     public ClearCommand(List<String> input) {
         super(input);
     }

@@ -8,7 +8,7 @@ import main.java.task.TaskList;
 
 import java.util.List;
 
-class TaskCommand extends Command {
+public class TaskCommand extends Command {
     public TaskCommand(List<String> input) {
         super(input);
     }

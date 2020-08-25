@@ -7,7 +7,7 @@ import main.java.task.TaskList;
 
 import java.util.List;
 
-class DeleteCommand extends Command {
+public class DeleteCommand extends Command {
     public DeleteCommand(List<String> input) {
         super(input);
     }

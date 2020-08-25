@@ -5,7 +5,7 @@ import main.java.task.TaskList;
 
 import java.util.List;
 
-class ListCommand extends Command {
+public class ListCommand extends Command {
     public ListCommand(List<String> input) {
         super(input);
     }
