@@ -21,10 +21,6 @@ public class AddDeadlineCommand extends AddCommand {
         this.toAdd = new Deadline(description, deadline);
     }
 
-    public AddDeadlineCommand(Deadline toAdd) {
-        this.toAdd = toAdd;
-    }
-
     public Deadline getDeadline() {
         return toAdd;
     }
@@ -34,4 +30,5 @@ public class AddDeadlineCommand extends AddCommand {
         taskList.add(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd, taskList.size()));
     }
+
 }

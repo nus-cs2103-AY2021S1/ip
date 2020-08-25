@@ -1,14 +1,20 @@
 import commands.Command;
 import commands.CommandResult;
 import commands.ExitCommand;
+
 import data.TaskList;
 import data.exception.IllegalValueException;
-import parser.Parser;
-import storage.Storage;
+
 import ui.Ui;
+import storage.Storage;
+import parser.Parser;
 
 import java.io.FileNotFoundException;
 
+/**
+ * Entry point of the Duke application.
+ * Initializes the application and starts the interaction with the user.
+ */
 public class Duke {
 
     private Ui ui;
@@ -19,14 +25,18 @@ public class Duke {
         new Duke().run(args);
     }
 
-    // Runs the program until termination.
+    /** Runs the program until termination.  */
     public void run(String[] args) {
         start(args);
         runCommandLoopUntilExitCommand();
         exit();
     }
 
-    // Sets up the required objects, loads up the data from the storage file, and prints the welcome message.
+    /**
+     * Sets up the required objects, loads up the data from the storage file, and prints the welcome message.
+     *
+     * @param args arguments supplied by the user at program launch
+     */
     private void start(String[] args) {
         try {
             this.ui = new Ui();
@@ -38,7 +48,7 @@ public class Duke {
         }
     }
 
-    // Prints the Goodbye message and exits the program.
+    /** Prints the Goodbye message and exits. */
     private void exit() {
         try {
             ui.showGoodbyeMessage();
@@ -49,7 +59,7 @@ public class Duke {
         }
     }
 
-    // Reads the user command and executes it, until the user issues the exit command.
+    /** Reads the user command and executes it, until the user issues the exit command.  */
     private void runCommandLoopUntilExitCommand() {
         Command command;
         do {
@@ -60,6 +70,12 @@ public class Duke {
         } while (!ExitCommand.isExit(command));
     }
 
+    /**
+     * Executes the command and returns the result.
+     *
+     * @param command user command
+     * @return result of the command
+     */
     private CommandResult executeCommand(Command command) {
         try {
             command.setData(taskList);
@@ -72,9 +88,14 @@ public class Duke {
         }
     }
 
-    private Storage initializeStorage(String[] launchArgs) throws Storage.InvalidStorageFilePathException {
-        boolean isStorageFileSpecifiedByUser = launchArgs.length > 0;
-        return isStorageFileSpecifiedByUser ? new Storage(launchArgs[0]) : new Storage();
+    /**
+     * Creates the Storage object based on the user specified path (if any) or the default storage path.
+     * @param args arguments supplied by the user at program launch
+     * @throws Storage.InvalidStorageFilePathException if the target file path is incorrect.
+     */
+    private Storage initializeStorage(String[] args) throws Storage.InvalidStorageFilePathException {
+        boolean isStorageFileSpecifiedByUser = args.length > 0;
+        return isStorageFileSpecifiedByUser ? new Storage(args[0]) : new Storage();
     }
 
 }

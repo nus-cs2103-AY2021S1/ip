@@ -9,6 +9,7 @@ import utils.Messages;
  * Represents an executable command.
  */
 public abstract class Command {
+
     protected TaskList taskList;
     private int targetIndex = -1;
 
@@ -48,4 +49,5 @@ public abstract class Command {
      * Executes the command and returns the result.
      */
     abstract public CommandResult execute();
+
 }

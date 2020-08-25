@@ -47,8 +47,9 @@ public class Storage {
     public Storage(String filePath) throws InvalidStorageFilePathException {
         this.filePath = filePath;
         this.file = new File(filePath);
-        if (!this.file.exists())
+        if (!this.file.exists()) {
             throw new InvalidStorageFilePathException("File not found.");
+        }
     }
 
     /**

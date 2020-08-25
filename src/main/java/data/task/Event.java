@@ -34,4 +34,5 @@ public class Event extends Task {
     public String toString() {
         return String.format("[E]%1$s (at: %2$s)", super.toString(), this.dateTimeStr);
     }
+
 }

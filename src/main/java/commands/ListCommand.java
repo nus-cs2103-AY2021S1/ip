@@ -20,4 +20,5 @@ public class ListCommand extends Command {
         List<Task> allTasks = taskList.getList();
         return new CommandResult(Command.getMessageForTaskListSummary(taskList), allTasks);
     }
+
 }

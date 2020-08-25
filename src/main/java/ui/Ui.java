@@ -90,10 +90,7 @@ public class Ui {
      * Generates and prints the welcome message upon the start of the application.
      */
     public void showWelcomeMessage() {
-        showToUser(
-                DIVIDER,
-                Messages.MESSAGE_WELCOME,
-                DIVIDER);
+        showToUser(DIVIDER, Messages.MESSAGE_WELCOME, DIVIDER);
     }
 
     /**
