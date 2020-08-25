@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 
+/**
+ * Handles the loading of task list data from the disk and the saving of task list data to the disk.
+ */
 public class Storage {
     private static final String TODO_FORMAT = "T";
     private static final String EVENT_FORMAT = "E";
@@ -13,10 +16,20 @@ public class Storage {
 
     private File file;
 
+    /**
+     * Initializes storage with the path to the data file.
+     * @param filePath The relative path to the file which data is to be loaded from and saved to.
+     */
     public Storage(String filePath) {
         this.file = new File(filePath);
     }
 
+    /**
+     * Loads the task list data from the file and returns the task list as a List of tasks.
+     * If the file does not exist, create it and then return an empty list as the task list.
+     * @return List of tasks.
+     * @throws DukeException Throws DukeException when the task cannot be loaded from the file.
+     */
     public List<Task> load() throws DukeException {
         try {
             if (this.file.exists()) {
@@ -48,6 +61,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the task list provided to the file.
+     * @param tasks The task list to be saved.
+     * @throws DukeException Throws DukeException when the task list cannot be saved to the file.
+     */
     public void saveTaskList(TaskList tasks) throws DukeException {
         FileWriter fileWriter;
         try {

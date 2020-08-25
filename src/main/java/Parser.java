@@ -2,7 +2,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
+/**
+ * Handles the parsing of user input to identify the command given by user.
+ */
 public class Parser {
+
+    /**
+     * Parses the string input provided by the user and returns the executable Command object.
+     * @param fullCommand The string input provided by the user.
+     * @return The Command identified from the user's input.
+     * @throws DukeException Throws DukeException when the command cannot be identified, or is not valid.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] commandArgs = fullCommand.split(" ");
         if (commandArgs[0].equals(CommandType.BYE.getName())) {

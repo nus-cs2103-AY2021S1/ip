@@ -1,3 +1,6 @@
+/**
+ * Represents the different types of command that the user can input
+ */
 public enum CommandType {
     BYE("bye"),
     LIST("list"),
