@@ -167,8 +167,7 @@ public class TaskList {
 
     public void deleteTask(int taskIndex) throws InvalidIndexException {
         try {
-            Task deleted = tasks.get(taskIndex);
-            tasks.remove(taskIndex);
+            Task deleted = tasks.remove(taskIndex);
 
             System.out.println("Noted. I've removed this task:");
             System.out.println(deleted);

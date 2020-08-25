@@ -1,7 +1,15 @@
 package duke;
 
-import duke.command.*;
-import duke.exception.*;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ToDoCommand;
+import duke.exception.DukeException;
+import duke.exception.EmptyTaskException;
+import duke.exception.InvalidDateException;
+import duke.exception.NoIndexException;
+import duke.exception.UnrecognizedTaskException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
