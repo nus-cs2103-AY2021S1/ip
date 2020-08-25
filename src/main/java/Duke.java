@@ -3,12 +3,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-<<<<<<< HEAD
+
     static List<Task> list = new ArrayList<>();
-=======
-    static String[] list = new String[100];
     static int index = 0;
->>>>>>> master
+
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -22,7 +20,7 @@ public class Duke {
 
     public static void bot(){
         Scanner sc = new Scanner(System.in);
-<<<<<<< HEAD
+
         try {
             while (sc.hasNext()) {
                 String input = sc.nextLine();
