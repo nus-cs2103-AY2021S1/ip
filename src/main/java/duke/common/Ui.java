@@ -5,6 +5,9 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Text UI of the application.
+ */
 public class Ui {
     private final Scanner sc;
 
@@ -12,16 +15,27 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Generates and prints a custom string.
+     * @param s text to be displayed to the user
+     */
     public static void display(String s) {
         displayLine();
         System.out.println(s);
         displayLine();
     }
 
+    /**
+     * Generates and prints a divider line.
+     */
     public static void displayLine() {
         System.out.println("________________________________________");
     }
 
+    /**
+     * Generates and prints the current task list of the user.
+     * @param tasks list of tasks the user has inputted thus far
+     */
     public static void displayTasks(ArrayList<Task> tasks) {
         displayLine();
         System.out.println("Here is your current list:");
@@ -31,6 +45,9 @@ public class Ui {
         displayLine();
     }
 
+    /**
+     * Generates and prints the welcome message upon the start of the application.
+     */
     public static void displayWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -42,6 +59,10 @@ public class Ui {
                 "     What can I do for you?");
     }
 
+    /**
+     * Uses scanner to read the next line that the user input.
+     * @return next command
+     */
     public String readCommand() {
         return sc.nextLine();
     }

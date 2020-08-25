@@ -5,6 +5,9 @@ import duke.common.Ui;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
+/**
+ * Marks a task as done.
+ */
 public class DoneCommand extends Command {
     private static int taskindex;
 

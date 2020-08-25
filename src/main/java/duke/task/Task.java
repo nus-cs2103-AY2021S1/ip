@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Tasks that the user input
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Stores user data.
+ */
 public class Storage {
 
     private static String filePath;
@@ -20,8 +23,6 @@ public class Storage {
     public Storage(String filePath) {
         Storage.filePath = filePath;
         try {
-
-            // returns pathnames for files and directory
             File f = new File(filePath);
             f.getParentFile().mkdir();
             f.createNewFile();
@@ -30,7 +31,10 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Writes task list to file
+     * @param toDoList list of tasks that user has inputted that needs to be saved
+     */
     public static void writeToFile(ArrayList<Task> toDoList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < toDoList.size(); i++) {
@@ -40,6 +44,10 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Adds an additional task to file
+     * @param task the task that needs to be added to the file to be saved
+     */
     public static void appendToFile(Task task) throws IOException {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
         fw.write(task.infoString());
@@ -47,6 +55,10 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Reads file and generates the task list that was saved
+     * @return the tasklist that was saved in the file
+     */
     public static ArrayList<Task> readFile() throws FileNotFoundException {
         File f = new File(filePath);
 
@@ -63,6 +75,11 @@ public class Storage {
         return listOfTasks;
     }
 
+    /**
+     * Converts infoString format into a Task
+     * @param s infoString of the task
+     * @return task represented by the infoString
+     */
     public static Task createTask(String s) {
         String[] parts = s.split("\\|");
         switch(parts[0].trim()) {
