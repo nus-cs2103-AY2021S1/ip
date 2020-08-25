@@ -9,16 +9,23 @@ import java.util.Scanner;
 
 // TODO: setup code style check
 // TODO: consider whether Commands should throw Exceptions, or stay as they are now
-// TODO: make Duke implement Bot
 
-public class Duke {
+public class Duke implements Bot {
+    private boolean isStopped;
+    private Ui ui;
+    private StringBuilder message;
+
+    private Duke() {
+        isStopped = false;
+        ui = new Ui();
+        message = new StringBuilder();
+    }
+
     public static void main(String[] args) {
         new Duke().run();
     }
 
     private void run() {
-        Ui ui = new Ui();
-
         String logo =
             " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -28,20 +35,32 @@ public class Duke {
         System.out.println(logo);
         ui.say("Hello, I'm Duke. What can I do for you?");
 
-        boolean stop = false;
         Scanner sc = new Scanner(System.in);
-        BotClass openTaskListBot = new BotClass();
-        TaskList list = new TaskListStorage("data/tasks.txt").load(openTaskListBot);
-        ui.say(openTaskListBot.getMessage());
-        while (!stop) {
+        TaskList list = new TaskListStorage("data/tasks.txt").load(this);
+        flushMessage();
+        while (!isStopped) {
             String input = sc.nextLine();
-            BotClass bot = new BotClass();
-            Parser.parse(input).execute(bot, list);
-            ui.say(bot.getMessage());
-            if (bot.stopped()) {
-                stop = true;
-            }
+            Parser.parse(input).execute(this, list);
+            flushMessage();
         }
         sc.close();
+    }
+
+    @Override
+    public void stop() {
+        isStopped = true;
+    }
+
+    @Override
+    public void sayLine(String string) {
+        if (message.length() != 0) {
+            message.append("\n");
+        }
+        message.append(string);
+    }
+
+    private void flushMessage() {
+        ui.say(message.toString());
+        message = new StringBuilder();
     }
 }
