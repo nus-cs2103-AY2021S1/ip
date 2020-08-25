@@ -86,7 +86,8 @@ public class Ui {
             while (userInput.hasNext()) {
                 String input = userInput.nextLine();
                 String s = Parser.parse(input, tasks);
-                if (s.equals("Bye")) {   break;
+                if (s.equals("Bye")) {
+                    break;
                 }
             }
         } catch (DukeException e) {

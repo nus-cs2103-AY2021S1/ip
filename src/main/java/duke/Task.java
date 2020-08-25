@@ -18,7 +18,7 @@ public class Task {
      * @return Tick if completed, cross if not.
      */
     public String getStatusIcon() {
-        return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
+        return (isDone ? "[\u2713]" : "[\u2718]");
     }
 
     /**

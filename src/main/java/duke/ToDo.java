@@ -8,7 +8,9 @@ public class ToDo extends Task {
         super(description);
     }
 
-    public String recordString() { return toString(); }
+    public String recordString() {
+        return toString();
+    }
 
     @Override
     public String toString() {
