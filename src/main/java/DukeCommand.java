@@ -1,9 +1,11 @@
-import java.security.DigestException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public enum DukeCommand {
-    LIST("list", 100),
+    LIST("list", 100),DATE("date",101),
 
     TODO("todo", 200),DEADLINE("deadline", 201),EVENT("event", 201),
 
@@ -29,13 +31,6 @@ public enum DukeCommand {
     public int getIndex() { return index; }
 
     public void setIndex(int index) { this.index = index; }
-
-
-
-    public static void executeCommand(String command, String input) {
-
-
-    }
 
     public static void listComm(String input) throws DukeException{
 
@@ -71,12 +66,12 @@ public enum DukeCommand {
 
     public static void deadlineComm(String input) throws DukeException{
 
-        Pattern pattern = Pattern.compile("deadline ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*) /by ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*)");
+        Pattern pattern = Pattern.compile("deadline ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*) /by [0-9]{1,2}/[0-9]{1,2}/[0-9]{4,4} [0-9]{4,4}");
         if(!pattern.matcher(input).matches()) {
             throw new DukeException("\u2639 OOPS!!! Wrong 'deadline' command format!");
         } else {
             String[] s = input.substring(9).split(" /by ");
-            Deadline deadline = new Deadline(s[0], s[1]);
+            Deadline deadline = new Deadline(s[0], LocalDateTime.parse(s[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
             tasks.add(deadline);
 
             System.out.println("        Got it. I've added this task:");
@@ -87,12 +82,12 @@ public enum DukeCommand {
 
     public static void eventComm(String input) throws DukeException{
 
-        Pattern pattern = Pattern.compile("event ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*) /at ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*)");
+        Pattern pattern = Pattern.compile("event ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*) /at [0-9]{1,2}/[0-9]{1,2}/[0-9]{4,4} [0-9]{4,4}");
         if(!pattern.matcher(input).matches()) {
             throw new DukeException("\u2639 OOPS!!! Wrong 'event' command format!");
         } else {
             String[] s = input.substring(6).split(" /at ");
-            Event event = new Event(s[0], s[1]);
+            Event event = new Event(s[0], LocalDateTime.parse(s[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
             tasks.add(event);
 
             System.out.println("        Got it. I've added this task:");
@@ -136,6 +131,44 @@ public enum DukeCommand {
             }
         }
     }
+
+    public static void dateComm(String input) throws DukeException{
+
+        Pattern pattern = Pattern.compile("date [0-9]{1,2}/[0-9]{1,2}/[0-9]{4,4}");
+        if(!pattern.matcher(input).matches()) {
+            throw new DukeException("\u2639 OOPS!!! Wrong 'date' command format!");
+        } else {
+
+            String date = input.split(" ")[1];
+            LocalDate time = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            System.out.println("        Here are the tasks of date " + date + ":");
+            int ctr = 1;
+            StringBuilder sb;
+            for(Task task: tasks) {
+                if(task instanceof Deadline) {
+                    Deadline deadline = (Deadline)task;
+                    LocalDateTime temp = deadline.by;
+                    if(time.getYear() == temp.getYear() && time.getDayOfYear() == temp.getDayOfYear()) {
+                        sb = new StringBuilder();
+                        sb.append(gap).append(ctr).append(".").append(task);
+                        System.out.println(sb.toString());
+                        ctr++;
+                    }
+                }
+                if(task instanceof Event) {
+                    Event event = (Event)task;
+                    LocalDateTime temp = event.at;
+                    if(time.getYear() == temp.getYear() && time.getDayOfYear() == temp.getDayOfYear()) {
+                        sb = new StringBuilder();
+                        sb.append(gap).append(ctr).append(".").append(task);
+                        System.out.println(sb.toString());
+                        ctr++;
+                    }
+                }
+            }
+        }
+    }
+
 
     public static void byeComm(String input) throws DukeException{
 
