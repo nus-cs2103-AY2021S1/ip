@@ -16,6 +16,21 @@ public class TaskList {
     public ArrayList<Task> getTasks(){
         return this.tasks;
     }
+    // find task
+
+    public void findTask(String keyword){
+        ArrayList<Task> fTasks = new ArrayList<Task>();
+        for(int i = 0;i<this.tasks.size();i++){
+            Task currTask = this.tasks.get(i);
+            if(currTask.relevant(keyword)){
+             fTasks.add(currTask);
+            }
+        }
+        for (int i = 0; i < fTasks.size(); i++) {
+            System.out.println("" + (i + 1)+"." + fTasks.get(i));
+        }
+
+    }
 
 
     // 4 type ways to add task

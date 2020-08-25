@@ -43,6 +43,13 @@ public class Task implements Serializable {
         this.details = details;
     }
 
+    public boolean relevant(String keyWord){
+        if(details.contains(keyWord)){
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Constructor to create task
      * @param type string value of ["T"] etc
