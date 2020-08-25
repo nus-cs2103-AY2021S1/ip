@@ -15,7 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
+
 
 public class Duke {
 
@@ -77,7 +77,14 @@ public class Duke {
 
                 System.out.println(Ui.printTaskList(inputList));
 
-            }else {
+            } else if (splitString[0].equals("find")) {
+                try {
+                    System.out.println(Parser.commandParser(currInput, inputList));
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+
+            } else {
                 try {
                     Task currTask = Parser.parser(currInput);
                     inputList.add(currTask);

@@ -59,14 +59,28 @@ public class Parser {
                 }
             }
         } else {
-            throw new InvalidInputException("Unrecognized task");
+            throw new InvalidInputException("Unrecognized command");
         }
     }
 
+    public static TaskList commandParser(String rawInput, TaskList list) throws InvalidInputException {
 
+        String[] splitString = rawInput.split(" ");
 
+        if (splitString[0].equals("find")) {
 
+            TaskList tempList = new TaskList();
+            for (int i = 0; i < list.size(); i++) {
+                if(list.get(i).toString().contains(splitString[1])) {
+                    tempList.add(list.get(i));
+                }
+            }
 
+            return tempList;
 
+        } else {
+            throw new InvalidInputException("Unrecognized command");
+        }
 
+    }
 }
