@@ -1,3 +1,5 @@
+package duke;
+
 public class Duke {
 
     private Storage storage;
@@ -20,7 +22,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/TaskList.txt").run();
+        new Duke("data/duke.TaskList.txt").run();
     }
 
     public void run() {

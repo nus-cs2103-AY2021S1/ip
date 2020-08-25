@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -30,7 +32,7 @@ public class Ui {
     }
 
     public void printGreetings() {
-        String greeting = "Hello I'm Duke, your favourite chatbot! \n\n"
+        String greeting = "Hello I'm duke.Duke, your favourite chatbot! \n\n"
                 + "Type 'help' to see the list of command I support. ";
         formatPrint(greeting);
     }

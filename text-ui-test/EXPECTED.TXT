@@ -1,5 +1,5 @@
    ----------------------------
-   Hello I'm Duke, your favourite chatbot! 
+   Hello I'm duke.Duke, your favourite chatbot!
    
    Type 'help' to see the list of command I support. 
    ----------------------------
@@ -50,11 +50,11 @@
    ############################
    
    ############################
-   OOPS! Task number is invalid!
+   OOPS! duke.Task number is invalid!
    ############################
    
    ############################
-   OOPS! Task number is invalid!
+   OOPS! duke.Task number is invalid!
    ############################
    
    ----------------------------

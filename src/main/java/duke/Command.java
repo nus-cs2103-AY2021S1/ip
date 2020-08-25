@@ -1,3 +1,5 @@
+package duke;
+
 public class Command {
     protected CommandType commandType;
     protected String[] inputs;
@@ -26,26 +28,26 @@ public class Command {
                 break;
             case DONE:
                 if (inputs.length <= 1) {
-                    throw new DukeException("OOPS! Task number cannot be empty for done action!");
+                    throw new DukeException("OOPS! duke.Task number cannot be empty for done action!");
                 }
                 try {
                     Task doneTask = tasks.markTaskAsDone(Integer.parseInt(inputs[1]));
                     ui.showMarkedAsDone(doneTask);
                     storage.saveTaskListToFile(tasks);
                 } catch (NumberFormatException | IndexOutOfBoundsException ex) {
-                    throw new DukeException("OOPS! Task number is invalid!");
+                    throw new DukeException("OOPS! duke.Task number is invalid!");
                 }
                 break;
             case DELETE:
                 if (inputs.length <= 1) {
-                    throw new DukeException("OOPS! Task number cannot be empty for delete action!");
+                    throw new DukeException("OOPS! duke.Task number cannot be empty for delete action!");
                 }
                 try {
                     Task deleteTask = tasks.deleteTask(Integer.parseInt(inputs[1]));
                     ui.showDeletedTask(deleteTask, tasks);
                     storage.saveTaskListToFile(tasks);
                 } catch (NumberFormatException | IndexOutOfBoundsException ex) {
-                    throw new DukeException("OOPS! Task number is invalid!");
+                    throw new DukeException("OOPS! duke.Task number is invalid!");
                 }
                 break;
             case TODO:
