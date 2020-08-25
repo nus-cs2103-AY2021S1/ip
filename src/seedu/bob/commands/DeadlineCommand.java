@@ -9,9 +9,17 @@ import seedu.bob.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Adds a deadline to the Bob's tasklist.
+ */
 public class DeadlineCommand extends Command {
     String input;
 
+    /**
+     * Creates a deadline command.
+     * @param input User input.
+     * @throws BobEmptyTaskException If there is no description for deadline.
+     */
     public DeadlineCommand(String input) throws BobEmptyTaskException {
         if (input.length() == 0) {
             throw new BobEmptyTaskException();
@@ -82,6 +90,14 @@ public class DeadlineCommand extends Command {
         return false;
     }
 
+    /**
+     * Executes deadline command.
+     * @param tasks Bob's tasklist.
+     * @param ui Bob's ui.
+     * @param storage Bob's storage.
+     * @throws BobInvalidDateAndTimeException if no/invalid date and time is stated.
+     * @throws IOException If an error occurs while updating file.
+     */
     @Override
     public void execute(Tasklist tasks, Ui ui, Storage storage) throws BobInvalidDateAndTimeException, IOException {
         String[] splitD = input.split("/by");

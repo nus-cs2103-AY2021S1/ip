@@ -3,9 +3,7 @@ package seedu.bob.exceptions;
 import seedu.bob.common.Messages;
 
 /**
- * Exception representing index out of bounds for DONE and DELETE commands
- * with inherited functionalities from Exception.
- * @author Lim Zi Yang
+ * Exception representing index out of bounds for DONE and DELETE commands.
  */
 public class BobListIndexOutOfBoundsException extends BobException {
     private final int totalNoOfTasks;
@@ -25,10 +23,6 @@ public class BobListIndexOutOfBoundsException extends BobException {
         this.action = action;
     }
 
-    /**
-     * Overridden toString method.
-     * @return String value of the BobListIndexOutOfBoundsException.
-     */
     @Override
     public String toString() {
         String errMsg = Messages.listIndexOutOfBoundsMsgGenerator(totalNoOfTasks, taskNo, action);

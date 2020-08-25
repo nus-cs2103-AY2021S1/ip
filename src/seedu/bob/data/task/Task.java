@@ -2,43 +2,25 @@ package seedu.bob.data.task;
 
 /**
  * Represents a task.
- * @author Lim Zi Yang
  */
 public class Task {
     protected final String description;
     protected final boolean isDone;
 
-    /**
-     * Creates an undone task.
-     * @param description Description of task.
-     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    /**
-     * Creates a task.
-     * @param description Description of task.
-     * @param isDone Whether the task is done.
-     */
     protected Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
 
-    /**
-     * Description getter.
-     * @return The description of the task.
-     */
     public String getDescription() {
         return description;
     }
 
-    /**
-     * isDone getter.
-     * @return Boolean value representing whether the task is done.
-     */
     public boolean checkIsDone() {
         return isDone;
     }
@@ -71,10 +53,6 @@ public class Task {
                 : "T/0/" + getDescription();
     }
 
-    /**
-     * Overridden toString method.
-     * @return String value of the task.
-     */
     @Override
     public String toString() {
         return "[T][" + getStatusIcon() + "] " + getDescription();

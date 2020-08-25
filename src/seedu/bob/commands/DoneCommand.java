@@ -9,6 +9,9 @@ import seedu.bob.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Marks a task done from Bob's tasklist.
+ */
 public class DoneCommand extends Command {
     String input;
 
@@ -21,6 +24,15 @@ public class DoneCommand extends Command {
         return false;
     }
 
+    /**
+     * Executes done command.
+     * @param tasks Bob's tasklist.
+     * @param ui Bob's ui.
+     * @param storage Bob's storage.
+     * @throws BobInvalidNumberException If input cannot be parsed.
+     * @throws BobListIndexOutOfBoundsException If number > size of tasklist or <= 0.
+     * @throws IOException If an error occurs while updating file.
+     */
     public void execute(Tasklist tasks, Ui ui, Storage storage)
             throws BobInvalidNumberException, BobListIndexOutOfBoundsException, IOException {
         try {

@@ -12,13 +12,17 @@ import java.io.IOException;
 
 /**
  * Represents the task-managing ChatBot.
- * @author Lim Zi Yang
  */
 public class Bob {
     private final Storage storage;
     private final Tasklist tasks;
     private final Ui ui;
 
+    /**
+     * Creates a Bob.
+     * @param filePath File path of saved file containing tasks.
+     * @throws IOException If saved file can't be loaded.
+     */
     public Bob(String filePath) throws IOException {
         Tasklist tempTasks;
         this.ui = new Ui();
@@ -31,6 +35,9 @@ public class Bob {
         this.tasks = tempTasks;
     }
 
+    /**
+     * Runs Bob.
+     */
     public void run() {
         ui.showIntroMessage();
         boolean isExit = false;
@@ -53,7 +60,7 @@ public class Bob {
 
 
     /**
-     * The program initializes Bob and reads user inputs for Bob.
+     * The main environment where Bob runs.
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
