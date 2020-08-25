@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,7 +10,7 @@ public class Duke {
 
     public static ArrayList<Task> taskList = new ArrayList<>();
     public static Scanner sc = new Scanner(System.in);
-
+    
     public static void inputList(String display) {
         for (int i = 0; i < taskList.size(); i++) {
             if (i == 0) {
@@ -45,7 +47,6 @@ public class Duke {
         }
     }
 
-
     public static void inputDeadline(String display) {
         try {
             if (display.length() == 8 || display.length() == 9) {
@@ -60,10 +61,16 @@ public class Duke {
                 }
                 String description = display.substring(9, index - 1);
                 String deadlineDate = display.substring(index + 4);
-                Deadline deadline = new Deadline(description, deadlineDate);
-                taskList.add(deadline);
-                System.out.println("Got it. I've added this task:\n" + deadline + "\n"
-                        + "Now you have " + taskList.size() + " tasks in the list.\n");
+
+                try {
+                    LocalDate date = LocalDate.parse(deadlineDate);
+                    Deadline deadline = new Deadline(description, date);
+                    taskList.add(deadline);
+                    System.out.println("Got it. I've added this task:\n" + deadline + "\n"
+                            + "Now you have " + taskList.size() + " tasks in the list.\n");
+                } catch (DateTimeParseException e) {
+                    System.out.println("Please key in the date in the format YYYY-MM-DD");
+                }
             } else {
                 throw new DukeException("☹ OOPS!!! The format is wrong. A dash is missing.");
             }
@@ -88,10 +95,15 @@ public class Duke {
                 }
                 String description = display.substring(6, index - 1);
                 String eventDate = display.substring(index + 4);
-                Event event = new Event(description, eventDate);
-                taskList.add(event);
-                System.out.println("Got it. I've added this task:\n" + event + "\n"
-                        + "Now you have " + taskList.size() + " tasks in the list.\n");
+                try {
+                    LocalDate date = LocalDate.parse(eventDate);
+                    Event event = new Event(description, date);
+                    taskList.add(event);
+                    System.out.println("Got it. I've added this task:\n" + event + "\n"
+                            + "Now you have " + taskList.size() + " tasks in the list.\n");
+                } catch (DateTimeParseException e) {
+                    System.out.println("Please key in the date in the format YYYY-MM-DD");
+                }
             } else {
                 throw new DukeException("☹ OOPS!!! The format is wrong. A dash is missing.");
             }
@@ -136,6 +148,7 @@ public class Duke {
     }
 
     public static void readUserInput() {
+        
         String display = sc.nextLine();
         if (display.equals("bye")) {
             exit();
