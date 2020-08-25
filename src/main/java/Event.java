@@ -6,6 +6,10 @@ public class Event extends Task{
         this.time = time;
     }
 
+    public Event(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
     public String toString() {
         return "[E]" + super.toString()
                 + " (at: " + time + ")";

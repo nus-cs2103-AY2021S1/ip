@@ -6,6 +6,10 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    public Deadline(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
     public String toString() {
         return "[D]" + super.toString()
                 + " (by: " + time + ")";
