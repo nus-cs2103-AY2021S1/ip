@@ -22,9 +22,9 @@ public class Storage {
         File outFile;
         Writer out;
 
-        try{
+        try {
             outFile = new File(filePath);
-            if(!outFile.getParentFile().exists()) {
+            if (!outFile.getParentFile().exists()) {
                 throw new DukeException(" ☹ OOPS!!! The folder does not exist.");
             } else if (!outFile.exists()) {
                 throw new DukeException(" ☹ OOPS!!! The file does not exist.");
@@ -50,9 +50,9 @@ public class Storage {
         FileReader fileReader;
         BufferedReader bufferedReader;
 
-        try{
+        try {
             File file = new File(filePath);
-            if(!file.getParentFile().exists()) {
+            if (!file.getParentFile().exists()) {
                 throw new DukeException(" ☹ OOPS!!! The folder does not exist.");
             } else if (!file.exists()) {
                 throw new DukeException(" ☹ OOPS!!! The file does not exist.");
@@ -62,7 +62,7 @@ public class Storage {
             String line = null;
 
             while ((line = bufferedReader.readLine()) != null) {
-                if(!line.isBlank()) {
+                if (!line.isBlank()) {
                     taskList.add(parseTask(line));
                 }
             }
@@ -76,15 +76,15 @@ public class Storage {
         String[] commands = line.split(" \\| ");
         boolean isDone = commands[1].equals("1");
         switch (commands[0]) {
-            case "T": {
-                return new Todo(isDone, commands[2]);
-            }
-            case "D": {
-                return new Deadline(isDone, commands[2], commands[3]);
-            }
-            default: {
-                return new Event(isDone, commands[2], commands[3]);
-            }
+        case "T": {
+            return new Todo(isDone, commands[2]);
+        }
+        case "D": {
+            return new Deadline(isDone, commands[2], commands[3]);
+        }
+        default: {
+            return new Event(isDone, commands[2], commands[3]);
+        }
         }
     }
 }

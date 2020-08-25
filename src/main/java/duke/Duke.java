@@ -23,10 +23,10 @@ public class Duke {
         ui.showWelcome();
         String fullCommand = ui.readCommand();
 
-        while(true) {
+        while (true) {
             try {
                 String[] commands = Parser.parse(fullCommand);
-                if(commands[0].equals("bye")) break;
+                if (commands[0].equals("bye")) break;
                 tasks.runCommand(commands, ui, storage);
             } catch (DukeException e) {
                 ui.showError(e.msg);
