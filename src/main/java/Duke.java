@@ -21,6 +21,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        new Duke("src/main/java/data/duke.txt").run();
+        new Duke("./duke.txt").run();
     }
 }
