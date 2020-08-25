@@ -17,13 +17,13 @@ public class Ui {
         sc.close();
     }
 
-    public static void formatPrint(String str) {
+    public void formatPrint(String str) {
         String divider = "----------------------------\n";
         String newStr = ("   " + divider + str + "\n" + divider).replaceAll("(\r\n|\n)", "\r\n   ");
         System.out.println(newStr);
     }
 
-    public static void printError(String str) {
+    public void printError(String str) {
         String divider = "############################\n";
         String newStr = ("   " + divider + str + "\n" + divider).replaceAll("(\r\n|\n)", "\r\n   ");
         System.out.println(newStr);

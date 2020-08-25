@@ -39,15 +39,11 @@ public class Storage {
         }
     }
 
-    public void saveTaskListToFile(TaskList taskList) {
-        try {
-            PrintWriter writer = initialiseWriter();
-            String allTasks = taskList.getTaskListForSave();
-            writer.print(allTasks);
-            writer.close();
-        } catch (DukeException e) {
-            Ui.printError(e.getMessage());
-        }
+    public void saveTaskListToFile(TaskList taskList) throws DukeException {
+        PrintWriter writer = initialiseWriter();
+        String allTasks = taskList.getTaskListForSave();
+        writer.print(allTasks);
+        writer.close();
     }
 
     public static PrintWriter initialiseWriter() throws DukeException {

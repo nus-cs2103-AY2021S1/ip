@@ -8,13 +8,9 @@ public class TaskList {
         taskList = new ArrayList<>();
     }
 
-    public TaskList(List<String> tasks) {
+    public TaskList(List<String> tasks) throws DukeException {
         taskList = new ArrayList<>();
-        try {
-            generateTaskList(tasks);
-        } catch (DukeException e) {
-            Ui.printError("OOPS! There are some invalid tasks in your storage.");
-        }
+        generateTaskList(tasks);
     }
 
     public int getSize() {

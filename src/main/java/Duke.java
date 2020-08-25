@@ -14,7 +14,7 @@ public class Duke {
             try {
                 storage.newStorage();
             } catch (DukeException ex) {
-                Ui.printError(e.getMessage());
+                ui.printError(e.getMessage());
             }
         }
     }
@@ -34,7 +34,7 @@ public class Duke {
                 command.execute(ui, tasks, storage);
                 isExit = command.isExit();
             } catch (DukeException e) {
-                Ui.printError(e.getMessage());
+                ui.printError(e.getMessage());
             }
         }
 

@@ -9,8 +9,10 @@ public class Event extends Task {
     protected LocalDateTime endDateTime;
     public Event(String description, String time) throws DukeException {
         super(description);
-
         String[] timeDetails = time.split("\\s", 3);
+        if (timeDetails.length < 3) {
+            throw new DukeException("OOPS! Wrong Date/Time format! Type 'help' to see the correct format");
+        }
         this.startDateTime = parseEventDateTime(timeDetails[0], timeDetails[1]);
         this.endDateTime = parseEventDateTime(timeDetails[0], timeDetails[2]);
     }
