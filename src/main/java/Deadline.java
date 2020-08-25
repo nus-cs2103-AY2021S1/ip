@@ -1,14 +1,18 @@
-public class Deadline extends Task {
-    protected String dueDate;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String name, String details) {
+public class Deadline extends Task {
+    protected LocalDate dueDate;
+
+    public Deadline(String name, LocalDate details) {
         super(name);
         this.dueDate = details;
     }
 
     // Gets deadline of the task
     public String getDeadline() {
-        return this.dueDate;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return this.dueDate.format(formatter);
     }
 
     @Override
@@ -19,6 +23,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         // By default print task name
-        return "[D]" + super.toString() + " (by: " + this.dueDate + ")";
+        return "[D]" + super.toString() + " (by: " + getDeadline() + ")";
     }
 }

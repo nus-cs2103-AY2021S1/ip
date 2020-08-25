@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
     protected String duration;
 
@@ -8,6 +11,8 @@ public class Event extends Task {
 
     // Gets duration of the task
     public String getEventDetails() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        //return this.duration.format(formatter);
         return this.duration;
     }
 
@@ -19,6 +24,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         // By default print task name
-        return "[E]" + super.toString() + " (at: " + this.duration + ")";
+        return "[E]" + super.toString() + " (at: " + getEventDetails() + ")";
     }
 }
