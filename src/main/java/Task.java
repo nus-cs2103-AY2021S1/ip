@@ -1,10 +1,15 @@
 public class Task {
     protected String description;
+    protected String identifier;
     protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public String getIdentifier() {
+        return identifier;
     }
 
     public String getStatusIcon() {
