@@ -1,8 +1,11 @@
 package duke.command;
 
 import duke.exception.InvalidIndexException;
+
 import duke.storage.Storage;
+
 import duke.task.TaskList;
+
 import duke.ui.Ui;
 
 public class DoneCommand extends Command{

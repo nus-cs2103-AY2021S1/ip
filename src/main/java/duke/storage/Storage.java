@@ -34,6 +34,7 @@ public class Storage {
                 String type = splitted[0];
                 boolean isDone = splitted[1].equals("D");
                 Task newTask;
+                
                 if (type.equals("T")) {
                     String description = splitted[2];
                     newTask = new ToDo(description);
@@ -47,9 +48,11 @@ public class Storage {
                         newTask = new Event(description, time);
                     }
                 }
+                
                 if (isDone) {
                     newTask.markAsDone();
                 }
+                
                 tasks.add(newTask);
             }
             sc.close();
@@ -71,10 +74,12 @@ public class Storage {
     public void write(TaskList tasks) {
         try {
             File f = new File(filePath);
+            
             if (f.exists()) {
                 f.delete();
             }
             f.createNewFile();
+            
             FileWriter fw = new FileWriter(filePath, true);
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
