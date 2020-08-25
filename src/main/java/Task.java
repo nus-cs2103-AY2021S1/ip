@@ -44,7 +44,7 @@ public abstract class Task {
         if (d == '\u2713') {
             t.done();
         }
-        
+
         return t;
     }
 
