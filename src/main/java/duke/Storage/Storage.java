@@ -1,16 +1,13 @@
-package Logic.Storage;
+package duke.Storage;
 
-import Logic.Exceptions.DukeException;
-import Logic.Tasks.Task;
+import duke.Exceptions.DukeException;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Storage {
-    private String filePath = "./src/main/java/Logic/Data/data.txt";
-    private String folderPath = "./src/main/java/Logic/Data";
+    private String filePath = "./src/main/java/duke/Data/data.txt";
+    private String folderPath = "./src/main/java/duke/Data";
 
     public Storage(String filePath, String folderPath) {
         this.filePath = filePath;
@@ -20,7 +17,6 @@ public class Storage {
     public void makeFolder() throws DukeException{
         File savedFolder = new File(folderPath);
         savedFolder.mkdir();
-        System.out.println("creating data directory");
         this.makeFile();
     }
 
@@ -28,9 +24,8 @@ public class Storage {
         File savedFile = new File(filePath);
         try{
             savedFile.createNewFile();
-            System.out.println("creating data file");
         } catch (IOException e) {
-            throw new DukeException("   Error creating data storage file for duke");
+            throw new DukeException("    Error creating data storage file for duke");
         }
     }
 

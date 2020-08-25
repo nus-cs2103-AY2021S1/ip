@@ -1,0 +1,7 @@
+D|1|read book|
+D|0|return book |2020-06-06 12:00
+E|1|project meeting |2020-08-06 10:00
+D|1|join sports club|
+D|0|borrow book|
+E|0|cca meeting |2020-06-03 20:00
+D|0|go to bed |2020-08-28 01:00

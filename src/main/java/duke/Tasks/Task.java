@@ -1,4 +1,4 @@
-package Logic.Tasks;
+package duke.Tasks;
 
 public class Task {
 

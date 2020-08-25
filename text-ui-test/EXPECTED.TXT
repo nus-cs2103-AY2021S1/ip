@@ -1,3 +1,4 @@
+    Error creating data storage file for duke
     Welcome to 
      ____        _        
     |  _ \ _   _| | _____ 
@@ -14,16 +15,16 @@
     Now you have 1 tasks in the list.
     ______________________________________________________
     ______________________________________________________
-    Invalid index entry
+    Invalid index entry for done command.
     ______________________________________________________
     ______________________________________________________
     Got it. I've added this task: 
-     [D][?] return book  (by:  June 6th)
+     [D][?] return book  (by: Sat Jun 6 2020 12 00 PM)
     Now you have 2 tasks in the list.
     ______________________________________________________
     ______________________________________________________
     Got it. I've added this task: 
-     [E][?] project meeting  (at:  Aug 6th)
+     [E][?] project meeting  (at: Thu Aug 6 2020 10 00 AM)
     Now you have 3 tasks in the list.
     ______________________________________________________
     ______________________________________________________
@@ -54,19 +55,19 @@
     ______________________________________________________
     ______________________________________________________
     1: [T][?] read book
-    2: [D][?] return book  (by:  June 6th)
-    3: [E][?] project meeting  (at:  Aug 6th)
+    2: [D][?] return book  (by: Sat Jun 6 2020 12 00 PM)
+    3: [E][?] project meeting  (at: Thu Aug 6 2020 10 00 AM)
     4: [T][?] join sports club
     5: [T][?] borrow book
     ______________________________________________________
     ______________________________________________________
     Got it. I've added this task: 
-     [E][?] cca meeting  (at:  June 13th 3-4am)
+     [E][?] cca meeting  (at: Wed Jun 3 2020 20 00 PM)
     Now you have 6 tasks in the list.
     ______________________________________________________
     ______________________________________________________
     Got it. I've added this task: 
-     [D][?] go to bed  (by:  10pm)
+     [D][✘] go to bed  (by: Fri Aug 28 2020 01 00 AM)
     Now you have 7 tasks in the list.
     ______________________________________________________
     ______________________________________________________
@@ -75,12 +76,12 @@
     ______________________________________________________
     ______________________________________________________
     1: [T][?] read book
-    2: [D][?] return book  (by:  June 6th)
-    3: [E][?] project meeting  (at:  Aug 6th)
+    2: [D][?] return book  (by: Sat Jun 6 2020 12 00 PM)
+    3: [E][?] project meeting  (at: Thu Aug 6 2020 10 00 AM)
     4: [T][?] join sports club
     5: [T][?] borrow book
-    6: [E][?] cca meeting  (at:  June 13th 3-4am)
-    7: [D][?] go to bed  (by:  10pm)
+    6: [E][?] cca meeting  (at: Wed Jun 3 2020 20 00 PM)
+    7: [D][?] go to bed  (by: Fri Aug 28 2020 01 00 AM)
     ______________________________________________________
     ______________________________________________________
     Bye. Hope to see you again soon!
