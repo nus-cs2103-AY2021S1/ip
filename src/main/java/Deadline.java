@@ -9,7 +9,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + "(by:" + by + ")";
     }
 
     @Override
@@ -20,4 +20,11 @@ public class Deadline extends Task {
         }
         System.out.println(indents + this.toString());
     }
+
+    @Override
+    public String stringToSave() {
+        char status = this.isDone ? '1' : '0';
+        return "D " + "| " + status + " | " + this.description + "|" + this.by;
+    }
+
 }

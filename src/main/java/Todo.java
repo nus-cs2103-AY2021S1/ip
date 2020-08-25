@@ -1,7 +1,5 @@
 public class Todo extends Task {
 
-    protected String by;
-
     public Todo(String description) {
         super(description);
     }
@@ -19,4 +17,11 @@ public class Todo extends Task {
         }
         System.out.println(indents + this.toString());
     }
+
+    @Override
+    public String stringToSave() {
+        char status = this.isDone ? '1' : '0';
+        return "T " + "| " + status + " | " + this.description;
+    }
+
 }

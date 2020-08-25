@@ -1,0 +1,6 @@
+T | 0 | buy monitor
+D | 1 | get 6 packs | 10 sept
+T | 1 | get bread
+E | 1 | strongman challenge | daily
+E | 0 | Go to gym | once a year
+E | 1 | food marathon | everyday

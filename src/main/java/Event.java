@@ -9,7 +9,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + "(at:" + at + ")";
     }
 
     @Override
@@ -20,4 +20,11 @@ public class Event extends Task {
         }
         System.out.println(indents + this.toString());
     }
+
+    @Override
+    public String stringToSave() {
+        char status = this.isDone ? '1' : '0';
+        return "E " + "| " + status + " | " + this.description + "|" + this.at;
+    }
+
 }
