@@ -1,9 +1,43 @@
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException, IOException {
-        Tracker tracker = new Tracker("./data/duke.txt");
-        Bot bot = new Bot(tracker);
-        bot.start();
+    private TaskList taskList;
+    private Ui ui;
+    private Storage storage;
+
+    public Duke(String path) throws IOException {
+        ui = new Ui();
+        storage = new Storage(path);
+        try {
+            taskList = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            taskList = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(taskList, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } catch (DateTimeParseException e) {
+                ui.showError("Invalid date input");
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        new Duke("./data/duke.txt").run();
     }
 }
