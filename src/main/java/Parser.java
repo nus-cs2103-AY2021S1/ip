@@ -74,6 +74,8 @@ public class Parser {
                 }
             case "bye":
                 return new endCommand(tasks);
+            case "find":
+                return new findCommand(tasks, description);
 
             default:
                 duke.ui.badInput();
