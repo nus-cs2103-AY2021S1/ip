@@ -12,7 +12,8 @@ public class DukeException {
         empty_illegal,
         todo_empty,
         deadline_empty_incomplete,
-        event_empty_incomplete
+        event_empty_incomplete,
+        read_file
     }
 
     @Override
@@ -41,6 +42,9 @@ public class DukeException {
             case event_empty_incomplete:
                 output = "     ☹ OOPS!!! The description of an event cannot be empty or incomplete." +
                             "\n     Please follow the format: 'event MY_TASK /at DATE_OR_TIME'";
+                break;
+            case read_file:
+                output = "     ☹ OOPS!!! There seems to be some problem reading the memory!";
                 break;
             default:
                 output = "     ☹ OOPS!!! Unspecified problem detected!" + full_guide;
