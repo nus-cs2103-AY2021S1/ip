@@ -15,7 +15,7 @@ public class ListCommand extends Command {
     public void execute(Storage storage, TaskList taskList, Ui ui) {
         try {
             taskList.printList();
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
     }

@@ -1,6 +1,13 @@
 package duke;
 
-import duke.command.*;
+
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.FormatCommand;
+import duke.command.ListCommand;
+import duke.command.MarkDoneCommand;
 
 public class Parser {
 
@@ -22,7 +29,7 @@ public class Parser {
             return new DeleteCommand(userCommand);
         } else {
             // Dino adds task to list
-            return new AddCommand(userCommand, inputWords);
+            return new AddCommand(userCommand);
         }
     }
 }

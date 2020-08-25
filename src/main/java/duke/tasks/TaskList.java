@@ -19,7 +19,7 @@ public class TaskList {
     }
 
     public void printList() throws DukeException {
-        if(this.taskList.size() != 0) {
+        if (this.taskList.size() != 0) {
             // Dino lists out all items in list
             System.out.println("Dino lists your tasks:");
             for (int i = 0; i < this.taskList.size(); i++) {
@@ -52,7 +52,8 @@ public class TaskList {
         }
     }
 
-    public String addTask(Storage storage, String input, String[] inputWords) throws DukeException {
+    public String addTask(Storage storage, String input) throws DukeException {
+        String[] inputWords = input.split(" ");
         try {
             String successStatement;
             switch (inputWords[0]) {
@@ -67,7 +68,7 @@ public class TaskList {
                 break;
             case "deadline":
                 String[] taskBy = input.substring(9).split(" /by");
-                if(taskBy.length == 2 && !taskBy[0].equals("")) {
+                if (taskBy.length == 2 && !taskBy[0].equals("")) {
                     // condition checks that input has task description and date/time
                     // task deadline taken as string after first '/by'
                     Deadline deadline = Deadline.createDeadline(taskBy[0], taskBy[1].substring(1));
@@ -84,7 +85,7 @@ public class TaskList {
                 break;
             case "event":
                 String[] eventAt = input.substring(6).split(" /at");
-                if(eventAt.length == 2 && !eventAt[0].equals("")) {
+                if (eventAt.length == 2 && !eventAt[0].equals("")) {
                     // condition checks that input has task description and date/time
 
                     // task deadline taken as string after first '/at'
@@ -107,7 +108,7 @@ public class TaskList {
                         + "\nFormats to input a task can be found by entering 'format'.");
             }
             return successStatement;
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             // invalid task format entered
             throw new DukeException("Rawr! Dino could not add your task. "
                     + "Make sure your format is correct."

@@ -9,16 +9,15 @@ public class AddCommand extends Command {
     protected String input;
     protected String[] inputWords;
 
-    public AddCommand(String input, String[] inputWords) {
+    public AddCommand(String input) {
         this.input = input;
-        this.inputWords = inputWords;
     }
 
     @Override
     public void execute(Storage storage, TaskList taskList, Ui ui) {
         try {
-            ui.showSuccess(taskList.addTask(storage, this.input, this.inputWords));
-        } catch(DukeException e) {
+            ui.showSuccess(taskList.addTask(storage, this.input));
+        } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
     }

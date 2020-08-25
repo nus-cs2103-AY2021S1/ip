@@ -7,5 +7,6 @@ import duke.ui.Ui;
 
 public abstract class Command {
     public boolean isBye = false;
+
     public abstract void execute(Storage storage, TaskList taskList, Ui ui) throws DukeException;
 }

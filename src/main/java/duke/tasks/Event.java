@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task{
+public class Event extends Task {
 
     protected LocalDate date;
     protected String time;
@@ -31,7 +31,7 @@ public class Event extends Task{
             String[] startAndEndTime = userInputTime.split("-");
             String time = timeFormat(startAndEndTime[0]) + " - " + timeFormat(startAndEndTime[1]);
             return new Event(description, userInputDate, userInputTime, date, time);
-        } catch(DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Rawr! Dino could not add your task. "
                     + "Make sure your format is correct."
                     + "\nFormats to input a task can be found by entering 'format'.");
@@ -44,11 +44,14 @@ public class Event extends Task{
 
         StringBuilder formattedTime = new StringBuilder();
         if (hour >= 12 && hour < 24 && min < 60 && min >= 0) {
-            formattedTime.append(hour-12).append(".").append(String.format("%02d", min)).append("pm");
+            formattedTime.append(hour - 12).append(".")
+                    .append(String.format("%02d", min)).append("pm");
         } else if (hour > 0 && hour < 12 && min < 60 && min >= 0) {
-            formattedTime.append(hour).append(".").append(String.format("%02d", min)).append("am");
+            formattedTime.append(hour).append(".")
+                    .append(String.format("%02d", min)).append("am");
         } else if (hour == 0 && min < 60 && min >= 0) {
-            formattedTime.append("12").append(".").append(String.format("%02d", min)).append("am");
+            formattedTime.append("12").append(".")
+                    .append(String.format("%02d", min)).append("am");
         } else {
             throw new DukeException("Rawr! Dino could not add your task. "
                     + "Make sure your format is correct."
