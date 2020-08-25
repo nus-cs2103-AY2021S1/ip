@@ -44,7 +44,7 @@ public class TaskList {
     }
 
     /**
-     * Lists all the tasks
+     * Lists all the tasks.
      */
     public void listTasks() {
         //If tasks list is empty
@@ -67,7 +67,7 @@ public class TaskList {
     }
 
     /**
-     * Informs the user of the number of tasks in the current list
+     * Informs the user of the number of tasks in the current list.
      */
     public String listTaskSize() {
         return "You now have " + tasks.size() + " task(s) in the list.";
@@ -92,8 +92,9 @@ public class TaskList {
     }
 
     /**
-     * Adds an event Task to the list
-     * @param input The task to be added followed by time
+     * Adds an event Task to the list.
+     *
+     * @param input The task to be added followed by time.
      */
     public void addEventTask(String input) throws InvalidDateTimeException, WrongFormatException {
         //splits the input according to whitespace
@@ -120,8 +121,9 @@ public class TaskList {
     }
 
     /**
-     * Adds a deadline Task to the list
-     * @param input The task to be added followed by time
+     * Adds a deadline Task to the list.
+     *
+     * @param input The task to be added followed by time.
      */
     public void addDeadlineTask(String input) throws InvalidDateTimeException, WrongFormatException {
         //splits the input according to whitespace
@@ -149,6 +151,7 @@ public class TaskList {
 
     /**
      * Checks if the given dateTime is valid.
+     *
      * @param str Localized date and time.
      */
     private LocalDateTime parseDateTime(String str) throws InvalidDateTimeException {
@@ -162,8 +165,9 @@ public class TaskList {
     }
 
     /**
-     * Completes a task in the given index
-     * @param taskIndex Index of the task in the list
+     * Completes a task in the given index.
+     *
+     * @param taskIndex Index of the task in the list.
      */
     public void completeTask(int taskIndex) throws InvalidIndexException, TaskAlreadyCompleteException {
         try {
@@ -184,8 +188,9 @@ public class TaskList {
     }
 
     /**
-     * Deletes the task at the specified index
-     * @param taskIndex Index of the task in the list
+     * Deletes the task at the specified index.
+     *
+     * @param taskIndex Index of the task in the list.
      */
     public void deleteTask(int taskIndex) throws InvalidIndexException {
         try {

@@ -3,7 +3,13 @@ package taskbot.command;
 import taskbot.task.TaskList;
 import taskbot.ui.Ui;
 
+/**
+ * Encapsulates a command to list all tasks.
+ */
 public class ListCommand extends Command {
+    /**
+     * Creates a ListCommand.
+     */
     public ListCommand() {
         super(false);
     }

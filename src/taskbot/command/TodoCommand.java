@@ -3,8 +3,18 @@ package taskbot.command;
 import taskbot.task.TaskList;
 import taskbot.ui.Ui;
 
+/**
+ * Encapsulates a command to add a todo task.
+ */
 public class TodoCommand extends Command {
+    // The task description
     private String task;
+
+    /**
+     * Creates a TodoCommand
+     *
+     * @param task The task description.
+     */
     public TodoCommand(String task) {
         super(false);
         this.task = task;

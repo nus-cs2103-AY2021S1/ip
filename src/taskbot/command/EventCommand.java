@@ -5,13 +5,26 @@ import taskbot.exceptions.TaskbotException;
 import taskbot.task.TaskList;
 import taskbot.ui.Ui;
 
+/**
+ * Encapsulates a command to add an event task.
+ */
 public class EventCommand extends Command {
+    // The task description
     private String task;
+
+    /**
+     * Creates a EventCommand.
+     *
+     * @param task The task description.
+     */
     public EventCommand(String task) {
         super(false);
         this.task = task;
     }
 
+    /**
+     * @return The task description.
+     */
     public String getTask() {
         return task;
     }

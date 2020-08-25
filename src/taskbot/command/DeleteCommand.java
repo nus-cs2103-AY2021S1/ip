@@ -5,13 +5,26 @@ import taskbot.exceptions.TaskbotException;
 import taskbot.task.TaskList;
 import taskbot.ui.Ui;
 
+/**
+ * Encapsulates a command to delete a task.
+ */
 public class DeleteCommand extends Command {
+    // The index at which to delete the task.
     private int taskIndex;
+
+    /**
+     * Creates a DeleteCommand.
+     *
+     * @param taskIndex The index where the task is at.
+     */
     public DeleteCommand(int taskIndex) {
         super(false);
         this.taskIndex = taskIndex;
     }
 
+    /**
+     * @return The index of the list where the task is.
+     */
     public int getTaskIndex() {
         return taskIndex;
     }
