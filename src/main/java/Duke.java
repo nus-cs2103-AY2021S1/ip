@@ -151,7 +151,6 @@ public class Duke {
             input = scanner.nextLine().trim();
             if (isBye(input)) {
                 bye();
-                writeFile(tasks);
                 return;
             } else if (isList(input)) {
                 listOut(tasks);
@@ -170,6 +169,7 @@ public class Duke {
             } else {
                 add(tasks, input);
             }
+            writeFile(tasks);
         }
     }
 
