@@ -5,6 +5,7 @@ import dependencies.task.Schedulable;
 import dependencies.task.Task;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -28,8 +29,9 @@ public class TaskList {
             try {
                 todoList = l.openAndReadObject();
             } catch (MissingListException e) {
-                e.printStackTrace();
-                System.out.println("Error in save file: Helping you to initialise a new list!!!!!");
+//                e.printStackTrace();
+                System.out.println("OOPS, there seems to be data corruption in the todolist!");
+                System.out.println("Initialising new directory for saving your list...");
                 todoList = new ArrayList<>();
             }
         } else {

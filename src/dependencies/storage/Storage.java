@@ -42,21 +42,24 @@ public class Storage {
         assert !isFilePresent;
         try {
             if (Files.exists(DIR_PATH)) {
-                System.out.println("Dir exist");
+//                System.out.println("Dir exist");
                 if (Files.exists(FILE_PATH)) {
-                    System.out.println("File exists");
+//                    System.out.println("File exists");
                 } else {
                     Files.createFile(FILE_PATH);
-                    System.out.println("File created");
+//                    System.out.println("File created");
                 }
+                System.out.println("Clean slate: Initialising cache...");
             } else {
                 // Directory and storage file not present
-                System.out.println("Creating Dir");
+//                System.out.println("Creating Dir");
                 Files.createDirectory(DIR_PATH);
-                System.out.println("Dir created");
-                System.out.println("Creating file");
+//                System.out.println("Dir created");
+//                System.out.println("Creating file");
                 Files.createFile(FILE_PATH);
-                System.out.println("File created");
+//                System.out.println("File created");
+                System.out.println("Clean slate: Initialising cache...");
+
             }
             isFilePresent = true;
         } catch (IOException e) {
@@ -77,7 +80,7 @@ public class Storage {
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(t);
             oos.close();
-            System.out.println("Successfully saved your data.");
+//            System.out.println("Successfully saved your data.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -97,7 +100,7 @@ public class Storage {
             ObjectInputStream ois = new ObjectInputStream(fis);
             return (T) ois.readObject();
         } catch (Exception e) {
-            e.getStackTrace();
+//            e.getStackTrace();
             throw new MissingListException("Error: Unable to load your saved list");
         }
     }

@@ -1,9 +1,10 @@
 todo run 100km
 list
-event meeting /at 2020-08-5
-deadline return books /by 2019-12-5
+event meeting /at 2020-08-05
+deadline return books /by 2019-11-05
 done 2
 todo change the world
+delete 2
 list
 blahhh
 exit

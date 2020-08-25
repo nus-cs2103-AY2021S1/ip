@@ -1,5 +1,4 @@
-Dir exist
-File created
+Clean slate: Initialising cache...
 ____________________________________________________________
  ____        _        
 |  _ \ _   _| | _____ 
@@ -11,7 +10,6 @@ Hello, I'm Duke
 what can I do for you?
 ____________________________________________________________
 
-Successfully saved your data.
 ____________________________________________________________
 Got it! I have added the task:
 [ToDo][X] run 100km
@@ -24,17 +22,51 @@ Here are the tasks in your list:
 So stop procrastinating!
 ____________________________________________________________
 
-Error: Date format not accepted.
 ____________________________________________________________
-I don't understand the date you are giving -_-
-Please give in the following formats:
-MM/dd/yyyy or yyyy-MM-dd
+Got it! I have added the task:
+[Event][X] meeting (at: 2020-08-05)
+Now you have 2 tasks in the list.
 ____________________________________________________________
 
-Error: Date format not accepted.
 ____________________________________________________________
-I don't understand the date you are giving -_-
-Please give in the following formats:
-MM/dd/yyyy or yyyy-MM-dd
+Got it! I have added the task:
+[Deadline][X] return books (by: 2019-11-05)
+Now you have 3 tasks in the list.
+____________________________________________________________
+
+____________________________________________________________
+Congratz! I will marked this task as completed for you!
+[Event][?] meeting (at: 2020-08-05)
+Keep up the good work and continue to stay motivated.
+You've got 2 task left to be completed!
+____________________________________________________________
+
+____________________________________________________________
+Got it! I have added the task:
+[ToDo][X] change the world
+Now you have 4 tasks in the list.
+____________________________________________________________
+
+____________________________________________________________
+Noted. I've removed this task:
+[Event][?] meeting (at: 2020-08-05)
+Now you have 3 tasks left in the list.
+____________________________________________________________
+
+____________________________________________________________
+Here are the tasks in your list:
+1. [ToDo][X] run 100km
+2. [Deadline][X] return books (by: 2019-11-05)
+3. [ToDo][X] change the world
+So stop procrastinating!
+____________________________________________________________
+
+Error: Unknown command
+____________________________________________________________
+C'mon, you know I don't understand this!
+____________________________________________________________
+
+____________________________________________________________
+Spero di rivederti presto
 ____________________________________________________________
 

@@ -1,5 +1,6 @@
 package dependencies.task;
 
+import java.io.Serializable;
 import java.time.DateTimeException;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +14,7 @@ import java.time.temporal.ChronoUnit;
  * Encapsulates a LocalDate object as well.
  *
  */
-public class TaskDate implements Comparable<TaskDate> {
+public class TaskDate implements Serializable, Comparable<TaskDate> {
     /** Some common format for dates */
     private static final DateTimeFormatter US_DATE_FORMAT = DateTimeFormatter.ofPattern("MM/dd/uuuu");
     private static final DateTimeFormatter UK_DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/uuuu");
