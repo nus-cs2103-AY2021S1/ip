@@ -1,18 +1,11 @@
 package duke.component;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
-
-import java.io.IOException;
-
 import java.util.LinkedList;
 import java.util.Scanner;
+
+import java.io.*;
+
+import duke.task.*;
 
 /**
  * Permanent storage that stores user's task list in a data file

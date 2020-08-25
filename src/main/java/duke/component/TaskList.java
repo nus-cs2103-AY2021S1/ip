@@ -1,9 +1,8 @@
 package duke.component;
 
-import duke.task.Task;
-
 import java.util.LinkedList;
 
+import duke.task.Task;
 /**
  * List that stores the task list.
  * Operations related to a task list has been abstracted in this class
