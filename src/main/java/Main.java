@@ -1,8 +1,8 @@
 import duck.Duck;
-import duck.LocalStorage;
-import duck.Storage;
-import duck.Ui;
-import duck.ConsoleUi;
+import duck.storage.LocalStorage;
+import duck.storage.Storage;
+import duck.ui.Ui;
+import duck.ui.ConsoleUi;
 
 public class Main {
     public static void main(String args[]) {

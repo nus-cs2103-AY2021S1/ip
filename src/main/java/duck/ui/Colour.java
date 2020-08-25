@@ -1,4 +1,4 @@
-package duck;
+package duck.ui;
 
 public class Colour {
     public static String Red(String s) {

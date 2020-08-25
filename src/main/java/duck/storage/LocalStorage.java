@@ -1,4 +1,4 @@
-package duck;
+package duck.storage;
 
 import duck.exception.DuckException;
 import duck.task.TaskList;

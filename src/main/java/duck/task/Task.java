@@ -1,6 +1,6 @@
 package duck.task;
 
-import duck.Colour;
+import duck.ui.Colour;
 
 import java.io.Serializable;
 

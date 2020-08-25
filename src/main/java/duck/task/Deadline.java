@@ -1,9 +1,8 @@
 package duck.task;
 
-import duck.Colour;
+import duck.ui.Colour;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Deadline extends TaskWithDate {
 

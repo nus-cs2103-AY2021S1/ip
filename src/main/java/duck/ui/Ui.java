@@ -1,4 +1,4 @@
-package duck;
+package duck.ui;
 
 import java.util.List;
 

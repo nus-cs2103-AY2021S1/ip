@@ -1,6 +1,6 @@
 package duck.exception;
 
-import duck.Colour;
+import duck.ui.Colour;
 
 public class DuckException extends Exception {
 
