@@ -1,11 +1,11 @@
-package seedu.duke;
+package main.java.seedu.duke;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import seedu.duke.todo.*;
+import main.java.seedu.duke.todo.Task;
 
 public class Storage {
     private static final String DIRECTORY_PATH = "data";

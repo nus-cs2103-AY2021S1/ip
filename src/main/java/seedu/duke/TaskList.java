@@ -1,10 +1,10 @@
-package seedu.duke;
+package main.java.seedu.duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import seedu.duke.todo.*;
+import main.java.seedu.duke.todo.Task;
 
 public class TaskList {
     ArrayList<Task> tasks = new ArrayList<>();

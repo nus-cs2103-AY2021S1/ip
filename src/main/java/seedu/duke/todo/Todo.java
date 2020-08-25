@@ -1,4 +1,4 @@
-package seedu.duke.todo;
+package main.java.seedu.duke.todo;
 
 public class Todo extends Task {
 

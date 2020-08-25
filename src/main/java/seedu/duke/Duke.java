@@ -1,6 +1,6 @@
-package seedu.duke;
+package main.java.seedu.duke;
 
-import seedu.duke.commands.*;
+import main.java.seedu.duke.commands.Command;
 
 public class Duke {
 

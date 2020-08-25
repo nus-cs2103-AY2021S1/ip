@@ -1,8 +1,8 @@
-package seedu.duke.commands;
+package main.java.seedu.duke.commands;
 
-import seedu.duke.TaskList;
-import seedu.duke.Ui;
-import seedu.duke.Storage;
+import main.java.seedu.duke.Storage;
+import main.java.seedu.duke.TaskList;
+import main.java.seedu.duke.Ui;
 
 public class DoneCommand extends Command {
     private int taskNo;

@@ -1,9 +1,9 @@
-package seedu.duke.commands;
+package main.java.seedu.duke.commands;
 
-import seedu.duke.TaskList;
-import seedu.duke.Ui;
-import seedu.duke.Storage;
-import seedu.duke.DukeException;
+import main.java.seedu.duke.DukeException;
+import main.java.seedu.duke.TaskList;
+import main.java.seedu.duke.Ui;
+import main.java.seedu.duke.Storage;
 
 public class DeleteCommand extends Command {
     private int taskNo;

@@ -1,4 +1,4 @@
-package seedu.duke;
+package main.java.seedu.duke;
 
 public class DukeException extends Exception {
     DukeException(String errorMessage) {

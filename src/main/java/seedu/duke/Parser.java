@@ -1,11 +1,14 @@
-package seedu.duke;
+package main.java.seedu.duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
-import seedu.duke.commands.*;
-import seedu.duke.todo.*;
+import main.java.seedu.duke.commands.*;
+import main.java.seedu.duke.todo.Deadline;
+import main.java.seedu.duke.todo.Event;
+import main.java.seedu.duke.todo.Todo;
+import main.java.seedu.duke.todo.Task;
 
 public class Parser {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
