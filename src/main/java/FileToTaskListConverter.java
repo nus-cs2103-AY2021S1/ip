@@ -1,12 +1,14 @@
-import Exception.DukeException;
-import Exception.FileCorruptedException;
-import Task.DeadlineTask;
-import Task.EventTask;
-import Task.Task;
-import Task.ToDoTask;
+import exception.DukeException;
+import exception.FileCorruptedException;
+import task.DeadlineTask;
+import task.EventTask;
+import task.Task;
+import task.ToDoTask;
+import task.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,7 @@ import java.util.Scanner;
 import java.util.regex.PatternSyntaxException;
 
 public abstract class FileToTaskListConverter {
-    public static List<Task> convert(File data) throws FileCorruptedException {
+    public static TaskList convert(File data) throws FileCorruptedException {
         List<String> dataList = loadStringData(data);
         List<Task> list = new ArrayList<>();
 
@@ -22,7 +24,35 @@ public abstract class FileToTaskListConverter {
             list.add(getTaskFromData(dataList.get(i)));
         }
 
-        return list;
+        return new TaskList(list);
+    }
+
+    public static boolean saveToFile(TaskList list, File file) {
+        try {
+            FileWriter fw = new FileWriter(file);
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < list.size(); i++) {
+                Task task = list.getTask(i);
+                String type = task.getType();
+
+                sb.append(type + "//");
+                sb.append(task.isDone() ? "✓" : "✘");
+                sb.append("//");
+                sb.append(task.getDescription() + "//");
+
+                if (type.equals("D") || type.equals("E")) {
+                    sb.append(task.getDateInput() + "//");
+                    sb.append(task.getTimeInput());
+                }
+                sb.append("\n");
+            }
+            fw.write(sb.toString());
+            fw.close();
+            return true;
+        } catch (IOException e) {
+            System.out.println("Unable to save");
+            return false;
+        }
     }
 
     private static List<String> loadStringData(File data) {
