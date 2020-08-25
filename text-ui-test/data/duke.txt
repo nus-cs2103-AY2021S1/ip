@@ -1,0 +1,4 @@
+T | 0 | read book
+D | 0 | return book | june
+E | 1 | project meeting | 3pm
+T | 0 | borrow book
