@@ -14,11 +14,15 @@ Alas, I do apologise but I don't know what 'blah' means.
 __________________________________________________
 
 __________________________________________________
+Alas, this command does not support task type blah.
+__________________________________________________
+
+__________________________________________________
 Alas, the description of a todo cannot be empty.
 __________________________________________________
 
 __________________________________________________
-Very well. I've added this task:
+Very well. I've added this todo:
 [T][✘] t1
 Now you have 1 tasks in the list.
 __________________________________________________
@@ -43,13 +47,13 @@ The time is optional and the default is 0000.
 __________________________________________________
 
 __________________________________________________
-Very well. I've added this task:
+Very well. I've added this deadline:
 [D][✘] t2 (by: Aug 23 2020, 14:00)
 Now you have 2 tasks in the list.
 __________________________________________________
 
 __________________________________________________
-Very well. I've added this task:
+Very well. I've added this deadline:
 [D][✘] t3 (by: Aug 26 2020, 00:00)
 Now you have 3 tasks in the list.
 __________________________________________________
@@ -89,13 +93,13 @@ The time is optional and the default is 0000.
 __________________________________________________
 
 __________________________________________________
-Very well. I've added this task:
+Very well. I've added this event:
 [E][✘] t4 (at: Aug 23 2020, 18:00)
 Now you have 4 tasks in the list.
 __________________________________________________
 
 __________________________________________________
-Very well. I've added this task:
+Very well. I've added this event:
 [E][✘] t5 (at: Aug 26 2020, 19:00)
 Now you have 5 tasks in the list.
 __________________________________________________
@@ -167,7 +171,7 @@ Alas, your task list does not contain a task number 0.
 __________________________________________________
 
 __________________________________________________
-Very good! I have marked this task as done:
+Very good! I have marked this todo as done:
 [T][✓] t1
 __________________________________________________
 
@@ -181,7 +185,7 @@ Here are the tasks in your list:
 __________________________________________________
 
 __________________________________________________
-Very well. I've removed this task:
+Very well. I've removed this todo:
 [T][✓] t1
 Now you have 4 tasks in the list.
 __________________________________________________
@@ -210,7 +214,7 @@ What can I do for you on this blessed day?
 __________________________________________________
 
 __________________________________________________
-Very good! I have marked this task as done:
+Very good! I have marked this event as done:
 [E][✓] t4 (at: Aug 23 2020, 18:00)
 __________________________________________________
 
@@ -231,19 +235,19 @@ Alas, 'a' is not a valid task number.
 __________________________________________________
 
 __________________________________________________
-Very well. I've removed this task:
+Very well. I've removed this deadline:
 [D][✘] t2 (by: Aug 23 2020, 14:00)
 Now you have 3 tasks in the list.
 __________________________________________________
 
 __________________________________________________
-Very well. I've removed this task:
+Very well. I've removed this event:
 [E][✘] t5 (at: Aug 26 2020, 19:00)
 Now you have 2 tasks in the list.
 __________________________________________________
 
 __________________________________________________
-Very well. I've removed this task:
+Very well. I've removed this event:
 [E][✓] t4 (at: Aug 23 2020, 18:00)
 Now you have 1 tasks in the list.
 __________________________________________________

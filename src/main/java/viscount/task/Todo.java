@@ -20,6 +20,11 @@ public class Todo extends Task {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Gives a task data representation of the task in String format.
+     * 
+     * @return Task data representation of the task.
+     */
     @Override
     public String toTaskData() {
         return String.format(Todo.TASK_DATA_FORMAT, taskType.name(), isDone ? 1 : 0, description);

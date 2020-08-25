@@ -1,10 +1,11 @@
 blah
-todo
-todo t1
-deadline
-deadline /by
-deadline t2 /by
-deadline t2 /by wednesday
-deadline t2 /by 23-08-2020 1400
-deadline t3 /by 26-08-2020
+add blah
+add todo
+add todo t1
+add deadline
+add deadline /by
+add deadline t2 /by
+add deadline t2 /by wednesday
+add deadline t2 /by 23-08-2020 1400
+add deadline t3 /by 26-08-2020
 bye

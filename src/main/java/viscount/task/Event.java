@@ -25,6 +25,11 @@ public class Event extends Task {
         return eventTime;
     }
 
+    /**
+     * Gives a task data representation of the task in String format.
+     *
+     * @return Task data representation of the task.
+     */
     @Override
     public String toTaskData() {
         return String.format(Event.TASK_DATA_FORMAT, taskType.name(), isDone ? 1 : 0, description,

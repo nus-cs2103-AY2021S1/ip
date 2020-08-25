@@ -2,6 +2,8 @@ package viscount.command;
 
 import viscount.*;
 import viscount.exception.ViscountException;
+import viscount.exception.ViscountIOException;
+import viscount.exception.ViscountIndexOutOfBoundsException;
 
 public class DoneCommand extends Command {
     private int taskIndex;
@@ -10,11 +12,21 @@ public class DoneCommand extends Command {
         this.taskIndex = taskIndex;
     }
 
+    /**
+     * Executes the done command.
+     *
+     * @param taskList Task list where tasks are stored.
+     * @param ui Ui to display response.
+     * @param storage Storage to save changes to disk.
+     * @throws ViscountIndexOutOfBoundsException If taskIndex is < 0 or >= list size
+     * @throws ViscountIOException If exception occurs with writing to disk.
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ViscountException {
-        tasks.markDone(taskIndex);
-        storage.saveToDisk(tasks.getTasks());
-        ui.showDone(tasks.getTask(taskIndex));
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws ViscountIndexOutOfBoundsException,
+            ViscountIOException {
+        taskList.markDone(taskIndex);
+        storage.saveToDisk(taskList.getTasks());
+        ui.showDone(taskList.getTask(taskIndex));
     }
 
     @Override
