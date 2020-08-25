@@ -10,7 +10,7 @@ public class ShowCommand extends Command {
         if (tasks.isEmpty()) {
             ui.emptyTaskList();
         } else {
-            ui.showTaskList(tasks);
+            ui.showTaskList(tasks, "");
         }
     }
 }

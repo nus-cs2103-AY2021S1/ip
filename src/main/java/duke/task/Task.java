@@ -42,6 +42,10 @@ public abstract class Task {
         return time;
     }
 
+    public boolean match(String query) {
+        return description.contains(query);
+    }
+
     @Override
     public String toString() {
         return getStatusIcon() + " " + description;

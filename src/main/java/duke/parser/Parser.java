@@ -23,6 +23,8 @@ public class Parser {
             return new AddComplexTaskCommand(details, TaskType.DEADLINE);
         } else if (keyWord.equals("event")) {
             return new AddComplexTaskCommand(details, TaskType.EVENT);
+        } else if (keyWord.equals("find")) {
+            return new FindCommand(details);
         } else if (keyWord.equals("bye")) {
             return new ExitCommand();
         } else {

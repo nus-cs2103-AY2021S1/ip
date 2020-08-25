@@ -20,4 +20,6 @@ delete asbf
 list
 delete 2
 done 7
+FiND book
+find legend
 bye 5
