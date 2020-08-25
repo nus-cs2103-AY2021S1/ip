@@ -35,12 +35,14 @@ public class DeleteCommand extends Command {
      * @param storage Storage managing the file in hard disk.
      * @throws DeleteException If user's input is incomplete or in the wrong format.
      */
-    public void processDelete(String theRest, TaskList taskList, Ui ui, Storage storage) throws DeleteException {
+
+    public void processDelete(
+            String theRest, TaskList taskList, Ui ui, Storage storage) throws DeleteException {
         try {
             Integer taskNum = Integer.parseInt(theRest);
             int index = taskNum - 1;
             taskList.deleteTask(index);
-            storage.updateData(taskList.getTasks());
+            Storage.updateData(taskList.getTasks());
 
         } catch (DukeException d) {
             throw new DeleteException("Please enter a number. I cannot delete nothing :(");

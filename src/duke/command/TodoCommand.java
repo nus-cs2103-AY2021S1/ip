@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.task.Todo;
 
 public class TodoCommand extends Command {
@@ -30,7 +32,7 @@ public class TodoCommand extends Command {
     public void processTodo(String theRest, TaskList taskList, Ui ui, Storage storage) {
         Todo todo = new Todo(theRest);
         taskList.saveToList(todo);
-        storage.updateData(taskList.getTasks());
+        Storage.updateData(taskList.getTasks());
     }
 
     /**

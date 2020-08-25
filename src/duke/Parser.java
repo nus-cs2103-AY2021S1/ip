@@ -3,7 +3,6 @@ package duke;
 import duke.command.*;
 import duke.exception.DukeException;
 import duke.exception.WrongInputException;
-import duke.command.Command;
 
 public class Parser {
 
@@ -63,8 +62,6 @@ public class Parser {
             System.out.println("Error!");
             throw new DukeException(exc.getMessage());
         }
-
-        //throw new WrongInputException();
     }
 
     /**

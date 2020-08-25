@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.EventException;
 import duke.task.Event;
@@ -38,7 +40,9 @@ public class EventCommand extends Command {
      * @param storage Storage managing the file in hard disk.
      * @throws EventException If user's input is incomplete or in the wrong format.
      */
-    public void processEvent(String theRest, TaskList taskList, Ui ui, Storage storage) throws EventException {
+
+    public void processEvent(
+            String theRest, TaskList taskList, Ui ui, Storage storage) throws EventException {
         try {
             String[] eventAndDateAndTime = theRest.split(" /at ", 2);
             Event event;
@@ -54,7 +58,7 @@ public class EventCommand extends Command {
                 try {
                     LocalDate localDate = LocalDate.parse(date);
 
-                    if(dateTime.length < 2) {
+                    if (dateTime.length < 2) {
                         event = new Event(eventDesc, localDate);
                     } else {
 
@@ -69,15 +73,17 @@ public class EventCommand extends Command {
                             String endTime = startEndTime[1];
                             LocalTime localStartTime = LocalTime.parse(startTime);
                             LocalTime localEndTime = LocalTime.parse(endTime);
-                            event = new Event(eventDesc, false, localDate, localStartTime, localEndTime);
+                            event = new Event(eventDesc, false,
+                                    localDate, localStartTime, localEndTime);
                         }
                     }
 
                     taskList.saveToList(event);
-                    storage.updateData(taskList.getTasks());
+                    Storage.updateData(taskList.getTasks());
 
                 } catch (DateTimeParseException e) {
-                    System.out.println("Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
+                    System.out.println(
+                            "Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
                 }
 
             } catch (IndexOutOfBoundsException e) {

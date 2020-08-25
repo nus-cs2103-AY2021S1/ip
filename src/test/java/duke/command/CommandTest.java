@@ -25,10 +25,12 @@ public class CommandTest {
             DeadlineCommand command = new DeadlineCommand("test2 /by 2020-09-08 16:00");
             assertEquals(command, Parser.parse("deadline test2 /by 2020-09-08 16:00"));
         } catch (CalendarException c) {
-            CalendarException calendarExc = new CalendarException("Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
+            CalendarException calendarExc = new CalendarException(
+                    "Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
             assertEquals(calendarExc.getMessage(), c.getMessage());
         } catch (DeadlineException t) {
-            DeadlineException deadlineExc = new DeadlineException("Please specify the task and deadline.");
+            DeadlineException deadlineExc = new DeadlineException(
+                    "Please specify the task and deadline.");
             assertEquals(deadlineExc.getMessage(), t.getMessage());
         } catch (DukeException d) {
             System.out.println(d.getMessage());
@@ -41,7 +43,8 @@ public class CommandTest {
             EventCommand command = new EventCommand("test3 /at 2020-09-01 16:00-19:00");
             assertEquals(command, Parser.parse("event test3 /at 2020-09-01 16:00-19:00"));
         } catch (CalendarException c) {
-            CalendarException calendarExc = new CalendarException("Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
+            CalendarException calendarExc = new CalendarException(
+                    "Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
             assertEquals(calendarExc.getMessage(), c.getMessage());
         } catch (EventException t) {
             EventException eventExc = new EventException("Please specify the event name and date.");

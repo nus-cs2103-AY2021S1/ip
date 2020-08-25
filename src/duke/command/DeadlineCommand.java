@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.exception.CalendarException;
 import duke.exception.DeadlineException;
 import duke.exception.DukeException;
@@ -39,7 +41,9 @@ public class DeadlineCommand extends Command {
      * @param storage Storage managing the file in hard disk.
      * @throws DeadlineException If user's input is incomplete or in the wrong format.
      */
-    public void processDeadline(String theRest, TaskList taskList, Ui ui, Storage storage) throws DeadlineException {
+
+    public void processDeadline(
+            String theRest, TaskList taskList, Ui ui, Storage storage) throws DeadlineException {
         try {
             String[] taskAndDeadlineAndTime = theRest.split(" /by ", 2);
             Deadline deadline;
@@ -62,7 +66,7 @@ public class DeadlineCommand extends Command {
                         deadline = new Deadline(task, false, localDate, localTime);
                     }
                     taskList.saveToList(deadline);
-                    storage.updateData(taskList.getTasks());
+                    Storage.updateData(taskList.getTasks());
 
                 } catch (DateTimeParseException e) {
                     throw new CalendarException("Please enter the date in YYYY/MM/DD format and time in HH:MM format.");

@@ -40,7 +40,10 @@ public abstract class Task {
      * Get status of the task.
      * @return True if the task is done and false otherwise.
      */
-    public Boolean getStatus() { return isDone; }
+
+    public Boolean getStatus() {
+        return isDone;
+    }
 
     /**
      * Mark this task as done.

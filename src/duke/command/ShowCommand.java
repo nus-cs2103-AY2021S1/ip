@@ -34,7 +34,9 @@ public class ShowCommand extends Command {
      * @param storage Storage managing the file in hard disk.
      * @throws CalendarException If the date is in incorrect format.
      */
-    public void processShow(String date, TaskList taskList, Ui ui, Storage storage) throws CalendarException {
+
+    public void processShow(
+            String date, TaskList taskList, Ui ui, Storage storage) throws CalendarException {
         taskList.showDate(date);
     }
 

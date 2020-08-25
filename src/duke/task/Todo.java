@@ -34,7 +34,7 @@ public class Todo extends Task {
     @Override
     public Todo markAsDone() {
         //int index = taskNum - 1;
-        if(!this.isDone) {
+        if (!this.isDone) {
             Todo newTask = new Todo(this.getDescription(), true);
             return newTask;
         }

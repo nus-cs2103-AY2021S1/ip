@@ -48,12 +48,12 @@ public class TaskList {
      * @throws DeleteException If the index < 0 or more than the size.
      */
     public void deleteTask(int index) throws DeleteException {
-        if(index < 0 || index > tasks.size()) {
+        if (index < 0 || index > tasks.size()) {
             throw new DeleteException("Please enter a valid task number.");
         } else {
             Task task = this.tasks.get(index);
             this.tasks.remove(task);
-            storage.updateData(this.tasks);
+            Storage.updateData(this.tasks);
             System.out.println("Noted. I've removed this task for you: \n"
                     + task.toString() + "\n"
                     + "Now you have " + this.tasks.size() + " task(s) in the list.");
@@ -77,7 +77,7 @@ public class TaskList {
      * @return The task corresponding to the task number.
      */
     public Task getTask(int taskNum) {
-        return this.tasks.get(taskNum-1);
+        return this.tasks.get(taskNum - 1);
     }
 
     /**
@@ -86,18 +86,18 @@ public class TaskList {
      * @throws DoneException If the index < 0 or more than the size.
      */
     public void markTaskAsDone(int taskNum) throws DoneException {
-            if (taskNum <= 0 || taskNum > tasks.size()) {
-                throw new DoneException("Please enter a valid task number.");
-            } else {
-                int index = taskNum - 1;
-                Task oldTask = this.tasks.get(index);
-                Task newTask = oldTask.markAsDone();
-                this.tasks.remove(oldTask);
-                this.tasks.add(index, newTask);
-                storage.updateData(this.tasks);
-                System.out.println("YAYY! I've marked this task as done : \n"
-                        + newTask.toString());
-            }
+        if (taskNum <= 0 || taskNum > tasks.size()) {
+            throw new DoneException("Please enter a valid task number.");
+        } else {
+            int index = taskNum - 1;
+            Task oldTask = this.tasks.get(index);
+            Task newTask = oldTask.markAsDone();
+            this.tasks.remove(oldTask);
+            this.tasks.add(index, newTask);
+            Storage.updateData(this.tasks);
+            System.out.println("YAYY! I've marked this task as done : \n"
+                    + newTask.toString());
+        }
     }
 
     /**
