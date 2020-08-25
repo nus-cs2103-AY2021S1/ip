@@ -32,4 +32,8 @@ public class Command {
         this.errorMessage = message;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Command: %s %s %s %s", name, index, task, errorMessage);
+    }
 }
