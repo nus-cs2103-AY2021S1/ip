@@ -25,7 +25,6 @@ public class WrongFormatException extends DukeException {
      */
     @Override
     public String getMessage() {
-        return super.getMessage() + " The " + commandName + " " +
-                "command has to be followed by a\n";
+        return super.getMessage() + " The " + commandName + " command has to be followed by a\n";
     }
 }

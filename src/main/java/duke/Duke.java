@@ -24,7 +24,7 @@ public class Duke {
     private Ui ui;
 
     /** The relative path in which the save file is located */
-    private static final String memoryFilePath = "data/duke.txt";
+    private static final String FILE_PATH = "data/duke.txt";
 
     /**
      * Creates and initializes the Duke program.
@@ -48,7 +48,7 @@ public class Duke {
      * @param args User input arguments (not used).
      */
     public static void main(String[] args) {
-        new Duke(memoryFilePath).run();
+        new Duke(FILE_PATH).run();
     }
 
     /**

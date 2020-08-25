@@ -40,10 +40,8 @@ public class AddDeadlineCommand extends AddCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DeadlineWrongFormatException {
         try {
-            String[] splitLineIntoTwo = fullCommand.split("/by");
-            Task newTask = new Deadline(splitLineIntoTwo[0]
-                    .substring(9).trim(),
-                    splitLineIntoTwo[1].trim());
+            String[] commandParts = fullCommand.split("/by");
+            Task newTask = new Deadline(commandParts[0].substring(9).trim(), commandParts[1].trim());
             tasks.addTask(newTask);
             ui.showReplyForAddTask(newTask, tasks);
             try {

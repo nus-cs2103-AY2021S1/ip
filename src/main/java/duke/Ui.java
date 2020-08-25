@@ -31,7 +31,7 @@ public class Ui {
             "------------------------------------------------------\n";
 
     /** Scanner used to scan user's input */
-    private static final Scanner sc = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     /**
      * Greets the user upon program start up.
@@ -63,7 +63,7 @@ public class Ui {
      * @return The user's input as a String.
      */
     public String readCommand() {
-        return sc.nextLine();
+        return SCANNER.nextLine();
     }
 
     /**
@@ -113,10 +113,11 @@ public class Ui {
      * @param tasks The list of tasks to be shown.
      * @return The list of tasks in String format.
      */
-    public String showTaskList(TaskList tasks) {
+    public void showTaskList(TaskList tasks) {
         if (tasks.isEmpty()) {
-            return "Your list is empty! Let's add some tasks!";
+            showReply("Your list is empty! Let's add some tasks!");
+        } else {
+            showReply("Here are the tasks in your list:" + tasks.toString());
         }
-        return "Here are the tasks in your list:" + tasks.toString();
     }
 }

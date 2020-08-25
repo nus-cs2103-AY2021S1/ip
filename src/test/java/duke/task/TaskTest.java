@@ -48,10 +48,10 @@ public class TaskTest {
     }
 
     @Test
-    public void testMarkAsDone() {
+    public void testSetDone() {
         try {
             Task task = new Task("do homework", "[T]", "todo", false);
-            task.markAsDone();
+            task.setDone(true);
             assertEquals("✓", task.getStatusIcon());
         } catch (WrongFormatException e) {
             fail();
@@ -59,10 +59,10 @@ public class TaskTest {
     }
 
     @Test
-    public void testStringToSaveInMemory() {
+    public void testToStringForMemory() {
         try {
             Task task = new Task("do homework", "[T]", "todo", false);
-            assertEquals("[T]|0|do homework", task.stringToSaveInMemory());
+            assertEquals("[T]|0|do homework", task.toStringForMemory());
         } catch (WrongFormatException e) {
             fail();
         }

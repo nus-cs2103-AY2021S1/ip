@@ -17,7 +17,7 @@ import java.util.List;
 public class TaskList {
 
     /** The user's list of tasks */
-    private List<Task> taskList = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
 
     /**
      * Creates and initializes a list of tasks that is empty.
@@ -45,13 +45,13 @@ public class TaskList {
             String[] splitLine = s.split("\\|");
             switch (splitLine[0]) {
             case "[T]": // To-Do
-                taskList.add(new ToDo(splitLine[2], !splitLine[1].equals("0")));
+                tasks.add(new ToDo(splitLine[2], !splitLine[1].equals("0")));
                 break;
             case "[E]": // duke.task.Event
-                taskList.add(new Event(splitLine[2], splitLine[3], !splitLine[1].equals("0")));
+                tasks.add(new Event(splitLine[2], splitLine[3], !splitLine[1].equals("0")));
                 break;
             case "[D]": // duke.task.Deadline
-                taskList.add(new Deadline(splitLine[2], LocalDateTime.parse(splitLine[3]).format(DateTimeFormatter
+                tasks.add(new Deadline(splitLine[2], LocalDateTime.parse(splitLine[3]).format(DateTimeFormatter
                         .ofPattern("yyyy-MM-dd HHmm")), !splitLine[1].equals("0")));
                 break;
             default:
@@ -67,7 +67,7 @@ public class TaskList {
      * @return The task list.
      */
     public List<Task> getTaskList() {
-        return taskList;
+        return tasks;
     }
 
     /**
@@ -77,7 +77,7 @@ public class TaskList {
      * @return The task with the specified index.
      */
     public Task getTask(int taskIndex) {
-        return taskList.get(taskIndex);
+        return tasks.get(taskIndex);
     }
 
     /**
@@ -86,7 +86,7 @@ public class TaskList {
      * @param task The task to be added to the task list.
      */
     public void addTask(Task task) {
-        taskList.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -96,7 +96,7 @@ public class TaskList {
      * @return The removed task.
      */
     public Task removeTask(int taskIndex) {
-        return taskList.remove(taskIndex);
+        return tasks.remove(taskIndex);
     }
 
     /**
@@ -105,7 +105,7 @@ public class TaskList {
      * @return The number of tasks in the task list.
      */
     public int getNumberOfTasks() {
-        return taskList.size();
+        return tasks.size();
     }
 
     /**
@@ -114,7 +114,7 @@ public class TaskList {
      * @return true if the task list is empty; false otherwise.
      */
     public boolean isEmpty() {
-        return taskList.isEmpty();
+        return tasks.isEmpty();
     }
 
     /**
@@ -127,7 +127,7 @@ public class TaskList {
     public String toString() {
         int index = 1;
         StringBuilder result = new StringBuilder();
-        for (Task task : taskList) {
+        for (Task task : tasks) {
             result.append("\n").append(index++).append(".").append(task);
         }
         return result.toString();

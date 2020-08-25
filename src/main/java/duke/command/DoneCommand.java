@@ -16,15 +16,15 @@ import java.io.IOException;
 public class DoneCommand extends Command {
 
     /** The user's full command split into strings separated by whitespaces */
-    private String[] splitCommand;
+    private String[] commandParts;
 
     /**
      * Creates and initializes a DoneCommand object.
      *
-     * @param splitCommand The user's full command split into strings separated by whitespaces.
+     * @param commandParts The user's full command split into strings separated by whitespaces.
      */
-    public DoneCommand(String[] splitCommand) {
-        this.splitCommand = splitCommand;
+    public DoneCommand(String[] commandParts) {
+        this.commandParts = commandParts;
     }
 
     /**
@@ -41,12 +41,12 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DoneWrongFormatException,
             TaskIndexOutOfBoundsException {
         try {
-            if (splitCommand.length != 2) { // If command is in a wrong format
+            if (commandParts.length != 2) { // If command is in a wrong format
                 throw new DoneWrongFormatException();
             }
-            int taskIndex = Integer.parseInt(splitCommand[1]) - 1; // Index of task in the task list
+            int taskIndex = Integer.parseInt(commandParts[1]) - 1; // Index of task in the task list
             Task completedTask = tasks.getTask(taskIndex);
-            completedTask.markAsDone();
+            completedTask.setDone(true);
             ui.showReplyForDoneTask(completedTask);
             try {
                 storage.writeToFile(tasks);
@@ -57,7 +57,7 @@ public class DoneCommand extends Command {
             throw new DoneWrongFormatException();
         } catch (IndexOutOfBoundsException e) { // User requests for a task with an index not within the current task
             // list
-            throw new TaskIndexOutOfBoundsException(splitCommand[1]);
+            throw new TaskIndexOutOfBoundsException(commandParts[1]);
         }
     }
 }

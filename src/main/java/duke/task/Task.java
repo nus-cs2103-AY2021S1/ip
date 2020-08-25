@@ -50,10 +50,12 @@ public class Task {
     }
 
     /**
-     * Marks the task as completed.
+     * Changes the task's completion indicator to either completed or not completed.
+     *
+     * @param isDone The user enters true to mark the task as complete and false for incomplete.
      */
-    public void markAsDone() {
-        isDone = true;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**
@@ -61,7 +63,7 @@ public class Task {
      *
      * @return The string that will be written in the save file to represent this particular task.
      */
-    public String stringToSaveInMemory() {
+    public String toStringForMemory() {
         return taskTypeSymbol + "|" + (isDone ? 1 : 0) + "|" + description;
     }
 

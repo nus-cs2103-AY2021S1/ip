@@ -42,8 +42,8 @@ public class Event extends Task {
      * @return The string that will be written in the save file to represent this particular event task.
      */
     @Override
-    public String stringToSaveInMemory() {
-        return super.stringToSaveInMemory() + "|" + at;
+    public String toStringForMemory() {
+        return super.toStringForMemory() + "|" + at;
     }
 
     /**

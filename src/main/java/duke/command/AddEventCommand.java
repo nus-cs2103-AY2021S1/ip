@@ -39,10 +39,8 @@ public class AddEventCommand extends AddCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws EventWrongFormatException {
         try {
-            String[] splitLineIntoTwo = fullCommand.split("/at");
-            Task newTask = new Event(splitLineIntoTwo[0]
-                    .substring(6).trim(),
-                    splitLineIntoTwo[1].trim());
+            String[] commandParts = fullCommand.split("/at");
+            Task newTask = new Event(commandParts[0].substring(6).trim(), commandParts[1].trim());
             tasks.addTask(newTask);
             ui.showReplyForAddTask(newTask, tasks);
             try {
