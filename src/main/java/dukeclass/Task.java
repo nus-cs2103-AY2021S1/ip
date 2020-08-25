@@ -1,5 +1,9 @@
 package dukeclass;
 
+/**
+ * Represents a task.
+ * The task has a String message and a Boolean status.
+ */
 public abstract class Task {
 
     public static String icon;

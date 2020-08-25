@@ -10,6 +10,13 @@ import java.util.Scanner;
 
 public class Parser {
 
+    /**
+     * Parse the input String by the user and returns a task.
+     *
+     * @param rawInput A single line of entry from the user.
+     * @return Task of a specific type e.g. todo, deadline.
+     * @throws InvalidInputException  If the user did not enter the entry in the correct format.
+     */
     public static Task parser(String rawInput) throws InvalidInputException{
         String[] splitString = rawInput.split(" ");
         int splitStringLength = splitString.length;

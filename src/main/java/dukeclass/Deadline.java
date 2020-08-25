@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A type of task.
+ * The task has a String message and a Boolean status.
+ * in addition to that, it has a preposition and a timeline to be completed by
+ */
 public class Deadline extends Task{
 
     public static String icon = "D";
