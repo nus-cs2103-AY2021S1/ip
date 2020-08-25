@@ -11,6 +11,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String taskSaver() {
+        String type = "D";
+        return type + "/" + super.taskSaver() + "/" + by.format(DateTimeFormatter.ISO_LOCAL_DATE);
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " +
                 this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";

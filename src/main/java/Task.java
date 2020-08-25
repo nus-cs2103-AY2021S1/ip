@@ -15,6 +15,11 @@ public class Task {
         this.isDone = true;
     }
 
+    public String taskSaver() {
+        String doneStatus = this.isDone ? "1" : "0";
+        return doneStatus + "/" + description;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

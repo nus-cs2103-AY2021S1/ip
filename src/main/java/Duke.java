@@ -104,25 +104,8 @@ public class Duke {
         FileWriter fw = new FileWriter(Paths.get(root, "data", "dukeTaskList.txt").toString());
         for(int i = 0; i < this.list.size(); i++) {
             Task task = this.list.get(i);
-            String toAdd;
-            if(task instanceof Todo) {
-                String type = "T";
-                String isDone = task.isDone ? "1" : "0";
-                String description = task.description;
-                toAdd = type + "/" + isDone + "/" + description;
-            } else if(task instanceof Event) {
-                String type = "E";
-                String isDone = task.isDone ? "1" : "0";
-                String description = task.description;
-                String time = ((Event) task).at;
-                toAdd = type + "/" + isDone + "/" + description + "/" + time;
-            } else {
-                String type = "D";
-                String isDone = task.isDone ? "1" : "0";
-                String description = task.description;
-                String time = ((Deadline) task).by;
-                toAdd = type + "/" + isDone + "/" + description + "/" + time;
-            }
+            String toAdd = task.taskSaver();
+            System.out.println("Added: toAdd");
             fw.write(toAdd + "\n");
         }
         fw.close();

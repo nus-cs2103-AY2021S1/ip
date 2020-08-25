@@ -4,6 +4,12 @@ public class Todo extends Task {
     }
 
     @Override
+    public String taskSaver() {
+        String type = "T";
+        return type + "/" + super.taskSaver();
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
