@@ -153,8 +153,8 @@ public class TaskList {
 
     /**
      * Finds and returns all matching task that has the keyword in the task.
-     * @param keyword
-     * @return
+     * @param keyword Keyword to be matched.
+     * @return A list in the form of a string of all task matching the keyword.
      */
     public String findMatching(String keyword) {
         StringBuilder sb = new StringBuilder();
