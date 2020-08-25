@@ -121,6 +121,7 @@ public class Duke {
         fw.close();
     }
 
+    //helper function to update done status of task
     public static void replaceDone(String filePath, String replaceWith) {
         try {
             // input the file content to the StringBuffer "input"
