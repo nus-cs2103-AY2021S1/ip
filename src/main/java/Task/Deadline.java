@@ -2,13 +2,30 @@ package Task;
 
 import Task.Task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
+    private final static DateTimeFormatter NEW_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mma");
+    private final static DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     public Deadline(int position, String taskDescription) {
         super(position, taskDescription);
     }
 
-    public void setTime(String givenDate) {
+    public void setTime(LocalDateTime givenDate) {
         date = givenDate;
+    }
+
+    @Override
+    public String saveFormat() {
+        String base = "[D] ";
+        if (taskCompleted) {
+            base = base + "[✓]";
+        } else {
+            base = base + "[✗]";
+        }
+        base = base + taskDescription + "by:" + date.format(SAVE_READ_DATETIME_FORMAT);
+        return base;
     }
 
     @Override
@@ -19,7 +36,7 @@ public class Deadline extends Task {
         } else {
             base = base + "[✗]";
         }
-        base = base + taskDescription + "(by:" + date + ")";
+        base = base + taskDescription + "(by:" + date.format(NEW_DATETIME_FORMAT) + ")";
         return base;
     }
 }

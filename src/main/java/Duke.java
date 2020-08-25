@@ -3,6 +3,11 @@ import Task.Task;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import Task.*;
@@ -21,6 +26,7 @@ public class Duke {
     private final static String DELETE_EVENT = "delete";
     private final static String DEADLINE_DATE = "/by";
     private final static String EVENT_DATE = "/at";
+    private final static DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     private static ArrayList<Task> userInputsList = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -88,7 +94,7 @@ public class Duke {
                                 newTodo);
                         saveFile(true);
                     } catch(DukeExceptions e) {
-                        System.out.println(e.toString());
+                        System.out.println(e);
                     }
                     break;
                 case TASK_DEADLINE:
@@ -103,12 +109,18 @@ public class Duke {
                         int byPosition = userInput.indexOf(DEADLINE_DATE);
                         int position = userInputsList.size() + 1;
                         String taskDescription = userInput.substring(0, byPosition);
-                        String dateDescription = userInput.substring(byPosition + 3);
+                        String dateDescription = userInput.substring(byPosition + 4);
+                        LocalDateTime date;
+                        try {
+                            date = LocalDateTime.parse(dateDescription, SAVE_READ_DATETIME_FORMAT);
+                        } catch (DateTimeParseException e) {
+                            throw new DukeExceptions("☹ OOPS !!! Formato de fecha y hora incorrecto. Formatee como dd/MM/yyyy HHmm");
+                        }
                         if (dateDescription.isEmpty()) {
                             throw new DukeExceptions("☹ OOPS !!! Debe establecer una fecha límite para esta tarea.");
                         }
                         Deadline newDeadline = new Deadline(position, taskDescription);
-                        newDeadline.setTime(dateDescription);
+                        newDeadline.setTime(date);
                         userInputsList.add(newDeadline);
                         System.out.println("Entendido. He agregado esta tarea:\n" +
                                 newDeadline);
@@ -129,12 +141,18 @@ public class Duke {
                         int atPosition = userInput.indexOf(EVENT_DATE);
                         int position = userInputsList.size() + 1;
                         String taskDescription = userInput.substring(0, atPosition);
-                        String dateDescription = userInput.substring(atPosition + 3);
+                        String dateDescription = userInput.substring(atPosition + 4);
+                        LocalDateTime date;
+                        try {
+                            date = LocalDateTime.parse(dateDescription, SAVE_READ_DATETIME_FORMAT);
+                        } catch (DateTimeParseException e) {
+                            throw new DukeExceptions("☹ OOPS !!! Formato de fecha y hora incorrecto. Formatee como dd/MM/yyyy HHmm");
+                        }
                         if (dateDescription.isEmpty()) {
                             throw new DukeExceptions("☹ OOPS !!! Debe establecer la hora del evento para esta tarea.");
                         }
                         Event newEvent = new Event(position, taskDescription);
-                        newEvent.setTime(dateDescription);
+                        newEvent.setTime(date);
                         userInputsList.add(newEvent);
                         System.out.println("Entendido. He agregado esta tarea:\n" +
                                 newEvent);
@@ -191,7 +209,7 @@ public class Duke {
         try {
             FileWriter dukeFileWriter = new FileWriter(filepath, false);
             for (int i = 0; i < userInputsList.size(); i++) {
-                dukeFileWriter.write(userInputsList.get(i).toString() + "\n");
+                dukeFileWriter.write(userInputsList.get(i).saveFormat() + "\n");
             }
             dukeFileWriter.close();
         } catch (IOException e) {
@@ -219,7 +237,8 @@ public class Duke {
                         if (loadedInput.substring(4, 7).equals("[✓]")) {
                             newDeadline.completeTask();
                         }
-                        newDeadline.setTime(loadedInput.substring(byPosition + 3));
+                        LocalDateTime date = LocalDateTime.parse(loadedInput.substring(byPosition + 3), SAVE_READ_DATETIME_FORMAT);
+                        newDeadline.setTime(date);
                         userInputsList.add(newDeadline);
                     } else if (loadedInput.substring(0, 3).equals("[E]")) {
                         int atPosition = loadedInput.indexOf("at:");
@@ -228,7 +247,8 @@ public class Duke {
                         if (loadedInput.substring(4, 7).equals("[✓]")) {
                             newEvent.completeTask();
                         }
-                        newEvent.setTime(loadedInput.substring(atPosition + 3));
+                        LocalDateTime date = LocalDateTime.parse(loadedInput.substring(atPosition + 3), SAVE_READ_DATETIME_FORMAT);
+                        newEvent.setTime(date);
                         userInputsList.add(newEvent);
                     }
                 }
