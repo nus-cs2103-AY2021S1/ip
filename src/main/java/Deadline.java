@@ -1,5 +1,8 @@
 import java.time.LocalDateTime;
 
+/**
+ * Deadline class creates a type of Task called deadline which contains a date and description of the task
+ */
 public class Deadline extends Task {
 
    // protected String by;
@@ -10,6 +13,11 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    /**
+     * creates a deadline a string
+     * @param str input form user
+     * @return Deadline object
+     */
     public static Deadline createDeadline(String str) {
         if (str == null) {
             throw new DukeException("I need something to work with.");
@@ -25,10 +33,20 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * convertes a String into a condensed form
+     * @return condesnsed form of inputted string
+     */
     public String encode() {
         return String.format("D|%s|%s|%s", super.isDone ? "Y" : "N", this.date, super.description);
     }
 
+    /**
+     * unravels encoded Strings
+     * @param code String that has been previously encoded()
+     * @return Deadline object
+     * @throws DukeException in the event it is unable to decode the string
+     */
     public static Deadline decode(String code) throws DukeException {
         if (code.charAt(0) == 'D') {
             String[] content = code.split("\\|", 4);
@@ -48,7 +66,10 @@ public class Deadline extends Task {
     }
 
 
-
+    /**
+     * overrides Deadline String output to be formatted
+     * @return String of formatted Deadline
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by:" + DateConverter.parseLocalDateTime(this.date) + ")";

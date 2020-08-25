@@ -1,5 +1,8 @@
 import java.time.LocalDateTime;
 
+/**
+ * Event class creates a type of Task called event which contains a date and description of the task
+ */
 public class Event extends Task {
 
    // protected String at;
@@ -9,7 +12,11 @@ public class Event extends Task {
         super(description);
         this.date = date;
     }
-
+    /**
+     * creates a Event from string
+     * @param details input from user
+     * @return Event object
+     */
     public static Event createEvent(String details) {
         if (details == null) {
             throw new DukeException("I need something to work with.");
@@ -24,11 +31,19 @@ public class Event extends Task {
             throw new DukeException("Out of Bounds Exceptions");
         }
     }
-
+    /**
+     * convertes a String into a condensed form
+     * @return condesnsed form of inputted string
+     */
     public String encode() {
         return String.format("E|%s|%s|%s", super.isDone ? "Y" : "N", this.date, super.description);
     }
-
+    /**
+     * unravels encoded Strings
+     * @param code String that has been previously encoded()
+     * @return Event object
+     * @throws DukeException in the event it is unable to decode the string
+     */
     public static Event decode(String code) throws DukeException {
         if (code.charAt(0) == 'E') {
             String[] content = code.split("\\|", 4);
@@ -44,7 +59,10 @@ public class Event extends Task {
             throw new DukeException("Unable to decode event");
         }
     }
-
+    /**
+     * overrides Event String output to be formatted
+     * @return String of formatted Event
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at:" + DateConverter.parseLocalDateTime(this.date) + ")";

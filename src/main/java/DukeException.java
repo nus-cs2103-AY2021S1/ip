@@ -1,3 +1,6 @@
+/**
+ * DukeException class handles exception unique to Duke
+ */
 public class DukeException extends RuntimeException {
     public DukeException(String errorMessage, Throwable err) {
         super(errorMessage, err);

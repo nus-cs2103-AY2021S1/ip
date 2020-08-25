@@ -1,7 +1,16 @@
+/**
+ * Parser class handles userinput from UI class and parses throught it to create the Task List
+ */
 public class Parser {
 
     public static final String line = "____________________________________________________________";
 
+    /**
+     * Takes all the necessary arguments to create the list of tasks
+     * @param taskList main list where all tasks are kept on
+     * @param ui scanner that takes user inputs
+     * @param flag boolean value that exits the program once true
+     */
     public static void parseCode(TaskList taskList, UI ui, boolean flag) {
         while (!flag) {
            String echo = ui.sc.nextLine();

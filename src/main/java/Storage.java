@@ -2,17 +2,26 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
+
 import java.util.Scanner;
 
+/**
+ * Storage class handles saving and loading of data from the hardrive
+ */
 public class Storage {
 
     public static final String FILE_PATH = "duke/data/list.duke";
 
+    /**
+     * saves the list of items in a hardcoded file called list.duke
+     * @param list TaskList object to be saved
+     * @param filePath path to save file at
+     * @throws DukeException
+     */
     public static void save(TaskList list, String filePath) throws DukeException {
         String[] directories = filePath.split("/");
         String home = System.getProperty("user.home");
@@ -26,7 +35,6 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(path.toString());
             for (Task item : list) {
-                System.out.println(item.encode());
                 writer.write(item.encode() + "\n");
             }
             writer.close();
@@ -35,6 +43,11 @@ public class Storage {
         }
     }
 
+    /**
+     * loads from list.duke form specified filePath
+     * @param filePath filePath to search
+     * @return TaskList containing all saved additions to the list
+     */
     public static TaskList load(String filePath) {
         try {
             String[] directories = filePath.split("/");
