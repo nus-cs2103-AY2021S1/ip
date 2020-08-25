@@ -5,6 +5,7 @@ import duke.exception.DuplicateTaskException;
 import duke.exception.EventInvalidDate;
 import duke.exception.InvalidDateException;
 import duke.exception.InvalidIndexException;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -236,6 +237,32 @@ public class TaskList {
             System.out.println(deleted);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException(tasks.size());
+        }
+    }
+
+    /** Finds tasks with the given @keyword.
+     *
+     * @param keyword The keyword to search for in tasks.
+     */
+    public void findTasks(String keyword) {
+
+        keyword = keyword.trim().toLowerCase();
+
+        int i = 0;
+        for (Task task: tasks) {
+            if (task.getTask().contains(keyword)) {
+                if (i == 0) {
+                    System.out.println("Here are the matching tasks on your list.");
+                }
+
+                System.out.print((i + 1) + ". ");
+                System.out.println(task);
+                i++;
+            }
+        }
+
+        if (i == 0) {
+            System.out.println("OOPS. There are no tasks on your list with the following keyword.");
         }
     }
 

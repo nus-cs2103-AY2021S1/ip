@@ -35,6 +35,10 @@ public abstract class Task {
     /** Marks the task as done. */
     public abstract Task markDone();
 
+    public String getTask() {
+        return this.task;
+    }
+
     public abstract LocalDate getDate();
 
     /**

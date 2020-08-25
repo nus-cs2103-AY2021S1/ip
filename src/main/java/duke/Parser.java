@@ -6,11 +6,14 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
+
 import duke.exception.EmptyTaskException;
 import duke.exception.InvalidDateException;
 import duke.exception.NoIndexException;
+import duke.exception.NoKeywordException;
 import duke.exception.UnrecognizedTaskException;
 
 import java.time.LocalDate;
@@ -32,7 +35,7 @@ public class Parser {
      *         event, or deadline and is followed by no description.
      */
     public static Command parse(String fullCommand)
-            throws UnrecognizedTaskException, NoIndexException, EmptyTaskException {
+            throws UnrecognizedTaskException, NoIndexException, EmptyTaskException, NoKeywordException {
 
         fullCommand = fullCommand.trim();
 
@@ -43,16 +46,18 @@ public class Parser {
         switch (firstWord) {
             case "todo":
                 return new ToDoCommand(getTask(fullCommand, "todo"));
-            // Fallthrough
+                // Fallthrough
             case "event":
                 return new EventCommand(getTask(fullCommand, "event"));
-            // Fallthrough
+                // Fallthrough
             case "deadline":
                 return new DeadlineCommand(getTask(fullCommand, "deadline"));
-            // Fallthrough
+                // Fallthrough
             case "list":
                 return new ListCommand(fullCommand);
-            // Fallthrough
+                // Fallthrough
+            case "find":
+                return new FindCommand(fullCommand);
             case "done":
 
                 if (fullCommand.equalsIgnoreCase("done")) {
