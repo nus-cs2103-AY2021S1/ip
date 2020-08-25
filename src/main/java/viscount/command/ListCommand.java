@@ -18,19 +18,19 @@ import viscount.task.Task;
 import viscount.task.TaskType;
 
 public class ListCommand extends Command {
-    private String modifier;
+    private String taskTypeModifier;
     private String dateString;
     
-    public ListCommand(String modifier, String dateString) {
+    public ListCommand(String taskTypeModifier, String dateString) {
         super();
-        this.modifier = modifier;
+        this.taskTypeModifier = taskTypeModifier;
         this.dateString = dateString;
     }
     
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ViscountException {
-        Predicate<Task> filterByModifier = task -> modifier.isEmpty()
-                || task.getTaskType() == TaskType.valueOf(modifier.toUpperCase());
+        Predicate<Task> filterByModifier = task -> taskTypeModifier.isEmpty()
+                || task.getTaskType() == TaskType.valueOf(taskTypeModifier.toUpperCase());
         
         List<Task> tasks = taskList.getTasks();
 
@@ -40,7 +40,7 @@ public class ListCommand extends Command {
                     .filter(filterByModifier)
                     .collect(Collectors.toList());
             
-            ui.showList(filteredTasks, modifier, dateString);
+            ui.showList(filteredTasks, taskTypeModifier, dateString);
         } else {
             try {
                 LocalDateTime queriedDateTime = dateString.equals("today")
@@ -56,8 +56,8 @@ public class ListCommand extends Command {
                         .collect(Collectors.toList());
 
                 ui.showList(
-                        filteredTasks, 
-                        modifier, 
+                        filteredTasks,
+                        taskTypeModifier, 
                         dateString.equals("today") 
                                 ? dateString 
                                 : queriedDateTime.format(Parser.OUTPUT_DATE_FORMATTER));
