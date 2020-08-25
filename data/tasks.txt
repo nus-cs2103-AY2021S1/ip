@@ -1,1 +1,5 @@
-T | 0 | 1
+T | 0 | sleep
+T | 0 | read book
+D | 1 | return book  | Dec 12 2020 12:12
+T | 0 | eat
+T | 0 | borrow book

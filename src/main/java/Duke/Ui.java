@@ -71,6 +71,20 @@ public class Ui {
         System.out.println(seperateLine());
     }
 
+    public void listMatchedTasks(TaskList tasklist, String toFind) {
+        System.out.println(seperateLine());
+        System.out.println(spaceBeforeOder() + "Here are the matching tasks in your list:");
+        int count = 1;
+        for (int i = 0; i < tasklist.getNumOfTasks(); i++){
+            if (tasklist.getTask(i).getName().contains(toFind)) {
+                System.out.println(spaceBeforeOder() + count + ". " +
+                        tasklist.getTask(i));
+                count++;
+            }
+        }
+        System.out.println(seperateLine());
+    }
+
     public void showGoodbye() {
         printFormmat(spaceBeforeOder() + "Bye. Very nice to meet you!\n" +
                 spaceBeforeOder() + "Hope to see you again soon!");

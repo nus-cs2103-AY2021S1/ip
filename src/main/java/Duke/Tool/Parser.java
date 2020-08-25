@@ -46,6 +46,8 @@ public class Parser {
                     } else {
                         return new Delete((Integer.parseInt(command[1]) - 1));
                     }
+                } else if (command[0].equals("find")) {
+                    return new Find(command[1]);
                 } else {
                     if (command.length == 1) {
                         throw new NoDescriptionException(command[0]);
