@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,6 +47,26 @@ public class Duke {
         }
     }
 
+    public static LocalDateTime processDate(String inputDeadline) throws DukeException {
+        String dateFormat;
+        if (inputDeadline.contains("/")) {
+            dateFormat = "/";
+        } else if (inputDeadline.contains(".")) {
+            dateFormat = "\\.";
+        } else if (inputDeadline.contains("-")) {
+            dateFormat = "-";
+        } else {
+            throw new DukeException("Please input valid date format!");
+        }
+        String[] inputData = inputDeadline.split(dateFormat);
+        int date = Integer.parseInt(inputData[0]);
+        int month = Integer.parseInt(inputData[1]);
+        int year = Integer.parseInt(inputData[2].substring(0, 4));
+        int hour = Integer.parseInt(inputData[2]. substring(5, 7));
+        int min = Integer.parseInt(inputData[2]. substring(7));
+        return LocalDateTime.of(year, month, date, hour, min);
+    }
+
     public static void addToList(String inputMsg, String actionType) throws DukeException {
         Task newTask;
         int numOfWords = inputMsg.split(" ").length;
@@ -58,14 +81,16 @@ public class Duke {
                 throw new DukeException("Description of task cannot be empty!");
             }
             String taskName = inputMsg.split("/")[0].substring(9);
-            String deadline = inputMsg.split("/")[1].substring(3);
+            String inputDeadline = inputMsg.split("/", 2)[1].substring(3);
+            LocalDateTime deadline = processDate(inputDeadline);
             newTask = new Deadline(taskName, false, deadline);
         } else if (actionType.equals("event")) {
             if (numOfWords <= 1) {
                 throw new DukeException("Description of task cannot be empty!");
             }
             String taskName = inputMsg.split("/")[0].substring(6);
-            String deadline = inputMsg.split("/")[1].substring(3);
+            String inputDeadline = inputMsg.split("/", 2)[1].substring(3);
+            LocalDateTime deadline = processDate(inputDeadline);
             newTask = new Event(taskName, false, deadline);
         } else { // when user keys in unregistered action
             throw new DukeException("Specified action is not recognised.");
