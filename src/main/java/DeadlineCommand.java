@@ -4,7 +4,7 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Adds the deadline entry that the user input to the
- * Arraylist of Duke
+ * Arraylist of Duke.
  */
 public class DeadlineCommand extends Command{
 
@@ -14,13 +14,14 @@ public class DeadlineCommand extends Command{
     }
 
     /**
-     * Add deadline entry to the Arraylist
-     * @param tasks list of tasks given
-     * @param ui handles the output to print
-     * @param storage writes the save file
-     * @throws InvalidDateTimeFormatException if input does not follow format specified
-     * @throws InvalidInputException if the input for the delete is incorrect
-     * @throws InvalidSaveFileException if there is an issue writing the save file
+     * Add deadline entry to the Arraylist.
+     *
+     * @param tasks List of tasks given.
+     * @param ui Handles the output to print.
+     * @param storage Writes the save file.
+     * @throws InvalidDateTimeFormatException If input does not follow format specified.
+     * @throws InvalidInputException If the input for the delete is incorrect.
+     * @throws InvalidSaveFileException If there is an issue writing the save file.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateTimeFormatException,
             InvalidInputException, InvalidSaveFileException {
@@ -37,15 +38,15 @@ public class DeadlineCommand extends Command{
             throw new InvalidDateTimeFormatException("\tDeadline input must follow a certain format: yyyy-mm-dd HH:mm " +
                     "e.g. 2020-08-23 16:45");
         }
-        tasks.getTasks().add(task);
+        tasks.addTask(task);
         ui.printOutput("\tGot it. I've added this task:\n" + "\t" + task.toString() +
                 "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
         storage.saveFile(tasks.getTasks());
     }
 
     /**
-     * Lets the main logic know that it cannot exit
-     * @return false to prevent loop from exitting
+     * Lets the main logic know that it cannot exit.
+     * @return False to prevent loop from exiting.
      */
     public boolean isExit() {
         return false;

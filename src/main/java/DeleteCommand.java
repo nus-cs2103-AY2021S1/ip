@@ -24,7 +24,7 @@ public class DeleteCommand extends Command{
             throw new InvalidInputException("\t☹ OOPS!!! The description of a delete operation cannot be empty / invalid index.");
         }
         Task task = tasks.getTasks().get(index-1);
-        tasks.getTasks().remove(index-1);
+        tasks.removeTask(index-1);
         ui.printOutput("\tNoted. I've removed this task:\n"+"\t"+task.toString()+
                 "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
         storage.saveFile(tasks.getTasks());

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Handles saving of the list and reading it upon startup
+ * Handles saving of the list and reading it upon startup.
  */
 public class Storage {
     private String fileLocation;
@@ -19,8 +19,8 @@ public class Storage {
     /**
      * Called upon startup. Reads save file if there is one, else creates
      * a blank save file.
-     * @return a List populated by the Task from previous save file
-     * @throws InvalidSaveFileException if there is an issue with creating the save file
+     * @return A List populated by the Task from previous save file.
+     * @throws InvalidSaveFileException If there is an issue with creating the save file.
      */
     public List<Task> readFile() throws InvalidSaveFileException {
         List<Task> toDoList = new ArrayList<Task>();
@@ -45,7 +45,7 @@ public class Storage {
                         int index = entry.indexOf("(");
                         String datetime = entry.substring(index + 5, entry.length() - 1);
                         LocalDateTime ldt = LocalDateTime.parse(datetime, dtf2);
-                        Deadlines d = new Deadlines(entry.substring(7, index),
+                        Deadlines d = new Deadlines(entry.substring(7, index-1),
                                 ldt);
                         if (entry.contains("✓")) {
                             d.completeTask();
@@ -55,7 +55,7 @@ public class Storage {
                         int index = entry.indexOf("(");
                         String datetime = entry.substring(index + 5, entry.length() - 1);
                         LocalDateTime ldt = LocalDateTime.parse(datetime, dtf2);
-                        Events e = new Events(entry.substring(7, index),
+                        Events e = new Events(entry.substring(7, index-1),
                                 ldt);
                         if (entry.contains("✓")) {
                             e.completeTask();
