@@ -1,7 +1,11 @@
 todo borrow book
 list
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+deadline return book /by 209-12-0
+event project meeting /at 2020-08-52
+deadline wrong3 /by 2019-12-01 03:1
+event wrong4 /at 2019-12-01 00:70
+deadline return book /by 2019-12-01 00:11
+event project meeting /at 2020-08-22 23:32
 done 2
 list
 delete 4
