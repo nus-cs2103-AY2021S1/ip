@@ -4,6 +4,10 @@ import java.util.List;
 import src.main.java.duke.data.Duke;
 import src.main.java.duke.data.task.Task;
 
+
+/**
+ * Command that adds todo
+ */
 public class Command {
 
     protected Duke duke;

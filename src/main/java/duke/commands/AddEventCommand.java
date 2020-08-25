@@ -2,6 +2,10 @@ package src.main.java.duke.commands;
 
 import src.main.java.duke.data.task.Event;
 
+
+/**
+ * Command that adds event
+ */
 public class AddEventCommand extends Command {
 
     public static final String COMMAND_WORD = "event";

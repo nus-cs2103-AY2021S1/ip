@@ -9,6 +9,10 @@ import src.main.java.duke.data.task.*;
 import src.main.java.duke.storage.StorageFile.StorageOperationException;
 import src.main.java.duke.data.exception.IllegalValueException;
 
+
+/**
+ * DukeDencoder decodes all the {@code Task} in the {@code toSave} into a list of decodable
+ */
 public class DukeDecoder {
 
     /**

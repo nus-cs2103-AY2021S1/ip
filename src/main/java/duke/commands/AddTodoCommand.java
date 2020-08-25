@@ -2,6 +2,10 @@ package src.main.java.duke.commands;
 
 import src.main.java.duke.data.task.Todo;
 
+
+/**
+ * Command that adds todo
+ */
 public class AddTodoCommand extends Command {
 
     public static final String COMMAND_WORD = "todo";

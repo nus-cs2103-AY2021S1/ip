@@ -3,8 +3,7 @@ package src.main.java.duke.commands;
 import src.main.java.duke.commons.Messages;
 
 /**
- * Deletes a task identified using it's last displayed index from the address
- * book.
+ * Deletes a task identified using it's last displayed index from the task list.
  */
 public class DeleteCommand extends Command {
 

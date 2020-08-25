@@ -2,6 +2,9 @@ package src.main.java.duke.commands;
 
 import src.main.java.duke.commons.Messages;
 
+/**
+ * Marks a task as done in the task list.
+ */
 public class MarkDoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";

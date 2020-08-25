@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 
 /**
- * The Deadline class that represents a event task.
+ * The Deadline class that represents a deadline task.
  *
  * @author Zeng Yu Ting
  * @version 3.0

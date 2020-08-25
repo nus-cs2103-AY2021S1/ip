@@ -11,6 +11,10 @@ import java.util.List;
 import src.main.java.duke.data.Duke;
 import src.main.java.duke.data.exception.IllegalValueException;
 
+
+/**
+ * StorageFile manages the storage of the Best2103Bot
+ */
 public class StorageFile {
 
     private static String STORAGE_DIRECTORY = System.getProperty("user.dir") + "/data";

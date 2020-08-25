@@ -2,6 +2,9 @@ package src.main.java.duke.commands;
 
 import src.main.java.duke.data.task.Deadline;
 
+/**
+ * Command that adds deadline
+ */
 public class AddDeadlineCommand extends Command {
 
     public static final String COMMAND_WORD = "deadline";

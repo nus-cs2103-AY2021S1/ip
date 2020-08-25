@@ -4,6 +4,10 @@ import src.main.java.duke.data.task.TaskList;
 import src.main.java.duke.data.task.TaskList.TaskNotFoundException;
 import src.main.java.duke.data.task.Task;
 
+
+/**
+ * Duke class represents the bot which contains a tasklist and interacts with the tasks.
+ */
 public class Duke {
 
     private final TaskList taskList;

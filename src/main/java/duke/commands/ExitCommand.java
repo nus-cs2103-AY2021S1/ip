@@ -1,5 +1,9 @@
 package src.main.java.duke.commands;
 
+
+/**
+ * Exits the program
+ */
 public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "bye";
