@@ -10,7 +10,7 @@ import duke.task.TaskList;
 public class ExitCommand extends Command{
 
     /**
-     * Constructor for ExitCommand class.
+     * Creates an ExitCommand.
      */
     public ExitCommand() {
     }

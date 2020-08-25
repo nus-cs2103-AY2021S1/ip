@@ -13,7 +13,7 @@ public class UnknownCommand extends Command {
     String gibberish;
 
     /**
-     * Constructor for UnknownCommand class.
+     * Creates an UnknownCommand.
      *
      * @param gibberish Full input by the user.
      */

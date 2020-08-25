@@ -14,7 +14,7 @@ public class DoneCommand extends Command {
     private int i;
 
     /**
-     * Constructor for DoneCommand class.
+     * Creates a DoneCommand.
      *
      * @param i Index of task to be marked as done.
      */

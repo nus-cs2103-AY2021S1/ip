@@ -10,7 +10,7 @@ import duke.task.TaskList;
 public class ListCommand extends Command{
 
     /**
-     * Constructor for ListCommand class.
+     * Creates a ListCommand.
      */
     public ListCommand() {
     }

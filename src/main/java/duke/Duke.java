@@ -7,11 +7,23 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents the Duke chat-bot, called Nite.
+ * Nite is an interactive app which helps to keep track of tasks.
+ * @author Chia Wen Ling
+ * @version v0.1
+ */
 public class Duke {
     private static Ui ui;
     private static Storage storage;
     private static TaskList tasks;
 
+    /**
+     * Creates a Duke Chat-bot.
+     *
+     * @param filePath Directory where Duke text file is saved.
+     * @param folderPath Path name of Duke text file to be saved.
+     */
     public Duke(String filePath, String folderPath) {
         ui = new Ui();
         storage = new Storage(filePath, folderPath);
@@ -23,7 +35,9 @@ public class Duke {
         }
     }
 
-
+    /**
+     * Runs the chat-bot upon starting the program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -39,6 +53,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method for starting the chat-bot.
+     * @param args Command line arguments, not used.
+     */
     public static void main(String[] args) {
         new Duke("/data/duke.txt", "/data").run();
     }
