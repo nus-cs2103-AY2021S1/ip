@@ -4,8 +4,18 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>The TaskSaveAndLoadManager class manages the logic to convert Java objects into data objects
+ * and vice versa.</p>
+ */
 public class TaskSaveAndLoadManager {
 
+    /**
+     * Saves the task list with tasks, along with their descriptions as well as
+     * their respective statuses and types.
+     * @param taskManager The TaskManager that stores the task list
+     * @throws IOException An exception thrown when IO operation fails
+     */
     public void saveTaskManager(TaskManager taskManager) throws IOException {
         TaskManagerData taskManagerData = new TaskManagerData();
         TaskData taskData = null;
@@ -18,36 +28,29 @@ public class TaskSaveAndLoadManager {
                 boolInt = 0;
             }
             if (task instanceof ToDoTask) {
-                taskData = new TaskData("todo", task.getTaskDescription(), boolInt, "");
+                taskData = new TaskData("todo", task.getTaskDescription(),
+                        boolInt, "");
             } else if (task instanceof DeadlineTask) {
                 LocalDate date = ((DeadlineTask) task).getTimeToBeDoneBy().getDate();
-                taskData = new TaskData("deadline", task.getTaskDescription(), boolInt, date.toString(), "");
+                taskData = new TaskData("deadline", task.getTaskDescription(),
+                        boolInt, date.toString(), "");
             } else if (task instanceof EventTask) {
                 LocalDate date = ((EventTask) task).getEventTime().getDate();
                 LocalTime time = ((EventTask) task).getEventTime().getTime();
-                taskData = new TaskData("event", task.getTaskDescription(), boolInt,
-                        date.toString(), time.toString());
+                taskData = new TaskData("event", task.getTaskDescription(),
+                        boolInt, date.toString(), time.toString());
             }
-            taskManagerData.taskList.add(taskData);
+            taskManagerData.getTaskList().add(taskData);
         }
         FileReadWriteIO.saveTaskListData(taskManagerData);
     }
 
-    public Task loadTask(TaskData taskData) {
-        boolean isDone;
-        isDone = taskData.isDone == 1;
-
-        if (taskData.taskType.equals("todo")) {
-            return new ToDoTask(taskData.taskDescription, isDone);
-        } else if (taskData.taskType.equals("deadline")) {
-            DateAndTime dt = new DateAndTime(LocalDate.parse(taskData.time));
-            return new DeadlineTask(taskData.taskDescription, isDone, dt);
-        } else {
-            DateAndTime dt = new DateAndTime(LocalDate.parse(taskData.date), LocalTime.parse(taskData.time));
-            return new EventTask(taskData.taskDescription, isDone, dt);
-        }
-    }
-
+    /**
+     * Loads the task list with tasks, along with their descriptions as well as
+     * their respective statuses and types since last save.
+     * @return The TaskManager that stores the task list
+     * @throws IOException An exception thrown when IO operation fails
+     */
     public TaskManager loadTaskManager() throws IOException {
         List<String> loadedData = FileReadWriteIO.loadUngroupedSavedTaskList();
         ArrayList<Task> taskList = new ArrayList<>();
@@ -72,4 +75,20 @@ public class TaskSaveAndLoadManager {
         }
         return null;
     }
+
+    private Task loadTask(TaskData taskData) {
+        boolean isDone;
+        isDone = taskData.isDone == 1;
+
+        if (taskData.taskType.equals("todo")) {
+            return new ToDoTask(taskData.taskDescription, isDone);
+        } else if (taskData.taskType.equals("deadline")) {
+            DateAndTime dt = new DateAndTime(LocalDate.parse(taskData.time));
+            return new DeadlineTask(taskData.taskDescription, isDone, dt);
+        } else {
+            DateAndTime dt = new DateAndTime(LocalDate.parse(taskData.date), LocalTime.parse(taskData.time));
+            return new EventTask(taskData.taskDescription, isDone, dt);
+        }
+    }
+
 }
