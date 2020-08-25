@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -35,7 +37,7 @@ public class Storage {
                 fw.write(taskType + taskDetailsSeparator + isCompleted
                         + taskDetailsSeparator + taskDetails + this.lineSeparator);
             } else {
-                // For Event and Deadline tasks
+                // For duke.task.Event and duke.task.Deadline tasks
                 fw.write(taskType + taskDetailsSeparator + isCompleted
                         + taskDetailsSeparator + taskDetails + taskDetailsSeparator
                         + date + this.lineSeparator);
