@@ -167,7 +167,7 @@ public class Duke {
             throw new DukeException(exceptionMsg);
         }
         String toDoTitle = instruction.substring(5);
-        Todo newTodo = new Todo(toDoTitle);
+        Todo newTodo = new Todo(toDoTitle, false);
         this.addToDo(newTodo);
     }
     
@@ -195,7 +195,7 @@ public class Duke {
                         + "    You can do it by adding deadline after '/by '." + emoji ;
                 throw new DukeException(exceptionMsg);
             }
-            Deadline deadline = new Deadline(description, by);
+            Deadline deadline = new Deadline(description, by, false);
             this.addDeadline(deadline);
         } else {
             String emoji = Emoji.SMILE.toString();
@@ -229,7 +229,7 @@ public class Duke {
                         + "    You can do it by adding time after '/at '." + emoji ;
                 throw new DukeException(exceptionMsg);
             }
-            Event event = new Event(description, time);
+            Event event = new Event(description, time, false);
             this.addEvent(event);
         } else {
             String emoji = Emoji.SMILE.toString();
@@ -247,6 +247,8 @@ public class Duke {
     //store user input and respond to different input
     public void run() {
         this.printWelcomeMessage();
+        Storage storage = new Storage("data/data.txt");
+        this.listOfTaskEntered = storage.load();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String instruction = sc.nextLine();
@@ -255,6 +257,7 @@ public class Duke {
                 if (instruction.equals("list")) {
                     this.list();
                 } else if (instruction.equals("bye")) {
+                    storage.writeData(this.listOfTaskEntered);
                     this.stop();
                     break;
                 } else if (len >= 5 && instruction.substring(0, 5).equals("done ")) {
@@ -267,7 +270,6 @@ public class Duke {
                     this.handleTodo(instruction);
                 } else if (len >= 8 && instruction.substring(0, 8).equals("deadline")) {
                     this.handleDeadline(instruction);
-
                 } else if (len >= 5 && instruction.substring(0, 5).equals("event")) {
                     this.handleEvent(instruction);
                 } else {

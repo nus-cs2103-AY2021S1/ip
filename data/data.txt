@@ -1,0 +1,5 @@
+D | 1 | return book | June 6th
+E | 1 | project meeting | Aug 6th 2-4pm
+T | 0|join sports club
+E | 1 | project | Wed
+E | 0 | meeting | Wed

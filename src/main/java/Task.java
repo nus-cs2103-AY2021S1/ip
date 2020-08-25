@@ -2,9 +2,9 @@ public class Task {
     protected String taskDescription;
     protected boolean isDone;
 
-    public Task(String taskDescription) {
+    public Task(String taskDescription, boolean isDone) {
         this.taskDescription = taskDescription;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public String getTaskDescription() {
@@ -24,5 +24,9 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] "
                 + this.getTaskDescription();
+    }
+    
+    public String toWrite() {
+        return "T | " + (this.isDone == true ? '1' : '0')  + "|" + this.taskDescription;
     }
 }
