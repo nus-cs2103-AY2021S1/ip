@@ -4,12 +4,12 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    protected Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    public Task(String description, boolean isDone) {
+    protected Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
@@ -19,7 +19,7 @@ public class Task {
     }
 
     public void markAsDone() {
-        this.isDone = true;
+            this.isDone = true;
     }
 
     public String getDescription() {
@@ -43,6 +43,7 @@ public class Task {
     public String getStorageString() {
         return "";
     }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
