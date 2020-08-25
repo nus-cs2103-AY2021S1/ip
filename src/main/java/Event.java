@@ -14,13 +14,13 @@ public class Event extends Task {
     }
 
     public static Event create(String taskDescription) throws DukeException{
-        if(!taskDescription.contains("/at")){
+        if (!taskDescription.contains("/at")) {
             throw new DukeException("Please include '/at' in front of the event time period");
         }
         String[] NameTimePair = taskDescription.split(" /at");
         String taskName = NameTimePair[0];
         String taskTime = NameTimePair[1];
-        return new Event(taskName,taskTime);
+        return new Event(taskName, taskTime);
     }
 
 
@@ -31,9 +31,9 @@ public class Event extends Task {
 
     private void parseTime(String taskDateTime) throws DukeException {
         String[] dateTime = taskDateTime.replace("/","-").split(" ",2);
-        try{
+        try {
             this.atDate = LocalDate.parse(dateTime[0]);
-        }catch(DateTimeParseException e){
+        } catch(DateTimeParseException e) {
             throw new DukeException("please enter a valid yyyy-mm-dd format");
         }
 
@@ -41,29 +41,29 @@ public class Event extends Task {
             if(dateTime.length == 2) {
                 this.atTime = LocalTime.parse(dateTime[1]);
             }
-        }catch(DateTimeParseException e){
+        } catch(DateTimeParseException e) {
             throw new DukeException("please enter a valid HH:MM format");
         }
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String symbol = isDone ? "\u2713" : "\u2718";
-        if(atTime != null) {
+        if (atTime != null) {
             return String.format("[%s][%s] %s (at: %s %s)", tag, symbol, taskName
                     , atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), atTime.toString());
-        }else{
+        } else {
             return String.format("[%s][%s] %s (at: %s)", tag, symbol, taskName
                     , atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         }
     }
 
     @Override
-    public String safeFileFormat(){
+    public String safeFileFormat() {
         int done = isDone ? 1 : 0;
-        if(atTime == null) {
+        if (atTime == null) {
             return String.format("%s | %d | %s | %s \n", tag, done, taskName, atDate.toString());
-        }else{
+        } else {
             return String.format("%s | %d | %s | %s %s \n", tag, done, taskName, atDate.toString(), atTime.toString());
         }
     }

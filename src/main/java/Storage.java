@@ -6,12 +6,11 @@ import java.nio.file.Paths;
 public class Storage {
 
     private TaskList taskList;
-    private Parser parser;
     private Path storageFilePath;
 
-    public Storage(TaskList taskList, Parser parser) throws DukeException {
+    public Storage(TaskList taskList) throws DukeException {
+
         this.taskList = taskList;
-        this.parser = parser;
         storageFilePath = Paths.get(".", "data", "test.txt");
         try {
             // Create directory if needed
@@ -39,24 +38,24 @@ public class Storage {
                 Task newTask;
                 try {
                     switch (taskType) {
-                        case "T": {
-                            newTask = new Todo(inputs[2]);
-                            break;
-                        }
+                    case "T": {
+                        newTask = new Todo(inputs[2]);
+                        break;
+                    }
 
-                        case "D": {
-                            newTask = Deadline.create(inputs[2], inputs[3]);
-                            break;
-                        }
+                    case "D": {
+                        newTask = Deadline.create(inputs[2], inputs[3]);
+                        break;
+                    }
 
-                        case "E": {
-                            newTask = Event.create(inputs[2], inputs[3]);
-                            break;
-                        }
+                    case "E": {
+                        newTask = Event.create(inputs[2], inputs[3]);
+                        break;
+                    }
 
-                        default: {
-                            throw new DukeException("smlj??????");
-                        }
+                    default: {
+                         throw new DukeException("smlj??????");
+                    }
                     }
 
                     if (inputs[1].equals("1")) {
@@ -82,7 +81,7 @@ public class Storage {
                 fw.write(taskList.getTask(i).safeFileFormat());
             }
             fw.close();
-        }catch(IOException e){
+        } catch(IOException e) {
             throw new DukeException("unable to save file");
         }
     }

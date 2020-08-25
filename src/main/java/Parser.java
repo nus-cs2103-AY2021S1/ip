@@ -18,44 +18,44 @@ public class Parser {
             }
 
             switch (command) {
-                case DONE: {
-                    int index = Integer.parseInt(taskDescription) - 1;
-                    taskList.DoneTask(index);
-                    break;
-                }
-                case LIST: {
-                    taskList.ListTask();
-                    break;
-                }
-                case BYE: {
-                    System.out.println("Bye, Have a Great Time!");
-                    taskList.setTaskListNotUpdating();
-                    break;
-                }
-                case TODO: {
-                    Task newTask = new Todo(taskDescription);
-                    taskList.AddTask(newTask,true);
-                    break;
-                }
-                case DEADLINE: {
-                    Task newTask = Deadline.create(taskDescription);
-                    taskList.AddTask(newTask,true);
-                    break;
-                }
-                case EVENT: {
-                    Task newTask = Event.create(taskDescription);
-                    taskList.AddTask(newTask,true);
-                    break;
-                }
-                case DELETE: {
-                    int index = Integer.parseInt(taskDescription) - 1;
-                    taskList.DeleteTask(index);
-                }
-                default: {
-                    throw new DukeException("smlj??????");
-                }
+            case DONE: {
+                int index = Integer.parseInt(taskDescription) - 1;
+                taskList.DoneTask(index);
+                break;
             }
-        }catch(DukeException e){
+            case LIST: {
+                taskList.ListTask();
+                break;
+            }
+            case BYE: {
+                System.out.println("Bye, Have a Great Time!");
+                taskList.setTaskListNotUpdating();
+                break;
+            }
+            case TODO: {
+                Task newTask = new Todo(taskDescription);
+                taskList.AddTask(newTask,true);
+                break;
+            }
+            case DEADLINE: {
+                Task newTask = Deadline.create(taskDescription);
+                taskList.AddTask(newTask,true);
+                break;
+            }
+            case EVENT: {
+                Task newTask = Event.create(taskDescription);
+                taskList.AddTask(newTask,true);
+                break;
+            }
+            case DELETE: {
+                int index = Integer.parseInt(taskDescription) - 1;
+                taskList.DeleteTask(index);
+            }
+            default: {
+                throw new DukeException("smlj??????");
+            }
+            }
+        } catch(DukeException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -64,7 +64,7 @@ public class Parser {
         Commands command;
         try{
             command = Commands.valueOf(commandInput.toUpperCase());
-        }catch(IllegalArgumentException e){
+        } catch(IllegalArgumentException e) {
             command = Commands.UNKNOWN;
         }
         return command;

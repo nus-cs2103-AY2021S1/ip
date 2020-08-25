@@ -4,31 +4,31 @@ public abstract class Task {
     protected boolean isDone = false;
     protected String taskName;
 
-    public Task(String taskName){
+    public Task(String taskName) {
         this.taskName = taskName;
     }
 
-    public Task(String taskName, Boolean isDone){
+    public Task(String taskName, Boolean isDone) {
         this.taskName = taskName;
     }
 
-    public void complete(){
+    public void complete() {
         this.isDone = true;
     }
 
-    public void printAddTask(){
+    public void printAddTask() {
         System.out.println(
                 String.format("Got it. I've added this task:\n  %s",this.toString())
         );
     }
 
-    public void printDeleteTask(){
+    public void printDeleteTask() {
         System.out.println(
                 String.format("Noted. I've removed this task:\n %s",this.toString())
         );
     }
 
-    public String safeFileFormat(){
+    public String safeFileFormat() {
         return "";
     }
 
