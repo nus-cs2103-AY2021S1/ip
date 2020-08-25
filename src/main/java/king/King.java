@@ -11,9 +11,10 @@ import tasks.TaskList;
 import java.util.Scanner;
 
 public class King {
-    Storage storage;
-    Parser parser;
-    TaskList taskList;
+
+    private final Storage storage;
+    private final Parser parser;
+    private TaskList taskList;
 
     /**
      * Creates the asset needed for the King program in the given file path.
