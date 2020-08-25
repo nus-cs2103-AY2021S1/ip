@@ -1,7 +1,7 @@
 package duke;
 
-import duke.tasks.Task;
 import duke.tool.TaskList;
+import duke.tasks.Task;
 
 import java.util.Scanner;
 
@@ -114,6 +114,25 @@ public class Ui {
         for (int i = 0; i < tasklist.getNumOfTasks(); i++) {
             System.out.println(spaceBeforeOder() + (i + 1) + ". " +
                     tasklist.getTask(i));
+        }
+        System.out.println(seperateLine());
+    }
+
+    /**
+     * Print the tasks in the list which contain the certain string.
+     * @param tasklist
+     * @param toFind
+     */
+    public void listMatchedTasks(TaskList tasklist, String toFind) {
+        System.out.println(seperateLine());
+        System.out.println(spaceBeforeOder() + "Here are the matching tasks in your list:");
+        int count = 1;
+        for (int i = 0; i < tasklist.getNumOfTasks(); i++){
+            if (tasklist.getTask(i).getName().contains(toFind)) {
+                System.out.println(spaceBeforeOder() + count + ". " +
+                        tasklist.getTask(i));
+                count++;
+            }
         }
         System.out.println(seperateLine());
     }

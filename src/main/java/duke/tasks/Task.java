@@ -2,7 +2,6 @@ package duke.tasks;
 
 import duke.tool.Storage;
 import duke.tool.TaskList;
-
 import duke.Ui;
 
 /**
@@ -34,6 +33,14 @@ public class Task {
     public Task markDone() {
         this.isDone = true;
         return this;
+    }
+
+    /**
+     * Get the description of the task.
+     * @return
+     */
+    public String getName() {
+        return this.name;
     }
 
     /**

@@ -1,1 +1,3 @@
-T | 0 | 1
+T | 0 | eat apple
+T | 1 | eat 2 apples
+T | 0 | eat banana pie

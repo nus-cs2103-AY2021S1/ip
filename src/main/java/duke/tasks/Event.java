@@ -2,7 +2,6 @@ package duke.tasks;
 
 import duke.tool.Storage;
 import duke.tool.TaskList;
-
 import duke.Ui;
 
 import java.time.LocalDateTime;
@@ -11,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represent a event task.
  */
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDateTime at;
 
     public Event(String description, LocalDateTime at, Boolean isDone) {

@@ -1,19 +1,20 @@
 package duke.tool;
 
+import duke.tasks.Delete;
+import duke.tasks.Done;
+import duke.tasks.Exit;
+import duke.tasks.List;
+import duke.tasks.Find;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 import duke.exceptions.NoDescriptionException;
 import duke.exceptions.NoSuchOrderException;
 import duke.exceptions.NoTaskChosenException;
 import duke.exceptions.NoThisNumOfTaskException;
 import duke.exceptions.NoTimeException;
-
-import duke.tasks.Deadline;
-import duke.tasks.Delete;
-import duke.tasks.Done;
-import duke.tasks.Event;
-import duke.tasks.Exit;
-import duke.tasks.List;
-import duke.tasks.Task;
-import duke.tasks.Todo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -74,6 +75,8 @@ public class Parser {
                     } else {
                         return new Delete((Integer.parseInt(command[1]) - 1));
                     }
+                } else if (command[0].equals("find")) {
+                    return new Find(command[1]);
                 } else {
                     if (command.length == 1) {
                         throw new NoDescriptionException(command[0]);
