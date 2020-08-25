@@ -1,5 +1,3 @@
-T , 0 , homework , 
-D , 1 , return book , 2020-07-30
-E , 1 , read book , 2020-08-01
-E , 0 , huh , 2015-04-12
-E , 0 , buy book , 2020-08-28
+E , 1 , croccy , 2020-03-01
+D , 0 , huhuh , 2020-03-01
+T , 1 , hi , 

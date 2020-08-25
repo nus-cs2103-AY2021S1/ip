@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents a Task object
+ */
 public class Task {
     protected boolean isDone;
     protected String description;
@@ -22,11 +25,18 @@ public class Task {
         return isDone;
     }
 
-    @Override
+    /**
+     * String representation of Task object
+     * @return String representation of Task object
+     */
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
+    /**
+     * String representation of Task object to be saved to hard disk
+     * @return String representation of Task object to be saved to hard disk
+     */
     public String fileFormat() {
         String indicateDone = isDone ? "1" : "0";
         return indicateDone + " , " + description + " , ";

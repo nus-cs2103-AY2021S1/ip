@@ -2,7 +2,17 @@ package duke;
 
 import java.util.Scanner;
 
+
+/**
+ * Parses string input and invokes different commands for different inputs
+ */
 public class Parser {
+    /**
+     * Parses the raw chunk of user input and returns a Command
+     * @param line
+     * @return Command object representing different commands available
+     * @throws DukeException
+     */
     public static Command parse(String line) throws DukeException {
         Scanner sc = new Scanner(line);
         String sentence = sc.next();
