@@ -15,6 +15,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public String txtFileFormat() {
+        return (this.isDone ? 1 : 0) + " ~/~ " + this.description;
+    }
+
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }

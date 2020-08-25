@@ -3,6 +3,12 @@ public class ToDo extends Task {
         super(description);
     }
 
+    @Override
+    public String txtFileFormat() {
+        return "T ~/~ " + super.txtFileFormat();
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

@@ -1,0 +1,6 @@
+T ~/~ 0 ~/~ study
+D ~/~ 0 ~/~ homework ~/~ Aug 26th
+E ~/~ 1 ~/~ movie ~/~ Aug 27th 8-10pm
+D ~/~ 0 ~/~ pay bills ~/~ Aug 28th
+E ~/~ 0 ~/~ birthday party ~/~ Aug 29th 6-9pm
+T ~/~ 0 ~/~ walk dog

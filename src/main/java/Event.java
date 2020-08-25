@@ -7,7 +7,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String txtFileFormat() {
+        return "E ~/~ " + super.txtFileFormat() + " ~/~ " + this.time;
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time + ")";
+        return "[E]" + super.toString() + " (at: " + this.time + ")";
     }
 }
