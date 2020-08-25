@@ -14,6 +14,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         inputs = sc.nextLine().split(" ",2);
         command = inputs[0];
+        tasks = Storage.load();
 
         while(!command.equals("bye")) {
             switch(command) {
@@ -69,6 +70,7 @@ public class Duke {
             inputs = sc.nextLine().split(" ",2);
             command = inputs[0];
         }
+        Storage.save(tasks);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("--------------------------------");
     }
