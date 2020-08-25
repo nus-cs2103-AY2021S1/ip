@@ -18,7 +18,7 @@ public class ToDo extends Task {
     /**
      * Gets the string representation of the todo to be written into the file upon exit
      *
-     * @return String representation of the todo
+     * @return String representation of the todo in the file
      */
     @Override
     public String[] getDataString() {
@@ -28,7 +28,7 @@ public class ToDo extends Task {
     /**
      * Gets the string representation of the todo to be printed in the UI
      *
-     * @return String representation of the todo
+     * @return String representation of the todo in the UI
      */
     @Override
     public String toString() {

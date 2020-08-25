@@ -31,6 +31,8 @@ public class Duke {
             String input = sc.nextLine();
             Command command = Parser.parse(input);
             command.execute(storage, tasks, ui);
+
+            // Exit command exits the program
             if (command instanceof ExitCommand) {
                 break;
             }

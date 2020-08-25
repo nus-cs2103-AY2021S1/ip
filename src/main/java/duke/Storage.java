@@ -73,6 +73,7 @@ public class Storage {
 
     /**
      * Clears all the contents in the file
+     *
      * @return true if the contents are cleared successfully, false otherwise
      */
     public boolean resetFile() {
@@ -87,6 +88,7 @@ public class Storage {
 
     /**
      * Saves data in current task list into file specified by pathName
+     *
      * @param taskList Task list to be saved
      * @return true if saving is successful, false otherwise
      */

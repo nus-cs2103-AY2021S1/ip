@@ -33,13 +33,6 @@ public abstract class Task {
     }
 
     /**
-     * Marks the task as complete
-     */
-    public void setComplete() {
-        this.isComplete = true;
-    }
-
-    /**
      * Gets the string representation of the task to be written into the file upon exit
      *
      * @return String representation of the task in the file
@@ -74,6 +67,13 @@ public abstract class Task {
         } else {
             return "\u2718";
         }
+    }
+
+    /**
+     * Marks the task as complete
+     */
+    public void setComplete() {
+        this.isComplete = true;
     }
 
     /**
