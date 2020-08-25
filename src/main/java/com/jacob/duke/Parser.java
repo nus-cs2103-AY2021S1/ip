@@ -36,7 +36,11 @@ public class Parser {
             break;
         case "list-due":
             //iterate through the taskList and print all active members
-            c = new PrintFilteredListCommand(fullCommand);
+            c = new PrintFilteredListDateTimeCommand(fullCommand);
+            break;
+        case "find":
+            //iterate through the taskList and print all active members
+            c = new FindCommand(fullCommand);
             break;
         case "done":
             //doneEventHandler();

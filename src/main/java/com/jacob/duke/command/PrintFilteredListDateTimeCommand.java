@@ -8,14 +8,16 @@ import main.java.com.jacob.duke.TaskList;
 import main.java.com.jacob.duke.Ui;
 import main.java.com.jacob.duke.task.Task;
 
-public class PrintFilteredListCommand implements Command {
+
+
+
+public class PrintFilteredListDateTimeCommand implements Command {
     private String inputCommand;
-    private boolean isComplete;
     /**
      * Constructor for Print filtered List Command
      * @param fullCommand with from console input
      */
-    public PrintFilteredListCommand(String fullCommand) {
+    public PrintFilteredListDateTimeCommand(String fullCommand) {
         this.inputCommand = fullCommand;
     }
     /**
@@ -28,7 +30,7 @@ public class PrintFilteredListCommand implements Command {
     @Override
     public void execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
         List<Task> taskList = tasks.getTaskList();
-        ui.showFilteredList(inputCommand, taskList);
+        ui.showFilteredDateTimeList(inputCommand, taskList);
     }
 
     /**

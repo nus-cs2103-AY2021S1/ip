@@ -57,7 +57,10 @@ public class Ui {
      * @param inputCommand Command includes the date time it is filtering for
      * @param taskList List representation of the current task list
      */
-    public void showFilteredList(String inputCommand, List<Task> taskList) {
+    public void showFilteredDateTimeList(String inputCommand, List<Task> taskList) throws DukeException {
+        if (inputCommand.length() <= "list-due ".length()) {
+            throw new DukeException(" list-due command cannot be empty!!");
+        }
         //get the date time string from the initial string
         String dateTime = inputCommand.substring("list-due ".length());
 
@@ -72,6 +75,37 @@ public class Ui {
         System.out.println(" Here are the tasks in your filtered list:");
         for (Task t : taskList) {
             if (t.getDueDateTime() != null && dateTimePredicate.test(t.getDueDateTime())) {
+                System.out.println("  " + count + ". " + t.getCurrentStatus());
+                count++;
+            }
+        }
+    }
+
+    /**
+     * Show List of tasks with keyword
+     * @param inputCommand Command includes keyword
+     * @param taskList List representation of the current task list
+     * @throws DukeException Throws Exception if the search string is empty
+     */
+    public void showKeywordList(String inputCommand, List<Task> taskList) throws DukeException {
+
+        if (inputCommand.length() <= "find ".length()) {
+            throw new DukeException(" find command cannot be empty!!");
+        }
+        //get the keyword string from the initial string
+        String keyword = inputCommand.substring("find ".length());
+
+        if (keyword.equals("")) {
+            throw new DukeException(" Search String cannot be empty!");
+        }
+        //check that the date and time is the same before printing
+        Predicate<String> searchStringPredicate = x -> x.contains(keyword);
+
+        //print out the filtered items
+        int count = 1;
+        System.out.println(" Here are the tasks in your filtered list:");
+        for (Task t : taskList) {
+            if (t.getDescription() != null && searchStringPredicate.test(t.getDescription())) {
                 System.out.println("  " + count + ". " + t.getCurrentStatus());
                 count++;
             }
