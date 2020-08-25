@@ -30,6 +30,8 @@ public class Parser {
             return prepareDone(commandArr[1]);
         case "list":
             return new ListCommand();
+        case "find":
+            return new FindCommand(commandArr[1]);
         default:
             throw new InvalidCommandException("Invalid Command: " + commandArr[0]);
         }

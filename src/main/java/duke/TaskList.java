@@ -35,6 +35,18 @@ public class TaskList {
         return this.tasks;
     }
 
+    public List<Task> findTasks(String keyword) {
+        List<Task> searchResults = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (task.description.contains(keyword)) {
+                searchResults.add(task);
+            }
+        }
+        return searchResults;
+
+    }
+
     /**
      * Adds a new task to TaskList.
      * @param task Description of task to be added.
