@@ -2,73 +2,80 @@ public class Parser {
     public Parser() {
     }
 
-    //takes in a string, returns a string array containing a command type and the details
-    //[command type, detail, date]
+    /***
+     * Returns a string array containing the command type, command details and date details. If there
+     * are no details then the array slot is left as null. Reads the raw input from the user as
+     * a string and split the based on whitespace
+     * @param String input from the user
+     * @return a size 3 string array containing command type, command detail and date detail
+     */
+
     public String[] getDetails(String s) {
-        String[] details = new String[3];
         String[] rawData = s.split(" ");
-        String type = rawData[0];
-        String[] extractedDetails = extractDetails(rawData, type);
-        details[0] = type;
-        details[1] = extractedDetails[0];
-        details[2] = extractedDetails[1];
-        return details; //finish this code, when given raw data -> extract details. Then implement parser and switch loop
+        String[] extractedDetails = extractDetails(rawData);
+        return extractedDetails;
     }
 
-
-    public String[] extractDetails(String[] details, String type) {
-        String[] s = new String[2];
+    /**
+     * Returns a size 3 array containing command type, command detail and command date. Any array slots
+     * that have no inputs are left as null. The original raw input is split and processed depending on
+     * the command type. The command types available are todo, deadline, event, done and delete
+     * @param string array of the raw user input
+     * @return  a size 3 array containing command type, command detail and date detail.
+     **/
+    public String[] extractDetails(String[] details) {
+        String type = details[0];
+        String[] s = new String[3];
         String s1 = "";
         String s2 = "";
         int counter = 1;
 
         switch (type) {
-            case "todo": //extract details
-                if (details.length == 1) {
-                    s[0] = null;
+            case "todo":
+                if (details.length == 1) { //empty todo
+                    s[1] = null;
                     break;
-                } else {
+                } else { // form a single string of detail
                     for (int i = 1; i < details.length; i++) {
                         s1 = s1 + " " + details[i];
                     }
-                    s[0] = s1;
+                    s[1] = s1;
                     break;
                 }
 
-            case "deadline": //extract details and date
+            case "deadline":
                 for (; counter < details.length; counter++) {
-                    if (details[counter].equals("/by")) {
-                        s[0] = s1; // get details
-                        counter++;
+                    if (details[counter].equals("/by")) { //base case for task details
+                        s[1] = s1;  //enter detail into extracted details array
                         break;
                     }
-                    s1 = s1 + " " + details[counter];
+                    s1 = s1 + " " + details[counter]; //build a string of task details
                 }
-                for (; counter < details.length; counter++) {
-                    s2 = s2 + " " + details[counter];
+                for (counter++; counter < details.length; counter++) {
+                    s2 = s2 + " " + details[counter]; //build a string of time detail
                 }
-                s[1] = s2; //date
+                s[2] = s2; //enter time detail into extracted detail array
                 break;
-            case "event": //extract details and date
+            case "event":
                 for (; counter < details.length; counter++) {
-                    if (details[counter].equals("/at")) {
-                        s[0] = s1; // get details
-                        counter++;
+                    if (details[counter].equals("/at")) { //base case for task details
+                        s[1] = s1; // enter detail into final array
                         break;
                     }
-                    s1 = s1 + " " + details[counter];
+                    s1 = s1 + " " + details[counter]; //build string of detail
                 }
-                for (; counter < details.length; counter++) {
-                    s2 = s2 + " " + details[counter];
+                for (counter++; counter < details.length; counter++) {
+                    s2 = s2 + " " + details[counter]; // build string of time detail
                 }
-                s[1] = s2; //date
+                s[2] = s2; //enter time detail into final array
                 break;
             case ("done"):
-                s[0] = details[1];
+                s[1] = details[1]; //expected to be an int
                 break;
             case ("delete"):
-                s[0] = details[1];
+                s[1] = details[1]; //expected to be an int
         }
+        s[0] = type;
         return s;
     }
 }

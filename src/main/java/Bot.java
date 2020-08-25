@@ -7,9 +7,9 @@ public class Bot {
     public Bot() {
     }
 
-    String line = "    ____________________________________________________________";
-    String gotIt = "     Got it. I've added this task: ";
-    String whiteSpaceSeven = "       ";
+    String LINE = "    ____________________________________________________________";
+    String GOT_IT = "     Got it. I've added this task: ";
+    String WHITE_SPACE_SEVEN = "       ";
     ArrayList<Listing> list = new ArrayList<Listing>();
     Parser parser = new Parser();
 
@@ -41,7 +41,7 @@ public class Bot {
                         }
                         break;
                     case ("deadline"):
-                        if (commandDetail == null || dateInfo == null) { //can be modified to do description AND time;
+                        if (commandDetail == null || dateInfo == null) {
                             throw new NoDescriptionException("deadline");
                         } else {
                             addListings(parsedInfo);
@@ -80,22 +80,22 @@ public class Bot {
             case ("todo"):
                 ToDo todo = new ToDo(taskInfo);
                 list.add(todo);
-                s = line + "\n" + gotIt + "\n" + whiteSpaceSeven + todo.toString() +
-                        "\n" + "     Now you have " + size + " tasks in the list." + "\n" + line;
+                s = LINE + "\n" + GOT_IT + "\n" + WHITE_SPACE_SEVEN + todo.toString() +
+                        "\n" + "     Now you have " + size + " tasks in the list." + "\n" + LINE;
                 System.out.println(s);
                 break;
             case ("deadline"):
                 Deadline deadline = new Deadline(taskInfo, dateInfo);
                 list.add(deadline);
-                s = line + "\n" + gotIt + "\n" + whiteSpaceSeven + deadline.toString() +
-                        "\n" + "     Now you have " + size + " tasks in the list." + "\n" + line;
+                s = LINE + "\n" + GOT_IT + "\n" + WHITE_SPACE_SEVEN + deadline.toString() +
+                        "\n" + "     Now you have " + size + " tasks in the list." + "\n" + LINE;
                 System.out.println(s);
                 break;
             case ("event"):
                 Event event = new Event(taskInfo, dateInfo);
                 list.add(event);
-                s = line + "\n" + gotIt + "\n" + whiteSpaceSeven + event.toString() +
-                        "\n" + "     Now you have " + size + " tasks in the list." + "\n" + line;
+                s = LINE + "\n" + GOT_IT + "\n" + WHITE_SPACE_SEVEN + event.toString() +
+                        "\n" + "     Now you have " + size + " tasks in the list." + "\n" + LINE;
                 System.out.println(s);
                 break;
         }
@@ -103,36 +103,36 @@ public class Bot {
 
 
     public void returnListings() {
-        System.out.println(line);
+        System.out.println(LINE);
         System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             String s = "     " + (i + 1) + "." + list.get(i).toString();
             System.out.println(s);
         }
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     public void doneListings(Integer value) {
         Listing item = list.get(value - 1);
         item.complete(); //completes the list
-        String s = line + "\n" + "     Nice! I've marked this task as done: \n" + "     "
-                + item.toString() + "\n" + line;
+        String s = LINE + "\n" + "     Nice! I've marked this task as done: \n" + "     "
+                + item.toString() + "\n" + LINE;
         System.out.println(s);
     }
 
     public void undefinedExceptionMessage() {
-        System.out.println(line + "\n" + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-("
-                + "\n" + line);
+        System.out.println(LINE + "\n" + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-("
+                + "\n" + LINE);
     }
 
     public void noDescriptionMessage(String s) {
-        System.out.println(line + "\n" + "     ☹ OOPS!!! The description of a " + s + " cannot be empty."
-                + "\n" + line);
+        System.out.println(LINE + "\n" + "     ☹ OOPS!!! The description of a " + s + " cannot be empty."
+                + "\n" + LINE);
     }
 
     public void deleteMessage(Integer num) {
-        System.out.println(line + "\n" + "     Noted. I've removed this task: \n" + whiteSpaceSeven +
-                list.get(num) + "\n" + "     Now you have " + (list.size() - 1) + " tasks in the list.\n" + line);
+        System.out.println(LINE + "\n" + "     Noted. I've removed this task: \n" + WHITE_SPACE_SEVEN +
+                list.get(num) + "\n" + "     Now you have " + (list.size() - 1) + " tasks in the list.\n" + LINE);
     }
 
 }
