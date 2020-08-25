@@ -1,4 +1,3 @@
-import javax.annotation.processing.SupportedSourceVersion;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -209,7 +208,7 @@ public class Duke {
                                 throw new DukeException("Did you include /by?");
                             } else {
                                 String description = input.substring(9, indexOfBy);
-                                String by = input.substring(indexOfBy + 3);
+                                String by = input.substring(indexOfBy + 4);
                                 Deadline newTask = new Deadline(description, by);
                                 addTask(newTask);
                             }
@@ -227,7 +226,7 @@ public class Duke {
                                 throw new DukeException("Did you include /at?");
                             } else {
                                 String description = input.substring(6, indexOfAt);
-                                String at = input.substring(indexOfAt + 3);
+                                String at = input.substring(indexOfAt + 4);
                                 Event newTask = new Event(description, at);
                                 addTask(newTask);
                             }
