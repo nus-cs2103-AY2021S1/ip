@@ -8,7 +8,6 @@ import duke.ui.Ui;
 public abstract class Command {
     public boolean isBye = false;
 
-<<<<<<< HEAD
     /**
      * Executes action done to task in TaskList.
      *
@@ -16,7 +15,5 @@ public abstract class Command {
      * @param taskList TaskList where task actions are done.
      * @param ui Ui that shows relevant messages to user.
      */
-=======
->>>>>>> branch-A-CodingStandard
     public abstract void execute(Storage storage, TaskList taskList, Ui ui) throws DukeException;
 }

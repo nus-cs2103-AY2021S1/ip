@@ -14,6 +14,12 @@ To mark a task as done, input 'done <task number>'.
 To delete a task from your list, input 'delete <task number>'.
 To stop Dino, input 'bye'.
 ____________________________________________________________
+Dino lists your tasks:
+1. [T][1] swimming in sea
+2. [D][1] swimming (by: May 27 2020, 2.30pm)
+3. [T][1] racing car
+To mark off a task after completion, input 'done <task number>'.
+____________________________________________________________
 Here are the matching tasks in your list:
 [T][1] racing car
 ____________________________________________________________
