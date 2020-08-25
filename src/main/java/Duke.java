@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +18,7 @@ public class Duke {
     private enum InstructionGuide {
         // For formatting purposes, except for the last guide, the guides must end with a guideBreaker
         // It splits them into paragraphs
-        LevelInformation("* Level 7: Saving Data. Follow the Task Input Instructions for more\n" +
+        LevelInformation("* Level 8: Formatting Time. Follow the Task Input Instructions for more\n" +
                 "* Do try to avoid ambiguous inputs, " +
                 "such as [keywords] + [random gibberish] as I cannot recognise them!\n" +
                 "\tI'm not very smart (yet) :(\n" +
@@ -27,6 +29,11 @@ public class Duke {
                 " todo [Task Description] - Inputs a TODO DukeTask\n" +
                 " deadline [Task Description] /by [Date] - Inputs a DEADLINE DukeTask, along with INDICATOR /by\n" +
                 " event [Task Description] /at [Date] - Inputs an EVENT DukeTask, along with INDICATOR /at", false),
+
+        TaskInputSpecifications("TO NOTE:\n" +
+                " FORMAT FOR DATE: \"DD/MM/YYYY hh/mm/ss\"\n" +
+                " \tDD, MM, YYYY are the date, month and year respectively (IN INTEGERS)\n" +
+                " \thh, mm, ss are the hour (in 24 HOUR NOTATION), minutes and seconds respectively (IN INTEGERS)", false),
 
         AvailableInstruction(" help - Display Available Instructions\n" +
                 " bye - Terminate Duke\n" +
@@ -61,6 +68,7 @@ public class Duke {
                 InstructionGuide.LevelInformation +
                 "TASK INPUT INSTRUCTIONS:\n" + // Task Input Instructions
                 InstructionGuide.TaskInput +
+                InstructionGuide.TaskInputSpecifications +
                 "AVAILABLE INSTRUCTIONS:\n" + // Available Instructions
                 InstructionGuide.AvailableInstruction), // END OF INSTRUCTIONS)
 
@@ -211,42 +219,10 @@ public class Duke {
                         }
                         break;
                     case DEADLINE:
-                        int byIndex = findIndex(instructionArray, BY_INDICATOR);
-                        if (byIndex == -1) {
-                            throw new InvalidFormatException(DEADLINE);
-                        } else {
-                            String deadlineDesc = mergeArray(instructionArray, 1, byIndex);
-                            String deadlineDatetime = mergeArray(instructionArray, byIndex + 1, instrLen);
-                            if (deadlineDesc.equals("")) {
-                                throw new MissingFieldException(DEADLINE + ": Description");
-                            } else if (deadlineDatetime.equals("")) {
-                                throw new MissingFieldException(DEADLINE + ": Date and Time");
-                            } else {
-                                DeadlineTask deadlinetask = new DeadlineTask(deadlineDesc, deadlineDatetime);
-                                inputList.add(deadlinetask);
-                                System.out.println("Task Added: " + deadlinetask.toString());
-                                System.out.println(getTaskSize(inputList));
-                            }
-                        }
+                        generateTaskWithDate(DEADLINE, instructionArray, BY_INDICATOR, inputList);
                         break;
                     case EVENT:
-                        int atIndex = findIndex(instructionArray, AT_INDICATOR);
-                        if (atIndex == -1) {
-                            throw new InvalidFormatException(EVENT);
-                        } else {
-                            String eventDesc = mergeArray(instructionArray, 1, atIndex);
-                            String eventDatetime = mergeArray(instructionArray, atIndex + 1, instrLen);
-                            if (eventDesc.equals("")) {
-                                throw new MissingFieldException(EVENT + ": Description");
-                            } else if (eventDatetime.equals("")) {
-                                throw new MissingFieldException(EVENT + ": Date and Time");
-                            } else {
-                                EventTask eventTask = new EventTask(eventDesc, eventDatetime);
-                                inputList.add(eventTask);
-                                System.out.println("Task Added: " + eventTask.toString());
-                                System.out.println(getTaskSize(inputList));
-                            }
-                        }
+                        generateTaskWithDate(EVENT, instructionArray, AT_INDICATOR, inputList);
                         break;
                     default:
                         throw new InvalidInstructionException(UNKNOWN);
@@ -340,15 +316,16 @@ public class Duke {
                 String savedTask = fileScanner.nextLine();
                 String[] taskData = savedTask.split("\\|");
                 DukeTask task;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(CommonString.DUKE_DATETIME_FORMAT.toString());
                 switch (taskData[0]) {
                     case "T":
                         task = new TodoTask(taskData[2]);
                         break;
                     case "E":
-                        task = new EventTask(taskData[2], taskData[3]);
+                        task = new EventTask(taskData[2], LocalDateTime.parse(taskData[3], formatter));
                         break;
                     default: // "D"
-                        task = new DeadlineTask(taskData[2], taskData[3]);
+                        task = new DeadlineTask(taskData[2], LocalDateTime.parse(taskData[3], formatter));
 
                 }
                 if (taskData[1].equals("1")) {
@@ -393,5 +370,117 @@ public class Duke {
         FileWriter writer = new FileWriter(PATH);
         writer.write(output);
         writer.close();
+    }
+
+    private static LocalDateTime parseDateAndTime(String taskType, String date, String time) throws InvalidFormatException {
+        // INPUT DATE FORMAT: DD/MM/YYYY
+        // INPUT TIME FORMAT: hh/mm/ss
+        int year, month, day, hour, minute, second;
+
+        String[] dateArray = date.split("/");
+        String[] timeArray = time.split("/");
+
+        if (dateArray.length != 3 || timeArray.length != 3) {
+            throw new InvalidFormatException(taskType + " DATE AND TIME");
+        }
+
+        try {
+            day = Integer.parseInt(dateArray[0]);
+            month = Integer.parseInt(dateArray[1]);
+            year = Integer.parseInt(dateArray[2]);
+
+            hour = Integer.parseInt(timeArray[0]);
+            minute = Integer.parseInt(timeArray[1]);
+            second = Integer.parseInt(timeArray[2]);
+        } catch (NumberFormatException nfe) {
+            throw new InvalidFormatException(taskType + " DATE AND TIME");
+        }
+
+        // input validation for time
+        if (hour < 0 || hour > 23 || minute < 0 || minute > 59 || second < 0 || second > 59) {
+            throw new InvalidFormatException(taskType + " TIME FORMAT");
+        }
+
+        // input validation for date
+        if (year <= 0 || month <= 0 || month > 12 || day <= 0) {
+            throw new InvalidFormatException(taskType + " DATE FORMAT");
+        }
+
+        switch (month) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                if (day > 31) {
+                    throw new InvalidFormatException(taskType + " DATE FORMAT");
+                }
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                if (day > 30) {
+                    throw new InvalidFormatException(taskType + " DATE FORMAT");
+                }
+                break;
+            default:
+                if ((isLeapYear(year) && day > 29) || (!isLeapYear(year) && day > 28)){
+                    throw new InvalidFormatException(taskType + " DATE FORMAT");
+                }
+        }
+
+        return LocalDateTime.of(year, month, day, hour, minute, second);
+    }
+
+    private static boolean isLeapYear(int year) {
+        boolean isLeap = false;
+        if (year % 4 == 0) {
+            if(year % 100 == 0) {
+                isLeap = year % 400 == 0;
+            } else {
+                isLeap = true;
+            }
+        }
+        return isLeap;
+    }
+
+    private static void generateTaskWithDate(String taskType, String[] instructionArray,
+                                             String indicator, ArrayList<DukeTask> inputList)
+            throws InvalidFormatException, MissingFieldException {
+
+        // find the index of the indicator
+        int index = findIndex(instructionArray, indicator);
+        if (index == -1) { // does not exist
+            throw new InvalidFormatException(taskType);
+        } else {
+            String description = mergeArray(instructionArray, 1, index);
+            if (description.equals("")) {
+                throw new MissingFieldException(taskType + ": Description");
+            }
+
+            if (instructionArray.length < index + 3) { // account for index + date + time
+                throw new MissingFieldException(taskType + ": Date and Time");
+            }
+            String date = instructionArray[index + 1];
+            String time = instructionArray[index + 2];
+
+            // parse date and time into LocalDateTime object
+            LocalDateTime dateTime = parseDateAndTime(taskType, date, time);
+
+            if (taskType.equals(DEADLINE)) {
+                DeadlineTask task = new DeadlineTask(description, dateTime);
+                inputList.add(task);
+                System.out.println("Task Added: " + task.toString());
+                System.out.println(getTaskSize(inputList));
+            } else if (taskType.equals(EVENT)) {
+                EventTask task = new EventTask(description, dateTime);
+                inputList.add(task);
+                System.out.println("Task Added: " + task.toString());
+                System.out.println(getTaskSize(inputList));
+            }
+        }
     }
 }

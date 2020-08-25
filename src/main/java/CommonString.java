@@ -6,7 +6,8 @@ public enum CommonString {
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n");
+            + "|____/ \\__,_|_|\\_\\___|\n"),
+    DUKE_DATETIME_FORMAT("dd MMM yyyy hh:mm:ss a");
 
     private final String value;
 
