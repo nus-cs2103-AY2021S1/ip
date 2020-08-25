@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 import java.util.ArrayList;
 
 public class Handler {
@@ -63,7 +67,12 @@ public class Handler {
     }
 
     private static String deadline(String body) {
-        return body.split(" /by ", 2)[1];
+        String time = body.split(" /by ", 2)[1];
+        if (time.equals("now")) {
+            return LocalDate.now().format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        } else {
+            return LocalDate.parse(time).format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        }
     }
 
     private static boolean isValidEFormat(String body) {
@@ -71,7 +80,12 @@ public class Handler {
     }
 
     private static String eventTime(String body) {
-        return body.split(" /at ", 2)[1];
+        String time = body.split(" /at ", 2)[1];
+        if (time.equals("now")) {
+            return LocalDate.now().format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        } else {
+            return LocalDate.parse(time).format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        }
     }
 
     public static boolean isBye(String input){
