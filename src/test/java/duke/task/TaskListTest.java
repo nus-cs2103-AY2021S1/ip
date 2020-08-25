@@ -10,7 +10,7 @@ public class TaskListTest {
     @Test
     void emptyTaskList_zeroSize() {
         TaskList tasks = new TaskList();
-        assertEquals(0, tasks.size());
+        assertEquals(0, tasks.getSize());
     }
 
     @Test
