@@ -2,6 +2,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.FormatStyle;
+import java.util.ArrayList;
+import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Chatbot {
     public String line = "____________________________________________________________";
@@ -76,7 +83,25 @@ public class Chatbot {
                     char y = s.charAt(s.length() - 1);
                     int k = Character.getNumericValue(y);
                     delete(k);
+
+            case "deadline":
+                if (s.length() != "deadline".length()) {
+                    String[] value = s.split(" /by ");
+                    String date = value[1];
+                    DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                    DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
+                    LocalDateTime dateTime = LocalDateTime.parse(date, inputFormat);
+                    dateTime.format(outputFormat);
+                    Deadline deadline = new Deadline(value[0].replace("deadline ", ""), dateTime);
+                    list.add(deadline);
+                    addTask(deadline);
+                    file.newLine();
+                    file.write(deadline.toSave());
+                    file.close();
                     return true;
+                } else {
+                    throw new IncorrectInputException("☹ OOPS!!! The description of an deadline cannot be empty.");
+                }
                 case "todo":
                     if (s.length() != "todo".length()) {
                         ToDo toDo = new ToDo(s.replace("todo ", ""));
@@ -102,19 +127,7 @@ public class Chatbot {
                     } else {
                         throw new IncorrectInputException("☹ OOPS!!! The description of an event cannot be empty.");
                     }
-                case "deadline":
-                    if (s.length() != "deadline".length()) {
-                        String[] value = s.split(" /by ");
-                        Deadline deadline = new Deadline(value[0].replace("deadline ", ""), value[1]);
-                        list.add(deadline);
-                        addTask(deadline);
-                        file.newLine();
-                        file.write(deadline.toSave());
-                        file.close();
-                        return true;
-                    } else {
-                        throw new IncorrectInputException("☹ OOPS!!! The description of a deadline cannot be empty.");
-                    }
+
                 default:
                     throw new IncorrectInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
