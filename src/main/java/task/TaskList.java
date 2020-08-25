@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -61,11 +63,13 @@ public class TaskList extends ArrayList<Task> {
                         break;
                     }
                     case "E": {
-                        task = new Event(completed, parts[2], parts[3]);
+                        LocalDate time = LocalDate.parse(parts[3]);
+                        task = new Event(completed, parts[2], time);
                         break;
                     }
                     case "D": {
-                        task = new Deadline(completed, parts[2], parts[3]);
+                        LocalDate time = LocalDate.parse(parts[3]);
+                        task = new Deadline(completed, parts[2], time);
                         break;
                     }
                     default: {
@@ -75,11 +79,9 @@ public class TaskList extends ArrayList<Task> {
                 add(task);
             }
         } catch (SecurityException | IOException err) {
-            err.printStackTrace(System.err);
             System.err.println("Warning: unable to read data storage. "
                 + "Your task list is not loaded.");
-        } catch (CorruptedDataException | IndexOutOfBoundsException err) {
-            err.printStackTrace(System.err);
+        } catch (DateTimeException | CorruptedDataException | IndexOutOfBoundsException err) {
             System.err.println("Warning: Corrupted data storage. "
                 + "Your task list may not be fully loaded.");
         }

@@ -1,7 +1,9 @@
 package task;
 
+import java.time.LocalDate;
+
 public class Event extends Task {
-    public Event(boolean completed, String content, String time) {
+    public Event(boolean completed, String content, LocalDate time) {
         super(completed, content, time);
     }
 
@@ -14,7 +16,7 @@ public class Event extends Task {
     public String toString() {
         String mark = getCompleteMark();
         String content = getContent();
-        String time = getTime();
+        LocalDate time = getTime();
         return String.format("[E][%s] %s (at: %s)", mark, content, time);
     }
 }

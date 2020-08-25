@@ -1,3 +1,5 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
@@ -114,7 +116,7 @@ public class Tickbot {
     private static void processAddTask(
         String[] args,
         String taskName,
-        BiFunction<String, String, ? extends Task> initializer,
+        BiFunction<String, LocalDate, ? extends Task> initializer,
         String timeMarker
     ) {
         if (args.length < 2) {
@@ -135,7 +137,7 @@ public class Tickbot {
                 }
             }
             Task task = initializer.apply(content,
-                timeMarker == null ? null : time.get());
+                timeMarker == null ? null : LocalDate.parse(time.get()));
             tasks.add(task);
             printMessage(taskName + " added: " + task);
             printMessage("You have " + tasks.size() + " task(s) in task list.");
@@ -146,6 +148,8 @@ public class Tickbot {
         } catch (NoSuchElementException err) {
             printMessage("Missing time for the " + args[0] + ".");
             printAddTaskUsage(args[0], timeMarker);
+        } catch (DateTimeException err) {
+            printMessage("Bad date format. Please input in YYYY-MM-DD format.");
         }
     }
 
