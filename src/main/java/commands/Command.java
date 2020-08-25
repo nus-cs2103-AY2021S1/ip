@@ -8,8 +8,10 @@ import tasks.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public enum Command {
@@ -112,6 +114,30 @@ public enum Command {
             }
         }
     },
+    FIND {
+        @Override
+        public String execute(HashMap<String, String> parameters, TaskList tasks) throws DukeException {
+            if (!parameters.containsKey("argument")) {
+                throw new DukeInvalidParameterException(strings.getString("error.find"), parameters);
+            }
+            String searchTerm = parameters.get("argument");
+            List<Task> matches = tasks
+                    .getList()
+                    .stream()
+                    .filter(item -> item.getDescription().contains(searchTerm))
+                    .collect(Collectors.toList());
+
+            String output = IntStream.range(0, matches.size())
+                    .mapToObj(index -> (index + 1) + ". " + matches.get(index) + "\t\t")
+                    .reduce("", (x, y) -> x + y)
+                    .strip();
+            if (output.equals("")) {
+                return strings.getString("output.findEmpty");
+            } else {
+                return String.format(strings.getString("output.find"), output);
+            }
+        }
+    },
     BYE {
         @Override
         public String execute(HashMap<String, String> parameters, TaskList tasks) {
@@ -135,6 +161,8 @@ public enum Command {
             ret = EVENT;
         } else if (command.equals(strings.getString("command.delete"))) {
             ret = DELETE;
+        } else if (command.equals(strings.getString("command.find"))) {
+            ret = FIND;
         } else if (command.equals(strings.getString("command.bye"))) {
             ret = BYE;
         } else {
