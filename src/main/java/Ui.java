@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Ui {
     final private String line = "-------------------------------------";
     final private String addedMsg = "Alright, I've added a new order: ";
@@ -22,11 +24,11 @@ public class Ui {
         System.out.println(line);
     }
 
-    public void addedItem(Task curr) {
+    public void addedItem(Task curr, int size) {
         System.out.println(line);
         System.out.println(addedMsg);
         System.out.println(curr);
-        System.out.println("You have ordered " + Duke.list.size() + " items.");
+        System.out.println("You have ordered " + size + " items.");
         System.out.println(line);
     }
 
@@ -50,11 +52,11 @@ public class Ui {
         System.out.println(line);
     }
 
-    public void returnList() {
+    public void returnList(ArrayList<Task> curr) {
         System.out.println(line);
         System.out.println(retListMsg);
-        for (int k = 0; k < Duke.list.size(); k++) {
-            System.out.println((k + 1) + ": " + Duke.list.get(k));
+        for (int k = 0; k < curr.size(); k++) {
+            System.out.println((k + 1) + ": " + curr.get(k));
         }
         System.out.println((line));
     }
