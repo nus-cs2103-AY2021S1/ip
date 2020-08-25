@@ -5,9 +5,9 @@ import duke.task.Task;
 import java.util.Objects;
 
 /**
- * Mark duke.task as done
+ * Mark task as done
  */
-public class DoneCommand implements UndoCommand {
+public class DoneCommand implements ReversibleCommand {
 
     private final Task task;
 
@@ -16,7 +16,7 @@ public class DoneCommand implements UndoCommand {
     }
 
     /**
-     * Mark the task referenced by this Command as completed
+     * Mark task as completed
      */
     @Override
     public void execute() {
@@ -25,10 +25,10 @@ public class DoneCommand implements UndoCommand {
     }
 
     /**
-     * Mark the task referenced by this Command as not completed
+     * Mark task as incomplete
      */
     @Override
-    public void undo() {
+    public void reverse() {
         task.setCompleted(false);
         System.out.println("\t# Undo Done: " + task.toString());
     }

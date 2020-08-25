@@ -23,20 +23,21 @@ public class DukeDateTime implements Comparable<DukeDateTime> {
     public DukeDateTime() { this(LocalDateTime.now().format(FORMAT)); }
 
     /**
-     * Initialise DukeDateTime with specified time, following DukeDateTime.FORMAT format
-     * @param localDateTime The string representation of LocalDateTime in DukeDateTime.FORMAT format
-     * @throws DateTimeParseException If the String cannot be parsed
-     */
-    public DukeDateTime(String localDateTime) throws DateTimeParseException {
-        this.localDateTime = LocalDateTime.parse(localDateTime, FORMAT);
-    }
-
-    /**
      * Initialise DukeDateTime with specified LocalDateTime
      * @param localDateTime The LocalDateTime to initialize with
      */
     public DukeDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
+        // Discard seconds and milliseconds from localDateTime
+        this(localDateTime.format(FORMAT));
+    }
+
+    /**
+     * Initialise DukeDateTime with specified time, following DukeDateTime.FORMAT
+     * @param localDateTime The string representation of LocalDateTime in DukeDateTime.FORMAT
+     * @throws DateTimeParseException If the String cannot be parsed
+     */
+    public DukeDateTime(String localDateTime) throws DateTimeParseException {
+        this.localDateTime = LocalDateTime.parse(localDateTime, FORMAT);
     }
 
     /**
@@ -83,6 +84,13 @@ public class DukeDateTime implements Comparable<DukeDateTime> {
         return this.localDateTime.compareTo(obj.get());
     }
 
+    /**
+     * DukeDateTime is equals to another object if the object is
+     * a LocalDateTime that does not contain seconds and milliseconds,
+     * and is equivalent to the LocalDateTime referenced in DukeDateTime
+     * @param obj The object to compare this DukeDateTime with
+     * @return true if they are equivalent, otherwise false
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

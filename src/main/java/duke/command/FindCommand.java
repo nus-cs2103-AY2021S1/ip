@@ -5,6 +5,9 @@ import duke.task.Task;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * List all tasks which containing searchString
+ */
 public class FindCommand implements Command {
 
     private final List<Task> taskList;
@@ -15,6 +18,9 @@ public class FindCommand implements Command {
         this.searchString = searchString;
     }
 
+    /**
+     * List all tasks containing searchString
+     */
     @Override
     public void execute() {
         System.out.println("Here are the matching tasks in your list:");

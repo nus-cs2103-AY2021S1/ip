@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Enum of all valid commands in CDuke
+ * Parse user input for Duke application
  */
 public class Parser {
 

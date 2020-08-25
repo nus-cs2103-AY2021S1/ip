@@ -1,16 +1,17 @@
 package duke.command;
 
 /**
- * Use isExit() to check for exit duke.command
+ * A command signally the end of program
  */
 public class ExitCommand implements Command {
 
     /**
-     * No action is performed
+     * Exit program
      */
     @Override
     public void execute() {
-        // Nothing to do
+        // Exit program
+        System.exit(0);
     }
 
 }

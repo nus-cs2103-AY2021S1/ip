@@ -3,7 +3,7 @@ package duke.task;
 import java.util.Objects;
 
 /**
- * A duke.task is a is an item that has a description and is completable
+ * A task is a is an item that has a description and can be marked as completed
  */
 public abstract class Task {
 
@@ -44,6 +44,19 @@ public abstract class Task {
     }
 
     @Override
+    public String toString() {
+        return "[" + isCompletedSymbol() + "] " + description;
+    }
+
+    /**
+     * Get the csv representation of this task
+     * @return A csv String representative of this task
+     */
+    public String toCsv() {
+        return "" + this.isCompleted() + ',' + this.description;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (!(obj instanceof Task)) return false;
@@ -55,15 +68,6 @@ public abstract class Task {
     @Override
     public int hashCode() {
         return Objects.hash(isCompleted(), getDescription());
-    }
-
-    @Override
-    public String toString() {
-        return "[" + isCompletedSymbol() + "] " + description;
-    }
-
-    public String toCsv() {
-        return "" + this.isCompleted() + ',' + this.description;
     }
 
 }

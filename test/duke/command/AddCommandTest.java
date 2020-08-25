@@ -24,9 +24,9 @@ class AddCommandTest {
         Task task2 = new Deadline("Deadline 1", dateTime);
         Task task3 = new Event("Event 1", dateTime, dateTime);
         
-        UndoCommand c1 = new AddCommand(taskList, task1);
-        UndoCommand c2 = new AddCommand(taskList, task2);
-        UndoCommand c3 = new AddCommand(taskList, task3);
+        ReversibleCommand c1 = new AddCommand(taskList, task1);
+        ReversibleCommand c2 = new AddCommand(taskList, task2);
+        ReversibleCommand c3 = new AddCommand(taskList, task3);
 
         c1.execute();
         c2.execute();
@@ -37,9 +37,9 @@ class AddCommandTest {
         assertEquals(task2, taskList.get(1));
         assertEquals(task3, taskList.get(2));
 
-        c3.undo();
-        c2.undo();
-        c1.undo();
+        c3.reverse();
+        c2.reverse();
+        c1.reverse();
 
         assertEquals(0, taskList.size());
 

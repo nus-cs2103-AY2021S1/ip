@@ -9,6 +9,7 @@ import java.util.Objects;
 
 /**
  * Save taskList to file
+ * The tasks will be saved in a defined csv format
  */
 public class SaveCommand implements Command {
 
@@ -20,6 +21,10 @@ public class SaveCommand implements Command {
         this.filePath = filePath;
     }
 
+    /**
+     * Save taskList to file
+     * The tasks will be saved in a defined csv format
+     */
     @Override
     public void execute() {
         try {

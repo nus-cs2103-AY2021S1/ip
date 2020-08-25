@@ -36,9 +36,9 @@ class DoneCommandTest {
         assertFalse(taskList.get(2).isCompleted());
 
         // Actual test
-        UndoCommand c1 = new DoneCommand(task1);
-        UndoCommand c2 = new DoneCommand(task2);
-        UndoCommand c3 = new DoneCommand(task3);
+        ReversibleCommand c1 = new DoneCommand(task1);
+        ReversibleCommand c2 = new DoneCommand(task2);
+        ReversibleCommand c3 = new DoneCommand(task3);
 
         c1.execute();
         c2.execute();
@@ -48,9 +48,9 @@ class DoneCommandTest {
         assertTrue(taskList.get(1).isCompleted());
         assertTrue(taskList.get(2).isCompleted());
 
-        c1.undo();
-        c2.undo();
-        c3.undo();
+        c1.reverse();
+        c2.reverse();
+        c3.reverse();
 
         assertFalse(taskList.get(0).isCompleted());
         assertFalse(taskList.get(1).isCompleted());

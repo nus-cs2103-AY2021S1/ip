@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Add a duke.task to taskList
+ * Add a task to taskList
  */
-public class AddCommand implements UndoCommand {
+public class AddCommand implements ReversibleCommand {
 
     private final List<Task> taskList;
     private final Task task;
@@ -19,7 +19,7 @@ public class AddCommand implements UndoCommand {
     }
 
     /**
-     * Adds a task to the list
+     * Add task to end of list
      */
     @Override
     public void execute() {
@@ -28,10 +28,10 @@ public class AddCommand implements UndoCommand {
     }
 
     /**
-     * Removes the task referenced by this Command from the list
+     * Remove task from list
      */
     @Override
-    public void undo() {
+    public void reverse() {
         this.taskList.remove(task);
         System.out.println("\t- Undo Add: " + task.toString());
     }

@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class EventTest {
 
@@ -53,9 +52,14 @@ class EventTest {
     }
     @Test
     void toCSV_fromCSV() {
-        Task task1 = new Event("duke.task one", time1, time2);
-        Task task2 = Event.fromCsv(task1.toCsv());
-        assertEquals(task1.hashCode(), task2.hashCode());
+        try {
+            Task task1 = new Event("duke.task one", time1, time2);
+            Task task2 = Event.fromCsv(task1.toCsv());
+            assertEquals(task1.hashCode(), task2.hashCode());
+        } catch (Exception e) {
+            // Failed to convert csv to Event
+            fail();
+        }
     }
 
 }

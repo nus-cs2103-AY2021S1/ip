@@ -3,12 +3,12 @@ package duke.command;
 import java.util.Arrays;
 
 /**
- * Display list of available Command
+ * List all available Commands
  */
 public class HelpCommand implements Command {
 
     /**
-     * Display all available commands
+     * List all available Commands
      */
     @Override
     public void execute() {

@@ -31,9 +31,9 @@ class DeleteCommandTest {
         // Pre-test
         assertEquals(3, taskList.size());
 
-        UndoCommand c1 = new DeleteCommand(taskList, task1);
-        UndoCommand c2 = new DeleteCommand(taskList, task2);
-        UndoCommand c3 = new DeleteCommand(taskList, task3);
+        ReversibleCommand c1 = new DeleteCommand(taskList, task1);
+        ReversibleCommand c2 = new DeleteCommand(taskList, task2);
+        ReversibleCommand c3 = new DeleteCommand(taskList, task3);
 
         // Actual test
         c1.execute();
@@ -42,9 +42,9 @@ class DeleteCommandTest {
 
         assertEquals(0, taskList.size());
 
-        c1.undo();
-        c2.undo();
-        c3.undo();
+        c1.reverse();
+        c2.reverse();
+        c3.reverse();
 
         assertEquals(3, taskList.size());
     }

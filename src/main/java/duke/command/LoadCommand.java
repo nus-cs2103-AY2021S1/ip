@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 
 /**
  * Load taskList from file
+ * The file should be in a defined csv format
  */
 public class LoadCommand implements Command {
 
@@ -25,6 +26,10 @@ public class LoadCommand implements Command {
         this.filePath = filePath;
     }
 
+    /**
+     * Load taskList from file
+     * The file should be in a defined csv format
+     */
     @Override
     public void execute() {
         // Empty current list

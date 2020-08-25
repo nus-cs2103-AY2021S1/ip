@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.time.LocalDateTime;
 
 /**
- * A Task with a DukeDateTime indicating it's deadline
+ * A Task with a deadline
  */
 public class Deadline extends Task {
 
@@ -28,6 +28,39 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " + deadline.pretty() + ")";
+    }
+
+    /**
+     * Get the csv representation of this task
+     * @return A csv String representative of this task
+     */
+    @Override
+    public String toCsv() {
+        return TaskEnum.DEADLINE + "," + super.toCsv() + "," + deadline;
+    }
+
+    /**
+     * Initialize a deadline instance from it's csv representation
+     * @param csv A deadline in csv format
+     * @return The deadline represented by the csv
+     * @throws Exception If csv cannot be parsed into a deadline object
+     */
+    public static Task fromCsv(String csv) throws Exception {
+        Scanner scanner = new Scanner(csv);
+        scanner.useDelimiter(",");
+        scanner.next(); // Discard first match
+
+        // Construct task from csv
+        return new Deadline(
+                Boolean.parseBoolean(scanner.next()),
+                scanner.next(),
+                new DukeDateTime(scanner.next())
+        );
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (!(obj instanceof Deadline)) return false;
@@ -39,29 +72,5 @@ public class Deadline extends Task {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), getDeadline());
-    }
-
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline.pretty() + ")";
-    }
-
-    @Override
-    public String toCsv() {
-        return TaskEnum.DEADLINE + "," + super.toCsv() + "," + deadline;
-    }
-
-    // Warning: does not check for corrupt entry
-    public static Task fromCsv(String csv) {
-        Scanner scanner = new Scanner(csv);
-        scanner.useDelimiter(",");
-        scanner.next(); // Discard first match
-
-        // Construct duke.task from csv
-        return new Deadline(
-                Boolean.parseBoolean(scanner.next()),
-                scanner.next(),
-                new DukeDateTime(scanner.next())
-        );
     }
 }

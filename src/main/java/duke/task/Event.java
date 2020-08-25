@@ -35,6 +35,40 @@ public class Event extends Task {
     }
 
     @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (from: " + eventStart.pretty() + " till: " + eventEnd.pretty() + ")";
+    }
+
+    /**
+     * Get the csv representation of this task
+     * @return A csv String representative of this task
+     */
+    @Override
+    public String toCsv() {
+        return TaskEnum.EVENT + "," + super.toCsv() + "," + eventStart + "," + eventEnd;
+    }
+
+    /**
+     * Initialize an event instance from it's csv representation
+     * @param csv An event in csv format
+     * @return The event represented by the csv
+     * @throws Exception If csv cannot be parsed into a event object
+     */
+    public static Task fromCsv(String csv) throws Exception{
+        Scanner scanner = new Scanner(csv);
+        scanner.useDelimiter(",");
+        scanner.next(); // Discard first match
+
+        // Construct task from csv
+        return new Event(
+                Boolean.parseBoolean(scanner.next()),
+                scanner.next(),
+                new DukeDateTime(scanner.next()),
+                new DukeDateTime(scanner.next())
+        );
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (!(obj instanceof Event)) return false;
@@ -47,31 +81,6 @@ public class Event extends Task {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), getStart(), getEnd());
-    }
-
-    @Override
-    public String toString() {
-        return "[E]" + super.toString() + " (from: " + eventStart.pretty() + " till: " + eventEnd.pretty() + ")";
-    }
-
-    @Override
-    public String toCsv() {
-        return TaskEnum.EVENT + "," + super.toCsv() + "," + eventStart + "," + eventEnd;
-    }
-
-    // Warning: does not check for corrupt entry
-    public static Task fromCsv(String csv) {
-        Scanner scanner = new Scanner(csv);
-        scanner.useDelimiter(",");
-        scanner.next(); // Discard first match
-
-        // Construct duke.task from csv
-        return new Event(
-                Boolean.parseBoolean(scanner.next()),
-                scanner.next(),
-                new DukeDateTime(scanner.next()),
-                new DukeDateTime(scanner.next())
-        );
     }
 
 }

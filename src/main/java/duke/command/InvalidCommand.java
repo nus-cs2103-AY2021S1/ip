@@ -3,7 +3,7 @@ package duke.command;
 import java.util.Objects;
 
 /**
- * Command that has no functionality other than printing to stdout
+ * Prints a notice to System.out
  */
 public class InvalidCommand implements Command {
 
@@ -18,7 +18,7 @@ public class InvalidCommand implements Command {
     }
 
     /**
-     * Notifies the user in case of an invalid input
+     * Prints a notice to System.out
      */
     @Override
     public void execute() {

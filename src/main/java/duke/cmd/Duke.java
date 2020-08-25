@@ -45,12 +45,14 @@ public class Duke {
             String input = scanner.nextLine();
             if (input.isBlank()) continue;
 
-            // Look up duke.command and execute
+            // Parse command
             Command command = Parser.parse(taskList, input);
-            command.execute();
 
-            // Exit CDuke
+            // Received exit command
             if (command instanceof ExitCommand) break;
+
+            // Execute command
+            command.execute();
         }
 
         System.out.println(ENDING_GREETING);

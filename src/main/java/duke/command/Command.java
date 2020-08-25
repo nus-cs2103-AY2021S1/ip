@@ -1,7 +1,7 @@
 package duke.command;
 
 /**
- * Command implements execute() method
+ * Command interface implements execute() method
  */
 public interface Command {
 

@@ -20,17 +20,27 @@ public class ToDo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Get the csv representation of this task
+     * @return A csv String representative of this task
+     */
     @Override
     public String toCsv() {
         return TaskEnum.TODO + "," + super.toCsv();
     }
 
-    public static Task fromCsv(String csv) {
+    /**
+     * Initialize a task_todo instance from it's csv representation
+     * @param csv A task_todo in csv format
+     * @return The task_todo represented by the csv
+     * @throws Exception If csv cannot be parsed into a task_todo object
+     */
+    public static Task fromCsv(String csv) throws Exception {
         Scanner scanner = new Scanner(csv);
         scanner.useDelimiter(",");
         scanner.next(); // Discard first match
 
-        // Construct duke.task from csv
+        // Construct task from csv
         return new ToDo(
                 Boolean.parseBoolean(scanner.next()),
                 scanner.next()

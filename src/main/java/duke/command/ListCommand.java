@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Display all items in taskList
+ * List all items in taskList
  */
 public class ListCommand implements Command {
 
@@ -16,6 +16,9 @@ public class ListCommand implements Command {
         this.taskList = taskList;
     }
 
+    /**
+     * List all items in taskList
+     */
     @Override
     public void execute() {
 
