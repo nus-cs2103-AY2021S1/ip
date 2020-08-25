@@ -57,15 +57,6 @@ public class Duke {
     }
 
 
-    public static int[] timeSplitter(String time) {
-        String[] stringArr = time.split("-");
-        int[] timeArr = new int[3];
-        for (int i = 0; i < stringArr.length; i++) {
-            timeArr[i] = Integer.parseInt(stringArr[i]);
-        }
-        return timeArr;
-    }
-
     public static boolean isValidDate(String time) throws IllegalArgumentException {
         String[] stringArr = time.split("-");
         if (stringArr.length != 3) {
@@ -79,7 +70,6 @@ public class Duke {
     public static boolean hasTime(String time) {
         String[] stringArr = time.split(" ");
         return stringArr.length == 2;
-
     }
 
     /**
