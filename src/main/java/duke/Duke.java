@@ -3,6 +3,10 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 
+/**
+ * Entry point of Duke chatbot
+ * Initializes the chatbot and starts interaction with user
+ */
 public class Duke {
 
 	private static String DATA_PATHNAME = "data/duke.txt";
@@ -11,6 +15,9 @@ public class Duke {
 	private Storage storage;
 	private Ui ui;
 
+	/**
+	 * Constructs a new instance of a Duke object.
+	 */
 	public Duke() {
 		storage = new Storage(DATA_PATHNAME);
 		ui = new Ui();
@@ -22,6 +29,9 @@ public class Duke {
 		}
 	}
 
+	/**
+	 * Runs the program until termination.
+	 */
 	public void run() {
 		ui.showWelcome();
 		boolean isExit = false;
