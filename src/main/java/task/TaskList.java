@@ -12,6 +12,7 @@ import task.tasks.Event;
 import storage.Storage;
 
 public class TaskList {
+
     protected List<Task> tasks;
 
     public TaskList(List<Task> tasks) {
@@ -73,6 +74,7 @@ public class TaskList {
         try {
             // E.g given "done 1", we split to ["done", "1"]
             String[] userCommandSplit = userCommand.split(" ");
+
             // To prevent cases such as "done 1 7", "done", "done123123123"
             if (userCommandSplit.length != 2) {
                 DukeException.invalidCommand();
@@ -102,6 +104,7 @@ public class TaskList {
         try {
             // E.g given "delete 1", we split to ["delete", "1"]
             String[] userCommandSplit = userCommand.split(" ");
+
             // To prevent cases such as "delete 1 7", "delete", "delete123123123"
             if (userCommandSplit.length != 2) {
                 DukeException.invalidCommand();
