@@ -13,6 +13,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * Represents the database of the system which will handle the reading and writing to update the items stored in the
+ * database.
+ */
+
 public class Storage {
     private final Path path;
     private static final String DEFAULT_FILEPATH = "./data/duke.txt";

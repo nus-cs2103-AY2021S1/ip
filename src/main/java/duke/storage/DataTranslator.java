@@ -17,6 +17,12 @@ import duke.utils.Ui;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a translator which will encode the tasks in {@link TaskManager} object into the valid format to write
+ * into {@link Storage} object and decode the information from {@link Storage} into the valid format to store in
+ * {@link TaskManager} object.
+ */
+
 public class DataTranslator {
     private static final Ui formatter = new Ui();
     public static TaskManager decode(List<String> lines){
