@@ -1,4 +1,8 @@
-public class ListCommand implements Command{
+package duke.command;
+
+import duke.component.*;
+
+public class ListCommand implements Command {
 
     @Override
     public boolean isExit() {

@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.component.*;
+import duke.task.Task;
+
 public class AddCommand implements Command {
     private Task newTask;
 

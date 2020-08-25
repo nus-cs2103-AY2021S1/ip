@@ -1,9 +1,15 @@
-public class DeleteCommand implements Command{
+package duke.command;
+
+import duke.component.*;
+import duke.task.Task;
+
+public class DoneCommand implements Command {
     private int index;
 
-    public DeleteCommand(int index) {
+    public DoneCommand(int index) {
         this.index = index;
     }
+
     @Override
     public boolean isExit() {
         return false;
@@ -15,12 +21,9 @@ public class DeleteCommand implements Command{
             throw new DukeException("The task index should be an index on the list!");
         }
         Task task = taskList.get(index);
-        taskList.remove(index);
+        taskList.markAsDone(index);
         storage.saveList(taskList);
 
-        ui.giveResponse(" Noted. I've removed this task:\n       " +
-                task +
-                "\n\t Now you have " + taskList.size() +
-                " task" + (taskList.size() > 1 ? "s" : "") + " in the list.");
+        ui.giveResponse("Nice! I've marked this task as done:\n       " + task);
     }
 }

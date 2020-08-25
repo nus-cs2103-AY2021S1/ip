@@ -15,7 +15,7 @@ fi
 export LC_ALL=en_GB.UTF-8
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java
+if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/duke/*.java ../src/main/java/duke/*/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1

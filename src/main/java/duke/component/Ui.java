@@ -1,4 +1,5 @@
-import java.util.LinkedList;
+package duke.component;
+
 import java.util.Scanner;
 
 public class Ui {
