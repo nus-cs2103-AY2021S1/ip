@@ -1,5 +1,8 @@
 package tasks;
 
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
+import utils.PersistentList;
 import utils.ResourceHandler;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -10,7 +13,12 @@ import java.util.List;
  */
 public class TaskManager {
     /** List of {@code Task} objects. */
-    private final List<Task> tasks = new ArrayList<>();
+    private final List<Task> tasks = new PersistentList<>("./data/tasks.txt",
+            new TypeToken<ArrayList<Task>>(){}.getType(),
+            RuntimeTypeAdapterFactory.of(Task.class)
+                    .registerSubtype(Deadline.class)
+                    .registerSubtype(Event.class)
+                    .registerSubtype(ToDo.class));
 
     /** Constructs a {@code TaskManager} object. */
     public TaskManager() {}
