@@ -27,8 +27,6 @@ public class LocalStorage implements Storage{
 
     }
 
-
-
     public void save(TaskList taskList) throws DuckException {
         try {
             ensureFileExists();
@@ -38,7 +36,6 @@ public class LocalStorage implements Storage{
             out.close();
             file.close();
         } catch (IOException i) {
-            System.out.println(i);
             throw new DuckException("Failed to save file");
         }
     }

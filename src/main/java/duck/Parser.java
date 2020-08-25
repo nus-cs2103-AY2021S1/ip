@@ -1,11 +1,9 @@
 package duck;
 
 import duck.exception.DuckException;
-import duck.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 public class Parser {
     private static final String[] dateSeparators = {"/at", "/by"};

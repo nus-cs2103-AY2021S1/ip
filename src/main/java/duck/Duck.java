@@ -10,6 +10,7 @@ import duck.ui.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -17,13 +18,13 @@ import java.util.Scanner;
 
 public class Duck {
 
-    private Ui userInterface;
+    private Ui ui;
     private Storage storage;
     private TaskList taskList;
     private List<String> responses;
 
     public Duck(Ui ui, Storage storage) {
-        this.userInterface = ui;
+        this.ui = ui;
         this.storage = storage;
         try {
             this.taskList = storage.load();
@@ -43,7 +44,7 @@ public class Duck {
         List<String> welcomeMessage = new ArrayList<>();
         welcomeMessage.add("Hello! I'm Duck");
         welcomeMessage.add("What can I do for you?");
-        userInterface.respond(welcomeMessage);
+        ui.respond(welcomeMessage);
     }
 
     public void shutdown() {
@@ -153,7 +154,7 @@ public class Duck {
             } catch (DuckException e) {
                 responses.add(e.toString());
             } finally {
-                userInterface.respond(responses);
+                ui.respond(responses);
             }
         }
     }
