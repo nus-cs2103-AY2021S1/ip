@@ -18,11 +18,12 @@ public class Event extends Task {
     LocalTime endTime;
 
     /**
-     * Constructor for Deadline.
-     * @param taskName name of deadline
-     * @param date date of deadline
+     * Constructor for Event
+     * @param taskName Name of Event
+     * @param date Date of Event in format of "YYYY-MM-DD"
+     * @throws DukeException If date is not in the specified format
      */
-    public Event(String taskName, String date) {
+    public Event(String taskName, String date) throws DukeException {
         // date format must be in YYYY-MM-DD e.g. 2020-08-22
         // time format must by in XX:XX-YY:YY e.g. 14:00-16:00
         super(taskName.stripTrailing());
@@ -36,7 +37,7 @@ public class Event extends Task {
             this.startTime = LocalTime.parse(eventStartTime);
             this.endTime = LocalTime.parse(eventEndTime);
         } catch (DateTimeParseException e) {
-            System.out.println("Date and time is in the wrong format");
+            throw new DukeException("Date and time is in the wrong format");
         }
     }
 

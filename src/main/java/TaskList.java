@@ -21,14 +21,18 @@ public class TaskList {
      * Adds task to the list.
      * Also prints out remaining tasks.
      * @param task Task to be added to task list
+     * @return String that is to be output
      */
-    public void add(Task task) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Got it. I've added this task: ");
-        System.out.println("       " + task);
+    public String add(Task task) {
         list.add(task);
-        System.out.printf("     Now you have %d tasks in the list.\n", list.size());
-        System.out.println("    ____________________________________________________________");
+        StringBuilder output = new StringBuilder();
+        output.append("    ____________________________________________________________\n");
+        output.append("     Got it. I've added this task:\n");
+        output.append(String.format("       %s\n", task));
+        output.append(String.format("     Now you have %d tasks in the list.\n", list.size()));
+        output.append("    ____________________________________________________________\n");
+
+        return output.toString();
     }
 
     /**
@@ -43,25 +47,30 @@ public class TaskList {
 
     /**
      * Lists out all task currently in the list.
+     * @return String that is to be output
      */
-    public void listOut() {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Here are the tasks in your list:");
+    public String listOut() {
+        StringBuilder output = new StringBuilder();
+        output.append("    ____________________________________________________________\n");
+        output.append("     Here are the tasks in your list:\n");
+
 
         for (int i = 0; i < list.size(); i++) {
-            System.out.printf("     %d. %s \n", i + 1, list.get(i));
+            output.append(String.format("     %d. %s \n", i + 1, list.get(i)));
+
         }
 
-        System.out.println("    ____________________________________________________________");
-        System.out.println();
+        output.append("    ____________________________________________________________\n");
+        return output.toString();
     }
 
     /**
      * Deletes the task specified by the number.
      * @param input Number of task
+     * @return String that is to be output
      * @throws DukeException If number is not entered
      */
-    public void delete(String input) throws DukeException {
+    public String delete(String input) throws DukeException {
         if (!input.contains(" ")) {
             throw new DukeException(" ☹ OOPS!!! Please enter delete with a number.");
         } else {
@@ -80,22 +89,24 @@ public class TaskList {
 
             Task task = list.get(index - 1);
             list.remove(index - 1);
-            System.out.println("    ____________________________________________________________");
-            System.out.println("     Noted. I've removed this task: ");
 
-            System.out.println("       " + task);
-            System.out.printf("     Now you have %d tasks in the list.\n", list.size());
-            System.out.println("    ____________________________________________________________");
-            System.out.println();
+            StringBuilder output = new StringBuilder();
+            output.append("    ____________________________________________________________\n");
+            output.append("     Noted. I've removed this task:\n");
+            output.append(String.format("       %s\n", task));
+            output.append(String.format("     Now you have %d tasks in the list.\n", list.size()));
+            output.append("    ____________________________________________________________\n");
+            return output.toString();
         }
     }
 
     /**
      * Marks the specified task as completed in the list.
      * @param input Number of task
+     * @return String that is to be output
      * @throws DukeException If number is not entered
      */
-    public void done(String input) throws DukeException {
+    public String done(String input) throws DukeException {
         if (!input.contains(" ")) {
             throw new DukeException(" ☹ OOPS!!! Please enter done with a number.");
         } else {
@@ -115,16 +126,21 @@ public class TaskList {
 
             Task task = list.get(index - 1);
             task.completed();
-            System.out.println("    ____________________________________________________________");
-            System.out.println("     Nice! I've marked this task as done: ");
-
-            System.out.println("       " + task);
-            System.out.println("    ____________________________________________________________");
-            System.out.println();
+            StringBuilder output = new StringBuilder();
+            output.append("    ____________________________________________________________\n");
+            output.append("     Nice! I've marked this task as done:\n");
+            output.append(String.format("       %s\n", task));
+            output.append("    ____________________________________________________________\n");
+            return output.toString();
         }
     }
 
-    public void find(String input) {
+    /**
+     * Returns task that contains the keyword
+     * @param input Keyword
+     * @return String to be output
+     */
+    public String find(String input) {
         String[] arr = input.split(" ");
         String keyWord = arr[1];
 
@@ -136,12 +152,14 @@ public class TaskList {
             }
         }
 
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Here are the matching tasks in your list:");
+        StringBuilder output = new StringBuilder();
+        output.append("    ____________________________________________________________\n");
+        output.append("     Here are the matching tasks in your list:\n");
         for (int i = 0; i < hits.size(); i++) {
-            System.out.printf("     %d. %s \n", i + 1, hits.get(i));
+            output.append(String.format("     %d. %s \n", i + 1, hits.get(i)));
         }
-        System.out.println("    ____________________________________________________________");
+        output.append("    ____________________________________________________________\n");
+        return output.toString();
     }
 
     /**

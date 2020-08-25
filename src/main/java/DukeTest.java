@@ -13,13 +13,25 @@ public class DukeTest {
 
     @Test
     public void deadlineTest() {
-        Deadline deadline = new Deadline("return book", "2020-08-22");
-        Assert.assertEquals(deadline.toString(), "[D][\u2718] return book (by: Aug 22 2020)");
+        Deadline deadline = null;
+        try {
+            deadline = new Deadline("return book", "2020-08-22");
+            Assert.assertEquals(deadline.toString(), "[D][\u2718] return book (by: Aug 22 2020)");
+        } catch (DukeException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Test
     public void eventTest() {
-        Event event = new Event("return book", "2020-08-22 14:00-16:00");
-        Assert.assertEquals(event.toString(), "[E][\u2718] return book (at: Aug 22 2020 14:00 - 16:00)");
+        Event event = null;
+        try {
+            event = new Event("return book", "2020-08-22 14:00-16:00");
+            Assert.assertEquals(event.toString(), "[E][\u2718] return book (at: Aug 22 2020 14:00 - 16:00)");
+        } catch (DukeException e) {
+            e.printStackTrace();
+        }
+
     }
 }

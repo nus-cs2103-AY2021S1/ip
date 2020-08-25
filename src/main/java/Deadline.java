@@ -15,17 +15,18 @@ public class Deadline extends Task {
     LocalDate date;
 
     /**
-     * Constructor for Deadline.
-     * @param taskName name of deadline
-     * @param date date of deadline
+     * Constructor for Deadline
+     * @param taskName Name of Deadline
+     * @param date Date of Deadline in format of "YYYY-MM-DD"
+     * @throws DukeException If date is not in the specified format
      */
-    public Deadline(String taskName, String date) {
+    public Deadline(String taskName, String date) throws DukeException {
         // date format must be in YYYY-MM-DD e.g. 2020-08-22
         super(taskName.stripTrailing());
         try {
             this.date = LocalDate.parse(date);
         } catch (DateTimeParseException e) {
-            System.out.println("Date is in the wrong format");
+            throw new DukeException("Date is in the wrong format");
         }
     }
 

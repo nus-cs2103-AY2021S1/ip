@@ -42,10 +42,11 @@ public class Storage {
 
     /**
      * Rewrites duke.txt file to the hard drive.
+     * @throws DukeException If file is missing or cannot be created
      */
     // rewrites duke.txt file by iterating though task list
     // can be used by add, delete and done method
-    public void save() {
+    public void save() throws DukeException {
         try {
             FileWriter fw = new FileWriter(FILENAME);
             if (list.size() > 0) {
@@ -57,14 +58,15 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("File is missing");
+            throw new DukeException("File is missing");
         }
     }
 
     /**
      * Initialises the TaskList if there is an existing duke.txt.
+     * @throws DukeException If file is missing
      */
-    public void init() {
+    public void init() throws DukeException {
         File directory = new File(DIRECTORY_NAME);
 
         // checks if directory exists, else directory will be created
@@ -111,14 +113,13 @@ public class Storage {
                 }
                 sc.close();
             } catch (FileNotFoundException e) {
-                System.out.println("File not found");
+                throw new DukeException("File not found");
             }
         } else {
-            System.out.println("File not found, will be created");
             try {
                 f.createNewFile();
             } catch (IOException e) {
-                System.out.println("Missing input");
+                throw new DukeException("File not found");
             }
         }
     }

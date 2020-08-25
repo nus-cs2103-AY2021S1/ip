@@ -31,17 +31,25 @@ public class Ui {
     public void echo() {
 
         Scanner sc = new Scanner(System.in);
+
+        // read duke.txt file and initialise taskList
+        try {
+            storage.init();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+
         while (true) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
                 break;
             } else if (input.equals("list")) {
-                taskList.listOut();
+                System.out.println(taskList.listOut());
             } else if (input.contains("find")) {
-                taskList.find(input);
+                System.out.println(taskList.find(input));
             } else if (input.contains("done")) {
                 try {
-                    taskList.done(input);
+                    System.out.println(taskList.done(input));
                     storage.save();
                 } catch (DukeException e) {
                     System.out.println("    ____________________________________________________________");
@@ -51,7 +59,7 @@ public class Ui {
                 }
             } else if (input.contains("delete")) {
                 try {
-                    taskList.delete(input);
+                    System.out.println(taskList.delete(input));
                     storage.save();
                 } catch (DukeException e) {
                     System.out.println("    ____________________________________________________________");
@@ -62,17 +70,19 @@ public class Ui {
             } else {
 
                 try {
+                    Task task;
                     if (input.contains("todo")) {
-                        parser.handleToDo(input);
+                        task = parser.handleToDo(input);
                     } else if (input.contains("deadline")) {
-                        parser.handleDeadline(input);
+                        task = parser.handleDeadline(input);
                     } else if (input.contains("event")) {
-                        parser.handleEvent(input);
+                        task = parser.handleEvent(input);
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
 
-                    System.out.println();
+                    System.out.println(taskList.add(task));
+                    storage.save();
                 } catch (DukeException e) {
                     System.out.println("    ____________________________________________________________");
                     System.out.println("     " + e.getMessage());
@@ -82,5 +92,25 @@ public class Ui {
             }
         }
         sc.close();
+    }
+
+    /**
+     * Greeting used by Duke.
+     */
+    public void greet() {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Hello! I'm Duke");
+        System.out.println("     What can I do for you?");
+        System.out.println("    ____________________________________________________________");
+        System.out.println();
+    }
+
+    /**
+     * Farewell used by Duke.
+     */
+    public void exit() {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Bye. Hope to see you again soon!");
+        System.out.println("    ____________________________________________________________");
     }
 }
