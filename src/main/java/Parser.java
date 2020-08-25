@@ -3,6 +3,12 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
+    /**
+     * Parses the String input into the YYYY/MM/DD format.
+     * @param input String input from user
+     * @return LocalDate in the correct format
+     * @throws DukeException Throws exception if the input is invalid or in an unrecognisable format.
+     */
     public static LocalDate dateParser(String input) throws DukeException {
         try {
             input = input.replace("/", "-");
@@ -13,6 +19,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Converts the 24Hour into AM/PM format.
+     * @param input String that represents time in 24Hour.
+     * @return String that represents time in AM/PM.
+     */
     public static String timeParser(String input) {
         String ret = "";
         int hour = Integer.valueOf(input)/100;
@@ -26,6 +37,11 @@ public class Parser {
         return ret;
     }
 
+    /**
+     * Returns the first word a String
+     * @param text any String
+     * @return the first word in the string.
+     */
     private static String getFirstWord(String text) {
 
         int index = text.indexOf(' ');
@@ -40,6 +56,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a enum class item stored in Duke based on the first word of the input.
+     * @param input Command from user
+     * @return Duke Command to indicate which switch to enter
+     */
     public static Duke.Command parse(String input) {
         if (getFirstWord(input).equals("todo") || getFirstWord(input).equals("deadline") ||
                 getFirstWord(input).equals("event")) {

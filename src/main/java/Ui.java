@@ -16,6 +16,11 @@ public class Ui {
         this.s = new Scanner(System.in);
     }
 
+    /**
+     * Reads the next line of input by user.
+     *
+     * @return the next command
+     */
     public String readCommand() {
         return s.nextLine();
     }

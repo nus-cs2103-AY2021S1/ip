@@ -1,17 +1,33 @@
 import java.util.ArrayList;
 
+/**
+ * TaskList Class stores the list of tasks and modifies the list according to commands.
+ */
 public class TaskList {
 
     public ArrayList<Task> list;
 
+    /**
+     * Default constructor that initialises an empty ArrayList
+     */
     public TaskList() {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Initialises an Arraylist of Tasks if there is saved data present.
+     * @param savedData an ArrayList of tasks
+     */
     public TaskList(ArrayList<Task> savedData) {
         this.list = savedData;
     }
 
+    /**
+     * Adds a new subclass of Task based on a String input.
+     * @param input Command from user
+     * @return a Task that is either a ToDo, a Deadline or an Event.
+     * @throws DukeException Throws exception if command is invalid due to missing information.
+     */
     public Task addItem(String input) throws DukeException {
 
         String arr[] = input.split(" ", 2);
@@ -42,6 +58,12 @@ public class TaskList {
         return curr;
     }
 
+    /**
+     * Deletes an item based on the number
+     * @param input Command from user
+     * @return the Task that was deleted
+     * @throws DukeException Throws exception if command is invalid due to missing or wrong information.
+     */
     public Task deleteItem(String input) throws DukeException{
         String info[] = input.split(" ", 2);
         Task toBeDeleted = new Task("");
@@ -63,6 +85,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks an item as done based on the number
+     * @param input Command from user
+     * @return the Task that was marked as done after it has been marked.
+     * @throws DukeException Throws exception if command is invalid due to missing or wrong information.
+     */
     public Task doneItem(String input) throws DukeException {
         String info[] = input.split(" ", 2);
         Task toBeRet = new Task("");
@@ -80,10 +108,18 @@ public class TaskList {
         return toBeRet;
     }
 
+    /**
+     * Returns the number of tasks on the list.
+     * @return integer representing the number of tasks on the list
+     */
     public int getListSize() {
         return this.list.size();
     }
 
+    /**
+     * Returns the current list of Tasks.
+     * @return an ArrayList of Tasks
+     */
     public ArrayList<Task> getList() {
         return list;
     }
