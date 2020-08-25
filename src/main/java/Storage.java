@@ -55,7 +55,7 @@ public class Storage {
     public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter("./data/duke.txt");
-            for(Task task : tasks.getTaskList()) {
+            for (Task task : tasks.getTaskList()) {
                 fw.write(task.stringify() + "\n");
             }
             fw.close();
