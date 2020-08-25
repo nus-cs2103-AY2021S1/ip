@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private final String name;
     private boolean Done = false;
     private static final String MESSAGE_BLANK_TASK = "Did you casually forget to put in the description of the task?";
@@ -26,5 +26,7 @@ public class Task {
     public void markAsDone() {
         Done = true;
     }
+
+    public abstract String[] attributeList();
 
 }
