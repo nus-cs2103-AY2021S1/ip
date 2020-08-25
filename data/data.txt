@@ -1,5 +1,5 @@
-D | 1 | return book | June 6th
-E | 1 | project meeting | Aug 6th 2-4pm
-T | 0|join sports club
-E | 1 | project | Wed
-E | 0 | meeting | Wed
+D | 1 | return book | 2020-08-20 16:30
+E | 1 | project meeting | 2020-08-20 15:30
+T | 0 | join sports club
+E | 1 | project | 2020-08-20 17:30
+E | 0 | meeting | 2020-08-20 18:30

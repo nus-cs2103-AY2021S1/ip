@@ -27,6 +27,6 @@ public class Task {
     }
     
     public String toWrite() {
-        return "T | " + (this.isDone == true ? '1' : '0')  + "|" + this.taskDescription;
+        return "T | " + (this.isDone == true ? '1' : '0')  + " | " + this.taskDescription;
     }
 }

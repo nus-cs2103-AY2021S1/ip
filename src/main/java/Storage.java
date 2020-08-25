@@ -1,6 +1,8 @@
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -22,6 +24,7 @@ public class Storage {
     
     public ArrayList<Task> load() {
         ArrayList<Task> taskList = new ArrayList<>();
+        DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
             File data = new File(this.filePath);
             Scanner sc = new Scanner(data);
@@ -36,12 +39,12 @@ public class Storage {
                     int pos = ordinalIndexOf(task, "|", 3);
                     String description = task.substring(8, pos);
                     String time = task.substring(pos + 1);
-                    taskList.add(new Event(description, time, status));
+                    taskList.add(new Event(description, LocalDateTime.parse(time.substring(1), validFormat), status));
                 } else if (type == 'D') {
                     int pos = ordinalIndexOf(task, "|", 3);
                     String description = task.substring(8, pos);
                     String by = task.substring(pos + 1);
-                    taskList.add(new Deadline(description, by, status));
+                    taskList.add(new Deadline(description, LocalDateTime.parse(by.substring(1), validFormat), status));
                 }
             }
             sc.close();
