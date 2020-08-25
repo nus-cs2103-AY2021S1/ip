@@ -35,50 +35,50 @@ public class CommandHandler implements Consumer<String> {
                 final String stripped = cmd.strip(input);
                 final String[] split;
                 switch (cmd) {
-                    case LIST_CMD:
-                        output = listTasks();
-                        break;
-                    case DONE_CMD:
-                        try {
-                            final int id = Integer.parseInt(stripped);
-                            output = completeTask(TaskList.get(id - 1));
-                        } catch (NumberFormatException e) {
-                            throw new CommandException(input, "Could not read the task ID");
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new CommandException(input, "Task ID does not exist");
-                        }
-                        break;
-                    case TODO_CMD:
-                        output = addTask(new Todo(stripped));
-                        break;
-                    case EVENT_CMD:
-                        split = stripped.split("/at", 2);
-                        if (split.length < 2) {
-                            throw new CommandException(input,
-                                    "Events should have a time specified with /at");
-                        }
-                        output = addTask(new Event(split[0].strip(), split[1].strip()));
-                        break;
-                    case DEADLINE_CMD:
-                        split = stripped.split("/by", 2);
-                        if (split.length < 2) {
-                            throw new CommandException(input,
-                                    "Deadlines should have a time due specified with /by");
-                        }
-                        output = addTask(new Deadline(split[0].strip(), split[1].strip()));
-                        break;
-                    case DELETE_CMD:
-                        try {
-                            final int id = Integer.parseInt(stripped);
-                            output = deleteTask(id - 1);
-                        } catch (NumberFormatException e) {
-                            throw new CommandException(input, "Could not read the task ID");
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new CommandException(input, "Task ID does not exist");
-                        }
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected state");
+                case LIST_CMD:
+                    output = listTasks();
+                    break;
+                case DONE_CMD:
+                    try {
+                        final int id = Integer.parseInt(stripped);
+                        output = completeTask(TaskList.get(id - 1));
+                    } catch (NumberFormatException e) {
+                        throw new CommandException(input, "Could not read the task ID");
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new CommandException(input, "Task ID does not exist");
+                    }
+                    break;
+                case TODO_CMD:
+                    output = addTask(new Todo(stripped));
+                    break;
+                case EVENT_CMD:
+                    split = stripped.split("/at", 2);
+                    if (split.length < 2) {
+                        throw new CommandException(input,
+                                "Events should have a time specified with /at");
+                    }
+                    output = addTask(new Event(split[0].strip(), split[1].strip()));
+                    break;
+                case DEADLINE_CMD:
+                    split = stripped.split("/by", 2);
+                    if (split.length < 2) {
+                        throw new CommandException(input,
+                                "Deadlines should have a time due specified with /by");
+                    }
+                    output = addTask(new Deadline(split[0].strip(), split[1].strip()));
+                    break;
+                case DELETE_CMD:
+                    try {
+                        final int id = Integer.parseInt(stripped);
+                        output = deleteTask(id - 1);
+                    } catch (NumberFormatException e) {
+                        throw new CommandException(input, "Could not read the task ID");
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new CommandException(input, "Task ID does not exist");
+                    }
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected state");
                 }
                 if (printOutput) {
                     Ui.print(output);

@@ -2,16 +2,11 @@ package core;
 
 import command.Command;
 import command.CommandHandler;
-import tasks.Task;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
 public class IPbot {
-
-    // task list
-    private static final ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Entry point of the program.
