@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Bot {
     public Bot() {
     }
-    //checking branch
+
     String LINE = "    ____________________________________________________________";
     String GOT_IT = "     Got it. I've added this task: ";
     String WHITE_SPACE_SEVEN = "       ";
