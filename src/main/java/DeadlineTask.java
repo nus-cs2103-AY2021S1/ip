@@ -29,6 +29,6 @@ public class DeadlineTask extends Task {
     @Override
     public String toSaveString() {
         return String.format("D @@ %d @@ %s @@ %s",
-                isDone ? 1 : 0, desc, deadline == null ? deadlineString : deadline);
+                isDone ? 1 : 0, desc, deadlineString);
     }
 }
