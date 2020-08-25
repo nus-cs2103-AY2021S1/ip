@@ -150,14 +150,14 @@ public class Duke {
                 taskString = input.substring(6);
                 String[] arr = taskString.split(" /at ", 2);
                 if (arr.length < 2 || arr[1].equals("")) {
-                    throw new DukeException("\u2639 OOPS!!! Enter the date and/or time of the event after \"/at\".\n");
+                    throw new DukeException("\u2639 OOPS!!! Enter the date and time of the event after \"/at\".\n");
                 }
                 task = new Event(arr[0], arr[1]);
             } else {    // deadline
                 taskString = input.substring(9);
                 String[] arr = taskString.split(" /by ", 2);
                 if (arr.length < 2 || arr[1].equals("")) {
-                    throw new DukeException("\u2639 OOPS!!! Enter the date and/or time of the deadline after \"/by\".\n");
+                    throw new DukeException("\u2639 OOPS!!! Enter the date and time of the deadline after \"/by\".\n");
                 }
                 task = new Deadline(arr[0], arr[1]);
             }

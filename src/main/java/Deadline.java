@@ -3,19 +3,19 @@
  */
 public class Deadline extends Task {
 
-    private String by;
+    private String dateTime;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
-        this.by = by;
+        this.dateTime = DateTimeHandler.parseDateTime(by);
     }
 
-    public String getBy() {
-        return this.by;
+    public String getDateTime() {
+        return this.dateTime;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.getBy() + ")";
+        return "[D]" + super.toString() + " (by: " + this.getDateTime() + ")";
     }
 }

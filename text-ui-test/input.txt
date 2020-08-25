@@ -5,9 +5,12 @@ deadline
 deadline return book
 deadline return book /by
 deadline return book /by Sunday
+deadline return book /by 01/09/2020 6pm
+deadline return book /by 01/09/2020 1800
+deadline return book /by 01-09-2020 1800
 event
 event project meeting /by
-event project meeting /at Mon 2-4pm
+event project meeting /at 1-9-2020 0800
 list
 done
 done a

@@ -3,19 +3,19 @@
  */
 public class Event extends Task {
 
-    private String at;
+    private String dateTime;
 
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeException {
         super(description);
-        this.at = at;
+        this.dateTime = DateTimeHandler.parseDateTime(at);
     }
 
-    public String getAt() {
-        return this.at;
+    public String getDateTime() {
+        return this.dateTime;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.getAt() + ")";
+        return "[E]" + super.toString() + " (at: " + this.getDateTime() + ")";
     }
 }
