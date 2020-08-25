@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
 
@@ -48,8 +49,10 @@ public class Duke {
 
             List<Task> taskList = storage.load();
             while (!input.equals("bye")) {
+
                 String command = input.split(" ")[0];
                 int size = taskList.size();
+
                 if (command.equals("list")) {
                     commandList(size, taskList);
                 } else if (command.equals("done") || command.equals("delete")) {
@@ -65,9 +68,10 @@ public class Duke {
                 storage.writeData(taskList);
                 input = sc.nextLine();
             }
-
         } catch (DukeCommandException | DukeIndexException | DukeTaskException | DukeListException e) {
             System.out.print(String.format("    ERROR: %s\n", e.getMessage()));
+        } catch (DateTimeParseException e) {
+            System.out.print(String.format("  ERROR: INPUT DATE TIME FORMAT IS WRONG. \n"));
         } catch (IOException e) {
             System.out.print(e.getStackTrace());
         }
@@ -111,7 +115,9 @@ public class Duke {
 
         try {
 
-            if (tag.equals("todo")) {
+            if (message.isEmpty()) {
+                throw new IndexOutOfBoundsException();
+            } else if (tag.equals("todo")) {
                 newTask = new Todo(message);
             } else if (tag.equals("deadline")) {
                 parsedMessage = message.split("/by ");
