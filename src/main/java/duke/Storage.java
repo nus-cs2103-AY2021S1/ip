@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -49,17 +53,17 @@ public class Storage {
         PrintWriter print_line = new PrintWriter(writer);
         for (Task task : list) {
             String[] details = new String[4];
-            details[2] = task.name;
+            details[2] = task.getName();
             if (task instanceof ToDo) {
                 details[0] = "T";
             } else if (task instanceof Deadline) {
                 details[0] = "D";
-                details[3] = ((Deadline) task).by.toString();
+                details[3] = ((Deadline) task).getBy().toString();
             } else {
                 details[0] = "E";
-                details[3] = ((Event) task).duration.toString();
+                details[3] = ((Event) task).getDuration().toString();
             }
-            if (task.isDone) {
+            if (task.getIsDone()) {
                 details[1] = "1";
             } else {
                 details[1] = "0";

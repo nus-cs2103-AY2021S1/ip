@@ -1,3 +1,5 @@
+package duke.task;
+
 public abstract class Task {
     protected final String name;
     protected boolean isDone;
@@ -9,6 +11,14 @@ public abstract class Task {
 
     public void done() {
         this.isDone = true;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     @Override
