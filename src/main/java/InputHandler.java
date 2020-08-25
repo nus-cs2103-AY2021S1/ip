@@ -1,19 +1,30 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InputHandler {
     private static final ArrayList<Task> TASK_LIST = new ArrayList<>();
-    private static final String DIVIDER = "____________________________________________________________";
     private static final String CMD_EXIT = "bye";
     private static final String CMD_LIST = "list";
     private static final String CMD_DONE = "done";
     private static final String CMD_DELETE = "delete";
+    private static final String CMD_DUE = "due";
     private static final Path SAVE_FOLDER_PATH = Paths.get("data");
     private static final Path SAVE_FILE_PATH = Paths.get("data", "duke.txt");
     private final Scanner SC;
+
 
     public InputHandler(Scanner sc) {
         this.SC = sc;
@@ -22,10 +33,10 @@ public class InputHandler {
 
     private static void handleStart() {
         String startMsg =
-            DIVIDER + "\n" +
-            "Hello! I'm Duke\n" +
-            "What can I do for you?\n" +
-            DIVIDER;
+            generateMessage(
+                "Hello! I'm Duke\n" +
+                "What can I do for you?"
+            );
         System.out.println(startMsg);
     }
 
@@ -34,7 +45,12 @@ public class InputHandler {
         loadSaveFile();
         String input;
         while (!(input = SC.nextLine()).equals(CMD_EXIT)) {
-            System.out.println(handleInput(input, true));
+            try {
+                String reply = handleInput(input, true);
+                System.out.println(reply);
+            } catch (DukeException e) {
+                System.out.println(generateMessage(e.getMessage()));
+            }
         }
         System.out.println(handleExit());
     }
@@ -58,18 +74,24 @@ public class InputHandler {
         try {
             BufferedReader in = new BufferedReader(new FileReader(SAVE_FILE_PATH.toString()));
             in.lines().forEach((String s) -> {
-                handleInput(s.substring(1), false);
-                if (s.charAt(0) == '1') {
-                    TASK_LIST.get(TASK_LIST.size() - 1).markAsDone();
+                try {
+                    handleInput(s.substring(1), false);
+                    if (s.charAt(0) == '1') {
+                        TASK_LIST.get(TASK_LIST.size() - 1).markAsDone();
+                    }
+                } catch (DukeException e) {
+                    String msg = "A line in your save file seems to be formatted incorrectly!";
+                    System.out.println(
+                        generateMessage(msg)
+                    );
                 }
             });
         } catch(FileNotFoundException e) {
             System.out.println("An error has occurred when reading the save file.");
-            e.printStackTrace();
         }
     }
 
-    private String handleInput(String in, boolean shouldSave) {
+    private String handleInput(String in, boolean shouldSave) throws DukeException {
         String[] input = in.split(" ");
         String cmdWord = input[0];
         switch (cmdWord) {
@@ -79,12 +101,41 @@ public class InputHandler {
             return handleDone(Integer.parseInt(input[1]));
         case (CMD_DELETE):
             return handleDelete(in);
+        case (CMD_DUE):
+            return handleDue(in);
         default: // for invalid commands and adding of tasks
-            try {
-                return handleTask(in, cmdWord, shouldSave);
-            } catch (DukeException e) {
-                return generateMessage(e.getMessage());
+            return handleTask(in, cmdWord, shouldSave);
+        }
+    }
+
+    private String handleDue(String in) throws InvalidCommandException {
+        String dateStr = in.replaceFirst("due ", "");
+        try {
+            LocalDate date = DateTimeParsing.parseDate(dateStr);
+            String formattedDate = DateTimeParsing.localDateToFormattedString(date);
+            ArrayList<String> filteredTasks = new ArrayList<>();
+
+            int len = TASK_LIST.size();
+            for (int i = 1; i <= len; i++) {
+                Task task = TASK_LIST.get(i - 1);
+                if (task.isDueOn(date)) {
+                    String output = i + "." + task.toString();
+                    filteredTasks.add(output);
+                }
             }
+
+            String firstLine = filteredTasks.size() == 0
+                    ? "There are no tasks due on " + formattedDate + "!"
+                    : "These are the tasks due on " + formattedDate + ":";
+
+            String msg = firstLine + "\n" + String.join("\n", filteredTasks);
+
+            return generateMessage(msg);
+        } catch (DateTimeParseException | NumberFormatException e) {
+            String errMsg =
+                "Please key in a valid date format.\n" +
+                "due *yyyy-mm-dd*";
+            throw new InvalidCommandException(errMsg);
         }
     }
 
@@ -109,16 +160,19 @@ public class InputHandler {
 
     private String handleList() {
         int len = TASK_LIST.size();
-        String firstLine = len == 0
-            ? "There are no tasks in your list!"
-            : "Here are the tasks in your list:\n";
-        StringBuilder msgBody = new StringBuilder(firstLine);
+        ArrayList<String> msgBody = new ArrayList<>();
+        msgBody.add(
+            len == 0
+                ? "There are no tasks in your list!"
+                : "Here are the tasks in your list:"
+        );
+
         for (int i = 1; i <= len; i++) {
             Task task = TASK_LIST.get(i - 1);
-            String line = i + "." + task.toString() + (i == len ? "" : "\n");
-            msgBody.append(line);
+            String line = i + "." + task.toString();
+            msgBody.add(line);
         }
-        return generateMessage(msgBody.toString());
+        return generateMessage(String.join("\n", msgBody));
     }
 
     private String handleDone(int index) {
@@ -133,11 +187,10 @@ public class InputHandler {
             return addNewTask(TaskType.Deadline, in, shouldSave);
         case "event":
             return addNewTask(TaskType.Event, in, shouldSave);
-        case "todo":
+        case "todo": // todo task
             return addNewTask(TaskType.Todo, in, shouldSave);
         default:
-            String errMsg = "I'm sorry, but I don't know what that means :-(";
-            throw new InvalidCommandException(errMsg);
+            throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -164,14 +217,12 @@ public class InputHandler {
     private void updateSaveFile() {
         try {
             FileWriter myWriter = new FileWriter(SAVE_FILE_PATH.toString());
-            for (int i = 0; i < TASK_LIST.size(); i++) {
-                Task task = TASK_LIST.get(i);
+            for (Task task : TASK_LIST) {
                 myWriter.write(task.toSaveString() + "\n");
             }
             myWriter.close();
         } catch (IOException e) {
-            System.out.println("An error when updating the save file.");
-            e.printStackTrace();
+            System.out.println("An error has occurred when updating the save file.");
         }
     }
 
@@ -179,7 +230,8 @@ public class InputHandler {
         return generateMessage("Bye. Hope to see you again soon!");
     }
 
-    private String generateMessage(String reply) {
-        return DIVIDER + "\n" + reply + "\n" + DIVIDER;
+    private static String generateMessage(String reply) {
+        String divider = "____________________________________________________________";
+        return divider + "\n" + reply + "\n" + divider;
     }
 }

@@ -1,9 +1,14 @@
-public class Event extends Task {
-    private String at;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
-    private Event(String description, String at) {
+public class Event extends Task {
+    private String TIME12H;
+    private LocalDate DATE;
+
+    private Event(String description, String TIME12H, LocalDate DATE) {
         super(description);
-        this.at = at;
+        this.TIME12H = TIME12H;
+        this.DATE = DATE;
     }
 
     protected static Event createEvent(String details) throws InvalidEventException {
@@ -12,17 +17,31 @@ public class Event extends Task {
             throw new InvalidEventException();
         }
         String desc = info[0];
-        String at = info[1].replaceFirst("at ", "");
-        return new Event(desc, at);
+        String[] dateTime = info[1].replaceFirst("at ", "").split(" ");
+        try {
+            LocalDate date = DateTimeParsing.parseDate(dateTime[0]);
+            String time12h = DateTimeParsing.to12HTimeFormat(dateTime[1]);
+            return new Event(desc, time12h, date);
+        } catch(DateTimeParseException | NumberFormatException e) {
+            throw new InvalidEventException();
+        }
+    }
+
+    @Override
+    public boolean isDueOn(LocalDate date) {
+        return this.DATE.equals(date);
     }
 
     @Override
     public String toSaveString() {
-        return (isDone ? 1 : 0) +  "event " + description + "/at " + at;
+        String date = DateTimeParsing.localDateToString(DATE);
+        String time = DateTimeParsing.to24HTimeFormat(TIME12H);
+        return (isDone ? 1 : 0) + "event " + description + "/at " + date + " " + time;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + at + ")";
+        String formattedDate = DateTimeParsing.localDateToFormattedString(DATE);
+        return "[E]" + super.toString() + "(at: " + formattedDate + " " + TIME12H + ")";
     }
 }

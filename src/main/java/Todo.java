@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Todo extends Task {
     private Todo(String desc) {
         super(desc);
@@ -13,6 +15,11 @@ public class Todo extends Task {
     @Override
     public String toSaveString() {
         return (isDone ? 1 : 0) + "todo " + description;
+    }
+
+    @Override
+    public boolean isDueOn(LocalDate date) {
+        return false;
     }
 
     @Override
