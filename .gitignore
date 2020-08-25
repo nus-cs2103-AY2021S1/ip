@@ -16,5 +16,8 @@ bin/
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
 
-# VS Code
+# Visual Studio Code
 .vscode
+.settings
+.classpath
+.project
