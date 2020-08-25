@@ -37,20 +37,54 @@ public abstract class Task implements Serializable, Schedulable {
 
     /* -------------------------- Static factory methods to create different Tasks ----------------------- */
 
+    /**
+     * Returns a task representing the corresponding task index in the todoList of the user.
+     * Task corresponds to Done, Delete commands.
+     *
+     * @param task this task should be in the inform "1" or "1 2 3"
+     * @return task
+     */
     public static Task createMiscTask(String task) { return new DoneTask(task); }
 
+    /**
+     * Returns a task that is empty. Corresponds to a List command where there is no task.
+     *
+     * @return empty task
+     */
     public static Task createEmptyTask(){
         return new EmptyTask();
     }
 
+    /**
+     * Returns a task representing a todoTask. Task has no date or deadline associated.
+     *
+     * @param task string describing the task
+     * @return todoTask
+     */
     public static Task createTodo(String task) {
         return new ToDos(task);
     }
 
+    /**
+     * Returns a task representing an event. Task will have a date associated with it,
+     * specifying when the event is taking place.
+     *
+     * @param task string describing the task
+     * @param date date string, in valid format: "dd/MM/uuuu" or "uuuy-dd-MM"
+     * @return eventTask
+     */
     public static Task createEvent(String task, String date) {
         return new Events(task, date);
     }
 
+    /**
+     * Returns a task representing a deadline. Deadlines has to be completed by the specified date
+     * De deadline associatione is user referencion.
+     *
+     * @param task string describing the task
+     * @param date date string, in valid format: "dd/MM/uuuu" or "uuuy-dd-MM"
+     * @return deadlineTask
+     */
     public static Task createDeadline(String task, String date) {
         return new Deadlines(task, date);
     }
