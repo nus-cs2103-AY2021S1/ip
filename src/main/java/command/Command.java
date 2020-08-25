@@ -1,3 +1,4 @@
+package command;
 public class Command {
     public String description;
     public String[] parameters;

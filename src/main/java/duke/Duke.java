@@ -1,6 +1,10 @@
+package duke;
+
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.io.IOException;
+import command.*;
+import task.Task;
 
 public class Duke {
     private boolean isRunning = true;

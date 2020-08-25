@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -6,6 +8,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import command.Command;
+import command.TodoCommand;
+import command.EventCommand;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 public class TaskList {
 

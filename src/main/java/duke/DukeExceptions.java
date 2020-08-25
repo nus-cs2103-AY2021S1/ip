@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeExceptions {
 
     public static class IncompleteCommandException extends Exception {

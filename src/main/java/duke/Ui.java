@@ -1,3 +1,7 @@
+package duke;
+
+import task.Task;
+
 public class Ui {
 
     private String border = "----------------------------------------------------------------------------\n";
@@ -10,8 +14,8 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        String greeting = "Sorry :( Duke is getting some upgrades at the moment.\n"
-                + "This is Tron, temporarily standing in for Duke, how may I assist you ?\n";
+        String greeting = "Sorry :( duke.Duke is getting some upgrades at the moment.\n"
+                + "This is Tron, temporarily standing in for duke.Duke, how may I assist you ?\n";
         System.out.println(this.border + greeting + this.border);
     }
 
