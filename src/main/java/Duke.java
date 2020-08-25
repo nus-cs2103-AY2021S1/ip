@@ -172,6 +172,8 @@ public class Duke {
             throw new DukeException("Please give me details for your deadline task");
         } catch (ArrayIndexOutOfBoundsException a) {
             throw new DukeException("Please give date / time after '/by' for this deadline task");
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
         }
     }
 
@@ -192,6 +194,8 @@ public class Duke {
             throw new DukeException("Please give me information about your event!");
         } catch (ArrayIndexOutOfBoundsException a) {
             throw new DukeException("Please give date / time after '/at' for this event");
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
         }
     }
 

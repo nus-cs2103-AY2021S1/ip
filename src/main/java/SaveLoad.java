@@ -2,6 +2,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +55,7 @@ public class SaveLoad {
                     String substringE = stringTask.substring(8);
                     String[] strArrE = substringE.split("\\|");
                     String descriptionE = strArrE[0];
-                    String dateE = strArrE[1];
+                    String dateE = convertBackDateTime(strArrE[1]);
                     tempTask = new Event(descriptionE, dateE);
 
                     if (isDone) {
@@ -66,7 +68,7 @@ public class SaveLoad {
                     String substringD = stringTask.substring(8);
                     String[] strArrD = substringD.split("\\|");
                     String descriptionD = strArrD[0];
-                    String dateD = strArrD[1];
+                    String dateD = convertBackDateTime(strArrD[1]);
                     tempTask = new Deadline(descriptionD, dateD);
 
                     if (isDone) {
@@ -89,6 +91,20 @@ public class SaveLoad {
         return listOfTasks;
     }
 
+    private String convertBackDateTime (String dateTime) {
+        String dateUnconverted = dateTime.substring(1, 12);
+        String timeConverted = dateTime.substring(13, 18);
+
+        // converting date
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        LocalDate date = LocalDate.parse(dateUnconverted, dtf);
+
+        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        String dateConverted = date.format(dtf2);
+
+
+        return " " + dateConverted + " " + timeConverted;
+    }
 
     // Overwrites file at that location with updated information
     public void saveFile() {
