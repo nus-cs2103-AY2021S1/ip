@@ -8,6 +8,9 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Duke {
 
     // Filepath constants
@@ -153,8 +156,13 @@ public class Duke {
                     throw DukeException.emptyDescription("event");
                 }
 
+                // format dates
+                LocalDateTime time = LocalDateTime.parse(eventTime,
+                        DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+                String timeToUse = time.format(DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"));
+
                 // remove leading and trailing whitespace
-                Task newEvent = new Event(false, eventName, eventTime);
+                Task newEvent = new Event(false, eventName, timeToUse);
                 store.add(newEvent);
 
                 // write to file
@@ -181,13 +189,18 @@ public class Duke {
                 String deadlineTime = input.substring(deadlineMarker + 4).trim();
                 String deadlineName = input.substring(9, deadlineMarker - 1).trim();
 
+                // format dates
+                LocalDateTime time = LocalDateTime.parse(deadlineTime,
+                        DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+                String timeToUse = time.format(DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"));
+
                 // case: check for "whitespace description or timeline"
                 if (deadlineTime.matches("\\s+") || deadlineName.matches("\\s+")) {
                     throw DukeException.emptyDescription("deadline");
                 }
 
                 // remove leading and trailing whitespace
-                Task newDeadline = new Deadline(false, deadlineName, deadlineTime);
+                Task newDeadline = new Deadline(false, deadlineName, timeToUse);
                 store.add(newDeadline);
 
                 // write to file
