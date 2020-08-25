@@ -28,6 +28,10 @@ public abstract class Task {
         );
     }
 
+    public boolean fitsTask(String description){
+        return taskName.contains(description);
+    }
+
     public String safeFileFormat(){
         return "";
     }

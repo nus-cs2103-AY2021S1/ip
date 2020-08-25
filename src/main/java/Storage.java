@@ -62,7 +62,7 @@ public class Storage {
                     if (inputs[1].equals("1")) {
                         newTask.complete();
                     }
-                    taskList.AddTask(newTask, false);
+                    taskList.addTask(newTask, false);
                     task = bf.readLine();
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());

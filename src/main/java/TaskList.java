@@ -9,7 +9,7 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
-    public void DoneTask(int index) throws DukeException {
+    public void doneTask(int index) throws DukeException {
         if(index < 0 || index > taskList.size() - 1){
             throw new DukeException("please give a correct task index");
         }
@@ -19,17 +19,31 @@ public class TaskList {
         System.out.println(String.format("  %s", doneTask.toString()));
     }
 
-    public void ListTask(){
+    public void listTask(){
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println(String.format("%d. %s", i + 1, taskList.get(i).toString()));
         }
     }
 
-    public void AddTask(Task newTask, Boolean print){
+    public void addTask(Task newTask, Boolean print){
         taskList.add(newTask);
         if(print) {
             newTask.printAddTask();
             printNumberOfTask(taskList.size());
+        }
+    }
+
+    public void findTask(String description) {
+        ArrayList<Task> taskMatchingDescription = new ArrayList<>();
+
+        for (Task task : taskList){
+            if (task.fitsTask(description)) {
+                taskMatchingDescription.add(task);
+            }
+        }
+
+        for (int i = 0; i < taskMatchingDescription.size(); i++) {
+            System.out.println(String.format("%d. %s", i + 1, taskMatchingDescription.get(i).toString()));
         }
     }
 
@@ -48,7 +62,7 @@ public class TaskList {
     public boolean isUpdating(){
         return isUpdating;
     }
-    public void DeleteTask(int index) throws DukeException {
+    public void deleteTask(int index) throws DukeException {
         if(index < 0 || index > taskList.size() - 1){
             throw new DukeException("please give a correct task index");
         }
