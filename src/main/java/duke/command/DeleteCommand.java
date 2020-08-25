@@ -22,8 +22,8 @@ public class DeleteCommand extends Command {
                 throw new InvalidArgumentException("☹ OOPS!!! The task index you give is not found.");
             }
             String output = "Noted. I've removed this task:\n";
-            output += ("\t" + tasks.getTask(index) + "\n");
-            output += ("\tNow you have " + (tasks.getSize() - 1) + " tasks in the list.");
+            output += ("\t " + tasks.getTask(index) + "\n");
+            output += ("\t Now you have " + (tasks.getSize() - 1) + " tasks in the list.");
             ui.displayMessage(output);
             tasks.deleteTask(index);
             storage.writeData(tasks.getTasks());
