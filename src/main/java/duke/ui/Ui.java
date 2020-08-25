@@ -122,6 +122,19 @@ public class Ui {
         showLine();
     }
 
+    public void formatFindTasks(ArrayList<Task> matchingTasks) {
+        showLine();
+        if (!matchingTasks.isEmpty()) {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 1; i <= matchingTasks.size(); i++) {
+                System.out.println(i + "." + matchingTasks.get(i-1));
+            }
+        } else {
+            System.out.println("There are no matching tasks in your list.");
+        }
+        showLine();
+    }
+
     /** Shows the error message in Duke format.
      *
      * @param e The exception that is thrown.

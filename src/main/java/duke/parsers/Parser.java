@@ -5,6 +5,7 @@ import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.DateCommand;
 
@@ -90,6 +91,8 @@ public class Parser {
             return new AddCommand(new Event(userInput.substring(6, pos - 1), date));
         } else if (userInput.startsWith("date")) {
             return new DateCommand(LocalDate.parse(userInput.substring(5), FORMATTER_INPUT));
+        } else if (userInput.startsWith("find")) {
+            return new FindCommand(userInput.substring(5));
         } else {
             throw new InvalidDukeCommandException();
         }
