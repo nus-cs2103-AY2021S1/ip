@@ -93,7 +93,8 @@ public class Ui {
                     try {
                         Task toAdd = parser.handleInput(nextInput);
                         if (toAdd == null) {
-                            invalidInput("  \u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                            invalidInput("  \u2639 OOPS!!! I'm sorry, but I don't know what " +
+                                    "that means :-(");
                         } else {
                             storage.writeToFile(toAdd.toString() + System.lineSeparator());
                             System.out.println("  Got it. I've added this task:\n"
