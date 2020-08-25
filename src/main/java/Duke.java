@@ -1,20 +1,77 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.File;
+import java.nio.file.Files;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+        
 
 public class Duke {
 
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static ArrayList<Task> storedTasks = new ArrayList<>();
+    private static int globalIndex = 1;
 
-    public static void init() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("\n Always at your service, \n" + logo + "\n");
-        System.out.println("Your Majesty, I am your loyal Duke.");
-        System.out.println("I offer a range of administrative services. Do type 'assist' to see the comprehensive list.");
-        System.out.println();
+    public static void init() throws DukeException {
+        try {
+            String workingDir = System.getProperty("user.dir");
+            java.nio.file.Path path = java.nio.file.Paths.get(workingDir, "storage", "data.txt");
+            if (!java.nio.file.Files.exists(path)) {
+                File newDir = new File("storage" + File.separator + "data.txt");
+                newDir.getParentFile().mkdirs();
+                newDir.createNewFile();
+            } else {
+                String filePath = "storage" + File.separator + "data.txt";
+                FileReader fr = new FileReader(filePath);
+                BufferedReader br = new BufferedReader(fr);
+                String currentLine;
+                while ((currentLine = br.readLine()) != null) {
+                    String task[] = currentLine.split("\\|");
+                    if (task.length != 0 && !task[0].equals("")) {
+                        switch(task[1]) {
+                            case "T":
+                                ToDo todo = new ToDo(task[3]);
+                                if (Integer.parseInt(task[2]) == 1) todo.markAsDone();
+                                storedTasks.add(todo);
+                                break;
+                            case "D":
+                                Deadline deadline = new Deadline(task[3]);
+                                if (Integer.parseInt(task[2]) == 1) deadline.markAsDone();
+                                storedTasks.add(deadline);
+                                break;
+                            case "E":
+                                Event event = new Event(task[3]);
+                                if (Integer.parseInt(task[2]) == 1) event.markAsDone();
+                                storedTasks.add(event);
+                                break;
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            throw new DukeException("Oops");
+        }
+    }
+    public static void welcome() {
+        try {
+            init();
+            String logo = " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+            System.out.println("\n Always at your service, \n" + logo + "\n");
+            System.out.println("Your Majesty, I am your loyal Duke.");
+            System.out.println("I offer a range of administrative services. Do type 'assist' to see the comprehensive list.");
+            System.out.println();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+       
     }
 
     public static String dashedLineBreak() {
@@ -67,7 +124,7 @@ public class Duke {
     
     // Handles cases where user enters a number that does not correspond to an existing task
     public static void validateIndex(int taskNumber) throws DukeException{
-        if(taskNumber > tasks.size() || taskNumber <= 0) {
+        if(taskNumber > storedTasks.size() || taskNumber <= 0) {
             throw new DukeException("Your Majesty, there's no such agenda in my detailed records.");
         }
     }
@@ -86,14 +143,95 @@ public class Duke {
         return input.stripLeading();
     }
 
+    // Add a new task 
+    public static void writeToFile(String type, int done, String content) {
+        try {
+            String workingDir = System.getProperty("user.dir");
+            java.nio.file.Path path = java.nio.file.Paths.get(workingDir, "storage", "data.txt");
+            if (!java.nio.file.Files.exists(path)) {
+                File newDir = new File("storage" + File.separator + "data.txt");
+                newDir.getParentFile().mkdirs();
+                newDir.createNewFile();
+            } else {
+                FileWriter fw = new FileWriter("storage" + File.separator + "data.txt", true);
+                fw.write(globalIndex + "|" + type + "|" + done + "|" + content + "\n");
+                globalIndex++;
+                fw.close();
+            }
+            
+        } catch (Exception err) {
+            System.out.println(err);
+        }
+    }
+    
+    public static void removeFromFile(int taskIndex) { 
+        try {
+            int index = 1;
+            String tempFilePath = "storage" + File.separator + "temp.txt";
+            String oldFilePath = "storage" + File.separator + "data.txt";
+            File tempFile = new File(tempFilePath);
+            FileReader fr = new FileReader(oldFilePath);
+            BufferedReader br = new BufferedReader(fr);
+            String currentLine; 
+            String[] task;
+            FileWriter fw = new FileWriter(tempFile, true);
+            
+            while((currentLine = br.readLine()) != null) {
+                task = currentLine.split("\\|");
+                if (Integer.parseInt(task[0]) != taskIndex) {
+                    fw.write(index + "|" + task[1] + "|" + task[2] + "|" + task[3] + "\n");
+                    index++;
+                }
+            }
+            globalIndex = index;
+            fw.close();
+            fr.close();
+            br.close();
+            Files.copy(Paths.get(tempFilePath), Paths.get(oldFilePath), StandardCopyOption.REPLACE_EXISTING);
+            Files.delete(Paths.get(tempFilePath));
+        } catch (Exception err) {
+            System.out.println(err);
+        }
+    }
+    
+    public static void overwriteInFile(int taskIndex, String taskType, Task taskToConquer) {
+        try {
+            int index = 1;
+            String tempFilePath = "storage" + File.separator + "temp.txt";
+            String oldFilePath = "storage" + File.separator + "data.txt";
+            File tempFile = new File(tempFilePath);
+            FileReader fr = new FileReader(oldFilePath);
+            BufferedReader br = new BufferedReader(fr);
+            String currentLine;
+            String[] task;
+            FileWriter fw = new FileWriter(tempFile, true);
+
+            while((currentLine = br.readLine()) != null) {
+                task = currentLine.split("\\|");
+                    if (Integer.parseInt(task[0]) != taskIndex) {
+                        fw.write(currentLine + "\n");
+                    } else {
+                        fw.write(taskIndex + "|" + taskType + "|" + 1 + "|" + taskToConquer.getDescription() + "\n");
+                    }
+            }
+            fw.close();
+            fr.close();
+            br.close();
+            Files.copy(Paths.get(tempFilePath), Paths.get(oldFilePath), StandardCopyOption.REPLACE_EXISTING);
+            Files.delete(Paths.get(tempFilePath));
+        } catch (Exception err) {
+            System.out.println(err);
+        }
+    }
+
     public static void printAllTasks() {
-        if (tasks.size() == 0) {
+        if (storedTasks.size() == 0) {
             System.out.println("Your scroll is currently empty, Your Majesty.");
         } else {
             System.out.println(dashedLineBreak());
             System.out.println("Your current scroll, Your Majesty:");
-            for (Task task : tasks) {
-                System.out.printf("\t%s.%s", tasks.indexOf(task) + 1, task);
+            for (Task task : storedTasks) {
+                System.out.printf("\t%s.%s", storedTasks.indexOf(task) + 1, task);
                 System.out.println();
             }
         }
@@ -108,29 +246,32 @@ public class Duke {
             validateScannerInput(task);
             
             String splitTask[] = task.split(" ", 2);
-            Task newTask;
+            Task newTask = null;
             validateAdd(splitTask);
             validateSlashCommands(splitTask);
             
             switch(splitTask[0].toLowerCase()) {
                 case "todo":
                     newTask = new ToDo(splitTask[1]);
+                    writeToFile("T", 0, splitTask[1]);
                     break;
                 case "deadline":
                     newTask = new Deadline(splitTask[1]);
+                    writeToFile("D", 0, splitTask[1]);
                     break;
                 case "event":
                     newTask = new Event(splitTask[1]);
+                    writeToFile("E", 0, splitTask[1]);
                     break;
                 default:
                     throw new DukeException("I'm afraid I do not understand that command, Your Majesty.");
             }
             if (newTask != null) {
-                tasks.add(newTask);
+                storedTasks.add(newTask);
                 System.out.println(dashedLineBreak());
                 System.out.println("Your Majesty, I've added the writing:");
                 System.out.println("\t" + newTask);
-                System.out.printf("You have %s writing(s) on your scroll as of now. \n", tasks.size());
+                System.out.printf("You have %s writing(s) on your scroll as of now. \n", storedTasks.size());
                 System.out.println(dashedLineBreak());
                 System.out.println();
             }
@@ -148,10 +289,19 @@ public class Duke {
             int taskNumber = Integer.parseInt(sanitiseInput(command[1]));
             validateIndex(taskNumber);
             
-            tasks.get(taskNumber - 1).markAsDone();
+            storedTasks.get(taskNumber - 1).markAsDone();
+            String taskType;
+            if (storedTasks.get(taskNumber - 1) instanceof ToDo) {
+                taskType = "T";
+            } else if (storedTasks.get(taskNumber - 1) instanceof Deadline) {
+                taskType = "D";
+            } else {
+                taskType = "E";
+            }
+            overwriteInFile(taskNumber, taskType, storedTasks.get(taskNumber - 1));
             System.out.println(dashedLineBreak());
             System.out.println("As you wish, Your Majesty. I have marked this as conquered.");
-            System.out.println("\t" + tasks.get(taskNumber - 1));
+            System.out.println("\t" + storedTasks.get(taskNumber - 1));
             System.out.println(dashedLineBreak());
         } catch (DukeException err) {
             System.out.println(err.getMessage());
@@ -166,12 +316,13 @@ public class Duke {
             int taskNumber = Integer.parseInt(sanitiseInput(command[1]));
             validateIndex(taskNumber);
             
-            Task deletedTask = tasks.get(taskNumber - 1);
-            tasks.remove(taskNumber - 1);
+            Task deletedTask = storedTasks.get(taskNumber - 1);
+            storedTasks.remove(deletedTask);
+            removeFromFile(taskNumber);
             System.out.println(dashedLineBreak());
             System.out.println("As you wish, Your Majesty. I have removed this writing.");
             System.out.println("\t" + deletedTask);
-            System.out.printf("You have %s writing(s) on your scroll as of now. \n", tasks.size());
+            System.out.printf("You have %s writing(s) on your scroll as of now. \n", storedTasks.size());
             System.out.println(dashedLineBreak());
         } catch (DukeException err) {
             System.out.println(err.getMessage());
@@ -181,7 +332,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        init();
+        welcome();
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
             String userInput = sc.nextLine();
