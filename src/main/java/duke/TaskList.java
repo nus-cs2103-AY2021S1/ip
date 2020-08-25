@@ -69,6 +69,10 @@ public class TaskList {
         return list.remove(taskNumber - 1);
     }
 
+    /**
+     * Prints out all tasks with the specified keyword.
+     * @param keyword Keyword to be searched.
+     */
     public void find(String keyword) {
         List<Task> filteredList = list.stream()
                 .filter(t -> t.getDetails().contains(keyword))
