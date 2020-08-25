@@ -13,6 +13,6 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 
-/text-ui-test/ACTUAL.txt
+/text-dukeUi-test/ACTUAL.txt
 save.txt
 save2.txt
