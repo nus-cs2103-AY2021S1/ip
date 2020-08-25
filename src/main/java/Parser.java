@@ -13,6 +13,8 @@ public class Parser {
             return Command.done;
         } else if (in.startsWith("delete ")){
             return Command.delete;
+        } else if (in.startsWith("find ")){
+            return Command.find;
         } else if (in.startsWith("todo ") || in.startsWith("deadline ") || in.startsWith("event ")){
             return Command.add;
         } else {

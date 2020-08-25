@@ -1,5 +1,5 @@
 ✰ hi! im conundrum boy :) ✰
-✰ you haven't added any tasks to the list yet! ✰
+✰ this list doesn't contain any tasks! ✰
 ⚠ that is not the number of a task in the list! ⚠
 ✰ i've added this task for you: 
 	[T] [✗] read the bible
@@ -43,4 +43,10 @@ now you have 2 items in your tasklist. ✰
 ✰ 1. [T] [✓] read the bible ✰
 ✰ 2. [E] [✗] 2101 tutorial (at: 27 Aug 2020 4.00pm) ✰
 ⚠ i don't know what that means :( ⚠
+⚠ i don't know what that means :( ⚠
+⚠ you haven't entered a search keyword! ⚠
+✰ here's the list of tasks that contain the keyword! ✰
+✰ this list doesn't contain any tasks! ✰
+✰ here's the list of tasks that contain the keyword! ✰
+✰ 1. [T] [✓] read the bible ✰
 ✰ bye bye! ✰
