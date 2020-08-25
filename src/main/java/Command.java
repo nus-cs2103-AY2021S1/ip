@@ -28,6 +28,8 @@ public class Command {
             doneCommand(splitInput, tasks, storage);
         } else if (keyWord.equals("delete")) {
             deleteCommand(tasks, splitInput, ui, storage);
+        } else if (keyWord.equals("find")) {
+            findCommand(tasks, splitInput);
         } else if (keyWord.equals("todo") || keyWord.equals("deadline") || keyWord.equals("event")){
             addTaskCommand(splitInput, keyWord, tasks, storage);
         } else {
@@ -200,5 +202,16 @@ public class Command {
             return new String[]{des};
         }
         return new String[]{};
+    }
+
+    public void findCommand(TaskList tasks, String[] splitInput) {
+        String desToFind = "";
+        for (int i = 1; i < splitInput.length; i++) {
+            desToFind += splitInput[i];
+            if (i != splitInput.length - 1) {
+                desToFind += " ";
+            }
+        }
+        ui.showFoundTasks(tasks, desToFind);
     }
 }
