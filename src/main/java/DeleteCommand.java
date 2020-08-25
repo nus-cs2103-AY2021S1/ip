@@ -21,5 +21,6 @@ public class DeleteCommand implements Command {
         list.remove(index);
         new Duke().print("The following task has been removed successfully:", "\t" + task.toString(),
                          "Now you have " + list.size() + " items(s) left in the list.");
+        new Duke().writeFile(list);
     }
 }
