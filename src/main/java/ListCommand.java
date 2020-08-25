@@ -1,3 +1,6 @@
+/**
+ * Lists out the tasks that user has added.
+ */
 public class ListCommand extends Command {
     public final static String COMMAND_WORD = "list";
 

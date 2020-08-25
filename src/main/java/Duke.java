@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * Responsible for running the Duke application, and responding to user.
+ * Initializes and terminates the application.
+ */
 public class Duke {
     private TaskList tasks;
     private Storage storage;
@@ -19,7 +23,6 @@ public class Duke {
     public void run() {
         this.ui.showWelcomeMessage();
         Scanner sc = new Scanner(System.in);
-        boolean isExit = false;
 
         while (sc.hasNextLine()) {
             String fullCommand = sc.nextLine();

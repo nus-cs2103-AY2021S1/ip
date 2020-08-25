@@ -1,3 +1,6 @@
+/**
+ * Adds an event task to the list of tasks.
+ */
 public class EventCommand extends Command {
     public final static String COMMAND_WORD = "event";
 

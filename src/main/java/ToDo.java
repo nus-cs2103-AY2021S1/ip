@@ -1,3 +1,6 @@
+/**
+ * Represents a todo task.
+ */
 public class ToDo extends Task {
     static final String TYPE = "todo";
 

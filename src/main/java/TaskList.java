@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Represents the list of tasks.
+ */
 public class TaskList {
     protected ArrayList<Task> tasks;
 
@@ -27,6 +30,10 @@ public class TaskList {
         return this.tasks;
     }
 
+    /**
+     * Returns the total number of tasks in the list.
+     * @return a String message informing user of the number of remaining tasks
+     */
     public String replyNumTasks() {
         return String.format(
                 "Now you have %d %s in the list.%n",
