@@ -2,15 +2,15 @@ import java.util.Scanner;
 
 public class Ui {
 
-    Scanner sc;
-    String line = "____________________________\n"
-                 +"____________________________\n";
+    private Scanner sc;
+    private String line = "____________________________\n"
+                         +"____________________________\n";
 
-    String logo = "****** ****** ****** ******\n"
-                 +"   *   *      *      *\n"
-                 +"   *   ****** ****** ******\n"
-                 +"*  *   *      *      *\n"
-                 +"***    ****** *      *\n";
+    private String logo = "****** ****** ****** ******\n"
+                         +"   *   *      *      *\n"
+                         +"   *   ****** ****** ******\n"
+                         +"*  *   *      *      *\n"
+                         +"***    ****** *      *\n";
 
     public Ui(){
         sc = new Scanner(System.in);

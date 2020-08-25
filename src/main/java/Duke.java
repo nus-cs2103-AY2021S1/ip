@@ -18,7 +18,7 @@ public class Duke {
 
     public void run() {
         ui.printStarting();
-        while(taskList.isUpdating) {
+        while(taskList.isUpdating()) {
             String[] fullCommand = ui.readCommand();
             parser.ParseCommand(fullCommand);
             ui.printLine();

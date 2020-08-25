@@ -1,6 +1,6 @@
 public class Parser {
 
-    TaskList taskList;
+    private TaskList taskList;
 
     public Parser(TaskList taskList){
         this.taskList = taskList;
@@ -29,7 +29,7 @@ public class Parser {
                 }
                 case BYE: {
                     System.out.println("Bye, Have a Great Time!");
-                    taskList.isUpdating = false;
+                    taskList.setTaskListNotUpdating();
                     break;
                 }
                 case TODO: {

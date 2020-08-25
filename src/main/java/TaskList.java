@@ -2,8 +2,9 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    ArrayList<Task> taskList;
-    boolean isUpdating = true;
+    private ArrayList<Task> taskList;
+    private boolean isUpdating = true;
+
     public TaskList(){
         this.taskList = new ArrayList<>();
     }
@@ -32,7 +33,21 @@ public class TaskList {
         }
     }
 
+    public int getTaskListSize(){
+        return taskList.size();
+    }
 
+    public void setTaskListNotUpdating(){
+        this.isUpdating = false;
+    }
+
+    public Task getTask(int index){
+        return taskList.get(index);
+    }
+
+    public boolean isUpdating(){
+        return isUpdating;
+    }
     public void DeleteTask(int index) throws DukeException {
         if(index < 0 || index > taskList.size() - 1){
             throw new DukeException("please give a correct task index");

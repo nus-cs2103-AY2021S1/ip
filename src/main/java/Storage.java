@@ -5,9 +5,9 @@ import java.nio.file.Paths;
 
 public class Storage {
 
-    TaskList taskList;
-    Parser parser;
-    Path storageFilePath;
+    private TaskList taskList;
+    private Parser parser;
+    private Path storageFilePath;
 
     public Storage(TaskList taskList, Parser parser) throws DukeException {
         this.taskList = taskList;
@@ -78,8 +78,8 @@ public class Storage {
     public void saveFile() throws DukeException{
         try {
             FileWriter fw = new FileWriter(storageFilePath.toString());
-            for (int i = 0; i < taskList.taskList.size(); i++) {
-                fw.write(taskList.taskList.get(i).safeFileFormat());
+            for (int i = 0; i < taskList.getTaskListSize(); i++) {
+                fw.write(taskList.getTask(i).safeFileFormat());
             }
             fw.close();
         }catch(IOException e){
