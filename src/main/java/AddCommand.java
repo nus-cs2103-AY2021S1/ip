@@ -42,7 +42,6 @@ public class AddCommand extends Command {
                 try {
                     LocalDate deadline = LocalDate.parse(text[1]);
                     Task newDeadline = new Deadline(description, deadline);
-
                     ui.showMessage(tasks.createTask(newDeadline));
                 } catch (DateTimeParseException e) {
                     throw new UnknownInputException(text[1]);
