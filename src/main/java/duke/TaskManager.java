@@ -26,7 +26,7 @@ public class TaskManager {
         this.tasks.add(task);
     }
 
-    public Task deleteTask(int index) throws DukeException {
+    public Task deleteTask(int index) {
         return this.tasks.remove(index);
     }
 

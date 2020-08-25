@@ -5,11 +5,11 @@ import duke.exception.DukeException;
 
 public class Duke {
 
-    private Storage storage;
+    private final Storage storage;
 
     private TaskManager manager;
 
-    private Ui ui;
+    private final Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
