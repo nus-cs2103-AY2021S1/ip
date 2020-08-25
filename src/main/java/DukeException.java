@@ -18,18 +18,27 @@ abstract class InvalidTaskException extends DukeException {
 
 class InvalidDeadlineException extends InvalidTaskException {
     public InvalidDeadlineException() {
-        super("Please input the details and deadline for the task.");
+        super(
+            "Please input the correct details for the deadline task.\n" +
+            "deadline *description* /by *yyyy-mm-dd* *HH:mm*"
+        );
     }
 }
 
 class InvalidEventException extends InvalidTaskException {
     public InvalidEventException() {
-        super("Please input the details and event time for the task.");
+        super(
+            "Please input the correct details for the event task.\n" +
+            "event *description* /at *yyyy-mm-dd* *HH:mm*"
+        );
     }
 }
 
 class InvalidTodoException extends InvalidTaskException {
     public InvalidTodoException() {
-        super("Please input the details for the task.");
+        super(
+            "Please input the correct details for the event task.\n" +
+            "todo *description*"
+        );
     }
 }

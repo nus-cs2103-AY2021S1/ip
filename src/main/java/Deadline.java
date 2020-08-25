@@ -1,9 +1,15 @@
-public class Deadline extends Task {
-    private String by;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
 
-    private Deadline(String description, String by) {
+public class Deadline extends Task {
+    private String time12h;
+    private LocalDate date;
+
+    private Deadline(String description, String time12h, LocalDate date) {
         super(description);
-        this.by = by;
+        this.time12h = time12h;
+        this.date = date;
     }
 
     protected static Deadline createDeadline(String details) throws InvalidDeadlineException {
@@ -12,12 +18,20 @@ public class Deadline extends Task {
             throw new InvalidDeadlineException();
         }
         String desc = info[0];
-        String by = info[1].replaceFirst("by ", "");
-        return new Deadline(desc, by);
+        String[] dateTime = info[1].replaceFirst("by ", "").split(" ");
+        try {
+            LocalDate date = DateTimeParsing.parseDate(dateTime[0]);
+            String time12h = DateTimeParsing.parse24HTime(dateTime[1]);
+            return new Deadline(desc, time12h, date);
+        } catch(DateTimeParseException | NumberFormatException e) {
+            e.printStackTrace();
+            throw new InvalidDeadlineException();
+        }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + by + ")";
+        String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "[D]" + super.toString() + "(by: " + formattedDate + " " + time12h + ")";
     }
 }
