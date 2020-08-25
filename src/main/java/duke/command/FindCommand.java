@@ -7,6 +7,7 @@ import duke.DukeException;
 
 /** A subclass of Command which find a task via a keyword */
 public class FindCommand extends Command {
+    private static final int KEYWORD_LENGTH = 1;
     private final String keyword;
 
     /**
@@ -20,7 +21,7 @@ public class FindCommand extends Command {
             throw new DukeException("☹ OOPS!!! Please enter some keyword for me to find");
         } else {
             String[] contentParts = content.split(" ");
-            if (contentParts.length > 1 | contentParts[0].equals("")) {
+            if (contentParts.length > KEYWORD_LENGTH | contentParts[0].equals("")) {
                 throw new DukeException("☹ OOPS!!! Please enter one keyword at a time");
             } else {
                 this.keyword = contentParts[0];
