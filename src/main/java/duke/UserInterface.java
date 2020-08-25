@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * Class to represent the User Interface of which a user interacts with.
+ * @author Kor Ming Soon
+ */
 public class UserInterface {
 
     private static final String LOGO =
@@ -17,7 +21,7 @@ public class UserInterface {
                     "           :-._____.-:\n" +
                     "          `''       `''\n";
 
-    private static final String thunderbolt =
+    private static final String THUNDERBOLT =
             "                  .-~*~--,.   .-.\n" +
                     "          .-~-. ./OOOOOOOOO\\.'OOO`9~~-.\n" +
                     "        .`OOOOOO.OOM.OLSONOOOOO@@OOOOOO\\\n" +
@@ -47,37 +51,66 @@ public class UserInterface {
 
     private static final String ERROR = "    ERROR: ";
 
-    private static final String newLine = "\n";
+    private static final String NEWLINE = "\n";
 
+    /**
+     * To print out the task that is just added to the list.
+     * @param task Task of which to be added.
+     * @param totalNumber The prevailing number after a task is added.
+     */
     public void printAddTask(String task, int totalNumber) {
-        System.out.print(BORDER + "Steady! I add... wait ah.." + newLine);
-        System.out.print(BORDER + BORDER + "ADDED: " + task + newLine);
-        System.out.print(BORDER + "Now you got " + totalNumber + " tasks" + newLine);
+        System.out.print(BORDER + "Steady! I add... wait ah.." + NEWLINE);
+        System.out.print(BORDER + BORDER + "ADDED: " + task + NEWLINE);
+        System.out.print(BORDER + "Now you got " + totalNumber + " tasks" + NEWLINE);
     }
 
+    /**
+     * Preamble while the chat bot retrieves list of the tasks.
+     */
     public void listTask() {
         System.out.print(BORDER + "Retrieving your list, patient ah!\n");
     }
 
+    /**
+     * To print out the list of tasks in an ordered fashion.
+     * @param listNumber Index of the tasking in the list.
+     * @param task The details of the task itself.
+     */
     public void printTask(int listNumber, String task) {
         String toPrint = String.format("%2d. %s\n", listNumber, task);
         System.out.print(BORDER + toPrint);
     }
 
+    /**
+     * To print the preamble as well as the details of the task marked as done.
+     * @param task Task of which to be marked as done.
+     */
     public void printDone(String task) {
-        System.out.print(BORDER + "Swee la, task done liao:" + newLine);
-        System.out.print(BORDER + BORDER + task + newLine);
+        System.out.print(BORDER + "Swee la, task done liao:" + NEWLINE);
+        System.out.print(BORDER + BORDER + task + NEWLINE);
     }
 
+    /**
+     * Preamble as well as printing of the sequence of deletion.
+     * @param task Task to be deleted.
+     * @param remaining Remaining number of tasks after deletion.
+     */
     public void printDelete(String task, int remaining) {
-        System.out.print(BORDER + "Delete liao boss:" + newLine);
-        System.out.print(BORDER + "Remaining Tasks: " + remaining + newLine);
+        System.out.print(BORDER + "Delete liao boss:" + NEWLINE);
+        System.out.print(BORDER + "Remaining Tasks: " + remaining + NEWLINE);
     }
 
+    /**
+     * Standard error message to be printed.
+     * @param errorMessage The details of the error message itself.
+     */
     public void printError(String errorMessage) {
-        System.out.print(ERROR + errorMessage + newLine);
+        System.out.print(ERROR + errorMessage + NEWLINE);
     }
 
+    /**
+     * Preamble for the initialisation of the Pikachu Chatbot.
+     */
     public void welcomeMessage() {
         String startingMessage = "Pikachu: Hello, I am Pikachu! My pika service creates a to-do list for you!\n\n" +
                 "1. type 'list' and I list all that you said, along if it is completed\n" +
@@ -91,9 +124,12 @@ public class UserInterface {
         System.out.print(LOGO + startingMessage);
     }
 
+    /**
+     * Exit messsage when the chat bot terminates.
+     */
     public void exitMessage() {
         String exitMessage = "Pikachu: Pika byebye! THUNDERBOLT!\n";
-        System.out.print(thunderbolt + exitMessage);
+        System.out.print(THUNDERBOLT + exitMessage);
     }
 
 }
