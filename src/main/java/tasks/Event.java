@@ -21,23 +21,28 @@ public class Event extends Task {
             throw new InvalidTimeException("Do try again by adding a time where the event takes place.");
         } else {
             this.time = time;
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                this.formattedDateTime = LocalDateTime.parse(this.time, formatter);
-            } catch (DateTimeParseException e1) {
-                this.formattedDateTime = null;
-                try {
-                    this.formattedDate = LocalDate.parse(this.time);
-                } catch (DateTimeParseException e2) {
-                    this.formattedDate = null;
-                }
-            }
+            formatTime();
         }
     }
 
     public Event(String description, String time, boolean isDone) {
         super(description, isDone);
         this.time = time;
+        formatTime();
+    }
+
+    private void formatTime() {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            this.formattedDateTime = LocalDateTime.parse(this.time, formatter);
+        } catch (DateTimeParseException e1) {
+            this.formattedDateTime = null;
+            try {
+                this.formattedDate = LocalDate.parse(this.time);
+            } catch (DateTimeParseException e2) {
+                this.formattedDate = null;
+            }
+        }
     }
 
     @Override

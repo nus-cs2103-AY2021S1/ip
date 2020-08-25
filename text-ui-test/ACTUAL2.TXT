@@ -2,22 +2,34 @@ Hello! I'm Duke
 What can I do for you?
 Here are your saved tasks:
 1.[T][✓] go cycling
-2.[E][✓] watch horror movie with friends (at: 12am)
-3.[D][✘] do homework (by: Monday 6pm)
+2.[D][✓] learn how to swim (by: Oct 15 2020)
+3.[E][✘] watch horror movie with friends (at: 12am)
+4.[E][✘] discover north pole (at: Sep 20 2020)
+5.[D][✘] do homework (by: Monday 6pm)
+6.[D][✓] fix the car (by: Aug 27 2020, 06:00 PM)
+7.[E][✘] run in a stream (at: Aug 29 2020, 10:00 AM)
 Here are the tasks in your list:
 1.[T][✓] go cycling
-2.[E][✓] watch horror movie with friends (at: 12am)
-3.[D][✘] do homework (by: Monday 6pm)
+2.[D][✓] learn how to swim (by: Oct 15 2020)
+3.[E][✘] watch horror movie with friends (at: 12am)
+4.[E][✘] discover north pole (at: Sep 20 2020)
+5.[D][✘] do homework (by: Monday 6pm)
+6.[D][✓] fix the car (by: Aug 27 2020, 06:00 PM)
+7.[E][✘] run in a stream (at: Aug 29 2020, 10:00 AM)
 Nice! I've marked this task as done:
-[D][✓] do homework (by: Monday 6pm)
-Noted. I've removed this task:
 [E][✓] watch horror movie with friends (at: 12am)
-Now you have 2 tasks in the list.
+Noted. I've removed this task:
+[D][✓] learn how to swim (by: Oct 15 2020)
+Now you have 6 tasks in the list.
 Got it. I've added this task:
 [D][✘] finish project (by: thursday)
-Now you have 3 tasks in the list.
+Now you have 7 tasks in the list.
 Here are the tasks in your list:
 1.[T][✓] go cycling
-2.[D][✓] do homework (by: Monday 6pm)
-3.[D][✘] finish project (by: thursday)
+2.[E][✓] watch horror movie with friends (at: 12am)
+3.[E][✘] discover north pole (at: Sep 20 2020)
+4.[D][✘] do homework (by: Monday 6pm)
+5.[D][✓] fix the car (by: Aug 27 2020, 06:00 PM)
+6.[E][✘] run in a stream (at: Aug 29 2020, 10:00 AM)
+7.[D][✘] finish project (by: thursday)
 Bye. Hope to see you again soon!

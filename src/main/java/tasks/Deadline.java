@@ -21,23 +21,28 @@ public class Deadline extends Task {
             throw new InvalidTimeException("Do try again by adding a time you need to get this done by.");
         } else {
             this.endTime = endTime;
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                this.formattedDateTime = LocalDateTime.parse(this.endTime, formatter);
-            } catch (DateTimeParseException e1) {
-                this.formattedDateTime = null;
-                try {
-                    this.formattedDate = LocalDate.parse(this.endTime);
-                } catch (DateTimeParseException e2) {
-                    this.formattedDate = null;
-                }
-            }
+            formatEndTime();
         }
     }
 
     public Deadline(String description, String endTime, boolean isDone) {
         super(description, isDone);
         this.endTime = endTime;
+        formatEndTime();
+    }
+
+    private void formatEndTime() {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            this.formattedDateTime = LocalDateTime.parse(this.endTime, formatter);
+        } catch (DateTimeParseException e1) {
+            this.formattedDateTime = null;
+            try {
+                this.formattedDate = LocalDate.parse(this.endTime);
+            } catch (DateTimeParseException e2) {
+                this.formattedDate = null;
+            }
+        }
     }
 
     @Override
