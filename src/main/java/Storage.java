@@ -22,18 +22,8 @@ public class Storage {
         return tasks;
     }
 
-    public void done(int number) {
+    public void write(TaskList tasks) {
         // ...
-    }
-
-    public void delete(int number) {
-        // ...
-    }
-
-    public void addTask(Task task) throws IOException {
-        FileWriter writer = new FileWriter(file, true);
-        writer.write(task.toString() + System.lineSeparator());
-        writer.close();
     }
 
     private static Task getTask(String line) throws DukeException {
