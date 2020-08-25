@@ -13,5 +13,10 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# text files from testing
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+# codestyle checks
+checkstyle-8.2-all.jar
+cs2030_checks.xml
