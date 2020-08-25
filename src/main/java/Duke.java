@@ -1,30 +1,58 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Scanner;
 
 public class Duke {
 
     static String line = "_________________________________________________________________";
     static List<Task> list = new ArrayList<>();
-    //static int index = 0;
+    static File file = new File("data/duke.txt");
 
-    public static void greeting() {
+    // greet while read all data from duke.txt
+    public static void greeting() throws FileNotFoundException{
         String str = ("\t" + line + "\n"
                 + "\tHello! I'm Duke\n"
                 + "\tWhat can I do for you?\n"
                 + "\t" + line);
         System.out.println(str);
+
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()) {
+            String task = sc.nextLine();
+            String description = task.substring(7);
+            // check the 5th char is tick or cross
+            boolean isDone = task.charAt(4) == '\u2713';
+            Task newTask;
+
+            // check the second character is T/D/E
+            if (task.charAt(1) == 'T') {
+                newTask = new Todo(description, isDone);
+            } else if (task.charAt(1) == 'D') {
+                newTask = new Deadline(description, isDone);
+            } else {
+                newTask = new Event(description, isDone);
+            }
+            list.add(newTask);
+        }
+        sc.close();
     }
 
-    public static void bye(){
+    // re-write the file after saying bye
+    public static void bye() throws IOException{
         System.out.println("\t" + line + "\n"
                 + "\tBye. Hope to see you again soon!\n"
                 + "\t" + line);
+
+        FileWriter fw = new FileWriter(file);
+        for (Task task : list) {
+            fw.write(task + "\n");
+        }
+        fw.close();
     }
 
-    public static void addTask(Task task) {
-        //list[index] = task;
-        //index++;
+    public static void addTask(Task task) throws IOException {
         list.add(task);
         System.out.println("\t" + line + "\n\tGot it. I've added this task:\n"
                 + "\t  " + task + "\n"
@@ -50,6 +78,7 @@ public class Duke {
         return Integer.parseInt(str.split(" ")[1]);
     }
 
+    // num is the number in front of each task
     public static void markDone(int num) {
             list.get(num-1).markDone();
             System.out.println("\t" + line + "\n\tNice! I've marked this task as done:\n\t  "
@@ -65,11 +94,16 @@ public class Duke {
         list.remove(num-1);
     }
 
-
-
     public static void main(String[] args) {
-        greeting();
+        try {
+            greeting();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
         Scanner sc = new Scanner(System.in);
+        // inside the loop, must catch the error
+        // if not the exception will break the loop, thus system terminates
         while (true) {
             try {
                 String input = sc.nextLine().toLowerCase(); // everything in lower case
@@ -124,7 +158,7 @@ public class Duke {
                 } else { // when input cannot be recognised
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            } catch (DukeException e) { // catch all the exception I manually throwed in the try block
+            } catch (DukeException | IOException e) { // catch all the exception I manually throwed in the try block
                 System.err.println(e);
             }
         }
