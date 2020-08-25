@@ -4,6 +4,14 @@ public class TaskListManager {
 
     private ArrayList<Task> listOfTasks = new ArrayList<>();
 
+    TaskListManager(){
+        listOfTasks = new ArrayList<>();
+    }
+
+    public int findListSize(){
+     return listOfTasks.size();
+    }
+
     public void printTaskList(){
         System.out.println("Here are the tasks in your list:");
 
@@ -30,5 +38,23 @@ public class TaskListManager {
 
     }
 
+    public void addTask(Task task){
+
+        listOfTasks.add(task);
+
+        int taskSize = listOfTasks.size();
+
+        System.out.println("Got it. I've added this task:");
+
+        System.out.println(task.toString());
+
+        System.out.println("Now you have " + taskSize + " tasks in the list.");
+    }
+
+    public void markAsDone(int index){
+
+        listOfTasks.get(index - 1).markAsDone();
+
+    }
 
 }

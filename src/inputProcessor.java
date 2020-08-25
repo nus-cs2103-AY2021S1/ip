@@ -1,6 +1,4 @@
-import java.util.*;
-
-public class Duke {
+public class inputProcessor {
 
     static String logo = "      ____        _        \n"
             + "     |  _ \\ _   _| | _____ \n"
@@ -9,6 +7,9 @@ public class Duke {
             + "     |____/ \\__,_|_|\\_\\___|\n";
 
     static TaskListManager taskListManager;
+
+    public inputProcessor(){
+    }
 
     public static void greet(){
 
@@ -160,41 +161,5 @@ public class Duke {
 
     }
 
-    public static void main(String[] args) {
 
-        taskListManager = new TaskListManager();
-
-        greet();
-
-        Scanner input = new Scanner(System.in);
-
-        String command;
-
-        while(input.hasNext()){
-
-            try{
-                command = input.nextLine();
-
-                if(command.equals("bye")){
-
-                    exit();
-
-                    input.close();
-
-                    break;
-
-                }else{
-
-                    processCommand(command);
-
-                }
-            } catch(Exception e){
-
-                System.out.println(e.getMessage());
-
-            }
-
-        }
-
-    }
 }

@@ -1,5 +1,6 @@
 ../src/InvalidDeadlineException.java
 ../src/InvalidEventException.java
+../src/taskStorage.java
 ../src/Event.java
 ../src/Task.java
 ../src/InvalidRequestException.java
