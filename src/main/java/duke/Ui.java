@@ -18,8 +18,10 @@ class Ui {
                                     + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String CIAO = DIVIDER + "Spero di rivederti presto\n" + DIVIDER;
     private static final String CONVO_START = DIVIDER + LOGO + "\n" + GREETING + DIVIDER;
-    private  static final Controller CONTROLLER = Controller.initParser();
     private static final String END = "end|ciao|bye|close|exit|nights|shutdown";
+
+    private  static final Controller CONTROLLER = Controller.initController();
+
 
     /**
      * Starts the Duke application.
