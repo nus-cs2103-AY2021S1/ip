@@ -37,7 +37,6 @@ public class Storage {
         if (first == 'T') {
             des = "todo ";
             des += input.substring(8);
-
         } else {
             String temp = input.substring(8);
             String taskDescription = temp.substring(0, temp.indexOf(" |"));
@@ -137,6 +136,5 @@ public class Storage {
             System.out.println("Oops, something went wrong: " + e.getMessage());
         }
     }
-
 }
 

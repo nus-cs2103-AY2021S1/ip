@@ -6,8 +6,6 @@ import java.util.Scanner;
  * Represents a class that deals with interactions with the user
  */
 public class Ui {
-
-
     public void showLoadingError() {
         System.out.println("Something went wrong");
     }
