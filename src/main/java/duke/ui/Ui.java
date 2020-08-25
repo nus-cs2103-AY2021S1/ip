@@ -122,6 +122,10 @@ public class Ui {
         showLine();
     }
 
+    /** Shows the list of tasks that contain the keyword in Duke format.
+     *
+     * @param matchingTasks The list of tasks that contain the keyword.
+     */
     public void formatFindTasks(ArrayList<Task> matchingTasks) {
         showLine();
         if (!matchingTasks.isEmpty()) {
