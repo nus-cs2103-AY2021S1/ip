@@ -12,4 +12,13 @@ public abstract class Command {
     boolean isExitProgram() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        String result = "";
+        for (String str : parsedCommand) {
+            result += str;
+        }
+        return result;
+    }
 }
