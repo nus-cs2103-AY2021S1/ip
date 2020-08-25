@@ -142,7 +142,6 @@ public class Duke {
                             }
                             break;
 
-
                         case "delete":
                             description = s.nextLine();
                             if (!(description.length() > 0)) {
