@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.TodoTask;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -44,7 +52,7 @@ public class Storage {
         }
     }
 
-    void writeToFile(TaskList tasks) throws DukeException {
+    public void writeToFile(TaskList tasks) throws DukeException {
         FileWriter fw = null;
         try {
             fw = new FileWriter(filePath);

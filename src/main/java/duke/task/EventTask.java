@@ -1,11 +1,15 @@
+package duke.task;
+
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class EventTask extends Task {
-    LocalDateTime timing;
+    public LocalDateTime timing;
 
-    EventTask(String description, String timing) throws DukeException {
+    public EventTask(String description, String timing) throws DukeException {
         super(description);
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");

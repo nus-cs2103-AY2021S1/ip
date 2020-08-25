@@ -1,3 +1,12 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.exception.InvalidIndexException;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.TodoTask;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,14 +49,14 @@ public class TaskList {
         }
     }
 
-    void deleteTask (int index) throws InvalidIndexException {
+    public void deleteTask(int index) throws InvalidIndexException {
         if (index > tasks.size() || index < 1) {
             throw new InvalidIndexException("☹ OOPS!!! There is no such task.");
         }
         tasks.remove(index - 1);
     }
 
-    void completeTask(int index) throws InvalidIndexException {
+    public void completeTask(int index) throws InvalidIndexException {
         if (index > tasks.size() || index < 1) {
             throw new InvalidIndexException("☹ OOPS!!! There is no such task.");
         }
@@ -55,11 +64,11 @@ public class TaskList {
         completedTask.markAsDone();
     }
 
-    int size() {
+    public int size() {
         return tasks.size();
     }
 
-    Task get(int i) {
+    public Task get(int i) {
         return tasks.get(i);
     }
 

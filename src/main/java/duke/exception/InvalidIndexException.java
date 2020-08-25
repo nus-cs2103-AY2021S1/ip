@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class InvalidIndexException extends DukeException {
-    InvalidIndexException(String message) {
+    public InvalidIndexException(String message) {
         super(message);
     }
 

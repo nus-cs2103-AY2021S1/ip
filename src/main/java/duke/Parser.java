@@ -1,3 +1,9 @@
+package duke;
+
+import duke.command.*;
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidInputException;
+
 public class Parser {
     static Command parse (String fullCommand) throws InvalidInputException, InvalidCommandException {
         String[] commandArr = fullCommand.trim().split(" ", 2);

@@ -1,3 +1,8 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+
 public class Duke {
 
 	private static String DATA_PATHNAME = "data/duke.txt";
