@@ -1,0 +1,2 @@
+E|1|read book|Aug 4th 3-4pm
+T|0|return book

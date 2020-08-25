@@ -1,78 +1,127 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Luke {
     public static void main(String[] args) {
+        File tlFile = new File("./data/", "luke.txt");
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<>();
-        System.out.printf("Luke:\n\tHey there! I'm Luke.\n\tPlease tell me what to add to your list.\nYou:\n\t");
+        ArrayList<Task> taskList = new ArrayList<>();
+        readTasks(taskList, tlFile);
+        System.out.printf("Luke:\n\tHey there! I'm Luke.\n\tPlease tell me what to add to your list.\nYou:\n");
         while (true) {
             String input = sc.nextLine().toLowerCase();
             if (Pattern.matches("^(todo) *.*$", input)) {
                 try {
-                    Task newTodo = createTodo(input);
-                    list.add(newTodo);
-                    String number = countTasks(list);
-                    System.out.printf("Luke:\n\tThe following task has been successfully added.\n\t\t%s\n\tNow you have %s in your list.\nYou:\n\t", newTodo, number);
+                    Todo newTodo = createTodo(input);
+                    writeTasks(taskList, tlFile, newTodo);
                 } catch (EmptyTodoException e) {
-                    System.out.printf("Luke:%s\nYou:\n\t", e.getMessage());
+                    System.out.printf("Luke:%s\nYou:\n", e.getMessage());
                 }
             } else if (Pattern.matches("^(deadline) *.*$", input)){
                 try {
                     Deadline newDeadline = createDeadline(input);
-                    list.add(newDeadline);
-                    String number = countTasks(list);
-                    System.out.printf("Luke:\n\tThe following task has been successfully added.\n\t\t%s\n\tNow you have %s in your list.\nYou:\n\t", newDeadline, number);
+                    writeTasks(taskList, tlFile, newDeadline);
                 } catch (EmptyDeadlineException e) {
-                    System.out.printf("Luke:%s\nYou:\n\t", e.getMessage());
+                    System.out.printf("Luke:%s\nYou:\n", e.getMessage());
                 } catch (InvalidDeadlineException e) {
-                    System.out.printf("Luke:%s\nYou:\n\t", e.getMessage());
+                    System.out.printf("Luke:%s\nYou:\n", e.getMessage());
                 }
             } else if (Pattern.matches("^(event) *.*$", input)) {
                 try {
                     Event newEvent = createEvent(input);
-                    list.add(newEvent);
-                    String number = countTasks(list);
-                    System.out.printf("Luke:\n\tThe following task has been successfully added.\n\t\t%s\n\tNow you have %s in your list.\nYou:\n\t", newEvent, number);
+                    writeTasks(taskList, tlFile, newEvent);
                 } catch (EmptyEventException e) {
-                    System.out.printf("Luke:%s\nYou:\n\t", e.getMessage());
+                    System.out.printf("Luke:%s\nYou:\n", e.getMessage());
                 } catch (InvalidEventException e) {
-                    System.out.printf("Luke:%s\nYou:\n\t", e.getMessage());
+                    System.out.printf("Luke:%s\nYou:\n", e.getMessage());
                 }
             } else if (input.equals("list")) {
-                if (list.size() < 1) {
-                    System.out.printf("Luke:\n\tYou don't have any tasks in your list :(\nYou:\n\t");
+                if (taskList.size() < 1) {
+                    System.out.printf("Luke:\n\tYou don't have any tasks in your list :(\nYou:\n");
                 } else {
                     String todoSummary = "Luke:\n\tHere are the tasks in your list.";
-                    for (int i = 0; i < list.size(); i++) {
-                        Task current = list.get(i);
+                    for (int i = 0; i < taskList.size(); i++) {
+                        Task current = taskList.get(i);
                         todoSummary += String.format("\n\t%d.%s", i + 1, current);
                     }
-                    System.out.printf("%s\nYou:\n\t", todoSummary);
+                    System.out.printf("%s\nYou:\n", todoSummary);
                 }
             } else if (Pattern.matches("^(done) *[0-9]*$", input)) {
                try {
-                   completeTask(input, list);
+                   completeTask(input, taskList);
                } catch (InvalidDoneException e) {
-                   System.out.printf("Luke:%s\nYou:\n\t", e.getMessage());
+                   System.out.printf("Luke:%s\nYou:\n", e.getMessage());
                } catch (DoneIndexOutofboundsException e) {
-                   System.out.printf("Luke:%s\nYou:\n\t", e.getMessage());
+                   System.out.printf("Luke:%s\nYou:\n", e.getMessage());
                }
             } else if (Pattern.matches("^(delete) *[0-9]*$", input)) {
                 try {
-                    deleteTask(input, list);
+                    deleteTask(input, taskList, tlFile);
                 } catch (InvalidDeleteException e) {
-                    System.out.printf("Luke:%s\nYou:\n\t", e.getMessage());
+                    System.out.printf("Luke:%s\nYou:\n", e.getMessage());
                 } catch (DeleteIndexOutofboundsException e) {
-                    System.out.printf("Luke:%s\nYou:\n\t", e.getMessage());
+                    System.out.printf("Luke:%s\nYou:\n", e.getMessage());
                 }
             } else if (input.equals("bye")) {
                 System.out.println("Luke:\n\tOh, are you leaving? Hope to see you soon!");
                 break;
             } else {
-                System.out.printf("Luke:\n\tSorry I do not understand :( Please try another command.\nYou:\n\t");
+                System.out.printf("Luke:\n\tSorry I do not understand :( Please try another command.\nYou:\n");
             }
+        }
+    }
+
+    private static void readTasks(ArrayList<Task> arrayList, File file) {
+        // read tasks from hard disk (./data/luke.txt)
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String readLine = null;
+            while((readLine = br.readLine()) != null){
+                String[] readEach = readLine.split("\\|");
+                Task task = null;
+                if (readEach[0].equals("T")) {
+                    task = new Todo(readEach[2]);
+                } else if (readEach[0].equals("D")) {
+                    task = new Deadline(readEach[2], readEach[3]);
+                } else if (readEach[0].equals("E")) {
+                    task = new Event(readEach[2], readEach[3]);
+                }
+                if (readEach[1].equals("1")) {
+                    task.markAsDone();
+                }
+                arrayList.add(task);
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    private static void writeTasks(ArrayList<Task> arrayList, File file, Task task) {
+        // add task to the list
+        arrayList.add(task);
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
+            // write task to hard disk (./data/luke.txt)
+            String newTask = "";
+            String stat = "";
+            if (task.isDone) {
+                stat = "1|";
+            } else {
+                stat += "0|";
+            }
+            if (task instanceof Todo) {
+                newTask += "T|" + stat + task.getDescription();
+            } else if (task instanceof Deadline) {
+                newTask += "T|" + stat  + task.getDescription() + ((Deadline) task).getBy();
+            } else if (task instanceof Event) {
+                newTask += "T|" + stat  + task.getDescription() + ((Event) task).getAt();
+            }
+            bw.newLine();
+            bw.write(newTask);
+            bw.flush();
+            printAddSuccess(arrayList, task);
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 
@@ -83,12 +132,17 @@ public class Luke {
                 : String.format("%d tasks", n);
     }
 
-    private static Task createTodo(String input) throws EmptyTodoException {
+    private static void printAddSuccess(ArrayList<Task> arrayList, Task task) {
+        String number = countTasks(arrayList);
+        System.out.printf("Luke:\n\tThe following task has been successfully added.\n\t\t%s\n\tNow you have %s in your list.\nYou:\n", task, number);
+    }
+
+    private static Todo createTodo(String input) throws EmptyTodoException {
         String todo = input.replaceAll("todo ", "");
         if (input.equals("todo") || input.equals("todo ")) {
             throw new EmptyTodoException("\n\tThe description of todo cannot be empty.\n\tPlease make sure you follow the correct format.");
         } else {
-            return new Task(todo);
+            return new Todo(todo);
         }
     }
 
@@ -125,11 +179,11 @@ public class Luke {
         } else {
             Task done = arrayList.get(index);
             done.markAsDone();
-            System.out.printf("Luke:\n\tThe following task has successfully been marked as done!\n\t\t%s\nYou:\n\t", done);
+            System.out.printf("Luke:\n\tThe following task has successfully been marked as done!\n\t\t%s\nYou:\n", done);
         }
     }
 
-    private static void deleteTask(String input, ArrayList<Task> arrayList) throws InvalidDeleteException, DeleteIndexOutofboundsException {
+    private static void deleteTask(String input, ArrayList<Task> arrayList, File file) throws InvalidDeleteException, DeleteIndexOutofboundsException {
         if (input.equals("delete") || input.equals("delete ")) {
             throw new InvalidDeleteException("\n\tThe index of delete cannot be empty.\n\tPlease make sure you follow the correct format.");
         }
@@ -140,7 +194,26 @@ public class Luke {
         } else {
             Task delete = arrayList.get(index);
             arrayList.remove(index);
-            System.out.printf("Luke:\n\tThe following task has successfully been deleted!\n\t\t%s\nYou:\n\t", delete);
+            File tempFile = new File("./data/", "temp.txt");
+            try (BufferedReader br = new BufferedReader(new FileReader(file));
+                 BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile))) {
+                String readLine = "";
+                int counter = 0;
+                while((readLine = br.readLine()) != null) {
+                    // remove task from hard disk (./data/luke.txt)
+                    counter++;
+                    if (counter == index + 1) {
+                        continue;
+                    }
+                    bw.write(readLine);
+                    bw.newLine();
+                }
+                bw.flush();
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+            tempFile.renameTo(file);
+            System.out.printf("Luke:\n\tThe following task has successfully been deleted!\n\t\t%s\nYou:\n", delete);
         }
     }
 }
