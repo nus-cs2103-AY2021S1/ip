@@ -31,32 +31,32 @@ public class DataStorage {
                 Task task;
                 boolean completed = Objects.equals(parts[1], "1");
                 switch (parts[0]) {
-                    case "T": {
-                        task = new Todo(completed, parts[2]);
-                        break;
-                    }
-                    case "E": {
-                        LocalDate time = LocalDate.parse(parts[3]);
-                        task = new Event(completed, parts[2], time);
-                        break;
-                    }
-                    case "D": {
-                        LocalDate time = LocalDate.parse(parts[3]);
-                        task = new Deadline(completed, parts[2], time);
-                        break;
-                    }
-                    default: {
-                        throw new CorruptedDataException();
-                    }
+                case "T": {
+                    task = new Todo(completed, parts[2]);
+                    break;
+                }
+                case "E": {
+                    LocalDate time = LocalDate.parse(parts[3]);
+                    task = new Event(completed, parts[2], time);
+                    break;
+                }
+                case "D": {
+                    LocalDate time = LocalDate.parse(parts[3]);
+                    task = new Deadline(completed, parts[2], time);
+                    break;
+                }
+                default: {
+                    throw new CorruptedDataException();
+                }
                 }
                 tasks.add(task);
             }
         } catch (SecurityException | IOException err) {
             System.err.println("Warning: unable to read data storage. "
-                + "Your task list is not loaded.");
+                    + "Your task list is not loaded.");
         } catch (DateTimeException | CorruptedDataException | IndexOutOfBoundsException err) {
             System.err.println("Warning: Corrupted data storage. "
-                + "Your task list may not be fully loaded.");
+                    + "Your task list may not be fully loaded.");
         }
         return tasks;
     }

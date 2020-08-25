@@ -43,11 +43,11 @@ public abstract class Task {
     public String toString() {
         String timeMarker = getTimeMarker();
         if (timeMarker != null) {
-            return String.format("[%s][%s] %s (%s: %s)",
-                getTaskType(), getCompleteMark(), getContent(), timeMarker, getTime());
+            return String.format("[%s][%s] %s (%s: %s)", getTaskType(), 
+                    getCompleteMark(), getContent(), timeMarker, getTime());
         } else {
-            return String.format("[%s][%s] %s",
-                getTaskType(), getCompleteMark(), getContent());
+            return String.format("[%s][%s] %s", getTaskType(),
+                    getCompleteMark(), getContent());
         }
     }
 }
