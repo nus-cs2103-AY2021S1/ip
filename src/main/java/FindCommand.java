@@ -1,18 +1,19 @@
-public class CheckCommand extends Command {
+public class FindCommand extends Command {
     private final String target;
 
-    public CheckCommand(String detail) {
-        this.target = detail;
+    public FindCommand(String detail) {
+        this.target = detail.trim();
     }
 
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) {
         boolean hasFound = false;
+
         int count = 1;
         for (Task task : list.getList()) {
-            if (task.getDate().equals(this.target)) {
+            if (task.getName().contains(this.target)) {
                 if (!hasFound) {
-                    ui.showCheck();
+                    ui.showFind();
                     hasFound = true;
                 }
                 ui.showTask(count, task);
