@@ -104,6 +104,49 @@ public class TaskList {
         return output.toString();
     }
 
+    /**
+     * Returns all the {@link Task}s that have not been completed.
+     * @return A formatted String of all pending {@link Task}s.
+     */
+    public String showPendingTasks() {
+        List<Task> pendingTasks = list.stream().filter(task -> !task.isTaskDone()).collect(Collectors.toList());
+        if (pendingTasks.size() == 0) {
+            return "Congratulations! You have completed all your tasks!";
+        }
+        StringBuilder output = new StringBuilder();
+        output.append("Here are the tasks that are pending: \n");
+
+        for (int i = 0; i < pendingTasks.size(); i++) {
+            output.append(String.format("\t %d. %s" + (i == pendingTasks.size() - 1 ? "" : "\n"), i + 1, pendingTasks.get(i)));
+        }
+
+        return output.toString();
+    }
+
+    /**
+     * Returns all the {@link Task}s that have been completed.
+     * @return A formatted String of all completed {@link Task}s.
+     */
+    public String showCompletedTasks() {
+        List<Task> completedTasks = list.stream().filter(Task::isTaskDone).collect(Collectors.toList());
+        if (completedTasks.size() == 0) {
+            return "☹ OOPS!!! You have not completed any task yet.";
+        }
+        StringBuilder output = new StringBuilder();
+        output.append("Here are the tasks that have been completed: \n");
+
+        for (int i = 0; i < completedTasks.size(); i++) {
+            output.append(String.format("\t %d. %s" + (i == completedTasks.size() - 1 ? "" : "\n"), i + 1, completedTasks.get(i)));
+        }
+
+        return output.toString();
+    }
+
+    /**
+     * Returns all the {@link Task}s that contains the keyword.
+     * @param keyword A String to search for.
+     * @return A formatted String of {@link Task}s with description that includes this keyword.
+     */
     public String showMatchingTasks(String keyword) {
         List<Task> matchingTasks = list.stream().filter(task -> task.includesKeyword(keyword)).collect(Collectors.toList());
         if (matchingTasks.size() == 1) {

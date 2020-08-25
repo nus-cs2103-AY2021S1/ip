@@ -28,6 +28,10 @@ public class Parser {
             return new ByeCommand();
         } else if (fullCommand.equals(CommandType.LIST.getType())) {
             return new ListCommand();
+        } else if (fullCommand.equals(CommandType.PENDING.getType())) {
+            return new PendingCommand();
+        } else if (fullCommand.equals(CommandType.COMPLETED.getType())) {
+            return new CompletedCommand();
         } else if (fullCommand.equals(CommandType.SHOW.getType())) {
             throw new InvalidArgumentException("☹ OOPS!!! The show command requires a date in yyyy-mm-dd.");
         } else if (fullCommand.equals(CommandType.FIND.getType())) {
