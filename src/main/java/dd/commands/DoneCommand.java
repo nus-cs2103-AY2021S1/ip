@@ -1,5 +1,6 @@
 package dd.commands;
 
+import dd.exception.DukeException;
 import dd.storage.DataStorage;
 import dd.tasks.TaskList;
 import dd.ui.Ui;
@@ -11,7 +12,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, DataStorage ds) {
+    public void execute(TaskList tasks, Ui ui, DataStorage ds) throws DukeException {
         int taskNum = 0;
 
         try {
@@ -21,11 +22,11 @@ public class DoneCommand extends Command {
         }
 
         if (taskNum > 0 && taskNum <= tasks.getTaskSize()) {
-            tasks.getTaskList().get(taskNum - 1).markAsDone();
-            System.out.println("Wow!! Good job!!\n  " + tasks.getTaskList().get(taskNum - 1));
+            tasks.getTask(taskNum - 1).markAsDone();
+            ui.printDoneTask(tasks.getTask(taskNum - 1));
         }
         else {
-            System.out.println("hmm.. I don't think thats a valid task, try again?");
+            throw new DukeException().invalidTaskNumber();
         }
     }
 

@@ -1,5 +1,6 @@
 package dd.commands;
 
+import dd.exception.DukeException;
 import dd.storage.DataStorage;
 import dd.tasks.TaskList;
 import dd.ui.Ui;
@@ -11,7 +12,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, DataStorage ds) {
+    public void execute(TaskList tasks, Ui ui, DataStorage ds) throws DukeException {
         int delNum = 0;
 
         try {
@@ -21,13 +22,13 @@ public class DeleteCommand extends Command {
         }
 
         if (delNum > 0 && delNum <= tasks.getTaskSize()) {
-            System.out.println("Alright! I've deleted the task:\n  " + tasks.getTask(delNum-1));
+            ui.printDeletedTask(tasks.getTask(delNum-1));
             tasks.deleteTask(delNum-1);
 
-            System.out.println("You now have " + tasks.getTaskSize() + " task(s) in your list!");
+            ui.printTasksSize(tasks.getTaskSize());
         }
         else {
-            System.out.println("hmm.. I don't think thats a valid task, try again?");
+            throw new DukeException().invalidTaskNumber();
         }
     }
 

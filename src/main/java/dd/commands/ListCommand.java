@@ -1,6 +1,7 @@
 package dd.commands;
 
 import dd.datetimehandler.DateTimeHandler;
+import dd.exception.DukeException;
 import dd.storage.DataStorage;
 import dd.tasks.Task;
 import dd.tasks.TaskList;
@@ -20,13 +21,14 @@ public class ListCommand extends Command {
 
     public void list(ArrayList<Task> tasks) {
         int curr = 0;
+
         while (curr < tasks.size()) {
-            System.out.println((curr + 1) + ". " + tasks.get(curr));
+            ui.printTask(curr + 1, tasks.get(curr));
             curr += 1;
         }
     }
 
-    public void checkDate() {
+    public void checkDate() throws DukeException {
         boolean validInput = dth.checkInput(item);
 
         if (validInput && item.length() == 10) {
@@ -34,25 +36,25 @@ public class ListCommand extends Command {
             ArrayList<Task> tasksOnDate = dth.filterDate(item, tasks.getTaskList());
 
             if (tasksOnDate.isEmpty()) {
-                System.out.println("No tasks found on " + item + "!");
+                throw new DukeException().emptyCheckDate(item);
             }
             else {
-                System.out.println("Here is your list of task(s) on " + item + ":");
+                ui.startCheckDate(item);
                 list(tasksOnDate);
             }
         }
         else {
             // not valid date
-            System.out.println("I don't understand :( Please input date as DD-MM-YYYY\n"
-                    + "Example: 31-12-2020");
+            throw new DukeException().invalidCheckDate();
         }
     }
 
     @Override
-    public void execute(TaskList taskList, Ui u, DataStorage ds) {
+    public void execute(TaskList taskList, Ui u, DataStorage ds) throws DukeException {
         tasks = taskList;
         ui = u;
         this.dth = new DateTimeHandler();
+
         if (command.equals("list")) {
             list(tasks.getTaskList());
         }

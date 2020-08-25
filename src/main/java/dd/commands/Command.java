@@ -1,5 +1,6 @@
 package dd.commands;
 
+import dd.exception.DukeException;
 import dd.storage.DataStorage;
 import dd.tasks.TaskList;
 import dd.ui.Ui;
@@ -13,6 +14,6 @@ public abstract class Command {
         this.item = item;
     }
 
-    public abstract void execute(TaskList taskList, Ui u, DataStorage ds);
+    public abstract void execute(TaskList taskList, Ui u, DataStorage ds) throws DukeException;
     public abstract boolean isExit();
 }

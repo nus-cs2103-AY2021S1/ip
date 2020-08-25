@@ -1,5 +1,6 @@
 package dd.commands;
 
+import dd.exception.DukeException;
 import dd.storage.DataStorage;
 import dd.tasks.TaskList;
 import dd.ui.Ui;
@@ -11,9 +12,8 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui u, DataStorage ds) {
-        System.out.println("You're leaving? Bye :( Come back soon!"
-                + "\n_________________________________________");
+    public void execute(TaskList tasks, Ui u, DataStorage ds) throws DukeException {
+        u.exit();
         ds.writeData(tasks.getTaskList());
     }
 

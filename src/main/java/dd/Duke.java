@@ -1,6 +1,7 @@
 package dd;
 
 import dd.commands.Command;
+import dd.exception.DukeException;
 import dd.parser.Parser;
 import dd.storage.DataStorage;
 import dd.tasks.TaskList;
@@ -9,40 +10,40 @@ import dd.ui.Ui;
 import java.io.IOException;
 
 public class Duke {
-    private final DataStorage ds;
-    private final Ui ui;
+
+    private DataStorage ds;
+    private Ui ui;
     private TaskList tasks;
 
     public Duke() {
         this.ds = new DataStorage();
         this.ui = new Ui();
+
         try {
             tasks = new TaskList(ds.loadData());
         } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
     public void run() {
         ui.greeting();
-
         boolean isExit = false;
 
         while (!isExit) {
-            String input = ui.readInput();
-            Command c = Parser.parse(input);
-
-            if (c != null) {
+            try {
+                String input = ui.readInput();
+                Command c = Parser.parse(input);
                 c.execute(tasks, ui, ds);
                 isExit = c.isExit();
             }
-            else {
-                // not valid command
-                System.out.println("Sorry what?");
+            catch (DukeException e){
+                ui.showError(e.getMessage());
             }
-            ui.printLine();
+            finally {
+                ui.printLine();
+            }
         }
     }
 

@@ -1,6 +1,8 @@
 package dd.storage;
 
+import dd.exception.DukeException;
 import dd.tasks.Task;
+import dd.ui.Ui;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,18 +11,22 @@ import java.util.ArrayList;
 
 public class DataStorage {
 
+    Ui ui = new Ui();
+
     public File loadData() throws IOException {
-        File f = new File("../src/data/duke.txt"); // create a File for the given file path
+        File f = new File("./src/data/duke.txt"); // create a File for the given file path
+
         if (f.createNewFile()) {
-            System.out.println("New data created: " + f.getName());
-        } else {
-            System.out.println("Data already exists.");
+            ui.dataCreate(f.getName());
+        }
+        else {
+            ui.dataExists();
         }
         return f;
     }
 
-    public void convertData(ArrayList<Task> taskList) throws IOException {
-        FileWriter fw = new FileWriter("../src/data/duke.txt");
+    public void convertData(ArrayList<Task> taskList) throws IOException, RuntimeException {
+        FileWriter fw = new FileWriter("./src/data/duke.txt");
         String input = taskList.get(0).saveString();
         taskList.remove(0);
 
@@ -33,13 +39,16 @@ public class DataStorage {
         fw.close();
     }
 
-    public void writeData(ArrayList<Task> taskList) {
+    public void writeData(ArrayList<Task> taskList) throws DukeException {
         try {
             convertData(taskList);
-            System.out.println("Updated your data!");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            ui.updateData();
+        }
+        catch (IOException e) {
+            ui.showError("Error writing to file.");
+        }
+        catch (RuntimeException e) {
+            throw new DukeException().noData();
         }
     }
 }
