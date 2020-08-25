@@ -1,11 +1,19 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class EventCommand extends TaskCreationCommand {
-    final static String COMMAND = "event";
-    final static String TIME_SPECIFIER = "/at";
+    public final static String COMMAND = "event";
+    public final static String TIME_SPECIFIER = "/at";
     
     private String description;
     private String time;
     
-    EventCommand(String description, String time) {
+    public EventCommand(String description, String time) {
         this.description = description;
         this.time = time;
     }

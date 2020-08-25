@@ -1,14 +1,16 @@
+package duke.task;
+
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
 public class TaskList {
     ArrayList<Task> tasks;
     
-    TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;    
     }
     
-    TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<>();
     }
     

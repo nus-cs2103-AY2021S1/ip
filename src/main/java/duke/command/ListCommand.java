@@ -1,7 +1,13 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class ListCommand extends Command {
-    final static String COMMAND = "list";
+    public final static String COMMAND = "list";
     
-    ListCommand() {
+    public ListCommand() {
         super();
     }
 

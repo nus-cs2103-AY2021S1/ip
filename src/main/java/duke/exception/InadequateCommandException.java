@@ -1,8 +1,10 @@
-class InadequateCommandException extends DukeException {
+package duke.exception;
+
+public class InadequateCommandException extends DukeException {
     private String typeOfTask;
     private String[] missingSections;
 
-    InadequateCommandException(String typeOfTask, String[] missingSections) {
+    public InadequateCommandException(String typeOfTask, String[] missingSections) {
         super("");
         this.typeOfTask = typeOfTask;
         this.missingSections = missingSections;

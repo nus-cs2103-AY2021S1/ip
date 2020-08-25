@@ -1,9 +1,16 @@
+package duke.command;
+
+import duke.exception.InvalidIndexException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class DoneCommand extends Command{
-    final static String COMMAND = "done";
+    public final static String COMMAND = "done";
     
     private int index;
 
-    DoneCommand(String string) throws InvalidIndexException {
+    public DoneCommand(String string) throws InvalidIndexException {
         try {
             index = Integer.parseInt(string) - 1;
         } catch (NumberFormatException e) {

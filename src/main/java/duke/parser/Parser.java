@@ -1,3 +1,11 @@
+package duke.parser;
+
+
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.exception.InadequateCommandException;
+import duke.exception.InvalidIndexException;
+
 public class Parser {
     public static Command parse(String fullCommand) throws DukeException { 
         String[] splitted = fullCommand.split("\\s+", 2);

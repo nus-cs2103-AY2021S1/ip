@@ -1,7 +1,13 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class ExitCommand extends Command{
-    final static String COMMAND = "bye";
+    public final static String COMMAND = "bye";
     
-    ExitCommand() {
+    public ExitCommand() {
         super();
     }
     

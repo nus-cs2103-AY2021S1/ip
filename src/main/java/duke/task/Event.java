@@ -1,5 +1,8 @@
-import java.time.LocalDate;
+package duke.task;
 
+import duke.parser.DateParser;
+
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import java.util.Optional;
@@ -10,7 +13,7 @@ public class Event extends Task {
     private LocalDate endTime;
     private boolean isInDateFormat;
 
-    Event(String description, String eventTime) {
+    public Event(String description, String eventTime) {
         super(description);
         this.eventTime = eventTime;
         isInDateFormat = false;

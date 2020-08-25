@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.parser.DateParser;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -8,7 +12,7 @@ public class Deadline extends Task {
     private LocalDate dueTime;
     private boolean isInDateFormat;
 
-    Deadline(String description, String dueTime) {
+    public Deadline(String description, String dueTime) {
         super(description);
         this.dueTimeStr = dueTime;
         Optional<LocalDate> optDate = DateParser.parse(dueTime);
