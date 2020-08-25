@@ -1,5 +1,13 @@
+/**
+ * Represents the Parser class, that interprets user input commands.
+ */
 public class Parser {
 
+    /**
+     * Interprets user input text, into understandable commands.
+     * @param command Commands input by user.
+     * @return Command understood by Chatbot.
+     */
     protected Command commandHandler(String command) {
         try {
             if (command.equals("bye")) {

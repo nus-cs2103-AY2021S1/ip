@@ -7,8 +7,15 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class that handles all the hard-disk storage of the Tasklist.
+ */
 public class Storage {
 
+    /**
+     * Loads an existing stored list of tasks (if any).
+     * @return ArrayList of Tasks.
+     */
     public ArrayList<Task> load() {
         try {
             String root = System.getProperty("user.dir");
@@ -42,7 +49,13 @@ public class Storage {
 
     }
 
-    public File checkAndCreateFile(String root) {
+    /**
+     * Checks and identifies storage file (if available), or else
+     * creates a new and empty file.
+     * @param root User project root path.
+     * @return Storage file.
+     */
+    protected File checkAndCreateFile(String root) {
         try {
             boolean directoryExists = Files.exists(Paths.get(root, "data"));
             boolean fileExists = Files.exists(Paths.get(root, "data", "dukeTaskList.txt"));
