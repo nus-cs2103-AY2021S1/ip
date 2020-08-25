@@ -28,15 +28,17 @@ public class ToDo extends Task {
         if (code.charAt(0) == 'T') {
             String[] content = code.split("\\|", 3);
             if (content.length != 3) {
-                throw new Error("Your data is corrupt.");
+                throw new DukeException("There are some holes in my memory...");
             }
             ToDo newToDo = new ToDo(content[2]);
             if (content[1].equals("Y")) {
                 newToDo.setCompleted();
+            } else if (!content[1].equals("N")) {
+                throw new DukeException("There are some holes in my memory...");
             }
             return newToDo;
         } else {
-            throw new DukeException("Unable to decode duke.task.ToDo.");
+            throw new DukeException("Something doesn't seem right...");
         }
     }
 }
