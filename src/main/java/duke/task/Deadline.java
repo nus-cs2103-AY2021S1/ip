@@ -1,16 +1,18 @@
 package duke.task;
 
-public class Deadline extends Task {
-    private String by;
+import java.util.Date;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    private Date date;
+
+    public Deadline(String description, Date date) {
         super(description);
-        this.by = by;
+        this.date = date;
     }
 
     @Override
     public String displayString() {
-        return super.displayString() + String.format(" (by: %s)", by);
+        return super.displayString() + String.format(" (by: %s)", DateHelper.formatDate(date));
     }
 
     @Override

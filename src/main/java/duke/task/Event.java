@@ -1,16 +1,20 @@
 package duke.task;
 
-public class Event extends Task {
-    private String at;
+import java.util.Date;
 
-    public Event(String description, String at) {
+public class Event extends Task {
+    private Date start;
+    private Date end;
+
+    public Event(String description, Date start, Date end) {
         super(description);
-        this.at = at;
+        this.start = start;
+        this.end = end;
     }
 
     @Override
     public String displayString() {
-        return super.displayString() + String.format(" (at: %s)", at);
+        return super.displayString() + String.format(" (at: %s)", DateHelper.formatDateRange(start, end));
     }
 
     @Override
