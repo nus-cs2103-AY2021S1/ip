@@ -10,7 +10,8 @@ import duke.dependencies.executor.Executor;
 
 /**
  * Parser class which parses the given input. Checks if any command is given
- * and command is valid.
+ * and command is valid. Also validates the format of the dates given and ensures/enforces user compliance to
+ * input formats before parsing into an Executable
  */
 public class Parser {
     /** Object for executing the commands. */
@@ -24,7 +25,7 @@ public class Parser {
     /**
      * Initializer for Parser.
      *
-     * @return the Parser
+     * @return The Parser object.
      */
     public static Parser initParser() {
         return new Parser();
@@ -35,7 +36,7 @@ public class Parser {
      * and calls an executor to execute a valid command.
      *
      * @param command
-     * @return reply: what was done
+     * @return Reply: what was done by the execution of input.
      */
     public String parseAndExec(String command) {
         Checker checker = null;

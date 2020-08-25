@@ -21,10 +21,16 @@ class Ui {
     private  static final Parser PARSER = Parser.initParser();
     private static final String END = "end|ciao|bye|close|exit|nights|shutdown";
 
+    /**
+     * Starts the Duke application.
+     */
     public void start() {
         System.out.println(CONVO_START);
     }
 
+    /**
+     * Stops the Duke application.
+     */
     public void end() {
         System.out.println(CIAO);
     }

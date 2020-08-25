@@ -9,6 +9,11 @@ import duke.dependencies.task.Task;
 
 import static duke.dependencies.executable.CommandType.*;
 
+/**
+ * Class that enables the logical manipulation of given Executable. Interprets the type of Command and
+ * carries out the command on the associated Task and the task list of the user.
+ *
+ */
 public class Executor {
 
     private static final TaskList storage = TaskList.initStorage();
@@ -23,23 +28,19 @@ public class Executor {
     private Executor() {}
 
     /**
-     * Initializer for the executor.
+     * Initializer for the executor. Returns the Executor object.
      *
-     * @return
+     * @return Executor object.
      */
     public static Executor initExecutor() {
         return new Executor();
     }
 
-    private void setState(CommandType c) {
-        this.commandState = c;
-    }
-
     /**
-     * Executed the given command.
+     * Executes the given command and returns with a reply indicating the state of completion of given Executable.
      *
-     * @param executable
-     * @return string specifying what happened/what was done (no newline character at end of reply)
+     * @param executable The command to be executed.
+     * @return String specifying what happened/what was done (no newline character at end of reply).
      */
     public String receiveAndExec(Executable executable) {
         // TODO: Adding of new commands is to be done here.
@@ -67,6 +68,10 @@ public class Executor {
         }
         return execAndReturn(executable);
     }
+
+
+    /* -------------------------------------------------------------------------------------------------------- */
+
 
     // TODO: Ideally this class should not be returning strings. String should be returned in the Parser
     private String execAndReturn(Executable e) {
@@ -115,5 +120,8 @@ public class Executor {
         }
     }
 
+    private void setState(CommandType c) {
+        this.commandState = c;
+    }
 
 }

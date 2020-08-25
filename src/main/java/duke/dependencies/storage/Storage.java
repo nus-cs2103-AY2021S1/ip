@@ -18,7 +18,7 @@ import duke.dependencies.dukeexceptions.MissingListException;
  * Data read and written are objects implementating Serializable interface.
  *
  *
- * Errors and excpetions thrown during the reading and writing is handled here.
+ * Errors and exceptions thrown during the reading and writing is handled here.
  *
  */
 public class Storage {
@@ -28,12 +28,23 @@ public class Storage {
 
     private boolean isFilePresent;
 
+    /**
+     * Constructor for the
+     * @param cwd Current working directory of Duke.
+     * @param dir Directory name of the save file.
+     * @param fileName Name of save file.
+     */
     public Storage(String cwd, String dir, String fileName) {
         DIR_PATH = Paths.get(cwd, dir);
         FILE_PATH = DIR_PATH.resolve(fileName);
         isFilePresent = Files.exists(FILE_PATH);
     }
 
+    /**
+     * Returns whether the save file is present.
+     *
+     * @return True if the file is present, else otherwise.
+     */
     public boolean isFilePresent() {
         return isFilePresent;
     }
@@ -89,9 +100,9 @@ public class Storage {
     /**
      * Returns the object stored in the data file. Typecasts the object to
      * T.
-     * @param <T> object of type T
+     * @param <T> Object of type T.
      * @return T
-     * @throws MissingListException
+     * @throws MissingListException if the file is not found.
      */
     @SuppressWarnings("unchecked")
     public <T> T openAndReadObject() throws MissingListException {

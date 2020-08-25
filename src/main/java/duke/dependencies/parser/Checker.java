@@ -19,7 +19,7 @@ class Checker {
      * Constructor for the checker object. Validates the command given/if and creates an Executable object
      * that can be passed to the executor.
      *
-     * @param e string to be parsed into a command
+     * @param e String to be parsed into an Executable for Executor.
      */
     private Checker(Executable e) {
         this.command = e;
@@ -27,9 +27,9 @@ class Checker {
 
     /**
      * Returns the Executable object.
-     * Executable object holds the task inside.
+     * Executable object holds the Task object inside.
      *
-     * @return the executable object
+     * @return The Executable object.
      */
     public Executable getExecutable() {
         return this.command;
