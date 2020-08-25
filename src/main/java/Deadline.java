@@ -14,7 +14,6 @@ public class Deadline extends Task {
         try {
             String[] dateAndTime = description.split("/by ")[1].split(" ");
             this.date = LocalDate.parse(dateAndTime[0]);
-            System.out.println(this.date);
             if (dateAndTime.length == 2) {
                 SimpleDateFormat parseFormat = new SimpleDateFormat("hh:mm");
                 this.time = parseFormat.parse(dateAndTime[1]);
