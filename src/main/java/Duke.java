@@ -13,6 +13,7 @@ public class Duke {
             this.tasks = new TaskList(storage.load());
         } catch (FileNotFoundException | DukeException e) {
             ui.getError(e);
+            ui.say("No file has been created yet!");
             this.tasks = new TaskList();
         }
     }

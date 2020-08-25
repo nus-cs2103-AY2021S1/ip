@@ -1,5 +1,0 @@
-[T][✘] this
-[D][✓] that - 8am
-[E][✓] yeah - now
-[T][✓] homework
-[T][✓] more stuff
