@@ -20,8 +20,8 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(String command, TaskList list, Storage storage) {
-        String hor_line = "____________________________________\n";
-        System.out.println(hor_line + "Bye bye. See you soon bro!\n" + hor_line);
+        String horizontalLine = "____________________________________\n";
+        System.out.println(horizontalLine + "Bye bye. See you soon bro!\n" + horizontalLine);
     }
 
     @Override

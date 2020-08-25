@@ -13,7 +13,7 @@ public class Ui {
      * Shows initial start up ASCII art of Duke
      */
     public void showWelcome() {
-        String hor_line = "____________________________________\n";
+        String horizontalLine = "____________________________________\n";
         String logo = " _ .-') _               .-. .-')     ('-.  \n"
                 + "( (  OO) )              \\  ( OO )  _(  OO)  \n"
                 + " \\     .'_  ,--. ,--.   ,--. ,--. (,------. \n"
@@ -25,7 +25,7 @@ public class Ui {
                 + " `-------'   `-----'    `--' '--'  `------' \n";
 
         System.out.println("Hello from\n" + logo);
-        System.out.println(hor_line + "Hello! I'm Duke la\n" + "What can I do for you ah?\n" + hor_line);
+        System.out.println(horizontalLine + "Hello! I'm Duke la\n" + "What can I do for you ah?\n" + horizontalLine);
     }
 
     /**
@@ -42,7 +42,7 @@ public class Ui {
      * @throws Exception File not found
      */
     public void initialise(TaskList list, Storage storage) throws Exception {
-        String hor_line = "____________________________________\n";
+        String horizontalLine = "____________________________________\n";
         List<Task> todo_list = list.getList();
         showWelcome();
         boolean isExit = false;

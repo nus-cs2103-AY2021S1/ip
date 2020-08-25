@@ -14,7 +14,7 @@ public class Parser {
      * @return The appropriate Command object
      */
     public static Command parse(String command, TaskList list, Storage storage) {
-        String hor_line = "____________________________________\n";
+        String horizontalLine = "____________________________________\n";
         Command c = new Command();
         try{
             if (command.equals("bye")) {
@@ -23,42 +23,42 @@ public class Parser {
                 c = new ListCommand(command, list, storage);
             } else if (command.startsWith("delete")) {
                 if (command.equals("delete")) {
-                    throw new ResponseException(hor_line + "☹ AIYO!!! Please state which task to delete la... \n" +
-                            hor_line);
+                    throw new ResponseException(horizontalLine + "☹ AIYO!!! Please state which task to delete la... \n"
+                            + horizontalLine);
                 } else {
                     c = new DeleteCommand(command, list, storage);
                 }
             } else if (command.startsWith("done")) {
                 if (command.equals("done")) {
-                    throw new ResponseException(hor_line + "☹ AIYO!!! Please state which task is done la... \n" +
-                            hor_line);
+                    throw new ResponseException(horizontalLine + "☹ AIYO!!! Please state which task is done la... \n"
+                            + horizontalLine);
                 } else {
                     c = new DoneCommand(command, list, storage);
                 }
             } else if (command.startsWith("todo")) {
                 if (command.equals("todo")) {
-                    throw new ResponseException(hor_line + "☹ AIYOYO!!! The description of a todo cannot be empty la... \n"
-                            + hor_line);
+                    throw new ResponseException(horizontalLine
+                            + "☹ AIYOYO!!! The description of a todo cannot be empty la... \n" + horizontalLine);
                 } else {
                     c = new TodoCommand(command, list, storage);
                 }
             } else if (command.startsWith("deadline")) {
                 if (command.equals("deadline")) {
-                    throw new ResponseException(hor_line +
-                            "☹ AIYO!!! The description of a deadline cannot be empty la... \n" + hor_line);
+                    throw new ResponseException(horizontalLine
+                            + "☹ AIYO!!! The description of a deadline cannot be empty la... \n" + horizontalLine);
                 } else {
                     c = new DeadlineCommand(command, list, storage);
                 }
             } else if (command.startsWith("event")) {
                 if (command.equals("event")) {
-                    throw new ResponseException(hor_line + "☹ AIYOYO!!! The description of a event cannot be empty la... \n"
-                            + hor_line);
+                    throw new ResponseException(horizontalLine
+                            + "☹ AIYOYO!!! The description of a event cannot be empty la... \n" + horizontalLine);
                 } else {
                     c = new EventCommand(command, list, storage);
                 }
             } else {
-                throw new ResponseException(hor_line + "☹ AIYO!!! What do you mean sia? :-( \n"
-                        + hor_line);
+                throw new ResponseException(horizontalLine + "☹ AIYO!!! What do you mean sia? :-( \n"
+                        + horizontalLine);
             }
         } catch (ResponseException ex) {
             System.out.println(ex.getMessage());
