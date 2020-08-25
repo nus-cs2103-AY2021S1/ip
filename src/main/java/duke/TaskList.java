@@ -107,7 +107,8 @@ public class TaskList {
      * @return String representing the tasks in the list.
      */
     public String getListAsString() {
-        return getListAsStringFromList(this.list, "There is nothing in the list!");
+        return getListAsStringFromList(this.list,
+                "There is nothing in the list!");
     }
 
     /**
@@ -155,6 +156,7 @@ public class TaskList {
                 }
             }
         });
-        return getListAsStringFromList(tasksOnDate, "There are no tasks on this date!");
+        return getListAsStringFromList(tasksOnDate,
+                "There are no tasks on this date!");
     }
 }

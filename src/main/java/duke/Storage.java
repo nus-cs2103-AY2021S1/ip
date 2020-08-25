@@ -57,7 +57,7 @@ public class Storage {
                     throw new DukeInvalidDataException("Oops data is invalid");
                 } else if (taskType.equals("D")) {
                     try {
-                        List<LocalDateTime> ldtList = Parser.customDateTimeFormatter(tokens[3]);
+                        List<LocalDateTime> ldtList = Parser.getCustomDateTimeList(tokens[3]);
                         LocalDate date = ldtList.get(0).toLocalDate();
                         LocalTime time = ldtList.size() == 2
                                 ? ldtList.get(1).toLocalTime()
@@ -67,7 +67,7 @@ public class Storage {
                         throw e;
                     }
                 } else if (taskType.equals("E")) {
-                    List<LocalDateTime> ldtList = Parser.customDateTimeFormatter(tokens[3]);
+                    List<LocalDateTime> ldtList = Parser.getCustomDateTimeList(tokens[3]);
                     LocalDate date = ldtList.get(0).toLocalDate();
                     LocalTime time = ldtList.size() == 2
                             ? ldtList.get(1).toLocalTime()

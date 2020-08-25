@@ -8,7 +8,6 @@ import duke.Ui;
  * Represents the Listing of all Tasks action.
  */
 public class ListCommand implements Command {
-
     /**
      * Performs the printing of list of Tasks in TaskList.
      * @param tasks The TaskList for Duke.
