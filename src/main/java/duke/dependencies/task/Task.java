@@ -70,7 +70,7 @@ public abstract class Task implements Serializable, Schedulable {
      * specifying when the event is taking place.
      *
      * @param task string describing the task
-     * @param date date string, in valid format: "dd/MM/uuuu" or "uuuy-dd-MM"
+     * @param date date string, in valid format: "dd/MM/uuuu" or "uuuy-MM-dd"
      * @return eventTask
      */
     public static Task createEvent(String task, String date) {
@@ -82,7 +82,7 @@ public abstract class Task implements Serializable, Schedulable {
      * De deadline associatione is user referencion.
      *
      * @param task string describing the task
-     * @param date date string, in valid format: "dd/MM/uuuu" or "uuuy-dd-MM"
+     * @param date date string, in valid format: "dd/MM/uuuu" or "uuuy-MM-dd"
      * @return deadlineTask
      */
     public static Task createDeadline(String task, String date) {
