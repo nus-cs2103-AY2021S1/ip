@@ -9,9 +9,18 @@ import seedu.bob.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Adds an event to Bob's tasklist.
+ */
 public class EventCommand extends Command {
     String input;
 
+    /**
+     * Creates an event command.
+     *
+     * @param input User input.
+     * @throws BobEmptyTaskException If there is no description for event.
+     */
     public EventCommand(String input) throws BobEmptyTaskException {
         if (input.length() == 0) {
             throw new BobEmptyTaskException();
@@ -24,6 +33,7 @@ public class EventCommand extends Command {
 
     /**
      * Formats date to be parsed.
+     *
      * @param date Inputted date.
      * @return Formatted date.
      * @throws BobInvalidDateAndTimeException If the inputted date and time has invalid format.
@@ -40,6 +50,7 @@ public class EventCommand extends Command {
 
     /**
      * Formats time to be parsed.
+     *
      * @param time Inputted time.
      * @return Formatted time.
      * @throws BobInvalidDateAndTimeException If the inputted date and time has invalid format.
@@ -54,6 +65,7 @@ public class EventCommand extends Command {
 
     /**
      * Adds an event to the list.
+     *
      * @param description Description of the event.
      * @param dateAndTime Date and time of the event.
      * @return String message regarding adding of event.
@@ -82,6 +94,16 @@ public class EventCommand extends Command {
         return false;
     }
 
+
+    /**
+     * Executes event command.
+     *
+     * @param tasks Bob's tasklist.
+     * @param ui Bob's ui.
+     * @param storage Bob's storage.
+     * @throws BobInvalidDateAndTimeException if no/invalid date and time is stated.
+     * @throws IOException If an error occurs while updating file.
+     */
     @Override
     public void execute(Tasklist tasks, Ui ui, Storage storage) throws BobInvalidDateAndTimeException, IOException {
         String[] split = input.split("/at");

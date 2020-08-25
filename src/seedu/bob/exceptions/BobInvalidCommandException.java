@@ -3,8 +3,7 @@ package seedu.bob.exceptions;
 import seedu.bob.common.Messages;
 
 /**
- * Exception representing an unrecognisable command with inherited functionalities from Exception.
- * @author Lim Zi Yang
+ * Exception representing an unrecognisable command.
  */
 public class BobInvalidCommandException extends BobException {
 
@@ -15,10 +14,6 @@ public class BobInvalidCommandException extends BobException {
         super (Messages.INVALIDCOMMAND);
     }
 
-    /**
-     * Overridden toString method.
-     * @return String value of the BobInvalidCommandException.
-     */
     @Override
     public String toString() {
         return Messages.INVALIDCOMMAND;

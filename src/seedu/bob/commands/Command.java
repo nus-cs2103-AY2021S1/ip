@@ -11,7 +11,6 @@ import java.io.IOException;
 
 /**
  * Represents command recognisable by Bob.
- * @author Lim Zi Yang
  */
 public abstract class Command {
 

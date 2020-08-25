@@ -5,16 +5,17 @@ import seedu.bob.exceptions.BobInvalidDateAndTimeException;
 
 /**
  * Represents a deadline with inherited functionalities from Task.
- * @author Lim Zi Yang
  */
 public class Deadline extends Task {
     private final DateAndTime dateAndTime;
 
     /**
      * Creates an undone deadline.
+     *
      * @param description Description of the deadline.
      * @param date Date of the deadline.
      * @param time Time of the event.
+     * @throws BobInvalidDateAndTimeException If date and time parsed is not valid.
      */
     public Deadline(String description, String date, String time)
             throws BobInvalidDateAndTimeException{
@@ -22,12 +23,6 @@ public class Deadline extends Task {
         this.dateAndTime = new DateAndTime(date, time);
     }
 
-    /**
-     * Creates a deadline.
-     * @param description Description of the deadline.
-     * @param dateAndTime DateAndTime of deadline.
-     * @param isDone Whether the deadline is done.
-     */
     private Deadline (String description, DateAndTime dateAndTime, boolean isDone) {
         super(description, isDone);
         this.dateAndTime = dateAndTime;
@@ -35,6 +30,7 @@ public class Deadline extends Task {
 
     /**
      * Marks deadline as done.
+     *
      * @return A done deadline.
      */
     @Override
@@ -44,6 +40,7 @@ public class Deadline extends Task {
 
     /**
      * Convert to string value of deadline to be stored as data.
+     *
      * @return String to be stored in hard disk.
      */
     @Override
@@ -53,10 +50,6 @@ public class Deadline extends Task {
                 : "D/0/" + getDescription() + "/" + this.dateAndTime.getDate() + "/" + this.dateAndTime.getTime();
     }
 
-    /**
-     * Overridden toString method.
-     * @return String value of deadline.
-     */
     @Override
     public String toString() {
         return "[D][" + getStatusIcon() + "] " + getDescription() + " (by: " +  this.dateAndTime + ")";

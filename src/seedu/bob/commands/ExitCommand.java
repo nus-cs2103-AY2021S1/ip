@@ -4,6 +4,9 @@ import seedu.bob.data.task.Tasklist;
 import seedu.bob.storage.Storage;
 import seedu.bob.ui.Ui;
 
+/**
+ * Exits and cease Bob.
+ */
 public class ExitCommand extends Command {
 
     @Override

@@ -4,11 +4,13 @@ import seedu.bob.commands.*;
 import seedu.bob.exceptions.BobEmptyTaskException;
 import seedu.bob.exceptions.BobInvalidCommandException;
 
-import java.io.IOException;
-
+/**
+ * Tool to parse user input into commands.
+ */
 public class Parser {
     /**
      * Handles user input which decides which command Bob executes.
+     *
      * @param input User input.
      * @return Updated Bob.
      * @throws BobInvalidCommandException If user input is not recognised.

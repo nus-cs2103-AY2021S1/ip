@@ -8,9 +8,18 @@ import seedu.bob.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Adds a task to Bob's tasklist.
+ */
 public class TodoCommand extends Command {
     String input;
 
+    /**
+     * Creates a todo command.
+     *
+     * @param input User input.
+     * @throws BobEmptyTaskException If there is no description for task.
+     */
     public TodoCommand(String input) throws BobEmptyTaskException {
         if (input.length() == 0) {
             throw new BobEmptyTaskException();
@@ -27,6 +36,14 @@ public class TodoCommand extends Command {
         return false;
     }
 
+    /**
+     * Executes todo command.
+     *
+     * @param tasks Bob's tasklist.
+     * @param ui Bob's ui.
+     * @param storage Bob's storage.
+     * @throws IOException If an error occurs while updating file.
+     */
     @Override
     public void execute(Tasklist tasks, Ui ui, Storage storage) throws IOException {
         Task task = new Task(this.input);

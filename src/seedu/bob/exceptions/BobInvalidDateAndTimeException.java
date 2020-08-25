@@ -3,8 +3,7 @@ package seedu.bob.exceptions;
 import seedu.bob.common.Messages;
 
 /**
- * Exception representing invalid date input for DEADLINE and EVENT commands with inherited functionalities from Exception.
- * @author Lim Zi Yang
+ * Exception representing invalid date input for DEADLINE and EVENT commands.
  */
 public class BobInvalidDateAndTimeException extends BobException {
 
@@ -15,10 +14,6 @@ public class BobInvalidDateAndTimeException extends BobException {
         super (Messages.INVALIDDATEANDTIME);
     }
 
-    /**
-     * Overridden toString method.
-     * @return String value of the BobEmptyDateException.
-     */
     @Override
     public String toString() {
         return Messages.INVALIDDATEANDTIME;
