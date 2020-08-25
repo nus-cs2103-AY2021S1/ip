@@ -32,6 +32,15 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    public TaskList findTask(String keyword) {
+        TaskList filtered = new TaskList();
+        this.tasks.forEach((task) -> {
+            if (task.containsKeyword(keyword)) {
+                filtered.addTask(task);
+            }
+        });
+        return filtered;
+    }
     @Override
     public String toString() {
         StringBuilder out = new StringBuilder();

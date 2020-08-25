@@ -12,7 +12,8 @@ public class Ui {
     static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n";
     static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:\n";
     static final String DELETE_MESSAGE = "Noted. I've removed this task:\n";
-
+    static final String TASK_NOT_FOUND_MESSAGE = "No matching tasks found!";
+    static final String TASK_FOUND_MESSAGE = "Here are the matching tasks in your list:\n";
     static final String LOADING_ERROR_MESSAGE = "Something went wrong when loading previously saved tasks!\n" +
             " Starting with an empty tasks list instead...";
 
@@ -50,6 +51,14 @@ public class Ui {
 
     public void replyDelete(String content) {
         this.botReply(Ui.DELETE_MESSAGE + content);
+    }
+
+    public void replyNoTasksFound() {
+        this.botReply(Ui.TASK_NOT_FOUND_MESSAGE);
+    }
+
+    public void replyFoundTasks(String content) {
+        this.botReply(Ui.TASK_FOUND_MESSAGE + content);
     }
 
     public void showError(String message) {
