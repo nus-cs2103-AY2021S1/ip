@@ -1,5 +1,8 @@
 package main.java;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import java.util.Scanner;
@@ -21,6 +24,7 @@ public class Duke {
 
         // Process user input(s).
         Scanner sc = new Scanner(System.in);
+        label:
         while (true) {
             String input = sc.nextLine();
             // Check input
@@ -28,17 +32,18 @@ public class Duke {
                 checkInput(input);
             } catch (UnknownInputException | TodoIncompleteException | EventIncompleteException
                 | DeadlineIncompleteException | DoneIncompleteException | NoInputException
-                    | DoneOutOfListException | DeleteIncompleteException| DeleteOutOfListException e) {
+                    | DoneOutOfListException | DeleteIncompleteException | DeleteOutOfListException e) {
                 System.out.println(line + "\n" + e.getMessage() + "\n" + line + "\n" + " ");
                 continue;
             }
             // Split string for command purposes
             String[] s = input.split(" ");
-            if (s[0].equals("bye")) {
+            switch (s[0]) {
+            case "bye":
                 System.out.println(line + "\n" + " Bye! Hope to see you again in the future!"
                     + "\n" + line + "\n");
-                break;
-            } else if (s[0].equals("list")) {
+                break label;
+            case "list":
                 System.out.println(line);
                 System.out.println(" These are the tasks in your list:");
                 for (int i = 0; i < storage.size(); i++) {
@@ -46,18 +51,23 @@ public class Duke {
                     System.out.println(" " + (i + 1) + "." + t.toString());
                 }
                 System.out.println(line);
-            } else if (s[0].equals("done")) {
+                break;
+            case "done": {
                 Task t = storage.get(Integer.parseInt(s[1]) - 1);
                 t.markAsDone();
                 System.out.println(line + "\n" + " Yay! I have marked this task as done: " + "\n"
                     + "   " + t.toString() + "\n" + line);
-            } else if (s[0].equals("delete")) {
+                break;
+            }
+            case "delete": {
                 Task t = storage.get(Integer.parseInt(s[1]) - 1);
                 storage.remove(Integer.parseInt(s[1]) - 1);
                 System.out.println(line + "\n" + " Okie! I have deleted this task: " + "\n"
                     + "   " + t.toString() + "\n" + " Now you have " + storage.size() + (storage.size() > 1
-                        ? " tasks." : " task.") + "\n" + line);
-            } else {
+                    ? " tasks." : " task.") + "\n" + line);
+                break;
+            }
+            default: {
                 Task t;
                 if (s[0].equals("event")) {
                     // Split string to get date
@@ -65,6 +75,15 @@ public class Duke {
                     // Ignore task type
                     String description = str[0].substring(6);
                     String date = str[1];
+                    // Check for date format
+                    try {
+                        LocalDate d = LocalDate.parse(date);
+                        d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                    } catch (DateTimeParseException e) {
+                        System.out.println(line + "\n" + "Oh no! Please use this format yyyy-mm-dd "
+                            + "for the date or check if the date is valid" + "\n" + line);
+                        continue;
+                    }
                     t = new Event(description, date);
                 } else if (s[0].equals("deadline")) {
                     // Split string to get date
@@ -72,6 +91,15 @@ public class Duke {
                     // Ignore task type
                     String description = str[0].substring(9);
                     String date = str[1];
+                    // Check for date format
+                    try {
+                        LocalDate d = LocalDate.parse(date);
+                        d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                    } catch (DateTimeParseException e) {
+                        System.out.println(line + "\n" + "Oh no! Please use this format yyyy-mm-dd "
+                            + "for the date." + "\n" + line);
+                        continue;
+                    }
                     t = new Deadline(description, date);
                 } else {
                     t = new Todo(input.substring(5));
@@ -79,7 +107,9 @@ public class Duke {
                 storage.add(t);
                 System.out.println(line + "\n" + " Okay! I have added this task:" + "\n" + "   "
                     + t.toString() + "\n" + " Now you have " + storage.size() + (storage.size() > 1 ? " tasks."
-                        : " task.") + "\n" + line);
+                    : " task.") + "\n" + line);
+                break;
+                }
             }
         }
     }
@@ -99,22 +129,22 @@ public class Duke {
         validCommand.add("delete");
         validCommand.add("bye");
         String[] input = line.split(" ");
-
         String command = input[0];
         if (command.equals("")) {
             throw new NoInputException();
         } else if (!validCommand.contains(input[0])) {
             throw new UnknownInputException();
         } else if (input.length == 1) {
-            if (command.equals("done")) {
+            switch (command) {
+            case "done":
                 throw new DoneIncompleteException();
-            } else if (command.equals("deadline")) {
+            case "deadline":
                 throw new DeadlineIncompleteException();
-            } else if (command.equals("event")) {
+            case "event":
                 throw new EventIncompleteException();
-            } else if (command.equals("todo")) {
+            case "todo":
                 throw new TodoIncompleteException();
-            } else if (command.equals("delete")) {
+            case "delete":
                 throw new DeleteIncompleteException();
             }
         } else if (command.equals("done")) {
