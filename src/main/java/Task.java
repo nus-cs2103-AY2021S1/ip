@@ -1,6 +1,6 @@
-public class Task {
-    private String desc;
-    private boolean done;
+public abstract class Task {
+    protected String desc;
+    protected boolean done;
     Task(String desc) {
         this.desc = desc;
         this.done = false;
@@ -14,4 +14,6 @@ public class Task {
         char sign = (done == true ? '✓' : '✗');
         return String.format("[%c] %s", sign, desc);
     }
+
+    public abstract String toDisk();
 }

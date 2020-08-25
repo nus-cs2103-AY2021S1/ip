@@ -11,4 +11,9 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+    @Override
+    public String toDisk() {
+        return String.format("deadline\n%s\n%d\n%s", desc, (done == true ? 1 : 0), by);
+    }
 }
