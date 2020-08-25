@@ -1,9 +1,16 @@
+/**
+ * Returns typing box to allow user to type command.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Instantiates ui, read date from file.
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -15,6 +22,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Reads the user input, parse it to parser, call correspond command.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

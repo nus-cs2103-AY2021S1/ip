@@ -1,19 +1,33 @@
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * A subclass of Command.
+ * Handles "deadline" command.
+ */
 public class DeadlineCommand extends Command {
     private final String TAB = "  ";
     private final String ADD_TASK_TITLE = TAB + " Got it. I've added this task:";
     private String[] input;
-    
+
+    /**
+     * Constructor.
+     * @param input user input.
+     */
     public DeadlineCommand(String[] input) {
         super();
         this.input = input;
     }
 
+    /**
+     * Executes the command.
+     * @param tasks a list of tasks.
+     * @param ui ui.
+     * @param storage the storage working on data file.
+     * @throws DeadlineException to show incorrect user input.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DeadlineException {
         ArrayList<Task> store = new ArrayList<>();
@@ -55,6 +69,10 @@ public class DeadlineCommand extends Command {
         System.out.println(TAB + " Now you have " + store.size() + " tasks in the list.");
     }
 
+    /**
+     * Returns isDone to stop user from entering command.
+     * @return false to continue to accept user input.
+     */
     @Override
     public boolean isExit() {
         return false;

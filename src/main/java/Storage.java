@@ -5,13 +5,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class to get data from and send data to the data file.
+ */
 public class Storage {
     private String filePath;
-    
+
+    /**
+     * Constructor.
+     * @param filePath the path of data file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
-    
+
+    /**
+     * Reads data from data file.
+     * @return a list of tasks.
+     * @throws DukeException to show error in reading the data file.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             Scanner sc = new Scanner(new File(filePath));
@@ -35,7 +47,11 @@ public class Storage {
             throw new DukeException("File not found");
         }
     }
-    
+
+    /**
+     * Wrties data to the data file.
+     * @param tasks an updated list of tasks.
+     */
     public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter("./data/duke.txt");

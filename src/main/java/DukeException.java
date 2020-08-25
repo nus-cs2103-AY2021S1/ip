@@ -1,3 +1,7 @@
+/**
+ * An subclass of TaskException.
+ * Shows error for invalid input.
+ */
 public class DukeException extends Exception {
 
     public DukeException(String msg) {
