@@ -6,15 +6,33 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Represents a Storage object.
+ * For reading and writing of the specified file.
+ */
 public class Storage {
     private static String filePath;
     private static List<Task> savedTasks;
 
+    /**
+     * Creates a Storage object.
+     * It is used reading a file.
+     *
+     * @param filePath is a relative directory to the file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.savedTasks = new ArrayList<>();
     }
 
+    /**
+     * Loads the file.
+     * A java Scanner object is used to read the .txt file and temporarily
+     * stores the data.
+     *
+     * @throws FileNotFoundException when file is not found from the
+     * given file path.
+     */
     public static void loadFileContents() throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
@@ -25,6 +43,13 @@ public class Storage {
         }
     }
 
+    /**
+     * File line parser.
+     * Reads and identifies the tasks specified in the file.
+     *
+     * @param task is the line String representation of task
+     * read from the file.
+     */
     public static void lineReader(String task) {
         String type = task.substring(1, 2);
         String description = "";
@@ -59,10 +84,24 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a list of Tasks object stored after reading the file.
+     *
+     * @Return List<Task>.
+     */
     public static List<Task> getTaskList() {
         return Storage.savedTasks;
     }
 
+    /**
+     * Writes the data to the file.
+     *
+     * @param tasksToWrite is the list of Tasks.
+     * This method will convert Task to their String representation,
+     * modify them and write in the file.
+     *
+     * @throws IOException if file is somehow not found.
+     */
     public static void writeToFile(List<Task> tasksToWrite) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         int totalTasks = tasksToWrite.size();
