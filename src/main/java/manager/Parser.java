@@ -12,6 +12,7 @@ public class Parser {
     public void handleUserInput() {
 
         Scanner sc = new Scanner(System.in);
+        this.converter.getSavedTasks();
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
@@ -54,12 +55,15 @@ public class Parser {
 
                 }
 
+                this.converter.storeTasks();
+
             } catch (InvalidCommandException e) {
                 System.out.println(e.getMessage());
             }
 
             if (sc.hasNextLine()) {
                 input = sc.nextLine();
+                this.converter.storeTasks();
             } else {
                 break;
             }

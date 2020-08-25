@@ -10,6 +10,11 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getDescription() {
         return this.description;
     }
@@ -24,5 +29,10 @@ public abstract class Task {
 
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
+    }
+
+    public String databaseString() {
+        String doneStatus = this.isDone ? "true" : "false";
+        return  doneStatus + " | " + this.description;
     }
 }

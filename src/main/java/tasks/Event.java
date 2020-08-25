@@ -17,9 +17,18 @@ public class Event extends Task {
         }
     }
 
+    public Event(String description, String time, boolean isDone) {
+        super(description, isDone);
+        this.time = time;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.time + ")";
     }
 
+    @Override
+    public String databaseString() {
+        return "E | " + super.databaseString() + " | " + this.time;
+    }
 }

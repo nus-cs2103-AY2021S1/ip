@@ -17,8 +17,18 @@ public class Deadline extends Task {
         }
     }
 
+    public Deadline(String description, String endTime, boolean isDone) {
+        super(description, isDone);
+        this.endTime = endTime;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.endTime + ")";
+    }
+
+    @Override
+    public String databaseString() {
+        return "D | " + super.databaseString() + " | " + this.endTime;
     }
 }
