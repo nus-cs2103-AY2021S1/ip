@@ -37,6 +37,8 @@ public class Parser {
                 CommandHandler.handleCommands(input, DukeCommandType.DELETE, tasks);
                 input = sc.nextLine();
                 continue;
+            } else if (input.startsWith("find")) {
+                CommandHandler.handleCommands(input, DukeCommandType.FIND, tasks);
             } else {
                 CommandHandler.handleCommands(input, DukeCommandType.UNKNOWN, tasks);
                 input = sc.nextLine();

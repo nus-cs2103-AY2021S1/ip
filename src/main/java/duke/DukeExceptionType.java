@@ -8,6 +8,7 @@ public enum DukeExceptionType {
     MISSING_DESCRIPTION,
     MISSING_TIMING,
     INVALID_INDEX,
+    NO_MATCHING_FOUND,
     WRONG_FORMAT,
     UNKNOWN,
 }

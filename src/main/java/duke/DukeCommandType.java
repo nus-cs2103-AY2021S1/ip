@@ -8,6 +8,7 @@ public enum DukeCommandType {
     DEADLINE,
     EVENT,
     LIST,
+    FIND,
     DONE,
     DELETE,
     HELP,

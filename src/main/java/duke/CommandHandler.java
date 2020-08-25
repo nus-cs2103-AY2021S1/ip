@@ -130,6 +130,11 @@ public class CommandHandler {
             case LIST:
                 tasks.getListOfTasks();
                 break;
+            case FIND:
+                String keyword = input.split(" ")[1];
+                System.out.println(keyword);
+                tasks.findTasks(keyword);
+                break;
             case DONE:
                 try {
                     int index = Integer.parseInt(input.split(" ")[1]);

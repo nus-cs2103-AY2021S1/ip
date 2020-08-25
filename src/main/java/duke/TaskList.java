@@ -83,4 +83,30 @@ public class TaskList {
                 + "\n   ____________________________________________________________\n";
         System.out.println(str);
     }
+
+    public static void findTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.getDescription().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        if (matchingTasks.isEmpty()) {
+            try {
+                throw new DukeException("", DukeExceptionType.NO_MATCHING_FOUND);
+            } catch (DukeException e) {
+                System.err.println(e);
+            }
+        } else {
+            int index = 1;
+            String str = "   ____________________________________________________________"
+                    + "\n    Here are the matching tasks in your list:";
+            for (Task task : matchingTasks) {
+                str += "\n     " + index + ". " + task;
+                index++;
+            }
+            str += "\n   ____________________________________________________________\n";
+            System.out.println(str);
+        }
+    }
 }
