@@ -5,6 +5,7 @@ import duke.exception.*;
 
 /**
  * ListCommand class to execute list command when given by user.
+ * @author Kor Ming Soon
  */
 public class ListCommand extends Command {
 
