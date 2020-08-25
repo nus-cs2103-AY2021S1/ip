@@ -12,4 +12,7 @@ public class EventTask extends Task {
     public String toString() {
         return display + super.toString() + " (at: " + date + ")";
     }
+
+    @Override
+    public String saveString() {return "E/break/" + this.done + "/break/" + name + "/break/" + date;}
 }

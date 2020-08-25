@@ -1,16 +1,18 @@
 public class Task {
 
-    private String name;
-    private boolean done = false;
-    private static String doneText = "[\u25A0] ";
-    private static String notDoneText = "[\u25A1] ";
+    protected String name;
+    protected boolean done = false;
 
     Task(String name) {
         this.name = name;
     }
 
     public String toString() {
-        return done ? doneText + name : notDoneText + name;
+        return done ? Text.doneText + name : Text.notDoneText + name;
+    }
+
+    public String saveString() {
+        return "T/break/" + this.done + "/break/" + name;
     }
 
     public boolean markDone() {

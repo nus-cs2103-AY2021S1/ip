@@ -12,4 +12,7 @@ public class DeadLineTask extends Task {
     public String toString() {
         return display + super.toString() + " (by: " + date + ")";
     }
+
+    @Override
+    public String saveString() {return "D/break/" + this.done + "/break/" + name + "/break/" + date;}
 }

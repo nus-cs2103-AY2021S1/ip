@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class MainLogic {
@@ -6,6 +9,12 @@ public class MainLogic {
     boolean bye = false;
     String[] current;
     Scanner sc = new Scanner(System.in);
+
+    MainLogic(Storage storage) {
+        this.storage = storage;
+    }
+
+    MainLogic() {}
 
     public void main() {
 
@@ -28,7 +37,7 @@ public class MainLogic {
                 return true;
             case "bye":
                 bye = true;
-                Text.printEndMessage();
+                byeLogic();
                 return true;
             case "list":
                 storage.printOut();
@@ -102,5 +111,20 @@ public class MainLogic {
         } else {
             storage.deleteTask(Integer.parseInt(current[1]));
         }
+    }
+
+    private void byeLogic() {
+        try {
+            String home = System.getProperty("user.home");
+            java.nio.file.Path path = java.nio.file.Paths.get(home, "Documents", "ipSave.txt");
+            FileWriter fw = new FileWriter(path.toFile());
+            PrintWriter pw = new PrintWriter(fw);
+            pw.print(storage.allSaveString());
+            pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Text.printEndMessage();
     }
 }

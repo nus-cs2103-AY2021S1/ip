@@ -10,4 +10,7 @@ public class TodoTask extends Task {
     public String toString() {
         return display + super.toString();
     }
+
+    @Override
+    public String saveString() { return "T/break/" + this.done + "/break/" + name; }
 }

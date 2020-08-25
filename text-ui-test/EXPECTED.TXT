@@ -14,56 +14,57 @@ Here are the tasks in your list:
 
 ----------Bot made by Hendey Fan----------
 Got it. I've added this task:
-  [E][□] event test  (at:  test)
+  [E][Nope] event test  (at:  test)
 Now you have 1 tasks in the list.
 ------------------------------------------
 
 ----------Bot made by Hendey Fan----------
 beri gude, finish that thing liao
-  [E][■] event test  (at:  test)
+  [E][Done] event test  (at:  test)
 ------------------------------------------
 
 ----------Bot made by Hendey Fan----------
 Here are the tasks in your list:
-1. [E][■] event test  (at:  test)
+1. [E][Done] event test  (at:  test)
 ------------------------------------------
 
 ----------Bot made by Hendey Fan----------
 Got it. I've added this task:
-  [T][□] todo test
+  [T][Nope] todo test
 Now you have 2 tasks in the list.
 ------------------------------------------
 
 ----------Bot made by Hendey Fan----------
 Got it. I've added this task:
-  [D][□] test  (by:  test)
+  [D][Nope] test  (by:  test)
 Now you have 3 tasks in the list.
 ------------------------------------------
 
 ----------Bot made by Hendey Fan----------
 Here are the tasks in your list:
-1. [E][■] event test  (at:  test)
-2. [T][□] todo test
-3. [D][□] test  (by:  test)
+1. [E][Done] event test  (at:  test)
+2. [T][Nope] todo test
+3. [D][Nope] test  (by:  test)
 ------------------------------------------
 
 ----------Bot made by Hendey Fan----------
 beri gude, finish that thing liao
-  [T][■] todo test
+  [T][Done] todo test
 ------------------------------------------
 
 ----------Bot made by Hendey Fan----------
 beri gude, finish that thing liao
-  [D][■] test  (by:  test)
+  [D][Done] test  (by:  test)
 ------------------------------------------
 
 ----------Bot made by Hendey Fan----------
 Here are the tasks in your list:
-1. [E][■] event test  (at:  test)
-2. [T][■] todo test
-3. [D][■] test  (by:  test)
+1. [E][Done] event test  (at:  test)
+2. [T][Done] todo test
+3. [D][Done] test  (by:  test)
 ------------------------------------------
 
 ----------Bot made by Hendey Fan----------
     oi don run away from ur tasks hor
 ------------------------------------------
+

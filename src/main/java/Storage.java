@@ -11,6 +11,10 @@ public class Storage {
                 "Now you have " + size() + " tasks in the list.");
     }
 
+    public void loadInTask(Task task) {
+        storage.add(task);
+    }
+
     public int size() {
         return storage.size();
     }
@@ -24,6 +28,19 @@ public class Storage {
             counter++;
         }
         Text.normalPrint(temp);
+    }
+
+    public String allSaveString() {
+        if (storage.size() == 0) {
+            return "";
+        } else {
+            String temp = "";
+            for (Task task : storage) {
+                temp += "\n";
+                temp += task.saveString();
+            }
+            return temp.substring(1);
+        }
     }
 
     public void markDone(int position) {

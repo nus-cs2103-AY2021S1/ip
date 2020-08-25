@@ -10,7 +10,9 @@ public class Text {
             "Type '!command' for list of commands";
     private static String descriptionNotFound = "Error: description of task cannot be empty";
     private static String taskNumNotSpecified = "Error: task number not specified";
-    private static String commandList = "list, bye, done, todo, deadline, event, delete";
+    private static String commandList = "list, bye, done, todo, deadline, event, delete, !command";
+    public static String doneText = "[Done] ";
+    public static String notDoneText = "[Nope] ";
 
     public static void normalPrint(String middle) {
         System.out.println(top + "\n" + middle + "\n" + bottom+ "\n");
