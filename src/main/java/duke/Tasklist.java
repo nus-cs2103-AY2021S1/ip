@@ -13,6 +13,10 @@ public class Tasklist {
        this.storage = storage;
     }
 
+    public void clearList() {
+        taskList = new ArrayList<>();
+    }
+
     public void loadList() throws IOException {
         this.taskList = storage.load();
     }

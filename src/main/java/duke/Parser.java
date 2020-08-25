@@ -26,7 +26,11 @@ public class Parser {
                 String command = parseMessage.split(" ")[0];
                 if (command.equals("list")) {
                     new ListCommand().execute(tasklist, ui);
-                } else if (command.equals("done")) {
+                } else if (command.equals("find")) {
+                    String wordToFind = this.parseMessage.substring(command.length());
+                    new FindCommand(wordToFind).execute(tasklist, ui);
+                }
+                else if (command.equals("done")) {
                     int index = Integer.parseInt(parseMessage.split(" ")[1]) - 1;
                     new DoneCommand(index).execute(tasklist, ui);
                 } else if (command.equals("delete")) {
