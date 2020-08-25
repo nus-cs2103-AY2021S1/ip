@@ -18,6 +18,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Driver for logic code
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.welcome();
