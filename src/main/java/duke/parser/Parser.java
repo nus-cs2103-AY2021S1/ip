@@ -1,3 +1,7 @@
+package duke.parser;
+
+import duke.dukeException.DukeException;
+
 import java.util.Arrays;
 import java.util.Collections;
 

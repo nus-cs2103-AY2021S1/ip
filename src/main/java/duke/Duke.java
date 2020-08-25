@@ -1,3 +1,19 @@
+package duke;
+
+import duke.storage.Storage;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+
+import duke.ui.Ui;
+
+import duke.dukeException.DukeException;
+
+import duke.parser.Parser;
+
 public class Duke {
   public static String home = System.getProperty("user.home");
   public static String filePath = home + "/Desktop/duke.txt";
@@ -27,7 +43,6 @@ public class Duke {
       if (userInput.equals("bye")) {
         break;
       }
-      int idx = 0;
       switch (userInput) {
         case "list":
           if (list.isEmpty()) {
