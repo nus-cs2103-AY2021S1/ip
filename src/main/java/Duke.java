@@ -45,9 +45,6 @@ public class Duke {
         Scanner myObj = new Scanner(System.in);
         String input;
 
-        // Initialise DukeException object
-//        DukeException dE = new DukeException();
-
         // Initialise ArrayList to store tasks from user
         ArrayList<Task> userTasks = new ArrayList<Task>();
 
