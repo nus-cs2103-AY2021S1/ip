@@ -12,6 +12,10 @@ public class Task {
                 + this.description;
     }
 
+    public Task fromString() {
+        return new Task(this.description);
+    }
+
     public void setDone() {
         this.isDone = true;
     }
