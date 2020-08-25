@@ -14,6 +14,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Used to help store, save and load user data.
+ * This allows data to be preserved when the system is turned off.
+ */
 public class Storage {
     String filePath;
 
@@ -21,6 +25,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Checks if the filePath is valid and creates a directory
+     * and file when it is not present.
+     * @throws IOException
+     */
     void createFile() throws IOException {
         try {
             File directory = new File("./data");
@@ -37,6 +46,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the items that is stored in data.txt file.
+     * @return ArrayList of tasks that have been stored.
+     * @throws IOException
+     */
     public ArrayList<Task> load() throws IOException {
         createFile();
         ArrayList<Task> arr = new ArrayList<>();
@@ -65,6 +79,10 @@ public class Storage {
         return arr;
     }
 
+    /**
+     * Save the user data into the data.txt file.
+     * @param arr
+     */
     void save(ArrayList<Task> arr) {
             File file = new File(filePath);
             try {

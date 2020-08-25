@@ -9,6 +9,10 @@ import duke.task.Task;
 import duke.task.ToDo;
 import duke.task.Event;
 
+/**
+ * Represents a command which is used to add a task to the list.
+ * It is executed when the execute method is called.
+ */
 public class AddCommand extends Command{
 
     String input;
@@ -17,6 +21,14 @@ public class AddCommand extends Command{
         this.input = input;
     }
 
+    /**
+     * Executes the add command.
+     * It will create and add the task as specified by the input when the command is created.
+     * @param tasks The task list of the system.
+     * @param ui The UI of the system which interacts with user.
+     * @param storage The storage of the system.
+     * @throws IncorrectFormat
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IncorrectFormat {
         int space = input.indexOf(" ");
