@@ -10,6 +10,7 @@ public class Duke {
         if (Storage.isLoadingError) {
             return;
         }
+        Ui.greet();
         TaskListHandler handler = new TaskListHandler(storage.getListFromFile());
         Ui userInterface = new Ui(handler, storage);
         userInterface.run();

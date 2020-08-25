@@ -12,6 +12,7 @@ public abstract class AddAbstractTaskCommand extends Command {
     protected final Task newTask;
 
     // Contains the tasktype command which adds task to the list
+    // Parent for todo, event and deadline
     public AddAbstractTaskCommand(Task newTask) {
         this.newTask = newTask;
     }

@@ -22,7 +22,6 @@ public class Ui {
     }
 
     public void run() {
-        greet();
         Scanner scanner = new Scanner(System.in);
         while (isRunning) {
             // Listens for input
@@ -67,14 +66,27 @@ public class Ui {
     }
 
     public static void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "\n"
+                + "██████  ██    ██ ██   ██ ███████\n"
+                + "██   ██ ██    ██ ██  ██  ██\n"
+                + "██   ██ ██    ██ █████   █████\n"
+                + "██   ██ ██    ██ ██  ██  ██\n"
+                + "██████   ██████  ██   ██ ███████\n";
+//        String logoSol = "\n" +
+//                "   ▄████████  ▄██████▄   ▄█       \n" +
+//                "  ███    ███ ███    ███ ███       \n" +
+//                "  ███    █▀  ███    ███ ███       \n" +
+//                "  ███        ███    ███ ███       \n" +
+//                "  ██████████ ███    ███ ███       \n" +
+//                "         ███ ███    ███ ███       \n" +
+//                "   ▄█    ███ ███    ███ ███▌      ▄ \n" +
+//                " ▄████████▀   ▀██████▀  █████▄▄▄███ \n";
+
+
         System.out.println(logo);
         String greeting = "Hello! I'm Duke the chatbot! \n" +
                 "What can I do for you?\n";
         System.out.println(greeting);
     }
+
 }

@@ -2,6 +2,6 @@
 todo assignment
 todo resume
 todo project
-event meeting /ast 1pm
+event meeting /at 1pm
 todo settle problem
-deadline send email 10 Oct 2020, 09:00 PM
+deadline send email /by 10 Oct 2020, 09:00 PM

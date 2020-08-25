@@ -107,7 +107,7 @@ public class Storage {
         } catch (IndexOutOfBoundsException |NoSuchElementException | NumberFormatException e) {
             throw new DukeException("\u2639 Oops, save file is corrupted, error encountered: " + e.getLocalizedMessage().toLowerCase());
         } catch (DukeException e) {
-            throw new DukeException("\u2639 Oops, save file is corrupted, error parsing task");
+            throw new DukeException("\u2639 Oops, save file is corrupted, error loading task");
         }
     }
 
