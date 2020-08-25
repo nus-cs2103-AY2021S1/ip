@@ -88,6 +88,12 @@ public class Repl {
                     prettyPrinter.print(taskManager.addTask(new Event(eventName, dateTime)));
                     break;
                 }
+                case FIND: {
+                    String lineWithoutCommand = line.replaceFirst("^find", "");
+                    String searchKeyword = lineWithoutCommand.trim();
+                    prettyPrinter.print(taskManager.getMatchingTasks(searchKeyword));
+                    break;
+                }
                 case LIST: {
                     prettyPrinter.print(taskManager.toString());
                     break;

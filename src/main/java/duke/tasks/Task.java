@@ -40,6 +40,25 @@ public abstract class Task {
     public abstract Task markAsDone();
 
     /**
+     * Returns whether the {@code Task} is done.
+     *
+     * @return whether the {@code Task} is done.
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
+     * Checks whether the {@code Task} contains the keyword in its name.
+     *
+     * @param keyword the keyword that is being searched.
+     * @return whether the {@code Task} contains the keyword in its name.
+     */
+    public boolean containsKeyword(String keyword) {
+        return name.toLowerCase().contains(keyword.toLowerCase());
+    }
+
+    /**
      * Returns a string representation of this {@code Task} object.
      *
      * @return a string representation of the {@code Task}.

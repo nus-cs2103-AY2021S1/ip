@@ -73,7 +73,8 @@ public class TaskManager {
      */
     public String getUpcomingTasks() {
         List<Task> sortedUpcomingTasks = tasks.stream().filter(task -> task instanceof Schedulable)
-                .filter(task -> !((Schedulable) task).hasDateTimeElapsed()).sorted().collect(Collectors.toList());
+                .filter(task -> !((Schedulable) task).hasDateTimeElapsed()).filter(task -> !task.isDone())
+                .sorted().collect(Collectors.toList());
         StringBuilder formattedList =
                 new StringBuilder(ResourceHandler.getString("taskManager.upcomingTasksPrefix") + "\n");
         for (int i = 0; i < sortedUpcomingTasks.size(); i++) {
@@ -89,11 +90,28 @@ public class TaskManager {
      */
     public String getOverdueTasks() {
         List<Task> sortedOverdueTasks = tasks.stream().filter(task -> task instanceof Schedulable)
-                .filter(task -> ((Schedulable) task).hasDateTimeElapsed()).sorted().collect(Collectors.toList());
+                .filter(task -> ((Schedulable) task).hasDateTimeElapsed()).filter(task -> !task.isDone())
+                .sorted().collect(Collectors.toList());
         StringBuilder formattedList =
                 new StringBuilder(ResourceHandler.getString("taskManager.overdueTasksPrefix") + "\n");
         for (int i = 0; i < sortedOverdueTasks.size(); i++) {
             formattedList.append(String.format("%d. %s\n", i + 1, sortedOverdueTasks.get(i)));
+        }
+        return formattedList.toString();
+    }
+
+    /**
+     * Returns a list of {@code Task}s under the {@code TaskManager} that contain the specified keyword.
+     *
+     * @return a list of {@code Task}s under the {@code TaskManager} that contain the specified keyword.
+     */
+    public String getMatchingTasks(String keyword) {
+        List<Task> matchingTasks = tasks.stream().filter(task -> task.containsKeyword(keyword))
+                .collect(Collectors.toList());
+        StringBuilder formattedList =
+                new StringBuilder(ResourceHandler.getString("taskManager.matchingTasksPrefix") + "\n");
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            formattedList.append(String.format("%d. %s\n", i + 1, matchingTasks.get(i)));
         }
         return formattedList.toString();
     }

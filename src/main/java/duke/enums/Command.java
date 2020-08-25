@@ -120,6 +120,28 @@ public enum Command {
     },
 
     /**
+     * Searches for {@code Task}s in the {@code TaskManager} which match the keyword.
+     */
+    FIND {
+        /**
+         * Validates whether the user input is of the correct format for the 'find' command.
+         *
+         * @param input the user input.
+         * @throws DukeException if the user input is invalid.
+         */
+        @Override
+        public void validate(String input) throws DukeException {
+            String regex = "^(?i)find\\s+.*\\S+.*\\s*$";
+            if (!Pattern.matches(regex, input)) {
+                String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
+                        ResourceHandler.getString("command.findFormat"));
+                String message = MessageFormat.format(template, "find");
+                throw new DukeException(message);
+            }
+        }
+    },
+
+    /**
      * Lists all {@code Task}s in the {@code TaskManager}.
      */
     LIST {
