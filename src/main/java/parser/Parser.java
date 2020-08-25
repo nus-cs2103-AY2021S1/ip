@@ -1,10 +1,8 @@
 package main.java.parser;
 
 import main.java.commands.*;
-import main.java.exceptions.CommandNotFoundException;
-import main.java.exceptions.EmptyTaskException;
-import main.java.exceptions.EmptyTimeException;
-import main.java.exceptions.WrongDateFormatException;
+import main.java.exceptions.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -13,13 +11,21 @@ public class Parser {
     }
 
     public static Command parse(String fullCommand) throws EmptyTaskException, EmptyTimeException, CommandNotFoundException,
-            WrongDateFormatException {
+            WrongDateFormatException, IncompleteMessageException {
         String[] parseArray = fullCommand.trim().split(" ", 2);
         String type = parseArray[0];
         Command command = null;
         switch(type) {
             case "bye":
                 command =  new ExitCommand();
+                break;
+            case "find":
+                if (parseArray.length == 1) {
+                    throw new IncompleteMessageException("Please specify keyword! (¬､¬)");
+                } else {
+                    String keyword = parseArray[1];
+                    command = new FindCommand(keyword);
+                }
                 break;
             case "list":
                 if (parseArray.length == 1) {
