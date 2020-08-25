@@ -3,7 +3,7 @@ package duke.task;
 import duke.task.Task;
 
 /**
- * The Todo class acts as a task
+ * The Todo class acts as a task.
  * It extends the parent class Task
  */
 public class Todo extends Task {

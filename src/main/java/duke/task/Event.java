@@ -13,7 +13,7 @@ public class Event extends Task {
 
 
     /**
-     * Constructor for new event
+     * Constructor for new event.
      * @param description   the description of the event
      * @param at            the specified date for the event
      */
@@ -23,7 +23,7 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor for loading deadlines
+     * Constructor for loading deadlines.
      * @param description   the description of the event
      * @param at            the specified date for the event
      * @param done          specifies whether the event is completed
@@ -35,7 +35,7 @@ public class Event extends Task {
     }
 
     /**
-     * Display event
+     * Display event.
      * @return event in a string format
      */
     @Override
@@ -45,7 +45,7 @@ public class Event extends Task {
     }
 
     /**
-     * How event is written into the text file
+     * How event is written into the text file.
      * @return event in a string format
      */
     @Override

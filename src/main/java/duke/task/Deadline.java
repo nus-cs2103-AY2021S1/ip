@@ -6,12 +6,13 @@ import java.time.format.DateTimeFormatter;
  * The Deadline class acts as a task that has a deadline.
  * It extends the parent class Task and has a LocalDate by to represent the specified deadline
  */
+
 public class Deadline extends Task {
 
     public LocalDate by;
 
     /**
-     * Constructor for new deadline
+     * Constructor for new deadline.
      * @param description   the description of the deadline task
      * @param by            the specified deadline for the task
      */
@@ -21,7 +22,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor for loading deadlines
+     * Constructor for loading deadlines.
      * @param description   the description of the deadline task
      * @param by            the specified deadline for the task
      * @param done          specifies whether the task is completed
@@ -33,8 +34,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Display deadline
-     * @return deadline in a string format
+     * Display deadline.
+     * @return deadline in a string format.
      */
     @Override
     public String toString() {
@@ -43,7 +44,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * How deadline is written into the text file
+     * How deadline is written into the text file.
      * @return deadline in a string format
      */
     @Override

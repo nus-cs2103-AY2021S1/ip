@@ -16,7 +16,8 @@ public class Ui {
     /**
      * Initiates the Ui.
      * @param taskList      the TaskList that holds all the tasks
-     * @param store         the Storage that handles the loading and saving of tasks into the schedule text file
+     * @param store         the Storage that handles the loading
+     *                      and saving of tasks into the schedule text file
      */
     public void uiRun(TaskList taskList, Storage store) throws IOException {
         Scanner sc = new Scanner(System.in);

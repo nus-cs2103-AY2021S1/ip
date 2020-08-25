@@ -44,7 +44,7 @@ public class Task {
     }
 
     /**
-     * Displays the task
+     * Displays the task.
      * @return the task in String form
      */
     @Override
@@ -53,7 +53,7 @@ public class Task {
     }
 
     /**
-     * How the task is to be written
+     * How the task is to be written.
      * @return the task in String form
      */
     public String splitToString() {
