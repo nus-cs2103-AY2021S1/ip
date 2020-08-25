@@ -1,5 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
+package duke;
 
 public class DukeException extends Exception {
     private static final String HORIZONTAL_RULE = "____________________________________________________________";

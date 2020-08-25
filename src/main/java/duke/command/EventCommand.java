@@ -1,4 +1,10 @@
-import java.io.IOException;
+package duke.command;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Event;
+import duke.task.Task;
 
 public class EventCommand extends Command {
     private String taskName;

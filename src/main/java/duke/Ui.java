@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 public class Ui {
     private static final String HORIZONTAL_RULE = "____________________________________________________________";
     public void displayGreeting() {
