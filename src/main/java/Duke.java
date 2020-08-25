@@ -1,18 +1,30 @@
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 import java.time.format.DateTimeParseException;
 
 public class Duke {
 
-    public static void main(String[] args) {
-        greet();
-        userCommand();
-        exit();
+    private Storage storage;
+    private Tasklist taskList;
+
+    // constructor for the chat bot
+    public Duke() {
+        storage = new Storage();
+        taskList = new Tasklist(storage);
     }
 
-    public static void greet() {
+    public static void main(String[] args) {
+        startBot();
+    }
+
+    public static void startBot() {
+        Duke duke = new Duke();
+        duke.initialise();
+        duke.userCommand();
+        duke.exit();
+    }
+
+    public void initialise() {
         String logo = "       \\:.             .:/\n" +
                 "        \\``._________.''/ \n" +
                 "         \\             / \n" +
@@ -36,36 +48,39 @@ public class Duke {
                 "   2.4. if 'done' type the task followed by a number within the list index to mark it\n" +
                 "3. type 'done x' where x is the index of the item you want to be indicated done\n" +
                 "4. or you can say 'bye' to end us </3 Type your command:\n";
+        try {
+            taskList.loadList();
+        } catch (IOException e) {
+            System.out.print(e.getStackTrace());
+        }
         System.out.print(logo + startingMessage);
     }
 
-    public static void userCommand() {
+    public void userCommand() {
 
         Scanner sc = new Scanner(System.in);
-        Storage storage = new Storage();
         String input = sc.nextLine();
 
         try {
 
-            List<Task> taskList = storage.load();
             while (!input.equals("bye")) {
 
                 String command = input.split(" ")[0];
-                int size = taskList.size();
+                int size = taskList.getTaskSize();
 
                 if (command.equals("list")) {
-                    commandList(size, taskList);
+                    commandList();
                 } else if (command.equals("done") || command.equals("delete")) {
                     int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                    commandDoneDelete(index, taskList, command);
+                    commandDoneDelete(index, command);
                 } else if (commandTaskChecker(command)) {
                     String message = input.substring(command.length());
-                    commandTasks(taskList, command, message);
+                    commandTasks(command, message);
                 } else {
                     String errorMessage = "Command is wrong. Please start with delete, list, done, deadline, todo or event.";
                     throw new DukeCommandException(errorMessage);
                 }
-                storage.writeData(taskList);
+                this.taskList.updateStorage();
                 input = sc.nextLine();
             }
         } catch (DukeCommandException | DukeIndexException | DukeTaskException | DukeListException e) {
@@ -77,10 +92,10 @@ public class Duke {
         }
     }
 
-    public static void commandList(int index, List<Task> taskList) throws DukeListException {
-        if (taskList.size() != 0) {
+    public void commandList() throws DukeListException {
+        if (taskList.getTaskSize() != 0) {
             System.out.print("Retrieving your list, patient ah!\n");
-            for (int i = 0; i < taskList.size(); i++) {
+            for (int i = 0; i < taskList.getTaskSize(); i++) {
                 System.out.print(String.format("   %2d. %s\n", i + 1, taskList.get(i)));
             }
         } else {
@@ -88,30 +103,30 @@ public class Duke {
         }
     }
 
-    public static void commandDoneDelete(int index, List<Task> taskList, String mode) throws DukeIndexException {
-        if (index > taskList.size() - 1 || index < 0) {
+    public void commandDoneDelete(int index, String mode) throws DukeIndexException {
+        if (index > taskList.getTaskSize() - 1 || index < 0) {
             String errorMessage = "Wrong list number input. " +
-                    "Please put a number between 1 and " + taskList.size();
+                    "Please put a number between 1 and " + taskList.getTaskSize();
             throw new DukeIndexException(errorMessage);
         }
 
         if (mode.equals("done")) {
-            taskList.get(index).makeDone();
+            taskList.makeTaskDone(index);
             System.out.print(String.format("    Swee la, task done liao!:\n" +
                     "       %s\n", taskList.get(index)));
         } else {
             System.out.print(String.format("    Delete liao boss:\n" +
-                    "       %s\n    Remaining Tasks: %d\n", taskList.get(index), taskList.size()));
-            taskList.remove(index);
+                    "       %s\n    Remaining Tasks: %d\n", taskList.get(index), taskList.getTaskSize()));
+            taskList.removeTask(index);
         }
 
     }
 
-    public static void commandTasks(List<Task> taskList, String tag, String message) throws DukeTaskException {
+    public void commandTasks(String tag, String message) throws DukeTaskException {
 
         String[] parsedMessage = null;
         Task newTask = null;
-        int size = taskList.size();
+        int size = taskList.getTaskSize();
 
         try {
 
@@ -127,7 +142,7 @@ public class Duke {
                 newTask = new Event(parsedMessage[0], parsedMessage[1]);
             }
 
-            taskList.add(newTask);
+            taskList.addTask(newTask);
 
             System.out.print("    Steady! I add... wait ah...\n");
             System.out.print(String.format("        ADDED: %s\n", newTask));
@@ -139,11 +154,11 @@ public class Duke {
         }
     }
 
-    public static boolean commandTaskChecker(String command) throws DukeCommandException {
+    public boolean commandTaskChecker(String command) throws DukeCommandException {
         return command.equals("event") || command.equals("deadline") || command.equals("todo");
     }
 
-    public static void exit() {
+    public void exit() {
         String exitMessage = "Pikachu: Pika byebye! THUNDERBOLT!\n";
         String bolt = "\n" +
                 "                  .-~*~--,.   .-.\n" +

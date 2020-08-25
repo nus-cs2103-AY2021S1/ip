@@ -7,6 +7,7 @@ public class Event extends Task {
 
     public Event (String task, String duration) {
         super(task, Tasktype.EVENT, duration);
+        this.durationFormatted = LocalDateTime.parse(duration, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
     public Event (String task, String duration, boolean isDone) {
