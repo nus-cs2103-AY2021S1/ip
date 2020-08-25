@@ -8,6 +8,8 @@ import commands.ListCommand;
 import commands.DeleteCommand;
 import commands.ByeCommand;
 import commands.DoneCommand;
+import commands.FindCommand;
+import commands.FindDateCommand;
 import data.exception.DukeIllegalCommandException;
 import data.task.TaskList;
 import storage.Storage;
