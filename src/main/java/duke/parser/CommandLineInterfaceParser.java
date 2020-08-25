@@ -16,6 +16,10 @@ import duke.exceptions.DukeException;
 
 import java.util.Scanner;
 
+/**
+ * Represents a parser which will parse user input into its respective commands.
+ */
+
 public class CommandLineInterfaceParser {
     private static final Scanner scanner = new Scanner(System.in);
 

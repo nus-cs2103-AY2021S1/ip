@@ -9,6 +9,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a parser which will parse the valid datetime format that the user has inputted into a
+ * {@link DukeDateTime} object.
+ */
+
 public class DateTimeParser {
     private static final String[] DATE_TIME_PATTERNS_WITHOUT_TIME = {"d/M/yyyy", "d MMM yyyy", "d MMMM yyyy", "d-M-yyyy"
             , "yyyy-M-d", "MM d yyyy", "MMM d yyyy", "MMMM d yyyy"};
