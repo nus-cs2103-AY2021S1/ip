@@ -83,7 +83,7 @@ public class SaveLoad {
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());
 //            System.out.println(e.getMe
-        } catch (NullPointerException n) {
+        } catch (NullPointerException | StringIndexOutOfBoundsException n) {
             throw new DukeException("No data found in file");
         }
         return listOfTasks;
