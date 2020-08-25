@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Parser {
 
-    public void listener(Ui myUi) {
+    public void listener(TaskList myTasklist, Ui myUi) {
         Scanner fetch = new Scanner(System.in);
         String currInput = fetch.nextLine();
 
@@ -25,14 +25,14 @@ public class Parser {
                     task += args1[i] + " ";
                 }
                 try {
-                    myUi.addTask("[T]",task);
+                    myTasklist.addTask("[T]",task);
                 }
                 catch (InSuffArgsException E){
                     System.out.println("☹ OOPS!!! The description of a " + args1[0] + " cannot be empty.");
                 }
-                myUi.numTask();
+                myTasklist.numTask();
             } else if (args1[0].equals("delete")) {
-                myUi.deleteTask(Integer.parseInt(args1[1]) - 1);
+                myTasklist.deleteTask(Integer.parseInt(args1[1]) - 1);
             } else if (args1[0].equals("deadline")) {
                 String task = "";
                 for (int i = 1; i < args1.length; i++) {
@@ -57,10 +57,10 @@ public class Parser {
                         //System.out.println(time);
 
                         LocalDate d1 = LocalDate.parse(year+"-"+month+"-"+day);
-                        myUi.addTask("[D]",task,d1);
+                        myTasklist.addTask("[D]",task,d1);
 
                     }else{
-                        myUi.addTask("[D]",task ,fullArg[1]);
+                        myTasklist.addTask("[D]",task ,fullArg[1]);
                     }
 
                 }
@@ -68,7 +68,7 @@ public class Parser {
                     System.out.println("☹ OOPS!!! The description of a " + args1[0] + " cannot be empty.");
                 }
 
-                myUi.numTask();
+                myTasklist.numTask();
 
             } else if (args1[0].equals("event")) {
 
@@ -80,20 +80,20 @@ public class Parser {
                     if(fullArg.length==1){
                         throw new InSuffArgsException();
                     }
-                    myUi.addTask("[E]",task ,fullArg[1]);
+                    myTasklist.addTask("[E]",task ,fullArg[1]);
                 }
                 catch (InSuffArgsException E){
                     System.out.println("☹ OOPS!!! The description of a " + args1[0] + " cannot be empty.");
                 }
-                myUi.numTask();
+                myTasklist.numTask();
 
             } else if (currInput.equals("list")) {
-                myUi.list();
+                myTasklist.list();
             } else if (args1[0].equals("done")) {
                 int index = Integer.parseInt(args1[1]) - 1;
-                myUi.getTasks().get(index).setDone();
+                myTasklist.getTasks().get(index).setDone();
                 System.out.println("Nice I've marked this tasks as done");
-                System.out.println( myUi.getTasks().get(index));
+                System.out.println( myTasklist.getTasks().get(index));
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

@@ -47,7 +47,7 @@ public class Storage {
         return myTask;
 
     }
-    public void updateDirectory(Ui myUi){
+    public void updateDirectory(TaskList myTaskList){
         // deleting all files in directory
         File dir = new File("ToDo");
         File[] myItems = dir.listFiles();
@@ -65,13 +65,13 @@ public class Storage {
         }
 
         // repopulating directory with that in arraylist taks
-        for(int i = 0;i<myUi.getTasks().size();i++){
-            writeToFile(myUi.getTasks().get(i),i);
+        for(int i = 0;i<myTaskList.getTasks().size();i++){
+            writeToFile(myTaskList.getTasks().get(i),i);
         }
     }
 
 
-    public void populateList(Ui myUi){
+    public void populateList(TaskList myUi){
         File dir = new File("ToDo");
         File[] myItems = dir.listFiles();
         for (File child : myItems) {

@@ -6,15 +6,16 @@ public class Duke {
         Ui myDukeBot = new Ui();
         Storage myStorage = new Storage();
         Parser myParser = new Parser();
+        TaskList myTaskList = new TaskList();
 
         myDukeBot.greeting();
         myStorage.createDirectory("ToDo");
-        myStorage.populateList(myDukeBot);
-        myDukeBot.list();
+        myStorage.populateList(myTaskList);
+        myTaskList.list();
 
-        myParser.listener(myDukeBot);
+        myParser.listener(myTaskList,myDukeBot);
 
-        myStorage.updateDirectory(myDukeBot);
+        myStorage.updateDirectory(myTaskList);
         System.out.println("End");
 
     }
