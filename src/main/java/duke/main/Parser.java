@@ -31,6 +31,8 @@ public abstract class Parser {
             return new DisplayListCommand();
         } else if (inputLine.equals("save")) {
             return new SaveCommand();
+        } else if (arr[0].equals("find")) {
+            return new FindCommand(inputLine.substring(5));
         } else if (arr.length == 2 && (arr[0].equals("done") || arr[0].equals("delete")) && isInteger(arr[1])) {
             try {
                 int num = Integer.parseInt(arr[1]);

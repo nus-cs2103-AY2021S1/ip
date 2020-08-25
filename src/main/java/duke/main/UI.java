@@ -95,6 +95,29 @@ public class UI {
     }
 
     /**
+     * Displays the list of tasks that contains the matching keyword to the user.
+     *
+     * @param taskList The TaskList containing tasks with the matching keyword
+     */
+    public void displayMatchingList(ArrayList<Task> taskList) {
+        if (taskList.isEmpty()) {
+            showCmd(" I've found no matching tasks with the keyword! T_T\n Try again!");
+        } else {
+            String s = "";
+            if (taskList.size() == 1) {
+                s = s.concat(" Here is the matching task in your list:\n");
+            } else {
+                s = s.concat(" Here are the matching tasks in your list:\n");
+            }
+            for (int i = 0; i < taskList.size(); i++) {
+                s = s.concat(" " + (i+1) + "." + taskList.get(i) + "\n");
+            }
+            s = s.substring(0, s.length() - 1);
+            showCmd(s);
+        }
+    }
+
+    /**
      * Displays the size of the TaskList to the user.
      *
      * @param n The size of the TaskList

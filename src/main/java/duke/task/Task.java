@@ -22,7 +22,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "✓" : "✘"); //return tick or X symbols
+        return (isDone ? "Y" : "N");
     }
 
     public abstract String getTaskType();
