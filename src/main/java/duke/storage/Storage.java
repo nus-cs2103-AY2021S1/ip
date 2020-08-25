@@ -38,23 +38,23 @@ public class Storage {
         try {
             File dir = new File(this.dirpath);
             File taskFile = new File(this.filepath);
-            if(dir.mkdir()) {
+            if (dir.mkdir()) {
                 System.out.println("Welcome. Dino has created a new directory " +
                         "to store your data.");
-                if(taskFile.createNewFile()) {
-                    System.out.println("Dino has successfully created a new file to store your task list.");
+                if (taskFile.createNewFile()) {
+                    System.out.println("Dino has successfully " +
+                            "created a new file to store your task list.");
                 } else {
                     System.out.println("Dino could not create a new file to store your task list.");
                 }
-            } else if(taskFile.createNewFile()) {
+            } else if (taskFile.createNewFile()) {
                 System.out.println("Welcome. Dino has successfully created " +
                         "a new file to store your task list.");
             } else {
                 Scanner scan = new Scanner(taskFile);
                 while (scan.hasNextLine()) {
                     String taskString = scan.nextLine();
-                    if(taskString.equals("")) {
-                    } else {
+                    if (!taskString.equals("")) {
                         String[] taskSplit = taskString.split("@");
                         String taskType = taskSplit[0];
                         String taskDone = taskSplit[1];
@@ -64,7 +64,7 @@ public class Storage {
 
                         case "T":
                             Todo todo = new Todo(taskDesc);
-                            if(taskDone.equals("1")) {
+                            if (taskDone.equals("1")) {
                                 todo.markAsDone();
                             }
                             tasks.add(todo);
@@ -73,7 +73,7 @@ public class Storage {
                         case "D":
                             String taskDeadline = taskSplit[3] + " " + taskSplit[4];
                             Deadline deadline = Deadline.createDeadline(taskDesc, taskDeadline);
-                            if(taskDone.equals("1")) {
+                            if (taskDone.equals("1")) {
                                 deadline.markAsDone();
                             }
                             tasks.add(deadline);
@@ -82,17 +82,20 @@ public class Storage {
                         case "E":
                             String taskDateTime = taskSplit[3] + " " + taskSplit[4];
                             Event event = Event.createEvent(taskDesc, taskDateTime);
-                            if(taskDone.equals("1")) {
+                            if (taskDone.equals("1")) {
                                 event.markAsDone();
                             }
                             tasks.add(event);
                             break;
+
+                        default:
+                            throw new DukeException("Invalid task type.");
                         }
                     }
                 }
                 System.out.println("Welcome back. Dino has successfully loaded your task data.");
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new DukeException("Dino could not load your task data.");
         }
         System.out.println("____________________________________________________________");
@@ -111,7 +114,7 @@ public class Storage {
      */
     public void writeToFile(Task task, DukeAction action) throws DukeException {
         try {
-            switch(action) {
+            switch (action) {
             case ADD:
                 FileWriter fw = new FileWriter(this.filepath, true);
                 fw.write(task.storedTaskString() + "\n");
@@ -127,7 +130,7 @@ public class Storage {
 
                 String lineToRemove = task.storedTaskString();
                 String currentLine;
-                while((currentLine = reader.readLine()) != null) {
+                while ((currentLine = reader.readLine()) != null) {
                     if (!currentLine.equals(lineToRemove)) {
                         writer.write(currentLine);
                         writer.newLine();
@@ -137,8 +140,8 @@ public class Storage {
                 reader.close();
                 System.gc();
 
-                if(inputFile.delete()) {
-                    if(tempFile.renameTo(inputFile)) {
+                if (inputFile.delete()) {
+                    if (tempFile.renameTo(inputFile)) {
                         System.out.println("Success!");
                     } else {
                         throw new DukeException("Dino could not write task data to hard disk.");
@@ -156,7 +159,7 @@ public class Storage {
 
                 String lineToMarkDone = task.storedTaskString();
                 String currentL;
-                while((currentL = br.readLine()) != null) {
+                while ((currentL = br.readLine()) != null) {
                     if (!currentL.equals(lineToMarkDone)) {
                         bw.write(currentL);
                     } else {
@@ -170,8 +173,8 @@ public class Storage {
                 br.close();
                 System.gc();
 
-                if(taskFile.delete()) {
-                    if(temFile.renameTo(taskFile)) {
+                if (taskFile.delete()) {
+                    if (temFile.renameTo(taskFile)) {
                         System.out.println("Success!");
                     } else {
                         throw new DukeException("Dino could not write task data to hard disk.");
@@ -180,9 +183,12 @@ public class Storage {
                     throw new DukeException("Dino could not write task data to hard disk.");
                 }
                 break;
+
+            default:
+                throw new DukeException("Not a valid action.");
             }
 
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new DukeException("Dino could not write task data to hard disk.");
         }
     }

@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
     public void execute(Storage storage, TaskList taskList, Ui ui) {
         try {
             ui.showSuccess(taskList.deleteTask(storage, this.input));
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
     }

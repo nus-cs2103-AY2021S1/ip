@@ -24,7 +24,7 @@ public class MarkDoneCommand extends Command {
     public void execute(Storage storage, TaskList taskList, Ui ui) {
         try {
             ui.showSuccess(taskList.markDone(storage, this.input));
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
     }

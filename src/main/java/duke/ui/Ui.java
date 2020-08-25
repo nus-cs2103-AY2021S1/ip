@@ -16,7 +16,7 @@ public class Ui {
                 + "| |_| | | | | | |_| |\n"
                 + "|____/|_|_| |_|\\___/\n";
         System.out.println("Rawr! I'm Dino ><\n"
-                +logo
+                + logo
                 + "\nGet started on your task list by entering a task!"
                 + "\nTo see how to format your task, input 'format'"
                 + "\nTo see your list of tasks, input 'list'."
