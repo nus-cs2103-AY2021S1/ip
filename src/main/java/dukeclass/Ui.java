@@ -17,13 +17,13 @@ public class Ui {
 
     public static String printTaskList(TaskList list) {
         return "____________________________________________________________\n"
-                + list.toString()
+                + list.toString() + "\n"
                 + "____________________________________________________________\n";
     }
 
     public static String printTask(Task Task) {
         return "____________________________________________________________\n"
-                + Task.toString()
+                + Task.toString() + "\n"
                 + "____________________________________________________________\n";
     }
 
