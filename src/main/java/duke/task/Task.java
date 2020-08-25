@@ -2,6 +2,10 @@ package duke.task;
 
 import java.util.Objects;
 
+/**
+ * Represents a task. Task will generally have a description and have a isDone state. Some subclasses
+ * will have other details such as time (e.g. Event, Deadline)
+ */
 abstract public class Task {
     protected boolean isDone = false;
     String description;
@@ -11,6 +15,9 @@ abstract public class Task {
         this.description = description;
     }
 
+    /**
+     * Mark a task as done.
+     */
     public void markAsDone(){
         isDone = true;
     }
@@ -38,5 +45,10 @@ abstract public class Task {
         return isDone;
     }
 
+    /**
+     * Returns a string that can be used to write to memory.
+     *
+     * @return  String that will be used to write to memory.
+     */
     abstract public String convertToData();
 }

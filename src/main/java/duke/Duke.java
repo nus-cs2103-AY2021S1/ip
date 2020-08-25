@@ -2,8 +2,11 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import duke.task.Ui;
 
+/**
+ * Dook the all purpose chatbot to serve your human needs. Made from the finest IDEs, Dook will be the most
+ * efficient task list you have ever laid your hands upon.
+ */
 public class Duke {
 
     private Storage storage;
@@ -16,6 +19,9 @@ public class Duke {
         tasks = new TaskList(storage);
     }
 
+    /**
+     * To start Dook chatbot.
+     */
     public void run() {
 
         // Initialise

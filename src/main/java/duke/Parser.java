@@ -9,6 +9,9 @@ import duke.task.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Parser class that helps to understand user input and returns the correct commands.
+ */
 public class Parser {
 
     private static Command parseDone(String input) throws DukeException {
@@ -63,15 +66,29 @@ public class Parser {
         return new DeleteCommand(index);
     }
 
+    /**
+     * Parse a dateTime string of format : yyyy-mm-dd HHmm
+     * and returns with format : yyyy-mm-ddTHH:mm
+     *
+     * @param s  String to be parsed.
+     * @return  LocalDateTime parsable string.
+     */
     public static LocalDateTime parseDateTime(String s) {
-        // s will be in the format : yyyy-mm-dd HHmm
-        // return format : yyyy-mm-ddTHH:mm
         String[] dateTimeSplit = s.split(" ");
         String date = dateTimeSplit[0];
         String hour = dateTimeSplit[1].substring(0, 2);
         String min = dateTimeSplit[1].substring(2);
         return LocalDateTime.parse(date + "T" + hour + ":" + min);
     }
+
+    /**
+     * Main method of the Parser class, this will evaluate a input string and
+     * return the appropriate command.
+     *
+     * @param input  Input to be parsed
+     * @return  Command Object that represents the input's desires.
+     * @throws DukeException  If input is invalid.
+     */
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) {
             return new ExitCommand();

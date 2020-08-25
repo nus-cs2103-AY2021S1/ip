@@ -5,7 +5,7 @@ import duke.TaskList;
 import duke.exception.DukeException;
 import duke.exception.InvalidArgumentException;
 import duke.task.Task;
-import duke.task.Ui;
+import duke.Ui;
 
 public class DeleteCommand implements Command {
     private final int index;

@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Deals with all Storage operations.
+ */
 public class Storage {
     private Path path;
     static private File memoryFile;
@@ -23,7 +26,7 @@ public class Storage {
         path = Paths.get(filePath);
     }
 
-    List<Task> parseData(File f) throws FileNotFoundException {
+    private List<Task> parseData(File f) throws FileNotFoundException {
         List<Task> tasklist = new ArrayList<>();
 
         Scanner s = new Scanner(f);
@@ -62,12 +65,24 @@ public class Storage {
         return tasklist;
     }
 
-
+    /**
+     * Writes given task to memory.
+     *
+     * @param task  Task to be saved.
+     * @throws IOException  If FileWriter faces writing issues.
+     */
     public void writeData(Task task) throws IOException {
         FileWriter fw = new FileWriter(path.toString(), true);
         fw.write(task.convertToData() + "\n");
         fw.close();
     }
+
+    /**
+     * Rewrites entire memory file with TaskList.
+     *
+     * @param tasks  TaskList to be saved.
+     * @throws IOException  If FileWriter faces exceptions
+     */
     public void rewriteData(List<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(path.toString());
         for(Task t : tasks) {
@@ -75,6 +90,12 @@ public class Storage {
         }
         fw.close();
     }
+
+    /**
+     * Initialise a TaskList from memory file
+     *
+     * @param tasklist  TaskList to be initialised.
+     */
     public void initialiseTasks(List<Task> tasklist){
         System.out.print(Ui.divider);
         memoryFile = new File(path.toString());

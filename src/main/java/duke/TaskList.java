@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a list of Task objects. Contains functions to manipulate tasklist.
+ */
 public class TaskList {
     private static Storage store;
     private List<Task> taskList;
@@ -19,6 +22,11 @@ public class TaskList {
     }
 
 
+    /**
+     * Returns TaskList's Storage Object.
+     *
+     * @return TaskList's Storage Object.
+     */
     public Storage getStore() {
         return store;
     }
@@ -30,6 +38,12 @@ public class TaskList {
             throw new WriteToStorageException();
         }
     }
+
+    /**
+     * Mark a task in TaskList as done.
+     * @param index Index of the task to be set as done.
+     * @throws WriteToStorageException if Storage faces issues writing tasks.
+     */
     public void doneTask(int index) throws WriteToStorageException {
         taskList.get(index).markAsDone();
         try {
@@ -56,11 +70,15 @@ public class TaskList {
     public Task getTask(int index) {
         return taskList.get(index);
     }
-
     public int size() {
         return taskList.size();
     }
 
+    /**
+     * Delete a task from list.
+     * @param index Index of task to be removed.
+     * @return return deleted Task object.
+     */
     public Task remove(int index) {
         return taskList.remove(index);
     }
