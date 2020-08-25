@@ -1,8 +1,9 @@
-package Duke.Tasks;
+package duke.tasks;
 
-import Duke.Tool.Storage;
-import Duke.Tool.TaskList;
-import Duke.Ui;
+import duke.tool.Storage;
+import duke.tool.TaskList;
+
+import duke.Ui;
 
 public class Todo extends Task{
     public Todo(String description, boolean isDone) {

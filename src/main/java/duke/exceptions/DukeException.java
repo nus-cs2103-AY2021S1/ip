@@ -1,6 +1,4 @@
-package Duke.Exceptions;
-
-import Duke.Duke;
+package duke.exceptions;
 
 public class DukeException extends Exception{
     public DukeException(String e) {

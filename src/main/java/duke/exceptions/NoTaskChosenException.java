@@ -1,4 +1,4 @@
-package Duke.Exceptions;
+package duke.exceptions;
 
 public class NoTaskChosenException extends DukeException{
     public NoTaskChosenException(String task) {

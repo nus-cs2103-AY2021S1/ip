@@ -1,13 +1,25 @@
-package Duke.Tool;
+package duke.tool;
 
-import Duke.Exceptions.*;
-import Duke.Tasks.*;
+import duke.exceptions.NoDescriptionException;
+import duke.exceptions.NoSuchOrderException;
+import duke.exceptions.NoTaskChosenException;
+import duke.exceptions.NoThisNumOfTaskException;
+import duke.exceptions.NoTimeException;
+
+import duke.tasks.Deadline;
+import duke.tasks.Delete;
+import duke.tasks.Done;
+import duke.tasks.Event;
+import duke.tasks.Exit;
+import duke.tasks.List;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
-    public static DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    public static DateTimeFormatter VALID_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public static boolean isInteger(String s) {
         if (s == null) {
@@ -33,7 +45,8 @@ public class Parser {
                 if (command[0].equals("done")) {
                     if (command.length == 1) {
                         throw new NoTaskChosenException(command[0]);
-                    } else if (!isInteger(command[1]) || Integer.parseInt(command[1]) > numOfOrders) {
+                    } else if (!isInteger(command[1])
+                            || Integer.parseInt(command[1]) > numOfOrders) {
                         throw new NoThisNumOfTaskException();
                     } else {
                         return new Done(Integer.parseInt(command[1]) - 1);
@@ -41,7 +54,8 @@ public class Parser {
                 } else if (command[0].equals("delete")) {
                     if (command.length == 1) {
                         throw new NoTaskChosenException(command[0]);
-                    } else if (!isInteger(command[1]) || Integer.parseInt(command[1]) > numOfOrders) {
+                    } else if (!isInteger(command[1])
+                            || Integer.parseInt(command[1]) > numOfOrders) {
                         throw new NoThisNumOfTaskException();
                     } else {
                         return new Delete((Integer.parseInt(command[1]) - 1));
@@ -54,14 +68,15 @@ public class Parser {
                         if (splitAgain.length == 1) {
                             throw new NoTimeException(command[0]);
                         }
-                        return new Deadline(splitAgain[0], LocalDateTime.parse(splitAgain[1], validFormat), false);
+                        return new Deadline(splitAgain[0],
+                                LocalDateTime.parse(splitAgain[1], VALID_FORMAT), false);
                     } else if (command[0].equals("event")) {
                         String[] splitAgain = command[1].split("/at ");
                         if (splitAgain.length == 1) {
                             throw new NoTimeException(command[0]);
                         }
-                        return new Event(splitAgain[0], LocalDateTime.parse(splitAgain[1], validFormat), false);
-
+                        return new Event(splitAgain[0],
+                                LocalDateTime.parse(splitAgain[1], VALID_FORMAT), false);
                     } else if (command[0].equals("todo")) {
                         return new Todo(command[1], false);
                     } else {
@@ -69,7 +84,8 @@ public class Parser {
                     }
                 }
             }
-        } catch (NoDescriptionException | NoTimeException | NoSuchOrderException | NoTaskChosenException | NoThisNumOfTaskException e) {
+        } catch (NoDescriptionException | NoTimeException | NoSuchOrderException
+                | NoTaskChosenException | NoThisNumOfTaskException e) {
             e.printStackTrace();
         }
         return null;

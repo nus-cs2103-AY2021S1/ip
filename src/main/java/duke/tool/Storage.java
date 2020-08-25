@@ -1,16 +1,18 @@
-package Duke.Tool;
+package duke.tool;
 
-import Duke.Tasks.Deadline;
-import Duke.Tasks.Event;
-import Duke.Tasks.Task;
-import Duke.Tasks.Todo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -34,10 +36,10 @@ public class Storage {
                 Boolean isDone = currTask[1] == "1";
                 if (currTask[0] == "T") {
                     orderList.add(new Todo(currTask[2], isDone));
-                } else if(currTask[0] == "D") {
+                } else if (currTask[0] == "D") {
                     orderList.add(new Deadline(currTask[2],
                             LocalDateTime.parse(currTask[3], validFormat), isDone));
-                } else if(currTask[0] == "E") {
+                } else if (currTask[0] == "E") {
                     orderList.add(new Event(currTask[2],
                             LocalDateTime.parse(currTask[3], validFormat), isDone));
                 }
@@ -45,7 +47,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             if (new File("data").mkdir()) {
                 System.out.println("folder data does not exist yet.");
-            } else if(new File(filePath).createNewFile()) {
+            } else if (new File(filePath).createNewFile()) {
                 System.out.println("File duke.txt does not exist yet.");
             }
         }

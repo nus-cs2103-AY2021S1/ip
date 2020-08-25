@@ -1,7 +1,7 @@
-package Duke;
+package duke;
 
-import Duke.Tasks.Task;
-import Duke.Tool.TaskList;
+import duke.tasks.Task;
+import duke.tool.TaskList;
 
 import java.util.Scanner;
 
@@ -64,7 +64,7 @@ public class Ui {
     public void listTasks(TaskList tasklist) {
         System.out.println(seperateLine());
         System.out.println(spaceBeforeOder() + "Here are the tasks in your list:");
-        for (int i = 0; i < tasklist.getNumOfTasks(); i++){
+        for (int i = 0; i < tasklist.getNumOfTasks(); i++) {
             System.out.println(spaceBeforeOder() + (i + 1) + ". " +
                     tasklist.getTask(i));
         }

@@ -1,4 +1,4 @@
-package Duke.Exceptions;
+package duke.exceptions;
 
 public class NoDescriptionException extends DukeException{
     public NoDescriptionException(String task) {

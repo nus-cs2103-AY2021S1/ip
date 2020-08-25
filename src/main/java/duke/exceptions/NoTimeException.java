@@ -1,4 +1,4 @@
-package Duke.Exceptions;
+package duke.exceptions;
 
 public class NoTimeException extends DukeException{
     public NoTimeException(String task) {

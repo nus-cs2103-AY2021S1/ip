@@ -1,8 +1,8 @@
-package Duke;
+package duke;
 
-import Duke.Tasks.Task;
-import Duke.Tasks.Todo;
-import Duke.Tool.TaskList;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+import duke.tool.TaskList;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

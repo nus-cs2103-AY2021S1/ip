@@ -1,21 +1,23 @@
-package Duke.Tasks;
+package duke.tasks;
 
-import Duke.Tool.Storage;
-import Duke.Tool.TaskList;
-import Duke.Ui;
+import duke.tool.Storage;
+import duke.tool.TaskList;
+
+import duke.Ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
-    protected LocalDateTime by;
-    public Deadline(String description, LocalDateTime by, Boolean isDone) {
+public class Event extends Task{
+    protected LocalDateTime at;
+
+    public Event(String description, LocalDateTime at, Boolean isDone) {
         super(description, isDone);
-        this.by = by;
+        this.at = at;
     }
 
     @Override
-    public Deadline markDone() {
+    public Event markDone() {
         super.markDone();
         return this;
     }
@@ -27,18 +29,17 @@ public class Deadline extends Task {
         storage.writeData(tasklist.taskList);
     }
 
-
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
-                + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
+        return "[E]" + super.toString() + " (at: " +
+                at.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))  + ")";
     }
 
     @Override
     public String fileFormattedString() {
         String doneOrNot = isDone ? "1" : "0";
-        return "D | " + doneOrNot + " | " + this.name + " | " +
-                by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
+        return "E | " + doneOrNot + " | " + this.name + " | " +
+                at.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
     }
 
 }

@@ -1,4 +1,4 @@
-package Duke.Exceptions;
+package duke.exceptions;
 
 public class NoSuchOrderException extends DukeException{
     public NoSuchOrderException() {
