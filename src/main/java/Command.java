@@ -70,6 +70,8 @@ public class Command {
                 taskList.addTask(new Event(lst.get(2), lst.get(3)), ui);
             }
             storage.save(taskList.getTasks());
+        } else if (lst.get(0).equals("Find")) {
+            taskList.findTask(lst.get(1), ui);
         } else {
             taskList.deleteTask(Integer.parseInt(lst.get(1)), ui);
             storage.save(taskList.getTasks());

@@ -100,4 +100,19 @@ public class TaskList {
         tasks.add(task);
         ui.showAdd(tasks.get(tasks.size() - 1), tasks.size());
     }
+
+    /**
+     * Finds the tasks in the task list that match the given keyword.
+     * @param keyword the keyword given by the user.
+     * @param ui the user interface of the Duke application.
+     */
+    public void findTask(String keyword, Ui ui) {
+        ArrayList<String> lst = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.toString().contains(keyword)) {
+                lst.add(t.toString());
+            }
+        }
+        ui.showFind(lst);
+    }
 }

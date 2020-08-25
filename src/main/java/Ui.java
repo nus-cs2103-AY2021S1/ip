@@ -106,6 +106,21 @@ public class Ui {
     }
 
     /**
+     * Displays the tasks in the task list that match the keyword given by
+     * the user.
+     * @param lst a list of String objects representing the tasks in the task list
+     *            that match the given keyword.
+     */
+    public void showFind(ArrayList<String> lst) {
+        showLine();
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < lst.size(); i++) {
+            System.out.println("    " + (i + 1) + "." + lst.get(i));
+        }
+        showLine();
+    }
+
+    /**
      * Reads the command entered by the user.
      * @return the user command.
      */
