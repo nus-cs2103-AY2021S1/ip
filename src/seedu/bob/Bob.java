@@ -41,7 +41,7 @@ public class Bob {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExited();
-            } catch (IOException e){
+            } catch (IOException e) {
                 ui.showUpdatingError();
             } catch (BobException e) {
                 ui.showError(e);

@@ -28,7 +28,7 @@ public class Parser {
             return new EventCommand(input.substring(5));
         } else if (input.length() >= 8 && input.startsWith("deadline")) {
             return new DeadlineCommand(input.substring(8));
-            // If user's command is invalid/not recognisable by Bob
+        // If user's command is invalid/not recognisable by Bob
         } else {
             throw new BobInvalidCommandException();
         }

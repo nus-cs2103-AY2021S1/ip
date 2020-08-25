@@ -2,15 +2,17 @@ package seedu.bob.commands;
 
 import seedu.bob.data.task.Deadline;
 import seedu.bob.data.task.Tasklist;
+
 import seedu.bob.exceptions.BobEmptyTaskException;
 import seedu.bob.exceptions.BobInvalidDateAndTimeException;
+
 import seedu.bob.storage.Storage;
 import seedu.bob.ui.Ui;
 
 import java.io.IOException;
 
 public class DeadlineCommand extends Command {
-    String input;
+    private final String input;
 
     public DeadlineCommand(String input) throws BobEmptyTaskException {
         if (input.length() == 0) {
@@ -18,8 +20,8 @@ public class DeadlineCommand extends Command {
         }
 
         this.input = input.startsWith(" ")
-                ? input.substring(1)
-                : input;
+                    ? input.substring(1)
+                    : input;
     }
 
     /**
@@ -34,8 +36,7 @@ public class DeadlineCommand extends Command {
         if (date.length() != 10 || split.length != 3) {
             throw new BobInvalidDateAndTimeException();
         }
-        String formattedDate = split[0] + "-" + split[1] + "-" + split[2];
-        return formattedDate;
+        return split[0] + "-" + split[1] + "-" + split[2];
     }
 
     /**

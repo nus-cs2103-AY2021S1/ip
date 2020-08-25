@@ -36,7 +36,7 @@ public class DateAndTime {
      * @return Original String of date.
      */
     public String getDate() {
-        return this.date.format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
+        return this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     /**
@@ -56,9 +56,4 @@ public class DateAndTime {
         return this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(Locale.UK))
                 + ", " + this.time.format(DateTimeFormatter.ofPattern("hh:mma"));
     }
-
-//    public static void main(String[] args) {
-//        DateAndTime test = new DateAndTime("2222-09-09", "04:00");
-//        System.out.println(new DateAndTime(test.getDate(), test.getTime()).toString());
-//    }
 }

@@ -2,14 +2,16 @@ package seedu.bob.commands;
 
 import seedu.bob.data.task.Task;
 import seedu.bob.data.task.Tasklist;
+
 import seedu.bob.exceptions.BobEmptyTaskException;
+
 import seedu.bob.storage.Storage;
 import seedu.bob.ui.Ui;
 
 import java.io.IOException;
 
 public class TodoCommand extends Command {
-    String input;
+    private final String input;
 
     public TodoCommand(String input) throws BobEmptyTaskException {
         if (input.length() == 0) {

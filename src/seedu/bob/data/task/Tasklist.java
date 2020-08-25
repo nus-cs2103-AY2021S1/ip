@@ -1,17 +1,18 @@
 package seedu.bob.data.task;
 
 import seedu.bob.exceptions.BobInvalidDateAndTimeException;
-import seedu.bob.storage.Storage;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import seedu.bob.storage.Storage;
+
 import java.util.ArrayList;
 
 /**
  * Represents the task list in Bob.
  */
 public class Tasklist {
-    ArrayList<Task> list;
+    private final ArrayList<Task> list;
 
     public Tasklist(Storage storage) throws FileNotFoundException, BobInvalidDateAndTimeException {
         this.list = storage.getList();
