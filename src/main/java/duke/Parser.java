@@ -23,7 +23,20 @@ public class Parser {
             ui.showByeMessage();
             Duke.running = false; // DONT KNOW IF THIS IS OK
         } else if (command.equals("list")) {
-            ui.printList(tList);
+            ui.printList(tList, "Here are the task(s) in your list:");
+        } else if (command.substring(0, 4).equals("find")) {
+            String search = command.substring(5);
+            TaskList tClone = new TaskList();
+            for (Task t : tList) {
+                if (t.getName().contains(search)) {
+                    tClone.add(t);
+                }
+            }
+            if (tClone.size() == 0) {
+                ui.showNoResultsMessage();
+            } else {
+                ui.printList(tClone, "Here are the matching tasks in your list:");
+            }
         } else if (command.substring(0, 4).equals("done")) {
             int index = Integer.parseInt(command.substring(5)) - 1;
             tList.get(index).setStatus(true);

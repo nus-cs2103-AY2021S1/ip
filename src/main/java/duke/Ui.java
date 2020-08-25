@@ -67,8 +67,11 @@ public class Ui {
         System.out.println(border + "Naw, this isn't an accepted command!\n" + availableCommands + border);
     }
 
-    public void printList(TaskList tList) {
-        System.out.println(border + "Here are the task(s) in your list:\n");
+    public void showNoResultsMessage() {
+        System.out.println(border + "Sorry, no tasks were found with that name!" + border);
+    }
+    public void printList(TaskList tList, String s) {
+        System.out.println(border + s + "\n");
         for (int i = 0; i < tList.size(); i++) {
             System.out.println("\t" + (i + 1) + ". " + tList.get(i));
         }
