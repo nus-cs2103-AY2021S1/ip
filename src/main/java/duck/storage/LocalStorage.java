@@ -10,9 +10,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * LocalStorage makes use of Serializable objects to write to a local file.
+ */
 public class LocalStorage implements Storage{
     private String filePath;
 
+    /**
+     * Initializes file location.
+     *
+     * @param filePath Location that storage file will be.
+     */
     public LocalStorage(String filePath) {
         this.filePath = filePath;
     }
@@ -27,8 +35,12 @@ public class LocalStorage implements Storage{
 
     }
 
-
-
+    /**
+     * Serializes the TaskList object and stores in a file.
+     *
+     * @param taskList List of tasks to be saved.
+     * @throws DuckException If file is unable to be saved due to corruption.
+     */
     public void save(TaskList taskList) throws DuckException {
         try {
             ensureFileExists();
@@ -43,6 +55,12 @@ public class LocalStorage implements Storage{
         }
     }
 
+    /**
+     * Loads the serialized data into a TaskList object.
+     *
+     * @return Object of instance TaskList with previously saved tasks.
+     * @throws DuckException If file is not found or error occured in loading.
+     */
     public TaskList load() throws DuckException {
         try {
             FileInputStream file = new FileInputStream(filePath);

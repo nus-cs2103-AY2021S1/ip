@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
 
+/**
+ * Duck is the bot that handles all user input and calls the
+ * respective classes needed.
+ */
 public class Duck {
 
     private Ui userInterface;
@@ -22,6 +26,13 @@ public class Duck {
     private TaskList taskList;
     private List<String> responses;
 
+    /**
+     * Initializes the components needed by the bot.
+     * Loads the existing data from storage if present.
+     *
+     * @param ui Object that implements the Ui interface.
+     * @param storage Object that implements the Storage interface.
+     */
     public Duck(Ui ui, Storage storage) {
         this.userInterface = ui;
         this.storage = storage;
@@ -34,11 +45,13 @@ public class Duck {
         this.responses = new ArrayList<>();
     }
 
-
     private String getNumberOfTasks() {
         return "Now you have " + this.taskList.getLength() + " tasks in the list.";
     }
 
+    /**
+     * Default greeting when user first sees the bot.
+     */
     public void greet() {
         List<String> welcomeMessage = new ArrayList<>();
         welcomeMessage.add("Hello! I'm Duck");
@@ -46,6 +59,10 @@ public class Duck {
         userInterface.respond(welcomeMessage);
     }
 
+    /**
+     * To be run when the user exits the application or when the bot closes.
+     * This will send a message as well as save the existing data via storage.
+     */
     public void shutdown() {
         responses.add("Bye. Hope to see you again soon!");
         try {
@@ -56,6 +73,9 @@ public class Duck {
 
     }
 
+    /**
+     * Gets statuses of all tasks in TaskList and adds to response.
+     */
     public void listTasks() {
         responses.add("Here are the tasks in your list");
         String[] statuses = this.taskList.getStatuses();
@@ -63,6 +83,13 @@ public class Duck {
             responses.add(statuses[i]);
         }
     }
+
+    /**
+     * Lists all the tasks with dates in ascending date order.
+     * Triggered by "due" with optional date term "due /by 2020-12-12".
+     *
+     * @param input Input from user.
+     */
     public void listByDueDate(String input) {
         Optional<LocalDate> optionalDate;
         try {
@@ -81,6 +108,12 @@ public class Duck {
         }
     }
 
+    /**
+     * Marks the task as done and displays the done task.
+     *
+     * @param input Input from user.
+     * @throws DuckException If index obtained is less than 1 or greater than number of tasks.
+     */
     public void markTaskAsDone(String input) throws DuckException {
         int taskNumber = Parser.parseTaskNumber(input);
         Task task = this.taskList.markDone(taskNumber);
@@ -88,6 +121,12 @@ public class Duck {
         responses.add("  " + task.getStatus());
     }
 
+    /**
+     * Deletes the task and displays the deleted task.
+     *
+     * @param input Input from user.
+     * @throws DuckException If index obtained is less than 1 or greater than number of tasks.
+     */
     public void deleteTask(String input) throws DuckException {
         int taskNumber = Parser.parseTaskNumber(input);
         Task task = this.taskList.deleteTask(taskNumber);
@@ -97,8 +136,13 @@ public class Duck {
 
     }
 
+    /**
+     * Obtains a task from TaskFactory and adds it to the TaskList.
+     *
+     * @param input Input from user.
+     * @throws DuckException If input is unable to be parsed into any Task.
+     */
     public void createNewTask(String input) throws DuckException {
-
         Task newTask = TaskFactory.createTaskFromInput(input);
         this.taskList.addTask(newTask);
         responses.add("Got it. I've added this task");
@@ -106,8 +150,10 @@ public class Duck {
         responses.add(getNumberOfTasks());
     }
 
-
-
+    /**
+     * Main loop of the bot.
+     * Continuously waits for input until "bye" command is given.
+     */
     public void run() {
         greet();
         Runtime.getRuntime().addShutdownHook(new Thread() {

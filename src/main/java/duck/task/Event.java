@@ -4,6 +4,9 @@ import duck.ui.Colour;
 
 import java.time.LocalDate;
 
+/**
+ * Event class for representing the event type.
+ */
 public class Event extends TaskWithDate {
 
     public Event(String desc, LocalDate date) {

@@ -3,6 +3,12 @@ package duck;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Enumerators for different commands for clarity and consistent reference.
+ *
+ * Solution adapted from Effective Java by Joshua Bloch.
+ * https://stackoverflow.com/questions/604424/how-to-get-an-enum-value-from-a-string-value-in-java
+ */
 public enum Option {
     BYE("bye"),
     LIST("list"),
