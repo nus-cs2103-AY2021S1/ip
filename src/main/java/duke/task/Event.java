@@ -17,8 +17,8 @@ public class Event extends Task {
     }
 
     @Override
-    public String stringToSaveInMemory() {
-        return super.stringToSaveInMemory() + "|" + at;
+    public String toStringForMemory() {
+        return super.toStringForMemory() + "|" + at;
     }
 
     @Override

@@ -11,19 +11,19 @@ import java.io.IOException;
 
 public class DeleteCommand extends Command {
 
-    private String[] splitCommand;
+    private String[] commandParts;
 
-    public DeleteCommand(String[] splitCommand) {
-        this.splitCommand = splitCommand;
+    public DeleteCommand(String[] commandParts) {
+        this.commandParts = commandParts;
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DeleteWrongFormatException,
             TaskIndexOutOfBoundsException {
         try {
-            if (splitCommand.length != 2) { // If command is in a wrong format
+            if (commandParts.length != 2) { // If command is in a wrong format
                 throw new DeleteWrongFormatException();
             }
-            int taskIndex = Integer.parseInt(splitCommand[1]) - 1; // Index of task in the task list
+            int taskIndex = Integer.parseInt(commandParts[1]) - 1; // Index of task in the task list
             Task removedTask = tasks.removeTask(taskIndex);
             ui.showReplyForDeleteTask(removedTask, tasks);
             try {
@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
         } catch (IndexOutOfBoundsException e) { // User requests
             // for a task with an index not within the current
             // task list
-            throw new TaskIndexOutOfBoundsException(splitCommand[1]);
+            throw new TaskIndexOutOfBoundsException(commandParts[1]);
         }
     }
 }

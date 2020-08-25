@@ -21,10 +21,8 @@ public class AddEventCommand extends AddCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws EventWrongFormatException {
         try {
-            String[] splitLineIntoTwo = fullCommand.split("/at");
-            Task newTask = new Event(splitLineIntoTwo[0]
-                    .substring(6).trim(),
-                    splitLineIntoTwo[1].trim());
+            String[] commandParts = fullCommand.split("/at");
+            Task newTask = new Event(commandParts[0].substring(6).trim(), commandParts[1].trim());
             tasks.addTask(newTask);
             ui.showReplyForAddTask(newTask, tasks);
             try {
@@ -32,8 +30,8 @@ public class AddEventCommand extends AddCommand {
             } catch (IOException e) {
                 System.err.println(e.getMessage());
             }
-        } catch (IndexOutOfBoundsException | WrongFormatException e)
-        { // duke.command.Command is in a wrong format
+        } catch (IndexOutOfBoundsException | WrongFormatException e) {
+            // duke.command.Command is in a wrong format
             throw new EventWrongFormatException();
         }
     }

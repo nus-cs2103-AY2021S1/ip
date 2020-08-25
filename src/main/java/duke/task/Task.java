@@ -28,11 +28,11 @@ public class Task {
         return (isDone ? "✓" : "✘"); //return tick or X symbols
     }
 
-    public void markAsDone() {
-        isDone = true;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
-    public String stringToSaveInMemory() {
+    public String toStringForMemory() {
         return taskTypeSymbol + "|" + (isDone ? 1 : 0) + "|" + description;
     }
 

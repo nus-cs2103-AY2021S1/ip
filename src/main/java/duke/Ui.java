@@ -30,7 +30,7 @@ public class Ui {
     private static final String DIVIDER =
             "------------------------------------------------------\n";
 
-    private static final Scanner sc = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     public void showWelcome() {
         System.out.println(LOGO + "\nHello, I'm Star Bot! What can I do for " +
@@ -46,7 +46,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        return sc.nextLine();
+        return SCANNER.nextLine();
     }
 
     /**
@@ -74,10 +74,11 @@ public class Ui {
     /**
      * Formats the task list to be shown to the user.
      */
-    public String showTaskList(TaskList tasks) {
+    public void showTaskList(TaskList tasks) {
         if (tasks.isEmpty()) {
-            return "Your list is empty! Let's add some tasks!";
+            showReply("Your list is empty! Let's add some tasks!");
+        } else {
+            showReply("Here are the tasks in your list:" + tasks.toString());
         }
-        return "Here are the tasks in your list:" + tasks.toString();
     }
 }

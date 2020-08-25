@@ -13,9 +13,9 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) throws WrongFormatException {
         super(description, "[D]", "deadline", false);
-        String[] bySplit = by.split(" ");
-        String byDate = bySplit[0];
-        String byTime = bySplit[1];
+        String[] dateAndTimeParts = by.split(" ");
+        String byDate = dateAndTimeParts[0];
+        String byTime = dateAndTimeParts[1];
         this.date = LocalDate.parse(byDate);
         this.dateAndTime = this.date.atTime(Integer.parseInt(byTime.substring(0,2)),
                 Integer.parseInt(byTime.substring(2,4)));
@@ -23,17 +23,17 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by, boolean isDone) throws WrongFormatException {
         super(description, "[D]", "deadline", isDone);
-        String[] bySplit = by.split(" ");
-        String byDate = bySplit[0];
-        String byTime = bySplit[1];
+        String[] dateAndTimeParts = by.split(" ");
+        String byDate = dateAndTimeParts[0];
+        String byTime = dateAndTimeParts[1];
         this.date = LocalDate.parse(byDate);
         this.dateAndTime = this.date.atTime(Integer.parseInt(byTime.substring(0,2)),
                 Integer.parseInt(byTime.substring(2,4)));
     }
 
     @Override
-    public String stringToSaveInMemory() {
-        return super.stringToSaveInMemory() + "|" + dateAndTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+    public String toStringForMemory() {
+        return super.toStringForMemory() + "|" + dateAndTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
     @Override

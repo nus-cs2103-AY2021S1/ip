@@ -16,7 +16,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private static final String memoryFilePath = "data/duke.txt";
+    private static final String FILE_PATH = "data/duke.txt";
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -30,7 +30,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(memoryFilePath).run();
+        new Duke(FILE_PATH).run();
     }
 
     public void run() {

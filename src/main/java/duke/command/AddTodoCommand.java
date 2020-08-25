@@ -29,8 +29,8 @@ public class AddTodoCommand extends AddCommand {
             } catch (IOException e) {
                 System.err.println(e.getMessage());
             }
-        } catch (IndexOutOfBoundsException | WrongFormatException e)
-        { // duke.command.Command is in a wrong format
+        } catch (IndexOutOfBoundsException | WrongFormatException e) {
+            // duke.command.Command is in a wrong format
             throw new TodoWrongFormatException();
         }
     }

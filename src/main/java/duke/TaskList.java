@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TaskList {
 
-    private List<Task> taskList = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
 
     public TaskList() {}
 
@@ -26,13 +26,13 @@ public class TaskList {
             String[] splitLine = s.split("\\|");
             switch (splitLine[0]) {
             case "[T]": // To-Do
-                taskList.add(new ToDo(splitLine[2], !splitLine[1].equals("0")));
+                tasks.add(new ToDo(splitLine[2], !splitLine[1].equals("0")));
                 break;
             case "[E]": // duke.task.Event
-                taskList.add(new Event(splitLine[2], splitLine[3], !splitLine[1].equals("0")));
+                tasks.add(new Event(splitLine[2], splitLine[3], !splitLine[1].equals("0")));
                 break;
             case "[D]": // duke.task.Deadline
-                taskList.add(new Deadline(splitLine[2], LocalDateTime.parse(splitLine[3]).format(DateTimeFormatter
+                tasks.add(new Deadline(splitLine[2], LocalDateTime.parse(splitLine[3]).format(DateTimeFormatter
                         .ofPattern("yyyy-MM-dd HHmm")), !splitLine[1].equals("0")));
                 break;
             default:
@@ -43,34 +43,34 @@ public class TaskList {
     }
 
     public List<Task> getTaskList() {
-        return taskList;
+        return tasks;
     }
 
     public Task getTask(int taskIndex) {
-        return taskList.get(taskIndex);
+        return tasks.get(taskIndex);
     }
 
     public void addTask(Task task) {
-        taskList.add(task);
+        tasks.add(task);
     }
 
     public Task removeTask(int taskIndex) {
-        return taskList.remove(taskIndex);
+        return tasks.remove(taskIndex);
     }
 
     public int getNumberOfTasks() {
-        return taskList.size();
+        return tasks.size();
     }
 
     public boolean isEmpty() {
-        return taskList.isEmpty();
+        return tasks.isEmpty();
     }
 
     @Override
     public String toString() {
         int index = 1;
         StringBuilder result = new StringBuilder();
-        for (Task task : taskList) {
+        for (Task task : tasks) {
             result.append("\n").append(index++).append(".").append(task);
         }
         return result.toString();
