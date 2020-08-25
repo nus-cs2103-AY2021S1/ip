@@ -52,7 +52,8 @@ public class TaskList {
         }
     }
 
-    public String addTask(Storage storage, String input, String[] inputWords) throws DukeException {
+    public String addTask(Storage storage, String input) throws DukeException {
+        String[] inputWords = input.split(" ");
         try {
             String successStatement;
             switch (inputWords[0]) {
@@ -128,6 +129,29 @@ public class TaskList {
             doneTask.markAsDone();
             return "Great! Dino has marked " + "Task " + taskNumber
                     + " as done:\n" + doneTask;
+        }
+    }
+
+    public String findTask(String input) throws DukeException {
+        String[] inputWords = input.split(" ");
+        String keyWord = inputWords[1];
+        StringBuilder result = new StringBuilder();
+        result.append("Here are the matching tasks in your list:");
+
+        int matchingTasks = 0;
+        for (int i = 0; i < this.taskList.size(); i++) {
+            String taskString = taskList.get(i).toString();
+            if (taskString.contains(keyWord)) {
+                result.append("\n" + taskString);
+                matchingTasks++;
+            }
+        }
+
+        if (matchingTasks == 0) {
+            throw new DukeException("Rawr! Dino could not find " +
+                    "any matching tasks in your list.");
+        } else {
+            return result.toString();
         }
     }
 
