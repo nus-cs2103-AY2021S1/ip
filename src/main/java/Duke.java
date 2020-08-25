@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -74,6 +76,52 @@ public class Duke {
             res += command[i++];
         }
         return res;
+    }
+
+    // returns string to be parsed to LocalTime
+    public static String getLocalTime(String[] command, TaskType type){
+        String word = type == TaskType.DEADLINE ? "/by" : "/at";
+        for(int i = 0; i < command.length; i++) {
+            if(command[i].equals(word)){
+                if(i + 2 < command.length){
+                    return command[i + 2];
+                }
+                else{
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static String changeDateFormat(String[] command, TaskType type){
+        String word = type == TaskType.DEADLINE ? "/by" : "/at";
+        for(int i = 0; i < command.length; i++){
+            if(command[i].equals(word)){
+                if(i + 1 < command.length){
+                    command[i + 1] = command[i + 1].replace('/', '-');
+                    return command[i + 1];
+                }
+            }
+        }
+        return null;
+    }
+
+    public static void checkAndPrint(ArrayList<Task> list){
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i) instanceof Deadline){
+                Deadline ddl = (Deadline)list.get(i);
+                if(ddl.getDate() != null && ddl.getDate().equals(LocalDate.now()) && !ddl.getIsDone()){
+                    System.out.println("Deadline: (" + ddl.getDescription() + ") is due today");
+                }
+            }
+            else if(list.get(i) instanceof Event){
+                Event event = (Event)list.get(i);
+                if(event.getDate() != null && event.getDate().equals(LocalDate.now()) && !event.getIsDone()){
+                    System.out.println("Event: (" + event.getDescription() + ") is today");
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -159,14 +207,20 @@ public class Duke {
                 }
             }
             else if(command[ptr].equals("todo")){
-                String description = getDescription(inputCommand, TaskType.TODO);
+                /*String description = getDescription(inputCommand, TaskType.TODO);
                 if(description.equals("") || ptr == command.length - 1){
                     System.out.println("____________________________________________________________");
                     System.out.println("\uD83D\uDE43 OOPS!!! The description of a todo cannot be empty.");
                     System.out.println("____________________________________________________________");
                     continue;
+                }*/
+                Todo newTodo = Todo.of(inputCommand);
+                if(newTodo == null){
+                    System.out.println("____________________________________________________________");
+                    System.out.println("\uD83D\uDE43 OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println("____________________________________________________________");
+                    continue;
                 }
-                Todo newTodo = new Todo(description);
                 list.add(newTodo);
                 System.out.println("____________________________________________________________\n" +
                         "Got it. I've added this task:\n" +
@@ -175,35 +229,93 @@ public class Duke {
                         "\n____________________________________________________________");
             }
             else if(command[ptr].equals("deadline")){
-                String by = getTime(inputCommand, TaskType.DEADLINE), description = getDescription(inputCommand, TaskType.DEADLINE);
+                /*String by = getTime(inputCommand, TaskType.DEADLINE), description = getDescription(inputCommand, TaskType.DEADLINE);
                 if(description.equals("") || by.equals("") || command[command.length - 1].equals("/by") || ptr == command.length - 1){
                     System.out.println("____________________________________________________________");
                     System.out.println("\uD83D\uDE43 OOPS!!! The description and time of a deadline cannot be empty." +
                             " Or maybe you used \"at\" instead of \"by\"?");
                     System.out.println("____________________________________________________________");
                     continue;
+                }*/
+                Deadline deadline = Deadline.of(inputCommand);
+                if(deadline == null){
+                    System.out.println("____________________________________________________________");
+                    System.out.println("\uD83D\uDE43 OOPS!!! The description and time of a deadline cannot be empty." +
+                            " Or maybe you used \"at\" instead of \"by\"?");
+                    System.out.println("____________________________________________________________");
+                    continue;
                 }
-                Deadline deadline = new Deadline(description, by);
+                /*System.out.println("____________________________________________________________");
+                try{
+                    LocalDate date = LocalDate.parse(changeDateFormat(command, TaskType.DEADLINE));
+                    deadline.setDate(date);
+                }
+                catch(Exception e){
+                    System.out.println("Wrong date input format. Correct format should be \"YYYY-MM-DD\"");
+                }
+                try{
+                    LocalTime time = LocalTime.parse(getLocalTime(command, TaskType.DEADLINE));
+                    deadline.setTime(time);
+                }
+                catch (Exception e){
+                    System.out.println("Wrong time format. Correct format should be \"HH:MM\"");
+                }*/
                 list.add(deadline);
-                System.out.println("____________________________________________________________\n" +
-                        "Got it. I've added this task:\n" +
+                System.out.println("____________________________________________________________");
+                if(deadline.getDate() == null){
+                    System.out.println("Wrong date input format. Correct format should be \"YYYY-MM-DD\"");
+                }
+                if(deadline.getTime() == null){
+                    System.out.println("Wrong time format. Correct format should be \"HH:MM\"");
+                }
+                System.out.println("Got it. I've added this task:\n" +
                         deadline.toString() + "\n" +
                         String.format("Now you have %d tasks in the list.", list.size()) +
                         "\n____________________________________________________________");
             }
             else if(command[ptr].equals("event")){
-                String at = getTime(inputCommand, TaskType.EVENT), description = getDescription(inputCommand, TaskType.EVENT);
+                /*String at = getTime(inputCommand, TaskType.EVENT), description = getDescription(inputCommand, TaskType.EVENT);
                 if(description.equals("") || at.equals("") || command[command.length - 1].equals("/at") || ptr == command.length - 1){
                     System.out.println("____________________________________________________________");
                     System.out.println("\uD83D\uDE43 OOPS!!! The description and time of a event cannot be empty." +
                             " Or maybe you used \"by\" instead of \"at\"?");
                     System.out.println("____________________________________________________________");
                     continue;
+                }*/
+                Event event = Event.of(inputCommand);
+                if(event == null){
+                    System.out.println("____________________________________________________________");
+                    System.out.println("\uD83D\uDE43 OOPS!!! The description and time of a event cannot be empty." +
+                            " Or maybe you used \"by\" instead of \"at\"?");
+                    System.out.println("____________________________________________________________");
+                    continue;
                 }
-                Event event = new Event(description, at);
+                System.out.println("____________________________________________________________");
+                /*try{
+                    LocalDate date = LocalDate.parse(changeDateFormat(command, TaskType.EVENT));
+                    event.setDate(date);
+                }
+                catch(Exception e){
+                    System.out.println("Wrong date input format. Correct format should be \"YYYY-MM-DD\"");
+                }
+                try{
+                    String s = getLocalTime(command, TaskType.EVENT);
+                    System.out.println(s);
+
+                    LocalTime time = LocalTime.parse(getLocalTime(command, TaskType.EVENT));
+                    event.setTime(time);
+                }
+                catch (Exception e){
+                    System.out.println("Wrong time format. Correct format should be \"HH:MM\"");
+                }*/
                 list.add(event);
-                System.out.println("____________________________________________________________\n" +
-                        "Got it. I've added this task:\n" +
+                if(event.getDate() == null){
+                    System.out.println("Wrong date input format. Correct format should be \"YYYY-MM-DD\"");
+                }
+                if(event.getTime() == null){
+                    System.out.println("Wrong time format. Correct format should be \"HH:MM\"");
+                }
+                System.out.println("Got it. I've added this task:\n" +
                         event.toString() + "\n" +
                         String.format("Now you have %d tasks in the list.", list.size()) +
                         "\n____________________________________________________________");
@@ -220,6 +332,8 @@ public class Duke {
                         "put the word \"todo\" or \"deadline\" or \"event\" in front of your description");
             }
         }
+
+        checkAndPrint(list);
 
         System.out.println("____________________________________________________________\n" +
                            "Bye. Hope to see you again soon!" +
