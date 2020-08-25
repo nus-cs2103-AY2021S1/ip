@@ -5,8 +5,15 @@ import main.java.duke.command.ExitCommand;
 
 import java.util.Scanner;
 
+/**
+ * Main class of duke
+ */
 public class Duke {
 
+    /**
+     * Main method of duke
+     * @param args String arguments (not necessary)
+     */
     public static void main(String[] args) {
 
         String pathName = "./data/duke_data.csv";

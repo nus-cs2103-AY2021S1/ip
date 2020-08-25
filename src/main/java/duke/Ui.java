@@ -2,21 +2,53 @@ package main.java.duke;
 
 import main.java.duke.task.Task;
 
+/**
+ * Encapsulates the user interface of duke
+ */
 public class Ui {
-    private String horizontalLine = "    ____________________________________________________________";
-    private String textIndentation = "     ";
 
-    private String[] greetMessage = new String[] {"Hello! I'm Duke", "What can I do for you?"};
-    private String exitMessage = "Bye. Hope to see you again soon!";
-    private String addTaskMessage = "Got it. I've added this task:";
-    private String completeTaskMessage = "Nice! I've marked this task as done:";
-    private String invalidSyntaxMessage = "OOPS!!! I'm sorry, but I don't know what that means :(";
-    private String deleteTaskMessage = "Noted. I've removed this task:";
-    private String numOfTasksMessage = "Now you have %d tasks in the list";
-    private String zeroTasksMessage = "Your task list is currently empty. YAY!!! :D";
-    private String listTasksMessage = "Here are the tasks in your list:";
-    private String invalidTaskIndexMessage = "Please enter a valid task index";
+    /** String to print upon adding a new task to the task list */
+    private final String addTaskMessage = "Got it. I've added this task:";
 
+    /** String to print upon completion of a task */
+    private final String completeTaskMessage = "Nice! I've marked this task as done:";
+
+    /** String to print upon deletion of a task */
+    private final String deleteTaskMessage = "Noted. I've removed this task:";
+
+    /** String to print on exit */
+    private final String exitMessage = "Bye. Hope to see you again soon!";
+
+    /** Strings to print on start-up */
+    private final String[] greetMessage = new String[] {"Hello! I'm Duke", "What can I do for you?"};
+
+    /** Horizontal line */
+    private final String horizontalLine = "    ____________________________________________________________";
+
+    /** String to print when an invalid input is detected */
+    private final String invalidSyntaxMessage = "OOPS!!! I'm sorry, but I don't know what that means :(";
+
+    /** String to print when an invalid task index is detected */
+    private final String invalidTaskIndexMessage = "Please enter a valid task index";
+
+    /** String to print as a header preceding the task list */
+    private final String listTasksMessage = "Here are the tasks in your list:";
+
+    /** String to print to reflect the number of tasks in the current task list */
+    private final String numOfTasksMessage = "Now you have %d tasks in the list";
+
+    /** Text indentation */
+    private final String textIndentation = "     ";
+
+    /** String to print when the task list is empty */
+    private final String zeroTasksMessage = "Your task list is currently empty. YAY!!! :D";
+
+    /**
+     * Gets the string to print to reflect the number of tasks in the current task list
+     * @param tasks Task list
+     * @return zeroTaskMessage if the task list is empty, numOfTasksMessage formatted with the number of
+     * tasks if the list is not empty
+     */
     private String getNumOfTasksString(TaskList tasks) {
         int numOfTasks = tasks.getNumOfTasks();
         if (numOfTasks == 0) {
@@ -24,6 +56,19 @@ public class Ui {
         } else {
             return String.format(numOfTasksMessage, numOfTasks);
         }
+    }
+
+    /**
+     * Prints the strings with top and bottom horizontal lines and indentation
+     * @param strings Array of strings to be printed
+     */
+    void print(String[] strings) {
+        System.out.println(this.horizontalLine);
+        for(String string : strings) {
+            System.out.print(this.textIndentation);
+            System.out.println(string);
+        }
+        System.out.println(this.horizontalLine);
     }
 
     /**
@@ -53,6 +98,21 @@ public class Ui {
     public void printDeleteTask(TaskList tasks, Task task) {
         String[] strings = new String[] {this.deleteTaskMessage, task.toString(),getNumOfTasksString(tasks)};
         this.print(strings);
+    }
+
+    /**
+     * Prints strings upon exit
+     */
+    public void printExit() {
+        String[] strings = new String[] {this.exitMessage};
+        this.print(strings);
+    }
+
+    /**
+     * Prints strings upon start-up
+     */
+    void printHello() {
+        this.print(this.greetMessage);
     }
 
     /**
@@ -87,33 +147,5 @@ public class Ui {
             }
             this.print(strings);
         }
-    }
-
-    /**
-     * Prints strings upon start-up
-     */
-    void printHello() {
-        this.print(this.greetMessage);
-    }
-
-    /**
-     * Prints strings upon exit
-     */
-    public void printExit() {
-        String[] strings = new String[] {this.exitMessage};
-        this.print(strings);
-    }
-
-    /**
-     * Prints the strings with top and bottom horizontal lines and indentation
-     * @param strings Array of strings to be printed
-     */
-    void print(String[] strings) {
-        System.out.println(this.horizontalLine);
-        for(String string : strings) {
-            System.out.print(this.textIndentation);
-            System.out.println(string);
-        }
-        System.out.println(this.horizontalLine);
     }
 }

@@ -12,6 +12,9 @@ import main.java.duke.command.ListTasksCommand;
 
 import java.time.LocalDate;
 
+/**
+ * Encapsulates a parser to read user inputs in duke and determine the subsequent actions
+ */
 class Parser {
 
     /**
@@ -20,6 +23,11 @@ class Parser {
      */
     private static String dateSeparator = "-";
 
+    /**
+     * Parses the given input from the user
+     * @param input Input from user
+     * @return Command corresponding to the input
+     */
     static Command parse(String input) {
 
         String[] parsedCommand = input.split(" ", 2);
@@ -75,6 +83,12 @@ class Parser {
         return new InvalidInputCommand();
     }
 
+    /**
+     * Converts a string representation of a date to a LocalDate
+     * @param input String representation of a date
+     * @return LocalDate of the date
+     * @throws NumberFormatException Exception thrown if the string cannot be parsed into integers
+     */
     static LocalDate genDate(String input) throws NumberFormatException {
         String[] strings = input.split(Parser.dateSeparator, 3);
         int[] ints = new int[3];
