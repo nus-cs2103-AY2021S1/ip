@@ -49,6 +49,7 @@ public class Task {
         return (isDone ? "✓" : "✘");
     }
 
+
     /**
      * Changes the task's completion indicator to either completed or not completed.
      *
@@ -56,6 +57,15 @@ public class Task {
      */
     public void setDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    /**
+     * Returns the task's description.
+     *
+     * @return The task's description.
+     */
+    public String getDescription() {
+        return description;
     }
 
     /**

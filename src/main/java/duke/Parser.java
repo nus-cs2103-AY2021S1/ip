@@ -1,14 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.DeleteCommand;
-import duke.command.AddTodoCommand;
-import duke.command.AddEventCommand;
-import duke.command.AddDeadlineCommand;
-import duke.command.UnknownCommand;
+import duke.command.*;
 
 /**
  * Parses user commands in the Duke program.
@@ -37,6 +29,8 @@ public class Parser {
             return new AddEventCommand(fullCommand);
         } else if (commandWords[0].equals("deadline")) { // Add duke.task.Deadline task
             return new AddDeadlineCommand(fullCommand);
+        } else if (commandWords[0].equals("find")) { // Find task(s) in task list
+            return new FindCommand(fullCommand);
         } else { // Unknown command entered
             return new UnknownCommand();
         }

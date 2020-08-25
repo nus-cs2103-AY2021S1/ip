@@ -293,6 +293,117 @@ Your list is empty! Let's add some tasks!
 
 ------------------------------------------------------
 Got it. I've added this task:
+[D][✘] buy presents (by: 24 Dec 2020 @ 11:59pm)
+Now you have 1 tasks in the list.
+------------------------------------------------------
+
+------------------------------------------------------
+Got it. I've added this task:
+[T][✘] deck the halls
+Now you have 2 tasks in the list.
+------------------------------------------------------
+
+------------------------------------------------------
+Got it. I've added this task:
+[T][✘] dress presentably
+Now you have 3 tasks in the list.
+------------------------------------------------------
+
+------------------------------------------------------
+Got it. I've added this task:
+[E][✘] Christmas party (at: home)
+Now you have 4 tasks in the list.
+------------------------------------------------------
+
+------------------------------------------------------
+Got it. I've added this task:
+[E][✘] give presents (at: Christmas party)
+Now you have 5 tasks in the list.
+------------------------------------------------------
+
+------------------------------------------------------
+Got it. I've added this task:
+[D][✘] homework (by: 17 Oct 2020 @ 01:30pm)
+Now you have 6 tasks in the list.
+------------------------------------------------------
+
+------------------------------------------------------
+OOPS! The find command has to be followed by a
+word / words that you would like to search for in
+the task list.
+------------------------------------------------------
+
+------------------------------------------------------
+Sorry! No tasks were found with the word(s)
+"mistletoe".
+------------------------------------------------------
+
+------------------------------------------------------
+Here are the tasks in your list with the word(s)
+"present":
+1.[D][✘] buy presents (by: 24 Dec 2020 @ 11:59pm)
+2.[T][✘] dress presentably
+3.[E][✘] give presents (at: Christmas party)
+------------------------------------------------------
+
+------------------------------------------------------
+Here are the tasks in your list with the word(s)
+"presents":
+1.[D][✘] buy presents (by: 24 Dec 2020 @ 11:59pm)
+2.[E][✘] give presents (at: Christmas party)
+------------------------------------------------------
+
+------------------------------------------------------
+Here are the tasks in your list with the word(s)
+"give presents":
+1.[E][✘] give presents (at: Christmas party)
+------------------------------------------------------
+
+------------------------------------------------------
+Here are the tasks in your list with the word(s)
+"home":
+1.[E][✘] Christmas party (at: home)
+2.[D][✘] homework (by: 17 Oct 2020 @ 01:30pm)
+------------------------------------------------------
+
+------------------------------------------------------
+Noted. I've removed this task:
+[E][✘] give presents (at: Christmas party)
+Now you have 5 tasks in the list.
+------------------------------------------------------
+
+------------------------------------------------------
+Noted. I've removed this task:
+[T][✘] dress presentably
+Now you have 4 tasks in the list.
+------------------------------------------------------
+
+------------------------------------------------------
+Noted. I've removed this task:
+[D][✘] buy presents (by: 24 Dec 2020 @ 11:59pm)
+Now you have 3 tasks in the list.
+------------------------------------------------------
+
+------------------------------------------------------
+Noted. I've removed this task:
+[E][✘] Christmas party (at: home)
+Now you have 2 tasks in the list.
+------------------------------------------------------
+
+------------------------------------------------------
+Noted. I've removed this task:
+[T][✘] deck the halls
+Now you have 1 tasks in the list.
+------------------------------------------------------
+
+------------------------------------------------------
+Noted. I've removed this task:
+[D][✘] homework (by: 17 Oct 2020 @ 01:30pm)
+Now you have 0 tasks in the list.
+------------------------------------------------------
+
+------------------------------------------------------
+Got it. I've added this task:
 [T][✘] first task
 Now you have 1 tasks in the list.
 ------------------------------------------------------

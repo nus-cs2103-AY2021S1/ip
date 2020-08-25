@@ -37,6 +37,15 @@ public class Event extends Task {
     }
 
     /**
+     * Returns the venue where the task is to be done.
+     *
+     * @return The venue where the task is to be done.
+     */
+    public String getAt() {
+        return at;
+    }
+
+    /**
      * Formats the string that will be written in the save file to represent this particular event task.
      *
      * @return The string that will be written in the save file to represent this particular event task.

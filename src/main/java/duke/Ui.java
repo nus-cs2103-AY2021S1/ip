@@ -120,4 +120,15 @@ public class Ui {
             showReply("Here are the tasks in your list:" + tasks.toString());
         }
     }
+
+    /**
+     * Formats the task list to be shown to the user.
+     */
+    public void showFoundTaskList(TaskList tasks, String keyWords) {
+        if (tasks.isEmpty()) {
+            showReply("Sorry! No tasks were found with the word(s)\n\"" + keyWords + "\".");
+        } else {
+            showReply("Here are the tasks in your list with the word(s)\n\"" + keyWords + "\":" + tasks.toString());
+        }
+    }
 }
