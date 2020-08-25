@@ -66,11 +66,11 @@ public class Storage {
 
     /**
      * Saves a task onto duke.txt
-     * @param path The file path of duke.txt
+     * @param path The file path of duke.txt.
      * @param todoList The current task ArrayList
      * @param task The task to be saved
      */
-    public static void saveTask(String path, ArrayList<Task> todoList, Task task ) {
+    public static void saveTask(String path, ArrayList<Task> todoList, Task task) {
         try {
             String s = formatString(task);
 

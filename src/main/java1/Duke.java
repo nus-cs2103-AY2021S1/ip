@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Duke {
+    public final static String FILEPATH = System.getProperty("user.dir") + "/data/duke.txt";
+
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
@@ -67,7 +69,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("/Users/joshua/Desktop/ip/data/duke.txt").run();
+        new Duke(FILEPATH).run();
     }
 
 }
