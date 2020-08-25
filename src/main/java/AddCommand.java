@@ -1,14 +1,27 @@
+/**
+ * Represents a command to add a task to the task list.
+ */
 public class AddCommand extends Command {
     CommandType addType;
     String description;
     String datetime;
 
+    /**
+     * Initializes the add command.
+     * @param addType The type of task to add.
+     * @param description The description of the task.
+     * @param datetime The datetime for the task if any.
+     */
     public AddCommand(CommandType addType, String description, String datetime) {
         this.addType = addType;
         this.description = description;
         this.datetime = datetime;
     }
 
+    /**
+     * Adds the task to the task list provided and shows the output to the user.
+     * Saves the new task list to the disk as well.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task;
