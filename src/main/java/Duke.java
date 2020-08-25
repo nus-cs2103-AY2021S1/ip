@@ -19,12 +19,12 @@ public class Duke {
 
     private DukeUi dukeUi;
     private DukeFile dukeFile;
-    private ArrayList<Task> arraylst;
+    private ArrayList<Task> arrayLst;
     private Processor processor;
 
     public Duke(String filePath) {
         this.dukeUi = new DukeUi();
-        this.arraylst = new ArrayList<>();
+        this.arrayLst = new ArrayList<>();
         this.dukeFile = DukeFile.createDukeFile(filePath);
         this.processor = new Processor();
     }
@@ -45,7 +45,7 @@ public class Duke {
             String cmd = sc.nextLine().trim().toLowerCase();
             if (!cmd.equals("bye")) {
                 try {
-                    this.processor.process(cmd, this.arraylst, this.dukeFile);
+                    this.processor.process(cmd, this.arrayLst, this.dukeFile);
                 } catch (DukeException e) {
                     this.dukeUi.showError(e.getMessage());
                 }
