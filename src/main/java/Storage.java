@@ -33,11 +33,32 @@ public class Storage {
                      int index = Integer.parseInt(tempArray[1]) - 1;
                      listOfItems.get(index).markDone();
                      System.out.println("Nice! I've marked this task as done: \n" + listOfItems.get(index).toString());
-                 } else if(tempArray[0].equals("delete")) {
+                 }
+
+                 else if (tempArray[0].equals("delete")) {
                      int index = Integer.parseInt(tempArray[1]) - 1;
                      Task tobeRemove = listOfItems.get(index);
                      listOfItems.remove(index);
                      System.out.println("Noted. I've removed this task: \n" + tobeRemove.toString() + "\nNow you have " + listOfItems.size() + " tasks in the list");
+                 }
+                 else if (tempArray[0].equals("find")) {
+                     ArrayList<Task> listOfFoundItems = new ArrayList<Task>();
+                     for (Task s : listOfItems) {
+                         String[] items = s.description.split(" ");
+                         for (int i = 0; i < items.length; i++) {
+                             if (tempArray[1].equals(items[i])) {
+                                 listOfFoundItems.add(s);
+                                 break;
+                             }
+                         }
+                         
+                     }
+                     int iterator = 1;
+                     System.out.println("Here are the matching tasks in your list:\n");
+                     for (Task s : listOfFoundItems) {
+                         System.out.println(iterator + "." + s.toString());
+                         iterator++;
+                     }
                  }
                  else {
                      if (tempArray[0].equals("todo")) {
