@@ -46,7 +46,7 @@ public class Runner {
             Output.printMessage("Invalid Syntax.");
             Output.printMessage("Usage: done <task_index>");
         } catch (IndexOutOfBoundsException err) {
-            Output.printMessage("Sorry, No such task found.");
+            Output.printMessage("Sorry, no such task found.");
         }
     }
 

@@ -11,19 +11,19 @@ public class TaskTests {
     public void testSpace() {
         LocalDate date = LocalDate.parse("2020-01-01");
         Deadline deadline = new Deadline(false, "with space", date);
-        assertEquals(deadline.toString(), "[D][✘] with space (by: 2020-01-01)");
+        assertEquals("[D][✘] with space (by: 2020-01-01)", deadline.toString());
     }
 
     @Test
     public void testComma() {
         LocalDate date = LocalDate.parse("2020-01-01");
         Event event = new Event(false, "with, comma", date);
-        assertEquals(event.toString(), "[E][✘] with, comma (at: 2020-01-01)");
+        assertEquals("[E][✘] with, comma (at: 2020-01-01)", event.toString());
     }
 
     @Test
     public void testBackSlash() {
         Todo todo = new Todo(true, "with \\ backslash");
-        assertEquals(todo.toString(), "[T][✔︎] with \\ backslash");
+        assertEquals("[T][✔︎] with \\ backslash", todo.toString());
     }
 }
