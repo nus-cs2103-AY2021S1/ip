@@ -19,6 +19,7 @@ public class DateAndTime {
 
     /**
      * Creates a DateAndTime.
+     *
      * @param date String representing date.
      * @param time String representing time.
      * @throws BobInvalidDateAndTimeException If date and time parsed is not valid.
@@ -34,6 +35,7 @@ public class DateAndTime {
 
     /**
      * Gets String value of date.
+     *
      * @return String of date.
      */
     public String getDate() {
@@ -42,6 +44,7 @@ public class DateAndTime {
 
     /**
      * Gets String value of time.
+     *
      * @return String of time.
      */
     public String getTime() {

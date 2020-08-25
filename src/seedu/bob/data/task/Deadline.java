@@ -11,6 +11,7 @@ public class Deadline extends Task {
 
     /**
      * Creates an undone deadline.
+     *
      * @param description Description of the deadline.
      * @param date Date of the deadline.
      * @param time Time of the event.
@@ -29,6 +30,7 @@ public class Deadline extends Task {
 
     /**
      * Marks deadline as done.
+     *
      * @return A done deadline.
      */
     @Override
@@ -38,6 +40,7 @@ public class Deadline extends Task {
 
     /**
      * Convert to string value of deadline to be stored as data.
+     *
      * @return String to be stored in hard disk.
      */
     @Override

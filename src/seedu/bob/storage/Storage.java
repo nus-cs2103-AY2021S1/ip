@@ -22,6 +22,7 @@ public class Storage {
 
     /**
      * Creates a storage.
+     *
      * @param filePath Directory path of file.
      */
     public Storage(String filePath) throws IOException {
@@ -37,6 +38,7 @@ public class Storage {
 
     /**
      * Converts file into a list of task.
+     *
      * @return List containing the task.
      * @throws FileNotFoundException If file does not exist.
      */
@@ -79,6 +81,7 @@ public class Storage {
 
     /**
      * Updates the file data based on the list.
+     *
      * @param list Bob's task list.
      * @return A new storage with the updated file.
      * @throws IOException If error occurs while writing the file.

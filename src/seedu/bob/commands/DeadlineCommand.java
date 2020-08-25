@@ -17,6 +17,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Creates a deadline command.
+     *
      * @param input User input.
      * @throws BobEmptyTaskException If there is no description for deadline.
      */
@@ -32,6 +33,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Formats date to be parsed.
+     *
      * @param date Inputted date.
      * @return Formatted date.
      * @throws BobInvalidDateAndTimeException If the inputted date and time has invalid format.
@@ -48,6 +50,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Formats time to be parsed.
+     *
      * @param time Inputted time.
      * @return Formatted time.
      * @throws BobInvalidDateAndTimeException If the inputted date and time has invalid format.
@@ -62,6 +65,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Adds a deadline to the list.
+     *
      * @param description Description of the deadline.
      * @param dateAndTime Date and time of the deadline.
      * @return String message regarding adding of deadline.

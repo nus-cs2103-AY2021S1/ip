@@ -12,6 +12,7 @@ public class BobListIndexOutOfBoundsException extends BobException {
 
     /**
      * Creates a BobListIndexOutOfBoundsException.
+     *
      * @param totalNoOfTasks Total number of task in Bob's list.
      * @param taskNo Task number that was inputted.
      * @param action Intended action based on command.

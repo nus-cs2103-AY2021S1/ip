@@ -38,6 +38,7 @@ public class Ui {
 
     /**
      * Reads user input.
+     *
      * @return User input.
      */
     public String readCommand() {
@@ -54,6 +55,7 @@ public class Ui {
 
     /**
      * Shows message(s) to user.
+     *
      * @param message Message to be shown.
      */
     public void showToUser(String... message) {
@@ -84,6 +86,7 @@ public class Ui {
 
     /**
      * Shows error message to user.
+     *
      * @param e Exception caught.
      */
     public void showError(BobException e) {
@@ -92,6 +95,7 @@ public class Ui {
 
     /**
      * Shows add message to user.
+     *
      * @param task Task to include in the message.
      * @param tasks Tasklist of Bob.
      */
@@ -107,6 +111,7 @@ public class Ui {
 
     /**
      * Shows done message to user.
+     *
      * @param task Task to include in the message.
      */
     public void showDoneMessage(Task task) {
@@ -116,6 +121,7 @@ public class Ui {
 
     /**
      * Shows delete message to user.
+     * 
      * @param task
      */
     public void showDeleteMessage(Task task) {

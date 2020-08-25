@@ -11,6 +11,7 @@ public class Event extends Task {
 
     /**
      * Creates an undone event.
+     *
      * @param description Description of event.
      * @param date  Date of event.
      * @param time Time of event.
@@ -28,6 +29,7 @@ public class Event extends Task {
 
     /**
      * Marks event as done.
+     *
      * @return A done event.
      */
     @Override
@@ -37,6 +39,7 @@ public class Event extends Task {
 
     /**
      * Convert to string value of event to be stored as data.
+     *
      * @return String to be stored in hard disk.
      */
     @Override

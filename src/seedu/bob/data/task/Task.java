@@ -27,6 +27,7 @@ public class Task {
 
     /**
      * Generates symbol based on whether task is done.
+     *
      * @return A String representing a tick or cross symbol.
      */
     protected String getStatusIcon() {
@@ -37,6 +38,7 @@ public class Task {
 
     /**
      * Marks the task as done.
+     *
      * @return A done task.
      */
     public Task markDone() {
@@ -45,6 +47,7 @@ public class Task {
 
     /**
      * Convert to string value of task to be stored as data.
+     *
      * @return String to be stored in hard disk.
      */
     public String convertToStringData() {

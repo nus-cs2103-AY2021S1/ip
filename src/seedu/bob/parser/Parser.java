@@ -10,6 +10,7 @@ import seedu.bob.exceptions.BobInvalidCommandException;
 public class Parser {
     /**
      * Handles user input which decides which command Bob executes.
+     *
      * @param input User input.
      * @return Updated Bob.
      * @throws BobInvalidCommandException If user input is not recognised.

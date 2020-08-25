@@ -15,6 +15,7 @@ public class Tasklist {
 
     /**
      * Creates a tasklist.
+     *
      * @param storage Bob's Storage.
      * @throws FileNotFoundException If File in Storage does not exist.
      * @throws BobInvalidDateAndTimeException If there is an error from converting file data to Task.
@@ -23,15 +24,13 @@ public class Tasklist {
         this.list = storage.getList();
     }
 
-    /**
-     * Initializes a new list.
-     */
     public Tasklist() {
         list = new ArrayList<>();
     }
 
     /**
      * Updates Storage file.
+     *
      * @param storage Bob's storage.
      * @throws IOException If there is an error rewriting file.
      */
@@ -41,6 +40,7 @@ public class Tasklist {
 
     /**
      * Add task to list.
+     *
      * @param task Task to be added.
      */
     public void addTask(Task task) {
@@ -49,6 +49,7 @@ public class Tasklist {
 
     /**
      * Gets size of list.
+     *
      * @return Size of task list.
      */
     public int getListSize() {
@@ -57,6 +58,7 @@ public class Tasklist {
 
     /**
      * Marks a task in list as done.
+     *
      * @param taskNo Task number of task to be marked as done.
      * @return Task marked as done.
      */
@@ -69,6 +71,7 @@ public class Tasklist {
 
     /**
      * Deletes task in list.
+     *
      * @param taskNo Task number of task to be deleted.
      * @return Deleted task.
      */
@@ -81,6 +84,7 @@ public class Tasklist {
 
     /**
      * Get number of done tasks in list.
+     *
      * @return Number of done tasks.
      */
     private int getNumOfDoneTask() {
@@ -95,6 +99,7 @@ public class Tasklist {
 
     /**
      * Creates a readable String of tasks in list.
+     *
      * @return String representing tasks in list.
      */
     private String convertList() {

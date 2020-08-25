@@ -16,6 +16,7 @@ public class TodoCommand extends Command {
 
     /**
      * Creates a todo command.
+     *
      * @param input User input.
      * @throws BobEmptyTaskException If there is no description for task.
      */
@@ -37,6 +38,7 @@ public class TodoCommand extends Command {
 
     /**
      * Executes todo command.
+     *
      * @param tasks Bob's tasklist.
      * @param ui Bob's ui.
      * @param storage Bob's storage.

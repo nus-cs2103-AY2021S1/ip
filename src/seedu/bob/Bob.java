@@ -20,6 +20,7 @@ public class Bob {
 
     /**
      * Creates a Bob.
+     *
      * @param filePath File path of saved file containing tasks.
      * @throws IOException If saved file can't be loaded.
      */
@@ -61,6 +62,7 @@ public class Bob {
 
     /**
      * The main environment where Bob runs.
+     *
      * @param args Command line arguments.
      */
     public static void main(String[] args) {

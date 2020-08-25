@@ -17,6 +17,7 @@ public class EventCommand extends Command {
 
     /**
      * Creates an event command.
+     *
      * @param input User input.
      * @throws BobEmptyTaskException If there is no description for event.
      */
@@ -32,6 +33,7 @@ public class EventCommand extends Command {
 
     /**
      * Formats date to be parsed.
+     *
      * @param date Inputted date.
      * @return Formatted date.
      * @throws BobInvalidDateAndTimeException If the inputted date and time has invalid format.
@@ -48,6 +50,7 @@ public class EventCommand extends Command {
 
     /**
      * Formats time to be parsed.
+     *
      * @param time Inputted time.
      * @return Formatted time.
      * @throws BobInvalidDateAndTimeException If the inputted date and time has invalid format.
@@ -62,6 +65,7 @@ public class EventCommand extends Command {
 
     /**
      * Adds an event to the list.
+     *
      * @param description Description of the event.
      * @param dateAndTime Date and time of the event.
      * @return String message regarding adding of event.
@@ -93,6 +97,7 @@ public class EventCommand extends Command {
 
     /**
      * Executes event command.
+     *
      * @param tasks Bob's tasklist.
      * @param ui Bob's ui.
      * @param storage Bob's storage.
