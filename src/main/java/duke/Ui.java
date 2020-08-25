@@ -4,12 +4,14 @@ import duke.task.Task;
 
 import java.util.Scanner;
 
+/**
+ * Represents Ui Components for user interaction and displaying messages.
+ */
 public class Ui {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     /**
-     * Sends a greeting to user and indicates the INTRUBOT is active.
-     * Loads data from harddisk
+     * Sends a greeting to user.
      */
     public void greeting() {
         String logo =
@@ -24,40 +26,76 @@ public class Ui {
         printReply(replyFormatter("ITS ME: \n" + logo + "\nI want to know EVERYTHING ABOUT YOU"));
     }
 
+    /**
+     * Sends Goodbye message to user.
+     */
     public void sayGoodbye() {
         printReply("SAYONARA!");
     }
-    
-    // Formatting and UI
+
+    /**
+     * Wraps message in partitioning for clearer readability.
+     * @param reply to be wrapped in partition.
+     * @return String representation of reply.
+     */
     public static String replyFormatter(String reply) {
         String partition = "__________________________";
         return String.format(partition + "\n%s\n" + partition, reply);
     }
 
+    /**
+     * Shows Task error message with a wrapper.
+     * 
+     * @param errorMessage custom error message.
+     */
     public void showError(String errorMessage) {
         System.out.println(replyFormatter(String.format("Something is amiss `(OCO)/ !!: %s", errorMessage)));
     }
-    
+
+    /**
+     * Shows Task done message.
+     * 
+     * @param task which is mark complete.
+     */
     public void doneTaskReply(Task task) {
         printReply(replyFormatter("Nice! I've marked this task as done:\n" + task.toString()));
     }
 
+    /**
+     * Shows Task added message.
+     *
+     * @param task which is added.
+     */
     public void addTaskReply(Task task, TaskList taskItems) {
         printReply(replyFormatter(String.format("Got it. I've added this task:\n    %s\nNow you have %d tasks in the list"
                 , task.toString(), taskItems.getSize())));
     }
 
+    /**
+     * Shows Task deleted message.
+     *
+     * @param task which is deleted.
+     */
     public void deleteTaskReply(Task task, TaskList taskItems) {
         printReply(replyFormatter(String.format("HAI. I've deleted this task:\n    %s\nNow you have %d tasks in the list"
                 , task.toString(), taskItems.getSize())));
     }
 
-
+    /**
+     * Prints String to console. 
+     * 
+     * @param reply String to be printed.
+     */
     public void printReply(String reply) {
         System.out.println(reply);
     }
-    
+
+    /**
+     * Reads user input in the command line.
+     * 
+     * @return String representation of user input.
+     */
     public String readCommand() {
-        return  SCANNER.nextLine();
+        return SCANNER.nextLine();
     }
 }

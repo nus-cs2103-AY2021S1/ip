@@ -16,9 +16,16 @@ import duke.task.ToDo;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents Parser Object which parses user reply and execute appropriate response.
+ */
 public class Parser {
     /**
-     * Parses user input and carry out operations on user's tasks
+     * Parses user input and returns appropriate Command Object for execution in Duke class.
+     * 
+     * @param reply user message input into Intrubot.
+     * @return Command to be executed by Duke class.
+     * @throws DukeException if invalid command or arguments specified.
      */
     static Command parse(String reply) throws DukeException {
         String[] replyArray = reply.split(" ");
