@@ -5,13 +5,25 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class FileProcessor {
+public class Storage {
     File file;
     boolean added = false;
-    FileProcessor(File f) {
-        file = f;
+    Storage() throws IOException {
+        String dir = System.getProperty("user.dir") + "/data";
+        File path = new File(dir);
+        if(!path.exists()) {
+            path.mkdir();
+        }
+        file = new File(path + "/duke.txt");
+        boolean result = file.createNewFile();
+        if(result) {
+            System.out.println("file created " + file.getCanonicalPath());
+        } else {
+            System.out.println("file exists at: " + file.getCanonicalPath());
+        }
     }
 
     void reset() {
@@ -21,6 +33,47 @@ public class FileProcessor {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    ArrayList<Task> load() {
+        System.out.println("reading... ");
+        ArrayList<Task> list = new ArrayList<>();
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
+            String line = bufferedReader.readLine();
+            while(line != null) {
+                String[] parts = line.split("</>");
+                Task task;
+                if (parts[0].equals("TODO") && parts.length == 3) {
+                    task = new Todo(parts[2]);
+                    if(parts[1].equals("true")) {
+                        task.setCompleted();
+                    }
+                    list.add(task);
+                } else if (parts[0].equals("DEADLINE") && parts.length == 4){
+                    task = new Deadline(parts[2], parts[3]);
+                    if(parts[1].equals("true")) {
+                        task.setCompleted();
+                    }
+                    list.add(task);
+                } else if (parts[0].equals("EVENT") && parts.length == 4) {
+                    task = new Event(parts[2], parts[3]);
+                    if(parts[1].equals("true")) {
+                        task.setCompleted();
+                    }
+                    list.add(task);
+                }
+                line = bufferedReader.readLine();
+            }
+//            System.out.println(list);
+            added = true;
+        } catch (FileNotFoundException e) {
+            // Exception handling
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            // Exception handling
+            System.out.println(e.getMessage());
+        }
+        return list;
     }
 
     void readAll(List<Task> list) {
