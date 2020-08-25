@@ -1,2 +1,5 @@
 D | false | sleep | 2020-12-11
-E | false | play | 1985-11-02
+E | true | play | 1985-11-02
+T | true | eat 
+D | false | sing | 2020-04-03
+E | false | war | 2021-02-11
