@@ -6,11 +6,17 @@ import duke.task.TaskList;
 
 import java.io.IOException;
 
+/**
+ * The main class for the project. Initialises the Duke class and runs it.
+ */
 public class Duke {
     private TaskList tasks;
     private final Ui ui;
     private final Storage storage;
 
+    /**
+     * Instantiates a Duke object.
+     */
     Duke() {
         tasks = new TaskList();
         ui = new Ui();
@@ -22,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke programme.
+     */
     void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -36,6 +45,7 @@ public class Duke {
                 ui.displayMessage(e.getMessage());
             } finally {
                 ui.showLine();
+                ui.newLine();
             }
         }
     }

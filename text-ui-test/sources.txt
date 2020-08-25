@@ -5,6 +5,7 @@
 ../src/main/java/duke/task/TaskType.java
 ../src/main/java/duke/task/Event.java
 ../src/main/java/duke/task/Task.java
+../src/main/java/duke/task/CommandType.java
 ../src/main/java/duke/task/Deadline.java
 ../src/main/java/duke/task/ToDo.java
 ../src/main/java/duke/command/ByeCommand.java

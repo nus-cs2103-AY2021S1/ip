@@ -88,5 +88,33 @@
 	 Now you have 3 tasks in the list.
 	_____________________________________________________
 	_____________________________________________________
+	 Got it. I've added this task:
+	 [D][✘] reading (by: August 27 2020)
+	 Now you have 4 tasks in the list.
+	_____________________________________________________
+	_____________________________________________________
+	 Here are the tasks happening on: 2020-08-27
+	 1. [D][✘] ip week 3 (by: August 27 2020)
+	 2. [D][✘] reading (by: August 27 2020)
+	_____________________________________________________
+	_____________________________________________________
+	 Got it. I've added this task:
+	 [T][✘] reading book
+	 Now you have 5 tasks in the list.
+	_____________________________________________________
+	_____________________________________________________
+	 Here are the tasks containing keyword: reading
+	 1. [D][✘] reading (by: August 27 2020)
+	 2. [T][✘] reading book
+	_____________________________________________________
+	_____________________________________________________
+	 Here are the tasks in your agenda:
+	 1.[T][✘] read book
+	 2.[E][✘] project meeting (at: August 24 2020)
+	 3.[D][✘] ip week 3 (by: August 27 2020)
+	 4.[D][✘] reading (by: August 27 2020)
+	 5.[T][✘] reading book
+	_____________________________________________________
+	_____________________________________________________
 	 Bye. Hope to see you again soon
 	_____________________________________________________

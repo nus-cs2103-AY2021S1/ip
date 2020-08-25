@@ -3,55 +3,55 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.ListCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ShowCommand;
-import duke.command.ByeCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.exception.InvalidArgumentException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidTaskTypeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskType;
-import duke.task.ToDo;
+import duke.task.*;
 
+/**
+ * The Parser class parses and processes user input.
+ */
 public class Parser {
+    /**
+     * Returns the appropriate {@link Command} to execute next.
+     * @param fullCommand A String read from user input.
+     * @return The corresponding {@link Command} for the input.
+     * @throws DukeException Exception when parsing the input.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         fullCommand = fullCommand.toLowerCase();
         String[] fullCommandArray = fullCommand.split(" ");
         fullCommand = fullCommand.strip();
-        if (fullCommand.equals("bye")) {
+        if (fullCommand.equals(CommandType.BYE.getType())) {
             return new ByeCommand();
-        } else if (fullCommand.equals("list")) {
+        } else if (fullCommand.equals(CommandType.LIST.getType())) {
             return new ListCommand();
-        } else if (fullCommand.equals("show")) {
+        } else if (fullCommand.equals(CommandType.SHOW.getType())) {
             throw new InvalidArgumentException("☹ OOPS!!! The show command requires a date in yyyy-mm-dd.");
-        } else if (fullCommand.equals("find")) {
+        } else if (fullCommand.equals(CommandType.FIND.getType())) {
             throw new InvalidArgumentException("☹ OOPS!!! The find command requires keyword.");
-        } else if (fullCommand.equals("delete")) {
+        } else if (fullCommand.equals(CommandType.DELETE.getType())) {
             throw new InvalidCommandException("☹ OOPS!!! The delete command requires the index of a task.");
-        } else if (fullCommand.equals("done")) {
+        } else if (fullCommand.equals(CommandType.DONE.getType())) {
             throw new InvalidCommandException("☹ OOPS!!! The done command requires the index of a task.");
-        } else if (fullCommandArray[0].equals("list")) {
+        } else if (fullCommandArray[0].equals(CommandType.LIST.getType())) {
             throw new InvalidArgumentException("☹ OOPS!!! The list command does not take any additional argument(s).");
-        } else if (fullCommandArray[0].equals("bye")) {
+        } else if (fullCommandArray[0].equals(CommandType.BYE.getType())) {
             throw new InvalidArgumentException("☹ OOPS!!! The bye command does not take any additional argument(s).");
-        } else if (fullCommandArray[0].equals("show")) {
+        } else if (fullCommandArray[0].equals(CommandType.SHOW.getType())) {
             try {
                 LocalDate date = LocalDate.parse(fullCommandArray[1]);
                 return new ShowCommand(date);
             } catch (DateTimeParseException e) {
                 throw new InvalidArgumentException("☹ OOPS!!! The show command requires a date in yyyy-mm-dd.");
             }
-        } else if (fullCommandArray[0].equals("done")) {
+        } else if (fullCommandArray[0].equals(CommandType.DONE.getType())) {
             return new DoneCommand(Integer.parseInt(fullCommandArray[1]));
-        } else if (fullCommandArray[0].equals("delete")) {
+        } else if (fullCommandArray[0].equals(CommandType.DELETE.getType())) {
             return new DeleteCommand(Integer.parseInt(fullCommandArray[1]));
-        } else if (fullCommandArray[0].equals("find")) {
+        } else if (fullCommandArray[0].equals(CommandType.FIND.getType())) {
             return new FindCommand(fullCommandArray[1]);
         } else {
             String type = fullCommand.split(" ")[0];
