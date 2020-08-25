@@ -16,9 +16,11 @@ public class Duke {
         }
 
         StringIdentifier strIden = new StringIdentifier(fileReader.getTaskList());
+        /*
         System.out.println("    _______________________________________________________________________");
         strIden.displayList();
         System.out.println("    _______________________________________________________________________\n");
+         */
 
         Scanner sc = new Scanner(System.in);
         FileWriting fileWriter = new FileWriting();

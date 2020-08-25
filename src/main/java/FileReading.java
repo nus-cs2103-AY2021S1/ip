@@ -42,7 +42,7 @@ public class FileReading {
         } else if (type.equals("E")) {
             int start = task.indexOf("(");
             int end = task.lastIndexOf(")");
-            timeDescription = task.substring(start + 4, end);
+            timeDescription = task.substring(start + 5, end);
             description = task.substring(7, start);
             Event newEvent = new Event(description, timeDescription, isDone);
             FileReading.savedTasks.add(newEvent);
@@ -50,7 +50,7 @@ public class FileReading {
         } else if (type.equals("D")) {
             int start = task.indexOf("(");
             int end = task.lastIndexOf(")");
-            timeDescription = task.substring(start + 4, end);
+            timeDescription = task.substring(start + 5, end);
             description = task.substring(7, start);
             Deadline newDeadline = new Deadline(description, timeDescription, isDone);
             FileReading.savedTasks.add(newDeadline);
