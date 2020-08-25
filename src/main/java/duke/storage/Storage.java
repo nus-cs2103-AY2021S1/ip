@@ -35,8 +35,6 @@ public class Storage {
     public List<Task> load() {
         List<Task> taskList = new ArrayList<>();
         try {
-/*            String home = System.getProperty("user.home");
-            Path path = Paths.get(home, "Duke", "data", "tasks.text");*/
             File file = new File(filePath);
             FileInputStream fis = new FileInputStream(file);
             Scanner sc = new Scanner(fis);

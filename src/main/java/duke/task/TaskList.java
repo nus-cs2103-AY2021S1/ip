@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.util.List;
-import duke.task.Task;
 public class TaskList {
     public static List<Task> taskList;
 
