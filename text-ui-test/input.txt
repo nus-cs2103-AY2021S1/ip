@@ -1,5 +1,6 @@
 todo borrow book
-deadline return book /by sunday
+deadline return book /by 2020-08-25
+deadline return book /by 2-03-19
 event meet friend /at wed 2pm
 list
 done 1
