@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
-public class Storage {
+public class StorageHelper {
     public static void save(Serializable object, String filepath) throws FileWritingException {
         File file = new File(filepath);
 

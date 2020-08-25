@@ -1,6 +1,10 @@
 package duke;
 
 import duke.parser.Parser;
+import duke.storage.DeserializingException;
+import duke.storage.FileMissingException;
+import duke.storage.FileReadingException;
+import duke.storage.TaskListStorage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -27,9 +31,30 @@ public class Duke {
         System.out.println(logo);
         ui.say("Hello, I'm Duke. What can I do for you?");
 
+        final String savePath = "data/tasks.txt";
+        final String createNewListMessage = "I'll create a new list of tasks.";
+        TaskList list;
+        TaskListStorage storage = new TaskListStorage(savePath);
+        try {
+            list = storage.open();
+            ui.say(String.format("Loaded tasks from %s.", savePath));
+        } catch (FileMissingException e) {
+            ui.say(String.format("Couldn't find %s. %s", savePath, createNewListMessage));
+            list = new TaskList();
+        } catch (FileReadingException e) {
+            ui.say(String.format("Couldn't read the file %s. %s", savePath, createNewListMessage));
+            list = new TaskList();
+        } catch (DeserializingException e) {
+            ui.say(String.format("I don't understand the data in %s. %s", savePath,
+                    createNewListMessage));
+            list = new TaskList();
+        }
+        list.connectStorage(storage, (e) -> {
+            ui.say(String.format("Couldn't save task list to %s!", savePath));
+        });
+
         boolean stop = false;
         Scanner sc = new Scanner(System.in);
-        TaskList list = new TaskList();
         while (!stop) {
             String input = sc.nextLine();
             BotClass bot = new BotClass();

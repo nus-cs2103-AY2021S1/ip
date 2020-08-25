@@ -24,7 +24,7 @@ public class DoneCommand implements Command {
             if (t.isDone()) {
                 bot.sayLine("You've already completed this task:");
             } else {
-                t.markAsDone();
+                list.markAsDone(index);
                 bot.sayLine("Nice! I've marked this task as done:");
             }
             bot.sayLine("  " + t.displayString());
