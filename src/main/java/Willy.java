@@ -5,68 +5,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Willy {
-    static ArrayList<Task> listOfTasks = new ArrayList<>();
+
     private static TaskStore storage;
     private String message;
     private static String lastGreeting = "bye";
     static String style = "\t________________________________________________________________\n";
+    static String logo = "__       ____       __\n"
+            + "\\  \\    /    \\    /  /\n"
+            + " \\  \\  /  /\\  \\  /  /\n"
+            + "  \\  \\/  /  \\  \\/  /\n"
+            + "   \\____/    \\____/ ILLY ~(^-^)~\n";
 
-    public Willy() {
-        this.storage = new TaskStore();
-    }
-
-    // Add Tasks to list
-    public static void addToList(Task task) {
-        listOfTasks.add(task);
-        storage.updateStorage(listOfTasks);
-        System.out.println(style +
-                "\tAy here is the task you just added:\n" +
-                "\t  " + task + "\n" +
-                "\tNow you have " + listOfTasks.size() + " task(s) ah dun forget\n" +
-                style);
-    }
-
-    public static void removeTask(int taskNum) {
-        int i = taskNum - 1;
-        Task task = listOfTasks.get(i);
-        listOfTasks.remove(i);
-        storage.updateStorage(listOfTasks);
-        System.out.println(style +
-                "\tOkai here is the task you just deleted:\n" +
-                "\t  " + task + "\n" +
-                "\tNow you have " + listOfTasks.size() + " task(s) left ~\n" +
-                style);
-    }
-
-    // Reads through all the tasks in the list
-    public static void readList() {
-        System.out.println(style);
-        System.out.print("\tHere are the tasks in your list to jolt ur memory:>\n");
-        for(int i = 0; i < listOfTasks.size(); i++) {
-            Task task = listOfTasks.get(i);
-            System.out.println("\t" + (i+1) + ". " + task);
-        }
-        System.out.println(style);
-    }
-
-    // Update Tasks to be done
-    public static void setTaskDone(int taskNum) {
-        int i = taskNum - 1;
-        Task task = listOfTasks.get(i);
-        task.setTaskDone(true);
-        storage.updateStorage(listOfTasks);
-        System.out.println(style);
-        System.out.println("\tNiceee I've marked this task as done!");
-        System.out.println("\t   " + task);
-        System.out.println(style);
-    }
 
     public static void main(String[] args) throws WillyException {
-        String logo = "__       ____       __\n"
-                    + "\\  \\    /    \\    /  /\n"
-                    + " \\  \\  /  /\\  \\  /  /\n"
-                    + "  \\  \\/  /  \\  \\/  /\n"
-                    + "   \\____/    \\____/ ILLY ~(^-^)~\n";
         System.out.println(logo + "    Your personal life secretary");
 
         Scanner input = new Scanner(System.in);
@@ -75,6 +26,7 @@ public class Willy {
         System.out.println(startDuke);
         storage = new TaskStore();
         storage.createFile();
+        TaskList list = new TaskList(storage);
 
 
         while (input.hasNext()) {
@@ -89,24 +41,24 @@ public class Willy {
             // take note of keyword "list" to display the lists
             if (message.equals("list")) {
                 // reads list
-                readList();
+                list.readList();
             }
             // take note of keyword "done" to update task
             else if (message.contains("done")) {
                 int taskNum = Integer.parseInt(message.substring(5));
-                setTaskDone(taskNum);
+                list.setTaskDone(taskNum);
             }
             // take note of keyword "delete" to remove task from list
             else if (message.contains("delete")) {
                 int taskNum = Integer.parseInt(message.substring(7));
-                removeTask(taskNum);
+                list.removeTask(taskNum);
             }
             // take note of keyword "to-do" to add normal task
             else if (message.contains("todo")) {
                 try {
                 String activity = message.substring(5);
                 ToDo newTask = new ToDo(activity, TaskSymbol.TODO);
-                addToList(newTask);
+                list.addToList(newTask);
                 } catch (Exception e){
                     WillyException error = new WillyException("Hmmm what would you like to do?");
                     System.out.println(error);
@@ -122,7 +74,7 @@ public class Willy {
                     String activity = message.substring(9, separatorIndex - 1);
                     String deadline = message.substring(separatorIndex + 4);
                     DeadlineTask newTask = new DeadlineTask(deadline, activity, TaskSymbol.DEADLINE);
-                    addToList(newTask);
+                    list.addToList(newTask);
                 } catch (Exception e){
                     WillyException error = new WillyException("Hmmm the description/deadline of the task is missing... \n\tTry again with more details?");
                     System.out.println(error);
@@ -137,7 +89,7 @@ public class Willy {
                     String activity = message.substring(6, separatorIndex - 1);
                     String duration = message.substring(separatorIndex + 4);
                     EventsTask newTask = new EventsTask(duration, activity, TaskSymbol.EVENT);
-                    addToList(newTask);
+                    list.addToList(newTask);
                 } catch (Exception e) {
                     WillyException error = new WillyException(e.getMessage());
 //                    WillyException error = new WillyException("Hmmm the description/timing of event is missing... \n\tTry again with more details?");
