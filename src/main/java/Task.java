@@ -14,7 +14,7 @@ public class Task {
     }
 
     String getIcon() {
-        return isDone ? "[" + "\u2713" + "]" : "[" + "\u2718" + "] ";
+        return isDone ? "[" + "\u2713" + "] " : "[" + "\u2718" + "] ";
     }
 
     void taskIsDone() {
