@@ -20,4 +20,8 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
+
+    public String saveToFile() {
+        return isDone ? "1/" : "0/" + description;
+    }
 }
