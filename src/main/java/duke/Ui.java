@@ -3,6 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.task.Task;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Ui {
@@ -25,11 +26,14 @@ public class Ui {
         Scanner scanner = new Scanner(System.in);
         while (isRunning) {
             // Listens for input
-            String input = scanner.nextLine();
             try {
+                String input = scanner.nextLine();
                 Command c = Parser.parse(input, handler);
                 c.execute(handler, storage);
                 System.out.println();
+            }  catch (NoSuchElementException e1) {
+                // Encounter end of file, terminate
+                isRunning = false;
             } catch (DukeException e) {
                 e.printStackTrace(System.out);
                 DukeException.tryAgain();
