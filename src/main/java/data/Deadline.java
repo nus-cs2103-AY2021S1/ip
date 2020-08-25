@@ -2,6 +2,9 @@ package data;
 
 import java.time.LocalDate;
 
+/**
+ * Encapsulates a Deadline task.
+ */
 public class Deadline extends Task {
 
     protected LocalDate by;

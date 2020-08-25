@@ -6,6 +6,10 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Encapsulates a Storage class.
+ * Saves the existing task list of Duke into the hard drive.
+ */
 public class Storage {
     private ArrayList<Task> tasks = new ArrayList<>();
     private String filePath;
@@ -16,8 +20,9 @@ public class Storage {
 
     }
 
-    public void initTaskList() throws IOException {
 
+
+    private void initTaskList() throws IOException {
 
         try {
             File file = new File(this.filePath);
@@ -64,6 +69,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the task list from the file path
+     * @return task list from the file path, in array list.
+     */
+
     public ArrayList<Task> load() {
         try {
             initTaskList();
@@ -72,6 +82,11 @@ public class Storage {
         }
         return tasks;
     }
+
+    /**
+     * Saves the task list to the hard drive.
+     * @param tasks TaskList to be saved.
+     */
 
     public void save(TaskList tasks) {
         try { //write the list to file

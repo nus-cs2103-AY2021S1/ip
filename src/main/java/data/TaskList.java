@@ -2,11 +2,19 @@ package data;
 
 import java.util.ArrayList;
 
+/**
+ * Encapsulates TaskList that supports various methods
+ */
+
 public class TaskList {
     private ArrayList<Task> tasks;
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
+
+    /**
+     * Prints out the current list of tasks.
+     */
 
     public void list() {
         int counter = 1;
@@ -21,6 +29,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Delete the task with a specified index from the task list.
+     * @param num index of task to be deleted.
+     */
+
     public void delete(int num) {
 
         try {
@@ -34,6 +47,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Mark the task with a specified index from the task list as done.
+     * @param num Index of task to be done.
+     */
+
     public void doTask(int num) {
         Task task = tasks.get(num - 1);
         task.doTask();
@@ -41,6 +59,10 @@ public class TaskList {
                 + task);
     }
 
+    /**
+     * Add a task to the task list.
+     * @param task Task object to be added to the list.
+     */
     public void add(Task task) {
 
         tasks.add(task);
@@ -48,6 +70,12 @@ public class TaskList {
                 + task
                 + "\nNow you have " + tasks.size() + " task(s) in the list.");
     }
+
+    /**
+     * Returns the task with specified index from the task list.
+     * @param index Index of task to be returned
+     * @return Task from list with specified index
+     */
 
     public Task get(int index) {
         if (index < size() && index >= 0) {
@@ -57,6 +85,11 @@ public class TaskList {
         }
 
     }
+
+    /**
+     * Returns size of task list.
+     * @return size of task list.
+     */
 
     public int size() {
         return tasks.size();

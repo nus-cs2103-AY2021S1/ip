@@ -1,5 +1,9 @@
 package exception;
 
+/**
+ * Exception when the input has an invalid command.
+ */
+
 public class CommandException extends DukeException {
     private String command;
     public CommandException(String command) {
