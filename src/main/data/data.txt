@@ -1,0 +1,4 @@
+[T][DONE] read book
+[D][DONE] return book (by: Jun 06 2020)
+[T][DONE] join sports club
+[T][NOT DONE] borrow book

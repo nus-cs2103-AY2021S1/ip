@@ -5,7 +5,8 @@ import duke.tasks.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.*;
+import java.util.Scanner;
+import java.util.ArrayList;
 
 /** Represents the UI that prints out messages in Duke format. */
 public class Ui {
@@ -44,15 +45,15 @@ public class Ui {
 
     /** Shows the list of tasks in Duke format.
      *
-     * @param lst The list of tasks.
+     * @param tasks The list of tasks.
      */
-    public void formatLst(ArrayList<Task> lst) {
+    public void formatLst(ArrayList<Task> tasks) {
         showLine();
-        int size = lst.size();
+        int size = tasks.size();
         if (size > 0) {
             System.out.println("Here are the tasks in your list:");
-            for (int i = 1; i <= lst.size(); i++) {
-                System.out.println(i + "." + lst.get(i-1));
+            for (int i = 1; i <= tasks.size(); i++) {
+                System.out.println(i + "." + tasks.get(i-1));
             }
         } else {
             System.out.println("There are no tasks in your list.");
@@ -62,23 +63,23 @@ public class Ui {
 
     /** Shows the message where a task is marked as done in Duke format.
      *
-     * @param lst The list of tasks.
+     * @param tasks The list of tasks.
      * @param num The index of the task that is marked as done.
      */
-    public void formatMarkAsDone(ArrayList<Task> lst, int num) {
+    public void formatMarkAsDone(ArrayList<Task> tasks, int num) {
         showLine();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(lst.get(num));
+        System.out.println(tasks.get(num));
         showLine();
     }
 
     /** Shows the list of tasks after a task is added in Duke format.
      *
-     * @param lst The list of tasks.
+     * @param tasks The list of tasks.
      * @param task The task that is added.
      */
-    public void formatAddTask(ArrayList<Task> lst, Task task) {
-        int size = lst.size();
+    public void formatAddTask(ArrayList<Task> tasks, Task task) {
+        int size = tasks.size();
         showLine();
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
@@ -88,15 +89,16 @@ public class Ui {
 
     /** Shows the list of tasks after a task is deleted in Duke format.
      *
-     * @param lst The list of tasks.
+     * @param tasks The list of tasks.
      * @param num The index of the task that is deleted.
      */
-    public void formatDeleteTask(ArrayList<Task> lst, int num) {
-        int sizeAfterDeletion = lst.size() - 1;
+    public void formatDeleteTask(ArrayList<Task> tasks, int num) {
+        int sizeAfterDeletion = tasks.size() - 1;
         showLine();
         System.out.println("Noted. I've removed this task:");
-        System.out.println(lst.get(num));
-        System.out.println(String.format("Now you have %d %s in the list.", sizeAfterDeletion, sizeAfterDeletion == 1 ? "task" : "tasks"));
+        System.out.println(tasks.get(num));
+        System.out.println(String.format("Now you have %d %s in the list.", sizeAfterDeletion,
+                sizeAfterDeletion == 1 ? "task" : "tasks"));
         showLine();
     }
 
@@ -108,12 +110,14 @@ public class Ui {
     public void formatShowTasksOnDate(ArrayList<Task> tasksOnDate, LocalDate queryDate) {
         showLine();
         if (!tasksOnDate.isEmpty()) {
-            System.out.println(String.format("The following deadlines/events are scheduled on %s.", queryDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))));
+            System.out.println(String.format("The following deadlines/events are scheduled on %s.",
+                    queryDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))));
             for (int i = 1; i <= tasksOnDate.size(); i++) {
                 System.out.println(i + "." + tasksOnDate.get(i-1));
             }
         } else {
-            System.out.println(String.format("There are no deadlines/events scheduled on %s.", queryDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))));
+            System.out.println(String.format("There are no deadlines/events scheduled on %s.",
+                    queryDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))));
         }
         showLine();
     }

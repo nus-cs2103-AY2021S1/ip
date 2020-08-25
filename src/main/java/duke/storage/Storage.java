@@ -54,11 +54,11 @@ public class Storage {
 
     /** Saves the list of tasks into the hard disk.
      *
-     * @param lst The list of tasks to be saved into the hard disk.
+     * @param tasks The list of tasks to be saved into the hard disk.
      */
-    public void saveTaskList(ArrayList<Task> lst) {
+    public void saveTaskList(ArrayList<Task> tasks) {
         StringBuilder sb = new StringBuilder();
-        for (Task task : lst) {
+        for (Task task : tasks) {
             sb.append(task);
             sb.append("\n");
         }

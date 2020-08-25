@@ -24,13 +24,13 @@ public class DateCommand extends Command {
 
     /** Prints out the list of tasks that are occurring on the inputted date in Duke format.
      *
-     * @param tasks The list of tasks.
+     * @param taskList The list of tasks.
      * @param ui The UI that prints out messages in Duke format.
-     * @param storage The storage system that saves the list of tasks.
+     * @param storage The storage system that saves the taskList.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> tasksOnDate = new ArrayList<>();
-        for (Task task : tasks.lst) {
+        for (Task task : taskList.tasks) {
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
                 if (deadline.date.equals(queryDate)) {

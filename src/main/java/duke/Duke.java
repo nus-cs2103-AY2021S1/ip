@@ -6,7 +6,7 @@ import duke.ui.Ui;
 import duke.parsers.Parser;
 import duke.tasks.Task;
 import duke.exceptions.DukeException;
-import duke.commands.*;
+import duke.commands.Command;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Duke {
 
     private Storage storage;
-    private TaskList tasks;
+    private TaskList taskList;
     private Ui ui;
     private Parser parser;
 
@@ -29,8 +29,8 @@ public class Duke {
         storage = new Storage(directoryPath, dataFilePath);
         ArrayList<String> lines = storage.readFile();
         parser = new Parser();
-        ArrayList<Task> lst = parser.parseSavedTaskList(lines);
-        tasks = new TaskList(lst);
+        ArrayList<Task> tasks = parser.parseSavedTaskList(lines);
+        taskList = new TaskList(tasks);
     }
 
     /** Runs the Duke program. */
@@ -40,8 +40,8 @@ public class Duke {
         try {
             while (!isExit) {
                 String userInput = ui.readCommand();
-                Command c = parser.parse(userInput, tasks.lst);
-                c.execute(tasks, ui, storage);
+                Command c = parser.parse(userInput, taskList.tasks);
+                c.execute(taskList, ui, storage);
                 isExit = c.isExit();
             }
         } catch (DukeException | DateTimeParseException e) {

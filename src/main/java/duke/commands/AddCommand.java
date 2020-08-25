@@ -5,7 +5,7 @@ import duke.tasks.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-/** Represents the command that adds a task to TaskList's list when executed. */
+/** Represents the command that adds a task to the taskList when executed. */
 public class AddCommand extends Command {
 
     /** The task to be added. */
@@ -19,18 +19,18 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
-    /** Adds the task to TaskList's list,
+    /** Adds the task to the taskList,
      * prints out the AddCommand message in Duke format and
      * saves the list in the hard disk.
      *
-     * @param tasks The list of tasks.
+     * @param taskList The list of tasks.
      * @param ui The UI that prints out messages in Duke format.
-     * @param storage The storage system that saves the list of tasks.
+     * @param storage The storage system that saves the taskList.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.addTask(task);
-        ui.formatAddTask(tasks.lst, task);
-        storage.saveTaskList(tasks.lst);
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        taskList.addTask(task);
+        ui.formatAddTask(taskList.tasks, task);
+        storage.saveTaskList(taskList.tasks);
     }
 }

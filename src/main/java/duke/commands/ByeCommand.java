@@ -9,12 +9,12 @@ public class ByeCommand extends Command {
 
     /** Prints out the ByeCommand message in Duke format.
      *
-     * @param tasks The list of tasks.
+     * @param taskList The list of tasks.
      * @param ui The UI that prints out messages in Duke format.
-     * @param storage The storage system that saves the list of tasks.
+     * @param storage The storage system that saves the taskList.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showBye();
     }
 
