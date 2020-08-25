@@ -17,31 +17,57 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+
+/**
+ * Represents an add command. An AddCommand object represents a command
+ * to insert a task into a TaskList. This task can be either a todo, deadline or event.
+ */
 public class AddCommand extends Command {
 
-    protected String[] stringArray;
-    protected boolean isDone;
+    /** String array storing the user input. */
+    private String[] stringArray;
 
+    /** Done status of the task associated with the command. */
+    private boolean isDone;
+
+    /**
+     * Creates a new AddCommand and initialises its done status to false.
+     *
+     * @param stringArray Tokenized array form of the input command string.
+     */
     public AddCommand(String[] stringArray) {
         super(stringArray);
         this.isDone = false;
     }
 
+    /**
+     * Creates a new AddCommand and allows the initialisation of its done status.
+     *
+     * @param stringArray Tokenized array form of the input command string.
+     * @param isDone The done status to set for the task represented by the command.
+     */
     public AddCommand(String[] stringArray, boolean isDone) {
         super(stringArray);
         this.isDone = isDone;
     }
 
-    public boolean containsString(String delimeter) {
-        return Arrays.stream(getArray()).anyMatch(delimeter::equals);
-    }
-
-    public Task processTask(String delimeter, String taskType) throws DukeException {
+    /**
+     * Processes the string array and returns the correct task to be added into the task list.
+     * This can be a todo task with the task name, a deadline task with a date and/or time,
+     * or an event task with a date and/or time.
+     *
+     * @param delimiter Represents the delimiter that is used to separate names and the date of the task.
+     * @param taskType Represents the type of the task (todo, deadline, event).
+     * @return The task to be added into the task list.
+     * @throws DukeException If task string does not contain dates (for deadline and event tasks),
+     * or has wrong date/time formatting.
+     */
+    public Task processTask(String delimiter, String taskType) throws DukeException {
         //Task Name Only
-        String taskName = Arrays.stream(getArray()).takeWhile(e -> !e.equals(delimeter)).skip(1)
+        String taskName = Arrays.stream(getArray()).takeWhile(e -> !e.equals(delimiter)).skip(1)
                 .collect(Collectors.joining(" "));
         //Date + Time, each in a single array cell
-        String[] dateTime = Arrays.stream(getArray()).dropWhile(e -> !e.equals(delimeter)).skip(1)
+        String[] dateTime = Arrays.stream(getArray()).dropWhile(e -> !e.equals(delimiter)).skip(1)
                 .collect(Collectors.joining(" ")).split(" ");
 
         if (dateTime.length < 1 || dateTime[0].equals("")) {
@@ -50,7 +76,6 @@ public class AddCommand extends Command {
 
         //Array to store 3 fields - task name, date and time (if available)
         ArrayList<String> newArray = new ArrayList<>();
-        //TaskName
         newArray.add(taskName);
 
         //More than necessary words or date and time in wrong format
@@ -94,6 +119,14 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Carries out the addition of a task to the task list specified.
+     *
+     * @param taskList The task list to add the new task into.
+     * @return The same task that is added to the task list.
+     * @throws DukeException If task string does not contain task name, is unrecognized,
+     * or the delimiter used to process deadline/event tasks.
+     */
     public Task addTask(TaskList taskList) throws DukeException {
         //Makes sure task name is available
         if (getArray().length < 2 || getFirstIndex().equals("")) {
@@ -106,7 +139,7 @@ public class AddCommand extends Command {
             return todo;
         case ("deadline"):
             if (!containsString("/by")) {
-                throw new DukeException("Your deadline task input must contain the delimeter /by to separate your " +
+                throw new DukeException("Your deadline task input must contain the delimiter /by to separate your " +
                         "task name and date!");
             }
             Task deadline = processTask("/by", "deadline");
@@ -114,7 +147,7 @@ public class AddCommand extends Command {
             return deadline;
         case ("event"):
             if (!containsString("/at")) {
-                throw new DukeException("Your event task input must contain the delimeter /at to separate your " +
+                throw new DukeException("Your event task input must contain the delimiter /at to separate your " +
                         "task name and date!");
             }
             Task event = processTask("/at", "event");
@@ -125,6 +158,12 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Carries out the addition of a task from a local file to the task list specified.
+     *
+     * @param taskList The task list to operate on.
+     * @throws DukeException If the addition of the task fails.
+     */
     public void executeFromFile(TaskList taskList) throws DukeException {
         Task task = addTask(taskList);
         if (this.isDone) {
@@ -132,6 +171,15 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Executes the addition of tasks and prints notifications to users once that is successful.
+     * Also writes the task list to a user-specified file.
+     *
+     * @param tasks The task list to operate on.
+     * @param ui The user-interaction object responsible for all system printing and user-interaction.
+     * @param storage Represents the logic needed to write to an user-specified file.
+     * @throws DukeException If the addition of the task fails.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         addTask(tasks);
