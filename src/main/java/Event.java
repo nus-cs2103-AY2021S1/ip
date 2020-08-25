@@ -4,10 +4,12 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task{
 
     protected LocalDate date;
+    protected String at;
 
     public Event(String description, String at) {
         super(description);
         this.date = parseDate(at);
+        this.at = at;
     }
 
     private LocalDate parseDate(String at) {

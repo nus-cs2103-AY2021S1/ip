@@ -6,11 +6,13 @@ public class Deadline extends Task {
 
     protected LocalDate date;
     protected LocalTime time;
+    protected String by;
 
 
     public Deadline(String description, String by) {
         super(description);
         parseDateAndTime(by);
+        this.by = by;
     }
 
     private void parseDateAndTime(String by) {
@@ -30,6 +32,10 @@ public class Deadline extends Task {
         return time.format(timeFormatter);
     }
 
+    private String printDateNTime() {
+        return printDate() + " " + printTime();
+    }
+
     @Override
     public String diskFormat() {
         return "     D | " + super.diskFormat() + " | " + by;
@@ -37,6 +43,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + printDate() + " " + printTime() + ")";
+        return "[D]" + super.toString() + " (by: " + printDateNTime() + ")";
     }
 }

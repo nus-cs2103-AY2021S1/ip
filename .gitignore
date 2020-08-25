@@ -20,10 +20,19 @@ src/main/java/Task.class
 src/main/java/Todo.class
 src/main/java/Event.class
 src/main/java/Deadline.class
-<<<<<<< HEAD
-src/main/java/Sparkles.txt
-text-ui-test/Sparkles.txt
-=======
-text-ui-test/Sparkles.txt
-src/main/java/Sparkles.txt
->>>>>>> branch-level-7
+
+src/main/java/AddCommand.class
+src/main/java/AddDeadlineCommand.class
+src/main/java/AddEventCommand.class
+src/main/java/AddTodoCommand.class
+src/main/java/Command.class
+src/main/java/DeleteCommand.class
+src/main/java/DoneCommand.class
+src/main/java/ExitCommand.class
+src/main/java/Parser.class
+src/main/java/ShowListCommand.class
+src/main/java/SparklesException.class
+src/main/java/Storage.class
+src/main/java/TaskList.class
+src/main/java/TaskUnclearCommand.class
+src/main/java/Ui.class
