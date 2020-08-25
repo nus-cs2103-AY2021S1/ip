@@ -2,9 +2,18 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * <h>Storage</h>
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     File file;
 
+    /**
+     * Constructor for Storage class.
+     * @param filePath The path of the file todolist.txt.
+     * @throws IOException On input error.
+     */
     public Storage(String filePath) throws IOException {
         this.file = new File(filePath);
         boolean exists = file.exists();
@@ -13,16 +22,29 @@ public class Storage {
         }
     }
 
+    /**
+     * Getter to get the file.
+     * @return File The file.
+     */
     public File getFile() {
         return file;
     }
 
+    /**
+     * Get the path of the file.
+     * @return String the absolute path of the file.
+     */
     public static String getFilePath() {
         String filePath = new File("").getAbsolutePath();
         filePath += "\\todolist.txt";
         return filePath;
     }
 
+    /**
+     * Loads the file from todolist.txt.
+     * @return An arraylist of task that was stored.
+     * @throws FileNotFoundException When the file is not found.
+     */
     protected ArrayList<Task> loadFile() throws FileNotFoundException {
         ArrayList<String> result = new ArrayList<>();
         ArrayList<Task> taskList = new ArrayList<>();
@@ -109,6 +131,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Save and write the file into todolist.txt.
+     * @param f File The file.
+     * @param ls TaskList the list of the tasks to be written.
+     * @throws IOException On input error.
+     */
     protected static void saveFile(File f, TaskList ls) throws IOException {
         ArrayList<String> arrayList = new ArrayList<>();
         String link = " >> ";
