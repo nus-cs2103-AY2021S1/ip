@@ -1,5 +1,7 @@
+package duke.task;
+
 public class DukeRunTimeException extends RuntimeException {
-    DukeRunTimeException(String errorMessage) {
+    public DukeRunTimeException(String errorMessage) {
         super(errorMessage);
     }
 }

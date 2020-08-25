@@ -1,9 +1,11 @@
+package duke.task;
+
 public class Task {
     private String taskInfo;
     private TaskType taskType;
     protected boolean done;
-    protected static final int undoneNo = 0;
-    protected static final int doneNo = 1;
+    public static final int undoneNo = 0;
+    public static final int doneNo = 1;
 
     public Task(String taskInfo, TaskType taskType) {
         this.taskInfo = taskInfo;

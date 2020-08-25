@@ -2,21 +2,22 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.List;
+import duke.DukeIOException;
+import duke.Storage;
+import duke.UI.UI;
+import duke.task.*;
 
 public class Duke {
-    private static List<Task> taskList = new ArrayList<>();
     private TaskList tasks;
     private Storage storage;
+    private UI ui;
+
     Duke(String filePath) {
+        ui = new UI();
         storage = new Storage(filePath);
+        storage.addDirIfRequired();
         tasks = new TaskList(storage.load());
-    }
-    public static void intro() {
-        System.out.println("\tHi handsome! My name is Duck. What can I do for you?");
     }
 
     public void printList() {
@@ -30,7 +31,13 @@ public class Duke {
         if (taskInfo.length() <= 5) {
             throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
         }
-        int taskNo = Character.getNumericValue(taskInfo.charAt(5));
+        taskInfo = taskInfo.replace("done", "").trim();
+        int taskNo;
+        try {
+            taskNo = Integer.parseInt(taskInfo);
+        } catch (NumberFormatException err){
+            throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
+        }
         if (taskNo < 1 || taskNo > tasks.size()) {
             throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
         }
@@ -71,22 +78,6 @@ public class Duke {
         tasks.addTask(new Events(taskInfo, at));
     }
 
-    public static void addDirIfRequired() {
-        String home = System.getProperty("user.home");
-        Path path = Paths.get(home, "Duke");
-        boolean dukeDirectoryExists = Files.exists(path);
-        if (!dukeDirectoryExists) {
-            File dir = new File(path.toString());
-            dir.mkdir();
-        }
-        path = Paths.get(home, "Duke", "data");
-        boolean dataDirectoryExists = Files.exists(path);
-        if (!dataDirectoryExists) {
-            File dir = new File(path.toString());
-            dir.mkdir();
-        }
-    }
-
     public void handleTask(String task) {
         switch(task) {
         case "bye" :
@@ -125,29 +116,9 @@ public class Duke {
             }
         }
     }
-
-  /*  public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }*/
-
     public void run() {
         Scanner sc = new Scanner(System.in);
-        Duke.intro();
-        addDirIfRequired();
+        ui.showIntro();
         while (sc.hasNextLine()) {
             String task = sc.nextLine();
             handleTask(task);
@@ -155,10 +126,13 @@ public class Duke {
         sc.close();
     }
 
-    public static void main(String[] args) throws DukeRunTimeException {
+    public static String getFilePath() {
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "Duke", "data", "tasks.text");
-        new Duke(path.toString()).run();
+        return path.toString();
+    }
+    public static void main(String[] args) throws DukeRunTimeException {
+        new Duke(getFilePath()).run();
         /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

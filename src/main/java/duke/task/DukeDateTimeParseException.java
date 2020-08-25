@@ -1,5 +1,7 @@
+package duke.task;
+
 public class DukeDateTimeParseException extends DukeRunTimeException {
-    DukeDateTimeParseException(String errorMessage) {
+   public DukeDateTimeParseException(String errorMessage) {
         super(errorMessage);
     }
 }

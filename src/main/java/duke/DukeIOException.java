@@ -1,5 +1,7 @@
+package duke;
+
 public class DukeIOException extends DukeCompileTimeException {
-    DukeIOException(String errorMessage) {
+    public DukeIOException(String errorMessage) {
         super(errorMessage);
     }
 }

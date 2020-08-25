@@ -1,5 +1,7 @@
+package duke.task;
+
 public class DukeInvalidCommandException extends DukeRunTimeException {
-    DukeInvalidCommandException(String errorMessage) {
+    public DukeInvalidCommandException(String errorMessage) {
         super(errorMessage);
     }
 }
