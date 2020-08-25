@@ -25,6 +25,9 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Lists all the tasks in the list.
+     */
     public void listItems() {
         if (this.tasks.size() == 0) {
             System.out.println("You don't have any task in your list.");
@@ -39,6 +42,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task based on the corresponding number.
+     * @param index Index of the list containing the task
+     * @throws DeleteException If the index < 0 or more than the size.
+     */
     public void deleteTask(int index) throws DeleteException {
         if(index < 0 || index > tasks.size()) {
             throw new DeleteException("Please enter a valid task number.");
@@ -53,16 +61,30 @@ public class TaskList {
 
     }
 
+    /**
+     * Saves the task to the list.
+     * @param task Task to save to the list.
+     */
     public void saveToList(Task task) {
         this.tasks.add(task);
         System.out.println("Okay~ I've added this task: \n" + task.toString());
         System.out.println("Now you have " + this.tasks.size() + " task(s) in the list.");
     }
 
+    /**
+     * Returns the task corresponding to the task number.
+     * @param taskNum Task number of the task.
+     * @return The task corresponding to the task number.
+     */
     public Task getTask(int taskNum) {
         return this.tasks.get(taskNum-1);
     }
 
+    /**
+     * Marks the task corresponding to the task number as done.
+     * @param taskNum Task number of the task.
+     * @throws DoneException If the index < 0 or more than the size.
+     */
     public void markTaskAsDone(int taskNum) throws DoneException {
             if (taskNum <= 0 || taskNum > tasks.size()) {
                 throw new DoneException("Please enter a valid task number.");
@@ -78,6 +100,11 @@ public class TaskList {
             }
     }
 
+    /**
+     * Shows the all task(s) on the input day.
+     * @param date Date to show.
+     * @throws CalendarException If the date input is in invalid format.
+     */
     public void showDate(String date) throws CalendarException {
         try {
             LocalDate localDate = LocalDate.parse(date);
@@ -116,6 +143,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns all the tasks in the list.
+     * @return List containing all of the tasks.
+     */
     public List<Task> getTasks() {
         return this.tasks;
     }

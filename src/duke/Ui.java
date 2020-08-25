@@ -6,6 +6,9 @@ public class Ui {
 
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Shows greetings when user starts the bot.
+     */
     public void greet() {
         String donLogo = "   ___     ___    _  _     ___     ___ \n"
                 + "  |   \\   / _ \\  | \\| |   / __|   / _ \\  \n"
@@ -18,43 +21,26 @@ public class Ui {
         System.out.println(donLogo + "\n" + msg);
     }
 
+    /**
+     * Shows the loading error if
+     * there is a problem in loading the bot.
+     */
     public void showLoadingError() {
         System.out.println("Unable to load.... Try again later.");
     }
 
+    /**
+     * Reads user's command from Scanner.
+     * @return user's command.
+     */
     public String readCommand() {
         String command = sc.nextLine();
         return command;
-//            if (firstWord.equals("list")) {
-//                listItems();
-//
-//            } else if (firstWord.equals("bye")) {
-//                sc.close();
-//                System.out.println("Time to say goodbye :( \n" +
-//                                    "Have a great day!");
-//                System.exit(0);
-//                return;
-//
-//            } else {
-//
-//                if (firstWord.equals("done")) {
-//                    processDone(duke.command);
-//                } else if (firstWord.equals("todo")) {
-//                    processTodo(duke.command);
-//                } else if (firstWord.equals("deadline")) {
-//                    processDeadline(duke.command);
-//                } else if (firstWord.equals("event")) {
-//                    processEvent(duke.command);
-//                } else if (firstWord.equals("delete")) {
-//                    processDelete(duke.command);
-//                } else {
-//                    WrongInputException wrong = new WrongInputException();
-//                    System.out.println(wrong.getMessage());
-//                }
-//            }
-//        }
     }
 
+    /**
+     * Exits the bot and shows bye message.
+     */
     public void bye() {
         sc.close();
         System.out.println("Time to say goodbye :( \n" +
@@ -63,11 +49,18 @@ public class Ui {
         return;
     }
 
+    /**
+     * Shows pretty line before and after every output.
+     */
     public void showLine() {
         //System.out.println("\n__̴ı̴̴̡̡̡ ̡͌l̡̡̡ ̡͌l̡*̡̡ ̴̡ı̴̴̡ ̡̡͡|̲̲̲͡͡͡ ̲▫̲͡ ̲̲̲͡͡π̲̲͡͡ ̲̲͡▫̲̲͡͡ ̲|̡̡̡ ̡ ̴̡ı̴̡̡ ̡͌l̡̡̡̡._____̴ı̴̴̡̡̡ ̡͌l̡̡̡ ̡͌l̡*̡̡ ̴̡ı̴̴̡ ̡̡͡|̲̲̲͡͡͡ ̲▫̲͡ ̲̲̲͡͡π̲̲͡͡ ̲̲͡▫̲̲͡͡ ̲|̡̡̡ ̡ ̴̡ı̴̡̡ ̡͌l̡̡̡̡._____̴ı̴̴̡̡̡ ̡͌l̡̡̡ ̡͌l̡*̡̡ ̴̡ı̴̴̡ ̡̡͡|̲̲̲͡͡͡ ̲▫̲͡ ̲̲̲͡͡π̲̲͡͡ ̲̲͡▫̲̲͡͡ ̲|̡̡̡ ̡ ̴̡ı̴̡̡ ̡͌l̡̡̡̡._____̴ı̴̴̡̡̡ ̡͌l̡̡̡ ̡͌l̡*̡̡ ̴̡ı̴̴̡ ̡̡͡|̲̲̲͡͡͡ ̲▫̲͡ ̲̲̲͡͡π̲̲͡͡ ̲̲͡▫̲̲͡͡ ̲|̡̡̡ ̡ ̴̡ı̴̡̡ ̡͌l̡̡̡̡.___\n");
         System.out.println("\n▬▬ι═══════ﺤ -═══════ι▬▬ ▬▬ι═══════ﺤ -═══════ι▬▬\n");
     }
 
+    /**
+     * Shows error message.
+     * @param msg Error message.
+     */
     public void showError(String msg) {
         System.out.println(msg);
     }
