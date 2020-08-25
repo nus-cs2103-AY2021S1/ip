@@ -48,6 +48,12 @@ public class TaskList {
         fr.close();
     }
 
+    /**
+     * Adds new task to the task list
+     *
+     * @param task task to be added
+     * @return the task that was added
+     */
     public Task addTask(Command task) {
         Task newTask;
         if (task.getClass() == TodoCommand.class) {
@@ -63,12 +69,24 @@ public class TaskList {
         return newTask;
     }
 
+    /**
+     * Deletes a task from the task list
+     *
+     * @param index the index of the task in the list
+     * @return the deleted task
+     */
     public Task deleteTask(int index) {
         Task task = this.taskList.get(index);
         this.taskList.remove(index);
         return task;
     }
 
+    /**
+     * Retrieves the tasks that is due/occurring at a specified date
+     *
+     * @param dueDate a string representation of the due/event date for the tasks to be searched up
+     * @return the string representation of all the task due on that date
+     */
     public String getTaskDueOn(String dueDate){
         String output = "";
 
@@ -79,6 +97,13 @@ public class TaskList {
         }
         return (output == "" ? "None\n" : output) ;
     }
+
+    /**
+     * Retrieves the tasks that has the specified keyword in their description
+     *
+     * @param parameter a string representation of the keyword to be searched up
+     * @return the string representation of all the task that contains the keyword
+     */
 
     public String getTaskWithKeyword(String parameter) {
         String output = "";
