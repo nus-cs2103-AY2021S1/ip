@@ -1,7 +1,7 @@
 package duke;
 
 import duke.task.Task;
-import exceptions.DukeException;
+import duke.exceptions.DukeException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
