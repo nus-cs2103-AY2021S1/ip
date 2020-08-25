@@ -1,5 +1,5 @@
 public class DukeDeleteException extends DukeException {
-    DukeDeleteException(String s){
+    DukeDeleteException(String s) {
         super(s);
     }
 }

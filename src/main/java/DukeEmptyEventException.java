@@ -1,5 +1,5 @@
 public class DukeEmptyEventException extends DukeException {
-    DukeEmptyEventException(String s){
+    DukeEmptyEventException(String s) {
         super(s);
     }
 }

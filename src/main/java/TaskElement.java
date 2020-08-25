@@ -10,7 +10,7 @@ public enum TaskElement {
 
     public final String label;
 
-    private TaskElement(String label){
+    private TaskElement(String label) {
         this.label = label;
     }
 

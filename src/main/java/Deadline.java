@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected String by;
     protected LocalDateTime localDate;
 
@@ -13,7 +13,7 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String writerSave(){
+    public String writeSaveFormat() {
         return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, by);
     }
 

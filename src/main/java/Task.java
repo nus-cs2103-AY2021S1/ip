@@ -7,19 +7,19 @@ public class Task {
         this.isDone = false;
     }
 
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
         UI.printMarkAsDone(this);
     }
 
-    public String writerSave(){
+    public String writeSaveFormat() {
         String store = "D |";
-        if(isDone){
+        if (isDone) {
             store += " 1 |";
         } else {
             store += " 0 |";
         }
-        store += " "  + this.description;
+        store += " " + this.description;
         return store;
     }
 
@@ -28,8 +28,8 @@ public class Task {
     }
 
     @Override
-    public String toString(){
-            return "[" + getStatusIcon()+ "]" + " " + description;
+    public String toString() {
+        return "[" + getStatusIcon() + "]" + " " + description;
     }
 
     public boolean containsKeyword(String substring){
@@ -37,3 +37,4 @@ public class Task {
     }
 
 }
+
