@@ -38,8 +38,27 @@ public class TaskList {
         return list;
     }
 
+    public TaskList filter(String keyword) {
+        List<Task> filteredList = new ArrayList<>();
+        for(Task task: list) {
+            if(task.toString().contains(keyword)) {
+                filteredList.add(task);
+            }
+        }
+        return new TaskList(filteredList);
+    }
+
     public List<String> itemize() {
         List<String> itemizedList = new ArrayList<>();
+        for(int i = 0; i < list.size(); i++) {
+            itemizedList.add((i + 1) + ". " + list.get(i));
+        }
+        return itemizedList;
+    }
+
+    public List<String> itemize(String introText) {
+        List<String> itemizedList = new ArrayList<>();
+        itemizedList.add(introText);
         for(int i = 0; i < list.size(); i++) {
             itemizedList.add((i + 1) + ". " + list.get(i));
         }

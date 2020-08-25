@@ -17,6 +17,10 @@ public class Parser {
                 if (remainingText != null) throw new DukeException("Did you mean to say \'list\'?");
                 return new ListCommand();
             }
+            case "find": {
+                if (remainingText == null) throw new DukeException("The keyword for finding a task cannot be empty.");
+                return new FindCommand(remainingText);
+            }
             case "todo": {
                 if (remainingText == null) throw new DukeException("The description for a task cannot be empty.");
                 Task task = new TodoTask(remainingText);
