@@ -3,12 +3,12 @@ public class Task {
     protected boolean isDone;
     protected Type type;
 
-    public enum Type { TODO, DEADLINE, EVENT, UNKNOWN }
+    public enum Type { TODO, DEADLINE, EVENT, NONE }
 
     protected Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.type = Type.UNKNOWN;
+        this.type = Type.NONE;
     }
 
     @Override
@@ -33,11 +33,11 @@ public class Task {
         case EVENT:
             icon = "E";
             break;
-        case UNKNOWN:
+        case NONE:
             icon = "?";
             break;
         default:
-            icon = "Error";
+            icon = "X";
         }
         return "[" + icon + "]";
     }

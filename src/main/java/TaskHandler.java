@@ -16,7 +16,7 @@ public class TaskHandler {
             type = Task.Type.EVENT;
             break;
         default:
-            type = Task.Type.UNKNOWN;
+            type = Task.Type.NONE;
         }
         return type;
     }

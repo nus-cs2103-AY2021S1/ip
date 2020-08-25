@@ -1,18 +1,7 @@
-public class Deadline extends Task {
-    protected String deadline;
+public class Deadline extends TimedTask {
 
     public Deadline(String description, String deadline) {
-        super(description);
+        super(description, deadline);
         super.type = Task.Type.DEADLINE;
-        this.deadline = deadline;
-    }
-
-    @Override
-    public String toString() {
-        return this.getTypeIcon() + this.getStatusIcon() + " " + this.description + this.getDeadline();
-    }
-
-    protected String getDeadline() {
-        return " (by: " + this.deadline + ")";
     }
 }

@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+
     public static void main(String[] args) throws DukeException {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<>();
@@ -42,7 +43,7 @@ public class Duke {
                     valid = handler.checkEvent(input);
                     if (valid) addToList(Task.Type.EVENT, input, handler, taskList);
                     break;
-                case UNKNOWN: // Fallthrough
+                case NONE: // Fallthrough
                 default: // Fallthrough
                 }
                 if (!valid) {
