@@ -5,7 +5,7 @@ import java.util.Objects;
  */
 public abstract class Task {
     private final String name;
-    private boolean Done = false;
+    private boolean isDone = false;
     private static final String MESSAGE_BLANK_TASK = "Did you casually forget to put in the description of the task?";
 
     /**
@@ -41,14 +41,14 @@ public abstract class Task {
      * @return true if task is done, false otherwise.
      */
     public boolean isDone() {
-        return Done;
+        return isDone;
     }
 
     /**
      * Marks the task as done.
      */
     public void markAsDone() {
-        Done = true;
+        isDone = true;
     }
 
     /**
@@ -67,12 +67,12 @@ public abstract class Task {
             return false;
         }
         Task task = (Task) o;
-        return Done == task.Done &&
+        return isDone == task.isDone &&
                 Objects.equals(name, task.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, Done);
+        return Objects.hash(name, isDone);
     }
 }

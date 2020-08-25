@@ -39,7 +39,8 @@ public class DeleteCommand extends Command {
      * @param o Other object.
      * @return True if the given object represents an DeleteCommand equivalent to this DeleteCommand, false otherwise.
      */
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -55,7 +56,8 @@ public class DeleteCommand extends Command {
      *
      * @return A hash code for this DeleteCommand.
      */
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         return Objects.hash(id);
     }
 }

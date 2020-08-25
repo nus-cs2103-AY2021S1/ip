@@ -26,7 +26,8 @@ public class DoneCommand extends Command {
      * @throws IOException               If there is an error during saving to disk.
      * @throws IndexOutOfBoundsException If the task number provided does not exist.
      */
-    @Override public void execute(TaskList tasks, Ui ui, Storage storage)
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage)
             throws IOException, IndexOutOfBoundsException {
         Task curr = tasks.getTaskAtIndex(id);
         if (curr.isDone()) {
@@ -44,7 +45,8 @@ public class DoneCommand extends Command {
      * @param o Other object.
      * @return True if the given object represents an DoneCommand equivalent to this DoneCommand, false otherwise.
      */
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -60,7 +62,8 @@ public class DoneCommand extends Command {
      *
      * @return A hash code for this DoneCommand.
      */
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         return Objects.hash(id);
     }
 }

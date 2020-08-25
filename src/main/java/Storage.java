@@ -26,12 +26,12 @@ public class Storage {
     /**
      * Saves the current list of tasks to the disk.
      *
-     * @param taskList List of tasks.
+     * @param tasks List of tasks.
      * @throws IOException If an error occurred when saving to disk.
      */
-    void updateMemory(ArrayList<Task> taskList) throws IOException {
+    void updateMemory(ArrayList<Task> tasks) throws IOException {
         StringBuilder taskListString = new StringBuilder();
-        for (Task task : taskList) {
+        for (Task task : tasks) {
             for (String attribute : task.attributeList()) {
                 taskListString.append(attribute).append("\n");
             }
