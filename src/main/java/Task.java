@@ -12,8 +12,16 @@ class Task {
         completed = true;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Type getType() {
         return type;
+    }
+
+    public boolean getCompleted() {
+        return completed;
     }
 
     @Override

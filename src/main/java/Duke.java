@@ -1,8 +1,34 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
 
 public class Duke {
     static ArrayList<Task> list = new ArrayList<>();
+    private static FileProcessor fp;
+
+    static void initialise() {
+        try {
+            list = new ArrayList<>();
+            String dir = System.getProperty("user.dir") + "/data";
+            File path = new File(dir);
+            if(!path.exists()) {
+                path.mkdir();
+            }
+            File f = new File(path + "/duke.txt");
+            boolean result = f.createNewFile();
+            if(result) {
+                System.out.println("file created "+f.getCanonicalPath());
+            } else {
+                System.out.println("file exists at: "+f.getCanonicalPath());
+                System.out.println("reading... ");
+                fp = new FileProcessor(f);
+                fp.readAll(list);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     static boolean isNum(String s) {
         if (s == null) {
@@ -58,6 +84,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        initialise();
         Scanner scanner = new Scanner(System.in);
         String s;
         print("\tHello! I'm Duke\n" +
@@ -68,6 +95,8 @@ public class Duke {
                     && Integer.parseInt(done[1]) <= list.size() && Integer.parseInt(done[1]) > 0) {
                 if(done[0].equals("done")) {
                     list.get(Integer.parseInt(done[1]) - 1).setCompleted();
+//                    fp.setTaskCompleted(Integer.parseInt(done[1]));
+                    //test
                     print("\tNice! I've marked this task as done:\n" +
                             "\t" + list.get(Integer.parseInt(done[1]) - 1) + "\n");
                 } else {
@@ -77,6 +106,8 @@ public class Duke {
                             "\t" + deleted + "\n" +
                             "\tNow you have " + list.size() + " tasks in the list.\n");
                 }
+                fp.reset();
+                fp.addAll(list);
             } else if(s.equals("list")) {
                 String temp = "";
                 for(int i = 0; i < list.size(); i++) {
@@ -85,7 +116,9 @@ public class Duke {
                 print("\tHere are the tasks in your list:\n" + temp);
             } else {
                 try {
-                    list.add(createTask(s));
+                    Task task = createTask(s);
+                    list.add(task);
+                    fp.addTask(task);
                     print("\tGot it. I've added this task: \n" +
                         "\t" + list.get(list.size()-1) + "\n" +
                         "\tNow you have " + list.size() + " tasks in the list.\n");
