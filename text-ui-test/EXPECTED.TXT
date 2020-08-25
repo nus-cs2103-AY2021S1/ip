@@ -23,8 +23,8 @@ Duke> What can I do for you?
 3. [D][✘] cs2103 proj (by: 02/03/20 23:59)
 Duke> Choose the task(s) to be marked as 'Done'
 >> Duke> Nice! I've marked the following as done:
-[D][✓] cs2103 proj (by: 02/03/20 23:59)
-[T][✓] go running
+1. [D][✓] cs2103 proj (by: 02/03/20 23:59)
+2. [T][✓] go running
 >> Duke> Here's your Task List:
 1. [T][✓] go running
 2. [E][✘] concert (at: 02/02/20 18:00)
@@ -37,14 +37,14 @@ Duke> Choose the task(s) to be marked as 'Done'
 Choose the task(s) to be deleted.
 >> Duke> This task #99 does not exist.
 Duke> I've deleted the task(s) you specified:
-[E][✘] concert (at: 02/02/20 18:00)
+1. [E][✘] concert (at: 02/02/20 18:00)
 >> Duke> Here's your Task List:
 1. [T][✓] go running
 2. [D][✓] cs2103 proj (by: 02/03/20 23:59)
 Choose the task(s) to be deleted.
 >> Duke> I've deleted the task(s) you specified:
-[D][✓] cs2103 proj (by: 02/03/20 23:59)
-[T][✓] go running
+1. [D][✓] cs2103 proj (by: 02/03/20 23:59)
+2. [T][✓] go running
 >> Duke> Your List is Empty.
 >> Here's what I can do:
 Available Commands:
@@ -55,9 +55,9 @@ Available Commands:
 'delete'
 'bye'
 >> Duke> Enter task details:
->> Duke> Yo! Command Syntax Error. '<Event Details> /at <Event Time>'
+>> Duke> Yo! Command Syntax Error. '<Details> /by or /at <dd/MM/yy [HH:MM]>'
 Duke> Enter task details:
->> Duke> Yo! Event details/time are missing.
+>> Duke> Yo! Details/Time are missing.
 Duke> Enter task details:
 >> Duke> I've added 'briefing' to your Task List
 >> Duke> Unrecognised Command :(, type 'help' for available commands.

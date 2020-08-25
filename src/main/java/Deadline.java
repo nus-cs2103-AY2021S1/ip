@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
   protected String by;
@@ -9,16 +10,20 @@ public class Deadline extends Task {
   protected DateTimeFormatter dateParser = DateTimeFormatter.ofPattern("dd/MM/yy");
   protected DateTimeFormatter timeParser = DateTimeFormatter.ofPattern("HH:mm");
 
-  public Deadline(String description, String by) {
+  public Deadline(String description, String by) throws DukeException {
     super(description);
     this.by = by;
-    String s[] = by.split(" ");
-    if (s.length <= 1) {
-      time = null;
-    } else {
-      time = LocalTime.parse(s[1], timeParser);
+    try {
+      String s[] = by.split(" ");
+      if (s.length <= 1) {
+        time = null;
+      } else {
+        time = LocalTime.parse(s[1], timeParser);
+      }
+      date = LocalDate.parse(s[0], dateParser);
+    } catch (DateTimeParseException e) {
+      throw new DukeException("Yo! DateTime format is wrong. <dd/MM/yy [HH:MM]>");
     }
-    date = LocalDate.parse(s[0], dateParser);
   }
 
   @Override

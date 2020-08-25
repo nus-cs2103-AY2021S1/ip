@@ -1,10 +1,6 @@
-import java.util.Collections;
-import java.util.Arrays;
-
 public class Duke {
   public static String home = System.getProperty("user.home");
   public static String filePath = home + "/Desktop/duke.txt";
-  // do a check whether file exists
   private Storage storeFile;
   private TaskList list;
   private Ui ui;
@@ -51,12 +47,7 @@ public class Duke {
               ui.showListDoneAskMsg();
               try {
                 userInput = ui.readInput();
-                if (userInput.isBlank()) {
-                  validInput = false;
-                  throw new DukeException("Yo! Enter the task number(s) to be marked as 'Done'");
-                }
-                int[] tasksArray =
-                        Arrays.stream(userInput.split(" ")).mapToInt(Integer::parseInt).toArray();
+                int[] tasksArray = Parser.parse(userInput);
                 TaskList doneList = new TaskList();
                 for (int index : tasksArray) {
                   try {
@@ -118,16 +109,7 @@ public class Duke {
             ui.showTaskAddAskMsg();
             try {
               userInput = ui.readInput();
-              if (!userInput.contains("/by")) {
-                validInput = false;
-                throw new DukeException(
-                        "Yo! Command Syntax Error. '<Task Details> /by <Deadline>'");
-              }
-              s = userInput.split(" /by ");
-              if (s.length <= 1) {
-                validInput = false;
-                throw new DukeException("Yo! Task details/deadline are missing.");
-              }
+              s = Parser.parseDetails(userInput);
               Task deadLine = new Deadline(s[0], s[1]);
               list.addTask(deadLine);
               ui.showTaskAddedMsg(deadLine);
@@ -135,6 +117,7 @@ public class Duke {
 
             } catch (DukeException e) {
               ui.showErrorMsg(e);
+              validInput = false;
             }
           } while (!validInput);
 
@@ -150,16 +133,7 @@ public class Duke {
             ui.showTaskAddAskMsg();
             try {
               userInput = ui.readInput();
-              if (!userInput.contains("/at")) {
-                validInput = false;
-                throw new DukeException(
-                        "Yo! Command Syntax Error. '<Event Details> /at <Event Time>'");
-              }
-              s = userInput.split(" /at ");
-              if (s.length <= 1) {
-                validInput = false;
-                throw new DukeException("Yo! Event details/time are missing.");
-              }
+              s = Parser.parseDetails(userInput);
               Task event = new Event(s[0], s[1]);
               list.addTask(event);
               ui.showTaskAddedMsg(event);
@@ -167,6 +141,7 @@ public class Duke {
 
             } catch (DukeException e) {
               ui.showErrorMsg(e);
+              validInput = false;
             }
           } while (!validInput);
 
@@ -187,16 +162,8 @@ public class Duke {
               ui.showTaskDeleteAskMsg();
               try {
                 userInput = ui.readInput();
-                if (userInput.isBlank()) {
-                  validInput = false;
-                  throw new DukeException("Yo! Enter the task number(s) to be deleted.");
-                }
-                int[] tasksArray =
-                        Arrays.stream(userInput.split(" "))
-                                .sorted(Collections.reverseOrder())
-                                .mapToInt(Integer::parseInt)
-                                .toArray();
                 TaskList deletedTasks = new TaskList();
+                int[] tasksArray = Parser.parse(userInput);
                 for (int index : tasksArray) {
                   try {
                     if (index > list.size() || index <= 0) {
@@ -216,6 +183,7 @@ public class Duke {
                 validInput = true;
               } catch (DukeException e) {
                 ui.showErrorMsg(e);
+                validInput = false;
               }
             } while (!validInput);
           }
