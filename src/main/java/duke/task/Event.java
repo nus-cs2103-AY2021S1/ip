@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exceptions.DukeStorageException;
+import duke.exceptions.DukeTaskCreationException;
 import duke.parser.DateParser;
 import duke.exceptions.DukeException;
 
@@ -16,9 +18,9 @@ public class Event extends Task {
         this.dateTime = dateTime;
     }
 
-    public static Event createTask(String details) {
+    public static Event createTask(String details) throws DukeTaskCreationException {
         if (details == null) {
-            throw new DukeException("I need something to work with.");
+            throw new DukeTaskCreationException("I need something to work with.");
         }
         String[] detailsArray = details.split(EVENT_DELIMITER, 2);
         try {
@@ -27,7 +29,7 @@ public class Event extends Task {
             LocalDateTime dateTime = DateParser.parseString(dateTimeString);
             return new Event(description, dateTime);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Wow that sure is one long event...");
+            throw new DukeTaskCreationException("Wow that sure is one long event...");
         }
     }
 
@@ -35,21 +37,21 @@ public class Event extends Task {
         return String.format("E|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(this.dateTime), super.description);
     }
 
-    public static Event decode(String code) throws DukeException {
+    public static Event decode(String code) throws DukeStorageException {
         if (code.charAt(0) == 'E') {
             String[] content = code.split("\\|", 4);
             if (content.length != 4) {
-                throw new DukeException("There are some holes in my memory...");
+                throw new DukeStorageException("There are some holes in my memory...");
             }
             Event newEvent = new Event(content[3], DateParser.parseString(content[2]));
             if (content[1].equals("Y")) {
                 newEvent.setCompleted();
             } else if (!content[1].equals("N")) {
-                throw new DukeException("There are some holes in my memory...");
+                throw new DukeStorageException("There are some holes in my memory...");
             }
             return newEvent;
         } else {
-            throw new DukeException("Something doesn't seem right...");
+            throw new DukeStorageException("Something doesn't seem right...");
         }
     }
 

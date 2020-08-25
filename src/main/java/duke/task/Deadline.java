@@ -2,6 +2,8 @@ package duke.task;
 
 import java.time.LocalDateTime;
 import duke.exceptions.DukeException;
+import duke.exceptions.DukeStorageException;
+import duke.exceptions.DukeTaskCreationException;
 import duke.parser.DateParser;
 
 public class Deadline extends Task {
@@ -15,9 +17,9 @@ public class Deadline extends Task {
         this.dateTime = dateTime;
     }
 
-    public static Deadline createTask(String details) {
+    public static Deadline createTask(String details) throws DukeTaskCreationException {
         if (details == null) {
-            throw new DukeException("I need something to work with.");
+            throw new DukeTaskCreationException("I need something to work with.");
         }
         String[] detailsArray = details.split(DEADLINE_DELIMITER, 2);
         try {
@@ -26,7 +28,7 @@ public class Deadline extends Task {
             LocalDateTime dateTime = DateParser.parseString(dateTimeString);
             return new Deadline(description, dateTime);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("So you never did plan on doing it huh...");
+            throw new DukeTaskCreationException("So you never did plan on doing it huh...");
         }
     }
 
@@ -34,21 +36,21 @@ public class Deadline extends Task {
         return String.format("D|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(this.dateTime), super.description);
     }
 
-    public static Deadline decode(String code) throws DukeException {
+    public static Deadline decode(String code) throws DukeStorageException {
         if (code.charAt(0) == 'D') {
             String[] content = code.split("\\|", 4);
             if (content.length != 4) {
-                throw new DukeException("There are some holes in my memory...");
+                throw new DukeStorageException("There are some holes in my memory...");
             }
             Deadline newDeadline = new Deadline(content[3], DateParser.parseString(content[2]));
             if (content[1].equals("Y")) {
                 newDeadline.setCompleted();
             } else if (!content[1].equals("N")) {
-                throw new DukeException("There are some holes in my memory...");
+                throw new DukeStorageException("There are some holes in my memory...");
             }
             return newDeadline;
         } else {
-            throw new DukeException("Something doesn't seem right...");
+            throw new DukeStorageException("Something doesn't seem right...");
         }
     }
 

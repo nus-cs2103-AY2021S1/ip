@@ -1,6 +1,8 @@
 package duke.task;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.DukeStorageException;
+import duke.exceptions.DukeTaskCreationException;
 
 public class ToDo extends Task {
 
@@ -8,9 +10,9 @@ public class ToDo extends Task {
         super(description);
     }
 
-    public static ToDo createTask(String details) throws DukeException {
+    public static ToDo createTask(String details) throws DukeTaskCreationException {
         if (details == null) {
-            throw new DukeException("I need something to work with.");
+            throw new DukeTaskCreationException("I need something to work with.");
         }
         return new ToDo(details);
     }
@@ -19,21 +21,21 @@ public class ToDo extends Task {
         return String.format("T|%s|%s", super.completed ? "Y" : "N", super.description);
     }
 
-    public static ToDo decode(String code) throws DukeException {
+    public static ToDo decode(String code) throws DukeStorageException {
         if (code.charAt(0) == 'T') {
             String[] content = code.split("\\|", 3);
             if (content.length != 3) {
-                throw new DukeException("There are some holes in my memory...");
+                throw new DukeStorageException("There are some holes in my memory...");
             }
             ToDo newToDo = new ToDo(content[2]);
             if (content[1].equals("Y")) {
                 newToDo.setCompleted();
             } else if (!content[1].equals("N")) {
-                throw new DukeException("There are some holes in my memory...");
+                throw new DukeStorageException("There are some holes in my memory...");
             }
             return newToDo;
         } else {
-            throw new DukeException("Something doesn't seem right...");
+            throw new DukeStorageException("Something doesn't seem right...");
         }
     }
 

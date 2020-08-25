@@ -2,6 +2,7 @@ package duke.parser;
 
 import duke.exceptions.DukeException;
 import duke.command.*;
+import duke.exceptions.ParseDukeCommandException;
 import duke.task.TaskType;
 
 public class Parser {
@@ -21,17 +22,17 @@ public class Parser {
             this.input = keyword;
         }
 
-        public static Keyword findKeyword(String keyword) throws DukeException {
+        public static Keyword findKeyword(String keyword) throws ParseDukeCommandException {
             for (Keyword k : values()) {
                 if (keyword.equals(k.input)) {
                     return k;
                 }
             }
-            throw new DukeException("Wakarimasen~");
+            throw new ParseDukeCommandException("Wakarimasen~");
         }
     }
 
-    public static Command parse(String fullCommand) {
+    public static Command parse(String fullCommand) throws ParseDukeCommandException {
         String[] inputs = fullCommand.split(" ", 2);
         // By spec, inputs is guaranteed to have at least one element.
         String userInput = inputs[0];
@@ -46,9 +47,9 @@ public class Parser {
                 int index = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
                 return new CompleteCommand(index);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("What did you complete exaclty?");
+                throw new ParseDukeCommandException("What did you complete exaclty?");
             } catch (NumberFormatException e) {
-                throw new DukeException("This isn't harry potter, please use only integers.");
+                throw new ParseDukeCommandException("This isn't harry potter, please use only integers.");
             }
         case DELETE:
             try {
@@ -59,30 +60,30 @@ public class Parser {
                     return new DeleteCommand(index);
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("What do you want to remove exactly?");
+                throw new ParseDukeCommandException("What do you want to remove exactly?");
             } catch (NumberFormatException e) {
-                throw new DukeException("This isn't harry potter, please use only integers.");
+                throw new ParseDukeCommandException("This isn't harry potter, please use only integers.");
             }
         case DEADLINE:
             try {
                 return new AddCommand(TaskType.DEADLINE, inputs[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("What are you rushing for? To wait?");
+                throw new ParseDukeCommandException("What are you rushing for? To wait?");
             }
         case TODO:
             try {
                 return new AddCommand(TaskType.TODO, inputs[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("I know your life is empty but your todo can't be empty.");
+                throw new ParseDukeCommandException("I know your life is empty but your todo can't be empty.");
             }
         case EVENT:
             try {
                 return new AddCommand(TaskType.EVENT, inputs[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("Are you going to attend a nameless event?");
+                throw new ParseDukeCommandException("Are you going to attend a nameless event?");
             }
         default:
-            throw new DukeException("Wakarimasen~");
+            throw new ParseDukeCommandException("Wakarimasen~");
         }
     }
 }

@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.DukeStorageException;
 import duke.task.*;
 
 import java.io.File;
@@ -24,14 +25,14 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void save(TaskList list) throws DukeException {
+    public void save(TaskList list) throws DukeStorageException {
         String[] directories = filePath.split("/");
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, directories);
         if (!Files.exists(path.getParent())) {
             boolean directoriesCreated = path.getParent().toFile().mkdirs();
             if (!directoriesCreated) {
-                throw new DukeException("I got lost somewhere in your folders.");
+                throw new DukeStorageException("I got lost somewhere in your folders.");
             }
         }
         try {
@@ -41,12 +42,12 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            throw new DukeException("I didn't have enough strength to move the bits.");
+            throw new DukeStorageException("I didn't have enough strength to move the bits.");
         }
     }
 
     // TODO: Consider moving decoding switch statement to its own method or under a util class.
-    public List<Task> load() throws DukeException {
+    public List<Task> load() throws DukeStorageException {
         try {
             String[] directories = filePath.split("/");
             String home = System.getProperty("user.home");
@@ -68,15 +69,15 @@ public class Storage {
                     loadedTask = ToDo.decode(line);
                     break;
                 default:
-                    throw new DukeException("There's something wrong with my memory...");
+                    throw new DukeStorageException("There's something wrong with my memory...");
                 }
                 temporaryList.add(loadedTask);
             }
             return temporaryList;
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("There's something wrong with my memory...");
+            throw new DukeStorageException("There's something wrong with my memory...");
         } catch (FileNotFoundException e) {
-            throw new DukeException("I lost my memories.");
+            throw new DukeStorageException("I lost my memories.");
         }
     }
 }

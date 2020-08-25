@@ -1,6 +1,8 @@
 package duke.task;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.DukeStorageException;
+import duke.exceptions.DukeTaskCreationException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -37,7 +39,7 @@ public class DeadlineTest {
 
     @Test
     public void createTask_withoutDate_Failure() {
-        DukeException thrown = assertThrows(DukeException.class, () -> {
+        DukeException thrown = assertThrows(DukeTaskCreationException.class, () -> {
             Deadline deadline = Deadline.createTask("Submit homework");
         });
         assertTrue(thrown.getMessage().contains("So you never did plan on doing it huh..."));
@@ -45,7 +47,7 @@ public class DeadlineTest {
 
     @Test
     public void createTask_withoutDescription_Failure() {
-        DukeException thrown = assertThrows(DukeException.class, () -> {
+        DukeException thrown = assertThrows(DukeTaskCreationException.class, () -> {
             Deadline deadline = Deadline.createTask(null);
         });
         assertTrue(thrown.getMessage().contains("I need something to work with."));
@@ -65,7 +67,7 @@ public class DeadlineTest {
 
     @Test
     public void decode_missingCompletion_failure() {
-        DukeException thrown = assertThrows(DukeException.class, () -> {
+        DukeException thrown = assertThrows(DukeStorageException.class, () -> {
             Deadline deadline = Deadline.decode("D|1 Jan 2020 11:59|Description");
         });
         assertTrue(thrown.getMessage().contains("There are some holes in my memory..."));
@@ -73,7 +75,7 @@ public class DeadlineTest {
 
     @Test
     public void decode_missingDescription_failure() {
-        DukeException thrown = assertThrows(DukeException.class, () -> {
+        DukeException thrown = assertThrows(DukeStorageException.class, () -> {
             Deadline deadline = Deadline.decode("D|N");
         });
         assertTrue(thrown.getMessage().contains("There are some holes in my memory..."));
@@ -81,7 +83,7 @@ public class DeadlineTest {
 
     @Test
     public void decode_incorrectCompletion_failure() {
-        DukeException thrown = assertThrows(DukeException.class, () -> {
+        DukeException thrown = assertThrows(DukeStorageException.class, () -> {
             Deadline deadline = Deadline.decode("D|X|Description");
         });
         assertTrue(thrown.getMessage().contains("There are some holes in my memory..."));
@@ -89,7 +91,7 @@ public class DeadlineTest {
 
     @Test
     public void decode_incorrectTaskType_failure() {
-        DukeException thrown = assertThrows(DukeException.class, () -> {
+        DukeException thrown = assertThrows(DukeStorageException.class, () -> {
             Deadline deadline = Deadline.decode("E|X|Description");
         });
         assertTrue(thrown.getMessage().contains("Something doesn't seem right..."));
