@@ -15,12 +15,18 @@ public class DoneCommand extends Command {
         this.task = task;
     }
 
+    /**
+     * Mark the task referenced by this Command as completed
+     */
     @Override
     public void execute() {
         task.setCompleted(true);
         System.out.println("\t# Done: " + task.toString());
     }
 
+    /**
+     * Mark the task referenced by this Command as not completed
+     */
     @Override
     public void undo() {
         task.setCompleted(false);

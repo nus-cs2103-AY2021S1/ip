@@ -18,12 +18,18 @@ public class AddCommand extends Command{
         this.task = task;
     }
 
+    /**
+     * Adds a task to the list
+     */
     @Override
     public void execute() {
         this.taskList.add(task);
         System.out.println("\t+ Add: " + task.toString());
     }
 
+    /**
+     * Removes the task referenced by this Command from the list
+     */
     @Override
     public void undo() {
         this.taskList.remove(task);

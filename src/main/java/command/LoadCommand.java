@@ -32,6 +32,9 @@ public class LoadCommand extends Command {
         return false;
     }
 
+    /**
+     * Load taskList from a filePath as captured by this Class
+     */
     @Override
     public void execute() {
 

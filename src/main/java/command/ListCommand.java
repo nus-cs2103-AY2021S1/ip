@@ -21,6 +21,9 @@ public class ListCommand extends Command {
         return false;
     }
 
+    /**
+     * Display all items in taskList
+     */
     @Override
     public void execute() {
 

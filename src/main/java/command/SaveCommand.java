@@ -24,6 +24,9 @@ public class SaveCommand extends Command {
         return false;
     }
 
+    /**
+     * Save taskList to a filePath as captured by this Class
+     */
     @Override
     public void execute() {
         try {

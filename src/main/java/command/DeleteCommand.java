@@ -18,12 +18,18 @@ public class DeleteCommand extends Command {
         this.task = task;
     }
 
+    /**
+     * Delete the task referenced by this Command from the list
+     */
     @Override
     public void execute() {
         this.taskList.remove(task);
         System.out.println("\t- Delete: " + task.toString());
     }
 
+    /**
+     * Adds the task removed by this Command into the list
+     */
     @Override
     public void undo() {
         this.taskList.add(task);

@@ -15,6 +15,9 @@ public class ExitCommand extends Command{
         return true;
     }
 
+    /**
+     * No action is performed
+     */
     @Override
     public void execute() {
         // Nothing to do

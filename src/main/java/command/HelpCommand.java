@@ -14,6 +14,9 @@ public class HelpCommand extends Command {
         return false;
     }
 
+    /**
+     * Display all available commands
+     */
     @Override
     public void execute() {
         System.out.println("Command list:");

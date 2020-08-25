@@ -149,18 +149,18 @@ public enum Parser {
     };
 
     /**
-     * Generate the command based on given secondary parameters
-     * @param taskList Required for commands that makes use of an index
-     * @param commandParam Command parameters (As required)
-     * @return Consumer which executes the command on given taskList
+     * Generate the command based on given parameters
+     * @param taskList The taskList which the generated command will execute on
+     * @param commandParam Command parameters, if required for generating the command
+     * @return An executable command
      */
     public abstract Command generate(List<Task> taskList, String commandParam);
 
     /**
-     * Translates user input to its corresponding Command
-     * @param taskList The taskList which command will execute on
+     * Parses the user input and generate the corresponding command
+     * @param taskList The taskList which the Command will execute on
      * @param input The raw user input
-     * @return The relevant Command
+     * @return The Command which when executed, performs the input's desired action
      */
     public static Command parse(List<Task> taskList, String input) {
 
