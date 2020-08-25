@@ -76,8 +76,8 @@ public class DeadlineCommand extends Command {
         IDuke newDuke = storeTask(task);
         System.out.print(TextFormatter.getFormattedText(
                 "Got it. I've added this task:\n\t" + task.toString()
-                        + "\nNow you have " +  newDuke.getNumTask()
-                        + " task(s) in the list."));
+                + "\nNow you have " +  newDuke.getNumTask()
+                + " task(s) in the list."));
         return newDuke;
     }
 
