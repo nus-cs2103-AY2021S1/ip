@@ -12,34 +12,37 @@ Now you have 1 task in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task: 
-  [D][?] brush teeth (by: 10am)
+  [D][?] brush teeth (by: Aug 25 2020 10:00 AM)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Please input the details for the task.
+Please input the correct details for the event task.
+todo *description*
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task: 
-  [E][?] online lecture (at: 10am-12pm)
+  [E][?] online lecture (at: Aug 25 2020 12:00 PM)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Please input the details and event time for the task.
+Please input the correct details for the event task.
+event *description* /at *yyyy-mm-dd* *HH:mm*
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task: 
-  [D][?] submit assignment (by: Friday)
+  [D][?] submit assignment (by: Aug 29 2020 05:00 PM)
 Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Please input the details and deadline for the task.
+Please input the correct details for the deadline task.
+deadline *description* /by *yyyy-mm-dd* *HH:mm*
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1.[T][?] wake up
-2.[D][?] brush teeth (by: 10am)
-3.[E][?] online lecture (at: 10am-12pm)
-4.[D][?] submit assignment (by: Friday)
+2.[D][?] brush teeth (by: Aug 25 2020 10:00 AM)
+3.[E][?] online lecture (at: Aug 25 2020 12:00 PM)
+4.[D][?] submit assignment (by: Aug 29 2020 05:00 PM)
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
@@ -59,43 +62,43 @@ Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task: 
-  [E][?] project meeting (at: 4pm)
+  [E][?] project meeting (at: Aug 30 2020 08:00 PM)
 Now you have 5 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[D][?] brush teeth (by: 10am)
-2.[E][?] online lecture (at: 10am-12pm)
-3.[D][?] submit assignment (by: Friday)
+1.[D][?] brush teeth (by: Aug 25 2020 10:00 AM)
+2.[E][?] online lecture (at: Aug 25 2020 12:00 PM)
+3.[D][?] submit assignment (by: Aug 29 2020 05:00 PM)
 4.[T][?] eat lunch
-5.[E][?] project meeting (at: 4pm)
+5.[E][?] project meeting (at: Aug 30 2020 08:00 PM)
 ____________________________________________________________
 ____________________________________________________________
 I'm sorry, but I don't know what that means :-(
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done
-  [D][?] submit assignment (by: Friday)
+  [D][?] submit assignment (by: Aug 29 2020 05:00 PM)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done
-  [E][?] online lecture (at: 10am-12pm)
+  [E][?] online lecture (at: Aug 25 2020 12:00 PM)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done
-  [D][?] brush teeth (by: 10am)
+  [D][?] brush teeth (by: Aug 25 2020 10:00 AM)
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
-  [E][?] online lecture (at: 10am-12pm)
+  [E][?] online lecture (at: Aug 25 2020 12:00 PM)
 Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[D][?] brush teeth (by: 10am)
-2.[D][?] submit assignment (by: Friday)
+1.[D][?] brush teeth (by: Aug 25 2020 10:00 AM)
+2.[D][?] submit assignment (by: Aug 29 2020 05:00 PM)
 3.[T][?] eat lunch
-4.[E][?] project meeting (at: 4pm)
+4.[E][?] project meeting (at: Aug 30 2020 08:00 PM)
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!

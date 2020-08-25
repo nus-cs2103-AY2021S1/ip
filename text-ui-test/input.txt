@@ -1,17 +1,17 @@
 list
 todo wake up
-deadline brush teeth /by 10am
+deadline brush teeth /by 2020-08-25 10:00
 todo
-event online lecture /at 10am-12pm
+event online lecture /at 2020-08-25 12:00
 event some event without event time
-deadline submit assignment /by Friday
+deadline submit assignment /by 2020-08-29 17:00
 deadline
 list
 delete 1
 delete abc
 delete 10
 todo eat lunch
-event project meeting /at 4pm
+event project meeting /at 2020-08-30 20:00
 list
 some invalid command
 done 3
