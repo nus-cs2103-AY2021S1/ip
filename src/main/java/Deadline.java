@@ -15,10 +15,18 @@ public class Deadline extends Task {
         this.time = LocalTime.parse(str[1]);
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
-                + time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
+                + getDate().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
+                + getTime().format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
     }
 }
