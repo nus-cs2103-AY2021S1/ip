@@ -75,7 +75,7 @@ public class TextUi {
             throw new IllegalArgumentException(DIVIDER +
                     "☹ OOPS!!! The description of an event cannot be empty. Try again!\n" + DIVIDER);
         } else if (descriptionArray.length == 1) { //no "/at" present
-            throw new IllegalArgumentException("Invalid input, no deadline stated");
+            throw new IllegalArgumentException("Invalid input, no event time stated");
         } else if (descriptionArray.length > 2) {
             throw new IllegalArgumentException("Invalid input, multiple deadlines stated");
         } else {
@@ -114,6 +114,7 @@ public class TextUi {
                 throw new IllegalArgumentException(DIVIDER + "☹ OOPS!!! Invalid input. Try again!\n" + DIVIDER);
             } else {
                 System.out.println(DIVIDER + "Bye bye! Hope to see you again soon!\n" + DIVIDER);
+                System.exit(0);
             }
         }
 
