@@ -12,6 +12,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String toSaveData() {
+        return "E - " + super.toSaveData() + " - " + this.duration + "\n";
+    }
+
+    @Override
     public String toString() {
         // By default print task name
         return "[E]" + super.toString() + " (at: " + this.duration + ")";

@@ -27,6 +27,15 @@ public class Task {
         return this.name;
     }
 
+    // Creates save file data
+    public String toSaveData() {
+        if(isDone) {
+            return "1 - " + this.name;
+        } else {
+            return "0 - " + this.name;
+        }
+    }
+
     @Override
     public String toString() {
         // By default print task name and status

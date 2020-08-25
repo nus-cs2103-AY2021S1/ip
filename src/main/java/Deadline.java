@@ -12,6 +12,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toSaveData() {
+        return "D - " + super.toSaveData() + " - " + this.dueDate + "\n";
+    }
+
+    @Override
     public String toString() {
         // By default print task name
         return "[D]" + super.toString() + " (by: " + this.dueDate + ")";

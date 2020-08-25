@@ -1,10 +1,11 @@
-import java.lang.reflect.Array;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     /** Constants **/
     public static String outputBreaker = ">>> ";
+    public static String DATA_PATH = "data/duke.txt";
 
     public static void main(String[] args) {
         /** Initialize objects required **/
@@ -23,6 +24,15 @@ public class Duke {
 
         String lineBreaker = "--.--.--.--.--.--.--.--.--.--.--." +
                 "--.--.--.--.--.--.--.--.--.--.--";
+
+        /** Load past data if any. Else create new file */
+        try {
+            loadFileContents(DATA_PATH, list);
+            System.out.println("... Oh! You're back!\nEr, gimme a sec...");
+        } catch (FileNotFoundException e) {
+            System.out.println("... Who? Never mind.");
+            createFile();
+        }
 
         // Greetings
         System.out.println("\nHello, I'm Duke!");
@@ -157,10 +167,24 @@ public class Duke {
             // Read user input once more
             userInput = scanner.nextLine();
         }
+
         // Farewell message
         System.out.print(outputBreaker);
         System.out.println("Bye! Hoped I helped!");
         System.out.println("\n" + lineBreaker);
+
+        /** Save current data, if any. */
+        try {
+            // Try to clear the last save
+            clearTheFile();
+            // Overwrite it with current
+            saveToFile(list);
+
+            System.out.println("\n...save successful...");
+        } catch(IOException e) {
+            // Print message if something goes wrong
+            System.out.println("☹️Sorry, something went wrong and I couldn't save my data... ");
+        }
     }
 
     /** Prints all the contents of the list in order **/
@@ -205,5 +229,84 @@ public class Duke {
                     "Whoops! I think you forgot to finish your "
                     + cmd[0] + " command. Sorry but I need it. D:");
         }
+    }
+
+    /** Checks if there is data to draw from. **/
+    /** Retrieved from https://nus-cs2103-ay2021s1.github.io/website/book/cppToJava/misc/fileAccess/ */
+    private static void loadFileContents(String filePath, ArrayList<Task> list) throws FileNotFoundException {
+        File data = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(data); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            // Read the data line
+            String dataLine = s.nextLine();
+            // Split data line into components
+            String[] taskDetails = dataLine.split(" - ", 0);
+            // Depending on first letter, determine what task it is
+            if (taskDetails[0].equals("T")) {
+                Task t = new Todo(taskDetails[2]);
+                if (taskDetails[1].equals("1")) {
+                    t.markedDone(true);
+                }
+                list.add(t);
+            } else if (taskDetails[0].equals("D")) {
+                Task t = new Deadline(taskDetails[2], taskDetails[3]);
+                if (taskDetails[1].equals("1")) {
+                    t.markedDone(true);
+                }
+                list.add(t);
+            } else if (taskDetails[0].equals("E")) {
+                Task t = new Event(taskDetails[2], taskDetails[3]);
+                if (taskDetails[1].equals("1")) {
+                    t.markedDone(true);
+                }
+                list.add(t);
+            } else {
+                // Basic Error, if invalid task, print error message
+                System.out.print("Sorry I could not comprehend this: ");
+                System.out.println(dataLine);
+            }
+        }
+    }
+
+    /** Saves Duke's current data **/
+    private static void saveToFile(ArrayList<Task> list) {
+        for (int i = 0; i < list.size(); i++) {
+            // Try to write into save file
+            try {
+                writeToFile(DATA_PATH, list.get(i).toSaveData());
+            } catch (IOException e) {
+                System.out.print("Something happened and this failed to be saved: ");
+                System.out.println(list.get(i));
+            }
+        }
+    }
+
+    /** Writes Data to File **/
+    /** Retrieved from https://nus-cs2103-ay2021s1.github.io/website/book/cppToJava/misc/fileAccess/ */
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    /** Clear the save file of content. */
+    /** Retrieved from
+     * https://stackoverflow.com/questions/29878237
+     *      /java-how-to-clear-a-text-file-without-deleting-it/42282671*/
+    public static void clearTheFile() throws IOException {
+        FileWriter fwOb = new FileWriter(DATA_PATH, false);
+        PrintWriter pwOb = new PrintWriter(fwOb, false);
+        pwOb.flush();
+        pwOb.close();
+        fwOb.close();
+    }
+
+    /** Creation of data to draw from. **/
+    private static void createFile() {
+        // Make directory if it doesn't already exists
+        File dir = new File("data");
+        dir.mkdir();
+        // create a File for the given file path
+        new File("data/duke.txt");
     }
 }
