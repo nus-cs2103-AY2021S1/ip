@@ -189,6 +189,7 @@ public class Parser {
             System.out.println("     " + index + "." + currLst.get(i));
             index ++;
         }
+
         index ++;
     }
 
@@ -228,13 +229,19 @@ public class Parser {
     }
 
     /**
-     * Communicates with TaskList class and to get the current stored
-     * Task list.
+     * Communicates with TaskList class and to get the current stored Task list.
      */
     public List<Task> getTasks() {
         return lst.getTasks();
     }
 
+    /**
+     * Communicates with TaskList class and to get the current stored Task list.
+     * Filters the tasks based on the keyword searched
+     *
+     * @param keyword String will be searched within all tasks
+     * If matched, it will be printed.
+     */
     public void findTask(String keyword) {
         List<Task> allTasks = lst.getTasks();
         int fullSize = lst.getLength();
@@ -251,6 +258,7 @@ public class Parser {
         System.out.println("     Here are the matching task(s) in your list:");
         int partialSize = filteredTasks.size();
         int index = 1;
+
         for (int i = 0; i < partialSize; i++) {
             System.out.println("     " + index + "." + filteredTasks.get(i));
             index ++;
