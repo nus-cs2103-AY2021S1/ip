@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Todo extends Task {
     private Todo(String desc) {
         super(desc);
@@ -8,6 +10,11 @@ public class Todo extends Task {
             throw new InvalidTodoException();
         }
         return new Todo(details);
+    }
+
+    @Override
+    public boolean isDueOn(LocalDate date) {
+        return false;
     }
 
     @Override

@@ -1,15 +1,14 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private String time12h;
-    private LocalDate date;
+    private final String TIME12H;
+    private final LocalDate DATE;
 
     private Deadline(String description, String time12h, LocalDate date) {
         super(description);
-        this.time12h = time12h;
-        this.date = date;
+        this.TIME12H = time12h;
+        this.DATE = date;
     }
 
     protected static Deadline createDeadline(String details) throws InvalidDeadlineException {
@@ -24,14 +23,18 @@ public class Deadline extends Task {
             String time12h = DateTimeParsing.parse24HTime(dateTime[1]);
             return new Deadline(desc, time12h, date);
         } catch(DateTimeParseException | NumberFormatException e) {
-            e.printStackTrace();
             throw new InvalidDeadlineException();
         }
     }
 
     @Override
+    public boolean isDueOn(LocalDate date) {
+        return this.DATE.equals(date);
+    }
+
+    @Override
     public String toString() {
-        String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return "[D]" + super.toString() + "(by: " + formattedDate + " " + time12h + ")";
+        String formattedDate = DateTimeParsing.localDateToString(DATE);
+        return "[D]" + super.toString() + "(by: " + formattedDate + " " + TIME12H + ")";
     }
 }

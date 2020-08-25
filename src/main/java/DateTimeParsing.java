@@ -7,6 +7,10 @@ public class DateTimeParsing {
         return LocalDate.parse(date);
     }
 
+    static String localDateToString(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
     static String parse24HTime(String time) {
         String result = LocalTime
             .parse(time, DateTimeFormatter.ofPattern("HH:mm"))

@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,6 +10,7 @@ public class InputHandler {
     private static final String CMD_LIST = "list";
     private static final String CMD_DONE = "done";
     private static final String CMD_DELETE = "delete";
+    private static final String CMD_DUE = "due";
     private Scanner sc;
 
     public InputHandler(Scanner sc) {
@@ -44,7 +47,10 @@ public class InputHandler {
             break;
         case (CMD_DELETE):
             handleDelete(in);
-            break;    
+            break;
+        case (CMD_DUE):
+            handleDue(in);
+            break;
         default: // for invalid commands and adding of tasks
             try {
                 handleTask(in, cmdWord);
@@ -55,6 +61,45 @@ public class InputHandler {
                     DIVIDER
                 );
             }
+        }
+    }
+
+    private void handleDue(String in) {
+        String dateStr = in.replaceFirst("due ", "");
+        try {
+            LocalDate date = DateTimeParsing.parseDate(dateStr);
+            String formattedDate = DateTimeParsing.localDateToString(date);
+            ArrayList<String> filteredTasks = new ArrayList<>();
+
+            int len = taskList.size();
+            for (int i = 1; i <= len; i++) {
+                Task task = taskList.get(i - 1);
+                if (task.isDueOn(date)) {
+                    String output = i + "." + task.toString();
+                    filteredTasks.add(output);
+                }
+            }
+
+            String firstLine = filteredTasks.size() == 0
+                    ? "There are no tasks due on " + formattedDate + "!"
+                    : "These are the tasks due on " + formattedDate + ":";
+
+            String msg =
+                DIVIDER + "\n" +
+                firstLine + "\n" +
+                String.join("\n", filteredTasks) + "\n" +
+                DIVIDER;
+
+            System.out.println(msg);
+        } catch (DateTimeParseException | NumberFormatException e) {
+            String errMsg =
+                "Please key in a valid date format.\n" +
+                "due *yyyy-mm-dd*";
+            System.out.println(
+                DIVIDER + "\n" +
+                errMsg + "\n" +
+                DIVIDER
+            );
         }
     }
 

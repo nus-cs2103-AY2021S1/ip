@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 abstract class Task {
     protected String description;
     protected boolean isDone = false;
@@ -29,4 +31,6 @@ abstract class Task {
     public String toString() {
         return "[" + getStatusIcon() + "]" + " " + description;
     }
+
+    public abstract boolean isDueOn(LocalDate date);
 }
