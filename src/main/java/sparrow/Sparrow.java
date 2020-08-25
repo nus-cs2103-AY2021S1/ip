@@ -1,19 +1,15 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+package sparrow;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.lang.StringBuilder;
 
 public class Sparrow {
     private Storage storage;
     private TaskList tasks;
 
     public Sparrow(String filePath) {
-        storage = new Storage("data/Sparrow.txt");
+        storage = new Storage("data/sparrow.Sparrow.txt");
         try {
             tasks = new TaskList(storage.loadFromFile());
         } catch (AssertionError e ) {
@@ -32,7 +28,7 @@ public class Sparrow {
     }
 
     public static void main(String[] args) {
-        Sparrow sparrow = new Sparrow("data/Sparrow.txt");
+        Sparrow sparrow = new Sparrow("data/sparrow.Sparrow.txt");
         Ui.greet();
 
         Scanner sc = new Scanner(System.in);

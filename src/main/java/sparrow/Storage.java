@@ -1,3 +1,5 @@
+package sparrow;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,7 +18,7 @@ public class Storage {
     public ArrayList<Task> loadFromFile() {
         ArrayList<Task> tasks = new ArrayList<>();
         // check if directory and file exist
-        File f = new File("data/Sparrow.txt");
+        File f = new File("data/sparrow.Sparrow.txt");
         if (f.exists()) {
             try {
                 Scanner sc = new Scanner(f);
@@ -104,7 +106,7 @@ public class Storage {
 
     public void saveTaskList(ArrayList<Task> taskList) {
         try {
-            FileWriter fw = new FileWriter("data/Sparrow.txt");
+            FileWriter fw = new FileWriter("data/sparrow.Sparrow.txt");
             for (Task task : taskList) {
                 fw.append(taskToString(task));
             }

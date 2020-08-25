@@ -1,5 +1,6 @@
+package sparrow;
+
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 public class Parser {
     private TaskList tasks;

@@ -1,3 +1,5 @@
+package sparrow;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -84,7 +86,7 @@ public class TaskList {
             for (Task task : tasks) {
                 LocalDate taskDate;
 
-                // Get date from Deadline/Event
+                // Get date from sparrow.Deadline/sparrow.Event
                 if (task instanceof Deadline) {
                     taskDate = ((Deadline) task).getDueDate();
                 } else if (task instanceof Event) {
@@ -103,7 +105,7 @@ public class TaskList {
             for (Task task : tasks) {
                 LocalDate taskDate;
 
-                // Get date from Deadline/Event
+                // Get date from sparrow.Deadline/sparrow.Event
                 if (task instanceof Deadline) {
                     taskDate = ((Deadline) task).getDueDate();
                 } else if (task instanceof Event) {
