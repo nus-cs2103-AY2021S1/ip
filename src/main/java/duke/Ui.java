@@ -14,7 +14,7 @@ public class Ui {
     /**
      * The messages that the chat bot sends out.
      */
-    static final String DIVIDE = "____________________________________________________________";
+    static final String DIVIDE = "_____________________________________________________________";
     static final String WELCOME_MESSAGE = "Hello! I'm duke.Duke\nWhat can I do for you?";
     static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     static final String LIST_MESSAGE = "Here are the tasks in your list:\n";
