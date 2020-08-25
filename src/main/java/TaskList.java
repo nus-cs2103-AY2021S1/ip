@@ -34,7 +34,7 @@ public class TaskList implements Iterable<Task> {
         try {
             Task item = ListOfItems.remove(index);
 
-            return String.format("\nNoted. I've removed this task:\n  %s\nNow you have %d tasks in your list.",
+            return String.format("\nNoted. I've removed this task:\n  %s\nNow you have %d tasks in your list.\n",
                     item.toString(),
                     this.ListOfItems.size());
         } catch (IndexOutOfBoundsException e) {
