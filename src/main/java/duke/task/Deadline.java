@@ -18,7 +18,7 @@ public class Deadline extends Task {
 
     @Override
     public String getType() {
-        return "E";
+        return "D";
     }
 
     @Override

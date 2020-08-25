@@ -59,7 +59,7 @@ public class Storage {
         FileWriter fw = new FileWriter("data/data.txt");
         for (Task t: list) {
             String toWrite = "";
-            toWrite += t.encode();
+            toWrite += (t.encode() + "\n");
             fw.write(toWrite);
         }
         fw.close();
