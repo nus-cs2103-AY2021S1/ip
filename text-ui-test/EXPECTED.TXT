@@ -14,16 +14,16 @@ What can I do for you?
     ☹OOPS!!! I'm sorry, but I don't know what that means.
     Here are the available commands that I know:
      1. todo _ (e.g. todo 3)
-     2. deadline `task name` /by `end time` (e.g. deadline Exercise /by Sunday)
-     3. `event name` /at `start time - end time` (e.g. meeting /at Sunday 2pm - 4pm)
+     2. deadline 'task name' /by 'end time' (e.g. deadline Exercise /by Sunday)
+     3. 'event name' /at 'start time - end time' (e.g. meeting /at Sunday 2pm - 4pm)
      4. list
      5. done _ (e.g. done 4)
      6. delete _ (e.g. delete 4)
-     7. bye
+     7. find '   ' (e.g. find book)
    --------------------------------------------------------------
 
    --------------------------------------------------------------
-    Here are the tasks in your list:
+    Here are the  tasks in your list:
      1.[T][✘] test case
    --------------------------------------------------------------
 
@@ -109,7 +109,7 @@ What can I do for you?
    --------------------------------------------------------------
 
    --------------------------------------------------------------
-    Here are the tasks in your list:
+    Here are the  tasks in your list:
      1.[T][✓] test case
      2.[D][✘] return book (by: Aug 23 2020)
      3.[D][✘] return book (by: Aug 23 2020 / 10.15 AM)
@@ -127,6 +127,16 @@ What can I do for you?
    --------------------------------------------------------------
     ☹OOPS!!! Task number does not exist in the list.
     Your current list only has 5 tasks!
+   --------------------------------------------------------------
+
+   --------------------------------------------------------------
+    Here are the matching tasks in your list:
+     1.[D][✘] return book (by: Aug 23 2020 / 10.15 AM)
+     2.[D][✘] return book (by: 12.00 AM)
+   --------------------------------------------------------------
+
+   --------------------------------------------------------------
+    There are no matching tasks with the keyword legend.
    --------------------------------------------------------------
 
    --------------------------------------------------------------

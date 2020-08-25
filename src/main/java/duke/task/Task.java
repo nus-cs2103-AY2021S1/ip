@@ -82,6 +82,10 @@ public abstract class Task {
         return time;
     }
 
+    public boolean match(String query) {
+        return description.contains(query);
+    }
+
     /**
      * Returns the String representation of the Task.
      *

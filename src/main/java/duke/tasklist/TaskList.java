@@ -2,6 +2,7 @@ package duke.tasklist;
 
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -81,5 +82,15 @@ public class TaskList {
      */
     public boolean isEmpty() {
         return tasks.isEmpty();
+    }
+
+    public TaskList matchAll(String input) {
+        List<Task> newTaskList = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.match(input)) {
+                newTaskList.add(task);
+            }
+        }
+        return new TaskList(newTaskList);
     }
 }

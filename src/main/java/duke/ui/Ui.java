@@ -130,14 +130,18 @@ public class Ui {
      *
      * @param tasks Task list.
      */
-    public void showTaskList(TaskList tasks) {
+    public void showTaskList(TaskList tasks, String extra) {
         StringBuilder str1 = new StringBuilder();
-        str1.append("Here are the tasks in your list:\n");
+        str1.append(String.format("Here are the %s tasks in your list:\n", extra));
         int size = tasks.size();
         for (int i = 0; i < size - 1; i++) {
             str1.append(String.format("     %d.%s\n", i + 1, tasks.get(i)));
         }
         str1.append(String.format("     %d.%s", size, tasks.get(size - 1)));
         printMsg(str1.toString());
+    }
+
+    public void emptyFind(String queryWord) {
+        printMsg(String.format("There are no matching tasks with the keyword %s.", queryWord));
     }
 }

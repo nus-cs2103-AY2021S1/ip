@@ -19,11 +19,12 @@ public class UnknownCommandException extends DukeException {
 
     private static final String[] listOfCommands = new String[]{
             "todo _ (e.g. todo 3)",
-            "deadline `task name` /by `end time` (e.g. deadline Exercise /by Sunday)",
-            "`event name` /at `start time - end time` (e.g. meeting /at Sunday 2pm - 4pm)",
+            "deadline 'task name' /by 'end time' (e.g. deadline Exercise /by Sunday)",
+            "'event name' /at 'start time - end time' (e.g. meeting /at Sunday 2pm - 4pm)",
             "list",
             "done _ (e.g. done 4)",
             "delete _ (e.g. delete 4)",
+            "find '   ' (e.g. find book)",
             "bye",
     };
 
