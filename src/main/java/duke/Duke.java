@@ -1,9 +1,7 @@
 package duke;
 
+import java.io.IOException;
 import java.text.ParseException;
-
-import java.io.*;
-
 
 public class Duke {
     private Storage storage;
@@ -21,6 +19,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException, ParseException {
-        new Duke("/Users/viromics/Desktop/CS2103/ip/ip/src/main/java/duke/resources/todo.txt").run();
+        new Duke("src/main/java/duke/resources/todo.txt").run();
     }
 }

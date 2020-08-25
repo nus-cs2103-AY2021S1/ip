@@ -19,10 +19,11 @@ public class Task {
     }
 
     public int ifDone() {
-        if(this.isDone){
+        if (this.isDone) {
             return 1;
+        } else {
+            return 0;
         }
-        else return 0;
     }
 
     @Override

@@ -57,9 +57,11 @@ public class Parser {
                         Todo td = new Todo(name);
                         todoList.add(td);
                         System.out.println("Aight new task for you: \n" + td.toString());
-                        System.out.println("Now you got " + todoList.size() + " task(s) waiting man");
+                        System.out.println("Now you got " + todoList.size()
+                                + " task(s) waiting man");
                         store.write(td);
-                    }} catch (DukeException e){
+                    }
+                } catch (DukeException e) {
                     System.out.println(e.getMessage());
                     e.printStackTrace();
                 }
@@ -70,9 +72,9 @@ public class Parser {
                 String fullDL = sc.nextLine();
 
                 try {
-                    String DLname = fullDL.split("/by")[0];
-                    LocalDate DLtime = LocalDate.parse(fullDL.split("/by ")[1]);
-                    Deadline dl = new Deadline(DLname, DLtime);
+                    String dlName = fullDL.split("/by")[0];
+                    LocalDate dlTime = LocalDate.parse(fullDL.split("/by ")[1]);
+                    Deadline dl = new Deadline(dlName, dlTime);
                     todoList.add(dl);
                     System.out.println("Aight new task for you: \n" + dl.toString());
                     System.out.println("Now you got " + todoList.size() + " task(s) waiting man");
@@ -87,9 +89,9 @@ public class Parser {
                 printLine();
                 String fullE = sc.nextLine();
                 try {
-                    String EventName = fullE.split("/at")[0];
-                    LocalDate EventTime = LocalDate.parse(fullE.split("/at ")[1]);
-                    Event e = new Event(EventName, EventTime);
+                    String eventName = fullE.split("/at")[0];
+                    LocalDate eventTime = LocalDate.parse(fullE.split("/at ")[1]);
+                    Event e = new Event(eventName, eventTime);
                     todoList.add(e);
                     System.out.println("Aight new task for you: \n" + e.toString());
                     System.out.println("Now you got " + todoList.size() + " task(s) waiting man");
@@ -119,15 +121,15 @@ public class Parser {
                 printLine();
                 LocalDate checkOn = LocalDate.parse(sc.nextLine().trim());
                 System.out.println("On this day, you have: ");
-                int eCount = 0;
+                int eventCount = 0;
                 for (Task checkEvent: todoList) {
                     if (checkEvent instanceof Event && ((Event) checkEvent).at.equals(checkOn)) {
                         System.out.println(checkEvent.toString());
-                        eCount ++;
+                        eventCount++;
                     }
                 }
-                if (eCount > 0) {
-                    System.out.println("   [ A total of " + eCount + " event(s)]");
+                if (eventCount > 0) {
+                    System.out.println("   [ A total of " + eventCount + " event(s)]");
                 } else {
                     System.out.println("   [ You have no events on this day ]");
                 }
@@ -137,18 +139,35 @@ public class Parser {
                 printLine();
                 LocalDate checkBy = LocalDate.parse(sc.nextLine().trim());
                 System.out.println("By this day, you have: ");
-                int dCount = 0;
+                int deadlineCount = 0;
                 for (Task checkDead: todoList) {
-                    if (checkDead instanceof Deadline && (((Deadline) checkDead).by.isBefore(checkBy) ||
-                            ((Deadline) checkDead).by.equals(checkBy))) {
+                    if (checkDead instanceof Deadline
+                            && (((Deadline) checkDead).by.isBefore(checkBy)
+                            || ((Deadline) checkDead).by.equals(checkBy))) {
                         System.out.println(checkDead.toString());
-                        dCount ++;
+                        deadlineCount++;
                     }
                 }
-                if (dCount > 0) {
-                    System.out.println("   [ A total of " + dCount + " deadline(s)]");
+                if (deadlineCount > 0) {
+                    System.out.println("   [ A total of " + deadlineCount + " deadline(s)]");
                 } else {
                     System.out.println("   [ You have no deadlines by this day ]");
+                }
+                printLine();
+                break;
+            case "find":
+                printLine();
+                String keyword = sc.nextLine();
+                int findCount = 0;
+                System.out.println("Here are your tasks with the keyword: " + keyword + "\n");
+                for (Task find: todoList) {
+                    if (find.description.contains(keyword)) {
+                        System.out.println(findCount + 1 + ". " + find.toString());
+                        findCount++;
+                    }
+                }
+                if (findCount == 0) {
+                    System.out.println("No related tasks found");
                 }
                 printLine();
                 break;

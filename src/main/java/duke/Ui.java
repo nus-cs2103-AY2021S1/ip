@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Ui {
     public  Ui(){
     }
+
     public void uiRun(TaskList taskList, Storage store) throws IOException {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser();
