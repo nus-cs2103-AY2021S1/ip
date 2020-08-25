@@ -26,8 +26,12 @@ public class ToDo extends Task {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj instanceof ToDo) return description.equals(((ToDo) obj).description);
-        return false;
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof ToDo) {
+            return description.equals(((ToDo) obj).description);
+        } else {
+            return false;
+        }
     }
 }
