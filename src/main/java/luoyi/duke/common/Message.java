@@ -1,5 +1,8 @@
 package luoyi.duke.common;
 
+/**
+ * Encapsulate all the common messages used in the application.
+ */
 public enum Message {
     WELCOME ("Hi I'm Cat Bot.\nWhat can I do for you?\n"),
     FAREWELL ("Bye! Hope to see you again!\n"),

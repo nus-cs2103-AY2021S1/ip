@@ -23,7 +23,7 @@ public class TimeParser {
                             + "[\\s\\-.T](?<hour>\\d{1,2})[\\s\\-.:]?(?<minute>\\d{2})")));
 
     /**
-     * Parses and returns a date.
+     * Returns a parsed date.
      *
      * @param string Time as a string.
      * @return LocalDate representing the time string.
@@ -48,7 +48,7 @@ public class TimeParser {
     }
 
     /**
-     * Parses and returns a date time.
+     * Returns a parsed date time.
      *
      * @param string Time as a string.
      * @return LocalDateTime representing the time string.

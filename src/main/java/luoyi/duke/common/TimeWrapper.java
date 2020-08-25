@@ -20,7 +20,7 @@ public class TimeWrapper {
     }
 
     /**
-     * Factory method for getting a time wrapper.
+     * Returns a time wrapper.
      *
      * @param string String representation of time.
      * @return A time wrapper which may contain explicit time representation.

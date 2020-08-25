@@ -5,7 +5,18 @@ import luoyi.duke.common.Message;
 import luoyi.duke.data.exception.DukeIllegalArgumentException;
 import luoyi.duke.data.exception.DukeUnrecognizedArgumentException;
 
+/**
+ * Parser class to handle command string parsing.
+ */
 public class Parser {
+    /**
+     * Parse a command and returns the corresponding command object.
+     * @see Command For details of command objects.
+     *
+     * @param commandStr Command string.
+     * @return Command object to execute.
+     * @throws DukeIllegalArgumentException If the command string is invalid.
+     */
     public static Command parse(String commandStr) throws DukeIllegalArgumentException {
         if (commandStr.matches("^list.*")) {
             // Found list command

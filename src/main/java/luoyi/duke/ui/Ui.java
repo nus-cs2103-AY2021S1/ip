@@ -4,18 +4,32 @@ import luoyi.duke.common.Message;
 import luoyi.duke.common.TextFormatter;
 import luoyi.duke.data.task.TaskList;
 
+/**
+ * Ui class to encapsulate output operations.
+ */
 public class Ui {
+    /**
+     * Prints greeting message.
+     */
     public static void greet() {
         System.out.print(TextFormatter.LOGO);
         System.out.print(TextFormatter
                 .getFormattedText(Message.WELCOME.toString()));
     }
 
+    /**
+     * Prints farewell message.
+     */
     public static void bye() {
         System.out.print(TextFormatter
                 .getFormattedText(Message.FAREWELL.toString()));
     }
 
+    /**
+     * Prints a list of tasks.
+     *
+     * @param list List of task.
+     */
     public static void displayTasks(TaskList list) {
         if (list.size() == 0) {
             System.out.print(TextFormatter.getFormattedText(
@@ -30,7 +44,13 @@ public class Ui {
         }
     }
 
-
+    /**
+     * Display a list of tasks based a list of indexes.
+     *
+     * @param list List of tasks.
+     * @param listIndex List of task indexes.
+     * @param date Date which was used to filter the list.
+     */
     public static void displayTasks(TaskList list, int[] listIndex, String date) {
         if (listIndex.length == 0) {
             System.out.print(TextFormatter.getFormattedText(

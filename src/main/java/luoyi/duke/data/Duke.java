@@ -103,6 +103,11 @@ public class Duke implements IDuke {
         return this;
     }
 
+    /**
+     * Returns the storage utility object used in the chatbot.
+     *
+     * @return Storage utility object.
+     */
     public Storage getStorage() {
         return storage;
     }

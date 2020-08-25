@@ -8,6 +8,13 @@ import luoyi.duke.ui.Ui;
 
 import java.util.stream.IntStream;
 
+/**
+ * ListCommand class to encapsulate a list command.
+ * A list command list some tasks in the current duke.
+ *
+ * A command must be initiated with a Duke object before
+ * it can execute.
+ */
 public class ListCommand extends Command {
 
     private final String date;
@@ -17,10 +24,22 @@ public class ListCommand extends Command {
         this.date = date;
     }
 
+    /**
+     * Returns a ListCommand object.
+     *
+     * @param date Date by which the tasks are filtered by.
+     * @return ListCommand object with specified properties, not yet initiated with duke.
+     */
     public static ListCommand getListCommand(String date) {
         return new ListCommand(date, null);
     }
 
+    /**
+     * Executes the list command.
+     * Duke object duke must be initiated.
+     *
+     * @return Resultant duke object.
+     */
     @Override
     public IDuke execute() {
         if (duke == null) {
@@ -39,6 +58,11 @@ public class ListCommand extends Command {
         displayTasks(list);
     }
 
+    /**
+     * Handles the display of list based on a date filter.
+     *
+     * @param date Date by which the tasks are filtered by.
+     */
     private void handleDisplay(String date) {
         TaskList list = duke.getTasks();
         int[] indexes = IntStream
@@ -48,6 +72,11 @@ public class ListCommand extends Command {
         Ui.displayTasks(list, indexes, date);
     }
 
+    /**
+     * Prints all tasks in the tasklist.
+     *
+     * @param list Tasklist to be printed.
+     */
     public void displayTasks(TaskList list) {
         Ui.displayTasks(list);
     }

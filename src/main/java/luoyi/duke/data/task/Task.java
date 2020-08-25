@@ -8,6 +8,11 @@ public class Task implements ITask {
     protected final String description;
     protected final boolean isDone;
 
+    /**
+     * Returns a new Task object.
+     * @param description Description of the task.
+     * @param isDone Boolean to keep track of whether the task is done.
+     */
     protected Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -15,6 +20,7 @@ public class Task implements ITask {
 
     /**
      * Returns a new uncompleted task.
+     *
      * @param description Description of task.
      * @return New uncompleted task.
      */
