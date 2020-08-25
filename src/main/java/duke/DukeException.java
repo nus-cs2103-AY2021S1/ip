@@ -10,6 +10,7 @@ public class DukeException extends Exception {
     private static final String BAD_COMMAND_ERROR = "I have literally no idea what you're asking of me. \uD83D\uDE20";
     private static final String BAD_TODO_ERROR = "HELLO! Please fill up a description of todo. " +
             "Can't be empty!!! \uD83D\uDE20";
+    private static final String BAD_FIND_ERROR = "HELLO! How can I find something if you don't tell me what to find?";
     private static final String BAD_DEADLINE_DATE_ERROR = "HELLO! Please fill up due date for the deadline. " +
             "Can't be empty!!! \uD83D\uDE20";
     private static final String BAD_DEADLINE_TASK_ERROR = "HELLO! Please fill up the task for the deadline. " +
@@ -73,6 +74,10 @@ public class DukeException extends Exception {
      */
     public static DukeException badEventDate() {
         return new DukeException(HORIZONTAL_RULE + "\n" + BAD_EVENT_DATE_ERROR + "\n" + HORIZONTAL_RULE);
+    }
+
+    public static DukeException badFind() {
+        return new DukeException(HORIZONTAL_RULE + "\n" + BAD_FIND_ERROR + "\n" + HORIZONTAL_RULE);
     }
 
 }

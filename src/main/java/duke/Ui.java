@@ -38,11 +38,13 @@ public class Ui {
      * @param tasks TaskList consisting of items to be printed
      */
     public void printList(TaskList tasks) {
-        final String CHECKMARK = "[✓]";
-        final String CROSS = "[✗]";
+        printList(tasks, "Here are all your burdens");
+    }
+
+    private void printList(TaskList tasks, String message) {
 
         System.out.println(HORIZONTAL_RULE);
-        System.out.println("Here are all your burdens");
+        System.out.println(message);
 
         for (int i = 1; i <= tasks.numTasks(); i++) {
             Task item = tasks.getTask(i - 1);
@@ -52,6 +54,14 @@ public class Ui {
         }
 
         System.out.println(HORIZONTAL_RULE);
+    }
+
+    /**
+     * Prints out tasks that have been found from a find query
+     * @param tasks TaskList containing found Tasks
+     */
+    public void printFindResult(TaskList tasks) {
+        printList(tasks, "Found these for you, couch potato");
     }
 
     /**

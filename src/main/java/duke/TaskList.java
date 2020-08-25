@@ -3,12 +3,13 @@ package duke;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * This class represents a list of tasks. It contains several operations that can be performed on the list.
  */
-public class TaskList {
+public class TaskList implements Iterable<Task> {
     private List<Task> taskList;
 
     /**
@@ -58,5 +59,10 @@ public class TaskList {
      */
     public Task removeTask(int index) {
         return taskList.remove(index);
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return taskList.iterator();
     }
 }
