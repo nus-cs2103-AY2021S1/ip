@@ -1,3 +1,5 @@
+package duke;
+
 public enum PARSER_RESULT {
     BYE,
     LIST,

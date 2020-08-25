@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     private static boolean isBye(String s) {
         return s.toLowerCase().equals("bye");
