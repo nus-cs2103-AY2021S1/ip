@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String name;
     protected boolean isDone;
@@ -21,11 +23,11 @@ public class Task {
     }
 
     public String getType() {
-        return "type unknown";
+        return "";
     }
 
-    public String getTime() {
-        return "";
+    public LocalDate getTime() {
+        return null;
     }
 
     public boolean isComplete() {

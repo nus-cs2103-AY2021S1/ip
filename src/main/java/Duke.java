@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Duke {
 
@@ -135,7 +136,8 @@ public class Duke {
                                     throw new DukeNotSureException("What are deadlines? :s");
                                 } else {
                                     String[] stuff = words[1].split(" /by ");
-                                    Deadline newDL = new Deadline(stuff[0], stuff[1], false);
+                                    LocalDate day = LocalDate.parse(stuff[1]);
+                                    Deadline newDL = new Deadline(stuff[0], day, false);
                                     ls.add(newDL);
                                     String thing = "Alright then, add more things to your ever-growing list of tasks:\n"
                                             + newDL.getStatus().replaceAll("(?m)^", "\t")
@@ -146,8 +148,9 @@ public class Duke {
                                 if (words.length < 2) {
                                     throw new DukeNotSureException("What event are you making? :s");
                                 } else {
-                                    String[] stuff = words[1].split(" /at ");
-                                    Event newE = new Event(stuff[0], stuff[1], false);
+                                    String[] stuff = words[1].split(" /by ");
+                                    LocalDate day = LocalDate.parse(stuff[1]);
+                                    Event newE = new Event(stuff[0], day, false);
                                     ls.add(newE);
                                     String thing = "Alright then, add more things to your ever-growing list of tasks:\n"
                                             + newE.getStatus().replaceAll("(?m)^", "\t")
