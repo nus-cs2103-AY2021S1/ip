@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Command {
     private CommandType commandType;
@@ -27,6 +28,20 @@ public class Command {
         System.out.println("Here are the tasks in your list:");
         while (numTask < tasks.size()) {
             System.out.println(Integer.valueOf(numTask + 1) + "." + tasks.getTask(numTask));
+            numTask++;
+        }
+    }
+
+    /**
+     * Print all the matching tasks.
+     *
+     * @param tasks ArrayList
+     */
+    public void printSearchedTask(ArrayList<Task> tasks) {
+        int numTask = 0;
+        System.out.println("Here are the matching tasks in your list:");
+        while (numTask < tasks.size()) {
+            System.out.println(Integer.valueOf(numTask + 1) + "." + tasks.get(numTask));
             numTask++;
         }
     }
@@ -170,6 +185,24 @@ public class Command {
     }
 
     /**
+     * Search keyword from all the Tasks' description in the TaskList given and
+     * return arraylist of task that match the keyword.
+     *
+     * @param tasks TaskList
+     * @param keyword string
+     * @return ArrayList of Task
+     */
+    public ArrayList<Task> searchKeyWord(TaskList tasks, String keyword) {
+        ArrayList<Task> tempTasks = new ArrayList<>();
+        for (Task task: tasks.tasks) {
+            if (task.description.matches("(.*)" + keyword + "(.*)")) {
+                tempTasks.add(task);
+            }
+        }
+        return tempTasks;
+    }
+
+    /**
      * Execute Command.
      *
      * @param tasks TaskList
@@ -207,6 +240,10 @@ public class Command {
         } else if (commandType.equals(CommandType.ADDEVENT)) {
             tasks.addTask(createEvent());
             storage.saveToFile(tasks.tasks);
+        } else if (commandType.equals(CommandType.FINDTASK)) {
+            String keyword = joinString(removeFirst(commandArr));
+            ArrayList<Task> tempTasks = searchKeyWord(tasks, keyword);
+            printSearchedTask(tempTasks);
         } else {}
     }
 

@@ -48,6 +48,8 @@ public class Parser {
             command = new Command(CommandType.ADDDEADLINE, commandArr);
         } else if (commandArr[0].equals("event")) {
             command = new Command(CommandType.ADDEVENT, commandArr);
+        } else if (commandArr[0].equals("find")) {
+            command = new Command(CommandType.FINDTASK, commandArr);
         } else {
             throw new InvalidFirstDukeException();
         }
