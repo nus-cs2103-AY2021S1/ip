@@ -1,7 +1,7 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+package main.java.tasklist;
+
+import main.java.tasks.Task;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class TaskList {
     protected ArrayList<Task> tasks;

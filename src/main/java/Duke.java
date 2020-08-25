@@ -1,3 +1,13 @@
+package main.java;
+
+import main.java.commands.Command;
+import main.java.exceptions.DukeException;
+import main.java.tasklist.TaskList;
+import main.java.parser.Parser;
+import main.java.storage.Storage;
+import main.java.ui.Ui;
+import main.java.Duke;
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;

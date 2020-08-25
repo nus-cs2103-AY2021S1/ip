@@ -1,3 +1,7 @@
+package main.java.ui;
+
+import main.java.tasklist.TaskList;
+import main.java.tasks.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

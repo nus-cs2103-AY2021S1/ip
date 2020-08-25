@@ -1,3 +1,5 @@
+package main.java.tasks;
+
 import java.time.LocalDate;
 
 public class Task {
