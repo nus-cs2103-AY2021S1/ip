@@ -31,6 +31,8 @@ public class Parser {
             } else if (input.startsWith("delete")) {
                 deleteTask(input, tasks, ui);
                 storage.saveTasks(tasks, ui);
+            } else if (input.startsWith("find")) {
+                findTask(input, tasks, ui);
             } else {
 
                 Task currTask = null;
@@ -54,6 +56,25 @@ public class Parser {
         } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
+    }
+
+    private static void findTask(String input, TaskList tasks, Ui ui) throws DukeException {
+        if (input.equals("find")) {
+            throw new DukeException("Sorry sir you will have to try again and this time " +
+                    "tell me which task you want me to find");
+        }
+
+        String searchTerm = input.split(" ")[1];
+        TaskList searchResults = new TaskList();
+
+        for (int i = 0; i < tasks.getSize(); i++) {
+            Task task = tasks.getTask(i);
+            if (task.toString().contains(searchTerm)) {
+                searchResults.addTask(task);
+            }
+        }
+
+        ui.showAllTasks(searchResults);
     }
 
     /**
