@@ -7,6 +7,7 @@ public class Duke {
         SAVE,
         DELETE,
         LIST,
+        FIND,
         ERROR
     }
 
@@ -74,6 +75,10 @@ public class Duke {
                     } catch (IOException ex1) {
                         ui.showError(ex1.getMessage());
                     }
+                    nextLine = ui.readCommand();
+                    break;
+                case FIND:
+                    ui.returnList(tasks.find(nextLine));
                     nextLine = ui.readCommand();
                     break;
                 case ERROR:

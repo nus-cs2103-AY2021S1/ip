@@ -73,9 +73,10 @@ public class Parser {
             return Duke.Command.LIST;
         } else if (input.equals("save")) {
             return Duke.Command.SAVE;
+        } else if (input.contains("find")) {
+            return Duke.Command.FIND;
         } else {
             return Duke.Command.ERROR;
         }
     }
-
 }

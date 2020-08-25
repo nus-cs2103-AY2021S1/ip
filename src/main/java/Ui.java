@@ -7,7 +7,7 @@ public class Ui {
     final private String doneMsg = "Great choice! I have taken your order: ";
     final private String deleteMsg = "Too bad. I'll remove the following order: ";
     final private String saveMsg = "Aright, I have remembered your sins :)";
-    final private String retListMsg = "Here's what you have ordered so far...";
+    final private String retListMsg = "Here's what you have ordered...";
     final private String defaultError = "Wat talking you?";
 
     private Scanner s;

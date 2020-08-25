@@ -108,6 +108,17 @@ public class TaskList {
         return toBeRet;
     }
 
+    public ArrayList<Task> find(String input) {
+        String[] info = input.split(" ", 2);
+        ArrayList<Task> ret = new ArrayList<>();
+        for (Task k: list) {
+            if (k.description.contains(info[1])) {
+                ret.add(k);
+            }
+        }
+        return ret;
+    }
+
     /**
      * Returns the number of tasks on the list.
      * @return integer representing the number of tasks on the list
