@@ -34,7 +34,7 @@ public class Ui {
         }
     }
 
-    public void showFilteredList(String inputCommand, List<Task> taskList) {
+    public void showFilteredDateTimeList(String inputCommand, List<Task> taskList) {
         //get the date time string from the initial string
         String dateTime = inputCommand.substring("list-due ".length());
 
@@ -54,6 +54,28 @@ public class Ui {
             }
         }
     }
+
+    public void showKeywordList(String inputCommand, List<Task> taskList) throws DukeException {
+        //get the keyword string from the initial string
+        String keyword = inputCommand.substring("find ".length());
+
+        if (keyword.equals("")) {
+            throw new DukeException(" Search String cannot be empty!");
+        }
+        //check that the date and time is the same before printing
+        Predicate<String> searchStringPredicate = x -> x.contains(keyword);
+
+        //print out the filtered items
+        int count = 1;
+        System.out.println(" Here are the tasks in your filtered list:");
+        for (Task t : taskList) {
+            if (t.getDescription() != null && searchStringPredicate.test(t.getDescription())) {
+                System.out.println("  " + count + ". " + t.getCurrentStatus());
+                count++;
+            }
+        }
+    }
+
 
     public void sayBye() {
         System.out.println(" Bye. Hope to see you again soon!");
