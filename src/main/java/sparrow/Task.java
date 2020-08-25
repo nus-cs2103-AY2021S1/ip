@@ -1,5 +1,8 @@
 package sparrow;
 
+/**
+ * Represents a Task in the task list. Child classes include Todo, Deadline and Event.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
