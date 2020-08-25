@@ -9,10 +9,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/** Represents the storage system that saves the list of tasks. */
 public class Storage {
 
+    /** The file that stores in the list of tasks in the hard disk. */
     File dataFile;
 
+    /** Constructor.
+     *
+     * @param directoryPath The path of the dataFile's directory.
+     * @param dataFilePath The path of the dataFile.
+     */
     public Storage(String directoryPath, String dataFilePath) {
         try {
             File directory = new File(directoryPath);
@@ -27,6 +34,10 @@ public class Storage {
         }
     }
 
+    /** Generates a list of user inputs from the list saved in the hard disk for the Parser to process.
+     *
+     * @return A list of user inputs in the list saved in the hard disk.
+     */
     public ArrayList<String> readFile() {
         ArrayList<String> lines = new ArrayList<>();
         try {
@@ -41,6 +52,10 @@ public class Storage {
             return lines;
     }
 
+    /** Saves the list of tasks into the hard disk.
+     *
+     * @param lst The list of tasks to be saved into the hard disk.
+     */
     public void saveTaskList(ArrayList<Task> lst) {
         StringBuilder sb = new StringBuilder();
         for (Task task : lst) {

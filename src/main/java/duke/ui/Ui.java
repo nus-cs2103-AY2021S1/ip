@@ -7,36 +7,45 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
+/** Represents the UI that prints out messages in Duke format. */
 public class Ui {
 
     private Scanner sc;
 
+    /** Constructor. */
     public Ui() {
         sc = new Scanner(System.in);
     }
 
-    public void showLine() {
+    private void showLine() {
         System.out.println("____________________________________________________________");
     }
 
+    /** Shows the welcome message in Duke format. */
     public void showWelcome() {
         format("Hello! I'm Duke\nWhat can I do for you?");
     }
 
+    /** Shows the goodbye message in Duke format. */
     public void showBye() {
         format("Bye. Hope to see you again soon!");
     }
 
+    /** Reads the user input from the scanner. */
     public String readCommand() {
         return sc.nextLine();
     }
 
-    public void format(String message) {
+    private void format(String message) {
         showLine();
         System.out.println(message);
         showLine();
     }
 
+    /** Shows the list of tasks in Duke format.
+     *
+     * @param lst The list of tasks.
+     */
     public void formatLst(ArrayList<Task> lst) {
         showLine();
         int size = lst.size();
@@ -51,6 +60,11 @@ public class Ui {
         showLine();
     }
 
+    /** Shows the message where a task is marked as done in Duke format.
+     *
+     * @param lst The list of tasks.
+     * @param num The index of the task that is marked as done.
+     */
     public void formatMarkAsDone(ArrayList<Task> lst, int num) {
         showLine();
         System.out.println("Nice! I've marked this task as done:");
@@ -58,6 +72,11 @@ public class Ui {
         showLine();
     }
 
+    /** Shows the list of tasks after a task is added in Duke format.
+     *
+     * @param lst The list of tasks.
+     * @param task The task that is added.
+     */
     public void formatAddTask(ArrayList<Task> lst, Task task) {
         int size = lst.size();
         showLine();
@@ -67,6 +86,11 @@ public class Ui {
         showLine();
     }
 
+    /** Shows the list of tasks after a task is deleted in Duke format.
+     *
+     * @param lst The list of tasks.
+     * @param num The index of the task that is deleted.
+     */
     public void formatDeleteTask(ArrayList<Task> lst, int num) {
         int sizeAfterDeletion = lst.size() - 1;
         showLine();
@@ -76,6 +100,11 @@ public class Ui {
         showLine();
     }
 
+    /** Shows the list of tasks that occur on the specified date in Duke format.
+     *
+     * @param tasksOnDate The list of tasks that occur on the specified date.
+     * @param queryDate The specified date.
+     */
     public void formatShowTasksOnDate(ArrayList<Task> tasksOnDate, LocalDate queryDate) {
         showLine();
         if (!tasksOnDate.isEmpty()) {
@@ -89,6 +118,10 @@ public class Ui {
         showLine();
     }
 
+    /** Shows the error message in Duke format.
+     *
+     * @param e The exception that is thrown.
+     */
     public void showError(Exception e) {
         showLine();
         if (e instanceof DateTimeParseException) {

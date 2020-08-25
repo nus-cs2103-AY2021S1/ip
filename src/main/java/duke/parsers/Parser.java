@@ -8,11 +8,22 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/** Represents a parser that parses the user inputs and the list saved in the hard disk into a suitable format
+ * for Duke to process. */
 public class Parser {
 
+    /** The formatter for user inputs. */
     DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    /** The formatter for user inputs that are displayed in the list saved in the hard disk. */
     DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
+    /** Parses the user inputs into a suitable format for Duke to process.
+     *
+     * @param userInput The user input fed into Duke.
+     * @param lst The list that stores tasks.
+     * @return An appropriate command to be executed.
+     * @throws DukeException If the userInput is invalid or missing.
+     */
     public Command parse(String userInput, ArrayList<Task> lst) throws DukeException {
         if (userInput.equals("bye")) {
             return new ByeCommand();
@@ -68,6 +79,11 @@ public class Parser {
         }
     }
 
+    /** Parses the user inputs in the list saved in the hard disk into a suitable format for Duke to process.
+     *
+      * @param savedTaskList The list of user inputs in the list saved in the hard disk.
+     * @return A list of tasks.
+     */
     public ArrayList<Task> parseSavedTaskList(ArrayList<String> savedTaskList) {
         ArrayList<Task> lst = new ArrayList<>();
         for (String task : savedTaskList) {

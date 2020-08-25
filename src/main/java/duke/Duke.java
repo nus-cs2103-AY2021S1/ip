@@ -11,6 +11,7 @@ import duke.commands.*;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/** Represents the main class. */
 public class Duke {
 
     private Storage storage;
@@ -18,6 +19,11 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /** Constructor.
+     *
+     * @param directoryPath The path of the dataFile's directory.
+     * @param dataFilePath The path of the dataFile.
+     */
     public Duke(String directoryPath, String dataFilePath) {
         ui = new Ui();
         storage = new Storage(directoryPath, dataFilePath);
@@ -27,6 +33,7 @@ public class Duke {
         tasks = new TaskList(lst);
     }
 
+    /** Runs the Duke program. */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -42,6 +49,7 @@ public class Duke {
         }
     }
 
+    /** The main method which runs the Duke program. */
     public static void main(String[] args) {
         new Duke("src/main/data", "src/main/data/data.txt").run();
     }
