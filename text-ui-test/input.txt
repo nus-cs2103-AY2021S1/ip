@@ -16,4 +16,9 @@ list
 deadline iP week 3 /by 2020-08-27
 list
 delete 1
+deadline reading /by 2020-08-27
+show 2020-08-27
+todo reading book
+find reading
+list
 bye
