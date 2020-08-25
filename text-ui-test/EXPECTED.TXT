@@ -7,34 +7,50 @@
 Eh yo, I am Duke! Some kids call me 'Lao Duke' (which means old Duke).
 I like to speak Singlish but I also can remember your tasks one. Come try la! 
 Lao Duke has added this task for you:
-[T][✘] borrow book
+T|✘|borrow book
 You have 1 task(s) in your list!
 Lao Duke has added this task for you:
-[D][✘] return book (by: Sunday)
+D|✘|return book |09 Aug 2020|05.00pm
 You have 2 task(s) in your list!
 Wah very good! I am proud that you got do your task!
-[T][✓] borrow book
+T|✓|borrow book
+You have 2 task(s) in your list!
 Wah very good! I am proud that you got do your task!
-[D][✓] return book (by: Sunday)
+D|✓|return book |09 Aug 2020|05.00pm
+You have 2 task(s) in your list!
+Can can I removed this task for you:
+D|✓|return book |09 Aug 2020|05.00pm
+You have 1 task(s) in your list!
 Lao Duke not so blur like you. Tsk. I got remember your tasks one hor.
-Task 1: [T][✓] borrow book
-Task 2: [D][✓] return book (by: Sunday)
+Task 1: T|✓|borrow book
+You have 1 task(s) in your list!
 Lao Duke has added this task for you:
-[E][✘] project meeting (at: Mon 2-4pm)
+E|✘|project meeting |08 Aug 2020|02.00pm to 03.00pm
+You have 2 task(s) in your list!
+Lao Duke has added this task for you:
+T|✘|individual project
 You have 3 task(s) in your list!
 Lao Duke has added this task for you:
-[T][✘] individual project
+D|✘|study |09 Aug 2020|06.00pm
+You have 4 task(s) in your list!
+I how smart...I have matched your queries as below:
+D|✘|study |09 Aug 2020|06.00pm
 You have 4 task(s) in your list!
 Lao Duke has added this task for you:
-[E][✘] watch movie (at: Tues 1-3pm)
+E|✘|group project |09 Sep 2020|09.00am to 12.00pm
 You have 5 task(s) in your list!
-Wah very good! I am proud that you got do your task!
-[E][✓] project meeting (at: Mon 2-4pm)
+I how smart...I have matched your queries as below:
+E|✘|project meeting |08 Aug 2020|02.00pm to 03.00pm
+T|✘|individual project
+E|✘|group project |09 Sep 2020|09.00am to 12.00pm
+You have 5 task(s) in your list!
 Lao Duke not so blur like you. Tsk. I got remember your tasks one hor.
-Task 1: [T][✓] borrow book
-Task 2: [D][✓] return book (by: Sunday)
-Task 3: [E][✓] project meeting (at: Mon 2-4pm)
-Task 4: [T][✘] individual project
-Task 5: [E][✘] watch movie (at: Tues 1-3pm)
+Task 1: T|✓|borrow book
+Task 2: E|✘|project meeting |08 Aug 2020|02.00pm to 03.00pm
+Task 3: T|✘|individual project
+Task 4: D|✘|study |09 Aug 2020|06.00pm
+Task 5: E|✘|group project |09 Sep 2020|09.00am to 12.00pm
+You have 5 task(s) in your list!
+You have 5 task(s) in your list!
 Alamak, you sure you finished all your tasks? Ok lah I also need to sleep anyway Zzzz.
 Goodbye!

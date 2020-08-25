@@ -1,11 +1,14 @@
 todo borrow book
-deadline return book /by Sunday
+deadline return book /by 2020-08-09 1700
 done 1
 done 2
+delete 2
 list
-event project meeting /at Mon 2-4pm
+event project meeting /at 2020-08-08 1400-1500
 todo individual project
-event watch movie /at Tues 1-3pm
-done 3
+deadline study /by 2020-08-09 1800
+print 2020-08-09
+event group project /at 2020-09-09 0900-1200
+find project
 list
 bye
