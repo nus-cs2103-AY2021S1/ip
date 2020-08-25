@@ -5,6 +5,8 @@ import data.task.Task;
 import ui.Ui;
 import utils.Messages;
 
+import java.util.List;
+
 // Represents an executable command.
 public abstract class Command {
     protected TaskList taskList;
@@ -20,7 +22,7 @@ public abstract class Command {
         this.taskList = taskList;
     }
 
-    public static String getMessageForTaskListSummary(TaskList taskList) {
+    public static String getMessageForTaskListSummary(List<Task> taskList) {
         return String.format(Messages.MESSAGE_TASK_LISTED_OVERVIEW_FORMAT, taskList.size());
     }
 

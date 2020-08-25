@@ -1,6 +1,8 @@
 package data.task;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class Task {
 
@@ -16,6 +18,17 @@ public abstract class Task {
     public Task(boolean isDone, String description) {
         this.description = description;
         this.isDone = isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Retrieves a listing of every word in the description, in order.
+     */
+    public List<String> getWordsInDescription() {
+        return Arrays.asList(description.split("\\s+"));
     }
 
     public String getStatusIcon() {
