@@ -6,6 +6,9 @@ import main.java.duke.TaskList;
 import main.java.duke.Ui;
 import main.java.duke.task.Task;
 
+/**
+ * Represents a <code>Command</code> telling Duke to delete a certain <code>Task</code>.
+ */
 public class DeleteCommand implements Command {
     String[] command;
 

@@ -8,6 +8,9 @@ import main.java.duke.Ui;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
+/**
+ * Represents a <code>Command</code> telling Duke to list <code>Task</code>s.
+ */
 public class ListCommand implements Command {
     String[] command;
 

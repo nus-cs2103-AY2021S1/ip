@@ -6,6 +6,9 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a <code>Task</code> that has to be done by certain date.
+ */
 public class Deadline extends Task {
     private LocalDate deadline;
 

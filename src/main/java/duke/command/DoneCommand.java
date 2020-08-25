@@ -6,6 +6,9 @@ import main.java.duke.TaskList;
 import main.java.duke.Ui;
 import main.java.duke.task.Task;
 
+/**
+ * Represents a <code>Command</code> telling Duke to mark a certain <code>Task</code> as done.
+ */
 public class DoneCommand implements Command {
     String[] command;
 

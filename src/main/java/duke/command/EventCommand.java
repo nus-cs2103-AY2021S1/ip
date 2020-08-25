@@ -6,6 +6,9 @@ import main.java.duke.TaskList;
 import main.java.duke.Ui;
 import main.java.duke.task.Event;
 
+/**
+ * Represents a <code>Command</code> telling Duke to create a new <code>Event</code>.
+ */
 public class EventCommand implements Command {
     String command;
 
