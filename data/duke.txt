@@ -1,4 +1,4 @@
-T / 0 / buy bread
-T / 1 / borrow book
-E / 0 / project meeting / Mon 2-4pm
+T / 1 / buy bread
+T / 0 / borrow book
+D / 0 / return book / 01 Sep 2020, 06:00 PM
 T / 0 / join sports club

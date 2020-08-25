@@ -3,29 +3,29 @@
  */
 public class Deadline extends Task {
 
-    private String by;
+    private String dateTime;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
-        this.by = by;
+        this.dateTime = DateTimeHandler.parseDateTime(by);
     }
 
-    public Deadline(String description, boolean isDone, String by) {
+    public Deadline(String description, boolean isDone, String dateTime) {
         super(description, isDone);
-        this.by = by;
+        this.dateTime = dateTime;
     }
 
-    public String getBy() {
-        return this.by;
+    public String getDateTime() {
+        return this.dateTime;
     }
 
     @Override
     public String getData() {
-        return "D / " + super.getData() + " / " + this.getBy();
+        return "D / " + super.getData() + " / " + this.getDateTime();
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.getBy() + ")";
+        return "[D]" + super.toString() + " (by: " + this.getDateTime() + ")";
     }
 }

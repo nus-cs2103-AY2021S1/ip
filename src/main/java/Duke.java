@@ -63,6 +63,8 @@ public class Duke {
             deleteTask(input);
         } else if (input.contains("done")) {
             markTaskAsDone(input);
+        } else if (input.contains("get")) {
+            printTasksFromDate(input);
         } else if (input.contains("todo") || input.contains("event") || input.contains("deadline")) {
             createTask(input);
         } else {
@@ -143,6 +145,39 @@ public class Duke {
         }
     }
 
+    /**
+     * Prints the tasks with the date required by the user.
+     *
+     * @param input Date of tasks required.
+     * @throws DukeException If the input is invalid.
+     */
+    private static void printTasksFromDate(String input) throws DukeException {
+        try {
+            String requiredDate = DateTimeHandler.parseDate(input.substring(4));
+            boolean hasRequiredTasks = false;
+            StringBuilder requiredTasks = new StringBuilder();
+            int number = 0;
+
+            for (int i = 0; i < tasks.size(); i++) {
+                String taskString = tasks.get(i).toString();
+                if (taskString.contains(requiredDate)) {
+                    hasRequiredTasks = true;
+                    number++;
+                    requiredTasks.append(number).append(". ").append(taskString).append("\n");
+                }
+            }
+
+            if (hasRequiredTasks) {
+                System.out.println("Here are the task(s) from " + requiredDate + ":");
+                System.out.println(requiredTasks);
+            } else {
+                System.out.println("You have no tasks from " + requiredDate + ".");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("\u2639 OOPS!!! Enter the date you want to get tasks from.\n");
+        }
+    }
+
     /***
      * Creates a task.
      * Either a todo, an event or a deadline.
@@ -162,14 +197,14 @@ public class Duke {
                 taskString = input.substring(6);
                 String[] arr = taskString.split(" /at ", 2);
                 if (arr.length < 2 || arr[1].equals("")) {
-                    throw new DukeException("\u2639 OOPS!!! Enter the date and/or time of the event after \"/at\".\n");
+                    throw new DukeException("\u2639 OOPS!!! Enter the date and time of the event after \"/at\".\n");
                 }
                 task = new Event(arr[0], arr[1]);
             } else {    // deadline
                 taskString = input.substring(9);
                 String[] arr = taskString.split(" /by ", 2);
                 if (arr.length < 2 || arr[1].equals("")) {
-                    throw new DukeException("\u2639 OOPS!!! Enter the date and/or time of the deadline after \"/by\".\n");
+                    throw new DukeException("\u2639 OOPS!!! Enter the date and time of the deadline after \"/by\".\n");
                 }
                 task = new Deadline(arr[0], arr[1]);
             }

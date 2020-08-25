@@ -5,20 +5,27 @@ deadline
 deadline return book
 deadline return book /by
 deadline return book /by Sunday
+deadline return book /by 01/09/2020 6pm
+deadline return book /by 01/09/2020 1800
+deadline return book /by 01-09-2020 1800
 event
 event project meeting /by
-event project meeting /at Mon 2-4pm
+event project meeting /at 1-9-2020 0800
 list
+get
+get 1/9/2020
+get 1-9-2020
 done
 done a
-done 3
+done 1
 list
-done 2
+done 4
 blah
 todo join sports club
 delete
 delete a
-delete 3
+delete 4
 list
+get 1-9-2020
 bye
 blah

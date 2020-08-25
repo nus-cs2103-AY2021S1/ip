@@ -3,29 +3,29 @@
  */
 public class Event extends Task {
 
-    private String at;
+    private String dateTime;
 
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeException {
         super(description);
-        this.at = at;
+        this.dateTime = DateTimeHandler.parseDateTime(at);
     }
 
-    public Event(String description, boolean isDone, String at) {
+    public Event(String description, boolean isDone, String dateTime) {
         super(description, isDone);
-        this.at = at;
+        this.dateTime = dateTime;
     }
 
-    public String getAt() {
-        return this.at;
+    public String getDateTime() {
+        return this.dateTime;
     }
 
     @Override
     public String getData() {
-        return "E / " + super.getData() + " / " + this.getAt();
+        return "E / " + super.getData() + " / " + this.getDateTime();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.getAt() + ")";
+        return "[E]" + super.toString() + " (at: " + this.getDateTime() + ")";
     }
 }
