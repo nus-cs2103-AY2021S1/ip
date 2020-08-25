@@ -51,4 +51,14 @@ abstract public class Task {
      * @return  String that will be used to write to memory.
      */
     abstract public String convertToData();
+
+    /**
+     * Check whether Task's description contains query.
+     *
+     * @param query  Query to be checked
+     * @return  returns true if query is contained in description else returns false.
+     */
+    public boolean contains(String query) {
+        return description.contains(query);
+    }
 }

@@ -56,14 +56,21 @@ public class Parser {
     }
     private static Command parseDelete(String input) throws DukeException {
         if (input.matches("delete\\s*")) {
-            throw new EmptyArgumentException("duke.task.Task Index");
+            throw new EmptyArgumentException("Task Index");
         }
         if (!input.matches("delete \\d+")) {
-            throw new InvalidArgumentException("duke.task.Task Index");
+            throw new InvalidArgumentException("Task Index");
         }
         String[] arr = input.split(" ");
         int index = Integer.parseInt(arr[1]) - 1;
         return new DeleteCommand(index);
+    }
+    private static Command parseFind(String input) throws EmptyArgumentException {
+        if (input.matches("find\\s*")) {
+            throw new EmptyArgumentException("find argument");
+        }
+        return new FindCommand(input.substring(5));
+
     }
 
     /**
@@ -104,6 +111,8 @@ public class Parser {
             return parseEventTask(input);
         } else if (input.matches("delete.*")) {
             return parseDelete(input);
+        } else if (input.matches("find.*")) {
+            return parseFind(input);
         } else {
             throw new InvalidCommandException();
         }

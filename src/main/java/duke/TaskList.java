@@ -38,7 +38,6 @@ public class TaskList {
             throw new WriteToStorageException();
         }
     }
-
     /**
      * Mark a task in TaskList as done.
      * @param index Index of the task to be set as done.
@@ -52,7 +51,6 @@ public class TaskList {
             throw new WriteToStorageException();
         }
     }
-
     @Override
     public String toString() {
         if (tasks.size() == 0) {
@@ -66,7 +64,6 @@ public class TaskList {
             return result.toString();
         }
     }
-
     public Task getTask(int index) {
         return tasks.get(index);
     }
@@ -81,5 +78,21 @@ public class TaskList {
      */
     public Task remove(int index) {
         return tasks.remove(index);
+    }
+
+    /**
+     * Searches through TaskList to find all Task that contains query.
+     *
+     * @param query  Query to be searched
+     * @return  returns list of tasks that contains query.
+     */
+    public List<Task> findAll(String query) {
+        List<Task> ts = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.contains(query)) {
+                ts.add(t);
+            }
+        }
+        return ts;
     }
 }
