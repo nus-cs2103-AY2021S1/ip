@@ -17,6 +17,11 @@ public abstract class Task {
         return isDone ? "[\u2713] " : "[\u2718] ";
     }
 
+    /**
+     * Returns string representation of task to be written to a file.
+     *
+     * @return String representation of the Task.
+     */
     public abstract String print();
 
     @Override

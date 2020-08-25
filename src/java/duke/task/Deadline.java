@@ -16,6 +16,17 @@ public class Deadline extends Task {
         this.dueDate = dueDate;
     }
 
+    /**
+     * Creates a new Deadline object represented by the given command.
+     * The command is split into two parts by the " /by " delimiter, with the
+     * first being the task description and the second being the due date.
+     *
+     * @param task Description of task to be converted to a Deadline.
+     * @return Deadline object representing the given description.
+     * @throws EmptyTaskException If there is no text after "deadline ".
+     * @throws MissingDateException If " /by " is not given or if there is no date provided.
+     * @throws InvalidDateException If the date provided is in the wrong format.
+     */
     public static Deadline create(String task)
             throws EmptyTaskException, MissingDateException, InvalidDateException {
         if (task.length() <= 9) throw new EmptyTaskException("deadline");
@@ -34,6 +45,13 @@ public class Deadline extends Task {
         return new Deadline(taskInfo[0], dateTime);
     }
 
+    /**
+     * Creates a new Deadline object represented by the given task details.
+     *
+     * @param task Description of task.
+     * @param date Date by which the task is to be completed by.
+     * @return Deadline object representing the given details.
+     */
     public static Deadline create(String task, String date) {
         DateTimeFormatter format = DateFormat.FORMAT6.toDateFormat();
         return new Deadline(task, LocalDate.parse(date, format));
