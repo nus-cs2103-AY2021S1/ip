@@ -45,12 +45,16 @@ public class Storage {
         return taskList;
     }
 
-    public void save() throws IOException {
-        FileWriter writer = new FileWriter(file);
-        for (int i = 0; i < Duke.taskList.size(); i++) {
-            Task task = Duke.taskList.get(i);
-            writer.write(task.toEncoding() + System.lineSeparator());
+    public void save() throws DukeException {
+        try {
+            FileWriter writer = new FileWriter(file);
+            for (int i = 0; i < Duke.taskList.size(); i++) {
+                Task task = Duke.taskList.get(i);
+                writer.write(task.toEncoding() + System.lineSeparator());
+            }
+            writer.close();
+        } catch (IOException e) {
+            throw new DukeException("Error saving file!");
         }
-        writer.close();
     }
 }

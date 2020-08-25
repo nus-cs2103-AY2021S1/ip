@@ -3,7 +3,7 @@ import task.Task;
 import java.util.ArrayList;
 
 public class TaskList {
-    public static ArrayList<Task> taskList;
+    public ArrayList<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
@@ -17,12 +17,12 @@ public class TaskList {
         this.taskList.add(newTask);
     }
 
-    public void delete(int taskNum) {
-        this.taskList.remove(taskNum - 1);
+    public void delete(int taskId) {
+        this.taskList.remove(taskId);
     }
 
-    public Task get(int taskNum) {
-        return this.taskList.get(taskNum - 1);
+    public Task get(int taskId) {
+        return this.taskList.get(taskId);
     }
 
     public int size() {

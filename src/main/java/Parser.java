@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public class Parser {
     public static final String LINE = "_______________________________________\n";
 
@@ -9,6 +7,7 @@ public class Parser {
         try {
             if (userCommand.equals("bye")) {  // For exiting the program
                 Duke.running = false;
+                Duke.storage.save();
             } else if (userCommand.equals("list")) {  // For viewing items in to do list
                 Duke.ui.handleList();
             } else if (userCommand.equals("done")) {  // For marking items in the to do list as done

@@ -1,20 +1,13 @@
-import task.*;
-import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+
 
 public class Duke {
-    public Storage storage;
+    public static Storage storage;
     public static TaskList taskList;
     public static Ui ui;
     public static boolean running;
 
-    public Duke(String filePath) throws DukeException {
+    public Duke(String filePath){
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
@@ -36,7 +29,7 @@ public class Duke {
         ui.goodbye();
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 }

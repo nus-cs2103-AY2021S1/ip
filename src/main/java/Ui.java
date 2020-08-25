@@ -1,6 +1,4 @@
-import task.Deadline;
-import task.Event;
-import task.ToDo;
+import task.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
