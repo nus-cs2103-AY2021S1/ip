@@ -29,6 +29,15 @@ public class Task {
     }
 
     /**
+     * Retrieves task description.
+     *
+     * @return Task's description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Represents done or not done in string.
      *
      * @return unicode character for tick/cross.

@@ -6,16 +6,16 @@ import java.util.ArrayList;
 /**
  * Contains the task list and handles any operations regarding the task list.
  */
-public class TaskListHandler {
-    protected ArrayList<Task> taskList;
+public class taskListHandler {
+    protected ArrayList<Task> tasks;
 
     /**
      * Stores tasks from save file or empty task list if save file unavailable.
      *
      * @param list Task list.
      */
-    public TaskListHandler(ArrayList<Task> list) {
-        this.taskList = list;
+    public taskListHandler(ArrayList<Task> list) {
+        this.tasks = list;
     }
 
     /**
@@ -23,8 +23,8 @@ public class TaskListHandler {
      *
      * @return Task list
      */
-    public ArrayList<Task> getTaskList() {
-        return taskList;
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
     /**
@@ -33,7 +33,7 @@ public class TaskListHandler {
      * @param task Task
      */
     public void addToList(Task task) {
-        taskList.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -42,9 +42,12 @@ public class TaskListHandler {
      * @return An empty task list.
      */
     public ArrayList<Task> clearList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
+        Ui.drawTopBorder();
+        Ui.indent(1);
         System.out.println("The list of tasks has been cleared.");
-        return taskList;
+        Ui.drawBottomBorder();
+        return tasks;
     }
 
     /**
@@ -53,19 +56,21 @@ public class TaskListHandler {
      * @throws DukeException If task list is currently empty.
      */
     public void printList() throws DukeException {
-        if (taskList.isEmpty()) {
+        if (tasks.isEmpty()) {
             // Asks user for tasks when printing empty list
-            throw new DukeException("\u2639 Oops, the list of tasks is empty, pls add tasks first");
+            throw new DukeException("\u2639 Oops, the list of tasks is empty, pls add tasks first!");
         }
         int listPos = 1;
-        indent(1);
+        Ui.drawTopBorder();
+        Ui.indent(1);
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++,listPos++) {
-            indent(2);
-            System.out.println(listPos + ". " + taskList.get(i));
+        for (int i = 0; i < tasks.size(); i++,listPos++) {
+            Ui.indent(2);
+            System.out.println(listPos + ". " + tasks.get(i));
         }
-        indent(1);
-        System.out.println("You have " + taskList.size() + " task(s) in the list");
+        Ui.indent(1);
+        System.out.println("You have " + tasks.size() + " task(s) in the list");
+        Ui.drawBottomBorder();
     }
 
     /**

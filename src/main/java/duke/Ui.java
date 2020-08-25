@@ -10,12 +10,12 @@ import java.util.Scanner;
  * Represents all user interaction with Duke
  */
 public class Ui {
-    protected final TaskListHandler handler;
+    protected final taskListHandler handler;
     protected final Storage storage;
     /** Class-wide variable to know whether to continue running user interface */
     protected static boolean isRunning = true;
 
-    public Ui(TaskListHandler handler, Storage storage) {
+    public Ui(taskListHandler handler, Storage storage) {
         this.handler = handler;
         this.storage = storage;
     }
@@ -50,6 +50,15 @@ public class Ui {
         }
     }
 
+    public static void drawTopBorder() {
+        System.out.println(" ______________________________________________________________ ");
+        System.out.println("*                                                              *");
+
+    }
+    public static void drawBottomBorder() {
+        System.out.println("*______________________________________________________________*");
+    }
+
     /**
      * Provides indentation for formatting.
      *
@@ -69,33 +78,38 @@ public class Ui {
      * @param listSize Size of task list.
      */
     public static void printSuccess(String operation, Task currentTask, int listSize) {
+        // Prints success message and list size after task added/deleted
+        drawTopBorder();
         indent(1);
         if (operation.equals("add")) {
-            System.out.print("Successfully added:\n");
+            System.out.print("Yes! I have successfully added:\n");
         } else if (operation.equals("delete")) {
-            System.out.print("Noted. I've removed this task:\n");
+            System.out.print("Alright! I've removed this task:\n");
         } else {
             System.out.println("Good job! You completed:");
             indent(2);
             System.out.println(currentTask);
+            drawBottomBorder();
             return;
         }
         indent(2);
         System.out.println(currentTask);
         indent(1);
         System.out.println("You have " + listSize + " task(s) in the list.");
+        drawBottomBorder();
     }
 
     /**
      * Initial greeting message in unicode.
      */
     public static void greet() {
+        drawTopBorder();
         String logo = "\n"
-                + "██████  ██    ██ ██   ██ ███████\n"
-                + "██   ██ ██    ██ ██  ██  ██\n"
-                + "██   ██ ██    ██ █████   █████\n"
-                + "██   ██ ██    ██ ██  ██  ██\n"
-                + "██████   ██████  ██   ██ ███████\n";
+            + "    ██████  ██    ██ ██   ██ ███████\n"
+            + "    ██   ██ ██    ██ ██  ██  ██\n"
+            + "    ██   ██ ██    ██ █████   █████\n"
+            + "    ██   ██ ██    ██ ██  ██  ██\n"
+            + "    ██████   ██████  ██   ██ ███████\n";
 //        String logoSol = "\n" +
 //                "   ▄████████  ▄██████▄   ▄█       \n" +
 //                "  ███    ███ ███    ███ ███       \n" +
@@ -106,11 +120,14 @@ public class Ui {
 //                "   ▄█    ███ ███    ███ ███▌      ▄ \n" +
 //                " ▄████████▀   ▀██████▀  █████▄▄▄███ \n";
 
-
         System.out.println(logo);
-        String greeting = "Hello! I'm Duke the chatbot! \n" +
-                "What can I do for you?\n";
+        String greeting = "Hey! I'm Duke the chatbot!";
+        String doForYou = "What can I do for you?";
+        indent(1);
         System.out.println(greeting);
+        indent(1);
+        System.out.println(doForYou);
+        drawBottomBorder();
     }
 
 }
