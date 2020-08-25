@@ -1,5 +1,8 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,9 +17,13 @@ public class BotHandler {
         BotResponses.displayListReply(lst);
     }
 
-    private static void addTask(String input, String type) throws DuckieException, IOException {
-        Task t1;
+    private static void addTask(String input, String type) throws IOException, DuckieException {
+        Task t1 = null;
         try {
+            if (is_word(input)) {
+                throw new DuckieInsufficientInfoException();
+            }
+
             if (type.equals("todo")) {
                 String todo = input.split(" ", 2)[1];
                 t1 = new Todo(todo);
@@ -25,17 +32,19 @@ public class BotHandler {
                 String time = splitted[1].split(" ", 2)[1];
                 String description = splitted[0].split(" ", 2)[1];
                 if (type.equals("deadline")) {
-                    t1 = new Deadline(description, time);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
+                    LocalDate date = LocalDate.parse(time, formatter);
+                    t1 = new Deadline(description, date);
                 } else { //This will be Event task.
-                    t1 = new Event(description, time);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a");
+                    LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
+                    t1 = new Event(description, dateTime);
                 }
             }
             lst.add(t1);
             writeToFile();
         } catch (IOException e) {
             throw e;
-        } catch (Exception e) {
-            throw new DuckieNoIndexException();
         }
         BotResponses.addTaskReply(t1, lst);
     }
@@ -76,14 +85,18 @@ public class BotHandler {
                 lst.add(taskToDo);
             } else if (type.equals("D")) {
                 String date = taskBreakdown[3].strip();
-                Deadline taskD = new Deadline(description, date);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, MMM dd yyyy");
+                LocalDate d1 = LocalDate.parse(date, formatter);
+                Deadline taskD = new Deadline(description, d1);
                 if (isDone.equals("1")) {
                     taskD.checked();
                 }
                 lst.add(taskD);
             } else {
                 String dateTime = taskBreakdown[3].strip();
-                Event taskE = new Event(description, dateTime);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, MMM dd yyyy hh:mm a");
+                LocalDateTime d1 = LocalDateTime.parse(dateTime, formatter);
+                Event taskE = new Event(description, d1);
                 if (isDone.equals("1")) {
                     taskE.checked();
                 }
