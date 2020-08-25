@@ -17,7 +17,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String taskString = String.format("%s|%s", this.showStatus(), name);
+        String taskString = String.format("%s,%s", this.showStatus(), name);
         return taskString;
     }
 

@@ -1,13 +1,13 @@
 public class DeleteTaskCommand implements Command {
-    Storage store;
+    TaskList tasks;
     int taskIndex;
 
-    public DeleteTaskCommand(Storage store, int taskIndex) {
-        this.store = store;
+    public DeleteTaskCommand(TaskList tasks, int taskIndex) {
+        this.tasks = tasks;
         this.taskIndex = taskIndex;
     }
 
     public void execute() {
-        store.deleteTask(taskIndex);
+        tasks.deleteTask(taskIndex);
     }
 }

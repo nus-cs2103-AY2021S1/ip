@@ -39,7 +39,7 @@ public class Parser {
     // Parses a single line of input from file
     public static Task parseFileLine(String string)
             throws StreamCorruptedException, ParseException {
-        String[] tokens = string.split("\\|");
+        String[] tokens = string.split(",");
         String type = tokens[0];
         switch (type) {
             case "[T]": {
@@ -93,7 +93,7 @@ public class Parser {
     }
 
     // Parses a single line of input from stdin into a command
-    public static Command parseLine(Storage store, String string) throws ParseException {
+    public static Command parseLine(TaskList tasks, String string) throws ParseException {
         String[] tokens = string.split(",");
         String type = tokens[0];
         switch (type) {
@@ -108,7 +108,7 @@ public class Parser {
 
                 // Create the task
                 Task task = new TodoTask(false, taskName);
-                return new CreateTaskCommand(store, task);
+                return new CreateTaskCommand(tasks, task);
             }
             case "event": {
                 // Event task
@@ -124,7 +124,7 @@ public class Parser {
                         tokens[1],
                         parseDate(tokens[2])
                 );
-                return new CreateTaskCommand(store, task);
+                return new CreateTaskCommand(tasks, task);
             }
             case "deadline": {
                 // Deadline task
@@ -142,13 +142,13 @@ public class Parser {
                         tokens[1],
                         parseDate(tokens[2])
                 );
-                return new CreateTaskCommand(store, task);
+                return new CreateTaskCommand(tasks, task);
             }
             case "bye": {
                 return new ExitCommand();
             }
             case "list": {
-                return new ListCommand(store);
+                return new ListCommand(tasks);
             }
             case "done": {
                 // Handle incorrect argument lengths
@@ -157,7 +157,7 @@ public class Parser {
                 }
 
                 Integer taskIndex = Parser.parseInt(tokens[1]) - 1;
-                return new CompleteTaskCommand(store, taskIndex);
+                return new CompleteTaskCommand(tasks, taskIndex);
             }
 
             case "delete": {
@@ -166,7 +166,7 @@ public class Parser {
                     throw new CommandMissingArgumentException();
                 }
                 Integer taskIndex = Parser.parseInt(tokens[1]) - 1;
-                return new DeleteTaskCommand(store, taskIndex);
+                return new DeleteTaskCommand(tasks, taskIndex);
             }
 
             default:

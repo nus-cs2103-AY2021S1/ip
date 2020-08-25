@@ -1,8 +1,8 @@
 public class CreateTaskCommand implements Command {
-    Storage store;
+    TaskList tasks;
     Task task;
-    public CreateTaskCommand(Storage store, Task task) {
-        this.store = store;
+    public CreateTaskCommand(TaskList tasks, Task task) {
+        this.tasks = tasks;
         this.task = task;
     }
 
@@ -10,6 +10,6 @@ public class CreateTaskCommand implements Command {
     public void execute() {
         String message = String.format("Added: %s", task.toString());
         System.out.println(message);
-        store.addTask(task);
+        tasks.addTask(task);
     }
 }

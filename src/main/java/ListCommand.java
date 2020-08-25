@@ -1,11 +1,11 @@
 public class ListCommand implements Command {
-    Storage store;
-    public ListCommand(Storage store) {
-        this.store = store;
+    TaskList tasks;
+    public ListCommand(TaskList tasks) {
+        this.tasks = tasks;
     }
 
     @Override
     public void execute() {
-        store.list();
+        tasks.list();
     }
 }

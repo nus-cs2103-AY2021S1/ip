@@ -10,7 +10,7 @@ import java.nio.file.Files;
 public class Storage {
     protected FileWriter writeHandle;
     protected File fileHandle;
-    protected ArrayList<Task> store;
+    protected TaskList taskList;
 
     /**
      * Constructor
@@ -35,7 +35,7 @@ public class Storage {
             String data = Files.readString(Paths.get("./data/duke.txt"));
             ArrayList<Task> tasks = Parser.parseFile(data);
             // Load contents into store
-            this.store = tasks;
+            this.taskList = new TaskList(tasks);
         } catch (Exception e) {
             System.out.println("Failed to initialize storage");
             System.out.println(e.toString());
@@ -58,10 +58,8 @@ public class Storage {
             this.writeHandle = new FileWriter("./data/duke.txt");
 
             // Format the store output as a string
-            String data = "";
-            for ( Task task : store ) {
-                data += task.toString() + "\n";
-            }
+            String data = taskList.dumpTasks();
+
             // Write the store to file
             writeHandle.write(data);
             writeHandle.close();
@@ -74,35 +72,7 @@ public class Storage {
         return false;
     }
 
-    public void addTask(Task task) {
-        store.add(task);
-    }
-
-    public void deleteTask(int taskIndex) {
-        if (taskIndex < 0 || taskIndex >= store.size()) {
-            throw new MissingTaskException();
-        }
-        Task task = store.remove(taskIndex);
-        System.out.println("Task deleted:");
-        System.out.println(task);
-    }
-    public void completeTask(Integer taskIndex) {
-        // If the task doesn't exist (It's index is missing)
-        if (taskIndex < 0 || taskIndex >= store.size()) {
-            throw new MissingTaskException();
-        }
-
-        // Set the task to done
-        Task task = store.get(taskIndex);
-        task.done();
-        System.out.println("Task marked as complete:");
-        System.out.println(task);
-    }
-
-    public void list() {
-        for (int i = 0; i < store.size(); i++) {
-            String listText = String.format("%d. %s", i + 1, store.get(i));
-            System.out.println(listText);
-        }
+    public TaskList getTaskList() {
+        return taskList;
     }
 }

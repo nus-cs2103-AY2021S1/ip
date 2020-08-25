@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class PersonalAssistant {
     private Storage store;
+    private TaskList tasks;
     private Scanner reader;
 
     /**
@@ -13,6 +14,7 @@ public class PersonalAssistant {
      */
     public PersonalAssistant() {
         store = new Storage();
+        tasks = store.getTaskList();
         reader = new Scanner(System.in);
     }
 
@@ -31,7 +33,7 @@ public class PersonalAssistant {
             // Tokenize the input
             String input = reader.nextLine();
 
-            Command command = Parser.parseLine(store, input);
+            Command command = Parser.parseLine(tasks, input);
             command.execute();
 
             // After every command, save to disk
