@@ -5,11 +5,14 @@ import task.Task;
 import command.Command;
 import data.DukeData;
 import data.DukeCommandSet;
+import data.TaskSave;
 
 import exception.IncorrectFormatException;
 import exception.InvalidIndexException;
 import exception.NoDescriptionException;
 import exception.UnknownCommandException;
+
+import java.io.IOException;
 
 public class DukeFunction {
 
@@ -103,5 +106,13 @@ public class DukeFunction {
                 System.out.println(exception.getMessage());
             }
         }
+    }
+
+    public static void loadSavedTasks() throws IOException {
+        DukeData.tasks = TaskSave.getInstance().getSavedTasks();
+    }
+
+    public static void saveCurrentTasks() throws IOException {
+        TaskSave.getInstance().saveTasks(DukeData.tasks);
     }
 }
