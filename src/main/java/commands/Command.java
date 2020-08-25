@@ -1,30 +1,21 @@
 package commands;
 
+import exceptions.DukeException;
 import exceptions.DukeInvalidParameterException;
 import exceptions.DukeUnrecognisedCommandException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import tasks.*;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.IntStream;
-import java.nio.file.Path;
 
 public enum Command {
     LIST {
         @Override
-        public String execute(HashMap<String, String> parameters, ArrayList<Task> tasks) throws DukeInvalidParameterException {
+        public String execute(HashMap<String, String> parameters, TaskList tasks) throws DukeInvalidParameterException {
             if (!parameters.isEmpty()) {
                 throw new DukeInvalidParameterException(strings.getString("error.list"), parameters);
             }
@@ -37,14 +28,13 @@ public enum Command {
     },
     DONE {
         @Override
-        public String execute(HashMap<String, String> parameters, ArrayList<Task> tasks) throws DukeInvalidParameterException {
+        public String execute(HashMap<String, String> parameters, TaskList tasks) throws DukeException {
             if (!parameters.containsKey("argument")) {
                 throw new DukeInvalidParameterException(strings.getString("error.done"), parameters);
             }
             try {
                 int toMark = Integer.parseInt(parameters.get("argument")) - 1;
-                tasks.get(toMark).markAsDone();
-                updateData(tasks);
+                tasks.markAsDone(toMark);
                 return String.format(strings.getString("output.done"), tasks.get(toMark)).strip();
             } catch (NumberFormatException e) {
                 throw new DukeInvalidParameterException(strings.getString("error.doneNum"), parameters);
@@ -55,7 +45,7 @@ public enum Command {
     },
     TODO {
         @Override
-        public String execute(HashMap<String, String> parameters, ArrayList<Task> tasks) throws DukeInvalidParameterException {
+        public String execute(HashMap<String, String> parameters, TaskList tasks) throws DukeException {
             if (parameters.isEmpty()) {
                 throw new DukeInvalidParameterException(strings.getString("error.todo"), parameters);
             }
@@ -65,13 +55,12 @@ public enum Command {
 
             Task toAdd = new Todo(parameters.get("argument"));
             tasks.add(toAdd);
-            updateData(tasks);
             return String.format(strings.getString("output.added"), toAdd, tasks.size());
         }
     },
     DEADLINE {
         @Override
-        public String execute(HashMap<String, String> parameters, ArrayList<Task> tasks) throws DukeInvalidParameterException {
+        public String execute(HashMap<String, String> parameters, TaskList tasks) throws DukeException {
             if (parameters.isEmpty() || !parameters.containsKey(strings.getString("parameter.by"))) {
                 throw new DukeInvalidParameterException(strings.getString("error.deadline"), parameters);
             }
@@ -81,7 +70,6 @@ public enum Command {
 
                 Task toAdd = new Deadline(parameters.get("argument"), deadline);
                 tasks.add(toAdd);
-                updateData(tasks);
                 return String.format(strings.getString("output.added"), toAdd, tasks.size());
 
             } catch (DateTimeParseException e) {
@@ -91,7 +79,7 @@ public enum Command {
     },
     EVENT {
         @Override
-        public String execute(HashMap<String, String> parameters, ArrayList<Task> tasks) throws DukeInvalidParameterException {
+        public String execute(HashMap<String, String> parameters, TaskList tasks) throws DukeException {
             if (parameters.isEmpty() || !parameters.containsKey(strings.getString("parameter.at"))) {
                 throw new DukeInvalidParameterException(strings.getString("error.event"), parameters);
             }
@@ -101,8 +89,6 @@ public enum Command {
 
                 Task toAdd = new Event(parameters.get("argument"), eventDate);
                 tasks.add(toAdd);
-                updateData(tasks);
-
                 return String.format(strings.getString("output.added"), toAdd, tasks.size());
 
             } catch (DateTimeParseException e) {
@@ -112,15 +98,13 @@ public enum Command {
     },
     DELETE {
         @Override
-        public String execute(HashMap<String, String> parameters, ArrayList<Task> tasks) throws DukeInvalidParameterException {
+        public String execute(HashMap<String, String> parameters, TaskList tasks) throws DukeException {
             if (!parameters.containsKey("argument")) {
                 throw new DukeInvalidParameterException(strings.getString("error.delete"), parameters);
             }
             try {
                 int toDelete = Integer.parseInt(parameters.get("argument")) - 1;
-                String ret = String.format(strings.getString("output.delete"), tasks.remove(toDelete), tasks.size()).strip();
-                updateData(tasks);
-                return ret;
+                return String.format(strings.getString("output.delete"), tasks.remove(toDelete), tasks.size()).strip();
             } catch (NumberFormatException e) {
                 throw new DukeInvalidParameterException(strings.getString("error.deleteNum"), parameters);
             } catch (IndexOutOfBoundsException e) {
@@ -130,35 +114,10 @@ public enum Command {
     },
     BYE {
         @Override
-        public String execute(HashMap<String, String> parameters, ArrayList<Task> tasks) {
+        public String execute(HashMap<String, String> parameters, TaskList tasks) {
             return strings.getString("output.bye");
         }
     };
-
-    protected void updateData(ArrayList<Task> tasks) {
-        //Solution below adapted from https://www.javatpoint.com/serialization-in-java
-        try {
-            Path dirPath = Paths.get("database");
-
-            File directory = new File(dirPath.normalize().toString());
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
-
-            FileOutputStream fileOut = new FileOutputStream(dirPath.normalize().toString()+ "/tasks.ser");
-
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-
-            out.writeObject(tasks);
-            out.flush();
-
-            out.close();
-            fileOut.close();
-        } catch (IOException i) {
-            i.printStackTrace();
-        }
-    }
-
 
     private static final ResourceBundle strings = ResourceBundle.getBundle("resources.StringsBundle", Locale.ENGLISH);
 
@@ -185,5 +144,5 @@ public enum Command {
         return ret;
     }
 
-    public abstract String execute(HashMap<String, String> parameters, ArrayList<Task> tasks) throws DukeInvalidParameterException;
+    public abstract String execute(HashMap<String, String> parameters, TaskList tasks) throws DukeException;
 }
