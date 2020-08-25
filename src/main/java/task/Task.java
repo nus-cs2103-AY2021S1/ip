@@ -19,7 +19,8 @@ public class Task {
      * @return Boolean of completion status.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2717"); // return tick or X symbols
+        // return tick or X symbols
+        return (isDone ? "\u2713" : "\u2717");
     }
 
     /**
