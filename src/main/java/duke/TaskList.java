@@ -6,6 +6,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.stream.Collectors;
+
 /**
  * Represents a list of tasks that can be added, deleted, or set as done.
  */
@@ -42,6 +44,16 @@ public class TaskList {
      */
     public int size() {
         return this.tasks.size();
+    }
+
+    /**
+     * Returns a filtered list of tasks according to the given keyword.
+     * @param key keyword of the find command.
+     * @return filtered list of tasks.
+     */
+    public List<Task> find(String key) {
+        return this.tasks.stream().filter(task -> task.getDesc().contains(key))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -102,7 +114,7 @@ public class TaskList {
 
     /**
      * Add a deadline or event task to the list with a date and time.
-     * 
+     *
      * @param type type of the task.
      * @param desc description of the task.
      * @param date date of the task.

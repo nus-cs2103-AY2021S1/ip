@@ -26,6 +26,9 @@ public class Parser {
                 return new Command("bye");
             case "list":
                 return new Command("list");
+            case "find":
+                String key = input.substring(input.indexOf(' ') + 1);
+                return new Command("find" , key);
             case "done":
                 int idx = Integer.parseInt(input.split(" ")[1]) - 1;
                 return new Command("done" , idx);

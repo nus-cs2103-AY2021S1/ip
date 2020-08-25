@@ -111,6 +111,9 @@ public class Command {
         case "list":
             ui.onList(tasks.getList());
             break;
+        case "find":
+            ui.onFind(tasks.find(this.desc));
+            break;
         case "done":
             if (this.idx >= tasks.size()) {
                 throw new DukeException("Oh dear! That task doesn't exist!");

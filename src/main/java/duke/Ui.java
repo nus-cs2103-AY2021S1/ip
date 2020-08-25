@@ -60,6 +60,21 @@ public class Ui {
     }
 
     /**
+     * Prints the set output whenever a find command is executed.
+     *
+     * @param tasks a list of tasks.
+     */
+    public void onFind(List<Task> tasks) {
+        int id = 1;
+        StringBuilder output = new StringBuilder("Here are the matching tasks in your list:");
+        for (Task task : tasks) {
+            output.append("\n").append(tab).append(id).append(". ").append(task);
+            id++;
+        }
+        chatPrint(output.toString());
+    }
+
+    /**
      * Prints the set output whenever a task is done.
      *
      * @param task a done task.

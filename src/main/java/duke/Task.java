@@ -30,6 +30,15 @@ public class Task {
     }
 
     /**
+     * Gets the description of this task.
+     *
+     * @return description of task.
+     */
+    public String getDesc() {
+        return this.desc;
+    }
+
+    /**
      * Sets this task as done.
      *
      * @return task set as done.
