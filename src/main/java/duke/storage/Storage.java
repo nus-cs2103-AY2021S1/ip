@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.Duke;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -95,7 +96,7 @@ public class Storage {
 
         // writes fileString to .txt file
         try {
-            writeToFile("/Users/tengjianling/ip/data/duke.txt", textToAdd);
+            writeToFile(Duke.FILENAME, textToAdd);
         } catch (IOException e) {
             System.out.println("Oops, something went wrong: " + e.getMessage());
         }

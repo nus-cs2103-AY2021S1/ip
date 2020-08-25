@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Duke;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
@@ -31,7 +32,7 @@ public class DeleteCommand extends Command {
         fileString = fileString.replace(taskToBeDeleted + "\n", "");
 
         // saves fileString to txt file
-        Storage.save("/Users/tengjianling/ip/data/duke.txt", fileString);
+        Storage.save(Duke.FILENAME, fileString);
     }
 }
 

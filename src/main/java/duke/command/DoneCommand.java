@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Duke;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
@@ -29,7 +30,7 @@ public class DoneCommand extends Command {
         fileString = fileString.replace(beforeDone, afterDone);
 
         // saves fileString to txt file
-        Storage.save("/Users/tengjianling/ip/data/duke.txt", fileString);
+        Storage.save(Duke.FILENAME, fileString);
 
         System.out.println("    Nice! I've marked this task as done:\n"
                 + "        " + tasks.get(taskNumber - 1));
