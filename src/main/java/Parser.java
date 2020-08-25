@@ -15,6 +15,8 @@ public class Parser {
             return new Command(line, "event");
         } else if (line.indexOf("done") == 0 || line.equals("bye") || line.equals("list")) {
             return new Command(line, line);
+        } else if (line.indexOf("find") == 0) {
+            return new Command(line, "find");
         } else {
             return new Command(line, null);
         }

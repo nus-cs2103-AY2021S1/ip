@@ -32,8 +32,6 @@ public class Duke {
                 Command nextCommand = parser.interpret(input);
                 nextCommand.execute(taskList, ui);
                 isEnd = nextCommand.isEnd();
-            } catch (IOException e) {
-                ui.showError(e);
             } catch (DukeException e) {
                 ui.showError(e);
             }

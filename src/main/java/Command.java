@@ -1,5 +1,7 @@
 package main.java;
 
+import java.util.ArrayList;
+
 public class Command {
     private String task;
     private String action;
@@ -39,6 +41,23 @@ public class Command {
         } else if (action.equals("event")) {
             taskList.addEvent(task);
             ui.showAdded();
+        } else if (action.equals("find")) {
+            String[] split = task.split("find ");
+            String toFind = split[1];
+            ArrayList<Task> list = taskList.getList();
+            ArrayList<Task> filtered = new ArrayList<>();
+            if(list.size() == 0) {
+                System.out.println("You do not have any tasks yet");
+            } else {
+                System.out.println("Here are the tasks that matches '" + toFind + "'");
+                for (int i = 0; i < list.size(); i++) {
+                    String task = list.get(i).toString();
+                    if (task.contains(toFind)) {
+                        filtered.add(list.get(i));
+                    }
+                }
+                ui.showList(filtered);
+            }
         } else {
             ui.showInvalidCommand();
         }
