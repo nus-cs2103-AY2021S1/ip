@@ -61,7 +61,7 @@ public class TaskManager {
         String completedTasks = Colour.Green(getCompletedTasks()
                 + (isPluralCompletedTasks ? " tasks" : " task"));
         String uncompletedTasks = Colour.Red(getUncompletedTasks()
-                + (isPluralUncompletedTasks ? " tasks." : "task"));
+                + (isPluralUncompletedTasks ? " tasks." : " task"));
         stringBuilder.append("You have completed " + completedTasks + " and have yet to complete "
                 + uncompletedTasks);
         return stringBuilder.toString();
