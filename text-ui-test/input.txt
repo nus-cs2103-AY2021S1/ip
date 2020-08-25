@@ -31,6 +31,12 @@ event task 3 /at abcd-01-31 2359
 event task 3 /at 1967-01-31 abcd
 event task 3 /at 1967-01-31 3560
 event task 3 /at 1967-01-31 1400
+find
+find 1
+find 2
+find 3
+find task
+find abc123
 blah
 list
 delete

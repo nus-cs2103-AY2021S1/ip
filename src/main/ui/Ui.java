@@ -37,6 +37,22 @@ public class Ui {
         System.out.print(SEPARATOR);
     }
 
+    /**
+     * Prints out the tasks found via the find command.
+     * @param tasks the tasks found via the find command.
+     */
+    public void printFoundList(TaskList tasks) {
+        if (tasks.size() == 0) {
+            System.out.println("     There are no tasks found!");
+        } else {
+            System.out.println("     Here are the matching tasks in your list:");
+        }
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.printf("     %d.%s\n", i + 1, tasks.get(i));
+        }
+        System.out.print(SEPARATOR);
+    }
+
     public void printAddSuccess(Task task, int taskNum) {
         boolean isSingular = taskNum == 1;
         System.out.printf("     Got it. I've added this task:\n"

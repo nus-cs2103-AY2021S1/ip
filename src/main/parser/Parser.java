@@ -11,6 +11,7 @@ import main.command.DeleteCommand;
 import main.command.DoneCommand;
 import main.command.ExitCommand;
 import main.command.ListCommand;
+import main.command.FindCommand;
 import main.exception.InvalidDateException;
 import main.exception.InvalidDeadlineFormatException;
 import main.exception.InvalidEventFormatException;
@@ -26,6 +27,7 @@ public class Parser {
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
     private static final String DELETE_COMMAND = "delete";
+    private static final String COMMAND_FIND = "find";
 
     private static LocalDateTime toDateTime(String dateTime) throws InvalidDateException {
         String[] dateTimeSplit = dateTime.split(" ");
@@ -113,6 +115,11 @@ public class Parser {
         case EVENT_COMMAND:
             if (isSingleArgument) throw new EmptyMessageException(command);
             return parseAdd(input);
+        case COMMAND_FIND:
+            if (isSingleArgument) {
+                return new FindCommand("");
+            }
+            return new FindCommand(input[1]);
         default:
             throw new UnknownCommandException();
         }
