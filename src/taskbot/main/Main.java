@@ -1,8 +1,9 @@
 package taskbot.main;
 
 import taskbot.command.Command;
-import taskbot.Parser.Parser;
+import taskbot.parser.Parser;
 import taskbot.exceptions.TaskbotException;
+import taskbot.storage.Storage;
 import taskbot.ui.Ui;
 
 import taskbot.task.TaskList;
@@ -19,7 +20,8 @@ public class Main {
 
         //Prints the title to the console and greets the user
         ui.printTitle();
-        TaskList taskList = new TaskList();
+        Storage storage = new Storage(System.getProperty("user.dir"));
+        TaskList taskList = new TaskList(storage);
         ui.greet();
 
         //Exit condition

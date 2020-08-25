@@ -2,7 +2,6 @@ package taskbot.storage;
 
 import java.io.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import java.nio.file.Path;
@@ -16,16 +15,25 @@ public class Storage {
     /**
      * Creates a new Storage
      */
-    public Storage() {
-        tasks = new ArrayList<Task>();
+    public Storage(String dirPath) {
+        tasks = new ArrayList<>();
         //Path of project directory
-        this.dirPath = System.getProperty("user.dir");
+        this.dirPath = dirPath;
 
         //Outputs message from searching database
         System.out.println(createStorage());
 
         //Loads tasks from file into tasks array
         loadTasks();
+    }
+
+    public ArrayList<Task> getTasksList() {
+        return tasks;
+    }
+
+    public void setTasksList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+        saveTasks();
     }
 
     /**
@@ -64,19 +72,10 @@ public class Storage {
         return "Unexpected Error.";
     }
 
-    public ArrayList<Task> getTasksList() {
-        return tasks;
-    }
-
-    public void setTasksList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
-        saveTasks();
-    }
-
     /**
      * Loads tasks from the database
      */
-    public void loadTasks() {
+    private void loadTasks() {
         try {
             //Makes new file instance
             Path filePath = Paths.get(dirPath, "data", "tasks.txt");
@@ -131,7 +130,7 @@ public class Storage {
     /**
      * Writes the tasks to the database
      */
-    public void saveTasks() {
+    private void saveTasks() {
         //Makes new file instance
         Path filePath = Paths.get(dirPath, "data", "tasks.txt");
         try {

@@ -1,30 +1,46 @@
 package taskbot.task;
 
-import taskbot.exceptions.InvalidDateTimeException;
-import taskbot.exceptions.InvalidIndexException;
-import taskbot.exceptions.TaskAlreadyCompleteException;
-import taskbot.exceptions.WrongFormatException;
-import taskbot.storage.Storage;
+import java.util.ArrayList;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
+
+import taskbot.storage.Storage;
+
+import taskbot.exceptions.InvalidDateTimeException;
+import taskbot.exceptions.InvalidIndexException;
+import taskbot.exceptions.TaskAlreadyCompleteException;
+import taskbot.exceptions.WrongFormatException;
 
 /**
- * Contains the task list.
+ * Encapsulates the task list.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
     private Storage storage;
     /**
-     * Creates a task list
+     * Creates a task list.
+     *
+     * @param storage The database to retrieve the task list.
      */
-    public TaskList() {
-        this.storage = new Storage();
+    public TaskList(Storage storage) {
+        this.storage = storage;
         this.tasks = storage.getTasksList();
+    }
+
+    /**
+     * Creates a task list given the task list.
+     * This constructor is to be used for
+     * testing purposes only.
+     *
+     * @param tasks The task list to initialize with.
+     */
+    public TaskList(ArrayList<Task> tasks) {
+        this.storage = null;
+        this.tasks = tasks;
     }
 
     /**
@@ -47,7 +63,14 @@ public class TaskList {
         sb.append(size).append(". ").append(tasks.get(size - 1));
 
         //Prints the string
-        System.out.println(sb.toString());
+        System.out.print(sb.toString());
+    }
+
+    /**
+     * Informs the user of the number of tasks in the current list
+     */
+    public String listTaskSize() {
+        return "You now have " + tasks.size() + " task(s) in the list.";
     }
 
     /**
@@ -60,7 +83,9 @@ public class TaskList {
         //Adds the new task to the list
         tasks.add(newTask);
         //Update the storage
-        storage.setTasksList(tasks);
+        if (storage != null) {
+            storage.setTasksList(tasks);
+        }
         //Informs the user that the task has been added
         System.out.println("I have added a Todo:\n" + newTask +
                 "\n" + listTaskSize());
@@ -85,7 +110,9 @@ public class TaskList {
         tasks.add(newTask);
 
         //Update the storage
-        storage.setTasksList(tasks);
+        if (storage != null) {
+            storage.setTasksList(tasks);
+        }
 
         //Informs the user that the task has been added
         System.out.println("I have added an Event:\n" + newTask +
@@ -111,17 +138,20 @@ public class TaskList {
         tasks.add(newTask);
 
         //Update the storage
-        storage.setTasksList(tasks);
+        if (storage != null) {
+            storage.setTasksList(tasks);
+        }
 
         //Informs the user that the task has been added
         System.out.println("I have added a Deadline:\n" + newTask +
                 "\n" + listTaskSize());
     }
+
     /**
      * Checks if the given dateTime is valid.
      * @param str Localized date and time.
      */
-    public LocalDateTime parseDateTime(String str) throws InvalidDateTimeException {
+    private LocalDateTime parseDateTime(String str) throws InvalidDateTimeException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             return LocalDateTime.parse(str, formatter);
@@ -129,13 +159,6 @@ public class TaskList {
             throw new InvalidDateTimeException("Invalid format of date and time.\n" +
                     "Please follow the format: YYYY-mm-dd hhmm");
         }
-    }
-
-    /**
-     * Informs the user of the number of tasks in the current list
-     */
-    public String listTaskSize() {
-        return "You now have " + tasks.size() + " task(s) in the list";
     }
 
     /**
@@ -149,7 +172,9 @@ public class TaskList {
             }
             tasks.get(taskIndex).completeTask();
             //Update the storage
-            storage.setTasksList(tasks);
+            if (storage != null) {
+                storage.setTasksList(tasks);
+            }
             String message = "Understood. The following task is now marked as done:\n";
             message += "    " + tasks.get(taskIndex);
             System.out.println(message);
@@ -172,7 +197,9 @@ public class TaskList {
             message += "    " + tasks.get(taskIndex) + "\n";
             tasks.remove(taskIndex);
             //Update the storage
-            storage.setTasksList(tasks);
+            if (storage != null) {
+                storage.setTasksList(tasks);
+            }
             message += listTaskSize();
             System.out.println(message);
         } catch (IndexOutOfBoundsException e) {
@@ -199,12 +226,8 @@ public class TaskList {
         //Builds the list of tasks
         for (int i = 0; i < size; i++) {
             Task task = tasks.get(i);
-            if (task instanceof Deadline) {
-                if (((Deadline) task).getBy().isAfter(threshold)) {
-                    continue;
-                }
-            } else if (task instanceof Event) {
-                if (((Event) task).getAt().isAfter(threshold)) {
+            if (task instanceof TimedTask) {
+                if (((TimedTask) task).getTime().isAfter(threshold)) {
                     continue;
                 }
             }

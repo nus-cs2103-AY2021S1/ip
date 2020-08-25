@@ -1,9 +1,7 @@
 package taskbot.command;
 
-import taskbot.exceptions.InvalidIndexException;
-import taskbot.exceptions.TaskAlreadyCompleteException;
 import taskbot.exceptions.TaskbotException;
-import taskbot.exceptions.WrongFormatException;
+
 import taskbot.task.TaskList;
 import taskbot.ui.Ui;
 
