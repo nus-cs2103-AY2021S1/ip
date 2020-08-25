@@ -1,6 +1,16 @@
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
+
+import java.io.IOException;
+import java.io.FileNotFoundException;
+
+import java.time.format.DateTimeParseException;
 
 public class TodoList {
     private static ArrayList<Task> todoList = new ArrayList<>();
@@ -135,6 +145,8 @@ public class TodoList {
             } catch (IndexOutOfBoundsException error) {
                 // When "done is followed by a number that is out of range
                 throw new DukeException("OOPS!!! That index is out of range!");
+            } catch (DateTimeParseException e) {
+                throw new DukeException("OOPS!!! Please enter the date in yyyy-mm-dd format!");
             }
         } catch (DukeException error) {
             System.out.println(error.getMessage());
