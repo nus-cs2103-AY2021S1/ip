@@ -3,7 +3,7 @@ package duke.task;
 //@@author CS2103T-week2-project-task3
 //Reused from https://nus-cs2103-ay2021s1.github.io/website/schedule/week2/project.html
 public abstract class Task {
-    protected String description;
+    private String description;
     protected boolean isDone;
 
     public Task(String description) {
@@ -33,5 +33,9 @@ public abstract class Task {
     public String toStoredTextString() {
         String done = (isDone) ? "1" : "0";
         return done + " | " + description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

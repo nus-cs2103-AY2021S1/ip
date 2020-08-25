@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -90,5 +91,19 @@ public class Ui {
 
     public String readInput() {
         return scanner.nextLine();
+    }
+
+    public void printFoundTasks(ArrayList<Task> foundTasks) {
+        String printedList = "";
+        if (foundTasks.size() > 0) {
+            printedList = "Here are the matching tasks in your list: \n";
+            for (int i = 0; i < foundTasks.size(); i++) {
+                String lineItem = (i + 1) + ". " + foundTasks.get(i) + "\n";
+                printedList = printedList + lineItem;
+            }
+        } else {
+            printedList = "No such keyword exists in the tasks in your list.\n";
+        }
+        System.out.println(formatString(printedList));
     }
 }

@@ -28,6 +28,13 @@ public class Parser {
             case "list":
                 return new ListCommand();
 
+            case "find":
+                if (userInput.length() < 2) {
+                    throw new DukeException("Please enter a keyword to find\n");
+                }
+                String keyword = userInput.substring(5);
+                return new FindCommand(keyword);
+
             case "done":
             case "delete":
                 if (userInputArr.length < 2) {
