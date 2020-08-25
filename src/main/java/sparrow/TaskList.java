@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Encapsulates task list with operations to be carried out on list.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
@@ -19,6 +22,9 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Displays current tasks in list to user.
+     */
     public void displayList() {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list: \n");
         for (int i = 0; i < tasks.size(); i++) {
@@ -27,6 +33,12 @@ public class TaskList {
         }
         Ui.reply(sb.toString());
     }
+
+    /**
+     * Adds a task to task list.
+     * @param type Type of Task to be added.
+     * @param details Description of Task.
+     */
     public void addTask(String type, String details) {
         StringBuilder sb = new StringBuilder("Aye Aye Captain! I've added this task:\n  ");
         try {
@@ -76,6 +88,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns a task list matching the inputted date filter.
+     * @param dateFilter User's command and date to filter by.
+     * @return Filtered list based on input.
+     * @throws DateTimeParseException if date passed cannot be converted to a LocalDate object.
+     */
     public ArrayList<Task> filterList(String dateFilter) throws DateTimeParseException {
         String[] dateArr = dateFilter.trim().split("\\s+", 2);
         LocalDate dateToCompare = Sparrow.stringToDate(dateArr[1]);
@@ -123,6 +141,11 @@ public class TaskList {
         }
         return filteredList;
     }
+
+    /**
+     * Marks a task in the task list as completed.
+     * @param taskNum Task number corresponding to completed task.
+     */
     public void markAsDone(String taskNum) {
         try {
             int taskNumber = Integer.parseInt(taskNum);
@@ -136,6 +159,11 @@ public class TaskList {
             System.out.println("Please enter a valid task number.");
         }
     }
+
+    /**
+     * Delets a task from the task list.
+     * @param taskNum Task number corresponding to the task to be deleted.
+     */
     public void deleteTask(String taskNum) {
         try {
             int taskNumber = Integer.parseInt(taskNum);

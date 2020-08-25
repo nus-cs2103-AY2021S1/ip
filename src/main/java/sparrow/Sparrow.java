@@ -40,13 +40,20 @@ public class Sparrow {
         sc.close();
     }
 
-
+    /**
+     * Returns emoji to be pre-pended to an exception message.
+     * @return Pre-exception string.
+     */
     public static String standardExceptionMessage() {
         return "ARR!\uD83C\uDFF4\u200D\u2620\uFE0F️ ";
     }
 
-
-
+    /**
+     * Converts String representation of date to LocalDate.
+     * @param dateStr String representation of a date.
+     * @return LocalDate object.
+     * @throws DateTimeParseException
+     */
     public static LocalDate stringToDate(String dateStr) throws DateTimeParseException {
         return LocalDate.parse(dateStr);
     }

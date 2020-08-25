@@ -2,8 +2,14 @@ package sparrow;
 
 import java.util.Scanner;
 
+/**
+ * Responsible for sending messages to the user.
+ */
 public class Ui {
 
+    /**
+     * Welcomes the user to the program.
+     */
     public static void greet() {
         String welcome = "  _  _ _   ___ _                    \n" +
                 " | || (_) |_ _( )_ __               \n" +
@@ -17,6 +23,10 @@ public class Ui {
         reply("How can I help ye?");
     }
 
+    /**
+     * Sends a reply to the user in a standard format.
+     * @param message Reply to be formatted.
+     */
     public static void reply(String message) {
         System.out.println("    ________________________________________");
         Scanner sc = new Scanner(message);

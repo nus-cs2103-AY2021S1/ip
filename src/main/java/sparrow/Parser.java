@@ -2,14 +2,29 @@ package sparrow;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses user input and calls the relevant methods.
+ */
 public class Parser {
     private TaskList tasks;
     private Storage storage;
 
+    /**
+     * Creates a Parser that handles user input.
+     * @param tasks TaskList for methods to be called on
+     * @param storage Storage and retrieval of TaskList
+     */
     public Parser(TaskList tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
     }
+
+    /**
+     * Returns boolean to tell program whether to exit.
+     * Parses a line of user input and calls relevant methods.
+     * @param commandLine entire line of user input to be handled
+     * @return whether to exit program
+     */
     public boolean parse(String commandLine) {
         String[] commandArr = commandLine.trim().split("\\s+", 2);
         String command = commandArr[0];

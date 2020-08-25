@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the file used to store the task list.
+ */
 public class Storage {
     private String filePath;
 
@@ -15,6 +18,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns list of tasks loaded from hard disk.
+     * If no file found, returns an empty list.
+     * @return Task list.
+     */
     public ArrayList<Task> loadFromFile() {
         ArrayList<Task> tasks = new ArrayList<>();
         // check if directory and file exist
@@ -43,6 +51,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Converts user input into a Task.
+     * @param input user input to be converted.
+     * @return Task object
+     */
     public Task stringToTask(String input) {
         Task task = null;
         String[] inputArr = input.split("\\s+\\|\\s+", 4);
@@ -81,6 +94,11 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Converts a Task into a String for storage.
+     * @param task Task to be converted.
+     * @return String representation of Task.
+     */
     public String taskToString(Task task) {
         StringBuilder sb = new StringBuilder(task.getDescription());
         if (task.getIsDone()) {
@@ -104,6 +122,10 @@ public class Storage {
         return sb.toString();
     }
 
+    /**
+     * Saves specified task list to the hard disk.
+     * @param taskList Task list to be saved.
+     */
     public void saveTaskList(ArrayList<Task> taskList) {
         try {
             FileWriter fw = new FileWriter("data/sparrow.Sparrow.txt");
