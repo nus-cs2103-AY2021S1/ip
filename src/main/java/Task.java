@@ -65,6 +65,7 @@ public class Task {
      * Marks a task as completed by setting completion flag to true.
      */
     public void markAsDone() {
+
         isDone = true;
     }
 
