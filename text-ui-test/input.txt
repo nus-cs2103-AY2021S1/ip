@@ -1,3 +1,31 @@
-list
-deadline hi /by 2019-01-01
 clear
+list
+todo study for exams
+todo buy food
+list
+done 1
+done oops type wrong
+done 69
+todo pray
+deadline CS2103 /by 20 August 2020
+deadline final assignment /by 19 September 2020
+deadline /by
+event run /at Utown 10pm
+event run at Utown 10pm
+event gym /at Utown 10pm
+event run /at
+event dance /at school
+list
+delete 3
+todo
+deadline
+event
+blah
+done 2
+done 4
+list
+delete 4
+delete 1
+delete
+clear
+bye

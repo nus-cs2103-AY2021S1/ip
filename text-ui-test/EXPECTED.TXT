@@ -1,0 +1,100 @@
+Konichiwa! Welcome to Kaizen
+I am Kai, what can I do for you today?
+
+All your tasks have been removed!
+
+No tasks at the moment! Good job!
+
+Hai! I have added this task to your list:
+[TODO] [✘] study for exams
+You now have 1 tasks in your list. Gambatte!
+
+Hai! I have added this task to your list:
+[TODO] [✘] buy food
+You now have 2 tasks in your list. Gambatte!
+
+Here are your tasks!
+1. [TODO] [✘] study for exams
+2. [TODO] [✘] buy food
+
+Sugoi! This task is done!
+[TODO] [✓] study for exams
+
+oops type wrong is not an integer!
+
+Sorry, no such task to mark as done!
+
+Hai! I have added this task to your list:
+[TODO] [✘] pray
+You now have 3 tasks in your list. Gambatte!
+
+NANI??! Enter a valid date and time(optional).
+Date should be: yyyy-mm-dd.
+Time should be HH:mm
+NANI??! Enter a valid date and time(optional).
+Date should be: yyyy-mm-dd.
+Time should be HH:mm
+NANI??! Enter your deadline name & a date and time(optional) (e.g. 2020-01-30 18:30)!
+
+Hai! I have added this task to your list:
+[EVENT] [✘] run (at: Utown 10pm)
+You now have 4 tasks in your list. Gambatte!
+
+Please enter a valid event! Remember to add '/at'
+
+Hai! I have added this task to your list:
+[EVENT] [✘] gym (at: Utown 10pm)
+You now have 5 tasks in your list. Gambatte!
+
+NANI??! Enter your event name & an event timing!
+
+Hai! I have added this task to your list:
+[EVENT] [✘] dance (at: school)
+You now have 6 tasks in your list. Gambatte!
+
+Here are your tasks!
+1. [TODO] [✓] study for exams
+2. [TODO] [✘] buy food
+3. [TODO] [✘] pray
+4. [EVENT] [✘] run (at: Utown 10pm)
+5. [EVENT] [✘] gym (at: Utown 10pm)
+6. [EVENT] [✘] dance (at: school)
+
+Hai! This task has been deleted!
+[TODO] [✘] pray
+You now have 5 tasks in your list. Gambatte!
+
+NANI??! Enter a description for your todo!
+
+NANI??! Enter a description for your deadline!
+
+NANI??! Enter a description for your event!
+
+NANI??! Please say something that I can understand!
+
+Sugoi! This task is done!
+[TODO] [✓] buy food
+
+Sugoi! This task is done!
+[EVENT] [✓] gym (at: Utown 10pm)
+
+Here are your tasks!
+1. [TODO] [✓] study for exams
+2. [TODO] [✓] buy food
+3. [EVENT] [✘] run (at: Utown 10pm)
+4. [EVENT] [✓] gym (at: Utown 10pm)
+5. [EVENT] [✘] dance (at: school)
+
+Hai! This task has been deleted!
+[EVENT] [✓] gym (at: Utown 10pm)
+You now have 4 tasks in your list. Gambatte!
+
+Hai! This task has been deleted!
+[TODO] [✓] study for exams
+You now have 3 tasks in your list. Gambatte!
+
+Which task do you want to delete? Please key in the task number!
+
+All your tasks have been removed!
+
+Sayonara! See you again my friend!
