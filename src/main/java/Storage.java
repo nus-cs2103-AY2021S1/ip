@@ -20,7 +20,7 @@ public class Storage {
         this.file = new File(filePath);
     }
 
-    public ArrayList<Task> readFromFile() {
+    public ArrayList<Task> readFromFile() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             if (!this.folder.exists()) {
@@ -72,13 +72,15 @@ public class Storage {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("File is empty when loading");
         }
         return tasks;
     }
 
     public void appendToFile(String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(this.file, true); // create a FileWriter in append mode
-        fw.write(textToAppend);
+        fw.write(textToAppend + "\n");
         fw.close();
     }
 
@@ -88,10 +90,10 @@ public class Storage {
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             if (i == 0) {
-                fw.write(task.toText());
+                fw.write(task.toText() + "\n");
                 fw.close();
             } else {
-                appendToFile("\n" + task.toText());
+                appendToFile(task.toText());
             }
         }
     }
