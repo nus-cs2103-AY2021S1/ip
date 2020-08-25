@@ -75,6 +75,12 @@ public class Luke {
         }
     }
 
+    /**
+     * Creates a Todo object with the given input.
+     *
+     * @param input description of the Todo object
+     * @return the todo object with the given input
+     */
     private static Todo createTodo(String input) throws EmptyTodoException {
         String todo = input.replaceAll("todo ", "");
         if (input.equals("todo") || input.equals("todo ")) {
@@ -84,6 +90,12 @@ public class Luke {
         }
     }
 
+    /**
+     * Creates a Deadline object with the given input.
+     *
+     * @param input description of the Deadline object
+     * @return the Deadline object with the given input
+     */
     private static Deadline createDeadline(String input) throws EmptyDeadlineException, InvalidDeadlineException {
         String[] deadline = input.split("deadline | /by ");
         if (input.equals("deadline") || input.equals("deadline ")) {
@@ -95,6 +107,12 @@ public class Luke {
         }
     }
 
+    /**
+     * Creates a Event object with the given input.
+     *
+     * @param input description of the Event object
+     * @return the Event object with the given input
+     */
     private static Event createEvent(String input) throws EmptyEventException, InvalidEventException {
         String[] event = input.split("event | /at ");
         if (input.equals("event") || input.equals("event ")) {
