@@ -42,6 +42,11 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    public boolean clearList() {
+        this.store = new ArrayList<>();
+        return true;
+    }
+
     public String listItems() {
         String list = "Here are the tasks in your list:\n";
         for (int i = 0; i < this.store.size(); i++) {

@@ -52,8 +52,12 @@ public class Parser {
             }
         case DELETE:
             try {
-                int index = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
-                return new DeleteCommand(index);
+                if (fullCommand.toLowerCase().contains("all")) {
+                    return new DeleteAllCommand();
+                } else {
+                    int index = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
+                    return new DeleteCommand(index);
+                }
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("What do you want to remove exactly?");
             } catch (NumberFormatException e) {

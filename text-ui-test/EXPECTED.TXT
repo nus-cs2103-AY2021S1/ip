@@ -1,10 +1,11 @@
     ________________________________________________________
-     I think I lost my memory... Let me start afresh.
+     Konnichiwa!
+     What can I do for you?
     ________________________________________________________
 
     ________________________________________________________
-     Konnichiwa!
-     What can I do for you?
+     I've cleared all your tasks.
+     You sure are efficient.
     ________________________________________________________
 
     ________________________________________________________
@@ -47,32 +48,31 @@
     ________________________________________________________
 
     ________________________________________________________
-     Nice! I've marked this task as complete:
-       [T][✓] borrow book
+     Gomen nasai~ Wakarimasen~
     ________________________________________________________
 
     ________________________________________________________
      Here are the tasks in your list:
-     1.[T][✓] borrow book
+     1.[T][✘] borrow book
      2.[T][✘] read book
      3.[D][✘] return book (by: 14 Aug 2019)
      4.[E][✘] celebrate birthday (at: 22 Aug 2020 10:00)
     ________________________________________________________
 
     ________________________________________________________
-     Gomen nasai~ I couldn't find that task. Are you trying to make 2020 worse?
+     Gomen nasai~ Wakarimasen~
     ________________________________________________________
 
     ________________________________________________________
      Here are the tasks in your list:
-     1.[T][✓] borrow book
+     1.[T][✘] borrow book
      2.[T][✘] read book
      3.[D][✘] return book (by: 14 Aug 2019)
      4.[E][✘] celebrate birthday (at: 22 Aug 2020 10:00)
     ________________________________________________________
 
     ________________________________________________________
-     Gomen nasai~ I couldn't find that task. Are you trying to make 2020 worse?
+     Gomen nasai~ Wakarimasen~
     ________________________________________________________
 
     ________________________________________________________
@@ -97,7 +97,7 @@
 
     ________________________________________________________
      Here are the tasks in your list:
-     1.[T][✓] borrow book
+     1.[T][✘] borrow book
      2.[T][✘] read book
      3.[D][✘] return book (by: 14 Aug 2019)
      4.[E][✘] celebrate birthday (at: 22 Aug 2020 10:00)
@@ -119,7 +119,7 @@
 
     ________________________________________________________
      Here are the tasks in your list:
-     1.[T][✓] borrow book
+     1.[T][✘] borrow book
      2.[T][✘] read book
      3.[E][✘] celebrate birthday (at: 22 Aug 2020 10:00)
     ________________________________________________________
