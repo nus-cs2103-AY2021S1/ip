@@ -5,10 +5,18 @@ import java.nio.file.Paths;
 
 public class Storage {
 
+    /** TaskList class that stores and deals with the tasks **/
     private TaskList taskList;
+    /** Parser class that parse and deal with the commands given **/
     private Parser parser;
+    /** Path to where the file is stored **/
     private Path storageFilePath;
 
+    /**
+     *Class constructor
+     *
+     * @throws DukeException If the file is unable to be opened
+     */
     public Storage(TaskList taskList, Parser parser) throws DukeException {
         this.taskList = taskList;
         this.parser = parser;
@@ -28,6 +36,12 @@ public class Storage {
         LoadFile();
     }
 
+    /**
+     * Open and read the stored tasks from the hard drive
+     * add the stored tasks to taskList
+     *
+     * @throws DukeException If the file is unable to be opened
+     */
     public void LoadFile() throws DukeException {
         try {
             BufferedReader bf = new BufferedReader(new FileReader(storageFilePath.toString()));
@@ -75,6 +89,11 @@ public class Storage {
 
     }
 
+    /**
+     * Write the stored tasks in taskList into a file stored in the hard drive
+     *
+     * @throws DukeException If the tasks are unable to be saved into the file
+     */
     public void saveFile() throws DukeException{
         try {
             FileWriter fw = new FileWriter(storageFilePath.toString());

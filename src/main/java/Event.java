@@ -4,7 +4,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 public class Event extends Task {
 
+    /** Date of the task **/
     protected LocalDate atDate;
+    /** Time of the task **/
     protected LocalTime atTime;
 
     private Event(String taskName, String taskDateTime) throws DukeException {
@@ -13,6 +15,13 @@ public class Event extends Task {
         parseTime(taskDateTime.trim().replace("/", "-"));
     }
 
+    /**
+     * Creates Event task
+     *
+     * @param taskDescription description of the task
+     * @return Event task
+     * @throws DukeException if the format of the task description is wrong
+     */
     public static Event create(String taskDescription) throws DukeException{
         if(!taskDescription.contains("/at")){
             throw new DukeException("Please include '/at' in front of the event time period");
@@ -29,6 +38,13 @@ public class Event extends Task {
     }
 
 
+    /**
+     * Converts string date/time in LocalDate and LocalTime
+     * Stores them into the LocalDate and LocalTime variable
+     *
+     * @param taskDateTime the string representation of the time and date
+     * @throws DukeException if the format of the task date/time is wrong
+     */
     private void parseTime(String taskDateTime) throws DukeException {
         String[] dateTime = taskDateTime.replace("/","-").split(" ",2);
         try{
@@ -46,6 +62,12 @@ public class Event extends Task {
         }
     }
 
+
+    /**
+     * return the summarised form of the task
+     *
+     * @return String format of the summarised details of the task
+     */
     @Override
     public String toString(){
         String symbol = isDone ? "\u2713" : "\u2718";
@@ -58,6 +80,12 @@ public class Event extends Task {
         }
     }
 
+
+    /**
+     * return the summarised form of the task in the format to be saved
+     *
+     * @return String format of the summarised details of the task to be saved
+     */
     @Override
     public String safeFileFormat(){
         int done = isDone ? 1 : 0;

@@ -1,11 +1,21 @@
 public class Parser {
 
+    /** TaskList class that stores and deals with the tasks **/
     private TaskList taskList;
 
+    /**
+     *Class constructor
+     *
+     */
     public Parser(TaskList taskList){
         this.taskList = taskList;
     }
 
+    /**
+     * Parse the inputs and carry out the respective commands
+     *
+     * @param inputs the array of command and taskDescription obtain from user
+     */
     public void ParseCommand(String[] inputs) {
 
         try {
@@ -60,6 +70,12 @@ public class Parser {
         }
     }
 
+
+    /**
+     * convert string command into enum Command
+     *
+     * @param commandInput command from the user
+     */
     public Commands GetCommand(String commandInput){
         Commands command;
         try{
