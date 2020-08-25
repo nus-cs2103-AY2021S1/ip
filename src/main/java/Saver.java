@@ -27,14 +27,18 @@ public class Saver {
             ArrayList<Task> tasks = new ArrayList<>();
             while (scanner.hasNext()) {
                 String[] components = scanner.nextLine().split("\\|");
-                if (components[0].equals("T")) {
-                    tasks.add(new Todo(components[2], components[1].equals("1")));
-                } else if (components[0].equals("D")) {
-                    tasks.add(new Deadline(components[2], components[1].equals("1"), LocalDateTime.parse(components[3])));
-                } else if (components[0].equals("E")) {
-                    tasks.add(new Event(components[2], components[1].equals("1"), components[3]));
-                } else {
-                    throw new InvalidSaveFileException();
+                switch (components[0]) {
+                    case "T":
+                        tasks.add(new Todo(components[2], components[1].equals("1")));
+                        break;
+                    case "D":
+                        tasks.add(new Deadline(components[2], components[1].equals("1"), LocalDateTime.parse(components[3])));
+                        break;
+                    case "E":
+                        tasks.add(new Event(components[2], components[1].equals("1"), components[3]));
+                        break;
+                    default:
+                        throw new InvalidSaveFileException();
                 }
             }
             return tasks;
