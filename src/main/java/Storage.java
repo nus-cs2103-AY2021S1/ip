@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Storage {
-    private ArrayList<Task> list = new ArrayList<>();
+    public ArrayList<Task> list = new ArrayList<>();
 
     public void addItem(Task i) {
         list.add(i);
@@ -23,6 +23,10 @@ public class Storage {
     public String displayTasksLeft() {
         String indents = "  ";
             return "\n" + indents + "Now you have " + this.list.size() + " tasks in the list.";
+    }
+
+    public void setList(ArrayList<Task> newList) {
+        this.list.addAll(newList);
     }
 
     public void print() {

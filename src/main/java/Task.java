@@ -19,6 +19,19 @@ public abstract class Task {
         return this.getStatusIcon() + description;
     }
 
+    public static boolean checkIfDone(char number) throws DukeException {
+        switch(number) {
+            case '0':
+                return false;
+            case '1':
+                return true;
+            default:
+                throw new DukeException("Item in list on HDD does not have a 'done' status");
+        }
+    }
+
+    public abstract String stringToSave();
+
     public abstract void print(int numOfIndents);
 
 }
