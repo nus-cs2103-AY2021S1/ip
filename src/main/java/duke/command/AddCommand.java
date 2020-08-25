@@ -11,7 +11,6 @@ import duke.task.TaskType;
  * Encapsulates the logic for adding tasks.
  */
 public class AddCommand extends Command {
-
     private final TaskType taskType;
 
     /**

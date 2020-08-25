@@ -9,7 +9,6 @@ import duke.task.TaskList;
  * Encapsulates a Command.
  */
 public abstract class Command {
-
     protected final String args;
 
     protected Command(String args) {
