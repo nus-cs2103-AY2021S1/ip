@@ -43,7 +43,7 @@ public class Parser {
                 time = arr[3];
                 return new Event(name, time);
             }
-        } catch (StringIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new IncompleteInputException();
         }
     }

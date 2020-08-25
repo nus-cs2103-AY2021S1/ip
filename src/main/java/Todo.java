@@ -26,4 +26,18 @@ public class Todo extends Task {
     public String toString() {
         return "[todo]" + super.toString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Todo test = (Todo) obj;
+        if (obj == this) {
+            return true;
+        } else if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        } else if (this.name.equals(test.name) && (this.completed == test.completed)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
