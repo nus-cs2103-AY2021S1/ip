@@ -1,10 +1,12 @@
 package duke;
 
 import org.junit.jupiter.api.Test;
+
 import task.Task;
 import task.Todo;
 
 import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,7 +26,7 @@ public class TaskListTest {
         TaskList taskList = new TaskList(new ArrayList<>());
         taskList.addTask(new Todo("Test1", false));
         taskList.addTask(new Todo("Test2", true));
-        assertEquals("1. [T][\u2717] Test1\n2. [T][\u2713] Test2", taskList.listTasks());
 
+        assertEquals("1. [T][\u2717] Test1\n2. [T][\u2713] Test2", taskList.listTasks());
     }
 }
