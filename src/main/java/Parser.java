@@ -19,7 +19,15 @@ public class Parser {
                 break;
             }
 
-            if (args1[0].equals("todo")) {
+            if(args1[0].equals("find")){
+                String findItem = "";
+                for (int i = 1; i < args1.length; i++) {
+                    findItem += args1[i] + " ";
+                }
+                myTasklist.findTask(findItem);
+            }
+
+            else if (args1[0].equals("todo")) {
                 String task = "";
                 for (int i = 1; i < args1.length; i++) {
                     task += args1[i] + " ";

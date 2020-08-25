@@ -21,6 +21,13 @@ public class Task implements Serializable {
         this.done=true;
     }
 
+    public boolean relevant(String keyWord){
+        if(details.contains(keyWord)){
+            return true;
+        }
+        return false;
+    }
+
     public Task(String type, String details) {
 
         this.type = type;
