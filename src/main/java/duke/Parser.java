@@ -25,8 +25,9 @@ public class Parser {
         return date;
     }
 
-    // Parses lines of input
-    // The parser is able to parse input from file
+    /**
+     * The parser is able to parse input from file
+     */
     public static ArrayList<Task> parseFile(String string)
             throws StreamCorruptedException, ParseException {
         Scanner scanner = new Scanner(string);
@@ -39,7 +40,9 @@ public class Parser {
         return tasks;
     }
 
-    // Parses a single line of input from file
+    /**
+     * Parses a single line of input from file
+     */
     public static Task parseFileLine(String string)
             throws StreamCorruptedException, ParseException {
         String[] tokens = string.split(",");
@@ -95,9 +98,12 @@ public class Parser {
         }
     }
 
-    // Parses a single line of input from stdin into a command
+    /**
+     * Parses a single line of input from stdin into a command
+     */
     public static Command parseLine(TaskList tasks, String string)
             throws ParseException {
+
         String[] tokens = string.split(",");
         String type = tokens[0];
         switch (type) {

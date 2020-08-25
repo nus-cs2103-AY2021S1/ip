@@ -1,4 +1,8 @@
 package duke;
+
+/**
+ * Entry point for application, initializes the UI
+ */
 public class Duke {
     public static void main(String[] args) {
         String welcomeGraphic = "                      .,,uod8B8bou,,.\n" +
