@@ -5,12 +5,13 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
     static int whichTask = -1;
-
+    static String searchText = "";
+    
     /**
      * All valid command types.
      */
     enum Command {
-        BYE, DONE, DELETE, LIST, OTHERS;
+        BYE, DONE, DELETE, LIST, FIND, OTHERS;
     }
 
     private static boolean isNum(String s) {
@@ -47,6 +48,9 @@ public class Parser {
             }
         } else if (s.equals("list")) {
             return Command.LIST;
+        } else if (done[0].equals("find") && done.length > 1) {
+            searchText = s.replaceFirst("find ", "");
+            return Command.FIND;
         } else {
             return Command.OTHERS;
         }
