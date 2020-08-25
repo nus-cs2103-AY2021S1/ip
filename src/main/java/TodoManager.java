@@ -16,8 +16,6 @@ public class TodoManager {
             throw new IllegalArgumentException("☹ OOPS!!! Missing arguments for deadline task");
         String newDesc = desc.substring(0, desc.indexOf('/') - 1);
         String time = desc.substring(desc.indexOf('/') + 4);
-        System.out.println(newDesc);
-        System.out.println(time);
         lst.add(new Deadline(newDesc, time));
 
     }
@@ -28,8 +26,6 @@ public class TodoManager {
             throw new IllegalArgumentException("☹ OOPS!!! Missing arguments for event task");
         String newDesc = desc.substring(0, desc.indexOf('/') - 1);
         String time = desc.substring(desc.indexOf('/') + 4);
-        System.out.println(newDesc);
-        System.out.println(time);
         lst.add(new Event(newDesc, time));
     }
 

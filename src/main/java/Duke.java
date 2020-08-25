@@ -1,13 +1,13 @@
 /*input
-todo borrow book
-todo borrow store
-delete 1
+deadline return book /by 2019-10-15
+list
 bye
 */
 import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
+
         Scanner in = new Scanner(System.in);
         GreetExit greetExit = new GreetExit();
         TodoManager todoManager = new TodoManager();
@@ -37,7 +37,5 @@ public class Duke {
                 System.out.println(Helper.horiLine);
             }
         }
-
-
     }
 }
