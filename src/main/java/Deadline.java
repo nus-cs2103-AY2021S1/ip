@@ -10,6 +10,12 @@ public class Deadline extends Task {
         this.date= date;
     }
 
+    // Get info to store in hard disk
+    @Override
+    public String[] getInfo() {
+        return new String[] {"D", description, date};
+    }
+
     // Return string representation of Deadline
     @Override
     public String toString() {
