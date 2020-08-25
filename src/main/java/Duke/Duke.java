@@ -71,13 +71,13 @@ public class Duke {
      *  Then, prints out relevant information using the output() func.
      */
     public static void main(String[] args) throws IOException {
-        //Duke duke = new Duke("tasks.txt");
-        PrintStream fileOut = new PrintStream("src/main/java/output.txt");
-        System.setOut(fileOut);
-        FileWriter fw = new FileWriter("src/main/java/tasks.txt");
-        fw.write("");
-        fw.close();
-        Duke duke = new Duke("src/main/java/tasks.txt", "src/main/java/input.txt");
+        Duke duke = new Duke("tasks.txt");
+        //PrintStream fileOut = new PrintStream("src/main/java/output.txt");
+        //System.setOut(fileOut);
+        //FileWriter fw = new FileWriter("src/main/java/tasks.txt");
+        //fw.write("");
+        //fw.close();
+        //Duke duke = new Duke("src/main/java/tasks.txt", "src/main/java/input.txt");
         duke.run();
     }
 }

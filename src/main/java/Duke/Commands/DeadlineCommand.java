@@ -14,11 +14,19 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * has the method if deadline is keyword deadline
+ */
 public class DeadlineCommand extends AddCommand {
+    /**
+     * assigns string to a value of string
+     * @param string assigns string to this this.string
+     */
     public DeadlineCommand(String string) {
         super(string);
     }
-    public static Deadline provide(String name, String string) throws DukeException {
+
+    private static Deadline provide(String name, String string) throws DeadlineException {
         Deadline e;
         try{
             LocalDate parsedDate = localDate(string);
@@ -38,7 +46,16 @@ public class DeadlineCommand extends AddCommand {
         return e;
 
     }
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+
+    /**
+     * to add deadline into a task list in TaskList,
+     * @param tasks to change the taskList if necessary
+     * @param ui
+     * @param storage to change the file in the if necessary
+     * @throws DukeException whenever there is an error, where the time adn or date is absent or in wrong format, no
+     * description
+     */
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DeadlineException{
         if (string.length() == 8 || string.length() == 9) {
             throw new DeadlineException(true, false);
         }

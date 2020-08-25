@@ -1,13 +1,11 @@
 package Duke.Commands;
 
-import Duke.Errors.DeadlineException;
 import Duke.Errors.DukeException;
 import Duke.Errors.EventException;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Helpers.Ui;
-import Duke.Tasks.Deadline;
-import Duke.Tasks.Task;
+
 import Duke.Tasks.event;
 
 import java.io.IOException;
@@ -17,11 +15,18 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * handles cases when event is keyword
+ */
 public class EventCommand extends AddCommand{
+    /**
+     * assigns string to a value of string
+     * @param string assigns string to this this.string
+     */
     public EventCommand(String string) {
         super(string);
     }
-    public static event provide(String name, String string, String end) throws DukeException {
+    private static event provide(String name, String string, String end) throws DukeException {
         event e;
         try{
             LocalDate parsedDate = localDate(string);
@@ -62,6 +67,14 @@ public class EventCommand extends AddCommand{
             } }
         return e;
     }
+
+    /**
+     * is used to add event task or handle exceptions
+     * @param tasks to change the taskList if necessary when no error
+     * @param ui
+     * @param storage to change the file in the if necessary when no erro
+     * @throws DukeException if there no description after event no time or time is wrong format
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (string.length() == 5 || string.length() == 6) {
             throw new EventException(true, false, false, false);

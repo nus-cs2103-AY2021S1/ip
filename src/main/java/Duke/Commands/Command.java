@@ -1,25 +1,44 @@
 package Duke.Commands;
+
 import Duke.Errors.DukeException;
-import Duke.Errors.FileAbsentException;
+
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Helpers.Ui;
-import Duke.Tasks.Task;
 
-import java.io.FileWriter;
-import java.io.IOException;
-
+/**
+ * this is an abstract class used for polymorphism
+ */
 abstract public class Command {
-    String string;
+    /**
+     * string which contains information on task and details to perform task
+     * exit is used to tell whether program terminates, where id true, it terminates
+     */
+    public String string;
     boolean exit = false;
+
+    /**
+     * used to assign string to a value
+     * @param string assigns this.string to string
+     */
     Command(String string){
         this.string = string;
     }
+
+    /**
+     * gets value of exit
+     * @return exit
+     */
     public boolean isExit(){
         return exit;
     }
 
-
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-    }
+    /**
+     * executes the necessary task
+     * @param tasks used to access tasks in its list and change if necessary
+     * @param ui
+     * @param storage to change the input there if necessary
+     * @throws DukeException if there are exceptions present
+     */
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

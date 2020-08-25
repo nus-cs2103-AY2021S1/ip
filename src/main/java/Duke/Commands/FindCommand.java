@@ -10,12 +10,20 @@ import Duke.Tasks.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * used to handle case where find is keyword
+ */
 public class FindCommand extends Command {
-    List<Task> tasks = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
+
+    /**
+     * assigns string to a value of string
+     * @param string assigns string to this this.string
+     */
     public FindCommand(String string) {
         super(string);
     }
-    public void setTasks(String[] strings, TaskList tasks){
+    private void setTasks(String[] strings, TaskList tasks){
         List<Task> allTasks = tasks.getAllTasks();
         for(int i = 0; i < tasks.getAllTasks().size(); i++){
             Task task = allTasks.get(i);
@@ -36,6 +44,15 @@ public class FindCommand extends Command {
             }
         }
     }
+
+    /**
+     * used to find the tasks which contains keyword in string
+     * @param tasks to look for the task's string value
+     * @param ui
+     * @param storage no need
+     * @throws DukeException used to throw error when no words mentioned after find or the keyword is not present in
+     * tasks.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if(string.length() == 4 || string.length() == 5){
