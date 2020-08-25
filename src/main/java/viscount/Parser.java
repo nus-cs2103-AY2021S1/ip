@@ -37,48 +37,72 @@ public class Parser {
         String baseCommand = arguments.get(0);
         
         if (baseCommand.equals("list")) {
-            int onArgumentIndex = arguments.indexOf("/on");
-            String modifier = "";
-            String dateString = "";
+            return parseListCommand(arguments);
+        } else if (baseCommand.equals("add")) {
+            return parseAddCommand(arguments);
+        } else if (baseCommand.equals("done")) {
+            return parseDoneCommand(arguments);
+        } else if (baseCommand.equals("delete")) {
+            return parseDeleteCommand(arguments);
+        } else if (baseCommand.equals("bye")) {
+            return new ExitCommand();
+        } else {
+            throw new ViscountUnknownCommandException(baseCommand);
+        }
+    }
+    
+    private static ListCommand parseListCommand(List<String> arguments) throws ViscountException {
+        int onArgumentIndex = arguments.indexOf("/on");
+        String modifier = "";
+        String dateString = "";
 
-            if (onArgumentIndex == -1) {
-                modifier = String.join(" ", arguments.subList(1, arguments.size()));
-            } else {
-                modifier = String.join(" ", arguments.subList(1, onArgumentIndex));
-                dateString = String.join(" ", arguments.subList(onArgumentIndex + 1, arguments.size()));
+        if (onArgumentIndex == -1) {
+            modifier = String.join(" ", arguments.subList(1, arguments.size()));
+        } else {
+            modifier = String.join(" ", arguments.subList(1, onArgumentIndex));
+            dateString = String.join(" ", arguments.subList(onArgumentIndex + 1, arguments.size()));
 
-                if (modifier.equals("todo")) {
-                    throw new ViscountUnsupportedOperationException("/on");
-                } else if (dateString.isEmpty()) {
-                    throw new ViscountMissingArgumentDescriptionException("/on");
-                }
+            if (modifier.equals("todo")) {
+                throw new ViscountUnsupportedOperationException("/on");
+            } else if (dateString.isEmpty()) {
+                throw new ViscountMissingArgumentDescriptionException("/on");
             }
+        }
 
-            if (!modifier.isEmpty()) {
-                try {
-                    TaskType.valueOf(modifier.toUpperCase());
-                } catch (IllegalArgumentException e) {
-                    throw new ViscountUnknownCommandException(modifier);
-                }
+        if (!modifier.isEmpty()) {
+            try {
+                TaskType.valueOf(modifier.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                throw new ViscountUnknownCommandException(modifier);
             }
-            
-            return new ListCommand(modifier, dateString);
-        } else if (baseCommand.equals("todo")) {
-            String description = String.join(" ", arguments.subList(1, arguments.size()));
+        }
+
+        return new ListCommand(modifier, dateString);
+    }
+
+    private static AddCommand parseAddCommand(List<String> arguments) throws ViscountException {
+        if (arguments.size() < 2) {
+            throw new ViscountMissingArgumentException("task type");
+        }
+        
+        String taskTypeArgument = arguments.get(1);
+        
+        if (taskTypeArgument.equals("todo")) {
+            String description = String.join(" ", arguments.subList(2, arguments.size()));
 
             if (description.isEmpty()) {
                 throw new ViscountMissingDescriptionException("todo");
             }
-            
+
             return new AddCommand(TaskType.TODO, description, null);
-        } else if (baseCommand.equals("deadline")) {
+        } else if (taskTypeArgument.equals("deadline")) {
             int dueDateIndex = arguments.indexOf("/by");
 
             if (dueDateIndex == -1) {
                 throw new ViscountMissingArgumentException("/by");
             }
-            
-            String description = String.join(" ", arguments.subList(1, dueDateIndex));
+
+            String description = String.join(" ", arguments.subList(2, dueDateIndex));
             String dueDateString = String.join(" ", arguments.subList(dueDateIndex + 1, arguments.size()));
 
             if (description.isEmpty()) {
@@ -93,14 +117,14 @@ public class Parser {
                     throw new ViscountDateTimeParseException("due date");
                 }
             }
-        } else if (baseCommand.equals("event")) {
+        } else if (taskTypeArgument.equals("event")) {
             int eventTimeIndex = arguments.indexOf("/at");
 
             if (eventTimeIndex == -1) {
                 throw new ViscountMissingArgumentException("/at");
             }
-            
-            String description = String.join(" ", arguments.subList(1, eventTimeIndex));
+
+            String description = String.join(" ", arguments.subList(2, eventTimeIndex));
             String eventTimeString = String.join(" ", arguments.subList(eventTimeIndex + 1, arguments.size()));
 
             if (description.isEmpty()) {
@@ -115,36 +139,37 @@ public class Parser {
                     throw new ViscountDateTimeParseException("event date");
                 }
             }
-        } else if (baseCommand.equals("done")) {
-            if (arguments.size() < 2) {
-                throw new ViscountMissingArgumentException("task number");
-            } 
-            
+        } else {
+            throw new ViscountUnsupportedOperationException("task type " + taskTypeArgument);
+        }
+    }
+    
+    private static DoneCommand parseDoneCommand(List<String> arguments) throws ViscountException {
+        if (arguments.size() < 2) {
+            throw new ViscountMissingArgumentException("task number");
+        }
+
+        int taskIndex = -1;
+
+        try {
+            taskIndex = Integer.parseInt(arguments.get(1)) - 1;
+            return new DoneCommand(taskIndex);
+        } catch (NumberFormatException e) {
+            throw new ViscountNumberFormatException(arguments.get(1));
+        }
+    }
+    private static DeleteCommand parseDeleteCommand(List<String> arguments) throws ViscountException {
+        if (arguments.size() < 2) {
+            throw new ViscountMissingArgumentException("task number");
+        } else {
             int taskIndex = -1;
 
             try {
                 taskIndex = Integer.parseInt(arguments.get(1)) - 1;
-                return new DoneCommand(taskIndex);
+                return new DeleteCommand(taskIndex);
             } catch (NumberFormatException e) {
                 throw new ViscountNumberFormatException(arguments.get(1));
             }
-        } else if (baseCommand.equals("delete")) {
-            if (arguments.size() < 2) {
-                throw new ViscountMissingArgumentException("task number");
-            } else {
-                int taskIndex = -1;
-
-                try {
-                    taskIndex = Integer.parseInt(arguments.get(1)) - 1;
-                    return new DeleteCommand(taskIndex);
-                } catch (NumberFormatException e) {
-                    throw new ViscountNumberFormatException(arguments.get(1));
-                }
-            }
-        } else if (baseCommand.equals("bye")) {
-            return new ExitCommand();
-        } else {
-            throw new ViscountUnknownCommandException(baseCommand);
         }
     }
 

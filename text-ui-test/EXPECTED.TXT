@@ -14,6 +14,10 @@ Alas, I do apologise but I don't know what 'blah' means.
 __________________________________________________
 
 __________________________________________________
+Alas, this command does not support task type blah.
+__________________________________________________
+
+__________________________________________________
 Alas, the description of a todo cannot be empty.
 __________________________________________________
 

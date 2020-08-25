@@ -1,9 +1,9 @@
-event
-event /at
-event t4 /at
-event t4 /at 6pm
-event t4 /at 23-08-2020 1800
-event t5 /at 26-08-2020 1900
+add event
+add event /at
+add event t4 /at
+add event t4 /at 6pm
+add event t4 /at 23-08-2020 1800
+add event t5 /at 26-08-2020 1900
 list
 list blah
 list todo
