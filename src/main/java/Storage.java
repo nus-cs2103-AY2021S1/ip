@@ -1,17 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileOutputStream;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Storage {
     private static final String DEFAULT_PATH = "./data/duke.txt";
@@ -55,7 +51,7 @@ public class Storage {
                     String[] currLine = line.split(" \\| ");
                     Task currTask = null;
                     if (currLine[0].equals("T")) {
-                        currTask = new Todo(currLine[2]);
+                        currTask = new ToDo(currLine[2]);
                     } else if (currLine[0].equals("D")) {
                         currTask = new Deadline(currLine[2], currLine[3]);
                     } else if (currLine[0].equals("E")) {

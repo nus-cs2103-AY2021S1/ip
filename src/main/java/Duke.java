@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -43,7 +42,7 @@ public class Duke {
                             throw new DukeEmptyToDoException(input);
                         }
                         String tasker = Parser.stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
-                        Todo todoTask = new Todo(tasker);
+                        ToDo todoTask = new ToDo(tasker);
                         stringStore.addTask(todoTask);
                         UI.printTaskAdd(todoTask, stringStore.numOfTasks());
                     } else if (Parser.parseDeadline(input)) {

@@ -1,2 +1,0 @@
-T | 0 | borrow book
-E | 0 | project meeting | 01-01-2020 12:30
