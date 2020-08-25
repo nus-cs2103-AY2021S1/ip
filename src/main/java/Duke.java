@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
     protected String lines = "____________________________________________________________";
@@ -85,7 +88,7 @@ public class Duke {
 
 
     private void createAndAddDeadline(String input) throws EmptyDescriptionException, WrongFormatException {
-        if (input.length() < 8 || input.substring(8).replaceAll("\\s", "").equals("") || !input.substring(9).equals("/")) {
+        if (input.length() < 8 || input.substring(8).replaceAll("\\s", "").equals("")) {
             throw new EmptyDescriptionException("deadline");
         } else if (input.contains("/by")
                 && Character.toString(input.charAt(8)).equals(" ")
@@ -93,7 +96,11 @@ public class Duke {
                 && Character.toString(input.charAt(input.indexOf("/") - 1)).equals(" ")) {
             String desc = input.substring(9, input.indexOf("/") - 1);
             String by = input.substring(input.indexOf("/") + 4, input.length());
-            Task task = new Deadline(desc, by);
+            if (by.matches(".*[a-zA-Z]+.*")) {
+                throw new WrongFormatException("deadline");
+            }
+            LocalDate date = LocalDate.parse(by);
+            Task task = new Deadline(desc, date);
             this.addTaskToTasklist(task);
         } else {
             throw new WrongFormatException("deadline");
@@ -101,7 +108,7 @@ public class Duke {
     }
 
     private void createAndAddEvent(String input) throws EmptyDescriptionException, WrongFormatException {
-        if (input.length() < 5 || input.substring(5).replaceAll("\\s", "").equals("") || !input.substring(6).equals("/")) {
+        if (input.length() < 5 || input.substring(5).replaceAll("\\s", "").equals("")) {
             throw new EmptyDescriptionException("event");
         } else if (input.contains("/at")
                 && Character.toString(input.charAt(5)).equals(" ")
