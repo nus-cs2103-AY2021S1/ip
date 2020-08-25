@@ -4,6 +4,10 @@ import duke.task.Task;
 
 import java.util.LinkedList;
 
+/**
+ * List that stores the task list.
+ * Operations related to a task list has been abstracted in this class
+ */
 public class TaskList{
     private LinkedList<Task> list;
 

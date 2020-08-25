@@ -3,6 +3,9 @@ package duke.command;
 import duke.component.*;
 import duke.task.Task;
 
+/**
+ * Command that delete a task in task list and storage
+ */
 public class DeleteCommand implements Command {
     private int index;
 

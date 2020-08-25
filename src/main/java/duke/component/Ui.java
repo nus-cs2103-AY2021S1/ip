@@ -2,6 +2,9 @@ package duke.component;
 
 import java.util.Scanner;
 
+/**
+ * The class that receive user's input and print corresponding responses on the screen.
+ */
 public class Ui {
     private static final String divider = "\t____________________________________________________________\n";
     Scanner sc;

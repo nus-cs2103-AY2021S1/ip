@@ -6,6 +6,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Interpreter of user's input
+ */
 public class Parser {
 
     /**

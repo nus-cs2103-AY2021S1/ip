@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * A simple type of task
+ */
 public class Todo extends Task {
     /**
      * Initializes a todo using the given description

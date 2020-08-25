@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.component.*;
 
+/**
+ * Command that prints out the task list
+ */
 public class ListCommand implements Command {
 
     /**

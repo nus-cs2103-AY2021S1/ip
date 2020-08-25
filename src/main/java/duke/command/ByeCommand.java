@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.component.*;
 
+/**
+ * Command that closes Duke
+ */
 public class ByeCommand implements Command {
 
     /**
