@@ -14,11 +14,22 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
 
+/**
+ * Represents parser to parse and create appropriate Command object to handle
+ * the commands given by user.
+ *
+ */
 public class Parser {
     public Parser() {
 
     }
 
+    /**
+     * Generates the correct Command object to be executed.
+     *
+     * @param command User's input.
+     * @return Appropriate command to execute logic of input.
+     */
     public static Command parse(String command) {
         try {
             if (command.contains("done")) {
