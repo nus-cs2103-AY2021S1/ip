@@ -46,4 +46,8 @@ public class Ui {
     public void printTaskList(TaskList lst) {
         printLine(drawBorder( "Here are the tasks in your list:\n" + lst.toString()));
     }
+    
+    public void printMatchingTasks(TaskList lst) {
+        printLine(drawBorder( "Here are the matching tasks in your list:\n" + lst.toString()));
+    }
 }

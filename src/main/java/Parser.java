@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Parser {
     
@@ -79,6 +80,15 @@ public class Parser {
                     
                     ui.printAddTask(task, lst);
                     storage.writeFile(lst.getTaskList());
+                } else if (strArr[0].equals("find")) {
+                    String keyword = strArr[1];
+                    TaskList taskLst = new TaskList();
+                    for (int i = 0; i < lst.getSize(); i++) {
+                        if (lst.getTask(i).getDescription().contains(keyword)) {
+                            taskLst.addTask(lst.getTask(i));
+                        }
+                    }
+                    ui.printMatchingTasks(taskLst);
                 }
             }
         } catch (Exception e) {
@@ -89,10 +99,11 @@ public class Parser {
 
     public static void check(String[] arr) throws DukeException {
         if (arr.length == 1 && (arr[0].equals("todo") || arr[0].equals("deadline") || arr[0].equals("event") ||
-                arr[0].equals("done") || arr[0].equals("delete"))) {
+                arr[0].equals("done") || arr[0].equals("delete") || arr[0].equals("find"))) {
             throw new DukeException(arr[0]);
         } else if (!arr[0].equals("todo") && !arr[0].equals("deadline") && !arr[0].equals("event") &&
-                !arr[0].equals("list") && !arr[0].equals("bye") && !arr[0].equals("done") && !arr[0].equals("delete")) {
+                !arr[0].equals("list") && !arr[0].equals("bye") && !arr[0].equals("done") 
+                && !arr[0].equals("delete") && !arr[0].equals("find")) {
             throw new DukeException("other");
         }
     }
