@@ -12,14 +12,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Loads tasks from and saves tasks to the save file (a saved task list). Storage will attempt to load the save file
+ * upon start up of the program and will from thereon overwrite and save the file every time the task list changes.
+ */
 public class Storage {
 
+    /** The relative path in which the save file is located */
     private String filePath;
 
+    /**
+     * Creates and initializes the Storage object.
+     *
+     * @param filePath The relative path in which the save file is located.
+     */
     public Storage (String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the task list from the save file upon start up of the program. If no valid save file is found upon start
+     * up, a new save file will be created.
+     *
+     * @return A list of strings that represents tasks, that the TaskList class can then convert into a list of
+     * tasks.
+     * @throws FileNotFoundException If from the path specified by filePath, a save file is not found or there is a
+     * missing directory / there are missing directories.
+     */
     public List<String> load() throws FileNotFoundException {
         File memoryFile = new File(filePath);
         if (!memoryFile.exists()) { // If file is non-existent, either the .txt file or a directory in the
@@ -82,8 +101,9 @@ public class Storage {
     }
 
     /**
-     * Writes to save file as specified by memoryFilePath. Writing to save occurs every time the task list changes.
-     * @throws IOException
+     * Writes to save file as specified by filePath. Writing to save occurs every time the task list changes.
+     *
+     * @throws IOException If an error occurs during the process of trying to write to the save file.
      */
     public void writeToFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
