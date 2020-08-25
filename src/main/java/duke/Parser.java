@@ -4,6 +4,7 @@ import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
+import duke.command.FindCommand;
 import duke.command.FormatCommand;
 import duke.command.ListCommand;
 import duke.command.MarkDoneCommand;
@@ -16,8 +17,9 @@ public class Parser {
      *
      * @param userInput String of user's input command.
      * @return Command command for Dino to execute.
+     * @throws DukeException If user input command is invalid command.
      */
-    public static Command parse(String userInput) {
+    public static Command parse(String userInput) throws DukeException {
         String[] inputWords = userInput.split(" ");
         if (userInput.equals("bye")) {
             return new ByeCommand();
@@ -33,9 +35,15 @@ public class Parser {
                 && inputWords[1].matches("[0-9]+")) {
             // condition checks that user input is in the format "delete X" where X is a numeric
             return new DeleteCommand(userInput);
-        } else {
+        } else if (inputWords[0].equals("find") && inputWords.length == 2) {
+            // condition checks that user input is in format "find <key word>"
+            return new FindCommand(userInput);
+        } else if (inputWords[0].equals("todo") || inputWords[0].equals("deadline")
+                || inputWords[0].equals("event")){
             // Dino adds task to list
             return new AddCommand(userInput);
+        } else {
+            throw new DukeException("Invalid command entered! Please enter a valid command.");
         }
     }
 }
