@@ -74,7 +74,7 @@ public class Parser {
                 Printer.printCustomStatement(t.toString());
             }
         } else {
-            Printer.printCustomStatement("No matching tasks found");
+            Printer.printCustomStatement("No matching tasks found! Try again?");
         }
         return true;
     }
