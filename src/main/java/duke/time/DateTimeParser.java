@@ -7,8 +7,20 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Contains a static method for handling parsing string inputs to <code>DateTime</code> objects.
+ */
 public class DateTimeParser {
 
+    /**
+     * Parses string input, that is a representation of a point in time, into a <code>DateTime</code>.
+     * Input must be format compatible.
+     * For the string to be compatible, either "d/M/y" or "d/M/y H:m" formats must be provided.
+     *
+     * @param text Input to be parsed.
+     * @return <code>DateTime</code> representation of date and time in <code>text</code>.
+     * @throws DukeInputException If input string is poorly formatted.
+     */
     public static DateTime parse(String text) throws DukeInputException {
 
         String[] dateTimeSplit = text.split(" ", 2);
@@ -24,7 +36,7 @@ public class DateTimeParser {
             throw new DukeInputException(errorMessage);
         }
 
-        //adjust date to 1970-2070
+        //adjust date to within +- 50 years
         if (date.getYear() < 100) {
             date = date.plusYears(2000);
 

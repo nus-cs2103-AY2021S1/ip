@@ -10,8 +10,16 @@ import duke.command.ListCommand;
 import duke.command.ToDoCommand;
 import duke.exception.DukeInputException;
 
+/** Contains functions for parsing user inputs to software commands */
 public class Parser {
 
+    /**
+     * Parses given input String into commands with parameters.
+     *
+     * @param userCommand Input string, typically from user.
+     * @return Command object that represents the user command and contains execution functionality.
+     * @throws DukeInputException Thrown when input cannot be cleanly parsed into an available command.
+     */
     public static Command parse(String userCommand) throws DukeInputException {
         String[] inputs = userCommand.split(" ", 2);
         String command = inputs[0];
