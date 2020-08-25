@@ -19,6 +19,10 @@ public class TaskList {
         // index is bounded from 0 to len - 1
         return taskList.get(index - 1);
     }
+    
+    public ArrayList<Task> getAllTasks() {
+        return taskList;
+    }
 
     public int numTasks() {
         return taskList.size();
