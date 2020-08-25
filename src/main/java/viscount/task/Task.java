@@ -27,6 +27,9 @@ public abstract class Task {
     public TaskType getTaskType() {
         return taskType;
     }
+    public String getDescription() {
+        return description;
+    }
 
     public abstract boolean hasDateTime();
     public abstract LocalDateTime getDateTime();

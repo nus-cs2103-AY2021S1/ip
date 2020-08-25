@@ -18,19 +18,23 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class ListCommand extends Command {
-    private String modifier;
+    private String taskTypeModifier;
     private String dateString;
+    private String findString;
     
-    public ListCommand(String modifier, String dateString) {
+    public ListCommand(String modifier, String dateString, String findString) {
         super();
-        this.modifier = modifier;
+        this.taskTypeModifier = modifier;
         this.dateString = dateString;
+        this.findString = findString;
     }
     
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ViscountException {
-        Predicate<Task> filterByModifier = task -> modifier.isEmpty()
-                || task.getTaskType() == TaskType.valueOf(modifier.toUpperCase());
+        Predicate<Task> filterByModifier = task -> taskTypeModifier.isEmpty()
+                || task.getTaskType() == TaskType.valueOf(taskTypeModifier.toUpperCase());
+        
+        Predicate<Task> filterByDescription = task -> task.getDescription().contains(findString);
         
         List<Task> tasks = taskList.getTasks();
 
@@ -38,9 +42,10 @@ public class ListCommand extends Command {
             List<Task> filteredTasks = tasks
                     .stream()
                     .filter(filterByModifier)
+                    .filter(filterByDescription)
                     .collect(Collectors.toList());
             
-            ui.showList(filteredTasks, modifier, dateString);
+            ui.showList(filteredTasks, taskTypeModifier, dateString);
         } else {
             try {
                 LocalDateTime queriedDateTime = dateString.equals("today")
@@ -51,13 +56,14 @@ public class ListCommand extends Command {
                         .stream()
                         .filter(Task::hasDateTime)
                         .filter(filterByModifier)
+                        .filter(filterByDescription)
                         .filter(task -> task.getDateTime().toLocalDate().isEqual(queriedDateTime.toLocalDate()))
                         .sorted(Comparator.comparing(Task::getDateTime))
                         .collect(Collectors.toList());
 
                 ui.showList(
-                        filteredTasks, 
-                        modifier, 
+                        filteredTasks,
+                        taskTypeModifier, 
                         dateString.equals("today") 
                                 ? dateString 
                                 : queriedDateTime.format(Parser.OUTPUT_DATE_FORMATTER));
