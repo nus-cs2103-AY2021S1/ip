@@ -14,6 +14,7 @@ public class DeadlineCommand extends Command {
         this.taskName = taskName;
         this.deadlineString = deadlineString;
     }
+
     @Override
     public void execute(TaskList tasks, Ui ui) throws DukeException {
         if (taskName.isBlank()) {
