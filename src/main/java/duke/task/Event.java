@@ -4,6 +4,9 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This class represents a particular type of Task, corresponding to tasks of the "Event" form
+ */
 public class Event extends Task {
     private String eventDateString;
     private LocalDate eventDate = null;
@@ -18,11 +21,19 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Gets a String which represents the Event in the appropriate format for storing to the hard disk
+     * @return String in the storage format representing Event
+     */
     @Override
     public String getStorageFormat() {
         return "E | " + super.getStorageFormat() + " | " + eventDateString;
     }
 
+    /**
+     * Provides string representation of Event, used for UI display
+     * @return String representation of Event
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + eventDateString + ")";

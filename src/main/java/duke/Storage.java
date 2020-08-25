@@ -14,10 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class deals with the operations regarding the data stored and needed by the programme
+ */
 public class Storage {
     private String filePath;
     private Scanner sc;
 
+    /**
+     * Initialises a Storage object that represents the data stored in the file path provided
+     * @param filePath File path containing the location where the data for the program is stored
+     * @throws IOException If there is an error in Files operations
+     */
     public Storage(String filePath) throws IOException {
         if (!Files.exists(Paths.get(filePath))) {
             Files.createFile(Paths.get(filePath));
@@ -25,6 +33,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the data in the file into a List for easier manipulation
+     * @return List containing the tasks represented by each line in the data
+     * @throws FileNotFoundException If file is not found
+     * @throws DukeException If the data contains invalid tasks
+     */
     public List<Task> load() throws FileNotFoundException, DukeException {
         List<Task> tasks = new ArrayList<>();
         List<String> linesOfFile = new ArrayList<>();
@@ -39,7 +53,7 @@ public class Storage {
             Task newTask = null;
             String taskName = parsedTask[0];
 
-            switch (TaskType.getCommand(taskName)) {
+            switch (InputType.getCommand(taskName)) {
             case TODO:
                 if (parsedTask.length < 3) {
                     throw DukeException.badToDo();
@@ -74,6 +88,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Stores the provided TaskList into the data file
+     * @param tasks TaskList containing the data to be persisted to the hard disk
+     * @throws IOException If there is an error in Files operations
+     */
     public void storeTaskList(TaskList tasks) throws IOException {
         Files.writeString(Paths.get(filePath), ""); // clear storage
 

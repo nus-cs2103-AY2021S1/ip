@@ -3,6 +3,10 @@ package duke;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * The main class for the Duke Chatbot which serves as the entry point for the whole program. The main business logic
+ * is conducted by this class, which ties in functionality from all classes to run the whole programme.
+ */
 public class Duke {
 
     private Storage storage;
@@ -11,6 +15,10 @@ public class Duke {
     private Parser parser;
     private Scanner sc;
 
+    /**
+     * Creates a Duke object that initialises the necessary variables for the execution of the Duke program.
+     * @param filePath a relative file path giving the location to the data stored in the hard disk
+     */
     public Duke(String filePath) {
         ui = new Ui();
         parser = new Parser();
@@ -24,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * The method responsible for the main logic of the program.
+     */
     public void run() {
         ui.displayGreeting();
 
@@ -47,6 +58,10 @@ public class Duke {
         }
     }
 
+    /**
+     * The starting point for the program.
+     * @param args arguments to be passed to the main method. Any array can be used with no change in effect.
+     */
     public static void main(String[] args) {
         new Duke("./data/tasks.txt").run();
     }

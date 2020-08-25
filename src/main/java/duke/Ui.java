@@ -2,8 +2,16 @@ package duke;
 
 import duke.task.Task;
 
+/**
+ * This class is responsible for anything related to the user interface, from printing output to reading input from the
+ * user
+ */
 public class Ui {
     private static final String HORIZONTAL_RULE = "____________________________________________________________";
+
+    /**
+     * Prints out a string which gives a greeting to the user
+     */
     public void displayGreeting() {
         final String HELLO_MESSAGE = "Hello, and welcome to my humble abode. \n" +
                 "I'm supposed to help you but I'll be the judge of that. Anyway what do you want.";
@@ -13,6 +21,9 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE);
     }
 
+    /**
+     * Prints out a string for when the program exits
+     */
     public void displayExit() {
         final String BYE_MESSAGE = "Thank you for that utter waste of time.\n" +
                 "Can't wait to see you again...";
@@ -22,6 +33,10 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE);
     }
 
+    /**
+     * Prints out all items in the specified TaskList
+     * @param tasks TaskList consisting of items to be printed
+     */
     public void printList(TaskList tasks) {
         final String CHECKMARK = "[✓]";
         final String CROSS = "[✗]";
@@ -39,12 +54,20 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE);
     }
 
+    /**
+     * Prints out string for when the user has completed a task
+     */
     public void displayCompleteTask() {
         System.out.println(HORIZONTAL_RULE);
         System.out.println("Congratulations, you actually did something");
         System.out.println(HORIZONTAL_RULE);
     }
 
+    /**
+     * Prints out a string for when the user adds a Task
+     * @param task Task which the user has added
+     * @param size Number of items in the TaskList
+     */
     public void displayAddTask(Task task, int size) {
         System.out.println(HORIZONTAL_RULE);
         System.out.println("One more task added for you sire");
@@ -53,6 +76,11 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE);
     }
 
+    /**
+     * Prints out a string for when the user deletes a Task
+     * @param removedTask The removed Task
+     * @param size Number of items remaining in the TaskList
+     */
     public void displayDeleteTask(Task removedTask, int size) {
         System.out.println(HORIZONTAL_RULE);
         System.out.println("Finished so soon? Fine I've removed the following task. Good day.");
@@ -61,6 +89,9 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE);
     }
 
+    /**
+     * Prints out a string for when there is an error loading the stored data
+     */
     public void showLoadingError() {
         System.out.println(HORIZONTAL_RULE);
         System.out.println("Something messed up with your hard disk file i don't really know what. Figure it out.");

@@ -4,6 +4,9 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This class represents a particular type of Task, corresponding to tasks of the "Deadline" form
+ */
 public class Deadline extends Task {
     private String deadlineString;
     private LocalDate deadline = null;
@@ -18,11 +21,19 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Gets a String which represents the Deadline in the appropriate format for storing to the hard disk
+     * @return String in the storage format representing Deadline
+     */
     @Override
     public String getStorageFormat() {
         return "D | " + super.getStorageFormat() + " | " + deadlineString;
     }
 
+    /**
+     * Provides string representation of Deadline, used for UI display
+     * @return String representation of Deadline
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + deadlineString + ")";
