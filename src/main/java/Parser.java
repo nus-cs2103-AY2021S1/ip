@@ -2,19 +2,25 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
+/**
+ * Represents a parser that will make sense of user commands and break down
+ * to various components for ease of processing.
+ */
 public class Parser {
-    //makes sense of user command and processes it to various component esp if is add tasks
-    //e.g. if to-do task -> [T,task description]
-    //bye = [bye]
-    //list = [list]
-    //print = [print,date]
-    //done = [done,taskNum]
-    //delete = [delete,taskNum]
-    //deadline = [D, task description, date, time]
-    //event = [E, task description, date, startTime, endTime]
-    //invalid input = throw exception
+
+    /**
+     * Returns an array of string where the commands for tasks have been broken
+     * into its various parts for ease of processing/
+     * E.g. deadline task returns [deadline, task description, date, time]
+     * event = [event, task description, date, start time, end time]
+     * @param command The user command.
+     * @return An array of string which has been processed.
+     * @throws InvalidDateAndTimeException If input date/time is invalid.
+     * @throws InvalidTaskNumber If an improper integer task number is called in delete and done.
+     * @throws NoDescriptionException If there is no task description for addition of tasks.
+     * @throws NotTaskException If an invalid command is being input.
+     */
     public String[] parse(String command) throws InvalidDateAndTimeException, InvalidTaskNumber, NoDescriptionException, NotTaskException {
         String[] cmd = command.split(" ");
         switch(cmd[0].toLowerCase()) {
@@ -29,9 +35,9 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 throw new InvalidDateAndTimeException();
             }
-        //check if an integer is given for taskNum
         case("done"):
         case("delete"):
+            //check if an integer is given for taskNum
             try {
                 Integer.parseInt(cmd[1]);
                 return cmd;
@@ -44,11 +50,11 @@ public class Parser {
             } else {
                 return new String[]{cmd[0], command.replaceFirst(cmd[0] + " ", "")};
             }
-        //check if it is valid date and time
         case("deadline"):
             if (cmd.length < 2) {
                 throw new NoDescriptionException(cmd[0]);
             } else {
+                //check if it is valid date and time
                 try {
                     LocalDate.parse(cmd[cmd.length - 2], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     LocalTime.parse(cmd[cmd.length - 1], DateTimeFormatter.ofPattern("HHmm"));
@@ -59,12 +65,12 @@ public class Parser {
                     throw new InvalidDateAndTimeException();
                 }
             }
-        //check for valid date and time
         case("event"):
             if (cmd.length < 2) {
                 throw new NoDescriptionException(cmd[0]);
             } else {
                 try {
+                    //check for valid date and time
                     LocalDate.parse(cmd[cmd.length - 2], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     LocalTime.parse(cmd[cmd.length - 1].split("-")[0], DateTimeFormatter.ofPattern("HHmm"));
                     LocalTime.parse(cmd[cmd.length - 1].split("-")[1], DateTimeFormatter.ofPattern("HHmm"));

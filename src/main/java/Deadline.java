@@ -3,9 +3,13 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+/**
+ *  Represents a deadline task.
+ *  A deadline task has a deadline date and time.
+ */
 public class Deadline extends Task {
-    protected LocalDate deadlineDate;
-    protected LocalTime deadlineTime;
+    private LocalDate deadlineDate;
+    private LocalTime deadlineTime;
 
     public Deadline(String description, LocalDate date, LocalTime time) {
         super(description);
@@ -13,6 +17,10 @@ public class Deadline extends Task {
         this.deadlineTime = time;
     }
 
+    /**
+     * Returns an Optional of the deadline date.
+     * @return an Optional of deadline date.
+     */
     public Optional<LocalDate> getDate() {
         return Optional.of(deadlineDate);
     }
