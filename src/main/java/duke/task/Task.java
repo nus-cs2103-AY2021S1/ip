@@ -28,6 +28,10 @@ public class Task {
         return (isDone ? "✓" : "✘"); //return tick or X symbols
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void markAsDone() {
         isDone = true;
     }

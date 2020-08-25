@@ -74,10 +74,22 @@ public class Ui {
     /**
      * Formats the task list to be shown to the user.
      */
-    public String showTaskList(TaskList tasks) {
+    public void showTaskList(TaskList tasks) {
         if (tasks.isEmpty()) {
-            return "Your list is empty! Let's add some tasks!";
+            showReply("Your list is empty! Let's add some tasks!");
+        } else {
+            showReply("Here are the tasks in your list:" + tasks.toString());
         }
-        return "Here are the tasks in your list:" + tasks.toString();
+    }
+
+    /**
+     * Formats the task list to be shown to the user.
+     */
+    public void showFoundTaskList(TaskList tasks, String keyWords) {
+        if (tasks.isEmpty()) {
+            showReply("Sorry! No tasks were found with the word(s)\n\"" + keyWords + "\".");
+        } else {
+            showReply("Here are the tasks in your list with the word(s)\n\"" + keyWords + "\":" + tasks.toString());
+        }
     }
 }

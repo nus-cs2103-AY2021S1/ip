@@ -41,5 +41,23 @@ delete 1
 delete 1
 delete 1
 list
+deadline buy presents /by 2020-12-24 2359
+todo deck the halls
+todo dress presentably
+event Christmas party /at home
+event give presents /at Christmas party
+deadline homework /by 2020-10-17 1330
+find
+find mistletoe
+find present
+find presents
+find give presents
+find home
+delete 5
+delete 3
+delete 1
+delete 2
+delete 1
+delete 1
 todo first task
 bye
