@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CheckerTest {
+    // TODO: 25/8/2020 more checks for parsing exceptions
 
     @Test
     void test_Explicit_parseAndCheck_EmptyTODO_Exception() {
