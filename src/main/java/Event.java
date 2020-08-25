@@ -7,7 +7,7 @@ public class Event extends Task {
     private LocalDate date;
     private String time = "";
 
-    public Event(String isCompleted, String taskName, String by) {
+    public Event(String isCompleted, String taskName, String at) {
         super(isCompleted, taskName);
         this.at = at;
         String dateAndTime[] = at.split("\\s");
