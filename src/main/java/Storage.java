@@ -7,9 +7,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class Storage {
-    private final String filePath = "/data.txt";
+    private final String filePath;
 
-    public Storage(){
+    public Storage(String filePath){
+        this.filePath = filePath;
     }
 
     public ArrayList<Task> readFile() throws PathNoFoundException {
@@ -20,7 +21,6 @@ public class Storage {
                 List<String> allLines = Files.readAllLines(Paths.get(cwd + filePath));
                 for (String line : allLines) {
                     String[] info = line.split(" \\| ");
-
                     String type = info[0];
                     int complete = Integer.parseInt(info[1]);
                     String title = info[2];
@@ -44,17 +44,18 @@ public class Storage {
                     }
                 }
             }
+
             return tasks;
         } catch (IOException ex) {
-            throw new PathNoFoundException("not database yet");
+            throw new PathNoFoundException("No database found... A new database will be initialized!");
         }
     }
 
-    public void saveFile(ArrayList<Task> tasks){
+    public void saveFile(TaskList tasklist){
         try {
             String cwd = System.getProperty("user.dir");
             FileWriter fw = new FileWriter(cwd + filePath);
-            for (Task task : tasks) {
+            for (Task task : tasklist.getTasks()) {
                 String data = task.data();
                 fw.write(data + System.lineSeparator());
             }

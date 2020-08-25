@@ -41,19 +41,27 @@ public class Task {
 
     public Task markAsDone() {
         this.isDone = true;
-        System.out.println("Nice!(^∇^) I've marked this task as done:\n[\u2713] " + this.description );
         return this;
     }
 
     @Override
     public String toString() {
-        return "Got it. I've added this task:\n" +
-                "[\u2718] " + this.description;
+        return "[" + getStatusIcon() + "] " + description;
+    }
+
+    public String markAsDoneMessage() {
+        return "Nice!(^∇^) I've marked this task as done:\n"
+                + this.toString().replace("\u2718", "\u2713");
+    }
+
+    public String addMessage() {
+        return "Got it.(^∇^) I've added this task:\n"
+                + this.toString();
     }
 
     public String deleteMessage() {
-        return "Got it. I've deleted this task:\n" +
-                "[\u2718] " + this.description;
+        return "Got it.(^∇^) I've deleted this task:\n"
+                + this.toString();
     }
 
     public String data() {

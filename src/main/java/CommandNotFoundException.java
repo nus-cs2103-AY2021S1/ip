@@ -1,5 +1,4 @@
 public class CommandNotFoundException extends DukeException {
-    public static final String eM = "OOPS!!! I'm sorry, but I don't know what that means (´∀`)";
 
     CommandNotFoundException() {
         this("OOPS!!! I'm sorry, but I don't know what that means... (´∀`)\n" +

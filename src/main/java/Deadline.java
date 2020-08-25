@@ -23,19 +23,14 @@ public class Deadline extends Task {
         return hasTime;
     }
 
-
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         String timeString = time.format(formatter);
-        return super.toString().replace("[\u2718]", "[D][\u2718]") + " (by: " + timeString + ")";
+        return super.toString().replace("[", "[D][") + " (by: " + timeString + ")";
     }
 
     @Override
-    public String deleteMessage() {
-        return super.deleteMessage().replace("[\u2718]", "[T][\u2718]");
-    }
-
     public String data() {
         return  "D" + super.data() + " | " + time;
     }
