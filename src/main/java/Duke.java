@@ -25,48 +25,52 @@ public class Duke {
         // Check if data folder exists, if not create
         Path folderPath = Paths.get("..", "..", "..", "data");
         if (!Files.exists(folderPath)) {
-            //System.out.println("DOES NOT EXIST!!!!");
             File folderDir = new File(folderPath.toString());
             folderDir.mkdir();
-        } else {
-            //System.out.println("FOLDER EXIST!!!!");
         }
 
         // Get OS-independent file path to text file
         String filePath = Paths.get("..", "..", "..", "data", "Tasklist.txt")
                 .toString();
 
-/*
         // Uncomment for testing
-        String filePath = Paths.get("..","data", "Tasklist.txt")
-                .toString();
-*/
+//        String filePath = Paths.get("..","data", "Tasklist.txt")
+//                .toString();
 
         try {
             FileWriter myFile = new FileWriter(filePath);
             myFile.write(output); // Output is already all tasks in a string
             myFile.close();
-
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
     public static ArrayList<Task> readFromFile() {
+        // Check if data folder exists, if not create
+        Path folderPath = Paths.get("..", "..", "..", "data");
+        if (!Files.exists(folderPath)) {
+            File folderDir = new File(folderPath.toString());
+            folderDir.mkdir();
+        }
+
         // Initialise ArrayList to return
         ArrayList<Task> savedTasks = new ArrayList<Task>();
 
-        // Get OS-independent file path to read file
-        String filePath = Paths.get("..", "..", "..", "data", "Tasklist.txt")
-                .toString();
-/*
+        // Check if file exists, if return empty list
+        Path filePath = Paths.get("..", "..", "..", "data", "Tasklist.txt");
+        if (!Files.exists(filePath)) {
+            return savedTasks;
+        }
+
         // Uncomment for testing
-        String filePath = Paths.get("..","data", "Tasklist.txt")
-                .toString();
-*/
+//        Path filePath = Paths.get("..", "data", "Tasklist.txt");
+//        if (!Files.exists(filePath)) {
+//            return savedTasks;
+//        }
 
         try {
-            File myFile = new File(filePath);
+            File myFile = new File(filePath.toString());
             Scanner taskReader = new Scanner(myFile);
 
             // Keep reading new line until file end
