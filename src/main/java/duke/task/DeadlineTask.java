@@ -19,7 +19,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (at: %s)", TASK_TYPE, getStatusIcon(), description,
+        return String.format("[%s][%s] %s (by: %s)", TASK_TYPE, getStatusIcon(), description,
                 by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 
