@@ -161,28 +161,28 @@ public class TaskList {
             String description = task.getDescription();
             String[] keywords;
             switch (task.getType()) {
-                case TODO:
-                    keywords = description.split("\\s");
-                    for (String keyword : keywords) {
-                        if (keyword.equals(query)) {
-                            queriedList.add(new Todo(description, queriedList.size() + 1, task.hasDone()));
-                        }
+            case TODO:
+                keywords = description.split("\\s");
+                for (String keyword : keywords) {
+                    if (keyword.equals(query)) {
+                        queriedList.add(new Todo(description, queriedList.size() + 1, task.hasDone()));
                     }
-                    break;
-                case EVENT:
-                case DEADLINE:
-                    // to retrieve just the activity
-                    keywords = description.substring(0, description.indexOf("/") - 1).split("\\s");
-                    for (String keyword : keywords) {
-                        if (keyword.equals(query)) {
-                            queriedList.add(task.getType() == TaskType.DEADLINE
-                                    ? new Deadline(description, queriedList.size() + 1, task.hasDone())
-                                    : new Event(description, queriedList.size() + 1, task.hasDone()));
-                        }
+                }
+                break;
+            case EVENT:
+            case DEADLINE:
+                // to retrieve just the activity
+                keywords = description.substring(0, description.indexOf("/") - 1).split("\\s");
+                for (String keyword : keywords) {
+                    if (keyword.equals(query)) {
+                        queriedList.add(task.getType() == TaskType.DEADLINE
+                                ? new Deadline(description, queriedList.size() + 1, task.hasDone())
+                                : new Event(description, queriedList.size() + 1, task.hasDone()));
                     }
-                    break;
-                default:
-                    break;
+                }
+                break;
+            default:
+                break;
             }
         }
         return queriedList;

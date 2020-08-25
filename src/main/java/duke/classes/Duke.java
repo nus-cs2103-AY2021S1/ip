@@ -3,14 +3,9 @@ package duke.classes;
 import duke.exceptions.BlahException;
 import duke.exceptions.DukeInvalidTimeException;
 import duke.exceptions.EmptyDukeException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
 import duke.tasks.Task;
-import duke.tasks.Todo;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * The Duke class implements the DukeChatBot that is wired to store, display, update and delete
@@ -36,7 +31,12 @@ public class Duke {
             this.taskList = new TaskList(data.loadData());
         } catch (IOException | DukeInvalidTimeException | ArrayIndexOutOfBoundsException e) {
             System.out.println("FAILURE: Unable to load data from local drive.");
-            this.taskList = new TaskList();
+            try {
+                data = new Data();
+                this.taskList = new TaskList(data.loadData());
+            } catch (IOException | ArrayIndexOutOfBoundsException | DukeInvalidTimeException err) {
+                System.out.println("FAILURE: Unable to create any file for saving data");
+            }
         }
     }
 

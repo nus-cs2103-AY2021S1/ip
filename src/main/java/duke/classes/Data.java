@@ -36,6 +36,18 @@ public class Data {
     }
 
     /**
+     * Constructor that creates file and directory, if directory is not found.
+     *
+     * @throws IOException For missing files
+     */
+
+    Data() throws IOException {
+        this.path = Path.of("src/main/data/duke.txt");
+        new File("src/main/data").mkdirs();
+        new File(this.path.toString()).createNewFile();
+    }
+
+    /**
      * Method to read the data stored on local disk.
      *
      * @return List of tasks saved
