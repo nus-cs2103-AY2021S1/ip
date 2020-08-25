@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dcc7396a-4a04-47f3-9835-d9f0d7777614" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/ip.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/ip.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ip.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ip.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/duke.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/duke.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Deadline.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Duke.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DukeException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Event.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Storage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Task.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TaskList.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Todo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Ui.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,41 +22,104 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1gGfzCwdSZSXh0z0WVaE8Cucvl9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
   </component>
-  <component name="RunManager" selected="Application.Duke (1)">
-    <configuration name="Duke (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="duke.Duke" />
-      <module name="ip" />
+  <component name="RunManager" selected="JUnit.TodoTest">
+    <configuration name="DeadlineTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="duke.*" />
+          <option name="PATTERN" value="task.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="task" />
+      <option name="MAIN_CLASS_NAME" value="task.DeadlineTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Duke" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Duke" />
-      <module name="ip" />
+    <configuration name="EventTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="task.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="task" />
+      <option name="MAIN_CLASS_NAME" value="task.EventTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ParserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="parser.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="parser" />
+      <option name="MAIN_CLASS_NAME" value="parser.ParserTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="task.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="task" />
+      <option name="MAIN_CLASS_NAME" value="task.TaskTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TodoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="task.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="task" />
+      <option name="MAIN_CLASS_NAME" value="task.TodoTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Duke (1)" />
-        <item itemvalue="Application.Duke" />
+        <item itemvalue="JUnit.TodoTest" />
+        <item itemvalue="JUnit.TaskTest" />
+        <item itemvalue="JUnit.EventTest" />
+        <item itemvalue="JUnit.DeadlineTest" />
+        <item itemvalue="JUnit.ParserTest" />
       </list>
     </recent_temporary>
   </component>
@@ -85,29 +139,33 @@
       <screen x="4" y="23" width="1436" height="877" />
     </state>
     <state x="73" y="103" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/4.23.1436.877@4.23.1436.877" timestamp="1598286718834" />
-    <state width="1379" height="217" key="GridCell.Tab.0.bottom" timestamp="1598286948095">
+    <state width="1379" height="209" key="GridCell.Tab.0.bottom" timestamp="1598366394359">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="217" key="GridCell.Tab.0.bottom/4.23.1436.877@4.23.1436.877" timestamp="1598286948095" />
-    <state width="1379" height="217" key="GridCell.Tab.0.center" timestamp="1598286948093">
+    <state width="1379" height="209" key="GridCell.Tab.0.bottom/4.23.1436.877@4.23.1436.877" timestamp="1598366394359" />
+    <state width="1379" height="209" key="GridCell.Tab.0.center" timestamp="1598366394357">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="217" key="GridCell.Tab.0.center/4.23.1436.877@4.23.1436.877" timestamp="1598286948093" />
-    <state width="1379" height="217" key="GridCell.Tab.0.left" timestamp="1598286948092">
+    <state width="1379" height="209" key="GridCell.Tab.0.center/4.23.1436.877@4.23.1436.877" timestamp="1598366394357" />
+    <state width="1379" height="209" key="GridCell.Tab.0.left" timestamp="1598366394356">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="217" key="GridCell.Tab.0.left/4.23.1436.877@4.23.1436.877" timestamp="1598286948092" />
-    <state width="1379" height="217" key="GridCell.Tab.0.right" timestamp="1598286948094">
+    <state width="1379" height="209" key="GridCell.Tab.0.left/4.23.1436.877@4.23.1436.877" timestamp="1598366394356" />
+    <state width="1379" height="209" key="GridCell.Tab.0.right" timestamp="1598366394358">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="217" key="GridCell.Tab.0.right/4.23.1436.877@4.23.1436.877" timestamp="1598286948094" />
-    <state x="356" y="245" key="NewModule_or_Project.wizard" timestamp="1597677490495">
+    <state width="1379" height="209" key="GridCell.Tab.0.right/4.23.1436.877@4.23.1436.877" timestamp="1598366394358" />
+    <state x="356" y="245" key="NewModule_or_Project.wizard" timestamp="1598355742697">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state x="356" y="245" key="NewModule_or_Project.wizard/4.23.1436.877@4.23.1436.877" timestamp="1597677490495" />
-    <state x="319" y="29" key="SettingsEditor" timestamp="1598105897804">
+    <state x="356" y="245" key="NewModule_or_Project.wizard/4.23.1436.877@4.23.1436.877" timestamp="1598355742697" />
+    <state x="76" y="23" key="SettingsEditor" timestamp="1598356219516">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state x="319" y="29" key="SettingsEditor/4.23.1436.877@4.23.1436.877" timestamp="1598105897804" />
+    <state x="76" y="23" key="SettingsEditor/4.23.1436.877@4.23.1436.877" timestamp="1598356219516" />
+    <state x="325" y="341" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1598355847613">
+      <screen x="4" y="23" width="1436" height="877" />
+    </state>
+    <state x="325" y="341" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/4.23.1436.877@4.23.1436.877" timestamp="1598355847613" />
   </component>
 </project>
