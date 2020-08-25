@@ -22,6 +22,11 @@ public class Task {
         isDone = false;
     }
 
+    public String getStorageFormat() {
+        String done = isDone ? "1" : "0";
+        return done + " | " + taskName;
+    }
+
     @Override
     public String toString() {
         final String CHECKMARK = "[✓]";
