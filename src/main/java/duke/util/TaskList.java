@@ -1,9 +1,12 @@
+package duke.util;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class TaskList implements Iterable<Task> {
-
 
     protected List<Task> listOfTasks;
 
@@ -43,7 +46,7 @@ public class TaskList implements Iterable<Task> {
     }
 
 
-    protected String createTaskNumberCountMessage() {
+    public String createTaskNumberCountMessage() {
         return "Now you have " + listOfTasks.size() + " tasks in the list.";
     }
 

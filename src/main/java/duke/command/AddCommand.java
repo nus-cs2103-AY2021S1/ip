@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.util.TaskList;
+import duke.task.TaskParser;
+import duke.Ui;
+import duke.task.Task;
+
 public class AddCommand extends Command {
 
     protected static final String ADDED_MESSAGE = "Got it. I've added this task: ";

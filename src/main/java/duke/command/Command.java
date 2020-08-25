@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.util.TaskList;
+import duke.Ui;
+
 public abstract class Command {
 
     public boolean isExit() {

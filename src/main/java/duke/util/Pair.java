@@ -1,7 +1,9 @@
+package duke.util;
+
 public class Pair<T, U> {
 
-    protected T first;
-    protected U second;
+    public T first;
+    public U second;
 
     private Pair(T first, U second) {
         this.first = first;

@@ -1,3 +1,5 @@
+package duke.storage;
+
 /**
  * Encapsulates classes that can be summarised with the getSummary() method to be stored.
  * Classes that implement this interface must also have a <code>reconstruct(String summary)</code> method that recreates the object.

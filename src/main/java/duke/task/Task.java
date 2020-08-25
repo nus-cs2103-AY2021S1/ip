@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.storage.PrintSummary;
+
 /**
  * Encapsulates a Task with a description.
  *

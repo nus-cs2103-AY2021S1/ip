@@ -1,4 +1,8 @@
-import java.time.LocalDate;
+package duke.task;
+
+import duke.datetime.DateTimeHandler;
+import duke.DukeException;
+
 import java.time.LocalDateTime;
 
 /**
@@ -11,7 +15,7 @@ public class Deadline extends Task {
     /** String separator used to separate the task description from the dateline */
     public static final String SPLITTER = " /by ";
     /** Symbol representing the type of Task this is */
-    protected static final String SYMBOL = "D";
+    public static final String SYMBOL = "D";
 
     /** Deadline of the task */
     protected LocalDateTime deadline;

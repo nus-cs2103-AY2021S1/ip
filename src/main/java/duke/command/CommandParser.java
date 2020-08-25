@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+
 public class CommandParser {
 
     protected static final String INDICATOR_CLOSING = "bye";

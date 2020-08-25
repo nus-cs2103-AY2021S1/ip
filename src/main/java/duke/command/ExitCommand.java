@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.util.TaskList;
+import duke.Ui;
+
 public class ExitCommand extends Command {
 
     protected static final String CLOSING_MESSAGE = "Bye. Hope to see you again soon!";

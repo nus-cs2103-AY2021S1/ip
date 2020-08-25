@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents a general Exception class of Exceptions that occur while DukeException is running.
  */

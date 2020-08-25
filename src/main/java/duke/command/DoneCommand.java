@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.storage.Storage;
+import duke.util.TaskList;
+import duke.Ui;
+import duke.task.Task;
+
 public class DoneCommand extends Command {
 
     protected static final String DONE_MESSAGE = "Nice! I've marked this task as done: ";

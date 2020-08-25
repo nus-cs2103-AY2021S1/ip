@@ -1,19 +1,16 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+package duke;
+
+import duke.command.Command;
+import duke.command.CommandParser;
+
+import duke.storage.Storage;
+
+import duke.util.TaskList;
 
 /**
  * Duke is a Personal Assistant Chatbot that helps a user keep track of various things.
  */
 public class Duke {
-
-
-
-
-
-
-
 
     protected TaskList taskList;
     protected Storage storage;

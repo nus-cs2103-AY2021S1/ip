@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.storage.Storage;
+import duke.util.TaskList;
+import duke.Ui;
+import duke.task.Task;
+
 public class DeleteCommand extends Command {
 
     protected static final String DELETE_MESSAGE = "Noted. I've removed this task: ";

@@ -1,5 +1,10 @@
+package duke.task;
+
+import duke.datetime.DateTimeHandler;
+import duke.DukeException;
+import duke.util.Pair;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Encapsulates an Event.
@@ -8,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     /** Symbol representing the type of Task this is */
-    protected static final String SYMBOL = "E";
+    public static final String SYMBOL = "E";
     /** String separator used to separate the task description and the timing*/
     public static final String SPLITTER = " /at ";
 

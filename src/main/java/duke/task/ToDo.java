@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 /**
  * Encapsulates Tasks that are to be completed.
  * Object only carries information about the task to be completed.
@@ -5,7 +9,7 @@
 public class ToDo extends Task {
 
     /** Symbol representing the type of Task this is */
-    protected static final String SYMBOL = "T";
+    public static final String SYMBOL = "T";
 
     /**
      * Creates a ToDo object with the given task description.
