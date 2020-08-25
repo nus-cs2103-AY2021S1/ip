@@ -1,7 +1,6 @@
 /**
  * Represents a deadline task.
  */
-
 public class Deadline extends Task {
     protected String by;
 

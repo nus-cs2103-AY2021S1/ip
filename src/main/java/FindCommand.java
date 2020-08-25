@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Finds a task based on the given keyword.
+ */
 public class FindCommand extends Command {
     public final static String COMMAND_WORD = "find";
 
@@ -20,6 +23,7 @@ public class FindCommand extends Command {
 
         int size = matchingTasks.size();
         String message;
+
         if (size == 0) {
             message = "There is no matching task in your list.\n";
         } else if (size == 1) {
