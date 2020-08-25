@@ -1,6 +1,5 @@
 package duke.task;
 
-import duke.exceptions.DukeException;
 import duke.exceptions.DukeStorageException;
 import duke.exceptions.DukeTaskCreationException;
 
@@ -37,6 +36,11 @@ public class ToDo extends Task {
         } else {
             throw new DukeStorageException("Something doesn't seem right...");
         }
+    }
+
+    @Override
+    public boolean match(String searchParameter) {
+        return description.contains(searchParameter) || searchParameter.contains(description);
     }
 
     @Override

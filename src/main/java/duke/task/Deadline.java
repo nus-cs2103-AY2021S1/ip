@@ -1,10 +1,12 @@
 package duke.task;
 
-import java.time.LocalDateTime;
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeStorageException;
 import duke.exceptions.DukeTaskCreationException;
 import duke.parser.DateParser;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Deadline extends Task {
 
@@ -52,6 +54,18 @@ public class Deadline extends Task {
         } else {
             throw new DukeStorageException("Something doesn't seem right...");
         }
+    }
+
+    @Override
+    public boolean match(String searchParameter) {
+        try {
+            LocalDate searchDate = DateParser.parseString(searchParameter).toLocalDate();
+            if (searchDate.isEqual(dateTime.toLocalDate())) {
+                return true;
+            }
+        } catch (DukeException e) {
+        }
+        return searchParameter.contains(description) || description.contains(searchParameter);
     }
 
     @Override

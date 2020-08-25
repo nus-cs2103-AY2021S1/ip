@@ -18,20 +18,22 @@ public class DateParser {
     private static final int HAS_TIME_INDICATOR = 0;
     private static final int NULL_TIME_INDICATOR = 30;
 
-    public static LocalDateTime parseString(String input) {
+    public static LocalDateTime parseString(String input) throws DukeException {
         if (input.contains(":")) {
             for (String format : ACCEPTED_FORMATS_WITH_TIME) {
                 try {
                     return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(format)).withSecond(HAS_TIME_INDICATOR);
-                } catch (DateTimeParseException e) { }
+                } catch (DateTimeParseException e) {
+                }
             }
         } else {
             for (String format : ACCEPTED_FORMATS_DATE_ONLY) {
                 try {
                     // Since we do not support seconds for date and time based information, we use the second field to
                     // differentiate between a LocalDateTime with no defined time and one with time defined at midnight.
-                   return LocalDate.parse(input, DateTimeFormatter.ofPattern(format)).atStartOfDay().withSecond(NULL_TIME_INDICATOR);
-                } catch (DateTimeParseException e) { }
+                    return LocalDate.parse(input, DateTimeFormatter.ofPattern(format)).atStartOfDay().withSecond(NULL_TIME_INDICATOR);
+                } catch (DateTimeParseException e) {
+                }
             }
         }
         throw new DukeException("I'm not quite sure if we know each other...");

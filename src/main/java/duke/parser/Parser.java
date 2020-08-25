@@ -1,7 +1,13 @@
 package duke.parser;
 
-import duke.exceptions.DukeException;
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.CompleteCommand;
+import duke.command.DeleteAllCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.SearchCommand;
 import duke.exceptions.ParseDukeCommandException;
 import duke.task.TaskType;
 
@@ -14,7 +20,8 @@ public class Parser {
         TODO("todo"),
         DEADLINE("deadline"),
         EVENT("event"),
-        DELETE("delete");
+        DELETE("delete"),
+        SEARCH("search");
 
         private final String input;
 
@@ -81,6 +88,12 @@ public class Parser {
                 return new AddCommand(TaskType.EVENT, inputs[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new ParseDukeCommandException("Are you going to attend a nameless event?");
+            }
+        case SEARCH:
+            try {
+                return new SearchCommand(inputs[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new ParseDukeCommandException("I don't have the answer to every or anything");
             }
         default:
             throw new ParseDukeCommandException("Wakarimasen~");

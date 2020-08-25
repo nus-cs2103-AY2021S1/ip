@@ -1,8 +1,9 @@
 package duke.task;
 
 import duke.Encodable;
+import duke.Searchable;
 
-public abstract class Task implements Encodable<Task> {
+public abstract class Task implements Encodable<Task>, Searchable {
 
     protected String description;
     protected boolean completed;
