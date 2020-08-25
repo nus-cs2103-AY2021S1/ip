@@ -15,6 +15,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String getData() {
+        return "E | " + super.getData() + " | " + this.getAt();
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.getAt() + ")";
     }

@@ -1,5 +1,8 @@
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Encapsulates the handling of Duke's save file.
@@ -39,6 +42,26 @@ public class DukeSaveFile {
             } catch (IOException e) {
                 System.out.println(failMessage);
             }
+        }
+    }
+
+    /**
+     * Writes tasks' data to duke.txt
+     *
+     * @param tasks List of tasks to be saved.
+     */
+    public static void writeToSaveFile(ArrayList<Task> tasks) {
+        StringBuilder data = new StringBuilder();
+        for (Task task: tasks) {
+            data.append(task.getData()).append("\n");
+        }
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(FILE_PATH)));
+            writer.write(data.toString());
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Failed to write data to duke.txt. Please try again.");
         }
     }
 }

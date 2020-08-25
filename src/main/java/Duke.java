@@ -10,7 +10,7 @@ public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
-        // Check if save file exists.
+        // Check if save file exists
         DukeSaveFile.checkSaveFile();
 
         // Print Duke's introduction
@@ -104,6 +104,7 @@ public class Duke {
             int index = number - 1;
             Task task = tasks.get(index);
             tasks.remove(index);
+            DukeSaveFile.writeToSaveFile(tasks);    // write tasks' data to duke.txt
             System.out.println("Noted. I've removed this task:");
             System.out.println(task.toString());
             printNumOfTasks();
@@ -125,6 +126,7 @@ public class Duke {
             int number = Integer.parseInt(input.substring(5));
             Task task = tasks.get(number - 1);
             task.markAsDone();
+            DukeSaveFile.writeToSaveFile(tasks);    // write tasks' data to duke.txt
             System.out.println("Nice! I've marked this as done:");
             System.out.println(task.toString() + "\n");
         } catch (IndexOutOfBoundsException e) {
@@ -146,10 +148,10 @@ public class Duke {
         String taskString;
 
         try {
-            if (input.contains("todo")) {   // todo
+            if (input.contains("todo")) {    // todo
                 taskString = input.substring(5);
                 task = new Todo(taskString);
-            } else if (input.contains("event")) {   // event
+            } else if (input.contains("event")) {    // event
                 taskString = input.substring(6);
                 String[] arr = taskString.split(" /at ", 2);
                 if (arr.length < 2 || arr[1].equals("")) {
@@ -174,6 +176,7 @@ public class Duke {
         }
 
         tasks.add(task);
+        DukeSaveFile.writeToSaveFile(tasks);    // write tasks' data to duke.txt
         System.out.println("Got it. I've added this task:");
         System.out.println(task.toString());
         printNumOfTasks();
