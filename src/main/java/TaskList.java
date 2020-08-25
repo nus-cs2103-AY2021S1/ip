@@ -1,3 +1,8 @@
+/**
+ * A class containing a list of tasks, with methods for adding new tasks, deleting and returning
+ * tasks due on a specific date.
+ */
+
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Iterator;
@@ -10,18 +15,36 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Returns the current list of tasks.
+     * @return list of tasks
+     */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
 
+    /**
+     * Returns a task at the specified index.
+     * @param index index to locate task
+     * @return task at the given index
+     */
     public Task getTask(int index) {
         return this.tasks.get(index);
     }
 
+    /**
+     * Returns the current total number of tasks.
+     * @return total number of tasks
+     */
     public int count() {
         return this.tasks.size();
     }
 
+    /**
+     * Adds a new task to the list of tasks.
+     * @param task new task to be added
+     * @return true if a non-null task object is given
+     */
     public boolean addTask(Task task) {
         if (task == null) {
             return false;
@@ -30,6 +53,11 @@ public class TaskList {
         return true;
     }
 
+    /**
+     * Returns a list of tasks due on a given date.
+     * @param date given date
+     * @return list of tasks due
+     */
     public ArrayList<Task> retrieveTasksOnDate(LocalDate date) {
         Iterator<Task> iter = this.tasks.iterator();
         ArrayList<Task> tasks = new ArrayList<>();
@@ -43,6 +71,12 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Deletes the task at a specified index on the list.
+     * @param index index to locate task
+     * @return task that is removed
+     * @throws ChatbotException if given index is out-of-bounds
+     */
     public Task removeTask(int index) throws ChatbotException {
         Task removed;
         try {
@@ -53,6 +87,12 @@ public class TaskList {
         return removed;
     }
 
+    /**
+     * Mark a task on the list as done.
+     * @param index index to locate the task
+     * @return task to be marked as done
+     * @throws ChatbotException if given index is out-of-bounds
+     */
     public Task markAsDone(int index) throws ChatbotException {
         Task taskDone;
         try {

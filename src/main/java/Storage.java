@@ -1,3 +1,7 @@
+/**
+ * A storage class that contains methods for loading and saving tasks.
+ */
+
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.nio.file.Files;
@@ -7,10 +11,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
-/*
-    Storage class takes in a path and contains methods for loading and saving tasks.
-*/
-
 public class Storage {
 
     private final Path location;
@@ -19,6 +19,11 @@ public class Storage {
         this.location = location;
     }
 
+    /**
+     * Loads a list of tasks from a file on the disk. If no such file exists, create a new file.
+     * @return list of tasks saved to the disk
+     * @throws ChatbotException if could not load file
+     */
     public ArrayList<Task> loadTasks() throws ChatbotException {
         try {
 

@@ -1,5 +1,15 @@
+/**
+ * A class that parses the command input given by the user.
+ */
+
 public class Parser {
 
+    /**
+     * Parses the user input and returns an executable command.
+     * @param fullCmd the user input
+     * @return command matching the user input
+     * @throws ChatbotException
+     */
     public static Command parse(String fullCmd) throws ChatbotException{
 
         String text = fullCmd.trim();

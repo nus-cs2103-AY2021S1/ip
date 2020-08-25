@@ -1,3 +1,7 @@
+/**
+ * Represents a command to either delete or mark task as done given a type.
+ */
+
 public class ActionCommand extends Command {
 
     Type type;
