@@ -21,7 +21,7 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
-
+    
     /**
      * Checks whether the task is done.
      * @return Integer that represents done state.
@@ -30,6 +30,14 @@ public class Task {
         return (isDone ? 1 : 0);
     }
 
+    /**
+     * Gets task description.
+     * @return Task description.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+    
     /**
      * Marks the task as done.
      */

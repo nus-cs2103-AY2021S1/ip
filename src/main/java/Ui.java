@@ -78,11 +78,20 @@ public class Ui {
         printLine(drawBorder( "Here are the tasks in your list:\n" + lst.toString()));
     }
 
-    /**
+   /**
      * Prints error messages.
      * @param err Error message.
      */
     public void showError(String err) {
         printLine(drawBorder(err));
+    }
+
+    /**
+     * Prints matching tasks that contains the keyword entered by user.
+     * @param lst List of tasks.
+     */
+    public void printMatchingTasks(TaskList lst) {
+        printLine(drawBorder( "Here are the matching tasks in your list:\n" + lst.toString()));
+
     }
 }
