@@ -1,18 +1,29 @@
+package duke;
+
+import duke.command.Command;
+import duke.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
-    public TaskListHandler handler;
-    public Storage storage;
+    protected TaskListHandler handler;
+    protected Storage storage;
+    protected static boolean isRunning = true;
+
 
     public Ui(TaskListHandler handler, Storage storage) {
         this.handler = handler;
         this.storage = storage;
     }
 
+    public static void stopRunning() {
+        isRunning = false;
+    }
+
     public void run() {
         greet();
         Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextLine()) {
+        while (isRunning) {
             // Listens for input
             String input = scanner.nextLine();
             try {

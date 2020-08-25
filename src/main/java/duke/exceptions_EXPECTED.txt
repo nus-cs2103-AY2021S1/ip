@@ -1,0 +1,380 @@
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+Hello! I'm Duke the chatbot! 
+What can I do for you?
+
+Successfully loaded from save file: 1 task(s)
+DukeException: ? Oops, I'm sorry but I don't know what that means :-(
+	at InvalidCommand.execute(InvalidCommand.java:7)
+	at Ui.run(Ui.java:19)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+
+DukeException: ? Oops, the description of a todo cannot be empty.
+	at Parser.parseNewTaskCommand(Parser.java:55)
+	at Parser.parse(Parser.java:17)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, the description of a todo cannot be empty.
+	at Parser.parseNewTaskCommand(Parser.java:55)
+	at Parser.parse(Parser.java:17)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+    Here are the tasks in your list:
+        1. [T][?] final task
+    You have 1 task(s) in the list
+
+    Here are the tasks in your list:
+        1. [T][?] final task
+    You have 1 task(s) in the list
+
+DukeException: ? Oops, I'm sorry but I don't know what that means :-(
+	at InvalidCommand.execute(InvalidCommand.java:7)
+	at Ui.run(Ui.java:19)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+
+DukeException: ? Oops, use add deadline format: deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')]
+	at Parser.parseNewTaskCommand(Parser.java:64)
+	at Parser.parse(Parser.java:20)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, use add deadline format: deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')]
+	at Parser.parseNewTaskCommand(Parser.java:64)
+	at Parser.parse(Parser.java:20)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, use add deadline format: deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')]
+	at Parser.parseNewTaskCommand(Parser.java:64)
+	at Parser.parse(Parser.java:20)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, use add deadline format: deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')]
+	at Parser.parseNewTaskCommand(Parser.java:64)
+	at Parser.parse(Parser.java:20)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, use add deadline format: deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')]
+	at Parser.parseNewTaskCommand(Parser.java:64)
+	at Parser.parse(Parser.java:20)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, use add deadline format: deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')]
+	at Parser.parseNewTaskCommand(Parser.java:64)
+	at Parser.parse(Parser.java:20)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, use add deadline format: deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')]
+	at Parser.parseNewTaskCommand(Parser.java:64)
+	at Parser.parse(Parser.java:20)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+    Here are the tasks in your list:
+        1. [T][?] final task
+    You have 1 task(s) in the list
+
+    Here are the tasks in your list:
+        1. [T][?] final task
+    You have 1 task(s) in the list
+
+DukeException: ? Oops, I'm sorry but I don't know what that means :-(
+	at InvalidCommand.execute(InvalidCommand.java:7)
+	at Ui.run(Ui.java:19)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+
+DukeException: ? Oops, use add event format: event [task] /at [time]
+	at Parser.parseNewTaskCommand(Parser.java:70)
+	at Parser.parse(Parser.java:23)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, use add event format: event [task] /at [time]
+	at Parser.parseNewTaskCommand(Parser.java:70)
+	at Parser.parse(Parser.java:23)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, use add event format: event [task] /at [time]
+	at Parser.parseNewTaskCommand(Parser.java:70)
+	at Parser.parse(Parser.java:23)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, use add event format: event [task] /at [time]
+	at Parser.parseNewTaskCommand(Parser.java:70)
+	at Parser.parse(Parser.java:23)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, use add event format: event [task] /at [time]
+	at Parser.parseNewTaskCommand(Parser.java:70)
+	at Parser.parse(Parser.java:23)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, use add event format: event [task] /at [time]
+	at Parser.parseNewTaskCommand(Parser.java:70)
+	at Parser.parse(Parser.java:23)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, use add event format: event [task] /at [time]
+	at Parser.parseNewTaskCommand(Parser.java:70)
+	at Parser.parse(Parser.java:23)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, the description of a todo cannot be empty.
+	at Parser.parseNewTaskCommand(Parser.java:55)
+	at Parser.parse(Parser.java:17)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, the description of a todo cannot be empty.
+	at Parser.parseNewTaskCommand(Parser.java:55)
+	at Parser.parse(Parser.java:17)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, I'm sorry but I don't know what that means :-(
+	at InvalidCommand.execute(InvalidCommand.java:7)
+	at Ui.run(Ui.java:19)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+
+    Here are the tasks in your list:
+        1. [T][?] final task
+    You have 1 task(s) in the list
+
+    Here are the tasks in your list:
+        1. [T][?] final task
+    You have 1 task(s) in the list
+
+DukeException: ? Oops, I'm sorry but I don't know what that means :-(
+	at InvalidCommand.execute(InvalidCommand.java:7)
+	at Ui.run(Ui.java:19)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+
+DukeException: ? Oops, pls enter only one task number after done
+	at Parser.parseModifyTaskCommand(Parser.java:38)
+	at Parser.parse(Parser.java:11)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, pls enter only one task number after done
+	at Parser.parseModifyTaskCommand(Parser.java:38)
+	at Parser.parse(Parser.java:11)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, pls enter a valid task number after done
+	at Parser.parseModifyTaskCommand(Parser.java:45)
+	at Parser.parse(Parser.java:11)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, pls enter only one task number after done
+	at Parser.parseModifyTaskCommand(Parser.java:38)
+	at Parser.parse(Parser.java:11)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, pls enter a valid task number after done
+	at Parser.parseModifyTaskCommand(Parser.java:45)
+	at Parser.parse(Parser.java:11)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, pls enter only one task number after done
+	at Parser.parseModifyTaskCommand(Parser.java:38)
+	at Parser.parse(Parser.java:11)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, pls enter only one task number after done
+	at Parser.parseModifyTaskCommand(Parser.java:38)
+	at Parser.parse(Parser.java:11)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, pls enter a valid task number after done
+	at Parser.parseModifyTaskCommand(Parser.java:45)
+	at Parser.parse(Parser.java:11)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, pls enter only one task number after done
+	at Parser.parseModifyTaskCommand(Parser.java:38)
+	at Parser.parse(Parser.java:11)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+    Here are the tasks in your list:
+        1. [T][?] final task
+    You have 1 task(s) in the list
+
+    Here are the tasks in your list:
+        1. [T][?] final task
+    You have 1 task(s) in the list
+
+DukeException: ? Oops, I'm sorry but I don't know what that means :-(
+	at InvalidCommand.execute(InvalidCommand.java:7)
+	at Ui.run(Ui.java:19)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+
+DukeException: ? Oops, pls enter only one task number after delete
+	at Parser.parseModifyTaskCommand(Parser.java:38)
+	at Parser.parse(Parser.java:14)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, pls enter only one task number after delete
+	at Parser.parseModifyTaskCommand(Parser.java:38)
+	at Parser.parse(Parser.java:14)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, pls enter a valid task number after delete
+	at Parser.parseModifyTaskCommand(Parser.java:45)
+	at Parser.parse(Parser.java:14)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, pls enter only one task number after delete
+	at Parser.parseModifyTaskCommand(Parser.java:38)
+	at Parser.parse(Parser.java:14)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, pls enter a valid task number after delete
+	at Parser.parseModifyTaskCommand(Parser.java:45)
+	at Parser.parse(Parser.java:14)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, pls enter only one task number after delete
+	at Parser.parseModifyTaskCommand(Parser.java:38)
+	at Parser.parse(Parser.java:14)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, pls enter only one task number after delete
+	at Parser.parseModifyTaskCommand(Parser.java:38)
+	at Parser.parse(Parser.java:14)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, pls enter a valid task number after delete
+	at Parser.parseModifyTaskCommand(Parser.java:45)
+	at Parser.parse(Parser.java:14)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+DukeException: ? Oops, pls enter only one task number after delete
+	at Parser.parseModifyTaskCommand(Parser.java:38)
+	at Parser.parse(Parser.java:14)
+	at Ui.run(Ui.java:18)
+	at Duke.initialize(Duke.java:11)
+	at Duke.main(Duke.java:3)
+
+Please try again: 
+Bye bye! Hope to see you again soon!
+

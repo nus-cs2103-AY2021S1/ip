@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskListHandler;
+import duke.Ui;
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public abstract class AddAbstractTaskCommand extends Command {

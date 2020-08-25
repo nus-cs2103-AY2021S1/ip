@@ -1,8 +1,16 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskListHandler;
+import duke.Ui;
+import duke.task.Task;
+
 import java.util.ArrayList;
 
-public class DeleteCommand extends AbstractModifyTaskCommand {
+public class DoneCommand extends AbstractModifyTaskCommand {
 
-    public DeleteCommand(Task task) {
+    public DoneCommand(Task task) {
         super(task);
     }
 
@@ -10,8 +18,8 @@ public class DeleteCommand extends AbstractModifyTaskCommand {
     public void execute(TaskListHandler handler, Storage storage) {
         try {
             ArrayList<Task> taskList = handler.getTaskList();
-            handler.getTaskList().remove(task);
-            Ui.printSuccess("delete", task, taskList.size());
+            task.markAsDone();
+            Ui.printSuccess("done", task, taskList.size());
             storage.saveToFile(taskList);
         } catch (DukeException e) {
             e.printStackTrace(System.out);

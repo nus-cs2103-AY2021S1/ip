@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.task.Task;
+
 public abstract class AbstractModifyTaskCommand extends Command {
     protected final Task task;
 

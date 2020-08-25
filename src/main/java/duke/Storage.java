@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,10 +16,11 @@ public class Storage {
     protected File savefile;
     protected FileWriter writer;
     protected boolean isEmptySave;
+    protected static boolean isLoadingError = false;
 
     // hardcoding the directory? will it work on *nix?
     // try: String home = System.getProperty("user.home");
-    protected final static String location = "src/main/data";
+    protected final static String location = "./src/main/java/duke/data";
     protected final static String filename = "/save.txt";
     protected ArrayList<Task> listFromFile;
 
@@ -107,12 +112,15 @@ public class Storage {
             try {
                 // Resets save file to empty
                 this.saveToFile(newList);
+                Ui.greet();
             } catch (DukeException e1) {
                 e1.printStackTrace(System.out);
             }
-            Ui.greet();
+            return newList;
+        } else {
+            isLoadingError = true;
+            return newList;
         }
-        return newList;
     }
 
     public void saveToFile(ArrayList<Task> list) throws DukeException {
