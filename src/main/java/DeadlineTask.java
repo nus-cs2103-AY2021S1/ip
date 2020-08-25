@@ -1,23 +1,27 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class DeadlineTask extends Task {
-    private String by;
+    private LocalDate by;
     static final String TASK_TYPE = "D";
 
-    public DeadlineTask(String description, String by) {
+    public DeadlineTask(String description, LocalDate by) {
         super(description);
         this.by = by;
     }
 
-    public DeadlineTask(String description, String by, boolean isDone) {
+    public DeadlineTask(String description, LocalDate by, boolean isDone) {
         super(description, isDone);
         this.by = by;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (by: %s)", TASK_TYPE, getStatusIcon(), description, by);
+        return String.format("[%s][%s] %s (at: %s)", TASK_TYPE, getStatusIcon(), description,
+                by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 
     public String toDBString() {
-        return TASK_TYPE + "~" + super.toDBString() + "~" + by;
+        return TASK_TYPE + "~" + super.toDBString() + "~" + by.toString();
     }
 }
