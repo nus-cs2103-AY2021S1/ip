@@ -192,7 +192,8 @@ public class Wish {
                 if (parsed.length == 1) {
                     throw new Exception("Please input the deadline in a valid format");
                 } else {
-                    Deadline deadline = new Deadline(parsed[0].trim(), parsed[1].trim());
+                    String[] dateTime = parsed[1].trim().split(" ");
+                    Deadline deadline = new Deadline(parsed[0].trim(), dateTime[0], dateTime[1]);
                     add(database, deadline);
                 }
             } catch (Exception e) {
@@ -212,7 +213,8 @@ public class Wish {
                 if (parsed.length == 1) {
                     throw new Exception("Please input the start and end timing in a valid format");
                 } else {
-                    Event event = new Event(parsed[0].trim(), parsed[1].trim());
+                    String[] dateTime = parsed[1].trim().split(" ");
+                    Event event = new Event(parsed[0].trim(), dateTime[0], dateTime[1]);
                     add(database, event);
                 }
             } catch (Exception e) {
