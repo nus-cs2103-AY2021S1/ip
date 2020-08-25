@@ -15,52 +15,13 @@ public class Storage {
     }
 
     /**
-     * Returns a TaskList containing all the tasks loaded from the file.
-     * @param file is the file to be read.
-     * @return the TaskList.
-     * @throws FileNotFoundException if file is not found.
-     */
-    public static TaskList reader(File file) throws FileNotFoundException {
-        Scanner s = new Scanner(file);
-        TaskList tasks = new TaskList();
-        while (s.hasNextLine()) {
-            String line = s.nextLine();
-            String splitOn = "\\s*@\\s*";
-            String[] words = line.split(splitOn);
-            int done = Integer.parseInt(words[1]);
-            if (words.length == 3) {
-                ToDo toDo = new ToDo(words[2]);
-                if (done == 1) {
-                    toDo.setDone();
-                }
-                tasks.add(toDo);
-            } else {
-                if (words[0].equals("[E]")) {
-                    Event event = new Event(words[2], words[3]);
-                    if (done == 1) {
-                        event.setDone();
-                    }
-                    tasks.add(event);
-                } else {
-                    Deadline deadline = new Deadline(words[2], words[3]);
-                    if (done == 1) {
-                        deadline.setDone();
-                    }
-                    tasks.add(deadline);
-                }
-            }
-        }
-        return tasks;
-    }
-
-    /**
      * Check if file exists, if it does then read it, else create a file.
      * @return TaskList containing any tasks from file.
      * @throws FileNotFoundException if the file cannot be found.
      */
     public TaskList readFile() throws FileNotFoundException {
         if (Files.exists(path)) {
-            return reader(new File(path.toString()));
+            return Parser.reader(new File(path.toString()));
         } else {
             File f = new File(path.toString());
         }
