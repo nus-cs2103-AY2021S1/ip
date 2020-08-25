@@ -71,14 +71,11 @@ public class Duke {
                 if (description.isBlank() || by.isBlank()) {
                     throw new DukeException("OOPS!!! Please add both a description and deadline for your task!");
                 } else {
-                    LocalDateTime dateTime = LocalDateTime.parse(by.trim(),
-                            DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+                    LocalDateTime dateTime = generateDateTime(by);
                     task = new Deadline(description.trim(), dateTime.toLocalDate(), dateTime.toLocalTime());
                 }
             } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
                 throw new DukeException("OOPS!!! Please add both a description and deadline for your task!");
-            } catch (DateTimeException dateTimeException) {
-                throw new DukeException("OOPS!!! Please enter a valid date and time in the format 'DD-MM-YYYY HHMM'!");
             }
             break;
         case "event":
@@ -88,7 +85,8 @@ public class Duke {
                 if (description.isBlank() || at.isBlank()) {
                     throw new DukeException("OOPS!!! Please add both a description and date for your event!");
                 } else {
-                    task = new Event(description.trim(), at.trim());
+                    LocalDateTime dateTime = generateDateTime(at);
+                    task = new Event(description.trim(), dateTime.toLocalDate(), dateTime.toLocalTime());
                 }
             } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
                 throw new DukeException("OOPS!!! Please add both a description and date for your event!");
@@ -120,6 +118,7 @@ public class Duke {
         }
     }
 
+<<<<<<< HEAD
     public static void saveToFile(List<Task> taskList) throws DukeException {
         try {
             java.nio.file.Path pathToDirectory = java.nio.file.Paths.get("data");
@@ -138,6 +137,14 @@ public class Duke {
 
         } catch (IOException ioException) {
             throw new DukeException("OOPS!! Unable to save task list.");
+=======
+    public static LocalDateTime generateDateTime(String dateTimeString) throws DukeException {
+        try {
+            return LocalDateTime.parse(dateTimeString.trim(),
+                    DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+        } catch (DateTimeException dateTimeException) {
+            throw new DukeException("OOPS!!! Please enter a valid date and time in the format 'DD-MM-YYYY HHMM'!");
+>>>>>>> branch-Level-8
         }
     }
 
