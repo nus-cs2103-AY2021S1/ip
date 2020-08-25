@@ -10,11 +10,18 @@ public class Duke {
     private static Storage storage;
     private static TaskList tasks;
 
+    /**
+     * Creates a new instance of Duke which stores information at the given path.
+     * @param filePath the path where task information is stored.
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         tasks = new TaskList(storage.read());
     }
 
+    /**
+     * Contains most of the chat bot logic
+     */
     public void run() {
         Ui.print("hi! im conundrum boy :)");
         Scanner input = new Scanner(System.in);
