@@ -61,6 +61,16 @@ public class Task {
     }
 
     /**
+     * Returns the result of a check whether a task contains a keyword or not.
+     *
+     * @param keyword user specified keyword.
+     * @return <code>true</code> if contains, <code>false</code> otherwise.
+     */
+    public boolean containsKeyword(String keyword) {
+        return this.description.toLowerCase().contains(keyword.toLowerCase());
+    }
+
+    /**
      * Returns a string representation of the task in a save friendly format.
      * The way it is saved affects how the .txt file is read in {@link duke.Storage}
      *

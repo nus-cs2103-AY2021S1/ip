@@ -70,10 +70,26 @@ public class TaskList {
     }
 
     /**
+     * Returns a task list of all the tasks containing the specified keyword.
+     *
+     * @param keyword User input keyword.
+     * @return Task(s) that contain the keyword.
+     */
+    public TaskList findTask(String keyword) {
+        TaskList filtered = new TaskList();
+        this.tasks.forEach((task) -> {
+            if (task.containsKeyword(keyword)) {
+                filtered.addTask(task);
+            }
+        });
+        return filtered;
+    }
+
+    /**
      * Returns a string representation of all the tasks in the task list.
      * Each task has a number of it's index + 1 and is separated by a newline.
      *
-     * @return
+     * @return String comprising of all the tasks.
      */
     @Override
     public String toString() {

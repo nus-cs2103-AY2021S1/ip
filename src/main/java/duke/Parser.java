@@ -1,12 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.Commands;
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 
 /**
@@ -41,6 +35,11 @@ public class Parser {
             return new ByeCommand();
         case LIST:
             return new ListCommand();
+        case FIND:
+            if (commandDetail.length < 2) {
+                throw new DukeException("Please key in a task to find!");
+            }
+            return new FindCommand(commandDetail[1]);
         case DONE:
             if (commandDetail.length < 2) {
                 throw new DukeException("Please key in a task to be marked as done!");
