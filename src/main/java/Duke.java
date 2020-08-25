@@ -1,5 +1,8 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     
@@ -167,7 +170,9 @@ public class Duke {
             
             String[] commandParts = nextLine.split("\\s", 2);
             String[] deadlineParts = commandParts[1].split("/by");
-            Task newDeadlineTask = new Deadline(deadlineParts[0].trim(), deadlineParts[1].trim());
+            LocalDate deadline = LocalDate.parse(deadlineParts[1].trim());
+            String afterDateTimeFormat = deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+            Task newDeadlineTask = new Deadline(deadlineParts[0].trim(), afterDateTimeFormat);
             return newDeadlineTask;
             
         } catch (Exception e) {
@@ -186,7 +191,9 @@ public class Duke {
             
             String[] commandParts = nextLine.split("\\s", 2);
             String[] eventParts = commandParts[1].split("/at");
-            Task newEventTask = new Event(eventParts[0].trim(), eventParts[1].trim());
+            LocalDate event = LocalDate.parse(eventParts[1].trim());
+            String afterDateTimeFormat = event.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+            Task newEventTask = new Event(eventParts[0].trim(), afterDateTimeFormat);
             return newEventTask;
             
         } catch (Exception e) {
