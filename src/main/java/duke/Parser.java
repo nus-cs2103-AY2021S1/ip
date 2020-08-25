@@ -60,7 +60,9 @@ public class Parser {
                 throw new DukeException("Oh dear! I'm sorry, but I don't know what that means :(");
             }
         } catch (DateTimeParseException ex) {
-            throw new DukeException("Oh dear! Please format the date and time as yyyy/MM/dd HHmm.");
+            throw new DukeException("Oh dear! Please format the date and time as yyyy/MM/dd HHmm!");
+        } catch (NumberFormatException ex) {
+            throw new DukeException("Oh dear! Please give me a number!");
         }
     }
 
