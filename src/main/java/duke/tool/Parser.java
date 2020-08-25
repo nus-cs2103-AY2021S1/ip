@@ -1,5 +1,6 @@
 package duke.tool;
 
+import duke.Commands;
 import duke.command.ClearCommand;
 import duke.command.Command;
 import duke.command.AddCommand;
@@ -37,11 +38,6 @@ public class Parser {
      * @throws DukeException An exception that happen in Duke system
      */
     public static Command parse(String input) throws DukeException {
-        //Decode the exit command
-        if (input.equals("bye")) {
-            return new ExitCommand();
-        }
-
         //Detect ambiguous input
         if (input.equals("")) {
             throw new AmbiguousInputException();
@@ -51,13 +47,14 @@ public class Parser {
         String[] s = input.split(" ", 2);
 
         //TODO:Detect command with unresonable space (eg. "done ")
+        Commands command = Commands.commandType(s[0]);
 
-        switch (s[0]) {
-        case "clear":
+        switch (command) {
+        case CLEAR:
             return new ClearCommand();
-        case "list":
+        case LIST:
             return new ListCommand();
-        case "done":
+        case DONE:
             if (s.length == 1) {
                 throw new DoneIndexEmptyException();
             }
@@ -65,19 +62,19 @@ public class Parser {
             int index = Integer.parseInt(s[1]) - 1;
 
             return new DoneCommand(index);
-        case "find":
+        case FIND:
             if (s.length == 1) {
                 throw new DescriptionEmptyException("find");
             }
 
             return new FindCommand(s[1]);
-        case "todo":
+        case TODO:
             if (s.length == 1) {
                 throw new DescriptionEmptyException("todo");
             }
 
             return new AddCommand(new Todo(s[1]));
-        case "deadline": {
+        case DEADLINE: {
             if (s.length == 1) {
                 throw new DescriptionEmptyException("dealine");
             }
@@ -91,7 +88,7 @@ public class Parser {
             return new AddCommand(new Deadline(set[0]
                     , LocalDateTime.parse(set[1], acceptedFormatter)));
         }
-        case "event": {
+        case EVENT: {
             if (s.length == 1) {
                 throw new DescriptionEmptyException("event");
             }
@@ -104,13 +101,15 @@ public class Parser {
 
             return new AddCommand(new Event(set[0], LocalDateTime.parse(set[1], acceptedFormatter)));
         }
-        case "delete": {
+        case DELETE: {
             if (s.length == 1) {
                 throw new DeletionIndexEmptyException();
             }
 
             return new DeleteCommand(Integer.parseInt(s[1]) - 1);
         }
+        case EXIT:
+            return new ExitCommand();
         default:
             throw new AmbiguousInputException();
         }
