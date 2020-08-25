@@ -59,7 +59,7 @@ public class Parser {
             } else if (command.startsWith("find")) {
                 if (command.equals("find")) {
                     throw new ResponseException(horizontalLine
-                            + "☹ AIYOYO!!! What do you want me to find sia? \n" + horizontalLine);
+                            + "☹ AIYOYO!!! What do you want me to find? Cannot be empty... \n" + horizontalLine);
                 } else {
                     c = new FindCommand(command, list, storage);
                 }
