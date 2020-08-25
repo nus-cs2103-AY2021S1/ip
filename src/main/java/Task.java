@@ -2,9 +2,9 @@ public class Task {
     protected String name;
     protected boolean isDone;
 
-    public Task(String name) {
+    public Task(String name, boolean status) {
         this.name = name;
-        this.isDone = false;
+        this.isDone = status;
     }
 
     public String getStatus() {
@@ -18,5 +18,17 @@ public class Task {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    public String getType() {
+        return "type unknown";
+    }
+
+    public String getTime() {
+        return "";
+    }
+
+    public boolean isComplete() {
+        return this.isDone;
     }
 }
