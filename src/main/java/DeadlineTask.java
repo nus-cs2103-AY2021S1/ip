@@ -3,6 +3,9 @@ package main.java;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A type of Task with a deadline.
+ */
 public class DeadlineTask extends Task {
     protected String stringDeadline;
     protected LocalDateTime deadline;

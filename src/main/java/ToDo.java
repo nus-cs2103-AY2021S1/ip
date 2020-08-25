@@ -1,5 +1,8 @@
 package main.java;
 
+/**
+ * Basic Task with no additional conditions.
+ */
 public class ToDo extends Task {
 
     public ToDo(String task, TaskSymbol taskType) {

@@ -1,5 +1,8 @@
 package main.java;
 
+/**
+ * Work that people need to do. Status of task be marked done or undone.
+ */
 public class Task {
     protected boolean done;
     protected String task;

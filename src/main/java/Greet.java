@@ -1,5 +1,8 @@
 package main.java;
 
+/**
+ * Greetings that the bot can do.
+ */
 public class Greet {
     String originalGreeting;
     String greeting;

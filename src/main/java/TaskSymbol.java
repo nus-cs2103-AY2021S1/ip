@@ -1,5 +1,8 @@
 package main.java;
 
+/**
+ * Responsible for the symbol allocation of each type of task.
+ */
 public enum TaskSymbol {
     TODO {
         @Override

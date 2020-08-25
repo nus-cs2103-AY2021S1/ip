@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A bot that records tasks for people.
+ */
 public class Willy {
 
     private static TaskStore storage;

@@ -1,5 +1,8 @@
 package main.java;
 
+/**
+ * Handles the errors that may arise in the process of using the bot.
+ */
 public class WillyException extends Exception {
     String style = "\t______________________________________________________________\n";
     String error;

@@ -3,6 +3,9 @@ package main.java;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A type of Task that spans over a period.
+ */
 public class EventsTask extends Task {
     protected String stringPeriod;
     protected LocalDateTime period;

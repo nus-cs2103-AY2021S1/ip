@@ -2,6 +2,9 @@ package main.java;
 
 import java.util.ArrayList;
 
+/**
+ * Handles the different actions that can be done by the bot.
+ */
 public class TaskList {
     private ArrayList<Task> listOfTasks;
     private TaskStore storage;

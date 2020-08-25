@@ -9,7 +9,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-
+/**
+ * Stores the tasks recorded by the bot in a hard drive.
+ */
 public class TaskStore {
     private final Path filePath;
     private static final String FILE_PATH = "./storage/tasks.txt";
