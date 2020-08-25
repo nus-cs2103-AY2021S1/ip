@@ -129,4 +129,20 @@ public class TaskList {
     boolean isEmpty() {
         return taskArrayList.size() == 0;
     }
+
+    /**
+     * Retrieves a sublist of tasks whose descriptions contain the specified keyword
+     *
+     * @param keyword Keyword
+     * @return Sublist of tasks
+     */
+    public Task[] getSublistContainingKeyword(String keyword) {
+        ArrayList<Task> tasksContainingKeyword = new ArrayList<>();
+        for (Task task : this.taskArrayList) {
+            if (task.hasKeyword(keyword)) {
+                tasksContainingKeyword.add(task);
+            }
+        }
+        return tasksContainingKeyword.toArray(new Task[0]);
+    }
 }

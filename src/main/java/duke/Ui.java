@@ -19,6 +19,12 @@ public class Ui {
     /** String to print on exit */
     private final String exitMessage = "Bye. Hope to see you again soon!";
 
+    /** String to print at the start of a sublist of matched tasks */
+    private String foundTasksMessage = "Here are the matching tasks in your list:";
+
+    /** String to print if no matched tasks were found */
+    private String foundZeroTasksMessage = "I'm sorry, but none of the tasks match the keyword";
+
     /** Strings to print on start-up */
     private final String[] greetMessage = new String[] {"Hello! I'm Duke", "What can I do for you?"};
 
@@ -152,5 +158,23 @@ public class Ui {
             }
             this.print(strings);
         }
+    }
+
+
+    /**
+     * Prints strings upon finding matching tasks
+     * @param tasks Sublist of tasks
+     */
+    public void printTasksWithKeyword(Task[] tasks) {
+        String[] strings = new String[tasks.length + 1];
+        if (tasks.length == 0) {
+            strings[0] = this.foundZeroTasksMessage;
+        } else {
+            strings[0] = this.foundTasksMessage;
+            for (int i = 1; i < strings.length; i++) {
+                strings[i] = tasks[i - 1].toString();
+            }
+        }
+        this.print(strings);
     }
 }
