@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Represents a storage object that manages the retrieval and storage of data from an external text file.
+ */
 public class Storage {
     private String dataPathName;
     private String dataFilePath;
@@ -11,6 +14,13 @@ public class Storage {
         this.dataFilePath = dataFilePath;
     }
 
+    /**
+     * Retrieves saved data from the text file at the given location. If data is not found, creates a new text file
+     * for future storage.
+     *
+     * @param ui Ui to display results and errors to the user
+     * @return File containing the saved data from previous runs of Duke or a new text file if one is not found
+     */
     public File getSavedData(Ui ui) {
         File folder = new File(this.dataPathName);
 
@@ -29,6 +39,11 @@ public class Storage {
         return file;
     }
 
+    /**
+     * Saves tasks in the TaskList to the stated external .txt file
+     * @param tasks TaskList containing the updated tasks
+     * @param ui Ui to display results and errors to the user
+     */
     public void saveTasks(TaskList tasks, Ui ui) {
         File file = new File(this.dataFilePath);
 
@@ -48,6 +63,4 @@ public class Storage {
             ui.showError(e.getMessage());
         }
     }
-
-
 }

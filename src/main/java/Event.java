@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an Event task object with an added at variable to indicate when task was completed.
+ */
 public class Event extends Task {
     protected String at;
     protected LocalDate atDate;

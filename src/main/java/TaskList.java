@@ -3,6 +3,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a List of tasks that the user wants to keep track of and methods to interact with the list.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 

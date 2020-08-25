@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Deadline task object with an added by parameter to indicate when the task is due.
+ */
 public class Deadline extends Task {
     protected String by;
     protected LocalDate byDate;
@@ -31,6 +34,7 @@ public class Deadline extends Task {
         return output + ")";
     }
 
+    @Override
     public String getSaveFormat() {
         return "D | " + super.getSaveFormat() + " | " + this.by;
     }
