@@ -1,4 +1,7 @@
-import java.security.DigestException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.Serializable;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -7,7 +10,7 @@ public enum DukeCommand {
 
     TODO("todo", 200),DEADLINE("deadline", 201),EVENT("event", 201),
 
-    DONE("done", 300),DELETE("delete", 301),
+    DONE("done", 300),DELETE("delete", 301),SAVE("save", 302),
 
     BYE("bye", 400);
 
@@ -29,13 +32,6 @@ public enum DukeCommand {
     public int getIndex() { return index; }
 
     public void setIndex(int index) { this.index = index; }
-
-
-
-    public static void executeCommand(String command, String input) {
-
-
-    }
 
     public static void listComm(String input) throws DukeException{
 
@@ -137,7 +133,29 @@ public enum DukeCommand {
         }
     }
 
-    public static void byeComm(String input) throws DukeException{
+    public static void saveComm(String input) throws DukeException{
+
+        try{
+            String pathName = "." + File.separator + "data" + File.separator;
+            String fileName = "saved.duke";
+
+            File f = new File(pathName);
+            if(!f.exists()){
+                f.mkdirs();
+            }
+
+            File file = new File(pathName + fileName);
+            file.delete();
+            file.createNewFile();
+
+            FileOutputStream fos = new FileOutputStream(file);
+            byte[] data = SerializeUtil.serialize(tasks);
+            fos.write(data);
+
+            System.out.println("        Saved!");
+        } catch(Exception e) {
+            throw new DukeException("Oops! Something went wrong!");
+        }
 
     }
 }
