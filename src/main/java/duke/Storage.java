@@ -4,33 +4,37 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
 
-    private final String filePath;
+    private final String FILE_PATH;
 
     public Storage(String filePath) {
-        this.filePath = filePath;
+        this.FILE_PATH = filePath;
     }
 
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
         try {
-            int lastSlash = this.filePath.lastIndexOf('/');
+            int lastSlash = this.FILE_PATH.lastIndexOf('/');
             if (lastSlash != -1) {
-                String folderDir = filePath.substring(0, lastSlash);
+                String folderDir = FILE_PATH.substring(0, lastSlash);
                 Files.createDirectories(Paths.get("./" + folderDir));
             }
-            File file = new File(this.filePath);
+            File file = new File(this.FILE_PATH);
             if (!file.createNewFile()) {
                 loadFromFile(tasks);
             }
@@ -42,7 +46,7 @@ public class Storage {
 
     private void loadFromFile(List<Task> tasks) throws DukeException {
         try {
-            File f = new File(this.filePath);
+            File f = new File(this.FILE_PATH);
             Scanner s = new Scanner(f);
             int lineCounter = 0;
             while (s.hasNext()) {
@@ -51,15 +55,15 @@ public class Storage {
                 String[] attr = line.split(" \\| ");
                 formatCheck(attr, lineCounter);
                 switch (attr[0]) {
-                    case "T":
-                        tasks.add(new Todo(attr[2], attr[1].equals("V")));
-                        break;
-                    case "D":
-                        tasks.add(taskCreator("deadline", attr));
-                        break;
-                    default:
-                        tasks.add(taskCreator("event", attr));
-                        break;
+                case "T":
+                    tasks.add(new Todo(attr[2], attr[1].equals("V")));
+                    break;
+                case "D":
+                    tasks.add(taskCreator("deadline", attr));
+                    break;
+                default:
+                    tasks.add(taskCreator("event", attr));
+                    break;
                 }
             }
         } catch (DateTimeParseException ex) {
@@ -95,7 +99,7 @@ public class Storage {
         }
     }
 
-    public void save(List<Task> tasks) throws DukeException{
+    public void save(List<Task> tasks) throws DukeException {
         StringBuilder taskData = new StringBuilder();
         for (Task ts : tasks) {
             taskData.append(ts.formatTask()).append("\n");
@@ -108,7 +112,7 @@ public class Storage {
     }
 
     private void writeToFile(String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(this.filePath);
+        FileWriter fw = new FileWriter(this.FILE_PATH);
         fw.write(textToAdd);
         fw.close();
     }

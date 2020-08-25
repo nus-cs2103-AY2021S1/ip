@@ -2,14 +2,15 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 import java.time.format.DateTimeFormatter;
 
 import java.util.Optional;
 
 public class Deadline extends Task {
 
-    protected LocalDate date;
-    protected Optional<LocalTime> time;
+    private LocalDate date;
+    private Optional<LocalTime> time;
 
     public Deadline(String desc, LocalDate date, boolean isDone) {
         super(desc, isDone);
@@ -25,7 +26,8 @@ public class Deadline extends Task {
 
     @Override
     public Task setDone() {
-        Task doneTask = this.time.map(localTime -> new Deadline(this.desc, this.date, localTime, this.isDone))
+        Task doneTask = this.time.map(
+                localTime -> new Deadline(this.desc, this.date, localTime, this.isDone))
                 .orElseGet(() -> new Deadline(this.desc, this.date, this.isDone));
         doneTask.isDone = true;
         return doneTask;

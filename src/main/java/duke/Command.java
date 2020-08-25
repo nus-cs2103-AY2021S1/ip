@@ -55,43 +55,43 @@ public class Command {
         return this.type.equals("bye");
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (this.type) {
-            case "bye":
-                ui.farewell();
-                break;
-            case "list":
-                ui.onList(tasks.getList());
-                break;
-            case "done":
-                if (this.idx >= tasks.size()) {
-                    throw new DukeException("Oh dear! That task doesn't exist!");
-                }
-                Task doneTask = tasks.setDone(this.idx);
-                storage.save(tasks.getList());
-                ui.onDone(doneTask);
-                break;
-            case "delete":
-                if (this.idx >= tasks.size()) {
-                    throw new DukeException("Oh dear! That task doesn't exist!");
-                }
-                Task rmTask = tasks.remove(this.idx);
-                storage.save(tasks.getList());
-                ui.onDelete(rmTask, tasks.size());
-                break;
-            case "todo":
-                Task newTodo = tasks.addTodo(this.desc, false);
-                storage.save(tasks.getList());
-                ui.onAdd(newTodo, tasks.size());
-                break;
-            case "deadline":
-            case "event":
-                Task newTask = this.time == null
-                        ? tasks.addTimedTask(this.type, this.desc, this.date, false)
-                        : tasks.addTimedTask(this.type, this.desc, this.date, this.time, false);
-                storage.save(tasks.getList());
-                ui.onAdd(newTask, tasks.size());
-                break;
+        case "bye":
+            ui.farewell();
+            break;
+        case "list":
+            ui.onList(tasks.getList());
+            break;
+        case "done":
+            if (this.idx >= tasks.size()) {
+                throw new DukeException("Oh dear! That task doesn't exist!");
+            }
+            Task doneTask = tasks.setDone(this.idx);
+            storage.save(tasks.getList());
+            ui.onDone(doneTask);
+            break;
+        case "delete":
+            if (this.idx >= tasks.size()) {
+                throw new DukeException("Oh dear! That task doesn't exist!");
+            }
+            Task rmTask = tasks.remove(this.idx);
+            storage.save(tasks.getList());
+            ui.onDelete(rmTask, tasks.size());
+            break;
+        case "todo":
+            Task newTodo = tasks.addTodo(this.desc, false);
+            storage.save(tasks.getList());
+            ui.onAdd(newTodo, tasks.size());
+            break;
+        case "deadline":
+        default:
+            Task newTask = this.time == null
+                    ? tasks.addTimedTask(this.type, this.desc, this.date, false)
+                    : tasks.addTimedTask(this.type, this.desc, this.date, this.time, false);
+            storage.save(tasks.getList());
+            ui.onAdd(newTask, tasks.size());
+            break;
         }
     }
 

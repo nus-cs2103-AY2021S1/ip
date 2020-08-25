@@ -2,14 +2,15 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 import java.time.format.DateTimeFormatter;
 
 import java.util.Optional;
 
 public class Event extends Task {
 
-    protected LocalDate date;
-    protected Optional<LocalTime> time;
+    private LocalDate date;
+    private Optional<LocalTime> time;
 
     public Event(String desc, LocalDate date, boolean isDone) {
         super(desc, isDone);
@@ -25,7 +26,8 @@ public class Event extends Task {
 
     @Override
     public Task setDone() {
-        Task doneTask = this.time.map(localTime -> new Event(this.desc, this.date, localTime, this.isDone))
+        Task doneTask = this.time.map(
+                localTime -> new Event(this.desc, this.date, localTime, this.isDone))
                 .orElseGet(() -> new Event(this.desc, this.date, this.isDone));
         doneTask.isDone = true;
         return doneTask;
