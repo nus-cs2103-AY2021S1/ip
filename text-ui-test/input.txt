@@ -5,9 +5,9 @@ list
 done 1
 done 1
 todo 
-deadline 2103T homework /by tomorrow 2359
+deadline 2103T homework /by 25/8/20 2359
 list
-event 2101 tutorial /at :(
+event 2101 tutorial /at 27/8/20 1600
 list
 done 2
 done 2
