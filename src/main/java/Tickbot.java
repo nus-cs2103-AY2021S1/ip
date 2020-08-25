@@ -52,6 +52,7 @@ public class Tickbot {
                 } catch (IndexOutOfBoundsException err) {
                     printMessage("Sorry, No such task found.");
                 }
+                tasks.update();
                 break;
             }
             case "delete": {
@@ -68,6 +69,7 @@ public class Tickbot {
                 } catch (IndexOutOfBoundsException err) {
                     printMessage("Sorry, No such task found.");
                 }
+                tasks.update();
                 break;
             }
             case "list": {
