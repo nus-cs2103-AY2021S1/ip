@@ -1,3 +1,0 @@
-T	true	 eat foo
-T	false	 eat food
-T	false	 eat foodoododo

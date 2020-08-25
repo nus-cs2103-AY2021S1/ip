@@ -69,7 +69,7 @@ public class UserInterface {
 
     public void printDelete(String task, int remaining) {
         System.out.print(BORDER + "Delete liao boss:" + newLine);
-        System.out.print(BORDER + "Remaining Tasks: " + remaining);
+        System.out.print(BORDER + "Remaining Tasks: " + remaining + newLine);
     }
 
     public void printError(String errorMessage) {
