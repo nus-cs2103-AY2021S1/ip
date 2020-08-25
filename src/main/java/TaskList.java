@@ -1,6 +1,9 @@
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Represents a collection of all kinds of tasks.
+ */
 public class TaskList {
     protected List<Task> list;
 

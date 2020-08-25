@@ -2,6 +2,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ *  Represents a specific type of Task that has a deadline as additional information.
+ *  Following the convention for String input is crucial for successful instantiation.
+ */
 public class Deadline extends Task{
     protected String by;
     protected LocalDate date;
@@ -18,6 +22,12 @@ public class Deadline extends Task{
                 Integer.parseInt(minute));
     }
 
+    /**
+     * Converts the user input into a format that can be used for instantiating
+     * a java.time.LocalDate object.
+     * @param input user input
+     * @return String representation of user input in certain format
+     */
     private String format(String input) {
         String[] component = input.split("/");
         if (component[0].length() == 1) {
@@ -27,6 +37,10 @@ public class Deadline extends Task{
                 "-" + component[0];
     }
 
+    /**
+     * Returns a String representation of the deadline
+     * @return String representation of the Data and Time attached to this task.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter
@@ -38,6 +52,10 @@ public class Deadline extends Task{
         return this.by.split(" ")[0];
     }
 
+    /**
+     * Returns the data being written on hard disk.
+     * @return String representation of the text for storing in txt.file
+     */
     @Override
     public String convertTxt() {
         return "D | " + (this.status ? "1" : "0") + " | " + name + " | " + by;
