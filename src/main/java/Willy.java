@@ -139,6 +139,8 @@ public class Willy {
                 }
 
             }
+
+            // deadline input format: dd/MM/yyyy HHmm, output format: dd MMM yyyy HH:mm a
             // take note of keyword "deadline" to add task with deadline
             else if (message.contains("deadline")) {
                 try {
@@ -152,6 +154,8 @@ public class Willy {
                     System.out.println(error);
                 }
             }
+
+            // deadline input format: dd/MM/yyyy HH:mm, output format: dd MMM yyyy HH:mm a
             // take note of keyword "event" to add task with duration
             else if (message.contains("event")) {
                 try {
@@ -161,7 +165,8 @@ public class Willy {
                     EventsTask newTask = new EventsTask(duration, activity, TaskSymbol.EVENT);
                     addToList(newTask);
                 } catch (Exception e) {
-                    WillyException error = new WillyException("Hmmm the description/timing of event is missing... \n\tTry again with more details?");
+                    WillyException error = new WillyException(e.getMessage());
+//                    WillyException error = new WillyException("Hmmm the description/timing of event is missing... \n\tTry again with more details?");
                     System.out.println(error);
                 }
             }
