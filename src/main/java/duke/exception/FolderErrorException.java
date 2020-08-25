@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class FolderErrorException extends DukeException {
 
     public FolderErrorException() {

@@ -1,7 +1,15 @@
-public class DoneCommand extends Command {
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.task.Task;
+
+public class DeleteCommand extends Command {
     private final int index;
 
-    public DoneCommand(String number) throws DukeException {
+    public DeleteCommand(String number) throws DukeException {
         try {
             this.index = Integer.parseInt(number) - 1;
         } catch (NumberFormatException e) {
@@ -13,8 +21,8 @@ public class DoneCommand extends Command {
     public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         try{
             Task task = list.getList().get(index);
-            task.markAsDone();
-            ui.showDone(task);
+            list.delete(task);
+            ui.showDelete(task, list);
             storage.generateTxt(list);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Sorry, I can't seem to find the task...");

@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class FileErrorException extends DukeException {
 
     public FileErrorException() {

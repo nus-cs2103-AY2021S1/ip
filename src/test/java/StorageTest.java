@@ -1,3 +1,6 @@
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
 import org.junit.jupiter.api.Test;
 import java.io.File;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -34,7 +37,7 @@ public class StorageTest {
     }
 
     @Test
-    public void loadData_validData_success() throws DukeException{
+    public void loadData_validData_success() throws DukeException {
         StorageStub temp = new StorageStub("C:\\Users\\linco\\Desktop\\2103T IP\\data\\storageTest2.txt");
         TaskList list = new TaskList();
         temp.loadData(list);

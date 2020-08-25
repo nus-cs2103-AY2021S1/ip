@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a general task that has a name and status of completion.
  * More specific task will inherit from this class.

@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents probably the simplest type of Task.
  */

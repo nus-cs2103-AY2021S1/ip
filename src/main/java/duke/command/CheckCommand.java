@@ -1,19 +1,25 @@
-public class FindCommand extends Command {
+package duke.command;
+
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.task.Task;
+
+public class CheckCommand extends Command {
     private final String target;
 
-    public FindCommand(String detail) {
-        this.target = detail.trim();
+    public CheckCommand(String detail) {
+        this.target = detail;
     }
 
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) {
         boolean hasFound = false;
-
         int count = 1;
         for (Task task : list.getList()) {
-            if (task.getName().contains(this.target)) {
+            if (task.getDate().equals(this.target)) {
                 if (!hasFound) {
-                    ui.showFind();
+                    ui.showCheck();
                     hasFound = true;
                 }
                 ui.showTask(count, task);

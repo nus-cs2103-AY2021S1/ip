@@ -1,4 +1,14 @@
+package duke.command;
+
 import java.time.DateTimeException;
+import duke.exception.DukeException;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
 
 /**
  * Represents a command that will append a task to the list.

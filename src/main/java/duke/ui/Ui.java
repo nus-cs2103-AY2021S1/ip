@@ -1,4 +1,8 @@
+package duke.ui;
+
 import java.util.Scanner;
+import duke.task.Task;
+import duke.tasklist.TaskList;
 
 /**
  * Represents an object that is responsible for user interaction.

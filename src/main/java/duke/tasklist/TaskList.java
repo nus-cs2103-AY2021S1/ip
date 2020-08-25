@@ -1,5 +1,8 @@
+package duke.tasklist; 
+
 import java.util.List;
 import java.util.ArrayList;
+import duke.task.Task;
 
 /**
  * Represents a collection of all kinds of tasks.
