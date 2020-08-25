@@ -12,13 +12,22 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
-
+/**
+ * Entry point of the Duke application.
+ * Initializes the application and starts the interaction with the user.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Sets up the required objects, loads up the data from the storage file, and prints the welcome message.
+     *
+     * @param filePath directory of where the storage file is located in.
+     *
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -36,6 +45,7 @@ public class Duke {
         }
     }
 
+    /** Runs the program until termination.  */
     public void run() {
         boolean isExit = false;
         while (!isExit) {

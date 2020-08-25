@@ -10,8 +10,17 @@ import duke.command.DeadlineCommand;
 import duke.command.EventCommand;
 import duke.common.CustomException;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
 
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param command full user input string
+     * @return the command based on the user input
+     */
     public static Command parse(String command) throws CustomException {
         String[] parts = command.split(" ", 2);
 //        System.out.println(parts[0] + "|" + parts[1]);

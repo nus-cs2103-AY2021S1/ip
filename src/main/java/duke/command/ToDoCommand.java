@@ -9,12 +9,16 @@ import duke.task.ToDo;
 
 import java.io.IOException;
 
+/**
+ * Adds a ToDo task.
+ */
 public class ToDoCommand extends Command {
     private static String description;
 
     public ToDoCommand(String description) {
         ToDoCommand.description = description;
     }
+
     public void execute (TaskList tasks, Ui ui, Storage storage) throws CustomException, IOException {
         Task temp = new ToDo(description);
         tasks.addTask(temp);

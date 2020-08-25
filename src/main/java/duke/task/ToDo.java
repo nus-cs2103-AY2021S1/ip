@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Todo task that inherits from Task class
+ */
 public class ToDo extends Task {
     protected String by;
 
