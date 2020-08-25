@@ -1,11 +1,12 @@
-public class DuckieNoListException extends DuckieException {
+public class DuckieInvalidCommandException extends DuckieException {
     protected final static String INDENT = "\t";
     protected final static String horizL = INDENT +
             "____________________________________________________________";
 
-    public DuckieNoListException() {
+    public DuckieInvalidCommandException() {
         super(horizL + "\n" + INDENT
-                + "Quack. You have no tasks in the list currently.\n"
+                + "Sorry, Duckie does not know what you are trying to do.\n"
                 + horizL);
     }
+
 }
