@@ -30,8 +30,9 @@ public class Storage {
 
     /**
      * Reads the file from hard disk.
+     *
      * @return List containing the parsed data from file.
-     * @throws IOException If file cannot be read or found.
+     * @throws IOException   If file cannot be read or found.
      * @throws DukeException If there is incorrect format in the file.
      */
     public static List<Task> readFile() throws IOException, DukeException {
@@ -66,6 +67,7 @@ public class Storage {
 
     /**
      * Formats the data to more readable format.
+     *
      * @param line String to be parsed.
      * @return parsed Task.
      * @throws DukeException If there is incorrect data format.
@@ -167,6 +169,7 @@ public class Storage {
 
     /**
      * Updates the data in the file.
+     *
      * @param tasks List containing all the updated tasks.
      */
     public static void updateData(List<Task> tasks) {

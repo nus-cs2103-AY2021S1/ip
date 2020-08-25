@@ -13,9 +13,10 @@ public class ShowCommand extends Command {
 
     /**
      * Processes the show command to show all the task(s) on that day.
+     *
      * @param taskList List of tasks.
-     * @param ui UI of the bot.
-     * @param storage Storage managing the file in hard disk.
+     * @param ui       UI of the bot.
+     * @param storage  Storage managing the file in hard disk.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
@@ -28,10 +29,11 @@ public class ShowCommand extends Command {
 
     /**
      * Calls the TaskList to show all the task(s) on that day.
-     * @param date Queried date.
+     *
+     * @param date     Queried date.
      * @param taskList TaskList containing the tasks list.
-     * @param ui UI of the bot.
-     * @param storage Storage managing the file in hard disk.
+     * @param ui       UI of the bot.
+     * @param storage  Storage managing the file in hard disk.
      * @throws CalendarException If the date is in incorrect format.
      */
 
@@ -41,8 +43,9 @@ public class ShowCommand extends Command {
     }
 
     /**
-     *Evaluates whether this and other object if this and
+     * Evaluates whether this and other object if this and
      * other object is the same or of the same type and task details.
+     *
      * @param other Other object to compare.
      * @return True if this object
      */

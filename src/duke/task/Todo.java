@@ -12,6 +12,7 @@ public class Todo extends Task {
 
     /**
      * Returns T to mark this as a todo object.
+     *
      * @return T in string.
      */
     public String getType() {
@@ -20,6 +21,7 @@ public class Todo extends Task {
 
     /**
      * Returns the string representation of this deadline object.
+     *
      * @return String object of this deadline.
      */
     @Override
@@ -29,6 +31,7 @@ public class Todo extends Task {
 
     /**
      * Mark this task as done.
+     *
      * @return Done version of the old task.
      */
     @Override

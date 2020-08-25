@@ -13,8 +13,9 @@ public class Event extends Task {
     /**
      * Constructs deadline object with
      * description and date that is not done.
+     *
      * @param description Description of the task.
-     * @param date Event date of the task.
+     * @param date        Event date of the task.
      */
     public Event(String description, LocalDate date) {
         super(description);
@@ -26,9 +27,10 @@ public class Event extends Task {
     /**
      * Constructs event object with
      * description, date, and start time that is not done.
+     *
      * @param description Description of the task.
-     * @param date Event date of the task.
-     * @param startTime Start time of this event.
+     * @param date        Event date of the task.
+     * @param startTime   Start time of this event.
      */
     public Event(String description, LocalDate date, LocalTime startTime) {
         super(description);
@@ -40,10 +42,11 @@ public class Event extends Task {
     /**
      * Constructs event object with description, date,
      * start time, and end time that is not done.
+     *
      * @param description Description of the task.
-     * @param date Event date of the task.
-     * @param startTime Start time of this event.
-     * @param endTime End time of this event.
+     * @param date        Event date of the task.
+     * @param startTime   Start time of this event.
+     * @param endTime     End time of this event.
      */
     public Event(String description, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(description);
@@ -56,9 +59,10 @@ public class Event extends Task {
      * Constructs event object with description and date.
      * Constructs a done object if isDone is true
      * and not done object otherwise.
+     *
      * @param description Description of the task.
-     * @param isDone Indicates whether this task is done or not.
-     * @param date Event date of the task.
+     * @param isDone      Indicates whether this task is done or not.
+     * @param date        Event date of the task.
      */
     public Event(String description, Boolean isDone, LocalDate date) {
         super(description, isDone);
@@ -71,10 +75,11 @@ public class Event extends Task {
      * Constructs event object with description and date.
      * Constructs a done object if isDone is true
      * and not done object otherwise.
+     *
      * @param description Description of the task.
-     * @param isDone Indicates whether this task is done or not.
-     * @param date Event date of the task.
-     * @param startTime Start time of this event.
+     * @param isDone      Indicates whether this task is done or not.
+     * @param date        Event date of the task.
+     * @param startTime   Start time of this event.
      */
     public Event(String description, Boolean isDone, LocalDate date, LocalTime startTime) {
         super(description, isDone);
@@ -87,11 +92,12 @@ public class Event extends Task {
      * Constructs event object with description and date.
      * Constructs a done object if isDone is true
      * and not done object otherwise.
+     *
      * @param description Description of the task.
-     * @param isDone Indicates whether this task is done or not.
-     * @param date Event date of the task.
-     * @param startTime Start time of this event.
-     * @param endTime End time of this event.
+     * @param isDone      Indicates whether this task is done or not.
+     * @param date        Event date of the task.
+     * @param startTime   Start time of this event.
+     * @param endTime     End time of this event.
      */
 
     public Event(String description, Boolean isDone,
@@ -104,6 +110,7 @@ public class Event extends Task {
 
     /**
      * Returns E to mark this as an event object.
+     *
      * @return E in string.
      */
     public String getType() {
@@ -112,6 +119,7 @@ public class Event extends Task {
 
     /**
      * Returns the date of this event.
+     *
      * @return Event date in LocalDate.
      */
     public LocalDate getDate() {
@@ -120,6 +128,7 @@ public class Event extends Task {
 
     /**
      * Returns the start time of this event if it exists.
+     *
      * @return Event start time in LocalTime.
      */
     public LocalTime getStartTime() {
@@ -128,6 +137,7 @@ public class Event extends Task {
 
     /**
      * Returns the end time of this event if it exists.
+     *
      * @return Deadline time in LocalTime.
      */
     public LocalTime getEndTime() {
@@ -136,6 +146,7 @@ public class Event extends Task {
 
     /**
      * Returns the string representation of this event object.
+     *
      * @return String object of this event.
      */
     @Override
@@ -162,6 +173,7 @@ public class Event extends Task {
 
     /**
      * Mark this event as done.
+     *
      * @return Done version of this event task.
      */
     @Override

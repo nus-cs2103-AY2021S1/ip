@@ -3,9 +3,9 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.FindException;
 import duke.task.Task;
 
-import java.lang.module.FindException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class FindCommand extends Command {
             }
         }
 
-        if(tasksFound.size() == 0) {
+        if (tasksFound.size() == 0) {
             System.out.println("Nothing match this keyword. \n"
                     + "Please try again with another keyword.");
         }
