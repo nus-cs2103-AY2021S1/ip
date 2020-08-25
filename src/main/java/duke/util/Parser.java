@@ -17,7 +17,17 @@ import duke.exception.InvalidToDoException;
 import java.util.Arrays;
 import java.util.Date;
 
+/**
+ * Parses an input into a command.
+ */
 public class Parser {
+    /**
+     * Parses a String input into a command.
+     * 
+     * @param input The input to parse.
+     * @return Command associated with the input.
+     * @throws DukeException If the input does not match any command.
+     */
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) {
             return new ByeCommand();
