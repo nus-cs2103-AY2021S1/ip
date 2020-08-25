@@ -8,8 +8,12 @@ public class Task {
     }
 
     public String getStatusIcon() {
+<<<<<<< HEAD
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
         //return (isDone ? "tick" : "cross");
+=======
+        return (isDone ? "O" : "X"); //return tick or X symbols
+>>>>>>> branch-level-8
     }
 
     public void markAsDone() {
