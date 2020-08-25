@@ -3,12 +3,13 @@ package taskbot.task;
 /**
  * This class encapsulates the functionality of a task.
  */
-abstract public class Task {
+public abstract class Task {
     private String task;
     private boolean isDone;
 
     /**
      * Creates an incomplete task.
+     *
      * @param task Description of task.
      */
     public Task(String task) {
@@ -18,6 +19,7 @@ abstract public class Task {
 
     /**
      * Creates a Task given its completeness.
+     *
      * @param task Description of task.
      * @param isDone Whether the task is complete.
      */
@@ -35,6 +37,7 @@ abstract public class Task {
 
     /**
      * Gets the task description.
+     *
      * @return The task to be completed.
      */
     public String getTask() {
@@ -43,6 +46,7 @@ abstract public class Task {
 
     /**
      * Gets the icon signifying completeness.
+     *
      * @return The icon representing a complete task or not.
      */
     public String getStatusIcon() {
@@ -52,6 +56,7 @@ abstract public class Task {
 
     /**
      * Gets whether the task is complete.
+     *
      * @return True if complete, false otherwise.
      */
     public boolean getIsDone() {
