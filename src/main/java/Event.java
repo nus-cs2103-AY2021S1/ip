@@ -1,24 +1,30 @@
 package main.java;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    protected String date;
+    protected LocalDate date;
+    protected String date2;
 
     // Constructor for Event
     public Event(String description, String date) {
         super(description);
-        this.date = date;
+        this.date = LocalDate.parse(date);
+        this.date2 = date;
     }
 
     // Get info to store in hard disk
     @Override
     public String[] getInfo() {
-        return new String[] {"E", description, date};
+        return new String[] {"E", description, date2};
     }
 
     // Return string representation of Event
     @Override
     public String toString() {
-        return " [E]" + super.toString() + " (at: " + date + ")";
+        String dateString = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return " [E]" + super.toString() + " (at: " + dateString + ")";
     }
 }

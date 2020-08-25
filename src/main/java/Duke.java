@@ -9,6 +9,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -174,6 +178,15 @@ public class Duke {
                     // Ignore task type
                     String description = str[0].substring(6);
                     String date = str[1];
+                    // Check for date format
+                    try {
+                        LocalDate d = LocalDate.parse(date);
+                        d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                    } catch (DateTimeParseException e) {
+                        System.out.println(line + "\n" + "Oh no! Please use this format yyyy-mm-dd "
+                            + "for the date or check if the date is valid." + "\n" + line);
+                        continue;
+                    }
                     t = new Event(description, date);
                 } else if (s[0].equals("deadline")) {
                     // Split string to get date
@@ -181,6 +194,15 @@ public class Duke {
                     // Ignore task type
                     String description = str[0].substring(9);
                     String date = str[1];
+                    // Check for date format
+                    try {
+                        LocalDate d = LocalDate.parse(date);
+                        d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                    } catch (DateTimeParseException e) {
+                        System.out.println(line + "\n" + "Oh no! Please use this format yyyy-mm-dd "
+                            + "for the date" + "/n" + "or check if the date is valid." + "\n" + line);
+                        continue;
+                    }
                     t = new Deadline(description, date);
                 } else {
                     t = new Todo(input.substring(5));
@@ -211,7 +233,6 @@ public class Duke {
         validCommand.add("delete");
         validCommand.add("bye");
         String[] input = line.split(" ");
-
         String command = input[0];
         if (command.equals("")) {
             throw new NoInputException();
