@@ -17,15 +17,15 @@ public class Task {
 
     @Override
     public String toString() {
-        String taskString = String.format("%s %s", this.showStatus(), name);
+        String taskString = String.format("%s|%s", this.showStatus(), name);
         return taskString;
     }
 
     public String showStatus() {
         if (isDone) {
-            return "[✓]";
+            return "1";
         } else {
-            return "[✗]";
+            return "0";
         }
     }
 }

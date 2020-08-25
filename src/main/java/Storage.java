@@ -1,13 +1,14 @@
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.nio.file.Files;
 /**
  * Provides a handle to hard disk storage
  */
 public class Storage {
     protected FileWriter writeHandle;
-    protected Scanner readHandle;
     protected File fileHandle;
     protected ArrayList<Task> store;
 
@@ -24,19 +25,14 @@ public class Storage {
             storageFile.createNewFile(); // creates file if it doesn't exist
 
             // Initializes handle for writing to file
+            this.fileHandle = storageFile;
             this.writeHandle = new FileWriter("./data/duke.txt");
-            this.readHandle = new Scanner(storageFile);
 
-
-            // Initialize our store
-            while (readHandle.hasNext()) {
-                // Get the current store files
-                // Try to open the file and parse the contents
-                String data = readHandle.nextLine();
-                ArrayList<Task> tasks = Parser.parseFile(data);
-                // Load contents into store
-                this.store = tasks;
-            }
+            // Try to open the file and parse the contents
+            String data = Files.readString(Paths.get("./data/duke.txt"));
+            ArrayList<Task> tasks = Parser.parseFile(data);
+            // Load contents into store
+            this.store = tasks;
         } catch (Exception e) {
             System.out.println("Failed to initialize storage");
             System.exit(1);
@@ -52,12 +48,10 @@ public class Storage {
             fileHandle.delete();
 
             // Create a new file
-            File storageFile = new File("./data/duke.txt");
-            storageFile.createNewFile(); // creates file if it doesn't exist
+            fileHandle.createNewFile();
 
             // Initializes handle for writing to file
             this.writeHandle = new FileWriter("./data/duke.txt");
-            this.readHandle = new Scanner(storageFile);
 
             // Format the store output as a string
             String data = "";
@@ -66,16 +60,17 @@ public class Storage {
             }
             // Write the store to file
             writeHandle.write(data);
+            writeHandle.close();
+            System.out.println("Saved to disc");
             return true;
         } catch (Exception e) {
+            System.out.println(e.toString());
             System.out.println("Sync failed");
         }
         return false;
     }
 
     public void addTask(Task task) {
-        String message = String.format("Added: %s", task.toString());
-        System.out.println(message);
         store.add(task);
     }
 

@@ -6,7 +6,10 @@ public class CreateTaskCommand implements Command {
         this.task = task;
     }
 
+    @Override
     public void execute() {
+        String message = String.format("Added: %s", task.toString());
+        System.out.println(message);
         store.addTask(task);
     }
 }

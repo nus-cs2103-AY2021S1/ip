@@ -32,6 +32,9 @@ public class PersonalAssistant {
 
             Command command = Parser.parseLine(store, input);
             command.execute();
+
+            // After every command, save to disk
+            store.syncTasks();
             this.getUserCommands();
 
         } catch (CommandMissingArgumentException e) {
@@ -41,6 +44,7 @@ public class PersonalAssistant {
         } catch (MissingTaskException e) {
             System.out.println("Missing task!");
         } catch (Exception e) {
+            System.out.println(e.toString());
             throw e;
         } finally {
             this.getUserCommands();
