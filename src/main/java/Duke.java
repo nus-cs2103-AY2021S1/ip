@@ -172,11 +172,11 @@ public class Duke {
                         int counter = 0;
                         for (Task task : ls) {
                             if (task instanceof Event) {
-                                if (((Event) task).getAt().equals(date)) {
+                                if (((Event) task).getAt().equals(date) && !task.isDone) {
                                     counter += 1;
                                     System.out.println(counter + ". " + task.toString());
                                 }
-                            } else if (task instanceof Deadline) {
+                            } else if (task instanceof Deadline && !task.isDone) {
                                 if (((Deadline) task).getDate().equals(date)) {
                                     counter += 1;
                                     System.out.println(counter + ". " + task.toString());
@@ -184,13 +184,13 @@ public class Duke {
                             }
                         }
                         if (counter == 0) {
-                            System.out.println("You have currently no task on "
+                            System.out.println("You have currently no incomplete task on "
                                     + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
                         } else if (counter == 1) {
-                            System.out.println("You have a total of " + counter + " task on "
+                            System.out.println("You have a total of " + counter + " incomplete task on "
                                     + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
                         } else {
-                            System.out.println("You have a total of " + counter + " tasks on "
+                            System.out.println("You have a total of " + counter + " incomplete tasks on "
                                     + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
                         }
                     }
