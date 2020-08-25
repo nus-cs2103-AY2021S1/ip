@@ -14,21 +14,21 @@ public class EventTest {
         LocalDate fixedDate = LocalDate.parse("2020-12-12");
         String expectedFormattedDate = fixedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         Event event = new Event("read book", fixedDate);
-        assertEquals(event.getDone(), false);
-        assertEquals(event.getDescription(), "read book");
-        assertEquals(event.getDate(), fixedDate);
-        assertEquals(event.getDateAsString(), expectedFormattedDate);
-        assertEquals(event.getStatus(), Colour.Cyan("[E]")
+        assertEquals(false, event.getDone());
+        assertEquals("read book", event.getDescription());
+        assertEquals(fixedDate, event.getDate());
+        assertEquals(expectedFormattedDate, event.getDateAsString());
+        assertEquals(Colour.Cyan("[E]")
                 + Colour.Red("[\u2718] read book")
-                + " (by: " + expectedFormattedDate + ")");
+                + " (at: " + expectedFormattedDate + ")", event.getStatus());
     }
 
     @Test
     public void deadlineCanMarkDone() {
         LocalDate fixedDate = LocalDate.parse("2020-12-12");
         Event event = new Event("read book", fixedDate);
-        assertEquals(event.getDone(), false);
+        assertEquals(false, event.getDone());
         event.markDone();
-        assertEquals(event.getDone(), true);
+        assertEquals(true, event.getDone());
     }
 }

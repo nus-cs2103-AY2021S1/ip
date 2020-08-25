@@ -10,16 +10,16 @@ public class TodoTest {
     @Test
     public void todoCreated() {
         Todo todo = new Todo("read book");
-        assertEquals(todo.getDone(), false);
-        assertEquals(todo.getDescription(), "read book");
-        assertEquals(todo.getStatus(), Colour.Yellow("[T]") + Colour.Red("[\u2718] read book"));
+        assertEquals(false, todo.getDone());
+        assertEquals("read book", todo.getDescription());
+        assertEquals(Colour.Yellow("[T]") + Colour.Red("[\u2718] read book"), todo.getStatus());
     }
 
     @Test
     public void todoCanMarkDone() {
         Todo todo = new Todo("mark as done");
-        assertEquals(todo.getDone(), false);
+        assertEquals(false, todo.getDone());
         todo.markDone();
-        assertEquals(todo.getDone(), true);
+        assertEquals(true, todo.getDone());
     }
 }
