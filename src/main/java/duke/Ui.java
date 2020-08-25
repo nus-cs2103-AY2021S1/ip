@@ -20,7 +20,7 @@ public class Ui {
                 "\t██║  ██║██║   ██║██╔═██╗ ██╔══╝  \n" +
                 "\t██████╔╝╚██████╔╝██║  ██╗███████╗\n" +
                 "\t╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝\n";
-        System.out.println("\tHello boss! This is\n" + logo);
+        System.out.println("\tHello boss! This is\n\n" + logo);
     }
 
     void showWelcome() {
