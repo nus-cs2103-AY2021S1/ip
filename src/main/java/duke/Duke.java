@@ -1,3 +1,12 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -37,3 +46,4 @@ public class Duke {
         new Duke(filePath).run();
     }
 }
+

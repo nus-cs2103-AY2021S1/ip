@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 public class DeleteCommand extends Command {
     private String userInput;
 
@@ -27,3 +34,4 @@ public class DeleteCommand extends Command {
         Storage.save("/Users/tengjianling/ip/data/duke.txt", fileString);
     }
 }
+

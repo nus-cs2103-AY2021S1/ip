@@ -1,3 +1,14 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 public class AddCommand extends Command {
     private String userInput;
 
@@ -59,3 +70,4 @@ public class AddCommand extends Command {
 
     }
 }
+

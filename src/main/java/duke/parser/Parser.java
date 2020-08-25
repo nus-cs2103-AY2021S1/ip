@@ -1,4 +1,12 @@
-import java.util.Scanner;
+package duke.parser;
+
+import duke.command.AddCommand;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+import duke.command.ListCommand;
+import duke.command.ExitCommand;
+import duke.command.Command;
+import duke.task.Task;
 
 public class Parser {
 
@@ -24,3 +32,4 @@ public class Parser {
 
     }
 }
+

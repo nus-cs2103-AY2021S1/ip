@@ -1,3 +1,7 @@
+package duke.tasklist;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -35,3 +39,4 @@ public class TaskList {
         return str;
     }
 }
+
