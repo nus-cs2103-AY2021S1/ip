@@ -17,7 +17,7 @@ public class HelpCommand extends Command {
     @Override
     public void execute() {
         System.out.println("Command list:");
-        Arrays.stream(Parser.values())
+        Arrays.stream(CommandEnum.values())
                 .map((p) -> " " + p.toString().toLowerCase())
                 .forEach(System.out::print);
         System.out.println();

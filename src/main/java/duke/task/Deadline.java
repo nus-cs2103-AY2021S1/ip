@@ -47,12 +47,12 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toCSV() {
-        return "D," + super.toCSV() + "," + deadline;
+    public String toCsv() {
+        return TaskEnum.DEADLINE + "," + super.toCsv() + "," + deadline;
     }
 
     // Warning: does not check for corrupt entry
-    public static Task fromCSV(String csv) {
+    public static Task fromCsv(String csv) {
         Scanner scanner = new Scanner(csv);
         scanner.useDelimiter(",");
         scanner.next(); // Discard first match

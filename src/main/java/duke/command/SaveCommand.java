@@ -30,7 +30,7 @@ public class SaveCommand extends Command {
             // Open file for write/overwrite
             FileWriter fileWriter = new FileWriter(filePath);
             for (Task task : taskList) {
-                fileWriter.write(task.toCSV() + "\n");
+                fileWriter.write(task.toCsv() + "\n");
             }
 
             // Close file

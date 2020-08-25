@@ -6,7 +6,7 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 Hello! I'm Duke
-Let's have a conversation!
+What can i do for you?
 Unrecognised Command!
 Format: done {index}
 Format: delete {index}

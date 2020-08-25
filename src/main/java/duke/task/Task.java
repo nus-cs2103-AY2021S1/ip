@@ -62,7 +62,7 @@ public abstract class Task {
         return "[" + isCompletedSymbol() + "] " + description;
     }
 
-    public String toCSV() {
+    public String toCsv() {
         return "" + this.isCompleted() + ',' + this.description;
     }
 

@@ -18,7 +18,7 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String GREETING = "Hello! I'm Duke\nLet's have a conversation!";
+    private static final String GREETING = "Hello! I'm Duke\nWhat can i do for you?";
     private static final String ENDING_GREETING = "Bye. Hope to see you again soon!";
 
     private final List<Task> taskList;
@@ -37,7 +37,7 @@ public class Duke {
         System.out.println("Hello from\n" + LOGO);
         System.out.println(GREETING);
 
-        while(true) {
+        while (true) {
 
             // Prompt for input
             String input = scanner.nextLine();

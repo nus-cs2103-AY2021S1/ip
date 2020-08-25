@@ -28,7 +28,7 @@ class ToDoTest {
     @Test
     void toCSV_fromCSV() {
         Task task1 = new ToDo("test");
-        Task task2 = ToDo.fromCSV(task1.toCSV());
+        Task task2 = ToDo.fromCsv(task1.toCsv());
         assertEquals(task1.hashCode(), task2.hashCode());
     }
 

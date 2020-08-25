@@ -47,7 +47,7 @@ class DeadlineTest {
     @Test
     void toCSV_fromCSV() {
         Task task1 = new Deadline(string1, time1);
-        Task task2 = Deadline.fromCSV(task1.toCSV());
+        Task task2 = Deadline.fromCsv(task1.toCsv());
         assertEquals(task1.hashCode(), task2.hashCode());
     }
 }

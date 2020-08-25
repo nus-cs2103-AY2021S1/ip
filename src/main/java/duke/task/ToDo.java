@@ -21,11 +21,11 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String toCSV() {
-        return "T," + super.toCSV();
+    public String toCsv() {
+        return TaskEnum.TODO + "," + super.toCsv();
     }
 
-    public static Task fromCSV(String csv) {
+    public static Task fromCsv(String csv) {
         Scanner scanner = new Scanner(csv);
         scanner.useDelimiter(",");
         scanner.next(); // Discard first match

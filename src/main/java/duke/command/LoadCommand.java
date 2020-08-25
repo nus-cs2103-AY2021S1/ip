@@ -1,9 +1,7 @@
 package duke.command;
 
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.TaskEnum;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -49,17 +47,13 @@ public class LoadCommand extends Command {
                     .filter(Predicate.not(String::isBlank))
                     .map(String::trim)
                     .map(line -> {
-                        try {
-                            switch (line.charAt(0)) {
-                                case 'T': return ToDo.fromCSV(line);
-                                case 'D': return Deadline.fromCSV(line);
-                                case 'E': return Event.fromCSV(line);
-                                default: throw new Exception();
-                            }
-                        } catch (Exception e) {
-                            System.out.println("Corrupt entry: " + line);
-                            return null;
-                        }
+                         try {
+                             String taskType = line.substring(0, line.indexOf(','));
+                             return TaskEnum.valueOf(taskType).fromCsv(line);
+                         } catch(Exception e) {
+                             System.out.println("Corrupt entry: " + line);
+                             return null;
+                         }
                     })
                     .filter(Objects::nonNull)
                     .forEach(taskList::add);
