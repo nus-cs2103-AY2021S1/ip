@@ -48,16 +48,19 @@ public class Deadline extends Task {
     public String toString() {
 
         return this.time != null
-            ? "[" + this.getType()  + "]" + this.getStatusIcon() + " " + this.description + " (by:"
-                + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                ? "[" + this.getType() + "]" + this.getStatusIcon() + " "
+                + this.description + " (by:" + this.deadline.format(
+                DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + " " + this.time.format(DateTimeFormatter.ISO_LOCAL_TIME) + ")"
-            : "[" + this.getType()  + "]" + this.getStatusIcon() + " " + this.description + " (by:"
-                + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                : "[" + this.getType() + "]" + this.getStatusIcon() + " "
+                + this.description + " (by:" + this.deadline.format(
+                DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
+
     @Override
     public Deadline markAsDone() {
         //int index = taskNum - 1;
-        if(!this.isDone) {
+        if (!this.isDone) {
             Deadline newTask = new Deadline(this.getDescription(), true, this.deadline, this.time);
             return newTask;
         }

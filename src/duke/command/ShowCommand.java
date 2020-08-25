@@ -20,7 +20,8 @@ public class ShowCommand extends Command {
         }
     }
 
-    public void processShow(String date, TaskList taskList, Ui ui, Storage storage) throws CalendarException {
+    public void processShow(
+            String date, TaskList taskList, Ui ui, Storage storage) throws CalendarException {
         taskList.showDate(date);
     }
 

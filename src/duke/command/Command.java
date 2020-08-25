@@ -3,7 +3,6 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.task.Task;
 
 public abstract class Command {
     public String task;
@@ -37,6 +36,6 @@ public abstract class Command {
 
     public String getTask() {
         return this.task;
-    };
+    }
 
 }

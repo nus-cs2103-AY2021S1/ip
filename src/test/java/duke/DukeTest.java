@@ -1,12 +1,9 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.EventCommand;
-import duke.command.TodoCommand;
-import duke.exception.*;
-import duke.task.*;
-
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

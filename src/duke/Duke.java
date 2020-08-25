@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+
 import java.io.IOException;
 
 public class Duke {
@@ -24,6 +25,10 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) {
+        new Duke("tasks.txt").run();
+    }
+
     public void run() {
         ui.greet();
         //storage.showData();
@@ -41,9 +46,5 @@ public class Duke {
                 ui.showLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
     }
 }

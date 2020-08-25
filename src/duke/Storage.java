@@ -25,7 +25,7 @@ public class Storage {
     private TaskList taskList;
 
     public Storage(String filePath) {
-        this.filePath = filePath;
+        Storage.filePath = filePath;
     }
 
     public static List<Task> readFile() throws IOException, DukeException {
@@ -36,7 +36,7 @@ public class Storage {
         Files.createDirectories(folder);
 
         //if user is new and file does not exist, create the file
-        if(!Files.exists(file)) {
+        if (!Files.exists(file)) {
             Files.createFile(file);
         }
 
@@ -44,7 +44,7 @@ public class Storage {
         BufferedReader reader = Files.newBufferedReader(file);
         List<Task> tasks = new ArrayList<>(); //this does not update this.todos
         String currentLine;
-        while((currentLine = reader.readLine()) != null) {
+        while ((currentLine = reader.readLine()) != null) {
             try {
                 System.out.println(currentLine);
                 Task task = parseData(currentLine);
@@ -63,7 +63,7 @@ public class Storage {
         try {
             String[] parsed = line.split("\\s\\|\\s");
             Task task;
-            if(parsed.length < 2) {
+            if (parsed.length < 2) {
                 throw new StorageException(line + "is in invalid format.");
             } else {
                 String identifier = parsed[0]; //get the type of duke.task
@@ -71,7 +71,7 @@ public class Storage {
                 String taskName = parsed[2];
 
                 if (identifier.equals("T")) {
-                    if(doneIndicator.equals("1")) {
+                    if (doneIndicator.equals("1")) {
                         task = new Todo(taskName, true);
                     } else {
                         task = new Todo(taskName);
@@ -84,7 +84,7 @@ public class Storage {
                     //String date = dateTime[0];
                     LocalDate localDate = LocalDate.parse(date);
 
-                    if(parsed.length < 5) {
+                    if (parsed.length < 5) {
                         if (doneIndicator.equals("1")) {
                             task = new Event(taskName, true, localDate);
                         } else {
@@ -97,7 +97,7 @@ public class Storage {
                         String startTime = startEndTime[0];
                         LocalTime localStartTime = LocalTime.parse(startTime);
 
-                        if(startEndTime.length < 2) {
+                        if (startEndTime.length < 2) {
                             if (doneIndicator.equals("1")) {
                                 task = new Event(taskName, true, localDate, localStartTime);
                             } else {
@@ -107,9 +107,11 @@ public class Storage {
                             String endTime = startEndTime[1];
                             LocalTime localEndTime = LocalTime.parse(endTime);
                             if (doneIndicator.equals("1")) {
-                                task = new Event(taskName, true, localDate, localStartTime, localEndTime);
+                                task = new Event(taskName,
+                                        true, localDate, localStartTime, localEndTime);
                             } else {
-                                task = new Event(taskName, false, localDate, localStartTime, localEndTime);
+                                task = new Event(taskName,
+                                        false, localDate, localStartTime, localEndTime);
                             }
                         }
                     }
@@ -121,7 +123,7 @@ public class Storage {
                     //String date = dateTime[0];
                     LocalDate localDate = LocalDate.parse(date);
 
-                    if(parsed.length < 5) {
+                    if (parsed.length < 5) {
                         if (doneIndicator.equals("1")) {
                             task = new Deadline(taskName, true, localDate);
                         } else {
@@ -149,8 +151,9 @@ public class Storage {
 //            }
             return task;
 
-        } catch(DateTimeParseException e) {
-            throw new CalendarException("Please input the correct date and time format. YYYY-MM-DD for date and HH:MM for time.");
+        } catch (DateTimeParseException e) {
+            throw new CalendarException("Please input the correct date and time format. "
+                    + "YYYY-MM-DD for date and HH:MM for time.");
         }
 
     }
@@ -158,13 +161,13 @@ public class Storage {
     public static void updateData(List<Task> tasks) {
         try {
             BufferedWriter writer = Files.newBufferedWriter(Path.of("data/tasks.txt"));
-            for(Task task : tasks) {
+            for (Task task : tasks) {
                 String type = task.getType();
                 Boolean status = task.getStatus();
                 String taskName = task.getDescription();
                 String stored = "";
 
-                if(type.equals("T")) {
+                if (type.equals("T")) {
                     stored = String.format("%s | %d | %s", type, status ? 1 : 0, taskName);
 
                 } else if (type.equals("E")) {
@@ -173,12 +176,15 @@ public class Storage {
                     LocalTime startTime = event.getStartTime();
                     LocalTime endTime = event.getEndTime();
 
-                    if(startTime == null && endTime == null) {
-                        stored = String.format("%s | %d | %s | %s", type, status ? 1 : 0, taskName, date);
-                    } else if(endTime == null) {
-                        stored = String.format("%s | %d | %s | %s | %s", type, status ? 1 : 0, taskName, date, startTime);
+                    if (startTime == null && endTime == null) {
+                        stored = String.format(
+                                "%s | %d | %s | %s", type, status ? 1 : 0, taskName, date);
+                    } else if (endTime == null) {
+                        stored = String.format("%s | %d | %s | %s | %s",
+                                type, status ? 1 : 0, taskName, date, startTime);
                     } else {
-                        stored = String.format("%s | %d | %s | %s | %s-%s", type, status ? 1 : 0, taskName, date, startTime, endTime);
+                        stored = String.format("%s | %d | %s | %s | %s-%s",
+                                type, status ? 1 : 0, taskName, date, startTime, endTime);
                     }
 
                 } else if (type.equals("D")) {
@@ -186,10 +192,12 @@ public class Storage {
                     LocalDate date = deadline.getDeadline();
                     LocalTime time = deadline.getTime();
 
-                    if(time == null) {
-                        stored = String.format("%s | %d | %s | %s", type, status ? 1 : 0, taskName, date);
+                    if (time == null) {
+                        stored = String.format("%s | %d | %s | %s",
+                                type, status ? 1 : 0, taskName, date);
                     } else {
-                        stored = String.format("%s | %d | %s | %s | %s", type, status ? 1 : 0, taskName, date, time);
+                        stored = String.format("%s | %d | %s | %s | %s",
+                                type, status ? 1 : 0, taskName, date, time);
 
                     }
 
@@ -203,25 +211,5 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
-//    public static void showData() throws IOException {
-//        Path folder = Path.of("data");
-//        Path file = folder.resolve(filePath);
-//
-//        //Create a new directory by creating all parent directories first
-//        Files.createDirectories(folder);
-//
-//        //if user is new and file does not exist, create the file
-//        if(!Files.exists(file)) {
-//            Files.createFile(file);
-//        }
-//        //read from file
-//        BufferedReader reader = Files.newBufferedReader(file);
-//        String currentLine;
-//        System.out.println("Here are your duke.task(s) : ");
-//        while((currentLine = reader.readLine()) != null) {
-//            System.out.println(currentLine);
-//        }
-//    }
 
 }

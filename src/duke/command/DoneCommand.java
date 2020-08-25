@@ -21,11 +21,12 @@ public class DoneCommand extends Command {
         }
     }
 
-    public void processDone(String theRest, TaskList taskList, Ui ui, Storage storage) throws DoneException {
+    public void processDone(
+            String theRest, TaskList taskList, Ui ui, Storage storage) throws DoneException {
         try {
             Integer taskNum = Integer.parseInt(theRest);
             taskList.markTaskAsDone(taskNum);
-            storage.updateData(taskList.getTasks());
+            Storage.updateData(taskList.getTasks());
 
         } catch (DukeException d) {
             throw new DoneException("Please enter a valid task number");

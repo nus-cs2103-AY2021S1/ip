@@ -45,7 +45,8 @@ public class Event extends Task {
         this.endTime = null;
     }
 
-    public Event(String description, Boolean isDone, LocalDate date, LocalTime startTime, LocalTime endTime) {
+    public Event(String description, Boolean isDone,
+                 LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(description, isDone);
         this.date = date;
         this.startTime = startTime;
@@ -70,28 +71,32 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        if(this.startTime != null && this.endTime != null) {
-            return "[" + this.getType() + "]" + this.getStatusIcon() + " " + this.description + " (at:"
-                    + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+        if (this.startTime != null && this.endTime != null) {
+            return "[" + this.getType() + "]" + this.getStatusIcon() + " "
+                    + this.description + " (at:" + this.date.format(
+                    DateTimeFormatter.ofPattern("MMM d yyyy"))
                     + " " + this.startTime.format(DateTimeFormatter.ISO_LOCAL_TIME)
                     + " - " + this.endTime.format(DateTimeFormatter.ISO_LOCAL_TIME) + ")";
 
         } else if (this.startTime != null) {
-            return "[" + this.getType() + "]" + this.getStatusIcon() + " " + this.description + " (at:"
-                    + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+            return "[" + this.getType() + "]" + this.getStatusIcon() + " "
+                    + this.description + " (at:" + this.date.format(
+                    DateTimeFormatter.ofPattern("MMM d yyyy"))
                     + " " + this.startTime.format(DateTimeFormatter.ISO_LOCAL_TIME) + ")";
 
         } else {
-            return "[" + this.getType() + "]" + this.getStatusIcon() + " " + this.description + " (at:"
-                    + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            return "[" + this.getType() + "]" + this.getStatusIcon() + " "
+                    + this.description + " (at:" + this.date.format(
+                    DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
     }
 
     @Override
     public Event markAsDone() {
         //int index = taskNum - 1;
-        if(!this.isDone) {
-            Event newTask = new Event(this.getDescription(), true, this.date, this.startTime, this.endTime);
+        if (!this.isDone) {
+            Event newTask = new Event(this.getDescription(),
+                    true, this.date, this.startTime, this.endTime);
             return newTask;
         }
         return this;
