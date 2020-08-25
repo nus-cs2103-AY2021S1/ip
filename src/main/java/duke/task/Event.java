@@ -18,7 +18,7 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description);
         this.at = at;
-        try{
+        try {
             atDate = LocalDate.parse(at);
         } catch (DateTimeParseException e) {
             atDate = null;
