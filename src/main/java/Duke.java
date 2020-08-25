@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Duke {
 
     // Constants related to display (including messages)
@@ -68,7 +71,7 @@ public class Duke {
                 }
 
                 // remove leading and trailing whitespace
-                Task newTodo = new ToDo(false, todoName.trim());
+                Task newTodo = new ToDo(false, todoName);
                 store.add(newTodo);
                 displayModifiedTasks(newTodo, true);
             } catch (StringIndexOutOfBoundsException noDesc) {
@@ -92,8 +95,13 @@ public class Duke {
                     throw DukeException.emptyDescription("event");
                 }
 
+                // format dates
+                LocalDateTime time = LocalDateTime.parse(eventTime,
+                        DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+                String timeToUse = time.format(DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"));
+
                 // remove leading and trailing whitespace
-                Task newEvent = new Event(false, eventName.trim(), eventTime.trim());
+                Task newEvent = new Event(false, eventName, timeToUse);
                 store.add(newEvent);
                 displayModifiedTasks(newEvent, true);
             } catch (StringIndexOutOfBoundsException noDescOrTimeEvent) {
@@ -109,8 +117,13 @@ public class Duke {
                     throw new DukeException("The '/by' tag is missing");
                 }
 
-                String deadlineTime = input.substring(deadlineMarker + 4);
-                String deadlineName = input.substring(9, deadlineMarker - 1);
+                String deadlineTime = input.substring(deadlineMarker + 4).trim();
+                String deadlineName = input.substring(9, deadlineMarker - 1).trim();
+
+                // format dates
+                LocalDateTime time = LocalDateTime.parse(deadlineTime,
+                        DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+                String timeToUse = time.format(DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm a"));
 
                 // case: check for "whitespace description or timeline"
                 if (deadlineTime.matches("\\s+") || deadlineName.matches("\\s+")) {
@@ -118,7 +131,7 @@ public class Duke {
                 }
 
                 // remove leading and trailing whitespace
-                Task newDeadline = new Deadline(false, deadlineName.trim(), deadlineTime.trim());
+                Task newDeadline = new Deadline(false, deadlineName, timeToUse);
                 store.add(newDeadline);
                 displayModifiedTasks(newDeadline, true);
             } catch (StringIndexOutOfBoundsException noDescOrTimeDeadline) {
