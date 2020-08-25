@@ -8,7 +8,11 @@
     Quack. Duckie is here to remember your tasks!
     You can begin by adding tasks!
     ____________________________________________________________
-done
+delete all
+    ____________________________________________________________
+    Quack. You have no tasks in the list currently.
+    ____________________________________________________________
+list
     ____________________________________________________________
     Quack. You have no tasks in the list currently.
     ____________________________________________________________

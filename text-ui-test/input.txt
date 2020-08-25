@@ -1,4 +1,5 @@
-done
+delete all
+list
 hello
 todo borrow books
 list
