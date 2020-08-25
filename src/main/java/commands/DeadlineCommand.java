@@ -32,15 +32,18 @@ public class DeadlineCommand extends Command{
             String[] withoutCommandArr = withoutCommand.split("/");
             String description = withoutCommandArr[0].trim();
             if (description.isEmpty()) {
-                throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of a deadline must not be empty.");
+                throw new DukeInvalidUserInputException("I'm sorry to inform you that the "
+                        + "description of a deadline must not be empty.");
             }
             if (withoutCommandArr.length < 2) {
-                throw new DukeInvalidUserInputException("It appears you are missing a follow up '/by' command.");
+                throw new DukeInvalidUserInputException("It appears you are missing a "
+                        + "follow up '/by' command.");
             }
             String followUpCommand = Parser.parseFollowUpCommand(withoutCommandArr[1]);
             if (followUpCommand.equals("by")) {
                 if (!withoutCommandArr[1].trim().contains(" ")) {
-                    throw new DukeInvalidUserInputException("It appears you are missing the date and time for your deadline.");
+                    throw new DukeInvalidUserInputException("It appears you are missing "
+                            + "the date and time for your deadline.");
                 }
                 String dateTime = withoutCommandArr[1].substring(withoutCommandArr[1].indexOf(" ")).trim();
                 Deadline newTask = new Deadline(description, dateTime);
@@ -51,7 +54,8 @@ public class DeadlineCommand extends Command{
                 throw new DukeIllegalCommandException(followUpCommand);
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of a deadline must not be empty.");
+            throw new DukeInvalidUserInputException("I'm sorry to inform you that the description "
+                    + "of a deadline must not be empty.");
         }
     }
 

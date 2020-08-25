@@ -88,8 +88,8 @@ public class Ui {
      * Generates and prints the unknown error message upon encountering an unidentifiable error.
      */
     public static void showUnknownError() {
-        System.out.println("OH FIDDLESTICKS, WE SEEM TO HAVE HIT A BUMP ON THE ROAD HERE. " +
-                "AN UNKNOWN ERROR HAS BEEN DETECTED.");
+        System.out.println("OH FIDDLESTICKS, WE SEEM TO HAVE HIT A BUMP ON THE ROAD HERE. "
+                + "AN UNKNOWN ERROR HAS BEEN DETECTED.");
 
     }
 

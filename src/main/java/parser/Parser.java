@@ -1,6 +1,13 @@
 package parser;
 
-import commands.*;
+import commands.Command;
+import commands.ToDoCommand;
+import commands.DeadlineCommand;
+import commands.EventCommand;
+import commands.ListCommand;
+import commands.DeleteCommand;
+import commands.ByeCommand;
+import commands.DoneCommand;
 import data.exception.DukeIllegalCommandException;
 import data.task.TaskList;
 import storage.Storage;
@@ -34,22 +41,22 @@ public class Parser {
         }
         String keyword = user_inputArr[0];
         switch (keyword) {
-            case "list":
-                return new ListCommand(this.ui, this.taskList);
-            case "done":
-                return new DoneCommand(this.taskList, this.storage, user_input);
-            case "bye":
-                return new ByeCommand(this.ui);
-            case "todo":
-                return new ToDoCommand(this.taskList, this.storage, this.ui, user_input);
-            case "event":
-                return new EventCommand(this.taskList, this.storage, this.ui, user_input);
-            case "deadline":
-                return new DeadlineCommand(this.taskList, this.storage, this.ui, user_input);
-            case "delete":
-                return new DeleteCommand(this.taskList, this.storage, this.ui, user_input);
-            default:
-                throw new DukeIllegalCommandException(keyword);
+        case "list":
+            return new ListCommand(this.ui, this.taskList);
+        case "done":
+            return new DoneCommand(this.taskList, this.storage, user_input);
+        case "bye":
+            return new ByeCommand(this.ui);
+        case "todo":
+            return new ToDoCommand(this.taskList, this.storage, this.ui, user_input);
+        case "event":
+            return new EventCommand(this.taskList, this.storage, this.ui, user_input);
+        case "deadline":
+            return new DeadlineCommand(this.taskList, this.storage, this.ui, user_input);
+        case "delete":
+            return new DeleteCommand(this.taskList, this.storage, this.ui, user_input);
+        default:
+            throw new DukeIllegalCommandException(keyword);
         }
     }
 

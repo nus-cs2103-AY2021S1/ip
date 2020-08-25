@@ -33,11 +33,12 @@ public class Event extends Task {
             String []timeArr = dateTimeArr[1].split("-");
             this.startTime = LocalTime.parse(timeArr[0].substring(0, 2) + ":" + timeArr[0].substring(2, 4));
             this.endTime = LocalTime.parse(timeArr[1].substring(0, 2) + ":" + timeArr[1].substring(2, 4));
-            this.dateTimeTxt = this.date.format(DateTimeFormatter.ofPattern("d MMMM yyyy")) +
-                    " " + this.startTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + " to " +
-                    this.endTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
+            this.dateTimeTxt = this.date.format(DateTimeFormatter.ofPattern("d MMMM yyyy"))
+                    + " " + this.startTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + " to "
+                    + this.endTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
         } catch (DateTimeParseException | IndexOutOfBoundsException e) {
-            throw new DukeInvalidUserInputException("It seems you have entered an invalid date and time. The format should be as follows YYYY-MM-DD hhmm-hhmm.");
+            throw new DukeInvalidUserInputException("It seems you have entered an invalid date and time."
+                    + " The format should be as follows YYYY-MM-DD hhmm-hhmm.");
         }
     }
 
@@ -60,18 +61,24 @@ public class Event extends Task {
         String description = txtArray[2].trim();
         String[] unFormattedDateTime = txtArray[3].trim().split(" ");
 
-        String unformattedDate =unFormattedDateTime[0] + " " + unFormattedDateTime[1] + " " + unFormattedDateTime[2];
-        String unformattedStartTime = unFormattedDateTime[3] + " " + unFormattedDateTime[4];
-        String unformattedEndTime = unFormattedDateTime[6] + " " + unFormattedDateTime[7];
+        String unformattedDate
+                = unFormattedDateTime[0] + " " + unFormattedDateTime[1] + " " + unFormattedDateTime[2];
+        String unformattedStartTime
+                = unFormattedDateTime[3] + " " + unFormattedDateTime[4];
+        String unformattedEndTime
+                = unFormattedDateTime[6] + " " + unFormattedDateTime[7];
 
-        String formattedDate = LocalDate.parse(unformattedDate, DateTimeFormatter.ofPattern("d MMMM yyyy")).toString();
-        String startLocalTime = LocalTime.parse(unformattedStartTime, DateTimeFormatter.ofPattern("hh:mm a")).toString();
-        String endLocalTime = LocalTime.parse(unformattedEndTime, DateTimeFormatter.ofPattern("hh:mm a")).toString();
+        String formattedDate
+                = LocalDate.parse(unformattedDate, DateTimeFormatter.ofPattern("d MMMM yyyy")).toString();
+        String startLocalTime
+                = LocalTime.parse(unformattedStartTime, DateTimeFormatter.ofPattern("hh:mm a")).toString();
+        String endLocalTime
+                = LocalTime.parse(unformattedEndTime, DateTimeFormatter.ofPattern("hh:mm a")).toString();
 
-        String formattedStartTime = startLocalTime.substring(0, startLocalTime.indexOf(':')) +
-                startLocalTime.substring(startLocalTime.indexOf(':') + 1);
-        String formattedEndTime = endLocalTime.substring(0, endLocalTime.indexOf(':')) +
-                endLocalTime.substring(endLocalTime.indexOf(':') + 1);
+        String formattedStartTime = startLocalTime.substring(0, startLocalTime.indexOf(':'))
+                + startLocalTime.substring(startLocalTime.indexOf(':') + 1);
+        String formattedEndTime = endLocalTime.substring(0, endLocalTime.indexOf(':'))
+                + endLocalTime.substring(endLocalTime.indexOf(':') + 1);
 
         String finalDateTime = formattedDate + " " + formattedStartTime + "-" + formattedEndTime;
         Event event = new Event(description, finalDateTime);
