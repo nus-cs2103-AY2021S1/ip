@@ -1,10 +1,11 @@
+import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-
+    public static final String line = "____________________________________________________________";
    private static Commands comm;
-
+    public static ArrayList<Task> ListOfItems = new ArrayList<Task>();
 
     public static void main(String[] args) {
 
@@ -13,153 +14,105 @@ public class Duke {
         System.out.println(line);
         System.out.println(introduction);
         System.out.println(line);
+        runDuke();
 
-        ArrayList<Task> ListOfItems = new ArrayList<Task>();
-        boolean flag = false;
-        String echo;
+    }
+
+    private static void runDuke() {
+        TaskList taskList = Storage.load(Storage.FILE_PATH);
         Scanner sc = new Scanner(System.in);
-        echo = sc.nextLine();
-        while (!flag) {
+        String echo;
+        boolean flag = false;
 
-            if (echo.equals("bye")) {
-                comm = Commands.bye;
-                flag = true;
-            } else if (echo.equals("list")) {
-                comm = Commands.list;
-            } else {
+        while (!flag) {
+            echo = sc.nextLine();
+            try {
                 String split = echo;
                 String arr[] = split.split(" ", 2);
-                if (arr[0].equals("done")) {
-                    comm = Commands.done;
-                } else if (arr[0].equals("todo")) {
-                    comm = Commands.todo;
-                } else if (arr[0].equals("deadline")) {
-                    comm = Commands.deadline;
-                } else if (arr[0].equals("event")) {
-                    comm = Commands.event;
-                } else if (arr[0].equals("delete")) {
-                    comm = Commands.delete;
-                } else {
-                    comm = Commands.gibberish;
+                String keyword = arr[0];
+                Commands command = Commands.findCommand(keyword);
+                switch (command) {
+                    case EXIT:
+                        Storage.save(taskList, Storage.FILE_PATH);
+                        System.out.println(line);
+                        System.out.println("Bye. Hope to see you again soon!");
+                        System.out.println(line);
+                    flag = true;
+                    break;
+                    case LIST:
+                        addLines(taskList.printOutList());
+                        break;
+                    case DONE:
+                        try {
+                            int index = Integer.parseInt(arr[1]) - 1;
+                            addLines(taskList.markCompleted(index));
+                            break;
+                        } catch (Exception e) {
+                            System.out.println(new DukeException("Integer not detected"));
+                            break;
+                        }
+                    case DEADLINE:
+                        try {
+                            String obtainDate = arr[1];
+                            String arr2[] = obtainDate.split("/by", 2);
+                            String descrip = arr2[0];
+                            String date = arr2[1];
+                            Deadline item = new Deadline(descrip, date);
+                            addLines(taskList.add(item));
+                            break;
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println(new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.", e));
+                        }
+                    case TODO:
+                        try {
+                            ToDo item = new ToDo(arr[1]);
+                            addLines(taskList.add(item));
+                            break;
+                        } catch (Exception e) {
+                            System.out.println(new DukeException("☹ OOPS!!! The description of a todo cannot be empty.", e));
+                            break;
+                        }
+                    case EVENT:
+                        try {
+                            String obtainDate = arr[1];
+                            String arr2[] = obtainDate.split("/at", 2);
+                            String descrip = arr2[0];
+                            String date = arr2[1];
+                            Event item = new Event(descrip, date);
+                            addLines(taskList.add(item));
+                            break;
+                        } catch (Exception e) {
+                            System.out.println(new DukeException("☹ OOPS!!! The description of a event cannot be empty.", e));
+                            break;
+                        }
+                    case DELETE:
+                        try {
+
+                            int index2 = Integer.parseInt(arr[1]) - 1;
+                            addLines(taskList.deleteTask(index2));
+                            break;
+                        } catch (Exception e) {
+                            System.out.println(new DukeException("☹ OOPS!!! There is no task at that list number to delete!", e));
+                            break;
+                        }
                 }
+
+
+
+            } catch (DukeException e) {
+                System.out.println(e);
             }
-            String split = echo;
-            String arr[] = split.split(" ", 2);
-
-switch (comm) {
-    case bye:
-        System.out.println(line);
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(line);
-
-        break;
-    case list:
-        System.out.println(line);
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < ListOfItems.size(); i++) {
-            int number = i + 1;
-            System.out.println(Integer.toString(number) + ". " + ListOfItems.get(i));
-
         }
-        System.out.println(line);
-        echo = sc.nextLine();
-        break;
-    case done:
-        try {
-        int index = Integer.parseInt(arr[1]) - 1;
-        Task taskToChange = ListOfItems.get(index);
-        taskToChange.markAsDone();
-        ListOfItems.set(index, taskToChange);
-        System.out.println(line);
-        System.out.println("Nice! I've marked this task as done: \n" + ListOfItems.get(index));
-        System.out.println(line);
-        echo = sc.nextLine();
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(new DukeException("☹ OOPS!!! There is no task at that list number to mark as done!" , e));
-            echo = sc.nextLine();
-        }
-        break;
-    case todo:
-        try {
-        ToDo item = new ToDo(arr[1]);
-
-        ListOfItems.add(item);
-        System.out.println(line);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(item);
-        System.out.println("Now you have " + ListOfItems.size() + " tasks in the list.");
-        System.out.println(line);
-        echo = sc.nextLine();
-    } catch (ArrayIndexOutOfBoundsException e) {
-
-        System.out.println(new DukeException("☹ OOPS!!! The description of a todo cannot be empty.", e));
-        echo = sc.nextLine();
     }
-    break;
-    case deadline:
-        try {
-        String obtainDate = arr[1];
-        String arr2[] = obtainDate.split("/by", 2);
-        String descrip = arr2[0];
-        String date = arr2[1];
-        Deadline item = new Deadline(descrip, date);
-        ListOfItems.add(item);
-        System.out.println(line);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(item);
-        System.out.println("Now you have " + ListOfItems.size() + " tasks in the list.");
-        System.out.println(line);
-        echo = sc.nextLine();
-    } catch (ArrayIndexOutOfBoundsException e) {
-        System.out.println(new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.", e));
-        echo = sc.nextLine();
-    }
-    break;
-    case event:
-        try {
-        String obtainDate = arr[1];
-        String arr2[] = obtainDate.split("/at", 2);
-        String descrip = arr2[0];
-        String date = arr2[1];
-        Event item = new Event(descrip, date);
-        ListOfItems.add(item);
-        System.out.println(line);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(item);
-        System.out.println("Now you have " + ListOfItems.size() + " tasks in the list.");
-        System.out.println(line);
-        echo = sc.nextLine();
-    } catch (ArrayIndexOutOfBoundsException e) {
-        System.out.println(new DukeException("☹ OOPS!!! The description of a event cannot be empty.", e));
-        echo = sc.nextLine();
-    }
-    break;
-    case delete:
-        try {
-            int index2 = Integer.parseInt(arr[1]) - 1;
-            Task taskToChange2 = ListOfItems.get(index2);
 
-            ListOfItems.remove(index2);
-            System.out.println(line);
-            System.out.println("Noted. I've removed this task: \n" + taskToChange2);
-            System.out.println("Now you have " + ListOfItems.size() + " tasks in the list.");
-            System.out.println(line);
-            echo = sc.nextLine();
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(new DukeException("☹ OOPS!!! There is no task at that list number to delete!", e));
-            echo = sc.nextLine();
-        }
-        break;
-    case gibberish:
-        System.out.println(new DukeException("DukeException: ☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
-        echo = sc.nextLine();
+
+
+
+    private static void addLines(String content) {
+        System.out.print(line);
+        System.out.print(content);
+        System.out.println(line);
+    }
 }
 
 
-        }
-
-
-    }
-
-
-}
