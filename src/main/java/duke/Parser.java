@@ -1,3 +1,8 @@
+package duke;
+
+import duke.commands.*;
+import duke.patterns.InputPattern;
+
 public class Parser {
 
     public static Command parse(String input) {

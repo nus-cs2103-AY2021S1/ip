@@ -1,30 +1,35 @@
+package duke.tasks;
+
+import duke.exceptions.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task {
-    LocalDateTime datetime;
+public class Deadline extends Task {
+    LocalDateTime datetimeDue;
     static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public Event(String content, String datetimeString, Boolean isComplete) throws DukeException {
+    public Deadline(String content, String datetimeDueString, boolean isComplete) throws DukeException {
         super(content, isComplete);
-        if (datetimeString.replace(" ", "").equals("")) {
+        if (datetimeDueString.replace(" ", "").equals("")) {
             throw new DukeException("Event datetime cannot be empty.");
         }
         try {
-            this.datetime = LocalDateTime.parse(datetimeString, formatter);
+            this.datetimeDue = LocalDateTime.parse(datetimeDueString, formatter);
         } catch (DateTimeParseException exception) {
             throw new DukeException("Invalid datetime specified (Needs to be yyyy-MM-dd HH:mm).");
         }
     }
 
-    public Event(String content, String datetimeString) throws DukeException{
+
+    public Deadline(String content, String datetimeDueString) throws DukeException {
         super(content);
-        if (datetimeString.replace(" ", "").equals("")) {
+        if (datetimeDueString.replace(" ", "").equals("")) {
             throw new DukeException("Event datetime cannot be empty.");
         }
         try {
-            this.datetime = LocalDateTime.parse(datetimeString, formatter);
+            this.datetimeDue = LocalDateTime.parse(datetimeDueString, formatter);
         } catch (DateTimeParseException exception) {
             throw new DukeException("Invalid datetime specified (Needs to be yyyy-MM-dd HH:mm).");
         }
@@ -32,12 +37,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-
-        return String.format("[E]%s (at: %s)", super.toString(), datetime.format(formatter));
+        return String.format("[D]%s (by: %s)", super.toString(), datetimeDue.format(formatter));
     }
 
     @Override
     public String toSaveString() {
-        return String.format("E/%s/%s", super.toSaveString(), datetime.format(formatter));
+        return String.format("D/%s/%s", super.toSaveString(), datetimeDue.format(formatter));
     }
 }

@@ -1,6 +1,8 @@
+package duke;
+
 import java.util.Scanner;
 
-class Ui {
+public class Ui {
 
     private Scanner scanner;
 

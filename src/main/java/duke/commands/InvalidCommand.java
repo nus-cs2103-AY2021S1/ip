@@ -1,3 +1,8 @@
+package duke.commands;
+
+import duke.TaskManager;
+import duke.Ui;
+
 public class InvalidCommand extends Command {
 
     public InvalidCommand(String input) {

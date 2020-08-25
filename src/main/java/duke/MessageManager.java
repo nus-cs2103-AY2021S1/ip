@@ -1,3 +1,7 @@
+package duke;
+
+import duke.tasks.Task;
+
 public class MessageManager {
 
     static String greetMessage = "Hello. What can I do for you?";

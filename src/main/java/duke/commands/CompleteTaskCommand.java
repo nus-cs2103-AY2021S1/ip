@@ -1,3 +1,10 @@
+package duke.commands;
+
+import duke.*;
+import duke.exceptions.DukeException;
+import duke.patterns.InputPattern;
+import duke.tasks.Task;
+
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,24 +1,30 @@
+package duke.commands;
+
+import duke.*;
+import duke.exceptions.DukeException;
+import duke.patterns.InputPattern;
+import duke.tasks.Todo;
+
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AddDeadlineCommand extends Command{
+public class AddTodoCommand extends Command {
 
-    public AddDeadlineCommand(String input) {
+    public AddTodoCommand(String input) {
         this.input = input;
         this.isExit = false;
     }
 
     @Override
     public void execute(TaskManager taskManager, Ui ui) {
-        Pattern r = Pattern.compile(InputPattern.addDeadlinePattern);
+        Pattern r = Pattern.compile(InputPattern.addTodoPattern);
         Matcher m = r.matcher(input);
         m.find();
         String content = m.group("content");
-        String datetimeDue = m.group("datetimeDue");
         try {
-            Deadline deadline = taskManager.addDeadline(content, datetimeDue);
-            ui.sendMessage(MessageManager.getAddSuccessMessage(deadline, taskManager));
+            Todo todo = taskManager.addTodo(content);
+            ui.sendMessage(MessageManager.getAddSuccessMessage(todo, taskManager));
         } catch (DukeException | IOException exception) {
             ui.sendMessage(exception.getMessage());
         }

@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.exceptions.DukeException;
+
 public class Task {
 
     public String content;

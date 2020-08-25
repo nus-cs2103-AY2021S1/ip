@@ -1,7 +1,9 @@
+package duke;
+
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Duke {
     private TaskManager taskManager;
@@ -38,11 +40,6 @@ public class Duke {
             command.execute(taskManager, ui);
             isExit = command.isExit;
         }
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
     }
 
     private void listTasks(Duke duke) {
