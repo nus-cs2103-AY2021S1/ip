@@ -29,15 +29,18 @@ public class EventCommand extends Command{
             String[] withoutCommandArr = withoutCommand.split("/");
             String description = withoutCommandArr[0].trim();
             if (description.isEmpty()) {
-                throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of an event must not be empty.");
+                throw new DukeInvalidUserInputException("I'm sorry to inform you that the "
+                        + "description of an event must not be empty.");
             }
             if (withoutCommandArr.length < 2) {
-                throw new DukeInvalidUserInputException("It appears you are missing a follow up '/at' command.");
+                throw new DukeInvalidUserInputException("It appears you are missing a "
+                        + "follow up '/at' command.");
             }
             String followUpCommand = Parser.parseFollowUpCommand(withoutCommandArr[1]);
             if (followUpCommand.equals("at")) {
                 if (!withoutCommandArr[1].trim().contains(" ")) {
-                    throw new DukeInvalidUserInputException("It appears you are missing the date and time for your event.");
+                    throw new DukeInvalidUserInputException("It appears you are missing the "
+                            + "date and time for your event.");
                 }
                 String dateTime = withoutCommandArr[1].substring(withoutCommandArr[1].indexOf(" ")).trim();
                 Event newTask = new Event(description, dateTime);
@@ -48,7 +51,8 @@ public class EventCommand extends Command{
                 throw new DukeIllegalCommandException(followUpCommand);
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of an event must not be empty.");
+            throw new DukeInvalidUserInputException("I'm sorry to inform you that the "
+                    + "description of an event must not be empty.");
         }
     }
 

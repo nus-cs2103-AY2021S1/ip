@@ -20,7 +20,8 @@ public class DoneCommand extends Command {
     public void execute() throws DukeInvalidUserInputException {
         //Get number after done keyword
         if (this.user_input.length() == 4) {
-            throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of a done must not be empty.");
+            throw new DukeInvalidUserInputException("I'm sorry to inform you that the "
+                    + "description of a done must not be empty.");
         }
         try {
             String int_substring = this.user_input.substring(5);

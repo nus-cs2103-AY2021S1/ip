@@ -25,14 +25,16 @@ public class ToDoCommand extends Command {
         try {
             String description = user_input.substring(5).trim();
             if (description.isEmpty()) {
-                throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of a todo must not be empty.");
+                throw new DukeInvalidUserInputException("I'm sorry to inform you that the "
+                        + "description of a todo must not be empty.");
             }
             ToDo newTask = new ToDo(description);
             this.taskList.add(newTask);
             this.ui.showTotalTasks(this.taskList.getTotalTask());
             this.storage.saveTask(newTask);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeInvalidUserInputException("I'm sorry to inform you that the description of a todo must not be empty.");
+            throw new DukeInvalidUserInputException("I'm sorry to inform you that the "
+                    + "description of a todo must not be empty.");
         }
     }
 
