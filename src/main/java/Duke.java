@@ -66,12 +66,16 @@ class Deadline extends Task {
 }
 
 class Convert {
-    static String at(String time) {
-        return "";
+    static String at(String s) {
+        String first = s.split("/at")[0];
+        String second = s.split("/at")[1];
+        return first + "(at:" + second + ")";
     }
 
-    static String by(String time) {
-        return "";
+    static String by(String s) {
+        String first = s.split("/by")[0];
+        String second = s.split("/by")[1];
+        return first + "(by:" + second + ")";
     }
 }
 
@@ -137,9 +141,9 @@ public class Duke {
                     } else {
                         Task task;
                         if (priorCommand.equals("deadline")) {
-                            task = new Deadline(extraCommand);
+                            task = new Deadline(Convert.by(extraCommand));
                         } else if (priorCommand.equals("event")) {
-                            task = new Event(extraCommand);
+                            task = new Event(Convert.at(extraCommand));
                         } else if (priorCommand.equals("todo")) {
                             task = new Todo(extraCommand);
                         } else {
