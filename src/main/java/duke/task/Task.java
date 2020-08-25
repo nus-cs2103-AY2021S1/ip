@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Encapsulates a task with a description and a completion status.
  */

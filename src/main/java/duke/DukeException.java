@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Encapsulates the exception when a parser receives an invalid input.
  */

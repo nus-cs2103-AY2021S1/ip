@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a todo as a task.
  */

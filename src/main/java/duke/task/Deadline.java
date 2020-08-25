@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.util.DateTimeHandler;
+import duke.DukeException;
+
 /**
  * Represents a deadline as a task with a date and time.
  */
