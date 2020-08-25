@@ -1,7 +1,18 @@
 package main.java;
 
+/**
+ * This class consists of the parse method which parses user input and determines
+ * the correct command for Bob to execute.
+ */
 public class Parser {
 
+    /**
+     * Returns the appropriate command for Bob to execute by parsing a provided String command by the user.
+     *
+     * @param command a String consisting of a command to be parsed for Bob to execute.
+     * @return a command that corresponds to provided String command.
+     * @throws BobException if a command cannot be parsed from the provided String command.
+     */
     public static Command parse(String command) throws BobException {
         if (command.equals("list")) {
             return new ListCommand();
