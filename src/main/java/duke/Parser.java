@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
-    protected static List<LocalDateTime> customDateTimeFormatter(String dateTimeString) throws DukeInvalidDateTimeInputException {
+    protected static List<LocalDateTime> getCustomDateTimeList(String dateTimeString) throws DukeInvalidDateTimeInputException {
         //dateTimeString should be given in "dd/mm/yyyy hhmm"
         //will use manual parser to check for invalid date time inputs
         List<LocalDateTime> results = new ArrayList<>();
@@ -70,7 +70,7 @@ public class Parser {
             try {
                 tokens = command.split(" /by ");
                 des = tokens[0].substring(9);
-                List<LocalDateTime> ldtList = customDateTimeFormatter(tokens[1]);
+                List<LocalDateTime> ldtList = getCustomDateTimeList(tokens[1]);
                 LocalDate date = ldtList.get(0).toLocalDate();
                 LocalTime time = null;
                 if (ldtList.size() == 2) {
@@ -89,7 +89,7 @@ public class Parser {
             try {
                 tokens = command.split(" /at ");
                 des = tokens[0].substring(6);
-                List<LocalDateTime> ldtList = customDateTimeFormatter(tokens[1]);
+                List<LocalDateTime> ldtList = getCustomDateTimeList(tokens[1]);
                 LocalDate date = ldtList.get(0).toLocalDate();
                 LocalTime time = null;
                 if (ldtList.size() == 2) {
