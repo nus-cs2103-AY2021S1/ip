@@ -26,13 +26,13 @@ public class Duke {
 
     public void run() {
         ui.start();
-        boolean terminate = false;
-        while (!terminate) {
+        boolean isExit = false;
+        while (!isExit) {
             try {
                 String command = ui.read();
                 Command c = Parser.parse(command);
                 c.execute(tasks, ui, storage);
-                terminate = c.terminate();
+                isExit = c.shouldExit();
             } catch (DukeException e) {
                 ui.printError(e);
             }

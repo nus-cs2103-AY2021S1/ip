@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
 public class Command {
 
     private final String[] input;
-    private boolean terminate = false;
+    private boolean shouldExit = false;
 
     public Command(String[] input) {
         this.input = input;
@@ -23,7 +23,7 @@ public class Command {
         switch(input[0]) {
             case "bye":
                 ui.printBye();
-                this.terminate = true;
+                this.shouldExit = true;
                 break;
             case "list": {
                 ui.printList(tasks);
@@ -165,8 +165,8 @@ public class Command {
         }
     }
 
-    public boolean terminate() {
-        return this.terminate;
+    public boolean shouldExit() {
+        return this.shouldExit;
     }
 
 }
