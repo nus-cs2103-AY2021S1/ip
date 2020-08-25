@@ -1,12 +1,16 @@
-import main.java.Deadline;
-import main.java.Event;
-import main.java.Task;
-import main.java.ToDo;
+package main.java;
 
+<<<<<<< HEAD
 import java.io.*;
 
+=======
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+>>>>>>> branch-Level-8
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import java.time.LocalDate;
 
 public class Duke {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -68,6 +72,7 @@ public class Duke {
                         writeListToFile(tList);
                     }
                 } else if (command.substring(0, 5).equals("event")) {
+<<<<<<< HEAD
                     int escapeIndex = command.lastIndexOf("/");
                     String name = command.substring(6, escapeIndex - 1);
 
@@ -79,11 +84,31 @@ public class Duke {
                         System.out.println(border + "Wyre at your service. I've added the task:\n\t" + e);
                         System.out.println("Now you have " + tList.size() + " task(s) in the list." + border);
                         writeListToFile(tList);
+=======
+                    try {
+                        int escapeIndex = command.lastIndexOf("/");
+                        String name = command.substring(6, escapeIndex - 1);
+                        LocalDate date = LocalDate.parse(command.substring(escapeIndex + 4), DateTimeFormatter.ISO_DATE);
+                        if (name.isEmpty()) {
+                            System.out.println("Naw, you can't have a event with an empty name!");
+                        } else {
+                            Event e = new Event(name, false, date);
+                            tList.add(e);
+                            System.out.println(border + "Wyre at your service. I've added the task:\n\t" + e);
+                            System.out.println("Now you have " + tList.size() + " task(s) in the list." + border);
+                        }
+                    } catch(DateTimeParseException e) {
+                        System.out.println("Naw, the date needs to be in yyyy-mm-dd format!");
+>>>>>>> branch-Level-8
                     }
-                } else if (command.substring(0, 8).equals("deadline")) {
-                    int escapeIndex = command.lastIndexOf("/");
-                    String name = command.substring(9, escapeIndex - 1);
 
+                } else if (command.substring(0, 8).equals("deadline")) {
+                    try {
+                        int escapeIndex = command.lastIndexOf("/");
+                        String name = command.substring(9, escapeIndex - 1);
+                        LocalDate date = LocalDate.parse(command.substring(escapeIndex + 4), DateTimeFormatter.ISO_DATE);
+
+<<<<<<< HEAD
                     if (name.isEmpty()) {
                         System.out.println("Naw, you can't have a deadline with an empty name!");
                     } else {
@@ -92,6 +117,18 @@ public class Duke {
                         System.out.println(border + "Wyre at your service. I've added the task:\n\t" + d);
                         System.out.println("Now you have " + tList.size() + " task(s) in the list." + border);
                         writeListToFile(tList);
+=======
+                        if (name.isEmpty()) {
+                            System.out.println("Naw, you can't have a deadline with an empty name!");
+                        } else {
+                            Deadline d = new Deadline(name, false, date);
+                            tList.add(d);
+                            System.out.println(border + "Wyre at your service. I've added the task:\n\t" + d);
+                            System.out.println("Now you have " + tList.size() + " task(s) in the list." + border);
+                        }
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Naw, the date needs to be in yyyy-mm-dd format!");
+>>>>>>> branch-Level-8
                     }
                 } else {
                     System.out.println(border + "Naw, this isn't an accepted command!\n" + availableCommands + border);
