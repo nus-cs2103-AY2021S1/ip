@@ -3,11 +3,11 @@ package duke;
 import java.util.ArrayList;
 
 public class Parser {
-        public static void parse(String input, TaskList tasks) throws DukeException {
+        public static String parse(String input, TaskList tasks) throws DukeException {
             Ui ui = new Ui();
             String[] splitArr = input.split(" ");
             if (input.equals("bye")) {
-                ui.goodbye();
+                return ui.goodbye();
             } else if (input.equals("list")) {
                 ui.list(tasks);
             } else if (splitArr.length == 2 && splitArr[0].equals("done") && Integer.parseInt(splitArr[1]) > 0) {
@@ -24,7 +24,7 @@ public class Parser {
                     throw new DukeException("That task number does not exist.");
                 }
                 Task deletedTask = tasks.remove(index - 1);
-                ui.delete(index - 1, deletedTask, tasks.size());
+                ui.delete(deletedTask, tasks.size());
             } else {
                 switch (splitArr[0]) {
                     case "todo":
@@ -77,5 +77,6 @@ public class Parser {
             }
             ArrayList<Task> tasksCopy = tasks.clone();
             Storage.store(tasksCopy);
+            return "";
         }
 }

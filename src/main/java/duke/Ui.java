@@ -14,8 +14,9 @@ public class Ui {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
     }
 
-    public void goodbye() {
+    public String goodbye() {
         System.out.println("Bye! Hope to see you again soon!");
+        return "Bye";
     }
 
     public void list(TaskList tasks) {
@@ -30,7 +31,7 @@ public class Ui {
         System.out.println(t.recordString());
     }
 
-    public void delete(int index, Task t, int size) {
+    public void delete(Task t, int size) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(t.recordString());
         System.out.println("Now, you have " +  size + " tasks in the list");
@@ -48,7 +49,9 @@ public class Ui {
             Scanner userInput = new Scanner(System.in);
             while (userInput.hasNext()) {
                 String input = userInput.nextLine();
-                Parser.parse(input, tasks);
+                String s = Parser.parse(input, tasks);
+                if (s.equals("Bye")) {   break;
+                }
             }
         } catch (DukeException e) {
             showLoadingError(e);
