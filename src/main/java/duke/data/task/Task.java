@@ -57,12 +57,18 @@ public class Task {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Task task = (Task) o;
-        return isDone == task.isDone &&
-                Objects.equals(description, task.description);
+        return isDone == task.isDone
+                && Objects.equals(description, task.description);
     }
 
-    public String toWriteString() { return " | "+ (isDone ? "1" : "0") + " | " + description;}
+    public String toWriteString() {
+        return " | " + (isDone ? "1" : "0") + " | " + description;
+    }
 }

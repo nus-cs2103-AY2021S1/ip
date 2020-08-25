@@ -1,11 +1,10 @@
 package src.main.java.duke.parser;
 
 import src.main.java.duke.commands.*;
-
-import static src.main.java.duke.commons.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static src.main.java.duke.commons.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static src.main.java.duke.commons.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static src.main.java.duke.commons.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 
 /**
  * Parses user input.
@@ -14,12 +13,10 @@ public class Parser {
 
     public static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
-    public static final Pattern EVENT_TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<description>[^/]+)+\\s+(\\/at)+\\s+"
+    public static final Pattern EVENT_TASK_DATA_ARGS_FORMAT = Pattern.compile("(?<description>[^/]+)+\\s+(\\/at)+\\s+"
                     + "(?<duedate>[\\d\\d\\d-\\d\\d\\-\\d\\d\\d+\\s+\\d\\d:\\d\\d]+)");
 
-    public static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter
-                                                                 // prefixes
+    public static final Pattern DEADLINE_TASK_DATA_ARGS_FORMAT =
             Pattern.compile("(?<description>[^/]+)+\\s+(\\/by)+\\s+"
                     + "(?<duedate>[\\d\\d\\d-\\d\\d\\-\\d\\d\\d+\\s+\\d\\d:\\d\\d]+)");
 
@@ -46,22 +43,22 @@ public class Parser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
-            case AddTodoCommand.COMMAND_WORD:
-                return prepareAddTodo(arguments);
-            case AddEventCommand.COMMAND_WORD:
-                return prepareAddEvent(arguments);
-            case AddDeadlineCommand.COMMAND_WORD:
-                return prepareAddDeadline(arguments);
-            case DeleteCommand.COMMAND_WORD:
-                return prepareDelete(arguments);
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
-            case MarkDoneCommand.COMMAND_WORD:
-                return prepareMarkDone(arguments);
-            default:
-                return new HelpCommand();
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+        case AddTodoCommand.COMMAND_WORD:
+            return prepareAddTodo(arguments);
+        case AddEventCommand.COMMAND_WORD:
+            return prepareAddEvent(arguments);
+        case AddDeadlineCommand.COMMAND_WORD:
+            return prepareAddDeadline(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return prepareDelete(arguments);
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+        case MarkDoneCommand.COMMAND_WORD:
+            return prepareMarkDone(arguments);
+        default:
+            return new HelpCommand();
         }
     }
 

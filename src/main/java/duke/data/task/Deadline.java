@@ -19,6 +19,9 @@ public class Deadline extends Task {
         this.dueDate = LocalDateTime.parse(dueDate, dateFormat);
     }
 
+    /**
+     * This method returns the string to be written for the deadline.
+     */
     public String toString() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return "[D]" + super.toString() + "(by: " + dueDate.format(dateFormat) + ")";
@@ -33,5 +36,6 @@ public class Deadline extends Task {
      */
     public String toWriteString() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return "D " +  super.toWriteString() + " | " + dueDate.format(dateFormat); }
+        return "D " + super.toWriteString() + " | " + dueDate.format(dateFormat);
+    }
 }

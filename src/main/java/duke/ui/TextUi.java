@@ -1,14 +1,15 @@
 package src.main.java.duke.ui;
 
-import src.main.java.duke.commands.CommandResult;
-import src.main.java.duke.data.task.Task;
-
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+
+import src.main.java.duke.commands.CommandResult;
+import src.main.java.duke.data.task.Task;
+
 
 
 /**
@@ -87,7 +88,7 @@ public class TextUi {
      * Generates and prints the welcome message upon the start of the application.
      */
     public void showWelcomeMessage() {
-        showToUser("Hello! I'm Best2103/TBot","What can I do for you?");
+        showToUser("Hello! I'm Best2103/TBot", "What can I do for you?");
     }
 
     public void showGoodbyeMessage() {

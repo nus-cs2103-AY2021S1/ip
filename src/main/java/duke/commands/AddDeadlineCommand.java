@@ -23,6 +23,7 @@ public class AddDeadlineCommand extends Command {
         this.toAdd = new Deadline(description, dueDate);
     }
 
+    
 
     @Override
     public CommandResult execute() {
@@ -30,7 +31,7 @@ public class AddDeadlineCommand extends Command {
             duke.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (Exception e) {
-            return new CommandResult("send help");
+            return new CommandResult("Oh no. Add deadline was not successful");
         }
     }
 }

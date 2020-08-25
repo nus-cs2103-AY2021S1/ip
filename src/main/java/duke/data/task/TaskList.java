@@ -1,7 +1,11 @@
 package src.main.java.duke.data.task;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * A list of tasks. Does not allow null elements or duplicates.
@@ -84,8 +88,12 @@ public class TaskList implements Iterable<Task> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         TaskList tasks = (TaskList) o;
         return Objects.equals(internalList, tasks.internalList);
     }

@@ -20,5 +20,7 @@ public class Todo extends Task {
     /**
      * This method returns the string to be written for the todo.
      */
-    public String toWriteString() { return "T " +  super.toWriteString(); }
+    public String toWriteString() {
+        return "T " + super.toWriteString();
+    }
 }
