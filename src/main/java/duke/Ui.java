@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Implements User interface
+ */
 public class Ui {
     private Storage store;
     private TaskList tasks;
