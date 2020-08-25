@@ -3,6 +3,10 @@ import java.util.ArrayList;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+import java.nio.file.Paths;
 
 public class Duke {
 
@@ -15,8 +19,9 @@ public class Duke {
     }
 
     public static void saveToFile(String output) {
+        String filePath = Paths.get("..", "..", "..", "data", "Tasklist.txt").toString();
         try {
-            FileWriter myFile = new FileWriter("Tasklist.txt");
+            FileWriter myFile = new FileWriter(filePath);
             myFile.write(output);
             myFile.close();
             System.out.println("WRITTEN TO FILE THE WHOLE LIST!!!!");
@@ -24,6 +29,26 @@ public class Duke {
             System.out.println("Error IDIOT!!!");
             ex.printStackTrace();
         }
+    }
+
+    public static ArrayList<Task> readFromFile(String filePath) {
+        ArrayList<Task> savedTasks = new ArrayList<Task>();
+        try {
+            File myFile = new File(filePath);
+            Scanner taskReader = new Scanner(myFile);
+            while (taskReader.hasNextLine()) {
+                String task = taskReader.nextLine();
+                if (task == "") {
+                    continue;
+                } else {
+                    break;
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("Error IDIOT!!!");
+            ex.printStackTrace();
+        }
+        return savedTasks;
     }
 
     public static boolean isEmptyInput(String input) {
