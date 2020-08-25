@@ -63,7 +63,7 @@ public class Storage {
         }
     }
 
-    public void updateSave(TaskList tasks) throws BobIOException {
+    public void updateSave(TaskList tasks) throws BobIOException, BobIndexOutOfBoundsException {
         FileWriter deleter = null;
         try {
             deleter = new FileWriter(save);

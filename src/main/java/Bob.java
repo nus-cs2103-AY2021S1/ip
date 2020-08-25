@@ -43,6 +43,6 @@ public class Bob {
         }
     }
     public static void main(String[] args) {
-        new Bob("data/tasks.txt").run();
+        new Bob("data/save.txt").run();
     }
 }

@@ -31,6 +31,18 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Deadline) {
+            Deadline task = (Deadline) o;
+            return this.description.equals(task.description) && this.deadline.equals(task.deadline) && this.isDone == task.isDone;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public String saveFormat() {
         if (isDone) {
             return "D | 1 | " + this.getDescription() + " | " + this.deadline.format(inputFormatter).toString();

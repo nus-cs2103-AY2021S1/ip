@@ -28,6 +28,17 @@ public class Task {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Task) {
+            Task task = (Task) o;
+            return this.description.equals(task.description) && this.isDone == task.isDone;
+        } else {
+            return false;
+        }
+    }
+    @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();
     }

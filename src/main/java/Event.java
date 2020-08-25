@@ -33,6 +33,18 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Event) {
+            Event task = (Event) o;
+            return this.description.equals(task.description) && this.start.equals(task.start) && this.end.equals(task.end) && this.isDone == task.isDone;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public String saveFormat() {
         if (isDone) {
             return "E | 1 | " + this.getDescription() + " | " + this.start.format(inputFormatter) + " to " + this.end.format(inputFormatter);

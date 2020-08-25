@@ -14,4 +14,21 @@ public class AddCommand extends Command {
         storage.flushWriter();
         ui.addTask(task);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        } else if (o instanceof AddCommand) {
+            AddCommand c = (AddCommand) o;
+            return c.task.equals(this.task);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public String toString(){
+        return "Adds " + task.toString() + " to list";
+    }
 }

@@ -9,16 +9,24 @@ public class TaskList {
         list = new ArrayList<Task>();
     }
 
-    public void delete(int index) {
-        list.remove(index-1);
+    public void delete(int index) throws BobIndexOutOfBoundsException {
+        try {
+            list.remove(index-1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new BobIndexOutOfBoundsException();
+        }
     }
 
     public void add(Task task) {
         list.add(task);
     }
 
-    public Task get(int index) {
-        return list.get(index-1);
+    public Task get(int index) throws BobIndexOutOfBoundsException {
+        try {
+            return list.get(index - 1);
+        } catch(IndexOutOfBoundsException e) {
+            throw new BobIndexOutOfBoundsException();
+        }
     }
 
     public int size() {return list.size(); }

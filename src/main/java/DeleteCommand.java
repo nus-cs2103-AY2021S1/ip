@@ -11,7 +11,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws BobIOException {
+    public void execute(TaskList tasks, UI ui, Storage storage) throws BobIOException, BobIndexOutOfBoundsException {
         ui.deleteTask(tasks,index);
         tasks.delete(index);
         storage.updateSave(tasks);
