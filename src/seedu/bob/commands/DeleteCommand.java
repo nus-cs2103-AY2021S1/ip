@@ -2,8 +2,10 @@ package seedu.bob.commands;
 
 import seedu.bob.data.task.Task;
 import seedu.bob.data.task.Tasklist;
+
 import seedu.bob.exceptions.BobInvalidNumberException;
 import seedu.bob.exceptions.BobListIndexOutOfBoundsException;
+
 import seedu.bob.storage.Storage;
 import seedu.bob.ui.Ui;
 
@@ -13,7 +15,7 @@ import java.io.IOException;
  * Deletes a task from Bob's tasklist
  */
 public class DeleteCommand extends Command {
-    String input;
+    private final String input;
 
 
     public DeleteCommand(String input) {
@@ -25,6 +27,7 @@ public class DeleteCommand extends Command {
         return false;
     }
 
+
     /**
      * Executes delete command.
      *
@@ -35,6 +38,8 @@ public class DeleteCommand extends Command {
      * @throws BobListIndexOutOfBoundsException If number > size of tasklist or <= 0.
      * @throws IOException If an error occurs while updating file.
      */
+
+    @Override
     public void execute(Tasklist tasks, Ui ui, Storage storage)
             throws BobInvalidNumberException, BobListIndexOutOfBoundsException, IOException {
         try {

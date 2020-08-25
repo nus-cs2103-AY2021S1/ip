@@ -5,10 +5,14 @@ package seedu.bob.common;
  */
 public class Messages {
     public static final String INTRO = "/*----------------- Welcome to BOB -----------------*/\n"
-            + "                    █▀▀▄ █▀▀█ █▀▀▄\n"
-            + "                    █▀▀▄ █  █ █▀▀▄\n"
-            + "                    ▀▀▀  ▀▀▀▀ ▀▀▀\n"
+            + "                   _           _\n"
+            + "                  | |         | |\n"
+            + "                  | |__   ___ | |__\n"
+            + "                  | '_ \\ / _ \\| '_ \\\n"
+            + "                  | |_) | (_) | |_) |\n"
+            + "                  |_.__/ \\___/|_.__/\n"
             + "            Also known as BERY ORDINARY BOT\n"
+            + "\n"
             + "Hi, my name is BOB.\n"
             + "What can I do for you?";
     public static final String OUTRO = "Good bye boss, see you soon.";

@@ -39,7 +39,7 @@ public class DateAndTime {
      * @return String of date.
      */
     public String getDate() {
-        return this.date.format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
+        return this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     /**

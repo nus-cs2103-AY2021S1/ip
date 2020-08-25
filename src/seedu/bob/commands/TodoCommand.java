@@ -2,7 +2,9 @@ package seedu.bob.commands;
 
 import seedu.bob.data.task.Task;
 import seedu.bob.data.task.Tasklist;
+
 import seedu.bob.exceptions.BobEmptyTaskException;
+
 import seedu.bob.storage.Storage;
 import seedu.bob.ui.Ui;
 
@@ -12,7 +14,7 @@ import java.io.IOException;
  * Adds a task to Bob's tasklist.
  */
 public class TodoCommand extends Command {
-    String input;
+    private final String input;
 
     /**
      * Creates a todo command.

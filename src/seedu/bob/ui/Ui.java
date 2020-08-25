@@ -17,7 +17,7 @@ public class Ui {
     /** Divider to be display on UI */
     public static final String DIVIDER =
             "====================================================================="
-                    + "=====================================================================\n";
+                    + "========================================================\n";
 
     /** A platform independent line separator. */
     private static final String LS = System.lineSeparator();
@@ -42,8 +42,7 @@ public class Ui {
      * @return User input.
      */
     public String readCommand() {
-        String userInput = in.nextLine();
-        return userInput;
+        return in.nextLine();
     }
 
     /**
