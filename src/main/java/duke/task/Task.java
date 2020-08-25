@@ -14,10 +14,17 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Returns the icon of current task status.
+     * @return Tick if task is done and cross otherwise.
+     */
     public String getStatusIcon() {
         return (isDone ? Task.TICK_ICON : Task.CROSS_ICON);
     }
 
+    /**
+     * Marks current instance of task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
@@ -31,6 +38,10 @@ public class Task {
         return this.desciption.contains(keyword);
     }
 
+    /**
+     * Returns the status of a task.
+     * @return True if the task has done and false other wise.
+     */
     public boolean getStatus() {
         return this.isDone;
     }
@@ -41,6 +52,15 @@ public class Task {
      */
     public String toFileStringFormat() {
         return String.format("%d / %s",isDone ? 1 : 0,this.desciption);
+    }
+
+    /**
+     * Returns whether the task has the exact description as this object.
+     * @param task Task that user intend to add.
+     * @return True if the description is the same, false otherwise.
+     */
+    public boolean isExactDescription(Task task) {
+        return  this.desciption.equals(task.desciption);
     }
 
     @Override

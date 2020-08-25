@@ -10,8 +10,11 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private static String CLEAR_MESSAGE = "I have cleared all tasks!";
+    private static final String CLEAR_MESSAGE = "I have cleared all tasks!";
 
+    /**
+     * Shows the logo of Duke.
+     */
     public void showLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -21,6 +24,10 @@ public class Ui {
         System.out.println(logo);
     }
 
+    /**
+     * Prints the log of Duke.
+     * @param s Log content.
+     */
     public void printLog(String s) {
         System.out.println(formatOut(s));
     }
@@ -34,18 +41,25 @@ public class Ui {
         return String.format("  %s\n    %s\n  %s\n",line(),s,line());
     }
 
-    private String line() {
-        return "-------------------------------------";
-    }
 
+    /**
+     * Shows the welcome message.
+     */
     public void showWelcomeMessage() {
         System.out.println(formatOut("Hello, I am duke.Duke !\n\t What can I do for you ?"));
     }
 
+    /**
+     * Shows the goodbye message.
+     */
     public void showGoodbyeMessage() {
         System.out.println(formatOut("Bye ! Hope to see you again soon."));
     }
 
+    /**
+     * Returns a string when done command is done.
+     * @return String of greet message.
+     */
     public  String doneGreetMessage() {
         return "Nice! I've marked this task as done: \n";
     }
@@ -98,6 +112,10 @@ public class Ui {
         System.out.print(formatOut(builder.toString()));
     }
 
+    /**
+     * Returns the string of command from scanner.
+     * @return User input command.
+     */
     public String readCommand() {
         Scanner sc= new Scanner(System.in);
         return sc.nextLine();
@@ -111,7 +129,14 @@ public class Ui {
         System.out.print(formatOut(doneGreetMessage() + "\n\t" + task.toString()));
     }
 
+    /**
+     * Shows the message when user clear all data.
+     */
     public void showClearMessage() {
         System.out.print(formatOut(Ui.CLEAR_MESSAGE + "\n\t"));
+    }
+
+    private String line() {
+        return "-------------------------------------";
     }
 }

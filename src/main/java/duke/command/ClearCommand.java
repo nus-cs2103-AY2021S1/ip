@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.tool.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represent the command that to clear all data.
+ */
 public class ClearCommand implements Command{
 
     @Override

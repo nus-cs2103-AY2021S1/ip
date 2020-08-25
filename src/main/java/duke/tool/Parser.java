@@ -1,6 +1,6 @@
 package duke.tool;
 
-import duke.Commands;
+import duke.ValidCommand;
 import duke.command.ClearCommand;
 import duke.command.Command;
 import duke.command.AddCommand;
@@ -47,7 +47,7 @@ public class Parser {
         String[] s = input.split(" ", 2);
 
         //TODO:Detect command with unresonable space (eg. "done ")
-        Commands command = Commands.commandType(s[0]);
+        ValidCommand command = ValidCommand.commandType(s[0]);
 
         switch (command) {
         case CLEAR:

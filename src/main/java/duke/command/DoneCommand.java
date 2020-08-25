@@ -5,7 +5,9 @@ import duke.Storage;
 import duke.tool.TaskList;
 import duke.ui.Ui;
 
-
+/**
+ * Represents a command to mark element with certain index as done.
+ */
 public class DoneCommand implements Command {
     private final int targetIndex;
 

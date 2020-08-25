@@ -6,7 +6,10 @@ import duke.exception.AmbiguousInputException;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum Commands {
+/**
+ * ValidCommand enum represents the possible command type.
+ */
+public enum ValidCommand {
     DELETE("delete","DELETE","del","DEL"),
     DEADLINE ("deadline","DEADLINE","ddl","DDL"),
     EVENT ("event","EVENT","eve","EVE"),
@@ -18,22 +21,28 @@ public enum Commands {
     LIST ("list","LIST","ls","LS");
 
     private final String[] aliases;
-    private static final Map<String,Commands> aliasMap = new HashMap<>();
+    private static final Map<String, ValidCommand> aliasMap = new HashMap<>();
 
     static {
-        for (Commands command : Commands.values()) {
+        for (ValidCommand command : ValidCommand.values()) {
             for (String alias : command.aliases) {
                 aliasMap.put(alias,command);
             }
         }
     }
 
-    Commands(String... aliases) {
+    ValidCommand(String... aliases) {
         this.aliases = aliases;
     }
 
-    public static Commands commandType(String alias) throws AmbiguousInputException {
-        Commands command = aliasMap.get(alias);
+    /**
+     * Returns a specific command regarding to user input.
+     * @param alias User input.
+     * @return A command name.
+     * @throws AmbiguousInputException When system cannot recognize the command.
+     */
+    public static ValidCommand commandType(String alias) throws AmbiguousInputException {
+        ValidCommand command = aliasMap.get(alias);
 
         if (command == null) {
             throw new AmbiguousInputException();

@@ -6,6 +6,9 @@ import duke.Storage;
 import duke.tool.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a command to delete element with certain index in the task list.
+ */
 public class DeleteCommand implements Command {
     private final int targetIndex;
 
