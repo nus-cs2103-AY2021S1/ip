@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exceptions.InvalidTaskIndexException;
 import duke.utils.Colour;
 import duke.utils.ResourceHandler;
 
@@ -66,9 +67,9 @@ public class TaskManager {
         return stringBuilder.toString();
     }
 
-    public void markTaskAsDone(int taskIndex) {
-        Task updatedTask = tasks.get(taskIndex - 1);
-        updatedTask.markTaskAsDone();
-        tasks.set(taskIndex - 1, updatedTask);
+    public void markTaskAsDone(int taskIndex){
+            Task updatedTask = tasks.get(taskIndex - 1);
+            updatedTask.markTaskAsDone();
+            tasks.set(taskIndex - 1, updatedTask);
     }
 }
