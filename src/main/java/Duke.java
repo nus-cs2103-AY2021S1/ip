@@ -108,7 +108,7 @@ public class Duke {
     }
 
     private void createAndAddEvent(String input) throws EmptyDescriptionException, WrongFormatException {
-        if (input.length() < 5 || input.substring(5).replaceAll("\\s", "").equals("")) {
+        if (input.length() < 6 || input.substring(5).replaceAll("\\s", "").equals("")) {
             throw new EmptyDescriptionException("event");
         } else if (input.contains("/at")
                 && Character.toString(input.charAt(5)).equals(" ")
