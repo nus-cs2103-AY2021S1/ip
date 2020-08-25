@@ -31,6 +31,14 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Return the details of the task.
+     * @return Details of the task.
+     */
+    public String getDetails() {
+        return details;
+    }
+
     /** Mark the task as done. */
     public void markAsDone() {
         this.isDone = true;

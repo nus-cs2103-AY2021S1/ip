@@ -2,8 +2,8 @@ package duke;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 import duke.task.Task;
-
 
 /**
  * The TaskList class contains the task list and operations on the list.
@@ -67,5 +67,19 @@ public class TaskList {
      */
     public Task removeTask(int taskNumber) {
         return list.remove(taskNumber - 1);
+    }
+
+    public void find(String keyword) {
+        List<Task> filteredList = list.stream()
+                .filter(t -> t.getDetails().contains(keyword))
+                .collect(Collectors.toList());
+        Iterator<Task> iterator = filteredList.iterator();
+        int count = 0;
+        System.out.println(Ui.LINE + "    Here are the matching tasks in your list:");
+        while (iterator.hasNext()) {
+            count++;
+            System.out.println("    " + count + ". " + iterator.next().toString());
+        }
+        System.out.println(Ui.LINE);
     }
 }

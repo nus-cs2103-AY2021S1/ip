@@ -18,6 +18,7 @@ public class Parser {
     private static final String EVENT = "event";
     private static final String DEADLINE = "deadline";
     private static final String DELETE = "delete";
+    private static final String FIND = "find";
 
     /** Returns the command based on user input. */
     public static Command parse(String command) throws DukeException {
@@ -36,6 +37,8 @@ public class Parser {
             return new DeadlineCommand();
         case DELETE:
             return new DeleteCommand();
+        case FIND:
+            return new FindCommand();
         default:
             throw new DukeException("Oops! I'm sorry, but I don't know what that means");
         }
