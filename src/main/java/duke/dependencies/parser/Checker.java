@@ -1,13 +1,13 @@
-package dependencies.parser;
+package duke.dependencies.parser;
 
-import dependencies.dukeexceptions.DukeException;
-import dependencies.dukeexceptions.EmptyTaskException;
-import dependencies.dukeexceptions.InvalidDateException;
-import dependencies.dukeexceptions.UnknownCommandException;
-import dependencies.executable.Command;
-import dependencies.executable.Executable;
-import dependencies.task.Task;
-import dependencies.task.TaskDate;
+import duke.dependencies.dukeexceptions.DukeException;
+import duke.dependencies.dukeexceptions.EmptyTaskException;
+import duke.dependencies.dukeexceptions.InvalidDateException;
+import duke.dependencies.dukeexceptions.UnknownCommandException;
+import duke.dependencies.executable.Command;
+import duke.dependencies.executable.Executable;
+import duke.dependencies.task.Task;
+import duke.dependencies.task.TaskDate;
 
 import java.util.Locale;
 import java.util.regex.Pattern;

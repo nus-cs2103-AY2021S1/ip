@@ -1,10 +1,10 @@
-package dependencies.executor;
+package duke.dependencies.executor;
 
-import dependencies.storage.TaskList;
-import dependencies.task.Task;
-import dependencies.executable.*;
+import duke.dependencies.storage.TaskList;
+import duke.dependencies.task.Task;
+import duke.dependencies.executable.*;
 
-import static dependencies.executable.CommandType.*;
+import static duke.dependencies.executable.CommandType.*;
 
 public class Executor {
 

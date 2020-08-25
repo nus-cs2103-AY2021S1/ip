@@ -1,4 +1,4 @@
-package dependencies.storage;
+package duke.dependencies.storage;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import dependencies.dukeexceptions.MissingListException;
+import duke.dependencies.dukeexceptions.MissingListException;
 
 /**
  * Class to handle the reading and writing to files.

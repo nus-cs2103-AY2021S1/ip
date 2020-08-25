@@ -1,8 +1,8 @@
-package dependencies.task;
+package duke.dependencies.task;
 
 import java.io.Serializable;
 
-import static dependencies.task.CompletionState.*;
+import static duke.dependencies.task.CompletionState.*;
 
 public abstract class Task implements Serializable, Schedulable {
     protected CompletionState state;

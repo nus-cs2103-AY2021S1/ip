@@ -1,6 +1,6 @@
-package main.java;
+package duke;
 
-import dependencies.parser.Parser;
+import duke.dependencies.parser.Parser;
 
 
 /**

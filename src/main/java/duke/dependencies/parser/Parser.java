@@ -1,7 +1,7 @@
-package dependencies.parser;
+package duke.dependencies.parser;
 
-import dependencies.executor.Executor;
-import dependencies.dukeexceptions.*;
+import duke.dependencies.executor.Executor;
+import duke.dependencies.dukeexceptions.*;
 
 /**
  * Parser class which parses the given input. Checks if any command is given

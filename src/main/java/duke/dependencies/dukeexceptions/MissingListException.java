@@ -1,4 +1,6 @@
-package dependencies.dukeexceptions;
+package duke.dependencies.dukeexceptions;
+
+import duke.dependencies.dukeexceptions.DukeException;
 
 /**
  * <p>This class extends DukeExceptions, and is thrown when the saved todoList cannot be found in saved

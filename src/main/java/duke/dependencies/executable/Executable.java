@@ -1,6 +1,6 @@
-package dependencies.executable;
+package duke.dependencies.executable;
 
-import dependencies.task.Task;
+import duke.dependencies.task.Task;
 
 // TODO: Leave this for now
 public interface Executable {

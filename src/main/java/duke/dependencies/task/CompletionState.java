@@ -1,4 +1,4 @@
-package dependencies.task;
+package duke.dependencies.task;
 
 enum CompletionState {
     COMPLETED, UNFINISHED

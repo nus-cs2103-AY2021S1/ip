@@ -1,4 +1,6 @@
-package dependencies.dukeexceptions;
+package duke.dependencies.dukeexceptions;
+
+import duke.dependencies.dukeexceptions.DukeException;
 
 /**
  * <p>This class extends DukeExceptions, and is thrown the user fails to specify a certain date or

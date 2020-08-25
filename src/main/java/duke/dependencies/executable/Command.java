@@ -1,6 +1,6 @@
-package dependencies.executable;
+package duke.dependencies.executable;
 
-import dependencies.task.Task;
+import duke.dependencies.task.Task;
 
 public class Command implements Executable {
     private CommandType command;

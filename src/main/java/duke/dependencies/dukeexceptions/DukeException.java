@@ -1,4 +1,4 @@
-package dependencies.dukeexceptions;
+package duke.dependencies.dukeexceptions;
 
 /**
  * <p>The class DukeException indicates runtime conditions or situations that needs to be caught.
