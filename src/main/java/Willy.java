@@ -1,32 +1,40 @@
 package main.java;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Willy {
-    static ArrayList<Task> list = new ArrayList<>();
-    static String message;
-    static String lastGreeting = "bye";
+    static ArrayList<Task> listOfTasks = new ArrayList<>();
+    private static TaskStore storage;
+    private String message;
+    private static String lastGreeting = "bye";
     static String style = "\t________________________________________________________________\n";
+
+    public Willy() {
+        this.storage = new TaskStore();
+    }
 
     // Add Tasks to list
     public static void addToList(Task task) {
-        list.add(task);
+        listOfTasks.add(task);
+        storage.updateStorage(listOfTasks);
         System.out.println(style +
                 "\tAy here is the task you just added:\n" +
                 "\t  " + task + "\n" +
-                "\tNow you have " + list.size() + " task(s) ah dun forget\n" +
+                "\tNow you have " + listOfTasks.size() + " task(s) ah dun forget\n" +
                 style);
     }
 
     public static void removeTask(int taskNum) {
         int i = taskNum - 1;
-        Task task = list.get(i);
-        list.remove(i);
+        Task task = listOfTasks.get(i);
+        listOfTasks.remove(i);
+        storage.updateStorage(listOfTasks);
         System.out.println(style +
                 "\tOkai here is the task you just deleted:\n" +
                 "\t  " + task + "\n" +
-                "\tNow you have " + list.size() + " task(s) left ~\n" +
+                "\tNow you have " + listOfTasks.size() + " task(s) left ~\n" +
                 style);
     }
 
@@ -34,8 +42,8 @@ public class Willy {
     public static void readList() {
         System.out.println(style);
         System.out.print("\tHere are the tasks in your list to jolt ur memory:>\n");
-        for(int i = 0; i < list.size(); i++) {
-            Task task = list.get(i);
+        for(int i = 0; i < listOfTasks.size(); i++) {
+            Task task = listOfTasks.get(i);
             System.out.println("\t" + (i+1) + ". " + task);
         }
         System.out.println(style);
@@ -44,13 +52,40 @@ public class Willy {
     // Update Tasks to be done
     public static void setTaskDone(int taskNum) {
         int i = taskNum - 1;
-        Task task = list.get(i);
+        Task task = listOfTasks.get(i);
         task.setTaskDone(true);
+        storage.updateStorage(listOfTasks);
         System.out.println(style);
         System.out.println("\tNiceee I've marked this task as done!");
         System.out.println("\t   " + task);
         System.out.println(style);
     }
+
+//    public static void updateStorage() {
+//        for (int i = 0; i < listOfTasks.size(); i++) {
+//            Task task = listOfTasks.get(i);
+//            String combinedTask = "";
+//            String taskType = listOfTasks.get(i).taskType.toString();
+//            if (taskType.equals("[T]")) {
+//                String taskStatus = task.getStatusIcon();
+//                String taskContent = task.task;
+//                combinedTask = taskType + "|" + taskStatus + "|" + taskContent;
+//            } else if (taskType.equals("[D]")) {
+//                DeadlineTask deadlineTask = (DeadlineTask) listOfTasks.get(i);
+//                String taskDeadline = deadlineTask.deadline;
+//                String taskStatus = deadlineTask.getStatusIcon();
+//                String taskContent = deadlineTask.task;
+//                combinedTask = taskType + "|" + taskStatus + "|" + taskContent + "|" + taskDeadline;
+//            } else if (taskType.equals("[E]")) {
+//                EventsTask eventsTask = (EventsTask) listOfTasks.get(i);
+//                String taskPeriod = eventsTask.period;
+//                String taskStatus = eventsTask.getStatusIcon();
+//                String taskContent = eventsTask.task;
+//                combinedTask = taskType + "|" + taskStatus + "|" + taskContent + "|" + taskPeriod;
+//            }
+//            storage.updateTaskInFile(combinedTask);
+//        }
+//    }
 
     public static void main(String[] args) throws WillyException {
         String logo = "__       ____       __\n"
@@ -64,6 +99,9 @@ public class Willy {
         Greet startDuke = new Greet();
         // prints out intro
         System.out.println(startDuke);
+        storage = new TaskStore();
+        storage.createFile();
+
 
         while (input.hasNext()) {
             String message = input.nextLine();

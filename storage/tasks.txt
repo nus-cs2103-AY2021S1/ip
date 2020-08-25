@@ -1,0 +1,3 @@
+[T]|✘|read book
+[T]|✘|go sch
+[D]|✘|go home|2pm
