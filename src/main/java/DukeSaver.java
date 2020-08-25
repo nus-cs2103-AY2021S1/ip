@@ -43,7 +43,7 @@ public class DukeSaver {
 
         while (s.hasNext()) {
             String fileFormatString = s.nextLine();
-            String[] fileTokens = fileFormatString.split("|");
+            String[] fileTokens = fileFormatString.split("\\|");
             switch (fileTokens[0]) {
                 case "E":
                     taskList.add(Event.fromFileFormat(fileFormatString));
