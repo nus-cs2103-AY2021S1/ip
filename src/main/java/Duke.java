@@ -1,5 +1,11 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+//TODO: Stretch Goals: Level 8- Use date related command
 
 public class Duke {
 
@@ -94,7 +100,9 @@ public class Duke {
             throw new DukeException("I can't find the \"/by\" keyword...");
         if (split[0].isBlank() || split[1].isBlank())
             throw new DukeException("The description or deadline of \"deadline\" cannot be empty");
-        Deadline deadline = new Deadline(split[0].strip(), split[1].strip());
+
+
+        Deadline deadline = new Deadline(split[0].strip(), parseDateTime(split[1].strip()));
         taskList.add(deadline);
         printAddTask(deadline);
     }
@@ -105,7 +113,8 @@ public class Duke {
             throw new DukeException("I can't find the \"/at\" keyword...");
         if (split[0].isBlank() || split[1].isBlank())
             throw new DukeException("The description or date of \"event\" cannot be empty");
-        Event event = new Event(split[0].strip(), split[1].strip());
+
+        Event event = new Event(split[0].strip(), parseDateTime(split[1].strip()));
         taskList.add(event);
         printAddTask(event);
     }
@@ -157,6 +166,26 @@ public class Duke {
             case delete:
                 delete(msg.substring(6));
                 break;
+        }
+    }
+
+    /* To be refactored into utility class */
+
+    private static LocalDateTime parseDateTime(String dateTime) {
+        //Allow format of "YYYY-MM-dd HHmm", "dd/MM/yyyy HHmm"; Set HHmm to 0000 if not found.
+
+        try {
+            if (dateTime.indexOf(" ") == -1)
+                dateTime = dateTime + " 0000"; //pad with time if the input only contains date.
+
+            if (dateTime.charAt(4) == '-') {
+                return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            } else if (dateTime.charAt(2) == '/') {
+                return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+            } else
+                throw new DukeException("Invalid Date / time format...");
+        } catch (DateTimeParseException dtpe) {
+            throw new DukeException ("Invalid Date / time format...");
         }
     }
 }
