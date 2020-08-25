@@ -24,6 +24,12 @@ public class Task {
         return boxFormat(taskMarker) + boxFormat(status) + " " + description;
     }
 
+    public String generateSaveFormat() {
+        int isDoneInt = isDone ? 1 : 0;
+        return taskMarker + Duke.line + isDoneInt
+                + Duke.line + description;
+    }
+
     protected String boxFormat(String symbol) {
         return String.format("[%s]", symbol);
     }

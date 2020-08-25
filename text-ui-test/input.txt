@@ -1,6 +1,11 @@
 nothing
+list
 todo event
 deadline event
 deadline homework /by 7pm
 event meeting /at will confirm later
+list
+done 4
+done 3
+list
 bye

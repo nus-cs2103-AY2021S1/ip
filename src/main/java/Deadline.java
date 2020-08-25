@@ -7,6 +7,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String generateSaveFormat() {
+        return super.generateSaveFormat() + Duke.line + deadline;
+    }
+
+    @Override
     public String toString() {
         return super.toString() + String.format(" (by: %s)", deadline);
     }
