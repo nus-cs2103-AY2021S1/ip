@@ -1,6 +1,11 @@
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * Parses commands as well as provide differnet type of subclasses
+ * to handle different types of commands
+ */
+
 abstract class Command {
     protected boolean exit;
     private static ExitCommand exitCommand = new ExitCommand();
@@ -8,6 +13,14 @@ abstract class Command {
     private String type;
     private String task;
     private LocalDate date;
+
+    /**
+     * Takes a String command and parses it to return appropriate
+     * Command object
+     * @param command String command
+     * @return appropriate Command object
+     * @throws InvalidInput if String command not available
+     */
 
 
     static Command parse(String command) throws InvalidInput {
@@ -37,13 +50,28 @@ abstract class Command {
         }
     }
 
+    /**
+     * Executes the current command
+     * @param tasks Task list
+     * @param ui User interface
+     * @param storage Storage handling
+     * @throws IOException may be thrown while saving to storage
+     */
+
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
 
+    /**
+     * Returns if the command is supposed to cause an exit from UI
+     * @return True/False to exit
+     */
     public boolean isExit() {
         return exit;
     }
 }
 
+/**
+ * An exit command
+ */
 class ExitCommand extends Command {
     ExitCommand() {
         super();
@@ -56,6 +84,9 @@ class ExitCommand extends Command {
     }
 }
 
+/**
+ * A list command to list all tasks
+ */
 class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
@@ -63,6 +94,9 @@ class ListCommand extends Command {
     }
 }
 
+/**
+ * A done command to mark a given task number as done
+ */
 class doneCommand extends Command {
     int doneTask;
     doneCommand(int task) {
@@ -78,6 +112,9 @@ class doneCommand extends Command {
     }
 }
 
+/**
+ * A delete command to delete a given task number
+ */
 class deleteCommand extends Command {
     int deleteTask;
     deleteCommand(int task) {
@@ -94,6 +131,9 @@ class deleteCommand extends Command {
     }
 }
 
+/**
+ * A Todo command to add a todo Task to the TaskList
+ */
 class todoCommand extends Command {
     String task;
     todoCommand(String toParse) {
@@ -109,6 +149,9 @@ class todoCommand extends Command {
     }
 }
 
+/**
+ * A Deadline command to add a Deadline Task to the TaskList
+ */
 class deadlineCommand extends Command {
     String task;
     String deadline;
@@ -127,6 +170,9 @@ class deadlineCommand extends Command {
     }
 }
 
+/**
+ * An Event command to add an Event Task to the TaskList
+ */
 class eventCommand extends Command {
     String task;
     String at;
