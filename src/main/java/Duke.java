@@ -17,11 +17,14 @@ public class Duke {
         try {
             ui.intro();
             Scanner input = new Scanner(System.in);
+
+            // Uses user input text and acts accordingly.
             loop:
             while (input.hasNextLine()) {
                 String line = input.nextLine();
                 Command command = ui.parseCommand(line);
                 ui.lineBreak();
+
                 switch (command.name) {
                 case "bye":
                     System.out.println("That's it? That's a shame. Well, see you later then.");
@@ -45,6 +48,7 @@ public class Duke {
                 }
                 ui.lineBreak();
             }
+
             input.close();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
