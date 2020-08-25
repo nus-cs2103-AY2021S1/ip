@@ -2,8 +2,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+//TODO: Stretch Goals: Level 8- Use date related command
 
 public class Duke {
 
@@ -67,10 +72,10 @@ public class Duke {
                         t = new ToDo(split[2]);
                         break;
                     case "D":
-                        t = new Deadline(split[2], split[3]);
+                        t = new Deadline(split[2], parseDateTime(split[3]));
                         break;
                     case "E":
-                        t = new Event(split[2], split[3]);
+                        t = new Event(split[2], parseDateTime(split[3]));
                         break;
                     default:
                         throw new DukeException("Error in reading this line...");
@@ -175,7 +180,9 @@ public class Duke {
             throw new DukeException("I can't find the \"/by\" keyword...");
         if (split[0].isBlank() || split[1].isBlank())
             throw new DukeException("The description or deadline of \"deadline\" cannot be empty");
-        Deadline deadline = new Deadline(split[0].strip(), split[1].strip());
+
+
+        Deadline deadline = new Deadline(split[0].strip(), parseDateTime(split[1].strip()));
         taskList.add(deadline);
         printAddTask(deadline);
     }
@@ -186,7 +193,8 @@ public class Duke {
             throw new DukeException("I can't find the \"/at\" keyword...");
         if (split[0].isBlank() || split[1].isBlank())
             throw new DukeException("The description or date of \"event\" cannot be empty");
-        Event event = new Event(split[0].strip(), split[1].strip());
+
+        Event event = new Event(split[0].strip(), parseDateTime(split[1].strip()));
         taskList.add(event);
         printAddTask(event);
     }
@@ -238,6 +246,26 @@ public class Duke {
             case delete:
                 delete(msg.substring(6));
                 break;
+        }
+    }
+
+    /* To be refactored into utility class */
+
+    private static LocalDateTime parseDateTime(String dateTime) {
+        //Allow format of "YYYY-MM-dd HHmm", "dd/MM/yyyy HHmm"; Set HHmm to 0000 if not found.
+
+        try {
+            if (!dateTime.contains(" "))
+                dateTime = dateTime + " 0000"; //pad with time if the input only contains date.
+
+            if (dateTime.charAt(4) == '-') {
+                return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            } else if (dateTime.charAt(2) == '/') {
+                return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+            } else
+                throw new DukeException("Invalid Date / time format...");
+        } catch (DateTimeParseException dtpe) {
+            throw new DukeException ("Invalid Date / time format...");
         }
     }
 }
