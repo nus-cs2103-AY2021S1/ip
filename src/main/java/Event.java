@@ -4,7 +4,19 @@ public class Event extends Task {
 
     public Event(String eventTask, String atTime) {
         super(eventTask);
-        this.atTime = atTime;
+        this.atTime = TimeParser.parseTime(atTime);
+    }
+
+    @Override
+    public String[] taskToArray() {
+        String done;
+        if(this.isCompleted()) {
+            done = "0";
+        } else {
+            done = "1";
+        }
+        String[] str = new String[]{"E", done, this.getTaskName(), atTime};
+        return str;
     }
 
     @Override
