@@ -2,6 +2,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+/**
+ * Handles all elements displayed to the user
+ */
 public class Ui {
     Scanner scan;
     static String format = "\t";
@@ -10,6 +13,9 @@ public class Ui {
         this.scan = new Scanner(System.in);
     }
 
+    /**
+     * Prints the welcome message
+     */
     void welcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -21,23 +27,42 @@ public class Ui {
         System.out.println(format + "What can I do for you?");
     }
 
+    /**
+     * Reads the user input line
+     * @return String of raw input
+     */
     String readCommand() {
         return this.scan.nextLine();
     }
 
-
+    /**
+     * Prints divider line
+     */
     public void showLine() {
         System.out.println("_______");
     }
+
+    /**
+     * Prints goodbye message
+     */
 
     public void goodbye() {
         System.out.println(format + "Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints error message
+     * @param message Error message from exception
+     */
+
     public void showError(String message) {
         System.out.println(format + "An error was thrown: " + message);
     }
 
+    /**
+     * Formats given String and prints in the UI
+     * @param printStr String to be formatted and printed
+     */
     public void printf(String printStr) {
         String print = format + printStr;
         String[] printSplit = print.split("\n");
