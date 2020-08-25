@@ -4,10 +4,7 @@ import duke.Storage;
 import duke.Task;
 import duke.Tasklist;
 import duke.UserInterface;
-import duke.exception.DukeIndexException;
 import duke.exception.DukeListException;
-
-import java.io.IOException;
 
 /**
  * FindCommand class to execute find command when given by user.
