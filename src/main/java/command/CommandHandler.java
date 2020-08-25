@@ -11,9 +11,11 @@ import tasks.Task;
 import tasks.Todo;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class CommandHandler implements Consumer<String> {
 
@@ -76,6 +78,9 @@ public class CommandHandler implements Consumer<String> {
                         } catch (IndexOutOfBoundsException e) {
                             throw new CommandException(input, "Task ID does not exist");
                         }
+                        break;
+                    case FIND_CMD:
+                        output = findTasks(stripped);
                         break;
                     default:
                         throw new IllegalStateException("Unexpected state");
@@ -143,6 +148,25 @@ public class CommandHandler implements Consumer<String> {
     private static String deleteTask(int id) {
         return String.format("Task deleted: %s\n%d task(s) left.",
                 TaskList.remove(id).toString(), TaskList.size());
+    }
+
+    /**
+     * Finds a subset of the task list based on a given substring, and lists that subset.
+     * @param queryString the substring to match against
+     * @return String containing output generated from iPbot
+     */
+    private static String findTasks(String queryString) {
+        final List<Task> results = TaskList.stream()
+                .filter(x -> x.toString().contains(queryString))
+                .collect(Collectors.toList());
+        if (results.isEmpty()) {
+            return "No matches found.";
+        }
+
+        return results.size() + " match(es) found.\n" + IntStream.rangeClosed(1, results.size())
+                .boxed()
+                .map(i -> String.format("%d. %s", i, results.get(i-1)))
+                .collect(Collectors.joining("\n"));
     }
 
 }

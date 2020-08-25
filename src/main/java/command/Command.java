@@ -7,7 +7,8 @@ public enum Command {
     TODO_CMD    ("todo", false),
     EVENT_CMD   ("event", false),
     DEADLINE_CMD("deadline", false),
-    DELETE_CMD  ("delete", false);
+    DELETE_CMD  ("delete", false),
+    FIND_CMD    ("find", false);
 
     private final String cmdString;
     private final boolean noArgs;
