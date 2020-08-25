@@ -8,6 +8,9 @@ import duke.task.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * Command to search for keywords
+ */
 public class FindCommand extends Command {
 
     private static String keyword;

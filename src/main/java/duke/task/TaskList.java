@@ -62,6 +62,11 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Filters for tasks that contain the keyword.
+     *
+     * @return tasks that contains the keyword in an array list.
+     */
     public ArrayList<Task> findTask(String keyword) throws CustomException {
         ArrayList<Task> result = new ArrayList<>();
         if (!keyword.isEmpty()) {

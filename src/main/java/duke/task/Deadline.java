@@ -35,6 +35,11 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by.trim());
     }
 
+    /**
+     * Checks if task contains the keyword
+     *
+     * @return whether the task contains that keyword
+     */
     public boolean haveKeyword(String keyword) {
         return description.contains(keyword) || by.format(DateTimeFormatter.ofPattern("d MMM yyyy")).contains(keyword);
     }

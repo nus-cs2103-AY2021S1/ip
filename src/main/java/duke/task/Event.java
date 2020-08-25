@@ -35,6 +35,11 @@ public class Event extends Task {
         this.at = LocalDate.parse(at.trim());
     }
 
+    /**
+     * Checks if task contains the keyword
+     *
+     * @return whether the task contains that keyword
+     */
     public boolean haveKeyword(String keyword) {
         return description.contains(keyword) || at.format(DateTimeFormatter.ofPattern("d MMM yyyy")).contains(keyword);
     }

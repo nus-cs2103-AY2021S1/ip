@@ -24,6 +24,11 @@ public class ToDo extends Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Checks if task contains the keyword
+     *
+     * @return whether the task contains that keyword
+     */
     public boolean haveKeyword(String keyword) {
         return description.contains(keyword);
     }
