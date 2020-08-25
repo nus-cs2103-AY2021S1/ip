@@ -1,12 +1,42 @@
 package task;
 
+import exception.IncorrectFormatException;
+import ui.UIPrint;
+
 public class Event extends Task {
 
     private String time;
 
-    public Event(String icon, String description, String time) {
-        super(icon, description);
+    private Event(String icon, String description, String time, String taskInfo) {
+        super(icon, description, taskInfo);
         this.time = time;
+    }
+
+    @Override
+    public String getTaskType() {
+        return "event";
+    }
+
+    public static Event createEvent(String eventInfo) {
+        String[] splitStr = eventInfo.split(" /at ", 2);
+
+        checkException(splitStr);
+
+        String description = splitStr[0];
+        String time = splitStr[1];
+
+        Event newEvent = new Event(UIPrint.eventIcon, description, time, eventInfo);
+
+        return newEvent;
+    }
+
+    private static void checkException(String[] splitStr) throws IncorrectFormatException {
+        if (splitStr.length != 2) {
+            String line = UIPrint.getLine(UIPrint.star, 50);
+            String errMessage =
+                    line + "\nPlease follow the format of event <task description> /at <event time>\n" + line;
+            throw new IncorrectFormatException(errMessage);
+        }
     }
 
     @Override
