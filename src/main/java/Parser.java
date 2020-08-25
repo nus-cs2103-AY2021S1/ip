@@ -88,11 +88,12 @@ public class Parser {
     }
 
     public static void check(String[] arr) throws DukeException {
-        if (arr.length == 1 && (arr[0].equals("todo") || arr[0].equals("deadline") || arr[0].equals("event") ||
-                arr[0].equals("done") || arr[0].equals("delete"))) {
+        if (arr.length == 1 && (arr[0].equals("todo") || arr[0].equals("deadline") 
+                || arr[0].equals("event") || arr[0].equals("done") || arr[0].equals("delete"))) {
             throw new DukeException(arr[0]);
-        } else if (!arr[0].equals("todo") && !arr[0].equals("deadline") && !arr[0].equals("event") &&
-                !arr[0].equals("list") && !arr[0].equals("bye") && !arr[0].equals("done") && !arr[0].equals("delete")) {
+        } else if (!arr[0].equals("todo") && !arr[0].equals("deadline") 
+                && !arr[0].equals("event") && !arr[0].equals("list") 
+                && !arr[0].equals("bye") && !arr[0].equals("done") && !arr[0].equals("delete")) {
             throw new DukeException("other");
         }
     }

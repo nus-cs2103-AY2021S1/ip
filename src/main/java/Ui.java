@@ -28,19 +28,20 @@ public class Ui {
     }
     
     public void printAddTask(Task task, TaskList lst) {
-        printLine(drawBorder("Got it. I've added this task:\n" + "  " + task.toString() + "\n" +
-                "Now you have " + lst.getSize() + " tasks in the list."));
+        printLine(drawBorder("Got it. I've added this task:\n" + "  " 
+                + task.toString() + "\n" + "Now you have " 
+                + lst.getSize() + " tasks in the list."));
     }
     
     public void printDoneTask(Task task) {
-        printLine(drawBorder("Nice! I've marked this task as done: \n" + "  " +
-                task.toString()));
+        printLine(drawBorder("Nice! I've marked this task as done: \n" 
+                + "  " + task.toString()));
     }
     
     public void printDeleteTask(Task task, TaskList lst) {
-        printLine(drawBorder("Noted. I've removed this task:\n" + "  " +
-                task.toString() + "\n" +
-                "Now you have " + lst.getSize() + " tasks in the list."));
+        printLine(drawBorder("Noted. I've removed this task:\n" + "  " 
+                + task.toString() + "\n" + "Now you have " 
+                + lst.getSize() + " tasks in the list."));
     }
     
     public void printTaskList(TaskList lst) {

@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Duke {
-    public static final String PATH = "data/duke.txt";
+    private static final String PATH = "data/duke.txt";
 
     private Storage storage;
     private TaskList tasks;
