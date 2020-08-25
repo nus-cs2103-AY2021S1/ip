@@ -1,15 +1,26 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
 
 public class Chatbot {
     private ArrayList<Task> tasksList;
     private int totalTasks;
     private Scanner scanner;
+    String filePath = "data/duke.txt";
 
     public Chatbot(Scanner scanner) {
         this.tasksList = new ArrayList<>();
         this.totalTasks = 0;
         this.scanner = scanner;
+    }
+
+    private void writeToFile(String filePath, String textToAdd, boolean isAppending) throws IOException {
+        FileWriter fw = new FileWriter(filePath, isAppending);
+        fw.write(textToAdd);
+        fw.close();
     }
 
     private void add(Task task) {
@@ -28,7 +39,59 @@ public class Chatbot {
         }
     }
 
-    public void start() {
+    private void initialise() throws FileNotFoundException {
+        try {
+            File f = new File("data/duke.txt");
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String nextLine = s.nextLine();
+                Scanner s2 = new Scanner(nextLine);
+                String taskType = s2.next();
+                boolean isDone = false;
+                Task currTask;
+                if (taskType.equals("T")) {
+                    s2.useDelimiter(" ~ ");
+                    if (s2.nextInt() == 1) {
+                        isDone = true;
+                    }
+                    currTask = new Todo(s2.next());
+                    this.add(currTask);
+                    if (isDone) {
+                        currTask.markAsDone();
+                    }
+                } else if (taskType.equals("D")) {
+                    s2.useDelimiter(" ~ ");
+                    if (s2.nextInt() == 1) {
+                        isDone = true;
+                    }
+                    currTask = new Deadline(s2.next(), s2.next());
+                    this.add(currTask);
+                    if (isDone) {
+                        currTask.markAsDone();
+                    }
+                } else {
+                    s2.useDelimiter(" ~ ");
+                    if (s2.nextInt() == 1) {
+                        isDone = true;
+                    }
+                    currTask = new Event(s2.next(), s2.next());
+                    this.add(currTask);
+                    if (isDone) {
+                        currTask.markAsDone();
+                    }
+                }
+            }
+        } catch(FileNotFoundException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void start() throws FileNotFoundException {
+        try {
+            this.initialise();
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
         System.out.println("Hello! I'm Duke\n" +
                 "What can I do for you?");
         String line = this.scanner.nextLine();
@@ -88,6 +151,17 @@ public class Chatbot {
                 System.out.println(ex);
             }
             line = this.scanner.nextLine();
+        }
+        try {
+            for (int i = 0; i < totalTasks; i++) {
+                if (i == 0) {
+                    writeToFile(filePath, tasksList.get(i).getStoringFormat() + System.lineSeparator(), false);
+                } else {
+                    writeToFile(filePath, tasksList.get(i).getStoringFormat() + System.lineSeparator(), true);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e);
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
