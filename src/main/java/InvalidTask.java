@@ -1,4 +1,5 @@
-package PACKAGE_NAME;
-
-public class InvalidTask {
+class InvalidInput extends DukeException {
+    public InvalidInput() {
+        super("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
 }

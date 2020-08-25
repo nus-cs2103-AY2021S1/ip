@@ -1,0 +1,3 @@
+T%d%false%d%lol
+E%d%true%d%haha%d%2020-12-01
+D%d%true%d%cs2100%d%2020-07-13
