@@ -52,4 +52,16 @@ public class Deadline extends Task {
         String dateTime = dueDate.format(DateFormat.FORMAT5.toDateFormat());
         return "[D]" + super.toString() + " (by: " + dateTime + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof Deadline) {
+            return description.equals(((Deadline) obj).description)
+                    && dueDate.equals(((Deadline) obj).dueDate);
+        } else {
+            return false;
+        }
+    }
 }

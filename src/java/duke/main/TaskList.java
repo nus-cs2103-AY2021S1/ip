@@ -61,7 +61,7 @@ public class TaskList {
         }
     }
 
-    public String write() {
+    String write() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Task task : tasks) {
             stringBuilder.append(task.print()).append(System.lineSeparator());

@@ -27,7 +27,7 @@ public class Event extends Task {
         for (DateFormat format : DateFormat.values()) {
             try {
                 dateTime = LocalDate.parse(taskInfo[1], format.toDateFormat());
-            } catch (DateTimeParseException e) { }
+            } catch (DateTimeParseException ignored) { }
         }
         if (dateTime == null) throw new InvalidDateException();
 
@@ -51,5 +51,17 @@ public class Event extends Task {
     public String toString() {
         String dateTime = date.format(DateFormat.FORMAT5.toDateFormat());
         return "[E]" + super.toString() + " (at: " + dateTime + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof Event) {
+            return description.equals(((Event) obj).description)
+                    && date.equals(((Event) obj).date);
+        } else {
+            return false;
+        }
     }
 }
