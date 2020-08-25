@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -20,13 +21,21 @@ public class Duke {
         System.out.println("    _______________________________________________________________________\n");
 
         Scanner sc = new Scanner(System.in);
+        FileWriting fileWriter = new FileWriting();
 
         while (strIden.isRunning()) {
             String userInput = sc.nextLine();
+
             try {
                 strIden.checker(userInput);
             } catch(DukeException e) {
                 System.out.println(e.getMessage());
+            }
+
+            try {
+                fileWriter.writeToFile(FILE_PATH, strIden.getTasks());
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
             }
         }
     }

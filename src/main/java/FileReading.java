@@ -24,40 +24,34 @@ public class FileReading {
     }
 
     public static void lineReader(String task) {
-        String type = task.substring(0, 1);
+        String type = task.substring(1, 2);
         String description = "";
         String timeDescription = "";
         boolean isDone = false;
 
-        if (task.substring(4, 5).equals("1")) {
+        if (task.substring(4, 5).equals("\u2713")) {
             isDone = true;
         }
 
         if (type.equals("T")) {
             int end = task.length();
-            description = task.substring(8, end);
+            description = task.substring(7, end);
             Todo newTodo = new Todo(description, isDone);
             FileReading.savedTasks.add(newTodo);
 
         } else if (type.equals("E")) {
-            int end = task.length();
-            int start = task.lastIndexOf("|");
-            timeDescription = task.substring(start + 1, end);
-            String cutTask = task.substring(0, start);
-            start = cutTask.lastIndexOf("|");
-            end = cutTask.length();
-            description = cutTask.substring(start + 2, end);
+            int start = task.indexOf("(");
+            int end = task.lastIndexOf(")");
+            timeDescription = task.substring(start + 4, end);
+            description = task.substring(7, start);
             Event newEvent = new Event(description, timeDescription, isDone);
             FileReading.savedTasks.add(newEvent);
 
         } else if (type.equals("D")) {
-            int end = task.length();
-            int start = task.lastIndexOf("|");
-            timeDescription = task.substring(start + 1, end);
-            String cutTask = task.substring(0, start);
-            start = cutTask.lastIndexOf("|");
-            end = cutTask.length();
-            description = cutTask.substring(start + 2, end);
+            int start = task.indexOf("(");
+            int end = task.lastIndexOf(")");
+            timeDescription = task.substring(start + 4, end);
+            description = task.substring(7, start);
             Deadline newDeadline = new Deadline(description, timeDescription, isDone);
             FileReading.savedTasks.add(newDeadline);
         }

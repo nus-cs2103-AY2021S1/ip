@@ -143,4 +143,8 @@ public class StringIdentifier {
         this.isProgramRunning = false;
         System.out.println("     Bye. Hope to see you again soon!");
     }
+
+    public List<Task> getTasks() {
+        return lst;
+    }
 }
