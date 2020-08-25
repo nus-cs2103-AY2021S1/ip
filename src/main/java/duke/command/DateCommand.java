@@ -14,7 +14,7 @@ public class DateCommand extends Command {
     }
 
     /**
-     * Prints a data filtered version of the task list to console.
+     * Prints a date filtered version of the task list to console.
      *
      * @param storage Storage object pointing to the file path where the data is stored.
      * @param taskList Task list that needs to be filtered by date.
