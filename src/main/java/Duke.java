@@ -7,16 +7,19 @@ public class Duke {
         System.out.println("Hi I'm Duke, your personal task-tracker bot!");
         System.out.println("You can add todos, deadlines, or events to my " +
                                    "list.");
+        Storage storage = new Storage(FILE_PATH);
 
         try {
-            if (Reader.doesFileExist(FILE_PATH)) {
-                TaskList savedList = Reader.readListFromFile(FILE_PATH);
+            Parser parser;
+            if (storage.doesExist()) {
+                TaskList savedList = storage.load();
+                parser = new Parser(storage, savedList);
                 System.out.println("Your existing task list has been retrieved from disk.");
-                Scanner.scan(savedList);
             } else {
                 System.out.println("You don't have an existing saved task list.");
-                Scanner.scan();
+                parser = new Parser(storage);
             }
+            parser.scan();
         } catch (IOException e) {
             System.out.println("An exception occurred:");
             System.out.println(e.getMessage());

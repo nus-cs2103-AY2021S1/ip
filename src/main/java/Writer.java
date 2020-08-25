@@ -3,13 +3,7 @@ import java.io.ObjectOutputStream;
 import java.io.IOException;
 
 public class Writer {
-    private final String path;
-
-    Writer(String path) {
-        this.path = path;
-    }
-
-    void writeListToFile(TaskList taskList) {
+    static void writeListToFile(TaskList taskList, String path) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(path);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);

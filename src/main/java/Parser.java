@@ -4,17 +4,24 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Scanner {
+public class Parser {
     // array of valid commands
     private final static List<String> COMMANDS = Arrays.asList("done",
                                                                "delete");
+    private final TaskList userTaskList;
+    private final Storage storage;
 
-    static void scan() throws IOException {
-        TaskList userTaskList = new TaskList();
-        scan(userTaskList);
+    Parser(Storage storage) {
+        this.userTaskList = new TaskList();
+        this.storage = storage;
     }
 
-    static void scan(TaskList userTaskList) throws IOException {
+    Parser(Storage storage, TaskList userTaskList) {
+       this.userTaskList = userTaskList;
+       this.storage = storage;
+    }
+
+    void scan() throws IOException {
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader((System.in)));
 
@@ -56,8 +63,7 @@ public class Scanner {
                     userTaskList.printList();
                     break;
                 case "save":
-                    Writer writer = new Writer(Duke.FILE_PATH);
-                    writer.writeListToFile(userTaskList);
+                    storage.save(userTaskList);
                     break;
                 default:
                     try {
