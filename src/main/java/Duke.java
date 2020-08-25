@@ -20,7 +20,7 @@ public class Duke {
         sc.close();
         Storage.save(myTasks);
     }
-    
+
     private static void greet() {
         ArrayList<String> greeting = new ArrayList<>();
         greeting.add("Hello I'm Duke");
@@ -126,7 +126,5 @@ public class Duke {
     }
     
 }
-
-
 
 
