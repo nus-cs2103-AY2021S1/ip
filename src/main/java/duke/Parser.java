@@ -11,7 +11,7 @@ public class Parser {
      * @param input The input from the users.
      * @return a String array that contains different components of the input.
      */
-    public static String[] interpretInput(String input) {
+    public String[] interpretInput(String input) {
         ArrayList<String> list = new ArrayList<>();
         int spaceIndex = input.indexOf(" ");
         int slashIndex = input.indexOf("/");
@@ -26,6 +26,7 @@ public class Parser {
             list.add(input.substring(spaceIndex+1,slashIndex));
             list.add(input.substring(infoIndex+1));
         }
+        System.out.println(list.toString());
         return list.toArray(new String[0]);
     }
 }
