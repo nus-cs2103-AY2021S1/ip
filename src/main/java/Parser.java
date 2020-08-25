@@ -16,22 +16,24 @@ public class Parser {
         String category = getCategory(input);
         String description = getDescription(input);
         switch (category) {
-        case "todo":
-            return parseTodoCommand(description);
-        case "deadline":
-            return parseDeadlineCommand(description);
-        case "event":
-            return parseEventCommand(description);
-        case "done":
-            return parseDoneCommand(description);
-        case "delete":
-            return parseDeleteCommand(description);
-        case "list":
-            return parseListCommand(description);
-        case "bye":
-            return parseByeCommand(description);
-        default:
-            throw new IllegalArgumentException("Invalid input.");
+            case "todo":
+                return parseTodoCommand(description);
+            case "deadline":
+                return parseDeadlineCommand(description);
+            case "event":
+                return parseEventCommand(description);
+            case "done":
+                return parseDoneCommand(description);
+            case "delete":
+                return parseDeleteCommand(description);
+            case "list":
+                return parseListCommand(description);
+            case "bye":
+                return parseByeCommand(description);
+            case "find":
+                return parseFindCommand(description);
+            default:
+                throw new IllegalArgumentException("Invalid input.");
         }
     }
 
@@ -165,13 +167,27 @@ public class Parser {
      * parse user input into ListCommand
      *
      * @param description
-     * @return ListCommand
+     * @return ByeCommand
      */
     public static ByeCommand parseByeCommand(String description) {
         if (!description.equals("")) {
             throw new IllegalArgumentException(" Invalid input. ");
         } else {
             return new ByeCommand(null);
+        }
+    }
+
+    /**
+     * parse user input into FindCommand
+     *
+     * @param description
+     * @return FindCommand
+     */
+    public static FindCommand parseFindCommand(String description) {
+        if (description == null) {
+            throw new IllegalArgumentException("No keyword found. ");
+        } else {
+            return new FindCommand(description);
         }
     }
 }

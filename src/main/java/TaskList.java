@@ -11,6 +11,7 @@ public class TaskList implements Serializable {
 
     /**
      * prints the tasks in the taskList
+     *
      * @return string format of the task list
      */
     public String toString() {
@@ -59,5 +60,21 @@ public class TaskList implements Serializable {
     public void addTask(Task task) {
         taskList.add(task);
     }
+
+    /**
+     * shows the task list of tasks with keywords
+     *
+     * @param keyword
+     * @return task list of tasks with keywords
+     */
+    public TaskList getTasksWithKeyWords(String keyword) {
+        TaskList newTaskList = new TaskList();
+        for (Task task : taskList)
+            if (task.getDescription().contains(keyword)) {
+                newTaskList.addTask(task);
+            }
+        return newTaskList;
+    }
 }
+
 
