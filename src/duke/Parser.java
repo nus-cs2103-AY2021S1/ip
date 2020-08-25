@@ -26,9 +26,9 @@ public class Parser {
 
                 } else if (firstWord.equals("bye")) {
                     return new ExitCommand();
+                    
                 } else {
-                    throw new DukeException("The description of the task cannot be empty.");
-
+                    throw new WrongInputException();
                 }
 
             } else {
@@ -52,9 +52,11 @@ public class Parser {
                 } else if (firstWord.equals("show")) {
                     return new ShowCommand(taskDetails);
 
+                } else if (firstWord.equals("find")) {
+                    return new FindCommand(taskDetails);
+
                 } else {
                     throw new WrongInputException();
-                    //System.out.println(wrong.getMessage());
                 }
             }
 
