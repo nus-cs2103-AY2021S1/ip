@@ -1,5 +1,6 @@
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.ArrayList;
 import java.time.LocalDate;
 
 /**
@@ -75,6 +76,15 @@ public class Parser {
 
             Todo newTodo = new Todo(str.substring(5, length));
             store(newTodo);
+
+        }  else if (str.substring(0, 5).equals("find ")) {
+            int length = str.length();
+            if (length == 5) {
+                throw new DukeException("*Please fill in a keyword to find*");
+            }
+
+            String stringToFind = str.substring(5, length);
+            findTask(stringToFind);
 
         } else if (commandSpace <= 4) {
             throw new DukeException("*Invalid command.*\n" +
@@ -223,5 +233,29 @@ public class Parser {
      */
     public List<Task> getTasks() {
         return lst.getTasks();
+    }
+
+    public void findTask(String keyword) {
+        List<Task> allTasks = lst.getTasks();
+        int fullSize = lst.getLength();
+        List<Task> filteredTasks = new ArrayList<>();
+
+        for (int i = 0; i < fullSize; i++) {
+            Task task = allTasks.get(i);
+            String taskString = task.toString();
+            if (taskString.contains(keyword)) {
+                filteredTasks.add(task);
+            }
+        }
+
+        System.out.println("     Here are the matching task(s) in your list:");
+        int partialSize = filteredTasks.size();
+        int index = 1;
+        for (int i = 0; i < partialSize; i++) {
+            System.out.println("     " + index + "." + filteredTasks.get(i));
+            index ++;
+        }
+
+        index ++;
     }
 }
