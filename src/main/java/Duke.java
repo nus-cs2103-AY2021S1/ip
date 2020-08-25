@@ -16,15 +16,18 @@ public class Duke {
 
         try {
             FileReading.printFileContents(filePath);
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) { // if the required file/path directory is not yet created
+            System.out.println("Creating the storage file...");
+
+            // creating new directory(s)
             File parent = new File("dirPath");
             if (!parent.mkdirs()) {
                 System.err.println("Could not create parent directories ");
-            } try {
+            } try { //creating the new file
                 File newFile = new File(parent, fileName);
                 boolean b = newFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
             try {
                 FileReading.printFileContents(filePath);
@@ -65,15 +68,7 @@ public class Duke {
                     System.out.println(line + "Here are the tasks in your list: \n");
                     for (int i = 1; i < count + 1; i++) {
                         Task cur = list.get(i - 1);
-                        String type = "";
-                        if (cur instanceof ToDo) {
-                            type = "[T]";
-                        } else if (cur instanceof Deadline) {
-                            type = "[D]";
-                        } else {
-                            type = "[E]";
-                        }
-                        System.out.println("" + i + "." + type + "[" + cur.getStatusIcon() + "] " + cur);
+                        System.out.println("" + i + "." + "[" + cur.getType() + "][" + cur.getStatusIcon() + "] " + cur);
                     }
                     System.out.println(line);
                 }
@@ -109,15 +104,8 @@ public class Duke {
                 } else {
                     Task removed = list.get(num-1);
                     count --;
-                    String type = "";
-                    if (removed instanceof ToDo) {
-                        type = "T";
-                    } else if (removed instanceof Deadline) {
-                        type = "D";
-                    } else {
-                        type = "E";
-                    }
-                    s = "[" + type + "]" + "[\u2718] " + removed;
+
+                    s = "[" + removed.getType() + "][\u2718] " + removed;
                     System.out.println(line);
                     System.out.println("Got it. I've removed this task: \n" + s);
                     System.out.println("Now you have " + count + " tasks in the list. ");
@@ -190,7 +178,17 @@ public class Duke {
             }
 
         }
-
+        String output = "";
+        for (int i = 1; i < count + 1; i++) {
+            Task cur = list.get(i - 1);
+            String currentTask = "" + i + "." + "[" + cur.getType() + "][" + cur.getStatusIcon() + "] " + cur + "\n";
+            output = output + currentTask;
+        }
+        try {
+            FileWriting.writeToFile(filePath, output);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
