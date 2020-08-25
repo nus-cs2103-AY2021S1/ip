@@ -32,11 +32,10 @@ public class Duke implements Bot {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-        ui.say("Hello, I'm Duke. What can I do for you?");
-
+        sayLine(logo);
         Scanner sc = new Scanner(System.in);
         TaskList list = new TaskListStorage("data/tasks.txt").load(this);
+        sayLine("Hello, I'm Duke. What can I do for you?");
         flushMessage();
         while (!isStopped) {
             String input = sc.nextLine();

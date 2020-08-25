@@ -39,7 +39,7 @@ public class TaskListStorage {
                 try {
                     StorageHelper.save(() -> serializeTaskList(taskList), filepath);
                 } catch (FileWritingException e) {
-                    // TODO show an error message. Need to make Duke implement Bot.
+                    bot.sayLine(String.format("Couldn't save task list to %s!", filepath));
                 }
         });
         return list;
