@@ -1,15 +1,20 @@
-public class Event extends Task {
-    private final String time;
+package task;
 
-    Event(String content, String time) {
-        super(content);
-        this.time = time;
+public class Event extends Task {
+    public Event(boolean completed, String content, String time) {
+        super(completed, content, time);
+    }
+
+    @Override
+    public String getTaskType() {
+        return "E";
     }
 
     @Override
     public String toString() {
         String mark = getCompleteMark();
         String content = getContent();
+        String time = getTime();
         return String.format("[E][%s] %s (at: %s)", mark, content, time);
     }
 }

@@ -1,6 +1,13 @@
+package task;
+
 public class Todo extends Task {
-    Todo(String content) {
-        super(content);
+    public Todo(boolean completed, String content) {
+        super(completed, content, null);
+    }
+
+    @Override
+    public String getTaskType() {
+        return "T";
     }
 
     @Override

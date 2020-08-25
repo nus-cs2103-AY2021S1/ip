@@ -1,17 +1,17 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.function.BiFunction;
 
+import task.*;
+
 public class Tickbot {
-    private static Scanner inputScanner = new Scanner(System.in);
-    private static List<Task> tasks = new ArrayList<>();
+    private static TaskList tasks = new TaskList();
 
     public static void main(String[] args) {
         printMessage("Hello, this is tickbot! How can I help you?");
+        Scanner inputScanner = new Scanner(System.in);
         boolean running = true;
         while (running) {
             System.out.print("==> ");
@@ -21,6 +21,7 @@ public class Tickbot {
             String command = inputScanner.nextLine();
             running = processCommand(command);
         }
+        inputScanner.close();
     }
 
     private static boolean processCommand(String command) {
@@ -58,6 +59,7 @@ public class Tickbot {
                     tasks.remove(index);
                     printMessage("Task removed: " + task);
                     printMessage("You have " + tasks.size() + " task(s) in task list.");
+                    tasks.update();
                 } catch (NumberFormatException err) {
                     printMessage("Invalid Syntax.");
                     printMessage("Usage: delete <task_index>");
@@ -67,6 +69,10 @@ public class Tickbot {
                 break;
             }
             case "list": {
+                if (tasks.size() == 0) {
+                    printMessage("Your task list is empty now.");
+                    break;
+                }
                 printMessage("Task list:");
                 for (int i = 0; i < tasks.size(); i++) {
                     String message = String.format("%d. %s", i + 1, tasks.get(i));
@@ -75,15 +81,18 @@ public class Tickbot {
                 break;
             }
             case "todo": {
-                processAddTask(args, "TO-DO", (content, _time) -> new Todo(content), null);
+                processAddTask(args, "TO-DO",
+                    (content, _time) -> new Todo(false, content), null);
                 break;
             }
             case "deadline": {
-                processAddTask(args, "Deadline", Deadline::new, "/by");
+                processAddTask(args, "Deadline",
+                    (content, time) -> new Deadline(false, content, time), "/by");
                 break;
             }
             case "event": {
-                processAddTask(args, "Event", Event::new, "/at");
+                processAddTask(args, "Event",
+                    (content, time) -> new Event(false, content, time), "/at");
                 break;
             }
             default: {
@@ -93,12 +102,12 @@ public class Tickbot {
         return true; // continue inputing
     }
 
-    private static void printUsage(String[] args, String timeMarker) {
+    private static void printAddTaskUsage(String commandName, String timeMarker) {
         if (timeMarker != null) {
             printMessage(String.format("Usage: %s <content> %s <time>",
-                args[0], timeMarker));
+                commandName, timeMarker));
         } else {
-            printMessage(String.format("Usage: %s <content>", args[0]));
+            printMessage(String.format("Usage: %s <content>", commandName));
         }
     }
 
@@ -110,7 +119,7 @@ public class Tickbot {
     ) {
         if (args.length < 2) {
             printMessage("Please input the content of the " + args[0] + ".");
-            printUsage(args, timeMarker);
+            printAddTaskUsage(args[0], timeMarker);
             return;
         }
         String content = args[1];
@@ -130,12 +139,13 @@ public class Tickbot {
             tasks.add(task);
             printMessage(taskName + " added: " + task);
             printMessage("You have " + tasks.size() + " task(s) in task list.");
+            tasks.update();
         } catch (IndexOutOfBoundsException err) {
             printMessage("Please input valid time after " + timeMarker + ".");
-            printUsage(args, timeMarker);
+            printAddTaskUsage(args[0], timeMarker);
         } catch (NoSuchElementException err) {
             printMessage("Missing time for the " + args[0] + ".");
-            printUsage(args, timeMarker);
+            printAddTaskUsage(args[0], timeMarker);
         }
     }
 
