@@ -30,6 +30,19 @@ public class Storage {
         Text.normalPrint(temp);
     }
 
+    public void search(String string) {
+        String temp = "Here are the matching tasks in your list:";
+        int counter = 1;
+        for (Task item: storage) {
+            if (item.getDescription().contains(string)) {
+                temp += "\n";
+                temp += counter + ". " + item.toString();
+                counter++;
+            }
+        }
+        Text.normalPrint(temp);
+    }
+
     public String allSaveString() {
         if (storage.size() == 0) {
             return "";

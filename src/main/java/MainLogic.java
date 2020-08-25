@@ -58,6 +58,9 @@ public class MainLogic {
             case "event":
                 eventLogic();
                 return true;
+            case "find" :
+                findLogic();
+                return true;
             default:
                 Text.printCommandNotFoundError();
                 return false;
@@ -89,7 +92,7 @@ public class MainLogic {
                 Text.printTimeNotFoundError();
             } else {
                 try {
-                    storage.addTask(new DeadLineTask(details[0], DateTime.parse(details[1])));
+                    storage.addTask(new DeadLineTask(details[0], MyDateTime.parse(details[1])));
                 } catch (DateTimeParseException e) {
                     Text.printDateTimeFormatError();
                 }
@@ -106,7 +109,7 @@ public class MainLogic {
                 Text.printTimeNotFoundError();
             } else {
                 try {
-                    storage.addTask(new EventTask(details[0], DateTime.parse(details[1])));
+                    storage.addTask(new EventTask(details[0], MyDateTime.parse(details[1])));
                 } catch (DateTimeParseException e) {
                     Text.printDateTimeFormatError();
                 }
@@ -134,5 +137,13 @@ public class MainLogic {
             e.printStackTrace();
         }
         Text.printEndMessage();
+    }
+
+    private void findLogic() {
+        if (current.length == 1) {
+            Text.printNoSearchTermError();
+        } else {
+            storage.search(current[1]);
+        }
     }
 }

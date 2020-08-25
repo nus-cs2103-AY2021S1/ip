@@ -16,6 +16,7 @@ public class Text {
     private static String timeNotFound = "Error: time not specified";
     private static String dateTimeFormatError = "Error: date time in an incorrect format\n" +
             "Please follow this format: dd/MM/yyyy HHmm";
+    private static String noSearchTermError = "Error: search term not defined";
 
     // static info/display strings
     private static String commandList = "list, bye, done, todo, deadline, event, delete, !command";
@@ -55,4 +56,6 @@ public class Text {
     public static void printDateTimeFormatError() { normalPrint(dateTimeFormatError);}
 
     public static void printCommands() { normalPrint(commandList); }
+
+    public static void printNoSearchTermError() { normalPrint(noSearchTermError);}
 }

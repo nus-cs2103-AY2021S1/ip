@@ -1,10 +1,14 @@
 public class Task {
 
-    protected String name;
-    protected boolean done = false;
+    String name;
+    boolean done = false;
 
     Task(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return name;
     }
 
     public String toString() {
