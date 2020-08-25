@@ -35,7 +35,7 @@ public class Ui {
      * @param msg Input message.
      */
     public void printMsg(String msg) {
-        String separator = "   --------------------------------------------------------------\n";
+        String separator = "   ---------------------------------------------------------------------------\n";
         System.out.print(separator);
         System.out.printf("    %s\n", msg);
         System.out.println(separator);
