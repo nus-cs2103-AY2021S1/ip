@@ -51,7 +51,10 @@ public class Ui {
         System.out.println(ex.getMessage());
     }
 
-
+    /**
+     * Show all the tasks that are still in the list
+     * @param taskList
+     */
     public void showTask(TaskList taskList){
         if (taskList.getTasks().size() == 0) {
             System.out.println("This is no task in your task list yet. Add one now! (/^▽^)/");
@@ -66,6 +69,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Show the tasks on certain day
+     * @param taskList
+     */
     public void showTask(TaskList taskList, LocalDate date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         String dateString = date.format(formatter);

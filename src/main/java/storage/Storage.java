@@ -21,6 +21,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Return an arraylist in which individual task is constructed from the data txt file
+     * @return
+     * @throws PathNoFoundException
+     */
     public ArrayList<Task> readFile() throws PathNoFoundException {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
@@ -59,6 +64,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Save the modified TaskArray in the hard disc
+     * @param tasklist
+     */
     public void saveFile(TaskList tasklist){
         try {
             String cwd = System.getProperty("user.dir");
