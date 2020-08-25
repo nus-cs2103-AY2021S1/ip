@@ -28,29 +28,29 @@ public class Duke {
         UI.printGreeting();
         if (sc.hasNext()) {
             String input = sc.nextLine();
-            while (!input.equals(TaskElement.BYE.label)) {
+            while (!Parser.parseBye(input)) {
                 try{
-                    if (input.equals(TaskElement.LIST.label)) {
+                    if (Parser.parseList(input)) {
                         UI.printListOfTasks(this.stringStore.getTasks());
-                    } else if (input.split(" ")[0].equals(TaskElement.DONE.label)) {
+                    } else if (Parser.parseDone(input)) {
                         int doneTask = Integer.parseInt(input.split(" ")[1]) - 1;
                         if(doneTask + 1 > stringStore.numOfTasks() || doneTask < 0){
                             throw new DukeInvalidDoneNumException(input);
                         }
                         stringStore.markAsDone(doneTask);
-                    } else if (input.split(" ")[0].equals(TaskElement.TODO.label)) {
+                    } else if (Parser.parseToDo(input)) {
                         if (input.split(" ").length == 1) {
                             throw new DukeEmptyToDoException(input);
                         }
-                        String tasker = stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
+                        String tasker = Parser.stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
                         Todo todoTask = new Todo(tasker);
                         stringStore.addTask(todoTask);
                         UI.printTaskAdd(todoTask, stringStore.numOfTasks());
-                    } else if (input.split(" ")[0].equals(TaskElement.DEADLINE.label)) {
+                    } else if (Parser.parseDeadline(input)) {
                         if (input.split(" ").length == 1) {
                             throw new DukeEmptyDeadlineException(input);
                         }
-                        String deadliner = stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
+                        String deadliner = Parser.stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
                         String[] deadlinerparts = deadliner.split(" /by ");
                         if(deadlinerparts.length == 1){
                             throw new DukeEmptyDeadlineTImeException(input);
@@ -58,11 +58,11 @@ public class Duke {
                         Deadline deadlineTask = new Deadline(deadlinerparts[0], deadlinerparts[1]);
                         stringStore.addTask(deadlineTask);
                         UI.printTaskAdd(deadlineTask, stringStore.numOfTasks());
-                    } else if (input.split(" ")[0].equals(TaskElement.EVENT.label)) {
+                    } else if (Parser.parseEvent(input)) {
                         if (input.split(" ").length == 1) {
                             throw new DukeEmptyEventException(input);
                         }
-                        String eventer = stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
+                        String eventer = Parser.stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
                         String[] eventParts = eventer.split(" /at ");
                         if (eventParts.length == 1) {
                             throw new DukeEmptyEventTimeException(input);
@@ -70,7 +70,7 @@ public class Duke {
                         Event eventTask = new Event(eventParts[0], eventParts[1]);
                         stringStore.addTask(eventTask);
                         UI.printTaskAdd(eventTask, this.stringStore.numOfTasks());
-                    } else if(input.split(" ")[0].equals(TaskElement.DELETE.label)){
+                    } else if(Parser.parseDelete(input)){
                         int deleteTask = Integer.parseInt(input.split(" ")[1]) - 1;
                         if(deleteTask + 1 > stringStore.numOfTasks() || deleteTask < 0){
                             throw new DukeDeleteException(input);
@@ -106,18 +106,5 @@ public class Duke {
             UI.printByeMessage();
         }
         storage.save(storage.convertArrayToSaveFormat(this.stringStore));
-    }
-
-    public static String stringBuilder(String[] arr, int start, int end){
-        String store = "";
-        for (int i = start; i <= end; i++) {
-            if(i == end){
-                store += arr[i];
-            } else {
-                store += arr[i] + " ";
-            }
-
-        }
-        return store;
     }
 }
