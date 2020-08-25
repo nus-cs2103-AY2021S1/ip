@@ -44,7 +44,7 @@ public class TaskList {
         }
     }
 
-    public void addTask(String[] data, String keyWord, TaskList tasks, Storage storage, Ui ui) throws DukeException {
+    public void addTask(String[] data, String keyWord, TaskList tasks, Ui ui) {
         if (keyWord.equals("todo")) {
             ToDo toDo = new ToDo(data[0]);
             tasks.addTask(toDo);
@@ -60,7 +60,7 @@ public class TaskList {
         }
     }
 
-    public void doneTask(String[] splitInput, TaskList tasks, Storage storage, Ui ui) {
+    public void doneTask(String[] splitInput, TaskList tasks, Ui ui) {
         try {
             int taskNumber = Integer.parseInt(splitInput[1]);
             Task doneTask = tasks.getTask(taskNumber - 1);

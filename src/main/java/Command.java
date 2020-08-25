@@ -73,13 +73,13 @@ public class Command {
         if (splitInput.length > 2) {
             throw new DukeException("Please use the correct format: done <task number>");
         }
-        tasks.doneTask(splitInput, tasks, storage, ui);
+        tasks.doneTask(splitInput, tasks, ui);
         storage.updateTaskFile(tasks);
     }
 
     public void addTaskCommand(String[] splitInput, String keyWord, TaskList tasks, Storage storage) throws DukeException {
         String[] data = processUserInput(splitInput);
-        tasks.addTask(data, keyWord, tasks, storage, ui);
+        tasks.addTask(data, keyWord, tasks, ui);
         storage.updateTaskFile(tasks);
     }
 
