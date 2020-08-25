@@ -3,12 +3,20 @@ import main.java.*;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
+/**
+ * The Duke class is the main class in which the program is run.
+ *
+ */
 public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList taskList;
     private Parser parser;
 
+    /**
+     * Initializes a Duke object
+     * @param filePath path in which the storage file should be written to
+     */
     public Duke (String filePath) {
         storage = new Storage(filePath);
         try {
@@ -22,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program
+     */
     public void run(){
         ui.welcomeMessage(taskList);
         ui.start();
@@ -38,6 +49,10 @@ public class Duke {
         }
     };
 
+    /**
+     * The main function
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("./src/main/java/data/duke.txt").run();
     }

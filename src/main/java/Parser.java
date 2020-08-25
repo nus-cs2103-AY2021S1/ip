@@ -1,9 +1,20 @@
 package main.java;
 
+/**
+ * Parser class to interpret the input given by the user
+ */
 public class Parser {
 
+    /**
+     * Initializes the parser object
+     */
     public Parser () {}
 
+    /**
+     * Interprets the input given by the user
+     * @param line input given by user
+     * @return Command object determined by the interpretation
+     */
     public Command interpret (String line) {
         if (line.indexOf("todo") == 0) {
             return new Command(line, "todo");
