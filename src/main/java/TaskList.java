@@ -66,7 +66,7 @@ public class TaskList {
     public String toString() {
         String string = "";
         for (int i = 0; i < getSize(); i++) {
-            if(i == getSize() - 1) {
+            if (i == getSize() - 1) {
                 string += ((i + 1) + ". " + getTask(i).toString());
             } else {
                 string += ((i + 1) + ". " + getTask(i).toString() + "\n");

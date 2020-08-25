@@ -24,22 +24,22 @@ public class Storage {
     public ArrayList<Task> loadFile() throws IOException {
         File file = new File(filePath);
         ArrayList<Task> taskList = new ArrayList<>();
-        if(file.exists()) {
+        if (file.exists()) {
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line = null;
-            while((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 String[] strArr = line.split(" , ");
-                switch(strArr[0]) {
-                    case "T":
-                        taskList.add(new Todo(strArr[1], strArr[2]));
-                        break;
-                    case "D":
-                        taskList.add(new Deadline(strArr[1], strArr[2], LocalDate.parse(strArr[3])));
-                        break;
-                    case "E":
-                        taskList.add(new Event(strArr[1], strArr[2], LocalDate.parse(strArr[3])));
-                        break;
+                switch (strArr[0]) {
+                case "T":
+                    taskList.add(new Todo(strArr[1], strArr[2]));
+                    break; 
+                case "D":
+                    taskList.add(new Deadline(strArr[1], strArr[2], LocalDate.parse(strArr[3])));
+                    break;
+                case "E":
+                    taskList.add(new Event(strArr[1], strArr[2], LocalDate.parse(strArr[3])));
+                    break;
                 }
             }
         } else {
@@ -56,7 +56,7 @@ public class Storage {
      */
     public void writeFile(ArrayList<Task> tasks) throws IOException {
         FileWriter writer = new FileWriter(filePath);
-        for(Task task : tasks) {
+        for (Task task : tasks) {
             writer.write(task.saveString() + "\n");
         }
         writer.close();

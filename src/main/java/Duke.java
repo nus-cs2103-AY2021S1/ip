@@ -5,7 +5,7 @@ import java.util.Scanner;
  * Represents Duke bot and contains main information of how it works.
  */
 public class Duke {
-    public static final String PATH = "data/duke.txt";
+    private static final String PATH = "data/duke.txt";
 
     private Storage storage;
     private TaskList tasks;
