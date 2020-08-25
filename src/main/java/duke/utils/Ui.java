@@ -17,10 +17,10 @@ public class Ui {
         System.out.print("_\n");
     }
 
-    public void print(String ericaOutputMessage) {
+    public void print(String dukeOutputMessage) {
         printLeftPadding();
         printDivider();
-        String[] lines = ericaOutputMessage.split("\\r?\\n");
+        String[] lines = dukeOutputMessage.split("\\r?\\n");
         for (String line : lines) {
             printLeftPadding();
             System.out.println(line);
