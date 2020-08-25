@@ -18,6 +18,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public String getStatusIcon() {
         return isDone ? "\u2713" : "\u2718";
     }

@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.List;
 import java.util.Scanner;
 
 import duke.resource.TaskList;
@@ -69,6 +70,15 @@ public class Ui {
         System.out.println(
                 e.getMessage() + "\n" +
                 LINE);
+    }
+
+    public void printFind(List<Task> list) {
+        int i = 0;
+        System.out.println("    Here are the matching tasks in your list: ");
+        while (list.size() > i) {
+            System.out.println("        " + ++i + ". " + list.get(i - 1).toString());
+        }
+        System.out.println(LINE);
     }
 
     public void printList(TaskList list) {
