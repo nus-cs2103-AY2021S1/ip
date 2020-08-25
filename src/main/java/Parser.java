@@ -38,6 +38,10 @@ public class Parser {
             taskId = Short.parseShort(commandElements[1]);
             intendedCommand = new DeleteCommand(taskId);
             break;
+        case "find":
+            intendedCommand = new FindCommand(String.join(" ",
+                    Arrays.copyOfRange(commandElements, 1, commandElements.length)));
+            break;
         default:
             TaskType currType = taskTypeMap.get(commandElements[0]);
             if (currType == null) {

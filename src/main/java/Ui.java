@@ -30,6 +30,9 @@ public class Ui {
     static final String MESSAGE_WRONG_FORMAT = "The date format should be in DD-MM-YY and the time in HH:MM";
     static final String MESSAGE_ALR_DONE = "Do you happen to have short term memory?";
     private static final String MESSAGE_DELETE = "Got it. I removed this task:";
+    private static final String MESSAGE_NO_MATCHES = "Since when did you save a task like that?";
+    private static final String MESSAGE_MATCHES = "These are the matching tasks in your list:";
+
     private final Scanner sc;
 
     public Ui() {
@@ -42,14 +45,14 @@ public class Ui {
     }
 
     // displays the task list in the correct format
-    public void displayList(ArrayList<Task> inputArr) {
-        if (inputArr.size() == 0) {
-            displayOutput(MESSAGE_EMPTY);
+    public void displayList(ArrayList<Task> tasks, boolean isFiltered) {
+        if (tasks.size() == 0) {
+            displayOutput(isFiltered ? MESSAGE_NO_MATCHES : MESSAGE_EMPTY);
         } else {
-            StringBuilder out = new StringBuilder(MESSAGE_TASKS).append("\n");
-            for (short i = 0; i < inputArr.size(); i++) {
+            StringBuilder out = new StringBuilder(isFiltered ? MESSAGE_MATCHES : MESSAGE_TASKS).append("\n");
+            for (short i = 0; i < tasks.size(); i++) {
                 out.append(LEFT_MARGIN_DOUBLE).append(i + 1)
-                        .append(".").append(inputArr.get(i)).append("\n");
+                        .append(".").append(tasks.get(i)).append("\n");
             }
             displayOutput(out.substring(0, out.length() - 1));
         }

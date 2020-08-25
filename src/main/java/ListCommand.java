@@ -3,6 +3,6 @@ public class ListCommand extends Command {
     }
 
     @Override public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.displayList(tasks.getList());
+        ui.displayList(tasks.getList(), false);
     }
 }
