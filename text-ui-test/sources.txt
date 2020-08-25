@@ -6,6 +6,7 @@ C:\Users\Pactech\Desktop\ip\src\main\java\duke\command\DateListCommand.java
 C:\Users\Pactech\Desktop\ip\src\main\java\duke\command\DeleteCommand.java
 C:\Users\Pactech\Desktop\ip\src\main\java\duke\command\DoneCommand.java
 C:\Users\Pactech\Desktop\ip\src\main\java\duke\command\ExitCommand.java
+C:\Users\Pactech\Desktop\ip\src\main\java\duke\command\FindCommand.java
 C:\Users\Pactech\Desktop\ip\src\main\java\duke\command\ListCommand.java
 C:\Users\Pactech\Desktop\ip\src\main\java\duke\exception\DukeException.java
 C:\Users\Pactech\Desktop\ip\src\main\java\duke\parser\Parser.java

@@ -43,10 +43,10 @@ public class Parser {
 					splitString[0].equals("delete") && stringIsInt(splitString[1])) {
 				int index = parseInt(splitString[1]);
 				return new DeleteCommand(index - 1);
-			} else if (splitString.length == 2 && splitString[0].equals("find")) {
+			} else if (splitString.length == 2 && splitString[0].equals("date")) {
 				LocalDate date = parseDateStringToLocalDate(splitString[1]);
 				return new DateListCommand(date);
-			} else if (splitString.length == 3 && splitString[0].equals("find")) {
+			} else if (splitString.length == 3 && splitString[0].equals("dateAndTime")) {
 				LocalDate date = parseDateStringToLocalDate(splitString[1]);
 				LocalTime time = parseTimeStringToLocalTime(splitString[2]);
 				return new DateAndTimeListCommand(date, time);
@@ -54,6 +54,8 @@ public class Parser {
 				|| splitString[0].equals(Duke.TaskType.DEADLINE.name)
 					|| splitString[0].equals(Duke.TaskType.EVENT.name)) {
 				return createAddCommand(splitString);
+			} else if (splitString[0].equals("find") && splitString.length == 2) {
+				return new FindCommand(splitString[1]);
 			} else {
 				throw new DukeException("Oops! I'm sorry, I don't know what that means.");
 			}

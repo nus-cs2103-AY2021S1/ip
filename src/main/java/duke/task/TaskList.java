@@ -40,4 +40,15 @@ public class TaskList {
 	public int numberOfTasks() {
 		return tasks.size();
 	}
+
+	public ArrayList<Task> find(String keyWord) {
+		ArrayList<Task> foundTasks = new ArrayList<>();
+		for (int i = 0; i < tasks.size(); i++) {
+			Task task = tasks.get(i);
+			if (task.toString().contains(keyWord)) {
+				foundTasks.add(task);
+			}
+		}
+		return foundTasks;
+	}
 }
