@@ -1,12 +1,12 @@
 package main.java.com.jacob.duke;
 
-import main.java.com.jacob.duke.task.Task;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Predicate;
+
+import main.java.com.jacob.duke.task.Task;
 
 public class Ui {
     /**

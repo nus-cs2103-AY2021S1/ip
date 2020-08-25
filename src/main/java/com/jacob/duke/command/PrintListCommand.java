@@ -1,12 +1,12 @@
 package main.java.com.jacob.duke.command;
 
+import java.util.List;
+
 import main.java.com.jacob.duke.DukeException;
 import main.java.com.jacob.duke.Storage;
-import main.java.com.jacob.duke.task.Task;
 import main.java.com.jacob.duke.TaskList;
 import main.java.com.jacob.duke.Ui;
-
-import java.util.List;
+import main.java.com.jacob.duke.task.Task;
 
 public class PrintListCommand implements Command {
     /**

@@ -1,9 +1,9 @@
 package main.java.com.jacob.duke;
 
-import main.java.com.jacob.duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import main.java.com.jacob.duke.task.Task;
 
 public class TaskList {
     private List<Task> taskList;

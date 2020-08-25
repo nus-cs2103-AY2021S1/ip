@@ -1,13 +1,16 @@
 package main.java.com.jacob.duke.command;
 
-import main.java.com.jacob.duke.*;
-import main.java.com.jacob.duke.task.Task;
-
 import java.util.List;
+
+import main.java.com.jacob.duke.DukeException;
+import main.java.com.jacob.duke.Storage;
+import main.java.com.jacob.duke.TaskList;
+import main.java.com.jacob.duke.Ui;
+import main.java.com.jacob.duke.task.Task;
 
 public class PrintFilteredListCommand implements Command {
     private String inputCommand;
-
+    private boolean isComplete;
     /**
      * Constructor for Print filtered List Command
      * @param fullCommand with from console input

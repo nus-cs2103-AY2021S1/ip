@@ -1,10 +1,13 @@
 package main.java.com.jacob.duke.command;
 
-import main.java.com.jacob.duke.*;
+import java.util.List;
+
+import main.java.com.jacob.duke.DukeException;
+import main.java.com.jacob.duke.Storage;
+import main.java.com.jacob.duke.TaskList;
+import main.java.com.jacob.duke.Ui;
 import main.java.com.jacob.duke.task.Event;
 import main.java.com.jacob.duke.task.Task;
-
-import java.util.List;
 
 public class EventCommand implements Command {
     private String inputCommand;
@@ -29,7 +32,7 @@ public class EventCommand implements Command {
         int breakpoint = inputCommand.indexOf("/") - 1;
         if (inputCommand.length() <= "event ".length()) {
             throw new DukeException("☹ OOPS!!! The description of a event cannot be incomplete.");
-        } else if (breakpoint == -1) {
+        } else if (breakpoint == -2) {
             throw new DukeException("Hey, a event cannot have no actual date and time!!");
         }
         String description = inputCommand.substring("event".length() + 1, breakpoint);

@@ -1,6 +1,5 @@
 package main.java.com.jacob.duke.task;
 
-
 public class Deadline extends Task {
     /**
      * Constructor for basic Description

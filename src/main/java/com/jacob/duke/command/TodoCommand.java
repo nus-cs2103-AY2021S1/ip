@@ -1,10 +1,14 @@
 package main.java.com.jacob.duke.command;
 
-import main.java.com.jacob.duke.*;
+import java.util.List;
+
+import main.java.com.jacob.duke.DukeException;
+import main.java.com.jacob.duke.Storage;
+import main.java.com.jacob.duke.TaskList;
+import main.java.com.jacob.duke.Ui;
 import main.java.com.jacob.duke.task.Task;
 import main.java.com.jacob.duke.task.Todo;
 
-import java.util.List;
 
 public class TodoCommand implements Command {
     private String inputCommand;

@@ -1,12 +1,13 @@
 package main.java.com.jacob.duke.command;
-
-import main.java.com.jacob.duke.*;
-import main.java.com.jacob.duke.task.Task;
-
 import java.util.List;
 
-public class ByeCommand implements Command {
+import main.java.com.jacob.duke.Storage;
+import main.java.com.jacob.duke.TaskList;
+import main.java.com.jacob.duke.Ui;
+import main.java.com.jacob.duke.task.Task;
 
+
+public class ByeCommand implements Command {
     /**
      * Execution command for pre-determined ByeCommand
      * @param ui UI object to deal with program output
