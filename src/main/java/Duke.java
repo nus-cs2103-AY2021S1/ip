@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -68,6 +70,8 @@ public class Duke {
         } catch (IOException e) {
             System.out.println("Something went wrong.");
             e.printStackTrace();
+        } catch (DateTimeParseException e) {
+            e.printStackTrace();
         }
     }
 
@@ -100,9 +104,9 @@ public class Duke {
             case ("T"):
                 return new Todo(desc);
             case ("D"):
-                return new Deadline(desc, taskCharacteristics[3]);
+                return new Deadline(desc, LocalDate.parse(taskCharacteristics[3]));
             case ("E"):
-                return new Event(desc, taskCharacteristics[3]);
+                return new Event(desc, LocalDate.parse(taskCharacteristics[3]));
             default:
                 return new Task(desc);
         }
@@ -164,13 +168,13 @@ public class Duke {
                 case "deadline":
                     String[] deadlineDetails = description.split("/by", 2);
                     String deadlineDesc = deadlineDetails[0].trim();
-                    String deadlineTime = deadlineDetails[1].trim();
+                    LocalDate deadlineTime = LocalDate.parse(deadlineDetails[1].trim());
                     newTask = new Deadline(deadlineDesc, deadlineTime);
                     break;
                 case "event":
                     String[] eventDetails = description.split("/at", 2);
                     String eventDesc = eventDetails[0].trim();
-                    String eventTime = eventDetails[1].trim();
+                    LocalDate eventTime = LocalDate.parse(eventDetails[1].trim());
                     newTask = new Event(eventDesc, eventTime);
                     break;
             }
