@@ -282,7 +282,7 @@ public class Bill {
                     ui.printHorizontalLine();
                     Parser.processInput(input);
                     ui.printHorizontalLine();
-                }
+                } 
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
