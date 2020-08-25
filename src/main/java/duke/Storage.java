@@ -17,15 +17,28 @@ import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
 
-
+/**
+ * The Storage class deals with loading tasks from the file and saving tasks in the file.
+ *
+ * @author  Yen Pin Hsuan
+ * @version 1.0
+ */
 public class Storage {
 
     private Path path;
 
+    /**
+     * Create and initialise a storage object.
+     * @param path The path where data are saved.
+     */
     public Storage(Path path) {
         this.path = path;
     }
 
+    /**
+     * Return the list of task saved in file.
+     * @return list of task saved in file.
+     */
     public List<Task> load() {
         boolean directoryExists = java.nio.file.Files.exists(path);
         List<Task> list = new ArrayList<>();
@@ -71,6 +84,10 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Add data to the file.
+     * @param data Data to be added.
+     */
     public void addData(String data) {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(
@@ -82,6 +99,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Update the data in file.
+     * @param data Data to be updated.
+     * @param taskNumber Task number of the data.
+     */
     public void updateData(String data, int taskNumber) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(String.valueOf(path)));

@@ -6,6 +6,12 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.ToDo;
 
+/**
+ * The TodoCommand class contains methods pertaining to the TodoCommand.
+ *
+ *  @author  Yen Pin Hsuan
+ *  @version 1.0
+ */
 public class TodoCommand extends Command {
     @Override
     public void execute(TaskList taskList, Storage storage, Ui ui) {

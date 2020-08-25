@@ -6,6 +6,12 @@ import duke.Ui;
 import duke.DukeException;
 import duke.task.Task;
 
+/**
+ * The DeleteCommand class contains methods pertaining to the DeleteCommand.
+ *
+ *  @author  Yen Pin Hsuan
+ *  @version 1.0
+ */
 public class DeleteCommand extends Command {
 
     @Override

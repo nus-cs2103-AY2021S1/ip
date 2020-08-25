@@ -6,6 +6,12 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.Deadline;
 
+/**
+ * The DeadlineCommand class contains methods pertaining to the DeadlineCommand.
+ *
+ *  @author  Yen Pin Hsuan
+ *  @version 1.0
+ */
 public class DeadlineCommand extends Command {
 
     @Override
