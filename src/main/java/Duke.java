@@ -1,19 +1,31 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
     private static final String CHATBOT = "Bob: ";
     private static final String SKIPLINE = "\n";
     private static final String USER = SKIPLINE + "You: ";
+    private static final String PATHNAME = "tasklist.txt";
+    private static TaskList tasks = new TaskList();
 
     public static void main(String[] args) {
-        TaskList tasks = new TaskList();
-
+        try {
+            File savedTaskList = new File(PATHNAME);
+            SavedTaskList.readSavedTaskList(savedTaskList);
+        } catch (FileNotFoundException e) {
+            System.out.println(CHATBOT + SKIPLINE + "OOPS! Your tasklist has not been created");
+            System.out.println("Please enter task commands to create your own tasklist :)");
+            System.out.println();
+        }
+        
         // Greetings
         System.out.println(CHATBOT + "Hey there! I'm Bob" + SKIPLINE + "What can I do for you today?");
         System.out.println(USER);
 
         Scanner sc = new Scanner(System.in);
-
+        
         while (true) {
             String description = sc.nextLine();
 
@@ -107,6 +119,14 @@ public class Duke {
         System.out.println("Noted! I have added the following task to your list:");
         System.out.println(newTask);
         System.out.println("You now have " + tasks.totalNumberOfTasks() + " task(s) in your list");
+        
+        System.out.println(SKIPLINE + "Saving updated tasklist...");
+        try {
+            SavedTaskList.editSavedTaskList(PATHNAME, tasks.toString());
+            System.out.println("Successfully saved updated tasklist!");
+        } catch (IOException e) {
+            System.out.println("Sorry I was unable to find the file with your saved tasklist :(");
+        }
     }
 
     private static void markTaskAsDone(TaskList tasks, int index) throws TaskDoesNotExistException {
