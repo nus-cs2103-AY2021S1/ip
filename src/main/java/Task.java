@@ -1,3 +1,6 @@
+/**
+ * Represents a Task object that contains the base behaviour of a task.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -24,6 +27,11 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+    /**
+     * Retrieves a string representation of the task to be used for saving to the .txt file.
+     *
+     * @return Task in its save format
+     */
     public String getSaveFormat() {
         return (isDone ? "1" : "0") + " | " + this.description;
     }

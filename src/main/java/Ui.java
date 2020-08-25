@@ -1,3 +1,6 @@
+/**
+ * Represents the Ui that interacts with the user.
+ */
 public class Ui {
     private final String DIVIDER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     private final String INDENT = "        ";
