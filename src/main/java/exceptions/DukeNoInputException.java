@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class DukeNoInputException extends DukeException {
     public DukeNoInputException(String bad_cmd){

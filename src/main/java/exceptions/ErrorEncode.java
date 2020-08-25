@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public enum ErrorEncode {
     FileRead(0, "A I/O and Filereading Error has occured."),

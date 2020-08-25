@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class DukeBlankCommandException extends DukeException{
     public DukeBlankCommandException(String s){

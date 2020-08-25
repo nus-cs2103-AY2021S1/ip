@@ -1,8 +1,9 @@
-package Tasks;
+package tasks;
 
 abstract class Task {
     protected String description;
     protected boolean done;
+    public static final String SEP = "#sep#";
 
     protected Task(String description, boolean done) {
         this.description = description;
@@ -46,4 +47,11 @@ abstract class Task {
         return this.statusIcon()+this.getDescription();
     }
 
+    /**
+     * Takes done status and attributes to encode the sep
+     * @return a encoded string version of task for writing to text file.
+     */
+    public String saveTask(){
+        return this.done + SEP + description; 
+    }
 }

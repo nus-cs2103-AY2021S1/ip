@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class DukeDateTimeException extends DukeException {
     public DukeDateTimeException(String cmd){

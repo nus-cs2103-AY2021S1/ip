@@ -1,6 +1,4 @@
-package Tasks;
-
-import Tasks.TimedTask;
+package tasks;
 
 class Deadline extends TimedTask {
     Deadline(String desc,String date){
@@ -9,5 +7,10 @@ class Deadline extends TimedTask {
     @Override
     public String toString(){
         return "[D]" + super.toString()+" (by: "+getDateby()+")";
+    }
+
+    @Override
+    public String saveTask() {
+        return "D"+SEP+super.saveTask();
     }
 }

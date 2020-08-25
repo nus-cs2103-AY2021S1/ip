@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 public enum Command {
     error("asjdbaksjfbanfjknjkdfnskasd"),//random string as this is the default enum

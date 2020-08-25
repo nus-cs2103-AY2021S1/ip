@@ -1,3 +1,9 @@
+import exceptions.DukeIOException;
+
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -9,33 +15,13 @@ public class ChatbotApplication {
      * @param args
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println(lineWrapper("Hello! I'm Duke\n\tWhat can I do for you\n"));
         Scanner sc = new Scanner(System.in);
-        String in = "";
-        Duke d = new Duke("##");
-        while (d.running()){
-            in = sc.nextLine();
-            d.takeInput(in);
-
-        }
-        System.out.println(lineWrapper("Bye. Hope to see you again soon!"));
+        //System.out.println("What is your name?");
+        String path = System.getProperty("user.dir");
+        Duke d = new Duke("##", path);
+        // To refactor ChatbotApplication to hold mainloop such that UI elements to be added in future
+        // can be interactive with the application through ChatbotApplication class directly. 
+        d.dukeLoop(sc);
     }
-
-
-    /**
-     * Takes text input from Duke and Wraps it in a Line Seperator
-     * @param text
-     * @return String Wrapped by line breaker
-     */
-    private static String lineWrapper(String text){
-        //placeholder until lines can be added
-        String newLine = "\t"+"_________________________________________________"+System.getProperty("line.separator");
-        return newLine+"\n\t"+text+"\n"+newLine;
-    }
+    
 }

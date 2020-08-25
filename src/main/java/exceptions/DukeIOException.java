@@ -1,7 +1,7 @@
-package Exceptions;
+package exceptions;
 
 public class DukeIOException extends DukeException{
-    DukeIOException(String bad_cmd){
+    public DukeIOException(String bad_cmd){
         super(bad_cmd, 0);
     }
 }

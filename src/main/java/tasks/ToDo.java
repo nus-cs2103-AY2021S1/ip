@@ -1,6 +1,4 @@
-package Tasks;
-
-import Tasks.Task;
+package tasks;
 
 class ToDo extends Task {
     ToDo(String desc){
@@ -9,5 +7,9 @@ class ToDo extends Task {
     @Override
     public String toString(){
         return "[T]"+super.toString();
+    }
+    
+    public String saveTask(){
+        return "T" +SEP+super.saveTask();
     }
 }

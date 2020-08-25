@@ -1,6 +1,4 @@
-package Tasks;
-
-import Tasks.TimedTask;
+package tasks;
 
 class Event extends TimedTask {
     Event(String desc,String date){
@@ -9,5 +7,9 @@ class Event extends TimedTask {
     @Override
     public String toString(){
         return "[E]" + super.toString()+" (at: "+getDateby()+")";
+    }
+    
+    public String saveTask(){
+        return "E" +SEP+super.saveTask();
     }
 }

@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * Exceptions.DukeException is a classification of errors that pertain to any running problems within Duke Class applications

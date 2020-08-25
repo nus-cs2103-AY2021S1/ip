@@ -1,9 +1,8 @@
-import Exceptions.*;
-import Tasks.Command;
-import Tasks.TaskManager;
+import exceptions.*;
+import tasks.Command;
+import tasks.TaskManager;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * Backend Object Class for the Duke Chatbot Interface
@@ -12,11 +11,20 @@ class Duke {
     private final TaskManager list;
     private boolean running;
     private final String linebreaker;
-    public Duke(String linebreaker){
-        this.list = new TaskManager(linebreaker);
+    public Duke(String linebreaker, String path){
+        TaskManager list1;
+        try{
+            list1 = new TaskManager(path);    
+        }catch (DukeIOException e){
+            print(e.toString());
+            list1 = new TaskManager(path,true);
+        }
+
+        this.list = list1;
         this.running = true;
         this.linebreaker = linebreaker.repeat(50)+"\n";
     }
+
 
     /**
      * Manages all internal dataflow from Main or textual interaction
@@ -39,7 +47,7 @@ class Duke {
         try {
             switch (c) {
                 case bye:
-                    this.running = false;
+                    end();
                     break;
                 case help:
                     print(this.help());
@@ -78,6 +86,11 @@ class Duke {
             //an Expected exception that does not change the loop
             print(e.toString());
         } 
+    }
+
+    private void end() throws DukeIOException{
+        this.running = false;
+        this.list.saveTasks();
     }
 
     /**
@@ -130,17 +143,57 @@ class Duke {
      * Running state of the Duke Application
      * @return State of Duke running
      */
-    public boolean running() {
+    private boolean running() {
         return this.running;
     }
 
-    
+    /**
+     * Internal Main Loop of Duke program
+     * @param sc
+     */
+    public void dukeLoop(Scanner sc){
+        print("Please Enter your name");
+        String name = sc.nextLine();
+        print(greeting(name));
+        String in = "";
+        while (this.running()){
+            in = sc.nextLine();
+            takeInput(in);
+        }
+        try {
+            this.list.saveTasks();
+        } catch (DukeIOException e) {
+            print(e.toString());
+        }
+        print(goodbye(name));
+    }
 
+    /**
+     * Greeting from Duke Bot
+     * @return
+     */
+    private String greeting(String name){
+        StringBuilder logo = new StringBuilder("\tHello from\n")
+                                        .append(" ____        _        \n")
+                                        .append("|  _ \\ _   _| | _____ \n")
+                                        .append("| | | | | | | |/ / _ \\\n")
+                                        .append("| |_| | |_| |   <  __/\n")
+                                        .append("|____/ \\__,_|_|\\_\\___|\n")
+                                        .append("\tHello! I'm Duke\n\tWhat can I do for you ")
+                                        .append(name)
+                                        .append("\n");
+                
+        return logo.toString();
+    }
+
+    private String goodbye(String name){
+        return "Bye " + name +"! Hope to see you again soon!";
+    }
     /**
      * Wraps all text output and prints to the console
      * @param s
      */
-    public void print(String s){
-        System.out.println(String.format("%s%s%s",linebreaker,s,linebreaker));
+    private void print(String s){
+        System.out.printf("%s%s\n%s%n",linebreaker,s,linebreaker);
     }
 }

@@ -1,6 +1,4 @@
-package Tasks;
-
-import Tasks.Task;
+package tasks;
 
 abstract class TimedTask extends Task {
     protected final String dateby;
@@ -15,5 +13,10 @@ abstract class TimedTask extends Task {
      */
     public String getDateby(){
         return dateby;
+    }
+
+    @Override
+    public String saveTask() {
+        return super.saveTask()+SEP+getDateby();
     }
 }
