@@ -1,14 +1,11 @@
-import Commands.Command;
-import Parser.Parser;
-import Storage.Storage;
-import Ui.Ui;
-import exceptions.DukeException;
-import exceptions.InvalidCommandException;
-import task.Task;
-import task.TaskList;
+package duke;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import duke.Commands.Command;
+import duke.Parser.Parser;
+import duke.Storage.Storage;
+import duke.Ui.Ui;
+import duke.exceptions.DukeException;
+import duke.task.TaskList;
 
 public class Duke {
     private TaskList taskList;

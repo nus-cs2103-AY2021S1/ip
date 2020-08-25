@@ -1,8 +1,7 @@
-package task;
+package duke.task;
 
 
-import exceptions.DukeException;
-import exceptions.InvalidTaskIndexException;
+import duke.exceptions.DukeException;
 
 import java.util.ArrayList;
 import java.util.function.Consumer;
@@ -26,7 +25,7 @@ public class TaskList {
         if (isIndexInRange(index))
             return this.taskList.remove(index - 1);
 
-        throw new DukeException("Oh no! Task number does not exist in task list.");
+        throw new DukeException("Oh no! Task number does not exist in duke.task list.");
     }
 
     public int size() {
@@ -38,7 +37,7 @@ public class TaskList {
             return this.taskList.get(index - 1);
 
 
-        throw new DukeException("Oh no! Task number does not exist in task list.");
+        throw new DukeException("Oh no! Task number does not exist in duke.task list.");
 
 
 

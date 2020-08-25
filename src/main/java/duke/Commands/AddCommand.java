@@ -1,12 +1,12 @@
-package Commands;
+package duke.Commands;
 
-import Storage.Storage;
-import Ui.Ui;
-import exceptions.DukeException;
-import task.Deadline;
-import task.Event;
-import task.TaskList;
-import task.Todo;
+import duke.Storage.Storage;
+import duke.Ui.Ui;
+import duke.exceptions.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

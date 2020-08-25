@@ -1,10 +1,10 @@
-package Commands;
+package duke.Commands;
 
-import Storage.Storage;
-import Ui.Ui;
-import exceptions.DukeException;
-import task.Task;
-import task.TaskList;
+import duke.Storage.Storage;
+import duke.Ui.Ui;
+import duke.exceptions.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
 
 
 public class UpdateCommand extends Command {
@@ -14,7 +14,7 @@ public class UpdateCommand extends Command {
         try {
             this.index = Integer.parseInt(index);
         } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid task number");
+            System.out.println("Please enter a valid duke.task number");
         }
     }
 

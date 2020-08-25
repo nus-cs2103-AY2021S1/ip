@@ -1,7 +1,6 @@
-package task;
+package duke.task;
 
-import exceptions.DukeException;
-import exceptions.InvalidDescriptionException;
+import duke.exceptions.DukeException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

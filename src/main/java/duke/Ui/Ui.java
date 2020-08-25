@@ -1,11 +1,9 @@
-package Ui;
+package duke.Ui;
 
-import exceptions.DukeException;
-import task.Task;
-import task.TaskList;
+import duke.exceptions.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
 
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Ui {
@@ -44,17 +42,17 @@ public class Ui {
     }
 
     public void printAddTaskMessage(TaskList taskList, Task task) {
-        String message = "Got it. I've added this task:\n " + task + "\nNow you have "
+        String message = "Got it. I've added this duke.task:\n " + task + "\nNow you have "
                 + taskList.size() + " in the list";
         System.out.println(message);
     }
 
     public void printDoneMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n " + task);
+        System.out.println("Nice! I've marked this duke.task as done:\n " + task);
     }
 
     public void printDeleteMessage(TaskList taskList, Task task) {
-        System.out.println("Noted. I've removed this task:\n " + task
+        System.out.println("Noted. I've removed this duke.task:\n " + task
                         + "\nNow you have " + taskList.size() + " in the list.");
     }
 

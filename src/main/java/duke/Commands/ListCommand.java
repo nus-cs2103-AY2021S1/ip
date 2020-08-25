@@ -1,8 +1,8 @@
-package Commands;
+package duke.Commands;
 
-import Storage.Storage;
-import Ui.Ui;
-import task.TaskList;
+import duke.Storage.Storage;
+import duke.Ui.Ui;
+import duke.task.TaskList;
 
 public class ListCommand extends Command {
     public ListCommand(String command) {

@@ -1,10 +1,7 @@
-package Parser;
+package duke.Parser;
 
-import Commands.*;
-import exceptions.DukeException;
-import exceptions.InvalidDescriptionException;
-import task.TaskList;
-import task.Todo;
+import duke.Commands.*;
+import duke.exceptions.DukeException;
 
 public class Parser {
 
