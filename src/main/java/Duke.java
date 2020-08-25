@@ -66,25 +66,6 @@ public class Duke {
         }
         ui.exitFocus();
         sc.close();
-
-//        while (sc.hasNext()) {
-//            input = sc.nextLine();
-//            Command command = Parser.parse(input);
-//            exit = command.isExit();
-//            ui.printDivider();
-//            if (exit) {
-//                ui.exitFocus();
-//                break;
-//            }
-//            try {
-//                command.execute(input, taskList, storage);
-//            } catch (DukeException e) {
-//                System.out.println(e.getMessage());
-//            } finally {
-//                ui.printDividerWithSpacing();
-//            }
-//        }
-//        sc.close();
     }
 
     /**
