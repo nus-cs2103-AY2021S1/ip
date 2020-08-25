@@ -7,6 +7,13 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 
+import javax.swing.text.DateFormatter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -67,10 +74,17 @@ public enum Command {
                 throw new DukeInvalidParameterException(strings.getString("error.deadline"), parameters);
             }
 
-            Task toAdd = new Deadline(parameters.get("argument"), parameters.get(strings.getString("parameter.by")));
-            tasks.add(toAdd);
+            try {
+                LocalDate deadline = LocalDate.parse(parameters.get(strings.getString("parameter.by")));
 
-            return String.format(strings.getString("output.added"), toAdd, tasks.size());
+                Task toAdd = new Deadline(parameters.get("argument"), deadline);
+                tasks.add(toAdd);
+
+                return String.format(strings.getString("output.added"), toAdd, tasks.size());
+
+            } catch (DateTimeParseException e) {
+                throw new DukeInvalidParameterException(strings.getString("error.dateFormat"), parameters);
+            }
         }
     },
     EVENT {
@@ -80,10 +94,17 @@ public enum Command {
                 throw new DukeInvalidParameterException(strings.getString("error.event"), parameters);
             }
 
-            Task toAdd = new Event(parameters.get("argument"), parameters.get(strings.getString("parameter.at")));
-            tasks.add(toAdd);
+            try {
+                LocalDate eventDate = LocalDate.parse(parameters.get(strings.getString("parameter.at")));
 
-            return String.format(strings.getString("output.added"), toAdd, tasks.size());
+                Task toAdd = new Event(parameters.get("argument"), eventDate);
+                tasks.add(toAdd);
+
+                return String.format(strings.getString("output.added"), toAdd, tasks.size());
+
+            } catch (DateTimeParseException e) {
+                throw new DukeInvalidParameterException(strings.getString("error.dateFormat"), parameters);
+            }
         }
     },
     DELETE {
