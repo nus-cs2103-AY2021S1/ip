@@ -10,9 +10,13 @@ public class Scanner {
                                                                "delete");
 
     static void scan() throws IOException {
+        TaskList userTaskList = new TaskList();
+        scan(userTaskList);
+    }
+
+    static void scan(TaskList userTaskList) throws IOException {
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader((System.in)));
-        TaskList userTaskList = new TaskList();
 
         scanLoop:
         while(true) {
@@ -22,43 +26,47 @@ public class Scanner {
             if (COMMANDS.contains(command) && line.split(" ").length > 1) {
                 // handle commands with >1 argument
                 switch (command) {
-                    case "done":
-                        try {
-                            userTaskList.markAsDone(
-                                    Integer.parseInt(line.split( " ")[1])
-                            );
-                        } catch (IllegalArgumentException ex) {
-                            System.out.println(ex.getMessage());
-                        }
-                        break;
-                    case "delete":
-                        try {
-                            userTaskList.removeItem(
-                                    Integer.parseInt(line.split( " ")[1])
-                            );
-                        } catch (IllegalArgumentException ex) {
-                            System.out.println(ex.getMessage());
-                        }
-                        break;
-                    default:
-                        break;
+                case "done":
+                    try {
+                        userTaskList.markAsDone(
+                                Integer.parseInt(line.split( " ")[1])
+                        );
+                    } catch (IllegalArgumentException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
+                case "delete":
+                    try {
+                        userTaskList.removeItem(
+                                Integer.parseInt(line.split( " ")[1])
+                        );
+                    } catch (IllegalArgumentException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
+                default:
+                    break;
                 }
             } else {
                 switch(line) {
-                    case "bye":
-                        System.out.println("Bye. Hope to see you again");
-                        break scanLoop;
-                    case "list":
-                        userTaskList.printList();
-                        break;
-                    default:
-                        try {
-                            Task addedTask = userTaskList.addItem(line);
-                            System.out.println("added: " + addedTask);
-                        } catch (DukeException ex) {
-                            System.out.println(ex.getMessage());
-                        }
-                        break;
+                case "bye":
+                    System.out.println("Bye. Hope to see you again");
+                    break scanLoop;
+                case "list":
+                    userTaskList.printList();
+                    break;
+                case "save":
+                    Writer writer = new Writer(Duke.FILE_PATH);
+                    writer.writeListToFile(userTaskList);
+                    break;
+                default:
+                    try {
+                        Task addedTask = userTaskList.addItem(line);
+                        System.out.println("added: " + addedTask);
+                    } catch (DukeException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
                 }
             }
         }
