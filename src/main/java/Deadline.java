@@ -17,7 +17,7 @@ public class Deadline extends Task {
             completionStatus = "1";
         }
         return "D" + " | " + completionStatus + " | " + this.description + " | "
-                + this.by;
+                + by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy, HHmm"));
     }
 
     @Override

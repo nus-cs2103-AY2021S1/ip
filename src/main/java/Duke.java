@@ -6,8 +6,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static Storage storage = new Storage("data", "data/duke.txt");
-    private static ArrayList<Task> tasks = new ArrayList<>(storage.readFromFile());
+    private static final Storage storage = new Storage("data", "data/duke.txt");
+    private static final ArrayList<Task> tasks = new ArrayList<>(storage.readFromFile());
 
     public static void main(String[] args) {
         greet();
@@ -101,75 +101,78 @@ public class Duke {
               throw new DukeException("Invalid format!");
           }
         } else {
-            String taskName = "";
-            if (taskType.equals("todo")) {
-                try {
-                    taskName = input.substring(5);
-                    if (taskName.isBlank()) {
-                        throw new DukeException("Description cannot be only empty spaces!");
+            String taskName;
+            switch (taskType) {
+                case "todo":
+                    try {
+                        taskName = input.substring(5);
+                        if (taskName.isBlank()) {
+                            throw new DukeException("Description cannot be only empty spaces!");
+                        }
+                        Task taskCreated = new Todo(taskName);
+                        tasks.add(taskCreated);
+                        System.out.println("Got it. I've added this task:" +
+                                "\n\t" + taskCreated);
+                        printTotalNumberOfTasks();
+                        storage.appendToFile(System.lineSeparator() + taskCreated.toText());
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("Please include description!");
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                    Task taskCreated = new Todo(taskName);
-                    tasks.add(taskCreated);
-                    System.out.println("Got it. I've added this task:" +
-                            "\n\t" + taskCreated);
-                    printTotalNumberOfTasks();
-                    storage.appendToFile(System.lineSeparator() + taskCreated.toText());
-                } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Please include description!");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else if (taskType.equals("deadline")) {
-                try {
-                    if (input.substring(9).isBlank()) {
-                        throw new DukeException("Description cannot be only empty spaces!");
+                    break;
+                case "deadline":
+                    try {
+                        if (input.substring(9).isBlank()) {
+                            throw new DukeException("Description cannot be only empty spaces!");
+                        }
+                        String[] task = input.substring(9).split(" /by ");
+                        taskName = task[0];
+                        String timeBy = task[1].replace(' ', 'T');
+                        System.out.println("After formatting: " + timeBy);
+                        Task taskCreated = new Deadline(taskName, LocalDateTime.parse(timeBy,
+                                DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")));
+                        tasks.add(taskCreated);
+                        System.out.println("Got it. I've added this task:" +
+                                "\n\t" + taskCreated);
+                        printTotalNumberOfTasks();
+                        storage.appendToFile(System.lineSeparator() + taskCreated.toText());
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("Invalid description of a deadline item!");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (DateTimeParseException f) {
+                        throw new DukeException("Please enter deadline in this format: dd/MM/yyyy timeIn24Hr"
+                                + "\nE.g. 01/12/2020 2359");
                     }
-                    String[] task = input.substring(9).split(" /by ");
-                    taskName = task[0];
-                    String timeBy = task[1].replace(' ', 'T');
-                    System.out.println("After formatting: " + timeBy);
-                    Task taskCreated = new Deadline(taskName, LocalDateTime.parse(timeBy,
-                            DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")));
-                    System.out.println("Success");
-                    tasks.add(taskCreated);
-                    System.out.println("Got it. I've added this task:" +
-                            "\n\t" + taskCreated);
-                    printTotalNumberOfTasks();
-                    storage.appendToFile(System.lineSeparator() + taskCreated.toText());
-                } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Invalid description of a deadline item!");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (DateTimeParseException f) {
-                    throw new DukeException("Please enter deadline in this format: dd/MM/yyyy timeIn24Hr"
-                            + "\nE.g. 01/12/2020 2359");
-                }
-            } else if (taskType.equals("event")) {
-                try {
-                    if (input.substring(6).isBlank()) {
-                        throw new DukeException("Description cannot be only empty spaces!");
-                    }
-                    String[] task = input.substring(6).split(" /at ");
-                    taskName = task[0];
-                    String timeAt = task[1].replace(' ', 'T');
+                    break;
+                case "event":
+                    try {
+                        if (input.substring(6).isBlank()) {
+                            throw new DukeException("Description cannot be only empty spaces!");
+                        }
+                        String[] task = input.substring(6).split(" /at ");
+                        taskName = task[0];
+                        String timeAt = task[1].replace(' ', 'T');
 
-                    Task taskCreated = new Event(taskName, LocalDateTime.parse(timeAt,
-                            DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")));
-                    tasks.add(taskCreated);
-                    System.out.println("Got it. I've added this task:" +
-                            "\n\t" + taskCreated);
-                    printTotalNumberOfTasks();
-                    storage.appendToFile(System.lineSeparator() + taskCreated.toText());
-                } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Invalid description of an event!");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (DateTimeParseException f) {
-                    throw new DukeException("Please enter event time in this format: dd/MM/yyyy timeIn24Hr"
-                            + "\nE.g. 01/12/2020 2359");
-                }
-            } else {
-                throw new DukeException("I'm sorry, but I don't know what that means!");
+                        Task taskCreated = new Event(taskName, LocalDateTime.parse(timeAt,
+                                DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")));
+                        tasks.add(taskCreated);
+                        System.out.println("Got it. I've added this task:" +
+                                "\n\t" + taskCreated);
+                        printTotalNumberOfTasks();
+                        storage.appendToFile(System.lineSeparator() + taskCreated.toText());
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("Invalid description of an event!");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (DateTimeParseException f) {
+                        throw new DukeException("Please enter event time in this format: dd/MM/yyyy timeIn24Hr"
+                                + "\nE.g. 01/12/2020 2359");
+                    }
+                    break;
+                default:
+                    throw new DukeException("I'm sorry, but I don't know what that means!");
             }
             System.out.println("___________________________________________________");
         }

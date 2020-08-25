@@ -17,7 +17,7 @@ public class Event extends Task {
             completionStatus = "1";
         }
         return "E" + " | " + completionStatus + " | " + this.description + " | "
-                + this.at;
+                + at.format(DateTimeFormatter.ofPattern("dd/MM/yyyy, HHmm"));
     }
 
     @Override
