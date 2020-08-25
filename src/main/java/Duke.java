@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Duke {
@@ -16,12 +16,10 @@ public class Duke {
 
     public static void saveToFile(String output) {
         try {
-            File myFile = new File("Tasklist.txt");
-            if (myFile.createNewFile()) {
-                System.out.println("File created: " + myFile.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
+            FileWriter myFile = new FileWriter("Tasklist.txt");
+            myFile.write(output);
+            myFile.close();
+            System.out.println("WRITTEN TO FILE THE WHOLE LIST!!!!");
         } catch (IOException ex) {
             System.out.println("Error IDIOT!!!");
             ex.printStackTrace();
@@ -136,6 +134,12 @@ public class Duke {
 
             if (input.equals("to string")) {
                 System.out.println(listToString(userTasks));
+                continue;
+            }
+
+            if (input.equals("to file")) {
+                saveToFile(listToString(userTasks));
+                System.out.println("File saved!!!!");
                 continue;
             }
 
