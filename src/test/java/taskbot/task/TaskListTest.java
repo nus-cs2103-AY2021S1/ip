@@ -49,9 +49,9 @@ public class TaskListTest {
         try {
             StringBuilder expected = new StringBuilder("These are the following task(s) to complete:\n");
             for (int i = 1; i < 3; i++) {
-                expected.append(i).append(". ").append("Task ").append(i).append("\n");
+                expected.append(i).append(". ").append("[✗] Task ").append(i).append("\n");
             }
-            expected.append("3. Task 3");
+            expected.append("3. [✗] Task 3");
             taskList.listTasks();
             assertEquals(expected.toString(), outContent.toString());
         } catch (Exception e) {
@@ -124,7 +124,7 @@ public class TaskListTest {
         try {
             taskList.completeTask(2);
             String expected = "Understood. The following task is now marked as done:\n" +
-                    "    Task 3\r\n";
+                    "    [✓] Task 3\r\n";
             assertEquals(expected, outContent.toString());
 
             //Reset the TaskList
@@ -139,7 +139,7 @@ public class TaskListTest {
         try {
             taskList.deleteTask(2);
             String expected = "Understood. The following task has been deleted.\n" +
-                    "    Task 3\n" +
+                    "    [✗] Task 3\n" +
                     "You now have 2 task(s) in the list.\r\n";
             assertEquals(expected, outContent.toString());
 
@@ -167,12 +167,38 @@ public class TaskListTest {
             taskList = new TaskList(tasks);
             taskList.getUpcoming(3);
             String expected = "These are the following task(s) to complete:\n" +
-                    "1. Task 1\n" +
+                    "1. [✗] Task 1\n" +
                     "2. [✗] Timed Task(test): Timed Task 1(Time: " +
                     currentDateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a")) + ")\n" +
                     "3. [✗] Timed Task(test): Timed Task 2(Time: " +
                     currentDateTime.plusDays(1).format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a")) +
                     ")\n";
+            assertEquals(expected, outContent.toString());
+
+            //Reset the TaskList
+            taskList = new TaskList(tasks);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testFindTasks() {
+        try {
+            ArrayList<Task> tasks = new ArrayList<>();
+
+            tasks.add(new TaskStub("Run"));
+            tasks.add(new TaskStub("run"));
+            tasks.add(new TaskStub("run away"));
+            tasks.add(new TaskStub("not printed"));
+
+            taskList = new TaskList(tasks);
+
+            taskList.findTasks("run");
+            String expected = "Here are the matching tasks in your list:\n" +
+                    "1. [✗] Run\n" +
+                    "2. [✗] run\n" +
+                    "3. [✗] run away\n";
             assertEquals(expected, outContent.toString());
 
             //Reset the TaskList

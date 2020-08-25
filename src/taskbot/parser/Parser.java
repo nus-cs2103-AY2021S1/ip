@@ -1,14 +1,6 @@
 package taskbot.parser;
 
-import taskbot.command.Command;
-import taskbot.command.TodoCommand;
-import taskbot.command.DeadlineCommand;
-import taskbot.command.EventCommand;
-import taskbot.command.ListCommand;
-import taskbot.command.UpcomingCommand;
-import taskbot.command.DeleteCommand;
-import taskbot.command.DoneCommand;
-import taskbot.command.ExitCommand;
+import taskbot.command.*;
 
 import taskbot.exceptions.EmptyArgumentException;
 import taskbot.exceptions.InvalidCommandException;
@@ -16,8 +8,9 @@ import taskbot.exceptions.InvalidCommandException;
 public class Parser {
     /**
      * Determines the correct command to be used.
+     *
      * @param command The string to be parsed.
-     * @return The command corresponding to the string.
+     * @return The command corresponding to the string parsed.
      */
     public static Command parse(String command) throws InvalidCommandException, EmptyArgumentException {
         String[] commandArgs = command.split(" ", 2);
@@ -49,6 +42,11 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new InvalidCommandException("Please enter a valid digit for days.");
             }
+        case "find":
+            if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
+                throw new EmptyArgumentException("Please enter a keyword to search for.");
+            }
+            return new FindCommand(commandArgs[1]);
         case "done":
             if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
                 throw new EmptyArgumentException("Please enter the index of the task you wish to complete.");

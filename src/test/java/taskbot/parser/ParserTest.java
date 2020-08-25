@@ -7,6 +7,7 @@ import taskbot.command.DeadlineCommand;
 import taskbot.command.EventCommand;
 import taskbot.command.ListCommand;
 import taskbot.command.UpcomingCommand;
+import taskbot.command.FindCommand;
 import taskbot.command.DeleteCommand;
 import taskbot.command.DoneCommand;
 import taskbot.command.ExitCommand;
@@ -14,6 +15,9 @@ import taskbot.command.ExitCommand;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Tests the various commands that Parser handles.
+ */
 public class ParserTest {
     private String testCommand;
     @Test
@@ -63,6 +67,17 @@ public class ParserTest {
         try {
             testCommand = "upcoming 2";
             assertEquals(new UpcomingCommand(2), Parser.parse(testCommand));
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testParseFind() {
+        try {
+            testCommand = "find book";
+            assertEquals(new FindCommand("book"),
+                    Parser.parse(testCommand));
         } catch (Exception e) {
             fail();
         }
