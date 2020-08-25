@@ -16,6 +16,7 @@ public class Deadline extends Task {
 
     /**
      * Initializes a newly created Deadline with a description, date, and whether it is done.
+     *
      * @param desc description of task.
      * @param date date of task.
      * @param isDone whether task is done.
@@ -28,6 +29,7 @@ public class Deadline extends Task {
 
     /**
      * Initializes a newly created Deadline with a description, date, time, and whether it is done.
+     *
      * @param desc description of task.
      * @param date date of task.
      * @param time time of task.
@@ -41,6 +43,7 @@ public class Deadline extends Task {
 
     /**
      * Sets this task as done.
+     *
      * @return task set as done.
      */
     @Override
@@ -53,6 +56,7 @@ public class Deadline extends Task {
 
     /**
      * Formats the task to a string to write in a file.
+     *
      * @return formatted task.
      */
     @Override
@@ -65,6 +69,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a string representation of the task.
+     *
      * @return string representation of task.
      */
     @Override

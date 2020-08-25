@@ -21,6 +21,7 @@ public class Ui {
 
     /**
      * Returns the user input.
+     *
      * @return user input.
      */
     public String getInput() {
@@ -45,6 +46,7 @@ public class Ui {
 
     /**
      * Prints the set output whenever the list command is called.
+     *
      * @param tasks list of tasks.
      */
     public void onList(List<Task> tasks) {
@@ -59,6 +61,7 @@ public class Ui {
 
     /**
      * Prints the set output whenever a task is done.
+     *
      * @param task a done task.
      */
     public void onDone(Task task) {
@@ -68,6 +71,7 @@ public class Ui {
 
     /**
      * Prints the set output whenever a task is removed.
+     *
      * @param task a removed task.
      * @param size size of the list.
      */
@@ -79,6 +83,7 @@ public class Ui {
 
     /**
      * Prints the set output whenever a task is added.
+     *
      * @param task an added task.
      * @param size size of the list.
      */
@@ -89,6 +94,7 @@ public class Ui {
 
     /**
      * Formats and prints a string.
+     *
      * @param toPrint string to print.
      */
     public void chatPrint(String toPrint) {

@@ -16,6 +16,7 @@ public class Command {
 
     /**
      * Initializes a newly created Command with a type.
+     *
      * @param type type of command.
      */
     public Command(String type) {
@@ -28,6 +29,7 @@ public class Command {
 
     /**
      * Initializes a newly created Command with a type and index.
+     *
      * @param type type of command.
      * @param idx index of task.
      */
@@ -41,6 +43,7 @@ public class Command {
 
     /**
      * Initializes a newly created Command with a type and description.
+     *
      * @param type type of command.
      * @param desc description of task.
      */
@@ -54,6 +57,7 @@ public class Command {
 
     /**
      * Initializes a newly created Command with a type, description, and date.
+     *
      * @param type type of command.
      * @param desc description of task.
      * @param date date of task.
@@ -68,6 +72,7 @@ public class Command {
 
     /**
      * Initializes a newly created Command with a type, description, date, and time.
+     *
      * @param type type of command.
      * @param desc description of task.
      * @param date date of task.
@@ -83,6 +88,7 @@ public class Command {
 
     /**
      * Checks whether the program is quitting.
+     *
      * @return true if the command type is bye, false otherwise.
      */
     public boolean isQuitting() {
@@ -91,6 +97,7 @@ public class Command {
 
     /**
      * Executes the command.
+     *
      * @param tasks TaskList of the program
      * @param ui user interface of the program
      * @param storage storage of the program
@@ -138,6 +145,7 @@ public class Command {
 
     /**
      * Checks whether a given command equals this command.
+     *
      * @param o object to be compared with this command.
      * @return true if they are equal, false otherwise.
      */

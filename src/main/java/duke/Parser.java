@@ -12,6 +12,7 @@ public class Parser {
 
     /**
      * Parses the given input and returns the corresponding command.
+     *
      * @param input user input.
      * @return corresponding command.
      * @throws DukeException if there are any date/time parsing issues or unknown commands.
@@ -61,6 +62,7 @@ public class Parser {
 
     /**
      * Checks for any task formatting issues
+     *
      * @param type type of task.
      * @param input user input.
      * @throws DukeException if there are any formatting issues.

@@ -7,6 +7,7 @@ public class Todo extends Task {
 
     /**
      * Initializes a newly created Todo with a description.
+     *
      * @param desc description of task.
      */
     public Todo(String desc) {
@@ -15,6 +16,7 @@ public class Todo extends Task {
 
     /**
      * Initializes a newly created Todo with a description and whether it is done.
+     *
      * @param desc description of task.
      * @param isDone whether task is done.
      */
@@ -24,6 +26,7 @@ public class Todo extends Task {
 
     /**
      * Sets this task as done.
+     *
      * @return task set as done.
      */
     @Override
@@ -35,6 +38,7 @@ public class Todo extends Task {
 
     /**
      * Formats the task to a string to write in a file.
+     *
      * @return formatted task.
      */
     public String formatTask() {
@@ -43,6 +47,7 @@ public class Todo extends Task {
 
     /**
      * Returns a string representation of the task.
+     *
      * @return string representation of task.
      */
     @Override

@@ -56,6 +56,7 @@ public class TaskList {
 
     /**
      * Remove a task from the list.
+     *
      * @param idx index of task to be removed from the list.
      * @return removed task.
      */
@@ -67,6 +68,7 @@ public class TaskList {
 
     /**
      * Add a todo task to the list.
+     *
      * @param desc description of the task.
      * @param isDone whether the task is done.
      * @return added task.
@@ -79,6 +81,7 @@ public class TaskList {
 
     /**
      * Add a deadline or event task to the list with a date.
+     *
      * @param type type of the task.
      * @param desc description of the task.
      * @param date date of the task.
@@ -98,6 +101,7 @@ public class TaskList {
 
     /**
      * Add a deadline or event task to the list with a date and time.
+     * 
      * @param type type of the task.
      * @param desc description of the task.
      * @param date date of the task.

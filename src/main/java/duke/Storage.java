@@ -23,6 +23,7 @@ public class Storage {
 
     /**
      * Initializes a newly created Storage with a file path.
+     *
      * @param filePath path of the saved tasks file.
      */
     public Storage(String filePath) {
@@ -31,6 +32,7 @@ public class Storage {
 
     /**
      * Loads tasks into a task list.
+     *
      * @return list of tasks.
      * @throws DukeException if there are any I/O issues.
      */
@@ -54,6 +56,7 @@ public class Storage {
 
     /**
      * Loads tasks from a file to a list.
+     *
      * @param tasks list of tasks.
      * @throws DukeException if there are any I/O issues.
      */
@@ -88,6 +91,7 @@ public class Storage {
 
     /**
      * Processes a string from the save file to a task.
+     *
      * @param type type of task.
      * @param attr attributes of task.
      * @return task derived from string.
@@ -112,6 +116,7 @@ public class Storage {
 
     /**
      * Checks for any formatting issues from the save file.
+     *
      * @param attr attributes of task.
      * @param lineCounter current line number.
      * @throws DukeException if there are any formatting issues.
@@ -126,6 +131,7 @@ public class Storage {
 
     /**
      * Saves the list of tasks to a file.
+     *
      * @param tasks list of tasks.
      * @throws DukeException if there are any I/O issues.
      */
@@ -143,6 +149,7 @@ public class Storage {
 
     /**
      * Writes a line to a file.
+     *
      * @param textToAdd text to be written.
      * @throws IOException if there are any I/O issues.
      */

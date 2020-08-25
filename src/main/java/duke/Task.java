@@ -10,6 +10,7 @@ public class Task {
 
     /**
      * Initializes a newly created Task with a description.
+     *
      * @param desc description of task.
      */
     public Task(String desc) {
@@ -19,6 +20,7 @@ public class Task {
 
     /**
      * Initializes a newly created Task with a description and whether it is done.
+     *
      * @param desc description of task.
      * @param isDone whether task is done.
      */
@@ -29,6 +31,7 @@ public class Task {
 
     /**
      * Sets this task as done.
+     *
      * @return task set as done.
      */
     public Task setDone() {
@@ -39,6 +42,7 @@ public class Task {
 
     /**
      * Formats the task to a string to write in a file.
+     *
      * @return formatted task.
      */
     public String formatTask() {
@@ -47,6 +51,7 @@ public class Task {
 
     /**
      * Returns a string representation of the task.
+     *
      * @return string representation of task.
      */
     @Override
@@ -56,6 +61,7 @@ public class Task {
 
     /**
      * Checks whether a given task equals this task.
+     *
      * @param o object to be compared with this task.
      * @return true if they are equal, false otherwise.
      */

@@ -12,6 +12,7 @@ public class Duke {
 
     /**
      * Initializes a newly created Duke program with a saved file path.
+     *
      * @param filePath path of the saved tasks file.
      */
     public Duke(String filePath) {
