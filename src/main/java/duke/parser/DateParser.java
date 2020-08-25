@@ -34,7 +34,7 @@ public class DateParser {
                 } catch (DateTimeParseException e) { }
             }
         }
-        throw new DukeException("I can't tell the time.");
+        throw new DukeException("I'm not quite sure if we know each other...");
     }
 
     public static String parseLocalDateTime(LocalDateTime dateTime) {

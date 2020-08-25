@@ -10,7 +10,7 @@ public class Deadline extends Task {
 
     private LocalDateTime dateTime;
 
-    public Deadline(String description, LocalDateTime dateTime) {
+    private Deadline(String description, LocalDateTime dateTime) {
         super(description);
         this.dateTime = dateTime;
     }
