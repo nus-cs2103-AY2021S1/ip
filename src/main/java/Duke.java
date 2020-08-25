@@ -76,6 +76,14 @@ public class Duke {
                         }
                         UI.printDeleteMessage(stringStore.getTask(deleteTask), stringStore.numOfTasks() - 1);
                         stringStore.deleteTask(deleteTask);
+                    } else if (Parser.isFind(input)){
+                        String[] findParts = input.split(" ");
+                        if(findParts.length == 1){
+                            throw new DukeEmptyFindException(input);
+                        }
+                        UI.printKeywordTasks(findParts[1], this.stringStore.getTasks());
+
+
                     } else {
                         throw new DukeUnknownInputException(input);
                     }
@@ -97,6 +105,10 @@ public class Duke {
                     UI.printFormattedMessage("OOPS!!! The invalid delete number.!");
                 } catch (DateTimeParseException e){
                     UI.printFormattedMessage("OOPS!!! The invalid date format has been keyed in. PLease enter in dd-MM-yyyy HH:mm format");
+                } catch (DukeNoMatchesExcpetion dukeNoMatchesExcpetion) {
+                    UI.printFormattedMessage("ERROR: No matches found!");
+                } catch (DukeEmptyFindException e) {
+                    UI.printFormattedMessage("ERROR: Empty find body!");
                 }
                 if (sc.hasNext()) {
                     input = sc.nextLine();

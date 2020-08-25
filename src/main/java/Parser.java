@@ -43,5 +43,9 @@ public class Parser {
         return store;
     }
 
+    public static boolean isFind(String input){
+        return input.split(" ")[0].equals(TaskElement.FIND.label);
+    }
+
 
 }

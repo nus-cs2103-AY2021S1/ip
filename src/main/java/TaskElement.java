@@ -5,7 +5,8 @@ public enum TaskElement {
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event"),
-    DELETE("delete");
+    DELETE("delete"),
+    FIND("find");
 
     public final String label;
 

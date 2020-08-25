@@ -32,4 +32,8 @@ public class Task {
             return "[" + getStatusIcon()+ "]" + " " + description;
     }
 
+    public boolean containsKeyword(String substring){
+        return this.description.contains(substring);
+    }
+
 }
