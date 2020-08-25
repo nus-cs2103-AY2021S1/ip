@@ -76,6 +76,7 @@ public class Duke {
                 try {
                     handleUserCommands(tasks, description);
                 } catch (InvalidUserCommandException e) {
+                    System.out.println(SKIPLINE + CHATBOT);
                     System.out.println(e.getMessage());
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(SKIPLINE + CHATBOT);
@@ -176,7 +177,7 @@ public class Duke {
             // Retrieve deadline description and deadline date
             deadlineInformation = command.split("/by ");
             String description = deadlineInformation[0].substring(9);
-            String deadline = deadlineInformation[1];
+            String deadline = TaskDate.getDate(deadlineInformation[1]);
 
             Deadline newDeadlineTask = new Deadline(description, deadline);
             updateTaskList(tasks, newDeadlineTask);
@@ -186,7 +187,7 @@ public class Duke {
             // Retrieve event description and event date
             eventInformation = command.split("/at ");
             String description = eventInformation[0].substring(6);
-            String event = eventInformation[1];
+            String event = TaskDate.getDate(eventInformation[1]);
 
             Event newEventTask = new Event(description, event);
             updateTaskList(tasks, newEventTask);
