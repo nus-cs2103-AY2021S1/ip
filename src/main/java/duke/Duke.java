@@ -22,7 +22,10 @@ public class Duke {
             this.tasks = new TaskList();
         }
     }
-    
+
+    /**
+     * Runs the main logic of chat bot.
+     */
     public void run() {
         ui.greetUser();
         boolean isExit = false;
@@ -47,8 +50,12 @@ public class Duke {
             ui.printMessage(error.getMessage());
         }
     }
-    
 
+    /**
+     * Initializes and runs the program.
+     * 
+     * @param args Command line inputs.
+     */
     public static void main(String[] args) {
        new Duke("./tasks.txt").run();
     }

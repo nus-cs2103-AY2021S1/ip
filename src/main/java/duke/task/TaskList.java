@@ -19,11 +19,21 @@ public class TaskList {
         this.taskCount = savedTasks.size();
         this.ui = new Ui();
     }
-    
+
+    /**
+     * Returns user current tasks.
+     * 
+     * @return User current tasks.
+     */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
-    
+
+    /**
+     * Adds task to task list.
+     * 
+     * @param task Task to be added.
+     */
     public void addTask(Task task) {
         this.tasks.add(task);
         this.taskCount += 1;
@@ -31,7 +41,12 @@ public class TaskList {
                 "   " + task,
                 " You have " + this.taskCount + " tasks currently.");
     }
-    
+
+    /**
+     * Deletes a specific task.
+     * 
+     * @param index Position of the task to be deleted.
+     */
     public void deleteTask(int index) {
         if (index < 1 || this.taskCount < index) {
             ui.printMessage(" Sorry I cannot find your specified task :(");
@@ -44,7 +59,10 @@ public class TaskList {
                     " You have " + this.taskCount + " tasks currently.");
         }
     }
-    
+
+    /**
+     * Lists all tasks in task list.
+     */
     public void listTasks() {
         if (this.taskCount == 0) {
             ui.printMessage(" You've got no tasks now.",
@@ -57,7 +75,12 @@ public class TaskList {
             }
         }
     }
-    
+
+    /**
+     * Marks a specific task as done.
+     * 
+     * @param index Position of the task to be completed.
+     */
     public void markAsDone(int index) {
         if (index < 1 || this.taskCount < index) {
             ui.printMessage(" Sorry I cannot find your specified task :(");

@@ -9,16 +9,29 @@ public class Task {
         this.done = done;
     }
 
+    /**
+     * Completes a task.
+     */
     public void completeTask() {
         this.done = true;
     }
 
+    /**
+     * Describes task.
+     *
+     * @return String that describes task.
+     */
     @Override
     public String toString() {
         String symbol = (this.done ? "[\u2713] " : "[\u2718] ");
         return symbol + this.description;
     }
-    
+
+    /**
+     * Describes task to be saved in hard disk.
+     *
+     * @return String that will be stored on hard disk.
+     */
     public String saveToHardDisk() {
         int isDone = this.done ? 1 : 0;
         return " | " + isDone + " | " + this.description;

@@ -47,30 +47,52 @@ public class Ui {
             "██████████░░                ▒▒                ██              ██              ██                ████      ██████            ██████████\n" +
             "████████████                ████            ████            ░░██            ████              ██████      ██████            ██████████\n" +
             "██████████████            ████████          ██████          ████          ██████            ████████      ██████            ██████████";
-    
+
+    /**
+     * Prints welcome message.
+     */
     public void greetUser() {
         System.out.println(logo);
         System.out.println(welcomeMessage);
     }
-    
+
+    /**
+     * Prints line divider.
+     */
     public void showLine() {
         System.out.println(divider);
     }
-    
+
+    /**
+     * Prints goodbye message.
+     */
     public void goodbyeUser() {
         System.out.println(goodbyeMessage);
     }
-    
+
+    /**
+     * Prints loading error message.
+     */
     public void showLoadingError() {
         System.out.println(" Failed to load saved data :(");
     }
-    
+
+    /**
+     * Prints messages line by line.
+     * 
+     * @param messages Messages to be printed.
+     */
     public void printMessage(String... messages) {
         for (String m: messages) {
             System.out.println(m);
         }
     }
-    
+
+    /**
+     * Reads current input from user.
+     * 
+     * @return String indicating current input.
+     */
     public String readInput() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();

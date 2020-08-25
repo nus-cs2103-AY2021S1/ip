@@ -24,7 +24,13 @@ public class Storage {
             throw new DukeException(" I cannot find the directory :(");
         }
     }
-    
+
+    /**
+     * Generates list of tasks from save file.
+     * 
+     * @return List of tasks generated from save file.
+     * @throws DukeException If there is file reading error.
+     */
     public ArrayList<Task> loadTasks() throws DukeException {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
@@ -50,7 +56,13 @@ public class Storage {
             throw new DukeException(" I cannot find the directory :(");
         }
     }
-    
+
+    /**
+     * Saves task to hard disk.
+     * 
+     * @param tasks Tasks user currently have.
+     * @throws DukeException If there is writing file error.
+     */
     public void saveTasks(ArrayList<Task> tasks) throws DukeException {
         try {
             PrintWriter writer = new PrintWriter(new FileWriter(this.data));
