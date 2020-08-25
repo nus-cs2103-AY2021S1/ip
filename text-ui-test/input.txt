@@ -1,8 +1,13 @@
 list
 todo borrow book
+todo
+deadline
+event
 list
 deadline return book /by Sunday
+deadline oiewhfnadl
 event project meeting /at Mon 2-4pm
+event ahudlnsad
 deadline do homework /by no idea :-p
 list
 done 1
