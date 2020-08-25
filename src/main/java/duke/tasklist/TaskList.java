@@ -3,19 +3,18 @@ package duke.tasklist;
 import duke.task.Task;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Keeps and handles all operations regarding the user tasks.
  */
 public class TaskList {
-    private List<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Initializes the task list.
      * @param tasks List of tasks.
      */
-    public TaskList(List<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -52,7 +51,7 @@ public class TaskList {
      *
      * @return List object containing all tasks.
      */
-    public List<Task> getTasks() {
+    public ArrayList<Task> getTasks() {
         return tasks;
     }
 
@@ -91,7 +90,7 @@ public class TaskList {
      * @return new TaskList with tasks matching the input word
      */
     public TaskList matchAll(String input) {
-        List<Task> newTaskList = new ArrayList<>();
+        ArrayList<Task> newTaskList = new ArrayList<>();
         for (Task task : tasks) {
             if (task.match(input)) {
                 newTaskList.add(task);

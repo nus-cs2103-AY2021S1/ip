@@ -1,6 +1,7 @@
 package duke.storage;
 
 import duke.task.Task;
+
 import duke.tasklist.TaskList;
 
 import duke.ui.Ui;
@@ -12,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Handles the interactions with the user's CSV file.
@@ -48,8 +48,8 @@ public class Storage {
      *
      * @return List of tasks.
      */
-    public List<Task> getTasks() {
-        List<Task> taskList = new ArrayList<>();
+    public ArrayList<Task> getTasks() {
+        ArrayList<Task> taskList = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             String header = br.readLine();

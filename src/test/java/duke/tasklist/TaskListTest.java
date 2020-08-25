@@ -5,7 +5,6 @@ import duke.task.ToDo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TaskListTest {
     @Test
     public void test() {
-        List<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         TaskList taskList = new TaskList(tasks);
 
         assertTrue(taskList.isEmpty());
