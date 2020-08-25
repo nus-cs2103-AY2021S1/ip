@@ -91,6 +91,27 @@ public class TaskList {
         ui.showHorizontalLine();
     }
 
+    public void find(String keyword, Ui ui) {
+        ui.showHorizontalLine();
+        if (this.tasks.size() <= 0) {
+            ui.showIndentedMessage("No tasks added.");
+        } else {
+            int position = 1;
+            boolean hasTask = false;
+            for (Task task : this.tasks) {
+                if (task.containsKeyword(keyword)) {
+                    ui.showIndentedMessage(position + ". " + task);
+                    hasTask = true;
+                }
+                position++;
+            }
+            if (!hasTask) {
+                ui.showIndentedMessage("No tasks found.");
+            }
+        }
+        ui.showHorizontalLine();
+    }
+
     public void forEach(Consumer<? super Task> consumer) {
         this.tasks.forEach(consumer);
     }

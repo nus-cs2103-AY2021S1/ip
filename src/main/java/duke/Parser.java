@@ -22,6 +22,8 @@ public class Parser {
                 return new DeleteCommand(inputArray);
             case "list":
                 return new ListCommand(inputArray);
+            case "find":
+                return new FindCommand(command);
             default:
                 throw new DukeException("I'm not sure what you're talking about.");
             }
