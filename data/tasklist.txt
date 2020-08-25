@@ -1,3 +1,1 @@
-T@1@swimming in sea
-D@1@swimming@2020-05-27@1430
-T@0@racing carT@0@elepahnt
+T@0@drive car
