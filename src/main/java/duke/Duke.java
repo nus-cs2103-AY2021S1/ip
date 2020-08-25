@@ -9,6 +9,9 @@ import duke.util.Ui;
 
 import java.util.Scanner;
 
+/**
+ * Represents the main class for the Duke application.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -28,7 +31,10 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("tasks.txt").run();
     }
-    
+
+    /**
+     * Runs the application.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.greet();

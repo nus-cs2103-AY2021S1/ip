@@ -6,11 +6,21 @@ import duke.util.Ui;
 
 import java.util.StringJoiner;
 
+/**
+ * Responsible for executing a list command.
+ */
 public class ListCommand extends Command {
     public ListCommand() {
         super(true);
     }
 
+    /**
+     * Executes a list command.
+     *
+     * @param tasks Contains the current tasks.
+     * @param ui Responsible for displaying information to the user.
+     * @param storage Reads and stores data into memory.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         StringJoiner response = new StringJoiner("\n");

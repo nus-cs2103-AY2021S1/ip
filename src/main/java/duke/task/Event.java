@@ -4,6 +4,9 @@ import duke.util.DateFormatter;
 
 import java.util.Date;
 
+/**
+ * Models an event task.
+ */
 public class Event extends Task {
     protected Date at;
 
@@ -12,6 +15,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Returns icon representing whether the task is done or not.
+     *
+     * @return Icon representing whether the task is done or not.
+     */
     @Override
     public String toSaveFormat() {
         return String.format("E | %d | %s | %s", this.isDone ? 1 : 0, 

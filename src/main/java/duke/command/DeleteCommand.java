@@ -6,6 +6,9 @@ import duke.task.Task;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/**
+ * Responsible for executing a delete command.
+ */
 public class DeleteCommand extends Command {
     private int index;
 
@@ -14,6 +17,14 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Executes a delete command.
+     *
+     * @param tasks Contains the current tasks.
+     * @param ui Responsible for displaying information to the user.
+     * @param storage Reads and stores data into memory.
+     * @throws InvalidDeleteIndexException If index is out of bounds.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDeleteIndexException {
         if (index > tasks.size() || index < 1) {
             throw new InvalidDeleteIndexException(tasks.size());

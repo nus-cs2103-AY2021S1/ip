@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Responsible for loading and saving tasks to memory.
+ */
 public class Storage {
     private String dirName = "data/";
     private String filePath;
@@ -20,7 +23,13 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = dirName + filePath;
     }
-    
+
+    /**
+     * Loads the tasks from the storage directory.
+     * 
+     * @return {@code ArrayList<Task>} of the tasks stored in the storage directory.
+     * @throws DukeException If the tasks were not saved in appropriate format.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> result = new ArrayList<>();
         try {
@@ -63,7 +72,12 @@ public class Storage {
         
         return result;
     }
-    
+
+    /**
+     * Saves tasks to the storage directory.
+     * 
+     * @param tasks The tasks to save.
+     */
     public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
