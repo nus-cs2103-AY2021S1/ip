@@ -179,11 +179,14 @@ public class Duke {
      */
     public void start() {
         Duke.printStartMsg();
+        this.list.loadFromFile();
 
         Scanner sc = new Scanner(System.in);
         this.dukeLogic(sc);
 
         Duke.printMessage("Bye. Hope to see you again soon!");
+        
+        this.list.writeToFile();
 
         sc.close();
     }
