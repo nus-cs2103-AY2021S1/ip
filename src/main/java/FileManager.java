@@ -18,7 +18,7 @@ public class FileManager{
     public static void edit(String location, ArrayList<task> store) throws IOException {
         FileWriter fw = new FileWriter(location);
         for(task i : store){
-            fw.append(i.read());
+            fw.append(TaskManager.read(i));
             fw.write(System.lineSeparator());
         }
         fw.close();
@@ -89,7 +89,7 @@ public class FileManager{
             char done = current.charAt(4);
             String d = "";
             d = d + done;
-            if(d.equals("O")){
+            if(d.equals("✓")){
                 return true;
             } else if (d.equals("X")){
                 return false;
@@ -106,7 +106,6 @@ public class FileManager{
             Scanner sc = new Scanner(f);
             while(sc.hasNext()){
                 String current = sc.nextLine();
-//                System.out.println(current);
                 try {
                     int type = FileManager.getType(current);
                     String name = FileManager.getName(current);
@@ -121,8 +120,10 @@ public class FileManager{
                         try {
                             String date = FileManager.getDate(current);
                             Deadline d = new Deadline(name,"[D]");
-                            d.done();
-                            d.addDate(date);
+                            if(done) {
+                                d.done();
+                            }
+                            DateTimeManager.addDate(d,date);
                             store.add(d);
                         } catch(ErrorExceptions e){
                             System.out.println(e);
@@ -131,8 +132,10 @@ public class FileManager{
                         try {
                             String date = FileManager.getDate(current);
                             Event e = new Event(name,"[E]");
-                            e.done();
-                            e.addDate(date);
+                            if(done) {
+                                e.done();
+                            }
+                            DateTimeManager.addDate(e,date);
                             store.add(e);
                         } catch(ErrorExceptions e){
                             System.out.println(e);
