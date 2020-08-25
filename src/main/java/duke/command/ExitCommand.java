@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -33,7 +34,7 @@ public class ExitCommand extends Command{
      * @param storage A database that stores the task list locally when the program is not running
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.write(tasks);
         ui.showGoodbye();
     }
