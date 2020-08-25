@@ -6,22 +6,48 @@ import java.security.InvalidParameterException;
 
 public class Parser {
 
+    /**
+     * Checks if a command line is a "list" command
+     * @param line string of a command
+     * @return list or not
+     */
     public static boolean isList(String line) {
         return line.equals("list");
     }
 
+    /**
+     * Checks if a command line is an "exit" command
+     * @param line string of a command
+     * @return exit or not
+     */
     public static boolean isExit(String line) {
         return line.toLowerCase().contains("bye");
     }
 
+    /**
+     * Checks if a command line is a "done" command
+     * @param line string of a command
+     * @return done or not
+     */
     public static boolean isDone(String line) {
         return line.length() >= 4 && line.substring(0, 4).equals("done");
     }
 
+    /**
+     * Checks if a command line is a "delete" command
+     * @param line string of a command
+     * @return delete or not
+     */
     public static boolean isDelete(String line) {
         return line.length() >= 6 && line.substring(0, 6).equals("delete");
     }
 
+    /**
+     * Extracts task type from a given "add" command line
+     * @param line string of a command
+     * @return task type
+     * @throws InvalidParameterException if line is invalid
+     */
     public static TaskType taskType(String line) throws InvalidParameterException {
         if (line.length() > 8
             && line.substring(0, 8).equals("deadline")
@@ -39,6 +65,13 @@ public class Parser {
         else throw new InvalidParameterException("Invalid input");
     }
 
+    /**
+     * Extracts task name from a given "add" command line
+     * @param line string of a command
+     * @return task name
+     * @throws InvalidParameterException if line is invalid
+     * @throws NullPointerException if task name is empty
+     */
     public static String getName(String line) throws NullPointerException, InvalidParameterException {
         String name;
         try {
@@ -59,6 +92,12 @@ public class Parser {
         else return name;
     }
 
+    /**
+     * Extracts task time from an "add" command line of type "deadline" or "event"
+     * @param line string of a command
+     * @return time of the task
+     * @throws ArrayIndexOutOfBoundsException if the time does not exist
+     */
     public static String getTime(String line) throws ArrayIndexOutOfBoundsException{
         try {
             if (taskType(line) == TaskType.DEADLINE) {

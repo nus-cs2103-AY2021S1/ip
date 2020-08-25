@@ -16,6 +16,14 @@ import java.util.Scanner;
 public class Storage {
     private final static String filePath = "list.txt";
 
+    /**
+     * Converts parameters of a task into a string representation used in storage
+     * @param type task type
+     * @param done whether the task is done (0 for undone, 1 for done)
+     * @param name task name
+     * @param time task time (empty string if not applicable)
+     * @return a string representation
+     */
     private static String convertToText(TaskType type, int done, String name, String time) {
         String t = type == TaskType.DEADLINE ? "D"
                 : type == TaskType.EVENT ? "E" : "T";
@@ -23,6 +31,12 @@ public class Storage {
                 + (time.isEmpty() ? "" : "," + time) + "\n";
     }
 
+    /**
+     * Converts from a string representation to a task
+     * @param text string representation
+     * @return represented task
+     * @throws Exception if text is invalid
+     */
     private static Task convertFromText(String text) throws Exception {
         try {
             String[] ans = text.split(",");
@@ -53,10 +67,22 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a storage file
+     * @throws IOException if error occurs in file accessing
+     */
     public static void createListFile() throws IOException {
         Files.createFile(Paths.get(filePath));
     }
 
+    /**
+     * Adds parameters of a task to the storage file
+     * @param type task type
+     * @param done whether the task is done (0 for undone, 1 for done)
+     * @param name task name
+     * @param time task time (empty string if not applicable)
+     * @throws IOException if error occurs in file accessing
+     */
     public static void addToList(TaskType type, int done, String name, String time) throws IOException {
         try {
             File file = new File(filePath);
@@ -72,6 +98,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reloads the stored task list
+     * @return stored list of task
+     * @throws IOException if error occurs in file accessing
+     */
     public static List<Task> readList() throws IOException {
         try {
             File file = new File(filePath);
@@ -94,6 +125,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the task of a given index to "done" in the storage file
+     * @param index index of task to be updated
+     * @throws IOException if error occurs in file accessing
+     */
     public static void setDone(int index) throws IOException {
         try{
             File file = new File(filePath);
@@ -116,6 +152,12 @@ public class Storage {
             throw new IOException("File access failed");
         }
     }
+
+    /**
+     * Deletes the task of a given index in the storage file
+     * @param index index of task to be updated
+     * @throws IOException if error occurs in file accessing
+     */
     public static void delete(int index) throws IOException {
         try{
             File file = new File(filePath);

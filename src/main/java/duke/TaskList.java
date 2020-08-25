@@ -14,6 +14,12 @@ import java.util.List;
 public class TaskList {
     private static List<Task> taskList = new ArrayList<>();
 
+    /**
+     * Creates a task and adds it to the task list: todo
+     * @param type task type
+     * @param taskName task name
+     * @throws IOException if error occurs in file accessing
+     */
     public static void add(TaskType type, String taskName) throws IOException {
         try {
             Todo todo = new Todo(taskName);
@@ -27,6 +33,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a task and adds it to the task list: deadline or event
+     * @param type task type
+     * @param taskName task name
+     * @param time time of the task
+     * @throws IOException if error occurs in file accessing
+     */
     public static void add(TaskType type, String taskName, String time) throws IOException {
         try {
             if (type == TaskType.DEADLINE) {
@@ -52,6 +65,12 @@ public class TaskList {
         return taskList;
     }
 
+    /**
+     * Updates the task of a given index to "done"
+     * @param index index of task to be updated
+     * @throws InvalidParameterException if index is out of bound for task list
+     * @throws IOException if error occurs in file accessing
+     */
     public static void setDone(int index) throws InvalidParameterException, IOException {
         if (index > taskList.size() || index <= 0) {
             throw new InvalidParameterException("Out of bound");
@@ -62,6 +81,12 @@ public class TaskList {
         Ui.userMessage(taskList.get(index - 1).toString());
     }
 
+    /**
+     * Deletes the task of a given index
+     * @param index index of task to be updated
+     * @throws InvalidParameterException if index is out of bound for task list
+     * @throws IOException if error occurs in file accessing
+     */
     public static void delete(int index) throws InvalidParameterException, IOException {
         if (index > taskList.size() || index <= 0) {
             throw new InvalidParameterException("Out of bound");
@@ -73,6 +98,10 @@ public class TaskList {
         Ui.userMessage("Now you have " + taskList.size() + " tasks in the list.");
     }
 
+    /**
+     * Prints out the task list
+     * @throws IOException if error occurs in file accessing
+     */
     public static void printList() throws IOException {
         try {
             int n = taskList.size();

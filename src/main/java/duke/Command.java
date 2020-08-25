@@ -12,10 +12,17 @@ public class Command {
         this.line = command;
     }
 
+    /**
+     * Checks if the command is an "exit" command
+     * @return exit or not
+     */
     public boolean isExit() {
         return Parser.isExit(line);
     }
 
+    /**
+     * Executes the command
+     */
     public void execute() {
         if (Parser.isList(line)) {
             try {

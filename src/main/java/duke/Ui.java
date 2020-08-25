@@ -8,11 +8,17 @@ public class Ui {
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|";
 
+    /**
+     * Shows the welcome message
+     */
     public static void greet() {
         System.out.println(logo);
         System.out.println("Hello! This is Duke.\nWhat can I do for you?");
     }
 
+    /**
+     * Shows the exit message
+     */
     public static void exit() {
         System.out.println("Bye. Duke is always there for you!");
         System.out.println(logo);
@@ -26,6 +32,10 @@ public class Ui {
         System.out.println("Oops! Something went wrong :(");
     }
 
+    /**
+     * Shows a given message to the user
+     * @param msg message to show
+     */
     public static void userMessage(String msg) {
         System.out.println(msg);
     }

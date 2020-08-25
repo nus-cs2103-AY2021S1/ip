@@ -3,7 +3,10 @@ package duke;
 import java.util.Scanner;
 
 public class Duke {
-
+    /**
+     * Runs the Duke chat bot.
+     * Responses constantly until exit until command is received.
+     */
     private static void response() {
         Ui.greet();
         Scanner scanner = new Scanner(System.in);

@@ -9,10 +9,17 @@ public abstract class Task {
         this.done = false;
     }
 
+    /**
+     * Gets name of the task
+     * @return task name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Sets the task to be done
+     */
     public void setDone() {
         this.done = true;
     }
