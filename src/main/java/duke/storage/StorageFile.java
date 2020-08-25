@@ -1,5 +1,6 @@
 package src.main.java.duke.storage;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -53,8 +54,19 @@ public class StorageFile {
      */
     public void save(Duke duke) throws StorageOperationException {
         try {
-            List<String> encodedDuke = DukeEncoder.encodeDuke(duke);
-            Files.write(path, encodedDuke);
+            File tempFile = new File(String.valueOf(path));
+            boolean exists = tempFile.exists();
+            if (exists) {
+                List<String> encodedDuke = DukeEncoder.encodeDuke(duke);
+                Files.write(path, encodedDuke);
+            } else {
+                File directory = new File(System.getProperty("user.dir") + "/data");
+                directory.mkdirs();
+                File file = new File(String.valueOf(path));
+                boolean truth = file.createNewFile();
+                List<String> encodedDuke = DukeEncoder.encodeDuke(duke);
+                Files.write(path, encodedDuke);
+            }
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path);
         }
