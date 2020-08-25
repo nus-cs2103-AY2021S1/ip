@@ -5,49 +5,48 @@ public class Command {
     private String dateTime;
     private boolean isInProgram = true;
 
-    public Command(CommandType commandType){
+    public Command(CommandType commandType) {
         this.commandType = commandType;
     }
 
-    public Command(CommandType commandType, int taskNumber){
+    public Command(CommandType commandType, int taskNumber) {
         this.commandType = commandType;
         this.taskNumber = taskNumber;
     }
 
-    public Command(CommandType commandType, String description){
+    public Command(CommandType commandType, String description) {
         this.commandType = commandType;
         this.description = description;
     }
 
-    public Command(CommandType commandType, String description, String dateTime){
+    public Command(CommandType commandType, String description, String dateTime) {
         this.commandType = commandType;
         this.description = description;
         this.dateTime = dateTime;
     }
 
-    private static final String line = "____________________________________________________________";
-    public static final String exit_message = line +
-            "\n Waddling off now. See you soon! \n" + line;
-
-    public void execute(TaskList taskList) throws DukeException {
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         if (commandType == CommandType.BYE) {
-            System.out.println(exit_message);
+            ui.close();
             isInProgram = false;
         } else if (commandType == CommandType.LIST) {
-            taskList.listStoredTasks();
+            ui.listStoredTasks(taskList.getStoredTasks());
         } else if (commandType == CommandType.DONE) {
-            taskList.markTaskAsDone(taskNumber);
+            ui.printDoneMessage(taskList.markTaskAsDone(taskNumber));
         } else if (commandType == CommandType.DELETE) {
-            taskList.deleteTask(taskNumber);
+            ui.printDeleteMessage(taskList.deleteTask(taskNumber), taskList.getCount());
         } else if (commandType == CommandType.TODO) {
             ToDo newTask = new ToDo(description);
             taskList.addTask(newTask);
+            ui.printAddMessage(newTask, taskList.getCount());
         } else if (commandType == CommandType.DEADLINE) {
             Deadline newTask = new Deadline(description, dateTime);
             taskList.addTask(newTask);
+            ui.printAddMessage(newTask, taskList.getCount());
         } else if (commandType == CommandType.EVENT) {
             Event newTask = new Event(description, dateTime);
             taskList.addTask(newTask);
+            ui.printAddMessage(newTask, taskList.getCount());
         } else {
             throw new DukeException("Wrong command type");
         }

@@ -1,6 +1,3 @@
-import java.util.Arrays;
-import java.util.Scanner;
-
 /**
  * Duke, more commonly known as Duck, is a Personal Assistant Chat Bot that
  * helps a person to keep track of various tasks.
@@ -10,40 +7,32 @@ public class Duke {
 
     private Storage storage;
     private TaskList taskList;
-    private final String line = "____________________________________________________________";
+    private Ui ui;
 
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
+        this.ui = new Ui();
         try {
             this.taskList = new TaskList(storage.load(), storage);
         } catch (DukeException e) {
-            System.out.println(line);
-            System.out.println(e.getMessage());
-            System.out.println(line);
+            ui.printError(e.getMessage());
         }
     }
 
     public void run() {
         boolean isInProgram = true;
-        String greeting_message = line +
-                "\n Quack! I am Duck" +
-                "\n How can I help you today?\n" + line;
-        Scanner sc = new Scanner(System.in);
 
-        System.out.println(greeting_message);
+        ui.greet();
         while (isInProgram) {
             try {
-                String input = sc.nextLine();
+                String input = ui.nextInput();
                 Command command = Parser.parse(input);
-                command.execute(taskList);
+                command.execute(taskList, ui);
                 isInProgram = command.isInProgram();
             } catch (DukeException e) {
-                System.out.println(line);
-                System.out.println(e.getMessage());
-                System.out.println(line);
+                ui.printError(e.getMessage());
             }
         }
-        sc.close();
     }
 
     /**
