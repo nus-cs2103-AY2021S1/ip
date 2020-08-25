@@ -14,7 +14,7 @@ public class Duke {
 
     }
 
-    private static void runDuke() {
+   public static void runDuke() {
 
         UI.introduction();
         Parser.parseCode(Storage.load(Storage.FILE_PATH), new UI(), false);

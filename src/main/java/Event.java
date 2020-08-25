@@ -21,7 +21,7 @@ public class Event extends Task {
             LocalDateTime dateTime = DateConverter.parseString(dateTimeString);
             return new Event(description, dateTime);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Wow that sure is one long event...");
+            throw new DukeException("Out of Bounds Exceptions");
         }
     }
 
