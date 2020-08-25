@@ -39,7 +39,7 @@ public class DukeFile {
      *
      * @author Lee Penn Han.
      * @return Nothing.
-     * @throws IOException.
+     * @throws IOException
      */
     public void saveToFile() throws IOException {
         FileWriter fileWriter = new FileWriter(fileName);
