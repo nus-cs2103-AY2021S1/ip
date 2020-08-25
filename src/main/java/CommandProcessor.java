@@ -1,22 +1,18 @@
-import Exception.DukeException;
-import Exception.EmptyActionException;
-import Exception.InvalidActionException;
-import Exception.InvalidCommandException;
-import Task.DeadlineTask;
-import Task.EventTask;
-import Task.Task;
-import Task.ToDoTask;
+import exception.DukeException;
+import exception.EmptyActionException;
+import exception.InvalidActionException;
+import exception.InvalidCommandException;
+import task.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class CommandProcessor {
-    private List<Task> list;
+    private TaskList taskList;
     private final HashMap<String, Consumer<String>> map = setUpCommandMap();
 
-    CommandProcessor(List<Task> list) {
-        this.list = list;
+    CommandProcessor(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     private HashMap<String, Consumer<String>> setUpCommandMap() {
@@ -45,12 +41,7 @@ public class CommandProcessor {
     }
 
     private void listCommand() {
-        System.out.print("    ____________________________________________________________\n");
-        System.out.print("     Here are the tasks in your list:\n");
-        for (int i = 1; i <= this.list.size(); i++) {
-            System.out.println("     " + i + "." + this.list.get(i - 1));
-        }
-        System.out.println("    ____________________________________________________________\n");
+        this.taskList.showList();
     }
 
     private void doneCommand(String command) {
@@ -63,14 +54,14 @@ public class CommandProcessor {
                     String num = command.substring(5);
                     int index = Integer.parseInt(num);
 
-                    if (index == 0 || index > this.list.size()) {
+                    if (index == 0 || index > this.taskList.size()) {
                         throw new InvalidActionException(); // "done 0"
                     }
-                    this.list.get(index - 1).markAsDone();
+                    this.taskList.getTask(index - 1).markAsDone();
                     System.out.println("    ____________________________________________________________\n"
                             + "     Nice! I've marked this task as done:\n"
                             + "     "
-                            + this.list.get(index - 1)
+                            + this.taskList.getTask(index - 1)
                             + "\n"
                             + "    ____________________________________________________________\n"
                     );
@@ -99,18 +90,7 @@ public class CommandProcessor {
                 throw new EmptyActionException(); // "todo     "
             } else {
                 Task task = new ToDoTask(command.substring(spaceIndex + 1));
-                this.list.add(task);
-
-                System.out.println("    ____________________________________________________________\n"
-                        + "     Got it. I've added this task:\n"
-                        + "     "
-                        + task
-                        + "\n"
-                        + "     Now you have "
-                        + this.list.size()
-                        + " task(s) in the list.\n"
-                        + "    ____________________________________________________________\n"
-                );
+                this.taskList.addToTaskList(task);
             }
         } catch (DukeException e) {
             System.out.println(e);
@@ -131,18 +111,7 @@ public class CommandProcessor {
                 String time = command.substring(slashIndex + 4);
 
                 Task task = new DeadlineTask(description, time);
-                this.list.add(task);
-
-                System.out.println("    ____________________________________________________________\n"
-                        + "     Got it. I've added this task:\n"
-                        + "     "
-                        + task
-                        + "\n"
-                        + "     Now you have "
-                        + this.list.size()
-                        + " task(s) in the list.\n"
-                        + "    ____________________________________________________________\n"
-                );
+                this.taskList.addToTaskList(task);
             }
 
         } catch (DukeException e) {
@@ -164,18 +133,7 @@ public class CommandProcessor {
                 String time = command.substring(slashIndex + 4);
 
                 Task task = new EventTask(description, time);
-                this.list.add(task);
-
-                System.out.println("    ____________________________________________________________\n"
-                        + "     Got it. I've added this task:\n"
-                        + "     "
-                        + task
-                        + "\n"
-                        + "     Now you have "
-                        + this.list.size()
-                        + " task(s) in the list.\n"
-                        + "    ____________________________________________________________\n"
-                );
+                this.taskList.addToTaskList(task);
             }
 
         } catch (DukeException e) {
@@ -193,21 +151,10 @@ public class CommandProcessor {
                     String num = command.substring(7);
                     int index = Integer.parseInt(num);
 
-                    if (index == 0 || index > this.list.size()) {
+                    if (index == 0 || index > this.taskList.size()) {
                         throw new InvalidActionException(); // "delete 0"
                     }
-                    Task task = this.list.get(index - 1);
-                    this.list.remove(index - 1);
-                    System.out.println("    ____________________________________________________________\n"
-                            + "     Noted. I've removed this task:\n"
-                            + "     "
-                            + task
-                            + "\n"
-                            + "     Now you have "
-                            + this.list.size()
-                            + " task(s) in the list.\n"
-                            + "    ____________________________________________________________\n"
-                    );
+                    this.taskList.deleteFromTaskList(index - 1);
                 } catch (NumberFormatException e) {
                     throw new InvalidActionException(); // "delete 1A" etc
                 }
