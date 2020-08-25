@@ -1,20 +1,22 @@
 public class Operation {
     public static Memory<Task> memory;
 
-    public Operation(Memory<Task> memory) {
-        this.memory = memory;
+    public Operation() {
+        memory = new Memory<>();
+        new ReadFile(Directory.FILEDIRECTORY.toString()).readFile();
     }
 
 
     public void run(String order) {
 
         if (order.equals(Status.LIST.name().toLowerCase())) {
+            new Operation();
             System.out.println(
                     new Formating<>(Status.LIST.toString() + memory)
             );
         } else {
             if (order.length() >= 6
-                        && order.substring(0, 4).equals(Status.DONE.name().toLowerCase())) {
+                    && order.substring(0, 4).equals(Status.DONE.name().toLowerCase())) {
                 done(order);
             } else if (order.length() >= 8
                     && order.substring(0, 6).equals(Status.DELETE.name().toLowerCase())){
@@ -37,6 +39,9 @@ public class Operation {
             } else {
                 Task task = memory.getMemory().get(num - 1);
                 task.setDone();
+                EditiFile editiFile = new EditiFile(Directory.FILEDIRECTORY.toString());
+                editiFile.setTaskDone(num);
+
                 System.out.println(
                         new Formating<>(new Echo(Status.DONE.toString() + task)));
             }
@@ -56,12 +61,14 @@ public class Operation {
 
                 Task task = memory.getMemory().get(num - 1);
                 memory.getMemory().remove(num - 1);
+                EditiFile editiFile = new EditiFile(Directory.FILEDIRECTORY.toString());
+                editiFile.deleteLine(num);
 
                 String response =
-                    Status.DELETE.toString() +
-                    task + "\n" +
-                    String.format
-                        (Status.REPORT.toString(), memory.getMemory().size());
+                        Status.DELETE.toString() +
+                                task + "\n" +
+                                String.format
+                                        (Status.REPORT.toString(), memory.getMemory().size());
 
                 System.out.println(
                         new Formating<>(new Echo(response)));
@@ -84,8 +91,8 @@ public class Operation {
 
         //to check if the input is not a todo or event or deadline
         if (!idetity.equals(Status.TODO.toString())
-            & !idetity.equals(Status.EVENT.toString())
-            & !idetity.equals(Status.DEADLINE.toString())) {
+                & !idetity.equals(Status.EVENT.toString())
+                & !idetity.equals(Status.DEADLINE.toString())) {
             DukeException.inputFormatException();
             return;
         }
@@ -122,8 +129,8 @@ public class Operation {
             if (separator < len - 1) {
                 time = description.substring(separator + 1);
             } else {
-                time = description.substring(separator);
                 DukeException.timeMissingException();
+                return;
 
             }
 
@@ -134,6 +141,8 @@ public class Operation {
             }
         }
         memory.addMemory(task);
+        WriteIn data = new WriteIn(Directory.FILEDIRECTORY.toString(), true);
+        data.writeToFile(task.toString());
         Formating<Task> formatedEcho =
                 new Formating<>(task);
         System.out.println(formatedEcho);

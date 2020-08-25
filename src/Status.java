@@ -77,8 +77,12 @@ public enum Status {
     },
 
 
-
-
+    FINISHED {
+        @Override
+        public String toString() {
+            return "\u2713";
+        }
+    }
 
 
 }
