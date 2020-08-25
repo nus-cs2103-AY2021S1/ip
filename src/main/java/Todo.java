@@ -3,8 +3,18 @@ public class Todo extends Task {
         super(s);
     }
 
-    private Todo(String name, boolean completed) {
+    Todo(String name, boolean completed) {
         super(name, completed);
+    }
+
+    @Override
+    String getType() {
+        return "todo";
+    }
+
+    @Override
+    String getTime() {
+        return "0";
     }
 
     @Override

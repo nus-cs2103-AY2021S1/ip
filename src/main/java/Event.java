@@ -9,9 +9,24 @@ public class Event extends Task {
         this.time = LocalDate.parse(time);
     }
 
-    private Event(String name, boolean completed, LocalDate time) {
+    Event(String name, boolean completed, String time) {
+        super(name, completed);
+        this.time = LocalDate.parse(time);
+    }
+
+    Event(String name, boolean completed, LocalDate time) {
         super(name, completed);
         this.time = time;
+    }
+
+    @Override
+    String getType() {
+        return "event";
+    }
+
+    @Override
+    String getTime() {
+        return time.toString();
     }
 
     @Override
@@ -21,6 +36,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[event]" + super.toString() + "(at: " + this.time.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
+        return "[event]" + super.toString() + " (at: " + this.time.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
     }
 }

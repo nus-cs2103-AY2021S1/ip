@@ -1,13 +1,20 @@
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
+
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
 public class Duke {
     static Scanner sc = new Scanner(System.in);
-    static ArrayList<Task> arr = new ArrayList<>();
+    static int total;
     static String s;
+    static FileEditor f = new FileEditor();
 
-     static void greet() {
+    static String HOME = System.getProperty("user.home");
+    static java.nio.file.Path path = java.nio.file.Paths.get(HOME, "ip", "data.txt");
+
+    static void greet() throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -17,6 +24,10 @@ public class Duke {
         System.out.println(logo);
         System.out.println("welcome to my crib");
         System.out.println("______________________");
+
+        Scanner myReader = new Scanner(path);
+        total = myReader.nextInt();
+
         s = sc.nextLine();
     }
 
@@ -25,45 +36,88 @@ public class Duke {
         System.out.println("______________________");
     }
 
-    static void ls() {
-        for (int i = 0; i < arr.size(); i ++) {
-            System.out.println(Integer.toString(i + 1) + ". " + arr.get(i).toString());
-        }
-        System.out.println("______________________");
+    static void ls() throws IOException {
+        f.readFile();
         s = sc.nextLine();
     }
 
-    static void del() {
+    static void del() throws IOException {
+        Scanner myReader = new Scanner(path);
         System.out.println("removed!! ^^");
-        Task t = arr.remove(Integer.parseInt(s.substring(7)) - 1);
+        int taskNumber = Integer.parseInt(s.substring(7));
+        String taskData = "";
+        for (int i = 0; i <= taskNumber; i++) {
+            taskData = myReader.nextLine();
+        }
+        Task t = f.convertText(taskData);
         System.out.println(t);
-        System.out.println("total task: " + Integer.toString(arr.size()) + "\n:o");
+
+        f.deleteText(f.parseTask(t));
+        total--;
+        f.updateTotal(total);
+
+        System.out.println("total task: " + total + "\n:o");
         System.out.println("______________________");
         s = sc.nextLine();
     }
 
-    static void finish() {
+    static void finish() throws IOException {
+        Scanner myReader = new Scanner(path);
+
         System.out.println("gfy youve managed to finish the following...");
-        Task t = arr.get(Integer.parseInt(s.substring(5)) - 1);
+        int taskNumber = Integer.parseInt(s.substring(5));
+        String taskData = "";
+        for (int i = 0; i <= taskNumber; i++) {
+            taskData = myReader.nextLine();
+        }
+        Task t = f.convertText(taskData);
         t = t.completeTask();
-        arr.set(Integer.parseInt(s.substring(5)) - 1, t);
+        replaceText(taskData, f.parseTask(t));
         System.out.println(t);
         System.out.println("______________________");
         s = sc.nextLine();
     }
 
-    static void handleTodo() throws IncompleteInputException {
+    static void replaceText(String prevTask, String newTask) throws IOException {
+        File fileToBeModified = path.toFile();
+        String oldText = "";
+        BufferedReader reader = null;
+        FileWriter writer = null;
+
+        reader = new BufferedReader(new FileReader(fileToBeModified));
+        String line = reader.readLine();
+
+        while (line != null) {
+            oldText = oldText + line + System.lineSeparator();
+            line = reader.readLine();
+        }
+
+        String newText = oldText.replaceAll(prevTask, newTask);
+
+        writer = new FileWriter(fileToBeModified);
+        writer.write(newText);
+
+        reader.close();
+        writer.close();
+    }
+
+    static void handleTodo() throws IncompleteInputException, IOException {
          try {
              String name = s.substring(5);
              if (name.isBlank()) {
                  throw new IncompleteInputException();
              } else {
                  Task t = new Todo(name);
-                 arr.add(t);
+
+                 f.writeData(t);
+                 total++;
+                 f.updateTotal(total);
+
                  System.out.println("added!");
                  System.out.println(t);
-                 System.out.println("total task: " + Integer.toString(arr.size()) + "\n:o");
+                 System.out.println("total task: " + total + "\n:o");
                  System.out.println("______________________");
+
                  s = sc.nextLine();
              }
          } catch (StringIndexOutOfBoundsException e) {
@@ -72,55 +126,59 @@ public class Duke {
          }
     }
 
-    static void handleDeadline() throws IncompleteInputException {
+    static void handleDeadline() throws IncompleteInputException, IOException {
          try {
-             String name = s.split("/")[0].substring(9);
+             String name = s.split("/")[0].substring(9).stripTrailing();
              String deadline = s.split("/")[1].substring(3);
              if (name.isBlank() || deadline.isBlank()) {
                  throw new IncompleteInputException();
              } else {
                  Task t = new Deadline(name, deadline);
-                 arr.add(t);
+
+                 f.writeData(t);
+                 total++;
+                 f.updateTotal(total);
+
                  System.out.println("added!");
                  System.out.println(t);
-                 System.out.println("total task: " + Integer.toString(arr.size()) + "\n:o");
+                 System.out.println("total task: " + total + "\n:o");
                  System.out.println("______________________");
+
                  s = sc.nextLine();
              }
-         } catch (StringIndexOutOfBoundsException e) {
-             // command is incomplete
-             throw new IncompleteInputException();
-         } catch (ArrayIndexOutOfBoundsException e) {
+         } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
              // command is incomplete
              throw new IncompleteInputException();
          }
     }
 
-    static void handleEvent() throws IncompleteInputException {
+    static void handleEvent() throws IncompleteInputException, IOException {
         try {
-            String name = s.split("/")[0].substring(6);
+            String name = s.split("/")[0].substring(6).stripTrailing();
             String time = s.split("/")[1].substring(3);
             if (name.isBlank() || time.isBlank()) {
                 throw new IncompleteInputException();
             } else {
                 Task t = new Event(name, time);
-                arr.add(t);
+
+                f.writeData(t);
+                total++;
+                f.updateTotal(total);
+
                 System.out.println("added!");
                 System.out.println(t);
-                System.out.println("total task: " + Integer.toString(arr.size()) + "\n:o");
+                System.out.println("total task: " + total + "\n:o");
                 System.out.println("______________________");
+
                 s = sc.nextLine();
             }
-        } catch (StringIndexOutOfBoundsException e) {
-            // command is incomplete
-            throw new IncompleteInputException();
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
             // command is incomplete
             throw new IncompleteInputException();
         }
     }
 
-    static void talk() throws UnknownInputException {
+    static void talk() {
         while (1 == 1) {
             try {
                 if (s.equals("bye")) {
@@ -141,7 +199,7 @@ public class Duke {
                 } else { // unknown input
                     throw new UnknownInputException();
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 System.out.println(e.getMessage());
                 System.out.println("______________________");
                 s = sc.nextLine();
@@ -149,7 +207,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
         greet();
 
         talk();
