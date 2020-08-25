@@ -30,7 +30,7 @@ public class Duke {
     private void start(String[] args) {
         try {
             this.ui = new Ui();
-            this.storage = new Storage();
+            this.storage = initializeStorage(args);
             this.taskList = storage.load();
             ui.showWelcomeMessage();
         } catch (Storage.StorageOperationException | FileNotFoundException | IllegalValueException e) {
@@ -70,6 +70,11 @@ public class Duke {
             ui.showToUser(e.getMessage());
             throw new RuntimeException(e);
         }
+    }
+
+    private Storage initializeStorage(String[] launchArgs) throws Storage.InvalidStorageFilePathException {
+        boolean isStorageFileSpecifiedByUser = launchArgs.length > 0;
+        return isStorageFileSpecifiedByUser ? new Storage(launchArgs[0]) : new Storage();
     }
 
 }

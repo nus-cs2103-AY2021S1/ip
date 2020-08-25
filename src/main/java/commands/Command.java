@@ -21,7 +21,7 @@ public abstract class Command {
     }
 
     public static String getMessageForTaskListSummary(TaskList taskList) {
-        return String.format(Messages.MESSAGE_TASK_LISTED_OVERVIEW, taskList.size());
+        return String.format(Messages.MESSAGE_TASK_LISTED_OVERVIEW_FORMAT, taskList.size());
     }
 
     protected Task getTargetTask() throws IndexOutOfBoundsException {

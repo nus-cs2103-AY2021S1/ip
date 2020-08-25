@@ -1,7 +1,6 @@
-T/0/read book
-D/0/return book/Tue, 25 Aug 2020 10:00 AM
-E/1/project meeting/Sun, 18 Oct 2020 02:30 PM
-T/1/join sports club
-T/0/walk dog
-D/1/submit assignment/Mon, 07 Sep 2020 11:59 PM
-T/1/study for mock test
+T/O/read book
+D/O/return book/Tue, 25 Aug 2020 10:00 AM
+E/X/project meeting/Sun, 18 Oct 2020 02:30 PM
+T/X/join sports club
+T/O/walk dog
+D/X/submit assignment/Mon, 07 Sep 2020 11:59 PM

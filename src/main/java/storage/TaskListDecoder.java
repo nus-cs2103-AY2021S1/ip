@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 public class TaskListDecoder {
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy hh:mm a");
-    private static final Pattern TASK_DATA_ARGS_FORMAT = Pattern.compile("(?<taskType>[TDE]+)/(?<isDone>\\d0?)/(?<arguments>.*)");
+    private static final Pattern TASK_DATA_ARGS_FORMAT = Pattern.compile("(?<taskType>[TDE]+)/(?<isDone>[XO])/(?<arguments>.*)");
     private static final Pattern TODO_DATA_ARGS_FORMAT = Pattern.compile("(?<description>.*)");
     private static final Pattern DEADLINE_DATA_ARGS_FORMAT = Pattern.compile("(?<description>[^/]+)/(?<deadline>.*)");
     private static final Pattern EVENT_DATA_ARGS_FORMAT = Pattern.compile("(?<description>[^/]+)/(?<dateTime>.*)");
@@ -59,7 +59,7 @@ public class TaskListDecoder {
     }
 
     private static boolean isDonePrefix(String matchedPrefix) {
-        return "0".equals(matchedPrefix);
+        return "O".equals(matchedPrefix);
     }
 
     private static Todo addTodo(boolean isDone, String arguments) throws Storage.StorageOperationException {

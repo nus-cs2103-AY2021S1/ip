@@ -29,6 +29,6 @@ public class Deadline extends Task {
 
     @Override
     public String fileFormat() {
-        return String.format("%1$s/%2$s/%3$s/%4$s", "D", super.isDone ? "0" : "1", super.description, this.deadlineStr);
+        return String.format("%1$s/%2$s/%3$s/%4$s", "D", super.getStatusIcon(), super.description, this.deadlineStr);
     }
 }

@@ -7,7 +7,7 @@ public class AddTodoCommand extends AddCommand {
 
     public static final String COMMAND_WORD = "todo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a todo to the data.task list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a todo to the task list.\n"
             + "\tParameters: DESCRIPTION\n"
             + "\tExample: " + COMMAND_WORD + " read book";
 

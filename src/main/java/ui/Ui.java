@@ -46,7 +46,7 @@ public class Ui {
             fullInputLine = in.nextLine();
         }
 
-        showToUser("[commands.Command entered: " + fullInputLine + "]\n");
+        showToUser("[Command entered: " + fullInputLine + "]\n");
         return fullInputLine;
     }
 
@@ -71,9 +71,9 @@ public class Ui {
         showToUser(Messages.MESSAGE_GOODBYE, DIVIDER);
     }
 
-    public void showTaskListView(List<? extends Task> tasklist) {
+    public void showTaskListView(List<? extends Task> taskList) {
         final List<String> formattedTasks = new ArrayList<>();
-        for (Task task : tasklist) {
+        for (Task task : taskList) {
             formattedTasks.add(task.toString());
         }
         showToUsersAsIndexedList(formattedTasks);
@@ -81,9 +81,7 @@ public class Ui {
 
     public void showResultToUser(CommandResult result) {
         final Optional<List<? extends Task>> tasks = result.getRelevantTasks();
-        if (tasks.isPresent()) {
-            showTaskListView(tasks.get());
-        }
+        tasks.ifPresent(this::showTaskListView);
         showToUser(result.feedbackToUser, DIVIDER);
     }
 
@@ -93,7 +91,7 @@ public class Ui {
 
     private static String getIndexedListForViewing(List<String> listItems) {
         final StringBuilder formatted = new StringBuilder();
-        int displayIndex = 0 + DISPLAYED_INDEX_OFFSET;
+        int displayIndex = DISPLAYED_INDEX_OFFSET;
         for (String listItem : listItems) {
             formatted.append(getIndexedListItem(displayIndex, listItem)).append("\n");
             displayIndex++;

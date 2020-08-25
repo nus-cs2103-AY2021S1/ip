@@ -23,7 +23,7 @@ public class Event extends Task {
 
     @Override
     public String fileFormat() {
-        return String.format("%1$s/%2$s/%3$s/%4$s", "E", super.isDone ? "0" : "1", super.description, this.dateTimeStr);
+        return String.format("%1$s/%2$s/%3$s/%4$s", "E", super.getStatusIcon(), super.description, this.dateTimeStr);
     }
 
     @Override

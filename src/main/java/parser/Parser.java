@@ -14,6 +14,7 @@ import utils.Messages;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,14 +22,8 @@ public class Parser {
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     public static final Pattern ADD_TODO_FORMAT = Pattern.compile("(?<description>.*)");
-    public static final Pattern ADD_DEADLINE_FORMAT =
-            Pattern.compile("(?<description>[^/]+)" +
-                    "/by(?<deadline>(?<day>[1-31])/(?<month>[1-12])/(?<year>[1-9999]{4}) " +
-                    "(?<hour>[0-23]{2})(?<minutes>[0-59]{2}))");
-    public static final Pattern ADD_EVENT_FORMAT =
-            Pattern.compile("(?<description>[^/]+)" +
-                    "/at(?<dateTime>(?<day>[1-31])/(?<month>[1-12])/(?<year>[1-9999]{4}) " +
-                    "(?<hour>[0-23]{2})(?<minutes>[0-59]{2}))");
+    public static final Pattern ADD_DEADLINE_FORMAT = Pattern.compile("(?<description>[^/]+)/by(?<deadline>.*)");
+    public static final Pattern ADD_EVENT_FORMAT = Pattern.compile("(?<description>[^/]+)/at(?<dateTime>.*)");
 
     public static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>[0-9]+)");
 
@@ -83,6 +78,9 @@ public class Parser {
             return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddTodoCommand.MESSAGE_USAGE));
         }
+        if (matcher.group("description").isBlank()) {
+            return new IncorrectCommand(Messages.MESSAGE_INVALID_BLANK_STRING);
+        }
         return new AddTodoCommand(matcher.group("description"));
     }
 
@@ -92,8 +90,12 @@ public class Parser {
             return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddDeadlineCommand.MESSAGE_USAGE));
         }
-        return new AddDeadlineCommand(matcher.group("description"),
-                getLocalDateTime(matcher.group("deadline").trim()));
+        try {
+            LocalDateTime deadline = getLocalDateTime(matcher.group("deadline").trim());
+            return new AddDeadlineCommand(matcher.group("description"), deadline);
+        } catch (DateTimeParseException e) {
+            return new IncorrectCommand(Messages.MESSAGE_INVALID_DATE_TIME);
+        }
     }
 
     private Command prepareAddEvent(String args) {
@@ -102,11 +104,16 @@ public class Parser {
             return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     AddEventCommand.MESSAGE_USAGE));
         }
-        return new AddEventCommand(matcher.group("description"),
-                getLocalDateTime(matcher.group("dateTime").trim()));
+
+        try {
+            LocalDateTime dateTime = getLocalDateTime(matcher.group("dateTime").trim());
+            return new AddEventCommand(matcher.group("description"), dateTime);
+        } catch (DateTimeParseException e) {
+            return new IncorrectCommand(Messages.MESSAGE_INVALID_DATE_TIME);
+        }
     }
 
-    private LocalDateTime getLocalDateTime(String dateTimeStr) {
+    private LocalDateTime getLocalDateTime(String dateTimeStr) throws DateTimeParseException {
         String newDateTimeStr = dateTimeStr.replace('/','-');
         if (dateTimeStr.length() < 11) { // no timing specified
             newDateTimeStr += " 23:59";

@@ -14,7 +14,7 @@ public class Todo extends Task {
 
     @Override
     public String fileFormat() {
-        return String.format("%1$s/%2$s/%3$s", "T", super.isDone ? "0" : "1", super.description);
+        return String.format("%1$s/%2$s/%3$s", "T", super.getStatusIcon(), super.description);
     }
 
     @Override

@@ -9,7 +9,7 @@ public class AddEventCommand extends AddCommand {
 
     public static final String COMMAND_WORD = "event";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the data.task list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the task list.\n"
             + "\tParameters: DESCRIPTION /at DATE TIME\n"
             + "\tExample: " + COMMAND_WORD + " project meeting /at 05/09/2020 1430";
 

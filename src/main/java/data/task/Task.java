@@ -2,7 +2,7 @@ package data.task;
 
 import java.time.format.DateTimeFormatter;
 
-public class Task {
+public abstract class Task {
 
     protected String description;
     protected boolean isDone;
@@ -26,9 +26,7 @@ public class Task {
         this.isDone = true;
     }
 
-    public String fileFormat() {
-        return String.format("%1$s/%2$s/%3$s", "T", this.isDone ? "0" : "1", this.description);
-    }
+    public abstract String fileFormat();
 
     @Override
     public String toString() {
