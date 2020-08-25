@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     static int whichTask = -1;
     static String searchText = "";
-    
+
     /**
      * All valid command types.
      */
