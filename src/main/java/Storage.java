@@ -8,10 +8,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Save {
+public class Storage {
     private final Path path;
 
-     public Save(String filePath) throws IOException {
+     public Storage(String filePath) throws IOException {
 //         try {
 //             String dir = System.getProperty("user.dir");
 //             path = Path.of(dir, filePath);

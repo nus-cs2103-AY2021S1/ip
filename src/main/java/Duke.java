@@ -17,12 +17,12 @@ public class Duke {
 
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
-        Save save = null;
+        Storage storage = null;
 
         //loading
         try {
-            save = new Save("data/duke.txt");
-            tasks = save.read();
+            storage = new Storage("data/duke.txt");
+            tasks = storage.read();
         } catch (IOException ex){
             System.err.println(ex.getMessage());
         }
@@ -160,8 +160,8 @@ public class Duke {
                         throw new DukeException("You have keyed in an invalid command!\n(Valid commands: todo, deadline, event, list, delete, bye, done)");
                 }
 
-                assert save != null;
-                save.writeToFile(tasks);
+                assert storage != null;
+                storage.writeToFile(tasks);
 
             } catch (DukeException | IOException ex) {
                 System.out.println(line);
