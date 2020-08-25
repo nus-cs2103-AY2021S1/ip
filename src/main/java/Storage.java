@@ -9,7 +9,7 @@ public class Storage {
     Parser parser;
     Path storageFilePath;
 
-    public Storage(TaskList taskList, Parser parser) throws IOException {
+    public Storage(TaskList taskList, Parser parser) throws DukeException {
         this.taskList = taskList;
         this.parser = parser;
         storageFilePath = Paths.get(".", "data", "test.txt");
@@ -28,61 +28,63 @@ public class Storage {
         LoadFile();
     }
 
-    public void LoadFile() throws IOException {
+    public void LoadFile() throws DukeException {
+        try {
+            BufferedReader bf = new BufferedReader(new FileReader(storageFilePath.toString()));
+            String task = bf.readLine();
+            String[] inputs;
+            while (task != null) {
+                inputs = task.split(" \\| ", 4);
+                String taskType = inputs[0];
+                Task newTask;
+                try {
+                    switch (taskType) {
+                        case "T": {
+                            newTask = new Todo(inputs[2]);
+                            break;
+                        }
 
+                        case "D": {
+                            newTask = Deadline.create(inputs[2], inputs[3]);
+                            break;
+                        }
 
-        BufferedReader bf = new BufferedReader(new FileReader(storageFilePath.toString()));
-        String task = bf.readLine();
-        String[] inputs;
-        while(task != null){
-            inputs = task.split(" \\| ",4);
-            String taskType = inputs[0];
-            Task newTask;
-//            for(String s : inputs){
-//                System.out.print(s);
-//            }
-//            System.out.println(inputs.length);
-            try {
-                switch (taskType) {
-                    case "T": {
-                        newTask = new Todo(inputs[2]);
-                        break;
+                        case "E": {
+                            newTask = Event.create(inputs[2], inputs[3]);
+                            break;
+                        }
+
+                        default: {
+                            throw new DukeException("smlj??????");
+                        }
                     }
 
-                    case "D": {
-                        newTask = Deadline.create(inputs[2], inputs[3]);
-                        break;
+                    if (inputs[1].equals("1")) {
+                        newTask.complete();
                     }
-
-                    case "E": {
-                        newTask = Event.create(inputs[2], inputs[3]);
-                        break;
-                    }
-
-                    default: {
-                        throw new DukeException("smlj??????");
-                    }
+                    taskList.AddTask(newTask, false);
+                    task = bf.readLine();
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
                 }
 
-                if(inputs[1].equals("1")){
-                    newTask.complete();
-                }
-                taskList.AddTask(newTask,false);
-                task = bf.readLine();
-            }catch(DukeException e){
-                System.out.println(e.getMessage());
             }
-
+        }catch(IOException e){
+            throw new DukeException("unable to load file");
         }
 
     }
 
-    public void saveFile() throws IOException {
-        FileWriter fw = new FileWriter(storageFilePath.toString());
+    public void saveFile() throws DukeException{
+        try {
+            FileWriter fw = new FileWriter(storageFilePath.toString());
             for (int i = 0; i < taskList.taskList.size(); i++) {
                 fw.write(taskList.taskList.get(i).safeFileFormat());
             }
-        fw.close();
+            fw.close();
+        }catch(IOException e){
+            throw new DukeException("unable to save file");
+        }
     }
 
 }
