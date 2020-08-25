@@ -5,25 +5,37 @@ import duke.exception.*;
 
 import java.io.File;
 
+/**
+ * Represents the chat bot.
+ * It is the Main class.
+ */
 public class Duke {
     private TaskList list;
     private final Storage storage;
     private final Ui ui;
 
+    /**
+     * Class constructor.
+     * @param filePath The file path of the Storage text file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             list = new TaskList(storage.load());
-        } catch (DukeInvalidDataException | DukeInvalidStoragePathException dukeInvalidData) {
+        } catch (DukeInvalidDataException e) {
             ui.showLoadingError();
             list = new TaskList();
-        } catch (DukeInvalidDateTimeInputException | DukeInvalidData e) {
+        } catch (DukeInvalidDateTimeInputException e) {
             ui.showError(e);
             list = new TaskList();
         }
     }
 
+    /**
+     * Runs the chat bot, continuously interact with user.
+     * It also executes the command corresponding to user input.
+     */
     public void run() {
         ui.intro();
         boolean isExit = false;
@@ -40,6 +52,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Checks to see if directory is found.
+     * Creates the directory if directory is not found.
+     *
+     * @param filePath The file path of the directory.
+     */
     public static void checkAndMakeDir(String filePath) {
         File f = new File(filePath);
         if (f.mkdir()) {
@@ -47,16 +65,15 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method that runs the program.
+     *
+     * @param args The String array.
+     */
     public static void main(String[] args) {
         String homePath = System.getProperty("user.home");
         checkAndMakeDir(homePath + "/data");
         Duke duke = new Duke(homePath + "/data/duke.txt");
         duke.run();
     }
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
 }

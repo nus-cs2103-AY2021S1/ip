@@ -15,7 +15,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * An object that reads and understands user inputs.
+ * It then returns the required commands needed.
+ */
 public class Parser {
+    /**
+     * Reads and convert the date and time in String format to LocalDateTime.
+     * Date is stored in index 0 and Time is stored in index 1.
+     * (eg. "9/8/2020 2009" is converted to Local Date and Local Time.)
+     *
+     * @param dateTimeString String representing date and time.
+     * @return List of LocalDateTime where index 0 is Date and index 1 is Time.
+     * @throws DukeInvalidDateTimeInputException If Date or Time is invalid.
+     */
     protected static List<LocalDateTime> customDateTimeFormatter(String dateTimeString) throws DukeInvalidDateTimeInputException {
         //dateTimeString should be given in "dd/mm/yyyy hhmm"
         //will use manual parser to check for invalid date time inputs
@@ -53,6 +66,18 @@ public class Parser {
         }
         return results;
     }
+
+    /**
+     * Parses the user input into an AddCommand.
+     *
+     * @param command The user input.
+     * @return AddCommand with specific Task.
+     * @throws DukeEmptyDescriptionException If description of task is empty.
+     * @throws DukeEmptyByException If user did not input deadline date time.
+     * @throws DukeEmptyAtException If user did not input event date time.
+     * @throws DukeUnknownInputException If user input is unknown.
+     * @throws DukeInvalidDateTimeInputException If date and time inputted is erroneous.
+     */
     public static Command add(String command) throws DukeEmptyDescriptionException,
             DukeEmptyByException, DukeEmptyAtException, DukeUnknownInputException, DukeInvalidDateTimeInputException {
         Task toBeAdded;
@@ -107,6 +132,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user input into a DoneCommand.
+     *
+     * @param command The user input.
+     * @return DoneCommand with specific index.
+     * @throws DukeEmptyIndexException If user did not input index.
+     */
     public static Command markAsDone(String command) throws DukeEmptyIndexException {
         try {
             int index;
@@ -118,6 +150,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user input into a DeleteCommand.
+     *
+     * @param command The user input.
+     * @return DeleteCommand with specific index.
+     * @throws DukeEmptyIndexException If user did not input index.
+     */
     public static Command delete(String command) throws DukeEmptyIndexException {
         int index;
         try {
@@ -129,6 +168,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user input into a ListDateCommand.
+     *
+     * @param command The user input.
+     * @return ListDateCommand with specific date.
+     * @throws DukeInvalidDateTimeInputException If date and time inputted is erroneous.
+     */
     public static ListDateCommand listDate(String command) throws DukeInvalidDateTimeInputException {
         try {
             String dateString = command.substring(5);
@@ -142,6 +188,18 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user input and checking the type of command.
+     * Returns the correct command after calling for correct parser.
+     *
+     * @param command The user input.
+     * @return Command corresponding to user input.
+     * @throws DukeEmptyIndexException If user did not input index.
+     * @throws DukeEmptyDescriptionException If user did not input description.
+     * @throws DukeEmptyAtException If user did not input event date time.
+     * @throws DukeEmptyByException If user did not input deadline date time.
+     * @throws DukeInvalidDateTimeInputException If date and time inputted is erroneous.
+     */
     public static Command parse(String command) throws DukeEmptyIndexException,
             DukeEmptyDescriptionException, DukeEmptyAtException,
             DukeEmptyByException, DukeInvalidDateTimeInputException {
