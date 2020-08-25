@@ -26,4 +26,19 @@ public class TaskList {
     public ArrayList<Task> getList() {
         return this.list;
     }
+
+    public void find(String str) {
+        int counter = 1;
+        System.out.println("-------------------------");
+        for (Task task : this.list) {
+            if (task.getDescription().contains(str)) {
+                System.out.println(counter + ". [" + task.getType() + "][" + task.getStatusIcon() + "] " + task.getDescription());
+                counter++;
+            }
+        }
+        if (counter == 1) {
+            System.out.println("There are no tasks that match your search!");
+        }
+        System.out.println("-------------------------");
+    }
 }
