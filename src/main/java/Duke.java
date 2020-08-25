@@ -104,11 +104,12 @@ class Duke {
     /**
      * inputs string, processes and cleans the text for the chatbot
      * via adding a ending token seperator
+     * TODO Refactor this into a seperate command class
      * @param s
      * @return
      */
     private String cleanInput(String s){
-        return s+" [sep]";
+        return s.strip() +" [sep]";
     }
 
     public String help(){
@@ -119,8 +120,8 @@ class Duke {
         b.append("\t- 'list' to list the current list of tasks and their statuses\n");
         b.append("\t- 'done' to set a task as done\n");
         b.append("\t- 'todo' to list a untimed task\n");
-        b.append("\t- 'deadline' to list a timed deadline task, please structure with [deadline <task name> /by <time>]\n");
-        b.append("\t- 'event' to list a timed event task, please structure with [event <task name> /at <time>\n");
+        b.append("\t- 'deadline' to list a timed deadline task, please structure with [deadline <task name> /by dd-MM-yyyy]\n");
+        b.append("\t- 'event' to list a timed event task, please structure with [event <task name> /at dd-MM-yyyy\n");
         b.append("\t- 'help' to list these commands again\n");
         //eventually to add command help <command>
         return b.toString();
@@ -133,9 +134,7 @@ class Duke {
     public boolean running() {
         return this.running;
     }
-
     
-
     /**
      * Wraps all text output and prints to the console
      * @param s
