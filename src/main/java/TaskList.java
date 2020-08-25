@@ -34,4 +34,16 @@ public class TaskList {
         System.out.println(toBeDone);
     }
 
+    void findTasks(String keyword) {
+        System.out.println("Here are the tasks you're trying to find.");
+        int count = 1;
+        for (int i = 0; i < this.list.size(); i++) {
+            Task task = this.list.get(i);
+            String description = task.description;
+            if (description.matches(".*\\b" + keyword + "\\b.*")) {
+                System.out.println(count + ". " + task);
+                count++;
+            }
+        }
+    }
 }

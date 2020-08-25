@@ -2,7 +2,10 @@ public class Parser {
 
     protected Command commandHandler(String command) {
         try {
-            if (command.equals("bye")) {
+            if(command.split(" ")[0].equals("find")) {
+                String keyword = command.split(" ")[1];
+                return new Command("find", keyword);
+            } else if (command.equals("bye")) {
                 return new Command("bye");
             } else if (command.equals("list")) {
                 return new Command("list");
