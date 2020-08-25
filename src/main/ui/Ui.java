@@ -62,6 +62,22 @@ public class Ui {
     }
 
     /**
+     * Prints out the tasks found via the find command.
+     * @param tasks the tasks found via the find command.
+     */
+    public void printFoundList(TaskList tasks) {
+        if (tasks.size() == 0) {
+            System.out.println("     There are no tasks found!");
+        } else {
+            System.out.println("     Here are the matching tasks in your list:");
+        }
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.printf("     %d.%s\n", i + 1, tasks.get(i));
+        }
+        System.out.print(SEPARATOR);
+    }
+
+    /**
      * Prints when a task has been successfully added.
      * @param task the task added.
      * @param taskNum the number of tasks in the list.

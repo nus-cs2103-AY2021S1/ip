@@ -31,6 +31,14 @@ public class Task {
         this.doneState = doneState;
     }
 
+    /**
+     * Gets the name of the task.
+     * @return the name of the task.
+     */
+    public String getName() {
+        return name;
+    }
+
     private String doneTag() {
         return doneState ? "[\u2713]" : "[\u2718]";
     }
