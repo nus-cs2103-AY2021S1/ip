@@ -54,6 +54,12 @@ public class BotHandler {
         BotResponses.deleteTaskReply(t1);
     }
 
+    public static void deleteAllTasks() throws IOException {
+        lst.clear();
+        writeToFile();
+        BotResponses.deleteAllReply();
+    }
+
     public static void processData(Scanner sc) throws DuckieException {
         while(sc.hasNextLine()) {
             String task = sc.nextLine();
@@ -102,9 +108,7 @@ public class BotHandler {
         }
         fw.write(toWrite);
         fw.close();
-    }
-
-    //Check if a String only
+    }//Check if a String only
     private static boolean is_word(String s) {
         return (s.length() > 0 && s.split("\\s+").length == 1);
     }
@@ -121,8 +125,7 @@ public class BotHandler {
                     break;
                 } else if (input.equalsIgnoreCase("list")) {
                     displayList();
-                } else if (input.toLowerCase().indexOf("done") == 0
-                        || input.toLowerCase().indexOf("delete") == 0) {
+                } else if (input.toLowerCase().indexOf("done") == 0) {
                     if (lst.size() == 0) {
                         throw new DuckieNoListException();
                     } else if (is_word(input)) {
@@ -134,9 +137,23 @@ public class BotHandler {
                         throw new DuckieNoIndexException();
                     }
 
-                    if (input.toLowerCase().indexOf("done") == 0) {
-                        checkTask(ind);
+                    checkTask(ind);
+                } else if (input.toLowerCase().indexOf("delete") == 0) {
+                    if (lst.size() == 0) {
+                        throw new DuckieNoListException();
+                    } else if (is_word(input)) {
+                        throw new DuckieInsufficientInfoException();
+                    }
+
+                    String description = input.split(" ")[1].strip();
+
+                    if (description.toLowerCase().equals("all")) {
+                        deleteAllTasks();
                     } else {
+                        int ind = Integer.parseInt(description);
+                        if (lst.size() < ind) {
+                            throw new DuckieNoIndexException();
+                        }
                         deleteTask(ind);
                     }
                 } else if (input.toLowerCase().indexOf("todo") == 0) {

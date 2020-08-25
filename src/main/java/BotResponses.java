@@ -55,4 +55,9 @@ public class BotResponses {
         System.out.println(horizL + "\n" + INDENT + "Quack! I've remove this task: \n" +
                 INDENT + t1 + "\n" + horizL);
     }
+
+    public static void deleteAllReply() {
+        System.out.println(horizL + "\n" + INDENT + "Quack! All tasks are cleared in the list!\n"
+                + horizL);
+    }
 }
