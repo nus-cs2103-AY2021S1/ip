@@ -1,7 +1,9 @@
 package duke.resource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import duke.task.Task;
@@ -77,6 +79,19 @@ public class TaskList {
 
     public static TaskList parse(List<Task> tasks) {
         return new TaskList(tasks);
+    }
+
+    /**
+     * Returns a List of Tasks with descriptions that match the given keyword.
+     * @param keyword a String representing the keyword to search for
+     * @return a List of Tasks with descriptions that match the given keyword
+     */
+
+    public List<Task> search(String keyword) {
+        return tasks.stream()
+                .filter(t -> Arrays.asList(t.getDescription().split(" "))
+                        .contains(keyword))
+                .collect(Collectors.toList());
     }
 
     /**
