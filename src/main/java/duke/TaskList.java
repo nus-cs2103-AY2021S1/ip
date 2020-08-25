@@ -25,6 +25,18 @@ public class TaskList {
         return this.tasks;
     }
 
+    public List<Task> findTasks(String keyword) {
+        List<Task> searchResults = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (task.description.contains(keyword)) {
+                searchResults.add(task);
+            }
+        }
+        return searchResults;
+
+    }
+
     public void addTask(String task, String date, TaskType taskType) throws DukeException {
 
         Task t;

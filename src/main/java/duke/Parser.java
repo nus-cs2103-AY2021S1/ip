@@ -10,7 +10,6 @@ public class Parser {
         switch(commandArr[0]) {
             case "bye":
                 return new ExitCommand();
-
             case "todo":
             case "deadline":
             case "event":
@@ -24,7 +23,8 @@ public class Parser {
 
             case "list":
                 return new ListCommand();
-
+            case "find":
+                return new FindCommand(commandArr[1]);
             default:
                 throw new InvalidCommandException("Invalid Command: " + commandArr[0]);
         }
