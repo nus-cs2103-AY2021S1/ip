@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -18,11 +19,15 @@ public class TaskList {
                 taskToAdd = new Todo(todoDescription);
                 break;
             case "deadline":
-                taskToAdd = new Deadline(
-                        getItemDescription(item, type),
-                        getItemParameter(item, type)
-                );
-                break;
+                try {
+                    taskToAdd = new Deadline(
+                            getItemDescription(item, type),
+                            getItemParameter(item, type)
+                    );
+                    break;
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("Invalid date entered");
+                }
             case "event":
                 taskToAdd = new Event(
                         getItemDescription(item, type),

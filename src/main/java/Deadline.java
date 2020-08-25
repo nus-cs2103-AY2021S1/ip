@@ -1,13 +1,23 @@
-public class Deadline  extends Task {
-    private String date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    Deadline(String description, String date) {
+public class Deadline extends Task {
+    private LocalDate date;
+
+    Deadline(String description, String date) throws DateTimeParseException {
         super(description);
-        this.date = date;
+        parseDate(date);
+    }
+
+    void parseDate(String date) throws DateTimeParseException {
+        this.date = LocalDate.parse(date);
     }
 
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + date + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E dd MMM yyyy");
+        String formattedDate = this.date.format(formatter);
+        return "[D] " + super.toString() + " (by: " + formattedDate + ")";
     }
 }
