@@ -6,11 +6,22 @@ public class Command {
     CommandType commandType;
     String[] commandArr;
 
+    /**
+     * Command constructor specifying CommandType and command array.
+     *
+     * @param commandType
+     * @param commandArr String array which has remove spaces from string
+     */
     public Command(CommandType commandType, String[] commandArr) {
         this.commandType = commandType;
         this.commandArr = commandArr;
     }
 
+    /**
+     * Print all the tasks in the TaskList.
+     *
+     * @param tasks
+     */
     public void printAllTask(TaskList tasks) {
         int numTask = 0;
         System.out.println("Here are the tasks in your list:");
@@ -20,13 +31,25 @@ public class Command {
         }
     }
 
+    /**
+     * Delete a task using its position from TaskList.
+     *
+     * @param pos int
+     * @param tasks TaskList
+     */
     public void deleteTask(int pos, TaskList tasks) {
         System.out.println("Noted. I've removed this task: \n" + tasks.getTask(pos) +
                 "\n" + "Now you have " + Integer.valueOf(tasks.size() - 1) + " tasks in the list.");
         tasks.removeTask(pos);
     }
 
-    public static String[] removeFirst(String[] arr) {
+    /**
+     * Remove first string in the string array.
+     *
+     * @param arr string array
+     * @return string array
+     */
+    private static String[] removeFirst(String[] arr) {
         String[] tempArr = new String[arr.length];
         for (int i = 0; i < arr.length - 1; i++) {
             tempArr[i] = arr[i + 1];
@@ -34,7 +57,14 @@ public class Command {
         return tempArr;
     }
 
-    public static String[] removeAfterWord(String[] arr, String word) {
+    /**
+     * Remove the word and after the word from string array.
+     *
+     * @param arr string array
+     * @param word string
+     * @return string array before the word
+     */
+    private static String[] removeAfterWord(String[] arr, String word) {
         String[] temp = new String[arr.length];
         for (int i = 0; i < arr.length; i++) {
             if (arr[i].equals(word)) {
@@ -46,7 +76,14 @@ public class Command {
         return temp;
     }
 
-    public static String[] keepAfterWord(String[] arr, String word) {
+    /**
+     * Keep those string after the word into a string array and return.
+     *
+     * @param arr original string array
+     * @param word string
+     * @return string array
+     */
+    private static String[] keepAfterWord(String[] arr, String word) {
         String[] temp = new String[arr.length];
         int counter = 0;
         // find position of the word
@@ -63,7 +100,13 @@ public class Command {
         return temp;
     }
 
-    public static String joinString(String[] arr) {
+    /**
+     * Join all string in the array into a single string with spacing.
+     *
+     * @param arr string array
+     * @return string
+     */
+    private static String joinString(String[] arr) {
         String text = arr[0];
         if (arr.length == 1) {
             return text;
@@ -75,7 +118,13 @@ public class Command {
         return text;
     }
 
-    public Task createTodo() throws InvalidTodoDescripDukeException {
+    /**
+     * Create a Todo task.
+     *
+     * @return Task
+     * @throws InvalidTodoDescripDukeException
+     */
+    private Task createTodo() throws InvalidTodoDescripDukeException {
         if (commandArr.length == 1) {
             throw new InvalidTodoDescripDukeException();
         }
@@ -84,11 +133,16 @@ public class Command {
         return newTask;
     }
 
-    public Task createDeadline() throws InvalidDeadlineDescripDukeException, ParseException {
+    /**
+     * Create a Deadline task.
+     *
+     * @return Task
+     * @throws InvalidDeadlineDescripDukeException
+     */
+    private Task createDeadline() throws InvalidDeadlineDescripDukeException, ParseException {
         if (commandArr.length == 1) {
             throw new InvalidDeadlineDescripDukeException();
         }
-        // /by 2/12/2019 1800
         String[] modifiedCommand = removeFirst(commandArr);
         String[] upper = removeAfterWord(modifiedCommand, "/by");
         String[] lower = keepAfterWord(modifiedCommand, "/by");
@@ -97,7 +151,13 @@ public class Command {
         return newTask;
     }
 
-    public Task createEvent() throws InvalidEventDescripDukeException, ParseException {
+    /**
+     * Create an Event task.
+     *
+     * @return Task
+     * @throws InvalidEventDescripDukeException
+     */
+    private Task createEvent() throws InvalidEventDescripDukeException {
         if (commandArr.length == 1) {
             throw new InvalidEventDescripDukeException();
         }
@@ -107,9 +167,21 @@ public class Command {
         LocalDateTime dateAndTime = Parser.changeDateAndTime(lower);
         Task newTask = new Event(joinString(upper), dateAndTime);
         return newTask;
-        // deadline eat dinner with family /at 2000-08-1818:
     }
 
+    /**
+     * Execute Command.
+     *
+     * @param tasks TaskList
+     * @param ui Ui
+     * @param storage Storage
+     * @throws InvalidTodoDescripDukeException
+     * @throws InvalidDeadlineDescripDukeException
+     * @throws InvalidEventDescripDukeException
+     * @throws InvalidFirstDukeException
+     * @throws ParseException
+     * @throws IOException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTodoDescripDukeException,
             InvalidDeadlineDescripDukeException, InvalidEventDescripDukeException,
             InvalidFirstDukeException, ParseException, IOException {
@@ -138,9 +210,13 @@ public class Command {
         } else {}
     }
 
+    /**
+     * Return true if the command is "bye". Else false.
+     *
+     * @return boolean
+     */
     public boolean isExit() {
         if (commandType.equals(CommandType.EXITDUKE)) {
-            // close scanner
             return true;
         } else {
             return false;
