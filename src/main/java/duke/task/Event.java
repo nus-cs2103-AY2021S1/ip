@@ -14,6 +14,13 @@ public class Event extends Task {
     private final LocalTime startTime;
     private final String originalArguments;
 
+    /**
+     * Creates a new instance of the Event class if the argument provided is valid.
+     * 
+     * @param argument Argument entered by user to create Event class.
+     * @return New instance of the Event class.
+     * @throws DukeException If any part of the input argument is invalid.
+     */
     public static Event createNewEvent(String argument) throws DukeException {
         String[] eventArguments = argument.split(" /at ");
 
@@ -69,6 +76,11 @@ public class Event extends Task {
         this.startTime = startTime;
     }
 
+    /**
+     * Generates a single line string that will be saved in storage.
+     *
+     * @return String to be saved in storage.
+     */
     @Override
     public String generateStorageString() {
         return String.format("EVENT | %s | %s", isDone ? "TRUE" : "FALSE", originalArguments);

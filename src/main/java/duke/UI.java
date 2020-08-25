@@ -21,6 +21,12 @@ public class UI {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Prints a given message to the console. The message will be enclosed with
+     * two horizontal lines.
+     * 
+     * @param message Message to be printed.
+     */
     public void printToConsole(String message) {
         System.out.println(DIVIDER);
         System.out.println(message);

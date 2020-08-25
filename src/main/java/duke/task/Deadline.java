@@ -13,8 +13,14 @@ public class Deadline extends Task {
     private final LocalDate deadlineDate;
     private final LocalTime deadlineTime;
     private final String originalArguments;
-
-
+    
+    /**
+     * Creates a new instance of the Deadline class if the argument provided is valid.
+     *
+     * @param argument Argument entered by user to create Deadline class.
+     * @return New instance of the Deadline class.
+     * @throws DukeException If any part of the input argument is invalid.
+     */
     public static Deadline createNewDeadline(String argument) throws DukeException {
         String[] deadlineArguments = argument.split(" /by ");
 
@@ -76,6 +82,11 @@ public class Deadline extends Task {
         return localDate.isEqual(this.deadlineDate);
     }
 
+    /**
+     * Generates a single line string that will be saved in storage.
+     *
+     * @return String to be saved in storage.
+     */
     @Override
     public String generateStorageString() {
         return String.format("DEADLINE | %s | %s", isDone ? "TRUE" : "FALSE", originalArguments);
