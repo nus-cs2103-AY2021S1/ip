@@ -46,7 +46,7 @@ public class TaskList {
         }
     }
 
-    public void doneTasks(int taskNo) {
+    public void doneTask(int taskNo) {
         System.out.println("Nice! I've marked this task as done:");
         Task completedTask = tasks.get(taskNo - 1);
         completedTask.markAsDone();

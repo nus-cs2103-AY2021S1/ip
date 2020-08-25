@@ -44,26 +44,6 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public void showListMessage() {
-        this.showLine();
-    }
-
-    public void showDoneMessage() {
-        this.showLine();
-    }
-
-    public void showDeleteMessage() {
-        this.showLine();
-    }
-
-    public void showDateMessage() {
-        this.showLine();
-    }
-
-    public void showAddMessage() {
-        this.showLine();
-    }
-
     public void greet() {
         String logo =
                 "                 .   ,\n" +
