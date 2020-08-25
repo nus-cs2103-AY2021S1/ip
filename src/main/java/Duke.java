@@ -176,7 +176,7 @@ public class Duke {
 
     /**
      * Get the substring that comes after the first instance of the character
-     * Returns an empty String if character is not found
+     * Returns an empty String if character is not found in the String
      * Example: getStringAfterCharacter("abc def", ' ') returns "def"
      * @param task String to be operated on
      * @param character Character for the String to search for
