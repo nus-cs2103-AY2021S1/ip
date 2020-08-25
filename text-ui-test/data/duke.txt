@@ -1,7 +1,7 @@
+E  | 0 | mark homework | 2019-02-12 18:00
+T  | 0 | asdfasf
+E  | 0 | mark homework | 2019-02-12 18:00
+D  | 0 | do homework | 2019-02-12 18:00
 T  | 0 | borrow book
-T  | 0 | borrow book
-D  | 0 | deadline return book | Sunday
-E  | 0 | event project meeting | Mon 2-4pm
-T  | 0 | borrow book
-E  | 0 | event mark homework  | 2019-02-12 18:00
-D  | 0 | deadline do homework  | 2019-02-12 18:00
+E  | 0 | mark homework | 2019-02-12 18:00
+D  | 0 | do homework | 2019-02-12 18:00

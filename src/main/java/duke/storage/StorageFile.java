@@ -1,4 +1,4 @@
-package duke.storage;
+package src.main.java.duke.storage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,8 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import duke.data.Duke;
-import duke.data.exception.IllegalValueException;
+import src.main.java.duke.data.Duke;
+import src.main.java.duke.data.exception.IllegalValueException;
 
 public class StorageFile {
 

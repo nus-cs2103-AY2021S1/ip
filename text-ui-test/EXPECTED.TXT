@@ -1,46 +1,39 @@
    ----------------------------
    Hello! I'm Best2103/TBot
+   ----------------------------
    What can I do for you?
    ----------------------------
    ----------------------------
-   Got it. I've added this task:
-     [T][✘] borrow book
-   Now you have 6 tasks in the list.
+   New todo task added: [T][✘] borrow book
    ----------------------------
    ----------------------------
-   Here are the tasks in your list:
-   1.[T][✘] borrow book
-   2.[T][✘] borrow book
-   3.[E][✘] event project meeting(at: Mon 2-4pm)
-   4.[D][✘] deadline return book(by: Sunday)
-   5.[E][✘] event project meeting(at: Mon 2-4pm)
-   6.[T][✘] borrow book
+   Display a list of tasks: 
+   1.[E][✘] mark homework(at: Feb 12 2019 18:00)
+   2.[T][✘] asdfasf
+   3.[E][✘] mark homework(at: Feb 12 2019 18:00)
+   4.[T][✘] borrow book
    ----------------------------
    ----------------------------
-   Got it. I've added this task:
-     [E][✘] event mark homework (at: 2019-02-12 18:00)
-   Now you have 7 tasks in the list.
+   New event task added: [E][✘] mark homework(at: Feb 12 2019 18:00)
    ----------------------------
    ----------------------------
-   Got it. I've added this task:
-     [D][✘] deadline do homework (by: 2019-02-12 18:00)
-   Now you have 8 tasks in the list.
+   New deadline task added: [D][✘] do homework(by: Feb 12 2019 18:00)
    ----------------------------
    ----------------------------
-   Here are the tasks in your list:
-   1.[T][✘] borrow book
-   2.[T][✘] borrow book
-   3.[E][✘] event project meeting(at: Mon 2-4pm)
-   4.[D][✘] deadline return book(by: Sunday)
-   5.[E][✘] event project meeting(at: Mon 2-4pm)
-   6.[T][✘] borrow book
-   7.[E][✘] event mark homework (at: 2019-02-12 18:00)
-   8.[D][✘] deadline do homework (by: 2019-02-12 18:00)
+   Display a list of tasks: 
+   1.[E][✘] mark homework(at: Feb 12 2019 18:00)
+   2.[T][✘] asdfasf
+   3.[E][✘] mark homework(at: Feb 12 2019 18:00)
+   4.[T][✘] borrow book
+   5.[E][✘] mark homework(at: Feb 12 2019 18:00)
+   6.[D][✘] do homework(by: Feb 12 2019 18:00)
    ----------------------------
    ----------------------------
-   Noted. I've removed this task:
-   [E][✘] event project meeting(at: Mon 2-4pm)
-   Now you have 7 tasks in the list.
+   Deleted Task: 3
    ----------------------------
-   Bye. Hope to see you again soon!
+   ----------------------------
+   Saving files and exiting Best2103/TBot as requested ...
+   ----------------------------
+   ----------------------------
+   Goodbye :(
    ----------------------------

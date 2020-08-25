@@ -1,7 +1,7 @@
-package duke.ui;
+package src.main.java.duke.ui;
 
-import duke.commands.CommandResult;
-import duke.data.task.Task;
+import src.main.java.duke.commands.CommandResult;
+import src.main.java.duke.data.task.Task;
 
 import java.io.InputStream;
 import java.io.PrintStream;

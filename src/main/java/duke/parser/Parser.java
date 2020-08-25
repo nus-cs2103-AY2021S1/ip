@@ -1,9 +1,9 @@
-package duke.parser;
+package src.main.java.duke.parser;
 
-import duke.commands.*;
+import src.main.java.duke.commands.*;
 
-import static duke.commons.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static duke.commons.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
+import static src.main.java.duke.commons.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static src.main.java.duke.commons.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

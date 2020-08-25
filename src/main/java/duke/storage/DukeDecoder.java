@@ -1,13 +1,13 @@
-package duke.storage;
+package src.main.java.duke.storage;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import duke.data.Duke;
-import duke.data.task.*;
-import duke.storage.StorageFile.StorageOperationException;
-import duke.data.exception.IllegalValueException;
+import src.main.java.duke.data.Duke;
+import src.main.java.duke.data.task.*;
+import src.main.java.duke.storage.StorageFile.StorageOperationException;
+import src.main.java.duke.data.exception.IllegalValueException;
 
 public class DukeDecoder {
 
