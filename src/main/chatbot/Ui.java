@@ -1,11 +1,30 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class TaskPrinter implements Printable<Task> {
-    public void display(String message) {
+public class Ui implements Printable<Task> {
+    private void display(String message) {
         System.out.println("    ____________________________________________________________");
         System.out.println("    " + message);
         System.out.println("    ____________________________________________________________");
+    }
+
+    public void addSuccess(Task task, int count) {
+        display("Got it. I've added this task:\n        " + task +
+                String.format("\n    Now you have %d task(s) in the list.", count));
+    }
+
+    public void deleteSuccess(Task task, int count) {
+        display("Alright. I've removed this task:\n        " + task +
+                String.format("\n    Now you have %d task(s) in the list.", count));
+    }
+
+    public void markDoneSuccess(Task task) {
+        display("Nice! I've marked this task as done:\n    " +
+                "    " + task);
+    }
+
+    public void showErrorMessage(String message) {
+        display(message);
     }
 
     public void list(ArrayList<Task> ls) {

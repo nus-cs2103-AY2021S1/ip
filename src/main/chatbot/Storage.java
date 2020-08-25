@@ -8,10 +8,10 @@ import java.util.stream.Stream;
 
 public class Storage {
 
-    private final TaskManager taskManager;
+    private final TaskList taskList;
 
-    public Storage(TaskManager taskManager) {
-        this.taskManager = taskManager;
+    public Storage(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     public void loadTasks(Path file) throws ChatbotException {
@@ -44,7 +44,7 @@ public class Storage {
             });
 
             // add task to task list
-            ArrayList<Task> tasklist = this.taskManager.getTasks();
+            ArrayList<Task> tasklist = this.taskList.getTasks();
             taskStream.forEach(tasklist::add);
 
         } catch (IOException e) {
@@ -53,7 +53,7 @@ public class Storage {
     }
 
     public void saveTasks(Path location) throws ChatbotException {
-        ArrayList<Task> tasks = taskManager.getTasks();
+        ArrayList<Task> tasks = taskList.getTasks();
         Iterator iter = tasks.iterator();
         String dataStr = "";
         while (iter.hasNext()) {

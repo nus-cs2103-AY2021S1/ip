@@ -8,9 +8,9 @@ import java.io.IOException;
 
 public class Main {
 
-    private static TaskManager taskManager;
+    private static TaskList taskList;
     private static Storage taskStorage;
-    private static TaskPrinter ui;
+    private static Ui ui;
     private static final Path DEFAULT_LOC = Path.of("src","main", "chatbot", "data.txt");
 
     private static boolean getUserInput(Scanner s) {
@@ -26,75 +26,78 @@ public class Main {
         try {
              cmd = Command.valueOf(leading.toUpperCase());
         } catch (IllegalArgumentException e){
-            ui.display("Arghh! I do not know what you mean, are you using the right\n    " +
+            ui.showErrorMessage("Arghh! I do not know what you mean, are you using the right\n    " +
                     "commands?");
         }
 
         switch (cmd) {
             case LIST:
-                ui.list(taskManager.getTasks());
+                ui.list(taskList.getTasks());
                 break;
             case DONE:
                 int ind1 = Integer.parseInt(text.split(" ")[1]) - 1;
                 try {
-                    if (taskManager.markAsDone(ind1)) {
-                        taskStorage.saveTasks(DEFAULT_LOC);
-                    }
+                    Task taskDone = taskList.markAsDone(ind1);
+                    taskStorage.saveTasks(DEFAULT_LOC);
+                    ui.markDoneSuccess(taskDone);
                 } catch (ChatbotException e) {
-                    ui.display(e.getMessage());
+                    ui.showErrorMessage(e.getMessage());
                 }
                 break;
             case TODO:
                 try {
                     Todo task = Todo.newTodo(trailing);
-                    if (taskManager.addTask(task)) {
+                    if (taskList.addTask(task)) {
                         taskStorage.saveTasks(DEFAULT_LOC);
+                        ui.addSuccess(task, taskList.count());
                     }
                 } catch (ChatbotException e) {
-                    ui.display(e.getMessage());
+                    ui.showErrorMessage(e.getMessage());
                 }
                 break;
             case DEADLINE:
                 try {
                     Deadline deadline = Deadline.newDeadline(trailing);
-                    if (taskManager.addTask(deadline)) {
+                    if (taskList.addTask(deadline)) {
                         taskStorage.saveTasks(DEFAULT_LOC);
+                        ui.addSuccess(deadline, taskList.count());
                     }
                 } catch (ChatbotException e) {
-                    ui.display(e.getMessage());
+                    ui.showErrorMessage(e.getMessage());
                 }
                 break;
             case EVENT:
                 try {
                     Event event = Event.newEvent(trailing);
-                    if (taskManager.addTask(event)) {
+                    if (taskList.addTask(event)) {
                         taskStorage.saveTasks(DEFAULT_LOC);
+                        ui.addSuccess(event, taskList.count());
                     }
                 } catch (ChatbotException e) {
-                    ui.display(e.getMessage());
+                    ui.showErrorMessage(e.getMessage());
                 }
                 break;
             case DELETE:
                 int ind2 = Integer.parseInt(text.split(" ")[1]) - 1;
                 try {
-                    if (taskManager.removeTask(ind2)) {
-                        taskStorage.saveTasks(DEFAULT_LOC);
-                    }
+                    Task deletedTask = taskList.removeTask(ind2);
+                    taskStorage.saveTasks(DEFAULT_LOC);
+                    ui.deleteSuccess(deletedTask, taskList.count());
                 } catch (ChatbotException e) {
-                    ui.display(e.getMessage());
+                    ui.showErrorMessage(e.getMessage());
                 }
                 break;
             case DATE:
                 try {
-                    ArrayList<Task> tasks = taskManager.retrieveTasksOnDate(
+                    ArrayList<Task> tasks = taskList.retrieveTasksOnDate(
                             LocalDate.parse(trailing));
                     ui.list(tasks);
                 } catch (DateTimeParseException e) {
-                    ui.display("Please enter a valid date (yyyy-mm-dd).");
+                    ui.showErrorMessage("Please enter a valid date (yyyy-mm-dd).");
                 }
                 break;
             case BYE:
-                ui.display("Bye, hope to see you again soon.");
+                ui.showErrorMessage("Bye, hope to see you again soon.");
                 System.exit(0);
                 break;
             default:
@@ -104,9 +107,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        taskManager = new TaskManager();
-        taskStorage = new Storage(taskManager);
-        ui = new TaskPrinter();
+        taskList = new TaskList();
+        taskStorage = new Storage(taskList);
+        ui = new Ui();
 
         Scanner sc = new Scanner(System.in);
 
@@ -116,14 +119,15 @@ public class Main {
                 // if exists, load tasks
                 taskStorage.loadTasks(DEFAULT_LOC);
             } catch (ChatbotException e) {
-                ui.display(e.getMessage());
+                ui.showErrorMessage(e.getMessage());
             }
         } else {
             try {
                 // if not exists, create new file
                 Files.createFile(DEFAULT_LOC);
             } catch (IOException e) {
-                ui.display("Failure: couldn't create file");
+
+                ui.showErrorMessage("Failure: couldn't create file");
             }
         }
 

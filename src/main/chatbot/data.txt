@@ -1,6 +1,3 @@
-T | 1 | read book | -
-D | 1 | return book | 2020-08-20
 E | 1 | project meeting | 2020-08-20
-T | 0 | read book | -
-D | 0 | return book | 2020-08-20
-E | 0 | project meeting | 2020-08-20
+T | 1 | read | -
+D | 1 | return | 2020-01-11

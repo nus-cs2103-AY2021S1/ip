@@ -2,14 +2,12 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Iterator;
 
-public class TaskManager {
+public class TaskList {
 
-    private TaskPrinter taskPrinter;
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
-    public TaskManager() {
+    public TaskList() {
         this.tasks = new ArrayList<>();
-        this.taskPrinter = new TaskPrinter();
     }
 
     public ArrayList<Task> getTasks() {
@@ -29,20 +27,17 @@ public class TaskManager {
             return false;
         }
         tasks.add(task);
-        taskPrinter.display("Got it. I've added this task:\n        " + task +
-                String.format("\n    Now you have %d task(s) in the list.", count()));
         return true;
     }
 
-    public boolean removeTask(int index) throws ChatbotException {
+    public Task removeTask(int index) throws ChatbotException {
+        Task removed;
         try {
-            Task removed = this.tasks.remove(index);
-            taskPrinter.display("Alright. I've removed this task:\n        " + removed +
-                    String.format("\n    Now you have %d task(s) in the list.", count()));
+            removed = this.tasks.remove(index);
         } catch (IndexOutOfBoundsException e) {
             throw new ChatbotException("That item does not exist!");
         }
-        return true;
+        return removed;
     }
 
     public ArrayList<Task> retrieveTasksOnDate(LocalDate date) {
@@ -58,15 +53,14 @@ public class TaskManager {
         return tasks;
     }
 
-    public boolean markAsDone(int index) throws ChatbotException {
+    public Task markAsDone(int index) throws ChatbotException {
+        Task taskDone;
         try {
-            Task taskDone = getTask(index).markDone();
+            taskDone = getTask(index).markDone();
             this.tasks.set(index, taskDone);
-            taskPrinter.display("Nice! I've marked this task as done:\n    " +
-                    "    " + taskDone);
         } catch (IndexOutOfBoundsException e) {
             throw new ChatbotException("That item does not exist!");
         }
-        return true;
+        return taskDone;
     }
 }
