@@ -5,24 +5,29 @@ import java.util.Scanner;
 import java.io.IOException;
 import command.*;
 import task.Task;
-
+/**
+ * The Dukebot programme implements an application that assists the user in managing their tasks.
+ *
+ * @author  Ryan Lim
+ */
 public class Duke {
+    /** variable to check if duke is still running */
     private boolean isRunning = true;
+    /** ArrayList to hold all tasks keyed in by the user for the session */
     private TaskList taskList;
-    private Ui ui;
-    private Parser parser;
-    Storage storage;
-    enum commands {
-        BYE,
-        DONE,
-        DELETE,
-        LIST,
-        TODO,
-        EVENT,
-        DEADLINE,
-        DATE
-    }
+    /** UI where the user will interact with the Dukebot */
+    private final Ui ui;
+    /** Parser which handles user input */
+    private final Parser parser;
+    /** Storage which manages the saving of tasks from the session into the hard disk  */
+    private final Storage storage;
 
+
+    /**
+     * initialises Duke bot
+     *
+     * @param filePath Path which points to the desired location to store tasks
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.parser = new Parser();
@@ -36,39 +41,72 @@ public class Duke {
         this.ui.printGreeting();
     }
 
+    /**
+     * Handles Tasks which are marked done and updates it in both hard disk accordingly as well as the task list.
+     *
+     * @param parameters the index of the task to be marked done.
+     * @throws DukeExceptions.NoUndoneTaskException
+     */
+
     private void doneHandler(String[] parameters) throws DukeExceptions.NoUndoneTaskException {
         if (!this.taskList.isEmpty() || this.taskList.allDone()) {
             int index = Integer.parseInt(parameters[0].strip()) - 1;
             this.taskList.completeTask(index);
             this.ui.printDoneTask(this.taskList.getTask(index));
+            this.updateFile();
         } else {
             throw new DukeExceptions.NoUndoneTaskException();
         }
     }
 
+    /**
+     * Handles addition of new Tasks and updates it in both hard disk accordingly as well as the task list.
+     *
+     * @param command the command which indicates which type of task to create.
+     * @throws DukeExceptions.IncompleteCommandException
+     */
+
     private void addTaskHandler(Command command) throws DukeExceptions.IncompleteCommandException { ;
         if (!command.isEmpty()) {
             Task newTask = this.taskList.addTask(command);
             this.ui.printAddedNewTask(newTask, this.taskList.getNoTask());
+            this.updateFile();
         } else {
             throw new DukeExceptions.IncompleteCommandException(command.getClass().toString());
         }
     }
+
+    /**
+     * Handles addition of new Tasks and updates it in both hard disk accordingly as well as the task list.
+     *
+     * @param parameters index of task to delete.
+     * @throws DukeExceptions.NoTaskToDeleteException if tasklist is empty
+     */
 
     private void deleteTaskHandler(String[] parameters) throws  DukeExceptions.NoTaskToDeleteException {
         if (!this.taskList.isEmpty()) {
             int index = Integer.parseInt(parameters[0].strip()) - 1;
             Task task = this.taskList.deleteTask(index);
             this.ui.printDeleteTask(task, this.taskList.getNoTask());
+            this.updateFile();
         } else {
             throw new DukeExceptions.NoTaskToDeleteException();
         }
     }
 
+    /**
+     * Returns True if Duke bot is still running.
+     *
+     * @return boolean value indicating if Duke bot is still running or not.
+     */
     public boolean isRunning() {
         return this.isRunning;
     }
 
+
+    /**
+     * saves tasks to hard disk
+     */
     private void updateFile() {
         try {
             this.storage.save(this.taskList);
@@ -77,6 +115,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Takes in a user input as a string, parses it and gets fed the appropriate commands to be handled.
+     *
+     * @param userInput commands and parameters that the user inputs through the user interface
+     */
     public void run(String userInput) {
         Command command = this.parser.parse(userInput);
         if (command.getClass() == ByeCommand.class) {
@@ -87,7 +130,6 @@ public class Duke {
         } else if (command.getClass() == DoneCommand.class) {
             try {
                 this.doneHandler(command.getParameters());
-                this.updateFile();
             } catch (DukeExceptions.NoUndoneTaskException e) {
                 DukeExceptions.printNoUndoneTaskError();
             } catch (IndexOutOfBoundsException e) {
@@ -100,7 +142,6 @@ public class Duke {
                 || command.getClass() == DeadLineCommand.class ) {
             try {
                 this.addTaskHandler(command);
-                this.updateFile();
             } catch (DukeExceptions.IncompleteCommandException e) {
                 DukeExceptions.printIncompleteCommandError();
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -111,7 +152,6 @@ public class Duke {
         } else if (command.getClass() == DelCommand.class ) {
             try {
                 this.deleteTaskHandler(command.getParameters());
-                this.updateFile();
             } catch (DukeExceptions.NoTaskToDeleteException e) {
                 DukeExceptions.printNoTaskToDeleteError();
             } catch (IndexOutOfBoundsException e) {
