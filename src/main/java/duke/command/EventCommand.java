@@ -8,6 +8,9 @@ import duke.util.Ui;
 
 import java.util.Date;
 
+/**
+ * Responsible for executing an event command.
+ */
 public class EventCommand extends Command {
     private String description;
     private Date at;
@@ -18,6 +21,13 @@ public class EventCommand extends Command {
         this.at = at;
     }
 
+    /**
+     * Executes an event command.
+     *
+     * @param tasks Contains the current tasks.
+     * @param ui Responsible for displaying information to the user.
+     * @param storage Reads and stores data into memory.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = new Event(description, at);
         tasks.add(task);

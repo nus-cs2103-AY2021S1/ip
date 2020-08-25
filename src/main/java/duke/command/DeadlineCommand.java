@@ -8,6 +8,9 @@ import duke.util.Ui;
 
 import java.util.Date;
 
+/**
+ * Responsible for executing a deadline command.
+ */
 public class DeadlineCommand extends Command {
     String description;
     Date by;
@@ -18,6 +21,13 @@ public class DeadlineCommand extends Command {
         this.by = by;
     }
 
+    /**
+     * Executes a deadline command.
+     *
+     * @param tasks Contains the current tasks.
+     * @param ui Responsible for displaying information to the user.
+     * @param storage Reads and stores data into memory.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = new Deadline(description, by);

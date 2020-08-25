@@ -6,6 +6,9 @@ import duke.util.TaskList;
 import duke.task.ToDo;
 import duke.util.Ui;
 
+/**
+ * Responsible for executing a todo command.
+ */
 public class ToDoCommand extends Command {
     String description;
 
@@ -14,6 +17,13 @@ public class ToDoCommand extends Command {
         this.description = description;
     }
 
+    /**
+     * Executes a todo command.
+     *
+     * @param tasks Contains the current tasks.
+     * @param ui Responsible for displaying information to the user.
+     * @param storage Reads and stores data into memory.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = new ToDo(description);
         tasks.add(task);
