@@ -14,7 +14,7 @@ public class ReadFile {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 String[] dataSplit = data.split("\\|");
-                if (dataSplit.length == 3) {
+                if (dataSplit[3].equals("null")) {
                     switch (dataSplit[0]) {
                         case TODO:
                             if (dataSplit[1].equals("1")) {
@@ -37,27 +37,27 @@ public class ReadFile {
                                 TaskList.addTask(Duke.TaskType.EVENT, dataSplit[2]);
                             }
                     }
-                } else if (dataSplit.length == 4) {
+                } else if (dataSplit.length == 5) {
                     switch (dataSplit[0]) {
                         case TODO:
                             if (dataSplit[1].equals("1")) {
-                                TaskList.addTask(Duke.TaskType.TODOS, dataSplit[2], dataSplit[3]).markAsDone();
+                                TaskList.addTask(Duke.TaskType.TODOS, dataSplit[2], dataSplit[3] + " " + dataSplit[4]).markAsDone();
                             } else {
-                                TaskList.addTask(Duke.TaskType.TODOS, dataSplit[2], dataSplit[3]);
+                                TaskList.addTask(Duke.TaskType.TODOS, dataSplit[2], dataSplit[3] + " " + dataSplit[4]);
                             }
                             break;
                         case DEADLINE:
                             if (dataSplit[1].equals("1")) {
-                                TaskList.addTask(Duke.TaskType.DEADLINE, dataSplit[2], dataSplit[3]).markAsDone();
+                                TaskList.addTask(Duke.TaskType.DEADLINE, dataSplit[2], dataSplit[3] + " " + dataSplit[4]).markAsDone();
                             } else {
-                                TaskList.addTask(Duke.TaskType.DEADLINE, dataSplit[2], dataSplit[3]);
+                                TaskList.addTask(Duke.TaskType.DEADLINE, dataSplit[2], dataSplit[3] + " " + dataSplit[4]);
                             }
                             break;
                         case EVENT:
                             if (dataSplit[1].equals("1")) {
-                                TaskList.addTask(Duke.TaskType.EVENT, dataSplit[2], dataSplit[3]).markAsDone();
+                                TaskList.addTask(Duke.TaskType.EVENT, dataSplit[2], dataSplit[3] + " " + dataSplit[4]).markAsDone();
                             } else {
-                                TaskList.addTask(Duke.TaskType.EVENT, dataSplit[2], dataSplit[3]);
+                                TaskList.addTask(Duke.TaskType.EVENT, dataSplit[2], dataSplit[3] + " " + dataSplit[4]);
                             }
                     }
                 } else {

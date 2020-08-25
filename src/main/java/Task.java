@@ -1,9 +1,12 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String tag = "";
     protected String description;
     protected boolean isDone;
     public static final String tick = "\u2713";
     public static final String cross = "\u2718";
+    protected LocalDate date = null;
 
     public Task(String description) {
         this.description = description;

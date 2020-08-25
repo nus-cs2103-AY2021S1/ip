@@ -1,16 +1,25 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDate date = null;
+    protected String by = null;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
         tag = "D";
+        String[] bySplit = by.split(" ", 2);
+        date = LocalDate.parse(bySplit[0]);
+        if (bySplit.length > 1) {
+            this.by = bySplit[1];
+        }
     }
 
     public Deadline(String description) {
         super(description);
-        this.by = null;
         tag = "D";
     }
 
@@ -20,13 +29,24 @@ public class Deadline extends Task {
     }
 
     public String toPrint(){
-        return by == null
-                ? super.toPrint()
-                : super.toPrint() + "|" + by;
+        return super.toPrint() + "|" + date + "|" + by;
     }
 
     @Override
     public String toString() {
-        return by == null ? "[D]" + super.toString() : "[D]" + super.toString() + " (by: " + by + ")" ;
+        if (by == null) {
+            return "[D]" + super.toString();
+        } else {
+            String now = "AM";
+            LocalTime localTime = LocalTime.parse(by, DateTimeFormatter.ofPattern("HHmm"));
+            int hour = localTime.get(ChronoField.CLOCK_HOUR_OF_DAY);
+            int minute = localTime.get(ChronoField.MINUTE_OF_HOUR);
+            if (hour > 12) {
+                now = "PM";
+                hour -= 12;
+            }
+            return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                    + ", "+ hour + ":" + minute + now + ")" ;
+        }
     }
 }
