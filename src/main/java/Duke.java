@@ -57,15 +57,15 @@ public class Duke {
         switch (nextLineSplit[0]) {
             case "todo":
                 if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
-                System.out.println(TaskList.addTask(TaskType.TODOS, nextLineSplit[1]));
+                System.out.println(TaskList.addTaskHelper(TaskType.TODOS, nextLineSplit[1]));
                 break;
             case "deadline":
                 if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
-                System.out.println(TaskList.addTask(TaskType.DEADLINE, nextLineSplit[1]));
+                System.out.println(TaskList.addTaskHelper(TaskType.DEADLINE, nextLineSplit[1]));
                 break;
             case "event":
                 if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
-                System.out.println(TaskList.addTask(TaskType.EVENT, nextLineSplit[1]));
+                System.out.println(TaskList.addTaskHelper(TaskType.EVENT, nextLineSplit[1]));
                 break;
             case "done":
                 if (nextLineSplit.length < 2) throw new EmptyDescriptionException("Description empty la oi");
@@ -108,6 +108,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        ReadFile.readFile();
         Scanner sc = new Scanner(System.in);
         greet();
         boolean saidBye = false;
@@ -117,5 +118,6 @@ public class Duke {
             saidBye = testNextLine(nextLine);
         }
         sc.close();
+        TaskList.saveTasks();
     }
 }
