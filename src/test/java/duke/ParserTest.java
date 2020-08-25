@@ -1,20 +1,13 @@
 package duke;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
-    
-    @Test
-    public void testIsDate() {
-        assertTrue(new Parser().isDate("2020-08-24"));
-    }
-    
     @Test
     public void testConvertDate() {
-        assertEquals("Aug 24 2020", new Parser().convertDate("2020-08-24"));
-        assertEquals("Dec 25 0001", new Parser().convertDate("0001-12-25"));
+        assertEquals("Jul 15 2000", new Parser().convertDate("2000-07-15"));
+        assertEquals("Dec 25 2020", new Parser().convertDate("2020-12-25"));
+        assertEquals("Wednesday", new Parser().convertDate("Wednesday"));
     }
 }

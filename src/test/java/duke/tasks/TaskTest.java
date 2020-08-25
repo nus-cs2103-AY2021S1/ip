@@ -1,21 +1,18 @@
 package duke.tasks;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskTest {
     
     @Test
-    public void testGetDone() {
-        assertEquals(false, new Task("Sleep", "Todo").getDone());
-        assertEquals(true, new Task ("Sleep", "Todo", true).getDone());
+    public void testGetDescription() {
+        assertEquals ("Sleep", new Task("Sleep", "Todo").getDescription());
     }
     
     @Test
-    public void testGetDescription() {
-        assertEquals("Buy Coffee", new Task ("Buy Coffee", "Todo").getDescription());
-        assertEquals("Get Lost", new Task ("Get Lost", "hdfjfh").getDescription());
+    public void testGetDone() {
+        assertEquals(true, new Task ("Ice skate", "Todo", true).getDone());
+        assertEquals(false, new Task ("Ice skate", "Todo").getDone());
     }
 }
-
