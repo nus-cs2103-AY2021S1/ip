@@ -29,8 +29,8 @@ public class Deadline extends Task {
     }
 
     public LocalDateTime tryParseDateTime(String dateString) {
-        List<String> formatStrings = Arrays.asList("yyyy-MM-dd HHmm", "yyyy-MM-d HHmm", "dd/MM/yyyy HHmm", "d/MM/yyyy HHmm",
-                "dd-MM-yyyy HHmm", "d-MM-yyyy HHmm");
+        List<String> formatStrings = Arrays.asList("yyyy-MM-dd HHmm", "yyyy-MM-d HHmm", "dd/MM/yyyy HHmm", "dd/M/yyyy HHmm", "d/MM/yyyy HHmm", "d/M/yyyy HHmm",
+                "dd-MM-yyyy HHmm", "dd-M-yyyy HHmm", "d-MM-yyyy HHmm", "d-M-yyyy HHmm");
         for (String formatString : formatStrings) {
             try {
                 return LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern(formatString));
@@ -41,7 +41,7 @@ public class Deadline extends Task {
     }
 
     public LocalDate tryParseDate(String dateString) {
-        List<String> formatStrings = Arrays.asList("yyyy-MM-dd", "yyyy-MM-d", "dd/MM/yyyy", "d/MM/yyyy", "dd-MM-yyyy", "d-MM-yyyy");
+        List<String> formatStrings = Arrays.asList("yyyy-MM-dd", "yyyy-MM-d", "dd/MM/yyyy", "d/MM/yyyy", "dd/M/yyyy", "d/M/yyyy", "dd-MM-yyyy", "dd-M-yyyy", "d-MM-yyyy", "d-M-yyyy");
         for (String formatString : formatStrings) {
             try {
                 return LocalDate.parse(dateString, DateTimeFormatter.ofPattern(formatString));

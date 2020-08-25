@@ -156,7 +156,7 @@ public class Duke {
         for (int i = indexFrom; i < indexTo; i++){
             output += inputArr[i] + " ";
         }
-        return output;
+        return output.substring(0, output.length() - 1);
     }
 
     public void run() {
@@ -201,10 +201,12 @@ public class Duke {
                         throw new DukeException("Your todo description can't be empty...");
                     }
                 } else if (inputInformation[0].equals(Command.DEADLINE.getInput())) {
-                    if (inputInformation.length > 1) {
+                    if (inputInformation.length > 3) {
                         int indexOfBy = Arrays.asList(inputInformation).indexOf("/by");
                         if (indexOfBy == -1) {
                             throw new DukeException("Did you include /by?");
+                        } else if (indexOfBy == 1) {
+                            throw new DukeException("Did you include a description?");
                         } else {
                             String description = getStringFromArray(inputInformation, 1, indexOfBy);
                             String by = getStringFromArray(inputInformation, indexOfBy + 1, inputInformation.length);
@@ -212,13 +214,15 @@ public class Duke {
                             addTask(newTask);
                         }
                     } else {
-                        throw new DukeException("Your deadline description can't be empty...");
+                        throw new DukeException("Your deadline description or deadline can't be empty...");
                     }
                 } else if (inputInformation[0].equals(Command.EVENT.getInput())) {
-                    if (inputInformation.length > 1) {
+                    if (inputInformation.length > 3) {
                         int indexOfAt = Arrays.asList(inputInformation).indexOf("/at");
                         if (indexOfAt == -1) {
                             throw new DukeException("Did you include /at?");
+                        } else if (indexOfAt == 1) {
+                            throw new DukeException("Did you include a description?");
                         } else {
                             String description = getStringFromArray(inputInformation, 1, indexOfAt);
                             String at = getStringFromArray(inputInformation, indexOfAt + 1, inputInformation.length);
@@ -226,7 +230,7 @@ public class Duke {
                             addTask(newTask);
                         }
                     } else {
-                        throw new DukeException("Your event description can't be empty...");
+                        throw new DukeException("Your event description or event period can't be empty...");
                     }
                 } else {
                     throw new DukeException("My duck instincts tell me your input makes no sense...");
