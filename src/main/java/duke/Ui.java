@@ -38,6 +38,7 @@ public class Ui {
 
     /**
      * Read the full command from user's input.
+     *
      * @return String of the next input line.
      */
     public String readCommand() {
@@ -46,6 +47,7 @@ public class Ui {
 
     /**
      * Print the error message of a DukeException.
+     *
      * @param eMsg the error message of the DukeException.
      */
     public void showError(String eMsg) {
@@ -54,21 +56,33 @@ public class Ui {
                 + line);
     }
 
+    private void printLine() {
+        System.out.print(line);
+    }
+
     /**
      * Print out the list of tasks.
+     *
      * @param taskList the list of tasks.
      */
     public void printList(List<Task> taskList) {
-        System.out.print(line);
+        if (taskList.size() == 0) {
+            printLine();
+            System.out.println(" Oops, no task YET. Try to add one!");
+            printLine();
+            return;
+        }
+        printLine();
         System.out.println(" Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println(" " + (i + 1) + ". " + taskList.get(i));
         }
-        System.out.println(line);
+        printLine();
     }
 
     /**
      * Print out the Done command executed on a certain task.
+     *
      * @param task the task to be done.
      */
     public void printDone(Task task) {
@@ -80,6 +94,7 @@ public class Ui {
 
     /**
      * Print out the Delete command executed on a certain task.
+     *
      * @param task the task to be deleted.
      * @param size the size of the task list after deletion.
      */
@@ -93,6 +108,7 @@ public class Ui {
 
     /**
      * Print out the Add command.
+     *
      * @param task the task to be added.
      * @param size the size of the task list after addition.
      */
@@ -102,6 +118,26 @@ public class Ui {
         System.out.println("   " + task
                 + "\n Now you have " + size + " tasks in the list.\n"
                 + line);
+    }
+
+    /**
+     * Print out the list of tasks which was found by find command.
+     *
+     * @param findResult the list of tasks which was found.
+     */
+    public void printFind(List<Task> findResult) {
+        if (findResult.size() == 0) {
+            printLine();
+            System.out.println(" No task founded. Try to add one!");
+            printLine();
+            return;
+        }
+        printLine();
+        System.out.println(" Here are the matching tasks in your list:");
+        for (int i = 0; i < findResult.size(); i++) {
+            System.out.println(" " + (i + 1) + ". " + findResult.get(i));
+        }
+        printLine();
     }
 
     /**

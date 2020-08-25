@@ -9,6 +9,7 @@ public abstract class Task {
 
     /**
      * Constructor for Task.
+     *
      * @param description the description of the task.
      */
     public Task(String description) {
@@ -18,6 +19,7 @@ public abstract class Task {
 
     /**
      * Get the status of the task.
+     *
      * @return an icon to indicate the status of the task.
      */
     public String getStatusIcon() {
@@ -33,12 +35,14 @@ public abstract class Task {
 
     /**
      * Abstract method for subclass to implement to return a String which to be store in files.
+     *
      * @return the String to be store in files.
      */
     public abstract String toStore();
 
     /**
      * Return the String represents the task.
+     *
      * @return the String represents the task.
      */
     @Override

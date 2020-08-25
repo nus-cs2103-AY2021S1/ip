@@ -11,17 +11,20 @@ public class Parser {
 
     /**
      * Parse the full command to a Array of String.
+     *
      * @param command the full command from user's input.
      * @return a Array of String parsed from the full command.
      * @throws DukeException
      */
     public static String[] parse(String command) throws DukeException {
         String[] commands = command.split(" ", 2);
+        if (commands.length > 1 && commands[1] != null) commands[1] = commands[1].trim();
         String[] temp;
         commands = Arrays.copyOf(commands, 3);
         String key;
         switch (commands[0]) {
         case "bye":
+        case "find":
         case "list": {
             return commands;
         }
@@ -73,7 +76,7 @@ public class Parser {
 
     private static boolean isNumeric(String str) {
         for (int i = str.length(); --i >= 0; ) {
-            if (!(Character.isDigit(str.charAt(i)) || str.charAt(i) == ' ')) {
+            if (!Character.isDigit(str.charAt(i))) {
                 return false;
             }
         }

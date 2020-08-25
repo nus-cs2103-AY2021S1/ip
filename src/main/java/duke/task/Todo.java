@@ -7,6 +7,7 @@ public class Todo extends Task {
 
     /**
      * Default constructor for Todo.
+     *
      * @param description the description of the task.
      */
     public Todo(String description) {
@@ -15,7 +16,8 @@ public class Todo extends Task {
 
     /**
      * Construct a Todo task assigned the done status.
-     * @param isDone the done status of the task.
+     *
+     * @param isDone      the done status of the task.
      * @param description the description of the task.
      */
     public Todo(boolean isDone, String description) {
@@ -26,6 +28,7 @@ public class Todo extends Task {
 
     /**
      * Return the String to be store in files.
+     *
      * @return the String to be store in files.
      */
     @Override
@@ -36,6 +39,7 @@ public class Todo extends Task {
 
     /**
      * Return the String represents the task.
+     *
      * @return the String represents the task.
      */
     @Override

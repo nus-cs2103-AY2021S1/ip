@@ -13,6 +13,7 @@ public class Duke {
 
     /**
      * Construct the Duke initialized with the path of the target file to store and read.
+     *
      * @param filePath
      */
     public Duke(String filePath) {
@@ -48,6 +49,7 @@ public class Duke {
 
     /**
      * Execute the program.
+     *
      * @param args the argument Array of String.
      */
     public static void main(String[] args) {

@@ -13,6 +13,7 @@ public class Event extends Task {
 
     /**
      * Default constructor for Event.
+     *
      * @param description the description of the task.
      */
     public Event(String description, String at) {
@@ -27,7 +28,8 @@ public class Event extends Task {
 
     /**
      * Construct a Event task assigned the done status.
-     * @param isDone the done status of the task.
+     *
+     * @param isDone      the done status of the task.
      * @param description the description of the task.
      */
     public Event(boolean isDone, String description, String at) {
@@ -37,6 +39,7 @@ public class Event extends Task {
 
     /**
      * Return the String to be store in files.
+     *
      * @return the String to be store in files.
      */
     @Override
@@ -47,6 +50,7 @@ public class Event extends Task {
 
     /**
      * Return the String represents the task.
+     *
      * @return the String represents the task.
      */
     @Override

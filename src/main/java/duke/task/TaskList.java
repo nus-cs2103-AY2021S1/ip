@@ -44,20 +44,26 @@ public class TaskList {
             printList(ui);
             break;
         }
+        case "find": {
+            find(ui, commands[1]);
+            break;
+        }
         case "done": {
             markAsDone(ui, Integer.parseInt(commands[1]) - 1);
+            storage.store(taskList);
             break;
         }
         case "delete": {
             delete(ui, Integer.parseInt(commands[1]) - 1);
+            storage.store(taskList);
             break;
         }
         case "todo":
         case "deadline":
         case "event":
             addTask(ui, commands[0], commands[1], commands[2]);
+            storage.store(taskList);
         }
-        storage.store(taskList);
     }
 
     /**
@@ -91,6 +97,23 @@ public class TaskList {
         Task task = taskList.get(index);
         taskList.remove(index);
         ui.printDelete(task, taskList.size());
+    }
+
+
+    /**
+     * Find the tasks containing the given keyword in their description and print through the Ui.
+     *
+     * @param ui  the Ui to deal with the interactions with users.
+     * @param key the keyword used to find task in task list.
+     */
+    public void find(Ui ui, String key) {
+        List<Task> result = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.description.contains(key)) {
+                result.add(task);
+            }
+        }
+        ui.printFind(result);
     }
 
     /**
