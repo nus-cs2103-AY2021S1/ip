@@ -5,8 +5,8 @@ public class Event extends Task {
 
     private final Date at;
 
-    public Event(String description, Date at) {
-        super(description, TaskType.EVENT);
+    public Event(String description, Date at, boolean isDone) {
+        super(description, TaskType.EVENT, isDone);
         this.at = at;
     }
 

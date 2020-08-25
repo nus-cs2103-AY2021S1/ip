@@ -85,7 +85,7 @@ public class Duke {
 
     // adapted from https://stackoverflow.com/questions/4024544/how-to-parse-dates-in-multiple-formats-using-simpledateformat
     private static Date parseDate(String str) {
-        List<String> formatStrings = Arrays.asList("yyyy-M-dd", "dd/M/yyyy HHmm", "dd/M/yyyy");
+        List<String> formatStrings = Arrays.asList("yyyy-M-dd", "dd/M/yyyy HHmm", "dd/M/yyyy", "MMM d yyyy");
 
         for (String formatString : formatStrings) {
             try {
@@ -102,7 +102,7 @@ public class Duke {
                 if (display.length() == 4 || display.substring(4).isBlank()) {
                     throw new TaskException(TaskType.TODO, "description",  "cannot be empty.");
                 } else {
-                    tasks.add(new ToDo(display.substring(5)));
+                    tasks.add(new ToDo(display.substring(5), false));
                 }
             } else if (display.length() >= 8 && display.substring(0, 8).equals("deadline")) {
                 int idx = display.indexOf(" /by ");
@@ -114,7 +114,8 @@ public class Duke {
                     if (parseDate(display.substring(idx + 5)) == null) {
                         throw new TaskException(TaskType.DEADLINE, "time", "format is wrong.");
                     } else {
-                        tasks.add(new Deadline(display.substring(9, idx), parseDate(display.substring(idx + 5))));
+                        tasks.add(new Deadline(display.substring(9, idx), parseDate(display.substring(idx + 5)),
+                                false));
                     }
                 }
             } else if (display.length() >= 5 && display.substring(0, 5).equals("event")) {
@@ -127,7 +128,7 @@ public class Duke {
                     if (parseDate(display.substring(idx + 5)) == null) {
                         throw new TaskException(TaskType.EVENT, "time", "format is wrong.");
                     } else {
-                        tasks.add(new Event(display.substring(6, idx), parseDate(display.substring(idx + 5))));
+                        tasks.add(new Event(display.substring(6, idx), parseDate(display.substring(idx + 5)), false));
                     }
                 }
             } else {
@@ -141,8 +142,49 @@ public class Duke {
         }
     }
 
+    private static void addTaskFromStorage(String display) {
+        try {
+
+            String[] taskDetails = display.split(" \\| ");
+            String taskType = taskDetails[0];
+            boolean isDone = taskDetails[1].equals("1");
+            String description = taskDetails[2];
+            if (taskType.equals(TaskType.TODO.getSymbol())) {
+                tasks.add(new ToDo(description, isDone));
+            } else if (taskType.equals(TaskType.DEADLINE.getSymbol())) {
+                tasks.add(new Deadline(description, parseDate(taskDetails[3]), isDone));
+            } else if (taskType.equals(TaskType.EVENT.getSymbol())) {
+                tasks.add(new Deadline(description, parseDate(taskDetails[3]), isDone));
+            } else {
+                throw new DukeException("I don't know what that means");
+            }
+        } catch (DukeException err) {
+            formatResponse(err.getMessage());
+        }
+    }
+
+    public static void initializeTasks() {
+        File dir = new File("src/data");
+        if (!dir.exists()) {
+            return;
+        }
+        try {
+            File file = new File("src/data/duke.txt");
+            if (!file.exists()) {
+                return;
+            }
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                addTaskFromStorage(sc.nextLine());
+            }
+        } catch (IOException ex) {
+            formatResponse("Could not read tasks.");
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        initializeTasks();
         formatResponse("Hello! I'm Duke", "What can I do for you?");
         String display = "";
         while (!display.equals("bye")) {

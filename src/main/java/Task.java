@@ -40,10 +40,10 @@ public abstract class Task {
     protected boolean isDone;
     protected final TaskType taskType;
 
-    public Task(String description, TaskType taskType) {
+    public Task(String description, TaskType taskType, boolean isDone) {
         this.description = description;
         this.taskType = taskType;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
