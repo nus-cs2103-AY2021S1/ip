@@ -16,9 +16,9 @@ import java.util.Date;
 public class Parser {
 
     /** Represents date and time. */
-    private static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    private static final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
     /** Represents date. */
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      * Returns different Commands depending on the keywords that the user inputs.
@@ -77,10 +77,10 @@ public class Parser {
                 boolean isTime;
 
                 if (deadlineArr[1].split(" ").length == 1) {
-                    date = dateFormat.parse(deadlineArr[1]);
+                    date = DATE_FORMAT.parse(deadlineArr[1]);
                     isTime = false;
                 } else {
-                    date = dateTimeFormat.parse(deadlineArr[1]);
+                    date = DATE_TIME_FORMAT.parse(deadlineArr[1]);
                     isTime = true;
                 }
 
@@ -101,10 +101,10 @@ public class Parser {
                 boolean isTimeEvent;
 
                 if (eventArr[1].split(" ").length == 1) {
-                    dateEvent = dateFormat.parse(eventArr[1]);
+                    dateEvent = DATE_FORMAT.parse(eventArr[1]);
                     isTimeEvent = false;
                 } else {
-                    dateEvent = dateTimeFormat.parse(eventArr[1]);
+                    dateEvent = DATE_TIME_FORMAT.parse(eventArr[1]);
                     isTimeEvent = true;
                 }
 

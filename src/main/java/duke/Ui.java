@@ -34,7 +34,6 @@ public class Ui {
         String intro1 = "Hello! I'm Duke \n";
         String intro2 = "What can I do for you? \n";
 
-        //String greeting = addDividers(formatString(intro1) + formatString(intro2));
         String greeting = formatString(intro1 + intro2);
         System.out.println(greeting);
     }

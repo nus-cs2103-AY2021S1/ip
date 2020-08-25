@@ -19,7 +19,7 @@ public class Event extends Task {
      * @param date Date of event.
      * @param isTime Indicates if date has a time.
      */
-    public Event (String description, Date date, boolean isTime) {
+    public Event(String description, Date date, boolean isTime) {
         super(description);
         this.date = date;
         this.isTime = isTime;
@@ -32,7 +32,7 @@ public class Event extends Task {
      * @param isTime Indicates if date has a time.
      * @param isDone Indicates if event is done.
      */
-    public Event (String description, Date date, boolean isTime, boolean isDone) {
+    public Event(String description, Date date, boolean isTime, boolean isDone) {
         super(description, isDone);
         this.date = date;
         this.isTime = isTime;

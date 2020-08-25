@@ -21,7 +21,7 @@ public class Deadline extends Task {
      * @param date Date of deadline.
      * @param isTime Indicates if date has a time.
      */
-    public Deadline (String description, Date date, boolean isTime) {
+    public Deadline(String description, Date date, boolean isTime) {
         super(description);
         this.date = date;
         this.isTime = isTime;
@@ -34,7 +34,7 @@ public class Deadline extends Task {
      * @param isTime Indicates if date has a time.
      * @param isDone Indicates if deadline is done.
      */
-    public Deadline (String description, Date date, boolean isTime, boolean isDone) {
+    public Deadline(String description, Date date, boolean isTime, boolean isDone) {
         super(description, isDone);
         this.date = date;
         this.isTime = isTime;

@@ -12,7 +12,6 @@ public class ExitCommand extends Command {
     /**
      * Creates exit command.
      */
-    public ExitCommand() {}
 
 
     /**
