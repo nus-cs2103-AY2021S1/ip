@@ -1,11 +1,25 @@
 package duke;
 
+/**
+ * Encapsulates a Done Command.
+ */
 public class DoneCommand extends Command {
 
+    /**
+     * Instantiates a Done command.
+     * @param parsedCommand command that has been parsed
+     */
     public DoneCommand(String[] parsedCommand) {
         super(parsedCommand);
     }
 
+    /**
+     * Executes command and write to storage.
+     * @param tasks the tasklist containing tasks so far
+     * @param ui ui to interact with user
+     * @param storage storage to read and write to storage file
+     * @throws DukeException if parsedCommand does not meet the requirements
+     */
     @Override
     void execute(TaskList<Task> tasks, Ui ui, Storage storage) throws DukeException{
         try {

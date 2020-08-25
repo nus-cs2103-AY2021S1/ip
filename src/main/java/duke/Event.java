@@ -37,7 +37,7 @@ public class Event extends Task {
     }
 
     /**
-     * Overriden toString() method
+     * Overriden toString() method.
      * @return custom String
      */
     @Override
