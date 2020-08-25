@@ -104,8 +104,10 @@ public class Storage {
 
         } catch (IOException e1) {
             throw new DukeException("\u2639 Oops, error reading from " + location + filename);
-        } catch (NoSuchElementException | NumberFormatException e) {
-            throw new DukeException("\u2639 Oops, save file is corrupted, error encountered " + e.getLocalizedMessage().toLowerCase());
+        } catch (IndexOutOfBoundsException |NoSuchElementException | NumberFormatException e) {
+            throw new DukeException("\u2639 Oops, save file is corrupted, error encountered: " + e.getLocalizedMessage().toLowerCase());
+        } catch (DukeException e) {
+            throw new DukeException("\u2639 Oops, save file is corrupted, error parsing task");
         }
     }
 
@@ -114,6 +116,7 @@ public class Storage {
         ArrayList<Task> newList = new ArrayList<>();
         // If fail to load save file, prompts user to reset the savefile
         System.out.println("Type restart to reset task list or anything else to exit.");
+        System.out.println();
         if (scanner.nextLine().equals("restart")) {
             try {
                 // Resets save file to empty
