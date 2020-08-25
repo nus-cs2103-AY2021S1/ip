@@ -11,7 +11,6 @@ public class Duke {
         String open = "_______________________________________ \n"
                 + "Hello! I'm Duke \n"
                 + "What can I do for you? \n"
-                + "You can type 'help' to view commands \n"
                 + "_______________________________________ \n";
         System.out.println(open);
 
@@ -59,10 +58,6 @@ public class Duke {
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println(LINE + "Invalid input! Please specify which task you want to delete! \n" + LINE);
                     }
-                } else if (userCommand.equals("help")) { // Additional help feature
-                    handleHelp();
-                } else {
-                    System.out.println(LINE + "Invalid input! Please try again! \n" + LINE);
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
@@ -136,18 +131,6 @@ public class Duke {
                 + taskList.get(taskList.size() - 1) + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list."
                 + "\n" + LINE;
-        System.out.println(output);
-    }
-
-    public static void handleHelp() {
-        String output = LINE  + "These are my available commands: \n"
-                + "list: View entire list of task \n"
-                + "todo <desciption>: Add new todo to list \n"
-                + "deadline <description> /by <date/time>: Add new deadline to list \n"
-                + "event <description> /at <date/time>: Add new event to list \n"
-                + "done <task id>: Sets task as completed \n"
-                + "delete <task id>: Deletes task from list \n"
-                + "bye: Exits program \n" + LINE;
         System.out.println(output);
     }
 }
