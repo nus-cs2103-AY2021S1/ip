@@ -11,6 +11,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getDescription() {
         return this.description;
     }
@@ -41,7 +46,7 @@ public class Task {
         int statusNum = this.getStatusIcon().equals("\u2713")
                 ? 1
                 : 0;
-        return statusNum + " | " + this.getDescription();
+        return statusNum + " / " + this.getDescription();
     }
 
     @Override

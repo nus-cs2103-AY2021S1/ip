@@ -10,13 +10,18 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone);
+        this.by = by;
+    }
+
     public String getBy() {
         return this.by;
     }
 
     @Override
     public String getData() {
-        return "D | " + super.getData() + " | " + this.getBy();
+        return "D / " + super.getData() + " / " + this.getBy();
     }
 
     @Override

@@ -10,13 +10,18 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event(String description, boolean isDone, String at) {
+        super(description, isDone);
+        this.at = at;
+    }
+
     public String getAt() {
         return this.at;
     }
 
     @Override
     public String getData() {
-        return "E | " + super.getData() + " | " + this.getAt();
+        return "E / " + super.getData() + " / " + this.getAt();
     }
 
     @Override

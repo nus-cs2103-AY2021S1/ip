@@ -42,6 +42,13 @@ public class Duke {
     }
 
     /**
+     * Adds a task to the tasks list.
+     */
+    public static void addTask(Task task) {
+        tasks.add(task);
+    }
+
+    /**
      * Processes the input fed to Duke.
      *
      * @param input Input string to be processed.
