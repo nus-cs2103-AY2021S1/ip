@@ -16,6 +16,13 @@ import java.time.format.DateTimeParseException;
 import static java.lang.Integer.parseInt;
 
 public class Parser {
+	/**
+	 * Parses the command from CLI and returns a corresponding Command object.
+	 *
+	 * @param command
+	 * @return A command object corresponding to the input command string.
+	 * @throws DukeException If unknown command or error in command.
+	 */
 	public static Command parse(String command) throws DukeException {
 		return parseAndReturnCommand(command);
 	}

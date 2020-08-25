@@ -13,10 +13,24 @@ import java.time.LocalDate;
 public class DateListCommand extends Command {
 	LocalDate localDate;
 
+	/**
+	 * Initializes the command with the LocalDate to match with the tasks in TaskList.
+	 *
+	 * @param localDate
+	 */
 	public DateListCommand(LocalDate localDate) {
 		this.localDate = localDate;
 	}
 
+	/**
+	 * Searches for tasks that have the same date and time as localDate
+	 * and prints them in the Ui.
+	 *
+	 * @param taskList The TaskList used by Duke.
+	 * @param ui The Ui used by Duke.
+	 * @param storage The Storage used by Duke.
+	 * @throws DukeException
+	 */
 	@Override
 	public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 		StringBuilder stringBuilder = new StringBuilder();

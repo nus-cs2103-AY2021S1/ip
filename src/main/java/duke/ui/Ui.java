@@ -3,6 +3,7 @@ package duke.ui;
 import java.util.Scanner;
 
 public class Ui {
+
 	static String INDENTATION = "    ";
 
 	static String LINE = "-------------------------------------------------------------";
@@ -17,11 +18,17 @@ public class Ui {
 
 	Scanner scanner = new Scanner(System.in);
 
+	/**
+	 * Prints the entire opening message.
+	 */
 	public void showWelcome() {
 		System.out.println(OPENING);
 		printMessage("Hello! I'm Duke.\nHow can I help you today?");
 	}
 
+	/**
+	 * Prints the input string on the console between two lines.
+	 */
 	public void printMessage(String message) {
 		showLine();
 		String[] splitByNewLine = message.split("\\r?\\n");
@@ -32,11 +39,22 @@ public class Ui {
 		showLine();
 	}
 
+	/**
+	 * Reads a line of command from the CLI and returns it as a String.
+	 *
+	 * @return The String of the input in CLI.
+	 */
 	public String readCommand() {
 		String command = scanner.nextLine();
 		return command;
 	}
 
+	/**
+	 * Prints the input String with exclamation marks at the front and end of
+	 * the String to signify an error message.
+	 *
+	 * @param errorMessage The String of the error message to be printed.
+	 */
 	public void showError(String errorMessage) {
 		showLine();
 		String[] splitByNewLine = errorMessage.split("\\r?\\n");
@@ -47,10 +65,9 @@ public class Ui {
 		showLine();
 	}
 
-	public void showLoadingError() {
-		showError("Saved tasks could not be loaded.");
-	}
-
+	/**
+	 * Prints a line in the CLI.
+	 */
 	public void showLine() {
 		indent();
 		System.out.println(LINE);

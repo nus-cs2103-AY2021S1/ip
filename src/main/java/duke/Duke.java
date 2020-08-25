@@ -9,6 +9,9 @@ import duke.ui.Ui;
 
 public class Duke {
 
+    /**
+     * Task types used in Duke.
+     */
     public enum TaskType {
         TODO("todo"),
         EVENT("event"),
@@ -25,19 +28,25 @@ public class Duke {
     TaskList tasks;
     Storage storage;
 
+    /**
+     * Initializes a Duke object.
+     *
+     * @param pathName The path for the storage file.
+     */
     public Duke(String pathName) {
         ui = new Ui();
         storage = new Storage(pathName);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            //ui.showLoadingError();
             ui.showError(e.getMessage());
             tasks = new TaskList();
         }
     }
 
-
+    /**
+     * Runs the Duke object.
+     */
     public void run() {
         ui.showWelcome();
         boolean isRunning = true;
