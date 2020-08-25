@@ -1,4 +1,5 @@
 import duke.exceptions.DukeException;
+import duke.exceptions.IncompleteDukeCommandException;
 import duke.parser.Parser;
 import duke.Storage;
 import duke.Ui;
@@ -32,6 +33,8 @@ public class Duke {
                 c.execute(taskList, storage);
                 c.printFeedback(ui);
                 isExit = c.isExit();
+            } catch (IncompleteDukeCommandException e) {
+                ui.formattedPrint(ui.prependIndent("Something went wrong, but I'm not sure what...", 1));
             } catch (DukeException e) {
                 ui.formattedPrint(ui.prependIndent(e.getMessage(), 1));
             }

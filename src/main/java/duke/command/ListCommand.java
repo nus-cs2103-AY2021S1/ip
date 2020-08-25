@@ -3,6 +3,7 @@ package duke.command;
 import duke.exceptions.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.exceptions.IncompleteDukeCommandException;
 import duke.task.TaskList;
 
 public class ListCommand extends Command {
@@ -18,7 +19,7 @@ public class ListCommand extends Command {
         if (super.completed) {
             ui.formattedPrint(ui.prependIndent(this.printout, 1));
         } else {
-            throw new DukeException("This action has not been completed.");
+            throw new IncompleteDukeCommandException("List command was not completed.");
         }
     }
 

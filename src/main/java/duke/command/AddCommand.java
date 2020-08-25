@@ -3,6 +3,7 @@ package duke.command;
 import duke.exceptions.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.exceptions.IncompleteDukeCommandException;
 import duke.task.*;
 
 public class AddCommand extends Command {
@@ -32,12 +33,12 @@ public class AddCommand extends Command {
         super.completed = true;
     }
 
-    public void printFeedback(Ui ui) throws DukeException {
+    public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
         if (super.completed) {
             String feedback = String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in your list.\n", createdTask.toString(), remainingTaskCount);
             ui.formattedPrint(ui.prependIndent(feedback, 1));
         } else {
-            throw new DukeException("The command has not been executed.");
+            throw new IncompleteDukeCommandException("Add command was not completed.");
         }
     }
 
