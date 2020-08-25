@@ -21,7 +21,7 @@ public class Parser {
             ret = Integer.toString(hour == 12 ? 12 : hour - 12).concat(ret);
         } else {
             ret = "AM";
-            ret = Integer.toString(hour).concat(ret);
+            ret = Integer.toString(hour == 0 ? 12 : hour).concat(ret);
         }
         return ret;
     }
