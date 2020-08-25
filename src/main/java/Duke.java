@@ -1,10 +1,14 @@
+import java.io.File;
+import java.io.FileInputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args){
+        init();
         String gap = "        ";
 
         String init = "        ____________________________________________________________\n" +
@@ -16,7 +20,6 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String temp;
-        DukeCommand.tasks = new ArrayList<>();
 
         while(!(temp = sc.nextLine()).equals("bye")) {
             System.out.println("        ____________________________________________________________");
@@ -58,4 +61,21 @@ public class Duke {
                 "        ____________________________________________________________\n";
         System.out.println(exit);
     }
+
+    public static void init() {
+        String pathName = "." + File.separator + "data" + File.separator;
+        String fileName = "saved.duke";
+
+        try{
+            File file = new File(pathName + fileName);
+            if(file.exists()) {
+                FileInputStream fis = new FileInputStream(file);
+                List<Task> list = (List<Task>)SerializeUtil.deserialize(fis.readAllBytes());
+                DukeCommand.tasks = list;
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
+

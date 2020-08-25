@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -10,7 +7,7 @@ public enum DukeCommand {
 
     TODO("todo", 200),DEADLINE("deadline", 201),EVENT("event", 201),
 
-    DONE("done", 300),DELETE("delete", 301),SAVE("save", 302),
+    DONE("done", 300),DELETE("delete", 301),
 
     BYE("bye", 400);
 
@@ -62,6 +59,7 @@ public enum DukeCommand {
             System.out.println("        Got it. I've added this task:");
             System.out.println("          " + todo);
             System.out.println("        Now you have " + tasks.size() + " task(s) in the list.");
+            saveChanges();
         }
     }
 
@@ -78,6 +76,7 @@ public enum DukeCommand {
             System.out.println("        Got it. I've added this task:");
             System.out.println("          " + deadline);
             System.out.println("        Now you have " + tasks.size() + " task(s) in the list.");
+            saveChanges();
         }
     }
 
@@ -94,6 +93,7 @@ public enum DukeCommand {
             System.out.println("        Got it. I've added this task:");
             System.out.println("          " + event);
             System.out.println("        Now you have " + tasks.size() + " task(s) in the list.");
+            saveChanges();
         }
     }
 
@@ -110,6 +110,7 @@ public enum DukeCommand {
 
                 System.out.println("        Nice! I've marked this task as done: \n");
                 System.out.println("          " + tas);
+                saveChanges();
             }
         }
     }
@@ -127,18 +128,18 @@ public enum DukeCommand {
 
                 System.out.println("        Noted. I've removed this task:");
                 System.out.println("          " + tas);
+                saveChanges();
             } else {
                 throw new DukeException("\u2639 OOPS!!! There isn't a task with that index!");
             }
         }
     }
 
-    public static void saveComm(String input) throws DukeException{
+    public static void saveChanges() throws DukeException {
+        String pathName = "." + File.separator + "data" + File.separator;
+        String fileName = "saved.duke";
 
         try{
-            String pathName = "." + File.separator + "data" + File.separator;
-            String fileName = "saved.duke";
-
             File f = new File(pathName);
             if(!f.exists()){
                 f.mkdirs();
@@ -151,11 +152,8 @@ public enum DukeCommand {
             FileOutputStream fos = new FileOutputStream(file);
             byte[] data = SerializeUtil.serialize(tasks);
             fos.write(data);
-
-            System.out.println("        Saved!");
-        } catch(Exception e) {
-            throw new DukeException("Oops! Something went wrong!");
+        } catch (IOException e) {
+            throw new DukeException("        Failed to save changes.");
         }
-
     }
 }
