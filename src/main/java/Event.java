@@ -46,6 +46,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String stringify() {
+        String number = isDone ? "1" : "0";
+        return "E | " + number + " | " + super.description + " | " + this.at;
+    }
+    
+    @Override
     public String toString() {
         return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (at: " + at + ")";
     }
