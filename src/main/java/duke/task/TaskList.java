@@ -131,10 +131,25 @@ public class TaskList {
 
         return convertTaskListToString(temp);
     }
+    
+    /**
+     * Converts a task list to a numbered list filtered by a keyword.
+     *
+     * @param keyword String keyed in by the user as an argument.
+     * @return String with numbered list representation of the filtered task list.
+     */
+    public String taskListToKeywordFilteredString(String keyword) {
+        System.out.println(keyword);
+        List<Task> temp = tasks.stream()
+                .filter(task -> task.toString().contains(keyword))
+                .collect(Collectors.toList());
+
+        return convertTaskListToString(temp);
+    }
 
     /**
      * Populates the task list based on a text file found in a given filepath.
-     * 
+     *
      * @param filePath Filepath that the text file with the data is found.
      * @throws DukeException If the tasks in the text file are stored incorrectly.
      * @throws IOException If there are issues with reading from the file.

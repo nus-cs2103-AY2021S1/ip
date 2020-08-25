@@ -49,6 +49,8 @@ public class Parser {
             return new EventCommand(argument);
         case DEADLINE:
             return new DeadlineCommand(argument);
+        case FIND:
+            return new FindCommand(argument);
         case INVALID: default:
             return new InvalidCommand();
         }

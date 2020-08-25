@@ -27,4 +27,10 @@ delete 3
 delete 2
 delete 1
 list
+find [E]
+find [D]
+delete 4
+delete 3
+delete 2
+delete 1
 bye
