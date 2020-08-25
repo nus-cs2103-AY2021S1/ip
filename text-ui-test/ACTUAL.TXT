@@ -24,40 +24,17 @@ Here are the tasks in your list:
 So stop procrastinating!
 ____________________________________________________________
 
-Successfully saved your data.
+Error: Date format not accepted.
 ____________________________________________________________
-Got it! I have added the task:
-[Event][X] meeting (at: Monday)
-Now you have 2 tasks in the list.
-____________________________________________________________
-
-Successfully saved your data.
-____________________________________________________________
-Got it! I have added the task:
-[Deadline][X] return books (by: Tuesday)
-Now you have 3 tasks in the list.
+I don't understand the date you are giving -_-
+Please give in the following formats:
+MM/dd/yyyy or yyyy-MM-dd
 ____________________________________________________________
 
-Successfully saved your data.
+Error: Date format not accepted.
 ____________________________________________________________
-Congratz! I will marked this task as completed for you!
-[Event][?] meeting (at: Monday)
-Keep up the good work and continue to stay motivated.
-You've got 2 task left to be completed!
-____________________________________________________________
-
-Successfully saved your data.
-____________________________________________________________
-Got it! I have added the task:
-[ToDo][X] change the world
-Now you have 4 tasks in the list.
-____________________________________________________________
-
-____________________________________________________________
-OOPS!!! I'm sorry, but I don't know what that means :-(
-____________________________________________________________
-
-____________________________________________________________
-Spero di rivederti presto
+I don't understand the date you are giving -_-
+Please give in the following formats:
+MM/dd/yyyy or yyyy-MM-dd
 ____________________________________________________________
 
