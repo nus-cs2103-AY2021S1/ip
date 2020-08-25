@@ -21,26 +21,42 @@ _______________________________________________________________
 _______________________________________________________________
 
 _______________________________________________________________
+Please input in the following format 'deadline <description> /by <yyyy-MM-dd HH:mm>' with a valid date & time
+_______________________________________________________________
+
+_______________________________________________________________
+Please input in the following format 'event <description> /at <yyyy-MM-dd HH:mm>' with a valid date & time
+_______________________________________________________________
+
+_______________________________________________________________
+Please input in the following format 'deadline <description> /by <yyyy-MM-dd HH:mm>' with a valid date & time
+_______________________________________________________________
+
+_______________________________________________________________
+Please input in the following format 'event <description> /at <yyyy-MM-dd HH:mm>' with a valid date & time
+_______________________________________________________________
+
+_______________________________________________________________
 Got it. I've added this task:
-[D][✘] return book (by: Sunday)
+[D][✘] return book (by: Dec 1 2019 00:11)
 Now you have 2 tasks in the list.
 _______________________________________________________________
 
 _______________________________________________________________
 Got it. I've added this task:
-[E][✘] project meeting (at: Mon 2-4pm)
+[E][✘] project meeting (at: Aug 22 2020 23:32)
 Now you have 3 tasks in the list.
 _______________________________________________________________
 
 _______________________________________________________________
 Nice! I've marked this task as done:
-[D][✓] return book (by: Sunday)
+[D][✓] return book (by: Dec 1 2019 00:11)
 _______________________________________________________________
 
 _______________________________________________________________
 1.[T][✘] borrow book
-2.[D][✓] return book (by: Sunday)
-3.[E][✘] project meeting (at: Mon 2-4pm)
+2.[D][✓] return book (by: Dec 1 2019 00:11)
+3.[E][✘] project meeting (at: Aug 22 2020 23:32)
 _______________________________________________________________
 
 _______________________________________________________________

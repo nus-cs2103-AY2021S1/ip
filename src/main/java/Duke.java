@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Duke {
 
+
 	public static void main(String[] args) {
 		//prints Greeting message
 		printGreeting();
@@ -126,12 +127,13 @@ public class Duke {
 				throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
 			} else {
 
-				//check if contains deadline " /by "
-				if (instruction[1].contains(" /by ")) {
+				//check if contains deadline " /by yyyy-mm-dd"
+				if ((instruction[1].contains(" /by ")) &&
+						(instruction[1].split(" /by ")[1].matches("^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3]):[0-5][0-9]"))) {
 					addDeadline(lst, instruction[1].split(" /by ")[0], instruction[1].split(" /by ")[1]);
 
 				} else {
-					throw new DukeException("Please input in the following format 'deadline <description> /by <time>' ");
+					throw new DukeException("Please input in the following format 'deadline <description> /by <yyyy-MM-dd HH:mm>' with a valid date & time");
 				}
 			}
 			break;
@@ -141,11 +143,12 @@ public class Duke {
 			if (instruction.length == 1) {
 				throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
 			} else {
-				//check if contains event " /at "
-				if (instruction[1].contains(" /at ")) {
+				//check if contains event " /at yyyy-mm-dd"
+				if ((instruction[1].contains(" /at ")) &&
+						(instruction[1].split(" /at ")[1].matches("^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3]):[0-5][0-9]"))) {
 					addEvent(lst, instruction[1].split(" /at ")[0], instruction[1].split(" /at ")[1]);
 				} else {
-					throw new DukeException("Please input in the following format 'event <description> /at <time>' ");
+					throw new DukeException("Please input in the following format 'event <description> /at <yyyy-MM-dd HH:mm>' with a valid date & time");
 				}
 			}
 			break;
