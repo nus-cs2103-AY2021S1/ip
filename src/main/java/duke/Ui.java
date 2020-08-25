@@ -45,6 +45,7 @@ public class Ui {
 
     /**
      * Gets the string to print to reflect the number of tasks in the current task list
+     *
      * @param tasks Task list
      * @return zeroTaskMessage if the task list is empty, numOfTasksMessage formatted with the number of
      * tasks if the list is not empty
@@ -60,6 +61,7 @@ public class Ui {
 
     /**
      * Prints the strings with top and bottom horizontal lines and indentation
+     *
      * @param strings Array of strings to be printed
      */
     void print(String[] strings) {
@@ -73,6 +75,7 @@ public class Ui {
 
     /**
      * Prints strings upon completing a task
+     *
      * @param task Completed task
      */
     public void printCompleteTask(Task task) {
@@ -82,6 +85,7 @@ public class Ui {
 
     /**
      * Prints strings upon creating a new task
+     *
      * @param tasks Current task list
      * @param task Created task
      */
@@ -92,6 +96,7 @@ public class Ui {
 
     /**
      * Prints strings upon deleting a task
+     *
      * @param tasks Current task list
      * @param task Deleted task
      */
@@ -133,11 +138,11 @@ public class Ui {
 
     /**
      * Prints string representation of all tasks
+     *
      * @param tasks Current task list
      */
-    public void printList(TaskList tasks) {
+    public void printTaskList(TaskList tasks) {
         if (tasks.isEmpty()) {
-            String[] strings = new String[] {this.zeroTasksMessage};
             this.print(new String[] {this.zeroTasksMessage});
         } else {
             String[] strings = new String[tasks.getNumOfTasks() + 1];

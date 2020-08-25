@@ -24,6 +24,7 @@ public class CreateEventCommand extends Command {
 
     /**
      * Constructor
+     *
      * @param description Description of the event
      * @param isComplete Initial completion status of the event
      * @param date Date of the event
@@ -36,6 +37,7 @@ public class CreateEventCommand extends Command {
 
     /**
      * Executes the command to create an event
+     *
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui

@@ -15,6 +15,7 @@ public class CompleteTaskCommand extends Command {
 
     /**
      * Constructor
+     *
      * @param taskIndex Index of the task
      */
     public CompleteTaskCommand(int taskIndex) {
@@ -23,6 +24,7 @@ public class CompleteTaskCommand extends Command {
 
     /**
      * Executes the command to complete the task
+     *
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui

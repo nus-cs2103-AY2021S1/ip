@@ -11,6 +11,7 @@ public class InvalidInputCommand extends Command {
 
     /**
      * Executes the command to handle an invalid input
+     *
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui

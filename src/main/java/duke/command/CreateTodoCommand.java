@@ -18,6 +18,7 @@ public class CreateTodoCommand extends Command {
 
     /**
      * Constructor
+     *
      * @param description Description of the todo
      * @param isComplete Initial completion status of the todo
      */
@@ -28,6 +29,7 @@ public class CreateTodoCommand extends Command {
 
     /**
      * Executes the command to create a todo
+     *
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui

@@ -3,12 +3,13 @@ package main.java.duke.task;
 import java.time.LocalDate;
 
 /**
- * Encapsulates a deadline.
+ * Encapsulates a deadline
  */
 public class Deadline extends Task {
 
     /**
      * Constructor
+     *
      * @param description Description of the deadline
      * @param isComplete Completion status of the task
      * @param date Date of the deadline
@@ -19,7 +20,8 @@ public class Deadline extends Task {
 
     /**
      * Gets the string representation of the deadline to be written into the file upon exit
-     * @return String representation of the deadline
+     *
+     * @return String representation of the deadline in the file
      */
     @Override
     public String[] getDataString() {
@@ -28,7 +30,8 @@ public class Deadline extends Task {
 
     /**
      * Gets the string representation of the deadline to be printed in the UI
-     * @return String representation of the deadline
+     *
+     * @return String representation of the deadline in the UI
      */
     @Override
     public String toString() {

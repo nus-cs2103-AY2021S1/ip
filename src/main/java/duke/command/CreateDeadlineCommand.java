@@ -24,6 +24,7 @@ public class CreateDeadlineCommand extends Command {
 
     /**
      * Constructor
+     *
      * @param description Description of the deadline
      * @param isComplete Initial completion status of the deadline
      * @param date Date of the deadline
@@ -36,6 +37,7 @@ public class CreateDeadlineCommand extends Command {
 
     /**
      * Executes the command to create a deadline
+     *
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui

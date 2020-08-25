@@ -21,7 +21,8 @@ public class Storage {
     private final String pathName;
 
     /**
-     * Sole constructor
+     * Constructor
+     *
      * @param pathName pathname of the file
      */
     Storage(String pathName) {
@@ -31,6 +32,7 @@ public class Storage {
 
     /**
      * Creates new tasks based on the input strings read from the file and adds these tasks to the task list
+     *
      * @param tasks Current task list
      * @param strings Input strings read from the file
      */
@@ -49,8 +51,9 @@ public class Storage {
 
     /**
      * Loads data from file specified by pathName into a task list
-     * @return TaskList represented by the data in the file specified by pathName. task list is empty if loading of
-     * data was unsuccessful
+     * Task list is empty if loading of data was unsuccessful
+     *
+     * @return TaskList represented by the data in the file specified by pathName.
      */
     TaskList loadTasks() {
         TaskList tasks = new TaskList();
@@ -70,6 +73,7 @@ public class Storage {
 
     /**
      * Clears all the contents in the file
+     *
      * @return true if the contents are cleared successfully, false otherwise
      */
     public boolean resetFile() {
@@ -84,6 +88,7 @@ public class Storage {
 
     /**
      * Saves data in current task list into file specified by pathName
+     *
      * @param taskList Task list to be saved
      * @return true if saving is successful, false otherwise
      */
