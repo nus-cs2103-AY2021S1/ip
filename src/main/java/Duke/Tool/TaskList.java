@@ -1,7 +1,12 @@
+package Duke.Tool;
+
+import Duke.Duke;
+import Duke.Tasks.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
-    ArrayList<Task> taskList;
+     public ArrayList<Task> taskList;
 
     public TaskList(ArrayList<Task> tl) {
         this.taskList = tl;

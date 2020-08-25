@@ -1,7 +1,13 @@
+package Duke.Tasks;
+
+import Duke.Tool.Storage;
+import Duke.Tool.TaskList;
+import Duke.Ui;
+
 public class Task {
     protected String name;
     protected boolean isDone;
-    protected boolean isExit;
+    public boolean isExit;
 
     public Task(String name, boolean isDone) {
         this.name = name;

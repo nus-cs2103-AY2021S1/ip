@@ -1,3 +1,5 @@
+package Duke.Tasks;
+
 public class Exit extends Task{
 
     public Exit() {

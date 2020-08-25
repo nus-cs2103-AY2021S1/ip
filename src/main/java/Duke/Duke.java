@@ -1,11 +1,11 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+package Duke;
 
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import Duke.Exceptions.DukeException;
+import Duke.Tasks.Task;
+import Duke.Tool.Parser;
+import Duke.Tool.Storage;
+import Duke.Tool.TaskList;
+
 import java.io.IOException;
 
 public class Duke {
@@ -24,7 +24,8 @@ public class Duke {
         }
     }
 
-    public void run() {
+    public void run() throws DukeException {
+        ui.showLogo();
         ui.showGreeting();
         boolean continueOperate = true;
         while (continueOperate) {
@@ -36,9 +37,7 @@ public class Duke {
         ui.showGoodbye();
     }
 
-        public static void main(String[] args) {
+        public static void main(String[] args) throws DukeException {
             new Duke("data/tasks.txt").run();
         }
-
-
 }

@@ -1,3 +1,9 @@
+package Duke.Tasks;
+
+import Duke.Tool.Storage;
+import Duke.Tool.TaskList;
+import Duke.Ui;
+
 public class Done extends Task{
     int i;
     public Done(int i) {
