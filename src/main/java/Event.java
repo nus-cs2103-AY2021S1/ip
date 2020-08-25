@@ -42,6 +42,18 @@ public class Event extends Task {
     public String toString() {
         return "[EVENT]"
                 + " " + super.toString()
-                + " (at:" + this.timing + ")";
+                + "(at:" + this.timing + ")";
+    }
+
+    @Override
+    String toStorageRepresentation() {
+        String result;
+        result = "Event" + "|";
+        result += this.isDone ? "1" : "0";
+        result += "|";
+        result += this.description;
+        result += "|";
+        result += this.timing;
+        return result;
     }
 }

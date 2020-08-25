@@ -1,0 +1,5 @@
+Todo|1|buy food
+Deadline|0|CS2103 | 20 August 2020
+Event|0|run | Utown 10pm
+Event|0|gym | Utown 10pm
+Event|0|dance | school

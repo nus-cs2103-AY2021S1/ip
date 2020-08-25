@@ -38,4 +38,14 @@ public class ToDo extends Task {
     public String toString() {
         return "[TODO]" + " " + super.toString();
     }
+
+    @Override
+    String toStorageRepresentation() {
+        String result;
+        result = "Todo" + "|";
+        result += this.isDone ? "1" : "0";
+        result += "|";
+        result += this.description;
+        return result;
+    }
 }

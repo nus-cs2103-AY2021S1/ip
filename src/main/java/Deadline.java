@@ -42,6 +42,18 @@ public class Deadline extends Task {
     public String toString() {
         return "[DEADLINE]"
                 + " " + super.toString()
-                + " (by:" + this.endDate + ")";
+                + "(by:" + this.endDate + ")";
+    }
+
+    @Override
+    String toStorageRepresentation() {
+        String result;
+        result = "Deadline" + "|";
+        result += this.isDone ? "1" : "0";
+        result += "|";
+        result += this.description;
+        result += "|";
+        result += this.endDate;
+        return result;
     }
 }
