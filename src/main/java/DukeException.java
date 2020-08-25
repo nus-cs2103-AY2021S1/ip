@@ -13,7 +13,8 @@ public class DukeException {
         todo_empty,
         deadline_empty_incomplete,
         event_empty_incomplete,
-        read_file
+        read_file,
+        improper_dateTime
     }
 
     @Override
@@ -45,6 +46,10 @@ public class DukeException {
                 break;
             case read_file:
                 output = "     ☹ OOPS!!! There seems to be some problem reading the memory!";
+                break;
+            case improper_dateTime:
+                output = "     ☹ OOPS!!! The time provided is in an incorrect form." +
+                        "\n     Please follow the format: 'YYYY-MM-DD HHMM' or 'YYYY-MM-DD'";
                 break;
             default:
                 output = "     ☹ OOPS!!! Unspecified problem detected!" + full_guide;

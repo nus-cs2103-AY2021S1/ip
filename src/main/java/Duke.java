@@ -2,6 +2,8 @@ package main.java;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalTime;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +13,11 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
     public static String separation_line = "    ____________________________________________________________";
@@ -19,6 +26,7 @@ public class Duke {
     public static String ending_line = "\n" + separation_line + "\n";
 
     public static List<Task> task_collections = new ArrayList<>();
+
     public static String split_notn = "@#%#@%";
 
     public static String memory_file_dir = "./data/";
@@ -36,22 +44,68 @@ public class Duke {
         return memoStr;
     }
 
-    public static void write_memory(List<Task> task_list) throws IOException {
-        FileWriter fw = new FileWriter(memory_file_dir + memory_file_name);
-        String textToAppend = "";
-        Iterator task_iter = task_list.iterator();
-        while (task_iter.hasNext()) {
-            Task t = (Task) task_iter.next();
-            textToAppend += taskToMemoStr(t);
+    public static void write_memory(List<Task> task_list) {
+        try {
+            FileWriter fw = new FileWriter(memory_file_dir + memory_file_name);
+            String textToAppend = "";
+            Iterator task_iter = task_list.iterator();
+            while (task_iter.hasNext()) {
+                Task t = (Task) task_iter.next();
+                textToAppend += taskToMemoStr(t);
+            }
+            fw.write(textToAppend);
+            fw.close();
+        } catch (Exception ex) {
+            handleException(DukeException.ExceptionType.read_file);
         }
-        fw.write(textToAppend);
-        fw.close();
     }
 
-    public static void appendToFile(String filePath, Task t) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true); // appending instead of overwriting
-        fw.write(taskToMemoStr(t));
-        fw.close();
+    public static void appendToFile(String filePath, Task t) {
+        try {
+            FileWriter fw = new FileWriter(filePath, true); // appending instead of overwriting
+            fw.write(taskToMemoStr(t));
+            fw.close();
+        } catch (Exception ex) {
+            handleException(DukeException.ExceptionType.read_file);
+        }
+    }
+
+    public static DateTimeFormatter dtf = DateTimeFormatter.ofLocalizedDateTime(
+            FormatStyle.MEDIUM, FormatStyle.SHORT);
+
+    public static String processTime(String dateTime) {
+        String date;
+        String time;
+
+        try {
+            if (dateTime.length() > 11) {
+                String[] parts = dateTime.split(" ", 2);
+                time = parts[0].length() == 4 ? parts[0] : parts[1];
+                date = parts[0].length() == 4 ? parts[1] : parts[0];
+            } else {
+                date = dateTime;
+                time = "2359";
+            }
+
+            LocalTime lt = LocalTime.of(
+                    Integer.parseInt(time.substring(0, 2)), Integer.parseInt(time.substring(2)));
+
+            date = date.replaceAll("\\D", "-");
+            String[] date_seg = date.split("-", 3);
+
+            if (date_seg[0].length() != 4) {
+                String temp = date_seg[0];
+                date_seg[0] = date_seg[2];
+                date_seg[2] = temp;
+            }
+            LocalDate ld = LocalDate.parse(date_seg[0] + "-" + date_seg[1] + "-" + date_seg[2]);
+
+            LocalDateTime ldt = LocalDateTime.of(ld, lt);
+            return ldt.format(dtf);
+        } catch (Exception ex) {
+            handleException(DukeException.ExceptionType.improper_dateTime);
+        }
+        return "Unknown Date/Time";
     }
 
     public static void handleException(DukeException.ExceptionType et) {
@@ -148,7 +202,8 @@ public class Duke {
         Task t = null;
         if (!type.equals("todo")) {
             try {
-                input_split_arr = input_split_arr[1].split(" /", 2);
+                input_split_arr = input_split_arr[1].split(
+                        type.equals("event") ? " /at " : " /by ", 2);
             } catch (Exception ex) {
                 handleException(type.equals("deadline")
                         ? DukeException.ExceptionType.deadline_empty_incomplete
@@ -162,7 +217,9 @@ public class Duke {
                 } else {
                     String time;
                     try {
-                        time = input_split_arr[1].split(" ", 2)[1];
+                        time = input_split_arr[1];
+                        //time = input_split_arr[1].split(" ", 2)[1];
+                        time = processTime(time);
                         t = type.equals("event")
                                 ? new Event(input_split_arr[0], time)
                                 : new Deadline(input_split_arr[0], time);
@@ -181,11 +238,7 @@ public class Duke {
             }
             if (exception_absent) {
                 task_collections.add(t);
-                try {
-                    appendToFile(memory_file_dir + memory_file_name, t);
-                } catch (IOException ioe) {
-                    System.out.println();
-                }
+                appendToFile(memory_file_dir + memory_file_name, t);
                 if (exception_absent) {
                     System.out.println(indent + "Got it. I've added ths task:");
                     System.out.println(indent + "  " + task_collections.get(task_collections.size() - 1));
@@ -237,7 +290,15 @@ public class Duke {
         }
     }
 
-    /*public static void editTask(String action, String[] input_split_arr) {
+}
+
+//compile when current directory is at IndividualProject/text-ui-test
+//javac -cp ../src/ ../src/main/java/Task.java   etc. (Task, Deadline, Event, Todo, Duke)
+//sh runtest.sh
+
+
+
+/*public static void editTask(String action, String[] input_split_arr) {
         int action_number = -1;
         String success_result = "";
         try {
@@ -315,8 +376,3 @@ public class Duke {
             }
         }
     }*/
-}
-
-//compile when current directory is at IndividualProject/text-ui-test
-//javac -cp ../src/ ../src/main/java/Task.java   etc. (Task, Deadline, Event, Todo, Duke)
-//sh runtest.sh
