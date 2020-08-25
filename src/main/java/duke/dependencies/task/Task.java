@@ -15,22 +15,41 @@ public abstract class Task implements Serializable, Schedulable {
 
     abstract String getDateLine();
 
+    /**
+     * Returns boolean indicating presence of date/deadline.
+     * @return true if the task has a date/deadline associated with it
+     */
     public boolean hasADate() {
         return false;
     };
 
+    /**
+     * Returns the task.
+     * @return string describing the task
+     */
     public String showTask() {
         return this.task;
     }
 
+    /**
+     * Returns boolean indicating whether task is empty.
+     * @return true if the task is empty
+     */
     public boolean isItEmpty() {
         return false;
     }
 
+    /**
+     * Completes the task.
+     */
     public void completed() {
         this.state = COMPLETED;
     }
 
+    /**
+     * Checks whether this task has been completed.
+     * @return
+     */
     public boolean isCompleted() {
         return state == COMPLETED;
     }
@@ -39,15 +58,16 @@ public abstract class Task implements Serializable, Schedulable {
 
     /**
      * Returns a task representing the corresponding task index in the todoList of the user.
-     * Task corresponds to Done, Delete commands.
+     * Task corresponds to Done, Delete commands. MiscTask cannot be completed by the user.
      *
-     * @param task this task should be in the inform "1" or "1 2 3"
+     * @param task this task should be in the inform "1" or "1 2 3", checking done at Parser
      * @return task
      */
     public static Task createMiscTask(String task) { return new DoneTask(task); }
 
     /**
      * Returns a task that is empty. Corresponds to a List command where there is no task.
+     * Empty task cannot be completed.
      *
      * @return empty task
      */
@@ -70,7 +90,7 @@ public abstract class Task implements Serializable, Schedulable {
      * specifying when the event is taking place.
      *
      * @param task string describing the task
-     * @param date date string, in valid format: "dd/MM/uuuu" or "uuuy-dd-MM"
+     * @param date date string, in valid format: "dd/MM/uuuu" or "uuuy-MM-dd"
      * @return eventTask
      */
     public static Task createEvent(String task, String date) {

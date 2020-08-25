@@ -2,35 +2,36 @@ package duke.dependencies.task;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TaskTest {
 
     @Test
     void getDateLine() {
-    }
-
-    @Test
-    void hasADate() {
+        //legacy method
     }
 
     @Test
     void showTask() {
+        Task t = Task.createEvent("Meeting", "2020-08-05");
+        assertEquals("Meeting", t.showTask());
     }
 
-    @Test
-    void isItEmpty() {
-
-    }
 
     @Test
     void completed() {
+        Task t = Task.createTodo("Run");
+        t.completed();
+        assertTrue(t.isCompleted());
     }
 
     @Test
     void createMiscTask() {
+        Task t = Task.createMiscTask("1");
+        assertAll(() -> assertFalse(t.hasADate()),
+                () -> assertEquals("1", t.showTask()),
+                () -> assertNull(t.state));
+
     }
 
     @Test
