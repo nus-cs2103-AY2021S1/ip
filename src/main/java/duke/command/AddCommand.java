@@ -8,7 +8,6 @@ import duke.task.TaskList;
 import duke.task.TaskType;
 
 public class AddCommand extends Command {
-
     private final TaskType taskType;
 
     public AddCommand(String args, TaskType taskType) {

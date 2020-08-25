@@ -6,7 +6,6 @@ import duke.task.TaskException;
 import duke.task.TaskList;
 
 public abstract class Command {
-
     protected final String args;
 
     protected Command(String args) {
