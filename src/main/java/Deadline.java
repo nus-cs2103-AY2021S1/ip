@@ -13,7 +13,7 @@ public class Deadline extends Task {
     }
 
     public String recordString() {
-        return "[E]" + super.toString() + " (at: " + formattedDate + ")";
+        return "[D]" + super.toString() + " (at: " + formattedDate + ")";
     }
 
     @Override
