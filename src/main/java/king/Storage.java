@@ -55,22 +55,7 @@ public class Storage {
             FileReader input = new FileReader(data.getAbsoluteFile());
             Scanner scanner = new Scanner(input);
             while (scanner.hasNextLine()){
-                String data[] = scanner.nextLine().split("@",4);
-                Task loadedItem;
-                switch (data[0]){
-                    case "T":
-                        loadedItem = new ToDo(data[2]);
-                        break;
-                    case "D":
-                        loadedItem = new Deadline(data[2], LocalDateTime.parse(data[3]));
-                        break;
-                    default:
-                        loadedItem = new Event(data[2],data[3]);
-                }
-                if (data[1].equals("1")){
-                    loadedItem.markAsDone();
-                }
-                items.add(loadedItem);
+                items.add(dataToTask(scanner.nextLine()));
             }
             input.close();
             scanner.close();
@@ -114,5 +99,41 @@ public class Storage {
             return false;
         }
         return true;
+    }
+
+    public TaskList find(String keyword){
+        TaskList tasksFound = new TaskList();
+        try{
+            Scanner scanner = new Scanner(data);
+            while (scanner.hasNextLine()){
+                String item = scanner.nextLine();
+                if (item.contains(keyword)){
+                    tasksFound.add(dataToTask(item));
+                }
+            }
+        } catch (IOException e){
+            System.out.println(UI.errorBox("Error was encountered when reading asset file."));
+        }
+        return tasksFound;
+    }
+
+    // data to Task
+    private Task dataToTask(String data){
+        String dataTokens[] = data.split("@",4);
+        Task task;
+        switch (dataTokens[0]){
+            case "T":
+                task = new ToDo(dataTokens[2]);
+                break;
+            case "D":
+                task = new Deadline(dataTokens[2], LocalDateTime.parse(dataTokens[3]));
+                break;
+            default:
+                task = new Event(dataTokens[2],dataTokens[3]);
+        }
+        if (dataTokens[1].equals("1")){
+            task.markAsDone();
+        }
+        return task;
     }
 }
