@@ -57,8 +57,8 @@ public class DukeLogic {
         for(Task task: this.taskList) {
             if(task.isToday()){
                 System.out.println("    " + index + ". " + task);
+                index++;
             }
-            index++;
         }
         System.out.println("    ____________________________________________________________");
     }
