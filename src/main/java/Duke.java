@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import java.io.*;
+=======
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+>>>>>>> branch-Level-8
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,8 +17,12 @@ public class Duke {
 
     List<Task> ls = new ArrayList<>();
 
+<<<<<<< HEAD
     String folderPath = "data";
     String filePath = folderPath + "/duke.txt";
+=======
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+>>>>>>> branch-Level-8
 
     public static void main(String[] args) {
         System.out.println(face + spacing + "Hey hey I'm Poco");
@@ -80,12 +89,14 @@ public class Duke {
                     ls.add(new ToDo(msg));
                     break;
                 case EVENT:
-                    sp = msg.split(" /");
-                    ls.add(new Event(sp[0], sp[1]));
+                    sp = msg.split("/");
+                    LocalDateTime ldt = LocalDateTime.parse(sp[1].trim(), formatter);
+                    ls.add(new Event(sp[0], ldt));
                     break;
                 case DEADLINE:
                     sp = msg.split(" /");
-                    ls.add(new Deadline(sp[0], sp[1]));
+                    LocalDateTime ld = LocalDateTime.parse(sp[1].trim(), formatter);
+                    ls.add(new Deadline(sp[0], ld));
                     break;
             }
             System.out.println(face2 + spacing + "Poco has added " + sp[0] + " to your list");
