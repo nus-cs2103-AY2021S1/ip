@@ -12,13 +12,13 @@ public class TaskFactory {
         String inputWithoutOption;
         switch (option) {
         case TODO:
-            inputWithoutOption = input.substring(5).strip();
+            inputWithoutOption = input.substring(4).strip();
             return createTodo(inputWithoutOption);
         case DEADLINE:
-            inputWithoutOption = input.substring(9).strip();
+            inputWithoutOption = input.substring(8).strip();
             return createDeadline(inputWithoutOption);
         case EVENT:
-            inputWithoutOption = input.substring(6).strip();
+            inputWithoutOption = input.substring(5).strip();
             return createEvent(inputWithoutOption);
         default:
             throw new DuckException("Invalid task type!");

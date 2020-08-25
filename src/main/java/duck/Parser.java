@@ -17,16 +17,18 @@ public class Parser {
     }
 
     public static String parseDescription(String input) throws DuckException {
+
+        for (String separator : Parser.dateSeparators) {
+            if (input.contains(separator)) {
+                input = input.substring(0, input.indexOf(separator)).strip();
+            }
+        }
+
         if (input.length() == 0) {
             throw new DuckException("The description field cannot be empty!");
         }
 
-        for (String separator : Parser.dateSeparators) {
-            if (input.contains(separator)) {
-                input = input.substring(0, input.indexOf(separator));
-            }
-        }
-        return input.strip();
+        return input;
     }
 
     public static LocalDate parseDate(String input) throws DuckException {
