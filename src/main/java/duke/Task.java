@@ -16,6 +16,10 @@ public class Task {
          this.isDone = isDone;
     }
 
+    public boolean findTask(String name) {
+        return description.contains(name);
+    }
+
     /**
      * method to add tasks from given string format
      * @param task task in a string format

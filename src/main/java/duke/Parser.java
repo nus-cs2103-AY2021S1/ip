@@ -18,6 +18,8 @@ public class Parser {
                 String command = input.split(" ", 2)[1];
                 if (key.contains("done")) {
                     TaskList.doneTask(command);
+                } else if (key.equals("find")) {
+                    TaskList.findTask(command);
                 } else if (key.equals("delete")) {
                     TaskList.deleteTask(command);
                 } else if (key.equals("todo")) {

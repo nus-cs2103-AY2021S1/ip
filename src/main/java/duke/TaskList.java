@@ -120,6 +120,23 @@ public class TaskList {
         }
     }
 
+    public static void findTask(String name) {
+        List<Task> result = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).findTask(name)) {
+                result.add(tasks.get(i));
+            }
+        }
+        if (result.isEmpty()) {
+            System.out.println("No matching tasks found :(");
+        } else {
+            System.out.println("Meimei found these matching tasks:");
+            for (int i = 0; i < result.size(); i++) {
+                System.out.println((i + 1) + "." + result.get(i).toString());
+            }
+        }
+    }
+
     public static void printTaskList() {
         System.out.println("Here are the tasks in your list: ");
         for (int i = 0; i < tasks.size(); i++) {
