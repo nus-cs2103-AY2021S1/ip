@@ -1,9 +1,7 @@
 import java.util.Collections;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Duke {
-  public static String duke = "Duke> ";
   public static String home = System.getProperty("user.home");
   public static String filePath = home + "/Desktop/duke.txt";
   // do a check whether file exists
@@ -28,7 +26,6 @@ public class Duke {
     String[] s;
     boolean validInput = true;
 
-//MAIN EXEC
     while (true) {
       userInput = ui.readInput();
       if (userInput.equals("bye")) {
@@ -41,9 +38,7 @@ public class Duke {
             ui.showListEmptyMsg();
           } else {
             ui.showListMsg();
-            for (Task t : list.getList()) {
-              System.out.println(++idx + ". " + t.toString());
-            }
+            ui.showTaskList(list);
           }
           break;
         case "done":
@@ -51,9 +46,7 @@ public class Duke {
             ui.showListEmptyMsg();
           } else {
             ui.showListMsg();
-            for (Task t : list.getList()) {
-              System.out.println(++idx + ". " + t.toString());
-            }
+            ui.showTaskList(list);
             do {
               ui.showListDoneAskMsg();
               try {
@@ -64,7 +57,7 @@ public class Duke {
                 }
                 int[] tasksArray =
                         Arrays.stream(userInput.split(" ")).mapToInt(Integer::parseInt).toArray();
-                ArrayList<Task> doneTasks = new ArrayList<>();
+                TaskList doneList = new TaskList();
                 for (int index : tasksArray) {
                   try {
                     if (index > list.size() || index <= 0) {
@@ -72,16 +65,14 @@ public class Duke {
                     }
                     Task t = list.getTask(index);
                     t.setDone();
-                    doneTasks.add(t);
+                    doneList.addTask(t);
                   } catch (DukeException e) {
                     ui.showErrorMsg(e);
                   }
                 }
-                if (!doneTasks.isEmpty()) {
+                if (!doneList.isEmpty()) {
                   ui.showListDoneMsg();
-                  for (Task t : doneTasks) {
-                    System.out.println(t.toString());
-                  }
+                  ui.showTaskList(doneList);
                 }
                 validInput = true;
               } catch (DukeException e) {
@@ -191,9 +182,7 @@ public class Duke {
             ui.showListEmptyMsg();
           } else {
             ui.showListMsg();
-            for (Task t : list.getList()) {
-              System.out.println(++idx + ". " + t.toString());
-            }
+            ui.showTaskList(list);
             do {
               ui.showTaskDeleteAskMsg();
               try {
@@ -207,7 +196,7 @@ public class Duke {
                                 .sorted(Collections.reverseOrder())
                                 .mapToInt(Integer::parseInt)
                                 .toArray();
-                ArrayList<Task> deletedTasks = new ArrayList<>();
+                TaskList deletedTasks = new TaskList();
                 for (int index : tasksArray) {
                   try {
                     if (index > list.size() || index <= 0) {
@@ -215,16 +204,14 @@ public class Duke {
                     }
                     Task t = list.getTask(index);
                     list.removeTask(index);
-                    deletedTasks.add(t);
+                    deletedTasks.addTask(t);
                   } catch (DukeException e) {
                     ui.showErrorMsg(e);
                   }
                 }
                 if (!deletedTasks.isEmpty()) {
                   ui.showTaskDeleteMsg();
-                  for (Task t : deletedTasks) {
-                    System.out.println(t.toString());
-                  }
+                  ui.showTaskList(deletedTasks);
                 }
                 validInput = true;
               } catch (DukeException e) {
@@ -251,7 +238,6 @@ public class Duke {
           }
       }
     }
-
     ui.showByeMsg();
   }
 

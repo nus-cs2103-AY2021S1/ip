@@ -39,6 +39,13 @@ public class Ui {
     System.out.println(s + msg);
   }
 
+  public void showTaskList(TaskList list) {
+    int idx = 0;
+    for (Task t : list.getList()) {
+      System.out.println(++idx + ". " + t.toString());
+    }
+  }
+
   public void showErrorMsg(Exception e) {
     System.out.println(duke + e.getMessage());
   }
