@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.task.Event;
-
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * JUnit test class for testing the Event class
@@ -21,10 +21,12 @@ public class EventTest {
         String input3 = "meeting /at 21-09-2020 0800-23-09-2020 1000";
         String output1 = "[E][✘] meeting (at: 21-09-2020 0800-1000)";
         String output2 = "[E][✘] meeting (at: 21-09-2020 0800-1000)";
-        String output3 = "[E][✘] meeting (at: 21-09-2020 0800-23-09-2020 1000)";
+        String output3 = "[E][✓] meeting (at: 21-09-2020 0800-23-09-2020 1000)";
+        Event event3 = new Event(input3);
+        event3.markDone();
         assertEquals(output1, new Event(input1).toString());
         assertEquals(output2, new Event(input2).toString());
-        assertEquals(output3, new Event(input3).toString());
+        assertEquals(output3, event3.toString());
     }
 
     /**
@@ -55,6 +57,10 @@ public class EventTest {
         }
     }
 
+    /**
+     * Tests 1. if the summary comes out in the form required and
+     * 2. The same Event can be recreated from the summary.
+     */
     @Test
     public void testSummary_standardEvents_success() {
         String input1 = "meeting /at 21-09-2020 0800 21-09-2020 1000";

@@ -2,8 +2,9 @@ package duke.task;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * JUnit test class to test the Deadline class.
@@ -18,9 +19,11 @@ public class DeadlineTest {
         String input1 = "meeting /by 21-09-2020 0800";
         String input2 = "meeting /by 23-09-2020 1000";
         String output1 = "[D][✘] meeting (by: 21-09-2020 0800)";
-        String output2 = "[D][✘] meeting (by: 23-09-2020 1000)";
+        String output2 = "[D][✓] meeting (by: 23-09-2020 1000)";
+        Deadline deadline2 = new Deadline(input2);
+        deadline2.markDone();
         assertEquals(output1, new Deadline(input1).toString());
-        assertEquals(output2, new Deadline(input2).toString());
+        assertEquals(output2, deadline2.toString());
     }
 
     /**
@@ -44,6 +47,10 @@ public class DeadlineTest {
         }
     }
 
+    /**
+     * Tests 1. if the summary comes out in the form required and
+     * 2. The same Deadline can be recreated from the summary.
+     */
     @Test
     public void testSummary_standardDeadlines_success() {
         String input1 = "meeting /by 21-09-2020 0800";
