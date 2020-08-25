@@ -12,4 +12,5 @@ deadline
 deadline return book /by Sunday
 event
 event project meeting /at Mon 2-4pm
+find book
 bye
