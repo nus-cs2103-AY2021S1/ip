@@ -8,16 +8,17 @@ public class Duke {
     private static final String indent = "    ";
     private static final String mode = "list";
     
-    static boolean terminate = false;
+    static boolean canExit = false;
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
-        TaskList myTasks = new TaskList();
+        TaskList myTasks = Storage.load();
         greet();
-        while (!terminate) {
+        while (!canExit) {
             respond(sc, myTasks);
         }
         sc.close();
+        Storage.save(myTasks);
     }
     
     private static void greet() {
@@ -30,7 +31,7 @@ public class Duke {
     private static void respond(Scanner sc, TaskList myTasks) {
         Parser parser = new Parser();
         String input = sc.nextLine();
-        ArrayList<String> response = new ArrayList<>(); // arraylist of lines
+        ArrayList<String> response = new ArrayList<>();
         try {
             String[] parsedOutput = parser.parseCommand(input);
             String command = parsedOutput[0];
@@ -80,7 +81,7 @@ public class Duke {
     
     
     private static ArrayList<String> exit() {
-        Duke.terminate = true;
+        Duke.canExit = true;
         ArrayList<String> response = new ArrayList<>();
         response.add(Message.EXIT_GREETING.getMsg());
         return (response);
@@ -126,7 +127,6 @@ public class Duke {
     
 }
 
-//todo: create enums for messages, delims and commands/cases
 
 
 
