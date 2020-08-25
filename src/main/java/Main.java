@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         boolean exitProgram = false;
-        final Path dataLocation = Path.of("src","main", "chatbot", "data.txt");
+        final Path dataLocation = Path.of("chatbot.txt");
 
         // initialization
         ui = new Ui();
@@ -18,6 +18,7 @@ public class Main {
             taskList = new TaskList(taskStorage.loadTasks());
         } catch (ChatbotException e) {
             ui.showErrorMessage(e.getMessage());
+            System.exit(0);
         }
 
         ui.greet();
