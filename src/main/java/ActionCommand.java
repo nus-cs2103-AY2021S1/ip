@@ -17,12 +17,15 @@ public class ActionCommand extends Command {
     }
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ChatbotException {
+
         int index = -1;
+
         try {
             index = Integer.parseInt(body) - 1;
         } catch (NumberFormatException e) {
             throw new ChatbotException("Please give me a valid number.");
         }
+
         switch (type) {
             case DELETE:
                 Task deletedTask = taskList.removeTask(index);

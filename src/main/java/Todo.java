@@ -8,6 +8,7 @@ public class Todo extends Task {
         if (body.length() == 0) {
             throw new ChatbotException("Ooopsss (>.>) Todo task cannot be empty!!");
         }
+
         return new Todo(body, false);
     }
 

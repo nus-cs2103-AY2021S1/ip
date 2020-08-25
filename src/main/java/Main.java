@@ -14,6 +14,7 @@ public class Main {
         // initialization
         ui = new Ui();
         taskStorage = new Storage(dataLocation);
+
         try {
             taskList = new TaskList(taskStorage.loadTasks());
         } catch (ChatbotException e) {

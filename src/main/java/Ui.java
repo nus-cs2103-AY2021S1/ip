@@ -96,10 +96,12 @@ public class Ui {
 
         Iterator<Task> iter = ls.iterator();
         int index = 1;
+
         while (iter.hasNext()) {
             System.out.println("    " + index + ". " + iter.next());
             index++;
         }
+
         System.out.println("    - End of list -");
     }
 }

@@ -57,6 +57,7 @@ public class Storage {
                     default:
                         break;
                 }
+
                 return task;
             });
 
@@ -71,8 +72,10 @@ public class Storage {
     }
 
     public void saveTasks(ArrayList<Task> taskList) throws ChatbotException {
+
         Iterator iter = taskList.iterator();
         String dataStr = "";
+
         while (iter.hasNext()) {
             Task tsk = (Task)iter.next();
             String timestamp = tsk.timestamp == null ? "-" : tsk.timestamp.toString();
@@ -83,11 +86,11 @@ public class Storage {
                     System.lineSeparator();
             dataStr = dataStr + entry;
         }
+
         try {
             Files.write(location, dataStr.getBytes());
         } catch (IOException e) {
             throw new ChatbotException("Oooops, I couldn't save the tasks.");
         }
-
     }
 }

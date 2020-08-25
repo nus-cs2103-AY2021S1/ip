@@ -79,11 +79,13 @@ public class TaskList {
      */
     public Task removeTask(int index) throws ChatbotException {
         Task removed;
+
         try {
             removed = this.tasks.remove(index);
         } catch (IndexOutOfBoundsException e) {
             throw new ChatbotException("That item does not exist!");
         }
+
         return removed;
     }
 
@@ -95,12 +97,14 @@ public class TaskList {
      */
     public Task markAsDone(int index) throws ChatbotException {
         Task taskDone;
+
         try {
             taskDone = getTask(index).markDone();
             this.tasks.set(index, taskDone);
         } catch (IndexOutOfBoundsException e) {
             throw new ChatbotException("That item does not exist!");
         }
+
         return taskDone;
     }
 }

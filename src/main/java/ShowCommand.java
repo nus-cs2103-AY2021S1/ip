@@ -17,17 +17,16 @@ public class ShowCommand extends Command {
 
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         switch (type) {
-            case LIST:
-                ui.list(taskList.getTasks());
-                break;
-            case DATE:
-                ArrayList<Task> tasks = taskList.retrieveTasksOnDate(
-                        LocalDate.parse(body));
-                ui.list(tasks);
-                break;
-            default:
-                break;
-
+        case LIST:
+            ui.list(taskList.getTasks());
+            break;
+        case DATE:
+            ArrayList<Task> tasks = taskList.retrieveTasksOnDate(
+                    LocalDate.parse(body));
+            ui.list(tasks);
+            break;
+        default:
+            break;
         }
     }
 }
