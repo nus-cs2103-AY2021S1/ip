@@ -1,3 +1,5 @@
+package duke.task;
+
 public class TodoTask extends Task {
     static final String TASK_TYPE = "T";
 

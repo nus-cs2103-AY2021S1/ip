@@ -1,9 +1,11 @@
+package duke.ui;
+
 import java.util.Arrays;
 import java.util.List;
 
 public class Ui {
     public void greet() {
-        print("Hello! I'm Duke", "What can I do for you?");
+        print("Hello! I'm duke.Duke", "What can I do for you?");
     }
 
     public void showLoadingError() {
