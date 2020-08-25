@@ -3,6 +3,10 @@ package duck;
 import duck.exception.DuckException;
 import duck.task.Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
+
 public class Parser {
     private static final String[] dateSeparators = {"/at", "/by"};
 
@@ -25,7 +29,7 @@ public class Parser {
         return input.strip();
     }
 
-    public static String parseDate(String input) throws DuckException {
+    public static LocalDate parseDate(String input) throws DuckException {
         String date = "";
         for (String separator : Parser.dateSeparators) {
             if (input.contains(separator)) {
@@ -36,8 +40,14 @@ public class Parser {
         if (date.length() < 1) {
             throw new DuckException("Please specify a date");
         }
+        try {
+            LocalDate parsedDate = LocalDate.parse(date);
+            return parsedDate;
+        } catch (DateTimeParseException e) {
+            throw new DuckException("Date format not supported. Use \"yyyy-mm-dd\", E.g. 2020-02-02");
+        }
 
-        return date;
+
     }
 
     public static int parseTaskNumber(String input) throws DuckException {

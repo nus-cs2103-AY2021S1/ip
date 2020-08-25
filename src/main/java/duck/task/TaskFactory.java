@@ -4,6 +4,8 @@ import duck.Option;
 import duck.Parser;
 import duck.exception.DuckException;
 
+import java.time.LocalDate;
+
 public class TaskFactory {
     public static Task createTaskFromInput(String input) throws DuckException {
         Option option = Parser.parseOption(input);
@@ -30,13 +32,13 @@ public class TaskFactory {
 
     private static Deadline createDeadline(String inputWithoutOption) throws DuckException {
         String description = Parser.parseDescription(inputWithoutOption);
-        String date = Parser.parseDate(inputWithoutOption);
+        LocalDate date = Parser.parseDate(inputWithoutOption);
         return new Deadline(description, date);
     }
 
     private static Event createEvent(String inputWithoutOption) throws DuckException {
         String description = Parser.parseDescription(inputWithoutOption);
-        String date = Parser.parseDate(inputWithoutOption);
+        LocalDate date = Parser.parseDate(inputWithoutOption);
         return new Event(description, date);
     }
 }
