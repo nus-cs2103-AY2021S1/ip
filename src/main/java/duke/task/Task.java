@@ -14,9 +14,13 @@ public class Task {
         TODO, DEADLINE, EVENT
     }
 
-    public Task(String desc, String type) {
+    public Task(String desc) {
         this.status = taskStatus.NOTDONE;
         this.description = desc;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public String getStatusIcon() {

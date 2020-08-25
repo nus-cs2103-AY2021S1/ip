@@ -21,29 +21,29 @@ public class TaskListHandler {
 
     public ArrayList<Task> clearList() {
         this.taskList = new ArrayList<>();
-        System.out.println("The list of tasks has been cleared.");
+        Ui.drawTopBorder();
+        Ui.indent(1);
+        System.out.println("I have cleared the list of tasks for you!");
+        Ui.drawBottomBorder();
         return taskList;
     }
 
     public void printList() throws DukeException {
         if (taskList.isEmpty()) {
             // Asks user for tasks when printing empty list
-            throw new DukeException("\u2639 Oops, the list of tasks is empty, pls add tasks first");
+            throw new DukeException("\u2639 Oops, the list of tasks is empty, pls add tasks first!");
         }
         int listPos = 1;
-        indent(1);
+        Ui.drawTopBorder();
+        Ui.indent(1);
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++,listPos++) {
-            indent(2);
+            Ui.indent(2);
             System.out.println(listPos + ". " + taskList.get(i));
         }
-        indent(1);
+        Ui.indent(1);
         System.out.println("You have " + taskList.size() + " task(s) in the list");
+        Ui.drawBottomBorder();
     }
 
-    public static void indent(int times) {
-        for (int i=0; i<times; i++) {
-            System.out.print("    ");
-        }
-    }
 }

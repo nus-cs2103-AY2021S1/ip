@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Event extends Task {
     protected String at;
     public Event(String desc, String at) {
-        super(desc, "event");
+        super(desc);
         this.at = at;
     }
 

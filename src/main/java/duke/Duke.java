@@ -6,7 +6,7 @@ public class Duke {
     }
 
     public static void initialize() {
-        Storage storage = new Storage("./src/main/java/duke/data");
+        Storage storage = new Storage("./data");
         if (Storage.isLoadingError) {
             return;
         }
