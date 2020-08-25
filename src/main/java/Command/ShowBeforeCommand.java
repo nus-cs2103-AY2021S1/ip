@@ -43,6 +43,6 @@ public class ShowBeforeCommand extends Command {
             }
         }
 
-        ui.messageTemplate(sb.toString());
+        ui.getMessageTemplate(sb.toString());
     }
 }

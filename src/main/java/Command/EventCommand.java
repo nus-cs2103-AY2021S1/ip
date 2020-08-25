@@ -27,14 +27,14 @@ public class EventCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DescriptionException, DukeDateTimeParserException {
         try {
-            Map<String, String> taskDetails = Parser.taskDescriptionParser(this.command);
+            Map<String, String> taskDetails = Parser.findDescriptionParser(this.command);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             EventTask eventTask = new EventTask(taskDetails.get("taskDescription"),
                     LocalDateTime.parse(taskDetails.get("taskTime"), formatter));
 
             tasks.add(eventTask);
 
-            ui.taskMessage(eventTask, tasks.size());
+            ui.getTaskMessage(eventTask, tasks.size());
 
             storage.updateFile(tasks);
         } catch (DescriptionException e){

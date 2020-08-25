@@ -20,12 +20,12 @@ public class TodoCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DescriptionException {
-        String taskDescription = Parser.todoParser(this.command);
+        String taskDescription = Parser.findTodoParser(this.command);
         TodoTask todoTask = new TodoTask(taskDescription);
 
         tasks.add(todoTask);
 
-        ui.taskMessage(todoTask,tasks.size());
+        ui.getTaskMessage(todoTask,tasks.size());
 
         storage.updateFile(tasks);
     }

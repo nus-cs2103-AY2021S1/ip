@@ -24,7 +24,7 @@ public class DoneCommand extends Command {
         Task task = tasks.getTask(index-1);
         task.setStatus(true);
 
-        ui.messageTemplate(ui.formatMessage("Nice! I've marked this task as done:\n"
+        ui.getMessageTemplate(ui.formatMessage("Nice! I've marked this task as done:\n"
                 +ui.formatMessage(task.toString())));
 
         storage.updateFile(tasks);

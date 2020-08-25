@@ -25,7 +25,7 @@ public class Task {
     }
 
     private String getStatus() {
-        return isDone? "[✓]": "[✗]";
+        return isDone? "[O]": "[X]";
     }
 
     public void setStatus(boolean isDone) {

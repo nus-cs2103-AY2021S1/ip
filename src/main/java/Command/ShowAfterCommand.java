@@ -45,6 +45,6 @@ public class ShowAfterCommand extends Command {
 
         }
 
-        ui.messageTemplate(sb.toString());
+        ui.getMessageTemplate(sb.toString());
     }
 }

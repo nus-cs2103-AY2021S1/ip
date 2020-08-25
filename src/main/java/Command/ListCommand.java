@@ -21,6 +21,6 @@ public class ListCommand extends Command {
             }
         }
 
-        ui.messageTemplate(ui.formatMessage("Here are the tasks in your list:\n" + sb.toString()));
+        ui.getMessageTemplate(ui.formatMessage("Here are the tasks in your list:\n" + sb.toString()));
     }
 }

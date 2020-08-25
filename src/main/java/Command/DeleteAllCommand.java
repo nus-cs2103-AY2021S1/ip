@@ -21,7 +21,7 @@ public class DeleteAllCommand extends Command {
             tasks.remove(0);
         }
 
-        ui.messageTemplate(ui.formatMessage("All of your task has been removed!"));
+        ui.getMessageTemplate(ui.formatMessage("All of your task has been removed!"));
 
         storage.updateFile(tasks);
     }

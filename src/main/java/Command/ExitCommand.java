@@ -12,7 +12,7 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.messageTemplate(ui.formatMessage("Bye! Hope to see you soon"));
+        ui.getMessageTemplate(ui.formatMessage("Bye! Hope to see you soon"));
 
         super.setExit(true);
     }

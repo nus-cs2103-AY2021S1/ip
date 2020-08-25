@@ -11,10 +11,6 @@ public class TodoTask extends Task {
 
     public TodoTask() {}
 
-    public String getType() {
-        return TODO;
-    }
-
     @Override
     public String toString() {
         return TODO + super.toString();

@@ -27,14 +27,14 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DescriptionException, DukeDateTimeParserException {
           try {
-            Map<String, String> taskDetails = Parser.taskDescriptionParser(this.command);
+            Map<String, String> taskDetails = Parser.findDescriptionParser(this.command);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             DeadlineTask deadlineTask = new DeadlineTask(taskDetails.get("taskDescription"),
                     LocalDateTime.parse(taskDetails.get("taskTime"), formatter));
 
             tasks.add(deadlineTask);
 
-            ui.taskMessage(deadlineTask, tasks.size());
+            ui.getTaskMessage(deadlineTask, tasks.size());
 
             storage.updateFile(tasks);
         } catch (DateTimeParseException e) {

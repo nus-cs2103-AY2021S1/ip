@@ -21,11 +21,6 @@ public class DeadlineTask extends Task {
         this.dateTime = date;
     }
 
-    public String getType() {
-        return DEADLINE;
-    }
-
-
     @Override
     public String toString() {
         return DEADLINE + super.toString() + " (by: "

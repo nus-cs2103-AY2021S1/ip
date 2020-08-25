@@ -80,7 +80,7 @@ public class Parser {
         }
     }
 
-    public static Command commandParser(String command) {
+    public static Command parseCommand(String command) {
         if (command.toLowerCase().equals(Command.EXIT_COMMAND)) {
             return new ExitCommand();
         } else if (command.toLowerCase().equals(Command.LIST_COMMAND)) {
@@ -128,7 +128,7 @@ public class Parser {
         }
     }
 
-    public static Map<String,String> taskDescriptionParser(String input) throws DescriptionException {
+    public static Map<String,String> findDescriptionParser(String input) throws DescriptionException {
         try {
             Map<String, String> map = new HashMap<>();
             String[] getDetails = input.split("\\s", 2);
@@ -142,10 +142,10 @@ public class Parser {
         }
     }
 
-    public static String todoParser(String input) throws DescriptionException {
+    public static String findTodoParser(String input) throws DescriptionException {
         try {
             return input.split("\\s", 2)[1];
-        } catch(NullPointerException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DescriptionException();
         }
     }
