@@ -14,25 +14,8 @@ public class DeadlineCommand extends Command {
 
     @Override
     public void execute(String str) {
-        String[] splitStr = str.split(" /by ", 2);
-
-        checkException(splitStr);
-
-        String description = splitStr[0];
-        String deadline = splitStr[1];
-
-        Deadline newDeadline = new Deadline(UIPrint.deadlineIcon, description, deadline);
+        Deadline newDeadline = Deadline.createDeadline(str);
         DukeData.tasks.add(newDeadline);
-
         DukeFunction.reportNewTask(newDeadline);
-    }
-
-    private void checkException(String[] splitStr) {
-        if (splitStr.length != 2) {
-            String line = UIPrint.getLine(UIPrint.star, 50);
-            String errMessage =
-                    line + "\nPlease follow the format of deadline <task description> /by <deadline>\n" + line;
-            throw new IncorrectFormatException(errMessage);
-        }
     }
 }
