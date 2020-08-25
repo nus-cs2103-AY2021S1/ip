@@ -68,4 +68,8 @@ public abstract class Task {
      * @return a date
      */
     public abstract LocalDate getDate();
+
+    public boolean containsKeyword(String keyword) {
+        return this.title.contains(keyword);
+    }
 }

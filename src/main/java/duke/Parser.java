@@ -6,6 +6,7 @@ import main.java.duke.command.DeadlineCommand;
 import main.java.duke.command.DeleteCommand;
 import main.java.duke.command.DoneCommand;
 import main.java.duke.command.EventCommand;
+import main.java.duke.command.FindCommand;
 import main.java.duke.command.ListCommand;
 import main.java.duke.command.ToDoCommand;
 
@@ -39,6 +40,8 @@ public class Parser {
             return new DeleteCommand(inputArray);
         case "list":
             return new ListCommand(inputArray);
+        case "find":
+            return new FindCommand(command);
         default:
             throw new DukeException("I'm not sure what you're talking about.");
         }
