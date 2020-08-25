@@ -4,8 +4,11 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.TaskManager;
 import tasks.ToDo;
+import utils.DateTimeParser;
 import utils.PrettyPrinter;
 import utils.ResourceHandler;
+
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 /**
@@ -45,7 +48,8 @@ public class Repl {
                         String lineWithoutCommand = line.replaceFirst("^deadline", "");
                         String[] args = lineWithoutCommand.split("/by", 2);
                         String deadlineName = args[0].trim();
-                        String dueDate = args[1].trim();
+                        String dueDateString = args[1].trim();
+                        LocalDateTime dueDate = DateTimeParser.parseDateTime(dueDateString);
                         prettyPrinter.print(taskManager.addTask(new Deadline(deadlineName, dueDate)));
                         break;
                     }
@@ -77,7 +81,8 @@ public class Repl {
                         String lineWithoutCommand = line.replaceFirst("^event", "");
                         String[] args = lineWithoutCommand.split("/at", 2);
                         String eventName = args[0].trim();
-                        String dateTime = args[1].trim();
+                        String dateTimeString = args[1].trim();
+                        LocalDateTime dateTime = DateTimeParser.parseDateTime(dateTimeString);
                         prettyPrinter.print(taskManager.addTask(new Event(eventName, dateTime)));
                         break;
                     }
@@ -85,10 +90,18 @@ public class Repl {
                         prettyPrinter.print(taskManager.toString());
                         break;
                     }
+                    case OVERDUE: {
+                        prettyPrinter.print(taskManager.getOverdueTasks());
+                        break;
+                    }
                     case TODO: {
                         String lineWithoutCommand = line.replaceFirst("^todo", "");
                         String toDoName = lineWithoutCommand.trim();
                         prettyPrinter.print(taskManager.addTask(new ToDo(toDoName)));
+                        break;
+                    }
+                    case UPCOMING: {
+                        prettyPrinter.print(taskManager.getUpcomingTasks());
                         break;
                     }
                 }

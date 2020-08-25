@@ -141,6 +141,27 @@ public enum Command {
     },
 
     /**
+     * Lists all overdue {@code Task}s in the {@code TaskManager}.
+     */
+    OVERDUE {
+        /**
+         * Validates whether the user input is of the correct format for the 'overdue' command.
+         *
+         * @param input the user input.
+         * @throws DukeException if the user input is invalid.
+         */
+        @Override
+        public void validate(String input) throws DukeException {
+            String regex = "^(?i)overdue\\s*$";
+            if (!Pattern.matches(regex, input)) {
+                String template = ResourceHandler.getString("exception.noArgs");
+                String message = MessageFormat.format(template, "overdue");
+                throw new DukeException(message);
+            }
+        }
+    },
+
+    /**
      * Adds a {@code ToDo} task to the {@code TaskManager}.
      */
     TODO {
@@ -157,6 +178,27 @@ public enum Command {
                 String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
                         ResourceHandler.getString("command.toDoFormat"));
                 String message = MessageFormat.format(template, "todo");
+                throw new DukeException(message);
+            }
+        }
+    },
+
+    /**
+     * Lists all upcoming {@code Task}s in the {@code TaskManager}.
+     */
+    UPCOMING {
+        /**
+         * Validates whether the user input is of the correct format for the 'upcoming' command.
+         *
+         * @param input the user input.
+         * @throws DukeException if the user input is invalid.
+         */
+        @Override
+        public void validate(String input) throws DukeException {
+            String regex = "^(?i)upcoming\\s*$";
+            if (!Pattern.matches(regex, input)) {
+                String template = ResourceHandler.getString("exception.noArgs");
+                String message = MessageFormat.format(template, "upcoming");
                 throw new DukeException(message);
             }
         }
