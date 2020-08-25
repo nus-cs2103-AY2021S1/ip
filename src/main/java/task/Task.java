@@ -27,7 +27,6 @@ public class Task {
         this.dueDate = dueDate;
     }
 
-
     public void markDone() {
         this.status = Status.COMPLETED;
     }
