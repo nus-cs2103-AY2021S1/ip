@@ -6,7 +6,11 @@ import java.io.FileWriter;
 import java.time.LocalDate;
 
 public class DataManager {
-    private static final String filePath = "data/data.txt";
+    static String filePath;
+
+    public DataManager(String Path) {
+        filePath = Path;
+    }
 
     public static ArrayList<Task> loadTaskFromFile() throws IOException {
         ArrayList<Task> listOfTask = new ArrayList<>();
@@ -35,9 +39,9 @@ public class DataManager {
                 }
             }
 
-        }catch (IOException e){
-                System.out.println("\"Could not save file!" + e.getMessage());
-            }
+        } catch (IOException e) {
+            System.out.println("\"Could not save file!" + e.getMessage());
+        }
         return listOfTask;
     }
 
@@ -67,4 +71,5 @@ public class DataManager {
         fw.write(stringToAppend.toString());
         fw.close();
     }
+
 }
