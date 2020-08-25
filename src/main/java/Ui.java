@@ -259,6 +259,9 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints an error when there is not keyword by user.
+     */
     public void showFindError() {
         horizontalDiv();
         System.out.println("Key in something for me to find!");
