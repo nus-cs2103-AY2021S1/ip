@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Ui {
-    Scanner sc;
+    private Scanner sc;
 
     public Ui() {
         sc = new Scanner(System.in);

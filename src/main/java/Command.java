@@ -3,8 +3,8 @@ import java.text.ParseException;
 import java.time.LocalDateTime;
 
 public class Command {
-    CommandType commandType;
-    String[] commandArr;
+    private CommandType commandType;
+    private String[] commandArr;
 
     public Command(CommandType commandType, String[] commandArr) {
         this.commandType = commandType;

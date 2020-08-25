@@ -4,7 +4,8 @@ import java.time.format.DateTimeFormatter;
 
 public class Parser {
 
-    public static LocalDateTime changeDateAndTime(String[] dateAndTime) throws NumberFormatException, ParseException {
+    public static LocalDateTime changeDateAndTime(String[] dateAndTime)
+            throws NumberFormatException, ParseException {
         String date = dateAndTime[0];
         String time = dateAndTime[1];
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

@@ -35,11 +35,11 @@ public class Storage {
         File oldFile= new File(filePath);
         oldFile.delete();
         File newFile= new File(filePath);
-        FileWriter fw = new FileWriter(newFile, false);
+        FileWriter fileWriter = new FileWriter(newFile, false);
         for (Task task : taskArr) {
-            fw.write(task.toString());
-            fw.write(System.lineSeparator());
+            fileWriter.write(task.toString());
+            fileWriter.write(System.lineSeparator());
         }
-        fw.close();
+        fileWriter.close();
     }
 }
