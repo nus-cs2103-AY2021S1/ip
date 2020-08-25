@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -77,6 +80,28 @@ public class Duke {
         System.out.println(outputMsg);
     }
 
+    public static void writeToFile() throws IOException {
+        String output = "";
+        if (userInputs.size() == 0) { // user has not added any task
+            output = "Nothing has been added to the list yet!";
+        } else {
+            for (int i = 0; i < userInputs.size(); i++) {
+                output += (i + 1) + ". " + userInputs.get(i).toString() + "\n";
+            }
+        }
+        File directory = new File("./data");
+        if (!directory.exists()) { // directory does not exist
+            directory.mkdir();
+        }
+        File file = new File("./data/duke.txt");
+        if (!file.exists()) { // file does not exist
+            file.createNewFile();
+        }
+        FileWriter fw = new FileWriter("./data/duke.txt");
+        fw.write(output);
+        fw.close();
+    }
+
     public static void main(String[] args) {
         String welcomeMsg = "Hello! I'm Duke, some call me a parrot.\n"
                 + "What can I do for you?";
@@ -115,6 +140,11 @@ public class Duke {
                     System.out.println(e.getMessage());
                 }
             }
+        }
+        try {
+            writeToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         sc.close();
     }
