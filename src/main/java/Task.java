@@ -2,9 +2,13 @@ public class Task {
     private String taskName;
     private boolean taskCompleted;
 
-    public Task(String taskName) {
+    public Task(String isCompleted, String taskName) {
         this.taskName = taskName;
-        this.taskCompleted = false;
+        if (isCompleted.equals("0")) {
+            this.taskCompleted = false;
+        } else {
+            this.taskCompleted = true;
+        }
     }
 
     public String completeTask() {
