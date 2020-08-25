@@ -10,7 +10,7 @@ public class DeadlineTest {
         String command1 = "deadline test /by 2/8/20";
         String command2 = "test";
         String command3 = "2020-08-02";
-        assertEquals(Deadline.create(command1), Deadline.create(command2, command3));
+        assertEquals(Deadline.create(command1), Deadline.createFromFile(command2, command3));
     }
 
     @Test

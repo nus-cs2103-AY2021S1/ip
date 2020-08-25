@@ -52,13 +52,13 @@ public class Event extends Task {
     }
 
     /**
-     * Creates a new Event object represented by the given task details.
+     * Creates a new Event object represented by its String when read from a file.
      *
      * @param task Description of task.
      * @param date Date on which the task occurs.
      * @return Event object representing the given details.
      */
-    public static Event create(String task, String date) {
+    public static Event createFromFile(String task, String date) {
         DateTimeFormatter format = DateFormat.FORMAT6.toDateFormat();
         return new Event(task, LocalDate.parse(date, format));
     }

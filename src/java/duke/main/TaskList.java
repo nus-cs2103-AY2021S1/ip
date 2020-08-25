@@ -43,13 +43,13 @@ public class TaskList {
                 Task task = null;
                 switch (strings[0]) {
                 case "T":
-                    task = new ToDo(strings[2]);
+                    task = ToDo.createFromFile(strings[2]);
                     break;
                 case "D":
-                    task = Deadline.create(strings[2], strings[3]);
+                    task = Deadline.createFromFile(strings[2], strings[3]);
                     break;
                 case "E":
-                    task = Event.create(strings[2], strings[3]);
+                    task = Event.createFromFile(strings[2], strings[3]);
                     break;
                 default:
                     System.out.println(Ui.LINE + "\n"

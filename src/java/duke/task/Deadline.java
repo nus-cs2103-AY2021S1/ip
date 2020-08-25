@@ -51,13 +51,13 @@ public class Deadline extends Task {
     }
 
     /**
-     * Creates a new Deadline object represented by the given task details.
+     * Creates a new Deadline object represented by its String when read from a file.
      *
      * @param task Description of task.
      * @param date Date by which the task is to be completed by.
      * @return Deadline object representing the given details.
      */
-    public static Deadline create(String task, String date) {
+    public static Deadline createFromFile(String task, String date) {
         DateTimeFormatter format = DateFormat.FORMAT6.toDateFormat();
         return new Deadline(task, LocalDate.parse(date, format));
     }
