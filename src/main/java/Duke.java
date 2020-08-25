@@ -1,3 +1,4 @@
+import Exception.FileCorruptedException;
 import Task.Task;
 
 import java.io.File;
@@ -5,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,24 +26,30 @@ public class Duke {
     }
 
     public static void interact(Scanner sc) {
-        String home = System.getProperty("user.home");
-        Path path = Paths.get(home, "Downloads", "CS2103 IP", "data", "duke.txt");
-        File file = path.toFile();
-        List<Task> list = FileToTaskListConverter.convert(file);
+        try {
+            String home = System.getProperty("user.home");
+            Path path = Paths.get(home, "Downloads", "CS2103 IP", "data", "duke.txt");
+            File file = path.toFile();
 
-        String command = sc.nextLine();
-        CommandProcessor commandProcessor = new CommandProcessor(list);
+            List<Task> list = FileToTaskListConverter.convert(file);
 
-        while (!command.equals("bye")) {
-            commandProcessor.runCommand(command);
-            command = sc.nextLine();
+            String command = sc.nextLine();
+            CommandProcessor commandProcessor = new CommandProcessor(list);
+
+            while (!command.equals("bye")) {
+                commandProcessor.runCommand(command);
+                command = sc.nextLine();
+            }
+
+            saveToFile(list, path.toFile());
+            System.out.println("    ____________________________________________________________\n"
+                    + "     Bye. Hope to see you again soon!\n"
+                    + "    ____________________________________________________________\n"
+            );
+        } catch (FileCorruptedException fce) {
+            System.out.println(fce);
+            System.out.println("Program terminates");
         }
-
-        saveToFile(list, path.toFile());
-        System.out.println("    ____________________________________________________________\n"
-                + "     Bye. Hope to see you again soon!\n"
-                + "    ____________________________________________________________\n"
-        );
     }
 
     public static void saveToFile(List<Task> list, File file) {
@@ -52,7 +58,17 @@ public class Duke {
             StringBuilder sb = new StringBuilder();
             for(int i = 0; i < list.size(); i++) {
                 Task task = list.get(i);
-                sb.append(task.toString());
+                String type = task.getType();
+
+                sb.append(type + "//");
+                sb.append(task.isDone() ? "✓" : "✘");
+                sb.append("//");
+                sb.append(task.getDescription() + "//");
+
+                if (type.equals("D") || type.equals("E")) {
+                    sb.append(task.getDateInput() + "//");
+                    sb.append(task.getTimeInput());
+                }
                 sb.append("\n");
             }
             fw.write(sb.toString());
