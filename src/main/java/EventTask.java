@@ -13,6 +13,6 @@ public class EventTask extends Task {
 
     @Override
     public String toSaveString() {
-        return String.format("T @@ %d @@ %s @@ %s", isDone ? 1 : 0, desc, period);
+        return String.format("E @@ %d @@ %s @@ %s", isDone ? 1 : 0, desc, period);
     }
 }
