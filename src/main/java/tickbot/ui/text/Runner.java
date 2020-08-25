@@ -9,6 +9,9 @@ import java.util.function.BiFunction;
 
 import tickbot.task.*;
 
+/**
+ * The class to represent the runner of commands.
+ */
 public class Runner {
     private TaskList tasks = new TaskList();
 
@@ -74,6 +77,13 @@ public class Runner {
         addTask(args, "Event", (content, time) -> new Event(false, content, time), "/at");
     }
 
+    /**
+     * Add a task to the task list.
+     * @param args the split parts of the commands.
+     * @param taskName the human-readable name of the task (e.g. deadline, TO-DO, ...).
+     * @param initializer the initializer function of the task.
+     * @param timeMarker the time marker used by the task command (e.g. /by, /at, ...)
+     */
     private void addTask(
         String[] args,
         String taskName,

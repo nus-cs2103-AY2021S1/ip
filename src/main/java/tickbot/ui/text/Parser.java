@@ -1,8 +1,15 @@
 package tickbot.ui.text;
 
+/**
+ * The class to represent the command parser.
+ */
 public class Parser {
     private Runner runner = new Runner();
 
+    /**
+     * Execute a command.
+     * @param command the command to execute.
+     */
     public boolean executeCommand(String command) {
         if (command.isBlank()) {
             return true; // empty line, continue inputing

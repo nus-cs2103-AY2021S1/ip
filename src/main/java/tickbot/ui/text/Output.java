@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * The class to represent output in the text UI.
+ */
 public class Output {
     private Output() { } // not meant to be initialized
 
@@ -21,10 +24,17 @@ public class Output {
         }
     };
 
+    /**
+     * Display a message in text UI.
+     * <p> A line break will be appended to the message. </p>
+     */
     static void printMessage(String message) {
         System.out.println("  " + message);
     }
 
+    /**
+     * List all available commands in the text UI.
+     */
     static void printAllUsage() {
         printMessage("All available commands:");
         for (Entry<String, String> entry : usages.entrySet()) {
@@ -32,6 +42,10 @@ public class Output {
         }
     }
 
+    /**
+     * Display the usage for a given command.
+     * @param commandName the name of the command to look up the usage.
+     */
     static void printUsage(String commandName) {
         String usageString = usages.get(commandName);
         if (usageString != null) {

@@ -16,9 +16,17 @@ import net.harawata.appdirs.AppDirsFactory;
 import tickbot.exception.CorruptedDataException;
 import tickbot.task.*;
 
+/**
+ * The class to represent the data storage.
+ */
 public class DataStorage {
     private static final String DATA_STORAGE_FILE_NAME = "tasks.csv";
 
+    /**
+     * Read the stored data from the application data directory.
+     * @return a list containing the stored tasks.
+     * @see DataStorage#getDataStoragePath
+     */
     public List<Task> read() {
         List<Task> tasks = new ArrayList<>();
         try {
@@ -61,6 +69,11 @@ public class DataStorage {
         return tasks;
     }
     
+    /**
+     * Write the task list into the application data directory.
+     * @param tasks the task list to write.
+     * @see DataStorage#getDataStoragePath
+     */
     public void update(List<Task> tasks) {
         try {
             File dataFile = new File(getDataStoragePath(), DATA_STORAGE_FILE_NAME);
@@ -82,6 +95,10 @@ public class DataStorage {
         }
     }
 
+    /**
+     * Get the path of the application data directory.
+     * <p> The path is OS-specified and can vary among different OS. </p>
+     */
     private static String getDataStoragePath() {
         AppDirs appDirs = AppDirsFactory.getInstance();
         return appDirs.getUserDataDir("tickbot", null, "HouRui");

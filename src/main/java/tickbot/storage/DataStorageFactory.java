@@ -7,6 +7,10 @@ public class DataStorageFactory {
 
     private DataStorageFactory() { }
 
+    /**
+     * Get a singleton instance of {@code DataStorage}.
+     * @return a singleton instance.
+     */
     public static DataStorage getInstance() {
         return Singleton.instance;
     }
