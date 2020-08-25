@@ -17,7 +17,7 @@ public class Parser {
     }
 
     public static String parseDescription(String input) throws DuckException {
-
+        input = input.strip();
         for (String separator : Parser.dateSeparators) {
             if (input.contains(separator)) {
                 input = input.substring(0, input.indexOf(separator)).strip();
