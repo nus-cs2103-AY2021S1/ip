@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Duke {
-
     private static final Path filePath = Paths.get(".", "data", "duke.txt");
 
     private final Storage storage;
