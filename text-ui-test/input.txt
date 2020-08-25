@@ -5,6 +5,7 @@ list
 done 2
 done 4
 done 10
+done 1000
 blah
 deadline finish week 1 post lecture quiz /by Saturday
 todo read up on week 2 topics
