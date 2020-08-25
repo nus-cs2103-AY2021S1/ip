@@ -11,6 +11,7 @@ public class Bot {
     String gotIt = "     Got it. I've added this task: ";
     String whiteSpaceSeven = "       ";
     ArrayList<Listing> list = new ArrayList<Listing>();
+    Parser parser = new Parser();
 
 
     public void serve() {
@@ -21,43 +22,46 @@ public class Bot {
                 String s = sc.nextLine();
                 String[] arr = s.split(" ");
                 String firstWord = arr[0];
-                if (firstWord.equals("bye")) {
+                String[] arr1 = parser.getDetails(s);
+                if (arr1[0].equals("bye")) {
                     return;
-                } else if (firstWord.equals("list")) {
+                }
+                else if (arr1[0].equals("list")) {
                     returnListings(s);
-                } else if (firstWord.equals("done")) {
-                    Integer value = Integer.valueOf(arr[1]);
+                } else if (arr1[0].equals("done")) {
+                    Integer value = Integer.valueOf(arr1[1]);
                     doneListings(value);
-                } else if (firstWord.equals("todo")) {
-                    String detail = getDetails(arr);
-                    String[] details = new String[1];
-                    details[0] = detail;
-                    if (detail.isEmpty()) {
+                } else if (arr1[0].equals("todo")) {
+                    String[] detail = getDetails(arr, "todo");
+                    //String[] details = new String[1];
+                    //details[0] = detail;
+                    if (detail[0] == null) {
                         throw new NoDescriptionException("todo");
                     } else {
-                        addListings("todo", details);
+                        addListings("todo", detail);
                     }
-                } else if (firstWord.equals("deadline")) {
-                    String[] details = getDetailsSpecial(arr, "/by");
+                } else if (arr1[0].equals("deadline")) {
+                    String[] details = getDetails(arr, "deadline");
                     if (details[0] == null || details[1] == null) { //can be modified to do description AND time;
                         throw new NoDescriptionException("deadline");
                     } else {
                         addListings("deadline", details);
                     }
-                } else if (firstWord.equals("event")) {
-                    String[] details = getDetailsSpecial(arr, "/at");
+                } else if (arr1[0].equals("event")) {
+                    String[] details = getDetails(arr, "event");
                     if (details[0] == null || details[1] == null) {
                         throw new NoDescriptionException("event");
                     } else {
                         addListings("event", details);
                     }
-                } else if (firstWord.equals("delete")) {
-                    Integer number = Integer.valueOf(arr[1]) - 1;
+                } else if (arr1[0].equals("delete")) {
+                    Integer number = Integer.valueOf(arr1[1]) - 1;
                     deleteMessage(number);
                     list.remove((int) number);
                 } else {
                     throw new UndefinedException();
                 }
+
             } catch (NoDescriptionException e) {
                 noDescriptionMessage(e.s);
             } catch (UndefinedException e) {
@@ -92,7 +96,6 @@ public class Bot {
                     "\n" + "     Now you have " + size + " tasks in the list." + "\n" + line;
             System.out.println(s);
         }
-
     }
 
     public void returnListings(String listing) {
@@ -121,24 +124,48 @@ public class Bot {
         return s;
     }
 
-    public String[] getDetailsSpecial(String[] details, String type) {
-        //check deadline or event
+    public String[] getDetails(String[] details, String type) {
         String[] s = new String[2];
         String s1 = "";
         String s2 = "";
         int counter = 1;
-        for (; counter < details.length; counter++) {
-            if (details[counter].equals(type)) {
+
+        switch(type) {
+            case "todo": //extract details
+                for (int i = 1; i < details.length; i++) {
+                    s1 = s1 + " " + details[i];
+                }
                 s[0] = s1;
-                counter++;
                 break;
-            }
-            s1 = s1 + " " + details[counter];
+            case "deadline": //extract details and date
+                for (; counter < details.length; counter++) {
+                    if (details[counter].equals("/by")) {
+                        s[0] = s1; // get details
+                        counter++;
+                        break;
+                    }
+                    s1 = s1 + " " + details[counter];
+                }
+                for (; counter < details.length; counter++) {
+                    s2 = s2 + " " + details[counter];
+                }
+                s[1] = s2; //date
+                break;
+            case "event": //extract details and date
+                for (; counter < details.length; counter++) {
+                    if (details[counter].equals("/at")) {
+                        s[0] = s1; // get details
+                        counter++;
+                        break;
+                    }
+                    s1 = s1 + " " + details[counter];
+                }
+                for (; counter < details.length; counter++) {
+                    s2 = s2 + " " + details[counter];
+                }
+                s[1] = s2; //date
+                break;
         }
-        for (; counter < details.length; counter++) {
-            s2 = s2 + " " + details[counter];
-        }
-        s[1] = s2;
         return s;
     }
 
