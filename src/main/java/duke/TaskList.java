@@ -2,6 +2,10 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the user's list of tasks.
+ * Contains basic operations to manipulate tasks in the list.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
@@ -29,6 +33,11 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Creates a copy of the user's TaskList.
+     *
+     * @return Clone of user's TaskList.
+     */
     public ArrayList<Task> clone() {
         ArrayList<Task> tasksClone = new ArrayList<>();
         for (Task task : tasks) {
