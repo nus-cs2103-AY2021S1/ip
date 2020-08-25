@@ -23,6 +23,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Run a Duke object while isExit is not changed to true
+     */
     public void run() {
         ui.displayWelcome();
         boolean isExit = false;

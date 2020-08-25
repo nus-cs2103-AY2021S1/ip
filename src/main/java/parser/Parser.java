@@ -10,6 +10,16 @@ public class Parser {
     public Parser(){
     }
 
+    /**
+     * Cut an user-input String to smaller piece of information
+     * Return different command constructed with the info pieces
+     * @param fullCommand
+     * @return
+     * @throws EmptyTaskException
+     * @throws EmptyTimeException
+     * @throws CommandNotFoundException
+     * @throws WrongDateFormatException
+     */
     public static Command parse(String fullCommand) throws EmptyTaskException, EmptyTimeException, CommandNotFoundException,
             WrongDateFormatException, IncompleteMessageException {
         String[] parseArray = fullCommand.trim().split(" ", 2);
