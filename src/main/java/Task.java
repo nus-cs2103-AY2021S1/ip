@@ -1,7 +1,7 @@
 public abstract class Task {
     String desc;
     boolean isDone;
-    String symbol;
+    char symbol;
     String time = "";
 
     public Task(String desc) {
@@ -16,6 +16,29 @@ public abstract class Task {
 
     public void done() {
         isDone = true;
+    }
+
+    public static Task parseToTask(String line) {
+        char c = line.charAt(2);
+        String desc = line.substring(4);
+        Task t;
+
+        if(c == ToDo.sym) {
+            t = new ToDo(desc);
+        } else if (c == Event.sym) {
+            t = new Event(desc);
+        } else {
+            System.out.println("Error didn't recognize task symbol");
+            return null;
+        }
+
+        char d = line.charAt(0);
+        //check if its done
+        if(d == '\u2713') {
+            t.done();
+        }
+
+        return t;
     }
 
 }
