@@ -8,12 +8,19 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles the interactions with the user's CSV file.
+ * Includes creating, updating file and retrieving list of tasks from CSV file.
+ */
 public class Storage {
 
     private String dataDir = System.getProperty("user.dir") + "/data";
     private String filePath = dataDir + "/tasklist.csv";
     private Ui ui;
 
+    /**
+     * Initializes the storage object and create a new file.
+     */
     public Storage() {
         createFile();
         this.ui = new Ui();
@@ -30,6 +37,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Gets the list of tasks from the tasklist CSV file, if any.
+     *
+     * @return List of tasks.
+     */
     public List<Task> getTasks() {
         List<Task> taskList = new ArrayList<>();
         try {
@@ -52,6 +64,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the task list.
+     *
+     * @param tasks Task list.
+     */
     public void update(TaskList tasks) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);

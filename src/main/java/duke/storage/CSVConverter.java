@@ -7,7 +7,17 @@ import duke.task.TaskType;
 import duke.task.ToDo;
 import duke.ui.Ui;
 
+/**
+ * Converts the task in CSV format to a Task object.
+ */
 public class CSVConverter {
+    /**
+     * Creates a task from the CSV format of the task.
+     *
+     * @param input CSV format of task.
+     * @param ui User interface.
+     * @return Task.
+     */
     protected static Task parseToTask(String input, Ui ui) {
         try {
             String[] inputArr = input.split("\\s{2},", 4);

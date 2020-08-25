@@ -6,6 +6,9 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Abstracts the logic of deleting and completing a task.
+ */
 public class SimpleCommand extends Command {
 
     private String input;
@@ -16,6 +19,14 @@ public class SimpleCommand extends Command {
         this.type = type;
     }
 
+    /**
+     * Deletes or complete a task, depending on the task type.
+     *
+     * @param tasks Task List object.
+     * @param ui User Interface object.
+     * @param storage Storage object.
+     * @throws DukeException If an error is found in the user input.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (checkIfNumber(input)) {
             int digit = Integer.parseInt(input);
