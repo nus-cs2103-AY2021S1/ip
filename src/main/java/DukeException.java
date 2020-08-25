@@ -14,7 +14,11 @@ public class DukeException extends Exception {
         //super(cause);
         if (msg.equals("file not found")) {
             return "no databse found! pls try again ^__^";
-        } else {
+        } else if (msg.equals("command not found")) {
+            return "Meimei doesn't understand this command!";
+        } else if (msg.equals("time")) {
+            return "Date format error";
+        }else {
             return "☹ OOPS!!! The description of a " + msg + " cannot be empty.";
         }
     }

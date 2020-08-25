@@ -15,8 +15,8 @@ public class Event extends Task {
     }
     @Override
     public String inputStyle() {
-        return "event " + super.inputStyle() + " /at" +
-                at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "event " + super.inputStyle() + " /at " +
+                at;
     }
 
     @Override

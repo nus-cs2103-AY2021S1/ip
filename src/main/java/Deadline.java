@@ -17,7 +17,7 @@ public class Deadline extends Task {
 
     @Override
     public String inputStyle() {
-        return "deadline " + super.inputStyle() + " /by" + by;
+        return "deadline " + super.inputStyle() + "/by " + by;
     }
 
     @Override
