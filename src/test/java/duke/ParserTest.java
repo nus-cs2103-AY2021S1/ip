@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.*;
 import duke.exception.DukeException;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -204,6 +205,44 @@ public class ParserTest {
             Command c = Parser.parse("deadline reading /by");
         } catch (DukeException e) {
             assertEquals("☹ OOPS!!! Please specify a due date for the deadline.", e.getMessage());
+        }
+    }
+
+    @Test
+    void parsePendingCommandTest() {
+        try {
+            Command c = Parser.parse("pending");
+            assertTrue(c instanceof PendingCommand);
+        } catch (DukeException e) {
+            fail();
+        }
+    }
+
+    @Test
+    void parsePendingCommand_invalidArgumentExceptionThrown() {
+        try {
+            Command c = Parser.parse("pending 123");
+        } catch (DukeException e) {
+            assertEquals("☹ OOPS!!! The pending command does not take any additional argument(s).", e.getMessage());
+        }
+    }
+
+    @Test
+    void parseCompletedCommandTest() {
+        try {
+            Command c = Parser.parse("completed");
+            assertTrue(c instanceof CompletedCommand);
+        } catch (DukeException e) {
+            fail();
+        }
+    }
+
+    @Test
+    void parseCompletedCommand_invalidArgumentExceptionThrown() {
+        try {
+            Command c = Parser.parse("completed 123");
+        } catch (DukeException e) {
+            assertEquals("☹ OOPS!!! The completed command does not take any additional argument(s).", e.getMessage());
         }
     }
 }
