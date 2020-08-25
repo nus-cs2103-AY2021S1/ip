@@ -32,9 +32,9 @@ public class DeleteCommand extends Command {
 			Task taskToDelete = taskList.getTask(indexOfTask);
 			taskList.deleteTask(indexOfTask);
 			storage.updateStorage(taskList);
-			ui.printMessage("Noted. I've removed this task.\n" +
-					taskToDelete.toString() + "\n" +
-					"Now you have " + taskList.numberOfTasks() + " tasks in the list.");
+			ui.printMessage("Noted. I've removed this task.\n"
+					+ taskToDelete.toString() + "\n"
+						+ "Now you have " + taskList.numberOfTasks() + " tasks in the list.");
 		} catch (IndexOutOfBoundsException e) {
 			throw new DukeException("Oops! Sorry, I couldn't find the task.");
 		}
