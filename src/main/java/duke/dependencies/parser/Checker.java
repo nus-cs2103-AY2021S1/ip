@@ -13,7 +13,7 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 class Checker {
-    private Executable command;
+    private final Executable command;
 
     /**
      * Constructor for the checker object. Validates the command given/if and creates an Executable object
@@ -65,9 +65,12 @@ class Checker {
      */
     private static Checker parseExplicitCommand(String s) throws DukeException {
         Executable e;
+
+        /* LIST COMMAND */
         if (s.contains("list") || s.contains("List")) {
             e = Command.createListCommand(null);
         }
+        /* DONE COMMAND */
         else if (checkForWord(s, "done")) {
             String task = cutOutTheWord(s, "done");
             if (task.isBlank() || task.isEmpty()) {
@@ -76,7 +79,9 @@ class Checker {
             Task t = Task.createMiscTask(task);
             e = Command.createDoneCommand(t);
 
-        } else if (checkForWord(s, "todo")) {
+        }
+        /* TODO_COMMAND */
+        else if (checkForWord(s, "todo")) {
             String task = cutOutTheWord(s, "todo");
             Task t = Task.createTodo(task);
             if (task.isEmpty() || task.isBlank()) {
@@ -84,31 +89,37 @@ class Checker {
             }
             e = Command.createAddCommand(t);
 
-        } else if (checkForWord(s, "event")) {
+        }
+        /* EVENT COMMAND */
+        else if (checkForWord(s, "event")) {
             String task = cutOutTheWord(s, "event");
             if (task.isBlank() || task.isEmpty()) {
                 throw new EmptyTaskException("Error: Event task cannot be empty");
             }
-            String[] arr = task.split("/?at");
+            String[] arr = task.split("/at");
             if (!TaskDate.isValidFormat(arr[1].trim())) {
                 throw new InvalidDateException("Error: Date format not accepted.");
             }
             Task t = Task.createEvent(arr[0].trim(), arr[1].trim());
             e = Command.createAddCommand(t);
 
-        } else  if (checkForWord(s, "deadline")) {
+        }
+        /* DEADLINE COMMAND */
+        else  if (checkForWord(s, "deadline")) {
             String task = cutOutTheWord(s, "deadline");
             if (task.isEmpty() || task.isBlank()) {
                 throw new EmptyTaskException("Error: Deadline tasks cannot be empty");
             }
-            String[] arr = task.split("/?by");
+            String[] arr = task.split("/by");
             if (!TaskDate.isValidFormat(arr[1].trim())) {
                 throw new InvalidDateException("Error: Date format not accepted.");
             }
             Task t = Task.createDeadline(arr[0].trim(), arr[1].trim());
             e = Command.createAddCommand(t);
 
-        } else if (checkForWord(s, "delete")) {
+        }
+        /* DELETE COMMAND */
+        else if (checkForWord(s, "delete")) {
             String task = cutOutTheWord(s, "delete");
             if (task.isEmpty() || task.isBlank()) {
                 throw new EmptyTaskException("Error: Task to be deleted cannot be empty");
@@ -116,7 +127,18 @@ class Checker {
             Task t = Task.createMiscTask(task);
             e = Command.createDeleteCommand(t);
 
-        } else {
+        }
+        /* FIND COMMAND */
+        else if (s.contains("find")) {
+            String task = cutOutTheWord(s,"find");
+            if (task.isEmpty() || task.isBlank()) {
+                throw new EmptyTaskException("Error: Empty field for find: keyword");
+            }
+            Task t = Task.createMiscTask(task);
+            e = Command.createFindCommand(t);
+        }
+        /* MYSTERIOUS ERROR/COMMAND */
+        else {
             throw new UnknownCommandException("Error: Unknown command");
         }
 
@@ -135,7 +157,7 @@ class Checker {
     }
 
     /**
-     * Case Insensitive cutting out of the word.
+     * Case insensitive cutting out of the word.
      * @param line
      * @param cmd
      * @return
@@ -154,7 +176,7 @@ class Checker {
         return false;
     }
 
-    /* -------------------------------------- Additional Feature Section ---------------------------------- */
+    /* ---------------------------------------- Additional Feature Section ------------------------------------------ */
 
     /**
      * Instead of parsing just natural language, this function will be able to parse a natural sentence.

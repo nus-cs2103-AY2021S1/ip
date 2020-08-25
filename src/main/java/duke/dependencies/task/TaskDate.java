@@ -27,13 +27,16 @@ public class TaskDate implements Serializable, Comparable<TaskDate> {
     public static boolean isValidFormat(String date) {
         try {
             if (date.contains("/")) {
+                System.out.println(date);
                 LocalDate.parse(date, UK_DATE_FORMAT);
             } else {
                 LocalDate.parse(date);
             }
             return true;
         } catch (DateTimeParseException e) {
+
             return false;
+
         }
     }
 

@@ -30,7 +30,7 @@ public abstract class Task implements Serializable, Schedulable {
      * Returns the String describing this Task.
      * @return String representation of this Task.
      */
-    public String showTask() {
+    public String showTaskDescription() {
         return this.task;
     }
 

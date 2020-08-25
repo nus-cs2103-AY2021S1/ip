@@ -37,7 +37,9 @@ public class Command implements Executable {
         return this.task;
     }
 
-    /* -------------------------------------- Static Factory Methods ---------------------------------------------*/
+
+    /* -------------------------------------- Static Factory Methods --------------------------------------------------*/
+
 
     /**
      * Returns a Command of type ADD. This command encapsulates the instruction to add a specific Task object to
@@ -76,5 +78,9 @@ public class Command implements Executable {
      */
     public static Command createDeleteCommand(Task task) {
         return new Command(CommandType.DELETE, task);
+    }
+
+    public static Command createFindCommand(Task task) {
+        return new Command(CommandType.FIND, task);
     }
 }

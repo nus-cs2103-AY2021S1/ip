@@ -21,6 +21,7 @@ public class Executor {
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
     private static final String DELETE_COMMAND = "delete";
+    private static final String FIND_COMMAND = "find";
 
     private CommandType commandState;
 
@@ -61,6 +62,10 @@ public class Executor {
                 setState(DONE);
                 break;
             }
+            case FIND: {
+                setState(FIND);
+                break;
+            }
             default: {
                 setState(INVALID);  // Should never reached this stage.
                 break;
@@ -70,7 +75,7 @@ public class Executor {
     }
 
 
-    /* -------------------------------------------------------------------------------------------------------- */
+    /* -------------------------------------------------------------------------------------------------------------- */
 
 
     // TODO: Ideally this class should not be returning strings. String should be returned in the Parser
@@ -94,25 +99,31 @@ public class Executor {
             }
             case DONE: {
                 // Done command would have a task of "1 2 3 4"
-                String[] nums = e.getTask().showTask().split("[\\D]+");
+                String[] nums = e.getTask().showTaskDescription().split("[\\D]+");
                 Integer[] arr = new Integer[nums.length];
                 for (int i = 0; i < nums.length; i++) {
                     arr[i] = Integer.valueOf(nums[i]);
                 }
                 reply = storage.done(arr);
                 return String.format("Congratz! I will marked this task as completed for you!\n%s\n" +
-                        "Keep up the good work and continue to stay motivated.\n"
-                        + "You've got %d task left to be completed!",
+                        "Keep up the good work and continue to stay motivated.\n" +
+                                "You've got %d task left to be completed!",
                         reply,
                         storage.getNumOfIncomplete());
             }
             case DELETE: {
-                String nums = e.getTask().showTask();
+                String nums = e.getTask().showTaskDescription();
                 reply = storage.deleteTask(Integer.valueOf(nums));
-                return String.format("Noted. I've removed this task:\n%s\n"
-                        + "Now you have %d tasks left in the list.",
+                return String.format("Noted. I've removed this task:\n%s\n" +
+                                "Now you have %d tasks left in the list.",
                         reply,
                         storage.getListSize());
+            }
+            case FIND: {
+                String keyword = e.getTask().showTaskDescription();
+                reply = storage.findMatching(keyword);
+                return String.format("Here are the tasks matching: %s\n" +
+                        reply, keyword);
             }
             default: {
                 return "Error";
