@@ -1,0 +1,3 @@
+[T] @ [✓] @ read book @ 
+[E] @ [✘] @ project meeting @ Aug 6th 2-4pm
+[T] @ [✓] @ join sports club @ 

@@ -1,14 +1,21 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static String border = "-----------------------------------------------------------";
-    public static String indentation = "    ";
+    public static String filePath = "src/main/java/data/duke.txt";
+
+    public static String BORDER = "-----------------------------------------------------------";
+    public static String INDENTATION = "    ";
     public static List<Task> tasks = new ArrayList<>();
 
-    public static void interact() throws DukeException {
+    public static void interact() throws DukeException, IOException {
+        loadTasks(filePath);
         greet();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
@@ -62,62 +69,132 @@ public class Duke {
     }
 
     public static void printBorder() {
-        System.out.println(indentation + border);
+        System.out.println(INDENTATION + BORDER);
     }
 
     public static void greet() {
         printBorder();
-        System.out.println(indentation + "Hello! I'm Duke\n    What can I do for you?");
+        System.out.println(INDENTATION + "Hello! I'm Duke\n    What can I do for you?");
         printBorder();
     }
 
     public static void exit() {
         printBorder();
-        System.out.println(indentation + "Bye. Hope to see you again soon!");
+        System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
         printBorder();
     }
 
     public static void list() {
         printBorder();
-        System.out.println(indentation + "Here are the tasks in your list:");
+        System.out.println(INDENTATION + "Here are the tasks in your list:");
         for (Task task : tasks) {
             int index = tasks.indexOf(task) + 1;
-            System.out.println(indentation + index + "." + task);
+            System.out.println(INDENTATION + index + "." + task);
         }
         printBorder();
     }
 
-    public static void add(Task task) {
+    public static void add(Task task) throws IOException {
         printBorder();
         tasks.add(task);
-        System.out.println(indentation + "Got it. I've added this task:");
-        System.out.println(indentation + indentation + task);
-        System.out.println(indentation + "Now you have " + (tasks.size() != 1
+        String textToAppend = task.getSymbol() + " @ " + task.getStatusIcon() + " @ "
+                + task.getDescription() + " @ " + task.getBy() + "\n";
+        appendToFile(filePath, textToAppend);
+
+        System.out.println(INDENTATION + "Got it. I've added this task:");
+        System.out.println(INDENTATION + INDENTATION + task);
+        System.out.println(INDENTATION + "Now you have " + (tasks.size() != 1
                 ? tasks.size() + " tasks in the list."
                 : tasks.size() + " task in the list."));
         printBorder();
     }
 
-    public static void markDone(int index) {
+    public static void markDone(int index) throws IOException {
         Task task = tasks.get(index);
         Task newTask = task.markAsDone();
         tasks.set(index, newTask);
+
+        writeToFile(filePath, "");
+        for (Task tsk : tasks) {
+            String textToAppend = tsk.getSymbol() + " @ " + tsk.getStatusIcon() + " @ "
+                    + tsk.getDescription() + " @ " + tsk.getBy() + "\n";
+            appendToFile(filePath, textToAppend);
+        }
+
         printBorder();
-        System.out.println(indentation + "Nice! I've marked this task as done:");
-        System.out.println(indentation + indentation + newTask.getStatusIcon() + " " + newTask.description);
+        System.out.println(INDENTATION + "Nice! I've marked this task as done:");
+        System.out.println(INDENTATION + INDENTATION + newTask.getStatusIcon() + " " + newTask.description);
         printBorder();
     }
 
-    public static void delete(int index) {
+    public static void delete(int index) throws IOException {
         Task task = tasks.get(index);
         tasks.remove(task);
+
+        writeToFile(filePath, "");
+        for (Task tsk : tasks) {
+            String textToAppend = tsk.getSymbol() + " @ " + tsk.getStatusIcon() + " @ "
+                    + tsk.getDescription() + " @ " + tsk.getBy() + "\n";
+            appendToFile(filePath, textToAppend);
+        }
+
         printBorder();
-        System.out.println(indentation + "Noted. I've removed this task:");
-        System.out.println(indentation + indentation + task);
-        System.out.println(indentation + "Now you have " + (tasks.size() != 1
+        System.out.println(INDENTATION + "Noted. I've removed this task:");
+        System.out.println(INDENTATION + INDENTATION + task);
+        System.out.println(INDENTATION + "Now you have " + (tasks.size() != 1
                 ? tasks.size() + " tasks in the list."
                 : tasks.size() + " task in the list."));
         printBorder();
+    }
+
+    public static void loadTasks(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        if (f.exists()) {
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                String[] arrOfStr = line.split(" @ ", 0);
+                String symbol = arrOfStr[0];
+                String status = arrOfStr[1];
+                String description = arrOfStr[2];
+                Task newTask;
+
+                if (symbol.equals("[T]")) {
+                    newTask = new Todo(description);
+                } else if (symbol.equals("[D]")) {
+                    String by = arrOfStr[3];
+                    newTask = new Deadline(description, by);
+                } else {
+                    String by = arrOfStr[3];
+                    newTask = new Event(description, by);
+                }
+
+                if (status.equals("[✓]")) {
+                    newTask.markAsDone();
+                }
+                tasks.add(newTask);
+            }
+        }
+    }
+
+    public static void printFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the file as the source
+        while (s.hasNext()) {
+            System.out.println(s.nextLine());
+        }
+    }
+
+    public static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    public static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
     }
 
     public static void main(String[] args) {
@@ -125,7 +202,7 @@ public class Duke {
             interact();
         } catch (Exception e) {
             printBorder();
-            System.out.println(indentation + e.getMessage());
+            System.out.println(INDENTATION + e.getMessage());
             printBorder();
         }
     }

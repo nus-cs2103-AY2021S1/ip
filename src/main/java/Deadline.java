@@ -1,10 +1,8 @@
 public class Deadline extends Task {
 
-    protected final String symbol = "[D]";
-    protected String by;
-
     public Deadline(String description, String by) {
         super(description);
+        symbol = "[D]";
         this.by = by;
     }
 

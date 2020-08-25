@@ -1,10 +1,8 @@
 public class Event extends Task {
 
-    protected final String symbol = "[E]";
-    protected String by;
-
     public Event(String description, String by) {
         super(description);
+        symbol = "[E]";
         this.by = by;
     }
 
