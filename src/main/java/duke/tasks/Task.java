@@ -1,6 +1,6 @@
-package tasks;
+package duke.tasks;
 
-import utils.ResourceHandler;
+import duke.utils.ResourceHandler;
 import java.text.MessageFormat;
 
 /**

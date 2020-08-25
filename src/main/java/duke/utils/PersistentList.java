@@ -1,10 +1,10 @@
-package utils;
+package duke.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
-import tasks.Task;
+import duke.tasks.Task;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

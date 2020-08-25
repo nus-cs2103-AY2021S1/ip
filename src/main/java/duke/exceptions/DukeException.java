@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 /**
  * Represents an {@code Exception} that is related to <i>Duke</i>.

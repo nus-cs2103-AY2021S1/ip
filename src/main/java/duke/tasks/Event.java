@@ -1,8 +1,8 @@
-package tasks;
+package duke.tasks;
 
-import utils.DateTimeStringFormatter;
-import utils.ResourceHandler;
-import utils.Schedulable;
+import duke.utils.DateTimeStringFormatter;
+import duke.utils.ResourceHandler;
+import duke.utils.Schedulable;
 
 import java.text.MessageFormat;
 import java.time.LocalDateTime;

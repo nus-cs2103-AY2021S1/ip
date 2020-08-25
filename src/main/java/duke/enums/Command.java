@@ -1,7 +1,7 @@
-package enums;
+package duke.enums;
 
-import exceptions.DukeException;
-import utils.ResourceHandler;
+import duke.exceptions.DukeException;
+import duke.utils.ResourceHandler;
 
 import java.text.MessageFormat;
 import java.util.regex.Pattern;

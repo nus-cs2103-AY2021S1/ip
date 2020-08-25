@@ -1,12 +1,14 @@
-import enums.Command;
-import exceptions.DukeException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.TaskManager;
-import tasks.ToDo;
-import utils.DateTimeParser;
-import utils.PrettyPrinter;
-import utils.ResourceHandler;
+package duke;
+
+import duke.enums.Command;
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.TaskManager;
+import duke.tasks.ToDo;
+import duke.utils.DateTimeParser;
+import duke.utils.PrettyPrinter;
+import duke.utils.ResourceHandler;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;

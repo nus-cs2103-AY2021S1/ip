@@ -1,10 +1,10 @@
-package tasks;
+package duke.tasks;
 
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
-import utils.PersistentList;
-import utils.ResourceHandler;
-import utils.Schedulable;
+import duke.utils.PersistentList;
+import duke.utils.ResourceHandler;
+import duke.utils.Schedulable;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;

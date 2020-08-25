@@ -1,6 +1,6 @@
-package utils;
+package duke.utils;
 
-import exceptions.DukeException;
+import duke.exceptions.DukeException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

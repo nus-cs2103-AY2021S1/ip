@@ -1,4 +1,4 @@
-package utils;
+package duke.utils;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
