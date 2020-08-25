@@ -12,6 +12,7 @@ import duke.exception.FolderErrorException;
 import duke.task.Task;
 import duke.task.Event;
 import duke.task.Deadline;
+import duke.task.ToDo;
 import duke.tasklist.TaskList;
 
 /**
@@ -106,7 +107,7 @@ public class Storage {
                 }
                 switch (component[0].trim()) {
                     case "T": {
-                        Task current = new Task(component[2]);
+                        Task current = new ToDo(component[2]);
                         int state = Integer.parseInt(component[1].trim());
                         if (state == 1) {
                             current.markAsDone();

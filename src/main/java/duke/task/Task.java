@@ -4,7 +4,7 @@ package duke.task;
  * Represents a general task that has a name and status of completion.
  * More specific task will inherit from this class.
  */
-public class Task {
+public abstract class Task {
     protected String name;
     protected boolean status;
 
@@ -25,18 +25,12 @@ public class Task {
         return "[" + (status ? "\u2713" : "\u2718") + "] " + this.name.trim();
     }
 
-
-    public String convertTxt() {
-        return "T | " + (this.status ? "1" : "0") + " | " + name;
-    }
-
-    public String getDate() {
-        return "";
-    }
-
     public String getName() {
         return this.name.trim();
     }
 
+    public abstract String convertTxt();
+
+    public abstract String getDate();
 
 }

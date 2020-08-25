@@ -13,4 +13,14 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String convertTxt() {
+        return "T | " + (this.status ? "1" : "0") + " | " + name;
+    }
+
+    @Override
+    public String getDate() {
+        return "";
+    }
 }
