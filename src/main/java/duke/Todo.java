@@ -1,10 +1,25 @@
 package duke;
 
+/**
+ * A task to do.
+ */
 public class Todo extends Task {
+
+    /**
+     * Todo constructor.
+     * 
+     * @param description the description of the task.
+     */
     public Todo(String description) {
         super(description);
     }
 
+    /**
+     * Todo constructor with specified isDone.
+     * 
+     * @param description the description of the task.
+     * @param isDone      specify whether the task is done or not.
+     */
     public Todo(String description, boolean isDone) {
         super(description, isDone);
     }
@@ -14,6 +29,11 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Format task to be written to a file.
+     *
+     * @return formatted string of the task.
+     */
     public String writeToFile() {
         return String.format("T | %b | %s ", this.isDone, this.description);
     }

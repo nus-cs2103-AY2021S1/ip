@@ -7,6 +7,11 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Duke constructor.
+     * 
+     * @param filePath path of the storage file.
+     */
     public Duke(String filePath) {
         try {
             this.storage = new Storage(filePath);
@@ -16,6 +21,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Run the Duke.
+     */
     public void run() {
         Ui.showWelcome();
 
@@ -38,6 +46,11 @@ public class Duke {
         scanner.close();
     }
 
+    /**
+     * Entry point of the Duke's program.
+     * 
+     * @param args an array of command-line arguments for the application.
+     */
     public static void main(String[] args) {
         new Duke("./data/dukeFile.txt").run();
     }

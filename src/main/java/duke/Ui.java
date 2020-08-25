@@ -18,23 +18,40 @@ public class Ui {
             + "/ _` /  \\ /  \\ |  \\ |__) \\ / |__  \n" + "\\__> \\__/ \\__/ |__/ |__)  |  |___ \n"
             + "                                  ";
 
+    /**
+     * Show Duke's welcome.
+     */
     public static void showWelcome() {
         System.out.println("Hello I am\n" + logo + "How can I help you?");
         return;
     }
 
+    /**
+     * Show the given message.
+     * 
+     * @param message message to be shown.
+     */
     public static void showMessage(String message) {
         System.out.println(message);
     }
 
+    /**
+     * Show the upper line.
+     */
     public static void showUpperLine() {
         System.out.println(upperLine);
     }
 
+    /**
+     * Show the lower line.
+     */
     public static void showLowerLine() {
         System.out.println(lowerLine);
     }
 
+    /**
+     * Show Duke's goodbye.
+     */
     public static void showGoodbye() {
         System.out.println(upperLine + goodbye + "\n" + lowerLine);
     }
