@@ -33,4 +33,15 @@ public class TaskList {
     public int numTask() {
         return tasks.size();
     }
+
+    public ArrayList<Task> find(String input) {
+        ArrayList<Task> temp = new ArrayList<>();
+
+        for(Task t: tasks) {
+            if(t.contains(input)) {
+                temp.add(t);
+            }
+        }
+        return temp;
+    }
 }

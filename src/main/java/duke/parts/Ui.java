@@ -50,6 +50,18 @@ public class Ui {
         printNumTask(numTask);
     }
 
+    public void printFind(ArrayList<Task> arr) {
+        if (arr.isEmpty()) {
+            System.out.println(INDENT + "There are no items");
+        } else {
+            System.out.println(INDENT + "Here are the items that match the search request");
+            for (int i = 0; i < arr.size(); i++) {
+                System.out.println(String.format("%s%d) %s", INDENT, i + 1,
+                        arr.get(i).getOutput()));
+            }
+        }
+    }
+
     public void bye() {
         System.out.println(INDENT + "Bye. Hope to see you again soon!");
     }

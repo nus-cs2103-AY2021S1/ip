@@ -10,7 +10,6 @@ import duke.task.ToDo;
 import duke.task.Event;
 
 public class AddCommand extends Command{
-
     String input;
 
     public AddCommand(String input) {
