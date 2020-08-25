@@ -27,7 +27,6 @@ public class Storage {
             TaskList newTaskList = new TaskList();
             Storage.store(newTaskList);
             return newTaskList;
-
         }
     }
 

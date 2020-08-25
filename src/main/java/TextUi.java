@@ -21,25 +21,37 @@ public class TextUi {
     }
 
     /**
-     * prints messages of todo task
+     * prints messages when new task is added
      *
      * @param description
-     * @throws IllegalArgumentException
      */
     public static void printNewTasks(String description) {
         System.out.println(divider + "Got it. I've added this task: \n" + description);
     }
 
+    /**
+     * prints messages as a summary when taskList is updated
+     *
+     * @param taskLength
+     */
     public static void printTaskSummary(int taskLength) {
-        System.out.println(String.format("Now you have %d tasks in the list.\n", taskLength) + divider);
+        System.out.println(String.format("Now you have %d tasks in the list. \n", taskLength) + divider);
     }
 
+    /**
+     * prints messages when error is encountered
+     * @param exception
+     */
     public static void printError(Exception exception) {
         System.out.println(divider + "☹ OOPS!!!" + exception.getMessage() + "Try again!\n" + divider);
     }
 
+    /**
+     * prints message for Done, Delete, List, Bye commands
+     * @param description
+     */
     public static void printMessage(String description) {
-        System.out.println(divider + "\n" + description + "\n" + divider);
+        System.out.println(divider + description + "\n" + divider);
 
     }
 

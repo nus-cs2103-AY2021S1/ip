@@ -10,7 +10,8 @@ public class TaskList implements Serializable {
     private final static long serialVersionUID = 1234L;
 
     /**
-     * shows the entire task list
+     * prints the tasks in the taskList
+     * @return string format of the task list
      */
     public String toString() {
         int counter = 1;
