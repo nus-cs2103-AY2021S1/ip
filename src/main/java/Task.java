@@ -11,6 +11,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getDescription() {
         return this.description;
     }
@@ -30,6 +35,18 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Gets the data from the task to be saved in duke.txt.
+     *
+     * @return String representing the data of the task.
+     */
+    public String getData() {
+        int statusNum = this.getStatusIcon().equals("\u2713")
+                ? 1
+                : 0;
+        return statusNum + " / " + this.getDescription();
     }
 
     @Override

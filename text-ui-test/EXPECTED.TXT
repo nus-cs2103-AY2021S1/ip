@@ -5,17 +5,17 @@ ____________________________________________________________
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-Hello! I'm Duke
-What can I do for you?
+Hello! I'm Duke.
 ____________________________________________________________
 
-There are no tasks in your list.
+Here are the task(s) in your list:
+1.[T][✘] buy bread
 
 ☹ OOPS!!! The description of a todo cannot be empty.
 
 Got it. I've added this task:
 [T][✘] borrow book
-Now you have 1 task in the list.
+Now you have 2 tasks in the list.
 
 ☹ OOPS!!! The description of a deadline cannot be empty.
 
@@ -25,7 +25,7 @@ Now you have 1 task in the list.
 
 Got it. I've added this task:
 [D][✘] return book (by: Sunday)
-Now you have 2 tasks in the list.
+Now you have 3 tasks in the list.
 
 ☹ OOPS!!! The description of an event cannot be empty.
 
@@ -33,24 +33,26 @@ Now you have 2 tasks in the list.
 
 Got it. I've added this task:
 [E][✘] project meeting (at: Mon 2-4pm)
-Now you have 3 tasks in the list.
+Now you have 4 tasks in the list.
 
 Here are the task(s) in your list:
-1.[T][✘] borrow book
-2.[D][✘] return book (by: Sunday)
-3.[E][✘] project meeting (at: Mon 2-4pm)
+1.[T][✘] buy bread
+2.[T][✘] borrow book
+3.[D][✘] return book (by: Sunday)
+4.[E][✘] project meeting (at: Mon 2-4pm)
 
 ☹ OOPS!!! Which task have you done?
 
 ☹ OOPS!!! Enter the index of the task done.
 
 Nice! I've marked this as done:
-[E][✓] project meeting (at: Mon 2-4pm)
+[D][✓] return book (by: Sunday)
 
 Here are the task(s) in your list:
-1.[T][✘] borrow book
-2.[D][✘] return book (by: Sunday)
-3.[E][✓] project meeting (at: Mon 2-4pm)
+1.[T][✘] buy bread
+2.[T][✘] borrow book
+3.[D][✓] return book (by: Sunday)
+4.[E][✘] project meeting (at: Mon 2-4pm)
 
 Nice! I've marked this as done:
 [T][✓] borrow book
@@ -59,19 +61,20 @@ Nice! I've marked this as done:
 
 Got it. I've added this task:
 [T][✘] join sports club
-Now you have 4 tasks in the list.
+Now you have 5 tasks in the list.
 
 ☹ OOPS!!! Which task do you want to delete?
 
 ☹ OOPS!!! Enter the index of the task to be deleted.
 
 Noted. I've removed this task:
-[E][✓] project meeting (at: Mon 2-4pm)
-Now you have 3 tasks in the list.
+[D][✓] return book (by: Sunday)
+Now you have 4 tasks in the list.
 
 Here are the task(s) in your list:
-1.[T][✓] borrow book
-2.[D][✘] return book (by: Sunday)
-3.[T][✘] join sports club
+1.[T][✘] buy bread
+2.[T][✓] borrow book
+3.[E][✘] project meeting (at: Mon 2-4pm)
+4.[T][✘] join sports club
 
 Bye. Hope to see you again soon!
