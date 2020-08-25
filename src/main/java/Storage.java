@@ -31,7 +31,7 @@ public class Storage {
         String timeDescription = "";
         boolean isDone = false;
 
-        if (task.substring(4, 5).equals("\u2713")) {
+        if (task.substring(4, 5).equals("1")) {
             isDone = true;
         }
 
@@ -69,7 +69,10 @@ public class Storage {
 
         for (int i = 0; i < totalTasks; i++) {
             Task writeTask = tasksToWrite.get(i);
-            fw.write(writeTask.toString() + "\n");
+            String taskString = writeTask.toString();
+            String replacement1 = taskString.replaceAll("✓", "1");
+            String replacement2 = replacement1.replaceAll("✘", "0");
+            fw.write(replacement2 + "\n");
         }
         fw.close();
     }
