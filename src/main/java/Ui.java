@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class PersonalAssistant {
+public class Ui {
     private Storage store;
     private TaskList tasks;
     private Scanner reader;
@@ -12,7 +12,7 @@ public class PersonalAssistant {
     /**
      * Initialize personal assistant with a store for user input
      */
-    public PersonalAssistant() {
+    public Ui() {
         store = new Storage();
         tasks = store.getTaskList();
         reader = new Scanner(System.in);
