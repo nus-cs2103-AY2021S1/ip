@@ -1,7 +1,6 @@
 package king;
 
 import tasks.*;
-
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,6 +11,14 @@ public class Storage {
     public final String FILE_PATH;
     private File data;
 
+    /**
+     * Creates the directories and the file given the filepath
+     * if file does not exists. Then, returns Storage which handles
+     * the manipulation of asset in the filepath.
+     *
+     * @param filepath file path for an existing asset or to initialise a new asset.
+     *
+     */
     Storage(String filepath){
         this.FILE_PATH = filepath;
         String[] tokens = filepath.split("/");
@@ -36,8 +43,12 @@ public class Storage {
         }
     }
 
-
-    // method to load the asset into items
+    /**
+     * Storage read the asset in the filepath and loads the
+     * Tasks in the asset into an ArrayList.
+     *
+     * @return ArrayList<Task>
+     */
     public ArrayList<Task> load(){
         ArrayList<Task> items = new ArrayList<>();
         try{
@@ -71,7 +82,12 @@ public class Storage {
         return items;
     }
 
-    // method to persist the items into asset
+    /**
+     * Reads the tasks in the taskList and updates the tasks in the
+     * filepath.
+     * @param taskList
+     * @return boolean returns true if taskList is successfully persisted.
+     */
     public boolean persistTaskList(TaskList taskList){
         try {
             BufferedWriter output = new BufferedWriter(new FileWriter(FILE_PATH));

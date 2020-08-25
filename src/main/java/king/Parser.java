@@ -1,6 +1,9 @@
+/**
+ * Parser class handles all the commands from the King Program
+ * and returns a reply from the commands.
+ */
 package king;
 import tasks.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -9,12 +12,25 @@ public class Parser {
     private final Storage storage;
     private TaskList taskList;
 
+    /**
+     * Parse the commands from the King Program
+     *
+     * @param storage storage to save the commands to.
+     * @param taskList taskList to be manipulated from the commands.
+     * @return Parser parser to parse commands.
+     */
     Parser(Storage storage, TaskList taskList){
         this.storage = storage;
         this.taskList = taskList;
     }
 
-    // method generates reply based on the phrase given by the User
+    /**
+     * Parse the commands from the King Program
+     *
+     * @param phrase the command given by the user.
+     * @return String the reply from the command given.
+     * @throws KingException
+     */
     public String parse(String phrase) throws KingException {
         int phraseLength = phrase.length();
         String reply;
