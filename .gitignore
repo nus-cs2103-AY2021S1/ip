@@ -18,6 +18,3 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # VS Code
 .vscode
-.classpath
-.project
-.settings
