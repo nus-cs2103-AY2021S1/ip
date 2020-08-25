@@ -10,6 +10,8 @@ import java.util.Scanner;
  */
 public class Ui {
 
+    private static String CLEAR_MESSAGE = "I have cleared all tasks!";
+
     public void showLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -107,5 +109,9 @@ public class Ui {
      */
     public void showDoneGreet(Task task) {
         System.out.print(formatOut(doneGreetMessage() + "\n\t" + task.toString()));
+    }
+
+    public void showClearMessage() {
+        System.out.print(formatOut(Ui.CLEAR_MESSAGE + "\n\t"));
     }
 }

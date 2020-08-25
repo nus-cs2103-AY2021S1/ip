@@ -39,4 +39,8 @@ public class TaskList {
         targetTask.markAsDone();
         return targetTask;
     }
+
+    public void clear() {
+        taskList = new ArrayList<>();
+    }
 }

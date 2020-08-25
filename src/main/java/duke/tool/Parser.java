@@ -1,5 +1,6 @@
 package duke.tool;
 
+import duke.command.ClearCommand;
 import duke.command.Command;
 import duke.command.AddCommand;
 import duke.command.DeleteCommand;
@@ -9,11 +10,12 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 
 import duke.exception.AmbiguousInputException;
-import duke.exception.DeletionEmptyException;
+import duke.exception.DeletionIndexEmptyException;
 import duke.exception.DescriptionEmptyException;
+import duke.exception.DoneIndexEmptyException;
 import duke.exception.DukeException;
-
 import duke.exception.TimeEmptyException;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -29,6 +31,7 @@ public class Parser {
 
     /**
      * Returns a command that associate with the specific input.
+     *
      * @param input A complete input stream from user.
      * @return A command to be excuted
      * @throws DukeException An exception that happen in Duke system
@@ -46,50 +49,71 @@ public class Parser {
 
         //Detect the command and give it parameter
         String[] s = input.split(" ", 2);
-        if (s[0].equals("list")) {
+
+        //TODO:Detect command with unresonable space (eg. "done ")
+
+        switch (s[0]) {
+        case "clear":
+            return new ClearCommand();
+        case "list":
             return new ListCommand();
-        } else if (s[0].equals("done")) {
-            int index = Integer.parseInt(s[1]) - 1;
-            return new DoneCommand(index);
-        } else {
+        case "done":
             if (s.length == 1) {
-                if (s[0].equals("delete")) {
-                    throw new DeletionEmptyException();
-                } else {
-                    throw new DescriptionEmptyException(s[0]);
-                }
+                throw new DoneIndexEmptyException();
             }
 
-            switch (s[0]) {
-            case "find":
-                return new FindCommand(s[1]);
-            case "todo":
-                return new AddCommand(new Todo(s[1]));
-            case "deadline": {
-                String[] set = s[1].split(" /by ");
+            int index = Integer.parseInt(s[1]) - 1;
 
-                if (set.length == 1) {
-                    throw new TimeEmptyException("deadline");
-                }
+            return new DoneCommand(index);
+        case "find":
+            if (s.length == 1) {
+                throw new DescriptionEmptyException("find");
+            }
 
-                return new AddCommand(new Deadline(set[0]
-                        , LocalDateTime.parse(set[1], acceptedFormatter)));
+            return new FindCommand(s[1]);
+        case "todo":
+            if (s.length == 1) {
+                throw new DescriptionEmptyException("todo");
             }
-            case "event": {
-                String[] set = s[1].split(" /at ");
 
-                if (set.length == 1) {
-                    throw new TimeEmptyException("event");
-                }
+            return new AddCommand(new Todo(s[1]));
+        case "deadline": {
+            if (s.length == 1) {
+                throw new DescriptionEmptyException("dealine");
+            }
 
-                return new AddCommand(new Event(set[0], LocalDateTime.parse(set[1], acceptedFormatter)));
+            String[] set = s[1].split(" /by ");
+
+            if (set.length == 1) {
+                throw new TimeEmptyException("deadline");
             }
-            case "delete": {
-                return new DeleteCommand(Integer.parseInt(s[1]) - 1);
-            }
-            default:
-                throw new AmbiguousInputException();
-            }
+
+            return new AddCommand(new Deadline(set[0]
+                    , LocalDateTime.parse(set[1], acceptedFormatter)));
         }
+        case "event": {
+            if (s.length == 1) {
+                throw new DescriptionEmptyException("event");
+            }
+
+            String[] set = s[1].split(" /at ");
+
+            if (set.length == 1) {
+                throw new TimeEmptyException("event");
+            }
+
+            return new AddCommand(new Event(set[0], LocalDateTime.parse(set[1], acceptedFormatter)));
+        }
+        case "delete": {
+            if (s.length == 1) {
+                throw new DeletionIndexEmptyException();
+            }
+
+            return new DeleteCommand(Integer.parseInt(s[1]) - 1);
+        }
+        default:
+            throw new AmbiguousInputException();
+        }
+
     }
 }

@@ -4,6 +4,8 @@ package duke.task;
  * Represents a task.
  */
 public class Task {
+    public static final String TICK_ICON = "\u2713";
+    public static final String CROSS_ICON = "\u2718";
     protected String desciption;
     protected boolean isDone;
 
@@ -13,7 +15,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? Task.TICK_ICON : Task.CROSS_ICON);
     }
 
     public void markAsDone() {
