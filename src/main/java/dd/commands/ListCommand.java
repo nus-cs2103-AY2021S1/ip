@@ -15,11 +15,17 @@ public class ListCommand extends Command {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Class Constructor.
+     *
+     * @param command Command given.
+     * @param item Empty string.
+     */
     public ListCommand(String command, String item) {
         super(command, item);
     }
 
-    public void list(ArrayList<Task> tasks) {
+    private void list(ArrayList<Task> tasks) {
         int curr = 0;
 
         while (curr < tasks.size()) {
@@ -28,7 +34,7 @@ public class ListCommand extends Command {
         }
     }
 
-    public void checkDate() throws DukeException {
+    private void checkDate() throws DukeException {
         boolean validInput = dth.checkInput(item);
 
         if (validInput && item.length() == 10) {
@@ -49,6 +55,15 @@ public class ListCommand extends Command {
         }
     }
 
+    /**
+     * Executes the appropriate method based on command.
+     *
+     * @param taskList Current TaskList to modify.
+     * @param u Ui used to print statements.
+     * @param ds DataStorage used to load or write data.
+     * @throws DukeException If no date string contained in item,
+     * or invalid date string is given to a check command.
+     */
     @Override
     public void execute(TaskList taskList, Ui u, DataStorage ds) throws DukeException {
         tasks = taskList;
@@ -63,6 +78,9 @@ public class ListCommand extends Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return false;

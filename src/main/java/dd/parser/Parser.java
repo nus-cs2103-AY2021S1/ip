@@ -6,6 +6,14 @@ import dd.ui.Ui;
 
 public class Parser {
 
+    /**
+     * Parses and returns a appropriate command based on input given by user.
+     *
+     * @param input Input given by user.
+     * @return A Command based on the input given.
+     * @throws DukeException If no empty item description is given,
+     * or if an invalid command is given.
+     */
     public static Command parse(String input) throws DukeException {
         Command c;
 

@@ -1,5 +1,6 @@
 package dd.datetimehandler;
 
+import dd.exception.DukeException;
 import dd.tasks.Deadline;
 import dd.tasks.Event;
 import dd.tasks.Task;
@@ -13,6 +14,12 @@ import java.util.ArrayList;
 
 public class DateTimeHandler {
 
+    /**
+     * Returns whether input is a valid date or date and time input.
+     *
+     * @param input String containing input date or date and time.
+     * @return true if input is valid, false if not.
+     */
     public boolean checkInput(String input) {
         if (input.length() == 10) {
             try {
@@ -37,6 +44,13 @@ public class DateTimeHandler {
         }
     }
 
+    /**
+     * Returns the appropriate method based on input given.
+     *
+     * @param input String containing input date or date and time.
+     * @return convertDate() method if date input given,
+     * convertDateTime() method if date and time input is given.
+     */
     public String categorizeInput(String input) {
         if (input.length() == 10) {
             return convertDate(input);
@@ -46,7 +60,7 @@ public class DateTimeHandler {
         }
     }
 
-    public String convertDate(String input) {
+    private String convertDate(String input) {
         DateTimeFormatter inputFormat = new DateTimeFormatterBuilder().appendPattern("dd-MM-yyyy")
                 .toFormatter();
 
@@ -56,7 +70,7 @@ public class DateTimeHandler {
         return parsedDate.format(outputFormat);
     }
 
-    public String convertDateTime(String input) {
+    private String convertDateTime(String input) {
         DateTimeFormatter inputFormat = new DateTimeFormatterBuilder().appendPattern("dd-MM-yyyy HHmm")
                 .toFormatter();
 
@@ -66,6 +80,13 @@ public class DateTimeHandler {
         return parsedDate.format(outputFormat);
     }
 
+    /**
+     * Filters an ArrayList of tasks given according to date given.
+     *
+     * @param date String containing input date.
+     * @param tasks ArrayList of tasks to filter from.
+     * @return ArrayList of tasks in given tasks that fall on the date given.
+     */
     public ArrayList<Task> filterDate(String date, ArrayList<Task> tasks) {
         DateTimeFormatter inputFormat = new DateTimeFormatterBuilder().appendPattern("dd-MM-yyyy")
                 .toFormatter();

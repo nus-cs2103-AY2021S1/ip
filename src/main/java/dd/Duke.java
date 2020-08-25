@@ -15,6 +15,9 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Class Constructor.
+     */
     public Duke() {
         this.ds = new DataStorage();
         this.ui = new Ui();
@@ -27,7 +30,7 @@ public class Duke {
         }
     }
 
-    public void run() {
+    private void run() {
         ui.greeting();
         boolean isExit = false;
 
@@ -47,6 +50,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts a task tracking system with prior saved data, if applicable.
+     *
+     * @param args command-line arguments
+     */
     public static void main(String[] args) {
         new Duke().run();
     }
