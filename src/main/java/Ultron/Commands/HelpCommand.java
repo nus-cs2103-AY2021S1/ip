@@ -8,10 +8,21 @@ import ultron.UI;
 
 public class HelpCommand extends Command {
 
+    /**
+     * Constructor for the Help Command.
+     * @param arguments Argument for the help command
+     */
     public HelpCommand(String arguments){
         super(false, arguments);
     }
 
+    /**
+     * Execute the help command.
+     * @param taskList  List of tasks
+     * @param ui        UI for Ultron
+     * @param storage   Storage for Ultron
+     * @throws UltronException if the number of arguments > 0
+     */
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) throws UltronException {
 

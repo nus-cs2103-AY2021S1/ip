@@ -10,13 +10,32 @@ import java.util.regex.Pattern;
 public class Event extends Task {
 
     //Store the variables
+    /**
+     * Store the String form for time of event.
+     */
     private String at = null;
+
+    /**
+     * Store a date form for time of event.
+     */
     private Date date = null;
+
+    /**
+     * Store the regex for parsing the command for event.
+     */
     private static final Pattern DATEMATCH =
             Pattern.compile("^(.*) (/at) (.*)$");
+
+    /**
+     * Store the date format regex.
+     */
     private static final DateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm");
 
-    //Constructor for the event class
+    /**
+     * Task event.
+     * @param description   Description of the Event
+     * @param at            Date of the event as a string
+     */
     public Event(final String description, final String at) {
 
         //Call the superclass constructor
@@ -26,6 +45,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Task Event.
+     * @param description   Description of the Event
+     * @param at            Date of the event as a Date object
+     */
     //Constructor for the event class
     public Event(final String description, final Date at) {
 
@@ -37,6 +61,7 @@ public class Event extends Task {
     }
 
     /**
+     * Gets the date of the event.
      * @return date Date of the event
      */
     //Getter for the date of the
@@ -50,17 +75,30 @@ public class Event extends Task {
 
     }
 
+    /**
+     * Gets the type of the event.
+     * @return String type
+     */
     @Override
     public String getType() {
         return "EVENT";
     }
 
+    /**
+     * Gets the command representation of the event.
+     * @return String command
+     */
     @Override
     public String getCommand() {
         return String.format("%s /at %s", getMessage(), getDate());
     }
 
-    public static Task parseCommand(final String args) {
+    /**
+     * Parse the commands to Event class.
+     * @param args  Arguments for the Event task
+     * @return  Event with the arguments parsed
+     */
+    public static Event parseCommand(final String args) {
 
         //Create the matcher
         Matcher matcher = DATEMATCH.matcher(args);
@@ -89,6 +127,10 @@ public class Event extends Task {
 
     }
 
+    /**
+     * String representation of the class.
+     * @return String representation
+     */
     @Override
     public String toString() {
         return "[E]"
