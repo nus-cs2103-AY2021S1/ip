@@ -17,34 +17,38 @@ public class Task implements Serializable {
 
     public LocalDate localDeadline;
 
+
     /**
      * Tells if tasks is finish
+     *
      * @return boolean of whether task is finished
      */
-    public boolean finished(){
+    public boolean finished() {
         return this.done;
     }
 
     /**
      * Sets done to true. Used when finished task
      */
-    public void setDone(){
-        this.done=true;
+    public void setDone() {
+        this.done = true;
     }
+
 
     /**
      * Constructor to create task
-     * @param type string value of ["T"] etc
+     *
+     * @param type    string value of ["T"] etc
      * @param details consists of task information
      */
     public Task(String type, String details) {
-
         this.type = type;
         this.details = details;
     }
 
-    public boolean relevant(String keyWord){
-        if(details.contains(keyWord)){
+
+    public boolean relevant(String keyWord) {
+        if (details.contains(keyWord)) {
             return true;
         }
         return false;
@@ -52,11 +56,12 @@ public class Task implements Serializable {
 
     /**
      * Constructor to create task
-     * @param type string value of ["T"] etc
-     * @param details consists of task information
+     *
+     * @param type     string value of ["T"] etc
+     * @param details  consists of task information
      * @param deadLine deadline of task
      */
-    public Task(String type, String details,String deadLine)  {
+    public Task(String type, String details, String deadLine) {
         this.type = type;
         this.details = details;
         this.deadLine = deadLine;
@@ -64,14 +69,16 @@ public class Task implements Serializable {
 
     /**
      * Constructor to create task
-     * @param type string value of ["T"] etc
-     * @param details consists of task information
+     *
+     * @param type          string value of ["T"] etc
+     * @param details       consists of task information
      * @param localDeadline deadline of task in LocalDate instance
      */
-    public Task(String type, String details,LocalDate localDeadline)  {
+
+    public Task(String type, String details, LocalDate localDeadline) {
         this.type = type;
         this.details = details;
-        this.localDeadline=localDeadline;
+        this.localDeadline = localDeadline;
 
         deadLine = localDeadline.toString();
 
@@ -79,13 +86,14 @@ public class Task implements Serializable {
 
     /**
      * properly formats string value
+     *
      * @returns string of all relevant information of myTasks
      */
     @Override
     public String toString() {
-        String checkbox = done? "[✓]":"[✗]" ;
-        String myDeadline = deadLine==null? "": "-------"+deadLine;
+        String checkbox = done ? "[✓]" : "[✗]";
+        String myDeadline = deadLine == null ? "" : "-------" + deadLine;
 
-        return this.type+checkbox+" "+ this.details+" "+ myDeadline;
+        return this.type + checkbox + " " + this.details + " " + myDeadline;
     }
 }

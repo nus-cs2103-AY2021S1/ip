@@ -1,3 +1,3 @@
-public class InSuffArgsException extends Exception{
-    
+public class InSuffArgsException extends Exception {
+
 }

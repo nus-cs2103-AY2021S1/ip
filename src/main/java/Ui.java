@@ -17,6 +17,7 @@ public class Ui {
 
     /**
      * creates line
+     *
      * @return a string of line
      */
     public String horizontalRule() {
@@ -27,6 +28,7 @@ public class Ui {
 
     /**
      * A cool duke image
+     *
      * @return string of a Duke image
      */
     public String greeting() {
@@ -40,7 +42,6 @@ public class Ui {
 
 
     }
-
 
 
 }

@@ -15,7 +15,7 @@ public class Duke {
         myStorage.populateList(myTaskList);
         myTaskList.list();
 
-        myParser.listener(myTaskList,myDukeBot);
+        myParser.listener(myTaskList, myDukeBot);
 
         myStorage.updateDirectory(myTaskList);
         System.out.println("End");
