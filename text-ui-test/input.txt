@@ -23,4 +23,7 @@ delete 1
 delete 1
 delete 7
 list
+find work
+findwork
+find work 123
 bye

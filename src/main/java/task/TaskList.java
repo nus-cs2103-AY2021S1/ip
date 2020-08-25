@@ -121,4 +121,19 @@ public class TaskList {
             DukeException.noSuchTask();
         }
     }
+
+    public void findTask(String userCommand) {
+        // E.g given "find book", we split to ["find", "book"]
+        String[] userCommandSplit = userCommand.split(" ", 2);
+        // To prevent cases such as "findasd"
+        if (userCommandSplit.length != 2) {
+            DukeException.invalidCommand();
+        } else {
+            String keyword = userCommandSplit[1];
+            // Make a copy of the existing tasks and remove a task if keyword is not found
+            List<Task> tasksCopy = this.tasks;
+            tasksCopy.removeIf(task -> !task.getDescription().contains(keyword));
+            TaskDescription.searchedTaskDescription(tasksCopy);
+        }
+    }
 }

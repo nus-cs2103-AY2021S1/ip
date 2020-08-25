@@ -319,6 +319,27 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 	9.[E][N] project meeting (at: Mon 2-4pm)
 	____________________________________________________________
 
+	____________________________________________________________
+
+	Here are the matching tasks in your list:
+
+	1.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	2.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	3.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	4.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	5.[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
+	____________________________________________________________
+
+	____________________________________________________________
+	Command written incorrectly. Please check again.
+	____________________________________________________________
+
+	____________________________________________________________
+
+	No items with the finding keyword specified found in list.
+
+	____________________________________________________________
+
 	<CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE>
 
 	BYE, GONNA GO NUKE AMERICA NOW!!!!!!!!!!!

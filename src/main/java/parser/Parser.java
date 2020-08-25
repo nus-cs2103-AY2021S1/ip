@@ -32,6 +32,8 @@ public class Parser {
                 tasklist.addTask(userCommand);
             } else if (userCommand.contains("delete")) {
                 tasklist.deleteTask(userCommand);
+            } else if (userCommand.contains("find")) {
+                tasklist.findTask(userCommand);
             } else {
                 // If a task is specified as a Task but not a Deadline / To Do / Event, throw an error
                 DukeException.genericTask();
