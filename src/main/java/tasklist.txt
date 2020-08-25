@@ -1,10 +1,3 @@
-T | 1 | read book
-D | 0 | return book | June 6th
-E | 0 | project meeting | Aug 6th 2-4pm
-T | 1 | join sports club
-T | 0 | testing
-D | 0 | test2 | forever
-E | 0 | retest | infinity
-T | 0 | test again
-E | 0 | ahdh | Monday 2-3pm
-D | 0 | asa | Dec 12 2021 12:34
+T | 0 | eat dinner
+D | 0 | hw | Dec 12 2021 12:34
+E | 0 | sa | idk when
