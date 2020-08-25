@@ -32,6 +32,14 @@ public class Ui {
         print("\tHere are the tasks in your list:\n" + temp);
     }
 
+    public static void searchResult(ArrayList<Task> tasks) {
+        String temp = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            temp += "\t" + (i+1) + ". " + tasks.get(i) + "\n";
+        }
+        print("\tHere are the matching tasks in your list:\n" + temp);
+    }
+
     public static void addTaskMessage(Task task, int total) {
         print("\tGot it. I've added this task: \n" +
                 "\t" + task + "\n" +

@@ -34,4 +34,14 @@ public class TaskList {
         storage.reset();
         storage.addAll(taskList);
     }
+
+    public ArrayList<Task> find(String searchText) {
+        ArrayList<Task> list = new ArrayList<>();
+        for (Task t : taskList) {
+            if (t.getName().contains(searchText)) {
+                list.add(t);
+            }
+        }
+        return list;
+    }
 }

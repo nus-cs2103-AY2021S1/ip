@@ -1,4 +1,5 @@
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.IOException;
 
@@ -50,6 +51,10 @@ public class Duke {
                     break;
                 case LIST:
                     Ui.list(tasks);
+                    break;
+                case FIND:
+                    ArrayList<Task> found = tasks.find(parser.searchText);
+                    Ui.searchResult(found);
                     break;
             }
         }
