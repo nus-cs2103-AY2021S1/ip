@@ -16,7 +16,7 @@ public class EventCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (this.nextCommandArr.length < 2) {
-            throw new DukeException("The description of a event cannot be empty~");
+            throw new DukeException("The description of an event cannot be empty~");
         } else {
             try {
                 String[] eventArr = this.nextCommandArr[1].split("/at");
