@@ -1,11 +1,6 @@
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Collections;
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.io.File;
 
 public class Duke {
   public static String duke = "Duke> ";
@@ -22,7 +17,7 @@ public class Duke {
     try {
       list = new TaskList(storeFile.loadFile());
     } catch (DukeException e) {
-      ui.showError(e);
+      ui.showErrorMsg(e);
       list = new TaskList();
     }
     ui.startupMsg();
@@ -43,9 +38,9 @@ public class Duke {
       switch (userInput) {
         case "list":
           if (list.isEmpty()) {
-            System.out.println(duke + "Your Task List is empty.");
+            ui.showListEmptyMsg();
           } else {
-            System.out.println(duke + "Here's your Task List:");
+            ui.showListMsg();
             for (Task t : list.getList()) {
               System.out.println(++idx + ". " + t.toString());
             }
@@ -53,14 +48,14 @@ public class Duke {
           break;
         case "done":
           if (list.isEmpty()) {
-            System.out.println(duke + "Your Task List is empty. There's nothing to be done.");
+            ui.showListEmptyMsg();
           } else {
-            System.out.println(duke + "Here's your Task List:");
+            ui.showListMsg();
             for (Task t : list.getList()) {
               System.out.println(++idx + ". " + t.toString());
             }
             do {
-              System.out.println("Choose the task(s) to be marked as 'Done'");
+              ui.showListDoneAskMsg();
               try {
                 userInput = ui.readInput();
                 if (userInput.isBlank()) {
@@ -79,18 +74,18 @@ public class Duke {
                     t.setDone();
                     doneTasks.add(t);
                   } catch (DukeException e) {
-                    System.out.println(duke + e.getMessage());
+                    ui.showErrorMsg(e);
                   }
                 }
                 if (!doneTasks.isEmpty()) {
-                  System.out.println(duke + "Nice! I've marked the following as done:");
+                  ui.showListDoneMsg();
                   for (Task t : doneTasks) {
                     System.out.println(t.toString());
                   }
                 }
                 validInput = true;
               } catch (DukeException e) {
-                System.out.println(duke + e.getMessage());
+                ui.showErrorMsg(e);
               }
             } while (!validInput);
           }
@@ -98,13 +93,13 @@ public class Duke {
           try {
             storeFile.saveFile(list);
           } catch (DukeException e) {
-            System.out.println(duke + e.getMessage());
+            ui.showErrorMsg(e);
           }
 
           break;
         case "todo":
           do {
-            System.out.println(duke + "Enter task details:");
+            ui.showTaskAddAskMsg();
             try {
               userInput = ui.readInput();
               if (userInput.equals("")) {
@@ -113,24 +108,23 @@ public class Duke {
               }
               Task toDo = new Todo(userInput);
               list.addTask(toDo);
-              System.out.println(
-                      duke + "I've added '" + toDo.getTaskName() + "' to your Task List");
+              ui.showTaskAddedMsg(toDo);
               validInput = true;
             } catch (DukeException e) {
-              System.out.println(duke + e.getMessage());
+              ui.showErrorMsg(e);
             }
           } while (!validInput);
 
           try {
             storeFile.saveFile(list);
           } catch (DukeException e) {
-            System.out.println(duke + e.getMessage());
+            ui.showErrorMsg(e);
           }
 
           break;
         case "deadline":
           do {
-            System.out.println(duke + "Enter task details:");
+            ui.showTaskAddAskMsg();
             try {
               userInput = ui.readInput();
               if (!userInput.contains("/by")) {
@@ -145,25 +139,24 @@ public class Duke {
               }
               Task deadLine = new Deadline(s[0], s[1]);
               list.addTask(deadLine);
-              System.out.println(
-                      duke + "I've added '" + deadLine.getTaskName() + "' to your Task List");
+              ui.showTaskAddedMsg(deadLine);
               validInput = true;
 
             } catch (DukeException e) {
-              System.out.println(duke + e.getMessage());
+              ui.showErrorMsg(e);
             }
           } while (!validInput);
 
           try {
             storeFile.saveFile(list);
           } catch (DukeException e) {
-            System.out.println(duke + e.getMessage());
+            ui.showErrorMsg(e);
           }
 
           break;
         case "event":
           do {
-            System.out.println(duke + "Enter Event details:");
+            ui.showTaskAddAskMsg();
             try {
               userInput = ui.readInput();
               if (!userInput.contains("/at")) {
@@ -178,32 +171,31 @@ public class Duke {
               }
               Task event = new Event(s[0], s[1]);
               list.addTask(event);
-              System.out.println(
-                      duke + "I've added '" + event.getTaskName() + "' to your Task List");
+              ui.showTaskAddedMsg(event);
               validInput = true;
 
             } catch (DukeException e) {
-              System.out.println(duke + e.getMessage());
+              ui.showErrorMsg(e);
             }
           } while (!validInput);
 
           try {
             storeFile.saveFile(list);
           } catch (DukeException e) {
-            System.out.println(duke + e.getMessage());
+            ui.showErrorMsg(e);
           }
 
           break;
         case "delete":
           if (list.isEmpty()) {
-            System.out.println(duke + "Your Task List is empty. There's nothing to be deleted.");
+            ui.showListEmptyMsg();
           } else {
-            System.out.println(duke + "Here's your Task List:");
+            ui.showListMsg();
             for (Task t : list.getList()) {
               System.out.println(++idx + ". " + t.toString());
             }
             do {
-              System.out.println("Choose the task(s) to be deleted.");
+              ui.showTaskDeleteAskMsg();
               try {
                 userInput = ui.readInput();
                 if (userInput.isBlank()) {
@@ -225,18 +217,18 @@ public class Duke {
                     list.removeTask(index);
                     deletedTasks.add(t);
                   } catch (DukeException e) {
-                    System.out.println(duke + e.getMessage());
+                    ui.showErrorMsg(e);
                   }
                 }
                 if (!deletedTasks.isEmpty()) {
-                  System.out.println(duke + "I've deleted the task(s) you specified:");
+                  ui.showTaskDeleteMsg();
                   for (Task t : deletedTasks) {
                     System.out.println(t.toString());
                   }
                 }
                 validInput = true;
               } catch (DukeException e) {
-                System.out.println(duke + e.getMessage());
+                ui.showErrorMsg(e);
               }
             } while (!validInput);
           }
@@ -244,7 +236,7 @@ public class Duke {
           try {
             storeFile.saveFile(list);
           } catch (DukeException e) {
-            System.out.println(duke + e.getMessage());
+            ui.showErrorMsg(e);
           }
 
           break;
@@ -255,18 +247,16 @@ public class Duke {
           try {
             throw new DukeException("Unrecognised Command :(, type 'help' for available commands.");
           } catch (DukeException e) {
-            System.out.println(duke + e.getMessage());
+            ui.showErrorMsg(e);
           }
       }
     }
 
-    System.out.println(duke + "See you soon!");
+    ui.showByeMsg();
   }
 
 
   public static void main(String[] args) {
     new Duke(filePath).run();
   }
-  //END MAIN EXEC
-
 }

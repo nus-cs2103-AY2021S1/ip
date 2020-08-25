@@ -6,10 +6,10 @@
 
 Duke> Hi I'm Duke!
 Duke> What can I do for you?
->> Duke> Your Task List is empty.
+>> Duke> Your List is Empty.
 >> Duke> Enter task details:
 >> Duke> I've added 'go running' to your Task List
->> Duke> Enter Event details:
+>> Duke> Enter task details:
 >> Duke> I've added 'concert' to your Task List
 >> Duke> Enter task details:
 >> Duke> I've added 'cs2103 proj' to your Task List
@@ -21,7 +21,7 @@ Duke> What can I do for you?
 1. [T][✘] go running
 2. [E][✘] concert (at: 02/02/20 18:00)
 3. [D][✘] cs2103 proj (by: 02/03/20 23:59)
-Choose the task(s) to be marked as 'Done'
+Duke> Choose the task(s) to be marked as 'Done'
 >> Duke> Nice! I've marked the following as done:
 [D][✓] cs2103 proj (by: 02/03/20 23:59)
 [T][✓] go running
@@ -45,7 +45,7 @@ Choose the task(s) to be deleted.
 >> Duke> I've deleted the task(s) you specified:
 [D][✓] cs2103 proj (by: 02/03/20 23:59)
 [T][✓] go running
->> Duke> Your Task List is empty.
+>> Duke> Your List is Empty.
 >> Here's what I can do:
 Available Commands:
 'todo'
@@ -54,11 +54,11 @@ Available Commands:
 'list'
 'delete'
 'bye'
->> Duke> Enter Event details:
+>> Duke> Enter task details:
 >> Duke> Yo! Command Syntax Error. '<Event Details> /at <Event Time>'
-Duke> Enter Event details:
+Duke> Enter task details:
 >> Duke> Yo! Event details/time are missing.
-Duke> Enter Event details:
+Duke> Enter task details:
 >> Duke> I've added 'briefing' to your Task List
 >> Duke> Unrecognised Command :(, type 'help' for available commands.
 >> Duke> Here's your Task List:

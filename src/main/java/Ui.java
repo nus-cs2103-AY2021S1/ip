@@ -39,7 +39,44 @@ public class Ui {
     System.out.println(s + msg);
   }
 
-  public void showError(Exception e) {
+  public void showErrorMsg(Exception e) {
     System.out.println(duke + e.getMessage());
+  }
+
+  public void showListEmptyMsg() {
+    System.out.println(duke + "Your List is Empty.");
+  }
+
+  public void showListMsg() {
+    System.out.println(duke + "Here's your Task List:");
+  }
+
+  public void showListDoneAskMsg() {
+    System.out.println(duke + "Choose the task(s) to be marked as 'Done'");
+  }
+
+  public void showListDoneMsg() {
+    System.out.println(duke + "Nice! I've marked the following as done:");
+  }
+
+  public void showTaskAddAskMsg() {
+    System.out.println(duke + "Enter task details:");
+  }
+
+  public void showTaskAddedMsg(Task t) {
+    System.out.println(
+            duke + "I've added '" + t.getTaskName() + "' to your Task List");
+  }
+
+  public void showTaskDeleteAskMsg() {
+    System.out.println("Choose the task(s) to be deleted.");
+  }
+
+  public void showTaskDeleteMsg() {
+    System.out.println(duke + "I've deleted the task(s) you specified:");
+  }
+
+  public void showByeMsg() {
+    System.out.println(duke + "See you soon!");
   }
 }
