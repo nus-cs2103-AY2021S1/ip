@@ -5,13 +5,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Encapsulates data storage functionality
+ */
 public class Storage {
     File file;
 
+    /**
+     * Instantiates a storage item that can read and write data.
+     * @param filePath the directory to store the data
+     */
     public Storage(String filePath) {
         file = new File(filePath);
     }
 
+    /**
+     * Runs upon program start-up to load data onto program.
+     * @return An arrayList of existing tasks
+     * @throws DukeException if file is not found
+     */
     ArrayList<Task> load() throws DukeException {
         try {
             file.getParentFile().mkdirs();
@@ -22,6 +34,12 @@ public class Storage {
         }
     }
 
+    /**
+     *
+     * @param file path pointing to data storage file
+     * @return An arrayList of existing tasks
+     * @throws FileNotFoundException if file is not found
+     */
     ArrayList<Task> readContentToProgram(File file) throws FileNotFoundException {
         Scanner sc = new Scanner(file); // create a Scanner using file as the source
         ArrayList<Task> tasks = new ArrayList<>();
@@ -47,6 +65,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Iterates through taskList and writes tasks to file storage
+     * @param tasks the taskList containing the tasks
+     */
     void writeToFile(TaskList<Task> tasks) {
         try {
             ArrayList<Task> taskArrayList = tasks.exportList();
@@ -58,12 +80,5 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Error with writing tasks to storage");
         }
-
-
-
     }
-
-
-
-
 }
