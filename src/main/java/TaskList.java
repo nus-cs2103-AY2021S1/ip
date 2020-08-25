@@ -23,6 +23,16 @@ public class TaskList {
                 || (task instanceof Deadline && ((Deadline) task).isOnDate(date))).collect(Collectors.toList());
     }
 
+    /**
+     * Returns list of tasks which description contains the keyword.
+     * @param keyword The keyword to be used to filter the tasks.
+     * @return The list of tasks.
+     */
+    public List<Task> getListOfTasks(String keyword) {
+        return this.listOfTasks.stream().filter(
+                task -> task.getDescription().contains(keyword)).collect(Collectors.toList());
+    }
+
     public Task markTaskDone(int idx) throws DukeException {
         if (idx < 0 || idx >= listOfTasks.size()) {
             throw new DukeException("The task cannot be found.");

@@ -5,7 +5,8 @@ public enum CommandType {
     DELETE("delete"),
     TODO("todo"),
     DEADLINE("deadline"),
-    EVENT("event");
+    EVENT("event"),
+    FIND("find");
 
     private final String name;
     CommandType(String name) {

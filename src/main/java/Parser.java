@@ -44,6 +44,12 @@ public class Parser {
             String description = Parser.reassembleString(commandArgs, 1, atIdx);
             String at = Parser.reassembleString(commandArgs, atIdx + 1, commandArgs.length);
             return new AddCommand(CommandType.EVENT, description, at);
+        } else if (commandArgs[0].equals(CommandType.FIND.getName())) {
+            String keyword = Parser.reassembleString(commandArgs, 1, commandArgs.length);
+            if (keyword.length() == 0) {
+                throw new DukeException("The keyword has to be provided for the find command");
+            }
+            return new FindCommand(keyword);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means...");
         }

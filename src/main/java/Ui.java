@@ -48,6 +48,19 @@ public class Ui {
         showTasks(taskList);
     }
 
+    /**
+     * Shows a task list that has been filtered with a keyword.
+     * @param taskList The filtered task list.
+     */
+    public void showTasksFound(List<Task> taskList) {
+        if (taskList.size() > 0) {
+            System.out.println("Here are the matching tasks in your list:");
+            showTasks(taskList);
+        } else {
+            System.out.println("There are no matching tasks in your list :(");
+        }
+    }
+
     public void showTasks(List<Task> taskList) {
         int idx = 1;
         for (Task task : taskList) {
