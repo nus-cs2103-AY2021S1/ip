@@ -12,6 +12,10 @@ public class Event extends Task{
         this.date = LocalDate.parse(this.at);
     }
 
+    public String getAt() {
+        return this.at;
+    }
+
 
     public static void invalidInput() {
         invalidInput("OOPS!!! The format of the Event is wrong.");

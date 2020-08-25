@@ -26,6 +26,14 @@ public class Task {
         this.isDone = true;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
     public static void invalidInput(String error) {
         String errorMsg = "Error: " + error;
         System.out.println(errorMsg);
