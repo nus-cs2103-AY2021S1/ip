@@ -11,6 +11,7 @@
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list!!
+    1. [T][✓] homework
     ____________________________________________________________
     ____________________________________________________________
     Oh noes! I'm not sure what that means ;A;
@@ -20,31 +21,13 @@
     ____________________________________________________________
     ____________________________________________________________
      Okies! I've added this task~
-       [T][?] exercise
-     Now you have 1 tasks in the list uwu
-    ____________________________________________________________
-    ____________________________________________________________
-    Here are the tasks in your list!!
-    1. [T][?] exercise
-    ____________________________________________________________
-    ____________________________________________________________
-    Oh dear! Your task description seems to be incomplete :<
-    ____________________________________________________________
-    ____________________________________________________________
-    Oh dear! Your task description seems to be incomplete :<
-    ____________________________________________________________
-    ____________________________________________________________
-    Oops! Please make sure your date is of YYYY-MM-DD format ;A;
-    ____________________________________________________________
-    ____________________________________________________________
-     Okies! I've added this task~
-       [D][?] finish nekobot (by: Aug 20 2019, Tuesday)
+       [T][✘] exercise
      Now you have 2 tasks in the list uwu
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list!!
-    1. [T][?] exercise
-    2. [D][?] finish nekobot (by: Aug 20 2019, Tuesday)
+    1. [T][✓] homework
+    2. [T][✘] exercise
     ____________________________________________________________
     ____________________________________________________________
     Oh dear! Your task description seems to be incomplete :<
@@ -57,54 +40,79 @@
     ____________________________________________________________
     ____________________________________________________________
      Okies! I've added this task~
-       [E][?] sleep (at: Aug 17 2020, Monday)
+       [D][✘] finish nekobot (by: Aug 20 2019, Tuesday)
      Now you have 3 tasks in the list uwu
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list!!
-    1. [T][?] exercise
-    2. [D][?] finish nekobot (by: Aug 20 2019, Tuesday)
-    3. [E][?] sleep (at: Aug 17 2020, Monday)
+    1. [T][✓] homework
+    2. [T][✘] exercise
+    3. [D][✘] finish nekobot (by: Aug 20 2019, Tuesday)
     ____________________________________________________________
     ____________________________________________________________
-     Yay! I've marked this task as done :3
-       [D][?] finish nekobot (by: Aug 20 2019, Tuesday)
+    Oh dear! Your task description seems to be incomplete :<
+    ____________________________________________________________
+    ____________________________________________________________
+    Oh dear! Your task description seems to be incomplete :<
+    ____________________________________________________________
+    ____________________________________________________________
+    Oops! Please make sure your date is of YYYY-MM-DD format ;A;
+    ____________________________________________________________
+    ____________________________________________________________
+     Okies! I've added this task~
+       [E][✘] sleep (at: Aug 17 2020, Monday)
+     Now you have 4 tasks in the list uwu
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list!!
-    1. [T][?] exercise
-    2. [D][?] finish nekobot (by: Aug 20 2019, Tuesday)
-    3. [E][?] sleep (at: Aug 17 2020, Monday)
+    1. [T][✓] homework
+    2. [T][✘] exercise
+    3. [D][✘] finish nekobot (by: Aug 20 2019, Tuesday)
+    4. [E][✘] sleep (at: Aug 17 2020, Monday)
+    ____________________________________________________________
+    ____________________________________________________________
+     Yay! I've marked this task as done :3
+       [T][✓] exercise
+    ____________________________________________________________
+    ____________________________________________________________
+    Here are the tasks in your list!!
+    1. [T][✓] homework
+    2. [T][✓] exercise
+    3. [D][✘] finish nekobot (by: Aug 20 2019, Tuesday)
+    4. [E][✘] sleep (at: Aug 17 2020, Monday)
     ____________________________________________________________
     ____________________________________________________________
      Got it! I'll remove this task :>
-       [D][?] finish nekobot (by: Aug 20 2019, Tuesday)
-     Only 2 tasks left!!
+       [T][✓] exercise
+     Only 3 tasks left!!
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list!!
-    1. [T][?] exercise
-    2. [E][?] sleep (at: Aug 17 2020, Monday)
+    1. [T][✓] homework
+    2. [D][✘] finish nekobot (by: Aug 20 2019, Tuesday)
+    3. [E][✘] sleep (at: Aug 17 2020, Monday)
     ____________________________________________________________
     ____________________________________________________________
     Oh noes! I don't think you specified a valid task index :<
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list!!
-    1. [T][?] exercise
-    2. [E][?] sleep (at: Aug 17 2020, Monday)
+    1. [T][✓] homework
+    2. [D][✘] finish nekobot (by: Aug 20 2019, Tuesday)
+    3. [E][✘] sleep (at: Aug 17 2020, Monday)
     ____________________________________________________________
     ____________________________________________________________
     Oh noes! I don't think you specified a valid task index :<
     ____________________________________________________________
     ____________________________________________________________
      Yay! I've marked this task as done :3
-       [T][?] exercise
+       [T][✓] homework
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list!!
-    1. [T][?] exercise
-    2. [E][?] sleep (at: Aug 17 2020, Monday)
+    1. [T][✓] homework
+    2. [D][✘] finish nekobot (by: Aug 20 2019, Tuesday)
+    3. [E][✘] sleep (at: Aug 17 2020, Monday)
     ____________________________________________________________
     ____________________________________________________________
      Bye~ Hope to see you again soon ;w;

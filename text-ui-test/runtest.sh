@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export LC_ALL=en_GB.UTF-8
+
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then
@@ -25,6 +27,9 @@ java -classpath ../bin Duke < input.txt > ACTUAL.TXT
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
 dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
+
+# Reset data/tasks.txt file
+printf "T | 1 | homework\n" > data/tasks.txt
 
 # compare the output to the expected output
 diff ACTUAL.TXT EXPECTED-UNIX.TXT
