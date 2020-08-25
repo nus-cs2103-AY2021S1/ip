@@ -1,12 +1,14 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
     static String line = "_________________________________________________________________";
     static List<Task> list = new ArrayList<>();
-    //static int index = 0;
 
     public static void greeting() {
         String str = ("\t" + line + "\n"
@@ -23,8 +25,6 @@ public class Duke {
     }
 
     public static void addTask(Task task) {
-        //list[index] = task;
-        //index++;
         list.add(task);
         System.out.println("\t" + line + "\n\tGot it. I've added this task:\n"
                 + "\t  " + task + "\n"
@@ -63,6 +63,11 @@ public class Duke {
                 + "\n\tNow you have " + (list.size() - 1) + " tasks in the list."
                 + "\n\t" + line);
         list.remove(num-1);
+    }
+
+    public static String getLocalDate(String time) {
+        LocalDate d = LocalDate.parse(time);
+        return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
 
@@ -106,20 +111,26 @@ public class Duke {
                         String str = input.substring(9);
                         String description = str.split(" /by ")[0]; // split the stirng by "/by ", take first half
                         String time = str.split(" /by ")[1];
-                        Task newTask = new Deadline(description, time);
+                        String date = getLocalDate(time);
+                        Task newTask = new Deadline(description, date);
                         addTask(newTask);
                     } catch (IndexOutOfBoundsException e) {
                         System.err.println("☹ OOPS!!! The description or date of a deadline cannot be empty.");
+                    } catch (DateTimeParseException e) {
+                        System.err.println("☹ OOPS!!! The date must be valid and in the format of YYYY-MM-DD.");
                     }
                 } else if (firstWord(input).equals("event")) {
                     try {
                         String str = input.substring(6);
                         String description = str.split(" /at ")[0]; // split the stirng by "/by ", take first half
                         String time = str.split(" /at ")[1];
-                        Task newTask = new Event(description, time);
+                        String date = getLocalDate(time);
+                        Task newTask = new Event(description, date);
                         addTask(newTask);
                     } catch (IndexOutOfBoundsException e) {
                         System.err.println("☹ OOPS!!! The description or date of a event cannot be empty.");
+                    } catch (DateTimeParseException e) {
+                        System.err.println("☹ OOPS!!! The date must be valid and in the format of YYYY-MM-DD.");
                     }
                 } else { // when input cannot be recognised
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
