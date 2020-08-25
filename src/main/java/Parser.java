@@ -17,7 +17,7 @@ public class Parser {
             }
             writeToFile(textToAdd.toString());
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            System.out.println("Something Went wrong: " + e.getMessage());
         }
     }
 }
