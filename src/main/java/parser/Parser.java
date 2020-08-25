@@ -41,7 +41,14 @@ public class Parser {
             } else if (fullInput.equals("bye")) {
                 this.storage.save(this.tasks);
                 this.isExit = true;
+            } else if (fullInput.startsWith("find ")) {
+                if (fullInput.length() <= 5) {
+                    throw new DescriptionException("find");
+                }
+                this.tasks.find(fullInput.substring(5));
+
             }
+
             else if (fullInput.startsWith("todo ")) {
                 if (fullInput.length() <= 5) {
                     throw new DescriptionException("todo");
@@ -109,8 +116,8 @@ public class Parser {
                 Task task = new Events(description, at);
                 this.tasks.add(task);
 
-            } else if (fullInput.equals("event") ||(fullInput).equals("deadline") ||(fullInput).equals("todo") ||
-                (fullInput).equals("done")) {
+            } else if (fullInput.equals("event") || fullInput.equals("deadline") || fullInput.equals("todo") ||
+                fullInput.equals("done") || fullInput.equals("find")) {
                 throw new DescriptionException(fullInput);
             } else {
                 throw new CommandException(fullInput);
