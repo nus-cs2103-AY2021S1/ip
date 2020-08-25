@@ -1,4 +1,4 @@
-package Ultron.Tasks;
+package ultron.tasks;
 
 import org.junit.jupiter.api.Test;
 

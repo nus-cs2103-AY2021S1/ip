@@ -1,4 +1,4 @@
-package Ultron.Exceptions;
+package ultron.exceptions;
 
 public class UltronException extends Exception {
 
