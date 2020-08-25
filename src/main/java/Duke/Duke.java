@@ -64,7 +64,7 @@ public class Duke {
      *  Then, prints out relevant information using the output() func.
      */
     public static void main(String[] args) throws IOException {
-        Duke duke = new Duke("src/main/java/tasks.txt");
+        Duke duke = new Duke("tasks.txt");
         duke.run();
     }
 }

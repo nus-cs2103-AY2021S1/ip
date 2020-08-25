@@ -23,7 +23,10 @@ public class Deadline extends Task {
         super(name);
         this.day = day;
     }
-
+    public Deadline(String name, boolean done, String day) {
+        super(name, done);
+        this.day = day;
+    }
     /**
      * takes no arguments and overrides the toString method
      * @return the specific representation for deadline class as mentioned with [D] indicating that it is a deadline class

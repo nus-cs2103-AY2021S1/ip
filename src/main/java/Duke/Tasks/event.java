@@ -25,6 +25,11 @@ public class event extends Task {
         this.dateTime = dateTime;
         this.end = end;
     }
+    public event(String name, boolean done, String dateTime, String end) {
+        super(name, done);
+        this.dateTime = dateTime;
+        this.end = end;
+    }
     /**
      *  Overrides the toString methods
      * @return the specific representation for event class as mentioned with [E] indicating that it is a event class

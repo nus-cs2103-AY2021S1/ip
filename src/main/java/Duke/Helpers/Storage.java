@@ -42,8 +42,10 @@ public class Storage {
             if(sc.hasNext()) {
                 do{
                     String s = sc.nextLine();
+                    char bool = s.charAt(4);
+                    boolean done = (bool == '1');
                     if(s.charAt(0) == 'T'){
-                        tasks.add(new todo(s.substring(8)));
+                        tasks.add(new todo(s.substring(8), done));
                     }else if(s.charAt(0) == 'E'){
                         String string = "";
                         int index = -1;
@@ -55,14 +57,14 @@ public class Storage {
                             string = string + s.charAt(i);
                         }
                         String another = "";
-                        for(int i = index; i < s.length(); i++){
-                            if(s.charAt(i) == '|'){
+                        for(int i = index + 2; i < s.length(); i++){
+                            if(s.charAt(i) == '-'){
                                 index = i;
                                 break;
                             }
                             another = another + s.charAt(i);
                         }
-                        tasks.add(new event(string, another, s.substring(index + 2)));
+                        tasks.add(new event(string, done, another, s.substring(index + 1)));
                     }else {
                         String string = "";
                         int index = -1;
@@ -73,7 +75,7 @@ public class Storage {
                             }
                             string = string + s.charAt(i);
                         }
-                        tasks.add(new Deadline(string, s.substring(index + 2)));
+                        tasks.add(new Deadline(string, done, s.substring(index + 2)));
                     }
                     //xs.add();
                     } while (sc.hasNextLine());

@@ -13,6 +13,9 @@ public class todo extends Task {
     public todo(String name) {
         super(name);
     }
+    public todo(String name, boolean done){
+        super(name, done);
+    }
     /**
      * takes no arguments and overrides the toString method
      * @return the specific representation for todo class as mentioned with [T] indicating that it is a todo class

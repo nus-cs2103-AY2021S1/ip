@@ -17,11 +17,8 @@ abstract public class Task {
      * a single instance of Task
      */
     public static List<Task> tasks = new ArrayList<>();
-    private static int num = 0;
     private boolean done;
     private String name;
-    private int ID;
-    private boolean deleted;
 
     /**
      * @param name this assigns the name of the Task to the name being given in the constructor. Then assigns done to be
@@ -31,12 +28,13 @@ abstract public class Task {
     Task(String name) {
         this.done = false;
         this.name = name;
-        num++;
-        this.ID = num;
-        this.deleted = false;
         tasks.add(this);
     }
-
+    Task(String name, boolean done){
+        this.done = done;
+        this.name = name;
+        tasks.add(this);
+    }
     /**
      * gives name of task
      * @return name of task
