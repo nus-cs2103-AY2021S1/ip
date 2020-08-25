@@ -1,9 +1,9 @@
-<<<<<<< HEAD
+
 import java.io.*;
-=======
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
->>>>>>> branch-Level-8
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,12 +17,12 @@ public class Duke {
 
     List<Task> ls = new ArrayList<>();
 
-<<<<<<< HEAD
+
     String folderPath = "data";
     String filePath = folderPath + "/duke.txt";
-=======
+
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
->>>>>>> branch-Level-8
+
 
     public static void main(String[] args) {
         System.out.println(face + spacing + "Hey hey I'm Poco");
