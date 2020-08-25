@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) { // throws DukeException {
+    public static void main(String[] args) throws DukeException {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<>();
         TaskHandler handler = new TaskHandler();
@@ -18,13 +18,13 @@ public class Duke {
                 if (handler.isValidSize(input, taskList)) markAsDone(input, handler, taskList);
                 else {
                     say("Please specify a correct task number!");
-                    // throw new DukeException("Invalid task number");
+                    throw new DukeException("Invalid task number");
                 }
             } else if (handler.isDelete(input)) {
                 if (handler.isValidSize(input, taskList)) deleteTask(input, handler, taskList);
                 else {
                     say("Please specify a correct task number!");
-                    // throw new DukeException("Invalid task number");
+                    throw new DukeException("Invalid task number");
                 }
             } else if (handler.isValid(input)) {
                 Task.Type type = handler.getType(input);
@@ -47,11 +47,11 @@ public class Duke {
                 }
                 if (!valid) {
                     say("Task found but please follow the format!");
-                    // throw new DukeException("Wrong task format");
+                    throw new DukeException("Wrong task format");
                 }
             } else {
                 say("Please key in a task!");
-                // throw new DukeException("Not a task");
+                throw new DukeException("Not a task");
             }
             input = scanner.nextLine();
         }
@@ -98,22 +98,22 @@ public class Duke {
 
     private static void addToList(Task.Type type, String input, TaskHandler handler, ArrayList<Task> list) {
         switch (type) {
-            case TODO:
-                say("Added to-do '" + handler.getTodo(input) + "' to the task list.");
-                Todo todo = new Todo(handler.getTodo(input));
-                list.add(todo);
-                break;
-            case DEADLINE:
-                say("Added deadline '" + handler.getDTask(input) + "' to the task list.");
-                Deadline deadline = new Deadline(handler.getDTask(input), handler.getDTime(input));
-                list.add(deadline);
-                break;
-            case EVENT:
-                say("Added event '" + handler.getETask(input) + "' to the task list.");
-                Event event = new Event(handler.getETask(input), handler.getETime(input));
-                list.add(event);
-                break;
-            default: //
+        case TODO:
+            say("Added to-do '" + handler.getTodo(input) + "' to the task list.");
+            Todo todo = new Todo(handler.getTodo(input));
+            list.add(todo);
+            break;
+        case DEADLINE:
+            say("Added deadline '" + handler.getDTask(input) + "' to the task list.");
+            Deadline deadline = new Deadline(handler.getDTask(input), handler.getDTime(input));
+            list.add(deadline);
+            break;
+        case EVENT:
+            say("Added event '" + handler.getETask(input) + "' to the task list.");
+            Event event = new Event(handler.getETask(input), handler.getETime(input));
+            list.add(event);
+            break;
+        default: //
         }
         say("You have " + list.size() + " items in your task list now.");
     }
