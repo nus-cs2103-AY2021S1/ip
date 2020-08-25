@@ -14,7 +14,8 @@ import duke.task.TaskType;
 import duke.task.ToDo;
 
 public class Parser {
-    static Command parse(String fullCommand) throws DukeException {
+    public static Command parse(String fullCommand) throws DukeException {
+        fullCommand = fullCommand.toLowerCase();
         String[] fullCommandArray = fullCommand.split(" ");
         fullCommand = fullCommand.strip();
         if (fullCommand.equals("bye")) {
@@ -23,6 +24,10 @@ public class Parser {
             return new ListCommand();
         } else if (fullCommand.equals("show")) {
             throw new InvalidArgumentException("☹ OOPS!!! The show command requires a date in yyyy-mm-dd.");
+        } else if (fullCommandArray[0].equals("list")) {
+            throw new InvalidArgumentException("☹ OOPS!!! The list command does not take any additional argument(s).");
+        } else if (fullCommandArray[0].equals("bye")) {
+            throw new InvalidArgumentException("☹ OOPS!!! The bye command does not take any additional argument(s).");
         } else if (fullCommandArray[0].equals("show")) {
             try {
                 LocalDate date = LocalDate.parse(fullCommandArray[1]);
@@ -30,8 +35,10 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 throw new InvalidArgumentException("☹ OOPS!!! The show command requires a date in yyyy-mm-dd.");
             }
-        } else if (fullCommand.equals("done") || fullCommand.equals("delete")) {
-            throw new InvalidCommandException("☹ OOPS!!! The index of a task cannot be empty.");
+        } else if (fullCommand.equals("delete")) {
+            throw new InvalidCommandException("☹ OOPS!!! The delete command requires the index of a task.");
+        } else if (fullCommand.equals("done")) {
+            throw new InvalidCommandException("☹ OOPS!!! The done command requires the index of a task.");
         } else if (fullCommandArray[0].equals("done")) {
             return new DoneCommand(Integer.parseInt(fullCommandArray[1]));
         } else if (fullCommandArray[0].equals("delete")) {
@@ -40,7 +47,7 @@ public class Parser {
             String type = fullCommand.split(" ")[0];
             String temp = fullCommand.strip();
             if (temp.equals(TaskType.TODO.getType()) || temp.equals(TaskType.DEADLINE.getType()) || temp.equals(TaskType.EVENT.getType())) {
-                throw new InvalidArgumentException("☹ OOPS!!! The description of a " + temp + " cannot be empty.");
+                throw new InvalidArgumentException("☹ OOPS!!! The description of " + (temp.equals(TaskType.EVENT.getType()) ? "an " : "a ") + temp + " cannot be empty.");
             } else if (temp.equals("")) {
                 throw new InvalidTaskTypeException("☹ OOPS!!! The type of a task cannot be empty.");
             }
@@ -53,6 +60,9 @@ public class Parser {
                 return new AddCommand(t);
             } else if (type.equals(TaskType.DEADLINE.getType())) {
                 String[] detailsArray = details.split("/by");
+                if (detailsArray.length <= 1) {
+                    throw new InvalidArgumentException("☹ OOPS!!! Please specify a due date for the deadline.");
+                }
                 LocalDate date;
                 try {
                     date = LocalDate.parse(detailsArray[1].strip());
@@ -63,6 +73,9 @@ public class Parser {
                 return new AddCommand(d);
             } else {
                 String[] detailsArray = details.split("/at");
+                if (detailsArray.length <= 1) {
+                    throw new InvalidArgumentException("☹ OOPS!!! Please specify a date for the event.");
+                }
                 LocalDate date;
                 try {
                     date = LocalDate.parse(detailsArray[1].strip());

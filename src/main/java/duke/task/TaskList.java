@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
-import duke.exception.InvalidArgumentException;
 
 public class TaskList {
     private List<Task> list;
@@ -64,7 +63,7 @@ public class TaskList {
         return output.toString();
     }
 
-    public void deleteTask(int index) throws InvalidArgumentException {
+    public void deleteTask(int index) {
         this.list.remove(index - 1);
     }
 }

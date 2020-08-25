@@ -33,7 +33,7 @@ public class Task {
     }
 
     public String encode() {
-        return (getType() + " | " + (isCompleted ? "1" : "0") + " | " + description + (getDate() != null ? (" | " + getDate()) : "") + "\n");
+        return (getType() + " | " + (isCompleted ? "1" : "0") + " | " + description + (getDate() != null ? (" | " + getDate()) : ""));
     }
 
     @Override
