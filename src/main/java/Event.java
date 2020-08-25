@@ -1,7 +1,9 @@
-public class Event extends Task {
-    private final String time;
+import java.time.LocalDate;
 
-    Event(String content, String time) {
+public class Event extends Task {
+    private final LocalDate time;
+
+    Event(String content, LocalDate time) {
         super(content);
         this.time = time;
     }
