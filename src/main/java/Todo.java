@@ -1,7 +1,13 @@
 public class Todo extends Task {
 
     Todo(String desc) {
-        super(desc);
+        super("T", desc);
+    }
+
+    @Override
+    public String formatTaskForFile() {
+        return this.taskType + " | " +
+                (this.isDone ? "1" : "0") + " | " + this.description;
     }
 
     @Override

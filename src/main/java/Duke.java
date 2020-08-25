@@ -1,6 +1,10 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.FileWriter;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.File;
 
 public class Duke {
     static List<Task> taskList = new ArrayList<>();
@@ -10,14 +14,74 @@ public class Duke {
         return line + "\n " + message + "\n" + line;
     }
 
+    static void createFile() {
+        File file = new File("data/duke.txt");
+        File directory = file.getParentFile();
+        if (!(directory.exists())) {
+            directory.mkdir();
+        }
+
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            wrapMessage(e.getMessage());
+        }
+    }
+
+    static void writeToFile() throws IOException {
+        FileWriter fw = new FileWriter("data/duke.txt");
+        String textToAdd = "";
+        for (Task task: taskList) {
+            textToAdd += task.formatTaskForFile() + "\n";
+        }
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+
+    static void initialise() {
+        File file = new File("data/duke.txt");
+        try {
+            Scanner s = new Scanner(file);
+            while (s.hasNext()) {
+                readData(s.nextLine());
+            }
+            s.close();
+        } catch (FileNotFoundException e) {
+            createFile();
+        } catch (MissingDeadlineException e) {
+            System.out.println(wrapMessage("The data file is formatted wrongly."));
+        }
+    }
+
+    static void readData(String s) throws MissingDeadlineException {
+        String[] arr = s.split(" \\| ");
+        Task task;
+        if (arr[0].equals("T")) {
+            task = new Todo(arr[2]);
+        } else if (arr[0].equals("D")) {
+            task = new Deadline(arr[2] + " /by " + arr[3]);
+        } else {
+            task = new Event(arr[2] + " /at " + arr[3]);
+        }
+
+        if (arr[1].equals("1")) {
+            task.completeTask();
+        }
+
+        taskList.add(task);
+    }
+
     static void greet() {
         String greeting = "Hello! I'm Duke\n What can I do for you? (◠  ◠✿)";
         System.out.println(wrapMessage(greeting));
     }
 
-    static void exit() {
+    static void exit() throws IOException {
+        writeToFile();
         String byeMessage = "Bye! ( ´ ▽ ` )/";
         System.out.println(wrapMessage(byeMessage));
+        System.exit(0);
     }
 
     static Task createTask(String taskType, String desc) throws MissingDeadlineException{
@@ -32,12 +96,10 @@ public class Duke {
 
     static void addTask(String taskType, String desc) throws MissingDeadlineException {
         Task task = createTask(taskType, desc);
-        if (task != null) {
-            taskList.add(task);
-            String message = "Got it. I've added this task: \n  " + task +
+        taskList.add(task);
+        String message = "Got it. I've added this task: \n  " + task +
                     "\n Now you have " + taskList.size() + " tasks in the list.";
-            System.out.println(wrapMessage(message));
-        }
+        System.out.println(wrapMessage(message));
     }
 
     static String formatTask(int num) {
@@ -111,11 +173,12 @@ public class Duke {
                 default:
                     throw new UnknownCommandException();
             }
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             System.out.println(wrapMessage(e.toString()));
         }
     }
     public static void main(String[] args) {
+        initialise();
         greet();
         readInput();
     }
