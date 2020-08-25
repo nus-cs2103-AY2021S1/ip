@@ -163,14 +163,12 @@ public class Duke {
             }
 
             if(isChanged) {
-                StringBuilder data = new StringBuilder();
                 PrintWriter pw = new PrintWriter(path);
                 pw.close();
-                for(int i = 0; i < number; i++) {
-                    data.append(tasks.get(i).toSave() + "\n");
-                }
                 PrintWriter writer = new PrintWriter(path);
-                writer.write(data.toString());
+                for(int i = 0; i < number; i++) {
+                    writer.write(tasks.get(i).toSave() + "\n");
+                }
                 writer.close();
             }
 
