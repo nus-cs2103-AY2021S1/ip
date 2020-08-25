@@ -14,6 +14,12 @@ public class Deadline extends Task {
         this.time = null;
     }
 
+    public Deadline(String description, LocalDate deadline, LocalTime time) {
+        super(description);
+        this.deadline = deadline;
+        this.time = time;
+    }
+
     public Deadline(String description, Boolean isDone, LocalDate deadline) {
         super(description, isDone);
         this.deadline = deadline;
