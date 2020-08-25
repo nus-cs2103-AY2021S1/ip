@@ -32,4 +32,13 @@ list
 delete 3
 list
 blah
+event coffee chat /at 2019-03-05
+event tea chat /at 2019-03-06T00:05:01
+deadline cs2103 project /by 2020-08-20
+deadline cs2103 project /by 2020-08-20T12:05:20
+list 2019-03-05
+list abc
+find chat
+find random things
+find cs2103 project
 bye

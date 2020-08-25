@@ -190,5 +190,65 @@ I'm sorry, but I don't know what that means...
 ---------------------------------------------
 
 ---------------------------------------------
+Got it. I've added this task:
+  [E][✘] coffee chat (at: Mar 5 2019)
+Now you have 8 tasks in the list.
+---------------------------------------------
+
+---------------------------------------------
+Got it. I've added this task:
+  [E][✘] tea chat (at: Mar 6 2019, 00:05:01 AM)
+Now you have 9 tasks in the list.
+---------------------------------------------
+
+---------------------------------------------
+Got it. I've added this task:
+  [D][✘] cs2103 project (by: Aug 20 2020)
+Now you have 10 tasks in the list.
+---------------------------------------------
+
+---------------------------------------------
+Got it. I've added this task:
+  [D][✘] cs2103 project (by: Aug 20 2020, 12:05:20 PM)
+Now you have 11 tasks in the list.
+---------------------------------------------
+
+---------------------------------------------
+Here are the tasks in your list on Mar 5 2019:
+1.[E][✘] coffee chat (at: Mar 5 2019)
+---------------------------------------------
+
+---------------------------------------------
+Here are the tasks in your list:
+1.[T][✓] borrow book
+2.[D][✘] return book (by: 30 Aug 0000)
+3.[E][✓] exercise (at: monday, wednesday, friday)
+4.[D][✘] CS2103 project tasks (by: this thursday)
+5.[T][✓] do my laundry
+6.[D][✘] buy coffee (by: 4 aug)
+7.[E][✘] watch movie (at: 5 aug)
+8.[E][✘] coffee chat (at: Mar 5 2019)
+9.[E][✘] tea chat (at: Mar 6 2019, 00:05:01 AM)
+10.[D][✘] cs2103 project (by: Aug 20 2020)
+11.[D][✘] cs2103 project (by: Aug 20 2020, 12:05:20 PM)
+---------------------------------------------
+
+---------------------------------------------
+Here are the matching tasks in your list:
+1.[E][✘] coffee chat (at: Mar 5 2019)
+2.[E][✘] tea chat (at: Mar 6 2019, 00:05:01 AM)
+---------------------------------------------
+
+---------------------------------------------
+There are no matching tasks in your list :(
+---------------------------------------------
+
+---------------------------------------------
+Here are the matching tasks in your list:
+1.[D][✘] cs2103 project (by: Aug 20 2020)
+2.[D][✘] cs2103 project (by: Aug 20 2020, 12:05:20 PM)
+---------------------------------------------
+
+---------------------------------------------
 Goodbye! Shutting down now...
 ---------------------------------------------
