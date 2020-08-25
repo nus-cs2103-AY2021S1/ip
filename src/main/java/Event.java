@@ -7,6 +7,10 @@ public class Event extends Task {
         this.taskDateTime = taskDateTime;
     }
 
+    public String getSaveToFileString() {
+        return "E`" + super.getSaveToFileString() + "`" + taskDateTime;
+    }
+
     @Override
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(), this.taskDateTime);
