@@ -26,9 +26,9 @@ public abstract class Task {
         return this.date;
     }
 
-    public void setDone() throws TaskDoneException{
+    public void setDone() throws DukeException{
         if (isDone) {
-            throw new TaskDoneException();
+            throw new DukeException("Task is already done");
         }
         this.isDone = true;
     }

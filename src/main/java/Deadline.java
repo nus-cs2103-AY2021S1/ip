@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     private LocalTime time;
 
-    public Deadline(String name, String eventDetail) throws DateTimeParseException {
+    public Deadline(String name, String eventDetail) throws DukeException {
         super(name);
         String[] input = eventDetail.split("\\s+");
         try {
@@ -18,13 +18,14 @@ public class Deadline extends Task {
                 time = null;
             }
         } catch (DateTimeParseException err) {
-            throw err;
+            throw new DukeException("Error: Please key in as: \n " +
+                    "event [title] /by YYYY-MM-DD HH:MM");
         }
     }
 
     @Override
     public String toSaveFormat() {
-        return String.format("D%s| %s %s", super.toSaveFormat(),
+        return String.format("D%s | %s %s", super.toSaveFormat(),
                 Task.SAVE_DATE_FORMATTER.format(super.date.get()), Task.TIME_FORMATTER.format(time));
     }
 
