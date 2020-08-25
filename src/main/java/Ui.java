@@ -1,13 +1,8 @@
-import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Ui {
-
-    private Storage storage;
-    private TaskList tasks;
 
     /**
      * Class Constructor with no arguments.

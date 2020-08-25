@@ -1,4 +1,3 @@
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -38,7 +37,6 @@ public class Deadlines extends Task {
     public void setDateTime() {
         int index = this.deadline.indexOf(" ");
         String dateTemp = this.deadline.substring(0, index);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
         LocalDate date = LocalDate.parse(dateTemp);
         this.date = date;
         //System.out.println(date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));

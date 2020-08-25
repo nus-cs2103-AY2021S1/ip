@@ -1,10 +1,4 @@
-import javax.swing.*;
-import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.SQLOutput;
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.io.IOException;
 
 public class Duke {
 
