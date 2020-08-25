@@ -15,7 +15,7 @@ public class Ui {
     }
 
     public String greet() {
-        return "                      █████████\n"
+        return "              █████████\n"
             +  "  ███████          ███        ███\n"
             +  "  █      █       ███             ███\n"
             +  "   █      █    ██                   ██\n"
