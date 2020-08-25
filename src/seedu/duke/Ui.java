@@ -1,4 +1,5 @@
-import java.time.LocalDate;
+package seedu.duke;
+
 import java.util.Scanner;
 
 public class Ui {

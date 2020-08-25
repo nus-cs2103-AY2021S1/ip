@@ -1,6 +1,10 @@
+package seedu.duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import seedu.duke.todo.*;
 
 public class TaskList {
     ArrayList<Task> tasks = new ArrayList<>();
@@ -48,7 +52,7 @@ public class TaskList {
         completedTask.markAsDone();
         System.out.println(" " + " " +
                 "[" + completedTask.getStatusIcon() + "] " +
-                completedTask.description);
+                completedTask.getDescription());
     }
 
     public void addTask(Task newTask) {
@@ -69,7 +73,7 @@ public class TaskList {
             tasks.remove(taskNo - 1);
             System.out.println(" " + " " +
                     "[" + taskToBeDeleted.getStatusIcon() + "] " +
-                    taskToBeDeleted.description);
+                    taskToBeDeleted.getDescription());
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         }
     }

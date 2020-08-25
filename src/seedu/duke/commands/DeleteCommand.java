@@ -1,3 +1,10 @@
+package seedu.duke.commands;
+
+import seedu.duke.TaskList;
+import seedu.duke.Ui;
+import seedu.duke.Storage;
+import seedu.duke.DukeException;
+
 public class DeleteCommand extends Command {
     private int taskNo;
 
@@ -7,7 +14,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.deleteTask(taskNo);
         // ui.showDeleteMessage();
     }

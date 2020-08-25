@@ -1,3 +1,9 @@
+package seedu.duke.commands;
+
+import seedu.duke.TaskList;
+import seedu.duke.Ui;
+import seedu.duke.Storage;
+
 public class DoneCommand extends Command {
     private int taskNo;
 

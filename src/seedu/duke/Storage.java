@@ -1,12 +1,11 @@
+package seedu.duke;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.StandardSocketOptions;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Pattern;
+
+import seedu.duke.todo.*;
 
 public class Storage {
     private static final String DIRECTORY_PATH = "data";

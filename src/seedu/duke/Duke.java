@@ -1,5 +1,6 @@
-import java.time.LocalDate;
-import java.util.Scanner;
+package seedu.duke;
+
+import seedu.duke.commands.*;
 
 public class Duke {
 

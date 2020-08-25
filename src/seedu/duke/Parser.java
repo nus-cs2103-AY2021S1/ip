@@ -1,7 +1,11 @@
+package seedu.duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.regex.Pattern;
+
+import seedu.duke.commands.*;
+import seedu.duke.todo.*;
 
 public class Parser {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
@@ -104,9 +108,4 @@ public class Parser {
         return timeStr.replaceAll(" ","").replaceAll("/", "-").trim();
     }
 
-    public void removeWhiteSpace(String[] strings) {
-        for (String str : strings) {
-            str.replaceAll(" ", "");
-        }
-    }
 }

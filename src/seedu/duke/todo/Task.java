@@ -1,3 +1,5 @@
+package seedu.duke.todo;
+
 import java.time.LocalDate;
 
 public class Task {
@@ -12,6 +14,10 @@ public class Task {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     public String getStatusIcon() {

@@ -1,3 +1,9 @@
+package seedu.duke.commands;
+
+import seedu.duke.TaskList;
+import seedu.duke.Ui;
+import seedu.duke.Storage;
+
 public class ExitCommand extends Command {
     public ExitCommand() {
         super("exit");
