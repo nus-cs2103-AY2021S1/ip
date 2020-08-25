@@ -1,3 +1,6 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
 import java.util.*;
 public class Duke {
     public static void main(String[] args) {
@@ -11,8 +14,8 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" +
                 "Send me a task in one of the following formats and I'll store it for you.\n" +
                 "\tTodo: \"todo <description>\"\n" +
-                "\tDeadline: \"deadline <description> /by <date>\"\n" +
-                "\tEvent: \"event <description> /at <time interval>\"\n" +
+                "\tDeadline: \"deadline <description> /by <YYYY-MM-DD>\"\n" +
+                "\tEvent: \"event <description> /at <YYYY-MM-DD>\"\n" +
                 "Send \"list\" to see all tasks.\n" +
                 "Send \"done <item number>\" to mark an item as done\n" +
                 "Send \"delete <item number>\" to delete anj item from the list\n" +
@@ -68,12 +71,14 @@ public class Duke {
                             task = String.join(" ", Arrays.copyOfRange(strings, 1, strings.length));
                             String description = task.split(" /by ")[0];
                             String by = task.split(" /by ")[1];
-                            Task deadlineTask = new Deadline(description, by);
+                            Task deadlineTask = new Deadline(description, LocalDate.parse(by));
                             tasks.add(deadlineTask);
                             System.out.println("Got it. I've added this task:\n\t" + deadlineTask);
                             System.out.println("You now have " + tasks.size() + " in the list.");
                         } catch (ArrayIndexOutOfBoundsException ex) {
                             throw new DukeException("Please key in a valid deadline command!");
+                        } catch (DateTimeException ex) {
+                            throw new DukeException(ex.getMessage());
                         }
                         break;
                     case EVENT:
@@ -81,12 +86,14 @@ public class Duke {
                             task = String.join(" ", Arrays.copyOfRange(strings, 1, strings.length));
                             String description = task.split(" /at ")[0];
                             String at = task.split(" /at ")[1];
-                            Task eventTask = new Event(description, at);
+                            Task eventTask = new Event(description, LocalDate.parse(at));
                             tasks.add(eventTask);
                             System.out.println("Got it. I've added this task:\n\t" + eventTask);
                             System.out.println("You now have " + tasks.size() + " in the list.");
                         } catch (ArrayIndexOutOfBoundsException ex) {
                             throw new DukeException("Please key in a valid event command!");
+                        } catch (DateTimeException ex) {
+                            throw new DukeException(ex.getMessage());
                         }
                         break;
                     default:
