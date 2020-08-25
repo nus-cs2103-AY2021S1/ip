@@ -7,12 +7,12 @@ import java.util.ArrayList;
  */
 public class TaskList implements Iterable<Task> {
 
-<<<<<<< HEAD
+
     public ArrayList<Task> listOfItems;
-=======
+
     public ArrayList<Task> ListOfItems;
     public ArrayList<Task> ListOfKeyWordItems = new ArrayList<>();
->>>>>>> branch-Level-9
+
     public String line = "____________________________________________________________";
 
     TaskList() {
@@ -68,12 +68,12 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
-<<<<<<< HEAD
+
     /**
      * prints out the entire list
      * @return String output of the entire list
      */
-=======
+
     public void findTask(String Keyword){
         ListOfKeyWordItems.clear();
        for (Task item : ListOfItems) {
@@ -94,7 +94,7 @@ if (item.toString().indexOf(Keyword) != -1) {
         return list;
     }
 
->>>>>>> branch-Level-9
+
     public String printOutList() {
         String list = "\nHere are the tasks in your list:\n";
         for (int i = 0; i < this.listOfItems.size(); i++) {

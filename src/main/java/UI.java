@@ -1,11 +1,10 @@
 import java.util.Scanner;
 
-<<<<<<< HEAD
+
 /**
  * UI class handles the scanner object and UI elements seen by user
  */
-=======
->>>>>>> branch-A-CodingStandard
+
 public class UI {
 
     public static final String line = "____________________________________________________________";

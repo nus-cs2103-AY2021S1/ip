@@ -1,11 +1,11 @@
-<<<<<<< HEAD
+
 /**
  * Represents a task to do and creates a parent class with child classes Event, ToDo, Deadline
  */
 public abstract class Task implements Encodable<Task>{
-=======
-public abstract class Task implements Encodable<Task> {
->>>>>>> branch-A-CodingStandard
+
+
+
 
 
     protected String description;

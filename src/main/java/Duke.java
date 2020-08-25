@@ -15,14 +15,14 @@ public class Duke {
 
     }
 
-<<<<<<< HEAD
+
     /**
      * runs the program
      */
-   public static void runDuke() {
-=======
+
+
     public static void runDuke() {
->>>>>>> branch-A-CodingStandard
+
 
         UI.introduction();
         Parser.parseCode(Storage.load(Storage.FILE_PATH), new UI(), false);

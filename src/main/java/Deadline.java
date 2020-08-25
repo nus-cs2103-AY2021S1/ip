@@ -66,13 +66,12 @@ public class Deadline extends Task {
     }
 
 
-<<<<<<< HEAD
+
     /**
      * overrides Deadline String output to be formatted
      * @return String of formatted Deadline
      */
-=======
->>>>>>> branch-A-CodingStandard
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by:" + DateConverter.parseLocalDateTime(this.date) + ")";
