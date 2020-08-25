@@ -1,5 +1,13 @@
-todo Ask for Help
-deadline CS2103T iP /by 20/8/20
-done 1
+list
+delete 1
+todo read book
+done 4
+delete 1
+deadline return book /by June 6th
+delete 1
+event project meeting /at Aug 6th 2-4pm
+delete 1
+todo join sports club
+done 4
 list
 bye

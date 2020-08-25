@@ -33,6 +33,10 @@ public class Task {
     public Task markAsDone() {
         return new Task(this.description, true);
     }
+    
+    public String stringify() {
+        return this.toString();
+    }
 
     @Override
     public String toString() {

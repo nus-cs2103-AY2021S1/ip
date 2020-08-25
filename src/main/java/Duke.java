@@ -1,11 +1,61 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
+    
+    public static ArrayList<Task> store = new ArrayList<>(100);
+    
+    public static void readData() {
+        try {
+            Scanner sc = new Scanner(new File("./data/duke.txt"));
+            
+            while (sc.hasNextLine()) {
+                String[] str = sc.nextLine().split("\\|");
+                String title = str[0].trim();
+                boolean isDone = str[1].trim().equals(1 + "");
+                if (title.equals("T")) {
+                    Duke.store.add(new Todo(str[2].trim(), isDone));
+                } else if (title.equals("D")) {
+                    Duke.store.add(new Deadline(str[2].trim(), isDone, str[3].trim()));
+                } else {
+                    Duke.store.add(new Event(str[2].trim(), isDone, str[3].trim()));
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+    }
+    
+    public static void appendData(Task newTask) {
+        try {
+            FileWriter fw = new FileWriter("./data/duke.txt", true);
+            fw.write(newTask.stringify() + "\n");
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void writeData() {
+        try {
+            FileWriter fw = new FileWriter("./data/duke.txt");
+            for(Task task : store) {
+                fw.write(task.stringify() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     public static void main(String[] args) {
         //Setup
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> listOfTasks = new ArrayList<>(100);
 
         //constant
         String tab = "  ";
@@ -16,8 +66,10 @@ public class Duke {
         String listTitle = tab + " Here are the tasks in your list:";
         String doneTitle = tab + " Nice! I've marked this task as done:";
         String deleteTitle = tab + " Noted. I've removed this task:";
-
-
+        
+        //instantiate the store
+        readData();
+        
         //Greeting
         System.out.println(lineBreaker);
         System.out.println(greet);
@@ -39,7 +91,7 @@ public class Duke {
                 } else if (input.equals("list")) { //list command
                     int i = 1;
                     System.out.println(listTitle);
-                    for (Task task : listOfTasks) {
+                    for (Task task : store) {
                         System.out.println(tab + " " + i++ + "." + task);
                     }
 
@@ -49,14 +101,15 @@ public class Duke {
                     }
 
                     int indexOfMarkingTask = Integer.parseInt(words[1]) - 1;
-                    if (indexOfMarkingTask + 1 > listOfTasks.size() || indexOfMarkingTask + 1 <= 0) {
+                    if (indexOfMarkingTask + 1 > store.size() || indexOfMarkingTask + 1 <= 0) {
                         throw new DoneException(" ☹ OOPS!!! There is no such task.");
                     }
 
                     //complete done command
-                    Task markingTask = listOfTasks.get(indexOfMarkingTask);
+                    Task markingTask = store.get(indexOfMarkingTask);
                     Task markedTask = markingTask.markAsDone();
-                    listOfTasks.set(indexOfMarkingTask, markedTask);
+                    store.set(indexOfMarkingTask, markedTask);
+                    writeData();
 
                     System.out.println(doneTitle);
                     System.out.println(tab + "   " + markedTask);
@@ -67,37 +120,41 @@ public class Duke {
                     }
 
                     int indexOfMarkingTask = Integer.parseInt(words[1]) - 1;
-                    if (indexOfMarkingTask + 1 > listOfTasks.size() || indexOfMarkingTask + 1 <= 0) {
+                    if (indexOfMarkingTask + 1 > store.size() || indexOfMarkingTask + 1 <= 0) {
                         throw new DeleteException(" ☹ OOPS!!! There is no such task.");
                     }
 
                     //complete done command
-                    Task deletingTask = listOfTasks.get(indexOfMarkingTask);
-                    listOfTasks.remove(indexOfMarkingTask);
+                    Task deletingTask = store.get(indexOfMarkingTask);
+                    store.remove(indexOfMarkingTask);
+                    writeData();
 
                     System.out.println(deleteTitle);
                     System.out.println(tab + "   " + deletingTask);
-                    System.out.println(tab + " Now you have " + listOfTasks.size() + " tasks in the list.");
+                    System.out.println(tab + " Now you have " + store.size() + " tasks in the list.");
 
                 } else if (firstWord.equals("todo")) { //todo command
                     //complete command
                     Todo newTask = Todo.create(input);
                     System.out.println(addTaskTitle);
-                    listOfTasks.add(newTask);
+                    store.add(newTask);
+                    appendData(newTask);
                     System.out.println(tab + "   " + newTask);
-                    System.out.println(tab + " Now you have " + listOfTasks.size() + " tasks in the list.");
+                    System.out.println(tab + " Now you have " + store.size() + " tasks in the list.");
                 } else if (firstWord.equals("deadline")) {//complete deadline command
                     Deadline newTask = Deadline.create(input);
-                    listOfTasks.add(newTask);
+                    store.add(newTask);
+                    appendData(newTask);
                     System.out.println(addTaskTitle);
                     System.out.println(tab + "   " + newTask);
-                    System.out.println(tab + " Now you have " + listOfTasks.size() + " tasks in the list.");
+                    System.out.println(tab + " Now you have " + store.size() + " tasks in the list.");
                 } else if (firstWord.equals("event")) {
                     Event newTask = Event.create(input);
-                    listOfTasks.add(newTask);
+                    store.add(newTask);
+                    appendData(newTask);
                     System.out.println(tab + "   " + newTask);
                     System.out.println(addTaskTitle);
-                    System.out.println(tab + " Now you have " + listOfTasks.size() + " tasks in the list.");
+                    System.out.println(tab + " Now you have " + store.size() + " tasks in the list.");
                 } else { //exception handler
                     throw new DukeException();
                 }
