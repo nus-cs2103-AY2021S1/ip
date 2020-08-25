@@ -1,0 +1,4 @@
+T | 0 | eat food
+T | 0 | sleep
+D | 0 | make pastry | 2020-12-04
+E | 1 | marathon | 2020-03-04
