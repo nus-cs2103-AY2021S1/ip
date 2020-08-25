@@ -6,15 +6,31 @@ import duke.tasks.Event;
 import duke.tasks.TaskList;
 import duke.tasks.Todo;
 
-
+/**
+ * Command to add <code>todo</code>, <code>deadline</code> and <code>event</code> to <code>TaskList</code>.
+ */
 public class AddCommand extends Command {
     private final Commands c;
     private final String description;
 
+    /**
+     * Constructor to create AddCommand object.
+     *
+     * @param c an enum that is the command to identify type of task added.
+     * @param description specific details of the task being added.
+     */
     public AddCommand(Commands c, String description) {
         this.c = c;
         this.description = description;
     }
+
+    /**
+     * Adds the task into <code>tasklist</code>.
+     *
+     * @param tasklist list of all the tasks stored in Duke so far.
+     * @param ui prints out messages notifying user of what is being done.
+     * @param storage stores all the tasks being added so far into user's local storage.
+     */
     @Override
     public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
         switch (c) {

@@ -5,12 +5,25 @@ import duke.tasks.TaskList;
 
 import java.io.IOException;
 
+/**
+ * Bot with personality which assists and keeps track of user's tasks.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructor to create Duke object.
+     *
+     * <p>
+     * Contains a <code>Ui</code>, a <code>Storage</code>,
+     * \a <code>Parser</code> and a <code>TaskList</code>
+     * which is responsible for user interaction,
+     * saving and writing user's tasks to user's local storage and
+     * making sense of user's commands and keeping track of user's tasks respectively.
+     */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
@@ -23,6 +36,14 @@ public class Duke {
         }
     }
 
+    /**
+     * Responsible for receiving user's input and executing program.
+     *
+     * <p>
+     * Communicates with user via Ui, sends user input to parser
+     * to parse and find command of user, executes command and
+     * sends result to be saved in storage.
+     */
     public void run() {
         this.ui.showWelcome();
         boolean isExit = false;
@@ -38,6 +59,12 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * Starts Duke up.
+     *
+     * @param args user input from the command line.
+     */
     public static void main(String[] args) {
         new Duke().run();
     }
