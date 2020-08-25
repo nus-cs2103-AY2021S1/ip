@@ -83,7 +83,7 @@ Index Error: delete {index}
 5. [E][✗] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
 6. [T][✗] say goodbye
 Command list:
- help bye list done delete todo deadline event save load
+ help bye list done delete todo deadline event save load find
 Save: 6 entries
 	- Delete: [T][✗] say goodbye
 	# Done: [E][✓] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
@@ -100,4 +100,16 @@ Load: 6 entries
 4. [D][✗] drink coffee (by: 07 Jun 2020 11:59PM)
 5. [E][✗] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
 6. [T][✗] say goodbye
+Format: find {keyword}
+Here are the matching tasks in your list:
+Number of tasks found: 0
+Here are the matching tasks in your list:
+Number of tasks found: 0
+Here are the matching tasks in your list:
+1. [T][✗] readbook
+2. [D][✓] return book (by: 06 Jun 2020 11:59PM)
+Number of tasks found: 2
+Here are the matching tasks in your list:
+1. [T][✓] join sports club
+Number of tasks found: 1
 Bye. Hope to see you again soon!

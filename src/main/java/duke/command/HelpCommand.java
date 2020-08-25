@@ -1,11 +1,9 @@
 package duke.command;
 
-import duke.cmd.Parser;
-
 import java.util.Arrays;
 
 /**
- * Display list of available duke.command
+ * Display list of available Command
  */
 public class HelpCommand implements Command {
 

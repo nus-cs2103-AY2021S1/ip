@@ -27,7 +27,6 @@ public class LoadCommand implements Command {
 
     @Override
     public void execute() {
-
         // Empty current list
         taskList.clear();
 

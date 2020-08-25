@@ -144,6 +144,17 @@ public enum CommandEnum {
 
             return new LoadCommand(taskList, commandParam.trim());
         }
+    },
+
+    FIND {
+        @Override
+        public Command generate(List<Task> taskList, String commandParam) {
+            if (commandParam.isBlank()) {
+                return new InvalidCommand("Format: find {keyword}");
+            }
+
+            return new FindCommand(taskList, commandParam.trim());
+        }
     };
 
     /**
