@@ -1,6 +1,8 @@
 package main.java;
 
-public class Event extends Task {
+import java.io.Serializable;
+
+public class Event extends Task implements Serializable {
     private String time;
 
     public Event(String s, Boolean b, String t) {

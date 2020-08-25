@@ -3,17 +3,18 @@ import main.java.Event;
 import main.java.Task;
 import main.java.ToDo;
 
+import java.io.*;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         String border = "\n^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^\n";
         Scanner sc = new Scanner(System.in);
         String command;
         String availableCommands = "Available commands: bye, list, done, delete, todo, deadline, event";
-        ArrayList<Task> tList = new ArrayList<>();
+        ArrayList<Task> tList = readListFromFile();
 
         String logo = " _       _ \n"
                 + "| |  _  | |_   _ ____ ___\n"
@@ -43,6 +44,7 @@ public class Duke {
                     tList.get(index).setStatus(true);
                     System.out.println(border + "Well done! I've marked this task as done:");
                     System.out.println("\t" + tList.get(index) + border);
+                    writeListToFile(tList);
                 } else if (command.substring(0, 6).equals("delete")) {
                     int index = Integer.parseInt(command.substring(7)) - 1;
                     if(index < tList.size()) {
@@ -50,6 +52,7 @@ public class Duke {
                         System.out.println("\t" + tList.get(index));
                         tList.remove(index);
                         System.out.println("Now you have " + tList.size() + " task(s) in the list." + border);
+                        writeListToFile(tList);
                     } else {
                         System.out.println(border + "Sorry fam, you can't delete a nonexistent index!" + border);
                     }
@@ -62,6 +65,7 @@ public class Duke {
                         tList.add(t);
                         System.out.println(border + "Wyre at your service. I've added the task:\n\t" + t);
                         System.out.println("Now you have " + tList.size() + " task(s) in the list." + border);
+                        writeListToFile(tList);
                     }
                 } else if (command.substring(0, 5).equals("event")) {
                     int escapeIndex = command.lastIndexOf("/");
@@ -74,6 +78,7 @@ public class Duke {
                         tList.add(e);
                         System.out.println(border + "Wyre at your service. I've added the task:\n\t" + e);
                         System.out.println("Now you have " + tList.size() + " task(s) in the list." + border);
+                        writeListToFile(tList);
                     }
                 } else if (command.substring(0, 8).equals("deadline")) {
                     int escapeIndex = command.lastIndexOf("/");
@@ -86,13 +91,41 @@ public class Duke {
                         tList.add(d);
                         System.out.println(border + "Wyre at your service. I've added the task:\n\t" + d);
                         System.out.println("Now you have " + tList.size() + " task(s) in the list." + border);
+                        writeListToFile(tList);
                     }
                 } else {
                     System.out.println(border + "Naw, this isn't an accepted command!\n" + availableCommands + border);
                 }
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println(border + "Naw fam, not a legal command. :'(\n" + availableCommands + border);
+            } catch (IOException e) {
+                e.getStackTrace();
             }
         }
     }
+
+    public static ArrayList<Task> readListFromFile() throws IOException, ClassNotFoundException {
+        try {
+            FileInputStream fis = new FileInputStream("task_list.txt");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            ArrayList<Task> lst = (ArrayList<Task>) ois.readObject();
+            ois.close();
+            return lst;
+        } catch (FileNotFoundException e) {
+            return new ArrayList<Task>();
+        } catch (IOException e) {
+            throw e;
+        } catch (ClassNotFoundException e) {
+            throw e;
+        }
+
+    }
+
+    public static void writeListToFile(ArrayList<Task> lst) throws IOException {
+        FileOutputStream fos = new FileOutputStream("task_list.txt");
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(lst);
+        oos.close();
+    }
+
 }
