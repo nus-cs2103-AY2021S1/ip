@@ -1,17 +1,36 @@
 package Task;
 
+import Exceptions.WrongDateTimeFormatException;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
 
-    private final String end;
+    private final LocalDateTime at;
 
-    public Event(String name, boolean isDone, String end){
+    public Event(String name, boolean isDone, String end) throws WrongDateTimeFormatException {
         super(name, isDone);
-        this.end = end;
+        try {
+            this.at = LocalDate.parse(end.substring(0, 10)).atTime(
+                    Integer.parseInt(end.substring(11, 13)),
+                    Integer.parseInt(end.substring(13))
+            );
+        } catch (DateTimeParseException e) {
+            throw new WrongDateTimeFormatException("☹ OOPS!!! Please enter the deadline time in the right format. (YYYY-MM-DD HHmm)");
+        }
+    }
+
+    public Event(String name, boolean isDone, LocalDateTime at){
+        super(name, isDone);
+        this.at = at;
     }
 
     @Override
     public Task setToTrue(){
-        return new Event(this.name, true, this.end);
+        return new Event(this.name, true, this.at);
     }
 
     @Override
@@ -21,14 +40,14 @@ public class Event extends Task {
 
     @Override
     public String getEnd(){
-        return this.end;
+        return this.at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
     @Override
     public String toString(){
         return isDone
-                ? "[E][✓] " + this.getName() + " (by: " + this.end + ")"
-                : "[E][✗] " + this.getName() + " (by: " + this.end + ")";
+                ? "[E][✓] " + this.getName() + " (by: " + this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")"
+                : "[E][✗] " + this.getName() + " (by: " + this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")";
     }
 
     @Override
@@ -37,7 +56,7 @@ public class Event extends Task {
             return true;
         } else if (o instanceof Event){
             Event temp = (Event) o;
-            return this.name.equals(temp.name) && (this.isDone == temp.isDone) && this.end.equals(temp.end);
+            return this.name.equals(temp.name) && (this.isDone == temp.isDone) && this.at.equals(temp.at);
         } else {
             return false;
         }

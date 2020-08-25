@@ -4,17 +4,15 @@ import Command.*;
 
 public class Parser {
 
-    /** The variable that will make the program exit or quit **/
     private static String end = "bye";
 
-    /** The variable that will make the program to done the specified task **/
     private static String done = "done";
 
-    /** The variable that will make the program to delete the specified task **/
     private static String delete = "delete";
 
-    /** The variable that will make the program to list out all the current task **/
     private static String listing = "list";
+
+    private static String COMMAND_FIND = "find";
 
     /**
      * @param fullCommand
@@ -23,7 +21,9 @@ public class Parser {
     public static Command parse(String fullCommand){
         if (fullCommand.toLowerCase().contains(end)) {
             return new ExitCommand(fullCommand);
-        } else if (fullCommand.equals(listing)) {
+        } else if (fullCommand.toLowerCase().contains(COMMAND_FIND)) {
+            return new FindCommand(fullCommand);
+        } else if (fullCommand.toLowerCase().contains(listing)) {
             return new ListCommand(fullCommand);
         } else if (fullCommand.toLowerCase().contains(done)) {
             return new DoneCommand(fullCommand);

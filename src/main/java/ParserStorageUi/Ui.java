@@ -60,6 +60,17 @@ public class Ui {
                 + done);
     }
 
+    public void showFoundTasks(TaskList tasks, String constraint){
+        int i = 1;
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task item : tasks.getTaskList()) {
+            if (item.isNameMatchKeyWord(constraint)) {
+                System.out.println(i + ". " + item);
+                i++;
+            }
+        }
+    }
+
     public void showGoodBye(){
         System.out.println("Bye. Hope to see you again soon!");
     }

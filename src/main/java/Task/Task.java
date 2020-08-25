@@ -24,6 +24,10 @@ abstract public class Task {
 
     public abstract String getEnd();
 
+    public boolean isNameMatchKeyWord(String keyword){
+        return this.name.toLowerCase().contains(keyword);
+    }
+
     @Override
     public String toString(){
         if (isDone) {
