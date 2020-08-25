@@ -1,3 +1,9 @@
+package duke;
+
+import duke.exception.DukeStorageException;
+import duke.task.Task;
+import duke.util.SerializeUtil;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -14,14 +20,17 @@ public class Storage{
         this.path = path;
     }
 
-    public List<Task> load() throws DukeStorageException{
+    @SuppressWarnings("unchecked")
+    public List<Task> load() throws DukeStorageException {
         List<Task> list = new ArrayList<>();
 
         try{
             File file = new File(this.path + this.fileName);
             if(file.exists()) {
                 FileInputStream fis = new FileInputStream(file);
-                list = (ArrayList<Task>)SerializeUtil.deserialize(fis.readAllBytes());
+
+
+                list = (ArrayList<Task>) SerializeUtil.deserialize(fis.readAllBytes());
             }
         } catch(Exception e) {
             throw new DukeStorageException("Failed to load saved list.");

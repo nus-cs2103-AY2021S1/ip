@@ -1,10 +1,18 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DukeCommandException;
+import duke.task.Task;
+
 public class ListCommand extends Command{
     public ListCommand(String inputCommand) {
         super(inputCommand);
     }
 
     @Override
-    public void execute(TaskList list, Storage storage, Ui ui) throws DukeCommandException{
+    public void execute(TaskList list, Storage storage, Ui ui) throws DukeCommandException {
         if(this.inputCommand.split(" ").length != 1) {
             throw new DukeCommandException("\u2639 OOPS!!! Wrong 'list' command parameters!");
         }

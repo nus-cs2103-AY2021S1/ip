@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DukeCommandException;
+import duke.exception.DukeStorageException;
+import duke.task.Task;
+
 import java.util.regex.Pattern;
 
 public class DeleteCommand extends Command{

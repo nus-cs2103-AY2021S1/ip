@@ -1,3 +1,9 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.exception.DukeStorageException;
+
 import java.io.File;
 
 public class Duke {

@@ -1,6 +1,8 @@
+package duke.exception;
+
 public class DukeCommandException extends DukeException{
 
-    DukeCommandException(String message) {
+    public DukeCommandException(String message) {
         super(message);
     }
 }

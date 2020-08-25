@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -9,6 +11,10 @@ public class Event extends Task {
         super(description);
         this.at = at;
     }
+
+    public LocalDateTime getAt() { return at; }
+
+    public void setAt(LocalDateTime at) { this.at = at; }
 
     @Override
     public String toString() {

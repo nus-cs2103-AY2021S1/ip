@@ -1,17 +1,13 @@
-todo read book
-deadline return book /by tonight
-event play games /at tomorrow 9-11pm
 list
-wrongcommand
-todo
-todo things /at that time
-deadline
-deadline eat food
-event
-event shower /by next year
+todo aaa
+deadline bbb /by 12/12/2020 1000
+deadline bbb /by 13/12/2020 1200
+event ccc /at 12/12/2020 1600
+event ddd /at 13/13/2020 1700
+event eee /at 13/12/2020 2359
 list
-todo illegal stuff Kappa
-delete 5
-delete 4
+date 12/12/2020
+done 1
+delete 1
 list
 bye

@@ -1,3 +1,13 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DukeCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -22,7 +32,7 @@ public class DateCommand extends Command{
             for(Task task: list.getList()) {
                 if(task instanceof Deadline) {
                     Deadline deadline = (Deadline)task;
-                    LocalDateTime temp = deadline.by;
+                    LocalDateTime temp = deadline.getBy();
                     if(time.getYear() == temp.getYear() && time.getDayOfYear() == temp.getDayOfYear()) {
                         ui.printMessage(""+ctr + "."+ task);
                         ctr++;
@@ -30,7 +40,7 @@ public class DateCommand extends Command{
                 }
                 if(task instanceof Event) {
                     Event event = (Event)task;
-                    LocalDateTime temp = event.at;
+                    LocalDateTime temp = event.getAt();
                     if(time.getYear() == temp.getYear() && time.getDayOfYear() == temp.getDayOfYear()) {
                         ui.printMessage(""+ctr + "."+ task);
                         ctr++;

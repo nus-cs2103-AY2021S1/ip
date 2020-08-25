@@ -1,13 +1,22 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeParseException;
+
 public class Parser {
 
-    public static Command parse(String inputCommand) throws DukeParseException{
+    public static Command parse(String inputCommand) throws DukeParseException {
+
+        if(inputCommand == null || inputCommand.length() == 0) {
+            throw new DukeParseException("Empty command!");
+        }
 
         String commandName = inputCommand.split(" ")[0];
         boolean isCommand = false;
         Command command = null;
 
         try{
-            String className = Character.toUpperCase(commandName.charAt(0)) + commandName.substring(1) + "Command";
+            String className = "duke.command." + Character.toUpperCase(commandName.charAt(0)) + commandName.substring(1) + "Command";
             for(DukeCommand comm: DukeCommand.values()) {
                 if(commandName.equals(comm.getCommand())) {
                     command = (Command) Class.forName(className).getConstructor(String.class).newInstance(inputCommand);

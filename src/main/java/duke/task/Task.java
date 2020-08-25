@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.io.Serializable;
 
 public class Task implements Serializable {
@@ -11,7 +13,7 @@ public class Task implements Serializable {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     public void markAsDone() {

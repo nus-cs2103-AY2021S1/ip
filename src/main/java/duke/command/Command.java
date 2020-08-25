@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DukeCommandException;
+import duke.exception.DukeStorageException;
+
 public abstract class Command {
 
     public String inputCommand;

@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.*;
+
 public enum DukeCommand {
     LIST("list", 100, ListCommand.class),DATE("date",101, DateCommand.class),
 
