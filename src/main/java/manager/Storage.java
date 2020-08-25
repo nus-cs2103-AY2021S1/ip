@@ -13,16 +13,16 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Database {
+public class Storage {
 
     private String pathname;
     private File dataFile;
 
-    public static Database initializeDatabase() {
-        return new Database().initialize();
+    public static Storage initializeDatabase() {
+        return new Storage().initialize();
     }
 
-    private Database initialize() {
+    private Storage initialize() {
         String rootPath = new File(System.getProperty("user.dir"))
                 .getParentFile()
                 .getPath();

@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
 
-    private String time;
+    private final String time;
     private LocalDateTime formattedDateTime;
     private LocalDate formattedDate;
 

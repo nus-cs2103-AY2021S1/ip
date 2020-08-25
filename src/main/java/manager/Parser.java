@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Parser {
 
-    Converter converter = new Converter();
+    private final Ui converter = new Ui();
 
     public void handleUserInput() {
 

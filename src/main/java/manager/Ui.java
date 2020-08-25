@@ -7,10 +7,10 @@ import main.java.tasks.Event;
 import main.java.tasks.Task;
 import main.java.tasks.Todo;
 
-public class Converter {
+public class Ui {
 
-    TaskList taskList = new TaskList();
-    Database database = Database.initializeDatabase();
+    private final TaskList taskList = new TaskList();
+    private final Storage database = Storage.initializeDatabase();
 
     public Task convertTask(Commands command, String input) {
         try {

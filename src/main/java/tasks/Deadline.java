@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
 
-    private String endTime;
+    private final String endTime;
     private LocalDateTime formattedDateTime;
     private LocalDate formattedDate;
 
