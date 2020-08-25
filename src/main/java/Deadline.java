@@ -4,9 +4,24 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The Deadline class is used to represent the task of a deadline nature.
+ * This object contains the task name as well as the day/date of the deadline.
+ * Inherits from Task class.
+ */
+
 public class Deadline extends Task{
     private String date;
     private LocalDate dateTime;
+
+    /**
+     * Initializes a Deadline object
+     *
+     * @param taskName name or description of task
+     * @param date date in which task has to be completed
+     * @throws DukeInvalidDateException
+     * @throws DukeInvalidTaskException
+     */
 
     public Deadline(String taskName, String date) throws DukeInvalidDateException, DukeInvalidTaskException {
         super(taskName);
@@ -22,6 +37,12 @@ public class Deadline extends Task{
         }
     }
 
+    /**
+     * Gets the date of the Deadline
+     *
+     * @return a String representing the date.
+     */
+
     public String getDate(){
         if (dateTime == null) {
             return date;
@@ -29,6 +50,12 @@ public class Deadline extends Task{
             return dateTime.toString();
         }
     }
+
+    /**
+     * Get a string representation of the object
+     *
+     * @return a String representing the Deadline object
+     */
 
     @Override
     public String toString() {

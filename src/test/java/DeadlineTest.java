@@ -1,7 +1,6 @@
 import main.java.Deadline;
 import main.java.DukeInvalidDateException;
 import main.java.DukeInvalidTaskException;
-import main.java.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
