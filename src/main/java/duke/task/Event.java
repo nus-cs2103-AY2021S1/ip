@@ -44,15 +44,17 @@ public class Event extends Task {
         if (code.charAt(0) == 'E') {
             String[] content = code.split("\\|", 4);
             if (content.length != 4) {
-                throw new Error("Your data is corrupt.");
+                throw new Error("There are some holes in my memory...");
             }
             Event newEvent = new Event(content[3], DateParser.parseString(content[2]));
             if (content[1].equals("Y")) {
                 newEvent.setCompleted();
+            } else if (!content[1].equals("N")) {
+                throw new DukeException("There are some holes in my memory...");
             }
             return newEvent;
         } else {
-            throw new DukeException("Unable to decode event.");
+            throw new DukeException("Something doesn't seem right...");
         }
     }
 }
