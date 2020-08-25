@@ -23,6 +23,7 @@ public class ExitCommand extends Command {
      * @return true.
      */
     public boolean isExit() {
+
         return true;
     }
 }

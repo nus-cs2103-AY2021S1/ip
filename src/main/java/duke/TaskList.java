@@ -46,23 +46,20 @@ public class TaskList {
 
         Task t;
         switch (taskType) {
-            case TODO: {
-                t = new TodoTask(task);
-                tasks.add(t);
-                break;
-            }
-            case DEADLINE: {
-                t = new DeadlineTask(task, date);
-                tasks.add(t);
-                break;
-            }
-            case EVENT: {
-                t = new EventTask(task, date);
-                tasks.add(t);
-                break;
-            }
-            default:
-                throw new DukeException("Invalid Task Type");
+        case TODO:
+            t = new TodoTask(task);
+            tasks.add(t);
+            break;
+        case DEADLINE:
+            t = new DeadlineTask(task, date);
+            tasks.add(t);
+            break;
+        case EVENT:
+            t = new EventTask(task, date);
+            tasks.add(t);
+            break;
+        default:
+            throw new DukeException("Invalid Task Type");
         }
     }
 
