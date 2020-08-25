@@ -1,6 +1,7 @@
 package ultron;
 
 import ultron.commands.Command;
+import ultron.commands.FindCommand;
 import ultron.commands.TaskAllocator;
 import ultron.commands.ByeCommand;
 import ultron.commands.ListCommand;
@@ -34,6 +35,9 @@ public class Parser {
         //If the user keys in bye
         case "bye":
             return new ByeCommand(arguments);
+            
+        case "find":
+            return new FindCommand(arguments);
 
         //If the user keys in list
         case "list":
