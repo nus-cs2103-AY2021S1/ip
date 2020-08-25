@@ -3,7 +3,7 @@ package duke;
 /**
  * Exception thrown when program encounters errors.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     /**
      * Exception duke throws whenever there are errors encountered.

@@ -25,14 +25,14 @@ public class Duke {
      * making sense of user's commands and keeping track of user's tasks respectively.
      */
     public Duke() {
-        this.ui = new Ui();
-        this.storage = new Storage();
-        this.parser = new Parser();
+        ui = new Ui();
+        storage = new Storage();
+        parser = new Parser();
         try {
-            this.tasks = new TaskList(storage.readFile());
+            tasks = new TaskList(storage.readFile());
         } catch (DukeException e) {
-            this.ui.showLoadingError();
-            this.tasks = new TaskList();
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
     }
 
@@ -45,17 +45,17 @@ public class Duke {
      * sends result to be saved in storage.
      */
     public void run() {
-        this.ui.showWelcome();
+        ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
-                String fullCommand = this.ui.readCommand();
-                Command command = this.parser.findCommand(fullCommand);
-                command.execute(this.tasks, this.ui, this.storage);
-                this.storage.save(tasks.getList());
+                String fullCommand = ui.readCommand();
+                Command command = parser.findCommand(fullCommand);
+                command.execute(tasks, ui, storage);
+                storage.save(tasks.getList());
                 isExit = command.isExit();
             } catch (DukeException | IOException e) {
-                this.ui.showError(e.getMessage());
+                ui.showError(e.getMessage());
             }
         }
     }

@@ -23,7 +23,7 @@ public class Task {
      * @return details of the tasks.
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -32,7 +32,7 @@ public class Task {
      * @return true or false if task is done.
      */
     public boolean getDone() {
-        return this.isDone;
+        return isDone;
     }
 
     /**
@@ -48,7 +48,7 @@ public class Task {
      * Mark a task as done.
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
 }

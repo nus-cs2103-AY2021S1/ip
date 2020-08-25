@@ -6,9 +6,9 @@ import duke.commands.*;
  * Parses user input to make sense of the command and find out what user wants.
  */
 public class Parser {
-    private Commands command;
     boolean entered = false;
     String description = "";
+    private Commands command;
 
     /**
      * Parses user input and finds out of user input is valid and if it is, which specific command is given.
@@ -56,7 +56,7 @@ public class Parser {
             command = Commands.EVENT;
             this.description = description.substring(6);
             return new AddCommand(command, this.description);
-        } else if (description.length() >= 6 && description.substring(0,6).equals("delete")) {
+        } else if (description.length() >= 6 && description.substring(0, 6).equals("delete")) {
             if (description.substring(5).split(" ").length == 1) {
                 throw new DukeException("you need to give a number.");
             } else if (description.split(" ").length > 2) {
@@ -65,8 +65,8 @@ public class Parser {
             command = Commands.DELETE;
             this.description = description.split(" ")[1];
             return new DeleteCommand(this.description);
-        } else if (description.length() >= 4 && description.substring(0,4).equals("date")) {
-            if (description.substring(3).split(" ").length == 1 || description.substring(3).split(" ").length > 2 ) {
+        } else if (description.length() >= 4 && description.substring(0, 4).equals("date")) {
+            if (description.substring(3).split(" ").length == 1 || description.substring(3).split(" ").length > 2) {
                 throw new DukeException(("you need to input a legit date for e.g: 29-01-19, no more and no less."));
             }
             command = Commands.DATE;

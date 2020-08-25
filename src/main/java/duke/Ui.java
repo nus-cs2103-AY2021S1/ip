@@ -54,7 +54,7 @@ public class Ui {
      * @return command line from user input.
      */
     public String readCommand() {
-        return this.sc.nextLine();
+        return sc.nextLine();
     }
 
     /**

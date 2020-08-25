@@ -7,13 +7,13 @@ import java.util.List;
  * List that contains all the task.
  */
 public class TaskList {
-    private List<Task> list;
+    private List<Task> tasks;
 
     /**
      * Constructor to create TaskList.
      */
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -22,7 +22,7 @@ public class TaskList {
      * @param tasks list saved in user's local storage.
      */
     public TaskList(List<Task> tasks) {
-        this.list = tasks;
+        this.tasks = tasks;
     }
 
     /**
@@ -31,7 +31,7 @@ public class TaskList {
      * @param task task to be added into list of tasks.
      */
     public void add(Task task) {
-        this.list.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -40,7 +40,7 @@ public class TaskList {
      * @param index position of task being deleted in the TaskList.
      */
     public void delete(int index) {
-        this.list.remove(index);
+        tasks.remove(index);
     }
 
     /**
@@ -50,7 +50,7 @@ public class TaskList {
      * @return task at the index position in TaskList.
      */
     public Task get(int index) {
-        return this.list.get(index);
+        return tasks.get(index);
     }
 
     /**
@@ -59,7 +59,7 @@ public class TaskList {
      * @return the number of tasks in the TaskList.
      */
     public int getSize() {
-        return this.list.size();
+        return tasks.size();
     }
 
     /**
@@ -68,6 +68,6 @@ public class TaskList {
      * @return the entire lists of tasks.
      */
     public List<Task> getList() {
-        return this.list;
+        return tasks;
     }
 }

@@ -34,7 +34,7 @@ public class Event extends Task {
 
     private String convertDate() {
         String d1 = "";
-        String[] descriptions = this.date.split(" ");
+        String[] descriptions = date.split(" ");
         for (int i = 0; i < descriptions.length; i++) {
             try {
                 d1 += " " + LocalDate.parse(descriptions[i]).format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
@@ -77,6 +77,6 @@ public class Event extends Task {
      * @return task in the form of a string.
      */
     public String toString() {
-        return "[E][" + getStatusIcon() + "] " + this.description + "(at:" + convertDate() + ")";
+        return "[E][" + getStatusIcon() + "] " + description + "(at:" + convertDate() + ")";
     }
 }
