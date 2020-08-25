@@ -17,7 +17,8 @@ public class Storage {
     private final String pathName;
 
     /**
-     * Sole constructor
+     * Constructor
+     *
      * @param pathName pathname of the file
      */
     Storage(String pathName) {
@@ -27,8 +28,9 @@ public class Storage {
 
     /**
      * Loads data from file specified by pathName into a task list
-     * @return TaskList represented by the data in the file specified by pathName. task list is empty if loading of
-     * data was unsuccessful
+     * Task list is empty if loading of data was unsuccessful
+     *
+     * @return TaskList represented by the data in the file specified by pathName.
      */
     TaskList loadTasks() {
         TaskList tasks = new TaskList();

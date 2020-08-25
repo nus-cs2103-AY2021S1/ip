@@ -5,6 +5,7 @@ import main.java.duke.TaskList;
 import main.java.duke.Ui;
 
 public class ExitCommand extends Command {
+
     @Override
     public void execute(Storage storage, TaskList tasks, Ui ui) {
         storage.resetFile();

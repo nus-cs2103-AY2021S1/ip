@@ -10,7 +10,7 @@ public class Event extends Task {
 
     @Override
     public String[] getDataString() {
-        return new String[] {"deadline", String.valueOf(isComplete), this.description, this.date.toString()};
+        return new String[] {"deadline", String.valueOf(this.isComplete), this.description, this.date.toString()};
     }
 
     @Override

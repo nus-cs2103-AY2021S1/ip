@@ -8,7 +8,7 @@ public class ToDo extends Task {
 
     @Override
     public String[] getDataString() {
-        return new String[] {"todo", String.valueOf(isComplete), description};
+        return new String[] {"todo", String.valueOf(this.isComplete), this.description};
     }
 
     @Override

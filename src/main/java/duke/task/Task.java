@@ -24,7 +24,7 @@ public abstract class Task {
         }
     }
 
-    public void completeTask() {
+    public void setComplete() {
         this.isComplete = true;
     }
 

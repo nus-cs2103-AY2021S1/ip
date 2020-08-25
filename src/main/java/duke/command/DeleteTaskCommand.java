@@ -17,6 +17,7 @@ public class DeleteTaskCommand extends Command {
     @Override
     public void execute(Storage storage, TaskList tasks, Ui ui) {
         Task task = tasks.deleteTaskAt(this.taskIndex);
+
         if (task != null) {
             ui.printDeleteTask(tasks, task);
         } else {

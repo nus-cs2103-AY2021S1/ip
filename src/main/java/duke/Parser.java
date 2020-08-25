@@ -22,6 +22,7 @@ class Parser {
 
     static Command parse(String input) {
 
+        // Parses initial input into prefix and body
         String[] parsedCommand = input.split(" ", 2);
         String prefix = parsedCommand[0];
         String body = null;
@@ -29,6 +30,7 @@ class Parser {
             body = parsedCommand[1];
         }
 
+        // command determined by prefix
         switch(prefix) {
         case("bye"):
             return new ExitCommand();
