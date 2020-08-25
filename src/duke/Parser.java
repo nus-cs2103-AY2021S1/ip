@@ -1,8 +1,10 @@
+package duke;
+
 public class Parser {
     private TaskList taskList;
     private Ui ui;
     
-    Parser(TaskList taskList, Ui ui) {
+    public Parser(TaskList taskList, Ui ui) {
         this.taskList = taskList;
         this.ui = ui;
     }

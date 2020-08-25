@@ -1,6 +1,6 @@
 1 | Event | kappachuu | 2010-02-01T18:00 | 
 1 | Deadline | chuu | 2018-09-10T21:00 | 
 0 | Event | projekt | 2020-09-10T22:30 | 
-0 | Todo | kappa | 
 0 | Event | test | 2008-02-01T12:00 | 
 1 | Deadline | testy | 2020-08-05T15:00 | 
+0 | Todo | kappa | 

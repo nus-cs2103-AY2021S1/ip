@@ -1,10 +1,12 @@
+package duke;
+
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 
 public class Ui {
     PrintStream out;
     
-    Ui() {
+    public Ui() {
         try {
             out = new PrintStream(System.out, true, "UTF-8");
         } catch (UnsupportedEncodingException e) {

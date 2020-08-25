@@ -1,5 +1,8 @@
-import java.io.*;
-import java.util.ArrayList;
+import duke.Parser;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
 import java.util.Scanner;
 
 public class Duke {
