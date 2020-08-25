@@ -12,7 +12,7 @@ public class Duke {
             this.stringStore = storage.load();
 
         } catch (IOException e){
-            UI.printFormattedMessage("ERROR: File Loading error");
+            UI.printFormattedMessage("ERROR: File Loading error!");
         }
     }
 
