@@ -4,7 +4,9 @@ import data.task.Deadline;
 
 import java.time.LocalDateTime;
 
-// Adds a data.tasks.Deadline to the data.task list.
+/**
+ * Adds a Deadline to the task list.
+ */
 public class AddDeadlineCommand extends AddCommand {
 
     public static final String COMMAND_WORD = "deadline";

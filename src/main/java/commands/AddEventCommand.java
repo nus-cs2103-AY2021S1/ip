@@ -4,7 +4,9 @@ import data.task.Event;
 
 import java.time.LocalDateTime;
 
-// Adds a data.tasks.Event to the data.task list.
+/**
+ * Adds an Event to the task list.
+ */
 public class AddEventCommand extends AddCommand {
 
     public static final String COMMAND_WORD = "event";

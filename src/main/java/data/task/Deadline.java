@@ -3,6 +3,9 @@ package data.task;
 //  Deadlines: data.tasks that need to be done before a specific date/time
 //  e.g., submit report by 11/10/2019 5pm
 
+/**
+ * Represents a Deadline task in the task list.
+ */
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {

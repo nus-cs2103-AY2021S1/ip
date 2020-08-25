@@ -4,6 +4,10 @@ import java.time.LocalDateTime;
 
 //  Events: data.tasks that start at a specific time and ends at a specific time
 //  e.g., team project meeting on 2/10/2019 2-4pm
+
+/**
+ * Represents an Event task in the task list.
+ */
 public class Event extends Task {
 
     protected LocalDateTime dateTime;
