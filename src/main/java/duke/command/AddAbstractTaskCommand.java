@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.TaskListHandler;
+import duke.taskListHandler;
 import duke.Ui;
 import duke.task.Task;
 
@@ -27,10 +27,9 @@ public abstract class AddAbstractTaskCommand extends Command {
      * @param storage Storage instance.
      */
     @Override
-    public void execute(TaskListHandler handler, Storage storage) {
-        // Create and store events given in list
+    public void execute(taskListHandler handler, Storage storage) {
         try {
-            ArrayList<Task> taskList = handler.getTaskList();
+            ArrayList<Task> taskList = handler.getTasks();
             handler.addToList(newTask);
             Ui.printSuccess("add", newTask, taskList.size());
             storage.saveToFile(taskList);

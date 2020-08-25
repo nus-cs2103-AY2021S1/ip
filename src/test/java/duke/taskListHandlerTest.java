@@ -53,7 +53,7 @@ class taskListHandlerTest {
     void indent() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        taskListHandler.indent(5);
+        Ui.indent(5);
         String expectedOutput  = "                    ";
         assertEquals(expectedOutput, outContent.toString());
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
@@ -69,11 +69,23 @@ class taskListHandlerTest {
         handler.addToList(new Todo("assignment"));
         handler.addToList(new Deadline("submission", "9pm"));
         handler.printList();
-        String expectedOutput  = "    Here are the tasks in your list:" + System.getProperty("line.separator") +
-                "        1. [E][✘] mega sale (at: 12pm)" + System.getProperty("line.separator") +
-                "        2. [T][✘] assignment" + System.getProperty("line.separator") +
-                "        3. [D][✘] submission (by: 9pm)" + System.getProperty("line.separator") +
-                "    You have 3 task(s) in the list" + System.getProperty("line.separator");
+        String expectedOutput  = " ______________________________________________________________ "
+            + System.getProperty("line.separator")
+            + "*                                                              *"
+            + System.getProperty("line.separator")
+            + "    Here are the tasks in your list:"
+            + System.getProperty("line.separator")
+            +"        1. [E][✘] mega sale (at: 12pm)"
+            + System.getProperty("line.separator")
+            + "        2. [T][✘] assignment"
+            + System.getProperty("line.separator")
+            + "        3. [D][✘] submission (by: 9pm)"
+            + System.getProperty("line.separator")
+            + "    You have 3 task(s) in the list"
+            + System.getProperty("line.separator")
+            + "*______________________________________________________________*"
+            + System.getProperty("line.separator");
+
         assertEquals(expectedOutput, outContent.toString());
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
         System.out.println("Passed: printListTest!");

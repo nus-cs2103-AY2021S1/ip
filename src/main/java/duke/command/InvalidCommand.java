@@ -23,7 +23,6 @@ public class InvalidCommand extends Command {
      */
     @Override
     public void execute(taskListHandler handler, Storage storage) {
-        // Other commands
         try {
             throw new DukeException("\u2639 Oops, I'm sorry but I don't know what "
                 + '"' + invalidInput + '"' + " means :-(");
