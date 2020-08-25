@@ -1,1 +1,11 @@
-todo wow
+todo CS2103
+event tutorial /at 12-1pm
+deadline ip /by thursday
+list
+delete 2
+list
+done 2
+list
+done 1
+list
+bye

@@ -5,3 +5,39 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+--------------------------------------------------
+added: [T][✗] CS2103
+Now you have 1 tasks in the list.
+--------------------------------------------------
+added: [E][✗] tutorial (at: 12-1pm)
+Now you have 2 tasks in the list.
+--------------------------------------------------
+added: [D][✗] ip (by: thursday)
+Now you have 3 tasks in the list.
+--------------------------------------------------
+1.[T][✗] CS2103
+2.[E][✗] tutorial (at: 12-1pm)
+3.[D][✗] ip (by: thursday)
+--------------------------------------------------
+Noted. I've removed this task: 
+[E][✗] tutorial (at: 12-1pm)
+Now you have 2 tasks in the list.
+--------------------------------------------------
+1.[T][✗] CS2103
+2.[D][✗] ip (by: thursday)
+--------------------------------------------------
+Nice! I've marked this task as done: 
+[D][✓] ip (by: thursday)
+Now you have 2 tasks in the list.
+--------------------------------------------------
+1.[T][✗] CS2103
+2.[D][✓] ip (by: thursday)
+--------------------------------------------------
+Nice! I've marked this task as done: 
+[T][✓] CS2103
+Now you have 2 tasks in the list.
+--------------------------------------------------
+1.[T][✓] CS2103
+2.[D][✓] ip (by: thursday)
+--------------------------------------------------
+Bye. Hope to see you again soon!
