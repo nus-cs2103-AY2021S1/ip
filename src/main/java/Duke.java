@@ -3,8 +3,6 @@ import Task.Task;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -27,6 +25,8 @@ public class Duke {
     private final static String DEADLINE_DATE = "/by";
     private final static String EVENT_DATE = "/at";
     private final static DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private final static DateTimeFormatter ACCEPTED_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private final static DateTimeFormatter NEW_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mma");
     private static ArrayList<Task> userInputsList = new ArrayList<>();
 
     public static void main(String[] args) {
