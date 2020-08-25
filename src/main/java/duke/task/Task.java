@@ -55,6 +55,10 @@ public abstract class Task {
 
     public abstract String toStorageString();
 
+    public boolean descriptionContains(String searchTerm) {
+        return description.contains(searchTerm);
+    }
+
     @Override
     public String toString() {
         return printCompletionFlag() + " | " + description;

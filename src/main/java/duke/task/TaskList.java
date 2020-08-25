@@ -72,6 +72,16 @@ public class TaskList {
         }
     }
 
+    public List<Task> findTasks(String args) {
+        ArrayList<Task> results = new ArrayList<>();
+        for (Task t : taskList) {
+            if (t.descriptionContains(args)) {
+                results.add(t);
+            }
+        }
+        return results;
+    }
+
     public final List<Task> getTaskList() {
         return List.of(taskList.toArray(new Task[0]));
     }
