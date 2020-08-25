@@ -1,4 +1,4 @@
-public class Task {
+public class Task { //TODO: convert to abstract class
     private String desc;
     private boolean done;
 
