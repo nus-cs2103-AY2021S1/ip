@@ -219,12 +219,10 @@ public class Duke {
             LocalDate df = LocalDate.parse(dateString);
             return df;
         } catch (Exception e) {
-            // Check if there is even anything after command
-            // Exception thrown if userInput.split() fails
-            // Command has no details, throw exception
+            // Check if string can be recognized as a valid LocalDate
+            // If can't, print out error message
             throw new DukeException(outputBreaker +
-                    "Whoops! I think there is an error in your date for the"
-                    + " command. Sorry but please try again.");
+                    "Whoops! I think there is an error in your date.");
         }
     }
 
@@ -266,11 +264,18 @@ public class Duke {
                 }
                 list.add(t);
             } else if (taskDetails[0].equals("D")) {
-                Task t = new Deadline(taskDetails[2], taskDetails[3]);
-                if (taskDetails[1].equals("1")) {
-                    t.markedDone(true);
+                try {
+                    // Try to add Deadline based off file
+                    Task t = new Deadline(taskDetails[2], checkDate(taskDetails[3]));
+                    if (taskDetails[1].equals("1")) {
+                        t.markedDone(true);
+                    }
+                    list.add(t);
+                } catch(DukeException e) {
+                    //If can't, print out error message
+                    System.out.println(e);
                 }
-                list.add(t);
+
             } else if (taskDetails[0].equals("E")) {
                 Task t = new Event(taskDetails[2], taskDetails[3]);
                 if (taskDetails[1].equals("1")) {
