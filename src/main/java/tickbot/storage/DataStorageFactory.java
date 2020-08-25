@@ -1,4 +1,4 @@
-package storage;
+package tickbot.storage;
 
 public class DataStorageFactory {
     private static class Singleton {

@@ -1,4 +1,4 @@
-package ui.text;
+package tickbot.ui.text;
 
 public class Parser {
     private Runner runner = new Runner();

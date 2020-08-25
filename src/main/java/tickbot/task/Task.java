@@ -1,4 +1,4 @@
-package task;
+package tickbot.task;
 
 import java.time.LocalDate;
 

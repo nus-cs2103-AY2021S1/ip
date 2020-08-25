@@ -1,4 +1,4 @@
-package task;
+package tickbot.task;
 
 public class Todo extends Task {
     public Todo(boolean completed, String content) {

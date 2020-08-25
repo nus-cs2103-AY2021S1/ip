@@ -1,4 +1,4 @@
-package ui.text;
+package tickbot.ui.text;
 
 import java.util.HashMap;
 import java.util.Map;

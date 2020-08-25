@@ -1,8 +1,9 @@
-package task;
+package tickbot.task;
 
 import java.util.List;
-import storage.DataStorage;
-import storage.DataStorageFactory;
+
+import tickbot.storage.DataStorage;
+import tickbot.storage.DataStorageFactory;
 
 public class TaskList {
     private DataStorage storage = DataStorageFactory.getInstance();

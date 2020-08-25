@@ -1,4 +1,4 @@
-package storage;
+package tickbot.storage;
 
 import java.io.*;
 import java.time.DateTimeException;
@@ -10,10 +10,11 @@ import java.util.Objects;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
-import exception.CorruptedDataException;
 import net.harawata.appdirs.AppDirs;
 import net.harawata.appdirs.AppDirsFactory;
-import task.*;
+
+import tickbot.exception.CorruptedDataException;
+import tickbot.task.*;
 
 public class DataStorage {
     private static final String DATA_STORAGE_FILE_NAME = "tasks.csv";

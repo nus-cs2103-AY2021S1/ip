@@ -1,4 +1,6 @@
-import ui.text.TextUi;
+package tickbot;
+
+import tickbot.ui.text.TextUi;
 
 public class Tickbot {
     public static void main(String[] args) {

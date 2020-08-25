@@ -1,4 +1,4 @@
-package ui.text;
+package tickbot.ui.text;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiFunction;
 
-import task.*;
+import tickbot.task.*;
 
 public class Runner {
     private TaskList tasks = new TaskList();

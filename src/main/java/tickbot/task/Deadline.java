@@ -1,15 +1,15 @@
-package task;
+package tickbot.task;
 
 import java.time.LocalDate;
 
-public class Event extends Task {
-    public Event(boolean completed, String content, LocalDate time) {
+public class Deadline extends Task {
+    public Deadline(boolean completed, String content, LocalDate time) {
         super(completed, content, time);
     }
 
     @Override
     public String getTaskType() {
-        return "E";
+        return "D";
     }
 
     @Override
@@ -17,6 +17,6 @@ public class Event extends Task {
         String mark = getCompleteMark();
         String content = getContent();
         LocalDate time = getTime();
-        return String.format("[E][%s] %s (at: %s)", mark, content, time);
+        return String.format("[D][%s] %s (by: %s)", mark, content, time);
     }
 }
