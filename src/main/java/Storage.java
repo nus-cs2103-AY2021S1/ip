@@ -1,5 +1,4 @@
 
-//import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.BufferedReader;
@@ -12,22 +11,15 @@ import java.nio.file.Files;
 
 public class Storage {
 
-    // private File file;
-    //private final Path path;
-    //private Path dir;
     private File file;
 
     public Storage() {
-        // file = new File("../data/list.txt");
         Path path = Paths.get("data/");
         try {
             Files.createDirectories(path);
-            // Files.createFile(dir);
             file = new File("data/list.txt");
             file.createNewFile();
-            // System.out.println("path created");
         } catch (FileAlreadyExistsException e) {
-            //System.out.println("already exists");
             // the directory already exists.
         } catch (IOException e) {
             System.out.println("ioexception");
@@ -51,10 +43,6 @@ public class Storage {
     private Task reformat(String s) {
         String[] arr = s.split("-----");
         Task t = null;
-        // System.out.println(s);
-        // for (int i = 0; i < arr.length; i++) {
-        //     System.out.println(arr[i] + " is " + i + "th index of split");
-        // }
         switch (arr[0]) {
         
         case "T":
@@ -96,7 +84,6 @@ public class Storage {
             BufferedReader br = new BufferedReader(fr);
             String currLine = br.readLine();
             while (currLine != null) {
-                // System.out.println(currLine);
                 p.addTask(this.reformat(currLine));
                 currLine = br.readLine();
             }

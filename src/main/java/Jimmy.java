@@ -1,13 +1,11 @@
 
 public class Jimmy {
-    
-    //private Parser parser;
+
     private final Ui ui;
     private final Storage storage;
     private final TaskList planner;
 
     public Jimmy() {
-        //this.parser = new Parser();
         this.ui = new Ui();
         this.storage = new Storage();
         this.planner = new TaskList();

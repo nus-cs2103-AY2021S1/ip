@@ -44,7 +44,6 @@ public class TaskList {
             int i = 1;
             msg = ((i) + ". " + this.getTask(i) + "\n");
             for (Task t: this.lst) {
-                // Task t = this.list[i];
                 if (i == 1) {
                     i++;
                     continue;
