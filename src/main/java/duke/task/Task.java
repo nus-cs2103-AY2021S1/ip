@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Tasks that the user input
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -36,6 +36,8 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public abstract boolean haveKeyword(String keyword);
 
     /**
      * Returns task description and its status icon.

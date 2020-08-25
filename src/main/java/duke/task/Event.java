@@ -35,6 +35,10 @@ public class Event extends Task {
         this.at = LocalDate.parse(at.trim());
     }
 
+    public boolean haveKeyword(String keyword) {
+        return description.contains(keyword) || at.format(DateTimeFormatter.ofPattern("d MMM yyyy")).contains(keyword);
+    }
+
     /**
      * Overrides toString method of Task class
      *
