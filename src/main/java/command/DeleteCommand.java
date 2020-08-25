@@ -1,7 +1,7 @@
 package main.java.command;
 
-import main.java.misc.Ui;
 import main.java.exception.InvalidArgumentException;
+import main.java.misc.Ui;
 import main.java.task.Task;
 import main.java.task.TaskList;
 

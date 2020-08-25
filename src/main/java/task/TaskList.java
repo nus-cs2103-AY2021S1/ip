@@ -1,8 +1,8 @@
 package main.java.task;
 
+import main.java.exception.InvalidArgumentException;
 import main.java.misc.Parser;
 import main.java.misc.Storage;
-import main.java.exception.InvalidArgumentException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,19 +26,21 @@ public class TaskList {
                 : Parser.stringToTime(datetimeString);
 
         switch (tokens.get(0)) {
-            case "todo":
-                task = new Todo(tokens.get(1).trim());
-                break;
-            case "deadline":
-                task = new Deadline(tokens.get(1).trim(), datetime);
-                break;
-            case "event":
-                task = new Event(tokens.get(1).trim(), datetime);
-                break;
-            default:
-                throw new Error("An unexpected error has occurred");
+        case "todo":
+            task = new Todo(tokens.get(1).trim());
+            break;
+        case "deadline":
+            task = new Deadline(tokens.get(1).trim(), datetime);
+            break;
+        case "event":
+            task = new Event(tokens.get(1).trim(), datetime);
+            break;
+        default:
+            throw new Error("An unexpected error has occurred");
         }
-        if (tokens.get(3).equals("1")) task.markAsDone();
+        if (tokens.get(3).equals("1")) {
+            task.markAsDone();
+        }
         database.add(task);
         return task;
     }
@@ -87,7 +89,7 @@ public class TaskList {
      */
     public void initialize() throws InvalidArgumentException {
         List<List<String>> data = Storage.readFile();
-        for (List<String> tokens: data) {
+        for (List<String> tokens : data) {
             addTask(tokens);
         }
     }
@@ -103,7 +105,9 @@ public class TaskList {
      * Counts the number of current tasks in the list.
      * @return the number of current tasks.
      */
-    public int count() { return database.size();}
+    public int count() {
+        return database.size();
+    }
 
     /**
      * Clears all tasks in the list.

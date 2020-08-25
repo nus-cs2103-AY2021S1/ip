@@ -22,7 +22,9 @@ public class Task {
     /**
      * Marks the task as finished.
      */
-    public void markAsDone() {isDone = true;}
+    public void markAsDone() {
+        isDone = true;
+    }
 
     /**
      * Serializes the task to be store in the disk.
@@ -33,7 +35,9 @@ public class Task {
                 time.getMonthValue() + "/" +
                 time.getYear() + " " +
                 (time.getHour() * 100 + time.getMinute());
-        if (time.equals(LocalDateTime.MIN)) datetimeString = "null";
+        if (time.equals(LocalDateTime.MIN)) {
+            datetimeString = "null";
+        }
         return type + "%%%" + description + "%%%" + datetimeString + "%%%" + (isDone ? 1 : 0);
     }
 
