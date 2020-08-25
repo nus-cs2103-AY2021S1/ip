@@ -29,7 +29,7 @@ public class DeleteCommand extends UserCommand {
                 ls.remove(itemToBeDeleted - 1);
                 System.out.println("Noted. I've removed this task:");
                 System.out.println(item.toString());
-                System.out.format("Now you have %d duke.tasks in the list\n", ls.size());
+                System.out.format("Now you have %d tasks in the list\n", ls.size());
 
 //                ArrayListToTextConverter.convertArrayListToText(ls);
 
