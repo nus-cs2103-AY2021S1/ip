@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents the events that the user inputs
+ * Represents the events that the user inputs.
  */
 public class Events extends Task {
 
