@@ -7,6 +7,6 @@ public class DukeException extends Exception {
 
     @Override
     public String getMessage() {
-        return "********ERROR********\n" + this.message + "\n********ERROR********";
+        return "********ERROR********\n" + "OOPS!!! " + this.message + "\n********ERROR********";
     }
 }

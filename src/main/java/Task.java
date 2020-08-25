@@ -15,6 +15,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public String recordString() {
+        return "";
+    }
+
     @Override
     public String toString() {
         return getStatusIcon() + " " + this.description;
