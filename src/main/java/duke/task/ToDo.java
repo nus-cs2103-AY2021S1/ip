@@ -4,13 +4,8 @@ import duke.exceptions.DukeException;
 
 public class ToDo extends Task {
 
-    public ToDo(String description) {
+    private ToDo(String description) {
         super(description);
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
     }
 
     public static ToDo createTask(String details) throws DukeException {
@@ -40,5 +35,10 @@ public class ToDo extends Task {
         } else {
             throw new DukeException("Something doesn't seem right...");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
     }
 }

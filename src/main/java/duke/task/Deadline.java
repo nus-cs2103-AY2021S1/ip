@@ -30,11 +30,6 @@ public class Deadline extends Task {
         }
     }
 
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateParser.parseLocalDateTime(this.dateTime) + ")";
-    }
-
     public String encode() {
         return String.format("D|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(this.dateTime), super.description);
     }
@@ -55,5 +50,10 @@ public class Deadline extends Task {
         } else {
             throw new DukeException("Something doesn't seem right...");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " + DateParser.parseLocalDateTime(this.dateTime) + ")";
     }
 }

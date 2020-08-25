@@ -48,11 +48,15 @@ public class TaskList implements Iterable<Task> {
     }
 
     public String listItems() {
-        String list = "Here are the tasks in your list:\n";
-        for (int i = 0; i < this.store.size(); i++) {
-            list += String.format("%d.%s\n", i + 1, this.store.get(i).toString());
+        if (this.store.size() == 0) {
+            return "Congratulations! You don't have any tasks left to do.";
+        } else {
+            String list = "Here are the tasks in your list:\n";
+            for (int i = 0; i < this.store.size(); i++) {
+                list += String.format("%d.%s\n", i + 1, this.store.get(i).toString());
+            }
+            return list;
         }
-        return list;
     }
 
     public int taskCount() {

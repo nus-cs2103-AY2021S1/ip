@@ -31,11 +31,6 @@ public class Event extends Task {
         }
     }
 
-    @Override
-    public String toString() {
-        return "[E]" +  super.toString() + " (at: " + DateParser.parseLocalDateTime(this.dateTime) + ")";
-    }
-
     public String encode() {
         return String.format("E|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(this.dateTime), super.description);
     }
@@ -57,4 +52,10 @@ public class Event extends Task {
             throw new DukeException("Something doesn't seem right...");
         }
     }
+
+    @Override
+    public String toString() {
+        return "[E]" +  super.toString() + " (at: " + DateParser.parseLocalDateTime(this.dateTime) + ")";
+    }
+
 }
