@@ -8,6 +8,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the file used for storing user data.
+ */
 public class Storage {
     protected final static String SRC = System.getProperty("user.dir");
     protected final static Path PATH = Paths.get(SRC, "data", "duke.txt");
@@ -17,10 +20,11 @@ public class Storage {
         this.hasDirectory = Files.exists(PATH);
     }
 
-    public boolean hasDir() {
-        return this.hasDirectory;
-    }
-
+    /**
+     * Save the TaskList data to the storage file.
+     * @param tasks list of tasks given by the user
+     * @throws DukeException if the storage file is not found
+     */
     public void save(ArrayList<Task> tasks) throws DukeException {
         if (this.hasDirectory) {
             try {
@@ -99,6 +103,11 @@ public class Storage {
         return new TaskList();
     }
 
+    /**
+     * Loads TaskList data from the storage file, and returns it.
+     * Creates a new storage file, and returns an empty TaskList if the file does not exist.
+     * @return a TaskList
+     */
     public TaskList loadFile() {
         if (this.hasDirectory) {
             try {

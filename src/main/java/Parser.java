@@ -1,6 +1,15 @@
 import java.util.HashSet;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
+    /**
+     * Parses user input and passes the input to command for execution.
+     * @param userInput full user input string
+     * @return the command based on the user input
+     * @throws DukeException if the command is not recognised or the description of the command is empty
+     */
     public static Command parseCommand(String userInput)
         throws DukeException{
         String[] input = userInput.split(" ", 2);

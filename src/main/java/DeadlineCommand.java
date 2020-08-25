@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Adds a deadline task to the list of tasks.
+ */
 public class DeadlineCommand extends Command {
     public final static String COMMAND_WORD = "deadline";
 

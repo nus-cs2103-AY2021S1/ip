@@ -1,3 +1,6 @@
+/**
+ * Represents a task from user input.
+ */
 public class Task {
     protected String description;
     protected String type;
@@ -13,6 +16,10 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Marks a task as done.
+     * @return a String message informing the user of the completed task
+     */
     public String markAsDone() {
         this.isDone = true;
         String message = "Nice! I've marked this task as done:";
