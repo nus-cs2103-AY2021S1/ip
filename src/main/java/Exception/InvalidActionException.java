@@ -1,4 +1,4 @@
-package Exception;
+package exception;
 
 public class InvalidActionException extends DukeException {
     private static final String DESCRIPTION = "The action is invalid.";

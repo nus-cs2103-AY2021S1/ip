@@ -1,4 +1,4 @@
-package Task;
+package task;
 
 public class ToDoTask extends Task {
 
