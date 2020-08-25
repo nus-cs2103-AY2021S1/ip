@@ -1,14 +1,21 @@
 todo read book
-deadline return book /by 6 Sep 2020
-event meeting /at 23/7/2020 2:00 PM
-event meet /at 1/13/2020
-done 1
+deadline return book /by 6 September 2020
+event party /at 7/10/2020 4:00 pm
+deadline finish CS2103 /by 25-8-2020 2359
 list
-blah
+delete 6
+done 4
+find book
 todo
-deadline do something
-event meeting /at
-event /at 1-1-2020 14:00
-done 10
-done done
+deadline finish something /by
+event /at 1/1/2020
+event concert /at 13/13/2020
+find
+done
+done 100
+done task
+delete
+delete 100
+delete task
+hello
 bye

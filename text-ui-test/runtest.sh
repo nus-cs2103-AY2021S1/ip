@@ -12,11 +12,8 @@ then
     rm ACTUAL.TXT
 fi
 
-# delete data from prevous run
-if [ -e "./data/duke.txt" ]
-then
-    rm ./data/duke.txt
-fi
+# write initial data into file
+cp ./data/testData.txt ./data/duke.txt
 
 # compile the code into the bin folder, terminates if error occurred
 
