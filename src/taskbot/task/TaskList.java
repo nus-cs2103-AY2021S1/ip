@@ -208,7 +208,9 @@ public class TaskList {
     }
 
     /**
-     * Lists the upcoming tasks.
+     * Lists the upcoming tasks in the given time frame.
+     * Tasks without time limits are included as well.
+     *
      * @param days Number of days ahead to check for tasks.
      */
     public void getUpcoming(int days) {
@@ -233,8 +235,45 @@ public class TaskList {
             }
             sb.append(i + 1).append(". ").append(task).append("\n");
         }
-        //Prints the string
+        //Prints the list of tasks that fall within the timeframe
         System.out.print(sb.toString());
     }
 
+    /**
+     * Finds tasks containing the given keyword.
+     * This method ignores casing.
+     *
+     * @param keyword A word within a task's description
+     */
+    public void findTasks(String keyword) {
+        //If tasks is empty
+        if (tasks.size() == 0) {
+            System.out.println("You currently have no tasks pending.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
+        //size of the tasks
+        int size = tasks.size();
+        //Flag for when a match is found
+        boolean found = false;
+        //Builds the list of tasks
+        for (int i = 0; i < size; i++) {
+            Task task = tasks.get(i);
+            if (task.getTask().toLowerCase().contains(keyword)) {
+                if (!found) {
+                    found = true;
+                }
+                sb.append(i + 1).append(". ").append(task).append("\n");
+            }
+        }
+
+        if (!found) {
+            //Printed if no matches found
+            System.out.println("Sorry, that keyword did not return any results. Please try another.");
+        } else {
+            //Prints the lists of tasks found matching the keyword
+            System.out.print(sb.toString());
+        }
+    }
 }
