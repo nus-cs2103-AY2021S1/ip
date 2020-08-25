@@ -4,11 +4,22 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The class Deadlines denotes a Deadlines task.
+ *
+ * @author Alvin Chee
+ */
 public class Deadlines extends Task {
     private String by;
     private LocalDateTime localDateTime;
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a");
 
+    /**
+     * Constructs a Deadlines task
+     *
+     * @param taskInfo  Task description information.
+     * @param by  String description of time.
+     */
     public Deadlines(String taskInfo , String by) {
         super(taskInfo, TaskType.DEADLINE);
         this.by = by;
@@ -21,10 +32,20 @@ public class Deadlines extends Task {
 
     }
 
+    /**
+     * Returns string description of deadline.
+     *
+     * @return String description of deadline.
+     */
     public String returnTime() {
         return this.by;
     }
 
+    /**
+     * Return a done deadline task.
+     *
+     * @return A done deadline task.
+     */
     @Override
     public Deadlines doneTask() {
         super.done = true;
@@ -36,4 +57,3 @@ public class Deadlines extends Task {
         return String.format("%s (by: %s)", super.toString(), dateTimeFormatter.format(this.localDateTime));
     }
 }
-
