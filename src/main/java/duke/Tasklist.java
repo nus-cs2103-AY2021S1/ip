@@ -6,11 +6,15 @@ import java.util.ArrayList;
 
 public class Tasklist {
 
+    private List<Task> taskList;
     private Storage storage;
-    List<Task> taskList;
 
     public Tasklist(Storage storage) {
-       this.storage = storage;
+        this.storage = storage;
+    }
+
+    public void clearList() {
+        taskList = new ArrayList<>();
     }
 
     public void loadList() throws IOException {

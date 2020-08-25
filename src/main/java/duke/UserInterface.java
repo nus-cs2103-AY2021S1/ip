@@ -4,44 +4,44 @@ public class UserInterface {
 
     private static final String LOGO =
             "       \\:.             .:/\n" +
-            "        \\``._________.''/ \n" +
-            "         \\             / \n" +
-            " .--.--, / .':.   .':. \\\n" +
-            "/__:  /  | '::' . '::' |\n" +
-            "   / /   |`.   ._.   .'|\n" +
-            "  / /    |.'         '.|\n" +
-            " /___-_-,|.\\  \\   /  /.|\n" +
-            "      // |''\\.;   ;,/ '|\n" +
-            "      `==|:=         =:|\n" +
-            "         `.          .'\n" +
-            "           :-._____.-:\n" +
-            "          `''       `''\n";
+                    "        \\``._________.''/ \n" +
+                    "         \\             / \n" +
+                    " .--.--, / .':.   .':. \\\n" +
+                    "/__:  /  | '::' . '::' |\n" +
+                    "   / /   |`.   ._.   .'|\n" +
+                    "  / /    |.'         '.|\n" +
+                    " /___-_-,|.\\  \\   /  /.|\n" +
+                    "      // |''\\.;   ;,/ '|\n" +
+                    "      `==|:=         =:|\n" +
+                    "         `.          .'\n" +
+                    "           :-._____.-:\n" +
+                    "          `''       `''\n";
 
     private static final String thunderbolt =
             "                  .-~*~--,.   .-.\n" +
-            "          .-~-. ./OOOOOOOOO\\.'OOO`9~~-.\n" +
-            "        .`OOOOOO.OOM.OLSONOOOOO@@OOOOOO\\\n" +
-            "       /OOOO@@@OO@@@OO@@@OOO@@@@@@@@OOOO`.\n" +
-            "       |OO@@@WWWW@@@@OOWWW@WWWW@@@@@@@OOOO).\n" +
-            "     .-'OO@@@@WW@@@W@WWWWWWWWOOWW@@@@@OOOOOO}\n" +
-            "    /OOO@@O@@@@W@@@@@OOWWWWWOOWOO@@@OOO@@@OO|\n" +
-            "   lOOO@@@OO@@@WWWWWWW\\OWWWO\\WWWOOOOOO@@@O.'\n" +
-            "    \\OOO@@@OOO@@@@@@OOW\\     \\WWWW@@@@@@@O'.\n" +
-            "     `,OO@@@OOOOOOOOOOWW\\     \\WWWW@@@@@@OOO)\n" +
-            "      \\,O@@@@@OOOOOOWWWWW\\     \\WW@@@@@OOOO.'\n" +
-            "        `~c~8~@@@@WWW@@W\\       \\WOO|\\UO-~'\n" +
-            "             (OWWWWWW@/\\W\\    ___\\WO)\n" +
-            "               `~-~''     \\   \\WW=*'\n" +
-            "                         __\\   \\\n" +
-            "                         \\      \\\n" +
-            "                          \\    __\\\n" +
-            "                           \\  \\\n" +
-            "                            \\ \\\n" +
-            "                             \\ \\\n" +
-            "                              \\\\\n" +
-            "                               \\\\\n" +
-            "                                \\\n" +
-            "                                 \\\n";
+                    "          .-~-. ./OOOOOOOOO\\.'OOO`9~~-.\n" +
+                    "        .`OOOOOO.OOM.OLSONOOOOO@@OOOOOO\\\n" +
+                    "       /OOOO@@@OO@@@OO@@@OOO@@@@@@@@OOOO`.\n" +
+                    "       |OO@@@WWWW@@@@OOWWW@WWWW@@@@@@@OOOO).\n" +
+                    "     .-'OO@@@@WW@@@W@WWWWWWWWOOWW@@@@@OOOOOO}\n" +
+                    "    /OOO@@O@@@@W@@@@@OOWWWWWOOWOO@@@OOO@@@OO|\n" +
+                    "   lOOO@@@OO@@@WWWWWWW\\OWWWO\\WWWOOOOOO@@@O.'\n" +
+                    "    \\OOO@@@OOO@@@@@@OOW\\     \\WWWW@@@@@@@O'.\n" +
+                    "     `,OO@@@OOOOOOOOOOWW\\     \\WWWW@@@@@@OOO)\n" +
+                    "      \\,O@@@@@OOOOOOWWWWW\\     \\WW@@@@@OOOO.'\n" +
+                    "        `~c~8~@@@@WWW@@W\\       \\WOO|\\UO-~'\n" +
+                    "             (OWWWWWW@/\\W\\    ___\\WO)\n" +
+                    "               `~-~''     \\   \\WW=*'\n" +
+                    "                         __\\   \\\n" +
+                    "                         \\      \\\n" +
+                    "                          \\    __\\\n" +
+                    "                           \\  \\\n" +
+                    "                            \\ \\\n" +
+                    "                             \\ \\\n" +
+                    "                              \\\\\n" +
+                    "                               \\\\\n" +
+                    "                                \\\n" +
+                    "                                 \\\n";
 
     private static final String BORDER = "      ";
 
