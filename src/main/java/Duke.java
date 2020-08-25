@@ -1,9 +1,47 @@
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        // Initialise Task List
+        TaskList taskList = new TaskList();
+        
+        // Load from file
+        File dataFile = new File("data/duke.txt");
+        
+
+        try {
+            Scanner fileScanner = new Scanner(dataFile);
+            
+            while (fileScanner.hasNextLine()) {
+                String nextLine = fileScanner.nextLine();
+                if (!nextLine.isEmpty()) {
+                    String[] tokens = nextLine.split(" [|] ");
+
+                    boolean isDone = !tokens[0].equals("0");
+
+                    if (tokens[1].equals("Todo")) {
+                        taskList.addTask(new Todo(tokens[2], isDone));
+                    } else if (tokens[1].equals("Event")) {
+                        taskList.addTask(new Event(tokens[2], isDone, tokens[3]));
+                    } else if (tokens[1].equals("Deadline")) {
+                        taskList.addTask(new Deadline(tokens[2], isDone, tokens[3]));
+                    }
+                }
+            }
+            fileScanner.close();
+            
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+            if (!dataFile.getParentFile().mkdirs()) { System.out.println("ERROR");}
+//            try {
+//                dataFile.createNewFile();
+//            } catch (IOException ioException) {
+//                ioException.printStackTrace();
+//            }
+        }
+        
         // Initialise booleans and scanners
         boolean quitProgram = false;
         Scanner inputScanner = new Scanner(System.in);
@@ -14,11 +52,7 @@ public class Duke {
         } catch (UnsupportedEncodingException e) {
             out = new PrintStream(System.out, true);
         }
-
-
-        // Initialise Task List
-        TaskList taskList = new TaskList();
-
+        
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -127,6 +161,31 @@ public class Duke {
 
         // quit
         inputScanner.close();
+        
+        // TODO: save to file
+        // first we write to a temporary file
+//        File tempFile = new File("data/duke.txt");
+        ArrayList<Task> tasksArray = taskList.getAllTasks();
+        String fileOutput = "";
+        for (Task task: tasksArray) {
+            for (String string: task.serialize()) {
+                fileOutput = fileOutput + string + " | ";
+            }
+            fileOutput = fileOutput + "\n";
+        }
+
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("data/duke.txt"));
+            writer.write(fileOutput);
+            writer.close();
+
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         out.println("See you space cowboy!");
     }
 }
