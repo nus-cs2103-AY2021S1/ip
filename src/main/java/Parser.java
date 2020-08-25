@@ -1,7 +1,17 @@
 import java.time.LocalDate;
 
+/**
+ * Handles parsing of user inputs.
+ */
 public class Parser {
-    
+
+    /**
+     * Stores the parsed user inputs and prints response messages for user.
+     * @param userInput User input read by scanner.
+     * @param lst List of tasks.
+     * @param ui Ui object that deals with user interaction.
+     * @param storage Storage object that deals with loading tasks from the file and saving tasks in the file.
+     */
     public static void parse(String userInput, TaskList lst, Ui ui, Storage storage) {
         String[] strArr = userInput.split(" ");
         try {
@@ -82,11 +92,15 @@ public class Parser {
                 }
             }
         } catch (Exception e) {
-            System.out.println("_____________________________________________________\n" + e.toString() +
-                    "\n_____________________________________________________");
+            ui.showError(e.toString());
         }
     }
 
+    /**
+     * Checks whether has invalid user inputs.
+     * @param arr Array of user input.
+     * @throws DukeException Exception specific to Duke.
+     */
     public static void check(String[] arr) throws DukeException {
         if (arr.length == 1 && (arr[0].equals("todo") || arr[0].equals("deadline") || arr[0].equals("event") ||
                 arr[0].equals("done") || arr[0].equals("delete"))) {

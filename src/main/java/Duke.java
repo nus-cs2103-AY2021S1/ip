@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Represents Duke bot and contains main information of how it works.
+ */
 public class Duke {
     public static final String PATH = "data/duke.txt";
 
@@ -8,6 +11,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates Duke object.
+     * @param filePath Pathname of the file that stores tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Reads user input then acts accordingly and stores user data.
+     */
     public void run() {
         ui.greet();
         Scanner sc = new Scanner(System.in);
@@ -26,6 +36,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Scans and executes user inputs.
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         new Duke(PATH).run();
     }

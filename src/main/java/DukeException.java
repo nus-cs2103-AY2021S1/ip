@@ -1,6 +1,9 @@
+/**
+ * Handles incorrect user inputs.
+ */
 public class DukeException extends Exception {
     protected String type;
-
+    
     public DukeException(String type) {
         this.type = type;
     }

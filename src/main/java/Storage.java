@@ -2,13 +2,25 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private String filePath;
-    
+
+    /**
+     * Creates a Storage object.
+     * @param filePath Pathname of the file that stores tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads file from hard disk when Duke bot is started.
+     * @return List of tasks.
+     * @throws IOException Input error.
+     */
     public ArrayList<Task> loadFile() throws IOException {
         File file = new File(filePath);
         ArrayList<Task> taskList = new ArrayList<>();
@@ -37,6 +49,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Save the tasks in the hard disk automatically whenever the task list changes.
+     * @param tasks List of tasks.
+     * @throws IOException Input error.
+     */
     public void writeFile(ArrayList<Task> tasks) throws IOException {
         FileWriter writer = new FileWriter(filePath);
         for(Task task : tasks) {

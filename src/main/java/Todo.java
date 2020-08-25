@@ -1,13 +1,24 @@
+/**
+ * Represents a task without any time attached to it.
+ */
 public class Todo extends Task {
-    protected String doneState;
-    
+
+    /**
+     * Creates To-do object. 
+     * @param description To-do description.
+     */
     public Todo(String description) {
         super(description);
     }
-    
-    public Todo(String doneState, String description) {
+
+    /**
+     * Creates To-do object.
+     * @param done Done state of task.
+     * @param description To-do description.
+     */
+    public Todo(String done, String description) {
         super(description);
-        this.isDone = doneState.equals("1");
+        this.isDone = done.equals("1");
     }
 
     @Override
