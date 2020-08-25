@@ -12,9 +12,11 @@ public class Tasklist {
     public Tasklist(Storage storage) {
        this.storage = storage;
     }
+
     public void loadList() throws IOException {
         this.taskList = storage.load();
     }
+
     public void updateStorage() throws IOException {
         this.storage.writeData(this.taskList);
     }
@@ -34,6 +36,7 @@ public class Tasklist {
     public Task get(int index) {
         return taskList.get(index);
     }
+
     public int getTaskSize() {
         return this.taskList.size();
     }
