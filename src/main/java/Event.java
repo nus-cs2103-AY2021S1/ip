@@ -12,11 +12,11 @@ public class Event extends Task {
     private LocalTime startTime;
     private LocalTime endTime;
 
-    public Event(String description, LocalDate date, LocalTime start, LocalTime end) {
+    public Event(String description, LocalDate eventDate, LocalTime startTime, LocalTime endTime) {
         super(description);
-        this.eventDate = date;
-        this.startTime = start;
-        this.endTime = end;
+        this.eventDate = eventDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**

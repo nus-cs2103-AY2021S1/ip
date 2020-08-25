@@ -8,7 +8,6 @@ import java.time.format.DateTimeParseException;
  * to various components for ease of processing.
  */
 public class Parser {
-
     /**
      * Returns an array of string where the commands for tasks have been broken
      * into its various parts for ease of processing/
@@ -21,13 +20,14 @@ public class Parser {
      * @throws NoDescriptionException If there is no task description for addition of tasks.
      * @throws NotTaskException If an invalid command is being input.
      */
-    public String[] parse(String command) throws InvalidDateAndTimeException, InvalidTaskNumber, NoDescriptionException, NotTaskException {
+    public String[] parse(String command) throws InvalidDateAndTimeException,
+            InvalidTaskNumber, NoDescriptionException, NotTaskException {
         String[] cmd = command.split(" ");
         switch(cmd[0].toLowerCase()) {
-        case("bye"):
-        case("list"):
+        case "bye":
+        case "list":
             return cmd;
-        case("print"):
+        case "print":
             //check if is valid date
             try {
                 LocalDate.parse(cmd[1], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -35,22 +35,22 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 throw new InvalidDateAndTimeException();
             }
-        case("done"):
-        case("delete"):
-            //check if an integer is given for taskNum
+        //check if an integer is given for taskNum
+        case "done":
+        case "delete":
             try {
                 Integer.parseInt(cmd[1]);
                 return cmd;
             } catch (NumberFormatException e) {
                 throw new InvalidTaskNumber();
             }
-        case("todo"):
+        case "todo":
             if (cmd.length < 2) {
                 throw new NoDescriptionException(cmd[0]);
             } else {
                 return new String[]{cmd[0], command.replaceFirst(cmd[0] + " ", "")};
             }
-        case("deadline"):
+        case "deadline":
             if (cmd.length < 2) {
                 throw new NoDescriptionException(cmd[0]);
             } else {
@@ -60,12 +60,12 @@ public class Parser {
                     LocalTime.parse(cmd[cmd.length - 1], DateTimeFormatter.ofPattern("HHmm"));
                     String[] splitBySlash = command.split("/");
                     return new String[]{cmd[0], splitBySlash[0].replaceFirst(cmd[0] + " ", ""),
-                                        cmd[cmd.length - 2], cmd[cmd.length - 1]};
+                            cmd[cmd.length - 2], cmd[cmd.length - 1]};
                 } catch (DateTimeParseException e){
                     throw new InvalidDateAndTimeException();
                 }
             }
-        case("event"):
+        case "event":
             if (cmd.length < 2) {
                 throw new NoDescriptionException(cmd[0]);
             } else {

@@ -35,36 +35,36 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 String[] processedCommand = parser.parse(fullCommand);
                 switch(processedCommand[0].toLowerCase()) {
-                case("bye"):
+                case "bye":
                     isExit = true;
                     break;
-                case("list"):
+                case "list":
                     ui.showListTasks(tasks.getAllTasks());
                     break;
-                case("print"):
+                case "print":
                     ui.showSameDateTasks(tasks.getSameDateTasks(processedCommand[1]));
                     break;
-                case("done"):
+                case "done":
                     Task doneTask = tasks.markDone(Integer.parseInt(processedCommand[1]));
                     ui.showDoneTask(doneTask);
                     break;
-                case("delete"):
+                case "delete":
                     Task deletedTask = tasks.deleteTask(Integer.parseInt(processedCommand[1]));
                     ui.showDeleteTask(deletedTask);
                     break;
-                case("todo"):
+                case "todo":
                     Task todoTsk = new Todo(processedCommand[1]);
                     tasks.addTask(todoTsk);
                     ui.showAddTask(todoTsk);
                     break;
-                case("deadline"):
+                case "deadline":
                     Task deadlineTsk = new Deadline(processedCommand[1],
                             LocalDate.parse(processedCommand[2], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                             LocalTime.parse(processedCommand[3], DateTimeFormatter.ofPattern("HHmm")));
                     tasks.addTask(deadlineTsk);
                     ui.showAddTask(deadlineTsk);
                     break;
-                case("event"):
+                case "event":
                     Task eventTsk = new Event(processedCommand[1],
                             LocalDate.parse(processedCommand[2], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                             LocalTime.parse(processedCommand[3], DateTimeFormatter.ofPattern("HHmm")),
