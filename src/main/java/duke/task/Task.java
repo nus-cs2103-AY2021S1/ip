@@ -25,6 +25,10 @@ public class Task {
         return firstWord;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     public boolean isTodo() {
         return this.getFirstWord().equals("todo");
     }
@@ -130,6 +134,25 @@ public class Task {
         Event e = new Event(this.description, this.getDate());
         e.isDone = this.isDone;
         return e;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Task)) {
+            return false;
+        }
+
+        Task t = (Task) o;
+
+        if (this.description.equals(t.description) && this.isDone == t.isDone) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

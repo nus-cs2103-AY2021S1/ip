@@ -19,6 +19,7 @@ public class AddCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task t = new Task(userInput);
         try {
