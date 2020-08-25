@@ -30,7 +30,7 @@ public class Deadline extends Task{
 
     @Override
     public String encode() {
-        String encoded = "deadline " + item + " \\/by " + time;
+        String encoded = "deadline " + item + " /by " + time;
         if(this.done){
             encoded = encoded + "\n" + "done";
         }

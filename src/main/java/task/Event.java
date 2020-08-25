@@ -30,7 +30,7 @@ public class Event extends Task{
 
     @Override
     public String encode() {
-        String encoded = "event " + item + " \\/at " + time;
+        String encoded = "event " + item + " /at " + time;
         if(this.done){
             encoded = encoded + "\n" + "done";
         }

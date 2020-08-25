@@ -3,3 +3,5 @@ done
 todo eggs
 todo eggs
 done
+deadline egges /by 7pm
+done
