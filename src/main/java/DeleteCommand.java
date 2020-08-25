@@ -1,26 +1,23 @@
-import java.util.List;
-
 public class DeleteCommand implements Command {
     int index; // 0-based
-    List<Task> list;
 
-    public DeleteCommand(int index, List<Task> list) throws DukeException {
-        if(index < 0) {
-            throw new DukeException("That is not a valid item number.");
-        }
-        if(index >= list.size()) {
-            throw new DukeException("There are only " + list.size() +  " item(s) in the list, try entering a valid item number");
-        }
+    public DeleteCommand(int index) {
         this.index = index;
-        this.list = list;
     }
 
     @Override
-    public void execute() {
-        Task task = list.get(index);
-        list.remove(index);
-        new Duke().print("The following task has been removed successfully:", "\t" + task.toString(),
-                         "Now you have " + list.size() + " items(s) left in the list.");
-        new Duke().writeFile(list);
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if(index < 0) {
+            throw new DukeException("That is not a valid item number.");
+        }
+        if(index >= tasks.size()) {
+            throw new DukeException("There are only " + tasks.size() +  " item(s) in the list, try entering a valid item number");
+        }
+
+        Task task = tasks.get(index);
+        tasks.delete(index);
+        ui.print("The following task has been removed successfully:", "\t" + task.toString(),
+                         "Now you have " + tasks.size() + " items(s) left in the list.");
+        storage.write(tasks);
     }
 }
