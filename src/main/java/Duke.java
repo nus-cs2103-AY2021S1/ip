@@ -2,10 +2,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static ArrayList<Task> tasks = new ArrayList<>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         System.out.println("Hi there, I'm TARS!\nWhat can I do for you?");
+        ReadWriteFile.readTaskList(taskList);
+//        for (Task t : taskList) {
+//            System.out.println(t);
+//        }
         Scanner scanner = new Scanner(System.in);
         boolean stop = false;
 
@@ -20,7 +24,7 @@ public class Duke {
 
                 case "list":
                     try {
-                        Helper.showList();
+                        Helper.showList(taskList);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
@@ -28,7 +32,7 @@ public class Duke {
 
                 case "done":
                     try {
-                        Helper.markAsDone(line);
+                        Helper.markAsDone(line, taskList);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
@@ -42,19 +46,19 @@ public class Duke {
                         break;
                     } else if (operation.equals("todo")) {
                         try {
-                            Helper.addToDo(line);
+                            Helper.addToDo(line, taskList);
                         } catch (DukeException e) {
                             System.out.println(e.getMessage());
                         }
                     } else if (operation.equals("deadline")) {
                         try {
-                            Helper.addDeadline(line);
+                            Helper.addDeadline(line, taskList);
                         } catch (DukeException e) {
                             System.out.println(e.getMessage());
                         }
                     } else {
                         try {
-                            Helper.addEvent(line);
+                            Helper.addEvent(line, taskList);
                         } catch (DukeException e) {
                             System.out.println(e.getMessage());
                         }
@@ -63,7 +67,7 @@ public class Duke {
 
                 case "delete":
                     try {
-                        Helper.deleteTask(line);
+                        Helper.deleteTask(line, taskList);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
@@ -73,6 +77,7 @@ public class Duke {
                     // Handles all other inputs
                     System.out.println("☹ Sorry, I don't recognise that command! Try one of the following instead: todo, event, deadline, done or delete");
             }
+            ReadWriteFile.writeToFile(taskList);
         }
     }
 }
