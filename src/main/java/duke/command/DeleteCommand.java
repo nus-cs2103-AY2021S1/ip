@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exceptions.DukeException;
 import duke.Storage;
 import duke.Ui;
 import duke.exceptions.IncompleteDukeCommandException;
@@ -17,12 +16,14 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
+    @Override
     public void execute(TaskList list, Storage storage) {
-        this.deletedTask = list.deleteTask(index);
-        this.remainingTaskCount = list.taskCount();
+        deletedTask = list.deleteTask(index);
+        remainingTaskCount = list.taskCount();
         super.completed = true;
     }
 
+    @Override
     public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
         if (super.completed) {
             String feedback = String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in your list.",
@@ -34,6 +35,7 @@ public class DeleteCommand extends Command {
         }
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }

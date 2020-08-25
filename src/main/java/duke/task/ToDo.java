@@ -1,6 +1,5 @@
 package duke.task;
 
-import duke.exceptions.DukeException;
 import duke.exceptions.DukeStorageException;
 import duke.exceptions.DukeTaskCreationException;
 
@@ -15,10 +14,6 @@ public class ToDo extends Task {
             throw new DukeTaskCreationException("I need something to work with.");
         }
         return new ToDo(details);
-    }
-
-    public String encode() {
-        return String.format("T|%s|%s", super.completed ? "Y" : "N", super.description);
     }
 
     public static ToDo decode(String code) throws DukeStorageException {
@@ -37,6 +32,11 @@ public class ToDo extends Task {
         } else {
             throw new DukeStorageException("Something doesn't seem right...");
         }
+    }
+
+    @Override
+    public String encode() {
+        return String.format("T|%s|%s", super.completed ? "Y" : "N", super.description);
     }
 
     @Override

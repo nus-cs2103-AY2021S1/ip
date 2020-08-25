@@ -3,7 +3,6 @@ package duke.task;
 import duke.exceptions.DukeStorageException;
 import duke.exceptions.DukeTaskCreationException;
 import duke.parser.DateParser;
-import duke.exceptions.DukeException;
 
 import java.time.LocalDateTime;
 
@@ -33,10 +32,6 @@ public class Event extends Task {
         }
     }
 
-    public String encode() {
-        return String.format("E|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(this.dateTime), super.description);
-    }
-
     public static Event decode(String code) throws DukeStorageException {
         if (code.charAt(0) == 'E') {
             String[] content = code.split("\\|", 4);
@@ -56,8 +51,13 @@ public class Event extends Task {
     }
 
     @Override
+    public String encode() {
+        return String.format("E|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(dateTime), super.description);
+    }
+
+    @Override
     public String toString() {
-        return "[E]" +  super.toString() + " (at: " + DateParser.parseLocalDateTime(this.dateTime) + ")";
+        return "[E]" + super.toString() + " (at: " + DateParser.parseLocalDateTime(dateTime) + ")";
     }
 
 }

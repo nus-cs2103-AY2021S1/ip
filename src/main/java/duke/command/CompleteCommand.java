@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exceptions.DukeException;
 import duke.Storage;
 import duke.Ui;
 import duke.exceptions.IncompleteDukeCommandException;
@@ -16,11 +15,13 @@ public class CompleteCommand extends Command {
         this.index = index;
     }
 
+    @Override
     public void execute(TaskList list, Storage storage) {
-        this.completedTask = list.markAsComplete(index);
+        completedTask = list.markAsComplete(index);
         super.completed = true;
     }
 
+    @Override
     public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
         if (super.completed) {
             String feedback = String.format("Nice! I've marked this task as complete:\n  %s\n", completedTask.toString());
@@ -30,8 +31,8 @@ public class CompleteCommand extends Command {
         }
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }
-
 }

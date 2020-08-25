@@ -1,10 +1,10 @@
 package duke.task;
 
-import java.time.LocalDateTime;
-import duke.exceptions.DukeException;
 import duke.exceptions.DukeStorageException;
 import duke.exceptions.DukeTaskCreationException;
 import duke.parser.DateParser;
+
+import java.time.LocalDateTime;
 
 public class Deadline extends Task {
 
@@ -32,10 +32,6 @@ public class Deadline extends Task {
         }
     }
 
-    public String encode() {
-        return String.format("D|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(this.dateTime), super.description);
-    }
-
     public static Deadline decode(String code) throws DukeStorageException {
         if (code.charAt(0) == 'D') {
             String[] content = code.split("\\|", 4);
@@ -55,7 +51,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String encode() {
+        return String.format("D|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(dateTime), super.description);
+    }
+
+    @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateParser.parseLocalDateTime(this.dateTime) + ")";
+        return "[D]" + super.toString() + " (by: " + DateParser.parseLocalDateTime(dateTime) + ")";
     }
 }

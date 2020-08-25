@@ -2,24 +2,24 @@ package duke.task;
 
 import duke.exceptions.DukeException;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ArrayList;
 
 public class TaskList implements Iterable<Task> {
 
     private List<Task> store;
 
     public TaskList() {
-        this.store = new ArrayList<>();
+        store = new ArrayList<>();
     }
 
     public TaskList(List<Task> list) {
-        this.store = list;
+        store = list;
     }
 
     public Task add(Task item) {
-        this.store.add(item);
+        store.add(item);
         return item;
     }
 
@@ -43,28 +43,28 @@ public class TaskList implements Iterable<Task> {
     }
 
     public boolean clearList() {
-        this.store = new ArrayList<>();
+        store = new ArrayList<>();
         return true;
     }
 
     public String listItems() {
-        if (this.store.size() == 0) {
+        if (store.size() == 0) {
             return "Congratulations! You don't have any tasks left to do.";
         } else {
             String list = "Here are the tasks in your list:\n";
-            for (int i = 0; i < this.store.size(); i++) {
-                list += String.format("%d.%s\n", i + 1, this.store.get(i).toString());
+            for (int i = 0; i < store.size(); i++) {
+                list += String.format("%d.%s\n", i + 1, store.get(i).toString());
             }
             return list;
         }
     }
 
     public int taskCount() {
-        return this.store.size();
+        return store.size();
     }
 
     @Override
     public Iterator<Task> iterator() {
-        return this.store.iterator();
+        return store.iterator();
     }
 }

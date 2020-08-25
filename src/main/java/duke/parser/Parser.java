@@ -1,7 +1,12 @@
 package duke.parser;
 
-import duke.exceptions.DukeException;
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.CompleteCommand;
+import duke.command.DeleteAllCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
 import duke.exceptions.ParseDukeCommandException;
 import duke.task.TaskType;
 
@@ -19,7 +24,7 @@ public class Parser {
         private final String input;
 
         Keyword(String keyword) {
-            this.input = keyword;
+            input = keyword;
         }
 
         public static Keyword findKeyword(String keyword) throws ParseDukeCommandException {

@@ -1,10 +1,15 @@
 package duke.command;
 
-import duke.exceptions.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.exceptions.DukeException;
 import duke.exceptions.IncompleteDukeCommandException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskType;
+import duke.task.ToDo;
 
 public class AddCommand extends Command {
 
@@ -12,7 +17,7 @@ public class AddCommand extends Command {
     private int remainingTaskCount;
 
     public AddCommand(TaskType type, String taskParameters) throws DukeException {
-        switch(type) {
+        switch (type) {
         case DEADLINE:
             createdTask = Deadline.createTask(taskParameters);
             break;
@@ -27,21 +32,27 @@ public class AddCommand extends Command {
         }
     }
 
+    @Override
     public void execute(TaskList list, Storage storage) {
         list.add(createdTask);
-        this.remainingTaskCount = list.taskCount();
+        remainingTaskCount = list.taskCount();
         super.completed = true;
     }
 
+    @Override
     public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
         if (super.completed) {
-            String feedback = String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in your list.\n", createdTask.toString(), remainingTaskCount);
+            String feedback = String.format(
+                    "Got it. I've added this task:\n  %s\nNow you have %d tasks in your list.\n",
+                    createdTask.toString(),
+                    remainingTaskCount);
             ui.formattedPrint(ui.prependIndent(feedback, 1));
         } else {
             throw new IncompleteDukeCommandException("Add command was not completed.");
         }
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }

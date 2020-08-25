@@ -1,9 +1,9 @@
-import duke.exceptions.DukeException;
-import duke.exceptions.IncompleteDukeCommandException;
-import duke.parser.Parser;
 import duke.Storage;
 import duke.Ui;
 import duke.command.Command;
+import duke.exceptions.DukeException;
+import duke.exceptions.IncompleteDukeCommandException;
+import duke.parser.Parser;
 import duke.task.TaskList;
 
 public class Duke {
@@ -13,8 +13,8 @@ public class Duke {
     private Ui ui;
 
     Duke(String filePath) {
-        this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {

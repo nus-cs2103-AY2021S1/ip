@@ -9,7 +9,7 @@ public class Ui {
     private Scanner sc;
 
     public Ui() {
-        this.sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
     }
 
     public String prependIndent(String content, int indent) {
