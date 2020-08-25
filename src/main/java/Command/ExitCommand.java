@@ -1,6 +1,7 @@
 package Command;
 
 import Command.Command;
+import Exceptions.DukeException;
 import Task.TaskList;
 import ParserStorageUi.*;
 public class ExitCommand extends Command {
@@ -10,9 +11,13 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
-        storage.putToDatabase(tasks.getTaskList());
-        ui.showGoodBye();
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        try {
+            storage.putToDatabase(tasks.getTaskList());
+            ui.showGoodBye();
+        } catch (DukeException e){
+            throw new DukeException(e.getMessage());
+        }
     }
 
     @Override

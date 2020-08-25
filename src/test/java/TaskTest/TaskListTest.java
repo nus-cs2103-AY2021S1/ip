@@ -27,9 +27,4 @@ public class TaskListTest {
         assertEquals(new TaskList(new Storage("data/duke.txt").load()).done("done 1").getAddedOrDeletedTask(), new Deadline("cs2103 project", true, "2020-06-26 2359"));
     }
 
-    @Test
-    public void taskListDoneTest() throws DukeException {
-        assertEquals(new TaskList(new Storage("data/duke.txt").load()).done("done 1").getAddedOrDeletedTask(), new Deadline("cs2103 project", true, "2020-06-26 2359"));
-    }
-
 }

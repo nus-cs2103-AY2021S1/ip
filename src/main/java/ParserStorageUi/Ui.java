@@ -5,8 +5,10 @@ import Task.*;
 import java.util.Scanner;
 public class Ui {
 
+    /** Initializes Ui class **/
     public Ui() {}
 
+    /** Show Welcome message to the user **/
     public void showWelcome() {
         String logo = "Hello I'm Verzachtend \n" +
                 "What can I do for you?\n" +
@@ -14,9 +16,11 @@ public class Ui {
         System.out.println(logo);
     }
 
+    /** Read all the input from the user **/
     public String readCommand() {
         return new Scanner(System.in).nextLine();
     }
+
 
     public void showLoadingError(){
         System.out.println("No task found, please blablbalba");

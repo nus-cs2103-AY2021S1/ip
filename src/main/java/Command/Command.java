@@ -12,9 +12,7 @@ abstract public class Command {
         this.command = command;
     }
 
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws NoDateException,
-            InvalidCommandException, NoTaskException, MissingSpecifiedDeleteError, WrongIndexError,
-            WrongDateTimeFormatException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     public abstract boolean isExit();
 

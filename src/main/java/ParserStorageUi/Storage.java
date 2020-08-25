@@ -3,36 +3,42 @@ package ParserStorageUi;
 import Exceptions.DukeException;
 import Task.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Storage {
 
-    private static String line = "________________________________________________";
     private final String filePath;
-    private final BufferedReader br;
+    //private final BufferedReader br;
+    private Path file;
 
     public Storage(String filePath){
-        String filePath1;
-        BufferedReader tempBr;
-        try {
-            tempBr = new BufferedReader(new FileReader(filePath));
-            filePath1 = filePath;
-        } catch (IOException e)  {
-            filePath1 = filePath;
-            tempBr = null;
-            System.out.println(e.getMessage());
-        }
+        this.filePath = filePath;
+        initiateFile();
+    }
 
-        this.br = tempBr;
-        this.filePath = filePath1;
+    private void initiateFile(){
+        try{
+            if (Files.notExists(Paths.get(filePath))){
+                Files.createDirectory(Paths.get(filePath));
+            }
+            if (Files.notExists(Paths.get(filePath + "/duke.txt"))) {
+                file = Files.createFile(Paths.get(filePath + "/duke.txt"));
+            } else {
+                file = Paths.get(filePath + "/duke.txt") ;
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
 
     public ArrayList<Task> load() throws DukeException {
-        String task;
         ArrayList<Task> temp = new ArrayList<>();
         try {
-            while ((task = this.br.readLine()) != null) {
+            for (String task : Files.readAllLines(file)) {
                 String type = task.substring(0, 1);
                 String name = task.substring(8);
                 int isDone = Integer.parseInt(task.substring(4, 5));
@@ -51,16 +57,17 @@ public class Storage {
                         break;
                 }
             }
-            br.close();
+            //br.close();
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
         return temp;
     }
 
-    public void putToDatabase(ArrayList<Task> tasks) {
+    public void putToDatabase(ArrayList<Task> tasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(this.filePath);
+
+            FileWriter fw = new FileWriter(this.filePath + "/duke.txt");
             PrintWriter pw = new PrintWriter(fw);
             for (Task task : tasks) {
                 if (task instanceof Todo) {
@@ -71,9 +78,7 @@ public class Storage {
             }
             pw.close();
         } catch (IOException e) {
-            System.out.println(line);
-            System.out.println(e.getMessage());
-            System.out.println(line);
+            throw new DukeException(e.getMessage());
         }
     }
 }
