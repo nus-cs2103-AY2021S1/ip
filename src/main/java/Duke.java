@@ -17,8 +17,7 @@ public class Duke {
         System.out.println(hello);
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> task_list = new ArrayList<Task>(); //List to keep track of tasks
-        int task_num = 0;
+        ArrayList<? extends Task> task_list = new ArrayList<>(); //List to keep track of tasks
 
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
@@ -27,20 +26,14 @@ public class Duke {
             if (command.equals("list")) {
                 String tasks = "";
                 for (int i = 0; i < task_list.size(); i++) {
-                    tasks += "     " + task_list.get(i).toString() + "\n";
+                    tasks += String.format("     %d."  + task_list.get(i) + "\n", i + 1);
                 }
                 System.out.println("    ____________________________________________________________\n" +
                         "     Here are the tasks in your list:\n" +
                         tasks +
                         "    ____________________________________________________________\n");
             }
-            //Case: Blah
-            else if (command.equals("blah")) {
-                System.out.println("    ____________________________________________________________\n" +
-                        "     blah\n" +
-                        "    ____________________________________________________________\n");
 
-            }
             //Case: Bye -> Termination of Duke Program
             else if (command.equals("bye")) {
                 System.out.println("    ____________________________________________________________\n" +
@@ -58,15 +51,47 @@ public class Duke {
                         "    ____________________________________________________________");
 
             }
-            //Case: Any other Command -> Add task to the task_list
+
+            //Case: ToDo, Deadline, Event -> Add particular task to the task_list
             else {
-                task_num++;
-                task_list.add(new Task(task_num, command, false));
-                System.out.println(String.format("    ____________________________________________________________\n" +
-                        "     added: %s\n" +
-                        "    ____________________________________________________________\n", command));
+                Duke.TaskIdentifier(command, task_list);
             }
         }
+    }
+
+    public static void TaskIdentifier(String command, ArrayList task_list) {
+        String task_type = command.split(" ")[0];
+        String task_details = command.split(task_type + " ")[1]; //Includes task description and date/time if applicable
+        String task_info = task_details.split(" /")[0];
+
+        switch(task_type) {
+            case "todo":
+                Task todo = new ToDo(task_info);
+                task_list.add(todo);
+                break;
+
+            case "deadline":
+                String date = task_details.split(" /")[1];
+                Task deadline = new Deadline(task_info, date);
+                task_list.add(deadline);
+                break;
+
+            case "event":
+                String time = task_details.split(" /")[1];
+                Task event = new Event(task_info, time);
+                task_list.add(event);
+                break;
+
+            default:
+                break;
+        }
+
+        System.out.println(
+                String.format("    ____________________________________________________________\n" +
+                "     Got it. I've added this task: \n" +
+                "       %s\n" +
+                "     Now you have %d tasks in the list.\n" +
+                "    ____________________________________________________________\n", task_list.get(task_list.size() - 1).toString(), task_list.size()));
     }
 }
 

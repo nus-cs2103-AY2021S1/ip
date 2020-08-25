@@ -1,12 +1,10 @@
 public class Task {
-    private int task_num;
-    private String task_info;
-    private boolean task_completion;
+    protected String task_info;
+    protected boolean task_completion;
 
-    public Task(int task_num, String task_info, Boolean task_completion) {
-        this.task_num = task_num;
+    public Task(String task_info) {
         this.task_info = task_info;
-        this.task_completion = task_completion;
+        this.task_completion = false;
     }
 
     public void completeTask() {
@@ -15,7 +13,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("%d.[%s] %s", task_num, task_completion ?  "Done" : "!!!!", task_info);
+        return String.format("[%s] %s", task_completion ?  "Done" : "!!!!", task_info);
     }
 
 }
