@@ -12,6 +12,15 @@ test {
 group 'org.example'
 version '1.0-SNAPSHOT'
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+    mainClassName = 'main'
+    archiveBaseName = 'Duke'
+    archiveVersion = '0.1'
+}
+
 repositories {
     mavenCentral()
 }
