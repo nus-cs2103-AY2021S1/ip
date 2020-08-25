@@ -56,13 +56,6 @@ public class Parser {
                 } else {
                     c = new EventCommand(command, list, storage);
                 }
-            } else if (command.startsWith("find")) {
-                if (command.equals("find")) {
-                    throw new ResponseException(horizontalLine
-                            + "☹ AIYOYO!!! What do you want me to find sia? \n" + horizontalLine);
-                } else {
-                    c = new FindCommand(command, list, storage);
-                }
             } else {
                 throw new ResponseException(horizontalLine + "☹ AIYO!!! What do you mean sia? :-( \n"
                         + horizontalLine);

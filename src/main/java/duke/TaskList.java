@@ -26,17 +26,17 @@ public class TaskList {
      * @return A String of List of Tasks stored
      */
     public String iterateToDo() {
-        StringBuilder output = new StringBuilder();
+        String output = "";
         int counter = 1;
         for (Task task : list) {
             if (task == null) {
                 break;
             } else {
-                output.append(counter).append(". ").append(task.toString()).append("\n");
+                output += Integer.toString(counter) + ". " + task.toString() + "\n";
                 counter++;
             }
         }
-        return output.toString();
+        return output;
     }
 
     /**
@@ -54,36 +54,5 @@ public class TaskList {
      */
     public void addTask(int counter, Task task) {
         this.list.add(counter, task);
-    }
-
-    /**
-     * Filters through list of Tasks for appropriate keyword within instructions
-     * @param keyword Word to filter by
-     * @return A String of filtered Lists of Tasks
-     */
-    public String filter(String keyword) {
-        List<Task> filteredList = new ArrayList<>();
-        String loweredCaseKeyword = keyword.toLowerCase();
-        for (Task task : this.list ) {
-            if (task.instructions.toLowerCase().contains(loweredCaseKeyword)) {
-                filteredList.add(task);
-            }
-        }
-        return iterateFilteredList(filteredList);
-    }
-
-    /**
-     * Helper function to iterate through filtered list
-     * @param list A list of filtered Tasks
-     * @return A String format of list of filtered Tasks
-     */
-    public String iterateFilteredList(List<Task> list) {
-        StringBuilder output = new StringBuilder();
-        int counter = 1;
-        for (Task task : list) {
-            output.append(counter).append(". ").append(task.toString()).append("\n");
-            counter++;
-        }
-        return output.toString();
     }
 }
