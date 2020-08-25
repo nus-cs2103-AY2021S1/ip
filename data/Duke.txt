@@ -1,3 +1,7 @@
 T, 1, read book
 D, 1, return book, 2020-06-06
 T, 1, join sports club
+T, 0, meet zeling tomorrow
+D, 0, iP , 2020-08-25
+E, 0, CS2103 Tut , 2020-08-26 3PM
+E, 0, call JX , 2020-08-25 11PM

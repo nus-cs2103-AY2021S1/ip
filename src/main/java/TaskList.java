@@ -26,7 +26,7 @@ public class TaskList {
             if (info.length == 1) {
                 throw new DukeException("Deadline not provided!");
             } else {
-                curr = new Deadline(info[0], Duke.dateParser(info[1]));
+                curr = new Deadline(info[0], Parser.dateParser(info[1]));
                 list.add(curr);
             }
         } else if (arr[0].equals("event")) {
@@ -35,7 +35,7 @@ public class TaskList {
                 throw new DukeException("Time not provided!");
             } else {
                 String[] t = info[1].split(" ", 2);
-                curr = new Event(info[0], Duke.dateParser(t[0]), Duke.timeParser(t[1]));
+                curr = new Event(info[0], Parser.dateParser(t[0]), Parser.timeParser(t[1]));
                 list.add(curr);
             }
         }

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Ui {
     final private String line = "-------------------------------------";
@@ -9,8 +10,14 @@ public class Ui {
     final private String retListMsg = "Here's what you have ordered so far...";
     final private String defaultError = "Wat talking you?";
 
-    public Ui() {
+    private Scanner s;
 
+    public Ui() {
+        this.s = new Scanner(System.in);
+    }
+
+    public String readCommand() {
+        return s.nextLine();
     }
 
     public void showWelcome() {
@@ -74,6 +81,12 @@ public class Ui {
     public void bye() {
         System.out.println(line);
         System.out.println("Bye! Please come again!");
+        System.out.println(line);
+    }
+
+    public void showLoadingError() {
+        System.out.println(line);
+        System.out.println("Sorry, I forgot you existed!");
         System.out.println(line);
     }
 }

@@ -31,14 +31,14 @@ public class Storage {
                         }
                         txtData.add(tobeAdded);
                     } else if (info[0].equals("D")) {
-                        Deadline tobeAdded = new Deadline(info[2], Duke.dateParser(info[3]));
+                        Deadline tobeAdded = new Deadline(info[2], Parser.dateParser(info[3]));
                         if (info[1].equals("1")) {
                             tobeAdded.markAsDone();
                         }
                         txtData.add(tobeAdded);
                     } else if (info[0].equals("E")) {
                         String[] t = info[3].split(" ", 2);
-                        Event tobeAdded = new Event(info[2], Duke.dateParser(t[0]), t[1]);
+                        Event tobeAdded = new Event(info[2], Parser.dateParser(t[0]), t[1]);
                         if (info[1].equals("1")) {
                             tobeAdded.markAsDone();
                         }
@@ -60,7 +60,6 @@ public class Storage {
             String newData = "";
             for (Task k : data) {
                 String textToAdd = k.storageForm();
-                System.out.println(textToAdd);
                 newData += textToAdd + System.lineSeparator();
             }
             fw.write(newData);
