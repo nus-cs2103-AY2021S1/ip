@@ -30,8 +30,7 @@ public class Storage {
             fileScanner.close();
 
         } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-            if (!dataFile.getParentFile().mkdirs()) { System.out.println("ERROR");}
+            // No need to do anything if file not found as file will be created later anyway
         }
         
         return true;
