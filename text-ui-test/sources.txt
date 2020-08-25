@@ -2,7 +2,7 @@
 ../src/main/java/Duke.java
 ../src/main/java/Event.java
 ../src/main/java/InadequateCommandException.java
-../src/main/java/IncorrectCommandException.java
+../src/main/java/DukeException.java
 ../src/main/java/InvalidIndexException.java
 ../src/main/java/Task.java
 ../src/main/java/ToDo.java

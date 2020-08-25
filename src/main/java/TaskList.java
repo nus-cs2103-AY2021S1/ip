@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public class TaskList {
     ArrayList<Task> tasks;
@@ -7,12 +8,16 @@ public class TaskList {
         this.tasks = tasks;    
     }
     
+    TaskList() {
+        this.tasks = new ArrayList<>();
+    }
+    
     public void add(Task task) {
         tasks.add(task);
     }
     
-    public void remove(int index) {
-        tasks.remove(index);
+    public Task remove(int index) {
+        return tasks.remove(index);
     }
     
     public Task get(int index) {
@@ -21,6 +26,10 @@ public class TaskList {
     
     public void markAsDone(int index) {
         tasks.set(index, tasks.get(index).markAsDone());
+    }
+    
+    public int size() {
+        return tasks.size();
     }
 
     @Override
@@ -32,5 +41,14 @@ public class TaskList {
         return str;
     }
     
-    
+    public TaskList filter(Predicate<Task> predicate) {
+        ArrayList<Task> filtered = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (predicate.test(task)) {
+                filtered.add(task);
+            }
+        }
+        return new TaskList(filtered);
+    }
 }

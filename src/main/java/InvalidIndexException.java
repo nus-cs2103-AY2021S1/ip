@@ -1,5 +1,5 @@
 public class InvalidIndexException extends DukeException {
     InvalidIndexException() {
-        super();
+        super("Invalid index");
     }
 }

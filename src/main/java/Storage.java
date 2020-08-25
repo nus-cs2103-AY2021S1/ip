@@ -13,7 +13,7 @@ public class Storage {
         this.filePath = filePath;    
     }
     
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException{
         File f = new File(filePath);
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -52,13 +52,13 @@ public class Storage {
                 }
                 f.createNewFile();
             } catch (IOException e1) {
-                System.out.println(e1);
+                throw new DukeException("");
             }
         }
         return tasks;
     }
 
-    public void write(ArrayList<Task> tasks) {
+    public void write(TaskList tasks) {
         try {
             File f = new File(filePath);
             if (f.exists()) {

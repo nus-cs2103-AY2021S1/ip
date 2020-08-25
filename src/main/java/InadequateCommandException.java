@@ -3,7 +3,7 @@ class InadequateCommandException extends DukeException {
     private String[] missingSections;
 
     InadequateCommandException(String typeOfTask, String[] missingSections) {
-        super();
+        super("");
         this.typeOfTask = typeOfTask;
         this.missingSections = missingSections;
     }
