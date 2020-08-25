@@ -1,7 +1,7 @@
 public class AddCommand extends Command {
-    CommandType addType;
-    String description;
-    String datetime;
+    private final CommandType addType;
+    private final String description;
+    private final String datetime;
 
     public AddCommand(CommandType addType, String description, String datetime) {
         this.addType = addType;

@@ -4,9 +4,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    protected String by;
-    protected LocalDate byDate;
-    protected LocalDateTime byDateTime;
+    private String by;
+    private LocalDate byDate;
+    private LocalDateTime byDateTime;
 
     public Deadline(String description, String by) {
         super(description);

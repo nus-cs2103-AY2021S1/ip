@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 
 public class ListCommand extends Command {
-    LocalDate date;
+    private LocalDate date;
 
     public ListCommand() {}
 
