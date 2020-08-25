@@ -2,6 +2,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Scanner;
 import duke.UI.UI;
 import duke.storage.DukeIOException;
@@ -78,6 +79,20 @@ public class Duke {
         tasks.addTask(new Events(taskInfo, at));
     }
 
+    public boolean foundMatchingTasks(String taskInfo) {
+        boolean matched = false;
+        String[] taskInfos = taskInfo.split(" ");
+        List<Task> matchList = tasks.returnMatchingTasks(taskInfos);
+        for(int i = 0; i < matchList.size(); i++) {
+            if (i == 0) {
+                System.out.println("\tHere are the matching tasks in your list:");
+            }
+            System.out.println(String.format("\t%d. %s", i + 1, matchList.get(i)));
+            matched = true;
+        }
+        return matched;
+    }
+
     public void handleTask(String task) {
         switch(task) {
         case "bye" :
@@ -99,7 +114,9 @@ public class Duke {
                 } else if (task.startsWith("delete")) {
                     tasks.deleteTask(task);
                 } else {
-                    throw new DukeInvalidCommandException("Sorry handsome but I'm not sure about this command :)");
+                    if (!foundMatchingTasks(task)) {
+                        throw new DukeInvalidCommandException("Sorry handsome but I'm not sure about this command :)");
+                    }
                 }
                 storage.saveTaskList();
                 break;
