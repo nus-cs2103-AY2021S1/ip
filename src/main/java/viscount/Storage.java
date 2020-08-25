@@ -1,8 +1,5 @@
 package viscount;
 
-import viscount.exception.ViscountIOException;
-import viscount.task.*;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -18,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
+import viscount.exception.ViscountIOException;
+import viscount.task.*;
 
 /**
  * Represents Viscount's storage.
@@ -80,6 +80,7 @@ public class Storage {
 
                 while (sc.hasNext()) {
                     String line = sc.nextLine();
+                    
                     if (line.isEmpty()) {
                         // If the data file has empty lines, skip them
                         continue;
@@ -90,13 +91,13 @@ public class Storage {
                         boolean isDone = !taskData.get(1).equals("0");
                         String taskDescription = taskData.get(2);
 
-                        if (taskType == TaskType.TODO) {
+                        if (taskType == TaskType.Todo) {
                             tasks.add(new Todo(taskDescription, isDone));
-                        } else if (taskType == TaskType.DEADLINE) {
+                        } else if (taskType == TaskType.Deadline) {
                             LocalDateTime dueDate = Parser.parseDateTime(
                                     taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
                             tasks.add(new Deadline(taskDescription, isDone, dueDate));
-                        } else if (taskType == TaskType.EVENT) {
+                        } else if (taskType == TaskType.Event) {
                             LocalDateTime eventTime = Parser.parseDateTime(
                                     taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
                             tasks.add(new Event(taskDescription, isDone, eventTime));

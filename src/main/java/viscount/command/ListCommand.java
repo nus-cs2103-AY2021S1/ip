@@ -1,14 +1,5 @@
 package viscount.command;
 
-import viscount.*;
-
-import viscount.exception.ViscountDateTimeParseException;
-import viscount.exception.ViscountException;
-
-import viscount.exception.ViscountIOException;
-import viscount.task.Task;
-import viscount.task.TaskType;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -18,16 +9,24 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import viscount.*;
+
+import viscount.exception.ViscountDateTimeParseException;
+import viscount.exception.ViscountException;
+
+import viscount.task.Task;
+import viscount.task.TaskType;
+
 /**
  * Represents a list command.
  */
 public class ListCommand extends Command {
-    private String modifier;
+    private String taskTypeModifier;
     private String dateString;
     
-    public ListCommand(String modifier, String dateString) {
+    public ListCommand(String taskTypeModifier, String dateString) {
         super();
-        this.modifier = modifier;
+        this.taskTypeModifier = taskTypeModifier;
         this.dateString = dateString;
     }
 
@@ -41,8 +40,8 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ViscountDateTimeParseException {
-        Predicate<Task> filterByModifier = task -> modifier.isEmpty()
-                || task.getTaskType() == TaskType.valueOf(modifier.toUpperCase());
+        Predicate<Task> filterByModifier = task -> taskTypeModifier.isEmpty()
+                || task.getTaskType() == TaskType.valueOf(taskTypeModifier.toUpperCase());
         
         List<Task> tasks = taskList.getTasks();
 
@@ -52,7 +51,7 @@ public class ListCommand extends Command {
                     .filter(filterByModifier)
                     .collect(Collectors.toList());
             
-            ui.showList(filteredTasks, modifier, dateString);
+            ui.showList(filteredTasks, taskTypeModifier, dateString);
         } else {
             try {
                 LocalDateTime queriedDateTime = dateString.equals("today")
@@ -68,8 +67,8 @@ public class ListCommand extends Command {
                         .collect(Collectors.toList());
 
                 ui.showList(
-                        filteredTasks, 
-                        modifier, 
+                        filteredTasks,
+                        taskTypeModifier, 
                         dateString.equals("today") 
                                 ? dateString 
                                 : queriedDateTime.format(Parser.OUTPUT_DATE_FORMATTER));

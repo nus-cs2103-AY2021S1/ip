@@ -1,9 +1,9 @@
 package viscount;
 
+import java.util.List;
+
 import viscount.exception.ViscountIndexOutOfBoundsException;
 import viscount.task.Task;
-
-import java.util.List;
 
 /**
  * Represents Viscount's task list.

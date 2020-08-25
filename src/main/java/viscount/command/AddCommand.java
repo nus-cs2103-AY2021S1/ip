@@ -1,10 +1,12 @@
 package viscount.command;
 
+import java.time.LocalDateTime;
+
 import viscount.*;
-import viscount.exception.ViscountIOException;
+
 import viscount.task.*;
 
-import java.time.LocalDateTime;
+import viscount.exception.ViscountIOException;
 
 /**
  * Represents an add command.
@@ -40,13 +42,13 @@ public class AddCommand extends Command {
         Task newTask = null;
         
         switch(taskType) {
-        case TODO:
+        case Todo:
             newTask = new Todo(description, false);
             break;
-        case DEADLINE:
+        case Deadline:
             newTask = new Deadline(description, false, dateTime);
             break;
-        case EVENT:
+        case Event:
             newTask = new Event(description, false, dateTime);
             break;
         default:

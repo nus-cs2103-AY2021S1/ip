@@ -1,8 +1,8 @@
 package viscount.task;
 
-import viscount.Parser;
-
 import java.time.LocalDateTime;
+
+import viscount.Parser;
 
 /**
  * Represents a deadline, a type of task.
@@ -17,7 +17,7 @@ public class Deadline extends Task {
     private LocalDateTime dueDate;
 
     public Deadline(String description, boolean isDone, LocalDateTime dueDate) {
-        super(TaskType.DEADLINE, description, isDone);
+        super(TaskType.Deadline, description, isDone);
         this.dueDate = dueDate;
     }
     
