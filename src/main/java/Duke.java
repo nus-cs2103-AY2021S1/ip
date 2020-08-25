@@ -1,6 +1,8 @@
 import java.lang.reflect.Array;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Duke {
     /** Constants **/
@@ -67,7 +69,7 @@ public class Duke {
                         System.out.print(outputBreaker);
                         // Extract Details from command
                         String[] details = instructions[1].split(" /by ", 2);
-                        list.add(new Deadline(details[0], details[1]));
+                        list.add(new Deadline(details[0], checkDate(details[1])));
                         System.out.println("added: " + list.get(list.size() - 1));
                         System.out.println("There is now " + list.size() + " tasks in the list!");
                     } else {
@@ -184,6 +186,21 @@ public class Duke {
             return false;
         } else {
             return true;
+        }
+    }
+
+    /** Checks if the date entered is valid **/
+    public static LocalDate checkDate(String dateString) throws DukeException {
+        try {
+            LocalDate df = LocalDate.parse(dateString);
+            return df;
+        } catch (Exception e) {
+            // Check if there is even anything after command
+            // Exception thrown if userInput.split() fails
+            // Command has no details, throw exception
+            throw new DukeException(outputBreaker +
+                    "Whoops! I think there is an error in your date for the"
+                    + " command. Sorry but please try again.");
         }
     }
 
