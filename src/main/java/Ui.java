@@ -12,24 +12,20 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private ArrayList<Task> tasks = new ArrayList<Task>();
-
-    public ArrayList<Task> getTasks(){
-        return this.tasks;
+    public String horizontalRule() {
+        String myLine = "____________________________________________________________";
+        System.out.println(myLine);
+        return myLine;
     }
 
-
-    public void horizontalRule() {
-        System.out.println("____________________________________________________________");
-    }
-
-    public void greeting() {
+    public String greeting() {
         String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        return logo;
 
 
     }

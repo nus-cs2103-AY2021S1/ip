@@ -11,7 +11,11 @@ public class TaskList {
     }
 
 
-    // 3 type ways to add task
+    // 4 type ways to add task
+    public void addTask(Task myTask){
+        this.tasks.add(myTask);
+        System.out.println("added: " + myTask);
+    }
 
     public void addTask(String type, String task) throws InSuffArgsException{
 
@@ -20,8 +24,7 @@ public class TaskList {
         }
 
         Task myTask = new Task(type,task);
-        this.tasks.add(myTask);
-        System.out.println("added: " + myTask);
+        addTask(myTask);
     }
 
     public void addTask(String type, String task, LocalDate d1) throws InSuffArgsException{
@@ -31,8 +34,7 @@ public class TaskList {
         }
 
         Task myTask = new Task(type,task,d1);
-        this.tasks.add(myTask);
-        System.out.println("added: " + myTask);
+        addTask(myTask);
     }
     public void addTask(String type,String task,String deadLine) throws InSuffArgsException{
 
