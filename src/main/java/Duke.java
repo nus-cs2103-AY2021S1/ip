@@ -11,13 +11,13 @@ import java.util.ArrayList;
 public class Duke {
 
     private Storage storage;
-    private List<Task> stored_task;
+    private TaskList taskList;
     private final String line = "____________________________________________________________";
 
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         try {
-            this.stored_task = new ArrayList<>(storage.load());
+            this.taskList = new TaskList(storage.load(), storage);
         } catch (DukeException e) {
             System.out.println(line);
             System.out.println(e.getMessage());
@@ -42,53 +42,6 @@ public class Duke {
     }
 
     /**
-     * Lists stored task by looping through stored_task, along with their status.
-     **/
-    public void listStoredTasks() {
-        if (stored_task.isEmpty()) {
-            System.out.println("No tasks stored...");
-        } else {
-            System.out.println(line);
-            System.out.println("Quack! Here are the tasks in your list:");
-            int count = 1;
-            for (Task task : stored_task) {
-                System.out.println(count + ". " + task);
-                count++;
-            }
-            System.out.println(line);
-        }
-    }
-
-    public void displayTaskCount() {
-        int numOfTasks = stored_task.size();
-        if (numOfTasks == 1) {
-            System.out.println("My duck senses tell me you have 1 task in the list.");
-        } else {
-            System.out.println("My duck senses tell me you have " + numOfTasks + " tasks in the list.");
-        }
-    }
-
-    /**
-     * Adds input task into stored_task.
-     *
-     * @param newTask Input task from user to be stored.
-     **/
-    public void addTask(Task newTask) {
-        try {
-            stored_task.add(newTask);
-            storage.updateTasks(stored_task);
-            System.out.println(line);
-            System.out.println("Quack! I have added: " + newTask);
-            displayTaskCount();
-            System.out.println(line);
-        } catch (DukeException e) {
-            System.out.println(line);
-            System.out.println(e.getMessage());
-            System.out.println(line);
-        }
-    }
-
-    /**
      * Checks if string contains only numbers.
      *
      * @param input input string to check
@@ -96,59 +49,6 @@ public class Duke {
      **/
     public static boolean isNumber(String input) {
         return input.matches("[0-9]+");
-    }
-
-    /**
-     * Marks task as done.
-     *
-     * @param taskNumber Task number of task to be marked as done.
-     **/
-    public void markTaskAsDone(int taskNumber) {
-        try {
-            if (taskNumber <= 0 || taskNumber > stored_task.size()) {
-                throw new DukeException("Wrong task number!");
-            } else {
-                Task t = stored_task.get(taskNumber - 1);
-                if (t.isDone()) {
-                    throw new DukeException("This task is already done: " + t.getDescription());
-                } else {
-                    t.markAsDone();
-                    storage.updateTasks(stored_task);
-                    System.out.println(line);
-                    System.out.println("Quack! I have marked this task as done: \n" + t);
-                    System.out.println(line);
-                }
-            }
-        } catch (DukeException e) {
-            System.out.println(line);
-            System.out.println(e.getMessage());
-            System.out.println(line);
-        }
-    }
-
-    /**
-     * Deletes input task from stored_task.
-     *
-     * @param taskNumber Task number of task to be deleted.
-     **/
-    public void deleteTask(int taskNumber) {
-        try {
-            if (taskNumber <= 0 || taskNumber > stored_task.size()) {
-                throw new DukeException("Wrong task number!");
-            } else {
-                Task taskToDelete = stored_task.get(taskNumber - 1);
-                stored_task.remove(taskToDelete);
-                storage.updateTasks(stored_task);
-                System.out.println(line);
-                System.out.println("Quack! I have deleted this task: \n" + taskToDelete);
-                displayTaskCount();
-                System.out.println(line);
-            }
-        } catch (DukeException e) {
-            System.out.println(line);
-            System.out.println(e.getMessage());
-            System.out.println(line);
-        }
     }
 
     public String getStringFromArray(String[] inputArr, int indexFrom, int indexTo) {
@@ -177,18 +77,18 @@ public class Duke {
                     System.out.println(exit_message);
                     isInProgram = false;
                 } else if (inputInformation[0].equals(Command.LIST.getInput())) {
-                    listStoredTasks();
+                    taskList.listStoredTasks();
                 } else if (inputInformation[0].equals(Command.DONE.getInput())) {
                     if (inputInformation.length > 1 && isNumber(inputInformation[1])) {
                         int taskNumber = Integer.parseInt(inputInformation[1]);
-                        markTaskAsDone(taskNumber);
+                        taskList.markTaskAsDone(taskNumber);
                     } else {
                         throw new DukeException("You need to include your task number to mark done...");
                     }
                 } else if (inputInformation[0].equals(Command.DELETE.getInput())) {
                     if (inputInformation.length > 1 && isNumber(inputInformation[1])) {
                         int taskNumber = Integer.parseInt(inputInformation[1]);
-                        deleteTask(taskNumber);
+                        taskList.deleteTask(taskNumber);
                     } else {
                         throw new DukeException("You need to include your task number to delete...");
                     }
@@ -196,7 +96,7 @@ public class Duke {
                     if (inputInformation.length > 1) {
                         String description = getStringFromArray(inputInformation, 1, inputInformation.length);
                         ToDo newTask = new ToDo(description);
-                        addTask(newTask);
+                        taskList.addTask(newTask);
                     } else {
                         throw new DukeException("Your todo description can't be empty...");
                     }
@@ -211,7 +111,7 @@ public class Duke {
                             String description = getStringFromArray(inputInformation, 1, indexOfBy);
                             String by = getStringFromArray(inputInformation, indexOfBy + 1, inputInformation.length);
                             Deadline newTask = new Deadline(description, by);
-                            addTask(newTask);
+                            taskList.addTask(newTask);
                         }
                     } else {
                         throw new DukeException("Your deadline description or deadline can't be empty...");
@@ -227,7 +127,7 @@ public class Duke {
                             String description = getStringFromArray(inputInformation, 1, indexOfAt);
                             String at = getStringFromArray(inputInformation, indexOfAt + 1, inputInformation.length);
                             Event newTask = new Event(description, at);
-                            addTask(newTask);
+                            taskList.addTask(newTask);
                         }
                     } else {
                         throw new DukeException("Your event description or event period can't be empty...");
