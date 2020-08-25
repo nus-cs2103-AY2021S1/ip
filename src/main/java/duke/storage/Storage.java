@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import java.io.*;
 import java.nio.file.Files;

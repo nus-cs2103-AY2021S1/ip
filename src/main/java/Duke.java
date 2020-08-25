@@ -3,9 +3,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.util.Scanner;
-import duke.DukeIOException;
-import duke.Storage;
 import duke.UI.UI;
+import duke.storage.DukeIOException;
+import duke.storage.Storage;
 import duke.task.*;
 
 public class Duke {
