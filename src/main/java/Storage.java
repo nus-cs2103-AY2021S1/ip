@@ -1,17 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileOutputStream;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Storage {
     private static final String DEFAULT_PATH = "./data/duke.txt";
@@ -24,38 +20,38 @@ public class Storage {
 
     }
 
-    public ArrayList<Task> load(){
+    public TaskList load(){
         if(!Files.exists(path) || !Files.isRegularFile(path)){
-            return new ArrayList<Task>();
+            return new TaskList();
         }
         try {
             return convertTextToTask(Files.readAllLines(path));
         } catch (FileNotFoundException e){
             UI.printFormattedMessage("ERROR: There is an error in reading the files");
-            return new ArrayList<Task>();
+            return new TaskList();
         } catch (IOException e) {
             UI.printFormattedMessage("ERROR: There is an error with the inputs from the txt file");
-            return new ArrayList<Task>();
+            return new TaskList();
         }
     }
 
 
-    public ArrayList<String> convertArrayToSaveFormat(ArrayList<Task> stringStore) {
+    public ArrayList<String> convertArrayToSaveFormat(TaskList tasklist) {
         ArrayList<String> strings = new ArrayList<>();
-        for(Task tasks: stringStore){
+        for(Task tasks: tasklist.getTasks()){
             strings.add(tasks.writerSave());
         }
         return strings;
     }
 
-    public ArrayList<Task> convertTextToTask(List<String> lines){
-            ArrayList<Task> tasks = new ArrayList<>();
+    public TaskList convertTextToTask(List<String> lines){
+            TaskList tasks = new TaskList();
             try{
                 for (String line : lines) {
                     String[] currLine = line.split(" \\| ");
                     Task currTask = null;
                     if (currLine[0].equals("T")) {
-                        currTask = new Todo(currLine[2]);
+                        currTask = new ToDo(currLine[2]);
                     } else if (currLine[0].equals("D")) {
                         currTask = new Deadline(currLine[2], currLine[3]);
                     } else if (currLine[0].equals("E")) {
@@ -64,7 +60,7 @@ public class Storage {
                     if (currLine[1].equals("1")) {
                     currTask.markAsDone();
                     }
-                    tasks.add(currTask);
+                    tasks.addTask(currTask);
                 }
             } catch(ArrayIndexOutOfBoundsException e) {
                 UI.printFormattedMessage("ERROR: Incorrect inputs in data file!");

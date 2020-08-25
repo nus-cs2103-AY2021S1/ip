@@ -1,10 +1,9 @@
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private ArrayList<Task> stringStore = new ArrayList<>();
+    private TaskList stringStore;
     private Storage storage;
 
     public Duke(){
@@ -13,7 +12,7 @@ public class Duke {
             this.stringStore = storage.load();
 
         } catch (IOException e){
-            System.out.println("ERROR: File Loadding error");
+            UI.printFormattedMessage("ERROR: File Loading error");
         }
     }
 
@@ -28,55 +27,55 @@ public class Duke {
         UI.printGreeting();
         if (sc.hasNext()) {
             String input = sc.nextLine();
-            while (!input.equals(TaskElement.BYE.label)) {
+            while (!Parser.parseBye(input)) {
                 try{
-                    if (input.equals(TaskElement.LIST.label)) {
-                        UI.printListOfTasks(this.stringStore);
-                    } else if (input.split(" ")[0].equals(TaskElement.DONE.label)) {
+                    if (Parser.parseList(input)) {
+                        UI.printListOfTasks(this.stringStore.getTasks());
+                    } else if (Parser.parseDone(input)) {
                         int doneTask = Integer.parseInt(input.split(" ")[1]) - 1;
-                        if(doneTask + 1 > stringStore.size() || doneTask < 0){
+                        if(doneTask + 1 > stringStore.numOfTasks() || doneTask < 0){
                             throw new DukeInvalidDoneNumException(input);
                         }
-                        stringStore.get(doneTask).markAsDone();
-                    } else if (input.split(" ")[0].equals(TaskElement.TODO.label)) {
+                        stringStore.markAsDone(doneTask);
+                    } else if (Parser.parseToDo(input)) {
                         if (input.split(" ").length == 1) {
                             throw new DukeEmptyToDoException(input);
                         }
-                        String tasker = stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
-                        Todo todoTask = new Todo(tasker);
-                        stringStore.add(todoTask);
-                        UI.printTaskAdd(todoTask, stringStore.size());
-                    } else if (input.split(" ")[0].equals(TaskElement.DEADLINE.label)) {
+                        String tasker = Parser.stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
+                        ToDo todoTask = new ToDo(tasker);
+                        stringStore.addTask(todoTask);
+                        UI.printTaskAdd(todoTask, stringStore.numOfTasks());
+                    } else if (Parser.parseDeadline(input)) {
                         if (input.split(" ").length == 1) {
                             throw new DukeEmptyDeadlineException(input);
                         }
-                        String deadliner = stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
+                        String deadliner = Parser.stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
                         String[] deadlinerparts = deadliner.split(" /by ");
                         if(deadlinerparts.length == 1){
                             throw new DukeEmptyDeadlineTImeException(input);
                         }
                         Deadline deadlineTask = new Deadline(deadlinerparts[0], deadlinerparts[1]);
-                        stringStore.add(deadlineTask);
-                        UI.printTaskAdd(deadlineTask, stringStore.size());
-                    } else if (input.split(" ")[0].equals(TaskElement.EVENT.label)) {
+                        stringStore.addTask(deadlineTask);
+                        UI.printTaskAdd(deadlineTask, stringStore.numOfTasks());
+                    } else if (Parser.parseEvent(input)) {
                         if (input.split(" ").length == 1) {
                             throw new DukeEmptyEventException(input);
                         }
-                        String eventer = stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
+                        String eventer = Parser.stringBuilder(input.split(" "), 1, input.split(" ").length - 1);
                         String[] eventParts = eventer.split(" /at ");
                         if (eventParts.length == 1) {
                             throw new DukeEmptyEventTimeException(input);
                         }
                         Event eventTask = new Event(eventParts[0], eventParts[1]);
-                        stringStore.add(eventTask);
-                        UI.printTaskAdd(eventTask, this.stringStore.size());
-                    } else if(input.split(" ")[0].equals(TaskElement.DELETE.label)){
+                        stringStore.addTask(eventTask);
+                        UI.printTaskAdd(eventTask, this.stringStore.numOfTasks());
+                    } else if(Parser.parseDelete(input)){
                         int deleteTask = Integer.parseInt(input.split(" ")[1]) - 1;
-                        if(deleteTask + 1 > stringStore.size() || deleteTask < 0){
+                        if(deleteTask + 1 > stringStore.numOfTasks() || deleteTask < 0){
                             throw new DukeDeleteException(input);
                         }
-                        UI.printDeleteMessage(stringStore.get(deleteTask), stringStore.size() - 1);
-                        stringStore.remove(deleteTask);
+                        UI.printDeleteMessage(stringStore.getTask(deleteTask), stringStore.numOfTasks() - 1);
+                        stringStore.deleteTask(deleteTask);
                     } else {
                         throw new DukeUnknownInputException(input);
                     }
@@ -107,27 +106,4 @@ public class Duke {
         }
         storage.save(storage.convertArrayToSaveFormat(this.stringStore));
     }
-
-
-
-
-    public static String stringBuilder(String[] arr, int start, int end){
-        String store = "";
-        for (int i = start; i <= end; i++) {
-            if(i == end){
-                store += arr[i];
-            } else {
-                store += arr[i] + " ";
-            }
-
-        }
-        return store;
-    }
-
-    public static void printLine(){
-        System.out.println(" ____________________________________________________________");
-    }
-
-
-
 }

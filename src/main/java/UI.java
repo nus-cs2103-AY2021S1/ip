@@ -2,8 +2,6 @@ import java.util.ArrayList;
 
 public class UI {
 
-    public UI(){}
-
     public static void printFormattedMessage(String errorMessage){
         printHorizontalLine();
         System.out.println(errorMessage);
