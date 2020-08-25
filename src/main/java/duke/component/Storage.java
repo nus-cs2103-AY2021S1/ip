@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ * Permanent storage that stores user's task list in a data file
+ */
 public class Storage {
     private final String path;
 
