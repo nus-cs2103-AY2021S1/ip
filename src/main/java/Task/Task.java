@@ -26,6 +26,22 @@ public class Task {
         return this.isDone;
     }
 
+    public String getType() {
+        return "1"; // dummy type;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String getDateInput() {
+        return "No date available";
+    }
+
+    public String getTimeInput() {
+        return "No time available";
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
