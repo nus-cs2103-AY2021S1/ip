@@ -17,9 +17,9 @@ public class UI {
 
     // Returns a printable chatBox around a single-line string
     public static String chatBox(String chatContent){
-        return "\t== King says =====================\n" +
+        return "\t=== King says =========================\n" +
                 "\t " + chatContent + "\n" +
-                "\t==================================\n";
+                "\t=======================================\n";
     }
 
     // Returns a printable error message box around the error String
@@ -31,11 +31,11 @@ public class UI {
 
     // Creates a chat box when item is added
     public static String addItemChatBox(String chatContent, int noOfItems){
-        return "\t== King says =====================\n" +
+        return "\t=== King says =========================\n" +
                 "\t Got it. I've added this task:\n" +
                 "\t\t" + chatContent + "\n" +
                 "\t Now you have " + noOfItems + " tasks in the list.\n" +
-                "\t==================================\n";
+                "\t=======================================\n";
     }
 
     // Returns a printable chatBox numbering each item in given a TaskList
@@ -45,9 +45,26 @@ public class UI {
         for (int number = 0; number < len; number++){
             formatted.append("\t" + (number+1) + ". " + taskList.get(number).toString() + "\n");
         }
-        return "\t== King says =====================\n" +
+        return "\t=== King says =========================\n" +
                 "\tThere are " + len + " items in your list:\n" +
                 formatted.toString() +
-                "\t==================================\n";
+                "\t=======================================\n";
+    }
+
+    /**
+     * Returns a formatted string containing items found in the list.
+     * @param taskList taskList of the items found.
+     * @return String formatted printable list
+     */
+    public static String foundItemsList(TaskList taskList, String keyword){
+        StringBuilder formatted = new StringBuilder();
+        int len = taskList.size();
+        for (int number = 0; number < len; number++){
+            formatted.append("\t" + (number+1) + ". " + taskList.get(number).toString() + "\n");
+        }
+        return "\t=== King says =========================\n" +
+                "\tI found " + len + " items with the " + keyword + " keyword:\n" +
+                formatted.toString() +
+                "\t=======================================\n";
     }
 }

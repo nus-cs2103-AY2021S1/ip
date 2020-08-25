@@ -101,6 +101,9 @@ public class Parser {
             } catch (Exception e) {
                 throw new KingException("Please follow the syntax: delete <item no.>", e);
             }
+        } else if (phrase.startsWith("find ") || (phrase.startsWith("find") && phraseLength == 4)){
+            String keyword = phrase.substring(4).trim();
+            return UI.foundItemsList(storage.find(keyword), keyword);
         } else {
             throw new KingException("I don't understand you!", new Throwable("invalid command"));
         }
