@@ -16,4 +16,9 @@ public class DoneCommand extends Command {
         String task = tasks.done(index);
         ui.say("Marked this task as done:\n" + task);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof DoneCommand;
+    }
 }

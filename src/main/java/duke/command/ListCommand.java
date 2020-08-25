@@ -15,4 +15,9 @@ public class ListCommand extends Command {
             throw(e);
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ListCommand;
+    }
 }

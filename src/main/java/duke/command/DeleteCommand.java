@@ -16,4 +16,9 @@ public class DeleteCommand extends Command {
         String task = tasks.delete(index);
         ui.say("Deleted this task:\n" + task);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof DeleteCommand;
+    }
 }

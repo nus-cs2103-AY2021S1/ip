@@ -19,10 +19,6 @@ public class TaskList {
         this.list = list;
     }
 
-    public ArrayList<Task> getList() {
-        return list;
-    }
-
     public String listContents() throws DukeException {
         if (list.size() > 0) {
             String text = "Here is your list:";
@@ -58,9 +54,13 @@ public class TaskList {
         return task.toString();
     }
 
-    public String done(int index) {
-        list.get(index).setDone();
-        return list.get(index).toString();
+    public String done(int index) throws DukeException {
+        try {
+            list.get(index).setDone();
+            return list.get(index).toString();
+        } catch (IndexOutOfBoundsException e) {
+            throw(DukeException.outOfBounds());
+        }
     }
 
     public String extractListData() {

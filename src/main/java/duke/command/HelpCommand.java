@@ -21,4 +21,9 @@ public class HelpCommand extends Command {
                 "todo <description> - adds a todo duke.task with the given description to the duke.task list";
         ui.say(help);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof HelpCommand;
+    }
 }

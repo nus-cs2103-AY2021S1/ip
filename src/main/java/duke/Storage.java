@@ -22,26 +22,30 @@ public class Storage {
         this.list = new ArrayList<>();
     }
 
-    private void createTask(String s) {
-        Task next;
-        if (s.startsWith("todo")) {
-            next = new ToDo(s.substring(5));
-        } else if (s.startsWith("deadline")) {
-            String datePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)\\s";
-            String timePattern = "(\\d\\d)(\\d\\d)";
-            String pattern = "(deadline\\s)(.+)\\s(/by\\s)"+ datePattern + timePattern;
-            String task = s.replaceAll(pattern, "$2");
-            LocalDateTime dateTime = Parser.extractDateTime(s, pattern);
-            next = new Deadline(task, dateTime);
-        } else {
-            String datePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)\\s";
-            String timePattern = "(\\d\\d)(\\d\\d)";
-            String pattern = "(event\\s)(.+)\\s(/at\\s)(.+)"+ datePattern + timePattern;
-            String task = s.replaceAll(pattern, "$2");
-            LocalDateTime dateTime = Parser.extractDateTime(s, pattern);
-            next = new Event(task, dateTime);
+    private void createTask(String s) throws DukeException {
+        try {
+            Task next;
+            if (s.startsWith("todo")) {
+                next = new ToDo(s.substring(5));
+            } else if (s.startsWith("deadline")) {
+                String datePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)\\s";
+                String timePattern = "(\\d\\d)(\\d\\d)";
+                String pattern = "(deadline\\s)(.+)\\s(/by\\s)"+ datePattern + timePattern;
+                String task = s.replaceAll(pattern, "$2");
+                LocalDateTime dateTime = Parser.extractDateTime(s, pattern);
+                next = new Deadline(task, dateTime);
+            } else {
+                String datePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)\\s";
+                String timePattern = "(\\d\\d)(\\d\\d)";
+                String pattern = "(event\\s)(.+)\\s(/at\\s)(.+)"+ datePattern + timePattern;
+                String task = s.replaceAll(pattern, "$2");
+                LocalDateTime dateTime = Parser.extractDateTime(s, pattern);
+                next = new Event(task, dateTime);
+            }
+            list.add(next);
+        } catch (DukeException e) {
+            throw(e);
         }
-        list.add(next);
     }
 
     public ArrayList<Task> load() throws DukeException {
@@ -62,6 +66,8 @@ public class Storage {
             return list;
         } catch (FileNotFoundException e) {
             throw DukeException.loadingError(filePath);
+        } catch (DukeException e) {
+            throw(e);
         }
     }
 

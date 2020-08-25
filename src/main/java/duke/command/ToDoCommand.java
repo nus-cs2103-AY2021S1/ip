@@ -18,4 +18,9 @@ public class ToDoCommand extends Command {
         tasks.add(task, LocalDateTime.now(), TaskType.TODO);
         ui.say("Added ToDo '" + task + "' to your list!");
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ToDoCommand;
+    }
 }

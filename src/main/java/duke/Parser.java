@@ -21,8 +21,8 @@ public class Parser {
             }
         } catch (NumberFormatException e) {
             throw(DukeException.typeMismatch("done"));
-        } catch (IndexOutOfBoundsException e) {
-            throw(DukeException.outOfBounds());
+        } catch (DukeException e) {
+            throw(e);
         }
     }
 
@@ -39,8 +39,8 @@ public class Parser {
     private static Command handleDeadline(String input) throws DukeException {
         String basePattern = "(deadline\\s)(.+)";
         String almostCompletePattern = "(deadline\\s)(.+)\\s(/by\\s)(.+)";
-        String datePattern = "(\\d\\d\\d\\d-[01]\\d-[0123]\\d)\\s";
-        String timePattern = "([012]\\d)([012345]\\d)";
+        String datePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)\\s";
+        String timePattern = "(\\d\\d)(\\d\\d)";
         String completePattern = "(deadline\\s)(.+)\\s(/by\\s)"+ datePattern + timePattern;
         String missingTaskPattern = "(deadline\\s)(/by)((\\s(.*))*)";
         try {
@@ -61,8 +61,8 @@ public class Parser {
             } else {
                 throw(DukeException.emptyDesc("deadline"));
             }
-        } catch (DateTimeParseException e) {
-            throw(DukeException.invalidDateTime());
+        } catch (DukeException e) {
+            throw(e);
         }
     }
 
@@ -91,8 +91,8 @@ public class Parser {
             } else {
                 throw(DukeException.emptyDesc("event"));
             }
-        } catch (DateTimeParseException e) {
-            throw(DukeException.invalidDateTime());
+        } catch (DukeException e) {
+            throw(e);
         }
     }
 
@@ -113,12 +113,16 @@ public class Parser {
         }
     }
 
-    public static LocalDateTime extractDateTime(String input, String completePattern) {
-        String date = input.replaceAll(completePattern, "$4");
-        String hours = input.replaceAll(completePattern, "$5");
-        String minutes = input.replaceAll(completePattern, "$6");
-        String time = hours + ":" + minutes;
-        return LocalDateTime.parse(date + "T" + time);
+    public static LocalDateTime extractDateTime(String input, String completePattern) throws DukeException {
+        try {
+            String date = input.replaceAll(completePattern, "$4");
+            String hours = input.replaceAll(completePattern, "$5");
+            String minutes = input.replaceAll(completePattern, "$6");
+            String time = hours + ":" + minutes;
+            return LocalDateTime.parse(date + "T" + time);
+        } catch (DateTimeParseException e) {
+            throw(DukeException.invalidDateTime());
+        }
     }
 
     private static Command handleDueIn(String input) throws DukeException {

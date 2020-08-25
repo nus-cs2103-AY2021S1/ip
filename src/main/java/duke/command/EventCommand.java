@@ -25,4 +25,9 @@ public class EventCommand extends Command {
             throw(DukeException.pastDateTime());
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof EventCommand;
+    }
 }

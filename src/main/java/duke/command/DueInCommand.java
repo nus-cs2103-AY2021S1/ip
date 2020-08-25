@@ -21,4 +21,9 @@ public class DueInCommand extends Command {
             ui.say(tasks.extractDueTasksDays(time));
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof DueInCommand;
+    }
 }
