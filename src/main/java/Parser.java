@@ -1,5 +1,11 @@
 public class Parser {
 
+    /**
+     * Converts user input to its associated type of Command.
+     * @param input user input
+     * @return specific type of Command
+     * @throws DukeException if user input does not follow convention
+     */
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) {
             return new ByeCommand();

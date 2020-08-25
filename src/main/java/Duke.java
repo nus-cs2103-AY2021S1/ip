@@ -15,6 +15,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the programme provided that Duke has been initialized.
+     * Following the convention for user input is crucial for an expected behavior.
+     * Exception will be thrown upon undefined user input.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

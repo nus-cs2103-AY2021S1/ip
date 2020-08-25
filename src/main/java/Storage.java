@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents an object that is responsible for retrieving data from and writing
+ * to the file on hard disk.
+ * Unsuccessful attempt will trigger Exception.
+ */
 public class Storage {
     protected File data;
 
@@ -12,6 +17,13 @@ public class Storage {
         //do nothing
     }
 
+    /**
+     * Constructs a Storage object.
+     * If the folder or target file is not found according to the given path,
+     * it will attempt to create these documents along the way.
+     * @param filePath the path that leads to the target file
+     * @throws DukeException if unsuccessful attempt to create these documents
+     */
     public Storage (String filePath) throws DukeException {
         String folder = filePath.split("/")[0];
         String file = filePath.split("/")[1];
@@ -40,7 +52,11 @@ public class Storage {
         this.data = new File(fileLocation.toString());
     }
 
-
+    /**
+     * Overwrites everything in the target file on hard disk according to the TaskList.
+     * @param list a collection of all tasks
+     * @throws DukeException if attempt is unsuccessful
+     */
     public void generateTxt (TaskList list) throws DukeException {
         try {
             FileWriter fw = new FileWriter(this.data);
@@ -54,6 +70,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends the String representation of the task to the last row of the target
+     * file on the hard disk.
+     * @param task a specific task
+     * @throws DukeException if attempt is unsuccessful
+     */
     public void appendTxt (Task task) throws DukeException {
         try {
             FileWriter fw = new FileWriter(this.data, true);

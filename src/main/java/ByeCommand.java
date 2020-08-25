@@ -5,6 +5,10 @@ public class ByeCommand extends Command {
         ui.showBye();
     }
 
+    /**
+     * Indicates a termination of the program
+     * @return a false boolean value to break the loop
+     */
     @Override
     public boolean isExit() {
         return true;

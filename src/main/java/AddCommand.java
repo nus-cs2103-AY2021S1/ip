@@ -1,5 +1,12 @@
 import java.time.DateTimeException;
 
+/**
+ * Represents a command that will append a task to the list.
+ * The command must be in the format of todo/deadline/event + empty spaces +
+ * the description of the task (subject to the format requirement attached
+ * to the task type).
+ * Wrong format will trigger Exception.
+ */
 public class AddCommand extends Command {
     protected final String taskType;
     protected final String description;
@@ -9,6 +16,14 @@ public class AddCommand extends Command {
         this.description = description.trim();
     }
 
+    /**
+     * Appends the task to the TaskList
+     * @param list a TaskList that contains all the tasks
+     * @param ui an object used to interact with users
+     * @param storage an object used for retrieving data from or write data
+     *                into a specific txt file on the hard disk
+     * @throws DukeException if the user input does not follow the convention
+     */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         Task current;

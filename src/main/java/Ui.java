@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * Represents an object that is responsible for user interaction.
+ * This includes reading user input and displaying the correspondent output.
+ */
 public class Ui {
     private final String LINE_BREAK = "   ____________________________" +
             "________________________________";
