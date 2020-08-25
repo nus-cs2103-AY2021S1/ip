@@ -3,6 +3,10 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a wrapper class over {@link LocalDateTime} such that some objects may not contain time.
+ */
+
 public class DukeDateTime {
     private LocalDateTime dateTime;
     private boolean hasTime;

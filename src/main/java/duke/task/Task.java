@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Represents a task. A <code>Task</code> object contains a content and a boolean which indicates whether the task has
+ * been completed or not.
+ */
 public class Task {
     protected String content;
     protected boolean isDone;

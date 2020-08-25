@@ -1,11 +1,14 @@
 package duke.task;
 
-import duke.exceptions.InvalidTaskIndexException;
 import duke.utils.Colour;
-import duke.utils.ResourceHandler;
 
 import java.util.List;
 import java.util.ArrayList;
+
+/**
+ * Represents a list of tasks. A <code>TaskManager</code> object will be able to carry out certain functions
+ * with regards to the list of tasks.
+ */
 
 public class TaskManager {
     private List<Task> tasks = new ArrayList<>();

@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Represents a task which needs to be done before a specific date/time.
+ */
+
 public class Deadline extends Task {
     private final DukeDateTime dateTime;
 
