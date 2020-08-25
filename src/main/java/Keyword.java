@@ -17,13 +17,13 @@ public enum Keyword {
         this.keyword = keyword;
     }
 
-    public static boolean isValid(String inputKeyword) {
+    public static boolean isValid(String inputKeyword) throws InvalidCommandException {
         Keyword[] array = Keyword.values();
         for (Keyword keyword : array) {
             if (keyword.keyword.equals(inputKeyword)) {
                 return true;
             }
         }
-        return false;
+        throw new InvalidCommandException();
     }
 }

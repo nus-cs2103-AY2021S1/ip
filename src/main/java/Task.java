@@ -4,12 +4,12 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    protected Task(String description) {
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    protected Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
