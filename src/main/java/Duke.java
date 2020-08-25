@@ -3,6 +3,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -82,7 +84,9 @@ public class Duke {
                             EventException ee = new EventException();
                             System.out.println(ee.errorMessage);
                         } else {
-                            Event e = new Event(command.substring(6, indexOfSlash - 1), command.substring(indexOfSlash + 4));
+                            String time = command.substring(indexOfSlash + 4);
+                            LocalDate parsed = LocalDate.parse(time);
+                            Event e = new Event(command.substring(6, indexOfSlash - 1), parsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
                             arr.add(e);
                             print(arr, e);
                             fc.listWriter(arr);
@@ -108,7 +112,9 @@ public class Duke {
                             DeadlineException de = new DeadlineException();
                             System.out.println(de.errorMessage);
                         } else {
-                            Deadline d = new Deadline(command.substring(9, indexOfSlash - 1), command.substring(indexOfSlash + 4));
+                            String time = command.substring(indexOfSlash + 4);
+                            LocalDate parsed = LocalDate.parse(time);
+                            Deadline d = new Deadline(command.substring(9, indexOfSlash - 1), parsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
                             arr.add(d);
                             print(arr, d);
                             fc.listWriter(arr);
