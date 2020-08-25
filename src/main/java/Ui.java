@@ -1,4 +1,10 @@
+import java.io.IOException;
+
 public class Ui {
+    static void readUserInput(Parser parser) throws IOException {
+        parser.scan();
+    }
+
     static void showWelcomeMessage() {
         System.out.println("Hi I'm Duke, your personal task-tracker bot!");
         System.out.println("You can add todos, deadlines, or events to my " +

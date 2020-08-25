@@ -17,7 +17,7 @@ public class Duke {
                 Ui.showNoExistingSave();
                 parser = new Parser(storage);
             }
-            parser.scan();
+            Ui.readUserInput(parser);
         } catch (IOException e) {
             Ui.showErrorMessage("An exception occurred:", e);
         } catch (ClassNotFoundException e) {
