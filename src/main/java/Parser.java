@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represents the driver that parses the commands provided by the client.
+ */
 public class Parser {
     //error messages
     private static final String MESSAGE_MISSING_DATETIME = "Did you casually forget to put in the date/time?";
@@ -17,6 +20,17 @@ public class Parser {
             "deadline", TaskType.D,
             "todo", TaskType.T));
 
+    /**
+     * Parses the commands provided by the client.
+     *
+     * @param input Input Command.
+     * @return Parsed Command.
+     * @throws MissingDelimiterException If a delimiter for date/time is required but missing.
+     * @throws MissingDateTimeException  If a date/time is required but missing.
+     * @throws InvalidCommandException   If the command provided is not recognised.
+     * @throws DateTimeParseException    If the date/time is in the wrong format.
+     * @throws IndexOutOfBoundsException If the task number provided is invalid.
+     */
     public static Command parse(String input)
             throws MissingDelimiterException, MissingDateTimeException, InvalidCommandException,
             DateTimeParseException, IndexOutOfBoundsException {
