@@ -44,7 +44,7 @@ public class Parser {
                     } else if (!isInteger(command[1]) || Integer.parseInt(command[1]) > numOfOrders) {
                         throw new NoThisNumOfTaskException();
                     } else {
-                        return new Delete(Integer.parseInt(command[1]) - 1);
+                        return new Delete((Integer.parseInt(command[1]) - 1));
                     }
                 } else {
                     if (command.length == 1) {
