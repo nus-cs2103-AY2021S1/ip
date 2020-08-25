@@ -9,9 +9,8 @@ public class Event extends Task {
     protected LocalDateTime atDateTime;
 
     public Event(String description, String at, boolean isDone) {
-        super(description);
+        super(description, isDone);
         this.at = at;
-        this.completed = isDone;
         try {
             this.atDateTime = LocalDateTime.parse(reformatedDateTime());
         } catch (DateTimeParseException e) {

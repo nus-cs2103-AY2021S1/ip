@@ -3,8 +3,7 @@ package Task;
 public class ToDo extends Task {
 
     public ToDo(String description, boolean isDone) {
-        super(description);
-        this.completed = isDone;
+        super(description, isDone);
     }
 
     public String toString() {

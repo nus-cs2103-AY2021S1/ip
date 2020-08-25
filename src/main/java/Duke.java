@@ -13,8 +13,6 @@ public class Duke {
     public static FileWriter writer;
 
     public static void main(String[] args) throws DukeException, IOException {
-        // 1. edit the completeness
-        // 2. delete taks
 
         // Opening
         String open = "_______________________________________ \n"
@@ -150,19 +148,6 @@ public class Duke {
                 + "\n" + LINE;
         System.out.println(output);
     }
-
-    public static void handleHelp() {
-        String output = LINE  + "These are my available commands: \n"
-                + "list: View entire list of task \n"
-                + "todo <desciption>: Add new todo to list \n"
-                + "deadline <description> /by <date/time>: Add new deadline to list \n"
-                + "event <description> /at <date/time>: Add new event to list \n"
-                + "done <task id>: Sets task as completed \n"
-                + "delete <task id>: Deletes task from list \n"
-                + "bye: Exits program \n" + LINE;
-        System.out.println(output);
-    }
-
 
     public static void readSavedData(File file) throws IOException {
         if (!file.exists()) {

@@ -8,9 +8,8 @@ public class Deadline extends Task {
     protected LocalDateTime byDate;
 
     public Deadline(String description, String by, boolean isDone) {
-        super(description);
+        super(description, isDone);
         this.by = by;
-        this.completed = isDone;
         try {
             this.byDate = LocalDateTime.parse(reformatedDateTime());
         } catch (DateTimeParseException e) {
