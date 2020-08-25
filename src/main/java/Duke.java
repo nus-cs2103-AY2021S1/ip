@@ -1,15 +1,33 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    static Scanner sc = new Scanner(System.in);
-    static String line = "    ____________________________________________________________\n";
+    static final Scanner sc = new Scanner(System.in);
+    static final String line = "    ____________________________________________________________\n";
     static ArrayList<Task> taskList = new ArrayList<>();
 
     private static String format(String string) {
         return line + string + "\n" + line;
     }
 
+    private static void endChat() {
+        try {
+            FileWriter fileWriter = new FileWriter("myTaskList.txt");
+            for (Task t : taskList) {
+                fileWriter.write(t.saveAsString() + "\n");
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+        }
+
+        System.out.println(format("     Bye. Hope to see you again soon!"));
+    }
+    
     private static void list() {
         StringBuilder taskListString = new StringBuilder();
         taskListString.append("     Here are the tasks in your list:\n");
@@ -20,7 +38,7 @@ public class Duke {
         System.out.println(format(taskListString.toString()));
     }
 
-    private static void done(String input) throws DukeException{
+    private static void done(String input) throws DukeException {
         if (input.equals("done") || input.equals("done ")) {
             throw new InvalidTaskIndexException(input);
         } else if (input.startsWith("done ") && input.length() > 5) {
@@ -37,7 +55,7 @@ public class Duke {
         }
     }
 
-    private static void delete(String input) throws DukeException{
+    private static void delete(String input) throws DukeException {
         if (input.equals("delete") || input.equals("delete ")) {
             throw new InvalidTaskIndexException(input);
         } else if (input.startsWith("delete ") && input.length() > 7) {
@@ -76,12 +94,12 @@ public class Duke {
         if (input.equals("deadline") || input.equals("deadline ")) {
             throw new EmptyDescriptionException("deadline");
         } else if (input.startsWith("deadline ") && input.length() > 9) {
-            if (!input.contains("/by ")) {
+            if (!input.contains(" /by ")) {
                 throw new InvalidDateTimeException("deadline");
             } else {
-                int index = input.indexOf("/by ");
+                int index = input.indexOf(" /by ");
                 String description = input.substring(9, index);
-                String time = input.substring(index + 4);
+                String time = input.substring(index + 5);
                 Deadline newDeadline = new Deadline(description, time);
                 addNewTask(newDeadline);
             }
@@ -94,12 +112,12 @@ public class Duke {
         if (input.equals("event") || input.equals("event ")) {
             throw new EmptyDescriptionException("event");
         } else if (input.startsWith("event ") && input.length() > 6) {
-            if (!input.contains("/at ")) {
+            if (!input.contains(" /at ")) {
                 throw new InvalidDateTimeException("event");
             } else {
-                int index = input.indexOf("/at ");
+                int index = input.indexOf(" /at ");
                 String description = input.substring(6, index);
-                String time = input.substring(index + 4);
+                String time = input.substring(index + 5);
                 Event newEvent = new Event(description, time);
                 addNewTask(newEvent);
             }
@@ -111,7 +129,7 @@ public class Duke {
     private static void chat() {
         String input = sc.nextLine();
         if (input.equals("bye")) {
-            System.out.println(format("     Bye. Hope to see you again soon!"));
+            endChat();
         } else if (input.equals("list")) {
             list();
             chat();
@@ -138,6 +156,35 @@ public class Duke {
         }
     }
 
+    private static void readFile(File file) {
+        try {
+            Scanner fileReader = new Scanner(new File("myTaskList.txt"));
+            while (fileReader.hasNextLine()) {
+                String s = fileReader.nextLine();
+                Task currentTask = null;
+                if (s.startsWith("T")) {
+                    currentTask = new Todo(s.substring(8));
+                } else {
+                    int index = s.lastIndexOf(" |");
+                    String dateTime = s.substring(index + 3);
+                    if (s.startsWith("D")) {
+                        currentTask = new Deadline(s.substring(8, index), dateTime);
+                    } else if (s.startsWith("E")) {
+                        currentTask = new Event(s.substring(8, index), dateTime);
+                    }
+                }
+
+                if (s.charAt(4) == '1' && currentTask != null) {
+                    currentTask.markAsDone();
+                }
+                
+                taskList.add(currentTask);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+        }
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -147,6 +194,14 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println(format("     Hello! I'm Duke\n" +
                 "     What can I do for you?"));
+        try {
+            File myList = new File("myTaskList.txt");
+            if (!myList.createNewFile()) {
+                readFile(myList);
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+        }
         chat();
     }
 }
