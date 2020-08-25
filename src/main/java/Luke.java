@@ -8,7 +8,6 @@ public class Luke {
     public static void main(String[] args) {
         File tlFile = new File("./data/", "luke.txt");
         Scanner sc = new Scanner(System.in);
-//        ArrayList<Task> taskList = new ArrayList<>();
         TaskList taskList = new TaskList();
         taskList.readTasks(tlFile);
         System.out.printf("Luke:\n\tHey there! I'm Luke.\n\tPlease tell me what to add to your list.\nYou:\n");
@@ -66,6 +65,9 @@ public class Luke {
                 } catch (DeleteIndexOutofboundsException e) {
                     System.out.printf("Luke:%s\nYou:\n", e.getMessage());
                 }
+            } else if (Pattern.matches("^(find) *.*$", input)) {
+                input.replaceAll("find ", "");
+                taskList.findTask(input);
             } else if (input.equals("bye")) {
                 System.out.println("Luke:\n\tOh, are you leaving? Hope to see you soon!");
                 break;
@@ -75,6 +77,12 @@ public class Luke {
         }
     }
 
+    /**
+     * Creates a Todo object with the given input.
+     *
+     * @param input description of the Todo object
+     * @return the todo object with the given input
+     */
     private static Todo createTodo(String input) throws EmptyTodoException {
         String todo = input.replaceAll("todo ", "");
         if (input.equals("todo") || input.equals("todo ")) {
@@ -84,6 +92,12 @@ public class Luke {
         }
     }
 
+    /**
+     * Creates a Deadline object with the given input.
+     *
+     * @param input description of the Deadline object
+     * @return the Deadline object with the given input
+     */
     private static Deadline createDeadline(String input) throws EmptyDeadlineException, InvalidDeadlineException {
         String[] deadline = input.split("deadline | /by ");
         if (input.equals("deadline") || input.equals("deadline ")) {
@@ -95,6 +109,12 @@ public class Luke {
         }
     }
 
+    /**
+     * Creates a Event object with the given input.
+     *
+     * @param input description of the Event object
+     * @return the Event object with the given input
+     */
     private static Event createEvent(String input) throws EmptyEventException, InvalidEventException {
         String[] event = input.split("event | /at ");
         if (input.equals("event") || input.equals("event ")) {

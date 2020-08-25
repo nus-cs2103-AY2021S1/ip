@@ -18,5 +18,3 @@ Example of usage:
 Expected outcome:
 
 `outcome`
-
-Released on GitHub.
