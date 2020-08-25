@@ -6,7 +6,20 @@ import duck.exception.DuckException;
 
 import java.time.LocalDate;
 
+/**
+ * Factory class to create Tasks based on user input
+ *
+ * Referenced from: https://www.tutorialspoint.com/design_pattern/factory_pattern.htm
+ */
 public class TaskFactory {
+
+    /**
+     * Utilizes Parser class to parse the user input and create the correct Task object.
+     *
+     * @param input Input from user.
+     * @return Newly created Task.
+     * @throws DuckException If input from user is invalid.
+     */
     public static Task createTaskFromInput(String input) throws DuckException {
         Option option = Parser.parseOption(input);
         String inputWithoutOption;

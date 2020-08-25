@@ -2,9 +2,12 @@ package duck.task;
 
 import duck.ui.Colour;
 
+/**
+ * Todo class for representing the todo type.
+ */
 public class Todo extends Task {
-    public Todo(String d) {
-        super(d);
+    public Todo(String desc) {
+        super(desc);
     }
 
     @Override
