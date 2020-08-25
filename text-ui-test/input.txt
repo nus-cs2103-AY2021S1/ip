@@ -5,11 +5,13 @@ todo exercise
 list
 deadline
 deadline /by 2019-08-10
+deadline finish nekobot /by today
 deadline finish nekobot /by 2019-08-20
 list
 event
 event /at 2020-09-10
-event sleep /at 2029-08-17
+event sleep /at tonight
+event sleep /at 2020-08-17
 list
 done 2
 list

@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class DukeLogic {
@@ -35,6 +36,10 @@ public class DukeLogic {
         } catch (InvalidTaskException e) {
             System.out.println("    ____________________________________________________________");
             System.out.println("    Oh noes! I don't think you specified a valid task index :<");
+            System.out.println("    ____________________________________________________________");
+        } catch (DateTimeParseException e) {
+            System.out.println("    ____________________________________________________________");
+            System.out.println("    Oops! Please make sure your date is of YYYY-MM-DD format ;A;");
             System.out.println("    ____________________________________________________________");
         }
     }
@@ -112,33 +117,31 @@ public class DukeLogic {
                 command.split(" ")[0].equals("event");
     }
 
-    private void addTask(String command) throws IncompleteTaskException {
+    private void addTask(String command) throws IncompleteTaskException, DateTimeParseException {
         String typeOfTask = command.split(" ")[0];
         switch (typeOfTask) {
-            case "todo":
-                if (command.length() <= 4) {
-                    throw new IncompleteTaskException("Incomplete Todo description");
-                }
-                this.taskList.add(new Todo(command.substring(5)));
-                break;
-            case "event": {
-                if (!command.contains("/at") || (command.indexOf("event ") + 6 > command.indexOf(" /at"))) {
-                    throw new IncompleteTaskException("Incomplete Event description");
-                }
-                String taskName = command.substring(command.indexOf("event ") + 6, command.indexOf(" /at"));
-                String taskDate = command.substring(command.indexOf("/at ") + 4);
-                this.taskList.add(new Event(taskName, LocalDate.parse(taskDate)));
-                break;
+        case "todo":
+            if (command.length() <= 4) {
+                throw new IncompleteTaskException("Incomplete Todo description");
             }
-            case "deadline": {
-                if (!command.contains("/by") || (command.indexOf("deadline ") + 9 > command.indexOf(" /by"))) {
-                    throw new IncompleteTaskException("Incomplete Deadline description");
-                }
-                String taskName = command.substring(command.indexOf("deadline ") + 9, command.indexOf(" /by"));
-                String taskDate = command.substring(command.indexOf("/by ") + 4);
-                this.taskList.add(new Deadline(taskName, LocalDate.parse(taskDate)));
-                break;
+            this.taskList.add(new Todo(command.substring(5)));
+            break;
+        case "event":
+            if (!command.contains("/at") || (command.indexOf("event ") + 6 > command.indexOf(" /at"))) {
+                throw new IncompleteTaskException("Incomplete Event description");
             }
+            String eventName = command.substring(command.indexOf("event ") + 6, command.indexOf(" /at"));
+            String eventDate = command.substring(command.indexOf("/at ") + 4);
+            this.taskList.add(new Event(eventName, eventDate));
+            break;
+        case "deadline":
+            if (!command.contains("/by") || (command.indexOf("deadline ") + 9 > command.indexOf(" /by"))) {
+                throw new IncompleteTaskException("Incomplete Deadline description");
+            }
+            String deadlineName = command.substring(command.indexOf("deadline ") + 9, command.indexOf(" /by"));
+            String deadlineDate = command.substring(command.indexOf("/by ") + 4);
+            this.taskList.add(new Deadline(deadlineName, deadlineDate));
+            break;
         }
         System.out.println("    ____________________________________________________________");
         System.out.println("     Okies! I've added this task~");

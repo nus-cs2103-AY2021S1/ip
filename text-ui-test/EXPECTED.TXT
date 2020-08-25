@@ -34,6 +34,9 @@
     Oh dear! Your task description seems to be incomplete :<
     ____________________________________________________________
     ____________________________________________________________
+    Oops! Please make sure your date is of YYYY-MM-DD format ;A;
+    ____________________________________________________________
+    ____________________________________________________________
      Okies! I've added this task~
        [D][?] finish nekobot (by: Aug 20 2019, Tuesday)
      Now you have 2 tasks in the list uwu
@@ -50,15 +53,18 @@
     Oh dear! Your task description seems to be incomplete :<
     ____________________________________________________________
     ____________________________________________________________
+    Oops! Please make sure your date is of YYYY-MM-DD format ;A;
+    ____________________________________________________________
+    ____________________________________________________________
      Okies! I've added this task~
-       [E][?] sleep (at: Aug 17 2029, Friday)
+       [E][?] sleep (at: Aug 17 2020, Monday)
      Now you have 3 tasks in the list uwu
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list!!
     1. [T][?] exercise
     2. [D][?] finish nekobot (by: Aug 20 2019, Tuesday)
-    3. [E][?] sleep (at: Aug 17 2029, Friday)
+    3. [E][?] sleep (at: Aug 17 2020, Monday)
     ____________________________________________________________
     ____________________________________________________________
      Yay! I've marked this task as done :3
@@ -68,7 +74,7 @@
     Here are the tasks in your list!!
     1. [T][?] exercise
     2. [D][?] finish nekobot (by: Aug 20 2019, Tuesday)
-    3. [E][?] sleep (at: Aug 17 2029, Friday)
+    3. [E][?] sleep (at: Aug 17 2020, Monday)
     ____________________________________________________________
     ____________________________________________________________
      Got it! I'll remove this task :>
@@ -78,7 +84,7 @@
     ____________________________________________________________
     Here are the tasks in your list!!
     1. [T][?] exercise
-    2. [E][?] sleep (at: Aug 17 2029, Friday)
+    2. [E][?] sleep (at: Aug 17 2020, Monday)
     ____________________________________________________________
     ____________________________________________________________
     Oh noes! I don't think you specified a valid task index :<
@@ -86,7 +92,7 @@
     ____________________________________________________________
     Here are the tasks in your list!!
     1. [T][?] exercise
-    2. [E][?] sleep (at: Aug 17 2029, Friday)
+    2. [E][?] sleep (at: Aug 17 2020, Monday)
     ____________________________________________________________
     ____________________________________________________________
     Oh noes! I don't think you specified a valid task index :<
@@ -98,7 +104,7 @@
     ____________________________________________________________
     Here are the tasks in your list!!
     1. [T][?] exercise
-    2. [E][?] sleep (at: Aug 17 2029, Friday)
+    2. [E][?] sleep (at: Aug 17 2020, Monday)
     ____________________________________________________________
     ____________________________________________________________
      Bye~ Hope to see you again soon ;w;
