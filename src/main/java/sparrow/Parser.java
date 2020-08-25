@@ -1,6 +1,7 @@
 package sparrow;
 
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 /**
  * Parses user input and calls the relevant methods.
@@ -85,6 +86,9 @@ public class Parser {
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new MissingTaskNumberException("No task number passed to delete command.", e);
                 }
+            case "find":
+                tasks.displayList(tasks.findTasks(commandArr[1]));
+                break;
             default:
                 throw new UnknownCommandException(commandArr[0]);
             }
