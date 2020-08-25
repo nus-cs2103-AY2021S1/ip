@@ -3,11 +3,20 @@ package duke.task;
 public class Event extends Task {
     private String atTime;
 
+    /**
+     * Contructs an event object.
+     * @param eventTask Name of event.
+     * @param atTime Time at which event happens.
+     */
     public Event(String eventTask, String atTime) {
         super(eventTask);
         this.atTime = atTime;
     }
 
+    /**
+     * Returns the event in array form.
+     * @return String array.
+     */
     @Override
     public String[] taskToArray() {
         String done;

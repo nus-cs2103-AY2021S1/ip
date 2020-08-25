@@ -4,23 +4,42 @@ public class Task {
     private String taskName;
     private boolean completed;
 
+    /**
+     * Constructs a task object.
+     * @param taskName Name of task.
+     */
     public Task(String taskName) {
         this.taskName = taskName;
         this.completed = false;
     }
 
+    /**
+     * Returns the task name.
+     * @return String indicating name of task.
+     */
     public String getTaskName() {
         return taskName;
     }
 
+    /**
+     * Returns true if the task is completed, false if not done yet.
+     * @return Boolean indicating progress of task.
+     */
     public boolean isCompleted() {
         return completed;
     }
 
+    /**
+     * Marks the task as done or completed.
+     */
     public void markAsDone() {
         completed = true;
     }
 
+    /**
+     * Returns the task in array form.
+     * @return String array.
+     */
     public String[] taskToArray() {
         String done;
         if(completed) {

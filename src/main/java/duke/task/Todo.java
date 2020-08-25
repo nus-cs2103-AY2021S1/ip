@@ -2,10 +2,18 @@ package duke.task;
 
 public class Todo extends Task {
 
+    /**
+     * Constructs a todo object.
+     * @param todo Name of todo object.
+     */
     public Todo(String todo) {
         super(todo);
     }
 
+    /**
+     * Returns the todo in array form.
+     * @return String array.
+     */
     @Override
     public String[] taskToArray() {
         String done;

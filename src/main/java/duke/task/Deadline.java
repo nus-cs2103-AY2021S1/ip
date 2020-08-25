@@ -3,11 +3,20 @@ package duke.task;
 public class Deadline extends Task {
     private String byTime;
 
+    /**
+     * Constructs a deadline object.
+     * @param deadlineTask Name of deadline.
+     * @param byTime Time by which deadline should be completed.
+     */
     public Deadline(String deadlineTask, String byTime) {
         super(deadlineTask);
         this.byTime = byTime;
     }
 
+    /**
+     * Returns the deadline in array form.
+     * @return String array.
+     */
     @Override
     public String[] taskToArray() {
         String done;

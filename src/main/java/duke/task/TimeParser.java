@@ -6,23 +6,33 @@ import java.util.Arrays;
 // import java.time.temporal.ChronoUnit;
 
 public class TimeParser {
-        public static String parseTime(String str) {
-            LocalDate date = LocalDate.parse(str);
-            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        }
+    /** Returns the date in format "MMM d yyyy".
+     * @param str String of date in form yyyy-mm-dd.
+     * @return String of date in form "MMM d yyyy".
+     */
+    public static String parseTime(String str) {
+        LocalDate date = LocalDate.parse(str);
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
 
-        public static boolean isValidTime(String str) {
-            String[] arr = str.split("-", 3);
+    /**
+     * Checks if the date string is in valid form.
+     * @param str String of date.
+     * @return Boolean indicating whether date string is valid.
+     */
+    public static boolean isValidTime(String str) {
+        String[] arr = str.split("-", 3);
 //            System.out.println(Arrays.toString(arr));
-            if (arr.length == 3) {
-                int year = Integer.parseInt(arr[0]);
-                int month = Integer.parseInt(arr[1]);
-                int date = Integer.parseInt(arr[2]);
-                return month <= 12 && date <= 31;
-            } else {
-                return false;
-            }
+        if (arr.length == 3) {
+            int year = Integer.parseInt(arr[0]);
+            int month = Integer.parseInt(arr[1]);
+            int date = Integer.parseInt(arr[2]);
+            return month <= 12 && date <= 31;
+        } else {
+            return false;
         }
+    }
+}
 
 
 //
@@ -45,4 +55,4 @@ public class TimeParser {
 //            LocalDate d4 = LocalDate.now();
 //            System.out.println(d4); // -> 2019-10-15
 //            System.out.println(d4.format(DateTimeFormatter.ofPattern("MMM d yyyy"))); // -> Oct 15 2019
-}
+
