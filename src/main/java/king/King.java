@@ -1,5 +1,5 @@
-package main.java;
-import main.java.tasks.TaskList;
+package king;
+import tasks.TaskList;
 import java.util.Scanner;
 
 public class King {

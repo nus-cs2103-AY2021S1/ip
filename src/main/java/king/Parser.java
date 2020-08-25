@@ -1,5 +1,5 @@
-package main.java;
-import main.java.tasks.*;
+package king;
+import tasks.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

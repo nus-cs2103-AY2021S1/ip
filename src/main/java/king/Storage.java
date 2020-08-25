@@ -1,6 +1,6 @@
-package main.java;
+package king;
 
-import main.java.tasks.*;
+import tasks.*;
 
 import java.io.*;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package main.java;
+package king;
 
 public class KingException extends Exception {
     final String message;
