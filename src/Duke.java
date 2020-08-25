@@ -155,13 +155,13 @@ public class Duke {
     }
 
     public static void loadTasks(String line) {
-        String[] array = line.split(" \\| ");
-        String task = array[0];
-        Boolean isDone = array[1].equals("1");
-        String desc = array[2];
+        String[] tasks = line.split(" \\| ");
+        String task = tasks[0];
+        Boolean isDone = tasks[1].equals("1");
+        String desc = tasks[2];
         String date = null;
-        if (array.length > 3) {
-            date = array[3];
+        if (tasks.length > 3) {
+            date = tasks[3];
         }
         if (task.equals("T")) {
             Task newTask = new ToDos(desc, isDone);
