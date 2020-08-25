@@ -109,6 +109,14 @@ public class Duke {
             ls.remove(index);
         }
     }
+
+    void loadFile() {
+
+    }
+
+    void saveFile() {
+
+    }
 }
 
 enum Type {
