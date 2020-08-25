@@ -16,6 +16,11 @@ import storage.Storage;
 
 import java.time.LocalDate;
 
+
+/**
+ * Parser for Duke class.
+ * Parses the various commands and makes necessary changes to the TaskList and Storage.
+ */
 public class Parser {
     private TaskList tasks;
     private Storage storage;
@@ -25,6 +30,11 @@ public class Parser {
         this.storage = storage;
 
     }
+
+    /**
+     * Parses the input, and makes necessary changes to tasks and storage.
+     * @param fullInput Command from the user.
+     */
 
     public void parse(String fullInput) {
         try {

@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Test the Parser.
+ */
 public class ParserTest {
     TaskList tasks = new TaskList(new ArrayList<>());
     Storage storage = new Storage(".\\data_test.txt");

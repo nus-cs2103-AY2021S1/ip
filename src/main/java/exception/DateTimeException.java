@@ -1,5 +1,9 @@
 package exception;
 
+/**
+ * Exception when the Date/Time is in the incorrect format.
+ */
+
 public class DateTimeException extends DukeException {
     public DateTimeException() {
     }

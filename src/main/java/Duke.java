@@ -19,6 +19,10 @@ public class Duke {
         this.parser = new Parser(tasks, storage);
     }
 
+    /**
+     * Runs Duke.
+     */
+
     public void run() {
         ui.displayWelcome();
         boolean isExit = false;
