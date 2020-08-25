@@ -76,9 +76,20 @@ public class Ui {
             System.out.println("No tasks on this day! Chill Chill~ ٩(˘◡˘)۶");
         } else {
             System.out.println("On " + dateString + ", you have the following tasks:");
-            int no = 1;
             for (Task task : filtered) {
-                String state = "[" + task.getStatusIcon() + "] ";
+                System.out.println(task.toString());
+            }
+        }
+    }
+
+    public void showTask(TaskList taskList, String keyword){
+        ArrayList<Task> tasks = taskList.getTasks();
+        ArrayList<Task> filtered = tasks.stream().filter(task -> task.getDescription().contains(keyword))
+                .collect(Collectors.toCollection(ArrayList::new));
+        if (filtered.size() == 0) {
+            System.out.println("Yurina can't find any relevant tasks. (T▽T)");
+        } else {
+            for (Task task : filtered) {
                 System.out.println(task.toString());
             }
         }

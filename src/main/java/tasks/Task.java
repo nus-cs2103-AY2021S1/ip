@@ -41,6 +41,11 @@ public class Task {
         return null;
     }
 
+    public String getDescription(){
+        return description;
+    }
+
+
     public Task markAsDone() {
         this.isDone = true;
         return this;
