@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
 		Task taskToSetDone = taskList.getTask(indexOfTask);
 		taskList.setTaskDone(indexOfTask);
 		storage.updateStorage(taskList);
-		ui.printMessage("Nice! I've marked this task as done:\n" +
-				taskToSetDone.toString());
+		ui.printMessage("Nice! I've marked this task as done:\n"
+				+ taskToSetDone.toString());
 	}
 }

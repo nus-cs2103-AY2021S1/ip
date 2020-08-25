@@ -47,10 +47,6 @@ public class Ui {
 		showLine();
 	}
 
-	public void showLoadingError() {
-		showError("Saved tasks could not be loaded.");
-	}
-
 	public void showLine() {
 		indent();
 		System.out.println(LINE);
