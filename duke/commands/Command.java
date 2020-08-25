@@ -1,8 +1,8 @@
-package Duke.commands;
+package duke.commands;
 
 import java.util.List;
-import Duke.data.Duke;
-import Duke.data.task.Task;
+import duke.data.Duke;
+import duke.data.task.Task;
 
 public class Command {
 

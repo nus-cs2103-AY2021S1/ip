@@ -1,6 +1,6 @@
-package Duke.commands;
+package duke.commands;
 
-import Duke.data.task.Task;
+import duke.data.task.Task;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package Duke.commands;
+package duke.commands;
 
 public class ExitCommand extends Command {
 

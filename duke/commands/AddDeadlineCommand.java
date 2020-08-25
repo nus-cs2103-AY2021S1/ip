@@ -1,6 +1,6 @@
-package Duke.commands;
+package duke.commands;
 
-import Duke.data.task.Deadline;
+import duke.data.task.Deadline;
 
 public class AddDeadlineCommand extends Command {
 

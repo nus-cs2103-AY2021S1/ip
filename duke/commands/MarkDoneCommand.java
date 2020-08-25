@@ -1,7 +1,6 @@
-package Duke.commands;
+package duke.commands;
 
-import Duke.commons.Messages;
-import Duke.data.task.Event;
+import duke.commons.Messages;
 
 public class MarkDoneCommand extends Command {
 

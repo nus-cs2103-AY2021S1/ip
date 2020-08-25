@@ -1,4 +1,4 @@
-package Duke.data.task;
+package duke.data.task;
 
 /**
  * The Todo class that represents a Todo task.

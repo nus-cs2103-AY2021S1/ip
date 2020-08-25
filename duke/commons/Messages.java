@@ -1,4 +1,4 @@
-package Duke.commons;
+package duke.commons;
 
 /**
  * Container for user visible messages.

@@ -1,7 +1,4 @@
-package Duke.commands;
-
-import static Duke.commons.Messages.DIVIDER;
-import static Duke.commons.Messages.INDENT;
+package duke.commands;
 
 public class HelpCommand extends Command {
 

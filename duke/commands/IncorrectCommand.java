@@ -1,4 +1,4 @@
-package Duke.commands;
+package duke.commands;
 
 /**
  * Represents an incorrect command. Upon execution, produces some feedback to the user.

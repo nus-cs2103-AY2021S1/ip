@@ -1,9 +1,9 @@
-package Duke.commands;
+package duke.commands;
 
 import java.util.List;
 import java.util.Optional;
 
-import Duke.data.task.Task;
+import duke.data.task.Task;
 
 /**
  * Represents the result of a command execution.

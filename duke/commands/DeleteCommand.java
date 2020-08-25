@@ -1,6 +1,6 @@
-package Duke.commands;
+package duke.commands;
 
-import Duke.commons.Messages;
+import duke.commons.Messages;
 
 /**
  * Deletes a task identified using it's last displayed index from the address

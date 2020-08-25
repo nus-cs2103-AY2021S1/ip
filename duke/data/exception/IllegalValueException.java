@@ -1,4 +1,4 @@
-package Duke.data.exception;
+package duke.data.exception;
 
 /**
  * Signals that some given data does not fulfill some constraints.

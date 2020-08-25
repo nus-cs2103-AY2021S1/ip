@@ -1,6 +1,6 @@
-package Duke.commands;
+package duke.commands;
 
-import Duke.data.task.Todo;
+import duke.data.task.Todo;
 
 public class AddTodoCommand extends Command {
 

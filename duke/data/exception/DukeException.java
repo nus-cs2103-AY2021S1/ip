@@ -1,4 +1,4 @@
-package Duke.data.exception;
+package duke.data.exception;
 
 /**
  * Duke exception is customised exception class for Bot

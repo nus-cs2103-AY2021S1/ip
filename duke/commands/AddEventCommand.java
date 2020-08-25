@@ -1,6 +1,6 @@
-package Duke.commands;
+package duke.commands;
 
-import Duke.data.task.Event;
+import duke.data.task.Event;
 
 public class AddEventCommand extends Command {
 

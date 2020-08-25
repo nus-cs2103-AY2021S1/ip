@@ -1,8 +1,8 @@
-package Duke.data;
+package duke.data;
 
-import Duke.data.task.TaskList;
-import Duke.data.task.TaskList.TaskNotFoundException;
-import Duke.data.task.Task;
+import duke.data.task.TaskList;
+import duke.data.task.TaskList.TaskNotFoundException;
+import duke.data.task.Task;
 
 public class Duke {
 

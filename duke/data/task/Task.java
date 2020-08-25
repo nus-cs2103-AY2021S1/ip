@@ -1,6 +1,4 @@
-package Duke.data.task;
-
-import java.util.Objects;
+package duke.data.task;
 
 /**
  * The task class that represents a task.
