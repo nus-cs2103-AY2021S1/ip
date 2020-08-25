@@ -33,27 +33,29 @@ public class Storage {
             if (Files.exists(Paths.get(cwd + filePath))) {
                 List<String> allLines = Files.readAllLines(Paths.get(cwd + filePath));
                 for (String line : allLines) {
+
                     String[] info = line.split(" \\| ");
                     String type = info[0];
                     int complete = Integer.parseInt(info[1]);
                     String title = info[2];
+
                     switch(type) {
-                        case "T":
-                            Todo newTodo = new Todo(title, complete);
-                            tasks.add(newTodo);
-                            break;
-                        case "D":
-                            String deadline = info[3];
-                            LocalDate deadlineInLocalDate = LocalDate.parse(deadline);
-                            Deadline newDeadline = new Deadline(title, complete, deadlineInLocalDate);
-                            tasks.add(newDeadline);
-                            break;
-                        case "E":
-                            String time = info[3];
-                            LocalDate timeInLocalDate = LocalDate.parse(time);
-                            Event newEvent = new Event(title, complete, timeInLocalDate);
-                            tasks.add(newEvent);
-                            break;
+                    case "T":
+                        Todo newTodo = new Todo(title, complete);
+                        tasks.add(newTodo);
+                        break;
+                    case "D":
+                        String deadline = info[3];
+                        LocalDate deadlineInLocalDate = LocalDate.parse(deadline);
+                        Deadline newDeadline = new Deadline(title, complete, deadlineInLocalDate);
+                        tasks.add(newDeadline);
+                        break;
+                    case "E":
+                        String time = info[3];
+                        LocalDate timeInLocalDate = LocalDate.parse(time);
+                        Event newEvent = new Event(title, complete, timeInLocalDate);
+                        tasks.add(newEvent);
+                        break;
                     }
                 }
             }
