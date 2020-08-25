@@ -8,13 +8,13 @@ public class Event extends Task {
     protected Date date;
     protected boolean isTime;
 
-    public Event (String description, Date date, boolean isTime) {
+    public Event(String description, Date date, boolean isTime) {
         super(description);
         this.date = date;
         this.isTime = isTime;
     }
 
-    public Event (String description, Date date, boolean isTime, boolean isDone) {
+    public Event(String description, Date date, boolean isTime, boolean isDone) {
         super(description, isDone);
         this.date = date;
         this.isTime = isTime;

@@ -22,8 +22,8 @@ public class Storage {
 
     private Path filepath;
 
-    private static final SimpleDateFormat dateTimeConverterFormat = new SimpleDateFormat("MMM dd yyyy hh:mma");
-    private static final SimpleDateFormat dateConverterFormat = new SimpleDateFormat("MMM dd yyyy");
+    private static final SimpleDateFormat DATE_TIME_CONVERTER_FORMAT = new SimpleDateFormat("MMM dd yyyy hh:mma");
+    private static final SimpleDateFormat DATE_CONVERTER_FORMAT = new SimpleDateFormat("MMM dd yyyy");
 
     public Storage(String filepath) {
         this.filepath = Paths.get(System.getProperty("user.dir") + filepath);
@@ -51,12 +51,12 @@ public class Storage {
                         break;
                     case "D":
                         isTime = arr[4].equals("1");
-                        date = (isTime) ? dateTimeConverterFormat.parse(arr[3]) : dateConverterFormat.parse(arr[3]);
+                        date = (isTime) ? DATE_TIME_CONVERTER_FORMAT.parse(arr[3]) : DATE_CONVERTER_FORMAT.parse(arr[3]);
                         tasks.add(new Deadline(arr[2], date, isTime, isDone));
                         break;
                     case "E":
                         isTime = arr[4].equals("1");
-                        date = (isTime) ? dateTimeConverterFormat.parse(arr[3]) : dateConverterFormat.parse(arr[3]);
+                        date = (isTime) ? DATE_TIME_CONVERTER_FORMAT.parse(arr[3]) : DATE_CONVERTER_FORMAT.parse(arr[3]);
                         tasks.add(new Event(arr[2], date, isTime, isDone));
                         break;
                     }

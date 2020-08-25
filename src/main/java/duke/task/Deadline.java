@@ -10,13 +10,13 @@ public class Deadline extends Task {
     protected Date date;
     protected boolean isTime;
 
-    public Deadline (String description, Date date, boolean isTime) {
+    public Deadline(String description, Date date, boolean isTime) {
         super(description);
         this.date = date;
         this.isTime = isTime;
     }
 
-    public Deadline (String description, Date date, boolean isTime, boolean isDone) {
+    public Deadline(String description, Date date, boolean isTime, boolean isDone) {
         super(description, isDone);
         this.date = date;
         this.isTime = isTime;

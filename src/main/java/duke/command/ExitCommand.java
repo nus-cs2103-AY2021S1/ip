@@ -6,7 +6,8 @@ import duke.Ui;
 import duke.command.Command;
 
 public class ExitCommand extends Command {
-    public ExitCommand() {}
+    public ExitCommand() {
+    }
 
 
     @Override

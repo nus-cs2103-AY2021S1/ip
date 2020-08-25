@@ -16,7 +16,6 @@ public class Duke {
     }
 
 
-
     public void run() {
         ui.printGreeting();
         boolean isExit = false;
@@ -37,8 +36,6 @@ public class Duke {
         Duke duke = new Duke("/data/duke.txt");
         duke.run();
     }
-
-
 
 
 }
