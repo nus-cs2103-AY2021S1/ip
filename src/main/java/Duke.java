@@ -53,12 +53,7 @@ public class Duke {
                         }
                     case DEADLINE:
                         try {
-                            String obtainDate = arr[1];
-                            String arr2[] = obtainDate.split("/by", 2);
-                            String descrip = arr2[0];
-                            String date = arr2[1];
-                            Deadline item = new Deadline(descrip, date);
-                            addLines(taskList.add(item));
+                            addLines(taskList.add(Deadline.createDeadline(arr[1])));
                             break;
                         } catch (ArrayIndexOutOfBoundsException e) {
                             System.out.println(new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.", e));
@@ -74,12 +69,7 @@ public class Duke {
                         }
                     case EVENT:
                         try {
-                            String obtainDate = arr[1];
-                            String arr2[] = obtainDate.split("/at", 2);
-                            String descrip = arr2[0];
-                            String date = arr2[1];
-                            Event item = new Event(descrip, date);
-                            addLines(taskList.add(item));
+                            addLines(taskList.add(Event.createEvent(arr[1])));
                             break;
                         } catch (Exception e) {
                             System.out.println(new DukeException("☹ OOPS!!! The description of a event cannot be empty.", e));

@@ -1,23 +1,43 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
 
-    protected String by;
+   // protected String by;
+    private LocalDateTime date;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDateTime date) {
         super(description);
-        this.by = by;
+        this.date = date;
+    }
+
+    public static Deadline createDeadline(String str) {
+        if (str == null) {
+            throw new DukeException("I need something to work with.");
+        }
+        String[] detailsArray = str.split("/by", 2);
+        try {
+            String description = detailsArray[0].trim();
+            String dateTimeString = detailsArray[1].trim();
+            LocalDateTime dateTime = DateConverter.parseString(dateTimeString);
+            return new Deadline(description, dateTime);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("No date found");
+        }
     }
 
     public String encode() {
-        return String.format("D|%s|%s|%s", super.isDone ? "Y" : "N", this.by, super.description);
+        return String.format("D|%s|%s|%s", super.isDone ? "Y" : "N", this.date, super.description);
     }
 
     public static Deadline decode(String code) throws DukeException {
         if (code.charAt(0) == 'D') {
             String[] content = code.split("\\|", 4);
+
             if (content.length != 4) {
                 throw new Error("data string is not equal to 4");
             }
-            Deadline newDeadline = new Deadline(content[3], content[2]);
+
+            Deadline newDeadline = new Deadline(content[3], DateConverter.parseString(content[2]));
             if (content[1].equals("Y")) {
                 newDeadline.markAsDone();
             }
@@ -27,8 +47,10 @@ public class Deadline extends Task {
         }
     }
 
+
+
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by:" + by + ")";
+        return "[D]" + super.toString() + "(by:" + DateConverter.parseLocalDateTime(this.date) + ")";
     }
 }
