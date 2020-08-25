@@ -11,12 +11,13 @@ public class Parser {
      * @throws DukeException if the command is not recognised or the description of the command is empty
      */
     public static Command parseCommand(String userInput)
-        throws DukeException{
+            throws DukeException {
         String[] input = userInput.split(" ", 2);
         String commandWord = input[0];
         String arguments = "";
 
         HashSet<String> commandsWithArgs = new HashSet<>();
+
         commandsWithArgs.add(DeadlineCommand.COMMAND_WORD);
         commandsWithArgs.add(DeleteCommand.COMMAND_WORD);
         commandsWithArgs.add(DoneCommand.COMMAND_WORD);

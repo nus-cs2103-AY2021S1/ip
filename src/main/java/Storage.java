@@ -85,7 +85,7 @@ public class Storage {
                     break;
                 default:
                     throw new DukeException("OOPS!!! I'm sorry, "
-                        +"but I don't recognise the command from the text file.");
+                            + "but I don't recognise the command from the text file.");
                 }
 
                 if (isDone) {

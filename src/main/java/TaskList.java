@@ -46,14 +46,13 @@ public class TaskList {
     public String toString() {
         int size = this.tasks.size();
         String response = size <= 1
-            ? "Here is the task in your list:\n"
-            : "Here are the tasks in your list:\n";
+                ? "Here is the task in your list:\n"
+                : "Here are the tasks in your list:\n";
 
         for (int i = 0; i < size; i++) {
-            response += String.format(
-                "%d. %s%n",
-                i + 1,
-                this.tasks.get(i).toString()
+            response += String.format("%d. %s%n",
+                    i + 1,
+                    this.tasks.get(i).toString()
             );
         }
 

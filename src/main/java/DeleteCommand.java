@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
             System.err.println(e);
         }
         String message = this.DELETE_MESSAGE + "  " + task.toString()
-            + "\n" + tasks.replyNumTasks();
+                + "\n" + tasks.replyNumTasks();
         return new CommandResult(message);
     }
 }
