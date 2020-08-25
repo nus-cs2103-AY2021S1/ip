@@ -1,4 +1,4 @@
-public class PrintFunctions {
+public class Ui {
     public static void printWith4Indent(String message) {
         System.out.println(StringConstants.FOUR_SPACES + message);
     }
@@ -23,6 +23,10 @@ public class PrintFunctions {
             printWith6Indent(message);
         }
         printWith4Indent(StringConstants.LINE);
+    }
+
+    public static void printExceptionBetweenLines(Exception exception) {
+        printMessageBetweenLines("Error: " + exception.getMessage());
     }
 
     public static void printGreeting() {

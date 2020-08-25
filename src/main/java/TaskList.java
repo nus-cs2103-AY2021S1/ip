@@ -1,4 +1,3 @@
-import java.io.IOError;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -6,33 +5,33 @@ public class TaskList {
     private final ArrayList<Task> tasks;
 
     public TaskList() {
-        this.tasks = Saver.load();
+        this.tasks = Storage.load();
     }
 
     private void addTask(Task task) {
         tasks.add(task);
     }
 
-    public void addTask(String command, UserCommandType userCommandType) throws UserCommands.InvalidCommandException {
+    public void addTask(String command, UserCommandType userCommandType) throws Parser.InvalidCommandException {
         Task task;
-        String[] taskComponents = UserCommands.parseTask(command);
+        String[] taskComponents = Parser.parseTask(command);
 
         switch (userCommandType) {
             case TODO:
                 task = new Todo(taskComponents[0], false);
                 break;
             case DEADLINE:
-                task = new Deadline(taskComponents[0], false, UserCommands.parseDateTime(taskComponents[1]));
+                task = new Deadline(taskComponents[0], false, Parser.parseDateTime(taskComponents[1]));
                 break;
             case EVENT:
                 task = new Event(taskComponents[0], false, taskComponents[1]);
                 break;
             default:
-                throw new UserCommands.InvalidCommandException();
+                throw new Parser.InvalidCommandException();
         }
 
         addTask(task);
-        PrintFunctions.printMessagesBetweenLines(new String[] {
+        Ui.printMessagesBetweenLines(new String[] {
                 StringConstants.ADD_MESSAGE,
                 "  " + task.toString(),
                 String.format(StringConstants.COUNT_MESSAGE, tasks.size())
@@ -80,12 +79,12 @@ public class TaskList {
             Task task = tasks.get(i);
             messages[i] = String.format("%d.%s", i + 1, task.toString());
         }
-        PrintFunctions.printMessagesBetweenLines(messages);
+        Ui.printMessagesBetweenLines(messages);
     }
 
     public void saveTaskList() {
         try {
-            Saver.save(tasks);
+            Storage.save(tasks);
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
         }
@@ -94,7 +93,7 @@ public class TaskList {
 
     public static class InvalidIndexException extends Exception {
         public InvalidIndexException() {
-            super("☹ OOPS!!! Invalid task index");
+            super("Invalid task index");
         }
     }
 }

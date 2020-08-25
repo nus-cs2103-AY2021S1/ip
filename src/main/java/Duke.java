@@ -2,31 +2,31 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        PrintFunctions.printGreeting();
+        Ui.printGreeting();
         String userInput;
         TaskList userTaskList = new TaskList();
         Scanner scanner = new Scanner(System.in);
         loop: while (true) {
             userInput = scanner.nextLine();
             try {
-                UserCommandType userCommandType = UserCommands.parseUserCommand(userInput);
+                UserCommandType userCommandType = Parser.parseUserCommand(userInput);
                 switch (userCommandType) {
                     case EXIT:
-                        PrintFunctions.printMessageBetweenLines(StringConstants.EXIT_MESSAGE);
+                        Ui.printMessageBetweenLines(StringConstants.EXIT_MESSAGE);
                         break loop;
                     case LIST:
                         userTaskList.printTaskList();
                         break;
                     case DONE:
-                        int doneIndex = UserCommands.getTaskIndex(userInput);
+                        int doneIndex = Parser.getTaskIndex(userInput);
                         String[] doneMessages = userTaskList.markTaskDoneAtIndex(doneIndex);
-                        PrintFunctions.printMessagesBetweenLines(doneMessages);
+                        Ui.printMessagesBetweenLines(doneMessages);
                         userTaskList.saveTaskList();
                         break;
                     case DELETE:
-                        int deleteIndex = UserCommands.getTaskIndex(userInput);
+                        int deleteIndex = Parser.getTaskIndex(userInput);
                         String[] deleteMessages = userTaskList.deleteTaskAtIndex(deleteIndex);
-                        PrintFunctions.printMessagesBetweenLines(deleteMessages);
+                        Ui.printMessagesBetweenLines(deleteMessages);
                         userTaskList.saveTaskList();
                         break;
                     case TODO:
@@ -36,8 +36,8 @@ public class Duke {
                         userTaskList.saveTaskList();
                         break;
                 }
-            } catch (UserCommands.InvalidCommandException | TaskList.InvalidIndexException exception) {
-                PrintFunctions.printMessageBetweenLines(exception.getMessage());
+            } catch (Parser.InvalidCommandException | TaskList.InvalidIndexException exception) {
+                Ui.printExceptionBetweenLines(exception);
             }
         }
     }

@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Saver {
+public class Storage {
     private static final String saveFilePath = "data/duke.txt";
 
     public static void save(ArrayList<Task> tasks) throws IOException {
@@ -46,7 +46,7 @@ public class Saver {
             System.out.println("No save file detected");
             return new ArrayList<>();
         } catch (InvalidSaveFileException | DateTimeParseException exception) {
-            System.out.println(exception.getMessage());
+            Ui.printExceptionBetweenLines(exception);
             return new ArrayList<>();
         }
     }
@@ -60,7 +60,7 @@ public class Saver {
 
     public static class InvalidSaveFileException extends Exception {
         public InvalidSaveFileException() {
-            super("☹ OOPS!!! Invalid save file");
+            super("Invalid save file");
         }
     }
 

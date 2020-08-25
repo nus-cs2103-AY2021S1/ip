@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
-public class UserCommands {
+public class Parser {
     private static final String TODO_COMMAND = "todo";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
@@ -81,11 +81,11 @@ public class UserCommands {
 
     public static class InvalidCommandException extends Exception {
         public InvalidCommandException(String errorMessage) {
-            super("☹ OOPS!!! " + errorMessage);
+            super(errorMessage);
         }
 
         public InvalidCommandException() {
-            super("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            super("Unrecognised command");
         }
     }
 }
