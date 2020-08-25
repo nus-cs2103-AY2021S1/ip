@@ -1,3 +1,4 @@
+import javax.print.DocFlavor;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,5 +67,15 @@ public class TaskList {
     public void addTask(Task t, Ui ui) {
         tasks.add(t);
         ui.showAdd(tasks.get(tasks.size() - 1), tasks.size());
+    }
+
+    public void findTask(String keyword, Ui ui) {
+        ArrayList<String> lst = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.toString().contains(keyword)) {
+                lst.add(t.toString());
+            }
+        }
+        ui.showFind(lst);
     }
 }

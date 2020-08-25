@@ -135,6 +135,10 @@ public class Parser {
                             "specified by a valid number.");
                 }
             }
+        } else if ((st.length() >= 4) && (st.substring(0, 4).equals("find"))) {
+            lst.add("Find");
+            lst.add(st.split(" ")[1]);
+            return lst;
         } else {
             throw new InvalidCommandException("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

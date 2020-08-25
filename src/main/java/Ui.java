@@ -71,6 +71,15 @@ public class Ui {
         showLine();
     }
 
+    public void showFind(ArrayList<String> lst) {
+        showLine();
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < lst.size(); i++) {
+            System.out.println("    " + (i + 1) + "." + lst.get(i));
+        }
+        showLine();
+    }
+
     public String readCommand() {
         return sc.nextLine();
     }

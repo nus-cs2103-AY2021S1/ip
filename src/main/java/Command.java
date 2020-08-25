@@ -36,6 +36,8 @@ public class Command {
                 task.addTask(new Event(lst.get(2), lst.get(3)), ui);
             }
             storage.save(task.getTasks());
+        } else if (lst.get(0).equals("Find")) {
+            task.findTask(lst.get(1), ui);
         } else {
             task.deleteTask(Integer.parseInt(lst.get(1)), ui);
             storage.save(task.getTasks());
