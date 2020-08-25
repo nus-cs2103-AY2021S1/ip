@@ -21,6 +21,9 @@ abstract class Command {
         } else if (command.contains("delete ")) {
             int task = Integer.parseInt(command.replace("delete ", "")) - 1;
             return new deleteCommand(task);
+        } else if (command.contains("find ")) {
+            String key = command.replace("find ", "");
+            return new findCommand(key);
         } else {
             //actual entry
             String postFix = command.split(" ", 2)[1];
@@ -142,5 +145,19 @@ class eventCommand extends Command {
         ui.printf("Got it. I've added this task:\n" + task);
         ui.printf(tasks.taskCount());
         storage.saveFile(tasks);
+    }
+}
+
+class findCommand extends Command {
+    String key;
+
+    findCommand(String key) {
+        this.key = key;
+    }
+
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+        ui.printf("Here are the matching tasks in your list:\n");
+        ui.printf(tasks.find(this.key));
     }
 }
