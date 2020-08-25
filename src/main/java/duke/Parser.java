@@ -4,19 +4,30 @@ import duke.exception.*;
 import duke.command.*;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Parser class to parse through the input given by the user.
+ */
 public class Parser {
 
     private String parseMessage;
     private UserInterface ui;
 
+    /**
+     * Constructor for Parser.
+     * @param parseMessage Message that has to be parsed by the parser.
+     * @param ui UserInterface for the parser to trigger printing events.
+     */
     public Parser(String parseMessage, UserInterface ui) {
         this.parseMessage = parseMessage;
         this.ui = ui;
     }
 
+    /**
+     * Initialises the parser to start processing the parseMessage. Continues until user terminates.
+     * @param tasklist List for the Parser to reference for tasks, can be empty.
+     */
     public void start(Tasklist tasklist) {
 
         Scanner sc = new Scanner(System.in);
@@ -51,7 +62,14 @@ public class Parser {
         }
     }
 
-    public void commandTasks(Tasklist tasklist, String tag, String message) throws DukeTaskException {
+    /**
+     * Helper method to organize the different types of task that can be recorded.
+     * @param tasklist List of task to be referenced from.
+     * @param tasktype Type of task to be recorded.
+     * @param message Details of the task.
+     * @throws DukeTaskException When there is an error in the input.
+     */
+    public void commandTasks(Tasklist tasklist, String tasktype, String message) throws DukeTaskException {
 
         String[] parsedMessage = null;
         Task newTask = null;
@@ -61,12 +79,12 @@ public class Parser {
 
             if (message.isEmpty()) {
                 throw new IndexOutOfBoundsException();
-            } else if (tag.equals("todo")) {
+            } else if (tasktype.equals("todo")) {
                 newTask = new Todo(message);
-            } else if (tag.equals("deadline")) {
+            } else if (tasktype.equals("deadline")) {
                 parsedMessage = message.split("/by ");
                 newTask = new Deadline(parsedMessage[0], parsedMessage[1]);
-            } else if (tag.equals("event")) {
+            } else if (tasktype.equals("event")) {
                 parsedMessage = message.split("/at ");
                 newTask = new Event(parsedMessage[0], parsedMessage[1]);
             }

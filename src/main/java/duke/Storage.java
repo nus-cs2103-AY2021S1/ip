@@ -3,8 +3,6 @@ package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
@@ -23,6 +21,8 @@ public class Storage {
 
     /**
      * Constructor for the Storage object to track locally saved tasks.
+     * The storage object checks for any pre-existing files to load information.
+     * If not available, the storage object will create a file.
      */
     public Storage() {
         path = Paths.get(DEFAULT_PATH);
@@ -36,6 +36,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Method for the storage to write the current session's task list locally into the computer.
+     * @param taskList List of task to be copied into the local computer.
+     * @throws IOException
+     */
     public void writeData(List<Task> taskList) throws IOException {
         FileWriter file = new FileWriter(DEFAULT_PATH);
         for (Task tasking : taskList) {
@@ -63,6 +68,11 @@ public class Storage {
         file.close();
     }
 
+    /**
+     * Storage to search and load from the local computer a list of tasks.
+     * @return Returns list of tasks that was historically written existing in the computer.
+     * @throws IOException When there is no save file found.
+     */
     public List<Task> load() throws IOException {
         // checks to see if a file is already supposed to be there
         Scanner sc = new Scanner(path.toFile());
