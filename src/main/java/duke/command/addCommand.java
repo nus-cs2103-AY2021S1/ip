@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class addCommand extends Command {
     Task task;
 

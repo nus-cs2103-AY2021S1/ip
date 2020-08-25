@@ -1,7 +1,20 @@
+package duke;
+
+import duke.command.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
+    Duke duke;
+
+    public Parser(Duke duke) {
+        this.duke = duke;
+    }
 
     public Command parse(String input, TaskList tasks) throws DukeException {
         String command;
@@ -64,7 +77,8 @@ public class Parser {
                 return new endCommand(tasks);
 
             default:
-                throw new DukeException("I'm sorry, but I don't know what that means :-(\n");
+                duke.ui.badInput();
         }
+        return null;
     }
 }

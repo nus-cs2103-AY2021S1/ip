@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeException extends Exception {
 
     // default error message + particular error message
