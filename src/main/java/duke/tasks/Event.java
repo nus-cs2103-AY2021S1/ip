@@ -1,6 +1,6 @@
 package duke.tasks;
+
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents an Event task that is created upon user input.

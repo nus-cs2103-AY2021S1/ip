@@ -1,18 +1,7 @@
 package duke.tasks;
-import org.w3c.dom.ls.LSOutput;
-import java.io.*;
-import java.sql.Array;
-import java.sql.SQLOutput;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.Date;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 /**
  * Represents the Duke Program. Helps manage user's tasks and keeps them in check.
@@ -42,16 +31,16 @@ public class Duke {
     public void run() throws IOException {
         UI.intro();
         boolean isExit = false;
-
         while(!isExit) {
             String toPrint = ui.nextInput();
-            ui.dividerLine(); //show the divider line ("_____")
+            ui.dividerLine();
+
             Command c = parser.parse(toPrint);
             c.execute(tasks, ui, storage);
             isExit = c.isExit();
+
             ui.dividerLine();
         }
-
         System.out.println("Bye. Hope to see you again soon!");
     }
 

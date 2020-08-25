@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import java.util.Scanner;
-
 /**
  * Represents a parser where the inputs from the user is filtered according to
  * the command issued.

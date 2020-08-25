@@ -47,9 +47,8 @@ public class TaskList {
 
     /**
      * Lists all the task from the list of tasks.
-     * @param toPrint
      */
-    public void list(String toPrint) {
+    public void list() {
         int i = 1;
         System.out.println("Here are the tasks in your list: ");
         this.taskLs.forEach(n -> System.out.println(this.taskLs.indexOf(n) + 1 + ". " + n));
