@@ -1,5 +1,10 @@
+import java.time.LocalDateTime;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Chatbot {
     public String line = "____________________________________________________________";
@@ -100,7 +105,12 @@ public class Chatbot {
             case "deadline":
                 if (s.length() != "deadline".length()) {
                     String[] value = s.split(" /by ");
-                    Deadline deadline = new Deadline(value[0].replace("deadline ", ""), value[1]);
+                    String date = value[1];
+                    DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                    DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
+                    LocalDateTime dateTime = LocalDateTime.parse(date, inputFormat);
+                    dateTime.format(outputFormat);
+                    Deadline deadline = new Deadline(value[0].replace("deadline ", ""), dateTime);
                     list.add(deadline);
                     addTask(deadline);
                     return true;
