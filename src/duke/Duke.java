@@ -1,12 +1,25 @@
+package duke;
+import java.io.IOException;
 import java.util.*;
+
 
 public class Duke {
 
-    List<Task> list;
+    private List<Task> list;
+    private Storage saveData;
 
 
-    public Duke(){
+    public Duke(String path){
         list = new ArrayList<>();
+        try {
+            this.saveData = new Storage(path);
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        } try {
+            list.addAll(saveData.loadSavedData(path));
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
     }
 
     public void sayHi() {
@@ -33,6 +46,7 @@ public class Duke {
         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-");
     }
 
+
     public void run() {
         sayHi();
         Scanner sc = new Scanner(System.in);
@@ -56,7 +70,7 @@ public class Duke {
                 addDeleteTask(str);
             } else {
                 try {
-                    throw new DukeException("☹ OOPS!!! wait..... I don't understand you order my sir.");
+                    throw new DukeException("☹ OOPS!!! wait..... I don't understand your order my sir.");
                 } catch (DukeException e) {
                     saySomthing(e.getMessage());
                 }
@@ -68,12 +82,13 @@ public class Duke {
         try {
             if (str.trim().length() == 6) {
                 throw new DukeException("☹ OOPS!!! Check delete formatting, include which task to delete.");
-            } else if (Character.getNumericValue(str.charAt(7)) > list.size()) {
+            } else if (Character.getNumericValue(str.charAt(7)) > list.size() || Character.getNumericValue(str.charAt(7)) == 0) {
                 throw new DukeException("☹ OOPS!!! Task not in the list");
             }
             int index = Character.getNumericValue(str.charAt(7));
             deleteTask(index);
-        } catch (DukeException e) {
+            this.saveData.deleteTask(index);
+        } catch (DukeException | IOException e) {
             this.saySomthing(e.getMessage());
         }
     }
@@ -95,7 +110,9 @@ public class Duke {
             String by = holder[1].trim();
             Deadline task = new Deadline(description, by);
             addToList(task);
-        } catch (DukeException e) {
+            String save = "D>0>"+description+">"+by;
+            this.saveData.addTask(str);
+        } catch (DukeException | IOException e) {
             this.saySomthing(e.getMessage());
         }
     }
@@ -107,7 +124,9 @@ public class Duke {
             }
             Todo task = new Todo(str.substring(5));
             addToList(task);
-        } catch (DukeException e) {
+            String save = "T>0>"+str.substring(5);
+            this.saveData.addTask(save);
+        } catch (DukeException | IOException e) {
             this.saySomthing(e.getMessage());
         }
     }
@@ -124,7 +143,10 @@ public class Duke {
             String at = holder[1].trim();
             Event task = new Event(description, at);
             addToList(task);
-        } catch (DukeException e) {
+
+            String save = "E>0>"+description+">"+at;
+            this.saveData.addTask(save);
+        } catch (DukeException | IOException e) {
             this.saySomthing(e.getMessage());
         }
     }
@@ -133,12 +155,13 @@ public class Duke {
         try {
             if (str.trim().length() == 4) {
                 throw new DukeException("☹ OOPS!!! Check done formatting, include which task to complete.");
-            } else if (Character.getNumericValue(str.charAt(5)) > list.size()) {
+            } else if (Character.getNumericValue(str.charAt(5)) > list.size() || Character.getNumericValue(str.charAt(5)) == 0) {
                 throw new DukeException("☹ OOPS!!! Task not in the list");
             }
             int index = Character.getNumericValue(str.charAt(5));
             completeTask(index);
-        } catch (DukeException e) {
+            this.saveData.completeTask(index);
+        } catch (DukeException | IOException e) {
             this.saySomthing(e.getMessage());
         }
     }
@@ -155,6 +178,7 @@ public class Duke {
 
     public void showList() {
         String print = "";
+        print += "Here are the tasks in your list:\n";
         for (int i = 0; i < list.size(); i++) {
             if (i == list.size()-1) {
                 print += String.format("%d. ", i+1) + list.get(i);
@@ -166,7 +190,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke bot = new Duke();
+        Duke bot = new Duke("data/duke.txt");
         bot.run();
     }
 }
