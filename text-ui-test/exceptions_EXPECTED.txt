@@ -8,252 +8,252 @@ Hello! I'm Duke the chatbot!
 What can I do for you?
 
 DukeException: ? OOPS!!! I'm sorry, but I don't know what that means :-(
-	at TaskListHandler.receiveInvalidCommand(TaskListHandler.java:112)
+	at taskListHandler.receiveInvalidCommand(taskListHandler.java:112)
 	at Duke.startChat(Duke.java:86)
 	at Duke.main(Duke.java:8)
 
 DukeException: ? OOPS!!! The description of a todo cannot be empty.
-	at TaskListHandler.processNewTask(TaskListHandler.java:62)
+	at taskListHandler.processNewTask(taskListHandler.java:62)
 	at Duke.startChat(Duke.java:58)
 	at Duke.main(Duke.java:8)
 
 DukeException: ? OOPS!!! The description of a todo cannot be empty.
-	at TaskListHandler.processNewTask(TaskListHandler.java:62)
+	at taskListHandler.processNewTask(taskListHandler.java:62)
 	at Duke.startChat(Duke.java:58)
 	at Duke.main(Duke.java:8)
 
 DukeException: Empty list, pls add tasks to list first
-	at TaskListHandler.printList(TaskListHandler.java:21)
+	at taskListHandler.printList(taskListHandler.java:21)
 	at Duke.startChat(Duke.java:37)
 	at Duke.main(Duke.java:8)
 
 DukeException: Empty list, pls add tasks to list first
-	at TaskListHandler.printList(TaskListHandler.java:21)
+	at taskListHandler.printList(taskListHandler.java:21)
 	at Duke.startChat(Duke.java:37)
 	at Duke.main(Duke.java:8)
 
 DukeException: ? OOPS!!! I'm sorry, but I don't know what that means :-(
-	at TaskListHandler.receiveInvalidCommand(TaskListHandler.java:112)
+	at taskListHandler.receiveInvalidCommand(taskListHandler.java:112)
 	at Duke.startChat(Duke.java:86)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, use add deadline format: deadline [task] /by [time]
-	at TaskListHandler.processNewTask(TaskListHandler.java:71)
+	at taskListHandler.processNewTask(taskListHandler.java:71)
 	at Duke.startChat(Duke.java:67)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, use add deadline format: deadline [task] /by [time]
-	at TaskListHandler.processNewTask(TaskListHandler.java:71)
+	at taskListHandler.processNewTask(taskListHandler.java:71)
 	at Duke.startChat(Duke.java:67)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, use add deadline format: deadline [task] /by [time]
-	at TaskListHandler.processNewTask(TaskListHandler.java:71)
+	at taskListHandler.processNewTask(taskListHandler.java:71)
 	at Duke.startChat(Duke.java:67)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, use add deadline format: deadline [task] /by [time]
-	at TaskListHandler.processNewTask(TaskListHandler.java:71)
+	at taskListHandler.processNewTask(taskListHandler.java:71)
 	at Duke.startChat(Duke.java:67)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, use add deadline format: deadline [task] /by [time]
-	at TaskListHandler.processNewTask(TaskListHandler.java:71)
+	at taskListHandler.processNewTask(taskListHandler.java:71)
 	at Duke.startChat(Duke.java:67)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, use add deadline format: deadline [task] /by [time]
-	at TaskListHandler.processNewTask(TaskListHandler.java:71)
+	at taskListHandler.processNewTask(taskListHandler.java:71)
 	at Duke.startChat(Duke.java:67)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, use add deadline format: deadline [task] /by [time]
-	at TaskListHandler.processNewTask(TaskListHandler.java:71)
+	at taskListHandler.processNewTask(taskListHandler.java:71)
 	at Duke.startChat(Duke.java:67)
 	at Duke.main(Duke.java:8)
 
 DukeException: Empty list, pls add tasks to list first
-	at TaskListHandler.printList(TaskListHandler.java:21)
+	at taskListHandler.printList(taskListHandler.java:21)
 	at Duke.startChat(Duke.java:37)
 	at Duke.main(Duke.java:8)
 
 DukeException: Empty list, pls add tasks to list first
-	at TaskListHandler.printList(TaskListHandler.java:21)
+	at taskListHandler.printList(taskListHandler.java:21)
 	at Duke.startChat(Duke.java:37)
 	at Duke.main(Duke.java:8)
 
 DukeException: ? OOPS!!! I'm sorry, but I don't know what that means :-(
-	at TaskListHandler.receiveInvalidCommand(TaskListHandler.java:112)
+	at taskListHandler.receiveInvalidCommand(taskListHandler.java:112)
 	at Duke.startChat(Duke.java:86)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, use add event format: event [task] /at [time]
-	at TaskListHandler.processNewTask(TaskListHandler.java:77)
+	at taskListHandler.processNewTask(taskListHandler.java:77)
 	at Duke.startChat(Duke.java:77)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, use add event format: event [task] /at [time]
-	at TaskListHandler.processNewTask(TaskListHandler.java:77)
+	at taskListHandler.processNewTask(taskListHandler.java:77)
 	at Duke.startChat(Duke.java:77)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, use add event format: event [task] /at [time]
-	at TaskListHandler.processNewTask(TaskListHandler.java:77)
+	at taskListHandler.processNewTask(taskListHandler.java:77)
 	at Duke.startChat(Duke.java:77)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, use add event format: event [task] /at [time]
-	at TaskListHandler.processNewTask(TaskListHandler.java:77)
+	at taskListHandler.processNewTask(taskListHandler.java:77)
 	at Duke.startChat(Duke.java:77)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, use add event format: event [task] /at [time]
-	at TaskListHandler.processNewTask(TaskListHandler.java:77)
+	at taskListHandler.processNewTask(taskListHandler.java:77)
 	at Duke.startChat(Duke.java:77)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, use add event format: event [task] /at [time]
-	at TaskListHandler.processNewTask(TaskListHandler.java:77)
+	at taskListHandler.processNewTask(taskListHandler.java:77)
 	at Duke.startChat(Duke.java:77)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, use add event format: event [task] /at [time]
-	at TaskListHandler.processNewTask(TaskListHandler.java:77)
+	at taskListHandler.processNewTask(taskListHandler.java:77)
 	at Duke.startChat(Duke.java:77)
 	at Duke.main(Duke.java:8)
 
 DukeException: ? OOPS!!! The description of a todo cannot be empty.
-	at TaskListHandler.processNewTask(TaskListHandler.java:62)
+	at taskListHandler.processNewTask(taskListHandler.java:62)
 	at Duke.startChat(Duke.java:58)
 	at Duke.main(Duke.java:8)
 
 DukeException: ? OOPS!!! The description of a todo cannot be empty.
-	at TaskListHandler.processNewTask(TaskListHandler.java:62)
+	at taskListHandler.processNewTask(taskListHandler.java:62)
 	at Duke.startChat(Duke.java:58)
 	at Duke.main(Duke.java:8)
 
 DukeException: ? OOPS!!! I'm sorry, but I don't know what that means :-(
-	at TaskListHandler.receiveInvalidCommand(TaskListHandler.java:112)
+	at taskListHandler.receiveInvalidCommand(taskListHandler.java:112)
 	at Duke.startChat(Duke.java:86)
 	at Duke.main(Duke.java:8)
 
 DukeException: Empty list, pls add tasks to list first
-	at TaskListHandler.printList(TaskListHandler.java:21)
+	at taskListHandler.printList(taskListHandler.java:21)
 	at Duke.startChat(Duke.java:37)
 	at Duke.main(Duke.java:8)
 
 DukeException: Empty list, pls add tasks to list first
-	at TaskListHandler.printList(TaskListHandler.java:21)
+	at taskListHandler.printList(taskListHandler.java:21)
 	at Duke.startChat(Duke.java:37)
 	at Duke.main(Duke.java:8)
 
 DukeException: ? OOPS!!! I'm sorry, but I don't know what that means :-(
-	at TaskListHandler.receiveInvalidCommand(TaskListHandler.java:112)
+	at taskListHandler.receiveInvalidCommand(taskListHandler.java:112)
 	at Duke.startChat(Duke.java:86)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter only one task number after done
-	at TaskListHandler.modifyTask(TaskListHandler.java:39)
+	at taskListHandler.modifyTask(taskListHandler.java:39)
 	at Duke.startChat(Duke.java:43)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter only one task number after done
-	at TaskListHandler.modifyTask(TaskListHandler.java:39)
+	at taskListHandler.modifyTask(taskListHandler.java:39)
 	at Duke.startChat(Duke.java:43)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter a valid task number after done
-	at TaskListHandler.modifyTask(TaskListHandler.java:52)
+	at taskListHandler.modifyTask(taskListHandler.java:52)
 	at Duke.startChat(Duke.java:43)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter only one task number after done
-	at TaskListHandler.modifyTask(TaskListHandler.java:39)
+	at taskListHandler.modifyTask(taskListHandler.java:39)
 	at Duke.startChat(Duke.java:43)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter a valid task number after done
-	at TaskListHandler.modifyTask(TaskListHandler.java:52)
+	at taskListHandler.modifyTask(taskListHandler.java:52)
 	at Duke.startChat(Duke.java:43)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter only one task number after done
-	at TaskListHandler.modifyTask(TaskListHandler.java:39)
+	at taskListHandler.modifyTask(taskListHandler.java:39)
 	at Duke.startChat(Duke.java:43)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter only one task number after done
-	at TaskListHandler.modifyTask(TaskListHandler.java:39)
+	at taskListHandler.modifyTask(taskListHandler.java:39)
 	at Duke.startChat(Duke.java:43)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter a valid task number after done
-	at TaskListHandler.modifyTask(TaskListHandler.java:52)
+	at taskListHandler.modifyTask(taskListHandler.java:52)
 	at Duke.startChat(Duke.java:43)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter only one task number after done
-	at TaskListHandler.modifyTask(TaskListHandler.java:39)
+	at taskListHandler.modifyTask(taskListHandler.java:39)
 	at Duke.startChat(Duke.java:43)
 	at Duke.main(Duke.java:8)
 
 DukeException: Empty list, pls add tasks to list first
-	at TaskListHandler.printList(TaskListHandler.java:21)
+	at taskListHandler.printList(taskListHandler.java:21)
 	at Duke.startChat(Duke.java:37)
 	at Duke.main(Duke.java:8)
 
 DukeException: Empty list, pls add tasks to list first
-	at TaskListHandler.printList(TaskListHandler.java:21)
+	at taskListHandler.printList(taskListHandler.java:21)
 	at Duke.startChat(Duke.java:37)
 	at Duke.main(Duke.java:8)
 
 DukeException: ? OOPS!!! I'm sorry, but I don't know what that means :-(
-	at TaskListHandler.receiveInvalidCommand(TaskListHandler.java:112)
+	at taskListHandler.receiveInvalidCommand(taskListHandler.java:112)
 	at Duke.startChat(Duke.java:86)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter only one task number after delete
-	at TaskListHandler.modifyTask(TaskListHandler.java:39)
+	at taskListHandler.modifyTask(taskListHandler.java:39)
 	at Duke.startChat(Duke.java:50)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter only one task number after delete
-	at TaskListHandler.modifyTask(TaskListHandler.java:39)
+	at taskListHandler.modifyTask(taskListHandler.java:39)
 	at Duke.startChat(Duke.java:50)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter a valid task number after delete
-	at TaskListHandler.modifyTask(TaskListHandler.java:52)
+	at taskListHandler.modifyTask(taskListHandler.java:52)
 	at Duke.startChat(Duke.java:50)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter only one task number after delete
-	at TaskListHandler.modifyTask(TaskListHandler.java:39)
+	at taskListHandler.modifyTask(taskListHandler.java:39)
 	at Duke.startChat(Duke.java:50)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter a valid task number after delete
-	at TaskListHandler.modifyTask(TaskListHandler.java:52)
+	at taskListHandler.modifyTask(taskListHandler.java:52)
 	at Duke.startChat(Duke.java:50)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter only one task number after delete
-	at TaskListHandler.modifyTask(TaskListHandler.java:39)
+	at taskListHandler.modifyTask(taskListHandler.java:39)
 	at Duke.startChat(Duke.java:50)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter only one task number after delete
-	at TaskListHandler.modifyTask(TaskListHandler.java:39)
+	at taskListHandler.modifyTask(taskListHandler.java:39)
 	at Duke.startChat(Duke.java:50)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter a valid task number after delete
-	at TaskListHandler.modifyTask(TaskListHandler.java:52)
+	at taskListHandler.modifyTask(taskListHandler.java:52)
 	at Duke.startChat(Duke.java:50)
 	at Duke.main(Duke.java:8)
 
 DukeException: Oops, pls enter only one task number after delete
-	at TaskListHandler.modifyTask(TaskListHandler.java:39)
+	at taskListHandler.modifyTask(taskListHandler.java:39)
 	at Duke.startChat(Duke.java:50)
 	at Duke.main(Duke.java:8)
 

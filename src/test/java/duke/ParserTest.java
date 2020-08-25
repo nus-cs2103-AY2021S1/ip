@@ -8,13 +8,15 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ParserTest {
 
 //    @Test
 //    void parse() throws DukeException {
-//        TaskListHandler handler = new TaskListHandler(new ArrayList<>());
+//        taskListHandler handler = new taskListHandler(new ArrayList<>());
 //        Parser.parse("todo pop-quiz", handler);
 //        TodoCommand tdcmd = new TodoCommand(new Todo("todo pop-quiz"));
 //        assertEquals(Parser.parse("todo pop-quiz", handler), tdcmd);
@@ -22,9 +24,9 @@ class ParserTest {
 
     @Test
     void parseModifyTaskCommand() throws DukeException {
-        TaskListHandler handler = new TaskListHandler(new ArrayList<>());
+        taskListHandler handler = new taskListHandler(new ArrayList<>());
         handler.addToList(new Deadline("assignment", "8pm"));
-        handler.getTaskList().get(0).markAsDone();
+        handler.getTasks().get(0).markAsDone();
         Deadline newDeadline = new Deadline("assignment", "8pm");
         newDeadline.markAsDone();
         assertEquals(Parser.parseModifyTaskCommand("done 1", handler), newDeadline);

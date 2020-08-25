@@ -16,8 +16,12 @@ public class TodoCommand extends AddAbstractTaskCommand {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TodoCommand)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof TodoCommand)) {
+            return false;
+        }
         TodoCommand cmd = (TodoCommand) o;
         return newTask == cmd.newTask;
     }

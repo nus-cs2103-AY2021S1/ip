@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.TaskListHandler;
+import duke.taskListHandler;
 import duke.Ui;
 import duke.task.Task;
 
@@ -26,12 +26,12 @@ public class DeleteCommand extends AbstractModifyTaskCommand {
      * @param storage Storage instance.
      */
     @Override
-    public void execute(TaskListHandler handler, Storage storage) {
+    public void execute(taskListHandler handler, Storage storage) {
         try {
-            ArrayList<Task> taskList = handler.getTaskList();
-            handler.getTaskList().remove(task);
-            Ui.printSuccess("delete", task, taskList.size());
-            storage.saveToFile(taskList);
+            ArrayList<Task> tasks = handler.getTasks();
+            handler.getTasks().remove(task);
+            Ui.printSuccess("delete", task, tasks.size());
+            storage.saveToFile(tasks);
         } catch (DukeException e) {
             e.printStackTrace(System.out);
             DukeException.tryAgain();

@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Storage;
-import duke.TaskListHandler;
+import duke.taskListHandler;
 import duke.Ui;
 
 /**
@@ -16,7 +16,7 @@ public class ByeCommand extends Command {
      * @param storage Storage instance.
      */
     @Override
-    public void execute(TaskListHandler handler, Storage storage) {
+    public void execute(taskListHandler handler, Storage storage) {
         System.out.println("Bye bye! Hope to see you again soon!");
         Ui.stopRunning();
     }

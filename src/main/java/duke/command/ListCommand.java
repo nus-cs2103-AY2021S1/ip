@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.TaskListHandler;
+import duke.taskListHandler;
 
 /**
  * Inherits from generic command class.
@@ -16,7 +16,7 @@ public class ListCommand extends Command {
      * @param storage Storage instance.
      */
     @Override
-    public void execute(TaskListHandler handler, Storage storage) {
+    public void execute(taskListHandler handler, Storage storage) {
         // Prints the given list
         try {
             handler.printList();

@@ -28,7 +28,7 @@ public class Deadline extends Task {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             LocalDateTime parsedDateTime = LocalDateTime.parse(input, formatter);
-            this.by = parsedDateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a"));
+            by = parsedDateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a"));
         } catch (DateTimeParseException e) {
             System.out.print("");
         }
