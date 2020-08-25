@@ -1,11 +1,19 @@
+package duke;
+
+import duke.task.TaskList;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.io.File;
+import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Scanner;
 
 public class Storage {
 
@@ -32,26 +40,24 @@ public class Storage {
                         toAdd.markAsDone();
                     }
                     taskList.add(toAdd);
-                } else if (taskData[0].equals("D")) {
+                } else {
                     String dateTime = taskData[3].trim();
                     String[] dateTimeArray = dateTime.split(" ");
-                    LocalDate deadlineDate = LocalDate.parse(dateTimeArray[0]);
-                    LocalTime deadlineTime = LocalTime.parse(dateTimeArray[1]);
-                    Task toAdd = new Deadline(taskData[2], deadlineDate, deadlineTime);
-                    if (taskData[1].equals(" 1")) {
-                        toAdd.markAsDone();
+                    LocalDate taskDate = LocalDate.parse(dateTimeArray[0]);
+                    LocalTime taskTime = LocalTime.parse(dateTimeArray[1]);
+                    if (taskData[0].equals("D")) {
+                        Task toAdd = new Deadline(taskData[2], taskDate, taskTime);
+                        if (taskData[1].equals(" 1")) {
+                            toAdd.markAsDone();
+                        }
+                        taskList.add(toAdd);
+                    } else if (taskData[0].equals("E")) {
+                        Task toAdd = new Event(taskData[2], taskDate, taskTime);
+                        if (taskData[1].equals(" 1")) {
+                            toAdd.markAsDone();
+                        }
+                        taskList.add(toAdd);
                     }
-                    taskList.add(toAdd);
-                } else if (taskData[0].equals("E")) {
-                    String dateTime = taskData[3].trim();
-                    String[] dateTimeArray = dateTime.split(" ");
-                    LocalDate eventDate = LocalDate.parse(dateTimeArray[0]);
-                    LocalTime eventTime = LocalTime.parse(dateTimeArray[1]);
-                    Task toAdd = new Event(taskData[2], eventDate, eventTime);
-                    if (taskData[1].equals(" 1")) {
-                        toAdd.markAsDone();
-                    }
-                    taskList.add(toAdd);
                 }
             }
             sc.close();
@@ -69,8 +75,9 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException ex) {
-            System.out.println("Oh no! An error is encountered and the task file could not be updated.");
+            String err = "Oh no! An error is encountered and the task file could not be updated.";
+            System.out.println(err);
         }
-
     }
+
 }

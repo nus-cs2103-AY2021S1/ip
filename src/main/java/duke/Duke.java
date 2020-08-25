@@ -1,11 +1,8 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
-import java.time.LocalDate;
-import java.time.LocalTime;
+package duke;
+
+import duke.task.TaskList;
+import duke.command.Command;
+import duke.exception.DukeException;
 
 public class Duke {
 
@@ -19,7 +16,6 @@ public class Duke {
         this.storage = new Storage();
         this.taskList = this.storage.readFile();
     }
-
 
     public void run() {
         ui.showWelcome();

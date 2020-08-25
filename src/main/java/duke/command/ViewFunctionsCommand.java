@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.Ui;
+import duke.Storage;
+
 public class ViewFunctionsCommand extends Command {
 
     public ViewFunctionsCommand(String[] parsedCommand) {

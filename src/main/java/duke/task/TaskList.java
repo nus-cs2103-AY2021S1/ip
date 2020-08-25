@@ -1,10 +1,12 @@
+package duke.task;
+
 import java.util.List;
 
 public class TaskList {
 
     private final List<Task> taskList;
 
-    protected TaskList(List<Task> taskList) {
+    public TaskList(List<Task> taskList) {
         this.taskList =  taskList;
     }
 

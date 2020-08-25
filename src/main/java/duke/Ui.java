@@ -1,9 +1,15 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Ui {
 
-
     private static final String DIVIDER = "----------------------------------------";
+    private final Scanner sc;
+
+    public Ui() {
+        sc = new Scanner(System.in);
+    }
 
     public void showWelcome() {
         String text = "  ______  _____  __  ____     __     _______      \n" +
@@ -32,9 +38,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        Scanner sc = new Scanner(System.in);
         String message = sc.nextLine();
-        // sc.close;
         return message;
     }
 
@@ -47,9 +51,9 @@ public class Ui {
     }
 
     public void end() {
-        this.showLine();
-        System.out.println("  GoodBye and I hope to see you soon! Have a fantastic day! ");
-        this.showLine();
+        String farewellMessage = "  GoodBye and I hope to see you soon! Have a fantastic day! ";
+        System.out.println(farewellMessage);
+        sc.close();
     }
 
     public void showLine() {

@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 
 public abstract class Task {
@@ -21,6 +23,10 @@ public abstract class Task {
     public abstract String taskFileString();
 
     public abstract LocalDate getDate();
+
+    public boolean isCompleted() {
+        return this.isDone;
+    }
 
     @Override
     public String toString() {

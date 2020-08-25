@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.exception.*;
+import duke.task.TaskList;
+import duke.Ui;
+import duke.Storage;
+import duke.task.Task;
+import duke.task.Todo;
+
 public class AddTodoCommand extends Command {
 
     public AddTodoCommand(String[] parsedCommand) {
