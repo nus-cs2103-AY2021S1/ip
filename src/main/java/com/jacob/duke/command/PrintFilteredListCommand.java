@@ -1,21 +1,23 @@
 package main.java.com.jacob.duke.command;
 
-import main.java.com.jacob.duke.*;
-import main.java.com.jacob.duke.task.Task;
-
 import java.util.List;
 
-public class PrintFilteredListCommand implements Command{
-    public String inputCommand;
+import main.java.com.jacob.duke.Storage;
+import main.java.com.jacob.duke.TaskList;
+import main.java.com.jacob.duke.Ui;
+import main.java.com.jacob.duke.task.Task;
+
+public class PrintFilteredListCommand implements Command {
+    private String inputCommand;
     private boolean isComplete;
 
     public PrintFilteredListCommand(String fullCommand) {
         this.inputCommand = fullCommand;
     }
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
-        List<Task> taskList = tasks.taskList;
-        ui.showFilteredList(inputCommand,taskList);
+    public void execute(Ui ui, TaskList tasks, Storage storage) {
+        List<Task> taskList = tasks.getTaskList();
+        ui.showFilteredList(inputCommand, taskList);
         isComplete = true;
     }
 

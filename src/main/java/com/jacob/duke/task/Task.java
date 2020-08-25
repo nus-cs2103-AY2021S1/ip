@@ -35,10 +35,10 @@ public class Task {
 
     public String getCurrentStatus() {
         if (dueDateTime != null) {
-            return "  ["+ type + "]"+ "[" + getStatusIcon() +"] " + getDescription()
-                    + " " +dueDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy ha"));
+            return "  [" + type + "]" + "[" + getStatusIcon() + "] " + getDescription()
+                    + " " + dueDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy ha"));
         }
-        return "  ["+ type + "]"+ "[" + getStatusIcon() +"] " + getDescription();
+        return "  [" + type + "]" + "[" + getStatusIcon() + "] " + getDescription();
     }
 
     public String convertToFile() {

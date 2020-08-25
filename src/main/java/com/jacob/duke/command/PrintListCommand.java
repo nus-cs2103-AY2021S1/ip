@@ -1,17 +1,17 @@
 package main.java.com.jacob.duke.command;
 
-import main.java.com.jacob.duke.Storage;
-import main.java.com.jacob.duke.task.Task;
-import main.java.com.jacob.duke.TaskList;
-import main.java.com.jacob.duke.Ui;
-
 import java.util.List;
 
+import main.java.com.jacob.duke.Storage;
+import main.java.com.jacob.duke.TaskList;
+import main.java.com.jacob.duke.Ui;
+import main.java.com.jacob.duke.task.Task;
+
 public class PrintListCommand implements Command {
-    public boolean isComplete = false;
+    private boolean isComplete = false;
     @Override
     public void execute(Ui ui, TaskList tasks, Storage storage) {
-        List<Task> taskList = tasks.taskList;
+        List<Task> taskList = tasks.getTaskList();
         ui.showFullList(taskList);
         isComplete = true;
     }

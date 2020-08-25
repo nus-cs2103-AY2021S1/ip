@@ -1,16 +1,19 @@
 package main.java.com.jacob.duke.command;
-
-import main.java.com.jacob.duke.*;
-import main.java.com.jacob.duke.task.Task;
-
 import java.util.List;
 
-public class ByeCommand implements Command{
-    boolean isComplete = false;
+import main.java.com.jacob.duke.DukeException;
+import main.java.com.jacob.duke.Storage;
+import main.java.com.jacob.duke.TaskList;
+import main.java.com.jacob.duke.Ui;
+import main.java.com.jacob.duke.task.Task;
+
+
+public class ByeCommand implements Command {
+    private boolean isComplete = false;
 
     @Override
     public void execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
-        List<Task> taskList = tasks.taskList;
+        List<Task> taskList = tasks.getTaskList();
         ui.sayBye();
         isComplete = true;
     }

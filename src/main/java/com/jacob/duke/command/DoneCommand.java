@@ -1,11 +1,14 @@
 package main.java.com.jacob.duke.command;
 
+import java.util.List;
+
 import main.java.com.jacob.duke.Storage;
-import main.java.com.jacob.duke.task.Task;
 import main.java.com.jacob.duke.TaskList;
 import main.java.com.jacob.duke.Ui;
 
-import java.util.List;
+import main.java.com.jacob.duke.task.Task;
+
+
 
 public class DoneCommand implements Command {
     private boolean isComplete = false;
@@ -16,7 +19,7 @@ public class DoneCommand implements Command {
     }
     @Override
     public void execute(Ui ui, TaskList tasks, Storage storage) {
-        List<Task> taskList = tasks.taskList;
+        List<Task> taskList = tasks.getTaskList();
         //get the integer from the string command and convert to integer
         Task theTask = taskList.get(Integer.parseInt(fullCommand.substring(5)) - 1);
         String lineToEdit = theTask.convertToFile();

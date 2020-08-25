@@ -1,11 +1,14 @@
 package main.java.com.jacob.duke.command;
 
-import main.java.com.jacob.duke.*;
+import main.java.com.jacob.duke.DukeException;
+import main.java.com.jacob.duke.Storage;
+import main.java.com.jacob.duke.TaskList;
+import main.java.com.jacob.duke.Ui;
 import main.java.com.jacob.duke.task.Task;
 
 import java.util.List;
 
-public class DeleteCommand implements Command{
+public class DeleteCommand implements Command {
     private String inputCommand;
     private boolean isComplete;
     public DeleteCommand(String fullCommand) {
@@ -14,8 +17,8 @@ public class DeleteCommand implements Command{
 
     @Override
     public void execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
-        List<Task> taskList = tasks.taskList;
-        Task theRemovedTask = taskList.remove(Integer.parseInt(inputCommand.substring(7))-1);
+        List<Task> taskList = tasks.getTaskList();
+        Task theRemovedTask = taskList.remove(Integer.parseInt(inputCommand.substring(7)) - 1);
         if (theRemovedTask == null) {
             throw new DukeException("No such task exists! ");
         }
@@ -24,7 +27,7 @@ public class DeleteCommand implements Command{
 
         //print the output
 
-        ui.showTaskDeleted(theRemovedTask.getCurrentStatus(),taskList);
+        ui.showTaskDeleted(theRemovedTask.getCurrentStatus(), taskList);
     }
 
     @Override

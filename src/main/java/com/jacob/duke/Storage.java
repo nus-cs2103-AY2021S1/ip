@@ -1,10 +1,5 @@
 package main.java.com.jacob.duke;
 
-import main.java.com.jacob.duke.task.Deadline;
-import main.java.com.jacob.duke.task.Event;
-import main.java.com.jacob.duke.task.Task;
-import main.java.com.jacob.duke.task.Todo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
@@ -18,9 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import main.java.com.jacob.duke.task.Deadline;
+import main.java.com.jacob.duke.task.Event;
+import main.java.com.jacob.duke.task.Task;
+import main.java.com.jacob.duke.task.Todo;
+
+
+
+
+
 public class Storage {
-    StringBuffer stringBufferOfData = new StringBuffer();
-    String filename;
+    private StringBuffer stringBufferOfData = new StringBuffer();
+    private String filename;
 
     public Storage(String filename) {
         this.filename = filename;

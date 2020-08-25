@@ -1,6 +1,5 @@
 package main.java.com.jacob.duke.task;
 
-
 public class Deadline extends Task {
     public Deadline(String description) {
         super(description);

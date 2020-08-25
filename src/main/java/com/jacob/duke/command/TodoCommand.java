@@ -1,10 +1,14 @@
 package main.java.com.jacob.duke.command;
 
-import main.java.com.jacob.duke.*;
+import java.util.List;
+
+import main.java.com.jacob.duke.DukeException;
+import main.java.com.jacob.duke.Storage;
+import main.java.com.jacob.duke.TaskList;
+import main.java.com.jacob.duke.Ui;
 import main.java.com.jacob.duke.task.Task;
 import main.java.com.jacob.duke.task.Todo;
 
-import java.util.List;
 
 public class TodoCommand implements Command {
     private String inputCommand;
@@ -14,14 +18,14 @@ public class TodoCommand implements Command {
         this.inputCommand = fullCommand;
     }
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) throws DukeException{
-        List<Task> taskList = tasks.taskList;
+    public void execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
+        List<Task> taskList = tasks.getTaskList();
         String s = inputCommand.substring(4);
 
         if (s.equals("")) {
             throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
         }
-        Task theTodo = new Todo(inputCommand.substring(4+1));
+        Task theTodo = new Todo(inputCommand.substring(4 + 1));
         taskList.add(theTodo);
 
         //append text
