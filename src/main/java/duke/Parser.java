@@ -37,6 +37,10 @@ public class Parser {
             }
             Task deletedTask = tasks.remove(index - 1);
             ui.delete(deletedTask, tasks.size());
+        } else if (splitArr.length == 2 && splitArr[0].equals("find")) {
+            String keyWord = splitArr[1];
+            ArrayList<Task> foundTasks = tasks.find(keyWord);
+            ui.find(foundTasks);
         } else {
             switch (splitArr[0]) {
             case "todo":

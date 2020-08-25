@@ -45,4 +45,20 @@ public class TaskList {
         }
         return tasksClone;
     }
+
+    /**
+     * Searches the task list for tasks that contain the input string.
+     *
+     * @param word String to match
+     * @return Array List containing tasks taht contain the input string.
+     */
+    public ArrayList<Task> find(String word) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.toString().contains(word)) {
+                foundTasks.add(task);
+            }
+        }
+        return foundTasks;
+    }
 }
