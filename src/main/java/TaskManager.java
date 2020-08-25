@@ -1,37 +1,70 @@
 import java.util.ArrayList;
 
+/**
+ * <p>The TaskManager class stores a task list and manages commands relevant
+ * to the task list: add, remove, mark as done, get,....</p>
+ */
 public class TaskManager {
     private ArrayList<Task> taskList;
 
+    /**
+     * Creates a TaskManager object that stores a taskList.
+     * @param taskList The task list stored
+     */
     public TaskManager(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
-    // Should i make it immutable?
+    /**
+     * Adds a task into the current task list.
+     * @param newTask The Task to add
+     */
     public void addTask(Task newTask) {
         taskList.add(newTask);
     }
 
-    public void markTaskAsDone(int index) {
-        taskList.get(index).setTaskAsDone();
-    }
-
-    public Task getTask(int i) {
-        return taskList.get(i);
-    }
-
-    public int getTotalNoOfTasks() {
-        return this.taskList.size();
-    }
-
-    public void removeTask(Task taskToRemove) {
-        taskList.removeIf(task -> task == taskToRemove);
-    }
-
+    /**
+     * Removes a task of specified index.
+     * @param taskIndex The int that represents index of the task in the list
+     */
     public void removeTask(int taskIndex) {
         taskList.remove(taskIndex);
     }
 
+    /**
+     * Marks a task of specified index as done.
+     * @param index The int that represents index of the task in the list
+     */
+    public void markTaskAsDone(int index) {
+        taskList.get(index).setTaskAsDone();
+    }
+
+    /**
+     * Gets a task of specified index.
+     * @param index The int that represents index of the task in the list
+     * @return The Task that has the specified index
+     */
+    public Task getTask(int index) {
+        return taskList.get(index);
+    }
+
+    /**
+     * Gets the total number of tasks in the task list.
+     * @return The int that represents total number of tasks
+     */
+    public int getTotalNoOfTasks() {
+        return this.taskList.size();
+    }
+
+    public ArrayList<Task> getTaskList() {
+        return taskList;
+    }
+
+    /**
+     * Returns all the tasks in the task list that has a specified keyword.
+     * @param keyWord A String that represents the keyword
+     * @return A list of tasks that have the specified keyword
+     */
     public ArrayList<Task> findTaskThatHasKeyword(String keyWord) {
         ArrayList<Task> res = new ArrayList<>();
         for (Task task : this.taskList) {
@@ -42,10 +75,11 @@ public class TaskManager {
         return res;
     }
 
-    public ArrayList<Task> getTaskList() {
-        return taskList;
-    }
-
+    /**
+     * Converts a given task list into a formatted string representation.
+     * @param givenTaskList A list of task to be converted
+     * @return The string representation of the task list
+     */
     public String convertTaskListToString(ArrayList<Task> givenTaskList) {
         String result = "";
         for (int i = 0; i < givenTaskList.size(); i++) {

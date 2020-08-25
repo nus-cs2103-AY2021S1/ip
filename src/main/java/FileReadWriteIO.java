@@ -1,8 +1,10 @@
-/* Class to connect between the FileReadWrite and the internal logic of TaskManager */
-
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * <p>The FileReadWriteIO connects the logic between reading and writing a general file to
+ * reading and writing the specific files of the project.</p>
+ */
 public class FileReadWriteIO {
 
     // Saves task in 2 lines, first line is task description and second is status (1 is done, 0 is not done)
@@ -22,12 +24,16 @@ public class FileReadWriteIO {
                                                 taskData.getTime());
     }
 
+    /** Saves all tasks and their status in the list of task.
+     * @param taskManagerData The data object that stores information about the task list
+     * @throws IOException when an IO operation fails
+     */
     public static void saveTaskListData(TaskManagerData taskManagerData) throws IOException {
-        for (int i = 0; i < taskManagerData.taskList.size(); i++) {
+        for (int i = 0; i < taskManagerData.getTaskList().size(); i++) {
             if (i == 0) {
-                saveTaskData(taskManagerData.taskList.get(0));
+                saveTaskData(taskManagerData.getTaskList().get(0));
             } else {
-                appendTaskData(taskManagerData.taskList.get(i));
+                appendTaskData(taskManagerData.getTaskList().get(i));
             }
         }
     }

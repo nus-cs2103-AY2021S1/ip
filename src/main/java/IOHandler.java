@@ -4,12 +4,14 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * <p>The IOHandler class makes sense of user input and acts on it.</p>
+ */
 public class IOHandler {
-    Scanner sc = new Scanner(System.in);
-    String reply = sc.nextLine();
-
     String[] replyArr;
 
+    Scanner sc = new Scanner(System.in);
+    String reply = sc.nextLine();
     TaskManager taskManager = new TaskManager(new ArrayList<>());
     TaskSaveAndLoadManager taskSaveAndLoadManager = new TaskSaveAndLoadManager();
     UI ui = new UI();

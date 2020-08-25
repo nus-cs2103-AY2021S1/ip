@@ -6,10 +6,22 @@ public class UI {
     private String topPartOfBotReplyMessage = separationLine + indentation;
     private String botPartOfBotReplyMessage = "\n" + separationLine.substring(0, separationLine.length() - 1);
 
+    /**
+     * Prints a formatted message.
+     * @param message A String that represents the message to print
+     */
     public void printMessage(String message) {
         System.out.println(topPartOfBotReplyMessage + message + botPartOfBotReplyMessage);
     }
 
+    /**
+     * Returns the a list that contains the bot's reply to different user inputs:
+     * <li>If the user input is "find", returns a list of 2 strings, the first one is the
+     * reply if nothing a found, the second one is the reply if at least 1 element is found.</li>
+     * <li>Else, returns a list of 1 string responding to the user input.</li>
+     * @param userInput A String to represent user input
+     * @return A list of 1 or 2 strings to represent the bot's reply to the respective input
+     */
     public ArrayList<String> botReplyHeading(String userInput) {
         ArrayList<String> botReply = new ArrayList<>();
         botReply.add("");
@@ -28,6 +40,11 @@ public class UI {
         return botReply;
     }
 
+    /**
+     * Formats the body of the bot's reply.
+     * @param body A String to represent the body of bot's reply
+     * @return A String to represent the formatted body
+     */
     public String formatBotReplyBody(String body) {
         return indentation + body;
     }
