@@ -6,6 +6,11 @@ public class Deadline extends Task {
     protected String by;
     protected LocalDate date;
 
+    /**
+     * Initialise a deadline.
+     * @param desc contains description.
+     * @param by contains deadline.
+     */
     public Deadline(String desc, String by) {
         super(desc);
         this.by = by;

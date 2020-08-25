@@ -6,6 +6,11 @@ public class Event extends Task{
     protected String at;
     protected LocalDate date;
 
+    /**
+     * Initialise an Event.
+     * @param desc contains description.
+     * @param at contains deadline.
+     */
     public Event(String desc, String at) {
         super(desc);
         this.at = at;

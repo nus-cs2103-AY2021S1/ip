@@ -5,6 +5,11 @@ public class Duke {
     private Ui ui;
     String filePath;
 
+    /**
+     * Initialise Duke with the filePath.
+     * @param filePath the path to save/read output.
+     * @throws FileNotFoundException for if file is not found.
+     */
     public Duke(String filePath) throws FileNotFoundException {
         Ui ui = new Ui();
         Storage storage = new Storage(filePath);
@@ -14,6 +19,9 @@ public class Duke {
         this.tasks = tasks;
     }
 
+    /**
+     * Runs the Duke by initialise the Parser.
+     */
     public void run() {
         ui.showWelcome();
         Parser parser = new Parser(ui);

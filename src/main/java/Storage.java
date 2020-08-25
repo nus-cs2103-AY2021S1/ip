@@ -14,6 +14,12 @@ public class Storage {
         this.path = Paths.get(filePath);
     }
 
+    /**
+     * Returns a TaskList containing all the tasks loaded from the file.
+     * @param file is the file to be read.
+     * @return the TaskList.
+     * @throws FileNotFoundException if file is not found.
+     */
     public static TaskList reader(File file) throws FileNotFoundException {
         Scanner s = new Scanner(file);
         TaskList tasks = new TaskList();
@@ -47,6 +53,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Check if file exists, if it does then read it, else create a file.
+     * @return TaskList containing any tasks from file.
+     * @throws FileNotFoundException if the file cannot be found.
+     */
     public TaskList readFile() throws FileNotFoundException {
         if (Files.exists(path)) {
             return reader(new File(path.toString()));
@@ -56,6 +67,12 @@ public class Storage {
         return new TaskList();
     }
 
+    /**
+     * Overwrites and updates the file at the path for changes to the tasks.
+     * @param tasks TaskList containing all tasks.
+     * @param path where file is located.
+     * @throws IOException for any input/ output issues with FileWriter.
+     */
     public static void fileUpdate(TaskList tasks, Path path) throws IOException {
         FileWriter fw = new FileWriter(path.toString());
         for (Task t : tasks.getList()) {

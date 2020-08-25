@@ -10,6 +10,11 @@ public class Parser {
         this.ui = ui;
     }
 
+    /**
+     * Processes inputs from the user.
+     * @param tasks TaskList containing all tasks.
+     * @param filePath for path of file.
+     */
     public void parser(TaskList tasks, String filePath) {
         Scanner scanner = new Scanner(System.in);
         Path path = Paths.get(filePath);
@@ -55,6 +60,13 @@ public class Parser {
         }
     }
 
+    /**
+     * returns the index of task to be deleted/completed if possible.
+     * @param str input line from user.
+     * @param numTask total number of tasks.
+     * @return int index of task in TaskList.
+     * @throws DukeException if input is invalid or out of bounds.
+     */
     public static int completeDelete(String str, int numTask) throws DukeException {
         String[] words = str.split("\\s+");
         int len = words.length;
@@ -72,6 +84,12 @@ public class Parser {
         throw new DukeException("OOPS!!! Invalid task provided.");
     }
 
+    /**
+     * Returns the task of correct type based on input.
+     * @param str input by user.
+     * @return task.
+     * @throws DukeException for any invalid inputs.
+     */
     public static Task taskClassify(String str) throws DukeException {
         String[] words = str.split("\\s+");
         int len = words.length;
