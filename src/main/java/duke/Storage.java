@@ -14,13 +14,18 @@ import java.util.Scanner;
 
 public class Storage {
     
-     private final String filePath;
+    private final String filePath;
     
     public Storage(String filePath) {
         this.filePath = filePath;
     }
-    
-    
+
+    /**
+     * Loads the tasks that have been stored in the data file
+     * 
+     * @return List of tasks
+     * @throws DukeException If file is not found
+     */
     public ArrayList<Task> load() throws DukeException{
         
         ArrayList<Task> tasks = new ArrayList<>();
@@ -40,6 +45,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Stores tasks in the data file
+     * 
+     * @param list List of tasks to be stored
+     */
     public void writeToDataFile(TaskList list) {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -71,23 +81,23 @@ public class Storage {
     
     
     private Task decodeTask (String encodedline) throws DukeException {
-        String[] info = encodedline.split("\\|");
-        String type = info[0].trim();
-        boolean done = Boolean.parseBoolean(info[1]);
-        String description = info[2].trim();
+        String[] parts = encodedline.split("\\|");
+        String type = parts[0].trim();
+        boolean isDone = Boolean.parseBoolean(parts[1]);
+        String description = parts[2].trim();
         String time = "";
         
         switch (type) {
         case "Todo":
-            return new Todo(description, done);
+            return new Todo(description, isDone);
             
         case "Deadline":
-            time = info[3].trim();
-            return new Deadline (description, time, done);
+            time = parts[3].trim();
+            return new Deadline (description, time, isDone);
             
         case "Event":
-            time = info[3].trim();
-            return new Event(description, time, done);
+            time = parts[3].trim();
+            return new Event(description, time, isDone);
             
         default:
             throw new DukeException();
