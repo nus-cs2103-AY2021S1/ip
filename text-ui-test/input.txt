@@ -7,6 +7,9 @@ list
 event group project
 done 2
 list
+find project
+find book
+find homework
 delete 2
 list
 delete 3

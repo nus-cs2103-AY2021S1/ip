@@ -22,6 +22,10 @@ public class Task {
         return details;
     }
 
+    public String getDetails() {
+        return details;
+    }
+
     @Override
     public String toString() {
         String s = this.done ? "[✓] " : "[✗] ";

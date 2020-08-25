@@ -95,4 +95,8 @@ public class Ui {
                 String.format("    Now you have %d tasks in the list.", taskList.size()) + "\n" +
                 LINE);
     }
+
+    public String getKeyword() {
+        return sc.nextLine().trim();
+    }
 }
