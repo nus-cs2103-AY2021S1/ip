@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.Scanner;
 
 
@@ -128,47 +127,47 @@ public class Duke {
                 String keyword = msgArr[0];
 
                 switch (keyword) {
-                    case ("list"):
-                        String listString = this.list.toString();
-                        Duke.printMessage(listString);
+                case ("list"):
+                    String listString = this.list.toString();
+                    Duke.printMessage(listString);
+                    break;
+
+                case ("done"):
+                    try {
+                        String statusMsg = this.markAsDone(msgArr);
+                        Duke.printMessage(statusMsg);
                         break;
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        Duke.printMessage("OOPS!!! The index of `done` cannot be empty.");
+                        break;
+                    } catch (IndexOutOfBoundsException e) {
+                        Duke.printMessage("OOPS!!! The index given is invalid.");
+                        break;
+                    }
 
-                    case ("done"):
-                        try {
-                            String statusMsg = this.markAsDone(msgArr);
-                            Duke.printMessage(statusMsg);
-                            break;
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            Duke.printMessage("OOPS!!! The index of `done` cannot be empty.");
-                            break;
-                        } catch (IndexOutOfBoundsException e) {
-                            Duke.printMessage("OOPS!!! The index given is invalid.");
-                            break;
-                        }
-
-                    case ("delete"):
-                        try {
-                            String statusMsg = this.delete(msgArr);
-                            Duke.printMessage(statusMsg);
-                            break;
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            Duke.printMessage("OOPS!!! The index of `delete` cannot be empty.");
-                            break;
-                        } catch (IndexOutOfBoundsException e) {
-                            Duke.printMessage("OOPS!!! The index given is invalid.");
-                            break;
-                        }
+                case ("delete"):
+                    try {
+                        String statusMsg = this.delete(msgArr);
+                        Duke.printMessage(statusMsg);
+                        break;
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        Duke.printMessage("OOPS!!! The index of `delete` cannot be empty.");
+                        break;
+                    } catch (IndexOutOfBoundsException e) {
+                        Duke.printMessage("OOPS!!! The index given is invalid.");
+                        break;
+                    }
 
 
-                    default:
-                        try {
-                            String statusString = this.list.add(msgInput);
-                            Duke.printMessage(statusString);
-                            break;
-                        } catch (DukeException e) {
-                            Duke.printMessage(e.getMessage());
-                            break;
-                        }
+                default:
+                    try {
+                        String statusString = this.list.add(msgInput);
+                        Duke.printMessage(statusString);
+                        break;
+                    } catch (DukeException e) {
+                        Duke.printMessage(e.getMessage());
+                        break;
+                    }
                 }
             }
         }
@@ -185,7 +184,7 @@ public class Duke {
         this.dukeLogic(sc);
 
         Duke.printMessage("Bye. Hope to see you again soon!");
-        
+
         sc.close();
     }
 

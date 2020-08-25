@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class DukeList {
 
-    private final ArrayList<Task> list;
+    final ArrayList<Task> list;
     private static final int CAPACITY = 100;
 
 
@@ -43,40 +43,41 @@ public class DukeList {
         String keyword = strArr[0];
 
         String formattedItemString;
+        
         switch (keyword) {
-            case ("todo"):
-                try {
-                    formattedItemString = DukeList.getItemSubstring(strArr);
-                    newTask = new Todo(formattedItemString);
-                    break;
-                } catch (DukeInvalidDescriptionException e) {
-                    throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", keyword));
-                }
+        case ("todo"):
+            try {
+                formattedItemString = DukeList.getItemSubstring(strArr);
+                newTask = new Todo(formattedItemString);
+                break;
+            } catch (DukeInvalidDescriptionException e) {
+                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", keyword));
+            }
 
-            case ("deadline"):
-                try {
-                    formattedItemString = DukeList.getItemSubstring(strArr);
-                    newTask = new Deadline(formattedItemString);
-                    break;
-                } catch (DukeNoDescriptionException e) {
-                    throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", keyword));
-                } catch (DukeNoDateException e) {
-                    throw new DukeInvalidDescriptionException(String.format("OOPS!!! The date of `%s` cannot be empty.", keyword));
-                }
+        case ("deadline"):
+            try {
+                formattedItemString = DukeList.getItemSubstring(strArr);
+                newTask = new Deadline(formattedItemString);
+                break;
+            } catch (DukeNoDescriptionException e) {
+                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", keyword));
+            } catch (DukeNoDateException e) {
+                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The date of `%s` cannot be empty.", keyword));
+            }
 
-            case ("event"):
-                try {
-                    formattedItemString = DukeList.getItemSubstring(strArr);
-                    newTask = new Event(formattedItemString);
-                    break;
-                } catch (DukeNoDescriptionException e) {
-                    throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", keyword));
-                } catch (DukeNoDateException e) {
-                    throw new DukeInvalidDescriptionException(String.format("OOPS!!! The date of `%s` cannot be empty.", keyword));
-                }
+        case ("event"):
+            try {
+                formattedItemString = DukeList.getItemSubstring(strArr);
+                newTask = new Event(formattedItemString);
+                break;
+            } catch (DukeNoDescriptionException e) {
+                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", keyword));
+            } catch (DukeNoDateException e) {
+                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The date of `%s` cannot be empty.", keyword));
+            }
 
-            default:
-                throw new DukeInvalidCommandException(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", keyword));
+        default:
+            throw new DukeInvalidCommandException(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", keyword));
         }
 
         this.list.add(newTask);
@@ -100,6 +101,7 @@ public class DukeList {
         Task targetTask = this.list.get(index - 1);
         targetTask.markAsDone();
         return String.format("Nice! I've marked this task as done:\n\t%s", targetTask.toString());
+        
     }
 
 
@@ -116,7 +118,7 @@ public class DukeList {
         return "Noted. I've removed this task:\n" +
                 String.format("\t%s\n", removedTask.toString())
                 + String.format("%s", this.getListStats());
-
+        
     }
 
 
