@@ -20,8 +20,8 @@ public class TaskList {
         return this.listOfTasks.get(index);
     }
 
-    public Task deleteTask(int index) {
-        return this.listOfTasks.remove(index);
+    public void deleteTask(int index) {
+        this.listOfTasks.remove(index);
     }
 
     @Override
@@ -34,6 +34,5 @@ public class TaskList {
         }
 
         return allTasks.substring(0, allTasks.length() - 1);
-
     }
 }
