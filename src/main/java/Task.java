@@ -1,10 +1,12 @@
 public class Task {
     protected String name;
     protected boolean isDone;
+    protected boolean isExit;
 
     public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
+        this.isExit = false;
     }
 
 
@@ -25,4 +27,5 @@ public class Task {
         String doneOrNot = isDone ? "1" : "0";
         return "N | " + doneOrNot + " | " + this.name;
     }
+    public void excute(TaskList tasklist, Ui ui, Storage storage){};
 }

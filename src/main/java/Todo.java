@@ -10,6 +10,13 @@ public class Todo extends Task{
     }
 
     @Override
+    public void excute(TaskList tasklist, Ui ui, Storage storage) {
+        tasklist.add(this);
+        ui.showAddedMessage(tasklist, tasklist.getNumOfTasks() - 1);
+        storage.writeData(tasklist.taskList);
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
