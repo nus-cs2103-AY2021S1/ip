@@ -20,12 +20,13 @@ public class Storage {
 
     // hardcoding the directory? will it work on *nix?
     // try: String home = System.getProperty("user.home");
-    protected final static String location = "./src/main/java/duke/data";
+    protected String location;
     protected final static String filename = "/save.txt";
     protected ArrayList<Task> listFromFile;
 
-    public Storage() {
-        this.savefile = new File(location + filename);
+    public Storage(String specifiedLocation) {
+        this.location = specifiedLocation;
+        this.savefile = new File(specifiedLocation + filename);
         run();
     }
 
