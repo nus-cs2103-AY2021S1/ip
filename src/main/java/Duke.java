@@ -15,6 +15,7 @@ public class Duke {
 
     public static void main(String[] args) throws DukeException {
         Duke duke = new Duke("duke.txt");
+
         // displayed once Duke is run, without input from user
         duke.ui.greetings();
         Parser parser = new Parser(duke);

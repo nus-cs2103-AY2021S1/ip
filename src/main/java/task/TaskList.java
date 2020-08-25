@@ -14,6 +14,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints the tasks in the list.
+     */
     public void list() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i < tasks.size() + 1; i++) {
@@ -22,6 +25,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds the tasks to the tasklist.
+     *
+     * @param task Task to be added.
+     */
     public void addTask(Task task) {
         this.tasks.add(task);
         // inform user item has been added
@@ -30,7 +38,12 @@ public class TaskList {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
-    // method to delete task
+
+    /**
+     * Deletes the tasks from the tasklist.
+     *
+     * @param taskNo Task number to be deleted.
+     */
     public void deleteTask(int taskNo) throws DukeException {
         // verify task number exists, then delete
         if (taskNo - 1 < tasks.size()) {
@@ -45,7 +58,11 @@ public class TaskList {
         }
     }
 
-    // method to mark task as done
+    /**
+     * Marks the tasks as completed in the tasklist.
+     *
+     * @param taskNo Task number to be marked as done.
+     */
     public void markTaskDone(int taskNo) throws DukeException {
         // verify task number exists, then mark as done
         if (taskNo - 1 < tasks.size()) {

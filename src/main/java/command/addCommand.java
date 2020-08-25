@@ -11,6 +11,9 @@ public class addCommand extends Command {
         this.task = task;
     }
 
+    /**
+     * Adds task to list of tasks.
+     */
     @Override
     public void execute() {
         this.tasks.addTask(this.task);

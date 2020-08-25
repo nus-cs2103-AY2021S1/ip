@@ -23,6 +23,11 @@ public class Storage {
         loadTasks(tasks);
     }
 
+    /**
+     * Saves tasks stored in tasklist before program is terminated in a 'duke.txt' file.
+     *
+     * @param stored ArrayList of Tasks to be saved.
+     */
     public void saveTasks(ArrayList<Task> stored) {
         try {
             // Creates a BufferedWriter
@@ -41,6 +46,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks stored in 'duke.txt' when program is executed.
+     *
+     * @param tasks ArrayList of Tasks to be loaded.
+     */
     public void loadTasks(ArrayList<Task> tasks) {
         BufferedReader bufferedReader = null;
 
@@ -54,7 +64,7 @@ public class Storage {
                 while ((currentLine = bufferedReader.readLine()) != null) {
                     String taskType = currentLine.substring(1, 2);
                     boolean isDone = currentLine.contains("✗") ? false : true;
-                    String taskDescription = currentLine.substring(7);
+                    String taskDescription = currentLine.substring(currentLine.indexOf(" ") + 1);
 
                     switch (taskType) {
                         case "T":

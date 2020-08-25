@@ -11,6 +11,11 @@ public class deleteCommand extends Command {
         this.taskNo = taskNo;
     }
 
+    /**
+     * Deletes task to list of tasks.
+     *
+     * @throws DukeException
+     */
     @Override
     public void execute() throws DukeException {
         this.tasks.deleteTask(taskNo);
