@@ -265,7 +265,7 @@ public class Bill {
     private static final String filePath = "./data/bill.txt";
     public static void main(String[] args) throws IOException {
 
-        Ui ui = new Ui();
+        Ui ui = new Ui(); 
         TaskList taskList = new TaskList();
         ui.welcome_message();
         Storage storage = new Storage(filePath);
