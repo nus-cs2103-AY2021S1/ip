@@ -17,12 +17,18 @@ public class DeadlineTask extends Task {
         this.by = by;
     }
 
+    /**
+     * Converts task to string - task type, tick/check and description
+     */
     @Override
     public String toString() {
         return String.format("[%s][%s] %s (by: %s)", TASK_TYPE, getStatusIcon(), description,
                 by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 
+    /**
+     * Converts task to string representation in database- task type, 1 for done/0 for not done, and description
+     */
     public String toDBString() {
         return TASK_TYPE + "~" + super.toDBString() + "~" + by.toString();
     }

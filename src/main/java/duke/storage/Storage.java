@@ -2,6 +2,8 @@ package duke.storage;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
@@ -14,18 +16,24 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 public class Storage {
+    String dataDirectory;
     File file;
 
-    public Storage(String pathname) {
-        file = new File(pathname);
+    public Storage(String dataDirectory, String pathname) {
+        this.dataDirectory = dataDirectory;
+        this.file = new File(pathname);
     }
 
+    /**
+     * Load data from file, parses, and saves as tasks
+     * @return a list of tasks corresponding to the ones loaded
+     */
     public List<Task> load()  {
         List<Task> list = new ArrayList<>();
         try {
+            Files.createDirectories(Paths.get(dataDirectory));
             file.createNewFile();
             Scanner sc = new Scanner(file);
-
             String record;
             while (sc.hasNextLine()) {
                 record = sc.nextLine().trim();
@@ -62,10 +70,15 @@ public class Storage {
         }
     }
 
+
+    /**
+     * Stores data to file (rewritten after each function call)
+     */
     public void write(TaskList tasks) {
         try {
-            FileWriter writer = new FileWriter(file);
+            Files.createDirectories(Paths.get(dataDirectory));
             file.createNewFile();
+            FileWriter writer = new FileWriter(file);
             for(Task task: tasks.getList()) {
                 writer.write(task.toDBString() + System.lineSeparator());
             }

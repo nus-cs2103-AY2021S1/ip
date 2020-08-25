@@ -13,16 +13,19 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Duke(String dataDirectory, String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(dataDirectory, filePath);
         tasks = new TaskList(storage.load());
     }
 
     public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
+        new Duke("data", "./data/duke.txt").run();
     }
 
+    /**
+     * Runs the command-line interface for the Duke program.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         String fullCommand;

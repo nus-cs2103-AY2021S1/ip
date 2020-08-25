@@ -7,6 +7,15 @@ import duke.command.*;
 import duke.task.*;
 
 public class Parser {
+
+    /**
+     * Parses a line of user input, splits it via regex (~), creates a Command object with required information
+     * and returns it.
+     *
+     * @param fullCommand
+     * @return the Command represented by the input string
+     * @throws DukeException with appropriate message if command encountered is incorrect
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String arr[] = fullCommand.split(" ", 2);
         String command = arr[0];
