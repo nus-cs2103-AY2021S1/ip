@@ -142,9 +142,20 @@ public class Parser {
         }
     }
 
+    public static FindCommand find(String command) throws DukeEmptyKeywordException {
+        try {
+            String[] tokens = command.split("find ");
+            String keyword = tokens[1];
+            return new FindCommand(keyword);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeEmptyKeywordException();
+        }
+    }
+
     public static Command parse(String command) throws DukeEmptyIndexException,
             DukeEmptyDescriptionException, DukeEmptyAtException,
-            DukeEmptyByException, DukeInvalidDateTimeInputException {
+            DukeEmptyByException, DukeInvalidDateTimeInputException,
+            DukeEmptyKeywordException {
         if (command.equals("bye")) {
             return new ByeCommand();
         } else if (command.equals("list")) {
@@ -155,6 +166,8 @@ public class Parser {
             return markAsDone(command);
         } else if (command.startsWith("delete")) {
             return delete(command);
+        } else if (command.startsWith("find")) {
+            return find(command);
         } else {
             try {
                 return add(command);

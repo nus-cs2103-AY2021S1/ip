@@ -32,9 +32,12 @@ public class Duke {
             try {
                 Command c = Parser.parse(fullCommand);
                 isExit = !c.execute(list, ui, storage);
-            } catch (DukeEmptyIndexException | DukeEmptyDescriptionException
-                    | DukeEmptyByException | DukeEmptyAtException
-                    | DukeInvalidDateTimeInputException e) {
+            } catch (DukeEmptyIndexException
+                    | DukeEmptyDescriptionException
+                    | DukeEmptyByException
+                    | DukeEmptyAtException
+                    | DukeInvalidDateTimeInputException
+                    | DukeEmptyKeywordException e) {
                 ui.showError(e);
             }
         }
@@ -53,10 +56,4 @@ public class Duke {
         Duke duke = new Duke(homePath + "/data/duke.txt");
         duke.run();
     }
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
 }
