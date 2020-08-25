@@ -41,6 +41,10 @@ public class Task {
         return type + "%%%" + description + "%%%" + datetimeString + "%%%" + (isDone ? 1 : 0);
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     @Override
     public String toString() {
         return String.format("[T][%s] %s", (isDone ? "\u2713" : "\u2718"), description);

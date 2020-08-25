@@ -21,6 +21,8 @@ public class Commands {
             return new DoneCommand(input);
         case "clear":
             return new ClearCommand(input);
+        case "find":
+            return new FindCommand(input);
         case "delete":
             return new DeleteCommand(input);
         case "list":

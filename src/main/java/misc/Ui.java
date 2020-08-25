@@ -63,6 +63,16 @@ public class Ui {
         });
     }
 
+    public static void find(List<String> tasks) {
+        wrap(() -> {
+            System.out.println("Here are the matching tasks in your list: ");
+            List<String> output = tasks;
+            for (String s : output) {
+                System.out.println(s);
+            }
+        });
+    }
+
     /**
      * Prints the response of the DONE command.
      * @param task the task that is marked as finished
