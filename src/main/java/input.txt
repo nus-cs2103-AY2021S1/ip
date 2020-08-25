@@ -1,0 +1,9 @@
+event concert /at 12:00-10:00
+todo buy book
+done 1
+event book club /at 12:00-10:00
+delete 2
+deadline submission /by 2020 11 14
+list
+blah
+bye

@@ -1,15 +1,7 @@
 package Duke.Commands;
-import Duke.Errors.DeadlineException;
-import Duke.Errors.DukeException;
-import Duke.Errors.EventException;
-import Duke.Errors.TodoException;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
-import Duke.Helpers.Ui;
-import Duke.Tasks.Deadline;
 import Duke.Tasks.Task;
-import Duke.Tasks.event;
-import Duke.Tasks.todo;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,7 +11,10 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class AddCommand extends Command {
+/**
+ * This class handles the case of adding different tasks, todo,
+ */
+abstract public class AddCommand extends Command {
     public AddCommand(String string) {
         super(string);
     }

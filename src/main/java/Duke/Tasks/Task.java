@@ -1,11 +1,6 @@
 package Duke.Tasks;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import Duke.Errors.DukeException;
-import Duke.Errors.FileAbsentException;
 
 /**
  * This Task is made abstract because it is never intialized in the actual code, however, it is used so that polymorphism

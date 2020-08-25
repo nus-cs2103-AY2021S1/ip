@@ -1,14 +1,5 @@
 package Duke.Tasks;
 
-import Duke.Errors.DeadlineException;
-import Duke.Errors.DukeException;
-
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 /**
  * The deadline is a subclass of Task and it is used to describe tasks that has to be completed by a specific day.
  */

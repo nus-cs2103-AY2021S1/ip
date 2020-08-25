@@ -1,1 +1,7 @@
-T | 0 | read book
+event book club /at 12:00-14:00
+todo read book
+deadline submission /by 2019 12 12
+done 1
+delete 4
+list
+bye

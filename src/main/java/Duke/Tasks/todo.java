@@ -3,8 +3,6 @@
  */
 package Duke.Tasks;
 
-import Duke.Duke;
-
 public class todo extends Task {
     /**
      *

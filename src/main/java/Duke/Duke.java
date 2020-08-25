@@ -1,7 +1,5 @@
 package Duke;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 import Duke.Commands.Command;
 import Duke.Errors.DukeException;
@@ -17,7 +15,7 @@ import Duke.Helpers.Ui;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private Ui ui = new Ui();
 
     /**
      * assigns the above member variables with the appropriate values, and throws certain exceptions if file in
@@ -34,7 +32,16 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
+    public Duke(String filePath, String input){
+        storage = new Storage(filePath);
+        try {
+            ui = new Ui(input);
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError(e);
+            tasks = new TaskList();
+        }
+    }
     /**
      * gives main logic of the App,
      * where exceptions are caught and printed and if bye is there code stops. also starts with hello
@@ -64,7 +71,13 @@ public class Duke {
      *  Then, prints out relevant information using the output() func.
      */
     public static void main(String[] args) throws IOException {
-        Duke duke = new Duke("tasks.txt");
+        //Duke duke = new Duke("tasks.txt");
+        PrintStream fileOut = new PrintStream("src/main/java/output.txt");
+        System.setOut(fileOut);
+        FileWriter fw = new FileWriter("src/main/java/tasks.txt");
+        fw.write("");
+        fw.close();
+        Duke duke = new Duke("src/main/java/tasks.txt", "src/main/java/input.txt");
         duke.run();
     }
 }
