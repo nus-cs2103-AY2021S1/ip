@@ -44,6 +44,10 @@ public class Parser {
             throw new InvalidArgumentException("☹ OOPS!!! The list command does not take any additional argument(s).");
         } else if (fullCommandArray[0].equals(CommandType.BYE.getType())) {
             throw new InvalidArgumentException("☹ OOPS!!! The bye command does not take any additional argument(s).");
+        } else if (fullCommandArray[0].equals(CommandType.PENDING.getType())) {
+            throw new InvalidArgumentException("☹ OOPS!!! The pending command does not take any additional argument(s).");
+        } else if (fullCommandArray[0].equals(CommandType.COMPLETED.getType())) {
+            throw new InvalidArgumentException("☹ OOPS!!! The completed command does not take any additional argument(s).");
         } else if (fullCommandArray[0].equals(CommandType.SHOW.getType())) {
             try {
                 LocalDate date = LocalDate.parse(fullCommandArray[1]);
