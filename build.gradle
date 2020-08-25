@@ -16,3 +16,9 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'Duke'
+    }
+}
