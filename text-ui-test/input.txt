@@ -2,12 +2,14 @@ deadline prepare for presentation /by today 7pm
 todo go cycling
 hello
 list
+deadline learn how to swim /by 2020-10-15
 event watch horror movie with friends /at 12am
 deadline
 delete 10
 done 2
 todo
 deadline /by today
+event discover north pole /at 2020-09-20
 deadline do homework /by Monday 6pm
 done 17
 list
@@ -19,5 +21,9 @@ list
 event
 event go paragliding /at
 delete 1
+list
+deadline fix the car /by 2020-08-27 1800
+event run in a stream /at 2020-08-29 1000
+done 6
 list
 bye
