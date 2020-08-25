@@ -1,35 +1,57 @@
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.function.Consumer;
 
 public class TaskList {
 
-    ArrayList<Task> taskList = new ArrayList<>();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+    private final ArrayList<Task> taskList;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
-    public Task addTask(String taskType, String taskDescription) {
+    public TaskList(){
+        this.taskList = new ArrayList<Task>();
+    }
+
+    public TaskList (File savedTasks) throws IOException {
+        this.taskList = new ArrayList<Task>();
+        FileReader fr = new FileReader(savedTasks);   //reads the file
+        BufferedReader br = new BufferedReader(fr);  //creates a buffering character input stream
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] parameters = line.split("\\|");
+            String taskType = parameters[0];
+            boolean completionStatus = parameters[1].equals("1");
+            String taskDescription = parameters[2];
+            Task task;
+            if (taskType.equals("T")) {
+                task = new Todo(taskDescription, completionStatus);
+            } else if (taskType.equals("E")){
+                task = new Event(taskDescription, LocalDateTime.parse(parameters[3].strip()), completionStatus);
+            } else {
+                task = new Deadline(taskDescription, LocalDateTime.parse(parameters[3].strip()), completionStatus);
+            }
+            this.taskList.add(task);
+        }
+        fr.close();
+    }
+
+    public Task addTask(Command task) {
         Task newTask;
-        if (taskType.equals("todo")) {
-            newTask = new Todo(taskDescription);
-        } else if (taskType.equals("event")) {
-            String[] desAndDate = taskDescription.split("/at");
-            String date = desAndDate[1];
-            taskDescription = desAndDate[0] ;
-            newTask = new Event(taskDescription, LocalDateTime.parse(date.strip(), formatter));
+        if (task.getClass() == TodoCommand.class) {
+            newTask = new Todo(task.getParameters()[0]);
+        } else if (task.getClass() == EventCommand.class) {
+            newTask = new Event(task.getParameters()[0].strip()
+                    , LocalDateTime.parse(task.getParameters()[1].strip(), formatter));
         } else {
-            String[] desAndDate = taskDescription.split("/by");
-            String date = desAndDate[1];
-            taskDescription = desAndDate[0] ;
-            newTask = new Deadline(taskDescription, LocalDateTime.parse(date.strip(), formatter));
+            newTask = new Deadline(task.getParameters()[0].strip()
+                    , LocalDateTime.parse(task.getParameters()[1].strip(), formatter));
         }
         this.taskList.add(newTask);
         return newTask;
-    }
-
-    public void completeTask(int index){
-         this.taskList.get(index).markDone();
     }
 
     public Task deleteTask(int index) {
@@ -37,12 +59,6 @@ public class TaskList {
         this.taskList.remove(index);
         return task;
     }
-
-    public Task getTask(int index) {
-        return this.taskList.get(index);
-    }
-
-    public int getNoTask() { return  this.taskList.size(); }
 
     public String getTaskDueOn(String dueDate){
         String output = "";
@@ -55,8 +71,6 @@ public class TaskList {
         return (output == "" ? "None\n" : output) ;
     }
 
-    public boolean isEmpty() { return this.taskList.isEmpty();}
-
     public boolean allDone() {
         for (Task task : this.taskList) {
             if (!task.isDone()) {
@@ -66,10 +80,23 @@ public class TaskList {
         return true;
     }
 
+    public void completeTask(int index){
+        this.taskList.get(index).markDone();
+    }
+
+    public Task getTask(int index) {
+        return this.taskList.get(index);
+    }
+
+    public int getNoTask() { return  this.taskList.size(); }
+
     public ArrayList getTaskList(){
         return this.taskList;
     }
 
+    public boolean isEmpty() { return this.taskList.isEmpty();}
+
+    @Override
     public String toString() {
         String output = "";
         if (this.taskList.size() > 0) {

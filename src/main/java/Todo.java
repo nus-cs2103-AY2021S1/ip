@@ -2,6 +2,10 @@ import java.time.LocalDateTime;
 
 public class Todo extends Task{
 
+    public Todo(String description, boolean done) {
+        super(description, LocalDateTime.now(), done);
+    }
+
     public Todo(String description) {
         super(description, LocalDateTime.now());
     }

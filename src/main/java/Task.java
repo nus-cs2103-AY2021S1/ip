@@ -13,11 +13,18 @@ public class Task {
     Status status = Status.INCOMPLETE;
     LocalDateTime dueDate;
 
+    public Task (String description, LocalDateTime dueDate, boolean done) {
+        this.description = description;
+        this.status = done ? Status.COMPLETED : Status.INCOMPLETE;
+        this.dueDate = dueDate;
+    }
+
     public Task (String description, LocalDateTime dueDate) {
         this.description = description;
         this.status = Status.INCOMPLETE;
         this.dueDate = dueDate;
     }
+
 
     public void markDone() {
         this.status = Status.COMPLETED;
@@ -25,9 +32,8 @@ public class Task {
 
     public boolean isDone() { return this.status == Status.COMPLETED; }
 
-
     public String writeToFile() {
-        return (this.status.equals(Status.COMPLETED) ? "1" : "0")
+        return (this.status == Status.COMPLETED ? "1" : "0")
                 + "|" + this.description.strip();
     }
 
@@ -38,7 +44,7 @@ public class Task {
     }
 
     public String toString() {
-        return (this.status == Status.COMPLETED ? "[\u2718]" : "[\u2713]") + this.description;
+        return (this.status == Status.COMPLETED ? "[\u2713]" : "[\u2718]") + this.description;
     }
 
 }

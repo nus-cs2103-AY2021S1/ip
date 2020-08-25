@@ -1,6 +1,5 @@
 public class DukeExceptions {
 
-
     public static class IncompleteCommandException extends Exception {
         public IncompleteCommandException(String commandName) {
             super(commandName);

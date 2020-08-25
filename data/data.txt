@@ -1,4 +1,5 @@
-E|0|return book|2020-01-01T19:00
-E|0|shave|2020-01-01T18:00
+D|0|return book|2020-01-01T19:00
+D|0|shave|2020-01-01T18:00
 D|0|shave|2020-01-02T16:05
-D|0|read|2020-01-01T00:00
+D|1|read|2020-01-01T00:00
+T|0|hello world

@@ -1,19 +1,13 @@
-import java.io.IOException;
-import java.util.ArrayList;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class Duke {
-    private final String border = "----------------------------------------------------------------------------\n";
     private boolean isRunning = true;
-    private final TaskList taskList = new TaskList();
+    private TaskList taskList;
+    private Ui ui;
+    private Parser parser;
+    Storage storage;
     enum commands {
         BYE,
         DONE,
@@ -25,119 +19,71 @@ public class Duke {
         DATE
     }
 
-    public void printGreeting() {
-        String logo =
-                  " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        String greeting = "Sorry :( Duke is getting some upgrades at the moment.\n"
-                + "This is Tron, temporarily standing in for Duke, how may I assist you ?\n";
-        System.out.println(this.border + greeting + this.border);
+    public Duke(String filePath) {
+        this.ui = new Ui();
+        this.parser = new Parser();
+        this.storage = new Storage(filePath);
+        try {
+            this.taskList = new TaskList(storage.load());
+        } catch (IOException e) {
+            this.ui.printLoadingError();
+            this.taskList = new TaskList();
+        }
+        this.ui.printGreeting();
     }
 
-    public void printFarewell() {
-        String farewell = "Adios, pleasure to serve you!\n";
-        System.out.println(this.border + farewell + this.border);
-    }
-
-    public void printTaskList(TaskList taskList) {
-        System.out.println(this.border + taskList.toString() + this.border);
-    }
-
-    public void printDoneTask(Task task) {
-        System.out.println(this.border
-            + "Making great progress master.\n"
-            + task.toString() + "\n"
-            + this.border
-        );
-    }
-
-    public void printAddedNewTask(Task task, int noTask) {
-        System.out.println(this.border
-            + "Yes master. I've added the task to the list: \n"
-            + task.toString() + "\n"
-            + "You now have " + noTask + " task in the list master.\n"
-            + this.border
-        );
-    }
-
-    public void printDeleteTask(Task task, int noTask) {
-        System.out.println(this.border
-                + "Yes master. I've deleted the task from the list: \n"
-                + task.toString() + "\n"
-                + "You now have " + noTask + " task in the list master.\n"
-                + this.border
-        );
-    }
-
-    public void doneHandler(String parameters) throws DukeExceptions.NoUndoneTaskException {
+    public void doneHandler(String[] parameters) throws DukeExceptions.NoUndoneTaskException {
         if (!this.taskList.isEmpty() || this.taskList.allDone()) {
-            int index = Integer.parseInt(parameters.strip()) - 1;
+            int index = Integer.parseInt(parameters[0].strip()) - 1;
             this.taskList.completeTask(index);
-            this.printDoneTask(this.taskList.getTask(index));
+            this.ui.printDoneTask(this.taskList.getTask(index));
         } else {
             throw new DukeExceptions.NoUndoneTaskException();
         }
     }
 
-    public void addTaskHandler(String command, String parameters) throws DukeExceptions.IncompleteCommandException {
-        if (!parameters.isBlank()) {
-            Task newTask = this.taskList.addTask(command, parameters);
-            this.printAddedNewTask(newTask, this.taskList.getNoTask());
+    public void addTaskHandler(Command command) throws DukeExceptions.IncompleteCommandException { ;
+        if (!command.isEmpty()) {
+            Task newTask = this.taskList.addTask(command);
+            this.ui.printAddedNewTask(newTask, this.taskList.getNoTask());
         } else {
-            throw new DukeExceptions.IncompleteCommandException(command);
+            throw new DukeExceptions.IncompleteCommandException(command.getClass().toString());
         }
     }
 
-    public void deleteTaskHandler(String parameters) throws  DukeExceptions.NoTaskToDeleteException {
+    public void deleteTaskHandler(String[] parameters) throws  DukeExceptions.NoTaskToDeleteException {
         if (!this.taskList.isEmpty()) {
-            int index = Integer.parseInt(parameters.strip()) - 1;
+            int index = Integer.parseInt(parameters[0].strip()) - 1;
             Task task = this.taskList.deleteTask(index);
-            this.printDeleteTask(task, this.taskList.getNoTask());
+            this.ui.printDeleteTask(task, this.taskList.getNoTask());
         } else {
             throw new DukeExceptions.NoTaskToDeleteException();
         }
-    }
-
-    public void getTaskOn(String dueDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        System.out.println(
-            this.border
-            + "Master here are the tasks due on " + dueDate.strip() + " :\n"
-            + this.taskList.getTaskDueOn(dueDate)
-            + this.border
-        );
     }
 
     public boolean isRunning() {
         return this.isRunning;
     }
 
-    public void updateFile(File taskList) {
+    public void updateFile() {
         try {
-            FileWriter updateFile = new FileWriter(taskList.getPath());
-            ArrayList<Task> tasks = this.taskList.getTaskList();
-            for (Task task : tasks) {
-                updateFile.write(task.writeToFile() + "\n");
-            }
-            updateFile.close();
-        } catch (IOException e){
-
+            this.storage.save(this.taskList);
+        } catch (IOException e) {
+            this.ui.printErrorInSaving();
         }
     }
 
-    public boolean run(commands command, String parameters) {
-        if (command == commands.BYE) {
+    public void run(String userInput) {
+        Command command = this.parser.parse(userInput);
+        if (command.getClass() == ByeCommand.class) {
             this.isRunning = false;
-        } else if (command == commands.LIST) {
-            this.printTaskList(this.taskList);
-        } else if (command == commands.DONE) {
+            this.ui.printFarewell();
+        } else if (command.getClass() == ListCommand.class) {
+            this.ui.printTaskList(this.taskList);
+        } else if (command.getClass() == DoneCommand.class) {
             try {
-                this.doneHandler(parameters);
-                return true;
+                this.doneHandler(command.getParameters());
+                this.updateFile();
             } catch (DukeExceptions.NoUndoneTaskException e) {
                 DukeExceptions.printNoUndoneTaskError();
             } catch (IndexOutOfBoundsException e) {
@@ -145,10 +91,12 @@ public class Duke {
             } catch (NumberFormatException e) {
                 DukeExceptions.noIndexKeyedError();
             }
-        } else if (command == commands.EVENT || command == commands.TODO || command == commands.DEADLINE) {
+        } else if (command.getClass() == TodoCommand.class
+                || command.getClass() == EventCommand.class
+                || command.getClass() == DeadLineCommand.class ) {
             try {
-                this.addTaskHandler(command.toString().toLowerCase(), parameters);
-                return true;
+                this.addTaskHandler(command);
+                this.updateFile();
             } catch (DukeExceptions.IncompleteCommandException e) {
                 DukeExceptions.printIncompleteCommandError(command.toString().toLowerCase());
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -156,10 +104,10 @@ public class Duke {
             } catch (DateTimeParseException e) {
                 DukeExceptions.printIncorrectDateFormatError();
             }
-        } else if (command == commands.DELETE) {
+        } else if (command.getClass() == DelCommand.class ) {
             try {
-                this.deleteTaskHandler(parameters);
-                return true;
+                this.deleteTaskHandler(command.getParameters());
+                this.updateFile();
             } catch (DukeExceptions.NoTaskToDeleteException e) {
                 DukeExceptions.printNoTaskToDeleteError();
             } catch (IndexOutOfBoundsException e) {
@@ -167,43 +115,24 @@ public class Duke {
             } catch (NumberFormatException e) {
                 DukeExceptions.noIndexKeyedError();
             }
-        } else if (command == commands.DATE) {
-            this.getTaskOn(parameters);
+        } else if (command.getClass() == DateCommand.class ) {
+            ui.printGetTaskOnDThisDate(command.getParameters()[0], this.taskList);
         }
-        return false;
     }
 
     public static void main(String[] args) {
 
-        Duke duke = new Duke();
-        duke.printGreeting();
+        Duke duke = new Duke("./data/data.txt");
         Scanner sc = new Scanner(System.in); //scans for input
-        String command;
-        String parameters;
+        String userInput;
 
-
-        try {
-            File taskList = new File("./data/data.txt");
-            if (!taskList.exists()) {
-                taskList.getParentFile().mkdir();
-                taskList.createNewFile();
+        while (duke.isRunning()) {
+            userInput = sc.nextLine();
+            try {
+                duke.run(userInput);
+            } catch (IllegalArgumentException e) {
+                DukeExceptions.printUnrecognizableCommandError();
             }
-            while (duke.isRunning()) {
-                boolean hasChange = false;
-                command = sc.next().toUpperCase();
-                parameters = sc.nextLine().toLowerCase();
-                try {
-                    hasChange = duke.run(Duke.commands.valueOf(command), parameters);
-                } catch (IllegalArgumentException e) {
-                    DukeExceptions.printUnrecognizableCommandError();
-                }
-                if (hasChange) {
-                    duke.updateFile(taskList);
-                }
-            }
-            duke.printFarewell();
-        } catch (IOException e) {
-
         }
     }
 }
