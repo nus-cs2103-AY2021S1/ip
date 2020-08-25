@@ -94,7 +94,7 @@ public class Duke {
                 } catch (DukeEmptyEventTimeException e) {
                     UI.printFormattedMessage("OOPS!!! The description of a event time cannot be empty.");
                 } catch (DukeDeleteException e) {
-                    UI.printFormattedMessage("OOPS!!! The invalid delete number.");
+                    UI.printFormattedMessage("OOPS!!! The invalid delete number.!");
                 } catch (DateTimeParseException e){
                     UI.printFormattedMessage("OOPS!!! The invalid date format has been keyed in. PLease enter in dd-MM-yyyy HH:mm format");
                 }
