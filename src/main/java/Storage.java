@@ -7,13 +7,28 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the storage of the client data. Every storage instance will have a file path. Contains methods to save or
+ * load from disk.
+ */
 public class Storage {
-    Path filepath;
+    private final Path filepath;
 
+    /**
+     * Public Constructor.
+     *
+     * @param filepath Path of data storage file.
+     */
     public Storage(Path filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Saves the current list of tasks to the disk.
+     *
+     * @param taskList List of tasks.
+     * @throws IOException If an error occurred when saving to disk.
+     */
     void updateMemory(ArrayList<Task> taskList) throws IOException {
         StringBuilder taskListString = new StringBuilder();
         for (Task task : taskList) {
@@ -25,6 +40,15 @@ public class Storage {
 
     }
 
+    /**
+     * Loads the tasks that was previously saved to disk. If the file or directory cannot be found, it will be created
+     * and a new list is returned.
+     *
+     * @return List populated with previously saved tasks, otherwise returns a new list if an existing one cannot be
+     * found.
+     * @throws BlankTaskException If the task provided in the list has a blank name.
+     * @throws IOException        If there was an error in saving to disk.
+     */
     ArrayList<Task> load() throws BlankTaskException, IOException {
         if (Files.notExists(filepath)) {
             if (Files.notExists(filepath.getParent())) {

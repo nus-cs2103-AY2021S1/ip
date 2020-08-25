@@ -3,12 +3,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Main class for the Duke CLI task-tracking application.
+ */
 public class Duke {
 
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Initialises the instance attributes: storage, tasks, ui.
+     *
+     * @param filePath File path of storage data.
+     */
     public Duke(Path filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -21,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Drives the application and all of the underlying processes.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -52,6 +63,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Entry point of the program.
+     *
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         Path dataPath = Paths.get("data", "duke.txt");
         new Duke(dataPath).run();
