@@ -88,7 +88,7 @@ public class Duke {
 
 
     private void createAndAddDeadline(String input) throws EmptyDescriptionException, WrongFormatException {
-        if (input.length() < 8 || input.substring(8).replaceAll("\\s", "").equals("")) {
+        if (input.length() < 9 || input.substring(8).replaceAll("\\s", "").equals("")) {
             throw new EmptyDescriptionException("deadline");
         } else if (input.contains("/by")
                 && Character.toString(input.charAt(8)).equals(" ")
