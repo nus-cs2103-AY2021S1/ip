@@ -1,5 +1,5 @@
 /**
- * List all tasks that Duke currently has
+ * List all tasks that Duke currently has.
  */
 public class ListCommand extends Command{
     
@@ -7,11 +7,12 @@ public class ListCommand extends Command{
         super(input);
     }
     /**
-     * List out all tasks that Duke is currently handling
-     * @param tasks list of all tasks Duke has
-     * @param ui handles the output that the user sees
-     * @param storage writing of the save file
+     * List out all tasks that Duke is currently handling.
+     * @param tasks List of all tasks Duke has.
+     * @param ui Handles the output that the user sees.
+     * @param storage Writing of the save file.
      */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.getTasks().size() == 0) {
             ui.printOutput("\tList is empty! Start adding some tasks");
@@ -25,9 +26,10 @@ public class ListCommand extends Command{
     }
 
     /**
-     * Lets main logic know that it can not stop running
-     * @return false to prevent loop from exitting
+     * Lets main logic know that it can not stop running.
+     * @return False to prevent loop from exiting.
      */
+    @Override
     public boolean isExit() {
         return false;
     }

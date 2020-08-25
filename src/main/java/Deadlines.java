@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents the deadlines that the user wants to remember
+ * Represents the deadlines that the user wants to remember.
  */
 public class Deadlines extends Task {
 

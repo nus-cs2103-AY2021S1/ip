@@ -1,5 +1,3 @@
-[T][✘] kiwi
-[E][✘] mango (at: 15:00 Aug 30 2020)
-[D][✘] oranges (by: 15:00 Sep 30 2020)
-[T][✘] basketball
-[T][✘] kickball
+[T][✘] oranges
+[E][✘] kiwi (at: 18:00 Sep 9 2020)
+[D][✘] ostrich (by: 19:00 Sep 9 2020)

@@ -46,7 +46,7 @@ public class Storage {
                         int index = entry.indexOf("(");
                         String datetime = entry.substring(index + 5, entry.length() - 1);
                         LocalDateTime ldt = LocalDateTime.parse(datetime, dtf2);
-                        Deadlines d = new Deadlines(entry.substring(7, index),
+                        Deadlines d = new Deadlines(entry.substring(7, index-1),
                                 ldt);
                         if (entry.contains("✓")) {
                             d.completeTask();
@@ -56,7 +56,7 @@ public class Storage {
                         int index = entry.indexOf("(");
                         String datetime = entry.substring(index + 5, entry.length() - 1);
                         LocalDateTime ldt = LocalDateTime.parse(datetime, dtf2);
-                        Events e = new Events(entry.substring(7, index),
+                        Events e = new Events(entry.substring(7, index-1),
                                 ldt);
                         if (entry.contains("✓")) {
                             e.completeTask();

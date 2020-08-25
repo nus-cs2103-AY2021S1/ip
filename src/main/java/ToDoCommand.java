@@ -15,6 +15,7 @@ public class ToDoCommand extends Command {
      * @throws InvalidInputException If input of todos is wrong.
      * @throws InvalidSaveFileException If writing the save file goes wrong.
      */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidSaveFileException {
         if (super.input.length() <= 5) {
             throw new InvalidInputException("\t☹ OOPS!!! The description of a todo cannot be empty.");
@@ -30,6 +31,7 @@ public class ToDoCommand extends Command {
      * Lets the main logic know that it can not quit yet.
      * @return False to prevent the loop for exiting.
      */
+    @Override
     public boolean isExit() {
         return false;
     }

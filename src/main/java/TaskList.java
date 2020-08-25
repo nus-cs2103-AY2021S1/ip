@@ -23,4 +23,27 @@ public class TaskList {
     public List<Task> getTasks() {
         return this.taskList;
     }
+
+    /**
+     * Removes Task at the given index.
+     *
+     * @param index Represents the index of the item to be removed.
+     */
+    public void removeTask(int index) {
+        this.taskList.remove(index);
+    }
+
+    public List<Task> findTasks(String keyword) {
+        List<Task> newList = new ArrayList<>();
+        for( int m = 0; m < taskList.size(); m++) {
+            if(taskList.get(m).taskDesc.contains(keyword)) {
+                newList.add(taskList.get(m));
+            }
+        }
+        return newList;
+    }
+
+    public void addTask(Task task) {
+        this.taskList.add(task);
+    }
 }

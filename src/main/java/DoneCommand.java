@@ -1,6 +1,6 @@
 /**
  * Represents the command from the user to complete an
- * existing task
+ * existing task.
  */
 public class DoneCommand extends Command{
 
@@ -9,13 +9,14 @@ public class DoneCommand extends Command{
     }
 
     /**
-     * Completes the task that the user specified
-     * @param tasks List of tasks
-     * @param ui Ui object that handles printing
-     * @param storage handles the rewriting of save file
-     * @throws InvalidInputException if command is poorly written
-     * @throws InvalidSaveFileException if there is an issue writing the save file
+     * Completes the task that the user specified.
+     * @param tasks List of tasks.
+     * @param ui Ui Object that handles printing.
+     * @param storage Handles the rewriting of save file.
+     * @throws InvalidInputException If command is poorly written.
+     * @throws InvalidSaveFileException If there is an issue writing the save file.
      */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidSaveFileException {
         if(super.input.length() <= 5) {
             throw new InvalidInputException("\t☹ OOPS!!! Please specify which task you want to complete!");
@@ -30,6 +31,12 @@ public class DoneCommand extends Command{
         }
         storage.saveFile(tasks.getTasks());
     }
+
+    /**
+     * Lets the main logic know to continue running.
+     * @return False to prevent loop exit.
+     */
+    @Override
     public boolean isExit() {
         return false;
     }

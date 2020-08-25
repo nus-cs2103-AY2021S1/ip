@@ -23,6 +23,7 @@ public class DeadlineCommand extends Command{
      * @throws InvalidInputException If the input for the delete is incorrect.
      * @throws InvalidSaveFileException If there is an issue writing the save file.
      */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateTimeFormatException,
             InvalidInputException, InvalidSaveFileException {
         if (super.input.length() <= 9) {
@@ -38,7 +39,7 @@ public class DeadlineCommand extends Command{
             throw new InvalidDateTimeFormatException("\tDeadline input must follow a certain format: yyyy-mm-dd HH:mm " +
                     "e.g. 2020-08-23 16:45");
         }
-        tasks.getTasks().add(task);
+        tasks.addTask(task);
         ui.printOutput("\tGot it. I've added this task:\n" + "\t" + task.toString() +
                 "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
         storage.saveFile(tasks.getTasks());
@@ -46,9 +47,9 @@ public class DeadlineCommand extends Command{
 
     /**
      * Lets the main logic know that it cannot exit.
-     *
      * @return False to prevent loop from exiting.
      */
+    @Override
     public boolean isExit() {
         return false;
     }
