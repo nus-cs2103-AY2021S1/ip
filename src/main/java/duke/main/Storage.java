@@ -24,6 +24,7 @@ public class Storage {
 
     /**
      * Initialisation of the Storage class which requires a filepath to save and load data from.
+     *
      * @param filepath The relative filepath from where Duke was ran, to save and load data from
      */
     public Storage(String filepath) {
@@ -32,6 +33,7 @@ public class Storage {
 
     /**
      * Loads data using the filepath given.
+     *
      * @param ui Needed to display the outcome to the user
      * @return Returns the saved TaskList, if there is any
      */
@@ -87,7 +89,8 @@ public class Storage {
 
     /**
      * Saves data using the filepath given.
-     * @param ui Needed to display the outcome to the user
+     *
+     * @param ui       Needed to display the outcome to the user
      * @param taskList The TaskList being saved into the filepath
      */
     public void saveData(UI ui, TaskList taskList) {

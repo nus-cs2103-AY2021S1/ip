@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    protected LocalDateTime time;
+    protected final LocalDateTime time;
 
     public Event(String description, LocalDateTime time) {
         super(description);
-        this.time =time;
+        this.time = time;
     }
 
     @Override

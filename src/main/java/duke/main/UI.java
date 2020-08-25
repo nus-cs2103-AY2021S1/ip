@@ -24,6 +24,7 @@ public class UI {
 
     /**
      * Reads in the user's input.
+     *
      * @return Returns the trimmed version of the user's input
      */
     public String readCommand() {
@@ -52,6 +53,7 @@ public class UI {
 
     /**
      * Displays the error message to the user.
+     *
      * @param error The error that was thrown
      */
     public void showError(String error) {
@@ -60,8 +62,9 @@ public class UI {
 
     /**
      * Displays the added task message to the user.
+     *
      * @param task The task that was added
-     * @param n The size of the TaskList after the task was added
+     * @param n    The size of the TaskList after the task was added
      */
     public void addTask(String task, int n) {
         String s = " Got it. I've added this task:\n   " + task + "\n";
@@ -70,6 +73,7 @@ public class UI {
 
     /**
      * Displays the list of tasks to the user.
+     *
      * @param taskList The TaskList of the user
      */
     public void displayList(ArrayList<Task> taskList) {
@@ -83,7 +87,7 @@ public class UI {
                 s = s.concat(" Here are the tasks in your list:\n");
             }
             for (int i = 0; i < taskList.size(); i++) {
-                s = s.concat(" " + (i+1) + "." + taskList.get(i) + "\n");
+                s = s.concat(" " + (i + 1) + "." + taskList.get(i) + "\n");
             }
             s = s.substring(0, s.length() - 1);
             showCmd(s);
@@ -92,17 +96,16 @@ public class UI {
 
     /**
      * Displays the size of the TaskList to the user.
+     *
      * @param n The size of the TaskList
      * @return Returns the String message to be concatenated with the display message.
      */
     public String displayListSize(int n) {
         if (n == 0) {
             return (" Great job son! You're left with no more tasks!");
-        }
-        else if (n == 1) {
+        } else if (n == 1) {
             return String.format(" Now you have %d task in the list.", n);
-        }
-        else {
+        } else {
             return String.format(" Now you have %d tasks in the list.", n);
         }
     }
@@ -137,6 +140,7 @@ public class UI {
 
     /**
      * Displays the task was successfully done message to the user.
+     *
      * @param task The task that was successfully completed
      */
     public void doneTask(String task) {
@@ -145,8 +149,9 @@ public class UI {
 
     /**
      * Displays the task was successfully deleted message to the user.
+     *
      * @param task The task that was successfully deleted
-     * @param n The number of remaining tasks
+     * @param n    The number of remaining tasks
      */
     public void deleteTask(String task, int n) {
         String s = " Noted. I've removed this task:\n  " + task + "\n";

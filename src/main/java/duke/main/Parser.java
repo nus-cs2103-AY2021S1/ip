@@ -16,6 +16,7 @@ import java.time.format.DateTimeParseException;
 public abstract class Parser {
     /**
      * Reads the user's input and returns a command for Duke to execute.
+     *
      * @param inputLine The user's input
      * @return Returns an executable command based on the user's input
      */
@@ -24,21 +25,13 @@ public abstract class Parser {
 
         if (inputLine.equals("bye")) {
             return new ByeCommand();
-        }
-
-        else if (inputLine.equals("help")) {
+        } else if (inputLine.equals("help")) {
             return new HelpCommand();
-        }
-
-        else if (inputLine.equals("list")) {
+        } else if (inputLine.equals("list")) {
             return new DisplayListCommand();
-        }
-
-        else if (inputLine.equals("save")) {
+        } else if (inputLine.equals("save")) {
             return new SaveCommand();
-        }
-
-        else if (arr.length == 2 && (arr[0].equals("done") || arr[0].equals("delete")) && isInteger(arr[1])) {
+        } else if (arr.length == 2 && (arr[0].equals("done") || arr[0].equals("delete")) && isInteger(arr[1])) {
             try {
                 int num = Integer.parseInt(arr[1]);
                 if (arr[0].equals("done")) {
@@ -49,9 +42,7 @@ public abstract class Parser {
             } catch (NumberFormatException e) {
                 return new ErrorCommand(new InvalidNumberError());
             }
-        }
-
-        else {
+        } else {
             try {
                 switch (arr[0]) {
                     case "todo":
