@@ -1,4 +1,4 @@
-package timeformatter;
+package duke.timeformatter;
 
 import java.time.LocalDate;
 
