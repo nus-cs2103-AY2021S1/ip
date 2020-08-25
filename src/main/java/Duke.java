@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -19,6 +18,7 @@ public class Duke {
         try {
             this.storage.loadFileContents();
             this.tasks = new TaskList(this.storage.getTaskList());
+
         } catch (FileNotFoundException e) {
             System.out.println(e);
             this.isLoadingSuccess = false;

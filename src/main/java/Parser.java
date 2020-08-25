@@ -26,7 +26,8 @@ public class Parser {
             displayList();
 
         } else if (commandSpace < 0) {
-            throw new DukeException("*Invalid command.*\n     Commands: bye, list, todo, event, deadline, delete");
+            throw new DukeException("*Invalid command.*\n" +
+                    "     Commands: bye, list, todo, event, deadline, delete");
 
         } else if (str.substring(0, 5).equals("done ")) {
             int length = str.length();
@@ -48,7 +49,8 @@ public class Parser {
             store(newTodo);
 
         } else if (commandSpace <= 4) {
-            throw new DukeException("*Invalid command.*\n     Commands: bye, list, todo, event, deadline, delete");
+            throw new DukeException("*Invalid command.*\n" +
+                    "     Commands: bye, list, todo, event, deadline, delete");
 
         } else if (str.substring(0, 6).equals("event ")) {
             int length = str.length();
@@ -74,7 +76,8 @@ public class Parser {
             store(newEvent);
 
         } else if (commandSpace <= 5) {
-            throw new DukeException("*Invalid command.*\n     Commands: bye, list, todo, event, deadline, delete");
+            throw new DukeException("*Invalid command.*\n" +
+                    "     Commands: bye, list, todo, event, deadline, delete");
 
         } else if (str.substring(0, 7).equals("delete ")) {
             int length = str.length();
@@ -87,7 +90,8 @@ public class Parser {
             delete(realIndex);
 
         } else if (commandSpace <= 6) {
-            throw new DukeException("       *Invalid command.*\n     Commands: bye, list, todo, event, deadline, delete");
+            throw new DukeException("       *Invalid command.*\n" +
+                    "     Commands: bye, list, todo, event, deadline, delete");
 
         } else if (str.substring(0, 9).equals("deadline ")) {
             int length = str.length();
@@ -98,7 +102,7 @@ public class Parser {
             int end = str.indexOf("/by");
             if (end < 0) {
                 throw new DukeException("*Please fill in deadline completion time in the following format:*\n" +
-                                        "     eg. deadline return book to Jurong Regional Library /by YYYY-MM-DD");
+                        "     eg. deadline return book to Jurong Regional Library /by YYYY-MM-DD");
             }
 
             LocalDate date;
@@ -113,7 +117,8 @@ public class Parser {
             store(newDeadline);
 
         } else {
-            throw new DukeException("*Invalid command.*\n     Commands: bye, list, todo, event, deadline, delete");
+            throw new DukeException("*Invalid command.*\n" +
+                    "     Commands: bye, list, todo, event, deadline, delete");
         }
 
         System.out.println("    _______________________________________________________________________\n");
@@ -122,7 +127,7 @@ public class Parser {
     public void store(Task task) {
         this.lst.store(task);
         System.out.println("     Got it. I've added this task:\n"
-                         + "       " + task);
+                + "       " + task);
         System.out.println("     Now you have " + this.lst.getLength() + " task(s) in the list.");
     }
 
@@ -142,7 +147,7 @@ public class Parser {
     public void markDone(int index) {
         Task taskSubject = this.lst.markDone(index);
         System.out.println("     Nice! I've marked this task as done:\n"
-                         + "       " + taskSubject);
+                + "       " + taskSubject);
     }
 
     public void delete(int index) {

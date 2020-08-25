@@ -2,11 +2,12 @@ public class Ui {
     private static String TITLE = "     CS2103T Individual Project 1\n";
 
     public static void displayWelcome() {
-        System.out.println("    _______________________________________________________________________\n     ***Welcome to Project DUKE***\n"
-                            + TITLE
-                            + "\n     Hello! I'm Duke"
-                            + "\n     What can I do for you?"
-                            + "\n    _______________________________________________________________________\n");
+        System.out.println("    _______________________________________________________________________\n"
+                + "     ***Welcome to Project DUKE***\n"
+                + TITLE
+                + "\n     Hello! I'm Duke"
+                + "\n     What can I do for you?"
+                + "\n    _______________________________________________________________________\n");
     }
 
     public static void displayLoadFileError() {
