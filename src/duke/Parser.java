@@ -17,16 +17,17 @@ public class Parser {
 //                } catch (IllegalArgumentException e) {
 //                    throw new WrongInputException();
 //                }
-                if (cmd.length < 1 || cmd[1].isEmpty()) {
-                    throw new DukeException("The description of the task cannot be empty.");
 
-                } else if (cmd.length < 2) {
+                if (cmd.length < 2) {
 
                     if (firstWord.equals("list")) {
                         return new ListCommand();
 
                     } else if (firstWord.equals("bye")) {
                         return new ExitCommand();
+                    } else {
+                        throw new DukeException("The description of the task cannot be empty.");
+
                     }
 
                 } else {
@@ -91,7 +92,7 @@ public class Parser {
                 throw new DukeException(exc.getMessage());
             }
 
-            throw new WrongInputException();
+            //throw new WrongInputException();
     }
 
     private static String removeFirstWord(String command) throws DukeException {

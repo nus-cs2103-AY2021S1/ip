@@ -27,9 +27,9 @@ public class TaskList {
 
     public void listItems() {
         if (this.tasks.size() == 0) {
-            System.out.println("You don't have any duke.task in your list.");
+            System.out.println("You don't have any task in your list.");
         } else {
-            StringBuilder todoList = new StringBuilder("Here are the duke.task(s) in your list: \n");
+            StringBuilder todoList = new StringBuilder("Here are the task(s) in your list: \n");
             int num = 1;
             for (Task item : this.tasks) {
                 todoList.append(num + ". " + item.toString() + "\n");
@@ -41,14 +41,14 @@ public class TaskList {
 
     public void deleteTask(int index) throws DeleteException {
         if(index < 0 || index > tasks.size()) {
-            throw new DeleteException("Please enter a valid duke.task number.");
+            throw new DeleteException("Please enter a valid task number.");
         } else {
             Task task = this.tasks.get(index);
             this.tasks.remove(task);
             storage.updateData(this.tasks);
-            System.out.println("Noted. I've removed this duke.task for you: \n"
+            System.out.println("Noted. I've removed this task for you: \n"
                     + task.toString() + "\n"
-                    + "Now you have " + this.tasks.size() + " duke.task(s) in the list.");
+                    + "Now you have " + this.tasks.size() + " task(s) in the list.");
         }
 
     }
@@ -65,7 +65,7 @@ public class TaskList {
 
     public void markTaskAsDone(int taskNum) throws DoneException {
             if (taskNum <= 0 || taskNum > tasks.size()) {
-                throw new DoneException("Please enter a valid duke.task number.");
+                throw new DoneException("Please enter a valid task number.");
             } else {
                 int index = taskNum - 1;
                 Task oldTask = this.tasks.get(index);
@@ -73,7 +73,7 @@ public class TaskList {
                 this.tasks.remove(oldTask);
                 this.tasks.add(index, newTask);
                 storage.updateData(this.tasks);
-                System.out.println("YAYY! I've marked this duke.task as done : \n"
+                System.out.println("YAYY! I've marked this task as done : \n"
                         + newTask.toString());
             }
     }
