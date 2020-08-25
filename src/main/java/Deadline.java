@@ -1,6 +1,3 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 public class Deadline extends Task {
 
     private String by;
@@ -15,7 +12,7 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
-    public String formattedString() {
+    public String getFormattedString() {
         return "D | " + (super.isDone? 1 : 0) + " | " + super.description + " | " +
                 by;
     }

@@ -3,10 +3,10 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private Scanner sc;
+    private Scanner scanner;
 
     public Ui() {
-        sc = new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
     }
 
     public void showLine() {
@@ -20,7 +20,6 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-
         showLine();
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -33,32 +32,32 @@ public class Ui {
         showLine();
     }
 
-    public void showError(String mesg) {
+    public void showError(String message) {
         showLine();
-        System.out.println(mesg);
+        System.out.println(message);
         showLine();
     }
 
-    public void showDone(Task t) {
+    public void showDone(Task task) {
         showLine();
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("    " + t);
+        System.out.println("    " + task);
         showLine();
     }
 
-    public void showAdd(Task t, int i) {
+    public void showAdd(Task task, int size) {
         showLine();
         System.out.println("Got it. I've added this task:");
-        System.out.println("    " + t);
-        System.out.println("Now you have " + i + " tasks in the list.");
+        System.out.println("    " + task);
+        System.out.println("Now you have " + size + " tasks in the list.");
         showLine();
     }
 
-    public void showDelete(Task t, int i) {
+    public void showDelete(Task task, int size) {
         showLine();
         System.out.println("Noted. I've removed this task:");
-        System.out.println("    " + t);
-        System.out.println("Now you have " + i + " tasks in the list.");
+        System.out.println("    " + task);
+        System.out.println("Now you have " + size + " tasks in the list.");
         showLine();
     }
 
@@ -72,6 +71,6 @@ public class Ui {
     }
 
     public String readCommand() {
-        return sc.nextLine();
+        return scanner.nextLine();
     }
 }

@@ -1,6 +1,4 @@
-import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class TaskList {
 
@@ -13,25 +11,25 @@ public class TaskList {
     public TaskList(ArrayList<String> lst) {
         ArrayList<Task> temp = new ArrayList<>();
         for (String s : lst) {
-            String[] st = s.split(" \\| ");
-            if (st[0].equals("T")) {
-                ToDo t = new ToDo(st[2]);
-                if (st[1].equals("1")) {
-                    t.markAsDone();
+            String[] arr = s.split(" \\| ");
+            if (arr[0].equals("T")) {
+                ToDo todo = new ToDo(arr[2]);
+                if (arr[1].equals("1")) {
+                    todo.markAsDone();
                 }
-                temp.add(t);
-            } else if (st[0].equals("D")) {
-                Deadline d = new Deadline(st[2], st[3]);
-                if (st[1].equals("1")) {
-                    d.markAsDone();
+                temp.add(todo);
+            } else if (arr[0].equals("D")) {
+                Deadline deadline = new Deadline(arr[2], arr[3]);
+                if (arr[1].equals("1")) {
+                    deadline.markAsDone();
                 }
-                temp.add(d);
+                temp.add(deadline);
             } else {
-                Event e = new Event(st[2], st[3]);
-                if (st[1].equals("1")) {
-                    e.markAsDone();
+                Event event = new Event(arr[2], arr[3]);
+                if (arr[1].equals("1")) {
+                    event.markAsDone();
                 }
-                temp.add(e);
+                temp.add(event);
             }
         }
         this.tasks = temp;
@@ -47,24 +45,24 @@ public class TaskList {
 
     public void showList(Ui ui) {
         ArrayList<String> lst = new ArrayList<>();
-        for (Task t : tasks) {
-            lst.add(t.toString());
+        for (Task task : tasks) {
+            lst.add(task.toString());
         }
         ui.showList(lst);
     }
 
-    public void markDone(int i, Ui ui) {
-        tasks.get(i).markAsDone();
-        ui.showDone(tasks.get(i));
+    public void markDone(int pos, Ui ui) {
+        tasks.get(pos).markAsDone();
+        ui.showDone(tasks.get(pos));
     }
 
-    public void deleteTask(int i, Ui ui) {
-        Task t = tasks.remove(i);
+    public void deleteTask(int pos, Ui ui) {
+        Task t = tasks.remove(pos);
         ui.showDelete(t, tasks.size());
     }
 
-    public void addTask(Task t, Ui ui) {
-        tasks.add(t);
+    public void addTask(Task task, Ui ui) {
+        tasks.add(task);
         ui.showAdd(tasks.get(tasks.size() - 1), tasks.size());
     }
 }

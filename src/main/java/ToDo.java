@@ -9,7 +9,7 @@ public class ToDo extends Task {
         return "[T]" + super.toString();
     }
 
-    public String formattedString() {
+    public String getFormattedString() {
         return "T | " + (super.isDone? 1 : 0) + " | " + super.description;
     }
 }
