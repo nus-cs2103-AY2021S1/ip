@@ -12,8 +12,6 @@ import java.io.PrintStream;
 public class TodoTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
-    private final String line = "_".repeat(80) + "\n";
-    private final String leftPadding = " ".repeat(7);
 
     @BeforeEach
     public void setUpStreams() {
