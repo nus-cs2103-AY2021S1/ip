@@ -25,7 +25,7 @@ public class DateTimeHandler {
             DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
             return inputDate.format(outputFormatter);
         } catch (DateTimeParseException e) {
-            throw new DukeException("\u2639 OOPS!!! Enter the date as \"dd-MM-yyyy\".\n");
+            throw new DukeException("Enter the date as \"dd-MM-yyyy\".\n");
         }
     }
 
@@ -46,7 +46,7 @@ public class DateTimeHandler {
             DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:ss a");
             return inputDateTime.format(outputFormatter);
         } catch (DateTimeParseException e) {
-            throw new DukeException("\u2639 OOPS!!! Enter the date and time as \"dd-MM-yyyy HHmm\".\n");
+            throw new DukeException("Enter the date and time as \"dd-MM-yyyy HHmm\".\n");
         }
     }
 }

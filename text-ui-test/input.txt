@@ -1,6 +1,9 @@
 list
 todo
 todo borrow book
+done
+done a
+done 2
 deadline
 deadline return book
 deadline return book /by
@@ -10,22 +13,19 @@ deadline return book /by 01/09/2020 1800
 deadline return book /by 01-09-2020 1800
 event
 event project meeting /by
+event project meeting /by 1-9-2020 0800
 event project meeting /at 1-9-2020 0800
 list
 get
 get 1/9/2020
 get 1-9-2020
-done
-done a
-done 1
-list
 done 4
-blah
 todo join sports club
 delete
 delete a
 delete 4
 list
 get 1-9-2020
+blah
 bye
 blah

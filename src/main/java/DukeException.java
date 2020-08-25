@@ -1,5 +1,5 @@
 /**
- * Encapsulates the exception when Duke receives an invalid input.
+ * Encapsulates the exception when a parser receives an invalid input.
  */
 public class DukeException extends Exception {
 

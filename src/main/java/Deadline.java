@@ -1,9 +1,9 @@
 /**
- * Represents a deadline as a task with a date and/or time.
+ * Represents a deadline as a task with a date and time.
  */
 public class Deadline extends Task {
 
-    private String dateTime;
+    private final String dateTime;
 
     public Deadline(String description, String by) throws DukeException {
         super(description);

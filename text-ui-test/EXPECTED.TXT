@@ -8,90 +8,86 @@ ____________________________________________________________
 Hello! I'm Duke.
 ____________________________________________________________
 
-Here are the task(s) in your list:
-1.[T][✘] buy bread
+This is the only task in your list:
+1. [T][✘] buy bread
 
-☹ OOPS!!! The description of a todo cannot be empty.
+ERROR: The description of a todo cannot be empty.
 
 Got it. I've added this task:
 [T][✘] borrow book
 Now you have 2 tasks in the list.
 
-☹ OOPS!!! The description of a deadline cannot be empty.
+ERROR: Which task have you done?
 
-☹ OOPS!!! Enter the date and time of the deadline after "/by".
+ERROR: Enter the index of the task done.
 
-☹ OOPS!!! Enter the date and time of the deadline after "/by".
+Nice! I've marked this as done:
+[T][✓] borrow book
 
-☹ OOPS!!! Enter the date and time as "dd-MM-yyyy HHmm".
+ERROR: The description of a deadline cannot be empty.
 
-☹ OOPS!!! Enter the date and time as "dd-MM-yyyy HHmm".
+ERROR: Enter the date and time of the deadline after "/by".
 
-☹ OOPS!!! Enter the date and time as "dd-MM-yyyy HHmm".
+ERROR: Enter the date and time of the deadline after "/by".
+
+ERROR: Enter the date and time as "dd-MM-yyyy HHmm".
+
+ERROR: Enter the date and time as "dd-MM-yyyy HHmm".
+
+ERROR: Enter the date and time as "dd-MM-yyyy HHmm".
 
 Got it. I've added this task:
 [D][✘] return book (by: 01 Sep 2020, 06:00 PM)
 Now you have 3 tasks in the list.
 
-☹ OOPS!!! The description of an event cannot be empty.
+ERROR: The description of an event cannot be empty.
 
-☹ OOPS!!! Enter the date and time of the event after "/at".
+ERROR: Enter the date and time of the event after "/at".
+
+ERROR: Enter the date and time of the event after "/at".
 
 Got it. I've added this task:
 [E][✘] project meeting (at: 01 Sep 2020, 08:00 AM)
 Now you have 4 tasks in the list.
 
-Here are the task(s) in your list:
-1.[T][✘] buy bread
-2.[T][✘] borrow book
-3.[D][✘] return book (by: 01 Sep 2020, 06:00 PM)
-4.[E][✘] project meeting (at: 01 Sep 2020, 08:00 AM)
+Here are the 4 tasks in your list:
+1. [T][✘] buy bread
+2. [T][✓] borrow book
+3. [D][✘] return book (by: 01 Sep 2020, 06:00 PM)
+4. [E][✘] project meeting (at: 01 Sep 2020, 08:00 AM)
 
-☹ OOPS!!! Enter the date you want to get tasks from.
+ERROR: Enter the date you want to get tasks from.
 
-☹ OOPS!!! Enter the date as "dd-MM-yyyy".
+ERROR: Enter the date as "dd-MM-yyyy".
 
 Here are the task(s) from 01 Sep 2020:
 1. [D][✘] return book (by: 01 Sep 2020, 06:00 PM)
 2. [E][✘] project meeting (at: 01 Sep 2020, 08:00 AM)
 
-☹ OOPS!!! Which task have you done?
-
-☹ OOPS!!! Enter the index of the task done.
-
-Nice! I've marked this as done:
-[T][✓] buy bread
-
-Here are the task(s) in your list:
-1.[T][✓] buy bread
-2.[T][✘] borrow book
-3.[D][✘] return book (by: 01 Sep 2020, 06:00 PM)
-4.[E][✘] project meeting (at: 01 Sep 2020, 08:00 AM)
-
 Nice! I've marked this as done:
 [E][✓] project meeting (at: 01 Sep 2020, 08:00 AM)
-
-☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 
 Got it. I've added this task:
 [T][✘] join sports club
 Now you have 5 tasks in the list.
 
-☹ OOPS!!! Which task do you want to delete?
+ERROR: Which task do you want to delete?
 
-☹ OOPS!!! Enter the index of the task to be deleted.
+ERROR: Enter the index of the task to be deleted.
 
 Noted. I've removed this task:
 [E][✓] project meeting (at: 01 Sep 2020, 08:00 AM)
 Now you have 4 tasks in the list.
 
-Here are the task(s) in your list:
-1.[T][✓] buy bread
-2.[T][✘] borrow book
-3.[D][✘] return book (by: 01 Sep 2020, 06:00 PM)
-4.[T][✘] join sports club
+Here are the 4 tasks in your list:
+1. [T][✘] buy bread
+2. [T][✓] borrow book
+3. [D][✘] return book (by: 01 Sep 2020, 06:00 PM)
+4. [T][✘] join sports club
 
 Here are the task(s) from 01 Sep 2020:
 1. [D][✘] return book (by: 01 Sep 2020, 06:00 PM)
+
+ERROR: I'm sorry, but I don't know what that means. ☹
 
 Bye. Hope to see you again soon!

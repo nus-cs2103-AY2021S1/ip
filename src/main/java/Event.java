@@ -1,9 +1,9 @@
 /**
- * Represents an event as a task with a date and/or time.
+ * Represents an event as a task with a date and time.
  */
 public class Event extends Task {
 
-    private String dateTime;
+    private final String dateTime;
 
     public Event(String description, String at) throws DukeException {
         super(description);

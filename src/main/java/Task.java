@@ -3,7 +3,7 @@
  */
 public class Task {
 
-    private String description;
+    private final String description;
     private boolean isDone;
 
     public Task(String description) {
@@ -27,7 +27,7 @@ public class Task {
      * @return Status icon.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (this.isDone ? "\u2713" : "\u2718");
     }
 
     /**
@@ -43,14 +43,14 @@ public class Task {
      * @return String representing the data of the task.
      */
     public String getData() {
-        int statusNum = this.getStatusIcon().equals("\u2713")
+        int statusNumber = this.getStatusIcon().equals("\u2713")
                 ? 1
                 : 0;
-        return statusNum + " / " + this.getDescription();
+        return statusNumber + " / " + this.getDescription();
     }
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.getDescription();
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
