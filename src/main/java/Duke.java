@@ -1,9 +1,31 @@
 import java.util.Scanner;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.io.IOException;
+import static java.lang.System.exit;
 
 public class Duke {
     enum Instruction {
-        BYE, LIST, DONE, DELETE, DEADLINE, EVENT, TODO, OTHERS;
+        LIST, DONE, DELETE, DEADLINE, EVENT, TODO, OTHERS
+    }
+
+    public static void updateList(String filePath, ArrayList<Task> list) throws DukeException {
+        try {
+            FileWriter fw1 = new FileWriter(filePath);
+            FileWriter fw2 = new FileWriter(filePath, true);
+            for (int i = 1; i <= list.size(); i++) {
+                Task thisTask = list.get(i - 1);
+                if (i == 1) {
+                    fw1.write("     " + i + "." + thisTask.toString() + System.lineSeparator());
+                } else {
+                    fw2.write("     " + i + "." + thisTask.toString() + System.lineSeparator());
+                }
+            }
+            fw1.close();
+            fw2.close();
+        } catch (IOException ex) {
+            throw new DukeException(ex.getMessage());
+        }
     }
     
     public static void main(String[] args) {
@@ -15,12 +37,26 @@ public class Duke {
         Task thisTask;
         String input;
         int number;
-
+        
         String logo = "     ____        _        \n"
                 + "    |  _ \\ _   _| | _____ \n"
                 + "    | | | | | | | |/ / _ \\\n"
                 + "    | |_| | |_| |   <  __/\n"
                 + "    |____/ \\__,_|_|\\_\\___|\n";
+        String home = System.getProperty("user.home");
+        String folderpath = home + "/deskTop/CS2103 iP/data";
+        String filepath = folderpath + "/Duke.txt";
+
+        try {
+            if (!(new java.io.File(folderpath).exists())) {
+                throw new DukeException("There is not such folder.");
+            } else if (!(new java.io.File(filepath).exists())) {
+                throw new DukeException("There is not such file.");
+            }
+        } catch (DukeException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
         System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
         System.out.println("    Hello from\n" + logo);
         System.out.println("    Hey there! This is Duke here~");
@@ -59,6 +95,7 @@ public class Duke {
                     thisTask.markAsDone();
                     list.set(number - 1, thisTask);
                     System.out.println("       " + thisTask.toString());
+                    updateList(filepath,list);
                 } else if (thisInstruction == Instruction.DELETE) {
                     number = Character.getNumericValue(input.charAt(input.length() - 1));
                     System.out.println("     Sure! I've removed this task for you:");
@@ -66,6 +103,7 @@ public class Duke {
                     list.remove(number - 1);
                     System.out.println("       " + thisTask.toString());
                     System.out.println("     Now you have " + list.size() + " tasks in the list.");
+                    updateList(filepath,list);
                 } else {
                     if (thisInstruction == Instruction.DEADLINE) {
                         if (input.length() < 10) {
@@ -93,6 +131,7 @@ public class Duke {
                     } else {
                         throw new UnknownInstructionException("     I'm sorry, but I don't know what that means :-(");
                     }
+                    updateList(filepath,list);
                     System.out.println("       " + list.get(list.size() - 1));
                     System.out.println("     Now you have " + list.size() + " tasks in the list.");
                 }
