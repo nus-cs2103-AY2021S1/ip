@@ -5,7 +5,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    private ArrayList<Task> lst;
+    private final ArrayList<Task> lst;
 
     public TaskList () {
         this.lst = new ArrayList<>();
@@ -49,7 +49,7 @@ public class TaskList {
                     i++;
                     continue;
                 }
-                msg += String.format("\t" + (i++) + ". " + t + "\n");
+                msg += ("\t" + (i++) + ". " + t + "\n");
             }
         }
         return msg;

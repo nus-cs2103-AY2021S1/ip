@@ -13,15 +13,15 @@ import java.nio.file.Files;
 public class Storage {
 
     // private File file;
-    private Path path;
-    private Path dir;
+    //private final Path path;
+    //private Path dir;
     private File file;
 
     public Storage() {
         // file = new File("../data/list.txt");
-        path = Paths.get("data/");
+        Path path = Paths.get("data/");
         try {
-            dir = Files.createDirectories(path);
+            Files.createDirectories(path);
             // Files.createFile(dir);
             file = new File("data/list.txt");
             file.createNewFile();

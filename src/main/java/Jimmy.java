@@ -2,9 +2,9 @@
 public class Jimmy {
     
     //private Parser parser;
-    private Ui ui;
-    private Storage storage;
-    private TaskList planner;
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList planner;
 
     public Jimmy() {
         //this.parser = new Parser();

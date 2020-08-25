@@ -1,4 +1,3 @@
-T-----✓-----borrow book-----NaN
 D-----✓-----return book-----sunday
 D-----✘-----same as above-----Aug 29 2020 Sat 2359hrs
-E-----✘-----2103 tutorial-----5pm Wednesday 26th Aug
+E-----✓-----2103 tutorial-----5pm Wednesday 26th Aug

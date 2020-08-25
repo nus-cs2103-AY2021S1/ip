@@ -6,7 +6,7 @@ public enum ErrorMessage {
 
     private final String error;
 
-    private ErrorMessage(String error) {
+    ErrorMessage(String error) {
         this.error = error;
     }
 
