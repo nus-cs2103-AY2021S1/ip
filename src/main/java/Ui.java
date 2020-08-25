@@ -1,8 +1,13 @@
+import java.util.Scanner;
+
 public class Ui {
 
-    Ui() { }
+    Scanner sc;
+    Ui() {
+        sc = new Scanner(System.in);
+    }
 
-    void greet() {
+    void showWelcome() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
     void exit() {
@@ -15,4 +20,12 @@ public class Ui {
             System.out.println(i + ". " + tasks.get(i - 1));
         }
     }
+
+    void printReply(String message) {
+        System.out.println(message);
+    }
+
+    String readCommand() {
+       return sc.nextLine();
+    };
 }

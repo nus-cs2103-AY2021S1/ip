@@ -12,6 +12,10 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    List<Task> getTasks() {
+        return this.tasks;
+    }
+
     public void addTask(String task, String date, TaskType taskType) throws DukeException {
 
         Task t;
@@ -34,24 +38,21 @@ public class TaskList {
             default:
                 throw new DukeException("Invalid Task Type");
         }
-
-        System.out.println("Got it. I've added this task:\n " + t);
     }
 
-    void deleteTask (int index) {
-
-        Task deletedTask = tasks.get(index - 1);
+    void deleteTask (int index) throws InvalidIndexException {
+        if (index > tasks.size() || index < 1) {
+            throw new InvalidIndexException("☹ OOPS!!! There is no such task.");
+        }
         tasks.remove(index - 1);
-
-        System.out.println("Noted. I've removed this task:\n" + deletedTask);
     }
 
-    void completeTask(int index) {
-
+    void completeTask(int index) throws InvalidIndexException {
+        if (index > tasks.size() || index < 1) {
+            throw new InvalidIndexException("☹ OOPS!!! There is no such task.");
+        }
         Task completedTask = tasks.get(index - 1);
         completedTask.markAsDone();
-        System.out.println("Nice! I've marked this task as done:\n " + completedTask);
-
     }
 
     int size() {

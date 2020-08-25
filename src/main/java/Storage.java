@@ -1,9 +1,11 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,6 +29,33 @@ public class Storage {
 
         } catch (IOException exception) {
             System.out.println(exception);
+        }
+    }
+
+    String convertTaskToText (Task task) {
+        if (task instanceof TodoTask) {
+            return "T" + " | " + (task.isDone ? "1" : "0") + " | " + task.description;
+        } else if (task instanceof DeadlineTask) {
+            return "D" + " | " + (task.isDone ? "1" : "0") + " | " + task.description + " | " +
+                    ((DeadlineTask) task).deadline.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        } else {
+            return "E" + " | " + (task.isDone ? "1" : "0") + " | " + task.description + " | " +
+                    ((EventTask) task).timing.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        }
+    }
+
+    void writeToFile(TaskList tasks) throws DukeException {
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter(filePath);
+            List<String> fileContent = new ArrayList<>();
+            for (Task task : tasks.getTasks()) {
+                fileContent.add(convertTaskToText(task));
+            }
+            Files.write(Paths.get(filePath),fileContent);
+            fw.close();
+        } catch (IOException e) {
+           throw new DukeException("Write To File error");
         }
     }
 
