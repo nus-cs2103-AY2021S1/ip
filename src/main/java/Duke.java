@@ -40,16 +40,16 @@ public class Duke {
         }
         ui.print(strings.getString("output.greeting"));
 
-        String input, inputMainCommand = "", output;
+        String input, mainCommand = "", output;
         HashMap<String, String> parameters;
 
-        while (!inputMainCommand.equals(strings.getString("command.bye"))) {
+        while (!mainCommand.equals(strings.getString("command.bye"))) {
             input = ui.read();
-            inputMainCommand = Parser.parseMainCommand(input);
+            mainCommand = Parser.parseMainCommand(input);
             parameters = Parser.parseParameters(input);
 
             try {
-                output = Command.createCommand(inputMainCommand)
+                output = Command.createCommand(mainCommand)
                         .execute(parameters, tasks);
                 ui.print(output);
             } catch (DukeException e) {
