@@ -1,12 +1,12 @@
+import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
 
 public class Duke {
 
-    public static String line = "-------------------------------------";
-    public static String defaultError = "Wat talking you?";
-    public static String addedMsg = "Alright, I've added a new order: ";
-    public static String help = "HELP";
+    private static Ui ui = new Ui();
     public static ArrayList<Task> list = new ArrayList<>();
 
     private static String getFirstWord(String text) {
@@ -89,14 +89,55 @@ public class Duke {
         return toBeRet;
     }
 
+    public static void writeSaveData() throws FileNotFoundException, DukeException {
+        try {
+            File dir = new File("data/Duke.txt");
+            if (dir.exists()) {
+                Scanner data = new Scanner(dir);
+
+                while(data.hasNextLine()) {
+                    String curr = data.nextLine();
+                    String[] info = curr.split(", ", 4);
+                    if (info[0].equals("T")) {
+                        ToDo tobeAdded = new ToDo(info[2]);
+                        if (info[1].equals("1")) {
+                            tobeAdded.markAsDone();
+                        }
+                        list.add(tobeAdded);
+                    } else if (info[0].equals("D")) {
+                        Deadline tobeAdded = new Deadline(info[2], info[3]);
+                        if (info[1].equals("1")) {
+                            tobeAdded.markAsDone();
+                        }
+                        list.add(tobeAdded);
+                    } else if (info[0].equals("E")) {
+                        Event tobeAdded = new Event(info[2], info[3]);
+                        if (info[1].equals("1")) {
+                            tobeAdded.markAsDone();
+                        }
+                        list.add(tobeAdded);
+                    }
+                }
+            }
+        } catch (FileNotFoundException ex1) {
+            throw new DukeException("Saved Data not found");
+        }
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String nextLine = "";
+
+        try {
+            writeSaveData();
+        } catch (FileNotFoundException ex1) {
+            ui.showError(ex1.getMessage());
+        } catch (DukeException ex2) {
+            ui.showError(ex2.getMessage());
+        }
+
         // Introduction
-        System.out.println(line);
-        System.out.println("Welcome to mel's drive-in!");
-        System.out.println("What would you like to have?");
-        System.out.println(line);
+        ui.showWelcome();
 
         nextLine = scanner.nextLine();
 
@@ -106,65 +147,39 @@ public class Duke {
                     getFirstWord(nextLine).equals("event")) {
                 try {
                     Task curr = addItem(nextLine);
-
-                    System.out.println(line);
-                    System.out.println(addedMsg);
-                    System.out.println(curr);
-                    System.out.println("You have ordered " + list.size() + " items.");
-                    System.out.println(line);
+                    ui.addedItem(curr);
                 } catch (DukeException ex1) {
-                    System.out.println(line);
-                    System.out.println(ex1);
-                    System.out.println(line);
+                    ui.showError(ex1.getMessage());
                 }
                 nextLine = scanner.nextLine();
             }
             else if (getFirstWord(nextLine).equals("done")) { // Case 4: checking off an item
                 try {
                     Task curr = doneItem(nextLine);
-
-                    System.out.println(line);
-                    System.out.println("Great choice! I have taken your order: ");
-                    System.out.println(curr);
-                    System.out.println(line);
+                    ui.doneItem(curr);
                 } catch (DukeException ex1){
-                    System.out.println(line);
-                    System.out.println(ex1);
-                    System.out.println(line);
+                    ui.showError(ex1.getMessage());
                 }
                 nextLine = scanner.nextLine();
             } else if (getFirstWord(nextLine).equals("delete")) {
                 try {
                     Task curr = deleteItem(nextLine);
-
-                    System.out.println(line);
-                    System.out.println("Too bad. I'll remove the following order: ");
-                    System.out.println(curr);
-                    System.out.println(line);
+                    ui.deleteItem(curr);
                 }  catch(DukeException ex1) {
-                    System.out.println(ex1);
+                    ui.showError(ex1.getMessage());
                 }
                 nextLine = scanner.nextLine();
             } else if (nextLine.equals("list")) { // Case 5: Displaying List
-                System.out.println(line);
-                System.out.println("Here's what you have ordered so far...");
-                for (int k = 0; k < list.size(); k++) {
-                    System.out.println((k + 1) + ": " + list.get(k));
-                }
-                System.out.println((line));
+                ui.returnList();
                 nextLine = scanner.nextLine();
             } else { // Case 6: Default errors
-                System.out.println(line);
-                System.out.println(defaultError);
-                System.out.println(line);
+                ui.defaultError();
                 nextLine = scanner.nextLine();
             }
         }
 
         // Ending the bot
-        System.out.println(line);
-        System.out.println("Bye! Please come again!");
-        System.out.println(line);
+        ui.bye();
     }
 }
 
