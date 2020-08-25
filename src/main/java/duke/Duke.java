@@ -1,10 +1,11 @@
-package Duke;
+package duke;
 
-import Duke.Exceptions.DukeException;
-import Duke.Tasks.Task;
-import Duke.Tool.Parser;
-import Duke.Tool.Storage;
-import Duke.Tool.TaskList;
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
+
+import duke.tool.Parser;
+import duke.tool.Storage;
+import duke.tool.TaskList;
 
 import java.io.IOException;
 
@@ -48,7 +49,7 @@ public class Duke {
         ui.showGoodbye();
     }
 
-        public static void main(String[] args) throws DukeException {
-            new Duke("data/tasks.txt").run();
-        }
+    public static void main(String[] args) throws DukeException {
+        new Duke("data/tasks.txt").run();
+    }
 }

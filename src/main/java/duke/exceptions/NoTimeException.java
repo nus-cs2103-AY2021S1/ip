@@ -1,4 +1,4 @@
-package Duke.Exceptions;
+package duke.exceptions;
 
 /**
  * Deals with no time situation when write deadline or event tasks.

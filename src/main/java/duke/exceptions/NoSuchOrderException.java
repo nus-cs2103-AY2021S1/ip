@@ -1,4 +1,4 @@
-package Duke.Exceptions;
+package duke.exceptions;
 
 /**
  * The exception deals with wrong format of tasks.

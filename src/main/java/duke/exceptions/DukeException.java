@@ -1,6 +1,4 @@
-package Duke.Exceptions;
-
-import Duke.Duke;
+package duke.exceptions;
 
 /**
  * The class deal with the exception happened in Duke.

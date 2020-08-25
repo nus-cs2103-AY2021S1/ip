@@ -1,4 +1,4 @@
-package Duke.Tasks;
+package duke.tasks;
 
 /**
  * The Exit command when user want to quit the Duke.
