@@ -1,12 +1,14 @@
+package dukeclass;
+
 public class Todo extends Task{
 
     public static String icon = "T";
 
-    Todo(String taskString) {
+    public Todo(String taskString) {
         super(taskString);
     }
 
-    Todo(String taskString, boolean status) {
+    public Todo(String taskString, boolean status) {
         super(taskString);
         this.status = status;
     }

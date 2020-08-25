@@ -1,3 +1,5 @@
+package dukeclass;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -7,13 +9,13 @@ public class Event extends Task {
     private String preposition;
     private LocalDateTime dateTime;
 
-    Event(String taskString, String preposition, String dateTimeString) {
+    public Event(String taskString, String preposition, String dateTimeString) {
         super(taskString);
         this.preposition = preposition;
         this.dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
-    Event(String taskString, String preposition, String dateTimeString, boolean status) {
+    public Event(String taskString, String preposition, String dateTimeString, boolean status) {
         super(taskString);
         this.preposition = preposition;
         this.dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));

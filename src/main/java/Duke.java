@@ -8,6 +8,7 @@
 //        System.out.println("Hello from\n" + logo);
 //    }
 //}
+import dukeclass.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;

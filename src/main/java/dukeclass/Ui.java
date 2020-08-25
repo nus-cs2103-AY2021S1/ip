@@ -1,3 +1,5 @@
+package dukeclass;
+
 public class Ui {
 
     public static String welcomeMessage() {
@@ -14,20 +16,20 @@ public class Ui {
     }
 
     public static String printTaskList(TaskList list) {
-        return "____________________________________________________________"
+        return "____________________________________________________________\n"
                 + list.toString()
-                + "____________________________________________________________";
+                + "____________________________________________________________\n";
     }
 
     public static String printTask(Task Task) {
-        return "____________________________________________________________"
+        return "____________________________________________________________\n"
                 + Task.toString()
-                + "____________________________________________________________";
+                + "____________________________________________________________\n";
     }
 
     public static String unknownInputErrorMessage(Exception e) {
         return "DUKE DOES NOT UNDERSTAND YOU!!!@#%#$%^!@^%\n"
-                + e 
+                + e
                 + "\nTRY AGAIN!!!";
     }
 

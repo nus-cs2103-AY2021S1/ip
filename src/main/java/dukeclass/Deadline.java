@@ -1,3 +1,5 @@
+package dukeclass;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,13 +11,13 @@ public class Deadline extends Task{
     private LocalDateTime dateTime;
 
 
-    Deadline(String taskString, String preposition, String dateTimeString) {
+    public Deadline(String taskString, String preposition, String dateTimeString) {
         super(taskString);
         this.preposition = preposition;
         this.dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
-    Deadline(String taskString, String preposition, String dateTimeString, boolean status) {
+    public Deadline(String taskString, String preposition, String dateTimeString, boolean status) {
         super(taskString);
         this.preposition = preposition;
         this.dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
