@@ -46,6 +46,9 @@ public class Parser {
                 } else {
                     throw new DukeException("You only have " + taskList.getNumOfTask() + " tasks in your task list.");
                 }
+            } else if (taskType.equals("find")) {
+                String keyword = strArr[1];
+                taskList.findTaskByKeyword(keyword);
             } else if (taskType.equals("todo")) {
                 if (strArr.length == 1) {
                     throw new DukeException("The description of a todo cannot be empty.");
@@ -63,6 +66,7 @@ public class Parser {
                         throw new DukeException("Wrong format when describing a deadline.");
                     } else {
                         if (TimeParser.isValidTime(deadlineArr[1])) {
+                            System.out.println(deadlineArr[1]);
                             String deadlineTime = TimeParser.parseTime(deadlineArr[1]);
                             Deadline deadline = new Deadline(deadlineArr[0], deadlineTime);
                             taskList.addTask(deadline);
