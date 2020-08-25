@@ -2,22 +2,43 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * <h1>Duke!</h1>
+ * The Duke program implements an application that
+ * helps you keep track of your tasks.
+ *
+ * @author Augustine Kau
+ * @version 0.1
+ * @since 2020-08-18
+ */
 public class Duke {
 
     private final Storage storage;
     private final TaskList ls;
     private final Ui ui;
 
+    /**
+     * Command that user can input
+     */
     enum Command {
         BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, CHECK
     }
 
+    /**
+     * Constructor for Duke
+     * @param filePath For file todolist.txt.
+     * @throws IOException On input error.
+     */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         ls = new TaskList(storage.loadFile());
     }
 
+    /**
+     * This method is used to initiate the chat bot.
+     * @throws IOException On input error.
+     */
     public void run() throws IOException {
         ui.showWelcome();
         
@@ -159,6 +180,13 @@ public class Duke {
         }
     }
 
+    /**
+     * This is the main method which will create an instance of Duke
+     * and call on the method run.
+     *
+     * @param args Unused.
+     * @throws IOException On input error.
+     */
     public static void main(String[] args) throws IOException {
         new Duke(Storage.getFilePath()).run();
     }
