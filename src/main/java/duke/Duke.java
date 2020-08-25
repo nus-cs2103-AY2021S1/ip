@@ -21,6 +21,12 @@ public class Duke {
   private TaskList list;
   private Ui ui;
 
+  /**
+   * Initialize Duke, UI and load saved file into a TaskList object. If save file is empty, a new
+   * TaskList object will be created.
+   *
+   * @param filePath hard-coded File Path of the saved file
+   */
   public Duke(String filePath) {
     this.ui = new Ui();
     this.storeFile = new Storage(filePath);
@@ -33,6 +39,7 @@ public class Duke {
     ui.startupMsg();
   }
 
+  /** Main execution of Duke Chatbot */
   public void run() {
     String userInput;
     String[] s;
@@ -224,7 +231,7 @@ public class Duke {
     ui.showByeMsg();
   }
 
-
+  /** Duke is instantiated here. */
   public static void main(String[] args) {
     new Duke(filePath).run();
   }
