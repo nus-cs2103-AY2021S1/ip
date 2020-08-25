@@ -15,12 +15,12 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by, boolean isDone) {
         super(description, Type.DEADLINE, isDone);
-        this.by = by;
+        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
     }
 
     @Override
     public String getTime() {
-        return this.by;
+        return this.by.toString();
     }
 
 

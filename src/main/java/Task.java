@@ -3,6 +3,11 @@ public class Task {
     protected boolean isDone;
     protected Type type;
 
+    public Task(String task) {
+        this.task = task;
+        this.isDone = false;
+    }
+
     public Task(String task, Type type) {
         this.task = task;
         this.isDone = false;

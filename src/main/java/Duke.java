@@ -1,7 +1,7 @@
-//import java.io.File;
-//import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-//import java.text.ParseException;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -160,6 +160,7 @@ public class Duke {
                         throw new DukeException("You have keyed in an invalid command!\n(Valid commands: todo, deadline, event, list, delete, bye, done)");
                 }
 
+                assert save != null;
                 save.writeToFile(tasks);
 
             } catch (DukeException | IOException ex) {

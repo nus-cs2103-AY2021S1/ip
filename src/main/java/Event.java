@@ -13,13 +13,13 @@ public class Event extends Task {
 
     public Event(String description, String dateAndTime, boolean isDone) {
         super(description, Type.EVENT, isDone);
-        this.dateAndTime = dateAndTime;
+        this.dateAndTime = LocalDateTime.parse(dateAndTime, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
     }
 
 
     @Override
     public String getTime() {
-        return this.dateAndTime;
+        return this.dateAndTime.toString();
     }
 
     @Override

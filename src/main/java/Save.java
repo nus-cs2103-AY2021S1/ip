@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Save {
-    private Path path;
+    private final Path path;
 
      public Save(String filePath) throws IOException {
 //         try {
