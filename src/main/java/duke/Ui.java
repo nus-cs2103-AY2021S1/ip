@@ -16,8 +16,7 @@ public class Ui {
      * @return String of user input.
      */
     public String readInput() {
-        String input = scanner.nextLine();
-        return input;
+        return scanner.nextLine();
     }
 
     /**
