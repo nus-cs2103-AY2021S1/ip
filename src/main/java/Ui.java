@@ -7,7 +7,8 @@ public class Ui {
 
     public void greetings() {
         showLine();
-        String greetings = "Hello! I'm Duke\n" + "What can I do for you?\n";
+        String greetings = "Hello! I'm Duke\n"
+                + "What can I do for you?\n";
         System.out.println(greetings);
         showLine();
     }
@@ -17,6 +18,7 @@ public class Ui {
         String goodbye = "Bye. Hope to see you again soon!";
         System.out.println(goodbye);
         showLine();
+
         // exits program
         System.exit(0);
     }
@@ -39,7 +41,8 @@ public class Ui {
 
     public String readCommand() throws DukeException {
         String input = null;
-        input = sc.nextLine().trim(); // get rid of leading and trailing spaces
+        // get rid of leading and trailing spaces
+        input = sc.nextLine().trim();
         return input;
     }
 }

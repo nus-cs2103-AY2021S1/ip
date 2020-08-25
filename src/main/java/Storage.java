@@ -23,14 +23,14 @@ public class Storage {
         loadTasks(tasks);
     }
 
-    public void saveTasks(ArrayList<Task> stored) {
+    public void saveTasks(ArrayList<Task> tasks) {
         try {
             // Creates a BufferedWriter
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath));
 
             // Write tasks as strings into file
-            for (int i = 0; i < stored.size(); i++) {
-                bufferedWriter.write(stored.get(i).toString() + "\n");
+            for (int i = 0; i < tasks.size(); i++) {
+                bufferedWriter.write(tasks.get(i).toString() + "\n");
             }
 
             // Closes the writer
@@ -62,13 +62,16 @@ public class Storage {
                             break;
                         case "D":
                             String deadlineDescription = taskDescription.substring(0, taskDescription.indexOf("(") - 1);
-                            String deadlineBy = taskDescription.substring(taskDescription.indexOf("by:") + 4, taskDescription.indexOf(")"));
-                            LocalDate deadline = LocalDate.parse(deadlineBy, DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                            String deadlineBy = taskDescription.substring(taskDescription.indexOf("by:") + 4,
+                                    taskDescription.indexOf(")"));
+                            LocalDate deadline = LocalDate.parse(deadlineBy,
+                                    DateTimeFormatter.ofPattern("MMM dd yyyy"));
                             tasks.add(new Deadline(deadlineDescription, deadline, isDone));
                             break;
                         case "E":
                             String eventDescription = taskDescription.substring(0, taskDescription.indexOf("(") - 1);
-                            String eventAt = taskDescription.substring(taskDescription.indexOf("at:") + 4, taskDescription.indexOf(")"));
+                            String eventAt = taskDescription.substring(taskDescription.indexOf("at:") + 4,
+                                    taskDescription.indexOf(")"));
                             tasks.add(new Event(eventDescription, eventAt, isDone));
                             break;
                     }
