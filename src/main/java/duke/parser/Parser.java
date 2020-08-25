@@ -7,6 +7,7 @@ import duke.command.SimpleCommandType;
 import duke.command.AddToDoCommand;
 import duke.command.AddComplexTaskCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 
 import duke.exception.DukeException;
 import duke.exception.UnknownCommandException;

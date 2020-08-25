@@ -119,7 +119,7 @@ public class Ui {
     }
 
     /**
-     * Prints the empty task list.
+     * Prints the empty task list message.
      */
     public void emptyTaskList() {
         printMsg("You currently have no tasks in the list.");
@@ -129,6 +129,7 @@ public class Ui {
      * Prints the task list to the user.
      *
      * @param tasks Task list.
+     * @param extra Extra word to add in, if any.
      */
     public void showTaskList(TaskList tasks, String extra) {
         StringBuilder str1 = new StringBuilder();
@@ -141,6 +142,11 @@ public class Ui {
         printMsg(str1.toString());
     }
 
+    /**
+     * Prints the no matching tasks found message.
+     *
+     * @param queryWord Word use to query task list.
+     */
     public void emptyFind(String queryWord) {
         printMsg(String.format("There are no matching tasks with the keyword %s.", queryWord));
     }

@@ -5,10 +5,10 @@ package duke.task;
  * Variables include description, task type, time and done status.
  */
 public abstract class Task {
+
     private String description;
     private TaskType taskType;
     private String time;
-
     private boolean isDone;
 
     /**
@@ -82,6 +82,12 @@ public abstract class Task {
         return time;
     }
 
+    /**
+     * Returns true iff the task description contains the query word, false otherwise.
+     *
+     * @param query Query word.
+     * @return true iff task description contains the query.
+     */
     public boolean match(String query) {
         return description.contains(query);
     }
