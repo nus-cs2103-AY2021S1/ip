@@ -15,7 +15,7 @@ public class Deadline extends Task {
         this.time = time;
     }
 
-    public String getDate(){
+    public String getDate() {
         return time.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
     }
     @Override
