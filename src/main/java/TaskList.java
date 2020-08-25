@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TaskList implements Serializable {
@@ -14,6 +15,10 @@ public class TaskList implements Serializable {
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
+    }
+
+    public TaskList(List<Task> listOfTasks) {
+        this.taskList = listOfTasks;
     }
 
     // Methods
@@ -68,12 +73,21 @@ public class TaskList implements Serializable {
         }
     }
 
+    public TaskList findTasks(String substring) {
+         List<Task> listOfTasks = Arrays.asList(
+                 taskList.stream()
+                 .filter(task -> task.description.contains(substring)) // Filter tasks
+                 .toArray(Task[]::new)
+         );
+
+         return new TaskList(listOfTasks);
+    }
+
     // String Representation
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int sizeOfList = taskList.size();
-        sb.append("Here are the tasks in your list:");
 
         for (int i = 0; i < sizeOfList; i++) {
             int number = i + 1;
