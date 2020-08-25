@@ -3,7 +3,14 @@ package duke;
 import duke.command.*;
 
 public class Parser {
-    
+
+    /**
+     * Returns a Command object based on the input keyed in to Duke by
+     * the user.
+     * 
+     * @param fullCommand the command keyed in to Duke by the user.
+     * @return Command object of the required type.
+     */
     public static Command parse(String fullCommand) {
         String[] inputList = fullCommand.split(" ", 2);
         String argument = inputList.length > 1 ? inputList[1] : "";

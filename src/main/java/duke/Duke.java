@@ -19,6 +19,12 @@ public class Duke {
         this.storage = storage;
     }
 
+    /**
+     * Initializes a new instance of Duke if there are no issues with
+     * creating a new storage file or retrieving an existing file.
+     * 
+     * @param filePath path where data is to be retrieved and saved.
+     */
     public static void newDuke(Path filePath) {
 
         UI ui = new UI();
@@ -36,7 +42,7 @@ public class Duke {
         }
     }
     
-    public void run() {
+    private void run() {
         ui.greet();
 
         while (ui.hasNextCommand()) {

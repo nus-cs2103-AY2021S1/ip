@@ -25,6 +25,12 @@ public class TaskList {
         return convertTaskListToString(this.tasks);
     }
 
+    /**
+     * Converts a task list to a numbered list. 
+     * 
+     * @param tasks Task list to be converted to string.
+     * @return Numbered string representation of task list.
+     */
     private String convertTaskListToString(List<Task> tasks) {
 
         if (tasks.isEmpty()) {
@@ -46,6 +52,15 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Marks a task in the list as done.
+     * 
+     * @param taskID ID of the task that needs to be marked as done.
+     * @param storage Storage object that needs to be updated once the task is marked as done.
+     * @return String to be displayed in user interface that confirms the action.
+     * @throws DukeException If the task ID supplied is invalid.
+     * @throws IOException If there are issues with updating the changes to storage.
+     */
     public String markTaskAsDone(int taskID, Storage storage) throws DukeException, IOException {
         if (taskID < 1 || taskID > tasks.size()) {
             throw new DukeException("Task ID is invalid!");
@@ -60,6 +75,15 @@ public class TaskList {
         return String.format("Nice! I've marked this task as done.\n%s", task.toString());
     }
 
+    /**
+     * Deletes a task in the list.
+     *
+     * @param taskID ID of the task that needs to be deleted.
+     * @param storage Storage object that needs to be updated once the task is deleted.
+     * @return String to be displayed in user interface that confirms the action.
+     * @throws DukeException If the task ID supplied is invalid.
+     * @throws IOException If there are issues with updating the changes to storage.
+     */
     public String deleteTask(int taskID, Storage storage) throws DukeException, IOException {
         if (taskID < 1 || taskID > tasks.size()) {
             throw new DukeException("Task ID is invalid!");
@@ -73,12 +97,25 @@ public class TaskList {
                 task.toString(), tasks.size());
     }
 
+    /**
+     * Adds a task to the task list.
+     * 
+     * @param task Task to be added.
+     * @return String to be displayed in the user interface that confirms the action.
+     */
     public String addTaskToList(Task task) {
         tasks.add(task);
         return String.format("Got it. I've added this task: \n%s\nNow you have %d tasks in the list",
                 task.toString(), tasks.size());
     }
 
+    /**
+     * Converts a task list to a numbered list filtered by date.
+     * 
+     * @param dateString String keyed in by the user as an argument.
+     * @return String with numbered list representation of the filtered task list. 
+     * @throws DukeException if the DateTime format is invalid.
+     */
     public String taskListToDateFilteredString(String dateString) throws DukeException {
         LocalDate date;
 
@@ -95,6 +132,13 @@ public class TaskList {
         return convertTaskListToString(temp);
     }
 
+    /**
+     * Populates the task list based on a text file found in a given filepath.
+     * 
+     * @param filePath Filepath that the text file with the data is found.
+     * @throws DukeException If the tasks in the text file are stored incorrectly.
+     * @throws IOException If there are issues with reading from the file.
+     */
     public void loadDataFromStorage(Path filePath) throws DukeException, IOException {
         
         FileReader reader = new FileReader(filePath.toString());
