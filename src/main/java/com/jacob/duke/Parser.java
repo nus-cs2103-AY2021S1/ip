@@ -3,7 +3,12 @@ package main.java.com.jacob.duke;
 import main.java.com.jacob.duke.command.*;
 
 public class Parser {
-
+    /**
+     * Parses the full command and decides which command object to create and return for execution
+     * @param fullCommand the full user console input command
+     * @return Command for execution
+     * @throws DukeException thrown when invalid message is given
+     */
     public Command parse(String fullCommand) throws DukeException {
         String[] splitStrings = fullCommand.split(" ");
         String firstInput = splitStrings[0];

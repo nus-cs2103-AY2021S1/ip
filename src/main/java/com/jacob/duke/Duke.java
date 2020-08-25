@@ -7,12 +7,19 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke
+     * @param filePath contains file where task list is saved
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.readFile());
     }
 
+    /**
+     * Basic execution command logic
+     */
     public void run() {
         Parser parser = new Parser();
 

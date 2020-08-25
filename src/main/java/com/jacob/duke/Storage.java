@@ -16,24 +16,27 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Storage {
-    StringBuffer stringBufferOfData = new StringBuffer();
-    String filename;
+    private StringBuffer stringBufferOfData = new StringBuffer();
+    private String filename;
 
+    /**
+     * Constructor for the Storage object
+     * @param filename path of the file to be accessed
+     */
     public Storage(String filename) {
         this.filename = filename;
         accessTaskListInFileSystem(getCurrentDirectory());
     }
 
     //get current directory
-    public String getCurrentDirectory() {
+    private String getCurrentDirectory() {
         return System.getProperty("user.dir");
     }
 
     //Access the current list, creates the folder and files if they do not exist
-    public void accessTaskListInFileSystem(String current) {
+    private void accessTaskListInFileSystem(String current) {
         String[] fileParents = filename.split("/");
         String parent = fileParents[0];
         java.nio.file.Path directoryPath = java.nio.file.Paths.get(current, parent);
@@ -55,8 +58,9 @@ public class Storage {
         //System.out.println("Printing filepath after accessing it: " + filePath.toString());
     }
 
+
     //handle the file lines at initialization
-    public void handleFileCommands(String inputCommand, List<Task> taskList, int count) {
+    private void handleFileCommands(String inputCommand, List<Task> taskList, int count) {
 
         //parse input command (in format :  type, done, description, datetime) into task
         String[] inputs = inputCommand.split(",");
@@ -93,6 +97,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Handles the file and creates the taskList objects based on file information
+     * @return List which containing the task objects in a list representation
+     */
     public List<Task> readFile() {
         List<Task> taskList = new ArrayList<>();
         try {
@@ -118,6 +126,9 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes the stored string buffer to the file
+     */
     public void writeToFile() {
         try {
             BufferedWriter bfWriter = new BufferedWriter(new FileWriter(filename));
@@ -129,6 +140,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Replaces a specific line of text in the string buffer read
+     * @param lineToEdit text to be replaced
+     * @param replacementText text to be replace with
+     * @throws StringIndexOutOfBoundsException in case the string cannot be found
+     */
     public void replacement(String lineToEdit, String replacementText) throws StringIndexOutOfBoundsException {
         //System.out.println(sb);//used for debugging to check that my string buffer has correct contents and spacing
 
@@ -141,6 +158,10 @@ public class Storage {
 
     }
 
+    /**
+     * Add a string of text to the end
+     * @param replacementText text to be added
+     */
     public void appendText(String replacementText) {
         //add a separator for the newline before appending
         String newLine = System.getProperty("line.separator");
@@ -148,14 +169,18 @@ public class Storage {
         stringBufferOfData.append(replacementText);
     }
 
+    /**
+     * Remove a specific line of text from string buffer
+     * @param lineToEdit line to be removed
+     */
     public void removeText(String lineToEdit) {
         String newLine = System.getProperty("line.separator");
         lineToEdit = lineToEdit + newLine;
         replacement(lineToEdit, "");
     }
 
-    // test driver
-    public static void main(String[] args) {
+    //test driver code below
+    /* public static void main(String[] args) {
         Storage storage = new Storage("data/duke.txt");
         Scanner sc = new Scanner(System.in);
 
@@ -195,4 +220,5 @@ public class Storage {
         //complete writing to file
         storage.writeToFile();
     }
+     */
 }
