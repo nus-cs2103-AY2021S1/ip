@@ -63,7 +63,8 @@ public class TaskList {
     }
 
     public String getListAsString() {
-        return getListAsStringFromList(this.list, "There is nothing in the list!");
+        return getListAsStringFromList(this.list,
+                "There is nothing in the list!");
     }
 
     public int getSize() {
@@ -93,6 +94,7 @@ public class TaskList {
                 }
             }
         });
-        return getListAsStringFromList(tasksOnDate, "There are no tasks on this date!");
+        return getListAsStringFromList(tasksOnDate,
+                "There are no tasks on this date!");
     }
 }
