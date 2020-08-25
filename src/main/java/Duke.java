@@ -19,7 +19,7 @@ public class Duke {
                 "dun wanna see yu ever agin";
         System.out.println(farewell);
     }
-    
+
     private static void processDone(String s) throws InvalidIndexException {
         try {
             int num = Integer.parseInt(s) - 1;
