@@ -40,12 +40,20 @@ public class Ui {
     }
 
     // for add, delete task from the list
-    public void taskListModify(String message, Task task, TaskList taskList) {
+    private void taskListModify(String message, Task task, TaskList taskList) {
         String newTaskListLength = "Now you have " + taskList.getSize() + " items in the list";
         String taskDescription = indentMessage(task.toString());
         String[] strings = {message, taskDescription, newTaskListLength};
         String result = buildMessage(strings);
         print(result);
+    }
+
+    public void uiAddTask(Task task, TaskList taskList) {
+        taskListModify("Got it. I've added this task: ", task, taskList);
+    }
+
+    public void uiDeleteTask(Task task, TaskList taskList) {
+        taskListModify("Noted. I've removed this task: ", task, taskList);
     }
 
     public void printFullList(TaskList taskList) {

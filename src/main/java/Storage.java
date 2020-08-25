@@ -77,7 +77,7 @@ public class Storage {
             String isDone = arr[1];
             String description = arr[2];
             String timeNotProcessed = arr.length == 3 ? "" : arr[3];
-            boolean hasTime = !timeNotProcessed.equals("");
+            boolean hasTime = timeNotProcessed.contains("T"); //
             String timeProcessed = timeNotProcessed.replace("T", " ");
             Task task;
             if (command.equals("T")) {

@@ -1,1 +1,3 @@
 E | ✘ | read book  | 2020-10-03T10:00
+T | ✘ | play games
+D | ✘ | damn  | 2020-10-01
