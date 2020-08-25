@@ -6,9 +6,6 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    static String LINE = "    ____________________________________________________________";
-    static String INDENT = "    ";
-
     ArrayList<Task> tasks;
 
     public TaskList() {
