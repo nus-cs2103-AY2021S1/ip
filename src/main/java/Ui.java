@@ -13,7 +13,7 @@ public class Ui {
 
     public void showAllTasks(TaskList tasks) {
         if (tasks.getSize() == 0) {
-            System.out.println(INDENT + "Take a chill day sir you have no tasks left");
+            System.out.println(INDENT + "I have no tasks to show you sir");
         } else {
             System.out.println(INDENT + "Here are your tasks for today:");
             for (int i = 0; i < tasks.getSize(); i++) {
