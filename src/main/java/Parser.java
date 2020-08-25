@@ -24,16 +24,19 @@ public class Parser {
             boolean isShow = type == Type.LIST || type == Type.DATE;
             boolean isAdd = type == Type.TODO || type == Type.DEADLINE || type == Type.EVENT;
             boolean isAction = type == Type.DELETE || type == Type.DONE;
+            boolean isFind = type == Type.FIND;
             boolean isExit = type == Type.BYE;
 
             if (isShow) {
                 command = new ShowCommand(type, body);
             } else if (isAdd) {
-                command =  new AddCommand(type, body);
+                command = new AddCommand(type, body);
             } else if (isAction) {
                 command = new ActionCommand(type, body);
             } else if (isExit) {
                 command = new ExitCommand();
+            } else if (isFind){
+                command = new FindCommand(body);
             } else {
                 parseError();
             }

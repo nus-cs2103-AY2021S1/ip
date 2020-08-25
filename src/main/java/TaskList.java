@@ -54,24 +54,6 @@ public class TaskList {
     }
 
     /**
-     * Returns a list of tasks due on a given date.
-     * @param date given date
-     * @return list of tasks due
-     */
-    public ArrayList<Task> retrieveTasksOnDate(LocalDate date) {
-        Iterator<Task> iter = this.tasks.iterator();
-        ArrayList<Task> tasks = new ArrayList<>();
-        while (iter.hasNext()) {
-            Task tsk = iter.next();
-            LocalDate taskDate = tsk.getDate();
-            if (taskDate != null && taskDate.equals(date)) {
-                tasks.add(tsk);
-            }
-        }
-        return tasks;
-    }
-
-    /**
      * Deletes the task at a specified index on the list.
      * @param index index to locate task
      * @return task that is removed
@@ -106,5 +88,40 @@ public class TaskList {
         }
 
         return taskDone;
+    }
+
+    /**
+     * Returns a list of tasks due on a given date.
+     * @param date given date
+     * @return list of tasks due
+     */
+    public ArrayList<Task> retrieveTasksOnDate(LocalDate date) {
+
+        Iterator<Task> iter = this.tasks.iterator();
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        while (iter.hasNext()) {
+            Task tsk = iter.next();
+            LocalDate taskDate = tsk.getDate();
+            if (taskDate != null && taskDate.equals(date)) {
+                tasks.add(tsk);
+            }
+        }
+        return tasks;
+    }
+
+    public ArrayList<Task> find(String searchStr) {
+
+        Iterator<Task> iter = this.tasks.iterator();
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        while (iter.hasNext()) {
+            Task tsk = iter.next();
+            if (tsk.getDescription().contains(searchStr)) {
+                tasks.add(tsk);
+            }
+        }
+
+        return tasks;
     }
 }
