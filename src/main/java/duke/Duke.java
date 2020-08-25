@@ -10,18 +10,17 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
     public static void main(String[] args) {
-//        System.out.println("Hello from\n" + logo);
         TaskList taskList = new TaskList();
         Storage.loadFromFile(taskList);
         Ui ui = new Ui();
         ui.greet();
         Parser.setTaskList(taskList);
-        boolean notClosed = true;
-        while (notClosed) {
+        boolean isClosed = false;
+        while (!isClosed) {
             try {
                 String command = ui.readInput();
                 if (Parser.stopProgram(command)) {
-                    notClosed = false;
+                    isClosed = true;
                     Storage.writeToFile(taskList);
                     ui.exit();
                 } else {

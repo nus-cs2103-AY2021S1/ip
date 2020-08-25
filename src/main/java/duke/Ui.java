@@ -13,8 +13,7 @@ public class Ui {
 
 
     public String readInput() {
-        String input = scanner.nextLine();
-        return input;
+        return scanner.nextLine();
     }
 
     public void greet() {

@@ -2,11 +2,11 @@ package duke.task;
 
 public class Task {
     private String taskName;
-    private boolean completed;
+    private boolean isCompleted;
 
     public Task(String taskName) {
         this.taskName = taskName;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     public String getTaskName() {
@@ -14,16 +14,16 @@ public class Task {
     }
 
     public boolean isCompleted() {
-        return completed;
+        return isCompleted;
     }
 
     public void markAsDone() {
-        completed = true;
+        isCompleted = true;
     }
 
     public String[] taskToArray() {
         String done;
-        if(completed) {
+        if(isCompleted) {
             done = "0";
         } else {
             done = "1";
@@ -34,7 +34,7 @@ public class Task {
 
     @Override
     public String toString () {
-        if (completed) {
+        if (isCompleted) {
             return "[✓] " + taskName;
         } else {
             return "[✗] " + taskName;
