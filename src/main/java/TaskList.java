@@ -46,4 +46,14 @@ public class TaskList {
     public void delete(short id) throws IndexOutOfBoundsException {
         list.remove(id - 1);
     }
+
+    public ArrayList<Task> find(String query) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task task : list) {
+            if (task.toString().contains(query)) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks;
+    }
 }
