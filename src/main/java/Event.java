@@ -1,17 +1,28 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 class Event extends Task {
-    String time;
+    LocalDate time;
+
+    DateTimeFormatter in = DateTimeFormatter.ISO_LOCAL_DATE;
+    DateTimeFormatter out = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     Event(String name, String time) {
         super(name, Type.EVENT);
-        this.time = time;
+        try {
+            this.time = LocalDate.parse(time, in);
+        } catch (DateTimeParseException e) {
+            throw e;
+        }
     }
 
-    public String getTime() {
+    public LocalDate getTime() {
         return time;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time + ")";
+        return "[E]" + super.toString() + " (at: " + time.format(out) + ")";
     }
 }

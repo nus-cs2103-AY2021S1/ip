@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -42,7 +46,7 @@ public class Duke {
         return true;
     }
 
-    static Task createTask(String s) throws DukeException {
+    static Task createTask(String s) throws DukeException, DateTimeParseException {
         String[] task = s.split(" ");
         Task.Type type;
         if (task.length > 0) {
@@ -120,18 +124,19 @@ public class Duke {
                     list.add(task);
                     fp.addTask(task);
                     print("\tGot it. I've added this task: \n" +
-                        "\t" + list.get(list.size()-1) + "\n" +
-                        "\tNow you have " + list.size() + " tasks in the list.\n");
+                            "\t" + list.get(list.size()-1) + "\n" +
+                            "\tNow you have " + list.size() + " tasks in the list.\n");
                 } catch (DukeException e) {
                     if (e.getMessage().equals(DukeException.IGNORE)) {
                         print("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
                     } else if (e.getMessage().equals(DukeException.EMPTY_TODO)) {
                         print("\t☹ OOPS!!! The description of a todo cannot be empty.\n");
                     }
+                } catch (DateTimeParseException e) {
+                    System.out.println("Try again! Date format should be yyyy-mm-dd.");
                 }
             }
         }
-
         print("\tBye. Hope to see you again soon!\n");
 
     }

@@ -30,7 +30,6 @@ public class FileProcessor {
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
             String line = bufferedReader.readLine();
             while(line != null) {
-                System.out.println(line);
                 String[] parts = line.split("</>");
                 Task task;
                 if (parts[0].equals("TODO") && parts.length == 3) {
