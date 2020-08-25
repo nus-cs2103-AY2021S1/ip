@@ -9,7 +9,7 @@ public class Storage {
     Parser parser;
     Path storageFilePath;
 
-    public Storage(TaskList taskList, Parser parser) throws IOException, DukeException {
+    public Storage(TaskList taskList, Parser parser) throws IOException {
         this.taskList = taskList;
         this.parser = parser;
         storageFilePath = Paths.get(".", "data", "test.txt");
@@ -28,7 +28,7 @@ public class Storage {
         LoadFile();
     }
 
-    public void LoadFile() throws IOException, DukeException {
+    public void LoadFile() throws IOException {
 
 
         BufferedReader bf = new BufferedReader(new FileReader(storageFilePath.toString()));
@@ -42,31 +42,37 @@ public class Storage {
 //                System.out.print(s);
 //            }
 //            System.out.println(inputs.length);
-            switch( taskType ){
-                case "T" : {
-                    newTask = new Todo(inputs[2]);
-                    break;
+            try {
+                switch (taskType) {
+                    case "T": {
+                        newTask = new Todo(inputs[2]);
+                        break;
+                    }
+
+                    case "D": {
+                        newTask = Deadline.create(inputs[2], inputs[3]);
+                        break;
+                    }
+
+                    case "E": {
+                        newTask = Event.create(inputs[2], inputs[3]);
+                        break;
+                    }
+
+                    default: {
+                        throw new DukeException("smlj??????");
+                    }
                 }
 
-                case "D" : {
-                    newTask = Deadline.create(inputs[2],inputs[3]);
-                    break;
+                if(inputs[1].equals("1")){
+                    newTask.complete();
                 }
-
-                case "E" : {
-                    newTask = Event.create(inputs[2],inputs[3]);
-                    break;
-                }
-
-                default : {
-                    throw new DukeException("smlj??????");
-                }
+                taskList.AddTask(newTask,false);
+                task = bf.readLine();
+            }catch(DukeException e){
+                System.out.println(e.getMessage());
             }
-            if(inputs[1].equals("1")){
-                newTask.complete();
-            }
-            taskList.AddTask(newTask,false);
-            task = bf.readLine();
+
         }
 
     }
