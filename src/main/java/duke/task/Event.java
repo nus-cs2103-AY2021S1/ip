@@ -1,4 +1,6 @@
-package main.java;
+package main.java.duke.task;
+
+import main.java.duke.DukeException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -7,7 +9,7 @@ public class Event extends Task {
     private LocalTime startTime;
     private LocalTime endTime;
 
-    public Event(String name, String eventDetail) throws DukeException{
+    public Event(String name, String eventDetail) throws DukeException {
         super(name);
         String[] input = eventDetail.split("\\s+");
         try {
@@ -23,14 +25,14 @@ public class Event extends Task {
     @Override
     public String toSaveFormat() {
         return String.format("E%s | %s %s %s", super.toSaveFormat(), SAVE_DATE_FORMATTER.format(super.date.get()),
-                Task.TIME_FORMATTER.format(startTime), Task.TIME_FORMATTER.format(endTime));
+                TIME_FORMATTER.format(startTime), TIME_FORMATTER.format(endTime));
     }
 
     @Override
     public String toString() {
-        String dateTime = Task.DATE_FORMATTER.format(super.date.get());
-        dateTime += " " + Task.TIME_FORMATTER.format(startTime);
-        dateTime += " - " + Task.TIME_FORMATTER.format(endTime);
+        String dateTime = DATE_FORMATTER.format(super.date.get());
+        dateTime += " " + TIME_FORMATTER.format(startTime);
+        dateTime += " - " + TIME_FORMATTER.format(endTime);
         return String.format("[E]%s (at: %s)", super.toString(), dateTime);
     }
 }

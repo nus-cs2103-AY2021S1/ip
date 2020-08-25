@@ -1,4 +1,9 @@
-package main.java;
+package main.java.duke;
+
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -53,11 +58,11 @@ public class Storage {
         Task newTask;
         try{
             switch(args[0]) {
-            case "T":
-                newTask = new ToDo(args[2]);
-                break;
             case "D":
                 newTask = new Deadline(args[2], args[3]);
+                break;
+            case "T":
+                newTask = new ToDo(args[2]);
                 break;
             case "E":
                 newTask = new Event(args[2], args[3]);

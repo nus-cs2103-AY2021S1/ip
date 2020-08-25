@@ -1,16 +1,20 @@
-package main.java;
+package main.java.duke.task;
+
+import main.java.duke.DukeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public abstract class Task {
-    private final String name;
-    protected Optional<LocalDate> date;
-    private boolean isDone;
+
     protected static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
     protected static final DateTimeFormatter SAVE_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     protected static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+
+    private final String name;
+    protected Optional<LocalDate> date;
+    private boolean isDone;
 
     public Task(String name) {
         this.name = name;
@@ -26,7 +30,7 @@ public abstract class Task {
         return this.date;
     }
 
-    public void setDone() throws DukeException{
+    public void setDone() throws DukeException {
         if (isDone) {
             throw new DukeException("Task is already done");
         }

@@ -1,4 +1,9 @@
-package main.java;
+package main.java.duke;
+
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.ToDo;
 
 import java.util.List;
 import java.util.ArrayList;

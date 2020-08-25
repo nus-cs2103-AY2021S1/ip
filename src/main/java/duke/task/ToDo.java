@@ -1,7 +1,7 @@
-package main.java;
+package main.java.duke.task;
 
 public class ToDo extends Task {
-    ToDo(String name){
+    public ToDo(String name){
         super(name);
     }
 

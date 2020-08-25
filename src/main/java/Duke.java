@@ -1,6 +1,6 @@
-import main.java.*;
+import main.java.duke.*;
+import main.java.duke.task.Task;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
