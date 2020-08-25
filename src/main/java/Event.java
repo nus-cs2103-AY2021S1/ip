@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a type of Task that has a specific date and time of occurrence.
  * Similar to Deadline Class.
  */
-public class Event extends Task{
+public class Event extends Task {
     protected String at;
     protected LocalDate date;
     protected LocalTime time;

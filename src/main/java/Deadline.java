@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
  *  Represents a specific type of Task that has a deadline as additional information.
  *  Following the convention for String input is crucial for successful instantiation.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected String by;
     protected LocalDate date;
     protected LocalTime time;

@@ -1,4 +1,4 @@
-public class CheckCommand extends Command{
+public class CheckCommand extends Command {
     private final String target;
 
     public CheckCommand(String detail) {
