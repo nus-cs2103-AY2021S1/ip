@@ -39,56 +39,56 @@ public class Parser {
             ui.delete(deletedTask, tasks.size());
         } else {
             switch (splitArr[0]) {
-                case "todo":
-                    if (splitArr.length <= 1) {
-                        throw new DukeException("The description of a todo cannot be empty.");
-                    }
-                    Task newTask = new ToDo(input.substring(5));
-                    tasks.add(newTask);
-                    ui.add(newTask, tasks.size());
-                    break;
-                    case "deadline":
-                        if (splitArr.length <= 1) {
-                            throw new DukeException("The description of a deadline cannot be empty.");
-                        }
-                        int index = input.indexOf("/");
-                        if (index == -1) {
-                            throw new DukeException("Please include the date of the deadline!");
-                        }
-                        String desc = input.substring(9, index - 1);
-                        String date = input.substring(index + 4);
-                        try {
-                            Task newDeadline = new Deadline(desc, date);
-                            tasks.add(newDeadline);
-                            ui.add(newDeadline, tasks.size());
-                        } catch (Exception e) {
-                            throw new DukeException("Please enter a valid YYYY-MM-DD date format!");
-                        }
-                        break;
-                    case "event":
-                        if (splitArr.length <= 1) {
-                            throw new DukeException("The description of an event cannot be empty.");
-                        }
-                        int ind = input.indexOf("/");
-                        if (ind == -1) {
-                            throw new DukeException("Please include the date of the event!");
-                        }
-                        String des = input.substring(6, ind - 1);
-                        String dat = input.substring(ind + 4);
-                        try {
-                            Task newEvent = new Event(des, dat);
-                            tasks.add(newEvent);
-                            ui.add(newEvent, tasks.size());
-                        } catch (Exception e) {
-                            throw new DukeException("Please enter a valid YYYY-MM-DD date format!");
-                        }
-                        break;
-                    default:
-                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            case "todo":
+                if (splitArr.length <= 1) {
+                    throw new DukeException("The description of a todo cannot be empty.");
                 }
+                Task newTask = new ToDo(input.substring(5));
+                tasks.add(newTask);
+                ui.add(newTask, tasks.size());
+                break;
+            case "deadline":
+                if (splitArr.length <= 1) {
+                    throw new DukeException("The description of a deadline cannot be empty.");
+                }
+                int index = input.indexOf("/");
+                if (index == -1) {
+                    throw new DukeException("Please include the date of the deadline!");
+                }
+                String desc = input.substring(9, index - 1);
+                String date = input.substring(index + 4);
+                try {
+                    Task newDeadline = new Deadline(desc, date);
+                    tasks.add(newDeadline);
+                    ui.add(newDeadline, tasks.size());
+                } catch (Exception e) {
+                    throw new DukeException("Please enter a valid YYYY-MM-DD date format!");
+                }
+                break;
+            case "event":
+                if (splitArr.length <= 1) {
+                    throw new DukeException("The description of an event cannot be empty.");
+                }
+                int ind = input.indexOf("/");
+                if (ind == -1) {
+                    throw new DukeException("Please include the date of the event!");
+                }
+                String des = input.substring(6, ind - 1);
+                String dat = input.substring(ind + 4);
+                try {
+                    Task newEvent = new Event(des, dat);
+                    tasks.add(newEvent);
+                    ui.add(newEvent, tasks.size());
+                } catch (Exception e) {
+                    throw new DukeException("Please enter a valid YYYY-MM-DD date format!");
+                }
+                break;
+                default:
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
-            ArrayList<Task> tasksCopy = tasks.clone();
-            Storage.store(tasksCopy);
-            return "";
         }
+        ArrayList<Task> tasksCopy = tasks.clone();
+        Storage.store(tasksCopy);
+        return "";
+    }
 }

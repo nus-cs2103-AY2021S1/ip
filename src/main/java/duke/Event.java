@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents an Event with a specified description, date, and boolean to indicate done or not.
  */
 public class Event extends Task {
-    public String start;
+    protected String start;
     /** Formatted date to be printed to the user only */
     protected String formattedDate;
 
