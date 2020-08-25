@@ -2,9 +2,19 @@ import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parser parses a string input and turn it into a Command.
+ */
 public class Parser {
 
-    public static LocalDateTime changeDateAndTime(String[] dateAndTime) throws NumberFormatException, ParseException {
+    /**
+     * Change date and time into LocalDateTime.
+     *
+     * @param dateAndTime String array consist of date as first element and time as second element
+     * @return LocalDateTime
+     * @throws NumberFormatException
+     */
+    public static LocalDateTime changeDateAndTime(String[] dateAndTime) throws NumberFormatException {
         String date = dateAndTime[0];
         String time = dateAndTime[1];
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -12,6 +22,14 @@ public class Parser {
         return localDateAndTime;
     }
 
+    /**
+     * Parse a string into Command.
+     * If the first letter is not recognised, throws InvalidFirstDukeException.
+     *
+     * @param fullCommand String
+     * @return Command
+     * @throws InvalidFirstDukeException
+     */
     public static Command parse(String fullCommand) throws InvalidFirstDukeException {
         String[] commandArr = fullCommand.split(" "); // split input into string array
         Command command;
@@ -37,12 +55,7 @@ public class Parser {
     }
 
     public static void main(String[] args) {
-        try {
             String[] temp = {"2019-12-20", "18:00"};
             System.out.println(Parser.changeDateAndTime(temp));
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
-        }
-
     }
 }
