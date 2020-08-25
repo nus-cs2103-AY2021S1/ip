@@ -38,15 +38,15 @@ public class Ui {
 //            } else {
 //
 //                if (firstWord.equals("done")) {
-//                    processDone(command);
+//                    processDone(duke.command);
 //                } else if (firstWord.equals("todo")) {
-//                    processTodo(command);
+//                    processTodo(duke.command);
 //                } else if (firstWord.equals("deadline")) {
-//                    processDeadline(command);
+//                    processDeadline(duke.command);
 //                } else if (firstWord.equals("event")) {
-//                    processEvent(command);
+//                    processEvent(duke.command);
 //                } else if (firstWord.equals("delete")) {
-//                    processDelete(command);
+//                    processDelete(duke.command);
 //                } else {
 //                    WrongInputException wrong = new WrongInputException();
 //                    System.out.println(wrong.getMessage());

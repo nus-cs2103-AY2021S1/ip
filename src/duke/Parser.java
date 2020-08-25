@@ -3,7 +3,7 @@ package duke;
 import duke.command.*;
 import duke.exception.DukeException;
 import duke.exception.WrongInputException;
-import duke.task.Command;
+import duke.command.Command;
 
 public class Parser {
 
@@ -17,7 +17,10 @@ public class Parser {
 //                } catch (IllegalArgumentException e) {
 //                    throw new WrongInputException();
 //                }
-                if (cmd.length < 2) {
+                if (cmd.length < 1 || cmd[1].isEmpty()) {
+                    throw new DukeException("The description of the task cannot be empty.");
+
+                } else if (cmd.length < 2) {
 
                     if (firstWord.equals("list")) {
                         return new ListCommand();
@@ -100,9 +103,9 @@ public class Parser {
         }
     }
 
-//    public void processDelete(String command) throws DeleteException {
+//    public void processDelete(String duke.command) throws DeleteException {
 //        try {
-//            String theRest = removeFirstWord(command);
+//            String theRest = removeFirstWord(duke.command);
 //            Integer taskNum = Integer.parseInt(theRest);
 //            int index = taskNum - 1;
 //            System.out.println(index);
@@ -113,9 +116,9 @@ public class Parser {
 //        }
 //    }
 //
-//    public void processTodo(String command) throws TodoException {
+//    public void processTodo(String duke.command) throws TodoException {
 //        try {
-//            String theRest = removeFirstWord(command);
+//            String theRest = removeFirstWord(duke.command);
 //            Todo todo = new Todo(theRest);
 //            taskList.saveToList(todo);
 //        } catch (DukeException e) {
@@ -123,14 +126,14 @@ public class Parser {
 //        }
 //    }
 //
-//    public void processDeadline(String command) throws DeadlineException {
+//    public void processDeadline(String duke.command) throws DeadlineException {
 //        try {
-//            String theRest = removeFirstWord(command);
+//            String theRest = removeFirstWord(duke.command);
 //            String[] taskAndDeadlineAndTime = theRest.split(" /by ", 2);
 //            Deadline deadline;
 //
 //            try {
-//                String task = taskAndDeadlineAndTime[0];
+//                String duke.task = taskAndDeadlineAndTime[0];
 //                String dateAndTime = taskAndDeadlineAndTime[1];
 //                String[] dateTime = dateAndTime.split(" ", 2);
 //
@@ -140,11 +143,11 @@ public class Parser {
 //                    LocalDate localDate = LocalDate.parse(date);
 //
 //                    if (dateTime.length < 2) {
-//                        deadline = new Deadline(task, localDate);
+//                        deadline = new Deadline(duke.task, localDate);
 //                    } else {
 //                        String time = dateTime[1];
 //                        LocalTime localTime = LocalTime.parse(time);
-//                        deadline = new Deadline(task, false, localDate, localTime);
+//                        deadline = new Deadline(duke.task, false, localDate, localTime);
 //                    }
 //                    taskList.saveToList(deadline);
 //                } catch (DateTimeParseException e) {
@@ -152,17 +155,17 @@ public class Parser {
 //                }
 //
 //            } catch (IndexOutOfBoundsException e) {
-//                throw new DeadlineException("Please specify the task and deadline.");
+//                throw new DeadlineException("Please specify the duke.task and deadline.");
 //            }
 //
 //        } catch (DukeException d) {
-//            throw new DeadlineException("Please specify the task and deadline.");
+//            throw new DeadlineException("Please specify the duke.task and deadline.");
 //        }
 //    }
 //
-//    public void processEvent(String command) throws EventException {
+//    public void processEvent(String duke.command) throws EventException {
 //        try {
-//            String theRest = removeFirstWord(command);
+//            String theRest = removeFirstWord(duke.command);
 //            String[] eventAndDateAndTime = theRest.split(" /at ", 2);
 //            Event event;
 //
@@ -211,21 +214,21 @@ public class Parser {
 //        }
 //    }
 
-//    public void processDone(String command) throws DoneException {
+//    public void processDone(String duke.command) throws DoneException {
 //        try {
-//            String theRest = removeFirstWord(command);
+//            String theRest = removeFirstWord(duke.command);
 //            Integer taskNum = Integer.parseInt(theRest);
 //            taskList.markTaskAsDone(taskNum);
 //            //updateData(this.todos);
 //
 //        } catch (DukeException d) {
-//            throw new DoneException("Please enter a valid task number");
+//            throw new DoneException("Please enter a valid duke.task number");
 //        }
 //    }
 
-//    public void processShow(String command) throws CalendarException {
+//    public void processShow(String duke.command) throws CalendarException {
 //        try {
-//            String date = removeFirstWord(command);
+//            String date = removeFirstWord(duke.command);
 //            showCalendar(date);
 //        } catch (DukeException e) {
 //            throw new CalendarException("Invalid input date format. Please try again.");

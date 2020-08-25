@@ -66,7 +66,7 @@ public class Storage {
             if(parsed.length < 2) {
                 throw new StorageException(line + "is in invalid format.");
             } else {
-                String identifier = parsed[0]; //get the type of task
+                String identifier = parsed[0]; //get the type of duke.task
                 String doneIndicator = parsed[1];
                 String taskName = parsed[2];
 
@@ -145,7 +145,7 @@ public class Storage {
 
 //            String doneIndicator = parsed[1];
 //            if (doneIndicator.equals("1")) {
-//                task.markAsDone();
+//                duke.task.markAsDone();
 //            }
             return task;
 
@@ -218,7 +218,7 @@ public class Storage {
 //        //read from file
 //        BufferedReader reader = Files.newBufferedReader(file);
 //        String currentLine;
-//        System.out.println("Here are your task(s) : ");
+//        System.out.println("Here are your duke.task(s) : ");
 //        while((currentLine = reader.readLine()) != null) {
 //            System.out.println(currentLine);
 //        }
