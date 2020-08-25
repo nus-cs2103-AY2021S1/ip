@@ -36,7 +36,7 @@ class Ui {
      * @param s command given by user
      * @return -1 indicating failure, 0 indicating end of program, 1 indicating program is running
      */
-    public int takeCommand(String s) {
+    public int takeInput(String s) {
         // End command
         if (!s.isEmpty() && END.contains(s)) {
             end();

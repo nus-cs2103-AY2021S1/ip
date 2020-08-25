@@ -151,7 +151,7 @@ public class TaskList {
      *
      * @return number of incomplete tasks
      */
-    public int getNumOfIncompleted() {
+    public int getNumOfIncomplete() {
         int c = 0;
         for (int i = 0; i < todoList.size(); i++) {
             if (!todoList.get(i).isCompleted()) {

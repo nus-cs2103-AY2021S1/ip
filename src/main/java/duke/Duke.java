@@ -12,7 +12,7 @@ public class Duke {
         int x = 1;
         while (x > 0) {
             if (sc.hasNext()) {
-                x = duke.takeCommand(sc.nextLine());
+                x = duke.takeInput(sc.nextLine());
             } else {
 
             }

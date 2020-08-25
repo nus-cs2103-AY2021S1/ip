@@ -1,8 +1,11 @@
 package duke.dependencies.executor;
 
+import duke.dependencies.executable.CommandType;
+import duke.dependencies.executable.Executable;
+
 import duke.dependencies.storage.TaskList;
+
 import duke.dependencies.task.Task;
-import duke.dependencies.executable.*;
 
 import static duke.dependencies.executable.CommandType.*;
 
@@ -96,7 +99,7 @@ public class Executor {
                         "Keep up the good work and continue to stay motivated.\n"
                         + "You've got %d task left to be completed!",
                         reply,
-                        storage.getNumOfIncompleted());
+                        storage.getNumOfIncomplete());
             }
             case DELETE: {
                 String nums = e.getTask().showTask();
