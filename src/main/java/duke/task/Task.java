@@ -61,7 +61,7 @@ public abstract class Task {
      * @return Task name in CAPS.
      */
     public String getTaskName() {
-        return taskType.toString().toUpperCase();
+        return taskType.toString();
     }
 
     /**

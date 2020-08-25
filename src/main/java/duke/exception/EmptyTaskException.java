@@ -12,6 +12,6 @@ public class EmptyTaskException extends DukeException {
      * @param complexTask Complex Task.
      */
     public EmptyTaskException(TaskType complexTask) {
-        super(String.format("The description of a %s cannot be empty.", complexTask));
+        super(String.format("The description of a %s cannot be empty.", complexTask.toString().toLowerCase()));
     }
 }

@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.exception.EmptyTaskException;
-import duke.exception.EmptyByException;
+import duke.exception.EmptyTimeException;
 import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidEventException;
 
@@ -85,7 +85,7 @@ public class AddComplexTaskCommand extends AddCommand {
         if (description.isEmpty()) {
             throw new EmptyTaskException(taskType);
         } else if (time.isBlank()) {
-            throw new EmptyByException(taskType);
+            throw new EmptyTimeException(taskType);
         }
     }
 
