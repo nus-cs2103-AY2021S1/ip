@@ -65,6 +65,7 @@ public class Duke {
                 }
             }
 
+
             printPart("Hello! I'm Duke\n" + "What can I do for you?");
             type = s.next();
 
