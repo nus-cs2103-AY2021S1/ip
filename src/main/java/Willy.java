@@ -1,32 +1,38 @@
 package main.java;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Willy {
-    static ArrayList<Task> list = new ArrayList<>();
-    static String message;
-    static String lastGreeting = "bye";
+    static ArrayList<Task> listOfTasks = new ArrayList<>();
+    private TaskStore storage;
+    private String message;
+    private String lastGreeting = "bye";
     static String style = "\t________________________________________________________________\n";
+
+    public Willy(String filePath) {
+        this.storage = new TaskStore(filePath);
+    }
 
     // Add Tasks to list
     public static void addToList(Task task) {
-        list.add(task);
+        listOfTasks.add(task);
         System.out.println(style +
                 "\tAy here is the task you just added:\n" +
                 "\t  " + task + "\n" +
-                "\tNow you have " + list.size() + " task(s) ah dun forget\n" +
+                "\tNow you have " + listOfTasks.size() + " task(s) ah dun forget\n" +
                 style);
     }
 
     public static void removeTask(int taskNum) {
         int i = taskNum - 1;
-        Task task = list.get(i);
-        list.remove(i);
+        Task task = listOfTasks.get(i);
+        listOfTasks.remove(i);
         System.out.println(style +
                 "\tOkai here is the task you just deleted:\n" +
                 "\t  " + task + "\n" +
-                "\tNow you have " + list.size() + " task(s) left ~\n" +
+                "\tNow you have " + listOfTasks.size() + " task(s) left ~\n" +
                 style);
     }
 
@@ -34,8 +40,8 @@ public class Willy {
     public static void readList() {
         System.out.println(style);
         System.out.print("\tHere are the tasks in your list to jolt ur memory:>\n");
-        for(int i = 0; i < list.size(); i++) {
-            Task task = list.get(i);
+        for(int i = 0; i < listOfTasks.size(); i++) {
+            Task task = listOfTasks.get(i);
             System.out.println("\t" + (i+1) + ". " + task);
         }
         System.out.println(style);
@@ -44,12 +50,16 @@ public class Willy {
     // Update Tasks to be done
     public static void setTaskDone(int taskNum) {
         int i = taskNum - 1;
-        Task task = list.get(i);
+        Task task = listOfTasks.get(i);
         task.setTaskDone(true);
         System.out.println(style);
         System.out.println("\tNiceee I've marked this task as done!");
         System.out.println("\t   " + task);
         System.out.println(style);
+    }
+
+    public void updateStorage() throws IOException {
+        this.listOfTasks = storage.loadTasksFromStorage();
     }
 
     public static void main(String[] args) throws WillyException {
