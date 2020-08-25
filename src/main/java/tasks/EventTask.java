@@ -1,5 +1,7 @@
 package tasks;
 
+import enums.TaskEnum;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -34,7 +36,7 @@ public class EventTask extends Task {
                 LocalTime.parse(startTime, PATTERN_TIME_INPUT)
                         .format(PATTERN_TIME_OUTPUT),
                 LocalTime.parse(endTime, PATTERN_TIME_INPUT)
-                        .format(PATTERN_TIME_OUTPUT)), "E");
+                        .format(PATTERN_TIME_OUTPUT)), TaskEnum.EVENT);
         this.title = title;
         this.date = LocalDate.parse(date, PATTERN_DATE_INPUT);
         this.startTime = LocalTime.parse(startTime, PATTERN_TIME_INPUT);
@@ -48,7 +50,7 @@ public class EventTask extends Task {
                 LocalTime.parse(startTime, PATTERN_TIME_INPUT)
                         .format(PATTERN_TIME_OUTPUT),
                 LocalTime.parse(endTime, PATTERN_TIME_INPUT)
-                        .format(PATTERN_TIME_OUTPUT)), isDone, "E");
+                        .format(PATTERN_TIME_OUTPUT)), isDone, TaskEnum.EVENT);
         this.title = title;
         this.date = LocalDate.parse(date, PATTERN_DATE_INPUT);
         this.startTime = LocalTime.parse(startTime, PATTERN_TIME_INPUT);
@@ -57,7 +59,7 @@ public class EventTask extends Task {
 
     @Override
     public String getSaveFormat() {
-        return String.format("E | %s | %s | %s",
+        return String.format("%s | %s | %s | %s", TaskEnum.EVENT.getTaskLetter(),
                 super.getIsDone() ? 1 : 0, title, this.getDateTimeDetails());
     }
 

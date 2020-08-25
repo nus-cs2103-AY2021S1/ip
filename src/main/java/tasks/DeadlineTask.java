@@ -1,5 +1,7 @@
 package tasks;
 
+import enums.TaskEnum;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -18,7 +20,7 @@ public class DeadlineTask extends Task {
     public DeadlineTask(String title, String dateTimeDetails) {
         super(String.format("%s (by: %s)", title,
                 LocalDateTime.parse(dateTimeDetails, PATTERN_INPUT)
-                        .format(PATTERN_OUTPUT)), "D");
+                        .format(PATTERN_OUTPUT)), TaskEnum.DEADLINE);
 
         this.title = title;
         this.dateTime = LocalDateTime.parse(dateTimeDetails,
@@ -28,14 +30,14 @@ public class DeadlineTask extends Task {
     public DeadlineTask(String title, String dateTimeDetails, boolean isDone) {
         super(String.format("%s (by: %s)", title,
                 LocalDateTime.parse(dateTimeDetails, PATTERN_INPUT)
-                        .format(PATTERN_OUTPUT)), isDone, "D");
+                        .format(PATTERN_OUTPUT)), isDone, TaskEnum.DEADLINE);
         this.title = title;
         this.dateTime = LocalDateTime.parse(dateTimeDetails, PATTERN_INPUT);
     }
 
     @Override
     public String getSaveFormat() {
-        return String.format("D | %s | %s | %s",
+        return String.format("%s | %s | %s | %s", TaskEnum.DEADLINE.getTaskLetter(),
                 super.getIsDone() ? 1 : 0, title, this.getDateTimeDetails());
     }
 

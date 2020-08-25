@@ -1,22 +1,22 @@
 package tasks;
 
+import enums.TaskEnum;
+
 public class Task {
+
     private String title;
+
     private boolean isDone;
-    private String type;
 
-    public Task(String title) {
-        this.title = title;
-        this.isDone = false;
-    }
+    private TaskEnum type;
 
-    public Task(String title, String type) {
+    public Task(String title, TaskEnum type) {
         this.title = title;
         this.type = type;
         this.isDone = false;
     }
 
-    public Task(String title, boolean isDone, String type) {
+    public Task(String title, boolean isDone, TaskEnum type) {
         this.title = title;
         this.isDone = isDone;
         this.type = type;
@@ -31,19 +31,19 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (this.isDone ? "\u2713" : "\u2718");
     }
 
     public String getSaveFormat() {
-        return String.format("%s | %s | %s", type, isDone ? 1 : 0, title);
+        return String.format("%s | %s | %s", this.type.getTaskLetter(), this.isDone ? 1 : 0, this.title);
     }
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", type, this.getStatusIcon(), title);
+        return String.format("[%s][%s] %s", this.type.getTaskLetter(), this.getStatusIcon(), this.title);
     }
 
     public boolean getIsDone() {
-        return isDone;
+        return this.isDone;
     }
 }
