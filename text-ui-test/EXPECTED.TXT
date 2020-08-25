@@ -1,5 +1,6 @@
 Hi I'm Duke, your personal task-tracker bot!
 You can add todos, deadlines, or events to my list.
+You don't have an existing saved task list.
 added: [T] [✘] borrow book
 added: [D] [✘] return book (by: Tue 25 Aug 2020)
 Invalid date entered

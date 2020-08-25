@@ -10,9 +10,9 @@ public class Writer {
             objectOutputStream.writeObject(taskList);
             objectOutputStream.flush();
             objectOutputStream.close();
-            System.out.println("Alright, your list has been saved!");
+            Ui.showSuccessfulSave();
         } catch (IOException e) {
-            System.err.println("Error saving task list: " + e);
+            Ui.showErrorMessage(e);
         }
     }
 }

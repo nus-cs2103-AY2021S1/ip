@@ -82,7 +82,7 @@ public class TaskList implements Serializable {
                                                        "be removed.");
         }
         Task removed = itemList.remove(itemIndex - 1);
-        System.out.println("This task has been removed: " + removed);
+        Ui.showSuccessfulRemoval(removed);
     }
 
     void printList() {

@@ -10,7 +10,7 @@ public class Task implements Serializable {
 
     void markAsDone() {
        this.isDone = true;
-       System.out.println("I've marked this task as done:\n" + toString());
+       Ui.showMarkedAsDone(this);
     }
 
     public String toString() {

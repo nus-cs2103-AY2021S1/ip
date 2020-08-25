@@ -39,7 +39,7 @@ public class Parser {
                                 Integer.parseInt(line.split( " ")[1])
                         );
                     } catch (IllegalArgumentException ex) {
-                        System.out.println(ex.getMessage());
+                        Ui.showErrorMessage(ex);
                     }
                     break;
                 case "delete":
@@ -48,7 +48,7 @@ public class Parser {
                                 Integer.parseInt(line.split( " ")[1])
                         );
                     } catch (IllegalArgumentException ex) {
-                        System.out.println(ex.getMessage());
+                        Ui.showErrorMessage(ex);
                     }
                     break;
                 default:
@@ -57,7 +57,7 @@ public class Parser {
             } else {
                 switch(line) {
                 case "bye":
-                    System.out.println("Bye. Hope to see you again");
+                    Ui.showGoodbyeMessage();
                     break scanLoop;
                 case "list":
                     userTaskList.printList();
@@ -68,9 +68,9 @@ public class Parser {
                 default:
                     try {
                         Task addedTask = userTaskList.addItem(line);
-                        System.out.println("added: " + addedTask);
+                        Ui.showSuccessfulAdd(addedTask);
                     } catch (DukeException ex) {
-                        System.out.println(ex.getMessage());
+                        Ui.showErrorMessage(ex);
                     }
                     break;
                 }
