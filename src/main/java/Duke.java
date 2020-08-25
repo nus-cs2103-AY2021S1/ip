@@ -1,4 +1,3 @@
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -202,54 +201,10 @@ public class Duke {
                         }
                         break;
                     case DEADLINE:
-                        int byIndex = findIndex(instructionArray, BY_INDICATOR);
-                        if (byIndex == -1) {
-                            throw new InvalidFormatException(DEADLINE);
-                        } else {
-                            String deadlineDesc = mergeArray(instructionArray, 1, byIndex);
-                            if (instructionArray.length < byIndex + 3) { // account for index + date + time
-                                throw new MissingFieldException(EVENT + ": Date and Time");
-                            }
-                            String date = instructionArray[byIndex + 1];
-                            String time = instructionArray[byIndex + 2];
-
-                            // parse date and time into LocalDateTime object
-                            LocalDateTime dateTime = parseDateAndTime(DEADLINE, date, time);
-
-                            if (deadlineDesc.equals("")) {
-                                throw new MissingFieldException(DEADLINE + ": Description");
-                            } else {
-                                DeadlineTask deadlinetask = new DeadlineTask(deadlineDesc, dateTime);
-                                inputList.add(deadlinetask);
-                                System.out.println("Task Added: " + deadlinetask.toString());
-                                System.out.println(getTaskSize(inputList));
-                            }
-                        }
+                        generateTaskWithDate(DEADLINE, instructionArray, BY_INDICATOR, inputList);
                         break;
                     case EVENT:
-                        int atIndex = findIndex(instructionArray, AT_INDICATOR);
-                        if (atIndex == -1) {
-                            throw new InvalidFormatException(EVENT);
-                        } else {
-                            String eventDesc = mergeArray(instructionArray, 1, atIndex);
-                            if (instructionArray.length < atIndex + 3) { // account for index + date + time
-                                throw new MissingFieldException(EVENT + ": Date and Time");
-                            }
-                            String date = instructionArray[atIndex + 1];
-                            String time = instructionArray[atIndex + 2];
-
-                            // parse date and time into LocalDateTime object
-                            LocalDateTime dateTime = parseDateAndTime(EVENT, date, time);
-
-                            if (eventDesc.equals("")) {
-                                throw new MissingFieldException(EVENT + ": Description");
-                            } else {
-                                EventTask eventTask = new EventTask(eventDesc, dateTime);
-                                inputList.add(eventTask);
-                                System.out.println("Task Added: " + eventTask.toString());
-                                System.out.println(getTaskSize(inputList));
-                            }
-                        }
+                        generateTaskWithDate(EVENT, instructionArray, AT_INDICATOR, inputList);
                         break;
                     default:
                         throw new InvalidInstructionException(UNKNOWN);
@@ -316,8 +271,7 @@ public class Duke {
     private static LocalDateTime parseDateAndTime(String locator, String date, String time) throws InvalidFormatException {
         // INPUT DATE FORMAT: DD/MM/YYYY
         // INPUT TIME FORMAT: hh/mm/ss
-        int CURRENT_YEAR = 2020;
-        int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0;
+        int year, month, day, hour, minute, second;
 
         String[] dateArray = date.split("/");
         String[] timeArray = time.split("/");
@@ -344,7 +298,7 @@ public class Duke {
         }
 
         // input validation for date
-        if (year < 0 || month < 0 || month > 12 || day < 0) {
+        if (year <= 0 || month <= 0 || month > 12 || day <= 0) {
             throw new InvalidFormatException(locator + " DATE FORMAT");
         }
 
@@ -387,5 +341,42 @@ public class Duke {
             }
         }
         return isLeap;
+    }
+
+    private static void generateTaskWithDate(String taskType, String[] instructionArray,
+                                             String indicator, ArrayList<DukeTask> inputList)
+            throws InvalidFormatException, MissingFieldException {
+
+        // find the index of the indicator
+        int index = findIndex(instructionArray, indicator);
+        if (index == -1) { // does not exist
+            throw new InvalidFormatException(taskType);
+        } else {
+            String description = mergeArray(instructionArray, 1, index);
+            if (description.equals("")) {
+                throw new MissingFieldException(taskType + ": Description");
+            }
+
+            if (instructionArray.length < index + 3) { // account for index + date + time
+                throw new MissingFieldException(taskType + ": Date and Time");
+            }
+            String date = instructionArray[index + 1];
+            String time = instructionArray[index + 2];
+
+            // parse date and time into LocalDateTime object
+            LocalDateTime dateTime = parseDateAndTime(taskType, date, time);
+
+            if (taskType.equals(DEADLINE)) {
+                DeadlineTask task = new DeadlineTask(description, dateTime);
+                inputList.add(task);
+                System.out.println("Task Added: " + task.toString());
+                System.out.println(getTaskSize(inputList));
+            } else if (taskType.equals(EVENT)) {
+                EventTask task = new EventTask(description, dateTime);
+                inputList.add(task);
+                System.out.println("Task Added: " + task.toString());
+                System.out.println(getTaskSize(inputList));
+            }
+        }
     }
 }
