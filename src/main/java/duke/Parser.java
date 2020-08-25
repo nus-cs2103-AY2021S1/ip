@@ -63,6 +63,13 @@ public class Parser {
             command = Commands.DATE;
             this.description = description.substring(5);
             return new DateCommand(this.description);
+        } else if (description.length() >= 4 && description.startsWith("find")) {
+            if (description.substring(3).split(" ").length == 1 || description.substring(3).split(" ").length > 2) {
+                throw new DukeException(("you need to input something to find."));
+            }
+            command = Commands.FIND;
+            this.description = description.substring(5);
+            return new FindCommand(this.description);
         } else if (description.equals("bye")) {
             return new ByeCommand();
         } else if (entered) {
