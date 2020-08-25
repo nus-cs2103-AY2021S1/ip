@@ -32,7 +32,7 @@ public class Parser {
                 return new RandomCommand(string);
             }
         }else{
-            return new ExitCommand(string);
+            return new ExitCommand(null);
         }
     }
 }
