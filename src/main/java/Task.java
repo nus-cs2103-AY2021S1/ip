@@ -19,4 +19,12 @@ public class Task {
     public String printTask() {
         return "[" + this.getStatusIcon() + "] " + this.name;
     }
+
+    public int completedAsNumber() {
+        return this.completed ? 1 : 0;
+    }
+
+    public String toSave() {
+        return "| " + completedAsNumber() + " | " + this.name;
+    }
 }

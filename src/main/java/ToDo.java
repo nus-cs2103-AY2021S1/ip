@@ -8,4 +8,9 @@ public class ToDo extends Task {
     public String printTask() {
         return "[T]" + super.printTask();
     }
+
+    @Override
+    public String toSave() {
+        return "T " + super.toSave();
+    }
 }

@@ -10,4 +10,9 @@ public class Event extends Task {
     public String printTask() {
         return "[E]" + super.printTask() + " (at: " + duration + ")";
     }
+
+    @Override
+    public String toSave() {
+        return "E " + super.toSave() + " | " + this.duration;
+    }
 }

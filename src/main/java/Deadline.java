@@ -10,4 +10,9 @@ public class Deadline extends Task {
     public String printTask() {
         return "[D]" + super.printTask() + " (by: " + deadline + ")";
     }
+
+    @Override
+    public String toSave() {
+        return "D " + super.toSave() + " | " + this.deadline;
+    }
 }
