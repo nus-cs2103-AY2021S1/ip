@@ -15,6 +15,10 @@ import java.util.Scanner;
 public class Storage {
     private static String dukeFilePath;
 
+    /**
+     * Check whether duke.txt exists and read lines from that file.
+     * @param taskList TaskList that manages tasks.
+     */
     public static void loadFromFile(TaskList taskList) {
         try {
             Path currentRelativePath = Paths.get("");
@@ -48,7 +52,11 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Adds the tasks from data to taskList.
+     * @param data Task info in data array.
+     * @param taskList TaskList that manages tasks.
+     */
     public static void memoryProcessor(String[] data, TaskList taskList) {
         switch (data[0]) {
             case "T":
@@ -76,6 +84,10 @@ public class Storage {
 
     }
 
+    /**
+     * Stores the newly updated taskList to duke.txt.
+     * @param taskList TaskList that manages tasks.
+     */
     public static void writeToFile(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(dukeFilePath);

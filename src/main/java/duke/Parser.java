@@ -8,14 +8,28 @@ import duke.task.TimeParser;
 public class Parser {
     public static TaskList taskList;
 
+    /**
+     * Sets taskList for Parser.
+     * @param list TaskList that manages tasks.
+     */
     public static void setTaskList(TaskList list) {
         taskList = list;
     }
 
+    /**
+     * Returns a boolean to indicate whether program should be stopped.
+     * @param command Command from user input.
+     * @return Returns a boolean.
+     */
     public static boolean stopProgram(String command) {
         return command.equals("bye");
     }
 
+    /**
+     * Processes commands and add the tasks to taskList.
+     * @param command Command from user input.
+     * @throws DukeException DukeException if command is not in legal form.
+     */
     public static void parseCommand(String command) throws DukeException {
         if (command.equals("list")) {
             taskList.printList();
