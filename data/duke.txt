@@ -5,3 +5,4 @@
 [D][0] finish Black Clover (by: Aug 27 2020)
 [T][1] watch anime
 [D][0] finish Wudong Qiankun novel (by: Oct 5 2020)
+[E][1] CS2013T tutorial lesson (at: Aug 26 2020)
