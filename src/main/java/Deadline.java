@@ -1,7 +1,10 @@
-public class Deadline extends Task {
-    private String timeDescription;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String timeDescription) {
+public class Deadline extends Task {
+    private LocalDate timeDescription;
+
+    public Deadline(String description, LocalDate timeDescription) {
         super(description, "D");
         this.timeDescription = timeDescription;
     }
@@ -11,13 +14,9 @@ public class Deadline extends Task {
         this.timeDescription = timeDescription;
     }
 
-    public String getTimeDescription() {
-        return timeDescription;
-    }
-
     @Override
     public String toString() {
         return "[" + getType() + "]" + "[" + getStatusIcon() + "] " + description
-                + "(by:" + this.timeDescription + ")";
+                + "(by: " + this.timeDescription.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
