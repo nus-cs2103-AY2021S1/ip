@@ -7,7 +7,6 @@ public class Duke {
 
         ArrayList<Task> tasks = new ArrayList<>();
 
-
         Scanner Sc = new Scanner(System.in);
         String line = "____________________________\n"
                      +"____________________________\n";
@@ -26,16 +25,23 @@ public class Duke {
         while(true) {
             try {
                 String[] inputs = Sc.nextLine().trim().split(" ", 2);
-                String command = inputs[0];
+                String input = inputs[0];
                 String taskDescription = "";
                 if (inputs.length > 1) {
                     taskDescription = inputs[1];
-                } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
-                    throw new DukeException(String.format("The description of %s cannot be empty",command));
+                } else if (input.equals("todo") || input.equals("deadline") || input.equals("event")) {
+                    throw new DukeException(String.format("The description of %s cannot be empty",input));
+                }
+
+                Commands command;
+                try{
+                    command = Commands.valueOf(input.toUpperCase());
+                }catch(IllegalArgumentException e){
+                    command = Commands.UNKNOWN;
                 }
 
                 switch (command) {
-                    case "done": {
+                    case DONE: {
                         int index = Integer.parseInt(taskDescription) - 1;
                         if(index < 0 || index > tasks.size() - 1){
                             throw new DukeException("please give a correct task index");
@@ -46,38 +52,38 @@ public class Duke {
                         System.out.println(String.format("  %s", doneTask.toString()));
                         break;
                     }
-                    case "list": {
+                    case LIST: {
                         for (int i = 0; i < tasks.size(); i++) {
                             System.out.println(String.format("%d. %s", i + 1, tasks.get(i).toString()));
                         }
                         break;
                     }
-                    case "bye": {
+                    case BYE: {
                         System.out.println("Bye, Have a Great Time!");
                         break;
                     }
-                    case "todo": {
+                    case TODO: {
                         Task newTask = new Todo(taskDescription);
                         tasks.add(newTask);
                         newTask.printAddTask();
                         printNumberOfTask(tasks.size());
                         break;
                     }
-                    case "deadline": {
+                    case DEADLINE: {
                         Task newTask = Deadline.create(taskDescription);
                         tasks.add(newTask);
                         newTask.printAddTask();
                         printNumberOfTask(tasks.size());
                         break;
                     }
-                    case "event": {
+                    case EVENT: {
                         Task newTask = Event.create(taskDescription);
                         tasks.add(newTask);
                         newTask.printAddTask();
                         printNumberOfTask(tasks.size());
                         break;
                     }
-                    case "delete": {
+                    case DELETE: {
                         int index = Integer.parseInt(taskDescription) - 1;
                         if(index < 0 || index > tasks.size() - 1){
                             throw new DukeException("please give a correct task index");

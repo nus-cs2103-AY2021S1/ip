@@ -1,0 +1,3 @@
+public enum Commands{
+    LIST,BYE,TODO,DEADLINE,EVENT,DELETE,DONE,UNKNOWN
+}
