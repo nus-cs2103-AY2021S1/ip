@@ -1,10 +1,44 @@
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+    public static void main(String[] args) throws IOException, DukeException {
+
         ArrayList<Task> myList = new ArrayList<>();
+
+        File taskFile = new File("duke.txt");
+
+        if(!taskFile.exists()){
+
+        }else{
+
+            Scanner List = new Scanner(taskFile);
+
+            while(List.hasNextLine()){
+                String task = List.nextLine();
+                if(task.charAt(1) == 'T') {
+
+                    myList.add(new ToDo("todo "+task.substring(7)));
+
+                }else if(task.charAt(1) == 'D'){
+
+                    myList.add(new Deadline("deadline "+task.substring(7)));
+
+                }else if(task.charAt(1) == 'E') {
+
+                    myList.add(new Event("event "+task.substring(7)));
+
+                }
+
+            }
+
+        }
+
+
+
+        Scanner scan = new Scanner(System.in);
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -111,6 +145,19 @@ public class Duke {
 
 
             }
+
+//            File duke = new File(".\\src\\save\\duke.txt");
+//            duke.mkdir();
+//            duke.createNewFile();
+            PrintWriter file = new PrintWriter("duke.txt", "UTF-8");
+            BufferedWriter writer = new BufferedWriter(file);
+            for(int i = 0; i<myList.size();i++) {
+
+                writer.write(myList.get(i).toString());
+                writer.newLine();
+
+            }
+            writer.close();
             input = scan.nextLine();
 
         }
