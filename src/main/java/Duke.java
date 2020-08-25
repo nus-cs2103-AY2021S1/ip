@@ -27,13 +27,10 @@ public class Duke {
             try {
                 input = sc.nextLine();
                 Command command = Parser.decideCategory(input);
-                TextUi.printTaskStatements(input);
                 command.execute(taskList);
                 Storage.store(taskList);
-            } catch (IllegalArgumentException exception) {
-                System.out.println(exception.getMessage());
-            } catch (DateTimeParseException exception) {
-                System.out.println(exception.getMessage());
+            } catch (IllegalArgumentException | DateTimeParseException exception) {
+                TextUi.printError(exception);
             }
         }
     }

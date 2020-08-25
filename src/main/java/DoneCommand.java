@@ -1,3 +1,5 @@
+import org.w3c.dom.Text;
+
 /**
  * handles "done" Commands
  */
@@ -23,7 +25,7 @@ public class DoneCommand extends Command {
         taskNumber = Integer.parseInt(this.getTaskName());
         Task doneTask = taskList.getTask(taskNumber);
         doneTask.markAsDone();
-        System.out.println(doneTask + "\n" + TextUi.divider);
+        TextUi.printMessage("Nice! I've marked this task as done: " + doneTask);
     }
 }
 

@@ -12,12 +12,14 @@ public class TaskList implements Serializable {
     /**
      * shows the entire task list
      */
-    public void showList() {
+    public String toString() {
         int counter = 1;
+        String taskListString = "";
         for (Task task : taskList) {
-            System.out.println(counter + ". " + task);
+            taskListString += counter + ". " + task + "\n";
             counter++;
         }
+        return taskListString;
     }
 
     /**

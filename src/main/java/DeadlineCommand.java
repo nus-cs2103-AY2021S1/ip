@@ -24,7 +24,8 @@ public class DeadlineCommand extends Command {
     public void execute(TaskList taskList) {
         Deadline newDeadline = new Deadline(this.getTaskName(), this.getTaskDateTime());
         taskList.addTask(newDeadline);
-        System.out.println(newDeadline + String.format("\nNow you have %d tasks in the list.\n", taskList.getTaskLength())
-                + TextUi.divider);
+        String deadlineTask = newDeadline.toString();
+        TextUi.printNewTasks(deadlineTask);
+        TextUi.printTaskSummary(taskList.getTaskLength());
     }
 }

@@ -23,6 +23,6 @@ public class DeleteCommand extends Command {
         taskNumber = Integer.parseInt(this.getTaskName());
         Task deletedTask = taskList.getTask(taskNumber);
         taskList.removeTask(deletedTask);
-        System.out.println(deletedTask + "\n" + TextUi.divider);
+        TextUi.printMessage("Noted. I've removed this task:" + deletedTask);
     }
 }

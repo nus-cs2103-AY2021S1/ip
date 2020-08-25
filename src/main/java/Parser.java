@@ -16,24 +16,24 @@ public class Parser {
         String category = getCategory(input);
         String description = getDescription(input);
         switch (category) {
-        case "todo":
-            return parseTodoCommand(description);
-        case "deadline":
-            return parseDeadlineCommand(description);
-        case "event":
-            return parseEventCommand(description);
-        case "done":
-            return parseDoneCommand(description);
-        case "delete":
-            return parseDeleteCommand(description);
-        case "list":
-            return parseListCommand(description);
-        case "bye":
-            return parseByeCommand(description);
-        default:
-            throw new IllegalArgumentException(TextUi.divider +
-                    "☹ OOPS!!! Invalid input. Try again!\n"
-                    + TextUi.divider);
+            case "todo":
+                return parseTodoCommand(description);
+            case "deadline":
+                return parseDeadlineCommand(description);
+            case "event":
+                return parseEventCommand(description);
+            case "done":
+                return parseDoneCommand(description);
+            case "delete":
+                return parseDeleteCommand(description);
+            case "list":
+                return parseListCommand(description);
+            case "bye":
+                return parseByeCommand(description);
+            default:
+                throw new IllegalArgumentException(TextUi.divider +
+                        "Invalid input."
+                        + TextUi.divider);
         }
     }
 
@@ -59,7 +59,7 @@ public class Parser {
 
     public static String getDescription(String input) {
         String[] wordsArray = input.split(" ", 2);
-        String description = wordsArray.length == 2 ? wordsArray[1] : null;
+        String description = wordsArray.length == 2 ? wordsArray[1] : "";
         return description;
     }
 
@@ -70,7 +70,11 @@ public class Parser {
      * @return TodoCommand
      */
     public static TodoCommand parseTodoCommand(String description) {
-        return new TodoCommand(description);
+        if (description.equals("")) {
+            throw new IllegalArgumentException("The description of a todo cannot be empty.");
+        } else {
+            return new TodoCommand(description);
+        }
     }
 
     /**
@@ -82,10 +86,17 @@ public class Parser {
     public static DeadlineCommand parseDeadlineCommand(String description) {
         String[] descriptionArray = description.split("/by");
         String deadlineName = descriptionArray[0];
-
-        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern(" dd/MM/yyyy HH:mm");
-        LocalDateTime deadlineDateTime = LocalDateTime.parse(descriptionArray[1], inputFormat);
-        return new DeadlineCommand(deadlineName, deadlineDateTime);
+        if (deadlineName == null) {
+            throw new IllegalArgumentException("The description of a deadline cannot be empty. ");
+        } else if (descriptionArray.length == 1) { //no "/at" present
+            throw new IllegalArgumentException("Invalid input, no deadline stated. ");
+        } else if (descriptionArray.length > 2) {
+            throw new IllegalArgumentException("Invalid input, multiple deadlines stated. ");
+        } else {
+            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern(" dd/MM/yyyy HH:mm");
+            LocalDateTime deadlineDateTime = LocalDateTime.parse(descriptionArray[1], inputFormat);
+            return new DeadlineCommand(deadlineName, deadlineDateTime);
+        }
     }
 
     /**
@@ -97,10 +108,17 @@ public class Parser {
     public static EventCommand parseEventCommand(String description) {
         String[] descriptionArray = description.split("/at");
         String eventName = descriptionArray[0];
-
-        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern(" dd/MM/yyyy HH:mm");
-        LocalDateTime eventDateTime = LocalDateTime.parse(descriptionArray[1], inputFormat);
-        return new EventCommand(eventName, eventDateTime);
+        if (eventName == null) {
+            throw new IllegalArgumentException("The description of an event cannot be empty. ");
+        } else if (descriptionArray.length == 1) { //no "/at" present
+            throw new IllegalArgumentException("Invalid input, no event time stated. ");
+        } else if (descriptionArray.length > 2) {
+            throw new IllegalArgumentException("Invalid input, multiple deadlines stated. ");
+        } else {
+            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern(" dd/MM/yyyy HH:mm");
+            LocalDateTime eventDateTime = LocalDateTime.parse(descriptionArray[1], inputFormat);
+            return new EventCommand(eventName, eventDateTime);
+        }
     }
 
     /**
@@ -110,7 +128,11 @@ public class Parser {
      * @return DoneCommand
      */
     public static DoneCommand parseDoneCommand(String description) {
-        return new DoneCommand(description);
+        if (description == null) {
+            throw new IllegalArgumentException("Not sure which task is to be indicated as done. ");
+        } else {
+            return new DoneCommand(description);
+        }
     }
 
     /**
@@ -120,7 +142,11 @@ public class Parser {
      * @return DeleteCommand
      */
     public static DeleteCommand parseDeleteCommand(String description) {
-        return new DeleteCommand(description);
+        if (description == null) {
+            throw new IllegalArgumentException("Not sure which task is to be deleted. ");
+        } else {
+            return new DeleteCommand(description);
+        }
     }
 
     /**
@@ -130,7 +156,11 @@ public class Parser {
      * @return ListCommand
      */
     public static ListCommand parseListCommand(String description) {
-        return new ListCommand(null);
+        if (!description.equals("")) {
+            throw new IllegalArgumentException(" Invalid input. ");
+        } else {
+            return new ListCommand(null);
+        }
     }
 
     /**
@@ -140,7 +170,11 @@ public class Parser {
      * @return ListCommand
      */
     public static ByeCommand parseByeCommand(String description) {
-        return new ByeCommand(null);
+        if (!description.equals("")) {
+            throw new IllegalArgumentException(" Invalid input. ");
+        } else {
+            return new ByeCommand(null);
+        }
     }
 }
 
