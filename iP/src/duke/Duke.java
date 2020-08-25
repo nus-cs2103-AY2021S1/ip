@@ -3,12 +3,18 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashMap;
 
-
+/**
+ * Duke is the main class in this todo app.
+ */
 public class Duke {
     private Storage storage;
     public TaskList tasks;
     private Ui ui;
 
+    /**
+     * constructor of Duke
+     * @param filePath path where saved data of todo is stored
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,6 +28,10 @@ public class Duke {
         }
     }
 
+    /**
+     * load tasks from saved text file
+     * takes user input and execute until program terminates
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -43,10 +53,18 @@ public class Duke {
         }
     }
 
+    /**
+     * run todo app
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * takes user input and execute tasks according to it
+     * @param user_input input from user, run tasks according to this
+     * @param loading indicates whether input is from saved data or user
+     */
     public void user_input_handler(String user_input, boolean loading) throws DukeException, IOException {
         String instructionType = Parser.parseInstruction(user_input);
 

@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage is responsible for loading saving data(tasks)
+ */
 public class Storage {
     public String filePath;
 
@@ -13,6 +16,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * load data from text file in specific folder
+     * @param Duke app which is currently used
+     * @return ArrayList containing tasks from text file
+     */
     public ArrayList<Task> load(Duke Duke) throws IOException {
         // read file
         try {
@@ -43,6 +51,10 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * save tasks to text file in specific folder
+     * @param taskList contains list of tasks which will be saved
+     */
     static void save(ArrayList<Task> taskList) throws IOException {
         File file = new File("./data/duke.txt");
         FileWriter fileWriter = new FileWriter(file, false);
