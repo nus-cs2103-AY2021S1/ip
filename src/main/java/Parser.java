@@ -2,6 +2,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
+    /**
+     * Converts the string to a type of command.
+     * @param in The string to be parsed.
+     * @return The command called by the input string.
+     */
     public static Command parse(String in) {
         if ("".equals(in)) {
             return Command.blank;
@@ -20,6 +25,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles reading add task commands and creating the task.
+     * @param in The string to be parsed.
+     * @return The task required by the input string.
+     */
     public static Task getTask(String in) {
         String taskName;
         Task temp = null;

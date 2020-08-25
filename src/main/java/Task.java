@@ -14,6 +14,12 @@ public class Task {
     public String saveText() {
         return done + " | " + task;
     }
+
+    /**
+     * Converts a line of text in save file to a Task object.
+     * @param in The string to be converted.
+     * @return Task represented by the input string.
+     */
     public static Task readText(String in) {
         String[] result = in.split(" \\| ");
         String taskType = result[0];
@@ -31,9 +37,21 @@ public class Task {
         }
         return tempTask;
     }
+
+    /**
+     * Converts the date and time to the list display format.
+     * @param date Date to be converted
+     * @return String to be printed.
+     */
     public static String dateToString (LocalDateTime date) {
         return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy h.mma"));
     }
+
+    /**
+     * Converts the date and time to the save file format.
+     * @param date Date to be converted
+     * @return String to be written to the save file.
+     */
     public static String dateToSave (LocalDateTime date) {
         return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"));
     }

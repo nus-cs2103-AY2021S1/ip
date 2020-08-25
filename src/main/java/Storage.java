@@ -6,12 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Handles storing and retrieving of task list.
+ */
 public class Storage {
     private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
+    /**
+     * Converts all tasks in the list to a string and writes that to the save file.
+     * @param taskList The list of tasks.
+     */
     public void save(List<Task> taskList) {
         String toWrite = "";
         for (Task t : taskList) {
@@ -29,6 +37,11 @@ public class Storage {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Converts the text in the save file back to Tasks.
+     * @return List of Tasks that is converted from text.
+     */
     public List<Task> read() {
         List<Task> result = new ArrayList<Task>();
         File myObj = new File(filePath);
@@ -54,6 +67,10 @@ public class Storage {
         }
         return result;
     }
+
+    /**
+     * Clears the save file of all text.
+     */
     public void clear() {
         save(new ArrayList<Task>());
     }
