@@ -3,6 +3,9 @@ package commands;
 import data.task.TaskList;
 import ui.Ui;
 
+/**
+ * Prints the task list currently stored in Duke.
+ */
 public class ListCommand extends Command{
 
     private Ui ui;

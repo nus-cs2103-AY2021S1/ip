@@ -2,12 +2,13 @@ package data.task;
 
 import data.exception.DukeInvalidUserInputException;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A specific type of task that contains a description of a task and a specific date and time.
+ */
 public class Deadline extends Task {
     private LocalDateTime dateTime;
     private String dateTimeTxt;
@@ -17,6 +18,11 @@ public class Deadline extends Task {
         convertDateTime(dateTime);
     }
 
+    /**
+     * Converts the given string into a LocalDateTime to be stored in the given Deadline.
+     * @param dateTime to be converted into LocalDateTime.
+     * @throws DukeInvalidUserInputException when an invalid a date time format is used as input.
+     */
     private void convertDateTime(String dateTime) throws DukeInvalidUserInputException {
         try {
             String[] dateTimeArr = dateTime.split(" ");
@@ -29,10 +35,20 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Converts the Deadline task into a string to be saved into a text file.
+     * @return Deadline task in the form of a string.
+     */
     public String toTxtFormat() {
         return "D | " + super.toTxtFormat() + " | " + this.dateTimeTxt;
     }
 
+    /**
+     * Parses a given string array into a Deadline task.
+     * @param txtArray to be parsed into a Deadline task.
+     * @return Deadline task based on input string array.
+     * @throws DukeInvalidUserInputException when an invalid date and time format is found in the input string array.
+     */
     public static Deadline parse(String[] txtArray) throws DukeInvalidUserInputException {
         String dateTime = LocalDateTime.parse(txtArray[3].trim(),
                 DateTimeFormatter.ofPattern("d MMMM yyyy hh:mm a")).toString().replace('T', ' ');

@@ -5,6 +5,9 @@ import data.task.TaskList;
 import storage.Storage;
 import ui.Ui;
 
+/**
+ * Deletes a specific task in the current task list of Duke.
+ */
 public class DeleteCommand extends Command {
 
     private TaskList taskList;

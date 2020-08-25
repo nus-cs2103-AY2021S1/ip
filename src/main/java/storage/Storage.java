@@ -9,9 +9,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the storage of where Duke is loading information from and saving information to.
+ */
 public class Storage {
 
     private String filepath;
@@ -20,6 +22,11 @@ public class Storage {
         this.filepath = filepath;
     }
 
+    /**
+     * Loads the data in the text file from the file path to an assigned TaskList.
+     * @param taskList to load data to.
+     * @throws DukeInvalidUserInputException if there are any invalid inputs in the file that are unable to be parsed into a Task.
+     */
     public void loadTaskList(TaskList taskList) throws DukeInvalidUserInputException {
         File saveFile = new File(this.filepath);
         try {
@@ -33,6 +40,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the given task to the text file from the file path.
+     * @param task to be saved into text file.
+     */
     public void saveTask(Task task) {
         File saveFile = new File(this.filepath);
         try {
@@ -53,6 +64,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Overwrites and saves an entire tasklist into the text file from the file path.
+     * @param taskList to be saved into the text file.
+     */
     public void saveTaskList(TaskList taskList) {
         try {
             FileWriter overwriteFile = new FileWriter(this.filepath);

@@ -2,6 +2,9 @@ package commands;
 
 import ui.Ui;
 
+/**
+ * Exits from Duke.
+ */
 public class ByeCommand extends Command{
 
     private Ui ui;

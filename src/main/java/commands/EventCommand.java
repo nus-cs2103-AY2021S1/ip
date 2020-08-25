@@ -8,6 +8,9 @@ import parser.Parser;
 import storage.Storage;
 import ui.Ui;
 
+/**
+ * Adds an Event task into the current task list of Duke.
+ */
 public class EventCommand extends Command{
 
     private TaskList taskList;
