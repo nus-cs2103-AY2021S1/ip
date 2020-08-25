@@ -1,9 +1,11 @@
+import java.time.LocalDateTime;
+
 public class EventTask extends Task {
 
     private static String display = "[E]";
-    private final String date;
+    private final LocalDateTime date;
 
-    EventTask(String name, String date) {
+    EventTask(String name, LocalDateTime date) {
         super(name);
         this.date = date;
     }

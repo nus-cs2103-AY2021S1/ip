@@ -1,9 +1,11 @@
+import java.time.LocalDateTime;
+
 public class DeadLineTask extends Task {
 
     private static String display = "[D]";
-    private final String date;
+    private final LocalDateTime date;
 
-    DeadLineTask(String name, String date) {
+    DeadLineTask(String name, LocalDateTime date) {
         super(name);
         this.date = date;
     }

@@ -14,18 +14,18 @@ Here are the tasks in your list:
 
 ----------Bot made by Hendey Fan----------
 Got it. I've added this task:
-  [E][Nope] event test  (at:  test)
+  [E][Nope] event test  (at: 1234-12-12T12:34)
 Now you have 1 tasks in the list.
 ------------------------------------------
 
 ----------Bot made by Hendey Fan----------
 beri gude, finish that thing liao
-  [E][Done] event test  (at:  test)
+  [E][Done] event test  (at: 1234-12-12T12:34)
 ------------------------------------------
 
 ----------Bot made by Hendey Fan----------
 Here are the tasks in your list:
-1. [E][Done] event test  (at:  test)
+1. [E][Done] event test  (at: 1234-12-12T12:34)
 ------------------------------------------
 
 ----------Bot made by Hendey Fan----------
@@ -36,15 +36,15 @@ Now you have 2 tasks in the list.
 
 ----------Bot made by Hendey Fan----------
 Got it. I've added this task:
-  [D][Nope] test  (by:  test)
+  [D][Nope] test  (by: 1234-12-12T12:34)
 Now you have 3 tasks in the list.
 ------------------------------------------
 
 ----------Bot made by Hendey Fan----------
 Here are the tasks in your list:
-1. [E][Done] event test  (at:  test)
+1. [E][Done] event test  (at: 1234-12-12T12:34)
 2. [T][Nope] todo test
-3. [D][Nope] test  (by:  test)
+3. [D][Nope] test  (by: 1234-12-12T12:34)
 ------------------------------------------
 
 ----------Bot made by Hendey Fan----------
@@ -54,14 +54,14 @@ beri gude, finish that thing liao
 
 ----------Bot made by Hendey Fan----------
 beri gude, finish that thing liao
-  [D][Done] test  (by:  test)
+  [D][Done] test  (by: 1234-12-12T12:34)
 ------------------------------------------
 
 ----------Bot made by Hendey Fan----------
 Here are the tasks in your list:
-1. [E][Done] event test  (at:  test)
+1. [E][Done] event test  (at: 1234-12-12T12:34)
 2. [T][Done] todo test
-3. [D][Done] test  (by:  test)
+3. [D][Done] test  (by: 1234-12-12T12:34)
 ------------------------------------------
 
 ----------Bot made by Hendey Fan----------

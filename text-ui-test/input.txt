@@ -1,10 +1,10 @@
 test
 list
-event event test /at test
+event event test /at 12/12/1234 1234
 done 1
 list
 todo todo test
-deadline test /by test
+deadline test /by 12/12/1234 1234
 list
 done 2
 done 3

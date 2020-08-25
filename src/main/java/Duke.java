@@ -1,5 +1,6 @@
 import java.io.*;
 import java.nio.file.Path;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     public static void main(String[] args) throws IOException {
@@ -53,13 +54,21 @@ public class Duke {
                 task = new TodoTask(info[2]);
                 break;
             case "D":
-                task = new DeadLineTask(info[2], info[3]);
+                try {
+                    task = new DeadLineTask(info[2], DateTime.load(info[3]));
+                } catch (DateTimeParseException e) {
+                    throw new IllegalStateException("Unexpected time format: " + info[3]);
+                }
                 break;
             case "E":
-                task = new EventTask(info[2], info[3]);
+                try {
+                    task = new EventTask(info[2], DateTime.load(info[3]));
+                } catch (DateTimeParseException e) {
+                    throw new IllegalStateException("Unexpected time format: " + info[3]);
+                }
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + info[0]);
+                throw new IllegalStateException("Unexpected type: " + info[0]);
         }
 
         if (info[1] == "true") {

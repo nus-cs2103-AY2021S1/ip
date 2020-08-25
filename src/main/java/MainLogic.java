@@ -1,6 +1,7 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class MainLogic {
@@ -85,9 +86,13 @@ public class MainLogic {
         } else {
             String[] details = current[1].split("/by", 2);
             if (details.length == 1) {
-                storage.addTask(new DeadLineTask(details[0], "non specified date/time"));
+                Text.printTimeNotFoundError();
             } else {
-                storage.addTask(new DeadLineTask(details[0], details[1]));
+                try {
+                    storage.addTask(new DeadLineTask(details[0], DateTime.parse(details[1])));
+                } catch (DateTimeParseException e) {
+                    Text.printDateTimeFormatError();
+                }
             }
         }
     }
@@ -98,9 +103,13 @@ public class MainLogic {
         } else {
             String[] details = current[1].split("/at", 2);
             if (details.length == 1) {
-                storage.addTask(new EventTask(details[0], "non specified date/time"));
+                Text.printTimeNotFoundError();
             } else {
-                storage.addTask(new EventTask(details[0], details[1]));
+                try {
+                    storage.addTask(new EventTask(details[0], DateTime.parse(details[1])));
+                } catch (DateTimeParseException e) {
+                    Text.printDateTimeFormatError();
+                }
             }
         }
     }
@@ -124,7 +133,6 @@ public class MainLogic {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         Text.printEndMessage();
     }
 }
