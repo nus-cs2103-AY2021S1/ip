@@ -45,7 +45,7 @@ public class Ui {
 
     public void printDone(String message) {
         generateDivider();
-        System.out.println("Nice! I've marked this duke.task as done:");
+        System.out.println("Nice! I've marked this task as done:");
         generateLeftPadding();
         System.out.println(message);
         generateDivider();
@@ -53,7 +53,7 @@ public class Ui {
 
     public void printTaskAdded(String message, int size) {
         generateDivider();
-        System.out.println("Got it. I've added this duke.task:");
+        System.out.println("Got it. I've added this task:");
         generateLeftPadding();
         System.out.println(message);
         System.out.println("Now you have " + size + " tasks in the list.");
@@ -62,7 +62,7 @@ public class Ui {
 
     public void printTaskDeleted(String message, int size) {
         generateDivider();
-        System.out.println("Noted. I've removed this duke.task:");
+        System.out.println("Noted. I've removed this task:");
         generateLeftPadding();
         System.out.println(message);
         System.out.println("Now you have " + size + " tasks in the list.");
