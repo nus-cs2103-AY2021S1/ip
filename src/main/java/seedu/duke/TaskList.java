@@ -6,10 +6,17 @@ import java.util.ArrayList;
 
 import main.java.seedu.duke.todo.Task;
 
+/**
+ * Represents a list of tasks. A task list supports various modifications of the task list.
+ */
 public class TaskList {
     ArrayList<Task> tasks = new ArrayList<>();
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
+    /**
+     * Lists out all the tasks in the list.
+     * @throws DukeException
+     */
     public void listTasks() throws DukeException {
         if (tasks.size() <= 0) {
             throw new DukeException("You don't have any tasks.");
@@ -22,6 +29,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Lists out all the tasks on a specific date.
+     * @param date The specific date.
+     * @throws DukeException If there is no task on that day.
+     */
     public void listTasksOn(LocalDate date) throws DukeException {
         if (tasks.size() <= 0) {
             throw new DukeException("You don't have any tasks.");
@@ -46,6 +58,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the task as done.
+     * @param taskNo The task number in the list.
+     */
     public void doneTasks(int taskNo) {
         System.out.println("Nice! I've marked this task as done:");
         Task completedTask = tasks.get(taskNo - 1);
@@ -55,6 +71,10 @@ public class TaskList {
                 completedTask.getDescription());
     }
 
+    /**
+     * Adds a task to the task list.
+     * @param newTask The new task to add.
+     */
     public void addTask(Task newTask) {
         System.out.println("Got it. I've added this task:");
         tasks.add(newTask);
@@ -62,6 +82,11 @@ public class TaskList {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Deletes a task on the task list.
+     * @param taskNo The task number of the to be deleted task on the list.
+     * @throws DukeException If there is nothing to delete and the task number exceeds total number of tasks.
+     */
     public void deleteTask(int taskNo) throws DukeException {
         if (tasks.size() <= 0) {
             throw new DukeException("Nothing to delete.");

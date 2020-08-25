@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import main.java.seedu.duke.Parser;
 import main.java.seedu.duke.todo.Todo;
 import main.java.seedu.duke.todo.Task;
 import org.junit.jupiter.api.Test;

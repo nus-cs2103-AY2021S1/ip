@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 import main.java.seedu.duke.todo.Task;
 
+/**
+ * Represents a storage. Allow Duke to read and write to local disk.
+ */
 public class Storage {
     private static final String DIRECTORY_PATH = "data";
     private static final String FILE_PATH = DIRECTORY_PATH + "/duke.txt";
@@ -16,6 +19,9 @@ public class Storage {
         this.taskList = taskList;
     }
 
+    /**
+     * Reads files from local disk and print out the content.
+     */
     public void readFile() {
         // load the file first
         File directory = new File(DIRECTORY_PATH);
@@ -46,6 +52,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasks to local disk.
+     * @param taskList The task list that is to be saved.
+     */
     public void saveTasks(TaskList taskList) {
         if (taskList.tasks.size() == 0) {
             return;
@@ -58,6 +68,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Append text to local file at filePath.
+     * @param filePath The relative path of the file.
+     * @param textToAdd The text to be added.
+     */
     public void appendToFile(String filePath, String textToAdd) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
@@ -68,6 +83,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Write text to local file at filePath. This overwrites the whole file.
+     * @param filePath The relative path of the file.
+     * @param textToAdd The text to be added.
+     */
     public void writeToFile(String filePath, String textToAdd) {
         try {
             FileWriter fw = new FileWriter(filePath);

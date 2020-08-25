@@ -1,5 +1,8 @@
 package main.java.seedu.duke.todo;
 
+/**
+ * Represent a todo item.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {
@@ -15,6 +18,10 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Returns the date of the todo for storage.
+     * @return the date of todo event.
+     */
     @Override
     public String getData() {
         return "T " + super.getData();

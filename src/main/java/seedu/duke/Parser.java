@@ -10,9 +10,18 @@ import main.java.seedu.duke.todo.Event;
 import main.java.seedu.duke.todo.Todo;
 import main.java.seedu.duke.todo.Task;
 
+/**
+ * Used for parsing strings for Duke project.
+ */
 public class Parser {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
+    /**
+     * Returns corresponding command specified in the input string.
+     * @param str The input string.
+     * @return Command.
+     * @throws DukeException If the input is incomplete.
+     */
     public static Command parse(String str) throws DukeException {
         String[] split1 = str.split(" ", 2);
         String commandWord = split1[0].toLowerCase();
@@ -58,6 +67,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a task corresponding to the task string from storage file.
+     * @param taskStr The task string from storage file.
+     * @return Task.
+     */
     public static Task parseTaskFromStorage(String taskStr) {
         Task savedTask;
         String[] split = taskStr.split(Pattern.quote(" | "));
@@ -80,6 +94,11 @@ public class Parser {
         return savedTask;
     }
 
+    /**
+     * Returns a task corresponding to the task string from command line input.
+     * @param taskStr The task string from storage file.
+     * @return Task.
+     */
     public static Task parseTask(String taskStr) {
         String[] splits = taskStr.split(" ",2);
         String taskType = splits[0].toLowerCase();

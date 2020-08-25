@@ -1,9 +1,13 @@
 package main.java.seedu.duke.commands;
 
+import main.java.seedu.duke.DukeException;
 import main.java.seedu.duke.Storage;
 import main.java.seedu.duke.TaskList;
 import main.java.seedu.duke.Ui;
 
+/**
+ * Represents the command to mark a task as done.
+ */
 public class DoneCommand extends Command {
     private int taskNo;
 
@@ -12,10 +16,15 @@ public class DoneCommand extends Command {
         this.taskNo = taskNo;
     }
 
+    /**
+     * Executes the command to mark a task as done.
+     * @param tasks The task list that is involved.
+     * @param ui The UI of Duke.
+     * @param storage The storage of Duke.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.doneTasks(taskNo);
-        // ui.showDoneMessage();
     }
 
     @Override

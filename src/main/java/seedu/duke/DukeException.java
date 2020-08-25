@@ -1,5 +1,8 @@
 package main.java.seedu.duke;
 
+/**
+ * Encapsulates all exceptions that are related to Duke.
+ */
 public class DukeException extends Exception {
     DukeException(String errorMessage) {
         super(errorMessage);

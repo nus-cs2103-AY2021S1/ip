@@ -2,6 +2,9 @@ package main.java.seedu.duke;
 
 import java.util.Scanner;
 
+/**
+ * Provides user interaction for Duke.
+ */
 public class Ui {
     private int lengthOfLine = 55;
     private String line;
@@ -12,6 +15,10 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Outputs a horizontal line.
+     * @return An horizontal line in a string.
+     */
     public String getHorizontalLine() {
         String line = "";
         for (int i = 0; i < lengthOfLine; i++) {
@@ -32,6 +39,11 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Reads command line inputs from the user.
+     * @return The user input.
+     * @throws DukeException If there is no more input when user press 'Enter'.
+     */
     public String readCommand() throws DukeException {
         if (sc.hasNextLine()) {
             return sc.nextLine();

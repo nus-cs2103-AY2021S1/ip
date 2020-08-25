@@ -2,6 +2,9 @@ package main.java.seedu.duke.todo;
 
 import java.time.LocalDate;
 
+/**
+ * Represents the task. A Task consist of a description and a marker of whether it is done.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -20,15 +23,25 @@ public class Task {
         return this.description;
     }
 
+    /**
+     * Returns the corresponding status icon depending on whether the task is completed.
+     * @return A tick if the task is completed and a cross if the task is incomplete.
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void markAsDone() {
         isDone = true;
     }
 
-
+    /**
+     * Returns the date of the task.
+     * @return null for task of type Task that has no date.
+     */
     public LocalDate getDate() {
         return null;
     }
@@ -42,6 +55,10 @@ public class Task {
         return (isDone ? 1 : 0);
     }
 
+    /**
+     * Returns the data representation of the task.
+     * @return the data representation of the task.
+     */
     public String getData() {
         return "| " + getDataStatus() + " | " + this.description;
     }
