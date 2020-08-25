@@ -1,3 +1,8 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public class Helper extends Duke{
     public static void addToDo(String[] line) throws DukeException {
         String description = line[1];
@@ -49,7 +54,8 @@ public class Helper extends Duke{
         if (description.length != 2) {
             throw new DukeException("☹ OOPS!!! Description of deadline unclear. Here's an example: 'deadline return book /by Sunday'");
         }
-        Task task = new Deadline(description[0], description[1]);
+        String by = formatDate(description[1]);
+        Task task = new Deadline(description[0], by);
         tasks.add(task);
 
         System.out.println("Got it. I've added this task:");
@@ -63,7 +69,8 @@ public class Helper extends Duke{
         if (description.length != 2) {
             throw new DukeException("☹ OOPS!!! Description of event unclear. Here's an example: 'event project meeting /at Mon 2-4pm'");
         }
-        Task task = new Event(description[0], description[1]);
+        String at = formatDate(description[1]);
+        Task task = new Event(description[0], at);
         tasks.add(task);
 
         System.out.println("Got it. I've added this task:");
@@ -90,5 +97,24 @@ public class Helper extends Duke{
         System.out.println("Noted. I've removed this task:");
         System.out.println(task);
         System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
+    }
+
+    private static String formatDate(String date) {
+        LocalDate taskDate;
+        LocalTime taskTime = null;
+        date = date.replace('/', '-');
+        String[] dateArguments = date.split(" ");
+
+        taskDate = LocalDate.parse(dateArguments[0]);
+        if (dateArguments.length == 2) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH[:]mm");
+            taskTime = LocalTime.parse(dateArguments[1], formatter);
+                        }
+        System.out.println((taskDate));
+        String output = taskDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+        if (taskTime != null) {
+            output += ", " + taskTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
+        }
+        return output;
     }
 }
