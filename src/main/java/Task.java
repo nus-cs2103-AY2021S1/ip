@@ -54,7 +54,6 @@ public abstract class Task {
         isDone = true;
     }
 
-
     public String getSavedString() {
         return taskType.getSymbol() + " | " + (isDone ? "1" : "0") + " | " + description;
     }
