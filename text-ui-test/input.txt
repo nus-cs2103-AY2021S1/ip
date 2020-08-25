@@ -22,8 +22,9 @@ list 1
 done 1
 done 2
 done 5
-find 22/1/2100
-find 22/1/2100 1600
+date 22/1/2100
+dateAndTime 22/1/2100 1600
+find description
 delete 1
 delete 3
 delete 1
