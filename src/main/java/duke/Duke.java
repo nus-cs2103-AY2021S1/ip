@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents Duke, a virtual task management system and personal assistant.
+ */
 public class Duke {
 
     private Storage storage;
@@ -7,6 +10,11 @@ public class Duke {
     private Ui ui;
     private boolean isQuitting;
 
+    /**
+     * Initializes a newly created Duke program with a saved file path.
+     *
+     * @param filePath path of the saved tasks file.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -19,6 +27,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program
+     */
     public void run() {
         this.ui.greet();
         while (!this.isQuitting) {

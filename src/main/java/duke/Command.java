@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Represents a command in the Duke program.
+ */
 public class Command {
 
     private String type;
@@ -11,6 +14,11 @@ public class Command {
     private LocalDate date;
     private LocalTime time;
 
+    /**
+     * Initializes a newly created Command with a type.
+     *
+     * @param type type of command.
+     */
     public Command(String type) {
         this.type = type;
         this.idx = null;
@@ -19,6 +27,12 @@ public class Command {
         this.time = null;
     }
 
+    /**
+     * Initializes a newly created Command with a type and index.
+     *
+     * @param type type of command.
+     * @param idx index of task.
+     */
     public Command(String type, int idx) {
         this.type = type;
         this.idx = idx;
@@ -27,6 +41,12 @@ public class Command {
         this.time = null;
     }
 
+    /**
+     * Initializes a newly created Command with a type and description.
+     *
+     * @param type type of command.
+     * @param desc description of task.
+     */
     public Command(String type, String desc) {
         this.type = type;
         this.idx = null;
@@ -35,6 +55,13 @@ public class Command {
         this.time = null;
     }
 
+    /**
+     * Initializes a newly created Command with a type, description, and date.
+     *
+     * @param type type of command.
+     * @param desc description of task.
+     * @param date date of task.
+     */
     public Command(String type, String desc, LocalDate date) {
         this.type = type;
         this.idx = null;
@@ -43,6 +70,14 @@ public class Command {
         this.time = null;
     }
 
+    /**
+     * Initializes a newly created Command with a type, description, date, and time.
+     *
+     * @param type type of command.
+     * @param desc description of task.
+     * @param date date of task.
+     * @param time time of task.
+     */
     public Command(String type, String desc, LocalDate date, LocalTime time) {
         this.type = type;
         this.idx = null;
@@ -51,11 +86,24 @@ public class Command {
         this.time = time;
     }
 
+    /**
+     * Checks whether the program is quitting.
+     *
+     * @return true if the command type is bye, false otherwise.
+     */
     public boolean isQuitting() {
         return this.type.equals("bye");
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    /**
+     * Executes the command.
+     *
+     * @param tasks TaskList of the program
+     * @param ui user interface of the program
+     * @param storage storage of the program
+     * @throws DukeException if a task doesn't exist.
+     */
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (this.type) {
             case "bye":
                 ui.farewell();
@@ -95,6 +143,12 @@ public class Command {
         }
     }
 
+    /**
+     * Checks whether a given command equals this command.
+     *
+     * @param o object to be compared with this command.
+     * @return true if they are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {

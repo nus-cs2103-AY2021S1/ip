@@ -5,8 +5,18 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a parser which parses user commands into Command objects.
+ */
 public class Parser {
 
+    /**
+     * Parses the given input and returns the corresponding command.
+     *
+     * @param input user input.
+     * @return corresponding command.
+     * @throws DukeException if there are any date/time parsing issues or unknown commands.
+     */
     public static Command parse(String input) throws DukeException {
         String command = input.split(" ")[0];
         try {
@@ -50,6 +60,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks for any task formatting issues
+     *
+     * @param type type of task.
+     * @param input user input.
+     * @throws DukeException if there are any formatting issues.
+     */
     private static void taskFormatCheck(String type, String input) throws DukeException {
         int idxSpace = input.indexOf(' ');
         int idxMeta = input.indexOf('/');
