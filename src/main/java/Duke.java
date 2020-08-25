@@ -40,7 +40,7 @@ public class Duke {
             if (task.equals("E")) { // case where the task is an event
                 boolean status = arr[1].equals("\u2713");
                 String todo = arr[2];
-                String deadline = arr[3];
+                LocalDate deadline = LocalDate.parse(arr[3]);
                 ls.add(new Event(todo, deadline, status));
             } else if (task.equals("T")) {
                 boolean status = arr[1].equals("\u2713");
@@ -49,7 +49,7 @@ public class Duke {
             } else {
                 boolean status = arr[1].equals("\u2713");
                 String todo = arr[2];
-                String deadline = arr[3];
+                LocalDate deadline = LocalDate.parse(arr[3]);
                 ls.add(new Deadline(todo, deadline, status));
             }
         }

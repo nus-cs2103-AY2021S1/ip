@@ -11,7 +11,7 @@ public class Event extends Task {
 
     @Override
     public String getStatus() {
-        return "[E]" + super.getStatus() + " (at: " + this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.getStatus() + " (at: " + this.time + ")";
     }
 
     @Override
