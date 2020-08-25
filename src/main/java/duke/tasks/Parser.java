@@ -2,8 +2,18 @@ package duke.tasks;
 
 import java.util.Scanner;
 
+/**
+ * Represents a parser where the inputs from the user is filtered according to
+ * the command issued.
+ */
 public class Parser {
 
+    /**
+     * Creates a command that is specified by the user. The command will be
+     * executed in the main program.
+     * @param toPrint input from the user.
+     * @return type of command to be executed.
+     */
     public static Command parse(String toPrint) {
         if (toPrint.startsWith("list")) {
             return new ListCommand(toPrint);

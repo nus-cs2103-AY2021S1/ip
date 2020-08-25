@@ -2,6 +2,10 @@ package duke.tasks;
 
 import java.io.IOException;
 
+/**
+ * Represents a Done Command. This command handles the done input
+ * from users.
+ */
 public class DoneCommand extends Command {
     protected String done;
 

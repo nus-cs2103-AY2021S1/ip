@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a Storage system where the tasks lists and its content are
+ * being stored in.
+ */
 public class Storage {
 
     static String rtfPath = "data/duke.rtf";
@@ -16,6 +20,12 @@ public class Storage {
         readFromFile(rtfPath, tasksLs);
     }
 
+    /**
+     * Stores the list of tasks in a rtf file before Duke is terminated.
+     * @param filePath location of rtf file.
+     * @param textToAdd tasks to be added to the rtf file.
+     * @throws IOException file may not be found in the path.
+     */
     public static void writeToFile(String filePath, String textToAdd) throws IOException {
         File f = new File(filePath);
         FileWriter fw = new FileWriter(filePath);
@@ -23,6 +33,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Loads the list of tasks from the rtf file when Duke is launched.
+     * @param filePath location of rtf file.
+     * @param taskLs tasks lists where tasks are being loaded into.
+     * @throws FileNotFoundException file may not be found in the path.
+     */
     public static void readFromFile(String filePath, TaskList taskLs) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -44,6 +60,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Generates the format for the type of tasks to be displayed in a list format.
+     * @param itemsLs list of tasks to be made into a string.
+     * @return string containing the tasks in the list of tasks.
+     */
     public static String genList(ArrayList<Task> itemsLs) {
         String s = "";
         int i = 1;

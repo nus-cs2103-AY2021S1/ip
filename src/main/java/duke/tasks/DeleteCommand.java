@@ -2,9 +2,17 @@ package duke.tasks;
 
 import java.io.IOException;
 
+/**
+ * Represents a Delete Command. This command handles the delete input
+ * from users.
+ */
 public class DeleteCommand extends Command {
     protected String delete;
 
+    /**
+     * Constructor that stores the string to be deleted.
+     * @param delete string to be removed from list of tasks.
+     */
     public DeleteCommand(String delete) {
         this.delete = delete;
     }

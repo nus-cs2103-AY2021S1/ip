@@ -2,9 +2,17 @@ package duke.tasks;
 
 import java.io.IOException;
 
+/**
+ * Represents a deadline command. This command handles the deadline input
+ * from users.
+ */
 public class DeadlineCommand extends Command {
     protected String deadline;
 
+    /**
+     * Constructor that stores the deadline string.
+     * @param deadline input from user.
+     */
     public DeadlineCommand(String deadline) {
         this.deadline = deadline;
     }

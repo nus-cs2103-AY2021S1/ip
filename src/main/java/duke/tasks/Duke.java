@@ -14,6 +14,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Represents the Duke Program. Helps manage user's tasks and keeps them in check.
+ */
 public class Duke {
 
     private Storage storage;
@@ -32,6 +35,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Here is where the Duke program is run and commands are executed.
+     * @throws IOException File containing list of task may not be found.
+     */
     public void run() throws IOException {
         UI.intro();
         boolean isExit = false;

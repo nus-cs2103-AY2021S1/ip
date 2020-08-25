@@ -3,6 +3,9 @@ package duke.tasks;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Represents a TaskList of all the tasks managed in Duke.
+ */
 public class TaskList {
     protected ArrayList<Task> taskLs;
 
@@ -18,11 +21,19 @@ public class TaskList {
         this.taskLs.add(toAdd);
     }
 
+    /**
+     * Prints out a statement to inform users that the input
+     * is invalid.
+     */
     public static void confused() {
         String str = "OOPS!!! I'm sorry, but I don't know what that means :-(";
         System.out.println(str);
     }
 
+    /**
+     * Removes the task from the list of tasks.
+     * @param toDelete task to be removed.
+     */
     public void delete(String toDelete) {
         String command = toDelete.replaceAll("[^\\d.]", "");
         int i = Integer.parseInt(command.trim());
@@ -34,17 +45,28 @@ public class TaskList {
         System.out.println("Now you have " + numTask + " tasks in the list.");
     }
 
+    /**
+     * Lists all the task from the list of tasks.
+     * @param toPrint
+     */
     public void list(String toPrint) {
         int i = 1;
         System.out.println("Here are the tasks in your list: ");
         this.taskLs.forEach(n -> System.out.println(this.taskLs.indexOf(n) + 1 + ". " + n));
     }
 
-    public void findList(String toPrint) {
+    /**
+     * Lists the task from the list of tasks.
+     */
+    public void findList() {
         int i = 1;
         this.taskLs.forEach(n -> System.out.println(this.taskLs.indexOf(n) + 1 + ". " + n));
     }
 
+    /**
+     * Marks the task as done.
+     * @param toPrint contains int to mark the specific task as done.
+     */
     public void done(String toPrint) {
         String command = toPrint.replaceAll("[^\\d.]", "");
         int indexCommand = Integer.parseInt(command.trim());
@@ -54,6 +76,10 @@ public class TaskList {
         System.out.println("[" + completedTask.getStatusIcon() + "] " + completedTask.description);
     }
 
+    /**
+     * Creates a todo task and adds it to the list of tasks.
+     * @param toPrint Description of task.
+     */
     public void todo(String toPrint) {
         try {
             toPrint = toPrint.substring(4);
@@ -72,6 +98,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a event task and adds it to the list of tasks.
+     * @param toPrint Description and at of task.
+     */
     public void event(String toPrint) {
         try {
             toPrint = toPrint.substring(5);
@@ -88,6 +118,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a deadline task and adds it to the list of tasks.
+     * @param toPrint Description and by of task.
+     */
     public void deadline(String toPrint) {
         try {
             toPrint = toPrint.substring(8);
@@ -105,6 +139,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds the tasks in the list of tasks matching the keyword.
+     * @param toPrint Keyword entered by user.
+     */
     public void find(String toPrint) {
         TaskList duplicateTaskLs = new TaskList();
         duplicateTaskLs.taskLs = new ArrayList<>(this.getTaskLs());
@@ -114,7 +152,7 @@ public class TaskList {
 
         duplicateTaskLs.taskLs.removeIf(n -> !n.getDescription().contains(finalToPrint));
         System.out.println("Here are the matching tasks in your list: ");
-        duplicateTaskLs.findList("");
+        duplicateTaskLs.findList();
     }
 
 }

@@ -2,9 +2,17 @@ package duke.tasks;
 
 import java.io.IOException;
 
+/**
+ * Represents a todo command. This command handles the todo input
+ * from users.
+ */
 public class TodoCommand extends Command{
     protected String todo;
 
+    /**
+     * Constructor that stores the description string.
+     * @param todo input from user.
+     */
     public TodoCommand(String todo) {
         this.todo = todo;
     }
