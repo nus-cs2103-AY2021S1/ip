@@ -44,7 +44,6 @@ public class DeadlineCommand extends AddCommand {
                 }
             } }
         return e;
-
     }
 
     /**
@@ -79,6 +78,5 @@ public class DeadlineCommand extends AddCommand {
         }catch (IOException i){
 
         }
-
     }
 }

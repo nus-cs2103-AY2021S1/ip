@@ -68,6 +68,7 @@ abstract public class AddCommand extends Command {
             throw g;
         }
     }
+
     /**
      * converts string to time
      * @param string string to convert to time

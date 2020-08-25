@@ -1,7 +1,7 @@
 package Duke.Errors;
 /**
  * This DeleteException is used to print out exceptions when there is an incomplete input where the ID is absent or the ID
- * of that Task hasnt been defined yet or it has previously been deleted.
+ * of that Task hasn't been defined yet or it has previously been deleted.
  */
 public class DeleteException extends DukeException {
     /**
@@ -11,9 +11,10 @@ public class DeleteException extends DukeException {
      */
     private boolean IDabsent;
     private boolean deleted;
+
     /**
      * constructor that assigns tne 2 variables its respective values
-     * @param IDabsent input, depneding on whether the ID is present or not in the input.txt file. If present it is false
+     * @param IDabsent input, depending on whether the ID is present or not in the input.txt file. If present it is false
      *   else it is true.
      */
     public DeleteException(boolean IDabsent, boolean deleted){

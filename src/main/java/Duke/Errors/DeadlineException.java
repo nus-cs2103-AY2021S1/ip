@@ -11,6 +11,7 @@ public class DeadlineException extends DukeException{
      */
     private boolean description;
     private boolean format;
+
     /**
      *constructor for deadline exception that assigns description and format values
      * @param description input, depneding on whether the description is present or not in the input.txt file. If present it is false
@@ -21,6 +22,7 @@ public class DeadlineException extends DukeException{
         this.format = format;
 
     }
+
     /**
      * doesn't take in any arguments, overrides the in-built toString() method.
      * @return returns a string informing that the description is empty if description is true. Else, if description is

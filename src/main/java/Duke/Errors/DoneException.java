@@ -12,13 +12,14 @@ public class DoneException extends DukeException{
     private boolean deleted;
     /**
      * constructor that assigns tne 2 variables its respective values
-     * @param IDabsent input, depneding on whether the ID is present or not in the input.txt file. If present it is false
+     * @param IDabsent input, depending on whether the ID is present or not in the input.txt file. If present it is false
      *   else it is true.
      */
     public DoneException(boolean IDabsent, boolean deleted){
         this.IDabsent = IDabsent;
         this.deleted = deleted;
     }
+
     /**
      * doesn't take in any arguments, overrides the in-built toString() method.
      * @return returns a string depending on the scenario. If the IDabsent is true, then description that the description of

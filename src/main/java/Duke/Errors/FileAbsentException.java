@@ -5,7 +5,6 @@ package Duke.Errors;
  */
 public class FileAbsentException extends DukeException {
     private String filePath;
-
     /**
      * This assigns filePath variable to a value
      * @param filePath the value assigned to filePath

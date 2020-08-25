@@ -60,7 +60,5 @@ public class DeleteCommand extends Command {
                 rewrite(storage, tasks, ID);
             }
         }
-
-
     }
 }

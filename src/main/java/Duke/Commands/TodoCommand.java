@@ -20,6 +20,7 @@ public class TodoCommand extends AddCommand{
     public TodoCommand(String string) {
         super(string);
     }
+
     /**
      * to add deadline into a task list in TaskList,
      * @param tasks to change the taskList if necessary

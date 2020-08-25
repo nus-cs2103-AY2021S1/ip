@@ -18,7 +18,6 @@ import java.util.Scanner;
  */
 public class Storage {
     private String filePath;
-
     /**
      * constructor assigns filePath to filePath
      * @param filePath assigns this value to variable
@@ -75,7 +74,6 @@ public class Storage {
                         }
                         tasks.add(new Deadline(string, done, s.substring(index + 2)));
                     }
-                    //xs.add();
                     } while (sc.hasNextLine());
                 }
             if(tasks.size() == 0){
@@ -86,7 +84,6 @@ public class Storage {
             throw new FileAbsentException(this.filePath);
         }
     }
-
     /**
      * gives the filePath
      * @return the value of filePath

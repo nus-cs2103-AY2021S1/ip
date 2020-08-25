@@ -16,15 +16,20 @@ abstract public class Task {
     private String name;
 
     /**
-     * @param name this assigns the name of the Task to the name being given in the constructor. Then assigns done to be
-     *             false as it is not completed when it is being defined. The ID number is assigned to be prev size of Tasks
-     *             plus one because it is a task that is added now and this task is added to tasks.
+     * constructor assigns name variable a value
+     * @param name this assigns the name of the Task to the name being given in the constructor.
      */
     Task(String name) {
         this.done = false;
         this.name = name;
         tasks.add(this);
     }
+
+    /**
+     * constructor assigns name and done a value.
+     * @param name assigns name to this.name
+     * @param done assigns name to this.done
+     */
     Task(String name, boolean done){
         this.done = done;
         this.name = name;

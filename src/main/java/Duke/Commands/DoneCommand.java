@@ -55,7 +55,7 @@ public class DoneCommand extends Command {
                 throw new DoneException(false, false);
             } else {
                 rewrite(storage, tasks, ID);
-        }
+            }
         }
     }
 }

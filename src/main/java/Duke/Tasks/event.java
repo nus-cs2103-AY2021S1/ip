@@ -17,11 +17,18 @@ public class event extends Task {
         this.dateTime = dateTime;
         this.end = end;
     }
+
+    /**
+     * this assigns the nam, done and day values
+     * @param name argument in super class constructor
+     * @param done argument in super class constructor
+     */
     public event(String name, boolean done, String dateTime, String end) {
         super(name, done);
         this.dateTime = dateTime;
         this.end = end;
     }
+
     /**
      *  Overrides the toString methods
      * @return the specific representation for event class as mentioned with [E] indicating that it is a event class
@@ -30,6 +37,7 @@ public class event extends Task {
     public String toString() {
         return "[E]" + super.toString() + "(at: " + this.dateTime +  "-" + this.end + ")";
     }
+
     /**
      * gives a specific string representation for that in the tasks.txt file and overrides that in Task to make
      * it unique to that for event

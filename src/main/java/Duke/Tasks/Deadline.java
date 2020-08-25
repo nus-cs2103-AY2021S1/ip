@@ -14,6 +14,13 @@ public class Deadline extends Task {
         super(name);
         this.day = day;
     }
+
+    /**
+     * this assigns the nam, done and day values
+     * @param name argument in super class constructor
+     * @param done argument in super class constructor
+     * @param day assigns to this.day
+     */
     public Deadline(String name, boolean done, String day) {
         super(name, done);
         this.day = day;

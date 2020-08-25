@@ -7,6 +7,7 @@ public class FindException extends DukeException {
         this.description = description;
         this.string = string;
     }
+
     public String toString(){
         if(description){
             return "there are no matches to your keyword: " + string;

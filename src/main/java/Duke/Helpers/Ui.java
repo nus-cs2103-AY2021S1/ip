@@ -5,7 +5,7 @@ import Duke.Errors.FileAbsentException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.security.DigestException;
+
 import java.util.Scanner;
 
 /**
@@ -67,5 +67,4 @@ public class Ui {
     public void showError(String s){
         System.out.println(s);
     }
-
 }

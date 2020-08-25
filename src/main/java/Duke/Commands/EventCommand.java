@@ -26,6 +26,7 @@ public class EventCommand extends AddCommand{
     public EventCommand(String string) {
         super(string);
     }
+
     private static event provide(String name, String string, String end) throws DukeException {
         event e;
         try{
@@ -64,7 +65,8 @@ public class EventCommand extends AddCommand{
                 }catch (DateTimeException z) {
                     throw new EventException(false, false, false, true);
                 }
-            } }
+            }
+        }
         return e;
     }
 

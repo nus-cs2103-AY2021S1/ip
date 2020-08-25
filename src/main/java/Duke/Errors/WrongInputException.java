@@ -1,7 +1,5 @@
 package Duke.Errors;
 
-import Duke.Errors.DukeException;
-
 /**
  * This prints the exception when a wrong word is being input.
  */

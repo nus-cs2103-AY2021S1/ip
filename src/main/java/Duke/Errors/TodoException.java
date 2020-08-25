@@ -1,7 +1,5 @@
 package Duke.Errors;
 
-import Duke.Errors.DukeException;
-
 /**
  * This TodoException is used to print out exceptions when there is an incomplete input where whether the description
  * or date is absent.

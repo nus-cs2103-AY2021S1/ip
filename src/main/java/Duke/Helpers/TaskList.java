@@ -1,5 +1,5 @@
 package Duke.Helpers;
-import Duke.Duke;
+
 import Duke.Tasks.Task;
 
 import java.util.ArrayList;
@@ -10,7 +10,6 @@ import java.util.List;
  */
 public class TaskList {
     private List<Task> allTasks;
-
     /**
      * assigns allTasks a value
      * @param tasks assings the mem var a value of allTasks
@@ -18,14 +17,12 @@ public class TaskList {
     public TaskList(List<Task> tasks){
         this.allTasks = new ArrayList<>(tasks);
     }
-
     /**
      * another constructor, where the allTasks variable is just empty
      */
     public TaskList(){
         allTasks = new ArrayList<>();
     }
-
     /**
      * returns the List<Task> value
      * @return the List<Task> value
@@ -33,4 +30,5 @@ public class TaskList {
     public List<Task> getAllTasks(){
         return allTasks;
     }
+
 }
