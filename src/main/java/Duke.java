@@ -186,16 +186,27 @@ public class Duke {
             int index = data.lastIndexOf("|");
             String description = data.substring(8, index - 1);
             String eventDate = data.substring(index + 2);
-            Event event = new Event(description, eventDate);
-            event.isDone = data.charAt(4) == '1';
-            taskList.add(event);
+            try {
+                LocalDate date = LocalDate.parse(eventDate);
+                Event event = new Event(description, date);
+                event.isDone = data.charAt(4) == '1';
+                taskList.add(event);
+            } catch (DateTimeParseException e) {
+                System.out.println("Please key in the date in the format YYYY-MM-DD");
+            }
+
         } else if (data.startsWith("D")) {
             int index = data.lastIndexOf("|");
             String description = data.substring(8, index - 1);
             String deadlineDate = data.substring(index + 2);
-            Deadline deadline = new Deadline(description, deadlineDate);
-            deadline.isDone = data.charAt(4) == '1';
-            taskList.add(deadline);
+            try {
+                LocalDate date = LocalDate.parse(deadlineDate);
+                Deadline deadline = new Deadline(description, date);
+                deadline.isDone = data.charAt(4) == '1';
+                taskList.add(deadline);
+            } catch (DateTimeParseException e) {
+                System.out.println("Please key in the date in the format YYYY-MM-DD");
+            }
         }
     }
 
