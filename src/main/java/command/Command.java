@@ -12,5 +12,10 @@ public abstract class Command {
         this.isExit = false;
     }
 
+    /**
+     * Executes the command.
+     *
+     * @throws DukeException
+     */
     public void execute() throws DukeException { }
 }

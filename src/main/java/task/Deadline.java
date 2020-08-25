@@ -16,6 +16,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Returns description of this task and its completion status, with its deadline date.
+     * @return String that describes task.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";

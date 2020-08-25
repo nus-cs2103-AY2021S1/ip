@@ -15,6 +15,14 @@ public class Parser {
         this.duke = duke;
     }
 
+    /**
+     * Parses the user input and returns a Command to be executed.
+     *
+     * @param input String input from user.
+     * @param tasks TaskList being used to handle tasks.
+     * @return Command to be executed.
+     * @throws DukeException if user input is invalid or improperly formatted.
+     */
     public Command parse(String input, TaskList tasks) throws DukeException {
         String command;
         String description = null;

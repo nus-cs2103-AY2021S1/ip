@@ -9,6 +9,10 @@ public class Todo extends Task {
         super(description, isDone);
     }
 
+    /**
+     * Returns description of this task and its completion status.
+     * @return String that describes task.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();
