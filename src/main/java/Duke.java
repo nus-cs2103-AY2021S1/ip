@@ -1,3 +1,4 @@
+import java.nio.file.Files;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -6,6 +7,7 @@ import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Duke {
@@ -20,15 +22,25 @@ public class Duke {
     }
 
     public static void saveToFile(String output) {
-        // Get OS-independent file path
+        // Check if data folder exists, if not create
+        Path folderPath = Paths.get("..", "..", "..", "data");
+        if (!Files.exists(folderPath)) {
+            //System.out.println("DOES NOT EXIST!!!!");
+            File folderDir = new File(folderPath.toString());
+            folderDir.mkdir();
+        } else {
+            //System.out.println("FOLDER EXIST!!!!");
+        }
+
+        // Get OS-independent file path to text file
         String filePath = Paths.get("..", "..", "..", "data", "Tasklist.txt")
                 .toString();
 
-        /*
+/*
         // Uncomment for testing
         String filePath = Paths.get("..","data", "Tasklist.txt")
                 .toString();
-        */
+*/
 
         try {
             FileWriter myFile = new FileWriter(filePath);
@@ -47,6 +59,11 @@ public class Duke {
         // Get OS-independent file path to read file
         String filePath = Paths.get("..", "..", "..", "data", "Tasklist.txt")
                 .toString();
+/*
+        // Uncomment for testing
+        String filePath = Paths.get("..","data", "Tasklist.txt")
+                .toString();
+*/
 
         try {
             File myFile = new File(filePath);
@@ -63,7 +80,7 @@ public class Duke {
                         boolean isDone = taskString.split("  ")[0]
                                 .substring(3)
                                 .equals("[Done]");
-                        String description = taskString.split("  ")[1];
+                        String description = " " + taskString.split("  ")[1];
                         Task t = new ToDo(description);
                         if (isDone) {
                             t.setDone();
@@ -74,7 +91,7 @@ public class Duke {
                         isDone = taskString.split("  ")[0]
                                 .substring(3)
                                 .equals("[Done]");
-                        description = taskString.split("  ")[1]
+                        description = " " + taskString.split("  ")[1]
                                 .split("\\s[(]by:\\s")[0];
                         String by = taskString.split("  ")[1]
                                 .split("\\s[(]by:\\s")[1];
@@ -90,7 +107,7 @@ public class Duke {
                                 .equals("[Done]");
                         String[] stringSplit = taskString.split("  ")[1]
                                 .split("\\s[(]at:\\s");
-                        description = stringSplit[0];
+                        description = " " + stringSplit[0];
                         String start = stringSplit[1].split("-")[0];
                         String end = stringSplit[1].split("-")[1];
                         Event e = new Event(description, start, end);
@@ -151,7 +168,10 @@ public class Duke {
         String input;
 
         // Initialise ArrayList to store tasks from user
-        ArrayList<Task> userTasks = new ArrayList<Task>();
+        ArrayList<Task> userTasks;
+
+        // Read tasks stored in hard drive if any
+        userTasks = readFromFile();
 
         // Start chat
         while (true) {
