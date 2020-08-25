@@ -13,7 +13,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getItemName() {
+    public String getTaskName() {
         return name;
     }
 
@@ -34,6 +34,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.getStatusIcon() + " " + this.getItemName();
+        return this.getStatusIcon() + " " + this.getTaskName();
     }
 }

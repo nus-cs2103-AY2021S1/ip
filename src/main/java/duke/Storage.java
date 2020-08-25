@@ -79,11 +79,11 @@ public class Storage {
     public ArrayList<duke.Task> loadTask() throws IOException, duke.DukeException {
         ArrayList<duke.Task> list = new ArrayList<>();
         String line = getBr().readLine();
-        System.out.println(line);
-        System.out.println("aaa");
+
         if (line == null) {
             return list;
         }
+
         while (!line.isEmpty()) {
             boolean isDone = String.valueOf(line.charAt(6)).equals("\u2713");
             if (String.valueOf(line.charAt(3)).equals("T")) {
@@ -94,14 +94,14 @@ public class Storage {
                 list.add(todo);
             } else if (String.valueOf(line.charAt(3)).equals("D")) {
                 int indexOfColon = line.indexOf(":");
-                Deadline deadline = new Deadline(line.substring(9, indexOfColon-4), line.substring(indexOfColon+2));
+                Deadline deadline = new Deadline(line.substring(9, indexOfColon - 4), line.substring(indexOfColon + 2, line.length() - 1));
                 if (isDone) {
                     deadline.setDone();
                 }
                 list.add(deadline);
             } else if (String.valueOf(line.charAt(3)).equals("E")) {
                 int indexOfColon = line.indexOf(":");
-                Event event = new Event(line.substring(9, indexOfColon-4), line.substring(indexOfColon+2));
+                Event event = new Event(line.substring(9, indexOfColon - 4), line.substring(indexOfColon + 2, line.length() - 1));
                 if (isDone) {
                     event.setDone();
                 }

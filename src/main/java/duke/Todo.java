@@ -11,6 +11,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.getStatusIcon() + " " + super.getItemName();
+        return "[T]" + super.getStatusIcon() + " " + super.getTaskName();
     }
 }
