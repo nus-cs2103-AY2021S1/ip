@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -83,7 +84,7 @@ public class Luke {
                 if (readEach[0].equals("T")) {
                     task = new Todo(readEach[2]);
                 } else if (readEach[0].equals("D")) {
-                    task = new Deadline(readEach[2], readEach[3]);
+                    task = new Deadline(readEach[2], LocalDate.parse(readEach[3]));
                 } else if (readEach[0].equals("E")) {
                     task = new Event(readEach[2], readEach[3]);
                 }
@@ -153,7 +154,7 @@ public class Luke {
         } else if (deadline.length != 3) {
             throw new InvalidDeadlineException("\n\tYou have typed in an invalid deadline.\n\tPlease make sure you follow the correct format.");
         } else {
-            return new Deadline(deadline[1], deadline[2]);
+            return new Deadline(deadline[1], LocalDate.parse(deadline[2]));
         }
     }
 
