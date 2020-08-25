@@ -2,10 +2,30 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
+/**
+ * <h1> Duke Processor class </h1>
+ * This class is the class that processes the
+ * commands to create readable Tasks that will be stored in
+ * the arraylist of tasks and arraylist of records
+ *
+ * @author Lee Penn Han
+ * @version 1.0
+ * @since 2020-25-08
+ */
 public class Processor {
 
     public Processor() {}
 
+    /**
+     * Processes the command and filters
+     * it the correct private methods to
+     * instantiate the Task objects to be recorded
+     *
+     * @param command This is the user input
+     * @param arraylst This is the arraylist that stores the current lists of tasks
+     * @param dukeFile This is the DukeFile object that records the tasks
+     * @throws DukeException Exception for unidentified commands
+     */
     public void process(String command, ArrayList<Task> arraylst, DukeFile dukeFile) throws DukeException {
         String[] stringarr = command.split(" ");
         if (stringarr[0].equals("list")) {
@@ -27,7 +47,7 @@ public class Processor {
         }
     }
 
-    public void processorFind(ArrayList<Task> arraylst, String key) {
+    private void processorFind(ArrayList<Task> arraylst, String key) {
         int counter = 1;
         System.out.println("_________________________________________\n" + "Here are the matching tasks in your list:");
         for (int i = 0; i < arraylst.size(); i++) {
@@ -39,7 +59,7 @@ public class Processor {
         System.out.println("_________________________________________");
     }
 
-    public void processorList(ArrayList<Task> arraylst) {
+    private void processorList(ArrayList<Task> arraylst) {
         System.out.println("_________________________________________\n" + "Here are the tasks in your list:");
         for (int i = 0; i < arraylst.size(); i++) {
             int index = i+1;
@@ -48,7 +68,7 @@ public class Processor {
         System.out.println("_________________________________________");
     }
 
-    public String processorDone(ArrayList<Task> arraylst, int index) {
+    private String processorDone(ArrayList<Task> arraylst, int index) {
         int i = index - 1;
         arraylst.get(i).setDone();
         System.out.println("_________________________________________");
@@ -58,7 +78,7 @@ public class Processor {
         return arraylst.get(i).toString();
     }
 
-    public void processorDelete(ArrayList<Task> arraylst, int index) {
+    private void processorDelete(ArrayList<Task> arraylst, int index) {
         int i = index - 1;
         Task removed_task = arraylst.get(i);
         arraylst.remove(i);
@@ -69,7 +89,7 @@ public class Processor {
         System.out.println("_________________________________________");
     }
 
-    public String processorAdd(String cmd, ArrayList<Task> arraylst) throws DukeException {
+    private String processorAdd(String cmd, ArrayList<Task> arraylst) throws DukeException {
         String[] stringarr = cmd.split(" ", 2);
         if (stringarr[0].equals("todo")) {
             if (stringarr.length <= 1) {
