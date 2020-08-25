@@ -1,6 +1,7 @@
 package duke;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -79,6 +80,16 @@ public class Duke {
             tasks.deleteTask(index);
             if (!loading){
                 ui.showDeletedTask(chosenTask, tasks.taskList);
+            }
+
+        } else if (instructionType.equals("find")) {
+            // find task
+            // parse instruction
+            String keyword = Parser.parseFindInstr(user_input);
+            // execute
+            ArrayList<Task> foundTasks = tasks.find(keyword);
+            if (!loading){
+                ui.showFoundTask(foundTasks);
             }
 
         } else if (instructionType.equals("todo")) {

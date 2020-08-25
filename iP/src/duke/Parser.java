@@ -66,5 +66,10 @@ public class Parser {
         return parsedData;
     }
 
+    static String parseFindInstr(String user_input) {
+        String keyword = user_input.split(" ")[1];
+        return keyword;
+    }
+
 
 }
