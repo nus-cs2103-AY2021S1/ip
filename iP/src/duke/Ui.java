@@ -107,4 +107,14 @@ public class Ui {
         user_input = scanner.nextLine();  // Read user input
         return user_input;
     }
+
+    public void showFoundTask(ArrayList<Task> foundTasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        int index = 1;
+        for (Task task : foundTasks) {
+            System.out.println(String.format("%s. %s", index, task));
+            index += 1;
+        }
+    }
+    
 }
