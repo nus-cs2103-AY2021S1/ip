@@ -1,7 +1,4 @@
-import java.util.Scanner;
 import java.util.List;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -20,32 +17,24 @@ public class TaskManager {
         this.tasks = tasks;
     }
 
-    public void initialise() {
-        this.greet();
-        Scanner sc = new Scanner(System.in);
-        while (!isExit) {
-            try {
-                String input = sc.nextLine();
-                handleInput(input);
-                this.saveTasks();
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        sc.close();
-        this.exit();
+    public List<Task> getTasks() {
+        return this.tasks;
     }
 
-    private void greet() {
+    public boolean isExit() {
+        return this.isExit;
+    }
+
+    public void greet() {
         System.out.println("Hello! I'm Duke.");
         System.out.println("What can I do for you?\n");
     }
 
-    private void exit() {
+    public void exit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    private void handleInput(String input) throws DukeException {
+    public void handleInput(String input) throws DukeException {
         String[] inputArray = input.split(" ", 2);
         String command = inputArray[0];
         String errorMessage = "";
@@ -150,31 +139,6 @@ public class TaskManager {
                 System.out.println(i + 1 + ". " + tasks.get(i));
             }
             System.out.println("");
-        }
-    }
-
-    private void saveTasks() {
-        try {
-            FileWriter myWriter = new FileWriter("data/duke.txt");
-            for (Task task : tasks) {
-                char letter = task.toString().charAt(1);
-                int bit = task.isDone() ? 1 : 0;
-                String description = task.getDescription();
-                String data;
-                if (letter == 'T') {
-                    data = letter + " | " + bit + " | " + description;
-                } else if (letter == 'D') {
-                    String time = task.getTime().toString();
-                    data = letter + " | " + bit + " | " + description + " | " + time; 
-                } else { // letter == 'E'
-                    String time = task.getTime().toString();
-                    data = letter + " | " + bit + " | " + description + " | " + time; 
-                }
-                myWriter.write(data + "\n");
-            }
-            myWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

@@ -1,56 +1,44 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static List<Task> load(String filePath) throws DukeException {
-        File file = new File(filePath);
-        List<Task> tasks = new ArrayList<>();
+    private Storage storage;
+
+    private TaskManager manager;
+
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
         try {
-            Scanner sc = new Scanner(file);
-            while (sc.hasNextLine()) {
-                String data = sc.nextLine();
-                String[] dataArray = data.split(" \\| ");
-                String letter = dataArray[0];
-                int bit = Integer.parseInt(dataArray[1]);
-                String description = dataArray[2];
-                Task task;
-                if (letter.equals("T")) {
-                    task = new Todo(description);
-                } else if (letter.equals("D")) {
-                    LocalDate time = LocalDate.parse(dataArray[3]);
-                    task = new Deadline(description, time);
-                } else {
-                    LocalDate time = LocalDate.parse(dataArray[3]);
-                    task = new Event(description, time);
-                }
-                if (bit == 1) {
-                    task.markAsDone();
-                }
-                tasks.add(task);
-            }
-            sc.close();
-            return tasks;
-        } catch (FileNotFoundException e) {
-            String errorMessage = "No history found, "
-                    + "starting up with no saved records...";
-            throw new DukeException(errorMessage);
+            List<Task> tasks = storage.loadTasks();
+            manager = new TaskManager(tasks);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            manager = new TaskManager();
         }
     }
 
-    public static void main(String[] args) {
-        try {
-            List<Task> tasks = Duke.load("data/duke.txt");
-            TaskManager manager = new TaskManager(tasks);
-            manager.initialise();
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            TaskManager manager = new TaskManager();
-            manager.initialise();
+    public void run() {
+        manager.greet();   
+        boolean isExit = false;
+        Scanner sc = new Scanner(System.in);
+        while (!isExit) {
+            try {
+                String input = sc.nextLine();
+                manager.handleInput(input);
+                List<Task> tasks = manager.getTasks();
+                storage.saveTasks(tasks);
+                isExit = manager.isExit();
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
         }
+        sc.close();
+        manager.exit();
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke("data/duke.txt");
+        duke.run();
     }
 }
