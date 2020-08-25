@@ -7,6 +7,7 @@ import commands.AddTodoCommand;
 import commands.DoneCommand;
 import commands.DeleteCommand;
 import commands.ListCommand;
+import commands.FindCommand;
 import commands.ExitCommand;
 import commands.HelpCommand;
 import commands.IncorrectCommand;
@@ -16,8 +17,13 @@ import utils.Messages;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static utils.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
  * Parses user input.
@@ -34,6 +40,9 @@ public class Parser {
     public static final Pattern ADD_EVENT_FORMAT = Pattern.compile("(?<description>[^/]+)/at(?<dateTime>.*)");
 
     public static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>[0-9]+)");
+
+    public static final Pattern KEYWORDS_ARGS_FORMAT =
+            Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
     /**
      * Signals that the user input could not be parsed.
@@ -53,7 +62,7 @@ public class Parser {
     public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -75,6 +84,10 @@ public class Parser {
 
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(arguments);
+
+
+        case FindCommand.COMMAND_WORD:
+            return prepareFind(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -98,7 +111,7 @@ public class Parser {
     private Command prepareAddTodo(String args) {
         final Matcher matcher = ADD_TODO_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddTodoCommand.MESSAGE_USAGE));
         }
         if (matcher.group("description").isBlank()) {
@@ -116,7 +129,7 @@ public class Parser {
     private Command prepareAddDeadline(String args) {
         final Matcher matcher = ADD_DEADLINE_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddDeadlineCommand.MESSAGE_USAGE));
         }
 
@@ -137,7 +150,7 @@ public class Parser {
     private Command prepareAddEvent(String args) {
         final Matcher matcher = ADD_EVENT_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddEventCommand.MESSAGE_USAGE));
         }
 
@@ -179,7 +192,7 @@ public class Parser {
             final int targetIndex = parseArgsAsDisplayedIndex(args.trim());
             return new DoneCommand(targetIndex);
         } catch (ParseException e) {
-            return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
         } catch (NumberFormatException e) {
             return new IncorrectCommand(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
@@ -196,10 +209,30 @@ public class Parser {
             final int targetIndex = parseArgsAsDisplayedIndex(args.trim());
             return new DeleteCommand(targetIndex);
         } catch (ParseException e) {
-            return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         } catch (NumberFormatException e) {
             return new IncorrectCommand(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
+    }
+
+
+    /**
+     * Parses arguments in the context of the find person command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareFind(String args) {
+        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindCommand.MESSAGE_USAGE));
+        }
+
+        // keywords delimited by whitespace
+        final String[] keywords = matcher.group("keywords").split("\\s+");
+        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        return new FindCommand(keywordSet);
     }
 
     /**

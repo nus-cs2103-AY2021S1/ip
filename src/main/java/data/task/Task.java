@@ -1,6 +1,8 @@
 package data.task;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Represents a Task in the task list.
@@ -25,6 +27,17 @@ public abstract class Task {
      * Returns the status icon of the task. "O" for completed task, "X" for uncompleted task.
      * @return The status icon of the task
      */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Retrieves a listing of every word in the description, in order.
+     */
+    public List<String> getWordsInDescription() {
+        return Arrays.asList(description.split("\\s+"));
+    }
+
     public String getStatusIcon() {
         return (isDone ? "O" : "X"); //return O or X symbols
     }

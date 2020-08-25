@@ -5,6 +5,8 @@ import data.task.Task;
 import ui.Ui;
 import utils.Messages;
 
+import java.util.List;
+
 /**
  * Represents an executable command.
  */
@@ -32,7 +34,7 @@ public abstract class Command {
      * @param taskList used to generate summary
      * @return summary message for tasks displayed
      */
-    public static String getMessageForTaskListSummary(TaskList taskList) {
+    public static String getMessageForTaskListSummary(List<Task> taskList) {
         return String.format(Messages.MESSAGE_TASK_LISTED_OVERVIEW_FORMAT, taskList.size());
     }
 
