@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -6,18 +7,30 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
+/*
+    Storage class takes in a path and contains methods for loading and saving tasks.
+*/
+
 public class Storage {
 
-    private final TaskList taskList;
+    private final Path location;
 
-    public Storage(TaskList taskList) {
-        this.taskList = taskList;
+    public Storage(Path location) {
+        this.location = location;
     }
 
-    public void loadTasks(Path file) throws ChatbotException {
+    public ArrayList<Task> loadTasks() throws ChatbotException {
         try {
-            Stream<Task> taskStream = Files.lines(file).map(line -> {
-                // parse line
+
+            // File does not exist
+            if (!Files.exists(location)) {
+                Files.createFile(location);
+                return  new ArrayList<>();
+            }
+
+            // File exists, load data
+            Stream<Task> taskStream = Files.lines(location).map(line -> {
+
                 String[] lineData = line.split("\\|");
                 String type = lineData[0].trim();
                 boolean isDone = lineData[1].trim().equals("1");
@@ -26,7 +39,6 @@ public class Storage {
 
                 Task task = null;
 
-                // re-create task
                 switch (type) {
                     case "T":
                         task = new Todo(description, isDone);
@@ -43,18 +55,18 @@ public class Storage {
                 return task;
             });
 
-            // add task to task list
-            ArrayList<Task> tasklist = this.taskList.getTasks();
-            taskStream.forEach(tasklist::add);
+            ArrayList<Task> taskList = new ArrayList<>();
+            taskStream.forEach(taskList::add);
+
+            return taskList;
 
         } catch (IOException e) {
             throw new ChatbotException("Ooops, I couldn't load the tasks.");
         }
     }
 
-    public void saveTasks(Path location) throws ChatbotException {
-        ArrayList<Task> tasks = taskList.getTasks();
-        Iterator iter = tasks.iterator();
+    public void saveTasks(ArrayList<Task> taskList) throws ChatbotException {
+        Iterator iter = taskList.iterator();
         String dataStr = "";
         while (iter.hasNext()) {
             Task tsk = (Task)iter.next();
