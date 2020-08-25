@@ -1,3 +1,0 @@
-T | 0 | read book
-D | 1 | return book | 02 Dec 2019 6:00 PM
-E | 0 | project meeting | 12 Aug 2020 6:00 PM

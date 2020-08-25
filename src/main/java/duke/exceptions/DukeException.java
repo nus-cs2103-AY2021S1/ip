@@ -1,6 +1,6 @@
-package exceptions;
+package duke.exceptions;
 
-import utils.Colour;
+import duke.utils.Colour;
 
 public class DukeException extends Exception {
 

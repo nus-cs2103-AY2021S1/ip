@@ -1,8 +1,8 @@
-package commands;
+package duke.commands;
 
-import exceptions.DukeException;
+import duke.exceptions.DukeException;
 
-import utils.ResourceHandler;
+import duke.utils.ResourceHandler;
 
 import java.util.regex.Pattern;
 

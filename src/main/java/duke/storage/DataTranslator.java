@@ -1,17 +1,17 @@
-package task;
+package duke.storage;
 
-import exceptions.DukeException;
+import duke.exceptions.DukeException;
 
-import utils.Colour;
-import utils.Formatter;
+import duke.task.DateTimeParser;
+import duke.task.*;
+import duke.utils.Colour;
+import duke.utils.Ui;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataTranslator {
-    private static final int DIVIDER_LENGTH = 70;
-    private static final int LEFT_PADDING = 7;
-    private static final Formatter formatter = new Formatter(DIVIDER_LENGTH, LEFT_PADDING);
+    private static final Ui formatter = new Ui();
     public static TaskManager decode(List<String> lines){
         TaskManager taskManager = new TaskManager();
         for(String line : lines){

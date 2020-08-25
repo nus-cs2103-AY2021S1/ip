@@ -3,22 +3,22 @@
        How may I be of assistance?
        ______________________________________________________________________
        ______________________________________________________________________
-       Got it. I've added this task:
+       Got it. I've added this duke.task:
         [0;32m[T][✘] read book[0m
-       Now you have a total of 1 task in the list.
+       Now you have a total of 1 duke.task in the list.
        ______________________________________________________________________
        ______________________________________________________________________
-       Got it. I've added this task:
+       Got it. I've added this duke.task:
         [0;32m[D][✘] return book (by: 6 Sep)[0m
        Now you have a total of 2 tasks in the list.
        ______________________________________________________________________
        ______________________________________________________________________
-       Got it. I've added this task:
+       Got it. I've added this duke.task:
         [0;32m[E][✘] meeting (at: mon 2-4 pm)[0m
        Now you have a total of 3 tasks in the list.
        ______________________________________________________________________
        ______________________________________________________________________
-       Good job on completing this task! I have marked this task as done: 
+       Good job on completing this duke.task! I have marked this duke.task as done:
        [0;32m[T][✓] read book[0m
        ______________________________________________________________________
        ______________________________________________________________________
@@ -47,10 +47,10 @@
        [0;31mOOPS!!! Missing deadline date/time[0m
        ______________________________________________________________________
        ______________________________________________________________________
-       [0;31mInvalid task index! Please choose another index.[0m
+       [0;31mInvalid duke.task index! Please choose another index.[0m
        ______________________________________________________________________
        ______________________________________________________________________
-       [0;31mInvalid task index! Please choose another index.[0m
+       [0;31mInvalid duke.task index! Please choose another index.[0m
        ______________________________________________________________________
        ______________________________________________________________________
        Bye. Hope my service has been satisfactory.Hope to see you again soon.

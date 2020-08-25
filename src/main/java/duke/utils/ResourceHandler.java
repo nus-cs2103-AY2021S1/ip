@@ -1,4 +1,4 @@
-package utils;
+package duke.utils;
 
 import java.util.HashMap;
 import java.util.Locale;

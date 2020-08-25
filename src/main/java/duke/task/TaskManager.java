@@ -1,7 +1,7 @@
-package task;
+package duke.task;
 
-import utils.Colour;
-import utils.ResourceHandler;
+import duke.utils.Colour;
+import duke.utils.ResourceHandler;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -9,24 +9,24 @@ import java.util.ArrayList;
 public class TaskManager {
     private List<Task> tasks = new ArrayList<>();
 
-    public TaskManager() {
-    }
-
-    public String addTask(Task newTask) {
+    public void addTask(Task newTask) {
         tasks.add(newTask);
-        String output = "Got it. I've added this task:\n " + Colour.Green(newTask.toString()) + "\n";
-        String numberOfTasks = tasks.size() < 2 ? " task in the list." : " tasks in the list.";
-        return output + "Now you have a total of " + String.valueOf(tasks.size()) + numberOfTasks;
     }
 
-    public String deleteTask(int taskIndex) {
-        Task deletedTask = tasks.remove(taskIndex - 1);
-        String output = "Noted. I have removed the task: \n";
-        return output + Colour.Red(deletedTask.toString());
+    public void deleteTask(int taskIndex) {
+        tasks.remove(taskIndex - 1);
+    }
+
+    public Task getTask(int taskIndex){
+        return this.tasks.get(taskIndex);
     }
 
     public List<Task> getTasks(){
         return this.tasks;
+    }
+
+    public int getTotalNumberOfTasks(){
+        return this.tasks.size();
     }
 
     public int getCompletedTasks() {
@@ -60,19 +60,15 @@ public class TaskManager {
         String completedTasks = Colour.Green(getCompletedTasks()
                 + (isPluralCompletedTasks ? " tasks" : " task"));
         String uncompletedTasks = Colour.Red(getUncompletedTasks()
-                + (isPluralUncompletedTasks ? " tasks." : " task"));
+                + (isPluralUncompletedTasks ? " tasks." : "task"));
         stringBuilder.append("You have completed " + completedTasks + " and have yet to complete "
                 + uncompletedTasks);
         return stringBuilder.toString();
     }
 
-    public String markTaskAsDone(int taskIndex) {
+    public void markTaskAsDone(int taskIndex) {
         Task updatedTask = tasks.get(taskIndex - 1);
         updatedTask.markTaskAsDone();
         tasks.set(taskIndex - 1, updatedTask);
-        String taskDoneMessage = ResourceHandler.getMessage("taskManager.taskDoneMessage");
-        StringBuilder stringBuilder = new StringBuilder(taskDoneMessage);
-        stringBuilder.append(Colour.Green(updatedTask.toString()));
-        return stringBuilder.toString();
     }
 }

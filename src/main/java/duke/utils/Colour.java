@@ -1,4 +1,4 @@
-package utils;
+package duke.utils;
 
 public class Colour {
     public static String Green(String element) {
