@@ -5,5 +5,6 @@ public enum Command {
     done,
     delete,
     add,
+    find,
     error
 }

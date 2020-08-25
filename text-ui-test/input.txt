@@ -25,4 +25,8 @@ delete
 delete 2
 list
 add
+find
+find 
+find ke
+find bible
 bye

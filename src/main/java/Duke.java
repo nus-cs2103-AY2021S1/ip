@@ -37,7 +37,15 @@ public class Duke {
                 continue;
             } else if (cmd == Command.list) {
                 Ui.print(tasks.toString());
-            } else if (cmd == Command.done){
+            } else if (cmd == Command.find) {
+                String keyword = in.substring(5);
+                if (keyword.length() == 0) {
+                    Ui.errorMsg("you haven't entered a search keyword!");
+                } else {
+                    Ui.print("here's the list of tasks that contain the keyword!");
+                    Ui.print(tasks.findTasks(keyword).toString());
+                }
+            } else if (cmd == Command.done) {
                 int current;
                 try {
                     current = Integer.parseInt(in.substring(5));

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,7 +46,7 @@ public class TaskList {
     public String toString() {
         StringBuilder result = new StringBuilder();
         if (isEmpty()) {
-            result = new StringBuilder("you haven't added any tasks to the list yet!");
+            result = new StringBuilder("this list doesn't contain any tasks!");
         } else {
             result.append("1. ").append(taskList.get(0));
             for (int i = 2; i <= taskList.size(); i++) {
@@ -53,6 +54,16 @@ public class TaskList {
             }
         }
         return result.toString();
+    }
+
+    public TaskList findTasks(String keyword) {
+        List<Task> temp = new ArrayList<Task>();
+        for (Task t : taskList) {
+            if (t.task.contains(keyword)) {
+                temp.add(t);
+            }
+        }
+        return new TaskList(temp);
     }
 
 }
