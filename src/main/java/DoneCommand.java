@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Objects;
 
 public class DoneCommand extends Command {
     private short id;
@@ -17,5 +18,20 @@ public class DoneCommand extends Command {
         tasks.markAsDone(id);
         ui.showDone(curr);
         storage.updateMemory(tasks.getList());
+    }
+
+    @Override public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        DoneCommand that = (DoneCommand) o;
+        return id == that.id;
+    }
+
+    @Override public int hashCode() {
+        return Objects.hash(id);
     }
 }

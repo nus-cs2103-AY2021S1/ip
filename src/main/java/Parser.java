@@ -45,7 +45,7 @@ public class Parser {
             }
             switch (currType) {
             case D:
-                int delimiter = Arrays.binarySearch(commandElements, "/by");
+                int delimiter = Arrays.asList(commandElements).indexOf("/by");
                 if (delimiter < 0) {
                     throw new MissingDelimiterException(MESSAGE_MISSING_DELIM);
                 }
@@ -58,7 +58,7 @@ public class Parser {
                         LocalTime.parse(commandElements[delimiter + 2], DateTimeFormatter.ofPattern("HH:mm")));
                 break;
             case E:
-                delimiter = Arrays.binarySearch(commandElements, "/at");
+                delimiter = Arrays.asList(commandElements).indexOf("/at");
                 if (delimiter < 0) {
                     throw new MissingDelimiterException(MESSAGE_MISSING_DELIM);
                 }

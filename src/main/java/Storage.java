@@ -17,10 +17,8 @@ public class Storage {
     void updateMemory(ArrayList<Task> taskList) throws IOException {
         StringBuilder taskListString = new StringBuilder();
         for (Task task : taskList) {
-            //            taskListString.append(task.toString().replaceAll("[)\\[\\](✓✗]", "")
-            //                    .replaceAll("by:|at:", "/--")).append("\n").append(task.isDone()).append("\n");
             for (String attribute : task.attributeList()) {
-                taskListString.append(attribute).append(" ");
+                taskListString.append(attribute).append("\n");
             }
         }
         Files.writeString(filepath, taskListString, StandardOpenOption.WRITE);
@@ -38,23 +36,26 @@ public class Storage {
             Scanner data;
             data = new Scanner(filepath);
             ArrayList<Task> taskList = new ArrayList<>();
-            while (data.hasNext()) {
+            while (data.hasNextLine()) {
                 Task curr;
-                switch (data.next()) {
+                switch (data.nextLine()) {
                 case "T":
-                    curr = new ToDo(data.next());
+                    curr = new ToDo(data.nextLine());
                     break;
                 case "E":
-                    curr = new Event(data.next(), LocalDate.parse(data.next()), LocalTime.parse(data.next()));
+                    curr = new Event(data.nextLine(), LocalDate.parse(data.nextLine()),
+                            LocalTime.parse(data.nextLine()));
                     break;
                 default:
-                    curr = new Deadline(data.next(), LocalDate.parse(data.next()), LocalTime.parse(data.next()));
+                    curr = new Deadline(data.nextLine(), LocalDate.parse(data.nextLine()),
+                            LocalTime.parse(data.nextLine()));
                     break;
                 }
                 if (data.nextBoolean()) {
                     curr.markAsDone();
                 }
                 taskList.add(curr);
+                data.nextLine();
             }
             return taskList;
         }

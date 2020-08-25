@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Objects;
 
 public class DeleteCommand extends Command {
     private short id;
@@ -12,5 +13,20 @@ public class DeleteCommand extends Command {
         ui.showDelete((short) (tasks.size() - 1), tasks.getTaskAtIndex(id));
         tasks.delete(id);
         storage.updateMemory(tasks.getList());
+    }
+
+    @Override public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        DeleteCommand that = (DeleteCommand) o;
+        return id == that.id;
+    }
+
+    @Override public int hashCode() {
+        return Objects.hash(id);
     }
 }

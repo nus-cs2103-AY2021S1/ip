@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public abstract class Task {
     private final String name;
     private boolean Done = false;
@@ -29,4 +31,19 @@ public abstract class Task {
 
     public abstract String[] attributeList();
 
+    @Override public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Task task = (Task) o;
+        return Done == task.Done &&
+                Objects.equals(name, task.name);
+    }
+
+    @Override public int hashCode() {
+        return Objects.hash(name, Done);
+    }
 }

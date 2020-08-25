@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Event extends Task {
 
@@ -35,5 +36,24 @@ public class Event extends Task {
 
     @Override public String[] attributeList() {
         return new String[] { "E", getName(), date.toString(), time.toString(), String.valueOf(isDone()) };
+    }
+
+    @Override public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        Event event = (Event) o;
+        return Objects.equals(date, event.date) &&
+                Objects.equals(time, event.time);
+    }
+
+    @Override public int hashCode() {
+        return Objects.hash(super.hashCode(), date, time);
     }
 }

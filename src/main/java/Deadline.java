@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Deadline extends Task {
 
@@ -35,5 +36,24 @@ public class Deadline extends Task {
 
     @Override public String[] attributeList() {
         return new String[] { "D", getName(), dueDate.toString(), time.toString(), String.valueOf(isDone()) };
+    }
+
+    @Override public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        Deadline deadline = (Deadline) o;
+        return Objects.equals(dueDate, deadline.dueDate) &&
+                Objects.equals(time, deadline.time);
+    }
+
+    @Override public int hashCode() {
+        return Objects.hash(super.hashCode(), dueDate, time);
     }
 }
