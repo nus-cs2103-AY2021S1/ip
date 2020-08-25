@@ -1,3 +1,8 @@
+package duke.ui;
+
+import duke.tasklist.TaskList;
+import duke.tasks.Task;
+
 import java.time.LocalDate;
 import java.util.Scanner;
 
