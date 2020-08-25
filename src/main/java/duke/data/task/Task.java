@@ -1,5 +1,7 @@
 package src.main.java.duke.data.task;
 
+import java.util.Objects;
+
 /**
  * The task class that represents a task.
  *
@@ -44,11 +46,23 @@ public class Task {
         return true;
     }
 
+    public int hashCode() {
+        return this.description.length();
+    }
+
 
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return isDone == task.isDone &&
+                Objects.equals(description, task.description);
+    }
 
     public String toWriteString() { return " | "+ (isDone ? "1" : "0") + " | " + description;}
 }

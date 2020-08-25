@@ -1,10 +1,6 @@
 package src.main.java.duke.data.task;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -87,10 +83,16 @@ public class TaskList implements Iterable<Task> {
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof TaskList // instanceof handles nulls
-                && this.internalList.equals(((TaskList) other).internalList));
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TaskList tasks = (TaskList) o;
+        return Objects.equals(internalList, tasks.internalList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(internalList);
     }
 
     /**
