@@ -8,7 +8,7 @@ public class Todo extends Task {
 
     @Override
     String getSaveString() {
-        return "[T] " + super.getSaveString()  + "/";
+        return "[T] " + super.getSaveString();
     }
 
     @Override

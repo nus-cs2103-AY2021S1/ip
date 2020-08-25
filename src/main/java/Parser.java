@@ -1,32 +1,35 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Command {
+public class Parser {
 
-    private DukeList list;
+    private TaskList list;
+    private boolean isExit;
 
-    Command(DukeList list) {
+    Parser(TaskList list) {
         this.list = list;
+        this.isExit = false;
+    }
+
+    public boolean isExit() {
+        return isExit;
     }
 
     public String processCommand(String command) throws DukeException {
         Pattern pattern = Pattern.compile("^(.*?)\\s(.*?)(?:\\s/..\\s(.*))?$");
-//        String[] stringArray = command.split(" ");
-//        List<String> stringList = new ArrayList<>(Arrays.asList(stringArray));
-//        String com = stringList.remove(0);
         Matcher matcher = pattern.matcher(command);
         if (command.equals("list")) {
             return this.list.toString();
         }
         if (command.equals("hello")) {
             return "Hi! I'm Duke! Pleasure to meet you :)";
+        }
+        if (command.equals("bye")) {
+            this.isExit = true;
+            return "Bye! Hope to see you again soon!";
         }
         if (matcher.find()) {
             String com = matcher.group(1);
@@ -69,7 +72,7 @@ public class Command {
             case("deadline"):
                 if (!task.equals("")) {
                     try {
-                        return list.addItem(new Deadline(task, Command.convertDate(date)));
+                        return list.addItem(new Deadline(task, Parser.convertDate(date)));
                     } catch (DateTimeParseException e){
                         return "Please write your date in the format \"dd/MM/yyyy\"";
                     }
@@ -79,7 +82,7 @@ public class Command {
             case("event"):
                 if (!task.equals("")) {
                     try {
-                        return list.addItem(new Event(task, Command.convertDate(date)));
+                        return list.addItem(new Event(task, Parser.convertDate(date)));
                     } catch (DateTimeParseException e) {
                         return "Please write your date in the format \"dd/MM/yyyy\"";
                     }

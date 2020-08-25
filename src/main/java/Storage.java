@@ -9,12 +9,12 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FileHandler {
+public class Storage {
     private String currentDir = System.getProperty("user.dir");
     private Path dataDir = Paths.get(currentDir, "src", "main", "data");
     private Path fileDir = Paths.get(currentDir, "src", "main", "data", "list.txt");
 
-    private static final Pattern pattern = Pattern.compile("\\[([TDE])]\\s\\[(1|0)]\\s(.*?)\\s?/(?:.*?\\s(.*+))?");
+    private static final Pattern pattern = Pattern.compile("^\\[(.)]\\s\\[(.)]\\s(.*?)(?:\\s/..\\s(.*))?$");
 
     private boolean dirExists() {
         return Files.exists(dataDir);
@@ -47,7 +47,7 @@ public class FileHandler {
         }
     }
 
-    public boolean updateFile(DukeList list) {
+    public boolean updateFile(TaskList list) {
         try {
             System.out.println("Saving changes...");
             File file = getFile();
@@ -65,9 +65,9 @@ public class FileHandler {
         }
     }
 
-    public DukeList getList() {
+    public TaskList getList() {
         try {
-            DukeList list = new DukeList();
+            TaskList list = new TaskList();
             Scanner scanner = new Scanner(this.getFile());
             while (scanner.hasNextLine()) {
                 Matcher matcher = pattern.matcher(scanner.nextLine());
@@ -96,7 +96,7 @@ public class FileHandler {
             return list;
         } catch (IOException e) {
             e.printStackTrace();
-            return new DukeList();
+            return new TaskList();
         }
     }
 }

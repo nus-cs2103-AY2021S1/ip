@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class DukeList {
+public class TaskList {
 
     List<Task> list;
     int activeTasks;
     int completedTasks;
 
-    DukeList() {
+    TaskList() {
         this.list = new ArrayList<>();
         this.activeTasks = 0;
         this.completedTasks = 0;
