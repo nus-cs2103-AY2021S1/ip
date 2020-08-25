@@ -66,7 +66,9 @@ public class TaskList {
         for (Task task : tasks) {
             stringBuilder.append(task.print()).append(System.lineSeparator());
         }
-        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        if (stringBuilder.length() != 0) {
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        }
         return stringBuilder.toString();
     }
 
@@ -115,7 +117,9 @@ public class TaskList {
                     .append(task)
                     .append(System.lineSeparator());
         }
-        list.deleteCharAt(list.length() - 1);
+        if (list.length() != 0) {
+            list.deleteCharAt(list.length() - 1);
+        }
         return list.toString();
     }
 }
