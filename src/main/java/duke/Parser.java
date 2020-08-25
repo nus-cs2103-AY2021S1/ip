@@ -10,6 +10,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Class that Parses the user input given to the chatbot
+ */
+
 public class Parser {
 
   static Pattern todo = Pattern.compile("todo (.+)");
