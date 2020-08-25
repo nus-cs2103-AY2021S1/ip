@@ -19,11 +19,11 @@ public class RandomCommand extends Command {
     }
 
     /**
-     * gives wrong input exceptiom
+     * gives wrong input exception
      * @param tasks
      * @param ui
      * @param storage
-     * @throws WrongInputException thrown
+     * @throws WrongInputException is thrown
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws WrongInputException {
         throw new WrongInputException();
