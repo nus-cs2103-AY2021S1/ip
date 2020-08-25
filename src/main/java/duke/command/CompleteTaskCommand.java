@@ -27,11 +27,11 @@ public class CompleteTaskCommand extends Command {
             } else {
                 Task task = tasks.getTask(index - 1);
                 if (task.isCompleted()) {
-                    String message = "  This task has already been completed:";
+                    String message = "This task has already been completed:";
                     ui.printReply(message);
                 } else {
                     task.markAsDone();
-                    String message = "  Nice! I've marked this task as done:";
+                    String message = "Nice! I've marked this task as done:";
                     ui.printReply(message);
                 }
                 String successReply = "\t" + task;

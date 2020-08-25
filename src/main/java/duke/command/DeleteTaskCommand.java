@@ -27,8 +27,8 @@ public class DeleteTaskCommand extends Command {
             } else {
                 Task toRemove = tasks.getTask(index - 1);
                 tasks.removeTask(index - 1);
-                String successReply = "  Found it! This task has been successfully deleted: \n\t" +
-                        toRemove.toString() + "\n  You have " + tasks.getListSize() + " tasks in your list now.";
+                String successReply = "Found it! This task has been successfully deleted: \n\t" +
+                        toRemove.toString() + "\nYou have " + tasks.getListSize() + " tasks in your list now.";
                 ui.printReply(successReply);
                 storage.saveFile(tasks);
             }

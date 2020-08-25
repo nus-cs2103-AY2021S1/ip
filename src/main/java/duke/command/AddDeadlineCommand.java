@@ -33,8 +33,8 @@ public class AddDeadlineCommand extends Command {
 
             tasks.addTask(toAdd);
 
-            String successReply = "  Success! This deadline task has been added: \n\t" +
-                    toAdd.toString() + "\n   You have " + tasks.getListSize() + " tasks in your list now.";
+            String successReply = "Success! This deadline task has been added: \n\t" +
+                    toAdd.toString() + "\nYou have " + tasks.getListSize() + " tasks in your list now.";
             ui.printReply(successReply);
 
             storage.saveFile(tasks);
@@ -42,15 +42,13 @@ public class AddDeadlineCommand extends Command {
             String err = "The task date format is incorrect. \n" +
                     "Please input a valid date using the format: 'dd/mm/yyyy hh:mm'. For eg, 10/8/2020 18:00";
             throw new InvalidFunctionException(err);
-        } catch (DukeException ex) {
-            throw ex;
         }
     }
 
     public String[] retrieveDeadlineInfo(String[] parsedCommand) throws InvalidTaskException {
         String[] deadlineInfo = new String[2];
-        String description = "";
-        String time = "";
+        String description;
+        String time;
         if (parsedCommand.length == 0) {
             String err = "Your deadline task has missing arguments and has an incorrect format. " +
                     "The task cannot be created.\n" +
@@ -76,7 +74,7 @@ public class AddDeadlineCommand extends Command {
                         "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
             } else {
-                description = taskInputArray[0];
+                description = taskInputArray[0].trim();
                 time = taskInputArray[1].trim();
             }
         }

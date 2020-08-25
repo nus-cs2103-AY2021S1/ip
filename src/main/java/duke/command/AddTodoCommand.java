@@ -17,11 +17,11 @@ public class AddTodoCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String[] taskInfo = this.retrieveTodoInfo(this.parsedCommand);
-            Task toAdd = new Todo(taskInfo[0]);
+            Task toAdd = new Todo(taskInfo[0].trim());
             tasks.addTask(toAdd);
 
-            String successReply = "  Success! This todo task has been added: \n\t" +
-                    toAdd.toString() + "\n   You have " + tasks.getListSize() + " tasks in your list now.";
+            String successReply = "Success! This todo task has been added: \n\t" +
+                    toAdd.toString() + "\nYou have " + tasks.getListSize() + " tasks in your list now.";
             ui.printReply(successReply);
 
             storage.saveFile(tasks);

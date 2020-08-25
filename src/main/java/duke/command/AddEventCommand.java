@@ -33,8 +33,8 @@ public class AddEventCommand extends Command {
 
             tasks.addTask(toAdd);
 
-            String successReply = "  Success! This event task has been added: \n\t" +
-                    toAdd.toString() + "\n   You have " + tasks.getListSize() + " tasks in your list now.";
+            String successReply = "Success! This event task has been added: \n\t" +
+                    toAdd.toString() + "\nYou have " + tasks.getListSize() + " tasks in your list now.";
             ui.printReply(successReply);
 
             storage.saveFile(tasks);
@@ -74,7 +74,7 @@ public class AddEventCommand extends Command {
                         "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
             } else {
-                description = taskInputArray[0];
+                description = taskInputArray[0].trim();
                 time = taskInputArray[1].trim();
             }
         }
