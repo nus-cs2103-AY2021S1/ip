@@ -1,5 +1,10 @@
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 public class Duke {
 
@@ -33,12 +38,37 @@ public class Duke {
         formatResponse(lst);
     }
 
+    private static void formatListByDate(Date date) {
+        ArrayList<String> lst = new ArrayList<>();
+        lst.add("Here are the tasks in your list that occur on " + (new SimpleDateFormat("MMM d yyyy")).format(date) + ":");
+        int i = 1;
+        for (Task task: tasks) {
+            if (task.isOccuringOn(date)) {
+                lst.add((i++) + ". " + task.toString());
+            }
+        }
+        formatResponse(lst);
+    }
+
     private static void formatDoneTask(Task task) {
         formatResponse("Nice! I've marked this task as done:", INDENT + task.toString());
     }
 
     private static void formatDeletedTask(Task task) {
         formatResponse("Noted. I've removed this task: ", INDENT + task, "Now you have " + (tasks.size() - 1) + " task" + (tasks.size() == 2 ? "" : "s") + " in the list.");
+    }
+
+    // adapted from https://stackoverflow.com/questions/4024544/how-to-parse-dates-in-multiple-formats-using-simpledateformat
+    private static Date parseDate(String str) {
+        List<String> formatStrings = Arrays.asList("yyyy-M-dd", "dd/M/yyyy HHmm", "dd/M/yyyy");
+
+        for (String formatString : formatStrings) {
+            try {
+                return new SimpleDateFormat(formatString).parse(str);
+            } catch (ParseException e) {}
+        }
+
+        return null;
     }
 
     private static void addTask(String display) {
@@ -56,7 +86,11 @@ public class Duke {
                 } else if (display.substring(9, idx).isBlank()) {
                     throw new TaskException(TaskType.DEADLINE, "description", "cannot be empty.");
                 } else {
-                    tasks.add(new Deadline(display.substring(9, idx), display.substring(idx + 5)));
+                    if (parseDate(display.substring(idx + 5)) == null) {
+                        throw new TaskException(TaskType.DEADLINE, "time", "format is wrong.");
+                    } else {
+                        tasks.add(new Deadline(display.substring(9, idx), parseDate(display.substring(idx + 5))));
+                    }
                 }
             } else if (display.length() >= 5 && display.substring(0, 5).equals("event")) {
                 int idx = display.indexOf(" /at ");
@@ -65,7 +99,11 @@ public class Duke {
                 } else if (display.substring(6, idx).isBlank()) {
                     throw new TaskException(TaskType.EVENT, "description", "cannot be empty.");
                 } else {
-                    tasks.add(new Event(display.substring(6, idx), display.substring(idx + 5)));
+                    if (parseDate(display.substring(idx + 5)) == null) {
+                        throw new TaskException(TaskType.EVENT, "time", "format is wrong.");
+                    } else {
+                        tasks.add(new Event(display.substring(6, idx), parseDate(display.substring(idx + 5))));
+                    }
                 }
             } else {
                 throw new DukeException("I don't know what that means");
@@ -101,6 +139,12 @@ public class Duke {
                     tasks.remove(idx);
                 } catch (IndexOutOfBoundsException ex) {
                     System.out.println("Task index is empty / out of bounds.");
+                }
+            } else if (display.length() >= 12 && display.substring(0, 12).equals("Tasks due on")){
+                if (parseDate(display.substring(13)) == null) {
+                    formatResponse("Time is of the wrong format");
+                } else {
+                    formatListByDate(parseDate(display.substring(13)));
                 }
             } else if (!display.equals("bye")) {
                 addTask(display);

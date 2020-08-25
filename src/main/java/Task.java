@@ -1,3 +1,5 @@
+import java.util.Date;
+
 enum TaskType {
     TODO{
         @Override
@@ -37,6 +39,10 @@ public abstract class Task {
 
     public void markAsDone() {
         isDone = true;
+    }
+
+    public boolean isOccuringOn(Date date) {
+        return false;
     }
 
     @Override
