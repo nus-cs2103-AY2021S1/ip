@@ -1,4 +1,4 @@
-package java;
+package main.java;
 
 import main.java.commands.Command;
 import main.java.exceptions.DukeException;

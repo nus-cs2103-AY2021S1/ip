@@ -36,4 +36,14 @@ public class AddCommand extends Command {
         }
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof AddCommand) {
+            AddCommand command = (AddCommand) obj;
+            return (type.equals(command.type))&&(description.equals(command.description))
+                    &&(date == date||date.equals(command.date));
+        } else {
+            return false;
+        }
+    }
 }
