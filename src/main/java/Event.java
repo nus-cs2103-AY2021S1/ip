@@ -1,15 +1,16 @@
 public class Event extends Task {
 
-    private String duration;
-
     public Event (String task, String duration) {
-        super(task);
-        this.duration = duration;
+        super(task, Tasktype.EVENT, duration);
+    }
+
+    public Event (String task, String duration, boolean isDone) {
+        super(task, Tasktype.EVENT, duration, isDone);
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.duration);
+        return String.format("%s (at: %s)", super.toString(), this.duration);
     }
 
 }

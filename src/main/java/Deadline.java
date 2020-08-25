@@ -1,15 +1,17 @@
 public class Deadline extends Task {
 
-    private String date;
+    public Deadline(String task, String duration) {
+        super(task, Tasktype.DEADLINE, duration);
+    }
 
-    public Deadline(String task, String date) {
-        super(task);
-        this.date = date;
+    public Deadline(String task, String duration, boolean isDone) {
+        super(task, Tasktype.EVENT, duration, isDone);
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), date);
+        return String.format("%s (by: %s)", super.toString(), this.duration);
+
     }
 
 }
