@@ -11,6 +11,10 @@ public class TaskList {
         this.storage = storage;
     }
 
+    public ArrayList<Task> getList() {
+        return listOfTasks;
+    }
+
     // Add Tasks to list
     public void addToList(Task task) {
         listOfTasks.add(task);
