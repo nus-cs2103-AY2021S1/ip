@@ -1,3 +1,6 @@
+/**
+ * A command class that represents a interpreted command from the user.
+ */
 public class Command {
     protected String name;
     protected Integer index;
@@ -32,6 +35,10 @@ public class Command {
         this.errorMessage = message;
     }
 
+    /**
+     * Outputs the Command as a String.
+     * @return String representing the deadline.
+     */
     @Override
     public String toString() {
         return String.format("Command: %s %s %s %s", name, index, task, errorMessage);
