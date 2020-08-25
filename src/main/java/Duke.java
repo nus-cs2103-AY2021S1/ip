@@ -83,9 +83,7 @@ public class Duke {
 
      if a valid file exists, Duke simply notifies the user that it is currently reading from the file
     */
-    private static void createFile() {
-
-        File taskFile = new File("src/main/java/tasks.txt");
+    private static void createFile(File taskFile) {
 
         try {
             if (taskFile.createNewFile()) {
@@ -102,7 +100,32 @@ public class Duke {
                 System.out.println("Duke is currently reading the file from: " + taskFile.getAbsolutePath());
                 System.out.println(LINE);
             }
-        } catch (IOException e) {
+        }
+
+        // exception in case something goes wrong
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    // this function is called whenever the list of tasks is updated
+    // this function then updates the respective tasks.txt file to ensure that Duke will remember the list of tasks
+    // (in the event Duke stops running and is rerun)
+    private static void updateFile(ArrayList<Task> tasks, File file) {
+
+        try {
+            // create a FileWriter object used by Duke to write to the taskFile
+            FileWriter writeTaskFile = new FileWriter(file);
+            for (Task task : tasks) {
+                writeTaskFile.write(task.toString() + System.lineSeparator());
+
+            }
+            writeTaskFile.close();
+
+        }
+        // exception in case something goes wrong
+        catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -116,8 +139,10 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        // create a new file object needed for Duke to read from and write to
+        File taskFile = new File("src/main/java/tasks.txt");
         greeting();
-        createFile();
+        createFile(taskFile);
 
         // this field keeps track of the tasks given to Duke
         ArrayList<Task> tasks = new ArrayList<>();
@@ -157,6 +182,7 @@ public class Duke {
                         throw new InvalidNumberFromDoneCommandException();
                     }
                     printDone(tasks, taskNumber - 1);
+                    updateFile(tasks, taskFile);
                     continue;
                 }
 
@@ -194,6 +220,7 @@ public class Duke {
                         Event e = new Event(split[0], split[1]);
                         addTask(e, tasks);
                         sc.reset();
+                        updateFile(tasks, taskFile);
                         continue;
                     }
 
@@ -236,6 +263,7 @@ public class Duke {
                         Deadline e = new Deadline(split[0], split[1]);
                         addTask(e, tasks);
                         sc.reset();
+                        updateFile(tasks, taskFile);
                         continue;
                     }
                 }
@@ -268,6 +296,7 @@ public class Duke {
                     }
                     ToDo t = new ToDo(task);
                     addTask(t, tasks);
+                    updateFile(tasks, taskFile);
                     continue;
                 }
 
@@ -291,6 +320,7 @@ public class Duke {
                         throw new InvalidNumberFromDoneCommandException();
                     }
                     deleteTask(tasks, taskNumber - 1);
+                    updateFile(tasks, taskFile);
                 }
 
                 catch (MissingNumberFromCommandException e) {
