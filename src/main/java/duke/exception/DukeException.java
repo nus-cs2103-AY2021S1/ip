@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class DukeException extends RuntimeException {
-    DukeException(String msg) {
+    public DukeException(String msg) {
         super(":( \n\tI dont understand this... \n\t" + msg);
     }
 }

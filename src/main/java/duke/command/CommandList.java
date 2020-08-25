@@ -1,3 +1,5 @@
+package duke.command;
+
 public enum CommandList {
     bye,
     exit,

@@ -1,3 +1,11 @@
+package duke.util;
+
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+
 public class Parser {
     public static Command parse(String cmd) {
         int idx = cmd.indexOf(' ');
