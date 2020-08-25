@@ -8,7 +8,7 @@ public class Ui {
      * Prints the greeting message and prompt when Duke is launched.
      */
     public void greet() {
-        print("Hello! I'm duke.Duke", "What can I do for you?");
+        print("Hello! I'm Duke", "What can I do for you?");
     }
 
     public void showLoadingError() {

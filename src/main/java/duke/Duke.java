@@ -9,6 +9,7 @@ import duke.ui.Ui;
 import java.util.Scanner;
 
 public class Duke {
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
