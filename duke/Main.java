@@ -1,18 +1,14 @@
-package Duke;
+package duke;
 
-import Duke.commands.ExitCommand;
-import Duke.parser.Parser;
-import Duke.storage.StorageFile;
-import Duke.storage.StorageFile.InvalidStorageFilePathException;
-import Duke.storage.StorageFile.StorageOperationException;
-import Duke.ui.TextUi;
-import Duke.data.Duke;
-import Duke.data.task.Task;
-import Duke.commands.CommandResult;
-import Duke.commands.Command;
-
-import java.util.Collections;
-import java.util.List;
+import duke.commands.ExitCommand;
+import duke.parser.Parser;
+import duke.storage.StorageFile;
+import duke.storage.StorageFile.InvalidStorageFilePathException;
+import duke.storage.StorageFile.StorageOperationException;
+import duke.ui.TextUi;
+import duke.data.Duke;
+import duke.commands.CommandResult;
+import duke.commands.Command;
 
 
 /**

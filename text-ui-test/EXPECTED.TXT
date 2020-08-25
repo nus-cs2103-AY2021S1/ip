@@ -5,46 +5,42 @@
    ----------------------------
    Got it. I've added this task:
      [T][✘] borrow book
-   Now you have 2 tasks in the list.
-   ----------------------------
-   ----------------------------
-   Here are the tasks in your list:
-   1.[T][✘] borrow book
-   2.[T][✘] borrow book
-   ----------------------------
-   ----------------------------
-   Got it. I've added this task:
-     [D][✘] deadline return book (by: Sunday)
-   Now you have 3 tasks in the list.
-   ----------------------------
-   ----------------------------
-   Got it. I've added this task:
-     [E][✘] event project meeting (at: Mon 2-4pm)
-   Now you have 4 tasks in the list.
-   ----------------------------
-   ----------------------------
-   Got it. I've added this task:
-     [D][✘] deadline return book (by: Sunday)
-   Now you have 5 tasks in the list.
-   ----------------------------
-   ----------------------------
-   Got it. I've added this task:
-     [E][✘] event project meeting (at: Mon 2-4pm)
    Now you have 6 tasks in the list.
    ----------------------------
    ----------------------------
    Here are the tasks in your list:
    1.[T][✘] borrow book
    2.[T][✘] borrow book
-   3.[D][✘] deadline return book (by: Sunday)
-   4.[E][✘] event project meeting (at: Mon 2-4pm)
-   5.[D][✘] deadline return book (by: Sunday)
-   6.[E][✘] event project meeting (at: Mon 2-4pm)
+   3.[E][✘] event project meeting(at: Mon 2-4pm)
+   4.[D][✘] deadline return book(by: Sunday)
+   5.[E][✘] event project meeting(at: Mon 2-4pm)
+   6.[T][✘] borrow book
+   ----------------------------
+   ----------------------------
+   Got it. I've added this task:
+     [E][✘] event mark homework (at: 2019-02-12 18:00)
+   Now you have 7 tasks in the list.
+   ----------------------------
+   ----------------------------
+   Got it. I've added this task:
+     [D][✘] deadline do homework (by: 2019-02-12 18:00)
+   Now you have 8 tasks in the list.
+   ----------------------------
+   ----------------------------
+   Here are the tasks in your list:
+   1.[T][✘] borrow book
+   2.[T][✘] borrow book
+   3.[E][✘] event project meeting(at: Mon 2-4pm)
+   4.[D][✘] deadline return book(by: Sunday)
+   5.[E][✘] event project meeting(at: Mon 2-4pm)
+   6.[T][✘] borrow book
+   7.[E][✘] event mark homework (at: 2019-02-12 18:00)
+   8.[D][✘] deadline do homework (by: 2019-02-12 18:00)
    ----------------------------
    ----------------------------
    Noted. I've removed this task:
-   [D][✘] deadline return book (by: Sunday)
-   Now you have 5 tasks in the list.
+   [E][✘] event project meeting(at: Mon 2-4pm)
+   Now you have 7 tasks in the list.
    ----------------------------
    Bye. Hope to see you again soon!
    ----------------------------

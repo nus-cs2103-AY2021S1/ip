@@ -12,8 +12,12 @@ then
     rm ACTUAL.TXT
 fi
 
-# compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../Duke/Task.java ../Duke/Event.java ../Duke/Deadline.java ../Duke/Todo.java ../Duke/DukeException.java ../Duke/Duke.java
+
+if
+  ! (
+    find ../duke -name "*.java" >sources.txt
+    javac -cp ../src -Xlint:none -d ../bin @sources.txt
+  )
 then
     echo "********** BUILD FAILURE **********"
     exit 1

@@ -1,10 +1,10 @@
-package Duke.storage;
+package duke.storage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Duke.data.Duke;
-import Duke.data.task.Task;
+import duke.data.Duke;
+import duke.data.task.Task;
 
 public class DukeEncoder {
     /**
