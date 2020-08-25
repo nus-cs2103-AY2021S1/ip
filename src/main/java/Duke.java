@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 
 public class Duke {
     public static final String LINE = "_______________________________________\n";
-    public static ArrayList<Task> taskList = new ArrayList<>();
+    public static TaskList taskList = new TaskList();
     public static File file;
     public static FileWriter writer;
 

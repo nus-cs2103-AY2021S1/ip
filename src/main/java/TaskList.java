@@ -24,4 +24,8 @@ public class TaskList {
     public Task get(int taskNum) {
         return this.taskList.get(taskNum - 1);
     }
+
+    public int size() {
+        return this.taskList.size();
+    }
 }
