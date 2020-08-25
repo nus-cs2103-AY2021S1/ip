@@ -32,15 +32,14 @@ public class Storage {
                 throw new DukeIOException(strings.getString("error.dir"), directoryPath);
             }
         }
-
+        Storage storage = new Storage();
+        storage.path = dirPath.normalize() + "/" + fileName;
         try {
-            Storage storage = new Storage();
-            storage.fileIn = new FileInputStream(dirPath.normalize() + "/tasks.ser");
+            storage.fileIn = new FileInputStream(storage.path);
             storage.objIn = new ObjectInputStream(storage.fileIn);
-            storage.path = dirPath.normalize() + "/tasks.ser";
             return storage;
-        } catch (IOException e) {
-            throw new DukeIOException(e.getMessage(), directoryPath);
+        } catch (IOException ignored) {
+            return storage;
         }
 
     }
@@ -50,6 +49,7 @@ public class Storage {
 
         //Solution below adapted from https://www.javatpoint.com/serialization-in-java
         try {
+            if (objIn == null) return new ArrayList<>();
             ArrayList<Task> ret = (ArrayList<Task>) objIn.readObject();
 
             objIn.close();
