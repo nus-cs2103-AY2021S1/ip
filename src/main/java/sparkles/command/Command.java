@@ -1,3 +1,10 @@
+package sparkles.command;
+
+import sparkles.SparklesException;
+import sparkles.task.TaskList;
+import sparkles.util.Storage;
+import sparkles.util.Ui;
+
 abstract public class Command {
 
     protected final String command;

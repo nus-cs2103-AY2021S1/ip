@@ -1,3 +1,11 @@
+package sparkles.util;
+
+import sparkles.command.*;
+import sparkles.command.addcommand.AddCommand;
+import sparkles.command.addcommand.AddDeadlineCommand;
+import sparkles.command.addcommand.AddEventCommand;
+import sparkles.command.addcommand.AddTodoCommand;
+
 public class Parser {
 
     public static Command parse(String command) {

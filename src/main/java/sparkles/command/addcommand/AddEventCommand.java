@@ -1,3 +1,13 @@
+package sparkles.command.addcommand;
+
+import sparkles.SparklesException;
+import sparkles.command.Command;
+import sparkles.task.Event;
+import sparkles.task.Task;
+import sparkles.task.TaskList;
+import sparkles.util.Storage;
+import sparkles.util.Ui;
+
 public class AddEventCommand extends Command {
 
     public AddEventCommand(String command) {
@@ -24,7 +34,7 @@ public class AddEventCommand extends Command {
         } catch (Exception ex) {
             throw new SparklesException("     OOPS!! The description and time of an Event cannot be empty!");
         } finally {
-            storage.updateFile(taskList.storage);
+            storage.updateFile(taskList.getStorage());
         }
     }
 }

@@ -1,3 +1,11 @@
+package sparkles.command;
+
+import sparkles.SparklesException;
+import sparkles.task.Task;
+import sparkles.task.TaskList;
+import sparkles.util.Storage;
+import sparkles.util.Ui;
+
 public class DoneCommand extends Command {
 
     public DoneCommand(String command) {
@@ -10,14 +18,14 @@ public class DoneCommand extends Command {
 
         try {
             index = Integer.parseInt(command.substring(5));
-            Task task = taskList.storage.get(index - 1);
+            Task task = taskList.getStorage().get(index - 1);
             task.markAsDone();
             ui.print("     Nice! I have marked this task as done :-)");
         } catch (Exception ex) {
             if (ex instanceof StringIndexOutOfBoundsException) {
                 throw new SparklesException("     OOPS!! Task in the list to be marked as done is not specified!");
             } else {
-                if(taskList.storage.isEmpty()) {
+                if(taskList.getStorage().isEmpty()) {
                     throw new SparklesException( "     OOPS!! Task list is empty!");
 
                 } else {
@@ -25,7 +33,7 @@ public class DoneCommand extends Command {
                 }
             }
         } finally {
-            storage.updateFile(taskList.storage);
+            storage.updateFile(taskList.getStorage());
         }
     }
 }

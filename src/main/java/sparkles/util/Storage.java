@@ -1,3 +1,11 @@
+package sparkles.util;
+
+import sparkles.SparklesException;
+import sparkles.task.Deadline;
+import sparkles.task.Event;
+import sparkles.task.Task;
+import sparkles.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

@@ -1,3 +1,5 @@
+package sparkles.task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,6 +8,10 @@ public class TaskList {
     protected List<Task> storage = new ArrayList<>();
 
     public TaskList() {
+    }
+
+    public List<Task> getStorage() {
+        return storage;
     }
 
     public TaskList(List<Task> storage) {

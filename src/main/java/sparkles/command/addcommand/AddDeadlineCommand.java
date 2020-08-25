@@ -1,3 +1,13 @@
+package sparkles.command.addcommand;
+
+import sparkles.SparklesException;
+import sparkles.command.Command;
+import sparkles.task.Deadline;
+import sparkles.task.Task;
+import sparkles.task.TaskList;
+import sparkles.util.Storage;
+import sparkles.util.Ui;
+
 public class AddDeadlineCommand extends Command {
 
     public AddDeadlineCommand(String command) {
@@ -24,7 +34,7 @@ public class AddDeadlineCommand extends Command {
         } catch (Exception ex) {
             throw new SparklesException("     OOPS!! The description and deadline of a Deadline cannot be empty!");
         } finally {
-            storage.updateFile(taskList.storage);
+            storage.updateFile(taskList.getStorage());
         }
     }
 

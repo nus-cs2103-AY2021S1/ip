@@ -1,6 +1,15 @@
+package sparkles.command.addcommand;
+
+import sparkles.SparklesException;
+import sparkles.command.Command;
+import sparkles.task.TaskList;
+import sparkles.util.Parser;
+import sparkles.util.Storage;
+import sparkles.util.Ui;
+
 public class AddCommand extends Command {
 
-    protected AddCommand(String command) {
+    public AddCommand(String command) {
         super(command);
     }
 

@@ -1,3 +1,11 @@
+package sparkles;
+
+import sparkles.command.Command;
+import sparkles.task.TaskList;
+import sparkles.util.Parser;
+import sparkles.util.Storage;
+import sparkles.util.Ui;
+
 public class Sparkles {
 
     private final Storage storage;
