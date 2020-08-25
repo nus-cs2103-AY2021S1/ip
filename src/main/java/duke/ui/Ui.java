@@ -129,7 +129,7 @@ public class Ui {
      * @param tasks The list of tasks that fulfill the requirement
      */
     public static void showFindResult(TaskList tasks) {
-        System.out.println("Here is your search result: ");
+        System.out.println("Here are the matching task(s) in your list: ");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println(tasks.get(i));
         }
