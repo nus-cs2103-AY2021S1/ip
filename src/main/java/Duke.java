@@ -7,10 +7,19 @@ import Task.TaskList;
 
 public class Duke {
 
+    /** The storage assigned to Duke **/
     private Storage storage;
+
+    /** The TaskList assigned to Duke **/
     private TaskList tasks;
+
+    /** The Ui interaction handler **/
     private Ui ui;
 
+    /**
+     * Initializes Duke
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,6 +31,7 @@ public class Duke {
         }
     }
 
+    /** Run the whole program **/
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -40,6 +50,7 @@ public class Duke {
         }
     }
 
+    /** The main program of all file **/
     public static void main(String[] args) {
         new Duke("data").run();
     }

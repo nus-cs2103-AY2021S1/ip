@@ -10,6 +10,7 @@ public class ExitCommand extends Command {
         super(command);
     }
 
+    /** Executes the command **/
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
@@ -20,11 +21,13 @@ public class ExitCommand extends Command {
         }
     }
 
+    /** Check if the current command is an exit command **/
     @Override
     public boolean isExit(){
         return true;
     }
 
+    /** Override the equals method from Object to handle ExitCommand **/
     @Override
     public boolean equals(Object o){
         if (o == this) {

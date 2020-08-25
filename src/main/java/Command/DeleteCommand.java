@@ -12,6 +12,7 @@ public class DeleteCommand extends Command {
         super(command);
     }
 
+    /** Executes the command **/
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MissingSpecifiedDeleteError ,WrongIndexError{
         try {
@@ -24,11 +25,13 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /** Check if the current command is an exit command **/
     @Override
     public boolean isExit(){
         return false;
     }
 
+    /** Override the equals method from Object to handle DeleteCommand **/
     @Override
     public boolean equals(Object o){
         if (o == this) {

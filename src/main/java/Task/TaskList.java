@@ -5,32 +5,50 @@ import Exceptions.*;
 import java.util.ArrayList;
 
 public class TaskList {
+
+    /** The list of tasks **/
     private final ArrayList<Task> tasks;
+
+    /** The task that have just been added or deleted or done from the list **/
     private final Task addedOrDeletedTask;
 
+    /** Initialize TaskList **/
     public TaskList() {
         this.tasks = new ArrayList<>();
         this.addedOrDeletedTask = null;
     }
 
+    /**
+     * Initializes the tasklist
+     * @param tasks
+     * @throws DukeException
+     */
     public TaskList(ArrayList<Task> tasks) throws DukeException {
 
         this.tasks = tasks;
         this.addedOrDeletedTask = null;
     }
 
+    /**
+     * Initializes the tasklist
+     * @param tasks
+     * @param addedOrDeletedTask
+     */
     public TaskList(ArrayList<Task> tasks , Task addedOrDeletedTask) {
         this.tasks = tasks;
         this.addedOrDeletedTask = addedOrDeletedTask;
     }
 
+    /** Get the arraylist of tasks inside the TaskList **/
     public ArrayList<Task> getTaskList(){
         return this.tasks;
     }
 
+    /** Get the number of tasks currently from the list **/
     public int taskSize(){
         return this.tasks.size();
     }
+
 
     private static Task assignTask(String type, String name) throws NoTaskException, InvalidCommandException, NoDateException, WrongDateTimeFormatException {
         try {
@@ -76,6 +94,7 @@ public class TaskList {
         }
     }
 
+    /** Get the task that has just been deleted or added or done from the list **/
     public Task getAddedOrDeletedTask(){
         return this.addedOrDeletedTask;
     }
@@ -102,6 +121,13 @@ public class TaskList {
         return curr;
     }
 
+    /**
+     * Delete the task from the list
+     * @param task
+     * @return
+     * @throws WrongIndexError
+     * @throws MissingSpecifiedDeleteError
+     */
     public TaskList delete(String task) throws WrongIndexError, MissingSpecifiedDeleteError{
         int num = 0;
         ArrayList<Task> tempTasks = this.tasks;
@@ -121,6 +147,15 @@ public class TaskList {
 
     }
 
+    /**
+     * Add the specified task to the list
+     * @param task
+     * @return
+     * @throws NoTaskException
+     * @throws InvalidCommandException
+     * @throws NoDateException
+     * @throws WrongDateTimeFormatException
+     */
     public TaskList add(String task) throws NoTaskException, InvalidCommandException, NoDateException, WrongDateTimeFormatException {
         String firstWord = task.toLowerCase().contains("todo") ? "todo"
                 : task.toLowerCase().contains("deadline") ? "deadline"
@@ -144,6 +179,12 @@ public class TaskList {
         return new TaskList(tempTasks, curr);
     }
 
+    /**
+     * Set the specified task to done
+     * @param done
+     * @return
+     * @throws WrongIndexError
+     */
     public TaskList done(String done) throws WrongIndexError {
 
         try {

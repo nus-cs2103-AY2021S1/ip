@@ -21,6 +21,7 @@ public class DoneCommand extends Command {
 
     }
 
+    /** Check if the current command is an exit command **/
     @Override
     public boolean isExit(){
         return false;

@@ -21,31 +21,36 @@ public class Ui {
         return new Scanner(System.in).nextLine();
     }
 
-
+    /** Show loading error to the user **/
     public void showLoadingError(){
         System.out.println("No task found, please blablbalba");
     }
 
+    /** Show error message to the user **/
     public void showError(String message){
         System.out.println(message);
     }
 
+    /** Show line to the user **/
     public void showLine() {
         System.out.println("________________________________________________");
     }
 
+    /** Show added task to the user **/
     public void showAddedTask(int taskSize, Task added){
         System.out.println("Got it. I've added this task: \n"
                 + " " + added + "\n"
                 + "Now you have " + taskSize + " tasks in the list.");
     }
 
+    /** Show deleted task to the user **/
     public void showDeletedTask(int taskSize, Task deleted){
         System.out.println("Noted. I've removed this task: \n" +
                 "  " + deleted + "\n" +
                 "Now you have " + taskSize + " tasks in the list.");
     }
 
+    /** Show the current tasks to the user **/
     public void showTasks(TaskList tasks){
         int i = 1;
         System.out.println("Here are the tasks in your list:");
@@ -55,11 +60,13 @@ public class Ui {
         }
     }
 
+    /** Show done tasks to the user **/
     public void showDoneTask(Task done){
         System.out.println("Nice! I've marked this task as done: \n"
                 + done);
     }
 
+    /** Show goodbye message to the customer **/
     public void showGoodBye(){
         System.out.println("Bye. Hope to see you again soon!");
     }

@@ -12,8 +12,10 @@ abstract public class Command {
         this.command = command;
     }
 
+    /** Executes the command **/
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
+    /** Check if the current command is an exit command **/
     public abstract boolean isExit();
 
 }

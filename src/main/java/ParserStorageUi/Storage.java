@@ -1,5 +1,4 @@
 package ParserStorageUi;
-
 import Exceptions.DukeException;
 import Task.*;
 import java.io.*;
@@ -10,15 +9,22 @@ import java.util.ArrayList;
 
 public class Storage {
 
+    /** The file path of the folder of duke.txt **/
     private final String filePath;
-    //private final BufferedReader br;
+
+    /** The object file path for duke.txt **/
     private Path file;
 
+    /**
+     * Initializes Storage with filePath as the parameter
+     * @param filePath
+     */
     public Storage(String filePath){
         this.filePath = filePath;
         initiateFile();
     }
 
+    /** Initiate the file **/
     private void initiateFile(){
         try{
             if (Files.notExists(Paths.get(filePath))){
@@ -34,7 +40,7 @@ public class Storage {
         }
     }
 
-
+    /** Load all the tasks from the save file to ArrayList<Task> **/
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> temp = new ArrayList<>();
         try {
@@ -57,13 +63,13 @@ public class Storage {
                         break;
                 }
             }
-            //br.close();
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
         return temp;
     }
 
+    /** Put back all tasks from ArrayList to the save file (duke.txt) **/
     public void putToDatabase(ArrayList<Task> tasks) throws DukeException {
         try {
 

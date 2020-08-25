@@ -10,19 +10,18 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
 
+    /** The deadline of the task **/
     private final LocalDateTime deadline;
 
+    /**
+     * Initializes Deadline task
+     * @param name
+     * @param isDone
+     * @param end
+     * @throws WrongDateTimeFormatException
+     */
     public Deadline(String name, boolean isDone, String end) throws WrongDateTimeFormatException {
         super(name, isDone);
-        /*String rest = end.substring(end.indexOf("/") + 1);
-        String rest1 = rest.substring(rest.indexOf("/" ) + 6);
-
-        this.deadline = LocalDate.of(Integer.parseInt(rest.substring(3,7)) ,
-                Integer.parseInt(rest.substring(0, rest.indexOf("/"))) ,
-                Integer.parseInt(end.substring(0,1)) ).atTime(
-                Integer.parseInt(rest1.substring(0,3),
-                        Integer.parseInt(rest1.substring(3));
-        );*/
         try {
             this.deadline = LocalDate.parse(end.substring(0, 10)).atTime(
                     Integer.parseInt(end.substring(11, 13)),
@@ -33,26 +32,36 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Initializes deadline task
+     * @param name
+     * @param isDone
+     * @param deadline
+     */
     public Deadline(String name, boolean isDone, LocalDateTime deadline) {
         super(name,isDone);
         this.deadline = deadline;
     }
 
+    /** Set the current task to done **/
     @Override
     public Task setToTrue(){
         return new Deadline(this.name, true, this.deadline);
     }
 
+    /** Get the type of the current task **/
     @Override
     public String getType(){
         return "D";
     }
 
+    /** Get the deadline of the current task **/
     @Override
     public String getEnd() {
         return this.deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
+    /** Convert the task to string **/
     @Override
     public String toString(){
         return isDone
@@ -60,6 +69,7 @@ public class Deadline extends Task {
                 : "[D][✗] " + this.getName() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")";
     }
 
+    /** Override the equals from Object so that it can be used to handle deadline **/
     @Override
     public boolean equals(Object o){
         if (o == this){
