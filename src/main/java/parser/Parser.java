@@ -43,8 +43,7 @@ public class Parser {
                 //Saves the task list into the hard drive and terminates the program.
                 this.storage.save(this.tasks);
                 this.isExit = true;
-            }
-            else if (fullInput.startsWith("todo ")) {
+            } else if (fullInput.startsWith("todo ")) {
                 //Checks for validity of input
                 if (fullInput.length() <= 5) {
                     throw new DescriptionException("todo");
