@@ -1,7 +1,133 @@
+import java.nio.file.Files;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class Duke {
+
+    // Loop through every task and transform it into a string
+    public static String listToString(ArrayList<Task> taskList) {
+        String taskListStr = "";
+        for (Task t : taskList) {
+            taskListStr += t.toString() + "\n";
+        }
+        return taskListStr;
+    }
+
+    public static void saveToFile(String output) {
+        // Check if data folder exists, if not create
+        Path folderPath = Paths.get("..", "..", "..", "data");
+        if (!Files.exists(folderPath)) {
+            File folderDir = new File(folderPath.toString());
+            folderDir.mkdir();
+        }
+
+        // Get OS-independent file path to text file
+        String filePath = Paths.get("..", "..", "..", "data", "Tasklist.txt")
+                .toString();
+
+        // Uncomment for testing
+//        String filePath = Paths.get("..","data", "Tasklist.txt")
+//                .toString();
+
+        try {
+            FileWriter myFile = new FileWriter(filePath);
+            myFile.write(output); // Output is already all tasks in a string
+            myFile.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static ArrayList<Task> readFromFile() {
+        // Check if data folder exists, if not create
+        Path folderPath = Paths.get("..", "..", "..", "data");
+        if (!Files.exists(folderPath)) {
+            File folderDir = new File(folderPath.toString());
+            folderDir.mkdir();
+        }
+
+        // Initialise ArrayList to return
+        ArrayList<Task> savedTasks = new ArrayList<Task>();
+
+        // Check if file exists, if return empty list
+        Path filePath = Paths.get("..", "..", "..", "data", "Tasklist.txt");
+        if (!Files.exists(filePath)) {
+            return savedTasks;
+        }
+
+        // Uncomment for testing
+//        Path filePath = Paths.get("..", "data", "Tasklist.txt");
+//        if (!Files.exists(filePath)) {
+//            return savedTasks;
+//        }
+
+        try {
+            File myFile = new File(filePath.toString());
+            Scanner taskReader = new Scanner(myFile);
+
+            // Keep reading new line until file end
+            while (taskReader.hasNextLine()) {
+                String taskString = taskReader.nextLine();
+
+                // Only work with non empty lines
+                if (taskString != "") {
+                    switch (taskString.charAt(1)) {
+                    case 'T':
+                        boolean isDone = taskString.split("  ")[0]
+                                .substring(3)
+                                .equals("[Done]");
+                        String description = " " + taskString.split("  ")[1];
+                        Task t = new ToDo(description);
+                        if (isDone) {
+                            t.setDone();
+                        }
+                        savedTasks.add(t);
+                        break;
+                    case 'D':
+                        isDone = taskString.split("  ")[0]
+                                .substring(3)
+                                .equals("[Done]");
+                        description = " " + taskString.split("  ")[1]
+                                .split("\\s[(]by:\\s")[0];
+                        String by = taskString.split("  ")[1]
+                                .split("\\s[(]by:\\s")[1];
+                        Deadline d = new Deadline(description, by);
+                        if (isDone) {
+                            d.setDone();
+                        }
+                        savedTasks.add(d);
+                        break;
+                    case 'E':
+                        isDone = taskString.split("  ")[0]
+                                .substring(3)
+                                .equals("[Done]");
+                        String[] stringSplit = taskString.split("  ")[1]
+                                .split("\\s[(]at:\\s");
+                        description = " " + stringSplit[0];
+                        String start = stringSplit[1].split("-")[0];
+                        String end = stringSplit[1].split("-")[1];
+                        Event e = new Event(description, start, end);
+                        if (isDone) {
+                            e.setDone();
+                        }
+                        savedTasks.add(e);
+                        break;
+                    }
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return savedTasks;
+    }
 
     public static boolean isEmptyInput(String input) {
         return input.isEmpty();
@@ -46,7 +172,10 @@ public class Duke {
         String input;
 
         // Initialise ArrayList to store tasks from user
-        ArrayList<Task> userTasks = new ArrayList<Task>();
+        ArrayList<Task> userTasks;
+
+        // Read tasks stored in hard drive if any
+        userTasks = readFromFile();
 
         // Start chat
         while (true) {
@@ -78,6 +207,10 @@ public class Duke {
                                 + "    As you wish Sire. I have marked this task as done:\n"
                                 + "       " + userTasks.get(index).toString());
                     }
+
+                    // Update Tasklist.txt after marking task as done
+                    saveToFile(listToString(userTasks));
+
                 } catch (DukeException ex) {
                     System.out.print(servantSpeak);
                     System.out.println(ex);
@@ -101,6 +234,10 @@ public class Duke {
                                 + "       " + userTasks.get(index).toString());
                         userTasks.remove(index);
                     }
+
+                    // Update Tasklist.txt after removing task
+                    saveToFile(listToString(userTasks));
+
                 } catch (DukeException ex) {
                     System.out.print(servantSpeak);
                     System.out.println(ex);
@@ -146,44 +283,44 @@ public class Duke {
             String[] inputSplit;
             String description;
             switch (input.toLowerCase().split(" ")[0]) {
-                case "todo":
-                    description = input.substring(4);
-                    t = new ToDo(description);
+            case "todo":
+                description = input.substring(4);
+                t = new ToDo(description);
+                userTasks.add(t);
+                break;
+            case "deadline":
+                try {
+                    if (!hasDeadlineBy(input)) {
+                        throw new DukeException("", ExceptionType.DEADLINE_NO_BY);
+                    }
+                    inputSplit = input.split(" /by ");
+                    String by = inputSplit[1];
+                    description = inputSplit[0].substring(8);
+                    t = new Deadline(description, by);
                     userTasks.add(t);
                     break;
-                case "deadline":
-                    try {
-                        if (!hasDeadlineBy(input)) {
-                            throw new DukeException("", ExceptionType.DEADLINE_NO_BY);
-                        }
-                        inputSplit = input.split(" /by ");
-                        String by = inputSplit[1];
-                        description = inputSplit[0].substring(8);
-                        t = new Deadline(description, by);
-                        userTasks.add(t);
-                        break;
-                    } catch (DukeException ex) {
-                        System.out.print(servantSpeak);
-                        System.out.println(ex);
-                        continue;
+                } catch (DukeException ex) {
+                    System.out.print(servantSpeak);
+                    System.out.println(ex);
+                    continue;
+                }
+            case "event":
+                try {
+                    if (!hasEventStartEndTime(input)) {
+                        throw new DukeException("", ExceptionType.EVENT_NO_START_END);
                     }
-                case "event":
-                    try {
-                        if (!hasEventStartEndTime(input)) {
-                            throw new DukeException("", ExceptionType.EVENT_NO_START_END);
-                        }
-                        inputSplit = input.split(" /at ");
-                        String start = inputSplit[1].split("-")[0];
-                        String end = inputSplit[1].split("-")[1];
-                        description = inputSplit[0].substring(5);
-                        t = new Event(description, start, end);
-                        userTasks.add(t);
-                        break;
-                    } catch (DukeException ex) {
-                        System.out.print(servantSpeak);
-                        System.out.println(ex);
-                        continue;
-                    }
+                    inputSplit = input.split(" /at ");
+                    String start = inputSplit[1].split("-")[0];
+                    String end = inputSplit[1].split("-")[1];
+                    description = inputSplit[0].substring(5);
+                    t = new Event(description, start, end);
+                    userTasks.add(t);
+                    break;
+                } catch (DukeException ex) {
+                    System.out.print(servantSpeak);
+                    System.out.println(ex);
+                    continue;
+                }
             }
 
             // Standard reply from Duke for adding a task
@@ -192,6 +329,9 @@ public class Duke {
                     + userTasks.get(userTasks.size() - 1).toString() + "\n"
                     + "    Now you have " + userTasks.size()
                     + " tasks in the list.\n");
+
+            // Update Tasklist.txt after adding task
+            saveToFile(listToString(userTasks));
         }
     }
 }
