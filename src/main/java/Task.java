@@ -14,6 +14,11 @@ public class Task {
     public void markAsDone() {
         isDone = true;
     }
+    
+    public String saveTask() {
+        String doneOrNot = isDone ? "1" : "0";
+        return " | " + doneOrNot + " | " + description;
+    }
 
     @Override
     public String toString() {
