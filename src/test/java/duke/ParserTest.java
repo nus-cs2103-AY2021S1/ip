@@ -1,8 +1,5 @@
 package duke;
 
-import duke.command.ByeCommand;
-import duke.command.DoneCommand;
-import duke.command.TodoCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;

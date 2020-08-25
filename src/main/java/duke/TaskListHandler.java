@@ -1,30 +1,57 @@
 package duke;
 
 import duke.task.Task;
-
 import java.util.ArrayList;
 
+/**
+ * Contains the task list and handles any operations regarding the task list.
+ */
 public class TaskListHandler {
     protected ArrayList<Task> taskList;
 
+    /**
+     * Stores tasks from save file or empty task list if save file unavailable.
+     *
+     * @param list Task list.
+     */
     public TaskListHandler(ArrayList<Task> list) {
         this.taskList = list;
     }
 
+    /**
+     * Retrieves the task list.
+     *
+     * @return Task list
+     */
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
 
-    public void addToList(Task t) {
-        taskList.add(t);
+    /**
+     * Adds specified task to the task list.
+     *
+     * @param task Task
+     */
+    public void addToList(Task task) {
+        taskList.add(task);
     }
 
+    /**
+     * Removes all tasks from task list.
+     *
+     * @return An empty task list.
+     */
     public ArrayList<Task> clearList() {
         this.taskList = new ArrayList<>();
         System.out.println("The list of tasks has been cleared.");
         return taskList;
     }
 
+    /**
+     * Prints the list and the number of items in the list.
+     *
+     * @throws DukeException If task list is currently empty.
+     */
     public void printList() throws DukeException {
         if (taskList.isEmpty()) {
             // Asks user for tasks when printing empty list
@@ -41,6 +68,11 @@ public class TaskListHandler {
         System.out.println("You have " + taskList.size() + " task(s) in the list");
     }
 
+    /**
+     * Provides indentation for formatting.
+     *
+     * @param times The number of 4 spaces to be printed.
+     */
     public static void indent(int times) {
         for (int i=0; i<times; i++) {
             System.out.print("    ");

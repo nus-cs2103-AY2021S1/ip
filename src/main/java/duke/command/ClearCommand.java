@@ -9,6 +9,12 @@ import java.util.ArrayList;
 
 public class ClearCommand extends Command {
 
+    /**
+     * Clears the task list, printing success and saving updated list to save file.
+     *
+     * @param handler Task list.
+     * @param storage Storage instance.
+     */
     @Override
     public void execute(TaskListHandler handler, Storage storage) {
         ArrayList<Task> taskList;

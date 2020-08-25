@@ -12,43 +12,59 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Represents all loading and saving operations to the save file.
+ */
 public class Storage {
-    protected File savefile;
+    protected final File savefile;
     protected FileWriter writer;
     protected boolean isEmptySave;
     protected static boolean isLoadingError = false;
-
-    // hardcoding the directory? will it work on *nix?
-    // try: String home = System.getProperty("user.home");
-    protected String location;
+    protected final String location;
     protected final static String filename = "/save.txt";
     protected ArrayList<Task> listFromFile;
 
+    /**
+     * @param specifiedLocation The directory for the save file.
+     */
     public Storage(String specifiedLocation) {
         this.location = specifiedLocation;
         this.savefile = new File(specifiedLocation + filename);
         run();
     }
 
+    /**
+     * Retrieves tasks loaded from save file.
+     *
+     * @return Task list retrieved from save file.
+     */
     public ArrayList<Task> getListFromFile() {
         return listFromFile;
     }
 
+    /**
+     * Verifies save file directory and loads the save file from disk
+     * If unable to load, then resets the save file and the task list to empty.
+     */
     public void run() {
         try {
-            // Verifies save file directory and loads the save file from disk
             checkIfSaveFileExists();
             this.listFromFile = loadListFromFile();
         } catch (DukeException e) {
-            // If error loading save file, reset save file and task list
             e.printStackTrace(System.out);
             this.listFromFile = resetSaveFile();
         }
     }
 
+    /**
+     * Checks if directory exists, if not creates it.
+     * Checks if save file exists, if not creates it.
+     * Once save file is newly created, isEmptySave will be true.
+     *
+     * @throws DukeException If unable to access the specified directory.
+     */
     public void checkIfSaveFileExists() throws DukeException {
         try {
-                // Checks if directory exists, if not creates it.
                 Path path = Paths.get(location);
         if (!Files.isDirectory(path)) {
             File dir = new File(location);
@@ -57,15 +73,22 @@ public class Storage {
                 System.out.println("Created directory: " + location);
             }
         }
-        // Checks if save file exists, if not creates it.
-        // if created, isEmptySave will be true
-        // else already exists, isEmptySave will be false
             this.isEmptySave = savefile.createNewFile();
         } catch (IOException e) {
             throw new DukeException("\u2639 Oops, error checking if save file exists");
         }
     }
 
+    /**
+     * Loads the tasks into a new task list.
+     * Checks if save file is empty.
+     * Reads the number of tasks to be parsed then parses the tasks.
+     * Marks completed tasks as done.
+     * Prints the number of tasks loaded.
+     *
+     * @return Task list once tasks are parsed from save file.
+     * @throws DukeException If save file contains tasks of wrong format/ invalid tasks numbers/ invalid done tasks.
+     */
     public ArrayList<Task> loadListFromFile() throws DukeException {
         System.out.println("Loading from save file...");
         try {
@@ -93,7 +116,6 @@ public class Storage {
                     throw new DukeException("\u2639 Oops, error parsing " + '"' + input + '"' + " in save file");
                 }
             }
-
             // Mark tasks as done
             while(sc.hasNext()) {
                 int doneTaskIndex = Integer.parseInt(sc.next());
@@ -111,6 +133,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Prompts user for confirmation to reset task list.
+     * Else terminates the program.
+     *
+     * @return Empty task list.
+     */
     public ArrayList<Task> resetSaveFile() {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> newList = new ArrayList<>();
@@ -132,11 +160,19 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the number of tasks in list.
+     * Writes the each task to file.
+     * Writes the index of completed tasks.
+     *
+     * @param list Task list.
+     * @throws DukeException If error write tasks to save file.
+     */
     public void saveToFile(ArrayList<Task> list) throws DukeException {
         try {
             this.writer = new FileWriter(location+filename);
             String doneIndexes;
-            // Writes the number of tasks in list
+
             // System.out.println("Wrote: " + list.size());
             writer.write(list.size() + System.lineSeparator());
             // Saving each task to savefile
@@ -146,17 +182,13 @@ public class Storage {
                     if (t.isDone()) {
                         doneIndexesBuilder.append(i).append(" ");
                     }
-                    // Writes the task to file
+
                     // System.out.println("Wrote: " + t.toSaveFormat());
                     writer.write(t.toSaveFormat() + System.lineSeparator());
-
             }
             doneIndexes = doneIndexesBuilder.toString();
             if (!doneIndexes.equals("")) {
-                // Writes the index of completed tasks
-                // System.out.println("Wrote: " + doneIndexes);
                 writer.write(doneIndexes + System.lineSeparator());
-
             }
             writer.flush();
         } catch (IOException e) {
