@@ -40,117 +40,156 @@ public class AddCommand extends Command {
      * @throws DukeException If input does not meet criteria.
      */
     public void execute(String input, TaskList taskList, Storage storage) throws DukeException {
-        String information;
         switch (taskType) {
         case "todo": {
-            try { // user did not input description of to-do task
-                information = input.split("todo")[1];
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("\tThe description of a todo cannot be empty!");
-            }
-            if (information.isBlank()) {
-                throw new DukeException("\tThe description of a todo cannot be empty!");
-            }
-            String description = information.substring(1);
-            taskList.addToDo(description, storage);
+            addToDo(input, taskList, storage);
             break;
         }
         case "deadline": {
-            try { // user did not input description of deadline task
-                information = input.split("deadline")[1];
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("\tPlease input an appropriate description!\n"
-                        + "\tAn example would be:\n"
-                        + "\tdeadline return book /by 2020-12-09 08:00");
-            }
-            if (information.isBlank()) {
-                throw new DukeException("\tPlease input an appropriate description!\n"
-                        + "\tAn example would be:\n"
-                        + "\tdeadline return book /by 2020-12-09 08:00");
-            }
-
-            int end = information.indexOf("/");
-            if (end == -1) { // user did not input correct command
-                throw new DukeException("\tPlease input the appropriate command!\n"
-                        + "\tAn example would be:\n"
-                        + "\tdeadline return book /by 2020-12-09 08:00");
-            }
-
-            String description = information.substring(1, end - 1);
-            String by;
-            try { // user did not input date of deadline task
-                by = information.substring(end + 4);
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("\tPlease input the date!\n"
-                        + "\tAn example would be:\n"
-                        + "\tdeadline return book /by 2020-12-09 08:00");
-            }
-            if (by.isBlank()) {
-                throw new DukeException("\tPlease input the date!\n"
-                        + "\tAn example would be:\n"
-                        + "\tdeadline return book /by 2020-12-09 08:00");
-            }
-
-            String formattedBy = by.replace(' ', 'T');
-            LocalDateTime date;
-            try { // user did not input correct format of date of deadline task
-                date = LocalDateTime.parse(formattedBy);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("\tPlease input the correct date format!\n"
-                        + "\tAn example would be:\n"
-                        + "\tdeadline return book /by YYYY-MM-DD HH:mm");
-            }
-            taskList.addDeadline(description, date, storage);
+            addDeadline(input, taskList, storage);
             break;
         }
         case "event": {
-            try { // user did not input description of event task
-                information = input.split("event")[1];
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("\tPlease input an appropriate description!\n"
-                        + "\tAn example would be:\n"
-                        + "\tevent Christmas party /at 2020-12-25 17:00");
-            }
-            if (information.isBlank()) {
-                throw new DukeException("\tPlease input an appropriate description!\n"
-                        + "\tAn example would be:\n"
-                        + "\tevent Christmas party /at 2020-12-25 17:00");
-            }
-
-            int end = information.indexOf("/");
-            if (end == -1) { // user did not input correct command
-                throw new DukeException("\tPlease input the appropriate command!\n"
-                        + "\tAn example would be:\n"
-                        + "\tevent Christmas party /at 2020-12-25 17:00");
-            }
-
-            String description = information.substring(1, end - 1);
-            String at;
-            try { // user did not input date of event task
-                at = information.substring(end + 4);
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("\tPlease input the date!\n"
-                        + "\tAn example would be:\n"
-                        + "\tevent Christmas party /at 2020-12-25 17:00");
-            }
-            if (at.isBlank()) {
-                throw new DukeException("\tPlease input the date!\n"
-                        + "\tAn example would be:\n"
-                        + "\tevent Christmas party /at 2020-12-25 17:00");
-            }
-
-            String formattedAt = at.replace(' ', 'T');
-            LocalDateTime date;
-            try { // user did not input correct format of date of event task
-                date = LocalDateTime.parse(formattedAt);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("\tPlease input the correct date format!\n"
-                        + "\tAn example would be:\n"
-                        + "\tevent Christmas party /at YYYY-MM-DD HH:mm");
-            }
-            taskList.addEvent(description, date, storage);
+            addEvent(input, taskList, storage);
             break;
         }
         }
+    }
+
+    /**
+     * Adds To-Do tasks into task list.
+     * @param input User's input.
+     * @param taskList Task list created for user.
+     * @param storage Storage created for user.
+     * @throws DukeException If input does not meet criteria.
+     */
+    private void addToDo(String input, TaskList taskList, Storage storage) throws DukeException {
+        String information;
+        try { // user did not input description of to-do task
+            information = input.split("todo")[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("\tThe description of a todo cannot be empty!\n"
+                    + "\tAn example would be:\n"
+                    + "\ttodo week 3 quiz");
+        }
+        if (information.isBlank()) {
+            throw new DukeException("\tThe description of a todo cannot be empty!\n"
+                    + "\tAn example would be:\n"
+                    + "\ttodo week 3 quiz");
+        }
+        String description = information.substring(1);
+        taskList.addToDo(description, storage);
+    }
+
+    /**
+     * Adds Deadline tasks into task list.
+     * @param input User's input.
+     * @param taskList Task list created for user.
+     * @param storage Storage created for user.
+     * @throws DukeException If input does not meet criteria.
+     */
+    private void addDeadline(String input, TaskList taskList, Storage storage) throws DukeException {
+        String information;
+        try { // user did not input description of deadline task
+            information = input.split("deadline")[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("\tPlease input an appropriate description!\n"
+                    + "\tAn example would be:\n"
+                    + "\tdeadline return book /by 2020-01-30 08:00");
+        }
+        if (information.isBlank()) {
+            throw new DukeException("\tPlease input an appropriate description!\n"
+                    + "\tAn example would be:\n"
+                    + "\tdeadline return book /by 2020-01-30 08:00");
+        }
+
+        int end = information.indexOf("/");
+        if (end == -1) { // user did not input correct command
+            throw new DukeException("\tPlease input the appropriate command!\n"
+                    + "\tAn example would be:\n"
+                    + "\tdeadline return book /by 2020-01-30 08:00");
+        }
+
+        String description = information.substring(1, end - 1);
+        String by;
+        try { // user did not input date of deadline task
+            by = information.substring(end + 4);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("\tPlease input the date!\n"
+                    + "\tAn example would be:\n"
+                    + "\tdeadline return book /by 2020-01-30 08:00");
+        }
+        if (by.isBlank()) {
+            throw new DukeException("\tPlease input the date!\n"
+                    + "\tAn example would be:\n"
+                    + "\tdeadline return book /by 2020-01-30 08:00");
+        }
+
+        String formattedBy = by.replace(' ', 'T');
+        LocalDateTime date;
+        try { // user did not input correct format of date of deadline task
+            date = LocalDateTime.parse(formattedBy);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("\tPlease input the correct date format!\n"
+                    + "\tAn example would be:\n"
+                    + "\tdeadline return book /by 2020-01-30 08:00");
+        }
+        taskList.addDeadline(description, date, storage);
+    }
+
+    /**
+     * Adds Event tasks into task list.
+     * @param input User's input.
+     * @param taskList Task list created for user.
+     * @param storage Storage created for user.
+     * @throws DukeException If input does not meet criteria.
+     */
+    private void addEvent(String input, TaskList taskList, Storage storage) throws DukeException {
+        String information;
+        try { // user did not input description of event task
+            information = input.split("event")[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("\tPlease input an appropriate description!\n"
+                    + "\tAn example would be:\n"
+                    + "\tevent Christmas party /at 2020-12-25 17:00");
+        }
+        if (information.isBlank()) {
+            throw new DukeException("\tPlease input an appropriate description!\n"
+                    + "\tAn example would be:\n"
+                    + "\tevent Christmas party /at 2020-12-25 17:00");
+        }
+
+        int end = information.indexOf("/");
+        if (end == -1) { // user did not input correct command
+            throw new DukeException("\tPlease input the appropriate command!\n"
+                    + "\tAn example would be:\n"
+                    + "\tevent Christmas party /at 2020-12-25 17:00");
+        }
+
+        String description = information.substring(1, end - 1);
+        String at;
+        try { // user did not input date of event task
+            at = information.substring(end + 4);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("\tPlease input the date!\n"
+                    + "\tAn example would be:\n"
+                    + "\tevent Christmas party /at 2020-12-25 17:00");
+        }
+        if (at.isBlank()) {
+            throw new DukeException("\tPlease input the date!\n"
+                    + "\tAn example would be:\n"
+                    + "\tevent Christmas party /at 2020-12-25 17:00");
+        }
+
+        String formattedAt = at.replace(' ', 'T');
+        LocalDateTime date;
+        try { // user did not input correct format of date of event task
+            date = LocalDateTime.parse(formattedAt);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("\tPlease input the correct date format!\n"
+                    + "\tAn example would be:\n"
+                    + "\tevent Christmas party /at 2020-12-25 17:00");
+        }
+        taskList.addEvent(description, date, storage);
     }
 }

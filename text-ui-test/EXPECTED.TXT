@@ -13,8 +13,33 @@ Welcome to
         ------------------------------------------------------------------
 
         ------------------------------------------------------------------
-        Hi there, sampleName!
-        How can I help you today?
+        Hello there, sampleName! How can I help you today?
+        Note: If you are a first time user,
+        type 'help' for the list of commands to get started!
+        ------------------------------------------------------------------
+
+        ------------------------------------------------------------------
+        Here are the commands you can use:
+        -----------------------------------------------------------
+        To add tasks:
+                - todo <todo task name>
+                - deadline <deadline task name> /by <YYYY-MM-DD HH:mm>
+                - event <event task name> /at <YYYY-MM-DD HH:mm>
+        -----------------------------------------------------------
+        To delete tasks:
+                - delete <index of task>
+        -----------------------------------------------------------
+        To mark tasks as done:
+                - done <index of task>
+        -----------------------------------------------------------
+        To list the tasks on your task list:
+                - list
+        -----------------------------------------------------------
+        To find tasks on your task list:
+                - find <keyword>
+        -----------------------------------------------------------
+        To exit Focus:
+                - bye
         ------------------------------------------------------------------
 
         ------------------------------------------------------------------
@@ -70,6 +95,10 @@ Welcome to
         ------------------------------------------------------------------
 
         ------------------------------------------------------------------
+        Did you meant the command 'help'?
+        ------------------------------------------------------------------
+
+        ------------------------------------------------------------------
         Here are the tasks on your list:
         1. [T][✓] borrow book
         2. [D][✘] return book (by: Thu, 27 Aug 2020, 6.00 PM)
@@ -83,13 +112,13 @@ Welcome to
         ------------------------------------------------------------------
         Please input an appropriate description!
         An example would be:
-        deadline return book /by 2020-12-09 08:00
+        deadline return book /by 2020-01-30 08:00
         ------------------------------------------------------------------
 
         ------------------------------------------------------------------
         Please input the correct date format!
         An example would be:
-        event Christmas party /at YYYY-MM-DD HH:mm
+        event Christmas party /at 2020-12-25 17:00
         ------------------------------------------------------------------
 
         ------------------------------------------------------------------

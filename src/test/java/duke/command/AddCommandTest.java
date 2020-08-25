@@ -25,7 +25,9 @@ public class AddCommandTest {
             AddCommand addCommand = new AddCommand("todo");
             addCommand.execute("todo", taskList, storage);
         } catch (DukeException e) {
-            assertEquals("\tThe description of a todo cannot be empty!", e.getMessage());
+            assertEquals("\tThe description of a todo cannot be empty!\n"
+                    + "\tAn example would be:\n"
+                    + "\ttodo week 3 quiz", e.getMessage());
         }
     }
 
@@ -37,7 +39,7 @@ public class AddCommandTest {
         } catch (DukeException e) {
             assertEquals("\tPlease input an appropriate description!\n"
                     + "\tAn example would be:\n"
-                    + "\tdeadline return book /by 2020-12-09 08:00", e.getMessage());
+                    + "\tdeadline return book /by 2020-01-30 08:00", e.getMessage());
         }
         try {
             AddCommand addCommand = new AddCommand("deadline");
@@ -45,7 +47,7 @@ public class AddCommandTest {
         } catch (DukeException e) {
             assertEquals("\tPlease input the appropriate command!\n"
                     + "\tAn example would be:\n"
-                    + "\tdeadline return book /by 2020-12-09 08:00", e.getMessage());
+                    + "\tdeadline return book /by 2020-01-30 08:00", e.getMessage());
         }
         try {
             AddCommand addCommand = new AddCommand("deadline");
@@ -53,7 +55,7 @@ public class AddCommandTest {
         } catch (DukeException e) {
             assertEquals("\tPlease input the date!\n"
                     + "\tAn example would be:\n"
-                    + "\tdeadline return book /by 2020-12-09 08:00", e.getMessage());
+                    + "\tdeadline return book /by 2020-01-30 08:00", e.getMessage());
         }
         try {
             AddCommand addCommand = new AddCommand("deadline");
@@ -61,7 +63,7 @@ public class AddCommandTest {
         } catch (DukeException e) {
             assertEquals("\tPlease input the correct date format!\n"
                     + "\tAn example would be:\n"
-                    + "\tdeadline return book /by YYYY-MM-DD HH:mm", e.getMessage());
+                    + "\tdeadline return book /by 2020-01-30 08:00", e.getMessage());
         }
     }
 
@@ -97,7 +99,7 @@ public class AddCommandTest {
         } catch (DukeException e) {
             assertEquals("\tPlease input the correct date format!\n"
                     + "\tAn example would be:\n"
-                    + "\tevent Christmas party /at YYYY-MM-DD HH:mm", e.getMessage());
+                    + "\tevent Christmas party /at 2020-12-25 17:00", e.getMessage());
         }
     }
 }

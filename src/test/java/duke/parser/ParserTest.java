@@ -1,11 +1,6 @@
 package duke.parser;
 
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.InvalidCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
@@ -16,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParserTest {
     @Test
     public void testParse() {
+        assertEquals(HelpCommand.class, Parser.parse("help").getClass());
         assertEquals(AddCommand.class, Parser.parse("todo iP").getClass());
         assertEquals(AddCommand.class, Parser.parse("deadline tP /by 2020-08-23 23:59").getClass());
         assertEquals(AddCommand.class, Parser.parse("event meeting /at 2020-08-25 14:00").getClass());

@@ -48,10 +48,39 @@ public class UI {
      */
     public void addressUser(String name) {
         String address = divider
-                + "\tHi there, " + name + "!"
-                + "\n\tHow can I help you today?\n"
+                + "\tHello there, " + name + "! How can I help you today?\n"
+                + "\tNote: If you are a first time user,\n"
+                + "\ttype 'help' for the list of commands to get started!\n"
                 + divider;
         System.out.println(address);
+    }
+
+    /**
+     * List out the commands that the user can use.
+     */
+    public static void listCommands() {
+        String commands = "\tHere are the commands you can use:"
+                + "\n\t-----------------------------------------------------------"
+                + "\n\tTo add tasks:"
+                + "\n\t\t- todo <todo task name>"
+                + "\n\t\t- deadline <deadline task name> /by <YYYY-MM-DD HH:mm>"
+                + "\n\t\t- event <event task name> /at <YYYY-MM-DD HH:mm>"
+                + "\n\t-----------------------------------------------------------"
+                + "\n\tTo delete tasks:"
+                + "\n\t\t- delete <index of task>"
+                + "\n\t-----------------------------------------------------------"
+                + "\n\tTo mark tasks as done:"
+                + "\n\t\t- done <index of task>"
+                + "\n\t-----------------------------------------------------------"
+                + "\n\tTo list the tasks on your task list:"
+                + "\n\t\t- list"
+                + "\n\t-----------------------------------------------------------"
+                + "\n\tTo find tasks on your task list:"
+                + "\n\t\t- find <keyword>"
+                + "\n\t-----------------------------------------------------------"
+                + "\n\tTo exit Focus:"
+                + "\n\t\t- bye\n";
+        System.out.print(commands);
     }
 
     /**

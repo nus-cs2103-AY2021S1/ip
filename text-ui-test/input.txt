@@ -1,4 +1,5 @@
 sampleName
+help
 list
 todo borrow book
 deadline return book /by 2020-08-27 18:00
@@ -8,6 +9,7 @@ list
 done 1
 find book
 delete 4
+help me
 list
 find
 deadline

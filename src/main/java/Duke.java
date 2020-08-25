@@ -42,31 +42,49 @@ public class Duke {
      * Runs Focus.
      */
     public void run() {
-        boolean exit;
         Scanner sc = new Scanner(System.in);
         ui.greetUser();
         String name = sc.nextLine();
         ui.addressUser(name);
 
+        boolean exit = false;
         String input;
-        while (sc.hasNext()) {
+        while (!exit) {
             input = sc.nextLine();
             Command command = Parser.parse(input);
             exit = command.isExit();
             ui.printDivider();
-            if (exit) {
-                ui.exitFocus();
-                break;
-            }
             try {
                 command.execute(input, taskList, storage);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             } finally {
-                ui.printDividerWithSpacing();
+                if (!exit) {
+                    ui.printDividerWithSpacing();
+                }
             }
         }
+        ui.exitFocus();
         sc.close();
+
+//        while (sc.hasNext()) {
+//            input = sc.nextLine();
+//            Command command = Parser.parse(input);
+//            exit = command.isExit();
+//            ui.printDivider();
+//            if (exit) {
+//                ui.exitFocus();
+//                break;
+//            }
+//            try {
+//                command.execute(input, taskList, storage);
+//            } catch (DukeException e) {
+//                System.out.println(e.getMessage());
+//            } finally {
+//                ui.printDividerWithSpacing();
+//            }
+//        }
+//        sc.close();
     }
 
     /**

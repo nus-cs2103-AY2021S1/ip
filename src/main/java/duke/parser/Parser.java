@@ -6,6 +6,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.task.Deadline;
@@ -28,7 +29,9 @@ public class Parser {
      */
     public static Command parse(String input) {
         Command command;
-        if (input.startsWith("todo")) { // add to-do tasks
+        if (input.startsWith("help")) { // list out the commands
+            command = new HelpCommand();
+        } else if (input.startsWith("todo")) { // add to-do tasks
             command = new AddCommand("todo");
         } else if (input.startsWith("deadline")) { // add deadline tasks
             command = new AddCommand("deadline");
