@@ -44,9 +44,12 @@ public class Duke {
             try {
                 Command c = Parser.parse(fullCommand);
                 isExit = !c.execute(list, ui, storage);
-            } catch (DukeEmptyIndexException | DukeEmptyDescriptionException
-                    | DukeEmptyByException | DukeEmptyAtException
-                    | DukeInvalidDateTimeInputException e) {
+            } catch (DukeEmptyIndexException
+                    | DukeEmptyDescriptionException
+                    | DukeEmptyByException
+                    | DukeEmptyAtException
+                    | DukeInvalidDateTimeInputException
+                    | DukeEmptyKeywordException e) {
                 ui.showError(e);
             }
         }

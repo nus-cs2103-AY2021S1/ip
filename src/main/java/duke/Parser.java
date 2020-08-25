@@ -189,6 +189,23 @@ public class Parser {
     }
 
     /**
+     * Parses the user input into a FindCommand.
+     *
+     * @param command The user input.
+     * @return FindCommand with specific keyword.
+     * @throws DukeEmptyKeywordException If no keyword was inputted.
+     */
+    public static FindCommand find(String command) throws DukeEmptyKeywordException {
+        try {
+            String[] tokens = command.split("find ");
+            String keyword = tokens[1];
+            return new FindCommand(keyword);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeEmptyKeywordException();
+        }
+    }
+
+    /**
      * Parses the user input and checking the type of command.
      * Returns the correct command after calling for correct parser.
      *
@@ -200,9 +217,10 @@ public class Parser {
      * @throws DukeEmptyByException If user did not input deadline date time.
      * @throws DukeInvalidDateTimeInputException If date and time inputted is erroneous.
      */
-    public static Command parse(String command) throws DukeEmptyIndexException,
+       public static Command parse(String command) throws DukeEmptyIndexException,
             DukeEmptyDescriptionException, DukeEmptyAtException,
-            DukeEmptyByException, DukeInvalidDateTimeInputException {
+            DukeEmptyByException, DukeInvalidDateTimeInputException,
+            DukeEmptyKeywordException {
         if (command.equals("bye")) {
             return new ByeCommand();
         } else if (command.equals("list")) {
@@ -213,6 +231,8 @@ public class Parser {
             return markAsDone(command);
         } else if (command.startsWith("delete")) {
             return delete(command);
+        } else if (command.startsWith("find")) {
+            return find(command);
         } else {
             try {
                 return add(command);
