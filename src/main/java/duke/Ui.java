@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Represents the Duke User Interface which deals with interactions with the user
@@ -72,6 +73,22 @@ public class Ui {
         System.out.println("Got it. I've added this task:");
         System.out.println(t.recordString());
         System.out.println("Now, you have " + size + " tasks in the list");
+    }
+
+    /**
+     * Displays the tasks in the user's TaskList that match the input string.
+     *
+     * @param tasks The list of Tasks that contains the input string.
+     */
+    public void find(ArrayList<Task> tasks) {
+        if (tasks.size() == 0) {
+            System.out.println("Could not find any tasks.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println((i + 1) + ". " + tasks.get(i).recordString());
+            }
+        }
     }
 
     /**
