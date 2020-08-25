@@ -1,23 +1,27 @@
 package main.java;
 
-public class Deadline extends Task {
-    private String end;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String s, Boolean b, String e) {
+public class Deadline extends Task {
+    private LocalDate end;
+
+    public Deadline(String s, Boolean b, LocalDate e) {
         super(s, b);
         end = e;
     }
 
-    public String getEnd() {
+    public LocalDate getEnd() {
         return end;
     }
 
-    public void setEnd(String e) {
+    public void setEnd(LocalDate e) {
         end = e;
     }
 
     @Override
     public String toString() {
-        return "[D]" + "[" + (super.isDone() ? "O" : "X") + "] " + super.getName() + " (by: " + end + ")";
+        return "[D]" + "[" + (super.isDone() ? "O" : "X") + "] " + super.getName() + " (by: "
+                + end.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")) + ")";
     }
 }
