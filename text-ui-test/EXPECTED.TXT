@@ -23,8 +23,8 @@ now you have 3 items in your tasklist. ✰
 ✰ congrats on finishing your task :) it's marked as done:
 	[D] [✓] 2103T homework (by: tomorrow 2359) ✰
 ⚠ you have already completed 2103T homework! ⚠
-⚠ i dont know what that means :( ⚠
-⚠ i dont know what that means :( ⚠
+⚠ i don't know what that means :( ⚠
+⚠ i don't know what that means :( ⚠
 ⚠ you haven't entered a task number to complete! ⚠
 ⚠ you haven't entered a time that this task happens at. you can do that by typing "event xxx /at yyy". ⚠
 ⚠ you haven't entered a time that this task happens at. you can do that by typing "event xxx /at yyy". ⚠
@@ -38,5 +38,5 @@ now you have 3 items in your tasklist. ✰
 now you have 2 items in your tasklist. ✰
 ✰ 1. [T] [✓] read the bible ✰
 ✰ 2. [E] [✗] 2101 tutorial (at: :() ✰
-⚠ i dont know what that means :( ⚠
+⚠ i don't know what that means :( ⚠
 ✰ bye bye! ✰

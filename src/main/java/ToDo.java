@@ -13,4 +13,8 @@ public class ToDo extends Task {
         }
         return "[T] [" + donez + "] " + task;
     }
+
+    public String saveText() {
+        return "T | " + super.saveText();
+    }
 }

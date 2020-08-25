@@ -1,7 +1,8 @@
-public class Deadline extends Task {
-    String deadline;
-    public Deadline(String in, String deadline) {
+import java.time.LocalDateTime;
 
+public class Deadline extends Task {
+    LocalDateTime deadline;
+    public Deadline(String in, LocalDateTime deadline) {
         super(in);
         this.deadline = deadline;
     }
@@ -12,6 +13,10 @@ public class Deadline extends Task {
         } else {
             donez = "✗";
         }
-        return "[D] [" + donez + "] " + task + " (by: " + deadline + ")";
+        return "[D] [" + donez + "] " + task + " (by: " + dateToString(deadline) + ")";
+    }
+
+    public String saveText() {
+        return "D | " + super.saveText() + " | " + dateToSave(deadline);
     }
 }
