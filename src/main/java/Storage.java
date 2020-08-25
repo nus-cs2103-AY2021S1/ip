@@ -4,13 +4,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.StringJoiner;
 
-public class TaskManager {
-    private static String dirName = "data";
-    private static String filePath = dirName + "/duke.txt";
+public class Storage {
+    private String dirName = "data/";
+    private String filePath;
+
+    Storage(String filePath) {
+        this.filePath = dirName + filePath;
+    }
     
-    public static ArrayList<Task> readFile() {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> result = new ArrayList<>();
         try {
             // Create the directory if it does not exist
@@ -18,14 +21,13 @@ public class TaskManager {
             if (!dir.exists()) {
                 dir.mkdirs();
             }
-            
+
             File f = new File(filePath);
             Scanner sc = new Scanner(f);
             while (sc.hasNext()) {
                 String nextLine = sc.nextLine();
                 String[] taskDetails = nextLine.split(" \\| ");
                 Task task;
-                
                 if (taskDetails[0].equals("T")) {
                     task = new ToDo(taskDetails[2]);
                 } else if (taskDetails[0].equals("D")) {
@@ -38,7 +40,7 @@ public class TaskManager {
                 
                 if (taskDetails[1].equals("1")) {
                     task.completeTask();
-                } 
+                }
                 result.add(task);
             }
         } catch (FileNotFoundException e) {
@@ -49,21 +51,15 @@ public class TaskManager {
             } catch (IOException e2) {
                 e2.printStackTrace();
             }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
+        } 
+        
         return result;
     }
     
-    public static void saveFile(ArrayList<Task> tasks) {
-        StringJoiner text = new StringJoiner("\n");
-        for (Task task : tasks) {
-            text.add(task.toSaveFormat());
-        }
-        
+    public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
-            fw.write(text.toString());
+            fw.write(tasks.getSaveFormat());
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
