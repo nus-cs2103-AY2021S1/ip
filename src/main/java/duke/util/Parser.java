@@ -6,6 +6,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
@@ -57,6 +58,10 @@ public class Parser {
             String[] descriptionArray = Arrays.copyOfRange(split, 1, split.length);
             String description = String.join(" ", descriptionArray);
             return new ToDoCommand(description);
+        } else if (input.startsWith("find")) {
+            String[] split = input.split("find ");
+            String toFind = split[1];
+            return new FindCommand(toFind);
         } else {
             throw new DukeException();
         }

@@ -19,6 +19,10 @@ public abstract class Task {
 
     public abstract String toSaveFormat();
     
+    public boolean contains(String s) {
+        return this.description.contains(s);
+    }
+    
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), this.description);

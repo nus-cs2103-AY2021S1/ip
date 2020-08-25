@@ -39,4 +39,14 @@ public class TaskList {
         }
         return text.toString();
     }
+    
+    public String find(String toFind) {
+        StringJoiner response = new StringJoiner("\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).contains(toFind)) {
+                response.add(String.format("%d.%s", i+1, tasks.get(i)));
+            }
+        }
+        return response.toString();
+    }
 }
