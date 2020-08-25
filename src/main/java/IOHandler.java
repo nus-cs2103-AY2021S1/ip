@@ -110,7 +110,6 @@ public class IOHandler {
         if (taskSaveAndLoadManager.loadTaskManager() != null) {
             taskManager = taskSaveAndLoadManager.loadTaskManager();
         }
-
         while (!reply.equals("bye"))
         {
             replyArr = splitReply();
@@ -123,7 +122,6 @@ public class IOHandler {
             }
             reply = sc.nextLine();
         }
-
         taskSaveAndLoadManager.saveTaskManager(taskManager);
         String byeMessage = "That's all? Sure. See you again (hopefully LOL).";
         ui.printMessage(byeMessage);

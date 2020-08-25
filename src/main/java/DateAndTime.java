@@ -2,12 +2,19 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * <p>The DateAndTime class defines the behavior of an object that represents specific time.</p>
+ */
 public class DateAndTime {
     private final LocalDate date;
     private LocalTime time;
 
-    public DateAndTime(LocalDate localDate, LocalTime time) {
-        this.date = localDate;
+    /** Creates an object to represent date and time as a whole.
+     * @param date The date
+     * @param time The time
+     */
+    public DateAndTime(LocalDate date, LocalTime time) {
+        this.date = date;
         this.time = time;
     }
 

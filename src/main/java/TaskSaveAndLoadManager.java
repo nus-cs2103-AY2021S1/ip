@@ -35,16 +35,16 @@ public class TaskSaveAndLoadManager {
 
     public Task loadTask(TaskData taskData) {
         boolean isDone;
-        isDone = taskData.isDone == 1;
+        isDone = taskData.getIsDone() == 1;
 
-        if (taskData.taskType.equals("todo")) {
-            return new ToDoTask(taskData.taskDescription, isDone);
-        } else if (taskData.taskType.equals("deadline")) {
-            DateAndTime dt = new DateAndTime(LocalDate.parse(taskData.time));
-            return new DeadlineTask(taskData.taskDescription, isDone, dt);
+        if (taskData.getTaskType().equals("todo")) {
+            return new ToDoTask(taskData.getTaskDescription(), isDone);
+        } else if (taskData.getTaskType().equals("deadline")) {
+            DateAndTime dt = new DateAndTime(LocalDate.parse(taskData.getTime()));
+            return new DeadlineTask(taskData.getTaskDescription(), isDone, dt);
         } else {
-            DateAndTime dt = new DateAndTime(LocalDate.parse(taskData.date), LocalTime.parse(taskData.time));
-            return new EventTask(taskData.taskDescription, isDone, dt);
+            DateAndTime dt = new DateAndTime(LocalDate.parse(taskData.getDate()), LocalTime.parse(taskData.getTime()));
+            return new EventTask(taskData.getTime(), isDone, dt);
         }
     }
 

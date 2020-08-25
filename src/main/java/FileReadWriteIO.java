@@ -7,17 +7,19 @@ public class FileReadWriteIO {
 
     // Saves task in 2 lines, first line is task description and second is status (1 is done, 0 is not done)
     private static void saveTaskData(TaskData taskData) throws IOException {
-        FileReadWrite.writeToFile(taskData.taskType + " %% " +
-                                    taskData.taskDescription + " %% " +
-                                    taskData.isDone + " %% " +
-                                    taskData.date + " %% " + taskData.time);
+        FileReadWrite.writeToFile(taskData.getTaskType() + " %% " +
+                                            taskData.getTaskDescription() + " %% " +
+                                            taskData.getIsDone() + " %% " +
+                                            taskData.getDate() + " %% " +
+                                            taskData.getTime());
     }
 
     private static void appendTaskData(TaskData taskData) throws IOException {
-        FileReadWrite.appendToFile(taskData.taskType + " %% " +
-                taskData.taskDescription + " %% " +
-                taskData.isDone + " %% " +
-                taskData.date + " %% " + taskData.time);
+        FileReadWrite.appendToFile(taskData.getTaskType() + " %% " +
+                                                taskData.getTaskDescription() + " %% " +
+                                                taskData.getIsDone() + " %% " +
+                                                taskData.getDate() + " %% " +
+                                                taskData.getTime());
     }
 
     public static void saveTaskListData(TaskManagerData taskManagerData) throws IOException {

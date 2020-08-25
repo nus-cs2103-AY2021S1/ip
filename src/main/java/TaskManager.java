@@ -50,7 +50,6 @@ public class TaskManager {
         String result = "";
         for (int i = 0; i < givenTaskList.size(); i++) {
             String index = (i + 1) + ". ";
-
             // remove the empty line created in the last task
             if (i == givenTaskList.size() - 1) {
                 result = result + index + givenTaskList.get(i).toString();
