@@ -8,9 +8,11 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String path = "data/tasks.txt";
-
-    public static LinkedList<Task> readList() throws IOException, NoDataException {
+    private final String path;
+    public Storage(String path) {
+        this.path = path;
+    }
+    public LinkedList<Task> readList() throws DukeException {
         LinkedList<Task> taskList = new LinkedList<>();
         try {
             File data = new File(path);
@@ -43,21 +45,25 @@ public class Storage {
         } catch (FileNotFoundException e) {
             if (!new File(path).exists()) {
                 new File("data").mkdir();
-                new File(path).createNewFile();
+                try {
+                    new File(path).createNewFile();
+                } catch (IOException ioException) {
+                    throw new DukeException("I cannot create the data file!");
+                }
                 if (!new File(path).exists()) {
-                    throw new IOException("Failed to access the file.");
+                    throw new DukeException("Failed to access the file!");
                 } else {
-                    throw new NoDataException();
+                    throw new DukeException("No data file found, a new data file created!");
                 }
             }
         }
         return taskList;
     }
 
-    public static void saveList(LinkedList<Task> list) throws DukeException {
+    public void saveList(TaskList list) throws DukeException {
         try {
             FileWriter writer = new FileWriter(path);
-            for (Task task : list) {
+            for (Task task : list.getList()) {
                 writer.write(task.toStorageString() + "\n");
             }
             writer.close();
