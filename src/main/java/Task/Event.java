@@ -30,4 +30,16 @@ public class Event extends Task {
                 ? "[E][✓] " + this.getName() + " (by: " + this.end + ")"
                 : "[E][✗] " + this.getName() + " (by: " + this.end + ")";
     }
+
+    @Override
+    public boolean equals(Object o){
+        if (o == this){
+            return true;
+        } else if (o instanceof Event){
+            Event temp = (Event) o;
+            return this.name.equals(temp.name) && (this.isDone == temp.isDone) && this.end.equals(temp.end);
+        } else {
+            return false;
+        }
+    }
 }

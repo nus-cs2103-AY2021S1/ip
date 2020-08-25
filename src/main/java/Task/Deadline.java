@@ -1,14 +1,18 @@
 package Task;
 
+import Command.DeleteCommand;
+import Exceptions.WrongDateTimeFormatException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
 
     private final LocalDateTime deadline;
 
-    public Deadline(String name, boolean isDone, String end){
+    public Deadline(String name, boolean isDone, String end) throws WrongDateTimeFormatException {
         super(name, isDone);
         /*String rest = end.substring(end.indexOf("/") + 1);
         String rest1 = rest.substring(rest.indexOf("/" ) + 6);
@@ -19,10 +23,14 @@ public class Deadline extends Task {
                 Integer.parseInt(rest1.substring(0,3),
                         Integer.parseInt(rest1.substring(3));
         );*/
-        this.deadline = LocalDate.parse(end.substring(0,10)).atTime(
-                Integer.parseInt(end.substring(11,13)),
-                Integer.parseInt(end.substring(13))
-        );
+        try {
+            this.deadline = LocalDate.parse(end.substring(0, 10)).atTime(
+                    Integer.parseInt(end.substring(11, 13)),
+                    Integer.parseInt(end.substring(13))
+            );
+        } catch (DateTimeParseException e) {
+            throw new WrongDateTimeFormatException("☹ OOPS!!! Please enter the deadline time in the right format. (YYYY-MM-DD HHmm)");
+        }
     }
 
     public Deadline(String name, boolean isDone, LocalDateTime deadline) {
@@ -50,5 +58,17 @@ public class Deadline extends Task {
         return isDone
                 ? "[D][✓] " + this.getName() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")"
                 : "[D][✗] " + this.getName() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")";
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o == this){
+            return true;
+        } else if (o instanceof Deadline){
+            Deadline temp = (Deadline) o;
+            return this.name.equals(temp.name) && (this.isDone == temp.isDone) && this.deadline.equals(temp.deadline);
+        } else {
+            return false;
+        }
     }
 }

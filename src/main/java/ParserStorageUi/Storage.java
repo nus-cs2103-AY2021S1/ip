@@ -27,6 +27,7 @@ public class Storage {
         this.filePath = filePath1;
     }
 
+
     public ArrayList<Task> load() throws DukeException {
         String task;
         ArrayList<Task> temp = new ArrayList<>();
@@ -54,7 +55,6 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
-
         return temp;
     }
 

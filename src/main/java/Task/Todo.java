@@ -31,4 +31,16 @@ public class Todo extends Task {
                 ? "[T][✓] " + this.getName()
                 : "[T][✗] " + this.getName();
     }
+
+    @Override
+    public boolean equals(Object o){
+        if (o == this){
+            return true;
+        } else if (o instanceof Todo){
+            Todo temp = (Todo) o;
+            return this.name.equals(temp.name) && (this.isDone == temp.isDone);
+        } else {
+            return false;
+        }
+    }
 }
