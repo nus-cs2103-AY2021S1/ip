@@ -1,3 +1,5 @@
+A data directory has been successfully created at the root folder.
+A text file has been successfully created at [root_folder]/data.
 ____________________________________________________________
  ____        _        
 |  _ \ _   _| | _____ 
@@ -5,8 +7,7 @@ ____________________________________________________________
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-Hello! I'm Duke
-What can I do for you?
+Hello! I'm Duke.
 ____________________________________________________________
 
 There are no tasks in your list.

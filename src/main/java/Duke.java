@@ -10,6 +10,9 @@ public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
+        // Check if save file exists.
+        DukeSaveFile.checkSaveFile();
+
         // Print Duke's introduction
         String divider = "____________________________________________________________\n";
         String logo = " ____        _        \n"
@@ -17,7 +20,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n\n";
-        String welcome = "Hello! I'm Duke\nWhat can I do for you?\n";
+        String welcome = "Hello! I'm Duke.\n";
         System.out.println(divider + logo + welcome + divider);
 
         // Read inputs from input.txt
