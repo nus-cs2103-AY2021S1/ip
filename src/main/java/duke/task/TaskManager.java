@@ -1,8 +1,6 @@
 package duke.task;
 
-import duke.exceptions.InvalidTaskIndexException;
 import duke.utils.Colour;
-import duke.utils.ResourceHandler;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -65,6 +63,16 @@ public class TaskManager {
         stringBuilder.append("You have completed " + completedTasks + " and have yet to complete "
                 + uncompletedTasks);
         return stringBuilder.toString();
+    }
+
+    public List<Task> findTasksByKeyword(String keyword){
+        List<Task> filteredTasks = new ArrayList<>();
+        for(Task task : tasks){
+            if(task.getContent().contains(keyword)){
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks;
     }
 
     public void markTaskAsDone(int taskIndex){

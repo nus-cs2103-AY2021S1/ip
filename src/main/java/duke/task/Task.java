@@ -26,6 +26,10 @@ public class Task {
         return this.isDone;
     }
 
+    public String getContent(){
+        return this.content;
+    }
+
     public String getStatusIcon() {
         return "[" + (isDone ? "\u2713" : "\u2718") + "] ";
     }

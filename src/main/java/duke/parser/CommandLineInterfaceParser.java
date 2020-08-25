@@ -1,12 +1,6 @@
 package duke.parser;
 
-import duke.commands.AddCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.CommandTypes;
-import duke.commands.Command;
-import duke.commands.ListTasksCommand;
-import duke.commands.ExitCommand;
+import duke.commands.*;
 
 import duke.task.*;
 
@@ -22,6 +16,7 @@ public class CommandLineInterfaceParser {
     public static Command parse() throws DukeException {
         String userInput = scanner.nextLine();
         String[] words = userInput.toLowerCase().split(" ");
+        //System.out.println(words[0]);
         CommandTypes commandType = CommandTypes.valueOf(words[0].toUpperCase());
         commandType.checkInput(userInput.toLowerCase());
         String content, dateTime;
@@ -73,6 +68,11 @@ public class CommandLineInterfaceParser {
                     throw new DukeException(
                             ResourceHandler.getMessage("commandline.invalidTaskIndexErrorMessage"));
                 }
+            case FIND:
+                content = userInput.replaceFirst("^(?i)find", "");
+                trimmedContent = content.trim();
+                FindCommand findTaskCommand = new FindCommand(trimmedContent);
+                return findTaskCommand;
         }
         scanner.close();
         return null;
