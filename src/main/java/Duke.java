@@ -1,6 +1,30 @@
+import java.io.IOException;
 import java.util.*;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.FileWriter;
+
+
+
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    //functions to edit file
+    static void todoToFile(String path, ArrayList<Task> list) throws IOException {
+        FileWriter clearFile = new FileWriter(path);
+        clearFile.write("");
+        clearFile.close();
+        FileWriter appendFile = new FileWriter(path, true);
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            //System.out.println((i+1) + ". "+ task.toString());
+            appendFile.write(task.toString());
+        }
+        appendFile.close();
+    }
+
+
+
+    public static void main(String[] args) throws DukeException, IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -14,6 +38,18 @@ public class Duke {
 
         //Object to store the list
         ArrayList<Task> itemList = new ArrayList<>();
+
+        //create file
+        String path = "out/todo.txt";
+        File file = new File(path);
+        if (file.isFile()) {
+
+        } else {
+            file.createNewFile();
+        }
+        Scanner fileSc = new Scanner(file);
+
+
 
 
         while (sc.hasNextLine()) {
@@ -59,6 +95,7 @@ public class Duke {
                     throw new DukeException("Sorry, I do not understand this command");
                 }
                 itemList.add(newItem);
+                Duke.todoToFile(path, itemList);
                 System.out.println("new task added: " + newItem.toString());
                 System.out.println("You now have " + itemList.size() + " tasks in your list!");
             }
@@ -78,6 +115,7 @@ public class Duke {
                 int index = Character.getNumericValue(userMessage.charAt(5)) - 1;
                 Task task = itemList.get(index);
                 task.markAsDone();
+                Duke.todoToFile(path, itemList);
                 System.out.println("Good job! You have finished this task!");
                 System.out.println(task.toString());
             }
@@ -87,6 +125,7 @@ public class Duke {
                 int index = Character.getNumericValue(userMessage.charAt(7)) - 1;
                 Task task = itemList.get(index);
                 itemList.remove(index);
+                Duke.todoToFile(path, itemList);
                 System.out.println("I have deleted this task for you: ");
                 System.out.println(task.toString());
                 System.out.println("You now have " + itemList.size() + " tasks in your list!");
