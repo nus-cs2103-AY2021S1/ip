@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -15,6 +16,7 @@ public class Duke {
             int location;
             String description;
             String date;
+            LocalDate time;
             String type;
             ArrayList<Task> tasks = new ArrayList<>();
             int number = 0;
@@ -40,8 +42,9 @@ public class Duke {
                         case 'D':
                             location = line.indexOf("/");
                             date = line.substring(location + 1);
+                            time = LocalDate.parse(date);
                             description = line.substring(4, location);
-                            task = new Deadline(description, date);
+                            task = new Deadline(description, time);
                             if(line.charAt(2) == '1') {
                                 task.markAsDone();
                             }
@@ -51,8 +54,9 @@ public class Duke {
                         case 'E':
                             location = line.indexOf("/");
                             date = line.substring(location + 1);
+                            time = LocalDate.parse(date);
                             description = line.substring(4, location);
-                            task = new Event(description, date);
+                            task = new Event(description, time);
                             if(line.charAt(2) == '1') {
                                 task.markAsDone();
                             }
@@ -97,8 +101,9 @@ public class Duke {
                             } else {
                                 location = description.indexOf("/");
                                 date = description.substring(location + 4);
+                                time = LocalDate.parse(date);
                                 description = description.substring(1, location - 1);
-                                tasks.add(new Deadline(description, date));
+                                tasks.add(new Deadline(description, time));
                                 printPart("Got it. I've added this task:\n"
                                         + "  " + tasks.get(number).toString()
                                         + "\nNow you have " + (number + 1) + " tasks in the list.");
@@ -114,8 +119,9 @@ public class Duke {
                             } else {
                                 location = description.indexOf("/");
                                 date = description.substring(location + 4);
+                                time = LocalDate.parse(date);
                                 description = description.substring(1, location - 1);
-                                tasks.add(new Event(description, date));
+                                tasks.add(new Event(description, time));
                                 printPart("Got it. I've added this task:\n"
                                         + "  " + tasks.get(number).toString()
                                         + "\nNow you have " + (number + 1) + " tasks in the list.");
