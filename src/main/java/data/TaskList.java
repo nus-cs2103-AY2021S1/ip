@@ -27,8 +27,8 @@ public class TaskList {
             Task task = tasks.get(num - 1);
             tasks.remove(num - 1);
             System.out.println("Noted. I've removed the task: \n"
-                + task
-                + "\nNow you have " + tasks.size() + " tasks in the list.");
+                    + task
+                    + "\nNow you have " + tasks.size() + " tasks in the list.");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("There isn't such a task!");
         }
