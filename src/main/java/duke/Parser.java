@@ -2,7 +2,17 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * This class is responsible for parsing the input provided by the user into the respective commands they represent
+ */
 public class Parser {
+
+    /**
+     * Produces a Command object corresponding to the input provided. Throws an exception if invalid input is provided.
+     * @param input raw string form of a command
+     * @return Command object representing the command in the input
+     * @throws DukeException If the input is not a valid command
+     */
     public Command parse(String input) throws DukeException {
         String[] splitInput = input.split(" ", 2);
         String command = splitInput[0];
