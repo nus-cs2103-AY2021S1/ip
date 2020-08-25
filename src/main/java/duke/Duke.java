@@ -1,3 +1,6 @@
+package duke;
+import duke.task.TaskList;
+
 
 public class Duke {
     private static final String logo = " ____        _        \n"
@@ -5,11 +8,10 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-    private static TaskList taskList;
 
     public static void main(String[] args) {
 //        System.out.println("Hello from\n" + logo);
-        taskList = new TaskList();
+        TaskList taskList = new TaskList();
         Storage.loadFromFile(taskList);
         Ui ui = new Ui();
         ui.greet();
