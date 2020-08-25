@@ -29,7 +29,7 @@ public abstract class Task {
         String desc = line.substring(4);
         Task t;
 
-        if(c == ToDo.sym) {
+        if (c == ToDo.sym) {
             t = new ToDo(desc);
         } else if (c == Event.sym) {
             t = new Event(desc);
@@ -39,11 +39,12 @@ public abstract class Task {
         }
 
         char d = line.charAt(0);
+
         //check if its done
-        if(d == '\u2713') {
+        if (d == '\u2713') {
             t.done();
         }
-
+        
         return t;
     }
 
