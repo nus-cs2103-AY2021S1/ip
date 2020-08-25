@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 
 public class Task {
@@ -28,6 +30,10 @@ public class Task {
 
     void markAsDone() {
         isCompleted = true;
+    }
+
+    public String encode() {
+        return (getType() + " | " + (isCompleted ? "1" : "0") + " | " + description + (getDate() != null ? (" | " + getDate()) : "") + "\n");
     }
 
     @Override

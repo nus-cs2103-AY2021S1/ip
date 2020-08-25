@@ -1,7 +1,15 @@
+package duke.command;
+
+import duke.Storage;
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.exception.InvalidArgumentException;
+import duke.task.TaskList;
+
 public class DoneCommand extends Command {
     private final int index;
 
-    DoneCommand(int index) {
+    public DoneCommand(int index) {
         this.index = index;
     }
 

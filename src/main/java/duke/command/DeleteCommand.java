@@ -1,9 +1,18 @@
+package duke.command;
+
+import duke.Storage;
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.exception.InvalidArgumentException;
+import duke.exception.StorageAccessException;
+import duke.task.TaskList;
+
 import java.io.IOException;
 
 public class DeleteCommand extends Command {
     private final int index;
 
-    DeleteCommand(int index) {
+    public DeleteCommand(int index) {
         this.index = index;
     }
     @Override

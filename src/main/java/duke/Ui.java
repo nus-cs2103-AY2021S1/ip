@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -7,7 +9,7 @@ public class Ui {
         s = new Scanner(System.in);
     }
 
-    void displayMessage(String message) {
+    public void displayMessage(String message) {
         System.out.println("\t " + message);
     }
 
@@ -31,7 +33,7 @@ public class Ui {
         System.out.println("\t___________________________________________________________________________");
     }
 
-    void bye() {
+    public void bye() {
         displayMessage("Bye. Hope to see you again soon");
     }
 

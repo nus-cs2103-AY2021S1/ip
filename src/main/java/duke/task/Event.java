@@ -1,21 +1,23 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     private LocalDate date;
 
-    Event(String description, LocalDate date) {
+    public Event(String description, LocalDate date) {
         super(description);
         this.date = date;
     }
 
-    Event(String description, LocalDate date, String completionStatus) {
+    public Event(String description, LocalDate date, String completionStatus) {
         super(description, completionStatus);
         this.date = date;
     }
 
     @Override
-    String getType() {
+    public String getType() {
         return "E";
     }
 
