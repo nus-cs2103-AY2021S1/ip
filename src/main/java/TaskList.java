@@ -2,11 +2,9 @@ import java.util.List;
 
 public class TaskList {
     private List<Task> storedTasks;
-    private Storage storage;
 
-    public TaskList(List<Task> storedTasks, Storage storage) {
+    public TaskList(List<Task> storedTasks) {
         this.storedTasks = storedTasks;
-        this.storage = storage;
     }
 
     public List<Task> getStoredTasks() {
@@ -22,9 +20,8 @@ public class TaskList {
      *
      * @param newTask Input task from user to be stored.
      **/
-    public void addTask(Task newTask) throws DukeException {
+    public void addTask(Task newTask) {
         storedTasks.add(newTask);
-        storage.updateTasks(storedTasks);
     }
 
     /**
@@ -41,7 +38,6 @@ public class TaskList {
                 throw new DukeException("This task is already done: " + task.getDescription());
             } else {
                 task.markAsDone();
-                storage.updateTasks(storedTasks);
                 return task;
             }
         }
@@ -58,7 +54,6 @@ public class TaskList {
         } else {
             Task taskToDelete = storedTasks.get(taskNumber - 1);
             storedTasks.remove(taskToDelete);
-            storage.updateTasks(storedTasks);
             return taskToDelete;
         }
     }

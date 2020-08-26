@@ -50,10 +50,10 @@ public class Storage {
         return storedTaskStatus.equals("1");
     }
 
-    public void updateTasks(List<Task> stored_task) throws DukeException {
+    public void updateTasks(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);
-            for (Task task : stored_task) {
+            for (Task task : taskList.getStoredTasks()) {
                 if (task instanceof ToDo){
                     fileWriter.write(String.join(SPLITTER, Task.TaskType.TODO.getInitial(), getDoneString(task), task.getDescription()));
                 } else if (task instanceof Deadline) {

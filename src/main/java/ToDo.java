@@ -1,5 +1,3 @@
-import java.util.StringTokenizer;
-
 public class ToDo extends Task {
     /**
      * Constructor for ToDo.

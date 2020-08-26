@@ -25,7 +25,7 @@ public class Command {
         this.dateTime = dateTime;
     }
 
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (commandType == CommandType.BYE) {
             ui.close();
             isInProgram = false;
@@ -33,12 +33,15 @@ public class Command {
             ui.listStoredTasks(taskList.getStoredTasks());
         } else if (commandType == CommandType.DONE) {
             ui.printDoneMessage(taskList.markTaskAsDone(taskNumber));
+            storage.updateTasks(taskList);
         } else if (commandType == CommandType.DELETE) {
             ui.printDeleteMessage(taskList.deleteTask(taskNumber), taskList.getCount());
+            storage.updateTasks(taskList);
         } else if (commandType == CommandType.TODO) {
             ToDo newTask = new ToDo(description);
             taskList.addTask(newTask);
             ui.printAddMessage(newTask, taskList.getCount());
+            storage.updateTasks(taskList);
         } else if (commandType == CommandType.DEADLINE) {
             Deadline newTask = new Deadline(description, dateTime);
             taskList.addTask(newTask);
