@@ -11,11 +11,23 @@ import duke.ui.Ui;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Represents a command that adds a deadline task.
+ */
 public class DeadlineCommand extends UserCommand {
+
+    /**
+     * @param userInput user's input.
+     */
     public DeadlineCommand(String userInput) {
         super(userInput);
     }
 
+    /**
+     * @param taskList task list containing all the tasks.
+     * @param ui       ui that prints output.
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
 
