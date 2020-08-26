@@ -33,39 +33,43 @@ public class Duke {
                 // Parse out the command from the user input
                 Command cmd = Parser.parse(userInput);
                 // Use switch to process the commands
-                switch(cmd) {
-                    case EXIT:
-                        isExit = true;
-                        break;
-                    case LIST:
-                        ui.printList(tasks);
-                        break;
-                    case TODO:
-                        ui.printOutputSymbol();
-                        tasks.createTodo(userInput);
-                        break;
-                    case DEADLINE:
-                        ui.printOutputSymbol();
-                        tasks.createDeadline(userInput);
-                        break;
-                    case EVENT:
-                        ui.printOutputSymbol();
-                        tasks.createEvent(userInput);
-                        break;
-                    case INVALID:
-                        // Duke does not recognize the commands
-                        ui.printOutputSymbol();
-                        throw new DukeException("Sorry, I don't recognize what you just entered...");
-                    case DONE:
-                        ui.printOutputSymbol();
-                        tasks.markTaskDone(userInput);
-                        break;
-                    case DELETE:
-                        ui.printOutputSymbol();
-                        tasks.deleteTask(userInput);
-                        break;
-                    default:
-                        throw new DukeException("Sorry I think I something went wrong...");
+                switch (cmd) {
+                case EXIT:
+                    isExit = true;
+                    break;
+                case LIST:
+                    ui.printList(tasks);
+                    break;
+                case TODO:
+                    ui.printOutputSymbol();
+                    tasks.createTodo(userInput);
+                    break;
+                case DEADLINE:
+                    ui.printOutputSymbol();
+                    tasks.createDeadline(userInput);
+                    break;
+                case EVENT:
+                    ui.printOutputSymbol();
+                    tasks.createEvent(userInput);
+                    break;
+                case INVALID:
+                    // Duke does not recognize the commands
+                    ui.printOutputSymbol();
+                    throw new DukeException("Sorry, I don't recognize what you just entered...");
+                case DONE:
+                    ui.printOutputSymbol();
+                    tasks.markTaskDone(userInput);
+                    break;
+                case DELETE:
+                    ui.printOutputSymbol();
+                    tasks.deleteTask(userInput);
+                    break;
+                case FIND:
+                    ui.printOutputSymbol();
+                    tasks.searchForKeyword(userInput);
+                    break;
+                default:
+                    throw new DukeException("Sorry I think I something went wrong...");
                 }
             } catch (DukeException e) {
                 ui.printError(e);

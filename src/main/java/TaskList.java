@@ -98,4 +98,42 @@ public class TaskList {
         }
     }
 
+    /**
+     * Searches through all of Duke's tasks and
+     * print out tasks with given keyword
+     *
+     * @param command The find command inputted by the user.
+     * @throws DukeException If no tasks with keyword can be found.
+     */
+    public void searchForKeyword(String command) throws DukeException {
+        String[] instructions = command.split(" ", 2);
+        String keyword = instructions[1];
+
+        // Initialize an arraylist to store found tasks
+        ArrayList<Task> findings = new ArrayList<>();
+
+        // Go through Duke's tasks
+        for (int i = 0; i < list.size(); i++) {
+            //Check each task for the keyword
+            if (list.get(i).getDescription().contains(keyword)) {
+                // Add to findings
+                findings.add(list.get(i));
+            }
+        }
+
+        //Check if list is empty
+        if (findings.isEmpty()) {
+            throw new DukeException("Sorry I find can't any tasks related to " + keyword + ".");
+        } else {
+            System.out.println("Here are the relevant tasks!");
+            // Prints all tasks in findings
+            for (int i = 0; i < findings.size(); i++) {
+                // Enumerator
+                System.out.print((i+1) + ".");
+                // Actual Task
+                System.out.println(findings.get(i));
+            }
+        }
+        System.out.println();
+    }
 }
