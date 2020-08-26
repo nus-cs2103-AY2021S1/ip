@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,7 +16,7 @@ public class Parser {
 
         String type = splitTask[0];
         String description = splitTask[2];
-        boolean isDone = Integer.valueOf(splitTask[1]) == 1;
+        boolean isDone = Integer.parseInt(splitTask[1]) == 1;
 
         switch (type) {
         case "T":

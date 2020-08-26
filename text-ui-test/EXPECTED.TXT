@@ -1,41 +1,76 @@
+Warning: Unable to find file containing task history. Please carry on if this is the first time using Duke.
+Hello! I'm Duke
+What can I do for you?
+
+____________________________________________________________
 You have no tasks!
-OOPS!!! You didn't provide any task details.
+____________________________________________________________
+____________________________________________________________
+Please enter a valid task number!
+____________________________________________________________
+____________________________________________________________
+Please enter a valid task number!
+____________________________________________________________
+____________________________________________________________
+Unable to read command. Please enter it in the correct format!
+____________________________________________________________
+____________________________________________________________
 Got it. I've added this task:
-  [T][✘] Sample Todo Task
+  [T][?] Sample Todo Task
 Now you have 1 tasks in the list
-OOPS!!! You didn't provide any task details.
-OOPS!!! Please add both a description and deadline for your task!
-OOPS!!! Please add both a description and deadline for your task!
-OOPS!!! Please add both a description and deadline for your task!
-OOPS!!! Please add both a description and deadline for your task!
+____________________________________________________________
+____________________________________________________________
+Unable to read command. Please enter it in the correct format!
+____________________________________________________________
+____________________________________________________________
+Unable to read command. Please enter it in the correct format!
+____________________________________________________________
+____________________________________________________________
+Unable to read command. Please enter it in the correct format!
+____________________________________________________________
+____________________________________________________________
 Got it. I've added this task:
-  [D][✘] Sample Deadline Task (by: 2020)
+  [D][?] Sample Deadline Task (by: Jan 01 2020 12:00 am)
 Now you have 2 tasks in the list
-OOPS!!! You didn't provide any task details.
-OOPS!!! Please add both a description and date for your event!
-OOPS!!! Please add both a description and date for your event!
-OOPS!!! Please add both a description and date for your event!
-OOPS!!! Please add both a description and date for your event!
+____________________________________________________________
+____________________________________________________________
+Unable to read command. Please enter it in the correct format!
+____________________________________________________________
+____________________________________________________________
+Unable to read command. Please enter it in the correct format!
+____________________________________________________________
+____________________________________________________________
+Unable to read command. Please enter it in the correct format!
+____________________________________________________________
+____________________________________________________________
 Got it. I've added this task:
-  [E][✘] Sample Event (at: today)
+  [E][?] Sample Event (at: Jan 01 2020 12:00 am)
 Now you have 3 tasks in the list
-OOPS!!! Please indicate the number of the task you have completed.
-OOPS!!! Please enter a valid task number.
-OOPS!!! Please enter a valid task number.
+____________________________________________________________
+____________________________________________________________
+Please enter a valid task number!
+____________________________________________________________
+____________________________________________________________
 Nice! I've marked this task as done:
-  [T][✓] Sample Todo Task
-Nice! I've marked this task as done:
-  [E][✓] Sample Event (at: today)
-OOPS!!! Please enter a valid task number.
-OOPS!!! Please enter a valid task number.
-OOPS!!! Please indicate the number of the task you want to delete.
-OOPS!!! Please enter a valid task number.
-OOPS!!! Please enter a valid task number.
+  [T][?] Sample Todo Task
+____________________________________________________________
+____________________________________________________________
+Please enter a valid task number!
+____________________________________________________________
+____________________________________________________________
+Please enter a valid task number!
+____________________________________________________________
+____________________________________________________________
 Noted. I've removed this task:
-  [T][✓] Sample Todo Task
+  [E][?] Sample Event (at: Jan 01 2020 12:00 am)
 Now you have 2 tasks in the list.
-OOPS!!! Please enter a valid task number.
-OOPS!!! Please enter a valid task number.
-OOPS!!! Please enter a valid task number.
-OOPS!!! I'm sorry, but I don't know what that means :-(
+____________________________________________________________
+____________________________________________________________
+1.[T][?] Sample Todo Task
+2.[D][?] Sample Deadline Task (by: Jan 01 2020 12:00 am)
+____________________________________________________________
+____________________________________________________________
+Unable to read command. Please enter it in the correct format!
+____________________________________________________________
+____________________________________________________________
 Bye. Hope to see you again soon!
