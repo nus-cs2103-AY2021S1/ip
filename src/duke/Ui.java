@@ -65,6 +65,36 @@ public class Ui {
         );
     }
 
+    /**
+     * Prints out a list of tasks that match the searchword
+     * @param arr temporary list of tasks
+     */
+    public static void printForFind(ArrayList<Task> arr) {
+        if (arr.size() == 0) {
+            System.out.println("There is no task that matches your searchword");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            int counter = 1;
+            for (Task t: arr) {
+                String keyword = "";
+                String toPrint = "";
+                if (t instanceof Deadline) {
+                    keyword = "by";
+                    toPrint = " (" + keyword + ": " + t.time + ")";
+                } else if (t instanceof Event) {
+                    keyword = "at";
+                    toPrint = " (" + keyword + ": " + t.time + ")";
+                }
+                System.out.println(counter + ". " + t.getIndicator() + t.getIcon() + t.name + toPrint);
+                counter++;
+            }
+        }
+    }
+
+    /**
+     * Prints out a string everytime the user indicates a task as done
+     * @param arr arraylist of tasks
+     */
     public static void printForDone(ArrayList<Task> arr, Task t) {
         String keyword = "";
         String toPrint = "";
@@ -124,6 +154,28 @@ public class Ui {
     public void respondToList() throws Exception {
         System.out.println("Here are the tasks in the list: ");
         s.printList();
+    }
+
+    /**
+     * Prints out a statement when the user forgets to put the searchword.
+     */
+    public void respondToFindWrongSyntax() {
+        System.out.println("Provide a number of the todo that you want to mark as done!");
+    }
+
+    /**
+     * Prints the filtered list.
+     * @param searchWord the word on which the user wants to base their search.
+     * @throws Exception
+     */
+    public void respondToFind(String searchWord) throws Exception {
+        ArrayList<Task> temp = new ArrayList<>();
+        for (Task t: tl.getArr()) {
+            if (t.name.contains(searchWord)) {
+                temp.add(t);
+            }
+        }
+        printForFind(temp);
     }
 
     /**

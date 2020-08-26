@@ -26,6 +26,13 @@ public class Parser {
                 } else {
                     ui.respondToList();
                 }
+            } else if (command.substring(0, 4).equals("find")) {
+                if (command.length() == 4) {
+                    ui.respondToFindWrongSyntax();
+                } else {
+                    String searchWord = command.substring(5);
+                    ui.respondToFind(searchWord);
+                }
             } else if (command.substring(0, 4).equals("done")) {
                 if (command.length() == 4) {
                     ui.respondToDoneWrongSyntax();
