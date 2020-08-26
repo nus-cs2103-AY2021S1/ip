@@ -43,8 +43,9 @@ public class Ui {
                 + "\n     4.event <event name> /at <event timing> -- add an event with its timing"
                 + "\n     5.done <task index> -- mark this task as done"
                 + "\n     6.delete <task index> -- mark this task from task list"
-                + "\n     7.help -- show all commands"
-                + "\n     8.bye -- exit the chatbot"
+                + "\n     7.find <keyword> -- find all tasks in the task list which contains the keyword"
+                + "\n     8.help -- show all commands"
+                + "\n     9.bye -- exit the chatbot"
                 + "\n**************************************************************\n";
         System.out.println(commandList);
     }
