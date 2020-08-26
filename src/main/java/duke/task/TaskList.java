@@ -101,4 +101,18 @@ public class TaskList {
         }
         return strings;
     }
+
+    public String findTasks(String keyword) {
+        String tasks = "";
+        Task t;
+        int numMatch = 0;
+        for (int i = 0; i < this.tasks.size(); i++) {
+            t = this.tasks.get(i);
+            if (t.hasKeyword(keyword)) {
+                numMatch++;
+                tasks += String.format("\t %d.%s%n", numMatch, t);
+            }
+        }
+        return tasks;
+    }
 }
