@@ -8,10 +8,10 @@ import java.util.Scanner;
  */
 public class Ui {
     /** Bot's reply prefix */
-    private static String bot = "Dave says:";
+    private static final String bot = "Dave says:";
 
     /** Line separator */
-    private static String line = "_______________________________________________________________";
+    private static final String line = "_______________________________________________________________";
 
     /** Scanner object */
     Scanner scanner;
@@ -50,6 +50,9 @@ public class Ui {
         return Ui.line;
     }
 
+    /**
+     * Prints goodbye and terminates.
+     */
     public void printBye() {
         System.out.println(line);
         System.out.println(bot);
@@ -58,6 +61,11 @@ public class Ui {
         System.exit(0);
     }
 
+    /**
+     * Prints tasks in task list.
+     *
+     * @param tasks ArrayList containing tasks.
+     */
     public void printTaskList(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
             System.out.println(line);
@@ -75,6 +83,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Marks tasks as done.
+     *
+     * @param tasks Arraylist of tasks.
+     * @param pos Index in arraylist.
+     * @throws DukeException When index < 0 or index > tasks.size().
+     */
     public void printDone(ArrayList<Task> tasks, int pos) throws DukeException {
         if (pos <= tasks.size() && pos > 0) {
             tasks.get(pos - 1).markAsDone(); //marking task as done
@@ -89,17 +104,30 @@ public class Ui {
         }
     }
 
-
-    public void printFindings(ArrayList<Task> findings) {
+    /**
+     * Prints tasks with the keyword.
+     * @param findings Arraylist of tasks with the keyword.
+     * @throws DukeException When findings is empty.
+     */
+    public void printFindings(ArrayList<Task> findings) throws DukeException {
         System.out.println(line);
         System.out.println(bot);
-        System.out.println("These are the tasks with your keyword:");
-        for (Task finding : findings) {
-            System.out.println(finding);
+        if (findings.isEmpty()) {
+            throw new DukeException("There are no such tasks with this keyword! :(");
+        } else {
+            System.out.println("These are the tasks with your keyword:");
+            for (Task finding : findings) {
+                System.out.println(finding);
+            }
         }
     }
 
-
+    /**
+     * Prints replies when ToDo task is added.
+     *
+     * @param todoTask Task to be done.
+     * @param tasks TaskList to add task to.
+     */
     public void printAddTodo(ToDo todoTask, TaskList tasks) {
         System.out.println(line);
         System.out.println(bot);

@@ -170,5 +170,4 @@ public class AddCommand extends Command {
             throw new DukeException("The description of an event cannot be empty!");
         }
     }
-
 }

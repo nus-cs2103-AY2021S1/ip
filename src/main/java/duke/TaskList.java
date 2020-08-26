@@ -28,7 +28,12 @@ public class TaskList {
         this.tasks.add(task);
     }
 
-
+    /**
+     * Returns an Arraylist of tasks with keyword.
+     *
+     * @param userInput User input as string.
+     * @return Arraylist of tasks with keyword.
+     */
     public ArrayList<Task> findTasks(String userInput) {
         String keyword = userInput.substring(5);
         ArrayList<Task> findings = new ArrayList<>();
@@ -40,10 +45,21 @@ public class TaskList {
         return findings;
     }
 
+    /**
+     * Deletes task from task list at this index.
+     *
+     * @param index Index at which task should be removed at.
+     * @return Task to be removed.
+     */
     public Task deleteTask(int index) {
         return this.tasks.remove(index);
     }
 
+    /**
+     * Returns number of tasks in task list.
+     *
+     * @return Number of tasks in task list.
+     */
     public int size() {
         return this.tasks.size();
     }

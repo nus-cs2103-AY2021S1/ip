@@ -45,7 +45,6 @@ public class Deadline extends Task {
                 DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
     }
 
-
     /**
      * Returns a string representation of a Deadline task.
      * @return String representation of a Deadline task.
