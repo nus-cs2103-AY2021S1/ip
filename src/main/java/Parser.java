@@ -2,7 +2,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
- * Parser class deals with making sense of user input
+ * Parser class deals with making sense of user input.
  */
 public class Parser {
 
