@@ -6,8 +6,7 @@ import java.io.InputStreamReader;
 
 public class Parser {
     // array of valid commands
-    private final static List<String> COMMANDS = Arrays.asList("done",
-                                                               "delete");
+    private final static List<String> COMMANDS = Arrays.asList("done", "delete");
     private final TaskList userTaskList;
     private final Storage storage;
 
