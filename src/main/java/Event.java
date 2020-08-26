@@ -66,6 +66,7 @@ public class Event extends Task {
 
     /**
      * Returns the string representation of the event, which includes the status icon, description, and period.
+     *
      * @return the string representation of the event.
      */
     @Override

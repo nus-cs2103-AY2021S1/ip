@@ -7,6 +7,7 @@ public class BobStorageInitialisationException extends BobException {
 
     /**
      * Returns a message to indicate that the Storage could not be initialised.
+     *
      * @return a message to indicate that the Storage could not be initialised.
      */
     @Override

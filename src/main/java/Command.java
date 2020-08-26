@@ -18,6 +18,7 @@ public abstract class Command {
 
     /**
      * Returns a boolean value to indicate if Bob should stop accepting commands from the user.
+     *
      * @return false to indicate that Bob should continue accepting commands.
      */
     public boolean isExit() {

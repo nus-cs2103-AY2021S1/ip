@@ -1,2 +1,10 @@
+<<<<<<< HEAD
 T | 0 | eat food
+=======
+T | 0 | eat dinner
+
+D | 0 | eat apple | 2020-05-19 0800
+
+E | 0 | meet friends | 2020-05-19 0900 to 2020-05-19 1000
+>>>>>>> branch-level-9
 

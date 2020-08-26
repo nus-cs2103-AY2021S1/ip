@@ -1,7 +1,7 @@
 package main.java;
 
 /**
- * An exception which may be thrown when a desired file is cannot be found.
+ * An exception which may be thrown when a desired file cannot be found.
  */
 public class BobFileNotFoundException extends BobException {
 

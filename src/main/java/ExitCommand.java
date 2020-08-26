@@ -7,6 +7,7 @@ public class ExitCommand extends Command {
 
     /**
      * Executes nothing.
+     *
      * @param tasks the TaskList consisting of all tasks tracked by Bob.
      * @param ui the UI which prints out all messages corresponding to the Command.
      * @param storage the Storage which manages all saved data to be updated.

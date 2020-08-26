@@ -7,6 +7,7 @@ public class BobIOException extends BobException {
 
     /**
      * Returns a message to indicate that information could not be saved to a file.
+     *
      * @return a message to indicate that information could not be saved to a file.
      */
     @Override
