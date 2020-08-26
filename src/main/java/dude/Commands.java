@@ -5,5 +5,5 @@ package dude;
  */
 
 public enum Commands {
-    LIST, BYE, DONE, TODO, EVENT, DEADLINE, DELETE
+    LIST, BYE, DONE, TODO, EVENT, DEADLINE, DELETE, FIND
 }

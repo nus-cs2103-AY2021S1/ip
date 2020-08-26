@@ -1,5 +1,6 @@
 package dude;
 
+import com.sun.source.tree.ReturnTree;
 import dude.command.Command;
 
 import dude.command.DeadlineCommand;
@@ -7,6 +8,7 @@ import dude.command.DeleteCommand;
 import dude.command.DoneCommand;
 import dude.command.ExitCommand;
 import dude.command.EventCommand;
+import dude.command.FindCommand;
 import dude.command.ListCommand;
 import dude.command.TodoCommand;
 
@@ -40,6 +42,8 @@ public class Parser {
                     return new DeadlineCommand(commands[0], arr2[0], arr2[1].trim());
                 case DELETE:
                     return new DeleteCommand(commands[0], Integer.valueOf(commands[1]));
+                case FIND:
+                    return new FindCommand(commands[0], commands[1].trim());
                 default:
                     throw new InvalidCommandException("");
                 }
