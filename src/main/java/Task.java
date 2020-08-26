@@ -1,4 +1,5 @@
-/** Task represents a task to be done.
+/**
+ * Task represents a task to be done.
  */
 public abstract class Task {
     String taskName;
@@ -18,10 +19,12 @@ public abstract class Task {
         return (this.isDone ? "[✓] " : "[✘] ") + this.taskName;
     }
 
-  public abstract String toFileFormat();
+    public abstract String toFileFormat();
 
-  /** Return true if task name contains keyword else false */
-  public boolean containsKeyword(String keyword) {
-    return this.taskName.contains(keyword);
-  }
+    /**
+     * Return true if task name contains keyword else false
+     */
+    public boolean containsKeyword(String keyword) {
+        return this.taskName.contains(keyword);
+    }
 }
