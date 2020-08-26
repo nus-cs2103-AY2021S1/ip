@@ -6,6 +6,10 @@ import dude.util.*;
 
 import dude.command.Command;
 
+/**
+ * The main class containing the key functionality of the bot.
+ */
+
 public class Dude {
     private static final String BYE = "bye";
     private static final String FILEPATH = "./data/tasks.txt";

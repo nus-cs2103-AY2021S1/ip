@@ -12,6 +12,10 @@ import java.time.LocalDate;
 import dude.task.Task;
 import dude.task.Deadline;
 
+/**
+ * The command creates a deadline and adds it to the tasklist when executed.
+ */
+
 public class DeadlineCommand extends Command {
     private String description;
     private String by;

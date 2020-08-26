@@ -2,6 +2,10 @@ package dude.util;
 
 import java.util.Scanner;
 
+/**
+ * The class the handles all the on screen interaction with the user.
+ */
+
 public class Ui {
     private static final String LINE = "____________________________________________________________\n";
     private Scanner scanner;

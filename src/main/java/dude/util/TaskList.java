@@ -5,6 +5,11 @@ import java.util.List;
 
 import dude.task.Task;
 
+/**
+ * The class that handles all of the tasks while the program is running.
+ */
+
+
 public class TaskList {
     private List<Task> tasks;
 

@@ -5,6 +5,10 @@ import dude.util.Storage;
 import dude.util.TaskList;
 import dude.util.Ui;
 
+/**
+ * The command signals for the bot to terminate.
+ */
+
 public class ExitCommand extends Command {
     public ExitCommand(String action) {
         super(action);

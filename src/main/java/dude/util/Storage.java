@@ -22,6 +22,11 @@ import dude.task.Deadline;
 import dude.task.Event;
 import dude.task.Todo;
 
+/**
+ * The class that handles the reading and writing of tasks.
+ */
+
+
 public class Storage {
     private String filePath;
 

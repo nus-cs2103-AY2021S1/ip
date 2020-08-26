@@ -13,6 +13,10 @@ import dude.command.TodoCommand;
 import dude.util.InvalidArgumentException;
 import dude.util.InvalidCommandException;
 
+/**
+ * The class that processes the logic behind the bot.
+ */
+
 public class Parser {
     public static Command parse(String input) throws InvalidArgumentException, InvalidCommandException {
             String[] commands = input.split(" ", 2);

@@ -1,5 +1,11 @@
 package dude.task;
 
+
+/**
+ * Todo handles the tasks that only contains descriptions
+ */
+
+
 public class Todo extends Task {
     public Todo(String description) {
         super(description);

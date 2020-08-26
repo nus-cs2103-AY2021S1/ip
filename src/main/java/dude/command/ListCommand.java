@@ -5,6 +5,10 @@ import dude.util.Storage;
 import dude.util.TaskList;
 import dude.util.Ui;
 
+/**
+ * The command gets the ui class to list all of the current tasks.
+ */
+
 public class ListCommand extends Command {
     public ListCommand(String action) {
         super(action);

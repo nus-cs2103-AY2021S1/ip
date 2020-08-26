@@ -2,6 +2,10 @@ package dude.task;
 
 import java.time.LocalDate;
 
+/**
+ * The class handles tasks that occurs on a specific date.
+ */
+
 public class Event extends DatedTask {
     public Event(String description, LocalDate at) {
         super(description, at);

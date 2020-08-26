@@ -12,6 +12,10 @@ import java.time.LocalDate;
 
 import dude.task.Event;
 
+/**
+ * The command creates an event and adds it to the tasklist when executed.
+ */
+
 public class EventCommand extends Command {
     private String description;
     private String at;

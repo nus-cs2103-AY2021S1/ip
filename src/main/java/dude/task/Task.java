@@ -1,5 +1,9 @@
 package dude.task;
 
+/**
+ * The class that contains the key functionality of a task.
+ */
+
 public class Task {
     protected String description;
     protected boolean isDone;

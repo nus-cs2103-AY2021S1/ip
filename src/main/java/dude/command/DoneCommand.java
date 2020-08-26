@@ -7,6 +7,10 @@ import dude.util.Ui;
 
 import java.io.IOException;
 
+/**
+ * The command changes the status of an incomplete task to complete.
+ */
+
 public class DoneCommand extends Command {
     private int index;
 

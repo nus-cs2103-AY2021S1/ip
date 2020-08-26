@@ -7,6 +7,10 @@ import dude.util.Ui;
 
 import java.io.IOException;
 
+/**
+ * The command deletes a task from the tasklist.
+ */
+
 public class DeleteCommand extends Command {
     private int index;
 

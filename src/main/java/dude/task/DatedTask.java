@@ -3,6 +3,10 @@ package dude.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The class handles Tasks that contains a date parameter.
+ */
+
 public class DatedTask extends Task {
     protected LocalDate date;
 

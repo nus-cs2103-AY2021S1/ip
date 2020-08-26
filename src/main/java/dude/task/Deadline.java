@@ -2,6 +2,10 @@ package dude.task;
 
 import java.time.LocalDate;
 
+/**
+ * The class handles tasks with deadlines to meet.
+ */
+
 public class Deadline extends DatedTask {
     public Deadline(String description, LocalDate by) {
         super(description, by);

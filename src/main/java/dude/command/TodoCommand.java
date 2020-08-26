@@ -9,6 +9,10 @@ import java.io.IOException;
 
 import dude.task.Todo;
 
+/**
+ * The command creates a todo task and adds it to the tasklist when executed.
+ */
+
 public class TodoCommand extends Command {
     private String description;
 
