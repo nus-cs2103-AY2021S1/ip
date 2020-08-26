@@ -10,5 +10,4 @@ public class DukeException {
     public String toString() {
         return this.message;
     }
-
 }

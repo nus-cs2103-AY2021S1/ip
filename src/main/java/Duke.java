@@ -1,6 +1,3 @@
-import java.io.File;
-import java.io.FileWriter;
-
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"

@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class TextAndTaskConverter {
 
@@ -12,21 +11,17 @@ public class TextAndTaskConverter {
 
     public static Task textConverter(String text) {
         String[] split = text.split(" ## ");
-
         String description = split[2];
 
         if (split.length == 3) {
-            System.out.print("length3");
             Todo task = new Todo(description);
             if (split[1].trim().equals("1")) {
-                System.out.println(split[1]);
                 task.setDone();
             }
             return task;
 
         } else if (split.length == 4) {
             Task task = null;
-            System.out.println("elseif");
             if (split[0].trim().equals("D")) {
                 LocalDate date = LocalDate.parse(split[3]);
                 task = new Deadline(description, date);
@@ -46,7 +41,6 @@ public class TextAndTaskConverter {
                 if (split[1].equals("1")) {
                     task.setDone();
                 }
-                //return task;
             }
             return task;
 
@@ -87,6 +81,10 @@ public class TextAndTaskConverter {
             LocalTime t = LocalTime.parse(split2[1]);
             return t;
         }
+    }
+
+    public static taskConverter() {
+
     }
 }
 

@@ -25,7 +25,6 @@ public class FileHandler {
                 writer.write("E ## " + (taskList.get(i).getDone() ? 1 : 0) + " ## " + ((Event) taskList.get(i)).getDescription() + " ## " + ((Event) taskList.get(i)).getDate() + " " + ((Event) taskList.get(i)).getTime() + "\n");
             }
         }
-
         writer.close();
     }
 
@@ -63,30 +62,6 @@ public class FileHandler {
         } catch (Exception e) {
             System.out.println("Problem reading file.");
         }
-    }
-
-    public static void delete(String line) throws IOException {
-        System.out.println("deleting");
-
-        File inputFile = new File("data/duke.txt");
-        File tempFile = new File("data/myTempFile.txt");
-
-        BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
-
-        String lineToRemove = line;
-        String currentLine;
-
-        while((currentLine = reader.readLine()) != null) {
-            // trim newline when comparing with lineToRemove
-            String trimmedLine = currentLine.trim();
-            if(trimmedLine.equals(lineToRemove)) continue;
-            writer.write(currentLine + System.getProperty("line.separator"));
-        }
-
-        writer.close();
-        reader.close();
-        tempFile.renameTo(inputFile);
     }
 
     public static List<String> readSavedFile(String fileName) throws IOException {

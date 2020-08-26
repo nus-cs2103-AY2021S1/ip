@@ -1,6 +1,4 @@
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -25,10 +23,9 @@ public class IOHandler {
             }
 
             String error = DukeExceptionHandler.handleException(text);
-            //FileHandler fileHandler = new FileHandler();
 
             List<String> files = FileHandler.readSavedFile(fileName);
-            //System.out.println(files.get(0));
+
             System.out.println("load");
             for (int i = 0; i < files.size(); i++) {
                 Task task = TextAndTaskConverter.textConverter(files.get(i));
@@ -66,9 +63,6 @@ public class IOHandler {
                                 + deletedTask + "\nNow you have " + taskManager.getNumTasks()
                                 + " tasks in the list");
 
-                        //                        String lineToDelete = FileHandler.getInputLine(deletedTask);
-                        //                        FileHandler.delete(lineToDelete);
-
                     } else if (text.length() > 0) {
 
                         if (text.contains("todo")) {
@@ -79,27 +73,19 @@ public class IOHandler {
                                     + todo + "\nNow you have " + taskManager.getNumTasks()
                                     + " tasks in the list");
 
-                            // FileHandler.writeToFile(fileName, new Todo(textArray[1]));
-
                         } else if (text.contains("deadline")) {
                             String[] textArray = text.split(" ", 2);
                             String trimText = textArray[1].trim();
                             String task = trimText.replace("/by", "/");
 
-                            System.out.println(task);
                             String taskName = TextAndTaskConverter.getTaskName(task);
                             LocalDate date = TextAndTaskConverter.getDate(task);
-                            //LocalTime time = TextAndTaskConverter.getTime((textArray[1]));
-                            System.out.println(date);
-                            System.out.println(taskName);
 
                             Deadline deadline = new Deadline(taskName, date);
                             taskManager.addTask(deadline);
                             System.out.println("Got it. I've added this task:\n"
                                     + deadline + "\nNow you have " + taskManager.getNumTasks()
                                     + " tasks in the list");
-
-                            //FileHandler.writeToFile(fileName, new Deadline(textArray[1]));
 
                         } else if (text.contains("event")) {
                             String[] textArray = text.split(" ", 2);
@@ -116,8 +102,6 @@ public class IOHandler {
                             System.out.println("Got it. I've added this task:\n"
                                     + event + "\nNow you have " + taskManager.getNumTasks()
                                     + " tasks in the list");
-
-                            //FileHandler.writeToFile(fileName, new Event(textArray[1]));
                         }
                     }
                     text = sc.nextLine();
