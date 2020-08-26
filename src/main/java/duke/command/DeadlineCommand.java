@@ -12,6 +12,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Deadline Command class to execute command that adds a deadline to
+ * the TaskList.
+ */
 public class DeadlineCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Got it. I've added this task:\n";
@@ -22,6 +26,14 @@ public class DeadlineCommand extends Command {
         super(input);
     }
 
+    /**
+     * Execute a Deadline Command to add a Deadline into TaskList.
+     * @param tasks TaskList of tasks.
+     * @param ui Ui object from the Ui class.
+     * @param storage Storage object from the Storage class.
+     * @throws InvalidInputException rejects empty deadline or incorrect date and time format.
+     * @throws InvalidFileException throws an error when method fails to save.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 8) {

@@ -3,8 +3,17 @@ package main.java.duke;
 import main.java.duke.command.*;
 import main.java.duke.exceptions.DukeException;
 
+/**
+ * Parser class to parse user input into respective command lines.
+ */
 public class Parser {
 
+    /**
+     * Parse user input into useful commands.
+     * @param userInput String input by user through the Ui.
+     * @return respective command that will be executed.
+     * @throws DukeException exceptions thrown by parsing user inputs.
+     */
     public static Command parseCommand(String userInput) throws DukeException {
             if (userInput.startsWith("done")) {
                 return new DoneCommand(userInput);
@@ -21,6 +30,13 @@ public class Parser {
             }
     }
 
+    /**
+     * Differentiate user input into commands that add their respective
+     * tasks into the task list.
+     * @param command user input.
+     * @return respective Command.
+     * @throws DukeException unable to read user input.
+     */
     public static Command addCommand(String command) throws DukeException {
         if (command.startsWith("todo")) {
             return new TodoCommand(command);

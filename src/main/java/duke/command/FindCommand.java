@@ -9,6 +9,10 @@ import main.java.duke.tasks.TaskList;
 
 import java.util.*;
 
+/**
+ * FindCommand class to execute command that search for tasks in the
+ * task list using keywords.
+ */
 public class FindCommand extends Command {
 
     public static String TASK_FOUND_MESSAGE = "Here are the matching tasks in your list:";
@@ -19,6 +23,14 @@ public class FindCommand extends Command {
         super(input);
     }
 
+    /**
+     * Execute the find command to search the task list for task with similar keywords.
+     * @param tasks TaskList of tasks.
+     * @param ui Ui object from the Ui class.
+     * @param storage Storage object from the Storage class.
+     * @throws InvalidInputException incorrect input after find command.
+     * @throws InvalidFileException failed to save file.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 4) {
