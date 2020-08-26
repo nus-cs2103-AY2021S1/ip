@@ -2,7 +2,14 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Main program for Duke.
+ */
 public class Duke {
+    /**
+     * Main program function.
+     * @param args input arguments, not used
+     */
     public static void main(String[] args) {
         Ui.printGreeting();
         String userInput;
@@ -36,6 +43,8 @@ public class Duke {
                     case EVENT:
                         userTaskList.addTask(userInput, userCommandType);
                         userTaskList.saveTaskList();
+                        break;
+                    default:
                         break;
                 }
             } catch (Parser.InvalidCommandException | TaskList.InvalidIndexException exception) {

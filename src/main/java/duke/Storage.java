@@ -14,9 +14,17 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class for loading and persisting data to disk.
+ */
 public class Storage {
     private static final String saveFilePath = "data/duke.txt";
 
+    /**
+     * Save tasks to disk.
+     * @param tasks ArrayList of tasks to save
+     * @throws IOException if cannot write to saveFilePath
+     */
     public static void save(ArrayList<Task> tasks) throws IOException {
         createSaveDirectoryIfNotExists();
         FileWriter fileWriter = new FileWriter(saveFilePath);
@@ -26,6 +34,10 @@ public class Storage {
         fileWriter.close();
     }
 
+    /**
+     * Load tasks from saveFilePath.
+     * @return ArrayList of loaded tasks
+     */
     public static ArrayList<Task> load() {
         try {
             createSaveDirectoryIfNotExists();
@@ -39,10 +51,12 @@ public class Storage {
                         tasks.add(new Todo(components[2], components[1].equals("1")));
                         break;
                     case "D":
-                        tasks.add(new Deadline(components[2], components[1].equals("1"), LocalDateTime.parse(components[3])));
+                        tasks.add(new Deadline(components[2], components[1].equals("1"),
+                                LocalDateTime.parse(components[3])));
                         break;
                     case "E":
-                        tasks.add(new Event(components[2], components[1].equals("1"), components[3]));
+                        tasks.add(new Event(components[2], components[1].equals("1"),
+                                components[3]));
                         break;
                     default:
                         throw new InvalidSaveFileException();
@@ -65,6 +79,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Exception when save file syntax is invalid.
+     */
     public static class InvalidSaveFileException extends Exception {
         public InvalidSaveFileException() {
             super("Invalid save file");
