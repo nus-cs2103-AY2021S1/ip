@@ -49,8 +49,8 @@ public class Duke {
         			continue;
         		}
     			taskList.add(newTask);
-    			ui.showLine("Got it. I've added this task:\n" + newTask.toString() + "\nNow you have " + taskList.size() + " tasks in the list.");
-
+    			ui.showLine("Got it. I've added this task:\n" + newTask.toString() + "\nNow you have " 
+                        + taskList.size() + " tasks in the list.");
         	} else if (input.equals(new String("deadline"))) {
         		String task  = sc.nextLine();
         		int index = task.indexOf('/');
@@ -64,7 +64,8 @@ public class Duke {
                     newTask = new Deadline(task, dateString);
                 }
         		taskList.add(newTask);
-        		ui.showLine("Got it. I've added this task:\n" + newTask.toString() + "\nNow you have " + taskList.size() + " tasks in the list.");
+        		ui.showLine("Got it. I've added this task:\n" + newTask.toString() + "\nNow you have " 
+                        + taskList.size() + " tasks in the list.");
         	} else if (input.equals(new String("event"))) {
         		String task  = sc.nextLine();
         		int index = task.indexOf('/');
@@ -72,14 +73,16 @@ public class Duke {
         		String taskTime = task.substring(index + 4);
         		Event newTask = new Event(taskContent, taskTime);
         		taskList.add(newTask);
-        		ui.showLine("Got it. I've added this task:\n" + newTask.toString() + "\nNow you have " + taskList.size() + " tasks in the list.");
+        		ui.showLine("Got it. I've added this task:\n" + newTask.toString() + "\nNow you have " 
+                        + taskList.size() + " tasks in the list.");
         	} else if (input.equals(new String("delete"))) {
         		int index = sc.nextInt();
         		Task currentTask = taskList.get(index - 1);
-        		ui.showLine("Noted. I've removed this task:\n" + currentTask.toString() + "\nNow you have " + taskList.size() + " tasks in the list.");
+        		ui.showLine("Noted. I've removed this task:\n" + currentTask.toString() + "\nNow you have " 
+                        + taskList.size() + " tasks in the list.");
         		taskList.remove(index - 1);
         	} else {
-        		System.out.println("added: " + input);
+        		ui.showLine("added: " + input);
         		taskList.add(new Task(input));
         	}
         	file.write(taskList.getList());
