@@ -6,8 +6,19 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+/**
+ * Deals with making sense of the user command.
+ */
 public class Parser {
 
+    /**
+     * Ensures that user input of date and time is in the correct format.
+     * If is in the correct format, translate the string into <code>LocalDateTime</code>.
+     *
+     * @param dateTime User's input
+     * @return <code>LocalDateTime</code> object.
+     * @throws GelException If user's input is in the wrong format.
+     */
     public static LocalDateTime toDateTime(String dateTime) throws GelException {
         String[] dateTimeSplit = dateTime.split(" ");
         if (dateTimeSplit.length != 2) {
@@ -37,6 +48,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Translates user input into something understandable by the task planner.
+     *
+     * @param sc Scanner.
+     * @param storage Storage to store date.
+     * @param ui Ui to communicate with user.
+     * @param taskList List of tasks.
+     * @throws IOException If file could not be updated.
+     */
     public static void parseUserInput(Scanner sc, Storage storage, Ui ui, TaskList taskList) throws IOException {
         label:
         while (sc.hasNextLine()) {
