@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 
 import java.util.Scanner;
 
+// Main class that initializes the program.
 public class Duke {
     private final TaskArrayList TASK_LIST = new TaskArrayList();
     private final Scanner SC = new Scanner(System.in);
@@ -30,6 +31,9 @@ public class Duke {
         UI.print("Hello! I'm duke.Duke\nWhat can I do for you?");
     }
 
+    /**
+     * Starts the program by calling the relevant initialization processes then starts taking in user inputs.
+     */
     public void run() {
         handleStart();
         STORAGE.loadSaveFile(TASK_LIST, EXE);

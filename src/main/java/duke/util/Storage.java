@@ -7,7 +7,6 @@ import duke.task.TaskList;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+// Class that handles the loading and saving of the save file.
 public class Storage {
     private final Path FILE_PATH;
 
@@ -38,6 +38,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Iterates through the taskList and writes the task information into the save file.
+     *
+     * @param taskList TaskList list that contains tasks added by the user
+     */
     public void updateSaveFile(TaskList taskList) {
         if (!isActive) {
             return;
@@ -58,6 +63,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the the lines in the save file and adds the saved tasks into the taskList.
+     *
+     * @param taskList TaskList list that contains tasks added by the user
+     * @param exe CommandExecutor object that handles the parsing of the task info
+     */
     public void loadSaveFile(TaskList taskList, CommandExecutor exe) {
         // Prevent saving of duke.task.TaskList while loading it
         isActive = false;

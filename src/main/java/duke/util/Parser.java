@@ -3,6 +3,7 @@ package duke.util;
 import duke.command.CommandType;
 import duke.task.TaskType;
 
+// Parses and categorises the user's command.
 public class Parser {
     private static final String CMD_EXIT = "bye";
     private static final String CMD_LIST = "list";
@@ -13,6 +14,12 @@ public class Parser {
     private static final String CMD_TODO = "todo";
     private static final String CMD_EVENT = "event";
 
+    /**
+     * Parses the user's command and return the type of command issued by the user.
+     *
+     * @param in String command provided by user
+     * @return CommandType type of command
+     */
     public static CommandType parseCmdWord(String in) {
         String[] input = in.split(" ");
         String cmdWord = input[0];
@@ -38,6 +45,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user's "task" command and return the type of "task" command issued by the user.
+     *
+     * @param in String "task" command provided by user
+     * @return CommandType type of "task" command
+     */
     public static TaskType parseTaskType(String in) {
         String[] input = in.split(" ");
         String task = input[0];

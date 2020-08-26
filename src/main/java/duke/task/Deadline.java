@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.InvalidDeadlineException;
+import duke.exception.InvalidTodoException;
 import duke.util.DateTimeParsing;
 
 import java.time.format.DateTimeParseException;
@@ -16,6 +17,13 @@ public class Deadline extends Task {
         this.DATE = date;
     }
 
+    /**
+     * Factory method for creating a deadline task.
+     *
+     * @param details String details of the task
+     * @return Deadline the deadline task
+     * @throws InvalidDeadlineException If the format of the details is invalid
+     */
     protected static Deadline createDeadline(String details) throws InvalidDeadlineException {
         String[] info = details.split("/");
         if (info.length == 1) {

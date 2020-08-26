@@ -5,7 +5,15 @@ import duke.task.TaskList;
 
 import java.util.ArrayList;
 
+// Handles all the logic behind any "list" command from the user
 public class ListCommand {
+    /**
+     * Executes any "list" command issued by the user.
+     * Iterates the taskList and returns the information of all the tasks in the list.
+     *
+     * @param taskList TaskList list that contains tasks added by the user
+     * @return String information of all the tasks in taskList
+     */
     public static String execute(TaskList taskList) {
         int len = taskList.size();
         ArrayList<String> msgBody = new ArrayList<>();
