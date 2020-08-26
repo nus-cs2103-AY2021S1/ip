@@ -7,47 +7,43 @@ import java.util.Scanner;
 
 public class Duckie {
 
-    public static File openFile() {
-        String cwd = System.getProperty("user.dir");
-        Path dirPath = Paths.get(cwd, "data");
-        Path filePath = Paths.get(cwd, "data", "duckie.txt");
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duckie(String filePath) {
+        ui = new Ui();
+        ui.showIntro();
+        storage = new Storage(filePath);
         try {
-            File duckieFile = new File(String.valueOf(filePath));
-            if (!duckieFile.exists()) {
-                File dir = new File(String.valueOf(dirPath));
-                if (!dir.exists()) {
-                    if (dir.mkdirs() && duckieFile.createNewFile()) {
-                        System.out.println("Memory File created successfully!");
-                    } else {
-                        System.out.println("Quack! Unable to create file!");
-                    }
-                } else {
-                    if (duckieFile.createNewFile()) {
-                        System.out.println("Memory File created successfully!");
-                    } else {
-                        System.out.println("Quack! Unable to create file!");
-                    }
-                }
-            }
-            return duckieFile;
-        } catch (IOException e) {
-            System.out.println("Quack! Encounter problem while loading data!");
-            e.printStackTrace();
+            tasks = new TaskList(storage.load());
+        } catch (DuckieException e) {
+            ui.showError(e.getMessage());
+            tasks = new TaskList();
         }
-        return null;
+    }
+
+    public void run() {
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DuckieException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
     }
 
     public static void main(String[] args) {
-        BotResponses.intro();
-        File duckieFile = openFile();
-        try {
-            BotHandler.processData(new Scanner(duckieFile));
-        } catch (IOException e) {
-            System.out.println("Quack! Encounter problem while loading data!");
-        } catch (DuckieException e ) {
-            System.out.println(e.getMessage());
-        }
-        BotHandler.serve();
-        BotResponses.ending();
+        String cwd = System.getProperty("user.dir");
+        Path dirPath = Paths.get(cwd, "data");
+        Path filePath = Paths.get(cwd, "data", "duckie.txt");
+        new Duckie(String.valueOf(filePath)).run();
     }
 }

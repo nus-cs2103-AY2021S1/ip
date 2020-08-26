@@ -10,24 +10,22 @@
 	____________________________________________________________
 	Quack! You have these in your list currently:
 	1. [T][✘] borrow books
-	2. [E][✔] Homecoming(at: Wed, Aug 05 2020 07:50 PM)
-	3. [D][✘] quiz(by: Mon, Aug 10 2020)
+	2. [E][✔] Homecoming (at: Wed, Aug 05 2020 07:50 PM)
+	3. [D][✘] quiz (by: Mon, Aug 10 2020)
 	____________________________________________________________
 delete all
-C:\Users\ngsiq\OneDrive\Desktop\ip\text-ui-test/data/duckie.txt
 	____________________________________________________________
 	Quack! All tasks are cleared in the list!
 	____________________________________________________________
 list
 	____________________________________________________________
-	Quack. You have no tasks in the list currently.
+	Oh no! 	Quack. You have no tasks in the list currently.
 	____________________________________________________________
 hello
 	____________________________________________________________
-	Sorry, Duckie does not know what you are trying to do.
+	Oh no! 	Sorry, Duckie does not understand what you are trying to do.
 	____________________________________________________________
 todo borrow books
-C:\Users\ngsiq\OneDrive\Desktop\ip\text-ui-test/data/duckie.txt
 	____________________________________________________________
 	Quack! Added: [T][✘] borrow books
 	Now you have 1 task(s) in the list.
@@ -39,50 +37,46 @@ list
 	____________________________________________________________
 deadline
 	____________________________________________________________
-	Duckie needs more description after the first word.
+	Oh no! 	Duckie needs more description after the first word.
 	____________________________________________________________
 event
 	____________________________________________________________
-	Duckie needs more description after the first word.
+	Oh no! 	Duckie needs more description after the first word.
 	____________________________________________________________
 event Homecoming /at 5 Aug 2020 07:50 PM
-C:\Users\ngsiq\OneDrive\Desktop\ip\text-ui-test/data/duckie.txt
 	____________________________________________________________
-	Quack! Added: [E][✘] Homecoming (at: Wed, Aug 05 2020 07:50 PM)
+	Quack! Added: [E][✘] Homecoming  (at: Wed, Aug 05 2020 07:50 PM)
 	Now you have 2 task(s) in the list.
 	____________________________________________________________
 deadline quiz /by 10 Aug 2020
-C:\Users\ngsiq\OneDrive\Desktop\ip\text-ui-test/data/duckie.txt
 	____________________________________________________________
-	Quack! Added: [D][✘] quiz (by: Mon, Aug 10 2020)
+	Quack! Added: [D][✘] quiz  (by: Mon, Aug 10 2020)
 	Now you have 3 task(s) in the list.
 	____________________________________________________________
 todo
 	____________________________________________________________
-	Duckie needs more description after the first word.
+	Oh no! 	Duckie needs more description after the first word.
 	____________________________________________________________
 list
 	____________________________________________________________
 	Quack! You have these in your list currently:
 	1. [T][✘] borrow books
-	2. [E][✘] Homecoming (at: Wed, Aug 05 2020 07:50 PM)
-	3. [D][✘] quiz (by: Mon, Aug 10 2020)
+	2. [E][✘] Homecoming  (at: Wed, Aug 05 2020 07:50 PM)
+	3. [D][✘] quiz  (by: Mon, Aug 10 2020)
 	____________________________________________________________
 done 2
-C:\Users\ngsiq\OneDrive\Desktop\ip\text-ui-test/data/duckie.txt
 	____________________________________________________________
 	Quack! I've marked this task as done:
-	[E][✔] Homecoming (at: Wed, Aug 05 2020 07:50 PM)
+	[E][✔] Homecoming  (at: Wed, Aug 05 2020 07:50 PM)
 	____________________________________________________________
 list
 	____________________________________________________________
 	Quack! You have these in your list currently:
 	1. [T][✘] borrow books
-	2. [E][✔] Homecoming (at: Wed, Aug 05 2020 07:50 PM)
-	3. [D][✘] quiz (by: Mon, Aug 10 2020)
+	2. [E][✔] Homecoming  (at: Wed, Aug 05 2020 07:50 PM)
+	3. [D][✘] quiz  (by: Mon, Aug 10 2020)
 	____________________________________________________________
 bye
 	____________________________________________________________
 	Quack! Hope to see you again!
 	____________________________________________________________
-
