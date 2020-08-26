@@ -47,6 +47,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     /**
      * Sets <code>Task</code> as done.
      */

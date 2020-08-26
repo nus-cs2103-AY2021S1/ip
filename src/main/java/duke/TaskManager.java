@@ -5,6 +5,8 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Provides a container for storing <code>Task</code> objects.
@@ -91,6 +93,23 @@ public class TaskManager {
      */
     public int size() {
         return this.taskStorage.size();
+    }
+
+    /** Filters <code>storage</code> and returns a new <code>TaskManager</code> with the filtered <code>Task</code>s.
+     * The returned <code>TaskManager</code> can be mutated with no effect on this object.
+     * However, all <code>Task</code>s are still linked and any effects such as <code>Task.doTask()</code> will
+     * be lasting.
+     *
+     * @param predicate Filtering criteria.
+     * @return <code>TaskManager</code> containing all filtered out <code>Task</code>s.
+     */
+    public TaskManager filter(Predicate<? super Task> predicate) {
+
+        return new TaskManager(this.taskStorage
+                .stream()
+                .filter(predicate)
+                .collect(Collectors.toCollection(ArrayList::new)));
+
     }
 
     /**
