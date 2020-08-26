@@ -1,3 +1,10 @@
+package duke;
+
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidIndexException;
+import duke.exception.UnknownCommandException;
+import duke.task.Task;
+
 public class Parser {
 
     public boolean parse(TaskList tasks, String nextLine) {
