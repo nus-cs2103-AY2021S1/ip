@@ -12,6 +12,7 @@ public class Task {
     protected boolean isDone;
     public static final String tick = "\u2713";
     public static final String cross = "\u2718";
+    protected LocalDate date = null;
 
     public Task(String description) {
         this.description = description;
@@ -23,12 +24,24 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? tick : cross); //return tick or X symbols
+        return isDone ? tick : cross; //return tick or X symbols
+    }
+
+    public int getStatusBinary() {
+        return isDone? 1 : 0;
+    }
+
+    public String getTaskType() {
+        return tag;
     }
 
     public String markAsDone() {
         isDone = true;
         return toString();
+    }
+
+    public String toPrint() {
+        return tag + "|" + getStatusBinary() + "|" + getDescription();
     }
 
     public String toString() {

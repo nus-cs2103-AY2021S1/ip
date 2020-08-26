@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -12,31 +13,43 @@ public class Storage {
         this.filepath = filepath;
     }
 
-    static void reset () {
+    public final String dir;
+
+    WriteFile(String string) {
+        dir = string;
+    }
+
+    void reset() {
         try {
-            FileWriter writer = new FileWriter(new File("text-ui-test/ACTUAL.TXT"), false);
+            FileWriter writer = new FileWriter(new File(dir), false);
             writer.write("");
             writer.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No such file exists " + dir);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    static void writeInitial (String input) {
+    void write(String input) {
         try {
-            FileWriter writer = new FileWriter(new File("text-ui-test/ACTUAL.TXT"), true);
+            FileWriter writer = new FileWriter(new File(dir), true);
             writer.write(input);
             writer.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No such file exists " + dir);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    static void writeFinally (String input) {
+    void lineBreak() {
         try {
-            FileWriter writer = new FileWriter(new File("text-ui-test/ACTUAL.TXT"), true);
-            writer.write("\n" + input);
+            FileWriter writer = new FileWriter(new File(dir), true);
+            writer.write("\n");
             writer.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No such file exists " + dir);
         } catch (IOException e) {
             e.printStackTrace();
         }
