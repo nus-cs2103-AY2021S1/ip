@@ -27,6 +27,7 @@ public class Storage {
                     }
                 }
             }
+            
             fileScanner.close();
 
         } catch (FileNotFoundException e) {
@@ -46,14 +47,12 @@ public class Storage {
             }
             fileOutput = fileOutput + "\n";
         }
-
-
+        
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
             writer.write(fileOutput);
             writer.close();
-
-
+            
         } catch (IOException e) {
             e.printStackTrace();
         }

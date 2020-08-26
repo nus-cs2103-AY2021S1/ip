@@ -15,7 +15,6 @@ public class Parser {
                 return false;
             } else if (input.equals("list")) {
                 ui.printAllTasks(taskList);
-//                out.println(taskList.getAllTasksAsString());
             } else if (input.indexOf("done") == 0) {
                 if (input.length() == 4) {
                     throw new DukeException("OOPS!!! Please specify a task to mark as complete.");
@@ -25,8 +24,6 @@ public class Parser {
                     completedTask.markAsDone();
 
                     ui.printMarkTaskCompleteConfirmation(completedTask);
-//                    out.println("Nice! I've marked this task as done: ");
-//                    out.println(completedTask);
                 }
             } else if (input.indexOf("delete") == 0) {
                 if (input.length() == 6) {
@@ -39,10 +36,6 @@ public class Parser {
                         taskList.deleteTask(taskIndex);
                         
                         ui.printRemoveTaskConfirmation(removedTask, taskList);
-
-//                        out.println("Noted. I've removed this task: ");
-//                        out.println(removedTask);
-//                        out.println("Now you have " + taskList.numTasks() + " tasks in the list.");
                     } catch (NumberFormatException e) {
                         throw new DukeException(" OOPS!!! Please specify a valid task to delete.");
                     }
@@ -95,15 +88,13 @@ public class Parser {
                 }
 
                 ui.printAddTaskConfirmation(newTask, taskList);
-//                out.println("Got it. I've added this task: ");
-//                out.println(newTask);
-//                out.println("Now you have " + taskList.numTasks() + " tasks in the list.");
+                
             }
         } catch (DukeException e) {
             ui.printExceptionMessage(e);
-
         }
         
         return true;
+        
     }
 }

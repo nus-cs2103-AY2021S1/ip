@@ -4,7 +4,7 @@ import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 
 public class Ui {
-    PrintStream out;
+    private PrintStream out;
     
     public Ui() {
         try {
