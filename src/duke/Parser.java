@@ -1,6 +1,7 @@
 package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Parser {
@@ -39,9 +40,13 @@ public class Parser {
                 if (indexOfSlash == -1 || command.length() == 5 || !command.substring(indexOfSlash + 1, indexOfSlash + 3).equals("at")) {
                     ui.respondToEventFail();
                 } else {
-                    String time = command.substring(indexOfSlash + 4);
-                    LocalDate parsed = LocalDate.parse(time);
-                    ui.respondToEvent(command.substring(6, indexOfSlash - 1), parsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                    try {
+                        String time = command.substring(indexOfSlash + 4);
+                        LocalDate parsed = LocalDate.parse(time);
+                        ui.respondToEvent(command.substring(6, indexOfSlash - 1), parsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                    } catch(DateTimeParseException d) {
+                        ui.respondToEvent(command.substring(6, indexOfSlash - 1), command.substring(indexOfSlash + 4));
+                    }
                 }
 
             } else if (command.substring(0, 6).equals("delete")) {
@@ -59,9 +64,13 @@ public class Parser {
                 if (indexOfSlash == -1 || command.length() == 8 || !command.substring(indexOfSlash + 1, indexOfSlash + 3).equals("by")) {
                     ui.respondToDeadlineFail();
                 } else {
-                    String time = command.substring(indexOfSlash + 4);
-                    LocalDate parsed = LocalDate.parse(time);
-                    ui.respondToDeadline(command.substring(9, indexOfSlash - 1), parsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                    try {
+                        String time = command.substring(indexOfSlash + 4);
+                        LocalDate parsed = LocalDate.parse(time);
+                        ui.respondToDeadline(command.substring(9, indexOfSlash - 1), parsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                    } catch(DateTimeParseException d) {
+                        ui.respondToDeadline(command.substring(9, indexOfSlash - 1), command.substring(indexOfSlash + 4));
+                    }
                 }
             } else {
                 ui.respondToCommandDoesNotExist();

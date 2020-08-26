@@ -16,10 +16,6 @@ public class Storage {
         this.file = new File(path);
     }
 
-    boolean exists() {
-        return file.exists();
-    }
-
     boolean create() throws IOException {
         return !file.exists() ? file.createNewFile() : false;
     }
@@ -44,6 +40,12 @@ public class Storage {
         return counter;
     }
 
+    String stringMaker(int startIndex, String[] splits, String str) {
+         return startIndex >= splits.length - 1
+                 ? str
+                 : stringMaker(startIndex + 1, splits, splits[startIndex] + " ");
+    }
+
     ArrayList<Task> toArrayList() throws Exception {
         try {
             ArrayList<Task> arr = new ArrayList<>();
@@ -59,12 +61,14 @@ public class Storage {
                     } else if (task.charAt(1) == 'D') {
                         String[] splits = task.split(" ");
                         String name = splits[1];
-                        String deadline = splits[3];
+                        String deadline = stringMaker(3, splits, "");
+                        System.out.println(deadline);
                         arr.add(new Deadline(name, deadline));
                     } else {
                         String[] splits = task.split(" ");
                         String name = splits[1];
-                        String deadline = splits[3] + " " + splits[4] + " " + splits[5];
+                        String deadline = stringMaker(3, splits, "");
+                        System.out.println(deadline);
                         arr.add(new Event(name, deadline));
                     }
                 }
@@ -89,9 +93,6 @@ public class Storage {
                 toPrint = " (" + keyword + ": " + t.time + ")";
             }
             String text = t.getIndicator() + t.getIcon() + t.name + toPrint + "\n";
-//            String finalString = "Got it. I've added this task:" + "\n" +
-//                    text + "\n" + "Now you have " + lineCounter() + " tasks in the list.";
-//            System.out.println(finalString);
 
             fw.write(text);
         }
