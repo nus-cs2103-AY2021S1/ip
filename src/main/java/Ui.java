@@ -1,7 +1,18 @@
 import java.util.Scanner;
 
+/**
+ * A Ui object deals with interactions with the user.
+ *
+ * @author amelia
+ * @version 1.0
+ * @since 2020-08-26
+ */
 public class Ui {
 
+    /**
+     * Obtain user inputs and edit the TaskList currList accordingly.
+     * @param currList Current list of tasks.
+     */
     public void start(TaskList currList) {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(currList);

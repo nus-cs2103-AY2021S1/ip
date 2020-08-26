@@ -1,5 +1,12 @@
 import java.time.LocalDateTime;
 
+/**
+ * A Parser object deals with making sense of user command.
+ *
+ * @author amelia
+ * @version 1.0
+ * @since 2020-08-26
+ */
 public class Parser {
     private TaskList currList;
 
@@ -7,6 +14,10 @@ public class Parser {
         this.currList = currList;
     }
 
+    /**
+     * Displays all added tasks for users to view.
+     * @throws DukeException If no task has been added yet.
+     */
     public void viewTasks() throws DukeException {
         if (currList.getNumOfTasks() == 0) { // user has not added any task
             throw new DukeException("Nothing has been added to the list yet!");
@@ -18,6 +29,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Marks an existing task as done.
+     * @param inputMsg User input which contains the task number to be marked done.
+     * @throws DukeException If task number indicated does not exist.
+     */
     public void markDone(String inputMsg) throws DukeException {
         int taskNumber = Integer.valueOf(inputMsg.split(" ")[1]); // gets the done task number
         if (currList.getNumOfTasks() < taskNumber || taskNumber <= 0) {
@@ -33,6 +49,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Deletes an existing task from the list.
+     * @param inputMsg User input which contains the task number to be deleted.
+     * @throws DukeException If task number indicated does not exist.
+     */
     public void deleteFromList(String inputMsg) throws DukeException {
         int taskNumber = Integer.valueOf(inputMsg.split(" ")[1]); // gets the deleted task number
         if (currList.getNumOfTasks() < taskNumber || taskNumber <= 0) {
@@ -47,6 +68,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes the input date by user.
+     * @param inputDeadline Date related to Task.
+     * @return LocalDateTime object representing the date related to Task.
+     * @throws DukeException If input date format is invalid.
+     */
     public LocalDateTime processDate(String inputDeadline) throws DukeException {
         String dateFormat;
         if (inputDeadline.contains("/")) {
@@ -67,6 +94,12 @@ public class Parser {
         return LocalDateTime.of(year, month, date, hour, min);
     }
 
+    /**
+     * Adds a new task to the list of tasks.
+     * @param inputMsg User's input message to the chatbot.
+     * @param actionType Type of task indicated.
+     * @throws DukeException If user does not give a task description.
+     */
     public void addToList(String inputMsg, String actionType) throws DukeException {
         Task newTask;
         int numOfWords = inputMsg.split(" ").length;
@@ -111,6 +144,10 @@ public class Parser {
         System.out.println(outputMsg);
     }
 
+    /**
+     * Looks through the input message to determine actions to be taken.
+     * @param inputMsg User's input message to the chatbot.
+     */
     public void processMsg(String inputMsg) {
         String actionType = inputMsg.split(" ")[0]; // user specified action, to identify type of action
 

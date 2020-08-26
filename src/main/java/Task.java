@@ -7,14 +7,23 @@ public class Task {
         this.isCompleted = isCompleted;
     }
 
+    /**
+     * @return Current task name.
+     */
     public String getTaskName() {
         return this.taskName;
     }
 
+    /**
+     * @return Current task's state of completion.
+     */
     public boolean getStatus() {
         return this.isCompleted;
     }
 
+    /**
+     * Marks the current task as complete by changing its boolean attribute isCompleted.
+     */
     public void markAsComplete() {
         this.isCompleted = true;
     }

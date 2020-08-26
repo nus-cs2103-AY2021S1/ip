@@ -1,6 +1,13 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an Event by its taskName, date of event and whether or not it has been completed.
+ *
+ * @author amelia
+ * @version 1.0
+ * @since 2020-08-26
+ */
 public class Event extends Task {
     private LocalDateTime date;
 

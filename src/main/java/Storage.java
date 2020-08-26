@@ -9,6 +9,13 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * A Storage object deals with loading tasks from the file and saving tasks in the file.
+ *
+ * @author amelia
+ * @version 1.0
+ * @since 2020-08-26
+ */
 public class Storage {
 
     private String filePath;
@@ -17,6 +24,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Store all tasks in a file.
+     * @param tasks List of tasks as a TaskList object.
+     * @throws IOException If directory or file does not exist.
+     */
     public void writeToFile(TaskList tasks) throws IOException {
         String output = "";
         if (tasks.getNumOfTasks() == 0) { // user has not added any task
@@ -37,6 +49,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Converts date to a LocalDateTime object.
+     * @param taskDate Date of a task obtained from a .txt file.
+     * @return LocalDateTime object representing the date related to Task.
+     * @throws ParseException If an error has been reached while parsing.
+     */
     public LocalDateTime getDate(String taskDate) throws ParseException {
         String[] splitDate = taskDate.split(" ");
         int date = Integer.parseInt(splitDate[0]);
@@ -72,6 +90,14 @@ public class Storage {
         return getPastTasks(br);
     }
 
+    /**
+     * Obtain a list of tasks from .txt file.
+     * @param br BufferedReader object used to read the file.
+     * @return List of tasks stored in an ArrayList<Task>.
+     * @throws IOException If an I/O exception of some sort has occurred.
+     * @throws ParseException If an error has been reached while parsing.
+     * @throws DukeException If the task type is not recognized.
+     */
     public ArrayList<Task> getPastTasks(BufferedReader br) throws IOException, ParseException, DukeException {
         ArrayList<Task> pastTasks = new ArrayList<>();
         String line = br.readLine();
