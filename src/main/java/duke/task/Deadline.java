@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.DukeStorageException;
 import duke.exceptions.DukeTaskCreationException;
 import duke.parser.DateParser;
