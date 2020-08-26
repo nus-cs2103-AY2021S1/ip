@@ -17,18 +17,18 @@ public class TaskList implements Serializable {
     }
     
     // side effect: create & add task + return response
-    public String addEntry(String[] parsedOutput, String commandTag) throws DukeException {
+    public String addEntry(String[] parsedInput, String commandTag) throws DukeException {
         switch (commandTag) {
         case "T":
-            ToDo newToDo = new ToDo(parsedOutput[1]);
+            ToDo newToDo = new ToDo(parsedInput[1]);
             this.taskList.add(newToDo);
             return newToDo.toString();
         case "D":
-            Deadline newDeadline = Deadline.createDeadline(parsedOutput);
+            Deadline newDeadline = Deadline.createDeadline(parsedInput);
             this.taskList.add(newDeadline);
             return newDeadline.toString();
         case "E":
-            Event newEvent = Event.createEvent(parsedOutput);
+            Event newEvent = Event.createEvent(parsedInput);
             this.taskList.add(newEvent);
             return newEvent.toString();
         default:
