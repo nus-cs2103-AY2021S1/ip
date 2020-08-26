@@ -1,6 +1,7 @@
 package duke.storage;
 
 import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class ArrayListToTextConverter {
      * @param tasks list containing the tasks to be converted to a txt file.
      * @param filePath path to store the file.
      */
-    public static void convertArrayListToText(List<Task> tasks, String filePath) {
+    public static void convertTaskListToText(TaskList tasks, String filePath) {
         try {
             FileOutputStream writeData = new FileOutputStream(filePath);
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);

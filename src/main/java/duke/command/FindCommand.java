@@ -27,13 +27,13 @@ public class FindCommand extends UserCommand {
      */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
-        List<Task> ls = taskList.getTasks();
         if (userInput.trim().length() <= 4) {
             throw new EmptyFindException();
         } else {
             String search = userInput.substring(5);
             List<Task> temp = new ArrayList<>();
-            for (Task task : ls) {
+            for (int i = 0; i < taskList.listSize(); i++) {
+                Task task = taskList.getTask(i);
                 if (task.getDescription().contains(search)) {
                     temp.add(task);
                 }

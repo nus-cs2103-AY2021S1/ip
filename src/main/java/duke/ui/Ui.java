@@ -1,9 +1,7 @@
 package duke.ui;
 
-import duke.tasks.Task;
 import duke.tasks.TaskList;
 
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -41,10 +39,18 @@ public class Ui {
      * @param taskList list containing all the tasks.
      */
     public void printList(TaskList taskList) {
-        List<Task> ls = taskList.getTasks();
-        for (int x = 0; x < ls.size(); x++) {
-            System.out.println(x + 1 + ":" + ls.get(x).toString());
+        for (int x = 0; x < taskList.listSize(); x++) {
+            System.out.println(x + 1 + ":" + taskList.getTask(x).toString());
         }
+    }
+
+    /**
+     * Prints the size of the list.
+     *
+     * @param taskList list containing all the tasks.
+     */
+    public void printListCount(TaskList taskList) {
+        System.out.format("Now you have %d tasks in the list\n", taskList.listSize());
     }
 
     /**
@@ -52,5 +58,15 @@ public class Ui {
      */
     public String readCommand() {
         return in.nextLine();
+    }
+
+
+    /**
+     * Prints the response to user's command.
+     *
+     * @param response string to be output.
+     */
+    public void printResponse(String response) {
+        System.out.println(response);
     }
 }

@@ -21,8 +21,8 @@ public class Storage {
      *
      * @return list containing the previously saved tasks.
      */
-    public List<Task> load() {
-        return TextToArrayListConverter.readFile(filePath);
+    public TaskList load() {
+        return TextToTaskListConverter.readFile(filePath);
     }
 
 
@@ -32,6 +32,6 @@ public class Storage {
      * @param tasks containing the tasks in the list.
      */
     public void save(TaskList tasks) {
-        ArrayListToTextConverter.convertArrayListToText(tasks.getTasks(), filePath);
+        ArrayListToTextConverter.convertTaskListToText(tasks, filePath);
     }
 }
