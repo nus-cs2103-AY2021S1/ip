@@ -1,8 +1,9 @@
 package duke.ui;
 
+import java.util.Scanner;
+
 import duke.storage.TaskList;
 import duke.task.Task;
-import java.util.Scanner;
 
 public class Ui {
     private static final String CHATBOT = "Bob: ";
@@ -10,7 +11,7 @@ public class Ui {
     private static final String USER = SKIPLINE + "You: ";
     private static final String DIVIDER = SKIPLINE + CHATBOT;
     
-    public static boolean EXIT = false;
+    public static boolean exit = false;
     
     private final Scanner scan;
     
@@ -30,7 +31,7 @@ public class Ui {
     public void showGoodbyeMessage() {
         System.out.println(DIVIDER + "Goodbye! Have a nice day :D");
         this.scan.close();
-        EXIT = true;
+        exit = true;
 
     }
     

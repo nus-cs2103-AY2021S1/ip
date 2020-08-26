@@ -1,20 +1,20 @@
 package duke.task;
 
 public class Task {
+    // Indicators
+    public static final String STATUS_TICK = "[" + "\u2713" + "]";
+    public static final String STATUS_CROSS = "[" + "\u2718" + "]";
+
     private String description;
     private boolean isDone;
-
-    // Markers
-    public static final String TICK = "[" + "\u2713" + "]";
-    public static final String CROSS = "[" + "\u2718" + "]";
-
+    
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
     public String getStatusIcon() {
-        return (isDone ? TICK : CROSS);
+        return (isDone ? STATUS_TICK : STATUS_CROSS);
     }
 
     public void markAsDone() {

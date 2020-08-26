@@ -1,6 +1,12 @@
 package duke.storage;
 
-import duke.command.Parser;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exception.InvalidPathException;
 import duke.exception.SaveToStorageErrorException;
 import duke.exception.StorageException;
@@ -11,16 +17,10 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.ui.Ui;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Storage {
-    private static final String DEADLINE_TEXT_SEPARATOR = "by: ";
-    private static final String EVENT_TEXT_SEPARATOR = "at: ";
+    private static final String TASK_DEADLINE_TEXT_SEPARATOR = "by: ";
+    private static final String TASK_EVENT_TEXT_SEPARATOR = "at: ";
+    
     private Path filePath;
     
     public Storage(String filePath) {
@@ -73,15 +73,15 @@ public class Storage {
             String taskIndicator = taskDetails[0];
             String taskDescription = taskDetails[1];
 
-            if (taskIndicator.contains(TaskList.TODO_INDICATOR)) {
+            if (taskIndicator.contains(TaskList.TASK_TODO_INDICATOR)) {
                 Todo todo = new Todo(taskDescription);
 
                 parseIsDoneStatus(todo, taskIndicator);
 
                 savedTaskList.add(todo);
             
-            } else if (taskIndicator.contains(TaskList.DEADLINE_INDICATOR)) {
-                String[] deadlineDescriptionAndDate = parseTaskText(taskDescription, TaskList.DEADLINE_INDICATOR);
+            } else if (taskIndicator.contains(TaskList.TASK_DEADLINE_INDICATOR)) {
+                String[] deadlineDescriptionAndDate = parseTaskText(taskDescription, TaskList.TASK_DEADLINE_INDICATOR);
                 
                 String deadlineDescription = deadlineDescriptionAndDate[0];
                 String deadlineDate = deadlineDescriptionAndDate[1];
@@ -93,8 +93,8 @@ public class Storage {
 
                 savedTaskList.add(deadline);
             
-            } else if (taskIndicator.contains(TaskList.EVENT_INDICATOR)) {
-                String[] eventDescriptionAndDate = parseTaskText(taskDescription, TaskList.EVENT_INDICATOR);
+            } else if (taskIndicator.contains(TaskList.TASK_EVENT_INDICATOR)) {
+                String[] eventDescriptionAndDate = parseTaskText(taskDescription, TaskList.TASK_EVENT_INDICATOR);
 
                 String eventDescription = eventDescriptionAndDate[0];
                 String eventDate = eventDescriptionAndDate[1];
@@ -118,13 +118,13 @@ public class Storage {
         String[] taskDescriptionAndDate = taskText.split(" \\(", 2);
 
 
-        if (TaskList.DEADLINE_INDICATOR.equals(typeOfTask)) {
-            String[] date = taskDescriptionAndDate[1].split(DEADLINE_TEXT_SEPARATOR);
+        if (TaskList.TASK_DEADLINE_INDICATOR.equals(typeOfTask)) {
+            String[] date = taskDescriptionAndDate[1].split(TASK_DEADLINE_TEXT_SEPARATOR);
             taskDescriptionAndDate[1] = date[1].substring(0, date[1].length() -1);
         }
 
-        if (TaskList.EVENT_INDICATOR.equals(typeOfTask)) {
-            String[] date = taskDescriptionAndDate[1].split(EVENT_TEXT_SEPARATOR);
+        if (TaskList.TASK_EVENT_INDICATOR.equals(typeOfTask)) {
+            String[] date = taskDescriptionAndDate[1].split(TASK_EVENT_TEXT_SEPARATOR);
             taskDescriptionAndDate[1] = date[1].substring(0, date[1].length() -1);
         }
 
@@ -132,7 +132,7 @@ public class Storage {
     }
 
     private static void parseIsDoneStatus(Task task, String taskIndicator) {
-        if (taskIndicator.contains(Task.TICK)) {
+        if (taskIndicator.contains(Task.STATUS_TICK)) {
             task.markAsDone();
         }
     }

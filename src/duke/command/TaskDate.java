@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.exception.InvalidTaskDateException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.exception.InvalidTaskDateException;
 
 public class TaskDate {
     protected static String getDate(String userInput) throws InvalidTaskDateException {

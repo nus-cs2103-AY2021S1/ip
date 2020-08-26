@@ -1,22 +1,22 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class TaskTest {
 
     @Test
     void testGetStatusIcon() {
         Task testTask = new Task("This is a test");
-        assertEquals(Task.CROSS, testTask.getStatusIcon());
+        assertEquals(Task.STATUS_CROSS, testTask.getStatusIcon());
     }
 
     @Test
     void testMarkAsDone() {
         Task testTask = new Task("This is a test");
         testTask.markAsDone();
-        assertEquals(Task.TICK, testTask.getStatusIcon());
+        assertEquals(Task.STATUS_TICK, testTask.getStatusIcon());
     }
 
     @Test

@@ -24,7 +24,7 @@ public class Duke {
         ui.loadTaskList(tasks);
         ui.showGreetings();
         
-        while (!Ui.EXIT) {
+        while (!Ui.exit) {
             String userCommand = ui.readUserCommand();
             try {
                 Parser.parseCommands(userCommand, ui, storage);
