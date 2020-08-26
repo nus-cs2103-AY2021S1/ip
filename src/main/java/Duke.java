@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -30,6 +31,8 @@ public class Duke {
                     handleTask(TaskType.DEADLINE, commandArr);
                 } else if (command.equals("event")) {
                     handleTask(TaskType.EVENT, commandArr);
+                } else if (command.equals("get")) {
+                    getTaskByDate(commandArr);
                 } else {
                     throw new DukeException("I am sorry, I don't know what that means :(");
                 }
@@ -62,7 +65,7 @@ public class Duke {
                 }
                 addEvent(detailArr[0], detailArr[1]);
             }
-        } catch (MissingInformationException e) {
+        } catch (MissingInformationException | DateException e) {
             printMessage(e.getMessage());
         }
     }
@@ -90,18 +93,43 @@ public class Duke {
                 "     " + message + "\n    ______________________________________________________");
     }
 
+    public static void getTaskByDate(String[] commandArr) {
+        try {
+            if (commandArr.length < 2 || commandArr[1].isBlank()) {
+                throw new MissingInformationException("Date is missing!");
+            } else {
+                String dateString = commandArr[1];
+                Date date = DateFormat.parseDate(dateString);
+                String output = String.format("Here are the tasks with the date %s:\n", dateString);
+                int counter = 1;
+                for (Task task : taskList) {
+                    if (date.equals(task.getDate())) {
+                        output += String.format("     %d. %s\n", counter, task.getName());
+                        counter++;
+                    }
+                }
+                printMessage(output);
+            }
+        } catch (MissingInformationException | DateException e) {
+            printMessage(e.getMessage());
+        }
+    }
+
     public static void addTodo(String name) {
         Todo todo = new Todo(name);
         addTask(todo);
     }
 
-    public static void addDeadline(String name, String by) {
-        Deadline deadline = new Deadline(name, by);
+    public static void addDeadline(String name, String by) throws DateException {
+        Date date = DateFormat.parseDate(by);
+        System.out.println(date);
+        Deadline deadline = new Deadline(name, date);
         addTask(deadline);
     }
 
-    public static void addEvent(String name, String at) {
-        Event event = new Event(name, at);
+    public static void addEvent(String name, String at) throws DateException {
+        Date date = DateFormat.parseDate(at);
+        Event event = new Event(name, date);
         addTask(event);
     }
 

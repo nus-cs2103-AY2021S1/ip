@@ -1,4 +1,7 @@
-public class Task {
+import java.util.Date;
+
+public abstract class Task {
+
     protected String name;
     protected boolean isDone;
 
@@ -10,6 +13,8 @@ public class Task {
     public String getStatusIcon() {
         return isDone ? "\u2713" : "\u2718";
     }
+
+    public abstract Date getDate();
 
     public void markAsDone() {
         this.isDone = true;
