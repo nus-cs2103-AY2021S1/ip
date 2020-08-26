@@ -4,7 +4,8 @@ public class Parser {
     private String sanitisedUserInput = "";
     private String[] splitUserInput = new String[0];
     
-    public Parser() {}
+    public Parser() {
+    }
     
     public String sanitiseInput(String input) {
         return input.stripLeading();

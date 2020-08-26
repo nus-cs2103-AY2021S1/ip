@@ -26,7 +26,7 @@ public class Deadline extends Task {
         
     }
 
-    public String dateAndTimeBracket() {
+    public String getDateAndTimeBracket() {
         if (this.time == null) {
             return String.format("(by: %s)", this.date.format(dateFormatter));
         } else {
@@ -37,6 +37,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[D][%s] %s %s",
-                this.getStatusIcon(), this.description, this.dateAndTimeBracket());
+                this.getStatusIcon(), this.description, this.getDateAndTimeBracket());
     }
 }
