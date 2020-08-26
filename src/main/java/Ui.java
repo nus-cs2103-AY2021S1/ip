@@ -1,19 +1,24 @@
+import exception.DukeException;
 import task.*;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Ui {
-    public static final String LINE = "_______________________________________\n";
+    private static final String LINE = "_______________________________________\n";
+    private Scanner scanner;
 
     public Ui() {
-
+        this.scanner = new Scanner(System.in);
     }
 
-    public static void welcome() {
+    public String getUserInput() {
+        return scanner.nextLine();
+    }
+
+    public void welcome() {
         String open = "_______________________________________ \n"
                 + "Hello! I'm Duke \n"
                 + "What can I do for you? \n"
@@ -21,7 +26,7 @@ public class Ui {
         System.out.println(open);
     }
 
-    public static void goodbye() {
+    public void goodbye() {
         String close = "_______________________________________ \n"
                 + "Goodbye! See you soon! \n"
                 + "_______________________________________ \n";

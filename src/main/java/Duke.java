@@ -1,4 +1,5 @@
-import java.util.Scanner;
+import exception.DukeException;
+import parser.Parser;
 
 
 public class Duke {
@@ -19,13 +20,16 @@ public class Duke {
     
     public void run() {
         ui.welcome();
-        Scanner scanner = new Scanner(System.in);
         this.running = true;
         while(running) {
-            String userInput = scanner.nextLine();
-            Parser.parse(userInput);
+            try {
+                String userInput = ui.getUserInput();
+                Parser.parse(userInput);
+                this.storage.save();
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
         }
-        scanner.close();
         ui.goodbye();
     }
 
