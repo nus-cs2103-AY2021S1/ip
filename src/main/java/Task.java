@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     private final String description;
     private boolean isDone;
@@ -16,7 +18,11 @@ public class Task {
     }
 
     public String toSaveData() {
-        return String.valueOf(isDone ? 1 : 0) + " | " + description;
+        return (isDone ? 1 : 0) + " | " + description;
+    }
+
+    public boolean isDue(LocalDate date) {
+        return false;
     }
 
     @Override

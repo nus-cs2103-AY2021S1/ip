@@ -1,17 +1,29 @@
-public class Event extends Task {
-    private final String at;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String at, boolean isDone) {
+public class Event extends Task {
+    private final LocalDateTime at;
+
+    public Event(String description, LocalDateTime at, boolean isDone) {
         super(description, isDone);
         this.at = at;
     }
 
+    @Override
     public String toSaveData() {
         return "E | " + super.toSaveData() + " | " + at;
     }
 
     @Override
+    public boolean isDue(LocalDate date) {
+        return at.toLocalDate().equals(date);
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy, h:mm a");
+
+        return "[E]" + super.toString() + " (at: " + at.format(formatter) + ")";
     }
 }

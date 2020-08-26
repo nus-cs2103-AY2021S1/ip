@@ -2,6 +2,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.MonthDay;
+import java.time.Year;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -48,12 +56,68 @@ public class Duke {
                 + (tasks.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
+    public static LocalDateTime parseDateTime(String input) throws DukeException {
+        int index = input.indexOf(" ");
+        String dateStr = index == -1 ? input : input.substring(0, index);
+        String timeStr = index == -1 ? "" : input.substring(index + 1);
+
+        LocalDate date = parseDate(dateStr);
+        LocalTime time = parseTime(timeStr);
+
+        return LocalDateTime.of(date, time);
+    }
+
+    public static LocalDate parseDate(String input) throws DukeException {
+        LocalDate date;
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M[/yyyy][/yy]");
+
+        try {
+            TemporalAccessor result = dateFormatter.parseBest(input, LocalDate::from, MonthDay::from);
+
+            if (result instanceof LocalDate) {
+                date = ((LocalDate) result);
+            } else {
+                date = ((MonthDay) result).atYear(Year.now().getValue());
+            }
+        } catch(DateTimeParseException e) {
+            throw new DukeException("Unable to parse date.\n \n"
+                    + "Please input your date in one of the following formats:\n"
+                    + "26/08\n" + "26/08/20\n" + "26/08/2020");
+        }
+
+        return date;
+    }
+
+    public static LocalTime parseTime(String input) throws DukeException {
+        LocalTime time = LocalTime.MIDNIGHT;
+
+        if (!input.isEmpty()) {
+            String[] params = input.split("\\s");
+
+            try {
+                if (params.length == 1) {
+                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:m");
+                    time = timeFormatter.parse(params[0], LocalTime::from);
+                } else {
+                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:m a");
+                    time = timeFormatter.parse(params[0] + " " + params[1], LocalTime::from);
+                }
+            } catch(DateTimeParseException e) {
+                throw new DukeException("Unable to parse time.\n \n"
+                        + "Please input your time in one of the following formats:\n"
+                        + "1:19\n" + "1:19 AM");
+            }
+        }
+
+        return time;
+    }
+
     public static Todo addTodo(String description) throws DukeException {
         return addTodo(description, false);
     }
 
     public static Todo addTodo(String description, boolean isDone) throws DukeException {
-        if (description.equals("")) {
+        if (description.isEmpty()) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
 
@@ -71,13 +135,14 @@ public class Duke {
         return addDeadline(description, by, false);
     }
 
-    public static Deadline addDeadline(String description, String by, boolean isDone) throws DukeException {
-        if (description.equals("")) {
+    public static Deadline addDeadline(String description, String byStr, boolean isDone) throws DukeException {
+        if (description.isEmpty()) {
             throw new DukeException("The description of a deadline cannot be empty.");
-        } else if (by.equals("")) {
+        } else if (byStr.isEmpty()) {
             throw new DukeException("The date/time of an event cannot be empty.");
         }
 
+        LocalDateTime by = parseDateTime(byStr);
         Deadline deadline = new Deadline(description, by, isDone);
 
         tasks.add(deadline);
@@ -92,13 +157,14 @@ public class Duke {
         return addEvent(description, at, false);
     }
 
-    public static Event addEvent(String description, String at, boolean isDone) throws DukeException {
-        if (description.equals("")) {
+    public static Event addEvent(String description, String atStr, boolean isDone) throws DukeException {
+        if (description.isEmpty()) {
             throw new DukeException("The description of an event cannot be empty.");
-        } else if (at.equals("")) {
+        } else if (atStr.isEmpty()) {
             throw new DukeException("The date/time of an event cannot be empty.");
         }
 
+        LocalDateTime at = parseDateTime(atStr);
         Event event = new Event(description, at, isDone);
 
         tasks.add(event);
@@ -106,7 +172,7 @@ public class Duke {
     }
 
     public static Task doTask(String otherInput) throws DukeException {
-        if (otherInput.equals("")) {
+        if (otherInput.isEmpty()) {
             throw new DukeException("Task number required for the done command.");
         } else if (!otherInput.chars().allMatch(Character::isDigit)) {
             throw new DukeException("Only positive integers allowed for the done command.");
@@ -125,7 +191,7 @@ public class Duke {
     }
 
     public static Task deleteTask(String otherInput) throws DukeException {
-        if (otherInput.equals("")) {
+        if (otherInput.isEmpty()) {
             throw new DukeException("Task number required for the delete command.");
         } else if (!otherInput.chars().allMatch(Character::isDigit)) {
             throw new DukeException("Only positive integers allowed for the delete command.");
@@ -141,6 +207,25 @@ public class Duke {
 
         tasks.remove(task);
         return task;
+    }
+
+    public static void listDueTasks(String otherInput) throws DukeException {
+        if (otherInput.isEmpty()) {
+            throw new DukeException("Date required for the due command.");
+        }
+
+        LocalDate date = parseDate(otherInput);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
+        StringBuilder output = new StringBuilder("Here are the tasks in your list occurring on "
+                + date.format(formatter) + ":\n");
+
+        for (Task task : tasks) {
+            if (task.isDue(date)) {
+                output.append(tasks.indexOf(task) + 1).append(".").append(task).append('\n');
+            }
+        }
+
+        printPrompt(output.toString());
     }
 
     public static void listTasks() throws DukeException {
@@ -230,11 +315,15 @@ public class Duke {
             try {
                 switch (command) {
                     case "list":
-                        if (!otherInput.equals("")) {
+                        if (!otherInput.isEmpty()) {
                             throw new DukeException("I'm sorry, but I don't know what that means :-(");
                         }
 
                         listTasks();
+
+                        break;
+                    case "due":
+                        listDueTasks(otherInput);
 
                         break;
                     case "done":
