@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UtilsTest {
-    private static Stream<Arguments> concatenateArguments() {
+    private static Stream<Arguments> getConcatenateArguments() {
         String[] arr = new String[]{"This", "is", "," ,"a", "test", "case", "."};
         return Stream.of(
                 Arguments.of(arr, 0, 7, "This is , a test case ."),
@@ -20,7 +20,7 @@ public class UtilsTest {
     }
 
     @ParameterizedTest
-    @MethodSource("concatenateArguments")
+    @MethodSource("getConcatenateArguments")
     public void testConcatenate(String[] arr, int start, int end, String actual) {
         assertEquals(Utils.concatenate(arr, start, end), actual);
     }
@@ -42,19 +42,20 @@ public class UtilsTest {
         assertEquals(Utils.getIndexOf(arr, target), actual);
     }
 
-    private static Stream<Arguments> hasIntegerArguments() {
+    private static Stream<Arguments> getHasIntegerArguments() {
         return Stream.of(
                 Arguments.of(new String[]{"done", "2"}, 1, true),
-                Arguments.of(new String[]{"done", "2", "extra"}, 1, true),
+                Arguments.of(new String[]{"delete", "2", "extra"}, 1, true),
                 Arguments.of(new String[]{"done", "extra", "2"}, 2, true),
                 Arguments.of(new String[]{"done", "2.2"}, 1, false),
-                Arguments.of(new String[]{"done", "2.2"}, 0, false),
-                Arguments.of(new String[]{"done"}, 1, false)
+                Arguments.of(new String[]{"delete", "2.2"}, 0, false),
+                Arguments.of(new String[]{"delete"}, 1, false),
+                Arguments.of(new String[]{"done", "-"}, 1, false)
         );
     }
 
     @ParameterizedTest
-    @MethodSource("hasIntegerArguments")
+    @MethodSource("getHasIntegerArguments")
     public void testHasInteger(String[] arr, int index, boolean actual) {
         assertEquals(Utils.hasInteger(arr, index), actual);
     }
