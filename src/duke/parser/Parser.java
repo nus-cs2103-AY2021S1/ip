@@ -50,6 +50,11 @@ public final class Parser {
         }
     }
 
+    /**
+     * Converts a Task into a String format for writing to disk.
+     * @param task the Task to be converted
+     * @return the String representation of the Task to be used in the data file.
+     */
     public static String convertTask(Task task) {
         String[] args = task.toArray();
         String result = "";
@@ -59,6 +64,12 @@ public final class Parser {
         return result + "\n";
     }
 
+    /**
+     * Converts input text into the appropriate command.
+     * @param text the input text from the user
+     * @return the Command to be executed
+     * @throws DukeArgumentException if the input text did not match any existing Command types.
+     */
     public static Command parseCommand(String text) throws DukeArgumentException {
         String[] parsedInput = text.split(" ", 2);
         switch (parsedInput[0].toLowerCase()) {
@@ -77,7 +88,7 @@ public final class Parser {
         case DEADLINE:
             return new DeadlineCommand(parsedInput[1]);
         default:
-            throw new DukeArgumentException("duke.commands.Command did not match any known commands");
+            throw new DukeArgumentException("Command did not match any known commands");
         }
     }
 

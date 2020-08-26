@@ -10,10 +10,19 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an request by the user to add a Event object to the list of Tasks.
+ */
 public class EventCommand extends Command {
 
     Event event;
 
+
+    /**
+     * Constructor for a EventCommand object.
+     * @param input the input string to be parsed into the arguments for constructing a Event object.
+     * @throws DukeArgumentException if the arguments from the input string are invalid.
+     */
     public EventCommand(String input) throws DukeArgumentException {
         String[] args = input.split("/at ", 2);
         try {
@@ -30,6 +39,11 @@ public class EventCommand extends Command {
         return super.isExit();
     }
 
+    /**
+     * Attempts to add the Event object to the storage.
+     * @param storage The Storage object to take in the new Event object
+     * @throws DukeExecutionException if an IOException occurs
+     */
     @Override
     public void execute(Storage storage) throws DukeExecutionException {
         try {
