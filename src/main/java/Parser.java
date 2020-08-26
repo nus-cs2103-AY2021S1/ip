@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Parser {
     public static Command parse(String userInput) throws DukeException {
         if(userInput.equals("bye")) {
+            System.out.println();
             return Command.EXIT;
         } else if (userInput.equals("list")) {
             return Command.LIST;
