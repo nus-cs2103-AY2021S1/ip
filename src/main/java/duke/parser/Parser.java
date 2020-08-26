@@ -15,7 +15,17 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 
+/**
+ * This class contains a function to parse user input.
+ */
 public class Parser {
+
+    /**
+     * Returns the appropriate Command based on the given user input.
+     *
+     * @param input the user input
+     * @return a Command that should be executed in response to the user input
+     */
     public static Command parse(String input) {
         input = input.strip();
         String[] split = input.split("\\s+", 2); // guranteed to contain at least ""

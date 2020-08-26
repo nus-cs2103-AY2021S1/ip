@@ -4,9 +4,17 @@ import duke.Bot;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * This Command will delete a Task from the TaskList.
+ */
 public class DeleteCommand implements Command {
     private int index;
 
+    /**
+     * Creates a DeleteCommand.
+     *
+     * @param index the index of the Task to delete
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }

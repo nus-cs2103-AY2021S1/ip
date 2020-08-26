@@ -4,9 +4,17 @@ import duke.Bot;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * This Command will mark a Task as done.
+ */
 public class DoneCommand implements Command {
     private int index;
 
+    /**
+     * Creates a DoneCommand.
+     *
+     * @param index index of the Task to mark as done
+     */
     public DoneCommand(int index) {
        this.index = index;
     }
