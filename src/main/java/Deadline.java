@@ -19,9 +19,11 @@ public class Deadline extends Task {
         return "D|" + (this.isDone ? "1" : "0") + "|" + this.taskName + "|" + this.taskBy;
     }
 
-    /** Loads the file format String representation of Deadline task.
+    /**
+     * Loads the file format String representation of Deadline task.
+     *
      * @return Deadline loaded from file format representation
-     * */
+     */
     static Deadline fromFileFormat(String fileFormatString) {
         String[] tokens = fileFormatString.split("\\|");
         Deadline loaded = new Deadline(tokens[2], LocalDate.parse(tokens[3]));

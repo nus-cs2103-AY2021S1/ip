@@ -1,4 +1,5 @@
-/** Task represents a task to be done.
+/**
+ * Task represents a task to be done.
  */
 public abstract class Task {
     String taskName;
@@ -9,12 +10,16 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    /** Mark the task as done. */
+    /**
+     * Mark the task as done.
+     */
     public void setDone() {
         this.isDone = true;
     }
 
-    /** Returns a ticked check-box if done else cross */
+    /**
+     * Returns a ticked check-box if done else cross
+     */
     public String toString() {
         return (this.isDone ? "[✓] " : "[✘] ") + this.taskName;
     }

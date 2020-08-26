@@ -4,30 +4,36 @@ import java.util.List;
 
 public class Parser {
 
-    /** Parse a user input string as a delete command.
+    /**
+     * Parse a user input string as a delete command.
+     *
      * @param userInput - String representation of user input
      * @return integer index of the task in the task list to be deleted
-     * */
+     */
     static int parseDelete(String userInput) throws DukeException {
         String[] userTokens = userInput.split(" ");
         Parser.validateIdentifier(userInput, userTokens);
         return Integer.parseInt(userTokens[1]) - 1;
     }
 
-    /** Parse a user input string as a done command.
+    /**
+     * Parse a user input string as a done command.
+     *
      * @param userInput - String representation of user input
      * @return integer index of the task in the task list to be marked as done
-     * */
+     */
     static int parseDone(String userInput) throws DukeException {
         String[] userTokens = userInput.split(" ");
         Parser.validateIdentifier(userInput, userTokens);
         return Integer.parseInt(userTokens[1]) - 1;
     }
 
-    /** Parse a user input string as a event command.
+    /**
+     * Parse a user input string as a event command.
+     *
      * @param userInput - String representation of user input
      * @return Event task created from user command
-     * */
+     */
     static Event parseEvent(String userInput) throws DukeException {
         String[] userTokens = userInput.split(" ");
         String userCommand = userTokens[0];
@@ -39,10 +45,12 @@ public class Parser {
         return new Event(taskName, taskAt);
     }
 
-    /** Parse a user input string as a deadline command.
+    /**
+     * Parse a user input string as a deadline command.
+     *
      * @param userInput - String representation of user input
      * @return Deadline task created from user command
-     * */
+     */
     static Deadline parseDeadline(String userInput) throws DukeException {
         String[] userTokens = userInput.split(" ");
         String userCommand = userTokens[0];
@@ -54,10 +62,12 @@ public class Parser {
         return new Deadline(taskName, taskBy);
     }
 
-    /** Parse a user input string as a todo command.
+    /**
+     * Parse a user input string as a todo command.
+     *
      * @param userInput - String representation of user input
      * @return Todo task created from user command
-     * */
+     */
     static Todo parseTodo(String userInput) throws DukeException {
         String[] userTokens = userInput.split(" ");
         String userCommand = userTokens[0];
@@ -66,9 +76,11 @@ public class Parser {
         return new Todo(userTask);
     }
 
-    /** Validate a command from the user and throws an exception if invalid.
+    /**
+     * Validate a command from the user and throws an exception if invalid.
+     *
      * @param userCommand - String representation of user's command
-     * */
+     */
     static void validateCommand(String userCommand) throws DukeException {
         List<String> validCommands = Arrays.asList(
                 "bye", "list", "done", "todo", "deadline", "event", "delete");
@@ -78,20 +90,24 @@ public class Parser {
         }
     }
 
-    /** Validate a task from the user and throws an exception if invalid.
+    /**
+     * Validate a task from the user and throws an exception if invalid.
+     *
      * @param userCommand - String representation of user's command
-     * @param userTask - String representation of user's task
-     * */
+     * @param userTask    - String representation of user's task
+     */
     static void validateTask(String userCommand, String userTask) throws DukeException {
         if (userTask.isEmpty()) {
             throw new DukeException("Empty task: " + userCommand);
         }
     }
 
-    /** Validate a deadline from the user and throws an exception if invalid.
+    /**
+     * Validate a deadline from the user and throws an exception if invalid.
+     *
      * @param userCommand - String representation of user's command
-     * @param userTask - String representation of user's task
-     * */
+     * @param userTask    - String representation of user's task
+     */
     static void validateDeadline(String userCommand, String userTask) throws DukeException {
         validateTask(userCommand, userTask);
         if (!userTask.contains("/by")) {
@@ -99,10 +115,12 @@ public class Parser {
         }
     }
 
-    /** Validate a event from the user and throws an exception if invalid.
+    /**
+     * Validate a event from the user and throws an exception if invalid.
+     *
      * @param userCommand - String representation of user's command
-     * @param userTask - String representation of user's task
-     * */
+     * @param userTask    - String representation of user's task
+     */
     static void validateEvent(String userCommand, String userTask) throws DukeException {
         validateTask(userCommand, userTask);
         if (!userTask.contains("/at")) {
@@ -111,10 +129,13 @@ public class Parser {
     }
 
     // TODO: Implement validation for identifier commands, e.g. 'done 1', 'delete 2'
-    /** Validate an identifier from the user and throws an exception if invalid.
-     * @param userInput - String representation of user's input
+
+    /**
+     * Validate an identifier from the user and throws an exception if invalid.
+     *
+     * @param userInput  - String representation of user's input
      * @param userTokens - String array of user's input separated by spaces
-     * */
+     */
     static void validateIdentifier(String userInput, String[] userTokens) throws DukeException {
         if (userTokens.length != 2) {
             throw new DukeException("Invalid identifier, requires 2 tokens: " + userInput);
