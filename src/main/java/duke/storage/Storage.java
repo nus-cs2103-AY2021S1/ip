@@ -46,6 +46,7 @@ public class Storage {
 
     /**
      * Loads tasks data from store, parses them and saves them
+     *
      * @return list of tasks read from store
      */
     public List<Task> load() {
@@ -96,6 +97,7 @@ public class Storage {
 
     /**
      * Writes tasks data to store after each function call
+     *
      * @param tasks the list of tasks to write represented as a TaskList object
      */
     public void write(TaskList tasks) {

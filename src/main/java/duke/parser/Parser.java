@@ -36,6 +36,7 @@ public class Parser {
     /**
      * Parses a line of user input, creates and returns an Executable object
      * with the necessary information
+     *
      * @param input the raw user input
      * @return the Executable obtained from parsing the input
      * @throws DukeException if encountered command is
