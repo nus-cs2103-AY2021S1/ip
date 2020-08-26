@@ -1,5 +1,6 @@
-public class DukeException extends Exception{
-    public DukeException(String errorMessage){
-        System.out.println(errorMessage);
+public class DukeException extends Exception {
+    public DukeException(String errorMessage) {
+//        System.out.println(errorMessage);
+        super(errorMessage);
     }
 }

@@ -15,12 +15,12 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public String saveText(){
+    public String saveText() {
         return "E | " + getStatusIcon() + " | " + description + " | " + at + "\n";
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[E]" + super.toString() + "(at: " + at.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
     }
 }
