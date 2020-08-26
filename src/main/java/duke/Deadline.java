@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 
 public class Deadline extends Task {
@@ -20,6 +21,11 @@ public class Deadline extends Task {
         super(description, isDone);
         this.date = date;
         this.time = time;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(date, time);
     }
 
     @Override
