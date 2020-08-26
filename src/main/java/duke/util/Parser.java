@@ -6,6 +6,7 @@ import duke.command.CommandList;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 
 import duke.exception.DukeException;
@@ -71,6 +72,9 @@ public class Parser {
             } catch (NumberFormatException nfe) {
                 throw new DukeException("This is not a number for \"delete\" command: " + cmd.substring(6));
             }
+            break;
+        case find:
+            command = new FindCommand(cmd.substring(4).strip());
             break;
         }
         return command;

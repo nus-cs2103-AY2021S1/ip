@@ -3,6 +3,7 @@ package duke.util;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -132,5 +133,21 @@ public class Ui {
      */
     public String readCommand() {
         return scanner.nextLine();
+    }
+
+    public void printSearchResult(String searchTerm, List<Integer> idxList, List<Task> tasks) {
+        if (tasks.size() == 0) {
+            println("I can't find any task named \"" + searchTerm + "\" in the list...");
+            return;
+        }
+
+        String[] output = new String[tasks.size() + 1];
+        output[0] = " Here are the matching tasks according to your search keyword: \"" + searchTerm + "\"";
+
+        for (int i = 1; i <= tasks.size(); i++) {
+            output[i] = idxList.get(i-1) + "." + tasks.get(i-1);
+        }
+
+        println(output);
     }
 }
