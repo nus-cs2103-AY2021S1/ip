@@ -19,7 +19,16 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
 
+/**
+ * The program's command line parser.
+ */
 public class Parser {
+    /**
+     * Parses a string and gives a datetime for use in creating tasks
+     * @param dateTime A string representing a date and a time.
+     * @return a LocalDateTime object represented by the string.
+     * @throws DukeException if the string cannot be parsed.
+     */
     public static LocalDateTime parseDateTime(String dateTime) throws DukeException {
         String[] dateTimes = dateTime.split("\\s");
         String date = dateTimes[0];
@@ -28,6 +37,12 @@ public class Parser {
         return LocalDateTime.of(parseDate(date), parseTime(time));
     }
 
+    /**
+     * Parses a string and gives a date for use in creating tasks
+     * @param dateStr A string representing a date.
+     * @return a LocalDate object represented by the string.
+     * @throws DukeException if the string cannot be parsed.
+     */
     public static LocalDate parseDate(String dateStr) throws DukeException {
         LocalDate date;
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M[/yyyy][/yy]");
@@ -49,6 +64,12 @@ public class Parser {
         return date;
     }
 
+    /**
+     * Parses a string and gives a time for use in creating tasks
+     * @param timeStr A string representing a time.
+     * @return a LocalTime object represented by the string.
+     * @throws DukeException if the string cannot be parsed.
+     */
     public static LocalTime parseTime(String timeStr) throws DukeException {
         LocalTime time = LocalTime.MIDNIGHT;
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(timeStr.contains(" ") ? "h:m a" : "H:m");
@@ -66,6 +87,13 @@ public class Parser {
         return time;
     }
 
+    /**
+     * Parses the command given and returns a Command object for execution.
+     *
+     * @param fullCommand a string containing the full command.
+     * @return a Command object representing the command.
+     * @throws DukeException if the command cannot be parsed.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] commands = fullCommand.split("\\s");
         String command = commands[0];

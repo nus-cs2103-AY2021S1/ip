@@ -2,6 +2,9 @@ package duke.task;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a todo.
+ */
 public class Todo extends Task {
     public Todo(String description) {
         this(description, false);
@@ -11,6 +14,11 @@ public class Todo extends Task {
         super(description, isDone);
     }
 
+    /**
+     * Always returns false as a todo has no date.
+     * @param date A date
+     * @return false
+     */
     @Override
     public boolean isDue(LocalDate date) {
         return false;

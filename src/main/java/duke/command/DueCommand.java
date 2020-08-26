@@ -10,6 +10,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Represents a due command.
+ */
 public class DueCommand extends Command {
     private final LocalDate date;
 
@@ -17,6 +20,14 @@ public class DueCommand extends Command {
         this.date = date;
     }
 
+    /**
+     * Executes the command, listing all tasks due on the provided date.
+     *
+     * @param tasks TaskList instance
+     * @param ui Ui instance
+     * @param storage Storage instance
+     * @throws DukeException if there are no tasks in the TaskList due on the provided date.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         List<Task> dueTasks = tasks.getDueTasks(date);

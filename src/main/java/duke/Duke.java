@@ -2,6 +2,9 @@ package duke;
 
 import duke.command.Command;
 
+/**
+ * The main program
+ */
 public class Duke {
     private final Storage storage;
     private final TaskList tasks;
@@ -22,6 +25,9 @@ public class Duke {
         this.tasks = tasks;
     }
 
+    /**
+     * Runs the main program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

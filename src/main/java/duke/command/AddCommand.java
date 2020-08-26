@@ -9,6 +9,9 @@ import duke.task.TaskType;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents an add command.
+ */
 public class AddCommand extends Command {
     private final TaskType type;
     private final String description;
@@ -24,6 +27,14 @@ public class AddCommand extends Command {
         this.dateTime = dateTime;
     }
 
+    /**
+     * Executes the command, adding a task to the provided TaskList.
+     *
+     * @param tasks TaskList instance
+     * @param ui Ui instance
+     * @param storage Storage instance
+     * @throws DukeException if the task cannot be added.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.addTask(type, description, dateTime);
