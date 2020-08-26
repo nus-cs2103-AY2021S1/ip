@@ -20,21 +20,14 @@ public class Parser {
     }
 
     public static Command addCommand(String command) throws DukeException {
-        String[] cmdLine = command.split(" ");
-        String taskType = cmdLine[0];
-
-        switch (taskType) {
-            case "todo":
-                return new TodoCommand(command);
-
-            case "deadline":
-                return new DeadlineCommand(command);
-
-            case "event":
-                return new EventCommand(command);
-
-            default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        if (command.startsWith("todo")) {
+            return new TodoCommand(command);
+        } else if (command.startsWith("deadline")) {
+            return new DeadlineCommand(command);
+        } else if (command.startsWith("event")) {
+            return new EventCommand(command);
+        } else {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

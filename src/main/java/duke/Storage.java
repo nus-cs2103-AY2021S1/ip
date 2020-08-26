@@ -1,12 +1,17 @@
 package main.java.duke;
 
 import main.java.duke.exceptions.InvalidFileException;
+import main.java.duke.exceptions.InvalidInputException;
 import main.java.duke.tasks.*;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Storage {
+
+    public DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public final String path;
 
@@ -59,10 +64,10 @@ public class Storage {
                         newTask = new Todo(readLine[2]);
                         break;
                     case "D":
-                        newTask = new Deadline(readLine[2], readLine[3]);
+                        newTask = new Deadline(readLine[2], LocalDateTime.parse(readLine[3], formatter));
                         break;
                     case "E":
-                        newTask = new Event(readLine[2], readLine[3]);
+                        newTask = new Event(readLine[2], LocalDateTime.parse(readLine[3], formatter));
                         break;
                     default:
                         break;

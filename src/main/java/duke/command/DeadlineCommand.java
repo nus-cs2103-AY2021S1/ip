@@ -8,9 +8,15 @@ import main.java.duke.tasks.Deadline;
 import main.java.duke.tasks.Task;
 import main.java.duke.tasks.TaskList;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class DeadlineCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Got it. I've added this task:\n";
+    public static final String MESSAGE_PARSE_ERROR = "Invalid date and time format.\n" +
+            "Please enter date and time in the format: yyyy-MM-dd HH:mm";
 
     public DeadlineCommand(String input) {
         super(input);
@@ -18,14 +24,20 @@ public class DeadlineCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidFileException {
-        if (super.input.length() <= 5) {
+        if (super.input.length() <= 8) {
             throw new InvalidInputException("☹ OOPS!!! The description of a deadline cannot be empty.\n");
         }
-        String[] split = super.input.substring(9).split("/by ", 2);
-        Task deadline = new Deadline(split[0], split[1]);
-        tasks.addTask(deadline);
-        ui.printMessage(MESSAGE_SUCCESS + deadline.toString() + "\nNow you have " + tasks.taskListSize() + " tasks in the list.");
-        storage.save(tasks);
+        try {
+            String[] split = super.input.substring(9).split("/by ", 2);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime date = LocalDateTime.parse(split[1], formatter);
+            Task deadline = new Deadline(split[0], date);
+            tasks.addTask(deadline);
+            ui.printMessage(MESSAGE_SUCCESS + deadline.toString() + "\nNow you have " + tasks.taskListSize() + " tasks in the list.");
+            storage.save(tasks);
+        } catch (DateTimeParseException e) {
+            throw new InvalidInputException(MESSAGE_PARSE_ERROR);
+        }
     }
 
     @Override

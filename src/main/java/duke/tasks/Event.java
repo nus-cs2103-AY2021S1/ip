@@ -7,10 +7,9 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDateTime date;
 
-    public Event(String description, String date) {
+    public Event(String description, LocalDateTime date) {
         super(description);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        this.date = LocalDateTime.parse(date, formatter);
+        this.date = date;
     }
 
     @Override
