@@ -12,7 +12,8 @@ public abstract class AddCommand extends Command {
 
     /**
      * Constructs a command that adds a task.
-     * @param description the description of the task
+     *
+     * @param description The description of the task.
      */
     public AddCommand(String description) {
         this.description = description;

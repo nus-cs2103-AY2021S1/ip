@@ -21,8 +21,9 @@ public class EventCommand extends AddCommand {
 
     /**
      * Constructs a command that adds an event task.
-     * @param description the description of the event
-     * @param date the date of the event
+     *
+     * @param description The description of the event.
+     * @param date The date of the event.
      */
     public EventCommand(String description, LocalDate date) {
         super(description);

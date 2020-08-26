@@ -18,7 +18,8 @@ public class DoneCommand extends Command {
 
     /**
      * Constructs a command that marks a task as done.
-     * @param taskNumber the task number to be marked as done
+     *
+     * @param taskNumber The task number to be marked as done.
      */
     public DoneCommand(String taskNumber) {
         this.taskNumber = taskNumber;

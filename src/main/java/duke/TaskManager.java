@@ -24,7 +24,8 @@ public class TaskManager {
 
     /**
      * Initializes a manager instance with a non-empty list of tasks.
-     * @param tasks the list of tasks to be managed
+     *
+     * @param tasks The list of tasks to be managed.
      */
     public TaskManager(List<Task> tasks) {
         this.tasks = tasks;
@@ -32,7 +33,8 @@ public class TaskManager {
 
     /**
      * Returns the list of tasks.
-     * @return the list of tasks
+     *
+     * @return The list of tasks.
      */
     public List<Task> getTasks() {
         return this.tasks;
@@ -40,7 +42,8 @@ public class TaskManager {
 
     /**
      * Adds a task to the list.
-     * @param task the task to be added
+     *
+     * @param task The task to be added.
      */
     public void addTask(Task task) {
         this.tasks.add(task);
@@ -48,8 +51,9 @@ public class TaskManager {
 
     /**
      * Deletes a task from the list.
-     * @param index the index of the task in the list
-     * @return the deleted task
+     *
+     * @param index The index of the task in the list.
+     * @return The deleted task.
      */
     public Task deleteTask(int index) {
         return this.tasks.remove(index);
@@ -57,7 +61,8 @@ public class TaskManager {
 
     /**
      * Marks a task as done.
-     * @param task the task to be marked as done
+     *
+     * @param task The task to be marked as done.
      */
     public void markTaskAsDone(Task task) {
         task.markAsDone();

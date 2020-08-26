@@ -21,7 +21,8 @@ public class Task {
 
     /**
      * Initializes a task object.
-     * @param description the description of the task
+     *
+     * @param description The description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -30,7 +31,8 @@ public class Task {
 
     /**
      * Returns the description of the task.
-     * @return the description of the task
+     *
+     * @return The description of the task.
      */
     public String getDescription() {
         return this.description;
@@ -39,7 +41,8 @@ public class Task {
     /**
      * Returns the date of the task if the task has a date.
      * Otherwise, the current date is being returned.
-     * @return the date of the task
+     *
+     * @return The date of the task.
      */
     public LocalDate getDate() {
         return LocalDate.now();
@@ -47,7 +50,8 @@ public class Task {
 
     /**
      * Returns the status icon of the task i.e. a tick or a cross.
-     * @return a tick icon if the task is done, and a cross otherwise
+     *
+     * @return A tick icon if the task is done, and a cross otherwise.
      */
     public String getStatusIcon() {
         return isDone 
@@ -57,7 +61,8 @@ public class Task {
 
     /**
      * Determines whether the task is done.
-     * @return true if the task is done
+     *
+     * @return True if the task is done.
      */
     public boolean isDone() {
         return this.isDone;

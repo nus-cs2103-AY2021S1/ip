@@ -17,7 +17,7 @@ import duke.task.Event;
 
 /**
  * Represents a Duke storage that deals with
- * loading tasks from the file and saving tasks in the file
+ * loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
 
@@ -28,7 +28,8 @@ public class Storage {
 
     /**
      * Initializes a storage instance for a particular file path.
-     * @param filePath the path of the file
+     *
+     * @param filePath The path of the file.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -36,8 +37,9 @@ public class Storage {
 
     /**
      * Returns a list of tasks after loading them from the specified file.
-     * @return a list of tasks
-     * @throws DukeException if the file is not found
+     *
+     * @return A list of tasks.
+     * @throws DukeException If the file is not found.
      */
     public List<Task> loadTasks() throws DukeException {
         File file = new File(filePath);
@@ -76,9 +78,10 @@ public class Storage {
 
     /**
      * Saves tasks to the specified file.
-     * @param tasks the list of tasks to be saved
-     * @throws DukeException if the path specified is a directory,
-     * or if the file cannot be created or opened
+     *
+     * @param tasks The list of tasks to be saved.
+     * @throws DukeException If the path specified is a directory,
+     * or if the file cannot be created or opened.
      */
     public void saveTasks(List<Task> tasks) throws DukeException {
         try {

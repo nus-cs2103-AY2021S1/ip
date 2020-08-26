@@ -24,7 +24,8 @@ public class Ui {
 
     /**
      * Returns the next line of user input.
-     * @return the next line of user input
+     *
+     * @return The next line of user input.
      */
     public String readCommand() {
         return sc.nextLine();
@@ -47,8 +48,9 @@ public class Ui {
 
     /**
      * Displays the message when a task is being added.
-     * @param task the task to be added
-     * @param numTasks the total number of tasks after adding
+     *
+     * @param task The task to be added.
+     * @param numTasks The total number of tasks after adding.
      */
     public void showAddMessage(Task task, int numTasks) {
         System.out.println("Okay! Task added for you!");
@@ -58,8 +60,9 @@ public class Ui {
 
     /**
      * Displays the message when a task is being deleted.
-     * @param task the task to be deleted
-     * @param numTasks the total number of tasks after deleting
+     *
+     * @param task The task to be deleted.
+     * @param numTasks The total number of tasks after deleting.
      */
     public void showDeleteMessage(Task task, int numTasks) {
         System.out.println("Noted. The following task is removed:");
@@ -69,7 +72,8 @@ public class Ui {
 
     /**
      * Displays the message when a task is being marked as done.
-     * @param task the task to be marked as done
+     *
+     * @param task The task to be marked as done.
      */
     public void showDoneMessage(Task task) {
         System.out.println("Good job! I've marked this task as done:");
@@ -78,7 +82,8 @@ public class Ui {
 
     /**
      * Displays the error message when an error occurred.
-     * @param message the error message to be displayed
+     *
+     * @param message The error message to be displayed.
      */
     public void showErrorMessage(String message) {
         System.out.println(message);
@@ -86,7 +91,8 @@ public class Ui {
 
     /**
      * Displays the list of tasks to the user.
-     * @param tasks the list of tasks to be displayed
+     *
+     * @param tasks The list of tasks to be displayed.
      */
     public void displayTasks(List<Task> tasks) {
         if (tasks.isEmpty()) {

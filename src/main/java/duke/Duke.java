@@ -24,8 +24,9 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Initializes all class variables
-     * @param filePath the file path for the storage
+     * Initializes all class variables.
+     *
+     * @param filePath The file path for the storage.
      */
     public Duke(String filePath) {
         ui = new Ui();
