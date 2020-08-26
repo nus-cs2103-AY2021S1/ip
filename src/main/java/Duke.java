@@ -17,6 +17,8 @@ public class Duke {
             e.printStackTrace();
         }
 
+        UpdateListFromFile.updateList("data/duke.txt");
+
         System.out.println(new GreetCommand().execute());
         Responder.responder();
     }
