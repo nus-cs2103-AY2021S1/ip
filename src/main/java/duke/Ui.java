@@ -18,7 +18,9 @@ public class Ui {
     }
 
     public void welcomeMessage(String taskList) {
-        messageFormatter("Hello! I'm Duke! Welcome back!\n" + taskList);
+
+        messageFormatter("Hello! I'm Duke! Welcome back!\n"
+                + "Here are the tasks in your list:\n" + taskList);
     }
 
     public void byeMessage() {
@@ -26,7 +28,7 @@ public class Ui {
     }
 
     public void listMessage(String taskList) {
-        messageFormatter(taskList);
+        messageFormatter("Here are the tasks in your list:\n" + taskList);
     }
 
     public void errorMessage(String error) {
@@ -45,6 +47,14 @@ public class Ui {
     public void taskMessage(String task, int size) {
         messageFormatter("Got it. I've added this task:\n" + task +
                 "\nNow you have " + size + " tasks in the list.");
+    }
+
+    public void findTaskMessage(String taskList, int size) {
+        if (size == 0) {
+            messageFormatter("There are not matching task in your list!");
+        } else {
+            messageFormatter("There are " + size + " matching tasks in your list:\n" + taskList);
+        }
     }
 
 }

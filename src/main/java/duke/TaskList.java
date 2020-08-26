@@ -37,9 +37,20 @@ public class TaskList {
         return taskList.size();
     }
 
+    public TaskList findTask(String description) {
+        ArrayList<Task> matchingTask = new ArrayList<>();
+
+        for (Task task: taskList) {
+            if (task.getDescription().contains(description)) {
+                matchingTask.add(task);
+            }
+        }
+
+        return new TaskList(matchingTask);
+    }
+
     public String toString() {
         StringBuilder string = new StringBuilder();
-        string.append("Here are the tasks in your list:\n");
         for (int i =0; i < taskList.size(); i++){
             if (taskList.size() == i + 1) {
                 string.append(i + 1).append(". ").append(taskList.get(i).toString());

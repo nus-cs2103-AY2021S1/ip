@@ -6,6 +6,7 @@ import commands.DoneCommand;
 import commands.ListCommand;
 import commands.DeleteCommand;
 import commands.AddCommand;
+import commands.FindCommand;
 
 import exceptions.InvalidCommandException;
 
@@ -17,6 +18,7 @@ public class Parser {
     private final static String DEADLINE_COMMAND = "deadline";
     private final static String EVENT_COMMAND = "event";
     private final static String DELETE_COMMAND = "delete";
+    private final static String FIND_COMMAND = "find";
 
     public static Command parse(String fullCommand) throws InvalidCommandException {
         String[] tempArray = fullCommand.trim().split(" ");
@@ -33,6 +35,9 @@ public class Parser {
         }
         if (command.equals(DELETE_COMMAND)) {
             return new DeleteCommand(fullCommand);
+        }
+        if (command.equals(FIND_COMMAND)) {
+            return new FindCommand(fullCommand);
         }
         if (isTask(command)) {
             return new AddCommand(fullCommand);
