@@ -8,6 +8,18 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        this.storeAs = "D,0," + description + "," + by;
+    }
+
+    public Deadline(String done, String description, String by) {
+        super(description);
+        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+
+        if (done.equals("1")) {
+            this.isDone = true;
+            this.storeAs = "D,1," + description + "," + by;
+        }
+        this.storeAs = "D,1," + description + "," + by;
     }
 
     @Override

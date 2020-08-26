@@ -3,7 +3,4 @@ public class DukeException extends Exception{
         super(s);
     }
 
-    public String toString() {
-        return this.getMessage();
-    }
 }
