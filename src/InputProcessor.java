@@ -145,9 +145,9 @@ public class InputProcessor {
                         throw new InvalidEventException("Please enter both the name as well as the due date of the deadline!");
                     }
 
-                    String name = content.split(" /by ")[0];
+                    String name = content.split(" /at ")[0];
 
-                    String timePeriod = content.split(" /by ")[1];
+                    String timePeriod = content.split(" /at ")[1];
 
                     newTask = new Deadline(name, timePeriod);
 
@@ -187,6 +187,10 @@ public class InputProcessor {
                 }else{
 
                     processCommand(command);
+
+                    TaskStorage taskStorage = new TaskStorage(taskListManager);
+
+                    taskStorage.saveDataToFile();
 
                 }
             } catch(Exception e){

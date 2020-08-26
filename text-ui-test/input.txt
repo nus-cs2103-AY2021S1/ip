@@ -1,6 +1,6 @@
 todo homework
 deadline return book /by Monday
-event team meeting /at Tuesday
-deadline project
-delete 1
+event project meeting /at Mon 2-4pm
+todo project
+list
 bye

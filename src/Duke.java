@@ -7,6 +7,5 @@ public class Duke {
         InputProcessor inputProcessor = new InputProcessor();
 
         inputProcessor.processInput();
-
     }
 }

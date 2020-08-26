@@ -8,6 +8,10 @@ public class TaskListManager {
         listOfTasks = new ArrayList<>();
     }
 
+    public ArrayList<Task> getListOfTasks(){
+        return this.listOfTasks;
+    }
+
     public int findListSize(){
      return listOfTasks.size();
     }
