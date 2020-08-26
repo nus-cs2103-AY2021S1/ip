@@ -1,9 +1,13 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+
     List<Task> list = new ArrayList<>();
+    Storage storage;
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -19,7 +23,16 @@ public class Duke {
     }
 
     public void run() {
+        storage = new Storage();
+        try {
+            list = storage.readFile();
+        } catch (IOException e) {
+            System.out.println("You have no save tasks");
+        }
+        //System.out.println("todo-list size: " + list.size());
+        //System.out.println("first task: " + list.get(0));
         Scanner sc = new Scanner(System.in);
+
         while (sc.hasNext()) {
             String input = sc.nextLine();
             String checker;
@@ -37,7 +50,6 @@ public class Duke {
                 int num = Character.getNumericValue(input.charAt(5));
                 done(num);
             } else if (checker.equals("dele")) {
-                //System.out.println("character: " + input.charAt(7));
                 int num = Character.getNumericValue(input.charAt(7));
                 delete(num);
             } else {
@@ -53,10 +65,11 @@ public class Duke {
                 current.markAsDone();
                 System.out.println("        I have marked this as done:");
                 System.out.println("        [" + current.isDone + "] " + current.description);
+                storage.editFile(number);
             } else {
                 throw new DukeException("☹ OOPS!!! there is no such task");
             }
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             System.out.println("------------------------------------------------------");
             System.out.println(e.getMessage());
             System.out.println("------------------------------------------------------");
@@ -72,6 +85,8 @@ public class Duke {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
                 task = new Todo(type[1]);
+                Storage storage = new Storage(task);
+                storage.addToFile("T | 0 | " + task.description);
             } else if (type[0].equals("deadline")) {
                 if(type.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -79,6 +94,8 @@ public class Duke {
                 String second = type[1];
                 String[] secondSplit = second.split(" /by ", 2);
                 task = new Deadline(secondSplit[0], secondSplit[1]);
+                Storage storage = new Storage(task);
+                storage.addToFile("D | 0 | " + task.description + " | " + secondSplit[1]);
             } else if (type[0].equals("event")) {
                 if(type.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
@@ -86,6 +103,8 @@ public class Duke {
                 String second = type[1];
                 String[] secondSplit = second.split(" /at ", 2);
                 task = new Event(secondSplit[0], secondSplit[1]);
+                Storage storage = new Storage(task);
+                storage.addToFile("E | 0 | " + task.description + " | " + secondSplit[1]);
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -97,6 +116,8 @@ public class Duke {
             System.out.println("------------------------------------------------------");
             System.out.println(e.getMessage());
             System.out.println("------------------------------------------------------");
+        } catch (IOException e) {
+            System.out.println("Something went wrong");
         }
     }
 
@@ -118,15 +139,13 @@ public class Duke {
                 System.out.println("        Noted I've removed this task");
                 System.out.println("        " + deleted);
                 System.out.println("        you now have " + list.size() + " tasks on the list");
+                storage.deleteTask(num);
             }
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             System.out.println("------------------------------------------------------");
             System.out.println(e.getMessage());
             System.out.println("------------------------------------------------------");
         }
     }
 
-    public static void echo(String input) {
-        System.out.println("        " + input);
-    }
 }
