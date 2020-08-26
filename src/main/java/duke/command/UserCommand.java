@@ -4,22 +4,19 @@ import duke.exceptions.DukeException;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-public class UserCommand {
+public abstract class UserCommand {
 
-     String userInput;
+    protected String userInput;
 
-     public Boolean isExit = false;
+    public Boolean isExit = false;
 
-     public UserCommand(String userInput){
-          this.userInput = userInput;
-     }
+    public UserCommand(String userInput) {
+        this.userInput = userInput;
+    }
 
-     public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public abstract void execute(TaskList taskList, Ui ui) throws DukeException;
 
-     }
-
-
-     public boolean isExit() {
-          return isExit();
-     }
+    public boolean isExit() {
+        return isExit();
+    }
 }
