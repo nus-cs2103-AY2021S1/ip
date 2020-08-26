@@ -2,7 +2,7 @@ public class Parser {
     public String parse(String input, TaskList tasks, Storage storage) throws DukeException {
         String output;
         String[] command = input.split(" ", 2);
-
+                                                                                                                                                   
         if (input.equals("bye")) {
             output = "\tBye. Hope to see you again soon!";
         } else if (input.equals("list")) {
@@ -55,7 +55,8 @@ public class Parser {
             ToDo newToDo = new ToDo(command[1]);
 
             tasks.add(newToDo,storage);
-            output = "\tGot it. I've added this task: \n\t\t" + newToDo + "\n\tNow you have " + tasks.size() + " tasks in the list.";
+            output = "\tGot it. I've added this task: \n\t\t" + newToDo + "\n\tNow you have " + tasks.size() 
+                    + " tasks in the list.";
         } else if (command[0].equals("deadline")) {
             if (command.length < 2) {
                 throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -85,7 +86,8 @@ public class Parser {
             Deadline newDeadline = new Deadline(description, by);
 
             tasks.add(newDeadline, storage);
-            output = "\tGot it. I've added this task: \n\t\t" + newDeadline + "\n\tNow you have " + tasks.size() + " tasks in the list.";
+            output = "\tGot it. I've added this task: \n\t\t" + newDeadline + "\n\tNow you have " + tasks.size() 
+                    + " tasks in the list.";
         } else if (command[0].equals("event")) {
             if (command.length < 2) {
                 throw new DukeException("\t☹ OOPS!!! The description of a event cannot be empty.");
@@ -108,14 +110,16 @@ public class Parser {
                 throw new DukeException("\t☹ OOPS!!! The /at description of a event cannot be empty.");
             }
 
-            if (!at.matches("\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) ([1-9]|1[012]):([0-5][0-9]) [AP]M")) {
+            if (!at.matches(
+                    "\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) ([1-9]|1[012]):([0-5][0-9]) [AP]M")) {
                 throw new DukeException("\t☹ OOPS!!! The date-time format must be yyyy-mm-dd h:mm AM/PM.");
             }
 
             Event newEvent = new Event(description, at);
 
             tasks.add(newEvent, storage);
-            output = "\tGot it. I've added this task: \n\t\t" + newEvent + "\n\tNow you have " + tasks.size() + " tasks in the list.";
+            output = "\tGot it. I've added this task: \n\t\t" + newEvent + "\n\tNow you have " + tasks.size() 
+                    + " tasks in the list.";
         } else if (command[0].equals("delete")) {
             if (command.length < 2) {
                 throw new DukeException("\t☹ OOPS!!! The description of a delete cannot be empty.");
@@ -139,7 +143,8 @@ public class Parser {
 
             int index = inputNumber - 1;
             Task targetTask = tasks.remove(index, storage);
-            output = "\tNoted. I've removed this task: \n\t\t" + targetTask + "\n\tNow you have " + tasks.size() + " tasks in the list.";
+            output = "\tNoted. I've removed this task: \n\t\t" + targetTask + "\n\tNow you have " + tasks.size() 
+                    + " tasks in the list.";
         } else if (command[0].equals("find")) {
             if (command.length < 2) {
                 throw new DukeException("\t☹ OOPS!!! The description of a find cannot be empty.");

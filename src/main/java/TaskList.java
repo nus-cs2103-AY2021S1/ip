@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    List<Task> list;
+    private List<Task> list;
     
     public TaskList(List<Task> list) {
         this.list = list;
