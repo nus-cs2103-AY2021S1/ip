@@ -15,14 +15,10 @@ public class TaskCommand {
         TaskType taskType = Parser.parseTaskType(in);
         String taskDetails =
                 in.replaceFirst(taskType.toString().toLowerCase(), "").trim();
-        switch (taskType) {
-        case Deadline:
-        case Event:
-        case Todo:
-            return createTask(taskType, taskDetails, taskList, storage);
-        default:
+        if (taskType == TaskType.Invalid) {
             throw new InvalidCommandException("Something went wrong during the execution of the command. :-(");
         }
+        return createTask(taskType, taskDetails, taskList, storage);
     }
 
     private static String createTask(TaskType taskType, String details, TaskList taskList, Storage storage)
