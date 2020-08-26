@@ -1,3 +1,5 @@
+package duke;
+
 public enum Type {
     TODO {
         public String toString() {

@@ -1,4 +1,5 @@
-import java.text.SimpleDateFormat;
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;

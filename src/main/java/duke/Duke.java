@@ -1,13 +1,6 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.regex.PatternSyntaxException;
-import java.time.format.DateTimeParseException;
+package duke;
 
+import java.io.IOException;
 
 
 public class Duke {
