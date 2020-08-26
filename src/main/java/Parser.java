@@ -156,7 +156,7 @@ public class Parser {
         return input.equals("bye");
     }
 
-    public static LocalDate getDate(String string) throws InvalidCommandException{
+    public static LocalDate getDate(String string) throws InvalidCommandException {
         //Currently only accepts date in yyyy-mm-dd format
         //Removing the whitespace before and after the string
         try {

@@ -44,6 +44,10 @@ public class TaskList {
         taskList.set(index, taskList.get(index).markDone());
     }
 
+    public static void flush() {
+        taskList.clear();
+    }
+
     private static Task convertToTask(String line) {
         if (line.startsWith("[T]", 2)) {
             //Is a todo task
