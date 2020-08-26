@@ -11,8 +11,8 @@ public class Todo extends Task {
     /**
      * Todo takes in a String which contains the details of the task
      * and a boolean which indicates whether the todo is completed.
-     * @param item
-     * @param completed
+     * @param item description of the todo
+     * @param completed whether the todo is completed
      */
     public Todo(String item, boolean completed) {
         super(item, completed);
@@ -21,7 +21,7 @@ public class Todo extends Task {
     /**
      * It returns the String to be printed to the user containing
      * the details of the todo.
-     * @return String
+     * @return String to be printed to the user
      */
     @Override
     public String getItem() {
@@ -30,7 +30,7 @@ public class Todo extends Task {
 
     /**
      * It returns the String inputted by the user for this todo.
-     * @return String
+     * @return String to be printed to the user
      */
     @Override
     public String getInput() {

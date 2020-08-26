@@ -30,7 +30,7 @@ public class TaskList {
      * It creates a String to be printed to the user to show all the tasks in the list
      * and returns it.
      *
-     * @return String
+     * @return String to be printed to the user
      */
     public String showList() {
         int count = 1;
@@ -47,8 +47,8 @@ public class TaskList {
      * completed. It then returns the String to be printed for the user to see.
      * It throws a DukeException error if the user gives an invalid input.
      *
-     * @param input
-     * @return String
+     * @param input input given by the user
+     * @return String to be printed to the user
      * @throws DukeException
      */
     public String completeItem(String input) throws DukeException {
@@ -70,8 +70,8 @@ public class TaskList {
      * the list. It then returns the String to be printed for the user to see.
      * It throws a DukeException error if the user gives an invalid input.
      *
-     * @param input
-     * @return String
+     * @param input input given by the user
+     * @return String to be printed to the user
      * @throws DukeException
      */
     public String deleteItem(String input) throws DukeException {
@@ -95,9 +95,9 @@ public class TaskList {
      * add task functionand then returns the String to be printed to the user. It throws a
      * DukeException when an error occurred while adding a task to the list.
      *
-     * @param instruction
-     * @param item
-     * @return String
+     * @param instruction the command given by the user
+     * @param item description of the task
+     * @return String to be printed to the user
      * @throws DukeException
      */
     public String addItem(String instruction, String item) throws DukeException {
@@ -121,9 +121,9 @@ public class TaskList {
      * It creates a new todo item based on the prams given and returns the String
      * to be printed to the user.
      *
-     * @param item
-     * @param completed
-     * @return String
+     * @param item description of the todo item
+     * @param completed whether the todo is completed
+     * @return String to be printed to the user
      */
     public String addTodoItem(String item, boolean completed) {
         Todo newTask = new Todo(item, completed);
@@ -138,9 +138,9 @@ public class TaskList {
      * to be printed. It throws a DukeException when an error occurs while adding the
      * task to the list.
      *
-     * @param item
-     * @param completed
-     * @return String
+     * @param item the description of the Deadline
+     * @param completed whether the Deadline is completed
+     * @return String to be printed to the user
      * @throws DukeException
      */
     public String addDeadline(String item, boolean completed) throws DukeException {
@@ -155,9 +155,9 @@ public class TaskList {
      * to be printed. It throws a DukeException when an error occurs while adding the
      * task to the list.
      *
-     * @param item
-     * @param completed
-     * @return String
+     * @param item description of the Event
+     * @param completed whether the Event is completed
+     * @return String to be printed to the user
      * @throws DukeException
      */
     public String addEvent(String item, boolean completed) throws DukeException {
@@ -171,7 +171,7 @@ public class TaskList {
      * It converts all the tasks in the list to String for ease of printing
      * to the User and returns this String.
      *
-     * @return String
+     * @return String to be print to the user
      */
     public String formatTodoListToString() {
         String tasks = "";

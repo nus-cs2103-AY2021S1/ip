@@ -18,11 +18,11 @@ public class Event extends Task {
      * due date of the task, the input String by the user and whether the
      * task is completed or not.
      *
-     * @param item
-     * @param dateTime
-     * @param dueDate
-     * @param input
-     * @param completed
+     * @param item the description of the Event
+     * @param dateTime the date and time inputted by the user
+     * @param dueDate the due date of the Event
+     * @param input the input given by the user
+     * @param completed whether the Event is completed
      */
     public Event(String item, String dateTime, LocalDate dueDate, String input, boolean completed) {
         super(item, completed);
@@ -34,7 +34,7 @@ public class Event extends Task {
     /**
      * It returns the input given by the user to the Java Duke Program
      *
-     * @return String
+     * @return String to be printed to the user
      */
     @Override
     public String getItem() {
@@ -44,7 +44,7 @@ public class Event extends Task {
     /**
      * It returns the details of the Event
      *
-     * @return String
+     * @return String to be printed to the user
      */
     @Override
     public String getInput() {

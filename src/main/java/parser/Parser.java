@@ -22,8 +22,8 @@ public class Parser {
      * Has a taskList and storage object to call the appropriate taskList functions and
      * to overwrite the file containing the tasks at the end of the Java Duke Program
      *
-     * @param taskList
-     * @param storage
+     * @param taskList list of tasks
+     * @param storage storage that stores all the tasks
      */
     public Parser(TaskList taskList, Storage storage) {
         this.taskList = taskList;
@@ -36,7 +36,7 @@ public class Parser {
      * to the user, back to the UI. It throws Duke Exception if any error occurred
      * parsing and carrying out the commands.
      *
-     * @param input
+     * @param input input given by the user
      * @return String to be printed
      * @throws DukeException
      */
@@ -73,8 +73,8 @@ public class Parser {
      * a LocalDate object which is then returned. It throws a DukeException if any error
      * occurred while formatting.
      *
-     * @param dateTime
-     * @return LocalDate, duedate of the task
+     * @param dateTime the date and time string inputted by the user
+     * @return LocalDate duedate of the task
      * @throws DukeException
      */
     public static LocalDate formatDate(String dateTime) throws DukeException {
@@ -99,8 +99,8 @@ public class Parser {
      * and then parses it to the correct format String needed for printing and returns it. It
      * throws a DukeException if any error occurred while parsing.
      *
-     * @param dateTime
-     * @param dueDate
+     * @param dateTime the date and time string inputted by the user
+     * @param dueDate the date the task is due at
      * @return String to be printed for the date and time of the task due
      * @throws DukeException
      */
@@ -123,7 +123,7 @@ public class Parser {
      * format needed for printing to the User and returns it. It throws a DukeException if any
      * error occurred while parsing.
      *
-     * @param time
+     * @param time the time string inputted by the user
      * @return String of the time that the task is due
      */
     public static String formatTime(String time) {
@@ -151,9 +151,9 @@ public class Parser {
      * and parses the input before creating the Deadline object and returning it. It throws a
      * DukeException if any error occurred while parsing the input.
      *
-     * @param item
-     * @param completed
-     * @return Deadline
+     * @param item the description of the task
+     * @param completed whether the task is completed
+     * @return Deadline the task
      * @throws DukeException
      */
     public static Deadline parseDeadline(String item, boolean completed) throws DukeException {
@@ -171,9 +171,9 @@ public class Parser {
      * and parses the input before creating the Event object and returning it. It throws a
      * DukeException if any error occurred while parsing the input.
      *
-     * @param item
-     * @param completed
-     * @return Event
+     * @param item the description of the task
+     * @param completed whether the task is completed
+     * @return Event the task
      * @throws DukeException
      */
     public static Event parseEvent(String item, boolean completed) throws DukeException {

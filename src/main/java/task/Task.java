@@ -14,8 +14,8 @@ public class Task {
      * Task takes in a String which contains the details of the task
      * and a boolean which indicates whether the task is completed.
      *
-     * @param item
-     * @param completed
+     * @param item description of the task
+     * @param completed whether the task is completed
      */
     Task(String item, boolean completed) {
         this.item = item;
@@ -33,7 +33,7 @@ public class Task {
      * It returns the String to be printed to the user containing
      * the details of the task.
      *
-     * @return String
+     * @return String to be printed to the user
      */
     public String getItem() {
         if (completed) {
@@ -46,7 +46,7 @@ public class Task {
     /**
      * It returns the String inputted by the user
      *
-     * @return String
+     * @return String to be printed to the user
      */
     public String getInput() {
         return this.item;

@@ -21,8 +21,8 @@ public class Storage {
      * Takes in the filePath of the file the tasks are saved in and the taskList
      * which will contain the list of tasks of the Java Duke Program
      *
-     * @param filePath
-     * @param taskList
+     * @param filePath path of file from the root
+     * @param taskList list of tasks
      */
     public Storage(String filePath, TaskList taskList) {
         this.filePath = filePath;
@@ -53,7 +53,7 @@ public class Storage {
      * function to add the task to the list of tasks. If any error occurred while
      * adding the task, it is printed to the user.
      *
-     * @param task
+     * @param task the string of task from the file
      */
     public void formatStringToTask(String task) {
         String[] split = task.split(" ");

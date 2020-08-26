@@ -18,7 +18,7 @@ public class Ui {
     /**
      * It sets ongoing to false. ongoing signifies whether the Java Duke Program is running.
      *
-     * @param parser
+     * @param parser parser that is formatting the user's input to the correct format
      */
     public Ui(Parser parser) {
         ongoing = false;
@@ -43,7 +43,7 @@ public class Ui {
      * calling these functions will be printed to the user. But if the command is "bye",
      * it calles the goodbye function and sets ongoing to false.
      *
-     * @param input
+     * @param input input given by the user
      */
     public void systemOutput(String input) {
         System.out.println(line + "\n");

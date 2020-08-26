@@ -12,16 +12,16 @@ import parser.Parser;
  * @author (Sruthi)
  */
 public class Duke {
-    private Ui ui;
-    private Storage storage;
-    private TaskList taskList;
-    private Parser parser;
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList taskList;
+    private final Parser parser;
 
     /**
      * Initializes instances of TaskList, Storage, Parser and UI
      * and gets the task list from the storage.
      *
-     * @param filePath
+     * @param filePath path of the file from the root
      */
     Duke(String filePath) {
         taskList = new TaskList();
@@ -45,7 +45,7 @@ public class Duke {
     /**
      * Prints the logo of the Java Duke Program and initializes an instance of Duke
      * with the filepath containing the task list before running the Duke Program
-     * @param args
+     * @param args args from the terminal
      */
     public static void main(String[] args) {
         String logo = " ____        _\n"

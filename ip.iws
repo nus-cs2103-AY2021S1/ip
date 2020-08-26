@@ -18,6 +18,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/task/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task/Task.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/task/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task/Todo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/taskList/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/taskList/TaskList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/Ui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/Ui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
