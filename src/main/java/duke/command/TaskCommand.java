@@ -24,8 +24,7 @@ public class TaskCommand {
      */
     public static String execute(String in, TaskList taskList, Storage storage) throws DukeException {
         TaskType taskType = Parser.parseTaskType(in);
-        String taskDetails =
-                in.replaceFirst(taskType.toString().toLowerCase(), "").trim();
+        String taskDetails = in.replaceFirst(taskType.toString().toLowerCase(), "").trim();
         return createTask(taskType, taskDetails, taskList, storage);
     }
 
@@ -46,9 +45,8 @@ public class TaskCommand {
         taskList.add(task);
         storage.updateSaveFile(taskList);
         int len = taskList.size();
-        return
-            "Got it. I've added this task: \n" +
-            "  " + task.toString() + "\n" +
-            "Now you have " + len + " task" + (len == 1 ? "" : "s") + " in the list.";
+        return "Got it. I've added this task: \n"
+                + "  " + task.toString() + "\n"
+                + "Now you have " + len + " task" + (len == 1 ? "" : "s") + " in the list.";
     }
 }

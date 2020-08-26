@@ -32,7 +32,7 @@ public class DateTimeParsingTest {
     }
 
     @Test
-    public void testLocalDateToString() {
+    public void localDateToString() {
         String date1 = "2000-05-12";
         LocalDate localDate1 = LocalDate.parse(date1);
         assertEquals(date1, DateTimeParsing.localDateToString(localDate1));
