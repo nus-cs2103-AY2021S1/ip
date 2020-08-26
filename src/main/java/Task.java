@@ -1,4 +1,6 @@
-public class Task {
+import java.util.Optional;
+
+abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -18,6 +20,12 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
+
+    public String isDoneToString() { return isDone ? "1" : "0"; }
+
+    abstract String getStringType();
+
+    abstract Optional<String> getDate();
 
     @Override
     public String toString() {
