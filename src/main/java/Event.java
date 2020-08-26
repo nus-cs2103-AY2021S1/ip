@@ -15,7 +15,7 @@ public class Event extends Listing{
 
     public String[] toArray() {
         String[] details = new String[4];
-        details[0] = "T";
+        details[0] = "E";
         if (this.done) {
             details[1] = "1";
         } else {

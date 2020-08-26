@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Bot {
@@ -58,9 +56,7 @@ public class Bot {
                         break;
                     case ("delete"):
                         Integer number = Integer.valueOf(parsedInfo[1]) - 1;
-                        deleteMessage(number);
-                        list.remove((int) number);
-                        storage.save(list); // <----- change this
+                        deleteListing(number);
                         break;
                     default:
                         throw new UndefinedException();
@@ -118,11 +114,12 @@ public class Bot {
         storage.save(list); // <----- change this
     }
 
-
-
-    public void deleteMessage(Integer num) {
+    public void deleteListing(Integer num) {
+        list.remove(num);
         System.out.println(LINE + "\n" + "     Noted. I've removed this task: \n" + WHITE_SPACE_SEVEN +
                 list.get(num) + "\n" + "     Now you have " + (list.size() - 1) + " tasks in the list.\n" + LINE);
+        storage.save(list); // <----- change this
     }
+
 
 }

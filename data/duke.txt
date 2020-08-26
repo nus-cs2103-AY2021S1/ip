@@ -6,5 +6,8 @@ T | 0 |  b
 T | 0 |  b
 T | 0 |  a
 T | 0 |  b
-T | 0 |  lol |  9
-T | 0 |  a |  3
+T | 0 |  lol
+T | 0 |  a
+T | 0 |  a
+T | 0 |  list
+D | 0 |  eat | 2020-02-02
