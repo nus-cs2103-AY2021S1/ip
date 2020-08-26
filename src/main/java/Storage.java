@@ -3,6 +3,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Storage {
+
+    private String filepath;
+
+    Storage(String filepath) {
+        this.filepath = filepath;
+    }
+
     static void reset () {
         try {
             FileWriter writer = new FileWriter(new File("text-ui-test/ACTUAL.TXT"), false);

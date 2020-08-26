@@ -3,23 +3,23 @@ import java.util.List;
 
 public class TaskList {
 
-    private static List<Task> taskList = new ArrayList<>();
+    private List<Task> taskList = new ArrayList<>();
 
-    public static String removeTask (int idx) {
+    public String removeTask (int idx) {
         Task task = taskList.get(idx);
         taskList.remove(idx);
         return task.toString();
     }
 
-    public static Task getTask(int idx) {
+    public Task getTask(int idx) {
         return taskList.get(idx);
     }
 
-    public static int getSize() {
+    public int getSize() {
         return taskList.size();
     }
 
-    public static String addTask(Task.TaskType taskType, String description, String deadline) {
+    public String addTask(Task.TaskType taskType, String description, String deadline) {
         Task task = null;
         switch (taskType) {
             case TODOS:
@@ -41,7 +41,7 @@ public class TaskList {
                 "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 
-    public static String addTask(Task.TaskType taskType, String description) {
+    public String addTask(Task.TaskType taskType, String description) {
         Task task = null;
         switch (taskType) {
             case TODOS:
@@ -63,7 +63,7 @@ public class TaskList {
                 "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 
-    public static String toStr() {
+    public String toString() {
         String string = "";
         if (getSize() >= 1) {
             string = "1." + taskList.get(0).toString();
