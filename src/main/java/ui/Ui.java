@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String LINE = "_______________________________________\n";
+    public static final String LINE = "_______________________________________\n";
     private Scanner scanner;
 
     public Ui() {

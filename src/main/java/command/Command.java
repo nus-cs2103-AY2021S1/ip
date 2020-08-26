@@ -1,9 +1,13 @@
 package command;
+import exception.DukeException;
+import tasklist.TaskList;
+import ui.Ui;
+import storage.Storage;
 
 public abstract class Command {
-    private boolean exit;
+    public Command(){}
 
-    public Command(boolean exit){
-        this.exit = exit;
-    }
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+
+    public abstract boolean isExit();
 }

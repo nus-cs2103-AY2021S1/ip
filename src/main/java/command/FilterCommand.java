@@ -1,7 +1,42 @@
 package command;
 
+import exception.DukeException;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class FilterCommand extends Command {
-    public FilterCommand(boolean exit) {
-        super(exit);
+    private String date;
+
+    public FilterCommand(String date) {
+        this.date = date;
+    }
+
+    @Override
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        try {
+            String output = "";
+            String[] dateSplit = date.split("/", 3);
+            String reformatedDate = dateSplit[2] + "-" + dateSplit[1] + "-" + dateSplit[0];
+            LocalDate filterDate = LocalDate.parse(reformatedDate);
+            for (int i = 1; i <= taskList.size(); i++) {
+                if (taskList.get(i - 1).isDate(filterDate)) {
+                    output = output + i + ". " + taskList.get(i - 1) + "\n";
+                }
+            }
+            System.out.println(ui.LINE + "Here are your task due on "
+                    + filterDate.format(DateTimeFormatter.ofPattern("MMM d yyy")) + ": \n" + output + ui.LINE);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(ui.LINE + "Invalid input! Please enter a valid date! \n" + ui.LINE);
+        }
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }
