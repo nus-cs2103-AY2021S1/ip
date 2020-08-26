@@ -12,9 +12,11 @@ Now you have 1 tasks in the list.
 Got it. I've added this task:
 [D][✘] return book (by: Monday)
 Now you have 2 tasks in the list.
-Index 1 out of bounds for length 1
+Got it. I've added this task:
+[D][✘] team meeting (by: Tuesday)
+Now you have 3 tasks in the list.
 Please enter both the name as well as the due date of the deadline!
 Noted. I've removed this task:
 [T][✘] homework
-Now you have 1 task in the list.
+Now you have 2 tasks in the list
 Bye. Hope to see you again soon!
