@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
@@ -31,8 +30,8 @@ public class Storage {
         fs.close();
     }
     
-    public ArrayList<Task> loadTask() {
-        ArrayList<Task> tasks = new ArrayList<>();
+    public TaskList loadTask() {
+        TaskList tasks = TaskList.createTaskList();
         File f = new File(savePath);
 
         // Loads the input from the file, if no file, return empty arraylist
@@ -57,15 +56,15 @@ public class Storage {
                 String[] description;
                 switch (taskType) {
                     case 'T':
-                        tasks.add(new ToDo(newTask, isDone));
+                        tasks.addTask(new ToDo(newTask, isDone));
                         break;
                     case 'D':
                         description = Parser.stringSplit(newTask, "/by");
-                        tasks.add(new Deadline(description[0], isDone, LocalDate.parse(description[1])));
+                        tasks.addTask(new Deadline(description[0], isDone, LocalDate.parse(description[1])));
                         break;
                     case 'E':
                         description = Parser.stringSplit(newTask, "/at");
-                        tasks.add(new Event(description[0], isDone, LocalDate.parse(description[1])));
+                        tasks.addTask(new Event(description[0], isDone, LocalDate.parse(description[1])));
                         break;
                 }
             }

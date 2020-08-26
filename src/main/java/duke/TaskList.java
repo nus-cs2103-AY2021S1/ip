@@ -9,8 +9,8 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public static TaskList loadTasks(Storage storage) {
-        return new TaskList(storage.loadTask());
+    public static TaskList createTaskList() {
+        return new TaskList(new ArrayList<Task>());
     }
 
     public Task updateTaskStatus(int index, boolean status) {

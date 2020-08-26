@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String SAVEPATH = "./src/main/data/SaveData.txt";
+    private static final String SAVEPATH = "./src/data/SaveData.txt";
     private static enum AcceptedCommands {
         TODO,
         EVENT,
@@ -24,7 +24,7 @@ public class Duke {
 
     public Duke(String filepath) {
         storage = new Storage(filepath);
-        tasks = TaskList.loadTasks(storage);
+        tasks = storage.loadTask();
     }
 
     // Driver method to respond to user input
