@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a task.
+ */
 public class Task {
 
     public enum TaskType {
@@ -22,10 +25,15 @@ public class Task {
         return description;
     }
 
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? tick : cross); //return tick or X symbols
     }
 
+    /**
+     * Marks the task as done, and returns the String representation of the task.
+     *
+     * @return a String representation of the task.
+     */
     public String markAsDone() {
         isDone = true;
         return toString();

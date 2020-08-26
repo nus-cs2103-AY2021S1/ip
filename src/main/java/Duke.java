@@ -5,6 +5,9 @@ import duke.Ui;
 
 import java.util.Scanner;
 
+/**
+ * Main driving force for the Duke application.
+ */
 public class Duke {
 
     private Storage storage;
@@ -12,7 +15,7 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         ui = new Ui();
         tasks = new TaskList();
         parser = new Parser();
@@ -25,7 +28,7 @@ public class Duke {
 //        }
     }
 
-    public void run() {
+    private void run() {
         ui.greet();
         try {
             boolean isExit = false;
@@ -42,6 +45,11 @@ public class Duke {
         ui.farewell();
     }
 
+    /**
+     * Main method starts the Duke application.
+     *
+     * @param args Stores arguments in a String array.
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

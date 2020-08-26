@@ -5,8 +5,18 @@ import duke.exception.InvalidIndexException;
 import duke.exception.UnknownCommandException;
 import duke.task.Task;
 
+/**
+ * Deals with making sense of user inputs.
+ */
 public class Parser {
 
+    /**
+     * Parses the user data by making processing input.
+     *
+     * @param tasks List of tasks at the moment.
+     * @param nextLine String to be parsed.
+     * @return
+     */
     public boolean parse(TaskList tasks, String nextLine) {
         switch (nextLine) {
             case "bye":
@@ -24,7 +34,7 @@ public class Parser {
         }
     }
 
-    public void parseSplit(TaskList tasks, String nextLine) throws EmptyDescriptionException, UnknownCommandException {
+    private void parseSplit(TaskList tasks, String nextLine) throws EmptyDescriptionException, UnknownCommandException {
         String[] slashSplit = nextLine.split("/", 2);
         if (slashSplit.length == 2) {
             String[] spaceSplitFront = slashSplit[0].split(" ", 2);
@@ -86,7 +96,7 @@ public class Parser {
         }
     }
 
-    public void parseDone(TaskList tasks, String str) throws InvalidIndexException {
+    private void parseDone(TaskList tasks, String str) throws InvalidIndexException {
         try {
             int num = Integer.parseInt(str) - 1;
             if (num < 0 || num > tasks.getSize() - 1) {
@@ -101,7 +111,7 @@ public class Parser {
         }
     }
 
-    public void parseDelete(TaskList tasks, String str) throws InvalidIndexException {
+    private void parseDelete(TaskList tasks, String str) throws InvalidIndexException {
         try {
             int num = Integer.parseInt(str) - 1;
             if (num < 0 || num > tasks.getSize() - 1) {

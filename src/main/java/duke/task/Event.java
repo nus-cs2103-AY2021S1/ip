@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a specific task which is an event.
+ */
 public class Event extends Task {
 
     protected String at;
