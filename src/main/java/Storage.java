@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class FileCreator {
+public class Storage {
     String filepath;
     File file;
 
-    FileCreator(String path) {
+    Storage(String path) {
         this.filepath = path;
         this.file = new File(path);
     }
@@ -19,7 +19,7 @@ public class FileCreator {
     }
 
     boolean create() throws IOException {
-        return file.createNewFile();
+        return !file.exists() ? file.createNewFile() : false;
     }
 
     void printList() throws FileNotFoundException {
@@ -62,7 +62,7 @@ public class FileCreator {
                     } else {
                         String[] splits = task.split(" ");
                         String name = splits[1];
-                        String deadline = splits[3];
+                        String deadline = splits[3] + " " + splits[4] + " " + splits[5];
                         arr.add(new Event(name, deadline));
                     }
                 }
