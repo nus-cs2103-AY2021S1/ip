@@ -3,8 +3,8 @@ public class Deadline extends Task {
 
     protected String by;
 
-    public Deadline(String description, String by) {
-        super(description.trim());
+    public Deadline(String description, String by, boolean isDone) {
+        super(description.trim(), isDone);
         this.by = by.trim();
     }
 
