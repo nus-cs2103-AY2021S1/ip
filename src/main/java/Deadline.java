@@ -20,7 +20,6 @@ public class Deadline extends Task {
         descriptionArray[0] = split1[0];
         descriptionArray[1] = split2[0];
         descriptionArray[2] = split2[1];
-
         LocalDate d = LocalDate.parse(descriptionArray[1]);
 //        LocalTime t = LocalTime.parse(descriptionArray[2]);
 //        int time = t.getHour() + t.getMinute()
