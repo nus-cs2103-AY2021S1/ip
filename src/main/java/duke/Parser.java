@@ -17,6 +17,7 @@ public class Parser {
     private static final String DONE_COMMAND = "done";
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_BY_DATE_COMMAND = "find_by_date";
+    private static final String FIND_BY_KEYWORD_COMMAND = "find";
     private static final String VIEW_FUNCTION_COMMAND = "/commands";
 
     /**
@@ -55,6 +56,8 @@ public class Parser {
             return new DeleteTaskCommand(parsedCommand);
         } else if (function.equals(Parser.FIND_BY_DATE_COMMAND)) {
             return new FindByDateCommand(parsedCommand);
+        } else if (function.equals(Parser.FIND_BY_KEYWORD_COMMAND)) {
+            return new FindByKeywordCommand(parsedCommand);
         } else {
             String err = "Invalid Function! Input '/commands' for a list of all my commands.";
             throw new InvalidFunctionException(err);

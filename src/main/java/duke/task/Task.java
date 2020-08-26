@@ -60,6 +60,15 @@ public abstract class Task {
     }
 
     /**
+     * Returns the description of this task object.
+     *
+     * @return String containing the description of this task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
      * Converts the task object into a string to be displayed.
      *
      * @return String representation of this task object.
