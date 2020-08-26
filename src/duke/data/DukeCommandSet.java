@@ -8,15 +8,6 @@ import java.util.HashMap;
 
 public class DukeCommandSet {
 
-    private static DukeCommandSet instance;
-    public static DukeCommandSet getInstance() {
-        if (instance == null) {
-            instance = new DukeCommandSet();
-        }
-
-        return instance;
-    }
-
     private HashMap<String, Command> commandSet;
 
     public DukeCommandSet() {
