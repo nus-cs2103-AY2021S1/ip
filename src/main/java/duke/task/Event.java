@@ -40,6 +40,6 @@ public class Event extends Task {
      */
     @Override
     public String toFileString() {
-        return "E\n" + super.getDone() + "\n" + super.toFileString() + "\n" + at + "\n\n";
+        return "E\n" + super.getDoneStatus() + "\n" + super.toFileString() + "\n" + at + "\n\n";
     }
 }

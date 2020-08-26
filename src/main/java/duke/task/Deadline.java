@@ -40,6 +40,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toFileString() {
-        return "D\n" + super.getDone() + "\n" + super.toFileString() + "\n" + by + "\n\n";
+        return "D\n" + super.getDoneStatus() + "\n" + super.toFileString() + "\n" + by + "\n\n";
     }
 }

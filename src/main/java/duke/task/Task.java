@@ -26,7 +26,6 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-
     /**
      * Description of the task.
      *
@@ -36,13 +35,12 @@ public class Task {
         return description;
     }
 
-
     /**
      * Done status of the task.
      *
      * @return Done status.
      */
-    public boolean getDone() {
+    public boolean getDoneStatus() {
         return isDone;
     }
 

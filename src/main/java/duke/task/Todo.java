@@ -28,6 +28,6 @@ public class Todo extends Task {
      */
     @Override
     public String toFileString() {
-        return "T\n" + super.getDone() + "\n" + super.toFileString() + "\n\n";
+        return "T\n" + super.getDoneStatus() + "\n" + super.toFileString() + "\n\n";
     }
 }
