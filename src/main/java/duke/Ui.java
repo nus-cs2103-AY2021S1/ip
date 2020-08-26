@@ -2,6 +2,7 @@ package duke;
 
 import duke.io.InputHandler;
 import duke.io.OutputHandler;
+import duke.task.Task;
 
 /** Handles IO between Duke and user */
 public class Ui {
@@ -57,6 +58,18 @@ public class Ui {
      */
     public void displayException(Exception e) {
         this.display(e.getMessage());
+    }
+
+    /**
+     * Prints status message after adding new task.
+     *
+     * @param task <code>Task</code> that was just added into Duke.
+     * @param taskManagerSize Number of tasks already in Duke.
+     */
+    public void displayAfterAddTask(Task task, int taskManagerSize) {
+        this.display("Successfully added a new task:");
+        this.display("\t" + task.toString());
+        this.display("Now you have " + taskManagerSize + " tasks in the list.");
     }
 
     /**

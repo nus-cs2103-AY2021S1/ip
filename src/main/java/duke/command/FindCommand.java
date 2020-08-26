@@ -23,9 +23,9 @@ public class FindCommand extends ComplexCommand{
      * Filters the tasks that match input keywords, then display them to screen.
      * Displays error message without terminating software loop if parameters are invalid.
      *
-     * @param ui //Todo: copy from other commands after merge
-     * @param taskManager
-     * @param saveManager
+     * @param ui Print-out and display manager.
+     * @param taskManager <code>Task</code> manipulation manager.
+     * @param saveManager Handles saving and loading.
      */
     @Override
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {

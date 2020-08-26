@@ -39,6 +39,8 @@ public class EventCommand extends ComplexCommand {
             // Add new event to taskManager
             taskManager.storeTask(newEvent);
 
+            ui.displayAfterAddTask(newEvent, taskManager.size());
+
         } catch (DukeInputException e) {
             ui.displayException(e);
         }

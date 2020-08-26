@@ -39,6 +39,8 @@ public class DeadlineCommand extends ComplexCommand {
             // Store new deadline in taskManager
             taskManager.storeTask(newDeadline);
 
+            ui.displayAfterAddTask(newDeadline, taskManager.size());
+
         } catch (DukeInputException e) {
             ui.displayException(e);
         }

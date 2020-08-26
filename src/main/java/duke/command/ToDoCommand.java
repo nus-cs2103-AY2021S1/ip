@@ -38,6 +38,8 @@ public class ToDoCommand extends ComplexCommand {
             // Store new task
             taskManager.storeTask(newToDo);
 
+            ui.displayAfterAddTask(newToDo, taskManager.size());
+
         } catch (DukeInputException e){
             ui.displayException(e);
         }
