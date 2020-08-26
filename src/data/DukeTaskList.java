@@ -1,11 +1,9 @@
 package data;
 
+import java.util.ArrayList;
 import task.Task;
 
-import java.util.ArrayList;
+public class DukeTaskList {
 
-public class DukeData {
-
-    public static boolean exitLoop = false;
     public static ArrayList<Task> tasks = new ArrayList<>();
 }
