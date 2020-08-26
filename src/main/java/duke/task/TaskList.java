@@ -15,11 +15,11 @@ public class TaskList {
         list = new ArrayList<>();
     }
 
-    public Task getTask(int id) throws DukeException{
+    public Task getTask(int id) throws DukeException {
         try {
             return list.get(id - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(" This task #" + id +  " does not exist.");
+            throw new DukeException(" This task #" + id + " does not exist.");
         }
     }
 

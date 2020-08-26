@@ -33,17 +33,17 @@ public class Storage {
                 Task t;
 
                 switch (line[0]) {
-                    case "T":
-                        t = new Todo(line[2]);
-                        break;
-                    case "D":
-                        t = new Deadline(line[2], line[3]);
-                        break;
-                    case "E":
-                        t = new Event(line[2], line[3]);
-                        break;
-                    default:
-                        throw new DukeException("Failed to load tasks, check file for syntax errors");
+                case "T":
+                    t = new Todo(line[2]);
+                    break;
+                case "D":
+                    t = new Deadline(line[2], line[3]);
+                    break;
+                case "E":
+                    t = new Event(line[2], line[3]);
+                    break;
+                default:
+                    throw new DukeException("Failed to load tasks, check file for syntax errors");
                 }
 
                 if (line[1].equals("1")) {
