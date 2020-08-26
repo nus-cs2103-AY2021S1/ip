@@ -11,12 +11,22 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    /**
+     * Describes deadline.
+     * 
+     * @return String that describes deadline.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " +
                 this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    /**
+     * Describes deadline to be saved in hard disk.
+     * 
+     * @return String that will be stored on hard disk.
+     */
     @Override
     public String saveToHardDisk() {
         return "D" + super.saveToHardDisk() + " | " + this.time;

@@ -11,12 +11,22 @@ public class Event extends Task {
         this.time = time;
     }
 
+    /**
+     * Describes event.
+     *
+     * @return String that describes event.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " +
                 this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    /**
+     * Describes event to be saved in hard disk.
+     *
+     * @return String that will be stored on hard disk.
+     */
     @Override
     public String saveToHardDisk() {
         return "E" + super.saveToHardDisk() + " | " + this.time;

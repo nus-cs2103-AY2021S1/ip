@@ -15,7 +15,14 @@ public class Parser {
         DEADLINE,
         EVENT,
     }
-    
+
+    /**
+     * Parses user input into command.
+     * 
+     * @param input User input.
+     * @return Command to be executed.
+     * @throws DukeException If there is parsing error.
+     */
     public static Command parse(String input) throws DukeException {
         try {
             String[] separated = input.split("\\s+");
