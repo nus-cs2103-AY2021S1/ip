@@ -64,6 +64,8 @@ public class UI {
                         UI.read("Noted. I've removed this task:" + "\n" + "  " + TaskList.get(index)
                                 + "\n" + "Now you have " + (TaskList.size() - 1) + " tasks in the list.");
                         TaskList.delete(index);
+                    } else if (parseResult == 6) {
+                        //Do nothing for now
                     } else {
                         Task newTask = Parser.getTask(input);
                         TaskList.add(newTask);

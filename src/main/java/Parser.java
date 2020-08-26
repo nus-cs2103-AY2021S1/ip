@@ -17,7 +17,20 @@ public class Parser {
             //Save the task list
         } else if (isTerminateCommand(currInput)) {
             return 4;
+        } else if (isFindCommand(currInput)) {
+            String keyword = currInput.trim().split(" ", 2)[1].trim();
+            UI.read(" Here are the matching tasks in your list:");
+            List<Task> tasks = TaskList.getList();
+            int j = 1;
+            for (int i = 0; i < tasks.size(); i++) {
+                if (tasks.get(i).toString().contains(keyword)) {
+                    UI.read("  " + j + ". " + tasks.get(i).toString());
+                    j++;
+                }
+            }
+            return 6;
         } else {
+            //Is a task command
             return 5;
         }
     }
@@ -149,11 +162,15 @@ public class Parser {
     }
 
     public static boolean isListCommand(String input) {
-        return input.equals("list");
+        return input.trim().equals("list");
+    }
+
+    public static boolean isFindCommand(String input) {
+        return input.trim().startsWith("find");
     }
 
     public static boolean isTerminateCommand(String input) {
-        return input.equals("bye");
+        return input.trim().equals("bye");
     }
 
     public static LocalDate getDate(String string) throws InvalidCommandException {
