@@ -176,7 +176,7 @@ public class Duke {
 
     private static String getTasksLeftMessage() {
         return String.format(
-                "Now you have %d thing%s you'need me to remind you about.",
+                "Now you have %d thing%s you need me to remind you about.",
                 TASKS.size(),
                 TASKS.size() == 1 ? "" : "s");
     }
