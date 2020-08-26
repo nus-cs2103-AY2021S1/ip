@@ -36,6 +36,15 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    /**
+     * Return task description.
+     * 
+     * @return task description.
+     */
+    public String getDescription() {
+        return this.description;
+    }
     
     /**
      * Return a string representation of the task.

@@ -5,8 +5,10 @@ import task.EventTask;
 import task.Task;
 import task.ToDoTask;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * The TaskList class represents the list containing tasks.
@@ -63,7 +65,7 @@ public class TaskList {
     }
 
     /**
-     * Return number of tasks in the list.
+     * Returns number of tasks in the list.
      * 
      * @return  Number of tasks in the list.
      */
@@ -78,6 +80,20 @@ public class TaskList {
      */
     public Task get(int index) {
         return lst.get(index);
+    }
+
+    /**
+     * Returns a list of tasks based on the query.
+     *
+     * @param query String representing the search query.
+     * @return Returns a list of tasks based on the query.
+     */
+    public List<Task> filter(String query) {
+        return lst.stream().filter(task -> {
+            String taskDesc = task.getDescription();
+            String[] wordsInTask = taskDesc.split(" ");
+            return Arrays.asList(wordsInTask).contains(query);
+        }).collect(Collectors.toList());
     }
 
     /** Constants representing the different tasks. */
