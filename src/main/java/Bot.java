@@ -19,7 +19,8 @@ public class Bot {
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
-                String farewell = responseWrapper("Bye. Hope to see you again soon!");
+                scanner.close();
+                String farewell = responseWrapper("Have a good day, mate!");
                 System.out.println(farewell);
                 return;
             }
@@ -29,12 +30,11 @@ public class Bot {
             } catch (InvalidCommandException | InvalidInputException e) {
                 System.out.println(responseWrapper(e.getMessage()));
             }
-
         }
     }
 
     private void greet() {
-        String greeting = String.format("Hello, I'm %s. How can I help you?", name);
+        String greeting = String.format("Good day, I'm %s. What can I do for you?", name);
         System.out.println(responseWrapper(greeting));
     }
 
@@ -68,9 +68,9 @@ public class Bot {
                     return "Valid cmd given however it is not supported yet";
             }
         } catch (IllegalArgumentException e) {
-            throw new InvalidCommandException("Sorry, I can't understand that.");
+            throw new InvalidCommandException("What's that again? I can't understand.");
         } catch (InvalidInputException e) {
-            throw new InvalidInputException("Sorry, invalid argument(s) given.");
+            throw new InvalidInputException(e.getMessage());
         }
     }
 
@@ -84,7 +84,7 @@ public class Bot {
                 }
             }
             if (name.length() == 0) {
-                throw new InvalidInputException("Sorry, invalid argument(s) given.");
+                throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
             }
             Todo newTodo = new Todo(name.toString());
             this.taskList.add(newTodo);
@@ -92,7 +92,7 @@ public class Bot {
                     newTodo + "\n    " +
                     "Now you have " + taskList.size() + " tasks in the list.");
         } catch (Exception e) {
-            throw new InvalidInputException("Sorry, invalid argument(s) given.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
         }
     }
 
@@ -116,7 +116,7 @@ public class Bot {
                 }
             }
             if (name.length() == 0 || deadline.length() == 0) {
-                throw new InvalidInputException("Sorry, invalid argument(s) given.");
+                throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
             }
             deadline.deleteCharAt(deadline.length() - 1);
             Deadline newTask = new Deadline(name.toString(), deadline.toString());
@@ -125,7 +125,7 @@ public class Bot {
                     newTask + "\n    " +
                     "Now you have " + taskList.size() + " tasks in the list.");
         } catch (Exception e) {
-            throw new InvalidInputException("Sorry, invalid argument(s) given.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
         }
     }
 
@@ -149,7 +149,7 @@ public class Bot {
                 }
             }
             if (name.length() == 0 || deadline.length() == 0) {
-                throw new InvalidInputException("Sorry, invalid argument(s) given.");
+                throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
             }
             deadline.deleteCharAt(deadline.length() - 1);
             Event newTask = new Event(name.toString(), deadline.toString());
@@ -158,7 +158,7 @@ public class Bot {
                     newTask + "\n    " +
                     "Now you have " + taskList.size() + " tasks in the list.");
         } catch (Exception e) {
-            throw new InvalidInputException("Sorry, invalid argument(s) given.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
         }
     }
 
@@ -186,14 +186,14 @@ public class Bot {
             return responseWrapper("Nice! I've marked this task as done: \n    " +
                     task + "\n");
         } catch (Exception e) {
-            throw new InvalidInputException("Sorry, invalid argument(s) given.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
         }
     }
 
     private String cmdDelete(String[] words) throws InvalidInputException {
         try {
             if (words.length != 2) {
-                return responseWrapper("Please input 1 argument.");
+                throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
             }
             Task task = this.taskList.get(Integer.parseInt(words[1]) - 1);
             this.taskList.remove(Integer.parseInt(words[1]) - 1);
@@ -201,7 +201,7 @@ public class Bot {
                     task + "\n    " +
                     "Now you have " + taskList.size() + " tasks in the list.");
         } catch (Exception e) {
-            throw new InvalidInputException("Sorry, invalid argument(s) given.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
         }
     }
 }

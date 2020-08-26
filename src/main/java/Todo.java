@@ -6,6 +6,6 @@ public class Todo extends Task {
     @Override
     public String toString() {
         String symbol = this.done ? "✓" : "✘";
-        return String.format("[T][%s] %s", symbol, this.name);
+        return String.format("[T]%s", super.toString());
     }
 }
