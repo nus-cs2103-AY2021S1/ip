@@ -1,6 +1,7 @@
 todo borrow book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+deadline return book /by 14-Dec 1200
+event project meeting /on 03/12/2019 0200
+deadline homework /by 02-Aug-2020 2359
 list
 done 3
 done 1
@@ -12,6 +13,7 @@ done one
 todo
 deadline
 deadline fake deadline /by
+deadline unrecognised datetime /by Monday
 deadline hello
 event
 event fake event /at

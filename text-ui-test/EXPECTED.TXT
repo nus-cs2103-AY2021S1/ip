@@ -10,32 +10,38 @@ How can I help you today?
 ____________________________________________________________
  > ____________________________________________________________
 Roger. I've added the task to your list:
-    [T][✘] borrow book
+    [T][X] borrow book
 Now you have 1 task in your list
 ____________________________________________________________
  > ____________________________________________________________
 Roger. I've added the task to your list:
-    [D][✘] return book (by: Sunday)
+    [D][X] return book (by: Monday, Dec 14 2020, 12pm)
 Now you have 2 task in your list
 ____________________________________________________________
  > ____________________________________________________________
 Roger. I've added the task to your list:
-    [E][✘] project meeting (at: Mon 2-4pm)
+    [E][X] project meeting (on: Tuesday, Dec 03 2019, 2am)
 Now you have 3 task in your list
 ____________________________________________________________
  > ____________________________________________________________
+Roger. I've added the task to your list:
+    [D][X] homework (by: Sunday, Aug 02 2020, 11pm)
+Now you have 4 task in your list
+____________________________________________________________
+ > ____________________________________________________________
 Here are the tasks in your list:
-1. [T][✘] borrow book
-2. [D][✘] return book (by: Sunday)
-3. [E][✘] project meeting (at: Mon 2-4pm)
+1. [T][X] borrow book
+2. [D][X] return book (by: Monday, Dec 14 2020, 12pm)
+3. [E][X] project meeting (on: Tuesday, Dec 03 2019, 2am)
+4. [D][X] homework (by: Sunday, Aug 02 2020, 11pm)
 ____________________________________________________________
  > ____________________________________________________________
 Great work! I've marked this task as done:
-    [E][✓] project meeting (at: Mon 2-4pm)
+    [E][O] project meeting (on: Tuesday, Dec 03 2019, 2am)
 ____________________________________________________________
  > ____________________________________________________________
 Great work! I've marked this task as done:
-    [T][✓] borrow book
+    [T][O] borrow book
 ____________________________________________________________
  > ____________________________________________________________
 Oh no! That command is not in my dictionary!
@@ -44,7 +50,8 @@ ____________________________________________________________
 Oh no! Please give me something to do. T_T
 ____________________________________________________________
  > ____________________________________________________________
-Oh no! That task number is not in the list.
+Great work! I've marked this task as done:
+    [D][O] homework (by: Sunday, Aug 02 2020, 11pm)
 ____________________________________________________________
  > ____________________________________________________________
 Oh no! That task number is not in the list.
@@ -62,34 +69,39 @@ ____________________________________________________________
 Oh no! You cannot create an deadline without the date.
 ____________________________________________________________
  > ____________________________________________________________
+Oh no! Invalid datetime! Please use 24h format for time
+____________________________________________________________
+ > ____________________________________________________________
 Oh no! I can't find the date. Did you forget to add '/by'?
 ____________________________________________________________
  > ____________________________________________________________
 Oh no! The event description cannot be left empty.
 ____________________________________________________________
  > ____________________________________________________________
-Oh no! You cannot create an event without the start and end time.
+Oh no! I can't find the date & time of the event. Did you forget to add '/on'?
 ____________________________________________________________
  > ____________________________________________________________
-Oh no! I can't find the start/end time. Did you forget to add '/at'?
+Oh no! I can't find the date & time of the event. Did you forget to add '/on'?
 ____________________________________________________________
  > ____________________________________________________________
 Here are the tasks in your list:
-1. [T][✓] borrow book
-2. [D][✘] return book (by: Sunday)
-3. [E][✓] project meeting (at: Mon 2-4pm)
+1. [T][O] borrow book
+2. [D][X] return book (by: Monday, Dec 14 2020, 12pm)
+3. [E][O] project meeting (on: Tuesday, Dec 03 2019, 2am)
+4. [D][O] homework (by: Sunday, Aug 02 2020, 11pm)
 ____________________________________________________________
  > ____________________________________________________________
 Roger. I've added the task to your list:
-    [T][✘] return book
-Now you have 4 task in your list
+    [T][X] return book
+Now you have 5 task in your list
 ____________________________________________________________
  > ____________________________________________________________
 Here are the tasks in your list:
-1. [T][✓] borrow book
-2. [D][✘] return book (by: Sunday)
-3. [E][✓] project meeting (at: Mon 2-4pm)
-4. [T][✘] return book
+1. [T][O] borrow book
+2. [D][X] return book (by: Monday, Dec 14 2020, 12pm)
+3. [E][O] project meeting (on: Tuesday, Dec 03 2019, 2am)
+4. [D][O] homework (by: Sunday, Aug 02 2020, 11pm)
+5. [T][X] return book
 ____________________________________________________________
  > ____________________________________________________________
 These are the commands in my dictionary:
@@ -98,23 +110,24 @@ These are the commands in my dictionary:
     [delete] <task number>             Delete a task
     [todo] <desc>                      Create a todo task
     [deadline] <desc> /by <datetime>   Create a task with a deadline
-    [event] <desc> /at <datetime>      Create an event
+    [event] <desc> /on <datetime>      Create an event
     [help]                             Gets the list of commands
     [bye, exit]                        Exits the program
 ____________________________________________________________
  > ____________________________________________________________
 Roger. I've removed this task from your list:
-    [T][✓] borrow book
-Now you have 3 task in your list
+    [T][O] borrow book
+Now you have 4 task in your list
 ____________________________________________________________
  > ____________________________________________________________
 Oh no! That is not a valid number.
 ____________________________________________________________
  > ____________________________________________________________
 Here are the tasks in your list:
-1. [D][✘] return book (by: Sunday)
-2. [E][✓] project meeting (at: Mon 2-4pm)
-3. [T][✘] return book
+1. [D][X] return book (by: Monday, Dec 14 2020, 12pm)
+2. [E][O] project meeting (on: Tuesday, Dec 03 2019, 2am)
+3. [D][O] homework (by: Sunday, Aug 02 2020, 11pm)
+4. [T][X] return book
 ____________________________________________________________
  > ____________________________________________________________
 Goodbye. Hope to see you again soon!

@@ -26,7 +26,7 @@ public abstract class Task {
     }
 
     private String getStatusIcon() {
-        return isDone ? "✓" : "✘";
+        return isDone ? "O" : "X";
     }
 
     public String encode() {
