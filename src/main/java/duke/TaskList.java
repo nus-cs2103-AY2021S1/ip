@@ -31,7 +31,7 @@ public class TaskList {
      * @return Task object corresponding to the task at the specified index.
      */
     public Task getTask(int index) {
-        // index is bounded from 0 to len - 1
+        // index is bounded from 1 to len, so -1 to convert to array index
         return taskList.get(index - 1);
     }
 

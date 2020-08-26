@@ -41,7 +41,7 @@ public class Parser {
                         taskList.deleteTask(taskIndex);
                         
                         ui.printRemoveTaskConfirmation(removedTask, taskList);
-
+                        
                     } catch (NumberFormatException e) {
                         throw new DukeException(" OOPS!!! Please specify a valid task to delete.");
                     }
@@ -94,11 +94,13 @@ public class Parser {
                 }
 
                 ui.printAddTaskConfirmation(newTask, taskList);
+                
             }
         } catch (DukeException e) {
             ui.printExceptionMessage(e);
         }
         
         return true;
+        
     }
 }
