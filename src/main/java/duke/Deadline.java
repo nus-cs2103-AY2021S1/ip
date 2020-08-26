@@ -59,7 +59,7 @@ public class Deadline extends Task {
      */
     @Override
     public String[] getInfo() {
-        return new String[]{this.getType(), this.isDone(), this.description, this.getBy()};
+        return new String[] {this.getType(), this.isDone(), this.description, this.getBy()};
     }
 
 

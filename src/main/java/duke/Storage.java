@@ -113,7 +113,8 @@ public class Storage {
     public String taskToMemoStr(Task t) {
         String memoStr = "";
         String[] info = t.getInfo();
-        memoStr += "\n" + info[0] + SpecialFormat.SPLIT_NOTN + info[1] + SpecialFormat.SPLIT_NOTN + info[2];
+        memoStr += "\n" + info[0] + SpecialFormat.SPLIT_NOTN + info[1]
+                + SpecialFormat.SPLIT_NOTN + info[2];
         if (t.getType().equals("D") || t.getType().equals("E")) {
             memoStr += SpecialFormat.SPLIT_NOTN + info[3];
         }
