@@ -102,6 +102,11 @@ public class TaskList {
         return strings;
     }
 
+    /**
+     * Returns a String listing out all the tasks that match the keyword.
+     *
+     * @return String representation of list of tasks.
+     */
     public String findTasks(String keyword) {
         String tasks = "";
         Task t;
