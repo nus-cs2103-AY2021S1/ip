@@ -22,6 +22,10 @@ public abstract class Task {
      */
     public abstract boolean isDue(LocalDate date);
 
+    public boolean hasKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+    
     /**
      * Returns a status icon corresponding to whether the task is done.
      *

@@ -95,6 +95,10 @@ public class TaskList {
         return tasks.stream().filter(task -> task.isDue(date)).collect(Collectors.toList());
     }
 
+    public List<Task> findTasks(String keyword) {
+        return tasks.stream().filter(task -> task.hasKeyword(keyword)).collect(Collectors.toList());
+    }
+
     public List<Task> getTasks() {
         return tasks;
     }
