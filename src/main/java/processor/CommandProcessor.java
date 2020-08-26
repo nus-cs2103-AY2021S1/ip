@@ -6,7 +6,9 @@ import exception.InvalidActionException;
 import exception.InvalidCommandException;
 import task.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class CommandProcessor {
@@ -26,9 +28,10 @@ public class CommandProcessor {
         map.put("deadline", (command) -> deadlineCommand(command));
         map.put("event", (command) -> eventCommand(command));
         map.put("delete",(command) -> deleteCommand(command));
+        map.put("find",(command) -> findCommand(command));
         return map;
     }
-
+    
     public void runCommand(String command) {
         Consumer<String> action =  map.get(command.replaceAll(" .*", ""));
         try {
@@ -161,6 +164,34 @@ public class CommandProcessor {
                     throw new InvalidActionException(); // "delete 1A" etc
                 }
             }
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
+    }
+
+    private void findCommand(String command) {
+        try {
+            if (command.length() < 6) { // find
+                throw new EmptyActionException();
+            }
+            String searchWord = command.substring(5);
+            if (searchWord.equals(" ") || searchWord.equals("")) {
+                throw new EmptyActionException();
+            }
+
+            int size = this.taskList.size();
+            List<Task> list = new ArrayList<>();
+
+            for (int i = 0; i < size; i++) {
+                Task task = taskList.getTask(i);
+                String taskInfo = task.toString();
+                if (taskInfo.contains(searchWord)) {
+                    list.add(task);
+                }
+            }
+
+            TaskList filterList = new TaskList(list);
+            filterList.showList();
         } catch (DukeException e) {
             System.out.println(e);
         }
