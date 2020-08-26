@@ -1,7 +1,18 @@
 package duke;
 
-import duke.exception.*;
-import duke.task.*;
+import duke.exception.DeleteOutOfRangeException;
+import duke.exception.DoneOutOfRangeException;
+import duke.exception.EmptyDeadlineException;
+import duke.exception.EmptyEventException;
+import duke.exception.EmptyTodoException;
+import duke.exception.MissingDeadlineDateException;
+import duke.exception.MissingDeleteArgumentException;
+import duke.exception.MissingDoneArgumentException;
+import duke.exception.MissingEventDateException;
+import duke.exception.UnknownCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
 
 /**
  * Static class that parses user inputs and executes them.
