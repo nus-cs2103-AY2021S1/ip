@@ -1,9 +1,9 @@
 package command;
 
 import exception.InvalidIndexException;
-import function.DukeFunction;
 import task.Task;
 import ui.UIPrint;
+import ui.Ui;
 import data.DukeData;
 
 public class DoneCommand extends Command {
@@ -22,7 +22,7 @@ public class DoneCommand extends Command {
         Task task = DukeData.tasks.get(taskIndex);
         task.markAsDone();
 
-        DukeFunction.reportDoneTask(task);
+        Ui.reportDoneTask(task);
     }
 
     private boolean tryParseInt(String str) {

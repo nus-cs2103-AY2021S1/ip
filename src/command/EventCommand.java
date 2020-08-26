@@ -1,10 +1,8 @@
 package command;
 
-import exception.IncorrectFormatException;
 import task.Event;
-import ui.UIPrint;
 import data.DukeData;
-import function.DukeFunction;
+import ui.Ui;
 
 public class EventCommand extends Command {
 
@@ -16,7 +14,7 @@ public class EventCommand extends Command {
     public void execute(String str) {
         Event newEvent = Event.createEvent(str);
         DukeData.tasks.add(newEvent);
-        DukeFunction.reportNewTask(newEvent);
+        Ui.reportNewTask(newEvent);
     }
 
 }

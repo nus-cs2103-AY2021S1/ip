@@ -3,8 +3,8 @@ package command;
 import exception.InvalidIndexException;
 import task.Task;
 import ui.UIPrint;
+import ui.Ui;
 import data.DukeData;
-import function.DukeFunction;
 
 public class DeleteCommand extends Command {
 
@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
 
         Task task = DukeData.tasks.remove(taskIndex);
 
-        DukeFunction.reportDeleteTask(task);
+        Ui.reportDeleteTask(task);
     }
 
     private boolean tryParseInt(String str) {

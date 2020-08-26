@@ -1,7 +1,7 @@
 package command;
 
-import function.DukeFunction;
 import data.DukeData;
+import ui.Ui;
 
 public class ExitCommand extends Command {
 
@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(String str) {
-        DukeFunction.reportExit();
+        Ui.reportExit();
 
         DukeData.exitLoop = true;
     }

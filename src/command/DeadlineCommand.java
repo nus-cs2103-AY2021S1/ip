@@ -1,10 +1,8 @@
 package command;
 
-import exception.IncorrectFormatException;
 import task.Deadline;
-import ui.UIPrint;
 import data.DukeData;
-import function.DukeFunction;
+import ui.Ui;
 
 public class DeadlineCommand extends Command {
 
@@ -16,6 +14,6 @@ public class DeadlineCommand extends Command {
     public void execute(String str) {
         Deadline newDeadline = Deadline.createDeadline(str);
         DukeData.tasks.add(newDeadline);
-        DukeFunction.reportNewTask(newDeadline);
+        Ui.reportNewTask(newDeadline);
     }
 }
