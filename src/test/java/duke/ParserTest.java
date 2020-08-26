@@ -12,7 +12,8 @@ public class ParserTest {
     @Test
     public void parseValidTodo_success() throws DeleteOutOfRangeException, UnknownCommandException,
             MissingDoneArgumentException, EmptyEventException, MissingEventDateException, EmptyDeadlineException,
-            MissingDeadlineDateException, DoneOutOfRangeException, MissingDeleteArgumentException, EmptyTodoException {
+            MissingDeadlineDateException, DoneOutOfRangeException, MissingDeleteArgumentException, EmptyTodoException,
+            MissingFindArgumentException {
         assertEquals(true, Parser.parseAndExecute("todo todotest", new TaskList(), new Ui()));
     }
 
@@ -23,7 +24,7 @@ public class ParserTest {
         try {
             assertEquals(false, Parser.parseAndExecute("lmao xd", new TaskList(), new Ui()));
             fail(); //the test should not reach this line
-        } catch (UnknownCommandException e) {
+        } catch (UnknownCommandException | MissingFindArgumentException e) {
             assertEquals("\uD83D\uDE41 OOPS! I'm sorry, but I don't know what that means :-(", e.toString());
         }
     }
@@ -32,7 +33,7 @@ public class ParserTest {
     public void parseInvalidDeadlineDate_throwsDateTimeParseException() throws DeleteOutOfRangeException,
             UnknownCommandException, MissingDoneArgumentException, EmptyEventException, MissingEventDateException,
             EmptyDeadlineException, MissingDeadlineDateException, DoneOutOfRangeException, MissingDeleteArgumentException,
-            EmptyTodoException {
+            EmptyTodoException, MissingFindArgumentException {
         try {
             assertEquals(false, Parser.parseAndExecute("deadline test /by xddd", new TaskList(), new Ui()));
             fail(); //the test should not reach this line
@@ -44,7 +45,8 @@ public class ParserTest {
     @Test
     public void parseInvalidEventEmptyDescription_throwsEmptyEventException() throws DeleteOutOfRangeException,
             UnknownCommandException, MissingDoneArgumentException, MissingEventDateException, EmptyDeadlineException,
-            MissingDeadlineDateException, DoneOutOfRangeException, MissingDeleteArgumentException, EmptyTodoException {
+            MissingDeadlineDateException, DoneOutOfRangeException, MissingDeleteArgumentException, EmptyTodoException,
+            MissingFindArgumentException {
         try {
             assertEquals(false, Parser.parseAndExecute("event /at 2020-10-12", new TaskList(), new Ui()));
             fail(); //the test should not reach this line

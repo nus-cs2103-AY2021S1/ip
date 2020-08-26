@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
 public class Task {
     private String description;
     private boolean isDone;
-    public static DateTimeFormatter INPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    public static DateTimeFormatter PRINT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    public final static DateTimeFormatter INPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public final static DateTimeFormatter PRINT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     /**
      * Constructs the task with given description.
@@ -35,6 +35,14 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Gets the description of the task.
+     * @return  Description of the task.
+     */
+    public String getDescription() {
+        return this.description;
     }
 
     /**

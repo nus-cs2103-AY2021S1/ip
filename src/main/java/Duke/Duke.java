@@ -9,6 +9,7 @@ import duke.exception.MissingDeadlineDateException;
 import duke.exception.MissingDeleteArgumentException;
 import duke.exception.MissingDoneArgumentException;
 import duke.exception.MissingEventDateException;
+import duke.exception.MissingFindArgumentException;
 import duke.exception.UnknownCommandException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -85,6 +86,8 @@ public class Duke {
                 this.ui.sendExceptionMessage(e);
             } catch (DateTimeParseException e) {
                 this.ui.sendExceptionMessage("\uD83D\uDE41 OOPS! Date should be in the format: YYYY-MM-DD");
+            } catch (MissingFindArgumentException e) {
+                this.ui.sendExceptionMessage(e);
             }
             this.ui.sendBar();
             userInput = this.ui.getUserInput();
