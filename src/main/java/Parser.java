@@ -40,6 +40,9 @@ public class Parser {
           System.out.println(e);
         }
         break;
+      case "find":
+        tasks.handleFind(inputs);
+        break;
       default:
         try {
           throw new DukeException("I'm sorry, but I don't know what that means :-(");
