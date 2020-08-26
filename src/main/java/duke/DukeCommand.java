@@ -2,6 +2,10 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * An enumeration of different types of existing commands
+ * for duke.
+ */
 public enum DukeCommand {
     LIST("list", 100, ListCommand.class),DATE("date",101, DateCommand.class),
 
