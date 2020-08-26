@@ -1,10 +1,15 @@
 package duke;
-
 import duke.command.Command;
 import duke.task.TaskList;
-
 import java.io.IOException;
 import java.util.Scanner;
+
+/**
+ * Represents the Duke chat-bot.
+ * Duke is a chat application which helps to keep track of tasks in an interactive manner.
+ * @author David Liew
+ */
+
 
 public class Duke {
 

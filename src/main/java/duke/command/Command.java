@@ -13,5 +13,12 @@ public abstract class Command {
         this.isExit = isExit;
     }
 
+    /**
+     * Executes the command on a list of tasks.
+     *
+     * @param list Tasklist containing tasks.
+     * @param ui Ui for displaying output.
+     * @param storage Storage of tasks in a txt file.
+     */
     public abstract void execute(TaskList list, Ui ui, Storage storage);
 }

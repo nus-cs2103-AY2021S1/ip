@@ -3,8 +3,11 @@ import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
 import duke.task.*;
-
 import java.io.IOException;
+
+/**
+ * Represents an AddCommand that is part of the Command class, regarding adding a task.
+ */
 
 public class AddCommand extends Command {
 
