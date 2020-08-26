@@ -2,6 +2,7 @@ package duke;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidIndexException;
+import duke.exception.InvalidTaskException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
@@ -71,7 +72,7 @@ public class TaskList {
             tasks.add(t);
             break;
         default:
-            throw new DukeException("Invalid Task Type");
+            throw new InvalidTaskException("Invalid Task Type");
         }
     }
 

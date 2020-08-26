@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exception.DukeException;
+import duke.exception.DukeStorageException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
@@ -43,7 +44,7 @@ public class Storage {
             }
 
         } catch (IOException exception) {
-            System.out.println(exception);
+            System.out.println(exception.getMessage());
         }
     }
 
@@ -75,7 +76,7 @@ public class Storage {
             Files.write(Paths.get(filePath),fileContent);
             fw.close();
         } catch (IOException exception) {
-           throw new DukeException("Write To File error");
+           throw new DukeStorageException("Error saving task to file");
         }
     }
 
@@ -120,7 +121,7 @@ public class Storage {
             sc.close();
             return tasks;
         } catch (FileNotFoundException exception) {
-            throw new DukeException("File not found");
+            throw new DukeStorageException("File not found");
         }
     }
 }
