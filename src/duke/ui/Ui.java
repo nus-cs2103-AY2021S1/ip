@@ -49,6 +49,21 @@ public class Ui {
         System.out.println(USER);
     }
     
+    public void showFilteredByKeywordTaskList(TaskList tasks, String keyword) {
+        System.out.println(DIVIDER);
+
+        if (tasks.totalNumberOfTasks() == 0) {
+            System.out.println("No tasks matched with '" + keyword + "' :(");
+        }
+
+        if (tasks.totalNumberOfTasks() > 0) {
+            System.out.println("Here are the tasks that matched with '" + keyword + "':");
+            System.out.println(tasks);
+        }
+
+        System.out.println(USER);
+    }
+    
     public void loadTaskList(TaskList tasks) {
         System.out.println("Here is your current tasklist:");
         if (tasks.totalNumberOfTasks() == 0) {

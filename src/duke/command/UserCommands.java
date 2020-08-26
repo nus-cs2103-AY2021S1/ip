@@ -3,7 +3,7 @@ package duke.command;
 enum UserCommands {
     TODO("todo"), DEADLINE("deadline"), EVENT("event"), 
     DELETE("delete"), LIST("list"), DONE("done"), 
-    EXIT("bye");
+    FIND("find"), EXIT("bye");
     
     private final String commandWord;
     
