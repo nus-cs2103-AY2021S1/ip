@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.UUID;
 
 public class Task {
@@ -46,7 +48,7 @@ public class Task {
         this.uniqueId = uniqueId;
     }
 
-    public String getUniqueID() {
+    public String getUniqueId() {
         return this.uniqueId;
     }
 

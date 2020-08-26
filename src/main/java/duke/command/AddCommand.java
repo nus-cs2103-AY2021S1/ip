@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.*;
+import duke.task.*;
+
 public class AddCommand extends Command{
     CommandType taskType;
     String taskContent;

@@ -1,21 +1,23 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
-public class Deadline extends Task {
+public class Event extends Task {
 
-    private String by;
+    private String at;
     private LocalDate taskDate;
     private LocalTime taskTime;
 
-    public Deadline(String description, String by) {
+    public Event(String description, String at) {
         super(description);
-        this.by = by;
-        this.taskType = "D";
+        this.at = at;
+        this.taskType = "E";
 
-        String[] dateArguments = by.split(" ");
+        String[] dateArguments = at.split(" ");
 
         try {
             taskDate = LocalDate.parse(dateArguments[0]);
@@ -29,12 +31,12 @@ public class Deadline extends Task {
         }
     }
 
-    public Deadline(String uniqueId, boolean isDone, String description, String by) {
-        super(uniqueId, isDone, description);
-        this.by = by;
-        this.taskType = "D";
+    public Event(String uniqueId, boolean isDone, String description, String at) {
+        super (uniqueId, isDone, description);
+        this.at = at;
+        this.taskType = "E";
 
-        String[] dateArguments = by.split(" ");
+        String[] dateArguments = at.split(" ");
 
         try {
             taskDate = LocalDate.parse(dateArguments[0]);
@@ -49,7 +51,7 @@ public class Deadline extends Task {
     }
 
     public String getTime() {
-        return by;
+        return at;
     }
 
     private String formatTaskTime() {
@@ -60,8 +62,9 @@ public class Deadline extends Task {
         return output;
     }
 
+
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + formatTaskTime() + ")";
+        return "[E]" + super.toString() + " (at: " + formatTaskTime() + ")";
     }
 }

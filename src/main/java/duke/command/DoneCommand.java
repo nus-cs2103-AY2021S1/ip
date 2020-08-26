@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.*;
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class DoneCommand extends Command {
     
     private final int taskIdx;

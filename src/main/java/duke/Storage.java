@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.*;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -88,19 +92,19 @@ public class Storage {
     }
 
     public void saveTodo(ToDo task) {
-        String line = task.getUniqueID() + "|" + task.getTaskType() + "|" + task.getDone() + "|"
+        String line = task.getUniqueId() + "|" + task.getTaskType() + "|" + task.getDone() + "|"
                 + task.getDescription() + "\n";
         appendData(line);
     }
 
     public void saveDeadline(Deadline task)  {
-        String line = task.getUniqueID() + "|" + task.getTaskType() + "|" + task.getDone() + "|"
+        String line = task.getUniqueId() + "|" + task.getTaskType() + "|" + task.getDone() + "|"
                 + task.getDescription() + "|" + task.getTime() + "\n";
         appendData(line);
     }
 
     public void saveEvent(Event task) {
-        String line = task.getUniqueID() + "|" + task.getTaskType() + "|" + task.getDone() + "|"
+        String line = task.getUniqueId() + "|" + task.getTaskType() + "|" + task.getDone() + "|"
                 + task.getDescription() + "|" + task.getTime() + "\n";
         appendData(line);
     }
@@ -112,7 +116,7 @@ public class Storage {
             String line;
 
             while ((line = br.readLine()) != null) {
-                if (line.contains(task.uniqueId)) {
+                if (line.contains(task.getUniqueId())) {
                     line = line.replaceFirst("false", "true");
                 }
                 newData.append(line).append("\n");
@@ -132,7 +136,7 @@ public class Storage {
             String line;
 
             while ((line = br.readLine()) != null) {
-                if (!line.contains(task.uniqueId)) {
+                if (!line.contains(task.getUniqueId())) {
                     newData.append(line).append("\n");
                 }
             }
