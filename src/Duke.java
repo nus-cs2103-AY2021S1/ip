@@ -1,6 +1,7 @@
 import input.UserInput;
 import function.DukeFunction;
 import data.DukeState;
+import storage.DukeStorage;
 import ui.Ui;
 
 import java.io.IOException;
@@ -8,7 +9,7 @@ import java.io.IOException;
 public class Duke {
 
     public static void main(String[] args) throws IOException {
-        DukeFunction.loadSavedTasks();
+        DukeStorage.loadSavedTasks();
         Ui.greet();
 
         while (!DukeState.exitLoop) {
@@ -16,6 +17,6 @@ public class Duke {
             DukeFunction.checkCommand(inputLine);
         }
 
-        DukeFunction.saveCurrentTasks();
+        DukeStorage.saveCurrentTasks();
     }
 }

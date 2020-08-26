@@ -2,15 +2,11 @@ package function;
 
 import command.Command;
 import data.DukeCommandSet;
-import data.DukeTaskList;
-import storage.TaskStorage;
 
 import exception.IncorrectFormatException;
 import exception.InvalidIndexException;
 import exception.NoDescriptionException;
 import exception.UnknownCommandException;
-
-import java.io.IOException;
 
 public class DukeFunction {
 
@@ -33,13 +29,5 @@ public class DukeFunction {
                 System.out.println(exception.getMessage());
             }
         }
-    }
-
-    public static void loadSavedTasks() throws IOException {
-        DukeTaskList.tasks = TaskStorage.getInstance().getSavedTasks();
-    }
-
-    public static void saveCurrentTasks() throws IOException {
-        TaskStorage.getInstance().saveTasks(DukeTaskList.tasks);
     }
 }
