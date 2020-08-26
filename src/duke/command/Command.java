@@ -13,7 +13,7 @@ public abstract class Command {
      * Default: false
      * @return true if the program should exit, false otherwise.
      */
-    public boolean isExit() {
+    public boolean shouldExit() {
         return false;
     }
 

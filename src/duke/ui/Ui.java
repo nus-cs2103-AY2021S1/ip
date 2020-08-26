@@ -7,17 +7,17 @@ import duke.task.Task;
  */
 public final class Ui {
 
-    private final static String LINE1 = "_____________________________________________________DUKE___";
-    private final static String LINE2 = "------------------------------------------------------------";
-    private final static String WELCOME = "Hello, this is Duke.";
-    private final static String EXIT = "Goodbye.";
+    private final static String STRING_TOP_LINE = "_____________________________________________________DUKE___";
+    private final static String STRING_BOTTOM_LINE = "------------------------------------------------------------";
+    private final static String STRING_GREETING = "Hello, this is Duke.";
+    private final static String STRING_EXIT = "Goodbye.";
 
     public static void printStartLine() {
-        System.out.println(LINE1);
+        System.out.println(STRING_TOP_LINE);
     }
 
     public static void printEndLine() {
-        System.out.println(LINE2);
+        System.out.println(STRING_BOTTOM_LINE);
     }
 
     /**
@@ -32,11 +32,11 @@ public final class Ui {
     }
 
     public static void showWelcome() {
-        wrapText(WELCOME);
+        wrapText(STRING_GREETING);
     }
 
     public static void showExit() {
-        wrapText(EXIT);
+        wrapText(STRING_EXIT);
     }
 
     public static void showTaskAddition(Task task) {

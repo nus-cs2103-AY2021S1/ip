@@ -17,7 +17,8 @@ import java.time.format.DateTimeFormatter;
  */
 public final class Parser {
 
-    final static String regex = ",, ";
+    final static String REGEX_SEPARATOR = ",, ";
+
     private final static String BYE = "bye";
     private final static String LIST = "list";
     private final static String DONE = "done";
@@ -36,7 +37,7 @@ public final class Parser {
      * @throws DukeException if the line does not follow the given regex.
      */
     public static Task parseLine(String line) throws DukeIOException {
-        String[] values = line.split(regex);
+        String[] values = line.split(REGEX_SEPARATOR);
         switch (values[0]) {
         case "[T]":
             return new Todo(values[2], values[1]);
@@ -59,7 +60,7 @@ public final class Parser {
         String[] args = task.toArray();
         String result = "";
         for (String s : args) {
-            result = result.concat(String.format("%s%s", s, regex));
+            result = result.concat(String.format("%s%s", s, REGEX_SEPARATOR));
         }
         return result + "\n";
     }
