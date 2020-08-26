@@ -7,8 +7,8 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
-    public TaskList(ArrayList<Task> tasks) {
-        tasks = tasks;
+    public TaskList(ArrayList<Task> taskList) {
+        tasks = taskList;
     }
 
     @Override
