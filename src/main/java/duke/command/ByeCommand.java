@@ -11,14 +11,14 @@ public class ByeCommand extends Command {
 
     /**
      * Exit the program and saves the information to a file.
-     * @param taskList The list of tasks stored by Duke.
+     * @param tasks The list of tasks stored by Duke.
      * @param ui The user interface to read inputs from the user and print messages.
      * @param storage The class that deals with saving tasks into the file and loading tasks
      *                from the file.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        storage.storelist(taskList);
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        storage.storelist(tasks);
         ui.farewell();
         
     }
@@ -28,7 +28,7 @@ public class ByeCommand extends Command {
      * @return false.
      */
     @Override
-    public boolean isRunning() {
+    public boolean continueRunning() {
         return false;
     }
 }

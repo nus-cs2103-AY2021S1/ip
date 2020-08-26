@@ -18,8 +18,8 @@ public class ListCommand extends Command {
      *
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.listText(taskList);
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.listText(tasks);
     }
 
     /**
@@ -27,7 +27,7 @@ public class ListCommand extends Command {
      * @return true.
      */
     @Override
-    public boolean isRunning() {
+    public boolean continueRunning() {
         return true;
     }
 }

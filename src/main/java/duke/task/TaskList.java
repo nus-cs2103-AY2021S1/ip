@@ -6,14 +6,14 @@ import java.util.List;
  * Represents the list in which all the tasks are stored while Duke is running.
  */
 public class TaskList {
-    private List<Task> taskList;
+    private List<Task> tasks;
     
-    public TaskList(List<Task> list) {
-        this.taskList = list;
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
     
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -21,7 +21,7 @@ public class TaskList {
      * @param task The task that should be added to the list.
      */
     public void add(Task task) {
-        taskList.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -30,7 +30,7 @@ public class TaskList {
      * @return a Task from the list.
      */
     public Task get(int index) {
-        return taskList.get(index);
+        return tasks.get(index);
     }
 
     /**
@@ -38,7 +38,7 @@ public class TaskList {
      * @return an integer that represents the number of tasks in the list.
      */
     public int getSize() {
-        return taskList.size();
+        return tasks.size();
     }
 
     /**
@@ -46,16 +46,16 @@ public class TaskList {
      * @param index the number representing the task that should be removed.
      */
     public void remove(int index) {
-        taskList.remove(index);
+        tasks.remove(index);
     }
 
     /**
      * A function to print all of the tasks currently in the list.
      */
     public void printTaskList() {
-        for (int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             String num = (i + 1) + ". ";
-            Task current = taskList.get(i);
+            Task current = tasks.get(i);
             System.out.println(num + current);
         }
     }

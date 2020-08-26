@@ -73,17 +73,21 @@ public class Storage {
         }
     }
 
+<<<<<<< HEAD
     /**
      * A function to save all the tasks into the file.
      * @param taskList the TaskList whose tasks should be stored into the file.
      */
     public void storelist(TaskList taskList) {
+=======
+    public void storelist(TaskList tasks) {
+>>>>>>> branch-A-CodingStandard
         try {
             String seperator = " | ";
             FileWriter fileWriter = new FileWriter(filepath);
 
-            for (int i = 0; i < taskList.getSize(); i++) {
-                Task temp = taskList.get(i);
+            for (int i = 0; i < tasks.getSize(); i++) {
+                Task temp = tasks.get(i);
                 String doneStatus = "0";
                 if (temp.checkDone()) {
                     doneStatus = "1";
