@@ -16,6 +16,13 @@ public class AddCommand extends Command {
         super(command, false);
     }
 
+    /**
+     * Executes the command to add a task to the list of tasks.
+     *
+     * @param list Tasklist containing tasks.
+     * @param ui Ui for displaying output.
+     * @param storage Storage of tasks in a txt file.
+     */
     public void execute(TaskList list, Ui ui, Storage storage) {
         try {
             String[] type = this.command.split(" ", 2);

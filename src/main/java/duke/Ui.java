@@ -3,8 +3,11 @@ package duke;
 import duke.task.Task;
 import duke.task.TaskList;
 
-public class Ui {
+/**
+ * The main class to deal with interactions with the user.
+ */
 
+public class Ui {
 
     public static void intro() {
         String logo = " ____        _        \n"

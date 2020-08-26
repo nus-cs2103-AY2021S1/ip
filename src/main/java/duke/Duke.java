@@ -5,11 +5,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Represents the Duke chat-bot.
+ * Represents the overarching Duke chat-bot.
  * Duke is a chat application which helps to keep track of tasks in an interactive manner.
  * @author David Liew
  */
-
 
 public class Duke {
 
@@ -34,6 +33,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Duke chat-bot, by taking in user input and sending it to be parsed.
+     */
     public void run() {
         boolean isExit = false;
         Scanner sc = new Scanner(System.in);

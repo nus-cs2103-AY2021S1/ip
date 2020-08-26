@@ -7,6 +7,9 @@ public class Todo extends Task {
         super(description);
     }
 
+    /**
+     * @return a string indicating the details of the todo task.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

@@ -8,6 +8,9 @@ public abstract class Command {
     protected final String command;
     public final boolean isExit;
 
+    /**
+     * Represents an abstract Command forming the parent to other commands.
+     */
     public Command(String command, boolean isExit) {
         this.command = command;
         this.isExit = isExit;

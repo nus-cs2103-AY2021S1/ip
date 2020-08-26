@@ -1,8 +1,17 @@
 package duke;
-
 import duke.command.*;
 
+/**
+ * Handles the main logic of inputs and what Command to execute.
+ */
+
 public class Parser {
+
+    /**
+     * The main method to this class to handle inputs and give commands activated.
+     * @param input the user input.
+     * @retrun a Command indicating the type of action the user requires.
+     */
     public static Command parse(String input) {
         String checker;
         if (input.length() > 5) {

@@ -12,6 +12,13 @@ public class ExitCommand extends Command {
         super(command, true);
     }
 
+    /**
+     * Executes the command to exit out of a chat.
+     *
+     * @param list Tasklist containing tasks.
+     * @param ui Ui for displaying output.
+     * @param storage Storage of tasks in a txt file.
+     */
     public void execute(TaskList list, Ui ui, Storage storage) {
         ui.finsih();
     }
