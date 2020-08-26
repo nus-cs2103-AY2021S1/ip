@@ -91,4 +91,16 @@ public class Ui {
     public void showByeMsg() {
         System.out.println(duke + "See you soon!");
     }
+
+    public void showFindPromptMsg() {
+        System.out.println(duke + "Enter a keyword:");
+    }
+
+    public void showFoundMsg(String keyword) {
+        System.out.println(duke + "Here are the task(s) matching the keyword: " + keyword);
+    }
+
+    public void showNotFoundMsg(String keyword) {
+        System.out.println(duke + "Found no task(s) matching the keyword: " + keyword);
+    }
 }

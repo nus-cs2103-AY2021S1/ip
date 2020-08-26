@@ -42,4 +42,14 @@ public class TaskList {
     public ArrayList<Task> getList() {
         return this.list;
     }
+
+    public TaskList findTasks(String keyword) throws DukeException {
+        TaskList foundTasks = new TaskList();
+        for (Task task : list) {
+            if(task.getTaskName().contains(keyword)) {
+                foundTasks.addTask(task);
+            }
+        }
+        return foundTasks;
+    }
 }
