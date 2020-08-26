@@ -1,16 +1,25 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
     protected List<Task> listOfTasks;
+    
+    protected static String TODO_INDICATOR = "[T]";
+    protected static String DEADLINE_INDICATOR = "[D]";
+    protected static String EVENT_INDICATOR = "[E]";
+    
 
-    public TaskList() {
-        this.listOfTasks = new ArrayList<>();
+    public TaskList(List<Task> tasks) {
+        this.listOfTasks = tasks;
     }
 
     public void addNewTask(Task newTask) {
         this.listOfTasks.add(newTask);
     }
+
+    public void updateTaskList(Task newTask, int index) {
+        this.listOfTasks.add(index, newTask);
+    }
+
 
     public int totalNumberOfTasks() {
         return this.listOfTasks.size();
@@ -33,6 +42,6 @@ public class TaskList {
             allTasks.append(listIndex + "." + task + "\n");
         }
 
-        return allTasks.substring(0, allTasks.length() - 1);
+        return allTasks.toString();
     }
 }

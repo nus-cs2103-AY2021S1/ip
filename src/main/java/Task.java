@@ -3,8 +3,8 @@ public class Task {
     protected boolean isDone;
 
     // Markers
-    private final String TICK = "[" + "\u2713" + "]";
-    private final String CROSS = "[" + "\u2718" + "]";
+    protected static final String TICK = "[" + "\u2713" + "]";
+    protected static final String CROSS = "[" + "\u2718" + "]";
 
     public Task(String description) {
         this.description = description;

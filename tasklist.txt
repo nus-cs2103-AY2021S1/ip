@@ -1,2 +1,0 @@
-1.[T][✘] return book
-2.[D][✘] finish 2103 ip (by: monday)
