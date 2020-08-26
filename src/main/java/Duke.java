@@ -1,8 +1,4 @@
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Scanner;
 
 public class Duke {
 
