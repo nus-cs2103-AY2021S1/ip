@@ -1,5 +1,12 @@
+../src/main/java/AlreadyDoneIndexException.java
+../src/main/java/RangeIndexException.java
+../src/main/java/NullTaskNameException.java
+../src/main/java/NullDoneIndexException.java
 ../src/main/java/Event.java
+../src/main/java/EmptyTasksException.java
 ../src/main/java/Task.java
 ../src/main/java/Duke.java
 ../src/main/java/Deadline.java
 ../src/main/java/ToDo.java
+../src/main/java/NullTaskDateException.java
+../src/main/java/DukeException.java

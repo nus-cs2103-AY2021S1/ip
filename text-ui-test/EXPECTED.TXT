@@ -13,7 +13,8 @@ TO-DO LIST:
 
 ––––––––––––––––––––– *** –––––––––––––––––––––
 'call mom' added to list!
-1. [T][✘] call mom
+[T][✘] call mom
+
 You now have 1 task(s) in your list.
 
 (Use 'list' command to see your updated list.)
@@ -21,23 +22,26 @@ You now have 1 task(s) in your list.
 
 ––––––––––––––––––––– *** –––––––––––––––––––––
 'call dad' added to list!
-2. [T][✘] call dad
+[T][✘] call dad
+
 You now have 2 task(s) in your list.
 
 (Use 'list' command to see your updated list.)
 ––––––––––––––––––––– *** –––––––––––––––––––––
 
 ––––––––––––––––––––– *** –––––––––––––––––––––
-'project meeting ' added to list!
-3. [E][✘] project meeting  (at: 3pm)
+'project meeting' added to list!
+[E][✘] project meeting (at: 3pm)
+
 You now have 3 task(s) in your list.
 
 (Use 'list' command to see your updated list.)
 ––––––––––––––––––––– *** –––––––––––––––––––––
 
 ––––––––––––––––––––– *** –––––––––––––––––––––
-'homework ' added to list!
-4. [D][✘] homework  (by: Monday)
+'homework' added to list!
+[D][✘] homework (by: Monday)
+
 You now have 4 task(s) in your list.
 
 (Use 'list' command to see your updated list.)
@@ -45,7 +49,8 @@ You now have 4 task(s) in your list.
 
 ––––––––––––––––––––– *** –––––––––––––––––––––
 'clean fridge' added to list!
-5. [T][✘] clean fridge
+[T][✘] clean fridge
+
 You now have 5 task(s) in your list.
 
 (Use 'list' command to see your updated list.)
@@ -53,17 +58,17 @@ You now have 5 task(s) in your list.
 
 ––––––––––––––––––––– *** –––––––––––––––––––––
 Good job! This task is now marked done:
-3. [E][✓] project meeting  (at: 3pm)
+[E][✓] project meeting (at: 3pm)
 ––––––––––––––––––––– *** –––––––––––––––––––––
 
 ––––––––––––––––––––– *** –––––––––––––––––––––
 Good job! This task is now marked done:
-4. [D][✓] homework  (by: Monday)
+[D][✓] homework (by: Monday)
 ––––––––––––––––––––– *** –––––––––––––––––––––
 
 ––––––––––––––––––––– *** –––––––––––––––––––––
 Good job! This task is now marked done:
-2. [T][✓] call dad
+[T][✓] call dad
 ––––––––––––––––––––– *** –––––––––––––––––––––
 
 ––––––––––––––––––––– *** –––––––––––––––––––––
@@ -71,11 +76,12 @@ TO-DO LIST:
 2 pending
    1. [T][✘] call mom
    2. [T][✓] call dad
-   3. [E][✓] project meeting  (at: 3pm)
-   4. [D][✓] homework  (by: Monday)
+   3. [E][✓] project meeting (at: 3pm)
+   4. [D][✓] homework (by: Monday)
    5. [T][✘] clean fridge
 ––––––––––––––––––––– *** –––––––––––––––––––––
 
 ––––––––––––––––––––– *** –––––––––––––––––––––
 Alright, see you soon!
 ––––––––––––––––––––– *** –––––––––––––––––––––
+
