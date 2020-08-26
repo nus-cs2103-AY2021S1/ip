@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Parser {
 
     private TaskList taskList;
@@ -14,6 +16,7 @@ public class Parser {
      */
     public void runCommand(Command command) throws DukeException, Exception{
         Task task;
+        ArrayList<Task> allTasks;
         switch (command) {
             case BYE:
                 Ui.print("Bye. Hope to see you again soon!");
@@ -40,6 +43,10 @@ public class Parser {
             case DELETE:
                 task = parseDelete(command.getTaskContent());
                 Ui.printDelete(task, taskList.getUndoneCount());
+                break;
+            case FIND:
+                allTasks = parseFind(command.getTaskContent());
+                Ui.printFind(allTasks);
                 break;
             case INVALID:
                 throw new CommandException(command.echo() + " is an invalid command.\n"+
@@ -153,5 +160,9 @@ public class Parser {
             throw new WrongDescriptionException("The description of 'DELETE' should be an integer.\n"
                     + "Please re-enter your command.");
         }
+    }
+
+    public ArrayList<Task> parseFind(String content){
+        return taskList.findTask(content);
     }
 }

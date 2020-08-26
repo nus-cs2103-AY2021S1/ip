@@ -86,6 +86,16 @@ public class TaskList {
         return task;
     }
 
+    public ArrayList<Task> findTask(String content) {
+        ArrayList<Task> allMatches = new ArrayList<>();
+        for (Task task:todoList) {
+            if (task.getContent().contains(content))
+                allMatches.add(task);
+        }
+
+        return allMatches;
+    }
+
     public ArrayList<Task> getTodoList() {
         return todoList;
     }

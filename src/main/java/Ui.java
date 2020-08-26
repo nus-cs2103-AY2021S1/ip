@@ -134,4 +134,15 @@ public class Ui {
             Ui.print("  ["+task.getTaskType()+"][ ] " + task.toString());
         Ui.print(String.format("Now you have %d tasks waiting to be done.", undoneCount));
     }
+
+    static public void printFind(ArrayList<Task> allMatches){
+        Ui.print("Here are the matching tasks in your list:");
+        for (int i = 0; i < allMatches.size(); i++){
+            Task task = allMatches.get(i);
+            if (task.checkDone())
+                Ui.print(String.format("%d.[", i+1)+task.getTaskType()+"][X] " + task.toString());
+            else
+                Ui.print(String.format("%d.[", i+1)+task.getTaskType()+"][ ] " + task.toString());
+        }
+    }
 }
