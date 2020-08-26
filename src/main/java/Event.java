@@ -7,12 +7,12 @@ public class Event extends Task {
     @Override
     public String writeToFile() {
         return "event" + "|" + this.getStatusSymbol() + "|"
-                + this.taskName + "|" + this.timePeriod;
+                + this.taskName + "|" + this.time;
     }
 
     @Override
     public String toString() {
-        TimeParser timeParser = new TimeParser(localDate);
+        TimeParser timeParser = new TimeParser(localDate, time);
         String formattedTime = timeParser.getFormattedTime();
         return "[E]" + super.toString() + " (at: " + formattedTime + ")";
     }

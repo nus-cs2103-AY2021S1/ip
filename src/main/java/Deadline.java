@@ -6,13 +6,15 @@ public class Deadline extends Task {
 
     @Override
     public String writeToFile() {
+        TimeParser timeParser = new TimeParser(localDate, time);
+        String formattedTime = timeParser.getFormattedTime();
         return "deadline" + "|" + this.getStatusSymbol() + "|"
-                + this.taskName + "|" + this.completeBy;
+                + this.taskName + "|" + formattedTime;
     }
 
     @Override
     public String toString() {
-        TimeParser timeParser = new TimeParser(localDate);
+        TimeParser timeParser = new TimeParser(localDate, time);
         String formattedTime = timeParser.getFormattedTime();
         return "[D]" + super.toString() + " (by: " + formattedTime + ")";
     }

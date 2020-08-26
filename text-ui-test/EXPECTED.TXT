@@ -1,5 +1,6 @@
      _____________________________________
      Hi, I am
+
       ____        _        
      |  _ \ _   _| | _____ 
      | | | | | | | |/ / _ \
@@ -9,39 +10,45 @@
      Is there anything I could help with?
      _____________________________________
      _____________________________________
+     Here are the tasks in the list:
+     1.[D][✓] return book (by: 2020-10)
+     _____________________________________
+     _____________________________________
      Noted! The task below is added into the list:
         [T][✘] borrow book
-     There is 1 task in total in your list.
-     _____________________________________
-     _____________________________________
-     Noted! The task below is added into the list:
-        [D][✘] return book (by: Monday)
      There are 2 tasks in total in your list.
      _____________________________________
      _____________________________________
      Noted! The task below is added into the list:
-        [E][✘] project meeting (at: Tue 10-12am)
+        [D][✘] return book (by: 2020-10)
      There are 3 tasks in total in your list.
      _____________________________________
      _____________________________________
+     Noted! The task below is added into the list:
+        [E][✘] project meeting (at: Tue 10-12am)
+     There are 4 tasks in total in your list.
+     _____________________________________
+     _____________________________________
      Here are the tasks in the list:
-     1.[T][✘] borrow book
-     2.[D][✘] return book (by: Monday)
-     3.[E][✘] project meeting (at: Tue 10-12am)
+     1.[D][✓] return book (by: 2020-10)
+     2.[T][✘] borrow book
+     3.[D][✘] return book (by: 2020-10)
+     4.[E][✘] project meeting (at: Tue 10-12am)
      _____________________________________
      _____________________________________
      Great! The task below is marked as done:
-        [T][✓] borrow book
+        [D][✓] return book (by: 2020-10)
      _____________________________________
      _____________________________________
      Okay. The task below is deleted from your list:
-        [T][✓] borrow book
-     Now there are 2 tasks in total in your list.
+        [T][✘] borrow book
+     Now there are 3 tasks in total in your list.
      _____________________________________
      _____________________________________
      Here are the tasks in the list:
-     1.[D][✘] return book (by: Monday)
-     2.[E][✘] project meeting (at: Tue 10-12am)
+     1.[D][✓] return book (by: 2020-10)
+     2.[D][✘] return book (by: 2020-10)
+     3.[E][✘] project meeting (at: Tue 10-12am)
      _____________________________________
      _____________________________________
      Please tell me the name of the todo task! Or else I cannot add it into list.
@@ -50,10 +57,18 @@
      I cannot understand your command! Please ensure your command follows the rules.
      _____________________________________
      _____________________________________
-     Please tell me which task you want to be marked as done.
+     Great! The task below is marked as done:
+        [D][✓] return book (by: 2020-10)
      _____________________________________
      _____________________________________
-     You have entered an invalid task number! Please try again.
+     Okay. The task below is deleted from your list:
+        [D][✓] return book (by: 2020-10)
+     Now there are 2 tasks in total in your list.
+     _____________________________________
+     _____________________________________
+     Okay. The task below is deleted from your list:
+        [E][✘] project meeting (at: Tue 10-12am)
+     Now there is 1 task in total in your list.
      _____________________________________
      _____________________________________
      Please tell me both the name and the time due of the deadline task in the correct form! Don't forget to include the time by using /by.

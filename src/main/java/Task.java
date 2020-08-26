@@ -16,7 +16,11 @@ public class Task {
         this.taskName = taskName;
         this.isDone = false;
         this.time = time;
-        this.localDate = LocalDate.parse(time.trim());
+        try {
+            this.localDate = LocalDate.parse(time.trim());
+        } catch (Exception e) {
+            localDate = null;
+        }
     }
 
 

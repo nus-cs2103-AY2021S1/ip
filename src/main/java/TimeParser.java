@@ -3,9 +3,11 @@ import java.time.format.DateTimeFormatter;
 
 public class TimeParser {
     private LocalDate localDate;
+    private String time;
 
-    public TimeParser(LocalDate localDate) {
+    public TimeParser(LocalDate localDate, String time) {
         this.localDate = localDate;
+        this.time = time;
     }
 
     public String getFormattedTime() {
@@ -14,7 +16,7 @@ public class TimeParser {
             String formattedTime = localDate.format(formatter);
             return formattedTime;
         } catch (Exception e) {
-            return e.getMessage();
+            return time;
         }
 
     }

@@ -35,10 +35,10 @@ public class Storage {
         return filepath.endsWith(".txt");
     }
 
-    public void read(ArrayList<Task> listOfTasks) {
+    public TaskList read() {
         try {
+            ArrayList<Task> listOfTasks = new ArrayList<>();
             File storageFile = new File(filePath);
-            //FileReader fileReader = new FileReader(storageFile);
             Scanner scanner = new Scanner(storageFile);
             while (scanner.hasNextLine()) {
                 String currentLine = scanner.nextLine();
@@ -65,10 +65,10 @@ public class Storage {
                 }
             }
             scanner.close();
-
-
+            return new TaskList(listOfTasks);
         } catch (IOException e) {
             System.out.println(e.toString());
+            return new TaskList(new ArrayList<Task>());
         }
     }
 
