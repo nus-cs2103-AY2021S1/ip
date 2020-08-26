@@ -23,12 +23,22 @@ import duke.exception.UnknownInputException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Parser is used to make sense the input from the user and convert it to executable command.
+ */
 public class Parser {
 
-    public static String[] commands = {"list", "done", "deadline", "event", "todo", "delete", "bye"};
-    public static ArrayList<String> VALID_COMMAND = new ArrayList<>(Arrays.asList(commands));
+    /** Array of valid command. */
+    public static String[] COMMANDS = {"list", "done", "deadline", "event", "todo", "delete", "bye"};
+    /** A list of valid command that can be used by the user. */
+    public static ArrayList<String> VALID_COMMAND = new ArrayList<>(Arrays.asList(COMMANDS));
 
-    // Method to check user input
+    /**
+     * Checks the correctness of the input by the user.
+     *
+     * @param line The input from the user.
+     * @throws DukeException If user's input is invalid.
+     */
     public static void checkInput(String line) throws DukeException {
         String[] input = line.split(" ");
         String command = input[0];
@@ -60,6 +70,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Translates user input into executable Command.
+     *
+     * @param c The input from the user.
+     * @return Command that will be executed.
+     * @throws DukeException If user's input is invalid.
+     */
     public static Command parse(String c) throws DukeException {
         // Check command input
         checkInput(c);

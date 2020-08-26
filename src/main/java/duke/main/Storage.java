@@ -17,9 +17,18 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage is used to store Tasks to the hard disk from a TaskList. It can
+ * also be used to read file to input data to a TaskList.
+ */
 public class Storage {
 
-    // Method to convert task from hard disk
+    /**
+     * Converts a String from hard disk into a Task.
+     *
+     * @param s String from the hard disk.
+     * @return A Task based on the given String.
+     */
     public Task convertFromHardDisk(String s) {
         String[] data = s.split(" / ");
         String taskType = data[0];
@@ -41,7 +50,12 @@ public class Storage {
         return task;
     }
 
-    // Method to convert task to hard disk
+    /**
+     * Converts a Task into a String that can be stored in the hard disk.
+     *
+     * @param t The Task to be converted to String.
+     * @return A String representation of the given Task that can be stored in the hard disk.
+     */
     public String convertToHardDisk(Task t) {
         String[] info = t.getInfo();
         String taskType = info[0];
@@ -56,8 +70,12 @@ public class Storage {
         }
     }
 
-    // Method to read all tasks from hard disk
-    public ArrayList<Task> readFromHardDisk() {
+    /**
+     * Reads all data from hard disk, then convert all the data into Tasks.
+     *
+     * @return A TaskList that contains all the Tasks from the hard disk.
+     */
+    public TaskList readFromHardDisk() {
         // Create paths for the file
         String projectRoot = System.getProperty("user.dir");
         // p1 is used for creating directory
@@ -98,10 +116,14 @@ public class Storage {
                 x.printStackTrace();
             }
         }
-        return  storage;
+        return new TaskList(storage);
     }
 
-    // Method to write all task to hard disk
+    /**
+     * Writes all Tasks from a TaskList to hard disk.
+     *
+     * @param storage Tasklist that wants to be stored in the hard disk.
+     */
     public void writeToHardDisk(TaskList storage) {
         String projectRoot = System.getProperty("user.dir");
         Path p2 = Paths.get(projectRoot, "data", "task.txt");
