@@ -6,14 +6,16 @@ import duke.task.Task;
 
 import java.io.*;
 
-
+/**
+ * Class that encapsulates the saving and reading of tasks.
+ */
 public class Storage {
 
     File file;
     TaskList tasks;
 
     /**
-     * Constructor for a duke.storage.Storage object.
+     * Constructor for a Storage object.
      *
      * @param path The path to read/write the file to
      * @throws IOException if it is unable to create the file or if an IO error occurs
@@ -34,7 +36,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds the given Task to the list of tasks and appends the new task to the data file.
+     * @param task the Task to be added
+     * @throws IOException if an IOException occurs during writing
+     */
     public void add(Task task) throws IOException {
+        // TODO: Catch IOException into DukeIOException
         tasks.add(task);
         String taskString = Parser.convertTask(task);
         BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
@@ -44,12 +52,16 @@ public class Storage {
     }
 
     /**
-     * Removes the task at the given index from the ArrayList,
-     * then clears the existing file and rewrites the contents of the list back to it.
      *
+     */
+
+    /**
+     * Removes the task at the given index from the TaskList,
+     * then clears the existing file and rewrites the contents of the list back to it.
      * @param index The index of the task to be removed
      * @return The deleted task
-     * @throws IOException if there are issues with the IO operations
+     * @throws DukeIOException if an IOException occurs during writing.
+     * @throws ArrayIndexOutOfBoundsException if the given index is out of range.
      */
     public Task delete(int index) throws DukeIOException, ArrayIndexOutOfBoundsException {
         Task deleted = tasks.remove(index);
@@ -57,6 +69,14 @@ public class Storage {
         return deleted;
     }
 
+    /**
+     * Marks the task at the given index of the TaskList as completed,
+     * then clears the existing file and rewrites the contents of the list back to it.
+     * @param index
+     * @return
+     * @throws DukeIOException
+     * @throws ArrayIndexOutOfBoundsException
+     */
     public Task complete(int index) throws DukeIOException, ArrayIndexOutOfBoundsException {
         Task completed = tasks.complete(index);
         rewrite();
