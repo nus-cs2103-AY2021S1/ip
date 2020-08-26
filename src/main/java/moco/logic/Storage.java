@@ -1,5 +1,6 @@
 package main.java.moco.logic;
 
+import main.java.moco.MocoException;
 import main.java.moco.task.Deadline;
 import main.java.moco.task.Event;
 import main.java.moco.task.Task;

@@ -34,6 +34,16 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    public TaskList findTasks(String keyword) {
+        TaskList tl = new TaskList();
+        for (Task t : tasks) {
+            if (t.toString().contains(keyword)) {
+                tl.addTask(t);
+            }
+        }
+        return tl;
+    }
+
     @Override
     public String toString() {
         String s = "";
@@ -42,6 +52,4 @@ public class TaskList {
         }
         return s;
     }
-
-
 }
