@@ -63,6 +63,24 @@ public class TaskList {
         tasks.remove(index);
     }
 
+    // TaskList processing methods
+    /**
+     * Returns list of tasks filtered based on
+     * exact matching with the keyword given
+     *
+     * @param word the keyword to be used
+     * @return filtered TaskList
+     */
+    public TaskList filter(String word) {
+        List<Task> res = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.toString().contains(word)) {
+                res.add(t);
+            }
+        }
+        return new TaskList(res);
+    }
+
     // string processing
     /**
      * Enumerates (starting from 1) tasks in list using their string representations,

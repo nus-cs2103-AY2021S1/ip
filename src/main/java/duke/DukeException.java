@@ -20,6 +20,7 @@ public class DukeException extends Exception {
     private static final String INVALID_NUMBER = "Please specify a valid item number";
 
     private static final String UNSPECIFIC_COMMAND = "This is a single word command. Please try again";
+    private static final String MISSING_PARAMETERS = "This command requires more parameters. Please try again";
 
     private static final String UNKNOWN_OPERATION = "☹ OOPS!!! I'm sorry, " +
             "but I don't know what that means :-(";
@@ -56,6 +57,10 @@ public class DukeException extends Exception {
 
     public static DukeException unspecificCommand() {
         return new DukeException(UNSPECIFIC_COMMAND);
+    }
+
+    public static DukeException missingParameters() {
+        return new DukeException(MISSING_PARAMETERS);
     }
 
 }
