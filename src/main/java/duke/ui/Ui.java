@@ -45,6 +45,15 @@ public class Ui {
         }
     }
 
+    public void showFindMessage(TaskList taskList, String keyword) {
+        int i = 1;
+        for (Task t : taskList.getList()) {
+            if (t.getDescription().indexOf(keyword) != -1) {
+                System.out.println(i++ + "." + t);
+            }
+        }
+    }
+
     public void printDone(Task task) {
         System.out.println("Nice! I've marked this task as done:\n\t" + task);
     }

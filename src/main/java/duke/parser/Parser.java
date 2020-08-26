@@ -5,6 +5,7 @@ import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.tasks.ToDo;
@@ -21,14 +22,17 @@ public class Parser {
             return new ByeCommand();
         } else if (command.startsWith("list")) {
             return parseListCommand(command);
+        } else if (command.startsWith("find")) {
+            String keyword = command.substring(5);
+            return new FindCommand(keyword);
         } else if (command.startsWith("done ")) {
-            int i = Integer.valueOf(command.substring(5, command.length()));
+            int i = Integer.valueOf(command.substring(5));
             return new DoneCommand(i);
         } else if (command.startsWith("delete ")) {
-            int i = Integer.valueOf(command.substring(7, command.length()));
+            int i = Integer.valueOf(command.substring(7));
             return new DeleteCommand(i);
         } else if (command.startsWith("todo ")) {
-            ToDo todo = new ToDo(command.substring(5, command.length()));
+            ToDo todo = new ToDo(command.substring(5));
             return new AddCommand(todo);
         } else if (command.startsWith("deadline ")) {
             return parseDeadlineCommand(command);
@@ -55,7 +59,7 @@ public class Parser {
         int cut = command.indexOf(" /by ");
         if (cut >= 9) {
             String desc = command.substring(9, cut);
-            String by = command.substring(cut + 5, command.length());
+            String by = command.substring(cut + 5);
             String[] dateAndTime = by.split(" ");
             LocalDate date = LocalDate.parse(dateAndTime[0]);
             Deadline deadline = null;
@@ -75,7 +79,7 @@ public class Parser {
         try {
             if (cut >= 9) {
                 String desc = command.substring(6, cut);
-                String at = command.substring(cut + 5, command.length());
+                String at = command.substring(cut + 5);
                 String[] dateAndTime = at.split(" ");
                 LocalDate date = LocalDate.parse(dateAndTime[0]);
                 Event event = null;
