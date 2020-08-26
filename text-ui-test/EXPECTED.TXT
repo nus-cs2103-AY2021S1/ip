@@ -19,7 +19,7 @@ Now you have 2 tasks in this list.
 Insufficient arguments given. What todo do you have?
 
 Noted! I've added this task: 
-[D][✘] cs2100 lab (by: mon 2359)
+[D][✘] cs2103t (by: 26th of August 2020, 11.59PM)
 Now you have 3 tasks in this list.
 
 Noted! I've added this task: 
@@ -33,7 +33,7 @@ Now you have 5 tasks in this list.
 These are the tasks you have: 
 1. [T][✘] read book
 2. [T][✘] return book
-3. [D][✘] cs2100 lab (by: mon 2359)
+3. [D][✘] cs2103t (by: 26th of August 2020, 11.59PM)
 4. [T][✘] buy bread
 5. [E][✘] project meeting (at: sun 4pm)
 
@@ -48,7 +48,7 @@ Great! I've marked this task as done:
 These are the tasks you have: 
 1. [T][✘] read book
 2. [T][✓] return book
-3. [D][✘] cs2100 lab (by: mon 2359)
+3. [D][✘] cs2103t (by: 26th of August 2020, 11.59PM)
 4. [T][✓] buy bread
 5. [E][✘] project meeting (at: sun 4pm)
 
@@ -63,7 +63,7 @@ Now you have 4 tasks in this list.
 
 These are the tasks you have: 
 1. [T][✘] read book
-2. [D][✘] cs2100 lab (by: mon 2359)
+2. [D][✘] cs2103t (by: 26th of August 2020, 11.59PM)
 3. [T][✓] buy bread
 4. [E][✘] project meeting (at: sun 4pm)
 
@@ -73,7 +73,7 @@ Now you have 3 tasks in this list.
 
 These are the tasks you have: 
 1. [T][✘] read book
-2. [D][✘] cs2100 lab (by: mon 2359)
+2. [D][✘] cs2103t (by: 26th of August 2020, 11.59PM)
 3. [E][✘] project meeting (at: sun 4pm)
 
 OOPS! I'm sorry, but I don't know what that means :c

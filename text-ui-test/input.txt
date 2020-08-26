@@ -1,7 +1,7 @@
 todo read book
 todo return book
 todo
-deadline cs2100 lab /by mon 2359
+deadline cs2103t /by 26/08/2020 2359
 todo buy bread
 event project meeting /at sun 4pm
 list
