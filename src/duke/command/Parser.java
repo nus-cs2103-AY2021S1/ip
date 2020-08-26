@@ -1,9 +1,19 @@
+package duke.command;
+
+import duke.exception.InvalidIndexNumberException;
+import duke.exception.InvalidUserCommandException;
+import duke.exception.StorageException;
+import duke.exception.TaskDoesNotExistException;
+import duke.storage.Storage;
+import duke.storage.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.ui.Ui;
+
 public class Parser {
-    private static final String DEADLINE_TEXT_SEPARATOR = "by: ";
-    private static final String EVENT_TEXT_SEPARATOR = "at: ";
-    
-    
-    protected static void parseCommands(String userCommand, Ui ui, Storage storage) throws InvalidUserCommandException {
+    public static void parseCommands(String userCommand, Ui ui, Storage storage) throws InvalidUserCommandException {
         if (UserCommands.EXIT.getCommandWord().equals(userCommand)) {
             ui.showGoodbyeMessage();
         } else if (UserCommands.LIST.getCommandWord().equals(userCommand)) {
@@ -121,7 +131,7 @@ public class Parser {
             // Checks if index is valid
             if (index > 0 && index <= tasks.totalNumberOfTasks()) {
                 Task doneTask = tasks.getTask(index -1);
-                if (doneTask.isDone) {
+                if (doneTask.hasDoneStatus()) {
                     ui.showAlreadyMarkDoneMessage(doneTask);
                 } else {
                     tasks.deleteTask(index - 1);
@@ -136,29 +146,6 @@ public class Parser {
 
         } catch (InvalidUserCommandException | StorageException e) {
             ui.showErrorMessage(e);
-        }
-    }
-    
-    protected static String[] parseTaskText(String taskText, String typeOfTask) {
-        String[] taskDescriptionAndDate = taskText.split(" \\(", 2);
-
-        
-        if (TaskList.DEADLINE_INDICATOR.equals(typeOfTask)) {
-            String[] date = taskDescriptionAndDate[1].split(DEADLINE_TEXT_SEPARATOR);
-            taskDescriptionAndDate[1] = date[1].substring(0, date[1].length() -1);
-        } 
-        
-        if (TaskList.EVENT_INDICATOR.equals(typeOfTask)) {
-            String[] date = taskDescriptionAndDate[1].split(EVENT_TEXT_SEPARATOR);
-            taskDescriptionAndDate[1] = date[1].substring(0, date[1].length() -1);
-        }
-        
-        return taskDescriptionAndDate;
-    }
-    
-    protected static void parseIsDoneStatus(Task task, String taskIndicator) {
-        if (taskIndicator.contains(Task.TICK)) {
-            task.markAsDone();
         }
     }
 }

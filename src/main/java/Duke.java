@@ -1,3 +1,10 @@
+import duke.command.Parser;
+import duke.exception.InvalidUserCommandException;
+import duke.exception.StorageException;
+import duke.storage.Storage;
+import duke.storage.TaskList;
+import duke.ui.Ui;
+
 public class Duke {
     Storage storage;
     Ui ui;
@@ -17,7 +24,7 @@ public class Duke {
         ui.loadTaskList(tasks);
         ui.showGreetings();
         
-        while (!ui.EXIT) {
+        while (!Ui.EXIT) {
             String userCommand = ui.readUserCommand();
             try {
                 Parser.parseCommands(userCommand, ui, storage);

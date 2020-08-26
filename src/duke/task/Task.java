@@ -1,10 +1,12 @@
+package duke.task;
+
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     // Markers
-    protected static final String TICK = "[" + "\u2713" + "]";
-    protected static final String CROSS = "[" + "\u2718" + "]";
+    public static final String TICK = "[" + "\u2713" + "]";
+    private static final String CROSS = "[" + "\u2718" + "]";
 
     public Task(String description) {
         this.description = description;
@@ -17,6 +19,10 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
+    }
+    
+    public boolean hasDoneStatus() {
+        return this.isDone;
     }
 
     @Override

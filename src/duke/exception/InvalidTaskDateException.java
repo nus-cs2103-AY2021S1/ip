@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class InvalidTaskDateException extends InvalidUserCommandException{
     public InvalidTaskDateException(String invalidDate) {
         super("OOPS! " + invalidDate + " does not exist." 

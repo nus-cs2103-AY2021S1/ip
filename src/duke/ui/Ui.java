@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.storage.TaskList;
+import duke.task.Task;
 import java.util.Scanner;
 
 public class Ui {
@@ -6,31 +10,31 @@ public class Ui {
     private static final String USER = SKIPLINE + "You: ";
     private static final String DIVIDER = SKIPLINE + CHATBOT;
     
-    protected static boolean EXIT = false;
+    public static boolean EXIT = false;
     
     private final Scanner scan;
     
-    Ui() {
+    public Ui() {
         this.scan = new Scanner(System.in);
     }
 
-    protected String readUserCommand() {
+    public String readUserCommand() {
         return this.scan.nextLine();
     }
     
-    protected void showGreetings() {
+    public void showGreetings() {
         System.out.println(CHATBOT + "Hey there! I'm Bob" + SKIPLINE + "What can I do for you today?");
         System.out.println(USER);
     }
     
-    protected void showGoodbyeMessage() {
+    public void showGoodbyeMessage() {
         System.out.println(DIVIDER + "Goodbye! Have a nice day :D");
         this.scan.close();
         EXIT = true;
 
     }
     
-    protected void showTaskList(TaskList tasks) {
+    public void showTaskList(TaskList tasks) {
         System.out.println(DIVIDER);
 
         if (tasks.totalNumberOfTasks() == 0) {
@@ -45,7 +49,7 @@ public class Ui {
         System.out.println(USER);
     }
     
-    protected void loadTaskList(TaskList tasks) {
+    public void loadTaskList(TaskList tasks) {
         System.out.println("Here is your current tasklist:");
         if (tasks.totalNumberOfTasks() == 0) {
             System.out.print("List is empty :(");
@@ -57,20 +61,21 @@ public class Ui {
         }
     }
     
-    protected String showInvalidUserCommand(String userCommand) {
+    public String showInvalidUserCommand(String userCommand) {
         return "Sorry but I don't understand what '" + userCommand + "' means :(";
     }
     
-    protected void showAddedNewTaskMessage(Task newTask, TaskList tasks) {
+    public void showAddedNewTaskMessage(Task newTask, TaskList tasks) {
         System.out.println(DIVIDER);
         System.out.println("Noted! I have added the following task to your list:");
         System.out.println(newTask);
         System.out.println("You now have " + tasks.totalNumberOfTasks() + " task(s) in your list");
+        showSuccessfullySavedMessage();
         System.out.println(USER);
 
     }
 
-    protected void showDeleteTaskMessage(Task deletedTask, TaskList tasks) {
+    public void showDeleteTaskMessage(Task deletedTask, TaskList tasks) {
         System.out.println(DIVIDER);
         
         // Bob's response
@@ -81,7 +86,7 @@ public class Ui {
 
     }
     
-    protected void showMarkDoneMessage(Task doneTask) {
+    public void showMarkDoneMessage(Task doneTask) {
         System.out.println(DIVIDER);
 
         // Bob's response
@@ -92,20 +97,20 @@ public class Ui {
 
     }
     
-    protected void showAlreadyMarkDoneMessage(Task doneTask) {
+    public void showAlreadyMarkDoneMessage(Task doneTask) {
         System.out.println(DIVIDER);
         System.out.println("OOPS. It seems like this task has already been completed:");
         System.out.println(doneTask);
         System.out.println(USER);
     }
     
-    protected void showErrorMessage(Exception e) {
+    public void showErrorMessage(Exception e) {
         System.out.println(DIVIDER);
         System.out.println(e.getMessage());
         System.out.println(USER);
     }
     
-    protected void showSuccessfullySavedMessage() {
+    public void showSuccessfullySavedMessage() {
         System.out.println(SKIPLINE + "Successfully saved tasklist to file :)");
     }
 }
