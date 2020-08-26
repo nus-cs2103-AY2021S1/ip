@@ -13,7 +13,7 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Class that simulates the add command of the user
+ * Class that simulates the add command of the user.
  * Mainly: event, deadline, todo.
  */
 
@@ -23,7 +23,7 @@ public class AddCommand extends Command {
 
     
     /**
-     * Creates an AddCommand object
+     * Creates an AddCommand object.
      * 
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command

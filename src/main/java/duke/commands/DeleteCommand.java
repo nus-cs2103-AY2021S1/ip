@@ -8,7 +8,7 @@ import duke.ui.Ui;
 import static java.lang.Integer.parseInt;
 
 /**
- * Class the simulates the delete comannd.
+ * Class the simulates the delete command.
  */
 
 public class DeleteCommand extends Command {
@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
     private static final String INVALID_INPUT = "Invalid input for delete";
     private static final String DELETE_NOTIFICATION = "Noted. I've removed this duke.task:";
     /**
-     * Creates a DeleteCommand object
+     * Creates a DeleteCommand object.
      * 
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command

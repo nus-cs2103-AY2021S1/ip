@@ -84,7 +84,6 @@ public class Storage {
      * 
      * @param tasks Object contains the task list.
      */
-
     public void record(TaskList tasks) {
         String dir = System.getProperty("user.dir");
         Path path = Paths.get(dir, "duke.Duke");

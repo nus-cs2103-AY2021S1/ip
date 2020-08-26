@@ -20,7 +20,7 @@ public class Command {
 
     
     /**
-     * Creates a Command object
+     * Creates a Command object.
      * 
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command
@@ -71,8 +71,9 @@ public class Command {
      * @param ui Object that deals with interactions with the user.
      * @param storage Object that deals with loading tasks from the file and saving tasks in the file
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) 
-            throws InvalidFormatDeadlineException, InvalidFormatEventException, InvalidFormatDateException, 
-            UnknownCommandException { return; }
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatDeadlineException, 
+            InvalidFormatEventException, InvalidFormatDateException, UnknownCommandException { 
+        return; 
+    }
     
 }

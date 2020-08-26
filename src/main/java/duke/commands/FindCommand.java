@@ -11,7 +11,14 @@ import duke.ui.Ui;
 public class FindCommand extends Command {
     
     private static final String FIND_SUCCESS = "Here are the matching tasks in your list:";
-    
+
+    /**
+     * Creates a FindCommand object.
+     *
+     * @param inputArr Array of length 2 that contains information of the user input
+     *                 At index 0, contains the type of command
+     *                 At index 1, contains the message of the command.
+     */
     public FindCommand(String[] inputArr) {
         super(inputArr);
     }
@@ -22,7 +29,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Find and displays the list of task based on the user's input
+     * Find and displays the list of task based on the user's input.
      * 
      * @param tasks Object that contains the list of tasks.
      * @param keyword The task that the user is looking for.

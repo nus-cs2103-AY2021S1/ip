@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
     
     
     /**
-     * Creates a DoneCommand object
+     * Creates a DoneCommand object.
      * 
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command

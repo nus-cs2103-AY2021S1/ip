@@ -33,13 +33,13 @@ public class ParserTest {
 
         @Test
         @DisplayName("Testing the InvalidFormatDateException in the method FormatDateTime")
-        public void testInvalidFormatDateException() {
+        public void write_InvalidFormatDate_Exception() {
             assertThrows(InvalidFormatDateException.class, () -> p.formatDateTime("2020/20/13 1600"));
         }
 
         @Test
         @DisplayName("Testing the DateTimeException in the method FormatDateTime (receives InvalidFormatDateException)")
-        public void testDateTimeException() {
+        public void write_InvalidDateTime_Exception() {
             assertThrows(InvalidFormatDateException.class, () -> p.formatDateTime("2020-30-30 1600"));
         }
         
@@ -57,37 +57,37 @@ public class ParserTest {
 
         @Test
         @DisplayName("Testing the InvalidFormatByeException in the method Parse")
-        public void testInvalidFormatByeException() {
+        public void write_InvalidFormatBye_Exception() {
             assertThrows(InvalidFormatByeException.class, () -> p.parse("bye 2"));
         }
 
         @Test
         @DisplayName("Testing the InvalidFormatListException in the method Parse")
-        public void testInvalidFormatListException() {
+        public void write_InvalidFormatList_Exception() {
             assertThrows(InvalidFormatListException.class, () -> p.parse("list 2"));
         }
 
         @Test
         @DisplayName("Testing the InvalidFormatDoneException in the method Parse")
-        public void testInvalidFormatDoneException() {
+        public void write_InvalidFormatDone_Exception() {
             assertThrows(InvalidFormatDoneException.class, () -> p.parse("done here"));
         }
 
         @Test
         @DisplayName("Testing the EmptyTextException in the method Parse")
-        public void testEmptyTextException() {
+        public void write_EmptyText_Exception() {
             assertThrows(EmptyTextException.class, () -> p.parse("todo"));
         }
 
         @Test
         @DisplayName("Testing the InvalidFormatDeleteException in the method Parse")
-        public void testInvalidFormatDeleteException() {
+        public void write_InvalidFormatDelete_Exception() {
             assertThrows(InvalidFormatDeleteException.class, () -> p.parse("delete"));
         }
 
         @Test
         @DisplayName("Testing the InvalidFormatDeleteException in the method Parse")
-        public void testInvalidFormatFindException() {
+        public void write_InvalidFormatFind_Exception() {
             assertThrows(InvalidFormatFindException.class, () -> p.parse("find hello world"));
         }
         

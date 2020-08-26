@@ -10,11 +10,14 @@
 ../src/main/java/duke/commands/ByeCommand.java
 ../src/main/java/duke/commands/DeleteCommand.java
 ../src/main/java/duke/commands/ListCommand.java
+../src/main/java/duke/commands/UnknownCommand.java
 ../src/main/java/duke/commands/Command.java
 ../src/main/java/duke/commands/AddCommand.java
+../src/main/java/duke/commands/FindCommand.java
 ../src/main/java/duke/commands/DoneCommand.java
 ../src/main/java/duke/Duke.java
 ../src/main/java/duke/exception/InvalidFormatListException.java
+../src/main/java/duke/exception/InvalidFormatFindException.java
 ../src/main/java/duke/exception/InvalidFormatByeException.java
 ../src/main/java/duke/exception/EmptyTextException.java
 ../src/main/java/duke/exception/InvalidFormatDoneException.java

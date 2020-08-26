@@ -11,7 +11,7 @@ import duke.ui.Ui;
 public class ByeCommand extends Command {
 
     /**
-     * Creates an ByeCommand object
+     * Creates an ByeCommand object.
      * 
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command

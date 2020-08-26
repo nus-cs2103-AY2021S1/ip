@@ -40,7 +40,6 @@ public class Task {
      * @return Byte encoding strings of the symbols tick or X.
      */
     private String getStatusIcon() {
-        //return tick or X symbols
         return (isDone ? "\u2713" : "\u2718");
     }
     //@@author
@@ -68,7 +67,7 @@ public class Task {
     }
 
     /**
-     * If a task is completed, return 1 else 0
+     * If a task is completed, return 1 else 0.
      * 
      * @return An integer coded for the boolean status of the task.
      */
@@ -76,10 +75,14 @@ public class Task {
         return isDone ? 1 : 0;
     }
 
+    /**
+     * Retrieves the details of the task.
+     * 
+     * @return A string representing the details of the task.
+     */
     public String getDescription() {
         return description;
     }
-
     
     @Override
     public String toString() {

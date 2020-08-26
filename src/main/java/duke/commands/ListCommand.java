@@ -5,7 +5,7 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Class that simulates the add command of the user
+ * Class that simulates the add command of the user.
  */
 
 public class ListCommand extends Command {
@@ -15,7 +15,7 @@ public class ListCommand extends Command {
 
 
     /**
-     * Creates an ListCommand object
+     * Creates an ListCommand object.
      * 
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command
@@ -30,7 +30,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Printing out all the task in the list
+     * Printing out all the task in the list.
      * 
      * @param tasks Object contains the task list.
      * @param ui Object that deals with interactions with the user.
