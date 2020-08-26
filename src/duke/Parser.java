@@ -16,7 +16,7 @@ public class Parser {
      */
     public static void processCommand(String command, TaskList tl, Ui ui) throws Exception {
         int indexOfSlash = command.indexOf('/');
-        ArrayList<Task> arr = tl.arr;
+        ArrayList<Task> arr = tl.getArr();
         if (command.equals("bye")) {
             ui.respondToBye();
         } else if (command.length() >= 4) {
