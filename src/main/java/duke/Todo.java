@@ -4,7 +4,9 @@ public class Todo extends Task {
 
     public static String getDescription(String s){
         int start = 0;
-        while(!s.substring(start, start + 4).equals("todo")) start++;
+        while(!s.substring(start, start + 4).equals("todo")){
+            start++;
+        }
         return s.substring(start + 5);
     }
 

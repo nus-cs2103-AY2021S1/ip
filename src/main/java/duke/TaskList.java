@@ -18,8 +18,7 @@ public class TaskList {
     public TaskList(BufferedReader reader) throws IOException {
         if(reader == null){
             list = new ArrayList<>();
-        }
-        else{
+        } else{
             list = readTextFile2List(reader);
         }
     }
@@ -31,11 +30,9 @@ public class TaskList {
             String[] part = line.split("\\|");
             if(part[0].equals("T")){
                 list.add(new Todo(part[2], part[1].equals("1")));
-            }
-            else if(part[0].equals("D")){
+            } else if(part[0].equals("D")){
                 list.add(Deadline.of(part[2], part[3], part[1].equals("1")));
-            }
-            else{
+            } else{
                 list.add(Event.of(part[2], part[3], part[1].equals("1")));
             }
         }
@@ -56,8 +53,7 @@ public class TaskList {
         if(index < list.size()){
             list.get(index).markAsDone();
             return list.get(index);
-        }
-        else{
+        } else{
             return null;
         }
     }
@@ -69,8 +65,7 @@ public class TaskList {
     public Task delete(int index){
         if(index < list.size()){
             return list.remove(index);
-        }
-        else{
+        } else{
             return null;
         }
     }

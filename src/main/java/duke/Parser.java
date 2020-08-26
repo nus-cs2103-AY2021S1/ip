@@ -21,20 +21,20 @@ public class Parser {
             return CONTINUE;
         }
 
-        while(command[ptr].equals("")) ptr++;
+        while(command[ptr].equals("")){
+            ptr++;
+        }
 
         if(command[ptr].equals("bye")){
             ui.showByeMessage();
             return BYE;
-        }
-        else if(command[ptr].equals("list")){
+        } else if(command[ptr].equals("list")){
             System.out.println("____________________________________________________________");
             System.out.println("Here are the tasks in your list:");
             list.printList();
             System.out.println("____________________________________________________________");
             return CONTINUE;
-        }
-        else if(command[ptr].equals("done")){
+        } else if(command[ptr].equals("done")){
             try{
                 int taskNumber = Integer.parseInt(command[ptr + 1]);
                 System.out.println("____________________________________________________________");
@@ -51,8 +51,7 @@ public class Parser {
                 ui.wrongFormatAfterDone();
             }
             return CONTINUE;
-        }
-        else if(command[ptr].equals("delete")){
+        } else if(command[ptr].equals("delete")){
             try{
                 int taskNumber = Integer.parseInt(command[ptr + 1]);
                 System.out.println("____________________________________________________________");
@@ -64,13 +63,11 @@ public class Parser {
                     ui.showDeleteMessage(t, list);
                 }
                 System.out.println("____________________________________________________________");
-            }
-            catch (Exception e){
+            } catch (Exception e){
                 ui.wrongFormatAfterDelete();
             }
             return CONTINUE;
-        }
-        else if(command[ptr].equals("todo")){
+        } else if(command[ptr].equals("todo")){
             Todo newTodo = Todo.of(inputCommand);
             if(newTodo == null){
                 ui.descriptionEmpty();
@@ -79,8 +76,7 @@ public class Parser {
             list.add(newTodo);
             ui.MessageAfterAdd(newTodo, TODO, list.getSize());
             return CONTINUE;
-        }
-        else if(command[ptr].equals("deadline")){
+        } else if(command[ptr].equals("deadline")){
             Deadline deadline = Deadline.of(inputCommand);
             if(deadline == null){
                 ui.wrongDeadlineFormat();
@@ -96,8 +92,7 @@ public class Parser {
             }
             ui.MessageAfterAdd(deadline, DEADLINE, list.getSize());
             return CONTINUE;
-        }
-        else if(command[ptr].equals("event")){
+        } else if(command[ptr].equals("event")){
             Event event = Event.of(inputCommand);
             if(event == null){
                 ui.wrongEventFormat();
@@ -113,8 +108,7 @@ public class Parser {
             }
             ui.MessageAfterAdd(event, EVENT, list.getSize());
             return CONTINUE;
-        }
-        else{
+        } else{
             ui.noSuchCommand();
             return CONTINUE;
         }
