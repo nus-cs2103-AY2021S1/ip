@@ -7,6 +7,17 @@ public class Event extends Task {
     }
 
     @Override
+    public String writeMessage() {
+        String done = "";
+        if (this.done) {
+            done = "✓";
+        } else {
+            done = "✗";
+        }
+        return String.format("E | %s | %s", done, this.task, this.at);
+    }
+
+    @Override
     public String toString() {
         String[] ats = at.split(" ");
         String str = " (";

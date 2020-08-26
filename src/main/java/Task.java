@@ -6,6 +6,10 @@ public class Task {
         this.task = task;
         this.done = false;
     }
+    
+    public String writeMessage() {
+        return "";
+    }
 
     public void markDone() {
         this.done = true;

@@ -5,6 +5,17 @@ public class Deadline extends Task {
         super(task);
         this.by = by;
     }
+    
+    @Override
+    public String writeMessage() {
+        String done = "";
+        if (this.done) {
+            done = "✓";
+        } else {
+            done = "✗";
+        }
+        return String.format("D | %s | %s | %s", done, this.task, this.by);
+    }
 
     @Override
     public String toString() {
