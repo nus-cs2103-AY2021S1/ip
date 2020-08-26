@@ -13,12 +13,11 @@ import java.io.IOException;
 public class Duke {
     // file dir
     private static final String DIR = "data";
-    
+    private final Ui ui;
     private Storage storage;
     private TaskList tasks;
-    private final Ui ui;
     private Parser parser;
-    
+
     public Duke(String filePath) {
         ui = new Ui();
         try {
@@ -33,7 +32,11 @@ public class Duke {
             System.out.println("----- Something went wrong, please try again later");
         }
     }
-    
+
+    public static void main(String[] args) {
+        new Duke("data/serina.txt").run();
+    }
+
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -51,9 +54,5 @@ public class Duke {
                 ui.showError(ex.getMessage());
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/serina.txt").run();
     }
 }

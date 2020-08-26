@@ -4,31 +4,31 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Storage {
     private final File file;
-    
+
     public Storage(String filePath, String directory) throws IOException {
         File dir = new File(directory);
         file = new File(filePath);
-        
+
         // make the directory if doesn't exist
         if (!dir.isDirectory()) {
             dir.mkdir();
         }
-        
+
         // create the file if it doesn't exist
         if (!file.exists()) {
             file.createNewFile();
         }
     }
-    
+
     public List<String> loadData() throws FileNotFoundException {
         List<String> lst = new ArrayList<>();
         Scanner s = new Scanner(file);
@@ -38,20 +38,20 @@ public class Storage {
         }
         return lst;
     }
-    
+
     public void addLine(String line) throws IOException {
         FileWriter fw = new FileWriter(file, true);
         fw.write(line + "\n");
         fw.close();
     }
-    
+
     public void deleteLine(int lineNum) throws IOException {
         Path path = Path.of(file.getPath());
         List<String> fileContent = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
         fileContent.remove(lineNum);
         Files.write(path, fileContent, StandardCharsets.UTF_8);
     }
-    
+
     public void modifyLine(int lineNum) throws IOException {
         Path path = Path.of(file.getPath());
         List<String> fileContent = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));

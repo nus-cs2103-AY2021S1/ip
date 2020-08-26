@@ -8,8 +8,8 @@ public class EventTask extends Task {
 
     public EventTask(String description, boolean isDone, String eventTime) {
         super(description, isDone);
-        String[] splitEventTime= eventTime.split(" ");
-        String inputEventTime = splitEventTime[0] + "T" + splitEventTime[1].substring(0,2) + ":" + splitEventTime[1].substring(2,4);
+        String[] splitEventTime = eventTime.split(" ");
+        String inputEventTime = splitEventTime[0] + "T" + splitEventTime[1].substring(0, 2) + ":" + splitEventTime[1].substring(2, 4);
         this.eventTime = LocalDateTime.parse(inputEventTime);
     }
 
