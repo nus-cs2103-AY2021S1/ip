@@ -13,6 +13,7 @@ import duke.exec.Exit;
 import duke.exec.Delete;
 import duke.exec.Done;
 import duke.exec.Listing;
+import duke.exec.Find;
 
 import duke.task.Task;
 import duke.task.Todo;
@@ -29,6 +30,7 @@ public class Parser {
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
     private static final String DELETE_COMMAND = "delete";
+    private static final String FIND_COMMAND = "find";
 
     // DateTime format constant
     private static final DateTimeFormatter DATE_TIME_PARSE_FORMAT
@@ -106,6 +108,12 @@ public class Parser {
             }
             index = Integer.parseInt(remaining) - 1;
             return new Delete(index);
+        case FIND_COMMAND:
+            if (remaining == null) {
+                throw DukeException.missingParameters();
+            }
+            desc = remaining;
+            return new Find(desc);
         case EXIT_COMMAND:
             if (remaining != null) {
                 throw DukeException.unspecificCommand();
