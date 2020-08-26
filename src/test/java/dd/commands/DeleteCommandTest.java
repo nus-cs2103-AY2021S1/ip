@@ -17,18 +17,24 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class DeleteCommandTest {
 
-    // implementation of code from https://www.baeldung.com/java-testing-system-out-println
+    //@@author g-erm-reused
+    //Reused from https://www.baeldung.com/java-testing-system-out-println
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
-    // implementation of code from https://www.baeldung.com/java-testing-system-out-println
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
     }
 
+    @AfterEach
+    public void tearDown() {
+        System.setOut(standardOut);
+    }
+    //@@author
+
     @Test
-    public void deleteCommand_success() throws DukeException {
+    public void execute_success() throws DukeException {
         Todo delTask = new Todo("borrow book");
 
         String res = "Alright! I've deleted the task:\n  " + delTask
@@ -47,7 +53,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void deleteCommand_invalidTaskNumber_exceptionThrown() {
+    public void execute_invalidTaskNumber_exceptionThrown() {
         String res = "hmm.. I don't think thats a valid task, try again?";
 
         TaskList tasks = new TaskList();
@@ -63,11 +69,5 @@ public class DeleteCommandTest {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),
                     e.getMessage().replaceAll("\\p{Cntrl}", " "));
         }
-    }
-
-    // implementation of code from https://www.baeldung.com/java-testing-system-out-println
-    @AfterEach
-    public void tearDown() {
-        System.setOut(standardOut);
     }
 }

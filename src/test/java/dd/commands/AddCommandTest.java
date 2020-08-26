@@ -20,18 +20,24 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class AddCommandTest {
 
-    // implementation of code from https://www.baeldung.com/java-testing-system-out-println
+    //@@author g-erm-reused
+    //Reused from https://www.baeldung.com/java-testing-system-out-println
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
-    // implementation of code from https://www.baeldung.com/java-testing-system-out-println
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
     }
 
+    @AfterEach
+    public void tearDown() {
+        System.setOut(standardOut);
+    }
+    //@@author
+
     @Test
-    public void addCommand_todo_success() throws DukeException {
+    public void addTodo_success() throws DukeException {
         String res = "Ok, To-do added:\n  " + new Todo("borrow book")
                 + "\n " + "You now have 1 task(s) in your list!\n ";
 
@@ -46,7 +52,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void addCommand_deadline_success() throws DukeException {
+    public void addDeadline_success() throws DukeException {
         String res = "Ok, Deadline added:\n  " + new Deadline("return book", "31 Dec 2020")
                 + "\n " + "You now have 1 task(s) in your list!\n ";
 
@@ -61,7 +67,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void addCommand_deadline_invalidDeadline_exceptionThrown() {
+    public void addDeadline_invalidDeadline_exceptionThrown() {
         String res = "Due date not detected, try again!\n"
                 + "Please input deadline as 'deadline (title) /by (date)'\n"
                 + "Example: deadline return book /by 31-12-2020";
@@ -82,7 +88,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void addCommand_deadline_invalidDate_exceptionThrown() {
+    public void addDeadline_invalidDate_exceptionThrown() {
         String res = "I don't understand :( Please input date as DD-MM-YYYY or DD-MM-YYYY HHmm\n"
                 + "Example: 31-12-2020 or 31-12-2020 2359";
 
@@ -102,7 +108,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void addCommand_event_success() throws DukeException {
+    public void addEvent_success() throws DukeException {
         String res = "Ok, Event added:\n  " + new Event("meeting", "31 Dec 2020 02:00 PM")
                 + "\n " + "You now have 1 task(s) in your list!\n ";
 
@@ -117,7 +123,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void addCommand_event_invalidEvent_exceptionThrown() {
+    public void addEvent_invalidEvent_exceptionThrown() {
         String res = "Event date not detected, try again!\n"
                 + "Please input event as 'event (title) /at (date)'\n"
                 + "Example: event group meeting /at 31-12-2020";
@@ -138,7 +144,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void addCommand_event_invalidDate_exceptionThrown() {
+    public void addEvent_invalidDate_exceptionThrown() {
         String res = "I don't understand :( Please input date as DD-MM-YYYY or DD-MM-YYYY HHmm\n"
                 + "Example: 31-12-2020 or 31-12-2020 2359";
 
@@ -155,11 +161,5 @@ public class AddCommandTest {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),
                     e.getMessage().replaceAll("\\p{Cntrl}", " "));
         }
-    }
-
-    // implementation of code from https://www.baeldung.com/java-testing-system-out-println
-    @AfterEach
-    public void tearDown() {
-        System.setOut(standardOut);
     }
 }

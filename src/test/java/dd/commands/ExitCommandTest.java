@@ -15,18 +15,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExitCommandTest {
 
-    // implementation of code from https://www.baeldung.com/java-testing-system-out-println
+    //@@author g-erm-reused
+    //Reused from https://www.baeldung.com/java-testing-system-out-println
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
-    // implementation of code from https://www.baeldung.com/java-testing-system-out-println
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
     }
 
+    @AfterEach
+    public void tearDown() {
+        System.setOut(standardOut);
+    }
+    //@@author
+
     @Test
-    public void exitCommand_noFile() throws DukeException {
+    public void exitCommand_success() throws DukeException {
         String res = "You're leaving? Bye :( Come back soon!"
                 + "\n_________________________________________\n "
                 + "Error writing to file.\n ";
@@ -39,11 +45,5 @@ public class ExitCommandTest {
 
         assertEquals(res.replaceAll("\\p{Cntrl}", " "),
                 outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
-    }
-
-    // implementation of code from https://www.baeldung.com/java-testing-system-out-println
-    @AfterEach
-    public void tearDown() {
-        System.setOut(standardOut);
     }
 }
