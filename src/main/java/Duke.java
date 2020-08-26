@@ -6,7 +6,7 @@ import java.util.ArrayList;
  */
 public class Duke {
 
-    public static String lineDivider = "------------------------------------------";
+    public static String lineDivider = "--------------------------------------------";
 
     /**
      * Echos the message that the user put.
