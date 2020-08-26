@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.exception.InvalidTaskException;
-
 import java.time.LocalDate;
 
 public abstract class Task {

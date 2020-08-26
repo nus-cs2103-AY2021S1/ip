@@ -2,7 +2,7 @@ package duke;
 
 import duke.command.CommandExecutor;
 import duke.exception.DukeException;
-import duke.task.TaskList;
+import duke.task.TaskArrayList;
 import duke.util.Storage;
 import duke.util.Ui;
 
@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Duke {
-    private final TaskList TASK_LIST = new TaskList();
+    private final TaskArrayList TASK_LIST = new TaskArrayList();
     private final Scanner SC = new Scanner(System.in);
     private final CommandExecutor EXE = new CommandExecutor();
     private final Ui UI = new Ui();
