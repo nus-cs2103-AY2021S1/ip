@@ -68,6 +68,18 @@ public class Ui {
         System.out.println(wrapMessage(message));
     }
 
+    public void showFind(TaskList tasks) {
+        String message = "Here are the matching tasks in your list:\n";
+        for (int i = 0; i < tasks.getSize(); i++) {
+            Task task = tasks.getTask(i);
+            message += (i + 1)
+                    + ". "
+                    + task
+                    +"\n";
+        }
+        System.out.println(wrapMessage(message));
+    }
+
     public void showError(String message) {
         System.out.println(wrapMessage(message));
     }
