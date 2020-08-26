@@ -1,4 +1,8 @@
+package duke.task; 
+
 import java.util.List;
+import duke.DukeException;
+import duke.util.Parser;
 
 public class TaskList {
     private List<Task> tasks;

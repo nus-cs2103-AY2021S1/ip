@@ -1,9 +1,9 @@
-import java.text.ParseException;
+package duke; 
+
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Date;
-import java.text.SimpleDateFormat;
+import duke.task.TaskList; 
+import duke.storage.Storage; 
+import duke.ui.Ui;
 
 public class Duke {
     private TaskList tasks;

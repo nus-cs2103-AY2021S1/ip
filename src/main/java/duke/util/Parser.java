@@ -1,6 +1,9 @@
+package duke.util;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import duke.DukeException;
 
 public class Parser {
     public static Date parseDate(String strDate) throws DukeException{
