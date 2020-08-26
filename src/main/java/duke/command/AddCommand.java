@@ -3,15 +3,30 @@ package duke.command;
 import duke.*;
 import duke.task.*;
 
+/**
+ * Class representing an add task command.
+ */
 public class AddCommand extends Command{
     CommandType taskType;
     String taskContent;
-    
+
+    /**
+     * Creates a new AddCommand.
+     * @param taskType Type of the task to be created.
+     * @param taskContent Contents of the task.
+     */
     public AddCommand(CommandType taskType, String taskContent) {
         this.taskType = taskType;
         this.taskContent = taskContent;
     }
 
+    /**
+     * Executes the command and creates the respective tasks.
+     * @param tasks List of tasks.
+     * @param ui Ui object.
+     * @param storage Storage object.
+     * @throws DukeException if the tasks fails to create.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (taskContent == null) {
