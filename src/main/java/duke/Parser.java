@@ -8,17 +8,30 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 import java.time.DateTimeException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
+/**
+ * Parser deals with making sense of the user command.
+ */
 public class Parser {
     public String commandLine;
 
+    /**
+     * Parser constructor.
+     * @param commandLine The string of text given by the user.
+     */
     Parser(String commandLine) {
         this.commandLine = commandLine;
     }
 
+    /**
+     * The main method that analyse the user input and give an
+     * appropriate command.
+     * @param commandLine The user input.
+     * @return The command based on the user input. The 5 commands are AddCommand, ListCommand,
+     * DeleteCommand, DoneCommand and ExitCommand.
+     * @throws DukeException Throws exceptions that are all sub class of the DukeException.
+     */
     public static Command parse(String commandLine) throws DukeException {
         try {
             if (isList(commandLine)) {
@@ -43,38 +56,73 @@ public class Parser {
         }
     }
 
+    /**
+     * Convert a string into a LocalDateTime object.
+     * @param commandLine This is part of the user input.
+     * @return A LocalDateTime object, based on the user input.
+     */
     static LocalDateTime parseDateTime(String commandLine) {
         String[] dateNumbers = commandLine.split("-");
+
         //Represents 'dd hh:mm'
         String[] dayAndTime = dateNumbers[2].split(" ");
+
         //Represents 'yyyy'
         int year = Integer.parseInt(dateNumbers[0]);
+
         //Represents 'MM'
         Integer month = Integer.parseInt(dateNumbers[1]);
+
         //Represents 'dd'
         Integer day = Integer.parseInt(dayAndTime[0]);
 
         //Represents 'hh:mm'
         String time = dayAndTime[1];
         String[] timeNumbers = time.split(":");
+
+        //Represents 'hh'
         Integer hour = Integer.parseInt(timeNumbers[0]);
+
+        //Represents 'mm'
         Integer minutes = Integer.parseInt(timeNumbers[1]);
 
         return LocalDateTime.of(year, month, day, hour, minutes);
     }
 
+    /**
+     * Checks if the input is list.
+     * @param string The user input.
+     * @return Returns a boolean.
+     */
     static boolean isList(String string) {
         return string.equals("list");
     }
 
+    /**
+     * Creates the ListCommand.
+     * @return ListCommand
+     */
     private static Command parseListCommand() {
         return new ListCommand();
     }
 
+    /**
+     * Checks if the input starts with "todo"
+     * @param string The user input.
+     * @return Returns a boolean.
+     */
     static boolean isToDo(String string) {
         return string.startsWith("todo");
     }
 
+    /**
+     * Creates a TaskToDo object and use it as a parameter
+     * to create an AddCommand
+     * @param commandLine The user input.
+     * @return AddCommand
+     * @throws DukeEmptyToDoException Checks if the input includes
+     * a description.
+     */
     private static Command parseAddCommandTodo(String commandLine) throws DukeEmptyToDoException {
         if (commandLine.equals("todo")) {
             throw new DukeEmptyToDoException();
@@ -83,15 +131,35 @@ public class Parser {
         return new AddCommand(task);
     }
 
-
+    /**
+     * Checks if the input starts with "deadline"
+     * @param string The user input.
+     * @return Returns a boolean.
+     */
     static boolean isDeadline(String string) {
         return string.startsWith("deadline");
     }
 
+    /**
+     * Checks if the input starts with "event"
+     * @param string The user input.
+     * @return Returns a boolean.
+     */
     static boolean isEvent(String string) {
         return string.startsWith("event");
     }
 
+    /**
+     * Creates a Deadline or Event object and use it as a parameter
+     * to create an AddCommand.
+     * @param commandLine
+     * @return AddCommand
+     * @throws DukeEmptyDeadlineException Checks if the input for deadline includes a description
+     * @throws DukeEmptyEventException Checks if the input for event includes a description
+     * @throws DukeDeadlineFormatException Checks if the deadline contains a date and time
+     * @throws DukeEventFormatException Checks if event contains a date and time.
+     * @throws DukeDateTimeParseException Checks if the data and time is correct.
+     */
     private static Command parseAddCommandWithDate(String commandLine) throws DukeEmptyDeadlineException,
             DukeEmptyEventException, DukeDeadlineFormatException,
             DukeEventFormatException, DukeDateTimeParseException {
@@ -103,11 +171,13 @@ public class Parser {
 
         String[] arrOfString;
         if (isDeadline(commandLine)) {
+            // Removes the command key 'deadline' and split between description and time and date.
             arrOfString = (commandLine.substring(9)).split("/by ", 2);
             if (arrOfString.length == 1) {
                 throw new DukeDeadlineFormatException();
             }
         } else {
+            // Removes the command key 'event' and split between description and time and date.
             arrOfString = (commandLine.substring(6)).split("/at ", 2);
             if (arrOfString.length == 1) {
                 throw new DukeEventFormatException();
@@ -118,8 +188,10 @@ public class Parser {
             throw new DukeDateTimeParseException();
         }
 
-        // Format of LocalDateTime is "yyyy-MM-dd HH:mm"
+        // Removes extra space at the end
         String description = arrOfString[0].substring(0, arrOfString[0].length() - 1);
+
+        // Format of LocalDateTime is "yyyy-MM-dd HH:mm"
         LocalDateTime dateAndTime = parseDateTime(arrOfString[1]);
         Task task;
         if (isDeadline(commandLine)) {
@@ -130,17 +202,32 @@ public class Parser {
         return new AddCommand(task);
     }
 
-
+    /**
+     * Checks if the input starts with "done"
+     * @param string The user input.
+     * @return Returns a boolean.
+     */
     static boolean isDone(String string) {
         return string.startsWith("done");
     }
 
+    /**
+     * Checks if the input starts with "delete"
+     * @param string The user input.
+     * @return Returns a boolean.
+     */
     static boolean isDelete(String string) {
         return string.startsWith("delete");
     }
 
+    /**
+     * Creates a Done or Delete Command.
+     * @param commandLine The user input.
+     * @return Done or Delete Command.
+     */
     private static Command parseDoneDeleteCommand(String commandLine) {
         String[] tokens = commandLine.split(" ");
+        // tokens[1] is the index
         int num = Integer.parseInt(tokens[1]);
 
         if (isDone(commandLine)) {
