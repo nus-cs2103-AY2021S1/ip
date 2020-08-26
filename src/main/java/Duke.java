@@ -40,6 +40,9 @@ public class Duke {
                 } else if (s.startsWith("todo") || s.startsWith("deadline") || s.startsWith("event")) {
                     Task t = tasklist.add(s);
                     s = ui.add(t, tasklist.getTotal());
+                } else if (s.startsWith("find")) {
+                    String keyword = parser.getKeyword(s);
+                    s = ui.find(keyword);
                 } else { // unknown input
                     throw new UnknownInputException();
                 }

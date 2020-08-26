@@ -50,23 +50,33 @@ public class Parser {
      * @throws IncompleteInputException If user input is incomplete.
      */
     public Task commandToTask(String s) throws IncompleteInputException {
+        String type;
+        String name;
+        String time;
         try {
-            String[] arr = s.split(" ");
-            String type = arr[0];
-            String name = arr[1];
-            String time;
+            if (s.contains("/")) { // event or deadline
+                String[] arr = s.split("/");
+                String[] typeAndName = arr[0].split(" ", 2);
+                type = typeAndName[0];
+                name = typeAndName[1];
+                time = arr[1].split(" ")[1];
 
-            if (type.equals("todo")) {
+                if (type.equals("deadline")) {
+                    return new Deadline(name, time);
+                } else {
+                    return new Event(name, time);
+                }
+            } else { // to-do
+                String[] arr = s.split(" ", 2);
+                name = arr[1];
                 return new Todo(name);
-            } else if (type.equals("deadline")) {
-                time = arr[3];
-                return new Deadline(name, time);
-            } else {
-                time = arr[3];
-                return new Event(name, time);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new IncompleteInputException();
         }
+    }
+
+    String getKeyword(String s) {
+        return s.split(" ")[1];
     }
 }
