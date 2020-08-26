@@ -13,8 +13,10 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo +
-                "People call me Duke the All-Known ," +
+                "People call me Duke the All-Knowing ," +
                 "ask me anything by typing a line.");
+
+        Save.read();
 
         Scanner sc = new Scanner(System.in);
         String input;
@@ -47,6 +49,7 @@ public class Duke {
                                         correctedInput = input.substring("todo ".length());
                                         byOrAt = new DateAndTime();
                                         Task.write(correctedInput, "todo", byOrAt);
+                                        Save.write(Task.taskStorage);
 
                                     } else {
                                         System.out.println(
@@ -72,6 +75,7 @@ public class Duke {
 
                                         correctedInput = input.substring("event ".length());
                                         Task.write(correctedInput, "event", byOrAt);
+                                        Save.write(Task.taskStorage);
 
                                     } else {
                                         System.out.println(new DukeException(
@@ -90,6 +94,8 @@ public class Duke {
                                         byOrAt = new DateAndTime(input.substring(input.indexOf("/") + "/by ".length()));
                                         correctedInput = input.substring("deadline ".length());
                                         Task.write(correctedInput, "deadline", byOrAt);
+                                        Save.write(Task.taskStorage);
+
                                     } else {
                                         System.out.println(
                                                 new DukeException(
@@ -123,6 +129,8 @@ public class Duke {
                                 Task done = Task.taskStorage.get(ref).markAsDone();
                                 Task.taskStorage.add(ref, done);
 
+                                Save.write(Task.taskStorage);
+
                                 System.out.println("Nice! I've marked this task as done:\n"
                                         + Task.taskStorage.get(ref));
 
@@ -134,10 +142,13 @@ public class Duke {
                             }
 
                         }else{
+
                             int ref = Integer.parseInt(Character.toString(
                                     input.charAt("delete 1".length() - 1))) - 1;
 
                             Task.delete(ref);
+                            Save.write(Task.taskStorage);
+
                         }
 
                     }
