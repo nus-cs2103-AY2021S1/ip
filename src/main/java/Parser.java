@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 /**
  * Parses input by the user and identifies the commands.
@@ -27,7 +28,20 @@ public class Parser {
             //Save the task list
         } else if (isTerminateCommand(currInput)) {
             return 4;
+        } else if (isFindCommand(currInput)) {
+            String keyword = currInput.trim().split(" ", 2)[1].trim();
+            UI.read(" Here are the matching tasks in your list:");
+            List<Task> tasks = TaskList.getList();
+            int j = 1;
+            for (int i = 0; i < tasks.size(); i++) {
+                if (tasks.get(i).toString().contains(keyword)) {
+                    UI.read("  " + j + ". " + tasks.get(i).toString());
+                    j++;
+                }
+            }
+            return 6;
         } else {
+            //Is a task command
             return 5;
         }
     }
@@ -165,8 +179,12 @@ public class Parser {
         }
     }
 
-    private static boolean isListCommand(String input) {
-        return input.equals("list");
+    public static boolean isListCommand(String input) {
+        return input.trim().equals("list");
+    }
+
+    public static boolean isFindCommand(String input) {
+        return input.trim().startsWith("find");
     }
 
     /**
@@ -175,7 +193,7 @@ public class Parser {
      * @return boolean True if command is equals to "bye", returns false otherwise.
      */
     public static boolean isTerminateCommand(String input) {
-        return input.equals("bye");
+        return input.trim().equals("bye");
     }
 
     private static LocalDate getDate(String string) throws InvalidCommandException {
