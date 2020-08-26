@@ -1,4 +1,6 @@
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,19 +14,29 @@ public class Duke {
                     + "╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═════╝ ╚═╝ ╚═════╝   ╚═╝\n";
     private static final String BYE = "bye";
     private static final String GOODBYE_MESSAGE = "Ok lor like that lor.";
+    private static final String SAVE_FILE_PATH =
+            System.getProperty("user.home") + File.separator + ".duke" + File.separator + "tasks.txt";
 
     private static final List<Task> TASKS = new ArrayList<>();
 
     public static void main(String[] args) {
-        System.out.println("Hi, I'm\n" + LOGO);
-        Duke.displayMessages("What do you need this time 😫");
 
         try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Hi, I'm\n" + LOGO);
+            if (Duke.hasSavedTasks()) {
+                TASKS.addAll(Duke.loadSavedTasks());
+                Duke.displayMessages(
+                        "Don't forget you already have " + TASKS.size() + " things to do.",
+                        "But okay.");
+            }
+            Duke.displayMessages("What do you need this time 😫");
+
             System.out.print("> ");
             while (scanner.hasNextLine()) {
                 String input = scanner.nextLine();
 
                 if (input.equalsIgnoreCase(BYE)) {
+                    Duke.saveTasks(TASKS);
                     break;
                 } else {
                     Duke.handleCommand(input);
@@ -33,7 +45,48 @@ public class Duke {
             }
 
             Duke.displayMessages(GOODBYE_MESSAGE);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    // TODO: 26/8/20 Add more relevant error for parsing
+    private static Collection<Task> loadSavedTasks() throws IOException {
+        List<Task> tasks = new ArrayList<>();
+        try (var br = new BufferedReader(new FileReader(SAVE_FILE_PATH))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                Task task = TaskParser.parse(line);
+                tasks.add(task);
+            }
+        }
+        return tasks;
+    }
+
+    private static void saveTasks(List<Task> tasks) throws IOException {
+        File saveFile = new File(SAVE_FILE_PATH);
+        if (!saveFile.exists()) {
+            boolean directoryCreated = saveFile.getParentFile().mkdirs();
+            if (!directoryCreated) {
+                throw new IOException("Unable to create parent directories to save file");
+            }
+            boolean saveFileCreated = saveFile.createNewFile();
+            if (!saveFileCreated) {
+                throw new IOException("Unable to create save file");
+            }
+        }
+
+        // Use PrintWriter wrapping BufferedWriter in FileWriter
+        try (var out = new PrintWriter(new BufferedWriter(new FileWriter(SAVE_FILE_PATH)))) {
+            for (Task task : tasks) {
+                out.println(task.toSaveString());
+            }
+        }
+    }
+
+    // TODO: 26/8/20 consider a more robust check
+    private static boolean hasSavedTasks() {
+        return new File(SAVE_FILE_PATH).exists();
     }
 
     private static void handleCommand(String input) {
