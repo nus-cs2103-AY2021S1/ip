@@ -25,14 +25,14 @@ public class TaskList {
 
     public Task addTask(TaskType type, String description, LocalDateTime dateTime) throws DukeException {
         switch (type) {
-            case TODO:
-                return addTodo(description);
-            case DEADLINE:
-                return addDeadline(description, dateTime);
-            case EVENT:
-                return addEvent(description, dateTime);
-            default:
-                return null;
+        case TODO:
+            return addTodo(description);
+        case DEADLINE:
+            return addDeadline(description, dateTime);
+        case EVENT:
+            return addEvent(description, dateTime);
+        default:
+            return null;
         }
     }
 

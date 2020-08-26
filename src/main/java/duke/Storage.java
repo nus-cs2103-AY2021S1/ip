@@ -50,20 +50,20 @@ public class Storage {
                     }
 
                     switch (type) {
-                        case "T":
-                            tasks.add(new Todo(description, isDone));
+                    case "T":
+                        tasks.add(new Todo(description, isDone));
 
-                            break;
-                        case "D":
-                            tasks.add(new Deadline(description, LocalDateTime.parse(params[3]), isDone));
+                        break;
+                    case "D":
+                        tasks.add(new Deadline(description, LocalDateTime.parse(params[3]), isDone));
 
-                            break;
-                        case "E":
-                            tasks.add(new Event(description, LocalDateTime.parse(params[3]), isDone));
+                        break;
+                    case "E":
+                        tasks.add(new Event(description, LocalDateTime.parse(params[3]), isDone));
 
-                            break;
-                        default:
-                            throw new DukeException();
+                        break;
+                    default:
+                        throw new DukeException();
                     }
                 }
             } catch (DukeException | IOException | ArrayIndexOutOfBoundsException | DateTimeParseException e) {

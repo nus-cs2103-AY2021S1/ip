@@ -72,62 +72,62 @@ public class Parser {
         String args = commands.length > 1 ? String.join(" ", Arrays.copyOfRange(commands, 1, commands.length)) : "";
 
         switch (command) {
-            case "bye":
-                if (!args.isBlank()) {
-                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
-                }
-
-                return new ExitCommand();
-            case "list":
-                if (!args.isBlank()) {
-                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
-                }
-
-                return new ListCommand();
-            case "due":
-                if (args.isBlank()) {
-                    throw new DukeException("Date required for the due command.");
-                }
-
-                return new DueCommand(parseDate(args));
-            case "done":
-                if (args.isBlank()) {
-                    throw new DukeException("Task number required for the done command.");
-                } else if (!args.chars().allMatch(Character::isDigit)) {
-                    throw new DukeException("Only positive integers allowed for the done command.");
-                }
-
-                return new DoneCommand(Integer.parseInt(args));
-            case "delete":
-                if (args.isBlank()) {
-                    throw new DukeException("Task number required for the delete command.");
-                } else if (!args.chars().allMatch(Character::isDigit)) {
-                    throw new DukeException("Only positive integers allowed for the delete command.");
-                }
-
-                return new DeleteCommand(Integer.parseInt(args));
-            case "todo":
-                return new AddCommand(TaskType.TODO, args);
-            case "deadline": {
-                String[] deadlineArgs = args.split("\\s/by\\s");
-                String description = deadlineArgs[0];
-                String by = deadlineArgs.length > 1
-                        ? String.join(" ", Arrays.copyOfRange(deadlineArgs, 1, deadlineArgs.length))
-                        : "";
-
-                return new AddCommand(TaskType.DEADLINE, description, parseDateTime(by));
-            }
-            case "event": {
-                String[] eventArgs = args.split("\\s/at\\s");
-                String description = eventArgs[0];
-                String at = eventArgs.length > 1
-                        ? String.join(" ", Arrays.copyOfRange(eventArgs, 1, eventArgs.length))
-                        : "";
-
-                return new AddCommand(TaskType.EVENT, description, parseDateTime(at));
-            }
-            default:
+        case "bye":
+            if (!args.isBlank()) {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            }
+
+            return new ExitCommand();
+        case "list":
+            if (!args.isBlank()) {
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            }
+
+            return new ListCommand();
+        case "due":
+            if (args.isBlank()) {
+                throw new DukeException("Date required for the due command.");
+            }
+
+            return new DueCommand(parseDate(args));
+        case "done":
+            if (args.isBlank()) {
+                throw new DukeException("Task number required for the done command.");
+            } else if (!args.chars().allMatch(Character::isDigit)) {
+                throw new DukeException("Only positive integers allowed for the done command.");
+            }
+
+            return new DoneCommand(Integer.parseInt(args));
+        case "delete":
+            if (args.isBlank()) {
+                throw new DukeException("Task number required for the delete command.");
+            } else if (!args.chars().allMatch(Character::isDigit)) {
+                throw new DukeException("Only positive integers allowed for the delete command.");
+            }
+
+            return new DeleteCommand(Integer.parseInt(args));
+        case "todo":
+            return new AddCommand(TaskType.TODO, args);
+        case "deadline": {
+            String[] deadlineArgs = args.split("\\s/by\\s");
+            String description = deadlineArgs[0];
+            String by = deadlineArgs.length > 1
+                    ? String.join(" ", Arrays.copyOfRange(deadlineArgs, 1, deadlineArgs.length))
+                    : "";
+
+            return new AddCommand(TaskType.DEADLINE, description, parseDateTime(by));
+        }
+        case "event": {
+            String[] eventArgs = args.split("\\s/at\\s");
+            String description = eventArgs[0];
+            String at = eventArgs.length > 1
+                    ? String.join(" ", Arrays.copyOfRange(eventArgs, 1, eventArgs.length))
+                    : "";
+
+            return new AddCommand(TaskType.EVENT, description, parseDateTime(at));
+        }
+        default:
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
 }
