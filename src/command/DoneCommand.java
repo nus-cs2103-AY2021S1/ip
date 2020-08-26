@@ -14,8 +14,6 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(String str) throws InvalidIndexException {
-        UIPrint.drawLine(UIPrint.star, 50);
-
         boolean canParseInt = tryParseInt(str);
         int taskIndex = canParseInt ? Integer.parseInt(str) - 1 : -1;
 
@@ -25,8 +23,6 @@ public class DoneCommand extends Command {
         task.markAsDone();
 
         DukeFunction.reportDoneTask(task);
-
-        UIPrint.drawLine(UIPrint.star, 50);
     }
 
     private boolean tryParseInt(String str) {
