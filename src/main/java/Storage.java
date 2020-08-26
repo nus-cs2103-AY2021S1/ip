@@ -8,10 +8,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DukeSaver {
+public class Storage {
     String filePath;
 
-    DukeSaver(String filePath) throws IOException {
+    Storage(String filePath) throws IOException {
         this.filePath = filePath;
         File f = new File(this.filePath);
 
@@ -27,16 +27,16 @@ public class DukeSaver {
     }
 
     /* Saves the list of tasks to disk. */
-    void save(ArrayList<Task> taskList) throws IOException {
+    void save(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
-        for (Task t : taskList) {
+        for (Task t : taskList.tasks) {
             fw.write(t.toFileFormat() + "\n");
         }
         fw.close();
     }
 
     /* Loads the list of tasks from disk.*/
-    ArrayList<Task> load() throws FileNotFoundException {
+    ArrayList<Task> load() throws IOException {
         File f = new File(this.filePath);
         Scanner s = new Scanner(f);
         ArrayList<Task> taskList = new ArrayList<>();

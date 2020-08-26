@@ -1,2 +1,0 @@
-T|0|eat
-T|1|chicken

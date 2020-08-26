@@ -1,3 +1,4 @@
+File created: tasks.txt
 Hello! I'm Duke! I'm a chatbot-based To-Do list manager.
 My available commands are: todo, deadline, event, done, list, delete, bye
 What can I do for you today? :)
@@ -15,7 +16,6 @@ Nice! I've marked this task as done:
 Here are the tasks in your list:
 1.[D][✘] return book (by: Aug 26 2020)
 2.[E][✓] project meeting (at: Aug 27 2020)
-validating delete
 Noted. I have removed this task:
   [D][✘] return book (by: Aug 26 2020)
 Here are the tasks in your list:
