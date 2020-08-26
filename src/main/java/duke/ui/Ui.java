@@ -15,15 +15,15 @@ public class Ui {
      * @param string the string to print
      */
     public void say(String string) {
-        final String indent = "  ";
-        final int lineLength = 68;
-        final String separator = indent + "_".repeat(lineLength);
-        List<String> strings = splitIntoLines(string, lineLength);
-        System.out.println(separator);
+        final String INDENT = "  ";
+        final int LINE_LENGTH = 68;
+        final String SEPARATOR = INDENT + "_".repeat(LINE_LENGTH);
+        List<String> strings = splitIntoLines(string, LINE_LENGTH);
+        System.out.println(SEPARATOR);
         for (String s : strings) {
-            System.out.println(indent + s);
+            System.out.println(INDENT + s);
         }
-        System.out.println(separator);
+        System.out.println(SEPARATOR);
         System.out.println();
     }
 
