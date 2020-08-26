@@ -16,7 +16,7 @@ jar {
     manifest {
         attributes 'Main-Class': 'Main'
     }
-    mainClassName = 'main'
+    mainClassName = 'Main'
     archiveBaseName = 'Duke'
     archiveVersion = '0.1'
 }
@@ -27,7 +27,6 @@ repositories {
 
 dependencies {
     implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
-    testCompileOnly group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.0'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.4.0'
 }

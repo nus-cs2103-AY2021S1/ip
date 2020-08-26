@@ -2,6 +2,10 @@ package duke;
 
 import duke.tasks.Task;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 /**
  * Represents a MessageManager.
  * A MessageManager handles the different messages that Duke
@@ -19,7 +23,8 @@ public class MessageManager {
      */
     public static String getListMessage(TaskManager taskManager) {
         String listStringFormat = "Here are the tasks in your list:\n" +
-                "%sYou have %s task(s) in your list.";
+                "%s\n" +
+                "You have %s task(s) in your list.";
         return String.format(
                 listStringFormat,
                 taskManager.toString(),
@@ -96,4 +101,19 @@ public class MessageManager {
                 task,
                 taskManager.getTaskCount());
     }
+
+    /**
+     * Returns the list of tasks in the format of a find command response message.
+     *
+     * @param taskList the list of tasks to be included in the message
+     * @return the list of tasks in find command response format.
+     */
+    public static String getFindAllContainingMessage(List<Task> taskList) {
+        String findAllContainingStringFormat = "Here are the matching tasks in your list:\n%s";
+        String matchingTaskString = IntStream.range(0, taskList.size())
+                .mapToObj(i -> String.format("%d. %s", i + 1, taskList.get(i).toString()))
+                .collect(Collectors.joining("\n"));
+        return String.format(findAllContainingStringFormat, matchingTaskString);
+    }
+
 }

@@ -12,4 +12,6 @@ public class InputPattern {
     public static final String ADD_TODO = "^todo (?<content>.+)$";
     public static final String LIST = "^list$";
     public static final String BYE = "^bye$";
+    public static final String FIND_ALL_CONTAINING = "^find (?<content>.+)$";
+
 }

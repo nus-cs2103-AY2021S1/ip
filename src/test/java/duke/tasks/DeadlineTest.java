@@ -1,11 +1,12 @@
-import duke.tasks.Deadline;
+package duke.tasks;
+
 import duke.exceptions.DukeException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class DeadlineTest {
+class DeadlineTest {
 
 
 
