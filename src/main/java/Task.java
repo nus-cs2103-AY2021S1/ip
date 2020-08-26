@@ -8,9 +8,8 @@ public abstract class Task {
     static final char NOT_DONE = '\u2717';
 
     final String itemString;
-    boolean isDone;
-    String taskString;
     String dateString;
+    boolean isDone;
 
 
     public Task(String itemString) {

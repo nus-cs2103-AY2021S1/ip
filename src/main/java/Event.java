@@ -10,13 +10,15 @@ public class Event extends Task {
 
     public Event(String itemString) {
         super(Task.getTaskString(itemString, Event.DELIMITER));
-        this.date = LocalDate.parse(Task.getDateString(itemString, Event.DELIMITER));
+        this.dateString = Task.getDateString(itemString, Event.DELIMITER);
+        this.date = LocalDate.parse(this.dateString);
     }
 
 
     public Event(String itemString, boolean isDone) {
         super(Task.getTaskString(itemString, Event.DELIMITER), isDone);
-        this.date = Task.getDateString(itemString, Event.DELIMITER);
+        this.dateString = Task.getDateString(itemString, Event.DELIMITER);
+        this.date = LocalDate.parse(this.dateString);
     }
 
 
@@ -27,7 +29,7 @@ public class Event extends Task {
      */
     @Override
     public String[] toStorageStringArr() {
-        return new String[]{"E", this.isDone ? "1" : "0", this.itemString, this.date};
+        return new String[]{"E", this.isDone ? "1" : "0", this.itemString, this.dateString};
     }
 
 
