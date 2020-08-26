@@ -24,6 +24,9 @@ public class Parser {
                     break;
                 } else if (input.equals("list")) {
                     ui.showTasks(taskList);
+                } else if (input.startsWith("find")) {
+                    String word = input.split("find ")[1];
+                    ui.find(word, taskList);
                 } else if (input.startsWith("done")) {
                     String[] number = input.split("done ");
                     int index = Integer.parseInt(number[1]);

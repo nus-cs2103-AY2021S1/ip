@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Ui class deals with interactions with the user.
  */
@@ -114,5 +116,31 @@ public class Ui {
         Task task = taskList.getTask(index);
         System.out.println(LINE + "Nice! I've marked this task as done:" +  "\n" +
                 task.toString() + "\n" + LINE);
+    }
+
+    /**
+     * Prints a list of Tasks in the current TaskList that matches a specified word.
+     * @param word the word to search for in the TaskList.
+     * @param taskList the TaskList which contain the Tasks to be filtered
+     *                 according to whether it contains the specified word.
+     */
+    public void find(String word, TaskList taskList) {
+        TaskList temp = new TaskList();
+        for(int i = 1; i <= taskList.size(); i++) {
+            Task task = taskList.getTask(i);
+            if(task.getName().contains(word)) {
+                temp.addTask(task);
+            }
+        }
+        if(temp.size() > 0) {
+            System.out.println(LINE + "Here are the matching tasks in your list:");
+            for (int i = 1; i <= temp.size(); i++) {
+                //print out task with numbering
+                System.out.printf("%s. %s%n", i, temp.getTask(i).toString());
+            }
+        } else { //no matching tasks
+            System.out.println("You have no matching tasks!");
+        }
+        printLine();
     }
 }
