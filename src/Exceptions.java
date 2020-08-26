@@ -40,5 +40,28 @@ public enum Exceptions {
         public String toString() {
             return "    OOPS!!! The time of a deadline/event cannot be empty";
         }
+    },
+
+    FILEEXCEPTION {
+        @Override
+        public String toString() {
+            return "    OOPS!!! The file exists but is a directory rather than a regular file,\n" +
+                    "    or does not exist but cannot be created,\n" +
+                    "    or cannot be opened for any other reason";
+        }
+    },
+
+    READLINEEXCEPTION {
+        @Override
+        public String toString() {
+            return "    OOPS!!! There is a problem reading";
+        }
+    },
+
+    TIMEFORMATEXCEPTION {
+        @Override
+        public String toString() {
+            return "    OOPS!!! Your time format seems incorrect, please follow yyyy-mm-dd";
+        }
     }
 }

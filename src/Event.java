@@ -1,15 +1,15 @@
 public class Event extends Task {
-    public String on;
+    public String time;
 
     public Event(String description, String on) {
         super(description);
-        this.on = on;
+        this.time = on;
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() +
-                "(on: " + on + ")";
+                " (on: " + time + ")";
     }
 
 
