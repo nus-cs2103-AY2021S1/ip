@@ -5,20 +5,20 @@ import duke.exceptions.DukeException;
 
 import java.util.ArrayList;
 
+/**
+ * Duke helps you manage tasks through a chatbot.
+ * Duke also saves your list of tasks and will load
+ * where you left off.
+ */
 public class Duke {
-//    public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
-//    }
-
     protected Storage storage;
     protected Ui ui;
     protected String inquiry;
     protected TaskList tasks;
+
+    /**
+     * Duke constructor
+     */
     public Duke() {
         this.storage = new Storage();
         this.ui = new Ui();
@@ -30,6 +30,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the chatbot. The chatbot will respond
+     * based on specific keywords.
+     */
     public void chat() {
         ui.intro();
         boolean endLoop = false;
@@ -46,8 +50,21 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method that executes Duke chatbot.
+     * @param args String array of arguments.
+     */
     public static void main(String[] args) {
         Duke chatbot = new Duke();
         chatbot.chat();
     }
+
+    //    public static void main(String[] args) {
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        System.out.println("Hello from\n" + logo);
+//    }
 }

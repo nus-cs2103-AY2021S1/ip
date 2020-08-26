@@ -3,10 +3,18 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A sub class of Task, which represents any deadlines.
+ */
 public class Deadline extends Task {
-
     public LocalDateTime date;
 
+    /**
+     * Deadline constructor.
+     * @param description Details of the task.
+     * @param isDone Progress of the task.
+     * @param date Date of the deadline.
+     */
     public Deadline(String description, boolean isDone, LocalDateTime date) {
         super(description, isDone);
         this.date = date;
