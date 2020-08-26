@@ -34,7 +34,7 @@ public class Task {
      */
     public String toFileFormat() {
         String isDone = done ? "1" : "0";
-        return isDone + " | " + name ;
+        return isDone + " | " + name;
     }
 
     @Override

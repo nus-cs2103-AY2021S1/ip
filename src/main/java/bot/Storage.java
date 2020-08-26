@@ -24,7 +24,7 @@ public class Storage {
         ArrayList<Task> taskList = new ArrayList<>();
         File f = new File(filePath);
         File dir = new File(f.toPath().getParent().toString());
-        if(!dir.exists()) {
+        if (!dir.exists()) {
             dir.mkdir();
         }
         if (!f.exists()) {
@@ -35,7 +35,7 @@ public class Storage {
         String content = Files.readString(Paths.get(filePath), StandardCharsets.US_ASCII);
         String[] items = content.split("\n");
         for (String item : items) {
-            if(item.length() != 0) {
+            if (item.length() != 0) {
                 taskList.add(lineToObj(item));
             }
         }
@@ -62,10 +62,12 @@ public class Storage {
         switch (firstChar) {
             case 'D':
                 int len = words[3].length();
-                return new Deadline(words[2], words[3].toString().substring(0,len - 1), words[1].equals("1"));
+                return new Deadline(words[2], words[3].toString().substring(0,len - 1),
+                        words[1].equals("1"));
             case 'E':
                 int len2 = words[3].length();
-                return new Event(words[2], words[3].toString().substring(0, len2 - 1), words[1].equals("1"));
+                return new Event(words[2], words[3].toString().substring(0, len2 - 1),
+                        words[1].equals("1"));
             default:
                 return new Todo(words[2], words[1].equals("1"));
         }

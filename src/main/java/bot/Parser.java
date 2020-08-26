@@ -13,13 +13,13 @@ public class Parser {
     public Command parseInput(String input) throws InvalidInputException,
             InvalidCommandException {
         if (input.length() == 0) {
-          throw new InvalidInputException("Please input something");
+            throw new InvalidInputException("Please input something");
         }
         String[] words = input.split(" ");
         try {
-          return Command.valueOf(words[0].toUpperCase());
+            return Command.valueOf(words[0].toUpperCase());
         } catch (IllegalArgumentException e) {
-          throw new InvalidCommandException("What's that again? I can't understand.");
+            throw new InvalidCommandException("What's that again? I can't understand.");
         }
     }
 
@@ -40,7 +40,8 @@ public class Parser {
             }
         }
         if (name.length() == 0) {
-            throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
+                    " Thank you.");
         }
         return name.toString();
     }
@@ -73,7 +74,8 @@ public class Parser {
             }
         }
         if (name.length() == 0 || deadline.length() == 0) {
-            throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
+                    " Thank you.");
         }
         deadline.deleteCharAt(deadline.length() - 1);
         output[0] = name.toString();
@@ -109,7 +111,8 @@ public class Parser {
             }
         }
         if (name.length() == 0 || deadline.length() == 0) {
-            throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
+                    " Thank you.");
         }
         deadline.deleteCharAt(deadline.length() - 1);
         output[0] = name.toString();
@@ -126,7 +129,8 @@ public class Parser {
     public int parseIndex(String input) throws InvalidInputException {
         String[] words = input.split(" ");
         if (words.length != 2) {
-            throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
+                    " Thank you.");
         }
         return Integer.parseInt(words[1]);
     }

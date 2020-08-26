@@ -20,7 +20,7 @@ public class Bot {
         this.ui = new Ui(this.name);
         this.storage = new Storage(filePath);
         this.parser = new Parser();
-        try{
+        try {
             this.taskList = new TaskList(storage.loadFileContents());
         } catch (IOException e) {
             ui.showLoadingError();
@@ -44,28 +44,28 @@ public class Bot {
                 }
                 Command cmd = parser.parseInput(input);
                 switch(cmd) {
-                    case LIST:
-                        ui.showMessage(cmdList());
-                        break;
-                    case TODO:
-                        ui.showMessage(cmdTodo(parser.parseTodo(input)));
-                        break;
-                    case DEADLINE:
-                        ui.showMessage(cmdDeadline(parser.parseDeadline(input)));
-                        break;
-                    case EVENT:
-                        ui.showMessage(cmdEvent(parser.parseEvent(input)));
-                        break;
-                    case DONE:
-                        ui.showMessage(cmdDone(parser.parseIndex(input)));
-                        break;
-                    case DELETE:
-                        ui.showMessage(cmdDelete(parser.parseIndex(input)));
-                        break;
-                    default:
-                        ui.showMessage("Valid cmd given. " +
-                                "However it is not supported yet");
-                        break;
+                case LIST:
+                    ui.showMessage(cmdList());
+                    break;
+                case TODO:
+                    ui.showMessage(cmdTodo(parser.parseTodo(input)));
+                    break;
+                case DEADLINE:
+                    ui.showMessage(cmdDeadline(parser.parseDeadline(input)));
+                    break;
+                case EVENT:
+                    ui.showMessage(cmdEvent(parser.parseEvent(input)));
+                    break;
+                case DONE:
+                    ui.showMessage(cmdDone(parser.parseIndex(input)));
+                    break;
+                case DELETE:
+                    ui.showMessage(cmdDelete(parser.parseIndex(input)));
+                    break;
+                default:
+                    ui.showMessage("Valid cmd given. " +
+                            "However it is not supported yet");
+                    break;
                 }
             } catch (InvalidCommandException | InvalidInputException e) {
                 System.out.println(responseWrapper(e.getMessage()));
@@ -82,7 +82,8 @@ public class Bot {
                     newTodo + "\n    " +
                     "Now you have " + taskList.getSize() + " tasks in the list.";
         } catch (Exception e) {
-            throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
+                    " Thank you.");
         }
     }
 
@@ -95,7 +96,8 @@ public class Bot {
                     newTask + "\n    " +
                     "Now you have " + taskList.getSize() + " tasks in the list.";
         } catch (Exception e) {
-            throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
+                    " Thank you.");
         }
     }
 
@@ -108,7 +110,8 @@ public class Bot {
                     newTask + "\n    " + "Now you have " +
                     taskList.getSize() + " tasks in the list.";
         } catch (Exception e) {
-            throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
+                    " Thank you.");
         }
     }
 
@@ -134,7 +137,8 @@ public class Bot {
             return "Nice! I've marked this task as done: \n    " +
                     task + "\n";
         } catch (Exception e) {
-            throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
+                    " Thank you.");
         }
     }
 
@@ -147,7 +151,8 @@ public class Bot {
                     task + "\n    " +
                     "Now you have " + taskList.getSize() + " tasks in the list.";
         } catch (Exception e) {
-            throw new InvalidInputException("Sorry, do what? Please give me a valid input. Thank you.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
+                    " Thank you.");
         }
     }
 
