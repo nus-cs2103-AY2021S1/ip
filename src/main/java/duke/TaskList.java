@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> storedTasks;
-    private static int globalIndex = 1;
 
     public TaskList(ArrayList<Task> storedTasks) {
         this.storedTasks = storedTasks;
@@ -94,8 +93,7 @@ public class TaskList {
         }
         return toBeReturned;
     }
-
-
+    
     public int conquerTask(String[] command) {
         int indexToBeReturned = -1;
         try {
@@ -127,5 +125,9 @@ public class TaskList {
             Ui.dukeErrorMessage(err);
         }
         return indexToBeReturned;
+    }
+    
+    public ArrayList<Task> getStoredTasks() {
+        return this.storedTasks;
     }
 }
