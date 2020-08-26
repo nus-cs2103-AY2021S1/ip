@@ -34,6 +34,14 @@ public class Task {
     }
 
     /**
+     * Method that get the description of the Task
+     * @return  a String that describes the Task
+     */
+    public String getDescription(){
+        return this.description;
+    }
+
+    /**
      * To String method of Task
      * @return  a String that describes the Task
      */
