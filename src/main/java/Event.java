@@ -1,3 +1,7 @@
+/**
+ * Event class is a subclass of Task which holds information of an Event
+ * with an occuring time and date.
+ */
 public class Event extends Task{
 
     protected DateAndTime at;

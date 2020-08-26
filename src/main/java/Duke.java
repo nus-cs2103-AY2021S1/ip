@@ -1,4 +1,6 @@
-
+/**
+ * Entry point of the programme, Duke is used as it is the project's name.
+ */
 public class Duke {
 
     public static void main(String[] args) {

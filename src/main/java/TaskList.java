@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 
-//A container class for task storage
+/**
+ * TaskList class is a specific class that contains the task storage, a
+ * static variable to collect user inputs, and manipulates it accordingly.
+ */
 public class TaskList {
 
     public static ArrayList<Task> taskStorage = new ArrayList<>();
@@ -30,7 +33,7 @@ public class TaskList {
     public static void read(){
         System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < taskStorage.size(); i ++){
-            System.out.println(String.valueOf(i + 1 ) +"."+ taskStorage.get(i));
+            System.out.println((i + 1 ) +"."+ taskStorage.get(i));
         }
     }
 

@@ -1,3 +1,7 @@
+/**
+ * A class which stores key words of commands and various comparing methods
+ * used for checking and validation.
+ */
 public class Parser {
 
     public final static String BYE = "bye";

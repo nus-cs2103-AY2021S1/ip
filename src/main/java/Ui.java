@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * Ui class is the main processor for users inputs,
+ * Ui takes in user inputs, categorises it and stores it.
+ */
 public class Ui {
 
     private final Scanner scanner;
