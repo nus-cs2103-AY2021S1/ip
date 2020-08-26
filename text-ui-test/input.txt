@@ -1,8 +1,9 @@
-todo first task
-event second task /at Aug 20th 2pm
-deadline 3rd task /by Saturday 4pm
+todo make coffee
+event go for tutorial /at Thursday 2pm
+deadline individual project stage 8 /by Saturday 4pm
 done 1
 done 2
+todo eat dinner
 delete 3
 list
 bye

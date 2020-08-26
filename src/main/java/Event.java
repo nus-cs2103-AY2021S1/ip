@@ -7,8 +7,19 @@ public class Event extends Task {
         this.eventDate = date;
     }
 
+    public Event(String description, String date, boolean isDone) {
+        super(description, isDone);
+        this.eventDate = date;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + eventDate + ")";
+    }
+
+    @Override
+    public String getDescriptionForDatabase() {
+        return "event - " + (this.isTaskDone() ? "1" : "0") + " - " +
+                this.getDescription() + " - " + this.eventDate;
     }
 }

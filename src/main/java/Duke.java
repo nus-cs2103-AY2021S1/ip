@@ -1,5 +1,7 @@
+
 import java.io.File;
-import java.io.IOException;
+import java.io.FileWriter;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -61,7 +63,7 @@ public class Duke {
                         "\nlist: List the current tasks in your list." +
                         "\ntodo: Add a To-Do task." +
                         "\nevent: Add an Event task." +
-                        "\ndeadline: Add a deadline task." +
+                        "\ndeadline: Add a Deadline task." +
                         "\nfind: Find a task which matches your description.";
         System.out.println(introduction);
         Scanner sc = new Scanner(System.in);
@@ -251,16 +253,54 @@ public class Duke {
      * to the taskList ArrayList.
      */
     private void openTaskList() {
-        File savedList = new File("src/main/data/taskList.txt");
         try {
+            File savedList = new File("src/main/data/taskList.txt");
             if (!savedList.exists()) {
-                savedList.createNewFile();
-                System.out.println("First time user.. Creating new database..");
+                System.out.print(
+                        "Welcome, first time user. Let me create " +
+                                "a new database to store your tasks.."
+                );
+                System.out.println(savedList.createNewFile() ? " Success." : " Failure.");
             } else {
+                System.out.println("Found your data! Give me some time to read it...");
                 // TODO Get content from file. Transfer to arraylist.
-
+                Scanner taskReader = new Scanner(savedList);
+                while (taskReader.hasNextLine()) {
+                    String taskFromFile = taskReader.nextLine();
+                    // Note, this is assuming that format of
+                    // Task.getDescriptionForDatabase() remains the same.
+                    String[] formattedTaskString = taskFromFile.split(" - ");
+                    Command taskCommand = getCommand(formattedTaskString[0]);
+                    boolean isTaskDone = formattedTaskString[1].equals("0");
+                    switch (taskCommand) {
+                        case TODO:
+                            taskList.add(new Todo(formattedTaskString[2], isTaskDone));
+                            break;
+                        case EVENT:
+                            taskList.add(
+                                    new Event(
+                                            formattedTaskString[2],
+                                            formattedTaskString[3],
+                                            isTaskDone
+                                    )
+                            );
+                            break;
+                        case DEADLINE:
+                            taskList.add(
+                                    new Deadline(
+                                            formattedTaskString[2],
+                                            formattedTaskString[3],
+                                            isTaskDone
+                                    )
+                            );
+                            break;
+                    }
+                }
+                taskReader.close();
             }
-        } catch (IOException exception) {
+
+        } catch (
+                Exception exception) {
             System.out.println("Exception while opening task list file:" + exception);
         }
     }
@@ -270,8 +310,24 @@ public class Duke {
      * by setting isRunning to false.
      */
     private void closeDuke() {
-        System.out.println("Bye, see you soon. Exiting...");
         isRunning = false;
+        // Begin process of saving Tasks in the taskList to the file.
+        try {
+            if (taskList.size() > 0) {
+                File savedList = new File("src/main/data/taskList.txt");
+                FileWriter taskWriter = new FileWriter(savedList);
+
+                for (Task t : taskList) {
+                    taskWriter.write(t.getDescriptionForDatabase());
+                    taskWriter.write("\n");
+                }
+                System.out.println("...Saved your list.");
+                taskWriter.close();
+            }
+        } catch (Exception e) {
+            System.out.println("Exception occurred while closing Duke: " + e.toString());
+        }
+        System.out.println("Bye, see you soon. Exiting...");
     }
 
     /**
