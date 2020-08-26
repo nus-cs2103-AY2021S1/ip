@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The Storage object deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private final String filePath;
 
@@ -19,6 +22,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Writes the current list of tasks to the duke.txt file.
+     *
+     * @param tasks TaskList containing current list of tasks.
+     * @throws DukeException If unable to create or write file.
+     */
     public void write(TaskList tasks) throws DukeException {
         try {
             File f = new File(filePath);
@@ -39,6 +48,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns ArrayList of tasks found in duke.txt file.
+     *
+     * @param filePath Path of the duke.txt file.
+     * @return ArrayList of tasks.
+     * @throws DukeException If the duke.txt file has an unknown task type. If the file cannot be loaded.
+     */
     public ArrayList<Task> load(String filePath) throws DukeException {
         try {
             ArrayList<Task> taskList = new ArrayList<>();
@@ -79,13 +95,13 @@ public class Storage {
                     }
                     break;
                 default:
-                    throw new IllegalStateException("Unexpected value: " + type);
+                    throw new DukeException("Hmm.. The duke.txt file contains an unknown task type.");
                 }
                 taskList.add(task);
             }
             return taskList;
         } catch (FileNotFoundException e) {
-            throw new DukeException();
+            throw new DukeException("Cannot load, file not found!");
         }
     }
 }

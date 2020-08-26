@@ -6,9 +6,19 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * The Parser object deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Parser {
     static String[] inputArr;
 
+    /**
+     * Translates user input into meaningful commands and details.
+     *
+     * @param userInput User input.
+     * @return Command to be done.
+     * @throws DukeException If command is wrong. Or if details of the task is wrong.
+     */
     public static Command parse(String userInput) throws DukeException {
         inputArr = userInput.split("\\s+");
         String command = inputArr[0];
