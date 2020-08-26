@@ -9,13 +9,26 @@ import java.util.List;
 import java.util.Scanner;
 import duke.task.*;
 
+/**
+ * The class Storage denotes a storage object.
+ *
+ * @author Alvin Chee
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructs a storage
+     *
+     * @param filePath  file path where data file is stored
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Adds the respective directories if required.
+     */
     public void addDirIfRequired() {
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "Duke");
@@ -32,6 +45,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the list of tasks from storage.
+     */
     public List<Task> load() {
         List<Task> taskList = new ArrayList<>();
         try {
@@ -74,6 +90,9 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves lists of tasks into storage.
+     */
     public void saveTaskList() throws DukeIOException{
         try {
             File file = new File(filePath);
