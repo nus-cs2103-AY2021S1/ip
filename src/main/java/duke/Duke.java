@@ -13,14 +13,14 @@ public class Duke {
     static final String filepath = "duke.txt";
     private Storage storage;
     private Ui ui;
-    private TaskList taskList;
+    private TaskList tasks;
     
     public Duke (String filepath) {
-        taskList = new TaskList();
+        tasks = new TaskList();
         ui = new Ui();
         storage = new Storage(filepath);
         try {
-            storage.pullList(taskList);
+            storage.pullList(tasks);
         } catch (Exception e) {
             ui.printError(e);
         }
@@ -33,8 +33,8 @@ public class Duke {
             try {
                 String nextCommand = ui.readCommand();
                 Command c = Parser.parse(nextCommand);
-                c.execute(taskList, ui, storage);
-                isRunning = c.isRunning();
+                c.execute(tasks, ui, storage);
+                isRunning = c.continueRunning();
             } catch (DukeException e) {
                 ui.printError(e);
             }

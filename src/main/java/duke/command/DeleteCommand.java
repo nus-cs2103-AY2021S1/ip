@@ -14,19 +14,19 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             int deleteTaskRef = Integer.parseInt(this.nextCommandArr[1]);
-            Task deleteTask = taskList.get(deleteTaskRef - 1);
-            taskList.remove(deleteTaskRef - 1);
-            ui.deleteTaskText(deleteTask, taskList);
+            Task deleteTask = tasks.get(deleteTaskRef - 1);
+            tasks.remove(deleteTaskRef - 1);
+            ui.deleteTaskText(deleteTask, tasks);
         } catch (Exception e) {
             throw new DukeException("Please provide a valid task number to delete~");
         }
     }
 
     @Override
-    public boolean isRunning() {
+    public boolean continueRunning() {
         return true;
     }
 }

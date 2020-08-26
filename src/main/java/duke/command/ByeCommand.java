@@ -8,14 +8,14 @@ public class ByeCommand extends Command {
     
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        storage.storelist(taskList);
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        storage.storelist(tasks);
         ui.farewell();
         
     }
 
     @Override
-    public boolean isRunning() {
+    public boolean continueRunning() {
         return false;
     }
 }

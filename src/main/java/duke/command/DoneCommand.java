@@ -14,10 +14,10 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             int doneTaskRef = Integer.parseInt(this.nextCommandArr[1]);
-            Task doneTask = taskList.get(doneTaskRef - 1);
+            Task doneTask = tasks.get(doneTaskRef - 1);
             doneTask.setDone();
             ui.doneText(doneTask);
         } catch (Exception e) {
@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public boolean isRunning() {
+    public boolean continueRunning() {
         return true;
     }
 }

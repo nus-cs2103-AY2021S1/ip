@@ -65,13 +65,13 @@ public class Storage {
         }
     }
 
-    public void storelist(TaskList taskList) {
+    public void storelist(TaskList tasks) {
         try {
             String seperator = " | ";
             FileWriter fileWriter = new FileWriter(filepath);
 
-            for (int i = 0; i < taskList.getSize(); i++) {
-                Task temp = taskList.get(i);
+            for (int i = 0; i < tasks.getSize(); i++) {
+                Task temp = tasks.get(i);
                 String doneStatus = "0";
                 if (temp.checkDone()) {
                     doneStatus = "1";

@@ -6,14 +6,14 @@ import java.util.Scanner;
 
 public class Ui {
     
-    private static String greeting = "Hello~ I'm Duke!\n" + "What can I do for you?";
-    private static String farewell = "Goodbye~";
-    private static String doneMessage = "Nice! I've set this task as done~";
-    private static String addTaskMessage = "Got it~ I've added this task:";
-    private static String numberOfTaskMessage = "You now have %d tasks in the list~";
-    private static String removeTaskMessage = "Alright~ I've removed this task:";
-    private static String seperator = "____________________________________________________________";
-    private static String listMessage = "Here are your tasks~";
+    private static final String MESSAGE_GREETING = "Hello~ I'm Duke!\n" + "What can I do for you?";
+    private static final String MESSAGE_FAREWELL = "Goodbye~";
+    private static final String MESSAGE_DONE = "Nice! I've set this task as done~";
+    private static final String MESSAGE_ADD_TASK = "Got it~ I've added this task:";
+    private static final String MESSAGE_NUMBER_OF_TASKS = "You now have %d tasks in the list~";
+    private static final String MESSAGE_REMOVE_TASK = "Alright~ I've removed this task:";
+    private static final String MESSAGE_SEPERATOR = "____________________________________________________________";
+    private static final String MESSAGE_LIST = "Here are your tasks~";
     
     private Scanner sc;
     
@@ -22,34 +22,34 @@ public class Ui {
     }
     
     public void greet() {
-        System.out.println(greeting);
+        System.out.println(MESSAGE_GREETING);
     }
     
     public void farewell() {
-        System.out.println(seperator + "\n" + farewell + "\n" + seperator);
+        System.out.println(MESSAGE_SEPERATOR + "\n" + MESSAGE_FAREWELL + "\n" + MESSAGE_SEPERATOR);
     }
     
     public void doneText(Task doneTask) {
-        System.out.println(seperator + "\n" + doneMessage + "\n" + doneTask + 
-                "\n" + seperator);
+        System.out.println(MESSAGE_SEPERATOR + "\n" + MESSAGE_DONE + "\n" + doneTask + 
+                "\n" + MESSAGE_SEPERATOR);
     }
     
     public void addTaskText(Task addTask, TaskList result) {
-        System.out.println(seperator + "\n" + addTaskMessage + "\n" + addTask +
-                "\n" + String.format(numberOfTaskMessage, result.getSize()) + 
-                "\n" + seperator);
+        System.out.println(MESSAGE_SEPERATOR + "\n" + MESSAGE_ADD_TASK + "\n" + addTask +
+                "\n" + String.format(MESSAGE_NUMBER_OF_TASKS, result.getSize()) + 
+                "\n" + MESSAGE_SEPERATOR);
     }
     
     public void deleteTaskText(Task deleteTask, TaskList result) {
-        System.out.println(seperator + "\n" + removeTaskMessage + "\n" + deleteTask +
-                "\n" + String.format(numberOfTaskMessage, result.getSize()) +
-                "\n" + seperator);
+        System.out.println(MESSAGE_SEPERATOR + "\n" + MESSAGE_REMOVE_TASK + "\n" + deleteTask +
+                "\n" + String.format(MESSAGE_NUMBER_OF_TASKS, result.getSize()) +
+                "\n" + MESSAGE_SEPERATOR);
     }
     
     public void listText(TaskList taskList) {
-        System.out.println(seperator + "\n" + listMessage + "\n");
+        System.out.println(MESSAGE_SEPERATOR + "\n" + MESSAGE_LIST + "\n");
         taskList.printTaskList();
-        System.out.println("\n" + seperator);
+        System.out.println("\n" + MESSAGE_SEPERATOR);
     }
     
     public void printError(Exception e) {
