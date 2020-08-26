@@ -14,14 +14,14 @@ public class Ui {
 
     protected void startBot() {
         printBorder();
-        System.out.println("Hello I'm Duke\n");
+        System.out.println("Hello I'm Moco, a task list bot to help you stay on top of your tasks!\n");
         System.out.println("What can I do for you?\n");
         printBorder();
     }
 
     protected void stopBot() {
         printBorder();
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye. Moco hopes to see you again soon!");
         printBorder();
     }
 
@@ -51,12 +51,12 @@ public class Ui {
         System.out.println("Noted. I've removed this task:\n" + task);
     }
 
-    public void addTask(Task task, TaskList tasks) throws DukeException {
+    public void addTask(Task task, TaskList tasks) throws MocoException {
         System.out.println("Got it. I've added this task:\n" + task);
         try {
             System.out.println("Now you have " + tasks.size() + " tasks in the list.\n");
         } catch (Exception e) {
-            throw new DukeException("failed to provide task info sufficiently");
+            throw new MocoException("failed to provide task info sufficiently");
         }
     }
 }

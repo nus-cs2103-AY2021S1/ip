@@ -1,10 +1,10 @@
-public class Duke {
+public class Moco {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) throws DukeException {
+    public Moco(String filePath) throws MocoException {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
@@ -17,7 +17,7 @@ public class Duke {
             try {
                 String input = ui.getInput();
                 isCommand = Parser.parse(input, tasks, ui, storage);
-            } catch (DukeException e) {
+            } catch (MocoException e) {
                 System.out.println(e.getMessage());
                 ui.printBorder();
             }
@@ -25,7 +25,7 @@ public class Duke {
         ui.stopBot();
     }
 
-    public static void main(String[] args) throws DukeException {
-        new Duke("tasklist.txt").run();
+    public static void main(String[] args) throws MocoException {
+        new Moco("tasklist.txt").run();
     }
 }

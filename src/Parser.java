@@ -27,7 +27,7 @@ public class Parser {
         },
     }
 
-    public static boolean parse(String input, TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public static boolean parse(String input, TaskList tasks, Ui ui, Storage storage) throws MocoException {
         if (input.equals(("bye"))) {
             storage.Save();
             return false;
@@ -46,13 +46,13 @@ public class Parser {
             } else if (input.contains(type.Delete.toString())) {
                 deleteCommand(input, tasks, storage, ui);
             } else {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new MocoException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
         return true;
     }
 
-    private static void doneCommand(String input, TaskList tasks, Storage storage, Ui ui) throws DukeException {
+    private static void doneCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
         try {
             if (input.length() > 5) {
                 int index = Integer.parseInt(input.substring(5)) - 1;
@@ -60,10 +60,10 @@ public class Parser {
                 storage.Save();
                 ui.doneTask(tasks.get(index));
             } else {
-                throw new DukeException(" ☹ OOPS!!! What task did you complete? Please specific a valid task index.");
+                throw new MocoException(" ☹ OOPS!!! What task did you complete? Please specific a valid task index.");
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(" ☹ OOPS!!! You went out of the valid values, please specific a valid task index.");
+            throw new MocoException(" ☹ OOPS!!! You went out of the valid values, please specific a valid task index.");
         } catch (Exception e) {
             ui.printError(e.getMessage());
         }
@@ -77,14 +77,14 @@ public class Parser {
                 storage.Save();
                 ui.addTask(t, tasks);
             } else {
-                throw new DukeException("☹ Insufficient details! The description of a todo cannot be empty.");
+                throw new MocoException("☹ Insufficient details! The description of a todo cannot be empty.");
             }
         } catch (Exception e) {
             ui.printError(e.getMessage());
         }
     }
 
-    private static void deadlineCommand(String input, TaskList tasks, Storage storage, Ui ui) throws DukeException {
+    private static void deadlineCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
         try {
             String[] s = input.split("/by ", 2);
             if (s[0].length() > 9) {
@@ -96,16 +96,16 @@ public class Parser {
                 storage.Save();
                 ui.addTask(dl, tasks);
             } else {
-                throw new DukeException(" ☹ Insufficient details! The description of a deadline cannot be empty.");
+                throw new MocoException(" ☹ Insufficient details! The description of a deadline cannot be empty.");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Date not/wrongly entered! (Please provide in this format: deadline description /by dd-mm-yyyy");
+            throw new MocoException("Date not/wrongly entered! (Please provide in this format: deadline description /by dd-mm-yyyy");
         } catch (DateTimeParseException e) {
-            throw new DukeException(" ☹ Date wrongly entered, please remember to format date in dd-MM-yyyy!");
+            throw new MocoException(" ☹ Date wrongly entered, please remember to format date in dd-MM-yyyy!");
         }
     }
 
-    private static void eventCommand(String input, TaskList tasks, Storage storage, Ui ui) throws DukeException {
+    private static void eventCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
         try {
             String[] s = input.split("/at ", 2);
             if (s[0].length() > 6) {
@@ -117,16 +117,16 @@ public class Parser {
                 storage.Save();
                 ui.addTask(e, tasks);
             } else {
-                throw new DukeException(" ☹ Insufficient details! The description of an event cannot be empty.");
+                throw new MocoException(" ☹ Insufficient details! The description of an event cannot be empty.");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Date not/wrongly entered! (Please provide in this format: event description /at dd-mm-yyyy");
+            throw new MocoException("Date not/wrongly entered! (Please provide in this format: event description /at dd-mm-yyyy");
         } catch (DateTimeParseException e) {
-            throw new DukeException(" ☹ Date wrongly entered, please remember to format date in dd-MM-yyyy!");
+            throw new MocoException(" ☹ Date wrongly entered, please remember to format date in dd-MM-yyyy!");
         }
     }
 
-    private static void deleteCommand(String input, TaskList tasks, Storage storage, Ui ui) throws DukeException {
+    private static void deleteCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
         try {
             if (input.length() > 7) {
                 int index = Integer.parseInt(input.substring(7)) - 1;
@@ -135,10 +135,10 @@ public class Parser {
                 storage.Save();
                 ui.deleteTask(t, tasks);
             } else {
-                throw new DukeException("Please provide the index of the task you would like to remove.");
+                throw new MocoException("Please provide the index of the task you would like to remove.");
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("The index you specified is not valid. Please try again.");
+            throw new MocoException("The index you specified is not valid. Please try again.");
         } catch (Exception e) {
             ui.printError(e.getMessage());
         }

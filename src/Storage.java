@@ -16,7 +16,7 @@ public class Storage {
         this.taskList = new File(filePath);
     }
 
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws MocoException {
         try {
             if (taskList.exists()) {
                 FileReader fr = new FileReader(taskList);
@@ -35,9 +35,9 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new DukeException("Unable to find file of name 'tasklist");
+            throw new MocoException("Unable to find file of name 'tasklist");
         } catch (IOException e) {
-            throw new DukeException("Error accessing file");
+            throw new MocoException("Error accessing file");
         }
         return tasks;
     }
@@ -62,7 +62,7 @@ public class Storage {
         }
     }
 
-    public void Save() throws DukeException {
+    public void Save() throws MocoException {
         try {
             FileWriter newList = new FileWriter(taskList);
             for (Task t : tasks) {
@@ -71,7 +71,7 @@ public class Storage {
             newList.flush();
             newList.close();
         } catch (Exception e) {
-            throw new DukeException("Error saving update to task list");
+            throw new MocoException("Error saving update to task list");
         }
     }
 }
