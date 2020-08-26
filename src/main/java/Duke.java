@@ -222,14 +222,19 @@ public class Duke {
         }
 
         LocalDate date = parseDate(otherInput);
+        List<Task> dueTasks = tasks.stream().filter(task -> task.isDue(date)).collect(Collectors.toList());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
+
+        if (dueTasks.size() == 0) {
+            throw new DukeException("There are no tasks in your list occurring on "
+                    + date.format(formatter) + ".");
+        }
+
         StringBuilder output = new StringBuilder("Here are the tasks in your list occurring on "
                 + date.format(formatter) + ":\n");
 
-        for (Task task : tasks) {
-            if (task.isDue(date)) {
-                output.append(tasks.indexOf(task) + 1).append(".").append(task).append('\n');
-            }
+        for (Task task : dueTasks) {
+            output.append(tasks.indexOf(task) + 1).append(".").append(task).append('\n');
         }
 
         printPrompt(output.toString());
