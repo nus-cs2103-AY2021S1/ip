@@ -54,7 +54,6 @@ public class TaskList implements Serializable {
         return toDelete.toString();
     }
     
-    
     private void verifyTaskValidity(int taskID) throws DukeException {
         if (taskID > taskList.size()) {
             throw new DukeException("invalid task: task id > list size");
@@ -80,6 +79,4 @@ public class TaskList implements Serializable {
                    : " undone tasks")
                 + " in the list.";
     }
-    
-    
 }

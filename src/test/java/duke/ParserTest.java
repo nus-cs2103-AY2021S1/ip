@@ -31,7 +31,7 @@ public class ParserTest {
     }
     
     @ParameterizedTest
-    @ValueSource(strings = {"tod", "blah", })
+    @ValueSource(strings = {"tod", "blah",})
     public void exceptionHanlding_unknownCommand_dukeExceptionReturned(String s) {
         String expectedMsg = Message.ERROR_UNKNOWN_CMD.getMsg();
         Parser p = new Parser();

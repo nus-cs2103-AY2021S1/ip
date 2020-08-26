@@ -15,7 +15,9 @@ public class Task implements Serializable {
         this.description = description;
         this.completed = false;
     }
-    
+    public String getDescription() {
+        return this.description;
+    }
     public Task complete() {
         this.completed = true;
         return this;
