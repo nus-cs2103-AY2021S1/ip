@@ -11,17 +11,14 @@
 	;   :  .'    :  ,      .-./   :    :||   :    |     
 	|   ,.'       `--`----'    \   \  /   \   \  /  
 	'---'                       `----'     `----'       
-	 Initializing...
-	 Data directory located.
-	 Data file located.
-	 Data file loaded successfully.
-	 Initialization complete.
+
+	Initializing...
 	____________________________________________________________
 	 Hello! My name is Dude.
 	 What can I do for you?
 	____________________________________________________________
 	____________________________________________________________
-	 I'm sorry, but I don't know what that means ☹
+	 Sorry, but I don't know what that means ☹
 	____________________________________________________________
 	____________________________________________________________
 	 Got it. I've added this task:
@@ -72,17 +69,17 @@
 	 3. [E][✘] lesson (at: Dec 2 2012 1000h)
 	____________________________________________________________
 	____________________________________________________________
-	 Nice! I have marked this task as done:
+	 Nice! I've marked this task as done:
 	   [D][✓] homework (by: Dec 2 2012 1000h)
 	____________________________________________________________
 	____________________________________________________________
 	 Error! Please enter a valid task number.
 	____________________________________________________________
 	____________________________________________________________
-	 Error! The task number entered does not exist.
+	 Error! The task number you entered does not exist.
 	____________________________________________________________
 	____________________________________________________________
-	 Error! The task number entered does not exist.
+	 Error! The task number you entered does not exist.
 	____________________________________________________________
 	____________________________________________________________
 	 Here are the tasks in your list:
@@ -94,10 +91,10 @@
 	 Error! Please enter a valid task number.
 	____________________________________________________________
 	____________________________________________________________
-	 Error! The task number entered does not exist.
+	 Error! The task number you entered does not exist.
 	____________________________________________________________
 	____________________________________________________________
-	 Error! The task number entered does not exist.
+	 Error! The task number you entered does not exist.
 	____________________________________________________________
 	____________________________________________________________
 	 Got it. I've removed this task:
@@ -112,7 +109,7 @@
 	   [T][✘] read book
 	____________________________________________________________
 	____________________________________________________________
-	 Here are the tasks in your list:
+	 There are no tasks in your list.
 	____________________________________________________________
 	____________________________________________________________
 	 Bye. Hope to see you again soon!
