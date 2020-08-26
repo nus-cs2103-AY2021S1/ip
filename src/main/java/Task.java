@@ -1,7 +1,8 @@
 package main.java;
 
 /**
- * Work that people need to do. Status of task be marked done or undone.
+ * Work that people need to do that will be keep tracked of by the bot.
+ * Status of task to be marked done or undone.
  */
 public class Task {
     protected boolean done;

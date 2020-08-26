@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * A bot that records tasks for people.
+ * A bot that records tasks for people and keeps track of it for them.
  */
 public class Willy {
 

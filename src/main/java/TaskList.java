@@ -5,6 +5,8 @@ import java.util.List;
 
 /**
  * Handles the different actions that can be done by the bot.
+ * Bot can add tasks, remove tasks, read list of tasks,
+ * update tasks that are done and find tasks.
  */
 public class TaskList {
     private ArrayList<Task> listOfTasks;
