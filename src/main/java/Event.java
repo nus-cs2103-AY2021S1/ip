@@ -14,6 +14,11 @@ public class Event extends Task {
         }
     }
 
+    Event(String desc, String eventTime) {
+        super("E", desc);
+        this.eventTime = eventTime;
+    }
+
     @Override
     public String formatTaskForFile() {
         return this.taskType + " | " + (this.isDone ? "1" : "0") + " | " +

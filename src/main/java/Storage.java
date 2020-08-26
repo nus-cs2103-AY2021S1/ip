@@ -45,9 +45,9 @@ public class Storage {
         if (arr[0].equals("T")) {
             task = new Todo(arr[2]);
         } else if (arr[0].equals("D")) {
-            task = new Deadline(arr[2] + " /by " + arr[3]);
+            task = new Deadline(arr[2], arr[3]);
         } else {
-            task = new Event(arr[2] + " /at " + arr[3]);
+            task = new Event(arr[2], arr[3]);
         }
 
         if (arr[1].equals("1")) {

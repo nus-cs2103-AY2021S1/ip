@@ -14,6 +14,11 @@ public class Deadline extends Task {
         }
     }
 
+    Deadline(String desc, String date) {
+        super("D", desc);
+        this.deadline = date;
+    }
+
     @Override
     public String formatTaskForFile() {
         return this.taskType + " | " + (this.isDone ? "1" : "0") + " | " +
