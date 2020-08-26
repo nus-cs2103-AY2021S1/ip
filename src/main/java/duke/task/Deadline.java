@@ -1,11 +1,15 @@
 package duke.task;
 
-import java.time.LocalDateTime;
-import duke.exceptions.DukeException;
 import duke.exceptions.DukeStorageException;
 import duke.exceptions.DukeTaskCreationException;
 import duke.parser.DateParser;
 
+import java.time.LocalDateTime;
+
+/**
+ * The {@code Deadline} class represents a task with a specific deadline.
+ * Extends the {@link Task} class.
+ */
 public class Deadline extends Task {
 
     private static final String DEADLINE_DELIMITER = "/by";
@@ -17,6 +21,13 @@ public class Deadline extends Task {
         this.dateTime = dateTime;
     }
 
+    /**
+     * Returns a {@code Deadline} object with the specified details.
+     *
+     * @param details the description and deadline of the task.
+     * @return a {@code Deadline} object with the specified details.
+     * @throws DukeTaskCreationException if format of the specified details is not recognised.
+     */
     public static Deadline createTask(String details) throws DukeTaskCreationException {
         if (details == null) {
             throw new DukeTaskCreationException("I need something to work with.");
@@ -32,10 +43,22 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns an encoded string representation of this {@code Deadline}.
+     *
+     * @return an encoded string representation of this {@code Deadline}.
+     */
     public String encode() {
         return String.format("D|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(this.dateTime), super.description);
     }
 
+    /**
+     * Decodes an encoded string into a {@code Deadline} object.
+     *
+     * @param code the encoded string.
+     * @return a {@code Deadline} reconstructed from the encoded string.
+     * @throws DukeStorageException if format of the code is incorrect.
+     */
     public static Deadline decode(String code) throws DukeStorageException {
         if (code.charAt(0) == 'D') {
             String[] content = code.split("\\|", 4);
@@ -54,6 +77,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns a string representation of this {@code Deadline}.
+     *
+     * @return a string representation of this {@code Deadline}.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + DateParser.parseLocalDateTime(this.dateTime) + ")";
