@@ -21,3 +21,4 @@ src/main/java/*.class
 
 # Data folder
 data/
+../../data/
