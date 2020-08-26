@@ -99,4 +99,20 @@ public class Ui {
     public void showLoadingError() {
         this.displayMessages("Ugh, I can't remember what you told me to remind you :(");
     }
+
+    public void displayMatchingTasks(List<Task> matchingTasks) {
+        int noOfTasks = matchingTasks.size();
+        if (noOfTasks == 0) {
+            this.displayMessages("Well, I don't recall you asking me to note down anything like that.");
+        } else {
+            String[] messages = new String[noOfTasks + 1];
+            messages[0] = "Right, here's some tasks that match what you asked for:";
+
+            for (int i = 0; i < noOfTasks; i++) {
+                messages[i + 1] = String.format("%3d: %s", i + 1, matchingTasks.get(i));
+            }
+
+            this.displayMessages(messages);
+        }
+    }
 }

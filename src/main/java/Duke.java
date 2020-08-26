@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -80,6 +81,11 @@ public class Duke {
             switch (command) {
             case "list": // show tasks available
                 this.ui.displayTasks(this.tasks.getTasks());
+                break;
+            case "find":
+                String term = input.substring("find".length()).strip();
+                List<Task> matchingTasks = this.tasks.searchTasks(term);
+                this.ui.displayMatchingTasks(matchingTasks);
                 break;
             case "done": {
                 if (tokens.length < 2) {
