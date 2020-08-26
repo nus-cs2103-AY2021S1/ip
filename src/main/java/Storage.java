@@ -70,6 +70,7 @@ public class Storage {
     /** Saves Duke's current data **/
     public void saveToFile(ArrayList<Task> list) throws DukeException {
         try {
+            createFile();
             clearTheFile();
         } catch (IOException e) {
             throw new DukeException("☹️Sorry, something went wrong and I couldn't save my data... ");
