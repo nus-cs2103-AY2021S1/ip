@@ -16,14 +16,12 @@ public class IOHandler {
         while (!text.equals("bye")) {
 
             String error = DukeExceptionHandler.handleException(text);
-            System.out.println(text + "1");
+            //System.out.println(text);
             if (error != null) {
-                //System.out.println(" if");
-                System.out.print(text + "2");
+                System.out.print(text);
                 System.out.println(error);
 
             } else {
-                //System.out.println( " else");
                 if (text.equals("list")) {
                     System.out.print(taskManager);
 
