@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -113,15 +114,22 @@ public class Chatbot {
                 }
                 String desc = scan.next();
                 System.out.println("Got it. I've added this task:");
-                String dead;
                 String word = scan.next();
                 while (word.indexOf('/') < 0) {
                     desc += " ";
                     desc += word;
                     word = scan.next();
                 }
-                dead = (scan.nextLine()).substring(1);
-                Deadline curr = new Deadline(desc, dead);
+                String dtString = (scan.nextLine()).substring(1);
+                Scanner dT = new Scanner(dtString);
+                LocalDate date = LocalDate.parse(dT.next());
+                Deadline curr;
+                if (dT.hasNext()) {
+                    String duration = dT.next();
+                    curr = new Deadline(desc, date, duration);
+                } else {
+                    curr = new Deadline(desc, date);
+                }
                 System.out.println(curr);
                 arr.add(curr);
                 System.out.println("Now you have " + arr.size() + " tasks in the list.");
@@ -131,15 +139,22 @@ public class Chatbot {
                 }
                 String desc = scan.next();
                 System.out.println("Got it. I've added this task:");
-                String time;
                 String word = scan.next();
                 while (word.indexOf('/') < 0) {
                     desc += " ";
                     desc += word;
                     word = scan.next();
                 }
-                time = (scan.nextLine()).substring(1);
-                Event curr = new Event(desc, time);
+                String dtString = (scan.nextLine()).substring(1);
+                Scanner dT = new Scanner(dtString);
+                LocalDate date = LocalDate.parse(dT.next());
+                Event curr;
+                if (dT.hasNext()) {
+                    String duration = dT.next();
+                    curr = new Event(desc, date, duration);
+                } else {
+                    curr = new Event(desc, date);
+                }
                 System.out.println(curr);
                 arr.add(curr);
                 System.out.println("Now you have " + arr.size() + " tasks in the list.");
