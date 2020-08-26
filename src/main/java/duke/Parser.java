@@ -4,104 +4,125 @@ import java.time.format.FormatStyle;
 
 public class Parser {
 
+    /**
+     * Constructor of Parser.
+     */
     public Parser() {}
 
+    /**
+     * Return Formatted datetime of a task.
+     *
+     * @param dateTime  User input of date and time of a Task object (specifically Deadline/Event).
+     * @returns  Processed datetime of a Deadline or Event object.
+     */
     public String dateTimeParser(String dateTime) {
         DateTimeConverter dtc = new DateTimeConverter(FormatStyle.MEDIUM, FormatStyle.SHORT);
         return dtc.processTime(dateTime);
     }
 
+    /**
+     * Return Specific information of a Task object.
+     *
+     * @param taskLine  Single line of information of a Task object.
+     * @returns  Specific information of a Task contained in an array of Strings.
+     */
     public String[] memoTaskParser(String taskLine) {
-        String[] temp_type = taskLine.split(SpecialFormat.split_notn, 2);
-        String[] temp_details;
-        if (temp_type[0].equals("T")) {
-            temp_details = temp_type[1].split(SpecialFormat.split_notn, 2);
-            return new String[]{temp_type[0], temp_details[0], temp_details[1]};
+        String[] tempType = taskLine.split(SpecialFormat.SPLIT_NOTN, 2);
+        String[] tempDetails;
+        if (tempType[0].equals("T")) {
+            tempDetails = tempType[1].split(SpecialFormat.SPLIT_NOTN, 2);
+            return new String[]{tempType[0], tempDetails[0], tempDetails[1]};
         } else {
-            temp_details = temp_type[1].split(SpecialFormat.split_notn, 3);
-            return new String[]{temp_type[0], temp_details[0], temp_details[1], temp_details[2]};
+            tempDetails = tempType[1].split(SpecialFormat.SPLIT_NOTN, 3);
+            return new String[]{tempType[0], tempDetails[0], tempDetails[1], tempDetails[2]};
         }
     }
 
+    /**
+     * Return Specific information of a Command in Segments.
+     *
+     * @param input  User input of command.
+     * @returns  Specific information of a Command in the form of String array.
+     */
     public String[] commandParser(String input) {
-        String COMMAND_TYPE;
+        String commandType;
         String[] output = new String[]{};
         if (input.equals("bye")) {
-            COMMAND_TYPE = "bye";
-            output = new String[]{COMMAND_TYPE};
+            commandType = "bye";
+            output = new String[] {commandType};
         } else if (input.equals("list")) {
-            COMMAND_TYPE = "list";
-            output = new String[]{COMMAND_TYPE};
+            commandType = "list";
+            output = new String[] {commandType};
         } else {
-            String[] input_split_arr;
-            input_split_arr = input.split(" ", 2);
-            COMMAND_TYPE = input_split_arr[0];
-            String EXCEPTION_TYPE;
-            if (COMMAND_TYPE.equals("done") || COMMAND_TYPE.equals("delete")) {
+            String[] inputSplitArr;
+            inputSplitArr = input.split(" ", 2);
+            commandType = inputSplitArr[0];
+            String exceptionType;
+            if (commandType.equals("done") || commandType.equals("delete")) {
                 try {
-                    String ACTION_NUMBER = input_split_arr[1];
-                    output = new String[]{COMMAND_TYPE, ACTION_NUMBER};
+                    String actionNumber = inputSplitArr[1];
+                    output = new String[] {commandType, actionNumber};
                 } catch (Exception ex) {
-                    COMMAND_TYPE = "exception";
-                    return new String[] {COMMAND_TYPE, "empty_illegal"};
+                    commandType = "exception";
+                    return new String[] {commandType, "empty_illegal"};
                 }
-            } else if (COMMAND_TYPE.equals("deadline") || COMMAND_TYPE.equals("event") || COMMAND_TYPE.equals("todo")) {
-                String TASK_CONTENT;
-                String DATE_TIME;
-                boolean exception_absent = true;
-                if (!COMMAND_TYPE.equals("todo")) {
+            } else if (commandType.equals("deadline") || commandType.equals("event") || commandType.equals("todo")) {
+                String taskContent;
+                String dateTime;
+                boolean exceptionAbsent = true;
+                if (!commandType.equals("todo")) {
                     try {
-                        input_split_arr = input_split_arr[1].split(
-                                COMMAND_TYPE.equals("event") ? " /at " : " /by ", 2);
+                        inputSplitArr = inputSplitArr[1].split(
+                                commandType.equals("event") ? " /at " : " /by ", 2);
                     } catch (Exception ex) {
-                        exception_absent = false;
-                        EXCEPTION_TYPE = COMMAND_TYPE.equals("deadline")
+                        exceptionAbsent = false;
+                        exceptionType = commandType.equals("deadline")
                                 ? "deadline"
                                 : "event";
-                        COMMAND_TYPE = "exception";
-                        return new String[] {COMMAND_TYPE, EXCEPTION_TYPE};
+                        commandType = "exception";
+                        return new String[] {commandType, exceptionType};
                     }
                 }
-                if (exception_absent) {
-                    if (COMMAND_TYPE.equals("todo")) {
+                if (exceptionAbsent) {
+                    if (commandType.equals("todo")) {
                         try {
-                            TASK_CONTENT = input_split_arr[1];
+                            taskContent = inputSplitArr[1];
                         } catch (Exception e) {
                             return new String[] {"exception", "todo"};
                         }
-                        output = new String[] {COMMAND_TYPE, TASK_CONTENT};
+                        output = new String[] {commandType, taskContent};
                     } else {
                         try {
-                            TASK_CONTENT = input_split_arr[0];
-                            DATE_TIME = input_split_arr[1];
-                            DATE_TIME = this.dateTimeParser(DATE_TIME);
-                            output = new String[] {COMMAND_TYPE, TASK_CONTENT, DATE_TIME};
+                            taskContent = inputSplitArr[0];
+                            dateTime = inputSplitArr[1];
+                            dateTime = this.dateTimeParser(dateTime);
+                            output = new String[] {commandType, taskContent, dateTime};
                         } catch (Exception ex) {
-                            exception_absent = false;
-                            EXCEPTION_TYPE = COMMAND_TYPE.equals("event")
+                            exceptionAbsent = false;
+                            exceptionType = commandType.equals("event")
                                     ? "event"
                                     : "deadline";
-                            COMMAND_TYPE = "exception";
-                            return new String[] {COMMAND_TYPE, EXCEPTION_TYPE};
+                            commandType = "exception";
+                            return new String[] {commandType, exceptionType};
                         }
                     }
                     try {
 
                     } catch (Exception ex) {
-                        exception_absent = false;
-                        EXCEPTION_TYPE = COMMAND_TYPE.equals("todo")
+                        exceptionAbsent = false;
+                        exceptionType = commandType.equals("todo")
                                 ? "todo"
-                                : COMMAND_TYPE.equals("event")
+                                : commandType.equals("event")
                                 ? "event"
                                 : "deadline";
-                        COMMAND_TYPE = "exception";
-                        return new String[] {COMMAND_TYPE, EXCEPTION_TYPE};
+                        commandType = "exception";
+                        return new String[] {commandType, exceptionType};
                     }
                 }
             } else {
-                EXCEPTION_TYPE = "no_meaning";
-                COMMAND_TYPE = "exception";
-                return new String[] {COMMAND_TYPE, EXCEPTION_TYPE};
+                exceptionType = "no_meaning";
+                commandType = "exception";
+                return new String[] {commandType, exceptionType};
             }
         }
         return output;
