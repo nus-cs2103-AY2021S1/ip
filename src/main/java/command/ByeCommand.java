@@ -8,10 +8,7 @@ public class ByeCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        String close = "_______________________________________ \n"
-                + "Goodbye! See you soon! \n"
-                + "_______________________________________ \n";
-        System.out.println(close);
+        ui.goodbye();
     }
 
     @Override

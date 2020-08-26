@@ -1,5 +1,6 @@
 package command;
 
+import exception.DukeException;
 import storage.Storage;
 import tasklist.TaskList;
 import ui.Ui;
@@ -12,7 +13,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int taskId = Integer.parseInt(taskIdString);
         if (taskId <=0 || taskId > taskList.size()) {
             System.out.println(ui.LINE + "Invalid input! That task does not exist! \n" + ui.LINE);
@@ -24,6 +25,7 @@ public class DeleteCommand extends Command {
                     + "\n" + ui.LINE);
             taskList.delete(taskId - 1);
         }
+        storage.save(taskList);
     }
 
     @Override

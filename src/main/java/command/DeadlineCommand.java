@@ -1,5 +1,6 @@
 package command;
 
+import exception.DukeException;
 import storage.Storage;
 import task.Deadline;
 import tasklist.TaskList;
@@ -13,7 +14,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] details = this.deadlineDetails.split(" /by ", 2);
         Deadline newDeadline = new Deadline(details[0], details[1], false);
         taskList.add(newDeadline);
@@ -22,6 +23,7 @@ public class DeadlineCommand extends Command {
                 + "Now you have " + taskList.size() + " tasks in the list."
                 + "\n" + ui.LINE;
         System.out.println(output);
+        storage.save(taskList);
     }
 
     @Override

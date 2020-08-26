@@ -22,6 +22,7 @@ public class DoneCommand extends Command {
             System.out.println(ui.LINE + "Nice! I've marked this task as done: \n"
                     + taskList.get(taskId - 1) + "\n" + ui.LINE);
         }
+        storage.save(taskList);
     }
 
     @Override

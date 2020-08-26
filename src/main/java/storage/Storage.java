@@ -2,6 +2,7 @@ package storage;
 
 import exception.DukeException;
 import task.*;
+import tasklist.TaskList;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -48,11 +49,11 @@ public class Storage {
         return taskList;
     }
 
-    public void save() throws DukeException {
+    public void save(TaskList taskList) throws DukeException {
         try {
             FileWriter writer = new FileWriter(file);
-            for (int i = 0; i < Duke.taskList.size(); i++) {
-                Task task = Duke.taskList.get(i);
+            for (int i = 0; i < taskList.size(); i++) {
+                Task task = taskList.get(i);
                 writer.write(task.toEncoding() + System.lineSeparator());
             }
             writer.close();

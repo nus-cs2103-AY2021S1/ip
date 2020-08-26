@@ -21,6 +21,7 @@ public class TodoCommand extends Command {
                 + "Now you have " + taskList.size() + " tasks in the list."
                 + "\n" + ui.LINE;
         System.out.println(output);
+        storage.save(taskList);
     }
 
     @Override
