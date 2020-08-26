@@ -58,4 +58,8 @@ public class Ui {
         System.out.println("     Got it. I've added this task:\n       " + task +
                 "\n     Now you have " + listLength + " tasks in the list.");
     }
+    
+    void showMatchingTask(String taskList) {
+        System.out.println("     Here are the matching tasks in your list:\n" + taskList);
+    }
 }

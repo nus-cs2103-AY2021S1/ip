@@ -26,6 +26,16 @@ public class Parser {
     private static DeleteCommand delete(String input) throws DukeException {
         return new DeleteCommand(getTaskIndex(input, "delete"));
     }
+    
+    private static FindCommand find(String input) throws DukeException {
+        if (input.equals("find") || input.equals("find ")) {
+            throw new EmptyDescriptionException("find");
+        } else if (input.startsWith("find ") && input.length() > 5) {
+            return new FindCommand(input.substring(5));
+        } else {
+            throw new DukeException();
+        }
+    }
 
     private static AddCommand newTodo(String input) throws DukeException {
         if (input.equals("todo") || input.equals("todo ")) {
@@ -94,6 +104,8 @@ public class Parser {
                 return done(input);
             } else if (input.startsWith("delete")) {
                 return delete(input);
+            } else if (input.startsWith("find")) {
+                return find(input);
             } else if (input.startsWith("todo")) {
                 return newTodo(input);
             } else if (input.startsWith("deadline")) {
