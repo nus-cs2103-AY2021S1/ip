@@ -76,8 +76,4 @@ public class TaskList {
     protected ArrayList<Task> get() {
         return this.list;
     }
-
-
-
-
 }

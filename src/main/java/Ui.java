@@ -12,8 +12,6 @@ public class Ui {
             "What can I do for you?\n" +
             "____________________________________________________________";
 
-
-
     /**
      * Prints out the greeting message
      */

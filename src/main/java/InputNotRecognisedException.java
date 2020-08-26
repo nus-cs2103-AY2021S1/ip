@@ -1,5 +1,4 @@
 public class InputNotRecognisedException extends DukeException {
-
     public String toString() {
         return "____________________________________________________________"
                 + "\n"

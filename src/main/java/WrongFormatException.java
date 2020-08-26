@@ -27,6 +27,5 @@ public class WrongFormatException extends DukeException{
         } else {
             return "No such Task type";
         }
-
     }
 }
