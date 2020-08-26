@@ -77,6 +77,13 @@ public class Parser {
                 ui.wrongFormatAfterDelete();
             }
             return CONTINUE;
+        } else if(command[ptr].equals("find")){
+            if(ptr + 1 >= command.length){
+                ui.wrongFindFormat();
+                return CONTINUE;
+            }
+            Finder.find(list, command[ptr + 1]);
+            return CONTINUE;
         } else if(command[ptr].equals("todo")){
             Todo newTodo = Todo.of(inputCommand);
             if(newTodo == null){

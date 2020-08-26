@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 public class Ui {
 
     public static int TODO = 0, DEADLINE = 1, EVENT = 2;
@@ -173,5 +175,26 @@ public class Ui {
     public void noSuchCommand(){
         System.out.println("\uD83D\uDE43 Sorry~ please specify whether this is a todo or a deadline or a event\n" +
                 "put the word \"todo\" or \"deadline\" or \"event\" in front of your description");
+    }
+
+    /**
+     * Prints the Tasks of finding result for matching keyword
+     * @param list the list oof Tasks that contains matching keyword
+     */
+    public static void printFindResult(ArrayList<Task> list){
+        System.out.println("____________________________________________________________");
+        System.out.println("Here are the matching tasks in your list:");
+        for(int i = 0; i < list.size(); i++){
+            System.out.println(String.format("%d. ", i + 1) + list.get(i).toString());
+        }
+        System.out.println("____________________________________________________________");
+    }
+
+    /**
+     * Prints the wrong find format error
+     */
+    public void wrongFindFormat(){
+        System.out.println("Wrong \"find\" command format.");
+        System.out.println("Correct is \"find {keyword}\" where {keyword} is the keyword you want to search");
     }
 }
