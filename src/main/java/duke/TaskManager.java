@@ -12,21 +12,21 @@ import java.util.function.Consumer;
 public class TaskManager {
 
     /** List for storing objects in order. */
-    private List<Task> storage;
+    private List<Task> taskStorage;
 
     /**
      * Creates a new empty <code>TaskManager</code>.
      */
     public TaskManager() {
-        this.storage = new ArrayList<>();
+        this.taskStorage = new ArrayList<>();
     }
 
     /**
      * Creates a new <code>TaskManager</code> with <code>Task</code> objects from <code>fromSaveData</code>.
-     * @param fromSaveData List of tasks to initialise <code>TaskManager</code> with.
+     * @param tasksFromSaveData List of tasks to initialise <code>TaskManager</code> with.
      */
-    public TaskManager(List<Task> fromSaveData) {
-        this.storage = new ArrayList<>(fromSaveData);
+    public TaskManager(List<Task> tasksFromSaveData) {
+        this.taskStorage = new ArrayList<>(tasksFromSaveData);
     }
 
     /**
@@ -37,7 +37,7 @@ public class TaskManager {
      * @return <code>List</code> of <code>Task</code>s in <code>TaskManager</code>.
      */
     public List<Task> getAllTasks() {
-        return new ArrayList<>(this.storage);
+        return new ArrayList<>(this.taskStorage);
     }
 
     /**
@@ -46,7 +46,7 @@ public class TaskManager {
      * @param t New <code>Task</code>.
      */
     public void storeTask(Task t) {
-        this.storage.add(t);
+        this.taskStorage.add(t);
     }
 
     /**
@@ -59,7 +59,7 @@ public class TaskManager {
      * @return Desired <code>Task</code>.
      */
     public Task getTask(int index) {
-        return this.storage.get(index);
+        return this.taskStorage.get(index);
     }
 
     /**
@@ -72,7 +72,7 @@ public class TaskManager {
      * @return Deleted <code>Task</code>.
      */
     public Task removeTask(int index) {
-        return this.storage.remove(index);
+        return this.taskStorage.remove(index);
     }
 
     /**
@@ -81,7 +81,7 @@ public class TaskManager {
      * @param action <code>Consumer</code> to be performed on each <code>Task</code>.
      */
     public void forEach(Consumer<? super Task> action) {
-        this.storage.forEach(action);
+        this.taskStorage.forEach(action);
     }
 
     /**
@@ -90,7 +90,7 @@ public class TaskManager {
      * @return Number of <code>Task</code>s.
      */
     public int size() {
-        return this.storage.size();
+        return this.taskStorage.size();
     }
 
     /**
@@ -99,11 +99,15 @@ public class TaskManager {
      * @return Formatted String.
      */
     public String toString() {
+
         StringBuilder printString = new StringBuilder();
+
         for (int i = 0; i < this.size(); i++) {
             printString.append(i + 1).append(". ").append(this.getTask(i).toString()).append("\n");
         }
+
         return printString.toString();
+
     }
 
 }

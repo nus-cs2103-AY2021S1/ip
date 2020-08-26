@@ -7,13 +7,13 @@ import java.util.Scanner;
  */
 public class InputHandler {
 
-    Scanner sc;
+    Scanner scanner;
 
     /**
      * Initializes a new <code>InputHandler</code>.
      */
     public InputHandler() {
-        this.sc = new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
     }
 
     /**
@@ -21,6 +21,6 @@ public class InputHandler {
      * @return Input line from user.
      */
     public String input() {
-        return this.sc.nextLine();
+        return this.scanner.nextLine();
     }
 }

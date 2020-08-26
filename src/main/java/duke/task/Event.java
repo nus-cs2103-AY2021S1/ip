@@ -31,10 +31,10 @@ public class Event extends Task {
      *
      * @param name Name of <code>Event</code>.
      * @param when Time when <code>Event</code> occurs.
-     * @param done Whether <code>Event</code> has been done.
+     * @param isDone Whether <code>Event</code> has been done.
      */
-    public Event(String name, String when, boolean done) {
-        super(name, done);
+    public Event(String name, String when, boolean isDone) {
+        super(name, isDone);
         this.when = TimePoint.of(when);
     }
 
@@ -56,9 +56,12 @@ public class Event extends Task {
      */
     @Override
     public HashMap<String, String> convertToHashMap() {
+
         HashMap<String, String> dict = super.convertToHashMap();
+
         dict.put("type", "duke.task.Event");
         dict.put("when", this.when.toSaveString());
+
         return dict;
     }
 }

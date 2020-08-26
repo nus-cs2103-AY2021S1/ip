@@ -37,9 +37,13 @@ public class Duke {
      * @param filePath Path object representing save file directory.
      */
     public Duke(Path filePath) {
+        // Initialise properties
         this.filePath = filePath;
         this.ui = new Ui(new InputHandler(), new OutputHandler());
         this.saveManager = new SaveManager(this.filePath);
+
+        // Attempts to load save file.
+        // If fails, initialises Duke without save data.
         try {
             this.taskManager = saveManager.load();
         } catch (DukeSaveDataException e) {
@@ -58,15 +62,23 @@ public class Duke {
      */
     public void run() {
 
+        // Main software loop.
         while(true) {
 
             try {
+                // Parse user input into software command.
                 Command command = Parser.parse(this.ui.readCommand());
+
+                // Execute user command.
                 command.execute(this.ui, this.taskManager, this.saveManager);
+
+                // Terminate software loop if exit command is given.
                 if (command.isByeCommand()) {
                     break;
                 }
+
             } catch (DukeInputException e) {
+                // Display Exception without terminating loop if one is thrown.
                 ui.displayException(e);
             }
 
@@ -80,24 +92,12 @@ public class Duke {
      * @param args No args required.
      */
     public static void main(String[] args) {
-        //initialize Duke with save data and send welcome message
+        // Initialize Duke with save data and send welcome message
         Duke duke = new Duke(Path.of("data/data.txt"));
         duke.ui.displayGreet();
 
-        //input loop
+        // Start input loop
         duke.run();
-
-        /*testing code to check if printout to savefile worked
-        try {
-            Scanner sc2 = new Scanner(new File("/data/data.txt"));
-            while (sc2.hasNext()) {
-                System.out.println(sc2.nextLine());
-            }
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
-
-         */
 
     }
 }

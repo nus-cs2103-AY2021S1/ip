@@ -32,12 +32,18 @@ public class DoneCommand extends ComplexCommand {
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
 
         try {
+            // Attempt to parse parameter and get task at given index
             int index = this.parseParams(taskManager.size());
+
             Task temp = taskManager.getTask(index-1);
+
+            // Mark task as done
             temp.doTask();
 
+            // Display status message to user
             ui.display("Nice! I've marked this task as done:");
             ui.display("\t" + temp.toString());
+
         } catch (DukeInputException e) {
             ui.displayException(e);
         }
@@ -45,22 +51,28 @@ public class DoneCommand extends ComplexCommand {
     }
 
     private int parseParams(int taskManagerSize) throws DukeInputException {
+
+        // Check if parameters are empty
         if (this.params.equals("")) {
             throw new DukeInputException("'done' requires parameters.\n"
                     + "Use case: done <task number>");
         }
-        int i;
+
+        // Check if numerical parameter is given
+        int index;
         try {
-            i = Integer.parseInt(params);
+            index = Integer.parseInt(params);
         } catch (NumberFormatException e) {
             throw new DukeInputException("Please input number instead of <"
                     + this.params + "> after a 'done' command!");
         }
 
-        if (i < 1 || i > taskManagerSize) {
+        // Check if index is valid
+        if (index < 1 || index > taskManagerSize) {
             throw new DukeInputException("Index input out of range");
         }
-        return i;
+
+        return index;
     }
 
 }

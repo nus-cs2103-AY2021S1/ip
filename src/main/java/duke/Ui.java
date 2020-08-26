@@ -15,12 +15,12 @@ public class Ui {
     /**
      * Constructs <code>Ui</code> object given an <code>InputHandler</code> and an <code>OutputHandler</code>
      *
-     * @param in <code>InputHandler</code> for receiving inputs
-     * @param out <code>OutputHandler</code> for displaying outputs
+     * @param inputHandler <code>InputHandler</code> for receiving inputs
+     * @param outputHandler <code>OutputHandler</code> for displaying outputs
      */
-    public Ui(InputHandler in, OutputHandler out) {
-        this.inputHandler = in;
-        this.outputHandler = out;
+    public Ui(InputHandler inputHandler, OutputHandler outputHandler) {
+        this.inputHandler = inputHandler;
+        this.outputHandler = outputHandler;
     }
 
     /**
@@ -32,6 +32,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+
         this.display("Hello from\n" + logo);
     }
 
