@@ -1,4 +1,8 @@
+package duke.exceptions;
+
+
 public class DukeInvalidDescriptionException extends DukeException {
+
     public DukeInvalidDescriptionException() {
         super();
     }
@@ -7,4 +11,5 @@ public class DukeInvalidDescriptionException extends DukeException {
     public DukeInvalidDescriptionException(String errMsg) {
         super(errMsg);
     }
+
 }

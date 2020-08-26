@@ -1,3 +1,9 @@
+package duke.task;
+
+import duke.exceptions.DukeInvalidDescriptionException;
+import duke.exceptions.DukeNoDateException;
+import duke.exceptions.DukeNoDescriptionException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

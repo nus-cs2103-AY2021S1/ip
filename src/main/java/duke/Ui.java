@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -74,5 +76,5 @@ public class Ui {
         System.out.println("____________________________________________________________");
 
     }
-    
+
 }

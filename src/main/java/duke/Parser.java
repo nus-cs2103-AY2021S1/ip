@@ -1,3 +1,9 @@
+package duke;
+
+import duke.command.Command;
+import duke.task.TaskType;
+
+
 public class Parser {
 
     /**

@@ -1,3 +1,17 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.task.TaskType;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeInvalidCommandException;
+import duke.exceptions.DukeInvalidDescriptionException;
+import duke.exceptions.DukeNoDateException;
+import duke.exceptions.DukeNoDescriptionException;
+
 import java.util.ArrayList;
 import java.lang.StringBuilder;
 import java.util.Arrays;
@@ -7,7 +21,7 @@ public class DukeList {
 
     final ArrayList<Task> list;
     private static final int CAPACITY = 100;
-    
+
     private final Storage store = new Storage("data", "duke.txt");
 
 
@@ -153,7 +167,8 @@ public class DukeList {
                 String.format("\t%s\n", removedTask.toString())
                 + String.format("%s", this.getListStats());
     }
-    
+
+
     public void writeToFile() {
         this.store.writeToFile();
     }
