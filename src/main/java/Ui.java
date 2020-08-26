@@ -7,7 +7,8 @@ public class Ui {
         Parser parser = new Parser(currList);
         while (sc.hasNext()) {
             String inputMsg = sc.nextLine();
-            if (inputMsg.equals("bye")) { // ends the bot
+            if (inputMsg.equals("bye")) {
+                // ends the bot
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }
