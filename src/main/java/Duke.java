@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Duke {
     private static final String helloMsg = "Hello, I'm Eggy!\n" + "How may I help you?";
@@ -33,9 +34,9 @@ public class Duke {
                 if (command[0].equals("T")) {
                     taskList.add(new ToDo(command[2]));
                 } else if (command[0].equals("E")) {
-                    taskList.add(new Event(command[2], command[3]));
+                    taskList.add(new Event(command[2], LocalDate.parse(command[3])));
                 } else {
-                    taskList.add(new Deadline(command[2], command[3]));
+                    taskList.add(new Deadline(command[2], LocalDate.parse(command[3])));
                 }
                 if (command[1].equals("✓")) {
                     taskList.get(taskList.size() - 1).completeTask();
@@ -51,24 +52,24 @@ public class Duke {
         PrintWriter printer = new PrintWriter(writer);
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            String[] details = new String[4];
-            details[2] = task.description;
+            String[] command = new String[4];
+            command[2] = task.description;
             if (task instanceof ToDo) {
-                details[0] = "T";
+                command[0] = "T";
             } else if (task instanceof Deadline) {
-                details[0] = "D";
-                details[3] = ((Deadline) task).by;
+                command[0] = "D";
+                command[3] = ((Deadline) task).by.toString();
             } else {
-                details[0] = "E";
-                details[3] = ((Event) task).at;
+                command[0] = "E";
+                command[3] = ((Event) task).at.toString();
             }
             if (!task.isDone) {
-                details[1] = "✘";
+                command[1] = "✘";
             } else {
-                details[1] = "✓";
+                command[1] = "✓";
             }
-            String textLine = details[0] + " | " + details[1] + " | " + details[2]
-                    + " | " + details[3];
+            String textLine = command[0] + " | " + command[1] + " | " + command[2]
+                    + " | " + command[3];
             printer.printf("%s" + "%n", textLine);
         }
         printer.close();
@@ -127,19 +128,17 @@ public class Duke {
             if (command.length() <= 9 || command.substring(9).trim().isEmpty()) {
                 throw new DukeException("Please enter the description and deadline of your task");
             }
-            String str = command.substring(9);
-            String[] split = str.split("/by ");
+            String[] split = command.split("/by ");
             String description = split[0];
-            String by = split[1];
+            LocalDate by = LocalDate.parse(split[1]);
             task = new Deadline(description, by);
         } else if (command.equals("event") || command.startsWith("event ")) {
             if (command.length() <= 6 || command.substring(6).trim().isEmpty()) {
                 throw new DukeException("Please enter the description and timing of your event");
             }
-            String str = command.substring(6);
-            String[] split = str.split("/at ");
+            String[] split = command.split("/at ");
             String description = split[0];
-            String at = split[1];
+            LocalDate at = LocalDate.parse(split[1]);
             task = new Event(description, at);
         } else {
             System.out.println("I don't get what you're saying :( \n" + typeTask);
