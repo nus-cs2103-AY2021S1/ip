@@ -13,13 +13,6 @@ public class Ui {
         System.out.println(wrapMessage(greeting));
     }
 
-    String readInput() {
-        Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
-        sc.close();
-        return str;
-    }
-
     void exit() {
         String byeMessage = "Bye! ( ´ ▽ ` )/";
         System.out.println(wrapMessage(byeMessage));

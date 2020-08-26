@@ -28,9 +28,11 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
         try {
             Scanner s = new Scanner(file);
+
             while (s.hasNext()) {
                 tasks.add(readData(s.nextLine()));
             }
+
             s.close();
             return tasks;
         } catch (FileNotFoundException e) {
@@ -60,9 +62,11 @@ public class Storage {
     public void saveFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         String textToAdd = "";
+
         for (Task task: tasks.getList()) {
             textToAdd += task.formatTaskForFile() + "\n";
         }
+
         fw.write(textToAdd);
         fw.close();
     }
