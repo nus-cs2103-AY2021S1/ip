@@ -6,6 +6,9 @@ import duke.Ui;
 
 import exceptions.InvalidByeCommandException;
 
+/**
+ * Class to initiate the bye command.
+ */
 public class ByeCommand extends Command {
 
     public ByeCommand(String fullCommand) {
@@ -17,6 +20,15 @@ public class ByeCommand extends Command {
         return true;
     }
 
+    /**
+     * Executes the bye command, and sends a signal to exit the duke program,
+     * if there are no errors in the code.
+     *
+     * @param taskList Task list which contains the current task.
+     * @param ui Ui object to interact with the user.
+     * @param storage Storage object to read or save the task list in the hardware.
+     * @throws InvalidByeCommandException If the format of bye command is wrong.
+     */
     @Override
     public void executeCommand(TaskList taskList, Ui ui, Storage storage)
             throws InvalidByeCommandException {

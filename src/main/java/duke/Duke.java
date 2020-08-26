@@ -7,6 +7,10 @@ import exceptions.DukeException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Class that initiates the Duke object. Contains methods to run the duke bot.
+ * the appropriate Command object.
+ */
 public class Duke {
 
     // path of the data to be stored
@@ -26,6 +30,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Method to run the duke bot. Controls the interaction between different classes to
+     * achieve the bot behavior. Method stops when "bye" command is entered.
+     *
+     */
     public void runDuke() {
         ui.welcomeMessage(tasks.toString());
         boolean isExit = false;

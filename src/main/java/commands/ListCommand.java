@@ -6,6 +6,9 @@ import duke.Ui;
 
 import exceptions.InvalidListCommandException;
 
+/**
+ * Class to initiate the list command.
+ */
 public class ListCommand extends Command{
     public ListCommand(String fullCommand) {
         super(fullCommand);
@@ -16,6 +19,15 @@ public class ListCommand extends Command{
         return false;
     }
 
+    /**
+     * Executes the list command, and prints out the list of items in the task list,
+     * if there are no errors in the code.
+     *
+     * @param taskList Task list which contains the current task.
+     * @param ui Ui object to interact with the user.
+     * @param storage Storage object to read or save the task list in the hardware.
+     * @throws InvalidListCommandException If the format of list command is wrong.
+     */
     @Override
     public void executeCommand(TaskList taskList, Ui ui, Storage storage) throws InvalidListCommandException {
         String[] tempArray = fullCommand.trim().split(" ");

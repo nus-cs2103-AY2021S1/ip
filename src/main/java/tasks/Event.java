@@ -4,6 +4,9 @@ import duke.Time;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class to initiate a Event task.
+ */
 public class Event extends Task {
     private LocalDateTime by;
 

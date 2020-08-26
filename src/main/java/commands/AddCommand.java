@@ -14,6 +14,10 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.ToDo;
 
+/**
+ * Class that contains commands that can add task to the task list.
+ * Handles cases for event, todo and deadline commands.
+ */
 public class AddCommand extends Command{
 
     public AddCommand(String fullCommand) {
@@ -25,6 +29,20 @@ public class AddCommand extends Command{
         return false;
     }
 
+    /**
+     * Executes event, todo or deadline commands and makes sure that the format of the given
+     * string is correct.
+     * Throws InvalidCommandException if the command is unknown.
+     *
+     * @param taskList Task list which contains the current task.
+     * @param ui Ui object to interact with the user.
+     * @param storage Storage object to read or save the task list in the hardware.
+     * @throws InvalidToDoFormatException If todo command format is wrong.
+     * @throws InvalidDeadlineFormatException If deadline command format is wrong.
+     * @throws InvalidTimeException If format of the input time given by the user is wrong.
+     * @throws InvalidCommandException If command does not match event, todo or deadline.
+     * @throws InvalidEventFormatException If event command format is wrong.
+     */
     @Override
     public void executeCommand(TaskList taskList, Ui ui, Storage storage) throws InvalidToDoFormatException,
             InvalidDeadlineFormatException, InvalidTimeException, InvalidCommandException,
