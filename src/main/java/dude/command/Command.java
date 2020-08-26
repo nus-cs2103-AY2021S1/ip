@@ -1,4 +1,11 @@
-abstract class Command {
+package dude.command;
+
+import dude.util.CommandException;
+import dude.util.Storage;
+import dude.util.TaskList;
+import dude.util.Ui;
+
+public abstract class Command {
     private String action;
     protected boolean isExit;
 

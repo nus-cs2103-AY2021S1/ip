@@ -1,3 +1,18 @@
+package dude;
+
+import dude.command.Command;
+
+import dude.command.DeadlineCommand;
+import dude.command.DeleteCommand;
+import dude.command.DoneCommand;
+import dude.command.ExitCommand;
+import dude.command.EventCommand;
+import dude.command.ListCommand;
+import dude.command.TodoCommand;
+
+import dude.util.InvalidArgumentException;
+import dude.util.InvalidCommandException;
+
 public class Parser {
     public static Command parse(String input) throws InvalidArgumentException, InvalidCommandException {
             String[] commands = input.split(" ", 2);

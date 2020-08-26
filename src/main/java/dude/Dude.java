@@ -1,13 +1,19 @@
+package dude;
+
 import java.io.FileNotFoundException;
 
-public class Duke {
+import dude.util.*;
+
+import dude.command.Command;
+
+public class Dude {
     private static final String BYE = "bye";
     private static final String FILEPATH = "./data/tasks.txt";
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
 
-    private Duke() {
+    public Dude() {
         ui = new Ui();
         storage = new Storage(FILEPATH);
         try {
@@ -31,16 +37,9 @@ public class Duke {
                 command.execute(tasks, ui ,storage);
                 isExit = command.isExit();
                 ui.showMessage();
-            } catch (CommandException | InvalidArgumentException | InvalidCommandException e){
+            } catch (CommandException | InvalidArgumentException |InvalidCommandException e){
                 ui.showError(e.getMessage());
             }
         }
-    }
-
-
-
-    public static void main(String[] args) {
-        Duke bot = new Duke();
-        bot.run();
     }
 }

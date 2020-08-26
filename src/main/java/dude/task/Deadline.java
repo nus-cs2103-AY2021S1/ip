@@ -1,5 +1,6 @@
+package dude.task;
+
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Deadline extends DatedTask {
     public Deadline(String description, LocalDate by) {

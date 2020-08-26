@@ -1,5 +1,6 @@
+package dude.task;
+
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Event extends DatedTask {
     public Event(String description, LocalDate at) {

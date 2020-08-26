@@ -1,3 +1,5 @@
+package dude.util;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
@@ -14,6 +16,11 @@ import java.util.Scanner;
 import java.lang.StringBuilder;
 
 import java.time.LocalDate;
+
+import dude.task.Task;
+import dude.task.Deadline;
+import dude.task.Event;
+import dude.task.Todo;
 
 public class Storage {
     private String filePath;

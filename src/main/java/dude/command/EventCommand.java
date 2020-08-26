@@ -1,6 +1,16 @@
+package dude.command;
+
+import dude.util.CommandException;
+import dude.util.Storage;
+import dude.util.TaskList;
+import dude.util.Ui;
+
 import java.io.IOException;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
+
+import dude.task.Event;
 
 public class EventCommand extends Command {
     private String description;

@@ -1,5 +1,9 @@
+package dude.util;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import dude.task.Task;
 
 public class TaskList {
     private List<Task> tasks;

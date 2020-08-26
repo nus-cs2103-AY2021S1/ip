@@ -1,4 +1,5 @@
-import java.lang.invoke.StringConcatException;
+package dude.util;
+
 import java.util.Scanner;
 
 public class Ui {
