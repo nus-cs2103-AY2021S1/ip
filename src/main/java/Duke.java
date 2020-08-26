@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
-    private static ArrayList<Task> tasks = new ArrayList<>();
-
-    public static ArrayList<Task> getTasks() {
-        return tasks;
-    }
+    private static TaskList tasks = new TaskList();
+    private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -56,7 +56,7 @@ public class Duke {
                 try {
                     int index = Integer.parseInt(s.split(" ")[1]) - 1;
                     Task t = tasks.get(index);
-                    tasks.remove(index);
+                    tasks.removeTask(index);
                     System.out.println("Nice, I have removed this task: " + "\n" + t.toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 } catch (ArrayIndexOutOfBoundsException e) {
@@ -75,8 +75,8 @@ public class Duke {
 
             if (s.startsWith("todo")) {
                 try {
-                    Todo t = new Todo(s.substring(5));
-                    tasks.add(t);
+                    Todo t = new Todo(s.substring(5), false);
+                    tasks.addTask(t);
                     System.out.println("Got it. I've added this task: " + "\n" + t.toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 } catch (StringIndexOutOfBoundsException e) {
@@ -97,7 +97,6 @@ public class Duke {
                     }
                 }
 
-
                 continue;
             } // if starts with todo, the string after todo should be in the task.
 
@@ -106,8 +105,9 @@ public class Duke {
                     String[] divide = s.substring(9).split(" /by ");
                     String description = divide[0];
                     String ddl = divide[1];
-                    Deadline d = new Deadline(description, ddl);
-                    tasks.add(d);
+                    LocalDate deadline = LocalDate.parse(divide[1], formatter); // parse deadline
+                    Deadline d = new Deadline(description, deadline, false);
+                    tasks.addTask(d);
                     System.out.println("Got it. I've added this task: " + "\n" + d.toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 } catch (StringIndexOutOfBoundsException e) {
@@ -134,7 +134,7 @@ public class Duke {
                     String description = divide[0];
                     String time = divide[1];
                     Event e = new Event(description, time);
-                    tasks.add(e);
+                    tasks.addTask(e);
                     System.out.println("Got it. I've added this task: " + "\n" + e.toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 } catch (StringIndexOutOfBoundsException e) {

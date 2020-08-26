@@ -8,7 +8,7 @@ public class FileLoader {
     private static final String directoryPath = "data";
     private static final String filePath = "data/duke.txt";
 
-    public static void readSavedFile(ArrayList<Task> tasks) {
+    public static void readSavedFile(TaskList tasks) {
         try {
             File directory = new File(directoryPath);
 
@@ -25,7 +25,7 @@ public class FileLoader {
                 while (sc.hasNextLine()) {
                     String line = sc.nextLine();
                     String[] store = line.split(" ", 2);
-                    Duke.getTasks().add(new Task(store[1]));
+                    tasks.getTasks().add(new Task(store[1]));
                 }
                 sc.close();
                 System.out.println("All the data has been loaded!");
@@ -35,10 +35,10 @@ public class FileLoader {
         }
     }
 
-    public static void saveToFile(ArrayList<Task> tasks) {
+    public static void saveToFile(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter(filePath);
-            for (Task task : Duke.getTasks()) {
+            for (Task task : tasks.getTasks()) {
                 String[] store = task.toString().split(" ");
                 writer.write(store[0] + " " + store[1] + " " + store[2] + System.lineSeparator());
             }
