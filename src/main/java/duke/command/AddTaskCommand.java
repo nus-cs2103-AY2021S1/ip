@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.exception.StorageException;
+import duke.task.TaskList;
+import duke.task.TaskType;
+
 import java.time.LocalDate;
 
 public class AddTaskCommand extends Command {

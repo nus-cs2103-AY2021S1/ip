@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.exception.InvalidTaskException;
+import duke.exception.StorageException;
+import duke.task.TaskList;
+
 public class DoneCommand extends Command {
     private int taskIndex;
 

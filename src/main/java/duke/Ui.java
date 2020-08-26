@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class Ui {
@@ -35,7 +39,7 @@ public class Ui {
     }
 
     public static void todayMessage(ArrayList<Task> taskList){
-        // TODO: refactor to filter in TaskList class
+        // TODO: refactor to filter in duke.task.TaskList class
         System.out.println("    ____________________________________________________________");
         System.out.println("    Here are today's tasks!!");
         int index = 1;
