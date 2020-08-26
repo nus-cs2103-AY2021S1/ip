@@ -3,6 +3,9 @@ package duke.storage;
 import duke.task.Task;
 import java.util.List;
 
+/**
+ * Represents a customisable list of tasks to be completed by the user.
+ */
 public class TaskList {
     protected List<Task> listOfTasks;
     
@@ -10,32 +13,68 @@ public class TaskList {
     protected static String DEADLINE_INDICATOR = "[D]";
     protected static String EVENT_INDICATOR = "[E]";
     
-
+    /**
+     * Creates a new TaskList object to handle adding and deleting tasks.
+     * 
+     * @param tasks List of tasks made by the user.
+     */
     public TaskList(List<Task> tasks) {
         this.listOfTasks = tasks;
     }
 
+    /**
+     * Adds a new task to the task list.
+     * 
+     * @param newTask Task to be added.
+     */
     public void addNewTask(Task newTask) {
         this.listOfTasks.add(newTask);
     }
 
+    /**
+     * Replaces a task with a new task at the specified index in the task list.
+     * 
+     * @param newTask New task to replaced task at the specified index.
+     * @param index Index of task in the task list.
+     */
     public void updateTaskList(Task newTask, int index) {
+        this.deleteTask(index - 1);
         this.listOfTasks.add(index, newTask);
     }
 
-
+    /**
+     * Returns the total number of tasks currently in the task list.
+     * 
+     * @return Total number of tasks currently in the task list.
+     */
     public int totalNumberOfTasks() {
         return this.listOfTasks.size();
     }
 
+    /**
+     * Retrieves the task of the specified list index.
+     * 
+     * @param index Index of task to be retrieved.
+     * @return Task stored at the specified index.
+     */
     public Task getTask(int index) {
         return this.listOfTasks.get(index);
     }
 
+    /**
+     * Deletes the task at the specified index.
+     * 
+     * @param index Index of the task to be deleted.
+     */
     public void deleteTask(int index) {
         this.listOfTasks.remove(index);
     }
 
+    /**
+     * Returns the an ordered list of tasks stored in the task list.
+     * 
+     * @return An ordered list of tasks.
+     */
     @Override
     public String toString() {
         StringBuilder allTasks = new StringBuilder();
