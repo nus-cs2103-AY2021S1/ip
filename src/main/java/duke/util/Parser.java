@@ -20,38 +20,41 @@ public class Parser {
         }
 
         switch (commandList) {
-            case bye: //fallthrough
-            case exit:
-                command = new ExitCommand();
+        case bye: //fallthrough
+        case exit:
+            command = new ExitCommand();
             break;
-            case list:
-                command = new ListCommand();
+        case list:
+            command = new ListCommand();
             break;
-            case todo:
-                command = new AddCommand(todo(cmd.substring(4).strip()));
+        case todo:
+            command = new AddCommand(todo(cmd.substring(4).strip()));
             break;
-            case deadline:
-                command = new AddCommand(deadline(cmd.substring(8)));
+        case deadline:
+            command = new AddCommand(deadline(cmd.substring(8)));
             break;
-            case event:
-                command = new AddCommand(event(cmd.substring(5)));
+        case event:
+            command = new AddCommand(event(cmd.substring(5)));
             break;
-            case done:
-                try {
-                    int selected = Integer.parseInt(cmd.substring(4).strip());
-                    command = new DoneCommand(selected - 1);
-                } catch (NumberFormatException nfe) {
-                    throw new DukeException("This is not a number for \"done\" command: " + cmd.substring(4));
-                }
-                break;
-            case delete:
-                try {
-                    int selected = Integer.parseInt(cmd.substring(6).strip());
-                    command = new DeleteCommand(selected - 1);
-                } catch (NumberFormatException nfe) {
-                    throw new DukeException("This is not a number for \"delete\" command: " + cmd.substring(6));
-                }
-                break;
+        case done:
+            try {
+                int selected = Integer.parseInt(cmd.substring(4).strip());
+                command = new DoneCommand(selected - 1);
+            } catch (NumberFormatException nfe) {
+                throw new DukeException("This is not a number for \"done\" command: " + cmd.substring(4));
+            }
+            break;
+        case delete:
+            try {
+                int selected = Integer.parseInt(cmd.substring(6).strip());
+                command = new DeleteCommand(selected - 1);
+            } catch (NumberFormatException nfe) {
+                throw new DukeException("This is not a number for \"delete\" command: " + cmd.substring(6));
+            }
+            break;
+        case find:
+            command = new FindCommand(cmd.substring(4).strip());
+            break;
         }
         return command;
     }

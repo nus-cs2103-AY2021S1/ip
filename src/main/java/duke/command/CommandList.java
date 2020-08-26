@@ -8,5 +8,6 @@ public enum CommandList {
     deadline,
     event,
     done,
-    delete
+    delete,
+    find
 }
