@@ -6,14 +6,30 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * The Parser class deals with making sense of the user command.
+ */
 public class Parser {
 
     private static Ui ui;
 
+    /**
+     * Constructor which takes in a UI and initialises its ui field member.
+     *
+     * @param ui a UI for the Duke object
+     */
     public Parser(Ui ui) {
         this.ui = ui;
     }
 
+    /**
+     * Decides on the relevant actions to execute based on the input of the user.
+     *
+     * @param tasks TaskList object that contains a list of tasks
+     * @param filePath the path location of the load or save file
+     * @throws DukeException thrown if the Duke program does not recognise user input
+     * @throws IOException produced by failed or interrupted I/O operations
+     */
     public static void interact(TaskList tasks, String filePath) throws DukeException, IOException {
         ui.greet();
         Scanner sc = new Scanner(System.in);
