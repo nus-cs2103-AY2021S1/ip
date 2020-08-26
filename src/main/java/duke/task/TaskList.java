@@ -1,6 +1,6 @@
 /**
  * Encapsulates the idea of a list of tasks, implemented
- * using an arraylist
+ * using an ArrayList
  */
 package duke.task;
 
@@ -32,6 +32,7 @@ public class TaskList {
 
     /**
      * Get the task at the given zero-based index
+     *
      * @param index zero-based index of the task to return
      * @return the task at specified index
      */
@@ -49,6 +50,7 @@ public class TaskList {
     // mutators
     /**
      * Appends a task to end of the list
+     *
      * @param task the task to add
      */
     public void add(Task task) {
@@ -57,6 +59,7 @@ public class TaskList {
 
     /**
      * Removes a task at the given zero-based index
+     *
      * @param index zero-based index of the task to delete
      */
     public void remove(int index) {
@@ -67,6 +70,7 @@ public class TaskList {
     /**
      * Enumerates (starting from 1) tasks in list using their string representations,
      * and stores such enumerations in a list that is to be returned
+     *
      * @return list of enumerations
      */
     public List<String> enumerate() {

@@ -25,6 +25,7 @@ public class Ui {
     /**
      * Prints a list of strings to console with each item on a new line,
      * in a decorated format
+     *
      * @param strings the list of strings to be displayed
      */
     public void display(List<String> strings) {
@@ -36,7 +37,9 @@ public class Ui {
     }
 
     /**
-     * same as above function, but deals with arrays
+     * Does the same as above, except with multiple
+     * String arguments (an array of Strings)
+     *
      * @param strings the array of strings to be displayed
      */
     public void display(String ...strings) {

@@ -12,6 +12,7 @@ public class Exit implements Executable {
 
     /**
      * When run, prints the exit message
+     *
      * @param tasks the list of tasks
      * @param ui the ui object handling displays
      * @param store the storage object handling i/o

@@ -16,22 +16,10 @@ public class Duke {
     private Ui ui;
 
     // private execution helper method
-
-    // constructor
-    public Duke(String directory, String path) {
-        ui = new Ui();
-        storage = new Storage(directory, path);
-        tasks = new TaskList(storage.load());
-    }
-
-    public static void main(String[] args) {
-        new Duke("data", "./data/duke.txt").execute();
-    }
-
     /**
      * Runs the command-line interface for the Duke program.
      */
-    public void execute() {
+    private void execute() {
         Scanner sc = new Scanner(System.in);
         boolean isExit = false;
 
@@ -47,5 +35,16 @@ public class Duke {
                 ui.display(e.getMessage());
             }
         }
+    }
+
+    // constructor
+    public Duke(String directory, String path) {
+        ui = new Ui();
+        storage = new Storage(directory, path);
+        tasks = new TaskList(storage.load());
+    }
+
+    public static void main(String[] args) {
+        new Duke("data", "./data/duke.txt").execute();
     }
 }

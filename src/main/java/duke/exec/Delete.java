@@ -9,6 +9,7 @@ public class Delete implements Executable {
 
     // constants
     private static final String DELETED_MESSAGE = "Noted. I've removed this task:";
+
     private static final String TASK_COUNT_FRONT = "Now you have ";
     private static final String TASK_COUNT_END = " task(s) in the list.";
 
