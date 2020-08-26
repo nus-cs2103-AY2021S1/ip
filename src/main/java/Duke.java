@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Duke is a small educational project which acts
+ * based on user input.
+ * @author Xia Liyi
+ */
 public class Duke {
     public static void main(String[] args) {
     	Scanner sc = new Scanner(System.in);
