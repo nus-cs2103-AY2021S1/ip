@@ -1,0 +1,4 @@
+[T] [✓]asdasdqwefafzxfc
+[D] [✓]321 by:20/02/2020 2359
+[E] [✗]323132132 at:20/11/2020 2359
+[T] [✗]return book
