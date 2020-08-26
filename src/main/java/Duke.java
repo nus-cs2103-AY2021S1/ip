@@ -1,4 +1,9 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -70,14 +75,26 @@ public class Duke {
                     if (msg.matches("^deadline \\S.* /by \\S.*$")) {
                         int byIndex = msg.indexOf("/by");
                         String task = msg.substring(9, byIndex); //Number 9 = starting index of deadline string.
-                        String date = msg.substring(byIndex + 4, msg.length());
-                        newTask = new Deadline(task, date);
+                        String dateString = msg.substring(byIndex + 4, msg.length());
+                        try {
+                            LocalDate date = LocalDate.parse(dateString);
+                            newTask = new Deadline(task, date);
+                        } catch (DateTimeParseException e) {
+                            newTask = new Deadline(task, dateString);
+                        }
+
                         //              EVENTS
                     } else if (msg.matches("^event \\S.* /at \\S.*$")) {
                         int atIndex = msg.indexOf("/at");
                         String task = msg.substring(6, atIndex); //Number 6 = starting index of event string.
-                        String date = msg.substring(atIndex + 4, msg.length());
-                        newTask = new Event(task, date);
+                        String dateString = msg.substring(atIndex + 4, msg.length());
+                        try {
+                            LocalDate date = LocalDate.parse(dateString);
+                            newTask = new Event(task, date);
+                        } catch (DateTimeParseException e) {
+                            newTask = new Event(task, dateString);
+                        }
+
                         //              TODOS
                     } else if (msg.matches("^todo \\S.*$")) {
                         String task = msg.substring(5, msg.length()); //Number 5 = starting index of todo string.
