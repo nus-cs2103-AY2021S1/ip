@@ -18,7 +18,7 @@ public class DeadlineTask extends Task {
                     deadline.getYear());
 
         } catch (Exception e) {
-            // Not parseable
+            // Not parsable
             deadlineString = deadlineParse;
         }
     }

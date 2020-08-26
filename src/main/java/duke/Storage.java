@@ -14,9 +14,7 @@ public class Storage {
         try {
             TaskList tasks = new TaskList();
             File file = new File(dest);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
+            file.createNewFile();
             Scanner scanner = new Scanner(file);
             while (scanner.hasNext()) {
                 tasks.add(Parser.parseSavedTask(scanner.nextLine()));
