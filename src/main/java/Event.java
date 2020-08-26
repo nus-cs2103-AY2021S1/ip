@@ -19,7 +19,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("ha");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mma");
         return "[E]" + super.toString() + " (at: "
                 + dateFormatter.format(at) + " "
                 + timeFormatter.format(start) + "-"
