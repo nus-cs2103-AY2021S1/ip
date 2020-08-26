@@ -1,36 +1,36 @@
 public class Task {
 
     private final String name;
-    private boolean done;
+    private boolean isDone;
 
     public Task(String name, TaskType taskType) throws DukeEmptyDescException {
         if (Ui.isBlankString(name)) {
             throw new DukeEmptyDescException(taskType);
         } else {
             this.name = name;
-            done = false;
+            isDone = false;
         }
     }
 
-    public Task(String name, TaskType taskType, boolean done) throws DukeEmptyDescException {
+    public Task(String name, TaskType taskType, boolean isDone) throws DukeEmptyDescException {
         if (Ui.isBlankString(name)) {
             throw new DukeEmptyDescException(taskType);
         } else {
             this.name = name;
-            this.done = done;
+            this.isDone = isDone;
         }
     }
 
 
     private String getStatusIcon() {
-        return (done ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     /**
      * Completes the task.
      */
     public void complete() {
-        done = true;
+        isDone = true;
     }
 
     @Override

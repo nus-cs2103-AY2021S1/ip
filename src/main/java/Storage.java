@@ -54,12 +54,12 @@ public class Storage {
     }
 
     private static void convertToTask(String line, TaskList taskList) throws DukeException {
-        boolean done;
+        boolean isDone;
 
         if (line.startsWith("\u2713", 4)) {
-            done = true;
+            isDone = true;
         } else if (line.startsWith("\u2718", 4)) {
-            done = false;
+            isDone = false;
         } else {
             throw new DukeException();
         }
@@ -69,10 +69,10 @@ public class Storage {
                 taskList.addTask(new Todo(line.substring(7)), false);
                 break;
             case 'D':
-                Deadline.newDeadline(line.substring(7), taskList, done, false);
+                Deadline.newDeadline(line.substring(7), taskList, isDone, false);
                 break;
             case 'E':
-                Event.newEvent(line.substring(7), taskList, done, false);
+                Event.newEvent(line.substring(7), taskList, isDone, false);
                 break;
             default:
                 throw new DukeException();
