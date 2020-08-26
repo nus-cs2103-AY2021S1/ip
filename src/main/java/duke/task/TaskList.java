@@ -4,14 +4,24 @@ import duke.Storage;
 
 import java.util.ArrayList;
 
+/**
+ * Class the holds the tasks provided by the user.
+ */
 public class TaskList {
     
     private ArrayList<Task> taskList;
-    
+
+    /**
+     * Creates a brand new task list.
+     */
     public TaskList() {
         taskList = new ArrayList<>();
     }
-    
+
+    /**
+     * Creates a task list from existing data.
+     * @param storage Storage object that will load the data.
+     */
     public void loadFromStorage(Storage storage) {
         storage.loadData(this);
     }

@@ -6,12 +6,20 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
+/**
+ * Class representing a deadline.
+ */
 public class Deadline extends Task {
 
     private String by;
     private LocalDate taskDate;
     private LocalTime taskTime;
 
+    /**
+     * Creates a brand new deadline.
+     * @param description Description of the deadline.
+     * @param by Time that the deadline is due by.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
@@ -31,6 +39,13 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Create a Deadline from existing data.
+     * @param uniqueId Unique Id of the deadline.
+     * @param isDone Deadline completion status.
+     * @param description Description of the deadline.
+     * @param by Time that the deadline is due by.
+     */
     public Deadline(String uniqueId, boolean isDone, String description, String by) {
         super(uniqueId, isDone, description);
         this.by = by;
@@ -53,7 +68,7 @@ public class Deadline extends Task {
     public String getTime() {
         return by;
     }
-
+    
     private String formatTaskTime() {
         String output = taskDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
         if (taskTime != null) {
