@@ -27,7 +27,7 @@ public class TaskList {
             }
             return text;
         } else {
-            throw(DukeException.emptyList());
+            throw (DukeException.emptyList());
         }
     }
 
@@ -59,7 +59,7 @@ public class TaskList {
             list.get(index).setDone();
             return list.get(index).toString();
         } catch (IndexOutOfBoundsException e) {
-            throw(DukeException.outOfBounds());
+            throw (DukeException.outOfBounds());
         }
     }
 

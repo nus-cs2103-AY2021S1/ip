@@ -30,21 +30,21 @@ public class Storage {
             } else if (s.startsWith("deadline")) {
                 String datePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)\\s";
                 String timePattern = "(\\d\\d)(\\d\\d)";
-                String pattern = "(deadline\\s)(.+)\\s(/by\\s)"+ datePattern + timePattern;
+                String pattern = "(deadline\\s)(.+)\\s(/by\\s)" + datePattern + timePattern;
                 String task = s.replaceAll(pattern, "$2");
                 LocalDateTime dateTime = Parser.extractDateTime(s, pattern);
                 next = new Deadline(task, dateTime);
             } else {
                 String datePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)\\s";
                 String timePattern = "(\\d\\d)(\\d\\d)";
-                String pattern = "(event\\s)(.+)\\s(/at\\s)(.+)"+ datePattern + timePattern;
+                String pattern = "(event\\s)(.+)\\s(/at\\s)(.+)" + datePattern + timePattern;
                 String task = s.replaceAll(pattern, "$2");
                 LocalDateTime dateTime = Parser.extractDateTime(s, pattern);
                 next = new Event(task, dateTime);
             }
             list.add(next);
         } catch (DukeException e) {
-            throw(e);
+            throw (e);
         }
     }
 
@@ -67,7 +67,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw DukeException.loadingError(filePath);
         } catch (DukeException e) {
-            throw(e);
+            throw (e);
         }
     }
 

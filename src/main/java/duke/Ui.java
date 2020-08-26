@@ -35,7 +35,7 @@ public class Ui {
                         "█░░▄▀▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░█\n" +
                         "█░░░░░░░░░░░░░░░░█░░░░░░░░░░░░░░░░░░░░░░░░░█░░░░░░░░░░░░░░░░█\n" +
                         "█████████████████████████████████████████████████████████████";
-        String welcome = "Hello I am\n" + logo +"\nPlease say something.";
+        String welcome = "Hello I am\n" + logo + "\nPlease say something.";
         say(welcome);
     }
 

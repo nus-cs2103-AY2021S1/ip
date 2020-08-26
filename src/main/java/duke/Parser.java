@@ -17,12 +17,12 @@ public class Parser {
                 int index = parseInt(number) - 1;
                 return new DoneCommand(index);
             } else {
-                throw(DukeException.emptyDesc("done"));
+                throw (DukeException.emptyDesc("done"));
             }
         } catch (NumberFormatException e) {
-            throw(DukeException.typeMismatch("done"));
+            throw (DukeException.typeMismatch("done"));
         } catch (DukeException e) {
-            throw(e);
+            throw (e);
         }
     }
 
@@ -32,7 +32,7 @@ public class Parser {
             String task = input.replaceAll(pattern, "$2");
             return new ToDoCommand(task);
         } else {
-            throw(DukeException.emptyDesc("todo"));
+            throw (DukeException.emptyDesc("todo"));
         }
     }
 
@@ -41,7 +41,7 @@ public class Parser {
         String almostCompletePattern = "(deadline\\s)(.+)\\s(/by\\s)(.+)";
         String datePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)\\s";
         String timePattern = "(\\d\\d)(\\d\\d)";
-        String completePattern = "(deadline\\s)(.+)\\s(/by\\s)"+ datePattern + timePattern;
+        String completePattern = "(deadline\\s)(.+)\\s(/by\\s)" + datePattern + timePattern;
         String missingTaskPattern = "(deadline\\s)(/by)((\\s(.*))*)";
         try {
             if (input.trim().matches(basePattern)) {
@@ -51,18 +51,18 @@ public class Parser {
                         LocalDateTime dateTime = extractDateTime(input, completePattern);
                         return new DeadlineCommand(task, dateTime);
                     } else {
-                        throw(DukeException.wrongDateTimeFormat());
+                        throw (DukeException.wrongDateTimeFormat());
                     }
                 } else if (input.trim().matches(missingTaskPattern)) {
-                    throw(DukeException.missingTask());
+                    throw (DukeException.missingTask());
                 } else {
-                    throw(DukeException.missingTime("by"));
+                    throw (DukeException.missingTime("by"));
                 }
             } else {
-                throw(DukeException.emptyDesc("deadline"));
+                throw (DukeException.emptyDesc("deadline"));
             }
         } catch (DukeException e) {
-            throw(e);
+            throw (e);
         }
     }
 
@@ -71,7 +71,7 @@ public class Parser {
         String almostCompletePattern = "(event\\s)(.+)\\s(/at\\s)(.+)";
         String datePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)\\s";
         String timePattern = "(\\d\\d)(\\d\\d)";
-        String completePattern = "(event\\s)(.+)\\s(/at\\s)"+ datePattern + timePattern;
+        String completePattern = "(event\\s)(.+)\\s(/at\\s)" + datePattern + timePattern;
         String missingTaskPattern = "(event\\s)(/at)((\\s(.*))*)";
         try {
             if (input.trim().matches(basePattern)) {
@@ -81,18 +81,18 @@ public class Parser {
                         LocalDateTime dateTime = extractDateTime(input, completePattern);
                         return new EventCommand(task, dateTime);
                     } else {
-                        throw(DukeException.wrongDateTimeFormat());
+                        throw (DukeException.wrongDateTimeFormat());
                     }
                 } else if (input.trim().matches(missingTaskPattern)) {
-                    throw(DukeException.missingTask());
+                    throw (DukeException.missingTask());
                 } else {
-                    throw(DukeException.missingTime("at"));
+                    throw (DukeException.missingTime("at"));
                 }
             } else {
-                throw(DukeException.emptyDesc("event"));
+                throw (DukeException.emptyDesc("event"));
             }
         } catch (DukeException e) {
-            throw(e);
+            throw (e);
         }
     }
 
@@ -104,12 +104,12 @@ public class Parser {
                 int index = parseInt(number) - 1;
                 return new DeleteCommand(index);
             } else {
-                throw(DukeException.emptyDesc("delete"));
+                throw (DukeException.emptyDesc("delete"));
             }
         } catch (NumberFormatException e) {
-            throw(DukeException.typeMismatch("delete"));
+            throw (DukeException.typeMismatch("delete"));
         } catch (IndexOutOfBoundsException e) {
-            throw(DukeException.outOfBounds());
+            throw (DukeException.outOfBounds());
         }
     }
 
@@ -121,7 +121,7 @@ public class Parser {
             String time = hours + ":" + minutes;
             return LocalDateTime.parse(date + "T" + time);
         } catch (DateTimeParseException e) {
-            throw(DukeException.invalidDateTime());
+            throw (DukeException.invalidDateTime());
         }
     }
 
@@ -138,15 +138,15 @@ public class Parser {
                     long time = parseInt(input.replaceAll(dayPattern, "$2"));
                     return new DueInCommand(time, false);
                 } else {
-                    throw(DukeException.wrongDueInFormat());
+                    throw (DukeException.wrongDueInFormat());
                 }
             } else {
-                throw(DukeException.emptyDesc("due in"));
+                throw (DukeException.emptyDesc("due in"));
             }
         } catch (NumberFormatException e) {
-            throw(DukeException.typeMismatch("due in"));
+            throw (DukeException.typeMismatch("due in"));
         } catch (IndexOutOfBoundsException e) {
-            throw(DukeException.outOfBounds());
+            throw (DukeException.outOfBounds());
         }
     }
 
@@ -170,7 +170,7 @@ public class Parser {
         } else if (input.equals("bye")) {
             return new ByeCommand();
         } else {
-            throw(DukeException.unknownCommand());
+            throw (DukeException.unknownCommand());
         }
     }
 }
