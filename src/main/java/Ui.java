@@ -11,6 +11,7 @@ public class Ui {
 
     /**
      * Obtain user inputs and edit the TaskList currList accordingly.
+     *
      * @param currList Current list of tasks.
      */
     public void start(TaskList currList) {

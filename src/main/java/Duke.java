@@ -16,6 +16,7 @@ public class Duke {
 
     /**
      * Public constructor of Duke to create a Duke object to deal with user inputs.
+     *
      * @param filePath Path where file containing past and new tasks can be loaded from and saved to.
      */
     public Duke(String filePath) {
@@ -44,7 +45,8 @@ public class Duke {
     }
 
     /**
-     * When the bot is first launched, a new Duke object is created to process user inputs.
+     * Creates new Duke object to process user inputs when the bot is launched.
+     *
      * @param args Command-line arguments.
      */
     public static void main(String[] args) {

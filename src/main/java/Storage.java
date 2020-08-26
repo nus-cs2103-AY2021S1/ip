@@ -30,6 +30,7 @@ public class Storage {
 
     /**
      * Store all tasks in a file.
+     *
      * @param tasks List of tasks as a TaskList object.
      * @throws IOException If directory or file does not exist.
      */
@@ -58,6 +59,7 @@ public class Storage {
 
     /**
      * Converts date to a LocalDateTime object.
+     *
      * @param taskDate Date of a task obtained from a .txt file.
      * @return LocalDateTime object representing the date related to Task.
      * @throws ParseException If an error has been reached while parsing.
@@ -99,6 +101,7 @@ public class Storage {
 
     /**
      * Obtain a list of tasks from .txt file.
+     *
      * @param br BufferedReader object used to read the file.
      * @return List of tasks stored in an ArrayList<Task>.
      * @throws IOException If an I/O exception of some sort has occurred.

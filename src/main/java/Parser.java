@@ -17,6 +17,7 @@ public class Parser {
 
     /**
      * Displays all added tasks for users to view.
+     *
      * @throws DukeException If no task has been added yet.
      */
     public void viewTasks() throws DukeException {
@@ -30,11 +31,13 @@ public class Parser {
 
     /**
      * Marks an existing task as done.
+     *
      * @param inputMsg User input which contains the task number to be marked done.
      * @throws DukeException If task number indicated does not exist.
      */
     public void markDone(String inputMsg) throws DukeException {
-        int taskNumber = Integer.valueOf(inputMsg.split(" ")[1]); // gets the done task number
+        // gets the done task number
+        int taskNumber = Integer.valueOf(inputMsg.split(" ")[1]);
         if (currList.getNumOfTasks() < taskNumber || taskNumber <= 0) {
             throw new DukeException("There is no such task number!");
         } else {
@@ -51,6 +54,7 @@ public class Parser {
 
     /**
      * Deletes an existing task from the list.
+     *
      * @param inputMsg User input which contains the task number to be deleted.
      * @throws DukeException If task number indicated does not exist.
      */
@@ -72,6 +76,7 @@ public class Parser {
 
     /**
      * Processes the input date by user.
+     *
      * @param inputDeadline Date related to Task.
      * @return LocalDateTime object representing the date related to Task.
      * @throws DukeException If input date format is invalid.
@@ -98,6 +103,7 @@ public class Parser {
 
     /**
      * Adds a new task to the list of tasks.
+     *
      * @param inputMsg User's input message to the chatbot.
      * @param actionType Type of task indicated.
      * @throws DukeException If user does not give a task description.
@@ -147,6 +153,12 @@ public class Parser {
         System.out.println(outputMsg);
     }
 
+    /**
+     * Displays tasks containing keyword.
+     *
+     * @param inputMsg User's input message to the chatbot.
+     * @throws DukeException If user does not specify a keyword or there were no matches.
+     */
     public void findTask(String inputMsg) throws DukeException {
         int numOfWords = inputMsg.split(" ").length;
         if (numOfWords <= 1) {
@@ -164,6 +176,7 @@ public class Parser {
 
     /**
      * Looks through the input message to determine actions to be taken.
+     *
      * @param inputMsg User's input message to the chatbot.
      */
     public void processMsg(String inputMsg) {

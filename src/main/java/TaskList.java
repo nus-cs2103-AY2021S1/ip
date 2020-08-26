@@ -48,6 +48,12 @@ public class TaskList {
         this.tasks.add(t);
     }
 
+    /**
+     * Searches for and returns the list of tasks containing keyword.
+     *
+     * @param keyword Keyword user is searching for.
+     * @return ArrayList of tasks containing keyword.
+     */
     public ArrayList<Task> searchFor(String keyword) {
         ArrayList<Task> searchResult = new ArrayList<>();
         for (int i = 0; i < this.tasks.size(); i++) {
