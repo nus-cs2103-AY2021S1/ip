@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,6 +18,8 @@ public class Duke {
     private final static String done = "Nice! I've marked this task as done:";
     //----- level 4 here -----
     private final static String add = "Got it. I've added this task:";
+    //----- level 6 here -----
+    private final static String delete = "Noted. I've removed this task:";
 
     public static void main(String[] args) {
         System.out.println("Hello from\n" + Duke.logo);
@@ -24,11 +27,64 @@ public class Duke {
         System.out.println(Duke.greeting);
         System.out.println(Duke.bar);
 
+        //---- INITIALISE FROM FILE HERE ----
+        File dir = new File(System.getProperty("user.dir") + "/data/");
+        File outputFile = new File(dir, "Duke.txt");
+
+        try {
+            if (outputFile.exists()) {
+                BufferedReader reader = new BufferedReader(new FileReader(outputFile));
+                String currLine;
+                while ((currLine = reader.readLine()) != null) {
+                    char startChar = currLine.charAt(0);
+                    boolean isDone = currLine.charAt(4) == '1';
+                    switch (startChar) {
+                        case 'T': {
+                            String description = currLine.substring(8);
+                            ToDo taskToAdd = new ToDo(description, isDone);
+                            Duke.count++;
+                            Duke.list.add(taskToAdd);
+                            break;
+                        }
+                        case 'D': {
+                            String descriptionAndDeadline = currLine.substring(8);
+                            int stringBreak = descriptionAndDeadline.indexOf('|');
+                            String deadline = descriptionAndDeadline.substring(stringBreak + 2);
+                            String description = descriptionAndDeadline.substring(0, stringBreak - 1);
+                            Deadline taskToAdd = new Deadline(description, deadline, isDone);
+                            Duke.count++;
+                            Duke.list.add(taskToAdd);
+                            break;
+                        }
+                        case 'E': {
+                            String descriptionAndDate = currLine.substring(8);
+                            int stringBreak = descriptionAndDate.indexOf('|');
+                            String date = descriptionAndDate.substring(stringBreak + 2);
+                            String description = descriptionAndDate.substring(0, stringBreak - 1);
+                            Event taskToAdd = new Event(description, date, isDone);
+                            Duke.count++;
+                            Duke.list.add(taskToAdd);
+                            break;
+                        }
+                        default:
+
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Failed to read existing TODO list. Duke will initialise blankly.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
         while (!userInput.equals("bye")) {
+            boolean isUpdated = false;
             System.out.println(Duke.bar);
             try {
+                //DONE PORTION HERE----------------------------------------------------------
                 if (userInput.length() >= 4 && userInput.substring(0, 4).equals("done")) {
                     if (userInput.length() <= 5) {
                         throw new MissingDoneArgumentException();
@@ -40,6 +96,9 @@ public class Duke {
                     Duke.list.get(index).markAsDone();
                     System.out.println(Duke.done);
                     System.out.println("  " + Duke.list.get(index));
+                    isUpdated = true;
+
+                //DELETE PORTION HERE---------------------------------------------------------
                 } else if (userInput.length() >= 6 && userInput.substring(0, 6).equals("delete")) {
                     if (userInput.length() <= 7) {
                         throw new MissingDeleteArgumentException();
@@ -51,9 +110,12 @@ public class Duke {
                     Task toDelete = Duke.list.get(index);
                     Duke.list.remove(index);
                     Duke.count--;
-                    System.out.println();
+                    System.out.println(Duke.delete);
                     System.out.println("  " + toDelete);
                     System.out.println("Now you have " + Duke.count + (Duke.count==1?" task ":" tasks ") + "in the list.");
+                    isUpdated = true;
+
+                //TOD0 PORTION HERE-----------------------------------------------------------
                 } else if (userInput.length() >= 4 && userInput.substring(0, 4).equals("todo")) {
                     if (userInput.length() == 4) {
                         throw new EmptyTodoException();
@@ -68,6 +130,9 @@ public class Duke {
                     System.out.println(add);
                     System.out.println("  " + taskToAdd);
                     System.out.println("Now you have " + Duke.count + (Duke.count==1?" task ":" tasks ") + "in the list.");
+                    isUpdated = true;
+
+                //DEADLINE PORTION HERE--------------------------------------------------------
                 } else if (userInput.length() >= 8 && userInput.substring(0, 8).equals("deadline")) {
                     int index = userInput.indexOf("/");
                     if (index == -1) {
@@ -90,6 +155,9 @@ public class Duke {
                     System.out.println(add);
                     System.out.println("  " + taskToAdd);
                     System.out.println("Now you have " + Duke.count + (Duke.count==1?" task ":" tasks ") + "in the list.");
+                    isUpdated = true;
+
+                //EVENT PORTION HERE-----------------------------------------------------------
                 } else if (userInput.length() >= 5 && userInput.substring(0, 5).equals("event")) {
                     int index = userInput.indexOf("/");
                     if (index == -1) {
@@ -112,6 +180,9 @@ public class Duke {
                     System.out.println(add);
                     System.out.println("  " + taskToAdd);
                     System.out.println("Now you have " + Duke.count + (Duke.count==1?" task ":" tasks ") + "in the list.");
+                    isUpdated = true;
+
+                //LIST PORTION HERE------------------------------------------------------------
                 } else if (userInput.equals("list")) {
                     for (int i = 0; i < Duke.count; i++) {
                         System.out.println(i+1 + ". " + list.get(i));
@@ -119,6 +190,20 @@ public class Duke {
                 } else {
                     throw new UnknownCommandException();
                 }
+                if(isUpdated) {
+                    //WRITE TO FILE HERE
+                    if (!dir.exists()) {
+                        dir.mkdirs();
+                    }
+                    outputFile.createNewFile();
+
+                    FileWriter writer = new FileWriter(System.getProperty("user.dir") + "/data/Duke.txt");
+                    for (int i = 0; i < count; i++) {
+                        writer.write(list.get(i).fileText()+"\n");
+                    }
+                    writer.close();
+                }
+
             } catch (MissingDoneArgumentException e) {
                 System.out.println(e);
             } catch (UnknownCommandException e) {
@@ -139,6 +224,8 @@ public class Duke {
                 System.out.println(e);
             } catch (DeleteOutOfRangeException e) {
                 System.out.println(e);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
 
