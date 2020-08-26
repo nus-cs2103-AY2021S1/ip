@@ -6,6 +6,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
@@ -16,6 +17,7 @@ import duke.exception.DoneIncompleteException;
 import duke.exception.DoneOutOfListException;
 import duke.exception.DukeException;
 import duke.exception.EventIncompleteException;
+import duke.exception.FindIncompleteException;
 import duke.exception.NoInputException;
 import duke.exception.TodoIncompleteException;
 import duke.exception.UnknownInputException;
@@ -25,7 +27,7 @@ import java.util.Arrays;
 
 public class Parser {
 
-    public static String[] commands = {"list", "done", "deadline", "event", "todo", "delete", "bye"};
+    public static String[] commands = {"list", "done", "deadline", "event", "todo", "delete", "bye", "find"};
     public static ArrayList<String> VALID_COMMAND = new ArrayList<>(Arrays.asList(commands));
 
     // Method to check user input
@@ -48,6 +50,8 @@ public class Parser {
                     throw new TodoIncompleteException();
                 case "delete":
                     throw new DeleteIncompleteException();
+                case "find":
+                    throw new FindIncompleteException();
             }
         } else if (command.equals("done")) {
             if (Integer.parseInt(input[1]) < 1) {
@@ -88,6 +92,9 @@ public class Parser {
             String description = str[0].substring(9);
             String date = str[1];
             return new DeadlineCommand(description, date);
+        }
+        case "find": {
+            return new FindCommand(s[1]);
         }
         default: {
             // Split string to get date
