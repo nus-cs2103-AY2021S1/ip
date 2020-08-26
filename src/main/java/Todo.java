@@ -3,7 +3,6 @@ public class Todo extends Task {
     public static String getDescription(String s){
         int start = 0;
         while(!s.substring(start, start + 4).equals("todo")) start++;
-        System.out.println(start + 4);
         return s.substring(start + 4);
     }
 
