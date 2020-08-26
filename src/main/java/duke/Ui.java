@@ -59,6 +59,15 @@ public class Ui {
     }
 
 
+    public void printFindings(ArrayList<Task> findings) {
+        System.out.println(line);
+        System.out.println(bot);
+        System.out.println("These are the tasks with your keyword:");
+        for (Task finding : findings) {
+            System.out.println(finding);
+        }
+    }
+
 
     public void printAddTodo(ToDo todoTask, TaskList tasks) {
         System.out.println(line);
