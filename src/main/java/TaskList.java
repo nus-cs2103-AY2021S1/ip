@@ -43,6 +43,16 @@ public class TaskList {
             throw new InvalidTaskIndexException("delete");
         }
     }
+    
+    String findTask(String input) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        for (Task t : myTaskList) {
+            if (t.description.contains(input)) {
+                tasks.add(t);
+            }
+        }
+        return new TaskList(tasks).toString();
+    }
 
     @Override
     public String toString() {
