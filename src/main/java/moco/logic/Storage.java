@@ -1,9 +1,9 @@
-package moco.logic;
+package main.java.moco.logic;
 
-import moco.task.Deadline;
-import moco.task.Event;
-import moco.task.Task;
-import moco.task.Todo;
+import main.java.moco.task.Deadline;
+import main.java.moco.task.Event;
+import main.java.moco.task.Task;
+import main.java.moco.task.Todo;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,13 +38,13 @@ public class Storage {
                 try {
                     taskList.createNewFile();
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    throw new MocoException(ex.getMessage());
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new MocoException("Unable to find file of name 'tasklist");
+            throw new MocoException("Unable to find file of name 'tasklist :(");
         } catch (IOException e) {
-            throw new MocoException("Error accessing file");
+            throw new MocoException("Error accessing file :(");
         }
         return tasks;
     }

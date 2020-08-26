@@ -1,6 +1,6 @@
-package moco.logic;
+package main.java.moco.logic;
 
-import moco.task.Task;
+import main.java.moco.task.Task;
 
 import java.util.ArrayList;
 

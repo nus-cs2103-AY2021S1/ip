@@ -1,4 +1,4 @@
-package moco.task;
+package main.java.moco.task;
 
 public class Todo extends Task {
 

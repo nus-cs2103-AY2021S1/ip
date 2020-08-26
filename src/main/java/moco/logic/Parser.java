@@ -1,7 +1,10 @@
-package moco.logic;
+package main.java.moco.logic;
 
-import moco.task.*;
-import moco.ui.Ui;
+import main.java.moco.task.Deadline;
+import main.java.moco.task.Event;
+import main.java.moco.task.Task;
+import main.java.moco.task.Todo;
+import main.java.moco.ui.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

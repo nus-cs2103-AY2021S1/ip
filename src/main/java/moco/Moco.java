@@ -1,10 +1,10 @@
-package moco.main;
+package main.java.moco;
 
-import moco.logic.MocoException;
-import moco.logic.Parser;
-import moco.logic.Storage;
-import moco.logic.TaskList;
-import moco.ui.Ui;
+import main.java.moco.logic.MocoException;
+import main.java.moco.logic.Parser;
+import main.java.moco.logic.Storage;
+import main.java.moco.logic.TaskList;
+import main.java.moco.ui.Ui;
 
 public class Moco {
 

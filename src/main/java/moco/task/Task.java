@@ -1,4 +1,4 @@
-package moco.task;
+package main.java.moco.task;
 
 abstract public class Task {
     protected String description;

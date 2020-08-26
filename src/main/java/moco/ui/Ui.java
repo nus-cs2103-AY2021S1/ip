@@ -1,8 +1,8 @@
-package moco.ui;
+package main.java.moco.ui;
 
-import moco.logic.TaskList;
-import moco.task.Task;
-import moco.logic.MocoException;
+import main.java.moco.logic.MocoException;
+import main.java.moco.logic.TaskList;
+import main.java.moco.task.Task;
 
 import java.util.Scanner;
 
