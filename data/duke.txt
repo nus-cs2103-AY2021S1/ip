@@ -1,5 +1,0 @@
-T ## 0 ## eat
-T ## 0 ## sleep
-T ## 0 ## eat
-T ## 0 ## sleep
-D ## 0 ## read  ## 
