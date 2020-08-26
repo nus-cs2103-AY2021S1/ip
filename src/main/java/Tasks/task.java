@@ -13,7 +13,6 @@ public class task {
 
     public task(String name, String type){
         this.count++;
-        this.index = this.count;
         this.name = name;
         this.completed = false;
         this.type = type;
