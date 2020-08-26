@@ -97,7 +97,6 @@ public class Parser {
     static void validateCommand(String userCommand) throws DukeException {
         List<String> validCommands =
                 Arrays.asList("bye", "list", "done", "todo", "deadline", "event", "delete", "find");
-
         if (!validCommands.contains(userCommand)) {
             throw new DukeException("Invalid command: " + userCommand);
         }
