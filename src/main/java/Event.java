@@ -5,8 +5,6 @@ import java.time.LocalDate;
  */
 public class Event extends Task {
 
-    String by;
-
     /**
      * @param description Task description
      * @param date Date of the event

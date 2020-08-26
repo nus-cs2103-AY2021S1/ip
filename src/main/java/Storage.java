@@ -33,7 +33,7 @@ public class Storage {
      */
     public static TaskList read() {
         try {
-            TaskList t = null;
+            TaskList t;
             FileInputStream fileIn = new FileInputStream(storage_file);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             t = (TaskList) in.readObject();

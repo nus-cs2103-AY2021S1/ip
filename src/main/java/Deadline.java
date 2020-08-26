@@ -5,8 +5,6 @@ import java.time.LocalDate;
  */
 public class Deadline extends Task {
 
-    String by;
-
     /**
      * @param description Task description
      * @param date Deadline for the task
