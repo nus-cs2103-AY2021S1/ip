@@ -1,3 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +39,7 @@ public class Duke {
                     processHelp(cmdArr);
                 } else if (input.equals("add")) {
                     processAdd(taskArr, sc);
+                    saveTaskChanges(taskArr);
                 } else if (input.equals("list")) {
                     if (taskArr.isEmpty()) {
                         throw new EmptyListException("There are no tasks on your list");
@@ -45,11 +50,13 @@ public class Duke {
                         throw new EmptyListException("There are no tasks on your list");
                     }
                     processDone(taskArr, sc);
+                    saveTaskChanges(taskArr);
                 } else if (input.equals("delete")) {
                     if (taskArr.isEmpty()) {
                         throw new EmptyListException("There are no tasks on your list");
                     }
                     processDelete(taskArr, sc);
+                    saveTaskChanges(taskArr);
                 } else {
                     throw new UnknownCommandException("Sorry I didn't understand that :(");
                 }
@@ -69,6 +76,8 @@ public class Duke {
         System.out.println(divider);
         System.out.println("Bye! See you around :)");
         System.out.println(divider);
+
+
     }
 
     public static void processHelp(String[] cmdArr) {
@@ -85,7 +94,7 @@ public class Duke {
                 + " - Event\n");
         try {
             String type = sc.nextLine().toLowerCase();
-            TaskType taskType = TaskType.TODO;
+            TaskType taskType;
             switch (type.toLowerCase()) {
                 case "todo":
                     taskType = TaskType.TODO;
@@ -184,6 +193,28 @@ public class Duke {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Sorry that task doesn't exist :/");
             System.out.println("Try using 'list' to find out what tasks you have!");
+        }
+    }
+
+    public static void saveTaskChanges(List<Task> taskArr) {
+        File taskDir = new File("./data");
+        if (!taskDir.exists()) {
+            taskDir.mkdir();
+        }
+        File tasks = new File("./data/Tasks.txt");
+        try {
+            if(!tasks.exists()) {
+                tasks.createNewFile();
+            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter("./data/Tasks.txt"));
+            for (int j = 0; j < taskArr.size(); j++) {
+                writer.write((j + 1)
+                        + ". "
+                        + taskArr.get(j).toString() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Invalid file name");
         }
     }
 }
