@@ -1,5 +1,9 @@
 package duke;
 
+import duke.task.Task;
+
+import java.util.ArrayList;
+
 public class Ui {
     private static final int PADDING_LEFT_LENGTH = 5;
     private static final int DIVIDER_LENGTH = 60;
@@ -69,4 +73,14 @@ public class Ui {
         generateDivider();
     }
 
+    public void printMatchingTasks(ArrayList<Task> tempArrayList) {
+        generateDivider();
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tempArrayList.size(); i++) {
+            int index = i + 1;
+            generateLeftPadding();
+            System.out.println(index + ". " + tempArrayList.get(i).toString());
+        }
+        generateDivider();
+    }
 }

@@ -10,6 +10,7 @@ public enum Command {
     EVENT("event"),
     DEADLINE("deadline"),
     DELETE("delete"),
+    FIND("find"),
     INVALID;
 
     private static HashMap<String, Command> lookup = new HashMap<String, Command>();
