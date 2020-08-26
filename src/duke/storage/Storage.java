@@ -5,6 +5,7 @@ import duke.parser.Parser;
 import duke.task.Task;
 
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Class that encapsulates the saving and reading of tasks.
@@ -84,6 +85,21 @@ public class Storage {
     }
 
     /**
+     * Returns the list of Tasks whose name contains the given keyword.
+     * @param keyword the keyword in lower-case to be searched for
+     * @return TaskList containing only matching tasks
+     */
+    public ResultsList find(String keyword) {
+        ResultsList results = new ResultsList();
+        for (Task t : tasks.list()) {
+            if (t.name.toLowerCase().contains(keyword)) {
+                results.add(t);
+            }
+        }
+        return results;
+    }
+
+    /**
      * Clears the existing file and rewrites the contents of the list to the file.
      *
      * @throws IOException if there are issues with the IO operations
@@ -104,14 +120,6 @@ public class Storage {
 
     @Override
     public String toString() {
-        if (tasks.isEmpty()) {
-            return "The list is empty.";
-        } else {
-            String result = "";
-            for (Task t : tasks.list()) {
-                result = result.concat(t.toString()).concat("\n");
-            }
-            return result;
-        }
+        return tasks.toString();
     }
 }

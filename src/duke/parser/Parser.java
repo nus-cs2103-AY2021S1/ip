@@ -21,6 +21,7 @@ public final class Parser {
 
     private final static String BYE = "bye";
     private final static String LIST = "list";
+    private final static String FIND = "find";
     private final static String DONE = "done";
     private final static String DELETE = "delete";
     private final static String TODO = "todo";
@@ -78,6 +79,8 @@ public final class Parser {
             return new ExitCommand();
         case LIST:
             return new ListCommand();
+        case FIND:
+            return new FindCommand(parsedInput[1]);
         case DONE:
             return new DoneCommand(parsedInput[1]);
         case DELETE:
