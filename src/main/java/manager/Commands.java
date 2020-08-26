@@ -1,5 +1,5 @@
 package main.java.manager;
 
 public enum Commands {
-    DEADLINE, DELETE, DONE, EVENT, LIST, TODO;
+    DEADLINE, DELETE, DELETE_ALL, DONE, EVENT, LIST, TODO;
 }

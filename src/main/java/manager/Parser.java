@@ -22,6 +22,9 @@ public class Parser {
                 if (input.equals("list")) {
                     this.converter.convertAction(Commands.LIST, 0);
 
+                } else if (input.equals("delete all")) {
+                    this.converter.convertAction(Commands.DELETE_ALL, 0);
+
                 } else if (isNumberedCommand(input)) {
                     String[] words = input.split(" ");
 

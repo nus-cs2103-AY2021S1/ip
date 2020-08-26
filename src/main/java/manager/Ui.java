@@ -44,6 +44,9 @@ public class Ui {
             case DELETE:
                 this.taskList.deleteTask(index);
                 break;
+            case DELETE_ALL:
+                this.taskList.deleteAllTasks();
+                break;
         }
     }
 

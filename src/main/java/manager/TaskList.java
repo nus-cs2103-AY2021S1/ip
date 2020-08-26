@@ -37,6 +37,12 @@ public class TaskList {
         printNumberOfTasks();
     }
 
+    public void deleteAllTasks() {
+        if (this.taskList.size() > 0) {
+            this.taskList.subList(0, this.taskList.size()).clear();
+        }
+    }
+
     public int getNumberOfTasks() {
         return this.taskList.size();
     }

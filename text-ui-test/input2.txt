@@ -3,3 +3,4 @@ done 3
 delete 2
 deadline finish project /by thursday
 list
+delete all
