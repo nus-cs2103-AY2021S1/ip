@@ -37,7 +37,6 @@ public class Storage {
             if (split[1].equals("1")) {
                 current.markAsDone();
             }
-            //System.out.println("current" + current.toString());
             todoList.add(current);
         }
         return todoList;
@@ -60,7 +59,7 @@ public class Storage {
     public static void editFile(int number) throws IOException {
         Path path = Paths.get(savedFile);
         List<String> list = new ArrayList<>(Files.readAllLines(path));
-        String doneTask = list.get(number - 1).replace("0","1");
+        String doneTask = list.get(number).replace("0","1");
         list.set(number, doneTask);
         Files.write(path,list);
     }

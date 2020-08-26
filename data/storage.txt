@@ -1,4 +1,4 @@
-T | 1 | go run | stadium
-T | 0 | go eat
 T | 1 | go and sleep
-T | 0 | go eat
+T | 1 | go eat
+T | 1 | go fish
+T | 1 | go fuck
