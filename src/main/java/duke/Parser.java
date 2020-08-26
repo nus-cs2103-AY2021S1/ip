@@ -15,6 +15,7 @@ public class Parser {
      * @return The command to be executed based on user input.
      * @throws InvalidInputException If description is empty for adding new tasks.
      * @throws InvalidCommandException If command is not defined.
+     * @throws InvalidTaskTypeException if task is invalid.
      */
     static Command parse (String fullCommand) throws InvalidInputException, InvalidCommandException, InvalidTaskTypeException {
         String[] commandArr = fullCommand.trim().split(" ", 2);
@@ -44,7 +45,7 @@ public class Parser {
      * @param taskDetails Details of task to be added.
      * @return The prepared command to add new task.
      * @throws InvalidInputException If taskDetails is empty or lacking date or timing for Deadline and Event Task.
-     * @throws InvalidTaskTypeException If task type is not deadline, todo, event.
+     * @throws InvalidTaskTypeException If command is not deadline, todo, event.
      */
     static Command prepareAdd(String command, String taskDetails) throws InvalidInputException, InvalidTaskTypeException {
         switch (command) {
