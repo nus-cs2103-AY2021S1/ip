@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -17,8 +15,10 @@ public class Event extends Task {
         LocalDateTime timeStart;
         LocalDateTime timeEnd;
         try {
-            timeStart = LocalDateTime.parse(startEnd[0], DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-            timeEnd = LocalDateTime.parse(startEnd[1], DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            timeStart = LocalDateTime.parse(startEnd[0],
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            timeEnd = LocalDateTime.parse(startEnd[1],
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         } catch (DateTimeParseException ignored) {
             return;
         }

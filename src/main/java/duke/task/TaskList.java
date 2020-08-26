@@ -21,15 +21,15 @@ public class TaskList {
         String[] taskLine = taskString.split("~");
         Task task = null;
         switch (taskLine[0]) {
-            case "T":
-                task = new ToDo(taskLine[2]);
-                break;
-            case "D":
-                task = new Deadline(taskLine[2], taskLine[3]);
-                break;
-            case "E":
-                task = new Event(taskLine[2], taskLine[3]);
-                break;
+        case "T":
+            task = new ToDo(taskLine[2]);
+            break;
+        case "D":
+            task = new Deadline(taskLine[2], taskLine[3]);
+            break;
+        case "E":
+            task = new Event(taskLine[2], taskLine[3]);
+            break;
         }
         if (taskLine[1].equals("1")) {
             assert task != null;

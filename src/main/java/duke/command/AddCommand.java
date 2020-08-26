@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.task.Task;
@@ -15,7 +14,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTasks(task);
         String echoizer = "\t Got it. I've added this task:\n"
                 + "\t %s\n"
