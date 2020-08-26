@@ -1,7 +1,7 @@
 todo t1
 todo t2
-deadline t3 /by 1
-event t4 /at 2
+deadline t3 /by 1 Jan, 2020 13:00
+event t4 /at 1 Jan, 2020 13:00 /to 02/01/2020, 2020 13:00
 list
 done 2
 list
@@ -14,4 +14,5 @@ event 1
 delete -1
 delete
 delete 1
+event t5 /at 1 Jan, 2020 13:00 /to 2/1/2020, 2020 13:00
 bye
