@@ -44,4 +44,14 @@ public class TaskList {
             System.out.println((i + 1) + ". " + taskList.get(i));
         }
     }
+    
+    public String find(String keyword) {
+        String output = "Here are the matching tasks in your list: \n";
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).toString().contains(keyword)) {
+                output = output + ((i + 1) + ". " + taskList.get(i)) + "\n";
+            }
+        }
+        return output;
+    }
 }

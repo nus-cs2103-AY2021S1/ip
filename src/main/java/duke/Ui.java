@@ -29,7 +29,7 @@ public class Ui {
     }
     
     public void printExceptionMessage(Exception e) {
-        out.println(e);
+        out.println(e.getMessage());
     }
     
     public void printAddTaskConfirmation(Task task, TaskList taskList) {
@@ -51,5 +51,9 @@ public class Ui {
     
     public void printAllTasks(TaskList taskList) {
         out.println(taskList.getAllTasksAsString());
+    }
+    
+    public void printMessage(String message) {
+        out.println(message);
     }
 }
