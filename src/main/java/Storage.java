@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,16 +6,23 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Storage class.
+ * Used to save/load the TaskList to a predetermined directory
+ * saved file stored in ./data/duke.txt
+ *
+ * @author Biao Yi
+ */
 
 public class Storage {
 
     public static final String FILENAME = "./data/duke.txt";
     public static final String DIRECTORY_NAME = "./data/";
 
-
-    public Storage() {
-    }
-
+    /**
+     * Static method to save a TaskList to the hard drive
+     * @param list A TaskList object
+     */
     public static void save(ArrayList<Task> list) {
         try {
             FileWriter writer = new FileWriter(FILENAME);
@@ -38,15 +44,21 @@ public class Storage {
         }
     }
 
+    /**
+     * Static method to load a TaskList from hard drive
+     * Creates an empty directory and file "./data/duke.txt"
+     * if the file does not exist
+     */
     public static ArrayList<Task> load() {
         List<String> tasksList = new ArrayList<>();
         ArrayList<Task> tasks = new ArrayList<>();
 
         File directory = new File(DIRECTORY_NAME);
-        // checks if directory exists, else directory will be created
+        // Checks if directory exists, else directory will be created
         if (!directory.exists()) {
             directory.mkdir();
         }
+        // Checks if file exists, else create empty file
         File f = new File(FILENAME);
         if(!f.exists()) {
             try {
