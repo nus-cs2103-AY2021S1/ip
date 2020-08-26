@@ -20,7 +20,7 @@ public class TaskList {
     }
 
     /**
-     * Retrieves the requested <code>Task</code> Object from the list
+     * Retrieves the requested <code>Task</code> Object from the list.
      *
      * @param taskId The 1-based index of the task to be fetched
      * @return The requested <code>Task</code> object
@@ -41,7 +41,7 @@ public class TaskList {
     }
 
     /**
-     * Removes the requested <code>Task</code> Object from the list
+     * Removes the requested <code>Task</code> Object from the list.
      *
      * @param taskId The 1-based index of the task to be fetched
      * @return The requested <code>Task</code> object
@@ -61,6 +61,12 @@ public class TaskList {
         return tasks.isEmpty();
     }
 
+    /**
+     * Filters the list that contains the given keyword.
+     *
+     * @param keyword The keyword from user input
+     * @return The list of <code>Task</code> objects that contains the keyword
+     */
     public TaskList filter(String keyword) {
         ArrayList<Task> resultWithKeyword = new ArrayList<>();
         for (Task task : tasks) {

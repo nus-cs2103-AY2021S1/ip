@@ -14,12 +14,18 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Prints an error message if filePath is unable to load.
+     */
     public void showLoadingError() {
         showLine();
         System.out.println("Failed to load tasks. An empty list is created.");
         showLine();
     }
 
+    /**
+     * Prints a welcome message.
+     */
     public void showWelcome() {
         showLine();
         System.out.println(Message.MESSAGE_WELCOME);
@@ -39,7 +45,7 @@ public class Ui {
     }
 
     /**
-     * Prints a list of tasks
+     * Prints a list of tasks.
      *
      * @param tasks A list of tasks to be printed
      */
@@ -49,7 +55,7 @@ public class Ui {
         } else {
             System.out.println("Here are the tasks in your list:");
             ArrayList<Task> taskList = tasks.getTasks();
-            for (int i = 1; i <= taskList.size(); i ++) {
+            for (int i = 1; i <= taskList.size(); i++) {
                 Task task = taskList.get(i - 1);
                 System.out.printf("%d.%s\n", i, task);
             }
@@ -57,14 +63,14 @@ public class Ui {
     }
 
     /**
-     * Prints a message if there are no tasks in the list
+     * Prints a message if there are no tasks in the list.
      */
     private void showNoTasksMsg() {
         System.out.println("There are currently no tasks in your list");
     }
 
     /**
-     * Prints a message upon successful addition of a task to the list
+     * Prints a message upon successful addition of a task to the list.
      *
      * @param newTask The task to be added to the list
      * @param taskList The list of tasks after the addition
@@ -77,7 +83,7 @@ public class Ui {
     }
 
     /**
-     * Prints a message upon successful deletion of a task from the list
+     * Prints a message upon successful deletion of a task from the list.
      *
      * @param task The task to be removed from the list
      * @param taskList The list of tasks after the deletion
@@ -90,7 +96,7 @@ public class Ui {
     }
 
     /**
-     * Prints a message upon successful completion of a task in the list
+     * Prints a message upon successful completion of a task in the list.
      *
      * @param task The task that is completed in the list
      */
@@ -98,6 +104,12 @@ public class Ui {
         System.out.println(Message.DONE + task.toString());
     }
 
+    /**
+     * Prints a list of <code>Task</code> objects.
+     *
+     * @param taskList The list of <code>Task</code> objects
+     * @throws DukeException If there is no <code>Task</code> object in the list
+     */
     public void showFindMessage(TaskList taskList) throws DukeException {
         if (taskList.isEmpty()) {
             showNoTasksMsg();

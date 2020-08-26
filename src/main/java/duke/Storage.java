@@ -1,11 +1,16 @@
 package duke;
+
 import java.util.Scanner;
 
 import java.util.ArrayList;
 
 import duke.Exception.DukeException;
 
-import duke.Task.*;
+import duke.Task.Task;
+import duke.Task.TaskList;
+import duke.Task.ToDo;
+import duke.Task.Deadline;
+import duke.Task.Event;
 
 import duke.Ui.Message;
 
@@ -19,7 +24,7 @@ public class Storage {
     private String filePath;
 
     /**
-     * Constructs a <code>Storage</code> Object using filePath
+     * Constructs a <code>Storage</code> Object using filePath.
      *
      * @param filePath The filePath where the data is stored
      */
@@ -28,7 +33,7 @@ public class Storage {
     }
 
     /**
-     * Loads the existing tasks from the data file
+     * Loads the existing tasks from the data file.
      *
      * @return An ArrayList of tasks which are stored in the data file
      * @throws DukeException If file does not exist
@@ -71,7 +76,7 @@ public class Storage {
     }
 
     /**
-     * Saves the current tasks in the list to the data file
+     * Saves the current tasks in the list to the data file.
      *
      * @param tasks The TaskList to be saved to the destined filePath
      * @throws DukeException If writing to file fails

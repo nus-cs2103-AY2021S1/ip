@@ -26,7 +26,7 @@ public class AddCommand extends Command {
         return String.join(" ", Arrays.copyOfRange(strArr, 1, strArr.length));
     }
 
-    public static String getDate(String str, String delimiter) throws DukeException {
+    private static String getDate(String str, String delimiter) throws DukeException {
         String[] splitString = str.split("\\s+");
         if (delimiter.equals(Deadline.delimiterBy) && splitString[splitString.length - 1].equals("/by")) {
             throw new DukeException("The due time of a deadline cannot by empty");
@@ -43,7 +43,7 @@ public class AddCommand extends Command {
     }
 
 
-    public static String getWithoutDelimiter(String str, String delimiter) throws DukeException {
+    private static String getWithoutDelimiter(String str, String delimiter) throws DukeException {
         String[] splitString = str.split("\\s+");
         if (delimiter.equals(Deadline.delimiterBy) && splitString[0].equals("/by")) {
             throw new DukeException("The description of a deadline cannot by empty");

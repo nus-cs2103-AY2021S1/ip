@@ -18,7 +18,7 @@ public class Event extends Task {
     public static final String delimiterAt = " /at ";
 
     /**
-     * Constructs an <code>Event</code> Object to represent an event
+     * Constructs an <code>Event</code> Object to represent an event.
      *
      * @param description The description of the event item
      * @param at The duration of the event (including the start and end of both date and time)
@@ -30,7 +30,7 @@ public class Event extends Task {
 
         String[] dateTime = this.at.split(" ");
 
-            // case if event last for days
+        // case if event last for day.
         if (dateTime[0].contains("-")) {
             String[] dateSplit = dateTime[0].split("-");
             this.startDate = parseDate(dateSplit[0]);
@@ -54,7 +54,7 @@ public class Event extends Task {
     }
 
     /**
-     * Parses a text and returns the date of an event
+     * Parses a text and returns the date of an event.
      *
      * @param dateString The text to be parsed
      * @return The date of an event
@@ -65,7 +65,7 @@ public class Event extends Task {
     }
 
     /**
-     * Parses a text and returns the time of an event
+     * Parses a text and returns the time of an event.
      *
      * @param timeString The text to be parsed
      * @return The time of an event
@@ -92,7 +92,7 @@ public class Event extends Task {
 
     @Override
     public String serialize() {
-        return String.format("E | %d | %s | %s", getStatusCode(), description , at);
+        return String.format("E | %d | %s | %s", getStatusCode(), description, at);
     }
 
     @Override

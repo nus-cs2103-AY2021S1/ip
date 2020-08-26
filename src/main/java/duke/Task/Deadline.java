@@ -13,7 +13,8 @@ public class Deadline extends Task {
 
     public static final String delimiterBy = " /by ";
 
-    /** Constructs a <code>Deadline</code> Object to represent a task with a deadline
+    /**
+     * Constructs a <code>Deadline</code> Object to represent a task with a deadline.
      *
      * @param description The description of the deadline
      * @param by The deadline containing date and time
@@ -32,7 +33,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Parses a text and returns the date of the deadline
+     * Parses a text and returns the date of the deadline.
      *
      * @param dateString The text to be parsed
      * @return The date of the deadline
@@ -43,7 +44,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Parses a text and returns the time of the deadline
+     * Parses a text and returns the time of the deadline.
      *
      * @param timeString The text to be parsed
      * @return The time of the deadline
@@ -66,7 +67,7 @@ public class Deadline extends Task {
 
     @Override
     public String serialize() {
-        return String.format("D | %d | %s | %s", getStatusCode(), description , by);
+        return String.format("D | %d | %s | %s", getStatusCode(), description, by);
     }
 
     @Override

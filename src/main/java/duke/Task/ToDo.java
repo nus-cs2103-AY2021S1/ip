@@ -3,7 +3,7 @@ package duke.Task;
 public class ToDo extends Task {
 
     /**
-     * Constructs a <code>ToDo</code> Object to represent a todo
+     * Constructs a <code>ToDo</code> Object to represent a todo.
      *
      * @param description The description of a todo item
      */

@@ -7,7 +7,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Constructs a <code>Task</code> Object to represent a task
+     * Constructs a <code>Task</code> Object to represent a task.
      *
      * @param description The description of a task
      */
@@ -30,7 +30,7 @@ public abstract class Task {
     }
 
     /**
-     * Sets the status of a task as done
+     * Sets the status of a task as done.
      *
      * @throws DukeException If a task is already marked as done before
      */

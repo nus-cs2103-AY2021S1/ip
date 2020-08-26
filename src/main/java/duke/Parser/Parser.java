@@ -11,7 +11,7 @@ import duke.Command.FindCommand;
 public class Parser {
 
     /**
-     * Parses user input and returns an executable <code>Command</code> Object
+     * Parses user input and returns an executable <code>Command</code> Object.
      *
      * @param str The raw user input
      * @return An executable <code>Command</code> object

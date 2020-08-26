@@ -31,6 +31,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main entry point of the application.
+     */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -42,7 +45,7 @@ public class Duke {
 
     }
 
-    public void run() {
+    private void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
