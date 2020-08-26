@@ -18,11 +18,11 @@ public class FileHandler {
             }
 
             if (taskList.get(i) instanceof Deadline) {
-                writer.write("D ## " + (taskList.get(i).getDone() ? 1 : 0) + " ## " + ((Deadline) taskList.get(i)).getDescription() + " ## " + "\n");
+                writer.write("D ## " + (taskList.get(i).getDone() ? 1 : 0) + " ## " + ((Deadline) taskList.get(i)).getDescription() + " ## " + ((Deadline) taskList.get(i)).getDate() + "\n");
             }
 
             if (taskList.get(i) instanceof Event) {
-                writer.write("E ## " + (taskList.get(i).getDone() ? 1 : 0) + " ## " + ((Event) taskList.get(i)).getDescription() + " ## " + ((Event) taskList.get(i)).getTime() + "\n");
+                writer.write("E ## " + (taskList.get(i).getDone() ? 1 : 0) + " ## " + ((Event) taskList.get(i)).getDescription() + " ## " + ((Event) taskList.get(i)).getDate() + " " + ((Event) taskList.get(i)).getTime() + "\n");
             }
         }
 
@@ -39,7 +39,7 @@ public class FileHandler {
         }
     }
 
-   public static void replaceDone(String filePath, String replaceWith) {
+    public static void replaceDone(String filePath, String replaceWith) {
         try {
             // input the file content to the StringBuffer "input"
             BufferedReader file = new BufferedReader(new FileReader(filePath));
