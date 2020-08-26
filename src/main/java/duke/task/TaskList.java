@@ -26,6 +26,22 @@ public class TaskList {
         return index <= (totalTask() - 1);
     }
 
+    /**
+     * Finds all matching tasks from the task list.
+     *
+     * @param keyword Keyword to be matched with the task names in the task list.
+     * @return ArrayList containing all matching tasks that contain the keyword.
+     */
+    public ArrayList<Task> findTask(String keyword) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (int i = 0; i < getTaskList().size(); i++) {
+            if (getTask(i).getName().contains(keyword)) {
+                foundTasks.add(getTask(i));
+            }
+        }
+        return foundTasks;
+    }
+
     public int totalTask() {
         return getTaskList().size();
     }

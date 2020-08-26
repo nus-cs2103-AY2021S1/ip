@@ -20,6 +20,16 @@ public abstract class Task {
 
     public abstract String appendFile();
 
+    /**
+     * Returns name of the Task.
+     *
+     * @return Name of the task.
+     */
+    public String getName() {
+        return this.name;
+    }
+
+
     @Override
     public String toString() {
         String doneString = (done == true ? "✓" : "✗");
