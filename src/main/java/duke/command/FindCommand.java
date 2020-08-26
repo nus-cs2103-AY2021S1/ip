@@ -12,7 +12,7 @@ import java.util.*;
 public class FindCommand extends Command {
 
     public static String TASK_FOUND_MESSAGE = "Here are the matching tasks in your list:";
-    public static String NO_TASK_FOUND = "There are no matching task";
+    public static String NO_TASK_FOUND = "There are no matching task!";
 
 
     public FindCommand(String input) {
@@ -35,6 +35,7 @@ public class FindCommand extends Command {
         if (tasksFound.size() == 0) {
             ui.printMessage(NO_TASK_FOUND);
         } else {
+            ui.printMessage(TASK_FOUND_MESSAGE);
             for (int j = 0; j < tasksFound.size(); j++) {
                 ui.printMessage((j + 1) + "." + tasksFound.get(j));
             }
