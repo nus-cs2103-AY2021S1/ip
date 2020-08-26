@@ -1,7 +1,1 @@
-T | 0 | NAME
-E | 1 | runnning | tonight la si
-D | 0 | gymming | tmr la si
-E | 0 | ad | fasf
-D | 0 | fasdfas | fafa
-T | 0 | fasdfasf
-E | 0 | asdf | 12345
+T | 1 | run
