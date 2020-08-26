@@ -228,6 +228,7 @@ public class Duke {
             for (int i = 0; i < arr.length; i++) {
                 if (arr[i].equals("/at") || arr[i].equals("/by")) {
                     indexToStop = i;
+                    // Stop index when indicator /at or /by is found.
                 }
             }
             if (indexToStop == -1) throw new DukeException("Incorrect Input for timed task.");
@@ -238,14 +239,19 @@ public class Duke {
                 sb.append(arr[j]);
                 if (j != indexToStop - 1) sb.append(" ");
             }
+            // Event / Deadline description has been built, pass it to result[0].
             result[0] = sb.toString();
 
+            // TODO Need to check if date and time match pattern for level 8.
             sb = new StringBuilder();
             for (int k = indexToStop + 1; k < arr.length; k++) {
                 sb.append(arr[k]);
                 if (k != arr.length - 1) sb.append(" ");
             }
-            result[1] = sb.toString();
+            String date = sb.toString();
+            // Now to check if this date can be formatted nicely using DateTimeProcessor class.
+            String parsedDate = new DateTimeProcessor().getParsedDate(date);
+            result[1] = parsedDate;
         } catch (DukeException e) {
             System.out.println("Exception occurred while processing timed task: " + e);
         }
