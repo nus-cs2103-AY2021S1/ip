@@ -1,9 +1,11 @@
+package Duke;
+
 import java.io.IOException;
 
 public class Storage {
     private final String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 

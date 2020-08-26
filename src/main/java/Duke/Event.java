@@ -1,7 +1,9 @@
+package Duke;
+
 public class Event extends Task {
     private final String date;
 
-    Event(String description, String date) {
+    public Event(String description, String date) {
         super(description);
         this.date = date;
     }

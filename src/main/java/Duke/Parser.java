@@ -1,3 +1,5 @@
+package Duke;
+
 import java.util.Arrays;
 import java.util.List;
 import java.io.BufferedReader;
@@ -10,7 +12,7 @@ public class Parser {
     private final TaskList userTaskList;
     private final Storage storage;
 
-    Parser(Storage storage) {
+    public Parser(Storage storage) {
         this.userTaskList = new TaskList();
         this.storage = storage;
     }
@@ -20,7 +22,7 @@ public class Parser {
        this.storage = storage;
     }
 
-    void scan() throws IOException {
+    public void scan() throws IOException {
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader((System.in)));
 

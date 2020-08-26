@@ -1,3 +1,5 @@
+package Duke;
+
 import java.time.format.DateTimeParseException;
 import java.io.Serializable;
 import java.util.List;
@@ -6,7 +8,7 @@ import java.util.ArrayList;
 public class TaskList implements Serializable {
     private final List<Task> itemList = new ArrayList<>();
 
-    Task addItem(String item) throws DukeException {
+    public Task addItem(String item) throws DukeException {
         String type = getItemType(item);
         Task taskToAdd = null;
 

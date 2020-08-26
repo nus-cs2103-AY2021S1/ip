@@ -1,3 +1,5 @@
+package Duke;
+
 import java.io.IOException;
 
 public class Ui {
@@ -5,7 +7,7 @@ public class Ui {
         parser.scan();
     }
 
-    static void showWelcomeMessage() {
+    public static void showWelcomeMessage() {
         System.out.println("Hi I'm Duke, your personal task-tracker bot!");
         System.out.println("You can add todos, deadlines, or events to my " +
                                    "list.");
@@ -19,7 +21,7 @@ public class Ui {
         System.out.println("Your existing task list has been retrieved from disk.");
     }
 
-    static void showNoExistingSave() {
+    public static void showNoExistingSave() {
         System.out.println("You don't have an existing saved task list.");
     }
 

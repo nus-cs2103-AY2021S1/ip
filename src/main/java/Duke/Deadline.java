@@ -1,3 +1,5 @@
+package Duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -5,7 +7,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     private LocalDate date;
 
-    Deadline(String description, String date) throws DateTimeParseException {
+    public Deadline(String description, String date) throws DateTimeParseException {
         super(description);
         parseDate(date);
     }
