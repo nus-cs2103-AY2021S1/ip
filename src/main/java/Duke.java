@@ -3,21 +3,23 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Parser parser;
 
     public Duke(String filePath) {
-        storage = new Storage(filePath);
+        this.storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            this.tasks = new TaskList(this.storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
-        ui = new Ui(tasks);
+        this.ui = new Ui(this.tasks);
+        this.parser = new Parser(this.ui, this.tasks);
     }
 
     public void run() {
         ui.showWelcome();
-        ui.responder();
+        this.parser.responder();
     }
 
     public static void main(String[] args) {

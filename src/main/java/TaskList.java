@@ -1,22 +1,23 @@
 import java.util.Iterator;
-import java.util.List;
 import java.util.ArrayList;
 
 public class TaskList {
-    public List<Task> tasks;
-    public int numberOfTasks = 0;
+    private Storage storage;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
-    public TaskList(List<Task> tasks) {
-        this.tasks = tasks;
+
+    public TaskList(Storage storage) {
+        this.storage = storage;
+        this.tasks = this.storage.getTaskList();
     }
 
     public String numberOfTasks() {
         StringBuilder sb = new StringBuilder();
         sb.append("you have [")
-                .append(this.numberOfTasks).append("] in your list");
+                .append(this.tasks.size()).append("] task(s) in your list");
         return sb.toString();
     }
 
@@ -44,8 +45,9 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
         sb.append("yay! i have marked this task as done: \n    ")
                 .append(task)
-                .append(this.numberOfTasks());
+                .append("\n" + this.numberOfTasks());
 
+        this.storage.updateFile();
         return sb.toString();
     }
 
@@ -56,6 +58,20 @@ public class TaskList {
         sb.append("sure thing. i have removed this task: \n    ")
                 .append(task).append("\n")
                 .append(this.numberOfTasks());
+
+        this.storage.updateFile();
+        return sb.toString();
+    }
+
+    public String add(Task task) {
+        this.tasks.add(task);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("got it! i have added the following task to your list:\n    ")
+                .append(task)
+                .append("\n" + this.numberOfTasks());
+
+        this.storage.updateFile();
         return sb.toString();
     }
 }

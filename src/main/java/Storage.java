@@ -4,18 +4,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
 
 public class Storage {
-    String filePath;
-    List<Task> tasks = new ArrayList<Task>();
+    private String filePath;
+    private ArrayList<Task> tasks = new ArrayList<Task>();
 
     Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    public List<Task> load() throws EmptyDescriptionException {
+    public Storage load() throws EmptyDescriptionException {
         File dir = new File("data");
         if (!dir.exists()) {
             dir.mkdir();
@@ -36,7 +35,6 @@ public class Storage {
 
             String string;
             Task task;
-            int counter = 1;
 
             while (s.hasNext()) {
                 string = s.nextLine();
@@ -70,13 +68,13 @@ public class Storage {
                 if (string.contains("[\u2713]")) {
                     task.markAsDone();
                 }
-                counter += 1;
+                this.tasks.add(task);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        return this.tasks;
+        return this;
     }
 
     public void updateFile() {
@@ -94,5 +92,9 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<Task> getTaskList() {
+        return this.tasks;
     }
 }
