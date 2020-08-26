@@ -22,7 +22,7 @@ public class DoneCommand extends Command {
 
     /**
      * Marks a task in the taskList as done.
-     * @param taskList is the list of tasks stored by Duke.
+     * @param tasks is the list of tasks stored by Duke.
      * @param ui is the user interface to read inputs from the user and print messages.
      * @param storage deals with saving tasks into the file and loading tasks
      *                from the file.

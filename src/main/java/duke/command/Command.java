@@ -9,7 +9,6 @@ import duke.ui.Ui;
  * Represents an abstract command that is to be executed by Duke.
  */
 public abstract class Command {
-<<<<<<< HEAD
 
 
     /**
@@ -27,11 +26,6 @@ public abstract class Command {
      * Indicates if Duke should still be running after the command is executed.
      * @return true if Duke should keep running and false if not.
      */
-    public abstract boolean isRunning();
-=======
-    
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
-
     public abstract boolean continueRunning();
->>>>>>> branch-A-CodingStandard
+    
 }

@@ -17,17 +17,12 @@ public class Duke {
     static final String filepath = "duke.txt";
     private Storage storage;
     private Ui ui;
-<<<<<<< HEAD
     private TaskList tasks;
 
     /**
      * Constructs a Duke object and initialises the TaskList, Ui and Storage.
      * @param filepath location of the save file containing the list of tasks.
      */
-=======
-    private TaskList tasks;
-    
->>>>>>> branch-A-CodingStandard
     public Duke (String filepath) {
         tasks = new TaskList();
         ui = new Ui();

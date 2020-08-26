@@ -72,16 +72,12 @@ public class Storage {
             System.out.println(e);
         }
     }
-
-<<<<<<< HEAD
+    
     /**
      * A function to save all the tasks into the file.
-     * @param taskList the TaskList whose tasks should be stored into the file.
+     * @param tasks the TaskList whose tasks should be stored into the file.
      */
-    public void storelist(TaskList taskList) {
-=======
     public void storelist(TaskList tasks) {
->>>>>>> branch-A-CodingStandard
         try {
             String seperator = " | ";
             FileWriter fileWriter = new FileWriter(filepath);
