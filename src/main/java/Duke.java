@@ -44,10 +44,10 @@ public class Duke {
     }
 
     /**
-     * Creates a duke object and runs it.
+     * Creates a duke object named duck and runs it.
      **/
     public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt");
-        duke.run();
+        Duke duck = new Duke("data/duke.txt");
+        duck.run();
     }
 }
