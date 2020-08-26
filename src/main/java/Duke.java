@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -5,6 +8,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+
         System.out.println(logo +"Hello! I'm Duke\n" + "What can I do for you?");
 
         IOHandler handler = new IOHandler();
