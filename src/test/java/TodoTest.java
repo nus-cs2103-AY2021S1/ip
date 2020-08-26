@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoTest {
     @Test
-    public void descTestOne() throws DukeEmptyDescException {
+    public void descTest() throws DukeEmptyDescException {
         assertEquals(new Task("Hi", TaskType.TODO, false).toString(), "[✘] Hi");
     }
 
     @Test
-    public void descTestTwo() throws DukeEmptyDescException {
+    public void descTest2() throws DukeEmptyDescException {
         assertEquals(new Task("Hello There!", TaskType.TODO, true).toString(), "[✓] Hello There!");
     }
 
