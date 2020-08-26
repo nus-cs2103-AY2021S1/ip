@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline task.
+ */
 public class Deadline extends Task {
     protected LocalDate by;
 
@@ -9,6 +12,10 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
+    /**
+     * Returns the format for permanent storage of a deadline task in file.
+     * @return string format for storing
+     */
     @Override
     public String getStoringFormat() {
         return "D " + super.getStoringFormat() + " ~ " + this.by;

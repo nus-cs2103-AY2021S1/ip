@@ -1,7 +1,16 @@
 import java.util.Scanner;
 
+/**
+ * Represents a parser to make sense of the user commands.
+ */
 public class Parser {
 
+    /**
+     * Returns the appropriate command to be carried out after scanning the user command.
+     * @param fullCommand original user command
+     * @return command to be executed
+     * @throws DukeException for errors such as non-comprehensible user commands
+     */
     public static Command parse(String fullCommand) throws DukeException {
         Scanner s2 = new Scanner(fullCommand);
         if (fullCommand.equals("bye")) {
