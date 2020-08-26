@@ -1,10 +1,22 @@
 package src.main.java.duke.parser;
 
-import src.main.java.duke.commands.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import static src.main.java.duke.commons.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static src.main.java.duke.commons.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import src.main.java.duke.commands.AddDeadlineCommand;
+import src.main.java.duke.commands.AddEventCommand;
+import src.main.java.duke.commands.AddTodoCommand;
+import src.main.java.duke.commands.Command;
+import src.main.java.duke.commands.DeleteCommand;
+import src.main.java.duke.commands.ExitCommand;
+import src.main.java.duke.commands.FindCommand;
+import src.main.java.duke.commands.HelpCommand;
+import src.main.java.duke.commands.IncorrectCommand;
+import src.main.java.duke.commands.ListCommand;
+import src.main.java.duke.commands.MarkDoneCommand;
 
 /**
  * Parses user input.
@@ -46,24 +58,24 @@ public class Parser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
-            case AddTodoCommand.COMMAND_WORD:
-                return prepareAddTodo(arguments);
-            case AddEventCommand.COMMAND_WORD:
-                return prepareAddEvent(arguments);
-            case AddDeadlineCommand.COMMAND_WORD:
-                return prepareAddDeadline(arguments);
-            case DeleteCommand.COMMAND_WORD:
-                return prepareDelete(arguments);
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
-            case MarkDoneCommand.COMMAND_WORD:
-                return prepareMarkDone(arguments);
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+        case AddTodoCommand.COMMAND_WORD:
+            return prepareAddTodo(arguments);
+        case AddEventCommand.COMMAND_WORD:
+            return prepareAddEvent(arguments);
+        case AddDeadlineCommand.COMMAND_WORD:
+            return prepareAddDeadline(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return prepareDelete(arguments);
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+        case MarkDoneCommand.COMMAND_WORD:
+            return prepareMarkDone(arguments);
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
-            default:
-                return new HelpCommand();
+        default:
+            return new HelpCommand();
         }
     }
 

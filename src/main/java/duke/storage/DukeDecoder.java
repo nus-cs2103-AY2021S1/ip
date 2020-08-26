@@ -6,9 +6,11 @@ import java.util.regex.Pattern;
 
 import src.main.java.duke.data.Duke;
 import src.main.java.duke.data.exception.IllegalValueException;
+import src.main.java.duke.data.task.Task;
+import src.main.java.duke.data.task.TaskList;
+import src.main.java.duke.data.task.Todo;
 import src.main.java.duke.data.task.Deadline;
 import src.main.java.duke.data.task.Event;
-import src.main.java.duke.data.task.Todo;
 import src.main.java.duke.storage.StorageFile.StorageOperationException;
 
 

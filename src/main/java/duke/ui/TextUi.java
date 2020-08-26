@@ -46,7 +46,7 @@ public class TextUi {
      */
     private boolean shouldIgnore(String rawInputLine) {
         if (rawInputLine.trim().isEmpty() || isCommentLine(rawInputLine)) {
-            showToUser("OOPS WRONG FORMAT");
+            showToUser("OOPS WRONG FORMAT. Try typing 'help' for more instructions" );
             return true;
         }
         return false;

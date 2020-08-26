@@ -27,7 +27,7 @@ public class MarkDoneCommand extends Command {
         } catch (IndexOutOfBoundsException ie) {
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         } catch (Exception pnfe) {
-            return new CommandResult(Messages.MESSAGE_TASK_NOT_IN_ADDRESSBOOK);
+            return new CommandResult(Messages.MESSAGE_TASK_NOT_IN_TASKLIST);
         }
     }
 

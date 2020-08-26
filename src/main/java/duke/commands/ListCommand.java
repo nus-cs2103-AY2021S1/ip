@@ -4,6 +4,9 @@ import java.util.List;
 
 import src.main.java.duke.data.task.Task;
 
+/**
+ * Represents an list command. Upon execution, list the task list to the user.
+ */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";

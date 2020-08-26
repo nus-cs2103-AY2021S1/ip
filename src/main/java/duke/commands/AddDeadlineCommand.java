@@ -23,8 +23,6 @@ public class AddDeadlineCommand extends Command {
         this.toAdd = new Deadline(description, dueDate);
     }
 
-    
-
     @Override
     public CommandResult execute() {
         try {

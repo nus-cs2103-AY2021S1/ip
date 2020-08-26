@@ -6,9 +6,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
- * A list of tasks. Does not allow null elements or duplicates.
+ * A list of tasks that does not allow null elements or duplicates.
  *
  */
 public class TaskList implements Iterable<Task> {

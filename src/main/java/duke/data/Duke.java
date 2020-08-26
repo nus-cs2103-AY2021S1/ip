@@ -1,8 +1,8 @@
 package src.main.java.duke.data;
 
+import src.main.java.duke.data.task.Task;
 import src.main.java.duke.data.task.TaskList;
 import src.main.java.duke.data.task.TaskList.TaskNotFoundException;
-import src.main.java.duke.data.task.Task;
 
 
 /**
