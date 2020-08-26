@@ -224,7 +224,7 @@ public class Duke {
                 } else{
                     bufferedWriter.write("0");
                 }
-                bufferedWriter.write("-");
+                bufferedWriter.write("++");
             }
             //System.out.println(SAVED);
             bufferedWriter.close();
@@ -242,7 +242,7 @@ public class Duke {
                 BufferedReader reader = Files.newBufferedReader(filePath);
                 String data = reader.readLine();
                 if(data != null) {
-                    String[] tasks = data.split("-");
+                    String[] tasks = data.split("++");
                     for (int i = 0; i < tasks.length; i++) {
                         //split the individual tasks
                         String[] doneList = tasks[i].split("~", 2);
