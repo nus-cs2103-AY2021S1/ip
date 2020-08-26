@@ -2,7 +2,14 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ *
+ */
 public class Warnings extends Ui {
+    /**
+     *
+     * @param tasksSize
+     */
     public static void invalidDoneTaskIndex(int tasksSize) {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
@@ -14,6 +21,9 @@ public class Warnings extends Ui {
         System.out.println(warningMsg);
     }
 
+    /**
+     *
+     */
     public static void invalidToDo() {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
@@ -24,6 +34,9 @@ public class Warnings extends Ui {
         System.out.println(warningMsg);
     }
 
+    /**
+     *
+     */
     public static void invalidDeadline() {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
@@ -34,6 +47,9 @@ public class Warnings extends Ui {
         System.out.println(warningMsg);
     }
 
+    /**
+     *
+     */
     public static void invalidEvent() {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
@@ -44,6 +60,9 @@ public class Warnings extends Ui {
         System.out.println(warningMsg);
     }
 
+    /**
+     *
+     */
     public static void invalidInput() {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
@@ -53,6 +72,10 @@ public class Warnings extends Ui {
         System.out.println(warningMsg);
     }
 
+    /**
+     *
+     * @param tasksSize
+     */
     public static void invalidDelete(int tasksSize) {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
@@ -64,6 +87,10 @@ public class Warnings extends Ui {
         System.out.println(warningMsg);
     }
 
+    /**
+     *
+     * @param e
+     */
     public static void invalidFileInput(IOException e) {
         String warningMsg1 = "################################################################"
                 + "\n [• ▂ •]What? "
@@ -75,6 +102,10 @@ public class Warnings extends Ui {
         System.out.println(warningMsg2);
     }
 
+    /**
+     *
+     * @param e
+     */
     public static void invalidFileOutput(IOException e) {
         String warningMsg1 = "################################################################"
                 + "\n [• ▂ •]What? "

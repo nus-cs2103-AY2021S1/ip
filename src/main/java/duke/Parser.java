@@ -3,7 +3,14 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ *
+ */
 public class Parser {
+    /**
+     *
+     * @param tasklist
+     */
     public static void parseUserInput(TaskList tasklist) {
         ArrayList<Task> tasks = tasklist.getTaskList();
         Scanner sc = new Scanner(System.in);

@@ -2,8 +2,13 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class Ui {
-
+    /**
+     *
+     */
     public void logoMsg() {
         String logo = " ___       __   _______   ___       ________  " +
                 "________  _____ ______   _______      \n" +
@@ -23,6 +28,9 @@ public class Ui {
         System.out.println(logo);
     }
 
+    /**
+     *
+     */
     public void greetingMsg() {
         String greetingMsg = "\n___________________________________________________________"
                 + "\n |°‿°|"
@@ -33,6 +41,9 @@ public class Ui {
         System.out.println(greetingMsg);
     }
 
+    /**
+     *
+     */
     public static void helpMsg() {
         String commandList = "**************************************************************"
                 + "\n ┗( ⊙.⊙ )┛ "
@@ -49,6 +60,9 @@ public class Ui {
         System.out.println(commandList);
     }
 
+    /**
+     *
+     */
     public static void byeMsg() {
         String byeMsg = "\n___________________________________________________________"
                 + "\n |^_^|┛"
@@ -60,6 +74,10 @@ public class Ui {
         System.out.println(byeMsg);
     }
 
+    /**
+     *
+     * @param tasks
+     */
     public static void addDeadlineTaskMsg(ArrayList<Task> tasks) {
         String outputMsg = "\n___________________________________________________________"
                 + "\n (^.^)"
@@ -70,6 +88,10 @@ public class Ui {
         System.out.println(outputMsg);
     }
 
+    /**
+     *
+     * @param tasks
+     */
     public static void addEventTaskMsg(ArrayList<Task> tasks) {
         String outputMsg = "\n___________________________________________________________"
                 + "\n (^.^)"
@@ -80,6 +102,10 @@ public class Ui {
         System.out.println(outputMsg);
     }
 
+    /**
+     *
+     * @param tasks
+     */
     public static void addTodoTaskMsg(ArrayList<Task> tasks) {
         String outputMsg = "\n___________________________________________________________"
                 + "\n (^.^)"
@@ -90,6 +116,11 @@ public class Ui {
         System.out.println(outputMsg);
     }
 
+    /**
+     *
+     * @param index
+     * @param tasks
+     */
     public static void doneTaskMsg(int index, ArrayList<Task> tasks) {
         String outputMsg = "___________________________________________________________"
                 + "\n (ﾉﾟ0ﾟ)ﾉ~"
@@ -100,6 +131,12 @@ public class Ui {
         System.out.println(outputMsg);
     }
 
+    /**
+     *
+     * @param index
+     * @param newSizeOfTasks
+     * @param taskToDelete
+     */
     public static void deleteTaskMsg(int index, int newSizeOfTasks, Task taskToDelete) {
         String outputMsg = "___________________________________________________________"
                 + "\n (ಠ‿↼)"
@@ -110,6 +147,10 @@ public class Ui {
         System.out.println(outputMsg);
     }
 
+    /**
+     *
+     * @param tasks
+     */
     public static void getAllTasksMsg(ArrayList<Task> tasks) {
         String outputMsg = "";
         if (tasks.isEmpty()) {

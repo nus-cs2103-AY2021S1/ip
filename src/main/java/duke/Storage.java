@@ -7,13 +7,24 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     *
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -48,6 +59,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     *
+     * @param tasklist
+     */
     public void writeTasks(TaskList tasklist) {
         try {
             ArrayList<Task> tasks = tasklist.getTaskList();
