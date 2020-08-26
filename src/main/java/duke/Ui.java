@@ -111,6 +111,23 @@ public class Ui {
     }
 
     /**
+     * Shows the message when the user finds a list of tasks with a keyword.
+     *
+     * @param tasks The list of tasks containing the keyword.
+     */
+    public void showFind(TaskList tasks) {
+        String message = "Here are the matching tasks in your list:\n";
+        for (int i = 0; i < tasks.getSize(); i++) {
+            Task task = tasks.getTask(i);
+            message += (i + 1)
+                    + ". "
+                    + task
+                    +"\n";
+        }
+        System.out.println(wrapMessage(message));
+    }
+
+    /**
      * Shows the error message.
      *
      * @param message The error message to be shown.

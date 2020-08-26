@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * The TaskList object contains the task list, and contains operations to modify or get information about the list.
  */
 public class TaskList {
-    private static ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Initialize the TaskList object with 0 tasks.
@@ -21,7 +21,7 @@ public class TaskList {
      * Initialize the TaskList object with the list of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
-        TaskList.tasks = tasks;
+        this.tasks = tasks;
     }
 
     /**

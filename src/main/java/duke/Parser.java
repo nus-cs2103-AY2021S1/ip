@@ -33,6 +33,9 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(lastChar) - 1);
         } else if (command.equals("bye")) {
             return new ExitCommand();
+        } else if (command.equals("find")) {
+            String keyword = getFindKeyword();
+            return new FindCommand(keyword);
         } else if (command.equals("deadline") || command.equals("todo") || command.equals("event")){
             String desc;
             String dateTime;
@@ -92,5 +95,9 @@ public class Parser {
             i++;
         }
         return dateTime.substring(0, dateTime.length() - 1);
+    }
+
+    private static String getFindKeyword() {
+        return inputArr[1];
     }
 }
