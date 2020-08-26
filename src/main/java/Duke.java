@@ -31,7 +31,7 @@ public class Duke {
         );
     }
 
-    private static String createPrompt(String promptText) {
+    public static void printPrompt(String promptText) {
         String HORIZONTAL_LINE = "____________________________________________________________";
         String INDENTATION = "    ";
         String[] lines = promptText.split("[\\r\\n]+");
@@ -43,11 +43,7 @@ public class Duke {
 
         output.append(INDENTATION).append(HORIZONTAL_LINE).append('\n');
 
-        return output.toString();
-    }
-
-    public static void printPrompt(String promptText) {
-        System.out.println(createPrompt(promptText));
+        System.out.println(output.toString());
     }
 
     public static void printAddTask(Task task) {
@@ -58,13 +54,10 @@ public class Duke {
 
     public static LocalDateTime parseDateTime(String input) throws DukeException {
         int index = input.indexOf(" ");
-        String dateStr = index == -1 ? input : input.substring(0, index);
-        String timeStr = index == -1 ? "" : input.substring(index + 1);
+        String date = index == -1 ? input : input.substring(0, index);
+        String time = index == -1 ? "" : input.substring(index + 1);
 
-        LocalDate date = parseDate(dateStr);
-        LocalTime time = parseTime(timeStr);
-
-        return LocalDateTime.of(date, time);
+        return LocalDateTime.of(parseDate(date), parseTime(time));
     }
 
     public static LocalDate parseDate(String input) throws DukeException {
@@ -142,7 +135,14 @@ public class Duke {
             throw new DukeException("The date/time of an event cannot be empty.");
         }
 
-        LocalDateTime by = parseDateTime(byStr);
+        return addDeadline(description, parseDateTime(byStr), isDone);
+    }
+
+    public static Deadline addDeadline(String description, LocalDateTime by, boolean isDone) throws DukeException {
+        if (description.isEmpty()) {
+            throw new DukeException("The description of a deadline cannot be empty.");
+        }
+
         Deadline deadline = new Deadline(description, by, isDone);
 
         tasks.add(deadline);
@@ -164,7 +164,14 @@ public class Duke {
             throw new DukeException("The date/time of an event cannot be empty.");
         }
 
-        LocalDateTime at = parseDateTime(atStr);
+        return addEvent(description, parseDateTime(atStr), isDone);
+    }
+
+    public static Event addEvent(String description, LocalDateTime at, boolean isDone) throws DukeException {
+        if (description.isEmpty()) {
+            throw new DukeException("The description of an event cannot be empty.");
+        }
+
         Event event = new Event(description, at, isDone);
 
         tasks.add(event);
@@ -244,8 +251,7 @@ public class Duke {
 
     public static void saveTasks() throws DukeException {
         try {
-            Path path = Paths.get("data");
-            Files.createDirectories(path);
+            Files.createDirectories(Paths.get("data"));
             Path file = Paths.get("data/duke.txt");
 
             List<String> data = tasks.stream().map(Task::toSaveData).collect(Collectors.toList());
@@ -278,11 +284,11 @@ public class Duke {
 
                             break;
                         case "D":
-                            addDeadline(description, params[3], isDone);
+                            addDeadline(description, LocalDateTime.parse(params[3]), isDone);
 
                             break;
                         case "E":
-                            addEvent(description, params[3], isDone);
+                            addEvent(description, LocalDateTime.parse(params[3]), isDone);
 
                             break;
                         default:
