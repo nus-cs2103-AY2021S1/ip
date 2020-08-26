@@ -17,6 +17,7 @@ public class Ui {
     private static final String MESSAGE_REMOVE_TASK = "Alright~ I've removed this task:";
     private static final String MESSAGE_SEPERATOR = "____________________________________________________________";
     private static final String MESSAGE_LIST = "Here are your tasks~";
+    private static final String MESSAGE_FIND = "Here are the matching tasks in your list~";
     
     private Scanner sc;
     
@@ -69,14 +70,30 @@ public class Ui {
                 "\n" + String.format(MESSAGE_NUMBER_OF_TASKS, result.getSize()) +
                 "\n" + MESSAGE_SEPERATOR);
     }
-
+    
     /**
      * A function to print all the tasks in the list.
-     * @param taskList the TaskList from which all the tasks should be printed from.
+     * @param tasks the TaskList from which all the tasks should be printed from.
      */
-    public void listText(TaskList taskList) {
+    public void listText(TaskList tasks) {
         System.out.println(MESSAGE_SEPERATOR + "\n" + MESSAGE_LIST + "\n");
-        taskList.printTaskList();
+        for (int i = 0; i < tasks.getSize(); i++) {
+            String num = (i + 1) + ". ";
+            Task current = tasks.get(i);
+            System.out.println(num + current);
+        }
+        System.out.println("\n" + MESSAGE_SEPERATOR);
+    }
+
+    public void listRelevantTasks(TaskList tasks, String keyword) {
+        System.out.println(MESSAGE_SEPERATOR + "\n" + MESSAGE_FIND + "\n");
+        for (int i = 0; i < tasks.getSize(); i++) {
+            Task current = tasks.get(i);
+            if (current.containsKeyword(keyword)) {
+                String num = (i + 1) + ". ";
+                System.out.println(num + current);
+            }
+        }
         System.out.println("\n" + MESSAGE_SEPERATOR);
     }
 

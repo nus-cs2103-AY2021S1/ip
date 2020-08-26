@@ -38,6 +38,13 @@ public class Task {
         return this.done;
     }
     
+    public boolean containsKeyword(String keyword) {
+        if (this.taskName.contains(keyword)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public String toString() {

@@ -38,6 +38,8 @@ public class Parser {
             enumCommand = EnumCommand.EVENT;
         } else if (command.equals("delete")) {
             enumCommand = EnumCommand.DELETE;
+        } else if (command.equals("find")) {
+            enumCommand = EnumCommand.FIND;
         } else {
             throw new DukeException("Sorry, I don't know what that means~");
         }
@@ -63,6 +65,9 @@ public class Parser {
                 break;
             case DELETE: 
                 next = new DeleteCommand(nextCommandArr);
+                break;
+            case FIND:
+                next = new FindCommand(nextCommandArr);
                 break;
             default:
                 throw new DukeException("Sorry, I don't know what that means~");

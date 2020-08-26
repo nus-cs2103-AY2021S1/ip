@@ -48,16 +48,5 @@ public class TaskList {
     public void remove(int index) {
         tasks.remove(index);
     }
-
-    /**
-     * A function to print all of the tasks currently in the list.
-     */
-    public void printTaskList() {
-        for (int i = 0; i < tasks.size(); i++) {
-            String num = (i + 1) + ". ";
-            Task current = tasks.get(i);
-            System.out.println(num + current);
-        }
-    }
 }
 
