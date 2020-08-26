@@ -5,6 +5,12 @@ public class Event extends Task  {
         this.time = time;
     }
 
+
+    Event(String name, String time, boolean isCompleted) {
+        super(name, isCompleted);
+        this.time = time;
+    }
+
     public static Event create(String description) throws DukeException {
         String[] keywords = description.split(" /at ", 2);
         if (keywords.length < 2) {
@@ -14,5 +20,10 @@ public class Event extends Task  {
     }
     public String toString() {
         return "[E]" + super.toString() + " (at: " + time + ")";
+    }
+
+    @Override
+    public String toSaveFormat() {
+        return "E | " + super.toSaveFormat() + " | " + time;
     }
 }

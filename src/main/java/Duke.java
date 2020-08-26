@@ -1,21 +1,34 @@
+import java.nio.file.*;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
-        sayHello();
+    List<Task> taskList;
+    TaskSaver taskSaver;
 
-        List<Task> taskList = new ArrayList<>();
+    public Duke() {
+        String home = System.getProperty("user.dir");
+        Path savePath = Paths.get(home, "data", "duke.txt");
+        this.taskSaver = new TaskSaver(savePath);
+        this.taskList = taskSaver.load();
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
+    public void run() {
+        sayHello();
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
-        while (handleCommand(command, taskList)) {
+        while (handleCommand(command)) {
             command = scanner.nextLine();
         }
     }
 
-    public static void deleteTask(String[] commands, List<Task> taskList) throws DukeException {
-        int index = getTaskIndex(commands, taskList);
+    public void deleteTask(String[] commands) throws DukeException {
+        int index = getTaskIndex(commands);
         Task task = taskList.remove(index);
         System.out.println(wrapDivider(
                 "     Noted. I've removed this task: \n" +
@@ -25,7 +38,7 @@ public class Duke {
 
     }
 
-    private static int getTaskIndex(String[] commands, List<Task> taskList) throws DukeException {
+    private int getTaskIndex(String[] commands) throws DukeException {
         if (commands.length < 2) {
             throw new DukeException("☹ OOPS!!! Please put a number to select a task for the \"" +
                     commands[0] + "\" action!");
@@ -41,39 +54,40 @@ public class Duke {
         }
     }
 
-    private static void checkValidAddCommand(String[] commands) throws DukeException {
+    private void checkValidAddCommand(String[] commands) throws DukeException {
         if (commands.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of a " + commands[0] + " cannot be empty.");
         }
     }
 
-    private static boolean handleCommand(String commandLine, List<Task> taskList) {
+    private boolean handleCommand(String commandLine) {
         String[] commands = commandLine.split(" ", 2);
         try {
             switch (commands[0]) {
                 case "todo":
                     checkValidAddCommand(commands);
-                    addTask(new Todo(commands[1]), taskList);
+                    addTask(new Todo(commands[1]));
                     break;
                 case "deadline":
                     checkValidAddCommand(commands);
-                    addTask(Deadline.create(commands[1]), taskList);
+                    addTask(Deadline.create(commands[1]));
                     break;
                 case "event":
                     checkValidAddCommand(commands);
-                    addTask(Event.create(commands[1]), taskList);
+                    addTask(Event.create(commands[1]));
                     break;
                 case "list":
-                    displayTaskList(taskList);
+                    displayTaskList();
                     break;
                 case "done":
-                    markTaskDone(commands, taskList);
+                    markTaskDone(commands);
                     break;
                 case "delete":
-                    deleteTask(commands, taskList);
+                    deleteTask(commands);
                     break;
                 case "bye":
                     sayBye();
+                    taskSaver.save(taskList);
                     return false;
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -84,7 +98,7 @@ public class Duke {
         return true;
     }
 
-    private static void addTask(Task task, List<Task> taskList) {
+    private void addTask(Task task) {
         taskList.add(task);
         System.out.println(wrapDivider(
                 "     Got it. I've added this task: \n" +
@@ -94,8 +108,8 @@ public class Duke {
 
     }
 
-    private static void markTaskDone(String[] commands, List<Task> taskList) throws DukeException {
-        int index = getTaskIndex(commands,taskList);
+    private void markTaskDone(String[] commands) throws DukeException {
+        int index = getTaskIndex(commands);
         Task task = taskList.get(index);
         task.markDone();
         System.out.println(wrapDivider(
@@ -104,11 +118,11 @@ public class Duke {
         ));
     }
 
-    private static void echoAddCommand(String command) {
+    private void echoAddCommand(String command) {
         System.out.println(wrapDivider("     added: " + command + "\n"));
     }
 
-    private static void sayHello() {
+    private void sayHello() {
         System.out.println(wrapDivider(
             "      ____        _        \n" +
             "     |  _ \\ _   _| | _____ \n" +
@@ -120,19 +134,19 @@ public class Duke {
         );
     }
 
-    private static void sayBye() {
+    private void sayBye() {
         System.out.println(wrapDivider("     Bye. Hope to see you again soon!\n"));
     }
 
-    private static void displayTaskList(List<Task> textList) {
+    private void displayTaskList() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < textList.size(); i++) {
-            stringBuilder.append("     " + (i+1) + "."+ textList.get(i) +"\n");
+        for (int i = 0; i < taskList.size(); i++) {
+            stringBuilder.append("     " + (i+1) + "."+ taskList.get(i) +"\n");
         }
         System.out.println(wrapDivider(stringBuilder.toString()));
     }
 
-    private static String wrapDivider(String text) {
+    private String wrapDivider(String text) {
         return  "    ____________________________________________________________\n" +
                 text +
                 "    ____________________________________________________________\n" ;

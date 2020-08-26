@@ -6,6 +6,11 @@ public class Deadline extends Task  {
         this.date = date;
     }
 
+    Deadline(String name, String date, boolean isCompleted) {
+        super(name, isCompleted);
+        this.date = date;
+    }
+
     public static Deadline create(String description) throws DukeException {
         String[] keywords = description.split(" /by ", 2);
         if (keywords.length < 2) {
@@ -16,5 +21,10 @@ public class Deadline extends Task  {
 
     public String toString() {
         return "[D]" + super.toString() + " (by: " + date + ")";
+    }
+
+    @Override
+    public String toSaveFormat() {
+        return "D | " + super.toSaveFormat() + " | " + date;
     }
 }
