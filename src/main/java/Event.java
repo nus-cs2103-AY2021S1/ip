@@ -1,14 +1,19 @@
-public class Event extends Task {
-    private String dateTime;
+import java.time.format.DateTimeFormatter;
 
+public class Event extends TimedTask {
+    
     Event(String name, String dateTime) {
-        super(name);
-        this.dateTime = dateTime;
+        super(name, dateTime);
+        taskType = "E";
     }
 
+    Event(String name, Boolean isDone, String dateTime) {
+        super(name, isDone, dateTime);
+        taskType = "E";
+    }
+    
     @Override
     public String toString() {
-        String dateTimeFormat = String.format(" (at: %s)", dateTime);
-        return "[E]" + super.toString() + dateTimeFormat;
+        return String.format("[%s]%s", taskType, super.toString());
     }
 }

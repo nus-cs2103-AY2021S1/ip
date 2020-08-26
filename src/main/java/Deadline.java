@@ -1,14 +1,19 @@
-public class Deadline extends Task {
-    private String dateTime;
+import java.time.format.DateTimeFormatter;
+
+public class Deadline extends TimedTask {
 
     Deadline(String name, String dateTime) {
-        super(name);
-        this.dateTime = dateTime;
+        super(name, dateTime);
+        taskType = "D";
     }
 
+    Deadline(String name, Boolean isDone, String dateTime) {
+        super(name, isDone, dateTime);
+        taskType = "D";
+    }
+    
     @Override
     public String toString() {
-        String dateTimeFormat = String.format(" (by: %s)", dateTime);
-        return "[D]" + super.toString() + dateTimeFormat;
+        return String.format("[%s]%s", taskType, super.toString());
     }
 }
