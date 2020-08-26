@@ -1,3 +1,9 @@
+package rogue.logic.parser;
+
+import rogue.logic.directives.DeleteDirective;
+
+import rogue.commons.exceptions.IncorrectArgumentException;
+
 public class DeleteDirectiveParser {
     private final String ERROR_INCORRECT_INDEX = "sToP TrYiNg tO FoOl mE. tHe \"delete\" ComMand"
             + " mUsT Be FolLoWed bY tHe InDEx Of THe TAsK.";

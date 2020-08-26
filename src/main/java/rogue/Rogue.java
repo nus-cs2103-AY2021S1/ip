@@ -1,3 +1,17 @@
+package rogue;
+
+import rogue.storage.Storage;
+import rogue.model.task.TaskList;
+import rogue.ui.Ui;
+
+import rogue.logic.directives.Executable;
+import rogue.logic.parser.Parser;
+import rogue.logic.Report;
+
+import rogue.commons.exceptions.IncorrectArgumentException;
+import rogue.logic.parser.exceptions.UnknownCommandException;
+import rogue.storage.exceptions.StorageException;
+
 public class Rogue {
     private Storage storage;
     private TaskList tasks;

@@ -1,3 +1,5 @@
+package rogue.commons.util;
+
 public class StringUtil {
     public static int findIndex(String[] arr, String searchTerm) {
         for (int i = 0; i < arr.length; ++i) {

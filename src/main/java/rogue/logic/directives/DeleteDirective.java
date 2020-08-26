@@ -1,3 +1,16 @@
+package rogue.logic.directives;
+
+import rogue.storage.Storage;
+import rogue.model.task.TaskList;
+import rogue.ui.Ui;
+
+import rogue.model.task.Task;
+
+import rogue.logic.Report;
+
+import rogue.commons.exceptions.IncorrectArgumentException;
+import rogue.storage.exceptions.StorageException;
+
 public class DeleteDirective implements Executable {
     private final String ERROR_INCORRECT_INDEX = "sToP TrYiNg tO FoOl mE. taSK #%d dOeS NoT ExIsT.";
     private final String MESSAGE_DELETE_SUCCESS = "gReAt! OnE FeWeR ThInG To rEmEmBeR: %s\n" +

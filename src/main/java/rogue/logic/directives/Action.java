@@ -1,3 +1,5 @@
+package rogue.logic.directives;
+
 import java.util.HashMap;
 import java.util.Map;
 

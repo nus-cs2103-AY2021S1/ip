@@ -1,3 +1,5 @@
+package rogue.logic;
+
 public class Report {
     private final String description;
     private final boolean isExit;

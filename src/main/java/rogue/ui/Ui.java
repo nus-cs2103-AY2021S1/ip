@@ -1,3 +1,7 @@
+package rogue.ui;
+
+import rogue.logic.Report;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
