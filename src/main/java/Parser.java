@@ -19,7 +19,8 @@ public class Parser {
      * @throws DukeException If no task has been added yet.
      */
     public void viewTasks() throws DukeException {
-        if (currList.getNumOfTasks() == 0) { // user has not added any task
+        if (currList.getNumOfTasks() == 0) {
+            // user has not added any task
             throw new DukeException("Nothing has been added to the list yet!");
         } else {
             for (int i = 0; i < currList.getNumOfTasks(); i++) {
@@ -40,7 +41,8 @@ public class Parser {
             throw new DukeException("There is no such task number!");
         } else {
             Task currTask = currList.get(taskNumber - 1);
-            if (currTask.getStatus()) { // task has already marked done before
+            if (currTask.getStatus()) {
+                // task has already marked done before
                 throw new DukeException("Task has already been completed earlier on!");
             } else {
                 currTask.markAsComplete();
@@ -55,7 +57,9 @@ public class Parser {
      * @throws DukeException If task number indicated does not exist.
      */
     public void deleteFromList(String inputMsg) throws DukeException {
-        int taskNumber = Integer.valueOf(inputMsg.split(" ")[1]); // gets the deleted task number
+        // gets the deleted task number
+        int taskNumber = Integer.valueOf(inputMsg.split(" ")[1]);
+
         if (currList.getNumOfTasks() < taskNumber || taskNumber <= 0) {
             throw new DukeException("There is no such task number!");
         } else {
@@ -104,38 +108,39 @@ public class Parser {
         Task newTask;
         int numOfWords = inputMsg.split(" ").length;
         switch (actionType) {
-            case "todo": {
-                if (numOfWords <= 1) {
-                    throw new DukeException("Description of task cannot be empty!");
-                }
-                String taskName = inputMsg.substring(5);
-                newTask = new Todo(taskName, false);
-                break;
+        case "todo": {
+            if (numOfWords <= 1) {
+                throw new DukeException("Description of task cannot be empty!");
             }
-            case "deadline": {
-                if (numOfWords <= 1) {
-                    throw new DukeException("Description of task cannot be empty!");
-                }
-                String task = inputMsg.split("/")[0];
-                String taskName = task.substring(9, task.length() - 1);
-                String inputDeadline = inputMsg.split("/", 2)[1].substring(3);
-                LocalDateTime deadline = processDate(inputDeadline);
-                newTask = new Deadline(taskName, false, deadline);
-                break;
+            String taskName = inputMsg.substring(5);
+            newTask = new Todo(taskName, false);
+            break;
+        }
+        case "deadline": {
+            if (numOfWords <= 1) {
+                throw new DukeException("Description of task cannot be empty!");
             }
-            case "event": {
-                if (numOfWords <= 1) {
-                    throw new DukeException("Description of task cannot be empty!");
-                }
-                String task = inputMsg.split("/")[0];
-                String taskName = task.substring(6, task.length() - 1);
-                String inputDeadline = inputMsg.split("/", 2)[1].substring(3);
-                LocalDateTime deadline = processDate(inputDeadline);
-                newTask = new Event(taskName, false, deadline);
-                break;
+            String task = inputMsg.split("/")[0];
+            String taskName = task.substring(9, task.length() - 1);
+            String inputDeadline = inputMsg.split("/", 2)[1].substring(3);
+            LocalDateTime deadline = processDate(inputDeadline);
+            newTask = new Deadline(taskName, false, deadline);
+            break;
+        }
+        case "event": {
+            if (numOfWords <= 1) {
+                throw new DukeException("Description of task cannot be empty!");
             }
-            default:  // when user keys in unregistered action
-                throw new DukeException("Specified action is not recognised.");
+            String task = inputMsg.split("/")[0];
+            String taskName = task.substring(6, task.length() - 1);
+            String inputDeadline = inputMsg.split("/", 2)[1].substring(3);
+            LocalDateTime deadline = processDate(inputDeadline);
+            newTask = new Event(taskName, false, deadline);
+            break;
+        }
+        default:
+            // when user keys in unregistered action
+            throw new DukeException("Specified action is not recognised.");
         }
         currList.add(newTask);
         String outputMsg = "Got it. I've added this task:\n"
@@ -149,15 +154,16 @@ public class Parser {
      * @param inputMsg User's input message to the chatbot.
      */
     public void processMsg(String inputMsg) {
-        String actionType = inputMsg.split(" ")[0]; // user specified action, to identify type of action
+        // user specified action, to identify type of action
+        String actionType = inputMsg.split(" ")[0];
 
-        if (inputMsg.equals("list")) { // sees all tasks
+        if (inputMsg.equals("list")) {
             try {
                 viewTasks();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
-        } else if (actionType.equals("done")) { // mark task as done
+        } else if (actionType.equals("done")) {
             try {
                 markDone(inputMsg);
             } catch (DukeException e) {
@@ -169,7 +175,7 @@ public class Parser {
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
-        } else { // add task to list
+        } else {
             try {
                 addToList(inputMsg, actionType);
             } catch (Exception e) {

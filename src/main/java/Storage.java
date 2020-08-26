@@ -1,4 +1,8 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -31,17 +35,20 @@ public class Storage {
      */
     public void writeToFile(TaskList tasks) throws IOException {
         String output = "";
-        if (tasks.getNumOfTasks() == 0) { // user has not added any task
+        if (tasks.getNumOfTasks() == 0) {
+            // user has not added any task
             output = "Nothing has been added to the list yet!";
         } else {
             output = tasks.displayTasks();
         }
         File file = new File(this.filePath);
         File directory = new File(file.getParent());
-        if (!directory.exists()) { // directory does not exist
+        if (!directory.exists()) {
+            // directory does not exist
             directory.mkdir();
         }
-        if (!file.exists()) { // file does not exist
+        if (!file.exists()) {
+            // file does not exist
             file.createNewFile();
         }
         FileWriter fw = new FileWriter("./data/duke.txt");
