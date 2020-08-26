@@ -8,10 +8,10 @@ public class Task {
         if(!description.isEmpty()) {
             if(description.contains("/by")) {
                 this.type = "deadline";
-                this.description = description.substring(0, description.indexOf("/"));
+                this.description = description;
             }else if(description.contains("/at")){
                 this.type = "event";
-                this.description = description.substring(0, description.indexOf("/"));
+                this.description = description;
 
             }else{
                 this.type = "todo";
@@ -41,6 +41,10 @@ public class Task {
 
     @Override
     public String toString(){
+        return "["+getStatusIcon()+"]"+" "+description;
+    }
+
+    public String toSave(){
         return "["+getStatusIcon()+"]"+" "+description;
     }
 
