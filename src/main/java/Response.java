@@ -10,20 +10,39 @@ public class Response {
     public Tag tag;
     public int numOfTasks;
 
+    /**
+     * Creates the response of normal texts.
+     * 
+     * @param texts An array of strings. Each string will be printed in one line.
+     */
     public Response(String[] texts) {
         this.texts = texts;
         this.tag = Tag.NORMAL;
     }
 
+    /**
+     * Creates the response after receiving task related commands from the user
+     * like adding task to the list.
+     * 
+     * @param tasks The task to be added or removed.
+     * @param tag Removal or addition of the task.
+     * @param numOfTasks The number of Tasks in the list.
+     */
     public Response(Task[] tasks, Tag tag, int numOfTasks) {
         this.tasks = tasks;
         this.tag = tag;
         this.numOfTasks = numOfTasks;
     }
 
-    public Response(Task[] tasks, Tag tag) {
+    /**
+     * Creates the response after receiving some other task related commands from the user
+     * like listing the tasks in the list.
+     * 
+     * @param tasks The list of the tasks in the list.
+     */
+    public Response(Task[] tasks) {
         this.tasks = tasks;
-        this.tag = tag;
+        this.tag = Tag.LIST;
     }
 
     public String getResponse() {
