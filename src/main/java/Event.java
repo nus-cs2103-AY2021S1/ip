@@ -6,6 +6,16 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event(String description, boolean isDone, String at) {
+        super(description, isDone);
+        this.at = at;
+    }
+
+    @Override
+    public String toSave() {
+        return "E | " +  super.toSave() + " | " + at;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (at: " + at + ")";

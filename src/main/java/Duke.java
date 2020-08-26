@@ -1,40 +1,52 @@
-import jdk.jshell.spi.ExecutionControl;
-
-import java.nio.channels.NonWritableChannelException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 import java.lang.StringBuilder;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 public class Duke {
-    private static final String line = "____________________________________________________________\n";
-    private static final String bye = "bye";
+    private static final String LINE = "____________________________________________________________\n";
+    private static final String BYE = "bye";
+    private static final String FILEPATH = "./data/tasks.txt";
     private ArrayList<Task> inputList;
+    private Storage storage;
 
     private Duke() {
         inputList = new ArrayList<>();
+        storage = new Storage(FILEPATH);
     }
 
     public void init() {
         Scanner sc = new Scanner(System.in);
+        try {
+            inputList = storage.read();
+        } catch (FileNotFoundException e) {
+            System.out.println(template("No existing user data file found. Welcome to the bot club:)"));
+        } catch (CorruptedFileException e) {
+            System.out.println("Your file has been corrupted :( Unfortunately the data cannot be used");
+        }
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
-            if (command.equals(bye)) {
+            if (command.equals(BYE)) {
                 System.out.println(template("Cya!!"));
                 return;
             } else {
                 try {
                     String reply = inputHandler(command);
                     System.out.println(template(reply));
-                } catch (InvalidArgumentException | InvalidCommandException e){
+                    storage.write(FILEPATH, inputList);
+                } catch (IllegalArgumentException | InvalidArgumentException | InvalidCommandException e){
                     System.out.println(e.getMessage());
+                } catch (IOException e) {
+                    System.out.println("There is an issue writing to the storage file!!");
                 }
             }
         }
     }
 
     private String template(String reply) {
-        return line + reply + "\n" + line;
+        return LINE + reply + "\n" + LINE;
     }
 
     private String inputHandler(String input) throws InvalidArgumentException, InvalidCommandException {
@@ -43,22 +55,22 @@ public class Duke {
         try {
             current = Commands.valueOf(commands[0].toUpperCase());
             switch(current) {
-                case LIST:
-                    return display();
-                case DONE:
-                    return updateTask(Integer.valueOf(commands[1]));
-                case TODO:
-                    return addTodo(commands[1]);
-                case EVENT:
-                    String[] arr = commands[1].split("/at");
-                    return addEvent(arr[0], arr[1]);
-                case DEADLINE:
-                    String[] arr2 = commands[1].split("/by");
-                    return addDeadline(arr2[0], arr2[1]);
-                case DELETE:
-                    return deleteTask(Integer.valueOf(commands[1]));
-                default:
-                    throw new InvalidCommandException("");
+            case LIST:
+                return display();
+            case DONE:
+                return updateTask(Integer.valueOf(commands[1]));
+            case TODO:
+                return addTodo(commands[1]);
+            case EVENT:
+                String[] arr = commands[1].split("/at");
+                return addEvent(arr[0], arr[1].trim());
+            case DEADLINE:
+                String[] arr2 = commands[1].split("/by");
+                return addDeadline(arr2[0], arr2[1].trim());
+            case DELETE:
+                return deleteTask(Integer.valueOf(commands[1]));
+            default:
+                throw new InvalidCommandException("");
             }
         } catch (ArrayIndexOutOfBoundsException exception) {
             throw new InvalidArgumentException("Sorry, your argument cannot be empty!");
@@ -144,7 +156,7 @@ public class Duke {
 
     public static void main(String[] args) {
         String welcome = "Yo I'm Dood!!\nAnything I can do for you?\n";
-        System.out.println(line + welcome + line);
+        System.out.println(LINE + welcome + LINE);
         Duke bot = new Duke();
         bot.init();
     }

@@ -16,6 +16,7 @@ bin/
 # Testing folders
 src/main/output
 src/main/java/*.class
+data/tasks.txt
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT

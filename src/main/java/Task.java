@@ -7,6 +7,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
@@ -17,6 +22,10 @@ public class Task {
 
     public String getStatusIcon() {
         return (this.isDone ? "✓" : "✗"); //return tick or X symbols
+    }
+
+    public String toSave() {
+        return (isDone ? "1" : "0") + " | " + description;
     }
 
     @Override
