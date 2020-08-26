@@ -75,17 +75,20 @@ public class Duke {
 
     private void addTask(String task, Commands type, String ddl, boolean done) {
         Task newTask;
-        if (type == Commands.TODO) {
-            newTask = new Todo(task);
-        } else if (type == Commands.DEADLINE) {
-            newTask = new Deadline(task, ddl);
-        } else {
-            newTask = new Event(task, ddl);
-        }
-        if (done) {
-            newTask.markDone();
-        }
-        taskList.add(newTask);
+        try {
+            if (type == Commands.TODO) {
+                newTask = new Todo(task);
+            } else if (type == Commands.DEADLINE) {
+                newTask = new Deadline(task, validateDateTime(ddl));
+            } else {
+                newTask = new Event(task, validateDateTime(ddl));
+            }
+
+            if (done) {
+                newTask.markDone();
+            }
+            taskList.add(newTask);
+        } catch (DukeException ignored) {}
     }
 
     private void addTask(String task, boolean isEvent) throws DukeException {
