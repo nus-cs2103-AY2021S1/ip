@@ -14,7 +14,8 @@ import java.util.List;
  */
 public class DateParser {
 
-    private static final List<String> ACCEPTED_FORMATS_WITH_TIME = Arrays.asList("d MMM uuuu HH:mm", "d-M-uuuu HH:mm", "d/M/uuuu HH:mm");
+    private static final List<String> ACCEPTED_FORMATS_WITH_TIME = Arrays.asList("d MMM uuuu HH:mm", "d-M-uuuu HH:mm",
+            "d/M/uuuu HH:mm");
 
     private static final List<String> ACCEPTED_FORMATS_DATE_ONLY = Arrays.asList("d MMM uuuu", "d-M-uuuu", "d/M/uuuu");
 
@@ -33,7 +34,8 @@ public class DateParser {
         if (input.contains(":")) {
             for (String format : ACCEPTED_FORMATS_WITH_TIME) {
                 try {
-                    return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(format)).withSecond(HAS_TIME_INDICATOR);
+                    return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(format))
+                            .withSecond(HAS_TIME_INDICATOR);
                 } catch (DateTimeParseException e) {
                 }
             }
@@ -42,7 +44,8 @@ public class DateParser {
                 try {
                     // Since we do not support seconds for date and time based information, we use the second field to
                     // differentiate between a LocalDateTime with no defined time and one with time defined at midnight.
-                    return LocalDate.parse(input, DateTimeFormatter.ofPattern(format)).atStartOfDay().withSecond(NULL_TIME_INDICATOR);
+                    return LocalDate.parse(input, DateTimeFormatter.ofPattern(format)).atStartOfDay()
+                            .withSecond(NULL_TIME_INDICATOR);
                 } catch (DateTimeParseException e) {
                 }
             }

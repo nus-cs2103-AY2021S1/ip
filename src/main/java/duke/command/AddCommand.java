@@ -48,9 +48,10 @@ public class AddCommand extends Command {
      * @param list    the currently loaded {@link TaskList} object.
      * @param storage the currently loaded {@link Storage} object.
      */
+    @Override
     public void execute(TaskList list, Storage storage) {
         list.add(createdTask);
-        this.remainingTaskCount = list.taskCount();
+        remainingTaskCount = list.taskCount();
         super.completed = true;
     }
 
@@ -60,9 +61,13 @@ public class AddCommand extends Command {
      * @param ui the {@link Ui} instance to use for formatting.
      * @throws IncompleteDukeCommandException if this {@code AddCommand} was not executed.
      */
+    @Override
     public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
         if (super.completed) {
-            String feedback = String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in your list.\n", createdTask.toString(), remainingTaskCount);
+            String feedback = String.format(
+                    "Got it. I've added this task:\n  %s\nNow you have %d tasks in your list.\n",
+                    createdTask.toString(),
+                    remainingTaskCount);
             ui.formattedPrint(ui.prependIndent(feedback, 1));
         } else {
             throw new IncompleteDukeCommandException("Add command was not completed.");
@@ -72,6 +77,7 @@ public class AddCommand extends Command {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isExit() {
         return false;
     }

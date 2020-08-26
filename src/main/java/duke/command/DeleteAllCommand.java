@@ -17,6 +17,7 @@ public class DeleteAllCommand extends Command {
      * @param list    the currently loaded {@link TaskList} object.
      * @param storage the currently loaded {@link Storage} object.
      */
+    @Override
     public void execute(TaskList list, Storage storage) {
         list.clearList();
         super.completed = true;
@@ -28,6 +29,7 @@ public class DeleteAllCommand extends Command {
      * @param ui the {@link Ui} instance to use for formatting.
      * @throws IncompleteDukeCommandException
      */
+    @Override
     public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
         if (super.completed) {
             String feedback = "I've cleared all your tasks.\nYou sure are efficient.";
@@ -40,6 +42,7 @@ public class DeleteAllCommand extends Command {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isExit() {
         return false;
     }

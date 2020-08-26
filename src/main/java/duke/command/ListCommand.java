@@ -19,8 +19,9 @@ public class ListCommand extends Command {
      * @param list    the currently loaded {@link TaskList} object.
      * @param storage the currently loaded {@link Storage} object.
      */
+    @Override
     public void execute(TaskList list, Storage storage) {
-        this.printout = list.listItems();
+        printout = list.listItems();
         super.completed = true;
     }
 
@@ -30,9 +31,10 @@ public class ListCommand extends Command {
      * @param ui the {@link Ui} instance to use for formatting.
      * @throws DukeException
      */
+    @Override
     public void printFeedback(Ui ui) throws DukeException {
         if (super.completed) {
-            ui.formattedPrint(ui.prependIndent(this.printout, 1));
+            ui.formattedPrint(ui.prependIndent(printout, 1));
         } else {
             throw new IncompleteDukeCommandException("List command was not completed.");
         }
@@ -41,6 +43,7 @@ public class ListCommand extends Command {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isExit() {
         return false;
     }

@@ -44,15 +44,6 @@ public class Event extends Task {
     }
 
     /**
-     * Returns an encoded string representation of this {@code Event}.
-     *
-     * @return an encoded string representation of this {@code Event}.
-     */
-    public String encode() {
-        return String.format("E|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(this.dateTime), super.description);
-    }
-
-    /**
      * Decodes an encoded string into an {@code Event} object.
      *
      * @param code the encoded string.
@@ -78,13 +69,22 @@ public class Event extends Task {
     }
 
     /**
+     * Returns an encoded string representation of this {@code Event}.
+     *
+     * @return an encoded string representation of this {@code Event}.
+     */
+    public String encode() {
+        return String.format("E|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(dateTime), super.description);
+    }
+
+    /**
      * Returns a string representation of this {@code Event} object.
      *
      * @return a string representation of this {@code Event} object.
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + DateParser.parseLocalDateTime(this.dateTime) + ")";
+        return "[E]" + super.toString() + " (at: " + DateParser.parseLocalDateTime(dateTime) + ")";
     }
 
 }

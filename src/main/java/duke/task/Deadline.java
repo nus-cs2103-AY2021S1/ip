@@ -44,15 +44,6 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns an encoded string representation of this {@code Deadline}.
-     *
-     * @return an encoded string representation of this {@code Deadline}.
-     */
-    public String encode() {
-        return String.format("D|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(this.dateTime), super.description);
-    }
-
-    /**
      * Decodes an encoded string into a {@code Deadline} object.
      *
      * @param code the encoded string.
@@ -78,12 +69,22 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns an encoded string representation of this {@code Deadline}.
+     *
+     * @return an encoded string representation of this {@code Deadline}.
+     */
+    @Override
+    public String encode() {
+        return String.format("D|%s|%s|%s", super.completed ? "Y" : "N", DateParser.parseLocalDateTime(dateTime), super.description);
+    }
+
+    /**
      * Returns a string representation of this {@code Deadline}.
      *
      * @return a string representation of this {@code Deadline}.
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateParser.parseLocalDateTime(this.dateTime) + ")";
+        return "[D]" + super.toString() + " (by: " + DateParser.parseLocalDateTime(dateTime) + ")";
     }
 }

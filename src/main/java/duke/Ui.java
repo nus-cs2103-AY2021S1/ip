@@ -15,7 +15,7 @@ public class Ui {
      * Constructs a {@code Ui} instance.
      */
     public Ui() {
-        this.sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
     }
 
     /**

@@ -13,8 +13,8 @@ public class Duke {
     private Ui ui;
 
     Duke(String filePath) {
-        this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {

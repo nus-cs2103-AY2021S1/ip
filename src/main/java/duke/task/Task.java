@@ -18,18 +18,18 @@ public abstract class Task implements Encodable<Task> {
      */
     protected Task(String description) {
         this.description = description;
-        this.completed = false;
+        completed = false;
     }
 
     /**
      * Marks a task as complete.
      */
     public void setCompleted() {
-        this.completed = true;
+        completed = true;
     }
 
     private String getStatusIcon() {
-        return this.completed ? "\u2713" : "\u2718";
+        return completed ? "\u2713" : "\u2718";
     }
 
     /**
@@ -40,6 +40,6 @@ public abstract class Task implements Encodable<Task> {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "] " + description;
     }
 }

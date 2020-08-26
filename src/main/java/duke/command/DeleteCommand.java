@@ -31,9 +31,10 @@ public class DeleteCommand extends Command {
      * @param list
      * @param storage
      */
+    @Override
     public void execute(TaskList list, Storage storage) {
-        this.deletedTask = list.deleteTask(index);
-        this.remainingTaskCount = list.taskCount();
+        deletedTask = list.deleteTask(index);
+        remainingTaskCount = list.taskCount();
         super.completed = true;
     }
 
@@ -42,6 +43,7 @@ public class DeleteCommand extends Command {
      *
      * @param ui the {@link Ui} instance to use for formatting.
      */
+    @Override
     public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
         if (super.completed) {
             String feedback = String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in your list.",
@@ -56,6 +58,7 @@ public class DeleteCommand extends Command {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isExit() {
         return false;
     }

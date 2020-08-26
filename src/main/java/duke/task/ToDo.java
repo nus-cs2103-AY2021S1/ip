@@ -28,15 +28,6 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns an encoded string representation of this {@code Deadline}.
-     *
-     * @return an encoded string representation of this {@code Deadline}.
-     */
-    public String encode() {
-        return String.format("T|%s|%s", super.completed ? "Y" : "N", super.description);
-    }
-
-    /**
      * Decodes an encoded string into a {@code ToDo} object.
      *
      * @param code the encoded string.
@@ -59,6 +50,16 @@ public class ToDo extends Task {
         } else {
             throw new DukeStorageException("Something doesn't seem right...");
         }
+    }
+
+    /**
+     * Returns an encoded string representation of this {@code Deadline}.
+     *
+     * @return an encoded string representation of this {@code Deadline}.
+     */
+    @Override
+    public String encode() {
+        return String.format("T|%s|%s", super.completed ? "Y" : "N", super.description);
     }
 
     /**

@@ -30,7 +30,7 @@ public class Parser {
         private final String input;
 
         Keyword(String keyword) {
-            this.input = keyword;
+            input = keyword;
         }
 
         /**
