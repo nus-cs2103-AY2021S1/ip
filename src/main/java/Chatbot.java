@@ -27,7 +27,6 @@ public class Chatbot {
         if (!data.exists()) {
             data.createNewFile();
         } else {
-            System.out.println("File exists!");
             Scanner read = new Scanner(data);
             while (read.hasNext()) {
                 String currLine = read.nextLine();
@@ -42,7 +41,6 @@ public class Chatbot {
                         toAdd.markAsDone();
                     }
                     arr.add(toAdd);
-                    System.out.println(toAdd);
                 } else if (type.equals("D")) {
                     String desc = cL.next();
                     String add = cL.next();
@@ -56,7 +54,6 @@ public class Chatbot {
                         toAdd.markAsDone();
                     }
                     arr.add(toAdd);
-                    System.out.println(toAdd);
                 } else if (type.equals("E")) {
                     String desc = cL.next();
                     String add = cL.next();
@@ -70,7 +67,6 @@ public class Chatbot {
                         toAdd.markAsDone();
                     }
                     arr.add(toAdd);
-                    System.out.println(toAdd);
                 }
             }
         }
