@@ -27,7 +27,7 @@ public class Duke {
     }
 
     private void handleStart() {
-        UI.print("Hello! I'm duke.Duke\nWhat can I do for you?");
+        UI.print("Hello! I'm Duke\nWhat can I do for you?");
     }
 
     public void run() {
