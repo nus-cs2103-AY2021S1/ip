@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class TaskList {
     protected List<Task> listOfTasks;
-    
+
     protected static String TODO_INDICATOR = "[T]";
     protected static String DEADLINE_INDICATOR = "[D]";
     protected static String EVENT_INDICATOR = "[E]";
-    
+
     /**
      * Creates a new TaskList object to handle adding and deleting tasks.
-     * 
+     *
      * @param tasks List of tasks made by the user.
      */
     public TaskList(List<Task> tasks) {
@@ -24,7 +24,7 @@ public class TaskList {
 
     /**
      * Adds a new task to the task list.
-     * 
+     *
      * @param newTask Task to be added.
      */
     public void addNewTask(Task newTask) {
@@ -33,7 +33,7 @@ public class TaskList {
 
     /**
      * Replaces a task with a new task at the specified index in the task list.
-     * 
+     *
      * @param newTask New task to replaced task at the specified index.
      * @param index Index of task in the task list.
      */
@@ -44,7 +44,7 @@ public class TaskList {
 
     /**
      * Returns the total number of tasks currently in the task list.
-     * 
+     *
      * @return Total number of tasks currently in the task list.
      */
     public int totalNumberOfTasks() {
@@ -53,7 +53,7 @@ public class TaskList {
 
     /**
      * Retrieves the task of the specified list index.
-     * 
+     *
      * @param index Index of task to be retrieved.
      * @return Task stored at the specified index.
      */
@@ -63,7 +63,7 @@ public class TaskList {
 
     /**
      * Deletes the task at the specified index.
-     * 
+     *
      * @param index Index of the task to be deleted.
      */
     public void deleteTask(int index) {
@@ -72,7 +72,7 @@ public class TaskList {
 
     /**
      * Returns the an ordered list of tasks stored in the task list.
-     * 
+     *
      * @return An ordered list of tasks.
      */
     @Override

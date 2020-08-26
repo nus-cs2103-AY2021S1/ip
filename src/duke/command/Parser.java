@@ -19,11 +19,11 @@ import duke.ui.Ui;
 public class Parser {
     private static final String DEADLINE_TASK_SEPARATOR = "/by ";
     private static final String EVENT_TASK_SEPARATOR = "/at ";
-    
+
     /**
      * Processes user commands to determine the appropriate actions needed to display the 
      * appropriate output.
-     * 
+     *
      * @param userCommand User input command.
      * @param ui User interface which handles the printing the appropriate output.
      * @param storage Local storage which handles the loading and saving of task lists.
@@ -40,8 +40,8 @@ public class Parser {
                 // Unable to load saved TaskList
                 ui.showErrorMessage(e);
             }
-            
-        // For multi-word user commands
+
+            // For multi-word user commands
         } else {
             // Extract the first word of the user command to obtain the type of user command
             String[] commandDetails = userCommand.split(" ", 2);
@@ -68,7 +68,7 @@ public class Parser {
 
     /**
      * Adds a new todo task to the task list.
-     * 
+     *
      * @param todo Description of new todo task.
      * @param ui User interface which displays a new todo has been added to the task list.
      * @param storage Local storage that loads the old task list and saves the updated task list.
@@ -89,7 +89,7 @@ public class Parser {
 
     /**
      * Adds a new task with a deadline to the task list.
-     * 
+     *
      * @param deadline Description of new task with the deadline date.
      * @param ui User interface which displays a new deadline has been added to the task list.
      * @param storage Local storage that loads the old task list and saves the updated task list.
@@ -116,7 +116,7 @@ public class Parser {
 
     /**
      * Adds a new event task to the task list.
-     * 
+     *
      * @param event Description of new event with event date.
      * @param ui User interface which displays a new event has been added to the task list.
      * @param storage Local storage that loads the old task list and saves the updated task list.
@@ -143,7 +143,7 @@ public class Parser {
 
     /**
      * Deletes the specified task from the task list.
-     * 
+     *
      * @param taskToDelete List index of the task to be deleted.
      * @param ui User interface which displays that the task has been deleted to the task list.
      * @param storage Local storage that loads the old task list and saves the updated task list.
@@ -152,19 +152,19 @@ public class Parser {
         try {
             TaskList tasks = storage.load();
             int index = parseTaskIndex(taskToDelete);
-            
+
             // Checks if index is valid
             if (index > 0 && index <= tasks.totalNumberOfTasks()) {
                 Task deletedTask = tasks.getTask(index - 1);
                 tasks.deleteTask(index - 1);
                 storage.save(tasks, ui);
                 ui.showDeleteTaskMessage(deletedTask, storage.load());
-
+                
             // If task specified does not exist in the task list
             } else {
                 throw new TaskDoesNotExistException(index);
             }
-            
+
         // If index specified by users is not a number or task list fails to load or save
         } catch (InvalidUserCommandException | StorageException e) {
             ui.showErrorMessage(e);
@@ -174,7 +174,7 @@ public class Parser {
     /**
      * Processes the list index in the user command and returns the integer value of the task 
      * index. If a non-numerical number is found, an exception is thrown.
-     * 
+     *
      * @param inputIndex List index indicated in the user command.
      * @return Integer value of list index.
      * @throws InvalidIndexNumberException If inputIndex is not an integer.
@@ -191,7 +191,7 @@ public class Parser {
 
     /**
      * Marks the specified task as done.
-     * 
+     *
      * @param taskToMarkDone List index of the task to be marked as done.
      * @param ui User interface which displays the specified task has been marked as done.
      * @param storage Local storage that loads the old task list and saves the updated task list.
@@ -204,7 +204,7 @@ public class Parser {
             // Checks if index is valid
             if (index > 0 && index <= tasks.totalNumberOfTasks()) {
                 Task doneTask = tasks.getTask(index -1);
-                
+
                 // Task has already been marked as done
                 if (doneTask.hasDoneStatus()) {
                     ui.showAlreadyMarkDoneMessage(doneTask);
@@ -214,7 +214,7 @@ public class Parser {
                     storage.save(tasks, ui);
                     ui.showMarkDoneMessage(doneTask);
                 }
-                
+
             // If task specified does not exist in the task list
             } else {
                 throw new TaskDoesNotExistException(index);

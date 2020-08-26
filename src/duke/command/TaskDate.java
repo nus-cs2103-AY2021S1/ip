@@ -16,10 +16,10 @@ public class TaskDate {
      * Input time follows the 24-hour clock system and of the form "HH:mm". It is converted into 
      * "hh:mm aa" form, which follows the 12-hour clock. The day of the week is returned along with
      * the converted date and time.
-     * 
+     *
      * For example, given input date and time "2020-01-01 18:00", "1 Jan 2020, Wednesday 06:00 PM" 
      * would be returned.
-     * 
+     *
      * @param userInput Date and time of deadline or event.
      * @return Date of form "d MMM yyyy", time of form "hh:mm aa" (12-hour clock) and day of the week.
      * @throws InvalidTaskDateException If input date and time do not match the format or are invalid.
@@ -32,8 +32,8 @@ public class TaskDate {
         try {
             LocalDateTime taskDate = LocalDateTime.parse(userInput, inputFormat);
             taskDateOutput = taskDate.format(outputFormat);
-            
-        // If input date and time do not match the format or are invalid
+
+            // If input date and time do not match the format or are invalid
         } catch (DateTimeException e) {
             throw new InvalidTaskDateException(userInput);
         }

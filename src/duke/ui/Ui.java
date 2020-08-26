@@ -13,9 +13,9 @@ public class Ui {
     private static final String SKIPLINE = "\n";
     private static final String USER = SKIPLINE + "You: ";
     private static final String DIVIDER = SKIPLINE + CHATBOT;
-    
+
     public static boolean EXIT = false;
-    
+
     private final Scanner scan;
 
     /**
@@ -27,7 +27,7 @@ public class Ui {
 
     /**
      * Reads user commands.
-     * 
+     *
      * @return User command.
      */
     public String readUserCommand() {
@@ -54,7 +54,7 @@ public class Ui {
 
     /**
      * Displays the task list saved in the local storage. 
-     * 
+     *
      * @param tasks Task list saved in the local storage.
      */
     public void showTaskList(TaskList tasks) {
@@ -63,8 +63,8 @@ public class Ui {
         // If list is empty
         if (tasks.totalNumberOfTasks() == 0) {
             System.out.print("List is empty :(");
-        } 
-        
+        }
+
         if (tasks.totalNumberOfTasks() > 0) {
             System.out.println("Your current tasklist is as follows:");
             System.out.println(tasks);
@@ -75,7 +75,7 @@ public class Ui {
 
     /**
      * Displays the saved task list when the program starts up.
-     * 
+     *
      * @param tasks Task list saved in the local storage
      */
     public void loadTaskList(TaskList tasks) {
@@ -92,7 +92,7 @@ public class Ui {
 
     /**
      * Returns the error message when there is an invalid user command.
-     * 
+     *
      * @param userCommand Invalid user command.
      * @return Error message to inform users that userCommand is invalid.
      */
@@ -102,7 +102,7 @@ public class Ui {
 
     /**
      * Informs user that a new task has been added to the task list and has successfully been added.
-     * 
+     *
      * @param newTask New task added to the task list.
      * @param tasks Task list saved in the local storage.
      */
@@ -121,13 +121,13 @@ public class Ui {
     /**
      * Informs user that indicated task has been deleted from the task list and has successfully 
      * been deleted from the task list.
-     * 
+     *
      * @param deletedTask Task to be deleted from the task list.
      * @param tasks Task list saved in the local storage.
      */
     public void showDeleteTaskMessage(Task deletedTask, TaskList tasks) {
         System.out.println(DIVIDER);
-        
+
         // Bob's response
         System.out.println("Noted! I have deleted this task from your list:");
         System.out.println(deletedTask);
@@ -138,7 +138,7 @@ public class Ui {
 
     /**
      * Informs user that indicated task has been successfully marked as done. 
-     * 
+     *
      * @param doneTask Task to be marked done.
      */
     public void showMarkDoneMessage(Task doneTask) {
@@ -154,7 +154,7 @@ public class Ui {
 
     /**
      * Informs user that indicated task is already marked as done.
-     * 
+     *
      * @param doneTask Task that is already marked done.
      */
     public void showAlreadyMarkDoneMessage(Task doneTask) {
@@ -169,7 +169,7 @@ public class Ui {
     /**
      * Displays the appropriate error message depending on the type of Exception is passed into the
      * parameters.
-     * 
+     *
      * @param e Exception caught.
      */
     public void showErrorMessage(Exception e) {

@@ -8,7 +8,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a new task with the specified description and deadline.
-     * 
+     *
      * @param description Description of task.
      * @param by Deadline of task.
      */
@@ -19,7 +19,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a String representation of a deadline task.
-     * 
+     *
      * @return String representation of a deadline task.
      */
     @Override
