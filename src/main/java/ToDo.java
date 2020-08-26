@@ -1,7 +1,3 @@
-/**
- * represents a todo task
- */
-
 public class ToDo extends Task{
     public ToDo(String todo) throws EmptyDescriptionException {
         super(todo.substring(5));

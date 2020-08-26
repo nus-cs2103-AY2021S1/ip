@@ -1,7 +1,3 @@
-/**
- * contains the task list and has operations to alter the list
- */
-
 import java.util.Iterator;
 import java.util.ArrayList;
 

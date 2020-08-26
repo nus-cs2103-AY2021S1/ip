@@ -6,10 +6,6 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-/**
- * deals with loading tasks from the file and saving tasks in the file
- */
-
 public class Storage {
     private String filePath;
     private ArrayList<Task> tasks = new ArrayList<Task>();

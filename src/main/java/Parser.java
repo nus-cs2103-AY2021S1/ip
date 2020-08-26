@@ -1,9 +1,3 @@
-import java.util.Scanner;
-
-/**
- * deals with making sense of the user command
- */
-
 public class Parser {
     private Ui ui;
     private TaskList tasks;
@@ -13,21 +7,8 @@ public class Parser {
         this.tasks = tasks;
     }
 
-    /**
-     * reads in inputs from the user
-     * @return first line of user input
-     */
-    public String readIn() {
-        String input;
-        Scanner scan = new Scanner(System.in);
-
-        input = scan.nextLine();
-
-        return input;
-    }
-
     public void responder() {
-        String input = this.readIn();
+        String input = ReadIn.readIn();
         String firstWord = input.split(" ")[0];
 
         while (true) {
@@ -67,7 +48,7 @@ public class Parser {
             }
             sb.append("\n--------------------------------------------------------------");
             System.out.println(sb.toString());
-            input = this.readIn();
+            input = ReadIn.readIn();
             firstWord = input.split(" ")[0];
         }
     }
