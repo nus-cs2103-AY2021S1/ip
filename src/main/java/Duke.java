@@ -8,11 +8,20 @@ import duke.ui.Ui;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents a chat-bot named Duke.
+ */
 public class Duke {
+
     private final Storage storage;
     private final Ui ui;
     private TaskList taskList;
-
+    /**
+     * Creates a Duke Chat-bot.
+     *
+     * @param folderPath for Duke to load saved TaskList if there exists
+     * @param filePath for Duke to load saved TaskList if there exists
+     */
     public Duke(String folderPath, String filePath) {
         this.storage = new Storage(folderPath, filePath);
         this.ui = new Ui();
@@ -22,11 +31,17 @@ public class Duke {
             this.taskList = new TaskList(new ArrayList<>());
         }
     }
-
+    /**
+     * Starts the Chat-bot.
+     *
+     * @param args Args
+     */
     public static void main(String[] args) {
         new Duke("data","data/duke.txt").run();
     }
-
+    /**
+     * Runs the main logic of the Chat-bot.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
