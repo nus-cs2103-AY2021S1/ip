@@ -1,6 +1,10 @@
 import java.util.Iterator;
 import java.util.ArrayList;
 
+/**
+ * contains the task list and has operations to alter the task list
+ */
+
 public class TaskList {
     private Storage storage;
     private ArrayList<Task> tasks;

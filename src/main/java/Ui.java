@@ -1,4 +1,6 @@
-import java.util.List;
+/**
+ * deals with interactions with the user
+ */
 
 public class Ui {
     TaskList tasks;
