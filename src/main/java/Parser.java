@@ -13,6 +13,10 @@ public class Parser {
             } catch (Exception e) {
                 return new ErrorCommand(e.getMessage());
             }
+        } else if (input.contains("find")) {
+            String keyword = input.substring(5, input.length());
+            return new PrintsearchCommand(keyword);
+
         } else if (input.contains("remove")) {
             int removeInt;
             try {
