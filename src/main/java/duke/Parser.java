@@ -34,8 +34,8 @@ public class Parser {
         idx++;
 
         if (idx >= data.length) {
-            throw new DukeException("Please specify the deadline date in this format: \""
-                    + timeDivider + " <date>\". ");
+            throw new DukeException(
+                    "Please specify the deadline date in this format: \"" + timeDivider + " <date>\". ");
         }
 
         String time = data[idx];
@@ -58,7 +58,7 @@ public class Parser {
 
     /**
      * Parse the input string to a command.
-     * 
+     *
      * @param line the string to be parsed.
      * @return command from the parsed string.
      * @throws DukeException input string is an invalid command.
@@ -77,29 +77,29 @@ public class Parser {
         }
 
         switch (commandEnum) {
-            case list:
-                command = new ListCommand();
-                break;
-            case done:
-                idx = Integer.parseInt(commandLine[1]);
-                command = new DoneCommand(idx);
-                break;
-            case delete:
-                idx = Integer.parseInt(commandLine[1]);
-                return new DeleteCommand(idx);
-            case todo:
-                command = new AddCommand(new Todo(Parser.parseDescription(commandLine, "")));
-                break;
-            case deadline:
-                command = new AddCommand(new Deadline(Parser.parseDescription(commandLine, "/by"),
-                        Parser.parseTime(commandLine, "/by")));
-                break;
-            case event:
-                command = new AddCommand(new Event(Parser.parseDescription(commandLine, "/at"),
-                        Parser.parseTime(commandLine, "/at")));
-                break;
-            default:
-                throw new DukeException("I'm sorry but I don't recognize your commandLine T__T.");
+        case list:
+            command = new ListCommand();
+            break;
+        case done:
+            idx = Integer.parseInt(commandLine[1]);
+            command = new DoneCommand(idx);
+            break;
+        case delete:
+            idx = Integer.parseInt(commandLine[1]);
+            return new DeleteCommand(idx);
+        case todo:
+            command = new AddCommand(new Todo(Parser.parseDescription(commandLine, "")));
+            break;
+        case deadline:
+            command = new AddCommand(new Deadline(Parser.parseDescription(commandLine, "/by"),
+                    Parser.parseTime(commandLine, "/by")));
+            break;
+        case event:
+            command = new AddCommand(
+                    new Event(Parser.parseDescription(commandLine, "/at"), Parser.parseTime(commandLine, "/at")));
+            break;
+        default:
+            throw new DukeException("I'm sorry but I don't recognize your commandLine T__T.");
         }
         return command;
     }
