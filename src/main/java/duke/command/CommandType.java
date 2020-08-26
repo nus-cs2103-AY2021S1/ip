@@ -83,7 +83,7 @@ public enum CommandType {
         @Override
         public String toString() {
             return "- Deadline: Creates a deadline task with specific description and date/time\n"
-                    + "        \"deadline <description> /at <time>\"\n"
+                    + "        \"deadline <description> /by <time>\"\n"
                     + "        Time formatting: dd-MM-yyyy HH:mm";
         }
     },
