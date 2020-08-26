@@ -68,7 +68,6 @@ public class AddCommand extends Command {
         return this.userInput;
     }
 
-
     /**
      * Adds a ToDo task.
      *
