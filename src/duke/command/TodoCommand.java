@@ -1,4 +1,7 @@
-package main.java;
+package duke.command;
+
+import duke.main.TaskList;
+import duke.task.Todo;
 
 public class TodoCommand extends Command {
 

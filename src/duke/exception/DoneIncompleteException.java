@@ -1,4 +1,4 @@
-package main.java;
+package duke.exception;
 
 public class DoneIncompleteException extends DukeException {
 

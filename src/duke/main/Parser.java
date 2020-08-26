@@ -1,4 +1,24 @@
-package main.java;
+package duke.main;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+
+import duke.exception.DeadlineIncompleteException;
+import duke.exception.DeleteIncompleteException;
+import duke.exception.DeleteOutOfListException;
+import duke.exception.DoneIncompleteException;
+import duke.exception.DoneOutOfListException;
+import duke.exception.DukeException;
+import duke.exception.EventIncompleteException;
+import duke.exception.NoInputException;
+import duke.exception.TodoIncompleteException;
+import duke.exception.UnknownInputException;
 
 import java.util.ArrayList;
 import java.util.Arrays;

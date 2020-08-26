@@ -1,8 +1,11 @@
-package main.java;
+package duke.command;
+
+import duke.main.TaskList;
+import duke.task.Deadline;
 
 public class DeadlineCommand extends Command {
 
-    Deadline deadline;
+    protected Deadline deadline;
 
     public DeadlineCommand(String description, String date) {
         this.deadline = new Deadline(description, date);
