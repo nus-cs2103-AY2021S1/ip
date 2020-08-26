@@ -1,6 +1,10 @@
 package duke;
 import java.util.Scanner;
 
+/**
+ * Ui class prints various response by Duke object, handles user interactions.
+ */
+
 public class Ui {
     Scanner sc = new Scanner(System.in);
 

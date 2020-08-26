@@ -2,6 +2,10 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline as a subclass of Task that handles a deadline task.
+ */
+
 public class Deadline extends Task {
     protected LocalDate by;
 

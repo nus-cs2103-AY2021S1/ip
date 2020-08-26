@@ -1,4 +1,9 @@
 package duke;
+
+/**
+ * A parser object that makes sense of all the user input.
+ */
+
 public class Parser {
 
     Parser() { }

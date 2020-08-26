@@ -2,6 +2,10 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event is a subclass of Task that handles all the event tasks by user.
+ */
+
 public class Event extends Task {
     protected LocalDate at;
 

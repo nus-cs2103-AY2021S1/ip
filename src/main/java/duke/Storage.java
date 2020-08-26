@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A storage that handles synchronisation of database in a specified filePath given to Duke object.
+ */
+
 public class Storage {
     File file;
 

@@ -1,4 +1,9 @@
 package duke;
+
+/**
+ * Duke class that creates a Duke bot to interact with user.
+ */
+
 public class Duke {
 
     private Storage storage;

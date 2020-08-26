@@ -1,8 +1,13 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * A list of Task object and methods that deal with modification to the list of tasks.
+ */
 
 public class TaskList {
 

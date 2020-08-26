@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * DukeException is a subclass of Exception that handles all the Duke exceptions.
+ */
+
 public class DukeException extends Exception {
     private String msg;
 

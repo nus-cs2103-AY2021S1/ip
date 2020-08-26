@@ -2,6 +2,10 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * A general task class that handles the status of any task and methods to add a task to the task list.
+ */
+
 public class Task {
     private String description;
     private Boolean isDone;
