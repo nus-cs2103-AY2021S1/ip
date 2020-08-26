@@ -16,6 +16,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Storage manages the database that is used by Duke.
+ * It is initialised using a path that leads to a .txt file.
+ * A task is saved as a string with various data separated by the '|' character.
+ * It supports the uploading and retrieval of tasks to and from the database.
+ */
 public class Storage {
     private File file;
     
@@ -31,6 +37,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves all tasks in a list of tasks to the database.
+     * @param tasks A list of tasks to be saved to the database.
+     * @throws DukeException
+     */
     public void saveTasks(List<Task> tasks) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);
@@ -42,7 +53,12 @@ public class Storage {
             throw new DukeException("Error saving tasks to storage.");
         }
     }
-    
+
+    /**
+     * Retrieves all tasks that is being stored in the database as a list of tasks.
+     * @return A list of all tasks that is being stored in the database.
+     * @throws DukeException
+     */
     public List<Task> getTasks() throws DukeException {
         try {
             List<Task> tasks = new ArrayList<>();

@@ -4,6 +4,10 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * UnknownCommand is an extension of a command.
+ * It displays a message to inform the user that the input is unrecognised.
+ */
 public class UnknownCommand extends Command {
     public UnknownCommand() {
         super();

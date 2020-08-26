@@ -13,7 +13,16 @@ import duke.command.UnknownCommand;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parser breaks down user inputs to generate commands to be executed by Dude.
+ */
 public class Parser {
+    /**
+     * Parses user inputs to generate commands.
+     * @param input Input by user.
+     * @return A command object that will be executed by Duke.
+     * @throws DukeException
+     */
     public Command parse(String input) throws DukeException {
         String[] inputBreakdown = input.split(" ", 2);
         String command = inputBreakdown[0];

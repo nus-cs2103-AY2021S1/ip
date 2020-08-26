@@ -7,6 +7,10 @@ import duke.TaskList;
 
 import java.time.LocalDateTime;
 
+/**
+ * EventCommand is an extension of a command.
+ * It creates a event task to be added to both the TaskList and Storage.
+ */
 public class EventCommand extends Command {
     private String description;
     private LocalDateTime at;

@@ -4,13 +4,20 @@ import duke.task.Task;
 
 import java.util.List;
 
+/**
+ * TaskList manages all the tasks in a list of tasks.
+ * It generates messages to inform users of its operations.
+ */
 public class TaskList {
     private List<Task> taskList;
     
     public TaskList(List<Task> taskList) {
         this.taskList = taskList;
     }
-    
+
+    /**
+     * Displays all the tasks in the list of tasks.
+     */
     public void listAllTasks() {
         int size = taskList.size();
         if (size == 0) {
@@ -25,7 +32,11 @@ public class TaskList {
         }
         Ui.sendMessages();
     }
-    
+
+    /**
+     * Adds a task to the list of tasks.
+     * @param task Task to be added.
+     */
     public void addTask(Task task) {
         taskList.add(task);
         int size = taskList.size();
@@ -35,7 +46,11 @@ public class TaskList {
         Ui.addMessage("Now you have " + size + " " + taskWord + " in the list.");
         Ui.sendMessages();
     }
-    
+
+    /**
+     * Deletes a task with the given index in the list of tasks.
+     * @param index Index of task to be deleted.
+     */
     public void deleteTask(int index) {
         Task task = taskList.get(index);
         taskList.remove(index);
@@ -44,7 +59,11 @@ public class TaskList {
         Ui.addMessage("  " + task);
         Ui.sendMessages();
     }
-    
+
+    /**
+     * Marks a task with the given index in the list of tasks as done.
+     * @param index Index of task to be marked as done.
+     */
     public void doneTask(int index) {
         Task task = taskList.get(index);
         task.markAsDone();
@@ -53,7 +72,11 @@ public class TaskList {
         Ui.addMessage("  " + task);
         Ui.sendMessages();
     }
-    
+
+    /**
+     * Retrieves the list of tasks.
+     * @return List of task.
+     */
     public List<Task> getTask() {
         return taskList;
     }

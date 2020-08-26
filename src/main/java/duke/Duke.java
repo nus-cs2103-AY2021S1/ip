@@ -4,13 +4,20 @@ import duke.command.Command;
 
 import java.util.Scanner;
 
+/**
+ * Duke is a friendly personal assistant that helps keep track of tasks to be done.
+ * Duke has recently been renamed to Dude.
+ */
 public class Duke {
     private final String PATH = "./data/duke.txt";
     private Storage storage;
     private TaskList taskList;
     private Parser parser;
     private Scanner scanner;
-    
+
+    /**
+     * Initializes duke.
+     */
     public void initialize() {
         try {
             Ui.printLogo();
