@@ -1,23 +1,29 @@
-public class Deadline extends Task {
-    protected String due;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    public Deadline(String description, String due) {
+public class Deadline extends Task {
+    LocalDateTime deadline;
+
+    public Deadline(String description, String deadline) throws DateTimeParseException {
         super(description);
-        this.due = due;
+        this.deadline = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
     }
 
-    public Deadline(String description, String due, Boolean isDone) {
+    public Deadline(String description, String deadline, Boolean isDone) {
         super(description, isDone);
-        this.due = due;
+        this.deadline = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
     }
 
     @Override
     public String toString() {
-        return "[D]" + this.getIcon() + description + " (by: " + due + ")";
+        return "[D]" + this.getIcon() + description + " (by: " +
+                this.deadline.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"))+ ")";
     }
 
     public String toSaveString() {
-        return String.format("D | %s | %s | %s", super.doneString(), this.description, this.due);
+        return String.format("D | %s | %s | %s",
+                super.doneString(), this.description, this.deadline.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")));
     }
 
 }
