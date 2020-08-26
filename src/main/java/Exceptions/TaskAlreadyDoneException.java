@@ -1,5 +1,9 @@
+package Exceptions;
+
+import Tasks.Task;
+
 // Exception to check if task is already done
-public class TaskAlreadyDoneException extends DukeException{
+public class TaskAlreadyDoneException extends DukeException {
     public TaskAlreadyDoneException(Task task){
 
         super("This task is already done!\n" +

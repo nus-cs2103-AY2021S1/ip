@@ -1,3 +1,5 @@
+package Exceptions;
+
 // Exception for incomplete/ inappropriate command given
 public class IncompleteCommandException extends DukeException{
 

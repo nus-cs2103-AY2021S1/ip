@@ -1,3 +1,5 @@
+package Exceptions;
+
 // Exception for wrong deadline format
 public class DeadlineException extends DukeException{
 

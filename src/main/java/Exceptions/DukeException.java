@@ -1,3 +1,5 @@
+package Exceptions;
+
 // Base Exception to extend from
 public class DukeException extends Exception{
 

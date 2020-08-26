@@ -1,4 +1,6 @@
-//Adapted from CS2103T website's Task class
+package Tasks;
+
+//Adapted from CS2103T website's Tasks.Task class
 public class Task {
     protected String description;
     protected boolean isDone;
