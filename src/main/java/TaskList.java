@@ -68,9 +68,9 @@ public class TaskList {
     public void findTask(String keyword) {
         ArrayList<Task> keyList = new ArrayList<>();
         for (int i = 0; i < listOfTasks.size(); i++) {
-            if (listOfTasks.get(i).task.contains(keyword)) {
-                Task task = listOfTasks.get(i);
-                keyList.add(task);
+            Task tempTask = listOfTasks.get(i);
+            if (tempTask.task.contains(keyword)) {
+                keyList.add(tempTask);
             }
         }
 
