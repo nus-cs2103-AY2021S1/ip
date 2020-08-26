@@ -7,13 +7,28 @@ import java.util.List;
 import java.util.Arrays;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
+import ikura.util.Pair;
+
+import java.time.format.DateTimeParseException;
 import ikura.util.InvalidInputException;
 
+/**
+ * A helper class with methods common to tasks with a date component (Event and Deadline).
+ */
 public class DatedTask {
 
-	public static List<String> parse(String kind, String input, String dateSpec, String usage)
+    /**
+     * Parses the provided input, extracting the task's description and the date. The input should
+     * be of the form "<description> /<dateSpec> <date>".
+     *
+     * @param kind     the specific kind; either "deadline" or "event".
+     * @param input    the user input.
+     * @param dateSpec the keyword for specifying the date (after the slash); either 'at' or 'by'.
+     * @param usage    the correct usage for the command (used for the error message).
+     * @return a Pair of strings; first is the description, and second is the date.
+     */
+	public static Pair<String, String> parse(String kind, String input, String dateSpec, String usage)
         throws InvalidInputException {
 
         var slash = input.indexOf('/');
@@ -35,9 +50,16 @@ public class DatedTask {
         }
 
         when = when.substring(3).strip();
-        return Arrays.asList(item, when);
+        return new Pair<>(item, when);
 	}
 
+    /**
+     * Parses the input string as a date according to ISO-8601 format (yyyy-mm-dd).
+     *
+     * @param date the input string.
+     * @return the LocalDate representing the input date.
+     * @throws InvalidInputException if the input was not in the correct format.
+     */
     public static LocalDate parseDate(String date) throws InvalidInputException {
         // TODO: handle more formats, eg dd/mm/yy, dd/mm/yyyy, dd/mm
         // TODO: handle offsets from now, eg. +7d or something like that

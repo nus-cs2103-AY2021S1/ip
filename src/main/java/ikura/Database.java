@@ -24,16 +24,33 @@ import ikura.util.Either;
 import ikura.util.InvalidInputException;
 import ikura.util.InvalidDatabaseException;
 
+
+/**
+ * A class encapsulating the serialisation and deserialisation of the list of tasks.
+ */
 public class Database {
 
     private static final int DATABASE_VERSION = 1;
 
     private final String databasePath;
 
+    /**
+     * Constructs a new database, using the given path as the backing file. The file does
+     * not have to exist, but it should be writeable.
+     *
+     * @param path the path to the file.
+     */
     public Database(String path) {
         this.databasePath = path;
     }
 
+    /**
+     * Load the list of tasks from the database.
+     *
+     * @return the list of tasks loaded from disk.
+     * @throws IOException if there was an error reading the file.
+     * @throws InvalidDatabaseException if there were malformed lines in the file.
+     */
     public List<Task> loadTasks() throws IOException, InvalidDatabaseException {
 
         /*
@@ -170,6 +187,12 @@ public class Database {
 
 
 
+    /**
+     * Saves the list of tasks to disk.
+     *
+     * @param list the list of tasks.
+     * @throws IOException if there were errors creating or writing the file.
+     */
     public void saveTasks(List<Task> list) throws IOException {
 
         var path = Path.of(this.databasePath);
