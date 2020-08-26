@@ -4,10 +4,10 @@ package duke.command;
  * Represents the different types of user commands recognized by the program.
  */
 enum UserCommands {
-    TODO("todo"), DEADLINE("deadline"), EVENT("event"),
-    DELETE("delete"), LIST("list"), DONE("done"),
-    EXIT("bye");
-
+    TODO("todo"), DEADLINE("deadline"), EVENT("event"), 
+    DELETE("delete"), LIST("list"), DONE("done"), 
+    FIND("find"), EXIT("bye");
+    
     private final String commandWord;
 
     /**

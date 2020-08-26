@@ -74,6 +74,21 @@ public class Ui {
         System.out.println(USER);
     }
 
+    public void showFilteredByKeywordTaskList(TaskList tasks, String keyword) {
+        System.out.println(DIVIDER);
+
+        if (tasks.totalNumberOfTasks() == 0) {
+            System.out.println("No tasks matched with '" + keyword + "' :(");
+        }
+
+        if (tasks.totalNumberOfTasks() > 0) {
+            System.out.println("Here are the tasks that matched with '" + keyword + "':");
+            System.out.println(tasks);
+        }
+
+        System.out.println(USER);
+    }
+
     /**
      * Displays the saved task list when the program starts up.
      *

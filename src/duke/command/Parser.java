@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exception.InvalidIndexNumberException;
 import duke.exception.InvalidUserCommandException;
 import duke.exception.StorageException;
@@ -59,6 +62,8 @@ public class Parser {
                 deleteTask(commandDetails[1], ui, storage);
             } else if (UserCommands.DONE.getCommandWord().equals(command)) {
                 markTaskAsDone(commandDetails[1], ui, storage);
+            } else if (UserCommands.FIND.getCommandWord().equals(command)) {
+                searchTaskListForKeyword(commandDetails[1], ui, storage);
             } else {
                 // User commands is not recognized by the system
                 throw new InvalidUserCommandException(ui.showInvalidUserCommand(userCommand));
@@ -222,6 +227,27 @@ public class Parser {
 
         // If index specified by users is not a number or task list fails to load or save
         } catch (InvalidUserCommandException | StorageException e) {
+            ui.showErrorMessage(e);
+        }
+    }
+    
+    private static void searchTaskListForKeyword(String keyword, Ui ui, Storage storage) {
+        try {
+            TaskList tasks = storage.load();
+            List<Task> tasksContainingKeyword = new ArrayList<>();
+
+            for (int i = 0; i < tasks.totalNumberOfTasks(); i++) {
+                Task task = tasks.getTask(i);
+                boolean containsKeyword = task.toString().contains(keyword);
+                
+                if (containsKeyword) {
+                    tasksContainingKeyword.add(task);
+                }
+            }
+            
+            TaskList filteredTaskList = new TaskList(tasksContainingKeyword);
+            ui.showFilteredByKeywordTaskList(filteredTaskList, keyword);
+        } catch (StorageException e) {
             ui.showErrorMessage(e);
         }
     }
