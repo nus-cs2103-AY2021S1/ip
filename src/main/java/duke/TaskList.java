@@ -20,7 +20,7 @@ public class TaskList {
     }
 
     public TaskList(List<Task> tasks) {
-        this.tasks = tasks;
+        this.tasks = new ArrayList<>(tasks);
     }
 
     public Task addTask(TaskType type, String description, LocalDateTime dateTime) throws DukeException {
