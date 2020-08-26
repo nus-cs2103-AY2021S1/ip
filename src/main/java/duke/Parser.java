@@ -1,7 +1,17 @@
 package duke;
 
+/**
+ * Represents Parser class that parses input commands.
+ */
 public class Parser {
 
+    /**
+     * Returns a specific command after parsing.
+     *
+     * @param userInput User input as a String.
+     * @return Specific input command.
+     * @throws DukeException When invalid command or formatting is entered.
+     */
     public static Command parseCommands(String userInput) throws DukeException {
         CommandEnum command;
         try {

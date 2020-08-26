@@ -2,12 +2,25 @@ package duke;
 
 import java.io.IOException;
 
-
+/**
+ * Represents a Duke class.
+ */
 public class Duke {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
 
+    /** Storage for reading and writing all tasks */
+    private Storage storage;
+
+    /** Task list containing tasks */
+    private TaskList tasks;
+
+    /** Handles printing of user interaction */
+    private final Ui ui;
+
+    /**
+     * Constructs a new instance of Duke object.
+     *
+     * @param filePath Path of file to store tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         try {
@@ -19,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program.
+     */
     public void run() {
         ui.printGreetings();
         while (ui.hasMoreInput()) {
@@ -28,13 +44,16 @@ public class Duke {
                command.execute(this.tasks, this.storage, this.ui);
            } catch (DukeException | IOException ex) {
                System.out.println(ex.getMessage());
-           }
-           finally {
+           } finally {
                System.out.println(Ui.line);
            }
         }
     }
 
+    /**
+     * Executes the main program.
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
