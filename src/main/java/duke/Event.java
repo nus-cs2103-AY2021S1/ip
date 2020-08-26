@@ -5,12 +5,20 @@ import java.time.format.DateTimeFormatter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents an event.
+ */
 public class Event extends Task {
     private LocalDate date;
     private Date time = null;
     SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm a");
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
+    /**
+     * Creates an instance of a deadline task.
+     * @param description  Contents of the event task in the format "deadline XXX /by yyyy-mm-dd HH:mm".
+     * @throws DukeException  If format of date and/or time given is not yyyy-mm-dd HH:mm.
+     */
     public Event(String description) throws DukeException{
         super(description.split("/on ")[0]);
         try {
@@ -26,6 +34,10 @@ public class Event extends Task {
 
     }
 
+    /**
+     * Returns formatted date and time string of an event task.
+     * @return Formatted date and time string of the event task.
+     */
     public String dateAndTimeBracket() {
         if (this.time == null) {
             return String.format("(by: %s)", this.date.format(dateFormatter));
@@ -34,6 +46,10 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns String representation of an event task.
+     * @return String representation of an event task.
+     */
     @Override
     public String toString() {
         return String.format("[E][%s] %s %s",

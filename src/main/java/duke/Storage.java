@@ -10,9 +10,16 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+/**
+ * Represents a Storage that stores tasks.
+ */
 public class Storage {
     private static int globalIndex = 1;
-    
+
+    /**
+     * Creates an instance of a Storage.
+     * @param filePath Location where the Storage is initialised.
+     */
     public Storage(Path filePath) {
         try {
             if (!java.nio.file.Files.exists(filePath)) { 
@@ -24,7 +31,11 @@ public class Storage {
             System.out.println(e);
         }
     }
-    
+
+    /**
+     * Copies stored tasks into a list of tasks.
+     * @return ArrayList of stored tasks.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> storedTasks = new ArrayList<>();
         try {
@@ -59,7 +70,10 @@ public class Storage {
         }
         return storedTasks;
     }
-    
+
+    /**
+     * Writes a new task to file containing stored tasks.
+     */
     public void writeToFile(Task t, String input) {
         String splitTask[] = input.split(" ", 2);
         if (t != null) {
@@ -86,6 +100,10 @@ public class Storage {
         
     }
 
+    /**
+     * Removes a specific task from file containing stored tasks.
+     * @param taskIndex Number corresponding to the specific task to be removed.
+     */
     public void removeFromFile(int taskIndex) {
         try {
             if (taskIndex != -1) {
@@ -118,6 +136,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Modifies a specific task in file containing stored tasks.
+     * @param taskIndex Number corresponding to the specific task to be modified.
+     */
     public void overwriteInFile(int taskIndex) {
         try {
             if (taskIndex != -1) {
@@ -148,5 +170,4 @@ public class Storage {
             System.out.println(err);
         }
     }
-    
 }
