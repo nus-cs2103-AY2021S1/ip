@@ -1,6 +1,6 @@
 /** Task represents a task to be done.
  */
-public class Task {
+public abstract class Task {
     String taskName;
     boolean isDone;
 
@@ -17,4 +17,6 @@ public class Task {
     public String toString() {
         return (this.isDone ? "[✓] " : "[✘] ") + this.taskName;
     }
+
+    public abstract String toFileFormat();
 }
