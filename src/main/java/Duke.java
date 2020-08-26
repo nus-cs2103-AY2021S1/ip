@@ -6,6 +6,11 @@ import duke.Storage;
 import java.util.Scanner;
 
 public class Duke {
+    /**
+     * Entry point to the Duke programme. 
+     * When run, this function will load all the necessary classes required to start Duke.
+     * @param args Input arguments to the programme.
+     */
     public static void main(String[] args) {
         TaskList taskList = new TaskList();
         Ui ui = new Ui();

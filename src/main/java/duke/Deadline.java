@@ -19,6 +19,11 @@ public class Deadline extends Task {
         this.by = LocalDateTime.parse(by);  //  use default formatter that leaves no whitespace to trim
     }
 
+    /**
+     * Returns an array of Strings representing the state of the task, to be passed to Storage to 
+     * be formatted and written to a file.
+     * @return Array of Strings representing the current state of the Task.
+     */
     @Override
     public String[] serialize() {
         String[] output = new String[4];
