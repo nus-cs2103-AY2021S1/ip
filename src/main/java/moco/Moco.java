@@ -18,6 +18,12 @@ public class Moco {
         tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Starts Moco
+     * If the user inputs "bye", Moco closes, saving task list
+     *
+     * @throws MocoException If insufficient details are entered/wrongly entered.
+     */
     public void run() {
         ui.startBot();
         boolean isCommand = true;

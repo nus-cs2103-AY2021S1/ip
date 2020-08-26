@@ -18,18 +18,40 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add specified task to tasklist.
+     *
+     * @param t task to be added to task list.
+     */
     public void addTask(Task t) {
         tasks.add(t);
     }
 
+    /**
+     * Retrieved task with specified index.
+     *
+     * @param index index of task to be retrieved.
+     * @return Task of specified index.
+     */
     public Task get(int index) {
         return tasks.get(index);
     }
 
+    /**
+     * Delete specified task from tasklist.
+     *
+     * @param index index of task to be deleted.
+     * @return Task of specified index.
+     */
     public Task deleteTask(int index) {
         return tasks.remove(index);
     }
 
+    /**
+     * Returns current size of task list.
+     *
+     * @return Task list size.
+     */
     public int size() {
         return this.tasks.size();
     }

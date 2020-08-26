@@ -11,6 +11,11 @@ public class Todo extends Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Returns task printing with proper formatting.
+     *
+     * @return String with task formatting
+     */
     public String saveText() {
         return "T | " + getStatusIcon() + " | " + description + "\n";
     }

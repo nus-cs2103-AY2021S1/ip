@@ -17,6 +17,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Returns task printing with proper formatting.
+     *
+     * @return String with task formatting
+     */
     public String saveText() {
         return "E | " + getStatusIcon() + " | " + description + " | " + at + "\n";
     }

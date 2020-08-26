@@ -18,11 +18,23 @@ public class Storage {
     private File taskList;
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor for Storage
+     *
+     * @param filePath File path for previously saved task list.
+     */
     public Storage(String filePath) {
         this.tasks = new ArrayList<>();
         this.taskList = new File(filePath);
     }
 
+    /**
+     * Returns arraylist of tasks loaded from given file name.
+     * If no file is found, a new one is created with an empty arraylist
+     *
+     * @return Task ArrayList
+     * @throws MocoException If failure to create file or access file.
+     */
     public ArrayList<Task> load() throws MocoException {
         try {
             if (taskList.exists()) {
@@ -69,7 +81,7 @@ public class Storage {
         }
     }
 
-    public void Save() throws MocoException {
+    protected void Save() throws MocoException {
         try {
             FileWriter newList = new FileWriter(taskList);
             for (Task t : tasks) {

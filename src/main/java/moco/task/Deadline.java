@@ -17,6 +17,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Returns task printing with proper formatting.
+     *
+     * @return String with task formatting
+     */
     public String saveText() {
         return "D | " + getStatusIcon() + " | " + description + " | " + by + "\n";
     }

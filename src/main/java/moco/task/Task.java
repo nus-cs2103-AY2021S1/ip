@@ -9,6 +9,11 @@ abstract public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Changes task completion symbol from boolean value
+     *
+     * @return String with symbol formatting
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //returns tick or X symbol accordingly
     }

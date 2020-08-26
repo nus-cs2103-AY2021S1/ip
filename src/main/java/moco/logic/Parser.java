@@ -6,6 +6,7 @@ import main.java.moco.task.Task;
 import main.java.moco.task.Todo;
 import main.java.moco.ui.Ui;
 
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -35,6 +36,18 @@ public class Parser {
         },
     }
 
+    /**
+     * Processes/parses commands input to Moco
+     * If the command is invalid, Exception is thrown and
+     * user is prompted for a different command.
+     *
+     * @param input   user input (command)
+     * @param tasks   TaskList to keep tasks
+     * @param ui      ui
+     * @param storage to save tasks from tasklist
+     * @return whether or not a command/userInput is valid
+     * @throws MocoException If command is not valid.
+     */
     public static boolean parse(String input, TaskList tasks, Ui ui, Storage storage) throws MocoException {
         if (input.equals(("bye"))) {
             storage.Save();
