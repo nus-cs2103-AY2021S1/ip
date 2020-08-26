@@ -8,6 +8,13 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toData() {
+        return checkDone()
+                ? "D/1/" + getDescription() + "/" + this.by
+                : "D/0/" + getDescription() + "/" + this.by;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }

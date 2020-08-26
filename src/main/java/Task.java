@@ -16,8 +16,22 @@ public class Task {
         this.isDone = true;
     }
 
+    public boolean checkDone() {
+        return isDone;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String toData () {
+        return checkDone()
+                ? "T/1/" + getDescription()
+                : "T/0/" + getDescription();
+    }
+
     public String toString() {
-        return '[' + getStatusIcon() + "] " + description;
+        return '[' + getStatusIcon() + "] " + getDescription();
     }
 
 }
