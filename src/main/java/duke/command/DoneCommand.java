@@ -21,6 +21,11 @@ public class DoneCommand extends Command {
         ui.displayDone(task);
     }
 
+    /**
+     * Checks if the command is ExitCommand.
+     *
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return false;

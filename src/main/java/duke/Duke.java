@@ -10,12 +10,17 @@ import duke.ui.Ui;
 
 import java.util.Scanner;
 
+/**
+ * Duke class is the control class of Duke, include the logic of Duke.
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
-
+    /**
+     * Initializes storage, taskList and ui.
+     */
     public Duke() {
         try {
             storage = new Storage("data/tasks.txt", "data");
@@ -26,6 +31,9 @@ public class Duke {
         ui = new Ui(taskList);
     }
 
+    /**
+     * Starts the program by executing commands scanned from user inputs.
+     */
     public void run() {
         ui.displayGreeting();
         Scanner scanner = new Scanner(System.in);
@@ -45,7 +53,11 @@ public class Duke {
     }
 
 
-
+    /**
+     * Executes the program Duke.
+     *
+     * @param args user input.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();

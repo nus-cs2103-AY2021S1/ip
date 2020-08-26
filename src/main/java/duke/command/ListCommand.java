@@ -15,6 +15,11 @@ public class ListCommand extends Command {
         ui.getList();
     }
 
+    /**
+     * Checks if the command is ExitCommand.
+     *
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return false;

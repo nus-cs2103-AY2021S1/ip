@@ -6,15 +6,31 @@ import duke.exception.InvalidInputException;
 
 public class ExitCommand extends Command {
 
+    /**
+     * Constructs an ExitCommand.
+     */
     public ExitCommand() {
         super();
     }
 
+    /**
+     * Executes the ExitCommand by displaying the exit message to users.
+     *
+     * @param storage The storage object.
+     * @param taskList
+     * @param ui The ui object.
+     * @throws InvalidInputException If the input is invalid.
+     */
     @Override
     public void execute(Storage storage, TaskList taskList, Ui ui) throws InvalidInputException {
         ui.displayExit();
     }
 
+    /**
+     * Checks if the command is ExitCommand.
+     *
+     * @return True.
+     */
     @Override
     public boolean isExit() {
         return true;
