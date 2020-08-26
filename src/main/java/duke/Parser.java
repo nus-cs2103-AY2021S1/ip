@@ -3,8 +3,19 @@ package duke;
 import duke.command.*;
 import duke.task.TaskType;
 
+/**
+ * The Parser class will deal with making sense of the user command
+ */
 public class Parser {
 
+    /**
+     * Reads the input to determine which type of command Duke
+     * should execute to reply the user.
+     *
+     * @param input The user input entered in the command line.
+     * @return type of Command to be executed.
+     * @throws DukeException if the input is formatted wrongly.
+     */
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) {
             return new ExitCommand();

@@ -10,14 +10,30 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The Storage class will deal with loading tasks from the file
+ * and saving tasks in the file.
+ */
 public class Storage {
 
     private final String filePath;
 
+    /**
+     * Constructor for a Storage object.
+     *
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the file which is stored in the hard disk and
+     * retrieves the information from the file.
+     *
+     * @return An arraylist which contains the Tasks stored in the file.
+     * @throws DukeException if an IO error occurred and createNewFile() throws IOException.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             File file = new File(filePath);
@@ -48,6 +64,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the data file to store all the Tasks in the list.
+     *
+     * @param list An arraylist which contains information for all the Tasks.
+     * @throws IOException if the file in filePath does not exist or cannot be opened.
+     */
     public void updateDataFile(ArrayList<Task> list) throws IOException {
         FileWriter writer = new FileWriter(filePath);
         PrintWriter print_line = new PrintWriter(writer);
