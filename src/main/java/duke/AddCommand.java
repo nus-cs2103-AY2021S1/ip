@@ -30,6 +30,11 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Returns user input.
+     *
+     * @return User input as a String.
+     */
     public String getUserInput() {
         return this.userInput;
     }
