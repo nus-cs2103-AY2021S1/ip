@@ -1,5 +1,5 @@
 /**
- * Class to handle the case where an invalid task description is entered
+ * Class to handle the case where an invalid task description is entered.
  * @author vanGoghhh
  */
 

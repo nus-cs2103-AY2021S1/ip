@@ -2,15 +2,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Class to print string responses by the bot
+ * Class to print string responses by the bot.
  * @author vanGoghhh
  */
 
 public class UI {
 
     /**
-     * Reads command entered by user
-     * @return string representation of command entered
+     * Reads command entered by user.
+     * @return string representation of command entered.
      */
     protected String readCommand() {
         Scanner sc = new Scanner(System.in);
@@ -21,7 +21,7 @@ public class UI {
     }
 
     /**
-     * Greets the user upon launch
+     * Greets the user upon launch.
      */
     protected void greetUser() {
         String welcome = "Hello I am Duke!\nHow can I help you?\n";
@@ -35,8 +35,8 @@ public class UI {
     }
 
     /**
-     * Prints responses when a task is completed
-     * @param task
+     * Prints responses when a task is completed.
+     * @param task the completed task.
      */
     protected void doneTask(Task task) {
         if (task.getStatus()) {
@@ -48,31 +48,33 @@ public class UI {
     }
 
     /**
-     * Prints responses when a task is added
-     * @param tasks TaskList containing all tasks
-     * @param newTask Task to be added
+     * Prints responses when a task is added.
+     * @param tasks TaskList containing all tasks.
+     * @param newTask Task to be completed.
      */
     protected void addTask(TaskList tasks, Task newTask) {
         System.out.println("\nGot it. This task is now added.");
         System.out.println(" " + newTask);
         int tasksLeft = tasks.checkTasksLeft();
-        System.out.println("You have " + tasksLeft + " tasks left in your list!\n");
+        System.out.println("You have " + tasksLeft
+                + " tasks left in your list!\n");
     }
 
     /**
-     * Prints responses when a task is deleted
-     * @param tasks TaskList containing all tasks
-     * @param deletedTask Task to be deleted
+     * Prints responses when a task is deleted.
+     * @param tasks TaskList containing all tasks.
+     * @param deletedTask Task to be deleted.
      */
     protected void deleteTask(TaskList tasks, Task deletedTask) {
         System.out.println("\nGot it. Deleting task.....");
         System.out.println(" " + deletedTask);
-        System.out.println("You have " + tasks.getTaskList().size() + " tasks left in your list!\n");
+        System.out.println("You have " + tasks.getTaskList().size()
+                + " tasks left in your list!\n");
     }
 
     /**
-     * Prints all the tasks stored
-     * @param taskList TaskList containing all the tasks
+     * Prints all the tasks stored.
+     * @param taskList TaskList containing all the tasks.
      */
     protected void displayTasks(TaskList taskList) {
         int index = 1;
@@ -86,8 +88,8 @@ public class UI {
     }
 
     /**
-     * Prints tasks found using find command
-     * @param foundTasks tasks found with find command
+     * Prints tasks found using find command.
+     * @param foundTasks tasks found with find command.
      */
     protected void findTask(ArrayList<Task> foundTasks) {
         if (foundTasks.isEmpty()) {

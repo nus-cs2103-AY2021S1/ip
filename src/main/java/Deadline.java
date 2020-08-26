@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class to represent a deadline object
+ * Class to represent a deadline object.
  * @author vanGoghhh
  */
 
@@ -11,9 +11,9 @@ public class Deadline extends Task {
     private LocalDate by;
 
     /**
-     * Constructor for deadline class
-     * @param description description of the deadline
-     * @param by date that the deadline is dued
+     * Constructor for deadline class.
+     * @param description description of the deadline.
+     * @param by date that the deadline is dued.
      */
     public Deadline(String description, LocalDate by) {
         super(description);
@@ -21,16 +21,16 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the duedate of the deadline
-     * @return duedate of the deadline
+     * Returns the duedate of the deadline.
+     * @return duedate of the deadline.
      */
     protected LocalDate getBy() {
         return this.by;
     }
 
     /**
-     * Prints the deadline object
-     * @return string representation of a deadline
+     * Prints the deadline object.
+     * @return string representation of a deadline.
      */
     @Override
     public String toString() {

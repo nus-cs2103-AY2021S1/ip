@@ -1,5 +1,5 @@
 /**
- * Class for custom exceptions
+ * Class for custom exceptions.
  * @author vanGoghhh
  */
 public class DukeException extends Exception {

@@ -1,12 +1,12 @@
 /**
- * Class for the command to exit the bot
+ * Class for the command to exit the bot.
  * @author vanGoghhh
  */
 
 public class ByeCommand extends Command {
 
     /**
-     * Returns a string to indicate the exiting of the bot
+     * Returns a string to indicate the exiting of the bot.
      * @param tasks
      * @param ui
      * @throws DukeException
@@ -17,8 +17,8 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Return a boolean to indicate the exiting of the bot
-     * @return true to exit the command
+     * Return a boolean to indicate the exiting of the bot.
+     * @return true to exit the command.
      */
     protected boolean isExit() {
         return true;

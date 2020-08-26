@@ -1,5 +1,5 @@
 /**
- * Class to handle cases when an invalid command is entered
+ * Class to handle cases when an invalid command is entered.
  * @author vanGoghhh
  */
 

@@ -1,5 +1,5 @@
 /**
- * Class to handle the case where an invalid task number is entered
+ * Class to handle the case where an invalid task number is entered.
  * @author vanGoghhh
  */
 

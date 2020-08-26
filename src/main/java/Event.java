@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class to represent an event object
+ * Class to represent an event object.
  */
 
 public class Event extends Task {
@@ -10,9 +10,9 @@ public class Event extends Task {
     private LocalDate at;
 
     /**
-     * Constructor for event class
-     * @param description description of the event
-     * @param at duedate of the event
+     * Constructor for event class.
+     * @param description description of the event.
+     * @param at duedate of the event.
      */
     public Event(String description, LocalDate at) {
         super(description);
@@ -20,7 +20,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the duedate of the event
+     * Returns the duedate of the event.
      * @return
      */
     protected LocalDate getAt() {
@@ -28,8 +28,8 @@ public class Event extends Task {
     }
 
     /**
-     * Prints the event object
-     * @return string representation of the event object
+     * Prints the event object.
+     * @return string representation of the event object.
      */
     @Override
     public String toString() {

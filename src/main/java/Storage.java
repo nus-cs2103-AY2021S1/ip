@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Class to load and write tasks objects to the local drive
+ * Class to load and write tasks objects to the local drive.
  * @author vanGoghhh
  */
 
@@ -17,16 +17,16 @@ public class Storage {
     private String filepath;
 
     /**
-     * Constructor for Storage
-     * @param filepath specified filepath in the user's local drive
+     * Constructor for Storage.
+     * @param filepath specified filepath in the user's local drive.
      */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
     /**
-     * Loads data from the user's local files
-     * @return the tasks in the users local files in an arraylist
+     * Loads data from the user's local files.
+     * @return the tasks in the users local files in an arraylist.
      * @throws IOException
      */
     protected ArrayList<Task> loadData() throws IOException {
@@ -66,8 +66,8 @@ public class Storage {
     }
 
     /**
-     * Writes data to the user's local files
-     * @param tasks TaskList containing all tasks
+     * Writes data to the user's local files.
+     * @param tasks TaskList containing all tasks.
      * @throws IOException
      */
     protected void writeData(TaskList tasks) throws IOException {

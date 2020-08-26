@@ -1,5 +1,5 @@
 /**
- * Class to handle delete commands entered by the user
+ * Class to handle delete commands entered by the user.
  * @author vanGoghhh
  */
 
@@ -8,18 +8,18 @@ public class DeleteCommand extends Command {
     private String command;
 
     /**
-     * Constructor for delete command object
-     * @param command Complete line of delete command entered by user
+     * Constructor for delete command object.
+     * @param command Complete line of delete command entered by user.
      */
     public DeleteCommand(String command) {
         this.command = command;
     }
 
     /**
-     * Method to execute entirely when a delete command is entered by the user
-     * @param tasks Tasklist containing all the tasks
-     * @param dukeUI UI to print string responses by the bot
-     * @throws InvalidTaskNumberException when an inaccurate task number is entered
+     * Method to execute entirely when a delete command is entered by the user.
+     * @param tasks Tasklist containing all the tasks.
+     * @param dukeUI UI to print string responses by the bot.
+     * @throws InvalidTaskNumberException when an inaccurate task number is entered.
      */
     @Override
     protected void execute(TaskList tasks, UI dukeUI) throws InvalidTaskNumberException {
@@ -41,8 +41,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Method to tell bot whether to end the current session
-     * @return false to not exit the system
+     * Method to tell bot whether to end the current session.
+     * @return false to not exit the system.
      */
     protected boolean isExit() {
         return false;
