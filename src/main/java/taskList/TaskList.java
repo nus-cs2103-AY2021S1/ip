@@ -8,15 +8,30 @@ import task.Event;
 import duke.DukeException;
 import parser.Parser;
 
+/**
+ * TaskList contains the list of tasks and the functions that change the list of
+ * tasks depending on the commands from the user of the Java Duke Program.
+ *
+ * @author (Sruthi)
+ */
 public class TaskList {
     private ArrayList<Task> todoList;
     private int numberOfTasks;
 
+    /**
+     * It creates a new array list for the todo list and sets the counter to 0.
+     */
     public TaskList() {
         todoList = new ArrayList<>();
         numberOfTasks = 0;
     }
 
+    /**
+     * It creates a String to be printed to the user to show all the tasks in the list
+     * and returns it.
+     *
+     * @return String
+     */
     public String showList() {
         int count = 1;
         String output = "  The tasks in your Todo List: ";
@@ -27,6 +42,15 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * It finds the task in the task list based on the number given and sets it to
+     * completed. It then returns the String to be printed for the user to see.
+     * It throws a DukeException error if the user gives an invalid input.
+     *
+     * @param input
+     * @return String
+     * @throws DukeException
+     */
     public String completeItem(String input) throws DukeException {
         String indexString = input.split(" ")[1];
         try {
@@ -41,6 +65,15 @@ public class TaskList {
         }
     }
 
+    /**
+     * It finds the task in the task list based on the number given and deletes it from
+     * the list. It then returns the String to be printed for the user to see.
+     * It throws a DukeException error if the user gives an invalid input.
+     *
+     * @param input
+     * @return String
+     * @throws DukeException
+     */
     public String deleteItem(String input) throws DukeException {
         String indexString = input.split(" ")[1];
         try {
@@ -57,6 +90,16 @@ public class TaskList {
         }
     }
 
+    /**
+     * It adds a task to the task list based on the command given by calling the appropriate
+     * add task functionand then returns the String to be printed to the user. It throws a
+     * DukeException when an error occurred while adding a task to the list.
+     *
+     * @param instruction
+     * @param item
+     * @return String
+     * @throws DukeException
+     */
     public String addItem(String instruction, String item) throws DukeException {
         if (item.equals("") || item.equals(" ")) {
             throw new DukeException("Oops! The description cannot be empty >.<");
@@ -74,6 +117,14 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * It creates a new todo item based on the prams given and returns the String
+     * to be printed to the user.
+     *
+     * @param item
+     * @param completed
+     * @return String
+     */
     public String addTodoItem(String item, boolean completed) {
         Todo newTask = new Todo(item, completed);
         todoList.add(newTask);
@@ -82,6 +133,16 @@ public class TaskList {
     }
 
 
+    /**
+     * It creates a new Deadline item based on the params given and returns the String
+     * to be printed. It throws a DukeException when an error occurs while adding the
+     * task to the list.
+     *
+     * @param item
+     * @param completed
+     * @return String
+     * @throws DukeException
+     */
     public String addDeadline(String item, boolean completed) throws DukeException {
         Deadline newTask = Parser.parseDeadline(item, completed);
         todoList.add(newTask);
@@ -89,6 +150,16 @@ public class TaskList {
         return "  " + newTask.getItem();
     }
 
+    /**
+     * It creates a new Event item based on the params given and returns the String
+     * to be printed. It throws a DukeException when an error occurs while adding the
+     * task to the list.
+     *
+     * @param item
+     * @param completed
+     * @return String
+     * @throws DukeException
+     */
     public String addEvent(String item, boolean completed) throws DukeException {
         Event newTask = Parser.parseEvent(item, completed);
         todoList.add(newTask);
@@ -96,6 +167,12 @@ public class TaskList {
         return "  " + newTask.getItem();
     }
 
+    /**
+     * It converts all the tasks in the list to String for ease of printing
+     * to the User and returns this String.
+     *
+     * @return String
+     */
     public String formatTodoListToString() {
         String tasks = "";
         for (Task task : todoList) {

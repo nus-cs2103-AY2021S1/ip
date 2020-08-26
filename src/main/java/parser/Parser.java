@@ -8,13 +8,38 @@ import duke.DukeException;
 import task.Deadline;
 import task.Event;
 
+/**
+ * Parser parses the commands inputted by the user into the Java Duke Program
+ * and calls the necessary functions in the task list.
+ *
+ * @author (Sruthi)
+ */
 public class Parser {
     TaskList taskList;
     Storage storage;
+
+    /**
+     * Has a taskList and storage object to call the appropriate taskList functions and
+     * to overwrite the file containing the tasks at the end of the Java Duke Program
+     *
+     * @param taskList
+     * @param storage
+     */
     public Parser(TaskList taskList, Storage storage) {
         this.taskList = taskList;
         this.storage = storage;
     }
+
+    /**
+     * Takes in the user input and calls the appropriate taskList functions based on
+     * the commands in the input. It then returns the String that needs to be printed
+     * to the user, back to the UI. It throws Duke Exception if any error occurred
+     * parsing and carrying out the commands.
+     *
+     * @param input
+     * @return String to be printed
+     * @throws DukeException
+     */
     public String scenarios(String input) throws DukeException {
         String[] instructions = input.split(" ");
         String command = instructions[0];
@@ -43,6 +68,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Takes in the String of the date and time inputted by the user and converts it to
+     * a LocalDate object which is then returned. It throws a DukeException if any error
+     * occurred while formatting.
+     *
+     * @param dateTime
+     * @return LocalDate, duedate of the task
+     * @throws DukeException
+     */
     public static LocalDate formatDate(String dateTime) throws DukeException {
         try {
             String[] split = dateTime.split(" ");
@@ -60,6 +94,16 @@ public class Parser {
         }
     }
 
+    /**
+     * Takes in a LocalDate object and a String containing the date and time inputted by the user
+     * and then parses it to the correct format String needed for printing and returns it. It
+     * throws a DukeException if any error occurred while parsing.
+     *
+     * @param dateTime
+     * @param dueDate
+     * @return String to be printed for the date and time of the task due
+     * @throws DukeException
+     */
     public static String formatDateString(LocalDate dateTime, String dueDate) throws DukeException {
         try {
             String time = "2359";
@@ -74,6 +118,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Takes in a String containing the time inputted by the user and parses it to the correct
+     * format needed for printing to the User and returns it. It throws a DukeException if any
+     * error occurred while parsing.
+     *
+     * @param time
+     * @return String of the time that the task is due
+     */
     public static String formatTime(String time) {
         int firstHour = (int) time.charAt(0) - '0';
         int secondHour = (int) time.charAt(1) - '0';
@@ -94,6 +146,16 @@ public class Parser {
         return convertedTime + "." + time.substring(2, 4) + amPM;
     }
 
+    /**
+     * Takes in the input from the user and a boolean of whether the task is completed or not
+     * and parses the input before creating the Deadline object and returning it. It throws a
+     * DukeException if any error occurred while parsing the input.
+     *
+     * @param item
+     * @param completed
+     * @return Deadline
+     * @throws DukeException
+     */
     public static Deadline parseDeadline(String item, boolean completed) throws DukeException {
         String[] splitItem = item.split("/by ");
         if (splitItem.length == 1) {
@@ -104,6 +166,16 @@ public class Parser {
         return new Deadline(splitItem[0], dateTime, dueDate, splitItem[1], completed);
     }
 
+    /**
+     * Takes in the input from the user and a boolean of whether the task is completed or not
+     * and parses the input before creating the Event object and returning it. It throws a
+     * DukeException if any error occurred while parsing the input.
+     *
+     * @param item
+     * @param completed
+     * @return Event
+     * @throws DukeException
+     */
     public static Event parseEvent(String item, boolean completed) throws DukeException {
         String[] splitItem = item.split("/at ");
         if (splitItem.length == 1) {

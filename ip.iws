@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="ip:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="dcc7396a-4a04-47f3-9835-d9f0d7777614" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/ip.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/ip.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ip.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ip.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/duke.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/duke.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/Duke.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/DukeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/DukeException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/storage/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/storage/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/task/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task/Deadline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/task/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/task/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/task/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task/Todo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/taskList/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/taskList/TaskList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +45,7 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
@@ -139,30 +152,34 @@
       <screen x="4" y="23" width="1436" height="877" />
     </state>
     <state x="73" y="103" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/4.23.1436.877@4.23.1436.877" timestamp="1598286718834" />
-    <state width="1379" height="209" key="GridCell.Tab.0.bottom" timestamp="1598366394359">
+    <state x="915" y="275" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1598370034749">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="209" key="GridCell.Tab.0.bottom/4.23.1436.877@4.23.1436.877" timestamp="1598366394359" />
-    <state width="1379" height="209" key="GridCell.Tab.0.center" timestamp="1598366394357">
+    <state x="915" y="275" key="#com.intellij.ide.util.TreeClassChooserDialog/4.23.1436.877@4.23.1436.877" timestamp="1598370034749" />
+    <state width="1379" height="209" key="GridCell.Tab.0.bottom" timestamp="1598366526509">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="209" key="GridCell.Tab.0.center/4.23.1436.877@4.23.1436.877" timestamp="1598366394357" />
-    <state width="1379" height="209" key="GridCell.Tab.0.left" timestamp="1598366394356">
+    <state width="1379" height="209" key="GridCell.Tab.0.bottom/4.23.1436.877@4.23.1436.877" timestamp="1598366526509" />
+    <state width="1379" height="209" key="GridCell.Tab.0.center" timestamp="1598366526508">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="209" key="GridCell.Tab.0.left/4.23.1436.877@4.23.1436.877" timestamp="1598366394356" />
-    <state width="1379" height="209" key="GridCell.Tab.0.right" timestamp="1598366394358">
+    <state width="1379" height="209" key="GridCell.Tab.0.center/4.23.1436.877@4.23.1436.877" timestamp="1598366526508" />
+    <state width="1379" height="209" key="GridCell.Tab.0.left" timestamp="1598366526507">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state width="1379" height="209" key="GridCell.Tab.0.right/4.23.1436.877@4.23.1436.877" timestamp="1598366394358" />
+    <state width="1379" height="209" key="GridCell.Tab.0.left/4.23.1436.877@4.23.1436.877" timestamp="1598366526507" />
+    <state width="1379" height="209" key="GridCell.Tab.0.right" timestamp="1598366526509">
+      <screen x="4" y="23" width="1436" height="877" />
+    </state>
+    <state width="1379" height="209" key="GridCell.Tab.0.right/4.23.1436.877@4.23.1436.877" timestamp="1598366526509" />
     <state x="356" y="245" key="NewModule_or_Project.wizard" timestamp="1598355742697">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
     <state x="356" y="245" key="NewModule_or_Project.wizard/4.23.1436.877@4.23.1436.877" timestamp="1598355742697" />
-    <state x="76" y="23" key="SettingsEditor" timestamp="1598356219516">
+    <state x="390" y="23" key="SettingsEditor" timestamp="1598370057271">
       <screen x="4" y="23" width="1436" height="877" />
     </state>
-    <state x="76" y="23" key="SettingsEditor/4.23.1436.877@4.23.1436.877" timestamp="1598356219516" />
+    <state x="390" y="23" key="SettingsEditor/4.23.1436.877@4.23.1436.877" timestamp="1598370057271" />
     <state x="325" y="341" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1598355847613">
       <screen x="4" y="23" width="1436" height="877" />
     </state>

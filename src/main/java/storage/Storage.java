@@ -7,16 +7,34 @@ import java.util.Scanner;
 import taskList.TaskList;
 import duke.DukeException;
 
+/**
+ * Storage deals with loading tasks from a file and saving tasks in the same file
+ *
+ * @author (Sruthi)
+ */
 public class Storage {
     private String filePath;
     private String outputFormat = "  %s\n";
     private TaskList taskList;
 
+    /**
+     * Takes in the filePath of the file the tasks are saved in and the taskList
+     * which will contain the list of tasks of the Java Duke Program
+     *
+     * @param filePath
+     * @param taskList
+     */
     public Storage(String filePath, TaskList taskList) {
         this.filePath = filePath;
         this.taskList = taskList;
     }
 
+    /**
+     * It gets the task list from the file and throws a DukeException if no file is found
+     * in the filePath given.
+     *
+     * @throws DukeException
+     */
     public void getTodoList() throws DukeException {
         try {
             File f = new File(filePath);
@@ -30,6 +48,13 @@ public class Storage {
         }
     }
 
+    /**
+     * It takes in the String of a task from the file and calls the taskList's add
+     * function to add the task to the list of tasks. If any error occurred while
+     * adding the task, it is printed to the user.
+     *
+     * @param task
+     */
     public void formatStringToTask(String task) {
         String[] split = task.split(" ");
         String body = task.substring(6, task.length());
@@ -58,6 +83,11 @@ public class Storage {
         }
     }
 
+    /**
+     * It overwrites the file to include all the tasks in the current task list
+     * and if any error occurred while overwriting, the error message is printed
+     * to the user.
+     */
     public void overwriteTodoList() {
         try {
             FileWriter fw = new FileWriter(filePath);

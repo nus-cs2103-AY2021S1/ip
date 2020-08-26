@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactManager">
+    <artifact type="jar" name="ip:jar">
+      <output-path>$PROJECT_DIR$/out/artifacts/ip_jar</output-path>
+      <root id="archive" name="ip.jar">
+        <element id="module-output" name="ip" />
+      </root>
+    </artifact>
+  </component>
   <component name="CodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
