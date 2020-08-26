@@ -52,6 +52,22 @@ public class TaskList {
         ui.say("You have " + size() + " items in your task list now.");
     }
 
+    public void findTask(String body, Ui ui) {
+        if (tasks.size() > 0) {
+            ui.say("Here are the matching tasks in your list:");
+            boolean noneFound = true;
+            for (Task task : tasks) {
+                if (task.toString().contains(body)) {
+                    System.out.println(task);
+                    noneFound = false;
+                }
+            }
+            if (noneFound) ui.say("No matching tasks.");
+        } else {
+            ui.say("You have no tasks yet.");
+        }
+    }
+
     public int size() {
         return tasks.size();
     }

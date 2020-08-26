@@ -33,6 +33,8 @@ public class Parser {
             if (isValidEFormat(body)) tasks.addTask(new Event(desc(body), eventTime(body)), ui);
             else throw new DukeException("Invalid task format");
             break;
+        case "find":
+            tasks.findTask(body, ui);
         case "bye":
             break;
         default:
