@@ -72,7 +72,8 @@ public class Parser {
             int indexOfTask = Integer.parseInt(stringArr[1]) - 1;
             return handler.getTasks().get(indexOfTask);
         } catch (IndexOutOfBoundsException e){
-            throw new DukeException("\u2639 Oops, " + '"' + stringArr[1] + '"' + " is not a valid task number for " + lowerCaseOperation + "!");
+            throw new DukeException("\u2639 Oops, " + '"' + stringArr[1] + '"'
+                + " is not a valid task number for " + lowerCaseOperation + "!");
         } catch (NumberFormatException e){
             throw new DukeException("\u2639 Oops, " + '"' + stringArr[1] + '"' + " is not a number!");
         }
@@ -92,7 +93,8 @@ public class Parser {
             // if given empty arguments or space as task
             String afterTask = input.split(" ")[1].trim();
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("\u2639 Oops, the description of " + tasktype.toString().toLowerCase() + " cannot be empty");
+            throw new DukeException("\u2639 Oops, the description of "
+                + tasktype.toString().toLowerCase() + " cannot be empty");
         }
 
         if (tasktype == Task.taskType.TODO) {
@@ -104,13 +106,15 @@ public class Parser {
             try {
                 return parseTaskWithTime(input, tasktype, "/by");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("\u2639 Oops wrong format, use add deadline format: deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')] !");
+                throw new DukeException("\u2639 Oops wrong format, use add deadline format: " +
+                    "deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')] !");
             }
         } else if (tasktype == Task.taskType.EVENT) {
             try {
                 return parseTaskWithTime(input, tasktype, "/at");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("\u2639 Oops wrong format, use add event format: event [task] /at [time] !");
+                throw new DukeException("\u2639 Oops wrong format, use add event format: " +
+                    "event [task] /at [time] !");
             }
         } else {
             return new Task("this task should not be created");
