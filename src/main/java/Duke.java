@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -52,36 +53,59 @@ public class Duke {
     }
 
     public static LocalDateTime parseDateTime(String input) throws DukeException {
-        String[] params = input.split("\\s");
+        int index = input.indexOf(" ");
+        String dateStr = index == -1 ? input : input.substring(0, index);
+        String timeStr = index == -1 ? "" : input.substring(index + 1);
+
+        LocalDate date = parseDate(dateStr);
+        LocalTime time = parseTime(timeStr);
+
+        return LocalDateTime.of(date, time);
+    }
+
+    public static LocalDate parseDate(String input) throws DukeException {
+        LocalDate date;
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M[/yyyy][/yy]");
 
         try {
-            LocalDate date;
-            LocalTime time = LocalTime.MIDNIGHT;
-            TemporalAccessor result = dateFormatter.parseBest(params[0], LocalDate::from, MonthDay::from);
+            TemporalAccessor result = dateFormatter.parseBest(input, LocalDate::from, MonthDay::from);
 
             if (result instanceof LocalDate) {
                 date = ((LocalDate) result);
             } else {
                 date = ((MonthDay) result).atYear(Year.now().getValue());
             }
-
-            if (params.length == 2) {
-                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:m");
-                time = timeFormatter.parse(params[1], LocalTime::from);
-            } else if (params.length == 3) {
-                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:m a");
-                time = timeFormatter.parse(params[1] + " " + params[2], LocalTime::from);
-            }
-
-            return LocalDateTime.of(date, time);
         } catch(DateTimeParseException e) {
-            throw new DukeException("Unable to parse date/time.\n \n"
-                    + "Please input your date/time in one of the following formats:\n"
-                    + "26/08\n" + "26/08 1:19\n" + "26/08 1:19 AM\n"
-                    + "26/08/20\n" + "26/08/20 1:19\n" + "26/08/20 1:19 AM\n"
-                    + "26/08/2020\n" + "26/08/2020 1:19\n" + "26/08/2020 1:19 AM");
+            throw new DukeException("Unable to parse date.\n \n"
+                    + "Please input your date in one of the following formats:\n"
+                    + "26/08\n" + "26/08/20\n" + "26/08/2020");
         }
+
+        return date;
+    }
+
+    public static LocalTime parseTime(String input) throws DukeException {
+        LocalTime time = LocalTime.MIDNIGHT;
+
+        if (!input.isEmpty()) {
+            String[] params = input.split("\\s");
+
+            try {
+                if (params.length == 1) {
+                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:m");
+                    time = timeFormatter.parse(params[0], LocalTime::from);
+                } else {
+                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:m a");
+                    time = timeFormatter.parse(params[0] + " " + params[1], LocalTime::from);
+                }
+            } catch(DateTimeParseException e) {
+                throw new DukeException("Unable to parse time.\n \n"
+                        + "Please input your time in one of the following formats:\n"
+                        + "1:19\n" + "1:19 AM");
+            }
+        }
+
+        return time;
     }
 
     public static void addTodo(String description) throws DukeException {
@@ -172,6 +196,25 @@ public class Duke {
                 + (tasks.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
+    public static void listDueTasks(String otherInput) throws DukeException {
+        if (otherInput.isEmpty()) {
+            throw new DukeException("Date required for the due command.");
+        }
+
+        LocalDate date = parseDate(otherInput);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
+        StringBuilder output = new StringBuilder("Here are the tasks in your list occurring on "
+                + date.format(formatter) + ":\n");
+
+        for (Task task : tasks) {
+            if (task.isDue(date)) {
+                output.append(tasks.indexOf(task) + 1).append(".").append(task).append('\n');
+            }
+        }
+
+        printPrompt(output.toString());
+    }
+
     public static void listTasks() throws DukeException {
         if (tasks.size() == 0) {
             throw new DukeException("There are no tasks in your list.");
@@ -206,6 +249,10 @@ public class Duke {
                         }
 
                         listTasks();
+
+                        break;
+                    case "due":
+                        listDueTasks(otherInput);
 
                         break;
                     case "done":

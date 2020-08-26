@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -7,6 +8,11 @@ public class Event extends Task {
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
+    }
+
+    @Override
+    public boolean isDue(LocalDate date) {
+        return at.toLocalDate().equals(date);
     }
 
     @Override
