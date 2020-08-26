@@ -34,4 +34,26 @@ public class ReadFile {
             DukeException.FileException();
         }
     }
+
+    public void matchContent(String content) {
+        try {
+            FileReader fileReader = new FileReader(path);
+            BufferedReader textReader = new BufferedReader(fileReader);
+
+            String currentLine = textReader.readLine();
+
+            while (currentLine != null) {
+                if (currentLine.contains(content)) {
+                    Formating<String> stringFormating = new Formating<>(currentLine);
+                    Parser.taskList.addMemory(stringFormating.stringToTask());
+                }
+                currentLine = textReader.readLine();
+            }
+
+            textReader.close();
+
+        } catch (IOException e) {
+            DukeException.FileException();
+        }
+    }
 }
