@@ -20,12 +20,14 @@ public class Ui {
      * Handles I/O interaction with users and passes the command to the Parser
      */
     void handleInteraction() {
-        while (sc.hasNext()) {
+        boolean isValid = true;
+        while (sc.hasNext() && isValid) {
             String input = sc.nextLine();
             printTopLine();
-            parser.handleCommand(input);
+            isValid = parser.handleCommand(input);
             printBottomLine();
         }
+        Printer.printCustomStatement("Goodbye!");
     }
 
     /**

@@ -53,12 +53,12 @@ public class Parser {
             return handleSearchTask(command);
         }
         else if (command.startsWith("bye")) {
-            //TODO: Add bye functionality
-            return true;
+           return false;
         } else {
             return false;
         }
     }
+
 
     private boolean handleSearchTask(String command) {
         if (command.length() < 6) {
