@@ -22,6 +22,8 @@ public class Parser {
             return new CompleteTaskCommand(command);
         } else if(keyWord.equals("delete")) {
             return new DeleteTaskCommand(command);
+        } else if(keyWord.equals("find")) {
+            return new FindTaskCommand(command);
         } else {
             throw new DukeException("☹ OOPS!!! wait..... I don't understand your order my sir.");
         }
