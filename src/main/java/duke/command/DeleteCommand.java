@@ -7,6 +7,10 @@ import main.java.duke.exceptions.InvalidInputException;
 import main.java.duke.tasks.Task;
 import main.java.duke.tasks.TaskList;
 
+/**
+ * Delete Command class to execute command that deletes a task in
+ * the TaskList.
+ */
 public class DeleteCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Noted. I've removed this task:\n";
@@ -15,6 +19,14 @@ public class DeleteCommand extends Command {
         super(input);
     }
 
+    /**
+     * Execute a Delete Command to delete a task in the task list.
+     * @param tasks TaskList of tasks.
+     * @param ui Ui object from the Ui class.
+     * @param storage Storage object from the Storage class.
+     * @throws InvalidInputException incorrect input after delete command.
+     * @throws InvalidFileException failed to save file.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 7) {

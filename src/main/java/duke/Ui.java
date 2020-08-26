@@ -1,9 +1,11 @@
 package main.java.duke;
 
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.Scanner;
 
+/**
+ * Ui class to handle the user input and user interface.
+ * Includes method that will prompt the user for their input.
+ */
 public class Ui {
 
     static String logo = " ____        _        \n"

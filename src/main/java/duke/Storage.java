@@ -1,7 +1,6 @@
 package main.java.duke;
 
 import main.java.duke.exceptions.InvalidFileException;
-import main.java.duke.exceptions.InvalidInputException;
 import main.java.duke.tasks.*;
 
 import java.io.*;
@@ -9,6 +8,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Storage class that contains save and load methods to keep task list
+ * updated.
+ */
 public class Storage {
 
     public DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -20,6 +23,11 @@ public class Storage {
     }
 
 
+    /**
+     * Save task list into path specified.
+     * @param taskList task list to be saved.
+     * @throws InvalidFileException failed to save.
+     */
     public void save(TaskList taskList) throws InvalidFileException {
         ArrayList<Task> currTaskList = taskList.getTaskList();
         File saved = new File(this.path);
@@ -37,6 +45,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Load saved file into task list.
+     * @return TaskList
+     * @throws InvalidFileException failed to load, read or create new file.
+     */
     public TaskList load() throws InvalidFileException {
         TaskList taskList = new TaskList();
         File dir = new File("data");

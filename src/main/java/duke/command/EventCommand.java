@@ -13,6 +13,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
 
+/**
+ * EventCommand class to execute command that add an event into
+ * the TaskList.
+ */
 public class EventCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Got it. I've added this task:\n";
     public static final String MESSAGE_PARSE_ERROR = "Invalid date and time format.\n" +
@@ -22,6 +26,14 @@ public class EventCommand extends Command {
         super(input);
     }
 
+    /**
+     * Execute the command to add an event into the task list.
+     * @param tasks TaskList of tasks.
+     * @param ui Ui object from the Ui class.
+     * @param storage Storage object from the Storage class.
+     * @throws InvalidInputException incorrect input or wrong format for date and time.
+     * @throws InvalidFileException failed to save file.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 5) {
