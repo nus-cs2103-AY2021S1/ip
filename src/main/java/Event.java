@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
  */
 
 public class Event extends Task {
+
     /**The date and time at which the event begins. */
     private LocalDateTime start;
 
@@ -85,7 +86,8 @@ public class Event extends Task {
             return true;
         } else if (o instanceof Event) {
             Event task = (Event) o;
-            return this.description.equals(task.description) && this.start.equals(task.start) && this.end.equals(task.end) && this.isDone == task.isDone;
+            return this.description.equals(task.description) && this.start.equals(task.start)
+                    && this.end.equals(task.end) && this.isDone == task.isDone;
         } else {
             return false;
         }
@@ -99,9 +101,11 @@ public class Event extends Task {
     @Override
     public String saveFormat() {
         if (isDone) {
-            return "E | 1 | " + this.getDescription() + " | " + this.start.format(inputFormatter) + " to " + this.end.format(inputFormatter);
+            return "E | 1 | " + this.getDescription() + " | " + this.start.format(inputFormatter)
+                    + " to " + this.end.format(inputFormatter);
         } else {
-            return "E | 0 | " + this.getDescription() + " | " + this.start.format(inputFormatter) + " to " + this.end.format(inputFormatter);
+            return "E | 0 | " + this.getDescription() + " | " + this.start.format(inputFormatter)
+                    + " to " + this.end.format(inputFormatter);
         }
     }
 }

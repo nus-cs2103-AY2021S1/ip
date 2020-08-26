@@ -6,11 +6,11 @@ import java.util.ArrayList;
 public class TaskList {
 
     /** An array list consisting of tasks. */
-    ArrayList<Task> list;
+    private ArrayList<Task> list;
 
     /**
      * Constructs a TaskList by assigning the list parameter to a newly constructed
-     * empty task list.
+     * empty Task ArrayList.
      */
     public TaskList() {
         list = new ArrayList<Task>();
@@ -58,12 +58,17 @@ public class TaskList {
      *
      * @return the size of list.
      */
-    public int size() {return list.size(); }
+    public int size() {
+        return list.size();
+    }
 
     /**
      * Returns a boolean value indicating if the TaskList is empty.
      *
      * @return true or false if the list is empty or not empty respectively.
      */
-    public boolean isEmpty() {return list.isEmpty();}
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
 }

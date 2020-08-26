@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 public class AddCommand extends Command {
     /** The task to be added to the TaskList when the command is executed. */
-    Task task;
+    private Task task;
 
     /** Constructs an AddCommand with a task assigned to the task parameter. */
     AddCommand(Task task) {

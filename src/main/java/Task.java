@@ -1,5 +1,6 @@
 package main.java;
 
+
 /**
  * Encapsulates a Task.
  */
@@ -39,7 +40,7 @@ public class Task {
      * @return the status icon of the task.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     /**

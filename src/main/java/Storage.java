@@ -1,12 +1,12 @@
 package main.java;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
-
 
 /**
  * This class consists of methods pertaining to the management of data storage for Bob.
@@ -14,10 +14,10 @@ import java.util.Scanner;
 public class Storage {
 
     /** The File where data will be stored. */
-    File save;
+    private File save;
 
     /** The FileWriter which will write data to storage. */
-    FileWriter writer;
+    private FileWriter writer;
 
 
     /**
@@ -105,6 +105,7 @@ public class Storage {
      */
     public void updateSave(TaskList tasks) throws BobIOException, BobIndexOutOfBoundsException {
         FileWriter deleter = null;
+
         try {
             deleter = new FileWriter(save);
         } catch (IOException e) {
@@ -119,6 +120,7 @@ public class Storage {
                 throw new BobIOException();
             }
         }
+
         try {
             deleter.close();
         } catch (IOException e) {
@@ -165,5 +167,4 @@ public class Storage {
             throw new BobIOException();
         }
     }
-
 }

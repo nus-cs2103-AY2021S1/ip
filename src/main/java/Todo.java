@@ -19,5 +19,9 @@ public class Todo extends Task{
      * @param isDone indicates if the todo is completed.
      * @param description brief description of the todo.
      */
-    public Todo(boolean isDone, String description) {super(isDone, description);}
+
+    public Todo(boolean isDone, String description) {
+        super(isDone, description);
+    }
+
 }

@@ -3,6 +3,7 @@ package main.java;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 /**
  * This class consists of methods which prints out information that may be helpful to the user.
  * It also consists of a single method which accepts user input, which may be passed to Bob's

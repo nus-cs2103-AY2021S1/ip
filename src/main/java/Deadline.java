@@ -42,12 +42,14 @@ public class Deadline extends Task {
         this.deadline = LocalDateTime.parse(deadline, inputFormatter);
     }
 
+
     /**
      * Returns a String representation of the deadline with the format of outputFormatter.
      *
      * @return a String representation of the deadline with the format of outputFormatter.
      */
-    String getDeadline() {
+
+    public String getDeadline() {
         return this.deadline.format(outputFormatter).toString();
     }
 

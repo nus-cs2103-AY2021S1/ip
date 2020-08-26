@@ -1,7 +1,7 @@
 package main.java;
+
 import main.java.Command;
 import main.java.Parser;
-
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

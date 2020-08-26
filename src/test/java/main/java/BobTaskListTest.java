@@ -17,7 +17,8 @@ public class BobTaskListTest {
             Assertions.assertEquals(tasks.get(1), new Task("empty"));
             Assertions.fail();
         } catch (BobIndexOutOfBoundsException e) {
-            Assertions.assertEquals("There are no tasks on the list with the provided index. Please check the list and try again!", e.getMessage());
+            Assertions.assertEquals("There are no tasks on the list with the provided index."
+                    + " Please check the list and try again!", e.getMessage());
         }
     }
 
