@@ -1,4 +1,9 @@
-import java.io.*;
+import java.io.FileReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -36,6 +41,8 @@ public class Duke {
                 } else if (command.equals("event")) {
                     handleTask(TaskType.EVENT, commandArr);
                     saveData();
+                } else if (command.equals("get")) {
+                    getTaskByDate(commandArr);
                 } else {
                     throw new DukeException("I am sorry, I don't know what that means :(");
                 }
@@ -56,8 +63,7 @@ public class Duke {
             BufferedReader br = new BufferedReader(reader);
             String line = br.readLine();
             while (line != null) {
-                Task task = readTask(line);
-                taskList.add(task);
+                loadTask(line);
                 line = br.readLine();
             }
             reader.close();
@@ -67,18 +73,22 @@ public class Duke {
 
     }
 
-    public static Task readTask(String line) {
-        String[] taskComponent = line.split("\\|");
-        boolean isComplete = !taskComponent[1].equals("0");
-        String name = taskComponent[2];
-        if (taskComponent[0].equals("T")) {
-            return new Todo(name, isComplete);
-        } else if (taskComponent[0].equals("D")) {
-            String by = taskComponent[3];
-            return new Deadline(name, isComplete, by);
-        } else {
-            String at = taskComponent[3];
-            return new Event(name, isComplete, at);
+    public static void loadTask(String line) {
+        try {
+            String[] taskComponent = line.split("\\|");
+            boolean isComplete = !taskComponent[1].equals("0");
+            String name = taskComponent[2];
+            if (taskComponent[0].equals("T")) {
+                taskList.add(new Todo(name, isComplete));
+            } else if (taskComponent[0].equals("D")) {
+                String by = taskComponent[3];
+                taskList.add(new Deadline(name, isComplete, DateFormat.parseDate(by)));
+            } else {
+                String at = taskComponent[3];
+                taskList.add(new Event(name, isComplete, DateFormat.parseDate(at)));
+            }
+        } catch (DateException e) {
+            printMessage(e.getMessage());
         }
     }
 
@@ -118,7 +128,8 @@ public class Duke {
         if (type.equals("T")) {
             return String.format("%s|%d|%s", type, isComplete, name);
         } else {
-            return String.format("%s|%d|%s|%s", type, isComplete, name, task.getDetails());
+            return String.format("%s|%d|%s|%s", type, isComplete,
+                    name, DateFormat.formatDate(task.getDate()));
         }
 
     }
@@ -146,7 +157,7 @@ public class Duke {
                 }
                 addEvent(detailArr[0], detailArr[1]);
             }
-        } catch (MissingInformationException e) {
+        } catch (MissingInformationException | DateException e) {
             printMessage(e.getMessage());
         }
     }
@@ -174,18 +185,42 @@ public class Duke {
                 "     " + message + "\n    ______________________________________________________");
     }
 
+    public static void getTaskByDate(String[] commandArr) {
+        try {
+            if (commandArr.length < 2 || commandArr[1].isBlank()) {
+                throw new MissingInformationException("Date is missing!");
+            } else {
+                String dateString = commandArr[1];
+                Date date = DateFormat.parseDate(dateString);
+                String output = String.format("Here are the tasks with the date %s:\n", dateString);
+                int counter = 1;
+                for (Task task : taskList) {
+                    if (date.equals(task.getDate())) {
+                        output += String.format("     %d. %s\n", counter, task.getName());
+                        counter++;
+                    }
+                }
+                printMessage(output);
+            }
+        } catch (MissingInformationException | DateException e) {
+            printMessage(e.getMessage());
+        }
+    }
+
     public static void addTodo(String name) {
         Todo todo = new Todo(name, false);
         addTask(todo);
     }
 
-    public static void addDeadline(String name, String by) {
-        Deadline deadline = new Deadline(name, false, by);
+    public static void addDeadline(String name, String by) throws DateException {
+        Date date = DateFormat.parseDate(by);
+        Deadline deadline = new Deadline(name, false, date);
         addTask(deadline);
     }
 
-    public static void addEvent(String name, String at) {
-        Event event = new Event(name, false, at);
+    public static void addEvent(String name, String at) throws DateException {
+        Date date = DateFormat.parseDate(at);
+        Event event = new Event(name, false, date);
         addTask(event);
     }
 

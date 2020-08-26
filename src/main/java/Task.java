@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public abstract class Task {
     protected String name;
     protected boolean isDone;
@@ -21,7 +23,7 @@ public abstract class Task {
         return this.type;
     }
 
-    public abstract String getDetails();
+    public abstract Date getDate();
 
     public void markAsDone() {
         this.isDone = true;

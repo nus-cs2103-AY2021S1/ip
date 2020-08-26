@@ -1,18 +1,22 @@
-public class Event extends Task {
-    protected String at;
+import java.util.Date;
 
-    public Event(String name, boolean isComplete, String at) {
+public class Event extends Task {
+    protected Date at;
+
+
+
+    public Event(String name, boolean isComplete, Date at) {
         super(name, isComplete, TaskType.EVENT);
         this.at = at;
     }
 
     @Override
-    public String getDetails() {
+    public Date getDate() {
         return this.at;
     }
 
     @Override
     public String toString() {
-        return String.format("[E] %s (at: %s)", super.toString(), this.at);
+        return String.format("[E] %s (at: %s)", super.toString(), DateFormat.formatDate(this.at));
     }
 }

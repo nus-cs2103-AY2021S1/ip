@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public class Todo extends Task {
     public Todo(String name, boolean isComplete) {
         super(name, isComplete, TaskType.TODO);
@@ -9,7 +11,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String getDetails() {
-        return "";
+    public Date getDate() {
+        return null;
     }
 }

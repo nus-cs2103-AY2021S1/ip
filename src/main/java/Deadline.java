@@ -1,18 +1,21 @@
+import java.util.Date;
 public class Deadline extends Task {
-    protected String by;
+    protected Date by;
 
-    public Deadline(String name, boolean isComplete, String by) {
+
+    public Deadline(String name, boolean isComplete, Date by) {
         super(name, isComplete, TaskType.DEADLINE);
         this.by = by;
     }
 
     @Override
-    public String getDetails() {
+
+    public Date getDate() {
         return this.by;
     }
 
     @Override
     public String toString() {
-        return String.format("[D] %s (by: %s)", super.toString(), this.by);
+        return String.format("[D] %s (by: %s)", super.toString(), DateFormat.formatDate(this.by));
     }
 }
