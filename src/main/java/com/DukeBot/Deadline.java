@@ -1,6 +1,7 @@
+package com.DukeBot;
+
 public class Deadline extends Task{
     private final String deadline;
-
     Deadline(String task, String deadline, boolean isDone)throws DukeException{
         super(task,isDone);
         this.deadline = deadline;

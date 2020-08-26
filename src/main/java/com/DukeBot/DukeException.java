@@ -1,3 +1,5 @@
+package com.DukeBot;
+
 public class DukeException extends Exception{
     private final String errorMsg;
 

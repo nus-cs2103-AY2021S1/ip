@@ -1,3 +1,5 @@
+package com.DukeBot;
+
 public class Task {
     //This class manages the information of each task within Dukes Task List
     protected final String task;

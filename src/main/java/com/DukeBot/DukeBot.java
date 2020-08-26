@@ -1,3 +1,5 @@
+package com.DukeBot;
+
 import java.util.Scanner;
 
 public class DukeBot{

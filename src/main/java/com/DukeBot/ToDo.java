@@ -1,3 +1,5 @@
+package com.DukeBot;
+
 public final class ToDo extends Task{
 
     ToDo(String task, boolean isDone) throws DukeException{
