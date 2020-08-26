@@ -6,22 +6,46 @@ import Duke.storage.ReadFile;
 import Duke.storage.WriteIn;
 import Duke.task.*;
 
+/**
+ * This class deals with the strings from the client
+ * and enable the string to make sense to Duke.
+ */
 public class Parser {
     public static TaskList<Task> taskList;
 
+    /**
+     * This is to initialize the Parser.
+     */
     public Parser() {
         taskList = new TaskList<>();
     }
 
+    /**
+     * This method is to refresh the taskList.
+     */
     public static void reloadTaskList() {
         taskList = new TaskList<>();
         new ReadFile(Directory.FILEDIRECTORY.toString()).readFile();
     }
 
+    /**
+     * Return true if the input from the
+     * user is "bye".
+     *
+     * @param inputFromClient Input from the
+     *                        user.
+     * @return Return true if input is "bye".
+     */
     public boolean isEnd(String inputFromClient) {
         return inputFromClient.equals(Status.BYE.name().toLowerCase());
     }
 
+    /**
+     * The method is to run the Parser.
+     *
+     * @param order The order is the string after
+     *              being shortened by Formating.shorten().
+     */
     public static void run(String order) {
         reloadTaskList();
         if (order.equals(Status.LIST.name().toLowerCase())) {
@@ -43,6 +67,13 @@ public class Parser {
         }
     }
 
+    /**
+     * This method is to set done the corresponding
+     * task on both the taskList and Duke.txt.
+     *
+     * @param order The order is the string after
+     *              being shortened by Formating.shorten().
+     */
     public static void done(String order) {
         try {
             int num =
@@ -64,6 +95,13 @@ public class Parser {
         }
     }
 
+    /**
+     * This method is to delete the corresponding
+     * task on both the taskList and Duke.txt.
+     *
+     * @param order The order is the string after
+     *              being shortened by Formating.shorten().
+     */
     public static void delete(String order) {
         try {
             int num =
@@ -91,6 +129,17 @@ public class Parser {
         }
     }
 
+    /**
+     * This method is to identify the type of Tasks
+     * from the description passed down from the upper
+     * level, which is essentially the input from the
+     * user.
+     *
+     * @param description The description passed down
+     *                    from the upper level, which
+     *                    is essentially the input from
+     *                    the user.
+     */
     public static void identifier(String description) {
         int len = description.length();
         int pointer = 0;
