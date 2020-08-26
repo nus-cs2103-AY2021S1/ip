@@ -6,10 +6,18 @@ public class TaskList {
         this.arr = arr;
     }
 
+    /**
+     * Adds the task to arr.
+     * @param t task that is being added.
+     */
     public void addTask(Task t) {
         arr.add(t);
     }
 
+    /**
+     * Removes the task to arr.
+     * @param t task that is being added.
+     */
     public void removeTask(Task t) {
         arr.remove(t);
     }

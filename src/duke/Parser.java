@@ -7,6 +7,13 @@ import java.util.ArrayList;
 public class Parser {
     Parser() {}
 
+    /**
+     * Processes all the commands given by the user and triggers functions correspondingly.
+     * @param command command given by the user
+     * @param tl the TaskList object defined in Duke.
+     * @param ui the Ui object defined in Duke.
+     * @throws Exception
+     */
     public static void processCommand(String command, TaskList tl, Ui ui) throws Exception {
         int indexOfSlash = command.indexOf('/');
         ArrayList<Task> arr = tl.arr;

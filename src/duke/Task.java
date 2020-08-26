@@ -15,14 +15,25 @@ public class Task {
         this.time = time;
     }
 
+    /**
+     * Returns a string of icon.
+     * @return String
+     */
     String getIcon() {
         return isDone ? "[" + "\u2713" + "] " : "[" + "\u2718" + "] ";
     }
 
+    /**
+     * Updates the task as done.
+     */
     void taskIsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Returns a string of indicator.
+     * @return String
+     */
     String getIndicator() {
         return "[T]";
     }

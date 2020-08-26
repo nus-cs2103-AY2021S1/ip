@@ -22,6 +22,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the whole program.
+     * @throws Exception
+     */
     public void run() throws Exception {
         ui.start();
     }
