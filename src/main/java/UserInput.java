@@ -20,8 +20,6 @@ public class UserInput {
         BYE,
         LIST,
     }
-
-
     void handleFile() {
         try {
             File file = new File("data/duke.txt");

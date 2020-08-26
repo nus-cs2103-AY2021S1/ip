@@ -1,9 +1,30 @@
+import java.io.File;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) throws IOException {
+        UserInput userinput = new UserInput();
+
+        String path = "."+File.separator+"data"+File.separator;
+        String fileName = "duke.txt";
+
+        File file = new File(path);
+        File dukeSave = new File(path + fileName);
+        if (!file.exists()) {
+            file.mkdirs();
+            dukeSave.createNewFile();
+        } else {
+            if (dukeSave.exists()) {
+                userinput.handleFile();
+            } else {
+                dukeSave.createNewFile();
+            }
+        }
+
+
+
         Scanner sc = new Scanner(System.in);
         System.out.println(
                 "Hello from\n" +
@@ -17,9 +38,7 @@ public class Duke {
                 "     What can I do for you?\n" +
                 "____________________________________________________________\n");
         boolean stop = false;
-        UserInput userinput = new UserInput();
-        userinput.handleFile();
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             try {
                 String input = sc.nextLine();
                 String output = userinput.getDukeResponse(input);
