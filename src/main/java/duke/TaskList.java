@@ -5,13 +5,11 @@ import java.io.IOException;
 
 public class TaskList {
     private ArrayList<Task> items;
-    private int total;
     Storage storage;
 
     public TaskList() {
         this.storage = new Storage();
         this.items = storage.readData();
-        this.total = items.size();
     }
 
     public void bye() {
@@ -24,20 +22,41 @@ public class TaskList {
 
     public void add(Task toAdd) {
         this.items.add(toAdd);
-        this.total++;
-        Ui.addLine(String.format("    Got it. I've added this task:\n    %s\n    Now you have %d tasks in the list.", toAdd, this.total));
+        Ui.addLine(String.format("    Got it. I've added this task:\n    %s\n    Now you have %d tasks in the list.", toAdd, this.items.size()));
     }
 
     public void display() {
         String res = "Here are your tasks:\n";
-        for (int i = 0; i < this.total; i++) {
+        for (int i = 0; i < this.items.size(); i++) {
             res += String.format("    %d.%s\n", i + 1, this.items.get(i));
         }
         Ui.addLine(res);
     }
 
+    public void display(ArrayList<Task> arrayList) {
+        String res = "Here are your tasks:\n";
+        for (int i = 0; i < arrayList.size(); i++) {
+            res += String.format("    %d.%s\n", i + 1, arrayList.get(i));
+        }
+        Ui.addLine(res);
+    }
+
+    public void find(String keyWord) throws InvalidDescriptionException {
+        String[] arr = keyWord.split(" ");
+        if (keyWord.length() == 4 || arr[1].equals("")) {
+            throw new InvalidDescriptionException();
+        }
+        ArrayList<Task> temp = new ArrayList<>();
+        for (Task task : this.items) {
+            if (task.toString().contains(arr[1])) {
+                temp.add(task);
+            }
+        }
+        this.display(temp);
+    }
+
     public void completeTask(int idx) throws InvalidIndexException {
-        if (idx < 0 || idx >= this.total) {
+        if (idx < 0 || idx >= this.items.size()) {
             throw new InvalidIndexException();
         }
         Task t = this.items.get(idx);
@@ -46,12 +65,11 @@ public class TaskList {
     }
 
     public void deleteTask(int idx) throws InvalidIndexException {
-        if (idx < 0 || idx >= this.total) {
+        if (idx < 0 || idx >= this.items.size()) {
             throw new InvalidIndexException();
         }
         Task t = this.items.get(idx);
         this.items.remove(idx);
-        this.total--;
-        Ui.addLine(String.format("    Nice! I've removed this task:\n    %s\n    Now you have %d tasks in the list.", t, this.total));
+        Ui.addLine(String.format("    Nice! I've removed this task:\n    %s\n    Now you have %d tasks in the list.", t, this.items.size()));
     }
 }
