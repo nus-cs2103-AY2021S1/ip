@@ -42,8 +42,12 @@ public class InputManager {
             ParseShow.execute();
         }
         else if(current.equals("filter")){
-            String date = sc.next();
-            ParseFilter.execute(date);
+            try {
+                String date = sc.next();
+                ParseFilter.execute(date);
+            } catch(NoSuchElementException e){
+                throw new ErrorExceptions("Missing date!");
+            }
         }
         else{ // add tasks
             ParseAddTask.execute(current,input);

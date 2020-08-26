@@ -57,7 +57,7 @@ public class TaskManager {
     public static String read(task t){
         String done = "";
         if(t.taskCompleted()){
-            done = "[✓]";
+            done = "[O]";
         }
         else{
             done = "[X]";

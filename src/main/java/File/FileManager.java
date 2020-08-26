@@ -95,7 +95,7 @@ public class FileManager{
             char done = current.charAt(4);
             String d = "";
             d = d + done;
-            if(d.equals("✓")){
+            if(d.equals("O")){
                 return true;
             } else if (d.equals("X")){
                 return false;

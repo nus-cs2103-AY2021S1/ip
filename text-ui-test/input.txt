@@ -19,4 +19,7 @@ done 2
 list
 delete 1
 list
+show
+filter
+filter 12-12-2020
 bye

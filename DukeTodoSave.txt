@@ -1,5 +1,5 @@
 [D][X] name (by: 12 Dec 2020 1200)
-[D][X] t (by: 12 Dec 2020 1200)
+[D][O] t (by: 12 Dec 2020 1200)
 [T][X] return 
 [D][X] test (by: 12 Dec 1212 1200)
 [T][X] read 
