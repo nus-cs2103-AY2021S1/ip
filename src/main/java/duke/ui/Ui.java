@@ -69,6 +69,10 @@ public class Ui {
         }
     }
 
+    public void printFindMessage() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
     private void listAllTasks(TaskList taskList) {
         for (int i = 0; i < taskList.size(); i++) {
             try {

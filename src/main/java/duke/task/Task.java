@@ -23,6 +23,10 @@ public abstract class Task {
         this.isDone = !isDone;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public abstract String formatTaskForDatabase();
 
     @Override
