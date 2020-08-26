@@ -10,6 +10,10 @@ import java.time.format.FormatStyle;
 
 public class Event extends Task {
 
+    /**
+     * Encapsulates data and methods specific to Event tasks.
+     */
+
     private final LocalDate startDate;
     private final LocalTime startTime;
     private final String originalArguments;

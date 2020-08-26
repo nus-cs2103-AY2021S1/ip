@@ -9,6 +9,10 @@ import duke.task.TaskList;
 import java.io.IOException;
 
 public class DeadlineCommand extends Command {
+
+    /**
+     * Encapsulates data and methods specific to the Deadline command.
+     */
     
     private final String argument;
 

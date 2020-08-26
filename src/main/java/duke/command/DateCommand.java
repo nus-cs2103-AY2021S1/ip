@@ -6,6 +6,10 @@ import duke.UI;
 import duke.task.TaskList;
 
 public class DateCommand extends Command {
+
+    /**
+     * Encapsulates data and methods specific to the Date command.
+     */
     
     private final String argument;
 

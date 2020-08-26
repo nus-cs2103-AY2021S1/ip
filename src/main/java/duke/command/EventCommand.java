@@ -10,6 +10,10 @@ import java.io.IOException;
 
 public class EventCommand extends Command {
     
+    /**
+     * Encapsulates data and methods specific to the Event command.
+     */
+    
     private final String argument;
 
     public EventCommand(String argument) {

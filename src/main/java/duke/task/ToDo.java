@@ -5,6 +5,10 @@ import duke.DukeException;
 public class ToDo extends Task {
 
     /**
+     * Encapsulates data and methods specific to ToDo tasks.
+     */
+
+    /**
      * Creates a new instance of the class if the input is valid.
      * 
      * @param argument Argument keyed in by the user when creating the task.

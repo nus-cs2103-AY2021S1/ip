@@ -6,6 +6,10 @@ import duke.task.TaskList;
 
 public class FindCommand extends Command {
 
+    /**
+     * Encapsulates data and methods specific to the Find command.
+     */
+
     private final String argument;
 
     public FindCommand(String argument) {

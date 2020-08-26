@@ -9,6 +9,10 @@ import java.nio.file.Paths;
 
 public class Duke {
 
+    /**
+     * A personal assistant chat bot to help users keep track of tasks.
+     */
+
     private final UI ui;
     private final TaskList taskList;
     private final Storage storage;

@@ -5,6 +5,10 @@ import duke.UI;
 import duke.task.TaskList;
 
 public class ByeCommand extends Command {
+
+    /**
+     * Encapsulates data and methods specific to the Bye command.
+     */
     
     public ByeCommand() {
     }

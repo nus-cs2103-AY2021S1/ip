@@ -6,6 +6,10 @@ import duke.task.TaskList;
 
 public class ListCommand extends Command {
 
+    /**
+     * Encapsulates data and methods specific to the List command.
+     */
+
     public ListCommand() {
     }
 

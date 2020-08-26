@@ -8,6 +8,10 @@ import duke.task.TaskList;
 import java.io.IOException;
 
 public class DoneCommand extends Command {
+
+    /**
+     * Encapsulates data and methods specific to the Done command.
+     */
     
     private final int argument;
 

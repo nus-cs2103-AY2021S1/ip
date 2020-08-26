@@ -7,6 +7,10 @@ import duke.task.TaskList;
 
 public class InvalidCommand extends Command {
 
+    /**
+     * Encapsulates data and methods specific to invalid commands.
+     */
+
     public InvalidCommand() {
     }
 

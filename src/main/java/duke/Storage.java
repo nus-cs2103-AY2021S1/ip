@@ -9,7 +9,11 @@ import java.nio.file.Path;
 import java.util.regex.Pattern;
 
 public class Storage {
-    
+
+    /**
+     * Encapsulates behaviour for all storage related actions.
+     */
+
     private final Path filePath;
     
     private Storage(Path filePath) {

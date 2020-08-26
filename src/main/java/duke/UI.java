@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 public class UI {
 
+    /**
+     * Encapsulates behaviour for all UI related actions.
+     */
+
     private static final String DIVIDER = "___________________________________________________________________________";
 
     private static final String LOGO = "             _        ______   _____    ______   _____  \n"

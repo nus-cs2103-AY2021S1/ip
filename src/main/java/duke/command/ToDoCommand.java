@@ -9,7 +9,11 @@ import duke.task.ToDo;
 import java.io.IOException;
 
 public class ToDoCommand extends Command {
-    
+
+    /**
+     * Encapsulates data and methods specific to the ToDo command.
+     */
+
     private final String argument;
 
     /**

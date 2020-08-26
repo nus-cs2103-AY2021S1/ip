@@ -4,6 +4,10 @@ import java.time.LocalDate;
 
 public abstract class Task {
 
+    /**
+     * Encapsulates information that are shared by all tasks.
+     */
+
     final String taskData;
     protected boolean isDone = false;
 

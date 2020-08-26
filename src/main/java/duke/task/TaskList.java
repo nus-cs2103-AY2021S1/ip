@@ -15,6 +15,10 @@ import java.util.stream.Collectors;
 
 public class TaskList {
 
+    /**
+     * Encapsulates behavior and data for the TaskList.
+     */
+
     private final List<Task> tasks;
     
     public TaskList() {

@@ -16,6 +16,10 @@ import duke.command.ToDoCommand;
 public class Parser {
 
     /**
+     * Encapsulates behavior for parsing commands.
+     */
+
+    /**
      * Returns a Command object based on the input keyed in to Duke by
      * the user.
      * 

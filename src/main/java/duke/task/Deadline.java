@@ -10,6 +10,10 @@ import java.time.format.FormatStyle;
 
 public class Deadline extends Task {
 
+    /**
+     * Encapsulates data and methods specific to Deadline tasks.
+     */
+    
     private final LocalDate deadlineDate;
     private final LocalTime deadlineTime;
     private final String originalArguments;

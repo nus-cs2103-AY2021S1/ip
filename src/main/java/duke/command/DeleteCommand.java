@@ -8,6 +8,10 @@ import duke.task.TaskList;
 import java.io.IOException;
 
 public class DeleteCommand extends Command {
+
+    /**
+     * Encapsulates data and methods specific to the Delete command.
+     */
     
     private final int argument;
 
