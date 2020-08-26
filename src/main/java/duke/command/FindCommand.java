@@ -31,9 +31,9 @@ public class FindCommand extends Command {
         ArrayList<Task> foundTasks = new ArrayList<>();
         try {
             String keyword = input.split(" ")[1];
-            for (Task t : handler.getTasks()) {
-                if (t.getDescription().contains(keyword)) {
-                    foundTasks.add(t);
+            for (Task task : handler.getTasks()) {
+                if (task.getDescription().contains(keyword)) {
+                    foundTasks.add(task);
                     hasFoundTask = true;
                 }
             }
