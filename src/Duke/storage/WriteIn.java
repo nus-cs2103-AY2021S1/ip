@@ -15,7 +15,7 @@ public class WriteIn {
         this.append_to_file = append_to_file;
     }
 
-    public void writeToFile (String input) {
+    public void writeToFile(String input) {
         try {
             FileWriter writeIn = new FileWriter(path, append_to_file);
             PrintWriter printWrite = new PrintWriter(writeIn);
@@ -25,7 +25,7 @@ public class WriteIn {
             printWrite.close();
 
         } catch (IOException e) {
-            DukeException.FileException();
+            DukeException.fileException();
         }
     }
 }

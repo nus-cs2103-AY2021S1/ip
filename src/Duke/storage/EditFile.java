@@ -33,7 +33,7 @@ public class EditFile {
             reader.close();
             fileWriter.close();
         } catch (IOException e) {
-            DukeException.ReadLineException();
+            DukeException.readLineException();
         }
     }
 
@@ -64,7 +64,7 @@ public class EditFile {
             reader.close();
             fileWriter.close();
         } catch (IOException e) {
-            DukeException.ReadLineException();
+            DukeException.readLineException();
         }
     }
 }
