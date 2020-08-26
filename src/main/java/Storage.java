@@ -1,3 +1,8 @@
+/**
+ * Encapsulates a Storage
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
+
 import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
@@ -6,10 +11,18 @@ import java.util.ArrayList;
 public class Storage {
     protected String fileName;
 
+    /**
+     * Constructor
+     *
+     * @param name is the filename that data is going to be stored in
+     */
     public Storage(String name) {
         this.fileName = name;
     }
 
+    /**
+     * Initialises the file for data to be stored in
+     */
     protected void init() {
         Class myClass = getClass();
         URL url = myClass.getResource("Data.txt");
@@ -18,6 +31,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Imports the data from the data file into a list
+     *
+     * @param list is the list that the data is going to be stored in
+     */
     protected void importSavedDataToList(ArrayList<Task> list) {
         BufferedReader objReader = null;
         try {
@@ -63,6 +81,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Clears all data in the data file
+     */
     protected void clearData() {
         PrintWriter writer = null;
         try {
@@ -74,6 +95,11 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Uploads data from the list onto the data file
+     *
+     * @param list is the list that the data is going to be uploaded from
+     */
     protected void saveListToData(ArrayList<Task> list) {
         this.clearData();
         for (int i = 0; i < list.size(); i++) {
@@ -113,6 +139,4 @@ public class Storage {
             }
         }
     }
-
-
 }

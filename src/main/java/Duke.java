@@ -1,10 +1,8 @@
-import java.io.*;
-import java.net.URL;
-import java.util.ArrayList;
+/**
+ * Main body of application Duke
+ */
+
 import java.util.Scanner;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Duke {
     private Storage storage;
@@ -12,6 +10,9 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Initialises the application
+     */
     private void start() {
         this.storage = new Storage("Data.txt");
         this.tasks = new TaskList();
@@ -22,10 +23,18 @@ public class Duke {
         ui.greet();
     }
 
+    /**
+     * Sends the user input to the parser for processing
+     *
+     * @param input is the String input from the user
+     */
     private void processInput(String input) throws DukeException {
         this.parser.processInput(input);
     }
 
+    /**
+     * Main body of application
+     */
     public static void main(String[] args) throws DukeException {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
