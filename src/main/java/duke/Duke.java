@@ -12,7 +12,7 @@ public class Duke {
     private Storage storage;
 
     /**
-     * Construct the Duke initialized with the path of the target file to store and read.
+     * Constructs the Duke initialized with the path of the target file to store and read.
      *
      * @param filePath
      */
@@ -28,7 +28,7 @@ public class Duke {
     }
 
     /**
-     * Run the Duke.
+     * Runs the Duke.
      */
     public void run() {
         ui.showWelcome();

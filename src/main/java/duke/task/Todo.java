@@ -15,7 +15,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Construct a Todo task assigned the done status.
+     * Constructs a Todo task assigned the done status.
      *
      * @param isDone      the done status of the task.
      * @param description the description of the task.
@@ -27,7 +27,7 @@ public class Todo extends Task {
 
 
     /**
-     * Return the String to be store in files.
+     * Returns the String to be store in files.
      *
      * @return the String to be store in files.
      */
@@ -38,7 +38,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Return the String represents the task.
+     * Returns the String represents the task.
      *
      * @return the String represents the task.
      */

@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class Parser {
 
     /**
-     * Parse the full command to a Array of String.
+     * Parses the full command to a Array of String.
      *
      * @param command the full command from user's input.
      * @return a Array of String parsed from the full command.

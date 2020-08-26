@@ -18,7 +18,7 @@ public abstract class Task {
     }
 
     /**
-     * Get the status of the task.
+     * Gets the status of the task.
      *
      * @return an icon to indicate the status of the task.
      */
@@ -27,21 +27,21 @@ public abstract class Task {
     }
 
     /**
-     * Mark the the status of the task as done.
+     * Marks the the status of the task as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Abstract method for subclass to implement to return a String which to be store in files.
+     * Abstracts method for subclass to implement to return a String which to be store in files.
      *
      * @return the String to be store in files.
      */
     public abstract String toStore();
 
     /**
-     * Return the String represents the task.
+     * Returns the String represents the task.
      *
      * @return the String represents the task.
      */

@@ -27,7 +27,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Construct a Deadline task assigned the done status.
+     * Constructs a Deadline task assigned the done status.
      *
      * @param isDone      the done status of the task.
      * @param description the description of the task.
@@ -38,7 +38,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return the String to be store in files.
+     * Returns the String to be store in files.
      *
      * @return the String to be store in files.
      */
@@ -49,7 +49,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return the String represents the task.
+     * Returns the String represents the task.
      *
      * @return the String represents the task.
      */

@@ -15,14 +15,14 @@ public class TaskList {
     List<Task> taskList;
 
     /**
-     * Construct a new TaskList containing a empty task list.
+     * Constructs a new TaskList containing a empty task list.
      */
     public TaskList() {
         this(new ArrayList<>());
     }
 
     /**
-     * Construct a new TaskList containing a given task list.
+     * Constructs a new TaskList containing a given task list.
      *
      * @param taskList the given List of task.
      */
@@ -31,7 +31,7 @@ public class TaskList {
     }
 
     /**
-     * Execute the command on the list of tasks.
+     * Executes the command on the list of tasks.
      *
      * @param commands an Array of String which contains command and its arguments.
      * @param ui       the Ui to deal with the interactions with users.
@@ -67,7 +67,7 @@ public class TaskList {
     }
 
     /**
-     * Print the list of task through the Ui.
+     * Prints the list of task through the Ui.
      *
      * @param ui the Ui to deal with the interactions with users.
      */
@@ -76,7 +76,7 @@ public class TaskList {
     }
 
     /**
-     * Mark done the task in the list of task of a certain index and print through the Ui.
+     * Marks done the task in the list of task of a certain index and print through the Ui.
      *
      * @param ui    the Ui to deal with the interactions with users.
      * @param index the index of the task in the task list.
@@ -88,7 +88,7 @@ public class TaskList {
     }
 
     /**
-     * Delete the task in the list of task of a certain index and print through the Ui.
+     * Deletes the task in the list of task of a certain index and print through the Ui.
      *
      * @param ui    the Ui to deal with the interactions with users.
      * @param index the index of the task in the task list.
@@ -101,7 +101,7 @@ public class TaskList {
 
 
     /**
-     * Find the tasks containing the given keyword in their description and print through the Ui.
+     * Finds the tasks containing the given keyword in their description and print through the Ui.
      *
      * @param ui  the Ui to deal with the interactions with users.
      * @param key the keyword used to find task in task list.
@@ -117,7 +117,7 @@ public class TaskList {
     }
 
     /**
-     * Add a new task of a certain type with description and time if needed,
+     * Adds a new task of a certain type with description and time if needed,
      * and print through the Ui.
      *
      * @param ui          the Ui to deal with the interactions with users.

@@ -27,7 +27,7 @@ public class Ui {
     }
 
     /**
-     * Print welcome.
+     * Prints welcome.
      */
     public void showWelcome() {
         System.out.println(line
@@ -37,7 +37,7 @@ public class Ui {
     }
 
     /**
-     * Read the full command from user's input.
+     * Reads the full command from user's input.
      *
      * @return String of the next input line.
      */
@@ -46,7 +46,7 @@ public class Ui {
     }
 
     /**
-     * Print the error message of a DukeException.
+     * Prints the error message of a DukeException.
      *
      * @param eMsg the error message of the DukeException.
      */
@@ -61,7 +61,7 @@ public class Ui {
     }
 
     /**
-     * Print out the list of tasks.
+     * Prints out the list of tasks.
      *
      * @param taskList the list of tasks.
      */
@@ -81,7 +81,7 @@ public class Ui {
     }
 
     /**
-     * Print out the Done command executed on a certain task.
+     * Prints out the Done command executed on a certain task.
      *
      * @param task the task to be done.
      */
@@ -93,7 +93,7 @@ public class Ui {
     }
 
     /**
-     * Print out the Delete command executed on a certain task.
+     * Prints out the Delete command executed on a certain task.
      *
      * @param task the task to be deleted.
      * @param size the size of the task list after deletion.
@@ -107,7 +107,7 @@ public class Ui {
     }
 
     /**
-     * Print out the Add command.
+     * Prints out the Add command.
      *
      * @param task the task to be added.
      * @param size the size of the task list after addition.
@@ -121,7 +121,7 @@ public class Ui {
     }
 
     /**
-     * Print out the list of tasks which was found by find command.
+     * Prints out the list of tasks which was found by find command.
      *
      * @param findResult the list of tasks which was found.
      */
@@ -141,7 +141,7 @@ public class Ui {
     }
 
     /**
-     * Say good bye to user.
+     * Says good bye to user.
      */
     public void bye() {
         System.out.println(line + " Bye. Hope to see you again soon!\n" + line);
