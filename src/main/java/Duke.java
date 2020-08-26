@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Duke is a chatbot that allows users to send input to perform tasks.
+ * Duke is a chatbot that allows users to send input to perform tasks
  */
 public class Duke {
     private Storage storage;
