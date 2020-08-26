@@ -17,6 +17,14 @@ public class Task {
     this.isDone = true;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Task task = (Task) o;
+    return isDone == task.isDone && description.equals(task.description);
+  }
+
   public String toString() {
     return String.format("[%s] %s", this.getStatusIcon(), this.description);
   }

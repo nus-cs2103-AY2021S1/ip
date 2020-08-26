@@ -59,4 +59,31 @@ public class DukeTaskTest {
         .equals(
             "[E][\u2713] Conduct Event Test: Mark Task Done (at: Wed, 26/Aug/2020 1250 till Wed, 26/Aug/2020 1950)");
   }
+
+  @Test
+  public void equalsTest_testToDo() {
+    Todo todo = new Todo("Conduct ToDo Test: equals");
+    Todo todoTest = new Todo("Conduct ToDo Test: equals");
+    assert todo.equals(todoTest);
+  }
+
+  @Test
+  public void equalsTest_testDeadline() {
+    LocalDateTime testTime = LocalDateTime.of(2020, 8, 26, 12, 50);
+    Deadline deadline = new Deadline("Conduct Deadline Test: equals", testTime);
+    LocalDateTime testTime2 = LocalDateTime.of(2020, 8, 26, 12, 50);
+    Deadline deadlineTest = new Deadline("Conduct Deadline Test: equals", testTime2);
+    assert deadline.equals(deadlineTest);
+  }
+
+  @Test
+  public void equalsTest_testEvent() {
+    LocalDateTime testStartTime = LocalDateTime.of(2020, 8, 26, 12, 50);
+    LocalDateTime testEndTime = LocalDateTime.of(2020, 8, 26, 19, 50);
+    Event event = new Event("Conduct Event Test: Mark Task Done", testStartTime, testEndTime);
+    LocalDateTime testStartTime2 = LocalDateTime.of(2020, 8, 26, 12, 50);
+    LocalDateTime testEndTime2 = LocalDateTime.of(2020, 8, 26, 19, 50);
+    Event eventTest = new Event("Conduct Event Test: Mark Task Done", testStartTime2, testEndTime2);
+    assert event.equals(eventTest);
+  }
 }
