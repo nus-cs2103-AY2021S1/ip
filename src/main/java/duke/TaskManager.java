@@ -67,7 +67,13 @@ public class TaskManager {
     public void markTaskAsDone(Task task) {
         task.markAsDone();
     }
-    
+
+    /**
+     * Finds all matching tasks with the specified keyword.
+     *
+     * @param keyword The keyword used to find matching tasks.
+     * @return The list of tasks that match the keyword.
+     */
     public List<Task> findTasks(String keyword) {
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {

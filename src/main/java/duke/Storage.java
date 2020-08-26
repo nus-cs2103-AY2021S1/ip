@@ -71,7 +71,7 @@ public class Storage {
             return tasks;
         } catch (FileNotFoundException e) {
             String errorMessage = "No history found, "
-                    + "starting up with no saved records...";
+                    + "starting up with no saved records...\n";
             throw new DukeException(errorMessage);
         }
     }
@@ -104,7 +104,8 @@ public class Storage {
             }
             myWriter.close();
         } catch (IOException e) {
-            String errorMessage = "File path specified could not be created or opened, unable to save tasks :(";
+            String errorMessage = "File path specified could not be created or opened,"
+                    + "unable to save tasks :(";
             throw new DukeException(errorMessage);
         }
     }
