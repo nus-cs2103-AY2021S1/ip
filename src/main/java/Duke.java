@@ -1,34 +1,39 @@
-import java.io.IOException;
 import java.util.Scanner;
+import java.io.IOException;
+
 import java.util.ArrayList;
-import java.util.List;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+
 
 
 public class Duke {
 
     public static void main(String[] args) {
+
+        // read file
         String filePath = "data/duke.txt";
-        String fileName = "duke.txt";
-        String dirPath = "data";
 
         try {
             FileReading.printFileContents(filePath);
         } catch (FileNotFoundException e) { // if the required file/path directory is not yet created
             System.out.println("Creating the storage file...");
 
-            // creating new directory(s)
-            File parent = new File("dirPath");
-            if (!parent.mkdirs()) {
-                System.err.println("Could not create parent directories ");
-            } try { //creating the new file
-                File newFile = new File(parent, fileName);
-                boolean b = newFile.createNewFile();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            File f = new File(filePath);
+            if(!f.getParentFile().exists()){
+                f.getParentFile().mkdirs(); //create directory if not created
             }
+
+            if(!f.exists()){
+                try {
+                    f.createNewFile(); // create file if not created
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            // read the file again
             try {
                 FileReading.printFileContents(filePath);
             } catch (FileNotFoundException ex) {
@@ -115,21 +120,20 @@ public class Duke {
         }else {
                 if (pieces.length == 1) {
                     switch (pieces[0]) {
-                        case "todo":
-                            ex = new InvalidInputException("Heyy, you forget the description for your todo!");
-                            break;
+                    case "todo":
+                        ex = new InvalidInputException("Heyy, you forget the description for your todo!");
+                        break;
+                    case "deadline":
+                        ex = new InvalidInputException("Heyy, you forget the description for your deadline!");
+                        break;
 
-                        case "deadline":
-                            ex = new InvalidInputException("Heyy, you forget the description for your deadline!");
-                            break;
+                    case "event":
+                        ex = new InvalidInputException("Heyy, you forget the description for your event!");
+                        break;
 
-                        case "event":
-                            ex = new InvalidInputException("Heyy, you forget the description for your event!");
-                            break;
-
-                        default:
-                            ex = new InvalidInputException("Ah oh! I didn't know what that means >n<, sorry! ");
-                            break;
+                    default:
+                        ex = new InvalidInputException("Ah oh! I didn't know what that means >n<, sorry! ");
+                        break;
                     }
                     System.err.println(line + ex.getMessage() + "\n" + line);
                 } else {
