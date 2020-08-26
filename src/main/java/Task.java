@@ -12,6 +12,11 @@ public class Task {
                 + this.description;
     }
 
+    public String toStringFileFormat() {
+        return "[" + getStatusIcon() + "] "
+                + this.description;
+    }
+
     public void setDone() {
         this.isDone = true;
     }

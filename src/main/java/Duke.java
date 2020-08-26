@@ -16,7 +16,7 @@ public class Duke {
     public static String listToString(ArrayList<Task> taskList) {
         String taskListStr = "";
         for (Task t : taskList) {
-            taskListStr += t.toString() + "\n";
+            taskListStr += t.toStringFileFormat() + "\n";
         }
         return taskListStr;
     }
@@ -99,6 +99,7 @@ public class Duke {
                                 .split("\\s[(]by:\\s")[0];
                         String by = taskString.split("  ")[1]
                                 .split("\\s[(]by:\\s")[1];
+                        by = by.substring(0, by.length() - 1); // remove parentheses at the end
                         Deadline d = new Deadline(description, by);
                         if (isDone) {
                             d.setDone();
@@ -114,6 +115,7 @@ public class Duke {
                         description = " " + stringSplit[0];
                         String start = stringSplit[1].split("-")[0];
                         String end = stringSplit[1].split("-")[1];
+                        end = end.substring(0, end.length() - 1); // remove parentheses at the end
                         Event e = new Event(description, start, end);
                         if (isDone) {
                             e.setDone();
