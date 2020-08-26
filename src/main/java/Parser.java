@@ -5,7 +5,7 @@ import java.util.Scanner;
  * Parser class deals with making sense of user input.
  */
 public class Parser {
-
+    
     /**
      * Takes in user input and processes it, producing an output.
      * @param ui the Ui currently in use.
@@ -14,8 +14,9 @@ public class Parser {
      */
     public static void echo(Ui ui, TaskList taskList, Storage storage) {
         ui.printHi();
-        storage.load(taskList, ui);
         Scanner sc = new Scanner(System.in);
+        storage.load(taskList, ui);
+        
         while (true) {
             String input = sc.nextLine();
             try {
