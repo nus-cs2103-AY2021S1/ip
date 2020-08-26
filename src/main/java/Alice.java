@@ -4,10 +4,20 @@ import java.util.Scanner;
 public class Alice {
     private static final String PROMPT = " > ";
     private static final String DIVIDER = "____________________________________________________________\n";
-    private final ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
+    private final Storage storage;
 
-    public Alice() {
-        tasks = new ArrayList<>();
+    public Alice(String filePath) {
+        storage = new Storage(filePath);
+        try {
+            // Read stored data
+            tasks = storage.load();
+        } catch (AliceException ex) {
+            tasks = new ArrayList<>();
+            System.out.print(ex.getMessage() + "\n" + DIVIDER);
+        } finally {
+            System.out.print(greet());
+        }
     }
 
     public boolean canContinue(String input) {
@@ -65,6 +75,7 @@ public class Alice {
         try {
             int index = Integer.parseInt(s_index) - 1;
             tasks.get(index).markAsDone();
+            storage.save(tasks);
             return "Great work! I've marked this task as done:\n    " + tasks.get(index);
         } catch (NumberFormatException e) {
             throw new AliceException("That is not a valid number.");
@@ -77,6 +88,7 @@ public class Alice {
         try {
             int index = Integer.parseInt(s_index) - 1;
             Task removed = tasks.remove(index);
+            storage.save(tasks);
             return "Roger. I've removed this task from your list:\n    "
                     + removed
                     + "\nNow you have " + tasks.size() + " task in your list";
@@ -127,7 +139,8 @@ public class Alice {
         }
     }
 
-    private String addTask(Task t) {
+    private String addTask(Task t) throws AliceException {
+        storage.saveToLastLine(t);
         tasks.add(t);
         return "Roger. I've added the task to your list:\n    " + t
                 + "\nNow you have " + tasks.size() + " task in your list";
@@ -171,8 +184,7 @@ public class Alice {
     }
 
     public static void main(String[] args) {
-        Alice alice = new Alice();
-        System.out.print(alice.greet());
+        Alice alice = new Alice("data/tasks.txt");
 
         Scanner sc = new Scanner(System.in);
 
