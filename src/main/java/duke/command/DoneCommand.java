@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
         try {
             ui.printDone(taskList.setDone(i));
             storage.refresh(taskList);
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Sorry something went wrong!");
         }
     }

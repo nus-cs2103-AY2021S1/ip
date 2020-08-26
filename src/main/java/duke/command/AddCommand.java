@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 import duke.tasks.Task;
+import duke.ui.Ui;
 
 import java.io.IOException;
 
@@ -20,7 +20,7 @@ public class AddCommand extends Command {
             taskList.add(this.task);
             ui.printAdd(this.task, taskList.size());
             storage.add(this.task);
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Something went wrong!");
         }
     }

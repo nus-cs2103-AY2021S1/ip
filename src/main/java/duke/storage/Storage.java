@@ -1,6 +1,5 @@
 package duke.storage;
 
-
 import duke.exception.DukeException;
 import duke.tasklist.TaskList;
 import duke.tasks.Deadline;
@@ -8,11 +7,19 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,30 +46,32 @@ public class Storage {
                 String[] splits = task.split(" ~/~ ");
                 Task t = null;
                 switch (splits[0]) {
-                    case "T":
-                        t = new ToDo(splits[2]);
-                        break;
-                    case "D":
-                        if (splits.length == 4) {
-                            t = new Deadline(splits[2], LocalDate.parse(splits[3]));
-                        } else if (splits.length == 5) {
-                            t = new Deadline(splits[2], LocalDate.parse(splits[3]), LocalTime.parse(splits[4]));
-                        }
-                        break;
-                    case "E":
-                        if (splits.length == 4) {
-                            t = new Event(splits[2], LocalDate.parse(splits[3]));
-                        } else if (splits.length == 5) {
-                            t = new Event(splits[2], LocalDate.parse(splits[3]), LocalTime.parse(splits[4]));
-                        } else if (splits.length == 6) {
-                            t = new Event(splits[2], LocalDate.parse(splits[3]), LocalTime.parse(splits[4]),
-                                    LocalTime.parse(splits[5]));
-                        }
-                        break;
-                    default:
-                        throw new DukeException("Please check the hard disk for any errors");
+                case "T":
+                    t = new ToDo(splits[2]);
+                    break;
+                case "D":
+                    if (splits.length == 4) {
+                        t = new Deadline(splits[2], LocalDate.parse(splits[3]));
+                    } else if (splits.length == 5) {
+                        t = new Deadline(splits[2], LocalDate.parse(splits[3]), LocalTime.parse(splits[4]));
+                    }
+                    break;
+                case "E":
+                    if (splits.length == 4) {
+                        t = new Event(splits[2], LocalDate.parse(splits[3]));
+                    } else if (splits.length == 5) {
+                        t = new Event(splits[2], LocalDate.parse(splits[3]), LocalTime.parse(splits[4]));
+                    } else if (splits.length == 6) {
+                        t = new Event(splits[2], LocalDate.parse(splits[3]), LocalTime.parse(splits[4]),
+                                LocalTime.parse(splits[5]));
+                    }
+                    break;
+                default:
+                    throw new DukeException("Please check the hard disk for any errors");
                 }
-                if (splits[1].equals("1")) t.markAsDone();
+                if (splits[1].equals("1")) {
+                    t.markAsDone();
+                }
                 list.add(t);
             }
             task = br.readLine();

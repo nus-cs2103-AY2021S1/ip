@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
         try {
             ui.printDelete(taskList.delete(i));
             storage.refresh(taskList);
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Sorry something went wrong!");
         }
     }
