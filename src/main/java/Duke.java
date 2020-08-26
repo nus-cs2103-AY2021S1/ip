@@ -24,19 +24,6 @@ public class Duke {
 
     }
 
-    public static void echo_input(){
-        Scanner scanner = new Scanner(System.in);
-        while(scanner.hasNext()){
-            String input = scanner.nextLine();
-            if(input.toLowerCase().equals(bye_key)){
-                byeGreetings();
-                break;
-            } else {
-                lineFormatter(input);
-            }
-        }
-    }
-
 
     public static void add_input() {
         Scanner scanner = new Scanner(System.in);
@@ -121,8 +108,14 @@ public class Duke {
         if(nameList[0].trim().toLowerCase().equals(deadline_key)){
             String[] task_deadline = nameList[1].trim().split("/by", 2);
             if(task_deadline.length != 2){
+                System.out.println("error in length");
                 throw new DeadlineException();
             }
+            // check for date time format
+            if(!task_deadline[1].trim().matches("\\d{4}-\\d{2}-\\d{2} \\d{4}")
+                    && !task_deadline[1].trim().matches("\\d{4}-\\d{2}-\\d{2}")){
+            }
+
             Task newTask = new Deadline(task_deadline[0].trim(), task_deadline[1].trim());
             taskList.add(newTask);
             newTaskItem(newTask, deadline_key);
@@ -130,6 +123,11 @@ public class Duke {
         } else if(nameList[0].trim().toLowerCase().equals(event_key)){
             String[] task_event = nameList[1].trim().split("/at", 2);
             if(task_event.length != 2){
+                throw new EventException();
+            }
+            // check for date time format
+            if(!task_event[1].matches("\\d{4}-\\d{2}-\\d{2} \\d{4}")
+                    && !task_event[1].matches("\\d{4}-\\d{2}-\\d{2}")){
                 throw new EventException();
             }
             Task newTask = new Event(task_event[0].trim(), task_event[1].trim());
