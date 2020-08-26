@@ -32,7 +32,8 @@ public class FindCommand extends Command {
      * @throws InvalidFileException failed to save file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidFileException {
+    public void execute(TaskList tasks, Ui ui, Storage storage)
+            throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 4) {
             throw new InvalidInputException("Please select task to find!");
         }

@@ -24,7 +24,8 @@ public class ListCommand extends Command {
      * @param storage Storage object from the Storage class.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage)
+            throws InvalidInputException {
         if (tasks.taskListSize() == 0) {
             ui.printMessage("List is empty! Start adding to your task list!");
         } else {
