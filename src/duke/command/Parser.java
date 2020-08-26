@@ -113,7 +113,15 @@ public class Parser {
             ui.showErrorMessage(e);
         }
     }
-
+    
+    /**
+     * Processes the list index in the user command and returns the integer value of the task 
+     * index. If a non-numerical number is found, an exception is thrown.
+     * 
+     * @param inputIndex List index indicated in the user command.
+     * @return Integer value of list index.
+     * @throws InvalidIndexNumberException If inputIndex is not an integer.
+     */
     private static int parseTaskIndex(String inputIndex) throws InvalidIndexNumberException {
         try {
             int index = Integer.parseInt(inputIndex);
