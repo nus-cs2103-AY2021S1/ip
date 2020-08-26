@@ -1,7 +1,5 @@
 package main.java.duke;
 
-import main.java.duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -10,16 +8,11 @@ import java.time.format.FormatStyle;
 
 public class DateTimeConverter {
 
-    //public String dateTime;
     public DateTimeFormatter dtf;
 
     public DateTimeConverter(FormatStyle dateStyle, FormatStyle timeStyle) {
-        //this.dateTime = dateTime;
         this.dtf = DateTimeFormatter.ofLocalizedDateTime(dateStyle, timeStyle);
     }
-
-    /*public DateTimeFormatter dtf = DateTimeFormatter.ofLocalizedDateTime(
-            FormatStyle.MEDIUM, FormatStyle.SHORT);*/
 
     public String processTime(String dateTime) {
         String date;

@@ -1,15 +1,10 @@
 package main.java.duke;
 
-import main.java.duke.DateTimeConverter;
-import main.java.duke.SpecialFormat;
-
 import java.time.format.FormatStyle;
 
 public class Parser {
 
-    public Parser() {
-
-    }
+    public Parser() {}
 
     public String dateTimeParser(String dateTime) {
         DateTimeConverter dtc = new DateTimeConverter(FormatStyle.MEDIUM, FormatStyle.SHORT);

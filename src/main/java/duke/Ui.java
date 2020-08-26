@@ -7,13 +7,10 @@ import java.util.Scanner;
 
 public class Ui {
 
-    public static List<Task> task_collections = new ArrayList<>();
     protected String FILE_PATH;
     protected String FILE_NAME;
     protected Parser parser;
     protected TaskList TASK_LIST;
-
-    public boolean exception_absent;
 
     public Ui(String FILE_PATH, String FILE_NAME, List<Task> MEMO_TASK) {
         this.FILE_PATH = FILE_PATH;
