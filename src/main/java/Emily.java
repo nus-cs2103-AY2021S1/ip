@@ -1,9 +1,52 @@
 package main.java;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class Emily {
     static ArrayList<Task> store = new ArrayList<>(100);
+
+    static public void readData() throws DukeException{
+
+        File f = new File("data/emily.txt");
+        f.getParentFile().mkdirs();
+        try {
+            if (f.exists()) {
+                //read data from the text
+                Scanner sc = new Scanner(f);
+                while (sc.hasNext()) {
+                    String line = sc.nextLine();
+                    char type = line.charAt(0);
+                    boolean isCompleted = line.charAt(1)=='1';
+                    String[] temp;
+
+                    switch(type){
+                        case 'T':
+                            temp = line.split(",", 2);
+                            Task t = new ToDos(temp[1]);
+                            t.finished = isCompleted;
+                            store.add(t);
+                            break;
+
+                    }
+
+
+                }
+
+
+            } else {
+                f.createNewFile();
+
+            }
+        } catch(FileNotFoundException e){
+            throw new DukeException("file is not found");
+        } catch(IOException e){
+            throw new DukeException("file already existed");
+        }
+
+    }
 
 
     static public void interacting() throws DukeException {
@@ -133,8 +176,8 @@ public class Emily {
     }
 
 
-    public static void main(String[] args) throws DukeException {
-        String divider = "-------------------";
+    public static void main(String[] args) throws DukeException, IOException {
+       /* String divider = "-------------------";
         boolean end = false;
 
 
@@ -153,6 +196,10 @@ public class Emily {
 
         System.out.println("bye\n" + divider + "\nBye~, hope to see you again!");
 
+        */
+
+        readData();
+        System.out.println(store.toString());
 
     }
 }
