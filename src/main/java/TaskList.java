@@ -3,7 +3,6 @@ package main.java;
 import java.util.ArrayList;
 
 /** Encapsulates a list of tasks */
-
 public class TaskList {
 
     /** An array list consisting of tasks. */
@@ -46,7 +45,6 @@ public class TaskList {
      * @return
      * @throws BobIndexOutOfBoundsException
      */
-
     public Task get(int index) throws BobIndexOutOfBoundsException {
         try {
             return list.get(index - 1);

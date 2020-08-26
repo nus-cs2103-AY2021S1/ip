@@ -4,6 +4,7 @@ package main.java;
  * This command indicates that Bob may terminate.
  */
 public class ExitCommand extends Command {
+
     /**
      * Executes nothing.
      * @param tasks the TaskList consisting of all tasks tracked by Bob.
@@ -13,7 +14,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage){
-
     }
 
     /**

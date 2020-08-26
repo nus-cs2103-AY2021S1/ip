@@ -1,9 +1,10 @@
 package main.java;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 
 /**
  * Encapsulates a task to be completed over a span of time (i.e period).
@@ -11,13 +12,16 @@ import java.time.temporal.ChronoUnit;
 
 public class Event extends Task {
     /**The date and time at which the event begins. */
-    LocalDateTime start;
+    private LocalDateTime start;
+
     /**The date and time at which the event ends. */
-    LocalDateTime end;
+    private LocalDateTime end;
+
     /**The format of inputted dates and times that the class can accept. */
-    static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
     /**The format of outputted dates and times by the class. */
-    static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
+    private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
 
     /**
      * Constructs an event that has not been completed with a brief
