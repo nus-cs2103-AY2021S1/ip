@@ -4,8 +4,18 @@ public class Todo extends Task {
         super(description);
     }
 
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
+    public Todo(String description, boolean isDone) {
+        super(description, isDone);
     }
+
+    @Override
+    public String toDisplayString() {
+        return "[T]" + super.toDisplayString();
+    }
+
+    @Override
+    public String toSavedString() {
+        return "T" + " | " + super.toSavedString();
+    }
+
 }

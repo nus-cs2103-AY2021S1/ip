@@ -14,10 +14,24 @@ public class Event extends Task {
         this.time = time;
     }
 
+    public Event(String description, boolean isDone, LocalDate date, LocalTime time) {
+        super(description, isDone);
+        this.date = date;
+        this.time = time;
+    }
+
     @Override
-    public String toString() {
-        return "[E]" + super.toString() + " (at: "
+    public String toDisplayString() {
+        return "[E]" + super.toDisplayString() + " (at: "
                 + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
                 + time.format(DateTimeFormatter.ofPattern("h:mm a")) + ")";
     }
+
+    @Override
+    public String toSavedString() {
+        return "E" + " | " + super.toSavedString() + " | "
+                + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
+                + time.format(DateTimeFormatter.ofPattern("h:mm a"));
+    }
+
 }

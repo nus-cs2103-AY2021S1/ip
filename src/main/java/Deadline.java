@@ -14,10 +14,24 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    public Deadline(String description, boolean isDone, LocalDate date, LocalTime time) {
+        super(description, isDone);
+        this.date = date;
+        this.time = time;
+    }
+
     @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by: "
+    public String toDisplayString() {
+        return "[D]" + super.toDisplayString() + " (by: "
                 + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
                 + time.format(DateTimeFormatter.ofPattern("h:mm a")) + ")";
     }
+
+    @Override
+    public String toSavedString() {
+        return "D" + " | " + super.toSavedString() + " | "
+                + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
+                + time.format(DateTimeFormatter.ofPattern("h:mm a"));
+    }
+
 }
