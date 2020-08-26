@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a specific task which is a to do.
+ */
 public class ToDos extends Task {
 
     protected LocalDate date = null;

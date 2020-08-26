@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Deals with the manipulation of loading and saving data.
+ */
 public class Storage {
 
     private String filepath;
