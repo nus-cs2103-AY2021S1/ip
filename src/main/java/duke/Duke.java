@@ -10,17 +10,15 @@ import duke.ui.Ui;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
-/**
- * The main class of the app
- */
+/** The main class of the app. */
 public class Duke {
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
 
     /**
-     * Constructs a Duke object associated with a file path
-     * @param path The location of the storage file
+     * Constructs a Duke object associated with a file path.
+     * @param path The location of the storage file.
      */
     public Duke(String path) throws IOException {
         ui = new Ui();

@@ -7,15 +7,13 @@ import duke.tasks.Task;
 
 import java.io.IOException;
 
-/**
- * This class represents the command of adding a task
- */
+/** This class represents the command of adding a task. */
 public class AddCommand extends Command {
     private Task task;
 
     /**
-     * Constructs a AddCommand object with a task
-     * @param task The Task associated with the AddCommand
+     * Constructs a AddCommand object with a task.
+     * @param task The Task associated with the AddCommand.
      */
     public AddCommand(Task task) {
         this.task = task;
@@ -25,9 +23,9 @@ public class AddCommand extends Command {
      * Adds task to taskList.
      * Prints the task that has just been added.
      * Adds task to storage.
-     * @param taskList The TaskList to add the task to
-     * @param ui The Ui which will print the messages to the user
-     * @param storage The Storage to add the task to
+     * @param taskList The TaskList to add the task to.
+     * @param ui The Ui which will print the messages to the user.
+     * @param storage The Storage to add the task to.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {

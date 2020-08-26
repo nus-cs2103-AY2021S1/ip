@@ -13,15 +13,15 @@ public class TaskList {
     private List<Task> list;
 
     /**
-     * Constructs an empty TaskList
+     * Constructs an empty TaskList.
      */
     public TaskList() {
         this.list = new ArrayList<>();
     }
 
     /**
-     * Constructs a TaskList from the given list
-     * @param list
+     * Constructs a TaskList from the given list.
+     * @param list The List to be associated with the TaskList.
      */
     public TaskList(List<Task> list) {
         this.list = list;
@@ -36,9 +36,9 @@ public class TaskList {
     }
 
     /**
-     * Marks the i-th task (index i - 1) as done
-     * @param i The index (starting from 1) of the task to be marked as done in the TaskList
-     * @return The task marked as done
+     * Marks the i-th task (index i - 1) as done.
+     * @param i The index (starting from 1) of the task to be marked as done in the TaskList.
+     * @return The task marked as done.
      */
     public Task setDone(int i) {
         this.list.get(i - 1).markAsDone();
@@ -46,24 +46,24 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the TaskList
-     * @param task The task to be added
+     * Adds a task to the TaskList.
+     * @param task The task to be added.
      */
     public void add(Task task) {
         this.list.add(task);
     }
 
     /**
-     * Deletes the i-th task (index i - 1) from the TaskList
-     * @param i The index (starting from 1) of the task to be deleted
-     * @return The deleted task
+     * Deletes the i-th task (index i - 1) from the TaskList.
+     * @param i The index (starting from 1) of the task to be deleted.
+     * @return The deleted task.
      */
     public Task delete(int i) {
         return this.list.remove(i - 1);
     }
 
     /**
-     * @return The number of tasks in the TaskList
+     * @return The number of tasks in the TaskList.
      */
     public int size() {
         return this.list.size();

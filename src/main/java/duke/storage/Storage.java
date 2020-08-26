@@ -16,17 +16,15 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * This class deals with loading tasks from the file and saving tasks in the file
- */
+/** This class deals with loading tasks from the file and saving tasks in the file */
 public class Storage {
     private String path;
     private BufferedWriter writer;
 
     /**
      * Constructs a Storage object with a path as the given path and a BufferedWriter object
-     * that writes to the file located at the given path
-     * @param path
+     * that writes to the file located at the given path.
+     * @param path The path of the storage file.
      */
     public Storage(String path) throws IOException {
         this.path = path;
@@ -39,9 +37,9 @@ public class Storage {
     }
 
     /**
-     * Loads the tasks from the file
-     * @return A List containing the saved tasks
-     * @throws DukeException when the an exception occurs when loading tasks from the file
+     * Loads the tasks from the file.
+     * @return A List containing the saved tasks.
+     * @throws DukeException An exception while loading tasks from the file.
      */
     public List<Task> load() throws IOException, DukeException {
         List<Task> list = new ArrayList<>();
@@ -84,8 +82,8 @@ public class Storage {
     }
 
     /**
-     * Saves task to the file
-     * @param task The task to be saved
+     * Saves task to the file.
+     * @param task The task to be saved.
      */
     public void add(Task task) throws IOException {
         writer.write(task.txtFileFormat());
@@ -94,8 +92,8 @@ public class Storage {
     }
 
     /**
-     * Refreshes the storage to reflect all tasks in the TaskList
-     * @param taskList The TaskList that the storage will save tasks from
+     * Refreshes the storage to reflect all tasks in the TaskList.
+     * @param taskList The TaskList that the storage will save tasks from.
      */
     public void refresh(TaskList taskList) throws IOException {
         this.writer = new BufferedWriter(new FileWriter(this.path));

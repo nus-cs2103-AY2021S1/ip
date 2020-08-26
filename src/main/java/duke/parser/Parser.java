@@ -15,14 +15,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
-/**
- * This class deals with making sense of user commands
- */
+/** This class deals with making sense of user commands. */
 public class Parser {
     /**
-     * @param command The command input from the user
-     * @return The Command to be executed
-     * @throws DukeException when the user input command cannot be parsed
+     * @param command The command input from the user.
+     * @return The Command to be executed.
+     * @throws DukeException when the user input command cannot be parsed.
      */
     public static Command parse(String command) throws DukeException {
         if (command.equals("bye")) {
@@ -48,9 +46,9 @@ public class Parser {
     }
 
     /**
-     * @param command User command that starts with list
-     * @return The ListCommand to be executed
-     * @throws DukeException when the user input command cannot be parsed
+     * @param command User command that starts with list.
+     * @return The ListCommand to be executed.
+     * @throws DukeException The user input command cannot be parsed.
      */
     public static ListCommand parseListCommand(String command) throws DukeException {
         String[] splits = command.split(" ");
@@ -65,9 +63,9 @@ public class Parser {
     }
 
     /**
-     * @param command User input command that starts with deadline
-     * @return The AddCommand to be executed
-     * @throws DukeException when the user input command cannot be parsed
+     * @param command User input command that starts with deadline.
+     * @return The AddCommand to be executed.
+     * @throws DukeException The user input command cannot be parsed.
      */
     public static AddCommand parseDeadlineCommand(String command) throws DukeException {
         int cut = command.indexOf(" /by ");
@@ -89,9 +87,9 @@ public class Parser {
     }
 
     /**
-     * @param command User input command that starts with event
-     * @return The AddCommand to be executed
-     * @throws DukeException when the user input command cannot be parsed
+     * @param command User input command that starts with event.
+     * @return The AddCommand to be executed.
+     * @throws DukeException The user input command cannot be parsed.
      */
     public static AddCommand parseEventCommand(String command) throws DukeException {
         int cut = command.indexOf(" /at ");

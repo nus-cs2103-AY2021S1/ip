@@ -4,18 +4,16 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * This class represents an event
- */
+/** This class represents an event. */
 public class Event extends Task {
     protected LocalDate date;
     protected LocalTime startTime;
     protected LocalTime endTime;
 
     /**
-     * Constructs an Event object associated with a description and a date
-     * @param description The description of the task
-     * @param date The date of the event
+     * Constructs an Event object associated with a description and a date.
+     * @param description The description of the task.
+     * @param date The date of the event.
      */
     public Event(String description, LocalDate date) {
         super(description);
@@ -23,10 +21,10 @@ public class Event extends Task {
     }
 
     /**
-     * Constructs an Event object associated with a description, a date and a start time
-     * @param description The description of the task
-     * @param date The date of the event
-     * @param startTime The time that the event starts
+     * Constructs an Event object associated with a description, a date and a start time.
+     * @param description The description of the task.
+     * @param date The date of the event.
+     * @param startTime The time that the event starts.
      */
     public Event(String description, LocalDate date, LocalTime startTime) {
         super(description);
@@ -35,11 +33,11 @@ public class Event extends Task {
     }
 
     /**
-     * Constructs an Event object associated with a description, a date, a start time and a end time
-     * @param description The description of the task
-     * @param date The date of the event
-     * @param startTime The time that the event starts
-     * @param endTime The time that the event ends
+     * Constructs an Event object associated with a description, a date, a start time and a end time.
+     * @param description The description of the task.
+     * @param date The date of the event.
+     * @param startTime The time that the event starts.
+     * @param endTime The time that the event ends.
      */
     public Event(String description, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(description);
@@ -53,7 +51,7 @@ public class Event extends Task {
     }
 
     /**
-     * @return A String representing the Event object, to be used when saving events to the storage file
+     * @return A String representing the Event object, to be used when saving events to the storage file.
      */
     @Override
     public String txtFileFormat() {
@@ -63,7 +61,7 @@ public class Event extends Task {
     }
 
     /**
-     * @return A String representing the Event object, to be used when printing the Event
+     * @return A String representing the Event object, to be used when printing the Event.
      */
     @Override
     public String toString() {
