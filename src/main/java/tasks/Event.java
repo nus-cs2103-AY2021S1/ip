@@ -5,7 +5,7 @@ import duke.Time;
 import java.time.LocalDateTime;
 
 public class Event extends Task {
-    protected LocalDateTime by;
+    private LocalDateTime by;
 
     public Event(String description, LocalDateTime by) {
         super(description);

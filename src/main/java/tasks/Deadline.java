@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public class Deadline extends Task {
     // @@author Damith C. Rajapakse
     // Reused from https://nus-cs2103-ay2021s1.github.io/website/schedule/week2/project.html with minor modifications
-    protected LocalDateTime by;
+    private LocalDateTime by;
 
     public Deadline(String description, LocalDateTime by) {
         super(description);

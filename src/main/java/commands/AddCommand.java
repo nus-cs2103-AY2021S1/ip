@@ -15,6 +15,7 @@ import tasks.Event;
 import tasks.ToDo;
 
 public class AddCommand extends Command{
+
     public AddCommand(String fullCommand) {
         super(fullCommand);
     }
@@ -28,7 +29,9 @@ public class AddCommand extends Command{
     public void executeCommand(TaskList taskList, Ui ui, Storage storage) throws InvalidToDoFormatException,
             InvalidDeadlineFormatException, InvalidTimeException, InvalidCommandException,
             InvalidEventFormatException {
+
         String[] tempArray = fullCommand.trim().split(" ");
+
         if (Parser.isToDoCommand(tempArray[0])) {
             if (tempArray.length == 1) {
                 throw new InvalidToDoFormatException();

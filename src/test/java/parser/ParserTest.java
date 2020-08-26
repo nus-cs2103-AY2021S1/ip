@@ -5,8 +5,11 @@ import commands.DeleteCommand;
 import commands.DoneCommand;
 import commands.ListCommand;
 import commands.AddCommand;
+
 import duke.Parser;
+
 import exceptions.InvalidCommandException;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -58,6 +61,7 @@ public class ParserTest {
     @Test
     @DisplayName("Testing if InvalidCommandException is thrown if a invalid command is inputted")
     public void parseInvalidCommand() {
-        assertThrows(InvalidCommandException.class, () -> Parser.parse("blah"));
+        assertThrows(InvalidCommandException.class,
+                () -> Parser.parse("blah"));
     }
 }

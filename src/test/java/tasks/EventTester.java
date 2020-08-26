@@ -23,6 +23,7 @@ public class EventTester {
     public void testToString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime testDate = LocalDateTime.parse("2020-12-12 12:12", formatter);
-        assertEquals(new Event("read book", testDate).toString(), "[E][✘] read book (at: Dec 12 2020 12:12)");
+        assertEquals(new Event("read book", testDate).toString(),
+                "[E][✘] read book (at: Dec 12 2020 12:12)");
     }
 }
