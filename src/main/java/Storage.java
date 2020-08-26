@@ -7,6 +7,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Stroage deals with loading tasks from the file 
+ * and saving tasks in the file
+ */
 public class Storage {
     private String path;
     private File file;
@@ -28,6 +32,11 @@ public class Storage {
         }
     }
 
+    /**
+     * This method wites all of tasks onto the disk.
+     *
+     * @return nothing.
+     */ 
     void write(ArrayList<? extends Task> tasks) {
         try {
             FileWriter writer = new FileWriter(path, false);
@@ -46,6 +55,11 @@ public class Storage {
         }
     }
 
+    /**
+     * This method fetches all of tasks stored in disk.
+     *
+     * @return an ArrayList.
+     */ 
     public ArrayList<Task> getTasks() {
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {
