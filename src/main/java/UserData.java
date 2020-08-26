@@ -22,7 +22,6 @@ public class UserData {
     public void create(Task task) {
         try {
             FileWriter fw = new FileWriter(data, true);
-            System.out.println(task.toData());
             fw.write(task.toData() + "\n");
             fw.close();
             tasks.add(task);
@@ -76,6 +75,5 @@ public class UserData {
         update();
         return task;
     }
-
 
 }
