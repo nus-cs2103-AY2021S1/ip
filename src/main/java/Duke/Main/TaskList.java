@@ -4,6 +4,7 @@ import Duke.Errors.InvalidIndexException;
 import Duke.Tasks.Task;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
 	Storage storage;
@@ -77,6 +78,20 @@ public class TaskList {
 		filecontents.remove(i - 1);
 		storage.rewriteFileContents(filecontents);
 		return t;
+	}
+
+	/**
+	 * Find List of Tasks by filter
+	 * @param filter Text to filter Task Descriptions
+	 * @return List of filtered Tasks
+	 * @throws Exception
+	 */
+	public List<Task> findTasks(String filter) throws Exception {
+		List<Task> filterdContents = storage.getFileContents()
+				.stream()
+				.filter(Task -> Task.getDescription().contains(filter))
+				.collect(Collectors.toList());
+		return filterdContents;
 	}
 
 	/**
