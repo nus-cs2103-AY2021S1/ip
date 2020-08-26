@@ -17,7 +17,7 @@ public class Duke {
         System.out.println(hello);
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<? extends Task> task_list = new ArrayList<>(); //List to keep track of tasks
+        ArrayList<Task> task_list = new ArrayList<Task>(); //List to keep track of tasks
 
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
@@ -54,37 +54,63 @@ public class Duke {
 
             //Case: ToDo, Deadline, Event -> Add particular task to the task_list
             else {
-                Duke.TaskIdentifier(command, task_list);
+
+                try {
+                    Duke.TaskIdentifier(command, task_list);
+                }
+
+                catch (DukeInvalidCommandException e) {
+                    System.out.println(e.toString());
+                }
+
+                catch (DukeIncompleteCommandException e) {
+                    System.out.println(e.toString());
+                }
             }
         }
     }
 
-    public static void TaskIdentifier(String command, ArrayList task_list) {
-        String task_type = command.split(" ")[0];
-        String task_details = command.split(task_type + " ")[1]; //Includes task description and date/time if applicable
-        String task_info = task_details.split(" /")[0];
+    public static void TaskIdentifier(String command, ArrayList<Task> task_list) throws DukeInvalidCommandException, DukeIncompleteCommandException{
+            String task_type = command.split(" ")[0];
 
-        switch(task_type) {
-            case "todo":
-                Task todo = new ToDo(task_info);
-                task_list.add(todo);
-                break;
+            if (!task_type.equals("todo") && !task_type.equals("event") && !task_type.equals("deadline")) {
+                throw new DukeInvalidCommandException("    ____________________________________________________________\n" +
+                        "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                        "    ____________________________________________________________");
+            }
 
-            case "deadline":
-                String date = task_details.split(" /")[1];
-                Task deadline = new Deadline(task_info, date);
-                task_list.add(deadline);
-                break;
+            try {
+                String task_details = command.split(task_type + " ")[1]; //Includes task description and date/time if applicable
+                String task_info = task_details.split(" /")[0];
 
-            case "event":
-                String time = task_details.split(" /")[1];
-                Task event = new Event(task_info, time);
-                task_list.add(event);
-                break;
+                switch (task_type) {
+                    case "todo":
+                        Task todo = new ToDo(task_info);
+                        task_list.add(todo);
+                        break;
 
-            default:
-                break;
-        }
+                    case "deadline":
+                        String date = task_details.split(" /")[1];
+                        Task deadline = new Deadline(task_info, date);
+                        task_list.add(deadline);
+                        break;
+
+                    case "event":
+                        String time = task_details.split(" /")[1];
+                        Task event = new Event(task_info, time);
+                        task_list.add(event);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeIncompleteCommandException(String.format(
+                        "    ____________________________________________________________\n" +
+                        "     ☹ OOPS!!! The description of a %s cannot be empty.\n" +
+                        "    ____________________________________________________________\n", task_type));
+            }
 
         System.out.println(
                 String.format("    ____________________________________________________________\n" +
