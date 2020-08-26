@@ -1,5 +1,6 @@
-import jdk.jfr.Event;
-
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -121,12 +122,18 @@ public class Duke {
                 //Verify the deadline command
                 verifyDeadline(input);
                 String[] split = parts[1].split("/by");
-                tasks.add(new Deadlines(split[0], split[1]));
+
+                //Should be of format yyyy-mm-dd x:x
+                LocalDate date = getDate(split[1]);
+                LocalTime time = getTime(split[1]);
+                tasks.add(new Deadlines(split[0], date, time));
             } else if (input.startsWith("event")) {
                 //Verify the event command
                 verifyEvent(input);
                 String[] split = parts[1].split("/at");
-                tasks.add(new Events(split[0], split[1]));
+                LocalDate date = getDate(split[1]);
+                LocalTime time = getTime(split[1]);
+                tasks.add(new Events(split[0], date, time));
             } else {
                 throw new InvalidInputException("Sorry, I don't know what that means :(");
             }
@@ -204,6 +211,35 @@ public class Duke {
             return "Currently no tasks in you list";
         }
         return listOfTasks;
+    }
+
+    public static LocalDate getDate(String string) throws InvalidCommandException{
+        //Currently only accepts date in yyyy-mm-dd format
+        //Removing the whitespace before and after the string
+        try {
+            String timeDate = string.trim();
+            String[] parts = timeDate.split(" ", 2);
+            String date = parts[0].trim();
+            System.out.println(LocalDate.parse(date));
+            return LocalDate.parse(date);
+        } catch (DateTimeParseException e ) {
+            throw new InvalidCommandException("Please give your date in yyyy-mm-dd format!");
+        }
+    }
+
+    public static LocalTime getTime(String string) throws InvalidCommandException {
+        //Currently only accepts time in x:x format
+        //Removing the whitespace before and after the string
+
+        try {
+            String timeDate = string.trim();
+            String[] parts = timeDate.split(" ", 2);
+            String date = parts[1].trim();
+            System.out.println(LocalTime.parse(date));
+            return LocalTime.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new InvalidCommandException("Please give your time in hh:mm format!");
+        }
     }
 }
 
