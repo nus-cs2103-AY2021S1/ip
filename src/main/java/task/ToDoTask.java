@@ -7,7 +7,7 @@ package task;
  *
  * <p> (i) Getters to details </p>
  */
-public class ToDoTask extends task.Task {
+public class ToDoTask extends Task {
 
     /**
      * Constructor to create this object.

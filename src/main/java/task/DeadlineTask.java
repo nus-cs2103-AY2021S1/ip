@@ -15,7 +15,7 @@ import java.util.regex.PatternSyntaxException;
  *
  * <p> (i) getters </p>
  */
-public class DeadlineTask extends task.Task {
+public class DeadlineTask extends Task {
     protected LocalDateTime dateTime;
     protected static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy kk:mm");
 

@@ -8,7 +8,7 @@ package exception;
  *
  * <p> (i) Getters to error message </p>
  */
-public class InvalidActionException extends exception.DukeException {
+public class InvalidActionException extends DukeException {
     private static final String DESCRIPTION = "The action is invalid.";
 
     /**

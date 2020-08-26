@@ -8,7 +8,7 @@ package exception;
  *
  * <p> (i) Getters to error message </p>
  */
-public class EmptyActionException extends exception.DukeException {
+public class EmptyActionException extends DukeException {
     private static final String DESCRIPTION = "The description of a command cannot be empty.";
 
     /**
