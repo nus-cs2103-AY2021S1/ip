@@ -11,7 +11,7 @@ public class Deadline extends Task {
 
     public static Deadline load(String str) {
         String[] arr = str.split("\\|", 4);
-        Deadline task = new Deadline(arr[2], arr[3]);
+        Deadline task = new Deadline(arr[2], LocalDate.parse(arr[3]));
         if (arr[1].equals("true")) {
             task.markAsDone();
         }

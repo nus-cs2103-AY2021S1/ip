@@ -11,7 +11,7 @@ public class Event extends Task {
 
     public static Event load(String str) {
         String[] arr = str.split("\\|", 4);
-        Event task = new Event(arr[2], arr[3]);
+        Event task = new Event(arr[2], LocalDate.parse(arr[3]));
         if (arr[1].equals("true")) {
             task.markAsDone();
         }
