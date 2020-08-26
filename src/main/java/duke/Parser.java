@@ -74,7 +74,7 @@ public class Parser {
         }
     }
 
-    public LocalDateTime parseDateTime(String input) throws DukeException {
+    private LocalDateTime parseDateTime(String input) throws DukeException {
         String pattern = "d/M/yyyy HHmm";
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
