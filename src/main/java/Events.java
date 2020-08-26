@@ -6,7 +6,7 @@ public class Events extends Task {
         this.startTime = startTime;
     }
 
-    public Events(String description, String startTime, boolean bool) {
+    private Events(String description, String startTime, boolean bool) {
         super(description, bool);
         this.startTime = startTime;
     }

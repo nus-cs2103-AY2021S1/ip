@@ -1,20 +1,25 @@
-import jdk.jfr.Event;
-
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Duke {
     public static void main(String[] args) {
+        List<Task> savedTasks = getSavedTasks();
+        //Have to resolve a case when the directory can't be found which returns savedTasks as null
         Scanner scanner = new Scanner(System.in);
-        processInput(scanner);
+        processInput(scanner, savedTasks);
     }
 
-    public static void processInput(Scanner scanner) {
-        System.out.println("Hi! I'm Duke" + "\n" + "What can I do for you?");
-        String currInput = scanner.nextLine();
-        List<Task> storedTasks = new ArrayList<>();
+    public static void processInput(Scanner scanner, List<Task> saved) {
+        List<Task> storedTasks = saved;
 
+        if (saved != null) {
+            System.out.println("Hi! I'm Duke" + "\n" + "What can I do for you?");
+            String currInput = scanner.nextLine();
             while (isNotTerminateCommand(currInput)) {
                 try {
                     if (isListCommand(currInput)) {
@@ -29,7 +34,7 @@ public class Duke {
 
                         System.out.println("Nice! I've marked this task as done:" + "\n" + "  " + storedTasks.get(index).toString());
                     } else if (isDeleteCommand(currInput)) {
-                      verifyDeleteCommand(currInput, storedTasks.size());
+                        verifyDeleteCommand(currInput, storedTasks.size());
 
                         String[] parts = currInput.split(" ");
                         int index = Integer.parseInt(parts[1]) - 1;
@@ -37,29 +42,37 @@ public class Duke {
                         System.out.println("Noted. I've removed this task:" + "\n" + "  " + storedTasks.get(index)
                                 + "\n" + "Now you have " + (storedTasks.size() - 1) + " tasks in the list.");
                         storedTasks.remove(index);
+                        //Save the task list
                     } else {
                         //handle task commands
                         addTasks(currInput, storedTasks);
                         System.out.println("Got it. I've added this task:" + "\n" + "  " + storedTasks.get(storedTasks.size() - 1)
                                 + "\n" + "Now you have " + storedTasks.size() + " tasks in the list.");
+                        //Save the task list
                     }
 
                     currInput = scanner.nextLine();
 
-                    } catch (InvalidCommandException e) {
-                        System.out.println(e + "\n" + "Please enter a valid command");
-                        currInput = scanner.nextLine();
-                        //Should continue to run the program as it is
-                    } catch (InvalidInputException e) {
-                        System.out.println(e + "\n" + "Please enter a valid input");
-                        currInput = scanner.nextLine();
-                        //Should continue to run the program as it is
-                    }
+                } catch (InvalidCommandException e) {
+                    System.out.println(e + "\n" + "Please enter a valid command");
+                    currInput = scanner.nextLine();
+                    //Should continue to run the program as it is
+                } catch (InvalidInputException e) {
+                    System.out.println(e + "\n" + "Please enter a valid input");
+                    currInput = scanner.nextLine();
+                    //Should continue to run the program as it is
+                }
 
             }
+            //Saves whatever changes made to the tasks
+            saveTasks(storedTasks);
+
             System.out.println("Bye. Hope to see you again soon!");
             scanner.close();
+        } else {
+            scanner.close();
         }
+    }
 
      public static boolean isDeleteCommand(String input) {
          String[] parts = input.split(" ");
@@ -191,9 +204,122 @@ public class Duke {
         }
     }
 
+    public static List<Task> getSavedTasks() {
+        String home = System.getProperty("user.home");
+        Path path = Paths.get(home, "ip", "src", "main", "java", "Data");
+        boolean directoryExists = Files.exists(path);
+
+        //checks for the directory
+        if (directoryExists) {
+
+            List<Task> tasks= new ArrayList<Task>();
+
+            try {
+                File file1 = new File(home + "/ip/src/main/java/Data/Duke.txt");
+                File file2 = new File(home + "/ip/src/main/java/Data/Duke2.txt");
+                File toBeRead;
+
+                //Checks which file is to be read
+                if (file1.exists()) {
+                    toBeRead = file1;
+                } else if (file2.exists()) {
+                    toBeRead = file2;
+                } else {
+                    //if no file create a new empty file
+                    Path newFile = Files.createFile(Path.of(home + "/ip/src/main/java/Data/Duke.txt"));
+                    toBeRead = new File(String.valueOf(newFile));
+                }
+                Scanner savedTasks = new Scanner(toBeRead);
+
+                //Prints out the tasks
+                if (savedTasks.hasNext()) {
+                    //If there's saved tasks, print and add to list
+                    while (savedTasks.hasNext()) {
+                        String nextLine = savedTasks.nextLine();
+                        Task task = convertToTask(nextLine);
+                        tasks.add(task);
+                        System.out.println(nextLine);
+                    }
+                    System.out.println("That's the end of your current tasks!" + "\n");
+                } else {
+                    //No saved tasks
+                    System.out.println("You currently have no tasks");
+                }
+
+            } catch (FileNotFoundException e) {
+                System.out.println("Error, file not found!");
+                //Throw exception?
+            } catch (IOException e) {
+                e.printStackTrace();
+                //Throw exception?
+            }
+            return tasks;
+        } else {
+            System.out.println("Sorry the directory does not exists");
+            //Directory exception
+            return null;
+        }
+
+    }
+
+    //Saves the tasks into a new file after termination("bye" command) and deletes the old file
+    public static void saveTasks(List<Task> list) {
+        String home = System.getProperty("user.home");
+        Path path = Paths.get(home, "ip", "src", "main", "java", "Data");
+        boolean directoryExists = Files.exists(path);
+
+        if (directoryExists) {
+            File file1 = new File(home + "/ip/src/main/java/Data/Duke.txt");
+
+            try {
+                if (file1.exists()) {
+                    //creates a new empty file
+                    Path newFile = Files.createFile(Path.of(home + "/ip/src/main/java/Data/Duke2.txt"));
+                    FileWriter fw = new FileWriter(home + "/ip/src/main/java/Data/Duke2.txt");
+                    BufferedWriter bw = new BufferedWriter(fw);
+
+                    //deletes the old file
+                    Files.delete(Paths.get(home + "/ip/src/main/java/Data/Duke.txt"));
+
+                    for (int i = 0; i < list.size(); i++) {
+                        Task task = list.get(i);
+                        bw.write((i + 1) + "." + task.toString());
+                        //Writes task on a new line
+                        bw.newLine();
+                    }
+
+                    bw.close();
+                } else {
+                    //creates a new empty file
+                    Path newFile = Files.createFile(Path.of(home + "/ip/src/main/java/Data/Duke.txt"));
+                    FileWriter fw = new FileWriter(home + "/ip/src/main/java/Data/Duke.txt");
+                    BufferedWriter bw = new BufferedWriter(fw);
+
+                    //deletes the old file
+                    Files.delete(Paths.get(home + "/ip/src/main/java/Data/Duke2.txt"));
+
+                    for (int i = 0; i < list.size(); i++) {
+                        Task task = list.get(i);
+                        bw.write((i + 1) + "." + task.toString());
+                        //Writes the task on a new line
+                        bw.newLine();
+                    }
+
+                    bw.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                //Throw exception?
+            }
+        } else {
+            System.out.println("Sorry directory changed!");
+            //Directory exception
+        }
+
+    }
+
     public static String readList(List<Task> list) {
         String listOfTasks = "Here are the tasks in your list:";
-
 
         for (int i = 1; i <= list.size(); i++) {
             Task currTask = list.get(i - 1);
@@ -204,6 +330,41 @@ public class Duke {
             return "Currently no tasks in you list";
         }
         return listOfTasks;
+    }
+
+    //Converts each line in file to task
+    public static Task convertToTask(String line) {
+        if (line.startsWith("[T]", 2)) {
+            //Is a todo task
+            String[] parts = line.split(" ", 2);
+            if (line.contains("[✘]")) {
+                return new Task(parts[1]);
+            } else {
+                return new Task(parts[1]).markDone();
+            }
+        } else if (line.startsWith("[E]", 2)) {
+            //Is a event task
+            String[] parts = line.split(" ", 2);
+            String[] split = parts[1].split("\\(at:");
+            String desc = split[0];
+            String startTime = split[1].split("\\)")[0];
+            if (line.contains("[✘]")) {
+                return new Events(desc, startTime);
+            } else {
+                return new Events(desc, startTime).markDone();
+            }
+        } else {
+            //Is a deadline task
+            String[] parts = line.split(" ", 2);
+            String[] split = parts[1].split("\\(by:");
+            String desc = split[0];
+            String deadline = split[1].split("\\)")[0];
+            if (line.contains("[✘]")) {
+                return new Deadlines(desc, deadline);
+            } else {
+                return new Deadlines(desc, deadline).markDone();
+            }
+        }
     }
 }
 
