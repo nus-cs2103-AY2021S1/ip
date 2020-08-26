@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.io.File;
 
 public class Bot {
+    final String FILE_PATH = "./assets/userData.txt";
     private String name;
     private ArrayList<Task> taskList;
 
@@ -22,9 +23,8 @@ public class Bot {
      */
     public void init() {
         greet();
-        String filePath = "./assets/userData.txt";
         try{
-            loadFileContents(filePath);
+            loadFileContents(FILE_PATH);
         } catch (IOException e) {
             System.out.println(responseWrapper("IO Exception"));
         }
@@ -34,7 +34,6 @@ public class Bot {
             try {
                 if (input.equals("bye")) {
                     scanner.close();
-                    saveUserData(filePath);
                     String farewell = responseWrapper("Have a good day, mate!");
                     System.out.println(farewell);
                     return;
@@ -43,17 +42,12 @@ public class Bot {
                 System.out.println(response);
             } catch (InvalidCommandException | InvalidInputException e) {
                 System.out.println(responseWrapper(e.getMessage()));
-            } catch (IOException e) {
-                System.out.println(responseWrapper("Unable to save file"));
-                String farewell = responseWrapper("Have a good day, mate!");
-                System.out.println(farewell);
-                return;
             }
         }
     }
 
-    private void saveUserData(String filePath) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
+    private void saveUserData(String FILE_PATH) throws IOException {
+        FileWriter fw = new FileWriter(FILE_PATH);
         for (Task task : this.taskList) {
             fw.write(task.toFileFormat());
         }
@@ -75,8 +69,8 @@ public class Bot {
         }
     }
 
-    private void loadFileContents(String filePath) throws IOException {
-        File f = new File(filePath);
+    private void loadFileContents(String FILE_PATH) throws IOException {
+        File f = new File(FILE_PATH);
         File dir = new File(f.toPath().getParent().toString());
         if(!dir.exists()) {
             dir.mkdir();
@@ -86,7 +80,7 @@ public class Bot {
             System.out.println(responseWrapper(response));
             f.createNewFile();
         }
-        String content = Files.readString(Paths.get(filePath), StandardCharsets.US_ASCII);
+        String content = Files.readString(Paths.get(FILE_PATH), StandardCharsets.US_ASCII);
         String[] items = content.split("\n");
         for (String item : items) {
             this.taskList.add(lineToObj(item));
@@ -148,6 +142,7 @@ public class Bot {
             }
             Todo newTodo = new Todo(name.toString());
             this.taskList.add(newTodo);
+            saveUserData(FILE_PATH);
             return responseWrapper("Got it. I've added this task:\n    " +
                     newTodo + "\n    " +
                     "Now you have " + taskList.size() + " tasks in the list.");
@@ -181,6 +176,7 @@ public class Bot {
             deadline.deleteCharAt(deadline.length() - 1);
             Deadline newTask = new Deadline(name.toString(), deadline.toString());
             this.taskList.add(newTask);
+            saveUserData(FILE_PATH);
             return responseWrapper("Got it. I've added this task:\n    " +
                     newTask + "\n    " +
                     "Now you have " + taskList.size() + " tasks in the list.");
@@ -214,6 +210,7 @@ public class Bot {
             deadline.deleteCharAt(deadline.length() - 1);
             Event newTask = new Event(name.toString(), deadline.toString());
             this.taskList.add(newTask);
+            saveUserData(FILE_PATH);
             return responseWrapper("Got it. I've added this task:\n    " +
                     newTask + "\n    " +
                     "Now you have " + taskList.size() + " tasks in the list.");
@@ -243,6 +240,7 @@ public class Bot {
             }
             Task task = this.taskList.get(Integer.parseInt(words[1]) - 1);
             task.markAsDone();
+            saveUserData(FILE_PATH);
             return responseWrapper("Nice! I've marked this task as done: \n    " +
                     task + "\n");
         } catch (Exception e) {
@@ -257,6 +255,7 @@ public class Bot {
             }
             Task task = this.taskList.get(Integer.parseInt(words[1]) - 1);
             this.taskList.remove(Integer.parseInt(words[1]) - 1);
+            saveUserData(FILE_PATH);
             return responseWrapper("Noted. I've removed this task: \n    " +
                     task + "\n    " +
                     "Now you have " + taskList.size() + " tasks in the list.");
