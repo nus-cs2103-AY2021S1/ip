@@ -1,4 +1,5 @@
 package tasks;
+
 public class ToDo extends Task {
 
     /**
@@ -7,7 +8,7 @@ public class ToDo extends Task {
      * @param description description of todo.
      * @see Task
      */
-    public ToDo(String description){
+    public ToDo(String description) {
         super(description);
     }
 

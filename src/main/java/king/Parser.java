@@ -3,7 +3,13 @@
  * and returns a reply from the commands.
  */
 package king;
-import tasks.*;
+
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.TaskList;
+import tasks.ToDo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -15,11 +21,11 @@ public class Parser {
     /**
      * Parse the commands from the King Program
      *
-     * @param storage storage to save the commands to.
+     * @param storage  storage to save the commands to.
      * @param taskList taskList to be manipulated from the commands.
      * @return Parser parser to parse commands.
      */
-    Parser(Storage storage, TaskList taskList){
+    Parser(Storage storage, TaskList taskList) {
         this.storage = storage;
         this.taskList = taskList;
     }
@@ -34,12 +40,12 @@ public class Parser {
     public String parse(String phrase) throws KingException {
         int phraseLength = phrase.length();
         String reply;
-        if (phrase.equals("list")){
+        if (phrase.equals("list")) {
             return UI.listTaskList(taskList);
-        } else if (phrase.equals("clear list")){
+        } else if (phrase.equals("clear list")) {
             taskList.clear();
             reply = UI.chatBox("I have cleared the list!");
-        } else if((phrase.startsWith("done") && phraseLength == 4) || phrase.startsWith("done ")){
+        } else if ((phrase.startsWith("done") && phraseLength == 4) || phrase.startsWith("done ")) {
             String stringItem = phrase.substring(4).trim();
             try {
                 int itemNo = Integer.parseInt(stringItem) - 1;
@@ -51,7 +57,7 @@ public class Parser {
                 );
             } catch (IndexOutOfBoundsException e) {
                 throw new KingException("Item " + stringItem + " not found.", e);
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 throw (stringItem.isEmpty())
                         ? new KingException("Done must be followed by item number", e)
                         : new KingException(stringItem + " is not a valid item number!", e);
@@ -60,10 +66,10 @@ public class Parser {
             }
         } else if (phrase.startsWith("todo ") || (phrase.startsWith("todo") && phraseLength == 4)) {
             String item;
-            if (phraseLength != 4 && (item = phrase.substring(5).trim()).length() != 0){
+            if (phraseLength != 4 && (item = phrase.substring(5).trim()).length() != 0) {
                 ToDo todo = new ToDo(item);
                 taskList.add(todo);
-                reply = UI.addItemChatBox(todo.toString(),taskList.size());
+                reply = UI.addItemChatBox(todo.toString(), taskList.size());
             } else {
                 throw new KingException("Todo cannot be empty!", new Throwable("empty field"));
             }
@@ -71,10 +77,10 @@ public class Parser {
             String item = phrase.substring(5).trim();
             String[] tokens = item.split(" /at ");
             if (tokens.length == 2) {
-                Event event = new Event(tokens[0],tokens[1]);
+                Event event = new Event(tokens[0], tokens[1]);
                 taskList.add(event);
-                reply = UI.addItemChatBox(event.toString(),taskList.size());
-            } else if(tokens.length < 2){
+                reply = UI.addItemChatBox(event.toString(), taskList.size());
+            } else if (tokens.length < 2) {
                 throw new KingException("Event description and time CANNOT be empty!", new Throwable("empty field"));
             } else {
                 throw new KingException("Follow the syntax event: <description> /at <time>", new Throwable(
@@ -84,16 +90,16 @@ public class Parser {
         } else if (phrase.startsWith("deadline ") || (phrase.startsWith("deadline") && phraseLength == 8)) {
             String item = phrase.substring(8).trim();
             String[] tokens = item.split(" /by ");
-            if (tokens.length != 2){
+            if (tokens.length != 2) {
                 throw new KingException("Follow the syntax: deadline <description> /by <date> <time>", new Throwable(
                         "bad deadline"
                 ));
             }
             try {
                 LocalDateTime datetime = StringToLocalDateTime(tokens[1]);
-                Deadline deadline = new Deadline(tokens[0],datetime);
+                Deadline deadline = new Deadline(tokens[0], datetime);
                 taskList.add(deadline);
-                reply = UI.addItemChatBox(deadline.toString(),taskList.size());
+                reply = UI.addItemChatBox(deadline.toString(), taskList.size());
             } catch (KingException e) {
                 throw e;
             }
@@ -110,14 +116,14 @@ public class Parser {
                 );
             } catch (IndexOutOfBoundsException e) {
                 throw new KingException("Item " + stringItem + " not found.", e);
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 throw (stringItem.isEmpty())
                         ? new KingException("delete must be followed by item number", e)
                         : new KingException(stringItem + " is not a valid item number", e);
             } catch (Exception e) {
                 throw new KingException("Please follow the syntax: delete <item no.>", e);
             }
-        } else if (phrase.startsWith("find ") || (phrase.startsWith("find") && phraseLength == 4)){
+        } else if (phrase.startsWith("find ") || (phrase.startsWith("find") && phraseLength == 4)) {
             String keyword = phrase.substring(4).trim();
             return UI.foundItemsList(storage.find(keyword), keyword);
         } else {
@@ -128,11 +134,11 @@ public class Parser {
     }
 
     // takes a Date Time string and returns a LocalDateTime
-    private LocalDateTime StringToLocalDateTime(String localDateTime) throws KingException{
-        try{
+    private LocalDateTime StringToLocalDateTime(String localDateTime) throws KingException {
+        try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-            return LocalDateTime.parse(localDateTime,formatter);
-        } catch (Exception e){
+            return LocalDateTime.parse(localDateTime, formatter);
+        } catch (Exception e) {
             throw new KingException("Date and Time must be formatted as /by <date> <time>. E.g. 2/1/2020 1400", new Throwable(
                     "bad datetime"
             ));

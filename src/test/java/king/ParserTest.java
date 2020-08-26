@@ -1,4 +1,5 @@
 package king;
+
 import org.junit.jupiter.api.Test;
 import tasks.Event;
 import tasks.TaskList;
@@ -13,28 +14,29 @@ public class ParserTest {
     Storage storage = new Storage("data/test/parserTest.txt");
 
     @Test
-    public void parseTodoTest(){
+    public void parseTodoTest() {
         String testCommand = "todo read book";
-        Parser parser = new Parser(storage,tasklist);
-        try{
+        Parser parser = new Parser(storage, tasklist);
+        try {
             String actual = parser.parse(testCommand);
             ToDo todo = new ToDo("read book");
-            String expected = UI.addItemChatBox(todo.toString(),tasklist.size());
+            String expected = UI.addItemChatBox(todo.toString(), tasklist.size());
             assertEquals(actual, expected);
-        } catch (Exception e){
+        } catch (Exception e) {
             fail();
         }
     }
+
     @Test
-    public void parseEventTest(){
+    public void parseEventTest() {
         String testCommand = "event test /at 2pm";
-        Parser parser = new Parser(storage,tasklist);
-        try{
+        Parser parser = new Parser(storage, tasklist);
+        try {
             String actual = parser.parse(testCommand);
-            Event testEvent = new Event("test","2pm");
-            String expected = UI.addItemChatBox(testEvent.toString(),tasklist.size());
+            Event testEvent = new Event("test", "2pm");
+            String expected = UI.addItemChatBox(testEvent.toString(), tasklist.size());
             assertEquals(actual, expected);
-        } catch (Exception e){
+        } catch (Exception e) {
             fail();
         }
     }

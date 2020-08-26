@@ -8,6 +8,7 @@
 package king;
 
 import tasks.TaskList;
+
 import java.util.Scanner;
 
 public class King {
@@ -21,11 +22,11 @@ public class King {
      *
      * @param filepath file path to create the asset file.
      */
-    King(String filepath){
+    King(String filepath) {
         storage = new Storage(filepath);
         taskList = new TaskList();
         taskList.addAll(storage.load());
-        this.parser = new Parser(storage,taskList);
+        this.parser = new Parser(storage, taskList);
     }
 
     /**
@@ -34,7 +35,7 @@ public class King {
     public void chat() {
         Scanner scanner = new Scanner(System.in);
         String phrase;
-        while(scanner.hasNextLine() && !(phrase = scanner.nextLine()).equals("bye")){
+        while (scanner.hasNextLine() && !(phrase = scanner.nextLine()).equals("bye")) {
             try {
                 System.out.println(parser.parse(phrase));
             } catch (KingException e) {

@@ -7,10 +7,10 @@ public class Event extends Task {
      * Returns an Event task.
      *
      * @param description description of the event.
-     * @param time time of the event.
+     * @param time        time of the event.
      * @see Task
      */
-    public Event(String description, String time){
+    public Event(String description, String time) {
         super(description);
         this.time = time;
     }
@@ -20,7 +20,7 @@ public class Event extends Task {
      *
      * @return String time of event.
      */
-    public String getTime(){
+    public String getTime() {
         return time;
     }
 

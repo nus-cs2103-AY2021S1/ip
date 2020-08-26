@@ -1,7 +1,16 @@
 package king;
 
-import tasks.*;
-import java.io.*;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.TaskList;
+import tasks.ToDo;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -17,19 +26,18 @@ public class Storage {
      * the manipulation of asset in the filepath.
      *
      * @param filepath file path for an existing asset or to initialise a new asset.
-     *
      */
-    Storage(String filepath){
+    Storage(String filepath) {
         this.FILE_PATH = filepath;
         String[] tokens = filepath.split("/");
         int pathLength = tokens.length;
-        if (pathLength == 0){
+        if (pathLength == 0) {
             System.out.println(UI.errorBox("Invalid file path"));
         } else {
             String path = tokens[0];
-            for (int i = 1; i < pathLength; i++){
+            for (int i = 1; i < pathLength; i++) {
                 File directory = new File(path);
-                if (!directory.exists()){
+                if (!directory.exists()) {
                     directory.mkdir();
                 }
                 path += "/" + tokens[i];
@@ -37,7 +45,7 @@ public class Storage {
             try {
                 data = new File(path);
                 data.createNewFile();
-            } catch (IOException e){
+            } catch (IOException e) {
                 System.out.println(UI.errorBox("Error occurred while loading asset."));
             }
         }
@@ -49,17 +57,17 @@ public class Storage {
      *
      * @return ArrayList<Task>
      */
-    public ArrayList<Task> load(){
+    public ArrayList<Task> load() {
         ArrayList<Task> items = new ArrayList<>();
-        try{
+        try {
             FileReader input = new FileReader(data.getAbsoluteFile());
             Scanner scanner = new Scanner(input);
-            while (scanner.hasNextLine()){
+            while (scanner.hasNextLine()) {
                 items.add(dataToTask(scanner.nextLine()));
             }
             input.close();
             scanner.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println(UI.errorBox("Error occurred while reading asset."));
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(UI.errorBox("Asset file is corrupted."));
@@ -70,10 +78,11 @@ public class Storage {
     /**
      * Reads the tasks in the taskList and updates the tasks in the
      * filepath.
+     *
      * @param taskList
      * @return boolean returns true if taskList is successfully persisted.
      */
-    public boolean persistTaskList(TaskList taskList){
+    public boolean persistTaskList(TaskList taskList) {
         try {
             BufferedWriter output = new BufferedWriter(new FileWriter(FILE_PATH));
             for (int i = 0; i < taskList.size(); i++) {
@@ -82,7 +91,7 @@ public class Storage {
                 if (task.getClass().isAssignableFrom(ToDo.class)) {
                     String s = "T@" + isLoaded + "@" + task.getDescription();
                     output.write(s);
-                } else if (task.getClass().isAssignableFrom(Event.class)){
+                } else if (task.getClass().isAssignableFrom(Event.class)) {
                     String s = "E@" + isLoaded + "@" + task.getDescription() + "@" + ((Event) task).getTime();
                     output.write(s);
                 } else {
@@ -92,36 +101,36 @@ public class Storage {
                 output.newLine();
             }
             output.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println(UI.errorBox("Error was encountered when saving list to asset."));
             return false;
-        } catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
         return true;
     }
 
-    public TaskList find(String keyword){
+    public TaskList find(String keyword) {
         TaskList tasksFound = new TaskList();
-        try{
+        try {
             Scanner scanner = new Scanner(data);
-            while (scanner.hasNextLine()){
+            while (scanner.hasNextLine()) {
                 String item = scanner.nextLine();
-                if (item.contains(keyword)){
+                if (item.contains(keyword)) {
                     tasksFound.add(dataToTask(item));
                 }
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println(UI.errorBox("Error was encountered when reading asset file."));
         }
         return tasksFound;
     }
 
     // data to Task
-    private Task dataToTask(String data){
-        String dataTokens[] = data.split("@",4);
+    private Task dataToTask(String data) {
+        String[] dataTokens = data.split("@", 4);
         Task task;
-        switch (dataTokens[0]){
+        switch (dataTokens[0]) {
             case "T":
                 task = new ToDo(dataTokens[2]);
                 break;
@@ -129,9 +138,9 @@ public class Storage {
                 task = new Deadline(dataTokens[2], LocalDateTime.parse(dataTokens[3]));
                 break;
             default:
-                task = new Event(dataTokens[2],dataTokens[3]);
+                task = new Event(dataTokens[2], dataTokens[3]);
         }
-        if (dataTokens[1].equals("1")){
+        if (dataTokens[1].equals("1")) {
             task.markAsDone();
         }
         return task;

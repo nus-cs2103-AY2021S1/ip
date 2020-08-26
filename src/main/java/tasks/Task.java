@@ -9,38 +9,42 @@ public class Task {
 
     /**
      * Returns the task created.
+     *
      * @param description description of the task.
      */
-    Task(String description){
+    Task(String description) {
         state = TaskStates.UNDONE;
         this.description = description;
     }
 
     /**
      * Returns the description of the task.
+     *
      * @return String description of task.
      */
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
     /**
      * Mark the task as Done.
      */
-    public void markAsDone(){
+    public void markAsDone() {
         state = TaskStates.DONE;
     }
 
     /**
      * Checks if a task is done.
+     *
      * @return boolean true if task is done.
      */
-    public boolean isDone(){
+    public boolean isDone() {
         return state == TaskStates.DONE;
     }
 
     /**
      * Returns the icon for the status of the task.
+     *
      * @return String icon for task status.
      */
     public String getStatusIcon() {
@@ -49,7 +53,7 @@ public class Task {
 
     @Override
     public String toString() {
-        switch(state){
+        switch (state) {
             case DONE:
                 return "[\u2713] " + description;
             case UNDONE:

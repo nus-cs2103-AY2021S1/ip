@@ -9,7 +9,7 @@ public class KingException extends Exception {
      * Create a KingException generated from the King Program.
      *
      * @param message message for the exception generated.
-     * @param error throwable error resulting in KingException generated.
+     * @param error   throwable error resulting in KingException generated.
      * @return KingException
      */
     KingException(String message, Throwable error) {

@@ -10,7 +10,7 @@ public class TaskList {
     /**
      * Clears the task list.
      */
-    public void clear(){
+    public void clear() {
         taskList.clear();
     }
 
@@ -19,7 +19,7 @@ public class TaskList {
      *
      * @return int size of task list.
      */
-    public int size(){
+    public int size() {
         return taskList.size();
     }
 
@@ -29,7 +29,7 @@ public class TaskList {
      * @param list list of objects to be added to the task list.
      * @return boolean true if added successfully.
      */
-    public boolean addAll(List<Task> list){
+    public boolean addAll(List<Task> list) {
         return taskList.addAll(list);
     }
 
@@ -39,7 +39,7 @@ public class TaskList {
      * @param task task to be added.
      * @return boolean true if added successfully.
      */
-    public boolean add(Task task){
+    public boolean add(Task task) {
         return taskList.add(task);
     }
 
@@ -50,7 +50,7 @@ public class TaskList {
      * @return task task in the given index.
      * @see Task
      */
-    public Task get(int index){
+    public Task get(int index) {
         return taskList.get(index);
     }
 
@@ -61,7 +61,7 @@ public class TaskList {
      * @return Task task deleted in the position.
      * @see Task
      */
-    public Task delete(int position){
+    public Task delete(int position) {
         return taskList.remove(position);
     }
 }
