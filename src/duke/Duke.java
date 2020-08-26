@@ -1,5 +1,7 @@
 package duke;
 
+import duke.data.DukeCommandSet;
+import duke.data.DukeTaskList;
 import duke.input.UserInput;
 import duke.command.CommandParser;
 import duke.data.DukeState;
@@ -10,16 +12,32 @@ import java.io.IOException;
 
 public class Duke {
 
-    private void run() throws IOException {
-        DukeStorage.loadSavedTasks();
-        Ui.greet();
+    public DukeCommandSet commandSet;
+    public DukeState state;
+    public Ui ui;
+    public CommandParser commandParser;
+    public DukeTaskList taskList;
+    public DukeStorage storage;
 
-        while (!DukeState.exitLoop) {
+    protected Duke() {
+        commandSet = new DukeCommandSet();
+        state = new DukeState();
+        ui = new Ui(this);
+        commandParser = new CommandParser();
+        taskList = new DukeTaskList();
+        storage = new DukeStorage(this);
+    }
+
+    private void run() throws IOException {
+        storage.loadSavedTasks();
+        ui.greet();
+
+        while (!state.exitLoop) {
             String inputLine = UserInput.getOneLine();
-            CommandParser.parse(inputLine);
+            commandParser.parse(inputLine, this);
         }
 
-        DukeStorage.saveCurrentTasks();
+        storage.saveCurrentTasks();
     }
 
     public static void main(String[] args) throws IOException {
