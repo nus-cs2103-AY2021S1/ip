@@ -3,14 +3,14 @@ package duke;
 public class Ui {
 
     public void greet() {
-        String greeting = "Hello mah dud, itza handsome robo speakin\n" +
-                "What duh hell du yu wan?";
+        String greeting = "Hello mah dud, itza handsome robo speakin\n"
+                + "What duh hell du yu wan?";
         System.out.println(greeting);
     }
 
     public void farewell() {
-        String farewell = "Never come back,\n" +
-                "dun wanna see yu ever agin";
+        String farewell = "Never come back,\n"
+                + "dun wanna see yu ever agin";
         System.out.println(farewell);
     }
 

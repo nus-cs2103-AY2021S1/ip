@@ -39,8 +39,7 @@ public class ParserTest {
     @Test
     public void parse_byeEntry_success() {
 
-        boolean actualResult =  new Parser().parse(new TaskList(), "bye");
-
+        boolean actualResult = new Parser().parse(new TaskList(), "bye");
         assertTrue(actualResult);
     }
 
@@ -49,8 +48,7 @@ public class ParserTest {
 
         new Parser().parse(new TaskList(), "list");
 
-        String expectedResult = "Here yur tasks faggit: \n" +
-                "empty";
+        String expectedResult = "Here yur tasks faggit: \n" + "empty";
         String actualResult = outputStreamCaptor.toString().trim();
 
         assertEquals(expectedResult, actualResult);

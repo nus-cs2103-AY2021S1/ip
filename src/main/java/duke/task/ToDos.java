@@ -17,6 +17,8 @@ public class ToDos extends Task {
 
     @Override
     public String toString() {
-        return by == null ? "[T]" + super.toString() : "[T]" + super.toString() + " (by: " + by + ")" ;
+        return by == null
+                ? "[T]" + super.toString()
+                : "[T]" + super.toString() + " (by: " + by + ")";
     }
 }

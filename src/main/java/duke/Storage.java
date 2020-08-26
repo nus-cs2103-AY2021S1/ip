@@ -12,7 +12,7 @@ public class Storage {
         this.filepath = filepath;
     }
 
-    static void reset () {
+    static void reset() {
         try {
             FileWriter writer = new FileWriter(new File("text-ui-test/ACTUAL.TXT"), false);
             writer.write("");
@@ -22,7 +22,7 @@ public class Storage {
         }
     }
 
-    static void writeInitial (String input) {
+    static void writeInitial(String input) {
         try {
             FileWriter writer = new FileWriter(new File("text-ui-test/ACTUAL.TXT"), true);
             writer.write(input);
@@ -32,7 +32,7 @@ public class Storage {
         }
     }
 
-    static void writeFinally (String input) {
+    static void writeFinally(String input) {
         try {
             FileWriter writer = new FileWriter(new File("text-ui-test/ACTUAL.TXT"), true);
             writer.write("\n" + input);
