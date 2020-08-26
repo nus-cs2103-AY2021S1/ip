@@ -1,9 +1,11 @@
 package duke.task;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.DukeStorageException;
 import duke.exceptions.DukeTaskCreationException;
 import duke.parser.DateParser;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -77,6 +79,18 @@ public class Event extends Task {
         return String.format("E|%s|%s|%s", super.completed ? "Y" : "N",
                 DateParser.parseLocalDateTime(dateTime),
                 super.description);
+    }
+
+    @Override
+    public boolean match(String searchParameter) {
+        try {
+            LocalDate searchDate = DateParser.parseString(searchParameter).toLocalDate();
+            if (searchDate.isEqual(dateTime.toLocalDate())) {
+                return true;
+            }
+        } catch (DukeException e) {
+        }
+        return searchParameter.contains(description) || description.contains(searchParameter);
     }
 
     /**

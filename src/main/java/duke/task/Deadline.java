@@ -4,12 +4,15 @@ import duke.exceptions.DukeStorageException;
 import duke.exceptions.DukeTaskCreationException;
 import duke.parser.DateParser;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
  * The {@code Deadline} class represents a task with a specific deadline.
  * Extends the {@link Task} class.
  */
+
+
 public class Deadline extends Task {
 
     private static final String DEADLINE_DELIMITER = "/by";
@@ -78,6 +81,18 @@ public class Deadline extends Task {
         return String.format("D|%s|%s|%s", super.completed ? "Y" : "N",
                 DateParser.parseLocalDateTime(dateTime),
                 super.description);
+    }
+
+    @Override
+    public boolean match(String searchParameter) {
+        try {
+            LocalDate searchDate = DateParser.parseString(searchParameter).toLocalDate();
+            if (searchDate.isEqual(dateTime.toLocalDate())) {
+                return true;
+            }
+        } catch (DukeException e) {
+        }
+        return searchParameter.contains(description) || description.contains(searchParameter);
     }
 
     /**

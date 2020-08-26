@@ -70,6 +70,11 @@ public class ToDo extends Task {
      * @return a string representation of this {@code ToDo}.
      */
     @Override
+    public boolean match(String searchParameter) {
+        return description.contains(searchParameter) || searchParameter.contains(description);
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

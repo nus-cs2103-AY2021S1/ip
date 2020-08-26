@@ -1,12 +1,13 @@
 package duke.task;
 
 import duke.Encodable;
+import duke.Searchable;
 
 /**
  * The {@code Task} class provides a skeletal implementation of an object representing a task.
- * Implements the {@code Encodable} interface.
+ * Implements the {@code Encodable} and {@code Searchable} interface.
  */
-public abstract class Task implements Encodable<Task> {
+public abstract class Task implements Encodable<Task>, Searchable {
 
     protected String description;
     protected boolean completed;
