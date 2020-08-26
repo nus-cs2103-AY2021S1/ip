@@ -2,7 +2,6 @@ package main.java.duke;
 
 public class DukeException extends Throwable {
 
-
     /** ExceptionType object of DukeException */
     protected ExceptionType et;
 
@@ -23,6 +22,7 @@ public class DukeException extends Throwable {
         NO_MEANING,
         EMPTY_ILLEGAL,
         TODO_INCOMPLETE,
+        FIND_INCOMPLETE,
         DEADLINE_INCOMPLETE,
         EVENT_INCOMPLETE,
         READ_FILE,
@@ -50,11 +50,15 @@ public class DukeException extends Throwable {
             break;
         case EMPTY_ILLEGAL:
             output = "     ☹ OOPS!!! Your number input is empty or invalid." +
-                    "\n     Please follow the format: 'done TASK_NUMBER' or 'delete TASK_NUMBER'";
+                    "\n     Please foxllow the format: 'done TASK_NUMBER' or 'delete TASK_NUMBER'";
             break;
         case TODO_INCOMPLETE:
             output = "     ☹ OOPS!!! The description of a todo cannot be empty." +
                     "\n     Please follow the format: 'todo MY_TASK'";
+            break;
+        case FIND_INCOMPLETE:
+            output = "     ☹ OOPS!!! The keyword of a search cannot be empty." +
+                    "\n     Please follow the format: 'find KEYWORD'";
             break;
         case DEADLINE_INCOMPLETE:
             output = "     ☹ OOPS!!! The description of a deadline cannot be empty or incomplete." +

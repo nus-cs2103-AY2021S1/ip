@@ -1,10 +1,10 @@
 package main.java.duke;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class TaskList {
-
 
     /**
      * Collection of Task objects for easy modification
@@ -31,9 +31,9 @@ public class TaskList {
      * Constructor of TaskList class.
      * Initialize the taskCollections to be an empty ArrayList.
      *
-     * @param taskCollections  List of Task objects to initialize the class variable taskCollections.
-     * @param memoFileDir  Directory of the file to store tasks.
-     * @param memoFileName  Name of the file to store tasks.
+     * @param taskCollections List of Task objects to initialize the class variable taskCollections.
+     * @param memoFileDir     Directory of the file to store tasks.
+     * @param memoFileName    Name of the file to store tasks.
      */
     public TaskList(List<Task> taskCollections, String memoFileDir, String memoFileName) {
         this.taskCollections = taskCollections;
@@ -103,6 +103,31 @@ public class TaskList {
                 HandleException.handleException(DukeException.ExceptionType.EMPTY_ILLEGAL);
             }
         }
+    }
+
+
+    /**
+     * Return List of the Task objects matching the keyword.
+     *
+     * @param keyword  User input of keyword to look for.
+     * @return Matching Task objects.
+     */
+    public List<Task> searchTask(String keyword) {
+        List<Task> searchResult = new ArrayList<>();
+        Iterator itr = taskCollections.iterator();
+        while (itr.hasNext()) {
+            Task currTask = (Task) itr.next();
+            if (currTask.getDescription().contains(keyword)) {
+                searchResult.add(currTask);
+            } else {
+                if (currTask.getType().equals("D") || currTask.getType().equals("E")) {
+                    if (currTask.getInfo()[3].contains(keyword)) {
+                        searchResult.add(currTask);
+                    }
+                }
+            }
+        }
+        return searchResult;
     }
 
 

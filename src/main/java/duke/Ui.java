@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class Ui {
 
-
     /** Directory of local file to store tasks */
     protected String filePath;
 
@@ -79,15 +78,36 @@ public class Ui {
             } else if (commandTask.length == 2 && !commandTask[0].equals("todo")) {
                 if (commandTask[0].equals("exception")) {
                     switch (commandTask[1]) {
-                        case "todo":
-                            HandleException.handleException(DukeException.ExceptionType.TODO_INCOMPLETE);
-                            break;
-                        case "event":
-                            HandleException.handleException(DukeException.ExceptionType.EVENT_INCOMPLETE);
-                            break;
-                        case "deadline":
-                            HandleException.handleException(DukeException.ExceptionType.DEADLINE_INCOMPLETE);
-                            break;
+                    case "todo":
+                        HandleException.handleException(DukeException.ExceptionType.TODO_INCOMPLETE);
+                        break;
+                    case "event":
+                        HandleException.handleException(DukeException.ExceptionType.EVENT_INCOMPLETE);
+                        break;
+                    case "deadline":
+                        HandleException.handleException(DukeException.ExceptionType.DEADLINE_INCOMPLETE);
+                        break;
+                    case "empty_illegal":
+                        HandleException.handleException(DukeException.ExceptionType.EMPTY_ILLEGAL);
+                        break;
+                    case "no_meaning":
+                        HandleException.handleException(DukeException.ExceptionType.NO_MEANING);
+                        break;
+                    }
+                } else if (commandTask[0].equals("find")) {
+                    List<Task> matchList = taskList.searchTask(commandTask[1]);
+                    if (matchList.size() == 0) {
+                        System.out.println(
+                                SpecialFormat.INDENT + "Sorry, there is no match for your keyword!");
+                    } else {
+                        int temp = 1;
+                        System.out.println(SpecialFormat.INDENT +
+                                "Here are the tasks that match your keyword:");
+                        Iterator itr = matchList.iterator();
+                        while (itr.hasNext()) {
+                            System.out.println(SpecialFormat.INDENT + temp + "." + itr.next());
+                            temp++;
+                        }
                     }
                 }
             } else if (commandTask.length == 2 && !commandTask[0].equals("todo")) {

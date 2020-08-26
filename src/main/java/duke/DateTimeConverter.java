@@ -35,11 +35,18 @@ public class DateTimeConverter {
         try {
             if (dateTime.length() > 11) {
                 String[] parts = dateTime.split(" ", 2);
-                time = parts[0].length() == 4 ? parts[0] : parts[1];
-                date = parts[0].length() == 4 ? parts[1] : parts[0];
+                time = parts[0].length() == 4
+                        ? parts[0]
+                        : parts[1];
+                date = (parts[0].length() <= 4)
+                        ? parts[1]
+                        : parts[0];
             } else {
                 date = dateTime;
                 time = "2359";
+            }
+            if (time.length() == 2) {
+                time += "00";
             }
             LocalTime lt = LocalTime.of(
                     Integer.parseInt(time.substring(0, 2)), Integer.parseInt(time.substring(2)));

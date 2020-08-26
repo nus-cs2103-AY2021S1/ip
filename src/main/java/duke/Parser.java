@@ -73,8 +73,19 @@ public class Parser {
                     commandType = "exception";
                     return new String[] {commandType, "empty_illegal"};
                 }
+            } else if (commandType.equals("find")) {
+                String keyword;
+                try {
+                    keyword = inputSplitArr[1];
+                } catch (Exception e) {
+                    return new String[] {"exception", "find"};
+                }
+                /*if (keyword.isBlank()) {
+                    return new String[] {"exception", "find"};
+                }*/
+                output = new String[] {commandType, keyword};
             } else if (commandType.equals("deadline") || commandType.equals("event") ||
-                        commandType.equals("todo")) {
+                    commandType.equals("todo")) {
                 String taskContent;
                 String dateTime;
                 boolean exceptionAbsent = true;

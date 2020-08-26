@@ -61,7 +61,6 @@ public class Event extends Task {
      */
     @Override
     public String[] getInfo() {
-
         return new String[] {this.getType(), this.isDone(), this.description, this.getAt()};
     }
 
