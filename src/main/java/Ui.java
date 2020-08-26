@@ -23,7 +23,6 @@ public class Ui {
 
     public static void printDeleteTaskMessage() {
         System.out.println("I have removed the task from your list.\n" + LINE);
-
     }
     public static void printDoneMessage(boolean isDone) {
         if (isDone) {

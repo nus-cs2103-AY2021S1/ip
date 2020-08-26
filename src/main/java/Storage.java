@@ -1,5 +1,9 @@
 package main.java;
 
+import main.java.Task.Deadline;
+import main.java.Task.Event;
+import main.java.Task.Task;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
