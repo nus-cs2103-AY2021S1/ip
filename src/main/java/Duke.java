@@ -22,10 +22,10 @@ public class Duke {
         			num++;
         		}
         	} else if (input.equals(new String("done"))) {
-        		int index = Integer.parseInt(sc.next());
-        		Task currenTask = dataBase.get(index - 1);
-        		currenTask.markAsDone();
-        		System.out.println("Nice! I've marked this task as done:\n" + currenTask.toString());
+        		int index = sc.nextInt();
+        		Task currentTask = dataBase.get(index - 1);
+        		currentTask.markAsDone();
+        		System.out.println("Nice! I've marked this task as done:\n" + currentTask.toString());
         	} else if (input.equals(new String("todo"))) {
         		String taskContent = sc.nextLine();
         		ToDo newTask = new ToDo(taskContent);
@@ -54,8 +54,12 @@ public class Duke {
         		Event newTask = new Event(taskContent, taskTime);
         		dataBase.add(newTask);
         		System.out.println("Got it. I've added this task:\n" + newTask.toString() + "\nNow you have " + dataBase.size() + " tasks in the list.");
-        	} 
-        	else {
+        	} else if (input.equals(new String("delete"))) {
+        		int index = sc.nextInt();
+        		Task currentTask = dataBase.get(index - 1);
+        		System.out.println("Noted. I've removed this task:\n" + currentTask.toString() + "\nNow you have " + dataBase.size() + " tasks in the list.");
+        		dataBase.remove(index - 1);
+        	} else {
         		System.out.println("added: " + input);
         		dataBase.add(new Task(input));
         	}
