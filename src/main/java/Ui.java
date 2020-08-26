@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * <h1>User Interface class</h1>
+ * Deals with interaction with the users.
+ */
 public class Ui {
 
     private static String LINE = "____________________________________________________________";
@@ -12,6 +16,15 @@ public class Ui {
         this.storage = storage;
     }
 
+    /**
+     * Users will be greeted by Duke at the start.
+     * A parser will be used to determine the command type based on the input.
+     * Based on the command type, its respective method will be called to
+     * carry out the command.
+     * The updated list of tasks will be stored upon every command.
+     * Duke will end when users type "bye".
+     * @throws IOException
+     */
     public void startProgram() throws IOException {
         greet();
 
@@ -66,6 +79,9 @@ public class Ui {
         end();
     }
 
+    /**
+     * Greeting of users to signify the start of the program.
+     */
     public void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -79,6 +95,9 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Good bye to signify the end of the program.
+     */
     public void end() {
         String end = "Goodbye! Hope to see you again soon. :)";
         System.out.println(LINE);
@@ -86,6 +105,9 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Prints out the current list of tasks.
+     */
     public void list() {
         if (list.isEmpty()) {
             System.out.println("You have no tasks, go out and have fun! ~");
@@ -97,12 +119,21 @@ public class Ui {
         }
     }
 
+    /**
+     * Marks the task indicated as completed and prints out the task.
+     * that was completed.
+     * @param taskNumber Task's number in the list.
+     */
     public void done(int taskNumber) {
         list.getList().get(taskNumber - 1).completed();
         System.out.println("You've completed this task:");
         System.out.println((list.getList().get(taskNumber - 1)).toString());
     }
 
+    /**
+     * Removes the task indicated from the list and prints out the task.
+     * @param taskNumber Task's number in the list.
+     */
     public void delete(int taskNumber) {
         String deleted = (list.getList().get(taskNumber - 1)).toString();
         list.remove(taskNumber - 1);
@@ -111,6 +142,10 @@ public class Ui {
         System.out.println(list.toString());
     }
 
+    /**
+     * Creates a new todo task.
+     * @param task Task details.
+     */
     public void todo(String task) {
         Todo todo = new Todo(task, false);
         list.add(todo);
@@ -119,6 +154,11 @@ public class Ui {
         System.out.println(list.toString());
     }
 
+    /**
+     * Creates a new event.
+     * @param task Event details.
+     * @param date Date of event.
+     */
     public void event(String task, String date) {
         Event event = new Event(task, date, false);
         list.add(event);
@@ -127,6 +167,11 @@ public class Ui {
         System.out.println(list.toString());
     }
 
+    /**
+     * Creates a new deadline.
+     * @param task Deadline details.
+     * @param date Date of deadline.
+     */
     public void deadline(String task, String date) {
         Deadline deadline = new Deadline(task, date, false);
         list.add(deadline);

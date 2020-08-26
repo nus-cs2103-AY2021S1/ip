@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <h1>TaskList class</h1>
+ * List of all the current tasks that the user has inputted.
+ */
 public class TaskList {
     private List<Task> list;
     private int totalTasks;
@@ -10,6 +14,10 @@ public class TaskList {
         totalTasks = 0;
     }
 
+    /**
+     * Overloaded method that takes in a list of tasks retrieved from duke.txt.
+     * @param list List of tasks that the user inputted previously.
+     */
     public TaskList(List<Task> list) {
         this.list = list;
         totalTasks = list.size();
