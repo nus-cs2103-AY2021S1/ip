@@ -1,5 +1,6 @@
 package main.java;
 
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
@@ -61,7 +62,9 @@ class Store {
         } catch (DukeGotNoArgumentsException e) {
             System.out.println(e.getMessage() + "\n" + line);
         } catch (DataFormatException e) {
-            System.out.println("Please key in again with the date in the ddmmyyyy format.");
+            System.out.println("Please key in again with the date in the ddmmyyyy format." + "\n" + line);
+        } catch (DateTimeException e) {
+            System.out.println("Please key in again with a valid date." + "\n" + line);
         }
     }
 

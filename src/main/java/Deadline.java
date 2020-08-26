@@ -1,6 +1,7 @@
 package main.java;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 class Deadline extends Task {
     protected LocalDate date;
@@ -17,6 +18,8 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D] [" + this.getStatusIcon() + "] " + this.description + " ----- By: " + this.date;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd E");
+        String dateText = this.date.format(formatter);
+        return "[D] [" + this.getStatusIcon() + "] " + this.description + " ----- By: " + dateText;
     }
 }
