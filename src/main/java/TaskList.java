@@ -41,11 +41,15 @@ public class TaskList implements java.io.Serializable {
      * Prints the list of tasks through the UI class
      */
     public void print_tasks() {
-        System.out.print(UI.LINE);
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.print((i + 1) + "." + tasks.get(i));
+        if(tasks.size() == 0){
+            UI.print("There are no tasks!\n");
+            return;
         }
-        System.out.print(UI.LINE);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append((i + 1) + "." + tasks.get(i).toString());
+        }
+        UI.print(sb.toString());
     }
 
     /**
@@ -85,6 +89,10 @@ public class TaskList implements java.io.Serializable {
         Storage.store(this);
     }
 
+    /**
+     * Finds tasks in this tasklist that matches the provided substring, and prints them.
+     * @param substring string to match
+     */
     public void find(String substring) {
         StringBuilder sb = new StringBuilder();
         int counter = 0;
