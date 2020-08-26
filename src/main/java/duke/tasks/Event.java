@@ -1,14 +1,15 @@
-package main.java;
+package main.java.duke.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import main.java.duke.DukeException;
 
-public class Deadline extends Task{
-    private char type = 'D';
+public class Event extends Task{
+    private char type = 'E';
     private LocalDate date;
-    private final String BY = "best consumed by: ";
-    Deadline(String task, String date) throws DukeException {
+    private final String AT = "bought at: ";
+    public Event(String task, String date) throws DukeException {
         super(task);
         try {
             this.date = LocalDate.parse(date);
@@ -19,7 +20,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return String.format("[%c]%s %s%s", type, super.toString(), BY,
+        return String.format("[%c]%s %s%s", type, super.toString(), AT,
                 date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 

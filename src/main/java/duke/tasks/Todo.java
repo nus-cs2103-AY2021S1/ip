@@ -1,8 +1,8 @@
-package main.java;
+package main.java.duke.tasks;
 
 public class Todo extends Task {
     private char type = 'T';
-    Todo(String task) {
+    public Todo(String task) {
         super(task);
     }
 

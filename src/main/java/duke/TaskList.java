@@ -1,6 +1,7 @@
-package main.java;
+package main.java.duke;
 
 import java.util.ArrayList;
+import main.java.duke.tasks.Task;
 
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -16,7 +17,10 @@ public class TaskList {
     public String listAllTasks() {
         String res = "";
         for (int i = 0; i < taskList.size(); i++) {
-            res += String.format("%d. %s\n", i + 1, taskList.get(i));
+            res += String.format("%d. %s", i + 1, taskList.get(i));
+            if (i < taskList.size() - 1) {
+                res += "\n";
+            }
         }
         return res;
     }

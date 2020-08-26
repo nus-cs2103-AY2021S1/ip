@@ -1,4 +1,9 @@
-package main.java;
+package main.java.duke;
+
+import main.java.duke.tasks.Task;
+import main.java.duke.tasks.Deadline;
+import main.java.duke.tasks.Todo;
+import main.java.duke.tasks.Event;
 
 public class Duke {
     private Storage storage;
@@ -34,7 +39,6 @@ public class Duke {
                     if (command.equals("done")) {
                         Task task = tasks.doneTask(taskNum);
                         storage.editTaskList(task.saveToString(), taskNum, false);
-                        //shift to Ui
                         ui.printInBorder("Nice I've digested the following:\n"
                                 + task.toString() + "\n" + "Now I'm hungry again! FEED ME MORE :3");
                     } else {
