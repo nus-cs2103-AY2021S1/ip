@@ -77,13 +77,13 @@ public class Storage {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                System.out.println(this.IOMESSAGE);
+                Ui.addLine(this.IOMESSAGE);
             } catch (InvalidTypeException e) {
                 System.out.println(e.toString());
-                System.out.println(this.INVALIDMESSAGE);
+                Ui.addLine(this.INVALIDMESSAGE);
             } catch (InvalidDataException e) {
                 System.out.println(e.toString());
-                System.out.println(this.INVALIDMESSAGE);
+                Ui.addLine(this.INVALIDMESSAGE);
             }
         }
 

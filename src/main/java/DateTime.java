@@ -1,30 +1,35 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class DateTime {
-    private LocalDate datetime = LocalDate.now();
-    private final String INVALIDDATEMESSAGE = "Your Date must be in the format YYYY-MM-DD. Initialising date to Today!";
+    private LocalDate date = LocalDate.now();
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private final String INVALIDDATEMESSAGE = "Your Date must be in the format yyyy-mm-dd. Initialising date to Today!";
 
-    public DateTime(String datetime) {
-        if (isValidFormat(datetime)) {
-            this.datetime = LocalDate.parse(datetime);
+    public DateTime(String date) {
+        if (isValidFormat(date)) {
+            this.date = LocalDate.parse(date);
         } else {
             System.out.println(INVALIDDATEMESSAGE);
         }
     }
 
     public static Boolean isValidFormat(String date) {
-        String[] components = date.split("-");
-        return components.length == 3
-                && components[0].length() == 4
-                && components[1].length() == 2
-                && Integer.parseInt(components[1]) <= 12
-                && components[2].length() == 2
-                && Integer.parseInt(components[2]) <= 31;
+        try {
+            FORMATTER.parse(date);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public String saveString() {
+        return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     @Override
     public String toString() {
-        return datetime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }

@@ -8,13 +8,13 @@ public class Event extends Task {
 
     public Event(String title, Boolean isComplete, String time) {
         super(title, isComplete);
-        this.time = time;
+        this.time = new DateTime(time);
     }
 
     @Override
     public String saveString() {
         int completeSymbol = this.complete ? 1 : 0;
-        return String.format("E|%d|%s|%s", completeSymbol, this.title, this.time);
+        return String.format("E|%d|%s|%s", completeSymbol, this.title, this.time.saveString());
     }
 
     @Override

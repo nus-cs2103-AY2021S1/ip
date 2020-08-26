@@ -4,29 +4,19 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class AddList {
-    private final String intro = "Hello I am Duke!\nWhat can I help you with?";
-    private final String goodbye = "Goodbye. See you soon!";
     private final String line = "---------------------------------------------";
     private ArrayList<Task> items;
     private int total;
     Storage storage;
 
     public AddList() {
-        this.addLines(this.intro);
         this.storage = new Storage();
         this.items = storage.readData();
         this.total = items.size();
     }
-
-    public void addLines(String input) {
-        System.out.println(this.line);
-        System.out.println(input);
-        System.out.println(this.line);
-    }
-
+    
     public void bye() {
         try {
-            this.addLines(this.goodbye);
             storage.writeData(this.items);
         } catch (IOException e) {
             e.printStackTrace();
@@ -56,11 +46,11 @@ public class AddList {
             Task toAdd = this.handleInput(input);
             this.items.add(toAdd);
             this.total++;
-            this.addLines(String.format("    Got it. I've added this task:\n    %s\n    Now you have %d tasks in the list.", toAdd, this.total));
+            Ui.addLine(String.format("    Got it. I've added this task:\n    %s\n    Now you have %d tasks in the list.", toAdd, this.total));
         } catch (InvalidDescriptionException e) {
-            this.addLines(e.toString());
+            Ui.addLine(e.toString());
         } catch (InvalidTypeException e) {
-            this.addLines(e.toString());
+            Ui.addLine(e.toString());
         }
     }
 
@@ -69,7 +59,7 @@ public class AddList {
         for (int i = 0; i < this.total; i++) {
             res += String.format("    %d.%s\n", i + 1, this.items.get(i));
         }
-        this.addLines(res);
+        Ui.addLine(res);
     }
 
     public void completeTask(int idx) throws InvalidIndexException {
@@ -78,7 +68,7 @@ public class AddList {
         }
         Task t = this.items.get(idx);
         t.complete();
-        this.addLines(String.format("    Nice! I've marked this task as done:\n    %s", t));
+        Ui.addLine(String.format("    Nice! I've marked this task as done:\n    %s", t));
     }
 
     public void deleteTask(int idx) throws InvalidIndexException {
@@ -88,7 +78,7 @@ public class AddList {
         Task t = this.items.get(idx);
         this.items.remove(idx);
         this.total--;
-        this.addLines(String.format("    Nice! I've removed this task:\n    %s\n    Now you have %d tasks in the list.", t, this.total));
+        Ui.addLine(String.format("    Nice! I've removed this task:\n    %s\n    Now you have %d tasks in the list.", t, this.total));
     }
 
     public void allocate(String input) {
@@ -103,14 +93,14 @@ public class AddList {
             try {
                 this.completeTask(idx);
             } catch (InvalidIndexException e) {
-                this.addLines(e.toString());
+                Ui.addLine(e.toString());
             }
         } else if (arr[0].equals("delete")) {
             int idx = Integer.parseInt(arr[1]) - 1;
             try {
                 this.deleteTask(idx);
             } catch (InvalidIndexException e) {
-                this.addLines(e.toString());
+                Ui.addLine(e.toString());
             }
         } else {
             this.add(input);

@@ -8,13 +8,13 @@ public class Deadline extends Task {
 
     public Deadline(String title, Boolean isComplete, String deadline) {
         super(title, isComplete);
-        this.deadline = deadline;
+        this.deadline = new DateTime(deadline);
     }
 
     @Override
     public String saveString() {
         int completeSymbol = this.complete ? 1 : 0;
-        return String.format("D|%d|%s|%s", completeSymbol, this.title, this.deadline);
+        return String.format("D|%d|%s|%s", completeSymbol, this.title, this.deadline.saveString());
     }
 
     @Override
