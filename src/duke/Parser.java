@@ -4,7 +4,7 @@ import duke.command.*;
 
 public class Parser {
 
-    public static Command parse(String command) {
+    public static Command parse(String command) throws DukeException {
         String arr[] = command.split(" ");
         String keyWord = arr[0];
 
@@ -23,12 +23,7 @@ public class Parser {
         } else if(keyWord.equals("delete")) {
             return new DeleteTaskCommand(command);
         } else {
-            try {
-                throw new DukeException("☹ OOPS!!! wait..... I don't understand your order my sir.");
-            } catch (DukeException e) {
-                new Ui().saySomthing(e.getMessage());
-            }
+            throw new DukeException("☹ OOPS!!! wait..... I don't understand your order my sir.");
         }
-        return null;
     }
 }

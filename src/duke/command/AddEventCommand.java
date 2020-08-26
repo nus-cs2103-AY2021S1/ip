@@ -7,7 +7,7 @@ import duke.task.TaskList;
 import java.io.IOException;
 
 public class AddEventCommand extends Command {
-    AddEventCommand(String command) {
+    public AddEventCommand(String command) {
         super(command);
     }
 

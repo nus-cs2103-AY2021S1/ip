@@ -15,5 +15,7 @@ public abstract class Command {
 
     public void execute(TaskList list, Ui ui, Storage saveData){};
 
-    public boolean isExit(){return false;};
+    public boolean isExit(){
+        return false;
+    };
 }

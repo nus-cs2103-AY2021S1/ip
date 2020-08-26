@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class AddTodoCommand extends Command {
 
-    AddTodoCommand(String command) {
+    public AddTodoCommand(String command) {
         super(command);
     }
 

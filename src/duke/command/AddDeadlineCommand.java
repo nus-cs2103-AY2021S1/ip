@@ -9,7 +9,7 @@ import java.io.IOException;
 public class AddDeadlineCommand extends Command {
 
 
-    AddDeadlineCommand(String command) {
+    public AddDeadlineCommand(String command) {
         super(command);
     }
 

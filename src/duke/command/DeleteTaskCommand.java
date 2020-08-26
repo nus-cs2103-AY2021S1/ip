@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class DeleteTaskCommand extends Command {
 
-    DeleteTaskCommand(String command) {
+    public DeleteTaskCommand(String command) {
         super(command);
     }
 
