@@ -1,5 +1,10 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
+
 /**
  * Represents a specific task which is an event.
  */
@@ -24,6 +29,18 @@ public class Event extends Task {
         tag = "E";
     }
 
+    public Event(String done, String description, String date, String time) {
+        super(description);
+        tag = "E";
+        if (!date.equals("null")) {
+            this.date = LocalDate.parse(date);
+            this.at = time;
+        }
+        if (done.equals("1")) {
+            this.markAsDone();
+        }
+    }
+
     @Override
     public String getTaskType() {
         return tag;
@@ -35,8 +52,19 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return at == null
-                ? "[E]" + super.toString()
-                : "[E]" + super.toString() + " (by: " + at + ")";
+        if (at == null) {
+            return "[E]" + super.toString();
+        } else {
+            String now = "AM";
+            LocalTime localTime = LocalTime.parse(at, DateTimeFormatter.ofPattern("HHmm"));
+            int hour = localTime.get(ChronoField.CLOCK_HOUR_OF_DAY);
+            int minute = localTime.get(ChronoField.MINUTE_OF_HOUR);
+            if (hour > 12) {
+                now = "PM";
+                hour -= 12;
+            }
+            return "[E]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                    + ", " + hour + ":" + minute + now + ")";
+        }
     }
 }

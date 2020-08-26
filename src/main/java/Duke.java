@@ -2,6 +2,7 @@ import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 
 import java.util.Scanner;
 
@@ -10,7 +11,6 @@ import java.util.Scanner;
  */
 public class Duke {
 
-<<<<<<< HEAD
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -21,12 +21,7 @@ public class Duke {
         tasks = new TaskList();
         parser = new Parser();
         storage = new Storage(filePath);
-//        try {
-//            tasks = new TaskList(storage.load());
-//        } catch (DukeException e) {
-//            ui.showLoadingError();
-//            tasks = new TaskList();
-//        }
+        tasks = storage.load();
     }
 
     public void run() {
@@ -44,6 +39,7 @@ public class Duke {
             // Change to DukeException
             ui.showError(e.getMessage());
         }
+        storage.save();
         ui.farewell();
     }
 

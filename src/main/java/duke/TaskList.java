@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.exception.InvalidIndexException;
 import duke.task.Task;
 import duke.task.ToDos;
 import duke.task.Deadline;
@@ -35,6 +36,10 @@ public class TaskList {
         return taskList.size();
     }
 
+    public void addTask(Task task) {
+        taskList.add(task);
+    }
+
     /**
      * Creates a task and adds it into the List of tasks.
      *
@@ -43,10 +48,6 @@ public class TaskList {
      * @param deadline Deadline of task.
      * @return a String representation of the task added.
      */
-    private void addTask(Task task) {
-        taskList.add(task);
-    }
-
     public String addTask(Task.TaskType taskType, String description, String deadline) {
         Task task = null;
         switch (taskType) {

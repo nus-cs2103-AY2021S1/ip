@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Represents a task.
  */
@@ -13,9 +15,11 @@ public class Task {
 
     protected String description;
     protected boolean isDone;
+    protected String tag = "";
+    protected LocalDate date = null;
     public static final String tick = "\u2713";
     public static final String cross = "\u2718";
-    protected LocalDate date = null;
+
 
     public Task(String description) {
         this.description = description;

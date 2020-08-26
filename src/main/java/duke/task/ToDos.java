@@ -1,5 +1,10 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
+
 /**
  * Represents a specific task which is a to do.
  */
@@ -23,6 +28,18 @@ public class ToDos extends Task {
         tag = "T";
     }
 
+    public ToDos(String done, String description, String date, String time) {
+        super(description);
+        tag = "T";
+        if (!date.equals("null")) {
+            this.date = LocalDate.parse(date);
+            this.by = time;
+        }
+        if (done.equals("1")) {
+            this.markAsDone();
+        }
+    }
+
     @Override
     public String getTaskType() {
         return tag;
@@ -34,8 +51,19 @@ public class ToDos extends Task {
 
     @Override
     public String toString() {
-        return by == null
-                ? "[T]" + super.toString()
-                : "[T]" + super.toString() + " (by: " + by + ")";
+        if (by == null) {
+            return "[T]" + super.toString();
+        } else {
+            String now = "AM";
+            LocalTime localTime = LocalTime.parse(by, DateTimeFormatter.ofPattern("HHmm"));
+            int hour = localTime.get(ChronoField.CLOCK_HOUR_OF_DAY);
+            int minute = localTime.get(ChronoField.MINUTE_OF_HOUR);
+            if (hour > 12) {
+                now = "PM";
+                hour -= 12;
+            }
+            return "[T]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                    + ", " + hour + ":" + minute + now + ")";
+        }
     }
 }

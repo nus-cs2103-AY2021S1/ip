@@ -51,7 +51,7 @@ public class Ui {
      *
      * @param e String of loading error to be printed.
      */
-    public void showLoadingError(String e) {
-        System.out.println(e);
+    public void showLoadingError() {
+        System.out.println("Error when loading file...");
     }
 }

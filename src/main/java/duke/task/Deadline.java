@@ -1,5 +1,10 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
+
 /**
  * Represents a specific task which has a deadline.
  */
@@ -23,6 +28,18 @@ public class Deadline extends Task {
         tag = "D";
     }
 
+    public Deadline(String done, String description, String date, String time) {
+        super(description);
+        tag = "D";
+        if (!date.equals("null")) {
+            this.date = LocalDate.parse(date);
+            this.by = time;
+        }
+        if (done.equals("1")) {
+            this.markAsDone();
+        }
+    }
+
     @Override
     public String getTaskType() {
         return tag;
@@ -34,8 +51,19 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return by == null
-                ? "[D]" + super.toString()
-                : "[D]" + super.toString() + " (by: " + by + ")";
+        if (by == null) {
+            return "[D]" + super.toString();
+        } else {
+            String now = "AM";
+            LocalTime localTime = LocalTime.parse(by, DateTimeFormatter.ofPattern("HHmm"));
+            int hour = localTime.get(ChronoField.CLOCK_HOUR_OF_DAY);
+            int minute = localTime.get(ChronoField.MINUTE_OF_HOUR);
+            if (hour > 12) {
+                now = "PM";
+                hour -= 12;
+            }
+            return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                    + ", " + hour + ":" + minute + now + ")";
+        }
     }
 }
