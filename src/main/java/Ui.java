@@ -36,6 +36,10 @@ public class Ui {
         System.out.println("Nice! I've marked this task as done:\n"
                 + task);
     }
+    
+    public void showFindMessage() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
 
     /**
      * Prints a message to indicate that a task has been deleted.

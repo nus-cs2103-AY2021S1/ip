@@ -22,6 +22,11 @@ public class Parser {
             s2.skip("done");
             int taskNumber = s2.nextInt();
             return new DoneCommand(taskNumber);
+        } else if (fullCommand.contains("find")) {
+            // done command
+            s2.skip("find");
+            String filterWord = s2.next();
+            return new FindCommand(filterWord);
         } else if (fullCommand.equals("list")) {
             // list command
             return new ListCommand();

@@ -39,11 +39,8 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException, IOException {
         try {
             File f = new File(this.filePath);
-            if (!f.exists()) {
-                f = new File("data/duke.txt");
-                f.getParentFile().mkdir();
-                f.createNewFile();
-            }
+            f.getParentFile().mkdir();
+            f.createNewFile();
 
             Scanner s = new Scanner(f);
 
