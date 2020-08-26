@@ -14,6 +14,18 @@ public class Task {
 			throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
 		}
 	}
+	public String getType() {
+		return "";
+	}
+	public boolean isDone() {
+		return this.isDone;
+	}
+	public String  getContent() {
+		return this.taskContent;
+	}
+	public String  getDate() {
+		return "";
+	}
 	@Override
 	public String toString() {
 		if (isDone) {

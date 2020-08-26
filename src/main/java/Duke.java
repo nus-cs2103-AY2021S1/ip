@@ -11,9 +11,13 @@ public class Duke {
         //         + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello! I'm Duke\nWhat can I do for you");
         ArrayList<Task> dataBase = new ArrayList<Task>();
-        String input = "";
-        while (!input.equals(new String("bye"))) {
-        	input = sc.next();
+        Storage file = new Storage("../data/duke.txt");
+
+        while (sc.hasNext()) {
+        	String input = sc.next();
+        	if (input.equals(new String("bye"))) {
+        		break;
+        	}
         	if (input.equals(new String("list"))) {
         		int num = 1;
         		System.out.println("Here are the tasks in your list:");
@@ -64,6 +68,7 @@ public class Duke {
         		dataBase.add(new Task(input));
         	}
         }
+        file.write(dataBase);
         System.out.println("Bye. Hope to see you again soon!");
     }
 }
