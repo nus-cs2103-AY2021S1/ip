@@ -1,3 +1,7 @@
+/**
+ * duke is a chat bot cum task manager
+ */
+
 public class Duke {
 
     private Storage storage;

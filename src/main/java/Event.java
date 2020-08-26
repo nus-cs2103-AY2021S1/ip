@@ -2,6 +2,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * represents an event task
+ */
+
 public class Event extends Task {
     protected String eventTime;
 
