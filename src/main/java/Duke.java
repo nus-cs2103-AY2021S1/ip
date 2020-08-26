@@ -1,3 +1,10 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -6,10 +13,32 @@ public class Duke {
 
     Scanner scanner;
     List<Task> taskList;
+    static final String FILE_NAME = "duke_data.txt";
+    final Path FILE_PATH;
 
     public Duke() {
         scanner = new Scanner(System.in);
         taskList = new ArrayList<>();
+
+        String home = System.getProperty("user.dir");
+        Path DIR_PATH = java.nio.file.Paths.get(home, "data");
+        try {
+            java.nio.file.Files.createDirectory(DIR_PATH);
+        } catch (FileAlreadyExistsException ignored) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        FILE_PATH = java.nio.file.Paths.get(home, "data", FILE_NAME);
+        try {
+            java.nio.file.Files.createFile(FILE_PATH);
+        } catch (FileAlreadyExistsException ignored) {
+            loadFile();
+            writeOutput("Existing file loaded!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         writeOutput("Hello! I'm Duke", "What can I do for you?");
     }
 
@@ -27,6 +56,21 @@ public class Duke {
 
     private void addTask(String task) {
         addTask(new Todo(task));
+    }
+
+    private void addTask(String task, Commands type, String ddl, boolean done) {
+        Task newTask;
+        if (type == Commands.TODO) {
+            newTask = new Todo(task);
+        } else if (type == Commands.DEADLINE) {
+            newTask = new Deadline(task, ddl);
+        } else {
+            newTask = new Event(task, ddl);
+        }
+        if (done) {
+            newTask.markDone();
+        }
+        taskList.add(newTask);
     }
 
     private void addTask(String task, boolean isEvent) throws DukeException {
@@ -85,6 +129,43 @@ public class Duke {
                 String.format("Now you have %d tasks in the list.", taskList.size()));
     }
 
+    private void saveFile() {
+        try {
+            FileWriter writer = new FileWriter(FILE_PATH.toString());
+
+            for (Task task : taskList) {
+                writer.write(task.fileString() + "\n");
+            }
+            writer.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void loadFile() {
+        try {
+            BufferedReader reader = java.nio.file.Files.newBufferedReader(FILE_PATH);
+
+            String line;
+            String[] lineSplit;
+            boolean done;
+            while ((line = reader.readLine()) != null) {
+                lineSplit = line.split("\\|");
+                done = lineSplit[2].equals("1");
+                if (lineSplit[0].equals("T")) {
+                    addTask(lineSplit[1], Commands.TODO, "", done);
+                } else if (lineSplit[0].equals("D")) {
+                    addTask(lineSplit[1], Commands.DEADLINE, lineSplit[3], done);
+                } else {
+                    addTask(lineSplit[1], Commands.EVENT, lineSplit[3], done);
+                }
+            }
+            reader.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public boolean processInput(String input) throws DukeException {
         if (Commands.BYE.check(input)) {
             exit();
@@ -130,6 +211,7 @@ public class Duke {
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means :(");
             }
+            saveFile();
         }
         return true;
     }
@@ -140,6 +222,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+
         Duke duke = new Duke();
         String input;
         boolean keepGoing = true;

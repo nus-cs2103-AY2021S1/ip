@@ -17,4 +17,8 @@ public class Task {
         String mark = done ? "\u2713" : "\u2717";
         return String.format("[%s] %s", mark, task);
     }
+
+    public String fileString() {
+        return String.format("%s|%s", task, done ? "1" : "0");
+    }
 }

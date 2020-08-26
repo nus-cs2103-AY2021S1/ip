@@ -1,0 +1,3 @@
+T|eat|0
+D|wash dishes|1|noon
+E|dry dishes|0|afternoon
