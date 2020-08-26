@@ -7,10 +7,24 @@ import dd.ui.Ui;
 
 public class DeleteCommand extends Command {
 
+    /**
+     * Class Constructor.
+     *
+     * @param command Command given.
+     * @param item Details of item being deleted.
+     */
     public DeleteCommand(String command, String item) {
         super(command, item);
     }
 
+    /**
+     * Deletes the task as given in item.
+     *
+     * @param tasks Current TaskList to modify.
+     * @param ui Ui used to print statements.
+     * @param ds DataStorage used to load or write data.
+     * @throws DukeException If invalid task number is given in item.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, DataStorage ds) throws DukeException {
         int delNum = 0;
@@ -32,6 +46,9 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return false;

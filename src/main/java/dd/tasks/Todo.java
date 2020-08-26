@@ -2,10 +2,18 @@ package dd.tasks;
 
 public class Todo extends Task {
 
+    /**
+     * Class Constructor.
+     *
+     * @param description Description of to-do.
+     */
     public Todo(String description) {
         super(description);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String saveString() {
         if (this.isDone) {

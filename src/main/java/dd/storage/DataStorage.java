@@ -11,8 +11,13 @@ import java.util.ArrayList;
 
 public class DataStorage {
 
-    Ui ui = new Ui();
+    private Ui ui = new Ui();
 
+    /**
+     * Returns file created or opened to read and save data.
+     *
+     * @return File created or opened
+     */
     public File loadData() throws IOException {
         File f = new File("./src/data/duke.txt"); // create a File for the given file path
 
@@ -25,7 +30,7 @@ public class DataStorage {
         return f;
     }
 
-    public void convertData(ArrayList<Task> taskList) throws IOException, RuntimeException {
+    private void convertData(ArrayList<Task> taskList) throws IOException, RuntimeException {
         FileWriter fw = new FileWriter("./src/data/duke.txt");
         String input = taskList.get(0).saveString();
         taskList.remove(0);
@@ -39,6 +44,13 @@ public class DataStorage {
         fw.close();
     }
 
+    /**
+     * Writes data to file based on ArrayList of tasks given.
+     *
+     * @param taskList ArrayList of tasks to be written to file.
+     * @throws DukeException If no tasks are in taskList,
+     * and no tasks are to be written to file.
+     */
     public void writeData(ArrayList<Task> taskList) throws DukeException {
         try {
             convertData(taskList);

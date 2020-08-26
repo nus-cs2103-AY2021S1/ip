@@ -8,10 +8,18 @@ import java.util.Scanner;
 public class TaskList {
     private final ArrayList<Task> taskList;
 
+    /**
+     * Class Constructor.
+     */
     public TaskList() {
         taskList = new ArrayList<>();
     }
 
+    /**
+     * Class Constructor with specified file to fetch data from.
+     *
+     * @param f Specified file to fetch data from to create TaskList.
+     */
     public TaskList(File f) throws FileNotFoundException {
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         ArrayList<Task> scannedTasks = new ArrayList<>();
@@ -36,26 +44,57 @@ public class TaskList {
         this.taskList = scannedTasks;
     }
 
+    /**
+     * Returns the ArrayList of tasks saved.
+     *
+     * @return ArrayList of tasks.
+     */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
+    /**
+     * Returns the number of tasks saved.
+     *
+     * @return The size of ArrayList of tasks.
+     */
     public int getTaskSize() {
         return taskList.size();
     }
 
+    /**
+     * Returns the last task in the ArrayList of tasks.
+     *
+     * @return Last task in the ArrayList of tasks.
+     */
     public Task getLastTask() {
         return taskList.get(taskList.size()-1);
     }
 
+    /**
+     * Returns a task according to a given index.
+     *
+     * @param i Index of Task in tasks to be returned.
+     * @return Task at the given index.
+     */
     public Task getTask(int i) {
         return taskList.get(i);
     }
 
+    /**
+     * Adds a Task given into tasks.
+     *
+     * @param t Task to be added to ArrayList of tasks.
+     */
     public void addTask(Task t) {
         taskList.add(t);
     }
 
+    /**
+     * Deletes the task at a given index.
+     *
+     * @param i Index of Task in tasks to be deleted.
+     */
     public void deleteTask(int i) {
         taskList.remove(i);
     }

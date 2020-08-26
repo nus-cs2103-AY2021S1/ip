@@ -15,18 +15,24 @@ public class AddCommand extends Command {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Class Constructor.
+     *
+     * @param command Command given.
+     * @param item Details of item being added.
+     */
     public AddCommand(String command, String item) {
         super(command, item);
     }
 
-    public void addTodo() {
+    private void addTodo() {
         tasks.addTask(new Todo(item));
 
         ui.startAddTodo(tasks.getLastTask());
         ui.printTasksSize(tasks.getTaskSize());
     }
 
-    public void addDeadline() throws DukeException {
+    private void addDeadline() throws DukeException {
         String[] temp = item.split(" /by "); // create array of [task desc, task date]
 
         if (temp.length == 2) {
@@ -51,7 +57,7 @@ public class AddCommand extends Command {
         }
     }
 
-    public void addEvent() throws DukeException {
+    private void addEvent() throws DukeException {
         String[] temp = item.split(" /at "); // create array of [task desc, task date]
 
         if (temp.length == 2) {
@@ -76,6 +82,15 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Executes the appropriate method based on command.
+     *
+     * @param taskList Current TaskList to modify.
+     * @param u Ui used to print statements.
+     * @param ds DataStorage used to load or write data.
+     * @throws DukeException If no date string contained in item,
+     * or invalid date string is given to Deadline or Event tasks.
+     */
     @Override
     public void execute(TaskList taskList, Ui u, DataStorage ds) throws DukeException {
         tasks = taskList;
@@ -93,6 +108,9 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return false;
