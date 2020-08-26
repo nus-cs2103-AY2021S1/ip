@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+
 public abstract class Task {
 
     static final char DONE = '\u2713';
@@ -50,6 +54,10 @@ public abstract class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+    
+    public static String formatDateString(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
 

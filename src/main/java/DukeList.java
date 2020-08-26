@@ -62,7 +62,7 @@ public class DukeList {
             } catch (DukeNoDescriptionException e) {
                 throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", keyword));
             } catch (DukeNoDateException e) {
-                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The date of `%s` cannot be empty.", keyword));
+                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of `%s` is invalid.", keyword));
             }
 
         case ("event"):
@@ -73,7 +73,7 @@ public class DukeList {
             } catch (DukeNoDescriptionException e) {
                 throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", keyword));
             } catch (DukeNoDateException e) {
-                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The date of `%s` cannot be empty.", keyword));
+                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of `%s` is invalid.", keyword));
             }
 
         default:
