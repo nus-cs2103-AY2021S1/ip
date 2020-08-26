@@ -13,6 +13,6 @@ public class ExitCommand extends Command {
     }
 
     public void execute(TaskList list, Ui ui, Storage storage) {
-        ui.outro();
+        ui.finsih();
     }
 }

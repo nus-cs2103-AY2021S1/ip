@@ -26,7 +26,7 @@ public class Ui {
         System.out.println("------------------------------------------------------");
     }
 
-    public static void outro() {
+    public static void finsih() {
         System.out.println("        Bye have a good day!");
     }
 
