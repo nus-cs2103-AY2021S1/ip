@@ -25,9 +25,9 @@ public class Either<L, R> {
     }
 
     /**
-     *  Returns true if the Either contains a left value, false otherwise.
+     * Returns true if the Either contains a left value, false otherwise.
      *
-     *  @return true if this is a left value, false otherwise.
+     * @return true if this is a left value, false otherwise.
     */
     public boolean isLeft() {
         return this.leftValue != null;
@@ -46,7 +46,7 @@ public class Either<L, R> {
      * Obtains the stored left value in the Either. If the Either contains a
      * right value, throws a NoSuchElementException.
      *
-     *  @return The left value contained in the Either.
+     * @return The left value contained in the Either.
      */
     public L fromLeft() {
         return Optional.ofNullable(this.leftValue).get();
@@ -56,18 +56,32 @@ public class Either<L, R> {
      * Obtains the stored right value in the Either. If the Either contains a
      * right value, throws a NoSuchElementException.
      *
-     *  @return The right value contained in the Either.
+     * @return The right value contained in the Either.
      */
     public R fromRight() {
         return Optional.ofNullable(this.rightValue).get();
     }
 
+    /**
+     * Maps the given function onto the left value of the Either, returning a new Either with
+     * the updated left value. If it contains a right value, it returns the Either unmodified.
+     *
+     * @param fn the function to map with.
+     * @return the new Either with the corresponding value.
+     */
     public <L1> Either<L1, R> mapLeft(Function<? super L, ? extends L1> fn) {
         return this.isLeft()
             ? Either.left(fn.apply(this.leftValue))
             : Either.right(this.rightValue);
     }
 
+    /**
+     * Maps the given function onto the right value of the Either, returning a new Either with
+     * the updated right value. If it contains a left value, it returns the Either unmodified.
+     *
+     * @param fn the function to map with.
+     * @return the new Either with the corresponding value.
+     */
     public <R1> Either<L, R1> mapRight(Function<? super R, ? extends R1> fn) {
         return this.isRight()
             ? Either.right(fn.apply(this.rightValue))
@@ -77,7 +91,7 @@ public class Either<L, R> {
     /**
      * Creates an Either containing a left value.
      *
-     *  @return An Either containing a left value.
+     * @return An Either containing a left value.
      */
     public static <L, R> Either<L, R> left(L l) {
         return new Either<L, R>(l, null);
@@ -86,7 +100,7 @@ public class Either<L, R> {
     /**
      * Creates an Either containing a right value.
      *
-     *  @return An Either containing a right value.
+     * @return An Either containing a right value.
      */
     public static <L, R> Either<L, R> right(R r) {
         return new Either<L, R>(null, r);
