@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.CommandExecutor;
+import duke.command.DukeCommandExecutor;
 import duke.exception.DukeException;
 import duke.task.TaskArrayList;
 import duke.util.Storage;
@@ -16,7 +17,7 @@ import java.util.Scanner;
 public class Duke {
     private final TaskArrayList TASK_LIST = new TaskArrayList();
     private final Scanner SC = new Scanner(System.in);
-    private final CommandExecutor EXE = new CommandExecutor();
+    private final CommandExecutor EXE = new DukeCommandExecutor();
     private final Ui UI = new Ui();
     private final Storage STORAGE;
 

@@ -76,7 +76,8 @@ public class Storage {
                     e.printStackTrace();
                 }
             });
-        } catch(FileNotFoundException e) {
+            in.close();
+        } catch(IOException e) {
             System.out.println("An error has occurred when reading the save file.");
         }
 
