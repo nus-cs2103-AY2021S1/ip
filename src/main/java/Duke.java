@@ -1,9 +1,35 @@
+import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+
+    public static Storage storage;
+
+    public static void main(String[] args) throws DukeException {
+
+        Path location = Path.of("duke.txt");
+        storage = new Storage(location);
+        try {
+            ArrayList<Task> tskList = storage.showTasks();
+
+            if (tskList.size() != 0) {
+                for (Task tsk : tskList) {
+                    String timestamp = tsk.getTime() == null ? "-" : tsk.getTime().toString();
+                    String entry = tsk.getType() + " | " +
+                            tsk.getStatus() + " | " +
+                            tsk.getDescription() + " | " +
+                            timestamp;
+                    System.out.println(entry);
+                }
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            System.exit(0);
+        }
 
         System.out.println("Wazzup! I am Duke the Nuke \uD83D\uDE08\n"
                 + "What do you want?");
@@ -15,6 +41,7 @@ public class Duke {
 
         while (!(input = sc.nextLine()).equals(terminate)) {
 
+            DateTimeFormatter df = DateTimeFormatter.ofPattern("d MMM yyyy");
             String trimmed = input.trim();
             String first = trimmed.split(" ")[0].trim(); // checking the first word
             String last = input.substring(first.length()).trim(); // get rid of the first word
@@ -30,16 +57,8 @@ public class Duke {
                     String type = tasks.get(id).getType();
                     System.out.println("[" + type + "][" + "\u2713" + "]" + changed);
 
-                    if (type.equals("T")) {
-                        Todo updatedTask = new Todo(changed, true);
-                        tasks.set(id, updatedTask);
-                    } else if (type.equals("D")) {
-                        Deadline updatedTask = new Deadline(changed, true);
-                        tasks.set(id, updatedTask);
-                    } else {
-                        Event updatedTask = new Event(changed, true);
-                        tasks.set(id, updatedTask);
-                    }
+                    tasks.get(id).markAsDone();
+                    storage.saveTasks(tasks);
 
                     break;
                 case "todo":
@@ -49,6 +68,7 @@ public class Duke {
                         System.out.println("Got it. I've added this task:");
                         System.out.println("[T][" + "\u2718" + "] " + last);
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                        storage.saveTasks(tasks);
                     } catch (DukeException e) {
                         System.err.println(e.getMessage());
                     }
@@ -58,8 +78,10 @@ public class Duke {
 
                     String job = last.split("/by")[0].trim();
                     String time = last.split("/by")[1].trim();
-                    Deadline work = new Deadline(job + " (by: " + time + ")", false);
+                    LocalDate date = LocalDate.parse(time);
+                    Deadline work = new Deadline(job + " (by: " + df.format(date) + ")", false, date);
                     tasks.add(work);
+                    storage.saveTasks(tasks);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("[D][" + "\u2718" + "] " + work.getDescription());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -70,8 +92,10 @@ public class Duke {
 
                     String job = last.split("/at")[0].trim();
                     String time = last.split("/at")[1].trim();
-                    Event work = new Event(job + " (at: " + time + ")", false);
+                    LocalDate date = LocalDate.parse(time);
+                    Event work = new Event(job + " (at: " + df.format(date) + ")", false, date);
                     tasks.add(work);
+                    storage.saveTasks(tasks);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("[E][" + "\u2718" + "] " + work.getDescription());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -86,6 +110,7 @@ public class Duke {
                     String status = tasks.get(index).getStatusIcon();
                     System.out.println("[" + deletedType + "][" + status + "] " + deleted);
                     tasks.remove(index);
+                    storage.saveTasks(tasks);
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
 
                     break;
