@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,14 +29,18 @@ public class Duke {
                 boolean isDone = data[1].equals("1");
                 String description = data[2];
 
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyy, hh:mm a");
+
                 if (taskType.equals("T")) {
                     tasksList.add(new Todo(description, isDone));
                 } else if (taskType.equals("E")) {
-                    String at = data[3];
-                    tasksList.add(new Event(description, isDone, at));
+                    String dateTime = data[3];
+                    LocalDateTime localDateTime = LocalDateTime.parse(dateTime, formatter);
+                    tasksList.add(new Event(description, isDone, localDateTime));
                 } else if (taskType.equals("D")) {
-                    String by = data[3];
-                    tasksList.add(new Deadline(description, isDone, by));
+                    String dateTime = data[3];
+                    LocalDateTime localDateTime = LocalDateTime.parse(dateTime, formatter);
+                    tasksList.add(new Deadline(description, isDone, localDateTime));
                 } else {
                     throw new IOException("Error loading tasks from file.");
                 }
@@ -56,9 +62,9 @@ public class Duke {
                 if (task instanceof Todo) {
                     fileWriter.write("T" + " / " + (task.getIsDone() ? "1" : "0") + " / " + task.getDescription() + System.lineSeparator());
                 } else if (task instanceof Event) {
-                    fileWriter.write("E" + " / " + (task.getIsDone() ? "1" : "0") + " / " + task.getDescription() + " / " + ((Event) task).getAt() + System.lineSeparator());
+                    fileWriter.write("E" + " / " + (task.getIsDone() ? "1" : "0") + " / " + task.getDescription() + " / " + ((Event) task).formatDateTime() + System.lineSeparator());
                 } else if (task instanceof Deadline){
-                    fileWriter.write("D" + " / " + (task.getIsDone() ? "1" : "0") + " / " + task.getDescription() + " / " + ((Deadline) task).getBy() + System.lineSeparator());
+                    fileWriter.write("D" + " / " + (task.getIsDone() ? "1" : "0") + " / " + task.getDescription() + " / " + ((Deadline) task).formatDateTime() + System.lineSeparator());
                 } else {
                     throw new DukeException("Error saving task to file.");
                 }
@@ -133,6 +139,8 @@ public class Duke {
 
         Task newTask;
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
         if (taskType.equals(Instruction.TODO.getInstruction())){
             if (taskDescription.equals(Instruction.EMPTY.getInstruction())) {
                 throw new DukeException("Please key in a valid name for To Do");
@@ -145,12 +153,15 @@ public class Duke {
                 throw new DukeException("Please key in a valid name and date for the Deadline");
             }
             String deadlineName = deadlineArr[0];
-            String deadlineDate = deadlineArr[1];
+            String deadlineDateTime = deadlineArr[1];
 
-            if (deadlineDate.equals(Instruction.EMPTY.getInstruction())) {
-                throw new DukeException("Please key in a valid date for the Deadline");
+            if (deadlineDateTime.equals(Instruction.EMPTY.getInstruction())) {
+                throw new DukeException("Please key in a valid date and time for the Deadline");
             }
-            newTask = new Deadline(deadlineName, deadlineDate);
+
+            LocalDateTime localDateTime = LocalDateTime.parse(deadlineDateTime, formatter);
+            newTask = new Deadline(deadlineName, localDateTime);
+
         } else if (taskType.equals(Instruction.EVENT.getInstruction())) {
             String[] eventArr = taskDescription.split(" /at ", 2);
             if (eventArr.length != 2) {
@@ -162,7 +173,8 @@ public class Duke {
             if (eventDuration.equals(Instruction.EMPTY.getInstruction())) {
                 throw new DukeException("Please key in a valid duration for the Event");
             }
-            newTask = new Event(eventName, eventDuration);
+            LocalDateTime localDateTime = LocalDateTime.parse(eventDuration, formatter);
+            newTask = new Event(eventName, localDateTime);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }

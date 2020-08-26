@@ -1,21 +1,27 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task{
-    protected String at;
-    public Event(String description, String at) {
+
+    protected LocalDateTime localDateTime;
+
+    public Event(String description, LocalDateTime localDateTime) {
         super(description);
-        this.at = at;
+        this.localDateTime = localDateTime;
     }
 
-    public Event(String description, boolean isDone, String at) {
+    public Event(String description, boolean isDone, LocalDateTime localDateTime) {
         super(description, isDone);
-        this.at = at;
+        this.localDateTime = localDateTime;
     }
 
-    public String getAt() {
-        return this.at;
+    String formatDateTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyy, hh:mm a");
+        return this.localDateTime.format(formatter);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + formatDateTime() + ")";
     }
 }
