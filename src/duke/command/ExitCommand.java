@@ -1,7 +1,6 @@
 package duke.command;
 
-import duke.data.DukeState;
-import duke.ui.Ui;
+import duke.Duke;
 
 public class ExitCommand extends Command {
 
@@ -10,9 +9,9 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(String str) {
-        Ui.reportExit();
+    public void execute(String str, Duke duke) {
+        duke.ui.reportExit();
 
-        DukeState.exitLoop = true;
+        duke.state.exitLoop = true;
     }
 }

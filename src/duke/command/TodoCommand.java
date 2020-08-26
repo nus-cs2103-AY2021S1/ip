@@ -1,9 +1,8 @@
 package duke.command;
 
-import duke.data.DukeTaskList;
+import duke.Duke;
 import duke.exception.NoDescriptionException;
 import duke.task.ToDo;
-import duke.ui.Ui;
 
 public class TodoCommand extends Command {
 
@@ -12,10 +11,10 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(String str) throws NoDescriptionException {
+    public void execute(String str, Duke duke) throws NoDescriptionException {
         ToDo newToDo = ToDo.createToDo(str);
-        DukeTaskList.tasks.add(newToDo);
-        Ui.reportNewTask(newToDo);
+        duke.taskList.tasks.add(newToDo);
+        duke.ui.reportNewTask(newToDo);
     }
 
 

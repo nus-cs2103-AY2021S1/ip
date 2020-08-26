@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.ui.Ui;
+import duke.Duke;
 
 public class ListCommand extends Command {
 
@@ -9,7 +9,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(String str) {
-        Ui.reportCurrentTasks();
+    public void execute(String str, Duke duke) {
+        duke.ui.reportCurrentTasks();
     }
 }

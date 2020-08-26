@@ -1,10 +1,9 @@
 package duke.command;
 
-import duke.data.DukeTaskList;
+import duke.Duke;
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
 import duke.ui.UIPrint;
-import duke.ui.Ui;
 
 public class DoneCommand extends Command {
 
@@ -13,16 +12,16 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(String str) throws InvalidIndexException {
+    public void execute(String str, Duke duke) throws InvalidIndexException {
         boolean canParseInt = tryParseInt(str);
         int taskIndex = canParseInt ? Integer.parseInt(str) - 1 : -1;
 
-        checkException(taskIndex, str);
+        checkException(taskIndex, str, duke);
 
-        Task task = DukeTaskList.tasks.get(taskIndex);
+        Task task = duke.taskList.tasks.get(taskIndex);
         task.markAsDone();
 
-        Ui.reportDoneTask(task);
+        duke.ui.reportDoneTask(task);
     }
 
     private boolean tryParseInt(String str) {
@@ -34,8 +33,8 @@ public class DoneCommand extends Command {
         }
     }
 
-    private void checkException(int taskIndex, String str) {
-        if (DukeTaskList.tasks.size() <= taskIndex || taskIndex < 0) {
+    private void checkException(int taskIndex, String str, Duke duke) {
+        if (duke.taskList.tasks.size() <= taskIndex || taskIndex < 0) {
             String line = UIPrint.getLine(UIPrint.star, 50);
             String errMessage =
                     line + "\nSorry " + str + " is not a valid index\n" + line;

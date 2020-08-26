@@ -1,8 +1,7 @@
 package duke.command;
 
-import duke.data.DukeTaskList;
+import duke.Duke;
 import duke.task.Event;
-import duke.ui.Ui;
 
 public class EventCommand extends Command {
 
@@ -11,10 +10,10 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(String str) {
+    public void execute(String str, Duke duke) {
         Event newEvent = Event.createEvent(str);
-        DukeTaskList.tasks.add(newEvent);
-        Ui.reportNewTask(newEvent);
+        duke.taskList.tasks.add(newEvent);
+        duke.ui.reportNewTask(newEvent);
     }
 
 }
