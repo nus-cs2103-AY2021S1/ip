@@ -47,15 +47,18 @@ public class Ui {
     }
 
     public void printLineBreaker() {
-        System.out.print(lineBreaker);
+        System.out.println(lineBreaker);
+        System.out.println();
     }
 
     public void showLoadingError() {
         System.out.println("... Who? Never mind. Er-hmm.");
+        System.out.println();
     }
 
     public void printError(DukeException e) {
         System.out.println(e.getMessage());
+        System.out.println();
     }
 
     /** Prints all the contents of the list in order **/
@@ -67,5 +70,7 @@ public class Ui {
         } else {
             list.printAllTasks();
         }
+
+        System.out.println();
     }
 }

@@ -52,7 +52,6 @@ public class Parser {
                 String[] details = instructions[1].split(" /at ", 2);
                 // Check if have valid event time
                 if (hasCmdDetails(details)) {
-                    checkDate(details[1]);
                     return Command.EVENT;
                 } else {
                     // Something wrong with command, throw exception

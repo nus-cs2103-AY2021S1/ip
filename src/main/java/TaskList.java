@@ -29,7 +29,7 @@ public class TaskList {
         Task t = new Todo(instructions[1]);
         list.add(t);
         System.out.println("added: " + t);
-        System.out.println("There is now " + list.size() + " tasks in the list!");
+        System.out.println("There is now " + list.size() + " tasks in the list!\n");
     }
 
     // Create Deadline Task
@@ -39,7 +39,7 @@ public class TaskList {
         Task t = new Deadline(details[0], LocalDate.parse(details[1]));
         list.add(t);
         System.out.println("added: " + t);
-        System.out.println("There is now " + list.size() + " tasks in the list!");
+        System.out.println("There is now " + list.size() + " tasks in the list!\n");
     }
 
     // Create Event Task
@@ -49,19 +49,19 @@ public class TaskList {
         Task t = new Event(details[0], details[1]);
         list.add(t);
         System.out.println("added: " + t);
-        System.out.println("There is now " + list.size() + " tasks in the list!");
+        System.out.println("There is now " + list.size() + " tasks in the list!\n");
     }
 
     // Marking Tasks as done
     public void markTaskDone(String command) throws DukeException {
         String[] instructions = command.split(" ", 2);
-        int index = Integer.parseInt(instructions[1]);
+        int index = Integer.parseInt(instructions[1]) - 1;
         try {
             Task t = list.get(index);
             t.markedDone(true);
             System.out.println("Congratulations! I've helped you mark the task as done:");
-            System.out.print("    " + t.toString() + "\n");
-        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("    " + t.toString() + "\n");
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Sorry, I don't think that's a valid index...");
         }
     }
@@ -69,14 +69,14 @@ public class TaskList {
     // Deleting Tasks
     public void deleteTask(String command) throws DukeException {
         String[] instructions = command.split(" ", 2);
-        int index = Integer.parseInt(instructions[1]);
+        int index = Integer.parseInt(instructions[1]) - 1;
         try {
-            System.out.println("Noted! I've helped you remove the following task:");
             Task t = list.get(index);
+            System.out.println("Noted! I've helped you remove the following task:");
             System.out.print("    " + t.toString() + "\n");
-            list.remove(t);
-            System.out.println("    Now, there is " + list.size() + " tasks in the list!");
-        } catch (ArrayIndexOutOfBoundsException e) {
+            list.remove(index);
+            System.out.println("    Now, there is " + list.size() + " tasks in the list!\n");
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Sorry, I don't think that's a valid index...");
         }
     }

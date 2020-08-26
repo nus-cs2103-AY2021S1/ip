@@ -44,11 +44,11 @@ public class Duke {
                         ui.printOutputSymbol();
                         tasks.createTodo(userInput);
                         break;
-                    case EVENT:
+                    case DEADLINE:
                         ui.printOutputSymbol();
                         tasks.createDeadline(userInput);
                         break;
-                    case DEADLINE:
+                    case EVENT:
                         ui.printOutputSymbol();
                         tasks.createEvent(userInput);
                         break;
