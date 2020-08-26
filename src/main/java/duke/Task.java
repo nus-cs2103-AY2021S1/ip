@@ -28,15 +28,6 @@ abstract public class Task {
 
     abstract String getTaskDetailsForSave();
 
-    public static PrintWriter initialiseWriter() throws DukeException {
-        try {
-            PrintWriter writer = new PrintWriter("data/duke.TaskList.txt");
-            return writer;
-        } catch (IOException e) {
-            throw new DukeException("OOPS! I'm sorry, there is an error during initialisation :-(");
-        }
-    }
-
     @Override
     public String toString() {
         return this.getStatusIcon() + " " + description;
