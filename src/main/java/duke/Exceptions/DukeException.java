@@ -1,6 +1,9 @@
 package duke.Exceptions;
 
-// Base Exception to extend from
+/**
+ * Main exception class in the Duke application, that allows
+ * the other exceptions to extend from.
+ */
 public class DukeException extends Exception{
 
     public DukeException(String message){
