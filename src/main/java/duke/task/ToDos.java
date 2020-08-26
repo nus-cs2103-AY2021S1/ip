@@ -34,19 +34,8 @@ public class ToDos extends Task {
 
     @Override
     public String toString() {
-        if (by == null) {
-            return "[T]" + super.toString();
-        } else {
-            String now = "AM";
-            LocalTime localTime = LocalTime.parse(by, DateTimeFormatter.ofPattern("HHmm"));
-            int hour = localTime.get(ChronoField.CLOCK_HOUR_OF_DAY);
-            int minute = localTime.get(ChronoField.MINUTE_OF_HOUR);
-            if (hour > 12) {
-                now = "PM";
-                hour -= 12;
-            }
-            return "[T]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
-                    + ", "+ hour + ":" + minute + now + ")" ;
-        }
+        return by == null
+                ? "[T]" + super.toString()
+                : "[T]" + super.toString() + " (by: " + by + ")";
     }
 }

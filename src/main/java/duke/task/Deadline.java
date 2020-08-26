@@ -34,19 +34,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        if (by == null) {
-            return "[D]" + super.toString();
-        } else {
-            String now = "AM";
-            LocalTime localTime = LocalTime.parse(by, DateTimeFormatter.ofPattern("HHmm"));
-            int hour = localTime.get(ChronoField.CLOCK_HOUR_OF_DAY);
-            int minute = localTime.get(ChronoField.MINUTE_OF_HOUR);
-            if (hour > 12) {
-                now = "PM";
-                hour -= 12;
-            }
-            return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
-                    + ", "+ hour + ":" + minute + now + ")" ;
-        }
+        return by == null
+                ? "[D]" + super.toString()
+                : "[D]" + super.toString() + " (by: " + by + ")";
     }
 }

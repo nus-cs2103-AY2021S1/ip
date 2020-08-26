@@ -40,7 +40,8 @@ public class Duke {
                 isExit = parser.parse(tasks, nextLine);
             }
             sc.close();
-        } catch (Exception e) { // Change to DukeException
+        } catch (Exception e) {
+            // Change to DukeException
             ui.showError(e.getMessage());
         }
         ui.farewell();

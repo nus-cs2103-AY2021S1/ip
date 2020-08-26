@@ -2,7 +2,11 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
-import duke.task.*;
+
+import duke.task.Task;
+import duke.task.ToDos;
+import duke.task.Deadline;
+import duke.task.Event;
 
 /**
  * Deals with manipulation on the list of tasks
@@ -42,45 +46,43 @@ public class TaskList {
     public String addTask(Task.TaskType taskType, String description, String deadline) {
         Task task = null;
         switch (taskType) {
-            case TODOS:
-                task = new ToDos(description.trim(), deadline);
-                taskList.add(task);
-                break;
-            case DEADLINE:
-                task = new Deadline(description.trim(), deadline);
-                taskList.add(task);
-                break;
-            case EVENT:
-                task = new Event(description.trim(), deadline);
-                taskList.add(task);
-                break;
+        case TODOS:
+            task = new ToDos(description.trim(), deadline);
+            taskList.add(task);
+            break;
+        case DEADLINE:
+            task = new Deadline(description.trim(), deadline);
+            taskList.add(task);
+            break;
+        case EVENT:
+            task = new Event(description.trim(), deadline);
+            taskList.add(task);
+            break;
         }
 
-        return "Got it, here yur task bij\n" +
-                task.toString() +
-                "\nNow you have " + taskList.size() + " tasks in the list.";
+        return "Got it, here yur task bij\n" + task.toString()
+                + "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 
     public String addTask(Task.TaskType taskType, String description) {
         Task task = null;
         switch (taskType) {
-            case TODOS:
-                task = new ToDos(description);
-                taskList.add(task);
-                break;
-            case DEADLINE:
-                task = new Deadline(description);
-                taskList.add(task);
-                break;
-            case EVENT:
-                task = new Event(description);
-                taskList.add(task);
-                break;
+        case TODOS:
+            task = new ToDos(description);
+            taskList.add(task);
+            break;
+        case DEADLINE:
+            task = new Deadline(description);
+            taskList.add(task);
+            break;
+        case EVENT:
+            task = new Event(description);
+            taskList.add(task);
+            break;
         }
 
-        return "Got it, here yur task bij\n" +
-                task.toString() +
-                "\nNow you have " + taskList.size() + " tasks in the list.";
+        return "Got it, here yur task bij\n" + task.toString()
+                + "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 
     /**
@@ -93,7 +95,7 @@ public class TaskList {
         if (getSize() >= 1) {
             string = "1." + taskList.get(0).toString();
             for (int num = 2; num <= getSize(); num++) {
-                string = string + "\n" + num + "." + taskList.get(num-1).toString();
+                string = string + "\n" + num + "." + taskList.get(num - 1).toString();
             }
         } else {
             string = "empty";

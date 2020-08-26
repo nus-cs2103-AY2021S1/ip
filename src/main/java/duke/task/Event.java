@@ -35,19 +35,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        if (at == null) {
-            return "[E]" + super.toString();
-        } else {
-            String now = "AM";
-            LocalTime localTime = LocalTime.parse(at, DateTimeFormatter.ofPattern("HHmm"));
-            int hour = localTime.get(ChronoField.CLOCK_HOUR_OF_DAY);
-            int minute = localTime.get(ChronoField.MINUTE_OF_HOUR);
-            if (hour > 12) {
-                now = "PM";
-                hour -= 12;
-            }
-            return "[E]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
-                    + ", "+ hour + ":" + minute + now + ")" ;
-        }
+        return at == null
+                ? "[E]" + super.toString()
+                : "[E]" + super.toString() + " (by: " + at + ")";
     }
 }
