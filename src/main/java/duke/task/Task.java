@@ -26,7 +26,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -35,7 +35,7 @@ public class Task {
      * @return The description of the task.
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -63,19 +63,19 @@ public class Task {
      * @return True if the task is done.
      */
     public boolean isDone() {
-        return this.isDone;
+        return isDone;
     }
 
     /**
      * Marks the task as done.
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     @Override
     public String toString() {
-        String symbol = this.getStatusIcon();
-        return "[" + symbol + "] " + this.description;
+        String symbol = getStatusIcon();
+        return "[" + symbol + "] " + description;
     }
 }

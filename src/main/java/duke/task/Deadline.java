@@ -26,12 +26,12 @@ public class Deadline extends Task {
 
     @Override
     public LocalDate getDate() {
-        return this.by;
+        return by;
     }
 
     @Override
     public String toString() {
-        String date = this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        String date = by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         return "[D]" + super.toString() + " (by: " + date + ")";
     }
 }

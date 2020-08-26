@@ -19,7 +19,7 @@ public class Ui {
      * Initializes a Ui object with the scanner ready to take in inputs.
      */
     public Ui() {
-        this.sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
     }
 
     /**

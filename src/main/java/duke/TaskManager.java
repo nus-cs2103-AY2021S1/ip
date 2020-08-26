@@ -19,7 +19,7 @@ public class TaskManager {
      * Initializes a manager instance with an empty list of tasks.
      */
     public TaskManager() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -37,7 +37,7 @@ public class TaskManager {
      * @return The list of tasks.
      */
     public List<Task> getTasks() {
-        return this.tasks;
+        return tasks;
     }
 
     /**
@@ -46,7 +46,7 @@ public class TaskManager {
      * @param task The task to be added.
      */
     public void addTask(Task task) {
-        this.tasks.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -56,7 +56,7 @@ public class TaskManager {
      * @return The deleted task.
      */
     public Task deleteTask(int index) {
-        return this.tasks.remove(index);
+        return tasks.remove(index);
     }
 
     /**

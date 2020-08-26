@@ -26,12 +26,12 @@ public class Event extends Task {
 
     @Override
     public LocalDate getDate() {
-        return this.at;
+        return at;
     }
 
     @Override
     public String toString() {
-        String date = this.at.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        String date = at.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         return "[E]" + super.toString() + " (at: " + date + ")";
     }
 }
