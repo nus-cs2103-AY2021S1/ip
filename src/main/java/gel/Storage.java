@@ -40,7 +40,7 @@ public class Storage {
         List<Task> listOfTask = taskList.getListOfTask();
         for (Task task : listOfTask) {
             String isDone;
-            if (task.isDone()) {
+            if (task.getIsDone()) {
                 isDone = "1,";
             } else {
                 isDone = "0,";
