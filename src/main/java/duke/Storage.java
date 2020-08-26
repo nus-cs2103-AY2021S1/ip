@@ -15,11 +15,21 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Encapsulates methods and information that relate to file operations
+ * and storage of tasks.
+ */
 public class Storage {
 
     private static final String DIRECTORY = "data";
     private static final String FILE_LOCATION = "data/duke.txt";
 
+    /**
+     * Retrieves the list of tasks stored in the designated file
+     * and stores them in a TaskList object.
+     *
+     * @return TaskList containing tasks retrieved from the file.
+     */
     public TaskList readFile() {
 
         List<Task> taskList = new ArrayList<>();
@@ -67,6 +77,11 @@ public class Storage {
         return new TaskList(taskList);
     }
 
+    /**
+     * Stores the list of tasks in the TaskList object in the designated file.
+     *
+     * @param taskList List of tasks to be saved in the file.
+     */
     public void saveFile(TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter(Storage.FILE_LOCATION);

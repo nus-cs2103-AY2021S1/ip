@@ -4,12 +4,18 @@ import duke.task.TaskList;
 import duke.Ui;
 import duke.Storage;
 
+/**
+ * Represents a command to view a list of Duke's function and the function commands.
+ */
 public class ViewFunctionsCommand extends Command {
 
-    public ViewFunctionsCommand(String[] parsedCommand) {
-        super(parsedCommand);
-    }
-
+    /**
+     * Prints all of Duke's functions and the commands for each function.
+     *
+     * @param tasks List of tasks belonging to the user.
+     * @param ui Ui object created for the Duke object.
+     * @param storage Storage object used by the Duke object for file operations.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String commands = "  Below is a list of all the commands for my functions: \n" +
@@ -30,6 +36,11 @@ public class ViewFunctionsCommand extends Command {
         ui.printReply(commands);
     }
 
+    /**
+     * Indicates if the DukeBot session has ended.
+     *
+     * @return False since the DukeBot session has not been terminated.
+     */
     @Override
     public boolean isExit() {
         return false;

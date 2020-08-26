@@ -6,12 +6,31 @@ import duke.Ui;
 import duke.Storage;
 import duke.task.Task;
 
+/**
+ * Represents a command to delete a task from the user's list of tasks.
+ */
 public class DeleteTaskCommand extends Command {
 
+    protected final String[] parsedCommand;
+
+    /**
+     * Creates and initialises a new DeleteTaskCommand object
+     *
+     * @param parsedCommand String array that contains information of the task to be deleted.
+     */
     public DeleteTaskCommand(String[] parsedCommand) {
-        super(parsedCommand);
+        this.parsedCommand = parsedCommand;
     }
 
+    /**
+     * Deletes the task from the user's list of tasks and updates the list of tasks
+     * stored in the designated file.
+     *
+     * @param tasks List of tasks belonging to the user.
+     * @param ui Ui object created for the Duke object.
+     * @param storage Storage object used by the Duke object for file operations.
+     * @throws DukeException If the task cannot be deleted due to invalid arguments.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
@@ -42,6 +61,11 @@ public class DeleteTaskCommand extends Command {
         }
     }
 
+    /**
+     * Indicates if the DukeBot session has ended.
+     *
+     * @return False since the DukeBot session has not been terminated.
+     */
     @Override
     public boolean isExit() {
         return false;

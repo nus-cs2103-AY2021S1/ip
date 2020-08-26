@@ -10,12 +10,31 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a command to search for tasks by date.
+ */
 public class FindByDateCommand extends Command {
 
+    protected final String[] parsedCommand;
+
+    /**
+     * Creates and initialises a new FindByDateCommand object
+     *
+     * @param parsedCommand String array that contains the search date input.
+     */
     public FindByDateCommand(String[] parsedCommand) {
-        super(parsedCommand);
+        this.parsedCommand = parsedCommand;
     }
 
+    /**
+     * Performs the operation of searching for all the tasks in the user's list
+     * of tasks that matches the date provided for the search.
+     *
+     * @param tasks List of tasks belonging to the user.
+     * @param ui Ui object created for the Duke object.
+     * @param storage Storage object used by the Duke object for file operations.
+     * @throws DukeException If no tasks could be found due to invalid date provided.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
@@ -46,7 +65,11 @@ public class FindByDateCommand extends Command {
         }
     }
 
-
+    /**
+     * Indicates if the DukeBot session has ended.
+     *
+     * @return False since the DukeBot session has not been terminated.
+     */
     @Override
     public boolean isExit() {
         return false;

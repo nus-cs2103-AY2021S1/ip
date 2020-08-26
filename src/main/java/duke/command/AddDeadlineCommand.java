@@ -12,18 +12,37 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a command to add a new deadline task to the user's list of tasks.
+ */
 public class AddDeadlineCommand extends Command {
 
+    protected final String[] parsedCommand;
+
+    /**
+     * Creates and initialises a new AddDeadlineCommand object
+     *
+     * @param parsedCommand String array that contains the deadline task information.
+     */
     public AddDeadlineCommand(String[] parsedCommand) {
-        super(parsedCommand);
+        this.parsedCommand = parsedCommand;
     }
 
+    /**
+     * Creates a new deadline task, adds it to the list of tasks
+     * and saves it into the designated file containing the user's list of tasks.
+     *
+     * @param tasks List of tasks which the new deadline task will be added into.
+     * @param ui Ui object created for the Duke object.
+     * @param storage Storage object used by the Duke object for file operations.
+     * @throws DukeException If the task cannot be created due to invalid inputs.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
         try {
-            String[] deadlineInfo = retrieveDeadlineInfo(this.parsedCommand);
+            String[] deadlineInfo = retrieveDeadlineInfo();
             String[] timeStamp = deadlineInfo[1].split(" ");
 
             LocalDate deadlineDate = LocalDate.parse(timeStamp[0], dateFormatter);
@@ -45,27 +64,33 @@ public class AddDeadlineCommand extends Command {
         }
     }
 
-    public String[] retrieveDeadlineInfo(String[] parsedCommand) throws InvalidTaskException {
+    /**
+     * Retrieves the details of the deadline task and stores it in an array.
+     *
+     * @return String array containing the deadline description and deadline time stamp.
+     * @throws InvalidTaskException If the deadline information is invalid and is missing arguments.
+     */
+    public String[] retrieveDeadlineInfo() throws InvalidTaskException {
         String[] deadlineInfo = new String[2];
         String description;
         String time;
-        if (parsedCommand.length == 0) {
+        if (this.parsedCommand.length == 0) {
             String err = "Your deadline task has missing arguments and has an incorrect format. " +
                     "The task cannot be created.\n" +
                     "Type '/commands' to view the correct command for task creation!";
             throw new InvalidTaskException(err);
         } else {
-            String[] taskInputArray = parsedCommand[1].split(" /by ");
-            if (!parsedCommand[1].contains(" /by ") && !parsedCommand[1].endsWith("/by")) {
+            String[] taskInputArray = this.parsedCommand[1].split(" /by ");
+            if (!this.parsedCommand[1].contains(" /by ") && !this.parsedCommand[1].endsWith("/by")) {
                 String err = "Your deadline task has an incorrect format. The task cannot be created. \n" +
                         "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
-            } else if (parsedCommand[1].trim().equals("/by")) {
+            } else if (this.parsedCommand[1].trim().equals("/by")) {
                 String err = "Your deadline task is missing a description and time stamp. " +
                         "The task cannot be created. \n" +
                         "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
-            } else if (parsedCommand[1].trim().endsWith("/by")) {
+            } else if (this.parsedCommand[1].trim().endsWith("/by")) {
                 String err = "Your deadline task is missing a time stamp. The task cannot be created. \n" +
                         "Type '/commands' to view the correct command for task creation!";
                 throw new InvalidTaskException(err);
@@ -83,6 +108,11 @@ public class AddDeadlineCommand extends Command {
         return deadlineInfo;
     }
 
+    /**
+     * Indicates if the DukeBot session has ended.
+     *
+     * @return False since the DukeBot session has not been terminated.
+     */
     @Override
     public boolean isExit() {
         return false;
