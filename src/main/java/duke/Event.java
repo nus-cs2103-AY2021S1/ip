@@ -9,6 +9,13 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
     protected LocalDateTime startDateTime;
     protected LocalDateTime endDateTime;
+
+    /**
+     * Creates an event object.
+     * @param description Description of the event.
+     * @param time Time of the event.
+     * @throws DukeException If time format is not correct.
+     */
     public Event(String description, String time) throws DukeException {
         super(description);
         String[] timeDetails = time.split("\\s", 3);
@@ -19,6 +26,13 @@ public class Event extends Task {
         this.endDateTime = parseEventDateTime(timeDetails[0], timeDetails[2]);
     }
 
+    /**
+     * Creates an event object with done/not done status.
+     * @param isDone Whether the event is done.
+     * @param description Description of the event.
+     * @param time Time of the event.
+     * @throws DukeException If time format is not correct.
+     */
     public Event(boolean isDone, String description, String time) throws DukeException {
         super(isDone, description);
         String[] timeDetails = time.split("\\s", 3);
@@ -26,6 +40,13 @@ public class Event extends Task {
         this.endDateTime = parseEventDateTime(timeDetails[0], timeDetails[2]);
     }
 
+    /**
+     * Converts string date and time to LocalDateTime.
+     * @param date String date input.
+     * @param time String time input.
+     * @return Converted LocalDateTime object.
+     * @throws DukeException If date format is wrong.
+     */
     private static LocalDateTime parseEventDateTime(String date, String time) throws DukeException {
         try {
             LocalDate datePart = LocalDate.parse(date);

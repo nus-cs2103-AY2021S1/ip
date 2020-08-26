@@ -1,12 +1,25 @@
 package duke;
 
 public class Parser {
+
+    /**
+     * Returns the command object parsed from user input.
+     * @param input User input.
+     * @return Command parsed from use input.
+     * @throws DukeException If input command type is incorrect.
+     */
     public static Command parse(String input) throws DukeException {
         String[] inputs = input.split("\\s", 2);
         CommandType commandType = convertInputToEnum(inputs[0].toLowerCase());
         return new Command(commandType, inputs);
     }
 
+    /**
+     * Converts user input command to CommandType Enum.
+     * @param input User input of command.
+     * @return CommandType Enum.
+     * @throws DukeException
+     */
     private static CommandType convertInputToEnum(String input) throws DukeException {
         switch (input) {
             case "bye":

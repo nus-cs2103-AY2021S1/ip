@@ -15,15 +15,28 @@ public class TaskList {
         generateTaskList(tasks);
     }
 
+    /**
+     * Returns the number of tasks in the task list.
+     * @return Number of tasks.
+     */
     public int getSize() {
         return taskList.size();
     }
 
+    /**
+     * Adds a task into the task list.
+     * @param task The task to be added.
+     * @return The task added to the list.
+     */
     public Task addTask(Task task) {
         taskList.add(task);
         return task;
     }
 
+    /**
+     * Returns a string of task list in the correct format.
+     * @return String of formatted task list.
+     */
     public String printList() {
         String output = "Here are the tasks in your list:\n";
         int count = taskList.size();
@@ -37,16 +50,31 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task from the list.
+     * @param num Index of the task that the user wants to delete.
+     * @return Deleted task.
+     */
     public Task deleteTask(int num) {
         Task deletedTask = taskList.get(num - 1);
         taskList.remove(num - 1);
         return deletedTask;
     }
 
+    /**
+     * Marks a task as done.
+     * @param idx Index of the task that the user wants to mark as done.
+     * @return The task marked as done.
+     */
     public Task markTaskAsDone(int idx) {
         return taskList.get(idx - 1).markAsDone();
     }
 
+    /**
+     * Generates a list of tasks from strings read from file.
+     * @param tasks List of tasks in strings.
+     * @throws DukeException If there is error in the input.
+     */
     private void generateTaskList(List<String> tasks) throws DukeException {
         for (String task : tasks) {
             if (task.length() < 1) {

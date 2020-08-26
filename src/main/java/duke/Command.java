@@ -5,11 +5,20 @@ public class Command {
     protected String[] inputs;
     protected boolean isExit;
 
+    /**
+     * Creates a Command object.
+     * @param commandType Type of command given.
+     * @param inputs Inputs related to the command given.
+     */
     public Command(CommandType commandType, String[] inputs) {
         this.commandType = commandType;
         this.inputs = inputs;
     }
 
+    /**
+     * Returns whether the use is exiting the program.
+     * @return Whether the user is exiting ths program.
+     */
     public boolean isExit() {
         return isExit;
     }

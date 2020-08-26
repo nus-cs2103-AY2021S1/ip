@@ -11,6 +11,11 @@ public class Storage {
         this.filepath = filepath;
     }
 
+    /**
+     * Return a list of tasks saved in local storage.
+     * @return List of tasks saved in local storage.
+     * @throws DukeException If there is error in the local storage file.
+     */
     public List<String> load() throws DukeException {
         try {
 
@@ -32,6 +37,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates new storage file for saving the tasks.
+     * @throws DukeException If there is error while creating the local file.
+     */
     public void newStorage() throws DukeException {
         new File("data/").mkdirs();
         try {
@@ -41,6 +50,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the updated task list to local storage.
+     * @param taskList Task list.
+     * @throws DukeException If there is error when writing to the local file.
+     */
     public void saveTaskListToFile(TaskList taskList) throws DukeException {
         PrintWriter writer = initialiseWriter();
         String allTasks = taskList.getTaskListForSave();
@@ -48,6 +62,11 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Initialises the file writer.
+     * @return File Writer to the local storage file.
+     * @throws DukeException If there is error when initialising the file.
+     */
     public static PrintWriter initialiseWriter() throws DukeException {
         try {
             PrintWriter writer = new PrintWriter("data/duke.TaskList.txt");
