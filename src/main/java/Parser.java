@@ -13,12 +13,14 @@ public class Parser {
      * @throws DukeException  If input is invalid.
      */
     public static Command parse(String userInput) throws DukeException {
+        // Check if it is a single word command
         if(userInput.equals("bye")) {
             System.out.println();
             return Command.EXIT;
         } else if (userInput.equals("list")) {
             return Command.LIST;
         }
+
         // Check command
         // Process input
         String[] instructions = userInput.split(" ", 2);
@@ -39,6 +41,7 @@ public class Parser {
             if (hasCmdDetails(instructions)) {
                 // Extract Details from command
                 String[] details = instructions[1].split(" /by ", 2);
+
                 // Check if have valid deadline
                 if (hasCmdDetails(details)) {
                     checkDate(details[1]);
@@ -59,6 +62,7 @@ public class Parser {
             if (hasCmdDetails(instructions)) {
                 // Extract Details from command
                 String[] details = instructions[1].split(" /at ", 2);
+
                 // Check if have valid event time
                 if (hasCmdDetails(details)) {
                     return Command.EVENT;

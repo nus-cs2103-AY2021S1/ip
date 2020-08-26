@@ -94,8 +94,8 @@ public class Ui {
      */
     public void printList(TaskList list) {
         System.out.print("Here is what I have! ^^\n");
-        // Handles printing empty list
         if (list.isListEmpty()) {
+            // Handles printing empty list
             System.out.println("Whoops! I don't have anything of note yet...");
         } else {
             list.printAllTasks();
