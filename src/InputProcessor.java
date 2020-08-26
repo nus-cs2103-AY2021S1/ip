@@ -131,11 +131,11 @@ public class InputProcessor {
 
                     String dueDate = content.split(" /by ")[1];
 
-                    TimeConverter timeConverter = new TimeConverter();
+//                     TimeConverter timeConverter = new TimeConverter();
 
-                    String formattedDueDate = timeConverter.convertTime(dueDate);
+//                     String formattedDueDate = timeConverter.convertTime(dueDate);
 
-                    newTask = new Deadline(name, formattedDueDate);
+                    newTask = new Deadline(name, dueDate);
 
                 }else if(words[0].equals("event")){
 
