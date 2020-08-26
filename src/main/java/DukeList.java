@@ -7,6 +7,8 @@ public class DukeList {
 
     final ArrayList<Task> list;
     private static final int CAPACITY = 100;
+    
+    private final Storage store = new Storage("data", "duke.txt");
 
 
     public DukeList() {
@@ -19,6 +21,7 @@ public class DukeList {
      *
      * @param strArr Array of strings (originally split by spaces).
      * @return Substring with the keyword removed.
+     * @throws DukeInvalidDescriptionException Invalid description text.
      */
     private static String getItemSubstring(String[] strArr) throws DukeInvalidDescriptionException {
         if (strArr.length <= 1) {
@@ -30,20 +33,20 @@ public class DukeList {
 
 
     /**
-     * Adds a new item to the list.
+     * Helper function for adding item.
      *
      * @param itemString String to be added.
-     * @return Status string to be printed.
+     * @return Task added.
+     * @throws DukeException Duke exception.
      */
-    public String add(String itemString) throws DukeException {
-        // this.list.add(new Task(itemString));
+    private Task addHelper(String itemString) throws DukeException {
         Task newTask;
 
         String[] strArr = itemString.split(" ");
         String keyword = strArr[0];
 
         String formattedItemString;
-        
+
         switch (keyword) {
         case ("todo"):
             try {
@@ -82,15 +85,46 @@ public class DukeList {
 
         this.list.add(newTask);
 
-        return "Got it. I've added this task:\n" +
-                String.format("\t%s\n", newTask.toString()) +
-                String.format("%s", this.getListStats());
-
+        return newTask;
     }
 
 
     /**
-     * Mark an item as done.
+     * Adds a new item to the list.
+     *
+     * @param itemString String to be added.
+     * @return Status string to be printed.
+     * @throws DukeException Duke exception.
+     */
+    public String add(String itemString) throws DukeException {
+        Task newTask = addHelper(itemString);
+        this.store.addToFileBuffer(newTask);
+
+        return "Got it. I've added this task:\n" +
+                String.format("\t%s\n", newTask.toString()) +
+                String.format("%s", this.getListStats());
+    }
+
+
+    /**
+     * Adds a new item to the list.
+     * This method is only accessed privately.
+     *
+     * @param itemString String to be added.
+     * @param isDone     If task is done already.
+     * @throws DukeException Duke exception.
+     */
+    private void add(String itemString, boolean isDone) throws DukeException {
+        Task newTask = addHelper(itemString);
+
+        if (isDone) {
+            newTask.markAsDone();
+        }
+    }
+
+
+    /**
+     * Marks an item as done.
      *
      * @param index Index of item to be marked as done.
      *              !This index is the printed index, not the actual index in the list.
@@ -101,7 +135,7 @@ public class DukeList {
         Task targetTask = this.list.get(index - 1);
         targetTask.markAsDone();
         return String.format("Nice! I've marked this task as done:\n\t%s", targetTask.toString());
-        
+
     }
 
 
@@ -118,7 +152,24 @@ public class DukeList {
         return "Noted. I've removed this task:\n" +
                 String.format("\t%s\n", removedTask.toString())
                 + String.format("%s", this.getListStats());
-        
+    }
+    
+    public void writeToFile() {
+        this.store.writeToFile();
+    }
+
+
+    /**
+     * Adds items that are read from file.
+     */
+    public void loadFromFile() {
+        String[][] parsedLines = this.store.readFromFile();
+        for (String[] parsedLine : parsedLines) {
+            String itemString = parsedLine[0];
+            String isDoneString = parsedLine[1];
+
+            this.add(itemString, isDoneString.equals("1"));
+        }
     }
 
 

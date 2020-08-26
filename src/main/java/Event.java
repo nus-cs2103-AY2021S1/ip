@@ -14,11 +14,28 @@ public class Event extends Task {
     }
 
 
+    public Event(String itemString, boolean isDone) {
+        super(Task.getTaskString(itemString, Event.DELIMITER), isDone);
+        this.date = Task.getDateString(itemString, Event.DELIMITER);
+    }
+
+
+    /**
+     * Gets string array for storage.
+     *
+     * @return string array for storage.
+     */
+    @Override
+    public String[] toStorageStringArr() {
+        return new String[]{"E", this.isDone ? "1" : "0", this.itemString, this.date};
+    }
+
+
     @Override
     public String toString() {
         char stateSymbol = this.isDone ? DONE : NOT_DONE;
         String dateString = Task.formatDateString(this.date);
-        return String.format("[D][%s] %s (at: %s)", stateSymbol, this.itemString, dateString);
+        return String.format("[E][%s] %s (at: %s)", stateSymbol, this.itemString, dateString);
     }
 
 }

@@ -9,11 +9,18 @@ public abstract class Task {
 
     final String itemString;
     boolean isDone;
+    String taskString;
+    String dateString;
 
 
     public Task(String itemString) {
         this.itemString = itemString;
         this.isDone = false;
+    }
+    
+    public Task(String itemString, boolean isDone) {
+        this.itemString = itemString;
+        this.isDone = isDone;
     }
 
 
@@ -50,7 +57,7 @@ public abstract class Task {
 
 
     /**
-     * Mark this item as done.
+     * Marks this item as done.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -58,6 +65,16 @@ public abstract class Task {
     
     public static String formatDateString(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+    }
+
+
+    /**
+     * Gets string array for storage.
+     * 
+     * @return string array for storage.
+     */
+    public String[] toStorageStringArr() {
+        return new String[]{"Task", this.isDone ? "1" : "0", this.itemString};
     }
 
 
