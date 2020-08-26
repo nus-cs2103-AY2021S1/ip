@@ -1,6 +1,5 @@
 package main.java;
 
-
 public enum Keyword {
     TODO("todo"),
     DEADLINE("deadline"),

@@ -43,16 +43,20 @@ public class Processor {
                 } else if (command.equals("deadline")) {
                     String taskDescription = Parser.findDescription(Parser.getArgs(userInput));
                     String deadlineTime = Parser.findTime(Parser.getArgs(userInput), "by");
-                    Parser.isValidDate(deadlineTime); // check whether the date time format is correct
-                    boolean hasTime = Parser.hasTime(deadlineTime); // check whether time is included
-                    Task deadLine = new DeadLine(taskDescription, deadlineTime, hasTime, false);
-                    taskList.addTask(deadLine);
-                    ui.uiAddTask(deadLine, taskList);
+                    // check whether the date time format is correct
+                    Parser.isValidDate(deadlineTime);
+                    // check whether time is included
+                    boolean hasTime = Parser.hasTime(deadlineTime);
+                    Task deadine = new DeadLine(taskDescription, deadlineTime, hasTime, false);
+                    taskList.addTask(deadine);
+                    ui.uiAddTask(deadine, taskList);
                 } else {
                     String taskDescription = Parser.findDescription(Parser.getArgs(userInput));
                     String eventTime = Parser.findTime(Parser.getArgs(userInput), "at");
-                    Parser.isValidDate(eventTime); // check whether the date time format is correct
-                    boolean hasTime = Parser.hasTime(eventTime); // check whether time is included
+                    // check whether the date time format is correct
+                    Parser.isValidDate(eventTime);
+                    // check whether time is included
+                    boolean hasTime = Parser.hasTime(eventTime);
                     Task event = new DeadLine(taskDescription, eventTime, hasTime, false);
                     taskList.addTask(event);
                     ui.uiAddTask(event, taskList);
@@ -60,6 +64,5 @@ public class Processor {
                 storage.writeTasks(taskList);
             }
         }
-        ui.goodBye();
     }
 }

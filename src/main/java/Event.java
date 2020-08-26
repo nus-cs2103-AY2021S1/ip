@@ -1,4 +1,5 @@
 package main.java;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,8 +17,6 @@ public class Event extends Task {
             this.time = LocalDateTime.parse(time, formatter);
         }
     }
-
-
 
     @Override
     public String getStorageString() {
@@ -37,6 +36,7 @@ public class Event extends Task {
             timeFormat += " " + hour + ":" + (min < 10 ? "0" : "") + min;
 
         }
-        return "[E][" + this.getStatusIcon() + "] " + this.description + " (at: " + timeFormat + ")";
+        return "[E][" + this.getStatusIcon() + "] "
+                + this.description + " (at: " + timeFormat + ")";
     }
 }
