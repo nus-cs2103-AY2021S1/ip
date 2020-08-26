@@ -19,7 +19,7 @@ public class Parser {
 
 	public static Command parse(String display) throws DukeException, TaskException {
 		if (display.equals("list")) {
-			return new ListCommand();
+			return new ListCommand(null, null);
 		} else if (display.length() >= 4 && display.substring(0, 4).equals("done")) {
 			try {
 				int idx = Integer.parseInt(String.valueOf(display.charAt(5))) - 1;
@@ -38,7 +38,13 @@ public class Parser {
 			if (parseDate(display.substring(13)) == null) {
 				throw new DukeException("time is of the wrong format");
 			} else {
-				return new ListCommand(parseDate(display.substring(13)));
+				return new ListCommand(parseDate(display.substring(13)), null);
+			}
+		} else if (display.startsWith("find")) {
+			if (display.substring(4).isBlank()) {
+				throw new DukeException("keyword is absent");
+			} else {
+				return new ListCommand(null, display.substring(5));
 			}
 		} else if (display.equals("bye")) {
 			return new ExitCommand();

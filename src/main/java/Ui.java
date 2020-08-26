@@ -49,14 +49,11 @@ public class Ui {
 		return "Now you have " + tasks.getCount() + " task" + (tasks.getCount() == 1 ? "" : "s") + " in the list.";
 	}
 
-	public void formatList(TaskList tasks, Date date) {
-		ArrayList<String> lst = tasks.toString(date);
-		if (date == null) {
-			lst.add(0, "Here are the tasks in your list:");
-		} else {
-			lst.add(0,
-					"Here are the tasks in your list that occur on " + formatDate(date) + ":");
-		}
+	public void formatList(TaskList tasks, Date date, String keyWord) {
+		ArrayList<String> lst = tasks.toString(date, keyWord);
+		lst.add(0, "Here are the " + ((keyWord == null) ? "" : "matching ") + "tasks in your list" + ((date == null) ?
+				"" :
+				" that occur on " + formatDate(date)) + ":");
 		formatResponse(lst);
 	}
 
