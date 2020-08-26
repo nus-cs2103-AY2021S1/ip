@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents a task. A task has a description and a state representing if it is done.
+ */
 public abstract class Task {
     protected String desc;
     protected boolean isDone;

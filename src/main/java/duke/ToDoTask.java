@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents a to-do task.
+ */
 public class ToDoTask extends Task {
 
     public ToDoTask(String desc) {
@@ -10,6 +13,7 @@ public class ToDoTask extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
 
     @Override
     public String toSaveString() {

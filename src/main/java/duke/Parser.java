@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Parses user inputs or saved strings.
+ */
 public class Parser {
     private static boolean isBye(String s) {
         return s.toLowerCase().equals("bye");
@@ -20,19 +23,45 @@ public class Parser {
     private static boolean isFind(String s) {
         return s.length() >= 4 && s.substring(0, 4).toLowerCase().equals("find");
     }
-    
+
+    /**
+     * Returns the index of the task to be marked done.
+     *
+     * @param s The input.
+     * @return An integer index.
+     */
     public int parseDone(String s) {
         return Integer.parseInt(s.split(" ")[1]) - 1;
     }
 
+    /**
+     * Returns the index of the task to be deleted.
+     *
+     * @param s The input.
+     * @return An integer index.
+     */
     public int parseDelete(String s) {
         return Integer.parseInt(s.split(" ")[1]) - 1;
     }
 
+    /**
+     * Returns the keyword to be searched.
+     *
+     * @param s The input.
+     * @return A string keyword.
+     */
     public String parseFind(String s) {
         return s.split(" ")[1];
     }
-    
+
+    /**
+     * Returns a task represented by the input.
+     *
+     * @param s The input.
+     * @return A task.
+     * @throws IllegalArgumentException Unrecognizable task command.
+     * @throws IndexOutOfBoundsException Task formatted wrongly.
+     */
     public Task parseInputTask(String s) throws IllegalArgumentException, IndexOutOfBoundsException {
         String[] processed;
         Task task;
@@ -53,14 +82,14 @@ public class Parser {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Unrecognizable task command");
+            throw new IllegalArgumentException("Unrecognizable task command.");
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException("Task formatted wrongly.");
         }
         return task;
     }
 
-    public boolean isTask(String s) {
+    private boolean isTask(String s) {
         try {
             parseInputTask(s);
             return true;
@@ -69,6 +98,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Determines the type of command.
+     *
+     * @param input The input.
+     * @return A PARSER_RESULT value.
+     * @throws IllegalArgumentException Unrecognizable command.
+     */
     public PARSER_RESULT parseInput(String input) throws IllegalArgumentException {
         if (isBye(input)) {
             return PARSER_RESULT.BYE;
@@ -87,6 +123,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse a saved string to a task.
+     *
+     * @param s The saved string.
+     * @return The saved task.
+     */
     public static Task parseSavedTask(String s) {
         String[] arg = s.split(" @@ ");
         Task task;
