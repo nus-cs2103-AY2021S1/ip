@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Parser {
+public class InputProcessor {
 
     static String logo = "      ____        _        \n"
             + "     |  _ \\ _   _| | _____ \n"
@@ -8,10 +8,10 @@ public class Parser {
             + "     | |_| | |_| |   <  __/\n"
             + "     |____/ \\__,_|_|\\_\\___|\n";
 
-    static TaskList taskList;
+    static TaskListManager taskListManager;
 
-    public Parser(){
-        taskList = new TaskList();
+    public InputProcessor(){
+        taskListManager = new TaskListManager();
     }
 
     public static void greet(){
@@ -34,7 +34,7 @@ public class Parser {
 
         if(command.equals("list")){
 
-            taskList.printTaskList();
+            taskListManager.printTaskList();
 
         }else{
 
@@ -57,14 +57,14 @@ public class Parser {
 
                 Integer index = Integer.parseInt(words[1]);
 
-                if(taskList.findListSize() < index){
+                if(taskListManager.findListSize() < index){
                     throw new InvalidRequestException("I could not find this task, please enter a valid task index.");
                 }
                 if(index < 0){
                     throw new InvalidRequestException("Task index is invalid, please enter a valid one.");
                 }
 
-                taskList.markAsDone(index);
+                taskListManager.markAsDone(index);
 
             }else if(words[0].equals("delete")){
 
@@ -78,16 +78,16 @@ public class Parser {
 
                 Integer index = Integer.parseInt(words[1]);
 
-                if(taskList.findListSize() < index){
+                if(taskListManager.findListSize() < index){
                     throw new InvalidRequestException("I could not find this task, please enter a valid task index.");
                 }
                 if(index < 0){
                     throw new InvalidRequestException("Task index is invalid, please enter a valid one.");
                 }
 
-                taskList.deleteTask(index);
+                taskListManager.deleteTask(index);
 
-                int size = taskList.findListSize();
+                int size = taskListManager.findListSize();
 
 
                 if(size == 0){
@@ -161,7 +161,7 @@ public class Parser {
 
                 }
 
-                taskList.addTask(newTask);
+                taskListManager.addTask(newTask);
 
             }
         }
