@@ -1,3 +1,0 @@
-T,0,stuff
-E,0,eat lunch,tomorrow noon
-D,0,iP,tomorrow evening 2359
