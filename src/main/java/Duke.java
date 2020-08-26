@@ -50,6 +50,7 @@ public class Duke {
                     if (taskNum > 0 && taskNum <= storedItems.size()) {
                         Task task = storedItems.get(taskNum - 1);
                         task.doTask();
+                        editTaskList(task.saveToString(), taskNum, false);
                         System.out.println(border + "\n" + "Nice I've digested the following:\n"
                                 + task + "\n" + "Now I'm hungry again! FEED ME MORE :3\n" + border);
 
@@ -65,6 +66,7 @@ public class Duke {
                     if (deleteNum > 0 && deleteNum <= storedItems.size()) {
                         Task task = storedItems.get(deleteNum - 1);
                         storedItems.remove((deleteNum - 1));
+                        editTaskList("", deleteNum, true);
                         System.out.println(border + "\n" + "Nooo you can't take away what you've already given me...\n"
                                 + "Okay fine. It's in my stomach tho... ASDFGUUVHHH!!\n"
                                 + "The following has been removed:\n"
@@ -80,7 +82,7 @@ public class Duke {
                     System.out.println(border + "\n" + "uwu\n" + border);
                 } else if (command.equals("exit")) {
                     System.out.println(border + "\n" + "bb cya again!\n" + border);
-                    check = false;
+                    userInput = false;
                 } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
                     if (arr.length < 2) {
                         throw new DukeException("The description of a task cannot be empty!");
@@ -101,6 +103,7 @@ public class Duke {
                         newTask = new Todo(arr[1]);
                     }
                     storedItems.add(newTask);
+                    saveTaskList(newTask.saveToString());
                     System.out.println(border + "\n"
                             + "*Gobble gobble* the following has been eated OwO:\n"
                             + newTask.toString() + "\n"
@@ -112,9 +115,9 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(border + "\n" + e + "\n" + border);
             } catch (DateTimeParseException e) {
-                System.out.println("☹ OOPSIE!! " + "Time format should be yyyy/mm/dd or yyyy-mm-dd.");
+                System.out.println("☹ OOPSIE!! Time format should be yyyy/mm/dd or yyyy-mm-dd.");
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("☹ OOPSIE!! Unable to save task locally.");
             }
         }
     }
