@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
@@ -15,13 +16,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Duke {
-    public static void main(String[] args) {
-        List<Task> savedTasks = getSavedTasks();
-        //Have to resolve a case when the directory can't be found which returns savedTasks as null
-        Scanner scanner = new Scanner(System.in);
-        processInput(scanner, savedTasks);
+    private TaskList tasks;
+    private Storage storage;
+    private UI ui;
+
+    public Duke() {
+        this.tasks = new TaskList();
+        this.storage = new Storage();
+        this.ui = new UI();
     }
 
+    public static void run() {
+        try {
+            File file = Storage.getFile();
+            TaskList.generateList(file);
+            UI.readFile(file);
+            UI.startUpMessage();
+            UI.processInput();
+        } catch (Exception e) {
+            UI.showError(e);
+        }
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
+    }
+
+    /*
     public static void processInput(Scanner scanner, List<Task> saved) {
         List<Task> storedTasks = saved;
 
@@ -421,6 +443,6 @@ public class Duke {
         } catch (DateTimeParseException e) {
             throw new InvalidCommandException("Please give your time in hh:mm format!");
         }
-    }
+    }*/
 }
 

@@ -5,6 +5,10 @@ public class InvalidInputException extends Throwable {
         this.errorMessage = message;
     }
 
+    public String getMessage() {
+        return this.errorMessage;
+    }
+
     @Override
     public String toString() {
         return this.errorMessage;
