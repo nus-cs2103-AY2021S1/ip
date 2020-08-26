@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -71,6 +72,9 @@ public class Parser {
             default:
                 throw new DukeException("Unknown command type.");
             }
+
+        } catch (DateTimeException dateTimeException) {
+            throw new DukeException("Please enter the date and time in the format 'DD-MM-YYYY HHMM'!");
         } catch (Exception exception) {
             throw new DukeException("Unable to read command. Please enter it in the correct format!");
         }

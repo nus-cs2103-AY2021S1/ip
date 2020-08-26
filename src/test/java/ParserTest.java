@@ -49,7 +49,7 @@ public class ParserTest {
             Command command = Parser.parseCommand(fullCommand);
             fail();
         } catch (Exception e) {
-            assertEquals("Unable to read command. Please enter it in the correct format!",
+            assertEquals("Please enter the date and time in the format 'DD-MM-YYYY HHMM'!",
                     e.getMessage());
         }
     }
