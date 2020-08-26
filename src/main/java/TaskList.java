@@ -5,10 +5,6 @@ public class TaskList {
 
     private static List<Task> taskList = new ArrayList<>();
 
-    TaskList() {
-        taskList = new ArrayList<>();
-    }
-
     public static String removeTask (int idx) {
         Task task = taskList.get(idx);
         taskList.remove(idx);
@@ -19,42 +15,25 @@ public class TaskList {
         return taskList.get(idx);
     }
 
-    public static String addTask(Duke.TaskType taskType, String description) {
+    public static int getSize() {
+        return taskList.size();
+    }
+
+    public static String addTask(Task.TaskType taskType, String description, String deadline) {
         Task task = null;
-        String[] splitReadLine = description.split("/", 2 );
-        String[] content;
-        if (splitReadLine.length == 2) content = splitReadLine[1].split(" ", 2);
-        else content = null;
-        if (splitReadLine.length == 2) {
-            switch (taskType) {
-                case TODOS:
-                    task = new ToDos(splitReadLine[0].trim(), content[1]);
-                    taskList.add(task);
-                    break;
-                case DEADLINE:
-                    task = new Deadline(splitReadLine[0].trim(), content[1]);
-                    taskList.add(task);
-                    break;
-                case EVENT:
-                    task = new Event(splitReadLine[0].trim(), content[1]);
-                    taskList.add(task);
-                    break;
-            }
-        } else {
-            switch (taskType) {
-                case TODOS:
-                    task = new ToDos(splitReadLine[0].trim());
-                    taskList.add(task);
-                    break;
-                case DEADLINE:
-                    task = new Deadline(splitReadLine[0].trim());
-                    taskList.add(task);
-                    break;
-                case EVENT:
-                    task = new Event(splitReadLine[0].trim());
-                    taskList.add(task);
-                    break;
-            }
+        switch (taskType) {
+            case TODOS:
+                task = new ToDos(description.trim(), deadline);
+                taskList.add(task);
+                break;
+            case DEADLINE:
+                task = new Deadline(description.trim(), deadline);
+                taskList.add(task);
+                break;
+            case EVENT:
+                task = new Event(description.trim(), deadline);
+                taskList.add(task);
+                break;
         }
 
         return "Got it, here yur task bij\n" +
@@ -62,8 +41,26 @@ public class TaskList {
                 "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 
-    public static int getSize() {
-        return taskList.size();
+    public static String addTask(Task.TaskType taskType, String description) {
+        Task task = null;
+        switch (taskType) {
+            case TODOS:
+                task = new ToDos(description);
+                taskList.add(task);
+                break;
+            case DEADLINE:
+                task = new Deadline(description);
+                taskList.add(task);
+                break;
+            case EVENT:
+                task = new Event(description);
+                taskList.add(task);
+                break;
+        }
+
+        return "Got it, here yur task bij\n" +
+                task.toString() +
+                "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 
     public static String toStr() {

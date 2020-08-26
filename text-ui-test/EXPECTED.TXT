@@ -3,67 +3,67 @@ What duh hell du yu wan?
 UnknownCommandException: Don't understand...
 Here yur tasks faggit: 
 empty
-EmptyDescriptionException: Description empty la oi
+EmptyDescriptionException: Specify index la oi
 Got it, here yur task bij
-[T][?] something (by: 1pm lol)
+[T][✘] something (by: 1pm lol)
 Now you have 1 tasks in the list.
 okcan done:
-[T][?] something (by: 1pm lol)
+[T][✓] something (by: 1pm lol)
 Now you have 1 tasks in the list.
 Here yur tasks faggit: 
-1.[T][?] something (by: 1pm lol)
+1.[T][✓] something (by: 1pm lol)
 Got it, here yur task bij
-[E][?] exciting!! (by: in da fuTureZ!!)
+[E][✘] exciting!! (by: in da fuTureZ!!)
 Now you have 2 tasks in the list.
 Got it, here yur task bij
-[D][?] homework (by: idk whenz)
+[D][✘] homework (by: idk whenz)
 Now you have 3 tasks in the list.
 Here yur tasks faggit: 
-1.[T][?] something (by: 1pm lol)
-2.[E][?] exciting!! (by: in da fuTureZ!!)
-3.[D][?] homework (by: idk whenz)
+1.[T][✓] something (by: 1pm lol)
+2.[E][✘] exciting!! (by: in da fuTureZ!!)
+3.[D][✘] homework (by: idk whenz)
 Got it, here yur task bij
-[E][?] exciting!! yay
+[E][✘] exciting!! yay
 Now you have 4 tasks in the list.
 Got it, here yur task bij
-[D][?] homework (by: still idk)
+[D][✘] homework (by: still idk)
 Now you have 5 tasks in the list.
 Got it, here yur task bij
-[T][?] even more homework omg
+[T][✘] even more homework omg
 Now you have 6 tasks in the list.
 Here yur tasks faggit: 
-1.[T][?] something (by: 1pm lol)
-2.[E][?] exciting!! (by: in da fuTureZ!!)
-3.[D][?] homework (by: idk whenz)
-4.[E][?] exciting!! yay
-5.[D][?] homework (by: still idk)
-6.[T][?] even more homework omg
+1.[T][✓] something (by: 1pm lol)
+2.[E][✘] exciting!! (by: in da fuTureZ!!)
+3.[D][✘] homework (by: idk whenz)
+4.[E][✘] exciting!! yay
+5.[D][✘] homework (by: still idk)
+6.[T][✘] even more homework omg
 InvalidIndexException: Simi number lai de
 okcan done:
-[E][?] exciting!! yay
+[E][✘] exciting!! yay
 Now you have 5 tasks in the list.
 Here yur tasks faggit: 
-1.[T][?] something (by: 1pm lol)
-2.[E][?] exciting!! (by: in da fuTureZ!!)
-3.[D][?] homework (by: idk whenz)
-4.[D][?] homework (by: still idk)
-5.[T][?] even more homework omg
+1.[T][✓] something (by: 1pm lol)
+2.[E][✘] exciting!! (by: in da fuTureZ!!)
+3.[D][✘] homework (by: idk whenz)
+4.[D][✘] homework (by: still idk)
+5.[T][✘] even more homework omg
 okcan done:
-[D][?] homework (by: still idk)
+[D][✓] homework (by: still idk)
 Now you have 5 tasks in the list.
 InvalidIndexException: Simi number lai de
 Here yur tasks faggit: 
-1.[T][?] something (by: 1pm lol)
-2.[E][?] exciting!! (by: in da fuTureZ!!)
-3.[D][?] homework (by: idk whenz)
-4.[D][?] homework (by: still idk)
-5.[T][?] even more homework omg
+1.[T][✓] something (by: 1pm lol)
+2.[E][✘] exciting!! (by: in da fuTureZ!!)
+3.[D][✘] homework (by: idk whenz)
+4.[D][✓] homework (by: still idk)
+5.[T][✘] even more homework omg
 Input is not number ley...
 Here yur tasks faggit: 
-1.[T][?] something (by: 1pm lol)
-2.[E][?] exciting!! (by: in da fuTureZ!!)
-3.[D][?] homework (by: idk whenz)
-4.[D][?] homework (by: still idk)
-5.[T][?] even more homework omg
+1.[T][✓] something (by: 1pm lol)
+2.[E][✘] exciting!! (by: in da fuTureZ!!)
+3.[D][✘] homework (by: idk whenz)
+4.[D][✓] homework (by: still idk)
+5.[T][✘] even more homework omg
 Never come back,
 dun wanna see yu ever agin

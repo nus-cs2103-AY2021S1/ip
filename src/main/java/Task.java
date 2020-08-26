@@ -1,4 +1,11 @@
 public class Task {
+
+    public enum TaskType {
+        TODOS,
+        DEADLINE,
+        EVENT
+    }
+
     protected String description;
     protected boolean isDone;
     public static final String tick = "\u2713";
