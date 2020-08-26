@@ -10,4 +10,9 @@ public class Todo extends Task {
     public String toString() {
         return String.format("[%c]%s", type, super.toString());
     }
+
+    @Override
+    public String saveToString() {
+        return String.format("%c | %s", type, super.saveToString());
+    }
 }
