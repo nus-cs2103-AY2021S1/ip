@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
 
     public static Task handleInput(String input) throws InvalidDescriptionException, InvalidTypeException {

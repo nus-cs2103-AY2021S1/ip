@@ -1,3 +1,5 @@
+package duke;
+
 public class Event extends Task {
     private DateTime time;
 
