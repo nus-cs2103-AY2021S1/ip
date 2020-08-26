@@ -135,6 +135,13 @@ public class Ui {
         return scanner.nextLine();
     }
 
+    /**
+     * Displays the page with search keyword and search result.
+     *
+     * @param searchTerm Searched keyword
+     * @param idxList Index of the task selected
+     * @param tasks Task selected based on the searched keyword. 
+     */
     public void printSearchResult(String searchTerm, List<Integer> idxList, List<Task> tasks) {
         if (tasks.size() == 0) {
             println("I can't find any task named \"" + searchTerm + "\" in the list...");
