@@ -21,11 +21,11 @@ public class Storage {
                 Scanner sc = new Scanner(file);
                 while (sc.hasNextLine()) {
                     String[] taskInformation = sc.nextLine().split("\\" + SPLITTER);
-                    if (taskInformation[0].equals(Task.TaskType.TODO.getInitial())) {
+                    if (taskInformation[0].equals(TaskType.TODO.getInitial())) {
                         taskList.add(new ToDo(taskInformation[2], isDone(taskInformation[1])));
-                    } else if (taskInformation[0].equals(Task.TaskType.DEADLINE.getInitial())) {
+                    } else if (taskInformation[0].equals(TaskType.DEADLINE.getInitial())) {
                         taskList.add(new Deadline(taskInformation[2], isDone(taskInformation[1]), taskInformation[3]));
-                    } else if (taskInformation[0].equals(Task.TaskType.EVENT.getInitial())) {
+                    } else if (taskInformation[0].equals(TaskType.EVENT.getInitial())) {
                         taskList.add(new Event(taskInformation[2], isDone(taskInformation[1]), taskInformation[3]));
                     } else {
                         throw new DukeException("File formatting is wrong...");
@@ -54,12 +54,12 @@ public class Storage {
         try {
             FileWriter fileWriter = new FileWriter(file);
             for (Task task : taskList.getStoredTasks()) {
-                if (task instanceof ToDo){
-                    fileWriter.write(String.join(SPLITTER, Task.TaskType.TODO.getInitial(), getDoneString(task), task.getDescription()));
+                if (task instanceof ToDo) {
+                    fileWriter.write(String.join(SPLITTER, TaskType.TODO.getInitial(), getDoneString(task), task.getDescription()));
                 } else if (task instanceof Deadline) {
-                    fileWriter.write(String.join(SPLITTER, Task.TaskType.DEADLINE.getInitial(), getDoneString(task), task.getDescription(), ((Deadline) task).getBy()));
+                    fileWriter.write(String.join(SPLITTER, TaskType.DEADLINE.getInitial(), getDoneString(task), task.getDescription(), ((Deadline) task).getBy()));
                 } else if (task instanceof Event) {
-                    fileWriter.write(String.join(SPLITTER, Task.TaskType.EVENT.getInitial(), getDoneString(task), task.getDescription(), ((Event) task).getAt()));
+                    fileWriter.write(String.join(SPLITTER, TaskType.EVENT.getInitial(), getDoneString(task), task.getDescription(), ((Event) task).getAt()));
                 } else {
                     throw new DukeException("I can't seem to update the file...");
                 }
