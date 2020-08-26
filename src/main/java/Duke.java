@@ -119,43 +119,8 @@ public class Duke {
         }
     }
 
-    // TODO: Consider some cleaner way of validating, perhaps a factory method for each Task
     private static void addTask(String command, String input) throws InvalidTaskException {
-        Task task;
-        switch (command) {
-        case "todo":
-            String[] todoDetails = input.split("todo ");
-            if (todoDetails.length < 2) {
-                throw new InvalidTaskException("😡 I have no idea what you want to do.");
-            }
-            String taskName = todoDetails[1];
-            task = new Todo(taskName);
-            break;
-        case "deadline":
-            String[] deadlineDetails = input.split("deadline | /by ");
-            if (deadlineDetails.length < 2) {
-                throw new InvalidTaskException("What is it you want to do?");
-            }
-            if (deadlineDetails.length < 3) {
-                throw new InvalidTaskException("What's your deadline? You have to tell me, you know.");
-            }
-            // TODO: 26/8/20 Use parser for all Tasks
-            // Ugh this interleaving of logic is disgusting
-            task = TaskParser.parseDeadline(false, deadlineDetails[1], deadlineDetails[2]);
-            break;
-        case "event":
-            String[] eventDetails = input.split("event | /at ");
-            if (eventDetails.length < 2) {
-                throw new InvalidTaskException("What is it you want to do?");
-            }
-            if (eventDetails.length < 3) {
-                throw new InvalidTaskException("When do you need to do this? You have to tell me, you know.");
-            }
-            task = new Event(eventDetails[1], eventDetails[2]);
-            break;
-        default:
-            throw new InvalidTaskException("Um, I don't get what you're saying.");
-        }
+        Task task = TaskParser.parseInput(command, input);
         TaskList.addTask(task);
         Ui.displayMessages(
                 "Okay, you want to:",
