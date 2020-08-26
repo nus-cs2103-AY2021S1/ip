@@ -92,7 +92,6 @@ public class Task {
         return this.type;
     }
 
-
     /**
      * Returns string representation of task.
      *
