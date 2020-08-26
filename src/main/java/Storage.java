@@ -19,6 +19,7 @@ public class Storage {
         ArrayList<Task> taskList = new ArrayList<>();
         
         try {
+            //noinspection ResultOfMethodCallIgnored
             new File(filePath).createNewFile();
         } catch (IOException e) {
             throw new DukeException("☹ OOPS!!! There was an error creating a save file.");
