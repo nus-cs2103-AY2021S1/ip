@@ -151,4 +151,14 @@ public class Ui {
         System.out.println(LINE);
         System.out.print("> ");
     }
+
+    /**
+     * Show interface to ask for a keyword.
+     */
+    public void askForKeyword() {
+        System.out.println(LINE);
+        System.out.println("Give me a keyword to search for");
+        System.out.println(LINE);
+        System.out.print("> ");
+    }
 }

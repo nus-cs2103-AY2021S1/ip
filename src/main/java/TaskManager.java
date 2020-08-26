@@ -98,4 +98,28 @@ class TaskManager {
             throw new DukeException("you gave an invalid task number!");
         }
     }
+
+    /**
+     * Finds a task with a given keyword in its name.
+     * @param keyword the keyword to search for
+     * @return the string represenation of the list of tasks found. If none found, it will
+     * say that no tasks are found.
+     */
+    public String findTask(String keyword) {
+        List<Task> temp = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getName().toLowerCase().contains(keyword.toLowerCase())) {
+                temp.add(task);
+            }
+        }
+        if (temp.isEmpty()) {
+            return "Sorry there are no tasks that matches your keyword";
+        } else {
+            StringBuilder sb = new StringBuilder("Here are the tasks that match your keyword\n");
+            for (int i = 0; i < temp.size(); i++) {
+                sb.append("\n").append(i + 1).append(". ").append(temp.get(i));
+            }
+            return sb.toString();
+        }
+    }
 }

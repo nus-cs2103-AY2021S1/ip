@@ -24,6 +24,8 @@ public class CommandHandler {
                 return new CompleteCommand();
             case "delete":
                 return new DeleteCommand();
+            case "find":
+                return new FindCommand();
             default:
                 return new ErrorCommand();
         }
