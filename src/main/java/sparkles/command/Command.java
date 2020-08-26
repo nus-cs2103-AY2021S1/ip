@@ -12,7 +12,7 @@ abstract public class Command {
 
     protected final String command;
 
-    protected Command(String command) {
+    public Command(String command) {
         this.command = command;
     }
 

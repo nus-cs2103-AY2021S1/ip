@@ -12,6 +12,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Return "O" or "X" based on whether the task is
      * done or not done.

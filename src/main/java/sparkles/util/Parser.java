@@ -32,6 +32,8 @@ public class Parser {
             return new ExitCommand(command);
         } else if (lowerCase.startsWith("delete")) {
             return new DeleteCommand(command);
+        } else if (lowerCase.startsWith("find")) {
+            return new FindCommand(command);
         } else {
             return new AddCommand(command);
         }
