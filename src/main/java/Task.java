@@ -7,7 +7,15 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public void toggleIsDone() {
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    protected void toggleIsDone() {
         this.isDone = true;
     }
 

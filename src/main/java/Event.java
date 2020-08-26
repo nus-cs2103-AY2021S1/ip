@@ -3,11 +3,15 @@
  */
 
 public class Event extends Task{
-    protected final String time;
+    private final String time;
 
     public Event(String description, boolean isDone, String time) {
         super(description, isDone);
         this.time = time;
+    }
+
+    public String getTime() {
+        return this.time;
     }
 
     @Override

@@ -3,11 +3,15 @@
  */
 
 public class Deadline extends Task{
-    protected final String doBy;
+    private final String doBy;
 
     public Deadline(String description, boolean isDone, String doBy) {
         super(description, isDone);
         this.doBy = doBy;
+    }
+
+    public String getDoBy() {
+        return this.doBy;
     }
 
     @Override
