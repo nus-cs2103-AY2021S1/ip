@@ -14,6 +14,7 @@ public class CheckCommand extends Command{
     public void execute(Ui ui, Storage storage) {
         Task task = TaskList.toDoList.get(checkInt - 1);
         task.markAsDone();
+        storage.save(TaskList.toDoList);
         ui.checkList(task.toString(), task.getTaskStatusIcon());
         ui.printNumberOfTasks(TaskList.toDoList.size());
     }
