@@ -9,20 +9,20 @@ import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
 
 public class Parser {
-    public static LocalDateTime parseDateTime(String input) throws DukeException {
-        int index = input.indexOf(" ");
-        String date = index == -1 ? input : input.substring(0, index);
-        String time = index == -1 ? "" : input.substring(index + 1);
+    public static LocalDateTime parseDateTime(String dateTime) throws DukeException {
+        String[] dateTimes = dateTime.split("\\s");
+        String date = dateTimes[0];
+        String time = dateTimes.length > 1 ? String.join(" ", Arrays.copyOfRange(dateTimes, 1, dateTimes.length)) : "";
 
         return LocalDateTime.of(parseDate(date), parseTime(time));
     }
 
-    public static LocalDate parseDate(String input) throws DukeException {
+    public static LocalDate parseDate(String dateStr) throws DukeException {
         LocalDate date;
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M[/yyyy][/yy]");
 
         try {
-            TemporalAccessor result = dateFormatter.parseBest(input, LocalDate::from, MonthDay::from);
+            TemporalAccessor result = dateFormatter.parseBest(dateStr, LocalDate::from, MonthDay::from);
 
             if (result instanceof LocalDate) {
                 date = ((LocalDate) result);
@@ -38,20 +38,13 @@ public class Parser {
         return date;
     }
 
-    public static LocalTime parseTime(String input) throws DukeException {
+    public static LocalTime parseTime(String timeStr) throws DukeException {
         LocalTime time = LocalTime.MIDNIGHT;
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(timeStr.contains(" ") ? "h:m a" : "H:m");
 
-        if (!input.isEmpty()) {
-            String[] params = input.split("\\s");
-
+        if (!timeStr.isBlank()) {
             try {
-                if (params.length == 1) {
-                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:m");
-                    time = timeFormatter.parse(params[0], LocalTime::from);
-                } else {
-                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:m a");
-                    time = timeFormatter.parse(params[0] + " " + params[1], LocalTime::from);
-                }
+                time = timeFormatter.parse(timeStr, LocalTime::from);
             } catch(DateTimeParseException e) {
                 throw new DukeException("Unable to parse time.\n \n"
                         + "Please input your time in one of the following formats:\n"
