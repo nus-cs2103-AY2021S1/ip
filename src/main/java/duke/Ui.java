@@ -8,10 +8,10 @@ import java.util.Scanner;
  */
 public class Ui {
     /** Bot's reply prefix */
-    static String bot = "Dave says:";
+    private static String bot = "Dave says:";
 
     /** Line separator */
-    static String line = "_______________________________________________________________";
+    private static String line = "_______________________________________________________________";
 
     /** Scanner object */
     Scanner scanner;
@@ -34,8 +34,22 @@ public class Ui {
     }
 
     /**
-     * Prints goodbyes and terminates.
+     * Returns prefix of reply.
+     *
+     * @return String of prefix of reply.
      */
+    public static String getBot() {
+        return Ui.bot;
+    }
+
+    /**
+     * Returns line separator.
+     * @return Line separator.
+     */
+    public static String getLine() {
+        return Ui.line;
+    }
+
     public void printBye() {
         System.out.println(line);
         System.out.println(bot);
@@ -110,5 +124,4 @@ public class Ui {
     public void showLoadingError() {
         System.out.println("I am unable to load your tasks! D:");
     }
-
 }

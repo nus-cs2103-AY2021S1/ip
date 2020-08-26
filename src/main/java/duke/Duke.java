@@ -45,7 +45,7 @@ public class Duke {
            } catch (DukeException | IOException ex) {
                System.out.println(ex.getMessage());
            } finally {
-               System.out.println(Ui.line);
+               System.out.println(Ui.getLine());
            }
         }
     }
@@ -57,9 +57,6 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
-
-
-
 }
 
 

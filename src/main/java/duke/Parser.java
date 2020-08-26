@@ -20,8 +20,8 @@ public class Parser {
             String extractCommand = input[0];
             command = CommandEnum.valueOf(extractCommand.toUpperCase());
         } catch (NullPointerException | IllegalArgumentException ex) {
-            System.out.println(Ui.line);
-            System.out.println(Ui.bot);
+            System.out.println(Ui.getLine());
+            System.out.println(Ui.getBot());
             throw new DukeException(
                     "You have keyed in an invalid command or formatting!\n" +
                             "(Valid commands: todo, deadline, event, list, delete, bye, done)");
@@ -43,12 +43,11 @@ public class Parser {
             case DELETE:
                 return new DeleteCommand(userInput);
             default:
-                System.out.println(Ui.line);
-                System.out.println(Ui.bot);
+                System.out.println(Ui.getLine());
+                System.out.println(Ui.getBot());
                 throw new DukeException(
                         "You have keyed in an invalid command!\n" +
                                 "(Valid commands: todo, deadline, event, list, delete, bye, done)");
         }
-
     }
 }

@@ -87,8 +87,8 @@ public class AddCommand extends Command {
             ui.printAddTodo(todo, tasks);
             storage.writeToFile(tasks.getTasks());
         } else {
-            System.out.println(Ui.line);
-            System.out.println(Ui.bot);
+            System.out.println(Ui.getLine());
+            System.out.println(Ui.getBot());
             throw new DukeException("The description of a todo cannot be empty!");
         }
     }
@@ -115,21 +115,19 @@ public class AddCommand extends Command {
                 ui.printAddDeadline(deadline, tasks);
                 storage.writeToFile(tasks.getTasks());
             } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex) {
-                System.out.println(Ui.line);
-                System.out.println(Ui.bot);
-                throw new DukeException("You have keyed in an invalid " +
-                        "input for 'deadline'!");
+                System.out.println(Ui.getLine());
+                System.out.println(Ui.getBot());
+                throw new DukeException("You have keyed in an invalid command for 'deadline'!");
             } catch (DateTimeParseException ex) {
-                System.out.println(Ui.line);
-                System.out.println(Ui.bot);
-                throw new DukeException("Please key in your deadline " +
-                        "in the form:\n /by <dd/MM/yyyy hh:mm AM/PM>");
+                System.out.println(Ui.getLine());
+                System.out.println(Ui.getLine());
+                throw new DukeException("Please key in your deadline in the form:\n /by <dd/MM/yyyy hh:mm AM/PM>");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
-            System.out.println(Ui.line);
-            System.out.println(Ui.bot);
+            System.out.println(Ui.getLine());
+            System.out.println(Ui.getBot());
             throw new DukeException("The description of a deadline cannot be empty!");
         }
     }
@@ -156,11 +154,10 @@ public class AddCommand extends Command {
                 tasks.addTask(event);
                 storage.writeToFile(tasks.getTasks());
                 ui.printAddEvent(event, tasks);
-            } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex) {
-                System.out.println(Ui.line);
-                System.out.println(Ui.bot);
-                throw new DukeException("You have keyed in an " +
-                        "invalid input for 'event'!");
+            } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex ) {
+                System.out.println(Ui.getLine());
+                System.out.println(Ui.getBot());
+                throw new DukeException("You have keyed in an invalid input for 'event'!");
             } catch (DateTimeParseException ex) {
                 throw new DukeException("Please key in your event " +
                         "in the form:\n /at <dd/MM/yyyy hh:mm AM/PM>");
@@ -168,8 +165,8 @@ public class AddCommand extends Command {
                 e.printStackTrace();
             }
         } else {
-            System.out.println(Ui.line);
-            System.out.println(Ui.bot);
+            System.out.println(Ui.getLine());
+            System.out.println(Ui.getBot());
             throw new DukeException("The description of an event cannot be empty!");
         }
     }
