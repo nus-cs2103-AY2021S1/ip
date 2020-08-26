@@ -5,6 +5,7 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -107,5 +108,20 @@ public class TaskList {
 
         printTotalNumberOfTasks();
         storage.appendToFile(task.toText());
+    }
+
+    public void findTask(String keyWord) {
+        ArrayList<String> matchedTasks = new ArrayList<>();
+
+        for (Task task: tasks) {
+            if (task.toString().contains(keyWord)) {
+                matchedTasks.add(task.toString());
+            }
+        }
+        System.out.println("Here are the tasks that matched your search:");
+        for (int i = 0; i < matchedTasks.size(); i++) {
+            String string = matchedTasks.get(i);
+            System.out.println(i + 1 + ". " + string);
+        }
     }
 }

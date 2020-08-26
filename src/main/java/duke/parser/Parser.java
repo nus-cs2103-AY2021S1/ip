@@ -1,12 +1,6 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.DeleteCommand;
-import duke.command.AddCommand;
-import duke.command.UnknownCommand;
+import duke.command.*;
 
 import duke.exception.DukeException;
 
@@ -23,6 +17,13 @@ public class Parser {
             break;
         case "done":
             command = new DoneCommand(Integer.parseInt(inputArr[1]));
+            break;
+        case "find":
+            try {
+                command = new FindCommand(input.substring(5));
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("Please include description!");
+            }
             break;
         case "delete":
             try {
