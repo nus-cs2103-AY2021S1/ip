@@ -6,20 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dcc7396a-4a04-47f3-9835-d9f0d7777614" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/ip.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/ip.ipr" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ip.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ip.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/duke/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/Duke.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/duke/DukeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/DukeException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/storage/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/storage/Storage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/task/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task/Deadline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/task/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/task/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/task/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task/Todo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/taskList/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/taskList/TaskList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/Ui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/Ui.java" afterDir="false" />
-    </list>
+    <list default="true" id="dcc7396a-4a04-47f3-9835-d9f0d7777614" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
