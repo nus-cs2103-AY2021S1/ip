@@ -1,8 +1,6 @@
-import java.util.regex.Pattern;
-
 public abstract class Task {
-    private final String description;
-    private Boolean done;
+    protected final String description;
+    protected Boolean done;
     protected static String format = "<task description>";
     
     public Task(String description) {
@@ -13,6 +11,8 @@ public abstract class Task {
     public static String getFormat() {
         return format;
     }
+    
+    public abstract String getParsedTask();
     
     public String getCheckBox() {
         if (this.done) {
