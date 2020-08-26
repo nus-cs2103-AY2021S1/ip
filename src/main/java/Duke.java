@@ -7,7 +7,6 @@ import java.util.Arrays;
 
 public class Duke {
 
-//    private List<Task> tasks = new ArrayList<>();
     UserData userData = new UserData();
 
     private void activate() {
