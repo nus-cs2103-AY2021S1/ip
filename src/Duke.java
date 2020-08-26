@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.Arrays;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -78,11 +78,16 @@ public class Duke {
                 if (arr.length == 1) {
                     throw new DukeException("The deadline of the task cannot be empty!");
                 } else {
-                    String due = arr[1];
-                    Task dl = new Deadline(des, due);
-                    taskList.add(dl);
-                    System.out.println(horizontal + "Got it. I've added this task:" + "\n" + dl.toString() + "\n" +
-                            "Now you have " + list.size() + " tasks in the list." + "\n" + horizontal);
+                    try {
+                        String due = arr[1];
+                        Task dl = new Deadline(des, due);
+                        taskList.add(dl);
+                        System.out.println(horizontal + "Got it. I've added this task:" + "\n" + dl.toString() + "\n" +
+                                "Now you have " + list.size() + " tasks in the list." + "\n" + horizontal);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Please use this format: \n" +
+                                "dd-MM-yyyy HHmm");
+                    }
                 }
             }
         } else if (input.startsWith("event")) {
@@ -95,11 +100,16 @@ public class Duke {
                 if (arr.length == 1) {
                     throw new DukeException("The date of the event cannot be empty!");
                 } else {
-                    String date = arr[1];
-                    Task event = new Events(des, date);
-                    taskList.add(event);
-                    System.out.println(horizontal + "Got it. I've added this task:" + "\n" + event.toString() + "\n" +
-                            "Now you have " + list.size() + " tasks in the list." + "\n" + horizontal);
+                    try {
+                        String date = arr[1];
+                        Task event = new Events(des, date);
+                        taskList.add(event);
+                        System.out.println(horizontal + "Got it. I've added this task:" + "\n" + event.toString() + "\n" +
+                                "Now you have " + list.size() + " tasks in the list." + "\n" + horizontal);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Please use this format: \n" +
+                                "dd-MM-yyyy HHmm");
+                    }
                 }
             }
         } else {
@@ -144,7 +154,7 @@ public class Duke {
                     line = br.readLine();
                 }
             } else {
-                System.out.println(horizontal + "foesuh9feoisfjse" + "\n" + horizontal);
+                System.out.println(horizontal + "file does not exist" + "\n" + horizontal);
             }
         } catch (FileNotFoundException e) {
 
