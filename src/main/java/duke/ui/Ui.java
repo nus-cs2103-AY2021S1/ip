@@ -6,6 +6,7 @@ import duke.task.TaskList;
 import java.util.ArrayList;
 
 public class Ui {
+
     private TaskList taskList;
     private static final String LINE_DIVIDER = "     _____________________________________";
     private static final String LOGO = "      ____        _        \n"

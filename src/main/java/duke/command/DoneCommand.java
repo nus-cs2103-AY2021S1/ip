@@ -6,6 +6,7 @@ import duke.ui.Ui;
 import duke.exception.InvalidInputException;
 
 public class DoneCommand extends Command {
+
     private Task task;
     private int index;
 
