@@ -115,7 +115,7 @@ public class Parser {
             // Exception thrown if userInput.split() fails
             // Command has no details, throw exception
             throw new DukeException("Whoops! I think you forgot to finish your "
-                    + cmd[0] + " command. Sorry but I need it. D:");
+                    + "command. Sorry but I need it. D:");
         }
     }
 
