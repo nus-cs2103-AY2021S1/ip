@@ -18,64 +18,60 @@ public class Parser {
         Command c;
 
         if (input.equals("bye")) {
+            // exit command
             c = new ExitCommand("exit", "");
-        }
-        else if (input.equals("list")) {
+        } else if (input.equals("list")) {
+            // list command
             new Ui().startList();
+
             c = new ListCommand("list", "");
-        }
-        else if (input.startsWith("todo")) {
+        } else if (input.startsWith("todo")) {
+            // add to-do command
             if (input.length() < 5) {
                 throw new DukeException("To-do item cannot be empty!");
-            }
-            else {
+            } else {
                 c = new AddCommand("todo", input.substring(5));
             }
-        }
-        else if (input.startsWith("deadline")) {
+        } else if (input.startsWith("deadline")) {
+            // add deadline command
             if (input.length() < 9) {
                 throw new DukeException("Deadline item cannot be empty!");
-            }
-            else {
+            } else {
                 c = new AddCommand("deadline", input.substring(9));
             }
-        }
-        else if (input.startsWith("event")) {
+        } else if (input.startsWith("event")) {
+            // add event command
             if (input.length() < 6) {
                 throw new DukeException("Event item cannot be empty!");
-            }
-            else {
+            } else {
                 c = new AddCommand("event", input.substring(6));
             }
-        }
-        else if (input.startsWith("done")) {
+        } else if (input.startsWith("done")) {
+            // done command
             if (input.length() < 5) {
                 throw new DukeException("Item number cannot be empty!");
-            }
-            else {
+            } else {
                 c = new DoneCommand("done", input.substring(5));
             }
-        }
-        else if (input.startsWith("delete")) {
+        } else if (input.startsWith("delete")) {
+            // delete command
             if (input.length() < 7) {
                 throw new DukeException("Item number cannot be empty!");
-            }
-            else {
+            } else {
                 c = new DeleteCommand("delete", input.substring(7));
             }
-        }
-        else if (input.startsWith("check")) {
+        } else if (input.startsWith("check")) {
+            // check list command
             if (input.length() < 6) {
                 throw new DukeException("Query date cannot be empty!");
-            }
-            else {
+            } else {
                 c = new ListCommand("check", input.substring(6));
             }
-        }
-        else {
+        } else {
             // not valid task
             throw new DukeException("Invalid command, I don't understand :(");
         }
+
         return c;
     }
 }

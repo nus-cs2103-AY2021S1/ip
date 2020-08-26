@@ -36,22 +36,20 @@ public class AddCommand extends Command {
         String[] temp = item.split(" /by "); // create array of [task desc, task date]
 
         if (temp.length == 2) {
-            boolean validInput = dth.checkInput(temp[1]);
+            boolean isValidInput = dth.isValidInput(temp[1]);
 
-            if (validInput) {
+            if (isValidInput) {
                 // valid
                 String formattedDate = dth.categorizeInput(temp[1]);
                 tasks.addTask(new Deadline(temp[0], formattedDate));
 
                 ui.startAddDeadline(tasks.getLastTask());
                 ui.printTasksSize(tasks.getTaskSize());
-            }
-            else {
+            } else {
                 // not valid date
                 throw new DukeException().invalidDate();
             }
-        }
-        else {
+        } else {
             // no date input
             throw new DukeException().invalidDeadline();
         }
@@ -61,22 +59,20 @@ public class AddCommand extends Command {
         String[] temp = item.split(" /at "); // create array of [task desc, task date]
 
         if (temp.length == 2) {
-            boolean validInput = dth.checkInput(temp[1]);
+            boolean isValidInput = dth.isValidInput(temp[1]);
 
-            if (validInput) {
+            if (isValidInput) {
                 // valid
                 String formattedDate = dth.categorizeInput(temp[1]);
                 tasks.addTask(new Event(temp[0], formattedDate));
 
                 ui.startAddEvent(tasks.getLastTask());
                 ui.printTasksSize(tasks.getTaskSize());
-            }
-            else {
+            } else {
                 // not valid date
                 throw new DukeException().invalidDate();
             }
-        }
-        else {
+        } else {
             // no date input
             throw new DukeException().invalidEvent();
         }
@@ -99,11 +95,9 @@ public class AddCommand extends Command {
 
         if (command.equals("todo")) {
             addTodo();
-        }
-        else if (command.equals("deadline")) {
+        } else if (command.equals("deadline")) {
             addDeadline();
-        }
-        else if (command.equals("event")) {
+        } else if (command.equals("event")) {
             addEvent();
         }
     }

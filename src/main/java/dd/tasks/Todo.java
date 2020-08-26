@@ -18,8 +18,7 @@ public class Todo extends Task {
     public String saveString() {
         if (this.isDone) {
             return "T , 1 , " + description;
-        }
-        else {
+        } else {
             return "T , 0 , " + description;
         }
     }

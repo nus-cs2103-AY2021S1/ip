@@ -31,8 +31,7 @@ public class Event extends Task {
     public String saveString() {
         if (this.isDone) {
             return "T , 1 , " + description + " , " + at;
-        }
-        else {
+        } else {
             return "T , 0 , " + description + " , " + at;
         }
     }

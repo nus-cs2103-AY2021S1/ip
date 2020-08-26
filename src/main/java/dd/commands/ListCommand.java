@@ -34,22 +34,20 @@ public class ListCommand extends Command {
         }
     }
 
-    private void checkDate() throws DukeException {
-        boolean validInput = dth.checkInput(item);
+    public void checkDate() throws DukeException {
+        boolean isValidInput = dth.isValidInput(item);
 
-        if (validInput && item.length() == 10) {
+        if (isValidInput && item.length() == 10) {
             // valid
             ArrayList<Task> tasksOnDate = dth.filterDate(item, tasks.getTaskList());
 
             if (tasksOnDate.isEmpty()) {
                 throw new DukeException().emptyCheckDate(item);
-            }
-            else {
+            } else {
                 ui.startCheckDate(item);
                 list(tasksOnDate);
             }
-        }
-        else {
+        } else {
             // not valid date
             throw new DukeException().invalidCheckDate();
         }
@@ -72,8 +70,7 @@ public class ListCommand extends Command {
 
         if (command.equals("list")) {
             list(tasks.getTaskList());
-        }
-        else if (command.equals("check")) {
+        } else if (command.equals("check")) {
             checkDate();
         }
     }

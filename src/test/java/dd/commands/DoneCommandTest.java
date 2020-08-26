@@ -31,6 +31,7 @@ public class DoneCommandTest {
     public void doneCommand_success() throws DukeException {
         Todo doneTask = new Todo("borrow book");
         doneTask.markAsDone();
+
         String res = "Wow!! Good job!!\n  " + doneTask + "\n ";
 
         TaskList tasks = new TaskList();
@@ -58,8 +59,7 @@ public class DoneCommandTest {
 
             assertEquals("", outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
             fail();
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),
                     e.getMessage().replaceAll("\\p{Cntrl}", " "));
         }

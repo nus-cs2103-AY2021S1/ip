@@ -29,11 +29,9 @@ public class TaskList {
 
             if (temp[0].equals("T")) {
                 scannedTasks.add(new Todo(temp[2]));
-            }
-            else if (temp[0].equals("E")) {
+            } else if (temp[0].equals("E")) {
                 scannedTasks.add(new Event(temp[2], temp[3]));
-            }
-            else {
+            } else {
                 scannedTasks.add(new Deadline(temp[2], temp[3]));
             }
 

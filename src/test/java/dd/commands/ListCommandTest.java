@@ -31,6 +31,7 @@ public class ListCommandTest {
     public void listCommand_success() throws DukeException {
         String res = "Ok, To-do added:\n  " + new Todo("borrow book")
                 + "\n " + "You now have 1 task(s) in your list!\n ";
+
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         DataStorage ds = new DataStorage();
@@ -55,8 +56,7 @@ public class ListCommandTest {
 
             assertEquals("", outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
             fail();
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),
                     e.getMessage().replaceAll("\\p{Cntrl}", " "));
         }
