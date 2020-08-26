@@ -14,7 +14,7 @@ public class Parser {
         this.ui = ui;
     }
 
-    public static void interact(TaskList tasks, String filePath) throws DukeException, IOException {
+    public static void interact(TaskList taskList, String filePath) throws DukeException, IOException {
         ui.greet();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
@@ -23,19 +23,19 @@ public class Parser {
                 ui.exit();
                 break;
             } else if (line.equals("list")) {
-                ui.list(tasks);
+                ui.list(taskList);
             } else {
                 String[] arrOfStr = line.split(" ", 0);
                 String identifier = arrOfStr[0];
                 if (identifier.equals("done")) {
 //                    mark as done
                     int index = Integer.parseInt(arrOfStr[1]) - 1;
-                    ui.markDone(tasks, index);
-                    Storage.updateFile(filePath, tasks);
+                    ui.markDone(taskList, index);
+                    Storage.updateFile(filePath, taskList);
                 } else if (identifier.equals("delete")) {
 //                    delete
                     int index = Integer.parseInt(arrOfStr[1]) - 1;
-                    tasks.delete(index);
+                    taskList.delete(index);
                 } else {
 //                    add to list
                     if ((identifier.equals("todo") || identifier.equals("deadline")
@@ -71,7 +71,7 @@ public class Parser {
                         } else {
                             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
-                        tasks.add(task);
+                        taskList.add(task);
                     }
                 }
             }

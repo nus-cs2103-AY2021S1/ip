@@ -84,9 +84,9 @@ public class Storage {
         fw.close();
     }
 
-    public static void updateFile(String filePath, TaskList tasks) throws IOException {
+    public static void updateFile(String filePath, TaskList taskList) throws IOException {
         writeToFile(filePath, "");
-        for (Task tsk : tasks.getTasks()) {
+        for (Task tsk : taskList.getTasks()) {
             String textToAppend = tsk.getSymbol() + " @ " + tsk.getStatusIcon() + " @ "
                     + tsk.getDescription() + " @ " + tsk.getDate() + "\n";
             appendToFile(filePath, textToAppend);

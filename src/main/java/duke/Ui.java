@@ -21,20 +21,20 @@ public class Ui {
         printBorder();
     }
 
-    public void list(TaskList tasks) {
+    public void list(TaskList taskList) {
         printBorder();
         System.out.println(INDENTATION + "Here are the tasks in your list:");
-        for (Task task : tasks.getTasks()) {
-            int index = tasks.getTasks().indexOf(task) + 1;
+        for (Task task : taskList.getTasks()) {
+            int index = taskList.getTasks().indexOf(task) + 1;
             System.out.println(INDENTATION + index + "." + task);
         }
         printBorder();
     }
 
-    public void markDone(TaskList tasks, int index) {
-        Task oldTask = tasks.getTasks().get(index);
+    public void markDone(TaskList taskList, int index) {
+        Task oldTask = taskList.getTasks().get(index);
         Task newTask = oldTask.markAsDone();
-        tasks.replace(oldTask, newTask);
+        taskList.replace(oldTask, newTask);
 
         printBorder();
         System.out.println(INDENTATION + "Nice! I've marked this task as done:");
