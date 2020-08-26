@@ -1,11 +1,18 @@
 import java.io.IOException;
 
+/**
+ * Represents the main Chatbot.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Loads the saved tasks into the list of tasks.
+     * @param filePath path to file containing saved tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -17,6 +24,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Activates and deactivates the Chatbot accordingly.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

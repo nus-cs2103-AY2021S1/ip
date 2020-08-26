@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the file handling aspect of reading and writing files.
+ */
 public class Storage {
     String filePath;
     ArrayList<Task> loadedTasks;
@@ -14,12 +17,25 @@ public class Storage {
         this.loadedTasks = new ArrayList<>();
     }
 
+    /**
+     * Writes task information to the file for permanent storage.
+     * @param filePath path to file
+     * @param textToAdd text to be added into the file
+     * @param isAppending indicates if text is being appended to the file
+     * @throws IOException for input/output errors
+     */
     private void writeToFile(String filePath, String textToAdd, boolean isAppending) throws IOException {
         FileWriter fw = new FileWriter(filePath, isAppending);
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * Returns an ArrayList of tasks from the stored tasks information upon reading the file.
+     * @return ArrayList of existing tasks
+     * @throws DukeException if file is not found
+     * @throws IOException for input/output errors
+     */
     public ArrayList<Task> load() throws DukeException, IOException {
         try {
             File f = new File(this.filePath);
@@ -75,6 +91,10 @@ public class Storage {
         return this.loadedTasks;
     }
 
+    /**
+     * Saves tasks into a file for permanent storage.
+     * @param tasks ArrayList of tasks to be saved
+     */
     public void saveTasks(ArrayList<Task> tasks) {
         try {
             for (int i = 0; i < tasks.size(); i++) {
