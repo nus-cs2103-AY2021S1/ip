@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private final List<Task> tasks = new ArrayList<>();
@@ -29,5 +30,11 @@ public class TaskList {
 
     public Task getTask(int index) {
         return tasks.get(index);
+    }
+
+    public List<Task> searchTasks(String term) {
+        return tasks.stream()
+                .filter(t -> t.taskName.contains(term))
+                .collect(Collectors.toList());
     }
 }
