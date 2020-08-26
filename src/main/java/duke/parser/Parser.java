@@ -7,6 +7,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ListCommand;
 import duke.command.ErrorCommand;
+import duke.command.FindCommand;
 import duke.exception.InvalidInputException;
 import duke.exception.InvalidEventException;
 import duke.exception.InvalidRequestException;
@@ -55,6 +56,15 @@ public class Parser {
                         }
                         Integer index = Integer.parseInt(wordArray[1]);
                         return new DeleteCommand(index);
+                    } else if (wordArray[0].equals("find")) {
+                        if (noOfWords == 1) {
+                            throw new InvalidRequestException("Please tell me the word you want "
+                                    + "to find!");
+                        }
+                        if (noOfWords > 2) {
+                            throw new InvalidRequestException("I can only handle one keyword!");
+                        }
+                        return new FindCommand(wordArray[1]);
                     } else {
                         Task newTask;
                         if (wordArray[0].equals("todo")) {

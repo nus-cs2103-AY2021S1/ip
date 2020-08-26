@@ -90,6 +90,21 @@ public class Ui {
         System.out.println(LINE_DIVIDER);
     }
 
+    public void displayFinding(ArrayList<Task> matchingtasks) {
+        int noOfTasks = matchingtasks.size();
+        if (noOfTasks == 0) {
+            messageFormat("     There is no task that match with this keyword!");
+        } else {
+            System.out.println(LINE_DIVIDER);
+            System.out.println("     Here are the task or tasks that match with this keyword:");
+            for (int i = 0; i < noOfTasks; i++) {
+                Task task = matchingtasks.get(i);
+                System.out.println("     " + (i + 1) + "." + task);
+            }
+            System.out.println(LINE_DIVIDER);
+        }
+    }
+
 
 
 }
