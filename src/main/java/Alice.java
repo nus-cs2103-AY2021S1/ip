@@ -1,5 +1,12 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
+import java.util.*;
 
 public class Alice {
     private static final String PROMPT = " > ";
@@ -87,6 +94,44 @@ public class Alice {
         }
     }
 
+    private static final List<DateTimeFormatter> KNOWN_FORMATS = createDateFormats();
+
+    private static List<DateTimeFormatter> createDateFormats() {
+        // List of acceptable date time format with optional time/year
+        List<String> knownPatterns = Arrays.asList(
+                "d/M[/uuuu][ HHmm]", "d-M[-uuuu][ HHmm]",
+                "M/d[/uuuu][ HHmm]", "M-d[-uuuu][ HHmm]",
+                "uuuu/M/d[ HHmm]", "uuuu-M-d[ HHmm]",
+                "d-MMM[-uuuu][ HHmm]", "d MMM[ HHmm]"
+        );
+
+        List<DateTimeFormatter> knownFormats = new ArrayList<>();
+        for (int i = 0; i < knownPatterns.size(); i++) {
+            knownFormats.add(
+                    new DateTimeFormatterBuilder()
+                            .appendPattern(knownPatterns.get(i))
+                            .parseDefaulting(ChronoField.YEAR, LocalDateTime.now().getYear())
+                            .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+                            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+                            .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
+                            .toFormatter()
+            );
+        }
+        return knownFormats;
+    }
+
+    private LocalDateTime parseDateTime(String dateTimeString) throws AliceException {
+        for (int i = 0; i < KNOWN_FORMATS.size(); i++) {
+            try {
+                return LocalDateTime.parse(dateTimeString, KNOWN_FORMATS.get(i));
+            } catch (DateTimeParseException ex) {
+                // ignore
+            }
+        }
+
+        throw new AliceException("Invalid datetime! Please use 24h format for time");
+    }
+
     private String addTodo(String details) throws AliceException {
         if (!details.isBlank()) {
             return addTask(new Todo(details));
@@ -98,7 +143,10 @@ public class Alice {
     private String addDeadline(String details) throws AliceException {
         String[] desc_date = details.split(" /by ", 2);
         if (desc_date.length == 2 && !desc_date[1].isBlank()) {
-            return addTask(new Deadline(desc_date[0], desc_date[1]));
+            String description = desc_date[0];
+            String dateTime = desc_date[1];
+            LocalDateTime deadlineDt = parseDateTime(dateTime);
+            return addTask(new Deadline(description, deadlineDt));
         } else if (details.isBlank()) {
             // Empty description
             throw new AliceException("The deadline description cannot be left empty.");
@@ -112,18 +160,22 @@ public class Alice {
     }
 
     private String addEvent(String details) throws AliceException {
-        String[] desc_date = details.split(" /at ", 2);
+        String[] desc_date = details.split(" /on ", 2);
         if (desc_date.length == 2 && !desc_date[1].isBlank()) {
-            return addTask(new Event(desc_date[0], desc_date[1]));
+            String description = desc_date[0];
+            String dateTime = desc_date[1];
+
+            LocalDateTime eventDateTime = parseDateTime(dateTime);
+            return addTask(new Event(description, eventDateTime));
         } else if (details.isBlank()) {
             // Empty event description
             throw new AliceException("The event description cannot be left empty.");
-        } else if (details.endsWith("/at")) {
+        } else if (details.endsWith("/on")) {
             // Empty start-end time
             throw new AliceException("You cannot create an event without the start and end time.");
         } else {
-            // No /at marker
-            throw new AliceException("I can't find the start/end time. Did you forget to add '/at'?");
+            // No /on marker
+            throw new AliceException("I can't find the date & time of the event. Did you forget to add '/on'?");
         }
     }
 

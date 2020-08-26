@@ -6,7 +6,7 @@ public enum Command {
     DELETE(new String[]{"delete"}, "Delete a task","<task number>"),
     TODO(new String[]{"todo"}, "Create a todo task","<desc>"),
     DEADLINE(new String[]{"deadline"}, "Create a task with a deadline","<desc> /by <datetime>"),
-    EVENT(new String[]{"event"}, "Create an event","<desc> /at <datetime>"),
+    EVENT(new String[]{"event"}, "Create an event","<desc> /on <datetime>"),
     HELP(new String[]{"help"}, "Gets the list of commands", ""),
     BYE(new String[]{"bye", "exit"}, "Exits the program", ""),
     EMPTY(new String[]{""}, null, null);
