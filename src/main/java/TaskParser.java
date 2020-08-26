@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 // TODO: 26/8/20 Consider a visitor pattern
 // TODO: 26/8/20 Add try-catch clause
 public class TaskParser {
@@ -12,8 +14,8 @@ public class TaskParser {
             return new TodoTask(isDone, taskName);
         }
         case "DEADLINE": {
-            String deadline = tokens[3];
-            return new DeadlineTask(taskName, deadline);
+            String deadlineStr = tokens[3];
+            return TaskParser.parseDeadline(isDone, taskName, deadlineStr);
         }
         case "EVENT": {
             String timeRange = tokens[3];
@@ -23,4 +25,10 @@ public class TaskParser {
             throw new InvalidInputException("Unable to parse task");
         }
     }
+    public static DeadlineTask parseDeadline(boolean isDone, String taskName, String deadlineStr) {
+        // TODO: 26/8/20 Handle DateTimeParseException
+        LocalDate deadline = LocalDate.parse(deadlineStr);
+        return new DeadlineTask(isDone, taskName, deadline);
+    }
+
 }
