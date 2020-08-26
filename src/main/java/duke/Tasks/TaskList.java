@@ -132,6 +132,12 @@ public class TaskList {
         return dataFile;
     }
 
+    /**
+     * Find tasks that match the keyword from the task list.
+     * @param ui Ui object to print messages to users.
+     * @param description Task description.
+     * @throws DukeException
+     */
     public void findTask(Ui ui, String description) throws DukeException {
         ArrayList<Task> result = new ArrayList<>();
         for (Task t : this.listOfTasks) {

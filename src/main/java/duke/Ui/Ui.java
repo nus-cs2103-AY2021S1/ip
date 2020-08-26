@@ -71,6 +71,9 @@ public class Ui {
         System.out.println("    " + counter + ": " + task.toString());
     }
 
+    /**
+     * Prints the search result.
+     */
     public void printResult() {
         System.out.println("    Here are the matching tasks in your list:");
     }

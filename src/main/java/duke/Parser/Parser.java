@@ -6,6 +6,7 @@ import duke.Commands.DeleteCommand;
 import duke.Commands.DoneCommand;
 import duke.Commands.ExitCommand;
 import duke.Commands.ListCommand;
+import duke.Commands.FindCommand;
 
 import duke.Exceptions.DukeException;
 
