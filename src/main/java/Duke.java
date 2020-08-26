@@ -152,7 +152,9 @@ public class Duke {
             if (deadlineDetails.length < 3) {
                 throw new InvalidTaskException("What's your deadline? You have to tell me, you know.");
             }
-            task = new DeadlineTask(deadlineDetails[1], deadlineDetails[2]);
+            // TODO: 26/8/20 Use parser for all Tasks
+            // Ugh this interleaving of logic is disgusting
+            task = TaskParser.parseDeadline(false, deadlineDetails[1], deadlineDetails[2]);
             break;
         case "event":
             String[] eventDetails = input.split("event | /at ");
