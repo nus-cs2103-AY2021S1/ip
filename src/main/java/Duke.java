@@ -58,11 +58,15 @@ public class Duke {
     }
 
     private void showTasks() {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            String task = tasks.get(i).toString();
-            String message = String.valueOf(i + 1) + ". " + task;
-            System.out.println(message);
+        if (tasks.size() == 0) {
+            System.out.println("No tasks in the list wohoo!");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                String task = tasks.get(i).toString();
+                String message = (i + 1) + ". " + task;
+                System.out.println(message);
+            }
         }
         System.out.print("\n");
     }
