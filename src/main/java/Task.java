@@ -82,4 +82,17 @@ public class Task {
     public String toString() {
         return String.format("[%s][%s] %s", type, getStatusIcon(), description);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof Task) {
+            Task t = (Task) obj;
+            return t.type.equals(this.type) && t.isDone == this.isDone
+                    && t.description.equals(this.description);
+        }
+        return false;
+    }
 }

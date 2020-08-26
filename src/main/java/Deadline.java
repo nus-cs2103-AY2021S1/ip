@@ -35,6 +35,8 @@ public class Deadline extends Task {
             this.byTime = LocalTime.parse(dateTime[1]);
         } catch (DateTimeParseException de) {
             throw new DukeException("Invalid date time format!");
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+            throw new DukeException("Missing date or time!");
         }
     }
 
@@ -52,6 +54,8 @@ public class Deadline extends Task {
             this.byTime = LocalTime.parse(dateTime[1]);
         } catch (DateTimeParseException de) {
             throw new DukeException("Invalid date time format!");
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+            throw new DukeException("Missing date or time!");
         }
     }
 
@@ -65,5 +69,19 @@ public class Deadline extends Task {
         return super.toString() + String.format(" (by: %s, %s)",
                 byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
                 byTime.format(DateTimeFormatter.ofPattern("hh:mm a")));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof Deadline) {
+            Deadline t = (Deadline) obj;
+            return t.type.equals(this.type) && t.isDone == this.isDone
+                    && t.description.equals(this.description)
+                    && t.byDate.equals(this.byDate) && t.byTime.equals(this.byTime);
+        }
+        return false;
     }
 }

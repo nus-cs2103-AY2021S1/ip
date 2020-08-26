@@ -35,6 +35,8 @@ public class Event extends Task {
             this.atTime = LocalTime.parse(dateTime[1]);
         } catch (DateTimeParseException de) {
             throw new DukeException("Invalid date time format!");
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+            throw new DukeException("Missing date or time!");
         }
     }
 
@@ -52,6 +54,8 @@ public class Event extends Task {
             this.atTime = LocalTime.parse(dateTime[1]);
         } catch (DateTimeParseException de) {
             throw new DukeException("Invalid date time format!");
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
+            throw new DukeException("Missing date or time!");
         }
     }
 
@@ -65,5 +69,19 @@ public class Event extends Task {
         return super.toString() + String.format(" (at: %s, %s)",
                 atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
                 atTime.format(DateTimeFormatter.ofPattern("hh:mm a")));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof Event) {
+            Event t = (Event) obj;
+            return t.type.equals(this.type) && t.isDone == this.isDone
+                    && t.description.equals(this.description)
+                    && t.atDate.equals(this.atDate) && t.atTime.equals(this.atTime);
+        }
+        return false;
     }
 }
