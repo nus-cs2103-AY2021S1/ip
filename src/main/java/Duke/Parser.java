@@ -59,7 +59,7 @@ public class Parser {
             if (index == -1) {
                 throw new MissingDeadlineDateException();
             }
-            if (input.length() == 8) {
+            if (input.length() == 8 || input.indexOf("/") <= 9) {
                 throw new EmptyDeadlineException();
             }
             String description = input.substring(9,index-1);
@@ -83,7 +83,7 @@ public class Parser {
             if (index == -1) {
                 throw new MissingEventDateException();
             }
-            if (input.length() == 5) {
+            if (input.length() == 5 || input.indexOf("/") <= 6) {
                 throw new EmptyEventException();
             }
             String description = input.substring(6,index-1);
