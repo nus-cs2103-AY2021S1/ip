@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Duke {
 
+    private String filePath;
     private ArrayList<Task> taskList;
     private boolean isRunning;
 
@@ -15,6 +16,12 @@ public class Duke {
     }
 
     public Duke() {
+        System.out.println(System.getProperty("user.dir"));
+        this.filePath = System.getProperty("user.dir")
+                + (System.getProperty("user.dir").endsWith("text-ui-test")
+                    ? "\\..\\data\\taskList.txt"
+                    : "\\data\\taskList.txt");
+        System.out.println("Current file path is set to: " + filePath);
         this.taskList = new ArrayList<>();
         this.isRunning = true;
     }
@@ -254,7 +261,7 @@ public class Duke {
      */
     private void openTaskList() {
         try {
-            File savedList = new File("src/main/data/taskList.txt");
+            File savedList = new File(filePath);
             if (!savedList.exists()) {
                 System.out.print(
                         "Welcome, first time user. Let me create " +
@@ -314,9 +321,13 @@ public class Duke {
         // Begin process of saving Tasks in the taskList to the file.
         try {
             if (taskList.size() > 0) {
-                File savedList = new File("src/main/data/taskList.txt");
+                File savedList = new File(filePath);
                 FileWriter taskWriter = new FileWriter(savedList);
-
+                // Need to clear the existing file before writing.
+                if (savedList.exists()) {
+                    savedList.delete();
+                    savedList.createNewFile();
+                }
                 for (Task t : taskList) {
                     taskWriter.write(t.getDescriptionForDatabase());
                     taskWriter.write("\n");
