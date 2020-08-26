@@ -8,28 +8,42 @@ added: [E] [✘] meet friend (at: wed 2pm)
 1. [T] [✘] borrow book
 2. [D] [✘] return book (by: Tue 25 Aug 2020)
 3. [E] [✘] meet friend (at: wed 2pm)
+Here are the matching tasks in your list:
+[T] [✘] borrow book
+[D] [✘] return book (by: Tue 25 Aug 2020)
+added: [T] [✘] borrow umbrella
+Here are the matching tasks in your list:
+[T] [✘] borrow book
+[T] [✘] borrow umbrella
+There are no matching tasks in your list.
 I've marked this task as done:
 [T] [✓] borrow book
 1. [T] [✓] borrow book
 2. [D] [✘] return book (by: Tue 25 Aug 2020)
 3. [E] [✘] meet friend (at: wed 2pm)
+4. [T] [✘] borrow umbrella
 I've marked this task as done:
 [D] [✓] return book (by: Tue 25 Aug 2020)
 1. [T] [✓] borrow book
 2. [D] [✓] return book (by: Tue 25 Aug 2020)
 3. [E] [✘] meet friend (at: wed 2pm)
+4. [T] [✘] borrow umbrella
 I've marked this task as done:
 [E] [✓] meet friend (at: wed 2pm)
 1. [T] [✓] borrow book
 2. [D] [✓] return book (by: Tue 25 Aug 2020)
 3. [E] [✓] meet friend (at: wed 2pm)
+4. [T] [✘] borrow umbrella
 This task has been removed: [T] [✓] borrow book
 1. [D] [✓] return book (by: Tue 25 Aug 2020)
 2. [E] [✓] meet friend (at: wed 2pm)
+3. [T] [✘] borrow umbrella
 This task has been removed: [D] [✓] return book (by: Tue 25 Aug 2020)
 1. [E] [✓] meet friend (at: wed 2pm)
-Item #2 does not exist and cannot be removed.
+2. [T] [✘] borrow umbrella
+Item #3 does not exist and cannot be removed.
 1. [E] [✓] meet friend (at: wed 2pm)
+2. [T] [✘] borrow umbrella
 Unrecognized task/command.
 Todos must have non-empty descriptions!
 Item #5 does not exist and cannot be marked as done.
