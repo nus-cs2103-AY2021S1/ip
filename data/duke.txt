@@ -1,5 +1,16 @@
-D | 1 | homework  | Oct 10 2010
-T | 0 | read book
-D | 1 | homework | Aug 26 2020
-E | 0 | concert | Aug 28 2020
-D | 0 | homework | Aug 26 2020
+T | 1 | enjoy life
+T | 1 | live life
+T | 1 | live life
+T | 0 | enjoy life
+T | 1 | live life
+T | 1 | live life
+E | 1 | concert | Aug 26 2020
+T | 0 | enjoy life
+T | 1 | live life
+T | 0 | enjoy life
+T | 0 | live life
+T | 0 | borrow book
+T | 0 | return book
+E | 0 | concert | Aug 26 2020
+T | 0 | live life
+T | 0 | live life
