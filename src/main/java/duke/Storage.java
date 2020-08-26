@@ -100,8 +100,9 @@ public class Storage {
         } catch (Exception e) {
             throw e;
         } finally {
-            if (fileIn != null)
+            if (fileIn != null) {
                 fileIn.close();
+            }
         }
     }
 
