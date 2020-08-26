@@ -19,6 +19,11 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructs a Duke object
+     * @param filePath the file path
+     * @throws FileNotFoundException
+     */
     public Duke(String filePath) throws FileNotFoundException {
         ui = new Ui();
         parser = new Parser();
@@ -31,6 +36,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke app
+     * @throws IOException
+     */
     public void run() throws IOException {
         ui.showWelcomeMessage();
         String inputCommand;
@@ -44,6 +53,11 @@ public class Duke {
         storage.writeFile(tasks);
     }
 
+    /**
+     * Drives the Duke app
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         new Duke("data/duke.txt").run();
     }

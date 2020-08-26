@@ -7,10 +7,20 @@ public class Parser {
     public static int CONTINUE = 1, BYE = 2;
     public static int TODO = 0, DEADLINE = 1, EVENT = 2;
     protected Ui ui;
+
+    /**
+     * Construct a Parser object
+     */
     public Parser(){
         ui = new Ui();
     }
 
+    /**
+     * Parses the input command
+     * @param inputCommand the command inputed by user
+     * @param list the TaskList object
+     * @return an integer indicating whether to continue to run the app or stop the app
+     */
     public int parse(String inputCommand, TaskList list){
         String[] command = inputCommand.split(" ");
         int ptr = 0;

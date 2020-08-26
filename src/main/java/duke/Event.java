@@ -10,6 +10,11 @@ public class Event extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * Gets the description of the event
+     * @param s user input
+     * @return the description of the event
+     */
     public static String getDescription(String s){
         String firstWord = "event", secondWord = "/at";
         int start = 0, len = s.length();
@@ -22,6 +27,11 @@ public class Event extends Task {
         return s.substring(start, end - 1);
     }
 
+    /**
+     * Gets the time of the event
+     * @param s user input
+     * @return the time of the event
+     */
     public static String getTime(String s){
         String word = "/at";
         int i = 0, len = s.length();
@@ -29,6 +39,11 @@ public class Event extends Task {
         return i + 3 == len ? "" : s.substring(i + 4);
     }
 
+    /**
+     * Changes the date format in user input
+     * @param command user input
+     * @return the formatted date
+     */
     public static String changeDateFormat(String[] command){
         String word = "/at";
         for(int i = 0; i < command.length; i++){
@@ -42,6 +57,11 @@ public class Event extends Task {
         return null;
     }
 
+    /**
+     * Returns the Time in user input
+     * @param command user input
+     * @return the Time in user input
+     */
     public static String getLocalTime(String[] command){
         String word = "/at";
         for(int i = 0; i < command.length; i++) {
@@ -57,6 +77,11 @@ public class Event extends Task {
         return null;
     }
 
+    /**
+     * Creates a Event object
+     * @param input user input
+     * @return a Event object
+     */
     public static Event of(String input){
         String by = getTime(input), description = getDescription(input);
         String[] command = input.split(" ");
@@ -83,6 +108,13 @@ public class Event extends Task {
         return event;
     }
 
+    /**
+     * Create a Event object
+     * @param description description of the event
+     * @param at at of the event
+     * @param isDone whether the event is done
+     * @return a Event object
+     */
     public static Event of(String description, String at, boolean isDone){
         Event event = new Event(description, at, isDone);
         String[] dateAndTime = at.replace('/', '-').split(" ");
@@ -103,38 +135,77 @@ public class Event extends Task {
         return event;
     }
 
+    /**
+     * Construct a Event object
+     * @param description description of the Event
+     * @param at at of the Event
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;
     }
 
+    /**
+     * Construct a Event object
+     * @param description description of the Event
+     * @param at at of the Event
+     * @param isDone whether the Event is done
+     */
     public Event(String description, String at, boolean isDone) {
         super(description, isDone);
         this.at = at;
     }
 
+    /**
+     * Returns the at
+     * @return the at
+     */
     public String getAt(){
         return at;
     }
 
+    /**
+     * Sets the date of the event
+     * @param date the date to be set
+     */
     public void setDate(LocalDate date) {
         this.date = date;
     }
 
+    /**
+     * Sets the time of the event
+     * @param time the time to be set
+     */
     public void setTime(LocalTime time){
         this.time = time;
     }
 
+    /**
+     * Returns the date
+     * @return the date
+     */
     public LocalDate getDate(){
         return date;
     }
 
+    /**
+     * Returns the time
+     * @return the time
+     */
     public LocalTime getTime(){
         return time;
     }
 
+    /**
+     * Returns whether is done
+     * @return whether is done
+     */
     public boolean getIsDone(){return isDone;}
 
+    /**
+     * Overrides the toString method
+     * @return the String
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " +

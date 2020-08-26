@@ -4,8 +4,15 @@ import java.time.LocalDate;
 
 public class Checker {
 
+    /**
+     * Construct a Checker object
+     */
     public Checker(){}
 
+    /**
+     * Loops through the task list and print the deadlines or events that are due or at today
+     * @param list the list of Task
+     */
     public static void checkAndPrint(TaskList list){
         for(int i = 0; i < list.getSize(); i++){
             if(list.get(i) instanceof Deadline){

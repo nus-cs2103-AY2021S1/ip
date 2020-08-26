@@ -11,6 +11,11 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * Gets the description of the deadline
+     * @param s user input
+     * @return the description of the deadline
+     */
     public static String getDescription(String s){
         String firstWord = "deadline", secondWord = "/by";
         int start = 0, len = s.length();
@@ -23,6 +28,11 @@ public class Deadline extends Task {
         return s.substring(start, end - 1);
     }
 
+    /**
+     * Gets the time of the deadline
+     * @param s user input
+     * @return the time of the deadline
+     */
     public static String getTime(String s){
         String word = "/by";
         int i = 0, len = s.length();
@@ -30,6 +40,11 @@ public class Deadline extends Task {
         return i + 3 == len ? "" : s.substring(i + 4);
     }
 
+    /**
+     * Changes the date format in the user input
+     * @param command user input
+     * @return the formatted date
+     */
     public static String changeDateFormat(String[] command){
         String word = "/by";
         for(int i = 0; i < command.length; i++){
@@ -43,6 +58,11 @@ public class Deadline extends Task {
         return null;
     }
 
+    /**
+     * Gets the time in user input
+     * @param command user input
+     * @return the time in user input
+     */
     public static String getLocalTime(String[] command){
         String word = "/by";
         for(int i = 0; i < command.length; i++) {
@@ -58,6 +78,11 @@ public class Deadline extends Task {
         return null;
     }
 
+    /**
+     * Create a Deadline object
+     * @param input user input
+     * @return a Deadline object
+     */
     public static Deadline of(String input){
         String by = getTime(input), description = getDescription(input);
         String[] command = input.split(" ");
@@ -84,6 +109,13 @@ public class Deadline extends Task {
         return deadline;
     }
 
+    /**
+     * Create a Deadline object
+     * @param description description of the deadline
+     * @param by by of the deadline
+     * @param isDone whether the deadline is done
+     * @return a Deadline object
+     */
     public static Deadline of(String description, String by, boolean isDone){
         Deadline ddl = new Deadline(description, by, isDone);
         String[] dateAndTime = by.replace('/', '-').split(" ");
@@ -104,38 +136,77 @@ public class Deadline extends Task {
         return ddl;
     }
 
+    /**
+     * Construct a Deadline object
+     * @param description description of the deadline
+     * @param by by of the deadline
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * Construct a Deadline object
+     * @param description description of the deadline
+     * @param by by of the deadline
+     * @param isDone whether the deadline is done
+     */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         this.by = by;
     }
 
+    /**
+     * Returns by
+     * @return by
+     */
     public String getBy(){
         return by;
     }
 
+    /**
+     * Sets the date of the deadline
+     * @param date date to be set
+     */
     public void setDate(LocalDate date) {
         this.date = date;
     }
 
+    /**
+     * Sets the time of the deadline
+     * @param time time to be set
+     */
     public void setTime(LocalTime time){
         this.time = time;
     }
 
+    /**
+     * Returns the date
+     * @return the date
+     */
     public LocalDate getDate(){
         return date;
     }
 
+    /**
+     * Returns the time
+     * @return the time
+     */
     public LocalTime getTime(){
         return time;
     }
 
+    /**
+     * Returns whether is done
+     * @return whether is done
+     */
     public boolean getIsDone(){return isDone;}
 
+    /**
+     * Overrides the toString method
+     * @return the String
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " +
