@@ -52,4 +52,15 @@ public class TaskList {
         Event newEvent = new Event(isCompleted, task, eventDate);
         this.todoList.add(newEvent);
     }
+
+    public void find(String keyword) {
+        ArrayList<Task> tempArrayList = new ArrayList<>();
+        for (Task task : this.todoList) {
+            String taskDetails = task.toString();
+            if (taskDetails.contains(keyword)) {
+                tempArrayList.add(task);
+            }
+        }
+        this.ui.printMatchingTasks(tempArrayList);
+    }
 }

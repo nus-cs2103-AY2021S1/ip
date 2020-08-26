@@ -6,6 +6,7 @@ import duke.exceptions.DukeException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskManager {
@@ -109,6 +110,10 @@ public class TaskManager {
                     }
                     int size = taskList.getSize();
                     this.ui.printTaskDeleted(targetTask.toString(), size);
+                    break;
+                }
+                case FIND : {
+                    this.taskList.find(splitCommand[1]);
                     break;
                 }
                 case INVALID: {
