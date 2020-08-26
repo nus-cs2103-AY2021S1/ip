@@ -3,9 +3,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Deadline class
- * Represents an Deadline task that contains a description
- * along with the date and time.
+ * Deadline class Represents an Deadline task that contains a description along with the date and
+ * time.
  */
 public class Deadline extends Task {
 
