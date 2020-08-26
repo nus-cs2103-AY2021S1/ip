@@ -1,3 +1,5 @@
 T ~ 1 ~ buy bread
-E ~ 1 ~ project meeting ~ Aug 6th
+E ~ 1 ~ project meeting ~ 2020-12-12
 T ~ 0 ~ readings
+T ~ 1 ~ bake bread
+D ~ 0 ~ project ~ 2020-10-09
