@@ -53,6 +53,9 @@ public class Duke {
             else if(msg.contains("deadline")) {
                 addToList(msg.replace("deadline ", ""), Type.DEADLINE);
             }
+            else if(msg.contains("find")) {
+                find(msg.replace("find ", ""));
+            }
             else {
                 System.out.println(sadFace + spacing + "Sorry, Poco does not understand. Try again?");
             }
@@ -121,6 +124,11 @@ public class Duke {
             tasks.remove(index);
         }
         storage.saveFile(tasks);
+    }
+
+    void find(String match) {
+        System.out.println(face3);
+        System.out.println(tasks.find(match));
     }
 
 
