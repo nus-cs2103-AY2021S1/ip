@@ -8,9 +8,7 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 import java.time.DateTimeException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 public class Parser {
     public String commandLine;

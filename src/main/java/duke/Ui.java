@@ -1,10 +1,7 @@
 package duke;
 
-import duke.exceptions.*;
-import duke.task.*;
+import duke.task.Task;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 

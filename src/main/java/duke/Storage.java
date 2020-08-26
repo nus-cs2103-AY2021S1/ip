@@ -7,9 +7,13 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.io.*;
-import java.time.LocalDate;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -24,6 +28,7 @@ public class Storage {
     }
 
     ArrayList<Task> load() throws DukeException {
+        // Path String
         String home = System.getProperty("user.home");
         String dataPath = java.nio.file.Paths.get(home,"data").toString();
         fileName = java.nio.file.Paths.get(dataPath,"duke.txt").toString();

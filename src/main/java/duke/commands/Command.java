@@ -7,5 +7,5 @@ import duke.exceptions.DukeException;
 
 
 public interface Command {
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    boolean execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }
