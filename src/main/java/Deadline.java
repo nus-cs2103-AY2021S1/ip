@@ -1,9 +1,11 @@
 package main.java;
 
-public class Deadline extends Task {
-    protected String date;
+import java.time.LocalDate;
 
-    public Deadline(String description, String date) {
+class Deadline extends Task {
+    protected LocalDate date;
+
+    Deadline(String description, LocalDate date) {
         super(description);
         this.date = date;
     }

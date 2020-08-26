@@ -1,8 +1,11 @@
 package main.java;
 
-public class Event extends Task {
-    protected String date;
-    public Event(String description, String date) {
+import java.time.LocalDate;
+
+class Event extends Task {
+    protected LocalDate date;
+
+    public Event(String description, LocalDate date) {
         super(description);
         this.date = date;
     }
