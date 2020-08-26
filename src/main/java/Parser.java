@@ -1,9 +1,14 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 public class Parser {
     
+    /**
+     * Returns a command depending on the input string.
+     * @param s the string.
+     * @return Command which specifies the action taken.
+     * @throws DukeException unidentified strings.
+     */
     public static Command parse(String s) throws DukeException {
         if (s.equals("list")) {
             return new ListCommand();
@@ -35,12 +40,23 @@ public class Parser {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
-    
+
+    /**
+     * Returns an integer specifying the index
+     * of the task to be marked as done.
+     * @param s the string input starting with "done".
+     * @return an integer which represents the index of the task.
+     */
     public static int parseDone(String s) {
         int index = Integer.parseInt(s.substring(5));
         return index - 1;
     }
 
+    /**
+     * Returns an event to be added into taskList.
+     * @param display the string input starting with "event".
+     * @return an event.
+     */
     public static Event parseEvent(String display) throws DukeException {
         if (display.length() == 5 || display.length() == 6) { // "event" or "event "
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
@@ -65,6 +81,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns an integer representing the index
+     * of the task to be deleted from taskList.
+     * @param s the string input starting with "delete".
+     * @return an integer.
+     */
     public static int parseDelete(String s) throws DukeException {
         if (s.length() == 6 || s.length() == 7) {
             throw new DukeException("ERROR: Specify the task number which you want to delete.");
@@ -73,6 +95,11 @@ public class Parser {
         return index - 1;
     }
 
+    /**
+     * Returns a todo to be added into taskList.
+     * @param s the string input starting with "todo".
+     * @return a todo.
+     */
     public static Todo parseTodo(String s) throws DukeException {
         if (s.length() == 4 || s.length() == 5) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -80,7 +107,12 @@ public class Parser {
         String description = s.substring(5);
         return new Todo(description);
     }
-
+    
+    /**
+     * Returns a deadline to be added into taskList.
+     * @param s the string input starting with "deadline".
+     * @return a deadline.
+     */
     public static Deadline parseDeadline(String s) throws DukeException {
         if (s.length() == 8 || s.length() == 9) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
