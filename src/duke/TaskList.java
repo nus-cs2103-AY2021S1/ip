@@ -1,9 +1,17 @@
 package duke;
 import java.util.ArrayList;
 public class TaskList {
-    ArrayList<Task> arr;
+    private ArrayList<Task> arr;
     TaskList(ArrayList<Task> arr) {
         this.arr = arr;
+    }
+
+    /**
+     * Getter fot the arr.
+     * @return arr
+     */
+    public ArrayList<Task> getArr() {
+        return this.arr;
     }
 
     /**
