@@ -1,6 +1,6 @@
 public class RemoveCommand implements Command {
 
-    private int index;
+    private final int index;
 
     public RemoveCommand(int index) {
         this.index = index;

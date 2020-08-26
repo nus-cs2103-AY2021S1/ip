@@ -1,6 +1,3 @@
-import java.util.Arrays;
-import java.util.List;
-
 public class ExitCommand implements Command {
 
     public boolean isExit() {
