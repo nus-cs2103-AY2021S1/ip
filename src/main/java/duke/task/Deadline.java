@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -9,6 +11,9 @@ public class Deadline extends Task {
     public Deadline(String desc, LocalDateTime by) {
         super(desc);
         this.taskBy = by;
+
+        if (this.desc.isBlank() || this.taskBy == null)
+            throw new DukeException("The description or date of \"deadline\" cannot be empty");
     }
 
     public String getSaveToFileString() {

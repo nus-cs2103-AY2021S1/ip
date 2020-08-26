@@ -1,8 +1,8 @@
 package duke.task;
 
 public class Task { //TODO: convert to abstract class
-    private String desc;
-    private boolean done;
+    protected String desc;
+    protected boolean done;
 
     public Task(String desc) {
         this(desc,false);

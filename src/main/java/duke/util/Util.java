@@ -26,7 +26,7 @@ public class Util {
                 return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
             } else
                 throw new DukeException("Invalid Date / time format...");
-        } catch (DateTimeParseException dtpe) {
+        } catch (DateTimeParseException | IndexOutOfBoundsException e) {
             throw new DukeException("Invalid Date / time format...");
         }
     }
