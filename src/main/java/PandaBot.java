@@ -2,13 +2,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PandaBot {
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static ArrayList<Task> tasks;
+    private static SaveLoad saveLoader = new SaveLoad("PandaBot_Save.txt");
     
     //TODO: afterwards, can abstract out the commands 
     // and change the error messages into actual exceptions
     // according to timeline [for handling errors]
     
     public static void main(String[] args) {
+        tasks = saveLoader.load();
+        
         String logo =
                  " ____                    _\n"
                + "|  _ \\                  | |\n"
@@ -139,6 +142,9 @@ public class PandaBot {
                     System.out.println("OOPS! I'm sorry, but I don't know what that means :c\n");
                     break;
             }
+            
+            // save the file after every command
+            saveLoader.write(tasks);
             
         }
         sc.close();

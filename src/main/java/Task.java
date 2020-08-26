@@ -18,6 +18,10 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
     }
+    
+    public String saveAsText() {
+        return String.format("%d | %s", (isDone ? 1 : 0), description);
+    }
 
     public void markTaskDone() {
         isDone = true;

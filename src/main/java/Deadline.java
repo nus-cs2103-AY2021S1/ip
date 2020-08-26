@@ -11,4 +11,9 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + dueBy + ")";
     }
+    
+    @Override
+    public String saveAsText() {
+        return "D | " + super.saveAsText() + " | " + dueBy;
+    }
 }
