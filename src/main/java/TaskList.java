@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -76,6 +77,22 @@ public class TaskList {
             storedTasks.remove(taskToDelete);
             return taskToDelete;
         }
+    }
+
+    /**
+     * Generates result task list of tasks with descriptions containing the search description.
+     *
+     * @param searchDescription String to be searched.
+     * @return Result task list of tasks with descriptions containing the search description.
+     */
+    public List<Task> generateResultTaskList(String searchDescription) {
+        List<Task> resultTaskList = new ArrayList<>();
+        for (Task task : storedTasks) {
+            if (task.getDescription().contains(searchDescription)) {
+                resultTaskList.add(task);
+            }
+        }
+        return resultTaskList;
     }
 
 }

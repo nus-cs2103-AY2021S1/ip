@@ -52,6 +52,8 @@ public class Command {
             taskList.addTask(newTask);
             ui.printAddMessage(newTask, taskList.getCount());
             storage.updateTasks(taskList);
+        } else if (commandType == CommandType.FIND) {
+            ui.printResultTaskList(taskList.generateResultTaskList(description));
         } else {
             throw new DukeException("Wrong command type");
         }

@@ -95,6 +95,13 @@ public class Parser {
             } else {
                 throw new DukeException("Your event description or event period can't be empty...");
             }
+        } else if (inputInformation[0].equals(CommandType.FIND.getInput())) {
+            if (inputInformation.length > 1) {
+                String searchDescription = getStringFromArray(inputInformation, 1, inputInformation.length);
+                return new Command((CommandType.FIND), searchDescription);
+            } else {
+                throw new DukeException("You need to include your keyword...");
+            }
         } else {
             throw new DukeException("My duck instincts tell me your input makes no sense...");
         }
