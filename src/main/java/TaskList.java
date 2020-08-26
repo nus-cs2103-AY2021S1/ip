@@ -31,4 +31,19 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
+
+    public void findTask(String display) {
+        ArrayList<String> matches = new ArrayList<>();
+        String task = display.substring(5);
+        for (int i = 0; i < taskList.size(); i++) {
+            String currentTask = taskList.get(i).toString();
+            if (currentTask.contains(task)) {
+                matches.add(currentTask);
+            }
+        }
+        System.out.println("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < matches.size(); i++) {
+            System.out.println(matches.get(i) + "\n");
+        }
+    }
 }

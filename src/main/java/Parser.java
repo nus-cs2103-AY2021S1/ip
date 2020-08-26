@@ -30,7 +30,10 @@ public class Parser {
         } else if (s.startsWith("deadline")) {
             Deadline deadline = parseDeadline(s);
             return new AddCommand(deadline);
-            
+
+        } else if (s.startsWith("find")) {
+            // String input = parseFind(s);
+            return new FindCommand(s);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -103,5 +106,10 @@ public class Parser {
         } else {
             throw new DukeException("☹ OOPS!!! The format is wrong. A dash is missing.");
         }
+    }
+    
+    public static void parseFind(String s) {
+        
+        
     }
 }
