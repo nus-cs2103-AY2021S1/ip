@@ -21,7 +21,6 @@ public class Duke {
         System.out.println(face + spacing + "Hey hey I'm Poco");
         Duke bot = new Duke("data/duke.txt");
         bot.processInput();
-
     }
 
     public Duke(String filePath) {
