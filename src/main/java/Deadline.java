@@ -1,10 +1,18 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
     private String identifier;
+    private LocalDate date;
 
     public Deadline(String description) {
         super(description);
         this.identifier = "D";
+
+        String[] desArray = this.description.split("/", 2); //e.g. do homework/ by 1999-10-21
+        String[] dateArray = desArray[1].split(" ", 2); //1999-10-21
+        this.date = LocalDate.parse(dateArray[1]);
     }
 
     @Override
@@ -21,15 +29,13 @@ public class Deadline extends Task {
     }
 
     public String getDate() {
-        String[] desArray = this.description.split("/", 2);
-        String[] timeArray = desArray[1].split(" ", 2);
-        return timeArray[1];
+        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override
     public String toString() {
         String[] desArray = this.description.split("/", 2);
         String[] timeArray = desArray[1].split(" ", 2);
-        return "[D]" + "[" + getStatusIcon() + "] " + desArray[0] + "(" + timeArray[0] + ": " + timeArray[1] + ")";
+        return "[D]" + "[" + getStatusIcon() + "] " + getDescription() + "(" + timeArray[0] + ": " + getDate() + ")";
     }
 }
