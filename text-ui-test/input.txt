@@ -1,7 +1,10 @@
+list
 deadline return book /by 2020-08-26
 event project meeting /at 2020-08-27
 list
 done 2
+list
+delete 1
 list
 delete 1
 list

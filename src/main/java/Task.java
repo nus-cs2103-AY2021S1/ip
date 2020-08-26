@@ -18,5 +18,10 @@ public abstract class Task {
         return (this.isDone ? "[✓] " : "[✘] ") + this.taskName;
     }
 
-    public abstract String toFileFormat();
+  public abstract String toFileFormat();
+
+  /** Return true if task name contains keyword else false */
+  public boolean containsKeyword(String keyword) {
+    return this.taskName.contains(keyword);
+  }
 }
