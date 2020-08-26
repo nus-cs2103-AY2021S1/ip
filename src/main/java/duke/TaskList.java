@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * Represents a {@code Tasklist} object to store tasks in memory
  */
 public class TaskList {
-    private List<Task> taskList;
+    private final List<Task> taskList;
 
     public TaskList(List<Task> taskList) {
         this.taskList = taskList;
@@ -82,9 +82,9 @@ public class TaskList {
         return new TaskList(
                 this.taskList
                         .stream()
-                        .filter(x ->
-                                (x instanceof Event && ((Event) x).getDate().equals(date))
-                                        || (x instanceof Deadline && ((Deadline) x).getDate().equals(date)))
+                        .filter(x -> (
+                                x instanceof Event && ((Event) x).getDate().equals(date))
+                                || (x instanceof Deadline && ((Deadline) x).getDate().equals(date)))
                         .collect(Collectors.toList()));
     }
 
