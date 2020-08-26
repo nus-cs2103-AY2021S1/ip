@@ -2,11 +2,17 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a Ui object.
+ */
 public class Ui {
     
     public Ui() {
     }
-    
+
+    /**
+     * Displays welcome message.
+     */
     public static void welcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -18,12 +24,18 @@ public class Ui {
         System.out.println("I offer a range of administrative services. Do type 'assist' to see the comprehensive list.");
         System.out.println();
     }
-    
+
+    /**
+     * Displays a dashed line break that is 32 dashes long.
+     */
     public static void dashedLineBreak() {
         String dashedLine = "- ";
         System.out.println(dashedLine.repeat(32));
     }
 
+    /**
+     * Displays list of possible user commands.
+     */
     public static void assist() {
         dashedLineBreak();
         System.out.println("Greetings, Your Majesty. \n");
@@ -40,19 +52,30 @@ public class Ui {
         dashedLineBreak();
         System.out.println();
     }
-    
+
+    /**
+     * Displays goodbye message.
+     */
     public static void dismiss() {
         dashedLineBreak();
         System.out.println("Your wish is my command, Your Majesty. Till I see you again. \n");
         System.exit(0);
     }
-    
+
+    /**
+     * Displays error message.
+     * @param e DukeException.
+     */
     public static void dukeErrorMessage(DukeException e) {
         System.out.println(e.getMessage());
         dashedLineBreak();
         System.out.println();
     }
-    
+
+    /**
+     * Displays marked task as done message.
+     * @param t Task that has been marked as done.
+     */
     public static void conqueredMessage(Task t) {
         dashedLineBreak();
         System.out.println("As you wish, Your Majesty. I have marked this as conquered.");
@@ -60,7 +83,12 @@ public class Ui {
         dashedLineBreak();
         System.out.println();
     }
-    
+
+    /**
+     * Displays deleted task message.
+     * @param t Task that has been deleted.
+     * @param size Size of current list of stored tasks.
+     */
     public static void deletedMessage(Task t, int size) {
         dashedLineBreak();
         System.out.println("As you wish, Your Majesty. I have removed this writing.");
@@ -69,7 +97,12 @@ public class Ui {
         dashedLineBreak();
         System.out.println();
     }
-    
+
+    /**
+     * Displays added task message.
+     * @param t Task that has been added.
+     * @param size Size of current list of stored tasks.
+     */
     public static void addedMessage(Task t, int size) {
         dashedLineBreak();
         System.out.println("Your Majesty, I've added the writing:");
@@ -78,7 +111,11 @@ public class Ui {
         dashedLineBreak();
         System.out.println();
     }
-    
+
+    /**
+     * Prints all stored tasks.
+     * @param storedTasks List of stored tasks.
+     */
     public static void printAllTasksUi(ArrayList<Task> storedTasks) {
         if (storedTasks.size() == 0) {
             System.out.println("Your scroll is currently empty, Your Majesty.");

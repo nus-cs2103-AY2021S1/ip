@@ -2,21 +2,36 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list of stored tasks.
+ */
 public class TaskList {
     private ArrayList<Task> storedTasks;
 
+    /**
+     * Creates an instance of a TaskList.
+     * @param storedTasks ArrayList of stored tasks loaded from file.
+     */
     public TaskList(ArrayList<Task> storedTasks) {
         this.storedTasks = storedTasks;
     }
-    
-    // Handles cases where user enters empty input
+
+    /**
+     * Checks whether an empty input is given and throws a DukeException.
+     * @param input String user input.
+     * @throws DukeException If input is empty.
+     */
     public void validateScannerInput(String input) throws DukeException {
         if (input.trim().length() == 0) {
             throw new DukeException("Come again, Your Majesty?");
         }
     }
 
-    // Handles cases where user does not enter a valid description for tasks
+    /**
+     * Checks whether an empty task description is given and throws a DukeException.
+     * @param task String array of user input.
+     * @throws DukeException If task description is empty.
+     */
     public void validateAdd(String[] task) throws DukeException {
         if ((task.length == 1 || task[1].trim().length() == 0) &&
                 (task[0].equalsIgnoreCase("todo") ||
@@ -27,7 +42,12 @@ public class TaskList {
         }
     }
 
-    // Handles cases where user does not enter the correct / commands (i.e. /by for deadlines, /on for events)
+    /**
+     * Checks whether correct slash command /by is given for a deadline task and /on for an event task. 
+     * DukeException is thrown if slash commands are incorrect.
+     * @param task String array of user input.
+     * @throws DukeException If slash commands are incorrect.
+     */
     public void validateSlashCommands(String[] task) throws DukeException {
         if(task[0].equalsIgnoreCase("deadline") && task[1].split("/by ", 2).length == 1){
             throw new DukeException("Use /by for deadlines, Your Majesty.");
@@ -36,14 +56,22 @@ public class TaskList {
         }
     }
 
-    // Handles cases where user enters a number that does not correspond to an existing task
+    /**
+     * Checks whether a given index corresponds to an existing task and throws a DukeException.
+     * @param taskNumber String array of user input.
+     * @throws DukeException If index given does not correspond to an existing task.
+     */
     public void validateIndex(int taskNumber) throws DukeException{
         if(taskNumber > storedTasks.size() || taskNumber <= 0) {
             throw new DukeException("Your Majesty, there's no such agenda in my detailed records.");
         }
     }
 
-    // Handles cases where user does not input a valid number after conquer/delete commands
+    /**
+     * Checks whether a valid number is given in user input.
+     * @param command String array of user input.
+     * @throws DukeException If no valid number is given in the user input.
+     */
     public void validateConquerDelete(String[] command) throws DukeException {
         try {
             Integer.parseInt(sanitiseInput(command[1]));
@@ -52,15 +80,27 @@ public class TaskList {
         }
     }
 
-    // Removes leading whitespaces in a String
+    /**
+     * Removes leading white spaces in String input.
+     * @param input String user input.
+     * @return String that has been trimmed of leading white spaces.
+     */
     public String sanitiseInput(String input) {
         return input.stripLeading();
     }
-    
+
+    /**
+     * Prints all stored tasks.
+     */
     public void printAllTasks() {
         Ui.printAllTasksUi(storedTasks);
     }
-    
+
+    /**
+     * Creates and adds an instance of a Task object to list of stored tasks.
+     * @param task String user input.
+     * @return Task object that has been created.
+     */
     public Task addTask(String task) {
         Task toBeReturned = null;
         try {
@@ -93,7 +133,12 @@ public class TaskList {
         }
         return toBeReturned;
     }
-    
+
+    /**
+     * Marks a specific task as done.
+     * @param command String array of user input.
+     * @return Index of task that is to be marked as done.
+     */
     public int conquerTask(String[] command) {
         int indexToBeReturned = -1;
         try {
@@ -110,6 +155,11 @@ public class TaskList {
         return indexToBeReturned;
     }
 
+    /**
+     * Deletes a specific task.
+     * @param command String array of user input.
+     * @return Index of task that is to be deleted.
+     */
     public int deleteTask(String[] command) {
         int indexToBeReturned = -1;
         try {
@@ -126,7 +176,11 @@ public class TaskList {
         }
         return indexToBeReturned;
     }
-    
+
+    /**
+     * Returns current list of stored tasks.
+     * @return Current list of stored tasks.
+     */
     public ArrayList<Task> getStoredTasks() {
         return this.storedTasks;
     }
