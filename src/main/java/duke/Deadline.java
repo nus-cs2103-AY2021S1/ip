@@ -5,6 +5,7 @@ public class Deadline extends Task {
     /** date and time of a Deadline object */
     protected String by;
 
+
     /**
      * Constructor of Deadline.
      *
@@ -15,6 +16,7 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
     }
+
 
     /**
      * Another constructor of Deadline.
@@ -28,6 +30,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+
     /**
      * Returns First letter of Deadline to represent its type.
      *
@@ -38,6 +41,7 @@ public class Deadline extends Task {
         return "D";
     }
 
+
     /**
      * Returns Date and time of the Deadline object.
      *
@@ -46,6 +50,7 @@ public class Deadline extends Task {
     public String getBy() {
         return this.by;
     }
+
 
     /**
      * Returns Information about the Deadline object.
@@ -56,6 +61,7 @@ public class Deadline extends Task {
     public String[] getInfo() {
         return new String[]{this.getType(), this.isDone(), this.description, this.getBy()};
     }
+
 
     /**
      * Returns String representation of the Deadline object.

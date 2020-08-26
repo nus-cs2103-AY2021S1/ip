@@ -5,6 +5,7 @@ public class Event extends Task {
     /** Date and time of the Event object */
     protected String at;
 
+
     /**
      * Constructor of Event.
      * Initialize content, datetime, and completion status of Event object.
@@ -16,6 +17,7 @@ public class Event extends Task {
         super(description);
         this.at = at;
     }
+
 
     /**
      * Another Constructor of Event.
@@ -30,6 +32,7 @@ public class Event extends Task {
         this.at = at;
     }
 
+
     /**
      * Return String "E" to represent type of object.
      *
@@ -40,6 +43,7 @@ public class Event extends Task {
         return "E";
     }
 
+
     /**
      * Return Date and Time of Event object.
      *
@@ -49,6 +53,7 @@ public class Event extends Task {
         return this.at;
     }
 
+
     /**
      * Return Information of Event object.
      *
@@ -56,8 +61,10 @@ public class Event extends Task {
      */
     @Override
     public String[] getInfo() {
-        return new String[]{this.getType(), this.isDone(), this.description, this.getAt()};
+
+        return new String[] {this.getType(), this.isDone(), this.description, this.getAt()};
     }
+
 
     /**
      * Return String representation of Event object.
@@ -68,4 +75,5 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
+
 }

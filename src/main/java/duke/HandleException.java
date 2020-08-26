@@ -7,6 +7,7 @@ public class HandleException {
      */
     public HandleException() {}
 
+
     /**
      * Handle Exceptions when running the program.
      *
@@ -16,4 +17,5 @@ public class HandleException {
         DukeException de = new DukeException(et);
         System.out.println(de);
     }
+
 }

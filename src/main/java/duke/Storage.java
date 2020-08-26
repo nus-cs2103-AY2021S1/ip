@@ -67,33 +67,36 @@ public class Storage {
         reachFile();
         List<Task> taskCollections = new ArrayList<>();
         Scanner sc;
+
         try {
             sc = new Scanner(memoFile);
         } catch (FileNotFoundException e) {
             System.out.println("Sorry, the memory cannot be read successfully.");
             return taskCollections;
         }
+
         while (sc.hasNextLine()) {
             String currTask = sc.nextLine();
             if (currTask.equals("") || currTask.isBlank()) {
                 continue;
             }
+
             String[] taskInfo = this.parser.memoTaskParser(currTask);
             switch (taskInfo[0]) {
-                case "T":
-                    taskCollections.add(
-                            new Todo(taskInfo[2], taskInfo[1].equals("0") ? false : true));
-                    break;
-                case "E":
-                    taskCollections.add(
-                            new Event(taskInfo[2], taskInfo[3],
-                                    taskInfo[1].equals("0") ? false : true));
-                    break;
-                case "D":
-                    taskCollections.add(
-                            new Deadline(taskInfo[2], taskInfo[3],
-                                    taskInfo[1].equals("0") ? false : true));
-                    break;
+            case "T":
+                taskCollections.add(
+                        new Todo(taskInfo[2], taskInfo[1].equals("0") ? false : true));
+                break;
+            case "E":
+                taskCollections.add(
+                        new Event(taskInfo[2], taskInfo[3],
+                                taskInfo[1].equals("0") ? false : true));
+                break;
+            case "D":
+                taskCollections.add(
+                        new Deadline(taskInfo[2], taskInfo[3],
+                                taskInfo[1].equals("0") ? false : true));
+                break;
             }
         }
         return taskCollections;

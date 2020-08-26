@@ -24,4 +24,6 @@ public class SpecialFormat {
      * Constructor of SpecialFormat.
      */
     public SpecialFormat() {}
+
 }
+

@@ -5,16 +5,25 @@ import java.util.List;
 
 public class TaskList {
 
-    /** Collection of Task objects for easy modification */
+
+    /**
+     * Collection of Task objects for easy modification
+     */
     protected List<Task> taskCollections;
 
-    /** Parser object to process input */
+    /**
+     * Parser object to process input
+     */
     protected Parser parser;
 
-    /** Directory of the file to store tasks */
+    /**
+     * Directory of the file to store tasks
+     */
     protected String memoFileDir;
 
-    /** Name of the file to store tasks */
+    /**
+     * Name of the file to store tasks
+     */
     protected String memoFileName;
 
 
@@ -82,10 +91,12 @@ public class TaskList {
                 if (type.equals("delete")) {
                     System.out.println(SpecialFormat.INDENT + "Noted. I've removed this task:");
                     System.out.println(SpecialFormat.INDENT + taskContent);
-                    System.out.println(SpecialFormat.INDENT + "Now you have " + this.taskCollections.size() + " tasks in the list.");
+                    System.out.println(SpecialFormat.INDENT + "Now you have " + this.taskCollections.size() +
+                            " tasks in the list.");
                 } else {
                     System.out.println(SpecialFormat.INDENT + "Nice! I've marked this task as done:");
-                    System.out.println(SpecialFormat.INDENT + "  [\u2713] " + taskCollections.get(actionNumber - 1).toString().split("] ", 2)[1]);
+                    System.out.println(SpecialFormat.INDENT + "  [\u2713] " +
+                            taskCollections.get(actionNumber - 1).toString().split("] ", 2)[1]);
                 }
             } catch (Exception ex) {
                 exceptionAbsent = false;
@@ -114,7 +125,8 @@ public class TaskList {
             new Storage(memoFileDir, memoFileName).appendToFile(memoFileDir + memoFileName, t);
             System.out.println(SpecialFormat.INDENT + "Got it. I've added ths task:");
             System.out.println(SpecialFormat.INDENT + "  " + taskCollections.get(taskCollections.size() - 1));
-            System.out.println(SpecialFormat.INDENT + "Now you have " + taskCollections.size() + " tasks in the list.");
+            System.out.println(SpecialFormat.INDENT + "Now you have " +
+                    taskCollections.size() + " tasks in the list.");
         } catch (Exception e) {
             HandleException.handleException(DukeException.ExceptionType.READ_FILE);
         }

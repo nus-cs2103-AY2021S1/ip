@@ -4,15 +4,19 @@ public class Duke {
 
     /** Storage object of the Duke object */
     private Storage storage;
+
     /** TaskList object of the Duke object */
     private TaskList tasks;
+
     /** Ui object of the Duke object */
     private Ui ui;
 
     /** Directory of file to store tasks */
     protected static String MEMORY_FILE_DIR = "./data/";
+
     /** Name of the file to store tasks */
     protected static String MEMORY_FILE_NAME = "task_list.txt";
+
 
     /**
      * Constructor of Duke.
@@ -33,6 +37,7 @@ public class Duke {
         this.ui = new Ui(memoryFileDir, memoryFileName, tasks.showList());
     }
 
+
     /**
      * Run process by calling processRequests() method of ui object.
      *
@@ -40,6 +45,7 @@ public class Duke {
     public void run() {
         ui.processRequests();
     }
+
 
     /**
      * Create a new Duke object and call its run() method.
