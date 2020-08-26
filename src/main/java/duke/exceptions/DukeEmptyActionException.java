@@ -1,7 +1,7 @@
 package duke.exceptions;
 
 public class DukeEmptyActionException extends DukeException {
-    final static String ERROR_EMPTY_ACTION_TASK = "⚠⚠⚠ Add the appropriate number after the command "
+    public final static String ERROR_EMPTY_ACTION_TASK = "⚠⚠⚠ Add the appropriate number after the command "
             + "'done/delete'.";
     public DukeEmptyActionException() {
         super(ERROR_EMPTY_ACTION_TASK);

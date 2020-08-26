@@ -14,7 +14,7 @@ public class Ui {
     protected final String LINE = "    ____________________________________________________________";
 
 
-    Ui() {
+    public Ui() {
         this.scanner = new Scanner(System.in);
     }
 

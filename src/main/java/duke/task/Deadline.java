@@ -17,7 +17,7 @@ public class Deadline extends Task {
         return "[D]"
                 + super.getStatusIcon()
                 + " " + super.toString()
-                + "(by: "
+                + " (by: "
                 + date.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"))
                 + ")";
     }

@@ -20,4 +20,9 @@ public class AddCommand implements Command {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "Command: Add " + task.toString() + " to TaskList";
+    }
+
 }
