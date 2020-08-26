@@ -1,5 +1,5 @@
 T | ✘ | borrow book | 
 T | ✘ | read book | 
 T | ✘ | join sports club | 
-D | ✘ | return book | Sunday
-E | ✘ | project meeting | Mon 2-4pm
+D | ✘ | return book | 2/12/2019 1800
+E | ✘ | project meeting | 2/12/2019 1800
