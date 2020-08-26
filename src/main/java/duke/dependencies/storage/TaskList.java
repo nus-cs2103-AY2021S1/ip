@@ -143,8 +143,8 @@ public class TaskList {
      */
     public int getNumOfCompleted() {
         int c = 0;
-        for (int i = 0; i < todoList.size(); i++) {
-            if (todoList.get(i).isCompleted()) {
+        for (Schedulable schedulable : todoList) {
+            if (schedulable.isCompleted()) {
                 c++;
             }
         }
@@ -179,8 +179,8 @@ public class TaskList {
      */
     public int getNumOfIncomplete() {
         int c = 0;
-        for (int i = 0; i < todoList.size(); i++) {
-            if (!todoList.get(i).isCompleted()) {
+        for (Schedulable schedulable : todoList) {
+            if (!schedulable.isCompleted()) {
                 c++;
             }
         }
