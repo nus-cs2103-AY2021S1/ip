@@ -14,12 +14,13 @@ public class Ui {
         System.out.println(INITIAL_PRINTING);
     }
      public static void showByeMessage() {
-         System.out.println("Byeeeee see you later!");
+         System.out.println("Byeeeee see you later!\n" + LINE);
      }
 
     public static void relayMessageToUser(String message) {
         System.out.println(message);
     }
+
     public static void printDeleteTaskMessage() {
         System.out.println("I have removed the task from your list.\n" + LINE);
 

@@ -1,5 +1,6 @@
 package main.java;
 
+import java.lang.reflect.Array;
 import java.time.DateTimeException;
 import java.util.Arrays;
 import java.util.zip.DataFormatException;
@@ -83,15 +84,21 @@ public class Parser {
 
                 // checking for event and deadline if the date is given or not
                 if (type.equals(COMMANDS.TODO.text) || partsOfTask.length == 2) {
-                    Command command = new AddCommand(type);
-                    command.execute(task, taskList);
-                } else {
-                    String description = partsOfTask[0].strip();
-                    String date = partsOfTask[1].strip();
-                    // check if the date is given in correct format
-                    if (date.length() != 8) {
-                        throw new DataFormatException();
+                    if (type.equals(COMMANDS.TODO.text) ) {
+                        Command command = new AddCommand(type);
+                        command.execute(task, taskList);
+                    } else {
+                        String description = partsOfTask[0].strip();
+                        String date = partsOfTask[1].strip();
+                        // check if the date is given in correct format
+                        if (date.length() != 8) {
+                            throw new DataFormatException();
+                        }
+                        Command command = new AddCommand(type);
+                        command.execute(task, taskList);
                     }
+                } else {
+
                     String instruction = "<type of task> <description> / <deadline>";
                     if (type.equals(COMMANDS.EVENT.text)) {
                         instruction = "<type of task> <description> / <date of event>";
@@ -111,6 +118,8 @@ public class Parser {
             System.out.println(e.getMessage() + "\n" + Ui.LINE);
         } catch (DataFormatException e) {
             System.out.println("Please key in again with the date in the ddmmyyyy format." + "\n" + Ui.LINE);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(answer);
         }
     }
 }

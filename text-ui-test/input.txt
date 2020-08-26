@@ -6,11 +6,15 @@ event
 todo something
 todo with 2 words
 deadline wrong
-deadline right / mon
-deadline right more that 2 words/ mon
+deadline right / 12122020
+deadline wrong / 121332020
+deadline wrong / 12132020
+deadline right more that 2 words/ 12122020
 event wrong
-event right / tue
-event right more that 2 words/ mon
+event right / 12122020
+event wrong / 121332020
+event wrong / 12132020
+event wrong more that 2 words/ 12122020
 list
 done two invalid
 done invalid
