@@ -52,9 +52,6 @@ public class Ui {
         System.out.println(line + "\n" + output + line);
     }
 
-
-
-
     /**
      * Checks if a given string only has spaces, or if it's an empty string.
      */
