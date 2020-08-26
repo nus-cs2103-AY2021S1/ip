@@ -23,9 +23,11 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidFileException {
+    public void execute(TaskList tasks, Ui ui, Storage storage)
+            throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 5) {
-            throw new InvalidInputException("☹ OOPS!!! The description of a event cannot be empty.\n");
+            throw new InvalidInputException
+                    ("☹ OOPS!!! The description of a event cannot be empty.\n");
         }
         try {
             String[] split = super.input.substring(6).split("/at ", 2);

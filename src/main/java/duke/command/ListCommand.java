@@ -11,7 +11,8 @@ public class ListCommand extends Command {
         super(input);
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
+    public void execute(TaskList tasks, Ui ui, Storage storage)
+            throws InvalidInputException {
         if (tasks.taskListSize() == 0) {
             ui.printMessage("List is empty! Start adding to your task list!");
         } else {

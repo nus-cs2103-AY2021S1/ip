@@ -8,14 +8,15 @@ import main.java.duke.tasks.TaskList;
 
 public class ExitCommand extends Command {
 
-    public static final String MESSAGE_EXIT_ACKNOWEDGEMENT = "Exiting...";
+    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting...";
 
     public ExitCommand(String input) {
         super(input);
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidFileException {
+    public void execute(TaskList tasks, Ui ui, Storage storage)
+            throws InvalidInputException, InvalidFileException {
         ui.showExitMessage();
         storage.save(tasks);
     }

@@ -23,9 +23,11 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidFileException {
+    public void execute(TaskList tasks, Ui ui, Storage storage)
+            throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 8) {
-            throw new InvalidInputException("☹ OOPS!!! The description of a deadline cannot be empty.\n");
+            throw new InvalidInputException
+                    ("☹ OOPS!!! The description of a deadline cannot be empty.\n");
         }
         try {
             String[] split = super.input.substring(9).split("/by ", 2);
@@ -33,7 +35,8 @@ public class DeadlineCommand extends Command {
             LocalDateTime date = LocalDateTime.parse(split[1], formatter);
             Task deadline = new Deadline(split[0], date);
             tasks.addTask(deadline);
-            ui.printMessage(MESSAGE_SUCCESS + deadline.toString() + "\nNow you have " + tasks.taskListSize() + " tasks in the list.");
+            ui.printMessage(MESSAGE_SUCCESS + deadline.toString()
+                    + "\nNow you have " + tasks.taskListSize() + " tasks in the list.");
             storage.save(tasks);
         } catch (DateTimeParseException e) {
             throw new InvalidInputException(MESSAGE_PARSE_ERROR);

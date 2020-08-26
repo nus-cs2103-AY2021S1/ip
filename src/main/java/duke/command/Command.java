@@ -13,7 +13,8 @@ public abstract class Command {
         this.input = input;
     }
 
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, InvalidFileException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage)
+            throws InvalidInputException, InvalidFileException;
 
     public abstract boolean isExit();
 
