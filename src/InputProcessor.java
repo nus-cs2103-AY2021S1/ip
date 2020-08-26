@@ -131,7 +131,11 @@ public class InputProcessor {
 
                     String dueDate = content.split(" /by ")[1];
 
-                    newTask = new Deadline(name, dueDate);
+                    TimeConverter timeConverter = new TimeConverter();
+
+                    String formattedDueDate = timeConverter.convertTime(dueDate);
+
+                    newTask = new Deadline(name, formattedDueDate);
 
                 }else if(words[0].equals("event")){
 
@@ -149,7 +153,7 @@ public class InputProcessor {
 
                     String timePeriod = content.split(" /at ")[1];
 
-                    newTask = new Deadline(name, timePeriod);
+                    newTask = new Event(name, timePeriod);
 
                 }else{
 

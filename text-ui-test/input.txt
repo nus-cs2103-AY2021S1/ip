@@ -1,6 +1,5 @@
 todo homework
-deadline return book /by Monday
+deadline return book /by 2020-09-13
 event team meeting /at Tuesday
-deadline project
 delete 1
 bye

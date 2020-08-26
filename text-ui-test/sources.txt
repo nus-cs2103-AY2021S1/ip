@@ -1,3 +1,4 @@
+../src/TimeConverter.java
 ../src/InvalidDeadlineException.java
 ../src/InvalidEventException.java
 ../src/InputProcessor.java
@@ -9,3 +10,4 @@
 ../src/Todo.java
 ../src/InvalidTodoException.java
 ../src/TaskListManager.java
+../src/InvalidTimeException.java
