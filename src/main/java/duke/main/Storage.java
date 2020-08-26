@@ -72,7 +72,7 @@ public class Storage {
             boolean created = temp.mkdir();
             if (!created) {
                 System.out.println("Cannot create directory for storage file! List will not" + "\n" +
-                    "be saved until the directory and the file are created.");
+                        "be saved until the directory and the file are created.");
             }
         }
         // ArrayList to store task
@@ -92,7 +92,7 @@ public class Storage {
                 boolean created = data.createNewFile();
                 if (!created) {
                     System.out.println("Cannot create storage file! List will not be saved until the " +
-                        "file is created");
+                            "file is created");
                 }
             } catch (IOException x) {
                 x.printStackTrace();
