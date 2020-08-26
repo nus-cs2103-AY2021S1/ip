@@ -16,7 +16,6 @@ public class Duke {
         }
     }
 
-
     /**
      * Driver function
      */

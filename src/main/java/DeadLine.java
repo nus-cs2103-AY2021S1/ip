@@ -1,4 +1,5 @@
 package main.java;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
@@ -32,6 +33,7 @@ public class DeadLine extends Task {
         } else {
             datePrintFormat = deadLineWithTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
         }
-        return "[D][" + this.getStatusIcon() + "] " + this.description + " (by: " + datePrintFormat + ")";
+        return "[D][" + this.getStatusIcon() + "] "
+                + this.description + " (by: " + datePrintFormat + ")";
     }
 }

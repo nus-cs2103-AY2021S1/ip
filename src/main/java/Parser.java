@@ -1,4 +1,5 @@
 package main.java;
+
 import java.util.Scanner;
 
 public class Parser {
@@ -58,7 +59,6 @@ public class Parser {
         if (stringArr.length != 3) {
             throw new InvalidDateFormatException(false);
         }
-
         return true;
     }
 
@@ -66,5 +66,4 @@ public class Parser {
         String[] stringArr = time.split(" ");
         return stringArr.length == 2;
     }
-
 }
