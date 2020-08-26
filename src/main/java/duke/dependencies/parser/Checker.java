@@ -53,6 +53,7 @@ class Checker {
 
     /* -------------------------------------- END OF PUBLIC METHODS ----------------------------------------------- */
 
+
     /**
      * Checks for command that is passed in explicit format.
      * eg.
