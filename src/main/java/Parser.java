@@ -1,4 +1,10 @@
+/**
+ * Encapsulates a Parser
+ * Deals with making sense of the user command
+ */
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Parser {
 
@@ -6,28 +12,72 @@ public class Parser {
     protected Ui ui;
     protected TaskList tasks;
 
+    /**
+     * Constructor
+     *
+     * @param storage is the storage that stores the data file
+     * @param ui is the user interface used with duke
+     * @param list is the TaskList that will be updated
+     */
     public Parser(Storage storage, Ui ui, TaskList list) {
         this.storage = storage;
         this.ui = ui;
         this.tasks = list;
     }
 
+    /**
+     * Processes the user's inputs
+     *
+     * @param input is the user's input in String form
+     * @throws DukeException
+     */
     protected void processInput(String input) throws DukeException {
         if (input.equals("list")) {
             this.provideList();
-        } else if (input.contains("done")) {
+        } else if (input.startsWith("done")) {
             this.markAsDone(input);
-        } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
+        } else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
             this.newTaskEntry(input);
         } else if (input.equals("bye")) {
             this.end();
-        } else if (input.contains("delete")) {
+        } else if (input.startsWith("delete")) {
             this.delete(input);
+        } else if (input.startsWith("find")) {
+            this.find(input);
         } else {
             throw new InputNotRecognisedException();
         }
     }
 
+    /**
+     * Finds and prints out Tasks with the keywords provided by the user
+     *
+     * @param input the user's input in String form
+     */
+    private void find(String input) {
+        String keyword = input.substring(5);
+        ArrayList<Task> temp = new ArrayList<>();
+        for (int i = 0; i < tasks.length(); i++) {
+            Task currentTask = tasks.get(i);
+            System.out.println(currentTask);
+            if (currentTask.getDescription().contains(keyword)) {
+                temp.add(currentTask);
+            }
+        }
+        ui.printLines();
+        ui.findMsg();
+        for (int i = 0; i < temp.size(); i++) {
+            Task task = temp.get(i);
+            String stringedIndex = Integer.toString(temp.indexOf(task) + 1);
+            String outputLine = stringedIndex + ". " + task;
+            System.out.println(outputLine);
+        }
+        ui.printLines();
+    }
+
+    /**
+     * Prints out the TaskList
+     */
     private void provideList() {
         ui.printLines();
         ui.provideListMsg();
@@ -41,6 +91,11 @@ public class Parser {
         storage.saveListToData(tasks.get());
     }
 
+    /**
+     * Marks a Task on the TaskList as done
+     *
+     * @param input is the user's input in String form
+     */
     private void markAsDone(String input) {
         String stringIndex = input.substring(5, input.length());
         int index = Integer.parseInt(stringIndex);
@@ -50,6 +105,13 @@ public class Parser {
         storage.saveListToData(this.tasks.get());
     }
 
+    /**
+     * Checks the type of Task the user is trying to create
+     *
+     * @param input is the User's input in String form
+     * @throws EmptyDescriptionException
+     * @throws WrongFormatException
+     */
     private void newTaskEntry(String input) throws EmptyDescriptionException, WrongFormatException {
         if (input.contains("todo")) {
             this.createAndAddTodo(input);
@@ -60,6 +122,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates and adds a Task with type "Todo" to the TaskList
+     *
+     * @param input is the description of the task as given by user
+     * @throws EmptyDescriptionException
+     * @throws WrongFormatException
+     */
     private void createAndAddTodo(String input) throws EmptyDescriptionException, WrongFormatException {
         if (input.length() < 5 || input.substring(5).replaceAll("\\s", "").equals("")) {
             throw new EmptyDescriptionException("todo");
@@ -71,6 +140,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates and adds a Task with type "Deadline" to the TaskList
+     *
+     * @param input is the description of the task as given by user
+     * @throws EmptyDescriptionException
+     * @throws WrongFormatException
+     */
     private void createAndAddDeadline(String input) throws EmptyDescriptionException, WrongFormatException {
         if (input.length() < 9 || input.substring(8).replaceAll("\\s", "").equals("")) {
             throw new EmptyDescriptionException("deadline");
@@ -91,6 +167,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Adds a Task to the TaskList
+     *
+     * @param task is the Task to be added to the TaskList
+     * @throws EmptyDescriptionException
+     * @throws WrongFormatException
+     */
     private void addTaskToTasklist(Task task) {
         int listCount = this.tasks.length();
         ui.addTaskToTasklistMsg(task, listCount);
@@ -98,6 +181,13 @@ public class Parser {
         storage.saveListToData(this.tasks.get());
     }
 
+    /**
+     * Creates and adds a Task with type "Event" to the TaskList
+     *
+     * @param input is the description of the task as given by user
+     * @throws EmptyDescriptionException
+     * @throws WrongFormatException
+     */
     private void createAndAddEvent(String input) throws EmptyDescriptionException, WrongFormatException {
         if (input.length() < 6 || input.substring(5).replaceAll("\\s", "").equals("")) {
             throw new EmptyDescriptionException("event");
@@ -114,12 +204,22 @@ public class Parser {
         }
     }
 
+    /**
+     * Exit sequence of the Application
+     */
     private void end() {
         storage.saveListToData(this.tasks.get());
         ui.farewell();
         System.exit(0);
     }
 
+    /**
+     * Deletes a Task in the TaskList based on user input
+     *
+     * @param input is the position of the Task to be deleted
+     * @throws EmptyListException
+     * @throws InvalidListIndexException
+     */
     private void delete(String input) throws EmptyListException, InvalidListIndexException {
         String stringIndex = input.substring(7, input.length());
         int index = Integer.parseInt(stringIndex);
@@ -135,8 +235,4 @@ public class Parser {
             throw new InvalidListIndexException();
         }
     }
-
-
-
-
 }
