@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class Duke {
 
-    public static void main(String[] args) throws IOException {
+    private void run() throws IOException {
         DukeStorage.loadSavedTasks();
         Ui.greet();
 
@@ -18,5 +18,9 @@ public class Duke {
         }
 
         DukeStorage.saveCurrentTasks();
+    }
+
+    public static void main(String[] args) throws IOException {
+        new Duke().run();
     }
 }
