@@ -84,6 +84,18 @@ public class TaskList implements Serializable {
         Task removed = itemList.remove(itemIndex - 1);
         Ui.showSuccessfulRemoval(removed);
     }
+    
+    List<Task> searchByKeyword(String keyword) {
+        List<Task> results = new ArrayList<>();
+        
+        itemList.forEach(task -> {
+            if (task.includesKeyword(keyword)) {
+                results.add(task);
+            }
+        });
+        
+        return results;
+    }
 
     void printList() {
         for (int i = 1; i <= itemList.size(); i++) {

@@ -12,6 +12,10 @@ public class Task implements Serializable {
        this.isDone = true;
        Ui.showMarkedAsDone(this);
     }
+    
+    boolean includesKeyword(String keyword) {
+        return taskDescription.contains(keyword);
+    }
 
     public String toString() {
         String status = isDone ? "\u2713" : "\u2718";
