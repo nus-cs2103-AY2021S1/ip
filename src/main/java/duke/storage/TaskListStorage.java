@@ -19,37 +19,37 @@ public class TaskListStorage {
     }
 
     public TaskList load(Bot bot) {
-        final String createNewListMessage = "I'll create a new list of tasks.";
+        final String CREATE_NEW_LIST_MESSAGE = "I'll create a new list of tasks.";
         TaskList list;
         try {
-            list = StorageHelper.open((s) -> deserializeTaskList(s), filepath);
+            list = StorageHelper.open(this::deserializeTaskList, filepath);
             bot.sayLine(String.format( "Loaded tasks from %s.", filepath ));
         } catch (FileMissingException e) {
-            bot.sayLine(String.format("Couldn't find the file %s. %s", filepath, createNewListMessage));
+            bot.sayLine(String.format("Couldn't find the file %s. %s", filepath, CREATE_NEW_LIST_MESSAGE));
             list = new TaskList();
         } catch (FileReadingException e) {
-            bot.sayLine(String.format("Couldn't read the file %s. %s", filepath, createNewListMessage));
+            bot.sayLine(String.format("Couldn't read the file %s. %s", filepath, CREATE_NEW_LIST_MESSAGE));
             list = new TaskList();
         } catch (DeserializingException e) {
             bot.sayLine(String.format("I don't understand the data in %s. %s", filepath,
-                    createNewListMessage));
+                    CREATE_NEW_LIST_MESSAGE));
             list = new TaskList();
         }
         list.connectStorage((taskList) -> {
-                try {
-                    StorageHelper.save(() -> serializeTaskList(taskList), filepath);
-                } catch (FileWritingException e) {
-                    bot.sayLine(String.format("Couldn't save task list to %s!", filepath));
-                }
+            try {
+                StorageHelper.save(() -> serializeTaskList(taskList), filepath);
+            } catch (FileWritingException e) {
+                bot.sayLine(String.format("Couldn't save task list to %s!", filepath));
+            }
         });
         return list;
     }
 
     private String serializeTaskList(TaskList tasklist) {
         return IntStream
-            .range(0, tasklist.size())
-            .mapToObj(i -> serializeTask(tasklist.get(i)))
-            .collect(Collectors.joining("\n"));
+                .range(0, tasklist.size())
+                .mapToObj(i -> serializeTask(tasklist.get(i)))
+                .collect(Collectors.joining("\n"));
     }
 
     private TaskList deserializeTaskList(String string) throws DeserializingException {
@@ -87,7 +87,7 @@ public class TaskListStorage {
             if (!isDoneString.equals("T") && !isDoneString.equals("F")) {
                 throw new DeserializingException();
             }
-            boolean isDone = isDoneString.equals("T") ? true : false;
+            boolean isDone = isDoneString.equals("T");
 
             Task task;
             switch (tokens[0]) {

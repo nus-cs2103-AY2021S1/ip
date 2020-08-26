@@ -104,9 +104,8 @@ public class Parser {
             argsSplit = splitAround(args, "\\s+/by\\s+");
             description = argsSplit[0];
         } catch (DukeParsingException e) {
-            throw new DukeParsingException(
-                    "Couldn't add deadline! To add a deadline, talk to me using "
-                            + "the format deadline <description> /by <date>!");
+            throw new DukeParsingException("Couldn't add deadline! To add a deadline, talk to me using "
+                    + "the format deadline <description> /by <date>!");
         }
         Date date = parseDate(argsSplit[1]);
         return new Deadline(description, date);

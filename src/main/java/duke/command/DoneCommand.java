@@ -18,7 +18,8 @@ public class DoneCommand implements Command {
         } else if (index < 0) {
             bot.sayLine("That's not a valid number, please give a number from 1 to " + list.size() + ".");
         } else if (index >= list.size()) {
-            bot.sayLine(String.format("That's not a valid number, you only have %d item(s) in your list.", list.size()));
+            bot.sayLine(String.format("That's not a valid number, you only have %d item(s) in your list.",
+                    list.size()));
         } else {
             Task t = list.get(index);
             if (t.isDone()) {
