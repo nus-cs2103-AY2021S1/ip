@@ -13,7 +13,11 @@ public class Duke {
             if (command.equals("bye")) {
                 break;
             } else {
-                tm.parseCommand(command);
+                try {
+                    tm.parseCommand(command);
+                } catch (DukeException e) {
+                    System.out.println(e);
+                }
             }
         }
         System.out.println(goodbye);
