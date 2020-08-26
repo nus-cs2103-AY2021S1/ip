@@ -8,6 +8,10 @@ public class Deadline extends Task {
         super(description, by);
     }
 
+    public String getBy() {
+        return by;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";

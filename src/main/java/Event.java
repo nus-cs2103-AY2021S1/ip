@@ -8,6 +8,10 @@ public class Event extends Task {
         super(description, at);
     }
 
+    public String getAt() {
+        return at;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";

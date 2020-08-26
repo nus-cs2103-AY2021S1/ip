@@ -22,6 +22,10 @@ public class Task {
     public LocalDate getDate() {
         return date;
     }
+    
+    public String getDescription() {
+        return description;
+    }
 
     public void setDone() {
         isDone = true;
