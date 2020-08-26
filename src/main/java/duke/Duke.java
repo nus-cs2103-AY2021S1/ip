@@ -1,6 +1,6 @@
-package Duke;
+package duke;
 
-import Util.Constants;
+import duke.utils.Constants;
 
 import java.util.Objects;
 import java.util.Scanner;

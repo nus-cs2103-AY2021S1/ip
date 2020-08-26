@@ -1,4 +1,4 @@
-package Exceptions;
+package duke.exceptions;
 
 public class LackOfTimeException extends Exception {
     private String typeOfCommand;

@@ -1,8 +1,9 @@
-package Duke;
+package duke;
 
-import Exceptions.*;
-import Util.Constants;
-import Util.UtilFunction;
+import duke.exceptions.*;
+import duke.tasks.*;
+import duke.utils.Constants;
+import duke.utils.UtilFunction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +16,7 @@ public class DukeCommandMatcher {
                                                                   Constants.EXITPATTERN, Constants.DONEPATTERN,
                                                                   Constants.TODOPATTERN, Constants.DEADLINEPATTERN,
                                                                   Constants.EVENTPATTERN, Constants.DELETEPATTERN));
-    private List<Task> taskList = new ArrayList<>();
+    private SingletonTaskList taskList = SingletonTaskList.getInstance();
 
     public String matchCommand(String command) throws CommandNotFoundException, NullCommandException,
             LackOfTimeException, NullCommandContentException, TaskOutOfBoundException, TaskNotSpecifyException {
@@ -60,21 +61,11 @@ public class DukeCommandMatcher {
 
     private String handleAdd(Task task){
         taskList.add(task);
-        int numOfTask = taskList.size();
-        System.out.println("Got it. I've added this task:\n" +
-                "   " + task +  '\n' +
-                "Now you have " + numOfTask + (numOfTask > 1 ? " tasks " : " task ") + "in the list.");
         return "Duke.Task added";
     }
 
     private String handleList(){
-        if(taskList.size() == 0){
-            System.out.println("😝You don't have any task in the schedule yet~~\n" +
-                    "use todo/deadline/event command to create your tasks~");
-        }
-        for(int i =1; i< taskList.size()+1; i++){
-            System.out.println(i + ". " + taskList.get(i-1));
-        }
+        taskList.listAll();
         return "List implemented";
     }
 
@@ -83,13 +74,7 @@ public class DukeCommandMatcher {
             throw new TaskNotSpecifyException("task to be done not specified", "DONE");
         }
         int targetTaskPos = Integer.parseInt(targetTask[1]) - 1;
-        if(targetTaskPos >= this.taskList.size() ){
-            throw new TaskOutOfBoundException("Target number of task out of bound", targetTaskPos + 1);
-        }
-        Task task = this.taskList.get(targetTaskPos);
-        task.setStatus(true);
-        System.out.println("Très bien!I have helped you marked task " + targetTask + " as done\n"
-            + task);
+        taskList.doneTask(targetTaskPos, targetTask);
         return "Duke.Task " + targetTask + " has been done";
     }
 
@@ -133,12 +118,7 @@ public class DukeCommandMatcher {
             throw new TaskNotSpecifyException("task to deletion not specified", "DELETE");
         }
         int taskToDelete = Integer.parseInt(deleteStr[1]);
-        if(taskToDelete > taskList.size()  ){
-            throw new TaskOutOfBoundException("task number out of bound", taskToDelete);
-        }
-        System.out.println("Noted. I've removed this task:\n" + "   " +
-                taskList.get(taskToDelete-1) + "\n" + "Now you have " + (taskList.size() -1 ) + " tasks in the list.");
-        taskList.remove(taskToDelete-1);
+        taskList.delete(taskToDelete);
         return "Duke.Task " + (taskToDelete -1) + " has been removed successfully";
 
     }

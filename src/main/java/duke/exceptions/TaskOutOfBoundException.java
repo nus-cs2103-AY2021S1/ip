@@ -1,4 +1,4 @@
-package Exceptions;
+package duke.exceptions;
 
 public class TaskOutOfBoundException extends Exception{
     private int taskNum;
@@ -9,6 +9,6 @@ public class TaskOutOfBoundException extends Exception{
 
     @Override
     public String getMessage(){
-        return "😝OOPS!!! You do not have " + taskNum + (taskNum > 1 ? " task " : " tasks ") + "in the schedule.";
+        return "😝OOPS!!! You do not have " + taskNum + (taskNum > 1 ? " task " : "duke/tasks ") + "in the schedule.";
     }
 }

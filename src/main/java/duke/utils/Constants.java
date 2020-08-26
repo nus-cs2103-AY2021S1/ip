@@ -1,6 +1,7 @@
-package Util;
+package duke.utils;
 
-import java.util.regex.Pattern;
+import java.util.Arrays;
+import java.util.List;
 
 public class Constants {
     public static final String GREETING =
@@ -21,5 +22,6 @@ public class Constants {
     public static final String EVENTPATTERN = ("^(e|E)(v|V)(e|E)(n|N)(t|T)$");
 
     public static final String DELETEPATTERN = ("^(d|D)(e|E)(l|L)(e|E)(t|T)(e|E)$");
+
 
 }

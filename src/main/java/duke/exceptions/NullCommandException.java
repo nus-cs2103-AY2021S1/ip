@@ -1,4 +1,4 @@
-package Exceptions;
+package duke.exceptions;
 
 public class NullCommandException extends Exception{
     public NullCommandException(String err){

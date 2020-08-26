@@ -1,5 +1,5 @@
 ____________________________
-Hello/您好/こんにちは I'm Duke.Duke
+Hello/您好/こんにちは I'm duke.duke
 What can I do for you?
 ____________________________
 ____________________________
@@ -10,17 +10,17 @@ ____________________________
 ____________________________
 Got it. I've added this task:
    [T][❎] study CS2101
-Now you have 2 tasks in the list.
+Now you have 2 duke.tasks in the list.
 ____________________________
 ____________________________
 Got it. I've added this task:
    [D][❎] return book  (by Sunday)
-Now you have 3 tasks in the list.
+Now you have 3 duke.tasks in the list.
 ____________________________
 ____________________________
 Got it. I've added this task:
    [E][❎] project meeting  (at Mon 2-4pm)
-Now you have 4 tasks in the list.
+Now you have 4 duke.tasks in the list.
 ____________________________
 ____________________________
 1. [T][❎] study CS2103T

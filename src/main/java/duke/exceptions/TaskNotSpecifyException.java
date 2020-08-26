@@ -1,4 +1,4 @@
-package Exceptions;
+package duke.exceptions;
 
 import java.util.Objects;
 

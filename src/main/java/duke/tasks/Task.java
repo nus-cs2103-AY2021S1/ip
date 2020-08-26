@@ -1,11 +1,21 @@
-package Duke;
+package duke.tasks;
+
+import java.util.Optional;
 
 public class Task {
     private String task;
     private Boolean status;
-    public Task(String task){
+    Task(String task){
         this.task = task;
         this.status = false;
+    }
+
+    public String getTaskType() {
+        return "task";
+    }
+
+    public Optional<String> getTime() {
+        return Optional.empty();
     }
 
     public String getTask() {
