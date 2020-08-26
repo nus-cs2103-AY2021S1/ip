@@ -5,12 +5,18 @@ import duke.exceptions.DukeException;
 
 import java.io.IOException;
 
+/**
+ * Represents a Duke.
+ */
 public class Duke {
+    private final Ui ui;
     private TaskManager taskManager;
-    private Ui ui;
     private boolean isExit;
 
 
+    /**
+     * Class constructor.
+     */
     public Duke() {
         this.ui = new Ui();
         try {
@@ -21,6 +27,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Run duke.
+     */
     public void run() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -40,11 +49,6 @@ public class Duke {
             command.execute(taskManager, ui);
             isExit = command.isExit;
         }
-    }
-
-    private void listTasks(Duke duke) {
-        String message = MessageManager.getListMessage(taskManager);
-        ui.sendMessage(message);
     }
 
 }

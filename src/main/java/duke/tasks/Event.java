@@ -6,10 +6,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an Event.
+ */
 public class Event extends Task {
-    LocalDateTime datetime;
     static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    LocalDateTime datetime;
 
+    /**
+     * Class constructor specifying whether the event is complete.
+     *
+     * @param content        the contents of the event
+     * @param datetimeString the datetime of the event
+     * @param isComplete     the completion status of the event
+     * @throws DukeException If an exception related to Duke occurred.
+     */
     public Event(String content, String datetimeString, Boolean isComplete) throws DukeException {
         super(content, isComplete);
         if (datetimeString.replace(" ", "").equals("")) {
@@ -22,7 +33,14 @@ public class Event extends Task {
         }
     }
 
-    public Event(String content, String datetimeString) throws DukeException{
+    /**
+     * Class constructor.
+     *
+     * @param content        the contents of the event
+     * @param datetimeString the datetime of the event
+     * @throws DukeException If an exception related to Duke occurred.
+     */
+    public Event(String content, String datetimeString) throws DukeException {
         super(content);
         if (datetimeString.replace(" ", "").equals("")) {
             throw new DukeException("Event datetime cannot be empty.");
@@ -34,12 +52,22 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns a user-readable event string.
+     *
+     * @return user-readable event string
+     */
     @Override
     public String toString() {
 
         return String.format("[E]%s (at: %s)", super.toString(), datetime.format(formatter));
     }
 
+    /**
+     * Returns an event string readable by storage.
+     *
+     * @return storage-safe event string
+     */
     @Override
     public String toSaveString() {
         return String.format("E/%s/%s", super.toSaveString(), datetime.format(formatter));
