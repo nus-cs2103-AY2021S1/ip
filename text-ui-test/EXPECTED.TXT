@@ -1,61 +1,95 @@
-        ---------------------------
-        Hello! I'm Duke
-        What can I do for you?
-        ---------------------------
-        ---------------------------
-        Got it. I've added this task:
-        [T][?] read book
-        Now you have 1 tasks in the list.
-        ---------------------------
-        ---------------------------
-        Got it. I've added this task:
-        [D][?] return book  (by: next monday)
-        Now you have 2 tasks in the list.
-        ---------------------------
-        ---------------------------
-        Got it. I've added this task:
-        [E][?] family dinner  (at: tonight 9pm)
-        Now you have 3 tasks in the list.
-        ---------------------------
-        ---------------------------
-        Here are the tasks in your list:
-        1. [T][?] read book
-        2. [D][?] return book  (by: next monday)
-        3. [E][?] family dinner  (at: tonight 9pm)
-
-        ---------------------------
-        ---------------------------
-        Nice! I've marked this task as done:
-          [D][?] return book  (by: next monday)
-        ---------------------------
-        ---------------------------
-        Here are the tasks in your list:
-        1. [T][?] read book
-        2. [D][?] return book  (by: next monday)
-        3. [E][?] family dinner  (at: tonight 9pm)
-
-        ---------------------------
-        ---------------------------
-        ☹ OOPS!!! The description of a delete cannot be empty.
-        ---------------------------
-        ---------------------------
-        Here are the tasks in your list:
-        1. [T][?] read book
-        2. [D][?] return book  (by: next monday)
-        3. [E][?] family dinner  (at: tonight 9pm)
-
-        ---------------------------
-        ---------------------------
-        Noted. I've removed this task:
-          [D][?] return book  (by: next monday)
-        Now you have 2 tasks in the list.
-        ---------------------------
-        ---------------------------
-        Here are the tasks in your list:
-        1. [T][?] read book
-        2. [E][?] family dinner  (at: tonight 9pm)
-
-        ---------------------------
-        ---------------------------
-        Bye. Hope to see you again soon!
-        ---------------------------
+	---------------------------
+	duke.txt file found, loading data
+	---------------------------
+	---------------------------
+	Hello! I'm Duke
+	What can I do for you?
+	---------------------------
+	---------------------------
+	Here are the tasks in your list:
+	1. [T][?] read book
+	2. [D][?] return book (by: Jun 6 2020)
+	3. [E][?] project meeting (at: Aug 6 2020)
+	4. [T][?] eat food
+	5. [E][?] eat friends (at: Dec 12 2020)
+	
+	---------------------------
+	---------------------------
+	Nice! I've marked this task as done:
+	  [T][?] eat food
+	---------------------------
+	---------------------------
+	Nice! I've marked this task as done:
+	  [E][?] eat friends (at: Dec 12 2020)
+	---------------------------
+	---------------------------
+	☹ OOPS!!! The task number specified is incorrect.
+	---------------------------
+	---------------------------
+	☹ OOPS!!! The task number specified is incorrect.
+	---------------------------
+	---------------------------
+	Noted. I've removed this task:
+	  [T][?] read book
+	Now you have 4 tasks in the list.
+	---------------------------
+	---------------------------
+	Noted. I've removed this task:
+	  [E][?] eat friends (at: Dec 12 2020)
+	Now you have 3 tasks in the list.
+	---------------------------
+	---------------------------
+	Noted. I've removed this task:
+	  [D][?] return book (by: Jun 6 2020)
+	Now you have 2 tasks in the list.
+	---------------------------
+	---------------------------
+	Noted. I've removed this task:
+	  [E][?] project meeting (at: Aug 6 2020)
+	Now you have 1 tasks in the list.
+	---------------------------
+	---------------------------
+	Noted. I've removed this task:
+	  [T][?] eat food
+	Now you have 0 tasks in the list.
+	---------------------------
+	---------------------------
+	Got it. I've added this task:
+	[T][?] read book
+	Now you have 1 tasks in the list.
+	---------------------------
+	---------------------------
+	Got it. I've added this task:
+	[D][?] return book (by: Jun 6 2020)
+	Now you have 2 tasks in the list.
+	---------------------------
+	---------------------------
+	Got it. I've added this task:
+	[E][?] project meeting (at: Aug 6 2020)
+	Now you have 3 tasks in the list.
+	---------------------------
+	---------------------------
+	Got it. I've added this task:
+	[T][?] eat food
+	Now you have 4 tasks in the list.
+	---------------------------
+	---------------------------
+	Got it. I've added this task:
+	[E][?] eat friends (at: Dec 12 2020)
+	Now you have 5 tasks in the list.
+	---------------------------
+	---------------------------
+	Nice! I've marked this task as done:
+	  [T][?] read book
+	---------------------------
+	---------------------------
+	Nice! I've marked this task as done:
+	  [D][?] return book (by: Jun 6 2020)
+	---------------------------
+	---------------------------
+	Nice! I've marked this task as done:
+	  [E][?] project meeting (at: Aug 6 2020)
+	---------------------------
+	---------------------------
+	Bye. Hope to see you again soon!
+	---------------------------
