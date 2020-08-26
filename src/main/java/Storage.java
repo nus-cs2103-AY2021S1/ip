@@ -3,6 +3,9 @@ import java.io.IOException;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Storage {
     private String path;
@@ -34,11 +37,51 @@ public class Storage {
                 if (task.getDate() != "") {
                     taskInfo = taskInfo + " | " + task.getDate();
                 }
+                taskInfo = taskInfo + "\n";
                 writer.write(taskInfo);
             }
             writer.close();
         } catch (IOException e) {
             System.out.println("Failed to write into " + this.path);
         }
+    }
+
+    public ArrayList<Task> getTasks() {
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        try {
+            Scanner sc = new Scanner(this.file);
+            while (sc.hasNext()) {
+                String taskContent = sc.nextLine();
+                String[] taskInfo = taskContent.split(" | ");
+                if (taskInfo[0].equals("T")) {
+                    ToDo task = new ToDo(taskInfo[2]);
+                    if (taskInfo[2].equals("1")) {
+                        task.markAsDone();
+                    }
+                    tasks.add(task);
+                } else if (taskInfo[0].equals("E")) {
+                    Event task = new Event(taskInfo[2], taskInfo[3]);
+                    if (taskInfo[1].equals("1")) {
+                        task.markAsDone();
+                    }
+                    tasks.add(task);
+                } else if (taskInfo[0].equals("D")) {
+                    Deadline task;
+                    try {
+                        LocalDate taskDeadline = LocalDate.parse(taskInfo[3]);
+                        task = new Deadline(taskInfo[2], taskDeadline);
+                    } catch (Exception e) {
+                        task = new Deadline(taskInfo[2], taskInfo[3]);
+                    }
+                    if (taskInfo[1].equals("1")) {
+                        task.markAsDone();
+                    }
+                    tasks.add(task);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Failed to load " + this.path);
+        }
+        return tasks;
     }
 }

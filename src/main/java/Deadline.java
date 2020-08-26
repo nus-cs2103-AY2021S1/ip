@@ -1,9 +1,18 @@
-public class Deadline extends Task {
-	private String deadline;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
-	public Deadline(String taskContent, String deadline) {
+public class Deadline extends Task {
+	private String byDateString;
+	private LocalDate byDate;
+
+	public Deadline(String taskContent, String byDateString) {
 		super(taskContent);
-		this.deadline = deadline;
+		this.byDateString = byDateString;
+	}
+	public Deadline(String taskContent, LocalDate byDate) {
+		super(taskContent);
+		this.byDate = byDate;
 	}
 
 	@Override
@@ -11,12 +20,15 @@ public class Deadline extends Task {
 		return "D";
 	}
 	@Override
-	public String getDate() {
-		return this.deadline;
-	}
-
+    public String getDate() {
+        if (byDateString != null) {
+            return byDateString;
+        } else {
+            return byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        }
+    }
 	@Override
 	public String toString() {
-		return "[D]" + super.toString() + " (by: " + this.deadline + ")";
+		return "[D]" + super.toString() + " (by: " + getDate() + ")";
 	}
 }
