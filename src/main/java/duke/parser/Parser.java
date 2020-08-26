@@ -1,10 +1,26 @@
 package duke.parser;
 
-import duke.commands.*;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.ExitCommand;
+import duke.commands.ListCommand;
+import duke.commands.UpdateCommand;
 import duke.exceptions.DukeException;
 
+/**
+ * Represents the parser that parses the user's input.
+ */
 public class Parser {
 
+    /**
+     * Returns the respective Command object depending on the user input only if the input is a
+     * valid command.
+     *
+     * @param input the command given by the user
+     * @return Command object that corresponds to the user's input
+     * @throws DukeException if the user inputs an unrecognisable command
+     */
     public static Command parse(String input) throws DukeException {
         if (input.startsWith("todo")) {
             return prepareAddTodo(input);

@@ -5,7 +5,9 @@ import duke.exceptions.DukeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * Represents a Deadline object that has a task description and a deadline timing.
+ */
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
@@ -14,6 +16,13 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * Constructor that is overloaded to create a deadline object from the database.
+     *
+     * @param doneStatus the state of the task from the user's previous session
+     * @param detail the description of the deadline
+     * @param deadline the time of the deadline.
+     */
     public Deadline(int doneStatus, String detail, LocalDateTime deadline) {
         super(doneStatus, detail);
         this.deadline = deadline;

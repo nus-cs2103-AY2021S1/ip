@@ -8,18 +8,21 @@ public class Todo extends Task {
         super(s);
     }
 
+    /**
+     * Constructor that is overloaded to create a deadline object from the database.
+     *
+     * @param doneStatus the state of the task from the user's previous session
+     * @param s the description of the todo
+     */
     public Todo(int doneStatus, String s)  {
         super(doneStatus ,s);
     }
-
-
 
     @Override
     public String formatTaskForDatabase() {
         int status = super.isDone ? 1 : 0;
         return "T|" + status + "|" + super.description;
     }
-
 
     @Override
     public String toString() {

@@ -1,4 +1,4 @@
-package duke.commands;
+package duke.storage;
 
 import duke.task.*;
 
@@ -8,10 +8,18 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+/**
+ * Represents the database of tasks for the user.
+ */
 public class Storage {
     private String directory;
     private File db;
 
+    /**
+     * Creates an instance of the database that is linked to the user file path.
+     *
+     * @return the storage object to be used when the bot is running
+     */
     public static Storage dbInstance() {
         return new Storage().init();
     }
@@ -31,6 +39,11 @@ public class Storage {
         return this;
     }
 
+    /**
+     * Scans the database file in the user's directory to return the task list stored.
+     *
+     * @return the task list that stores all tasks from the user's previous session
+     */
     public TaskList getTaskListFromDatabase() {
         TaskList taskList = new TaskList();
         try {
@@ -46,6 +59,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Uses the formatted string from the database to create a saved task.
+     *
+     * @param string the formatted string that has type, done status, description and time
+     * @return the task stored in the database
+     */
     public Task createTaskFromDatabase(String string) {
         String[] parts = string.split("\\|");
         String typeOfTask = parts[0];

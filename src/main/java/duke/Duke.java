@@ -2,15 +2,19 @@ package duke;
 
 import duke.commands.Command;
 import duke.parser.Parser;
-import duke.commands.Storage;
+import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.exceptions.DukeException;
 import duke.task.TaskList;
 
+/**
+ * Represents the chat bot Duke.
+ */
 public class Duke {
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
+
 
     public Duke() {
         storage = Storage.dbInstance();
@@ -18,7 +22,10 @@ public class Duke {
         ui = new Ui();
     }
 
-
+    /**
+     * Starts up the chat bot by welcoming and listing out saved tasks. Prompts the user to enter
+     * valid commands until the bye command is issued.
+     */
     public void start() {
         ui.printWelcomeMessage();
         ui.printDatabaseTasks(taskList);

@@ -1,11 +1,15 @@
 package duke.commands;
 
+import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.task.TaskList;
 
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Saves all current tasks to the database and exits the program.
+ */
 public class ExitCommand extends Command {
     public ExitCommand(String command) {
         super(command);

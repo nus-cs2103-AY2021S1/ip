@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.exceptions.DukeException;
 import duke.task.Deadline;
@@ -11,6 +12,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Adds a task to the task list.
+ */
 public class AddCommand extends Command {
     private Type type;
 
