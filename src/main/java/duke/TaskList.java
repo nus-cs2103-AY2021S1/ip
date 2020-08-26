@@ -2,40 +2,48 @@ package duke;
 
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    protected List<Task> planner;
+    protected List<Task> tasks;
 
     public TaskList(List<Task> planner) {
-        this.planner = planner;
+        this.tasks = planner;
     }
 
     public void addToPlanner(Task task) {
-        planner.add(task);
+        tasks.add(task);
     }
 
     public Integer getSize() {
-        return planner.size();
+        return tasks.size();
     }
 
     public List<Task> getPlanner() {
-        return this.planner;
+        return this.tasks;
     }
 
     public Task markAsDone(Integer index) {
-        this.planner.get(index).done();
-        return this.planner.get(index);
+        this.tasks.get(index).done();
+        return this.tasks.get(index);
     }
 
     public Task deleteTask(int index) {
-        return this.planner.remove(index);
+        return this.tasks.remove(index);
     }
 
     public Task getTask(Integer index) {
-        return this.planner.get(index);
+        return this.tasks.get(index);
     }
 
-
-
+    public List<Task> findTasks(String keyword) {
+        List<Task> filteredTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.description.contains(keyword)) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks;
+    }
 }

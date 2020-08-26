@@ -29,6 +29,8 @@ public class Parser {
                 return parseAddCommandWithDate(commandLine);
             } else if (isDone(commandLine) || isDelete(commandLine)) {
                 return parseDoneDeleteCommand(commandLine);
+            } else if (isFind(commandLine)) {
+                return parseFindCommand(commandLine);
             } else if (commandLine.equals("bye")) {
                 return new ExitCommand();
             } else {
@@ -41,6 +43,17 @@ public class Parser {
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new DukeEmptyActionException();
         }
+    }
+
+    private static Command parseFindCommand(String commandLine) throws DukeEmptyFindException {
+        if (commandLine.equals("todo")) {
+            throw new DukeEmptyFindException();
+        }
+        return new FindCommand(commandLine.substring(5));
+    }
+
+    private static boolean isFind(String commandLine) {
+        return commandLine.startsWith("find");
     }
 
     static LocalDateTime parseDateTime(String commandLine) {

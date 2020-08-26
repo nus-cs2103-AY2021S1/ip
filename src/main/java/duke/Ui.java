@@ -45,6 +45,19 @@ public class Ui {
         }
     }
 
+    public void filteredList(List<Task> planner) {
+        if (planner.size() == 0) {
+            reply("No tasks found");
+        } else {
+            reply("Here are the matching tasks in your list:");
+            for (int i = 0; i < planner.size(); i++) {
+                String number = (i + 1) + ".";
+                Task currentTask = planner.get(i);
+                reply(number + currentTask.toString());
+            }
+        }
+    }
+
     public void addMessage(Task currentTask, Integer size) {
         reply("Got it. I've added this duke.task:");
         reply(INDENTATION + currentTask.toString());
