@@ -2,6 +2,8 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.exception.InvalidIndexException;
 import duke.task.*;
 
 public class TaskList {
@@ -20,6 +22,10 @@ public class TaskList {
 
     public int getSize() {
         return taskList.size();
+    }
+
+    private void addTask(Task task) {
+        taskList.add(task);
     }
 
     public String addTask(Task.TaskType taskType, String description, String deadline) {
@@ -64,6 +70,21 @@ public class TaskList {
         return "Got it, here yur task bij\n" +
                 task.toString() +
                 "\nNow you have " + taskList.size() + " tasks in the list.";
+    }
+
+    public String findTask(String str) throws InvalidIndexException {
+        TaskList match = new TaskList();
+        for (Task i: taskList) {
+            String taskDescription = i.getDescription().toLowerCase();
+            String toCompare = str.toLowerCase();
+            if (taskDescription.contains(toCompare)) {
+                match.addTask(i);
+            }
+        }
+        if (match.getSize() == 0) {
+            throw new InvalidIndexException("No such tasks leh...");
+        }
+        return "Got it, here yur task bij\n" + match.toString();
     }
 
     public String toString() {

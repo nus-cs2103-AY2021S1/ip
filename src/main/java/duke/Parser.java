@@ -78,6 +78,14 @@ public class Parser {
                         System.out.println(e.toString());
                     }
                     break;
+                case "find":
+                    if (spaceSplitFront.length < 2) throw new EmptyDescriptionException("Specify key word la oi");
+                    try {
+                        System.out.println(tasks.findTask(spaceSplitFront[1]));
+                    } catch (InvalidIndexException e) {
+                        System.out.println(e.toString());
+                    }
+                    break;
                 default:
                     throw new UnknownCommandException("Don't understand...");
             }
