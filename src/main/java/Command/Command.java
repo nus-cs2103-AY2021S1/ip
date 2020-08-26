@@ -3,6 +3,7 @@ package main.java.Command;
 import main.java.Exception.AnonymousException;
 import main.java.Exception.DescriptionException;
 import main.java.Exception.DukeDateTimeParserException;
+import main.java.Exception.DukeKeywordException;
 import main.java.Exception.NoIndexException;
 import main.java.Storage.Storage;
 import main.java.Task.TaskList;
@@ -16,6 +17,7 @@ public abstract class Command {
     public static final String DEADLINE_COMMAND = "deadline";
     public static final String EVENT_COMMAND = "event";
     public static final String EXIT_COMMAND = "bye";
+    public static final String FIND_COMMAND = "find";
     public static final String HELP_COMMAND = "--help";
     public static final String LIST_COMMAND = "list";
     public static final String TODO_COMMAND ="todo";
@@ -30,7 +32,7 @@ public abstract class Command {
         this.isExit = false;
     }
 
-    public abstract void execute (TaskList tasks, Ui ui, Storage storage) throws IOException, AnonymousException, DescriptionException, DukeDateTimeParserException, NoIndexException;
+    public abstract void execute (TaskList tasks, Ui ui, Storage storage) throws IOException, AnonymousException, DescriptionException, DukeDateTimeParserException, NoIndexException, DukeKeywordException;
 
     public boolean isExit() {
         return isExit;

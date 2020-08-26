@@ -7,6 +7,7 @@ import main.java.Exception.DukeCreateFileException;
 import main.java.Exception.DukeDateTimeParserException;
 import main.java.Exception.DukeFileException;
 import main.java.Exception.DukeFileNotFoundException;
+import main.java.Exception.DukeKeywordException;
 import main.java.Exception.NoIndexException;
 import main.java.Parser.Parser;
 import main.java.Storage.Storage;
@@ -59,6 +60,8 @@ public class Duke {
                 ui.getExceptionTemplate(new DukeDateTimeParserException());
             } catch (NoIndexException e) {
                 ui.getExceptionTemplate(new NoIndexException());
+            } catch (DukeKeywordException e) {
+                ui.getExceptionTemplate(new DukeKeywordException());
             }
         }
     }

@@ -8,6 +8,7 @@ import main.java.Command.DoneAllCommand;
 import main.java.Command.DoneCommand;
 import main.java.Command.EventCommand;
 import main.java.Command.ExitCommand;
+import main.java.Command.FindCommand;
 import main.java.Command.HelpCommand;
 import main.java.Command.ListCommand;
 import main.java.Command.ShowAfterCommand;
@@ -16,6 +17,7 @@ import main.java.Command.TodoCommand;
 import main.java.Command.WrongCommand;
 import main.java.Exception.DescriptionException;
 import main.java.Exception.DukeDateTimeParserException;
+import main.java.Exception.DukeKeywordException;
 import main.java.Exception.NoIndexException;
 import main.java.Task.DeadlineTask;
 import main.java.Task.EventTask;
@@ -105,7 +107,9 @@ public class Parser {
             return new ShowAfterCommand(command);
         } else if (command.toLowerCase().contains(Command.SHOW_BEFORE_COMMAND)) {
             return new ShowBeforeCommand(command);
-        }else {
+        } else if(command.toLowerCase().contains(Command.FIND_COMMAND)) {
+            return new FindCommand(command);
+        } else {
             return new WrongCommand(command);
         }
     }
@@ -147,6 +151,27 @@ public class Parser {
             return input.split("\\s", 2)[1];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DescriptionException();
+        }
+    }
+
+    /**
+     * Finds the keyword specified in user command
+     *
+     * @param input String user command.
+     * @return String keyword
+     * @throws DukeKeywordException Thrown when user failed to specify the keyword
+     * in the command.
+     */
+    public static String findKeywordParser(String input) throws DukeKeywordException {
+        try {
+            String keyword = input.split("\\s", 2)[1];
+            if(keyword.equals("") || keyword.equals("\\s")) {
+                throw new DukeKeywordException();
+            } else {
+                return keyword.trim();
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeKeywordException();
         }
     }
 }
