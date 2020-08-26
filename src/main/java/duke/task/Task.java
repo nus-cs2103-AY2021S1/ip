@@ -23,4 +23,8 @@ public class Task {
         int isDone = this.done ? 1 : 0;
         return " | " + isDone + " | " + this.description;
     }
+    
+    public String getDescription() {
+        return description;
+    }
 }
