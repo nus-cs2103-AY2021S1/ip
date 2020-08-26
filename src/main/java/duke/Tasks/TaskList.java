@@ -1,5 +1,6 @@
 package duke.Tasks;
 
+import duke.Exceptions.DukeException;
 import duke.Ui.Ui;
 
 import java.time.LocalDate;
@@ -129,5 +130,23 @@ public class TaskList {
             dataFile.add(task.toData());
         }
         return dataFile;
+    }
+
+    public void findTask(Ui ui, String description) throws DukeException {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task t : this.listOfTasks) {
+            if (t.isResult(description)) {
+                result.add(t);
+            }
+        }
+        if (result.size() == 0) {
+            throw new DukeException("    No matching task found :(");
+        }
+        int counter = 1;
+        ui.printResult();
+        for (Task task: result) {
+            ui.printTask(counter, task);
+            counter += 1;
+        }
     }
 }

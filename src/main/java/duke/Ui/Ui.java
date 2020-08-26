@@ -2,6 +2,7 @@ package duke.Ui;
 
 import duke.Tasks.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -68,6 +69,10 @@ public class Ui {
      */
     public void printTask(int counter, Task task) {
         System.out.println("    " + counter + ": " + task.toString());
+    }
+
+    public void printResult() {
+        System.out.println("    Here are the matching tasks in your list:");
     }
 
     /**
