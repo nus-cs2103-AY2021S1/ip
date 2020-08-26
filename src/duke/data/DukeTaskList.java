@@ -5,5 +5,9 @@ import duke.task.Task;
 
 public class DukeTaskList {
 
-    public static ArrayList<Task> tasks = new ArrayList<>();
+    public ArrayList<Task> tasks;
+
+    public DukeTaskList() {
+        tasks = new ArrayList<>();
+    }
 }
