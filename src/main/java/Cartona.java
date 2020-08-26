@@ -1,50 +1,16 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Cartona {
     private static Scanner sc = new Scanner(System.in);
-    private static ArrayList<Task> taskList = new ArrayList<Task>();
+    private static TaskList taskList = new TaskList();
 
     private static String line = "    ____________________________________________________________\n";
-
-    /**
-     * Prints the current list of tasks to the console.
-     */
-    private static void printList() {
-        int counter = 0;
-
-        System.out.printf(line + "     Here are the tasks in your list:%n");
-        for (Task task: taskList) {
-            counter++;
-            System.out.printf("     %d.%s%n", counter, task);
-        }
-
-        System.out.printf(line);
-    }
-
-    /**
-     * Marks a task as completed
-     */
-    private static void finishTask(Task task) {
-        task.complete();
-        String completion = "     Nice! I've marked this task as done:\n" +
-                            String.format("       %s%n", task);
-        System.out.printf(line + completion + line);
-    }
-
-    private static void deleteTask(int taskNum) {
-        Task toDelete = taskList.get(taskNum - 1);
-        taskList.remove(taskNum - 1);
-        String deleteMsg = String.format("     Noted. I've removed this task:%n       %s%n", toDelete);
-        String countMsg = String.format("     Now you have %d tasks in the list.%n", taskList.size());
-        System.out.printf(line + deleteMsg + countMsg + line);
-    }
 
     /**
      * Helper function that parses the "add ..." argument into the console to add a Task to the taskList
      * @param consoleArg the exact string entered into the console
      */
-    private static void addTask(String consoleArg) throws EmptyTaskDescriptionException, InvalidTaskTimeException, UnknownCommandException {
+    private static void parseAndAddTask(String consoleArg) throws EmptyTaskDescriptionException, InvalidTaskTimeException, UnknownCommandException {
         String[] parsedArr = consoleArg.substring(4).split(" ");
         String keyword = parsedArr[0];
         if (keyword.equals("todo")) {
@@ -60,7 +26,8 @@ public class Cartona {
             if (name.equals("")) {
                 throw new EmptyTaskDescriptionException("");
             }
-            taskList.add(new Todo(name));
+            System.out.printf(taskList.addTask(new Todo(name)));
+
         } else if (keyword.equals("deadline")) {
             String name = "";
             String time = "";
@@ -91,7 +58,7 @@ public class Cartona {
                 throw new InvalidTaskTimeException("");
             }
 
-            taskList.add(new Deadline(name, time));
+            System.out.printf(taskList.addTask(new Deadline(name, time)));
 
         } else if (keyword.equals("event")) {
             String name = "";
@@ -121,7 +88,7 @@ public class Cartona {
                 throw new InvalidTaskTimeException("");
             }
 
-            taskList.add(new Event(name, timeRange));
+            System.out.printf(taskList.addTask(new Event(name, timeRange)));
         } else {
             throw new UnknownCommandException("");
         }
@@ -150,7 +117,8 @@ public class Cartona {
             if (nextInput.equals("bye")) {
                 break;
             } else if (nextInput.equals("list")) {
-                printList();
+                System.out.printf(taskList.printList());
+
             } else if (nextInput.length() < 4) {
                 System.out.printf("%s     Error: Invalid keyword! Please try again%n%s",
                         line, line);
@@ -158,17 +126,14 @@ public class Cartona {
                 try {
                     String[] doneArr = nextInput.split(" ");
                     int taskNum = Integer.parseInt(doneArr[1]);
-                    finishTask(taskList.get(taskNum - 1));
+                    System.out.printf(taskList.finishTask(taskNum));
                 } catch (IndexOutOfBoundsException e) {
                     System.out.printf("%s     Error: Invalid input! Did you mean: \"done TASK_NUM\"%n%s",
                                         line, line);
                 }
             } else if (nextInput.substring(0, 3).equals("add")) {
                 try {
-                    addTask(nextInput);
-                    System.out.printf("%s     Got it. I've added this task:%n       %s%n     " +
-                                    "Now you have %d tasks in the list.%n%s", line, taskList.get(taskList.size() - 1),
-                            taskList.size(), line);
+                    parseAndAddTask(nextInput);
                 } catch (EmptyTaskDescriptionException e1) {
                     System.out.printf("%s     Error: Empty task description!%n%s",
                             line, line);
@@ -184,7 +149,7 @@ public class Cartona {
                 try {
                     String[] doneArr = nextInput.split(" ");
                     int taskNum = Integer.parseInt(doneArr[1]);
-                    deleteTask(taskNum);
+                    System.out.printf(taskList.deleteTask(taskNum));
                 } catch (IndexOutOfBoundsException e) {
                     System.out.printf("%s     Error: Invalid input! Did you mean: \"del TASK_NUM\"%n%s",
                             line, line);
