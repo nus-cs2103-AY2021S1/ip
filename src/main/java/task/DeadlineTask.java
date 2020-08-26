@@ -7,9 +7,25 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.PatternSyntaxException;
 
-public class DeadlineTask extends Task {
+/**
+ * Encapsulates the details of a task with a deadline.
+ *
+ * <p>The 'DeadlineTask' class extends from Task class and supports operators,
+ * supported include: </p>
+ *
+ * <p> (i) getters </p>
+ */
+public class DeadlineTask extends task.Task {
     protected LocalDateTime dateTime;
     protected static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy kk:mm");
+
+    /**
+     * Constructor to create this object.
+     * Use dateTimeString inputted to get LocalDateTime object
+     * @param description the description of the task.
+     * @param dateTimeString the end dateTime of the task.
+     * @throws DateTimeInvalidFormatException if dateTimeString is not formatted in "YYYY-MM-DD HHmm"
+     */
     public DeadlineTask(String description, String dateTimeString) throws DateTimeInvalidFormatException {
         super(description);
 
@@ -46,8 +62,16 @@ public class DeadlineTask extends Task {
         }
     }
 
+    /**
+     * Constructor to create this object.
+     * Use dateTimeString inputted to get LocalDateTime object
+     * @param description the description of the task.
+     * @param dateTimeString the end dateTime of the task.
+     * @param isDone completion status of this object.
+     * @throws DateTimeInvalidFormatException if dateTimeString is not formatted in "YYYY-MM-DD HHmm"
+     */
     public DeadlineTask(String description, String dateTimeString, boolean isDone)
-        throws DateTimeInvalidFormatException {
+            throws DateTimeInvalidFormatException {
         super(description, isDone);
 
         try {
@@ -83,21 +107,37 @@ public class DeadlineTask extends Task {
         }
     }
 
+    /**
+     * Gets the type of Tasks.
+     * @return type of Task.
+     */
     @Override
     public String getType() {
         return "D";
     }
 
+    /**
+     * Gets the date inputted by user in string.
+     * @return date inputted by user.
+     */
     @Override
     public String getDateInput() {
         return this.dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
+    /**
+     * Gets the date inputted by user in string.
+     * @return time inputted by user.
+     */
     @Override
     public String getTimeInput() {
         return this.dateTime.format(DateTimeFormatter.ofPattern("kkmm"));
     }
 
+    /**
+     * String representation of this object.
+     * @return string representation of this object ([type][statusIcon] description (by: date time)).
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.dateTime.format(DeadlineTask.DATE_TIME_FORMAT) + ")";
