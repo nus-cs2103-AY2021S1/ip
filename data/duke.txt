@@ -1,11 +1,5 @@
-T | 1 |  read book
-T | 0 |  b
-T | 0 |  b
-T | 0 |  b
-T | 0 |  b
+T | 1 |  b
+D | 0 |  drink | 2013-01-02
 T | 0 |  a
 T | 0 |  b
-T | 0 |  lol
-T | 0 |  a
-T | 0 |  a
-T | 1 |  list
+D | 0 |  a | 2019-02-02

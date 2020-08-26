@@ -28,6 +28,6 @@ public class Event extends Listing{
 
     @Override
     public String toString() {
-        return "[E]" + super.doneness() + this.title + " (at:" + this.deadLine + ")";
+        return "[E]" + super.doneness() + " " + this.title + "(at:" + this.deadLine + ")";
     }
 }
