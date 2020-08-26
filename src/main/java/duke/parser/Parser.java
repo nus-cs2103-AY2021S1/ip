@@ -1,12 +1,23 @@
 package duke.parser;
 
-import duke.exceptions.DukeException;
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.CompleteCommand;
+import duke.command.DeleteAllCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
 import duke.exceptions.ParseDukeCommandException;
 import duke.task.TaskType;
 
+/**
+ * The {@code Parser} class provides methods for parsing user input.
+ */
 public class Parser {
 
+    /**
+     * An enum containing keywords used by the user for program control.
+     */
     enum Keyword {
         EXIT("exit"),
         LIST("list"),
@@ -22,6 +33,13 @@ public class Parser {
             this.input = keyword;
         }
 
+        /**
+         * Finds and returns the {@code Keyword} matching the specified input.
+         *
+         * @param keyword the input to match against.
+         * @return the {@code keyword} corresponding to the specified input.
+         * @throws ParseDukeCommandException if there is no matching {@code Keyword}.
+         */
         public static Keyword findKeyword(String keyword) throws ParseDukeCommandException {
             for (Keyword k : values()) {
                 if (keyword.equals(k.input)) {
@@ -32,6 +50,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the specified user input and returns its corresponding {@link Command}.
+     *
+     * @param fullCommand the user input to be parsed.
+     * @return a {@code Command} object to be executed.
+     * @throws ParseDukeCommandException if the user input is not recognised.
+     */
     public static Command parse(String fullCommand) throws ParseDukeCommandException {
         String[] inputs = fullCommand.split(" ", 2);
         // By spec, inputs is guaranteed to have at least one element.
