@@ -11,6 +11,10 @@ import Task.*;
 
 public class DeleteCommand extends Command {
 
+    /**
+     * Initializes DeleteCommand
+     * @param command
+     */
     public DeleteCommand(String command){
         super(command);
     }

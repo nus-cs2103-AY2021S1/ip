@@ -9,6 +9,10 @@ import Task.TaskList;
 import ParserStorageUi.*;
 public class ExitCommand extends Command {
 
+    /**
+     * Initializes ExitCommand
+     * @param command
+     */
     public ExitCommand(String command){
         super(command);
     }

@@ -5,10 +5,10 @@ import Task.*;
 import java.util.Scanner;
 public class Ui {
 
-
+    /** Initializes Ui class **/
     public Ui() {}
 
-
+    /** Show welcome message to the user **/
     public void showWelcome() {
         String logo = "Hello I'm Verzachtend \n" +
                 "What can I do for you?\n" +
@@ -16,6 +16,7 @@ public class Ui {
         System.out.println(logo);
     }
 
+    /** Receive input from user **/
     public String readCommand() {
         return new Scanner(System.in).nextLine();
     }
@@ -63,6 +64,18 @@ public class Ui {
     public void showDoneTask(Task done){
         System.out.println("Nice! I've marked this task as done: \n"
                 + done);
+    }
+
+    /** Show the tasks that match the keyword **/
+    public void showFoundTasks(TaskList tasks, String keyword){
+        int i = 1;
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task item : tasks.getTaskList()) {
+            if (item.isNameMatchKeyWord(keyword)) {
+                System.out.println(i + ". " + item);
+                i++;
+            }
+        }
     }
 
     /** Show goodbye message to the customer **/

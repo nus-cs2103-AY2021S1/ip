@@ -8,6 +8,10 @@ import ParserStorageUi.*;
 
 public class ListCommand extends Command {
 
+    /**
+     * Initializes ListCommand
+     * @param command
+     */
     public ListCommand(String command){
         super(command);
     }

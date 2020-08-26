@@ -37,4 +37,9 @@ abstract public class Task {
     /** Get the specific time of the current task **/
     public abstract String getEnd();
 
+    /** Check if the current task match the keyword **/
+    public boolean isNameMatchKeyWord(String keyword){
+        return this.name.toLowerCase().contains(keyword);
+    }
+
 }
