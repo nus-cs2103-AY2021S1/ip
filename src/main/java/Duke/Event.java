@@ -1,3 +1,5 @@
+package Duke;
+
 public class Event extends Task {
     private String duration;
     Event(String task, String duration){

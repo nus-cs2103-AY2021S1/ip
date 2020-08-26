@@ -1,3 +1,5 @@
+package Duke;
+
 import Exceptions.*;
 import Util.Constants;
 import Util.UtilFunction;
@@ -28,26 +30,29 @@ public class DukeCommandMatcher {
             //the command is in the list
             if(UtilFunction.matchPattern(commandPattern, splitCommand[0])){
                switch(commandPattern){
-                   case Constants.EXITPATTERN:
-                       return handleExit();
-                   case Constants.LISTPATTERN:
-                       return handleList();
-                   case Constants.DONEPATTERN:
-                       return handleDone(splitCommand);
-                   case Constants.TODOPATTERN:
-                       return handleTodo(splitCommand);
-                   case Constants.DEADLINEPATTERN:
-                       return handleDeadline(splitCommand);
-                   case Constants.EVENTPATTERN:
-                       return handleEvent(splitCommand);
-                   case Constants.DELETEPATTERN:
-                       return handleDelete(splitCommand);
+               case Constants.EXITPATTERN:
+                   return handleExit();
+               case Constants.LISTPATTERN:
+                   return handleList();
+               case Constants.DONEPATTERN:
+                   return handleDone(splitCommand);
+               case Constants.TODOPATTERN:
+                   return handleTodo(splitCommand);
+               case Constants.DEADLINEPATTERN:
+                   return handleDeadline(splitCommand);
+               case Constants.EVENTPATTERN:
+                   return handleEvent(splitCommand);
+               case Constants.DELETEPATTERN:
+                   return handleDelete(splitCommand);
+               default:
+                   break;
                }
             }
         }
         throw new CommandNotFoundException(command);
     }
 
+    
     private String handleExit(){
         System.out.println("Farewell/再見/さようなら～～");
         return "EXIT";
@@ -59,7 +64,7 @@ public class DukeCommandMatcher {
         System.out.println("Got it. I've added this task:\n" +
                 "   " + task +  '\n' +
                 "Now you have " + numOfTask + (numOfTask > 1 ? " tasks " : " task ") + "in the list.");
-        return "Task added";
+        return "Duke.Task added";
     }
 
     private String handleList(){
@@ -85,7 +90,7 @@ public class DukeCommandMatcher {
         task.setStatus(true);
         System.out.println("Très bien!I have helped you marked task " + targetTask + " as done\n"
             + task);
-        return "Task " + targetTask + " has been done";
+        return "Duke.Task " + targetTask + " has been done";
     }
 
     private String handleTodo(String[] todoStr) throws NullCommandContentException{
@@ -99,12 +104,12 @@ public class DukeCommandMatcher {
 
     private String handleDeadline(String[] deadlineStr) throws NullCommandContentException, LackOfTimeException {
         if(deadlineStr.length < 2){
-            throw new NullCommandContentException("Description cannot be null", "Deadline" );
+            throw new NullCommandContentException("Description cannot be null", "Duke.Deadline" );
         }
         String deadlineContent = deadlineStr[1];
         String[] splitDeadLineStr = deadlineContent.split("/", 2);
         if(splitDeadLineStr.length < 2){
-            throw new LackOfTimeException("The time cannot be empty", "Deadline" );
+            throw new LackOfTimeException("The time cannot be empty", "Duke.Deadline" );
         }
         Deadline deadline = new Deadline(splitDeadLineStr[0], splitDeadLineStr[1]);
         return handleAdd(deadline);
@@ -112,12 +117,12 @@ public class DukeCommandMatcher {
 
     private String handleEvent(String[] eventStr) throws NullCommandContentException, LackOfTimeException {
         if(eventStr.length < 2){
-            throw new NullCommandContentException("Description cannot be null", "Event" );
+            throw new NullCommandContentException("Description cannot be null", "Duke.Event" );
         }
         String eventContent = eventStr[1];
         String[] splitEventStr = eventContent.split("/", 2);
         if(splitEventStr.length < 2){
-            throw new LackOfTimeException("The time cannot be empty", "Event" );
+            throw new LackOfTimeException("The time cannot be empty", "Duke.Event" );
         }
         Event event = new Event(splitEventStr[0], splitEventStr[1]);
         return handleAdd(event);
@@ -134,7 +139,7 @@ public class DukeCommandMatcher {
         System.out.println("Noted. I've removed this task:\n" + "   " +
                 taskList.get(taskToDelete-1) + "\n" + "Now you have " + (taskList.size() -1 ) + " tasks in the list.");
         taskList.remove(taskToDelete-1);
-        return "Task " + (taskToDelete -1) + " has been removed successfully";
+        return "Duke.Task " + (taskToDelete -1) + " has been removed successfully";
 
     }
 
