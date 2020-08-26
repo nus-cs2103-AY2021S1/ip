@@ -12,6 +12,14 @@ public abstract class Task {
     }
 
     /**
+     * Getter method to get Task Description
+     * @return Task Description
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
      * Takes in an array of Task values to form into a String to be stored on database
      * @param arr String Array of Task values
      * @return String to be saved to database
