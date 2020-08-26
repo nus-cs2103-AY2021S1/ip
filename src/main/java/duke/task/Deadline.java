@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline.
+ */
 public class Deadline extends Task {
     private final LocalDateTime by;
 
@@ -16,6 +19,12 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Checks if the deadline is due by the given date.
+     *
+     * @param date A date
+     * @return true if the deadline is due by the given date.
+     */
     @Override
     public boolean isDue(LocalDate date) {
         return by.toLocalDate().equals(date);

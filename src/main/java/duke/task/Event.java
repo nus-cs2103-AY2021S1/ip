@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event.
+ */
 public class Event extends Task {
     private final LocalDateTime at;
 
@@ -16,6 +19,12 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Checks if the event is happening at the given date.
+     *
+     * @param date A date
+     * @return true if the event is happening at the given date.
+     */
     @Override
     public boolean isDue(LocalDate date) {
         return at.toLocalDate().equals(date);

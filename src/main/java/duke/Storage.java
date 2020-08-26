@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The Storage helper class.
+ */
 public class Storage {
     private final Path filePath;
 
@@ -22,6 +25,12 @@ public class Storage {
         this.filePath = Paths.get(filePath);
     }
 
+    /**
+     * Saves the given tasks into a file.
+     *
+     * @param tasks a list of Tasks.
+     * @throws DukeException if the file cannot be saved.
+     */
     public void save(List<Task> tasks) throws DukeException {
         try {
             Files.createDirectories(filePath.getParent());
@@ -32,6 +41,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from a given file.
+     *
+     * @return a list of Tasks.
+     * @throws DukeException if the file cannot be read or does not follow the proper format.
+     */
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
 

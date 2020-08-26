@@ -6,7 +6,18 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * Represents a list command.
+ */
 public class ListCommand extends Command {
+    /**
+     * Executes the command, listing all tasks.
+     *
+     * @param tasks TaskList instance
+     * @param ui Ui instance
+     * @param storage Storage instance
+     * @throws DukeException if there are no tasks in the TaskList.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.getTasks().size() == 0) {
