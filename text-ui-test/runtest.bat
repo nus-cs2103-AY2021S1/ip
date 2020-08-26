@@ -11,7 +11,7 @@ del ACTUAL.TXT
 set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 REM compile the code into the bin folder
-javac  -cp C:\Data\repos\CS2103\src\main\java -Xlint:none -d C:\Data\repos\CS2103\bin C:\Data\repos\CS2103\src\main\java\Duke.java
+javac  -cp C:\Data\repos\CS2103\src\main\java -Xlint:none -d C:\Data\repos\CS2103\bin C:\Data\repos\CS2103\src\main\java\Duke\Duke.java
 
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********

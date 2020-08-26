@@ -1,7 +1,11 @@
+package Duke;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
+import Duke.command.Command;
+import Duke.exception.DukeException;
+import Duke.parser.Parser;
+import Duke.storage.Storage;
+import Duke.task.TaskList;
+import Duke.ui.Ui;
 
 public class Duke {
 
@@ -12,7 +16,7 @@ public class Duke {
 	public Duke() {
 		ui = new Ui();
 		tasks = new TaskList();
-	};
+	}
 
 	public Duke(String filePath) {
 		//initialize User interface

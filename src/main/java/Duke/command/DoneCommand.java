@@ -1,3 +1,10 @@
+package Duke.command;
+
+import Duke.exception.DukeException;
+import Duke.storage.Storage;
+import Duke.task.TaskList;
+import Duke.ui.Ui;
+
 public class DoneCommand extends Command {
 
 	private final String markItem;
