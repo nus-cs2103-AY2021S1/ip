@@ -19,8 +19,12 @@ public class DoneCommand extends Command {
         try {
             index = Integer.parseInt(command.substring(5));
             Task task = taskList.getStorage().get(index - 1);
-            task.markAsDone();
-            ui.print("     Nice! I have marked this task as done :-)");
+            if (task.getStatusIcon().equals("O")) {
+                ui.print("     Task is already marked as done!");
+            } else {
+                task.markAsDone();
+                ui.print("     Nice! I have marked this task as done :-)");
+            }
         } catch (Exception ex) {
             if (ex instanceof StringIndexOutOfBoundsException) {
                 throw new SparklesException("     OOPS!! Task in the list to be marked as done is not specified!");
