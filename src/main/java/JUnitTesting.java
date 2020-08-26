@@ -13,7 +13,7 @@ public class JUnitTesting {
     TaskList list = new TaskList(store);
 
     @Test
-    public void addTaskToList() {
+    public void addTaskToList_Success() {
         String activity = "read book";
         ToDo newTask = new ToDo(activity, TaskSymbol.TODO);
         list.addToList(newTask);
@@ -21,7 +21,7 @@ public class JUnitTesting {
     }
 
     @Test
-    public void removeTaskFromList() {
+    public void removeTaskFromList_Success() {
         String activity1 = "read book";
         String activity2 = "go Home";
         // Add 2 tasks

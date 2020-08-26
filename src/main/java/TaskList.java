@@ -46,9 +46,9 @@ public class TaskList {
     public void readList() {
         System.out.println(Willy.style);
         System.out.print("\tHere are the tasks in your list to jolt ur memory:>\n");
-        for(int i = 0; i < listOfTasks.size(); i++) {
+        for (int i = 0; i < listOfTasks.size(); i++) {
             Task task = listOfTasks.get(i);
-            System.out.println("\t" + (i+1) + ". " + task);
+            System.out.println("\t" + (i + 1) + ". " + task);
         }
         System.out.println(Willy.style);
     }
@@ -76,7 +76,7 @@ public class TaskList {
 
         System.out.println(Willy.style);
         System.out.println("\t Here are the matching tasks in your list:");
-        for(int i = 0; i < keyList.size(); i++) {
+        for (int i = 0; i < keyList.size(); i++) {
             Task task = keyList.get(i);
             System.out.println("\t  " + (i + 1) + "." + task);
         }

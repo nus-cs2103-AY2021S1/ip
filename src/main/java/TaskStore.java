@@ -42,31 +42,34 @@ public class TaskStore {
                 Task task = listOfTasks.get(i);
                 String combinedTask = "";
                 String taskType = listOfTasks.get(i).taskType.toString();
+
                 if (taskType.equals("[T]")) {
                     String taskStatus = task.getStatusIcon();
                     String taskContent = task.task;
                     combinedTask = taskType + "|" + taskStatus + "|" + taskContent;
+
                 } else if (taskType.equals("[D]")) {
                     DeadlineTask deadlineTask = (DeadlineTask) listOfTasks.get(i);
                     String taskDeadline = deadlineTask.deadline.toString();
                     String taskStatus = deadlineTask.getStatusIcon();
                     String taskContent = deadlineTask.task;
                     combinedTask = taskType + "|" + taskStatus + "|" + taskContent + "|" + taskDeadline;
+
                 } else if (taskType.equals("[E]")) {
                     EventsTask eventsTask = (EventsTask) listOfTasks.get(i);
                     String taskPeriod = eventsTask.period.toString();
                     String taskStatus = eventsTask.getStatusIcon();
                     String taskContent = eventsTask.task;
                     combinedTask = taskType + "|" + taskStatus + "|" + taskContent + "|" + taskPeriod;
+
                 }
-                fw.write(combinedTask + "\n") ;
+                fw.write(combinedTask + "\n");
             }
             fw.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
-
 
 
 }

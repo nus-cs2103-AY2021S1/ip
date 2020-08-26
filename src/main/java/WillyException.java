@@ -13,7 +13,7 @@ public class WillyException extends Exception {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return style + "\t" + error + "\n" + style;
     }
 }

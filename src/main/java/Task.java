@@ -18,7 +18,7 @@ public class Task {
         return task;
     }
 
-    public void setTaskDone(boolean boo){
+    public void setTaskDone(boolean boo) {
         done = boo;
     }
 
@@ -27,7 +27,8 @@ public class Task {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return taskType + "[" + getStatusIcon() + "]" + " " + task;
+
     }
 }
