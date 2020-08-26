@@ -22,6 +22,12 @@ public class DukeException extends Exception {
         return new DukeException(msg);
     }
 
+    public DukeException emptyCheckDesc(String desc) {
+        String msg = "No tasks related to " + desc + "!";
+
+        return new DukeException(msg);
+    }
+
     public DukeException invalidCheckDate() {
         String msg = "I don't understand :( Please input date as DD-MM-YYYY\n"
                 + "Example: 31-12-2020";

@@ -63,6 +63,13 @@ public class Parser {
             else {
                 c = new ListCommand("check", input.substring(6));
             }
+        } else if (input.startsWith("find")) {
+            // list find command
+            if (input.length() < 5) {
+                throw new DukeException("Query description cannot be empty!");
+            } else {
+                c = new ListCommand("find", input.substring(5));
+            }
         }
         else {
             // not valid task

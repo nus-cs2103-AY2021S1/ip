@@ -79,6 +79,10 @@ public class Ui {
         System.out.println("Here is your list of task(s) on " + date + ":");
     }
 
+    public void startCheckDesc(String desc) {
+        System.out.println("Here is the list of task(s) related to " + desc + ":");
+    }
+
     public void startList() {
         System.out.println("Here is your current list of task(s)!");
     }
