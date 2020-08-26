@@ -4,6 +4,7 @@
 package ikura.util;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 public class Either<L, R> {
 
@@ -31,6 +32,18 @@ public class Either<L, R> {
 
     public R fromRight() {
         return Optional.ofNullable(this.rightValue).get();
+    }
+
+    public <L1> Either<L1, R> mapLeft(Function<? super L, ? extends L1> fn) {
+        return this.isLeft()
+            ? Either.left(fn.apply(this.leftValue))
+            : Either.right(this.rightValue);
+    }
+
+    public <R1> Either<L, R1> mapRight(Function<? super R, ? extends R1> fn) {
+        return this.isRight()
+            ? Either.right(fn.apply(this.rightValue))
+            : Either.left(this.leftValue);
     }
 
     public static <L, R> Either<L, R> left(L l) {
