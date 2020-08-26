@@ -12,30 +12,23 @@ public class Parser {
     public static Command parse(String s) throws DukeException {
         if (s.equals("list")) {
             return new ListCommand();
-            
         } else if (s.equals("bye")) {
             return new ExitCommand();
-            
         } else if (s.startsWith("done")) {
             int index = parseDone(s);
             return new DoneCommand(index);
-            
         } else if (s.startsWith("delete")) {
             int index = parseDelete(s);
             return new DeleteCommand(index);
-            
         } else if (s.startsWith("todo")) {
             Todo todo = parseTodo(s);
             return new AddCommand(todo);
-            
         } else if (s.startsWith("event")) {
             Event event = parseEvent(s);
             return new AddCommand(event);
-            
         } else if (s.startsWith("deadline")) {
             Deadline deadline = parseDeadline(s);
             return new AddCommand(deadline);
-            
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
