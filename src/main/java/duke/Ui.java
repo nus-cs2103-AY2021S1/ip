@@ -3,11 +3,11 @@ package duke;
 import java.util.ArrayList;
 
 /**
- *
+ * Prints the relevant messages.
  */
 public class Ui {
     /**
-     *
+     * Prints logo "Welcome" greeting.
      */
     public void logoMsg() {
         String logo = " ___       __   _______   ___       ________  " +
@@ -29,7 +29,7 @@ public class Ui {
     }
 
     /**
-     *
+     * Prints greeting.
      */
     public void greetingMsg() {
         String greetingMsg = "\n___________________________________________________________"
@@ -42,7 +42,7 @@ public class Ui {
     }
 
     /**
-     *
+     * Prints help message to show all possible commands available.
      */
     public static void helpMsg() {
         String commandList = "**************************************************************"
@@ -61,7 +61,7 @@ public class Ui {
     }
 
     /**
-     *
+     * Prints bye message to see goodbye to the user.
      */
     public static void byeMsg() {
         String byeMsg = "\n___________________________________________________________"
@@ -75,8 +75,9 @@ public class Ui {
     }
 
     /**
+     * Prints confirmation message to show user the deadline task has been added into the task list.
      *
-     * @param tasks
+     * @param tasks The overall user's task list.
      */
     public static void addDeadlineTaskMsg(ArrayList<Task> tasks) {
         String outputMsg = "\n___________________________________________________________"
@@ -89,8 +90,9 @@ public class Ui {
     }
 
     /**
+     * Prints confirmation message to show user the event task has been added into the task list.
      *
-     * @param tasks
+     * @param tasks The overall user's task list.
      */
     public static void addEventTaskMsg(ArrayList<Task> tasks) {
         String outputMsg = "\n___________________________________________________________"
@@ -103,8 +105,9 @@ public class Ui {
     }
 
     /**
+     * Prints confirmation message to show user the to-do task has been added into the task list.
      *
-     * @param tasks
+     * @param tasks The overall user's task list.
      */
     public static void addTodoTaskMsg(ArrayList<Task> tasks) {
         String outputMsg = "\n___________________________________________________________"
@@ -117,9 +120,10 @@ public class Ui {
     }
 
     /**
+     * Prints confirmation message to show user the task task has been marked as done.
      *
-     * @param index
-     * @param tasks
+     * @param index A series number of the task in the task list.
+     * @param tasks The overall user's task list.
      */
     public static void doneTaskMsg(int index, ArrayList<Task> tasks) {
         String outputMsg = "___________________________________________________________"
@@ -132,10 +136,11 @@ public class Ui {
     }
 
     /**
+     * Prints confirmation message to show user the corresponding task has been deleted from the task list.
      *
-     * @param index
-     * @param newSizeOfTasks
-     * @param taskToDelete
+     * @param index A series number of the task in the task list.
+     * @param newSizeOfTasks Size of the task list.
+     * @param taskToDelete Task to be deleted.
      */
     public static void deleteTaskMsg(int index, int newSizeOfTasks, Task taskToDelete) {
         String outputMsg = "___________________________________________________________"
@@ -148,8 +153,9 @@ public class Ui {
     }
 
     /**
+     * Prints out all tasks stored in the task list.
      *
-     * @param tasks
+     * @param tasks The overall user's task list.
      */
     public static void getAllTasksMsg(ArrayList<Task> tasks) {
         String outputMsg = "";

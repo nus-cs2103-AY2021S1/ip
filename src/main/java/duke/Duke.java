@@ -1,7 +1,7 @@
 package duke;
 
 /**
- *
+ * Main class for duke to run.
  */
 public class Duke {
     private Storage storage;
@@ -9,8 +9,9 @@ public class Duke {
     private Ui ui;
 
     /**
+     * Initialises Duke.
      *
-     * @param filePath
+     * @param filePath A string of file path to store the task list.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -19,7 +20,7 @@ public class Duke {
     }
 
     /**
-     *
+     * Runs Duke.
      */
     public void run() {
         ui.logoMsg();
@@ -29,8 +30,8 @@ public class Duke {
     }
 
     /**
-     *
-     * @param args
+     * Starts the program.
+     * @param args Arges.
      */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();

@@ -8,22 +8,24 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 
 /**
- *
+ * Deals with reading and saving user's task list from/into the file.
  */
 public class Storage {
     private final String filePath;
 
     /**
+     * Storage class construction.
      *
-     * @param filePath
+     * @param filePath A string of file path to store the task list.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
+     * Loads the user's task list from the file.
      *
-     * @return
+     * @return An ArrayList<Task> of the task list.
      */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -60,8 +62,9 @@ public class Storage {
     }
 
     /**
+     * Saves the user's task list into the file.
      *
-     * @param tasklist
+     * @param tasklist The overall user's task list.
      */
     public void writeTasks(TaskList tasklist) {
         try {

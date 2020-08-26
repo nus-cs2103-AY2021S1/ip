@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
+ * Takes in user inputs and make sense of them.
  */
 public class Parser {
     /**
+     * Parses the inputs and calls the corresponding execution.
      *
-     * @param tasklist
+     * @param tasklist The overall user's task list.
      */
     public static void parseUserInput(TaskList tasklist) {
         ArrayList<Task> tasks = tasklist.getTaskList();
