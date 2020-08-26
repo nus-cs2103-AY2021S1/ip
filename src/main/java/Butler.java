@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -91,26 +93,32 @@ public class Butler {
                             try {
                                 summary = inputList[1].split(" /by ", 2)[0];
                                 String deadline = inputList[1].split(" /by ", 2)[1];
-                                addedTask = new DeadlineTask(summary, deadline);
+                                LocalDate formattedDeadline = LocalDate.parse(deadline);
+                                addedTask = new DeadlineTask(summary, formattedDeadline);
                                 taskList.add(addedTask);
                                 reply = "\nI have added your Deadline task as follows:\n"
                                         + "Added: " + addedTask + "\n";
                                 System.out.println(reply);
+                            } catch (DateTimeParseException e) {
+                                    System.out.println("\nPlease input a valid Date format.\n");
                             } catch (Exception e) {
                                 System.out.println("\nExcuse me, " +
                                         "please provide a summary and deadline using the tag /by.\n");
                             }
                             break;
-
                         case "event":
                             try {
                                 summary = inputList[1].split(" /at ", 2)[0];
                                 String time = inputList[1].split(" /at ", 2)[1];
-                                addedTask = new EventTask(summary, time);
+                                LocalDate startDate = LocalDate.parse(time.split(" ")[0]);
+                                LocalDate endDate = LocalDate.parse(time.split(" ")[1]);
+                                addedTask = new EventTask(summary, startDate, endDate);
                                 taskList.add(addedTask);
                                 reply = "\nI have added your Event task as follows:\n"
                                         + "Added: " + addedTask + "\n";
                                 System.out.println(reply);
+                            } catch (DateTimeParseException e) {
+                                    System.out.println("\nPlease input a valid Date format.\n");
                             } catch (Exception e) {
                                 System.out.println("\nExcuse me, " +
                                         "please provide a summary and time of event using the tag /at.\n");
