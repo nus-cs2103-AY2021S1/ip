@@ -28,13 +28,17 @@ public class Storage {
                 f.getParentFile().mkdir();
                 f.createNewFile();
             }
+
             Scanner s = new Scanner(f);
+
             while (s.hasNext()) {
+
                 String nextLine = s.nextLine();
                 Scanner s2 = new Scanner(nextLine);
                 String taskType = s2.next();
                 boolean isDone = false;
                 Task currTask;
+
                 if (taskType.equals("T")) {
                     s2.useDelimiter(" ~ ");
                     if (s2.nextInt() == 1) {
@@ -79,9 +83,11 @@ public class Storage {
         try {
             for (int i = 0; i < tasks.size(); i++) {
                 if (i == 0) {
-                    writeToFile(filePath, tasks.get(i).getStoringFormat() + System.lineSeparator(), false);
+                    writeToFile(filePath, tasks.get(i).getStoringFormat() +
+                            System.lineSeparator(), false);
                 } else {
-                    writeToFile(filePath, tasks.get(i).getStoringFormat() + System.lineSeparator(), true);
+                    writeToFile(filePath, tasks.get(i).getStoringFormat() +
+                            System.lineSeparator(), true);
                 }
             }
         } catch (IOException e) {

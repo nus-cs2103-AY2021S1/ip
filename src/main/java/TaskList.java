@@ -2,35 +2,35 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    private ArrayList<Task> tasksList;
+    private ArrayList<Task> tasks;
     private int totalTasks;
 
     public TaskList(ArrayList<Task> tasksList) {
-        this.tasksList = tasksList;
+        this.tasks = tasksList;
         this.totalTasks = tasksList.size();
     }
 
     public TaskList() {
-        this.tasksList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
         this.totalTasks = 0;
     }
 
     public void add(Task task) {
-        tasksList.add(task);
+        tasks.add(task);
         totalTasks++;
     }
 
     public void delete(int taskNumber) {
-        tasksList.remove(taskNumber - 1);
+        tasks.remove(taskNumber - 1);
         totalTasks--;
     }
 
     public void markTaskAsDone(int taskNumber) {
-        tasksList.get(taskNumber - 1).markAsDone();
+        tasks.get(taskNumber - 1).markAsDone();
     }
 
     public Task getTask(int taskNumber) {
-        return tasksList.get(taskNumber - 1);
+        return tasks.get(taskNumber - 1);
     }
 
     public int getTotalTasks() {
@@ -38,12 +38,12 @@ public class TaskList {
     }
 
     public ArrayList<Task> getTasksList() {
-        return this.tasksList;
+        return this.tasks;
     }
 
     public void listTasks() {
         for (int i = 1; i <= totalTasks; i++) {
-            System.out.println(i + "." + tasksList.get(i - 1));
+            System.out.println(i + "." + tasks.get(i - 1));
         }
     }
 }

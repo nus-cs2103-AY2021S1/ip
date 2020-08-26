@@ -4,6 +4,7 @@ public class Parser {
 
     public static Command parse(String fullCommand) throws DukeException {
         Scanner s2 = new Scanner(fullCommand);
+
         if (fullCommand.equals("bye")) {
             // goodbye command
             return new ExitCommand();
@@ -22,6 +23,7 @@ public class Parser {
             return new DeleteCommand(taskNumber);
         } else {
             Task currTask;
+
             if (fullCommand.contains("todo")) {
                 // add command for todotask
                 s2.skip("todo");
