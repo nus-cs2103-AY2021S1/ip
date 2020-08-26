@@ -38,7 +38,7 @@ class TaskManager {
     public Task markDone(int taskNum) throws DukeException {
         try {
             Task task = tasks.get(taskNum - 1);
-            task.markDone();
+            task.setCompleted();
             save();
             return task;
         } catch (IndexOutOfBoundsException e) {
