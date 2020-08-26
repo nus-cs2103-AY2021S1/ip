@@ -18,7 +18,7 @@ public class Todo extends Task {
     }
 
     @Override
-    Todo completeTask() {
+    public Todo completeTask() {
         return new Todo(this.name, true);
     }
 

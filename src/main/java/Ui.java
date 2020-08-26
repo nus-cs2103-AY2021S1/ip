@@ -4,6 +4,9 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * This is class to interact with the user.
+ */
 public class Ui {
     static String HOME = System.getProperty("user.home");
     java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "ip", "data.txt");
@@ -18,7 +21,12 @@ public class Ui {
         System.out.println("______________________");
     }
 
-    String greet() {
+    /**
+     * Greets user.
+     *
+     * @return Next line that user inputs.
+     */
+    public String greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -32,12 +40,20 @@ public class Ui {
         return sc.nextLine();
     }
 
-    void exit() {
+    /**
+     * Bids user farewell.
+     */
+    public void exit() {
         System.out.println("ok u can leave lmao");
         printLine();
     }
 
-    String list() throws IOException {
+    /**
+     * List all Tasks in save file.
+     *
+     * @return Next line that user inputs.
+     */
+    public String list() throws IOException {
         int counter = 1;
         Scanner myReader = new Scanner(PATH);
         myReader.nextLine();
@@ -51,7 +67,12 @@ public class Ui {
         return sc.nextLine();
     }
 
-    String complete(Task t) {
+    /**
+     * Informs user of completed task.
+     *
+     * @return Next line that user inputs.
+     */
+    public String complete(Task t) {
         System.out.println("gfy youve managed to finish the following...");
         t = t.completeTask();
         System.out.println(t);
@@ -60,7 +81,12 @@ public class Ui {
         return sc.nextLine();
     }
 
-    String delete(Task t, int total) {
+    /**
+     * Informs user of deleted task.
+     *
+     * @return Next line that user inputs.
+     */
+    public String delete(Task t, int total) {
         System.out.println("removed!! ^^");
         System.out.println(t);
         System.out.println("total task: " + total + "\n:o");
@@ -69,7 +95,12 @@ public class Ui {
         return sc.nextLine();
     }
 
-    String add(Task t, int total) {
+    /**
+     * Informs user of added task.
+     *
+     * @return Next line that user inputs.
+     */
+    public String add(Task t, int total) {
         System.out.println("added!");
         System.out.println(t);
         System.out.println("total task: " + total + "\n:o");
@@ -78,7 +109,12 @@ public class Ui {
         return sc.nextLine();
     }
 
-    String handleException(Exception e) {
+    /**
+     * Informs user of exception.
+     *
+     * @return Next line that user inputs.
+     */
+    public String handleException(Exception e) {
         System.out.println(e.getMessage());
         printLine();
 

@@ -1,5 +1,11 @@
+/**
+ * This is a class to represent tasks.
+ */
+
 public class Task {
+    /** Name of task */
     String name;
+    /** Status of task, can either be complete or incomplete */
     boolean completed;
 
     Task(String name) {
@@ -18,11 +24,21 @@ public class Task {
 
     String getTime() { return ""; }
 
+    /**
+     * Returns symbol used to represent status of task.
+     *
+     * @return o if task is complete, x if task is incomplete.
+     */
     public String getStatusIcon() {
         return (this.completed ? "o" : "x"); //return O or X symbols
     }
 
-    Task completeTask() {
+    /**
+     * Updates the status of the task to completed.
+     *
+     * @return Completed task with same name.
+     */
+    public Task completeTask() {
         return new Task(this.name, true);
     }
 

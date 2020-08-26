@@ -1,10 +1,14 @@
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * This is a class to edit data in the save file.
+ */
 public class TaskList {
     String HOME = System.getProperty("user.home");
     java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "ip", "data.txt");
     Parser p = new Parser();
+    /** Total number of tasks in the task list */
     int total;
 
     TaskList(int total) {
@@ -15,7 +19,13 @@ public class TaskList {
         return this.total;
     }
 
-    String taskToString(Task t) {
+    /**
+     * Returns String representation of data of Task.
+     *
+     * @param t Task to be converted into String.
+     * @return String representation of data.
+     */
+    public String taskToString(Task t) {
         String s = t.toString();
 
         String type = t.getType();
@@ -26,7 +36,13 @@ public class TaskList {
         return type + " @ " + status + " @ " + name + " @ " + time;
     }
 
-    void writeData(Task t) throws IOException {
+    /**
+     * Adds Task to save file.
+     *
+     * @param t Task to be added.
+     * @throws IOException If FileWriter is unable to find file.
+     */
+    public void writeData(Task t) throws IOException {
         FileWriter fw = new FileWriter(PATH.toFile(), true);
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter pw = new PrintWriter(bw);
@@ -40,7 +56,13 @@ public class TaskList {
         fw.close();
     }
 
-    void updateTotal(int newTotal) throws IOException {
+    /**
+     * Updates total number of Tasks in save file.
+     *
+     * @param newTotal New total number of tasks.
+     * @throws IOException If FileWriter is unable to find file.
+     */
+    public void updateTotal(int newTotal) throws IOException {
         File fileToBeModified = PATH.toFile();
         String newText = "";
         BufferedReader reader = null;
@@ -64,7 +86,14 @@ public class TaskList {
         writer.close();
     }
 
-    void replaceText(String prevTask, String newTask) throws IOException {
+    /**
+     * Replaces specified line of text with another line of text.
+     *
+     * @param prevTask Text to be replaced.
+     * @param newTask Text to be added.
+     * @throws IOException If FileWriter is unable to find file.
+     */
+    public void replaceText(String prevTask, String newTask) throws IOException {
         File fileToBeModified = PATH.toFile();
         String oldText = "";
         BufferedReader reader = null;
@@ -87,7 +116,13 @@ public class TaskList {
         writer.close();
     }
 
-    void deleteText(String task) throws IOException {
+    /**
+     * Deletes specified line of text from file.
+     *
+     * @param task Task to be deleted.
+     * @throws IOException If FileWriter is unable to find file.
+     */
+    public void deleteText(String task) throws IOException {
         File fileToBeModified = PATH.toFile();
         String newText = "";
         BufferedReader reader = null;
@@ -113,7 +148,14 @@ public class TaskList {
         writer.close();
     }
 
-    Task complete(int taskNumber) throws IOException {
+    /**
+     * Completes specified Task.
+     *
+     * @param taskNumber Number of task to be completed.
+     * @return Completed task.
+     * @throws IOException If FileWriter is unable to find file.
+     */
+    public Task complete(int taskNumber) throws IOException {
         Scanner myReader = new Scanner(PATH);
 
         String taskData = "";
@@ -127,7 +169,14 @@ public class TaskList {
         return t;
     }
 
-    Task delete(int taskNumber) throws IOException {
+    /**
+     * Deletes specified Task from save file.
+     *
+     * @param taskNumber Number of task to be deleted.
+     * @return Task to be deleted.
+     * @throws IOException If FileWriter is unable to find file.
+     */
+    public Task delete(int taskNumber) throws IOException {
         Scanner myReader = new Scanner(PATH);
         String taskData = "";
         for (int i = 0; i <= taskNumber; i++) {
@@ -142,7 +191,15 @@ public class TaskList {
         return t;
     }
 
-    Task add(String s) throws IOException, IncompleteInputException {
+    /**
+     * Adds new Task to save file.
+     *
+     * @param s
+     * @return
+     * @throws IOException If FileWriter is unable to find file.
+     * @throws IncompleteInputException If user input is incomplete.
+     */
+    public Task add(String s) throws IOException, IncompleteInputException {
         Task t = p.commandToTask(s);
 
         writeData(t);
