@@ -9,7 +9,6 @@ public class Deadline extends Task {
 
     public static void newDeadline(String inputSuffix, TaskList taskList, boolean done, boolean announce)
             throws DukeException{
-        System.out.println("This is the suffix coming in:" + inputSuffix);
         String[] deadlineParts = inputSuffix.split("/by",2);
         String deadlineName = deadlineParts[0];
         if (deadlineParts.length == 1) {
