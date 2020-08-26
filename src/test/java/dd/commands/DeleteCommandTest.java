@@ -30,6 +30,7 @@ public class DeleteCommandTest {
     @Test
     public void deleteCommand_success() throws DukeException {
         Todo delTask = new Todo("borrow book");
+
         String res = "Alright! I've deleted the task:\n  " + delTask
                 + "\n " + "You now have 0 task(s) in your list!\n ";
 
@@ -58,8 +59,7 @@ public class DeleteCommandTest {
 
             assertEquals("", outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
             fail();
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),
                     e.getMessage().replaceAll("\\p{Cntrl}", " "));
         }

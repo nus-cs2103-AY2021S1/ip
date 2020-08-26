@@ -13,26 +13,22 @@ import java.util.ArrayList;
 
 public class DateTimeHandler {
 
-    public boolean checkInput(String input) {
+    public boolean isValidInput(String input) {
         if (input.length() == 10) {
             try {
                 convertDate(input);
                 return true;
-            }
-            catch (DateTimeParseException e) {
+            } catch (DateTimeParseException e) {
                 return false;
             }
-        }
-        else if (input.length() == 15) {
+        } else if (input.length() == 15) {
             try {
                 convertDateTime(input);
                 return true;
-            }
-            catch (DateTimeParseException e) {
+            } catch (DateTimeParseException e) {
                 return false;
             }
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -40,28 +36,31 @@ public class DateTimeHandler {
     public String categorizeInput(String input) {
         if (input.length() == 10) {
             return convertDate(input);
-        }
-        else {
+        } else {
             return convertDateTime(input);
         }
     }
 
     public String convertDate(String input) {
+        // define the input and output date formats
         DateTimeFormatter inputFormat = new DateTimeFormatterBuilder().appendPattern("dd-MM-yyyy")
                 .toFormatter();
-
-        LocalDate parsedDate = LocalDate.parse(input, inputFormat);
         DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
+
+        // parse the input according to the defined input format
+        LocalDate parsedDate = LocalDate.parse(input, inputFormat);
 
         return parsedDate.format(outputFormat);
     }
 
     public String convertDateTime(String input) {
+        // define the input and output date and time formats
         DateTimeFormatter inputFormat = new DateTimeFormatterBuilder().appendPattern("dd-MM-yyyy HHmm")
                 .toFormatter();
-
-        LocalDateTime parsedDate = LocalDateTime.parse(input, inputFormat);
         DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
+
+        // parse the input according to the defined input format
+        LocalDateTime parsedDate = LocalDateTime.parse(input, inputFormat);
 
         return parsedDate.format(outputFormat);
     }
@@ -78,12 +77,13 @@ public class DateTimeHandler {
         for (Task t : tasks) {
             if (t instanceof Deadline) {
                 LocalDate deadlineDate = LocalDate.parse(((Deadline) t).getDate(), taskFormat);
+
                 if (deadlineDate.isEqual(queryDate)) {
                     tasksOnDate.add(t);
                 }
-            }
-            else if (t instanceof Event) {
+            } else if (t instanceof Event) {
                 LocalDate eventDate = LocalDate.parse(((Event) t).getDate(), taskFormat);
+
                 if (eventDate.isEqual(queryDate)) {
                     tasksOnDate.add(t);
                 }

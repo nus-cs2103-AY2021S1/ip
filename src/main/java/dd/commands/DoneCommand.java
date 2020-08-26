@@ -17,15 +17,13 @@ public class DoneCommand extends Command {
 
         try {
             taskNum = Integer.parseInt(item);
-        }
-        catch (NumberFormatException ignored) {
+        } catch (NumberFormatException ignored) {
         }
 
         if (taskNum > 0 && taskNum <= tasks.getTaskSize()) {
             tasks.getTask(taskNum - 1).markAsDone();
             ui.printDoneTask(tasks.getTask(taskNum - 1));
-        }
-        else {
+        } else {
             throw new DukeException().invalidTaskNumber();
         }
     }

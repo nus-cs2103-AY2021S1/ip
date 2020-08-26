@@ -17,8 +17,7 @@ public class DeleteCommand extends Command {
 
         try {
             delNum = Integer.parseInt(item);
-        }
-        catch (NumberFormatException ignored) {
+        } catch (NumberFormatException ignored) {
         }
 
         if (delNum > 0 && delNum <= tasks.getTaskSize()) {
@@ -26,8 +25,7 @@ public class DeleteCommand extends Command {
             tasks.deleteTask(delNum-1);
 
             ui.printTasksSize(tasks.getTaskSize());
-        }
-        else {
+        } else {
             throw new DukeException().invalidTaskNumber();
         }
     }

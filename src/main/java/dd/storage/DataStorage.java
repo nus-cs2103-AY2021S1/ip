@@ -11,15 +11,14 @@ import java.util.ArrayList;
 
 public class DataStorage {
 
-    Ui ui = new Ui();
+    private Ui ui = new Ui();
 
     public File loadData() throws IOException {
         File f = new File("./src/data/duke.txt"); // create a File for the given file path
 
         if (f.createNewFile()) {
             ui.dataCreate(f.getName());
-        }
-        else {
+        } else {
             ui.dataExists();
         }
         return f;
@@ -43,11 +42,9 @@ public class DataStorage {
         try {
             convertData(taskList);
             ui.updateData();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             ui.showError("Error writing to file.");
-        }
-        catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             throw new DukeException().noData();
         }
     }

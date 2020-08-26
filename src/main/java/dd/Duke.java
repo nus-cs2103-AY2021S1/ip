@@ -29,19 +29,19 @@ public class Duke {
 
     public void run() {
         ui.greeting();
+
         boolean isExit = false;
 
         while (!isExit) {
             try {
                 String input = ui.readInput();
                 Command c = Parser.parse(input);
+
                 c.execute(tasks, ui, ds);
                 isExit = c.isExit();
-            }
-            catch (DukeException e){
+            } catch (DukeException e){
                 ui.showError(e.getMessage());
-            }
-            finally {
+            } finally {
                 ui.printLine();
             }
         }

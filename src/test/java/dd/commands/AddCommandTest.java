@@ -34,6 +34,7 @@ public class AddCommandTest {
     public void addCommand_todo_success() throws DukeException {
         String res = "Ok, To-do added:\n  " + new Todo("borrow book")
                 + "\n " + "You now have 1 task(s) in your list!\n ";
+
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         DataStorage ds = new DataStorage();
@@ -48,6 +49,7 @@ public class AddCommandTest {
     public void addCommand_deadline_success() throws DukeException {
         String res = "Ok, Deadline added:\n  " + new Deadline("return book", "31 Dec 2020")
                 + "\n " + "You now have 1 task(s) in your list!\n ";
+
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         DataStorage ds = new DataStorage();
@@ -73,8 +75,7 @@ public class AddCommandTest {
 
             assertEquals("", outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
             fail();
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),
                     e.getMessage().replaceAll("\\p{Cntrl}", " "));
         }
@@ -94,8 +95,7 @@ public class AddCommandTest {
 
             assertEquals("", outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
             fail();
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),
                     e.getMessage().replaceAll("\\p{Cntrl}", " "));
         }
@@ -105,6 +105,7 @@ public class AddCommandTest {
     public void addCommand_event_success() throws DukeException {
         String res = "Ok, Event added:\n  " + new Event("meeting", "31 Dec 2020 02:00 PM")
                 + "\n " + "You now have 1 task(s) in your list!\n ";
+
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         DataStorage ds = new DataStorage();
@@ -130,8 +131,7 @@ public class AddCommandTest {
 
             assertEquals("", outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
             fail();
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),
                     e.getMessage().replaceAll("\\p{Cntrl}", " "));
         }
@@ -151,8 +151,7 @@ public class AddCommandTest {
 
             assertEquals("", outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
             fail();
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),
                     e.getMessage().replaceAll("\\p{Cntrl}", " "));
         }
