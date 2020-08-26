@@ -7,7 +7,7 @@ Welcome! I am
 |____/ \__,_|_|\_\___|
 Here are some magic words to get you going:
 To add a todo, say 'todo <task description>'.
-To add a deadline, say 'deadline <task description> /by <task deadline>'.
+To add a deadline, say 'deadline <task description> /by <yyyy-mm-dd>'.
 To add an event, say 'event <event description> /at <event location>'
 To view your tasks, say 'list'.
 To check off a task, say 'done <task number>'.
@@ -18,65 +18,72 @@ To leave, say 'bye'.
 --------------------------------------------------------------------------
 added: [T][✘] eat chocolate
 Now you have 1 tasks in the list.
-added: [D][✘] project (by: tonight)
+added: [D][✘] project (by: May 22 2020)
 Now you have 2 tasks in the list.
 added: [E][✘] meeting tomorrow (at: home)
 Now you have 3 tasks in the list.
 **************************************************************************
 Here are the tasks in your list:
 1.[T][✘] eat chocolate
-2.[D][✘] project (by: tonight)
+2.[D][✘] project (by: May 22 2020)
 3.[E][✘] meeting tomorrow (at: home)
 **************************************************************************
 Nice! I've marked this task as done:
-[D][✓] project (by: tonight)
+[D][✓] project (by: May 22 2020)
 **************************************************************************
 Here are the tasks in your list:
 1.[T][✘] eat chocolate
-2.[D][✓] project (by: tonight)
+2.[D][✓] project (by: May 22 2020)
 3.[E][✘] meeting tomorrow (at: home)
 **************************************************************************
 added: [E][✘] run a marathon (at: sentosa)
 Now you have 4 tasks in the list.
-added: [D][✘] code website (by: 15 August 2020)
-Now you have 5 tasks in the list.
+--------------------------------------------------------------------------
+☹ OOPS! The deadline in an incorrect format! Please indicate the date as <yyyy-mm-dd>
+--------------------------------------------------------------------------
 added: [T][✘] throw chocolate wrapper
-Now you have 6 tasks in the list.
+Now you have 5 tasks in the list.
 added: [T][✘] wash dishes
-Now you have 7 tasks in the list.
+Now you have 6 tasks in the list.
+**************************************************************************
+Here are the tasks in your list:
+1.[T][✘] eat chocolate
+2.[D][✓] project (by: May 22 2020)
+3.[E][✘] meeting tomorrow (at: home)
+4.[E][✘] run a marathon (at: sentosa)
+5.[T][✘] throw chocolate wrapper
+6.[T][✘] wash dishes
+**************************************************************************
 Nice! I've marked this task as done:
 [E][✓] run a marathon (at: sentosa)
 The following task has been deleted:
-[D][✘] code website (by: 15 August 2020)
+[T][✘] throw chocolate wrapper
 --------------------------------------------------------------------------
 ☹ Please indicate which task you'd like to delete!
 OOPS! The keyword 'delete' is used to delete tasks as follows:   delete <task index>
 Nice! I've marked this task as done:
-[T][✓] throw chocolate wrapper
+[E][✓] meeting tomorrow (at: home)
 OOPS! This task index does not exist! Type 'list' to check out your tasks.
 OOPS! This task index does not exist! Type 'list' to check out your tasks.
 **************************************************************************
 Here are the tasks in your list:
 1.[T][✘] eat chocolate
-2.[D][✓] project (by: tonight)
-3.[E][✘] meeting tomorrow (at: home)
+2.[D][✓] project (by: May 22 2020)
+3.[E][✓] meeting tomorrow (at: home)
 4.[E][✓] run a marathon (at: sentosa)
-5.[T][✓] throw chocolate wrapper
-6.[T][✘] wash dishes
+5.[T][✘] wash dishes
 **************************************************************************
 --------------------------------------------------------------------------
 ☹ OOPS! The description of a todo cannot be empty.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
 ☹ OOPS! The description/location of an event cannot be empty.
-
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
 ☹ OOPS! The description/deadline of a deadline cannot be empty.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-☹ OOPS! Invalid syntax. To add an event, use:
-         event <event description> /at <event location>
+☹ OOPS! The description/location of an event cannot be empty.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
 ☹ OOPS! The description/deadline of a deadline cannot be empty.
@@ -84,11 +91,10 @@ Here are the tasks in your list:
 **************************************************************************
 Here are the tasks in your list:
 1.[T][✘] eat chocolate
-2.[D][✓] project (by: tonight)
-3.[E][✘] meeting tomorrow (at: home)
+2.[D][✓] project (by: May 22 2020)
+3.[E][✓] meeting tomorrow (at: home)
 4.[E][✓] run a marathon (at: sentosa)
-5.[T][✓] throw chocolate wrapper
-6.[T][✘] wash dishes
+5.[T][✘] wash dishes
 **************************************************************************
  _____  ___  ___  _____
 |  __ \ \  \/  / |  ___|
