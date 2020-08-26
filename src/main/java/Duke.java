@@ -73,18 +73,8 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        greeting();
-
-        // this field keeps track of the tasks given to Duke
-        ArrayList<Task> tasks = new ArrayList<>();
-
+    // this function prompts the user for an input
+    public static void userPrompt(ArrayList<Task> tasks) {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             // if the user inputs a "bye" command, we simply break out of the Duke program
@@ -281,5 +271,22 @@ public class Duke {
             }
 
         }
+
+    }
+
+    public static void main(String[] args) {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+        greeting();
+
+        // this field keeps track of the tasks given to Duke
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        userPrompt(tasks);
+
     }
 }
