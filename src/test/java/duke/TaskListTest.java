@@ -28,6 +28,5 @@ public class TaskListTest {
         } catch (DukeException e) {
             assertEquals("Sorry, the task does not exist", e.getMessage());
         }
-
     }
 }
