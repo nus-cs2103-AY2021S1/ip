@@ -19,6 +19,8 @@ public class DoneCommand extends EditCommand {
             sb.append("\n").append(Command.numberOfTasks());
         }
 
+        FileUpdater.updateFile();
+
         return sb.toString();
     }
 }
