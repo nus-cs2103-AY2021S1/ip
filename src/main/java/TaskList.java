@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TaskList {
 	private final ArrayList<Task> tasks;
@@ -35,9 +36,19 @@ public class TaskList {
 		tasks.add(task);
 	}
 
-	@Override
-	public String toString() {
-		return "Now you have " + tasks.size() + " task" + (tasks.size() == 1 ? "" : "s") + " in the list.";
+	public int getCount() {
+		return tasks.size();
+	}
+
+	public ArrayList<String> toString(Date date) {
+		ArrayList<String> lst = new ArrayList<>();
+		int i = 1;
+		for (Task task: tasks) {
+			if (date == null || task.isOccuringOn(date)) {
+				lst.add((i++) + ". " + task.toString());
+			}
+		}
+		return lst;
 	}
 
 }

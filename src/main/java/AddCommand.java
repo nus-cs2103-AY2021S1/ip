@@ -22,8 +22,10 @@ public class AddCommand extends Command {
 		} else if (taskType == TaskType.EVENT) {
 			task = new Event(description, date, false);
 		}
-		tasks.addTask(task);
-		ui.formatAddTask(task, tasks);
-		storage.saveList(tasks);
+		if (task != null) {
+			tasks.addTask(task);
+			ui.formatAddTask(task, tasks);
+			storage.saveList(tasks);
+		}
 	}
 }

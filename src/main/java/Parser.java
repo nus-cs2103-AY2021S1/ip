@@ -53,7 +53,7 @@ public class Parser {
 				int idx = display.indexOf(" /by ");
 				if (idx == -1 || display.length() == idx + 5 || display.substring(idx + 5).isBlank()) {
 					throw new TaskException(TaskType.DEADLINE, "time", "cannot be identified.");
-				} else if (display.substring(9, idx).isBlank()) {
+				} else if (idx <= 9 || display.substring(9, idx).isBlank()) {
 					throw new TaskException(TaskType.DEADLINE, "description", "cannot be empty.");
 				} else {
 					if (parseDate(display.substring(idx + 5)) == null) {
@@ -67,7 +67,7 @@ public class Parser {
 				int idx = display.indexOf(" /at ");
 				if (idx == -1 || display.length() < idx + 5 || display.substring(idx + 5).isBlank()) {
 					throw new TaskException(TaskType.EVENT, "time", "cannot be identified.");
-				} else if (display.substring(6, idx).isBlank()) {
+				} else if (idx <= 6 || display.substring(6, idx).isBlank()) {
 					throw new TaskException(TaskType.EVENT, "description", "cannot be empty.");
 				} else {
 					if (parseDate(display.substring(idx + 5)) == null) {
@@ -81,6 +81,5 @@ public class Parser {
 				throw new DukeException("I don't know what that means");
 			}
 		}
-
 	}
 }

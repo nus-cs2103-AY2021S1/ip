@@ -12,7 +12,7 @@ public class DukeTest {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 
-		Duke duke = new Duke("src/main/data.txt");
+		Duke duke = new Duke("data/duke.txt");
 		String welcomeMsg = "";
 		assertEquals(outContent.toString(), welcomeMsg);
 

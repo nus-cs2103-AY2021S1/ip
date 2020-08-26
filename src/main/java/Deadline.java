@@ -1,4 +1,3 @@
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Deadline extends Task {
@@ -12,7 +11,7 @@ public class Deadline extends Task {
 
     @Override
     public String getSavedString() {
-        return super.getSavedString() + " | " + (new SimpleDateFormat("MMM d yyyy")).format(by);
+        return super.getSavedString() + " | " + Ui.formatDate(by);
     }
 
     @Override
@@ -22,6 +21,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + (new SimpleDateFormat("MMM d yyyy")).format(by) + ")";
+        return super.toString() + " (by: " + Ui.formatDate(by) + ")";
     }
 }

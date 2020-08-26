@@ -20,7 +20,7 @@ public class ParserTest {
 		try {
 			Parser.parse("done junknumber");
 		} catch (DukeException | TaskException ex) {
-			assertEquals(ex.getMessage(), "☹ OOPS!!! I'm sorry, but task index is not a valid number :-(");
+			assertEquals(ex.getMessage(), "\u2639 OOPS!!! I'm sorry, but task index is not a valid number :-(");
 		}
 	}
 
@@ -29,13 +29,13 @@ public class ParserTest {
 		try {
 			Parser.parse("deadline return books /by");
 		} catch (DukeException | TaskException ex) {
-			assertEquals("☹ OOPS!!! The time of a deadline cannot be identified.", ex.getMessage());
+			assertEquals("\u2639 OOPS!!! The time of a deadline cannot be identified.", ex.getMessage());
 		}
 
 		try {
 			Parser.parse("deadline   /by 2020-03-04");
 		} catch (DukeException | TaskException ex) {
-			assertEquals("☹ OOPS!!! The description of a deadline cannot be empty.", ex.getMessage());
+			assertEquals("\u2639 OOPS!!! The description of a deadline cannot be empty.", ex.getMessage());
 		}
 	}
 
@@ -44,7 +44,7 @@ public class ParserTest {
 		try {
 			Parser.parse("junk input");
 		} catch (DukeException | TaskException ex) {
-			assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", ex.getMessage());
+			assertEquals("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(", ex.getMessage());
 		}
 	}
 }

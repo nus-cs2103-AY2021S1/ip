@@ -12,6 +12,10 @@ public class Ui {
 		this.sc = new Scanner(System.in);
 	}
 
+	public static String formatDate(Date date) {
+		return (new SimpleDateFormat("MMM d yyyy")).format(date);
+	}
+
 	public void showWelcome() {
 		formatResponse("Hello! I'm Duke", "What can I do for you?");
 	}
@@ -41,32 +45,31 @@ public class Ui {
 		formatResponse(lst);
 	}
 
-	public void formatList(TaskList taskList, Date date) {
-		ArrayList<String> lst = new ArrayList<>();
+	public String formatListCount(TaskList tasks) {
+		return "Now you have " + tasks.getCount() + " task" + (tasks.getCount() == 1 ? "" : "s") + " in the list.";
+	}
+
+	public void formatList(TaskList tasks, Date date) {
+		ArrayList<String> lst = tasks.toString(date);
 		if (date == null) {
-			lst.add("Here are the tasks in your list:");
+			lst.add(0, "Here are the tasks in your list:");
 		} else {
-			lst.add("Here are the tasks in your list that occur on " + (new SimpleDateFormat("MMM d yyyy")).format(date) + ":");
-		}
-		int i = 1;
-		for (Task task: taskList.getTasks()) {
-			if (date == null || task.isOccuringOn(date)) {
-				lst.add((i++) + ". " + task.toString());
-			}
+			lst.add(0,
+					"Here are the tasks in your list that occur on " + formatDate(date) + ":");
 		}
 		formatResponse(lst);
 	}
 
-	public static void formatDoneTask(Task task) {
+	public void formatDoneTask(Task task) {
 		formatResponse("Nice! I've marked this task as done:", INDENT + task.toString());
 	}
 
-	public static void formatDeletedTask(Task task, TaskList taskList) {
-		formatResponse("Noted. I've removed this task: ", INDENT + task.toString(), taskList.toString());
+	public void formatDeletedTask(Task task, TaskList taskList) {
+		formatResponse("Noted. I've removed this task: ", INDENT + task.toString(), formatListCount(taskList));
 	}
 
-	public static void formatAddTask(Task task, TaskList taskList) {
-		formatResponse("Got it. I've added this task: ", INDENT + task.toString(), taskList.toString());
+	public void formatAddTask(Task task, TaskList taskList) {
+		formatResponse("Got it. I've added this task: ", INDENT + task.toString(), formatListCount(taskList));
 	}
 
 }

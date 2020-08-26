@@ -1,4 +1,3 @@
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event extends Task {
@@ -12,7 +11,7 @@ public class Event extends Task {
 
     @Override
     public String getSavedString() {
-        return super.getSavedString() + " | " + (new SimpleDateFormat("MMM d yyyy")).format(at);
+        return super.getSavedString() + " | " + Ui.formatDate(at);
     }
 
     @Override
@@ -22,7 +21,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + (new SimpleDateFormat("MMM d yyyy")).format(at) + ")";
+        return super.toString() + " (at: " + Ui.formatDate(at) + ")";
     }
     
 }

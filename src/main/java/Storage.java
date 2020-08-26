@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Storage {
@@ -30,7 +31,7 @@ public class Storage {
 
 	public ArrayList<Task> initializeTasks() {
 		try {
-			File file = new File("src/data/duke.txt");
+			File file = new File(filePath);
 			if (!file.exists()) {
 				return new ArrayList<>();
 			}
@@ -46,14 +47,19 @@ public class Storage {
 		}
 	}
 
-	public static void saveList(TaskList taskList) throws DukeException {
+	public void saveList(TaskList taskList) throws DukeException {
 		ArrayList<Task> tasks = taskList.getTasks();
-		File dir = new File("src/data");
-		if (!dir.exists()) {
-			dir.mkdir();
+		String[] directories = filePath.split("/");
+		int nested = 1;
+		File dir = new File(directories[0]);
+		if (nested < directories.length) {
+			if (!dir.exists()) {
+				dir.mkdir();
+			}
+			dir = new File(String.join("/", Arrays.copyOfRange(directories, 0, nested++)));
 		}
 		try {
-			File file = new File("src/data/duke.txt");
+			File file = new File(filePath);
 			if (!file.exists()) {
 				file.createNewFile();
 			}
