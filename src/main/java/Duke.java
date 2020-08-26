@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Duke {
 
     public static void main(String[] args) throws DukeException {
+//        Initialising components
         Parser parser = new Parser();
         Ui printer = new Ui();
         String currentDirectory = System.getProperty("user.dir");
