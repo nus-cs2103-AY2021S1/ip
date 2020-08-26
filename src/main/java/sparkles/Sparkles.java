@@ -6,6 +6,9 @@ import sparkles.util.Parser;
 import sparkles.util.Storage;
 import sparkles.util.Ui;
 
+/**
+ * Represents a Sparkles object, a chat bot that respond to user's inputs.
+ */
 public class Sparkles {
 
     private final Storage storage;

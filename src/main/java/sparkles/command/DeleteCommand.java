@@ -6,12 +6,26 @@ import sparkles.task.TaskList;
 import sparkles.util.Storage;
 import sparkles.util.Ui;
 
+/**
+ * Represent a delete command.
+ */
 public class DeleteCommand extends Command {
 
     public DeleteCommand(String command) {
         super(command);
     }
 
+    /**
+     * Deals with user's command.
+     * Remove the specific task that user wants to delete
+     * from the local disk as well as the TaskList object.
+     * Printing out necessary information with regards to this
+     * execution.
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws SparklesException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
         int index;

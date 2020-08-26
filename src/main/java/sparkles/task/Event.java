@@ -3,6 +3,9 @@ package sparkles.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represent an Event object.
+ */
 public class Event extends Task{
 
     protected LocalDate date;
@@ -23,6 +26,11 @@ public class Event extends Task{
         return date.format(dateTimeFormatter);
     }
 
+    /**
+     * Package the deadline to a format used to store in the task.txt.
+     * A file in the local disk to store tasks.
+     * @return
+     */
     @Override
     public String diskFormat() {
         return "     E | " + super.diskFormat() + " | " + at;

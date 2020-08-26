@@ -14,6 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represent a storage object, taking in the file path of the task.txt.
+ * Task.txt is a file stored on the local disk
+ * with the tasks that user input.
+ * Deals with loading tasks from the file and saving task in the file.
+ */
 public class Storage {
 
     protected String filePath;
@@ -22,6 +28,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Update task.txt.
+     * Task.txt is overwritten with respect to the
+     * tasks in the list provided as parameter.
+     * @param storage, list of task
+     */
     public void updateFile(List<Task> storage) {
         String userDir = new File("").getAbsolutePath();
         String taskFilePath = userDir + File.separator + filePath;
@@ -41,6 +53,11 @@ public class Storage {
 
     }
 
+    /**
+     * Reads task.txt
+     * @return a list with the corresponding task.
+     * @throws SparklesException
+     */
     public List<Task> load() throws SparklesException {
         List<Task> taskList = new ArrayList<>();
 

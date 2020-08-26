@@ -6,8 +6,17 @@ import sparkles.command.addcommand.AddDeadlineCommand;
 import sparkles.command.addcommand.AddEventCommand;
 import sparkles.command.addcommand.AddTodoCommand;
 
+/**
+ * A Parser class that deals and make sense of user commands.
+ */
 public class Parser {
 
+    /**
+     * Taking in user's input as one String and return the correct Command class to execute.
+     *
+     * @param command, user's input
+     * @return corresponding Command
+     */
     public static Command parse(String command) {
         return parseCommand(command);
     }
@@ -28,6 +37,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Taking in user's input as one String and return the correct AddCommand class to execute.
+     *
+     * @param command, user's input
+     * @return corresponding AddCommand
+     */
     public static Command parseAddCommand(String command) {
         String lowerCase = command.toLowerCase();
 

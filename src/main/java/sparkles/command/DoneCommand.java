@@ -6,12 +6,26 @@ import sparkles.task.TaskList;
 import sparkles.util.Storage;
 import sparkles.util.Ui;
 
+/**
+ * Represent a done command.
+ */
 public class DoneCommand extends Command {
 
     public DoneCommand(String command) {
         super(command);
     }
 
+    /**
+     * Deals with user's command.
+     * Mark a task that user specify as done.
+     * Updates the TaskList object and local disk file.
+     * Printing out necessary information with regards to this
+     * execution.
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws SparklesException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
         int index;

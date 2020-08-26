@@ -2,6 +2,9 @@ package sparkles.util;
 
 import java.util.Scanner;
 
+/**
+ * A Ui object that deals with user interactions.
+ */
 public class Ui {
 
     private static final String DASH = "     ____________________________________________________________";
@@ -11,6 +14,9 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Prints the welcome message of Sparkles.
+     */
     public void showWelcome() {
         showLine();
         print("     *Hello, I am Sparkles*\n\n     How can I help you?");
@@ -25,10 +31,18 @@ public class Ui {
         System.out.println(str);
     }
 
+    /**
+     * Print the number of task in the list now.
+     * @param i, number of task
+     */
     public void printListSize(int i) {
         print("     Now you have " + i + " task(s) in your list.");
     }
 
+    /**
+     * Returns user's direct input.
+     * @return
+     */
     public String readCommand() {
         return sc.nextLine();
     }

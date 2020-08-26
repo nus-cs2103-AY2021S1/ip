@@ -8,12 +8,24 @@ import sparkles.util.Ui;
 
 import java.util.List;
 
+/**
+ * Represent a show list command.
+ */
 public class ShowListCommand extends Command {
 
     public ShowListCommand(String command) {
         super(command);
     }
 
+    /**
+     * Deals with user's command.
+     * Display user's tasks to the user.
+     *
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws SparklesException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
         taskList.updateList(storage.load());
