@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -83,7 +84,7 @@ public class Duke {
                     }
                     taskTokens = userTask.split(" /by ");
                     taskName = taskTokens[0];
-                    String taskBy = taskTokens[1];
+                    LocalDate taskBy = LocalDate.parse(taskTokens[1]);
                     taskList.add(new Deadline(taskName, taskBy));
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + taskList.get(taskList.size() - 1));
@@ -101,7 +102,7 @@ public class Duke {
                     }
                     taskTokens = userTask.split(" /at ");
                     taskName = taskTokens[0];
-                    String taskAt = taskTokens[1];
+                    LocalDate taskAt = LocalDate.parse(taskTokens[1]);
                     taskList.add(new Event(taskName, taskAt));
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + taskList.get(taskList.size() - 1));
