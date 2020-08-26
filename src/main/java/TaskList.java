@@ -1,12 +1,34 @@
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private final List<Task> list;
+    private List<Task> list;
     private static final String starline = "**************************************************************************";
 
     public TaskList() {
         this.list = new ArrayList<>();
+    }
+    
+    public TaskList(BufferedReader br) {
+        try {
+            this.list = new ArrayList<>();
+            String line = br.readLine();
+            while (line != null) {
+                Task task = this.add(line, false);
+                boolean done = Boolean.valueOf(br.readLine());
+                if (done) task.markDone();
+                line = br.readLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error populating task list with saved tasks: " + e);
+        }
+        
+    }
+    
+    public List<Task> getTaskList() {
+        return this.list;
     }
 
     public void list() {
@@ -27,7 +49,7 @@ public class TaskList {
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
-    public void add(String input) {
+    public Task add(String input, boolean echo) {
         String[] splitInput = input.split(" ", 2);
         String taskType = splitInput[0];
         Task newTask;
@@ -69,7 +91,8 @@ public class TaskList {
                 throw new IllegalArgumentException("OOPS! There is no task of type " + taskType + "!");
         }
         this.list.add(newTask);
-        echo(newTask.toString());
+        if (echo) echo(newTask.toString());
+        return newTask;
     }
 
     public void markTaskAsDone(String listIndexString) {

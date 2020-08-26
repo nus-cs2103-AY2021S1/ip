@@ -1,7 +1,9 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Duke {
-    private static final TaskList taskList = new TaskList();
+    private static Storage storage;
+    private static TaskList taskList;
     private static final String starline = "**************************************************************************";
     private static final String dashline = "--------------------------------------------------------------------------";
     private static final String logo =
@@ -54,7 +56,7 @@ public class Duke {
             // for ToDos, Deadlines, Events
             } else if (splitNext[0].equals("todo") || splitNext[0].equals("deadline") || splitNext[0].equals("event")){
                 try {
-                    taskList.add(next);
+                    taskList.add(next, true);
                 } catch (IllegalArgumentException ex) {
                     System.out.println(dashline + "\n\u2639 " + ex.getMessage() + "\n" + dashline);
                 }
@@ -77,10 +79,25 @@ public class Duke {
         );
         System.out.println("Hope you have a productive day ahead! :))");
     }
+    
+    public static void initialise() {
+        try {
+            storage = new Storage("./Data/saved-tasks.txt");
+            taskList = new TaskList(storage.load());
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: file not created. " + e);
+        }
+    }
+    
+    public static void save() {
+        storage.save(taskList);
+    }
 
     public static void main(String[] args) {
+        initialise();
         greet();
         awaitInputCommand();
+        save();
         exit();
     }
 }

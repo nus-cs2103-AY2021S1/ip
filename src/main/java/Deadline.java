@@ -10,6 +10,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public String getParsedTask() {
+        return "deadline " + this.description + " /by " + this.by + "\n" 
+                + this.done + "\n";
+    }
+    
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
