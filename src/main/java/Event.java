@@ -30,9 +30,7 @@ public class Event extends Task {
 
         sb.append("[E]")
                 .append(super.toString())
-                .append(" (").append("at: ")
-                .append(eventTime)
-                .append(")");
+                .append(" (").append("at: ").append(eventTime).append(")");
         return sb.toString();
     }
 
