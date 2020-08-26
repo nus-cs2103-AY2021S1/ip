@@ -3,7 +3,7 @@
  */
 public enum CommandType {
     LIST("list"), BYE("bye"), DELETE("delete"), DONE("done"),
-    TODO("todo"), DEADLINE("deadline"), EVENT("event");
+    TODO("todo"), DEADLINE("deadline"), EVENT("event"), FIND("find");
 
     private final String input;
 

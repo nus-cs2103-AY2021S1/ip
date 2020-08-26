@@ -76,4 +76,19 @@ public class Ui {
             System.out.println("My duck senses tell me you have " + numOfTasks + " tasks in the list.");
         }
     }
+
+    public void printResultTaskList(List<Task> resultTaskList) {
+        if (resultTaskList.isEmpty()) {
+            System.out.println("No tasks matched...");
+        } else {
+            System.out.println(line);
+            System.out.println("Quack! Here are the tasks in your list that match:");
+            int count = 1;
+            for (Task task : resultTaskList) {
+                System.out.println(count + ". " + task);
+                count++;
+            }
+            System.out.println(line);
+        }
+    }
 }
