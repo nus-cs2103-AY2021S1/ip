@@ -4,6 +4,9 @@ public class Storage {
 
     private static String filePath = "./src/main/data/duke.txt";
 
+    /**
+     * Attempts to load an existing save file.
+     */
     public static TaskList loadFromMem() throws DukeException {
         File saveFile = new File(filePath);
         if (saveFile.exists()) {
@@ -13,6 +16,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a new file that contains the saved tasks.
+     */
     public static void createNewSave(String data) throws DukeException {
         new File("./src/main/data").mkdirs();
         try {
@@ -24,7 +30,7 @@ public class Storage {
         }
     }
 
-    public static void writeToFile(String data, File file) throws IOException {
+    private static void writeToFile(String data, File file) throws IOException {
         FileWriter fileWriter = new FileWriter(file, false);
         fileWriter.write(data);
         fileWriter.close();
@@ -48,12 +54,12 @@ public class Storage {
     }
 
     private static void convertToTask(String line, TaskList taskList) throws DukeException {
-        boolean done;
+        boolean isDone;
 
         if (line.startsWith("\u2713", 4)) {
-            done = true;
+            isDone = true;
         } else if (line.startsWith("\u2718", 4)) {
-            done = false;
+            isDone = false;
         } else {
             throw new DukeException();
         }
@@ -63,10 +69,10 @@ public class Storage {
                 taskList.addTask(new Todo(line.substring(7)), false);
                 break;
             case 'D':
-                Deadline.newDeadline(line.substring(7), taskList, done, false);
+                Deadline.newDeadline(line.substring(7), taskList, isDone, false);
                 break;
             case 'E':
-                Event.newEvent(line.substring(7), taskList, done, false);
+                Event.newEvent(line.substring(7), taskList, isDone, false);
                 break;
             default:
                 throw new DukeException();

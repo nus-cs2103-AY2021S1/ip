@@ -11,7 +11,9 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-
+    /**
+     * Takes in inputs, and passes them to the Parser to perform actions.
+     */
     public static void processInput(TaskList taskList) {
 
         printWithLines("Hello! My name is Duketh Puketh III, but you can call me\n" + logo +
@@ -43,6 +45,9 @@ public class Ui {
 
     }
 
+    /**
+     * Prints the desired output with decorative lines.
+     */
     public static void printWithLines(String output) {
         System.out.println(line + "\n" + output + line);
     }
@@ -50,7 +55,9 @@ public class Ui {
 
 
 
-
+    /**
+     * Checks if a given string only has spaces, or if it's an empty string.
+     */
     public static boolean isBlankString(String string) {
         if (string.length() != 0) {
             for (char c : string.toCharArray()) {
