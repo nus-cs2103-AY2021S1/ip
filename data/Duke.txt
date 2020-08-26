@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 [T][✓] read books
 [D][✓] finish ip (by: tonight)
+=======
+[D][✘] hahaha  (by: Oct_10_2020)
+[E][✘] gagagaga  (on: Dec_12_2020)
+>>>>>>> branch-Level-8

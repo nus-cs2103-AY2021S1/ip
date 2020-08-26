@@ -50,7 +50,11 @@ public class Formating<T> {
                 int lenOfArray = inputArray.length;
                 int lenOfLastInArray = inputArray[lenOfArray - 1].length();
                 String time = inputArray[lenOfArray - 1]
+<<<<<<< HEAD
                         .substring(0, lenOfLastInArray - 1);
+=======
+                                .substring(0, lenOfLastInArray - 1);
+>>>>>>> branch-Level-8
                 if (typeOfTask == 'D') {
                     task = new Deadline(inputArray[1], time);
                 } else {

@@ -134,10 +134,17 @@ public class Operation {
 
             }
 
-            if (idetity.equals(Status.DEADLINE.toString())) {
-                task = new Deadline(detail, time);
-            } else {
-                task = new Event(detail, time);
+            try {
+                Time date = new Time(time);
+
+                if (idetity.equals(Status.DEADLINE.toString())) {
+                    task = new Deadline(detail, date.toString());
+                } else {
+                    task = new Event(detail, date.toString());
+                }
+            } catch (Exception e) {
+                DukeException.timeFormatException();
+                return;
             }
         }
         memory.addMemory(task);
@@ -147,5 +154,7 @@ public class Operation {
                 new Formating<>(task);
         System.out.println(formatedEcho);
     }
+
+
 
 }

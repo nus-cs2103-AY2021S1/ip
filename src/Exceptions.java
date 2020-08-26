@@ -56,5 +56,15 @@ public enum Exceptions {
         public String toString() {
             return "    OOPS!!! There is a problem reading";
         }
+<<<<<<< HEAD
+=======
+    },
+
+    TIMEFORMATEXCEPTION {
+        @Override
+        public String toString() {
+            return "    OOPS!!! Your time format seems incorrect, please follow yyyy-mm-dd";
+        }
+>>>>>>> branch-Level-8
     }
 }
