@@ -4,7 +4,7 @@ import duke.exceptions.DukeException;
 
 public abstract class Task {
     protected String description;
-    protected boolean isDone;
+    public boolean isDone;
 
     public Task(String s) throws DukeException {
         if (s.isBlank()) {

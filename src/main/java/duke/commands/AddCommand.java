@@ -1,7 +1,6 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.Storage.Storage;
-import duke.Ui.Ui;
+import duke.ui.Ui;
 import duke.exceptions.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
