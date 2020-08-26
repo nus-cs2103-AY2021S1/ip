@@ -1,6 +1,5 @@
 package duke.dependencies.executor;
 
-import duke.Duke;
 import duke.dependencies.dukeexceptions.DukeException;
 import duke.dependencies.executable.CommandType;
 import duke.dependencies.executable.Executable;
@@ -19,11 +18,11 @@ import static duke.dependencies.executable.CommandType.*;
 public class Executor {
 
     private static final TaskList storage = TaskList.initStorage();
-    private static final String ADD_COMMAND = "add";
-    private static final String LIST_COMMAND = "list";
-    private static final String DONE_COMMAND = "done";
-    private static final String DELETE_COMMAND = "delete";
-    private static final String FIND_COMMAND = "find";
+//    private static final String ADD_COMMAND = "add";
+//    private static final String LIST_COMMAND = "list";
+//    private static final String DONE_COMMAND = "done";
+//    private static final String DELETE_COMMAND = "delete";
+//    private static final String FIND_COMMAND = "find";
 
     /* Half-assed attempt at concurrency lock.
     There should be no need for concurrency
