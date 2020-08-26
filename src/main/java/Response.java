@@ -3,7 +3,8 @@ public class Response {
         LIST,
         ADD,
         REMOVE,
-        NORMAL
+        NORMAL,
+        FIND
     }
     public Task[] tasks;
     public String[] texts;
@@ -52,6 +53,14 @@ public class Response {
                         + "\n"
                         + "     "
                         + String.format("Now you have %d tasks in the list. \n", numOfTasks);
+            }
+        } else if (this.tag == Tag.FIND ) {
+            for (int i = 0; i < this.tasks.length; i++) {
+                linesOfText += "     "
+                        + "Here are the matching tasks in your list: \n"
+                        + "       "
+                        + this.tasks[i]
+                        + "\n";
             }
         } else {
             for (int i = 0; i < this.texts.length; i++) {

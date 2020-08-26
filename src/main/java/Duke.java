@@ -15,22 +15,22 @@ public class Duke {
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 String line = s.nextLine();
-                String[] task = line.split(" | ");
+                String[] task = line.split(" ");
                 if (task[0].equals("T")) {
-                    Task todo = new Todo(task[2]);
-                    if (task[1].equals("✓")) {
+                    Task todo = new Todo(task[4]);
+                    if (task[2].equals("✓")) {
                         todo.markDone();
                     }
                     lists.add(todo);
                 } else if (task[0].equals("D")) {
-                    Task deadline = new Deadline(task[2], LocalDateTime.parse(task[3]));
-                    if (task[1].equals("✓")) {
+                    Task deadline = new Deadline(task[4], LocalDateTime.parse(task[6]));
+                    if (task[2].equals("✓")) {
                         deadline.markDone();
                     }
                     lists.add(deadline);
                 } else if (task[0].equals("E")) {
-                    Task event = new Event(task[2], LocalDateTime.parse(task[3]));
-                    if (task[1].equals("✓")) {
+                    Task event = new Event(task[4], LocalDateTime.parse(task[6]));
+                    if (task[2].equals("✓")) {
                         event.markDone();
                     }
                     lists.add(event);
@@ -138,7 +138,7 @@ public class Duke {
                                     satisfiedTasks.add(lists.get(i));
                                 }
                             }
-                            Response msg = new Response(satisfiedTasks.toArray(new Task[0]), Response.Tag.LIST);
+                            Response msg = new Response(satisfiedTasks.toArray(new Task[0]), Response.Tag.FIND);
                             System.out.println(msg.getResponse());
                         } catch (DukeException e) {
                             Response msg = new Response(new String[]{"Please include the keyword!"});
