@@ -1,9 +1,13 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
 import java.lang.StringBuilder;
+
+import java.time.LocalDate;
+import java.time.DateTimeException;
 
 public class Duke {
     private static final String LINE = "____________________________________________________________\n";
@@ -43,10 +47,6 @@ public class Duke {
                 }
             }
         }
-    }
-
-    private String template(String reply) {
-        return LINE + reply + "\n" + LINE;
     }
 
     private String inputHandler(String input) throws InvalidArgumentException, InvalidCommandException {
@@ -106,11 +106,14 @@ public class Duke {
     private String addDeadline(String task, String by) throws InvalidArgumentException {
         try {
             StringBuilder str = new StringBuilder();
-            Deadline current = new Deadline(task, by);
+            LocalDate temp = LocalDate.parse(by);
+            Deadline current = new Deadline(task, temp);
             inputList.add(current);
             str.append("Got it bro, I've added this task:\n  ").append(current.toString() + "\n").append(
                     "Now you have ").append(inputList.size()).append(" tasks in the list.");
             return str.toString();
+        } catch (DateTimeException e) {
+            throw new InvalidArgumentException("Sorry, Invalid date format!");
         } catch (Exception e) {
             throw new InvalidArgumentException("Sorry, Deadline does not accept this argument!");
         }
@@ -119,11 +122,14 @@ public class Duke {
     private String addEvent(String task, String at) throws InvalidArgumentException {
         try {
             StringBuilder str = new StringBuilder();
-            Event current = new Event(task, at);
+            LocalDate temp = LocalDate.parse(at);
+            Event current = new Event(task, temp);
             inputList.add(current);
             str.append("Got it bro, I've added this task:\n  ").append(current.toString() + "\n").append(
                     "Now you have ").append(inputList.size()).append(" tasks in the list.");
             return str.toString();
+        } catch (DateTimeException e) {
+            throw new InvalidArgumentException("Sorry, Invalid date format!");
         } catch (Exception e) {
             throw new InvalidArgumentException("Sorry, Event does not accept this argument!");
         }
@@ -154,9 +160,25 @@ public class Duke {
         }
     }
 
+    private static void greet() {
+        StringBuilder str = new StringBuilder();
+        str.append("Yo I'm Dood!!\nAnything I can do for you?\n").append("The commands available are:\n")
+                .append("list     | Shows the list of tasks on the bot.\n")
+                .append("bye      | Exits the program\n")
+                .append("done     | Marks the Task as done. Format is 'done {task index}.\n")
+                .append("todo     | Creates a ToDo task. Format is 'Todo {description}.\n")
+                .append("event    | Creates an Event task. Format is 'event {description} /at {date in YYYY-MM-DD}.\n")
+                .append("deadline | Creates a DeadLine task. Format is 'deadline {description} /by {date in YY-MM-DD}.")
+                .append("\ndelete   | Deletes a Task. Format is ' delete {task index}");
+        System.out.println(template(str.toString()));
+    }
+
+    private static String template(String reply) {
+        return LINE + reply + "\n" + LINE;
+    }
+
     public static void main(String[] args) {
-        String welcome = "Yo I'm Dood!!\nAnything I can do for you?\n";
-        System.out.println(LINE + welcome + LINE);
+        greet();
         Duke bot = new Duke();
         bot.init();
     }
