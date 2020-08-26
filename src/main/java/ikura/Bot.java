@@ -58,6 +58,7 @@ public class Bot {
         Optional.ofNullable(Map.<String, BiConsumer<String, String>>of(
             "done",     this::cmdDone,
             "list",     this::cmdList,
+            "find",     this::cmdFind,
             "reset",    this::cmdReset,
             "delete",   this::cmdDelete,
             "todo",     this::cmdAddTask,
@@ -79,6 +80,18 @@ public class Bot {
     }
 
 
+    private void cmdFind(String cmd, String input) {
+        assert cmd.equals("find");
+
+        var matches = this.tasks.findTasksByKeywords(Arrays.asList(input.split(" ")));
+
+        this.ui.println("found %d result%s:", matches.size(), matches.size() == 1 ? "" : "s");
+
+        matches.stream()
+            .map(p -> p.mapFst(x -> x + 1))             // convert to 1-indexed for printing
+            .map(t -> String.format("  %d. %s", t.fst(), t.snd()))
+            .forEach(x -> this.ui.println("%s", x));
+    }
 
     private void cmdReset(String cmd, String input) {
         assert cmd.equals("reset");

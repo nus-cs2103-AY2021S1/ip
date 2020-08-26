@@ -4,13 +4,17 @@
 package ikura;
 
 import java.util.List;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.ArrayList;
 import java.util.stream.Stream;
-
-import java.io.IOException;
+import java.util.stream.Collectors;
 
 import ikura.task.Task;
+import ikura.util.Pair;
+import ikura.util.StreamUtils;
+
+import java.io.IOException;
 import ikura.util.InvalidDatabaseException;
 
 public class TaskList {
@@ -83,5 +87,16 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             return Optional.empty();
         }
+    }
+
+    public List<Pair<Integer, Task>> findTasksByKeywords(List<String> keywords) {
+
+        return StreamUtils.indexed(this.tasks.stream())
+            .filter(x -> {
+                // x.snd().getName().contains(name)
+                var words = Arrays.stream(x.snd().getName().split(" "));
+                return words.anyMatch(w -> keywords.contains(w));
+            })
+            .collect(Collectors.toList());
     }
 }
