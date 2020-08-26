@@ -8,6 +8,11 @@ public class Task {
         this.isDone = false;
         this.type = null;
     }
+    public Task(String description, boolean isDone, String type) {
+        this.description = description;
+        this.isDone = isDone;
+        this.type = type;
+    }
     public String getType() {
         return this.type;
     }
@@ -21,13 +26,17 @@ public class Task {
         }
     }
 
+    public void markAsDeleted() {
+        this.isDone = false;
+    }
+
     public void setType(String type) {
         this.type = type;
     }
 
     @Override
     public String toString() {
-        return  this.description;
+        return "[" + this.type + "][" + getStatusIcon() + "] " + this.description;
     }
 
 }

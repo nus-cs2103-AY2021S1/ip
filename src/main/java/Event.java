@@ -10,14 +10,19 @@ public class Event extends Task {
         this.type = "E";
         DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.at = LocalDate.parse(at,inputFormat);
+    }
 
+    public Event(String description, boolean isDone, String at) {
+        super(description, isDone,"E");
+        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        this.at = LocalDate.parse(at,inputFormat);
     }
 
     @Override
     public String toString() {
 
-        String atTime = at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return super.toString() + "(at:" + atTime + ")";
+        String atTime = at.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return super.toString() + "(at: " + atTime + ")";
 
     }
 }
