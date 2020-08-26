@@ -150,11 +150,11 @@ public class TaskList {
         ArrayList<Task> findings = new ArrayList<>();
 
         // Go through Duke's tasks
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             //Check each task for the keyword
-            if (list.get(i).getDescription().contains(keyword)) {
+            if (tasks.get(i).getDescription().contains(keyword)) {
                 // Add to findings
-                findings.add(list.get(i));
+                findings.add(tasks.get(i));
             }
         }
 
