@@ -12,6 +12,15 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
         taskFile = new File(filePath);
+        if (!taskFile.exists())
+            taskFile.getParentFile().mkdirs();
+            try {
+                taskFile.createNewFile();
+            }
+            catch (IOException e2){
+                System.out.println("Sorry, an error occurs while loading."+
+                        " Please contact developers");
+            }
     }
 
     public ArrayList<Task> load(){
@@ -41,17 +50,9 @@ public class Storage {
                 taskList.add(t);
             }
             return taskList;
-        }
-        catch (FileNotFoundException e){
-            if (!taskFile.exists())
-                taskFile.mkdirs();
-            try {
-                taskFile.createNewFile();
-            }
-            catch (IOException e2){
-                System.out.println("Sorry, an error occurs in DUKE."+
-                            " Please contact developers");
-            }
+        } catch (FileNotFoundException e){
+            System.out.println("Sorry, DUKE can't find saved todo list."+
+                    " Please contact developers");
         }
         return taskList;
     }
@@ -80,11 +81,17 @@ public class Storage {
                         else
                             fw.write("E|0|"+t.getContent()+"|"+t.getTime());
                         break;
+                    default:
+                        System.out.println("Whoops, this should not happen");
+                        break;
                 }
+                fw.write("\n");
             }
+
+            fw.close();
         }
         catch (IOException e){
-                System.out.println("Whoops, an error occurs in DUKE."+
+                System.out.println("Whoops, an error occurs while saving."+
                         " Please contact developers");
         }
     }

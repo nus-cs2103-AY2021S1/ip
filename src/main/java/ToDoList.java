@@ -10,17 +10,31 @@ public class ToDoList{
      * command is read.
      */
 
-    public static ToDoList start(){
+    public ToDoList(ArrayList<Task> list) {
+        todoList = list;
+        getUndoneCount(todoList);
+    }
+
+    public ToDoList run(){
         Scanner sc = new Scanner(System.in);
         Command command = Command.INIT;
-        ToDoList todo = new ToDoList();
         while (command != Command.BYE){      //when last command was bye
             System.out.print("> ");
             command = Command.getCommand(sc.nextLine());
-            todo.runCommand(command);
+            runCommand(command);
         }
         sc.close();
-        return todo;
+        return this;
+    }
+
+    private int getUndoneCount(ArrayList<Task> list) {
+        undoneCount = 0;
+        for (Task t:list){
+            if (!t.checkDone())
+                undoneCount++;
+        }
+
+        return undoneCount;
     }
 
     private void runCommand(Command command){
@@ -203,6 +217,10 @@ public class ToDoList{
         } catch (IndexOutOfBoundsException e){
             throw new IndexOutOfBoundsException();
         }
+    }
+
+    public ArrayList<Task> getTodoList(){
+        return todoList;
     }
 
     private void print(String str){
