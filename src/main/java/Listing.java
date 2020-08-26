@@ -17,6 +17,18 @@ public class Listing {
         }
     }
 
+    public void checkDoneness(String s) {
+        if (s.equals("1")) {
+            this.done = true;
+        } else {
+            this.done = false;
+        }
+    }
+
+    public String[] toArray() {
+        return new String[2];
+    }
+
     public String toString(){
         return this.title;
     }

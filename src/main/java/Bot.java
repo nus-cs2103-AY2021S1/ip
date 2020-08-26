@@ -5,16 +5,16 @@ import java.util.Scanner;
 
 public class Bot {
     public Bot() {
+        printer.greeting();
     }
 
-    String LINE = "    ____________________________________________________________";
-    String GOT_IT = "     Got it. I've added this task: ";
-    String WHITE_SPACE_SEVEN = "       ";
+    Printer printer = new Printer();
     ArrayList<Listing> list = new ArrayList<Listing>();
     Parser parser = new Parser();
+    String LINE = "    ____________________________________________________________";
+    String WHITE_SPACE_SEVEN = "       ";
 
-
-    public void serve() {
+    public void serve() { //run
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {
@@ -26,9 +26,10 @@ public class Bot {
                 String dateInfo = parsedInfo[2];
                 switch (command) {
                     case ("bye"):
-                        break;
+                        printer.farewell();
+                        return;
                     case ("list"):
-                        returnListings();
+                        printReturns();
                         break;
                     case ("done"):
                         doneListings(Integer.valueOf(commandDetail));
@@ -63,9 +64,9 @@ public class Bot {
                         throw new UndefinedException();
                 }
             } catch (NoDescriptionException e) {
-                noDescriptionMessage(e.s);
+                printer.noDescriptionMessage(e.s);
             } catch (UndefinedException e) {
-                undefinedExceptionMessage();
+                printer.undefinedExceptionMessage();
             }
         }
     }
@@ -73,36 +74,29 @@ public class Bot {
 
     public void addListings(String[] details) {
         int size = list.size() + 1;
-        String s = "";
         String taskInfo = details[1];
         String dateInfo = details[2];
         switch (details[0]) {
             case ("todo"):
                 ToDo todo = new ToDo(taskInfo);
                 list.add(todo);
-                s = LINE + "\n" + GOT_IT + "\n" + WHITE_SPACE_SEVEN + todo.toString() +
-                        "\n" + "     Now you have " + size + " tasks in the list." + "\n" + LINE;
-                System.out.println(s);
+                printer.printListing(todo, size);
                 break;
             case ("deadline"):
                 Deadline deadline = new Deadline(taskInfo, dateInfo);
                 list.add(deadline);
-                s = LINE + "\n" + GOT_IT + "\n" + WHITE_SPACE_SEVEN + deadline.toString() +
-                        "\n" + "     Now you have " + size + " tasks in the list." + "\n" + LINE;
-                System.out.println(s);
+                printer.printListing(deadline, size);
                 break;
             case ("event"):
                 Event event = new Event(taskInfo, dateInfo);
                 list.add(event);
-                s = LINE + "\n" + GOT_IT + "\n" + WHITE_SPACE_SEVEN + event.toString() +
-                        "\n" + "     Now you have " + size + " tasks in the list." + "\n" + LINE;
-                System.out.println(s);
+                printer.printListing(event, size);
                 break;
         }
     }
 
 
-    public void returnListings() {
+    protected void printReturns() {
         System.out.println(LINE);
         System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
@@ -120,15 +114,7 @@ public class Bot {
         System.out.println(s);
     }
 
-    public void undefinedExceptionMessage() {
-        System.out.println(LINE + "\n" + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-("
-                + "\n" + LINE);
-    }
 
-    public void noDescriptionMessage(String s) {
-        System.out.println(LINE + "\n" + "     ☹ OOPS!!! The description of a " + s + " cannot be empty."
-                + "\n" + LINE);
-    }
 
     public void deleteMessage(Integer num) {
         System.out.println(LINE + "\n" + "     Noted. I've removed this task: \n" + WHITE_SPACE_SEVEN +
