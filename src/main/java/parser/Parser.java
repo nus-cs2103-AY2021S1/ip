@@ -55,6 +55,8 @@ public class Parser {
             return taskList.completeItem(input);
         case "delete":
             return taskList.deleteItem(input);
+        case "find":
+            return taskList.findItem(input);
         case "todo":
             String todo = input.substring(4);
             return taskList.addItem(command, todo);

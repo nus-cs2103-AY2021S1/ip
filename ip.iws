@@ -8,7 +8,10 @@
   <component name="ChangeListManager">
     <list default="true" id="dcc7396a-4a04-47f3-9835-d9f0d7777614" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/ip.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ip.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/duke.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/duke.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/Duke.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/task/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tasklist/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tasklist/TaskList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

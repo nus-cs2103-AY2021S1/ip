@@ -44,9 +44,18 @@ public class Task {
     }
 
     /**
+     * Returns the description of the task
+     * @return String description of task
+     */
+    public String getTask() {
+        return this.item;
+    }
+
+    /**
      * It returns the String inputted by the user
      *
      * @return String to be printed to the user
+     * @return
      */
     public String getInput() {
         return this.item;
