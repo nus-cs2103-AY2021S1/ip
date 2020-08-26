@@ -5,7 +5,7 @@ import duke.ui.UIPrint;
 
 public class ToDo extends Task {
 
-    public ToDo(String icon, String description, String taskInfo) {
+    private ToDo(String icon, String description, String taskInfo) {
 
         super(icon, description, taskInfo);
     }
