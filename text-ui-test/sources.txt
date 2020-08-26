@@ -1,8 +1,24 @@
-../src/main/java/Deadline.java
-../src/main/java/Duke.java
-../src/main/java/Event.java
-../src/main/java/InadequateCommandException.java
-../src/main/java/DukeException.java
-../src/main/java/InvalidIndexException.java
-../src/main/java/Task.java
-../src/main/java/ToDo.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\Duke.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\command\Command.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\command\DeadlineCommand.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\command\DeleteCommand.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\command\DoneCommand.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\command\EventCommand.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\command\ExitCommand.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\command\FindCommand.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\command\ListCommand.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\command\TaskCreationCommand.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\command\ToDoCommand.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\exception\DukeException.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\exception\InadequateCommandException.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\exception\InvalidDateFormatException.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\exception\InvalidIndexException.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\parser\DateParser.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\parser\Parser.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\storage\Storage.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\task\Deadline.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\task\Event.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\task\Task.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\task\TaskList.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\task\ToDo.java
+D:\Duong\2021_Sem1\CS2103T\independent project\src\main\java\duke\ui\Ui.java

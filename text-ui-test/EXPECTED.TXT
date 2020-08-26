@@ -15,8 +15,8 @@ ________________________________________
 Your command:
 ________________________________________
 Got it. I've added this task:
-[T] [Not done] borrow book
-You have 1 tasks in your list
+[T] [?] borrow book
+You have 1 task(s) in your list
 ________________________________________
 Your command:
 ________________________________________
@@ -24,14 +24,14 @@ OOPS, the description of a todo cannot be empty
 ________________________________________
 Your command:
 ________________________________________
-Here are the task(s) in your lists:
-1. [T] [Not done] borrow book
+Here are the task(s) in your list:
+1. [T] [?] borrow book
 ________________________________________
 Your command:
 ________________________________________
 Got it. I've added this task:
-[D] [Not done] return book (by: Sunday)
-You have 2 tasks in your list
+[D] [?] return book (by: Sunday)
+You have 2 task(s) in your list
 ________________________________________
 Your command:
 ________________________________________
@@ -56,8 +56,8 @@ ________________________________________
 Your command:
 ________________________________________
 Got it. I've added this task:
-[E] [Not done] project meeting (at: Mon 2-4pm)
-You have 3 tasks in your list
+[E] [?] project meeting (at: Mon 2-4pm)
+You have 3 task(s) in your list
 ________________________________________
 Your command:
 ________________________________________
@@ -86,32 +86,30 @@ ________________________________________
 Your command:
 ________________________________________
 Good job bud! I've marked this task as done:
-[T] [Done] borrow book
+[T] [?] borrow book
 ________________________________________
 Your command:
 ________________________________________
-Invalid index. Please input a number between 1 and 3
+Invalid index
 ________________________________________
 Your command:
 ________________________________________
-Invalid index. Please input a number between 1 and 3
-________________________________________
-Your command:
-________________________________________
-Noted. I've deleted this task:
-[D] [Not done] return book (by: Sunday)
-You have 2 tasks in your list
+Invalid index
 ________________________________________
 Your command:
 ________________________________________
 Noted. I've deleted this task:
-Invalid index. Please input a number between 1 and 2
+[D] [?] return book (by: Sunday)
+You have 2 task(s) in your list
 ________________________________________
 Your command:
 ________________________________________
-Invalid index. Please input a number between 1 and 2
+Invalid index
+________________________________________
+Your command:
+________________________________________
+Invalid index
 ________________________________________
 Your command:
 ________________________________________
 Bye human. See you again soon!
-________________________________________
