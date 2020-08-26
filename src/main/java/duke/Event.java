@@ -31,14 +31,14 @@ public class Event extends Task {
         } catch (Exception e) {
             throw new DukeException("Please input a valid date and time in the format yyyy-mm-dd HH:MM");
         }
-
     }
-
+    
     /**
      * Returns formatted date and time string of an event task.
      * @return Formatted date and time string of the event task.
      */
-    public String dateAndTimeBracket() {
+    public String getDateAndTimeBracket() {
+
         if (this.time == null) {
             return String.format("(by: %s)", this.date.format(dateFormatter));
         } else {
@@ -53,6 +53,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[E][%s] %s %s",
-                this.getStatusIcon(), this.description, this.dateAndTimeBracket());
+                this.getStatusIcon(), this.description, this.getDateAndTimeBracket());
     }
 }

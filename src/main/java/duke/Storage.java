@@ -87,8 +87,10 @@ public class Storage {
                 } else if (t instanceof Event) {
                     type = "E";
                 }
-                if (t.isDone()) done = 1;
-
+                
+                if (t.isDone()) {
+                    done = 1;
+                }
                 FileWriter fw = new FileWriter("storage" + File.separator + "data.txt", true);
                 fw.write(globalIndex + "|" + type + "|" + done + "|" + splitTask[1] + "\n");
                 globalIndex++;
@@ -97,7 +99,6 @@ public class Storage {
                 System.out.println(e);
             }
         }
-        
     }
 
     /**

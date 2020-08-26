@@ -6,17 +6,19 @@ package duke;
 public class Parser {
     private String sanitisedUserInput = "";
     private String[] splitUserInput = new String[0];
-
+    
     /**
      * Creates an instance of a parser.
      */
-    public Parser() {}
+    public Parser() {
+    }
 
     /**
      * Returns String with trimmed leading white spaces.
      * @param input String to be trimmed of leading white spaces.
      * @return String that has been trimmed of leading white spaces.
      */
+
     public String sanitiseInput(String input) {
         return input.stripLeading();
     }

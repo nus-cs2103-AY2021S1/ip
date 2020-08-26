@@ -111,17 +111,17 @@ public class TaskList {
             validateSlashCommands(splitTask);
 
             switch(splitTask[0].toLowerCase()) {
-                case "todo":
-                    newTask = new ToDo(splitTask[1]);
-                    break;
-                case "deadline":
-                    newTask = new Deadline(splitTask[1]);
-                    break;
-                case "event":
-                    newTask = new Event(splitTask[1]);
-                    break;
-                default:
-                    throw new DukeException("I'm afraid I do not understand that command, Your Majesty.");
+            case "todo":
+                newTask = new ToDo(splitTask[1]);
+                break;
+            case "deadline":
+                newTask = new Deadline(splitTask[1]);
+                break;
+            case "event":
+                newTask = new Event(splitTask[1]);
+                break;
+            default:
+                throw new DukeException("I'm afraid I do not understand that command, Your Majesty.");
             }
             if (newTask != null) {
                 storedTasks.add(newTask);
