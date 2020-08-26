@@ -6,6 +6,12 @@ public class Parser {
         this.taskList = taskList;
     }
 
+    /**
+     * Run commands and seperate them according to types
+     * @param command the command
+     * @throws DukeException an DukeException that stores the information to be printed
+     * @throws Exception
+     */
     public void runCommand(Command command) throws DukeException, Exception{
         Task task;
         switch (command) {
@@ -45,12 +51,26 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse the content of TodoTask and pass parsed content to taskList
+     * @param content content of parsed event
+     * @return a Task object
+     * @throws EmptyDescriptionException
+     */
     public Task parseTodoTask(String content) throws EmptyDescriptionException{
         if (content.length() == 0)
             throw new EmptyDescriptionException("TODO");
         return taskList.addTodoTask(content);
     }
 
+    /**
+     * Parse the content of DeadlineTask and pass parsed content to taskList
+     * @param content content of parsed event
+     * @return a Task object
+     * @throws EmptyDescriptionException
+     * @throws ParseErrorException
+     * @throws WrongDescriptionException
+     */
     public Task parseDeadlineTask(String content) throws EmptyDescriptionException, ParseErrorException, WrongDescriptionException{
         if (content.length() <= 0)
             throw new EmptyDescriptionException("DEADLINE");
@@ -66,6 +86,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse the content of EventTask and pass parsed content to taskList
+     * @param content content of parsed task
+     * @return a Task object
+     * @throws EmptyDescriptionException
+     * @throws ParseErrorException
+     * @throws WrongDescriptionException
+     */
     public Task parseEventTask(String content) throws EmptyDescriptionException, ParseErrorException, WrongDescriptionException{
         if (content.length() <= 0)
             throw new EmptyDescriptionException("EVENT");
@@ -81,6 +109,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse the content of a Delete command and ask taskList to delete it.
+     * @param content content of parsed command
+     * @return a Task object indicates the requested task
+     * @throws DukeException
+     * @throws WrongDescriptionException
+     * @throws EmptyDescriptionException
+     */
     public Task parseDone(String content) throws DukeException, WrongDescriptionException, EmptyDescriptionException{
         try {
             if (content.length() < 1)
@@ -96,6 +132,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse the content of a Done command and ask taskList to finish it.
+     * @param content content of parsed command
+     * @return a Task object indicates the requested task
+     * @throws DukeException
+     * @throws WrongDescriptionException
+     * @throws EmptyDescriptionException
+     */
     public Task parseDelete(String content) throws DukeException, WrongDescriptionException, EmptyDescriptionException{
         try {
             if (content.length() < 1)

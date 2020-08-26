@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a user interface and is in charge of printing contents to screen
+ */
 public class Ui {
 
     private void welcome(){
@@ -14,6 +17,11 @@ public class Ui {
         System.out.println("What you are going to do today?");
     }
 
+    /**Reads incoming commands and use a parser to pase it.
+     *
+     * @param parser a parser used to parse incoming commands
+     * @return the User interface itself
+     */
     public Ui read(Parser parser){
         welcome();
         Scanner sc = new Scanner(System.in);
@@ -31,6 +39,11 @@ public class Ui {
         return this;
     }
 
+    /**
+     * Prints all the tasks stored in memory
+     *
+     * @param todoList a list contains all the tasks
+     */
     static public void printList(ArrayList<Task> todoList){
         for (int i = 0; i < todoList.size(); i++){
             Task task = todoList.get(i);
@@ -50,6 +63,13 @@ public class Ui {
         print(err);
     }
 
+    /**
+     * Print TodoTasks to screen
+     *
+     * @param taskContent content of todo task
+     * @param size total number of tasks left in the list
+     * @param undoneCount number of tasks in the list that has not been done.
+     */
     static public void printTodoTask(String taskContent, int size, int undoneCount){
         Ui.print("The following task has been added to your list:");
         Ui.print("  [T][ ] " + taskContent);
@@ -57,6 +77,13 @@ public class Ui {
         Ui.print(String.format("There are %d tasks waiting to be done.", undoneCount));
     }
 
+    /**
+     * Print DeadlineTasks to screen
+     *
+     * @param taskContent content of deadline task
+     * @param size total number of tasks left in the list
+     * @param undoneCount number of tasks in the list that has not been done.
+     */
     static public void printDeadlineTask(String taskContent, int size, int undoneCount){
         Ui.print("The following task has been added to your list:");
         Ui.print("  [D][ ] " + taskContent);
@@ -64,6 +91,13 @@ public class Ui {
         Ui.print(String.format("There are %d tasks waiting to be done.", undoneCount));
     }
 
+    /**
+     * Print EventTasks to screen
+     *
+     * @param taskContent content of event task
+     * @param size total number of tasks left in the list
+     * @param undoneCount number of tasks in the list that has not been done.
+     */
     static public void printEventTask(String taskContent, int size, int undoneCount){
         Ui.print("The following task has been added to your list:");
         Ui.print("  [E][ ] " + taskContent);
@@ -71,6 +105,12 @@ public class Ui {
         Ui.print(String.format("There are %d tasks waiting to be done.", undoneCount));
     }
 
+    /**
+     * Inform the used a task is deleted and print the information on screen
+     *
+     * @param task the deleted task
+     * @param undoneCount number of tasks in the list that has not been done.
+     */
     static public void printDelete(Task task, int undoneCount) {
         Ui.print("Nice! I've deleted following task:");
         if (task.checkDone())
@@ -80,7 +120,12 @@ public class Ui {
         Ui.print(String.format("Now you have %d tasks waiting to be done.", undoneCount));
     }
 
-
+    /**
+     * Inform the used a task is done and print the information on screen
+     *
+     * @param task the finished task
+     * @param undoneCount number of tasks in the list that has not been done.
+     */
     static public void printDone(Task task, int undoneCount) {
         Ui.print("Nice! I've marked following task as done:");
         if (task.checkDone())
