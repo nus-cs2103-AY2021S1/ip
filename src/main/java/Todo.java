@@ -1,21 +1,21 @@
 public class Todo extends Task {
-    public Todo(String task) {
-        super(task);
+    public Todo(String description) {
+        super(description);
     }
     
     @Override
     public String writeMessage() {
         String done = "";
-        if (this.done) {
+        if (this.isDone) {
             done = "✓";
         } else {
             done = "✗";
         }
-        return String.format("T | %s | %s", done, this.task);
+        return String.format("T | %s | %s", done, this.description);
     }
 
     @Override
     public String toString() {
-        return "[T][" + (this.done ? "✓" : "✗") + "] " + this.task;
+        return "[T][" + (this.isDone ? "✓" : "✗") + "] " + this.description;
     }
 }
