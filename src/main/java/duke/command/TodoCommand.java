@@ -20,5 +20,4 @@ public class TodoCommand extends AddCommand {
         ui.showAddMessage(task, manager.getTasks().size());
         storage.saveTasks(manager.getTasks());
     }
-    
 }

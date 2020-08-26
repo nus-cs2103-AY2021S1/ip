@@ -12,5 +12,4 @@ public class InvalidCommand extends Command {
         String errorMessage = "Sorry! I don't know what that means...\n";
         throw new DukeException(errorMessage);
     }
-    
 }

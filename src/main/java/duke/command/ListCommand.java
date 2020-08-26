@@ -11,5 +11,4 @@ public class ListCommand extends Command {
     public void execute(TaskManager manager, Ui ui, Storage storage) throws DukeException {
         ui.displayTasks(manager.getTasks());
     }
-    
 }

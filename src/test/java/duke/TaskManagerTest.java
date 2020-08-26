@@ -1,11 +1,12 @@
 package duke;
 
-import duke.task.Task;
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.task.Task;
 
 public class TaskManagerTest {
     @Test
