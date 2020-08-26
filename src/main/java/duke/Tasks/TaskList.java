@@ -13,14 +13,13 @@ public class TaskList {
 
     /** A list to store all user tasks. */
     private ArrayList<Task> listOfTasks;
-
-    private ArrayList<String> preProcessedTask;
+    private ArrayList<String> preProcessedTasks;
 
     /**
      * Constructor to create an empty taskList.
      */
     public TaskList() {
-        this.preProcessedTask = new ArrayList<>();
+        this.preProcessedTasks = new ArrayList<>();
         this.listOfTasks = new ArrayList<>();
     }
 
@@ -29,7 +28,7 @@ public class TaskList {
      * @param inputList List of tasks from data file.
      */
     public TaskList(ArrayList<String> inputList){
-        this.preProcessedTask = inputList;
+        this.preProcessedTasks = inputList;
         this.listOfTasks = new ArrayList<>();
     }
 
@@ -126,7 +125,7 @@ public class TaskList {
      */
     public ArrayList<String> convertToFile() {
         ArrayList<String> dataFile = new ArrayList<>();
-        for (Task task : this.listOfTasks){
+        for (Task task: this.listOfTasks){
             dataFile.add(task.toData());
         }
         return dataFile;
