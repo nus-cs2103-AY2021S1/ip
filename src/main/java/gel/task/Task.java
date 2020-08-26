@@ -1,9 +1,17 @@
 package gel.task;
 
+/**
+ * Represents task as a String and if the task is done.
+ */
 public class Task {
     protected String description;
     protected boolean done;
 
+    /**
+     * Constructor for <code>Task</code> class.
+     *
+     * @param description What the task is.
+     */
     public Task(String description) {
         this.description = description;
         this.done = false;

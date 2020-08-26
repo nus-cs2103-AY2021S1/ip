@@ -3,6 +3,9 @@ package gel.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A type of <code>Task</code> with a date and time description of when the task is due.
+ */
 public class Deadline extends Task {
 
     protected String byString;

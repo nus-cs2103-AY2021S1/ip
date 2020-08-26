@@ -4,10 +4,14 @@ import gel.task.Task;
 
 import java.util.List;
 
+/**
+ * Deals with interactions with the user.
+ */
 public class Ui {
 
     public void showLoadingError() {
-        System.out.println("    Lol... did not manage to load storage data...");
+        System.out.println("    Lol... Did not manage to load storage data..."
+                + " Creating new TaskList now...");
     }
 
     public void showWelcomeMessage() {

@@ -3,6 +3,9 @@ package gel.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A type of <code>Task</code> with a date and time description of when the event is heppening.
+ */
 public class Event extends Task {
 
     protected String atString;
