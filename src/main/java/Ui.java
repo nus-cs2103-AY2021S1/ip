@@ -21,6 +21,9 @@ public class Ui {
     /** The Scanner object for user inputs */
     private final Scanner sc;
 
+    /** The line for enclosing messages */
+    private final String LINE = "    --------------------------------------------------------------";
+
     /**
      * Constructor for the Ui class.
      * The scanner is being initialized together with the Ui object.
@@ -51,7 +54,9 @@ public class Ui {
      * Prints the exit message before the application closes.
      */
     public void showExit() {
-        sendMessage("Have a good day! Tebby logging off...");
+        String msg = LINE + "\n    Have a good day! Tebby logging off...\n";
+        msg += "    ----------------------------X---------------------------------";
+        System.out.println(msg);
     }
 
     /**
@@ -78,7 +83,7 @@ public class Ui {
                 break;
             }
         }
-        System.out.println(line + "\n    " + sb + "\n" + line);
+        System.out.println(LINE + "\n    " + sb + "\n" + LINE);
     }
 
     /**

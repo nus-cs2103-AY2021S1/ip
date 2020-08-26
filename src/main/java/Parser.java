@@ -69,16 +69,29 @@ public class Parser {
                 return new DoneCommand(i);
             } catch (NumberFormatException nfe) {
                 throw new DukeException("Invalid task number!");
+            } catch (ArrayIndexOutOfBoundsException aioobe) {
+                return new InvalidCommand("Hm? What task number have you done?");
             }
         case "list":
             return new ListCommand();
         case "delete":
         case "remove":
             try {
+                if (parsed[1].equals("all")) {
+                    return new RemoveCommand();
+                }
                 int i = Integer.parseInt(parsed[1]);
                 return new RemoveCommand(i);
             } catch (NumberFormatException nfe) {
                 throw new DukeException("Invalid task number!");
+            } catch (ArrayIndexOutOfBoundsException aioobe) {
+                return new InvalidCommand("Uh? What task number to remove?");
+            }
+        case "find":
+            try {
+                return new FindCommand(parsed[1]);
+            } catch (ArrayIndexOutOfBoundsException aioobe) {
+                return new InvalidCommand("Hm? What do you want to find?");
             }
         default:
             return new InvalidCommand();

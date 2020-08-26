@@ -91,6 +91,10 @@ public class TaskList {
         list.add(task);
     }
 
+    public Task get(int i) {
+        return list.get(i);
+    }
+
     /**
      * Removes the task of the given task number. The removed task
      * is then returned for the application to print or handle if required.
@@ -107,6 +111,10 @@ public class TaskList {
         } catch (IndexOutOfBoundsException ioobe) {
             throw new DukeException("Invalid task number!");
         }
+    }
+
+    public void removeAll() {
+        list.clear();
     }
 
     /**
@@ -162,5 +170,22 @@ public class TaskList {
             num++;
             }
         return msg.toString();
+    }
+
+    /**
+     *
+     * @param indices
+     * @return
+     */
+    public String getQueryResultMessage(List<Integer> indices) {
+        if (indices.isEmpty()) {
+            return "Search result is empty!";
+        }
+        StringBuilder msg = new StringBuilder();
+        for (int i: indices) {
+            msg.append(String.format("%d. %s", i + 1, list.get(i)));
+            msg.append("\n");
+        }
+        return msg.toString().strip();
     }
 }

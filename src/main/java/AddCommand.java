@@ -1,8 +1,8 @@
 public class AddCommand implements Command {
 
-    private String type;
+    private final String type;
 
-    private String description;
+    private final String description;
 
     public AddCommand(String type, String description) {
         this.type = type;

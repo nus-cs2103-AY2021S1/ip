@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Optional;
 
 /**
  * Event is a subtype of Task which requires an attendance at a fixed time.
@@ -10,6 +11,8 @@ import java.time.format.DateTimeParseException;
  *     [E][✘] birthday celebration (at: Mar 7 2020, 08:00 pm)
  *
  * This subtype uses the java.time package for its date and time.
+ * The time is optional, as depicted by the use of Optional class, as some
+ * tasks do not have exact stipulated time.
  */
 
 public class Event extends Task {
@@ -18,7 +21,7 @@ public class Event extends Task {
     protected LocalDate date;
 
     /** The time of the event. */
-    protected LocalTime time;
+    protected Optional<LocalTime> time;
 
     /**
      * Constructor for Event. The date time is a raw string which will
@@ -32,11 +35,15 @@ public class Event extends Task {
         try {
             String[] dateTime = at.split(" ");
             this.date = parseDate(dateTime[0]);
-            this.time = parseTime(dateTime[1]);
+            if (dateTime.length < 2) {
+                this.time = Optional.empty();
+            } else {
+                this.time = Optional.of(parseTime(dateTime[1]));
+            }
         } catch (DateTimeParseException de) {
-            throw new DukeException("Invalid date time format!");
+            throw new DukeException("Invalid date or time format!");
         } catch (ArrayIndexOutOfBoundsException aioobe) {
-            throw new DukeException("Missing date or time!");
+            throw new DukeException("Missing date!");
         }
     }
 
@@ -53,11 +60,15 @@ public class Event extends Task {
         try {
             String[] dateTime = at.split(" ");
             this.date = parseDate(dateTime[0]);
-            this.time = parseTime(dateTime[1]);
+            if (dateTime.length < 2) {
+                this.time = Optional.empty();
+            } else {
+                this.time = Optional.of(parseTime(dateTime[1]));
+            }
         } catch (DateTimeParseException de) {
-            throw new DukeException("Invalid date time format!");
+            throw new DukeException("Invalid date or time format!");
         } catch (ArrayIndexOutOfBoundsException aioobe) {
-            throw new DukeException("Missing date or time!");
+            throw new DukeException("Missing date!");
         }
     }
 
@@ -93,14 +104,21 @@ public class Event extends Task {
 
     @Override
     public String getDescription() {
-        return description + " / " + date + " " + time;
+        return String.format("%s / %s%s", description, date,
+                time.map(localTime -> " " + localTime).orElse(""));
     }
 
     @Override
     public String toString() {
-        return super.toString() + String.format(" (at: %s, %s)",
-                date.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
-                time.format(DateTimeFormatter.ofPattern("hh:mm a")));
+        String dt = String.format(" (at: %s",
+                date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        if (time.isPresent()) {
+            dt += String.format(", %s)",
+                    time.get().format(DateTimeFormatter.ofPattern("hh:mm a")));
+        } else {
+            dt += ")";
+        }
+        return super.toString() + dt;
     }
 
     @Override
