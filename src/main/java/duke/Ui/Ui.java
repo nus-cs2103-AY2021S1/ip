@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Ui {
 
-    Scanner sc;
+    private Scanner sc;
 
     public Ui() {
         this.sc = new Scanner(System.in);
@@ -56,7 +56,7 @@ public class Ui {
         System.out.println("    " + task.toString());
     }
 
-    public void markDelete(int listSize,Task task){
+    public void markDelete(int listSize, Task task){
         System.out.println("    Noted. I've removed this task:");
         System.out.println("    " + task.toString());
         System.out.println("    Now you have " + listSize + " tasks in the list.");

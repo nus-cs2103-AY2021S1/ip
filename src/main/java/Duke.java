@@ -2,7 +2,7 @@ import duke.Commands.Command;
 import duke.Exceptions.DukeException;
 import duke.Parser.Parser;
 import duke.Storage.Storage;
-import duke.Tasks.*;
+import duke.Tasks.TaskList;
 import duke.Ui.Ui;
 
 public class Duke {
@@ -14,6 +14,7 @@ public class Duke {
     public Duke(String filePath, String folderPath) {
         ui = new Ui();
         storage = new Storage(filePath, folderPath);
+
         try {
             tasks = new TaskList(storage.Load());
         } catch (DukeException e) {
@@ -25,6 +26,7 @@ public class Duke {
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
+
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();

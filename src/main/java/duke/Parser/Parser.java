@@ -1,6 +1,12 @@
 package duke.Parser;
 
-import duke.Commands.*;
+import duke.Commands.AddCommand;
+import duke.Commands.Command;
+import duke.Commands.DeleteCommand;
+import duke.Commands.DoneCommand;
+import duke.Commands.ExitCommand;
+import duke.Commands.ListCommand;
+
 import duke.Exceptions.DukeException;
 
 import java.time.LocalDate;
@@ -21,12 +27,13 @@ public class Parser {
         switch (userWord[0]) {
         case "list":
             return new ListCommand();
-
+            //Fallthrough
         case "todo":
             if (userWord.length == 1 || userWord[1].equals("")) {
                 throw new DukeException("   ☹ OOPS!!! The description of the command todo cannot be empty.");
             }
             return new AddCommand("todo", userWord[1]);
+            //Fallthrough
 
         case "deadline":
             if (userWord.length == 1 || userWord[1].equals("")) {
@@ -49,6 +56,7 @@ public class Parser {
                 throw new DukeException("   ☹ OOPS!!! It seems like you've provided us with the wrong date time format for your event. " +
                         "Please structure it as yyyy-mm-dd hh:mm");
             }
+            //Fallthrough
 
         case "event":
             if (userWord.length == 1 || userWord[1].equals("")) {
@@ -71,6 +79,7 @@ public class Parser {
                 throw new DukeException("   ☹ OOPS!!! It seems like you've provided us with the wrong date time format for your event. " +
                         "Please structure it as yyyy-mm-dd hh:mm");
             }
+            //Fallthrough
 
         case "done":
             if (userWord.length == 1 || userWord[1].equals("")) {
@@ -78,6 +87,7 @@ public class Parser {
             }
             int index = Integer.parseInt(userWord[1]) - 1;
             return new DoneCommand(index);
+            //Fallthrough
 
         case "delete":
             if (userWord.length == 1 || userWord[1].equals("")) {
@@ -85,9 +95,11 @@ public class Parser {
             }
             int index2 = Integer.parseInt(userWord[1]) - 1;
             return new DeleteCommand(index2);
+            //Fallthrough
 
         default:
             throw new DukeException("    Sorry! I'm not really sure what to do with this command yet ☹");
+            //Fallthrough
         }
     }
 }
