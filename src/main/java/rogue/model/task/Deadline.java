@@ -18,7 +18,8 @@ public class Deadline extends Task {
 
     @Override
     public String summarize() {
-        return String.format("D | %s | %s", super.summarize(), by);
+        return String.format("D | %s | %s", super.summarize(),
+                by.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
     }
 
     @Override

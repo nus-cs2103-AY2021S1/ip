@@ -18,7 +18,8 @@ public class Event extends Task {
 
     @Override
     public String summarize() {
-        return String.format("E | %s | %s", super.summarize(), at);
+        return String.format("E | %s | %s", super.summarize(),
+                at.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
     }
 
     @Override
