@@ -1,3 +1,6 @@
+/**
+ * Main driver class for Duke.
+ */
 public class Duke {
     protected Storage storage;
     protected Ui ui;

@@ -1,3 +1,6 @@
+/**
+ * Formats date for output.
+ */
 public class Date {
     private final int DAY, MONTH, YEAR;
     protected String date;
@@ -8,7 +11,6 @@ public class Date {
      * Instantiates Date object.
      * @param date Date from input file.
      */
-
     public Date(String date) {
         this.date = date;
         String[] dateElements = date.split("/");

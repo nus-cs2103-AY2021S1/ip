@@ -1,11 +1,26 @@
+/**
+ * Implements methods for FindCommand.
+ */
 public class FindCommand extends Command {
     private String keyword;
     boolean isExit;
 
+    /**
+     * Instantiates FindCommand object.
+     * @param keyword Keyword used to find matching tasks.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
+    /**
+     * Runs command to handle find command.
+     *
+     * @param arrayOfTasks Array of tasks that we have parsed.
+     * @param ui Ui object to aid in program execution.
+     * @param storage Storage object to aid in program execution.
+     * @return void
+     */
     public void runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) {
         TaskList matchedTasksList = new TaskList();
         int arraySize = arrayOfTasks.taskArraySize();
@@ -38,6 +53,11 @@ public class FindCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the program has to exit Duke.
+     *
+     * @return exitCheck as False
+     */
     public boolean exitCheck() {
         isExit = false;
         return isExit;

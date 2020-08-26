@@ -3,6 +3,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+/**
+ * Implements methods that prints out messages to console.
+ */
+
 public class Ui {
     private final BufferedReader INPUT_LINE;
 

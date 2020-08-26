@@ -3,6 +3,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+/**
+ *  Deals with saving and loading tasks from input path.
+ */
 public class Storage {
     protected String path;
     protected boolean isFileChanged = false;

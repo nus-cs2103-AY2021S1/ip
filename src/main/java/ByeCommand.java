@@ -1,3 +1,6 @@
+/**
+ * Implements methods for ByeCommand.
+ */
 public class ByeCommand extends Command {
     protected boolean isExit;
 

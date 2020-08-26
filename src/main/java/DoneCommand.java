@@ -1,3 +1,6 @@
+/**
+ * Implements methods for DoneCommand.
+ */
 public class DoneCommand extends Command {
     protected int taskIndex;
     protected boolean isExit;

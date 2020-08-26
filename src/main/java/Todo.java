@@ -1,3 +1,6 @@
+/**
+ * Implements constructor methods for Todo.
+ */
 public class Todo extends Task {
     /**
      * Instantiates Todo object.

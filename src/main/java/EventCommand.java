@@ -1,3 +1,6 @@
+/**
+ * Implements methods for EventCommand.
+ */
 public class EventCommand extends Command {
     protected boolean isExit;
     protected Task eventTask;

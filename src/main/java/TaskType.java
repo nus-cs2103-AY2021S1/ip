@@ -1,3 +1,7 @@
+/**
+ * Ensures that these are the only 3 types of tasks.
+ */
+
 public enum TaskType {
     DEADLINE {
         /**

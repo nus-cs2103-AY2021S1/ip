@@ -1,3 +1,6 @@
+/**
+ * Implements methods for TodoCommand.
+ */
 public class TodoCommand extends Command {
     protected Task toDoTask;
     protected boolean isExit;

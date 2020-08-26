@@ -1,3 +1,6 @@
+/**
+ * Implements methods for DeleteCommand.
+ */
 public class DeleteCommand extends Command {
     protected boolean isExit;
     protected int taskIndex;

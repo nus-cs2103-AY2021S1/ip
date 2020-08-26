@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * Implements methods to manipulate the array containing all of the tasks.
+ */
+
 public class TaskList {
     protected ArrayList<Task> arrayOfTasks;
 

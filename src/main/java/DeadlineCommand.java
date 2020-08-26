@@ -1,3 +1,6 @@
+/**
+ * Implements methods for DeadlineCommand.
+ */
 public class DeadlineCommand extends Command {
     protected boolean isExit;
     protected Task deadlineTask;

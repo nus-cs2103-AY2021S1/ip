@@ -1,3 +1,6 @@
+/**
+ * Implements constructor methods for all types of tasks.
+ */
 public class Task {
     protected boolean isDone;
     protected String description;

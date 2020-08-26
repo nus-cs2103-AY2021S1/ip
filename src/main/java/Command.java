@@ -1,3 +1,6 @@
+/**
+ * Abstract class for all command classes.
+ */
 public abstract class Command {
     protected String typeOfCommand;
 

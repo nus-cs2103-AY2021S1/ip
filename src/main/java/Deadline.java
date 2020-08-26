@@ -1,3 +1,6 @@
+/**
+ * Implements constructor methods for Deadline.
+ */
 public class Deadline extends Task {
     protected Date deadlineDate;
     protected Timing deadlineTime;

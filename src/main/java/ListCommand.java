@@ -1,3 +1,6 @@
+/**
+ * Implements methods for ListCommand.
+ */
 public class ListCommand extends Command {
     protected boolean isExit;
 

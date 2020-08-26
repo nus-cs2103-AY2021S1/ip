@@ -1,3 +1,6 @@
+/**
+ * Implements constructor methods for Event.
+ */
 public class Event extends Task {
     protected Date eventDate;
     protected Timing eventTime;

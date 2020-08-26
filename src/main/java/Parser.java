@@ -1,5 +1,7 @@
+/**
+ *  Parses user input.
+ */
 public class Parser {
-
     public static Command parse(String inputLine) throws DukeException {
         Command newTaskObject;
         String[] userInputArray = inputLine.split(" ");

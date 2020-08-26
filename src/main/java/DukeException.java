@@ -1,3 +1,6 @@
+/**
+ * Implements exception methods for Duke.
+ */
 public class DukeException extends Exception {
     protected String errorMessage;
 

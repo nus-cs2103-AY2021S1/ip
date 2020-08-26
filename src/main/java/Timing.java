@@ -1,3 +1,6 @@
+/**
+ * Formats timing for output.
+ */
 public class Timing {
     private final int MINUTE, HOUR;
     private final boolean isPM;
