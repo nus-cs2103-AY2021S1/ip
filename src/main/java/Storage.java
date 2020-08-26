@@ -30,13 +30,13 @@ public class Storage {
 
     // Format of task in file is "D/0/return book/June 6th"
     // where "0" means undone while "1" means done
-    public ArrayList<Task> getList() throws FileNotFoundException {
+    public ArrayList<Task> getList() throws FileNotFoundException, InvalidDateTimeException {
         Scanner sc = new Scanner(this.file);
         ArrayList<Task> list = new ArrayList<>();
 
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
-            String[] split = line.split("/");
+            String[] split = line.split("//");
 
             if (split[0].equals("T")) {
                 String description = split[2];
@@ -47,16 +47,18 @@ public class Storage {
                 list.add(todo);
             } else if (split[0].equals("D")) {
                 String description = split[2];
-                String by = split[3];
-                Deadline deadline = new Deadline(description, by);
+                String date = split[3];
+                String time = split[4];
+                Deadline deadline = new Deadline(description, date, time);
                 if (split[1].equals("1")) {
                     deadline.markAsDone();
                 }
                 list.add(deadline);
             } else if (split[0].equals("E")) {
                 String description = split[2];
-                String at = split[3];
-                Event event = new Event(description, at);
+                String date = split[3];
+                String time = split[4];
+                Event event = new Event(description, date, time);
                 if (split[1].equals("1")) {
                     event.markAsDone();
                 }

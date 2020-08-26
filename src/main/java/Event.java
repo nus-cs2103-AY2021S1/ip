@@ -1,21 +1,21 @@
 public class Event extends Task {
 
-    protected String at;
+    private final DateAndTime datetime;
 
-    public Event(String description, String at) {
+    public Event(String description, String date, String time) throws InvalidDateTimeException {
         super(description);
-        this.at = at;
+        this.datetime = new DateAndTime(date, time);
     }
 
     @Override
     public String toData() {
         return checkDone()
-                ? "E/1/" + getDescription() + "/" + this.at
-                : "E/0/" + getDescription() + "/" + this.at;
+                ? "E//1//" + getDescription() + "//" + this.datetime.getDate() + "//" + this.datetime.getTime()
+                : "E//0//" + getDescription() + "//" + this.datetime.getDate() + "//" + this.datetime.getTime();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + this.datetime + ")";
     }
 }

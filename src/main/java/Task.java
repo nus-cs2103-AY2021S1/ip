@@ -26,8 +26,8 @@ public class Task {
 
     public String toData () {
         return checkDone()
-                ? "T/1/" + getDescription()
-                : "T/0/" + getDescription();
+                ? "T//1//" + getDescription()
+                : "T//0//" + getDescription();
     }
 
     public String toString() {

@@ -45,7 +45,7 @@ public class Duke {
         this.output = GREET;
         try {
             tempList = storage.getList();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | InvalidDateTimeException e) {
             System.out.println("New list initialized.");
             tempList = new ArrayList<>();
         }
@@ -71,6 +71,23 @@ public class Duke {
         storage.updateFile(this.list);
     }
 
+
+    private String setDate(String date) throws InvalidDateTimeException {
+        String[] dateArray = date.split("/");
+        // date needs to be in format YYYY/MM/DD
+        if (date.length() != 10 || dateArray.length != 3) {
+            throw new InvalidDateTimeException();
+        }
+        return dateArray[0] + "-" + dateArray[1] + "-" + dateArray[2];
+    }
+
+    private String setTime(String time) throws InvalidDateTimeException {
+        if (time.length() != 4) {
+            throw new InvalidDateTimeException();
+        }
+        return time.substring(0, 2) + ":" + time.substring(2);
+    }
+
     private String addMessage(Task t) {
         return "Got it. I've added this task:\n"
                 + t.toString()
@@ -86,15 +103,28 @@ public class Duke {
         return addMessage(todo);
     }
 
-    private String addDeadline(String description, String by) throws IOException {
-        Deadline deadline = new Deadline(description, by);
+    private String addDeadline(String description, String datetime) throws InvalidDateTimeException, IOException {
+        String[] datetimeArray = datetime.split(" ");
+        if (datetimeArray.length != 2) {
+            throw new InvalidDateTimeException();
+        }
+        String date = setDate(datetimeArray[0]);
+        String time = setTime(datetimeArray[1]);
+        System.out.println(date + " and " + time);
+        Deadline deadline = new Deadline(description, date, time);
         this.list.add(deadline);
         updateStorage();
         return addMessage(deadline);
     }
 
-    private String addEvent(String description, String at) throws IOException {
-        Event event = new Event(description, at);
+    private String addEvent(String description, String datetime) throws InvalidDateTimeException, IOException {
+        String[] datetimeArray = datetime.split(" ");
+        if (datetimeArray.length != 2) {
+            throw new InvalidDateTimeException();
+        }
+        String date = setDate(datetimeArray[0]);
+        String time = setTime(datetimeArray[1]);
+        Event event = new Event(description, date, time);
         this.list.add(event);
         updateStorage();
         return addMessage(event);
@@ -106,11 +136,6 @@ public class Duke {
         int listSize = this.list.size();
         for (int i = 0; i < listSize; i++) {
             lst.append((i + 1) + ". " + this.list.get(i).toString() + "\n");
-            //if (i + 1 != listSize) {
-            //    lst.append((i + 1) + ". " + this.list.get(i).toString() + "\n");
-            //} else {
-            //    lst.append((i + 1) + ". " + this.list.get(i).toString());
-            //}
         }
         return lst.toString();
     }
@@ -196,7 +221,7 @@ public class Duke {
                 String deadlineDescription = deadlineTaskArray[0];
                 String by = deadlineTaskArray[1];
                 String outputDeadline = addDeadline(deadlineDescription, by);
-                return new Duke(deadlineDescription, this.list);
+                return new Duke(outputDeadline, this.list);
 
             case EVENT:
                 if (input.length() < 6) {
