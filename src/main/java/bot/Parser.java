@@ -14,7 +14,7 @@ public class Parser {
         }
     }
 
-    public String parseTodo(String input) throws InvalidInputException {
+    public String parseSingleArg(String input) throws InvalidInputException {
         String[] words = input.split(" ");
         StringBuilder name = new StringBuilder();
         for (int i = 1; i < words.length; i++) {

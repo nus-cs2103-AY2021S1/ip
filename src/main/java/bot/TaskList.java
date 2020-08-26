@@ -36,6 +36,15 @@ public class TaskList {
         }
     }
 
+    public ArrayList<Task> filter(String name) {
+        ArrayList<Task> newList = new ArrayList<>();
+        for (Task task: this.list) {
+            newList.add(task);
+        }
+        newList.removeIf(x -> (!x.getName().contains(name)));
+        return newList;
+    }
+
     public ArrayList<Task> getList() {
         return this.list;
     }

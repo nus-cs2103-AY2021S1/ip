@@ -1,6 +1,7 @@
 package bot;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Bot {
@@ -43,7 +44,7 @@ public class Bot {
                         ui.showMessage(cmdList());
                         break;
                     case TODO:
-                        ui.showMessage(cmdTodo(parser.parseTodo(input)));
+                        ui.showMessage(cmdTodo(parser.parseSingleArg(input)));
                         break;
                     case DEADLINE:
                         ui.showMessage(cmdDeadline(parser.parseDeadline(input)));
@@ -57,6 +58,9 @@ public class Bot {
                     case DELETE:
                         ui.showMessage(cmdDelete(parser.parseIndex(input)));
                         break;
+                    case FIND:
+                        ui.showMessage(cmdFind(parser.parseSingleArg(input)));
+                        break;
                     default:
                         ui.showMessage("Valid cmd given. " +
                                 "However it is not supported yet");
@@ -65,6 +69,26 @@ public class Bot {
             } catch (InvalidCommandException | InvalidInputException e) {
                 System.out.println(responseWrapper(e.getMessage()));
             }
+        }
+    }
+
+    private String cmdFind(String name) throws InvalidInputException {
+        try {
+            ArrayList<Task> currList = this.taskList.filter(name);
+            int index = 0;
+            StringBuilder string = new StringBuilder("Here are the tasks in your list:\n    ");
+            for (Task item : currList) {
+                index++;
+                string.append(index).append(".").append(item).append("\n    ");
+            }
+            if (index == 0) {
+                return "Nothing in the list";
+            }
+            string.delete(string.length() - 5, string.length());
+            return string.toString();
+        } catch (Exception e) {
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
+                    " Thank you.");
         }
     }
 
@@ -115,7 +139,7 @@ public class Bot {
             string.append(index).append(".").append(item).append("\n    ");
         }
         if (index == 0) {
-            return responseWrapper("Nothing in the list");
+            return "Nothing in the list";
         }
         string.delete(string.length() - 5, string.length());
         return string.toString();
