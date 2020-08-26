@@ -21,6 +21,10 @@ public class Task {
         this.done = done;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public void doTask() {
         this.done = true;
     }
