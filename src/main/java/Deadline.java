@@ -1,14 +1,14 @@
 public class Deadline extends Task {
 
-    protected String by;
+    private final DateAndTime datetime;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String date, String time) throws InvalidDateTimeException {
         super(description);
-        this.by = by;
+        this.datetime = new DateAndTime(date, time);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + this.datetime + ")";
     }
 }
