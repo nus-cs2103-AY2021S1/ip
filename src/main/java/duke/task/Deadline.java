@@ -60,7 +60,8 @@ public class Deadline extends Task {
             return true;
         } else if (other instanceof Deadline) {
             Deadline otherDeadline = (Deadline) other;
-            return this.isEqual(otherDeadline);
+            boolean isDatetimeEqual = this.getTaskDatetime().equals(otherDeadline.getTaskDatetime());
+            return this.isEqual(otherDeadline) && isDatetimeEqual;
         }
         return false;
     }

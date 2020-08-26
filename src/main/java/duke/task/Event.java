@@ -60,7 +60,8 @@ public class Event extends Task{
             return true;
         } else if (other instanceof Event) {
             Event otherEvent = (Event) other;
-            return this.isEqual(otherEvent);
+            boolean isTimeEqual = this.getTaskDatetime().equals(otherEvent.getTaskDatetime());
+            return this.isEqual(otherEvent) && isTimeEqual;
         }
         return false;
     }
