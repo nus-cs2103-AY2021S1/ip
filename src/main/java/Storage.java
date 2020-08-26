@@ -47,7 +47,7 @@ public class Storage {
     }
 
     private static void addTaskToArrayList(String[] temp, ArrayList<Task> al) {
-        boolean isDone = Integer.parseInt(temp[1]) == 0;
+        boolean isDone = Integer.parseInt(temp[1]) == 1;
         switch (temp[0]) {
             case "T":
                 Todo td = new Todo(temp[2], isDone);
@@ -72,7 +72,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(duke, false);
 
-            for (Task t : al) {
+            for (Task t : tasks.al) {
                 int isDone = t.isDone ? 1 : 0;
 
                 switch (t.getClass().getName()) {
