@@ -9,6 +9,11 @@ public class Task {
 	public void markAsDone() {
 		this.isDone = true;
 	}
+	public void test() throws DukeException {
+		if (taskContent.length() == 0) {
+			throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
+		}
+	}
 	@Override
 	public String toString() {
 		// if (isDone) {

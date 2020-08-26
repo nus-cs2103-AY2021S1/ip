@@ -11,8 +11,9 @@ public class Duke {
         //         + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello! I'm Duke\nWhat can I do for you");
         ArrayList<Task> dataBase = new ArrayList<Task>();
-        String input = sc.nextLine();
+        String input = "";
         while (!input.equals(new String("bye"))) {
+        	input = sc.nextLine();
         	if (input.equals(new String("list"))) {
         		int num = 1;
         		System.out.println("Here are the tasks in your list:");
@@ -26,10 +27,17 @@ public class Duke {
         		currenTask.markAsDone();
         		System.out.println("Nice! I've marked this task as done:\n" + currenTask.toString());
         	} else if (input.substring(0,4).equals(new String("todo"))) {
+        		try {
+        			String taskContent = input.substring(5);
+        		} catch (Exception e) {
+        			System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
+        			continue;
+        		}
         		String taskContent = input.substring(5);
         		ToDo newTask = new ToDo(taskContent);
-        		dataBase.add(newTask);
-        		System.out.println("Got it. I've added this task:\n" + newTask.toString() + "\nNow you have " + dataBase.size() + " tasks in the list.");
+    			dataBase.add(newTask);
+    			System.out.println("Got it. I've added this task:\n" + newTask.toString() + "\nNow you have " + dataBase.size() + " tasks in the list.");
+
         	} else if (input.substring(0,8).equals(new String("deadline"))) {
         		String task  = input.substring(8);
         		int index = task.indexOf('/');
@@ -51,7 +59,6 @@ public class Duke {
         		System.out.println("added: " + input);
         		dataBase.add(new Task(input));
         	}
-        	input = sc.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
