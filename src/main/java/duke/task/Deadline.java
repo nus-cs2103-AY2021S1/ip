@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.enums.DateTimeFormat;
+import duke.enums.Message;
 import duke.exception.DukeException;
 
 import java.time.LocalDate;
@@ -69,7 +70,7 @@ public class Deadline extends Task {
             this.date = localDate;
             this.time = localTime;
         } catch (Exception e) {
-            throw new DukeException("what kinda date/time is that");
+            throw new DukeException(Message.ERROR_BAD_TIME_INPUT.getMsg());
             // todo: send this throwing of exception to the parser
         }
     }
@@ -94,7 +95,7 @@ public class Deadline extends Task {
                         // ON PURPOSE: ignored because we only want the formatter that handles things properly
                     }
                     return false;
-                }).findAny().orElseThrow(() -> new DukeException("Can't find Date Formatter"));
+                }).findAny().orElseThrow(() -> new DukeException(Message.ERROR_NO_DATE_FORMATTER.getMsg()));
     }
     
     /**
@@ -117,7 +118,7 @@ public class Deadline extends Task {
                         // ON PURPOSE: ignored because we only want the formatter that handles things properly
                     }
                     return false;
-                }).findAny().orElseThrow(() -> new DukeException("Can't find Time Formatter"));
+                }).findAny().orElseThrow(() -> new DukeException(Message.ERRR_NO_TIME_FORMATTER.getMsg()));
     }
 }
     

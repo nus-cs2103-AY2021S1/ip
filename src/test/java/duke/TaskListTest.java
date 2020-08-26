@@ -10,7 +10,7 @@ public class TaskListTest {
     
     public static TaskList testTaskList = new TaskList();
     
-    private static void initTest() throws DukeException {
+    public static void initTest() throws DukeException {
         String[] parsedInput1 = {"T", "kill me now"};
         String[] parsedInput2 = {"T", "i want ice cream"};
         String commandTag = "T";

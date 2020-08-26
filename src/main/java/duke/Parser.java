@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.enums.CommandWord;
 import duke.enums.Message;
@@ -42,6 +43,8 @@ public class Parser {
         } else if (keyword.equals(CommandWord.DONE_CMD.getCmd())
                 || keyword.equals(CommandWord.DELETE_CMD.getCmd())) {
             return parseDoneDelete(input);
+        } else if (words[0].equals("find")) {
+            return new FindCommand(input);
         } else { // parse the command based on the identified keyword:
             switch (keyword) {
             case "todo":

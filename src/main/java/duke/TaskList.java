@@ -122,6 +122,4 @@ public class TaskList implements Serializable {
                    : " undone tasks")
                 + " in the list.";
     }
-    
-    
 }
