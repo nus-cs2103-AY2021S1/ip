@@ -1,9 +1,9 @@
 public class Deadline extends Task {
-    private String deadline;
+    private DateTime deadline;
 
     public Deadline(String title, String deadline) {
         super(title);
-        this.deadline = deadline;
+        this.deadline = new DateTime(deadline);
     }
 
     @Override

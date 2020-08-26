@@ -1,9 +1,9 @@
 public class Event extends Task {
-    private String time;
+    private DateTime time;
 
     public Event(String title, String time) {
         super(title);
-        this.time = time;
+        this.time = new DateTime(time);
     }
 
     @Override
