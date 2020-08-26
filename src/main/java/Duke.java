@@ -6,15 +6,19 @@ public class Duke {
     private TaskList tasks;
     private Storage storage;
 
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+
     public Duke(String filepath) {
-        this.ui = new Ui();
-        this.storage = new Storage(filepath);
+        ui = new Ui();
+        storage = new Storage(filepath);
         try {
-            this.tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.load());
         } catch (FileNotFoundException | DukeException e) {
             ui.getError(e);
-            ui.say("No file has been created yet!");
-            this.tasks = new TaskList();
+            ui.say("It seems like you have no saved files! Creating one now...");
+            tasks = new TaskList();
         }
     }
 
@@ -32,9 +36,5 @@ public class Duke {
             }
         }
         ui.goodbye();
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

@@ -3,17 +3,19 @@ public class Task {
     protected boolean isDone;
     protected Type type;
 
-    public enum Type { TODO, DEADLINE, EVENT, NONE }
+    public enum Type {
+        TODO, DEADLINE, EVENT, NONE
+    }
 
-    protected Task(String description) {
-        this.description = description;
-        this.isDone = false;
-        this.type = Type.NONE;
+    protected Task(String desc) {
+        description = desc;
+        isDone = false;
+        type = Type.NONE;
     }
 
     @Override
     public String toString() {
-        return this.getTypeIcon() + this.getStatusIcon() + " " + this.description;
+        return this.getTypeIcon() + this.getStatusIcon() + " " + description;
     }
 
     protected String getStatusIcon() {
@@ -23,7 +25,7 @@ public class Task {
 
     protected String getTypeIcon() {
         String icon;
-        switch (this.type) {
+        switch (type) {
         case TODO:
             icon = "T";
             break;
@@ -37,12 +39,12 @@ public class Task {
             icon = "?";
             break;
         default:
-            icon = "X";
+            icon = "!";
         }
         return "[" + icon + "]";
     }
 
     public void markDone() {
-        this.isDone = true;
+        isDone = true;
     }
 }

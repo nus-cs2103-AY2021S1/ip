@@ -1,13 +1,13 @@
 public class TimedTask extends Task {
     protected String time;
 
-    public TimedTask(String description, String time) {
+    public TimedTask(String description, String when) {
         super(description);
-        this.time = time;
+        time = when;
     }
 
     @Override
     public String toString() {
-        return this.getTypeIcon() + this.getStatusIcon() + " " + this.description + " - " + this.time;
+        return this.getTypeIcon() + this.getStatusIcon() + " " + description + " - " + time;
     }
 }

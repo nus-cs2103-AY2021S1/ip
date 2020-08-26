@@ -1,17 +1,17 @@
 public class DukeException extends Exception {
     private String exception;
 
-    public DukeException(String exception) {
-        this.exception = exception;
+    public DukeException(String error) {
+        exception = error;
     }
 
     @Override
     public String getMessage() {
-        return this.exception;
+        return exception;
     }
 
     @Override
     public String toString() {
-        return "DukeException[" + this.exception + "]";
+        return "DukeException[" + exception + "]";
     }
 }

@@ -1,8 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,16 +10,20 @@ public class Storage {
     private File file;
 
     public Storage(String filepath) {
-        this.file = new File(filepath);
+        file = new File(filepath);
     }
 
     public ArrayList<Task> load() throws FileNotFoundException, DukeException {
-        Scanner scanner = new Scanner(file);
-        ArrayList<Task> tasks = new ArrayList<>();
-        while (scanner.hasNext()) {
-            tasks.add(getTask(scanner.nextLine()));
+        if (file.exists()) {
+            Scanner scanner = new Scanner(file);
+            ArrayList<Task> tasks = new ArrayList<>();
+            while (scanner.hasNext()) {
+                tasks.add(getTask(scanner.nextLine()));
+            }
+            return tasks;
+        } else {
+            throw new DukeException("No file found");
         }
-        return tasks;
     }
 
     public void write(TaskList tasks) throws IOException {

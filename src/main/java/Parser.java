@@ -42,9 +42,17 @@ public class Parser {
     }
 
     private static boolean isValidSize(String body, TaskList tasks) {
-        String num = body.split(" ", 2)[0];
-        int number = Integer.parseInt(num);
-        return tasks.size() >= number && number > 0;
+        if (body.length() > 0) {
+            String num = body;
+            try {
+                int number = Integer.parseInt(num);
+                return tasks.size() >= number && number > 0;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     private static int getNumber(String body) {

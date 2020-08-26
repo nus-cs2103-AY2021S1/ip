@@ -4,11 +4,7 @@ public class Ui {
     private Scanner scanner;
 
     public Ui() {
-        this.scanner = new Scanner(System.in);
-    }
-
-    public void greet() {
-        System.out.println("Hello! How may I help you?");
+        scanner = new Scanner(System.in);
     }
 
     public String receive() {
@@ -16,15 +12,19 @@ public class Ui {
         return input;
     }
 
+    public void greet() {
+        System.out.println("Duke: Hello! How may I help you?");
+    }
+
     public void goodbye() {
-        System.out.println("Bye. Hope to see you again!");
+        System.out.println("Duke: Bye. Hope to see you again!");
     }
 
     public void say(String something) {
-        System.out.println(something);
+        System.out.println("Duke: " + something);
     }
 
     public void getError(Exception e) {
-        System.out.println(e.getMessage());
+        System.out.println("Duke: Error! " + e.getMessage());
     }
 }
