@@ -1,7 +1,11 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println(
                 "Hello from\n" +
@@ -16,6 +20,18 @@ public class Duke {
                 "____________________________________________________________\n");
         boolean stop = false;
         Userinput userinput = new Userinput();
+
+        try {
+            File f = new File("data/duke.txt");
+           
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                System.out.println(s.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
         while(sc.hasNextLine()){
             try {
                 String input = sc.nextLine();
@@ -32,5 +48,23 @@ public class Duke {
                 System.out.println(excep);
             }
         }
+
+        FileWriter fw = new FileWriter("data/duke.txt",true);
+        for (int k = 0; k < userinput.tasks.size(); k++) {
+            Task currentTask =  userinput.tasks.get(k);
+            String taskAssignment = currentTask.description;
+            String taskIsDone = currentTask.isDone ? "1" : "0";
+            String taskType = currentTask.status;
+            String date = "";
+            if (currentTask instanceof Deadline) {
+                date = " | " + ((Deadline) currentTask).by;
+            } else if (currentTask instanceof Event) {
+                date = " | " + ((Event) currentTask).at;
+            }
+
+            fw.write("\n" + taskType + " | " + taskIsDone + " | " + taskAssignment);
+        }
+        fw.close();
+
     }
 }

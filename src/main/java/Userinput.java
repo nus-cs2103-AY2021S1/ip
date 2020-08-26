@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Userinput {
     private boolean terminate;
-    ArrayList<Task> tasks = new ArrayList<>();
-    UserInput current = null;
+    protected ArrayList<Task> tasks = new ArrayList<>();
+    protected UserInput current = null;
 
     public Userinput() {
         this.terminate = false;
@@ -17,7 +17,6 @@ public class Userinput {
         DELETE,
         BYE,
         LIST,
-        BLAH
     }
 
     String[] getDukeType(String input) {
@@ -36,8 +35,6 @@ public class Userinput {
             this.current = UserInput.BYE;
         } else if (words[0].equals("list")) {
             this.current = UserInput.LIST;
-        } else {
-            this.current = UserInput.BLAH;
         }
         return words;
     }
@@ -175,7 +172,7 @@ public class Userinput {
                         "____________________________________________________________";
                 break;
 
-            case BLAH :
+            default:
                 throw new NoResponseException();
         }
 
