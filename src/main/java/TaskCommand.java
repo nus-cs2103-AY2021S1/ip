@@ -10,6 +10,7 @@ public abstract class TaskCommand extends Command {
         sb.append("yay! i have added this task to your list: \n    ")
                 .append(task).append("\n")
                 .append(Command.numberOfTasks());
+        FileUpdater.updateFile();
         return sb.toString();
     }
 }

@@ -18,6 +18,9 @@ public class DeleteCommand extends EditCommand {
         }
 
         sb.append(Command.numberOfTasks());
+
+        FileUpdater.updateFile();
+
         return sb.toString();
     }
 }
