@@ -8,6 +8,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+
+    /**
+     * Runs the Duke program.
+     */
     public static void main(String[] args) throws FileNotFoundException {
         ArrayList<Task> lists = new ArrayList<Task>();
         try {
@@ -15,22 +19,22 @@ public class Duke {
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 String line = s.nextLine();
-                String[] task = line.split(" | ");
+                String[] task = line.split(" ");
                 if (task[0].equals("T")) {
-                    Task todo = new Todo(task[2]);
-                    if (task[1].equals("✓")) {
+                    Task todo = new Todo(task[4]);
+                    if (task[2].equals("✓")) {
                         todo.markDone();
                     }
                     lists.add(todo);
                 } else if (task[0].equals("D")) {
-                    Task deadline = new Deadline(task[2], LocalDateTime.parse(task[3]));
-                    if (task[1].equals("✓")) {
+                    Task deadline = new Deadline(task[4], LocalDateTime.parse(task[6]));
+                    if (task[2].equals("✓")) {
                         deadline.markDone();
                     }
                     lists.add(deadline);
                 } else if (task[0].equals("E")) {
-                    Task event = new Event(task[2], LocalDateTime.parse(task[3]));
-                    if (task[1].equals("✓")) {
+                    Task event = new Event(task[4], LocalDateTime.parse(task[6]));
+                    if (task[2].equals("✓")) {
                         event.markDone();
                     }
                     lists.add(event);
@@ -57,7 +61,7 @@ public class Duke {
                     System.out.println(bye.getResponse());
                     break;
                 } else if (received.equals("list")) {
-                    Response list = new Response(lists.toArray(new Task[0]), Response.Tag.LIST);
+                    Response list = new Response(lists.toArray(new Task[0]));
                     System.out.println(list.getResponse());
                 } else {
                     String[] test = received.split(" ");
@@ -98,6 +102,8 @@ public class Duke {
                                     Response msg = new Response(new String[]{"Format of date and time is incorrect! Please fill in the date and time following the format below.",
                                             "YYYY-MM-DDTHH:MM:SS"});
                                     System.out.println(msg.getResponse());
+                                } catch (ArrayIndexOutOfBoundsException e) {
+                                    throw new MissingDeadlineException();
                                 }
                             }    
                         } catch (ArrayIndexOutOfBoundsException e) {
@@ -142,13 +148,13 @@ public class Duke {
                             }
                         } else if (test[0].equals("deadline")) {
                             try {
-                                String[] str = received.split("deadline ")[1].split(" /by ");
+                                String[] str = received.split("deadline ")[1].split(" /");
                                 if (str.length == 1) {
                                     throw new MissingDeadlineException();
                                 } else {
                                     try {
                                         String description = str[0];
-                                        String by = str[1];
+                                        String by = str[1].split("by ")[1];
                                         Deadline deadline = new Deadline(description, LocalDateTime.parse(by));
                                         lists.add(deadline);
                                         Response msg = new Response(new Task[]{deadline}, Response.Tag.ADD, lists.size());

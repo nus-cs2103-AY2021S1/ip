@@ -1,16 +1,19 @@
 public class Task {
     public String task;
     public boolean done;
-
-    public Task(String task) {
+    
+    protected Task(String task) {
         this.task = task;
         this.done = false;
     }
     
-    public String writeMessage() {
+    protected String writeMessage() {
         return "";
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void markDone() {
         this.done = true;
     }
