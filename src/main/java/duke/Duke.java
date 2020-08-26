@@ -40,7 +40,7 @@ public class Duke {
     }
 
     /**
-     * Main execution of Duke Chatbot
+     * Main execution of Duke Chat bot
      */
     public void run() {
         String userInput;
