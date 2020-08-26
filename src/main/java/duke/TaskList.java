@@ -9,6 +9,9 @@ import duke.task.ToDo;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Holds a Collection of Tasks and has methods to manipulate these Tasks, is serializable as well
+ */
 public class TaskList implements Serializable {
     private final ArrayList<Task> taskList;
     
@@ -16,6 +19,17 @@ public class TaskList implements Serializable {
         this.taskList = new ArrayList<>();
     }
     
+    
+    /**
+     * Creates a task and adds it as an entry to the tasklist.
+     *
+     * @param parsedInput The parsed output of the Parser object
+     * @param commandTag  A string tag to conveniently identify the type of Task entry it should be
+     *
+     * @return Description of the added Task entry
+     *
+     * @throws DukeException If the Task can't be created
+     */
     // side effect: create & add task + return response
     public String addEntry(String[] parsedInput, String commandTag) throws DukeException {
         switch (commandTag) {
@@ -36,13 +50,30 @@ public class TaskList implements Serializable {
         }
     }
     
-    // side effect: completes task + returns string for completed task
+    /**
+     * Marks a Task as complete and modifies the TaskList
+     *
+     * @param taskID Selected Task to mark as complete
+     *
+     * @return Description of the completed task
+     *
+     * @throws DukeException If it's an invalid task
+     */
     public String completeTask(int taskID) throws DukeException {
         verifyTaskValidity(taskID);
         taskList.set(taskID - 1, taskList.get(taskID - 1).complete());
         return taskList.get(taskID - 1).toString();
     }
     
+    /**
+     * Deletes the specified Task and modifies the TaskList by decrementing the IDs of the remaining tasks
+     *
+     * @param taskID Selected Task to delete
+     *
+     * @return Description of the deleted task
+     *
+     * @throws DukeException If it's an invalid task
+     */
     public String deleteTask(int taskID) throws DukeException {
         verifyTaskValidity(taskID);
         Task toDelete = taskList.get(taskID - 1);
@@ -54,7 +85,13 @@ public class TaskList implements Serializable {
         return toDelete.toString();
     }
     
-    
+    /**
+     * Verifies the validity of the task to be handled, whether it exists in the TaskList or not
+     *
+     * @param taskID TaskID to be checked
+     *
+     * @throws DukeException Invalid task if it's more than the current list size or fewer than 1
+     */
     private void verifyTaskValidity(int taskID) throws DukeException {
         if (taskID > taskList.size()) {
             throw new DukeException("invalid task: task id > list size");
@@ -67,6 +104,11 @@ public class TaskList implements Serializable {
         return taskList;
     }
     
+    /**
+     * Returns the String description of the remaining undone tasks in the list
+     *
+     * @return String description
+     */
     public String getCurrentStatus() {
         int incompleteTasks = 0;
         for (Task t : taskList) {

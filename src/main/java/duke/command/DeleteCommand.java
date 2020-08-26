@@ -7,6 +7,9 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Deletes Tasks from the TaskList and invokes appropriate UI messages about it
+ */
 public class DeleteCommand implements Command {
     
     private final String[] parsedInput;
@@ -15,6 +18,15 @@ public class DeleteCommand implements Command {
         this.parsedInput = parsedInput;
     }
     
+    /**
+     * Prints out a deletion message of the command, removes the entry from TaskList and displays the current status of
+     * the TaskList
+     *
+     * @param tasks Current TaskList
+     * @param ui    Where the User shall receive messages about the command
+     *
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui) throws DukeException {
         ArrayList<String> lines = new ArrayList<>();

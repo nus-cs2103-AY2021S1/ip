@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Contains information about an Event, with when it starts and ends and on what date
+ */
 public class Event extends Task {
     private static final String DELIMITER = "at",
             TIME_DELIMITER = "-";
@@ -14,11 +17,16 @@ public class Event extends Task {
         this.endTime = endTime;
     }
     
-    public static Event createEvent(String[] parsedOutput) {
-        String description = parsedOutput[1];
-        String dateString = parsedOutput[2];
-        String startTime = parsedOutput[3];
-        String endTime = parsedOutput[4];
+    /**
+     * Creates an Event by extracting out relevant information from the parsed user input
+     * @param parsedInput Parser's output
+     * @return Event
+     */
+    public static Event createEvent(String[] parsedInput) {
+        String description = parsedInput[1];
+        String dateString = parsedInput[2];
+        String startTime = parsedInput[3];
+        String endTime = parsedInput[4];
         return new Event(description, dateString, startTime, endTime);
     }
     
