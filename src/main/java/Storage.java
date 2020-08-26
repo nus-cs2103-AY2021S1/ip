@@ -1,4 +1,8 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -47,9 +51,7 @@ public class Storage {
                     System.out.println("Er, I found an error in the storage data.");
                     System.out.println("This line will be excluded from my task list:\n"
                             + dataLine);
-
                 }
-
             } else if (taskDetails[0].equals("E")) {
                 Task t = new Event(taskDetails[2], taskDetails[3]);
                 if (taskDetails[1].equals("1")) {
@@ -70,8 +72,12 @@ public class Storage {
     /** Saves Duke's current data **/
     public void saveToFile(ArrayList<Task> list) throws DukeException {
         try {
+            // Create file if there is none
             createFile();
+
+            // Empties file if there is one
             clearTheFile();
+
         } catch (IOException e) {
             throw new DukeException("☹️Sorry, something went wrong and I couldn't save my data... ");
         }
@@ -111,6 +117,7 @@ public class Storage {
         // Make directory if it doesn't already exists
         File dir = new File("data");
         dir.mkdir();
+
         // create a File for the given file path
         new File(filePath);
     }

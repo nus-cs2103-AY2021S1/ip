@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /** Deals with interactions with the user
@@ -64,8 +63,8 @@ public class Ui {
     /** Prints all the contents of the list in order **/
     public void printList(TaskList list) {
         System.out.print("Here is what I have! ^^\n");
-        // Handles printing empty list
         if (list.isListEmpty()) {
+            // Handles printing empty list
             System.out.println("Whoops! I don't have anything of note yet...");
         } else {
             list.printAllTasks();
