@@ -17,7 +17,11 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (taskIdx > tasks.size()) {
+            throw new DukeException("No task with this ID!");
+        }
+        
         Task task = tasks.getTask(taskIdx);
         tasks.markAsDone(task);
         storage.doneTask(tasks.getTask(taskIdx));
