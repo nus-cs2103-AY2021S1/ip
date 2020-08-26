@@ -8,13 +8,17 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return "[" + (isDone ? "\u2713" : "\u2718") + "]"; //return tick or X symbols
+        return "[" + (isDone ? "\u2713" : "\u2718") + "]";
+    }
+
+    public void setIsDone() {
+        this.isDone = true;
     }
 
     public String markAsDone () {
         this.isDone = true;
         String doneString = "____________________________________________________________\n" +
-                " Nice! I've marked this task as done:\n" +
+                " Nice! I've marked this task as done: \n" +
                 "  "+ this.getStatusIcon() + "  " + this.description + "\n" +
                 "____________________________________________________________";
         return doneString;

@@ -1,15 +1,17 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
-public class Userinput {
+public class UserInput {
     private boolean terminate;
-    ArrayList<Task> tasks = new ArrayList<>();
-    UserInput current = null;
+    protected ArrayList<Task> tasks = new ArrayList<>();
+    private User_Input current = null;
 
-    public Userinput() {
+    public UserInput() {
         this.terminate = false;
     }
-
-    enum UserInput {
+    enum User_Input {
         TODO,
         DEADLINE,
         EVENT,
@@ -17,27 +19,61 @@ public class Userinput {
         DELETE,
         BYE,
         LIST,
-        BLAH
     }
 
-    String[] getDukeType(String input) {
+
+    void handleFile() {
+        try {
+            File file = new File("data/duke.txt");
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext()) {
+                String previousTask = sc.nextLine();
+                String[] words = previousTask.split(" @ ",0);
+                for (int i =0; i < words.length; i ++) {
+                    System.out.println(words[i]);
+                }
+                if (words[0].equals("D")) {
+                    Deadline previousDeadline = new Deadline(words[2],words[3]);
+                    if (words[1].equals("1")) {
+                        previousDeadline.setIsDone();
+                    }
+                    this.tasks.add(previousDeadline);
+                } else if (words[0].equals("T")) {
+                    ToDo previousToDo = new ToDo(words[2]);
+                    if (words[1].equals("1")) {
+                        previousToDo.setIsDone();
+                    }
+                    this.tasks.add(previousToDo);
+                } else if (words[0].equals("E")) {
+                    Event previousEvent = new Event(words[2],words[3]);
+                    if (words[1].equals("1")) {
+                        previousEvent.setIsDone();
+                    }
+                    this.tasks.add(previousEvent);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    String[] getDukeType (String input) {
         String[] words = input.split(" ");
         if (words[0].equals("deadline")) {
-            this.current = UserInput.DEADLINE;
+            this.current = User_Input.DEADLINE;
         } else if (words[0].equals("todo")) {
-            this.current = UserInput.TODO;
+            this.current = User_Input.TODO;
         } else if (words[0].equals("event")) {
-            this.current = UserInput.EVENT;
+            this.current = User_Input.EVENT;
         } else if (words[0].equals("done")) {
-            this.current = UserInput.DONE;
+            this.current = User_Input.DONE;
         } else if (words[0].equals("delete")) {
-            this.current = UserInput.DELETE;
+            this.current = User_Input.DELETE;
         } else if (words[0].equals("bye")) {
-            this.current = UserInput.BYE;
+            this.current = User_Input.BYE;
         } else if (words[0].equals("list")) {
-            this.current = UserInput.LIST;
-        } else {
-            this.current = UserInput.BLAH;
+            this.current = User_Input.LIST;
         }
         return words;
     }
@@ -81,7 +117,6 @@ public class Userinput {
                             "       " + newDeadline.toString() + "\n" +
                             "     Now you have " + this.tasks.size() + " " + taskGrammar + " in the list.\n" +
                             "____________________________________________________________\n";
-
                 }
                 break;
 
@@ -104,7 +139,6 @@ public class Userinput {
                             "       " + newToDo.toString() + "\n" +
                             "     Now you have " + this.tasks.size() + " " + taskGrammar + " in the list.\n" +
                             "____________________________________________________________\n";
-
                 }
                 break;
 
@@ -175,7 +209,7 @@ public class Userinput {
                         "____________________________________________________________";
                 break;
 
-            case BLAH :
+            default :
                 throw new NoResponseException();
         }
 
