@@ -57,6 +57,14 @@ public class Parser {
                 taskDetails = line.substring(7);
             }
 
+        } else if (line.contains("find")) {
+            commandType = "find";
+            if (line.length() < 5) {
+                throw new IncompleteInputException();
+            } else {
+                taskDetails = line.substring(5);
+            }
+
         } else {
             throw new WrongCommandException();
         }
