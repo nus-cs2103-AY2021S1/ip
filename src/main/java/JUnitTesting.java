@@ -13,20 +13,20 @@ public class JUnitTesting {
     TaskList list = new TaskList(store);
 
     @Test
-    public void addTaskToList() {
+    public void addTaskToList_success() {
         String activity = "read book";
-        ToDo newTask = new ToDo(activity, TaskSymbol.TODO);
+        ToDoTask newTask = new ToDoTask(activity, TaskSymbol.TODO);
         list.addToList(newTask);
         assertEquals(1,list.getList().size(), "Number of Lists after adding a task");
     }
 
     @Test
-    public void removeTaskFromList() {
+    public void removeTaskFromList_success() {
         String activity1 = "read book";
         String activity2 = "go Home";
         // Add 2 tasks
-        list.addToList(new ToDo(activity1, TaskSymbol.TODO));
-        list.addToList(new ToDo(activity2, TaskSymbol.TODO));
+        list.addToList(new ToDoTask(activity1, TaskSymbol.TODO));
+        list.addToList(new ToDoTask(activity2, TaskSymbol.TODO));
         // Remove 1 task
         list.removeTask(1);
         assertEquals(1, list.getList().size(), "Number of Tasks after adding 2 tasks and removing 1 task");

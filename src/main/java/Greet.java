@@ -36,7 +36,7 @@ public class Greet {
     @Override
     public String toString() {
         if (originalGreeting == null) {
-            greeting =  startGreeting;
+            greeting = startGreeting;
         } else if (originalGreeting.equals("bye")) {
             greeting = exitGreeting;
         }
