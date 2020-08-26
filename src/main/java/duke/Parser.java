@@ -1,6 +1,4 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -69,7 +67,7 @@ public class Parser {
                             + curr.getDescription());
                     System.out.println("Now you have " + store.size() + " tasks in the list.");
                     System.out.println("-------------------------");
-                    Path relativePath = Paths.get("data/duke.txt");
+                    Path relativePath = Paths.get("duke.txt");
                     Path absolutePath = relativePath.toAbsolutePath();
                     BufferedWriter writer = new BufferedWriter(new FileWriter("" + absolutePath));
                     writer.append('\n');
@@ -84,8 +82,9 @@ public class Parser {
                     writer.close();
                     break;
                 } catch (IOException e) {
-                    System.out.println(e);
-                    throw new IOException("Please create a folder called \"data\" in the project root!");
+                    File yourFile = new File("duke.txt");
+                    yourFile.createNewFile();
+                    FileOutputStream oFile = new FileOutputStream(yourFile, false);
                 }
             } else if (str.contains("deadline")) {
                 try {
@@ -101,7 +100,7 @@ public class Parser {
                             + curr.getDescription().substring(0, description.indexOf("/")) + "(by: " + curr.getDeadline() + ")");
                     System.out.println("Now you have " + store.size() + " tasks in the list.");
                     System.out.println("-------------------------");
-                    Path relativePath = Paths.get("data/duke.txt");
+                    Path relativePath = Paths.get("duke.txt");
                     Path absolutePath = relativePath.toAbsolutePath();
                     BufferedWriter writer = new BufferedWriter(new FileWriter("" + absolutePath));
                     writer.append('\n');
@@ -116,7 +115,9 @@ public class Parser {
                     writer.close();
                     break;
                 } catch (IOException e) {
-                    throw new IOException("Please create a folder called \"data\" in the project root!");
+                    File yourFile = new File("duke.txt");
+                    yourFile.createNewFile();
+                    break;
                 }
             } else if (str.contains("event")) {
                 try {
@@ -147,7 +148,9 @@ public class Parser {
                     writer.close();
                     break;
                 } catch (IOException e) {
-                    throw new IOException("Please create a folder called \"data\" in the project root!");
+                    File yourFile = new File("duke.txt");
+                    yourFile.createNewFile();
+                    break;
                 }
             } else if (str.contains("delete")) {
                 if (str.length() == 6) {
