@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Storage {
+public class TaskList {
     public ArrayList<Task> list = new ArrayList<>();
 
     public void addItem(Task i) {

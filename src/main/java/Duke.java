@@ -5,17 +5,17 @@ import java.util.Scanner;
 public class Duke {
 //    public static final String pathToFile = ".\\data\\duke.txt";
     public static final Path filepath = Paths.get(".", "data", "duke.txt");
-    public SaveLoad saveLoad;
     public Storage storage;
+    public TaskList taskList;
 
     public Duke() {
-        this.storage = new Storage();
-        this.saveLoad = new SaveLoad(filepath);
+        this.taskList = new TaskList();
+        this.storage = new Storage(filepath);
         try {
-            this.storage.setList(saveLoad.getListOfTasks());
+            this.taskList.setList(storage.getListOfTasks());
         } catch (DukeException e) {
             System.out.println("Error in extracting tasks from saved file");
-            storage = new Storage();
+            taskList = new TaskList();
         }
     }
 
@@ -27,11 +27,11 @@ public class Duke {
         welcome.printMessage(1);
 
         Duke duke = new Duke();
-        Storage listOfItems = duke.storage;
+        TaskList listOfItems = duke.taskList;
         output(listOfItems, duke);
     }
 
-    public static void output(Storage listOfItems, Duke duke) {
+    public static void output(TaskList listOfItems, Duke duke) {
         // Subsequent messages
         Scanner scan = new Scanner(System.in);
         while (true) {
@@ -94,14 +94,14 @@ public class Duke {
         goodbye.printMessage(1);
     }
 
-    private static void listHandler(String userInput, String userInstruction, Storage listOfItems) throws DukeException {
+    private static void listHandler(String userInput, String userInstruction, TaskList listOfItems) throws DukeException {
         if (!userInput.equals(userInstruction)) {
             throw new DukeException("Please do not add anything after the \"list\" command");
         }
         listOfItems.print();
     }
 
-    private static void doneHandler(String userInput, Storage listOfItems, Duke duke) throws DukeException {
+    private static void doneHandler(String userInput, TaskList listOfItems, Duke duke) throws DukeException {
         try {
             String numberCharacter = userInput.substring(5);
             int index = Integer.parseInt(numberCharacter) - 1;
@@ -110,7 +110,7 @@ public class Duke {
             taskToChange.markDone();
 
             // change data file
-            duke.saveLoad.modifyTask(taskToChange, index);
+            duke.storage.modifyTask(taskToChange, index);
 
             // printing part
             Salutations markedDone = new Salutations(Salutations.type.TASKDONE);
@@ -123,14 +123,14 @@ public class Duke {
         }
     }
 
-    private static void deleteHandler(String userInput, Storage listOfItems, Duke duke) throws DukeException {
+    private static void deleteHandler(String userInput, TaskList listOfItems, Duke duke) throws DukeException {
         try {
             String taskNumberToDelete = userInput.substring(7);
             int index = Integer.parseInt(taskNumberToDelete) - 1;
             listOfItems.deleteItem(index);
 
             // change data file
-            duke.saveLoad.deleteTask(index);
+            duke.storage.deleteTask(index);
 
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please enter a task number within the range of tasks");
@@ -139,7 +139,7 @@ public class Duke {
         }
     }
 
-    private static void todoCreator(String[] inputArr, String input, Storage listOfItems, Duke duke) throws DukeException {
+    private static void todoCreator(String[] inputArr, String input, TaskList listOfItems, Duke duke) throws DukeException {
         try {
             if (inputArr[1].isBlank()) {
                 throw new DukeException("The description of a todo cannot be empty");
@@ -148,14 +148,14 @@ public class Duke {
             listOfItems.addItem(todoTask);
 
             // change data file
-            duke.saveLoad.addTask(todoTask);
+            duke.storage.addTask(todoTask);
 
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The description of a todo cannot be empty");
         }
     }
 
-    private static void deadlineCreator(String input, Storage listOfItems, Duke duke) throws DukeException {
+    private static void deadlineCreator(String input, TaskList listOfItems, Duke duke) throws DukeException {
         try {
             // Splitting string
             String substring = input.substring(9);
@@ -166,7 +166,7 @@ public class Duke {
             listOfItems.addItem(deadlineTask);
 
             // change data file
-            duke.saveLoad.addTask(deadlineTask);
+            duke.storage.addTask(deadlineTask);
 
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("Please give me details for your deadline task");
@@ -177,7 +177,7 @@ public class Duke {
         }
     }
 
-    private static void eventCreator(String input, Storage listOfItems, Duke duke) throws DukeException {
+    private static void eventCreator(String input, TaskList listOfItems, Duke duke) throws DukeException {
         try {
             // Splitting string
             String substring = input.substring(6);
@@ -188,7 +188,7 @@ public class Duke {
             listOfItems.addItem(eventTask);
 
             // change data file
-            duke.saveLoad.addTask(eventTask);
+            duke.storage.addTask(eventTask);
 
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("Please give me information about your event!");
