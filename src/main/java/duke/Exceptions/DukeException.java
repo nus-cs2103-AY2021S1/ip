@@ -1,4 +1,4 @@
-package Exceptions;
+package duke.Exceptions;
 
 // Base Exception to extend from
 public class DukeException extends Exception{

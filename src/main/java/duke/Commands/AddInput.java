@@ -1,16 +1,17 @@
-package Commands;
+package duke.Commands;
 
-import Exceptions.*;
-import Storage.StorageCommands;
-import TaskList.TaskList;
-import Tasks.Task;
-import Parser.Parser;
+import duke.Exceptions.*;
+import duke.Storage.Storage;
+import duke.TaskList.TaskList;
+import duke.Tasks.Task;
+import duke.Parser.Parser;
+import duke.Ui.Ui;
 
 import java.util.Scanner;
 
 public class AddInput {
 
-    public static void add_input() {
+    public static void add_input(TaskList taskList, Storage storage) {
         Scanner scanner = new Scanner(System.in);
 
         while(scanner.hasNext()){
@@ -21,8 +22,8 @@ public class AddInput {
 
                 // case where input is bye, and a case where the inputList is of length 1
                 if(Parser.isBye(inputList[0].trim().toLowerCase())){
-                    Parser.byeGreetings();
-                    StorageCommands.saveTasks();
+                    Ui.byeGreetings();
+                    storage.saveTasks(taskList);
                     break;
                 }
 
@@ -35,14 +36,14 @@ public class AddInput {
                     //to add in the starting line of the section
                     result.append("Here are the tasks in your list:\n");
 
-                    for (int i = 0; i < TaskList.getSize(); i++) {
+                    for (int i = 0; i < taskList.getSize(); i++) {
                         // getting the current task
-                        Task currentTask = TaskList.getTask(i);
+                        Task currentTask = taskList.getTask(i);
 
-                        // adding the current task into the tasklist
+                        // adding the current task into the taskList
                         result.append((i + 1) + ". " + currentTask.toString() + "\n");
                     }
-                    Parser.lineFormatter(result.toString());
+                    Ui.lineFormatter(result.toString());
                 }
 
                 //case where the command is incomplete, in the cases of done, todo, event, deadline and delete
@@ -53,10 +54,10 @@ public class AddInput {
                 // case where the input is done
                 else if(Parser.isComplete(inputList[0].trim().toLowerCase()) && Parser.isNum(inputList[1])){
                     int currentIndex = Integer.parseInt(inputList[1]) - 1;
-                    if(currentIndex + 1> TaskList.getSize() || currentIndex + 1 <= 0){
-                        throw new DoneException(currentIndex, TaskList.getSize());
+                    if(currentIndex + 1> taskList.getSize() || currentIndex + 1 <= 0){
+                        throw new DoneException(currentIndex, taskList.getSize());
                     } else {
-                        Task task = TaskList.getTask(currentIndex);
+                        Task task = taskList.getTask(currentIndex);
                         // to check if the task is already done
                         if(task.getStatus()){
                             throw new TaskAlreadyDoneException(task);
@@ -64,25 +65,25 @@ public class AddInput {
 //                                    task.toString());
                             // if task is not done
                         } else {
-                            TaskList.getTask(currentIndex).markAsDone();
-                            Parser.taskDone(TaskList.getTask(currentIndex));
+                            taskList.getTask(currentIndex).markAsDone();
+                            Ui.taskDone(taskList.getTask(currentIndex));
                         }
                     }
                 } else if(Parser.isDelete(inputList[0].trim().toLowerCase()) && Parser.isNum(inputList[1])) {
                     int currentIndex = Integer.parseInt(inputList[1]) - 1;
-                    if (currentIndex + 1 > TaskList.getSize() || currentIndex + 1 <= 0) {
-                        throw new DeleteException(currentIndex, TaskList.getSize());
+                    if (currentIndex + 1 > taskList.getSize() || currentIndex + 1 <= 0) {
+                        throw new DeleteException(currentIndex, taskList.getSize());
                     } else {
-                        Task deletedTask = TaskList.removeTask(currentIndex);
-                        Parser.taskDeleted(deletedTask);
+                        Task deletedTask = taskList.removeTask(currentIndex);
+                        Ui.taskDeleted(deletedTask);
                     }
                 } else {
-                    AddToList.added_to_List(input);
+                    AddToList.added_to_List(taskList, input);
 
 
                 }
             } catch (DukeException e){
-                Parser.lineFormatter(e.getMessage());
+                Ui.lineFormatter(e.getMessage());
             }
 
         }

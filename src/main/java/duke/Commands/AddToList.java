@@ -1,19 +1,20 @@
-package Commands;
+package duke.Commands;
 
-import Exceptions.DeadlineException;
-import Exceptions.DukeException;
-import Exceptions.EventException;
-import TaskList.TaskList;
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.ToDo;
-import Parser.Parser;
+import duke.Exceptions.DeadlineException;
+import duke.Exceptions.DukeException;
+import duke.Exceptions.EventException;
+import duke.TaskList.TaskList;
+import duke.Tasks.Deadline;
+import duke.Tasks.Event;
+import duke.Tasks.Task;
+import duke.Tasks.ToDo;
+import duke.Parser.Parser;
+import duke.Ui.Ui;
 
 public class AddToList {
 
     // method that adds tasks into the list of tasks
-    public static void added_to_List(String printable) throws DukeException {
+    public static void added_to_List(TaskList taskList, String printable) throws DukeException {
         Task task = new Task("Do something");
         String[] nameList = printable.split(" ", 2);
         if(Parser.isDeadline(nameList[0].trim().toLowerCase())){
@@ -24,7 +25,7 @@ public class AddToList {
             // check for date time format
             try {
                 task = new Deadline(task_deadline[0].trim(), task_deadline[1].trim());
-                Parser.newTaskItem(task);
+                Ui.newTaskItem(task);
             } catch (Exception e){
 
                 throw new DeadlineException();
@@ -38,7 +39,7 @@ public class AddToList {
             // check for date time format
             try {
                 task = new Event(task_event[0].trim(), task_event[1].trim());
-                Parser.newTaskItem(task);
+                Ui.newTaskItem(task);
 
             } catch (Exception e){
                 throw new EventException();
@@ -46,12 +47,12 @@ public class AddToList {
 
         } else if(Parser.isToDo(nameList[0].toLowerCase())){
             task = new ToDo(nameList[1].trim());
-            Parser.newTaskItem(task);
+            Ui.newTaskItem(task);
 
         } else {
-            Parser.lineFormatter("Please enter an appropriate command!!");
+            Ui.lineFormatter("Please enter an appropriate command!!");
         }
-        TaskList.addTask(task);
+        taskList.addTask(task);
 
     }
 }

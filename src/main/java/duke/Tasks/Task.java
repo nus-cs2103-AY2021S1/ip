@@ -1,6 +1,6 @@
-package Tasks;
+package duke.Tasks;
 
-//Adapted from CS2103T website's Tasks.Task class
+//Adapted from CS2103T website's duke.Tasks.Task class
 public class Task {
     protected String description;
     protected boolean isDone;

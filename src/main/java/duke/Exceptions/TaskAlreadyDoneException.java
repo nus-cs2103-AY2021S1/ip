@@ -1,6 +1,6 @@
-package Exceptions;
+package duke.Exceptions;
 
-import Tasks.Task;
+import duke.Tasks.Task;
 
 // Exception to check if task is already done
 public class TaskAlreadyDoneException extends DukeException {

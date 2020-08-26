@@ -1,4 +1,4 @@
-package Exceptions;
+package duke.Exceptions;
 
 // Exception for wrong event command format
 public class EventException extends DukeException{

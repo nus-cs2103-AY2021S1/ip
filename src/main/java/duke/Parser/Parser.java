@@ -1,10 +1,7 @@
-package Parser;
-
-import TaskList.TaskList;
-import Tasks.Task;
+package duke.Parser;
 
 public class Parser {
-    private static String longLine = "________________________________________________________________________________";
+
 
     private static String bye_key = "bye";
     private static String list_key = "list";
@@ -49,30 +46,8 @@ public class Parser {
         return checker.equals(delete_key);
     }
 
-    //method to segment every String that is being fed into this method
-    public static void lineFormatter (String printable){
-        System.out.println(longLine);
-        System.out.println(printable);
-        System.out.println(longLine);
-    }
 
-    // standardised goodbye greeting
-    public static void byeGreetings () {
-        lineFormatter("Bye! Hope to see you soon again?!");
-    }
 
-    //method to mark tasks as done
-    public static void taskDone(Task task) {
-        lineFormatter("Nice! This task is getting done!!\n" + "[" + task.getStatusIcon() + "] " + task.getTask());
-    }
-
-    //method to mark tasks as deleted
-    public static void taskDeleted(Task task) {
-        lineFormatter("The following Tasks.Task is removed from the TaskList.TaskList!!\n" + "[" + task.getStatusIcon() + "] "
-                + task.getTask() + "\n" +
-                "You have " + TaskList.getSize() + " tasks left!"
-        );
-    }
 
     // method to check for int in String
     public static boolean isNum(String num){
@@ -84,10 +59,4 @@ public class Parser {
         }
     }
 
-    //method for formatting inputs into the taskList
-    public static void newTaskItem (Task task){
-        lineFormatter("Now you have a new task! :\n" + task.toString() +
-                "\nYou currently have " + TaskList.getSize() + " events in your list\n" +
-                "Type \'list\' to check your Tasklist");
-    }
 }

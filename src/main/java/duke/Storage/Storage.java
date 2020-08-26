@@ -1,12 +1,12 @@
-package Storage;
+package duke.Storage;
 
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.ToDo;
+import duke.Tasks.Deadline;
+import duke.Tasks.Event;
+import duke.Tasks.Task;
+import duke.Tasks.ToDo;
 
-import TaskList.TaskList;
-import Parser.Parser;
+import duke.TaskList.TaskList;
+import duke.Parser.Parser;
 
 
 import java.io.File;
@@ -19,18 +19,25 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class StorageCommands {
+public class Storage {
+
+    public static String directory;
+
+    public Storage(String directory){
+        this.directory = directory;
+    }
+
+
     // method to update and save the txt file with the taskList
-    public static void saveTasks(){
-        String directory = System.getProperty("user.dir");
-        Path path =  Paths.get(directory, "data");
+    public void saveTasks(TaskList taskList){
+        Path path =  Paths.get(this.directory, "Data");
         try{
             // Check if the file path exists, if not, create a new directory
             if(!Files.exists(path)){
                 Files.createDirectories(path);
             }
 
-            Path filePath = Paths.get(directory,"data","taskList.txt");
+            Path filePath = Paths.get(directory,"Data","taskList.txt");
             File taskFile = filePath.toFile();
 
             // Check if the file exists, if not, create a new file
@@ -40,10 +47,10 @@ public class StorageCommands {
 
             FileWriter fileWriter = new FileWriter(taskFile);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            for (int i = 0; i < TaskList.getSize(); i++) {
-                bufferedWriter.write(TaskList.getTask(i).getOriginal());
+            for (int i = 0; i < taskList.getSize(); i++) {
+                bufferedWriter.write(taskList.getTask(i).getOriginal());
                 bufferedWriter.write("~");
-                if(TaskList.getTask(i).getStatus()){
+                if(taskList.getTask(i).getStatus()){
                     bufferedWriter.write("1");
                 } else{
                     bufferedWriter.write("0");
@@ -58,9 +65,9 @@ public class StorageCommands {
         }
     }
     // method to load the existing file and update the taskList
-    public static void loadTasks() {
-        String directory = System.getProperty("user.dir");
-        Path filePath = Paths.get(directory, "data", "taskList.txt");
+    public void loadTasks(TaskList taskList) {
+        Path filePath = Paths.get(this.directory, "Data", "taskList.txt");
+
         if(filePath.toFile().exists()){
             try{
                 BufferedReader reader = Files.newBufferedReader(filePath);
@@ -75,16 +82,16 @@ public class StorageCommands {
                             String[] task_deadline = nameList[1].trim().split("/by", 2);
                             Task newTask = new Deadline(task_deadline[0].trim(),
                                     task_deadline[1].trim(), checkDone(doneList[1]));
-                            TaskList.addTask(newTask);
+                            taskList.addTask(newTask);
 
                         } else if (Parser.isEvent(nameList[0].trim().toLowerCase())) {
                             String[] task_event = nameList[1].trim().split("/at", 2);
                             Task newTask = new Event(task_event[0].trim(), task_event[1].trim(),checkDone(doneList[1]));
-                            TaskList.addTask(newTask);
+                            taskList.addTask(newTask);
 
                         } else if (Parser.isToDo(nameList[0].toLowerCase())) {
                             Task newTask = new ToDo(nameList[1].trim(), checkDone(doneList[1]));
-                            TaskList.addTask(newTask);
+                            taskList.addTask(newTask);
                         }
                     }
                 }
@@ -93,7 +100,7 @@ public class StorageCommands {
                 System.out.println(e.getMessage());
             }
         } else {
-            File createFile = new File("/data/duke.txt");
+            File createFile = new File("/Data/duke.txt");
         }
     }
 
