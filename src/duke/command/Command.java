@@ -6,15 +6,15 @@ import duke.utility.TaskList;
 import duke.utility.Ui;
 
 public abstract class Command {
-    public static String BYE_COMMAND = "bye";
-    public static String LIST_COMMAND = "list";
-    public static String DONE_COMMAND = "done";
-    public static String DELETE_COMMAND = "delete";
-    public static String TODO_COMMAND = "todo";
-    public static String DEADLINE_COMMAND = "deadline";
-    public static String EVENT_COMMAND = "event";
-    public static String TASK_AFTER_COMMAND = "taskafter";
-    public static String TASK_BEFORE_COMMAND = "taskbefore";
+    public static String COMMAND_BYE = "bye";
+    public static String COMMAND_LIST = "list";
+    public static String COMMAND_DONE = "done";
+    public static String COMMAND_DELETE = "delete";
+    public static String COMMAND_TODO = "todo";
+    public static String COMMAND_DEADLINE = "deadline";
+    public static String COMMAND_EVENT = "event";
+    public static String COMMAND_TASK_AFTER = "taskafter";
+    public static String COMMAND_TASK_BEFORE = "taskbefore";
 
     private boolean isExit;
 
