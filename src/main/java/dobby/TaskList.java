@@ -1,10 +1,10 @@
-package main.java.dobby;
+package dobby;
 
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import main.java.dobby.task.*;
+import dobby.task.*;
 
 public class TaskList {
     private ArrayList<Task> tasks;

@@ -1,4 +1,4 @@
-package main.java.dobby;
+package dobby;
 
 import java.util.Scanner;
 

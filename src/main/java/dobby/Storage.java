@@ -1,4 +1,4 @@
-package main.java.dobby;
+package dobby;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
-import main.java.dobby.task.Task;
+import dobby.task.Task;
 
 public class Storage {
     private final String filePath;

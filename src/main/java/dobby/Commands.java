@@ -1,4 +1,4 @@
-package main.java.dobby;
+package dobby;
 
 public enum Commands {
     TODO("\n      todo _description_"),

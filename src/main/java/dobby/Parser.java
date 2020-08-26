@@ -1,8 +1,8 @@
-package main.java.dobby;
+package dobby;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import main.java.dobby.task.*;
+import dobby.task.*;
 
 public class Parser {
     private TaskList tasks;

@@ -1,4 +1,4 @@
-package main.java.dobby.task;
+package dobby.task;
 
 public class Task {
     private final String description;

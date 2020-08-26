@@ -1,4 +1,4 @@
-package main.java.dobby;
+package dobby;
 
 public class DobbyException extends Exception {
     public DobbyException(String message) {

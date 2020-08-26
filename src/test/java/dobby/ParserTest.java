@@ -1,6 +1,6 @@
 package test.java.dobby;
 
-import main.java.dobby.*;
+import dobby.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

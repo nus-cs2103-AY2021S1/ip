@@ -1,4 +1,4 @@
-package main.java.dobby.task;
+package dobby.task;
 
 import java.time.LocalDate;
 
