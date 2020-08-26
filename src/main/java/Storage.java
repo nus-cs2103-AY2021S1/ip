@@ -11,11 +11,11 @@ import java.util.Scanner;
 public class Storage {
 
     //public static String home = System.getProperty("src/data/duke.txt");
-    public static final String home = "data";
+    private static final String home = "data";
 
-    public static java.nio.file.Path path = java.nio.file.Paths.get(home, "duke.txt");
+    private static java.nio.file.Path path = java.nio.file.Paths.get(home, "duke.txt");
 
-    public static boolean directoryExists = java.nio.file.Files.exists(path);
+    private static boolean directoryExists = java.nio.file.Files.exists(path);
 
     public static void read() {
         try {

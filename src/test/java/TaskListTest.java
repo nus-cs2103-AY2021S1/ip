@@ -1,4 +1,3 @@
-
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void emptyDescriptionTest() throws DukeException {
+    public void taskList_emptyDescription() throws DukeException {
         try {
 
             TaskList.taskStorage = new ArrayList<>();
