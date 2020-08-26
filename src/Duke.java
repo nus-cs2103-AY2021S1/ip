@@ -1,5 +1,5 @@
 import input.UserInput;
-import function.DukeFunction;
+import command.CommandParser;
 import data.DukeState;
 import storage.DukeStorage;
 import ui.Ui;
@@ -14,7 +14,7 @@ public class Duke {
 
         while (!DukeState.exitLoop) {
             String inputLine = UserInput.getOneLine();
-            DukeFunction.checkCommand(inputLine);
+            CommandParser.parse(inputLine);
         }
 
         DukeStorage.saveCurrentTasks();
