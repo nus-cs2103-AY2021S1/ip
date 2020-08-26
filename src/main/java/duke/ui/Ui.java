@@ -57,6 +57,20 @@ public class Ui {
     }
 
     /**
+     * Show find message.
+     * @param taskList The TaskList containing the tasks to be printed.
+     * @param keyword The keyword filter
+     */
+    public void showFindMessage(TaskList taskList, String keyword) {
+        int i = 1;
+        for (Task t : taskList.getList()) {
+            if (t.getDescription().indexOf(keyword) != -1) {
+                System.out.println(i++ + "." + t);
+            }
+        }
+    }
+
+    /**
      * Print done message.
      * @param task The task marked as done.
      */

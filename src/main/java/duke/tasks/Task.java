@@ -30,6 +30,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public LocalDate getDate() {
         return null;
     }
