@@ -32,7 +32,7 @@ public class Duke {
                 ui.showLine();
                 Command command = Parser.parse(input);
                 if (command != null) {
-                    command.executeCommand(this.tasks, this.ui, this.storage);
+                    command.executeCommand(tasks, ui, storage);
                     isExit = command.isExit();
                 }
             } catch (DukeException error) {

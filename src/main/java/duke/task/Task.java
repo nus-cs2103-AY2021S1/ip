@@ -10,17 +10,17 @@ public class Task {
     }
 
     public void completeTask() {
-        this.done = true;
+        done = true;
     }
 
     @Override
     public String toString() {
         String symbol = (this.done ? "[\u2713] " : "[\u2718] ");
-        return symbol + this.description;
+        return symbol + description;
     }
     
     public String saveToHardDisk() {
-        int isDone = this.done ? 1 : 0;
-        return " | " + isDone + " | " + this.description;
+        int isDone = done ? 1 : 0;
+        return " | " + isDone + " | " + description;
     }
 }

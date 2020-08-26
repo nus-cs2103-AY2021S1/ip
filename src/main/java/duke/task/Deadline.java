@@ -14,11 +14,11 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " +
-                this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
     public String saveToHardDisk() {
-        return "D" + super.saveToHardDisk() + " | " + this.time;
+        return "D" + super.saveToHardDisk() + " | " + time;
     }
 }

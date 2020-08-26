@@ -7,7 +7,7 @@ import duke.ui.Ui;
 public class ByeCommand extends Command {
     @Override
     public void executeCommand(TaskList tasks, Ui ui, Storage storage) {
-        ui.goodbyeUser();
+        ui.showGoodbyeUser();
     }
 
     @Override
