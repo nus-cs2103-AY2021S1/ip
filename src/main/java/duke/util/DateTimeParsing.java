@@ -25,13 +25,13 @@ public class DateTimeParsing {
 
     public static String to12HTimeFormat(String time) {
         return LocalTime
-            .parse(time, DateTimeFormatter.ofPattern("HH:mm"))
-            .format(DateTimeFormatter.ofPattern("hh:mm a"));
+                .parse(time, DateTimeFormatter.ofPattern("HH:mm"))
+                .format(DateTimeFormatter.ofPattern("hh:mm a"));
     }
 
     public static String to24HTimeFormat(String time) {
         return LocalTime
-            .parse(time, DateTimeFormatter.ofPattern("hh:mm a"))
-            .format(DateTimeFormatter.ofPattern("HH:mm"));
+                .parse(time, DateTimeFormatter.ofPattern("hh:mm a"))
+                .format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 }

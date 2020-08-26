@@ -48,7 +48,7 @@ public class StorageTest {
     }
 
     @Test
-    public void testUpdateSaveFile() throws IOException {
+    public void updateSaveFile() throws IOException {
         Storage store = new Storage(TEST_FILE_PATH);
         assertTrue(java.nio.file.Files.exists(TEST_FILE_PATH));
 
@@ -74,7 +74,7 @@ public class StorageTest {
     }
 
     @Test
-    public void testLoadSaveFile() throws IOException {
+    public void loadSaveFile() throws IOException {
         Storage store = new Storage(TEST_FILE_PATH);
         assertTrue(java.nio.file.Files.exists(TEST_FILE_PATH));
 

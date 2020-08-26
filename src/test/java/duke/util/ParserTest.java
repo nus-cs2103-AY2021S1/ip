@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test
-    public void testParseCmdWord() {
+    public void parseCmdWord() {
         CommandType exit = Parser.parseCmdWord("bye");
         assertEquals(CommandType.Exit, exit);
 
@@ -39,7 +39,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testParseTaskType() {
+    public void parseTaskType() {
         TaskType deadline = Parser.parseTaskType("deadline lorem ipsum");
         assertEquals(TaskType.Deadline, deadline);
 

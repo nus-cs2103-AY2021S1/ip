@@ -26,7 +26,7 @@ public class UiTest {
     }
 
     @Test
-    public void testPrint() {
+    public void print() {
         String msgBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
         new Ui().print(msgBody);
         assertEquals(
@@ -36,7 +36,7 @@ public class UiTest {
     }
 
     @Test
-    public void testPrintErr() {
+    public void printErr() {
         String msgBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
         new Ui().printErr(msgBody);
         assertEquals(

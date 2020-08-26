@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.task.TaskList;
-import duke.util.DateTimeParsing;
 import duke.exception.InvalidCommandException;
 import duke.task.Task;
+import duke.task.TaskList;
+import duke.util.DateTimeParsing;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -32,12 +32,9 @@ public class DueCommand {
             }
 
             String firstLine = "These are the tasks due on " + formattedDate + ":";
-
             return firstLine + "\n" + String.join("\n", filteredTasks);
         } catch (DateTimeParseException | NumberFormatException e) {
-            String errMsg =
-                    "Please key in a valid date format.\n" +
-                    "due *yyyy-mm-dd*";
+            String errMsg = "Please key in a valid date format.\n" + "due *yyyy-mm-dd*";
             throw new InvalidCommandException(errMsg);
         }
     }
