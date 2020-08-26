@@ -1,9 +1,11 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
     public static ArrayList<Task> taskList = new ArrayList<>();
     public static void main(String[] args) {
+        loadData();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -19,17 +21,21 @@ public class Duke {
             try {
                 if (command.equals("bye")) {
                     printMessage("Bye. Hope to see you again soon!");
-                    return;
+                    break;
                 } else if (command.equals("list")) {
                     listTasks();
                 } else if (command.equals("done") || command.equals("delete")) {
                     handleCompleteStatus(command, commandArr);
+                    saveData();
                 } else if (command.equals("todo")) {
                     handleTask(TaskType.TODO, commandArr);
+                    saveData();
                 } else if (command.equals("deadline")) {
                     handleTask(TaskType.DEADLINE, commandArr);
+                    saveData();
                 } else if (command.equals("event")) {
                     handleTask(TaskType.EVENT, commandArr);
+                    saveData();
                 } else {
                     throw new DukeException("I am sorry, I don't know what that means :(");
                 }
@@ -37,6 +43,84 @@ public class Duke {
                 printMessage(e.getMessage());
             }
         }
+    }
+
+    public static void loadData() {
+        try {
+            String FILE_PATH = "data/duke.txt";
+            File dataFile = new File(FILE_PATH);
+            if (!dataFile.exists()) {
+                return;
+            }
+            FileReader reader = new FileReader(FILE_PATH);
+            BufferedReader br = new BufferedReader(reader);
+            String line = br.readLine();
+            while (line != null) {
+                Task task = readTask(line);
+                taskList.add(task);
+                line = br.readLine();
+            }
+            reader.close();
+        } catch (IOException e) {
+            printMessage(e.getMessage());
+        }
+
+    }
+
+    public static Task readTask(String line) {
+        String[] taskComponent = line.split("\\|");
+        boolean isComplete = !taskComponent[1].equals("0");
+        String name = taskComponent[2];
+        if (taskComponent[0].equals("T")) {
+            return new Todo(name, isComplete);
+        } else if (taskComponent[0].equals("D")) {
+            String by = taskComponent[3];
+            return new Deadline(name, isComplete, by);
+        } else {
+            String at = taskComponent[3];
+            return new Event(name, isComplete, at);
+        }
+    }
+
+    public static void saveData() {
+        try {
+            String DIR_PATH = "data";
+            File directory = new File(DIR_PATH);
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            String FILE_PATH = DIR_PATH + "/duke.txt";
+            File dataFile = new File(FILE_PATH);
+            dataFile.createNewFile();
+            FileWriter writer = new FileWriter(FILE_PATH);
+            String data = "";
+            for (Task task : taskList) {
+                data += String.format("%s\n", formatTask(task));
+            }
+            writer.write(data);
+            writer.close();
+        } catch (IOException e) {
+            printMessage(e.getMessage());
+        }
+    }
+
+    public static String formatTask(Task task) {
+        String name = task.getName();
+        int isComplete = task.getStatus() ? 1 : 0;
+        String type;
+        if (task.getType() == TaskType.DEADLINE) {
+            type = "D";
+        } else if (task.getType() == TaskType.TODO) {
+            type = "T";
+        } else {
+            type = "E";
+        }
+        if (type.equals("T")) {
+            return String.format("%s|%d|%s", type, isComplete, name);
+        } else {
+            return String.format("%s|%d|%s|%s", type, isComplete, name, task.getDetails());
+        }
+
     }
 
     public static void handleTask(TaskType taskType, String[] commandArr) {
@@ -91,17 +175,17 @@ public class Duke {
     }
 
     public static void addTodo(String name) {
-        Todo todo = new Todo(name);
+        Todo todo = new Todo(name, false);
         addTask(todo);
     }
 
     public static void addDeadline(String name, String by) {
-        Deadline deadline = new Deadline(name, by);
+        Deadline deadline = new Deadline(name, false, by);
         addTask(deadline);
     }
 
     public static void addEvent(String name, String at) {
-        Event event = new Event(name, at);
+        Event event = new Event(name, false, at);
         addTask(event);
     }
 
