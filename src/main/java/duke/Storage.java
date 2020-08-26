@@ -15,11 +15,19 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class that represents the storage of the data
+ */
 public class Storage {
 
     private final Path filePath;
     private List<String> serialisedTasks;
 
+    /**
+     * Initialises a new instance.
+     *
+     * @param filePath The path to save the data to in the hard disk.
+     */
     public Storage(Path filePath) {
         this.filePath = filePath;
 
@@ -39,6 +47,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Retrieves the task from the hard disk and loads them into the application.
+     *
+     * @return A list of saved <code>Task</code>s.
+     * @throws CorruptedStorageException If something went wrong de-serialising the saved tasks,
+     *                                   either due to missing fields, or unknown format.
+     */
     public List<Task> loadTasks() throws CorruptedStorageException {
         List<Task> tasks = new ArrayList<>();
 
@@ -91,12 +106,23 @@ public class Storage {
         return tasks;
     }
 
-    public void writeToFile() throws IOException {
+    /**
+     * Writes the list of tasks saved in the application to the hard disk.
+     *
+     * @throws IOException If there are issues reading/writing to the file.
+     */
+    private void writeToFile() throws IOException {
         String fileData = String.join("\n", this.serialisedTasks);
         Files.writeString(filePath, fileData, StandardCharsets.UTF_8, StandardOpenOption.WRITE,
                 StandardOpenOption.TRUNCATE_EXISTING);
     }
 
+    /**
+     * Saves a new task to the hard disk.
+     *
+     * @param task The task to be saved.
+     * @throws CorruptedStorageException If there are issues reading/writing to the file.
+     */
     public void saveNewTask(Task task) throws CorruptedStorageException {
         this.serialisedTasks.add(task.serialise());
 
@@ -107,6 +133,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates a task and write these changes to the hard disk.
+     *
+     * @param taskId The ID of the task to be updated.
+     * @param task   The updated task.
+     * @throws CorruptedStorageException If there are issues reading/writing to the file.
+     */
     public void updateExistingTask(int taskId, Task task) throws CorruptedStorageException {
         this.serialisedTasks.set(taskId - 1, task.serialise());
 
@@ -117,6 +150,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes a task from the hard disk.
+     *
+     * @param taskId The ID of the task to be deleted.
+     * @throws CorruptedStorageException If there are issues reading/writing to the file.
+     */
     public void deleteExistingTask(int taskId) throws CorruptedStorageException {
         this.serialisedTasks.remove(taskId - 1);
 

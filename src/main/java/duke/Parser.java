@@ -16,6 +16,9 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
+/**
+ * A parser that is used to parse inputs from the user.
+ */
 public class Parser {
     private static final String FAILED_TO_MARK_TASK_AS_COMPLETE =
             "Failed to mark task as complete!";
@@ -24,6 +27,13 @@ public class Parser {
     private static final String FAILED_TO_CREATE_DEADLINE_TASK = "Failed to create Deadline task!";
     private static final String FAILED_TO_CREATE_EVENT_TASK = "Failed to create Event task!";
 
+    /**
+     * Parses the full command given by the user as input.
+     *
+     * @param fullCommand The input by the user that is to be parsed.
+     * @return A <code>Command</code> that corresponds to the user input.
+     * @throws DukeException If the user input is invalid.
+     */
     static Command parse(String fullCommand) throws DukeException {
         String[] commandInputs = fullCommand.trim().split(" ", 2);
 
@@ -40,6 +50,7 @@ public class Parser {
             return new ListCommand();
 
         case "find":
+            // "find" needs to be accompanied by a keyword
             if (commandInputs.length < 2) {
                 throw new MissingKeywordException("I'm not sure what tasks to search for...");
             }
@@ -49,6 +60,7 @@ public class Parser {
             return new FindCommand(commandDetails);
 
         case "done":
+            // "done" needs to be accompanied by task ID
             if (commandInputs.length < 2) {
                 throw new MissingTaskIdException(FAILED_TO_MARK_TASK_AS_COMPLETE);
             }
@@ -63,6 +75,7 @@ public class Parser {
             }
 
         case "delete":
+            // "delete" needs to be accompanied by task ID
             if (commandInputs.length < 2) {
                 throw new MissingTaskIdException(FAILED_TO_DELETE_TASK);
             }
@@ -79,6 +92,8 @@ public class Parser {
         case "todo":
         case "deadline":
         case "event":
+            // "todo", "deadline", "event" needs to be accompanied with details on the task to be
+            // created
             if (commandInputs.length < 2) {
                 throw new MissingTaskDetailsException(FAILED_TO_CREATE_TASK);
             }
