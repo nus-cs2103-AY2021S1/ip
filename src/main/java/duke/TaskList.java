@@ -1,14 +1,16 @@
+package duke;
+
 import java.util.ArrayList;
 
 /**
- * <h>TaskList</h>
+ * <h>duke.TaskList</h>
  * Contains the task list
  */
 public class TaskList {
     ArrayList<Task> ls;
 
     /**
-     * Constructor of TaskList.
+     * Constructor of duke.TaskList.
      * @param ls The array list of task to be converted.
      */
     public TaskList(ArrayList<Task> ls) {
@@ -42,7 +44,7 @@ public class TaskList {
     /**
      * Get the task at position i.
      * @param i int The position to be retrieved from.
-     * @return Task The task that is queried.
+     * @return duke.Task The task that is queried.
      */
     public Task get(int i) {
         return getLs().get(i);

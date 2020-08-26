@@ -1,14 +1,16 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * <h>Ui</h>
+ * <h>duke.Ui</h>
  * Deals with interactions with the user.
  */
 public class Ui {
 
     /**
-     * Constructor of Ui class.
+     * Constructor of duke.Ui class.
      */
     public Ui() {
     }
@@ -97,8 +99,8 @@ public class Ui {
 
     /**
      * Prints the to-do task that have been added.
-     * @param ls TaskList
-     * @param newTask Task The new task to be added.
+     * @param ls duke.TaskList
+     * @param newTask duke.Task The new task to be added.
      */
     public void showTodoMsg(TaskList ls, Task newTask) {
         horizontalDiv();
@@ -123,8 +125,8 @@ public class Ui {
 
     /**
      * Prints that you have added the deadline task.
-     * @param ls TaskList
-     * @param newTask Task The new task to be added.
+     * @param ls duke.TaskList
+     * @param newTask duke.Task The new task to be added.
      */
     public void showDeadlineEventMsg(TaskList ls, Task newTask) {
         horizontalDiv();
@@ -179,8 +181,8 @@ public class Ui {
 
     /**
      * Prints the confirmation that the task has been deleted.
-     * @param ls TaskList
-     * @param tsk Task Task to be deleted.
+     * @param ls duke.TaskList
+     * @param tsk duke.Task duke.Task to be deleted.
      */
     public void showDeleteMsg(TaskList ls, Task tsk) {
         horizontalDiv();

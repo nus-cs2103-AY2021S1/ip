@@ -1,10 +1,12 @@
+package duke;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
- * <h1>Duke!</h1>
- * The Duke program implements an application that
+ * <h1>duke.Duke!</h1>
+ * The duke.Duke program implements an application that
  * helps you keep track of your tasks.
  *
  * @author Augustine Kau
@@ -25,7 +27,7 @@ public class Duke {
     }
 
     /**
-     * Constructor for Duke
+     * Constructor for duke.Duke
      * @param filePath For file todolist.txt.
      * @throws IOException On input error.
      */
@@ -194,7 +196,7 @@ public class Duke {
     }
 
     /**
-     * This is the main method which will create an instance of Duke
+     * This is the main method which will create an instance of duke.Duke
      * and call on the method run.
      *
      * @param args Unused.

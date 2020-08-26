@@ -1,15 +1,17 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * <h>Event Task Type</h>
+ * <h>duke.Event duke.Task Type</h>
  * This is a type of tasks that start at a specific time and ends at a specific time
  */
 public class Event extends Task {
     protected LocalDate at;
 
     /**
-     * Constructor of Event class.
+     * Constructor of duke.Event class.
      * @param description Name of the task input by user.
      * @param at Time of the task input by user.
      */
@@ -20,7 +22,7 @@ public class Event extends Task {
 
     /**
      * Getter for the time of the task.
-     * @return LocalDate Date of the time of the Event task.
+     * @return LocalDate Date of the time of the duke.Event task.
      */
     public LocalDate getAt() {
         return at;

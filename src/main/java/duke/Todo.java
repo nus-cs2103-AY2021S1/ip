@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * <h>To-do Task Type</h>
+ * <h>To-do duke.Task Type</h>
  * This class is a type of tasks without any date/time attached to it.
  */
 public class Todo extends Task{

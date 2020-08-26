@@ -1,14 +1,16 @@
+package duke;
+
 /**
- * <h1>Task</h1>
+ * <h1>duke.Task</h1>
  * General task for the multiple types of task.
- * To-do, Deadline and Event classes inherit from this class.
+ * To-do, duke.Deadline and duke.Event classes inherit from this class.
  */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Constructor for Task.
+     * Constructor for duke.Task.
      * @param description Name of the task input by user.
      */
     public Task(String description) {

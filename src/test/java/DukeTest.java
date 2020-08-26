@@ -1,3 +1,8 @@
+import duke.Deadline;
+import duke.Event;
+import duke.Parser;
+import duke.Task;
+import duke.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

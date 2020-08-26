@@ -1,9 +1,11 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * <h>Deadline Task Type</h>
+ * <h>duke.Deadline duke.Task Type</h>
  * This is a type of tasks that need to be done before a specific date/time.
  */
 public class Deadline extends Task {

@@ -1,16 +1,22 @@
-import java.io.*;
+package duke;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * <h>Storage</h>
+ * <h>duke.Storage</h>
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
     File file;
 
     /**
-     * Constructor for Storage class.
+     * Constructor for duke.Storage class.
      * @param filePath The path of the file todolist.txt.
      * @throws IOException On input error.
      */
@@ -100,7 +106,7 @@ public class Storage {
                 }
                 break;
             case "E":
-                // It is an Event task
+                // It is an duke.Event task
                 try {
                     if (Integer.valueOf(arr[1]).equals(0)) {
                         // Incomplete task
@@ -131,7 +137,7 @@ public class Storage {
     /**
      * Save and write the file into todolist.txt.
      * @param f File The file.
-     * @param ls TaskList the list of the tasks to be written.
+     * @param ls duke.TaskList the list of the tasks to be written.
      * @throws IOException On input error.
      */
     protected static void saveFile(File f, TaskList ls) throws IOException {
@@ -175,7 +181,7 @@ public class Storage {
                     }
                     arrayList.add(str);
                 } else {
-                    System.out.println("One of your task is neither a Todo, Event or Deadline");
+                    System.out.println("One of your task is neither a duke.Todo, duke.Event or duke.Deadline");
                 }
             }
             for (String str : arrayList) {

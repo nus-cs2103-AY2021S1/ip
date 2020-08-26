@@ -1,11 +1,13 @@
+package duke;
+
 /**
- * <h>Parser</h>
+ * <h>duke.Parser</h>
  * Deals with making sense of the user command.
  */
 public class Parser {
 
     /**
-     * Constructor for Parser.
+     * Constructor for duke.Parser.
      */
     public Parser() {
     }
@@ -37,10 +39,10 @@ public class Parser {
     public static String[] parse(String[] arr, int i) {
         String secondStr = arr[1];
         if (i == 1) {
-            // For Deadline
+            // For duke.Deadline
             return secondStr.split(" /by ", 2);
         } else {
-            // For Event
+            // For duke.Event
             return secondStr.split(" /at ", 2);
         }
     }
