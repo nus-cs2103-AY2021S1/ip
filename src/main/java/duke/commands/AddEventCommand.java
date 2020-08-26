@@ -33,7 +33,7 @@ public class AddEventCommand extends Command {
      */
     @Override
     public void execute(TaskManager taskManager, Ui ui) {
-        Pattern r = Pattern.compile(InputPattern.addEventPattern);
+        Pattern r = Pattern.compile(InputPattern.ADD_EVENT);
         Matcher m = r.matcher(input);
         m.find();
         String content = m.group("content");

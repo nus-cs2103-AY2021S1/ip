@@ -33,7 +33,7 @@ public class AddTodoCommand extends Command {
      */
     @Override
     public void execute(TaskManager taskManager, Ui ui) {
-        Pattern r = Pattern.compile(InputPattern.addTodoPattern);
+        Pattern r = Pattern.compile(InputPattern.ADD_TODO);
         Matcher m = r.matcher(input);
         m.find();
         String content = m.group("content");
