@@ -16,8 +16,8 @@ public class DeleteCommand extends Command {
                 String toDelete = userInput.substring(7);
                 int index = Integer.parseInt(toDelete);
                 if (index <= taskList.size() && index > 0) {
-                    System.out.println(Ui.line);
-                    System.out.println(Ui.bot);
+                    System.out.println(Ui.getLine());
+                    System.out.println(Ui.getBot());
                     System.out.println("Noted! I've deleted this task:");
                     System.out.println(taskList.getTasks().get(index - 1));
                     taskList.getTasks().remove(index - 1);

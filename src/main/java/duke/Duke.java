@@ -2,7 +2,6 @@ package duke;
 
 import java.io.IOException;
 
-
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -28,9 +27,8 @@ public class Duke {
                command.execute(this.tasks, this.storage, this.ui);
            } catch (DukeException | IOException ex) {
                System.out.println(ex.getMessage());
-           }
-           finally {
-               System.out.println(Ui.line);
+           } finally {
+               System.out.println(Ui.getLine());
            }
         }
     }
@@ -38,9 +36,6 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
-
-
-
 }
 
 

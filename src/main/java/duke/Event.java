@@ -18,7 +18,6 @@ public class Event extends Task {
         this.dateAndTime = LocalDateTime.parse(dateAndTime, DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
     }
 
-
     @Override
     public String getTime() {
         return this.dateAndTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));

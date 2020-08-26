@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    static String bot = "Dave says:";
-    static String line = "_______________________________________________________________";
+    private static final String bot = "Dave says:";
+    private static final String line = "_______________________________________________________________";
     Scanner scanner;
 
     Ui() {
@@ -17,6 +17,23 @@ public class Ui {
         System.out.println(bot);
         System.out.println("Greetings from me, Dave!\n" + "How can I help you? ^_^");
         System.out.println(line);
+    }
+
+    /**
+     * Returns prefix of reply.
+     *
+     * @return String of prefix of reply.
+     */
+    public static String getBot() {
+        return Ui.bot;
+    }
+
+    /**
+     * Returns line separator.
+     * @return Line separator.
+     */
+    public static String getLine() {
+        return Ui.line;
     }
 
     public void printBye() {
@@ -95,7 +112,4 @@ public class Ui {
     public void showLoadingError() {
         System.out.println("I am unable to load your tasks! D:");
     }
-
-
-
 }

@@ -15,8 +15,8 @@ public class DoneCommand extends Command {
         int pos = Integer.parseInt(userInput.substring(5, len));
         if (pos <= taskList.size() && pos > 0) {
             taskList.getTasks().get(pos - 1).markAsDone(); //marking task as done
-            System.out.println(Ui.line);
-            System.out.println(Ui.bot);
+            System.out.println(Ui.getLine());
+            System.out.println(Ui.getBot());
             System.out.println("Great work! I've marked this task as done:");
             //System.out.println("[" + tasks.get(pos - 1).getStatusIcon() + "]" + " " + tasks.get(pos - 1).getTask());
             System.out.println(taskList.getTasks().get(pos - 1));
