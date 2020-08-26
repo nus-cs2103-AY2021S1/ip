@@ -1,17 +1,17 @@
 package main.java;
 
-import main.java.Command.Command;
-import main.java.Exception.AnonymousException;
-import main.java.Exception.DescriptionException;
-import main.java.Exception.DukeCreateFileException;
-import main.java.Exception.DukeDateTimeParserException;
-import main.java.Exception.DukeFileException;
-import main.java.Exception.DukeFileNotFoundException;
-import main.java.Exception.NoIndexException;
-import main.java.Parser.Parser;
-import main.java.Storage.Storage;
-import main.java.Task.TaskList;
-import main.java.Ui.Ui;
+import main.java.command.Command;
+import main.java.exception.AnonymousException;
+import main.java.exception.DescriptionException;
+import main.java.exception.DukeCreateFileException;
+import main.java.exception.DukeDateTimeParserException;
+import main.java.exception.DukeFileException;
+import main.java.exception.DukeFileNotFoundException;
+import main.java.exception.NoIndexException;
+import main.java.parser.Parser;
+import main.java.storage.Storage;
+import main.java.task.TaskList;
+import main.java.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
