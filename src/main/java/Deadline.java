@@ -2,16 +2,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class DeadlineTask extends Task {
+public class Deadline extends Task {
     private final LocalDate deadline;
     private static final String SAVE_STRING = "DEADLINE|%s|%s|%s";
 
-    public DeadlineTask(String taskName, LocalDate deadline) {
+    public Deadline(String taskName, LocalDate deadline) {
         super(taskName);
         this.deadline = deadline;
     }
 
-    public DeadlineTask(boolean isDone, String taskName, LocalDate deadline) {
+    public Deadline(boolean isDone, String taskName, LocalDate deadline) {
         super(isDone, taskName);
         this.deadline = deadline;
     }

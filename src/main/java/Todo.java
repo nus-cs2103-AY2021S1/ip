@@ -1,11 +1,11 @@
-public class TodoTask extends Task {
+public class Todo extends Task {
     private static final String SAVE_STRING = "TODO|%s|%s";
 
-    public TodoTask(String taskName) {
+    public Todo(String taskName) {
         super(taskName);
     }
 
-    public TodoTask(boolean isDone, String taskName) {
+    public Todo(boolean isDone, String taskName) {
         super(isDone, taskName);
     }
 

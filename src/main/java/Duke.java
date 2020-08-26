@@ -142,7 +142,7 @@ public class Duke {
                 throw new InvalidTaskException("😡 I have no idea what you want to do.");
             }
             String taskName = todoDetails[1];
-            task = new TodoTask(taskName);
+            task = new Todo(taskName);
             break;
         case "deadline":
             String[] deadlineDetails = input.split("deadline | /by ");
@@ -164,7 +164,7 @@ public class Duke {
             if (eventDetails.length < 3) {
                 throw new InvalidTaskException("When do you need to do this? You have to tell me, you know.");
             }
-            task = new EventTask(eventDetails[1], eventDetails[2]);
+            task = new Event(eventDetails[1], eventDetails[2]);
             break;
         default:
             throw new InvalidTaskException("Um, I don't get what you're saying.");

@@ -1,13 +1,13 @@
-public class EventTask extends Task {
+public class Event extends Task {
     private String timeRange;
     private static final String SAVE_STRING = "EVENT|%s|%s|%s";
 
-    public EventTask(String taskName, String timeRange) {
+    public Event(String taskName, String timeRange) {
         super(taskName);
         this.timeRange = timeRange;
     }
 
-    public EventTask(boolean isDone, String taskName, String timeRange) {
+    public Event(boolean isDone, String taskName, String timeRange) {
         super(isDone, taskName);
         this.timeRange = timeRange;
     }

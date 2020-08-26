@@ -26,17 +26,17 @@ public class TaskParser {
         }
     }
 
-    public static EventTask parseEvent(boolean isDone, String taskName, String timeRangeStr) {
-        return new EventTask(isDone, taskName, timeRangeStr);
+    public static Event parseEvent(boolean isDone, String taskName, String timeRangeStr) {
+        return new Event(isDone, taskName, timeRangeStr);
     }
 
-    public static DeadlineTask parseDeadline(boolean isDone, String taskName, String deadlineStr) {
+    public static Deadline parseDeadline(boolean isDone, String taskName, String deadlineStr) {
         // TODO: 26/8/20 Handle DateTimeParseException
         LocalDate deadline = LocalDate.parse(deadlineStr);
-        return new DeadlineTask(isDone, taskName, deadline);
+        return new Deadline(isDone, taskName, deadline);
     }
 
-    public static TodoTask parseTodo(boolean isDone, String taskName) {
-        return new TodoTask(isDone, taskName);
+    public static Todo parseTodo(boolean isDone, String taskName) {
+        return new Todo(isDone, taskName);
     }
 }
