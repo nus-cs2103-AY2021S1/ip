@@ -28,7 +28,6 @@ class Event extends Task {
     }
     @Override
     public String getStoreRepresentation() {
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
         String dateText = this.date.format(formatter);
         String doneStatus = this.isDone ? "D," : "N,";

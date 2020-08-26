@@ -1,7 +1,6 @@
 package main.java;
 
 class Task {
-    private final String line = "____________________________________________________________\n";
     protected String description;
     protected boolean isDone;
 
@@ -15,10 +14,8 @@ class Task {
     }
 
     public void finishTask() {
-        if (this.isDone) {
-            System.out.println("Task is already done!\n" + line);
-        } else {
-            System.out.println("Congratulations! I have marked this task done.\n" + line);
+         Ui.printDoneMessage(this.isDone);
+        if (!this.isDone) {
             this.isDone = true;
         }
     }
