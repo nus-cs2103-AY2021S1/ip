@@ -7,13 +7,32 @@ import main.java.Ui.Ui;
 
 import java.io.IOException;
 
-
+/**
+ * DoneAllCommand would execute the program when user specify
+ * "done all" as the command. This would automatically set all task to done
+ * show message to the user and update the external file.
+ */
 public class DoneAllCommand extends Command {
 
+    /**
+     * Constructs a DoneAllCommand without any
+     * argument passed.
+     */
     public DoneAllCommand() {
         super();
     }
 
+    /**
+     * Executes parsed user command. The result is:
+     * 1. Sets all task in the list to finished via TaskList.
+     * 2. Shows the updates list of tasks to the user via UI.
+     * 3. Updates the external file via Storage object.
+     * @param tasks TaskList List of task.
+     * @param ui Ui updating user interface to show intended messages.
+     * @param storage Storage to update external file whenever needed.
+     * @throws IOException This exception is thrown when the system failed to detect
+     * the external file.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         for(Task task : tasks.getTasks()) {
