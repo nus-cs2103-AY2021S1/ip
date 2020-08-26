@@ -31,7 +31,8 @@ public class Parser {
     private static final String DELETE_COMMAND = "delete";
 
     // DateTime format constant
-    private static final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter DATE_TIME_PARSE_FORMAT
+            = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     /**
      * Parses a line of user input, creates and returns an Executable object
@@ -74,7 +75,7 @@ public class Parser {
                 throw DukeException.emptyTimeDescription(); // empty time
             }
 
-            LocalDateTime deadline = LocalDateTime.parse(taskItems[1].trim(), format);
+            LocalDateTime deadline = LocalDateTime.parse(taskItems[1].trim(), DATE_TIME_PARSE_FORMAT);
             task = new Deadline(desc, deadline);
             return new Add(task);
         case EVENT_COMMAND:
@@ -89,7 +90,7 @@ public class Parser {
                 throw DukeException.emptyTimeDescription(); // empty time
             }
 
-            LocalDateTime eventDate = LocalDateTime.parse(taskItems[1].trim(), format);
+            LocalDateTime eventDate = LocalDateTime.parse(taskItems[1].trim(), DATE_TIME_PARSE_FORMAT);
             task = new Event(desc, eventDate);
             return new Add(task);
         case DONE_COMMAND:
