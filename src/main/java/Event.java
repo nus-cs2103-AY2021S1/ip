@@ -4,8 +4,8 @@
  * @author jingyenloh
  */
 public class Event extends Task {
-    private String timeRange;
     private static final String SAVE_STRING = "EVENT|%s|%s|%s";
+    private String timeRange;
 
     public Event(String taskName, String timeRange) {
         super(taskName);

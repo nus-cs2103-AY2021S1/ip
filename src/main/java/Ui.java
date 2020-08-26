@@ -23,7 +23,7 @@ public class Ui {
      * Displays a given number of messages in an indented block, enclosed by 2 indented lines.
      * @param messages a variable number of messages to be displayed in the indented block
      */
-    public void displayMessages(String...messages) {
+    public void displayMessages(String... messages) {
         System.out.println("     ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――");
         for (String message : messages) {
             System.out.printf("     %s\n", message);

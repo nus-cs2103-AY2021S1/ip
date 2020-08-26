@@ -23,6 +23,14 @@ public class Duke {
     }
 
     /**
+     * Initializes an instance of Duke, and runs it.
+     * @param args The command line args passed to the program
+     */
+    public static void main(String[] args) {
+        new Duke(SAVE_FILE_PATH).run();
+    }
+
+    /**
      * Executes an instance of the Duke chatbot. While the user does not input a goodbye command, Duke interprets
      * different commands passed to it and performs different actions, including but not limited to the following:
      * - store a task to be done
@@ -57,14 +65,6 @@ public class Duke {
             this.ui.displayMessages(e.getMessage());
         }
 
-    }
-
-    /**
-     * Initializes an instance of Duke, and runs it.
-     * @param args The command line args passed to the program
-     */
-    public static void main(String[] args) {
-        new Duke(SAVE_FILE_PATH).run();
     }
 
     /**
