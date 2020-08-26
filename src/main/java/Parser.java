@@ -23,6 +23,9 @@ public class Parser {
             case "delete":
                 taskList.deleteTask(Integer.parseInt(inputSuffix) - 1);
                 break;
+            case "find":
+                taskList.lookFor(inputSuffix);
+                break;
             default:
                 throw new DukeNoSuchInputException();
         }

@@ -42,15 +42,28 @@ public class TaskList extends ArrayList<Task> {
         Ui.printWithLines(prefix + task + "\n");
     }
 
-    @Override
-    public String toString() {
+    /**
+     * Deletes a specific task from itself.
+     */
+    public void lookFor(String query) {
+        TaskList results = new TaskList();
+        this.stream().filter(task -> task.hasKeyword(query)).forEach(task -> results.addTask(task, false));
+        StringBuilder prefix = new StringBuilder("Here are the matches in your list:\n");
+        Ui.printWithLines(prefix.append(results.listOut()).toString());
+    }
+
+    private StringBuilder listOut() {
         StringBuilder list = new StringBuilder();
-        StringBuilder prefix = new StringBuilder("Here are the tasks in your list:\n");
-        int l = super.size();
+        int l = size();
         for (int i = 0; i < l; i++) {
             list.append(i + 1).append(".").append(super.get(i).toString()).append("\n");
         }
-        return prefix.append(list).toString();
+        return list;
+    }
+
+    @Override
+    public String toString() {
+        return "Here are the tasks in your list:\n" + listOut();
     }
 
     public String toData() {
@@ -60,4 +73,5 @@ public class TaskList extends ArrayList<Task> {
         }
         return list.toString();
     }
+
 }

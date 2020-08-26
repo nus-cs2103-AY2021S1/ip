@@ -33,6 +33,16 @@ public class Task {
         isDone = true;
     }
 
+    public boolean hasKeyword(String key) {
+        String[] words = name.split(" ");
+        for (String word : words) {
+            if (key.equals(word)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), name);
