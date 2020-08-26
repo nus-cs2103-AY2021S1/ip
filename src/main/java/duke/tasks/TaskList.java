@@ -8,16 +8,16 @@ import java.util.List;
  */
 public class TaskList {
 
-    List<Task> taskList;
-    public TaskList(List<Task> taskList){
-        this.taskList = taskList;
+    List<Task> tasks;
+    public TaskList(List<Task> tasks){
+        this.tasks = tasks;
     }
 
     public TaskList(){
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
-    public List<Task> getTaskList() {
-        return taskList;
+    public List<Task> getTasks() {
+        return tasks;
     }
 }

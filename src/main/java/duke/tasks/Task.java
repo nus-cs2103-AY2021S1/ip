@@ -29,7 +29,8 @@ public class Task implements Serializable {
      */
     public void markAsDone() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done: " + "\n" + "[\u2713]" + this.description);
+        System.out.println("Nice! I've marked this task as done: " + "\n" + "[\u2713]"
+                + this.description);
     }
 
     @Override

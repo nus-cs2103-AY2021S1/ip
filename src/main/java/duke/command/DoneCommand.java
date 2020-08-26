@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidDoneCommandException;
-import duke.storage.ArrayListToTextConverter;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
@@ -28,7 +27,7 @@ public class DoneCommand extends UserCommand {
      */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
-        List<Task> ls = taskList.getTaskList();
+        List<Task> ls = taskList.getTasks();
         String[] doneCommandArray = userInput.split(" ");
         if (doneCommandArray.length < 2) {
             throw new InvalidDoneCommandException();

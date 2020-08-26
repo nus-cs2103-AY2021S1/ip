@@ -24,7 +24,7 @@ public class TimeFormatter {
      * @return string in day of week, month, day and year format.
      */
     public static String prettyDate(LocalDate localDate) {
-        return localDate.getDayOfWeek() + "," + localDate.getMonth().name().substring(0, 3) +
-                " " + localDate.getDayOfMonth() + " " + localDate.getYear();
+        return localDate.getDayOfWeek() + "," + localDate.getMonth().name().substring(0, 3)
+                + " " + localDate.getDayOfMonth() + " " + localDate.getYear();
     }
 }

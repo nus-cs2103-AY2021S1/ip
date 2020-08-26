@@ -28,7 +28,7 @@ public class EventCommand extends UserCommand {
      */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
-        List<Task> ls = taskList.getTaskList();
+        List<Task> ls = taskList.getTasks();
         String[] eventArr = userInput.split("/", 2);
         String at = eventArr[1].substring(eventArr[1].indexOf("at") + 3);
         String eventString = eventArr[0].substring(6);
