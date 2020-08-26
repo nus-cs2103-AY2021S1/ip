@@ -34,6 +34,7 @@ public class Ui {
         System.out.println("\tscroll: Displays your scroll - your list of tasks");
         System.out.println("\tconquer [NUMBER]: Marks the particular item on your scroll as DONE");
         System.out.println("\tdelete [NUMBER]: Deletes the particular item from your scroll");
+        System.out.println("\tfind [KEYWORD]: Returns a list of relevant items on your scroll");
         System.out.println("\tdismiss: This will be my cue to leave.");
         System.out.println();
         System.out.println("Now, how may I serve you?");
@@ -85,6 +86,21 @@ public class Ui {
         } else {
             dashedLineBreak();
             System.out.println("Your current scroll, Your Majesty:");
+            for (Task task : storedTasks) {
+                System.out.printf("\t%s.%s", storedTasks.indexOf(task) + 1, task);
+                System.out.println();
+            }
+        }
+        dashedLineBreak();
+        System.out.println();
+    }
+
+    public static void printRelevantTasksUi(ArrayList<Task> storedTasks) {
+        if (storedTasks.size() == 0) {
+            System.out.println("There doesn't seem to be any relevant writings, Your Majesty.");
+        } else {
+            dashedLineBreak();
+            System.out.println("Here are the relevant writings, Your Majesty:");
             for (Task task : storedTasks) {
                 System.out.printf("\t%s.%s", storedTasks.indexOf(task) + 1, task);
                 System.out.println();

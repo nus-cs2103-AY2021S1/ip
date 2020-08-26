@@ -39,6 +39,9 @@ public class Duke {
                 case "assist":
                     Ui.assist();
                     break;
+                case "find":
+                    tasks.returnSearchedTask(parser.getSplitUserInput());
+                    break;
                 default:
                     Task t = tasks.addTask(parser.getSanitisedUserInput());
                     storage.writeToFile(t, parser.getSanitisedUserInput());
