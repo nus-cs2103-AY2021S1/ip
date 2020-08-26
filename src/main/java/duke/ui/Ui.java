@@ -58,6 +58,7 @@ public class Ui {
                         + "'event' \n"
                         + "'list' \n"
                         + "'delete' \n"
+                        + "'find' \n"
                         + "'bye'";
         System.out.println(s + msg);
     }
