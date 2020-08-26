@@ -1,3 +1,4 @@
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,6 +24,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         lineFormatter("Hello!!!! I'm Duke\nWhat can I do for you?!?!?!" );
+        loadTasks();
         add_input();
 
     }
@@ -40,6 +42,7 @@ public class Duke {
                 // case where input is bye, and a case where the inputList is of length 1
                 if(inputList[0].trim().toLowerCase().equals(bye_key)){
                     byeGreetings();
+                    saveTasks();
                     break;
                 }
 
@@ -107,33 +110,44 @@ public class Duke {
 
     // method that adds tasks into the list of tasks
     public static void added_to_List(String printable) throws DukeException{
+        Task task = new Task("Do something");
         String[] nameList = printable.split(" ", 2);
         if(nameList[0].trim().toLowerCase().equals(deadline_key)){
             String[] task_deadline = nameList[1].trim().split("/by", 2);
             if(task_deadline.length != 2){
                 throw new DeadlineException();
             }
-            Task newTask = new Deadline(task_deadline[0].trim(), task_deadline[1].trim());
-            taskList.add(newTask);
-            newTaskItem(newTask, deadline_key);
+            // check for date time format
+            try {
+                task = new Deadline(task_deadline[0].trim(), task_deadline[1].trim());
+                newTaskItem(task);
+            } catch (Exception e){
+
+                throw new DeadlineException();
+            }
 
         } else if(nameList[0].trim().toLowerCase().equals(event_key)){
             String[] task_event = nameList[1].trim().split("/at", 2);
             if(task_event.length != 2){
                 throw new EventException();
             }
-            Task newTask = new Event(task_event[0].trim(), task_event[1].trim());
-            taskList.add(newTask);
-            newTaskItem(newTask, event_key);
+            // check for date time format
+            try {
+                task = new Event(task_event[0].trim(), task_event[1].trim());
+                newTaskItem(task);
+
+            } catch (Exception e){
+                throw new EventException();
+            }
 
         } else if(nameList[0].toLowerCase().equals(todo_key)){
-            Task newTask = new ToDo(nameList[1].trim());
-            taskList.add(newTask);
-            newTaskItem(newTask, todo_key);
+            task = new ToDo(nameList[1].trim());
+
 
         } else {
             lineFormatter("Please enter an appropriate command!!");
         }
+        taskList.add(task);
 
 
     }
@@ -175,8 +189,8 @@ public class Duke {
     }
 
     //method for formatting inputs into the taskList
-    public static void newTaskItem (Task task, String type){
-        lineFormatter("Now you have a new " + type + "! :\n" + task.toString() +
+    public static void newTaskItem (Task task){
+        lineFormatter("Now you have a new task! :\n" + task.toString() +
                 "\nYou currently have " + taskList.size() + " events in your list\n" +
                 "Type \'list\' to check your Tasklist");
     }
@@ -236,7 +250,7 @@ public class Duke {
                 BufferedReader reader = Files.newBufferedReader(filePath);
                 String data = reader.readLine();
                 if(data != null) {
-                    String[] tasks = data.split("++");
+                    String[] tasks = data.split("\\+\\+");
                     for (int i = 0; i < tasks.length; i++) {
                         //split the individual tasks
                         String[] doneList = tasks[i].split("~", 2);
