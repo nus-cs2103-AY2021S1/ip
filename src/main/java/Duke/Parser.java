@@ -13,8 +13,7 @@ public class Parser {
     /**
      * An array of valid Duke commands to edit tasks.
      */
-    private final static List<String> COMMANDS = Arrays.asList("done",
-                                                               "delete");
+    private final static List<String> COMMANDS = Arrays.asList("done", "delete", "find");
     private final TaskList userTaskList;
     private final Storage storage;
 
@@ -73,6 +72,10 @@ public class Parser {
                     } catch (IllegalArgumentException ex) {
                         Ui.showErrorMessage(ex);
                     }
+                    break;
+                case "find":
+                    TaskSearcher searcher = new TaskSearcher(userTaskList);
+                    searcher.searchAndDisplay(line.split("find")[1].trim());
                     break;
                 default:
                     break;

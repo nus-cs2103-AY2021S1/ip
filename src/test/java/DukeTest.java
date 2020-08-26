@@ -5,19 +5,27 @@ import Duke.Parser;
 import Duke.Storage;
 import Duke.Task;
 import Duke.TaskList;
+import Duke.TaskSearcher;
 import Duke.Todo;
 import Duke.Ui;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 
@@ -92,5 +100,45 @@ public class DukeTest {
         Task actualTask = taskList.addItem("event birthday party /at 2pm Wednesday");
         Task expectedTask = new Event("birthday party", "2pm Wednesday");
         assertEquals(expectedTask.toString(), actualTask.toString());
+    }
+    
+    @Test
+    public void testTaskIncludesKeyword() {
+        Task task = new Task("Do something nice");
+        assertTrue(task.includesKeyword("nice"));
+        assertFalse(task.includesKeyword("bad"));
+    }
+    
+    @Test
+    public void testTaskListSearch() throws DukeException {
+        TaskList taskList = new TaskList();
+        taskList.addItem("todo borrow book");
+        taskList.addItem("todo borrow umbrella");
+        
+        List<Task> actualResults = taskList.searchByKeyword("borrow");
+        
+        List<Task> expectedResults = new ArrayList<>();
+        expectedResults.add(new Todo("borrow book"));
+        expectedResults.add(new Todo("borrow umbrella"));
+        
+        assertEquals(
+                Arrays.toString(actualResults.toArray()),
+                Arrays.toString(expectedResults.toArray())
+        );
+    }
+    
+    @Test
+    public void testTaskSearcher() throws DukeException {
+        TaskList taskList = new TaskList();
+        taskList.addItem("todo borrow book");
+        taskList.addItem("todo borrow umbrella");
+        
+        TaskSearcher searcher = new TaskSearcher(taskList);
+        searcher.searchAndDisplay("borrow");
+        
+        String expectedMessage = "Here are the matching tasks in your list:\n"
+                + "[T] [✘] borrow book\n"
+                + "[T] [✘] borrow umbrella\n";
+        assertEquals(expectedMessage, outputCaptor.toString());
     }
 }

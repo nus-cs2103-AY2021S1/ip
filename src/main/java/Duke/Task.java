@@ -14,7 +14,7 @@ public class Task implements Serializable {
      *
      * @param description The task description.
      */
-    Task(String description) {
+    public Task(String description) {
         taskDescription = description;
     }
 
@@ -24,6 +24,10 @@ public class Task implements Serializable {
     void markAsDone() {
        this.isDone = true;
        Ui.showMarkedAsDone(this);
+    }
+    
+    public boolean includesKeyword(String keyword) {
+        return taskDescription.contains(keyword);
     }
 
     /**

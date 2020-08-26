@@ -3,6 +3,10 @@ deadline return book /by 2020-08-25
 deadline return book /by 2-03-19
 event meet friend /at wed 2pm
 list
+find book
+todo borrow umbrella
+find borrow
+find abc
 done 1
 list
 done 2
@@ -13,7 +17,7 @@ delete 1
 list
 delete 1
 list
-delete 2
+delete 3
 list
 hello world
 todo
