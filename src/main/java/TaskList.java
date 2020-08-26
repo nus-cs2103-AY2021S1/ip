@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class TaskList extends ArrayList<Task> {
 
     public void printList() {
-        Ui.printWithLines(this.toString());
+        Ui.printWithLines(toString());
     }
 
     public void completeTask(int i) {
@@ -43,7 +43,6 @@ public class TaskList extends ArrayList<Task> {
 
     public String toData() {
         StringBuilder list = new StringBuilder();
-        int l = super.size();
         for (Task task: this) {
             list.append(task.toData()).append("\n");
         }

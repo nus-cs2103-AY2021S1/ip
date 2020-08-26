@@ -5,16 +5,16 @@ public class DukeEmptyDescException extends DukeException {
     DukeEmptyDescException(TaskType taskType) {
         switch (taskType) {
             case TODO:
-                this.type = "todo";
+                type = "todo";
                 break;
             case EVENT:
-                this.type = "event";
+                type = "event";
                 break;
             case DEADLINE:
-                this.type = "deadline";
+                type = "deadline";
                 break;
             default:
-                this.type = "";
+                type = "";
                 break;
         }
     }
@@ -22,7 +22,7 @@ public class DukeEmptyDescException extends DukeException {
     @Override
     public String toString() {
         return super.toString() + String.format("You can't have an empty description for this %s task silly!",
-                this.type);
+                type);
     }
 
 }

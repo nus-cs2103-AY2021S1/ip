@@ -8,7 +8,7 @@ public class Task {
             throw new DukeEmptyDescException(taskType);
         } else {
             this.name = name;
-            this.done = false;
+            done = false;
         }
     }
 
@@ -26,16 +26,16 @@ public class Task {
     }
 
     public void complete() {
-        this.done = true;
+        done = true;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.name);
+        return String.format("[%s] %s", getStatusIcon(), name);
     }
 
     public String toData() {
-        return this.toString();
+        return toString();
     }
 
 }
