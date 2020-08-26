@@ -2,3 +2,5 @@ T | 1 | go and sleep
 T | 1 | go eat
 T | 1 | go fish
 T | 1 | go swim
+T | 0 | sleep well
+T | 0 | sleep good

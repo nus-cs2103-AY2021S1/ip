@@ -1,6 +1,7 @@
 package duke;
 
 import duke.task.Task;
+import duke.task.TaskList;
 
 public class Ui {
 
@@ -45,5 +46,12 @@ public class Ui {
     public static void doneMessage(boolean isDone, String description) {
         System.out.println("        I have marked this as done:");
         System.out.println("        [" + isDone + "] " + description);
+    }
+
+    public static void printFoundTask(TaskList list) {
+        System.out.println("        I have found these matching tasks in your list:");
+        for (Task t : list.getList()) {
+            System.out.println("        " + t.toString());
+        }
     }
 }

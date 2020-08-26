@@ -20,6 +20,8 @@ public class Parser {
         } else if (checker.equals("dele")) {
             int num = Character.getNumericValue(input.charAt(7));
             return new DeleteCommand(input, num);
+        } else if (checker.equals("find")) {
+            return new FindCommand(input);
         } else {
             return new AddCommand(input);
         }
