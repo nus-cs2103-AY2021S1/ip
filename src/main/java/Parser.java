@@ -7,11 +7,21 @@ public class Parser {
     protected Storage file;
     protected TaskList tList;
 
+    /**
+     * Constructor to init a Parser class.
+     * @param file
+     * @param tList
+     */
     public Parser(Storage file, TaskList tList) {
         this.file = file;
         this.tList = tList;
     }
 
+    /**
+     * Method to process the different inputs that are taken in.
+     * @throws DukeException
+     * @throws IOException
+     */
     public void parse() throws DukeException, IOException {
         ArrayList<Task> arr = tList.getArr();
         // Main logic, take in input from scanner and process accordingly

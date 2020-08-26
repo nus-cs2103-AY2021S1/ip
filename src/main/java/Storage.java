@@ -10,11 +10,20 @@ public class Storage {
     protected ArrayList<Task> arr;
     protected String filePath;
 
+    /**
+     * Constructor to initialize Storage class.
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.arr = new ArrayList<Task>();
     }
 
+    /**
+     * Method to begin the file reading process from history.
+     * @return
+     * @throws IOException
+     */
     public ArrayList<Task> load() throws IOException {
         File data = new File(filePath);
 

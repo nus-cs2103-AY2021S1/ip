@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
+
+    /**
+     * Method to test the file reading capabilities of the storage class.
+     */
     @Test
     public void Test1() {
         try {
@@ -20,6 +24,9 @@ public class DukeTest {
         }
     }
 
+    /**
+     * Method to test the validity of the 'Task' class.
+     */
     @Test
     public void Test2() {
         ArrayList<Task> arr = new ArrayList<>();
