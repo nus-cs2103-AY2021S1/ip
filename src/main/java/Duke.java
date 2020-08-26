@@ -15,6 +15,7 @@ public class Duke {
         while (!input.equals(new String("bye"))) {
         	if (input.equals(new String("list"))) {
         		int num = 1;
+        		System.out.println("Here are the tasks in your list:");
         		for (Task task: dataBase) {
         			System.out.println(num + "." + task.toString());
         			num++;
@@ -24,7 +25,29 @@ public class Duke {
         		Task currenTask = dataBase.get(index - 1);
         		currenTask.markAsDone();
         		System.out.println("Nice! I've marked this task as done:\n" + currenTask.toString());
-        	} else {
+        	} else if (input.substring(0,4).equals(new String("todo"))) {
+        		String taskContent = input.substring(5);
+        		ToDo newTask = new ToDo(taskContent);
+        		dataBase.add(newTask);
+        		System.out.println("Got it. I've added this task:\n" + newTask.toString() + "\nNow you have " + dataBase.size() + " tasks in the list.");
+        	} else if (input.substring(0,8).equals(new String("deadline"))) {
+        		String task  = input.substring(8);
+        		int index = task.indexOf('/');
+        		String taskContent = task.substring(0, index - 1);
+        		String taskDeadline = task.substring(index + 4);
+        		Deadline newTask = new Deadline(taskContent, taskDeadline);
+        		dataBase.add(newTask);
+        		System.out.println("Got it. I've added this task:\n" + newTask.toString() + "\nNow you have " + dataBase.size() + " tasks in the list.");
+        	} else if (input.substring(0,5).equals(new String("event"))) {
+        		String task  = input.substring(5);
+        		int index = task.indexOf('/');
+        		String taskContent = task.substring(0, index - 1);
+        		String taskTime = task.substring(index + 4);
+        		Event newTask = new Event(taskContent, taskTime);
+        		dataBase.add(newTask);
+        		System.out.println("Got it. I've added this task:\n" + newTask.toString() + "\nNow you have " + dataBase.size() + " tasks in the list.");
+        	} 
+        	else {
         		System.out.println("added: " + input);
         		dataBase.add(new Task(input));
         	}
