@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 // Handles all the logic behind any "due" command from the user
-public class DueCommand {
+public class DueCommand extends Command {
     /**
      * Executes any "due" command issued by the user.
      * Returns the information of the tasks due on the date specified by the user.
@@ -26,8 +26,8 @@ public class DueCommand {
         try {
             LocalDate date = DateTimeParsing.parseDate(dateStr);
             String formattedDate = DateTimeParsing.localDateToFormattedString(date);
-            ArrayList<String> filteredTasks = new ArrayList<>();
 
+            ArrayList<String> filteredTasks = new ArrayList<>();
             int len = taskList.size();
             for (int i = 1; i <= len; i++) {
                 Task task = taskList.get(i - 1);

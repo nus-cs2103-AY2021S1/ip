@@ -6,7 +6,7 @@ import duke.task.TaskList;
 import java.util.ArrayList;
 
 // Handles all the logic behind any "list" command from the user
-public class ListCommand {
+public class ListCommand extends Command {
     /**
      * Executes any "list" command issued by the user.
      * Iterates the taskList and returns the information of all the tasks in the list.

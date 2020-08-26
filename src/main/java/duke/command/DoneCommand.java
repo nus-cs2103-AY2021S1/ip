@@ -5,7 +5,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 // Handles all the logic behind any "done" command from the user
-public class DoneCommand {
+public class DoneCommand extends Command {
     /**
      * Executes any "done" command issued by the user.
      * Marks the task in the taskList specified by the user as done.

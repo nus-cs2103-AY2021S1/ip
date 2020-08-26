@@ -27,12 +27,9 @@ public abstract class Task {
         return isDone ? "\u2713" : "\u2718";
     }
 
-    /**
-     * Converts the task into a string format that will be stored in the save file.
-     *
-     * @return String storage information of task
-     */
-    public abstract String toSaveString();
+    public boolean containsKeyword(String keyword) {
+        return description.contains(keyword);
+    }
 
     @Override
     public String toString() {
@@ -46,4 +43,11 @@ public abstract class Task {
      * @return boolean Whether the task is due on the specified date
      */
     public abstract boolean isDueOn(LocalDate date);
+
+    /**
+     * Converts the task into a string format that will be stored in the save file.
+     *
+     * @return String storage information of task
+     */
+    public abstract String toSaveString();
 }

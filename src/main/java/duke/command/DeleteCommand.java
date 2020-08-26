@@ -6,7 +6,7 @@ import duke.task.TaskList;
 import duke.util.Storage;
 
 // Handles all the logic behind any "delete" command from the user
-public class DeleteCommand {
+public class DeleteCommand extends Command {
     /**
      * Executes any "delete" command issued by the user.
      * Removes the task specified by the user from taskList and updates save file after deletion.

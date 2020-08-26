@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.exception.InvalidCommandException;
 import duke.exception.InvalidTaskException;
 import duke.task.Task;
 import duke.task.TaskFactory;
@@ -11,7 +10,7 @@ import duke.util.Parser;
 import duke.util.Storage;
 
 // Handles all the logic behind any "task" command from the user
-public class TaskCommand {
+public class TaskCommand extends Command {
     /**
      * Executes any "task" command issued by the user.
      * Adds the task specified by the user to the taskList and updates save file after updating.
