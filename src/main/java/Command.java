@@ -46,10 +46,12 @@ public class Command {
             Deadline newTask = new Deadline(description, dateTime);
             taskList.addTask(newTask);
             ui.printAddMessage(newTask, taskList.getCount());
+            storage.updateTasks(taskList);
         } else if (commandType == CommandType.EVENT) {
             Event newTask = new Event(description, dateTime);
             taskList.addTask(newTask);
             ui.printAddMessage(newTask, taskList.getCount());
+            storage.updateTasks(taskList);
         } else {
             throw new DukeException("Wrong command type");
         }

@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Storage {
 
     private File file;
-    public static final String SPLITTER = "|";
+    private static final String SPLITTER = "|";
 
     public Storage(String filePath) {
         this.file = new File(filePath);
@@ -55,11 +55,14 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(file);
             for (Task task : taskList.getStoredTasks()) {
                 if (task instanceof ToDo) {
-                    fileWriter.write(String.join(SPLITTER, TaskType.TODO.getInitial(), getDoneString(task), task.getDescription()));
+                    fileWriter.write(String.join(SPLITTER, TaskType.TODO.getInitial(), getDoneString(task),
+                            task.getDescription()));
                 } else if (task instanceof Deadline) {
-                    fileWriter.write(String.join(SPLITTER, TaskType.DEADLINE.getInitial(), getDoneString(task), task.getDescription(), ((Deadline) task).getBy()));
+                    fileWriter.write(String.join(SPLITTER, TaskType.DEADLINE.getInitial(), getDoneString(task),
+                            task.getDescription(), ((Deadline) task).getBy()));
                 } else if (task instanceof Event) {
-                    fileWriter.write(String.join(SPLITTER, TaskType.EVENT.getInitial(), getDoneString(task), task.getDescription(), ((Event) task).getAt()));
+                    fileWriter.write(String.join(SPLITTER, TaskType.EVENT.getInitial(), getDoneString(task),
+                            task.getDescription(), ((Event) task).getAt()));
                 } else {
                     throw new DukeException("I can't seem to update the file...");
                 }

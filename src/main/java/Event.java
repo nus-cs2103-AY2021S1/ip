@@ -15,6 +15,7 @@ public class Event extends Task {
 
     /**
      * Initializes an event task containing the task description and time and date of the event.
+     *
      * @param description Description of the event task.
      * @param at          Event time and/or date information.
      */
@@ -33,8 +34,9 @@ public class Event extends Task {
     /**
      * Initializes an event task containing the task description, if the task is done and time and date of the event.
      * This is an overloaded constructor to allow for tasks in the hard drive to be loaded when Duke first runs.
+     *
      * @param description Description of the event task.
-     * @param isDone If task is done.
+     * @param isDone      If task is done.
      * @param at          Event time and/or date information.
      */
     public Event(String description, boolean isDone, String at) {
@@ -46,12 +48,14 @@ public class Event extends Task {
      * Parses the date and time string, and returns a LocalDateTime object if the date and time string is in accordance
      * to any of the listed formats.
      * If date and time string does not follow any of the listed formats, null is returned.
+     *
      * @param dateString String representing the date and time.
      * @return LocalDateTime object if parsing the successful.
      */
     public LocalDateTime tryParseDateTime(String dateString) {
-        List<String> formatStrings = Arrays.asList("yyyy-MM-dd HHmm", "yyyy-MM-d HHmm", "dd/MM/yyyy HHmm", "dd/M/yyyy HHmm", "d/MM/yyyy HHmm", "d/M/yyyy HHmm",
-                "dd-MM-yyyy HHmm", "dd-M-yyyy HHmm", "d-MM-yyyy HHmm", "d-M-yyyy HHmm");
+        List<String> formatStrings = Arrays.asList("yyyy-MM-dd HHmm", "yyyy-MM-d HHmm", "dd/MM/yyyy HHmm",
+                "dd/M/yyyy HHmm", "d/MM/yyyy HHmm", "d/M/yyyy HHmm", "dd-MM-yyyy HHmm", "dd-M-yyyy HHmm",
+                "d-MM-yyyy HHmm", "d-M-yyyy HHmm");
         for (String formatString : formatStrings) {
             try {
                 return LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern(formatString));
@@ -65,11 +69,13 @@ public class Event extends Task {
      * Parses the date string, and returns a LocalDate object if the date string is in accordance
      * to any of the listed formats.
      * If date string does not follow any of the listed formats, null is returned.
+     *
      * @param dateString String representing the date.
      * @return LocalDate object if parsing the successful.
      */
     public LocalDate tryParseDate(String dateString) {
-        List<String> formatStrings = Arrays.asList("yyyy-MM-dd", "yyyy-MM-d", "dd/MM/yyyy", "d/MM/yyyy", "dd/M/yyyy", "d/M/yyyy", "dd-MM-yyyy", "dd-M-yyyy", "d-MM-yyyy", "d-M-yyyy");
+        List<String> formatStrings = Arrays.asList("yyyy-MM-dd", "yyyy-MM-d", "dd/MM/yyyy", "d/MM/yyyy",
+                "dd/M/yyyy", "d/M/yyyy", "dd-MM-yyyy", "dd-M-yyyy", "d-MM-yyyy", "d-M-yyyy");
         for (String formatString : formatStrings) {
             try {
                 return LocalDate.parse(dateString, DateTimeFormatter.ofPattern(formatString));
@@ -81,6 +87,7 @@ public class Event extends Task {
 
     /**
      * Generates a string for printing from either the LocalDateTime object, LocalDate object, or at String.
+     *
      * @return String representing the event time and/or date for printing.
      */
     public String generateAtFormat() {
@@ -95,6 +102,7 @@ public class Event extends Task {
 
     /**
      * Returns the event time and/or date of the event.
+     *
      * @return String representing the event time and/or date of the event.
      */
     public String getAt() {

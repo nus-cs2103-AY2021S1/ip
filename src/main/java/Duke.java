@@ -33,7 +33,7 @@ public class Duke {
         ui.greet();
         while (isInProgram) {
             try {
-                String input = ui.nextInput();
+                String input = ui.getNextInput();
                 Command command = Parser.parse(input);
                 command.execute(taskList, ui, storage);
                 isInProgram = command.isInProgram();
