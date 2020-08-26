@@ -23,7 +23,7 @@ public class Task {
      * @param title      Title of task.
      * @param isComplete Boolean to represent completion status of task.
      */
-    public Task(String title, Boolean isComplete) {
+    public Task(String title, boolean isComplete) {
         this.title = title;
         this.complete = isComplete;
     }

@@ -24,7 +24,7 @@ public class Event extends Task {
      * @param isComplete Boolean to represent completion status of task.
      * @param time       Time of task.
      */
-    public Event(String title, Boolean isComplete, String time) {
+    public Event(String title, boolean isComplete, String time) {
         super(title, isComplete);
         this.time = new DateTime(time);
     }

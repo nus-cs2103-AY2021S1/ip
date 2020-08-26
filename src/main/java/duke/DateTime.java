@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 public class DateTime {
     private LocalDate date = LocalDate.now();
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private final String INVALIDDATEMESSAGE = "Your Date must be in the format yyyy-MM-dd. Initialising date to Today!";
+    private final String INVALID_DATE_MESSAGE = "Your Date must be in the format yyyy-MM-dd. Initialising date to Today!";
 
     /**
      * Constructor for the DateTime class.
@@ -21,7 +21,7 @@ public class DateTime {
         if (isValidFormat(date)) {
             this.date = LocalDate.parse(date);
         } else {
-            System.out.println(INVALIDDATEMESSAGE);
+            System.out.println(INVALID_DATE_MESSAGE);
         }
     }
 
@@ -31,7 +31,7 @@ public class DateTime {
      * @param date Input date.
      * @return A boolean to show whether the input date is valid.
      */
-    public static Boolean isValidFormat(String date) {
+    public static boolean isValidFormat(String date) {
         try {
             FORMATTER.parse(date);
         } catch (DateTimeParseException e) {

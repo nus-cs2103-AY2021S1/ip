@@ -52,6 +52,7 @@ public class TaskList {
 
     /**
      * Overloads display method.
+     *
      * @param arrayList ArrayList from which items are to be displayed.
      */
     public void display(ArrayList<Task> arrayList) {
@@ -64,6 +65,7 @@ public class TaskList {
 
     /**
      * Function to display all tasks with specified keyword.
+     *
      * @param keyWord Keyword to search for.
      * @throws InvalidDescriptionException In case keyword is empty.
      */

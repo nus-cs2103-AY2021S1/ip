@@ -17,8 +17,8 @@ public class Storage {
     private final String HOME = System.getProperty("user.home");
     private final Path DIR = Paths.get(HOME, "data");
     private final Path PATH = Paths.get(HOME, "data", "iPStore.txt");
-    private final String IOMESSAGE = "Sorry! There was an IOException! Initialising with an empty Tasklist!";
-    private final String INVALIDMESSAGE = "Sorry! There was an error in reading your data! Initialising with a semi-complete Tasklist!";
+    private final String IO_MESSAGE = "Sorry! There was an IOException! Initialising with an empty Tasklist!";
+    private final String INVALID_MESSAGE = "Sorry! There was an error in reading your data! Initialising with a semi-complete Tasklist!";
 
     /**
      * Constructor for Storage class.
@@ -53,21 +53,21 @@ public class Storage {
         if (info.length < 3) {
             throw new InvalidDataException();
         }
-        Boolean isComplete = info[1].equals("1");
+        boolean isComplete = info[1].equals("1");
         switch (info[0]) {
-            case "T":
-                return new Todo(info[2], isComplete);
-            case "D":
-                return new Deadline(info[2], isComplete, info[3]);
-            case "E":
-                return new Event(info[2], isComplete, info[3]);
-            default:
-                throw new InvalidTypeException();
+        case "T":
+            return new Todo(info[2], isComplete);
+        case "D":
+            return new Deadline(info[2], isComplete, info[3]);
+        case "E":
+            return new Event(info[2], isComplete, info[3]);
+        default:
+            throw new InvalidTypeException();
         }
     }
 
     public void writeData(ArrayList<Task> items) throws IOException {
-        Boolean directoryExists = Files.exists(DIR);
+        boolean directoryExists = Files.exists(DIR);
 
         if (!directoryExists) {
             Files.createDirectory(DIR);
@@ -86,7 +86,7 @@ public class Storage {
     }
 
     public ArrayList<Task> readData() {
-        Boolean pathExists = Files.exists(PATH);
+        boolean pathExists = Files.exists(PATH);
 
         ArrayList<Task> res = new ArrayList<>();
 
@@ -100,13 +100,13 @@ public class Storage {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                Ui.addLine(this.IOMESSAGE);
+                Ui.addLine(this.IO_MESSAGE);
             } catch (InvalidTypeException e) {
                 System.out.println(e.toString());
-                Ui.addLine(this.INVALIDMESSAGE);
+                Ui.addLine(this.INVALID_MESSAGE);
             } catch (InvalidDataException e) {
                 System.out.println(e.toString());
-                Ui.addLine(this.INVALIDMESSAGE);
+                Ui.addLine(this.INVALID_MESSAGE);
             }
         }
 

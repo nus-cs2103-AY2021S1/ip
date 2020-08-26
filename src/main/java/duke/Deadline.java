@@ -24,7 +24,7 @@ public class Deadline extends Task {
      * @param isComplete Boolean to represent completion status of task.
      * @param deadline   Deadline of task.
      */
-    public Deadline(String title, Boolean isComplete, String deadline) {
+    public Deadline(String title, boolean isComplete, String deadline) {
         super(title, isComplete);
         this.deadline = new DateTime(deadline);
     }
