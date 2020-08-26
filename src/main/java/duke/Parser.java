@@ -30,7 +30,7 @@ public class Parser {
      */
     public static Command parse(String userInput) throws InvalidFunctionException {
         String message = userInput.trim();
-        String[] parsedCommand = message.split(" ");
+        String[] parsedCommand = message.split(" ",2);
         String function = parsedCommand[0];
         if (message.equals(Parser.END_COMMAND)) {
             return new ExitCommand();
