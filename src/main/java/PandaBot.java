@@ -11,14 +11,6 @@ public class PandaBot {
         tasks = new TaskList(storage.load());
     }
     
-    //TODO: afterwards, can abstract out the commands 
-    // and change the error messages into actual exceptions
-    // according to timeline [for handling errors]
-    
-//    public void run() {
-//        
-//    }
-    
     public static void main(String[] args) {
         new PandaBot("PandaBot_Save.txt").run();
     }
