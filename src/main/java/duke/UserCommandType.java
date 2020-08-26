@@ -9,6 +9,7 @@ public enum UserCommandType {
     EVENT,
     LIST,
     DONE,
+    FIND,
     DELETE,
     EXIT,
 }

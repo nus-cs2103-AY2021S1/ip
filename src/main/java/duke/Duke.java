@@ -44,6 +44,10 @@ public class Duke {
                         userTaskList.addTask(userInput, userCommandType);
                         userTaskList.saveTaskList();
                         break;
+
+                    case FIND:
+                        userTaskList.find(userInput);
+                        break;
                     default:
                         break;
                 }

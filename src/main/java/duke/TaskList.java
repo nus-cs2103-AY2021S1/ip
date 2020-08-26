@@ -125,6 +125,33 @@ public class TaskList {
     }
 
     /**
+     * Finds tasks matching with keyword String and prints them.
+     * @param command user command String
+     */
+    public void find(String command) {
+        try {
+            String keyWordString = Parser.getFindKeyWordString(command);
+            ArrayList<String> messages = new ArrayList<>();
+            messages.add(StringConstants.TASK_FOUND_MESSAGE);
+            int i = 1;
+            for (Task task: tasks) {
+                if (task.getName().contains(keyWordString)) {
+                    messages.add(String.format("%d.%s", i, task.toString()));
+                    i++;
+                }
+            }
+            if (messages.size() == 1) {
+                Ui.printMessageBetweenLines(StringConstants.NO_TASK_FOUND_MESSAGE);
+            } else {
+                Ui.printMessagesBetweenLines(messages.toArray(new String[0]));
+            }
+
+        } catch (Parser.InvalidCommandException exception) {
+            Ui.printExceptionBetweenLines(exception);
+        }
+    }
+
+    /**
      * Saves user tasks to disk.
      */
     public void saveTaskList() {

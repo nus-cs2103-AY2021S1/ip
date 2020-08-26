@@ -14,6 +14,7 @@ public class Parser {
     private static final String EVENT_COMMAND = "event";
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
+    private static final String FIND_COMMAND = "find";
     private static final String DELETE_COMMAND = "delete";
     private static final String EXIT_COMMAND = "bye";
     private static final DateTimeFormatter dateTimeFormatter =
@@ -40,6 +41,8 @@ public class Parser {
             return UserCommandType.DEADLINE;
         } else if (command.startsWith(EVENT_COMMAND)) {
             return UserCommandType.EVENT;
+        } else if (command.startsWith(FIND_COMMAND)) {
+            return UserCommandType.FIND;
         } else {
             throw new InvalidCommandException();
         }
@@ -109,6 +112,20 @@ public class Parser {
             throw new InvalidCommandException("Done command should have 2 components");
         }
         return Integer.parseInt(components[1]) - 1;
+    }
+
+    /**
+     * Get Keyword String from find command.
+     * @param command user command
+     * @return keyword String
+     * @throws InvalidCommandException if keyword string not provided
+     */
+    public static String getFindKeyWordString(String command) throws InvalidCommandException {
+        String[] components = command.split(" ");
+        if (components.length < 2) {
+            throw new InvalidCommandException("Done command should have 2 components");
+        }
+        return String.join(" ", Arrays.copyOfRange(components, 1, components.length));
     }
 
     /**
