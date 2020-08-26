@@ -1,11 +1,15 @@
+import jdk.swing.interop.SwingInterOpUtils;
+
+import java.io.*;
+import java.nio.file.NoSuchFileException;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Duke {
+public class Duke implements Serializable {
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException, ClassNotFoundException, FileNotFoundException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -14,13 +18,22 @@ public class Duke {
         Scanner scan1 = new Scanner(System.in);
         ArrayList<Task> storage = new ArrayList<>();
         int count = 1;
+        
+       try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("tasks"));
+            ) {
+           storage = (ArrayList<Task>) ois.readObject();
+       }
+       catch (EOFException | FileNotFoundException e) {
+           System.out.println("");
+       }
 
 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
         while (scan1.hasNext()) {
-            try {
+            try (FileOutputStream tasks = new FileOutputStream("tasks");
+            ObjectOutputStream oos = new ObjectOutputStream(tasks)) {
                 String command = scan1.next();
                 if (command.equals("")) {
                     throw new DukeException(command);
@@ -109,9 +122,13 @@ public class Duke {
                 else {
                     throw new DukeException(command);
                 }
-            } catch (DukeException e) {
+                oos.writeObject(storage);
+                
+            } catch (DukeException | FileNotFoundException e) {
                 System.out.println(e.getMessage());
-            }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } 
         }
     }
 }
