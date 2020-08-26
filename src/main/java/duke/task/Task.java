@@ -13,6 +13,10 @@ public abstract class Task {
 
     public abstract boolean isDue(LocalDate date);
 
+    public boolean hasKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+
     public String getStatusIcon() {
         return isDone ? "\u2713" : "\u2718";
     }
