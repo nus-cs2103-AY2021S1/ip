@@ -1,13 +1,19 @@
-import java.io.*;
 import java.nio.file.Files;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+
+import java.io.BufferedWriter;
+
+import java.io.IOException;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
 
-    public static File getFile() throws FileNotFoundException, IOException{
+    public static File getFile() throws FileNotFoundException, IOException {
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "ip", "src", "main", "java", "Data");
         boolean directoryExists = Files.exists(path);
