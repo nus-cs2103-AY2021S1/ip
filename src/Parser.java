@@ -1,18 +1,25 @@
-public class Operation {
-    public static Memory<Task> memory;
+public class Parser {
+    public static TaskList<Task> taskList;
 
-    public Operation() {
-        memory = new Memory<>();
+    public Parser() {
+        taskList = new TaskList<>();
+    }
+
+    public void reloadTaskList() {
+        taskList = new TaskList<>();
         new ReadFile(Directory.FILEDIRECTORY.toString()).readFile();
     }
 
+    public boolean isEnd(String inputFromClient) {
+        return inputFromClient.equals(Status.BYE.name().toLowerCase());
+    }
 
     public void run(String order) {
 
         if (order.equals(Status.LIST.name().toLowerCase())) {
-            new Operation();
+            reloadTaskList();
             System.out.println(
-                    new Formating<>(Status.LIST.toString() + memory)
+                    new Formating<>(Status.LIST.toString() + taskList)
             );
         } else {
             if (order.length() >= 6
@@ -34,16 +41,16 @@ public class Operation {
             int num =
                     Integer.parseInt(new Formating<>(order.substring(4)).shorten().getContent());
 
-            if (num > memory.getMemory().size()) {
+            if (num > taskList.getTaskList().size()) {
                 DukeException.numberExcessException();
             } else {
-                Task task = memory.getMemory().get(num - 1);
+                Task task = taskList.getTaskList().get(num - 1);
                 task.setDone();
                 EditFile editFile = new EditFile(Directory.FILEDIRECTORY.toString());
                 editFile.setTaskDone(num);
 
                 System.out.println(
-                        new Formating<>(new Echo(Status.DONE.toString() + task)));
+                        new Formating<>(new Response(Status.DONE.toString() + task)));
             }
         } catch (NumberFormatException e) {
             DukeException.numberFormatException();
@@ -55,12 +62,12 @@ public class Operation {
             int num =
                     Integer.parseInt(new Formating<>(order.substring(6)).shorten().getContent());
 
-            if (num > memory.getMemory().size()) {
+            if (num > taskList.getTaskList().size()) {
                 DukeException.numberExcessException();
             } else {
 
-                Task task = memory.getMemory().get(num - 1);
-                memory.getMemory().remove(num - 1);
+                Task task = taskList.getTaskList().get(num - 1);
+                taskList.getTaskList().remove(num - 1);
                 EditFile editFile = new EditFile(Directory.FILEDIRECTORY.toString());
                 editFile.deleteLine(num);
 
@@ -68,10 +75,10 @@ public class Operation {
                         Status.DELETE.toString() +
                                 task + "\n" +
                                 String.format
-                                        (Status.REPORT.toString(), memory.getMemory().size());
+                                        (Status.REPORT.toString(), taskList.getTaskList().size());
 
                 System.out.println(
-                        new Formating<>(new Echo(response)));
+                        new Formating<>(new Response(response)));
             }
         } catch (NumberFormatException e) {
             DukeException.numberFormatException();
@@ -111,7 +118,12 @@ public class Operation {
         }
 
         //details of the task is found
-        String detail = description.substring(pointer + 1, separator);
+        String detail = new Formating<>(
+                description
+                        .substring(pointer + 1, separator)
+        )
+                .shorten()
+                .getContent();
 
         Task task;
         if (idetity.equals(Status.TODO.toString())) {
@@ -127,7 +139,12 @@ public class Operation {
             String time;
 
             if (separator < len - 1) {
-                time = description.substring(separator + 1);
+                time = new Formating<>(
+                        description
+                                .substring(separator + 1)
+                )
+                        .shorten()
+                        .getContent();
             } else {
                 DukeException.timeMissingException();
                 return;
@@ -147,12 +164,12 @@ public class Operation {
                 return;
             }
         }
-        memory.addMemory(task);
+        taskList.addMemory(task);
         WriteIn data = new WriteIn(Directory.FILEDIRECTORY.toString(), true);
         data.writeToFile(task.toString());
-        Formating<Task> formatedEcho =
+        Formating<Task> formatedResponse =
                 new Formating<>(task);
-        System.out.println(formatedEcho);
+        System.out.println(formatedResponse);
     }
 
 

@@ -18,7 +18,7 @@ public class ReadFile {
 
             while (currentLine != null) {
                 Formating<String> stringFormating = new Formating<>(currentLine);
-                Operation.memory.addMemory(stringFormating.stringToTask());
+                Parser.taskList.addMemory(stringFormating.stringToTask());
                 currentLine = textReader.readLine();
             }
 

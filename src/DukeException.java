@@ -30,12 +30,9 @@ public class DukeException {
     protected static void ReadLineException() {
         System.out.println(new Formating<>(Exceptions.READLINEEXCEPTION.toString()));
     }
-<<<<<<< HEAD
-=======
+
 
     protected static void timeFormatException() {
         System.out.println(new Formating<>(Exceptions.TIMEFORMATEXCEPTION.toString()));
     }
-
->>>>>>> branch-Level-8
 }

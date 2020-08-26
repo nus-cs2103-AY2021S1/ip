@@ -50,11 +50,8 @@ public class Formating<T> {
                 int lenOfArray = inputArray.length;
                 int lenOfLastInArray = inputArray[lenOfArray - 1].length();
                 String time = inputArray[lenOfArray - 1]
-<<<<<<< HEAD
+                        .substring(0, lenOfLastInArray - 1)
                         .substring(0, lenOfLastInArray - 1);
-=======
-                                .substring(0, lenOfLastInArray - 1);
->>>>>>> branch-Level-8
                 if (typeOfTask == 'D') {
                     task = new Deadline(inputArray[1], time);
                 } else {
@@ -81,7 +78,7 @@ public class Formating<T> {
             return underscore + "\n" +
                     Status.TASKADDED.toString() +
                     content + "\n" +
-                    String.format(Status.REPORT.toString(), Operation.memory.getMemory().size()) +
+                    String.format(Status.REPORT.toString(), Parser.taskList.getTaskList().size()) +
                     "\n" +
                     underscore;
         }

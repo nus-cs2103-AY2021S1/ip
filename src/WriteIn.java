@@ -4,11 +4,7 @@ import java.io.IOException;
 
 public class WriteIn {
     private String path;
-    private boolean append_to_file = false;
-
-    public WriteIn(String path) {
-        this.path = path;
-    }
+    private boolean append_to_file;
 
     public WriteIn(String path, boolean append_to_file) {
         this.path = path;

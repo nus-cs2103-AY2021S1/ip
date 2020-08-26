@@ -7,8 +7,8 @@ C:\Users\zhang\OneDrive\文档\ip\src\Exceptions.java
 C:\Users\zhang\OneDrive\文档\ip\src\Exit.java
 C:\Users\zhang\OneDrive\文档\ip\src\Formating.java
 C:\Users\zhang\OneDrive\文档\ip\src\Greet.java
-C:\Users\zhang\OneDrive\文档\ip\src\Memory.java
-C:\Users\zhang\OneDrive\文档\ip\src\Operation.java
+C:\Users\zhang\OneDrive\文档\ip\src\TaskList.java
+C:\Users\zhang\OneDrive\文档\ip\src\Parser.java
 C:\Users\zhang\OneDrive\文档\ip\src\Response.java
 C:\Users\zhang\OneDrive\文档\ip\src\Status.java
 C:\Users\zhang\OneDrive\文档\ip\src\Task.java
