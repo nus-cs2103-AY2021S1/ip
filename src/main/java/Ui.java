@@ -34,6 +34,9 @@ public class Ui {
         sc.close();
     }
 
+    /**
+     * Lists stored task by looping through stored_task, along with their status.
+     **/
     public void listStoredTasks(List<Task> stored_tasks) {
         if (stored_tasks.isEmpty()) {
             System.out.println("No tasks stored...");

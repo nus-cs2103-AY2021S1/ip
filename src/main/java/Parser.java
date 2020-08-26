@@ -1,43 +1,24 @@
 import java.util.Arrays;
 
-/**
- * Parses user input as commands.
- */
 public class Parser {
     /**
      * Checks if string contains only numbers.
      *
-     * @param input Input string to check.
-     * @return If string contains only numbers.
-     */
+     * @param input input string to check
+     * @return if string contains only numbers
+     **/
     public static boolean isNumber(String input) {
         return input.matches("[0-9]+");
     }
 
-    /**
-     * Gets appended strings from string array.
-     * This facilitates parsing of input with many words.
-     *
-     * @param inputArr  Input string array.
-     * @param indexFrom Index of array to start appending.
-     * @param indexTo   Index of array to end appending.
-     * @return Appended string.
-     */
     public static String getStringFromArray(String[] inputArr, int indexFrom, int indexTo) {
         String output = "";
-        for (int i = indexFrom; i < indexTo; i++) {
+        for (int i = indexFrom; i < indexTo; i++){
             output += inputArr[i] + " ";
         }
         return output.substring(0, output.length() - 1);
     }
 
-    /**
-     * Parses user input as commands.
-     *
-     * @param input User input.
-     * @return Command to be executed.
-     * @throws DukeException When command input is wrongly formatted.
-     */
     public static Command parse(String input) throws DukeException {
         String[] inputInformation = input.split(" ");
         if (inputInformation[0].equals(CommandType.BYE.getInput())) {

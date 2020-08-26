@@ -1,53 +1,62 @@
 /**
- * Represents a task with a description and if task is done.
- */
+ * Contains task description and completion status of task.
+ **/
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    //Represents task initials as constants
+    public enum TaskType {
+        TODO("T"), DEADLINE("D"), EVENT("E");
+
+        private final String initial;
+
+        TaskType(String initial) {
+            this.initial = initial;
+        }
+
+        public String getInitial() {
+            return initial;
+        }
+    }
+
     /**
-     * Initializes a Task.
+     * Constructor for Task.
      *
-     * @param description Description of the task.
-     */
-    protected Task(String description) {
+     * @param description Task description
+     **/
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    /**
-     * Initializes a task containing the task description and if the task is done.
-     * This is an overloaded constructor to allow for tasks in the hard drive to be loaded when Duke first runs.
-     *
-     * @param description Description of the task.
-     */
-    protected Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
 
     /**
-     * Retrieves done status and returns icon corresponding to the status.
+     * Retrieves status and returns icon corresponding to status.
      *
      * @return Icon corresponding to status.
-     */
-    protected String getStatusIcon() {
+     **/
+    public String getStatusIcon() {
         return (isDone ? "✓" : "X"); //return tick or X symbols
     }
 
     /**
-     * Gets the task description.
+     * Gets task description.
      *
      * @return Task description.
-     */
-    protected String getDescription() {
+     **/
+    public String getDescription() {
         return description;
     }
 
     /**
      * Marks task as done.
-     */
-    protected void markAsDone() {
+     **/
+    public void markAsDone() {
         isDone = true;
     }
 
@@ -55,8 +64,8 @@ public class Task {
      * Checks if task is done.
      *
      * @return If Task is Done.
-     */
-    protected boolean isDone() {
+     **/
+    public boolean isDone() {
         return isDone;
     }
 
