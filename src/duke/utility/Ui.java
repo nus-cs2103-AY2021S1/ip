@@ -179,6 +179,34 @@ public class Ui {
     }
 
     /**
+     * Returns a message showing all the tasks in the list that contains
+     * the specified keyword.
+     *
+     * @param keyword keyword to find task
+     * @param tasks list of tasks
+     * @return message about all the task that contains the specified keyword
+     */
+    public String findTask(String keyword, TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
+        boolean isFound = false;
+        int count = 1;
+
+        for (Task task : tasks.getTasks()) {
+            if (task.getTaskName().contains(keyword)) {
+                isFound = true;
+                sb.append(count + ". " + task + "\n");
+                count++;
+            }
+        }
+
+        if (isFound) {
+            return "Here are the matching tasks in your list:\n" + sb.toString().trim();
+        } else {
+            return "No task found with that keyword!";
+        }
+    }
+
+    /**
      * Gets the DukeException's message and prints it to the user.
      *
      * @param e exception thrown when running duke

@@ -37,6 +37,9 @@ public abstract class Command {
     /** String to specify taskbefore command. */
     public static String COMMAND_TASK_BEFORE = "taskbefore";
 
+    /** String to specify find command. */
+    public static String COMMAND_FIND = "find";
+
     private boolean isExit;
 
     /**

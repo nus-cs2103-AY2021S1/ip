@@ -6,6 +6,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TaskAfterCommand;
 import duke.command.TaskBeforeCommand;
@@ -15,6 +16,7 @@ import duke.exception.DeleteException;
 import duke.exception.DoneException;
 import duke.exception.DukeException;
 import duke.exception.EventException;
+import duke.exception.FindException;
 import duke.exception.InvalidDateFormatException;
 import duke.exception.InvalidDateTimeFormatException;
 import duke.exception.InvalidTaskNumberException;
@@ -235,6 +237,12 @@ public class Parser {
             }
 
             return new EventCommand(taskForEvent, eventDate);
+        } else if (command.equals(Command.COMMAND_FIND)) {
+            if (arg == null) {
+                throw new FindException();
+            }
+
+            return new FindCommand(arg);
         } else {
             throw new NotACommandException();
         }
