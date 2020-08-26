@@ -1,16 +1,19 @@
 package main.java;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 
 public class Emily {
     static ArrayList<Task> store = new ArrayList<>(100);
+    static String FILE_PATH = "data/emily.txt";
 
     static public void readData() throws DukeException{
 
-        File f = new File("data/emily.txt");
+        File f = new File(FILE_PATH);
         f.getParentFile().mkdirs();
         try {
             if (f.exists()) {
@@ -28,6 +31,18 @@ public class Emily {
                             Task t = new ToDos(temp[1]);
                             t.finished = isCompleted;
                             store.add(t);
+                            break;
+                        case 'D':
+                            temp = line.split(",", 3);
+                            Task d = new Deadline(temp[1], temp[2]);
+                            d.finished = isCompleted;
+                            store.add(d);
+                            break;
+                        case 'E':
+                            temp = line.split(",", 3);
+                            Task e = new Event(temp[1], temp[2]);
+                            e.finished = isCompleted;
+                            store.add(e);
                             break;
 
                     }
@@ -47,7 +62,6 @@ public class Emily {
         }
 
     }
-
 
     static public void interacting() throws DukeException {
 
@@ -176,8 +190,58 @@ public class Emily {
     }
 
 
-    public static void main(String[] args) throws DukeException, IOException {
-       /* String divider = "-------------------";
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath,true);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static ArrayList<String> unravel(ArrayList<Task> s, int starter){
+        ArrayList<String> processed = new ArrayList<>();
+        for(int i = starter; i< s.size(); i++){
+            Task current = store.get(i);
+            String line = "";
+            line = (current.finished? "T1" : "T0") + "," + current.description;
+
+            if(current instanceof Deadline){
+                line = line + "," + ((Deadline) current).getBy();
+
+            } else if (current instanceof Event){
+                line = line + "," + ((Event) current).getAt();
+            }
+            processed.add(line);
+
+        }
+        System.out.println(processed.toString());
+
+
+        return processed;
+    }
+
+    private static void updateData(int starter) throws DukeException {
+
+        ArrayList<String> add = unravel(store, starter);
+
+        try {
+            for(int i = 0; i < add.size(); i++){
+                String l = add.get(i);
+                writeToFile(FILE_PATH, l + System.lineSeparator());
+            }
+
+
+        } catch (IOException e) {
+            throw new DukeException("file is not found");
+        }
+
+
+    }
+
+
+    public static void main(String[] args) throws DukeException {
+
+        readData();
+        int starter = store.size();
+        String divider = "-------------------";
         boolean end = false;
 
 
@@ -196,9 +260,10 @@ public class Emily {
 
         System.out.println("bye\n" + divider + "\nBye~, hope to see you again!");
 
-        */
+        updateData(starter);
 
-        readData();
+
+
         System.out.println(store.toString());
 
     }
