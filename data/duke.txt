@@ -1,0 +1,3 @@
+T | 1 | read book
+T | 0 | read book
+E | 1 | return plate | lol 12

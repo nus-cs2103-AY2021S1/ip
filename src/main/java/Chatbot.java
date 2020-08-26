@@ -1,15 +1,78 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Chatbot {
 
-    public static void chat() throws DukeException {
+    /**
+     * Method to start the Chatbot and also read/save the history of tasks.
+     * Contains all the logic that processes the incoming messages from the user.
+     * @throws DukeException
+     * @throws IOException
+     */
+    public void chat() throws DukeException, IOException {
+        // Initialize Bot and print Welcome Message
         String start = "Hello! I'm Duke \nWhat can I do for you?";
         System.out.println(start);
-        Scanner sc = new Scanner(System.in);
-        String[] x = new String[]{"todo", "deadline", "event"};
-        List<String> all = Arrays.asList(x);
+
+        // Get relative directory & init
+        String dir = System.getProperty("user.dir");
+        String textDir = dir + "/data/duke.txt";
+        File data = new File(textDir);
         ArrayList<Task> arr = new ArrayList<>();
+
+        // Check if duke.txt exists, if not create file and retrieve data
+        if (!data.exists()) {
+            data.createNewFile();
+        } else {
+            Scanner read = new Scanner(data);
+            while (read.hasNext()) {
+                String currLine = read.nextLine();
+                Scanner cL = new Scanner(currLine);
+                String type = cL.next();
+                cL.next();
+                String isDone = cL.next();
+                cL.next();
+                if (type.equals("T")) {
+                    Todo toAdd = new Todo(cL.nextLine().substring(1));
+                    if (isDone.equals("1")) {
+                        toAdd.markAsDone();
+                    }
+                    arr.add(toAdd);
+                } else if (type.equals("D")) {
+                    String desc = cL.next();
+                    String add = cL.next();
+                    while (!add.equals("|")) {
+                        desc = desc + " " + add;
+                        add = cL.next();
+                    }
+                    String time = cL.nextLine().substring(1);
+                    Deadline toAdd = new Deadline(desc, time);
+                    if (isDone.equals("1")) {
+                        toAdd.markAsDone();
+                    }
+                    arr.add(toAdd);
+                } else if (type.equals("E")) {
+                    String desc = cL.next();
+                    String add = cL.next();
+                    while (!add.equals("|")) {
+                        desc = desc + " " + add;
+                        add = cL.next();
+                    }
+                    String time = cL.nextLine().substring(1);
+                    Event toAdd = new Event(desc, time);
+                    if (isDone.equals("1")) {
+                        toAdd.markAsDone();
+                    }
+                    arr.add(toAdd);
+                }
+            }
+        }
+
+        // Main logic, take in input from scanner and process accordingly
+        Scanner sc = new Scanner(System.in);
         while (true) {
             String line = sc.nextLine();
             Scanner scan = new Scanner(line);
@@ -83,6 +146,35 @@ public class Chatbot {
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+            saveData(arr, textDir);
         }
+    }
+
+    /**
+     * Function to write data to txt file. Processes the instances and then converts to String to be written.
+     * @param array
+     * @param directory
+     * @throws IOException
+     */
+    public static void saveData(ArrayList<Task> array, String directory) throws IOException {
+        FileWriter fw = new FileWriter(directory);
+        for (Task curr : array) {
+            String toWrite = null;
+            if (curr instanceof Todo) {
+                String state = curr.isDone ? " | 1 | " : " | 0 | ";
+                toWrite = "T" + state + curr.description;
+            } else if (curr instanceof Deadline) {
+                String state = curr.isDone ? " | 1 | " : " | 0 | ";
+                toWrite = "D" + state + curr.description + " | " + curr.dateTime;
+                ;
+            } else if (curr instanceof Event) {
+                String state = curr.isDone ? " | 1 | " : " | 0 | ";
+                toWrite = "E" + state + curr.description + " | " + curr.dateTime;
+            }
+            assert toWrite != null;
+            fw.write(toWrite);
+            fw.write(System.lineSeparator());
+        }
+        fw.close();
     }
 }

@@ -11,6 +11,11 @@ public class Event extends Task {
         super(description, date, duration);
     }
 
+    public Event(String description, String dateTime) {
+        super(description);
+        this.dateTime = dateTime;
+    }
+
     @Override
     public String toString() {
         String print = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
