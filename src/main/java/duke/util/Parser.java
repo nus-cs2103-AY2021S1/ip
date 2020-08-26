@@ -1,7 +1,6 @@
 package duke.util;
 
 import duke.command.CommandType;
-import duke.exception.InvalidCommandException;
 import duke.task.TaskType;
 
 public class Parser {
@@ -31,7 +30,7 @@ public class Parser {
         case CMD_DEADLINE:
             // fallthrough
         case CMD_EVENT:
-            //fallthrough
+            // fallthrough
         case CMD_TODO:
             return CommandType.Task;
         default:
@@ -39,7 +38,7 @@ public class Parser {
         }
     }
 
-    public static TaskType parseTaskType(String in) throws InvalidCommandException {
+    public static TaskType parseTaskType(String in) {
         String[] input = in.split(" ");
         String task = input[0];
         switch (task) {
