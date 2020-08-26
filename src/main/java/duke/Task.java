@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+package duke;
 
 public class Task {
     protected String taskTitle;
@@ -22,18 +22,6 @@ public class Task {
     public String getStatusNum() {
         return (isDone ? "1" : "0");
     }
-
-//    public static void doneTask(int index, ArrayList<Task> tasks) {
-//        tasks.get(index - 1).markAsDone();
-//        Ui.doneTaskMsg(index, tasks);
-//    }
-
-//    public static void deleteTask(int index, ArrayList<Task> tasks) {
-//        Task taskToDelete = tasks.get(index - 1);
-//        tasks.remove(index - 1);
-//        int newSizeOfTasks = tasks.size();
-//        Ui.deleteTaskMsg(index, newSizeOfTasks, taskToDelete);
-//    }
 
     @Override
     public String toString() {
