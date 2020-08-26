@@ -6,10 +6,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class SaveLoad {
+//deals with loading tasks from the file and saving tasks in the file
+public class Storage {
     private Path saveFilePath;
     
-    public SaveLoad(String fileName) {
+    public Storage(String fileName) {
         String home = System.getProperty("user.home");
 
         Path dirPath = Paths.get(home, "PandaBot");
@@ -46,7 +47,9 @@ public class SaveLoad {
             loadTask(tasks, reader);
             reader.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error in reading save file: " + e.getMessage() + "\n" 
+                                + "I'll get you a new save file!");
+            tasks = new ArrayList<>();
         }
         
         return tasks;
