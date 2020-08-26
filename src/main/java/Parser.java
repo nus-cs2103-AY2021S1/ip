@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Parser {
 
     /**
-     * Takes in user input and processes it.
+     * Takes in user input and processes it, producing an output.
      * @param ui the Ui currently in use.
      * @param taskList the TaskList currently in use.
      * @param storage the Storage object currently in use.
