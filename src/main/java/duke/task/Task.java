@@ -20,7 +20,7 @@ public class Task {
         return description;
     }
 
-    public boolean getDone() {
+    public boolean getDoneStatus() {
         return isDone;
     }
 

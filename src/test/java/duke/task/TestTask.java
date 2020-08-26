@@ -9,7 +9,7 @@ public class TestTask {
 
     @Test
     public void getDone_notDone_success() {
-        assertFalse(new Task("description").getDone());
+        assertFalse(new Task("description").getDoneStatus());
     }
 
     @Test
