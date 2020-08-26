@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 public class Task {
     private String description;
     private boolean isDone;
-    public static DateTimeFormatter INPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    public static DateTimeFormatter PRINT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    public final static DateTimeFormatter INPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public final static DateTimeFormatter PRINT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     public Task(String description) {
         this.description = description;
@@ -20,6 +20,10 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     public String toString() {

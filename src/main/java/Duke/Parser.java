@@ -9,6 +9,7 @@ import duke.exception.MissingDeadlineDateException;
 import duke.exception.MissingDeleteArgumentException;
 import duke.exception.MissingDoneArgumentException;
 import duke.exception.MissingEventDateException;
+import duke.exception.MissingFindArgumentException;
 import duke.exception.UnknownCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -16,9 +17,10 @@ import duke.task.ToDo;
 
 public class Parser {
 
-    public static boolean parseAndExecute(String input, TaskList tasks, Ui ui) throws MissingDoneArgumentException, DoneOutOfRangeException,
-            MissingDeleteArgumentException, DeleteOutOfRangeException, EmptyTodoException, MissingDeadlineDateException,
-            EmptyDeadlineException, MissingEventDateException, EmptyEventException, UnknownCommandException {
+    public static boolean parseAndExecute(String input, TaskList tasks, Ui ui) throws MissingDoneArgumentException,
+            DoneOutOfRangeException, MissingDeleteArgumentException, DeleteOutOfRangeException, EmptyTodoException,
+            MissingDeadlineDateException, EmptyDeadlineException, MissingEventDateException, EmptyEventException,
+            UnknownCommandException, MissingFindArgumentException {
         //DONE PORTION HERE----------------------------------------------------------
         if (input.length() >= 4 && input.substring(0, 4).equals("done")) {
             if (input.length() <= 5) {
@@ -33,7 +35,7 @@ public class Parser {
             );
             return true;
 
-            //DELETE PORTION HERE---------------------------------------------------------
+        //DELETE PORTION HERE---------------------------------------------------------
         } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")) {
             if (input.length() <= 7) {
                 throw new MissingDeleteArgumentException();
@@ -48,7 +50,7 @@ public class Parser {
             ui.sendCount(tasks);
             return true;
 
-            //TOD0 PORTION HERE-----------------------------------------------------------
+        //TOD0 PORTION HERE-----------------------------------------------------------
         } else if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
             if (input.length() == 4) {
                 throw new EmptyTodoException();
@@ -64,7 +66,7 @@ public class Parser {
             ui.sendCount(tasks);
             return true;
 
-            //DEADLINE PORTION HERE--------------------------------------------------------
+        //DEADLINE PORTION HERE--------------------------------------------------------
         } else if (input.length() >= 8 && input.substring(0, 8).equals("deadline")) {
             int index = input.indexOf("/");
             if (index == -1) {
@@ -88,7 +90,7 @@ public class Parser {
             ui.sendCount(tasks);
             return true;
 
-            //EVENT PORTION HERE-----------------------------------------------------------
+        //EVENT PORTION HERE-----------------------------------------------------------
         } else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
             int index = input.indexOf("/");
             if (index == -1) {
@@ -112,11 +114,20 @@ public class Parser {
             ui.sendCount(tasks);
             return true;
 
-            //LIST PORTION HERE------------------------------------------------------------
+        //LIST PORTION HERE------------------------------------------------------------
         } else if (input.equals("list")) {
             ui.listTasks(tasks);
             return false;
-        } else {
+        //FIND PORTION HERE------------------------------------------------------------
+        } else if (input.length() >= 4 && input.substring(0, 4).equals("find")) {
+            if (input.length() <= 5) {
+                throw new MissingFindArgumentException();
+            }
+            String keyword = input.substring(5);
+            ui.findTasks(tasks, keyword);
+            return false;
+        }
+        else {
             throw new UnknownCommandException();
         }
     }
