@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Main class that will oversee the running of the program.
+ */
 public class Duke {
     Ui ui;
     TaskManager taskManager;
@@ -15,6 +18,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the program.
+     */
     private void start() {
         ui.showStartScreen();
         boolean running = true;
