@@ -27,7 +27,7 @@ public class Ui {
     }
 
     public void showLine() {
-        System.out.println("__________________________________________");
+        System.out.println("______________________________________________");
     }
 
     public void closeScanner() {

@@ -22,6 +22,12 @@ public class Parser {
             }
             String item = input.substring(7).trim();
             return new DeleteCommand(item);
+        } else if (input.startsWith("find ") || input.equals("find")) {
+            if (input.length() < 6 || input.substring(5).trim().isEmpty()) {
+                throw new DukeException("Which task do you want to find?");
+            }
+            String keyword = input.substring(5).trim();
+            return new FindCommand(keyword);
         } else if (input.startsWith("todo ") || input.equals("todo")) {
             if (input.length() < 6 || input.substring(5).trim().isEmpty()) {
                 throw new DukeException("The description of a todo cannot be empty.");
