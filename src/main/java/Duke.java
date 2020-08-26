@@ -1,20 +1,15 @@
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
     private static final String BYE = "bye";
-    private static final String SAVE_FILE_PATH =
-            System.getProperty("user.home") + File.separator + ".duke" + File.separator + "tasks.txt";
 
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
             Ui.displayGreeting();
 
-            if (Duke.hasSavedTasks()) {
-                TaskList.addAllTasks(Duke.loadSavedTasks());
+            if (Storage.hasSavedTasks()) {
+                TaskList.addAllTasks(Storage.load());
                 Ui.displayGreetingReminder(TaskList.tasksCount());
             }
 
@@ -23,7 +18,7 @@ public class Duke {
                 String input = scanner.nextLine();
 
                 if (input.equalsIgnoreCase(BYE)) {
-                    Duke.saveTasks(TaskList.getTasks());
+                    Storage.saveTasks(TaskList.getTasks());
                     break;
                 } else {
                     Duke.handleCommand(input);
@@ -33,47 +28,8 @@ public class Duke {
 
             Ui.displayGoodbye();
         } catch (IOException e) {
-            e.printStackTrace();
+            Ui.displayMessages(e.getMessage());
         }
-    }
-
-    // TODO: 26/8/20 Add more relevant error for parsing
-    private static Collection<Task> loadSavedTasks() throws IOException {
-        List<Task> tasks = new ArrayList<>();
-        try (var br = new BufferedReader(new FileReader(SAVE_FILE_PATH))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                Task task = TaskParser.parse(line);
-                tasks.add(task);
-            }
-        }
-        return tasks;
-    }
-
-    private static void saveTasks(List<Task> tasks) throws IOException {
-        File saveFile = new File(SAVE_FILE_PATH);
-        if (!saveFile.exists()) {
-            boolean directoryCreated = saveFile.getParentFile().mkdirs();
-            if (!directoryCreated) {
-                throw new IOException("Unable to create parent directories to save file");
-            }
-            boolean saveFileCreated = saveFile.createNewFile();
-            if (!saveFileCreated) {
-                throw new IOException("Unable to create save file");
-            }
-        }
-
-        // Use PrintWriter wrapping BufferedWriter in FileWriter
-        try (var out = new PrintWriter(new BufferedWriter(new FileWriter(SAVE_FILE_PATH)))) {
-            for (Task task : tasks) {
-                out.println(task.toSaveString());
-            }
-        }
-    }
-
-    // TODO: 26/8/20 consider a more robust check
-    private static boolean hasSavedTasks() {
-        return new File(SAVE_FILE_PATH).exists();
     }
 
     private static void handleCommand(String input) {
