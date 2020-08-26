@@ -28,6 +28,18 @@ public class TaskList {
         this.tasks.add(t);
     }
 
+    public ArrayList<Task> searchFor(String keyword) {
+        ArrayList<Task> searchResult = new ArrayList<>();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task currTask = this.tasks.get(i);
+            String currTaskName = currTask.getTaskName();
+            if (currTaskName.contains(keyword)) {
+                searchResult.add(currTask);
+            }
+        }
+        return searchResult;
+    }
+
     public String displayTasks() {
         String output = "";
         for (int i = 0; i < this.tasks.size(); i++) {

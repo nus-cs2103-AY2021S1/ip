@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Parser {
     private TaskList currList;
@@ -11,10 +12,7 @@ public class Parser {
         if (currList.getNumOfTasks() == 0) { // user has not added any task
             throw new DukeException("Nothing has been added to the list yet!");
         } else {
-            for (int i = 0; i < currList.getNumOfTasks(); i++) {
-                String output = (i + 1) + ". " + currList.get(i).toString();
-                System.out.println(output);
-            }
+            System.out.println(currList.displayTasks());
         }
     }
 
@@ -111,6 +109,21 @@ public class Parser {
         System.out.println(outputMsg);
     }
 
+    public void findTask(String inputMsg) throws DukeException {
+        int numOfWords = inputMsg.split(" ").length;
+        if (numOfWords <= 1) {
+            throw new DukeException("Enter keyword to search for!");
+        } else {
+            ArrayList<Task> searchResult = currList.searchFor(inputMsg.substring(5));
+            if (searchResult.isEmpty()) {
+                throw new DukeException("Unable to find keyword.");
+            } else {
+                TaskList result = new TaskList(searchResult);
+                System.out.println(result.displayTasks());
+            }
+        }
+    }
+
     public void processMsg(String inputMsg) {
         String actionType = inputMsg.split(" ")[0]; // user specified action, to identify type of action
 
@@ -129,6 +142,12 @@ public class Parser {
         } else if (actionType.equals("delete")) {
             try {
                 deleteFromList(inputMsg);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
+        } else if (actionType.equals("find")) {
+            try {
+                findTask(inputMsg);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
