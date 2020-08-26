@@ -84,4 +84,23 @@ public class Ui {
 
         return sc.nextLine();
     }
+
+    String find(String keyword) throws IOException {
+        int counter = 1;
+        Scanner reader = new Scanner(PATH);
+
+        String line = reader.nextLine();
+        line = reader.nextLine();
+
+        while (reader.hasNextLine()) {
+            if (line.contains(keyword)) {
+                System.out.println(counter + ". " + p.stringToTask(line));
+                counter++;
+            }
+            line = reader.nextLine();
+        }
+
+        printLine();
+        return sc.nextLine();
+    }
 }
