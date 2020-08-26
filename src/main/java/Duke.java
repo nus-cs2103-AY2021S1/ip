@@ -41,7 +41,7 @@ public class Duke {
 
         while (!(input = sc.nextLine()).equals(terminate)) {
 
-            DateTimeFormatter df = DateTimeFormatter.ofPattern("d MMM yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
             String trimmed = input.trim();
             String first = trimmed.split(" ")[0].trim(); // checking the first word
             String last = input.substring(first.length()).trim(); // get rid of the first word
@@ -79,7 +79,7 @@ public class Duke {
                     String job = last.split("/by")[0].trim();
                     String time = last.split("/by")[1].trim();
                     LocalDate date = LocalDate.parse(time);
-                    Deadline work = new Deadline(job + " (by: " + df.format(date) + ")", false, date);
+                    Deadline work = new Deadline(job + " (by: " + formatter.format(date) + ")", false, date);
                     tasks.add(work);
                     storage.saveTasks(tasks);
                     System.out.println("Got it. I've added this task:");
@@ -93,7 +93,7 @@ public class Duke {
                     String job = last.split("/at")[0].trim();
                     String time = last.split("/at")[1].trim();
                     LocalDate date = LocalDate.parse(time);
-                    Event work = new Event(job + " (at: " + df.format(date) + ")", false, date);
+                    Event work = new Event(job + " (at: " + formatter.format(date) + ")", false, date);
                     tasks.add(work);
                     storage.saveTasks(tasks);
                     System.out.println("Got it. I've added this task:");
