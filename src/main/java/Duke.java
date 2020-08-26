@@ -1,14 +1,14 @@
 import java.util.Scanner;
 import java.util.List;
-import java.util.ArrayList;
-import java.lang.StringBuilder;
 
 public class Duke {
     protected List<Task> tasks;
     protected Scanner sc;
+    protected Storage storage;
 
     public Duke() {
-        this.tasks = new ArrayList<>();
+        this.storage = new Storage();
+        this.tasks = storage.loadTasks();
         this.sc = new Scanner(System.in);
     }
 
@@ -21,33 +21,33 @@ public class Duke {
     }
 
 
-    public void addTask(String keyword, String description) throws DukeException{
+    public void addTask(String keyword, String description) throws DukeException {
         switch (keyword) {
-            case "todo":
-                Task task = new ToDo(description, false);
-                this.tasks.add(task);
-                printAddedConfirmation(task);
-                break;
-            case "deadline":
-                String[] splitSlash = description.split(" /by ");
-                if (splitSlash.length != 2) {
-                    throw new DukeException("\tPaise! :') Please use the correct format: deadline <task> /by <time>");
-                }
-                task = new Deadline(splitSlash[0], false, splitSlash[1]);
-                this.tasks.add(task);
-                printAddedConfirmation(task);
-                break;
-            case "event":
-                splitSlash = description.split(" /at ");
-                if (splitSlash.length != 2) {
-                    throw new DukeException("\tPaise! :') Please use the correct format: event <task> /at <time>");
-                }
-                task = new Event(splitSlash[0], false, splitSlash[1]);
-                this.tasks.add(task);
-                printAddedConfirmation(task);
-                break;
-            default:
-                break;
+        case "todo":
+            Task task = new ToDo(description, false);
+            this.tasks.add(task);
+            printAddedConfirmation(task);
+            break;
+        case "deadline":
+            String[] splitSlash = description.split(" /by ");
+            if (splitSlash.length != 2) {
+                throw new DukeException("\tPaise! :') Please use the correct format: deadline <task> /by <time>");
+            }
+            task = new Deadline(splitSlash[0], false, splitSlash[1]);
+            this.tasks.add(task);
+            printAddedConfirmation(task);
+            break;
+        case "event":
+            splitSlash = description.split(" /at ");
+            if (splitSlash.length != 2) {
+                throw new DukeException("\tPaise! :') Please use the correct format: event <task> /at <time>");
+            }
+            task = new Event(splitSlash[0], false, splitSlash[1]);
+            this.tasks.add(task);
+            printAddedConfirmation(task);
+            break;
+        default:
+            break;
         }
     }
 
@@ -69,7 +69,7 @@ public class Duke {
         System.out.println("\tNice! I've marked this task as done:\n\t\t" + task);
     }
 
-    public void deleteTask(int index) throws DukeException{
+    public void deleteTask(int index) throws DukeException {
         Task task = this.tasks.get(index);
         int size = this.tasks.size();
         try {
@@ -78,7 +78,7 @@ public class Duke {
             throw new DukeException("Sorry! The index is out of bounds! :')");
         }
         System.out.println("\tOkay! I've removed this task:\n\t\t" + task.toString());
-        System.out.println(String.format("\tNow you have %d %s in the list. Jiayous! :D", size-1, size-1 > 1 ? "tasks" : "task"));
+        System.out.println(String.format("\tNow you have %d %s in the list. Jiayous! :D", size - 1, size - 1 > 1 ? "tasks" : "task"));
 
     }
 
@@ -99,50 +99,52 @@ public class Duke {
         while (sc.hasNext()) {
             try {
                 String input = sc.nextLine();
-                String[] split = input.split(" ",2);
+                String[] split = input.split(" ", 2);
 
                 switch (split[0]) {
-                    case "bye":
-                        sayBye();
-                        break;
-                    case "list":
-                        displayTasks();
-                        break;
-                    case "done":
-                        try {
-                            int index = Integer.parseInt(split[1]) - 1;
-                            markTaskAsDone(index);
-                        } catch (NumberFormatException e) {
-                            throw new DukeException("\tPaise! :') Please use the correct format: done <order of task in the list>");
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new DukeException("\tPaise! :') The index is out of bounds!");
-                        }
-                        break;
-                    case "todo":
-                    case "deadline":
-                    case "event":
-                        if (split.length < 2) {
-                            throw new DukeException("\tSorry! The description of a todo cannot be empty :')");
-                        }
-                        addTask(split[0], split[1]);
-                        break;
-                    case "delete":
-                        try {
-                            int index = Integer.parseInt(split[1]) - 1;
-                            deleteTask(index);
-                        } catch (NumberFormatException e) {
-                            throw new DukeException("\tPaise! :') Please use the correct format: delete <order of task in the list>");
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new DukeException("\tPaise! :') The index is out of bounds!");
-                        }
-                        break;
-                    default:
-                        throw new DukeException("\tApologies! I do not understand what that means :')");
+                case "bye":
+                    sayBye();
+                    break;
+                case "list":
+                    displayTasks();
+                    break;
+                case "done":
+                    try {
+                        int index = Integer.parseInt(split[1]) - 1;
+                        markTaskAsDone(index);
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("\tPaise! :') Please use the correct format: done <order of task in the list>");
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("\tPaise! :') The index is out of bounds!");
+                    }
+                    break;
+                case "todo":
+                case "deadline":
+                case "event":
+                    if (split.length < 2) {
+                        throw new DukeException("\tSorry! The description of a todo cannot be empty :')");
+                    }
+                    addTask(split[0], split[1]);
+                    break;
+                case "delete":
+                    try {
+                        int index = Integer.parseInt(split[1]) - 1;
+                        deleteTask(index);
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("\tPaise! :') Please use the correct format: delete <order of task in the list>");
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("\tPaise! :') The index is out of bounds!");
+                    }
+                    break;
+                default:
+                    throw new DukeException("\tApologies! I do not understand what that means :')");
                 }
 
                 if (split[0].equals("bye")) {
                     break;
                 }
+
+                storage.saveTasks(tasks);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
