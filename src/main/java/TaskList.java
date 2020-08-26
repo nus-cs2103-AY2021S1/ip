@@ -72,7 +72,11 @@ public class TaskList {
     public String displayTasks() {
         String output = "";
         for (int i = 0; i < this.tasks.size(); i++) {
-            output += (i + 1) + ". " + this.tasks.get(i).toString() + "\n";
+            if (i == this.tasks.size() - 1) {
+                output += (i + 1) + ". " + this.tasks.get(i).toString();
+            } else {
+                output += (i + 1) + ". " + this.tasks.get(i).toString() + "\n";
+            }
         }
         return output;
     }
