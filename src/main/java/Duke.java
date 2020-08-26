@@ -43,7 +43,7 @@ public class Duke {
 
     /**
      * The main algorithm of the bot which runs indefinitely as long as
-     * the running flag is true. The algorithm is summarised as:
+     * the running flag is true. The algorithm is summarized as:
      *
      *     0. Show the welcome message
      *     1. Read raw user input
