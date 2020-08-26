@@ -5,7 +5,8 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class TaskList {
-    private final ArrayList<Task> tasks;
+
+    protected final ArrayList<Task> tasks;
 
     TaskList() {
         tasks = new ArrayList<>();
@@ -31,5 +32,18 @@ public class TaskList {
         Task toComplete = tasks.get(index);
         toComplete.setCompleted();
         return toComplete;
+    }
+
+    @Override
+    public String toString() {
+        if (tasks.isEmpty()) {
+            return "The list is empty.";
+        } else {
+            String result = "";
+            for (Task t : tasks) {
+                result = result.concat(t.toString()).concat("\n");
+            }
+            return result;
+        }
     }
 }

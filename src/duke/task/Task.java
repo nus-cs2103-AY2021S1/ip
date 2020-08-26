@@ -2,8 +2,8 @@ package duke.task;
 
 public class Task {
 
-    String name;
-    Boolean completed;
+    public String name;
+    public Boolean completed;
 
     Task(String name) {
         this.name = name;
