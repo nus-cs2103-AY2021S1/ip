@@ -1,9 +1,9 @@
 package command;
 
-import task.Task;
-import task.ToDoTask;
 import task.DeadlineTask;
 import task.EventTask;
+import task.Task;
+import task.ToDoTask;
 import util.Storage;
 import util.TaskList;
 import util.Ui;
@@ -14,13 +14,6 @@ import java.io.IOException;
  * Represents the add command. The add command adds either a to-do, deadline or event task to the task list.
  */
 public class AddCommand extends Command {
-    /** Constants representing the different tasks. */
-    private enum TaskType {
-        TODO,
-        DEADLINE,
-        EVENT
-    }
-    
     /** The type of the task to be added. */
     private final TaskType taskType;
 
@@ -67,27 +60,34 @@ public class AddCommand extends Command {
             Task task;
             int taskNum = lst.size();
             switch (taskType) {
-                case TODO:
-                    task = new ToDoTask(taskDesc, false);
-                    lst.add(task);
-                    storage.addLine("TODO | 0 | " + taskDesc);
-                    ui.showAddTask(task, taskNum + 1);
-                    break;
-                case EVENT:
-                    task = new EventTask(taskDesc, false, taskDate);
-                    lst.add(task);
-                    storage.addLine("EVENT | 0 | " + taskDesc + "| " + taskDate);
-                    ui.showAddTask(task, taskNum + 1);
-                    break;
-                case DEADLINE:
-                    task = new DeadlineTask(taskDesc, false, taskDate);
-                    lst.add(task);
-                    storage.addLine("DEADLINE | 0 | " + taskDesc + "| " + taskDate);
-                    ui.showAddTask(task, taskNum + 1);
-                    break;
+            case TODO:
+                task = new ToDoTask(taskDesc, false);
+                lst.add(task);
+                storage.addLine("TODO | 0 | " + taskDesc);
+                ui.showAddTask(task, taskNum);
+                break;
+            case EVENT:
+                task = new EventTask(taskDesc, false, taskDate);
+                lst.add(task);
+                storage.addLine("EVENT | 0 | " + taskDesc + "| " + taskDate);
+                ui.showAddTask(task, taskNum);
+                break;
+            case DEADLINE:
+                task = new DeadlineTask(taskDesc, false, taskDate);
+                lst.add(task);
+                storage.addLine("DEADLINE | 0 | " + taskDesc + "| " + taskDate);
+                ui.showAddTask(task, taskNum);
+                break;
             }
         } catch (IOException e) {
             ui.showError(e.getMessage());
         }
+    }
+
+    /** Constants representing the different tasks. */
+    private enum TaskType {
+        TODO,
+        DEADLINE,
+        EVENT
     }
 }

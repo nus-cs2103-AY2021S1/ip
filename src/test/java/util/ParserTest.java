@@ -1,8 +1,8 @@
 package util;
 
 import duke.DukeException;
-
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -10,7 +10,7 @@ public class ParserTest {
     Ui ui = new Ui();
     TaskList lst = new TaskList();
     Parser parser = new Parser(lst);
-    
+
     @Test
     public void testParseForInvalidCommand() {
         assertThrows(IllegalArgumentException.class, () -> parser.parse("awdawdwaed"));
@@ -24,7 +24,7 @@ public class ParserTest {
     @Test
     public void testParseForEmptyCommandDesc() {
         Exception e = assertThrows(DukeException.class, () -> parser.parse("TODO"));
-        
+
         String expectedMessage = "Command description cannot be empty";
         String actualMessage = e.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));

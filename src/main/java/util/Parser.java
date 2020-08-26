@@ -12,17 +12,6 @@ import duke.DukeException;
  * The Parser class handles the validation of user input and creation of commands.
  */
 public class Parser {
-    /** Constants representing the different actions. */
-    private enum Action {
-        BYE,
-        LIST,
-        TODO,
-        DEADLINE,
-        EVENT,
-        DONE,
-        DELETE
-    }
-
     /** List of tasks */
     private final TaskList lst;
 
@@ -81,37 +70,48 @@ public class Parser {
         String value = splitCommand.length > 1 ? splitCommand[1] : "";
         
         switch (action) {
-            case LIST:
-                resultantCommand = new ListCommand();
-                break;
-            case TODO:
-                this.validateCommandDesc(value, Action.TODO);
-                resultantCommand = new AddCommand("TODO", value);
-                break;
-            case DEADLINE:
-            case EVENT:
-                String[] splitValue;
-                if (action == Action.DEADLINE) {
-                    this.validateCommandDesc(value, Action.DEADLINE);
-                    splitValue = value.split("/by ");
-                    resultantCommand = new AddCommand("DEADLINE", splitValue[0], splitValue[1]);
-                } else {
-                    this.validateCommandDesc(value, Action.EVENT);
-                    splitValue = value.split("/at ");
-                    resultantCommand = new AddCommand("EVENT", splitValue[0], splitValue[1]);
-                }
-                break;
-            case DONE:
-            case DELETE:
-                int taskNum = Integer.parseInt(value);
-                this.validateTaskNum(taskNum);
-                resultantCommand = action == Action.DONE ? new DoneCommand(taskNum) : new DeleteCommand(taskNum);
-                break;
-            case BYE:
-                resultantCommand = new ExitCommand();
-                break;
+        case LIST:
+            resultantCommand = new ListCommand();
+            break;
+        case TODO:
+            this.validateCommandDesc(value, Action.TODO);
+            resultantCommand = new AddCommand("TODO", value);
+            break;
+        case DEADLINE:
+        case EVENT:
+            String[] splitValue;
+            if (action == Action.DEADLINE) {
+                this.validateCommandDesc(value, Action.DEADLINE);
+                splitValue = value.split("/by ");
+                resultantCommand = new AddCommand("DEADLINE", splitValue[0], splitValue[1]);
+            } else {
+                this.validateCommandDesc(value, Action.EVENT);
+                splitValue = value.split("/at ");
+                resultantCommand = new AddCommand("EVENT", splitValue[0], splitValue[1]);
+            }
+            break;
+        case DONE:
+        case DELETE:
+            int taskNum = Integer.parseInt(value);
+            this.validateTaskNum(taskNum);
+            resultantCommand = action == Action.DONE ? new DoneCommand(taskNum) : new DeleteCommand(taskNum);
+            break;
+        case BYE:
+            resultantCommand = new ExitCommand();
+            break;
         }
         
         return resultantCommand;
+    }
+
+    /** Constants representing the different actions. */
+    private enum Action {
+        BYE,
+        LIST,
+        TODO,
+        DEADLINE,
+        EVENT,
+        DONE,
+        DELETE
     }
 }

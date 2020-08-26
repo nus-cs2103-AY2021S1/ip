@@ -4,12 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * The storage class handles the logic of writing and reading files.
@@ -39,7 +39,6 @@ public class Storage {
             file.createNewFile();
         }
     }
-
 
     /**
      * Returns a list of tasks in their String format after reading the text data file.

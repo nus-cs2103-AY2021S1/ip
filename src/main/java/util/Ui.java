@@ -9,7 +9,7 @@ import java.util.Scanner;
  */
 public class Ui {
     /** Scanner to read in user input input. */
-    Scanner sc;
+    private final Scanner sc;
 
     /**
      * Creates a UI instance and create a new scanner object.

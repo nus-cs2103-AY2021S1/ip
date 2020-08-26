@@ -5,20 +5,13 @@ import task.EventTask;
 import task.Task;
 import task.ToDoTask;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The TaskList class represents the list containing tasks.
  */
 public class TaskList {
-    /** Constants representing the different tasks. */
-    private enum TaskType {
-        TODO,
-        DEADLINE,
-        EVENT
-    }
-
     /** List containing the different tasks. */
     private final List<Task> lst;
 
@@ -41,15 +34,15 @@ public class TaskList {
             String[] splitInput = line.split(" \\| ");
             TaskType taskType = TaskType.valueOf(splitInput[0]);
             switch (taskType) {
-                case TODO:
-                    this.add(new ToDoTask(splitInput[2], splitInput[1].equals(DONE)));
-                    break;
-                case DEADLINE:
-                    this.add(new DeadlineTask(splitInput[2], splitInput[1].equals(DONE), splitInput[3]));
-                    break;
-                case EVENT:
-                    this.add(new EventTask(splitInput[2], splitInput[1].equals(DONE), splitInput[3]));
-                    break;
+            case TODO:
+                this.add(new ToDoTask(splitInput[2], splitInput[1].equals(DONE)));
+                break;
+            case DEADLINE:
+                this.add(new DeadlineTask(splitInput[2], splitInput[1].equals(DONE), splitInput[3]));
+                break;
+            case EVENT:
+                this.add(new EventTask(splitInput[2], splitInput[1].equals(DONE), splitInput[3]));
+                break;
             }
 
         }
@@ -85,5 +78,12 @@ public class TaskList {
      */
     public Task get(int index) {
         return lst.get(index);
+    }
+
+    /** Constants representing the different tasks. */
+    private enum TaskType {
+        TODO,
+        DEADLINE,
+        EVENT
     }
 }
