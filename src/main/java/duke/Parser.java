@@ -1,7 +1,17 @@
 package duke;
 
+/**
+ * Parse user input.
+ */
 public class Parser {
 
+    /**
+     * Reads user input and invoke the Command based on the
+     * input provided.
+     *
+     * @param userInput Input from user.
+     * @return Returns appropriate Command.
+     */
     static Command readUserInput(String userInput) {
         if (userInput.equals(Instruction.BYE.getInstruction())) {
             return new ExitCommand();

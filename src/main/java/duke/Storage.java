@@ -8,13 +8,27 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Encapsulates data storage into hard disk.
+ */
 public class Storage {
     File file;
 
+    /**
+     * Instantiates a Storage object.
+     *
+     * @param filepath Directory to the file.
+     */
     public Storage(String filepath) {
         this.file = new File(filepath);
     }
 
+    /**
+     * Loads the tasks that were saved in the hard drive previously.
+     *
+     * @return ArrayList of existing tasks.
+     * @throws DukeException If error occurs while reading the file.
+     */
     ArrayList<Task> loadTasksFromFile() throws DukeException {
         try {
             if (file.exists()) {
@@ -55,7 +69,12 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Writes tasks to file storage.
+     *
+     * @param tasks TaskList containing the ArrayList of tasks to be written.
+     * @throws DukeException If an error occurs while saving the task.
+     */
     void saveTasksToFile(TaskList tasks) throws DukeException {
         FileWriter fileWriter;
 

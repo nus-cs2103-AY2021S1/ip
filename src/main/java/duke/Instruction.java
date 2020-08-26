@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Stores instructions given by user.
+ */
 public enum Instruction {
     DONE("done"),
     DELETE("delete"),
@@ -15,6 +18,11 @@ public enum Instruction {
         this.i = i;
     }
 
+    /**
+     * Gets instructions.
+     *
+     * @return Instruction given by user.
+     */
     public String getInstruction() {
         return this.i;
     }

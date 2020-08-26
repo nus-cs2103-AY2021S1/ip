@@ -2,11 +2,19 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Encapsulates a Duke object.
+ */
 public class Duke {
     private static TaskList tasks;
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Instantiates a Duke object.
+     *
+     * @param filePath directory of file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -19,6 +27,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns main logic of code.
+     */
     public void run() {
         ui.showGreeting();
         boolean isExit = false;
@@ -38,6 +49,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts Duke programme.
+     *
+     * @param args Arguments.
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }

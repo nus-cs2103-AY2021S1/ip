@@ -3,13 +3,30 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Supports adding of tasks to the TaskList.
+ */
 public class AddCommand extends Command {
     String input;
 
+    /**
+     * Instantiates AddCommand.
+     *
+     * @param input Input from user.
+     */
     AddCommand(String input) {
         this.input = input;
     }
 
+    /**
+     * Executes command by adding the new task to TaskList
+     * and write data to storage.
+     *
+     * @param tasks TaskList containing the tasks.
+     * @param storage To read and write to file.
+     * @param ui Interact with user.
+     * @throws DukeException If input does not meet requirements.
+     */
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         String[] inputArr = input.split(" ", 2);
