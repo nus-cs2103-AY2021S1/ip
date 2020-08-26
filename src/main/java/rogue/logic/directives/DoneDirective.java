@@ -1,13 +1,15 @@
 package rogue.logic.directives;
 
-import rogue.storage.Storage;
 import rogue.model.task.TaskList;
-import rogue.ui.Ui;
 
 import rogue.logic.Report;
 
-import rogue.commons.exceptions.IncorrectArgumentException;
+import rogue.storage.Storage;
 import rogue.storage.exceptions.StorageException;
+
+import rogue.ui.Ui;
+
+import rogue.commons.exceptions.IncorrectArgumentException;
 
 public class DoneDirective implements Executable {
     private final String ERROR_INCORRECT_INDEX = "sToP TrYiNg tO FoOl mE. taSK #%d dOeS NoT ExIsT.";

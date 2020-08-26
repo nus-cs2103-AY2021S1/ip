@@ -4,9 +4,9 @@ import rogue.logic.directives.Action;
 import rogue.logic.directives.Executable;
 import rogue.logic.directives.ExitDirective;
 import rogue.logic.directives.ListDirective;
+import rogue.logic.parser.exceptions.UnknownCommandException;
 
 import rogue.commons.exceptions.IncorrectArgumentException;
-import rogue.logic.parser.exceptions.UnknownCommandException;
 
 public class Parser {
     private static final String ERROR_INCORRECT_ARGUMENT = "i hAtE YoU! sToP MaKiNg mE Do sOmEtHiNg iMpOsSiBlE.";
