@@ -120,6 +120,9 @@ public class IOHandler {
                     }
                     text = sc.nextLine();
                 }
+
+
+                text = sc.nextLine();
             }
             FileHandler.writeToFile(fileName, taskManager);
         }
@@ -131,6 +134,52 @@ public class IOHandler {
                 System.out.println("OOPS something went wrong!");
             }
         sc.close();
+    }
+
+    public static void writeToFile(String file, Task task) throws IOException {
+
+        FileWriter writer = new FileWriter(file, true);
+
+        if (task instanceof Todo) {
+            writer.write("T | " +  (task.getDone() ? 1 : 0) + " | " + task.getDescription() + "\n");
+        }
+
+        if (task instanceof Deadline) {
+            writer.write("D | " + (task.getDone() ? 1 : 0) + " | " + ((Deadline) task).getDescription() + " | " + ((Deadline) task).getTime() + "\n");
+        }
+
+        if (task instanceof Event) {
+            writer.write("E | " + (task.getDone() ? 1 : 0) + " | " + ((Event) task).getDescription() + " | " + ((Event) task).getTime() + "\n");
+        }
+
+        writer.close();
+    }
+
+    public static void replaceDone(String filePath, String replaceWith) {
+        try {
+            // input the file content to the StringBuffer "input"
+            BufferedReader file = new BufferedReader(new FileReader(filePath));
+            StringBuffer inputBuffer = new StringBuffer();
+            String line;
+
+            while ((line = file.readLine()) != null) {
+                inputBuffer.append(line);
+                inputBuffer.append('\n');
+            }
+            file.close();
+            String inputStr = inputBuffer.toString();
+
+            inputStr = inputStr.replace("| 0 | " + replaceWith, "| 1 | " + replaceWith);
+
+
+            // write the new string with the replaced line OVER the same file
+            FileOutputStream fileOut = new FileOutputStream(filePath);
+            fileOut.write(inputStr.getBytes());
+            fileOut.close();
+
+        } catch (Exception e) {
+            System.out.println("Problem reading file.");
+        }
     }
 }
 
