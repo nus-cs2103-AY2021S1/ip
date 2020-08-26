@@ -3,8 +3,30 @@ package duke;
 import duke.exception.*;
 import duke.task.*;
 
+/**
+ * Static class that parses user inputs and executes them.
+ */
 public class Parser {
 
+    /**
+     * Parses and executes user input, adding tasks to given TaskList and output
+     * messages through given Ui.
+     *
+     * @param input  A String of user input.
+     * @param tasks  A TaskList object that the tasks will be modified in.
+     * @param ui  An Ui object that will display the outputs and collect user inputs.
+     * @return  A Boolean of whether TaskList was updated.
+     * @throws MissingDoneArgumentException  If done was input without an argument.
+     * @throws DoneOutOfRangeException  If done was input with an argument out of range.
+     * @throws MissingDeleteArgumentException  If delete was input without an argument.
+     * @throws DeleteOutOfRangeException  If delete was input with an argument out of range.
+     * @throws EmptyTodoException  If todo was input without a description.
+     * @throws MissingDeadlineDateException  If deadline was input without a date.
+     * @throws EmptyDeadlineException  If deadline was input without a description.
+     * @throws MissingEventDateException  If event was input without a date.
+     * @throws EmptyEventException  If event was input without a description.
+     * @throws UnknownCommandException  If input is not recognised by Duke.
+     */
     public static boolean parseAndExecute(String input, TaskList tasks, Ui ui) throws MissingDoneArgumentException, DoneOutOfRangeException,
             MissingDeleteArgumentException, DeleteOutOfRangeException, EmptyTodoException, MissingDeadlineDateException,
             EmptyDeadlineException, MissingEventDateException, EmptyEventException, UnknownCommandException {
