@@ -88,13 +88,11 @@ public class Storage {
                         String[] splits = task.split(" ");
                         String name = splits[1];
                         String deadline = stringMaker(3, splits, "");
-                        System.out.println(deadline);
                         arr.add(new Deadline(name, deadline));
                     } else {
                         String[] splits = task.split(" ");
                         String name = splits[1];
                         String deadline = stringMaker(3, splits, "");
-                        System.out.println(deadline);
                         arr.add(new Event(name, deadline));
                     }
                 }

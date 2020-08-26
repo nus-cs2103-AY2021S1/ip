@@ -16,7 +16,7 @@ public class Parser {
      */
     public static void processCommand(String command, TaskList tl, Ui ui) throws Exception {
         int indexOfSlash = command.indexOf('/');
-        ArrayList<Task> arr = tl.arr;
+        ArrayList<Task> arr = tl.getArr();
         if (command.equals("bye")) {
             ui.respondToBye();
         } else if (command.length() >= 4) {
@@ -25,6 +25,13 @@ public class Parser {
                     ui.respondToEmptyList();
                 } else {
                     ui.respondToList();
+                }
+            } else if (command.substring(0, 4).equals("find")) {
+                if (command.length() == 4) {
+                    ui.respondToFindWrongSyntax();
+                } else {
+                    String searchWord = command.substring(5);
+                    ui.respondToFind(searchWord);
                 }
             } else if (command.substring(0, 4).equals("done")) {
                 if (command.length() == 4) {
