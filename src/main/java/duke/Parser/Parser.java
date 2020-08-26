@@ -8,16 +8,33 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses and understands user commands.
+ * Break down user input string and creates appropriate user commands.
+ * Checks for wrong user inputs and throw Duke Exceptions if necessary.
+ */
 public class Parser {
 
+    /**
+     * Static method to parse user input.
+     * @param userCommand User string from the command line.
+     * @return Appropriate command to reflect user input.
+     * @throws DukeException
+     */
     public static Command parse(String userCommand) throws DukeException {
+
+        // Formats the way users input their dates for a task.
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yy");
+
+        // Formats the way users input their time for a task.
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
         String[] userWord = userCommand.split(" ", 2);
 
+        // Exits the program.
         if (userCommand.equals("bye")) {
             return new ExitCommand();
         }
+        // Switch block checks for the appropriate commands to create based on user input.
         switch (userWord[0]) {
         case "list":
             return new ListCommand();
