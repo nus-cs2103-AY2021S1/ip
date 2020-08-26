@@ -44,4 +44,16 @@ public class Ui {
         }
         System.out.println();
     }
+
+    public void showSearchResults(List<Task> taskList, String keyword) {
+        int resultCount = 1;
+        System.out.println("\n    Here are the matching task(s) in your list:");
+        for (Task task : taskList) {
+            if (task.getDescription().contains(keyword)) {
+                System.out.println("    " + resultCount + "." + task);
+                resultCount += 1;
+            }
+        }
+        System.out.println();
+    }
 }
