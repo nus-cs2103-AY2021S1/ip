@@ -155,6 +155,7 @@ public class Emily {
                                     type = "deadline";
                                     String describe = input.substring(9);
                                     String[] temp = describe.split("/by ");
+                                    System.out.println("date is " + temp[1]);
                                     item = new Deadline(temp[0], temp[1]);
                                 } else if (input.contains("event")) {
                                     type = "event";
@@ -174,6 +175,8 @@ public class Emily {
                                     "\n" + divider);
                         }catch(ArrayIndexOutOfBoundsException e){
                             throw new DukeException("missing or invalid timestamp for " + type + " task");
+                        }catch(java.time.format.DateTimeParseException e){
+                            throw new DukeException("invalid timestamp, please rewrite in this form yyyy-mm-dd");
                         }
 
 
