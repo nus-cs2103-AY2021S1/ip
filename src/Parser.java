@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class InputProcessor {
+public class Parser {
 
     static String logo = "      ____        _        \n"
             + "     |  _ \\ _   _| | _____ \n"
@@ -8,10 +8,10 @@ public class InputProcessor {
             + "     | |_| | |_| |   <  __/\n"
             + "     |____/ \\__,_|_|\\_\\___|\n";
 
-    static TaskListManager taskListManager;
+    static TaskList taskList;
 
-    public InputProcessor(){
-        taskListManager = new TaskListManager();
+    public Parser(){
+        taskList = new TaskList();
     }
 
     public static void greet(){
@@ -34,7 +34,7 @@ public class InputProcessor {
 
         if(command.equals("list")){
 
-            taskListManager.printTaskList();
+            taskList.printTaskList();
 
         }else{
 
@@ -57,14 +57,14 @@ public class InputProcessor {
 
                 Integer index = Integer.parseInt(words[1]);
 
-                if(taskListManager.findListSize() < index){
+                if(taskList.findListSize() < index){
                     throw new InvalidRequestException("I could not find this task, please enter a valid task index.");
                 }
                 if(index < 0){
                     throw new InvalidRequestException("Task index is invalid, please enter a valid one.");
                 }
 
-                taskListManager.markAsDone(index);
+                taskList.markAsDone(index);
 
             }else if(words[0].equals("delete")){
 
@@ -78,16 +78,16 @@ public class InputProcessor {
 
                 Integer index = Integer.parseInt(words[1]);
 
-                if(taskListManager.findListSize() < index){
+                if(taskList.findListSize() < index){
                     throw new InvalidRequestException("I could not find this task, please enter a valid task index.");
                 }
                 if(index < 0){
                     throw new InvalidRequestException("Task index is invalid, please enter a valid one.");
                 }
 
-                taskListManager.deleteTask(index);
+                taskList.deleteTask(index);
 
-                int size = taskListManager.findListSize();
+                int size = taskList.findListSize();
 
 
                 if(size == 0){
@@ -161,7 +161,7 @@ public class InputProcessor {
 
                 }
 
-                taskListManager.addTask(newTask);
+                taskList.addTask(newTask);
 
             }
         }
