@@ -1,5 +1,13 @@
+/**
+ * DukeIllegalArgumentException is thrown when user input is incomplete
+ */
 public class DukeIllegalArgumentException extends DukeException {
-    
+
+    /**
+     * Constructor that creates a DukeIllegalArgumentException.
+     * @param message the error message of the exception.
+     * @param dukeExceptionType the type of Exception.
+     */
     DukeIllegalArgumentException(String message, DukeExceptionType dukeExceptionType) {
         super(message, dukeExceptionType);
     }

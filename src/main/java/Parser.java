@@ -1,8 +1,17 @@
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Parser class deals with making sense of user input
+ */
 public class Parser {
-    
+
+    /**
+     * Takes in user input and processes it.
+     * @param ui the Ui currently in use.
+     * @param taskList the TaskList currently in use.
+     * @param storage the Storage object currently in use.
+     */
     public static void echo(Ui ui, TaskList taskList, Storage storage) {
         ui.printHi();
         storage.load(taskList, ui);

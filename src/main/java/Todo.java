@@ -1,17 +1,26 @@
+/**
+ * Todo class represents a Task that is a Todo.
+ * Extends from the Task class.
+ */
 public class Todo extends Task {
-    Todo(String name) {
+    /**
+     * Constructor that creates a Todo object.
+     * @param name name of the Todo.
+     */
+    public Todo(String name) {
         super(name);
         taskType = "T";
     }
-    
-    Todo(String name, Boolean isDone) {
+
+    /**
+     * Overloaded constructor that creates a Todo object with a specified
+     * completion status.
+     * @param name name of the Todo.
+     * @param isDone completion status of the Todo.
+     */
+    public Todo(String name, Boolean isDone) {
         super(name, isDone);
         taskType = "T";
-    }
-    public String encode() {
-        return isDone
-                ? String.format("T | 1 | %s", name)
-                : String.format("T | 0 | %s", name);
     }
     
     @Override

@@ -6,12 +6,25 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
+/**
+ * Storage class handles read and write operations to a specified text file.
+ */
 public class Storage {
     private final String filePath;
-    
+
+    /**
+     * Constructor that creates a Storage object.
+     * @param filePath the filepath in which Tasks will be saved to.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
+    /**
+     * Updates the current Tasks in the specified text file.
+     * @param taskList the TaskList which contains the Tasks to save.
+     * @param ui the Ui which is currently in use.
+     */
     public void save(TaskList taskList, Ui ui) {
         File savedTasks = new File(filePath);
         boolean exists = savedTasks.exists();
@@ -28,7 +41,7 @@ public class Storage {
             } else { //file does not exist, create new file
                 boolean isCreated = savedTasks.createNewFile();
                 if(isCreated) {
-                    System.out.println("New save file created");
+                    ui.printSuccess("New save file created");
                 } else {
                     ui.printError("Failed to create save file");
                 }
@@ -38,7 +51,12 @@ public class Storage {
             ui.printError(ex);
         }
     }
-    
+
+    /**
+     * Reads the save file and updates the TaskList with the previously saved Tasks.
+     * @param taskList the TaskList that is currently in use.
+     * @param ui the Ui that is currently in use.
+     */
     public void load(TaskList taskList, Ui ui) {
         ui.loadTasks();
         try {
@@ -52,10 +70,17 @@ public class Storage {
         } catch (FileNotFoundException e) {
             //Folder not yet created, do nothing
         } catch (IOException e) {
-            System.out.println(Duke.HORIZONTAL_LINE + "Error: " + e + "\n" + Duke.HORIZONTAL_LINE);
+            ui.printError(e);
         }
     }
 
+    /**
+     * Processes the text in the save file to update the current TaskList with Tasks
+     * previously saved in the text file.
+     * @param line the line of text in the text file
+     * @param taskList the TaskList that is currently in use.
+     * @param ui the Ui that is currently in use.
+     */
     private static void processTask(String line, TaskList taskList, Ui ui) {
         String[] task = line.split(" \\| ");
         Boolean isDone = task[1].equals("1");
