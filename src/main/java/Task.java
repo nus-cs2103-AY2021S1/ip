@@ -26,6 +26,11 @@ public class Task {
     public TaskType getType() {
         return type;
     }
+
+    public String getFileString() {
+        String status = this.isDone() ? "T" : "F";
+        return String.format("%s~%s", status, name);
+    }
     
     public void done() {
         this.done = true;

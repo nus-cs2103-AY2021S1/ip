@@ -1,5 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     private ArrayList<Task> tasks;
@@ -17,6 +21,36 @@ public class Duke {
     public static String get_input(Scanner sc) {
         String user_input = sc.nextLine().trim(); // Read user input
         return user_input;
+    }
+
+    public void load_tasks(File prev_tasks) {
+        try {
+            Scanner sc_file = new Scanner(prev_tasks);
+            while (sc_file.hasNextLine()) {
+                String[] saved_task = sc_file.nextLine().split("~");
+                
+                Task new_task = getTask(saved_task[1]);
+                if (saved_task[0].compareTo("T") == 0) {
+                    new_task.done();
+                }
+                this.tasks.add(new_task);
+            }
+            sc_file.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void save_task(File prev_tasks) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(prev_tasks));
+            for (int i = 0; i < tasks.size(); i++) {
+                writer.write(tasks.get(i).getFileString());
+            }
+            writer.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -149,6 +183,7 @@ public class Duke {
             }
         }
         System.out.println(format_response("Bye. Hope to see you again soon!\n"));
+        sc.close();
     }
     
     public static void main(String[] args) {
@@ -165,9 +200,25 @@ public class Duke {
         ));
 
         Duke hal9000 = new Duke();
+        
+        // Read and load all previous tasks
+        try {
+            File prev_tasks = new File("prev_tasks.txt");
+            if (!prev_tasks.exists()) {
+                prev_tasks.createNewFile();
+            }
+            prev_tasks.setReadable(true);
+            prev_tasks.setWritable(true);
+            hal9000.load_tasks(prev_tasks);
+            
+            // Operate hal9000
+            hal9000.op();
 
-        hal9000.op();
-
+            // AFter ending, save all remaining tasks
+            hal9000.save_task(prev_tasks);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 /*
 */
