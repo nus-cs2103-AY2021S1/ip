@@ -12,10 +12,10 @@ public class Todo extends Task {
      * Todo takes in a String which contains the details of the task
      * and a boolean which indicates whether the todo is completed.
      * @param item description of the todo
-     * @param completed whether the todo is completed
+     * @param isCompleted whether the todo is completed
      */
-    public Todo(String item, boolean completed) {
-        super(item, completed);
+    public Todo(String item, boolean isCompleted) {
+        super(item, isCompleted);
     }
 
     /**

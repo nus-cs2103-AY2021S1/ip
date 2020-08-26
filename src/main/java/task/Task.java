@@ -7,26 +7,26 @@ package task;
  * @author (Sruthi)
  */
 public class Task {
-    private String item;
-    private boolean completed;
+    private final String item;
+    private boolean isCompleted;
 
     /**
      * Task takes in a String which contains the details of the task
      * and a boolean which indicates whether the task is completed.
      *
      * @param item description of the task
-     * @param completed whether the task is completed
+     * @param isCompleted whether the task is completed
      */
-    Task(String item, boolean completed) {
+    Task(String item, boolean isCompleted) {
         this.item = item;
-        this.completed = completed;
+        this.isCompleted = isCompleted;
     }
 
     /**
      * Sets the task to completed(true).
      */
     public void completeTask() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
@@ -36,7 +36,7 @@ public class Task {
      * @return String to be printed to the user
      */
     public String getItem() {
-        if (completed) {
+        if (isCompleted) {
             return "[O]" + this.item;
         } else {
             return "[X]" + this.item;

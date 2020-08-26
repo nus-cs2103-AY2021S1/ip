@@ -8,9 +8,9 @@ import java.time.LocalDate;
  * @author (Sruthi)
  */
 public class Deadline extends Task {
-    private String dateTime;
-    private LocalDate dueDate;
-    private String input;
+    private final String dateTime;
+    private final LocalDate dueDate;
+    private final String input;
 
     /**
      * Deadline takes in the description of the task, the date and time,
@@ -21,10 +21,10 @@ public class Deadline extends Task {
      * @param dateTime the date and time inputted by the user
      * @param dueDate the due date of the Deadline
      * @param input the input given by the user
-     * @param completed whether the Deadline is completed
+     * @param isCompleted whether the Deadline is completed
      */
-    public Deadline(String item, String dateTime, LocalDate dueDate, String input, boolean completed) {
-        super(item, completed);
+    public Deadline(String item, String dateTime, LocalDate dueDate, String input, boolean isCompleted) {
+        super(item, isCompleted);
         this.dateTime = dateTime;
         this.dueDate = dueDate;
         this.input = input;

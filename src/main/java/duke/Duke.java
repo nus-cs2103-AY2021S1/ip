@@ -1,8 +1,11 @@
 package duke;
 
 import ui.Ui;
+
 import storage.Storage;
-import taskList.TaskList;
+
+import tasklist.TaskList;
+
 import parser.Parser;
 
 /**
