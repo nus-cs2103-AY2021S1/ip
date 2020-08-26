@@ -2,14 +2,15 @@ package task;
 
 import exception.IncorrectFormatException;
 import ui.UIPrint;
+import time.Time;
 
 public class Event extends Task {
 
-    private String time;
+    private Time time;
 
     private Event(String icon, String description, String time, String taskInfo) {
         super(icon, description, taskInfo);
-        this.time = time;
+        this.time = Time.stringToTime(time);
     }
 
     @Override
