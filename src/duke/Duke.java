@@ -6,50 +6,17 @@ import java.util.*;
 
 public class Duke {
 
-    private List<Task> list;
     private Storage saveData;
+    private TaskList list;
+    private Ui ui;
 
-
-    public Duke(String path){
-        list = new ArrayList<>();
-        try {
-            this.saveData = new Storage(path);
-        } catch (IOException e) {
-            System.out.println(e.toString());
-        } try {
-            list.addAll(saveData.loadSavedData(path));
-        } catch (IOException e) {
-            System.out.println(e.toString());
-        }
+    public Duke(String filePath) {
+        this.saveData = new Storage(filePath);
+        list = new TaskList(saveData.loadSavedData());
     }
-
-    public void sayHi() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you mate?");
-    }
-    public void saySomthing(String str) {
-        System.out.println("------------------------------------------------------------------------");
-        System.out.println(str);
-        System.out.println("------------------------------------------------------------------------");
-    }
-    public void echo(String input) {
-        this.saySomthing(input);
-    }
-
-    public void byeMessage() {
-        System.out.println("-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-");
-        System.out.println("Bye. Hope to see you again soon!!!");
-        System.out.println("-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-");
-    }
-
 
     public void run() {
-        sayHi();
+        ui.sayHi();
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
             String str = sc.nextLine();
@@ -73,11 +40,11 @@ public class Duke {
                 try {
                     throw new DukeException("☹ OOPS!!! wait..... I don't understand your order my sir.");
                 } catch (DukeException e) {
-                    saySomthing(e.getMessage());
+                    ui.saySomthing(e.getMessage());
                 }
             }
         }
-        byeMessage();
+        ui.byeMessage();
     }
     public void addDeleteTask(String str) {
         try {
@@ -90,14 +57,14 @@ public class Duke {
             deleteTask(index);
             this.saveData.deleteTask(index);
         } catch (DukeException | IOException e) {
-            this.saySomthing(e.getMessage());
+            ui.saySomthing(e.getMessage());
         }
     }
 
     public void deleteTask(int index) {
         Task toRemove = list.get(index-1);
         list.remove(index-1);
-        saySomthing("Noted. I've removed this task:\n" + toRemove.toString() + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
+        ui.saySomthing("Noted. I've removed this task:\n" + toRemove.toString() + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
     }
     public void addDeadline(String str) {
         try {
@@ -114,7 +81,7 @@ public class Duke {
             String save = "D>0>"+description+">"+by;
             this.saveData.addTask(str);
         } catch (DukeException | IOException e) {
-            this.saySomthing(e.getMessage());
+            ui.saySomthing(e.getMessage());
         }
     }
 
@@ -128,7 +95,7 @@ public class Duke {
             String save = "T>0>"+str.substring(5);
             this.saveData.addTask(save);
         } catch (DukeException | IOException e) {
-            this.saySomthing(e.getMessage());
+            ui.saySomthing(e.getMessage());
         }
     }
 
@@ -148,7 +115,7 @@ public class Duke {
             String save = "E>0>"+description+">"+at;
             this.saveData.addTask(save);
         } catch (DukeException | IOException e) {
-            this.saySomthing(e.getMessage());
+            ui.saySomthing(e.getMessage());
         }
     }
 
@@ -163,18 +130,18 @@ public class Duke {
             completeTask(index);
             this.saveData.completeTask(index);
         } catch (DukeException | IOException e) {
-            this.saySomthing(e.getMessage());
+            ui.saySomthing(e.getMessage());
         }
     }
 
     public void completeTask(int index) {
         list.get(index-1).markAsDone();
-        saySomthing("Nice! I've marked this task as done:\n" + list.get(index-1).toString());
+        ui.saySomthing("Nice! I've marked this task as done:\n" + list.get(index-1).toString());
     }
 
     public void addToList(Task task) {
         list.add(task);
-        saySomthing("Got it. I've added this task:\n" + task.toString() + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
+        ui.saySomthing("Got it. I've added this task:\n" + task.toString() + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
     }
 
     public void showList() {
@@ -187,11 +154,10 @@ public class Duke {
                 print += String.format("%d. ", i + 1) + list.get(i) + "\n";
             }
         }
-        saySomthing(print);
+        ui.saySomthing(print);
     }
 
     public static void main(String[] args) {
-        Duke bot = new Duke("data/duke.txt");
-        bot.run();
+        new Duke("data/duke.txt").run();
     }
 }

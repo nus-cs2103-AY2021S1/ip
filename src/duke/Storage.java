@@ -9,9 +9,13 @@ public class Storage {
     private final String txt_path = "data/duke.txt";
     private String path;
 
-    public Storage(String path) throws IOException {
+    public Storage(String path) {
         this.path = path;
-        createFolder();
+        try {
+            createFolder();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
     }
 
     private void createFolder() throws IOException {
@@ -25,26 +29,31 @@ public class Storage {
         }
     }
 
-    public List<Task> loadSavedData(String path) throws IOException {
+    public List<Task> loadSavedData() {
         List<Task> list = new ArrayList<>();
-        File file = new File(txt_path);
-        FileReader fr = new FileReader(file);
-        BufferedReader br = new BufferedReader(fr);
-        String line;
-        while((line = br.readLine()) != null){
-            String[] splited = line.split(">");
-            Task currTask = null;
-            if (splited[0].equals("T")) {
-                currTask = new Todo(splited[2]);
-            } else if (splited[0].equals("E")) {
-                currTask = new Event(splited[2], splited[3]);
-            } else if (splited[0].equals("D")) {
-                currTask = new Deadline(splited[2], splited[3]);
+
+        try {
+            File file = new File(txt_path);
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            while((line = br.readLine()) != null){
+                String[] splited = line.split(">");
+                Task currTask = null;
+                if (splited[0].equals("T")) {
+                    currTask = new Todo(splited[2]);
+                } else if (splited[0].equals("E")) {
+                    currTask = new Event(splited[2], splited[3]);
+                } else if (splited[0].equals("D")) {
+                    currTask = new Deadline(splited[2], splited[3]);
+                }
+                if (splited[1].equals("1")) {
+                    currTask.markAsDone();
+                }
+                list.add(currTask);
             }
-            if (splited[1].equals("1")) {
-                currTask.markAsDone();
-            }
-            list.add(currTask);
+        } catch(IOException e) {
+            System.out.println(e.toString());
         }
         return list;
     }
