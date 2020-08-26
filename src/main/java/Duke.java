@@ -1,13 +1,11 @@
-import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static String long_line = "________________________________________________________________________________";
+    private static String longLine = "________________________________________________________________________________";
     private static ArrayList<Task> taskList = new ArrayList<>();
     private static String bye_key = "bye";
     private static String list_key = "list";
@@ -17,8 +15,7 @@ public class Duke {
     private static String event_key = "event";
     private static String delete_key = "delete";
 
-
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -26,11 +23,9 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         lineFormatter("Hello!!!! I'm Duke\nWhat can I do for you?!?!?!" );
-        loadTasks();
         add_input();
 
     }
-
 
 
     public static void add_input() {
@@ -45,7 +40,6 @@ public class Duke {
                 // case where input is bye, and a case where the inputList is of length 1
                 if(inputList[0].trim().toLowerCase().equals(bye_key)){
                     byeGreetings();
-                    saveTasks();
                     break;
                 }
 
@@ -146,9 +140,9 @@ public class Duke {
 
     //method to segment every String that is being fed into this method
     public static void lineFormatter (String printable){
-        System.out.println(long_line);
+        System.out.println(longLine);
         System.out.println(printable);
-        System.out.println(long_line);
+        System.out.println(longLine);
     }
 
 
@@ -250,7 +244,7 @@ public class Duke {
                         if (nameList[0].trim().toLowerCase().equals(deadline_key)) {
                             String[] task_deadline = nameList[1].trim().split("/by", 2);
                             Task newTask = new Deadline(task_deadline[0].trim(),
-                                        task_deadline[1].trim(), checkDone(doneList[1]));
+                                    task_deadline[1].trim(), checkDone(doneList[1]));
                             taskList.add(newTask);
 
                         } else if (nameList[0].trim().toLowerCase().equals(event_key)) {
@@ -274,6 +268,7 @@ public class Duke {
     private static boolean checkDone (String checker){
         return checker.equals("1");
     }
+
 
 
 }
