@@ -25,14 +25,14 @@ public class Storage {
                 taskList.add(task);
             }
             return taskList;
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | DukeException e) {
             throw new DukeException("☹ OOPS!!! There was an error while loading the file");
         }
     }
 
     private Task getTask(String s) throws DukeException {
         try {
-            Task currentTask = null;
+            Task currentTask;
             if (s.startsWith("T")) {
                 currentTask = new Todo(s.substring(8));
             } else {
@@ -42,10 +42,12 @@ public class Storage {
                     currentTask = new Deadline(s.substring(8, index), LocalDate.parse(dateTime));
                 } else if (s.startsWith("E")) {
                     currentTask = new Event(s.substring(8, index), LocalDate.parse(dateTime));
+                } else {
+                    throw new DukeException();
                 }
             }
 
-            if (s.charAt(4) == '1' && currentTask != null) {
+            if (s.charAt(4) == '1') {
                 currentTask.markAsDone();
             }
 
