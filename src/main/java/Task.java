@@ -1,7 +1,17 @@
+/**
+ * The Task class represent an abstract class of Tasks which can be used to represent
+ * different types of tasks.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a Task object with the given description. A constructor in an abstract
+     * class cannot be instantiated.
+     * @param description
+     * @throws PandaBotEmptyTaskDescriptionException
+     */
     public Task(String description) throws PandaBotEmptyTaskDescriptionException {
         this.description = description.strip(); // removes starting and ending white spaces
         if (this.description.length() == 0) {

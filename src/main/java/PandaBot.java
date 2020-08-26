@@ -1,10 +1,15 @@
-import java.util.Scanner;
-
+/**
+ * The PandaBot class runs the main
+ */
 public class PandaBot {
     private Ui ui;
     private TaskList tasks;
-    private Storage storage = new Storage("PandaBot_Save.txt");
+    private Storage storage;
 
+    /**
+     * Creates a new PandaBot object.
+     * @param fileName
+     */
     public PandaBot(String fileName) {
         ui = new Ui();
         storage = new Storage(fileName);
@@ -14,7 +19,10 @@ public class PandaBot {
     public static void main(String[] args) {
         new PandaBot("PandaBot_Save.txt").run();
     }
-    
+
+    /**
+     * Runs the PandaBot program.
+     */
     public void run() {
         ui.printWelcome();
         boolean isExit = false;

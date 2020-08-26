@@ -3,11 +3,20 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-// Allows PandaBot to understand date and time  in the format of dd/mm/yyyy hhmm
+/**
+ * The DateAndTime class is used to allow PandaBot to understand date and time
+ * in the format of dd/mm/yyyy hhmm
+ */
 public class DateAndTime {
     private final LocalDate date;
     private final LocalTime time;
-    
+
+    /**
+     * Creates a DateAndTime object.
+     * @param date
+     * @param time
+     * @throws DateTimeParseException
+     */
     public DateAndTime (String date, String time) throws DateTimeParseException {
         this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));

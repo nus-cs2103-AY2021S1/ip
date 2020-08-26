@@ -1,10 +1,19 @@
 import java.time.format.DateTimeParseException;
 
+/**
+ * The Deadline class represents a Deadline task which needs to be 
+ * done before a specific time.
+ */
 public class Deadline extends Task {
-    // Deadlines: tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm
     private String dueBy;
-    
-    // can accept dueby as a formatted or unformatted date and time 
+
+    /**
+     * Create a Deadline object that can accept both formatted and unformatted due dates.
+     * Formatted due dates have to be in the format: dd/MM/yyyy HHmm
+     * @param description
+     * @param dueBy
+     * @throws PandaBotException
+     */
     public Deadline(String description, String dueBy) throws PandaBotException {
         super(description);
         // check if a formatted date and time is given

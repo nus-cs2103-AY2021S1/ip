@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ *  The TaskList class is responsible for storing the various Tasks in a list.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
     
