@@ -21,10 +21,14 @@ public class Task {
         }
     }
 
-    public String getStatusIcon() {
+
+    private String getStatusIcon() {
         return (done ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Completes the task.
+     */
     public void complete() {
         done = true;
     }

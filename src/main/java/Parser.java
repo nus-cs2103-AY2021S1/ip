@@ -1,5 +1,8 @@
 public class Parser {
 
+    /**
+     * Considers the command input and performs actions accordingly.
+     */
     public static void handleInput(String inputPrefix, String inputSuffix, TaskList taskList) throws DukeException {
         switch (inputPrefix) {
             case "list":

@@ -14,6 +14,9 @@ public class Deadline extends Task {
 
     }
 
+    /**
+     * Adds a new deadline to the task list.
+     */
     public static void newDeadline(String inputSuffix, TaskList taskList, boolean done, boolean announce)
             throws DukeException{
         String[] deadlineParts = inputSuffix.split("/by",2);

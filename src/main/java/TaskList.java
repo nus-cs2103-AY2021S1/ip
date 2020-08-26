@@ -2,10 +2,16 @@ import java.util.ArrayList;
 
 public class TaskList extends ArrayList<Task> {
 
+    /**
+     * Prints itself in a readable form.
+     */
     public void printList() {
         Ui.printWithLines(toString());
     }
 
+    /**
+     * Completes a specific task in itself.
+     */
     public void completeTask(int i) {
         String prefix = "Roger roger! I'm gonna mark this task as done:\n";
         Task task = super.get(i);
@@ -13,6 +19,9 @@ public class TaskList extends ArrayList<Task> {
         Ui.printWithLines(String.format("  %s%s\n", prefix, task));
     }
 
+    /**
+     * Adds a task to itself.
+     */
     public void addTask(Task newTask, boolean announce) {
         super.add(newTask);
         if (announce) {
@@ -23,6 +32,9 @@ public class TaskList extends ArrayList<Task> {
         }
     }
 
+    /**
+     * Deletes a specific task from itself.
+     */
     public void deleteTask(int index) {
         Task task = super.get(index);
         super.remove(index);

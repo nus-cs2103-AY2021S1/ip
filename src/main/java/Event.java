@@ -14,6 +14,9 @@ public class Event extends Task {
 
     }
 
+    /**
+     * Adds a new event to the task list.
+     */
     public static void newEvent(String inputSuffix, TaskList taskList, boolean done, boolean announce)
             throws DukeException {
         String[] eventParts = inputSuffix.split("/at",2);
