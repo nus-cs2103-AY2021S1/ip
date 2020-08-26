@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 public class Ui {
 
 
@@ -8,7 +12,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("Hi! I'm Duke your friendly neighbourhood chat bot");
+        System.out.println("Hi! I'm duke.Duke your friendly neighbourhood chat bot");
         System.out.println("What can i do for you?");
     }
 

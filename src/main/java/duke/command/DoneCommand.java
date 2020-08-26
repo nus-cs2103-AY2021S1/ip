@@ -1,6 +1,14 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.io.IOException;
 
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     private final int num;
 
     public DoneCommand(String command, int num) {
@@ -8,7 +16,7 @@ public class DoneCommand extends Command{
         this.num = num;
     }
 
-    protected void execute(TaskList list, Ui ui, Storage storage) {
+    public void execute(TaskList list, Ui ui, Storage storage) {
         try {
             if (num <= list.size()) {
                 Task current = list.get(num - 1);

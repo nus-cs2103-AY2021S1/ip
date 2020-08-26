@@ -1,6 +1,12 @@
+package duke.command;
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.*;
+
 import java.io.IOException;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
 
 
     public AddCommand(String command) {
