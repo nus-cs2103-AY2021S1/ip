@@ -1,3 +1,5 @@
+package duke;
+
 public enum Instruction {
     DONE("done"),
     DELETE("delete"),
