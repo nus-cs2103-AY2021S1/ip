@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 
 import java.util.Arrays;
@@ -55,6 +56,8 @@ public class Parser {
             return new DeleteCommand(splitInput);
         } else if (commandType.equals("list")) {
             return new ListCommand(splitInput);
+        } else if (commandType.equals("find")) {
+            return new FindCommand(splitInput);
         } else if (commandType.equals("bye")) {
             return new ExitCommand(splitInput);
         } else if (containsString(commandType, addCommands)) {

@@ -3,6 +3,7 @@ package duke;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -28,6 +29,21 @@ public class Ui {
     public String readCommand() {
         String userInput = this.sc.nextLine();
         return userInput;
+    }
+
+
+    /**
+     * Prints all of the matching tasks that are stored in the ArrayList.
+     *
+     * @param foundTasks The ArrayList containing all of the matching tasks.
+     */
+    public void printMatches(ArrayList<Task> foundTasks) {
+        showLine();
+        System.out.println("\t Here are the matching tasks in your list: ");
+        for (Task t: foundTasks) {
+            System.out.println("\t " + t.toString());
+        }
+        showLine();
     }
 
     private void showLine() {
