@@ -9,6 +9,7 @@ import duke.task.ToDo;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -46,9 +47,9 @@ public class Storage {
                 if (title.equals("T")) {
                     this.list.add(new ToDo(description, isDone));
                 } else if (title.equals("D")) {
-                    this.list.add(new Deadline(description, isDone, LocalDate.parse(arrOfString[3])));
+                    this.list.add(new Deadline(description, isDone, Parser.parseDateTime(arrOfString[3])));
                 } else if (title.equals("E")) {
-                    this.list.add(new Event(description, isDone, LocalDate.parse(arrOfString[3])));
+                    this.list.add(new Event(description, isDone, Parser.parseDateTime(arrOfString[3])));
                 }
             }
             return this.list;
@@ -72,6 +73,7 @@ public class Storage {
     }
 
     public void save(List<Task> list) throws DukeException {
+        DateTimeFormatter style = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
             FileWriter myWriter = new FileWriter(fileName);
             for (Task task: list) {
@@ -83,12 +85,12 @@ public class Storage {
                     myWriter.write("D | "
                             + (task.isDone ? "1 | ": "0 | ")
                             + task.description + " | "
-                            + ((Deadline) task).by);
+                            + ((Deadline) task).date.format(style));
                 } else {
                     myWriter.write("E | "
                             + (task.isDone ? "1 | ": "0 | ")
                             + task.description + " | "
-                            + ((Event) task).by);
+                            + ((Event) task).date.format(style));
                 }
                 myWriter.write("\n");
             }

@@ -1,16 +1,16 @@
 package duke.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    public LocalDate by;
+    public LocalDateTime date;
 
 
-    public Event(String description, boolean isDone, LocalDate by) {
+    public Event(String description, boolean isDone, LocalDateTime date) {
         super(description, isDone);
-        this.by = by;
+        this.date = date;
     }
 
     @Override
@@ -20,7 +20,7 @@ public class Event extends Task {
                 + " "
                 + super.toString()
                 + "(at: "
-                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"))
                 + ")";
     }
 }

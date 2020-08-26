@@ -23,12 +23,13 @@ public class TaskList {
         return this.planner;
     }
 
-    public void markAsDone(Integer index) {
+    public Task markAsDone(Integer index) {
         this.planner.get(index).done();
+        return this.planner.get(index);
     }
 
-    public void deleteTask(int index) {
-        this.planner.remove(index);
+    public Task deleteTask(int index) {
+        return this.planner.remove(index);
     }
 
     public Task getTask(Integer index) {

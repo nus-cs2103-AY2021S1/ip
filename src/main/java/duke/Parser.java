@@ -4,9 +4,11 @@ import duke.commands.*;
 import duke.exceptions.*;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.ToDo;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
@@ -27,31 +29,40 @@ public class Parser {
                 ToDo task = new ToDo(commandLine.substring(5), false);
                 return new AddCommand(task);
 
-            } else if (isDeadline(commandLine)) {
+            } else if (isDeadline(commandLine) || isEvent(commandLine)) {
                 if (commandLine.equals("deadline")) {
                     throw new DukeEmptyDeadlineException();
-                }
-                String[] arrOfString = (commandLine.substring(9)).split("/by ", 2);
-                if (arrOfString.length == 1) {
-                    throw new DukeDeadlineFormatException();
-                }
-                String deadline = arrOfString[1];
-                String description = arrOfString[0];
-                Deadline task = new Deadline(description, false, LocalDate.parse(deadline));
-                return new AddCommand(task);
-
-            } else if (isEvent(commandLine)) {
-                if (commandLine.equals("event")) {
+                } else if (commandLine.equals("event")) {
                     throw new DukeEmptyEventException();
                 }
-                String[] arrOfString = (commandLine.substring(6)).split("/at ", 2);
 
-                if (arrOfString.length == 1) {
-                    throw new DukeEventFormatException();
+
+                String[] arrOfString;
+                if (isDeadline(commandLine)) {
+                    arrOfString = (commandLine.substring(9)).split("/by ", 2);
+                    if (arrOfString.length == 1) {
+                        throw new DukeDeadlineFormatException();
+                    }
+                } else {
+                    arrOfString = (commandLine.substring(6)).split("/at ", 2);
+                    if (arrOfString.length == 1) {
+                        throw new DukeEventFormatException();
+                    }
                 }
-                String eventDate = arrOfString[1];
+
+                if (arrOfString.length != 2 ) {
+                    throw new DukeDateTimeParseException();
+                }
+
+                // Format of LocalDateTime is "yyyy-MM-dd HH:mm"
                 String description = arrOfString[0];
-                Event task = new Event(description, false, LocalDate.parse(eventDate));
+                LocalDateTime dateAndTime = parseDateTime(arrOfString[1]);
+                Task task;
+                if (isDeadline(commandLine)) {
+                    task = new Deadline(description, false, dateAndTime);
+                } else {
+                    task = new Event(description, false, dateAndTime);
+                }
                 return new AddCommand(task);
 
             } else if (isDone(commandLine) || isDelete(commandLine)) {
@@ -76,6 +87,26 @@ public class Parser {
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new DukeEmptyActionException();
         }
+    }
+
+    static LocalDateTime parseDateTime(String commandLine) {
+        String[] dateNumbers = commandLine.split("-");
+        //Represents 'dd hh:mm'
+        String[] dayAndTime = dateNumbers[2].split(" ");
+        //Represents 'yyyy'
+        int year = Integer.parseInt(dateNumbers[0]);
+        //Represents 'MM'
+        Integer month = Integer.parseInt(dateNumbers[1]);
+        //Represents 'dd'
+        Integer day = Integer.parseInt(dayAndTime[0]);
+
+        //Represents 'hh:mm'
+        String time = dayAndTime[1];
+        String[] timeNumbers = time.split(":");
+        Integer hour = Integer.parseInt(timeNumbers[0]);
+        Integer minutes = Integer.parseInt(timeNumbers[1]);
+
+        return LocalDateTime.of(year, month, day, hour, minutes);
     }
 
     static boolean isList(String string) {
