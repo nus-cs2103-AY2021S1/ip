@@ -24,7 +24,7 @@ public class Duke {
 		try {
 			tasks = new TaskList(storage.load());
 		} catch (DukeException e) {
-			System.out.println("ERROR LOADING DATA");
+			ui.showLoadingError();
 			tasks = new TaskList();
 		}
 	}
@@ -42,7 +42,7 @@ public class Duke {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+				ui.showError(e.getMessage());
             }
         }
 	}

@@ -68,4 +68,12 @@ public class Ui {
     String readCommand() {
        return sc.nextLine();
     };
+
+    public void showError(String errorMessage) {
+        System.out.println(errorMessage);
+    }
+
+    public void showLoadingError() {
+        System.out.println("Error loading data");
+    }
 }
