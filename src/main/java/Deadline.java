@@ -2,22 +2,21 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.Locale;
-import java.time.format.DateTimeParseException;
 
 
 public class Deadline extends Task {
     protected LocalDate date;
 
-    protected Deadline(String name, boolean isCompleted, String date) throws DateTimeParseException {
+    protected Deadline(String name, boolean isCompleted, LocalDate date) {
         super(name, isCompleted);
-        this.date = LocalDate.parse(date);
+        this.date = date;
     }
 
-    public static Deadline newDeadline(String name, String date){
+    public static Deadline newDeadline(String name, LocalDate date){
         return new Deadline(name, false, date);
     }
 
-    public static Deadline existingDeadline(String name, boolean isCompleted, String date){
+    public static Deadline existingDeadline(String name, boolean isCompleted, LocalDate date){
         return new Deadline(name, isCompleted, date);
     }
 

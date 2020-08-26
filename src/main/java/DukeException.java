@@ -1,5 +1,12 @@
 public class DukeException extends Exception {
+    private String UiMessage;
+
     public DukeException(String errorMessage) {
-        super("Oh noes! " + errorMessage);
+        super(errorMessage);
+        this.UiMessage = errorMessage;
+    }
+
+    public String getUiMessage(){
+        return this.UiMessage;
     }
 }

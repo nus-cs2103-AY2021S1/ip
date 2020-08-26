@@ -2,32 +2,27 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        DukeLogic commandHandler = new DukeLogic();
+        try {
+            Storage storage = new Storage();
+            TaskList taskList = TaskList.initialiseTaskList(storage);
+            CommandParser parser = new CommandParser();
 
-        Scanner sc = new Scanner(System.in);
-        String catLogo = "        /\\_____/\\\n" +
-                "       /  o   o  \\\n" +
-                "      ( ==  ^  == )\n" +
-                "       )         (\n" +
-                "      (           )\n" +
-                "     ( (  )   (  ) )\n" +
-                "    (__(__)___(__)__)";
-        System.out.println(catLogo);
+            Scanner sc = new Scanner(System.in);
+            Ui.welcomeMessage();
+            boolean isExit = false;
 
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    Hello! I'm NEKOBOT!!");
-        System.out.println("    What can I do for you :>");
-        System.out.println("    ____________________________________________________________");
-
-        String command = sc.nextLine();
-
-        while(!command.equals("bye")) {
-            commandHandler.executeCommand(command);
-            command = sc.nextLine();
+            while(!isExit) {
+                try {
+                    String userCommand = sc.nextLine();
+                    Command parsedCommand = parser.parseCommand(userCommand);
+                    parsedCommand.execute(taskList);
+                    isExit = parsedCommand.isExit();
+                } catch (DukeException e) {
+                    Ui.errorMessage(e.getUiMessage());
+                }
+            }
+        } catch (DukeException e) {
+            Ui.errorMessage(e.getUiMessage());
         }
-
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Bye~ Hope to see you again soon ;w;");
-        System.out.println("    ____________________________________________________________");
     }
 }

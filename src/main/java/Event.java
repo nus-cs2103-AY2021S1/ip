@@ -2,22 +2,21 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.Locale;
-import java.time.format.DateTimeParseException;
 
 
 public class Event extends Task {
     protected LocalDate date;
 
-    public Event(String name, boolean isCompleted, String date) throws DateTimeParseException {
+    public Event(String name, boolean isCompleted, LocalDate date) {
         super(name, isCompleted);
-        this.date = LocalDate.parse(date);
+        this.date = date;
     }
 
-    public static Event newEvent(String name, String date){
+    public static Event newEvent(String name, LocalDate date){
         return new Event(name, false, date);
     }
 
-    public static Event existingEvent(String name, boolean isCompleted, String date){
+    public static Event existingEvent(String name, boolean isCompleted, LocalDate date){
         return new Event(name, isCompleted, date);
     }
 
