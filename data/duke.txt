@@ -1,3 +1,0 @@
-D @ 1 @ PI @ yesterday
-T @ 0 @ run 
-T @ 0 @ watch video

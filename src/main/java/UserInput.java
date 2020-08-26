@@ -29,9 +29,6 @@ public class UserInput {
             while (sc.hasNext()) {
                 String previousTask = sc.nextLine();
                 String[] words = previousTask.split(" @ ",0);
-                for (int i =0; i < words.length; i ++) {
-                    System.out.println(words[i]);
-                }
                 if (words[0].equals("D")) {
                     Deadline previousDeadline = new Deadline(words[2],words[3]);
                     if (words[1].equals("1")) {
