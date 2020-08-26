@@ -1,6 +1,8 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Duke {
     public static void main(String[] args) {
@@ -11,7 +13,7 @@ public class Duke {
 
         while (true) {
             try {
-                String command = sc.nextLine();
+                String command = sc.nextLine().strip();
                 String[] commandArr = command.split(" ", 2);
                 Task task;
                 String[] strings;
@@ -34,7 +36,11 @@ public class Duke {
                             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                         }
                         strings = commandArr[1].split("/by");
-                        task = new Deadlines(strings[0].strip(), strings[1].strip());
+                        try {
+                            task = new Deadlines(strings[0].strip(), LocalDate.parse(strings[1].strip()));
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("Uh-oh! Please enter the correct date format.");
+                        }
                         tasks.add(task);
                         System.out.println("Got it. I've added this task:\n " + task + "\nNow you have " + tasks.size() + " tasks in the list.");
                         break;
@@ -43,7 +49,11 @@ public class Duke {
                             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
                         }
                         strings = commandArr[1].split("/at");
-                        task = new Events(strings[0].strip(), strings[1].strip());
+                        try {
+                            task = new Events(strings[0].strip(), LocalDate.parse(strings[1].strip()));
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("Uh-oh! Please enter the correct date format.");
+                        }
                         tasks.add(task);
                         System.out.println("Got it. I've added this task:\n " + task + "\nNow you have " + tasks.size() + " tasks in the list.");
                         break;
