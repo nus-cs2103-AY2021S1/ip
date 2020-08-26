@@ -6,15 +6,15 @@ import duke.io.TaskList;
 
 public class ByeCommand extends Command {
 
-  @Override
-  public void execute(TaskList task, Ui ui, Storage storage) {
-    ui.showLine();
-    System.out.println("Bye. Hope to see you again soon!");
-    ui.showLine();
-  }
+    @Override
+    public void execute(TaskList task, Ui ui, Storage storage) {
+        ui.showLine();
+        System.out.println("Bye. Hope to see you again soon!");
+        ui.showLine();
+    }
 
-  @Override
-  public boolean isExit() {
-    return true;
-  }
+    @Override
+    public boolean isExit() {
+        return true;
+    }
 }

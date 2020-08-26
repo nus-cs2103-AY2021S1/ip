@@ -8,19 +8,19 @@ import java.util.ArrayList;
 
 public class ListCommand extends Command {
 
-  @Override
-  public void execute(TaskList task, Ui ui, Storage storage) {
-    ui.showLine();
-    ArrayList<Task> taskArrayList = task.taskArrayList;
-    System.out.println("Here are the tasks in your list: ");
-    for (int i = 0; i < taskArrayList.size(); i++) {
-      ui.printString(String.format("%d.%s", i + 1, taskArrayList.get(i)));
+    @Override
+    public void execute(TaskList task, Ui ui, Storage storage) {
+        ui.showLine();
+        ArrayList<Task> taskArrayList = task.taskArrayList;
+        System.out.println("Here are the tasks in your list: ");
+        for (int i = 0; i < taskArrayList.size(); i++) {
+            ui.printString(String.format("%d.%s", i + 1, taskArrayList.get(i)));
+        }
+        ui.showLine();
     }
-    ui.showLine();
-  }
 
-  @Override
-  public boolean isExit() {
-    return false;
-  }
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 }
