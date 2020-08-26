@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+
 public class Duke {
 
     public static void main(String[] args) throws DukeException {
@@ -61,7 +62,7 @@ public class Duke {
                     if (desc.equals("")) {
                         throw new DukeException(command);
                     }
-                    String[] string = desc.split("/by");
+                    String[] string = desc.split("/by ");
                     if (string.length < 2) {
                         throw new DukeException(command);
                     }
@@ -76,7 +77,7 @@ public class Duke {
                     if (desc.equals("")) {
                         throw new DukeException(command);
                     }
-                    String[] string = desc.split("/at");
+                    String[] string = desc.split("/at ");
                     if (string.length < 2) {
                         throw new DukeException(command);
                     }
