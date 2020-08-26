@@ -8,9 +8,13 @@ public class Event extends Task{
     private char type = 'E';
     private LocalDate date;
     private final String AT = "bought at: ";
-    Event(String task, String date) throws DateTimeParseException {
+    Event(String task, String date) throws DukeException {
         super(task);
-        this.date = LocalDate.parse(date);
+        try {
+            this.date = LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Time format should be yyyy/mm/dd or yyyy-mm-dd.");
+        }
     }
 
     @Override

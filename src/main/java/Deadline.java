@@ -8,9 +8,13 @@ public class Deadline extends Task{
     private char type = 'D';
     private LocalDate date;
     private final String BY = "best consumed by: ";
-    Deadline(String task, String date) throws DateTimeParseException {
+    Deadline(String task, String date) throws DukeException {
         super(task);
-        this.date = LocalDate.parse(date);
+        try {
+            this.date = LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Time format should be yyyy/mm/dd or yyyy-mm-dd.");
+        }
     }
 
     @Override
