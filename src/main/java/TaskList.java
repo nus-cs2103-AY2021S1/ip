@@ -48,4 +48,16 @@ public class TaskList {
         }
     }
 
+    public static void find(String feature){
+
+        System.out.println("Here are the matching tasks in your list:");
+        for(Task task : TaskList.taskStorage){
+            if(task.description.contains(feature)){
+                System.out.println(task);
+            }
+        }
+
+    }
+
+
 }
