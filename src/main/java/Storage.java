@@ -42,7 +42,7 @@ public class Storage {
 			}
 			return tasks;
 		} catch (IOException | DukeException ex) {
-			Ui.formatResponse(ex.getMessage());
+			Ui.showResponse(ex.getMessage());
 			return new ArrayList<>();
 		}
 	}

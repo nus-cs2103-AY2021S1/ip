@@ -16,7 +16,7 @@ public class ParserTest {
 	}
 
 	@Test
-	public void parse_doneCommand() {
+	public void parse_doneCommand_exceptionThrown() {
 		try {
 			Parser.parse("done junknumber");
 		} catch (DukeException | TaskException ex) {
@@ -25,7 +25,7 @@ public class ParserTest {
 	}
 
 	@Test
-	public void parse_addCommand() {
+	public void parse_addCommand_exceptionThrown() {
 		try {
 			Parser.parse("deadline return books /by");
 		} catch (DukeException | TaskException ex) {
@@ -40,7 +40,7 @@ public class ParserTest {
 	}
 
 	@Test
-	public void parse_noCommand() {
+	public void parse_exceptionThrown() {
 		try {
 			Parser.parse("junk input");
 		} catch (DukeException | TaskException ex) {

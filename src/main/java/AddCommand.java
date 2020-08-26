@@ -24,7 +24,7 @@ public class AddCommand extends Command {
 		}
 		if (task != null) {
 			tasks.addTask(task);
-			ui.formatAddTask(task, tasks);
+			ui.showAddTask(task, tasks);
 			storage.saveList(tasks);
 		}
 	}

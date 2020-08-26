@@ -9,7 +9,7 @@ public class DoneCommand extends Command {
 	@Override
 	public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 		tasks.markAsDone(idx);
-		ui.formatDoneTask(tasks.getTask(idx));
+		ui.showDoneTask(tasks.getTask(idx));
 		storage.saveList(tasks);
 	}
 }
