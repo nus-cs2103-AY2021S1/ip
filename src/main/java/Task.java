@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task with a description that can be marked as done.
+ */
 abstract class Task {
     protected String taskType;
     protected String description;
@@ -40,6 +43,11 @@ abstract class Task {
         return this.isDone ? "[✓] " : "[✗] ";
     }
 
+    /**
+     * Formats the task to be stored in the text file.
+     *
+     * @return a string representing the task in a format to be stored in the text file
+     */
     abstract public String formatTaskForFile();
 
     @Override

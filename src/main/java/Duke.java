@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents a Duke chat bot that helps the user to keep track of their tasks, such as todos,
+ * events and deadlines.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -51,6 +55,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the chat bot by accepting user inputs and handling it through
+     * other classes like TaskList and Ui.
+     */
     public void run() {
         this.ui.greet();
         Scanner sc = new Scanner(System.in);

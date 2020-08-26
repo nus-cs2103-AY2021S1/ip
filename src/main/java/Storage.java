@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 
+/**
+ * Represents the area where the data file for the Duke chat bot is stored.
+ */
 public class Storage {
     protected String filePath;
 
@@ -23,6 +26,12 @@ public class Storage {
         file.createNewFile();
     }
 
+    /**
+     * Loads the saved tasks from the data file and returns them.
+     *
+     * @return the list of tasks saved in the data file
+     * @throws IOException
+     */
     public List<Task> loadFile() throws IOException {
         File file = new File(this.filePath);
         List<Task> tasks = new ArrayList<>();
@@ -57,6 +66,12 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Saves the current task list to the data file for future retrieval.
+     * 
+     * @param tasks the current task list
+     * @throws IOException
+     */
     public void saveFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         String textToAdd = "";
