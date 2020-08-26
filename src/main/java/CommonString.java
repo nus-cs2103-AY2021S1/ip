@@ -1,7 +1,9 @@
 
 // Enum class to denote commonly used, constant String values in Duke
 public enum CommonString {
-    LINE("____________________________________________________________"), // Single Line for divider
+    DELETE("DELETE"),
+    DONE("DONE"),
+
     LOGO(" ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"

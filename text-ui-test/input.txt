@@ -3,16 +3,44 @@ list
 todo homework
 todo
 list
-deadline CS2103 webcast /by Saturday
+deadline CS2103 webcast /by 12/12/2020 06/06/00
 deadline /by Saturday
 deadline CS2103 webcast /by
+deadline CS2103 webcast /by 12/12/2020
+deadline CS2103 webcast /by -12/12/2020 06/06/00
+deadline CS2103 webcast /by 12/-12/2020 06/06/00
+deadline CS2103 webcast /by 12/12/-2020 06/06/00
+deadline CS2103 webcast /by 12/12/2020 -06/06/00
+deadline CS2103 webcast /by 12/12/2020 06/-06/00
+deadline CS2103 webcast /by 12/12/2020 06/06/-06
+deadline CS2103 webcast /by 0/12/2020 06/06/00
+deadline CS2103 webcast /by 12/0/2020 06/06/00
+deadline CS2103 webcast /by 12/13/2020 06/06/00
+deadline CS2103 webcast /by 50/12/2020 06/06/00
+deadline CS2103 webcast /by 12/12/2020 90/06/00
+deadline CS2103 webcast /by 12/12/2020 06/120/00
+deadline CS2103 webcast /by 12/12/2020 06/06/120
 list
-event CS2100 Lab /at Monday 2pm-4pm
+event CS2100 Lab /at 12/12/2020 06/06/00
 event CS2100 Lab /at
-event /at Monday 2pm-4pm
+event /at 12/12/2020 06/06/00
+event CS2100 Lab /at 12/12/2020
+event CS2103 webcast /at -12/12/2020 06/06/00
+event CS2103 webcast /at 12/-12/2020 06/06/00
+event CS2103 webcast /at 12/12/-2020 06/06/00
+event CS2103 webcast /at 12/12/2020 -06/06/00
+event CS2103 webcast /at 12/12/2020 06/-06/00
+event CS2103 webcast /at 12/12/2020 06/06/-06
+event CS2103 webcast /at 0/12/2020 06/06/00
+event CS2103 webcast /at 12/0/2020 06/06/00
+event CS2103 webcast /at 12/13/2020 06/06/00
+event CS2103 webcast /at 50/12/2020 06/06/00
+event CS2103 webcast /at 12/12/2020 90/06/00
+event CS2103 webcast /at 12/12/2020 06/120/00
+event CS2103 webcast /at 12/12/2020 06/06/120
 list
-deadline GER1000 assignment /at Tomorrow
-event CS1010X /by Saturday
+deadline GER1000 assignment /at 12/12/2020 06/06/00
+event CS1010X /by 12/12/2020 06/06/00
 list
 done 1
 done 1
@@ -28,7 +56,7 @@ delete -1
 delete 1000
 delete 1
 todo newHomework
-event dinner /at 9March2021
+event dinner /at 12/12/2020 06/06/00
 done 3
 delete 3
 list

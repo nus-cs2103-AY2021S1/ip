@@ -4,14 +4,11 @@ What can I do for you today?
 Type "help" to see the available instructions!
 ____________________________________________________________
 How to use Duke:
-* Level 6: Allowing Delete. Follow the Task Input Instructions for more
-* Do try to avoid ambiguous inputs, such as [keywords] + [random gibberish] as I cannot recognise them!
-	I'm not very smart (yet) :(
+* Level 8: Formatting Time
 
-TASK INPUT INSTRUCTIONS:
- todo [Task Description] - Inputs a TODO DukeTask
- deadline [Task Description] /by [Date] - Inputs a DEADLINE DukeTask, along with INDICATOR /by
- event [Task Description] /at [Date] - Inputs an EVENT DukeTask, along with INDICATOR /at
+* DEVELOPER UPDATES:
+* I can now save data! Just terminate the program with "bye" and I'll save the data automatically!
+* Do take note of the DATE AND TIME notations when inserting DukeTasks!
 
 AVAILABLE INSTRUCTIONS:
  help - Display Available Instructions
@@ -19,23 +16,33 @@ AVAILABLE INSTRUCTIONS:
  list - Display current DukeTasks
  done [Task Number] - Complete the specified task number (Specify in numeric format!) Eg: "done 3"
  delete [Task Number] - Deletes the task number (Specify in numeric format!) Eg: "delete 3"
+* SEE TASK INPUT INSTRUCTIONS FOR MORE ABOUT TASKS
+
+TASK INPUT INSTRUCTIONS:
+IMPORTANT: DO AVOID USING THE VERTICAL BAR "|" IN YOUR TASK INSTRUCTIONS
+ todo [Task Description] - Inputs a TODO DukeTask
+ deadline [Task Description] /by [Date] - Inputs a DEADLINE DukeTask, using INDICATOR /by
+ event [Task Description] /at [Date] - Inputs an EVENT DukeTask, using INDICATOR /at
+
+TO NOTE:
+FORMAT FOR DATE: "DD/MM/YYYY hh/mm/ss"
+ 	DD, MM, YYYY are the date, month and year respectively (IN INTEGERS)
+ 	hh, mm, ss are the hour (in 24 HOUR NOTATION), minutes and seconds respectively (IN INTEGERS)
 ____________________________________________________________
-Your DukeTasks:
-You have no DukeTasks!
+You now have 0 tasks
 ____________________________________________________________
 Task Added: [T][✘] homework
 You now have 1 task
 ____________________________________________________________
-Exception: MissingFieldException
-	Please key in the missing fields
-	Fields Missing - todo: Description
+Exception: InvalidInstructionException
+	Please key in a valid instruction!
+	Source - todo
 	See "help" for more
 ____________________________________________________________
-Your DukeTasks:
 1. [T][✘] homework
-You now have 0 tasks done, and 1 task not done
+You now have 1 task
 ____________________________________________________________
-Task Added: [D][✘] CS2103 webcast (by: Saturday)
+Task Added: [D][✘] CS2103 webcast (by: 12 Dec 2020 06:06:00 AM)
 You now have 2 tasks
 ____________________________________________________________
 Exception: MissingFieldException
@@ -48,12 +55,81 @@ Exception: MissingFieldException
 	Fields Missing - deadline: Date and Time
 	See "help" for more
 ____________________________________________________________
-Your DukeTasks:
-1. [T][✘] homework
-2. [D][✘] CS2103 webcast (by: Saturday)
-You now have 0 tasks done, and 2 tasks not done
+Exception: MissingFieldException
+	Please key in the missing fields
+	Fields Missing - deadline: Date and Time
+	See "help" for more
 ____________________________________________________________
-Task Added: [E][✘] CS2100 Lab (at: Monday 2pm-4pm)
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline TIME FORMAT
+	See "help" for more
+____________________________________________________________
+1. [T][✘] homework
+2. [D][✘] CS2103 webcast (by: 12 Dec 2020 06:06:00 AM)
+You now have 2 tasks
+____________________________________________________________
+Task Added: [E][✘] CS2100 Lab (at: 12 Dec 2020 06:06:00 AM)
 You now have 3 tasks
 ____________________________________________________________
 Exception: MissingFieldException
@@ -66,11 +142,80 @@ Exception: MissingFieldException
 	Fields Missing - event: Description
 	See "help" for more
 ____________________________________________________________
-Your DukeTasks:
+Exception: MissingFieldException
+	Please key in the missing fields
+	Fields Missing - event: Date and Time
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event TIME FORMAT
+	See "help" for more
+____________________________________________________________
 1. [T][✘] homework
-2. [D][✘] CS2103 webcast (by: Saturday)
-3. [E][✘] CS2100 Lab (at: Monday 2pm-4pm)
-You now have 0 tasks done, and 3 tasks not done
+2. [D][✘] CS2103 webcast (by: 12 Dec 2020 06:06:00 AM)
+3. [E][✘] CS2100 Lab (at: 12 Dec 2020 06:06:00 AM)
+You now have 3 tasks
 ____________________________________________________________
 Exception: InvalidFormatException
 	Please use the correct format for your instructions!
@@ -82,50 +227,47 @@ Exception: InvalidFormatException
 	Format - event
 	See "help" for more
 ____________________________________________________________
-Your DukeTasks:
 1. [T][✘] homework
-2. [D][✘] CS2103 webcast (by: Saturday)
-3. [E][✘] CS2100 Lab (at: Monday 2pm-4pm)
-You now have 0 tasks done, and 3 tasks not done
+2. [D][✘] CS2103 webcast (by: 12 Dec 2020 06:06:00 AM)
+3. [E][✘] CS2100 Lab (at: 12 Dec 2020 06:06:00 AM)
+You now have 3 tasks
 ____________________________________________________________
 Alright! I'll mark this task as done!
 [T][✓] homework
-You now have 1 task done, and 2 tasks not done
+You now have 3 tasks
 ____________________________________________________________
 Exception: InvalidInstructionException
 	Please key in a valid instruction!
-	Source - done: Task is already done!
+	Source - DONE: Task is already done!
 	See "help" for more
 ____________________________________________________________
-Your DukeTasks:
 1. [T][✓] homework
-2. [D][✘] CS2103 webcast (by: Saturday)
-3. [E][✘] CS2100 Lab (at: Monday 2pm-4pm)
-You now have 1 task done, and 2 tasks not done
+2. [D][✘] CS2103 webcast (by: 12 Dec 2020 06:06:00 AM)
+3. [E][✘] CS2100 Lab (at: 12 Dec 2020 06:06:00 AM)
+You now have 3 tasks
 ____________________________________________________________
 Exception: InvalidInstructionException
 	Please key in a valid instruction!
-	Source - done: Invalid Task Number
+	Source - DONE: Invalid Task Number
 	See "help" for more
 ____________________________________________________________
 Exception: InvalidInstructionException
 	Please key in a valid instruction!
-	Source - done: Invalid Task Number
+	Source - DONE: Invalid Task Number
 	See "help" for more
 ____________________________________________________________
 Alright! I'll mark this task as done!
-[D][✓] CS2103 webcast (by: Saturday)
-You now have 2 tasks done, and 1 task not done
+[D][✓] CS2103 webcast (by: 12 Dec 2020 06:06:00 AM)
+You now have 3 tasks
 ____________________________________________________________
 Alright! I'll mark this task as done!
-[E][✓] CS2100 Lab (at: Monday 2pm-4pm)
-You now have 3 tasks done, and 0 tasks not done
+[E][✓] CS2100 Lab (at: 12 Dec 2020 06:06:00 AM)
+You now have 3 tasks
 ____________________________________________________________
-Your DukeTasks:
 1. [T][✓] homework
-2. [D][✓] CS2103 webcast (by: Saturday)
-3. [E][✓] CS2100 Lab (at: Monday 2pm-4pm)
-You now have 3 tasks done, and 0 tasks not done
+2. [D][✓] CS2103 webcast (by: 12 Dec 2020 06:06:00 AM)
+3. [E][✓] CS2100 Lab (at: 12 Dec 2020 06:06:00 AM)
+You now have 3 tasks
 ____________________________________________________________
 Exception: InvalidInstructionException
 	Please key in a valid instruction!
@@ -139,12 +281,12 @@ Exception: InvalidInstructionException
 ____________________________________________________________
 Exception: InvalidInstructionException
 	Please key in a valid instruction!
-	Source - delete: Invalid Task Number
+	Source - DELETE: Invalid Task Number
 	See "help" for more
 ____________________________________________________________
 Exception: InvalidInstructionException
 	Please key in a valid instruction!
-	Source - delete: Invalid Task Number
+	Source - DELETE: Invalid Task Number
 	See "help" for more
 ____________________________________________________________
 Alright! I'll delete this task!
@@ -155,23 +297,22 @@ ____________________________________________________________
 Task Added: [T][✘] newHomework
 You now have 3 tasks
 ____________________________________________________________
-Task Added: [E][✘] dinner (at: 9March2021)
+Task Added: [E][✘] dinner (at: 12 Dec 2020 06:06:00 AM)
 You now have 4 tasks
 ____________________________________________________________
 Alright! I'll mark this task as done!
 [T][✓] newHomework
-You now have 3 tasks done, and 1 task not done
+You now have 4 tasks
 ____________________________________________________________
 Alright! I'll delete this task!
 Take note that this is irreversible!
 [T][✓] newHomework
 You now have 3 tasks
 ____________________________________________________________
-Your DukeTasks:
-1. [D][✓] CS2103 webcast (by: Saturday)
-2. [E][✓] CS2100 Lab (at: Monday 2pm-4pm)
-3. [E][✘] dinner (at: 9March2021)
-You now have 2 tasks done, and 1 task not done
+1. [D][✓] CS2103 webcast (by: 12 Dec 2020 06:06:00 AM)
+2. [E][✓] CS2100 Lab (at: 12 Dec 2020 06:06:00 AM)
+3. [E][✘] dinner (at: 12 Dec 2020 06:06:00 AM)
+You now have 3 tasks
 ____________________________________________________________
 Exception: InvalidInstructionException
 	Please key in a valid instruction!
@@ -192,6 +333,7 @@ Exception: InvalidInstructionException
 	Please key in a valid instruction!
 	Source - bye
 	See "help" for more
+____________________________________________________________
 ____________________________________________________________
 Goodbye. Hope to see you soon!
  ____        _        
