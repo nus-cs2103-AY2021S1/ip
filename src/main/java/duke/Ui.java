@@ -108,4 +108,14 @@ public class Ui {
     public void showError(String message) {
         System.out.println(message);
     }
+
+    public void showTasksFound(TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        int index = 1;
+        ArrayList<Task> tasksList = tasks.getTasksList();
+        for (Task t : tasksList) {
+            System.out.println(index + ". " + t);
+            index++;
+        }
+    }
 }

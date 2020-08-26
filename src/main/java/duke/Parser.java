@@ -19,12 +19,16 @@ public class Parser {
             return new ListCommand();
         } else {
             String[] inputArr = userInput.split(" ");
-            if (inputArr[0].equals(Instruction.DONE.getInstruction())) {
+            String taskName = inputArr[0];
+            if (taskName.equals(Instruction.DONE.getInstruction())) {
                 int itemsIdx = Integer.parseInt(inputArr[1]) - 1;
                 return new DoneCommand(itemsIdx);
-            } else if (inputArr[0].equals(Instruction.DELETE.getInstruction())) {
+            } else if (taskName.equals(Instruction.DELETE.getInstruction())) {
                 int itemsIdx = Integer.parseInt(inputArr[1]) - 1;
                 return new DeleteCommand(itemsIdx);
+            } else if (taskName.equals(Instruction.FIND.getInstruction())) {
+                String keyword = inputArr[1];
+                return new FindCommand(keyword);
             } else {
                 return new AddCommand(userInput);
             }
