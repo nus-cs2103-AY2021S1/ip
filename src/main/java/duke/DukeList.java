@@ -112,7 +112,6 @@ public class DukeList {
      */
     public String add(String itemString) throws DukeException {
         Task newTask = addHelper(itemString);
-        this.store.addToFileBuffer(newTask);
 
         return "Got it. I've added this task:\n" +
                 String.format("\t%s\n", newTask.toString()) +
@@ -148,8 +147,8 @@ public class DukeList {
     public String markAsDone(int index) throws NullPointerException {
         Task targetTask = this.list.get(index - 1);
         targetTask.markAsDone();
-        return String.format("Nice! I've marked this task as done:\n\t%s", targetTask.toString());
 
+        return String.format("Nice! I've marked this task as done:\n\t%s", targetTask.toString());
     }
 
 
@@ -169,7 +168,13 @@ public class DukeList {
     }
 
 
+    /**
+     * Writes tasks to file.
+     */
     public void writeToFile() {
+        for (Task t : this.list) {
+            this.store.addToFileBuffer(t);
+        }
         this.store.writeToFile();
     }
 

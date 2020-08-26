@@ -79,7 +79,7 @@ public class Storage {
     public void addToFileBuffer(Task task) {
         String[] storageStrArr = task.toStorageStringArr();
         String joinedStorageStr = String.join(DELIMITER, storageStrArr);
-        fileBuffer.add(joinedStorageStr);
+        this.fileBuffer.add(joinedStorageStr);
     }
 
 
@@ -94,7 +94,7 @@ public class Storage {
                     this.createFile();
                 }
 
-                FileWriter fWriter = new FileWriter(storageFile, true);
+                FileWriter fWriter = new FileWriter(storageFile);
                 BufferedWriter writer = new BufferedWriter(fWriter);
 
                 for (String bufferedLine : this.fileBuffer) {
