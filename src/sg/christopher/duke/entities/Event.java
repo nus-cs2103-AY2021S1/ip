@@ -1,3 +1,5 @@
+package sg.christopher.duke.entities;
+
 public class Event extends Task {
     public Event(String description, String dateTime) {
         super(description);

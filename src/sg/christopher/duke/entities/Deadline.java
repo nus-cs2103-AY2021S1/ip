@@ -1,3 +1,5 @@
+package sg.christopher.duke.entities;
+
 public class Deadline extends Task {
     public Deadline(String description, String deadline) {
         super(description);

@@ -1,3 +1,10 @@
+package sg.christopher.duke;
+
+import sg.christopher.duke.entities.Deadline;
+import sg.christopher.duke.entities.Event;
+import sg.christopher.duke.entities.Task;
+import sg.christopher.duke.entities.Todo;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -133,7 +140,7 @@ public class Duke {
     }
 
     private static CommandType getCommandType(String command) {
-        switch(command) {
+        switch (command) {
         case "bye":
             // Fallthrough
         case "exit":
