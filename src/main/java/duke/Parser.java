@@ -1,7 +1,7 @@
-package main.java;
+package main.java.duke;
 
-import main.java.command.*;
-import main.java.exceptions.DukeException;
+import main.java.duke.command.*;
+import main.java.duke.exceptions.DukeException;
 
 public class Parser {
 

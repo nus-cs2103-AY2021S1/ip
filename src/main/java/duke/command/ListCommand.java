@@ -1,9 +1,9 @@
-package main.java.command;
+package main.java.duke.command;
 
-import main.java.exceptions.InvalidInputException;
-import main.java.Storage;
-import main.java.tasks.TaskList;
-import main.java.Ui;
+import main.java.duke.exceptions.InvalidInputException;
+import main.java.duke.Storage;
+import main.java.duke.tasks.TaskList;
+import main.java.duke.Ui;
 
 public class ListCommand extends Command {
 

@@ -1,7 +1,7 @@
-package main.java;
+package main.java.duke;
 
-import main.java.exceptions.InvalidFileException;
-import main.java.tasks.*;
+import main.java.duke.exceptions.InvalidFileException;
+import main.java.duke.tasks.*;
 
 import java.io.*;
 import java.util.ArrayList;

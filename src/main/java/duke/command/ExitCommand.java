@@ -1,9 +1,10 @@
-package main.java.command;
+package main.java.duke.command;
 
-import main.java.*;
-import main.java.exceptions.InvalidFileException;
-import main.java.exceptions.InvalidInputException;
-import main.java.tasks.TaskList;
+import main.java.duke.Storage;
+import main.java.duke.Ui;
+import main.java.duke.exceptions.InvalidFileException;
+import main.java.duke.exceptions.InvalidInputException;
+import main.java.duke.tasks.TaskList;
 
 public class ExitCommand extends Command {
 

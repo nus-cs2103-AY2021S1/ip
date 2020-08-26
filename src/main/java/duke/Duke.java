@@ -1,9 +1,9 @@
-package main.java;
+package main.java.duke;
 
-import main.java.command.Command;
-import main.java.exceptions.DukeException;
-import main.java.exceptions.InvalidFileException;
-import main.java.tasks.TaskList;
+import main.java.duke.command.Command;
+import main.java.duke.exceptions.DukeException;
+import main.java.duke.exceptions.InvalidFileException;
+import main.java.duke.tasks.TaskList;
 
 
 public class Duke {
