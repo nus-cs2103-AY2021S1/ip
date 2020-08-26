@@ -18,7 +18,9 @@ public class Parser {
         String description = String.join(" ", Arrays.copyOfRange(strings, 1, strings.length));
         switch (convertToEnum(strings[0])) {
         case LIST:
-            if (strings.length > 1) throw new DukeException("Please key in a correct command.");
+            if (strings.length > 1) {
+                throw new DukeException("Please key in a correct command.");
+            }
             return new ShowCommand();
         case DONE:
             return new UpdateCommand(description);
@@ -33,7 +35,7 @@ public class Parser {
         }
     }
 
-    private static CommandEnum convertToEnum(String string) throws DukeException{
+    private static CommandEnum convertToEnum(String string) throws DukeException {
         switch (string) {
         case "bye":
             return CommandEnum.BYE;
