@@ -1,10 +1,16 @@
 public class ToDo extends Task {
 
-    protected String by;
-
     public ToDo(String description) {
         super(description);
-        this.by = by;
+    }
+
+    public ToDo(String description, boolean isDone){
+        super(description, isDone);
+    }
+
+    @Override
+    public String getOriginal(){
+        return "todo " + getTask();
     }
 
     @Override

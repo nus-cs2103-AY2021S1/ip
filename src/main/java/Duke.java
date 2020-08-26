@@ -1,8 +1,13 @@
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static String longLine = "________________________________________________________________________________";
+    private static String long_line = "________________________________________________________________________________";
     private static ArrayList<Task> taskList = new ArrayList<>();
     private static String bye_key = "bye";
     private static String list_key = "list";
@@ -12,7 +17,8 @@ public class Duke {
     private static String event_key = "event";
     private static String delete_key = "delete";
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -20,22 +26,11 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         lineFormatter("Hello!!!! I'm Duke\nWhat can I do for you?!?!?!" );
+        loadTasks();
         add_input();
 
     }
 
-    public static void echo_input(){
-        Scanner scanner = new Scanner(System.in);
-        while(scanner.hasNext()){
-            String input = scanner.nextLine();
-            if(input.toLowerCase().equals(bye_key)){
-                byeGreetings();
-                break;
-            } else {
-                lineFormatter(input);
-            }
-        }
-    }
 
 
     public static void add_input() {
@@ -50,6 +45,7 @@ public class Duke {
                 // case where input is bye, and a case where the inputList is of length 1
                 if(inputList[0].trim().toLowerCase().equals(bye_key)){
                     byeGreetings();
+                    saveTasks();
                     break;
                 }
 
@@ -150,9 +146,9 @@ public class Duke {
 
     //method to segment every String that is being fed into this method
     public static void lineFormatter (String printable){
-        System.out.println(longLine);
+        System.out.println(long_line);
         System.out.println(printable);
-        System.out.println(longLine);
+        System.out.println(long_line);
     }
 
 
@@ -189,6 +185,94 @@ public class Duke {
         lineFormatter("Now you have a new " + type + "! :\n" + task.toString() +
                 "\nYou currently have " + taskList.size() + " events in your list\n" +
                 "Type \'list\' to check your Tasklist");
+    }
+
+    private static void createTasks() {
+        try {
+            File createFile = new File("/data/duke.txt");
+
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    // method to update and save the txt file with the taskList
+    private static void saveTasks(){
+        String directory = System.getProperty("user.dir");
+        Path path =  Paths.get(directory, "data");
+        try{
+            // Check if the file path exists, if not, create a new directory
+            if(!Files.exists(path)){
+                Files.createDirectories(path);
+            }
+
+            Path filePath = Paths.get(directory,"data","taskList.txt");
+            File taskFile = filePath.toFile();
+
+            // Check if the file exists, if not, create a new file
+            if(!taskFile.exists()){
+                taskFile.createNewFile();
+            }
+
+            FileWriter fileWriter = new FileWriter(taskFile);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (int i = 0; i < taskList.size(); i++) {
+                bufferedWriter.write(taskList.get(i).getOriginal());
+                bufferedWriter.write("~");
+                if(taskList.get(i).getStatus()){
+                    bufferedWriter.write("1");
+                } else{
+                    bufferedWriter.write("0");
+                }
+                bufferedWriter.write("-");
+            }
+            //System.out.println(SAVED);
+            bufferedWriter.close();
+
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    // method to load the existing file and update the taskList
+    private static void loadTasks() {
+        String directory = System.getProperty("user.dir");
+        Path filePath = Paths.get(directory, "data", "taskList.txt");
+        if(filePath.toFile().exists()){
+            try{
+                BufferedReader reader = Files.newBufferedReader(filePath);
+                String data = reader.readLine();
+                if(data != null) {
+                    String[] tasks = data.split("-");
+                    for (int i = 0; i < tasks.length; i++) {
+                        //split the individual tasks
+                        String[] doneList = tasks[i].split("~", 2);
+                        String[] nameList= doneList[0].split(" ", 2);
+                        if (nameList[0].trim().toLowerCase().equals(deadline_key)) {
+                            String[] task_deadline = nameList[1].trim().split("/by", 2);
+                            Task newTask = new Deadline(task_deadline[0].trim(),
+                                        task_deadline[1].trim(), checkDone(doneList[1]));
+                            taskList.add(newTask);
+
+                        } else if (nameList[0].trim().toLowerCase().equals(event_key)) {
+                            String[] task_event = nameList[1].trim().split("/at", 2);
+                            Task newTask = new Event(task_event[0].trim(), task_event[1].trim(),checkDone(doneList[1]));
+                            taskList.add(newTask);
+
+                        } else if (nameList[0].toLowerCase().equals(todo_key)) {
+                            Task newTask = new ToDo(nameList[1].trim(), checkDone(doneList[1]));
+                            taskList.add(newTask);
+                        }
+                    }
+                }
+
+            } catch (IOException e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+    // check if the task was done before
+    private static boolean checkDone (String checker){
+        return checker.equals("1");
     }
 
 

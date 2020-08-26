@@ -8,6 +8,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task (String description, boolean isDone){
+        this.isDone = isDone;
+        this.description = description;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
@@ -22,6 +27,9 @@ public class Task {
 
     public boolean getStatus(){
         return isDone;
+    }
+    public String getOriginal(){
+        return "task " + getTask();
     }
 
     public String toString(){
