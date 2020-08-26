@@ -32,7 +32,6 @@ public abstract class Task {
 
     public abstract String stringToSave();
 
-    public abstract void print(int numOfIndents);
 
 }
 

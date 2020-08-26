@@ -38,16 +38,6 @@ public class Deadline extends Task {
         DateTimeFormatter dtfTime = DateTimeFormatter.ISO_LOCAL_TIME;
         return "[D]" + super.toString() + "(by: " + this.date.format(dtfDate) + " " + this.time.format(dtfTime) + ")";
     }
-
-    @Override
-    public void print(int numOfIndents) {
-        String indents = "  ";
-        for (int i = 1; i < numOfIndents; i++) {
-            indents += indents;
-        }
-        System.out.println(indents + this.toString());
-    }
-
     @Override
     public String stringToSave() {
         char status = this.isDone ? '1' : '0';

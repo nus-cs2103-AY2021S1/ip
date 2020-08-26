@@ -41,15 +41,6 @@ public class Event extends Task {
     }
 
     @Override
-    public void print(int numOfIndents) {
-        String indents = "  ";
-        for (int i = 1; i < numOfIndents; i++) {
-            indents += indents;
-        }
-        System.out.println(indents + this.toString());
-    }
-
-    @Override
     public String stringToSave() {
         char status = this.isDone ? '1' : '0';
         DateTimeFormatter dtfDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
