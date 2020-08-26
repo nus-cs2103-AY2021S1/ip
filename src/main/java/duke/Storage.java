@@ -5,6 +5,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
+    /**
+     * Used to load tasks from a storage file.
+     * Parses the file specified at the filepath and adds Tasks to the tasklist 
+     * according to the contents of the file.
+     * @param filepath The relative path where the file is stored.
+     * @param taskList The task list to which the new Tasks should be added to.
+     * @return true if the file is loaded successfully, false otherwise.
+     */
     public static boolean loadTasksFrom(String filepath, TaskList taskList) {
         File dataFile = new File(filepath);
         
@@ -31,11 +39,18 @@ public class Storage {
 
         } catch (FileNotFoundException e) {
             // No need to do anything if file not found as file will be created later anyway
+            return false;
         }
         
         return true;
     }
-    
+
+    /**
+     * Stores all tasks in the specified tasklist to the file specified in the filepath.
+     * @param filepath The relative path where the file is stored.
+     * @param taskList The task list which contains the Tasks to be stored.
+     * @return true if the Tasks have been successfully stored to the file, false otherwise.
+     */
     public static boolean saveTasksTo(String filepath, TaskList taskList) {
         ArrayList<Task> tasksArray = taskList.getAllTasks();
         String fileOutput = "";
@@ -46,17 +61,15 @@ public class Storage {
             }
             fileOutput = fileOutput + "\n";
         }
-
-
+        
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
             writer.write(fileOutput);
             writer.close();
-
-
         } catch (IOException e) {
-            e.printStackTrace();
+            return false;
         }
+        
         return true;
     }
 }

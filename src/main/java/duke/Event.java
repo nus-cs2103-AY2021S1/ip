@@ -9,7 +9,6 @@ public class Event extends Task {
     protected static DateTimeFormatter dateTimeInputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     protected static DateTimeFormatter dateTimeOutputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
     
-
     public Event(String description, String timeOfEvent) {
         super(description);
         this.timeOfEvent = LocalDateTime.parse(timeOfEvent, dateTimeInputFormatter);
@@ -20,6 +19,11 @@ public class Event extends Task {
         this.timeOfEvent = LocalDateTime.parse(timeOfEvent);
     }
 
+    /**
+     * Returns an array of Strings representing the state of the task, to be passed to Storage to 
+     * be formatted and written to a file.
+     * @return Array of Strings representing the current state of the Task.
+     */
     @Override
     public String[] serialize() {
         String[] output = new String[4];
