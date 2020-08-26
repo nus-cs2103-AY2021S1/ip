@@ -110,7 +110,7 @@ public class DukeList {
      * @return Status string to be printed.
      * @throws DukeException Duke exception.
      */
-    public String add(String itemString) throws DukeException {
+    String add(String itemString) throws DukeException {
         Task newTask = addHelper(itemString);
 
         return "Got it. I've added this task:\n" +
@@ -144,7 +144,7 @@ public class DukeList {
      * @return Status string to be printed.
      * @throws NullPointerException invalid index.
      */
-    public String markAsDone(int index) throws NullPointerException {
+    String markAsDone(int index) throws NullPointerException {
         Task targetTask = this.list.get(index - 1);
         targetTask.markAsDone();
 
@@ -160,7 +160,7 @@ public class DukeList {
      * @return Status string to be printed.
      * @throws NullPointerException invalid index.
      */
-    public String delete(int index) throws NullPointerException {
+    String delete(int index) throws NullPointerException {
         Task removedTask = this.list.remove(index - 1);
         return "Noted. I've removed this task:\n" +
                 String.format("\t%s\n", removedTask.toString())
@@ -171,7 +171,7 @@ public class DukeList {
     /**
      * Writes tasks to file.
      */
-    public void writeToFile() {
+    void writeToFile() {
         for (Task t : this.list) {
             this.store.addToFileBuffer(t);
         }
@@ -182,7 +182,7 @@ public class DukeList {
     /**
      * Adds items that are read from file.
      */
-    public void loadFromFile() {
+    void loadFromFile() {
         String[][] parsedLines = this.store.readFromFile();
         for (String[] parsedLine : parsedLines) {
             String itemString = parsedLine[0];

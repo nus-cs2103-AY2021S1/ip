@@ -6,7 +6,7 @@ public enum TaskType {
     DEADLINE("deadline"),
     UNKNOWN("invalid");
 
-    private String taskKeywordStr;
+    private final String taskKeywordStr;
 
 
     private TaskType(String taskKeywordStr) {

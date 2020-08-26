@@ -43,7 +43,7 @@ public class Storage {
      *
      * @return file status string.
      */
-    public String getFileStatus() {
+    String getFileStatus() {
         return this.pathExists ? "exists" : "not found";
     }
 
@@ -53,7 +53,7 @@ public class Storage {
      *
      * @return if file exists.
      */
-    public boolean fileExists() {
+    boolean fileExists() {
         return this.pathExists;
     }
 
@@ -63,7 +63,7 @@ public class Storage {
      *
      * @throws IOException IOException.
      */
-    private void createFile() throws IOException {
+    void createFile() throws IOException {
         File storageFile = new File(path.toString());
         boolean fileCreatedSuccessfully = storageFile.createNewFile();
 
@@ -76,7 +76,7 @@ public class Storage {
      *
      * @param task task to be added to file buffer.
      */
-    public void addToFileBuffer(Task task) {
+    void addToFileBuffer(Task task) {
         String[] storageStrArr = task.toStorageStringArr();
         String joinedStorageStr = String.join(DELIMITER, storageStrArr);
         this.fileBuffer.add(joinedStorageStr);
@@ -86,7 +86,7 @@ public class Storage {
     /**
      * Writes file buffer to file.
      */
-    public void writeToFile() {
+    void writeToFile() {
         try {
             if (fileBuffer.size() > 0) {
                 if (!fileExists()) {
@@ -147,7 +147,7 @@ public class Storage {
      *
      * @return 2D array of saved tasks. Each task is given in an array of size 2.
      */
-    public String[][] readFromFile() {
+    String[][] readFromFile() {
         try {
             ArrayList<String[]> parsedLines = new ArrayList<>();
 

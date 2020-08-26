@@ -22,7 +22,8 @@ public abstract class Task {
         this.itemString = itemString;
         this.isDone = false;
     }
-    
+
+
     public Task(String itemString, boolean isDone) {
         this.itemString = itemString;
         this.isDone = isDone;
@@ -67,15 +68,22 @@ public abstract class Task {
     public void markAsDone() {
         this.isDone = true;
     }
-    
-    public static String formatDateString(LocalDate date) {
+
+
+    /**
+     * Formats date string.
+     *
+     * @param date date object
+     * @return formatted date string.
+     */
+    static String formatDateString(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
 
     /**
      * Gets string array for storage.
-     * 
+     *
      * @return string array for storage.
      */
     public String[] toStorageStringArr() {

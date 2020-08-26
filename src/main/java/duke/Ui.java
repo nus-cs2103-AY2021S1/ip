@@ -30,7 +30,7 @@ public class Ui {
      *
      * @return if scanner has next line.
      */
-    public boolean hasNextLine() {
+    boolean hasNextLine() {
         return sc.hasNextLine();
     }
 
@@ -40,7 +40,7 @@ public class Ui {
      *
      * @return next line of text.
      */
-    public String nextLine() {
+    String nextLine() {
         return sc.nextLine();
     }
 
@@ -48,7 +48,7 @@ public class Ui {
     /**
      * Prints start message.
      */
-    public static void printStartMessage() {
+    static void printStartMessage() {
         Ui.printSeparator();
         // System.out.println(Ui.LOGO);
         System.out.println("Hello! I'm Duke.");
@@ -62,7 +62,7 @@ public class Ui {
      *
      * @param msg message to be printed.
      */
-    public void printMessage(String msg) {
+    void printMessage(String msg) {
         Ui.printSeparator();
         System.out.println(msg);
         Ui.printSeparator();
