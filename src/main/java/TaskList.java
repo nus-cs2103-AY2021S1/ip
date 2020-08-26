@@ -13,12 +13,14 @@ public class TaskList extends ArrayList<Task> {
         Ui.printWithLines(String.format("  %s%s\n", prefix, task));
     }
 
-    public void addTask(Task newTask) {
+    public void addTask(Task newTask, boolean announce) {
         super.add(newTask);
-        String prefix = "Okay! I shall add this task:\n";
-        String suffix = String.format("Now you got a total of %s task%s in your list!\n", super.size(),
-                super.size() == 1 ? "" : "s");
-        Ui.printWithLines(prefix + newTask + "\n" + suffix);
+        if (announce) {
+            String prefix = "Okay! I shall add this task:\n";
+            String suffix = String.format("Now you got a total of %s task%s in your list!\n", super.size(),
+                    super.size() == 1 ? "" : "s");
+            Ui.printWithLines(prefix + newTask + "\n" + suffix);
+        }
     }
 
     public void deleteTask(int index) {
@@ -37,5 +39,14 @@ public class TaskList extends ArrayList<Task> {
             list.append(i + 1).append(".").append(super.get(i).toString()).append("\n");
         }
         return prefix.append(list).toString();
+    }
+
+    public String toData() {
+        StringBuilder list = new StringBuilder();
+        int l = super.size();
+        for (Task task: this) {
+            list.append(task.toData()).append("\n");
+        }
+        return list.toString();
     }
 }

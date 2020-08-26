@@ -9,42 +9,21 @@ public class Parser {
                 taskList.completeTask(Integer.parseInt(inputSuffix) - 1);
                 break;
             case "todo":
-                taskList.addTask(new Todo(inputSuffix));
+                taskList.addTask(new Todo(inputSuffix), true);
                 break;
             case "deadline":
-                String[] deadlineParts = inputSuffix.split("/by",2);
-                String deadlineName = deadlineParts[0];
-                if (deadlineParts.length == 1) {
-                    throw new DukeEmptyDescException(TaskType.EVENT);
-                } else {
-                    String by = deadlineParts[1];
-                    if (Ui.isBlankString(by)) {
-                        throw new DukeEmptyDescException(TaskType.EVENT);
-                    } else {
-                        taskList.addTask(new Deadline(deadlineName, by));
-                        break;
-                    }
-                }
+                Deadline.newDeadline(inputSuffix, taskList, false, true);
+                break;
             case "event":
-                String[] eventParts = inputSuffix.split("/at",2);
-                String eventName = eventParts[0];
-                if (eventParts.length == 1) {
-                    throw new DukeEmptyDescException(TaskType.EVENT);
-                } else {
-                    String at = eventParts[1];
-                    if (Ui.isBlankString(at)) {
-                        throw new DukeEmptyDescException(TaskType.EVENT);
-                    } else {
-                        taskList.addTask(new Event(eventName, at));
-                        break;
-                    }
-                }
+                Event.newEvent(inputSuffix, taskList, false, true);
+                break;
             case "delete":
                 taskList.deleteTask(Integer.parseInt(inputSuffix) - 1);
                 break;
             default:
                 throw new DukeNoSuchInputException();
         }
+        Storage.createNewSave(taskList.toData());
     }
 
 }
