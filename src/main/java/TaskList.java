@@ -27,6 +27,17 @@ public class TaskList {
         return ls.get(index);
     }
 
+    String find(String match) {
+        String s = "";
+        for(Task task : ls) {
+            if(task.toString().contains(match)) {
+                s = s.concat(task.toString());
+                s = s.concat("\n");
+            }
+        }
+        return s;
+    }
+
     @Override
     public String toString() {
         String s = "";
