@@ -6,7 +6,7 @@ public class Task {
 
     // Markers
     public static final String TICK = "[" + "\u2713" + "]";
-    private static final String CROSS = "[" + "\u2718" + "]";
+    public static final String CROSS = "[" + "\u2718" + "]";
 
     public Task(String description) {
         this.description = description;
