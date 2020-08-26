@@ -43,13 +43,17 @@ public class Duke {
 
     /**
      * The main algorithm of the bot which runs indefinitely as long as
-     * the running flag is true. The algorithm can be summarised as:
+     * the running flag is true. The algorithm can be summarized as:
+     *
      *     0. Show the welcome message
      *     1. Read raw user input
      *     2. Parse user input and create the appropriate command
      *     3. Execute the command
      *     4. Repeat 1-3 until an exit command
      *     5. Show the exit message
+     *
+     * Throughout the process, DukeExceptions may be created but are
+     * caught and handled by the respective classes.
      */
     public void run() {
         ui.showWelcome();
