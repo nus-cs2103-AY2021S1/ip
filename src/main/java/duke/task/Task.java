@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * {@code: Task} is an abstract object which dictates the minimal structure every Task should have
+ * {@code Task} is an abstract object which dictates the minimal structure every Task should have
  *      and capable of performing.
  */
 public class Task { //TODO: convert to abstract class

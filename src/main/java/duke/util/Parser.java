@@ -18,7 +18,7 @@ import duke.task.ToDo;
 //TODO: change exceptions to throw from creation instead of checking.
 
 /**
- * This class will translate the user's imput into command.
+ * This class will translate the user's input into command.
  */
 public class Parser {
 

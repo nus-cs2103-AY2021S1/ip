@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@code: FindCommand} is a child of {@code: Command} object.
+ * {@code FindCommand} is a child of {@code Command} object.
  *      On execution, it will search all task description and list those who matched the search criteria.
  */
 public class FindCommand extends Command {

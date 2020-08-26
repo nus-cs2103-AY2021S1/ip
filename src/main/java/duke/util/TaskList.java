@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * This class handles the list of task for {@code: Duke}.
+ * This class handles the list of task for {@code Duke}.
  */
 public class TaskList {
 
@@ -15,7 +15,7 @@ public class TaskList {
     private List<Task> taskList;
 
     /**
-     * Constructs an empty task list which utilised an {@code: ArrayList}.
+     * Constructs an empty task list which utilised an {@code ArrayList}.
      */
     public TaskList() {
         taskList = new ArrayList<>();

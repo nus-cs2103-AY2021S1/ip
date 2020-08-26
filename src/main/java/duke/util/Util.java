@@ -17,11 +17,11 @@ public class Util {
     private static final String TASK_DELIMITER = "`";
 
     /**
-     * Converts a String type date and time into a {@code: LocalDateTime} object
+     * Converts a String type date and time into a {@code LocalDateTime} object
      *
      * @param dateTime The String of Date/Time. Formats accepted: "YYYY-MM-dd HHmm", "dd/MM/yyyy HHmm"
      *                 and their date equivalent.
-     * @return The {@code: LocalDateTime} object from the given input.
+     * @return The {@code LocalDateTime} object from the given input.
      * @throws DukeException if the input string does not follow the above format.
      */
     public static LocalDateTime convertStringToDateTime(String dateTime) {
@@ -45,10 +45,10 @@ public class Util {
     }
 
     /**
-     * Converts a String type input into {@code: Task} object.
+     * Converts a String type input into {@code Task} object.
      *
      * @param string The string to be converted.
-     * @return The {@code: Task} object from the given input
+     * @return The {@code Task} object from the given input
      * @throws DukeException if the given input does not match the input format.
      */
     public static Task convertStringToTask(String string) {

@@ -1,7 +1,7 @@
 package duke.command;
 
 /**
- * The list of commands available for {@code: Duke}.
+ * The list of commands available for {@code Duke}.
  */
 public enum CommandList {
     bye,

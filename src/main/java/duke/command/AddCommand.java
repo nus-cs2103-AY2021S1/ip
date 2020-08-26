@@ -5,7 +5,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * {@code: AddCommand} is a child of {@code: Command} object.
+ * {@code AddCommand} is a child of {@code Command} object.
  *      On execution, it will add a given task into the task list.
  */
 public class AddCommand extends Command {

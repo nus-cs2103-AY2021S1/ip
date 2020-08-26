@@ -4,7 +4,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * {@code: ListCommand} is a child of {@code: Command} object.
+ * {@code ListCommand} is a child of {@code Command} object.
  *      On execution, it will display all the tasks currently in the task list.
  */
 public class ListCommand extends Command {

@@ -4,10 +4,10 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * {@code: Command} is an abstract object which wraps the user's instruction into Command objects and execute.
+ * {@code Command} is an abstract object which wraps the user's instruction into Command objects and execute.
  */
 public abstract class Command {
-    /** Status of the {@code: Duke} programme. True if programme is exited. */
+    /** Status of the {@code Duke} programme. True if programme is exited. */
     public static boolean isTerminated = false;
 
     /**

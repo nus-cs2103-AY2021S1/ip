@@ -140,7 +140,7 @@ public class Ui {
      *
      * @param searchTerm Searched keyword
      * @param idxList Index of the task selected
-     * @param tasks Task selected based on the searched keyword. 
+     * @param tasks Task selected based on the searched keyword.
      */
     public void printSearchResult(String searchTerm, List<Integer> idxList, List<Task> tasks) {
         if (tasks.size() == 0) {

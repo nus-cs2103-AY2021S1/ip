@@ -6,7 +6,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * {@code: DelelteCommand} is a child of {@code: Command} object.
+ * {@code DeleteCommand} is a child of {@code Command} object.
  *      On execution, it will delete a given index from the task list.
  */
 public class DeleteCommand extends Command {
@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
         try {
             Task t = tasks.remove(idx);
             ui.showRemoveTask(t, tasks.size());
-        } catch (IndexOutOfBoundsException iooob) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("I cannot delete this element: " + idx);
         }
     }

@@ -4,7 +4,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * {@code: ExitCommand} is a child of {@code: Command} object.
+ * {@code ExitCommand} is a child of {@code Command} object.
  *      On execution, it will set the isTerminated flag to true to stop the programme.
  */
 public class ExitCommand extends Command {

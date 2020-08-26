@@ -8,7 +8,7 @@ import duke.util.Ui;
 //TODO: Stretch Goals: Level 8- Use date related command
 
 /**
- * Driver of {@code: Duke} programme.
+ * Driver of {@code Duke} programme.
  */
 public class Duke {
 
@@ -35,7 +35,7 @@ public class Duke {
     }
 
     /**
-     * Execute the {@code: Duke} programme.
+     * Execute the {@code Duke} programme.
      */
     public void run() {
         while (!Command.isTerminated) {

@@ -6,7 +6,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * {@code: DoneCommand} is a child of {@code: Command} object.
+ * {@code DoneCommand} is a child of {@code Command} object.
  *      On execution, it will mark the given task in the task list as completed.
  */
 public class DoneCommand extends Command {
@@ -33,7 +33,7 @@ public class DoneCommand extends Command {
             Task t = tasks.get(idx);
             t.setDone();
             ui.showDone(t);
-        } catch (IndexOutOfBoundsException iooob) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("I cannot check this element: " + idx);
         }
     }
