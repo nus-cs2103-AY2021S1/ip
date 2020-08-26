@@ -10,9 +10,8 @@ public class UserData {
 
     public UserData() {
         if (!dataFolder.exists()) dataFolder.mkdir();
-        boolean isNew = false;
         try {
-            isNew = data.createNewFile();
+            boolean isNew = data.createNewFile();
             if (!isNew) read();
         } catch (IOException e) {
             e.printStackTrace();
