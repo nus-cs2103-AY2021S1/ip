@@ -1,4 +1,5 @@
-import java.lang.reflect.Array;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -86,12 +87,19 @@ public class Duke {
                             if (str.length == 1) {
                                 throw new MissingDeadlineException();
                             } else {
-                                String description = str[0];
-                                String by = str[1];
-                                Deadline deadline = new Deadline(description, by);
-                                lists.add(deadline);
-                                Response msg = new Response(new Task[]{deadline}, Response.Tag.ADD, lists.size());
-                                System.out.println(msg.getResponse());
+                                try {
+                                    String description = str[0];
+                                    String by = str[1].split("by ")[1];
+                                    LocalDateTime byTime = LocalDateTime.parse(by);
+                                    Deadline deadline = new Deadline(description, byTime);
+                                    lists.add(deadline);
+                                    Response msg = new Response(new Task[]{deadline}, Response.Tag.ADD, lists.size());
+                                    System.out.println(msg.getResponse());
+                                } catch (DateTimeParseException e) {
+                                    Response msg = new Response(new String[]{"Format of date and time is incorrect! Please fill in the date and time following the format below.",
+                                            "YYYY-MM-DDTHH:MM:SS"});
+                                    System.out.println(msg.getResponse());
+                                }
                             }    
                         } catch (ArrayIndexOutOfBoundsException e) {
                             MissingDescriptionException realError = new MissingDescriptionException("a deadline");
@@ -106,11 +114,21 @@ public class Duke {
                             String[] str = received.split("event ")[1].split(" /");
                             if (str.length == 1) {
                                 throw new MissingTimeException();
+                            } else {
+                                try {
+                                    String description = str[0];
+                                    String at = str[1].split("at ")[1];
+                                    LocalDateTime atTime = LocalDateTime.parse(at);
+                                    Event event = new Event(description, atTime);
+                                    lists.add(event);
+                                    Response msg = new Response(new Task[]{event}, Response.Tag.ADD, lists.size());
+                                    System.out.println(msg.getResponse());
+                                } catch (DateTimeParseException e) {
+                                    Response msg = new Response(new String[]{"Format of date and time is incorrect! Please fill in the date and time following the format below.",
+                                            "YYYY-MM-DDTHH:MM:SS"});
+                                    System.out.println(msg.getResponse());
+                                }
                             }
-                            Event event = new Event(str[0], str[1]);
-                            lists.add(event);
-                            Response msg = new Response(new Task[]{event}, Response.Tag.ADD, lists.size());
-                            System.out.println(msg.getResponse());
                         } catch (ArrayIndexOutOfBoundsException e) {
                             MissingDescriptionException realError = new MissingDescriptionException("an event");
                             Response msg = new Response(new String[]{String.valueOf(realError)});
