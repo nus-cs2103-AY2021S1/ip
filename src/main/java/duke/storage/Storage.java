@@ -5,8 +5,15 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import java.io.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -34,7 +41,7 @@ public class Storage {
     public ArrayList<Task> loadTasks() throws DukeException {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
-            Scanner sc = new Scanner(this.data);
+            Scanner sc = new Scanner(data);
             while (sc.hasNextLine()) {
                 String[] inputs = sc.nextLine().split(" \\| ");
                 String type = inputs[0];
@@ -65,7 +72,7 @@ public class Storage {
      */
     public void saveTasks(ArrayList<Task> tasks) throws DukeException {
         try {
-            PrintWriter writer = new PrintWriter(new FileWriter(this.data));
+            PrintWriter writer = new PrintWriter(new FileWriter(data));
             for (int i = 0; i < tasks.size(); i++) {
                 writer.println(tasks.get(i).saveToHardDisk());
             }

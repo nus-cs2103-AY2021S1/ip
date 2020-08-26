@@ -19,7 +19,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " +
-                this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**
@@ -29,6 +29,6 @@ public class Event extends Task {
      */
     @Override
     public String saveToHardDisk() {
-        return "E" + super.saveToHardDisk() + " | " + this.time;
+        return "E" + super.saveToHardDisk() + " | " + time;
     }
 }

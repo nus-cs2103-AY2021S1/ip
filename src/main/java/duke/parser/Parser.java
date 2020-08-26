@@ -1,7 +1,15 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
 import duke.exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -47,12 +55,12 @@ public class Parser {
                 try {
                     int index = Integer.parseInt(separated[1]);
                     switch (commandType) {
-                        case DONE:
-                            command = new DoneCommand(index);
-                            break;
-                        default:
-                            command = new DeleteCommand(index);
-                            break;
+                    case DONE:
+                        command = new DoneCommand(index);
+                        break;
+                    default:
+                        command = new DeleteCommand(index);
+                        break;
                     }
                 } catch (NumberFormatException error) {
                     isError = true;
@@ -71,32 +79,32 @@ public class Parser {
                 String[] content;
                 LocalDate time;
                 switch (commandType) {
-                    case TODO:
-                        description = input.substring(5);
-                        command = new ToDoCommand(description);
+                case TODO:
+                    description = input.substring(5);
+                    command = new ToDoCommand(description);
+                    break;
+                case DEADLINE:
+                    content = input.substring(9).split(" /by ");
+                    if (content.length <= 1) {
+                        isError = true;
+                        errorMessage = " Deadline date cannot be empty :(";
                         break;
-                    case DEADLINE:
-                        content = input.substring(9).split(" /by ");
-                        if (content.length <= 1) {
-                            isError = true;
-                            errorMessage = " Deadline date cannot be empty :(";
-                            break;
-                        }
-                        description = content[0];
-                        time = LocalDate.parse(content[1]);
-                        command = new DeadlineCommand(description, time);
+                    }
+                    description = content[0];
+                    time = LocalDate.parse(content[1]);
+                    command = new DeadlineCommand(description, time);
+                    break;
+                default:
+                    content = input.substring(6).split(" /at ");
+                    if (content.length <= 1) {
+                        isError = true;
+                        errorMessage = " Deadline date cannot be empty :(";
                         break;
-                    default:
-                        content = input.substring(6).split(" /at ");
-                        if (content.length <= 1) {
-                            isError = true;
-                            errorMessage = " Deadline date cannot be empty :(";
-                            break;
-                        }
-                        description = content[0];
-                        time = LocalDate.parse(content[1]);
-                        command = new EventCommand(description, time);
-                        break;
+                    }
+                    description = content[0];
+                    time = LocalDate.parse(content[1]);
+                    command = new EventCommand(description, time);
+                    break;
                 }
                 break;
             }

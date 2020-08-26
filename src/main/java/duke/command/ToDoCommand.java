@@ -22,7 +22,7 @@ public class ToDoCommand extends Command {
      */
     @Override
     public void executeCommand(TaskList tasks, Ui ui, Storage storage) {
-        Task newTask = new ToDo(this.description, false);
+        Task newTask = new ToDo(description, false);
         tasks.addTask(newTask);
     }
 }

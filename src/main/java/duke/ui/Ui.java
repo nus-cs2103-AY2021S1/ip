@@ -3,17 +3,17 @@ package duke.ui;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String logo = " _   _       _   _ _            \n" +
+    private static final String LOGO = " _   _       _   _ _            \n" +
             "| | | |     | | | (_)           \n" +
             "| |_| | ___ | |_| |_ _ __   ___ \n" +
             "|  _  |/ _ \\| __| | | '_ \\ / _ \\\n" +
             "| | | | (_) | |_| | | | | |  __/\n" +
             "\\_| |_/\\___/ \\__|_|_|_| |_|\\___| \n";
-    private static final String divider = "<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>";
-    private static final String welcomeMessage = divider + "\n Thanks for contacting Hotline! \n" +
+    private static final String DIVIDER = "<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>";
+    private static final String WELCOME_MESSAGE = DIVIDER + "\n Thanks for contacting Hotline! \n" +
             " How can I help you today? \n"
-            + divider + "\n";
-    private static final String goodbyeMessage = "██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████\n" +
+            + DIVIDER + "\n";
+    private static final String GOODBYE_MESSAGE = "██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████\n" +
             "██                  ████      ████████  ██████████████████      ████    ██  ▒▒██████████  ████████  ████████        ░░██    ██████████\n" +
             "██                  ████      ████████    ████████  ██████      ██      ██    ████████    ░░████▒▒    ████            ██      ▓▓      \n" +
             "██                  ████      ██████      ████████    ▒▒██      ██              ██████      ████                              ██      \n" +
@@ -52,22 +52,22 @@ public class Ui {
      * Prints welcome message.
      */
     public void greetUser() {
-        System.out.println(logo);
-        System.out.println(welcomeMessage);
+        System.out.println(LOGO);
+        System.out.println(WELCOME_MESSAGE);
     }
 
     /**
      * Prints line divider.
      */
     public void showLine() {
-        System.out.println(divider);
+        System.out.println(DIVIDER);
     }
 
     /**
      * Prints goodbye message.
      */
-    public void goodbyeUser() {
-        System.out.println(goodbyeMessage);
+    public void showGoodbyeUser() {
+        System.out.println(GOODBYE_MESSAGE);
     }
 
     /**

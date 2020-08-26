@@ -13,7 +13,7 @@ public class Task {
      * Completes a task.
      */
     public void completeTask() {
-        this.done = true;
+        done = true;
     }
 
     /**
@@ -24,7 +24,7 @@ public class Task {
     @Override
     public String toString() {
         String symbol = (this.done ? "[\u2713] " : "[\u2718] ");
-        return symbol + this.description;
+        return symbol + description;
     }
 
     /**
@@ -33,7 +33,7 @@ public class Task {
      * @return String that will be stored on hard disk.
      */
     public String saveToHardDisk() {
-        int isDone = this.done ? 1 : 0;
-        return " | " + isDone + " | " + this.description;
+        int isDone = done ? 1 : 0;
+        return " | " + isDone + " | " + description;
     }
 }

@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.ui.Ui;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -26,7 +27,7 @@ public class TaskList {
      * @return User current tasks.
      */
     public ArrayList<Task> getTasks() {
-        return this.tasks;
+        return tasks;
     }
 
     /**
@@ -35,11 +36,11 @@ public class TaskList {
      * @param task Task to be added.
      */
     public void addTask(Task task) {
-        this.tasks.add(task);
-        this.taskCount += 1;
+        tasks.add(task);
+        taskCount += 1;
         ui.printMessage(" Your task has been recorded.",
                 "   " + task,
-                " You have " + this.taskCount + " tasks currently.");
+                " You have " + taskCount + " tasks currently.");
     }
 
     /**
@@ -48,15 +49,15 @@ public class TaskList {
      * @param index Position of the task to be deleted.
      */
     public void deleteTask(int index) {
-        if (index < 1 || this.taskCount < index) {
+        if (index < 1 || taskCount < index) {
             ui.printMessage(" Sorry I cannot find your specified task :(");
         } else {
-            Task removed = this.tasks.get(index - 1);
-            this.tasks.remove(index - 1);
-            this.taskCount -= 1;
+            Task removed = tasks.get(index - 1);
+            tasks.remove(index - 1);
+            taskCount -= 1;
             ui.printMessage(" Okay, I will remove this task for you",
                     "   " + removed,
-                    " You have " + this.taskCount + " tasks currently.");
+                    " You have " + taskCount + " tasks currently.");
         }
     }
 
@@ -64,14 +65,14 @@ public class TaskList {
      * Lists all tasks in task list.
      */
     public void listTasks() {
-        if (this.taskCount == 0) {
+        if (taskCount == 0) {
             ui.printMessage(" You've got no tasks now.",
                     " If you want to get busy add more task.",
                     " I'll remember them for you :)");
         } else {
             ui.printMessage(" Let me list out all your tasks...");
-            for (int i = 0; i < this.taskCount; i++) {
-                ui.printMessage(" " + (i + 1) + "." + this.tasks.get(i));
+            for (int i = 0; i < taskCount; i++) {
+                ui.printMessage(" " + (i + 1) + "." + tasks.get(i));
             }
         }
     }
@@ -82,13 +83,13 @@ public class TaskList {
      * @param index Position of the task to be completed.
      */
     public void markAsDone(int index) {
-        if (index < 1 || this.taskCount < index) {
+        if (index < 1 || taskCount < index) {
             ui.printMessage(" Sorry I cannot find your specified task :(");
         } else {
-            this.tasks.get(index - 1).completeTask();
+            tasks.get(index - 1).completeTask();
             ui.printMessage(" Congratulations for finishing this task!",
                     " Let me mark this as done for you.",
-                    "   " + this.tasks.get(index - 1));
+                    "   " + tasks.get(index - 1));
         }
     }
 }
