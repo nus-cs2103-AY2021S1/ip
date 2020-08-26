@@ -15,8 +15,8 @@ public class Ui {
      * Prints a welcome message.
      */
     public void showWelcome() {
-        System.out.println("Hello! I'm Duke\n" +
-                "What can I do for you?");
+        System.out.println("Hello! I'm Duke\n"
+                + "What can I do for you?");
     }
 
     /**
@@ -33,8 +33,8 @@ public class Ui {
      * @param task task which has been marked as completed.
      */
     public void showDoneMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n" +
-                task);
+        System.out.println("Nice! I've marked this task as done:\n"
+                + task);
     }
 
     /**
@@ -43,9 +43,9 @@ public class Ui {
      * @param totalTasks total number of tasks left after deletion.
      */
     public void showDeletedMessage(Task task, int totalTasks) {
-        System.out.println("Noted. I've removed this task:\n" +
-                task +
-                "\nNow you have " + totalTasks + " tasks in the list.");
+        System.out.println("Noted. I've removed this task:\n"
+                + task
+                + "\nNow you have " + totalTasks + " tasks in the list.");
     }
 
     /**
@@ -54,9 +54,9 @@ public class Ui {
      * @param totalTasks total number of tasks left after addition.
      */
     public void showAddedMessage(Task task, int totalTasks) {
-        System.out.println("Got it. I've added this task:\n" +
-                task +
-                "\nNow you have " + totalTasks + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n"
+                + task
+                + "\nNow you have " + totalTasks + " tasks in the list.");
     }
 
     /**
