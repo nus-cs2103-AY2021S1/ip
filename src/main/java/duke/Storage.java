@@ -34,21 +34,18 @@ public class Storage {
                 if(list.get(i) instanceof Todo){
                     Todo todo = (Todo)list.get(i);
                     fileWriter.write("T|" + (todo.isDone ? "1" : "0") + "|" + todo.getDescription() + "\n");
-                }
-                else if(list.get(i) instanceof Deadline){
+                } else if(list.get(i) instanceof Deadline){
                     Deadline ddl = (Deadline)list.get(i);
                     fileWriter.write("D|" + (ddl.isDone ? "1" : "0") + "|" + ddl.getDescription() +
                             "|" + ddl.getBy() + "\n");
-                }
-                else{
+                } else{
                     Event event = (Event)list.get(i);
                     fileWriter.write("E|" + (event.isDone ? "1" : "0") + "|" + event.getDescription() +
                             "|" + event.getAt() + "\n");
                 }
             }
             fileWriter.close();
-        }
-        catch(Exception e){
+        } catch(Exception e){
             e.printStackTrace();
         }
     }

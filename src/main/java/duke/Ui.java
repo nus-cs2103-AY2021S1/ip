@@ -118,15 +118,13 @@ public class Ui {
                     newTodo.toString() + "\n" +
                     String.format("Now you have %d tasks in the list.", listSize) +
                     "\n____________________________________________________________");
-        }
-        else if(type == DEADLINE){
+        } else if(type == DEADLINE){
             Deadline ddl = (Deadline)task;
             System.out.println("Got it. I've added this task:\n" +
                     ddl.toString() + "\n" +
                     String.format("Now you have %d tasks in the list.", listSize) +
                     "\n____________________________________________________________");
-        }
-        else{
+        } else{
             Event event = (Event)task;
             System.out.println("Got it. I've added this task:\n" +
                     event.toString() + "\n" +

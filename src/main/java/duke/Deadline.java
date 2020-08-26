@@ -19,12 +19,18 @@ public class Deadline extends Task {
     public static String getDescription(String s){
         String firstWord = "deadline", secondWord = "/by";
         int start = 0, len = s.length();
-        while(!s.substring(start, start + 8).equals(firstWord)) start++;
+        while(!s.substring(start, start + 8).equals(firstWord)){
+            start++;
+        }
         start += 9;
         if(start >= len) return s.substring(len);
         int end = start + 1;
-        while(end + 3 < len && !s.substring(end, end + 3).equals(secondWord)) end++;
-        if(end + 3 >= len) end = len + 1;
+        while(end + 3 < len && !s.substring(end, end + 3).equals(secondWord)){
+            end++;
+        }
+        if(end + 3 >= len){
+            end = len + 1;
+        }
         return s.substring(start, end - 1);
     }
 
@@ -36,7 +42,9 @@ public class Deadline extends Task {
     public static String getTime(String s){
         String word = "/by";
         int i = 0, len = s.length();
-        while(i + 3 < len && !s.substring(i, i + 3).equals(word)) i++;
+        while(i + 3 < len && !s.substring(i, i + 3).equals(word)){
+            i++;
+        }
         return i + 3 == len ? "" : s.substring(i + 4);
     }
 
@@ -87,7 +95,9 @@ public class Deadline extends Task {
         String by = getTime(input), description = getDescription(input);
         String[] command = input.split(" ");
         int ptr = 0;
-        while(command[ptr].equals("")) ptr++;
+        while(command[ptr].equals("")){
+            ptr++;
+        }
         if(description.equals("") || by.equals("") || command[command.length - 1].equals("/by") || ptr == command.length - 1){
             return null;
         }
@@ -95,15 +105,13 @@ public class Deadline extends Task {
         try{
             LocalDate date = LocalDate.parse(changeDateFormat(command));
             deadline.setDate(date);
-        }
-        catch(Exception e){
+        } catch(Exception e){
 
         }
         try{
             LocalTime time = LocalTime.parse(getLocalTime(command));
             deadline.setTime(time);
-        }
-        catch (Exception e){
+        } catch (Exception e){
 
         }
         return deadline;
@@ -122,15 +130,13 @@ public class Deadline extends Task {
         try{
             LocalDate d = LocalDate.parse(dateAndTime[0]);
             ddl.setDate(d);
-        }
-        catch (Exception e){
+        } catch (Exception e){
 
         }
         try{
             LocalTime t = LocalTime.parse(dateAndTime[1]);
             ddl.setTime(t);
-        }
-        catch (Exception e){
+        } catch (Exception e){
 
         }
         return ddl;
