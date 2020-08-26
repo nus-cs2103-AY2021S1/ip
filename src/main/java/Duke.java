@@ -1,3 +1,6 @@
+/**
+ * Represent the main class to run the Duke program.
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;
@@ -10,7 +13,10 @@ public class Duke {
         this.parser = new Parser();
         this.tasks = new TaskList(storage.load());
     }
-    
+
+    /**
+     * Start the Duke program.
+     */
     public void run() {
         String input = "";
         String output;
@@ -30,6 +36,10 @@ public class Duke {
         }
     }
 
+    /**
+     * The main method for Duke class.
+     * @param args unused
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("data/storage/duke.txt");
         duke.run();

@@ -6,13 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represent a storage for the data (TaskList) of Duke program.
+ */
 public class Storage {
     private String filePath;
     
     public Storage(String filePath) {
         this.filePath = filePath;
     }
-    
+
+    /**
+     * Return the list of tasks previously saved in the filepath specified.
+     * @return list of tasks
+     */
     public List<Task> load() {
         List<Task> list = new ArrayList<>();
         
@@ -64,6 +71,10 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Update the storage with the given list of tasks.
+     * @param list list of tasks
+     */
     public void update(List<Task> list) {
         try {
             FileWriter fw = new FileWriter(this.filePath);

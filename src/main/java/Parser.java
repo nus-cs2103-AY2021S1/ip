@@ -1,4 +1,15 @@
+/**
+ * Represent a parser to parse user input.
+ */
 public class Parser {
+    /**
+     * Return the output of Duke program after parsing the user input.
+     * @param input user input
+     * @param tasks task list
+     * @param storage storage of the data of the program
+     * @return output of the program as String
+     * @throws DukeException exception thrown when input is invalid
+     */
     public String parse(String input, TaskList tasks, Storage storage) throws DukeException {
         String output;
         String[] command = input.split(" ", 2);
