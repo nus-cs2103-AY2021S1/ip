@@ -1,6 +1,9 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
 
@@ -79,6 +82,7 @@ public class Duke {
                                 throw new DukeException("You have already marked this task as done!");
                             } else {
                                 tasks.set(taskNumber - 1, tasks.get(taskNumber - 1).markAsDone());
+                                overwriteFile();
                             }
 
                         } else {
@@ -103,6 +107,7 @@ public class Duke {
                                         tasks.get(taskNumber - 1) +
                                         "\n Now you have " + numTasks + " task(s) in the list."));
                                 tasks.remove(taskNumber - 1);
+                                overwriteFile();
                             }
 
                         } else {
@@ -114,7 +119,9 @@ public class Duke {
                     if (inputDataWords.length < 2) {
                         throw new DukeException("The description of a " + firstWord + " cannot be empty.");
                     } else {
-                        tasks.add(numTasks, new ToDo(inputData.split("todo ")[1]));
+                        ToDo task = new ToDo(inputData.split("todo ")[1]);
+                        tasks.add(numTasks, task);
+                        appendToFile("\nT | 0 | " + task.description);
                         System.out.println(formatMessage("Got it. I've added this task:\n    " +
                                 tasks.get(numTasks) +
                                 "\n Now you have " + (numTasks + 1) + " task(s) in the list."));
@@ -129,9 +136,10 @@ public class Duke {
                                 "   Please re-enter the desired deadline task\n" +
                                 "   (e.g. deadline xxx /by zzz)");
                     } else {
-                        tasks.add(numTasks, new Deadline(inputData.split("deadline ")[1].split("/by ")[0],
-                                inputData.split("/by ")[1]));
-
+                        Deadline task = new Deadline(inputData.split("deadline ")[1].split(" /by ")[0],
+                                inputData.split("/by ")[1]);
+                        tasks.add(numTasks, task);
+                        appendToFile("\nD | 0 | " + task.description + " | " + task.by);
                         System.out.println(formatMessage("Got it. I've added this task:\n    " +
                                 tasks.get(numTasks) +
                                 "\n Now you have " + (numTasks + 1) + " task(s) in the list."));
@@ -146,8 +154,10 @@ public class Duke {
                                 "   Please re-enter the desired event task\n" +
                                 "   (e.g. event xxx /at zzz)");
                     } else {
-                        tasks.add(numTasks, new Event(inputData.split("event ")[1].split("/at ")[0],
-                                inputData.split("/at ")[1]));
+                        Event task = new Event(inputData.split("event ")[1].split(" /at ")[0],
+                                inputData.split("/at ")[1]);
+                        tasks.add(numTasks, task);
+                        appendToFile("\nE | 0 | " + task.description + " | " + task.at);
                         System.out.println(formatMessage("Got it. I've added this task:\n    " +
                                         tasks.get(numTasks) +
                                         "\n Now you have " + (numTasks + 1) + " task(s) in the list."));
@@ -164,10 +174,68 @@ public class Duke {
                     throw new DukeException("Invalid command provided. Please try again.");
                 }
 
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    // Scans through file and makes use of the information to initialise tasks arraylist.
+    // If file does not exist, it creates a duke.txt file in the correct directory.
+    private static void loadFileContents() throws IOException {
+        File f = new File("data/duke.txt"); // create a File for the given file path
+
+        if (f.exists()) {
+            Scanner s = new Scanner(f); // create a Scanner using the File as the source
+
+            // go through file contents and initialise the tasks arraylist
+            while (s.hasNext()) {
+                String currString = s.nextLine();
+                String[] currStringArray = currString.split(" \\| ");
+                boolean isDone = currStringArray[1].equals("1");
+                if (currStringArray[0].equals("T")) {
+                    tasks.add(numTasks, new ToDo(currStringArray[2], isDone));
+                    numTasks++;
+                } else if (currStringArray[0].equals("D")) {
+                    tasks.add(numTasks, new Deadline(currStringArray[2],
+                           currStringArray[3], isDone));
+                    numTasks++;
+                } else {
+                    tasks.add(numTasks, new Event(currStringArray[2],
+                            currStringArray[3], isDone));
+                    numTasks++;
+                }
+            }
+        } else {
+            File directory = new File("data");
+            directory.mkdir(); // creates the directory if it does not exist
+            File file = new File("data/duke.txt");
+            file.createNewFile();
+        }
+
+        printTasks();
+    }
+
+    private static void appendToFile(String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter("data/duke.txt", true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
+    }
+
+    // Rewrite actual duke.txt file based on tasks arraylist
+    // Loop through tasks array and format each task
+    public static void overwriteFile() throws IOException {
+        FileWriter fw = new FileWriter("data/duke.txt");
+        String tasksList = "";
+        for (int i = 0; i < numTasks; i++) {
+            if (i == 0) {
+                tasksList = tasks.get(i).toTxtFileFormat();
+            } else {
+                tasksList = tasksList + "\n" + tasks.get(i).toTxtFileFormat();
+            }
+        }
+        fw.write(tasksList);
+        fw.close();
     }
 
     public static void main(String[] args) {
@@ -175,6 +243,11 @@ public class Duke {
                 " Hello! I'm Duke\n" +
                 " What can I do for you today?"));
 
-        getInput();
+        try {
+            loadFileContents();
+            getInput();
+        } catch (IOException e) {
+            System.out.println("File could not be created.");
+        }
     }
 }

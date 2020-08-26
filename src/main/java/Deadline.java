@@ -23,6 +23,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toTxtFileFormat() {
+        return "D" + super.toTxtFileFormat() + " | " + this.by;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }

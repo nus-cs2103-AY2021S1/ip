@@ -25,6 +25,10 @@ public class Task {
         return new Task(this.description, true);
     }
 
+    public String toTxtFileFormat() {
+        return " | " + (this.isDone ? "1" : "0") + " | " + this.description;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
