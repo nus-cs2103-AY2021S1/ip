@@ -1,3 +1,7 @@
+package Duke.Tool;
+
+import Duke.Task.*;
+
 import java.time.LocalDateTime;
 
 public class Command {

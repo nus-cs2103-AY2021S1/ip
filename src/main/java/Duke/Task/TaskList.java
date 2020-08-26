@@ -1,3 +1,8 @@
+package Duke.Task;
+
+import Duke.Task.Task;
+import Duke.Task.Todo;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -49,7 +54,7 @@ public class TaskList {
     }
 
 //    //mark a task as done
-//    public void markAsDone(int num) throws DukeException {
+//    public void markAsDone(int num) throws Duke.Tool.DukeException {
 //        if (num > 0 && num <= taskList.size()) {
 //            taskList.get(num - 1).markAsDone();
 //            String msgForDone = "    ____________________________________________________________\n"
@@ -58,7 +63,7 @@ public class TaskList {
 //                    + "    ____________________________________________________________\n";
 //            System.out.println(msgForDone);
 //        } else {
-//            throw new DukeException(
+//            throw new Duke.Tool.DukeException(
 //                    "OOPS!!! The task is not found. Please try again."
 //            );
 //        }
@@ -77,7 +82,7 @@ public class TaskList {
 //    }
 //
 //    //delete a task
-//    public void delete(int num) throws DukeException {
+//    public void delete(int num) throws Duke.Tool.DukeException {
 //        if (num > 0 && num <= taskList.size()) {
 //            String msgForDelete = "    ____________________________________________________________\n"
 //                    + "    Noted. I've removed this task: \n"
@@ -87,7 +92,7 @@ public class TaskList {
 //                        + "    ____________________________________________________________\n";
 //            System.out.println(msgForDelete);
 //        } else {
-//            throw new DukeException(
+//            throw new Duke.Tool.DukeException(
 //                    "OOPS!!! The task is not found. Please try again."
 //            );
 //        }

@@ -1,3 +1,7 @@
+package Duke.Tool;
+
+import Duke.Task.*;
+
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;

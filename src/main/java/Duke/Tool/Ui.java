@@ -1,3 +1,7 @@
+package Duke.Tool;
+
+import Duke.Task.*;
+
 public class Ui {
 
     //print welcome message

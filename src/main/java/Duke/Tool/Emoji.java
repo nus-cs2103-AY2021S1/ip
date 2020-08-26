@@ -1,3 +1,5 @@
+package Duke.Tool;
+
 public enum Emoji {
 
     CHICKEN(0x1F423),
