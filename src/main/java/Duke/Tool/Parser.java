@@ -5,10 +5,20 @@ import Duke.Task.TaskList;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * Parse the user input into command.
+ */
 public class Parser {
     
     public static DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    
+
+    /**
+     * Parse the user input into different commands.
+     * @param storage class containing the data.
+     * @param ui handles system output.
+     * @param taskList a list of tasks.
+     * @param command handles different commands.
+     */
     public void parse(Storage storage, Ui ui, TaskList taskList, Command command) {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {

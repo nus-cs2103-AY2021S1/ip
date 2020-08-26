@@ -1,13 +1,17 @@
 package Duke.Task;
 
-import Duke.Task.Task;
-import Duke.Task.Todo;
-
 import java.util.ArrayList;
 
+/**
+ * Represents the list containing all the tasks.
+ */
 public class TaskList {
     protected ArrayList<Task> taskList;
-    
+
+    /**
+     * Construct a TaskList object.
+     * @param taskList a list of tasks
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
@@ -19,36 +23,61 @@ public class TaskList {
     public ArrayList<Task> getList() {
         return this.taskList;
     }
-    
-    //count number of tasks
+
+    /**
+     * Count the number of tasks in the list.
+     * @return number of tasks in the list in string format
+     */
     public String countNum() {
         int num = this.taskList.size();
         return "    Now you have " + num + " tasks in the list.";
     }
-    
+
+    /**
+     * Count the number of tasks in the list.
+     * @return number of tasks in the list.
+     */
     public int getSize() {
         return taskList.size();
     }
-    
+
+    /**
+     * Get a specific task from the list.
+     * @param num index.
+     * @return task at index num
+     */
     public Task get(int num) {
         return taskList.get(num);
     }
-    
+
+    /**
+     * Remove a specific task from the list.
+     * @param num index.
+     */
     public void remove(int num) {
         taskList.remove(num);
     }
-    
-    //add new to-do to the list
+
+    /**
+     * Add a new To-do task to the list.
+     * @param newToDo new to-do item.
+     */
     public void addToDo(Todo newToDo) {
         this.taskList.add(newToDo);
     }
 
-    //add new deadline to the list
+    /**
+     * Add a new deadline task to the list.
+     * @param newDdl new deadline.
+     */
     public void addDeadline(Deadline newDdl) {
         this.taskList.add(newDdl);
     }
 
-    //add new event to the list
+    /**
+     * Add a new event task to the list.
+     * @param newEvent new event.
+     */
     public void addEvent(Event newEvent) {
         this.taskList.add(newEvent);
     }

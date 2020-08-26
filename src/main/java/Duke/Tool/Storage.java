@@ -11,21 +11,39 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 
+/**
+ * Load and write data to data.txt.
+ */
 public class Storage {
     
     private String filePath;
-    
+
+    /**
+     * Construct a storage class.
+     * @param filePath path of the file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Find the index of nth occurrence of a string.
+     * @param str input string
+     * @param target target string
+     * @param n nth occurrence.
+     * @return the index of nth occurrence of a string.
+     */
     public static int ordinalIndexOf(String str, String target, int n) {
         int pos = str.indexOf(target);
         while (--n > 0 && pos != -1)
             pos = str.indexOf(target, pos + 1);
         return pos;
     }
-    
+
+    /**
+     * Load the data from the file.
+     * @return a list of tasks containing all the data.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> taskList = new ArrayList<>();
         DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -74,7 +92,11 @@ public class Storage {
         
         return taskList;
     }
-    
+
+    /**
+     * Write a list of tasks into the file.
+     * @param taskList a list of tasks.
+     */
     public void writeData(ArrayList<Task> taskList) {
         try {
             FileWriter myWriter = new FileWriter(filePath);

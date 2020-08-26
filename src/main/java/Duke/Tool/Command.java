@@ -4,14 +4,25 @@ import Duke.Task.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Handles different command.
+ */
 public class Command {
-    
-    //handle invalid input
+
+    /**
+     * Handles invalid user input.
+     * @throws DukeException exception indicating invalid input.
+     */
     public void invalidInput() throws DukeException {
         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-    //mark a task as done
+    /**
+     * Mark task as done.
+     * @param num index.
+     * @param taskList a list of tasks.
+     * @throws DukeException indicates that the task is not found.
+     */
     public void markAsDone(int num, TaskList taskList) throws DukeException {
         if (num > 0 && num <= taskList.getSize()) {
             taskList.get(num - 1).markAsDone();
@@ -27,7 +38,10 @@ public class Command {
         }
     }
 
-    //list all the tasks
+    /**
+     * List all the tasks in the list.
+     * @param taskList a list of tasks.
+     */
     public void list(TaskList taskList) {
         String msgForList = "    ____________________________________________________________\n";
         msgForList += "    Here are the tasks in your list: \n";
@@ -39,7 +53,12 @@ public class Command {
         System.out.println(msgForList);
     }
 
-    //delete a task
+    /**
+     * Delete a task from the list.
+     * @param num index of the task.
+     * @param taskList a list of tasks.
+     * @throws DukeException indicates that the task is not found.
+     */
     public void delete(int num, TaskList taskList) throws DukeException {
         if (num > 0 && num <= taskList.getSize()) {
             String msgForDelete = "    ____________________________________________________________\n"
@@ -56,6 +75,13 @@ public class Command {
         }
     }
 
+    /**
+     * Handles to-do task.
+     * @param instruction to-do instructions
+     * @param taskList a list of tasks.
+     * @param ui handles system output.
+     * @throws DukeException indicates that the description is empty.
+     */
     public void handleTodo(String instruction, TaskList taskList, Ui ui) throws DukeException {
         if (instruction.substring(4).isBlank()) {
             String emoji = Emoji.SMILE.toString();
@@ -69,7 +95,13 @@ public class Command {
         ui.printAddedToDo(taskList, newTodo);
     }
 
-    //handle deadline
+    /**
+     * Handles deadline task.
+     * @param instruction deadline-instructions.
+     * @param taskList a list of tasks.
+     * @param ui
+     * @throws DukeException indicates that the description or deadline timing is missing.
+     */
     public void handleDeadline(String instruction, TaskList taskList, Ui ui) throws DukeException {
         int index = instruction.indexOf("/by");
         if (index == 8) {
@@ -104,7 +136,13 @@ public class Command {
         }
     }
 
-    //handle event
+    /**
+     * Handles event.
+     * @param instruction event-instruction.
+     * @param taskList a list of tasks.
+     * @param ui Handles system output.
+     * @throws DukeException indicates that the timing or the description is missing.
+     */
     public void handleEvent(String instruction, TaskList taskList, Ui ui) throws DukeException {
         int index = instruction.indexOf("/at");
         if (index == 5) {

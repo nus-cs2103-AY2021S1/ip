@@ -2,9 +2,14 @@ package Duke.Tool;
 
 import Duke.Task.*;
 
+/**
+ * Handles system output.
+ */
 public class Ui {
 
-    //print welcome message
+    /**
+     * Print welcome message.
+     */
     public void printWelcomeMessage() {
         String emoji = Emoji.CHICKEN.toString();
         String welcomeMessage = "    ____________________________________________________________\n"
@@ -15,18 +20,29 @@ public class Ui {
         System.out.println(welcomeMessage);
     }
 
-    //send bye message
+    /**
+     * Print bye message.
+     */
     public void sendBye() {
         String msgForBye = "    ____________________________________________________________\n"
                 + "    Bye. Hope to see you again soon! \n"
                 + "    ____________________________________________________________\n";
         System.out.println(msgForBye);
     }
-    
+
+    /**
+     * Output the number of tasks.
+     * @param i number of tasks.
+     */
     public void sendCount(int i) {
         System.out.println("    Now you have " + i + " tasks in the list.");
     }
-    
+
+    /**
+     * Print the newly added to-do item.
+     * @param tl a list of tasks.
+     * @param todo a to-do item.
+     */
     public void printAddedToDo(TaskList tl, Todo todo) {
         String msgForToDo = "    ____________________________________________________________\n"
                 + "    Got it. I 've added this task: \n"
@@ -36,6 +52,11 @@ public class Ui {
         System.out.println(msgForToDo);
     }
 
+    /**
+     * Print the newly added deadline item.
+     * @param tl a list of tasks.
+     * @param ddl a deadline item.
+     */
     public void printAddedDdl(TaskList tl, Deadline ddl) {
         String msgForToDo = "    ____________________________________________________________\n"
                 + "    Got it. I 've added this task: \n"
@@ -45,6 +66,11 @@ public class Ui {
         System.out.println(msgForToDo);
     }
 
+    /**
+     * Print the newly added event item.
+     * @param tl a list of tasks.
+     * @param event a event item.
+     */
     public void printAddedEvent(TaskList tl, Event event) {
         String msgForEvent = "    ____________________________________________________________\n"
                 + "    Got it. I 've added this task: \n"
@@ -54,6 +80,9 @@ public class Ui {
         System.out.println(msgForEvent);
     }
 
+    /**
+     * Print loading error.
+     */
     public void showLoadingError() {
         System.out.println("Loading error!");
     }

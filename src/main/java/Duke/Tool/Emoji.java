@@ -1,5 +1,8 @@
 package Duke.Tool;
 
+/**
+ * Represents emoji symbol class.
+ */
 public enum Emoji {
 
     CHICKEN(0x1F423),
@@ -7,7 +10,11 @@ public enum Emoji {
     SMILE(0x1F609);
     
     private final int code;
-    
+
+    /**
+     * Construct an emoji object.
+     * @param emoji unicode of the emoji.
+     */
     private Emoji(int emoji) {
         this.code = emoji;
     }

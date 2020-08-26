@@ -1,6 +1,9 @@
 import Duke.Tool.*;
 import Duke.Task.*;
 
+/**
+ * Represent Duke, a task scheduling bot.
+ */
 public class Duke {
     
     private Storage storage;
@@ -9,6 +12,10 @@ public class Duke {
     private Parser parser;
     private Command command;
 
+    /**
+     * Construct a new Duke object.
+     * @param filePath path of file storing the data.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -17,7 +24,9 @@ public class Duke {
         taskList = new TaskList(storage.load());
     }
 
-    //store user input and respond to different input
+    /**
+     * Execute the bot.
+     */
     public void run() {
         this.ui.printWelcomeMessage();
         parser.parse(storage, ui, taskList, command);
