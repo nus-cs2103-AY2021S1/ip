@@ -52,4 +52,8 @@ public class Ui {
         System.out.println("Here are the matching tasks in your list:");
         results.forEach(System.out::println);
     }
+    
+    static void showNoSearchResults() {
+        System.out.println("There are no matching tasks in your list.");
+    }
 }

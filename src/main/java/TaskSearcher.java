@@ -10,6 +10,10 @@ public class TaskSearcher {
     
     void searchAndDisplay(String searchString) {
         List<Task> results = taskList.searchByKeyword(searchString);
-        Ui.showSearchResults(results);
+        if (results.size() > 0) {
+            Ui.showSearchResults(results);
+        } else {
+            Ui.showNoSearchResults();
+        }
     }
 }
