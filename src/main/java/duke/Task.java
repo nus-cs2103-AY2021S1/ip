@@ -38,6 +38,10 @@ public class Task {
     public boolean isDone() {
         return this.isDone;
     }
+    
+    public String getDescription() {
+        return this.description;
+    }
 
     /**
      * Returns String representation of a task.

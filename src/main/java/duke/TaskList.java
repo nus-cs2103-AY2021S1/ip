@@ -184,4 +184,15 @@ public class TaskList {
     public ArrayList<Task> getStoredTasks() {
         return this.storedTasks;
     }
+    
+    public void returnSearchedTask(String[] input) {
+        ArrayList<Task> relevantTasks = new ArrayList<>();
+        String searchWord = input[1];
+        for (Task t : storedTasks) {
+            if (t.getDescription().contains(searchWord)) {
+                relevantTasks.add(t);
+            }
+        }
+        Ui.printRelevantTasksUi(relevantTasks);
+    }
 }
