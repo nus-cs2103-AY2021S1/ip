@@ -1,22 +1,35 @@
-/** Task represents a task to be done. */
+/**
+ * Task represents a task to be done.
+ */
 public abstract class Task {
-  String taskName;
-  boolean isDone;
+    String taskName;
+    boolean isDone;
 
-  Task(String taskName) {
-    this.taskName = taskName;
-    this.isDone = false;
-  }
+    Task(String taskName) {
+        this.taskName = taskName;
+        this.isDone = false;
+    }
 
-  /** Mark the task as done. */
-  public void setDone() {
-    this.isDone = true;
-  }
+    /**
+     * Mark the task as done.
+     */
+    public void setDone() {
+        this.isDone = true;
+    }
 
-  /** Returns a ticked check-box if done else cross */
-  public String toString() {
-    return (this.isDone ? "[✓] " : "[✘] ") + this.taskName;
-  }
+    /**
+     * Returns a ticked check-box if done else cross
+     */
+    public String toString() {
+        return (this.isDone ? "[✓] " : "[✘] ") + this.taskName;
+    }
 
-  public abstract String toFileFormat();
+    public abstract String toFileFormat();
+
+    /**
+     * Return true if task name contains keyword else false
+     */
+    public boolean containsKeyword(String keyword) {
+        return this.taskName.contains(keyword);
+    }
 }
