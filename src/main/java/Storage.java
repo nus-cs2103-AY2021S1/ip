@@ -1,7 +1,14 @@
-import java.io.*;
-import java.nio.file.*;
-import java.util.List;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+
 import java.util.Scanner;
+
+import java.util.List;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +19,7 @@ import java.util.ArrayList;
  */
 public class Storage {
     private final Path path;
-    private String DESTINATION = "./duke.txt";
+    private static final String DESTINATION = "./duke.txt";
 
     public Storage() {
         path = Paths.get(DESTINATION);
@@ -46,11 +53,17 @@ public class Storage {
             Task task;
 
             if (type.equals("T")) {
+
                 task = new Todo(taskString, isCompleted);
+
             } else if (type.equals("D")) {
+
                 task = new Deadline(taskString, details[3], isCompleted);
+
             } else {
+
                 task = new Event(taskString, details[3], isCompleted);
+
             }
 
             list.add(task);
@@ -68,22 +81,26 @@ public class Storage {
         FileWriter fw = new FileWriter(DESTINATION);
 
         for (Task task : list) {
+
             String toAdd = "";
             String completed = String.valueOf(task.isCompleted);
 
             if (task instanceof Todo) {
+
                 toAdd = "T:" + completed + ":" + task.task;
 
             } else if (task instanceof Deadline) {
+
                 toAdd = "D:" + completed + ":" + task.task + ":" + ((Deadline) task).date;
 
             } else if (task instanceof Event) {
+
                 toAdd = "E:" + completed + ":" + task.task + ":" + ((Event) task).date;
+
             } else {
                 // nothing
             }
-
-            // System.out.println(toAdd);
+            
             fw.write(toAdd + "\n");
         }
 
