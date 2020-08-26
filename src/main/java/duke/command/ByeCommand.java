@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.main.TaskList;
 
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
 
     @Override
     public void perform(TaskList tasks) {

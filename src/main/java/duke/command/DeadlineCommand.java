@@ -15,8 +15,8 @@ public class DeadlineCommand extends Command {
     public void perform(TaskList tasks) {
         tasks.add(deadline);
         System.out.println(" Okay! I have added this task:" + "\n" + "   "
-            + deadline.toString() + "\n" + " Now you have " + tasks.size() + (tasks.size() > 1 ? " tasks."
-            : " task."));
+                + deadline.toString() + "\n" + " Now you have " + tasks.size() + (tasks.size() > 1 ? " tasks."
+                : " task."));
     }
 
     @Override
