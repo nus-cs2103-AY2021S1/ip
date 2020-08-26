@@ -6,12 +6,28 @@ import duke.Ui;
 import duke.exception.DukeInputException;
 import duke.task.Task;
 
+/**
+ * Represents a user command to delete a class from Duke.
+ */
 public class DeleteCommand extends ComplexCommand {
 
+    /**
+     * Creates a <code>DeleteCommand</code> with the given parameters.
+     *
+     * @param params Parameters.
+     */
     public DeleteCommand(String params) {
         super(params);
     }
 
+    /**
+     * Deletes <code>Task</code> based on given index and displays information about it.
+     * Displays an error message without terminating software loop if parameters are invalid.
+     *
+     * @param ui Print-out and display manager.
+     * @param taskManager <code>Task</code> manipulation manager.
+     * @param saveManager Handles saving and loading.
+     */
     @Override
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
 
@@ -28,7 +44,7 @@ public class DeleteCommand extends ComplexCommand {
 
     }
 
-    public int parseParams(int taskManagerSize) throws DukeInputException {
+    private int parseParams(int taskManagerSize) throws DukeInputException {
         if (this.params.equals("")) {
             throw new DukeInputException("'delete' requires parameters.\n"
                     + "Use case: delete <task number>");
@@ -47,8 +63,4 @@ public class DeleteCommand extends ComplexCommand {
         return i;
     }
 
-    @Override
-    public boolean isByeCommand() {
-        return false;
-    }
 }

@@ -3,7 +3,7 @@ package duke;
 import duke.io.InputHandler;
 import duke.io.OutputHandler;
 
-/** Handles IO between app and user */
+/** Handles IO between Duke and user */
 public class Ui {
 
     /** <code>InputHandler</code> object manages inputs from user */

@@ -6,12 +6,28 @@ import duke.Ui;
 import duke.exception.DukeInputException;
 import duke.task.ToDo;
 
+/**
+ * Represents a user command to create a new <code>ToDo</code>.
+ */
 public class ToDoCommand extends ComplexCommand {
 
+    /**
+     * Creates a new <code>ToDoCommand</code> with the given parameters.
+     *
+     * @param params Parameters.
+     */
     public ToDoCommand(String params) {
         super(params);
     }
 
+    /**
+     * Creates a new <code>ToDo</code> and stores it in <code>taskManager</code>.
+     * Displays an error message without terminating software loop if parameters are invalid.
+     *
+     * @param ui Print-out and display manager.
+     * @param taskManager <code>Task</code> manipulation manager.
+     * @param saveManager Handles saving and loading.
+     */
     @Override
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
         try {
@@ -22,7 +38,7 @@ public class ToDoCommand extends ComplexCommand {
         }
     }
 
-    public String parseParams() throws DukeInputException {
+    private String parseParams() throws DukeInputException {
         if (this.params.equals("")) {
             throw new DukeInputException("'todo' requires parameters.\n" +
                     "Use case: todo <name>");
@@ -31,8 +47,4 @@ public class ToDoCommand extends ComplexCommand {
         return this.params;
     }
 
-    @Override
-    public boolean isByeCommand() {
-        return false;
-    }
 }

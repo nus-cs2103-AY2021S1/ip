@@ -6,12 +6,28 @@ import duke.Ui;
 import duke.exception.DukeInputException;
 import duke.task.Event;
 
+/**
+ * Represents a user command to create a new <code>Event</code>.
+ */
 public class EventCommand extends ComplexCommand {
 
+    /**
+     * Creates a new <code>EventCommand</code> with the given parameters.
+     *
+     * @param params Parameters.
+     */
     public EventCommand(String params) {
         super(params);
     }
 
+    /**
+     * Creates a new <code>Event</code> and stores it to <code>taskManager</code>.
+     * Displays an error message without terminating software loop if parameters are invalid.
+     *
+     * @param ui Print-out and display manager.
+     * @param taskManager <code>Task</code> manipulation manager.
+     * @param saveManager Handles saving and loading.
+     */
     @Override
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
         try {
@@ -23,7 +39,7 @@ public class EventCommand extends ComplexCommand {
         }
     }
 
-    public String[] parseParams() throws DukeInputException {
+    private String[] parseParams() throws DukeInputException {
         if (this.params.equals("")) {
             throw new DukeInputException("'event' requires parameters.\n" +
                     "Use case: event <name> /at <when>");
@@ -37,8 +53,4 @@ public class EventCommand extends ComplexCommand {
         return splitParams;
     }
 
-    @Override
-    public boolean isByeCommand() {
-        return false;
-    }
 }

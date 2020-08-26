@@ -6,12 +6,28 @@ import duke.Ui;
 import duke.exception.DukeInputException;
 import duke.task.Deadline;
 
+/**
+ * Represents a user command to add a new <code>Deadline</code> to Duke.
+ */
 public class DeadlineCommand extends ComplexCommand {
 
+    /**
+     * Creates a <code>Deadline</code> using the given parameters.
+     *
+     * @param params Parameters.
+     */
     public DeadlineCommand(String params) {
         super(params);
     }
 
+    /**
+     * Creates a new <code>Deadline</code> and adds it to <code>taskManager</code>.
+     * Parses the command and displays an error message without terminating software loop if parameters invalid.
+     *
+     * @param ui Print-out and display manager.
+     * @param taskManager <code>Task</code> manipulation manager.
+     * @param saveManager Handles saving and loading.
+     */
     @Override
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
         try {
@@ -23,7 +39,7 @@ public class DeadlineCommand extends ComplexCommand {
         }
     }
 
-    public String[] parseParams() throws DukeInputException {
+    private String[] parseParams() throws DukeInputException {
         if (this.params.equals("")) {
             throw new DukeInputException("'deadline' requires parameters.\n" +
                     "Use case: deadline <name> /by <deadline>");
@@ -37,8 +53,4 @@ public class DeadlineCommand extends ComplexCommand {
         return splitParams;
     }
 
-    @Override
-    public boolean isByeCommand() {
-        return false;
-    }
 }

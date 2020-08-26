@@ -51,10 +51,10 @@ public class Duke {
 
     /**
      * Activates main software loop, accepting and processing commands.
-     * Parser parses inputs to commands which are then executed by duke.
+     * Parser parses inputs to commands which are then executed by Duke.
      * Exceptions trigger an error message for users without ending the program.
      * Main loop only ends on parsing a "bye" command from user.
-     * If unable to save, app will exit without saving.
+     * If unable to save, Duke will exit without saving.
      */
     public void run() {
 

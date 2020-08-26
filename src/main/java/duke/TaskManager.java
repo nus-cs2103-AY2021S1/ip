@@ -95,6 +95,7 @@ public class TaskManager {
 
     /**
      * Returns String formatted for display of <code>TaskManager</code> contents neatly.
+     *
      * @return Formatted String.
      */
     public String toString() {
