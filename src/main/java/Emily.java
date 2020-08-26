@@ -34,7 +34,6 @@ public class Emily {
                             break;
                         case 'D':
                             temp = line.split(",", 3);
-                            System.out.println("accessing " + temp[2]);
                             Task d = new Deadline(temp[1], temp[2]);
                             d.finished = isCompleted;
                             store.add(d);
@@ -174,7 +173,7 @@ public class Emily {
                                     System.out.println("date is " + temp[1]);
                                     item = new Deadline(temp[0], temp[1]);
 
-                                    line = "T0," + describe + ",temp[1]";
+                                    line = "D0," + temp[0] + "," + temp[1];
                                     writeToFile(FILE_PATH, line+ System.lineSeparator());
 
                                 } else if (input.contains("event")) {
@@ -183,7 +182,7 @@ public class Emily {
                                     String[] temp = describe.split("/at ");
                                     item = new Event(temp[0], temp[1]);
 
-                                    line = "T0," + describe + ",temp[1]";
+                                    line = "E0," + describe + "," + temp[1];
                                     writeToFile(FILE_PATH, line + System.lineSeparator());
                                 } else{
                                     throw new DukeException("invalid task");
