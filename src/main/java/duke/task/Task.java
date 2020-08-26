@@ -22,7 +22,7 @@ public class Task {
         this.isDone = false;
     }
 
-    private String getDescription() {
+    public String getDescription() {
         return description;
     }
 

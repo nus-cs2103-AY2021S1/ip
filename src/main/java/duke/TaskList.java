@@ -43,6 +43,10 @@ public class TaskList {
      * @param deadline Deadline of task.
      * @return a String representation of the task added.
      */
+    private void addTask(Task task) {
+        taskList.add(task);
+    }
+
     public String addTask(Task.TaskType taskType, String description, String deadline) {
         Task task = null;
         switch (taskType) {
@@ -90,6 +94,21 @@ public class TaskList {
      *
      * @return String which lists all tasks at the moment.
      */
+    public String findTask(String str) throws InvalidIndexException {
+        TaskList match = new TaskList();
+        for (Task i: taskList) {
+            String taskDescription = i.getDescription().toLowerCase();
+            String toCompare = str.toLowerCase();
+            if (taskDescription.contains(toCompare)) {
+                match.addTask(i);
+            }
+        }
+        if (match.getSize() == 0) {
+            throw new InvalidIndexException("No such tasks leh...");
+        }
+        return "Got it, here yur task bij\n" + match.toString();
+    }
+
     public String toString() {
         String string = "";
         if (getSize() >= 1) {

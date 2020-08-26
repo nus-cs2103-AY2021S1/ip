@@ -66,44 +66,44 @@ public class Parser {
             String[] spaceSplitFront = slashSplit[0].split(" ", 2);
             // todo = spaceSplitFront[0], description = spaceSplitFront[1]
             switch (spaceSplitFront[0]) {
-            case "todo":
-                if (spaceSplitFront.length < 2) {
-                    throw new EmptyDescriptionException("Description empty la oi");
-                }
-                System.out.println(tasks.addTask(Task.TaskType.TODOS, spaceSplitFront[1]));
-                break;
-            case "deadline":
-                if (spaceSplitFront.length < 2) {
-                    throw new EmptyDescriptionException("Description empty la oi");
-                }
-                System.out.println(tasks.addTask(Task.TaskType.DEADLINE, spaceSplitFront[1]));
-                break;
-            case "event":
-                if (spaceSplitFront.length < 2) {
-                    throw new EmptyDescriptionException("Description empty la oi");
-                }
-                System.out.println(tasks.addTask(Task.TaskType.EVENT, spaceSplitFront[1]));
-                break;
-            case "done":
-                if (spaceSplitFront.length < 2) {
-                    throw new EmptyDescriptionException("Specify index la oi");
-                }
-                try {
-                    parseDone(tasks, spaceSplitFront[1]);
-                } catch (InvalidIndexException e) {
-                    System.out.println(e.toString());
-                }
-                break;
-            case "delete":
-                if (spaceSplitFront.length < 2) throw new EmptyDescriptionException("Specify index la oi");
-                try {
-                    parseDelete(tasks, spaceSplitFront[1]);
-                } catch (InvalidIndexException e) {
-                    System.out.println(e.toString());
-                }
-                break;
-            default:
-                throw new UnknownCommandException("Don't understand...");
+                case "todo":
+                    if (spaceSplitFront.length < 2) throw new EmptyDescriptionException("Description empty la oi");
+                    System.out.println(tasks.addTask(Task.TaskType.TODOS, spaceSplitFront[1]));
+                    break;
+                case "deadline":
+                    if (spaceSplitFront.length < 2) throw new EmptyDescriptionException("Description empty la oi");
+                    System.out.println(tasks.addTask(Task.TaskType.DEADLINE, spaceSplitFront[1]));
+                    break;
+                case "event":
+                    if (spaceSplitFront.length < 2) throw new EmptyDescriptionException("Description empty la oi");
+                    System.out.println(tasks.addTask(Task.TaskType.EVENT, spaceSplitFront[1]));
+                    break;
+                case "done":
+                    if (spaceSplitFront.length < 2) throw new EmptyDescriptionException("Specify index la oi");
+                    try {
+                        parseDone(tasks, spaceSplitFront[1]);
+                    } catch (InvalidIndexException e) {
+                        System.out.println(e.toString());
+                    }
+                    break;
+                case "delete":
+                    if (spaceSplitFront.length < 2) throw new EmptyDescriptionException("Specify index la oi");
+                    try {
+                        parseDelete(tasks, spaceSplitFront[1]);
+                    } catch (InvalidIndexException e) {
+                        System.out.println(e.toString());
+                    }
+                    break;
+                case "find":
+                    if (spaceSplitFront.length < 2) throw new EmptyDescriptionException("Specify key word la oi");
+                    try {
+                        System.out.println(tasks.findTask(spaceSplitFront[1]));
+                    } catch (InvalidIndexException e) {
+                        System.out.println(e.toString());
+                    }
+                    break;
+                default:
+                    throw new UnknownCommandException("Don't understand...");
             }
         } else {
             throw new Error();
