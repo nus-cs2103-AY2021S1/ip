@@ -1,8 +1,11 @@
+import java.time.LocalDateTime;
+
 public class Task{
     private String content;        // stores the name of this task
     private Boolean closed = false;     //indicates the status of this task
     private String taskType = "";
-    private String time = "";
+    private LocalDateTime dateTime;
+    private LocalDateTime fromDateTime, toDateTime;
 
     Task(){}
 
@@ -36,9 +39,12 @@ public class Task{
         return this.taskType;
     }
 
-    public String getTime(){
-        return this.time;
+    public LocalDateTime getDateTime(){
+        return this.dateTime;
     }
+    public LocalDateTime getFromDateTime() { return this.fromDateTime; }
+
+    public LocalDateTime getToDateTime() { return this.toDateTime; }
 
     public String getContent(){
         return this.content;

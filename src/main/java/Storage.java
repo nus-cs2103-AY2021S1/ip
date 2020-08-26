@@ -1,5 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -52,6 +53,9 @@ public class Storage {
             return taskList;
         } catch (FileNotFoundException e){
             System.out.println("Sorry, DUKE can't find saved todo list."+
+                    " Please contact developers.");
+        } catch (ParseErrorException e) {
+            System.out.println("This ParseErrorException should not happen"+
                     " Please contact developers");
         }
         return taskList;
@@ -71,15 +75,15 @@ public class Storage {
                         break;
                     case "D":
                         if (t.checkDone())
-                            fw.write("D|1|"+t.getContent()+"|"+t.getTime());
+                            fw.write("D|1|"+t.getContent()+"|"+t.getDateTime().toString());
                         else
-                            fw.write("D|0|"+t.getContent()+"|"+t.getTime());
+                            fw.write("D|0|"+t.getContent()+"|"+t.getDateTime().toString());
                         break;
                     case "E":
                         if (t.checkDone())
-                            fw.write("E|1|"+t.getContent()+"|"+t.getTime());
+                            fw.write("E|1|"+t.getContent()+"|"+t.getDateTime().toString());
                         else
-                            fw.write("E|0|"+t.getContent()+"|"+t.getTime());
+                            fw.write("E|0|"+t.getContent()+"|"+t.getDateTime().toString());
                         break;
                     default:
                         System.out.println("Whoops, this should not happen");

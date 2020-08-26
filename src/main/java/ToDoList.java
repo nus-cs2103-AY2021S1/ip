@@ -127,6 +127,9 @@ public class ToDoList{
             print("The description of '"+command.getAction()+"' should not be empty.");
             print("Please re-enter your command.");
         }
+        catch (ParseErrorException e){
+            print(e.getMessage());
+        }
         catch (Exception e){
             System.out.println("This situation is not supposed to happen. Please contact the idiot programmer.");
         }
@@ -145,7 +148,7 @@ public class ToDoList{
         print(String.format("There are %d tasks waiting to be done.", this.undoneCount));
     }
 
-    private void addDeadline(String taskContent) throws WrongDescriptionException, EmptyDescriptionException{
+    private void addDeadline(String taskContent) throws WrongDescriptionException, EmptyDescriptionException, ParseErrorException{
         if (taskContent.length() < 1)
             throw new EmptyDescriptionException("");
         try {
@@ -157,12 +160,14 @@ public class ToDoList{
             print(String.format("Now you have %d tasks in your list.", todoList.size()));
             this.undoneCount++;
             print(String.format("There are %d tasks waiting to be done.", this.undoneCount));
+        } catch (ParseErrorException e){
+            throw e;
         } catch (Exception e){
             throw new WrongDescriptionException("");
         }
     }
 
-    private void addEvent(String taskContent) throws WrongDescriptionException, EmptyDescriptionException{
+    private void addEvent(String taskContent) throws WrongDescriptionException, EmptyDescriptionException, ParseErrorException{
         if (taskContent.length() < 1)
             throw new EmptyDescriptionException("");
         try {
@@ -174,6 +179,8 @@ public class ToDoList{
             print(String.format("Now you have %d tasks in your list.", todoList.size()));
             this.undoneCount++;
             print(String.format("There are %d tasks waiting to be done.", this.undoneCount));
+        } catch (ParseErrorException e){
+            throw e;
         } catch (Exception e){
             throw new WrongDescriptionException("");
         }
