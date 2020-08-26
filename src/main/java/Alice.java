@@ -1,6 +1,3 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -51,6 +48,11 @@ public class Alice {
         if (cmd == Command.LIST && params.isBlank()) {
             // Display task list
             return getTaskList();
+        } else if (cmd == Command.CLEAR) {
+            // clear tasklist
+            tasks.clear();
+            storage.save(tasks);
+            return "Task list successfully cleared!";
         } else if (cmd == Command.HELP) {
             // Get help
             return Command.getCommandList();

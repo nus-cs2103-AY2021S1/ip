@@ -9,6 +9,9 @@ Hello! I'm Alice
 How can I help you today?
 ____________________________________________________________
  > ____________________________________________________________
+Task list successfully cleared!
+____________________________________________________________
+ > ____________________________________________________________
 Roger. I've added the task to your list:
     [T][X] borrow book
 Now you have 1 task in your list
@@ -106,6 +109,7 @@ ____________________________________________________________
  > ____________________________________________________________
 These are the commands in my dictionary:
     [list, ls]                         Lists all tasks
+    [clear, clr]                       Clear all tasks
     [done] <task number>               Mark a task as done
     [delete] <task number>             Delete a task
     [todo] <desc>                      Create a todo task

@@ -14,16 +14,16 @@ public class Event extends Task {
         return on.format(E_DATETIME_FORMAT);
     }
 
-    public Event(boolean isDone, String description, String at) {
+    public Event(boolean isDone, String description, LocalDateTime on) {
         super(isDone, description);
-        this.at = at;
+        this.on = on;
     }
 
     public static Event decode(String saved) throws AliceException {
         String[] inputs = saved.split(" \\| ");
         boolean isDone = inputs[0].equals("1");
         if (inputs.length == 3) {
-            return new Event(isDone, inputs[1], inputs[2]);
+            return new Event(isDone, inputs[1], LocalDateTime.parse(inputs[2]));
         } else {
             throw new AliceException("Corrupted Event data");
         }
@@ -31,7 +31,7 @@ public class Event extends Task {
 
     @Override
     public String encode() {
-        return "E | " + super.encode() + " | " + at;
+        return "E | " + super.encode() + " | " + on.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
     @Override

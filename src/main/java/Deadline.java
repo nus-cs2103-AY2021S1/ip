@@ -10,7 +10,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public Deadline(boolean isDone, String description, String by) {
+    public Deadline(boolean isDone, String description, LocalDateTime by) {
         super(isDone, description);
         this.by = by;
     }
@@ -23,15 +23,15 @@ public class Deadline extends Task {
         String[] inputs = saved.split(" \\| ");
         boolean isDone = inputs[0].equals("1");
         if (inputs.length == 3) {
-            return new Deadline(isDone, inputs[1], inputs[2]);
+            return new Deadline(isDone, inputs[1], LocalDateTime.parse(inputs[2]));
         } else {
-            throw new AliceException("Corrupted Deadline data");
+            throw new AliceException("Corrupted deadline data");
         }
     }
 
     @Override
     public String encode() {
-        return "D | " + super.encode() + " | " + by;
+        return "D | " + super.encode() + " | " + by.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
     @Override

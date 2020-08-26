@@ -2,6 +2,7 @@ import java.util.Arrays;
 
 public enum Command {
     LIST(new String[]{"list", "ls"}, "Lists all tasks", ""),
+    CLEAR(new String[]{"clear", "clr"}, "Clear all tasks", ""),
     DONE(new String[]{"done"}, "Mark a task as done","<task number>"),
     DELETE(new String[]{"delete"}, "Delete a task","<task number>"),
     TODO(new String[]{"todo"}, "Create a todo task","<desc>"),

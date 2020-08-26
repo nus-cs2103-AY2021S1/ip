@@ -1,3 +1,0 @@
-T | 1 | hello
-E | 0 | hello | 5
-D | 0 | hello | today
