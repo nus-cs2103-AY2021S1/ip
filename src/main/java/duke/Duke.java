@@ -10,15 +10,30 @@ import util.Ui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Represents the Duke class. The Duke class serves as the main entry point into the chatbot application.
+ */
 public class Duke {
-    // file dir
+    /** File directory where the text file is stored */
     private static final String DIR = "data";
-    
+
+    /** Storage where writing and reading of files is handled */
     private Storage storage;
+
+    /** List of tasks */
     private TaskList tasks;
+
+    /** Ui to print responses to user */
     private final Ui ui;
+
+    /** Parser to parse and verify user input */
     private Parser parser;
-    
+
+    /**
+     * Creates a Duke instance and loads user tasks. Creates new file if there is no existing file.
+     *
+     * @param filePath Path and name of the file to be created and loaded from.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         try {
@@ -33,7 +48,10 @@ public class Duke {
             System.out.println("----- Something went wrong, please try again later");
         }
     }
-    
+
+    /**
+     * The main chat bot application logic. Repeatedly reads in user commands and executes the commands until the user exits the application.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -52,7 +70,12 @@ public class Duke {
             }
         }
     }
-
+    
+    /**
+     * The main method for the chat bot application. Reads in a file path to create a Duke instance and run the application.
+     *
+     * @param args 1 argument, filePath which is the path and name of the file to be created and loaded from.
+     */
     public static void main(String[] args) {
         new Duke("data/serina.txt").run();
     }

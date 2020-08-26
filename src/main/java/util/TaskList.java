@@ -8,19 +8,32 @@ import task.ToDoTask;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * The TaskList class represents the list containing tasks.
+ */
 public class TaskList {
+    /** Constants representing the different tasks. */
     private enum TaskType {
         TODO,
         DEADLINE,
         EVENT
     }
-    
+
+    /** List containing the different tasks. */
     private final List<Task> lst;
-    
+
+    /**
+     * Creates a new empty TaskList.
+     */
     public TaskList() {
         this.lst = new ArrayList<>();
     }
-    
+
+    /**
+     * Creates a new TaskList of tasks based on an input list of strings. The constructor parses these strings to create tasks before adding them to the TaskList.
+     * 
+     * @param inputLst List containing tasks represented as strings.
+     */
     public TaskList(List<String> inputLst) {
         String DONE = "1";
         this.lst = new ArrayList<>();
@@ -41,19 +54,35 @@ public class TaskList {
 
         }
     }
-    
+
+    /**
+     * Adds a task to the TaskList.
+     */
     public void add(Task task) {
         lst.add(task);
     }
-    
+
+    /**
+     * Removes a task from the TaskList.
+     */
     public void remove(Task task) {
         lst.remove(task);
     }
-    
+
+    /**
+     * Return number of tasks in the list.
+     * 
+     * @return  Number of tasks in the list.
+     */
     public int size() {
         return lst.size();
     }
-    
+
+    /**
+     * Returns a task based on its index in the list.
+     * 
+     * @return Task based on its index in the list.
+     */
     public Task get(int index) {
         return lst.get(index);
     }

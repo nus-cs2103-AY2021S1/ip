@@ -8,8 +8,11 @@ import command.ExitCommand;
 import command.ListCommand;
 import duke.DukeException;
 
+/**
+ * The Parser class handles the validation of user input and creation of commands.
+ */
 public class Parser {
-    // all valid actions
+    /** Constants representing the different actions. */
     private enum Action {
         BYE,
         LIST,
@@ -19,13 +22,24 @@ public class Parser {
         DONE,
         DELETE
     }
-    
+
+    /** List of tasks */
     private final TaskList lst;
 
+    /**
+     * Creates a new Parser instance.
+     *
+     * @param lst List of tasks.
+     */
     public Parser(TaskList lst) {
         this.lst = lst;
     }
-    
+
+    /**
+     * Validates the user input command description.
+     *
+     * @throws DukeException If user did not give a command description, or gave it in an invalid format.    
+     */
     private void validateCommandDesc(String desc, Action type) throws DukeException {
         String result = desc.trim();
         if (result.isEmpty()) {
@@ -42,13 +56,24 @@ public class Parser {
             }
         }
     }
-    
+
+    /**
+     * Validates the user input task number.
+     *
+     * @throws DukeException If user gave an invalid task number.
+     */
     private void validateTaskNum(int taskNum) throws DukeException {
         if (taskNum > lst.size() || taskNum <= 0) {
             throw new DukeException("You have no such task. Please check your task number.");
         }
     }
-    
+
+    /**
+     * Returns the correct command after parsing the user input. 
+     *
+     * @param command String representing the user input command.
+     * @throws DukeException If user gave an invalid input command.
+     */
     public Command parse(String command) throws DukeException {
         Command resultantCommand = null;
         String[] splitCommand = command.split(" ", 2);
