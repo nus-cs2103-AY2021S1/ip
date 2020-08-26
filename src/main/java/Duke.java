@@ -1,12 +1,60 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Duke {
+    private static final List<Task> tasks = new ArrayList<>();
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);    // Create a Scanner object
+        initialize();
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
-        List<Task> tasks = new ArrayList<>();
+        serveClient();
+    }
+
+    private static void initialize() {
+        File dir = new File("./data");
+        dir.mkdir();
+        File file = new File("./data/duke.txt");
+        try {
+            if (!file.createNewFile()) {        // createNewFile() returns true if the file path
+                Scanner sc = new Scanner(file); // does not exist and a new file is created
+                while (sc.hasNext()) {
+                    String str = sc.nextLine();
+                    Task task;
+                    if (str.startsWith("T")) {
+                        task = ToDo.load(str);
+                    } else if (str.startsWith("D")) {
+                        task = Deadline.load(str);
+                    } else if (str.startsWith("E")) {
+                        task = Event.load(str);
+                    } else {
+                        break;
+                    }
+                    tasks.add(task);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void saveTasks() {
+        try {
+            FileWriter fw = new FileWriter("./data/duke.txt");
+            for (Task task : tasks) {
+                fw.write(task.store() + "\n"); // write the task onto txt with the format
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void serveClient() {
+        Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             try {
                 String input = sc.nextLine();
@@ -63,6 +111,7 @@ public class Duke {
                     default:
                         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
+                saveTasks();
                 if (arr[0].equals("bye")) {
                     break;
                 }

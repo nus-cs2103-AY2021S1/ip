@@ -6,6 +6,20 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public static Deadline load(String str) {
+        String[] arr = str.split("\\|", 4);
+        Deadline task = new Deadline(arr[2], arr[3]);
+        if (arr[1].equals("true")) {
+            task.markAsDone();
+        }
+        return task;
+    }
+
+    @Override
+    public String store() {
+        return "D|" + super.store() + "|" + this.by;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";

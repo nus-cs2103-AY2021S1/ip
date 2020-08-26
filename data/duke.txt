@@ -1,0 +1,3 @@
+D|false|return book|June 6th
+E|true|esplanade|Aug 6th
+T|true|haerdung
