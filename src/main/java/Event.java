@@ -2,17 +2,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    protected LocalDateTime at;
+    protected LocalDateTime time;
 
     /**
      * Creates an Event object.
      * 
-     * @param task The description of the event.
-     * @param at The time of the event.
+     * @param description The description of the event.
+     * @param time The time of the event.
      */
-    public Event(String task, LocalDateTime at) {
-        super(task);
-        this.at = at;
+    public Event(String description, LocalDateTime time) {
+        super(description);
+        this.time = time;
     }
 
     /**
@@ -23,12 +23,12 @@ public class Event extends Task {
     @Override
     public String writeMessage() {
         String done = "";
-        if (this.done) {
+        if (this.isDone) {
             done = "✓";
         } else {
             done = "✗";
         }
-        return String.format("E | %s | %s", done, this.task, this.at);
+        return String.format("E | %s | %s", done, this.description, this.time);
     }
 
     /**
@@ -39,7 +39,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String str = " (at: ";
-        str += at.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
-        return "[E][" + (this.done ? "✓" : "✗") + "] " + this.task + str + ")";
+        str += time.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
+        return "[E][" + (this.isDone ? "✓" : "✗") + "] " + this.description + str + ")";
     }
 }

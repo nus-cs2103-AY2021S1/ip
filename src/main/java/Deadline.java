@@ -2,17 +2,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    protected LocalDateTime by;
-
+    protected LocalDateTime deadline;
+    
     /**
      * Creates a Deadline object.
      * 
-     * @param task The description of the task.
-     * @param by The deadline of the task.
+     * @param description The description of the task.
+     * @param deadline The deadline of the task.
      */
-    public Deadline(String task, LocalDateTime by) {
-        super(task);
-        this.by = by;
+    public Deadline(String description, LocalDateTime deadline) {
+        super(description);
+        this.deadline = deadline;
     }
 
     /**
@@ -23,12 +23,12 @@ public class Deadline extends Task {
     @Override
     public String writeMessage() {
         String done = "";
-        if (this.done) {
+        if (this.isDone) {
             done = "✓";
         } else {
             done = "✗";
         }
-        return String.format("D | %s | %s | %s", done, this.task, this.by);
+        return String.format("D | %s | %s | %s", done, this.description, this.deadline);
     }
 
     /**
@@ -39,7 +39,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
             String str = " (by: ";
-            str += by.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
-            return "[D][" + (this.done ? "✓" : "✗") + "] " + this.task + str + ")";
+            str += deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
+            return "[D][" + (this.isDone ? "✓" : "✗") + "] " + this.description + str + ")";
     }
 }

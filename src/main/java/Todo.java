@@ -3,10 +3,10 @@ public class Todo extends Task {
     /**
      * Creates a Todo object.
      * 
-     * @param task The description of the task.
+     * @param description The description of the task.
      */
-    public Todo(String task) {
-        super(task);
+    public Todo(String description) {
+        super(description);
     }
 
     /**
@@ -17,12 +17,12 @@ public class Todo extends Task {
     @Override
     public String writeMessage() {
         String done = "";
-        if (this.done) {
+        if (this.isDone) {
             done = "✓";
         } else {
             done = "✗";
         }
-        return String.format("T | %s | %s", done, this.task);
+        return String.format("T | %s | %s", done, this.description);
     }
 
     /**
@@ -32,6 +32,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T][" + (this.done ? "✓" : "✗") + "] " + this.task;
+        return "[T][" + (this.isDone ? "✓" : "✗") + "] " + this.description;
     }
 }

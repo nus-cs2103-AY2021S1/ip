@@ -1,10 +1,11 @@
 public class Task {
-    public String task;
-    public boolean done;
-    
-    protected Task(String task) {
-        this.task = task;
-        this.done = false;
+
+    public String description;
+    public boolean isDone;
+
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
     }
     
     protected String writeMessage() {
@@ -15,11 +16,11 @@ public class Task {
      * Marks the task as done.
      */
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     @Override
     public String toString() {
-        return "[" + (this.done ? "✓" : "✗") + "] " + this.task;
+        return "[" + (this.isDone ? "✓" : "✗") + "] " + this.description;
     }
 }
