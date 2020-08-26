@@ -19,6 +19,9 @@ public class Event extends Task {
         return "E|" + (this.isDone ? "1" : "0") + "|" + this.taskName + "|" + this.taskAt;
     }
 
+    /** Loads the file format String representation of Event task.
+     * @return Event loaded from file format representation
+     * */
     static Event fromFileFormat(String fileFormatString) {
         String[] tokens = fileFormatString.split("\\|");
         Event loaded = new Event(tokens[2], LocalDate.parse(tokens[3]));

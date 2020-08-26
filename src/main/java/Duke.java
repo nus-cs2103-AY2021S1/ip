@@ -8,6 +8,9 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
+    /** Creates a new Duke chatbot and load tasks from storage.
+     * @param filePath path to the storage file to load tasks from
+     * */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -21,6 +24,8 @@ public class Duke {
         }
     }
 
+    /** Runs main conversation loop with Duke chatbot.
+     * */
     public void run() {
         // Introduction messages
         System.out.println("Hello! I'm Duke! I'm a chatbot-based To-Do list manager.");

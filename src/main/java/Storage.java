@@ -26,7 +26,9 @@ public class Storage {
         }
     }
 
-    /* Saves the list of tasks to disk. */
+    /** Saves the list of tasks to disk.
+     * @param taskList - TaskList object to be saved to disk
+     * */
     void save(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         for (Task t : taskList.tasks) {
@@ -35,7 +37,9 @@ public class Storage {
         fw.close();
     }
 
-    /* Loads the list of tasks from disk.*/
+    /** Loads the list of tasks from disk.
+     * @return TaskList object loaded from disk
+     * */
     ArrayList<Task> load() throws IOException {
         File f = new File(this.filePath);
         Scanner s = new Scanner(f);
