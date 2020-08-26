@@ -1,3 +1,5 @@
+package Duke;
+
 import java.util.Arrays;
 import java.util.List;
 import java.io.BufferedReader;
@@ -21,7 +23,7 @@ public class Parser {
      *
      * @param storage A Storage instance to use when the parser needs to save to disk.
      */
-    Parser(Storage storage) {
+    public Parser(Storage storage) {
         this.userTaskList = new TaskList();
         this.storage = storage;
     }
@@ -42,7 +44,7 @@ public class Parser {
      *
      * @throws IOException if an IO exception occurs when trying to read standard input.
      */
-    void scan() throws IOException {
+    public void scan() throws IOException {
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader((System.in)));
 

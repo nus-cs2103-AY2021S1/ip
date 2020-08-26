@@ -1,3 +1,5 @@
+package Duke;
+
 /**
  * Represents a todo.
  */

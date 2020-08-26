@@ -1,3 +1,5 @@
+package Duke;
+
 /**
  * Represents all exceptions related to the Duke program.
  */

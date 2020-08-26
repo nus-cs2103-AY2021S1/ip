@@ -1,8 +1,10 @@
+package Duke;
+
 /**
  * Represents an event.
  */
 public class Event extends Task {
-    private String date;
+    private final String date;
 
     /**
      * Constructs a new Event instance containing a description and date.
@@ -10,7 +12,7 @@ public class Event extends Task {
      * @param description The event description.
      * @param date The event date.
      */
-    Event(String description, String date) {
+    public Event(String description, String date) {
         super(description);
         this.date = date;
     }

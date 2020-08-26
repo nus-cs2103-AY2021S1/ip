@@ -1,3 +1,5 @@
+package Duke;
+
 import java.io.IOException;
 
 /**
@@ -17,7 +19,7 @@ public class Ui {
     /**
      * Displays a welcome message when Duke starts.
      */
-    static void showWelcomeMessage() {
+    public static void showWelcomeMessage() {
         System.out.println("Hi I'm Duke, your personal task-tracker bot!");
         System.out.println("You can add todos, deadlines, or events to my " +
                                    "list.");
@@ -40,7 +42,7 @@ public class Ui {
     /**
      * Displays a message when no existing save has been found.
      */
-    static void showNoExistingSave() {
+    public static void showNoExistingSave() {
         System.out.println("You don't have an existing saved task list.");
     }
 

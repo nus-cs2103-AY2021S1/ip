@@ -1,3 +1,5 @@
+package Duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -16,7 +18,7 @@ public class Deadline extends Task {
      * @param date A string representation of the deadline's date.
      * @throws DateTimeParseException if the date string given doesn't follow ISO8601 format.
      */
-    Deadline(String description, String date) throws DateTimeParseException {
+    public Deadline(String description, String date) throws DateTimeParseException {
         super(description);
         parseDate(date);
     }

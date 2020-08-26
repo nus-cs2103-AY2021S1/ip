@@ -1,3 +1,5 @@
+package Duke;
+
 import java.io.IOException;
 
 /**
@@ -12,7 +14,7 @@ public class Storage {
      *
      * @param filePath The file path associated with a running instance of Duke.
      */
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 

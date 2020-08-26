@@ -1,6 +1,17 @@
+import Duke.Deadline;
+import Duke.DukeException;
+import Duke.Event;
+import Duke.Parser;
+import Duke.Storage;
+import Duke.Task;
+import Duke.TaskList;
+import Duke.Todo;
+import Duke.Ui;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -8,7 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class DukeTest {
