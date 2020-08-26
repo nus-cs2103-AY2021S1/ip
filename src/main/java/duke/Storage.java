@@ -36,7 +36,6 @@ public class Storage {
      * @param input String array that is passed in / read from the local file.
      * @return String that is modified and ready to be parsed by the Parser.
      */
-    //Remove done string and add in delimeter
     public String editFileInput(String[] input) {
         ArrayList<String> result = new ArrayList<>();
         String taskType = input[0];
@@ -66,12 +65,16 @@ public class Storage {
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line = br.readLine();
+
             TaskList newTaskList = new TaskList();
+
             while (line != null) {
                 String[] splitLine = line.split(" \\| ");
                 boolean isDone = splitLine[1].equals("1") ? true : false;
+
                 AddCommand c = new Parser(editFileInput(splitLine)).parseFromFile(isDone);
                 c.executeFromFile(newTaskList);
+
                 line = br.readLine();
             }
             br.close();

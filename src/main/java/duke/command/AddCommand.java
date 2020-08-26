@@ -64,11 +64,11 @@ public class AddCommand extends Command {
      */
     public Task processTask(String delimiter, String taskType) throws DukeException {
         //Task Name Only
-        String taskName = Arrays.stream(getArray()).takeWhile(e -> !e.equals(delimiter)).skip(1)
-                .collect(Collectors.joining(" "));
+        String taskName = Arrays.stream(getArray()).takeWhile(e -> !e.equals(delimiter))
+                .skip(1).collect(Collectors.joining(" "));
         //Date + Time, each in a single array cell
-        String[] dateTime = Arrays.stream(getArray()).dropWhile(e -> !e.equals(delimiter)).skip(1)
-                .collect(Collectors.joining(" ")).split(" ");
+        String[] dateTime = Arrays.stream(getArray()).dropWhile(e -> !e.equals(delimiter))
+                .skip(1).collect(Collectors.joining(" ")).split(" ");
 
         if (dateTime.length < 1 || dateTime[0].equals("")) {
             throw new DukeException("All deadline/event tasks must come with a date in yyyy-mm-dd format!");
@@ -80,8 +80,8 @@ public class AddCommand extends Command {
 
         //More than necessary words or date and time in wrong format
         if (dateTime.length > 2) {
-            throw new DukeException("Please make sure date is imputed in yyyy-mm-dd format. Any optional time" +
-                    " parameter should be in HHmm format. Don't add any more characters after the date and time!");
+            throw new DukeException("Please make sure date is imputed in yyyy-mm-dd format. Any optional time"
+                    + " parameter should be in HHmm format. Don't add any more characters after the date and time!");
         }
         //Append date and time into newArray if they exist
         for (int i = 0; i < dateTime.length; i++) {
@@ -113,9 +113,8 @@ public class AddCommand extends Command {
                         : new Event(newArray.get(0), taskDate));
             }
         } catch (DateTimeParseException e) {
-            throw new DukeException("Check your date/time! All deadline/event tasks' date must be in yyyy-mm-dd " +
-                    "format" +
-                    " and any time specified must be in HHmm format! (i.e. 2021-10-05 1800)");
+            throw new DukeException("Check your date/time! All deadline/event tasks' date must be in yyyy-mm-dd "
+                    + "format" + " and any time specified must be in HHmm format! (i.e. 2021-10-05 1800)");
         }
     }
 
@@ -139,8 +138,8 @@ public class AddCommand extends Command {
             return todo;
         case ("deadline"):
             if (!containsString("/by")) {
-                throw new DukeException("Your deadline task input must contain the delimiter /by to separate your " +
-                        "task name and date!");
+                throw new DukeException("Your deadline task input must contain the delimiter /by to separate your "
+                        + "task name and date!");
             }
             Task deadline = processTask("/by", "deadline");
             taskList.addTask(deadline);
@@ -150,11 +149,12 @@ public class AddCommand extends Command {
                 throw new DukeException("Your event task input must contain the delimiter /at to separate your " +
                         "task name and date!");
             }
+
             Task event = processTask("/at", "event");
             taskList.addTask(event);
             return event;
         default:
-            throw new DukeException("I don't understand what task you want to be added! Only deadline / todo / event!");
+            throw new DukeException("I don't understand what task you want to be added! Only deadline/todo/event!");
         }
     }
 

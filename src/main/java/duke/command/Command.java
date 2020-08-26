@@ -33,6 +33,7 @@ public abstract class Command {
         return stringArray.length < 2 || stringArray[1].equals("");
     }
 
+
     /**
      * Executes the command to add a task, mark a task as done, delete the task, list all tasks or exit.
      * Abstract method that should be implemented in all sub-types of the Command class.
@@ -74,6 +75,7 @@ public abstract class Command {
 
     /**
      * Returns the string array.
+     *
      * @return The string array.
      */
     protected String[] getArray() {

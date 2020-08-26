@@ -20,6 +20,7 @@ public class ExitCommand extends Command {
 
     /**
      * Represents an empty method as the program exits without any execution.
+     *
      * @param tasks The task list to operate on.
      * @param ui The user-interaction object responsible for all system printing and user-interaction.
      * @param storage Represents the logic needed to write to an user-specified file.

@@ -19,6 +19,7 @@ public class Duke {
 
     /**
      * Loads tasks into a task list from a local file that is read in based on an user-specified filepath.
+     *
      * @param filePath The filepath to find the local file.
      */
     public Duke(String filePath) {
