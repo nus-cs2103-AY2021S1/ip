@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     private static final List<Task> tasks = new ArrayList<>();
@@ -57,7 +59,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             try {
-                String input = sc.nextLine();
+                String input = sc.nextLine().trim();
                 String[] arr = input.split(" ", 2); // limit is the result threshold; return 2 strings
                 switch (arr[0]) { // use switch case for easy scalability
                     case "bye":
@@ -95,7 +97,11 @@ public class Duke {
                             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                         }
                         String[] strings = arr[1].split("/by");
-                        task = new Deadline(strings[0].strip(), strings[1].strip());
+                        try {
+                            task = new Deadline(strings[0].strip(), LocalDate.parse(strings[1].strip()));
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("OOPS!!! Wrong date format encountered!");
+                        }
                         tasks.add(task);
                         System.out.println("Got it. I've added this task:\n  " + task + "\nNow you have " + tasks.size() + " tasks in the list.");
                         break;
@@ -104,7 +110,11 @@ public class Duke {
                             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
                         }
                         strings = arr[1].split("/at");
-                        task = new Event(strings[0].strip(), strings[1].strip());
+                        try {
+                            task = new Event(strings[0].strip(), LocalDate.parse(strings[1].strip()));
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("OOPS!!! Wrong date format encountered!");
+                        }
                         tasks.add(task);
                         System.out.println("Got it. I've added this task:\n  " + task + "\nNow you have " + tasks.size() + " tasks in the list.");
                         break;
