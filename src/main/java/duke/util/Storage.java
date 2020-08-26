@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,8 +22,9 @@ public class Storage {
      * Creates the file if it does not exist.
      */
     private void createFileIfNotExist() {
-        if (file.isDirectory())
+        if (file.isDirectory()) {
             file.mkdirs();
+        }
         else {
             file.getParentFile().mkdirs();
             try {

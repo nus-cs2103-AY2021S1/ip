@@ -42,13 +42,9 @@ public class Duke {
         ui.showExit();
     }
 
-
     public static void main(String[] args) {
         Duke duke = new Duke(DATA_FILE);
         duke.run();
         duke.terminate();
     }
-
-
-
 }
