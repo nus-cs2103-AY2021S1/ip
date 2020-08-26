@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -32,8 +33,9 @@ public class Storage {
      * @throws DukeException if the creation of new file is not successful.
      */
     private void createFileIfNotExist() {
-        if (file.isDirectory())
+        if (file.isDirectory()) {
             file.mkdirs();
+        }
         else {
             file.getParentFile().mkdirs();
             try {

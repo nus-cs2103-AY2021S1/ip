@@ -21,15 +21,17 @@ public class Deadline extends Task {
         super(desc);
         this.taskBy = by;
 
-        if (this.desc.isBlank() || this.taskBy == null)
+        if (this.desc.isBlank() || this.taskBy == null) {
             throw new DukeException("The description or date of \"deadline\" cannot be empty");
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public String getSaveToFileString() {
-        return "D`" + super.getSaveToFileString() + "`" + taskBy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+        return "D`" + super.getSaveToFileString() + "`" +
+                taskBy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
     /**
@@ -38,6 +40,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(),
-                this.taskBy.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm")));
+                taskBy.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm")));
     }
 }

@@ -22,16 +22,17 @@ public class Event extends Task {
         super(desc);
         this.taskDateTime = taskDateTime;
 
-        if (this.desc.isBlank() || this.taskDateTime == null)
+        if (this.desc.isBlank() || this.taskDateTime == null) {
             throw new DukeException("The description or date of \"event\" cannot be empty");
-
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public String getSaveToFileString() {
-        return "E`" + super.getSaveToFileString() + "`" + taskDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+        return "E`" + super.getSaveToFileString() + "`" +
+                taskDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
     /**
@@ -40,6 +41,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(),
-                this.taskDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm")));
+                taskDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm")));
     }
 }
