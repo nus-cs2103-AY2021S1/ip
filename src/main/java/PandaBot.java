@@ -110,11 +110,11 @@ public class PandaBot {
                             System.out.println("Noted! I've added this task: ");
                             System.out.println(tasks.get(tasks.size() - 1).toString());
                             System.out.println("Now you have " + tasks.size() + " tasks in this list.\n");
-                        } catch (PandaBotEmptyTaskDescriptionException e) {
-                            System.out.println(e.getMessage());
                         } catch (ArrayIndexOutOfBoundsException e) {
                             System.out.println("Insufficient arguments given.\n" +
                                     "Are you missing a description or due by time?\n");
+                        } catch (PandaBotException e) {
+                            System.out.println(e.getMessage());
                         }
                     } else {
                         System.out.println("Insufficient arguments given. What deadline do you have?\n");
