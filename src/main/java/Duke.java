@@ -2,50 +2,14 @@ import java.util.Scanner;
 
 
 public class Duke {
-
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
+    
     private final DukeList list;
+    private final Ui ui;
 
 
     public Duke() {
         this.list = new DukeList();
-    }
-
-
-    /**
-     * Prints a given message within line separators.
-     *
-     * @param msg Message to be printed.
-     */
-    private static void printMessage(String msg) {
-        Duke.printSeparator();
-        System.out.println(msg);
-        Duke.printSeparator();
-    }
-
-
-    /**
-     * Prints the start message.
-     */
-    private static void printStartMsg() {
-        Duke.printSeparator();
-        // System.out.println(Duke.LOGO);
-        System.out.println("Hello! I'm Duke.");
-        System.out.println("What can I do for you?");
-        Duke.printSeparator();
-    }
-
-
-    /**
-     * Prints a line separator.
-     */
-    private static void printSeparator() {
-        System.out.println("____________________________________________________________");
+        this.ui = new Ui(System.in);
     }
 
 
@@ -113,14 +77,12 @@ public class Duke {
 
     /**
      * Logic framework of Duke.
-     *
-     * @param sc Scanner object.
      */
-    private void dukeLogic(Scanner sc) {
+    private void dukeLogic() {
         String msgInput = "";
 
-        while (!shouldQuit(msgInput) && sc.hasNextLine()) {
-            msgInput = sc.nextLine();
+        while (!shouldQuit(msgInput) && this.ui.hasNextLine()) {
+            msgInput = this.ui.nextLine();
 
             if (!shouldQuit(msgInput)) {
                 String[] msgArr = msgInput.split(" ");
@@ -129,32 +91,32 @@ public class Duke {
                 switch (keyword) {
                 case ("list"):
                     String listString = this.list.toString();
-                    Duke.printMessage(listString);
+                    this.ui.printMessage(listString);
                     break;
 
                 case ("done"):
                     try {
                         String statusMsg = this.markAsDone(msgArr);
-                        Duke.printMessage(statusMsg);
+                        this.ui.printMessage(statusMsg);
                         break;
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        Duke.printMessage("OOPS!!! The index of `done` cannot be empty.");
+                        this.ui.printMessage("OOPS!!! The index of `done` cannot be empty.");
                         break;
                     } catch (IndexOutOfBoundsException e) {
-                        Duke.printMessage("OOPS!!! The index given is invalid.");
+                        this.ui.printMessage("OOPS!!! The index given is invalid.");
                         break;
                     }
 
                 case ("delete"):
                     try {
                         String statusMsg = this.delete(msgArr);
-                        Duke.printMessage(statusMsg);
+                        this.ui.printMessage(statusMsg);
                         break;
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        Duke.printMessage("OOPS!!! The index of `delete` cannot be empty.");
+                        this.ui.printMessage("OOPS!!! The index of `delete` cannot be empty.");
                         break;
                     } catch (IndexOutOfBoundsException e) {
-                        Duke.printMessage("OOPS!!! The index given is invalid.");
+                        this.ui.printMessage("OOPS!!! The index given is invalid.");
                         break;
                     }
 
@@ -162,10 +124,10 @@ public class Duke {
                 default:
                     try {
                         String statusString = this.list.add(msgInput);
-                        Duke.printMessage(statusString);
+                        this.ui.printMessage(statusString);
                         break;
                     } catch (DukeException e) {
-                        Duke.printMessage(e.getMessage());
+                        this.ui.printMessage(e.getMessage());
                         break;
                     }
                 }
@@ -178,14 +140,14 @@ public class Duke {
      * Method to start the Duke programme.
      */
     public void start() {
-        Duke.printStartMsg();
+        Ui.printStartMessage();
         this.list.loadFromFile();
 
         Scanner sc = new Scanner(System.in);
-        this.dukeLogic(sc);
+        this.dukeLogic();
 
-        Duke.printMessage("Bye. Hope to see you again soon!");
-        
+        this.ui.printMessage("Bye. Hope to see you again soon!");
+
         this.list.writeToFile();
 
         sc.close();
