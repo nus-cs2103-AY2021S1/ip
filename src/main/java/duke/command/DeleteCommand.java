@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.exception.InvalidCommandException;
+import duke.util.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class DeleteCommand {
     public static String execute(String in, TaskList taskList, Storage storage) throws InvalidCommandException {
         try {

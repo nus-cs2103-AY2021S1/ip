@@ -1,4 +1,17 @@
-import java.io.*;
+package duke.util;
+
+import duke.command.CommandExecutor;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -46,7 +59,7 @@ public class Storage {
     }
 
     public void loadSaveFile(TaskList taskList, CommandExecutor exe) {
-        // Prevent saving of TaskList while loading it
+        // Prevent saving of duke.task.TaskList while loading it
         isActive = false;
 
         try {

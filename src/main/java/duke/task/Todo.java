@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.InvalidTodoException;
+
 import java.time.LocalDate;
 
 public class Todo extends Task {

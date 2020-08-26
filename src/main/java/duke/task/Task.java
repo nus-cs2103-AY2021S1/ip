@@ -1,6 +1,10 @@
+package duke.task;
+
+import duke.exception.InvalidTaskException;
+
 import java.time.LocalDate;
 
-abstract class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone = false;
 
@@ -22,12 +26,12 @@ abstract class Task {
             return Todo.createTodo(details);
         case Deadline:
             return Deadline.createDeadline(details);
-        default: // Event
+        default: // duke.task.Event
             return Event.createEvent(details);
         }
     }
 
-    abstract String toSaveString();
+    public abstract String toSaveString();
 
     @Override
     public String toString() {

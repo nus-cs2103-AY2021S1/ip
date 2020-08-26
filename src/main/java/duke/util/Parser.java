@@ -1,3 +1,9 @@
+package duke.util;
+
+import duke.command.CommandType;
+import duke.exception.InvalidCommandException;
+import duke.task.TaskType;
+
 public class Parser {
     private static final String CMD_EXIT = "bye";
     private static final String CMD_LIST = "list";

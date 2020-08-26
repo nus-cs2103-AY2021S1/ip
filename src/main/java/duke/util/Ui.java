@@ -1,3 +1,5 @@
+package duke.util;
+
 public class Ui {
     private static String DIVIDER = "____________________________________________________________";
     private static String ERROR_HEADER = "___________________________ERROR!___________________________";

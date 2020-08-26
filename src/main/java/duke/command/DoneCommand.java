@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.exception.InvalidCommandException;
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class DoneCommand {
     public static String execute(String in, TaskList taskList) throws InvalidCommandException {
         try {

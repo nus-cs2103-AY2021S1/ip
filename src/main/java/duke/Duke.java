@@ -1,8 +1,19 @@
+package duke;
+
+import duke.command.CommandExecutor;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.util.Storage;
+import duke.util.Ui;
+
 import java.io.IOException;
+
 import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import java.util.Scanner;
 
-public class InputHandler {
+public class Duke {
     private final TaskList TASK_LIST = new TaskList();
     private final Scanner SC = new Scanner(System.in);
     private final CommandExecutor EXE = new CommandExecutor();
@@ -10,12 +21,12 @@ public class InputHandler {
     private final Storage STORAGE;
 
 
-    public InputHandler(Path filePath) throws IOException {
+    public Duke(Path filePath) throws IOException {
         this.STORAGE = new Storage(filePath);
     }
 
     private void handleStart() {
-        UI.print("Hello! I'm Duke\nWhat can I do for you?");
+        UI.print("Hello! I'm duke.Duke\nWhat can I do for you?");
     }
 
     public void run() {
@@ -35,5 +46,9 @@ public class InputHandler {
                 UI.printErr(e.getMessage());
             }
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        new Duke(Paths.get("data", "duke.txt")).run();
     }
 }
