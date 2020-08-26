@@ -5,13 +5,13 @@ public class Duke {
         Ui.printWelcome();
         Scanner sc = new Scanner(System.in);
 
-        AddList a = new AddList();
+        TaskList t = new TaskList();
 
         String input = "";
 
         while (!input.equals("bye")) {
             input = sc.nextLine();
-            a.allocate(input);
+            Parser.allocate(input, t);
         }
 
         Ui.printGoodbye();

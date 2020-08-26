@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 public class DateTime {
     private LocalDate date = LocalDate.now();
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private final String INVALIDDATEMESSAGE = "Your Date must be in the format yyyy-mm-dd. Initialising date to Today!";
+    private final String INVALIDDATEMESSAGE = "Your Date must be in the format yyyy-MM-dd. Initialising date to Today!";
 
     public DateTime(String date) {
         if (isValidFormat(date)) {
