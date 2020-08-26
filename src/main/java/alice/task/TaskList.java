@@ -1,3 +1,8 @@
+package alice.task;
+
+import alice.AliceException;
+import alice.command.InvalidCommandException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -72,7 +77,6 @@ public class TaskList {
         try {
             tasks.get(index).markAsDone();
             return tasks.get(index);
-//            return "Great work! I've marked this task as done:\n    " + tasks.get(index);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidCommandException("That task number does not exist.");
         }

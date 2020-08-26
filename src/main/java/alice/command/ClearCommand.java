@@ -1,3 +1,11 @@
+package alice.command;
+
+import alice.storage.AliceStorageException;
+import alice.storage.Storage;
+
+import alice.task.TaskList;
+import alice.ui.Ui;
+
 import java.util.List;
 
 public class ClearCommand extends Command {

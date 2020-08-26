@@ -1,3 +1,14 @@
+package alice;
+
+import alice.command.Command;
+import alice.command.InvalidCommandException;
+
+import alice.parser.Parser;
+import alice.ui.Ui;
+
+import alice.storage.Storage;
+import alice.task.TaskList;
+
 public class Alice {
     private TaskList tasks;
     private final Storage storage;

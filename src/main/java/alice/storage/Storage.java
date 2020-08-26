@@ -1,3 +1,5 @@
+package alice.storage;
+
 import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;

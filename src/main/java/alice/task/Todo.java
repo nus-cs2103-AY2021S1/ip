@@ -1,4 +1,6 @@
-import javax.swing.*;
+package alice.task;
+
+import alice.AliceException;
 
 public class Todo extends Task {
     public Todo(String description) {

@@ -1,3 +1,9 @@
+package alice.command;
+
+import alice.storage.Storage;
+import alice.task.TaskList;
+import alice.ui.Ui;
+
 import java.util.List;
 
 public class HelpCommand extends Command {

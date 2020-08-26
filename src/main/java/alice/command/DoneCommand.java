@@ -1,3 +1,13 @@
+package alice.command;
+
+import alice.storage.AliceStorageException;
+import alice.storage.Storage;
+
+import alice.task.Task;
+import alice.task.TaskList;
+
+import alice.ui.Ui;
+
 import java.util.List;
 
 public class DoneCommand extends Command {
