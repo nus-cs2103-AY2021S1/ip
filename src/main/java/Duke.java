@@ -1,12 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     static List<Task> list = new ArrayList<>();
     static final String line = "--------------------------------------------------"; //50 dashes
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws  IOException{
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -17,8 +20,10 @@ public class Duke {
         bot();
     }
 
-    public static void bot(){
+    public static void bot() throws IOException {
         Scanner sc = new Scanner(System.in);
+        Save save = new Save();
+        list = save.loadFile();
         try {
             while (sc.hasNext()) {
                 String input = sc.nextLine();
@@ -30,10 +35,13 @@ public class Duke {
                     printList();
                 } else if (input.split(" ")[0].equals("done")) {
                     done(Integer.parseInt(input.split(" ")[1]));
+                    save.saveFile(list);
                 } else if (first.equals("todo")|| first.equals("deadline") || first.equals("event")) {
                     add(input);
+                    save.saveFile(list);
                 } else if (first.equals("delete")){
                     delete(input);
+                    save.saveFile(list);
                 } else {
                     throw new DukeException("Sorry I don't know what you mean");
                 }
@@ -51,20 +59,21 @@ public class Duke {
             if (temp.length == 1) {
                 throw new DukeException("Description of todo cannot be empty!");
             }
-            Task newTask = new ToDo(input.split(" ")[1]);
+            Task newTask = new ToDo(temp[1]);
             list.add(newTask);
             System.out.println("added: " + newTask.toString());
             System.out.println("Now you have "+list.size()+" tasks in the list.");
+
         } else if (input.split(" ")[0].equals("deadline")) {
             String[] temp = input.split(" ",2);
-            if (temp.length == 1) {
+            if (temp.length <= 1) {
                 throw new DukeException("Description of deadline cannot be empty!");
             }
-            String[] temp2 = input.split("/by",2);
+            String[] temp2 = temp[1].split("/by",2);
             if (temp2.length <= 1){
                 throw new DukeException("You need to specify a time!");
             }
-            Task newTask = new Deadlines(input.split(" ")[1], input.split("/by")[1]);
+            Task newTask = new Deadlines(temp2[0], temp2[1]);
             list.add(newTask);
             System.out.println("added: " + newTask.toString());
             System.out.println("Now you have "+list.size()+" tasks in the list.");
@@ -73,11 +82,11 @@ public class Duke {
             if (temp.length == 1) {
                 throw new DukeException("Description of event cannot be empty!");
             }
-            String[] temp2 = input.split("/at",2);
+            String[] temp2 = temp[1].split("/at",2);
             if (temp2.length <= 1){
                 throw new DukeException("You need to specify a time!");
             }
-            Task newTask = new Events(input.split(" ")[1], input.split("/at")[1]);
+            Task newTask = new Events(temp2[0], temp2[1]);
             list.add(newTask);
             System.out.println("added: " + newTask.toString());
             System.out.println("Now you have "+list.size()+" tasks in the list.");
@@ -109,9 +118,6 @@ public class Duke {
         }
         System.out.println(line);
     }
-
-    //i am very lost why are there no branches appearing
-
 
 }
 

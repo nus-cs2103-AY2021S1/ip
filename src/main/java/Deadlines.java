@@ -1,13 +1,12 @@
 public class Deadlines extends Task{
-    String time;
 
     Deadlines(String name, String time) {
-        super(name);
-        this.time = time;
+        super(name,time);
     }
 
-    public void setTime(String time){
-        this.time = time;
+
+    public String getTime() {
+        return time;
     }
 
     @Override
