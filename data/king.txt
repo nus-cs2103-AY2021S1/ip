@@ -1,2 +1,3 @@
-T@1@run
-T@0@running
+T@1@running
+E@0@meeting@2pm
+T@1@there was a boy in the blue town. the blue town was blue but the people were red. There was a girl in green but her face was red. The green girl with a red face was called reen.

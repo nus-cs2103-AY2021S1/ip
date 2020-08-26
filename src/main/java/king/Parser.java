@@ -15,8 +15,8 @@ import java.time.format.DateTimeFormatter;
 
 public class Parser {
 
-    private final Storage storage;
-    private TaskList taskList;
+    private final Storage  storage;
+    private       TaskList taskList;
 
     /**
      * Parse the commands from the King Program
@@ -31,17 +31,20 @@ public class Parser {
     }
 
     /**
-     * Parse the commands from the King Program
+     * Parse the commands from the King Program.
+     * The parser automatically modifies the asset file in the
+     * storage and the taskList according to the commands
+     * given by the user.
      *
      * @param phrase the command given by the user.
      * @return String the reply from the command given.
-     * @throws KingException
+     * @throws KingException kingException is thrown when phrase is invalid.
      */
     public String parse(String phrase) throws KingException {
         int phraseLength = phrase.length();
         String reply;
         if (phrase.equals("list")) {
-            return UI.listTaskList(taskList);
+            return UI.showTaskList(taskList);
         } else if (phrase.equals("clear list")) {
             taskList.clear();
             reply = UI.chatBox("I have cleared the list!");
@@ -51,10 +54,7 @@ public class Parser {
                 int itemNo = Integer.parseInt(stringItem) - 1;
                 Task item = taskList.get(itemNo);
                 item.markAsDone();
-                reply = UI.chatBox(
-                        "Nice! I've marked this task as done:\n"
-                                + "\t\t" + item.toString()
-                );
+                reply = UI.doneChatBox(item.toString());
             } catch (IndexOutOfBoundsException e) {
                 throw new KingException("Item " + stringItem + " not found.", e);
             } catch (NumberFormatException e) {
@@ -109,11 +109,7 @@ public class Parser {
                 int itemNo = Integer.parseInt(stringItem) - 1;
                 Task item = taskList.get(itemNo);
                 taskList.delete(itemNo);
-                reply = UI.chatBox(
-                        "I have deleted the following item:\n"
-                                + "\t\t" + item.toString() +
-                                "\n\t You got " + taskList.size() + " task(s) left."
-                );
+                reply = UI.deleteItemChatBox(item.toString(), taskList.size());
             } catch (IndexOutOfBoundsException e) {
                 throw new KingException("Item " + stringItem + " not found.", e);
             } catch (NumberFormatException e) {
@@ -125,7 +121,7 @@ public class Parser {
             }
         } else if (phrase.startsWith("find ") || (phrase.startsWith("find") && phraseLength == 4)) {
             String keyword = phrase.substring(4).trim();
-            return UI.foundItemsList(storage.find(keyword), keyword);
+            return UI.showFoundItems(storage.find(keyword), keyword);
         } else {
             throw new KingException("I don't understand you!", new Throwable("invalid command"));
         }
@@ -139,9 +135,8 @@ public class Parser {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             return LocalDateTime.parse(localDateTime, formatter);
         } catch (Exception e) {
-            throw new KingException("Date and Time must be formatted as /by <date> <time>. E.g. 2/1/2020 1400", new Throwable(
-                    "bad datetime"
-            ));
+            throw new KingException("Date and Time must be formatted as /by <date> <time>. E.g. 2/1/2020 1400",
+                    new Throwable("bad datetime"));
         }
     }
 }

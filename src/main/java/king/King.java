@@ -42,7 +42,7 @@ public class King {
                 System.out.println(UI.chatBox(e.message));
             }
         }
-        System.out.print(UI.chatBox("Bye. Hope to see you again soon!"));
+        System.out.print(UI.chatBox("Bye! Hope to see you again soon."));
         scanner.close();
     }
 

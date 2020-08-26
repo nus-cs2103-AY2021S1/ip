@@ -5,71 +5,75 @@
 |____|__ \__|___|  /\___  /
         \/       \//_____/
 
-Hello! I'm King
+Hello! I'm King!
 What can I do for you?
-	== King says =====================
-	 I have cleared the list!
-	==================================
+	======= King says ===================================
+	I have cleared the list!
+	=====================================================
 
-	== King says =====================
-	 I don't understand you!
-	==================================
+	======= King says ===================================
+	I don't understand you!
+	=====================================================
 
-	== King says =====================
-	 Got it. I've added this task:
+	======= King says ===================================
+	Got it. I've added this task:
 		[T][?] read book
-	 Now you have 1 tasks in the list.
-	==================================
+	Now you have 1 tasks in the list.
+	=====================================================
 
-	== King says =====================
-	 Got it. I've added this task:
-		[D][?] return book (by: Monday, Mar 2, 2020 2.00 pm)
-	 Now you have 2 tasks in the list.
-	==================================
+	======= King says ===================================
+	Got it. I've added this task:
+		[D][?] return book (by: Monday, Mar 2, 2020
+	 2.00 pm)
+	Now you have 2 tasks in the list.
+	=====================================================
 
-	== King says =====================
-	 Got it. I've added this task:
+	======= King says ===================================
+	Got it. I've added this task:
 		[E][?] project meeting (at: Mon 2-4pm)
-	 Now you have 3 tasks in the list.
-	==================================
+	Now you have 3 tasks in the list.
+	=====================================================
 
-	== King says =====================
-	 I have deleted the following item:
+	======= King says ===================================
+	I have deleted the following item:
 		[T][?] read book
-	 You got 2 task(s) left.
-	==================================
+	You got 2 task(s) left.
+	=====================================================
 
-	== King says =====================
-	 Todo cannot be empty!
-	==================================
+	======= King says ===================================
+	Todo cannot be empty!
+	=====================================================
 
-	== King says =====================
-	 Event description and time CANNOT be empty!
-	==================================
+	======= King says ===================================
+	Event description and time CANNOT be empty!
+	=====================================================
 
-	== King says =====================
-	 Follow the syntax: deadline <description> /by <date> <time>
-	==================================
+	======= King says ===================================
+	Follow the syntax: deadline <description>
+	 /by <date> <time>
+	=====================================================
 
-	== King says =====================
-	 delete must be followed by item number
-	==================================
+	======= King says ===================================
+	delete must be followed by item number
+	=====================================================
 
-	== King says =====================
+	======= King says ===================================
 	There are 2 items in your list:
-	1. [D][?] return book (by: Monday, Mar 2, 2020 2.00 pm)
+	1. [D][?] return book (by: Monday, Mar 2,
+	 2020 2.00 pm)
 	2. [E][?] project meeting (at: Mon 2-4pm)
-	==================================
+	=====================================================
 
-	== King says =====================
-	 Nice! I've marked this task as done:
-		[D][?] return book (by: Monday, Mar 2, 2020 2.00 pm)
-	==================================
+	======= King says ===================================
+	Nice! I've marked this task as done:
+		[D][?] return book (by: Monday, Mar 2, 2020
+	 2.00 pm)
+	=====================================================
 
-	== King says =====================
-	 Item 10 not found.
-	==================================
+	======= King says ===================================
+	Item 10 not found.
+	=====================================================
 
-	== King says =====================
-	 Bye. Hope to see you again soon!
-	==================================
+	======= King says ===================================
+	Bye! Hope to see you again soon.
+	=====================================================
