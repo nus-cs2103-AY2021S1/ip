@@ -83,6 +83,9 @@ public class Parser {
                 break;
             case ("delete"):
                 s[1] = details[1]; //expected to be an int
+                break;
+            case("bye"):
+                break;
         }
         s[0] = type;
         return s;
