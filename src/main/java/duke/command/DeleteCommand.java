@@ -6,13 +6,29 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a command to delete a task from the list.
+ */
 public class DeleteCommand extends Command {
+
+    /**
+     * A string array that represents the instruction for this command.
+     */
     private String[] nextCommandArr;
 
     public DeleteCommand(String[] nextCommandArr) {
         this.nextCommandArr = nextCommandArr;
     }
 
+    /**
+     * Deletes a Task from the taskList.
+     * @param taskList is the list of tasks stored by Duke.
+     * @param ui is the user interface to read inputs from the user and print messages.
+     * @param storage deals with saving tasks into the file and loading tasks
+     *                from the file.
+     *
+     * @throws DukeException if an invalid task number is provided to be deleted.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
@@ -25,6 +41,10 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Indicates Duke should keep running after this command is executed.
+     * @return true.
+     */
     @Override
     public boolean isRunning() {
         return true;

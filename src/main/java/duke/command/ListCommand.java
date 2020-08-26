@@ -4,13 +4,28 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a command to print all the tasks in the list.
+ */
 public class ListCommand extends Command {
 
+    /**
+     * Lists all the tasks in the taskList.
+     * @param taskList is the list of tasks stored by Duke.
+     * @param ui is the user interface to read inputs from the user and print messages.
+     * @param storage deals with saving tasks into the file and loading tasks
+     *                from the file.
+     *
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.listText(taskList);
     }
 
+    /**
+     * Indicates Duke should keep running after this command is executed.
+     * @return true.
+     */
     @Override
     public boolean isRunning() {
         return true;

@@ -6,17 +6,25 @@ import java.io.File;
 import java.util.Scanner;
 import java.io.FileWriter;
 
+/**
+ * A class to save tasks into the file and to load tasks from the file.
+ */
 public class Storage {
-    
+
+    /**
+     * The file location where Duke's list of tasks if stored.
+     */
     private String filepath;
     
     public Storage(String filepath) {
         this.filepath = filepath;
     }
-    
-    
 
 
+    /**
+     * A function to load all the tasks saved in the file.
+     * @param taskList the TaskList where all the tasks should be loaded into.
+     */
     public void pullList(TaskList taskList) {
         try {
             File file = new File(filepath);
@@ -65,6 +73,10 @@ public class Storage {
         }
     }
 
+    /**
+     * A function to save all the tasks into the file.
+     * @param taskList the TaskList whose tasks should be stored into the file.
+     */
     public void storelist(TaskList taskList) {
         try {
             String seperator = " | ";
