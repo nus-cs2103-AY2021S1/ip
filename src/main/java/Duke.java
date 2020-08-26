@@ -1,7 +1,15 @@
-import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
+import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,9 +92,7 @@ public class Duke {
             String[] parts = input.split(" ");
             int index = Integer.parseInt(parts[1]) - 1;
             boolean result = index > -1 && index < numOfTasks;
-            if (result) {
-
-            } else {
+            if (!result) {
                 throw new InvalidCommandException("Number is invalid!");
             }
         } catch (NumberFormatException e) {
@@ -134,12 +140,18 @@ public class Duke {
                 //Verify the deadline command
                 verifyDeadline(input);
                 String[] split = parts[1].split("/by");
-                tasks.add(new Deadlines(split[0], split[1]));
+
+                //Should be of format yyyy-mm-dd x:x
+                LocalDate date = getDate(split[1]);
+                LocalTime time = getTime(split[1]);
+                tasks.add(new Deadlines(split[0], date, time));
             } else if (input.startsWith("event")) {
                 //Verify the event command
                 verifyEvent(input);
                 String[] split = parts[1].split("/at");
-                tasks.add(new Events(split[0], split[1]));
+                LocalDate date = getDate(split[1]);
+                LocalTime time = getTime(split[1]);
+                tasks.add(new Events(split[0], date, time));
             } else {
                 throw new InvalidInputException("Sorry, I don't know what that means :(");
             }
@@ -343,27 +355,71 @@ public class Duke {
                 return new Task(parts[1]).markDone();
             }
         } else if (line.startsWith("[E]", 2)) {
+            DateTimeFormatter myDateFormat = DateTimeFormatter.ofPattern("d MMM yyyy");
+            DateTimeFormatter myTimeFormat = DateTimeFormatter.ofPattern("h:mm a");
             //Is a event task
             String[] parts = line.split(" ", 2);
             String[] split = parts[1].split("\\(at:");
             String desc = split[0];
-            String startTime = split[1].split("\\)")[0];
+            String timeInfo = split[1].split("\\)")[0];
             if (line.contains("[✘]")) {
-                return new Events(desc, startTime);
+                String[] dateTime = timeInfo.trim().split(", ");
+                String date = dateTime[1];
+                String time = dateTime[2];
+                return new Events(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat));
             } else {
-                return new Events(desc, startTime).markDone();
+                String[] dateTime = timeInfo.trim().split(", ");
+                String date = dateTime[1];
+                String time = dateTime[2];
+                return new Events(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat));
             }
         } else {
+            DateTimeFormatter myDateFormat = DateTimeFormatter.ofPattern("d MMM yyyy");
+            DateTimeFormatter myTimeFormat = DateTimeFormatter.ofPattern("h:mm a");
             //Is a deadline task
             String[] parts = line.split(" ", 2);
             String[] split = parts[1].split("\\(by:");
             String desc = split[0];
-            String deadline = split[1].split("\\)")[0];
+            String timeInfo = split[1].split("\\)")[0];
             if (line.contains("[✘]")) {
-                return new Deadlines(desc, deadline);
+                String[] dateTime = timeInfo.trim().split(", ");
+                String date = dateTime[1];
+                String time = dateTime[2];
+                return new Deadlines(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat));
             } else {
-                return new Deadlines(desc, deadline).markDone();
+                String[] dateTime = timeInfo.trim().split(", ");
+                String date = dateTime[1];
+                String time = dateTime[2];
+                return new Deadlines(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat)).markDone();
             }
+        }
+    }
+
+    public static LocalDate getDate(String string) throws InvalidCommandException{
+        //Currently only accepts date in yyyy-mm-dd format
+        //Removing the whitespace before and after the string
+        try {
+            String timeDate = string.trim();
+            String[] parts = timeDate.split(" ", 2);
+            String date = parts[0].trim();
+            System.out.println(LocalDate.parse(date));
+            return LocalDate.parse(date);
+        } catch (DateTimeParseException e ) {
+            throw new InvalidCommandException("Please give your date in yyyy-mm-dd format!");
+        }
+    }
+
+    public static LocalTime getTime(String string) throws InvalidCommandException {
+        //Currently only accepts time in x:x format
+        //Removing the whitespace before and after the string
+        try {
+            String timeDate = string.trim();
+            String[] parts = timeDate.split(" ", 2);
+            String date = parts[1].trim();
+            System.out.println(LocalTime.parse(date));
+            return LocalTime.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new InvalidCommandException("Please give your time in hh:mm format!");
         }
     }
 }
